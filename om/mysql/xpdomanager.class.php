@@ -1,7 +1,7 @@
 <?php
 /*
  * OpenExpedio (xPDO)
- * Copyright (C) 2006 Jason Coward <xpdo@opengeek. com>
+ * Copyright (C) 2006 Jason Coward <xpdo@opengeek.com>
  * 
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -258,9 +258,16 @@ class xPDOManager {
      * @return xPDOGenerator A generator class for this manager.
      */
     function getGenerator() {
-        if ($this->generator === null) {
-            include_once (XPDO_CORE_PATH . 'generator/xpdogenerator.class.php');
-            $this->generator= new xPDOGenerator($this);
+        if ($this->generator === null || !is_a($this->generator, 'xPDOGenerator')) {
+            if (!isset($this->xpdo->config['xPDOGenerator.'.$this->xpdo->config['dbtype'].'.class']) || !$generatorClass= $this->xpdo->loadClass($this->xpdo->config['xPDOGenerator.'.$this->xpdo->config['dbtype'].'.class'], XPDO_CORE_PATH, true, true)) {
+                $generatorClass= $this->xpdo->loadClass($this->xpdo->config['dbtype'] . '.xPDOGenerator', '', true, true);
+            }
+            if ($generatorClass) {
+                $this->generator= new $generatorClass ($this);
+            } 
+            if ($this->generator === null || !is_a($this->generator, 'xPDOGenerator')) {
+                $this->xpdo->_log(XPDO_LOG_LEVEL_ERROR, "Could not load xPDOGenerator [{$generatorClass}] class.");
+            }
         }
         return $this->generator;
     }
@@ -269,11 +276,17 @@ class xPDOManager {
      * Gets a data transport mechanism for this xPDOManager instance. 
      */
     function getTransport() {
-        if ($this->transport === null) {
-            include_once (XPDO_CORE_PATH . 'transport/xpdotransport.class.php');
-            $this->transport= new xPDOTransport($this);
+        if ($this->transport === null || !is_a($this->transport, 'xPDOTransport')) {
+            if (!isset($this->xpdo->config['xPDOTransport.class']) || !$transportClass= $this->xpdo->loadClass($this->xpdo->config['xPDOTransport.class'], XPDO_CORE_PATH, true, true)) { 
+                $transportClass= $this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
+            }
+            if ($transportClass) {
+                $this->transport= new $transportClass ($this);
+            } 
+            if ($this->transport === null || !is_a($this->transport, 'xPDOTransport')) {
+                $this->xpdo->_log(XPDO_LOG_LEVEL_ERROR, "Could not load xPDOTransport [{$transportClass}] class.");
+            }
         }
         return $this->transport;
     }
 }
-?>

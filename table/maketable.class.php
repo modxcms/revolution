@@ -612,4 +612,3 @@ class MakeTable {
 		return '<a href="' . $orderUrl . '">'.$text.'</a>';
     }
 }
-?>

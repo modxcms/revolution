@@ -86,7 +86,9 @@ if (!class_exists('PDO')) {
  */
 class xPDO {
     /**
-     * 
+     * A PDO instance used by xPDO for database access.
+     * @var PDO
+     * @access protected
      */
     protected $pdo= null;
     /**
@@ -313,7 +315,7 @@ class xPDO {
     public function getObject($className, $criteria= null, $cacheFlag= false) {
         $instance= null;
         if ($criteria !== null) {
-            $instance= $this->load($className, $criteria, $cacheFlag);
+            $instance= xPDOObject :: load($this, $className, $criteria, $cacheFlag);
         }
         return $instance;
     }
@@ -333,75 +335,9 @@ class xPDO {
     */
     public function getCollection($className, $criteria= null, $cacheFlag= false) {
         $objCollection= null;
-        $fromCache= false;
-        $all= false;
-        $rows= false;
         if ($className= $this->loadClass($className)) {
-            if (is_array($criteria)) {
-                $criteria= $this->getCriteria($className, $criteria);
+            $objCollection= xPDOObject :: loadCollection($this, $className, $criteria, $cacheFlag);
             }
-            if ($criteria === null) {
-                $criteria= 'all';
-            }
-            if ($criteria === 'all') {
-                $all= true;
-                if ($this->_cacheEnabled && $cacheFlag) {
-                    $rows= $this->fromCache($className . '_all');
-                }
-                if (!$rows) {
-                    $table= $this->getTableName($className);
-                    $criteria= new xPDOCriteria($this, "SELECT * FROM {$table}", array (), $cacheFlag);
-                } else {
-                    $fromCache= true;
-                }
-            }
-            if (is_object($criteria->stmt) && !$rows) {
-                $tstart= $this->getMicroTime();
-                if ($criteria->stmt->execute()) {
-                    $tend= $this->getMicroTime();
-                    $totaltime= $tend - $tstart;
-                    $this->queryTime= $this->queryTime + $totaltime;
-                    $this->executedQueries= $this->executedQueries + 1;
-                    $rows= $criteria->stmt->fetchAll(PDO_FETCH_ASSOC);
-                }
-            }
-            if (is_array ($rows)) {
-                foreach ($rows as $row) {
-                    $instanceClass= $className;
-                    if (isset ($row['class_key']) && $row['class_key'] && $this->loadClass($row['class_key'])) {
-                        $instanceClass= $row['class_key'];
-                    }
-                    if ($obj= $this->newObject($instanceClass)) {
-                        $obj->fromArray($row, '', true);
-                        $obj->_new= false;
-                        $obj->_dirty= array ();
-                        if ($pkval= $obj->getPrimaryKey()) {
-                            if (is_array($pkval)) {
-                                $cacheKey= implode('_', $pkval);
-                                $pkval= implode('-', $pkval);
-                            } else {
-                                $cacheKey= $pkval;
-                            }
-                            if ($this->_cacheEnabled && $cacheFlag) {
-                                if (!$fromCache) {
-                                    $this->toCache($instanceClass . '_' . $cacheKey, $obj, $cacheFlag);
-                                } else {
-                                    $obj->_cacheFlag= true;
-                                }
-                            }
-                            $objCollection[$pkval]= $obj;
-                        }
-                    }
-                }
-            }
-        }
-        if ($this->_cacheEnabled && $cacheFlag && !$fromCache && $objCollection) {
-            if ($all) {
-                $this->toCache($className . '_all', $rows, $cacheFlag);
-            } else {
-                $this->toCache($criteria, $rows, $cacheFlag);
-            }
-        }
         return $objCollection;
     }
 
@@ -422,107 +358,11 @@ class xPDO {
     public function getCriteria($className, $type= 'collection', $cacheFlag= true) {
         $criteria= null;
         if ($className= $this->loadClass($className)) {
-            $pk= $this->getPK($className);
-            $pktype= $this->getPKType($className);
-            if (is_array($type)) {
-                if (!isset ($type[0])) {
-                    $fieldMeta= $this->getFieldMeta($className);
-                    $bindings= array ();
-                    $fields= array ();
-                    $quotableOperators= array (
-                        '=',
-                        '>',
-                        '<',
-                        '>=',
-                        '<=',
-                        '<>',
-                        '!=',
-                        'LIKE'
-                    );
-                    $quotableTypes= array (
-                        'string',
-                        'password',
-                        'date',
-                        'datetime',
-                        'timestamp',
-                        'time'
-                    );
-                    reset($type);
-                    while (list ($key, $val)= each($type)) {
-                        $operator= '=';
-                        $key_prefix= '';
-                        $key_operator= explode(':', $key);
-                        if ($key_operator && count($key_operator) === 2) {
-                            $key= $key_operator[0];
-                            $operator= $key_operator[1];
-                        }
-                        elseif ($key_operator && count($key_operator) === 3) {
-                            $key_prefix= $key_operator[0];
-                            $key= $key_operator[1];
-                            $operator= $key_operator[2];
-                        }
-                        if (array_key_exists($key, $fieldMeta)) {
-                            $bindings[':' . $key]= $val;
-                            $fields[$key]= $key_prefix ? $key_prefix . ' ' : '' . "`{$key}` " . $operator . ' ' . ":{$key}";
-                        }
-                    }
-                    if (!empty ($fields) && !empty ($bindings)) {
-                        $fieldList= implode(' AND ', $fields);
-                        $tableName= $this->getTableName($className);
-                        $sql= "SELECT * FROM {$tableName} WHERE {$fieldList}";
-                        foreach ($bindings as $bk => $bv) {
-                            if (!is_array($bv)) {
-                                if (array_key_exists(substr($bk, 1), $fieldMeta)) {
-                                    if (!in_array($fieldMeta[substr($bk, 1)]['phptype'], $quotableTypes) || $val == 'NULL') {
-                                        $bt= PDO_PARAM_INT;
-                                    } else {
-                                        $bt= PDO_PARAM_STR;
-                                    }
-                                }
-                                $bindings[$bk]= array (
-                                    'value' => $bv,
-                                    'type' => $bt,
-                                    'length' => 0,
-                                );
-                            }
-                        }
-                        $criteria= new xPDOCriteria($this, $sql, $bindings, $cacheFlag);
-                    }
-                }
-                elseif (isset ($type[0]) && is_array($pk) && count($type) == count($pk)) {
-                    $bindings= array ();
-                    $iteration= 0;
-                    $tbl= $this->getTableName($className);
-                    $sql= "SELECT * FROM {$tbl} WHERE ";
-                    foreach ($pk as $k) {
-                        if ($iteration) {
-                            $sql .= " AND ";
-                        }
-                        if (!isset ($type[$iteration])) {
-                            $type[$iteration]= null;
-                        }
-                        $sql .= "`{$k}` = :{$k}";
-                        $bindings[":{$k}"]= $type[$iteration];
-                        $iteration++;
-                    }
-                    if (!empty ($bindings)) {
-                        $criteria= new xPDOCriteria($this, $sql, $bindings, $cacheFlag);
-                    }
-                }
-            }
-            elseif (($pktype == 'integer' && is_numeric($type)) || ($pktype == 'string' && is_string($type))) {
-                if ($pktype == 'integer') {
-                    $param_type= PDO_PARAM_INT;
-                } else {
-                    $param_type= PDO_PARAM_STR;
-                }
-                $tbl= $this->getTableName($className);
-                $sql= "SELECT * FROM {$tbl} WHERE `{$pk}` = :{$pk}";
-                $criteria= new xPDOCriteria($this, $sql);
-                $criteria->bind(array (':' . $pk => array ('value' => $type, 'type' => $param_type, 'length' => 0)), true, $cacheFlag);
-            }
+            $criteria= xPDOObject :: loadCriteria($this, $className, $type, $cacheFlag);
         }
-        if ($this->getDebug() === true) $this->_log(XPDO_LOG_LEVEL_DEBUG, 'Retrieving criteria object: ' . print_r($criteria, true));
+        if ($this->getDebug() === true) {
+            $this->_log(XPDO_LOG_LEVEL_DEBUG, 'Retrieving criteria object: ' . print_r($criteria, true));
+        }
         return $criteria;
     }
 
@@ -774,90 +614,6 @@ class xPDO {
     }
 
     /**
-     * Loads an instance of a class based on a specified xPDOCriteria instance.
-     * 
-     * @param string $className Name of the class.
-     * @param mixed $criteria The primary key or xPDOCriteria for loading the
-     * instance.
-     * @return object|null An instance of the requested class, or null if it
-     * could not be instantiated.
-     */
-    protected function load($className, $criteria, $cacheFlag= false) {
-        $instance= null;
-        $sql= '';
-        if ($className= $this->loadClass($className)) {
-            $bindings= array ();
-            if (!is_object($criteria)) {
-                $criteria= $this->getCriteria($className, $criteria, $cacheFlag);
-            }
-            if (is_object($criteria) && $criteria->stmt !== null && !empty($criteria->sql)) {
-                $fromCache= false;
-                $row= null;
-                if ($criteria->cacheFlag && $cacheFlag) {
-                    $row= $this->fromCache($criteria, $className);
-                }
-                if ($row === null || !is_array($row)) {
-                    if ($this->getDebug() === true) $this->_log(XPDO_LOG_LEVEL_DEBUG, "Attempting to execute query using PDO statement object: " . print_r($criteria->stmt, true) . print_r($criteria->bindings, true));
-                    $tstart= $this->getMicroTime();
-                    if (!$criteria->stmt->execute()) {
-                        $tend= $this->getMicroTime();
-                        $totaltime= $tend - $tstart;
-                        $this->queryTime= $this->queryTime + $totaltime;
-                        $this->executedQueries= $this->executedQueries + 1;
-                        $errorInfo= $criteria->stmt->errorInfo();
-                        $this->_log(XPDO_LOG_LEVEL_ERROR, 'Error ' . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($errorInfo, true));
-                        if ($errorInfo[1] == '1146') {
-                            if ($this->getManager() && $this->manager->createObjectContainer($className)) {
-                                $tstart= $this->getMicroTime();
-                                if (!$criteria->stmt->execute()) {
-                                    $this->_log(XPDO_LOG_LEVEL_FATAL, "Error " . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($criteria->stmt->errorInfo(), true));
-                                }
-                                $tend= $this->getMicroTime();
-                                $totaltime= $tend - $tstart;
-                                $this->queryTime= $this->queryTime + $totaltime;
-                                $this->executedQueries= $this->executedQueries + 1;
-                            } else {
-                                $this->_log(XPDO_LOG_LEVEL_FATAL, "Error " . $this->errorCode() . " attempting to create object container for class {$className}:\n" . print_r($this->errorInfo(), true));
-                            }
-                        }
-                    }
-                    $row= $criteria->stmt->fetch(PDO_FETCH_ASSOC);
-                    $criteria->stmt->closeCursor();
-                } else {
-                    $fromCache= true;
-                }
-                if (!is_array($row)) {
-                    if ($this->getDebug() === true) $this->_log(XPDO_LOG_LEVEL_DEBUG, "Error fetching result set from statement: " . print_r($criteria->stmt, true) . " with bindings: " . print_r($bindings, true));
-                    $this->_log(XPDO_LOG_LEVEL_WARN, "Error fetching result set: {$criteria->stmt->queryString}" . print_r($criteria->stmt->errorInfo(), true));
-                } else {
-                    if (isset ($row['class_key'])) {
-                        $actualClass= $row['class_key'];
-                        $instance= $this->newObject($actualClass);
-                        if (!$instance instanceof $className) {
-                            $this->_log(XPDO_LOG_LEVEL_WARN, "Instantiated a derived class {$actualClass} that is not a subclass of the requested class {$className}");
-                        }
-                    } else {
-                        $instance= $this->newObject($className);
-                    }
-                    $instance->fromArray($row, '', true);
-                }
-            } else {
-                $this->_log(XPDO_LOG_LEVEL_ERROR, 'No valid statement could be found in or generated from the given criteria.');
-            }
-        } else {
-            $this->_log(XPDO_LOG_LEVEL_ERROR, 'Invalid class specified: ' . $className);
-        }
-        if ($instance) {
-            $instance->_dirty= array ();
-            $instance->_new= false;
-            if ($cacheFlag && $this->_cacheEnabled && !$fromCache && is_object($criteria)) {
-                $this->toCache($criteria, $instance, $cacheFlag);
-            }
-        }
-        return $instance;
-    }
-
-    /**
      * Gets select columns from a specific class for building a query.
      * 
      * @param string $className The name of the class to build the column list
@@ -872,28 +628,7 @@ class xPDO {
      * @return string A valid SQL string of column names for a SELECT statement.
      */
     public function getSelectColumns($className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false) {
-        $columnarray= array ();
-        if ($aColumns= $this->getFields($className)) {
-            $tableAlias= !empty ($tableAlias) ? $tableAlias . '.' : '';
-            $this->_log(XPDO_LOG_LEVEL_WARN, print_r($aColumns, true));
-            foreach (array_keys($aColumns) as $k) {
-                if ($exclude && in_array($k, $columns)) {
-                    continue;
-                }
-                elseif (empty ($columns)) {
-                    $columnarray[$k]= "{$tableAlias}{$k}";
-                }
-                elseif (in_array($k, $columns)) {
-                    $columnarray[$k]= "{$tableAlias}{$k}";
-                } else {
-                    continue;
-                }
-                if (!empty ($columnPrefix)) {
-                    $columnarray[$k]= $columnarray[$k] . " AS {$columnPrefix}{$k}";
-                }
-            }
-        }
-        return implode(', ', $columnarray);
+        return xPDOObject :: getSelectColumns($this, $className, $tableAlias, $columnPrefix, $columns, $exclude);
     }
 
     /**

@@ -143,7 +143,275 @@ class xPDOObject {
     );
 
     /**
-     * Constructor (do not call directly; {@see xPDO::newObject()}).
+     * Static method to load an instance of an xPDOObject or derivative class.
+     * 
+     * @param string $className Name of the class.
+     * @param mixed $criteria The primary key or xPDOCriteria for loading the
+     * instance.
+     * @return object|null An instance of the requested class, or null if it
+     * could not be instantiated.
+     */
+    function load(& $xpdo, $className, $criteria, $cacheFlag= false) {
+        $instance= null;
+        $sql= '';
+        if ($className= $xpdo->loadClass($className)) {
+            $bindings= array ();
+            if (!is_object($criteria)) {
+                $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
+            }
+            if (is_object($criteria) && $criteria->stmt !== null && !empty($criteria->sql)) {
+                $fromCache= false;
+                $row= null;
+                if ($criteria->cacheFlag && $cacheFlag) {
+                    $row= $xpdo->fromCache($criteria, $className);
+                }
+                if ($row === null || !is_array($row)) {
+                    if ($xpdo->getDebug() === true) $xpdo->_log(XPDO_LOG_LEVEL_DEBUG, "Attempting to execute query using PDO statement object: " . print_r($criteria->stmt, true) . print_r($criteria->bindings, true));
+                    $tstart= $xpdo->getMicroTime();
+                    if (!$criteria->stmt->execute()) {
+                        $tend= $xpdo->getMicroTime();
+                        $totaltime= $tend - $tstart;
+                        $xpdo->queryTime= $xpdo->queryTime + $totaltime;
+                        $xpdo->executedQueries= $xpdo->executedQueries + 1;
+                        $errorInfo= $criteria->stmt->errorInfo();
+                        $xpdo->_log(XPDO_LOG_LEVEL_ERROR, 'Error ' . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($errorInfo, true));
+                        if ($errorInfo[1] == '1146') {
+                            if ($xpdo->getManager() && $xpdo->manager->createObjectContainer($className)) {
+                                $tstart= $xpdo->getMicroTime();
+                                if (!$criteria->stmt->execute()) {
+                                    $xpdo->_log(XPDO_LOG_LEVEL_FATAL, "Error " . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($criteria->stmt->errorInfo(), true));
+                                }
+                                $tend= $xpdo->getMicroTime();
+                                $totaltime= $tend - $tstart;
+                                $xpdo->queryTime= $xpdo->queryTime + $totaltime;
+                                $xpdo->executedQueries= $xpdo->executedQueries + 1;
+                            } else {
+                                $xpdo->_log(XPDO_LOG_LEVEL_FATAL, "Error " . $xpdo->errorCode() . " attempting to create object container for class {$className}:\n" . print_r($xpdo->errorInfo(), true));
+                            }
+                        }
+                    }
+                    $row= $criteria->stmt->fetch(PDO_FETCH_ASSOC);
+                    $criteria->stmt->closeCursor();
+                } else {
+                    $fromCache= true;
+                }
+                if (!is_array($row)) {
+                    if ($xpdo->getDebug() === true) $xpdo->_log(XPDO_LOG_LEVEL_DEBUG, "Error fetching result set from statement: " . print_r($criteria->stmt, true) . " with bindings: " . print_r($bindings, true));
+                    $xpdo->_log(XPDO_LOG_LEVEL_WARN, "Error fetching result set: {$criteria->stmt->queryString}" . print_r($criteria->stmt->errorInfo(), true));
+                } else {
+                    if (isset ($row['class_key'])) {
+                        $actualClass= $row['class_key'];
+                        $instance= $xpdo->newObject($actualClass);
+                        if (!is_a($instance, $className)) {
+                            $xpdo->_log(XPDO_LOG_LEVEL_WARN, "Instantiated a derived class {$actualClass} that is not a subclass of the requested class {$className}");
+                        }
+                    } else {
+                        $instance= $xpdo->newObject($className);
+                    }
+                    $instance->fromArray($row, '', true);
+                }
+            } else {
+                $xpdo->_log(XPDO_LOG_LEVEL_ERROR, 'No valid statement could be found in or generated from the given criteria.');
+            }
+        } else {
+            $xpdo->_log(XPDO_LOG_LEVEL_ERROR, 'Invalid class specified: ' . $className);
+        }
+        if ($instance) {
+            $instance->_dirty= array ();
+            $instance->_new= false;
+            if ($cacheFlag && $xpdo->_cacheEnabled && !$fromCache && is_object($criteria)) {
+                $xpdo->toCache($criteria, $instance, $cacheFlag);
+            }
+        }
+        return $instance;
+    }
+
+    function loadCollection(& $xpdo, $className, $criteria, $cacheFlag) {
+        $objCollection= null;
+        $all= false;
+        $rows= false;
+        if (is_array($criteria)) {
+            $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
+        }
+        if ($criteria === null) {
+            $criteria= 'all';
+        }
+        if ($criteria === 'all') {
+            $all= true;
+            if ($xpdo->_cacheEnabled && $cacheFlag) {
+                $rows= $xpdo->fromCache($className . '_all');
+            }
+            if (!$rows) {
+                $table= $xpdo->getTableName($className);
+                $criteria= new xPDOCriteria($xpdo, "SELECT * FROM {$table}", array (), $cacheFlag);
+            } else {
+                $fromCache= true;
+            }
+        }
+        if (is_object($criteria->stmt) && !$rows) {
+            $tstart= $xpdo->getMicroTime();
+            if ($criteria->stmt->execute()) {
+                $tend= $xpdo->getMicroTime();
+                $totaltime= $tend - $tstart;
+                $xpdo->queryTime= $xpdo->queryTime + $totaltime;
+                $xpdo->executedQueries= $xpdo->executedQueries + 1;
+                $rows= $criteria->stmt->fetchAll(PDO_FETCH_ASSOC);
+            }
+        }
+        if (is_array ($rows)) {
+            foreach ($rows as $row) {
+                $instanceClass= $className;
+                if (isset ($row['class_key']) && $row['class_key'] && $xpdo->loadClass($row['class_key'])) {
+                    $instanceClass= $row['class_key'];
+                }
+                if ($obj= $xpdo->newObject($instanceClass)) {
+                    $obj->fromArray($row, '', true);
+                    $obj->_new= false;
+                    $obj->_dirty= array ();
+                    if ($pkval= $obj->getPrimaryKey()) {
+                        if (is_array($pkval)) {
+                            $cacheKey= implode('_', $pkval);
+                            $pkval= implode('-', $pkval);
+                        } else {
+                            $cacheKey= $pkval;
+                        }
+                        if ($xpdo->_cacheEnabled && $cacheFlag) {
+                            if (!$fromCache) {
+                                $xpdo->toCache($instanceClass . '_' . $cacheKey, $obj, $cacheFlag);
+                            } else {
+                                $obj->_cacheFlag= true;
+                            }
+                        }
+                        $objCollection[$pkval]= $obj;
+                    }
+                }
+            }
+        }
+        if ($xpdo->_cacheEnabled && $cacheFlag && !$fromCache) {
+            if ($all) {
+                $xpdo->toCache($className . '_all', $rows, $cacheFlag);
+            } else {
+                $xpdo->toCache($criteria, $rows, $cacheFlag);
+            }
+        }
+        return $objCollection;
+    }
+    
+    function loadCriteria(& $xpdo, $className, $type, $cacheFlag) {
+        $criteria= null;
+        $pk= $xpdo->getPK($className);
+        $pktype= $xpdo->getPKType($className);
+        if (is_array($type)) {
+            if (!isset ($type[0])) {
+                $fieldMeta= $xpdo->getFieldMeta($className);
+                $bindings= array ();
+                $fields= array ();
+                $quotableOperators= array ('=', '>', '<', '>=', '<=', '<>', '!=', 'LIKE');
+                $quotableTypes= array ('string', 'password', 'date', 'datetime', 'timestamp', 'time');
+                reset($type);
+                while (list ($key, $val)= each($type)) {
+                    $operator= '=';
+                    $key_prefix= '';
+                    $key_operator= explode(':', $key);
+                    if ($key_operator && count($key_operator) === 2) {
+                        $key= $key_operator[0];
+                        $operator= $key_operator[1];
+                    }
+                    elseif ($key_operator && count($key_operator) === 3) {
+                        $key_prefix= $key_operator[0];
+                        $key= $key_operator[1];
+                        $operator= $key_operator[2];
+                    }
+                    if (array_key_exists($key, $fieldMeta)) {
+                        $bindings[':' . $key]= $val;
+                        $fields[$key]= $key_prefix ? $key_prefix . ' ' : '' . "`{$key}` " . $operator . ' ' . ":{$key}";
+                    }
+                }
+                if (!empty ($fields) && !empty ($bindings)) {
+                    $fieldList= implode(' AND ', $fields);
+                    $tableName= $xpdo->getTableName($className);
+                    $sql= "SELECT * FROM {$tableName} WHERE {$fieldList}";
+                    foreach ($bindings as $bk => $bv) {
+                        if (!is_array($bv)) {
+                            if (array_key_exists(substr($bk, 1), $fieldMeta)) {
+                                if (!in_array($fieldMeta[substr($bk, 1)]['phptype'], $quotableTypes) || $val == 'NULL') {
+                                    $bt= PDO_PARAM_INT;
+                                } else {
+                                    $bt= PDO_PARAM_STR;
+                                }
+                            }
+                            $bindings[$bk]= array ('value' => $bv, 'type' => $bt, 'length' => 0);
+                        }
+                    }
+                    $criteria= new xPDOCriteria($xpdo, $sql, $bindings, $cacheFlag);
+                }
+            }
+            elseif (isset ($type[0]) && is_array($pk) && count($type) == count($pk)) {
+                $bindings= array ();
+                $iteration= 0;
+                $tbl= $xpdo->getTableName($className);
+                $sql= "SELECT * FROM {$tbl} WHERE ";
+                foreach ($pk as $k) {
+                    if ($iteration) {
+                        $sql .= " AND ";
+                    }
+                    if (!isset ($type[$iteration])) {
+                        $type[$iteration]= null;
+                    }
+                    $sql .= "`{$k}` = :{$k}";
+                    $bindings[":{$k}"]= $type[$iteration];
+                    $iteration++;
+                }
+                if (!empty ($bindings)) {
+                    $criteria= new xPDOCriteria($xpdo, $sql, $bindings, $cacheFlag);
+                }
+            }
+        }
+        elseif (($pktype == 'integer' && is_numeric($type)) || ($pktype == 'string' && is_string($type))) {
+            if ($pktype == 'integer') {
+                $param_type= PDO_PARAM_INT;
+            } else {
+                $param_type= PDO_PARAM_STR;
+            }
+            $tbl= $xpdo->getTableName($className);
+            $sql= "SELECT * FROM {$tbl} WHERE `{$pk}` = :{$pk}";
+            $criteria= new xPDOCriteria($xpdo, $sql);
+            $criteria->bind(array (':' . $pk => array ('value' => $type, 'type' => $param_type, 'length' => 0)), true, $cacheFlag);
+        }
+        return $criteria;
+    }
+
+    function getSelectColumns(& $xpdo, $className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false) {
+        $columnarray= array ();
+        if ($aColumns= $this->getFields($className)) {
+            $tableAlias= '';
+            if (!empty ($tableAlias)) {
+                $tableAlias= trim($tableAlias, "`");
+                $tableAlias= "`{$tableAlias}`";
+                $tableAlias.= '.';
+            }
+            foreach (array_keys($aColumns) as $k) {
+                if ($exclude && in_array($k, $columns)) {
+                    continue;
+                }
+                elseif (empty ($columns)) {
+                    $columnarray[$k]= "{$tableAlias}`{$k}`";
+                }
+                elseif (in_array($k, $columns)) {
+                    $columnarray[$k]= "{$tableAlias}`{$k}`";
+                } else {
+                    continue;
+                }
+                if (!empty ($columnPrefix)) {
+                    $columnarray[$k]= $columnarray[$k] . " AS `{$columnPrefix}{$k}`";
+                }
+            }
+        }
+        return implode(', ', $columnarray);
+    }
+
+    /**
+     * PHP 4 Constructor (do not call directly; {@see xPDO::newObject()}).
      * 
      * @access protected
      */

@@ -13,4 +13,3 @@ $xpdo_meta_map['xPDOSimpleObject']['fieldMeta']= array (
    'id' => array('dbtype' => 'INTEGER', 'phptype' => 'integer', 'null' => false, 'index' => 'pk', 'generated' => 'native', 'attributes' => 'unsigned', ),
 );
 $xpdo_meta_map['xpdosimpleobject']= & $xpdo_meta_map['xPDOSimpleObject'];
-?>

@@ -1,7 +1,7 @@
 <?php
 /*
  * OpenExpedio (xPDO)
- * Copyright (C) 2006 Jason Coward <xpdo@opengeek. com>
+ * Copyright (C) 2006 Jason Coward <xpdo@opengeek.com>
  * 
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -21,7 +21,7 @@
 /**
  * Classes for generating xPDOObject classes and maps from an XML schema.
  * 
- * @package xpdo.generator
+ * @package xpdo.om.mysql
  */
 
 /**
@@ -419,12 +419,13 @@ class xPDOGenerator {
         $template= '<?php' . "\n";
         $template .=<<<EOD
 class [+class+] extends [+extends+] {
-    public function [+class+](& \$xpdo) {
-        \\\\ Do any custom initialization here 
-    }
+   function [+class+](& \$xpdo) {
+       parent :: __construct(\$xpdo);
+   }
 }
+
 EOD;
+        $template .= '?>';
         return $template;
     }
 }
-?>
