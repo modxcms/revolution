@@ -207,5 +207,3 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
         $this->assertTrue($result == true, "Error code not being set on PDO object");
     }
 }
-?>
-

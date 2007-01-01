@@ -27,5 +27,3 @@ class PDOTest extends PHPUnit2_Framework_TestCase {
 	}
 
 }
-?>
-
