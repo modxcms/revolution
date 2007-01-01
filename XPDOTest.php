@@ -135,9 +135,9 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
             2,
             1
         ));
-        $this->assertTrue(is_a($person, 'Person'), "Error retrieving Person object by primary key");
-        $this->assertTrue(is_a($phone, 'Phone'), "Error retrieving Phone object by primary key");
-        $this->assertTrue(is_a($personPhone, 'PersonPhone'), "Error retrieving PersonPhone object by primary key");
+        $this->assertTrue($person instanceof Person, "Error retrieving Person object by primary key");
+        $this->assertTrue($phone instanceof Phone, "Error retrieving Phone object by primary key");
+        $this->assertTrue($personPhone instanceof PersonPhone, "Error retrieving PersonPhone object by primary key");
     }
     
     public function testGetOne() {
@@ -149,16 +149,16 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
         ));
         $person= & $personPhone->getOne('Person');
         $phone= & $personPhone->getOne('Phone');
-        $this->assertTrue(is_a($personPhone, 'PersonPhone'), "Error retrieving PersonPhone object by primary key");
-        $this->assertTrue(is_a($person, 'Person'), "Error retrieving related Person object");
-        $this->assertTrue(is_a($phone, 'Phone'), "Error retrieving related Phone object");
+        $this->assertTrue($personPhone instanceof PersonPhone, "Error retrieving PersonPhone object by primary key");
+        $this->assertTrue($person instanceof Person, "Error retrieving related Person object");
+        $this->assertTrue($phone instanceof Phone, "Error retrieving related Phone object");
     }
     
     public function testGetAll() {
         $xpdo= $this->getXPDOObject();
         $people= $xpdo->getCollection('Person');
-        $this->assertTrue(is_a($people['1'], 'Person'), "Error retrieving all objects.");
-        $this->assertTrue(is_a($people['2'], 'Person'), "Error retrieving all objects.");
+        $this->assertTrue($people['1'] instanceof Person, "Error retrieving all objects.");
+        $this->assertTrue($people['2'] instanceof Person, "Error retrieving all objects.");
         $this->assertTrue(count($people) == 2, "Error retrieving all objects.");
     }
 
@@ -168,7 +168,7 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
         $person= $xpdo->getObject('Person', 2);
         $collPersonPhone= $person->getMany('PersonPhone');
 //        $xpdo->_log(XPDO_LOG_LEVEL_DEBUG, print_r($collPersonPhone, true));
-        $this->assertTrue(is_a($collPersonPhone['2-1'], 'PersonPhone'), "Error retrieving related objects with getMany().");
+        $this->assertTrue($collPersonPhone['2-1'] instanceof PersonPhone, "Error retrieving related objects with getMany().");
         $this->assertTrue(count($collPersonPhone) == 1, "Error retrieving proper objects with getMany().");
     }
 
