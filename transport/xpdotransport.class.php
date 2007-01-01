@@ -123,7 +123,7 @@ class xPDOTransport {
         if (!empty ($this->vehicles)) {
             foreach ($this->vehicles as $vKey => $vehicleMeta) {
                 if ($object= $this->get($vehicleMeta['filename'], array_merge($vehicleMeta, $options))) {
-                    if (is_object($object) && is_a($object, 'xPDOObject')) {
+                    if (is_object($object) && $object instanceof xPDOObject) {
                         if ($this->validate($object)) {
                             if ($object->save()) {
                                 $this->resolve($object);
@@ -147,7 +147,7 @@ class xPDOTransport {
      */
     function put($object, $attributes= array ()) {
         $added= false;
-        if (is_object($object) && is_a($object, 'xPDOObject')) {
+        if (is_object($object) && $object instanceof xPDOObject) {
             $vehicle= new xPDOVehicle();
             $vehicle->put($object, $attributes);
             if ($added= $vehicle->store($this)) {

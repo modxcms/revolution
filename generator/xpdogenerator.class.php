@@ -419,16 +419,11 @@ class xPDOGenerator {
         $template= '<?php' . "\n";
         $template .=<<<EOD
 class [+class+] extends [+extends+] {
-   function [+class+](& \$xpdo) {
-      \$this->__construct(\$xpdo); 
-   }
-   function __construct(& \$xpdo) {
-      parent :: __construct(\$xpdo);
-   }
+    public function [+class+](& \$xpdo) {
+        \\\\ Do any custom initialization here 
+    }
 }
-
 EOD;
-        $template .= '?>';
         return $template;
     }
 }

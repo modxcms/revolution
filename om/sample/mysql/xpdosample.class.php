@@ -11,12 +11,4 @@
  * @package xpdo.om.mysql
  * @subpackage example
  */
-class xPDOSample extends xPDOSimpleObject {
-    function xPDOSample(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
-?>
+class xPDOSample extends xPDOSimpleObject {}

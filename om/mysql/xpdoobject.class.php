@@ -143,20 +143,11 @@ class xPDOObject {
     );
 
     /**
-     * PHP 4 Constructor (do not call directly; {@see xPDO::newObject()}).
+     * Constructor (do not call directly; {@see xPDO::newObject()}).
      * 
-     * Falls through to PHP 5 constructor.
      * @access protected
      */
-    function xPDOObject(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-
-    /**
-     * PHP 5 Constructor (do not call directly; {@see xPDO::newObject()}).
-     * @access protected
-     */
-    function __construct(& $xpdo) {
+    public function xPDOObject(& $xpdo) {
         $this->container= $xpdo->config['dbname'];
         $this->_table= $xpdo->getTableName(get_class($this));
         $this->_tableType= $xpdo->getTableType(get_class($this));
@@ -1296,12 +1287,4 @@ class xPDOObject {
  * 
  * @package xpdo.om.mysql
  */
-class xPDOSimpleObject extends xPDOObject {
-    function xPDOSimpleObject(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
-?>
+class xPDOSimpleObject extends xPDOObject {}

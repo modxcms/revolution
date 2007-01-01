@@ -95,7 +95,7 @@ class MakeForm {
     }
     
     function _setFormObject(& $elements, & $object, $isRelated= false, $foreignKey= '') {
-        if (is_object($object) && is_a($object, 'xPDOObject')) {
+        if (is_object($object) && $object instanceof xPDOObject) {
             $elementClass= get_class($object);
             if ($elementKey= $object->getPrimaryKey()) {
                 if (is_array($elementKey)) {
@@ -424,7 +424,7 @@ class MakeForm {
      */
     function processForm(& $object, $valueArray= array ()) {
         $success= false;
-        if (is_object($object) && is_a($object, 'xPDOObject') && !empty ($valueArray)) {
+        if (is_object($object) && $object instanceof xPDOObject && !empty ($valueArray)) {
             if (is_array($this->formElements)) {
                 reset($this->formElements);
                 while (list ($elementKey, $element)= each($this->formElements)) {

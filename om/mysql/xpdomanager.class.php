@@ -58,10 +58,7 @@ class xPDOManager {
      * @param object $xpdo A reference to a specific modDataSource instance.
      */
     function xPDOManager(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        if ($xpdo !== null && is_a($xpdo, 'xPDO')) {
+        if ($xpdo !== null && $xpdo instanceof xPDO) {
             $this->xpdo= & $xpdo;
         }
         global $action;

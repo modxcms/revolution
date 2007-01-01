@@ -18,10 +18,6 @@ class xPDOCacheManager {
     var $objcache= null;
     
     function xPDOCacheManager(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    
-    function __construct(& $xpdo) {
         $this->xpdo= & $xpdo;
         $objCacheClass= 'xPDOFileCache';
         if (isset ($xpdo->config['cache_db_handler']) && $xpdo->config['cache_db_handler']) {
@@ -34,7 +30,7 @@ class xPDOCacheManager {
 
     function generateObject($obj, $objName, $generateObjVars= false, $generateRelated= false, $objRef= 'this->xpdo', $format= XPDO_CACHE_PHP) {
         $source= false;
-        if (is_object($obj) && is_a($obj, 'xPDOObject')) {
+        if (is_object($obj) && $obj instanceof xPDOObject) {
             $className= get_class($obj);
             $source= "\${$objName}= \${$objRef}->newObject('{$className}');\n";
             $source .= "\${$objName}->fromArray(" . var_export($obj->toArray(), true) . ", '', true, true);\n";
@@ -72,7 +68,7 @@ class xPDOCacheManager {
         $return= false;
         if ($this->objcache) {
             $value= null;
-            if (is_object($var) && is_a($var, 'xPDOObject')) {
+            if (is_object($var) && $var instanceof xPDOObject) {
                 $value= $var->toJSON();
             }
             else {
@@ -86,7 +82,7 @@ class xPDOCacheManager {
         $return= false;
         if ($this->objcache) {
             $value= null;
-            if (is_object($var) && is_a($var, 'xPDOObject')) {
+            if (is_object($var) && $var instanceof xPDOObject) {
                 $value= $var->toJSON();
             }
             else {
@@ -103,7 +99,7 @@ class xPDOCacheManager {
             if ($var === null) {
                 return $this->objcache->delete($key);
             }
-            elseif (is_object($var) && is_a($var, 'xPDOObject')) {
+            elseif (is_object($var) && $var instanceof xPDOObject) {
                 $value= $var->toArray();
             }
             else {

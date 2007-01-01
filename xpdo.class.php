@@ -1,9 +1,8 @@
 <?php
 /*
- * OpenExpedio (XPDO) is an ultra-light, PHP 4.3+ compatible ORB (Object-
- * Relational Bridge) library based around PDO (http://php.net/pdo/).  It uses
- * native PDO if available or provides a subset implementation for use with PHP
- * 4 on platforms that do not include the native PDO extensions.
+ * OpenExpedio (XPDO) is an ultra-light, PHP 5.1+ compatible ORB (Object-
+ * Relational Bridge) library based around PDO (http://php.net/pdo/).
+ * 
  * Copyright (C) 2006 Jason Coward <xpdo@opengeek.com>
  * 
  * This program is free software; you can redistribute it and/or modify it under
@@ -24,39 +23,10 @@
 /**
  * This is the main file to include in your scripts to use XPDO.
  * 
- * It defines PHP 4 and 5-compatible constants along with the core classes used
- * throughout the framework. The constants should be available regardless if you
- * are using native PDO or the OpenExpedio PDO implementation for PHP 4.3+.
- * OpenExpedio recommends using these constants instead of the STATIC class
- * variables in PDO when PHP 4 portability is a concern for your application, as
- * these constants mimic the native PDO static vars, which are unusable in PHP
- * 4.
+ * It defines the core classes used throughout the framework.
+ *  
  * @package xpdo
  */
-if (!function_exists('array_combine')) {
-    /**
-     * Emulates PHP5 array_combine function for PHP 4.
-     * 
-     * @see http:/php.net/function.array_combine
-     */
-    function array_combine($keys, $values) {
-        $keys= array_values((array) $keys);
-        $values= array_values((array) $values);
-        $n= max(count($keys), count($values));
-        $r= array ();
-        for ($i= 0; $i < $n; $i++) {
-            $r[$keys[$i]]= $values[$i];
-        }
-        return $r;
-    }
-}
-if (!defined('XPDO_PHP4_MODE')) {
-    if (version_compare(phpversion(), '5.0.0') < 0) {
-        define('XPDO_PHP4_MODE', true);
-    } else {
-        define('XPDO_PHP4_MODE', false);
-    }
-}
 if (!defined('XPDO_CORE_PATH')) {
     /**
      * @internal This global variable is only used to set the {@link
@@ -85,92 +55,16 @@ if (!defined('XPDO_CORE_PATH')) {
      * @var integer
      * @access public
      */
-    define('XPDO_MODE_NATIVE', 1);
-    define('XPDO_MODE_EMULATED', 2);
     define('XPDO_LOG_LEVEL_FATAL', 0);
     define('XPDO_LOG_LEVEL_ERROR', 1);
     define('XPDO_LOG_LEVEL_WARN', 2);
     define('XPDO_LOG_LEVEL_INFO', 3);
     define('XPDO_LOG_LEVEL_DEBUG', 4);
-    define('PDO_PARAM_BOOL', 5);
-    define('PDO_PARAM_NULL', 0);
-    define('PDO_PARAM_INT', 1);
-    define('PDO_PARAM_STR', 2);
-    define('PDO_PARAM_LOB', 3);
-    define('PDO_PARAM_STMT', 4);
-    define('PDO_PARAM_INPUT_OUTPUT', -2147483648);
-    define('PDO_ATTR_AUTOCOMMIT', 0);
-    define('PDO_ATTR_PREFETCH', 1);
-    define('PDO_ATTR_TIMEOUT', 2);
-    define('PDO_ATTR_ERRMODE', 3);
-    define('PDO_ATTR_SERVER_VERSION', 4);
-    define('PDO_ATTR_CLIENT_VERSION', 5);
-    define('PDO_ATTR_SERVER_INFO', 6);
-    define('PDO_ATTR_CONNECTION_STATUS', 7);
-    define('PDO_ATTR_CASE', 8);
-    define('PDO_ATTR_CURSOR_NAME', 9);
-    define('PDO_ATTR_CURSOR', 10);
-    define('PDO_ATTR_ORACLE_NULLS', 11);
-    define('PDO_ATTR_PERSISTENT', 12);
-    define('PDO_ATTR_STATEMENT_CLASS', 13);
-    define('PDO_ATTR_FETCH_TABLE_NAMES', 14);
-    define('PDO_ATTR_FETCH_CATALOG_NAMES', 15);
-    define('PDO_ATTR_DRIVER_NAME', 16);
-    define('PDO_ATTR_STRINGIFY_FETCHES', 17);
-    define('PDO_ATTR_MAX_COLUMN_LEN', 18);
-    define('PDO_ATTR_EMULATE_PREPARES', 19);
-    define('PDO_FETCH_LAZY', 1);
-    define('PDO_FETCH_ASSOC', 2);
-    define('PDO_FETCH_NUM', 3);
-    define('PDO_FETCH_BOTH', 4);
-    define('PDO_FETCH_OBJ', 5);
-    define('PDO_FETCH_BOUND', 6);
-    define('PDO_FETCH_COLUMN', 7);
-    define('PDO_FETCH_CLASS', 8);
-    define('PDO_FETCH_INTO', 9);
-    define('PDO_FETCH_FUNC', 10);
-    define('PDO_FETCH_GROUP', 65536);
-    define('PDO_FETCH_UNIQUE', 196608);
-    define('PDO_FETCH_CLASSTYPE', 262144);
-    define('PDO_FETCH_SERIALIZE', 524288);
-    define('PDO_FETCH_NAMED', 11);
-    define('PDO_ERRMODE_SILENT', 0);
-    define('PDO_ERRMODE_WARNING', 1);
-    define('PDO_ERRMODE_EXCEPTION', 2);
-    define('PDO_CASE_NATURAL', 0);
-    define('PDO_CASE_LOWER', 2);
-    define('PDO_CASE_UPPER', 1);
-    define('PDO_NULL_NATURAL', 0);
-    define('PDO_NULL_EMPTY_STRING', 1);
-    define('PDO_NULL_TO_STRING', 2);
-    define('PDO_ERR_NONE', '00000');
-    define('PDO_FETCH_ORI_NEXT', 0);
-    define('PDO_FETCH_ORI_PRIOR', 1);
-    define('PDO_FETCH_ORI_FIRST', 2);
-    define('PDO_FETCH_ORI_LAST', 3);
-    define('PDO_FETCH_ORI_ABS', 4);
-    define('PDO_FETCH_ORI_REL', 5);
-    define('PDO_CURSOR_FWDONLY', 0);
-    define('PDO_CURSOR_SCROLL', 1);
-    define('PDO_MYSQL_ATTR_USE_BUFFERED_QUERY', 1000);
-    define('PDO_MYSQL_ATTR_LOCAL_INFILE', 1001);
-    define('PDO_MYSQL_ATTR_INIT_COMMAND', 1002);
-    define('PDO_MYSQL_ATTR_READ_DEFAULT_FILE', 1003);
-    define('PDO_MYSQL_ATTR_READ_DEFAULT_GROUP', 1004);
-    define('PDO_MYSQL_ATTR_MAX_BUFFER_SIZE', 1005);
-    define('PDO_MYSQL_ATTR_DIRECT_QUERY', 1006);
-    define('PDO_PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT', 1000);
     /**#@-*/
 }
 
 if (!class_exists('PDO')) {
-    if (!defined('XPDO_MODE')) {
-        define('XPDO_MODE', XPDO_MODE_EMULATED);
-    }
-} else {
-    if (!defined('XPDO_MODE')) {
-        define('XPDO_MODE', XPDO_MODE_NATIVE);
-    }
+    //@todo Handle PDO configuration errors here.
 }
 
 /**
@@ -191,64 +85,67 @@ if (!class_exists('PDO')) {
  * @package xpdo
  */
 class xPDO {
-    var $pdo= null;
+    /**
+     * 
+     */
+    protected $pdo= null;
     /**
      * A array of xPDO configuration attributes.
      * @var array
      * @access public
      */
-    var $config= null;
+    public $config= null;
     /**
      * A map of data source meta data for all loaded classes.
      * @var array
      * @access public
      */
-    var $map= array ();
+    public $map= array ();
     /**
      * A default package for specifying classes by name.
      * @var string
      * @access public
      */
-    var $package= '';
+    protected $package= '';
     /**
      * {@link xPDOManager} instance, loaded only if needed to manage datasource
      * containers, data structures, etc.
      * @var xPDOManager
      * @access public
      */
-    var $manager= null;
+    protected $manager= null;
     /**
      * @var xPDOCacheManager The cache service provider registered for this xPDO
      * instance.
      */
-    var $cacheManager= null;
+    protected $cacheManager= null;
     /**
      * @var float Start time of the request, initialized when the constructor is
      * called.
      */
-    var $startTime= 0;
+    protected $startTime= 0;
     /**
      * @var int The number of direct DB queries executed during a request.
      */
-    var $executedQueries= 0;
+    protected $executedQueries= 0;
     /**
      * @var int The amount of request handling time spent with DB queries.
      */
-    var $queryTime= 0;
+    protected $queryTime= 0;
 
     /**
      * @var integer The logging level for the XPDO instance.
      */
-    var $logLevel= XPDO_LOG_LEVEL_FATAL;
+    protected $logLevel= XPDO_LOG_LEVEL_FATAL;
 
     /**
      * @var string The default logging target for the XPDO instance.
      */
-    var $logTarget= 'ECHO';
+    protected $logTarget= 'ECHO';
 
-    var $_debug= false;
-    var $_nativeMode= true;
-    var $_cacheEnabled= false;
+    protected $_debug= false;
+    protected $_nativeMode= true;
+    protected $_cacheEnabled= false;
 
     /**
      * The xPDO Constructor.
@@ -264,11 +161,7 @@ class xPDO {
      * might need to coexist in a single database container.
      * @param mixed $driverOptions Driver-specific PDO options.
      */
-    function xPDO($dsn, $username= '', $password= '', $tablePrefix= '', $driverOptions= null) {
-        $this->__construct($dsn, $username, $password, $tablePrefix, $driverOptions);
-    }
-    function __construct($dsn, $username= '', $password= '', $tablePrefix= '', $driverOptions= null) {
-        $this->_nativeMode= (XPDO_MODE === XPDO_MODE_NATIVE);
+    public function xPDO($dsn, $username= '', $password= '', $tablePrefix= '', $driverOptions= null) {
         $this->config= $this->parseDSN($dsn);
         $this->config['dsn']= $dsn;
         $this->config['username']= $username;
@@ -279,16 +172,14 @@ class xPDO {
         $this->loadClass('xPDOSimpleObject');
     }
     
-    function connect($driverOptions= array ()) {
+    protected function connect($driverOptions= array ()) {
         if ($this->pdo === null) {
-            if (class_exists('PDO') || include_once (XPDO_CORE_PATH . 'pdo.class.php')) {
-                if (!empty ($driverOptions)) {
-                    $this->config['driverOptions']= array_merge($this->config['driverOptions'], $driverOptions);
-                }
-                $this->pdo= new PDO($this->config['dsn'], $this->config['username'], $this->config['password'], $this->config['driverOptions']);
-                if ($this->config['dbtype'] === null) {
-                    $this->config['dbtype']= $this->getAttribute(PDO_ATTR_DRIVER_NAME);
-                }
+            if (!empty ($driverOptions)) {
+                $this->config['driverOptions']= array_merge($this->config['driverOptions'], $driverOptions);
+            }
+            $this->pdo= new PDO($this->config['dsn'], $this->config['username'], $this->config['password'], $this->config['driverOptions']);
+            if ($this->config['dbtype'] === null) {
+                $this->config['dbtype']= $this->getAttribute(PDO_ATTR_DRIVER_NAME);
             }
         }
         return $this->pdo;
@@ -304,7 +195,7 @@ class xPDO {
      * 
      * @param string $pkg A package name to use when looking up classes in XPDO.
      */
-    function setPackage($pkg= '') {
+    public function setPackage($pkg= '') {
         $this->package= $pkg;
     }
     
@@ -323,7 +214,7 @@ class xPDO {
      * @return string|boolean The actual classname if successful, or false if
      * not.
      */
-    function loadClass($fqn, $path= '', $ignorePkg= false, $transient= false) {
+    public function loadClass($fqn, $path= '', $ignorePkg= false, $transient= false) {
         if (empty($fqn)) {
             $this->_log(XPDO_LOG_LEVEL_ERROR, "No class specified for loadClass");
 			return false;
@@ -353,11 +244,7 @@ class xPDO {
             }
         }
         // check if class exists
-        if (XPDO_PHP4_MODE) {
-            $included= class_exists($class);
-        } else {
-            $included= class_exists($class, false);
-        }
+        $included= class_exists($class, false);
         if ($included) {
             if ($transient || (!$transient && isset ($this->map[$class]))) {
                 return $class;
@@ -394,7 +281,7 @@ class xPDO {
      * @return object|null A new instance of the specified class, or null if a
      * new object could not be instantiated.
      */
-    function newObject($className, $fields= array ()) {
+    public function newObject($className, $fields= array ()) {
         $instance= null;
         if ($this->loadClass($className)) {
             if ($instance= new $className ($this)) {
@@ -423,7 +310,7 @@ class xPDO {
      * @return object|null An instance of the class, or null if it could not be
      * instantiated.
     */
-    function getObject($className, $criteria= null, $cacheFlag= false) {
+    public function getObject($className, $criteria= null, $cacheFlag= false) {
         $instance= null;
         if ($criteria !== null) {
             $instance= $this->load($className, $criteria, $cacheFlag);
@@ -444,7 +331,7 @@ class xPDO {
      * live in cache indefinitely.
      * @return array|null An array of class instances retrieved.
     */
-    function getCollection($className, $criteria= null, $cacheFlag= false) {
+    public function getCollection($className, $criteria= null, $cacheFlag= false) {
         $objCollection= null;
         $fromCache= false;
         $all= false;
@@ -532,7 +419,7 @@ class xPDO {
      * for retrieving single and multiple instances of an object).
      * @return xPDOCriteria A criteria object or null if not found.
      */
-    function getCriteria($className, $type= 'collection', $cacheFlag= true) {
+    public function getCriteria($className, $type= 'collection', $cacheFlag= true) {
         $criteria= null;
         if ($className= $this->loadClass($className)) {
             $pk= $this->getPK($className);
@@ -647,7 +534,7 @@ class xPDO {
      * @param boolean $includeDb Qualify the table name with the database name.
      * @return string The table name for the class, or null if unsuccessful.
      */
-    function getTableName($className, $includeDb= true) {
+    public function getTableName($className, $includeDb= true) {
         $table= null;
         if ($className= $this->loadClass($className)) {
             if (isset ($this->map[$className]['table'])) {
@@ -677,7 +564,7 @@ class xPDO {
      * for.
      * @return string The table type for the class, or null if unsuccessful.
      */
-    function getTableType($className) {
+    public function getTableType($className) {
         $tableType= null;
         if ($className= $this->loadClass($className)) {
             if (isset ($this->map[$className]['tableType'])) {
@@ -707,7 +594,7 @@ class xPDO {
      * default field values as the array values; empty array is returned if
      * unsuccessful.
      */
-    function getFields($className) {
+    public function getFields($className) {
         $fields= array ();
         if ($className= $this->loadClass($className)) {
             if ($ancestry= $this->getAncestry($className)) {
@@ -733,7 +620,7 @@ class xPDO {
      * arrays of metadata information as the array values; empty array is
      * returned if unsuccessful.
      */
-    function getFieldMeta($className) {
+    public function getFieldMeta($className) {
         $fieldMeta= array ();
         if ($className= $this->loadClass($className)) {
             if ($ancestry= $this->getAncestry($className)) {
@@ -756,7 +643,7 @@ class xPDO {
      * key, an array of key names for compound primary keys, or null if no
      * primary key is found or defined for the class.
      */
-    function getPK($className) {
+    public function getPK($className) {
         $pk= null;
         if (strcasecmp($className, 'xPDOObject') == 0) {
             return $pk;
@@ -800,7 +687,7 @@ class xPDO {
      * key, or null if no primary key is found or defined for the class.
      * @todo Refactor method to return array of types rather than compound!
      */
-    function getPKType($className, $pk= false) {
+    public function getPKType($className, $pk= false) {
         $pktype= null;
         if ($actualClassName= $this->loadClass($className)) {
             if (!$pk)
@@ -829,7 +716,7 @@ class xPDO {
      * @param string $className The fully-qualified name of the class.
      * @return array An array of aggregate foreign key relationship definitions.
      */
-    function getAggregates($className) {
+    public function getAggregates($className) {
         $aggregates= array ();
         if ($className= $this->loadClass($className)) {
             if ($ancestry= $this->getAncestry($className)) {
@@ -849,7 +736,7 @@ class xPDO {
      * @param string $className The fully-qualified name of the class.
      * @return array An array of composite foreign key relationship definitions.
      */
-    function getComposites($className) {
+    public function getComposites($className) {
         $composites= array ();
         if ($className= $this->loadClass($className)) {
             if ($ancestry= $this->getAncestry($className)) {
@@ -872,7 +759,7 @@ class xPDO {
      * @return array An array of string class names representing the class
      * hierarchy, or an empty array if unsuccessful.
      */
-    function getAncestry($className, $includeSelf= true) {
+    public function getAncestry($className, $includeSelf= true) {
         $ancestry= array ();
         if ($actualClassName= $this->loadClass($className)) {
             $ancestor= $actualClassName;
@@ -895,7 +782,7 @@ class xPDO {
      * @return object|null An instance of the requested class, or null if it
      * could not be instantiated.
      */
-    function load($className, $criteria, $cacheFlag= false) {
+    protected function load($className, $criteria, $cacheFlag= false) {
         $instance= null;
         $sql= '';
         if ($className= $this->loadClass($className)) {
@@ -946,7 +833,7 @@ class xPDO {
                     if (isset ($row['class_key'])) {
                         $actualClass= $row['class_key'];
                         $instance= $this->newObject($actualClass);
-                        if (!is_a($instance, $className)) {
+                        if (!$instance instanceof $className) {
                             $this->_log(XPDO_LOG_LEVEL_WARN, "Instantiated a derived class {$actualClass} that is not a subclass of the requested class {$className}");
                         }
                     } else {
@@ -984,7 +871,7 @@ class xPDO {
      * parameter, instead of including them.
      * @return string A valid SQL string of column names for a SELECT statement.
      */
-    function getSelectColumns($className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false) {
+    public function getSelectColumns($className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false) {
         $columnarray= array ();
         if ($aColumns= $this->getFields($className)) {
             $tableAlias= !empty ($tableAlias) ? $tableAlias . '.' : '';
@@ -1020,8 +907,8 @@ class xPDO {
      * @return object|null A manager instance for the XPDO connection, or null
      * if a manager class can not be instantiated.
      */
-    function getManager() {
-        if ($this->manager === null || !is_a($this->manager, 'xPDOManager')) {
+    public function getManager() {
+        if ($this->manager === null || !$this->manager instanceof xPDOManager) {
             if ($managerClass= $this->loadClass($this->config['dbtype'] . '.xPDOManager', '', true, true)) {
                 $this->manager= new $managerClass ($this);
             } else {
@@ -1036,7 +923,7 @@ class xPDO {
      * 
      * @return string The full cache directory path.
      */
-    function getCachePath() {
+    public function getCachePath() {
         return $this->cachePath;
     }
 
@@ -1048,7 +935,7 @@ class xPDO {
      * 
      * @return object The xPDOCacheManager for this xPDO instance.
      */
-    function getCacheManager() {
+    public function getCacheManager() {
         if ($this->cacheManager === null) {
             if ($this->loadClass('cache.xPDOCacheManager', XPDO_CORE_PATH, true, true)) {
                 if ($this->cacheManager= new xPDOCacheManager($this)) {
@@ -1065,7 +952,7 @@ class xPDO {
      * @return boolean The current debug state for the connection, true for on,
      * false for off.
      */
-    function getDebug() {
+    public function getDebug() {
         return $this->_debug;
     }
 
@@ -1074,7 +961,7 @@ class xPDO {
      * 
      * @param boolean $v The debug status, true for on, false for off.
      */
-    function setDebug($v= true) {
+    public function setDebug($v= true) {
         $this->_debug= $v;
     }
 
@@ -1083,11 +970,11 @@ class xPDO {
      * 
      * @param integer $level The logging level to switch to.
      */
-    function setLogLevel($level= XPDO_LOG_LEVEL_FATAL) {
+    public function setLogLevel($level= XPDO_LOG_LEVEL_FATAL) {
         $this->logLevel= intval($level);
     }
 
-    function setLogTarget($target= 'ECHO') {
+    public function setLogTarget($target= 'ECHO') {
         $this->logTarget= $target;
     }
 
@@ -1098,7 +985,7 @@ class xPDO {
      * @param string $msg The message to log.
      * @param string $target The logging target.
      */
-    function _log($level, $msg, $target= '', $def= '', $file= '', $line= '') {
+    public function log($level, $msg, $target= '', $def= '', $file= '', $line= '') {
 //        $timestamp= strftime('%Y-%m-%d %H:%M:%S');
         if (empty ($target)) {
             $target= $this->logTarget;
@@ -1135,7 +1022,7 @@ class xPDO {
      * @param integer $level The logging level to retrieve a string for.
      * @return string The string representation of a valid logging level.
      */
-    function _getLogLevel($level) {
+    protected function getLogLevel($level) {
         $levelText= '';
         switch ($level) {
             case XPDO_LOG_LEVEL_DEBUG :
@@ -1164,7 +1051,7 @@ class xPDO {
      * @param boolean $includeDb Qualify the table name with the database name.
      * @return string The fully-qualified and quoted table name for the
      */
-    function _getFullTableName($baseTableName, $includeDb= true) {
+    private function _getFullTableName($baseTableName, $includeDb= true) {
         $fqn= '';
         if (!empty ($baseTableName)) {
             if ($includeDb) {
@@ -1183,7 +1070,7 @@ class xPDO {
      * @todo Have this method handle all methods of DSN specification as handled
      * by latest native PDO implementation.
      */
-    function parseDSN($string) {
+    protected function parseDSN($string) {
         $result= array ();
         $pos= strpos($string, ':');
         $parameters= explode(';', substr($string, ($pos +1)));
@@ -1198,10 +1085,10 @@ class xPDO {
         return $result;
     }
     
-    function fromCache($signature, $class= '', $format= 'php') {
+    protected function fromCache($signature, $class= '', $format= 'php') {
         $result= null;
         if ($signature && $cacheManager= $this->getCacheManager()) {
-            if (is_object($signature) && is_a($signature, 'xPDOCriteria')) {
+            if (is_object($signature) && $signature instanceof xPDOCriteria) {
                 $sigArray= array ();
                 if ($class) $sigArray['class']= $class;
                 $sigArray['hash']= md5($this->toJSON(array ($signature->sql, $signature->bindings)));
@@ -1227,10 +1114,10 @@ class xPDO {
         return $result;
     }
     
-    function toCache($signature, $object, $lifetime= 0, $compressed= false) {
+    protected function toCache($signature, $object, $lifetime= 0, $compressed= false) {
         $result= false;
         if ($cacheManager= $this->getCacheManager()) {
-            if (is_object($signature) && is_a($signature, 'xPDOCriteria')) {
+            if (is_object($signature) && $signature instanceof xPDOCriteria) {
                 $sigArray= array();
                 if (is_object($object) && $class= get_class($object)) {
                     $object->_cacheFlag= true;
@@ -1259,7 +1146,7 @@ class xPDO {
         return $result;
     }
     
-    function toJSON($array) {
+    public function toJSON($array) {
         $encoded= '';
         if (is_array ($array)) {
             if (!function_exists('json_encode')) {
@@ -1274,7 +1161,7 @@ class xPDO {
         return $encoded;
     }
 
-    function fromJSON($src, $asArray= true) {
+    public function fromJSON($src, $asArray= true) {
         $decoded= '';
         if ($src) {
             if (!function_exists('json_decode')) {
@@ -1295,7 +1182,7 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-begintransaction.php
      */
-    function beginTransaction() {
+    public function beginTransaction() {
         $this->connect();
         $this->pdo->beginTransaction();
     }
@@ -1303,7 +1190,7 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-commit.php
      */
-    function commit() {
+    public function commit() {
         $this->connect();
         $this->pdo->commit();
     }
@@ -1311,7 +1198,7 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-exec.php
      */
-    function exec($query) {
+    public function exec($query) {
         $this->connect();
         $tstart= $this->getMicroTime();
         $return= $this->pdo->exec($query);
@@ -1325,7 +1212,7 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-errorcode.php
      */
-    function errorCode() {
+    public function errorCode() {
         $this->connect();
         return $this->pdo->errorCode();
     }
@@ -1333,7 +1220,7 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-errorinfo.php
      */
-    function errorInfo() {
+    public function errorInfo() {
         $this->connect();
         return $this->pdo->errorInfo();
     }
@@ -1341,7 +1228,7 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-getattribute.php
      */
-    function getAttribute($attribute) {
+    public function getAttribute($attribute) {
         $this->connect();
         return $this->pdo->getAttribute($attribute);
     }
@@ -1349,7 +1236,7 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-lastinsertid.php
      */
-    function lastInsertId() {
+    public function lastInsertId() {
         $this->connect();
         return $this->pdo->lastInsertId();
     }
@@ -1357,7 +1244,7 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-prepare.php
      */
-    function prepare($statement, $driver_options= array ()) {
+    public function prepare($statement, $driver_options= array ()) {
         $this->connect();
         return $this->pdo->prepare($statement, $driver_options= array ());
     }
@@ -1365,7 +1252,7 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-query.php
      */
-    function query($query) {
+    public function query($query) {
         $this->connect();
         $tstart= $this->getMicroTime();
         $return= $this->pdo->query($query);
@@ -1379,7 +1266,7 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-quote.php
      */
-    function quote($string, $parameter_type= PDO_PARAM_STR) {
+    public function quote($string, $parameter_type= PDO_PARAM_STR) {
         $this->connect();
         return $this->pdo->quote($string, $parameter_type);
     }
@@ -1387,7 +1274,7 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-rollback.php
      */
-    function rollBack() {
+    public function rollBack() {
         $this->connect();
         $this->pdo->rollBack();
     }
@@ -1395,12 +1282,12 @@ class xPDO {
     /** 
      * @see http://php.net/manual/en/function.pdo-setattribute.php
      */
-    function setAttribute($attribute, $value) {
+    public function setAttribute($attribute, $value) {
         $this->connect();
         return $this->pdo->setAttribute($attribute, $value);
     }
     
-    function getMicroTime() {
+    public function getMicroTime() {
        list($usec, $sec) = explode(' ', microtime());
        return ((float)$usec + (float)$sec);
     }
@@ -1412,10 +1299,10 @@ class xPDO {
  * @package xpdo
  */
 class xPDOCriteria {
-    var $sql= '';
-    var $stmt= null;
-    var $bindings= array ();
-    var $cacheFlag= false;
+    protected $sql= '';
+    public $stmt= null;
+    public $bindings= array ();
+    protected $cacheFlag= false;
 
     /**
      * Creates a new xPDOCriteria instance.
@@ -1437,7 +1324,7 @@ class xPDOCriteria {
      * criteria is to be cached (true|false) and how long it will live in cache
      * in seconds.
      */
-    function xPDOCriteria(& $xpdo, $sql= '', $bindings= array (), $cacheFlag= false) {
+    public function xPDOCriteria(& $xpdo, $sql= '', $bindings= array (), $cacheFlag= false) {
         $this->xpdo= & $xpdo;
         $this->cacheFlag= $cacheFlag;
         if (is_string($sql) && !empty ($sql)) {
@@ -1468,7 +1355,7 @@ class xPDOCriteria {
      * @param boolean|integer $cacheFlag The cacheFlag indicates the cache state
      * of the xPDOCriteria object and can be absolutely off (false), absolutely 
      */
-    function bind($bindings= array (), $byValue= true, $cacheFlag= false) {
+    public function bind($bindings= array (), $byValue= true, $cacheFlag= false) {
         if (!empty ($bindings)) {
             $this->bindings= array_merge($this->bindings, $bindings);
         }
@@ -1501,8 +1388,7 @@ class xPDOCriteria {
      * @return boolean true if they are both equal is SQL and bindings, otherwise
      * false.
      */
-    function equals($obj) {
-        return (is_object($obj) && is_a($obj, 'xPDOCriteria') && $this->sql === $obj->sql && !array_diff_assoc($this->bindings, $obj->bindings));
+    public function equals($obj) {
+        return (is_object($obj) && $obj instanceof xPDOCriteria && $this->sql === $obj->sql && !array_diff_assoc($this->bindings, $obj->bindings));
     }
 }
-?>

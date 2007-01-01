@@ -11,14 +11,7 @@
  * @package xpdo.om.mysql
  * @subpackage example
  */
-class Person extends xPDOSimpleObject {
-   function Person(& $xpdo) {
-      $this->__construct($xpdo); 
-   }
-   function __construct(& $xpdo) {
-      parent :: __construct($xpdo);
-   }
-}
+class Person extends xPDOSimpleObject {}
 
 /**
  * Represents a Phone number.
@@ -26,14 +19,7 @@ class Person extends xPDOSimpleObject {
  * @package xpdo.om.mysql
  * @subpackage example
  */
-class Phone extends xPDOSimpleObject {
-   function Phone(& $xpdo) {
-      $this->__construct($xpdo); 
-   }
-   function __construct(& $xpdo) {
-      parent :: __construct($xpdo);
-   }
-}
+class Phone extends xPDOSimpleObject {}
 
 /**
  * Represents a one to many relationship between a Person and a Phone.
@@ -41,12 +27,5 @@ class Phone extends xPDOSimpleObject {
  * @package xpdo.om.mysql
  * @subpackage example
  */
-class PersonPhone extends xPDOObject {
-   function PersonPhone(& $xpdo) {
-      $this->__construct($xpdo);
-   }
-   function _construct(& $xpdo) {
-      parent :: __construct($xpdo);
-   }
-}
+class PersonPhone extends xPDOObject {}
 ?>

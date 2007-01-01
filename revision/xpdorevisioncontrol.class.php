@@ -49,11 +49,6 @@
  **/
 
 class xPDORevisionControl {
-    function xPDORevisionControl() {
-        $this->__construct();
-    }
-    function __construct() {}
-    
     /**
      * Computes the difference between two string linewise. 
      * The output is the same format

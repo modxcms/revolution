@@ -390,7 +390,7 @@ class MakeTable {
             $header= '';
             if (!empty ($fieldsArray)) {
                 foreach ($fieldsArray as $fieldName => $fieldValue) {
-                    if (is_object($fieldValue) && is_a($fieldValue, 'xPDOObject')) {
+                    if (is_object($fieldValue) && $fieldValue instanceof xPDOObject) {
                         $fieldValue= $fieldValue->toArray();
                     }
                     $table .= "\t<tr".$this->determineRowClass($i).">\n";

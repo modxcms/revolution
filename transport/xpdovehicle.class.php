@@ -52,7 +52,7 @@ class xPDOVehicle {
      */
     function get(& $transport, $options= array ()) {
         $object= $transport->xpdo->newObject($this->payload['class']);
-        if (is_object($object) && is_a($object, 'xPDOObject') && isset ($this->payload['object'])) {
+        if (is_object($object) && $object instanceof xPDOObject && isset ($this->payload['object'])) {
             $setKeys= false;
             if (isset ($options[XPDO_TRANSPORT_PRESERVE_KEYS])) {
                 $setKeys= (boolean) $options[XPDO_TRANSPORT_PRESERVE_KEYS];
@@ -82,7 +82,7 @@ class xPDOVehicle {
                 $guid= md5(uniqid(rand(), true));
                 $this->payload['guid']= $guid;
             }
-            if (is_a($object, 'xPDOObject')) {
+            if ($object instanceof xPDOObject) {
                 $nativeKey= $object->getPrimaryKey();
                 if (is_array($nativeKey)) {
                     $nativeKey= implode('-', $nativeKey);
@@ -100,7 +100,7 @@ class xPDOVehicle {
     
     function store(& $transport) {
         $stored= false;
-        if (!empty ($this->payload) && is_object($transport) && is_a($transport, 'xPDOTransport')) {
+        if (!empty ($this->payload) && is_object($transport) && $transport  instanceof xPDOTransport) {
             $content= '<?php return ';
             $content.= var_export($this->payload, true);
             $content.= ';';
