@@ -66,7 +66,8 @@ if (!@require_once (MODX_CORE_PATH . "model/modx/modx.class.php")) {
 ob_start();
 
 /* Create an instance of the modX class */
-if (!$modx= new modX()) {
+if (empty($options) || !is_array($options)) $options = array();
+if (!$modx= new modX('', $options)) {
     @ob_end_flush();
     @include(MODX_CORE_PATH . 'error/unavailable.include.php');
     header('HTTP/1.1 503 Service Unavailable');

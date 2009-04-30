@@ -53,7 +53,8 @@ if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 }
 
 /* create the modX object */
-$modx= new modX();
+if (empty($options) || !is_array($options)) $options = array();
+$modx= new modX('', $options);
 
 if (!is_object($modx) || !is_a($modx, 'modX')) {
     include MODX_CORE_PATH . 'error/unavailable.include.php';

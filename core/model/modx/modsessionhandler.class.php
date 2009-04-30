@@ -70,13 +70,18 @@ class modSessionHandler {
 
     function write($id, $data) {
         $written= false;
-        if (!$session= $this->modx->getObject('modSession', array ('id' => $id), false)) {
+        $gcMaxlifetime = $this->modx->getOption('session_gc_maxlifetime', array(), @ini_get('session.gc_max_lifetime'));
+        $cacheLifetime = $this->modx->getOption('cache_db_session_lifetime', array(), intval($gcMaxlifetime / 4));
+        if (!$session= $this->modx->getObject('modSession', array ('id' => $id), $cacheLifetime)) {
             $session= $this->modx->newObject('modSession');
             $session->set('id', $id);
+            $session->set('access', time());
         }
-        $session->set('access', time());
         $session->set('data', $data);
-        $written= $session->save(false);
+        if ($session->isDirty('data') || (time() - $session->get('access', '%s')) > $cacheLifetime) {
+            $session->set('access', time());
+        }
+        $written= $session->save();
         return $written;
     }
 
@@ -91,21 +96,14 @@ class modSessionHandler {
     }
 
     function gc($max) {
-        if (isset ($this->modx->config['session_gc_maxlifetime'])) {
-            $max= $this->modx->config['session_gc_maxlifetime'];
-        }
+        $max = (integer) $this->modx->getOption('session_gc_maxlifetime', array(), $max);
         $maxtime= time() - $max;
-        $query= $this->modx->newQuery('modSession');
-        $query->command('DELETE');
-        $query->where("`access` < {$maxtime}");
-        if ($stmt= $query->prepare()) {
-            $result= $stmt->execute();
-        }
+        $result = $this->modx->removeCollection('modSession', array("`access` < {$maxtime}"));
         return $result;
     }
 
     function _getSession($id, $autoCreate= false) {
-        $session= $this->modx->getObject('modSession', array('id' => $id), false);
+        $session= $this->modx->getObject('modSession', array('id' => $id), $this->modx->getOption('cache_db_session', array(), false));
         if ($autoCreate && !is_object($session)) {
             $session= $this->modx->newObject('modSession');
             $session->set('id', $id);

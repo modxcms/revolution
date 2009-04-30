@@ -149,7 +149,7 @@ class modRequest {
         if (!intval($resourceId)) {
             $this->modx->sendErrorPage();
         }
-
+        $fromCache = false;
         $cacheKey = $this->modx->context->get('key') . "/resources/{$resourceId}";
         if ($cachedResource = $this->modx->cacheManager->get($cacheKey)) {
             $resource = $this->modx->newObject($cachedResource['resourceClass']);
@@ -166,14 +166,14 @@ class modRequest {
                 if (isset($cachedResource['sjscripts'])) $this->modx->sjscripts = $cachedResource['sjscripts'];
                 if (isset($cachedResource['jscripts'])) $this->modx->jscripts = $cachedResource['jscripts'];
                 if (isset($cachedResource['loadedjscripts'])) $this->modx->loadedjscripts = $cachedResource['loadedjscripts'];
+                $fromCache = true;
             }
-            $fromCache = true;
         }
         $this->modx->resourceGenerated = (boolean) !$fromCache;
         if (!$fromCache || !is_object($resource)) {
             $criteria = array('id' => $resourceId, 'deleted' => '0');
             if (!$this->modx->hasPermission('view_unpublished')) $criteria['published']= 1;
-            if ($resource = $this->modx->getObject('modResource', $criteria, true)) {
+            if ($resource = $this->modx->getObject('modResource', $criteria)) {
                 if (is_object($resource)) {
                     if ($resource->get('context_key') !== $this->modx->context->get('key')) {
                         if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {

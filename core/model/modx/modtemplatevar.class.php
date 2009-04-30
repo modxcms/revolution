@@ -97,7 +97,10 @@ class modTemplateVar extends modElement {
      */
     function getValue($resourceId= 0) {
         $value= null;
-        if ($resourceId) {
+        if ($resourceId && array_key_exists('value', $this->_fields)) {
+            $value= $this->get('value');
+        }
+        elseif ($resourceId) {
             if ($resourceId === $this->xpdo->resourceIdentifier && isset ($this->xpdo->documentObject[$this->get('name')]) && is_array($this->xpdo->documentObject[$this->get('name')])) {
                 $value= $this->xpdo->documentObject[$this->get('name')][1];
             } else {

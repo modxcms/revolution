@@ -1,7 +1,7 @@
 <?php
 /*
  * MODx Revolution
- * 
+ *
  * Copyright 2006, 2007, 2008 by the MODx Team.
  * All rights reserved.
  *
@@ -24,7 +24,8 @@ if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE_
 if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
 
 // instantiate the modX class with the appropriate configuration
-$modx= new modX();
+if (empty($options) || !is_array($options)) $options = array();
+$modx= new modX('', $options);
 
 // set debugging/logging options
 $modx->setDebug(E_ALL & ~E_NOTICE);

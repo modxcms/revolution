@@ -198,6 +198,8 @@ class modCacheManager extends xPDOCacheManager {
                 }
             }
             if ($this->getOption('cache_context_settings', $options, true)) {
+                $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'default');
+                $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_context_settings_handler', $options);
                 $lifetime = intval($this->getOption(XPDO_OPT_CACHE_EXPIRES, $options, 0));
                 if (!$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
                     $this->modx->log(MODX_LOG_LEVEL_ERROR, 'Could not cache context settings for ' . $obj->get('key') . '.');
@@ -235,6 +237,8 @@ class modCacheManager extends xPDOCacheManager {
             }
         }
         if (!empty($config) && $this->getOption('cache_system_settings', $options, true)) {
+            $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_system_settings_key', $options, 'default');
+            $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_system_settings_handler', $options);
             $lifetime = intval($this->getOption(XPDO_OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set('config', $config, $lifetime, $options)) {
                 $this->modx->log(MODX_LOG_LEVEL_ERROR, 'Could not cache system settings.');
@@ -281,6 +285,8 @@ class modCacheManager extends xPDOCacheManager {
                     $results['loadedjscripts']= $this->modx->loadedjscripts;
                 }
             }
+            $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_resource_key', $options, 'default');
+            $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_resource_handler', $options);
             $lifetime = intval($this->getOption(XPDO_OPT_CACHE_EXPIRES, $options, 0));
             if (empty($results) || !$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
                 $this->modx->log(MODX_LOG_LEVEL_ERROR, "Error caching resource " . $obj->get('id'));
@@ -322,6 +328,8 @@ class modCacheManager extends xPDOCacheManager {
         }
 
         if (!empty($results) && $this->getOption('cache_lexicon_topics', $options, true)) {
+            $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_lexicon_topics_key', $options, 'default');
+            $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_lexicon_topics_handler', $options);
             $lifetime = intval($this->getOption(XPDO_OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($lexicon->getCacheKey($namespace, $topic, $language), $results, $lifetime, $options)) {
                 $this->modx->log(MODX_LOG_LEVEL_ERROR, "Error caching lexicon topic " . $lexicon->getCacheKey($namespace, $topic, $language));
@@ -359,6 +367,8 @@ class modCacheManager extends xPDOCacheManager {
             $results[$action->get('id')] = $objArray;
         }
         if (!empty($results) && $this->getOption('cache_action_map', $options, true)) {
+            $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_action_map_key', $options, 'default');
+            $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_action_map_handler', $options);
             $lifetime = intval($this->getOption(XPDO_OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $results, $lifetime, $options)) {
                 $this->modx->log(MODX_LOG_LEVEL_ERROR, "Error caching action map {$cacheKey}");
@@ -396,7 +406,9 @@ class modCacheManager extends xPDOCacheManager {
                 return $content;
             }
             $results = $content;
-            if ($this->getOption('cache_scripts', $options)) {
+            if ($this->getOption('cache_scripts', $options, true)) {
+                $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_scripts_key', $options, 'default');
+                $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_scripts_handler', $options);
                 $lifetime = $this->getOption(XPDO_OPT_CACHE_EXPIRES) ? intval($this->getOption(XPDO_OPT_CACHE_EXPIRES)) : 0;
                 if (empty($results) || !$this->set($objElement->getScriptCacheKey(), $results, $lifetime, $options)) {
                     $this->modx->log(MODX_LOG_LEVEL_ERROR, "Error caching resource " . $obj->get('id'));
