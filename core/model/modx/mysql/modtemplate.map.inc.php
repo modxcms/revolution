@@ -1,0 +1,124 @@
+<?php
+/**
+ * @package modx
+ * @subpackage mysql
+ */
+$xpdo_meta_map['modTemplate']= array (
+  'package' => 'modx',
+  'table' => 'site_templates',
+  'fields' => 
+  array (
+    'templatename' => '',
+    'description' => 'Template',
+    'editor_type' => 0,
+    'category' => 0,
+    'icon' => '',
+    'template_type' => 0,
+    'content' => '',
+    'locked' => 0,
+    'properties' => NULL,
+  ),
+  'fieldMeta' => 
+  array (
+    'templatename' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '50',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+      'index' => 'unique',
+    ),
+    'description' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'Template',
+    ),
+    'editor_type' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'category' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'fk',
+    ),
+    'icon' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'template_type' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'content' => 
+    array (
+      'dbtype' => 'mediumtext',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'locked' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'properties' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'array',
+      'null' => true,
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'modCategory' => 
+    array (
+      'class' => 'modCategory',
+      'key' => 'id',
+      'local' => 'category',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+  ),
+  'composites' => 
+  array (
+    'modTemplateVarTemplate' => 
+    array (
+      'class' => 'modTemplateVarTemplate',
+      'key' => 'tmplvarid',
+      'local' => 'id',
+      'foreign' => 'tmplvarid',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
+);
+if (XPDO_PHP4_MODE) $xpdo_meta_map['modTemplate']['aggregates']= array_merge($xpdo_meta_map['modTemplate']['aggregates'], array_change_key_case($xpdo_meta_map['modTemplate']['aggregates']));
+if (XPDO_PHP4_MODE) $xpdo_meta_map['modTemplate']['composites']= array_merge($xpdo_meta_map['modTemplate']['composites'], array_change_key_case($xpdo_meta_map['modTemplate']['composites']));
+$xpdo_meta_map['modtemplate']= & $xpdo_meta_map['modTemplate'];

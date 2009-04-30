@@ -1,0 +1,148 @@
+/* structure */
+
+.title {
+	font-size: 1.4em;
+	color: #707070;
+	font-weight: bold;
+}
+
+/* forms */
+div.labelHolder {
+    clear: both;
+}
+
+div.labelHolder input {
+    width: 200px;
+}
+
+label, input[type=button] {
+	cursor: pointer;
+}
+label {
+    width: 20em;
+    float: left;
+    display: block;
+}
+
+
+/* tables */
+table.options {
+	width: 100%;
+	font-size: .9em;
+}
+table.options tbody th {
+	font-weight: normal;
+	text-align: left;
+	width: 40%;
+}
+table.options th img {
+	text-align: left;
+	margin: 0 .5em;
+	float: left;
+}
+table.options label {
+    width: auto;
+}
+table.options td,table.options th {
+	padding-top: 1em;
+}
+table.options td {
+	vertical-align: top;
+}
+
+/* misc styles */
+.smalltext {
+	font-size: .7em;
+	color: #99CD00;
+	background-color: #000;
+}
+.right { float: right; }
+.left { float: left; }
+
+.center { text-align: center; }
+.center img { margin: 0 auto; }
+
+
+/* error */
+#modx_error {
+    display: none;
+	position: fixed; bottom: 0; right: 0;
+	z-index: 999;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+#modx_error a {
+    color: black;
+	text-decoration: none;
+}
+
+#modx_error a:hover {
+	text-decoration: underline;
+}
+
+#modx_error .close {
+	float: right;
+    color: black;
+	font-size: 10px;
+	vertical-align: middle;
+	height: 100%;
+}
+
+#modx_error .content {
+    padding: 0 2em;
+	clear: both;
+	float: left;
+	margin: 0 auto;
+}
+#modx_error br.clear {
+    clear: both;
+}
+
+.field_error {
+    font-size:0.8em;
+    color: red;
+}
+.ok, .notok { 
+	color: green;
+	font-weight: bold;
+}	
+.notok { color: red; }
+
+.error {
+    border: 1px solid red;
+    background-color: #f8c7c7;
+}
+.success {
+	border: 1px solid green;
+    background-color: #CAFF9A;
+}
+.finalsuccess { border: 0 !important; }
+.right { float: right; }
+
+/* other stuff */
+.cleanup {
+    float:left;
+    cursor:pointer;
+    background-color: #EEE;
+    color: #444;
+}
+.cleanup label {
+    display:inline;
+    float:none;
+    padding: .5em;
+}
+
+/* setup navbar */
+.setup_navbar {
+	border-top: 1px solid #e0e0e0;
+    padding: 2em;
+}
+.setup_navbar button {
+    float:right;
+    width:100px;
+    cursor: pointer;
+    margin-right: 1em;
+}
+.setup_navbar input {
+}

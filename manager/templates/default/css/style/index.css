@@ -1,0 +1,126 @@
+@import url(./navbar.css);
+@import url(./accordion.css);
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #ececec;
+}
+
+#modx-container {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
+
+
+/* top bar */
+#modx-topbar {
+    height: 4em;
+    /*border: 1px solid red;*/
+    background-color: #222;
+    color: white;
+    vertical-align: middle;
+    border-bottom: 1px solid #94bf4c;
+    background-image:url(../../images/restyle/header_background.jpg);
+    background-repeat:repeat-x;
+    }
+    
+#modx-site-name {
+    padding: .4em 1em;
+    font-size: 1.2em;
+    }
+.modx-version {
+    display: block;
+    clear: left;
+    color: #888;
+    font-size: .8em;
+    font-style: italic;
+}
+
+#modx-logo {
+    float: right;
+    height: 2.5em;
+    margin: .8em 1em 0;
+    }
+#modx-logo img {   
+    width: 94px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+
+/* 2nd row, navbar */
+#modx-navbar {
+    background-color: #707070;
+    height:3em;
+    background-image:url(../../images/restyle/header_sub.jpg);
+    background-repeat:repeat-x;    
+    
+}
+
+#rightlogin {
+    line-height: 36px;
+    float: right;
+    text-align: right;
+    vertical-align: middle;
+    z-index: 600;
+}
+#rightlogin span {
+    vertical-align: middle;
+    margin-right: 1.3em;
+    }
+#rightlogin a.modx-logout {
+    color: #ddd;
+    text-decoration: none;
+    padding: .3em;
+    }
+#rightlogin a.modx-logout:hover {
+    color: #222;
+}
+
+/* content div */
+#modx-content {
+    width: 72%;
+    padding: 1.5em;
+    float: left;
+}
+
+h2 {
+    color: #626162;
+}
+
+
+/* modAB */
+
+#modAB {
+    position: fixed;
+    /*width: 16em;*/
+    top: 8em;
+    right: 2em;
+    text-align: right;
+    z-index: 400;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #c9c8c9;
+    }
+#modAB .x-toolbar {
+    background: #fff;
+    border: 1px solid #fff;
+    }
+    
+/* panel stylings */
+.modx-page-header, .modx-page-header div {
+    background: transparent !important;
+}
+#modx-content form.x-panel-body {
+    background: transparent !important;
+}
+    
+.modx-page-header h2 {
+    border-bottom: 0;
+    margin: 0 .5em;
+}
+.modx-form p {
+    padding-bottom: 1em;
+}

@@ -1,0 +1,465 @@
+
+This file shows the changes in recent releases of MODx. The most current release is usually the 
+development release, and is only shown to give an idea of what's currently in the pipeline.
+
+MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
+====================================
+- modOutputFilter: Refactored date modifier to return '' if the timestamp encountered == 0 or -1.
+- modOutputFilter: Added strtotime modifier.- Refactored connectors to execute in the context from which they are called, rather than their own context.
+- Updated xPDO to revision 304 for new xPDOFileVehicle feature to respect XPDO_TRANSPORT_RESOLVE_FILES options.
+- [#MODX-562], [#XPDO-24], [#XPDO-25], and [#XPDO-26] Updated xPDO to revision 302 to resolve various issues regarding transport packages and model generation.
+- [#XPDO-23] and [#MODX-604] Updated xPDO to revision 298 to resolve nesting error when logging messages during installation with improper cache directory permissions.
+- Added modPropertySet->getElements() method as shortcut to get all proper modElement instances available to the set.
+- Added overridden modElementPropertySet->getOne() to get related Element using the proper element_class value.
+- [#XPDO-21] Updated xPDO to revision 290 for updates to xPDOObject::addOne() and addMany().
+- [#MODX-553] Unpublished and deleted Resources now ignored properly in modRequest::getResource().
+- [#MODX-553] Core setup now automatically adds an ACL to the web context for members of the Administrator group.
+- Core setup now updates the Administrator group ACLs for accessing the mgr and connector contexts with an Authority of 0 (highest authority).
+- Modified OnUserNotFound event handling not to rely on references which no longer work properly with recent changes to property handling.
+- Added overridden modElement->get() to handle converting legacy property strings stored in the database.
+- Added modPropertySet class to represent persistent sets of properties that can be applied to modElement instances.
+- Added support for modElements to relate modPropertySet objects via modElementPropertySet (many-to-many).
+
+MODx Revolution 2.0.0-alpha-6 (LastChangedRevision: 4485 , LastChangedDate: 2008-11-25 11:58:49 -0600 (Tue, 25 Nov 2008))
+====================================
+- [#MODX-395] i18n'ed the modMail classes, added lexicon topic 'mail' for handling mail strings
+- Added check to make sure user cannot browse to subdirs with ../ in connector processor fetching
+- [#MODX-482] Implemented code to remove setup/ directory when box is checked.
+- [#MODX-408] Fix atrocious grammar in mail reception message
+- Fixed labels for static resource page
+- [#MODX-518] Make sure clearing cache clears registry output from package
+- Fixed in_array() checks against $_currentTimestamps in xPDOObject::save() that prevented timestamp/datetime fields from saving 0 values.
+- [#MODX-512] Fixing check in setup to make sure core/packages is writable
+- Fixed bug with RTE loading and saving
+- Changed 'Provisioner' references to 'Provider' in UI for nomenclature consistency purposes
+- Added lexicon load to resource processors
+- Fix error on resource view when template is empty.
+- Added namespace filter to settings grid
+- Fixed import trees
+- Hide the resource ID field if a new resource
+- [#MODX-514] Fixed issue with pub_date/unpub_date not being reset properly
+- [#MODX-484] Added missing ht.access sample to web context files in included in transport package. 
+- Modified modWorkspace vehicle attributes to XPDO_TRANSPORT_UPDATE_OBJECT => false
+- Updated xPDO to revision 284 for new xPDO package-aware vehicle features when loading classes.
+- Slight styling improvement to grid to make alt-rows more apparent
+- Added clearCache() functions to modLexiconTopic, modLexiconLanguage
+- Added 'collapsible' options to the options tabs of resources. Can now collapse them to show only the content editor.
+- Prevent blank property value names
+- Adding css classes to modext components for easier styling
+- Fixed some issues related to installation of packages, namely dealing with the setup-options attribute and resolver handling
+- Added _build/build.local.xml to prepare an svn development copy for execution; builds core transport, minifies and concats the javascript and puts it in place, etc.
+- Slight fix to login box and css styles to get checkbox checked css to render properly
+- Updated xPDO to revision 281 to get fix to xPDOObject::save() when updating fields with NULL values.
+- Styling updates; make form fields bigger, tabs bigger, menus bigger...basically pretty up the UI
+- Fix to typo in createTable in modInstallVersion
+- Implemented version-specific upgrades to setup/ 
+- Updated xPDO to revision 275 (xPDOObject datetime/timestamp handling improvements, xPDOTransport pre-existing object restoration features, and more). 
+- Changed System Events action to Error Log Viewer, which now allows you to view (and clear) the error log from the manager
+- [#MODX-509] Fixed issue with refreshing of incorrect node in dragdrops on trees
+- Fixes to CSS in setup, moved error box to fixed bottom right, i18n'ed more stuff, cleaned up HTML and simplified outputs
+- Fixed issue where the path for processors could not be overridden by changing the parameters for handleRequest in modConnectorRequest to an array of options
+- [#MODX-501] Fixed issue where trees didn't refresh when package was installed. All trees now refresh.
+- Fixed bug with duplicating resources
+- [#MODX-505] Fixed issue with creating weblink redirecting improperly 
+- Fixed issue with emptying recycle bin and root-level resources
+- [#MODX-508] Weblinks are now not hidden by default
+- Fix missing published checkboxes in resource derivative classes 
+- Applied patch to fix issue with label click of checkboxes not changing value 
+- [#MODX-507] Fixed bug where Published checkbox wasnt showing in resource panel
+- Fixed bug in filetree that would scroll up topmenu
+- [#MODX-507] Adding in textbox for parent ID for now, will come up with better solution later
+- [#MODX-506] Fixed bug where cache wasn't cleared on drag/drop in tree
+- Fixed bug in modPackageBuilder that was preventing deletion of existing package directories and files.
+- Added constants MODX_INSTALL_MODE_NEW, MODX_INSTALL_MODE_UPGRADE_EVO, MODX_INSTALL_MODE_UPGRADE_REVO 
+- Extracted install->test() to a separate class, then i18n'ed the test strings
+- LOTS of phpdoc additions to all processors, including parameter lists for each processor
+- Removed any last trace of modules from Revolution
+- Added phpdoc information to processors
+- Properly clear cache on install/uninstall/remove of packages
+- Removed "require_once MODX_PROCESSORS_PATH.'index.php';" from all processors 
+- Only show 'Update Package' if the package comes from a provider
+- Fixes to get browser working with TinyMCE
+- Fixed issue with forced removing of packages not properly removing the resolvers
+- Standardized modRequest/modResponse methods across all derivatives (i.e. modRequest::handleRequest() always calls modRequest::prepareResponse(), which calls modResponse::outputContent()). 
+- [#MODX-478] Fixed typo in lexicon import/export that prevented window hiding
+- Fixed issues with Symlinks
+- Fix to TV output/input renders when loading in a context other than web/mgr
+- Fix to invokeEvent to prevent unwanted caching of event name if plugin executes more than one event per runtime
+- [#MODX-424] Added readme viewing to package grid
+- Added ability to delete multiple element properties at once via a multiple row handler
+- [#MODX-488] Removing double click from properties grid for 'name' field to prevent unwanted breaking
+- Added back in setDirectory to modConnectorRequest
+- [#MODX-292] Properly format system settings editedon value
+- [#MODX-293] Properly format editedon for lexicon entries
+- [#MODX-481] Fixed rendering issues in element property grid columns
+- [#MODX-479] Fixed issue where first snippet property edited didn't show value
+- [#MODX-480] Fixed issue with lexicon entry update/create not loading proper topic 
+- [#MODX-474] Removing package builder menu item from build script
+- [#MODX-456] Fixed issues with element property grids
+- Fixed MODx.grid.LocalGrid store bugs when dealing with grouped data
+- added pageSize and pageStart config items to MODx.grid.Grid
+- Fix to MODx.grid.Grid in case listeners are provided, dont ignore context menu
+- [#MODX-466] Fixes to dropdowns for element categories, field issues
+- [#MODX-115] Some fixes to rendering issues with comboboxes/datefields on Safari
+- Updated xPDO to rev 265 for improvements in xPDOValidator allowing multiple rules to be evaluated per column.
+- Refactored modError completely, removing all derivative classes and introducing modManagerResponse and modConnectorResponse to handle formatting modError responses appropriately.
+- Added modRequest::registerLogging() and relocated logic for detecting and taking action on register logging parameters out of loadErrorHandler().
+- Refactored modArrayError to remove Smarty dependencies, moving them to a new derivative, modSmartyError which the manager UI can utilize explicitly.
+- Added element property panel to all Element panels for managing default properties (except Modules).
+- Added modElement->setPlaceholders() to set placeholders and return any global placeholders that might need to be restored after an element is processed.
+- modChunk and modTemplateVar now restore any placeholders from the global scope after processing any local properties with the same name.
+- Added properties as local placeholders when processing modTemplateVar instances to match behavior of modChunk/modTemplate.
+- Updates to snippet property editor.
+- Added properties to modTemplateVar to make them consistent with all other elements.
+- Modify modX::getChunk() and runSnippet() to process those elements as non-cacheable instances. 
+- Added modResource::getContent() and setContent() functions for extensible control of accessing raw source content.
+- Modify modElement::setProperties() and modTag::setProperties() to handle various property data formats.
+- Updated modParser::parsePropertyString() to handle local property xtypes from UI and convert legacy types.
+- Added isCacheable() and setCacheable() to modElement and modTag classes for direct, extensible control of caching.
+- Modified behavior of modTemplate/modChunk not to prefix properties turned into placeholders with the name of the element.
+- Added getContent(), setContent(), getProperties(), and setProperties() to modTag and derivatives.
+- Added modParser::parsePropertyString() to parse element properties from string or array representations.
+- Updated modElement::process() behavior to check cache sooner and avoid unnecessary source content access and other processing.
+- Additional foreign key and sorting indexes added to modElement classes.
+- Added properties to all modElement classes except modTemplateVar.
+- Added setProperties() to modElement for setting a set of default properties that will be used by the element.
+- Added getProperties() to modElement for getting the properties to be used when processing the element.
+- Added getContent() and setContent() function to modElement and provided overrides in the appropriate subclasses.
+- Removed modTransportPackage::loadTransport(); the manifest should always be loaded from the file.
+- Updated xPDO to rev 262 for improvements in the xPDOTransport manifest format.
+- Updated xPDO to rev 258 for bug fix in new xPDOObject::_setRaw() function with array and json phptype fields.
+- Updated xPDO to rev 256 for bug fix in xPDO::getSelectColumns() and new xPDOObject::_setRaw() implementation to resolve issues with native php types when using fromArray().
+- Added modPackageBuilder->setPackageAttributes() function for easily adding transport-level attributes to a package.
+- Updated xPDO to rev 252 to get new features allowing transport packages to carry transport attributes.
+- Added numerous foreign key and sorting indexes to site_content table (modResource) to improve performance of common queries.
+- Changed modX::changePassword() implementation to call modUser::changePassword().
+- Added getResourceGroups() and getUserGroups() to modUser class to retrieve those things and cache in session.
+- Renamed and moved modX::_checkPublishStatus() to modRequest::checkPublishStatus() and renabled this functionality.
+- Deprecated and moved modX::checkPreview() implementation to modResponse.
+- Added view_offline attribute to default Context access policy.
+- Removed deprecated and invalid modX::makeFriendlyURL().
+- Removed deprecated modX::webAlert() function.
+- [#MODX-364] Results of regClient*() functions are now cached into the Resource cache files to solve error on cached pages with cached snippets.
+- Removed deprecated modX::mergeDocumentMETATags() and moved feature to modResource::mergeMetatags() and modResource::mergeKeywords().
+- Removed deprecated modX::makeList() function.
+
+MODx Revolution 2.0.0-alpha-5 (LastChangedRevision: 4273 , LastChangedDate: 2008-10-09 12:42:42 -0500 (Thu, 09 Oct 2008))
+====================================
+- [#MODX-88] Move version checking to setup script and add notifications.
+- [#MODX-66] Change the way properties work within the scope of a chunk; placeholders set by the chunks properties are now removed after the chunk is processed.
+- Added modX::unsetPlaceholder() and modX::unsetPlaceholders() functions.
+- [#MODX-329] Fixed error with browser "remembering" user even when "remember me" is not checked.  Was always using the system setting regardless of rememberme.
+- [#MODX-380] Created modSymLink resource class which forwards requests to other resources without changing the URL (as opposed to modWebLink which redirects).
+
+MODx Revolution 2.0.0-alpha-4 (LastChangedRevision: 4213 ,LastChangedDate: 2008-10-01 12:18:41 -0500 (Wed, 01 Oct 2008))
+====================================
+- Updated xPDO to rev 248
+- More log messages for modPackageBuilder
+- Fixed some bugs with MODx.Browser
+- Enabled specific path setting for MODx.Browser
+- Fix to remove redirect to system settings if version info differs.
+- Added MODX_SETUP_KEY to setup to identify the distribution type and allow setup logic to be conditional based on this information.
+- Introduced additional default policy attributes and policy checks throughout the controllers and processors for more robust access control.
+- [#MODX-349] Added processor and menu item to reload your own access policies without logging out and logging back in.
+- [#MODX-349] Added processor and menu item to flush all user sessions from the database.
+- [#MODX-349] Modified user policies to cache policies by Context; previously policies cached for one context were being applied to other contexts when switching or accessing both from the same browser session.
+- Updated xPDO to revision 246 to fix problem with modLexiconEntry rows being duplicated in upgrades after deleting modLexiconFocus records.
+- Modified Ant build to automatically compress and concatenate js files (SVN users cannot use compress_js option without performing the complete-wc task in build.xml).
+- Updating xPDO to revision 234.
+- Added support for logging to registers through any modError instance when loaded by modRequest::loadErrorHandler().
+- Removed modRegisterHandler and added logging helper functions to modRegistry. 
+- Updating xPDO to revision 233.
+- Updated modAccessibleObject::loadCollection() based on xPDO::loadCollection() changes.
+- Updating xPDO to revision 231.
+- Various model updates to reduce memory usage [convert foreach with fetchAll() calls to while with fetch()].
+- [#MODX-137] Locked Elements now editable by users with the Admin policy attribute edit_locked (not locked as in being edited by another user, but locked explicitly in the Element attributes).
+- Moved makeUrl logic to modContext class and modX now determines which context to use when building the URL.
+- Introduced modX->getContext() to retrieve, prepare and store context configurations in modX->contexts array for reuse during the single request
+- Added _config, _systemConfig and _userConfig to hold on to various parts of the configuration settings before they are merged for use, allowing other functions to remerge the settings as needed.
+- Fixed modX->switchContext() to clear all contextual/user setting overrides and reload the bootstrap _config, _systemConfig, and make use of the modX->contexts array.
+- Implemented UI ability to choose vehicle-specific attributes when adding vehicles to packages
+- Added dynamic value replacement of {setting_key} in user settings in modX->getUser().
+- Added function to grab the request parameters to MODx.request
+- Added missing permission check on empty_cache attribute on refresh_site controller/processor.
+- Updated xPDO to revision 218.
+- [#MODX-282] Fixed bug where grid would show non-existent page in lexicon/settings grids
+- Removed permission check on logout action; doesn't make much sense.
+- Proper formatting of editedon time in system settings grid
+- Added System Settings "Update Setting" window for more detailed editin
+- Rebuilt core data files for the transport.core.php script and made correction to core namespace path to the value {core_path} which is calculated at run-time.
+- [#MODX-263] Access policy update grid moved to separate page
+- Created panel for editing access policies
+- [#MODX-277] Changed 'setting' to 'name' at top of System Settings grid
+- [#MODX-283] Fixed combo-boolean combobox to prevent overwriting of form variables. this was a bizarre bug.
+- Allowed modPackageBuilder to now use dynamic, on-the-fly namespaces. Separated out registerNamespace() from create()
+- Added support for loading extension_packages via configuration settings before the session is initialized.
+- Fixed dynamic value replacement of {setting_key} in system and context setting generators.
+- Updated xPDO to revision 216.
+- Added class_key field to modUser class/table to support modUser derivatives.
+- Fix to new modLexiconEntry table structure (was not installing due to NOT NULL and no default value).
+- Removed modResource::hasAccess() function to make sure and avoid confusion with security.
+- Add default admin user to the Administrator modUserGroup with a modUserGroupRole of 2 (SuperUser) on new installs and upgrades.
+
+MODx Revolution 2.0.0-alpha-3 (LastChangedRevision: 3867, LastChangedDate: 2008-07-22 08:44:38 -0500 (Tue, 22 Jul 2008))
+====================================
+- [#MODX-210] Changed no-longer-valid help text for resource panel
+- [#MODX-216] Fixed bug with pub_date/unpub_date for the Resource panel
+- [#MODX-213] manually entered passwords not being displayed after saving
+- Added editability to packages grid
+- [#MODX-205] Fixed category saving
+- [#MODX-196] Fixed snippet category error in IE7
+- Created modInstallError for base processing methods
+- Added object support to modInstallJsonError
+- [#MODX-201] Fixed bug with Category combo that prevented adding in a custom category
+- [#MODX-200] Added colored Not Installed text to not installed packages
+- [#MODX-70] Removed top buttons, as they are unnecessary and cause more problems than they are worth.
+- [#MODX-174] Language setting in setup is not loaded.
+- Note: renamed the language file to en.php to match the adopted IANA standard codes (see #MODX-187)
+- [#MODX-26] Manager User creation problems
+- Corrections to new user account email
+- Added MODX_URL_SCHEME define and url_scheme configuration setting
+- Added MODX_HTTP_HOST define and http_host configuration setting
+- Changed "Modules" top menu to "Components" top menu. Component developers are encouraged to put their 3rd party menus in there.
+- [#MODX-83] Radio Options not working in TV
+- [#MODX-103] Fixed blank template change warning message.
+- [#MODX-173] Language setting in manager pages is not loaded.
+- Removed ucwords on getlist processor for lexicons.
+- Fixed feed_modx_security/news keys in the build file.
+- [#MODX-184] Fixed show in menu checkbox, should have been labeled "Hide Menu" since the opposite is true in the database. Changed to match DB column properties.
+- [#MODX-190] Fixed bug with missing duplicate snippet error message
+- Added check for existing name in snippet duplicate processor
+- Updated build.src.url to branches/revolution
+- Fixed import html/resources
+- Fixed action pointer if version is incorrect
+
+MODx Revolution 2.0.0-alpha-2 (LastChangedRevision: 3841, LastChangedDate: 2008-07-15 09:18:24 -0500 (Tue, 15 Jul 2008))
+====================================
+- Adopting new product name, MODx Revolution, and changed version to 2.0.0
+- Fixed bug with content type grid
+- Replaced 'gender' with Role column in Users grid
+- [#MODX-182] Fixed invalid reference in tv/create.js
+- Fixed TV input type dropdown, added proper processor/connector
+- changed xPDOCriteria calls to more abstract newQuery ability
+- Added attachment capabilities to modMail/modPHPMailer classes
+- Added setHTML method to modPHPMailer
+- Updated documentation for modValidator class
+- Added explicit header call to set text/json; charset=UTF-8 on responses from modJSONError
+- Remote package installation now works.
+- Fixed invalid schema relationships with transport providers/packages
+- Included check for xPDO transport service config to prevent warning
+- [#MODX-108] Added more database info to the site info page - contrib by sottwell
+- Finished UI for modStaticResource
+- Added some inline documentation to widgets for help
+- Set a more appropriate default resolver target
+- Removed unnecessary package parameter from modPackageBuilder::buildSchema
+- Removed unnecessary package setting
+- Added buildSchema function to modPackageBuilder
+- Added tooltips to elements and contexts in the resource/element trees
+- Fixed bug in Module update page
+- Added a qtip to document tree nodes so they display resource longtitle/description in a tooltip
+- Moved styles to gray theme to prepare for css work
+- Weblinks now functional
+- Fixed slight bug with FF3 and panel collapsibility
+- Fixed plugin properties
+- [#MODX-162] Fixes problem where vehicle grid is not refreshed on 2nd build, as well as resets the form
+- Added 'success' event to MODx.FormPanel
+- [#MODX-172] Fix to option values for setup in IE 6. Fix by kmd.
+- [#MODX-166] - Fixed config cache issue - fix provided by kmd
+- [#MODX-165] could not save Template element - fix provided by SA
+- Fixed and cleaned up the actions/menus JS and combos
+- Removed unnecessary tertiary expression (check is already handled by the function)
+- [#MODX-131] Fixed Apache crash and enabled Tools -> Action
+- Added fix to _() JS function to allow for parameter passing: 
+    String: 'Testing: [[+hello]]';
+    JS call: _('testkey',{'hello': 'Success!'});
+    Result: 'Testing: Success!';
+- [#MODX-148] Added support for [[+placeholder]] tags in lexicon strings. i.e., with a lexicon string with key 'test' and value: 'Test me: [[+hello]]'
+    Programmatically:
+    $modx->lexicon('test',array('hello' => 'Success!');
+    
+    Tag:
+    [[%test?hello=`Success!`]]
+- Fixed to typo on system info JS
+- Added namespacing ability to the addDirectory() and load() methods of modLexicon. Used like so:
+    $modx->lexicon->addDirectory('pathhere/','testNS');
+    $modx->lexicon->load('testNS:fociname');
+- [#MODX-102] fixed missing lexicon entries in php4
+- Added OnHandleRequest event, invoked before anything occurs in modRequest::handleRequest().
+- Set the modLexicon::_lexicon to an empty array even if nothing was loaded.
+- Added modX::switchContext(string $contextKey) function to make it easy to switch contexts using a plugin and the new OnHandleRequest event.
+- Fix to properly submit the content field for resources (should also handle multiple RTEs now)
+- Fixed typo in lexicon reference in event getlist
+- Fix to MODx.load to return multiple objects if they exist
+- General JS doc updates
+- Added MODx JS class, which allows for xtype loading via MODx.load()
+- Some JS doc updates
+- Fixed modErrorHandler to ignore suppressed errors like a proper error handler is expected to.
+- [#MODX-109] Fix bug with profile page loading of date.
+- Reconfigured context update window to separate into tabs for easier viewing and rendering
+- Changed TV resource group panel to a grid, instated proper remove/update code
+- [#MODX-126] Implemented 2 new modSystemSettings: feed_modx_news and feed_modx_security for dynamic setting of the RSS feeds in the welcome pane of the manager
+- [#MODX-137] Removed locked check until a resolution is made on locked elements.
+- [#MODX-119] Corrected issue with file editor stripping out SCRIPT tags.  Was using $_REQUEST instead of $_POST so the values were sanitized by the request handler.
+- Updated Template management to a MODx.FormPanel
+- Altered the way modLexicon loads multiple foci for PHP4 compatibility
+- Added modLexicon::addDirectory, which adds a directory when loading lexicon foci
+- Properly load TV widgets and i18n their strings
+- Fixed bug with modLexicon and $modx reference
+- [#MODX-133] Prevent elements from being dragged into different types
+- [#MODX-125] Fixed saving pub/unpub date on resources
+- [#MODX-106] Removed assets/images check.
+- Configured Object field in Package Builder to be a combobox that loads a dropdown of the selected class_key
+- Added ability to remove vehicles from not yet built package
+- Added MODx.grid.LocalGrid as abstract class of local-data-based grids
+- Added MODx.panel.Wizard as abstract class of wizard panels
+- [#MODX-121] Fixed top menu loading incorrectly when clicking on icons
+- Fixed TV management page, specifically with TV->Template access
+- [#MODX-118] Fixed bug with creating/removing/updating directories from Directory tree
+- Added MODx.combo.ContentDisposition
+- Added ability for MODx.toolbar.Actionbuttons to support formpanel as an alternative for form config parameter
+- Added $modx->config properties to MODx.config JS array sent
+- Fixed update resource TV loading
+- [#MODX-113] Fixed bug in Safari with scrolling in grids, apparently Safari doesn't like Ext's autoHeight
+- Removed legacy tpl's in settings/ dir
+- [#MODX-107] Fixed tree refreshes when resource is saved, both in create and update. Update will now refresh only the parent node of the resource being saved, which speeds up save time
+- Fixed issues with TV Panel loading improperly on new resource
+- [#MODX-114] Prevented JS error from occurring when using page settings checkboxes
+- [#MODX-116] Fixed text for removing a category
+- Fixed Resource pages to allow for Resource Groups to be assigned access prior to Resource creation, as well as making grid not save until 'Save' is clicked
+- Fixed Template pages to allow for TVs to be assigned access prior to Template creation, as well as making grid not save until 'Save' is clicked
+- Fixed TV pages to allow for templates to be assigned access prior to TV creation, as well as making grid not save until 'Save' is clicked
+- Fixed module update, removing legacy code
+- Fixed plugin event grid: now can be used via create or update, also properly handles events, does not save until "Save" button is clicked on action bar
+
+MODx 0.9.7-alpha-1 (LastChangedRevision: 3664, LastChangedDate: 2008-04-28 12:43:15 -0500 (Mon, 28 Apr 2008))
+====================================
+- Updated ExtJS from version 2.0 to 2.0.1
+- [Trac#20] When creating new document, make the 'Log Visits' checkbox respect the main configuration setting.
+- [Trac#9] Converted Database Tables tab in System Information to use Ext Grid.
+- [Trac#40] Default role settings are now set correctly when saving roles to the database.
+- [Trac#4] Converted Modules section to use Ext interface.
+- Added new resource import routine for creating resources from static content on the file system, as any valid modResource derivative.
+- Introducing context support to the manager resource trees.
+- [Trac#32] Display correct message counts for the Inbox section on the Welcome page.
+- [Trac#31] System Configuration page always showing 'New Install' message. Refactored code to use $modx->version.
+- [Trac#25] Several bugfixes and refactorings to make the Messages section function correctly.
+- [Trac#6] Remove Locks not working from the top menubar.
+- Removed custom_contenttype from system_settings and manager interface.
+- Converted and refactored Import HTML tool for the new APIs.
+- [Trac#29] Resource checkboxes on settings tab not showing accurate values when editing.
+- [Trac#28] Cache not cleared when resources are saved and the clear cache checkbox is checked.
+- [Trac#27] Cached modResources were not loading or rendering since getResource() moved to modRequest from modX.  Cache files generated with new reference to the modX object ($this->modx vs $this).
+- Remove logic in modResource::addOne() that was disallowing binary content types.
+- Add conditional to check for $GLOBALS['https_port'] before attempting to use it.
+- Several fixes to modResource processors involving saving of boolean fields via checkboxes; make sure POST is filled with unchecked fields having a value of zero.
+- Upgrades now work for previous 0.9.7 installations
+- Add-on installation has been removed from setup in preparation for adding it to the manager itself.
+- Removed modManager095 and all related legacy support for ManagerAPI extender, moving this functionality to modManagerRequest.
+- Added/updated delegate controllers, templates, and processors for modWebLink and modStaticResource.
+- Added new static resource option to document tree context menus. 
+- Fixed bug with chunk update processor deleting the chunk content.
+- [Trac#19] Bugs with password on user creation/update; was saving plain password (not encoded).
+- Introduction of new setup using transport packages (new installs only for now).
+- Modified modRequest::sanitize() to no longer strip old-style tags.
+- Moved MODx classes and maps out of core/xpdo/om/modx095 and into core/model/modx.
+- [xPDO] Add support for package specific include paths for models.
+- Refactored INCLUDE_ORDERING_ERROR to manager/includes/accesscheck.inc.php
+- Begin adding input and output filtering to all MODx elements and tags (modElement and modTag derivatives), including default filter implementations based on phX (not yet working).
+- Begin refactoring modx095 package to utilize xPDOQuery (modResource::getOne()).
+- [xPDO] Fixed error in xPDOObject::remove() that was trying to call the toCache function on xPDOObject rather than xPDO.
+- Added checkForLocks func to modx.class.php
+- Added checkIfIn to modmanager095.class.php, to do the annoying check if in manager in all the pages
+- Added splitter class for tables to get the line effect found in user management
+- Added ul.no_list to get list effect without bullets
+- Added formhandler.js - handles validation in forms by sending form through AJAX call. If response != true, then outputs response to a div with id 'errormsg'. Also evaluates JS scripts in the response.
+- Updated MODx model for modUserSettings and modWebUserSettings with appropriate primary key indexes and field types.
+- Updated installer SQL to remove the previous indexes and add the primary key index.
+- Fix to modX :: insideManager() to make sure there is a context object initialized before trying to get the context key.
+- [xPDO] Introduction of xPDOQuery for building SQL queries using only objects and the API.
+- [xPDO] Fix to timestamp phptype handling when stored as integer dbtype in database.
+- Modified modResource constructor to set createdon and createdby fields appropriately.
+- Fix for mcpuk GetUploadProgress script (see http://modxcms.com/forums/index.php/topic,11712.msg79581.html#msg79581)
+- Separated styles into their function, for easier manipulation and management
+- Ongoing Conversion of manager pages to xPDO, cleaning up XHTML
+- Emulated PDO can now be forced in PHP 5.1+ when PDO class is already available, but the required drivers are not available.
+- Added $modx->getTree() function for easily getting a tree structure of MODx resource ids in the current context.
+- Modified $modx->resourceMap to a simpler structure and optimized getParentIds() and getChildIds() functions.  $modx->documentMap still holds the old structure but is deprecated.
+- Refactored entire caching layer, based on changes to xPDO.  Files are now spread amongst logical directories, and automatic temp directory detection was also added.
+- Translated all core files and data in the core distribution/installation to the new native tag format.
+- Optimized modParser, removing run-time translation with modParser095 from normal execution and added modTranslate095 utility class, which can translate tags in database and file content, writing a log of the translation and/or making the changes to the database and files.  modParser095 is experimental, and not recommended, as there are too many issues with mixed tags being parsed incorrectly.
+- Fix to make sure modX::parseChunk removes replacement placeholders for empty values.
+- Updates to MakeForm class.
+- Added modXMLRPCResource, modXMLRPCResponse classes and supporting code, including modified XML-RPC for PHP code (from version 2.1).  You can now create resources that represent XMLRPC servers and clients.
+- Altered session cookie expiration that was getting set automatically on all sessions based on the default session cookie lifetime.  Lifetime is now only applied if a session value is set for each context.
+- Added check to verify keys passed to modX::getPlaceholder() are valid strings to avoid PHP errors.
+- Various additional changes to prevent errors from revealing critical database credentials and connection information.
+- Fixed bug with system settings getting overwritten on mutate_settings manager page.
+- Merged from trunk (0.9.5.1-RC1) at revision 2251.
+- Latest updates and bug fixes from xPDO project.
+- Add ability to locate and use original manager/config/config.inc.php to upgrade directly on legacy installations.
+- Applied fixes to modResponse::outputContent(); was not assigning regClient script replacements to the output.
+- Changed parseChunk to parse new style tags to avoid any accidental matches on mixed tag situations.
+- Changed modChunk and modTemplate logic to create placeholders from any properties of the elements prefixed by the name of the element + '.' (added the .).
+- Fixed alias path generation, was reversing the order of parent paths in the resourceListing.
+- Fixed problems with recent changes to modRequest::sanitizeRequest() which was again truncating $_POST vars in the manager when encountering MODx tags.
+- Fixed generation of context cache files; was generating an eventMap for the mgr context at all times.
+- Fix to logic in modDocument::getMany('modTemplateVar').
+- Merge with 0.9.5.1 trunk at revision 2205.
+- Parsing adjustments to better deal with mixed old and new style tags.
+- [xPDO] Significant xPDO core update to prepare for SQLite, PostgreSQL and other ports.
+- Fix bug in install/upgrade SQL when resetting user and system settings for manager_theme.
+- Added some new configuration options for session handling and various caching features; more to come.
+- Minor changes to reduce number of unique db connections used during a request.
+- Various PHP 4 warnings fixed when assigning values by reference directly from functions (only variables can be assigned by reference in PHP 4).
+- Various improvements to MakeTable class based on usage in user_management and other manager interfaces.
+- Begin replacing Datagrid usage in manager with MakeTable (user_management, web_user_management, manage_modules, docmanager module); lots more Datagrids to replace.
+- Various changes to DataGrid and DatasetPager to try and support existing usage.
+- Fix for @EVAL bindings with more than one line of code.
+- Adjustments to modParser::collectElementTags() to better handle invalid tags (i.e. mispelled snippet names) with nested tags.
+- Adjustments to modParser095::translate() to properly handle translation from old to new configuration tags [(email_sender)] to [[++email_sender]].
+- DBAPI::escape() adjustment (again) to avoid certain issues when using native PDO along-side legacy manager code calling the mysql extension.
+- Removed & from getMany call in modCacheManager to prevent PHP warnings in PHP 4.
+- [xPDO] Added additional logic to xPDO::loadClass() which will return an error immediately if no class name is provided.
+- Adjusted modDocument::getMany() signature; added $cacheFlag= false parameter.
+- Remerged mutate_content.dynamic.php to fix several problems saving documents.
+- Adjusted queries in refresh_site.dynamic.php.
+- Added session table to install script due to failure of auto-table creation on some environments.
+- Removed unnecessary if statement around session_set_save_handler() in modX::_initSession(); the actual problem was auto-table creation was failing.
+- Fix DBAPI::escape() function; PDO::quote() adds single-quotes unlike the legacy mysql escape functions and this was causing content truncation.
+- [xPDO] xPDOCacheHandler class updated to allow configuration properties to determine a class for handling xPDO object and result set caching.
+- modX::_initSession() updated to better handle situations where session_set_save_handler() fails when trying to override default PHP session handling.
+- [xPDO] Modified fromArray() so it is not responsible for determining the _new attribute of xPDOObject instances.  This is the responsibility of xPDO::getObject(), which uses xPDO::load(), and xPDO::getCollection().
+- Fix datasetpager error with PDO changes so DocManager module can load.
+- Fix WebUser login -- weblogin.processor.inc.php.
+- Fix makeUrl() -- no longer needs to add base_url.
+- Fix upgrade install script to insert new config settings properly.
+- Few tweaks to modX::_initSession function (was setting session_name twice).
+- Changed all line-endings to unix-style \n on all files.
+- Removed assets/cache/* which is replaced by core/cache/*.
+- Updated version data format to be compatible with PHP's version_compare() function.
+- Resolved problems setting primary keys values and improperly identifying new objects when using xPDOObject::fromArray().
+- Several adjustments to xPDO::load(), xPDO::getCollection() and several xPDOObject methods based on changes to xPDOObject::fromArray().
+- Added stripslashes() to modRequest::_sanitize() when working with magic_quotes_gpc enabled.
+- Fix to MakeTable::prepareOrderByLink() to handle FURLs properly.
+- Reduce exposure of critical database credentials in xPDO::load() when errors are reported/logged.
+- Fixed error in xPDOObject::save(); updates to objects with compound primary keys were failing.
+- Added proper escapes to deprecated modX::getFullTableName() to fix issues when dashes (-) or other reserved (My)SQL characters appear in a database name.
+- Merged with trunk (0.9.5 final) at revision 2106.
+- Removed session_keepalive code.
+- Merged with trunk (0.9.5) at revision 2066.
+- Merged with trunk (0.9.5) at revision 2063.
+- Schema updates based on column size changes in 0.9.5.
+- Added missing modX::getSettings() method.
+- Various bug fixes.
+- Merged with trunk (0.9.5) at revision 1945.
+- [bug fix] Fixed a modParser bug when CDATA wrappers were encountered.
+- Add missing webAlert function to new modX class.
+- Modify categories save process to get the insert id using $modx->lastInsertId().
+- Fix to setup.sql; changed ENGINE= to TYPE= when creating new context table to avoid problems with MySQL versions before 4.1.
+- Fixed invalid reference to mergeDocumentMETATags in modResponse class.
+- [New feature] Allow custom error handler classes.
+- [New feature] Fine-grained configuration options for caching pages, database results, or disabling the cache altogether (see system settings starting with `cache.`).  Turn the different caching options on/off or set a default time-to-live for those items being cached.
+- [New feature] Database result-set and xPDO object caching, with support for memcache, native-JSON object caching for high-performance AJAX requests.
+- [New feature] Configurable session management with default implementation configured for modSessionHandler, an xPDO-based implementation that stores sessions in a database, and allows a great deal of configurability, by site and/or context.
+- [New feature] Contexts allows a site to be organized into sub-sites, subdomains, etc, and override any system settings by context.  The default contexts are 'web' and 'mgr' to support the legacy ideas of front-end and back-end session contexts.
+- Introducing the new MODx core built on top of xPDO; this will incrementally replace the entire existing codebase, but can co-exist until 1.0 release and provides about 90 to 95% legacy compatibility for existing tags and add-ons.

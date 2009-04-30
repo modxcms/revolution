@@ -1,0 +1,156 @@
+<?xml version='1.0'?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://www.oasis-open.org/docbook/xml/4.3b2/docbookx.dtd">
+<refentry id="{@id}">
+    <refnamediv>
+        <refname>A Guide to the MODx Revolution</refname>
+        <refpurpose>Concepts and tutorials for getting the most from MODx Revolution</refpurpose>
+    </refnamediv>
+    <refsynopsisdiv>
+        <authorblurb>
+            <para>{@link mailto:jason@opengeek.com Jason Coward}</para>
+        </authorblurb>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id intro}">
+        <title>Introduction</title>
+        <para>
+            MODx is an open-source content management framework authored in PHP. It was originally
+            forked from the Etomite CMS project, where MODx existed as an unofficial set of mods to
+            that project. Unfortunately, the Etomite team did not approve of the mods and decided to
+            ban them from the community, and MODx was born as a separate and unique project.
+        </para>
+    </refsect1>
+    <refsect1 id="{@id evolution}">
+        <title>Evolution</title>
+        <para>
+            MODx, through the 0.9.6 releases, remained the same in most aspects, with various
+            improvements and changes made, and a growing community of add-on developers. However,
+            after working on the MODx source code for the first year and a half of the project, I
+            started to realize some of the limitations of the existing architecture. Through team
+            collaboration, exhaustive experimentation with various frameworks and tools, and a lot
+            of hours coding prototypes, I finally came up with an object-oriented model for MODx as
+            I envisioned it could be.
+        </para>
+        <para>
+            After having some success with early prototypes built on Propel, I realized the amount
+            of code Propel generated was a bottleneck to the kind of performance one expected from
+            the current MODx implementation. As a result of this, and after additional research and
+            experimentation, I decided to attempt to create a much lighter version of Propel that
+            would still acheive some of the benefits without all the bulk and the dependence on PHP
+            5. A few months later, {@link http://xpdo.org/ xPDO} was coded, and I set out to create
+            a path from the existing MODx to the ideal model I envisioned; this became the version 
+            now known as Revolution and represents a stepping stone release to introduce the new 
+            object-oriented xPDO-powered API while maintaining a reasonable migration path for
+            existing MODx sites.
+        </para>
+    </refsect1>
+    <refsect1 id="{@id key-concepts}">
+        <title>Key Concepts</title>
+        <para>
+            There are a number of key terms and concepts you need to be familiar with before working
+            with MODx Revolution code.
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>{@tutorial modx/modx.key-concepts.pkg#xpdo-core The xPDO Core}</para>
+                <para>
+                    The core of the new object-oriented rewrite and an essential ingredient in the
+                    new power and agility of the new MODx framework.
+                </para>
+                <itemizedlist>
+                    <title>SEE ALSO:</title>
+                    <listitem>
+                        <simpara>{@link xPDO}</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>{@link xpdo/xpdo.pkg xPDO}</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>{@link xpdo/xpdo.howto.pkg xPDO}</simpara>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+            <listitem>
+                <para>{@tutorial modx/modx.key-concepts.pkg#web-resources Web Resources}</para>
+                <para>
+                    <emphasis>(formerly Documents and Web Links)</emphasis>
+                    represent any content managed by MODx that is directly accessible via a URL.
+                </para>
+                <itemizedlist>
+                    <title>SEE ALSO:</title>
+                    <listitem>
+                        <simpara>{@link modResource}</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>{@link modx/modx.modResource.cls modResource}</simpara>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+            <listitem>
+                <para>
+                    {@tutorial modx/modx.key-concepts.pkg#content-elements Content Elements}
+                </para>
+                <para>
+                    <emphasis>(formerly MODx "resources")</emphasis>
+                    represent components that define source content managed within the MODx content
+                    database which can be processed and optionally return output.
+                </para>
+                <itemizedlist>
+                    <title>SEE ALSO:</title>
+                    <listitem>
+                        <simpara>{@link modElement}</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>{@link modx/modx.modElement.cls modElement}</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>{@link modParser}</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>{@link modx/modx.modParser.cls modParser}</simpara>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+            <listitem>
+                <para>{@tutorial modx/modx.key-concepts.pkg#content-tags Content Tags}</para>
+                <para>
+                    New name for existing and new template tags that are parseable, but that are not
+                    Content Elements; i.e. they do not define and/or manager their source content
+                    within the MODx content repository.
+                </para>
+                <itemizedlist>
+                    <title>SEE ALSO:</title>
+                    <listitem>
+                        <simpara>{@link modTag}</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>{@link modx/modx.modTag.cls modTag}</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>{@link modParser}</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>{@link modx/modx.modParser.cls modParser}</simpara>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+        </itemizedlist>
+    </refsect1>
+    <refsect1 id="{@id core}">
+        <title>The MODx Revolution Core</title>
+        <para>
+            Previous releases of MODx suffered from heavy dependencies on hardcoded paths
+            (especially the manager directory) expected to always be in the same place in relation
+            to where MODx was installed. The new MODx makes all of that configurable, starting with,
+            most importantly, the location of the MODx core files.
+        </para>
+        <para>
+            By default (e.g. when exporting from SVN), the new object-oriented MODx core code exists
+            in a subdirectory called simply core. This effectively isolates the core content
+            management framework from any of the actual web directories it will be serving, and
+            allows you to use the MODx core as if it were a stand-alone reusable library, not unlike
+            a PEAR library. This means you can move it out of this location for production
+            deployment, effectively making the files inaccessible directly from the webserver.
+        </para>
+    </refsect1>
+</refentry>

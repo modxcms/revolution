@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+ * MODx CMS and PHP Application Framework ("MODx")
+ * Copyright 2006, 2007, 2008, 2009 by the MODx Team.
+ * All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+ -->
+<!-- The following xPDO model represents an object-relational map structure of the MODx db registry package -->
+<model package="modx.registry.db" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="registry.db">
+    <object class="modDbRegisterQueue" table="register_queues" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+        <field key="options" dbtype="mediumtext" phptype="array" />
+        <composite alias="Topics" class="registry.db.modDbRegisterTopic" local="id" foreign="queue" cardinality="many" owner="local" />
+    </object>
+    <object class="modDbRegisterTopic" table="register_topics" extends="xPDOSimpleObject">
+        <field key="queue" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" index="fk" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="fk" />
+        <field key="created" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="options" dbtype="mediumtext" phptype="array" />
+        <aggregate alias="Queue" class="registry.db.modDbRegisterQueue" local="queue" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="Messages" class="registry.db.modDbRegisterMessage" local="id" foreign="topic" cardinality="many" owner="local" />
+    </object>
+    <object class="modDbRegisterMessage" table="register_messages" extends="xPDOObject">
+        <field key="topic" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" index="pk" />
+        <field key="id" dbtype="varchar" precision="255" phptype="string" null="false" index="pk" />
+        <field key="created" dbtype="datetime" phptype="datetime" null="false" index="index" />
+        <field key="valid" dbtype="datetime" phptype="datetime" null="false" index="index" />
+        <field key="accessed" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" index="index" />
+        <field key="accesses" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="expires" dbtype="integer" precision="20" phptype="integer" null="false" default="0" index="index" />
+        <field key="payload" dbtype="mediumtext" phptype="string" null="false" />
+        <field key="kill" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
+        <aggregate alias="Topic" class="registry.db.modDbRegisterTopic" local="topic" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+</model>

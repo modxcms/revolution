@@ -1,0 +1,132 @@
+#modx-home-icon {
+	width: 32px;
+	height: 32px;
+	float: left;
+	position: absolute;
+	left: .5em;
+	top: 4.3em;
+	background: transparent url(../../images/restyle/i/home.png) no-repeat top left;
+	opacity: .80;
+	}
+#modx-home-icon a {
+	width: 100%;
+	height: 100%;
+	display: block; 
+	}
+#modx-topnav-div {
+    background: transparent;
+    padding: .55em 0 0;
+    margin-left: 4em;
+    position: relative;
+    z-index: 500;
+    width: 78%;
+}
+#modx-topnav {
+    width: 100%;
+}
+#modx-topnav-div ul, 
+#modx-topnav-div li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#modx-topnav-div li.top {
+    display: block;
+    float: left;
+    margin-right: 9px;
+}
+#modx-topnav-div a {
+    padding: 0 12px;
+    color: #fff;
+    background-color: #333;
+    line-height: 30px;
+    display: block;
+    float: left;
+    text-decoration: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+#modx-topnav-div a:hover {
+    background-color: #222;
+}
+#modx-topnav-div li .zone { display: none }
+
+#modx-topnav-div li.top ul {
+    width: 224px;
+    clear: left;
+}
+li.top li.last {
+    margin: 0;
+    padding: 0 0 0 24px;
+    height: 12px;
+    line-height: 12px;
+    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat 0 0;
+    float: none;
+    clear: left;
+    position: relative;
+    overflow: visible;
+}
+li.top li.last span {
+    display: block;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 24px;
+    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat 100% 0;
+}
+#modx-topnav-div li:hover .zone {
+    display: block;
+    padding: 5px 30px 60px;
+}
+#modx-topnav-div li:hover .zone .zone {
+    display: none;
+    padding: 30px 30px 30px 5px;
+}
+#modx-topnav-div .top li:hover .zone {
+    display: block;
+}
+
+#modx-topnav-div li.top,
+#modx-topnav-div li.flyout {
+    position: relative;
+}
+#modx-topnav-div li.top li {
+    display: block;
+    float: none;
+    width: 200px;
+}
+li.top .zone {
+    position: absolute;
+    top: 25px;
+    left: -30px; 
+    opacity: .95;
+}
+.zone a {
+    display: block;
+    width: 100%;
+    background: #333;
+    line-height: 30px;
+    float: none;
+}
+.zone span.description {
+    display: block;
+    clear: left;
+    line-height: 1.2;
+    font-size: 1em;
+    color: #bbb;
+    margin-top: -4px;
+    padding-bottom: 6px;
+}
+.zone a:hover {
+    background-color: #222 !important;
+}
+li.flyout .zone {
+    position: absolute;
+    left: 219px;
+    top: 35px;
+    _top: 0;
+    opacity: 1.0;
+}
+li.last li.flyout .zone {
+    left: -228px; /* reverse the last one */
+}

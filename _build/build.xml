@@ -1,0 +1,429 @@
+<?xml version="1.0"?>
+<project name="MODxCore" basedir=".">
+    <!-- Override properties in the build.properties file -->
+    <property file="build.properties" />
+
+    <!-- Set some common project properties -->
+    <property name="project.name" value="modx" />
+    <property name="project.basedir" value=".." />
+    <property name="project.core.dir" value="${project.basedir}/core" />
+    <property name="project.assets.dir" value="${project.basedir}/assets" />
+    <property name="project.connectors.dir" value="${project.basedir}/connectors" />
+    <property name="project.manager.dir" value="${project.basedir}/manager" />
+    <property name="project.modext.dir" value="${project.manager.dir}/assets/modext" />
+
+    <!-- Set the project version -->
+    <property name="modx.core.version" value="2.0.0" />
+    <property name="modx.core.release" value="alpha" />
+
+    <!-- Set some common build properties -->
+    <property name="build.dir" value="${basedir}" />
+    <property name="build.src.url"
+              value="http://svn.modxcms.com/svn/tattoo/tattoo/branches/revolution"
+    />
+    <property name="build.image.basedir" value="${basedir}/image" />
+    <property name="build.image.dir" value="${basedir}/image/modx-${modx.core.version}-${modx.core.release}" />
+    <property name="build.image.modext.dir" value="${build.image.basedir}/modext" />
+    <property name="build.distrib.dir" value="${basedir}/distrib" />
+    <property name="build.apidocs.dir" value="${project.basedir}/docs" />
+
+    <!-- Set a path representing all the root path elements for the build source -->
+    <path id="project.srcpath">
+        <pathelement location="${project.core.dir}" />
+        <pathelement location="${project.assets.dir}" />
+        <pathelement location="${project.connectors.dir}" />
+        <pathelement location="${project.manager.dir}" />
+        <pathelement location="${project.basedir}/index.php" />
+        <pathelement location="${project.basedir}/ht.access" />
+    </path>
+
+    <!-- Set the project classpath and define the svn task -->
+    <path id="project.classpath">
+        <fileset dir="${basedir}/lib">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+    <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" classpathref="project.classpath" />
+    <taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask" classpathref="project.classpath" />
+
+    <!-- ================================= 
+          target: complete              
+         ================================= -->
+    <target name="complete" description="--> Complete Build">
+        <antcall target="svn-export-build-image-wc"></antcall>
+        <antcall target="modext-minify"></antcall>
+        <antcall target="modext-concat-min"></antcall>
+        <antcall target="modext-concat"></antcall>
+        <antcall target="copy-prepared-js"></antcall>
+        <antcall target="generate-core-transport"></antcall>
+        <antcall target="generate-phpdocs"></antcall>
+        <antcall target="prepare-build-image"></antcall>
+        <antcall target="copy-core-transport"></antcall>
+        
+        <buildnumber />
+        
+        <antcall target="build-sdk"></antcall>
+        <antcall target="build-traditional"></antcall>
+        <antcall target="build-advanced"></antcall>
+    </target>
+
+    <target name="complete-wc" description="--> Complete Working Copy Build">
+        <antcall target="modext-minify-wc"></antcall>
+        <antcall target="modext-concat-min"></antcall>
+        <antcall target="modext-concat-wc"></antcall>
+        <antcall target="copy-prepared-js-wc"></antcall>
+        <antcall target="generate-core-transport"></antcall>
+    </target>
+
+    <!-- Various cleanup targets -->
+    <target name="cleanup-build-image" description="empty the build image directory">
+        <delete dir="${build.image.dir}" />
+    </target>
+    <target name="cleanup-build-modext-image" description="empty the MODExt build image directory">
+        <delete dir="${build.image.modext.dir}" />
+    </target>
+    <target name="cleanup-build-distrib" description="empty the build distrib directory">
+        <delete dir="${build.distrib.dir}" />
+    </target>
+    <target name="cleanup-build-apidocs" description="empty the build apidocs directory">
+        <delete dir="${build.apidocs.dir}" />
+    </target>
+
+    <!-- Export the svn build image from the repository -->
+    <target name="svn-export-build-image"
+            depends="cleanup-build-image"
+            description="export a revision of the MODx core from SVN"
+    >
+        <svn>
+            <export srcUrl="${build.src.url}"
+                    destPath="${build.image.dir}"
+                    revision="HEAD"
+                    force="true"
+            />
+        </svn>
+    </target>
+
+    <!-- Export the svn build image from a local working copy -->
+    <target name="svn-export-build-image-wc"
+            depends="cleanup-build-image"
+            description="export a revision of the MODx core from an SVN working copy"
+    >
+        <svn>
+            <export srcPath="${project.basedir}"
+                    destPath="${build.image.dir}"
+                    force="true"
+            />
+        </svn>
+    </target>
+
+    <!-- Minify the MODExt JavaScript libraries -->
+	<!--
+    <target name="modext-minify" description="Create minimized MODExt scripts in the image directory">
+        <echo>Creating minimized js scripts in image directory</echo>
+        <mkdir dir="${build.image.modext.dir}/build"/>
+        <apply executable="java" parallel="false" dest="${build.image.modext.dir}/build">
+            <fileset dir="${build.image.dir}/manager/assets/modext"
+                  includes="**/*.js"
+                  excludes="build/**,util/filetree/**,modext.js,modext-debug.js" />
+            <arg line="-jar"/>
+            <arg path="${build.dir}\lib\yuicompressor-2.3.5.jar" />
+            <srcfile />
+            <arg line="-o"/>
+            <mapper type="glob" from="*.js" to="*-min.js"/>
+            <targetfile />
+        </apply>
+    </target>
+    -->
+
+    <!-- Minify the MODExt JavaScript libraries (using YUIAnt task) -->
+    <target name="modext-minify" depends="cleanup-build-modext-image" description="Create minimized MODExt scripts in the image directory">
+        <echo>Creating minimized js scripts in image directory</echo>
+
+        <yuicompress warn="false" munge="no" preserveallsemicolons="true" outputsuffix="-min" 
+            outputfolder="${build.image.modext.dir}/build" >
+            <fileset dir="${build.image.dir}/manager/assets/modext" 
+                includes="**/*.js" 
+                excludes="build/**,util/filetree/**,modext.js,modext-debug.js"
+            />
+        </yuicompress>
+    </target>
+
+    <!-- Minify the MODExt JavaScript libraries (using YUIAnt task) -->
+    <target name="modext-minify-wc" depends="cleanup-build-modext-image" description="Create minimized MODExt scripts in the working copy">
+        <echo>Creating minimized js scripts in your working copy</echo>
+
+        <yuicompress warn="false" munge="no" preserveallsemicolons="true" outputsuffix="-min" 
+            outputfolder="${build.image.modext.dir}/build" >
+            <fileset dir="${project.manager.dir}/assets/modext"
+                includes="**/*.js" 
+                excludes="build/**,util/filetree/**,modext.js,modext-debug.js"
+            />
+        </yuicompress>
+    </target>
+
+    <!-- Concat the minified MODExt JavaScript libraries -->
+    <target name="modext-concat-min" description="Create modext.js">
+        <echo>Creating modext.js in ${build.image.modext.dir}</echo>
+        
+        <concat destfile="${build.image.modext.dir}/modext.js">
+            <header filtering="no" trimleading="yes">
+/**
+MODExt Revolution 1.0
+Copyright (c) 2007-2008, Shaun McCormick
+All rights reserved
+MODx-specific JS extension for ExtJS 2.2
+
+-------------
+
+The MODExt JS extension is distributed under the terms of the GNU GPLv3 license.
+It extends ExtJS, distributed under the Open Source GPL 3.0 license.
+
+http://www.gnu.org/licenses/gpl.html
+
+-------------
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+*/
+            </header>
+            <fileset dir="${build.image.modext.dir}/build/core"
+                includes="**/*.js"
+                  excludes="modx-min.js,modx.layout-min.js" />
+            <fileset dir="${build.image.modext.dir}/build/util"
+                includes="**/*.js"
+                  excludes="filetree/**" />
+                  <!--
+            <fileset dir="${build.image.modext.dir}/build/widgets/core"
+                includes="**/*.js"
+                excludes="modx.msg-min.js,modx.grid-min.js" />
+                -->
+        </concat>
+    </target>
+    
+    <!-- Concat the non-minified MODExt JavaScript libraries -->
+    <target name="modext-concat" description="Create modext-debug.js">
+        <echo>Creating modext-debug.js in ${build.image.modext.dir}</echo>
+        
+        <concat destfile="${build.image.modext.dir}/modext-debug.js">
+            <header filtering="no" trimleading="yes">
+/**
+MODExt Revolution 1.0
+Copyright (c) 2007-2008, Shaun McCormick
+All rights reserved
+MODx-specific JS extension for ExtJS 2.2
+
+-------------
+
+The MODExt JS extension is distributed under the terms of the GNU GPLv3 license.
+It extends ExtJS, distributed under the Open Source GPL 3.0 license.
+
+http://www.gnu.org/licenses/gpl.html
+
+-------------
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+*/
+            </header>
+            <fileset dir="${build.image.dir}/manager/assets/modext/core"
+                includes="**/*.js"
+                  excludes="widgets/**,modx.js,modx.layout.js,modx.onready.js" />
+                  
+            <fileset dir="${build.image.dir}/manager/assets/modext/util"
+                includes="**/*.js"
+                  excludes="filetree/**" />
+                  
+        </concat>
+    </target>
+
+    <!-- Concat the non-minified MODExt JavaScript libraries -->
+    <target name="modext-concat-wc" description="Create modext-debug.js">
+        <echo>Creating modext-debug.js in ${build.image.modext.dir}</echo>
+        
+        <concat destfile="${build.image.modext.dir}/modext-debug.js">
+            <header filtering="no" trimleading="yes">
+/**
+MODExt Revolution 1.0
+Copyright (c) 2007-2008, Shaun McCormick
+All rights reserved
+MODx-specific JS extension for ExtJS 2.2
+
+-------------
+
+The MODExt JS extension is distributed under the terms of the GNU GPLv3 license.
+It extends ExtJS, distributed under the Open Source GPL 3.0 license.
+
+http://www.gnu.org/licenses/gpl.html
+
+-------------
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+*/
+            </header>
+            <fileset dir="${project.modext.dir}/core"
+                includes="**/*.js"
+                  excludes="widgets/**,modx.js,modx.layout.js,modx.onready.js" />
+                  
+            <fileset dir="${project.modext.dir}/util"
+                includes="**/*.js"
+                  excludes="filetree/**" />
+                  
+        </concat>
+    </target>
+
+    <!-- Copy the minified and concatenated MODExt files to the working copy -->
+    <target name="copy-prepared-js" description="copy the minified and concatenated js files to the image">
+        <copy todir="${build.image.dir}/manager/assets/modext">
+            <fileset dir="${build.image.modext.dir}" />
+        </copy>
+    </target>
+
+    <!-- Copy the minified and concatenated MODExt files to the working copy -->
+    <target name="copy-prepared-js-wc" description="copy the minified and concatenated js files to the image">
+        <delete file="${project.modext.dir}/modext.js" />
+        <delete file="${project.modext.dir}/modext-debug.js" />
+        <delete dir="${project.modext.dir}/build" />
+        <copy todir="${project.modext.dir}">
+            <fileset dir="${build.image.modext.dir}" />
+        </copy>
+    </target>
+
+    <!-- Run the core data generation script -->
+    <target name="generate-core-data"
+            description="generate core data for MODx from a reference database"
+    >
+        <exec dir="${basedir}" executable="${php.command}">
+            <arg line="${basedir}/transport.data.php" />
+        </exec>
+    </target>
+
+    <!-- Run the core package generation script in your local working copy -->
+    <target name="generate-core-transport" description="generate the core transport package in your working copy">
+        <delete file="${project.core.dir}/packages/core.transport.zip" />
+        <delete dir="${project.core.dir}/packages/core" />
+        <exec dir="${basedir}" executable="${php.command}">
+            <arg line="${basedir}/transport.core.php" />
+        </exec>
+    </target>
+
+    <!-- Run the phpdoc generation script -->
+    <target name="generate-phpdocs"
+            depends="cleanup-build-apidocs"
+            description="generate the phpdoc documentation"
+    >
+        <exec dir="${project.basedir}" executable="${phpdoc.command}">
+            <arg line="-c ${basedir}/phpdoc.ini" />
+        </exec>
+    </target>
+
+    <!-- Copy the core transport package from a working copy to an exported image -->
+    <target name="copy-core-transport" description="copy the core transport to the image">
+        <delete file="${build.image.dir}/core/packages/core.transport.zip" />
+        <delete dir="${build.image.dir}/core/packages/core" />
+        <copy file="${project.core.dir}/packages/core.transport.zip"
+              todir="${build.image.dir}/core/packages"
+        />
+    </target>
+
+    <!-- Prepare the build image for making a distrib -->
+    <target name="prepare-build-image" description="prepare the build image for packaging">
+        <mkdir dir="${build.distrib.dir}" />
+    </target>
+
+    <!-- Build a MODx SDK distrib with all files in place and extracted -->
+    <target name="build-sdk" description="create the traditional distribution package">
+        <replace file="${build.image.dir}/setup/includes/config.core.php" token="@svn" value="@sdk" />
+        <delete dir="${build.image.dir}/core/packages/core" />
+        <unzip src="${build.image.dir}/core/packages/core.transport.zip" dest="${build.image.dir}/core/packages/">
+            <patternset>
+                <include name="core/manifest.php" />
+                <include name="core/*/*.php" />
+            </patternset>
+        </unzip>
+        <copy file="${build.dir}/config.core.php.txt" tofile="${build.image.dir}/config.core.php">
+            <filterset>
+                <filter token="core-path" value="dirname(__FILE__) . '/core/'" />
+            </filterset>
+        </copy>
+        <copy file="${build.dir}/config.core.php.txt" tofile="${build.image.dir}/manager/config.core.php">
+            <filterset>
+                <filter token="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+            </filterset>
+        </copy>
+        <copy file="${build.dir}/config.core.php.txt" tofile="${build.image.dir}/connectors/config.core.php">
+            <filterset>
+                <filter token="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+            </filterset>
+        </copy>
+        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-${build.number}-sdk.zip">
+            <fileset dir="${build.image.dir}" />
+        </zip>
+        <replace file="${build.image.dir}/setup/includes/config.core.php" token="@sdk" value="@svn" />
+        <delete file="${build.image.dir}/config.core.php" />
+        <delete file="${build.image.dir}/manager/config.core.php" />
+        <delete file="${build.image.dir}/connectors/config.core.php" />
+    </target>
+
+    <!-- Build a traditional MODx distrib with all files in place and extracted -->
+    <target name="build-traditional" description="create the traditional distribution package">
+        <replace file="${build.image.dir}/setup/includes/config.core.php" token="@svn" value="@traditional" />
+        <delete dir="${build.image.dir}/core/packages/core" />
+        <unzip src="${build.image.dir}/core/packages/core.transport.zip" dest="${build.image.dir}/core/packages/">
+            <patternset>
+                <include name="core/manifest.php" />
+                <include name="core/*/*.php" />
+            </patternset>
+        </unzip>
+        <copy file="${build.dir}/config.core.php.txt" tofile="${build.image.dir}/config.core.php">
+            <filterset>
+                <filter token="core-path" value="dirname(__FILE__) . '/core/'" />
+            </filterset>
+        </copy>
+        <copy file="${build.dir}/config.core.php.txt" tofile="${build.image.dir}/manager/config.core.php">
+            <filterset>
+                <filter token="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+            </filterset>
+        </copy>
+        <copy file="${build.dir}/config.core.php.txt" tofile="${build.image.dir}/connectors/config.core.php">
+            <filterset>
+                <filter token="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
+            </filterset>
+        </copy>
+        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-${build.number}.zip">
+            <fileset dir="${build.image.basedir}">
+                <include name="${project.name}-${modx.core.version}-${modx.core.release}/**" />
+                <exclude name="${project.name}-${modx.core.version}-${modx.core.release}/_build/**" />
+            </fileset>
+        </zip>
+        <replace file="${build.image.dir}/setup/includes/config.core.php" token="@traditional" value="@svn" />
+        <delete file="${build.image.dir}/config.core.php" />
+        <delete file="${build.image.dir}/manager/config.core.php" />
+        <delete file="${build.image.dir}/connectors/config.core.php" />
+    </target>
+
+    <!-- Build a new advanced MODx distrib with only the core/ and setup/ dirs 
+        and the core transport package included -->
+    <target name="build-advanced" description="create the advanced distribution package">
+        <replace file="${build.image.dir}/setup/includes/config.core.php" token="@svn" value="@advanced" />
+        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-${build.number}-advanced.zip">
+            <fileset dir="${build.image.dir}">
+                <include name="core/**" />
+                <exclude name="core/packages/core/**" />
+                <include name="setup/**" />
+            </fileset>
+        </zip>
+        <replace file="${build.image.dir}/setup/includes/config.core.php" token="@advanced" value="@svn" />
+    </target>
+
+    <!-- Publish a distrib to a server -->
+    <target name="publish-build" description="publish the build to a server for download">
+        
+    </target>
+</project>

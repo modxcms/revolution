@@ -1,0 +1,120 @@
+/* @override http://bruce.bravado.dom:8080/modxsite/assets/css/text.rt.css */
+
+/*
+	960 Grid System ~ Text CSS.
+	Learn more ~ http://960.gs/
+
+	Licensed under GPL and MIT.
+*/
+
+/* =Basic HTML
+--------------------------------------------------------------------------------*/
+
+body
+{
+	font: 75%/1.5 Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+}
+html>body
+{
+    font-size: 13px;
+}
+
+a:focus
+{
+	outline: 1px dotted invert;
+}
+
+hr
+{
+	border-color: #ccc;
+	border-style: solid;
+	border-width: 1px 0 0;
+	clear: both;
+	height: 0;
+}
+
+/* =Headings
+--------------------------------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6 
+{
+	font-weight: normal;
+}
+
+
+/* line heights: base line height (font size in px * line-height) / font-size */
+/* margins: must add up to be an even multiple of the line-height in ems */
+h1 
+{ 
+    font-size: 216.6666666667%; /* 26px */
+    line-height: 0.6923076923;
+    margin: 0.6923076923em 0 0; /* all top */
+    margin: 0.4615384616em 0 0.2307692308em; /* 2/3 top, 1/3 bottom */
+}
+h2 
+{ 
+    font-size: 166.6666666667%; /* 20px */
+    line-height: 0.9;
+    margin: 0.9em 0 0;
+    margin: 0.6em 0 0.3em;
+}
+h3 
+{ 
+    font-size: 141.6666666667%; /* 17px */
+    line-height: 0.8235294118;
+    margin: 0.8235294118em 0 0;
+    margin: 0.5490196078em 0 0.2745098039em;
+}
+h4 
+{ 
+    font-size: 116.6666666667%; /* 14px */
+    line-height: 1;
+    margin: 1em 0 0;
+    margin: 0.66666666667em 0 0.33333333333em;
+}
+h5 
+{ 
+    font-size: 100%; /* 12px */
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 1.5em 0 0;
+    margin: 1em 0 0.5em;
+}
+h6 
+{ 
+    font-size: 83.33333333333%; /* 10px */
+    font-weight: bold; 
+    line-height: 1.8;
+    margin: 1.8em 0 0;
+} 
+
+/* =Other elements
+--------------------------------------------------------------------------------*/
+
+ol
+{
+	list-style: decimal;
+}
+
+ul
+{
+	list-style: square;
+}
+
+li
+{
+	margin-left: 30px;
+}
+
+p,
+dl,
+hr,
+ol,
+ul,
+pre,
+table,
+address,
+fieldset
+{
+	margin-bottom: 1.5em;
+}

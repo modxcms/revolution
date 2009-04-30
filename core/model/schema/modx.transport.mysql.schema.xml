@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+ * MODx CMS and PHP Application Framework ("MODx")
+ * Copyright 2006, 2007, 2008 by the MODx Team.
+ * All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+ -->
+<!-- The following xPDO model represents an object-relational map structure of the MODx transport package -->
+<model package="modx.transport" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="transport">
+    <object class="modTransportProvider" table="transport_providers" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+        <field key="description" dbtype="mediumtext" phptype="string" />
+        <field key="service_url" dbtype="tinytext" phptype="string" />
+        <field key="created" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <aggregate alias="Packages" class="transport.modTransportPackage" local="id" foreign="provider" cardinality="many" owner="local" />
+    </object>
+    <object class="modTransportPackage" table="transport_packages" extends="xPDOObject">
+        <field key="signature" dbtype="varchar" precision="255" phptype="string" null="false" index="pk" />
+        <field key="created" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="installed" dbtype="datetime" phptype="datetime" />
+        <field key="state" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="1" />
+        <field key="workspace" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="fk" />
+        <field key="provider" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="fk" />
+        <field key="disabled" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="source" dbtype="tinytext" phptype="string" />
+        <field key="manifest" dbtype="text" phptype="array" />
+        <field key="attributes" dbtype="mediumtext" phptype="array" />
+        <aggregate alias="Workspace" class="modWorkspace" local="workspace" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Provider" class="transport.modTransportProvider" local="provider" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+</model>

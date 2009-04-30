@@ -1,0 +1,162 @@
+<?php
+require_once(MODX_CORE_PATH . 'model/modx/modresponse.class.php');
+
+/**
+ * Encapsulates an HTTP response from the MODx manager.
+ *
+ * {@inheritdoc}
+ *
+ * @package modx
+ */
+class modConnectorResponse extends modResponse {
+    /**
+     * The base location of the processors called by the connectors.
+     *
+     * @var string
+     * @access private
+     */
+    var $_directory;
+    function modConnectorResponse(& $modx) {
+        $this->__construct($modx);
+    }
+    function __construct(& $modx) {
+        parent :: __construct($modx);
+        $this->setDirectory();
+    }
+
+    function outputContent($options = array()) {
+        /* variable pointer for easier access */
+        $modx =& $this->modx;
+
+        /* backwards compat */
+        $_lang =& $this->modx->lexicon;
+        $error =& $this->modx->error;
+
+        /* verify the location and action */
+        if (!isset($options['location']) || !isset($options['action'])) {
+            $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
+        }
+
+        /* execute a processor and format the response */
+        if (empty($options['action'])) {
+            $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
+        } else {
+            /* prevent browsing of subdirectories for security */
+            $options['action'] = str_replace('../','',$options['action']);
+
+            /* find the appropriate processor */
+            $file = $this->_directory.str_replace('\\', '/', $options['location'] . '/' . $options['action']).'.php';
+
+            /* verify processor exists */
+            if (!file_exists($file)) {
+                $this->body = $this->modx->error->failure($this->modx->lexicon('processor_err_nf').$file);
+            } else {
+                /* go load the correct processor */
+                $this->body = include $file;
+            }
+        }
+        //header("Content-Type: text/json; charset=UTF-8");
+        if (is_array($this->header)) {
+            foreach ($this->header as $header) header($header);
+        }
+        if (is_array($this->body)) {
+            die($this->modx->toJSON(array(
+                'success' => isset($this->body['success']) ? $this->body['success'] : 0,
+                'message' => isset($this->body['message']) ? $this->body['message'] : $this->modx->lexicon('error'),
+                'total' => (isset($this->body['total']) && $this->body['total'] > 0)
+                        ? intval($this->body['total'])
+                        : (isset($this->body['errors'])
+                                ? count($this->body['errors'])
+                                : 1),
+                'data' => isset($this->body['errors']) ? $this->body['errors'] : array(),
+                'object' => isset($this->body['object']) ? $this->body['object'] : array(),
+            )));
+        } else {
+            die($this->body);
+        }
+    }
+
+    /**
+     * Return arrays of objects (with count) converted to JSON.
+     *
+     * The JSON result includes two main elements, total and results. This format is used for list
+     * results.
+     *
+     * @access public
+     * @param array $array An array of data objects.
+     * @param mixed $count The total number of objects. Used for pagination.
+     * @return string The JSON output.
+     */
+    function outputArray($array,$count = false) {
+        if (!is_array($array)) return false;
+        if ($count === false) { $count = count($array); }
+        return '({"total":"'.$count.'","results":'.$this->modx->toJSON($array).'})';
+    }
+
+    /**
+     * Set the physical location of the processor directory for the response handler.
+     *
+     * This allows for dynamic processor locations.
+     *
+     * @access public
+     * @param string $dir The directory to set as the processors directory.
+     */
+    function setDirectory($dir = '') {
+        if ($dir == '') {
+            $this->_directory = $this->modx->config['processors_path'];
+        } else {
+            $this->_directory = $dir;
+        }
+    }
+
+    /**
+     * Converts PHP to JSON with JavaScript literals left in-tact.
+     *
+     * JSON does not allow JavaScript literals, but this function encodes certain identifiable
+     * literals and decodes them back into literals after modX::toJSON() formats the data.
+     *
+     * @access public
+     * @param mixed $data The PHP data to be converted.
+     * @return string The extended JSON-encoded string.
+     */
+    function toJSON($data) {
+        array_walk_recursive($data, array(&$this, '_encodeLiterals'));
+        return $this->_decodeLiterals($this->modx->toJSON($data));
+    }
+
+    /**
+     * Encodes certain JavaScript literal strings for later decoding.
+     *
+     * @access protected
+     * @param mixed &$value A reference to the value to be encoded if it is identified as a literal.
+     * @param integer|string $key The array key corresponding to the value.
+     */
+    function _encodeLiterals(&$value, $key) {
+        if (is_string($value)) {
+            /* properly handle common literal structures */
+            if (strpos($value, 'function(') === 0
+             || strpos($value, 'this.') === 0
+             || strpos($value, 'new Function(') === 0
+             || strpos($value, 'Ext.') === 0) {
+                $value = '@@' . base64_encode($value) . '@@';
+             }
+        }
+    }
+
+    /**
+     * Decodes strings encoded by _encodeLiterals to restore JavaScript literals.
+     *
+     * @access protected
+     * @param string $string The JSON-encoded string with encoded literals.
+     * @return string The JSON-encoded string with literals restored.
+     */
+    function _decodeLiterals($string) {
+        $pattern = '/"@@(.*?)@@"/';
+        $string = preg_replace_callback(
+            $pattern,
+            create_function('$matches', 'return base64_decode($matches[1]);'),
+            $string
+        );
+        return $string;
+    }
+}

@@ -1,0 +1,84 @@
+<?php
+/**
+ * @package modx
+ * @subpackage mysql
+ */
+$xpdo_meta_map['modPlugin']= array (
+  'package' => 'modx',
+  'table' => 'site_plugins',
+  'fields' => 
+  array (
+    'cache_type' => 0,
+    'plugincode' => '',
+    'locked' => 0,
+    'properties' => NULL,
+    'disabled' => 0,
+    'moduleguid' => '',
+  ),
+  'fieldMeta' => 
+  array (
+    'cache_type' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'plugincode' => 
+    array (
+      'dbtype' => 'mediumtext',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'locked' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'properties' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'array',
+      'null' => true,
+    ),
+    'disabled' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'moduleguid' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '32',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+      'index' => 'fk',
+    ),
+  ),
+  'composites' => 
+  array (
+    'modPluginEvent' => 
+    array (
+      'class' => 'modPluginEvent',
+      'local' => 'id',
+      'foreign' => 'pluginid',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
+);
+if (XPDO_PHP4_MODE) $xpdo_meta_map['modPlugin']['composites']= array_merge($xpdo_meta_map['modPlugin']['composites'], array_change_key_case($xpdo_meta_map['modPlugin']['composites']));
+$xpdo_meta_map['modplugin']= & $xpdo_meta_map['modPlugin'];

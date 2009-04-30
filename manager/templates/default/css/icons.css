@@ -1,0 +1,56 @@
+
+.icon-list-new {
+    background-image:url(../images/restyle/icons/icon-list-new.gif) !important;
+}
+.icon-mark-active {
+    background-image:url(../images/restyle/icons/icon-mark-active.gif) !important;
+}
+.icon-mark-complete {
+    background-image:url(../images/restyle/icons/icon-mark-complete.gif) !important;
+}
+
+.x-rbtn button{
+    background-color:transparent;
+    background-repeat:no-repeat;
+    background-position:center;
+    padding: 0;
+    margin:0;
+    border:0 none;
+    cursor:pointer;
+    width:24px;
+    height:16px;
+    -moz-outline:0 none;
+    outline:0 none;
+    font-size:1px;
+    line-height:1px;    
+}
+.x-rbtn {
+    table-layout:fixed;
+}
+.x-rbtn td {
+    width:24px;
+    height:21px;
+    background-image:url(../images/restyle/icons/rbtn.gif);
+    background-repeat:no-repeat;
+    padding:0;
+    vertical-align:middle;
+    border:0 none;
+}
+.x-rbtn td.x-rbtn-first {
+    background-position: 0 0;
+}
+.x-rbtn td.x-rbtn-item {
+    background-position: 0 -42px;
+}
+.x-rbtn td.x-rbtn-last {
+    background-position: right -21px;
+}
+.x-rbtn td.x-rbtn-first-active {
+    background-position: 0 -63px;
+}
+.x-rbtn td.x-rbtn-item-active {
+    background-position: 0 -105px;
+}
+.x-rbtn td.x-rbtn-last-active {
+    background-position: right -84px;
+}
