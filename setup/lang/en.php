@@ -124,7 +124,7 @@ $_lang['modx_err_instantiate'] = 'Could not instantiate the MODx class.';
 $_lang['modx_err_instantiate_mgr'] = 'Could not initialize the MODx manager context.';
 $_lang['modx_install']= 'MODx Installation';
 $_lang['modx_install_complete'] = 'MODx Installation Complete';
-$_lang['modx_footer1']= '&copy; 2005-2008 the <a href="http://www.modxcms.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODx</a> Content Management Framework (CMF) project. All rights reserved. MODx is licensed under the GNU GPL.';
+$_lang['modx_footer1']= '&copy; 2005-2009 the <a href="http://www.modxcms.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODx</a> Content Management Framework (CMF) project. All rights reserved. MODx is licensed under the GNU GPL.';
 $_lang['modx_footer2']= 'MODx is free software.  We encourage you to be creative and make use of MODx in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODx, that you keep the source code free!';
 $_lang['next'] = 'Next';
 $_lang['none'] = 'None';
