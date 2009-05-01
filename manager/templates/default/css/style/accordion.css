@@ -4,6 +4,7 @@
     clear: both;
     margin-top: -1px;
 }
+
 .modx-accordion {
     width: 23%;
     float: left;
@@ -19,29 +20,33 @@
     clear: left;
     margin: 1% 0 1% 1%;
 }
-.modx-accordion .tl, 
-.modx-accordion .tr, 
-.modx-accordion .bl, 
-.modx-accordion .br {
-    background: transparent url(../../images/restyle/i/corner-tree-16.png) no-repeat;
+
+.modx-accordion .tl,.modx-accordion .tr,.modx-accordion .bl,.modx-accordion .br
+    {
+    background: transparent url(../../images/restyle/i/corner-tree-16.png) no-repeat
+        ;
     position: absolute;
     width: 16px;
     height: 16px;
     z-index: 1;
-} 
+}
+
 .modx-accordion .tl {
     top: -8px;
     left: -8px;
 }
+
 .modx-accordion .tr {
     top: -8px;
     right: -8px;
 }
+
 .modx-accordion .br {
     bottom: -8px;
     right: -8px;
 }
-.modx-accordion .bl { 
+
+.modx-accordion .bl {
     bottom: -8px;
     left: -8px;
 }
@@ -50,8 +55,8 @@
     height: 25px;
     line-height: 25px;
     color: #f7f7f7;
-    background: transparent url(../../images/restyle/i/bg-x-accordion-hd.png) left top;
-    
+    background: transparent url(../../images/restyle/i/bg-x-accordion-hd.png) left
+        top;
     margin-right: 0;
     font-size: 1.3em;
     padding-left: 36px;
@@ -59,6 +64,7 @@
     position: relative;
     border: 0;
 }
+
 .modx-accordion .x-panel-header-text {
     /*background: transparent url(../../images/restyle/i/bg-x-accordion-hd.png) right top;*/
     /*
@@ -70,13 +76,14 @@
     width: 100%;
     z-index: 4;
     */
+    
 }
 
 .modx-accordion .x-tool-toggle {
     width: 24px;
     height: 24px;
     background: transparent url(../../images/restyle/i/collapse.png) 0 -24px;
-/*    position: absolute;
+    /*    position: absolute;
     right: 0;
     top: 4px;*/
     float: right;
@@ -84,29 +91,28 @@
 }
 
 .x-panel-collapsed .x-accordion-hd .x-tool-toggle-over {
-background-position:0 0;
+    background-position: 0 0;
 }
 
 /*
 .modx-accordion div:hover.x-tool-toggle {
     background-position: 0 100%;
-}*/
-
-/* other stuff */
+}*/ /* other stuff */
 .modx-tree .x-toolbar {
     background: #eee;
     /*border: 1px solid #fff;*/
     border: 0;
-    }
-    
+}
+
 .modx-accordion .x-panel-body {
     background: transparent;
-    }
+}
+
 .modx-accordion form.x-panel-body {
     background-color: #eee !important;
-    }
+}
+
 .modx-accordion .x-tree-root-ct {
     background-color: #eee;
     padding: .4em;
 }
-    

@@ -7,8 +7,9 @@ body, html {
     margin: 0;
     padding: 0;
     background-color: #ececec;
-		font-family: Arial, Helvetica, sans-serif;
-		margin-bottom: 1px;
+    font-size: .9em;
+	font-family: Arial, Helvetica, sans-serif;
+	margin-bottom: 1px;
 }
 
 #modx-container {
@@ -69,7 +70,7 @@ body, html {
     text-align: right;
     vertical-align: middle;
     z-index: 600;
-		color: #aaa;
+	color: #aaa;
 }
 
 #modx-login-user {
@@ -83,13 +84,13 @@ body, html {
     }
 #rightlogin a.modx-logout {
     color: #ddd;
-		background: #333;
+    background: #333;
     text-decoration: none;
     padding: 6px 12px 4px;
     }
 #rightlogin a.modx-logout:hover {
-    background: #D2150B;
-		color: #fff;
+    background: #6e9b38;
+	color: #fff;
 }
 
 /* content div */

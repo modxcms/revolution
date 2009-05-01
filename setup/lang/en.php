@@ -4,14 +4,14 @@
  *
  * @package setup
  */
-$_lang['additional_css']= '';
+$_lang['additional_css'] = '';
 $_lang['addons'] = 'Add-ons';
 $_lang['all'] = 'All';
-$_lang['app_description']= 'CMS and PHP Application Framework';
-$_lang['app_motto']= 'MODx Create and Do More with Less';
+$_lang['app_description'] = 'CMS and PHP Application Framework';
+$_lang['app_motto'] = 'MODx Create and Do More with Less';
 $_lang['back'] = 'Back';
 $_lang['choose_language'] = 'Choose Language';
-$_lang['close']= 'close';
+$_lang['close'] = 'close';
 $_lang['config_file_err_w'] = 'Error writing config file.';
 $_lang['config_file_perms_notset'] = 'Config file permissions were not updated. You may want to change the permissions on your config file to secure the file from tampering.';
 $_lang['config_file_perms_set'] = 'Config file permissions successfully updated.';
@@ -54,22 +54,22 @@ $_lang['db_err_connect'] = 'Could not connect to the database.';
 $_lang['db_err_connect_upgrade'] = 'Could not connect to the existing database for upgrade.  Check the connection properties and try again.';
 $_lang['db_err_create'] = 'Error while attempting to create the database.';
 $_lang['delete_setup_dir'] = 'Check this to DELETE the setup directory from the filesystem.';
-$_lang['dir']= 'ltr';
+$_lang['dir'] = 'ltr';
 $_lang['email_err_ns'] = 'Email address is invalid';
 $_lang['err_occ'] = 'Errors have occured!';
 $_lang['errors_occurred'] = 'Errors were encountered during core installation.  Please review the installation results below, correct the problems and proceed as directed.';
 $_lang['failed'] = 'Failed!';
-$_lang['img_banner']= 'assets/images/img_banner.gif';
-$_lang['img_box']= 'assets/images/img_box.png';
-$_lang['img_splash']= 'assets/images/img_splash.gif';
-$_lang['install']= 'Install';
+$_lang['img_banner'] = 'assets/images/img_banner.gif';
+$_lang['img_box'] = 'assets/images/img_box.png';
+$_lang['img_splash'] = 'assets/images/img_splash.gif';
+$_lang['install'] = 'Install';
 $_lang['install_packages'] = 'Install Packages';
 $_lang['install_packages_desc'] = 'You can choose to install individual add-on packages.  Once you have installed all the optional packages you want, press Finish to complete the process.';
 $_lang['install_packages_options'] = 'Package Installation Options';
 $_lang['install_success'] = 'Core installation was successful.  Click continue to complete the installation process.';
 $_lang['install_summary'] = 'Installation Summary';
 $_lang['install_update'] = 'Install/Update';
-$_lang['license']= '<p class="title">You must agree to the License before continuing installation.</p>
+$_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
 	<p>Usage of this software is subject to the GPL license. To help you understand
 	what the GPL licence is and how it affects your ability to use the software, we
 	have provided the following summary:</p>
@@ -115,17 +115,17 @@ $_lang['license']= '<p class="title">You must agree to the License before contin
 	file distributed with this package.</p>
 ';
 $_lang['license_agree'] = 'I agree to the terms set out in this license.';
-$_lang['license_agreement']= 'License Agreement';
-$_lang['license_agreement_error']= 'You must agree to the License before continuing installation.';
+$_lang['license_agreement'] = 'License Agreement';
+$_lang['license_agreement_error'] = 'You must agree to the License before continuing installation.';
 $_lang['login'] = 'Login';
 $_lang['modx_class_err_nf'] = 'Could not include the MODx class file.';
 $_lang['modx_configuration_file'] = 'MODx configuration file';
 $_lang['modx_err_instantiate'] = 'Could not instantiate the MODx class.';
 $_lang['modx_err_instantiate_mgr'] = 'Could not initialize the MODx manager context.';
-$_lang['modx_install']= 'MODx Installation';
+$_lang['modx_install'] = 'MODx Installation';
 $_lang['modx_install_complete'] = 'MODx Installation Complete';
-$_lang['modx_footer1']= '&copy; 2005-2009 the <a href="http://www.modxcms.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODx</a> Content Management Framework (CMF) project. All rights reserved. MODx is licensed under the GNU GPL.';
-$_lang['modx_footer2']= 'MODx is free software.  We encourage you to be creative and make use of MODx in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODx, that you keep the source code free!';
+$_lang['modx_footer1'] = '&copy; 2005-2009 the <a href="http://www.modxcms.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODx</a> Content Management Framework (CMF) project. All rights reserved. MODx is licensed under the GNU GPL.';
+$_lang['modx_footer2'] = 'MODx is free software.  We encourage you to be creative and make use of MODx in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODx, that you keep the source code free!';
 $_lang['next'] = 'Next';
 $_lang['none'] = 'None';
 $_lang['ok'] = 'OK!';
@@ -153,7 +153,7 @@ $_lang['preinstall_failure'] = 'Problems were detected.  Please review the pre-i
 $_lang['preinstall_success'] = 'Pre-installation tests were successful.  Click Install below to continue.';
 $_lang['refresh'] = 'Refresh';
 $_lang['retry'] = 'Retry';
-$_lang['security_notice'] ='Security Notice';
+$_lang['security_notice'] = 'Security Notice';
 $_lang['select'] = 'Select';
 $_lang['skip_to_bottom'] = 'scroll to bottom';
 $_lang['success'] = 'Success';
@@ -164,18 +164,16 @@ $_lang['transport_class_err_load'] = 'Error loading transport class.';
 $_lang['toggle'] = 'Toggle';
 $_lang['toggle_success'] = 'Toggle Success Messages';
 $_lang['toggle_warnings'] = 'Toggle Warnings';
-$_lang['username_err_ns'] =  'Username is invalid';
-$_lang['version']= 'version';
-$_lang['welcome']= 'Welcome to the MODx installation program.';
-$_lang['welcome_message']= '<p>This program will guide you through the rest of the installation.</p>
+$_lang['username_err_ns'] = 'Username is invalid';
+$_lang['version'] = 'version';
+$_lang['welcome'] = 'Welcome to the MODx installation program.';
+$_lang['welcome_message'] = '<p>This program will guide you through the rest of the installation.</p>
 	<p>Please select the `Next` button to continue:</p>
 ';
 $_lang['workspace_err_nf'] = 'Could not find the active workspace.';
 $_lang['workspace_err_path'] = 'Error setting the active workspace path.';
 $_lang['workspace_path_update'] = 'Updated the active workspace path.';
 $_lang['xpdo_err_ins'] = 'Could not instantiate xPDO.';
-
-
 $_lang['test_config_file'] = 'Checking if <span class="mono">%s</span> exists and is writable: ';
 $_lang['test_config_file_nw'] = 'For new Linux/Unix installs, please create a blank file named <span class="mono">%s.inc.php</span> in your MODx core <span class="mono">config/</span> directory with permissions set to be writable by PHP.';
 $_lang['test_db_check'] = 'Creating connection to the database: ';

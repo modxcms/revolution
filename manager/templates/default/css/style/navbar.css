@@ -1,21 +1,24 @@
 #modx-home-icon {
-	width: 24px;
-	height: 24px;
-	float: left;
-	position: absolute;
-	left: 1.3em;
-	top: .5em;
-	background: transparent url(../../images/restyle/i/home.png) no-repeat top left;
-	opacity: .50;
-	}
-#modx-home-icon:hover {
-	opacity: 1;
+    width: 24px;
+    height: 24px;
+    float: left;
+    position: absolute;
+    left: 1.3em;
+    top: .5em;
+    background: transparent url(../../images/restyle/i/home.png) no-repeat top left;
+    opacity: .50;
 }
+
+#modx-home-icon :hover {
+    opacity: 1;
+}
+
 #modx-home-icon a {
-	width: 100%;
-	height: 100%;
-	display: block; 
-	}
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 #modx-topnav-div {
     background: transparent;
     padding: 6px 0 0;
@@ -24,20 +27,23 @@
     z-index: 500;
     width: 78%;
 }
+
 #modx-topnav {
     width: 100%;
 }
-#modx-topnav-div ul, 
-#modx-topnav-div li {
+
+#modx-topnav-div ul,#modx-topnav-div li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
+
 #modx-topnav-div li.top {
     display: block;
     float: left;
     margin-right: 9px;
 }
+
 #modx-topnav-div a {
     padding: 0 12px;
     color: #fff;
@@ -52,58 +58,70 @@
 #modx-topnav-div a:hover {
     background-color: #222;
 }
-#modx-topnav-div li .zone { display: none }
+
+#modx-topnav-div li .zone {
+    display: none
+}
 
 #modx-topnav-div li.top ul {
     width: 224px;
     clear: left;
 }
+
 li.top li.last {
     margin: 0;
     padding: 0 0 0 24px;
     height: 12px;
     line-height: 12px;
-    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat 0 0;
+    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat 0
+        0;
     float: none;
     clear: left;
     position: relative;
     overflow: visible;
 }
+
 li.top li.last span {
     display: block;
     width: 100%;
     position: absolute;
     bottom: 0;
     left: 24px;
-    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat 100% 0;
+    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat
+        100% 0;
 }
+
 #modx-topnav-div li:hover .zone {
     display: block;
     padding: 5px 30px 60px;
 }
+
 #modx-topnav-div li:hover .zone .zone {
     display: none;
     padding: 30px 30px 30px 5px;
 }
+
 #modx-topnav-div .top li:hover .zone {
     display: block;
 }
 
-#modx-topnav-div li.top,
-#modx-topnav-div li.flyout {
+#modx-topnav-div li.top,#modx-topnav-div li.flyout {
     position: relative;
 }
+
 #modx-topnav-div li.top li {
     display: block;
     float: none;
     width: 200px;
 }
+
 li.top .zone {
     position: absolute;
     top: 20px;
-    left: -30px; 
+    left: -30px;
     opacity: 1;
 }
+
 .zone a {
     display: block;
     width: 100%;
@@ -111,21 +129,25 @@ li.top .zone {
     line-height: 30px;
     float: none;
 }
+
 .zone span.description {
     display: block;
     clear: left;
     line-height: 1.1;
-    font-size: .8em;
+    font-size: .9em;
     color: #999;
     margin-top: -4px;
     padding-bottom: 6px;
 }
+
 .zone a:hover {
     background-color: #222 !important;
 }
+
 .zone a:hover span.description {
-		color: #ddd !important;
+    color: #ddd !important;
 }
+
 li.flyout .zone {
     position: absolute;
     left: 219px;
@@ -133,6 +155,7 @@ li.flyout .zone {
     _top: 0;
     opacity: 1.0;
 }
+
 li.last li.flyout .zone {
     left: -228px; /* reverse the last one */
 }
