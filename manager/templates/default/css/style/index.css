@@ -1,10 +1,14 @@
 @import url(./navbar.css);
 @import url(./accordion.css);
 
+html {height: 100%;}
+
 body, html {
     margin: 0;
     padding: 0;
     background-color: #ececec;
+		font-family: Arial, Helvetica, sans-serif;
+		margin-bottom: 1px;
 }
 
 #modx-container {
@@ -16,7 +20,7 @@ body, html {
 
 /* top bar */
 #modx-topbar {
-    height: 4em;
+    height: 3em;
     /*border: 1px solid red;*/
     background-color: #222;
     color: white;
@@ -27,8 +31,7 @@ body, html {
     }
     
 #modx-site-name {
-    padding: .4em 1em;
-    font-size: 1.2em;
+    padding: .3em 0 0 1em;
     }
 .modx-version {
     display: block;
@@ -40,8 +43,7 @@ body, html {
 
 #modx-logo {
     float: right;
-    height: 2.5em;
-    margin: .8em 1em 0;
+    margin: .4em 1em 0 0;
     }
 #modx-logo img {   
     width: 94px;
@@ -52,37 +54,48 @@ body, html {
 
 /* 2nd row, navbar */
 #modx-navbar {
-    background-color: #707070;
-    height:3em;
-    background-image:url(../../images/restyle/header_sub.jpg);
-    background-repeat:repeat-x;    
+    background-color: #555;
+    height: 31px;
+		position: relative;
+    /*background-image:url(../../images/restyle/header_sub.jpg);
+    background-repeat:repeat-x;*/
     
 }
 
 #rightlogin {
-    line-height: 36px;
+    line-height: 25px;
+		padding-top: 6px;
     float: right;
     text-align: right;
     vertical-align: middle;
     z-index: 600;
+		color: #aaa;
 }
+
+#modx-login-user {
+	font-weight: bold;
+	color: #eee;
+}
+
 #rightlogin span {
     vertical-align: middle;
     margin-right: 1.3em;
     }
 #rightlogin a.modx-logout {
     color: #ddd;
+		background: #333;
     text-decoration: none;
-    padding: .3em;
+    padding: 6px 12px 4px;
     }
 #rightlogin a.modx-logout:hover {
-    color: #222;
+    background: #D2150B;
+		color: #fff;
 }
 
 /* content div */
 #modx-content {
-    width: 72%;
-    padding: 1.5em;
+    width: 74%;
+    padding: .5%;
     float: left;
 }
 

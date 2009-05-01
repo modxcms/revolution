@@ -1,13 +1,16 @@
 #modx-home-icon {
-	width: 32px;
-	height: 32px;
+	width: 24px;
+	height: 24px;
 	float: left;
 	position: absolute;
-	left: .5em;
-	top: 4.3em;
+	left: 1.3em;
+	top: .5em;
 	background: transparent url(../../images/restyle/i/home.png) no-repeat top left;
-	opacity: .80;
+	opacity: .50;
 	}
+#modx-home-icon:hover {
+	opacity: 1;
+}
 #modx-home-icon a {
 	width: 100%;
 	height: 100%;
@@ -15,7 +18,7 @@
 	}
 #modx-topnav-div {
     background: transparent;
-    padding: .55em 0 0;
+    padding: 6px 0 0;
     margin-left: 4em;
     position: relative;
     z-index: 500;
@@ -39,13 +42,13 @@
     padding: 0 12px;
     color: #fff;
     background-color: #333;
-    line-height: 30px;
+    line-height: 25px;
     display: block;
     float: left;
     text-decoration: none;
-    font-size: 1em;
     cursor: pointer;
 }
+
 #modx-topnav-div a:hover {
     background-color: #222;
 }
@@ -97,9 +100,9 @@ li.top li.last span {
 }
 li.top .zone {
     position: absolute;
-    top: 25px;
+    top: 20px;
     left: -30px; 
-    opacity: .95;
+    opacity: 1;
 }
 .zone a {
     display: block;
@@ -111,14 +114,17 @@ li.top .zone {
 .zone span.description {
     display: block;
     clear: left;
-    line-height: 1.2;
-    font-size: 1em;
-    color: #bbb;
+    line-height: 1.1;
+    font-size: .8em;
+    color: #999;
     margin-top: -4px;
     padding-bottom: 6px;
 }
 .zone a:hover {
     background-color: #222 !important;
+}
+.zone a:hover span.description {
+		color: #ddd !important;
 }
 li.flyout .zone {
     position: absolute;
