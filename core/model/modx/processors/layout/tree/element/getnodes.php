@@ -385,6 +385,7 @@ switch ($g[0]) {
     default: /* if clicking a node in a category */
         /* 0: type,  1: element/category  2: elID  3: catID */
         $cat_id = isset($g[3]) ? $g[3] : ($g[1] == 'category' ? $g[2] : 0);
+        $elementType = ucfirst($g[0]);
         $elementClassKey = $ar_typemap[$g[0]];
 
         /* first handle subcategories */
@@ -394,10 +395,9 @@ switch ($g[0]) {
         ));
         $c->sortby('category','ASC');
         $categories = $modx->getCollection('modCategory',$c);
-
         foreach ($categories as $category) {
             $elCount = $modx->getCount($elementClassKey,array(
-                'category' => $cat_id,
+                'category' => $category->get('id'),
             ));
             if ($elCount <= 0) continue;
             $resources[] = array(
