@@ -213,6 +213,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
                     Ext.getCmp('modx-tv-header').getEl().update('<h2>'+_('tv')+': '+r.object.name+'</h2>');
                     
                     this.showParameters(Ext.getCmp('modx-tv-display'));
+                    this.clearDirty();
                     this.fireEvent('ready',r.object);
 
                     var d = Ext.decode(r.object.data);

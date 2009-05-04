@@ -60,7 +60,7 @@ if (is_array($onTVFormRender)) $onTVFormRender = implode('',$onTVFormRender);
 $modx->smarty->assign('onTVFormRender',$onTVFormRender);
 
 /* check unlock default element properties permission */
-$modx->smarty->assign('unlock_element_properties',$modx->hasPermission('unlock_element_properties') ? 1 : 0);
+$unlock_element_properties = $modx->hasPermission('unlock_element_properties') ? 1 : 0;
 
 /* assign TV to parser */
 $modx->smarty->assign('tv',$tv);
