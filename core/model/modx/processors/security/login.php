@@ -5,9 +5,10 @@
  * @package modx
  * @subpackage processors.security
  */
-if (is_object($modx->lexicon)) {
-    $modx->lexicon->load('login');
+if (!isset($modx->lexicon) || !is_object($modx->lexicon)) {
+    $modx->getService('lexicon','modLexicon');
 }
+$modx->lexicon->load('login');
 
 $username = $_POST['username'];
 $givenPassword = $_POST['password'];
