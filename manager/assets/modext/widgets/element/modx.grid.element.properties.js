@@ -80,6 +80,15 @@ MODx.grid.ElementProperties = function(config) {
             ,handler: this.save
             ,scope: this
         }]
+        ,bbar: [{
+            text: 'Import Properties'
+            ,handler: this.importProperties
+            ,scope: this
+        },'-',{
+            text: 'Export Properties'
+            ,handler: this.exportProperties
+            ,scope: this
+        }]
         ,collapseFirst: false
         ,tools: [{
             id: 'plus'
@@ -314,6 +323,35 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                 }
             }
         },this);
+    }
+    
+    ,exportProperties: function (btn,e) {
+        MODx.Ajax.request({
+            url: MODx.config.connectors_url+'element/index.php'
+            ,params: {
+                action: 'exportProperties'
+                ,data: this.encode()
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    location.href = MODx.config.connectors_url+'element/index.php?action=exportProperties&download='+r.message;
+                },scope:this}
+            }
+        });
+    }
+    
+    ,importProperties: function (btn,e) {
+        this.loadWindow(btn,e,{
+            xtype: 'modx-window-properties-import'
+            ,record: this.menu.record
+            ,listeners: {
+                'success': {fn:function(o) {
+                    var s = this.getStore();
+                    var data = o.a.result.object;
+                    s.loadData(data);
+                },scope:this}
+            }
+        });
     }
     
     ,_showMenu: function(g,ri,e) {
@@ -841,3 +879,31 @@ MODx.window.AddPropertySet = function(config) {
 };
 Ext.extend(MODx.window.AddPropertySet,MODx.Window);
 Ext.reg('modx-window-element-property-set-add',MODx.window.AddPropertySet);
+
+MODx.window.ImportProperties = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('properties_import')
+        ,id: 'modx-window-properties-import'
+        ,url: MODx.config.connectors_url+'element/index.php'
+        ,action: 'importProperties'
+        ,fileUpload: true
+        ,saveBtnText: _('import')
+        ,fields: [{
+            html: _('properties_import_msg')
+            ,id: 'modx-impp-desc'
+            ,border: false
+            ,bodyStyle: 'margin: 1em;'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('file')
+            ,name: 'file'
+            ,id: 'modx-impp-file'
+            ,width: 250
+            ,inputType: 'file'
+        }]
+    });
+    MODx.window.ImportProperties.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.ImportProperties,MODx.Window);
+Ext.reg('modx-window-properties-import',MODx.window.ImportProperties);
