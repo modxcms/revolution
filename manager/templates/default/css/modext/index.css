@@ -36,3 +36,5 @@ textarea.x-form-field {
 
 /* fixes masking issues */
 .x-combo-list, .x-combo-list-item { z-index: 30000 !important; }
+/* fixes combo bluescreen issue */
+.x-combo-list-inner {  position:static; }

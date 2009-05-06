@@ -570,7 +570,6 @@ MODx.combo.Namespace = function(config) {
         ,fields: ['name']
         ,displayField: 'name'
         ,valueField: 'name'
-        ,baseParams: { action: 'getList' }
     });
     MODx.combo.Namespace.superclass.constructor.call(this,config);
 };

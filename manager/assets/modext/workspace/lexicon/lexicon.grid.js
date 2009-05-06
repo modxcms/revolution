@@ -41,7 +41,6 @@ MODx.grid.Lexicon = function(config) {
             text: _('namespace')+':'
         },{
 			xtype: 'modx-combo-namespace'
-			,name: 'namespace'
 			,id: 'modx-lexicon-filter-namespace'
 			,value: 'core'
 			,listeners: {
@@ -51,7 +50,6 @@ MODx.grid.Lexicon = function(config) {
 		    text: _('topic')+':'
 		},{
 			xtype: 'modx-combo-lexicon-topic'
-			,name: 'topic'
 			,id: 'modx-lexicon-filter-topic'
 			,value: 'default'
             ,listeners: {
