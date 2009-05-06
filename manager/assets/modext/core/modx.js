@@ -62,7 +62,9 @@ Ext.extend(MODx,Ext.Component,{
             ,params: { action: 'clearCache' }
             ,listeners: {
                 'success':{fn:function(r) {
-                    MODx.msg.alert(_('success'),r.message);
+                    MODx.msg.alert(_('success'),r.message,function() {
+                        Ext.getCmp('modx-layout').refreshTrees();
+                    },this);
                 },scope:this}
             }
         });
