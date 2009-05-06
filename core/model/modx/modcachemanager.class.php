@@ -411,7 +411,7 @@ class modCacheManager extends xPDOCacheManager {
                 $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_scripts_handler', $options);
                 $lifetime = $this->getOption(XPDO_OPT_CACHE_EXPIRES) ? intval($this->getOption(XPDO_OPT_CACHE_EXPIRES)) : 0;
                 if (empty($results) || !$this->set($objElement->getScriptCacheKey(), $results, $lifetime, $options)) {
-                    $this->modx->log(MODX_LOG_LEVEL_ERROR, "Error caching resource " . $obj->get('id'));
+                    $this->modx->log(MODX_LOG_LEVEL_ERROR, "Error caching script " . $objElement->getScriptCacheKey());
                 }
             }
         }
