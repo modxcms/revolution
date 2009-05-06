@@ -39,13 +39,13 @@ $collection['5']= $xpdo->newObject('modMenu');
 $collection['5']->fromArray(array (
   'id' => 5,
   'parent' => 1,
-  'action' => 62,
+  'action' => 0,
   'text' => 'refresh_site',
   'description' => 'refresh_site_desc',
   'icon' => 'images/icons/refresh.png',
   'menuindex' => 1,
   'params' => '',
-  'handler' => '',
+  'handler' => 'MODx.clearCache(); return false;',
 ), '', true, true);
 $collection['6']= $xpdo->newObject('modMenu');
 $collection['6']->fromArray(array (
