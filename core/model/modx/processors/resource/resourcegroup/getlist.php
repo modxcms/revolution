@@ -20,6 +20,13 @@ if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
 
 $c = $modx->newQuery('modResourceGroup');
+$c->leftJoin('modResourceGroupResource','rgr','
+    rgr.document_group = modResourceGroup.id
+AND rgr.document = '.$_REQUEST['resource']);
+$c->select('
+    modResourceGroup.*,
+    IF(ISNULL(rgr.document),0,1) AS access
+');
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
 $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 $rgs = $modx->getCollection('modResourceGroup',$c);
@@ -29,12 +36,7 @@ $count = $modx->getCount('modResourceGroup');
 $rs = array();
 foreach ($rgs as $rg) {
     $ra = $rg->toArray();
-
-    $rgr = $rg->getOne('modResourceGroupResource',array(
-        'document' => $_REQUEST['resource'],
-    ));
-    $ra['access'] = $rgr != null;
-
+    $ra['access'] = (boolean)$ra['access'];
     $rs[] = $ra;
 }
 
