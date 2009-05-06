@@ -730,7 +730,7 @@ class modInstall {
             if (!is_object($modx) || !is_a($modx, 'modX')) {
                 $errors[] = '<p>'.$this->lexicon['modx_err_instantiate'].'</p>';
             } else {
-                $modx->setDebug(E_ALL & ~E_STRICT);
+                $modx->setDebug(E_ALL & ~E_NOTICE);
                 $modx->setLogTarget(array(
                     'target' => 'FILE',
                     'options' => array(
