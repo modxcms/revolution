@@ -40,21 +40,22 @@ switch ($g[0]) {
         $elementClassKey = $ar_typemap[$g[1]];
         /* 1: type - eg. category_templates */
         $c = $modx->newQuery('modCategory');
+        $c->select('modCategory.*,
+            COUNT(`'.$elementClassKey.'`.`id`) AS elementCount,
+            COUNT(`Children`.`id`) AS childrenCount
+        ');
+        $c->leftJoin($elementClassKey,$elementClassKey,'`'.$elementClassKey.'`.`category` = `modCategory`.`id`');
+        $c->leftJoin('modCategory','Children');
         $c->where(array(
-            'parent' => 0,
+            'modCategory.parent' => 0,
         ));
-        $c->sortby('category','ASC');
+        $c->sortby('`category`','ASC');
+        $c->groupby('`modCategory`.`id`');
         $categories = $modx->getCollection('modCategory',$c);
 
         foreach ($categories as $category) {
-            $elCount = $modx->getCount($elementClassKey,array(
-                'category' => $category->get('id'),
-            ));
-            if ($elCount == 0) {
-                $childCats = $modx->getCount('modCategory',array('parent' => $category->get('id')));
-                if ($childCats <= 0 && $category->get('id') != 0) {
-                    continue;
-                }
+            if ($category->get('elementCount') == 0 && $category->get('childrenCount') <= 0 && $category->get('id') != 0) {
+                continue;
             }
 
             $resources[] = array(
@@ -106,12 +107,14 @@ switch ($g[0]) {
             unset($elCount,$childCats);
         }
 
-        $c = $modx->newQuery($ar_typemap[$g[1]]);
-        $c->where(array('category' => 0));
-        $c->sortby($g[1] == 'template' ? 'templatename' : 'name','ASC');
-        $elements = $modx->getCollection($ar_typemap[$g[1]],$c);
+        $c = $modx->newQuery($elementClassKey);
+        $c->where(array(
+            'category' => 0,
+        ));
+        $c->sortby($elementClassKey == 'modTemplate' ? 'templatename' : 'name','ASC');
+        $elements = $modx->getCollection($elementClassKey,$c);
         foreach ($elements as $element) {
-            $name = $g[1] == 'template' ? $element->get('templatename') : $element->get('name');
+            $name = $elementClassKey == 'modTemplate' ? $element->get('templatename') : $element->get('name');
 
             $menu = array();
             $menu[] = array(
@@ -130,7 +133,7 @@ switch ($g[0]) {
                      . '";
                 }',
             );
-            if ($g[1] == 'chunk') {
+            if ($elementClassKey == 'modChunk') {
                 $menu[] = array(
                     'text' => $modx->lexicon('chunk_update_quick'),
                     'handler' => 'function(itm,e) {
@@ -384,22 +387,26 @@ switch ($g[0]) {
         break;
     default: /* if clicking a node in a category */
         /* 0: type,  1: element/category  2: elID  3: catID */
-        $cat_id = isset($g[3]) ? $g[3] : ($g[1] == 'category' ? $g[2] : 0);
+        $categoryId = isset($g[3]) ? $g[3] : ($g[1] == 'category' ? $g[2] : 0);
         $elementType = ucfirst($g[0]);
         $elementClassKey = $ar_typemap[$g[0]];
 
         /* first handle subcategories */
         $c = $modx->newQuery('modCategory');
+        $c->select('modCategory.*,
+            COUNT(`'.$elementClassKey.'`.`id`) AS elementCount
+        ');
+        $c->leftJoin($elementClassKey,$elementClassKey,'`'.$elementClassKey.'`.`category` = `modCategory`.`id`');
         $c->where(array(
-            'parent' => $cat_id,
+            'parent' => $categoryId,
         ));
-        $c->sortby('category','ASC');
+        $c->groupby('`modCategory`.`id`');
+        $c->sortby('`category`','ASC');
+
         $categories = $modx->getCollection('modCategory',$c);
         foreach ($categories as $category) {
-            $elCount = $modx->getCount($elementClassKey,array(
-                'category' => $category->get('id'),
-            ));
-            if ($elCount <= 0) continue;
+            if ($category->get('elementCount') <= 0) continue;
+
             $resources[] = array(
                 'text' => $category->get('category') . ' (' . $category->get('id') . ')',
                 'id' => 'n_'.$g[0].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
@@ -451,7 +458,9 @@ switch ($g[0]) {
         /* all elements in category */
 
         $c = $modx->newQuery($elementClassKey);
-        $c->where(array('category' => $cat_id));
+        $c->where(array(
+            'category' => $categoryId
+        ));
         $c->sortby($g[0] == 'template' ? 'templatename' : 'name','ASC');
 
         $elements = $modx->getCollection($elementClassKey,$c);
