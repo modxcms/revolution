@@ -59,9 +59,7 @@ Ext.extend(MODx,Ext.Component,{
     ,clearCache: function() {
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'system/index.php'
-            ,params: {
-                action: 'clearCache'
-            }
+            ,params: { action: 'clearCache' }
             ,listeners: {
                 'success':{fn:function(r) {
                     MODx.msg.alert(_('success'),r.message);
