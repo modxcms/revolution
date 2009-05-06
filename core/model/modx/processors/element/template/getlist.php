@@ -13,21 +13,24 @@
  */
 $modx->lexicon->load('template');
 
-/* if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20; */
+$limit = isset($_REQUEST['limit']) ? true : false;
+if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
+if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'templatename';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
-$c = $modx->newQuery('modTemplate');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
 
-if (isset($_REQUEST['limit'])) {
-	$c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+$c = $modx->newQuery('modTemplate');
+$c->leftJoin('modCategory','modCategory');
+$c->select('modTemplate.*,modCategory.category AS category');
+
+$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+if ($limit) { $c->limit($_REQUEST['limit'],$_REQUEST['start']); }
 
 $templates = $modx->getCollection('modTemplate',$c);
 $count = $modx->getCount('modTemplate');
 
-$cs = array();
+$list = array();
 if (isset($_REQUEST['combo'])) {
     $empty = array(
         'id' => 0,
@@ -40,13 +43,12 @@ if (isset($_REQUEST['combo'])) {
         'locked' => false,
     );
     $empty['category'] = '';
-    $cs[] = $empty;
+    $list[] = $empty;
 }
 foreach ($templates as $template) {
-	$cat = $template->getOne('modCategory');
-	$ca = $template->toArray();
-	$ca['category'] = $cat ? $cat->get('category') : '';
-	$cs[] = $ca;
+	$array = $template->toArray();
+	$array['category'] = $template->get('category') != null ? $template->get('category') : '';
+	$list[] = $array;
 }
 
-return $this->outputArray($cs,$count);
+return $this->outputArray($list,$count);
