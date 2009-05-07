@@ -133,8 +133,10 @@ MODx.window.PackageMoreInfo = function(config) {
         ,width: 600
         ,url: MODx.config.connectors_url+'workspace/packages.php'
         ,action: 'info'
+        ,autoScroll: true
         ,fields: [{
-            html: '<div id="modx-pmi-content"></div>'
+            html: '<div id="modx-pmi-content" style="overflow: auto; width: 100%;"></div>'
+            ,autoScroll: true
         }]
         ,buttons: [{
             text: _('ok')
