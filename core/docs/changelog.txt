@@ -4,6 +4,163 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Made sure More Info in download panel can scroll
+- Fixed issue with spacing in setup options panel of package install
+- modCacheManager->generateScript(): Fixed PHP notice in log message on error.
+- modInstall: Modify _modx() function to call setDebug with E_ALL & ~E_NOTICE instead of E_ALL & ~E_STRICT.
+- Optimized queries in element tree to eliminate subqueries or queries in loop, reducing to O(n) instead of O(n^2n)
+- Made clear cache results a bit smaller 
+- Refresh trees after clear cache
+- [#MODX-609] Clear cache menu item now loads results in an alert dialog. No longer loads a separate page.
+- Fixed to template getlist processor
+- [#MODX-671] Fixed bug with resource group access permissions being checked when not assigned
+- [#MODX-699] Fixed to allow usage of login processor without lexicons 
+- Added Import/Export to element properties grids, which allows for file-based transporting of properties.
+- Fixed issues with comboboxes dropping down a blue screen
+- [#XPDO-28] Fixed problem with multiple file resolvers on vehicles with similar basenames cause directory contents to merge unexpectedly. 
+- fixed PHP notice for missing elementType variable 
+- fixed subcategory elements missing from display (was counting elements in parent category rather then subcategory to determine if the subcategory should be displayed)
+- Fixed issue with default properties in TVs being locked
+- Fixed no onTVFormPrerender
+- Made sure clearDirty is fired on TV panels
+- Tweaked the css and updated copyright year.
+- Refactored all index.php gateways to support constructor options set as $options in the various config.core.php files.
+- modCacheManager/modCache: Introduced cache partitioning allowing various cache provider implementations to target specific MODx cache partitions and provide custom (system/context/user) settings for configuration options to each: cache_system_settings, cache_context_settings, cache_resource, cache_scripts, cache_lexicon_topics, cache_action_map
+- modAccessibleObject: Refactored object and collection loader logic to improve cache hit rates.
+- modRequest: Fixed warning for undefined variable $fromCache.
+- modSessionHandler: Refactored write() method to only update access time when the session data has changed or at specified intervals before the data is made available for GC.
+- modSessionHandler: Added support for cache_db_session, a new configuration setting to allow session data to be cached when cache_db is enabled.
+- modTemplateVar: Allow getValue() to use a `value` field for data if already populated for a specific resource.
+- Commented out missing image in welcome.tpl (temporary)
+- Added couple of bugfixes to modDBRegister to prevent duplicate payloads and update existing messages.
+- Fixed bug where QuickUpdateChunk was persisting values
+- Added fix to prevent DOM id problems
+- Added clearCache checkbox to chunk editing to allow toggleable cache clearing
+- Optimized chunk processors
+- Added 'Quick Update Chunk' and 'Quick Create Chunk' options to Elements tree, which allows you to quickly edit or create chunks via a window straight from the Element tree on any page
+- [#MODX-718] Fixed bug where elements without a category wouldn't show
+- [#MODX-697] Fixed problem with deprecated role topic still in action build scripts
+- [#MODX-705] Removed random numbers causing Radio TVs to render improperly
+- Fixed bug that caused policy data to be erased when creating/saving/removing policy data
+- [#MODX-711] Fixed Update Context screen to properly pass correct PK
+- modDbRegister: fixed bug with expired messages not being removed if remove_read => false
+- modDbRegister: allowed messages to be updated/overwritten
+- Fixed modCacheManager::prepare() - was returning false on already-prepared contexts
+- Added support for nested categories for elements; categories can now have subcategories
+- Fixed to treestate to properly set treestate ID so restore can work properly
+- Fixed call to onDocFormRender to make sure ID is passed on Resource update
+- Fixed to getFiles processor for MODx.Browser to properly store URL parameter with the base_url prefixed
+- [#MODX-712] Fixed errors creating context settings
+- modX: Fixed potential error when invokeEvent() is called and executes a plugin with property sets and pluginCache does not contain the object
+- modCacheManager: Fixed error when building the pluginCache with property sets
+- modCacheManager: Fixed typo in parentSql that was breaking use alias paths option.
+- modCacheManager->generateContext(): Added support for Resources to be generated in multiple contexts via modContextResource.
+- modParser: Removed errant log() statement in parseProperties().
+- modParser: Fixed problem in parsePropertyString() when passing `escaped` property values containing semi-colons (;).
+- Added in necessary reloading functions to ColumnTree
+- Fixed issue with column tree's context menu overriding the ID
+- modManagerResponse: Detect if controller responses are error arrays and render using error.tpl appropriately.
+- [#MODX-693] redirect bug - modResponse logic error
+- Moved core/config/version.inc.php to core/docs/version.inc.php
+- layout/tree/resource/getnodes.php: Additional optimization to reduce memory usage and improve performance when opening Resources containing a large number of children.
+- modConnectorResponse->toJSON() optimized to greatly reduce memory usage and improve performance with large result sets.
+- [#MODX-691] allow User Settings to be saved from prop. grid
+- Fixed bug with documentMap
+- Fixed issue with default tv render panel for resource page
+- [#MODX-690] Fixed a few events names registered in the system_eventsnames table during build/install
+- Added id's to element and category nodes for informational purposes (missed one spot).
+- Added id's to element and category nodes for informational purposes.
+- Updated drag and drop behavior to update context_key of all child Resources when dropping a container on a different context node.
+- Modified modTransportPackage.manifest field from MEDIUMTEXT to TEXT in order to handle large manifests.
+- Fixed aliasMap broken in recent cacheManager refactoring.
+- Added helper functions to MODx.tree.ColumnTree
+- Added DD events to ColumnTree
+- Added missing column tree CSS
+- Added UI for adding property sets to PluginEvents
+- Added cacheManager object checks to verify for PHP4 installs
+- modCacheManager->generateResource(): added validation of the modResource primary key before attempting to cache a record.
+- modUser: modified storage of session data to use the modUser primary key value to isolate values associated with a specific user; this will allow users to login as multiple users on the back-end and/or front-end without affecting the session data associated with a specific user.
+- modX->_initSession(): Enable session_gc_lifetime configuration setting to set session.gc_liftime ini setting regardless of what session handler is configured.
+- modPluginEvent: Added the ability of plugins to utilize Property Sets by allowing a plugin registered to a particular event to attach a Property Set and make it available during processing.
+- Fixed warning with loading of RTEs in resource page
+- [#MODX-674] Fixed content-dispo combobox bug
+- Removed allowBlank: false check on menuindex to allow for dynamic creation
+- Added in missing lexicon entries for prior menuindex commit
+- [#MODX-678] Added back in 'menuindex' field to resource panels
+- Added missing modX::__construct() options parameter.
+- Allow for extending of MODx.panel.ResourceTV by making reference to modx-resource-template field dynamic
+- Fixes for RTE loading
+- Fixed issue where smarty template path was not being reset if 3PC set path to something else
+- modX constructor now accepts a second parameter containing an array of options to be set in the config
+- Major refactoring of modCacheManager to provide more granular caching options
+- modCacheManager now accepts options, based on changes to xPDOCacheManager, and provides access via getOption()
+- generate*() methods now all return data as well as cache it to a specified cache_handler unless otherwise configured
+- modX->getCacheManager() no longer supports MODX_CACHE_DISABLED or config['cache_disabled']; the cacheManager is required, though you will still be able to effectively turn off all caching in the future via this setting (this will be worked back in)
+- manager/controllers/system/refresh_site.php changes to better target things to remove from the cache
+- Introducing modDbRegister and the modx.registry.db package, providing a database modRegister implementation.
+- Added new system settings for individual cache areas, i.e. cache_system_settings, cache_context_settings, cache_lexicon_topics, cache_scripts, etc.
+- modCacheManager: Various fixes and adjustments to latest refactoring, including clearCache improvements.
+- manager/controllers/system/refresh_site.php: Improvements to default clearCache call.
+- modCacheManager: converted generateActionMap() to support configurable cache implementations
+- Updated modAction->rebuildCache() and modManagerRequest->loadActionMap()
+- Additional tweaks to manager/controllers/system/refresh_site.php
+- Updated xPDO externals to revision 308 
+- Removed unnecessary comments from the reg* functions
+- Moved all manager pages JS/CSS to inside HEAD tag using the reg* functions; this improves speed and validation of the manager
+- Fixed the way 3PCs handle their controller files. NOTE!!! This means that you no longer need a "core/controllers" file in your 3PC; just set the namespace path correctly, then set the controller in your modAction.
+- Added an ability for mgr pages to utilize regClientStartupScript and other reg* functions to make pages load faster and move JS/CSS to HEAD tag
+- modX->getEventMap() - Made sure prepare() creates a valid statement before calling execute()
+- Updated modStaticResource to set headers in getFileContent() for now, though this needs to be refactored for flexibility.
+- Fixed issue with saving TVs from create resource processor
+- [#MODX-637] Fixed issue with TVs not reloading on changing template in new resources
+- [#MODX-663] Fixed various issues with modAction creation
+- Fixed issue with MODx.Browser uploads not refreshing the main view
+- Fixed publishedon default date setting
+- Fixed date TV default value
+- Fixed default setting for symlinks
+- Fixed issue with Symlink/WebLink class_key storing
+- Fixed issue with textfield editing in Safari on Property Set grid
+- [#MODX-662] Fixed duplicate issue with elements
+- Fixed issue with property sets page and property lock
+- Fixed name issue on duplicating elements
+- Fixed symlink page setTimeout issue
+- Fixed missing file inclusions
+- Fixed element tree where categorized templates weren't showing
+- Added editing ability to resource's publishedon date
+- Fixes to package downloader panel due to ID conflicts
+- Adjusted modTransportPackage::transferPackage to rename incoming file to [signature].transport.zip rather than basename($source)
+- Fixed xml/json response classes to properly work
+- Added permission "unlock_element_properties", which gives ability to unlock editing of default element properties.
+- Added implementation of above permission into element properties grid
+- Fixed some logic issues with the lockMask
+- [#MODX-561] Added "Locked" ability to default properties for elements
+- [#MODX-633] Fixed issue with add another not respecting parent
+- Fixed TV access panel not working on new TVs
+- Fixed state management with tree nodes
+- [#MODX-661] Fixed URL TV input, where it was not setting prefix value
+- [#MODX-659] Fixed bug where root-level docs couldnt be updated b/c of parent issue
+- Fixed bug with parent being assigned to 0 always in derivative Resource classes
+- Made sure bad resources (where parent = id) are ignored when building the context cache files.
+- Fixed parent bug in controllers
+- Fixed transport.data.php with 'namespace' key on modActions
+- [#MODX-622] Updated top menu structure to be more consistent.
+- Fixed error if properties are null
+- [#MODX-651] Fixed bug when deleting a propset, would not empty grid
+- Fixed to resource page combos not setting display value correctly
+- [#MODX-658] Fixed issue where in TV -> Create, templates were not showing
+- Fixed template nodes to properly sort by templatename
+- Adjusted resource menus and such to refer to a 'Resource' without a specific class_key as 'Document' when applicable, with the exception of talking about Resources in the generic sense
+- Added Duplicate option to Property Sets
+- Fixed bug where template inheritance for resources wasn't happening
+- Fixed symlink page
+- [#MODX-632] Updating xmlrpc to 2.2.1
+- Corrected logic in setup to allow forced PDO emulation mode (XPDO_MODE == 2).
+- Added `category` field to modPropertySets; they can now be categorized
+- Enhanced UI to support new modPropertySet category ability
+- Modified MODx.Window so that the ENTER key submits the form
+- Added more IDs to element forms
+- Added ability to "remove" overridden properties, but only ones that are not in the default propset (ones that are should "revert")
+- Fixed OnWebPagePrerender event not firing as expected.
 - modOutputFilter: Refactored date modifier to return '' if the timestamp encountered == 0 or -1.
 - modOutputFilter: Added strtotime modifier.- Refactored connectors to execute in the context from which they are called, rather than their own context.
 - Updated xPDO to revision 304 for new xPDOFileVehicle feature to respect XPDO_TRANSPORT_RESOLVE_FILES options.

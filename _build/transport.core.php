@@ -113,9 +113,9 @@ $collection = array ();
 $collection['1'] = $xpdo->newObject('transport.modTransportProvider');
 $collection['1']->fromArray(array (
     'id' => 1,
-    'name' => 'MODx Web Transport Facility',
+    'name' => 'modxcms.com',
     'description' => 'The official MODx transport facility for 3rd party components.',
-    'service_url' => 'http://wtf.modxcms.com/addons2.js',
+    'service_url' => 'http://modxcms.com/assets/provider.js',
     'created' => strftime('%Y-%m-%d %H:%M:%S'),
 ), '', true, true);
 $attributes = array (
