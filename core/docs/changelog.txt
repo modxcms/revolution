@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Package Installations will now skip license agreements / readme panels if none are specified
 - Made sure More Info in download panel can scroll
 - Fixed issue with spacing in setup options panel of package install
 - modCacheManager->generateScript(): Fixed PHP notice in log message on error.

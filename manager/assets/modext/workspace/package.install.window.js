@@ -89,6 +89,7 @@ Ext.extend(MODx.panel.PILicense,MODx.panel.WizardPanel,{
                         b.setValue(a);
                     } else {
                         b.setValue('');
+                        Ext.getCmp('modx-window-package-installer').fireEvent('proceed','modx-pi-readme');
                     }
                 },scope:this}
             }
@@ -143,6 +144,7 @@ Ext.extend(MODx.panel.PIReadme,MODx.panel.WizardPanel,{
                         b.setValue(a);
                     } else {
                         b.setValue('');
+                        Ext.getCmp('modx-window-package-installer').fireEvent('proceed','modx-pi-install');
                     }
                 },scope:this}
             }
