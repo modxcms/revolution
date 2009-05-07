@@ -16,12 +16,12 @@ $modx->smarty->assign('online_users_msg',$modx->lexicon('onlineusers_message',ar
 )));
 
 /* do some config checks */
-include_once MODX_PROCESSORS_PATH . 'system/config_check.inc.php';
-if ($config_check_results != $modx->lexicon('configcheck_ok')) {
-	$modx->smarty->assign('config_display',true);
+$success = include_once MODX_PROCESSORS_PATH . 'system/config_check.inc.php';
+if (!$success) {
+	$config_display = true;
 	$modx->smarty->assign('config_check_results',$config_check_results);
 } else {
-	$modx->smarty->assign('config_display',false);
+	$config_display = false;
 }
 
 /* user info : TODO: convert to revo */
@@ -80,7 +80,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-welcome"
         ,site_name: "'.htmlentities($modx->config['site_name']).'"
-        ,config_display: '.($config_display ? 'true': 'false').'
+        ,displayConfigCheck: '.($config_display ? 'true': 'false').'
         ,user: "'.$modx->user->get('id').'"
     });
 });

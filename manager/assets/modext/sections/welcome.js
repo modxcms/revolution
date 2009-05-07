@@ -12,6 +12,7 @@ MODx.page.Welcome = function(config) {
 		components: [{
             xtype: 'modx-panel-welcome'
             ,renderTo: 'modx-panel-welcome'
+            ,displayConfigCheck: config.displayConfigCheck
         }]
 	});
     MODx.page.Welcome.superclass.constructor.call(this,config);

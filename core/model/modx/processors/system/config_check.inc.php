@@ -5,32 +5,27 @@
  * @package modx
  * @subpackage processors.system
  */
-$warningspresent = false;
 $warnings = array();
 
-if (is_writable(MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php')) {
+if (is_writable($modx->config['core_path'].'config/'.MODX_CONFIG_KEY.'.inc.php')) {
     /* Warn if world writable */
-    if (@ fileperms(MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php') & 0x0002) {
-        $warningspresent = true;
+    if (@ fileperms($modx->config['core_path'].'config/'.MODX_CONFIG_KEY.'.inc.php') & 0x0002) {
         $warnings[] = array($modx->lexicon('configcheck_configinc'));
     }
 }
 
-if (is_dir(MODX_BASE_PATH.'setup/')) {
-    $warningspresent = true;
+if (is_dir($modx->config['base_path'].'setup/')) {
     $warnings[] = array($modx->lexicon('configcheck_installer'));
 }
 
 $cachePath= $modx->getCachePath();
 if (!is_writable($cachePath)) {
-    $warningspresent = true;
     $warnings[] = array (
         $modx->lexicon('configcheck_cache')
     );
 }
 
 if (@ ini_get('register_globals') == true) {
-    $warningspresent = true;
     $warnings[] = array (
         $modx->lexicon('configcheck_register_globals')
     );
@@ -38,7 +33,6 @@ if (@ ini_get('register_globals') == true) {
 
 $unapage = $modx->getObject('modResource',$modx->config['unauthorized_page']);
 if ($unapage == null || $unapage->get('published') == 0) {
-    $warningspresent = true;
     $warnings[] = array (
         $modx->lexicon('configcheck_unauthorizedpage_unpublished')
     );
@@ -46,21 +40,18 @@ if ($unapage == null || $unapage->get('published') == 0) {
 
 $errpage = $modx->getObject('modResource',$modx->config['error_page']);
 if ($errpage == null || $errpage->get('published') == 0) {
-    $warningspresent = true;
     $warnings[] = array (
         $modx->lexicon('configcheck_errorpage_unpublished')
     );
 }
 
 if ($unapage == null || $unapage->get('privateweb') == 1) {
-    $warningspresent = true;
     $warnings[] = array (
         $modx->lexicon('configcheck_unauthorizedpage_unavailable')
     );
 }
 
 if ($errpage == null || $errpage->get('privateweb') == 1) {
-    $warningspresent = true;
     $warnings[] = array (
         $modx->lexicon('configcheck_errorpage_unavailable')
     );
@@ -68,8 +59,7 @@ if ($errpage == null || $errpage->get('privateweb') == 1) {
 
 /* clear file info cache */
 clearstatcache();
-if ($warningspresent === true) {
-
+if (!empty($warnings)) {
     $config_check_results = '<h4>' . $modx->lexicon('configcheck_notok') . '</h4>';
 
     for ($i = 0; $i < count($warnings); $i++) {
@@ -125,6 +115,9 @@ if ($warningspresent === true) {
         }
     }
     $_SESSION['mgrConfigCheck'] = true;
+    return false;
 } else {
     $config_check_results = $modx->lexicon('configcheck_ok');
+    return true;
 }
+return true;

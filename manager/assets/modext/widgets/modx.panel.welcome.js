@@ -22,7 +22,7 @@ MODx.panel.Welcome = function(config) {
             ,bodyStyle: 'padding: 1.5em;'
             ,collapsible: true
             ,titleCollapse: true
-            ,hidden: config.config_display ? true : false
+            ,hidden: !config.displayConfigCheck
         },{
             xtype: 'portal'
             ,items: [{
