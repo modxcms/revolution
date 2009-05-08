@@ -23,6 +23,12 @@ if (!$resource->checkPolicy(array('save'=>true, 'publish'=>true))) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
 
+$locked = $resource->addLock();
+if ($locked !== true) {
+    $user = $modx->getObject('modUser', $locked);
+    if ($user) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+}
+
 /* publish resource */
 $resource->set('published',true);
 $resource->set('pub_date',false);
@@ -31,8 +37,11 @@ $resource->set('editedby',$modx->user->get('id'));
 $resource->set('editedon',time(),'integer');
 $resource->set('publishedby',$modx->user->get('id'));
 $resource->set('publishedon',time());
+$saved = $resource->save();
 
-if (!$resource->save()) return $modx->error->failure($modx->lexicon('resource_err_publish'));
+$resource->removeLock();
+
+if (!$saved) return $modx->error->failure($modx->lexicon('resource_err_publish'));
 
 /* invoke OnDocPublished event */
 $modx->invokeEvent('OnDocPublished',array(

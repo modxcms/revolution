@@ -286,9 +286,58 @@ class modResource extends modAccessibleSimpleObject {
      * Resolve isfolder for the resource based on if it has children.
      */
     function checkChildren() {
-        $kids = $this->getMany('Children');
-        $this->set('isfolder',count($kids) > 0);
+        $kids = $this->xpdo->getCount('modResource', array('parent' => $this->get('id')));
+        $this->set('isfolder', $kids > 0);
         $this->save();
+    }
+
+    function addLock($user = 0) {
+        $locked = false;
+        if (is_a($this->xpdo, 'modX')) {
+            if (!$user) {
+                $user = $this->xpdo->user->get('id');
+            }
+            $lockedBy = $this->getLock();
+            if (empty($lockedBy) || ($lockedBy == $user)) {
+                $this->xpdo->registry->locks->subscribe('/resource/');
+                $this->xpdo->registry->locks->send('/resource/', array(md5($this->get('id')) => $user), array('ttl' => $this->xpdo->getOption('lock_ttl', array(), 360)));
+                $locked = true;
+            } elseif ($lockedBy != $user) {
+                $locked = $lockedBy;
+            }
+        }
+        return $locked;
+    }
+
+    function getLock() {
+        $lock = 0;
+        if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
+            $this->xpdo->registry->addRegister('locks', 'registry.modDbRegister', array('directory' => 'locks'));
+            $this->xpdo->registry->locks->connect();
+            $this->xpdo->registry->locks->subscribe('/resource/' . md5($this->get('id')));
+            if ($msgs = $this->xpdo->registry->locks->read(array('remove_read' => false, 'poll_limit' => 1))) {
+                $msg = reset($msgs);
+                $lock = intval($msg);
+            }
+        }
+        return $lock;
+    }
+
+    function removeLock($user = 0) {
+        $removed = false;
+        if (is_a($this->xpdo, 'modX')) {
+            if (!$user) {
+                $user = $this->xpdo->user->get('id');
+            }
+            if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
+                $this->xpdo->registry->addRegister('locks', 'registry.modDbRegister', array('directory' => 'locks'));
+                $this->xpdo->registry->locks->connect();
+                $this->xpdo->registry->locks->subscribe('/resource/' . md5($this->get('id')));
+                $this->xpdo->registry->locks->read(array('remove_read' => true, 'poll_limit' => 1));
+                $removed = true;
+            }
+        }
+        return $removed;
     }
 
     /**

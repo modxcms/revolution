@@ -15,8 +15,15 @@ if (!isset($_DATA['id'])) return $modx->error->failure($modx->lexicon('resource_
 $resource = $modx->getObject('modResource',$_DATA['id']);
 if ($resource == null) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_DATA['id'])));
 
+$locked = $resource->addLock();
+if ($locked !== true) {
+    $user = $modx->getObject('modUser', $locked);
+    if ($user) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+}
+
 $resource->fromArray($_DATA);
 if ($resource->save() === false) {
+    $resource->removeLock();
     return $modx->error->failure($modx->lexicon('resource_err_save'));
 }
 
@@ -30,5 +37,7 @@ $cacheManager->clearCache(array (
         'publishing' => true
     )
 );
+
+$resource->removeLock();
 
 return $modx->error->success();

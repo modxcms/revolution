@@ -140,7 +140,7 @@ class modContext extends modAccessibleObject {
 
             if ($config['friendly_urls'] == 1) {
                 if ($id == $config['site_start']) {
-                    $alias= '';
+                    $alias= ($scheme === '' || $scheme === -1) ? $config['base_url'] : '';
                     $found= true;
                 } else {
                     $alias= array_search($id, $this->aliasMap);

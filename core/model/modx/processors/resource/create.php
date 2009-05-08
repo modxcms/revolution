@@ -244,6 +244,7 @@ if ($resource->save() == false) {
     return $modx->error->failure($modx->lexicon('resource_err_save'));
 }
 
+$resource->addLock();
 
 /* save resource groups */
 if (isset($_POST['resource_groups'])) {
@@ -344,6 +345,10 @@ if ($_POST['syncsite'] == 1) {
 if ($resource->get('id') == $modx->config['site_start']) {
 	$resource->set('published',true);
     $resource->save();
+}
+
+if (!isset($_POST['modx-ab-stay']) || $_POST['modx-ab-stay'] !== 'stay') {
+    $resource->removeLock();
 }
 
 return $modx->error->success('', array('id' => $resource->get('id')));

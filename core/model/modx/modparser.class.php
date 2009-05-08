@@ -910,16 +910,19 @@ class modLinkTag extends modTag {
         if (!$this->_processed) {
             $this->_output= $this->_content;
             if (is_string($this->_output) && !empty ($this->_output)) {
+                /* collect element tags in the content and process them */
+                $maxIterations= isset ($this->modx->config['parser_max_iterations']) ? intval($this->modx->config['parser_max_iterations']) : 10;
+                $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
                 if (isset ($this->modx->aliasMap[$this->_output])) {
                     $this->_output= $this->modx->aliasMap[$this->_output];
                 }
-                $this->_output= $this->modx->makeUrl($this->_output);
-            } else {
-                $this->_output= $this->modx->config['base_url'];
+                if (!empty($this->_output)) $this->_output= $this->modx->makeUrl($this->_output);
             }
-            $this->filterOutput();
-            $this->cache();
-            $this->_processed= true;
+            if (!empty($this->_output)) {
+                $this->filterOutput();
+                $this->cache();
+                $this->_processed= true;
+            }
         }
         /* finally, return the processed element content */
         return $this->_output;

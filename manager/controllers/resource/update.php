@@ -10,31 +10,34 @@ if (!$modx->hasPermission('edit_document')) return $modx->error->failure($modx->
 $resource = $modx->getObject('modResource',$_REQUEST['id']);
 if ($resource == null) return $modx->error->failure(sprintf($modx->lexicon('resource_with_id_not_found'), $_REQUEST['id']));
 
+if (!$resource->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('access_permission_denied'));
+}
+
+$lockedBy = $resource->addLock($modx->user->get('id'));
+if (!empty($lockedBy) && $lockedBy !== true) {
+    if ($user = $modx->getObject('modUser', $lockedBy)) {
+        $lockedBy = $user->get('username');
+    }
+    return $modx->error->failure($modx->lexicon('resource_locked_by', array('user' => $lockedBy, 'id' => $resource->get('id'))));
+}
+
 $resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : $resource->get('class_key');
 $resourceDir= strtolower(substr($resourceClass, 3));
 
 $delegateView= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
 if (file_exists($delegateView)) {
-    $overridden= include_once ($delegateView);
+    $overridden= include($delegateView);
     if ($overridden !== false) {
         return $overridden;
     }
 }
 
-
-if (!$resource->checkPolicy('save')) {
-    ?><br /><br /><div class="sectionHeader"><?php echo $modx->lexicon('access_permissions'); ?></div><div class="sectionBody">
-    <p><?php echo $modx->lexicon('access_permission_denied'); ?></p>
-    <?php
-    exit;
-}
-
-
 if (isset($_REQUEST['template'])) $resource->set('template',$_REQUEST['template']);
 
 
 /* invoke OnDocFormPrerender event */
-$onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array('id' => 0));
+$onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array('id' => $resource->get('id')));
 if (is_array($onDocFormPrerender)) {
     $onDocFormPrerender = implode('',$onDocFormPrerender);
 }

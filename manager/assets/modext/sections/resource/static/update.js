@@ -32,7 +32,7 @@ MODx.page.UpdateStatic = function(config) {
             ,edit_doc_metatags: config.edit_doc_metatags
             ,access_permissions: config.access_permissions
         }]
-    	,loadStay: true
+        ,loadStay: true
         ,buttons: [{
             process: 'update'
             ,javascript: config.which_editor != 'none' ? "cleanupRTE('"+config.which_editor+"');" : ';'
@@ -55,7 +55,8 @@ MODx.page.UpdateStatic = function(config) {
         },{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: { a: MODx.action['welcome'] }
+            ,handler: this.cancel
+            ,scope: this
         }]
     });
     MODx.page.UpdateStatic.superclass.constructor.call(this,config);
@@ -80,6 +81,38 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
                 },scope:this}
             }
         });
+    }
+
+    ,cancel: function(btn,e) {
+        var fp = Ext.getCmp(this.config.formpanel);
+        if (fp != 'undefined' && fp.isDirty()) {
+            MODx.msg.confirm({
+                text: _('resource_cancel_dirty_confirm')
+                ,url: MODx.config.connectors_url+'resource/locks.php'
+                ,params: {
+                    action: 'release'
+                    ,id: this.config.id
+                }
+                ,listeners: {
+                    success: {fn:function(r) {
+                        location.href = '?a='+MODx.action['welcome'];
+                    },scope:this}
+                }
+            });
+        } else {
+            MODx.Ajax.request({
+                url: MODx.config.connectors_url+'resource/locks.php'
+                ,params: {
+                    action: 'release'
+                    ,id: this.config.id
+                }
+                ,listeners: {
+                    success: {fn:function(r) {
+                        location.href = '?a='+MODx.action['welcome'];
+                    },scope:this}
+                }
+            });
+        }
     }
 });
 Ext.reg('modx-page-static-update',MODx.page.UpdateStatic);

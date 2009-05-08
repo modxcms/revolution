@@ -4,6 +4,14 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-535] Removed automatic setting of isfolder based on presence or absence of children.
+- [#MODX-499] Site start Resources now return base_url from modContext->makeUrl() if no scheme is specified (i.e. when expecting relative links).
+- Improved error reporting on modX->makeUrl() to show original $id value being passed in on failures.
+- modLinkTag no longer returns empty values on first pass of parser, allowing delays until the value returns a valid value.
+- Implemented modResource editor locking (added modResource methods: getLock(), addLock($user), removeLock($user)).
+- Implemented modResource locking features in all appropriate processors.
+- modResource->checkChildren() now uses modX->getCount() to determine if children exist.
+- Added steal_locks attribute to Context access policy.
 - [#MODX-728] Made sure config check dialog is hidden if no warnings are present
 - Package Installations will now skip license agreements / readme panels if none are specified
 - Made sure More Info in download panel can scroll

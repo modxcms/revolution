@@ -30,6 +30,12 @@ if ($modx->config['site_unavailable_page'] == $resource->get('id')) {
     return $modx->error->failure($modx->lexicon('resource_err_delete_siteunavailable'));
 }
 
+$locked = $resource->addLock();
+if ($locked !== true) {
+    $user = $modx->getObject('modUser', $locked);
+    if ($user) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+}
+
 $ar_children = array ();
 getChildren($resource, $modx, $ar_children);
 function getChildren($parent, & $modx, & $ar_children) {
@@ -70,10 +76,17 @@ $modx->invokeEvent('OnBeforeDocFormDelete', array (
 /* delete children */
 if (count($ar_children) > 0) {
     foreach ($ar_children as $child) {
+        $locked = $child->addLock();
+        if ($locked !== true) {
+            $user = $modx->getObject('modUser', $locked);
+            if ($user) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $child->get('id'), 'user' => $user->get('username'))));
+        }
         $child->set('deleted', 1);
         $child->set('deletedby', $modx->user->get('id'));
         $child->set('deletedon', $deltime);
         if ($child->save() == false) {
+            $child->removeLock();
+            $resource->removeLock();
             return $modx->error->failure($modx->lexicon('resource_err_delete_children'));
         }
     }
@@ -84,6 +97,7 @@ $resource->set('deleted', 1);
 $resource->set('deletedby', $modx->user->get('id'));
 $resource->set('deletedon', $deltime);
 if ($resource->save() == false) {
+    $resource->removeLock();
     return $modx->error->failure($modx->lexicon('resource_err_delete'));
 }
 
@@ -100,6 +114,8 @@ $modx->logManagerAction('delete_resource','modDocument',$resource->get('id'));
 /* empty cache */
 $cacheManager = $modx->getCacheManager();
 $cacheManager->clearCache();
+
+$resource->removeLock();
 
 return $modx->error->success('', $resource->get(array (
     'id',

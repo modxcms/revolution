@@ -22,6 +22,12 @@ if (!$resource->checkPolicy(array('save'=>true, 'unpublish'=>true))) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
 
+$locked = $resource->addLock();
+if ($locked !== true) {
+    $user = $modx->getObject('modUser', $locked);
+    if ($user) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+}
+
 /* update the resource */
 $resource->set('published',false);
 $resource->set('pub_date',false);
@@ -31,7 +37,8 @@ $resource->set('editedon',time(),'integer');
 $resource->set('publishedby',false);
 $resource->set('publishedon',false);
 if ($resource->save() == false) {
-	return $modx->error->failure($modx->lexicon('resource_err_unpublish'));
+    $resource->removeLock();
+    return $modx->error->failure($modx->lexicon('resource_err_unpublish'));
 }
 
 /* invoke OnDocUnpublished event */
@@ -43,5 +50,7 @@ $modx->logManagerAction('unpublish_resource','modResource',$resource->get('id'))
 /* empty the cache */
 $cacheManager= $modx->getCacheManager();
 $cacheManager->clearCache();
+
+$resource->removeLock();
 
 return $modx->error->success('',$resource->get(array('id')));

@@ -57,6 +57,13 @@ if (!$modx->hasPermission('save_document') || !$resource->checkPolicy('save')) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
 
+$locked = $resource->addLock();
+if ($locked !== true) {
+    $lockedBy = intval($locked);
+    $user = $modx->getObject('modUser', $lockedBy);
+    if ($lockedBy) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+}
+
 $resourceClass = isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : $resource->get('class_key');
 $resourceDir= strtolower(substr($resourceClass, 3));
 
@@ -235,8 +242,8 @@ if ($resource->get('id') == $modx->config['site_start'] && ($_POST['pub_date'] !
     return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart_dates'));
 }
 
-$count_children = $modx->getCount('modResource',array('parent' => $resource->get('id')));
-$_POST['isfolder'] = $count_children > 0;
+//$count_children = $modx->getCount('modResource',array('parent' => $resource->get('id')));
+//$_POST['isfolder'] = $count_children > 0;
 
 /* Keep original publish state, if change is not permitted */
 if (!$modx->hasPermission('publish_document')) {
@@ -389,6 +396,10 @@ if ($_POST['syncsite'] == 1) {
             'publishing' => true
         )
     );
+}
+
+if (!isset($_POST['modx-ab-stay']) || $_POST['modx-ab-stay'] !== 'stay') {
+    $resource->removeLock();
 }
 
 return $modx->error->success('', $resource->get(array('id')));

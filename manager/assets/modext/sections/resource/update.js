@@ -9,16 +9,16 @@
 MODx.page.UpdateResource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-    	url: MODx.config.connectors_url+'resource/index.php'
+        url: MODx.config.connectors_url+'resource/index.php'
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
-    	,actions: {
+        ,actions: {
             'new': MODx.action['resource/create']
             ,edit: MODx.action['resource/update']
             ,preview: MODx.action['resource/preview']
             ,cancel: MODx.action['welcome']
         }
-    	,loadStay: true
+        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-resource'
             ,renderTo: 'modx-panel-resource'
@@ -59,7 +59,8 @@ MODx.page.UpdateResource = function(config) {
         },'-',{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: { a: MODx.action['welcome'] }
+            ,handler: this.cancel
+            ,scope: this
         }]
     });
     MODx.page.UpdateResource.superclass.constructor.call(this,config);
@@ -84,6 +85,38 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 },scope:this}
             }
         });
+    }
+
+    ,cancel: function(btn,e) {
+        var fp = Ext.getCmp(this.config.formpanel);
+        if (fp != 'undefined' && fp.isDirty()) {
+            MODx.msg.confirm({
+                text: _('resource_cancel_dirty_confirm')
+                ,url: MODx.config.connectors_url+'resource/locks.php'
+                ,params: {
+                    action: 'release'
+                    ,id: this.config.id
+                }
+                ,listeners: {
+                    success: {fn:function(r) {
+                        location.href = '?a='+MODx.action['welcome'];
+                    },scope:this}
+                }
+            });
+        } else {
+            MODx.Ajax.request({
+                url: MODx.config.connectors_url+'resource/locks.php'
+                ,params: {
+                    action: 'release'
+                    ,id: this.config.id
+                }
+                ,listeners: {
+                    success: {fn:function(r) {
+                        location.href = '?a='+MODx.action['welcome'];
+                    },scope:this}
+                }
+            });
+        }
     }
 });
 Ext.reg('modx-page-resource-update',MODx.page.UpdateResource);

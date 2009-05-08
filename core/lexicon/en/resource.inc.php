@@ -69,6 +69,7 @@ $_lang['resource_hide_from_menus'] = 'Hide from Menus';
 $_lang['resource_hide_from_menus_help'] = 'When enabled the resource will <b>not</b> be available for use inside a web menu. Please note that some Menu Builders might choose to ignore this option.';
 $_lang['resource_link_attributes'] = 'Link Attributes';
 $_lang['resource_link_attributes_help'] = 'Attributes for the link for this resource, such as target= or rel=.';
+$_lang['resource_locked_by'] = 'The resource with id [[+id]] is currently locked by [[+user]]';
 $_lang['resource_longtitle'] = 'Long Title';
 $_lang['resource_longtitle_help'] = 'This is a longer title for your resource. It is handy for search engines, and might be more descriptive for the resource.';
 $_lang['resource_menuindex'] = 'Menu Index';

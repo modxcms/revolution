@@ -2,29 +2,21 @@
 /**
  *
  */
-if (!$modx->hasPermission('edit_document')) return $modx->error->failure($modx->lexicon('access_denied'));
-
-$resource = $modx->getObject('modSymLink',$_REQUEST['id']);
-if ($resource == null) return $modx->error->failure($modx->lexicon('resource_err_nf'));
-
-$resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : $resource->get('class_key');
-$resourceDir= strtolower(substr($resourceClass, 3));
-
-$delegateView= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
-if (file_exists($delegateView)) {
-    $overridden= include_once ($delegateView);
-    if ($overridden !== false) {
-        return true;
-    }
-}
-
-if (!$resource->checkPolicy('save')) {
-	?><br /><br /><div class="sectionHeader"><?php echo $modx->lexicon('access_permissions'); ?></div><div class="sectionBody">
-    <p><?php echo $modx->lexicon('access_permission_denied'); ?></p>
-    <?php
-	exit;
-}
-
+//if (!$modx->hasPermission('edit_document')) return $modx->error->failure($modx->lexicon('access_denied'));
+//
+//$resource = $modx->getObject('modSymLink',$_REQUEST['id']);
+//if ($resource == null) return $modx->error->failure($modx->lexicon('resource_err_nf'));
+//
+//$resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : $resource->get('class_key');
+//$resourceDir= strtolower(substr($resourceClass, 3));
+//
+//$delegateView= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
+//if (file_exists($delegateView)) {
+//    $overridden= include_once ($delegateView);
+//    if ($overridden !== false) {
+//        return true;
+//    }
+//}
 
 if (isset($_REQUEST['template'])) $resource->set('template',$_REQUEST['template']);
 
@@ -48,16 +40,10 @@ $modx->smarty->assign('parent',$resource->get('parent'));
 $modx->smarty->assign('parentname',$parentname);
 
 
-
-/* set permissions on the resource based on the permissions of the parent resource
- * TODO: get working in revo, move to get processor
- */
 $groupsarray = array ();
-if (!empty ($_REQUEST['parent'])) {
-    $dgds = $modx->getCollection('modResourceGroupResource',array('document' => $_REQUEST['parent']));
-    foreach ($dgds as $dgd) {
-        $groupsarray[$dgd->get('id')] = $dgd->get('document_group');
-    }
+$dgds = $modx->getCollection('modResourceGroupResource',array('document' => $resource->get('id')));
+foreach ($dgds as $dgd) {
+    $groupsarray[$dgd->get('id')] = $dgd->get('document_group');
 }
 $c = $modx->newQuery('modResourceGroup');
 $c->sortby('name','ASC');

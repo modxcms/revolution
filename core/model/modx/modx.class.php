@@ -694,7 +694,8 @@ class modX extends xPDO {
      */
     function makeUrl($id, $context= '', $args= '', $scheme= -1) {
         $url= '';
-        if ($id = intval($id)) {
+        if ($validid = intval($id)) {
+            $id = $validid;
             if ($context == '' || $this->context->get('key') == $context) {
                 $url= $this->context->makeUrl($id, $args, $scheme);
             }
@@ -715,11 +716,11 @@ class modX extends xPDO {
                 }
             }
 
-            if (!empty($url) && isset ($this->config['xhtml_urls']) && $this->config['xhtml_urls'] == 1) {
+            if (!empty($url) && $this->getOption('xhtml_urls', array(), '0')) {
                 $url= preg_replace("/&(?!amp;)/","&amp;", $url);
             }
         } else {
-            $this->log(MODX_LOG_LEVEL_ERROR, '`' . $id . '` is not numeric and may not be passed to makeUrl()');
+            $this->log(MODX_LOG_LEVEL_ERROR, '`' . $id . '` is not a valid integer and may not be passed to makeUrl()');
         }
         return $url;
     }
