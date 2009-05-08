@@ -23,4 +23,14 @@ if ($transport) {
     return $modx->error->failure($modx->lexicon('package_err_nf'));
 }
 
+if ($_REQUEST['attr'] == 'setup-options') {
+    ob_start();
+    $options = $package->toArray();
+    $options[XPDO_TRANSPORT_PACKAGE_ACTION] = empty($package->installed)
+        ? XPDO_TRANSPORT_ACTION_INSTALL
+        : XPDO_TRANSPORT_ACTION_UPGRADE;
+    $attr = include $modx->config['core_path'].'packages/'.$attr;
+    ob_end_clean();
+}
+
 return $modx->error->success('',array('attr' => $attr));

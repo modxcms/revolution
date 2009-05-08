@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Update 'setup-options' ability in transport packages to allow for script-based setup options that will properly handle upgrades to setup options default values 
+- Updated to r323 in xPDO: Revise xPDOTransport::writeManifest to make 'setup-options' be able to be an executable script to allow for dynamic form ability
 - Updated snoopy class to version 1.2.4 (used by magpierss).
 - [#MODX-535] Removed automatic setting of isfolder based on presence or absence of children.
 - [#MODX-499] Site start Resources now return base_url from modContext->makeUrl() if no scheme is specified (i.e. when expecting relative links).
