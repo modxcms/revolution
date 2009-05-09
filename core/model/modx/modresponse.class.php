@@ -47,7 +47,10 @@ class modResponse {
      */
     function outputContent($options = array()) {
         if (!($contentType = $this->modx->resource->getOne('ContentType'))) {
-            $this->modx->log(MODX_LOG_LEVEL_FATAL, "The requested resource has no valid content type specified.\nRESOURCE: " . print_r($this->modx->resource->toArray(), true));
+            if ($this->modx->getDebug() === true) {
+                $this->modx->log(MODX_LOG_LEVEL_DEBUG, "No valid content type for RESOURCE: " . print_r($this->modx->resource->toArray(), true));
+            }
+            $this->modx->log(MODX_LOG_LEVEL_FATAL, "The requested resource has no valid content type specified.");
         }
 
         if (!$contentType->get('binary')) {

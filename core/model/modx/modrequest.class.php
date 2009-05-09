@@ -121,9 +121,9 @@ class modRequest {
      */
     function getResourceMethod() {
         $method = '';
-        if (isset ($_REQUEST[$this->modx->config['request_param_alias']]))
+        if (isset ($_REQUEST[$this->modx->getOption('request_param_alias', null, 'q')]))
             $method = "alias";
-        elseif (isset ($_REQUEST[$this->modx->config['request_param_id']])) {
+        elseif (isset ($_REQUEST[$this->modx->getOption('request_param_id', null, 'id')])) {
             $method = "id";
         }
         return $method;
@@ -155,6 +155,11 @@ class modRequest {
             $resource = $this->modx->newObject($cachedResource['resourceClass']);
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
+                if (isset($cachedResource['contentType'])) {
+                    $contentType = $this->modx->newObject('modContentType');
+                    $contentType->fromArray($cachedResource['contentType'], '', true, true, true);
+                    $resource->addOne($contentType, 'ContentType');
+                }
                 if (isset($cachedResource['resourceGroups'])) {
                     $rGroups = array();
                     foreach ($cachedResource['resourceGroups'] as $rGroupKey => $rGroup) {

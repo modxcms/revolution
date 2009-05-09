@@ -4,6 +4,11 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- modCacheManager now Caches related modContentType data to prevent unnecessary database connection/query on fully cached pages.
+- Fixed problem with modStaticResource truncating the content to the size of the static file by setting the content length header on non-binary content types.
+- Fixed problem with modStaticResource non-binary content types rendering the path to the static file rather than the actual content of the file.
+- Calling modX->log(MODX_LOG_LEVEL_FATAL) or modX->messageQuit() now logs the error to file and then renders {MODX_CORE_PATH}errors/fatal.include.php.
+- Updated to r325 in xPDO: xPDO method changes to getOption() and _log().
 - Update 'setup-options' ability in transport packages to allow for script-based setup options that will properly handle upgrades to setup options default values 
 - Updated to r323 in xPDO: Revise xPDOTransport::writeManifest to make 'setup-options' be able to be an executable script to allow for dynamic form ability
 - Updated snoopy class to version 1.2.4 (used by magpierss).

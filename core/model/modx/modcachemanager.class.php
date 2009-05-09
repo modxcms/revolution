@@ -258,12 +258,15 @@ class modCacheManager extends xPDOCacheManager {
      */
     function generateResource(& $obj, $options = array()) {
         $results= array();
-        if ($this->getOption('cache_resource', $options)) {
+        if ($this->getOption('cache_resource', $options, true)) {
             if (is_object($obj) && is_a($obj, 'modResource') && $obj->_processed && $obj->get('cacheable') && $obj->get('id')) {
                 $results['resourceClass']= $obj->_class;
                 $results['resource']= $obj->toArray('', true);
                 $results['resource']['_content']= $obj->_content;
                 $results['resource']['_processed']= $obj->_processed;
+                if ($contentType = $obj->getOne('ContentType')) {
+                    $results['contentType']= $contentType->toArray('', true);
+                }
                 /* TODO: remove legacy docGroups and cache ABAC policies instead */
                 if ($docGroups= $obj->getMany('modResourceGroupResource')) {
                     $groups= array();

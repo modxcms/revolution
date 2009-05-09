@@ -84,19 +84,6 @@ class modStaticResource extends modResource {
         $filesize= filesize($file);
         if ($this->getOne('ContentType')) {
             $type= $this->ContentType->get('mime_type') ? $this->ContentType->get('mime_type') : 'text/html';
-            $header= 'Content-Type: ' . $type;
-            if (!$this->ContentType->get('binary')) {
-                $charset= isset ($this->xpdo->config['modx_charset']) ? $this->xpdo->config['modx_charset'] : 'UTF-8';
-                $header .= '; charset=' . $charset;
-            }
-            header($header);
-            if ($this->ContentType->get('binary')) {
-                header('Content-Transfer-Encoding: binary');
-            }
-            if ($filesize > 0) {
-                $header= 'Content-Length: ' . $filesize;
-                header($header);
-            }
             if ($this->ContentType->get('binary') || $filesize > $byte_limit) {
                 if ($alias= array_search($this->xpdo->resourceIdentifier, $this->xpdo->aliasMap)) {
                     $name= basename($alias);
@@ -116,6 +103,19 @@ class modStaticResource extends modResource {
                         $name .= ".{$ext}";
                     }
                 }
+                $header= 'Content-Type: ' . $type;
+                if (!$this->ContentType->get('binary')) {
+                    $charset= isset ($this->xpdo->config['modx_charset']) ? $this->xpdo->config['modx_charset'] : 'UTF-8';
+                    $header .= '; charset=' . $charset;
+                }
+                header($header);
+                if ($this->ContentType->get('binary')) {
+                    header('Content-Transfer-Encoding: binary');
+                }
+                if ($filesize > 0) {
+                    $header= 'Content-Length: ' . $filesize;
+                    header($header);
+                }
                 $header= 'Cache-Control: public';
                 header($header);
                 $header= 'Content-Disposition: ' . $this->get('content_dispo') ? 'inline' : 'attachment' . '; filename=' . $name;
@@ -131,11 +131,11 @@ class modStaticResource extends modResource {
                 readfile($file);
                 die();
             }
-            elseif ($handle= fopen($file, 'rb')) {
-                $content= fread($handle, $filesize);
-                fclose($handle);
-            } else {
-                $this->xpdo->log(MODX_LOG_LEVEL_ERROR, "Could not open file for reading: {$file}");
+            else {
+                $content = file_get_contents($file);
+            }
+            if (!is_string($content)) {
+                $this->xpdo->log(MODX_LOG_LEVEL_ERROR, "modStaticResource->getFileContent({$file}): Could not get content from file.");
             }
         }
         return $content;

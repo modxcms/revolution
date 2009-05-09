@@ -1353,13 +1353,7 @@ class modX extends xPDO {
      * Legacy fatal error message.
      */
     function messageQuit($msg='unspecified error', $query='', $is_error=true, $nr='', $file='', $source='', $text='', $line='') {
-        $version= '';
-        $code_name= '';
-        if ($v= $this->getVersionData()) {
-            $version= $v['version'] . '.' . $v['small_version'] . '.' . $v['patch_level'];
-            $code_name= isset($v['code_name'])? $v['code_name']: $code_name;
-        }
-        $this->log(MODX_LOG_LEVEL_FATAL, '<pre>msg: ' . $msg . "\n" . 'query: ' . $query . "\n" . 'nr: ' . $nr . "\n" . 'file: ' . $file . "\n" . 'source: ' . $source . "\n" . 'text: ' . $text . "\n" . 'msg: ' . $line . "</pre>\n");
+        $this->log(MODX_LOG_LEVEL_FATAL, 'msg: ' . $msg . "\n" . 'query: ' . $query . "\n" . 'nr: ' . $nr . "\n" . 'file: ' . $file . "\n" . 'source: ' . $source . "\n" . 'text: ' . $text . "\n" . 'line: ' . $line . "\n");
     }
 
 
@@ -2534,21 +2528,38 @@ class modX extends xPDO {
         if (empty($target)) {
             $target = $this->logTarget;
         }
+        $targetOptions = array();
+        if (is_array($target)) {
+            if (isset($target['options'])) $targetOptions = $target['options'];
+            $target = isset($target['target']) ? $target['target'] : 'ECHO';
+        }
         if (is_object($target) && is_a($target, 'modRegister')) {
             if ($level === XPDO_LOG_LEVEL_FATAL) {
                 if (empty ($file)) $file= (isset ($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : (isset ($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '');
                 $this->_logInRegister($target, $level, $msg, $def, $file, $line);
-                while (@ob_end_flush()) {}
-                if (!empty ($def)) $def= " in {$def}";
-                if (!empty ($file)) $file= " @ {$file}";
-                if (!empty ($line)) $line= " : {$line}";
-                exit ('[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''));
+                while (@ob_end_clean()) {}
+                @include(MODX_CORE_PATH . 'error/fatal.include.php');
+                header('HTTP/1.1 500 Internal Server Error');
+                echo "<html><title>Error 500: Internal Server Error</title><body><h1>Error 500</h1><p>A fatal application error has been encountered.</p></body></html>";
+                exit();
             }
             if ($this->_debug === true || $level <= $this->logLevel) {
                 if (empty ($file)) $file= (isset ($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : (isset ($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '');
                 $this->_logInRegister($target, $level, $msg, $def, $file, $line);
             }
         } else {
+            if ($level === XPDO_LOG_LEVEL_FATAL) {
+                while (@ob_end_clean()) {}
+                if ($target == 'FILE' && $cacheManager= $this->getCacheManager()) {
+                    $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
+                    $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . XPDO_LOG_DIR;
+                    $cacheManager->writeFile($filepath . $filename, '[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''), 'a');
+                }
+                @include(MODX_CORE_PATH . 'error/fatal.include.php');
+                header('HTTP/1.1 500 Internal Server Error');
+                echo "<html><title>Error 500: Internal Server Error</title><body><h1>Error 500</h1><p>A fatal application error has been encountered.</p></body></html>";
+                exit();
+            }
             parent :: _log($level, $msg, $target, $def, $file, $line);
         }
     }
@@ -2584,8 +2595,8 @@ class modX extends xPDO {
      * @access protected
      */
     function _postProcess() {
-        if (isset ($this->config['cache_resource']) && $this->config['cache_resource']) {
-            if ($this->cacheManager && $this->documentGenerated && is_a($this->resource, 'modResource') && $this->resource->get('cacheable')) {
+        if ($this->getOption('cache_resource', array(), true)) {
+            if (is_object($this->resource) && $this->resource->get('cacheable')) {
                 $this->invokeEvent('OnBeforeSaveWebPageCache');
                 $this->cacheManager->generateResource($this->resource);
             }

@@ -657,7 +657,7 @@ class modTag {
      * @return string The raw source content for the element.
     */
     function getContent($options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
+        if (!$this->isCacheable() || !is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
             } else {
@@ -804,11 +804,15 @@ class modFieldTag extends modTag {
      * Get the raw source content of the field.
      */
     function getContent($options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
-            if (isset($options['content'])) {
+        if (!$this->isCacheable() || !is_string($this->_content) || $this->_content === '') {
+            if (isset($options['content']) && !empty($options['content'])) {
                 $this->_content = $options['content'];
             } else {
-                $this->_content = $this->modx->resource->get($this->get('name'));
+                if ($this->get('name') == 'content') {
+                    $this->_content = $this->modx->resource->getContent($options);
+                } else {
+                    $this->_content = $this->modx->resource->get($this->get('name'));
+                }
             }
         }
         return $this->_content;
