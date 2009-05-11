@@ -4,12 +4,12 @@
     float: left;
     position: absolute;
     left: 1.3em;
-    top: .5em;
+    top: 44px;
     background: transparent url(../../images/restyle/i/home.png) no-repeat top left;
-    opacity: .50;
+    opacity: .5;
 }
 
-#modx-home-icon :hover {
+#modx-home-icon:hover {
     opacity: 1;
 }
 
@@ -24,7 +24,7 @@
     padding: 6px 0 0;
     margin-left: 4em;
     position: relative;
-    z-index: 500;
+    z-index: 55555800;
     width: 78%;
 }
 
@@ -113,6 +113,7 @@ li.top li.last span {
     display: block;
     float: none;
     width: 200px;
+    #margin-top: -5px;
 }
 
 li.top .zone {
@@ -126,7 +127,7 @@ li.top .zone {
     display: block;
     width: 100%;
     background: #333;
-    line-height: 30px;
+    line-height: 25px;
     float: none;
 }
 
