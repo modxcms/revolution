@@ -23,10 +23,10 @@ if ($resource == null) {
 if (!$resource->checkPolicy(array('save'=>1, 'delete'=>1)))
     return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if ($modx->config['site_start'] == $resource->get('id')) {
+if ($modx->getOption('site_start') == $resource->get('id')) {
     return $modx->error->failure($modx->lexicon('resource_err_delete_sitestart'));
 }
-if ($modx->config['site_unavailable_page'] == $resource->get('id')) {
+if ($modx->getOption('site_unavailable_page') == $resource->get('id')) {
     return $modx->error->failure($modx->lexicon('resource_err_delete_siteunavailable'));
 }
 
@@ -45,10 +45,10 @@ function getChildren($parent, & $modx, & $ar_children) {
     $parent->children = $parent->getMany('Children');
     if (count($parent->children) > 0) {
         foreach ($parent->children as $child) {
-            if ($child->get('id') == $modx->config['site_start']) {
+            if ($child->get('id') == $modx->getOption('site_start')) {
                 return $modx->error->failure($modx->lexicon('resource_err_delete_container_sitestart',array('id' => $child->get('id'))));
             }
-            if ($child->get('id') == $modx->config['site_unavailable_page']) {
+            if ($child->get('id') == $modx->getOption('site_unavailable_page')) {
                 return $modx->error->failure($modx->lexicon('document_err_delete_container_siteunavailable',array('id' => $child->get('id'))));
             }
 

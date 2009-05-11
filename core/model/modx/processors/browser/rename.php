@@ -17,7 +17,7 @@ if (!isset($_POST['file']) || $_POST['file'] == '')
 
 $d = isset($_POST['prependPath']) && $_POST['prependPath'] != null
     ? $_POST['prependPath']
-    : $modx->config['base_path'].$modx->config['rb_base_dir'];
+    : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
 $old_file = realpath($d.$_POST['file']);
 
 if (!is_readable($old_file) || !is_writable($old_file))

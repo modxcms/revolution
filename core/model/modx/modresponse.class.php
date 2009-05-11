@@ -60,7 +60,7 @@ class modResponse {
 
             /* collect any uncached element tags in the content and process them */
             $this->modx->getParser();
-            $maxIterations= isset ($this->modx->config['parser_max_iterations']) ? intval($this->modx->config['parser_max_iterations']) : 10;
+            $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
             $this->modx->parser->processElementTags('', $this->modx->resource->_output, true, false, '[[', ']]', array(), $maxIterations);
             $this->modx->parser->processElementTags('', $this->modx->resource->_output, true, true, '[[', ']]', array(), $maxIterations);
 
@@ -115,11 +115,11 @@ class modResponse {
         }
 
         /* send out content-type, content-disposition, and custom headers from the content type */
-        if (isset ($this->modx->config['set_header']) && $this->modx->config['set_header']) {
+        if ($this->modx->getOption('set_header')) {
             $type= $contentType->get('mime_type') ? $contentType->get('mime_type') : 'text/html';
             $header= 'Content-Type: ' . $type;
             if (!$contentType->get('binary')) {
-                $charset= isset ($this->modx->config['modx_charset']) ? $this->modx->config['modx_charset'] : 'UTF-8';
+                $charset= $this->modx->getOption('modx_charset',null,'UTF-8');
                 $header .= '; charset=' . $charset;
             }
             header($header);
@@ -222,7 +222,7 @@ class modResponse {
         }
         else {
             if (strpos($url, '://') === false && !(substr($url, 0, 1) === '/' || substr($url, 0, 2) === './' || substr($url, 0, 3) === '../')) {
-                $url= $this->modx->config['site_url'] . $url;
+                $url= $this->modx->getOption('site_url',null,'/') . $url;
             }
             $header= 'Location: ' . $url;
         }

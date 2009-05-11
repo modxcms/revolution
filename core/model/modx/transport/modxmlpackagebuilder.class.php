@@ -161,7 +161,7 @@ class modXMLPackageBuilder extends modPackageBuilder {
                     $resolver[$attrName] = $attrValue;
                 }
                 if (isset($resolver['prependbase']) && $resolver['prependbase'] == true) {
-                	$resolver['source'] = $this->modx->config['base_path'].$resolver['source'];
+                	$resolver['source'] = $this->modx->getOption('base_path').$resolver['source'];
                 }
                 $this->build['vehicles'][$this->openVehicle]['resolvers'][] = $resolver;
                 break;

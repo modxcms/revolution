@@ -39,12 +39,12 @@ if (isset ($_POST['import_base_path']) && !empty($_POST['import_base_path'])) {
 } else {
     if ($contextObj= $modx->getObject('modContext', $context)) {
         $contextObj->prepare();
-        if (isset ($contextObj->config['resource_static_path'])) {
-            $filepath= $contextObj->config['resource_static_path'];
-            $basefilepath= $contextObj->config['resource_static_path'];
-        } elseif (isset ($modx->config['resource_static_path'])) {
-            $filepath= $modx->config['resource_static_path'];
-            $basefilepath= $modx->config['resource_static_path'];
+        if (isset ($contextObj->getOption('resource_static_path'))) {
+            $filepath= $contextObj->getOption('resource_static_path');
+            $basefilepath= $contextObj->getOption('resource_static_path');
+        } elseif (isset ($modx->getOption('resource_static_path'))) {
+            $filepath= $modx->getOption('resource_static_path');
+            $basefilepath= $modx->getOption('resource_static_path');
         }
     }
 }

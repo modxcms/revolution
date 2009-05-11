@@ -56,11 +56,11 @@ if (is_array($onDocFormPrerender)) {
 $modx->smarty->assign('onDocFormPrerender',$onDocFormPrerender);
 
 /* handle default parent */
-$parentname = $modx->config['site_name'];
+$parentname = $modx->getOption('site_name');
 $resource->set('parent',0);
 if (isset ($_REQUEST['parent'])) {
 	if ($_REQUEST['parent'] == 0) {
-		$parentname = $modx->config['site_name'];
+		$parentname = $modx->getOption('site_name');
 	} else {
 		$parent = $modx->getObject('modResource',$_REQUEST['parent']);
 		if ($parent != null) {
@@ -104,9 +104,9 @@ $modx->smarty->assign('onDocFormRender',$onDocFormRender);
  *  Initialize RichText Editor
  */
 /* Set which RTE */
-$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $modx->config['which_editor'];
+$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $modx->getOption('which_editor');
 $modx->smarty->assign('which_editor',$rte);
-if ($modx->config['use_editor']) {
+if ($modx->getOption('use_editor')) {
     /* invoke OnRichTextEditorRegister event */
     $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
     $modx->smarty->assign('text_editors',$text_editors);
@@ -134,15 +134,15 @@ $edit_doc_metatags = $modx->hasPermission('edit_doc_metatags');
 $access_permissions = $modx->hasPermission('access_permissions');
 
 /* register JS scripts */
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/core/modx.view.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/util/datetime.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/core/modx.browser.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/system/modx.tree.directory.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/element/modx.panel.tv.renders.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/resource/modx.grid.resource.security.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/resource/modx.panel.resource.tv.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/resource/modx.panel.resource.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/sections/resource/create.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/core/modx.view.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.browser.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.tree.directory.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.security.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.tv.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/resource/create.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[
@@ -150,7 +150,7 @@ MODx.config.publish_document = "'.$publish_document.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-resource-create"
-        ,template: "'.($parent != null ? $parent->get('template') : $modx->config['default_template']).'"
+        ,template: "'.($parent != null ? $parent->get('template') : $modx->getOption('default_template')).'"
         ,content_type: "1"
         ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument').'"
         ,context_key: "'.(isset($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web').'"

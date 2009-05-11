@@ -29,7 +29,7 @@ $actions = $modx->request->getAllActionIDs();
 
 $root = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
     ? $_POST['prependPath']
-    : $modx->config['base_path'].$modx->config['rb_base_dir'];
+    : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
 $fullpath = $root.($dir != '' ? $dir : '');
 $odir = dir($fullpath);
 while(false !== ($name = $odir->read())) {

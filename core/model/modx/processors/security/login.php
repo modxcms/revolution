@@ -71,10 +71,10 @@ foreach ($us as $settingPK => $setting) {
     $sname= $setting->get('key');
     $$sname= $setting->get('value');
 }
-if ($up->get('failed_logins') >= $modx->config['failed_login_attempts'] && $up->get('blockeduntil') > time()) {
+if ($up->get('failed_logins') >= $modx->getOption('failed_login_attempts') && $up->get('blockeduntil') > time()) {
     return $modx->error->failure($modx->lexicon('login_blocked_too_many_attempts'));
 }
-if ($up->get('failedlogincount') >= $modx->config['failed_login_attempts'] && $up->get('blockeduntil') < time()) {
+if ($up->get('failedlogincount') >= $modx->getOption('failed_login_attempts') && $up->get('blockeduntil') < time()) {
     $up->set('failedlogincount', 0);
     $up->set('blockeduntil', time() - 1);
     $up->save();
@@ -127,7 +127,7 @@ if (!$rt || (is_array($rt) && !in_array(true, $rt))) {
 $user->addSessionContext($loginContext);
 
 if ($rememberme) {
-    $_SESSION['modx.' . $loginContext . '.session.cookie.lifetime']= intval($modx->config['session_cookie_lifetime']);
+    $_SESSION['modx.' . $loginContext . '.session.cookie.lifetime']= intval($modx->getOption('session_cookie_lifetime'));
 } else {
     $_SESSION['modx.' . $loginContext . '.session.cookie.lifetime']= 0;
 }
@@ -145,10 +145,10 @@ if ($loginContext == 'mgr') {
     $modx->invokeEvent("OnWebLogin", $postLoginAttributes);
 }
 
-$response = array('url' => $modx->config['site_url']);
+$response = array('url' => $modx->getOption('site_url'));
 switch ($loginContext) {
     case 'mgr':
-        $manager_login_startup_url = $modx->config['manager_url'];
+        $manager_login_startup_url = $modx->getOption('manager_url');
         if (!empty($manager_login_startup)) {
             $manager_login_startup= intval($manager_login_startup);
             if ($manager_login_startup) $manager_login_startup_url .= '?id=' . $manager_login_startup;
@@ -157,7 +157,7 @@ switch ($loginContext) {
         break;
     case 'web':
     default:
-        $login_startup_url = $modx->config['site_url'];
+        $login_startup_url = $modx->getOption('site_url');
         if (!empty($login_startup)) {
             $login_startup = intval($login_startup);
             if ($login_startup) $login_startup_url = $modx->makeUrl($login_startup, $loginContext, '', 'full');

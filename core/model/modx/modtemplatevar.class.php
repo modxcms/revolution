@@ -46,7 +46,7 @@ class modTemplateVar extends modElement {
                 $restore = $this->toPlaceholders($this->_properties);
 
                 /* collect element tags in the content and process them */
-                $maxIterations= isset ($this->xpdo->config['parser_max_iterations']) ? intval($this->xpdo->config['parser_max_iterations']) : 10;
+                $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
                 $this->xpdo->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
 
                 /* remove the placeholders set from the properties of this element and restore global values */
@@ -183,9 +183,9 @@ class modTemplateVar extends modElement {
         $format= $this->get('display');
         $tvtype= $this->get('type');
 
-        $outputRenderPath = MODX_PROCESSORS_PATH.'element/tv/renders/'.$this->xpdo->context->get('key').'/output/';
+        $outputRenderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/output/';
         if (!file_exists($outputRenderPath) || !is_dir($outputRenderPath)) {
-            $outputRenderPath = MODX_PROCESSORS_PATH.'element/tv/renders/web/output/';
+            $outputRenderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/web/output/';
         }
 
         $outputRenderFile = $outputRenderPath.$this->get('display').'.php';
@@ -209,7 +209,7 @@ class modTemplateVar extends modElement {
     function renderInput($resourceId= 0, $style= '') {
         if (!isset($this->smarty)) {
             $this->xpdo->getService('smarty', 'smarty.modSmarty', '', array(
-                'template_dir' => $this->xpdo->config['manager_path'] . 'templates/' . $this->xpdo->config['manager_theme'] . '/',
+                'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme',null,'default') . '/',
             ));
         }
         $field_html= '';
@@ -234,9 +234,9 @@ class modTemplateVar extends modElement {
         }
 
         /* find the correct renderer for the TV, if not one, render a textbox */
-        $inputRenderPath = MODX_PROCESSORS_PATH.'element/tv/renders/'.$this->xpdo->context->get('key').'/input/';
+        $inputRenderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/input/';
         if (!file_exists($inputRenderPath) || !is_dir($inputRenderPath)) {
-            $outputRenderPath = MODX_PROCESSORS_PATH.'element/tv/renders/web/input/';
+            $outputRenderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/web/input/';
         }
 
         $inputRenderFile = $inputRenderPath.$this->get('type').'.php';
@@ -380,7 +380,7 @@ class modTemplateVar extends modElement {
 
                 case 'DIRECTORY':
                     $files = array();
-                    $path = $this->xpdo->config['base_path'].$param;
+                    $path = $this->xpdo->getOption('base_path').$param;
                     if(substr($path,-1,1)!='/') { $path.='/'; }
                     if(!is_dir($path)) { die($path); break;}
                     $dir = dir($path);

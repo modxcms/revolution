@@ -39,7 +39,7 @@ foreach ($resource->keywords as $kw) {
 $keywords = join($keywords,',');
 $modx->smarty->assign('keywords',$keywords);
 
-$server_offset_time= intval($modx->config['server_offset_time']);
+$server_offset_time= intval($modx->getOption('server_offset_time',null,0));
 $resource->set('createdon_adjusted',strftime('%c', $resource->get('createdon') + $server_offset_time));
 $resource->set('editedon_adjusted',strftime('%c', $resource->get('editedon') + $server_offset_time));
 
@@ -53,8 +53,8 @@ if ($buffer = $modx->cacheManager->get($resource->getCacheKey())) {
 $modx->smarty->assign('resource',$resource);
 
 /* register JS scripts */
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/resource/modx.panel.resource.data.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/sections/resource/data.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.data.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/resource/data.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[
@@ -65,7 +65,7 @@ Ext.onReady(function() {
         ,context_key: "'.$resource->get('context_key').'"
         ,class_key: "'.$resource->get('class_key').'"
         ,pagetitle: "'.$resource->get('pagetitle').'"
-        ,show_preview: "'.($modx->config['show_preview'] ? 'true' : 'false').'"
+        ,show_preview: "'.($modx->getOption('show_preview') ? 'true' : 'false').'"
     });
 });
 // ]]>

@@ -14,8 +14,8 @@ if ($policy == null) {
 $modx->smarty->assign('policy',$policy);
 
 /* register JS scripts */
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/security/modx.panel.access.policy.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/sections/security/access/policy/update.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.panel.access.policy.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/security/access/policy/update.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[

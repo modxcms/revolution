@@ -6,9 +6,9 @@
  * @subpackage processors.system.country
  */
 $_country_lang = array();
-include_once $modx->config['core_path'].'lexicon/country/en.inc.php';
-if ($modx->config['manager_language'] != 'en' && file_exists($modx->config['core_path'].'lexicon/country/'.$modx->config['manager_language'].'.inc.php')) {
-    include_once $modx->config['core_path'].'lexicon/country/'.$modx->config['manager_language'].'.inc.php';
+include $modx->getOption('core_path').'lexicon/country/en.inc.php';
+if ($modx->getOption('manager_language') != 'en' && file_exists($modx->getOption('core_path').'lexicon/country/'.$modx->getOption('manager_language').'.inc.php')) {
+    include_once $modx->getOption('core_path').'lexicon/country/'.$modx->getOption('manager_language').'.inc.php';
 }
 
 $countries = array();

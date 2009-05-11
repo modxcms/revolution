@@ -46,11 +46,13 @@ class modManagerRequest extends modRequest {
      * @return boolean True if successful.
      */
     function initialize() {
-        define('MODX_INCLUDES_PATH',$this->modx->config['manager_path'].'includes/');
+        if (!defined('MODX_INCLUDES_PATH')) {
+            define('MODX_INCLUDES_PATH',$this->modx->getOption('manager_path').'includes/');
+        }
 
         /* load smarty template engine */
         $this->modx->getService('smarty', 'smarty.modSmarty', '', array(
-            'template_dir' => $this->modx->config['manager_path'] . 'templates/' . $this->modx->config['manager_theme'] . '/',
+            'template_dir' => $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme',null,'default') . '/',
         ));
         /* load context-specific cache dir */
         $this->modx->smarty->setCachePath($this->modx->context->get('key').'/smarty/');
@@ -65,7 +67,7 @@ class modManagerRequest extends modRequest {
         header('Cache-Control: post-check=0, pre-check=0', false);
         header('Pragma: no-cache');
         /* send the charset header */
-        header('Content-Type: text/html; charset='.$this->modx->config['modx_charset']);
+        header('Content-Type: text/html; charset='.$this->modx->getOption('modx_charset'));
 
         /*
          * TODO: implement destroy active sessions if installing
@@ -78,7 +80,7 @@ class modManagerRequest extends modRequest {
         /* if not validated, load login page */
         $modx = & $this->modx;
         if (!isset($this->modx->user) || !$this->modx->user->isAuthenticated('mgr')) {
-            include_once $this->modx->config['manager_path'] . 'controllers/security/login.php';
+            include_once $this->modx->getOption('manager_path') . 'controllers/security/login.php';
             exit();
         } else {
             /* log user action */
@@ -96,7 +98,7 @@ class modManagerRequest extends modRequest {
                 }
             }
             $_SESSION['ip']= $ip;
-            $itemid= isset ($_REQUEST[$this->modx->config['request_param_id']]) ? $_REQUEST[$this->modx->config['request_param_id']] : 0;
+            $itemid= isset ($_REQUEST[$this->modx->getOption('request_param_id')]) ? $_REQUEST[$this->modx->getOption('request_param_id')] : 0;
             $lasthittime= time();
             $a= isset ($_REQUEST['a']) ? $_REQUEST['a'] : '';
             if ($a != 1) {
@@ -109,8 +111,8 @@ class modManagerRequest extends modRequest {
             }
         }
 
-        if (isset($this->modx->config['manager_language'])) {
-            $this->modx->cultureKey= $this->modx->config['manager_language'];
+        if (!empty($this->modx->getOption('manager_language'))) {
+            $this->modx->cultureKey= $this->modx->getOption('manager_language');
         }
 
         /* load default core cache file of lexicon strings */

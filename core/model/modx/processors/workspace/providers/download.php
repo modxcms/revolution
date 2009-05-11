@@ -16,7 +16,7 @@ if (!isset($_POST['provider'])) return $modx->error->failure($modx->lexicon('pro
 $provider = $modx->getObject('transport.modTransportProvider',$_POST['provider']);
 if ($provider == null) return $modx->error->failure($modx->lexicon('provider_err_nf'));
 
-$_package_cache = $modx->config['core_path'].'packages/';
+$_package_cache = $modx->getOption('core_path').'packages/';
 $pkgs = $modx->fromJSON($_POST['packages']);
 
 $packages = array();

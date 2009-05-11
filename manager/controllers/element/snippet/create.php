@@ -27,12 +27,12 @@ $modx->smarty->assign('onSnipFormRender',$onSnipFormRender);
 $unlock_element_properties = $modx->hasPermission('unlock_element_properties') ? 1 : 0;
 
 /* register JS scripts */
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/core/modx.grid.local.property.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/element/modx.grid.element.properties.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/element/modx.panel.element.properties.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/element/modx.panel.snippet.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/sections/element/snippet/common.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/sections/element/snippet/create.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.grid.local.property.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.grid.element.properties.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.element.properties.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.snippet.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/snippet/common.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/snippet/create.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[

@@ -18,7 +18,7 @@ if (!isset($_POST['file']) || $_POST['file'] == '')
 
 $d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
     ? $_POST['prependPath']
-    : $modx->config['base_path'].$modx->config['rb_base_dir'];
+    : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
 $file = $d.$_POST['file'];
 
 /* in case rootVisible is true */

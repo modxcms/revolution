@@ -5,5 +5,5 @@
  */
 
 // handles image fields using htmlarea image manager
-$modx->smarty->assign('base_url',$this->xpdo->config['base_url']);
+$modx->smarty->assign('base_url',$this->xpdo->getOption('base_url'));
 return $modx->smarty->fetch('element/tv/renders/properties/default.tpl');

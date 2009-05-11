@@ -18,7 +18,7 @@ class modUserGroup extends xPDOSimpleObject {
 	 * @return array An array of users.
 	 */
 	function getUsersIn() {
-		$ugms = $this->xpdo->getCollection('modUserGroupMember',array('user_group' => $this->id));
+		$ugms = $this->xpdo->getCollection('modUserGroupMember',array('user_group' => $this->get('id')));
 
 		$users = array();
 		foreach ($ugms as $ugm) {
@@ -36,7 +36,7 @@ class modUserGroup extends xPDOSimpleObject {
 	 */
   	function getDocumentsIn() {
 		$ugdgs = $this->xpdo->getCollection('modAccessResourceGroup',array(
-            'principal' => $this->id,
+            'principal' => $this->get('id'),
             'principal_class' => 'modUserGroup'
         ));
 		$dgs = array();
@@ -48,4 +48,3 @@ class modUserGroup extends xPDOSimpleObject {
 		return $dgs;
 	}
 }
-?>

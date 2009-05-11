@@ -35,7 +35,7 @@ $setting->fromArray($_POST,'',true);
 /* set lexicon name/description */
 $topic = $modx->getObject('modLexiconTopic',array(
     'name' => 'default',
-    'namespace' => $setting->namespace,
+    'namespace' => $setting->get('namespace'),
 ));
 if ($topic == null) {
     $topic = $modx->newObject('modLexiconTopic');

@@ -29,7 +29,7 @@ if ($builder->build($_FILE['tmp_name']) === false) {
 	return $modx->error->failure($modx->lexicon('package_build_err'));
 }
 
-$filename = $modx->config['core_path'].'packages/'.$builder->getSignature().'.transport.zip';
+$filename = $modx->getOption('core_path').'packages/'.$builder->getSignature().'.transport.zip';
 
 $modx->log(MODX_LOG_LEVEL_WARN,$modx->lexicon('package_built').' - '.$filename);
 return $modx->error->success($modx->lexicon('package_built').' - '.$filename);

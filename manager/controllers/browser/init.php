@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage manager.browser
  */
-@include(dirname(dirname(dirname(__FILE__))) . '/config.core.php');
+@include dirname(dirname(dirname(__FILE__))) . '/config.core.php';
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(dirname(dirname(__FILE__)))) . '/core/');
 if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
 
@@ -23,7 +23,7 @@ $modx->initialize(isset ($_POST['login_context']) ? $_POST['login_context'] : 'm
 /* handle the request */
 $modx->getRequest();
 
-$modx->getService('smarty', 'smarty.modSmarty', '', array ('template_dir' => $modx->config['manager_path'] . 'templates/' . $modx->config['manager_theme']));
+$modx->getService('smarty', 'smarty.modSmarty', '', array ('template_dir' => $modx->getOption('manager_path') . 'templates/' . $modx->config['manager_theme']));
 $modx->smarty->assign('_config',$modx->config);
 $modx->smarty->assign('_lang',$modx->lexicon->fetch());
 $modx->smarty->assign_by_ref('modx',$modx);

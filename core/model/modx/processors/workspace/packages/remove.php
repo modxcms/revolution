@@ -34,7 +34,7 @@ $cacheManager= $modx->getCacheManager();
 $cacheManager->clearCache();
 
 /* remove transport zip */
-$f = $modx->config['core_path'].'packages/'.$package->signature.'.transport.zip';
+$f = $modx->getOption('core_path').'packages/'.$package->signature.'.transport.zip';
 if (!file_exists($f)) {
     $modx->log(XPDO_LOG_LEVEL_ERROR,$modx->lexicon('package_remove_err_tzip_nf'));
 } else if (!@unlink($f)) {
@@ -45,7 +45,7 @@ if (!file_exists($f)) {
 $modx->log(XPDO_LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tdir_start'));
 
 /* remove transport dir */
-$f = $modx->config['core_path'].'packages/'.$package->signature.'/';
+$f = $modx->getOption('core_path').'packages/'.$package->signature.'/';
 if (!file_exists($f)) {
     $modx->log(XPDO_LOG_LEVEL_ERROR,$modx->lexicon('package_remove_err_tdir_nf'));
 } else if (!$cacheManager->deleteTree($f,true,false,array())) {

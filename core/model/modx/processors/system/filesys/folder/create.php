@@ -16,7 +16,7 @@ if (!is_dir($_POST['path']))
 	return $modx->error->failure($modx->lexicon('file_folder_err_invalid_path'));
 
 // setup vars
-$amode = isset($modx->config['new_folder_permissions']) ? octdec($modx->config['new_folder_permissions']) : 0777;
+$amode = !empty($modx->getOption('new_folder_permissions')) ? octdec($modx->getOption('new_folder_permissions')) : 0777;
 $new_folder = $_POST['path'].'/'.$_POST['name'];
 
 if (file_exists($new_folder))

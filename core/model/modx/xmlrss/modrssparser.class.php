@@ -24,7 +24,7 @@ class modRSSParser {
     function __construct(&$modx) {
         $this->modx =& $modx;
         if (!defined('MAGPIE_CACHE_DIR')) {
-            define('MAGPIE_CACHE_DIR',$this->modx->config['core_path'].'cache/rss/');
+            define('MAGPIE_CACHE_DIR',$this->modx->getOption('core_path').'cache/rss/');
         }
         if (!defined('MAGPIE_USER_AGENT')) {
             $this->modx->getVersionData();

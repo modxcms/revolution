@@ -69,11 +69,11 @@ class modSmarty extends Smarty {
         $this->modx= & $modx;
 
 		/* set up configuration variables for Smarty. */
-        $this->template_dir = $modx->config['manager_path'] . 'templates/';
+        $this->template_dir = $modx->getOption('manager_path') . 'templates/';
         $this->compile_dir  = $modx->cachePath . 'smarty/';
-        $this->config_dir   = $modx->config['core_path'] . 'model/smarty/configs';
+        $this->config_dir   = $modx->getOption('core_path') . 'model/smarty/configs';
         $this->plugins_dir  = array(
-            $this->modx->config['core_path'] . 'model/smarty/plugins',
+            $this->modx->getOption('core_path') . 'model/smarty/plugins',
         );
         $this->caching = false;
 

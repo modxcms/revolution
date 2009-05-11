@@ -19,7 +19,7 @@ if ($_POST['newusername'] == '')
 
 $newPassword= '';
 
-$s = include_once $modx->config['processors_path'].'security/user/_validation.php';
+$s = include_once $modx->getOption('processors_path').'security/user/_validation.php';
 
 if ($_POST['passwordnotifymethod'] == 'e') {
 	sendMailMessage($_POST['email'], $_POST['newusername'],$newPassword,$_POST['fullname']);
@@ -92,24 +92,24 @@ function convertDate($date) {
 function sendMailMessage($email, $uid, $pwd, $ufn) {
 	global $modx;
 
-	$message = $modx->config['signupemail_message'];
+	$message = $modx->getOption('signupemail_message');
 	/* replace placeholders */
 	$message = str_replace("[[+uid]]", $uid, $message);
 	$message = str_replace("[[+pwd]]", $pwd, $message);
 	$message = str_replace("[[+ufn]]", $ufn, $message);
-	$message = str_replace("[[+sname]]",$modx->config['site_name'], $message);
-	$message = str_replace("[[+saddr]]", $modx->config['emailsender'], $message);
-	$message = str_replace("[[+semail]]", $modx->config['emailsender'], $message);
-	$message = str_replace("[[+surl]]", $modx->config['url_scheme'] . $modx->config['http_host'] . $modx->config['manager_url'], $message);
+	$message = str_replace("[[+sname]]",$modx->getOption('site_name'), $message);
+	$message = str_replace("[[+saddr]]", $modx->getOption('emailsender'), $message);
+	$message = str_replace("[[+semail]]", $modx->getOption('emailsender'), $message);
+	$message = str_replace("[[+surl]]", $modx->getOption('url_scheme') . $modx->getOption('http_host') . $modx->getOption('manager_url'), $message);
 
     $modx->getService('mail', 'mail.modPHPMailer');
     $modx->mail->set(MODX_MAIL_BODY, $message);
-    $modx->mail->set(MODX_MAIL_FROM, $modx->config['emailsender']);
-    $modx->mail->set(MODX_MAIL_FROM_NAME, $modx->config['site_name']);
-    $modx->mail->set(MODX_MAIL_SENDER, $modx->config['emailsender']);
-    $modx->mail->set(MODX_MAIL_SUBJECT, $modx->config['emailsubject']);
+    $modx->mail->set(MODX_MAIL_FROM, $modx->getOption('emailsender'));
+    $modx->mail->set(MODX_MAIL_FROM_NAME, $modx->getOption('site_name'));
+    $modx->mail->set(MODX_MAIL_SENDER, $modx->getOption('emailsender'));
+    $modx->mail->set(MODX_MAIL_SUBJECT, $modx->getOption('emailsubject'));
     $modx->mail->address('to', $email, $ufn);
-    $modx->mail->address('reply-to', $modx->config['emailsender']);
+    $modx->mail->address('reply-to', $modx->getOption('emailsender'));
     if (!$modx->mail->send()) {
         return $modx->error->failure($modx->lexicon('error_sending_email_to').$email);
         exit;

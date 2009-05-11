@@ -73,10 +73,10 @@ class modManagerResponse extends modResponse {
                 }
 
                 /* reset path to core modx path for header/footer */
-                $this->modx->smarty->setTemplatePath($modx->config['manager_path'] . 'templates/' . $this->modx->config['manager_theme'] . '/');
+                $this->modx->smarty->setTemplatePath($modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme',null,'default') . '/');
 
                 if ($act['haslayout']) {
-                    $this->body .= include $this->modx->config['manager_path'] . 'controllers/header.php';
+                    $this->body .= include $this->modx->getOption('manager_path') . 'controllers/header.php';
                 }
                 /* assign later to allow for css/js registering */
                 if (is_array($cbody)) {
@@ -86,13 +86,13 @@ class modManagerResponse extends modResponse {
                 $this->body .= $cbody;
 
                 if ($act['haslayout']) {
-                    $this->body .= include_once $this->modx->config['manager_path'].'controllers/footer.php';
+                    $this->body .= include_once $this->modx->getOption('manager_path').'controllers/footer.php';
                 }
             } else {
                 $this->body = $this->modx->error->failure('No action with ID '.$action.' found.');
             }
         } else {
-            $logoutLink = '[ <a href="' . MODX_CONNECTORS_URL . 'security/logout.php" title="' . $this->modx->lexicon('logout') . '">' . $this->modx->lexicon('logout') . '</a> ]';
+            $logoutLink = '[ <a href="' . $modx->getOption('connectors_url') . 'security/logout.php" title="' . $this->modx->lexicon('logout') . '">' . $this->modx->lexicon('logout') . '</a> ]';
             $this->body = $this->modx->error->failure($this->modx->lexicon('permission_denied') . " <small>{$logoutLink}</small>");
         }
         if (empty($this->body)) {

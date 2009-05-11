@@ -14,7 +14,7 @@ $location = $_POST['location'];
 $signature = str_replace('.transport.zip','',$location);
 $signature = substr($signature,strlen(strrev($signature)) - strpos(strrev($signature),'/'));
 
-$_package_cache = $modx->config['core_path'].'packages/';
+$_package_cache = $modx->getOption('core_path').'packages/';
 
 /* create transport package object */
 $package = $modx->newObject('transport.modTransportPackage');

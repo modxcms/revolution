@@ -12,8 +12,8 @@ $modx->smarty->assign('user',$modx->user);
 
 
 /* register JS scripts */
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/security/modx.grid.user.recent.resource.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/sections/security/profile/update.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.recent.resource.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/security/profile/update.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[

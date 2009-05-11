@@ -25,9 +25,9 @@ $modx->smarty->assign('blockedmode',0);
 
 /* include the country list language file */
 $_country_lang = array();
-include_once $modx->config['core_path'].'lexicon/country/en.inc.php';
-if ($modx->config['manager_language'] != 'en' && file_exists($modx->config['core_path'].'lexicon/country/'.$modx->config['manager_language'].'.inc.php')) {
-    include_once $modx->config['core_path'].'lexicon/country/'.$modx->config['manager_language'].'.inc.php';
+include_once $modx->getOption('core_path').'lexicon/country/en.inc.php';
+if ($modx->getOption('manager_language') != 'en' && file_exists($modx->getOption('core_path').'lexicon/country/'.$modx->getOption('manager_language').'.inc.php')) {
+    include_once $modx->getOption('core_path').'lexicon/country/'.$modx->getOption('manager_language').'.inc.php';
 }
 $modx->smarty->assign('_country_lang',$_country_lang);
 
@@ -56,8 +56,8 @@ $modx->smarty->assign('groupsarray',$groupsarray);
 $modx->smarty->assign('user',$user);
 
 /* register JS scripts */
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/security/modx.grid.user.group.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/security/modx.panel.user.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/sections/security/user/create.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.group.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.panel.user.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/security/user/create.js');
 
 return $modx->smarty->fetch('security/user/create.tpl');

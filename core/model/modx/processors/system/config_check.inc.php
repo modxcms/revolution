@@ -7,14 +7,14 @@
  */
 $warnings = array();
 
-if (is_writable($modx->config['core_path'].'config/'.MODX_CONFIG_KEY.'.inc.php')) {
+if (is_writable($modx->getOption('core_path').'config/'.MODX_CONFIG_KEY.'.inc.php')) {
     /* Warn if world writable */
-    if (@ fileperms($modx->config['core_path'].'config/'.MODX_CONFIG_KEY.'.inc.php') & 0x0002) {
+    if (@ fileperms($modx->getOption('core_path').'config/'.MODX_CONFIG_KEY.'.inc.php') & 0x0002) {
         $warnings[] = array($modx->lexicon('configcheck_configinc'));
     }
 }
 
-if (is_dir($modx->config['base_path'].'setup/')) {
+if (is_dir($modx->getOption('base_path').'setup/')) {
     $warnings[] = array($modx->lexicon('configcheck_installer'));
 }
 
@@ -31,14 +31,14 @@ if (@ ini_get('register_globals') == true) {
     );
 }
 
-$unapage = $modx->getObject('modResource',$modx->config['unauthorized_page']);
+$unapage = $modx->getObject('modResource',$modx->getOption('unauthorized_page'));
 if ($unapage == null || $unapage->get('published') == 0) {
     $warnings[] = array (
         $modx->lexicon('configcheck_unauthorizedpage_unpublished')
     );
 }
 
-$errpage = $modx->getObject('modResource',$modx->config['error_page']);
+$errpage = $modx->getObject('modResource',$modx->getOption('error_page'));
 if ($errpage == null || $errpage->get('published') == 0) {
     $warnings[] = array (
         $modx->lexicon('configcheck_errorpage_unpublished')

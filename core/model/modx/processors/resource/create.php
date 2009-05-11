@@ -59,10 +59,6 @@ $delegateProcessor= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FI
 if (file_exists($delegateProcessor)) {
     $overridden= include ($delegateProcessor);
     return $overridden;
-    /* need another way to handle this, since now handled with return statements
-    if ($overridden !== false) {
-        return $modx->error->failure('Warning! Delegate processor did not provide appropriate response.');
-    }*/
 }
 
 $resource = $modx->newObject($resourceClass);
@@ -91,9 +87,9 @@ if ($_POST['pagetitle'] == '') $_POST['pagetitle'] = $modx->lexicon('resource_un
 $_POST['context_key']= !isset($_POST['context_key']) || $_POST['context_key'] == '' ? 'web' : $_POST['context_key'];
 
 /* friendly url alias checks */
-if ($modx->config['friendly_alias_urls']) {
+if ($modx->getOption('friendly_alias_urls')) {
     /* auto assign alias */
-    if ($_POST['alias'] == '' && $modx->config['automatic_alias']) {
+    if ($_POST['alias'] == '' && $modx->getOption('automatic_alias')) {
         $_POST['alias'] = strtolower(trim($resource->cleanAlias($_POST['pagetitle'])));
     } else {
         $_POST['alias'] = $resource->cleanAlias($_POST['alias']);
@@ -104,7 +100,7 @@ if ($modx->config['friendly_alias_urls']) {
     $fullAlias= $_POST['alias'];
     $isHtml= true;
     $extension= '';
-    $containerSuffix= isset ($modx->config['container_suffix']) ? $modx->config['container_suffix'] : '';
+    $containerSuffix= $modx->getOption('container_suffix',null,'');
     if (isset ($_POST['content_type']) && $contentType= $modx->getObject('modContentType', $_POST['content_type'])) {
         $extension= $contentType->getExtension();
         $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
@@ -113,7 +109,7 @@ if ($modx->config['friendly_alias_urls']) {
         $extension= $containerSuffix;
     }
     $aliasPath= '';
-    if ($modx->config['use_alias_path']) {
+    if ($modx->getOption('use_alias_path')) {
         $pathParentId= intval($_POST['parent']);
         $parentResources= array ();
         $currResource= $modx->getObject('modResource', $pathParentId);
@@ -234,7 +230,7 @@ if (!$resource->get('class_key')) {
 }
 
 /* increase menu index if this is a new resource */
-if (!isset($modx->config['auto_menuindex']) || $modx->config['auto_menuindex']) {
+if (!empty($modx->getOption('auto_menuindex'))) {
     $menuindex = $modx->getCount('modResource',array('parent' => $resource->get('parent')));
 }
 $resource->set('menuindex',isset($menuindex) ? $menuindex : 0);
@@ -342,7 +338,7 @@ if ($_POST['syncsite'] == 1) {
 }
 
 /* quick check to make sure it's not site_start, if so, publish */
-if ($resource->get('id') == $modx->config['site_start']) {
+if ($resource->get('id') == $modx->getOption('site_start')) {
 	$resource->set('published',true);
     $resource->save();
 }

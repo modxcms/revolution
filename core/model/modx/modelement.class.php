@@ -85,7 +85,7 @@ class modElement extends modAccessibleSimpleObject {
 
     /**
      * Constructs a valid tag representation of the element.
-     * 
+     *
      * @return string A tag representation of the element.
      */
     function getTag() {
@@ -189,9 +189,7 @@ class modElement extends modAccessibleSimpleObject {
         $filter= null;
         if (!isset ($this->_filters['output']) || is_a($this->_filters['output'], 'modOutputFilter')) {
             if (!$outputFilterClass= $this->get('output_filter')) {
-                if (!isset($this->xpdo->config['output_filter']) || !$outputFilterClass= $this->xpdo->config['output_filter']) {
-                    $outputFilterClass= 'filters.modOutputFilter';
-                }
+                $outputFilterClass = $this->xpdo->getOption('output_filter',null,'filters.modOutputFilter');
             }
             if ($filterClass= $this->xpdo->loadClass($outputFilterClass, '', false, true)) {
                 if ($filter= new $filterClass($this->xpdo)) {
@@ -243,7 +241,7 @@ class modElement extends modAccessibleSimpleObject {
 
     /**
      * Gets the raw, unprocessed source content for this element.
-     * 
+     *
      * @param array $options An array of options implementations can use to
      * accept language, revision identifiers, or other information to alter the
      * behavior of the method.
@@ -259,10 +257,10 @@ class modElement extends modAccessibleSimpleObject {
         }
         return $this->_content;
     }
-    
+
     /**
      * Set the raw source content for this element.
-     * 
+     *
      * @param mixed $content The source content; implementations can decide if
      * it can only be a string, or some other source from which to retrieve it.
      * @param array $options An array of options implementations can use to
@@ -273,10 +271,10 @@ class modElement extends modAccessibleSimpleObject {
     function setContent($content, $options = array()) {
         return $this->set('content', $content);
     }
-    
+
     /**
      * Get the properties for this element instance for processing.
-     * 
+     *
      * @param array|string $properties An array or string of properties to
      * apply.
      * @return array A simple array of properties ready to use for processing.
@@ -296,18 +294,18 @@ class modElement extends modAccessibleSimpleObject {
 
     /**
      * Gets a named property set related to this element instance.
-     * 
+     *
      * If a setName parameter is not provided, this function will attempt to
      * extract a setName from the element name using the @ symbol to delimit the
      * name of the property set.
-     * 
+     *
      * Here is an example of an element tag using the @ modifier to specify a
      * property set name:
      *  [[ElementName@PropertySetName:FilterCommand=`FilterModifier`?
      *      &PropertyKey1=`PropertyValue1`
      *      &PropertyKey2=`PropertyValue2`
      *  ]]
-     * 
+     *
      * @param string|null $setName An explicit property set name to search for.
      * @return array|null An array of properties or null if no set is found.
      */
@@ -342,7 +340,7 @@ class modElement extends modAccessibleSimpleObject {
 
     /**
      * Set default properties for this element instance.
-     * 
+     *
      * @param array|string $properties A property array or property string.
      * @param boolean $merge Indicates if properties should be merged with
      * existing ones.
@@ -377,7 +375,7 @@ class modElement extends modAccessibleSimpleObject {
                         'name' => $propKey,
                         'desc' => '',
                         'type' => 'textfield',
-                        'options' => array(), 
+                        'options' => array(),
                         'value' => $property
                     );
                 }
@@ -395,7 +393,7 @@ class modElement extends modAccessibleSimpleObject {
 
     /**
      * Add a property set to this element, making it available for use.
-     * 
+     *
      * @param string|modPropertySet $propertySet A modPropertySet object or the
      * name of a modPropertySet object to create a relationship with.
      * @return boolean True if a relationship was created or already exists.
@@ -424,7 +422,7 @@ class modElement extends modAccessibleSimpleObject {
 
     /**
      * Remove a property set from this element, making it unavailable for use.
-     * 
+     *
      * @param string|modPropertySet $propertySet A modPropertySet object or the
      * name of a modPropertySet object to dissociate from.
      * @return boolean True if a relationship was destroyed.
@@ -444,17 +442,17 @@ class modElement extends modAccessibleSimpleObject {
 
     /**
      * Indicates if the element is cacheable.
-     * 
+     *
      * @return boolean True if the element can be stored to or retrieved from
      * the element cache.
      */
     function isCacheable() {
         return $this->_cacheable;
     }
-    
+
     /**
      * Sets the runtime cacheability of the element.
-     * 
+     *
      * @param boolean $cacheable Indicates the value to set for cacheability of
      * this element.
      */
@@ -464,7 +462,7 @@ class modElement extends modAccessibleSimpleObject {
 
     /**
      * Turns associative arrays into placeholders in the scope of this element.
-     * 
+     *
      * @param array $placeholders An associative array of placeholders to set.
      * @return array An array of placeholders overwritten from the containing
      * scope you can use to restore values from, or an empty array if no

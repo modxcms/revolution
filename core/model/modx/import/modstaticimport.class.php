@@ -68,10 +68,10 @@ class modStaticImport extends modImport {
 
                 $resource->set('alias', $alias);
                 $resource->set('published', false);
-                $resource->set('template', $this->modx->config['default_template']);
+                $resource->set('template', $this->modx->getOption('default_template'));
                 $resource->set('menuindex', $menuindex++);
-                $resource->set('searchable', $this->modx->config['search_default']);
-                $resource->set('cacheable', $this->modx->config['cache_default']);
+                $resource->set('searchable', $this->modx->getOption('search_default'));
+                $resource->set('cacheable', $this->modx->getOption('cache_default'));
 
                 $this->log(sprintf($this->modx->lexicon('import_site_importing_document'), $alias));
                 if (!$resource->save()) {
@@ -126,10 +126,10 @@ class modStaticImport extends modImport {
 
                     $resource->set('alias', $alias);
                     $resource->set('published', false);
-                    $resource->set('template', $this->modx->config['default_template']);
+                    $resource->set('template', $this->modx->getOption('default_template'));
                     $resource->set('menuindex', $menuindex++);
-                    $resource->set('searchable', $this->modx->config['search_default']);
-                    $resource->set('cacheable', $this->modx->config['cache_default']);
+                    $resource->set('searchable', $this->modx->getOption('search_default'));
+                    $resource->set('cacheable', $this->modx->getOption('cache_default'));
                     $resource->_fields['content']= $content;
 
                     if (!$resource->save()) {
@@ -145,7 +145,7 @@ class modStaticImport extends modImport {
 
     function getResourceAlias(& $resource, $alias, $parent, $context= 'web') {
         // auto assign alias
-        if ($alias == '' && $this->modx->config['automatic_alias']) {
+        if ($alias == '' && $this->modx->getOption('automatic_alias')) {
             $alias= strtolower(trim($resource->cleanAlias($resource->get('pagetitle'))));
         } else {
             $alias= $resource->cleanAlias($alias);
@@ -155,7 +155,7 @@ class modStaticImport extends modImport {
 
         $isHtml= true;
         $extension= '';
-        $containerSuffix= isset ($this->modx->config['container_suffix']) ? $this->modx->config['container_suffix'] : '';
+        $containerSuffix= $this->modx->getOption('container_suffix',null,'');
         if ($contentType= $resource->getOne('ContentType')) {
             $extension= $contentType->getExtension();
             $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
@@ -164,7 +164,7 @@ class modStaticImport extends modImport {
             $extension= $containerSuffix;
         }
         $aliasPath= '';
-        if ($this->modx->config['use_alias_path']) {
+        if ($this->modx->getOption('use_alias_path')) {
             $pathParentId= intval($parent);
             $parentResources= array ();
             $currResource= $this->modx->getObject('modResource', $pathParentId);

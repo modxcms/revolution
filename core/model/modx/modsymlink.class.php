@@ -28,7 +28,7 @@ class modSymLink extends modResource {
             $this->_output= intval($this->_content);
         } else {
             $parser= $this->xpdo->getParser();
-            $maxIterations= isset ($this->xpdo->config['parser_max_iterations']) ? intval($this->xpdo->config['parser_max_iterations']) : 10;
+            $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
             $this->xpdo->parser->processElementTags($this->_tag, $this->_content, true, true, '[[', ']]', array(), $maxIterations);
         }
         if (is_numeric($this->_content)) {

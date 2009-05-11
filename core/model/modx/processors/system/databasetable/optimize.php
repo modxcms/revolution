@@ -13,7 +13,7 @@ if ($_POST['t'] == '' || !isset($_POST['t'])) {
     return $modx->error->failure($modx->lexicon('optimize_table_err'));
 }
 
-$sql = 'OPTIMIZE TABLE `'.$modx->config['dbname'].'`.'.$_POST['t'];
+$sql = 'OPTIMIZE TABLE `'.$modx->getOption('dbname').'`.'.$_POST['t'];
 if ($modx->exec($sql) === false) {
     return $modx->error->failure($modx->lexicon('optimize_table_err'));
 }

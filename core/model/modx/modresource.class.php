@@ -68,7 +68,7 @@ class modResource extends modAccessibleSimpleObject {
                 }
             } else {
                 $this->_content= $this->getContent();
-                $maxIterations= isset ($this->xpdo->config['parser_max_iterations']) ? intval($this->xpdo->config['parser_max_iterations']) : 10;
+                $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
                 $this->xpdo->parser->processElementTags('', $this->_content, false, false, '[[', ']]', array(), $maxIterations);
                 $this->_processed= true;
             }
@@ -250,7 +250,8 @@ class modResource extends modAccessibleSimpleObject {
      * @return string The sanitized string.
      */
     function cleanAlias($alias) {
-        if (!isset ($this->xpdo->config['modx_charset']) || strtoupper($this->xpdo->config['modx_charset']) == 'UTF-8') {
+        $charset = $this->xpdo->getOption('modx_charset',null,'UTF-8');
+        if (!empty($charset) || strtoupper($charset) == 'UTF-8') {
             $alias= utf8_decode($alias);
         }
         $alias= strtr($alias, array (chr(196) => 'Ae', chr(214) => 'Oe', chr(220) => 'Ue', chr(228) => 'ae', chr(246) => 'oe', chr(252) => 'ue', chr(223) => 'ss'));

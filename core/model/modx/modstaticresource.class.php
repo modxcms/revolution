@@ -39,8 +39,8 @@ class modStaticResource extends modResource {
         $content = '';
         $filename = parent :: getContent($options);
         if (!file_exists($filename)) {
-            if (empty($this->_sourcePath) && isset ($this->xpdo->config['resource_static_path'])) {
-                $this->_sourcePath= $this->xpdo->config['resource_static_path'];
+            if (empty($this->_sourcePath) && !empty($this->xpdo->getOption('resource_static_path'))) {
+                $this->_sourcePath= $this->xpdo->getOption('resource_static_path');
             }
             if (empty ($this->_sourceFile)) {
                 $this->_sourceFile= $this->_sourcePath . $filename;
@@ -105,7 +105,7 @@ class modStaticResource extends modResource {
                 }
                 $header= 'Content-Type: ' . $type;
                 if (!$this->ContentType->get('binary')) {
-                    $charset= isset ($this->xpdo->config['modx_charset']) ? $this->xpdo->config['modx_charset'] : 'UTF-8';
+                    $charset= $this->xpdo->getOption('modx_charset',null,'UTF-8');
                     $header .= '; charset=' . $charset;
                 }
                 header($header);

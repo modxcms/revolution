@@ -32,7 +32,7 @@ foreach ($actions as $action) {
 	$aa = $action->toArray();
 
 	if (strlen($aa['controller']) > 1 && substr($aa['controller'],strlen($aa['controller'])-4,strlen($aa['controller'])) != '.php') {
-		if (!file_exists($modx->config['manager_path'].'controllers/'.$aa['controller'].'.php')) {
+		if (!file_exists($modx->getOption('manager_path').'controllers/'.$aa['controller'].'.php')) {
 			$aa['controller'] .= '/index.php';
 			$aa['controller'] = strtr($aa['controller'],'//','/');
 		} else {

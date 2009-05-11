@@ -17,7 +17,7 @@ if ($workspace == null) return $modx->error->failure($modx->lexicon('workspace_e
 
 $packages = array();
 
-$fullpath = $modx->config['core_path'].'packages/';
+$fullpath = $modx->getOption('core_path').'packages/';
 $odir = dir($fullpath);
 while(false !== ($name = $odir->read())) {
 	if(in_array($name,array('.','..','.svn','_notes'))) continue;

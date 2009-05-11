@@ -39,12 +39,12 @@ foreach ($publish as $resource) {
     $pa = $resource->toArray();
 
     if ($resource->get('pub_date') != '') {
-        $pd = $resource->get('pub_date')+$modx->config['server_offset_time'];
+        $pd = $resource->get('pub_date')+$modx->getOption('server_offset_time',null,0);
         $pa['pub_date'] = strftime($time_format,$pd);
     }
 
     if ($resource->get('unpub_date') != '') {
-        $pd = $resource->get('unpub_date')+$modx->config['server_offset_time'];
+        $pd = $resource->get('unpub_date')+$modx->getOption('server_offset_time',null,0);
         $pa['unpub_date'] = strftime($time_format,$pd);
     }
     $ps[] = $pa;

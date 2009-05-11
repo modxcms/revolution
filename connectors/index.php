@@ -19,25 +19,29 @@
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
+/**
+ * @package modx
+ * @subpackage connectors
+ */
 @include(dirname(__FILE__) . '/config.core.php');
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
 if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
 
-// instantiate the modX class with the appropriate configuration
+/* instantiate the modX class with the appropriate configuration */
 if (empty($options) || !is_array($options)) $options = array();
 $modx= new modX('', $options);
 
-// set debugging/logging options
+/* set debugging/logging options */
 $modx->setDebug(E_ALL & ~E_NOTICE);
 $modx->setLogLevel(MODX_LOG_LEVEL_ERROR);
 $modx->setLogTarget('FILE');
 
-// initialize the proper context
+/* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $modx->initialize($ctx);
 
-// handle the request
-$connectorRequestClass = isset($modx->config['modConnectorRequest.class']) ? $modx->config['modConnectorRequest.class'] : 'modConnectorRequest';
+/* handle the request */
+$connectorRequestClass = $modx->getOption('modConnectorRequest.class',null,'modConnectorRequest');
 $modx->config['modRequest.class'] = $connectorRequestClass;
 $modx->getRequest();
 $modx->request->sanitizeRequest();

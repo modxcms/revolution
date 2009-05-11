@@ -18,7 +18,7 @@ if (!isset($_REQUEST['type'])) $_REQUEST['type'] = 'default';
 
 if (!isset($modx->smarty)) {
     $modx->getService('smarty', 'smarty.modSmarty', '', array(
-        'template_dir' => $modx->config['manager_path'] . 'templates/' . $modx->config['manager_theme'] . '/',
+        'template_dir' => $modx->getOption('manager_path') . 'templates/' . $modx->getOption('manager_theme') . '/',
     ));
 }
 

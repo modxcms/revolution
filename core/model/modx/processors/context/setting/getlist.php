@@ -48,7 +48,7 @@ foreach ($settings as $setting) {
     $k = 'setting_'.$sa['key'];
 
     /* if 3rd party setting, load proper text */
-    $modx->lexicon->load($setting->namespace.':default');
+    $modx->lexicon->load($setting->get('namespace').':default');
 
     if ($modx->lexicon->exists('area_'.$setting->get('area'))) {
         $sa['area_text'] = $modx->lexicon('area_'.$setting->get('area'));

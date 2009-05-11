@@ -35,7 +35,7 @@ foreach ($entries as $entry) {
     $o .= "\$_lang['".$entry->get('name')."'] = '".$value."';\n";
 }
 
-$fileName = $modx->config['core_path'].'export/lexicon/'.$namespace->get('name').'/'.$topic->get('name').'.inc.php';
+$fileName = $modx->getOption('core_path').'export/lexicon/'.$namespace->get('name').'/'.$topic->get('name').'.inc.php';
 
 $cacheManager = $modx->getCacheManager();
 $s = $cacheManager->writeFile($fileName,$o);

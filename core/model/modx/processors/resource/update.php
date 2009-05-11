@@ -97,9 +97,9 @@ $_POST['searchable'] = !isset($_POST['searchable']) ? 0 : 1;
 $_POST['syncsite'] = !isset($_POST['syncsite']) ? 0 : 1;
 
 /* friendly url alias checks */
-if ($modx->config['friendly_alias_urls']) {
+if ($modx->getOption('friendly_alias_urls')) {
     /* auto assign alias */
-    if ($_POST['alias'] == '' && $modx->config['automatic_alias']) {
+    if ($_POST['alias'] == '' && $modx->getOption('automatic_alias')) {
         $_POST['alias'] = $resource->cleanAlias(strtolower(trim($_POST['pagetitle'])));
     } else {
         $_POST['alias'] = $resource->cleanAlias($_POST['alias']);
@@ -111,7 +111,7 @@ if ($modx->config['friendly_alias_urls']) {
     $fullAlias= $_POST['alias'];
     $isHtml= true;
     $extension= '';
-    $containerSuffix= isset ($modx->config['container_suffix']) ? $modx->config['container_suffix'] : '';
+    $containerSuffix= $modx->getOption('container_suffix',null,'');
     if (isset ($_POST['content_type']) && $contentType= $modx->getObject('modContentType', $_POST['content_type'])) {
         $extension= $contentType->getExtension();
         $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
@@ -120,7 +120,7 @@ if ($modx->config['friendly_alias_urls']) {
         $extension= $containerSuffix;
     }
     $aliasPath= '';
-    if ($modx->config['use_alias_path']) {
+    if ($modx->getOption('use_alias_path')) {
         $pathParentId= intval($_POST['parent']);
         $parentResources= array ();
         $currResource= $modx->getObject('modResource', $pathParentId);
@@ -235,10 +235,10 @@ $_POST['publishedby'] = $_POST['published'] ? $modx->user->get('id') : 0;
 
 /* get parent */
 $oldparent_id = $resource->get('parent');
-if ($resource->get('id') == $modx->config['site_start'] && $_POST['published'] == 0) {
+if ($resource->get('id') == $modx->getOption('site_start') && $_POST['published'] == 0) {
     return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart'));
 }
-if ($resource->get('id') == $modx->config['site_start'] && ($_POST['pub_date'] != 0 || $_POST['unpub_date'] != 0)) {
+if ($resource->get('id') == $modx->getOption('site_start') && ($_POST['pub_date'] != 0 || $_POST['unpub_date'] != 0)) {
     return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart_dates'));
 }
 

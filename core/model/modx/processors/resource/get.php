@@ -20,14 +20,14 @@ if ($resource == null) {
 
 if (!$resource->checkPolicy('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if ($modx->config['use_editor'] == 1) {
+if ($modx->getOption('use_editor') == 1) {
     /* replace image path */
     $htmlcontent = $resource->get('content');
     if (!empty ($htmlcontent)) {
-        if (substr($modx->config['rb_base_url'], -1) != '/') {
-            $im_base_url = $modx->config['rb_base_url'] . '/';
+        if (substr($modx->getOption('rb_base_url'), -1) != '/') {
+            $im_base_url = $modx->getOption('rb_base_url') . '/';
         } else {
-            $im_base_url = $modx->config['rb_base_url'];
+            $im_base_url = $modx->getOption('rb_base_url');
         }
         $elements = parse_url($im_base_url);
         $image_path = $elements['path'];
@@ -35,7 +35,7 @@ if ($modx->config['use_editor'] == 1) {
         if (substr($image_path, -1) != '/') {
             $image_path .= '/';
         }
-        $modx_root = $modx->config['base_path'];
+        $modx_root = $modx->getOption('base_path');
         $image_prefix = substr($image_path, strlen($modx_root));
         if (substr($image_prefix, -1) != '/') {
             $image_prefix .= '/';

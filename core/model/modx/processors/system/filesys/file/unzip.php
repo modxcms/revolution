@@ -6,7 +6,7 @@
 
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$amode = isset($modx->config['new_folder_permissions']) ? octdec($modx->config['new_folder_permissions']) : 0777;
+$amode = !empty($modx->getOption('new_folder_permissions')) ? octdec($modx->getOption('new_folder_permissions')) : 0777;
 
 $file = $_POST['path'].$_POST['file'];
 

@@ -54,7 +54,7 @@ class modXMLRPCResponse extends modResponse {
 
         /* collect any uncached element tags in the content and process them */
         $this->modx->getParser();
-        $maxIterations= isset ($this->modx->config['parser_max_iterations']) ? intval($this->modx->config['parser_max_iterations']) : 10;
+        $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
         $this->modx->parser->processElementTags('', $this->modx->resource->_output, true, false, '[[', ']]', array(), $maxIterations);
         $this->modx->parser->processElementTags('', $this->modx->resource->_output, true, true, '[[', ']]', array(), $maxIterations);
 
@@ -104,4 +104,3 @@ class modXMLRPCResponse extends modResponse {
         unset($this->services[$key]);
     }
 }
-?>

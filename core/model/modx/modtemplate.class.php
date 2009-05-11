@@ -28,7 +28,7 @@ class modTemplate extends modElement {
                 $this->toPlaceholders($this->_properties);
 
                 /* collect element tags in the content and process them */
-                $maxIterations= isset ($this->xpdo->config['parser_max_iterations']) ? intval($this->xpdo->config['parser_max_iterations']) : 10;
+                $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
                 $this->xpdo->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
             }
             $this->filterOutput();
@@ -58,7 +58,7 @@ class modTemplate extends modElement {
                 '`tvtpl`.templateid' => $this->id,
             ));
             $c->sortby('`tvtpl`.`rank`,`modTemplateVar`.`rank`');
-            
+
             $collection = $this->xpdo->getCollection('modTemplateVar', $c);
         } else {
             $collection= parent :: getMany($class, $criteria);

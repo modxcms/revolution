@@ -608,9 +608,7 @@ class modTag {
         $filter= null;
         if (!isset ($this->_filters['input'])) {
             if (!$inputFilterClass= $this->get('input_filter')) {
-                if (!isset($this->modx->config['input_filter']) || !$inputFilterClass= $this->modx->config['input_filter']) {
-                    $inputFilterClass= 'filters.modInputFilter';
-                }
+                $inputFilterClass= $this->modx->getOption('input_filter',null,'filters.modInputFilter');
             }
             if ($filterClass= $this->modx->loadClass($inputFilterClass, '', false, true)) {
                 if ($filter= new $filterClass($this->modx)) {
@@ -633,9 +631,7 @@ class modTag {
         $filter= null;
         if (!isset ($this->_filters['output'])) {
             if (!$outputFilterClass= $this->get('output_filter')) {
-                if (!isset($this->modx->config['output_filter']) || !$outputFilterClass= $this->modx->config['output_filter']) {
-                    $outputFilterClass= 'filters.modOutputFilter';
-                }
+                $outputFilterClass= $this->modx->getOption('output_filter',null,'filters.modOutputFilter');
             }
             if ($filterClass= $this->modx->loadClass($outputFilterClass, '', false, true)) {
                 if ($filter= new $filterClass($this->modx)) {
@@ -789,7 +785,7 @@ class modFieldTag extends modTag {
             $this->_output= $this->_content;
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* collect element tags in the content and process them */
-                $maxIterations= isset ($this->modx->config['parser_max_iterations']) ? intval($this->modx->config['parser_max_iterations']) : 10;
+                $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
                 $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
             }
             $this->filterOutput();
@@ -850,7 +846,7 @@ class modPlaceholderTag extends modTag {
             $this->_output= $this->_content;
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* collect element tags in the content and process them */
-                $maxIterations= isset ($this->modx->config['parser_max_iterations']) ? intval($this->modx->config['parser_max_iterations']) : 10;
+                $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
                 $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
             }
             $this->filterOutput();
@@ -915,7 +911,7 @@ class modLinkTag extends modTag {
             $this->_output= $this->_content;
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* collect element tags in the content and process them */
-                $maxIterations= isset ($this->modx->config['parser_max_iterations']) ? intval($this->modx->config['parser_max_iterations']) : 10;
+                $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
                 $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
                 if (isset ($this->modx->aliasMap[$this->_output])) {
                     $this->_output= $this->modx->aliasMap[$this->_output];
@@ -941,7 +937,7 @@ class modLinkTag extends modTag {
                 $this->_content = $options['content'];
             } else {
                 if (!$this->get('name')) {
-                    $this->set('name', isset ($this->modx->config['error_page']) ? $this->modx->config['error_page'] : (isset ($this->modx->config['site_start']) ? $this->modx->config['site_start'] : $this->modx->config['base_url']));
+                    $this->set('name', $this->modx->getOption('error_page',null,$this->getOption('site_start',null,$this->getOption('base_url'))));
                 }
                 $this->_content= $this->get('name');
             }
@@ -976,7 +972,7 @@ class modLexiconTag extends modTag {
             $this->_output= $this->_content;
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* collect element tags in the content and process them */
-                $maxIterations= isset ($this->modx->config['parser_max_iterations']) ? intval($this->modx->config['parser_max_iterations']) : 10;
+                $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
                 $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
             }
             $this->filterOutput();

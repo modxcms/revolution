@@ -29,9 +29,9 @@ class modChunk extends modElement {
                 $restore = $this->toPlaceholders($this->_properties);
 
                 /* collect element tags in the output and process them */
-                $maxIterations= isset ($this->xpdo->config['parser_max_iterations']) ? intval($this->xpdo->config['parser_max_iterations']) : 10;
+                $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
                 $this->xpdo->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
-                
+
                 /* remove the placeholders set from the properties of this element and restore global values */
                 $this->xpdo->unsetPlaceholders(array_keys($this->_properties));
                 if ($restore) $this->xpdo->toPlaceholders($restore);

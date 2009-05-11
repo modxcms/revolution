@@ -19,7 +19,7 @@ if (!isset($_POST['dir']) || $_POST['dir'] == '')
 
 $d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
     ? $_POST['prependPath']
-    : $modx->config['base_path'].$modx->config['rb_base_dir'];
+    : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
 $olddir = realpath($d.$_POST['dir']);
 
 if (!is_dir($olddir)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));

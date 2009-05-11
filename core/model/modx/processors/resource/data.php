@@ -44,7 +44,7 @@ foreach ($resource->keywords as $kw) {
 $ra['keywords'] = join($keywords,',');
 
 /* get changes */
-$server_offset_time= intval($modx->config['server_offset_time']);
+$server_offset_time= intval($modx->getOption('server_offset_time',null,0));
 $ra['createdon_adjusted'] = strftime('%c', strtotime($resource->get('createdon')) + $server_offset_time);
 $ra['createdon_by'] = $resource->CreatedBy->get('username');
 if ($resource->EditedBy) {

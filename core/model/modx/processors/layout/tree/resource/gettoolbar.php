@@ -8,7 +8,7 @@
  */
 $modx->lexicon->load('resource');
 
-$p = $modx->config['manager_url'].'templates/'.$modx->config['manager_theme'].'/images/restyle/icons/';
+$p = $modx->getOption('manager_url').'templates/'.$modx->getOption('manager_theme').'/images/restyle/icons/';
 
 $actions = $modx->request->getAllActionIDs();
 

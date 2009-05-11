@@ -23,9 +23,9 @@ if (!$context->prepare()) {
 $modx->smarty->assign('context', $context);
 
 /* register JS scripts */
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/core/modx.grid.settings.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/system/modx.grid.context.settings.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/widgets/system/modx.panel.context.js');
-$modx->regClientStartupScript($modx->config['manager_url'].'assets/modext/sections/context/update.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.grid.settings.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.context.settings.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.panel.context.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/context/update.js');
 
 return $modx->smarty->fetch('context/update.tpl');

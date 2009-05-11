@@ -9,12 +9,12 @@ $modx->lexicon->load('system_info');
 
 if (!$modx->hasPermission('database')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$c = new xPDOCriteria($modx, 'SHOW TABLE STATUS FROM `'.$modx->config['dbname'].'`');
+$c = new xPDOCriteria($modx, 'SHOW TABLE STATUS FROM `'.$modx->getOption('dbname').'`');
 $c->stmt->execute();
 $dt = array();
 while ($row= $c->stmt->fetch(PDO_FETCH_ASSOC)) {
 	/* calculations first */
-	if ($modx->hasPermission('settings') && $row['Name'] == $modx->config['table_prefix'].'event_log' && $row['Data_length'] + $row['Data_free']>0) {
+	if ($modx->hasPermission('settings') && $row['Name'] == $modx->getOption('table_prefix').'event_log' && $row['Data_length'] + $row['Data_free']>0) {
 		$row['Data_size'] = '<a href="javascript:;" onclick="truncate(\''.$row['Name'].'\');" title="'.$modx->lexicon('truncate_table').'">'. nicesize($row['Data_length'] + $row['Data_free']).'</a>';
 	} else {
 		$row['Data_size'] = nicesize($row['Data_length'] + $row['Data_free']);

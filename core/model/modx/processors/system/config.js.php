@@ -13,13 +13,13 @@
 $stay = isset($_SESSION['modx.stay']) ? $_SESSION['modx.stay'] : 'stay';
 $modx->getVersionData();
 
-$template_url = $modx->config['manager_url'].'templates/'.$modx->config['manager_theme'].'/';
+$template_url = $modx->getOption('manager_url').'templates/'.$modx->getOption('manager_theme').'/';
 $c = array(
     'stay' => $stay,
-    'base_url' => $modx->config['base_url'],
-    'connectors_url' => $modx->config['connectors_url'],
+    'base_url' => $modx->getOption('base_url'),
+    'connectors_url' => $modx->getOption('connectors_url'),
     'icons_url' => $template_url.'images/ext/modext/',
-    'manager_url' => $modx->config['manager_url'],
+    'manager_url' => $modx->getOption('manager_url'),
     'template_url' => $template_url,
     'user' => $modx->user->get('id'),
     'version' => $modx->version['full_version'],

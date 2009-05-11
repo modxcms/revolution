@@ -12,7 +12,7 @@ if (empty($_REQUEST['download'])) {
     $o = $_POST['data'];
 
     $f = 'export.js';
-    $fileName = $modx->config['core_path'].'export/properties/'.$f;
+    $fileName = $modx->getOption('core_path').'export/properties/'.$f;
 
     $cacheManager = $modx->getCacheManager();
     $s = $cacheManager->writeFile($fileName,$o);
@@ -20,7 +20,7 @@ if (empty($_REQUEST['download'])) {
     return $modx->error->success($f);
 } else {
     $file = $_REQUEST['download'];
-    $f = $modx->config['core_path'].'export/properties/'.$file;
+    $f = $modx->getOption('core_path').'export/properties/'.$file;
 
     if (!is_file($f)) return $o;
 

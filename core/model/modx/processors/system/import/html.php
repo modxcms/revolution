@@ -59,12 +59,12 @@ if (!function_exists('importFiles')) {
 
                 $resource->set('alias', $alias);
                 $resource->set('published', false);
-                $resource->set('template', $modx->config['default_template']);
+                $resource->set('template', $modx->getOption('default_template'));
                 $resource->set('menuindex', $modx->getCount('modResource', array (
                     'parent' => $parent
                 )));
-                $resource->set('searchable', $modx->config['search_default']);
-                $resource->set('cacheable', $modx->config['cache_default']);
+                $resource->set('searchable', $modx->getOption('search_default'));
+                $resource->set('cacheable', $modx->getOption('cache_default'));
 
                 $results .= sprintf($modx->lexicon('import_site_importing_document'), $alias);
 
@@ -108,10 +108,10 @@ if (!function_exists('importFiles')) {
 
                     $resource->set('alias', $alias);
                     $resource->set('published', false);
-                    $resource->set('template', $modx->config['default_template']);
+                    $resource->set('template', $modx->getOption('default_template'));
                     $resource->set('menuindex', $modx->getCount('modResource', array ('parent' => $parent)));
-                    $resource->set('searchable', $modx->config['search_default']);
-                    $resource->set('cacheable', $modx->config['cache_default']);
+                    $resource->set('searchable', $modx->getOption('search_default'));
+                    $resource->set('cacheable', $modx->getOption('cache_default'));
                     $resource->set('content', $content);
 
                     if (!$resource->save()) {
@@ -142,7 +142,7 @@ if (!function_exists('getFileContent')) {
 if (!function_exists('aliasCheck')) {
     function getResourceAlias(& $modx, & $resource, & $results, $alias, $parent, $context= 'web') {
         /* auto assign alias */
-        if ($alias == '' && $modx->config['automatic_alias']) {
+        if ($alias == '' && $modx->getOption('automatic_alias')) {
             $alias= strtolower(trim($resource->cleanAlias($resource->get('pagetitle'))));
         } else {
             $alias= $resource->cleanAlias($alias);
@@ -152,7 +152,7 @@ if (!function_exists('aliasCheck')) {
 
         $isHtml= true;
         $extension= '';
-        $containerSuffix= isset ($modx->config['container_suffix']) ? $modx->config['container_suffix'] : '';
+        $containerSuffix= isset ($modx->getOption('container_suffix')) ? $modx->getOption('container_suffix') : '';
         if ($contentType= $modx->getObject('modContentType', 1)) {
             $extension= $contentType->getExtension();
             $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
@@ -161,7 +161,7 @@ if (!function_exists('aliasCheck')) {
             $extension= $containerSuffix;
         }
         $aliasPath= '';
-        if ($modx->config['use_alias_path']) {
+        if ($modx->getOption('use_alias_path')) {
             $pathParentId= intval($parent);
             $parentResources= array ();
             $currResource= $modx->getObject('modResource', $pathParentId);

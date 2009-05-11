@@ -22,7 +22,7 @@ if (!isset($_POST['parent'])) {
 }
 $d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
     ? $_POST['prependPath']
-    : $modx->config['base_path'].$modx->config['rb_base_dir'];
+    : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
 $parentdir = $d.$_POST['parent'].'/';
 
 if (!is_dir($parentdir)) return $modx->error->failure($modx->lexicon('file_folder_err_parent_invalid'));

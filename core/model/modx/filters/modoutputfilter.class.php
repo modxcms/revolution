@@ -157,7 +157,7 @@ class modOutputFilter {
                         $output= ucfirst($output, $m_val);
                         break;
                     case "htmlent" : /* See PHP's htmlentities - http://www.php.net/manual/en/function.htmlentities.php */
-                        $output= htmlentities($output, ENT_QUOTES, $this->modx->config['modx_charset']);
+                        $output= htmlentities($output, ENT_QUOTES, $this->modx->getOption('modx_charset'));
                         break;
                     case "esc" :
                     case "escape" :
@@ -194,7 +194,7 @@ class modOutputFilter {
 
                     case "tag": /* Displays the raw element tag without :tag */
                         $tag = $element->_tag;
-                        $tag = htmlentities($tag, ENT_QUOTES, $this->modx->config['modx_charset']);
+                        $tag = htmlentities($tag, ENT_QUOTES, $this->modx->getOption('modx_charset'));
                         $tag = str_replace(array ("[", "]", "`"), array ("&#91;", "&#93;", "&#96;"), $tag);
                         $tag = str_replace(":tag","",$tag);
                         $output = $tag;

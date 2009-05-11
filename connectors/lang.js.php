@@ -44,7 +44,7 @@ ob_end_clean();
 
 
 /* if turned on, will cache lexicon entries in JS based upon http headers */
-if (isset($modx->config['cache_lang_js']) && $modx->config['cache_lang_js']) {
+if ($modx->getOption('cache_lang_js',null,false)) {
     $hash = md5($output);
     $headers = $modx->request->getHeaders();
 

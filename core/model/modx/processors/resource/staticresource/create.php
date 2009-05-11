@@ -30,9 +30,9 @@ if ($_POST['pagetitle'] == '') $_POST['pagetitle'] = $modx->lexicon('untitled_do
 $_POST['context_key']= !isset($_POST['context_key']) || $_POST['context_key'] == '' ? 'web' : $_POST['context_key'];
 
 /* friendly url alias checks */
-if ($modx->config['friendly_alias_urls']) {
+if ($modx->getOption('friendly_alias_urls')) {
     /* auto assign alias */
-    if ($_POST['alias'] == '' && $modx->config['automatic_alias']) {
+    if ($_POST['alias'] == '' && $modx->getOption('automatic_alias')) {
         $_POST['alias'] = strtolower(trim($resource->cleanAlias($_POST['pagetitle'])));
     } else {
         $_POST['alias'] = $resource->cleanAlias($_POST['alias']);
@@ -43,7 +43,7 @@ if ($modx->config['friendly_alias_urls']) {
     $fullAlias= $_POST['alias'];
     $isHtml= true;
     $extension= '';
-    $containerSuffix= isset ($modx->config['container_suffix']) ? $modx->config['container_suffix'] : '';
+    $containerSuffix= $modx->getOption('container_suffix',null,'');
     if (isset ($_POST['content_type']) && $contentType= $modx->getObject('modContentType', $_POST['content_type'])) {
         $extension= $contentType->getExtension();
         $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
@@ -52,7 +52,7 @@ if ($modx->config['friendly_alias_urls']) {
         $extension= $containerSuffix;
     }
     $aliasPath= '';
-    if ($modx->config['use_alias_path']) {
+    if ($modx->getOption('use_alias_path')) {
         $pathParentId= intval($_POST['parent']);
         $parentResources= array ();
         $currResource= $modx->getObject('modResource', $pathParentId);
@@ -172,7 +172,7 @@ $_POST['publishedby'] = $_POST['published'] ? $modx->user->get('id') : 0;
 $resource->fromArray($_POST);
 
 /* increase menu index if this is a new resource */
-if (!isset($modx->config['auto_menuindex']) || $modx->config['auto_menuindex']) {
+if (!empty($modx->getOption('auto_menuindex'))) {
     $menuindex = $modx->getCount('modResource',array('parent' => $resource->get('parent')));
 }
 $resource->set('menuindex',isset($menuindex) ? $menuindex : 0);

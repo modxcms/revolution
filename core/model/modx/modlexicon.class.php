@@ -214,7 +214,7 @@ class modLexicon {
      */
     function init() {
         $this->_paths = array(
-             'core' => $this->modx->config['core_path'] . 'cache/lexicon/',
+             'core' => $this->modx->getOption('core_path') . 'cache/lexicon/',
         );
         $this->_lexicon = array();
     }
