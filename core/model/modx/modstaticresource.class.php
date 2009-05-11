@@ -39,7 +39,8 @@ class modStaticResource extends modResource {
         $content = '';
         $filename = parent :: getContent($options);
         if (!file_exists($filename)) {
-            if (empty($this->_sourcePath) && !empty($this->xpdo->getOption('resource_static_path'))) {
+            $sp = $this->xpdo->getOption('resource_static_path',null,'');
+            if (empty($this->_sourcePath) && !empty($sp)) {
                 $this->_sourcePath= $this->xpdo->getOption('resource_static_path');
             }
             if (empty ($this->_sourceFile)) {

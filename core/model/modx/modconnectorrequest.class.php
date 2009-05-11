@@ -37,7 +37,8 @@ class modConnectorRequest extends modManagerRequest {
     }
 
     function initialize() {
-        if (!empty($this->modx->getOption('manager_language'))) {
+        $ml = $this->modx->getOption('manager_language');
+        if (!empty($ml)) {
             $this->modx->cultureKey= $this->modx->getOption('manager_language');
         }
 

@@ -110,8 +110,7 @@ class modManagerRequest extends modRequest {
                 }
             }
         }
-
-        if (!empty($this->modx->getOption('manager_language'))) {
+        if ($this->modx->getOption('manager_language')) {
             $this->modx->cultureKey= $this->modx->getOption('manager_language');
         }
 
