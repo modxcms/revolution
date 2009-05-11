@@ -11,7 +11,7 @@
  * @package modx
  * @subpackage processors.system.menu
  */
-$modx->lexicon->load('action','menu');
+$modx->lexicon->load('action','menu','topmenu');
 
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;

@@ -24,116 +24,50 @@ MODx.tree.Action = function(config) {
 };
 Ext.extend(MODx.tree.Action,MODx.tree.Tree,{
 	windows: {}
-		
-	/**
-	 * Loads the MODx.window.CreateAction with the parent action information.
-	 * @see MODx.window.CreateAction
-	 * @param {Ext.tree.TreeNode} node The selected TreeNode.
-	 * @param {Ext.EventObject} e The event object.
-	 */
-	,create: function(n,e) {
-		var node = this.cm.activeNode;
-		var id = node.id.split('_'); 
-        id = id[1] == 'context' ? 0 : id[2];
-		
-		MODx.Ajax.request({
-			url: this.config.url
-			,params: {
-				action: 'get'
-				,id: id
-			}
-			,listeners: {
-				'success': {fn:function(r) {
-					Ext.apply(r.object,{
-                        parent: r.object.id
-                    });
-                    if (!this.windows.create_action) {
-                        this.windows.create_action = MODx.load({
-                            xtype: 'modx-window-action-create'
-                            ,scope: this
-                            ,success: this.refresh
-                            ,record: r.object
-                        });
-                    }
-                    this.windows.create_action.setValues(r.object);
-                    this.windows.create_action.show(e.target);
-				},scope:this}
-				,'failure': {fn:function(r) {
-					if (!id) {
-						Ext.Msg.hide();
-						Ext.apply(r.object,{parent: 0});
-                        if (!this.windows.create_action) {
-                            this.windows.create_action = MODx.load({
-                                xtype: 'modx-window-action-create'
-                                ,scope: this
-                                ,success: this.refresh
-                                ,record: r.object
-                            });
-                        }
-                        this.windows.create_action.setValues(r.object);
-                        this.windows.create_action.show(e.target);
-                        return false;
-					}
-				},scope:this}
-			}
-		});
+    
+	,createAction: function(n,e) {
+        var node = this.cm.activeNode.attributes;
+        var r = node.data;
+        if (node.type == 'namespace') {
+            r = { 'namespace': r.name };
+        }
+        
+        if (!this.windows.create_action) {
+            this.windows.create_action = MODx.load({
+                xtype: 'modx-window-action-create'
+                ,scope: this
+                ,success: this.refresh
+                ,record: r
+            });
+        }
+        this.windows.create_action.setValues(r);
+        this.windows.create_action.show(e.target);
+        return false;
 	}
 	
-	/**
-	 * Loads the UpdateAction window.
-	 * @see MODx.window.UpdateAction.
-	 * @param {Ext.tree.TreeNode} node The selected TreeNode.
-	 * @param {Ext.EventObject} e The event object.
-	 */
-	,update: function(n,e) {
-		var node = this.cm.activeNode;
-		var id = node.id.split('_'); id = id[2];
-		
-		MODx.Ajax.request({
-			url: this.config.url
-			,params: {
-				action: 'get'
-				,id: id
-			}
-			,listeners: {
-				'success': {fn:function(r) {
-					Ext.applyIf(r.object,{
-                        parent: r.object.id
-                        ,parent_controller: r.object.controller
-                        ,loadheaders: r.object.haslayout
-                    });
-                    if (!this.windows.update_action) {
-                        this.windows.update_action = MODx.load({
-                            xtype: 'modx-window-action-update'
-                            ,scope: this
-                            ,success: this.refresh
-                            ,record: r.object
-                        });
-                    }
-                    this.windows.update_action.setValues(r.object);
-                    this.windows.update_action.show(e.target);
-				},scope:this}
-			}
-		});
+	,updateAction: function(n,e) {
+        var r = this.cm.activeNode.attributes.data;
+        
+        if (!this.windows.update_action) {
+            this.windows.update_action = MODx.load({
+                xtype: 'modx-window-action-update'
+                ,scope: this
+                ,success: this.refresh
+                ,record: r
+            });
+        }
+        this.windows.update_action.setValues(r);
+        this.windows.update_action.show(e.target);        
 	}
 	
-	/**
-	 * Removes the action.
-	 * @see MODx.msg
-	 * @param {Ext.tree.TreeNode} node The selected TreeNode.
-	 * @param {Ext.EventObject} e The event object.
-	 */
-	,remove: function(n,e) {
-		var node = this.cm.activeNode;
-		var id = node.id.split('_'); id = id[2];
-		
+	,removeAction: function(n,e) {
 		MODx.msg.confirm({
 			title: _('warning')
 			,text: _('action_confirm_remove')
 			,url: this.config.url
 			,params: {
 				action: 'remove'
-				,id: id
+				,id: this.cm.activeNode.attributes.pk
 			}
             ,listeners: {
                 'success':{fn:this.refresh,scope:this}
@@ -182,8 +116,8 @@ MODx.window.CreateAction = function(config) {
             ,width: 200
         },{
             fieldLabel: _('load_headers')
-            ,name: 'loadheaders'
-            ,id: 'modx-cact-loadheaders'
+            ,name: 'haslayout'
+            ,id: 'modx-cact-haslayout'
             ,xtype: 'checkbox'
             ,checked: true
             ,inputValue: 1
@@ -248,8 +182,8 @@ MODx.window.UpdateAction = function(config) {
             ,allowBlank: false
         },{
             fieldLabel: _('controller_parent')
-            ,name: 'parent_controller'
-            ,hiddenName: 'parent_controller'
+            ,name: 'parent'
+            ,hiddenName: 'parent'
             ,id: 'modx-uact-parent-controller'
             ,xtype: 'modx-combo-action'
             ,readOnly: true
@@ -257,8 +191,8 @@ MODx.window.UpdateAction = function(config) {
             ,width: 200
         },{
             fieldLabel: _('load_headers')
-            ,name: 'loadheaders'
-            ,id: 'modx-uact-loadheaders'
+            ,name: 'haslayout'
+            ,id: 'modx-uact-haslayout'
             ,xtype: 'checkbox'
             ,checked: true
         },{

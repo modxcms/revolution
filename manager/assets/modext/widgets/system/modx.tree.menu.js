@@ -12,93 +12,68 @@ MODx.tree.Menu = function(config) {
         id: 'modx-tree-menu'
         ,root_id: 'n_0'
         ,root_name: _('menu_top')
-		,title: _('menu_top')
-        ,rootVisible: true
+		,rootVisible: true
         ,expandFirst: true
         ,enableDrag: true
         ,enableDrop: true
         ,url: MODx.config.connectors_url + 'system/menu.php'
 		,action: 'getNodes'
+        ,useDefaultToolbar: true
+        ,tbar: [{
+            text: _('menu_create')
+            ,handler: this.createMenu
+            ,scope: this
+        }]
     });
     MODx.tree.Menu.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
 	windows: {}
 	
-	,create: function(n,e) {
-		var node = this.cm.activeNode;
-		var id = node.id.split('_'); id = id[1];
-		
-		MODx.Ajax.request({
-			url: this.config.url
-			,params: {
-				action: 'get'
-				,id: id
-			}
-			,listeners: {
-				'success': {fn:function(r) {
-					Ext.applyIf(r.object,{
-                        parent: r.object.id
-                        ,parent_text: r.object.text
-                    });
-                    if (!this.windows.create_menu) {
-                        this.windows.create_menu = MODx.load({
-                            xtype: 'modx-window-menu-create'
-                            ,scope: this
-                            ,success: this.refresh
-                            ,record: r.object
-                        });
-                    } else {
-                        this.windows.create_menu.setValues(r.object);
-                    }
-                    this.windows.create_menu.show(e.target);
-				},scope:this}
-			}
-		});
+	,createMenu: function(n,e) {
+        var r = {};
+        if (this.cm.activeNode) {
+            r['parent'] = this.cm.activeNode.attributes.data.id;
+        }
+        if (!this.windows.create_menu) {
+            this.windows.create_menu = MODx.load({
+                xtype: 'modx-window-menu-create'
+                ,scope: this
+                ,success: this.refresh
+                ,record: r
+            });
+        } else {
+            this.windows.create_menu.setValues(r);
+        }
+        this.windows.create_menu.show(e.target);
 	}
 	
-	,update: function(n,e) {
-		var node = this.cm.activeNode;
-		var id = node.id.split('_'); id = id[1];
-		
-		MODx.Ajax.request({
-			url: this.config.url
-			,params: {
-				action: 'get'
-				,id: id
-			}
-			,listeners: {
-				'success': {fn:function(r) {
-					Ext.applyIf(r.object,{
-                        action_id: r.object.action
-                    });
-                    if (!this.windows.update_menu) {
-                        this.windows.update_menu = MODx.load({
-                            xtype: 'modx-window-menu-update'
-                            ,scope: this
-                            ,success: this.refresh
-                            ,record: r.object
-                        });
-                    } else {
-                        this.windows.update_menu.setValues(r.object);
-                    }
-                    this.windows.update_menu.show(e.target);
-				},scope:this}
-			}
-		});
+	,updateMenu: function(n,e) {		
+        var r = this.cm.activeNode.attributes.data;
+        Ext.apply(r,{
+            action_id: r.action
+        });
+        if (!this.windows.update_menu) {
+            this.windows.update_menu = MODx.load({
+                xtype: 'modx-window-menu-update'
+                ,scope: this
+                ,success: this.refresh
+                ,record: r
+            });
+        } else {
+            this.windows.update_menu.setValues(r);
+        }
+        this.windows.update_menu.show(e.target);
 	}
 	
-	,remove: function(n,e) {
-		var node = this.cm.activeNode;
-		var id = node.id.split('_'); id = id[1];
-		
+	,removeMenu: function(n,e) {
 		MODx.msg.confirm({
 			title: _('warning')
 			,text: _('menu_confirm_remove')
 			,url: this.config.url
 			,params: {
 				action: 'remove'
-				,id: id
+				,id: this.cm.activeNode.attributes.pk
 			}
             ,listeners: {
                 'success':{fn:this.refresh,scope:this}
@@ -125,7 +100,11 @@ MODx.window.CreateMenu = function(config) {
         ,url: MODx.config.connectors_url+'system/menu.php'
         ,action: 'create'
         ,fields: [{
-            fieldLabel: _('text')
+            xtype: 'hidden'
+            ,name: 'parent'
+            ,id: 'modx-cmen-parent'
+        },{
+            fieldLabel: _('lexicon_key')
             ,name: 'text'
             ,id: 'modx-cmen-text'
             ,xtype: 'textfield'
@@ -137,14 +116,6 @@ MODx.window.CreateMenu = function(config) {
             ,hiddenName: 'action_id'
             ,id: 'modx-cmen-action-id'
             ,xtype: 'modx-combo-action'
-        },{
-            fieldLabel: _('menu_parent')
-            ,name: 'parent'
-            ,hiddenName: 'parent'
-            ,id: 'modx-cmen-parent'
-            ,xtype: 'modx-combo-menu'
-            ,hideTrigger: true
-            ,width: 200
         },{
             fieldLabel: _('icon')
             ,name: 'icon'
@@ -194,6 +165,10 @@ MODx.window.UpdateMenu = function(config) {
             ,id: 'modx-umen-id'
             ,xtype: 'hidden'
         },{
+            name: 'parent'
+            ,id: 'modx-umen-parent'
+            ,xtype: 'hidden'
+        },{
             fieldLabel: _('text')
             ,name: 'text'
             ,id: 'modx-umen-text'
@@ -206,15 +181,6 @@ MODx.window.UpdateMenu = function(config) {
             ,hiddenName: 'action_id'
             ,id: 'modx-umen-action-id'
             ,xtype: 'modx-combo-action'
-        },{
-            fieldLabel: _('menu_parent')
-            ,name: 'parent'
-            ,hiddenName: 'parent'
-            ,id: 'modx-umen-parent'
-            ,xtype: 'modx-combo-menu'
-            ,readOnly: true
-            ,hideTrigger: true
-            ,width: 200
         },{
             fieldLabel: _('icon')
             ,name: 'icon'

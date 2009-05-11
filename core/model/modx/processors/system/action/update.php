@@ -17,16 +17,21 @@ $modx->lexicon->load('action','menu','namespace');
 
 if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
+
+$_POST['haslayout'] = !empty($_POST['haslayout']);
+
+
+/* get action */
 if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
 $action = $modx->getObject('modAction',$_POST['id']);
 if ($action == null) return $modx->error->failure($modx->lexicon('action_err_nf'));
 
+/* verify controller */
 if (!isset($_POST['controller']) || $_POST['controller'] == '') {
 	return $modx->error->failure($modx->lexicon('controller_err_ns'));
 }
 
-$loadheaders = isset($_POST['loadheaders']) ? true : false;
-
+/* verify parent */
 if (!isset($_POST['parent'])) return $modx->error->failure($modx->lexicon('action_parent_err_ns'));
 if ($_POST['parent'] == 0) {
 	$parent = $modx->newObject('modAction');
@@ -36,6 +41,7 @@ if ($_POST['parent'] == 0) {
 	if ($parent == null) return $modx->error->failure($modx->lexicon('action_parent_err_nf'));
 }
 
+/* verify namespace */
 if (!isset($_POST['namespace']) || $_POST['namespace'] == '') {
     return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 }
@@ -45,10 +51,7 @@ if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_e
 
 $action->set('namespace',$namespace->get('key'));
 $action->set('parent',$parent->get('id'));
-$action->set('controller',$_POST['controller']);
-$action->set('loadheaders',$loadheaders);
-$action->set('lang_topics',$_POST['lang_topics']);
-$action->set('assets',$_POST['assets']);
+$action->fromArray($_POST);
 
 if ($action->save() == false) {
     return $modx->error->failure($modx->lexicon('action_err_save'));

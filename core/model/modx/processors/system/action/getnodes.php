@@ -15,135 +15,132 @@ if (!isset($_REQUEST['id'])) $_REQUEST['id'] = 'n_0';
 
 $ar = explode('_',$_REQUEST['id']);
 $type = $ar[1];
-$id = $ar[2];
+$pk = $ar[2];
 
-
+$list = array();
 /* contexts */
 if ($type == 'root') {
-    $namespaces = $modx->getCollection('modNamespace');
+    $c = $modx->newQuery('modNamespace');
+    $c->sortby('name','ASC');
+    $namespaces = $modx->getCollection('modNamespace',$c);
 
-    $cs = array();
     foreach ($namespaces as $namespace) {
-        $cs[] = array(
+        $list[] = array(
             'text' => $namespace->get('name'),
             'id' => 'n_namespace_'.$namespace->get('name'),
             'leaf' => false,
             'cls' => 'folder',
+            'pk' => $namespace->get('name'),
+            'data' => $namespace->toArray(),
             'type' => 'namespace',
             'menu' => array( 'items' => array(
                 array(
                     'text' => $modx->lexicon('action_create_here'),
                     'handler' => 'function(itm,e) {
-                        this.create(itm,e);
+                        this.createAction(itm,e);
                     }',
                 ),
             )),
         );
     }
 
-    return $this->toJSON($cs);
-    die();
-
 /* root actions */
 } else if ($type == 'namespace') {
     $c = $modx->newQuery('modAction');
+    $c->leftJoin('modAction','Children');
+    $c->select('
+        `modAction`.*,
+        COUNT(`Children`.`id`) AS `childrenCount`
+    ');
     $c->where(array(
-        'parent' => 0,
-        'namespace' => $id,
+        'modAction.parent' => 0,
+        'modAction.namespace' => $pk,
     ));
-    $c->sortby('controller','ASC');
-    /*$c->limit($_REQUEST['limit'],$_REQUEST['start']);*/
+    $c->groupby('modAction.id');
+    $c->sortby('modAction.controller','ASC');
 
     $actions = $modx->getCollection('modAction',$c);
 
-    $cc = $modx->newQuery('modAction');
-    $cc->where(array(
-        'parent' => 0,
-        'namespace' => $id,
-    ));
-    $count = $modx->getCount('modAction',$cc);
-
-    $as = array();
     foreach ($actions as $action) {
-        $as[] = array(
+        $list[] = array(
             'text' => $action->get('controller').' ('.$action->get('id').')',
             'id' => 'n_action_'.$action->get('id'),
-            'leaf' => false,
+            'pk' => $action->get('id'),
+            'leaf' => $action->get('childrenCount') <= 0,
             'cls' => 'action',
             'type' => 'action',
+            'data' => $action->toArray(),
             'menu' => array(
                 'items' => array(
                     array(
                         'text' => $modx->lexicon('action_update'),
                         'handler' => 'function(itm,e) {
-                            this.update(itm,e);
+                            this.updateAction(itm,e);
                         }',
                     ),'-',array(
                         'text' => $modx->lexicon('action_create_here'),
                         'handler' => 'function(itm,e) {
-                            this.create(itm,e);
+                            this.createAction(itm,e);
                         }',
                     ),'-',array(
                         'text' => $modx->lexicon('action_remove'),
                         'handler' => 'function(itm,e) {
-                            this.remove(itm,e);
+                            this.removeAction(itm,e);
                         }',
                     ),
                 ),
             ),
         );
     }
-
-    return $this->toJSON($as);
-    die();
 
 /* subactions */
 } else {
     $c = $modx->newQuery('modAction');
+    $c->leftJoin('modAction','Children');
+    $c->select('
+        `modAction`.*,
+        COUNT(`Children`.`id`) AS `childrenCount`
+    ');
     $c->where(array(
-        'parent' => $id,
+        'modAction.parent' => $pk,
     ));
-    $c->sortby('controller','ASC');
-    /*$c->limit($_REQUEST['limit'],$_REQUEST['start']);*/
+    $c->groupby('modAction.id');
+    $c->sortby('modAction.controller','ASC');
 
     $actions = $modx->getCollection('modAction',$c);
-    $cc = $modx->newQuery('modAction');
-    $cc->where(array(
-        'parent' => $id,
-    ));
-    $count = $modx->getCount('modAction',$cc);
 
-    $as = array();
     foreach ($actions as $action) {
-        $as[] = array(
+        $list[] = array(
             'text' => $action->get('controller').' ('.$action->get('id').')',
             'id' => 'n_action_'.$action->get('id'),
-            'leaf' => 0,
+            'pk' => $action->get('id'),
+            'leaf' => $action->get('childrenCount') <= 0,
             'cls' => 'action',
             'type' => 'action',
+            'data' => $action->toArray(),
             'menu' => array(
                 'items' => array(
                     array(
                         'text' => $modx->lexicon('action_update'),
                         'handler' => 'function(itm,e) {
-                            this.update(itm,e);
+                            this.updateAction(itm,e);
                         }',
                     ),'-',array(
                         'text' => $modx->lexicon('action_create_here'),
                         'handler' => 'function(itm,e) {
-                            this.create(itm,e);
+                            this.createAction(itm,e);
                         }',
                     ),'-',array(
                         'text' => $modx->lexicon('action_remove'),
                         'handler' => 'function(itm,e) {
-                            this.remove(itm,e);
+                            this.removeAction(itm,e);
                         }',
                     ),
                 ),
             ),
         );
     }
-
-    return $this->toJSON($as);
-    die();
 }
+
+
+return $this->toJSON($list);

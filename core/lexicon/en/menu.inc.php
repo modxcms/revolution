@@ -1,4 +1,11 @@
 <?php
+/**
+ * English language strings for Menus
+ *
+ * @package modx
+ * @subpackage lexicon
+ */
+$_lang['lexicon_key'] = 'Lexicon Key';
 $_lang['menu_create'] = 'Create Menu';
 $_lang['menu_confirm_remove'] = 'Are you sure you want to remove this action from the menu?';
 $_lang['menu_err_nf'] = 'Menu not found!';

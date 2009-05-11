@@ -20,18 +20,22 @@ $modx->lexicon->load('action','menu');
 
 if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('menu_err_ns'));
-$menu = $modx->getObject('modMenu',$_REQUEST['id']);
+/* get menu */
+if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('menu_err_ns'));
+$menu = $modx->getObject('modMenu',$_POST['id']);
 if ($menu == null) return $modx->error->failure($modx->lexicon('menu_err_nf'));
 
+/* verify action */
 if (!isset($_POST['action_id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
-if ($_POST['action_id'] == 0) {
+if (empty($_POST['action_id'])) {
 	$action = $modx->newObject('modAction');
 	$action->set('id',0);
 } else {
 	$action = $modx->getObject('modAction',$_POST['action_id']);
 	if ($action == null) return $modx->error->failure($modx->lexicon('action_err_nf'));
 }
+
+/* verify parent */
 if (!isset($_POST['parent'])) return $modx->error->failure($modx->lexicon('menu_parent_err_ns'));
 if ($_POST['parent'] == 0) {
 	$parent = $modx->newObject('modMenu');
@@ -41,14 +45,14 @@ if ($_POST['parent'] == 0) {
 	if ($parent == null) return $modx->error->failure($modx->lexicon('menu_parent_err_nf'));
 }
 
+/* save menu */
+$menu->fromArray($_POST);
 $menu->set('parent',$parent->get('id'));
 $menu->set('action',$action->get('id'));
-$menu->set('text',isset($_POST['text']) ? $_POST['text'] : '');
-$menu->set('icon',isset($_POST['icon']) ? $_POST['icon'] : '');
-$menu->set('params',isset($_POST['params']) ? $_POST['params'] : '');
-$menu->set('handler',isset($_POST['handler']) ? $_POST['handler'] : '');
 
-if (!$menu->save()) return $modx->error->failure($modx->lexicon('menu_err_save'));
+if ($menu->save() == false) {
+    return $modx->error->failure($modx->lexicon('menu_err_save'));
+}
 
 /* log manager action */
 $modx->logManagerAction('menu_update','modMenu',$menu->get('id'));
