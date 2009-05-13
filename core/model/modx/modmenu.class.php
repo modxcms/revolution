@@ -17,7 +17,7 @@ class modMenu extends modAccessibleSimpleObject {
      * {@inheritdoc}
      */
     function save($cacheFlag = null) {
-        $this->rebuildCache();
+        if (is_a($this->xpdo, 'modX')) $this->rebuildCache();
         return parent::save($cacheFlag);
     }
 
@@ -27,7 +27,7 @@ class modMenu extends modAccessibleSimpleObject {
      * {@inheritdoc}
      */
     function remove() {
-        $this->rebuildCache();
+        if (is_a($this->xpdo, 'modX')) $this->rebuildCache();
         return parent::remove();
     }
 
