@@ -41,7 +41,7 @@ class modLexicon {
      * @var array $_lexicon
      * @access private
      */
-    var $_lexicon;
+    var $_lexicon = array();
     /**
      * Directories to search for language strings in.
      *
@@ -49,14 +49,17 @@ class modLexicon {
      * @var array $_paths
      * @access private
      */
-    var $_paths;
+    var $_paths = array();
 
     function modLexicon(&$modx) {
         $this->__construct($modx);
     }
     function __construct(&$modx) {
         $this->modx =& $modx;
-        $this->init();
+        $this->_paths = array(
+             'core' => $this->modx->getOption('core_path') . 'cache/lexicon/',
+        );
+        $this->_lexicon = array();
     }
 
     /**
@@ -98,7 +101,7 @@ class modLexicon {
     function getCacheKey($namespace = 'core',$topic = 'default',$language = '') {
         if (empty($namespace)) $namespace = 'core';
         if (empty($topic)) $topic = 'default';
-        if (empty($language)) $language = $this->modx->cultureKey;
+        if (empty($language)) $language = $this->modx->getOption('manager_language',null,$this->modx->cultureKey);
         return 'lexicon/'.$language.'/'.$namespace.'/'.$topic;
     }
 
@@ -130,16 +133,16 @@ class modLexicon {
             } else { /* if namespace, search specified lexicon */
                 $params = explode(':',$topic);
                 if (count($params) <= 2) {
-                    $language = $this->modx->cultureKey;
+                    $language = $this->modx->getOption('manager_language',null,$this->modx->cultureKey);
                     $namespace = $params[0];
-                    $topc = $params[1];
+                    $topic_parsed = $params[1];
                 } else {
                     $language = $params[0];
                     $namespace = $params[1];
-                    $topc = $params[2];
+                    $topic_parsed = $params[2];
                 }
 
-                $_lang = $this->loadCache($namespace,$topc,$language);
+                $_lang = $this->loadCache($namespace,$topic_parsed,$language);
                 $this->_lexicon = array_merge($this->_lexicon,$_lang);
             }
         }
@@ -156,9 +159,30 @@ class modLexicon {
      * @return array The loaded lexicon array.
      */
     function loadCache($namespace = 'core', $topic = 'default', $language = '') {
+        if (empty($language)) $language = $this->modx->getOption('manager_language',null,$this->modx->cultureKey);
         $key = $this->getCacheKey($namespace, $topic, $language);
-        if (!$cached = $this->modx->cacheManager->get($key)) {
-            $cached = $this->modx->cacheManager->generateLexiconTopic($this, $namespace, $topic, $language);
+
+        if (($cached = $this->modx->cacheManager->get($key)) == null) {
+            $results= false;
+
+            $c= $this->modx->newQuery('modLexiconEntry');
+            $c->innerJoin('modLexiconTopic','modLexiconTopic');
+            $c->innerJoin('modNamespace','modNamespace','modNamespace.name = modLexiconTopic.namespace');
+            $c->where(array(
+                'modLexiconTopic.name' => $topic,
+                'modNamespace.name' => $namespace,
+                'modLexiconEntry.language' => $language,
+            ));
+            $c->sortby('`modLexiconEntry`.`name`','ASC');
+
+            if ($entries= $this->modx->getCollection('modLexiconEntry',$c)) {
+                $results= array();
+                foreach ($entries as $entry) {
+                    $results[$entry->get('name')]= $entry->get('value');
+                }
+            }
+
+            $cached = $this->modx->cacheManager->generateLexiconTopic($key,$results);
         }
         if (empty($cached)) {
             $this->modx->log(MODX_LOG_LEVEL_ERROR, "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
@@ -205,18 +229,6 @@ class modLexicon {
         } else if (is_string($keys) && $keys != '') {
             $this->_lexicon[$keys] = $text;
         }
-    }
-
-    /**
-     * Initializes the lexicon.
-     *
-     * @access protected
-     */
-    function init() {
-        $this->_paths = array(
-             'core' => $this->modx->getOption('core_path') . 'cache/lexicon/',
-        );
-        $this->_lexicon = array();
     }
 
     /**
