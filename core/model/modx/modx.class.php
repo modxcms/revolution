@@ -729,6 +729,25 @@ class modX extends xPDO {
     }
 
     /**
+     * Send the user to a type-specific core error page and halt PHP execution.
+     *
+     * @param string $type The type of error to present.
+     * @param array $options An array of options to provide for the error file.
+     */
+    function sendError($type = '', $options = array()) {
+        if (!is_string($type) || empty($type)) $type = $this->getOption('error_type', $options, 'unavailable');
+        while (@ob_end_clean()) {}
+        if (file_exists(MODX_CORE_PATH . "error/{$type}.include.php")) {
+            @include(MODX_CORE_PATH . "error/{$type}.include.php");
+        }
+        header($this->getOption('error_header', $options, 'HTTP/1.1 503 Service Unavailable'));
+        $errorPageTitle = $this->getOption('error_pagetitle', $options, 'Error 503: Site temporarily unavailable');
+        $errorMessage = $this->getOption('error_message', $options, '<h1>' . $this->getOption('site_name', $options, 'Error 503') . '</h1><p>Site temporarily unavailable.</p>');
+        echo "<html><head><title>{$errorPageTitle}</title></head><body>{$errorMessage}</body></html>";
+        exit();
+    }
+
+    /**
      * Sends a redirect to the specified URL using the specified method.
      *
      * Valid $type values include:
@@ -767,46 +786,26 @@ class modX extends xPDO {
         }
         if ($idInt > 0) {
             $this->resource= $this->request->getResource('id', $idInt);
-            if (!$this->resource) {
-                $id= $this->getOption('error_page', null, $this->getOption('site_start'));
-                if (!$this->resource= $this->request->getResource('id', $id)) {
-                    $this->resource= $this->newObject('modDocument');
-                    $this->resource->set('cacheable', true);
-                    $this->resource->set('context_key', $this->context->get('key'));
-                    $this->resource->_content= "<html><body><h1>404 Not Found</h1></body></html>";
+            if ($this->resource) {
+                $this->resourceIdentifier= $idInt;
+                $this->resourceMethod= 'id';
+                if (isset($options['response_code']) && !empty($options['response_code'])) {
+                    header($options['response_code']);
                 }
-                $options['response_code']= 'HTTP/1.0 404 Not Found';
-            } else {
-                $id= $idInt;
+                $this->request->prepareResponse();
+                exit();
             }
-            $this->resourceIdentifier= $id;
-            $this->resourceMethod= 'id';
-            if (isset($options['response_code']) && !empty($options['response_code'])) {
-                header($options['response_code']);
-            }
-            $this->request->prepareResponse();
-            exit();
+            $options= array_merge(
+                array(
+                    'error_type' => '404'
+                    ,'error_header' => $this->getOption('error_page_header', null, 'HTTP/1.1 404 Not Found')
+                    ,'error_pagetitle' => $this->getOption('error_page_pagetitle', null, 'Error 404: Page not found')
+                    ,'error_message' => $this->getOption('error_page_message', null, '<h1>Page not found</h1><p>The page you requested was not found.</p>')
+                ),
+                $options
+            );
         }
         $this->sendError($id, $options);
-    }
-
-    /**
-     * Send the user to a type-specific core error page and halt PHP execution.
-     *
-     * @param string $type The type of error to present.
-     * @param array $options An array of options to provide for the error file.
-     */
-    function sendError($type = '', $options = array()) {
-        if (!is_string($type) || empty($type)) $type = $this->getOption('error_type', $options, 'unavailable');
-        while (@ob_end_clean()) {}
-        if (file_exists(MODX_CORE_PATH . "error/{$type}.include.php")) {
-            @include(MODX_CORE_PATH . "error/{$type}.include.php");
-        }
-        header($this->getOption('error_header', $options, 'HTTP/1.1 503 Service Unavailable'));
-        $errorPageTitle = $this->getOption('error_pagetitle', $options, 'Error 503: Site temporarily unavailable');
-        $errorMessage = $this->getOption('error_message', $options, '<h1>' . $this->getOption('site_name', $options, 'Error 503') . '</h1><p>Site temporarily unavailable.</p>');
-        echo "<html><head><title>{$errorPageTitle}</title></head><body>{$errorMessage}</body></html>";
-        exit();
     }
 
     /**
@@ -818,8 +817,19 @@ class modX extends xPDO {
      * page.
      */
     function sendErrorPage($options = null) {
+        if (!is_array($options)) $options = array();
+        $options= array_merge(
+            array(
+                'response_code' => $this->getOption('error_page_header', $options, 'HTTP/1.1 404 Not Found')
+                ,'error_type' => '404'
+                ,'error_header' => $this->getOption('error_page_header', null, 'HTTP/1.1 404 Not Found')
+                ,'error_pagetitle' => $this->getOption('error_page_pagetitle', null, 'Error 404: Page not found')
+                ,'error_message' => $this->getOption('error_page_message', null, '<h1>Page not found</h1><p>The page you requested was not found.</p>')
+            ),
+            $options
+        );
         $this->invokeEvent('OnPageNotFound', $options);
-        $this->sendForward($this->getOption('error_page', $options), array('response_code' => $this->getOption('error_page_header', $options, 'HTTP/1.1 404 Not Found')));
+        $this->sendForward($this->getOption('error_page', $options, '404'), $options);
     }
 
     /**
@@ -831,9 +841,19 @@ class modX extends xPDO {
      * event and unauthorized page.
      */
     function sendUnauthorizedPage($options = null) {
-        $unauthorizedPage= $this->getOption('unauthorized_page', $options, $this->getOption('start_page'));
+        if (!is_array($options)) $options = array();
+        $options= array_merge(
+            array(
+                'response_code' => $this->getOption('unauthorized_page_header' ,$options ,'HTTP/1.1 401 Unauthorized')
+                ,'error_type' => '401'
+                ,'error_header' => $this->getOption('unauthorized_page_header', null, 'HTTP/1.1 401 Unauthorized')
+                ,'error_pagetitle' => $this->getOption('unauthorized_page_pagetitle', null, 'Error 401: Unauthorized')
+                ,'error_message' => $this->getOption('unauthorized_page_message', null, '<h1>Unauthorized</h1><p>You are not authorized to view the requested content.</p>')
+            ),
+            $options
+        );
         $this->invokeEvent('OnPageUnauthorized', $options);
-        $this->sendForward($unauthorizedPage, array('response_code' => $this->getOption('unauthorized_page_header', $options, 'HTTP/1.1 401 Unauthorized')));
+        $this->sendForward($this->getOption('unauthorized_page', $options, '401'), $options);
     }
 
     /**
@@ -2577,7 +2597,7 @@ class modX extends xPDO {
             if ($level === XPDO_LOG_LEVEL_FATAL) {
                 if (empty ($file)) $file= (isset ($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : (isset ($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '');
                 $this->_logInRegister($target, $level, $msg, $def, $file, $line);
-                $this->sendError();
+                $this->sendError('fatal');
             }
             if ($this->_debug === true || $level <= $this->logLevel) {
                 if (empty ($file)) $file= (isset ($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : (isset ($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '');
@@ -2591,7 +2611,7 @@ class modX extends xPDO {
                     $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . XPDO_LOG_DIR;
                     $cacheManager->writeFile($filepath . $filename, '[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''), 'a');
                 }
-                $this->sendError();
+                $this->sendError('fatal');
             }
             parent :: _log($level, $msg, $target, $def, $file, $line);
         }
