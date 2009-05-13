@@ -316,10 +316,9 @@ class modX extends xPDO {
                 )
             );
             $this->setPackage('modx', MODX_CORE_PATH . 'model/');
-            $this->setLogTarget('HTML');
+            $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
         } else {
-            include (MODX_CORE_PATH . 'error/unavailable.include.php');
-            die('Could not find the configuration file!');
+            $this->sendError($this->getOption('error_type', null, 'unavailable'), $options);
         }
     }
 
@@ -455,7 +454,11 @@ class modX extends xPDO {
         if (array_key_exists($name, $this->services)) {
             $service= & $this->services[$name];
         } else {
-            $this->log(MODX_LOG_LEVEL_ERROR, "Problem getting service {$name}, instance of class {$class}, from path {$path}, with params " . print_r($params, true));
+            if ($this->getDebug() === true) {
+                $this->log(MODX_LOG_LEVEL_DEBUG, "Problem getting service {$name}, instance of class {$class}, from path {$path}, with params " . print_r($params, true));
+            } else {
+                $this->log(MODX_LOG_LEVEL_ERROR, "Problem getting service {$name}, instance of class {$class}, from path {$path}");
+            }
         }
         return $service;
     }
@@ -750,50 +753,87 @@ class modX extends xPDO {
      * Forwards the request to another resource without changing the URL.
      *
      * @param integer $id The resource identifier.
-     * @param string $responseCode An optional response code to send with
-     * the response to the browser.
+     * @param string $options An array of options for the process.
      */
-    function sendForward($id, $responseCode= '') {
+    function sendForward($id, $options = null) {
         if (!$this->getRequest()) {
             $this->log(MODX_LOG_LEVEL_FATAL, "Could not load request class.");
         }
-        $this->resource= $this->request->getResource('id', $id);
-        if (!$this->resource) {
-            $id= $this->config['error_page'] ? $this->config['error_page'] : $this->config['site_start'];
-            if (!$this->resource= $this->request->getResource('id', $id)) {
-                $this->resource= $this->newObject('modDocument');
-                $this->resource->set('cacheable', true);
-                $this->resource->_output= "<html><body><h1>404 Not Found</h1></body></html>";
+        $idInt = intval($id);
+        if (is_string($options) && !empty($options)) {
+            $options = array('response_code' => $options);
+        } elseif (!is_array($options)) {
+            $options = array();
+        }
+        if ($idInt > 0) {
+            $this->resource= $this->request->getResource('id', $idInt);
+            if (!$this->resource) {
+                $id= $this->getOption('error_page', null, $this->getOption('site_start'));
+                if (!$this->resource= $this->request->getResource('id', $id)) {
+                    $this->resource= $this->newObject('modDocument');
+                    $this->resource->set('cacheable', true);
+                    $this->resource->set('context_key', $this->context->get('key'));
+                    $this->resource->_content= "<html><body><h1>404 Not Found</h1></body></html>";
+                }
+                $options['response_code']= 'HTTP/1.0 404 Not Found';
+            } else {
+                $id= $idInt;
             }
-            $responseCode= 'HTTP/1.0 404 Not Found';
+            $this->resourceIdentifier= $id;
+            $this->resourceMethod= 'id';
+            if (isset($options['response_code']) && !empty($options['response_code'])) {
+                header($options['response_code']);
+            }
+            $this->request->prepareResponse();
+            exit();
         }
-        $this->resourceIdentifier= $id;
-        $this->resourceMethod= 'id';
-        if ($responseCode) {
-            header($responseCode);
+        $this->sendError($id, $options);
+    }
+
+    /**
+     * Send the user to a type-specific core error page and halt PHP execution.
+     *
+     * @param string $type The type of error to present.
+     * @param array $options An array of options to provide for the error file.
+     */
+    function sendError($type = '', $options = array()) {
+        if (!is_string($type) || empty($type)) $type = $this->getOption('error_type', $options, 'unavailable');
+        while (@ob_end_clean()) {}
+        if (file_exists(MODX_CORE_PATH . "error/{$type}.include.php")) {
+            @include(MODX_CORE_PATH . "error/{$type}.include.php");
         }
-        $this->request->preserveRequest('referrer.forwarded');
-        $this->request->prepareResponse();
+        header($this->getOption('error_header', $options, 'HTTP/1.1 503 Service Unavailable'));
+        $errorPageTitle = $this->getOption('error_pagetitle', $options, 'Error 503: Site temporarily unavailable');
+        $errorMessage = $this->getOption('error_message', $options, '<h1>' . $this->getOption('site_name', $options, 'Error 503') . '</h1><p>Site temporarily unavailable.</p>');
+        echo "<html><head><title>{$errorPageTitle}</title></head><body>{$errorMessage}</body></html>";
         exit();
     }
 
     /**
-     * Send the user to the error page, with the referring URL stored in $_REQUEST['refurl'].
+     * Send the user to a MODx virtual error page.
+     *
+     * @uses invokeEvent() The OnPageNotFound event is invoked before the error page is forwarded
+     * to.
+     * @param array $options An array of options to provide for the OnPageNotFound event and error
+     * page.
      */
-    function sendErrorPage() {
-        $this->invokeEvent('OnPageNotFound');
-        $this->sendForward($this->config['error_page'], 'HTTP/1.0 404 Not Found');
+    function sendErrorPage($options = null) {
+        $this->invokeEvent('OnPageNotFound', $options);
+        $this->sendForward($this->getOption('error_page', $options), array('response_code' => $this->getOption('error_page_header', $options, 'HTTP/1.1 404 Not Found')));
     }
 
     /**
-     * Send the user to the unauthorized page, with the referring URL stored in $_REQUEST['refurl'].
+     * Send the user to the MODx unauthorized page.
      *
-     * @return void
+     * @uses invokeEvent() The OnPageNotFound event is invoked before the unauthorized page is
+     * forwarded to.
+     * @param array $options An array of options to provide for the OnPageUnauthorized
+     * event and unauthorized page.
      */
-    function sendUnauthorizedPage() {
-        $unauthorizedPage= isset ($this->config['unauthorized_page']) ? $this->config['unauthorized_page'] : $this->config['start_page'];
-        $this->invokeEvent('OnPageUnauthorized');
-        $this->sendForward($unauthorizedPage, 'HTTP/1.0 401 Unauthorized');
+    function sendUnauthorizedPage($options = null) {
+        $unauthorizedPage= $this->getOption('unauthorized_page', $options, $this->getOption('start_page'));
+        $this->invokeEvent('OnPageUnauthorized', $options);
+        $this->sendForward($unauthorizedPage, array('response_code' => $this->getOption('unauthorized_page_header', $options, 'HTTP/1.1 401 Unauthorized')));
     }
 
     /**
@@ -2537,11 +2577,7 @@ class modX extends xPDO {
             if ($level === XPDO_LOG_LEVEL_FATAL) {
                 if (empty ($file)) $file= (isset ($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : (isset ($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '');
                 $this->_logInRegister($target, $level, $msg, $def, $file, $line);
-                while (@ob_end_clean()) {}
-                @include(MODX_CORE_PATH . 'error/fatal.include.php');
-                header('HTTP/1.1 500 Internal Server Error');
-                echo "<html><title>Error 500: Internal Server Error</title><body><h1>Error 500</h1><p>A fatal application error has been encountered.</p></body></html>";
-                exit();
+                $this->sendError();
             }
             if ($this->_debug === true || $level <= $this->logLevel) {
                 if (empty ($file)) $file= (isset ($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : (isset ($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '');
@@ -2555,10 +2591,7 @@ class modX extends xPDO {
                     $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . XPDO_LOG_DIR;
                     $cacheManager->writeFile($filepath . $filename, '[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''), 'a');
                 }
-                @include(MODX_CORE_PATH . 'error/fatal.include.php');
-                header('HTTP/1.1 500 Internal Server Error');
-                echo "<html><title>Error 500: Internal Server Error</title><body><h1>Error 500</h1><p>A fatal application error has been encountered.</p></body></html>";
-                exit();
+                $this->sendError();
             }
             parent :: _log($level, $msg, $target, $def, $file, $line);
         }

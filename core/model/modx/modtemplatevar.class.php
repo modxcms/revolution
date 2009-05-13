@@ -19,6 +19,10 @@ class modTemplateVar extends modElement {
         'INHERIT',
         'DIRECTORY'
     );
+    /**
+     * @var integer Indicates a value is loaded for a specified resource.
+     */
+    var $resourceId= 0;
 
     function modTemplateVar(& $xpdo) {
         $this->__construct($xpdo);
@@ -97,12 +101,12 @@ class modTemplateVar extends modElement {
      */
     function getValue($resourceId= 0) {
         $value= null;
-        if ($resourceId && array_key_exists('value', $this->_fields)) {
-            $value= $this->get('value');
-        }
-        elseif ($resourceId) {
+        $resourceId = intval($resourceId);
+        if ($resourceId) {
             if ($resourceId === $this->xpdo->resourceIdentifier && isset ($this->xpdo->documentObject[$this->get('name')]) && is_array($this->xpdo->documentObject[$this->get('name')])) {
                 $value= $this->xpdo->documentObject[$this->get('name')][1];
+            } elseif ($resourceId === $this->get('resourceId') && array_key_exists('value', $this->_fields)) {
+                $value= $this->get('value');
             } else {
                 $resource = $this->xpdo->getObject('modTemplateVarResource',array(
                     'tmplvarid' => $this->get('id'),
@@ -110,6 +114,7 @@ class modTemplateVar extends modElement {
                 ),true);
                 if ($resource != null) {
                     $value= $resource->get('value');
+                    $this->set('resourceId', $resourceId);
                 }
             }
         }

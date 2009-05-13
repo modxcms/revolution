@@ -164,7 +164,8 @@ class modResource extends modAccessibleSimpleObject {
             $c = $this->xpdo->newQuery('modTemplateVar');
             $c->select('
                 DISTINCT modTemplateVar.*,
-                IF(ISNULL(tvc.value),modTemplateVar.default_text,tvc.value) AS value
+                IF(ISNULL(tvc.value),modTemplateVar.default_text,tvc.value) AS value,
+                IF(ISNULL(tvc.value),0,'.$this->id.') AS resourceId
             ');
             $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
                 '`tvtpl`.`tmplvarid` = `modTemplateVar`.`id`',
@@ -292,7 +293,7 @@ class modResource extends modAccessibleSimpleObject {
         $this->save();
     }
 
-    function addLock($user = 0) {
+    function addLock($user = 0, $options = array()) {
         $locked = false;
         if (is_a($this->xpdo, 'modX')) {
             if (!$user) {
@@ -301,7 +302,7 @@ class modResource extends modAccessibleSimpleObject {
             $lockedBy = $this->getLock();
             if (empty($lockedBy) || ($lockedBy == $user)) {
                 $this->xpdo->registry->locks->subscribe('/resource/');
-                $this->xpdo->registry->locks->send('/resource/', array(md5($this->get('id')) => $user), array('ttl' => $this->xpdo->getOption('lock_ttl', array(), 360)));
+                $this->xpdo->registry->locks->send('/resource/', array(md5($this->get('id')) => $user), array('ttl' => $this->xpdo->getOption('lock_ttl', $options, 360)));
                 $locked = true;
             } elseif ($lockedBy != $user) {
                 $locked = $lockedBy;
@@ -312,13 +313,15 @@ class modResource extends modAccessibleSimpleObject {
 
     function getLock() {
         $lock = 0;
-        if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
-            $this->xpdo->registry->addRegister('locks', 'registry.modDbRegister', array('directory' => 'locks'));
-            $this->xpdo->registry->locks->connect();
-            $this->xpdo->registry->locks->subscribe('/resource/' . md5($this->get('id')));
-            if ($msgs = $this->xpdo->registry->locks->read(array('remove_read' => false, 'poll_limit' => 1))) {
-                $msg = reset($msgs);
-                $lock = intval($msg);
+        if (is_a($this->xpdo, 'modX')) {
+            if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
+                $this->xpdo->registry->addRegister('locks', 'registry.modDbRegister', array('directory' => 'locks'));
+                $this->xpdo->registry->locks->connect();
+                $this->xpdo->registry->locks->subscribe('/resource/' . md5($this->get('id')));
+                if ($msgs = $this->xpdo->registry->locks->read(array('remove_read' => false, 'poll_limit' => 1))) {
+                    $msg = reset($msgs);
+                    $lock = intval($msg);
+                }
             }
         }
         return $lock;

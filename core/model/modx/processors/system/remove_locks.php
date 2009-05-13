@@ -7,10 +7,11 @@
  */
 if (!$modx->hasPermission('remove_locks')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-/* remove locks */
-$locks = $modx->getCollection('modActiveUser');
-foreach ($locks as $lock) {
-	if (!$lock->remove()) return $modx->error->failure($modx->lexicon('remove_locks_error'));
+if ($modx->getService('registry', 'registry.modRegistry')) {
+    $modx->registry->addRegister('locks', 'registry.modDbRegister', array('directory' => 'locks'));
+    $modx->registry->locks->connect();
+    $modx->registry->locks->subscribe('/resource/');
+    $modx->registry->locks->read(array('remove_read' => true, 'poll_limit' => 1, 'msg_limit' => 1000));
 }
 
 return $modx->error->success();

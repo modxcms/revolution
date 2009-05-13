@@ -18,6 +18,7 @@ $_lang['resource_alias_help'] = 'An alias for this resource. This will make the 
 $_lang['resource_change_template_confirm'] = 'Are you sure you want to change this template? Doing so will erase your current Template Variable values for this resource.';
 $_lang['resource_cacheable'] = 'Cacheable';
 $_lang['resource_cacheable_help'] = 'When enabled, the resource will be saved to the cache.';
+$_lang['resource_cancel_dirty_confirm'] = 'You have changes pending; are you sure you want to cancel?';
 $_lang['resource_class_key_help'] = 'This is the class key of the resource, showing its MODx type.';
 $_lang['resource_content'] = 'Resource Content';
 $_lang['resource_contentdispo'] = 'Content Disposition';

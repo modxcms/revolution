@@ -59,9 +59,20 @@ if (!$modx->hasPermission('save_document') || !$resource->checkPolicy('save')) {
 
 $locked = $resource->addLock();
 if ($locked !== true) {
-    $lockedBy = intval($locked);
-    $user = $modx->getObject('modUser', $lockedBy);
-    if ($lockedBy) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+    if (isset($_REQUEST['steal_lock']) && !empty($_REQUEST['steal_lock'])) {
+        if (!$modx->hasPermission('steal_locks') || !$resource->checkPolicy('steal_lock')) {
+            return $modx->error->failure($modx->lexicon('permission_denied'));
+        }
+        if ($locked > 0 && $locked != $modx->user->get('id')) {
+            $resource->removeLock($locked);
+            $locked = $resource->addLock($modx->user->get('id'));
+        }
+    }
+    if ($locked !== true) {
+        $lockedBy = intval($locked);
+        $user = $modx->getObject('modUser', $lockedBy);
+        if ($lockedBy) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+    }
 }
 
 $resourceClass = isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : $resource->get('class_key');

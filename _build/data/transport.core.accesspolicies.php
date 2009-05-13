@@ -6,7 +6,7 @@ $collection['1']->fromArray(array (
   'description' => 'MODx Resource policy with all attributes.',
   'parent' => 0,
   'class' => '',
-  'data' => '{"create":true,"remove":true,"save":true,"load":true,"list":true,"view":true,"move":true,"publish":true,"unpublish":true,"delete":true,"undelete":true,"add_children":true}',
+  'data' => '{"create":true,"remove":true,"save":true,"load":true,"list":true,"view":true,"move":true,"publish":true,"unpublish":true,"delete":true,"undelete":true,"add_children":true,"steal_lock":true}',
 ), '', true, true);
 $collection['2']= $xpdo->newObject('modAccessPolicy');
 $collection['2']->fromArray(array (
