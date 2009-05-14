@@ -230,7 +230,7 @@ if (!$resource->get('class_key')) {
 }
 
 /* increase menu index if this is a new resource */
-if (!empty($modx->getOption('auto_menuindex'))) {
+if ($modx->getOption('auto_menuindex')) {
     $menuindex = $modx->getCount('modResource',array('parent' => $resource->get('parent')));
 }
 $resource->set('menuindex',isset($menuindex) ? $menuindex : 0);
