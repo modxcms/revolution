@@ -1,4 +1,10 @@
 <?php
+/**
+ * @package modx
+ * @subpackage lexicon
+ */
+$_lang['binary'] = 'Binary';
+$_lang['binary_desc'] = 'Is the file a binary file or text/ascii?';
 $_lang['content_type'] = 'Content Type';
 $_lang['content_type_desc'] = 'Content types are specific filesystem types for your resources. Here you can manage them; as well as associate them with file extensions.';
 $_lang['content_type_err_nf'] = 'Content type not found.';

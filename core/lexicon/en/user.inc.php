@@ -1,5 +1,8 @@
 <?php
 $_lang['authority'] = 'Authority';
+$_lang['change_password'] = 'Change Password';
+$_lang['change_password_confirm'] = 'Confirm password';
+$_lang['change_password_new'] = 'New password';
 $_lang['password_notification'] = 'Password Notification';
 $_lang['role'] = 'Role';
 $_lang['role_create'] = 'Create Role';

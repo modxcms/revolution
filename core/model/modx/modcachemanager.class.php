@@ -488,11 +488,11 @@ class modCacheManager extends xPDOCacheManager {
                         break;
                     }
                 } else {
-                    $publishingResults['errors'][]= sprintf($this->modx->lexicon('cache_publish_event_error'),$stmt->errorInfo());
+                    $publishingResults['errors'][]= $this->modx->lexicon('cache_publish_event_error',array('info' => $stmt->errorInfo()));
                 }
             }
             else {
-                $publishingResults['errors'][]= sprintf($this->modx->lexicon('cache_publish_event_error'),$sql);
+                $publishingResults['errors'][]= $this->modx->lexicon('cache_publish_event_error',array('info' => $sql));
             }
             if ($minpub) $timesArr[]= $minpub;
 
@@ -507,10 +507,10 @@ class modCacheManager extends xPDOCacheManager {
                         break;
                     }
                 } else {
-                    $publishingResults['errors'][]= sprintf($this->modx->lexicon('cache_unpublish_event_error'), $stmt->errorInfo());
+                    $publishingResults['errors'][]= $this->modx->lexicon('cache_unpublish_event_error',array('info' => $stmt->errorInfo()));
                 }
             } else {
-                $publishingResults['errors'][]= sprintf($this->modx->lexicon('cache_unpublish_event_error'), $sql);
+                $publishingResults['errors'][]= $this->modx->lexicon('cache_unpublish_event_error',array('info' => $sql));
             }
             if ($minunpub) $timesArr[]= $minunpub;
 

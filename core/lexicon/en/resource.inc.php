@@ -114,6 +114,7 @@ $_lang['resource_unpublishdate_help'] = 'If you set an unpublish date, the resou
 $_lang['resource_untitled'] = 'Untitled Resource';
 $_lang['resource_with_id_not_found'] = 'Resource with ID %s not found!';
 $_lang['resource_view'] = 'View Resource';
+$_lang['show_sort_options'] = 'Show Sorting Options';
 $_lang['site_schedule'] = 'Schedule';
 $_lang['site_schedule_desc'] = 'This shows the current resources that are scheduled to publish or unpublished on specified dates. You may toggle the current view by clicking on the toolbar button.';
 $_lang['source'] = 'Source';

@@ -2332,7 +2332,10 @@ class modX extends xPDO {
         $id= intval($id);
         if (!$id) $id= $this->getLoginUserID();
         if ($au = $this->getObject('modActiveUser',array('action' => $action, 'internalKey:!=' => $id))) {
-            $msg = sprintf($this->lexicon('lock_msg'), $au->get('username'), $type);
+            $msg = $this->lexicon('lock_msg',array(
+                'name' => $au->get('username'),
+                'object' => $type,
+            ));
         }
         return $msg;
     }

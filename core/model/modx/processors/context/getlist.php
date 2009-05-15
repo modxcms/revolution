@@ -30,10 +30,7 @@ $actions = $modx->request->getAllActionIDs();
 $list = array();
 foreach ($collection as $key => $object) {
     if (!$object->checkPolicy('list')) continue;
-	$la = array_merge(
-       $object->toArray(),
-       array('key_link' => '<a href="index.php?a='.$actions['context/update'].'&key='.$key.'" title="' . $modx->lexicon('click_to_edit_title') . '">' . $key . '</a>')
-    );
+	$la = $object->toArray();
     $la['menu'] = array(
         array(
             'text' => $modx->lexicon('context_update'),

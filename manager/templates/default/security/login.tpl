@@ -52,7 +52,6 @@ var onManagerLoginFormRender = '{$onManagerLoginFormRender}';
     <input type="checkbox" id="modx-login-rememberme" name="rememberme" />
     </form>
 </div>
-<!-- close #mx_loginbox -->
 
 <p class="loginLicense">
 {$_lang.login_copyright}
