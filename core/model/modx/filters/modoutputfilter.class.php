@@ -214,7 +214,7 @@ class modOutputFilter {
                     	$output = intval($output) + intval($m_val);
                     	break;
 
-                    case "substract":
+                    case "subtract":
                     case "decrement": /* Returns input decremented by option (default: -1) */
                     case "decr":
                         if (empty($m_val))
