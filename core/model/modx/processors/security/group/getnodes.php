@@ -23,7 +23,7 @@ foreach ($groups as $group) {
 		'id' => 'n_ug_'.$group->get('id'),
 		'leaf' => 0,
 		'type' => 'usergroup',
-		'cls' => 'folder',
+		'cls' => 'icon-group',
         'menu' => array(
             'items' => array(
                 array(
@@ -64,7 +64,7 @@ if ($g != null) {
 			'id' => 'n_user_'.$user->get('id'),
 			'leaf' => 1,
 			'type' => 'user',
-			'cls' => '',
+			'cls' => 'icon-user',
             'menu' => array(
                 'items' => array(
                     array(

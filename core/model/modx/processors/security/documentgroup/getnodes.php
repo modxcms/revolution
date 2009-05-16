@@ -23,7 +23,7 @@ if ($g == null) {
 			'id' => 'n_dg_'.$group->get('id'),
 			'leaf' => 0,
 			'type' => 'modResourceGroup',
-			'cls' => 'folder',
+			'cls' => 'icon-resourcegroup',
             'menu' => array(
                 'items' => array(
                     array(
@@ -51,7 +51,7 @@ if ($g == null) {
 			'id' => 'n_'.$resource->get('id'),
 			'leaf' => 1,
 			'type' => 'modResource',
-			'cls' => '',
+			'cls' => 'icon-'.$resource->get('class_key'),
             'menu' => array(
                 'items' => array(
                     array(

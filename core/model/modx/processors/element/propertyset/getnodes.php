@@ -30,7 +30,7 @@ switch ($node[0]) {
                 'text' => $category->get('category'),
                 'id' => 'cat_'.$category->get('id'),
                 'leaf' => false,
-                'cls' => 'folder icon-category',
+                'cls' => 'icon-category',
                 'href' => '',
                 'class_key' => 'modCategory',
                 'menu' => array(

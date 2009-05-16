@@ -36,7 +36,11 @@
 .icon-xls .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_excel.png) !important; }
 .icon-cfm .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_coldfusion.png) !important; }
 .icon-pdf .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_acrobat.png) !important; }
-.icon-js .x-tree-node-icon { background-image:url(../images/restyle/icons/script_gear.png) !important; }
+.icon-js .x-tree-node-icon { background-image:url(../images/restyle/icons/javascript.png) !important; }
+
+.icon-group .x-tree-node-icon { background-image:url(../images/restyle/icons/group.png) !important; }
+.icon-user .x-tree-node-icon { background-image:url(../images/restyle/icons/user.png) !important; }
+.icon-resourcegroup .x-tree-node-icon { background-image:url(../images/restyle/icons/application_cascade.png) !important; }
 
 .icon-list-new { background-image:url(../images/restyle/icons/layout_add.png) !important; }
 .icon-mark-active { background-image:url(../images/restyle/icons/layout_edit.png) !important; }
