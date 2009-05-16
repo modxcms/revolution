@@ -64,7 +64,7 @@ switch ($g[0]) {
                 'pk' => $category->get('id'),
                 'category' => $category->get('id'),
                 'leaf' => false,
-                'cls' => 'folder',
+                'cls' => 'icon-category',
                 'href' => '',
                 'type' => $g[1],
                 'menu' => array(
@@ -173,7 +173,7 @@ switch ($g[0]) {
                 'pk' => $element->get('id'),
                 'category' => 0,
                 'leaf' => true,
-                'cls' => 'file',
+                'cls' => 'icon-'.$g[1],
                 'href' => 'index.php?a='.$ar_actionmap[$g[1]].'&id='.$element->get('id'),
                 'type' => $g[1],
                 'qtip' => $element->get('description'),
@@ -190,7 +190,7 @@ switch ($g[0]) {
                 'text' => $modx->lexicon('templates'),
                 'id' => 'n_type_template',
                 'leaf' => false,
-                'cls' => 'folder',
+                'cls' => 'icon-template',
                 'href' => '',
                 'type' => 'template',
                 'menu' => array( 'items' => array(
@@ -213,7 +213,7 @@ switch ($g[0]) {
                 'text' => $modx->lexicon('tmplvars'),
                 'id' => 'n_type_tv',
                 'leaf' => false,
-                'cls' => 'folder',
+                'cls' => 'icon-tv',
                 'href' => '',
                 'type' => 'tv',
                 'menu' => array( 'items' => array(
@@ -236,7 +236,7 @@ switch ($g[0]) {
                 'text' => $modx->lexicon('chunks'),
                 'id' => 'n_type_chunk',
                 'leaf' => false,
-                'cls' => 'folder',
+                'cls' => 'icon-chunk',
                 'href' => '',
                 'type' => 'chunk',
                 'menu' => array( 'items' => array(
@@ -265,7 +265,7 @@ switch ($g[0]) {
                 'text' => $modx->lexicon('snippets'),
                 'id' => 'n_type_snippet',
                 'leaf' => false,
-                'cls' => 'folder',
+                'cls' => 'icon-snippet',
                 'href' => '',
                 'type' => 'snippet',
                 'menu' => array( 'items' => array(
@@ -288,7 +288,7 @@ switch ($g[0]) {
                 'text' => $modx->lexicon('plugins'),
                 'id' => 'n_type_plugin',
                 'leaf' => false,
-                'cls' => 'folder',
+                'cls' => 'icon-plugin',
                 'href' => '',
                 'type' => 'plugin',
                 'menu' => array( 'items' => array(
@@ -311,7 +311,7 @@ switch ($g[0]) {
                 'text' => $modx->lexicon('categories'),
                 'id' => 'n_category',
                 'leaf' => 0,
-                'cls' => 'folder',
+                'cls' => 'icon-category',
                 'href' => '',
                 'type' => 'category',
                 'menu' => array( 'items' => array(
@@ -349,7 +349,7 @@ switch ($g[0]) {
                 'pk' => $category->get('id'),
                 'category' => $category->get('id'),
                 'leaf' => false,
-                'cls' => 'file',
+                'cls' => 'icon-category',
                 'href' => '',
                 'type' => 'category',
                 'menu' => array(
@@ -413,7 +413,7 @@ switch ($g[0]) {
                 'pk' => $category->get('id'),
                 'category' => $category->get('id'),
                 'leaf' => false,
-                'cls' => 'folder',
+                'cls' => 'icon-category',
                 'href' => '',
                 'type' => $g[0],
                 'menu' => array(
@@ -514,7 +514,7 @@ switch ($g[0]) {
                 'pk' => $element->get('id'),
                 'category' => $cat_id,
                 'leaf' => 1,
-                'cls' => 'file',
+                'cls' => 'icon-'.$g[0],
                 'href' => 'index.php?a='.$ar_actionmap[$g[0]].'&id='.$element->get('id'),
                 'type' => $g[0],
                 'menu' => array(

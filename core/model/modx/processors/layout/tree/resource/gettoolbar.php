@@ -35,9 +35,14 @@ $items = array(
         'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'&class_key=modWebLink\");");',
     ),
     array(
-        'icon' => $p.'link_add.png',
+        'icon' => $p.'new-symlink.png',
         'tooltip' => $modx->lexicon('add_symlink'),
         'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'&class_key=modSymLink\");");',
+    ),
+    array(
+        'icon' => $p.'new-static-resource.png',
+        'tooltip' => $modx->lexicon('add_static_resource'),
+        'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'&class_key=modStaticResource\");");',
     ),
     '-',
     array(

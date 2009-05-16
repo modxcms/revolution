@@ -30,7 +30,7 @@ switch ($node[0]) {
                 'text' => $category->get('category'),
                 'id' => 'cat_'.$category->get('id'),
                 'leaf' => false,
-                'cls' => 'folder',
+                'cls' => 'folder icon-category',
                 'href' => '',
                 'class_key' => 'modCategory',
                 'menu' => array(
@@ -52,7 +52,7 @@ switch ($node[0]) {
                 'text' => $set->get('name'),
                 'id' => 'ps_'.$set->get('id'),
                 'leaf' => false,
-                'cls' => '',
+                'cls' => 'icon-propertyset',
                 'href' => '',
                 'class_key' => 'modPropertySet',
                 'data' => $set->toArray(),
@@ -104,7 +104,7 @@ switch ($node[0]) {
                 'text' => $set->get('name'),
                 'id' => 'ps_'.$set->get('id'),
                 'leaf' => false,
-                'cls' => 'folder',
+                'cls' => 'icon-propertyset',
                 'href' => '',
                 'class_key' => 'modPropertySet',
                 'data' => $set->toArray(),
@@ -146,11 +146,11 @@ switch ($node[0]) {
     case 'ps': /* grab all elements for property set */
 
         $classes = array(
-            'modChunk' => 'Chunk',
-            'modPlugin' => 'Plugin',
-            'modSnippet' => 'Snippet',
-            'modTemplate' => 'Template',
-            'modTemplateVar' => 'TemplateVar',
+            'modChunk' => $modx->lexicon('chunk'),
+            'modPlugin' => $modx->lexicon('plugin'),
+            'modSnippet' => $modx->lexicon('snippet'),
+            'modTemplate' => $modx->lexicon('template'),
+            'modTemplateVar' => $modx->lexicon('tv'),
         );
 
         foreach ($classes as $class => $alias) {
@@ -167,11 +167,13 @@ switch ($node[0]) {
 
             foreach ($els as $el) {
                 $sa = array(
-                    'text' => '<i>('.$alias.')</i> '.$el->get('name'),
+                    'text' => $el->get('name'),
                     'id' => 'el_'.$el->get('property_set').'_'.$el->get('id'),
                     'leaf' => true,
                     'href' => '',
                     'pk' => $el->get('id'),
+                    'qtip' => '<i>'.$alias.'</i>: <b>'.$el->get('name').'</b>'.($el->get('description') != '' ? ' - '.$el->get('description') : ''),
+                    'cls' => 'icon-'.strtolower($alias),
                     'propertyset' => $el->get('property_set'),
                     'element_class' => $class,
                     'menu' => array(

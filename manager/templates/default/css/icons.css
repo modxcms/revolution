@@ -1,14 +1,47 @@
+.icon-chunk .x-tree-node-icon { background-image:url(../images/restyle/icons/chunk.png) !important; }
+.icon-plugin .x-tree-node-icon { background-image:url(../images/restyle/icons/plugin.png) !important; }
+.icon-snippet .x-tree-node-icon { background-image:url(../images/restyle/icons/snippet.png) !important; }
+.icon-snippet .x-tree-node-icon { background-image:url(../images/restyle/icons/snippet.png) !important; }
+.icon-template .x-tree-node-icon { background-image:url(../images/restyle/icons/template.png) !important; }
+.icon-tv .x-tree-node-icon, .icon-templatevar .x-tree-node-icon { background-image:url(../images/restyle/icons/tv.png) !important; }
 
-.icon-list-new {
-    background-image:url(../images/restyle/icons/icon-list-new.gif) !important;
-}
-.icon-mark-active {
-    background-image:url(../images/restyle/icons/icon-mark-active.gif) !important;
-}
-.icon-mark-complete {
-    background-image:url(../images/restyle/icons/icon-mark-complete.gif) !important;
-}
+.icon-context .x-tree-node-icon { background-image:url(../images/restyle/icons/context.png) !important; }
 
+.icon-symlink .x-tree-node-icon { background-image:url(../images/restyle/icons/symlink.png) !important; }
+.icon-weblink .x-tree-node-icon { background-image:url(../images/restyle/icons/weblink.png) !important; }
+.icon-staticresource .x-tree-node-icon { background-image:url(../images/restyle/icons/static-resource.png) !important; }
+
+.icon-propertyset .x-tree-node-icon { background-image:url(../images/restyle/icons/property-set.png) !important; }
+
+.icon-file .x-tree-node-icon { background-image:url(../images/restyle/icons/disk.png) !important; }
+.icon-rss .x-tree-node-icon { background-image:url(../images/restyle/icons/feed.png) !important; }
+.icon-cal .x-tree-node-icon { background-image:url(../images/restyle/icons/calendar.png) !important; }
+.icon-sql .x-tree-node-icon { background-image:url(../images/restyle/icons/database_table.png) !important; }
+.icon-db .x-tree-node-icon { background-image:url(../images/restyle/icons/database.png) !important; }
+.icon-java .x-tree-node-icon, .icon-jar .x-tree-node-icon { background-image:url(../images/restyle/icons/cup.png) !important; }
+.icon-css .x-tree-node-icon { background-image:url(../images/restyle/icons/css.png) !important; }
+.icon-zip .x-tree-node-icon, .icon-tar .x-tree-node-icon, .icon-tgz .x-tree-node-icon { background-image:url(../images/restyle/icons/compress.png) !important; }
+.icon-jpg .x-tree-node-icon, .icon-jpeg .x-tree-node-icon, .icon-gif .x-tree-node-icon, .icon-png .x-tree-node-icon, .icon-bmp .x-tree-node-icon, .icon-tiff .x-tree-node-icon { background-image:url(../images/restyle/icons/picture.png) !important; }
+.icon-bat .x-tree-node-icon, .icon-scr .x-tree-node-icon { background-image:url(../images/restyle/icons/application_osx_terminal.png) !important; }
+.icon-log .x-tree-node-icon { background-image:url(../images/restyle/icons/computer.png) !important; }
+.icon-html .x-tree-node-icon, .icon-htm .x-tree-node-icon { background-image:url(../images/restyle/icons/html_valid.png) !important; }
+.icon-avi .x-tree-node-icon, .icon-mpg .x-tree-node-icon, .icon-mov .x-tree-node-icon { background-image:url(../images/restyle/icons/html_valid.png) !important; }
+.icon-rb .x-tree-node-icon { background-image:url(../images/restyle/icons/ruby.png) !important; }
+.icon-doc .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_word.png) !important; }
+.icon-ppt .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_powerpoint.png) !important; }
+.icon-php .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_php.png) !important; }
+.icon-access .x-tree-node-icon, .icon-htaccess .x-tree-node-icon { background-image:url(../images/restyle/icons/lock.png) !important; }
+.icon-php .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_php.png) !important; }
+.icon-flv .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_flash.png) !important; }
+.icon-xls .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_excel.png) !important; }
+.icon-cfm .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_coldfusion.png) !important; }
+.icon-pdf .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_acrobat.png) !important; }
+
+.icon-list-new { background-image:url(../images/restyle/icons/layout_add.png) !important; }
+.icon-mark-active { background-image:url(../images/restyle/icons/layout_edit.png) !important; }
+.icon-mark-complete { background-image:url(../images/restyle/icons/layout_header.png) !important; }
+
+/* stay options */
 .x-rbtn button{
     background-color:transparent;
     background-repeat:no-repeat;

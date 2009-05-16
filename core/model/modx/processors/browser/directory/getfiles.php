@@ -45,7 +45,7 @@ while(false !== ($name = $odir->read())) {
         }
 		$files[] = array(
 			'name' => $name,
-			'cls' => 'file',
+			'cls' => 'icon-'.$fileExtension,
 			'url' => $modx->getOption('base_url').$url,
 			'ext' => $fileExtension,
 			'pathname' => $fullname,

@@ -75,10 +75,11 @@ while(false !== ($name = $odir->read())) {
 
     /* get files in current dir */
     if (!is_dir($fullname) && $_POST['hideFiles'] != true) {
+        $ext = pathinfo($fullname,PATHINFO_EXTENSION);
         $files[$name] = array(
             'id' => $dir.'/'.$name,
             'text' => $name,
-            'cls' => 'file',
+            'cls' => 'icon-file icon-'.$ext,
             'type' => 'file',
             'disabled' => is_writable($fullname),
             'leaf' => true,

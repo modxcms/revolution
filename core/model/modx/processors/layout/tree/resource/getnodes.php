@@ -64,7 +64,7 @@ while ($item) {
     $canList = $item->checkPolicy('list');
     if ($canList) {
         if ($itemClass == 'modContext') {
-            $class= 'folder';
+            $class= 'icon-context';
             $menu = array(
                 array(
                     'id' => 'cm-context-edit',
@@ -145,13 +145,11 @@ while ($item) {
                 'menu' => array( 'items' => $menu ),
             );
         } else {
-            $class = '';
-            if ($item->class_key == 'modWebLink') {
-                $class = 'weblink';
-            } else {
-                $class = $item->isfolder ? 'folder' : 'file';
-            }
-            $class .= ($item->published ? '' : ' unpublished').($item->deleted ? ' deleted' : '').($item->hidemenu == 1 ? ' hidemenu' : '');
+            $class = 'icon-'.strtolower(str_replace('mod','',$item->get('class_key')));
+            $class .= ($item->get('published') ? '' : ' unpublished')
+                .($item->get('deleted') ? ' deleted' : '')
+                .($item->get('hidemenu') == 1 ? ' hidemenu' : '');
+
             $menu = array(
                 array(
                     'id' => 'cm-resource-header',
