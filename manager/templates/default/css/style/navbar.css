@@ -76,8 +76,7 @@ li.top li.last span {
     position: absolute;
     bottom: 0;
     left: 24px;
-    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat
-        100% 0;
+    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat 100% 0;
 }
 
 #modx-topnav-div li:hover .zone {
@@ -102,7 +101,6 @@ li.top li.last span {
     display: block;
     float: none;
     width: 200px;
-    #margin-top: -5px;
 }
 
 li.top .zone {

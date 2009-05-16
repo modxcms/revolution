@@ -58,7 +58,7 @@
 
 <div id="modx-container">
     <div id="modx-topbar">
-        <div id="modx-logo"><img src="templates/{$_config.manager_theme}/images/style/modx_logo_header.png" alt="" /></div>
+        <div id="modx-logo"><a href="http://modxcms.com"><img src="templates/{$_config.manager_theme}/images/style/modx_logo_header.png" target="_blank" alt="" /></a></div>
         <div id="modx-site-name">
             {$_config.site_name}
             <span class="modx-version">MODx Revolution {$_config.settings_version}</span>
