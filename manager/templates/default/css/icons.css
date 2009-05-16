@@ -32,7 +32,7 @@
 .icon-php .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_php.png) !important; }
 .icon-access .x-tree-node-icon, .icon-htaccess .x-tree-node-icon { background-image:url(../images/restyle/icons/lock.png) !important; }
 .icon-php .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_php.png) !important; }
-.icon-flv .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_flash.png) !important; }
+.icon-flv .x-tree-node-icon, .icon-swf .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_flash.png) !important; }
 .icon-xls .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_excel.png) !important; }
 .icon-cfm .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_coldfusion.png) !important; }
 .icon-pdf .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_acrobat.png) !important; }
