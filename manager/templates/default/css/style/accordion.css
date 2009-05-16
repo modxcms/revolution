@@ -82,14 +82,10 @@
 .modx-accordion .x-tool-toggle {
     width: 24px;
     height: 24px;
-    background: transparent url(../../images/restyle/i/collapse.png) 0 -24px;
-    /*    position: absolute;
-    right: 0;
-    top: 4px;*/
     float: right;
     z-index: 5;
+    display: none;
 }
-
 .x-panel-collapsed .x-accordion-hd .x-tool-toggle-over {
     background-position: 0 0;
 }

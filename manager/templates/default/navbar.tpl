@@ -1,8 +1,8 @@
-<div id="modx-home-icon"><a href="?a=1"></a></div>
 <div id="modx-topnav-div">
     <ul id="modx-topnav">
+    <li class="top first"><a href="javascript:;" onclick="MODx.loadPage(1);">{$_lang.home}</a></li>
     {foreach from=$menus item=menu name=m}
-       <li id="limenu{$menu.id}" class="top {if $smarty.foreach.m.first}first active{/if}">
+       <li id="limenu{$menu.id}" class="top {if $smarty.foreach.m.first}active{/if}">
            <a href="javascript:;" onmouseover="MODx.changeMenu(this,'menu{$menu.id}');">{$menu.text}</a>
            
 	       <div class="zone">

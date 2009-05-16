@@ -1,14 +1,3 @@
-#modx-home-icon {
-    width: 24px;
-    height: 24px;
-    float: left;
-    position: absolute;
-    left: 1.3em;
-    top: 44px;
-    background: transparent url(../../images/restyle/i/home.png) no-repeat top left;
-    opacity: .5;
-}
-
 #modx-home-icon:hover {
     opacity: 1;
 }
@@ -22,7 +11,7 @@
 #modx-topnav-div {
     background: transparent;
     padding: 6px 0 0;
-    margin-left: 4em;
+    margin-left: 1em;
     position: relative;
     z-index: 55555800;
     width: 78%;
