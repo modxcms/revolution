@@ -276,6 +276,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         Ext.getCmp('hiddenContent').setValue(v);
         
         var vs = Ext.getCmp('modx-resource-settings-fp').getForm().getValues();
+        Ext.applyIf(vs,{
+            isfolder: 0
+            ,richtext: 0
+            ,published: 0
+            ,searchable: 0
+            ,cacheable: 0
+            ,syncsite: 0            
+        });
         Ext.apply(o.form.baseParams,vs);
         
         var g = Ext.getCmp('modx-grid-resource-security');
@@ -323,7 +331,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 });
 Ext.reg('modx-panel-resource',MODx.panel.Resource);
 
-// global accessor for TV dynamic fields
 var triggerDirtyField = function(fld) {
     Ext.getCmp('modx-panel-resource').fieldChangeEvent(fld);
 };
