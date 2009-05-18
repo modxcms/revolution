@@ -149,7 +149,10 @@ if ($modx->getOption('friendly_alias_urls')) {
     if (isset ($resourceContext->aliasMap[$fullAlias])) {
         $duplicateId= $resourceContext->aliasMap[$fullAlias];
         if ($duplicateId != $resource->get('id')) {
-            $err = sprintf($modx->lexicon('duplicate_alias_found'), $duplicateId, $fullAlias);
+            $err = $modx->lexicon('duplicate_alias_found',array(
+                'id' => $duplicateId,
+                'alias' => $fullAlias,
+            ));
             $modx->error->addField('alias', $err);
         }
     }

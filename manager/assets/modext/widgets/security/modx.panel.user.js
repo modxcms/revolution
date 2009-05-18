@@ -115,7 +115,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,value: false
             },{
                 id: 'modx-user-fs-newpassword'
-                ,title: 'New Password'
+                ,title: _('password_new')
                 ,xtype: 'fieldset'
                 ,checkboxToggle: true
                 ,collapsed: (config.user ? true : false)
@@ -324,10 +324,10 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,autoHeight: true
                 ,defaults: { autoHeight: true }
                 ,items: [{
-                    html: '<h3>'+'User Settings'+'</h3>'
+                    html: '<h3>'+_('user_settings')+'</h3>'
                     ,border: false
                 },{
-                    html: '<p>'+'Here you can change specific settings for the user.'+'</p>'
+                    html: '<p>'+_('user_settings_desc')+'</p>'
                     ,border: false
                 },{
                     xtype: 'modx-grid-user-settings'

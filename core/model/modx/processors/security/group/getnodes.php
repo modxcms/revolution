@@ -27,14 +27,14 @@ foreach ($groups as $group) {
         'menu' => array(
             'items' => array(
                 array(
-                    'text' => $modx->lexicon('add_user_to_group'),
+                    'text' => $modx->lexicon('user_group_user_add'),
                     'handler' => 'function(itm,e) {
                         this.addUser(itm,e);
                     }',
                 ),
                 '-',
                 array(
-                    'text' => $modx->lexicon('create_user_group'),
+                    'text' => $modx->lexicon('user_group_create'),
                     'handler' => 'function(itm,e) {
                         this.create(itm,e);
                     }',
@@ -47,7 +47,7 @@ foreach ($groups as $group) {
                 ),
                 '-',
                 array(
-                    'text' => $modx->lexicon('delete_user_group'),
+                    'text' => $modx->lexicon('user_group_remove'),
                     'handler' => 'function(itm,e) {
                         this.remove(itm,e);
                     }',
@@ -68,7 +68,7 @@ if ($g != null) {
             'menu' => array(
                 'items' => array(
                     array(
-                        'text' => $modx->lexicon('remove_user_from_group'),
+                        'text' => $modx->lexicon('user_group_user_remove'),
                         'handler' => 'function(itm,e) {
                             this.removeUser(itm,e);
                         }',

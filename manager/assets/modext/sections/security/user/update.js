@@ -18,7 +18,7 @@ MODx.page.UpdateUser = function(config) {
         ,buttons: [{
             process: 'update', text: _('save'), method: 'remote'
         },{
-            process: 'delete', text: _('delete'), method: 'remote', confirm: _('confirm_delete_record')
+            process: 'delete', text: _('delete'), method: 'remote', confirm: _('user_confirm_remove')
         },{
             process: 'cancel', text: _('cancel'), params: {a:MODx.action['security/user']}
         }]

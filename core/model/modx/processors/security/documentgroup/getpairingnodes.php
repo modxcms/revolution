@@ -6,10 +6,11 @@
  * @package modx
  * @subpackage processors.security.documentgroup
  */
+$modx->lexicon->load('access');
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 
-$_REQUEST['id'] = !isset($_REQUEST['id']) ? 0 : str_replace('n_dg_','',$_REQUEST['id']);
+$_REQUEST['id'] = !isset($_REQUEST['id']) ? 0 : str_replace('n_rg_','',$_REQUEST['id']);
 
 $g = $modx->getObject('modResourceGroup',$_REQUEST['id']);
 $groups = $modx->getCollection('modResourceGroup');
@@ -20,9 +21,9 @@ if ($g == null) {
 	foreach ($groups as $group) {
 		$da[] = array(
 			'text' => $group->get('name'),
-			'id' => 'n_dg_'.$group->get('id'),
+			'id' => 'n_rg_'.$group->get('id'),
 			'leaf' => 0,
-			'type' => 'documentgroup',
+			'type' => 'resourcegroup',
 			'cls' => 'folder',
 		);
 	}

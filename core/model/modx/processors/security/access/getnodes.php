@@ -22,6 +22,7 @@ if (empty($targetClass)) {
     $da[] = array(
         'text' => $modx->lexicon('contexts'),
         'id' => 'n_modContext_0',
+        'cls' => 'icon-context',
         'target' => '0',
         'target_cls' => 'modContext',
         'leaf' => 0,
@@ -31,6 +32,7 @@ if (empty($targetClass)) {
     $da[] = array(
         'text' => $modx->lexicon('resource_groups'),
         'id' => 'n_modResourceGroup_0',
+        'cls' => 'icon-resourcegroup',
         'target' => '0',
         'target_cls' => 'modResourceGroup',
         'leaf' => 0,

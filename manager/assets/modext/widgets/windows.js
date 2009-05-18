@@ -111,7 +111,7 @@ Ext.reg('modx-window-usergroup-create',MODx.window.CreateUserGroup);
 MODx.window.AddUserToUserGroup = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
-		title: _('add_user_to_group')
+		title: _('user_group_user_add')
 		,height: 150
 		,width: 375
         ,url: MODx.config.connectors_url+'security/group.php'
@@ -142,7 +142,7 @@ Ext.reg('modx-window-usergroup-adduser',MODx.window.AddUserToUserGroup);
 MODx.window.CreateResourceGroup = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
-		title: _('create_document_group')
+		title: _('resource_group_create')
         ,id: 'modx-window-resourcegroup-create'
 		,height: 150
 		,width: 350

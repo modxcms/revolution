@@ -185,7 +185,10 @@ class modStaticImport extends modImport {
         while (isset ($resourceContext->aliasMap[$fullAlias]) && $iterations > 0) {
             $iterations--;
             $duplicateId= $resourceContext->aliasMap[$fullAlias];
-            $this->log(sprintf($this->modx->lexicon('duplicate_alias_found'), $duplicateId, $fullAlias));
+            $this->log($this->modx->lexicon('import_duplicate_alias_found',array(
+                'id' => $duplicateId,
+                'alias' => $fullAlias,
+            )));
             $alias= $origAlias . '-' . substr(uniqid(''), -3);
             $fullAlias= $aliasPath . $alias . $extension;
         }

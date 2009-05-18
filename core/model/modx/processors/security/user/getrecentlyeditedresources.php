@@ -26,14 +26,10 @@ if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_fou
 $c = $modx->newQuery('modResource');
 $c->where(array('editedby' => $user->get('id')));
 $c->orCondition(array('createdby' => $user->get('id')));
+$count= $modx->getCount('modResource',$c);
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
 $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 $resources= $modx->getCollection('modResource',$c);
-
-$cc = $modx->newQuery('modResource');
-$cc->where(array('editedby' => $user->get('id')));
-$cc->orCondition(array('createdby' => $user->get('id')));
-$count= $modx->getCount('modResource',$c);
 
 $actions = $modx->request->getAllActionIDs();
 
@@ -42,14 +38,14 @@ foreach ($resources as $resource) {
     $ra = $resource->toArray();
     $ra['menu'] = array(
         array(
-            'text' => $modx->lexicon('view_document'),
+            'text' => $modx->lexicon('resource_view'),
             'params' => array(
                 'a' => $actions['resource/data'],
                 'id' => $resource->get('id'),
             ),
         ),
         array(
-            'text' => $modx->lexicon('edit_document'),
+            'text' => $modx->lexicon('resource_edit'),
             'params' => array(
                 'a' => $actions['resource/update'],
                 'id' => $resource->get('id'),

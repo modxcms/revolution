@@ -1,9 +1,26 @@
 <?php
+/**
+ * English User language files
+ *
+ * @language english
+ * @package modx
+ * @subpackage processors
+ */
 $_lang['authority'] = 'Authority';
 $_lang['change_password'] = 'Change Password';
 $_lang['change_password_confirm'] = 'Confirm password';
 $_lang['change_password_new'] = 'New password';
+$_lang['password'] = 'Password';
+$_lang['password_confirm'] = 'Confirm Password';
+$_lang['password_gen_gen'] = 'Let MODx generate a password.';
+$_lang['password_gen_method'] = 'New password method';
+$_lang['password_gen_specify'] = 'Let me specify the password:';
+$_lang['password_method'] = 'Password notification method';
+$_lang['password_method_email'] = 'Send the new password by e-mail.';
+$_lang['password_method_screen'] = 'Show the new password on screen.';
+$_lang['password_new'] = 'New Password';
 $_lang['password_notification'] = 'Password Notification';
+$_lang['password_old'] = 'Old Password';
 $_lang['role'] = 'Role';
 $_lang['role_create'] = 'Create Role';
 $_lang['role_err_duplicate'] = 'An error occurred while duplicating the role.';
@@ -74,6 +91,7 @@ $_lang['user_fax'] = 'Fax';
 $_lang['user_female'] = 'Female';
 $_lang['user_full_name'] = 'Full name';
 $_lang['user_group'] = 'User Group';
+$_lang['user_group_create'] = 'Create User Group';
 $_lang['user_group_id'] = 'UG ID';
 $_lang['user_group_document_group_err_already_exists'] = 'The user group is already attached to that document group.';
 $_lang['user_group_document_group_err_create'] = 'An error occurred while trying to attach the user group to the document group.';
@@ -94,7 +112,7 @@ $_lang['user_group_member_err_save'] = 'An error occurred while trying to add th
 $_lang['user_group_new'] = 'New User Group';
 $_lang['user_group_parent'] = 'Parent Group';
 $_lang['user_group_remove'] = 'Remove User from User Group';
-$_lang['user_group_remove_confirm'] = 'Are you sure you want to remove the User from this User Group?';
+$_lang['user_group_remove_confirm'] = 'Are you sure you want to remove this User Group?';
 $_lang['user_group_untitled'] = 'Untitled User Group';
 $_lang['user_group_update'] = 'Update User Group';
 $_lang['user_group_user_add'] = 'Add User to Group';
@@ -123,6 +141,7 @@ $_lang['user_role_update'] = 'Update User Role';
 $_lang['user_setting_err_remove'] = 'An error occurred while removing user settings.';
 $_lang['user_setting_err_save'] = 'An error occurred while saving user settings.';
 $_lang['user_settings'] = 'User Settings';
+$_lang['user_settings_desc'] = 'Here you can change specific settings for the user.';
 $_lang['user_state'] = 'State';
 $_lang['user_title'] = 'Create/Edit user';
 $_lang['user_update'] = 'Update User';

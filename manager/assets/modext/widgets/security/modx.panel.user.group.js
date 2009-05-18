@@ -237,7 +237,7 @@ Ext.reg('modx-window-user-group-role-update',MODx.window.UpdateUserGroupRole);
 MODx.window.AddUserToUserGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('add_user_to_group')
+        title: _('user_group_user_add')
         ,height: 150
         ,width: 375
         ,url: MODx.config.connectors_url+'security/group.php'

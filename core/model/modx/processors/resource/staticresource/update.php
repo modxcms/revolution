@@ -11,7 +11,7 @@ $_POST['variablesmodified'] = isset($_POST['variablesmodified'])
     : array();
 
 /* default pagetitle */
-if ($_POST['pagetitle'] == '') $_POST['pagetitle'] = $modx->lexicon('untitled_document');
+if ($_POST['pagetitle'] == '') $_POST['pagetitle'] = $modx->lexicon('untitled_resource');
 
 $_POST['hidemenu'] = !isset($_POST['hidemenu']) ? 0 : 1;
 $_POST['isfolder'] = !isset($_POST['isfolder']) ? 0 : 1;
@@ -65,7 +65,10 @@ if ($modx->getOption('friendly_alias_urls')) {
     if (isset ($resourceContext->aliasMap[$fullAlias])) {
         $duplicateId= $resourceContext->aliasMap[$fullAlias];
         if ($duplicateId != $resource->get('id')) {
-            $err = sprintf($modx->lexicon('duplicate_alias_found'), $duplicateId, $fullAlias);
+            $err = $modx->lexicon('duplicate_alias_found',array(
+                'id' => $duplicateId,
+                'alias' => $fullAlias,
+            ));
             $modx->error->addField('alias', $err);
         }
     }

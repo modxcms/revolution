@@ -182,7 +182,10 @@ if (!function_exists('aliasCheck')) {
         while (isset ($resourceContext->aliasMap[$fullAlias]) && $iterations > 0) {
             $iterations--;
             $duplicateId= $resourceContext->aliasMap[$fullAlias];
-            $results .= sprintf($modx->lexicon('duplicate_alias_found'), $duplicateId, $fullAlias);
+            $results .= $modx->lexicon('import_duplicate_alias_found',array(
+                'id' => $duplicateId,
+                'alias' => $fullAlias
+            ));
             $alias= $origAlias . '-' . substr(uniqid(''), -3);
             $fullAlias= $aliasPath . $alias . $extension;
         }
@@ -208,7 +211,7 @@ if (isset ($_POST['import_parent'])) {
     $parent= intval($_POST['import_parent']);
 }
 $element= isset ($_POST['content_element']) ? $_POST['content_element'] : 'body';
-$filepath= isset ($_POST['filepath']) ? $_POST['filepath'] : MODX_CORE_PATH . 'import/';
+$filepath= isset ($_POST['filepath']) ? $_POST['filepath'] : $modx->config['core_path'] . 'import/';
 $filesfound= 0;
 
 $files= getFiles($modx, $results, $filesfound, $filepath);

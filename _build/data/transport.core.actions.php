@@ -439,26 +439,6 @@ $collection['50']->fromArray(array (
   'lang_topics' => 'user',
   'assets' => '',
 ), '', true, true);
-$collection['51']= $xpdo->newObject('modAction');
-$collection['51']->fromArray(array (
-  'id' => 51,
-  'namespace' => 'core',
-  'parent' => 50,
-  'controller' => 'security/role/create',
-  'haslayout' => 1,
-  'lang_topics' => 'user',
-  'assets' => '',
-), '', true, true);
-$collection['52']= $xpdo->newObject('modAction');
-$collection['52']->fromArray(array (
-  'id' => 52,
-  'namespace' => 'core',
-  'parent' => 50,
-  'controller' => 'security/role/update',
-  'haslayout' => 1,
-  'lang_topics' => 'user',
-  'assets' => '',
-), '', true, true);
 $collection['53']= $xpdo->newObject('modAction');
 $collection['53']->fromArray(array (
   'id' => 53,

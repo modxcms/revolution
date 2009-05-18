@@ -18,7 +18,7 @@ MODx.tree.ResourceGroup = function(config) {
 		,ddAppendOnly: true
         ,useDefaultToolbar: true
         ,tbar: [{
-            text: _('create_document_group')
+            text: _('resource_group_create')
             ,scope: this
             ,handler: this.create
         }]
@@ -36,7 +36,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
 		var dg_id = n.parentNode.id.substr(2).split('_'); dg_id = dg_id[1];
 		
 		MODx.msg.confirm({
-			text: _('confirm_delete_document_group_document')
+			text: _('resource_group_access_remove_confirm')
 			,url: this.config.url
 			,params: {
 				action: 'removeDocument'
@@ -54,7 +54,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
 		var id = n.id.substr(2).split('_'); id = id[1];
 		
 		MODx.msg.confirm({
-			text: _('confirm_delete_document_group')
+			text: _('resource_group_remove_confirm')
 			,url: this.config.url
 			,params: {
 				action: 'remove'

@@ -67,7 +67,7 @@
     <div id="modx-navbar">
         <div id="rightlogin">
         <span>
-            logged in as <a id="modx-login-user" onclick="MODx.loadFrame(49);">{$modx->getLoginUserName()}</a>
+            {$logged_in_as}
             | <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
         </span>
         </div>

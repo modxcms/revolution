@@ -126,21 +126,22 @@ foreach ($collection as $item) {
                     'header' => true,
                 ),'-',
                 array(
-                    'id' => 'view_document',
+                    'id' => 'resource_view',
                     'text' => $modx->lexicon('resource_view'),
                     'params' => array( 'a' => $actions['resource/data'], ),
                 ),
                 array(
-                    'id' => 'edit_document',
+                    'id' => 'resource_edit',
                     'text' => $modx->lexicon('resource_edit'),
                     'params' => array( 'a' => $actions['resource/update'], ),
                 ),
                 array(
-                    'id' => 'duplicate_document',
+                    'id' => 'resource_duplicate',
                     'text' => $modx->lexicon('resource_duplicate'),
                     'handler' => 'this.duplicateResource',
                 ),
                 array(
+                    'id' => 'resource_refresh',
                     'text' => $modx->lexicon('resource_refresh'),
                     'handler' => 'this.refreshNode.createDelegate(this,["'.$item->get('context_key') . '_'.$item->get('id').'",false])',
                 ),
@@ -178,26 +179,26 @@ foreach ($collection as $item) {
 
             if ($item->published) {
                 $menu[] = array(
-                    'id' => 'unpublish_document',
+                    'id' => 'resource_unpublish',
                     'text' => $modx->lexicon('resource_unpublish'),
                     'handler' => 'this.unpublishDocument',
                 );
             } else {
                 $menu[] = array(
-                    'id' => 'publish_document',
+                    'id' => 'resource_publish',
                     'text' => $modx->lexicon('resource_publish'),
                     'handler' => 'this.publishDocument',
                 );
             }
             if ($item->deleted) {
                 $menu[] = array(
-                    'id' => 'undelete_document',
+                    'id' => 'resource_undelete',
                     'text' => $modx->lexicon('resource_undelete'),
                     'handler' => 'this.undeleteDocument',
                 );
             } else {
                 $menu[] = array(
-                    'id' => 'delete_document',
+                    'id' => 'resource_delete',
                     'text' => $modx->lexicon('resource_delete'),
                     'handler' => 'this.deleteDocument',
                 );
@@ -205,7 +206,7 @@ foreach ($collection as $item) {
 
             $menu[] = '-';
             $menu[] = array(
-                'id' => 'preview_document',
+                'id' => 'resource_preview',
                 'text' => $modx->lexicon('resource_preview'),
                 'handler' => 'this.preview',
             );

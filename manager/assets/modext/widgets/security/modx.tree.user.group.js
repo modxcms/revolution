@@ -79,7 +79,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 		
 		MODx.msg.confirm({
 			title: _('warning')
-			,text: _('confirm_delete_user_group')
+			,text: _('user_group_remove_confirm')
 			,url: this.config.url
 			,params: {
 				action: 'remove'
@@ -98,7 +98,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 		
 		MODx.msg.confirm({
 			title: _('warning')
-			,text: _('confirm_remove_user_from_group')
+			,text: _('user_group_user_remove_confirm')
 			,url: this.config.url
 			,params: { 
 				action: 'removeUser'

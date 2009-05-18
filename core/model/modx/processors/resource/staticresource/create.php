@@ -25,7 +25,7 @@ $_POST['searchable'] = !isset($_POST['searchable']) ? 0 : 1;
 $_POST['syncsite'] = !isset($_POST['syncsite']) ? 0 : 1;
 
 /* default pagetitle */
-if ($_POST['pagetitle'] == '') $_POST['pagetitle'] = $modx->lexicon('untitled_document');
+if ($_POST['pagetitle'] == '') $_POST['pagetitle'] = $modx->lexicon('untitled_resource');
 
 $_POST['context_key']= !isset($_POST['context_key']) || $_POST['context_key'] == '' ? 'web' : $_POST['context_key'];
 
@@ -70,7 +70,10 @@ if ($modx->getOption('friendly_alias_urls')) {
 
     if (isset ($resourceContext->aliasMap[$fullAlias])) {
         $duplicateId= $resourceContext->aliasMap[$fullAlias];
-        $err = sprintf($modx->lexicon('duplicate_alias_found'), $duplicateId, $fullAlias);
+        $err = $modx->lexicon('duplicate_alias_found',array(
+            'id' => $duplicateId,
+            'alias' => $fullAlias,
+        ));
         $modx->error->addField('alias', $err);
     }
 }

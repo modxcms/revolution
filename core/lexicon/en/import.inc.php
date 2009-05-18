@@ -1,12 +1,19 @@
 <?php
-
+/**
+ * Import English lexicon entries
+ *
+ * @language english
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['import_allowed_extensions'] = 'Specify a comma-delimited list of file extensions to import.<br /><small><em>Leave blank to import all files according to the content types available in your site. Unknown types will be mapped as plain text.</em></small>';
 $_lang['import_base_path'] = 'Enter the base file path containing the files to import.<br /><small><em>Leave blank to use the target context\'s static file path setting.</em></small>';
+$_lang['import_duplicate_alias_found'] = 'Resource [[+id]] is already using the alias [[+alias]]. Please enter a unique alias.';
+$_lang['import_element'] = 'Enter the root HTML element to import:';
 $_lang['import_enter_root_element'] = 'Enter the root element to import:';
 $_lang['import_files_found'] = '<strong>Found %s documents for import...</strong><p/>';
 $_lang['import_parent_document'] = 'Parent Document:';
 $_lang['import_parent_document_message'] = 'Use the document tree presented below to select the parent location to import your files into.';
-$_lang['import_element'] = 'Enter the root HTML element to import:';
 $_lang['import_resource_class'] = 'Select a modResource class for import:<br /><small><em>Use modStaticResource to link to static files, or modDocument to copy the content to the database.</em></small>';
 $_lang['import_site_failed'] = '<span style="color:#990000">Failed!</span>';
 $_lang['import_site_html'] = 'Import site from HTML';
