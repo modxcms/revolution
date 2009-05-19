@@ -179,6 +179,7 @@ $_lang['new_snippet'] = 'New snippet';
 $_lang['new_template'] = 'New template';
 $_lang['new_tmplvars'] = 'New Template Variable';
 $_lang['new_user'] = 'New user';
+$_lang['next'] = 'Next -&gt;';
 $_lang['no'] = 'No';
 $_lang['none'] = 'None';
 $_lang['notset'] = 'Not set';
