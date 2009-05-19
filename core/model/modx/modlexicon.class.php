@@ -101,7 +101,7 @@ class modLexicon {
     function getCacheKey($namespace = 'core',$topic = 'default',$language = '') {
         if (empty($namespace)) $namespace = 'core';
         if (empty($topic)) $topic = 'default';
-        if (empty($language)) $language = this->modx->cultureKey;
+        if (empty($language)) $language = $this->modx->cultureKey;
         return 'lexicon/'.$language.'/'.$namespace.'/'.$topic;
     }
 
