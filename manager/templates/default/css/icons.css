@@ -20,12 +20,12 @@
 .icon-db .x-tree-node-icon { background-image:url(../images/restyle/icons/database.png) !important; }
 .icon-java .x-tree-node-icon, .icon-jar .x-tree-node-icon { background-image:url(../images/restyle/icons/cup.png) !important; }
 .icon-css .x-tree-node-icon { background-image:url(../images/restyle/icons/css.png) !important; }
-.icon-zip .x-tree-node-icon, .icon-tar .x-tree-node-icon, .icon-tgz .x-tree-node-icon { background-image:url(../images/restyle/icons/compress.png) !important; }
+.icon-zip .x-tree-node-icon, .icon-tar .x-tree-node-icon, .icon-tgz .x-tree-node-icon, .icon-gz .x-tree-node-icon { background-image:url(../images/restyle/icons/compress.png) !important; }
 .icon-jpg .x-tree-node-icon, .icon-jpeg .x-tree-node-icon, .icon-gif .x-tree-node-icon, .icon-png .x-tree-node-icon, .icon-bmp .x-tree-node-icon, .icon-tiff .x-tree-node-icon { background-image:url(../images/restyle/icons/picture.png) !important; }
 .icon-bat .x-tree-node-icon, .icon-scr .x-tree-node-icon { background-image:url(../images/restyle/icons/application_osx_terminal.png) !important; }
 .icon-log .x-tree-node-icon { background-image:url(../images/restyle/icons/computer.png) !important; }
 .icon-html .x-tree-node-icon, .icon-htm .x-tree-node-icon { background-image:url(../images/restyle/icons/html_valid.png) !important; }
-.icon-avi .x-tree-node-icon, .icon-mpg .x-tree-node-icon, .icon-mov .x-tree-node-icon { background-image:url(../images/restyle/icons/html_valid.png) !important; }
+.icon-avi .x-tree-node-icon, .icon-mpg .x-tree-node-icon, .icon-mov .x-tree-node-icon { background-image:url(../images/restyle/icons/film.png) !important; }
 .icon-rb .x-tree-node-icon { background-image:url(../images/restyle/icons/ruby.png) !important; }
 .icon-doc .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_word.png) !important; }
 .icon-ppt .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_powerpoint.png) !important; }
