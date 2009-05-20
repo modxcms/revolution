@@ -343,6 +343,7 @@ class modTemplateVar extends modElement {
                     $output = $chunk;
                     break;
 
+                case 'RESOURCE':
                 case 'DOCUMENT':    /* retrieve a document and process it's content */
                     $rs = $this->xpdo->getDocument($param);
                     if (is_array($rs)) $output = $rs['content'];
