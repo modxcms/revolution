@@ -916,7 +916,24 @@ class modLinkTag extends modTag {
                 if (isset ($this->modx->aliasMap[$this->_output])) {
                     $this->_output= $this->modx->aliasMap[$this->_output];
                 }
-                if (!empty($this->_output)) $this->_output= $this->modx->makeUrl($this->_output);
+                if (!empty($this->_output)) {
+                    $context = '';
+                    if (is_array($this->_properties) && !empty($this->_properties)) {
+                        $qs = array();
+                        if (array_key_exists('context', $this->_properties)) {
+                            $context = $this->_properties['context'];
+                            unset($this->_properties['context']);
+                        }
+                        foreach ($this->_properties as $propertyKey => $propertyValue) {
+                            if ($propertyKey === 'context') continue;
+                            $qs[]= "{$propertyKey}={$propertyValue}";
+                        }
+                        if ($qs= implode('&', $qs)) {
+                            $qs= urlencode($qs);
+                        }
+                    }
+                    $this->_output= $this->modx->makeUrl($this->_output, $context, $qs);
+                }
             }
             if (!empty($this->_output)) {
                 $this->filterOutput();
@@ -926,23 +943,6 @@ class modLinkTag extends modTag {
         }
         /* finally, return the processed element content */
         return $this->_output;
-    }
-
-    /**
-     * Get the raw source content of the link.
-     */
-    function getContent($options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
-            if (isset($options['content'])) {
-                $this->_content = $options['content'];
-            } else {
-                if (!$this->get('name')) {
-                    $this->set('name', $this->modx->getOption('error_page',null,$this->getOption('site_start',null,$this->getOption('base_url'))));
-                }
-                $this->_content= $this->get('name');
-            }
-        }
-        return $this->_content;
     }
 }
 
