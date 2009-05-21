@@ -60,33 +60,37 @@ body, html {
     height: 31px;
     background-image:url(../../images/restyle/header_sub.jpg);
     background-repeat:repeat-x;
+	position: relative;
 }
-
-#rightlogin {
-    line-height: 25px;
-	padding-top: 6px;
-    float: right;
-    text-align: right;
-    vertical-align: middle;
-    z-index: 600;
-	color: #aaa;
-}
-
 #modx-login-user {
 	font-weight: bold;
 	color: #eee;
 }
-
+#rightlogin {
+	position: absolute;
+	right: 12px;
+	bottom: 0;
+    line-height: 25px;
+	padding-top: 6px 1.3em 0 0;
+	height: 25px;
+    vertical-align: middle;
+    z-index: 600;
+	color: #aaa;
+}
 #rightlogin span {
     vertical-align: middle;
     margin-right: 1.3em;
-    }
+}
 #rightlogin a.modx-logout {
     color: #ddd;
     background: #333;
     text-decoration: none;
-    padding: 6px 12px 4px;
-    }
+    padding: 0 12px 0;
+	height: 25px;
+	line-height: 25px;
+	display: block;
+	float: right;
+}
 #rightlogin a.modx-logout:hover {
     background: #6e9b38;
 	color: #fff;
