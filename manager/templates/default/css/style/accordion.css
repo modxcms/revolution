@@ -21,10 +21,8 @@
     margin: 1% 0 1% 1%;
 }
 
-.modx-accordion .tl,.modx-accordion .tr,.modx-accordion .bl,.modx-accordion .br
-    {
-    background: transparent url(../../images/restyle/i/corner-tree-16.png) no-repeat
-        ;
+.modx-accordion .tl,.modx-accordion .tr,.modx-accordion .bl,.modx-accordion .br {
+    background: transparent url(../../images/restyle/i/corner-tree-16.png) no-repeat;
     position: absolute;
     width: 16px;
     height: 16px;
@@ -127,6 +125,9 @@
     background: transparent url(../../images/restyle/i/bg-x-accordion-hd2.png) 100% 0;
 	display: block;
 	line-height: 32px;
+}
+.modx-accordion .x-panel .x-panel-animated div.x-panel-header {
+	overflow: visible !important;
 }
 #modx-resource-tree-panel .x-accordion-hd {
     background-position: 0 0;
