@@ -270,6 +270,7 @@ $collection['25']->fromArray(array (
   'params' => '',
   'handler' => '',
 ), '', true, true);
+/*
 $collection['26']= $xpdo->newObject('modMenu');
 $collection['26']->fromArray(array (
   'id' => 26,
@@ -282,6 +283,7 @@ $collection['26']->fromArray(array (
   'params' => '',
   'handler' => '',
 ), '', true, true);
+*/
 $collection['28']= $xpdo->newObject('modMenu');
 $collection['28']->fromArray(array (
   'id' => 28,
