@@ -55,8 +55,7 @@
     height: 25px;
     line-height: 25px;
     color: #f7f7f7;
-    background: transparent url(../../images/restyle/i/bg-x-accordion-hd.png) left
-        top;
+    background: transparent url(../../images/restyle/i/bg-x-accordion-hd.png) left top;
     margin-right: 0;
     font-size: 1.3em;
     padding-left: 36px;
@@ -111,4 +110,33 @@
 .modx-accordion .x-tree-root-ct {
     background-color: #eee;
     padding: .4em;
+}
+
+
+
+.modx-accordion .x-accordion-hd {
+	margin-right: 10px;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 0 0 36px;
+	background: transparent url(../../images/restyle/i/bg-x-accordion-hd2.png) 0 0;
+}
+.modx-accordion .x-panel-header-text {
+	margin-right: -10px;
+    background: transparent url(../../images/restyle/i/bg-x-accordion-hd2.png) 100% 0;
+	display: block;
+	line-height: 32px;
+}
+#modx-resource-tree-panel .x-accordion-hd {
+    background-position: 0 0;
+}
+#modx-element-tree-panel .x-accordion-hd {
+    background-position: 0 -32px;
+}
+#modx-file-tree-panel .x-accordion-hd {
+    background-position: 0 -64px;
+}
+#modx-element-tree-panel,
+#modx-file-tree-panel {
+    margin-top: 7px;
 }
