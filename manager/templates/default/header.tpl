@@ -67,8 +67,8 @@
     <div id="modx-navbar">
         <div id="rightlogin">
         <span>
+            <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
             {$logged_in_as}
-            | <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
         </span>
         </div>
         {include file="navbar.tpl"}
@@ -86,4 +86,4 @@
         </div>
         
         <div id="modAB"></div>
-        <div id="modx-content">          
+        <div id="modx-content">
