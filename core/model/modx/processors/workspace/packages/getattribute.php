@@ -32,5 +32,6 @@ if ($_REQUEST['attr'] == 'setup-options') {
     $attr = include $modx->getOption('core_path').'packages/'.$attr;
     ob_end_clean();
 }
+if ($attr == false) $attr = '';
 
 return $modx->error->success('',array('attr' => $attr));
