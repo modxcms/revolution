@@ -12,7 +12,7 @@ MODx.grid.ManagerLog = function(config) {
         title: _('manager_log')
         ,id: 'modx-grid-manager-log'
         ,url: MODx.config.connectors_url+'system/log.php'
-        ,fields: ['id','user','occurred','action','classKey','item','menu']
+        ,fields: ['id','user','username','occurred','action','classKey','item','menu']
         ,autosave: true
         ,paging: true
         ,columns: [{
@@ -21,9 +21,8 @@ MODx.grid.ManagerLog = function(config) {
             ,width: 125
         },{
             header: _('user')
-            ,dataIndex: 'user'
+            ,dataIndex: 'username'
             ,width: 200
-            ,editor: { xtype: 'modx-combo-user' ,renderer: true }
             ,editable: false
         },{
             header: _('action')

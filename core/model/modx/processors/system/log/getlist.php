@@ -38,22 +38,19 @@ if (isset($_POST['date_end']) && $_POST['date_end'] != '') {
 }
 
 $c = $modx->newQuery('modManagerLog');
+$c->innerJoin('modUser','User');
 if (!empty($wa)) $c->where($wa);
 $c->sortby($_REQUEST['sort'], $_REQUEST['dir']);
 $c->limit($_REQUEST['limit'], $_REQUEST['start']);
 
-$cc = $modx->newQuery('modManagerLog');
-if (!empty($wa)) $c->where($wa);
+$count = $modx->getCount('modManagerLog',$c);
+$c->select('modManagerLog.*,User.username AS username');
 $logs = $modx->getCollection('modManagerLog',$c);
-$count = $modx->getCount('modManagerLog',$cc);
 
 $ls = array();
 foreach ($logs as $log) {
     $la = $log->toArray();
     $la['occurred'] = strftime('%a %b %d, %Y %H:%I:%S %p',strtotime($la['occurred']));
-
-
-
     $ls[] = $la;
 }
 return $this->outputArray($ls,$count);
