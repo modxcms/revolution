@@ -22,31 +22,31 @@
 }
 
 .modx-accordion .tl,.modx-accordion .tr,.modx-accordion .bl,.modx-accordion .br {
-    background: transparent url(../../images/restyle/i/corner-tree-16.png) no-repeat;
+    background: transparent url(../../images/restyle/i/corner-tree-20.png) no-repeat;
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     z-index: 1;
 }
 
 .modx-accordion .tl {
-    top: -8px;
-    left: -8px;
+    top: -10px;
+    left: -10px;
 }
 
 .modx-accordion .tr {
-    top: -8px;
-    right: -8px;
+    top: -10px;
+    right: -10px;
 }
 
 .modx-accordion .br {
-    bottom: -8px;
-    right: -8px;
+    bottom: -10px;
+    right: -10px;
 }
 
 .modx-accordion .bl {
-    bottom: -8px;
-    left: -8px;
+    bottom: -10px;
+    left: -10px;
 }
 
 .modx-accordion .x-accordion-hd {
@@ -120,9 +120,10 @@
 	padding: 0 0 0 36px;
 	background: transparent url(../../images/restyle/i/bg-x-accordion-hd2.png) 0 0;
 }
-.modx-accordion .x-panel-header-text {
-	margin-right: -10px;
-    background: transparent url(../../images/restyle/i/bg-x-accordion-hd2.png) 100% 0;
+.modx-accordion .x-panel-header-text,
+.x-panel-animated .x-panel-header-text {
+	margin-right: -10px !important;
+    background: transparent url(../../images/restyle/i/bg-x-accordion-hd2.png) 100% 0 !important;
 	display: block;
 	line-height: 32px;
 }
