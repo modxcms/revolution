@@ -28,10 +28,10 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
             var pkg = ps[i];
             items.push({
                 xtype: 'radio'
-                ,name: 'location'
+                ,name: 'info'
                 ,boxLabel: pkg.signature
                 ,description: pkg.description
-                ,inputValue: pkg.location
+                ,inputValue: pkg.info
                 ,labelSeparator: ''
                 ,checked: i == 0
             });

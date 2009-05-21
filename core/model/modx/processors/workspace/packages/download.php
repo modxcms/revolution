@@ -6,13 +6,12 @@
  * @subpackage processors.workspace.packages
  */
 
-if (!isset($_POST['location'])) return $modx->error->failure('No package selected to download.');
+if (!isset($_POST['info'])) return $modx->error->failure('No package selected to download.');
 
-$location = $_POST['location'];
-
-/* grab signature from transport zip filename */
-$signature = str_replace('.transport.zip','',$location);
-$signature = substr($signature,strlen(strrev($signature)) - strpos(strrev($signature),'/'));
+/* grab location and signature */
+$a = split('::',$_POST['info']);
+$location = $a[0];
+$signature = $a[1];
 
 $_package_cache = $modx->getOption('core_path').'packages/';
 
@@ -26,8 +25,9 @@ $package->set('provider',$_POST['provider']);
 
 /* download package */
 if (!$package->transferPackage($location,$_package_cache)) {
-    $modx->log(MODX_LOG_LEVEL_ERROR,'Could not download package at: '.$location);
-    continue;
+    $msg = 'Could not download package at: '.$location;
+    $modx->log(MODX_LOG_LEVEL_ERROR,$msg);
+    return $modx->error->failure($msg);
 }
 
 /* now save */

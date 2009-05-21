@@ -52,6 +52,7 @@ $latest = '';
 foreach ($packages as $p) {
     /* get rid of manifest to cut down on data outputs */
     unset($p['manifest']);
+    $p['info'] = $p['location'].'::'.$p['signature'];
     $pa[] = $p;
 }
 

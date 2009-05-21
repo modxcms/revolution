@@ -195,14 +195,14 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             ,listeners: {
                 'success': {fn:function() {
                     Ext.getCmp('modx-window-package-installer').hide();
-                    this.console.complete();
                     this.refresh();
+                    this.console.complete();
                     parent.Ext.getCmp('modx-layout').refreshTrees();
                 },scope:this}
                 ,'failure': {fn:function() {
-                    this.console.complete();
                     Ext.Msg.hide();
                     this.refresh();
+                    this.console.complete();
                 },scope:this}
             }
         });
