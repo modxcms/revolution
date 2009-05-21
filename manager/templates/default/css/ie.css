@@ -1,4 +1,16 @@
-
 #modx-frame-ct {
     height: 500px !important;
-    }
+}
+
+.modx-accordion .x-accordion-hd {
+	margin-right: 0;
+}
+
+#rightlogin {
+	text-align: right;
+}
+#rightlogin a.modx-logout {
+	display: block;
+	float: right;
+	margin-left: 0;
+}

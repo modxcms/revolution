@@ -116,6 +116,7 @@
 
 .modx-accordion .x-accordion-hd {
 	margin-right: 10px;
+	overflow: visible;
 	height: 32px;
 	line-height: 32px;
 	padding: 0 0 0 36px;
