@@ -35,8 +35,8 @@ $modx->invokeEvent('OnSiteRefresh');
 $o = '<div style="font-size: .8em;">';
 $num_rows_pub = isset($results['publishing']['published']) ? $results['publishing']['published'] : 0;
 $num_rows_unpub = isset($results['publishing']['unpublished']) ? $results['publishing']['unpublished'] : 0;
-$o .= sprintf($modx->lexicon('refresh_published'), $num_rows_pub).'<br />';
-$o .= sprintf($modx->lexicon('refresh_unpublished'), $num_rows_unpub).'<hr />';
+$o .= $modx->lexicon('refresh_published',array( 'num' => $num_rows_pub )).'<br />';
+$o .= $modx->lexicon('refresh_unpublished',array( 'num' => $num_rows_unpub )).'<hr />';
 $o .= $modx->lexicon('cache_files_deleted');
 if (count($results['deleted_files_count']) > 0) {
     $o .= '<ul>';
