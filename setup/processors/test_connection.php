@@ -6,8 +6,10 @@ $mode= isset ($_POST['installmode']) ? intval($_POST['installmode']) : MODX_INST
 
 /* validate database settings */
 $install->setConfig();
-$install->getConnection();
-if (!is_object($install->xpdo) || !$install->xpdo->connect()) {
+$err = $install->getConnection();
+if (!is_a($err,'xPDO')) { $this->error->failure($err); }
+
+if (!is_a($install->xpdo,'xPDO') || !$install->xpdo->connect()) {
     $this->error->failure('<p>'.$install->lexicon['db_err_connect'].'</p><pre>' . print_r($install->config, true) . '</pre>');
 }
 $this->error->setType('success');

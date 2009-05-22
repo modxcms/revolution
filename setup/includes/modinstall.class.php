@@ -65,11 +65,12 @@ class modInstall {
      * @return boolean True if successful.
      */
     function loadRequestHandler($class = 'modInstallRequest') {
-        $included = @include dirname(__FILE__).'/'.strtolower($class).'.class.php';
+        $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
+        $included = @include $path;
         if ($included) {
             $this->request = new $class($this);
         } else {
-            die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Make sure you have uploaded all the necessary files.</p></body></html>');
+            $this->_fatalError(sprintf($this->lexicon['request_handler_err_nf'],$path));
         }
         return $included;
     }
@@ -77,9 +78,11 @@ class modInstall {
     /**
      * Load the language strings.
      */
-    function loadLang() {
+    function loadLang($topic = 'default') {
         $_lang= array ();
-        include MODX_SETUP_PATH . 'lang/en.php';
+        if (!include (MODX_SETUP_PATH . 'lang/en/'.$topic.'.inc.php')) {
+            die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Could not load the default language directory. Make sure you have uploaded all the necessary files.</p></body></html>');
+        }
 
         $language= 'en';
         if (isset ($_COOKIE['modx_setup_language'])) {
@@ -87,9 +90,13 @@ class modInstall {
         }
         $language= isset ($_REQUEST['language']) ? $_REQUEST['language'] : $language;
         if ($language && $language != 'en') {
-            include MODX_SETUP_PATH . 'lang/'.$language.'.php';
+            include MODX_SETUP_PATH . 'lang/'.$language.'/'.$topic.'.inc.php';
         }
-        $this->lexicon = $_lang;
+        if (!is_array($this->lexicon)) $this->lexicon = array();
+
+        $this->lexicon = array_merge($this->lexicon,$_lang);
+
+        return $this->lexicon;
     }
 
     /**
@@ -187,6 +194,8 @@ class modInstall {
             $this->xpdo = $this->_modx($errors);
         } else if (!is_object($this->xpdo)) {
             $this->xpdo = $this->_connect($this->config['database_type'] . ':host=' . $this->config['database_server'] . ';dbname=' . trim($this->config['dbase'], '`') . ';charset=' . $this->config['database_connection_charset'] . ';collation=' . $this->config['database_collation'], $this->config['database_user'], $this->config['database_password'], $this->config['table_prefix']);
+            if (!is_a($this->xpdo,'xPDO')) { return $this->xpdo; }
+
             $this->xpdo->config['cache_path'] = MODX_CORE_PATH . 'cache/';
         }
         if (is_object($this->xpdo)) {
@@ -247,20 +256,23 @@ class modInstall {
     }
 
     function loadTestHandler($class = 'modInstallTest') {
-        $included = @include dirname(__FILE__).'/'.strtolower($class).'.class.php';
+        $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
+        $included = @include $path;
         if ($included) {
+            $this->loadLang('test');
             /* now load build-specific test class if not @svn */
             if (MODX_SETUP_KEY != '@svn') {
                 $class = $class.ucfirst(str_replace('@','',MODX_SETUP_KEY));
-                $included = @include dirname(__FILE__).'/checks/'.strtolower($class).'.class.php';
+                $versionPath = dirname(__FILE__).'/checks/'.strtolower($class).'.class.php';
+                $included = @include $versionPath;
                 if (!$included) {
-                    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Make sure you have uploaded all the necessary files.</p></body></html>');
+                    $this->_fatalError(sprintf($this->lexicon['test_version_class_nf'],$versionPath));
                 }
             }
             $this->test = new $class($this);
             return $this->test;
         } else {
-            die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Make sure you have uploaded all the necessary files.</p></body></html>');
+            $this->_fatalError(sprintf($this->lexicon['test_class_nf'],$path));
         }
     }
 
@@ -278,12 +290,13 @@ class modInstall {
     }
 
     function loadVersionInstaller($class = 'modInstallVersion') {
-        $included = @include dirname(__FILE__).'/'.strtolower($class).'.class.php';
+        $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
+        $included = @include $path;
         if ($included) {
             $this->versioner = new $class($this);
             return $this->versioner;
         } else {
-            die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Make sure you have uploaded all the necessary files.</p></body></html>');
+            $this->_fatalError(sprintf($this->lexicon['versioner_err_nf'],$path));
         }
     }
 
@@ -393,7 +406,7 @@ class modInstall {
                 if ($saved = $user->save()) {
                     $userProfile = $this->xpdo->newObject('modUserProfile');
                     $userProfile->set('internalKey', $user->get('id'));
-                    $userProfile->set('fullname', 'Default Admin User');
+                    $userProfile->set('fullname', $this->lexicon['default_admin_user']);
                     $userProfile->set('email', $this->config['cmsadminemail']);
                     $userProfile->set('role', 1);
                     $saved = $userProfile->save();
@@ -514,14 +527,15 @@ class modInstall {
         if ($modx) {
             $cacheManager = $modx->getCacheManager();
             if ($cacheManager) {
-                if (!$cacheManager->deleteTree($modx->config['base_path'].'setup/',true,false,false)) {
-                    $modx->log(MODX_LOG_LEVEL_ERROR,'An error occurred while trying to remove the setup directory.');
+                $setupPath = $modx->getOption('base_path').'setup/';
+                if (!$cacheManager->deleteTree($setupPath,true,false,false)) {
+                    $modx->log(MODX_LOG_LEVEL_ERROR,$this->lexicon['setup_err_remove']);
                 }
             } else {
-                $modx->log(MODX_LOG_LEVEL_ERROR,'MODx\'s Cache Manager could not be loaded.');
+                $modx->log(MODX_LOG_LEVEL_ERROR,$this->lexicon['cache_manager_err']);
             }
         } else {
-            $modx->log(MODX_LOG_LEVEL_ERROR,'The MODx object could not be loaded.');
+            $modx->log(MODX_LOG_LEVEL_ERROR,$this->lexicon['modx_object_err']);
         }
         return $errors;
     }
@@ -648,7 +662,7 @@ class modInstall {
             if (is_object($modx) && is_a($modx, 'modX')) {
                 /* try to initialize the mgr context */
                 $modx->initialize('mgr');
-                $url = $modx->config['manager_url'];
+                $url = $modx->getOption('manager_url');
             }
         }
 
@@ -690,34 +704,36 @@ class modInstall {
      * @return xPDO The xPDO instance to be used by the installation.
      */
     function _connect($dsn, $user = '', $password = '', $prefix = '') {
-        require_once MODX_CORE_PATH . 'xpdo/xpdo.class.php';
-        $xpdo = new xPDO($dsn, $user, $password, array(
-                XPDO_OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
-                XPDO_OPT_TABLE_PREFIX => $prefix,
-                XPDO_OPT_LOADER_CLASSES => array('modAccessibleObject')
-            ),
-            array (
-                PDO_ATTR_ERRMODE => PDO_ERRMODE_WARNING,
-                PDO_ATTR_PERSISTENT => false,
-                PDO_MYSQL_ATTR_USE_BUFFERED_QUERY => true
-            )
-        );
-        $xpdo->cachePath = MODX_CORE_PATH . 'cache/';
-        $xpdo->setDebug(E_ALL & ~E_STRICT);
-        $xpdo->setLogTarget(array(
-            'target' => 'FILE',
-            'options' => array(
-                'filename' => 'install.' . MODX_CONFIG_KEY . '.' . strftime('%Y%m%dT%H%M%S') . '.log'
-            )
-        ));
-        $xpdo->setLogLevel(XPDO_LOG_LEVEL_ERROR);
-        return $xpdo;
+        if (include_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php')) {
+            $xpdo = new xPDO($dsn, $user, $password, array(
+                    XPDO_OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
+                    XPDO_OPT_TABLE_PREFIX => $prefix,
+                    XPDO_OPT_LOADER_CLASSES => array('modAccessibleObject')
+                ),
+                array (
+                    PDO_ATTR_ERRMODE => PDO_ERRMODE_WARNING,
+                    PDO_ATTR_PERSISTENT => false,
+                    PDO_MYSQL_ATTR_USE_BUFFERED_QUERY => true
+                )
+            );
+            $xpdo->cachePath = MODX_CORE_PATH . 'cache/';
+            $xpdo->setDebug(E_ALL & ~E_STRICT);
+            $xpdo->setLogTarget(array(
+                'target' => 'FILE',
+                'options' => array(
+                    'filename' => 'install.' . MODX_CONFIG_KEY . '.' . strftime('%Y%m%dT%H%M%S') . '.log'
+                )
+            ));
+            $xpdo->setLogLevel(XPDO_LOG_LEVEL_ERROR);
+            return $xpdo;
+        } else {
+            return sprintf($this->lexicon['xpdo_err_nf'],MODX_CORE_PATH.'xpdo/xpdo.class.php');
+        }
     }
 
     /**
      * Instantiate an existing modX configuration.
      *
-     * @todo Internationalization of error messages.
      * @param array &$errors An array in which error messages are collected.
      * @return modX|null The modX instance, or null if it could not be instantiated.
      */
@@ -725,7 +741,7 @@ class modInstall {
         $modx = null;
 
         /* to validate installation, instantiate the modX class and run a few tests */
-        if (require_once (MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+        if (include_once (MODX_CORE_PATH . 'model/modx/modx.class.php')) {
             $modx = new modX(MODX_CORE_PATH . 'config/');
             if (!is_object($modx) || !is_a($modx, 'modX')) {
                 $errors[] = '<p>'.$this->lexicon['modx_err_instantiate'].'</p>';
@@ -749,5 +765,54 @@ class modInstall {
         }
 
         return $modx;
+    }
+
+    /**
+     * Does all the pre-load checks, before setup loads.
+     *
+     * @access public
+     */
+    function doPreloadChecks() {
+        $this->loadLang('preload');
+        $errors= array();
+
+        if ((!extension_loaded('mysql') && !function_exists('mysql_connect')) && ((defined('XPDO_MODE') && XPDO_MODE == 2) || (!defined('XPDO_MODE') && version_compare(MODX_SETUP_PHP_VERSION, '5.1') < 0))) {
+            $errors[] = $this->lexicon['preload_err_mysql'];
+        }
+        if (!extension_loaded('pdo') && ((defined('XPDO_MODE') && XPDO_MODE == 1) || (!defined('XPDO_MODE') && version_compare(MODX_SETUP_PHP_VERSION, '5.1') >= 0))) {
+            $errors[] = $this->lexicon['preload_err_pdo'];
+        }
+        if (!extension_loaded('pdo_mysql') && ((defined('XPDO_MODE') && XPDO_MODE == 1) || (!defined('XPDO_MODE') && version_compare(MODX_SETUP_PHP_VERSION, '5.1') >= 0))) {
+            $errors[] = $this->lexicon['preload_err_pdo_mysql'];
+        }
+        if (!file_exists(MODX_CORE_PATH) || !is_dir(MODX_CORE_PATH)) {
+            $errors[] = $this->lexicon['preload_err_core_path'];
+        }
+        if (!file_exists(MODX_CORE_PATH . 'cache/') || !is_dir(MODX_CORE_PATH . 'cache/') || !is_writable(MODX_CORE_PATH . 'cache/')) {
+            $errors[] = sprintf($this->lexicon['preload_err_cache'],MODX_CORE_PATH);
+        }
+
+        if (!empty($errors)) {
+            $this->_fatalError($errors);
+        }
+    }
+
+    /**
+     * Outputs a fatal error message and then dies.
+     *
+     * @access private
+     * @param string/array A string or array of errors
+     */
+    function _fatalError($errors) {
+        $output = '<html><head><title></title></head><body><h1>'.$this->lexicon['fatal_error'].'</h1><ul>';
+        if (is_array($errors)) {
+            foreach ($errors as $error) {
+                $output .= '<li>'.$error.'</li>';
+            }
+        } else {
+            $output .= '<li>'.$errors.'</li>';
+        }
+        $output .= '</ul></body></html>';
+        die($output);
     }
 }

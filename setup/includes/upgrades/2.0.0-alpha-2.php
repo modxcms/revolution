@@ -3,6 +3,7 @@
  * Handles all upgrades related to Revolution 2.0.0-alpha-2
  *
  * @package setup
+ * @subpackage upgrades
  */
 /* handle new class creation */
 $classes = array(

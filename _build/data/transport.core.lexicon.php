@@ -4,7 +4,7 @@ $invdirs = array('.','..','.svn','country');
 $d = MODX_CORE_PATH.'lexicon/';
 
 $i = 0;
-// loop through cultures
+/* loop through cultures */
 $dir = dir($d);
 while (false !== ($culture = $dir->read())) {
     if (in_array($culture,$invdirs)) continue;
@@ -15,7 +15,7 @@ while (false !== ($culture = $dir->read())) {
         'name' => $culture,
     ),'',true,true);
 
-    // loop through topics
+    /* loop through topics */
     $fdir = $d.$culture.'/';
     $fd = dir($fdir);
     $topcount = 1;

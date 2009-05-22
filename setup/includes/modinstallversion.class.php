@@ -84,6 +84,7 @@ class modInstallVersion {
         $connected = $this->install->xpdo->connect();
         if ($connected) {
             $this->install->xpdo->getManager();
+            $this->install->loadLang('upgrades');
             $scripts = $this->_getUpgradeScripts();
 
             foreach ($scripts as $script) {

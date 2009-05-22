@@ -69,7 +69,7 @@ $this->xpdo->getManager();
 $connected= $this->xpdo->connect();
 $created= false;
 if (!$connected) {
-    $dsnArray= xPDO :: parseDSN($this->xpdo->config['dsn']);
+    $dsnArray= xPDO :: parseDSN($this->xpdo->getOption('dsn'));
     $containerOptions['charset']= isset ($install->config['database_charset']) ? $install->config['database_charset'] : 'utf8';
     $containerOptions['collation']= isset ($install->config['database_collation']) ? $install->config['database_collation'] : 'utf8_unicode_ci';
     $created= $this->xpdo->manager->createSourceContainer($dsnArray, $this->xpdo->config['username'], $this->xpdo->config['password'], $containerOptions);
