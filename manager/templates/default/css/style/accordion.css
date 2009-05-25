@@ -137,7 +137,10 @@
     background-position: 0 -32px;
 }
 #modx-file-tree-panel .x-accordion-hd {
-    background-position: 0 -64px;
+	    background-position: 0 -64px;
+	}
+#modx-static-page-settings .x-accordion-hd {
+    background-position: 0 -96px;
 }
 #modx-element-tree-panel,
 #modx-file-tree-panel {
