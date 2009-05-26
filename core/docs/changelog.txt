@@ -4,6 +4,31 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Enhanced User Group update/create screen to now have grids that allow you to assign Resource Group / Context permissions to that user group. This will help clear up confusion with the access relationships.
+- Fixed scope issue in accordion.css that was causing odd behaviours with panels in the main content
+- Adjusted setup procedures to allow for more lexicon support for pre-load checks
+- Adjusted setup lexicon to allow for multiple topics; conformed upgrade scripts and other references to match
+- Consolidated similar code in setup, esp. with regards to fatal errors
+- Added smarter checks for xPDO failures in connectors
+- [#MODX-744] Fixed issue with invalid display of num cleared on cache claering
+- Fixed bugs with updating packages from a remote provider
+- Made sure package attr returns '' if false
+- Fixed manager log to show username, not user ID
+- Standardized derivative resource form panels to move page settings to left
+- Tweaked tree menu headers
+- Minor IE overrides for top navigation and accordion panel.
+- Added support for modLinkTag properties as url parameters, with context reserved to indicate a context to send to makeUrl().
+- Fixed error in modLinkTag when passed invalid data.
+- Added '@RESOURCE' binding alias so as to deprecate @DOCUMENT binding
+- Fixed default language setting for modLexicon
+- Fixed a couple issues with the page settings checkboxes for resources
+- Removed deprecated _tx_.gif 
+- Removed home icon and replaced with tab
+- Adjusted CSS to align main content page vertically
+- Trees now have fun new icons representing their types (this includes the resource, element and file trees)
+- Cleaned up the default.inc.php lexicon topic to remove any no-longer-used entries 
+- Fixing typo in subtract output modifier
+- Fixed improper reference in TV property renders for mgr context
 - Updated xPDO to revision 329.
 - Improvements to sendError() behavior.
 - Added lock stealing processor and updated remove_locks processor.
