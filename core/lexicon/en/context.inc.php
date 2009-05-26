@@ -1,5 +1,6 @@
 <?php
 $_lang['context'] = 'Context';
+$_lang['context_add'] = 'Add Context';
 $_lang['context_create'] = 'Create Context';
 $_lang['context_data'] = 'Context Data';
 $_lang['context_err_create'] = 'An error occurred while creating the context.';

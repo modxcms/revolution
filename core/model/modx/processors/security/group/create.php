@@ -24,7 +24,7 @@ $ug = $modx->newObject('modUserGroup');
 $ug->set('name',$_POST['name']);
 $ug->set('parent',$_POST['parent']);
 
-/* then add back in ones in form */
+/* users */
 $users = $modx->fromJSON($_POST['users']);
 $ugms = array();
 foreach ($users as $ua) {
@@ -39,6 +39,33 @@ $ug->addMany($ugms);
 if ($ug->save() == false) {
     return $modx->error->failure($modx->lexicon('user_group_err_create'));
 }
+
+
+/* contexts */
+$contexts = $modx->fromJSON($_POST['contexts']);
+foreach ($contexts as $context) {
+    $acl = $modx->newObject('modAccessContext');
+    $acl->set('target',$context['target']);
+    $acl->set('principal',$ug->get('id'));
+    $acl->set('principal_class','modUserGroup');
+    $acl->set('authority',$context['authority']);
+    $acl->set('policy',$context['policy']);
+    $acl->save();
+}
+
+/* resource groups */
+$resourceGroups = $modx->fromJSON($_POST['resource_groups']);
+foreach ($resourceGroups as $resourceGroup) {
+    $acl = $modx->newObject('modAccessResourceGroup');
+    $acl->set('target',$resourceGroup['target']);
+    $acl->set('principal',$ug->get('id'));
+    $acl->set('principal_class','modUserGroup');
+    $acl->set('authority',$resourceGroup['authority']);
+    $acl->set('policy',$resourceGroup['policy']);
+    $acl->set('context_key',$resourceGroup['context_key']);
+    $acl->save();
+}
+
 
 /* log manager action */
 $modx->logManagerAction('new_user_group','modUserGroup',$ug->get('id'));

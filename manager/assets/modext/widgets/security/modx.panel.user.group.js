@@ -12,50 +12,94 @@ MODx.panel.UserGroup = function(config) {
             ,border: false
             ,cls: 'modx-page-header'
             ,id: 'modx-user-group-header'
-        },{
-            layout: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
-            ,defaults: { border: false ,autoHeight: true }
-            ,items: [{
-                html: '<p>'+''+'</p>'
-            },{
-                xtype: 'hidden'
-                ,name: 'id'
-                ,id: 'modx-usergroup-id'
-                ,value: config.usergroup
-            },{
-                name: 'name'
-                ,id: 'modx-usergroup-name'
-                ,xtype: 'textfield'
-                ,fieldLabel: _('name')
-                ,allowBlank: false
-                ,enableKeyEvents: true
-                ,listeners: {
-                    'keyup': {scope:this,fn:function(f,e) {
-                        Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+f.getValue()+'</h2>');
-                    }}
-                }
-            },{
-                name: 'parent'
-                ,hiddenName: 'parent'
-                ,id: 'modx-usergroup-parent'
-                ,xtype: 'modx-combo-usergroup'
-                ,fieldLabel: _('user_group_parent')
-                ,editable: false
-                ,baseParams: {
-                    action: 'getList'
-                    ,addNone: true
-                }
-            },MODx.PanelSpacer,{
-                xtype: 'modx-grid-user-group-users'
-                ,title: _('users')
-                ,preventRender: true
-                ,usergroup: config.usergroup
-                ,listeners: {
-                    'afterRemoveRow': {fn:function() {
-                        this.fireEvent('fieldChange');
-                    },scope:this}
-                }
+        },{            
+            xtype: 'portal'
+            ,items: [{ 
+                columnWidth: 1
+                ,items: [{
+                    title: _('general_information')
+                    ,bodyStyle: 'padding: 1.5em;'
+                    ,defaults: { border: false ,msgTarget: 'side' }
+                    ,layout: 'form'
+                    ,id: 'modx-chunk-form'
+                    ,labelWidth: 150
+                    ,items: [{
+                        html: '<p>'+''+'</p>'
+                    },{
+                        xtype: 'hidden'
+                        ,name: 'id'
+                        ,id: 'modx-usergroup-id'
+                        ,value: config.usergroup
+                    },{
+                        name: 'name'
+                        ,id: 'modx-usergroup-name'
+                        ,xtype: 'textfield'
+                        ,fieldLabel: _('name')
+                        ,allowBlank: false
+                        ,enableKeyEvents: true
+                        ,listeners: {
+                            'keyup': {scope:this,fn:function(f,e) {
+                                Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+f.getValue()+'</h2>');
+                            }}
+                        }
+                    },{
+                        name: 'parent'
+                        ,hiddenName: 'parent'
+                        ,id: 'modx-usergroup-parent'
+                        ,xtype: 'modx-combo-usergroup'
+                        ,fieldLabel: _('user_group_parent')
+                        ,editable: false
+                        ,baseParams: {
+                            action: 'getList'
+                            ,addNone: true
+                        }
+                    }]
+                },{
+                    title: _('users')
+                    ,items: [{
+                        html: '<p>'+_('user_group_user_access_msg')+'</p>'
+                    },{
+                        xtype: 'modx-grid-user-group-users'
+                        ,preventRender: true
+                        ,usergroup: config.usergroup
+                        ,autoHeight: true
+                        ,listeners: {
+                            'afterRemoveRow': {fn:function() {
+                                this.fireEvent('fieldChange');
+                            },scope:this}
+                        }
+                    }]
+                },{
+                    title: _('user_group_context_access')
+                    ,items: [{
+                        html: '<p>'+_('user_group_context_access_msg')+'</p>'
+                    },{
+                        xtype: 'modx-grid-user-group-context'
+                        ,preventRender: true
+                        ,usergroup: config.usergroup
+                        ,autoHeight: true
+                        ,listeners: {
+                            'afterRemoveRow': {fn:function() {
+                                this.fireEvent('fieldChange');
+                            },scope:this}
+                        }
+                    }]
+                },{
+                    title: _('user_group_resourcegroup_access')
+                    ,items: [{
+                        html: '<p>'+_('user_group_resourcegroup_access_msg')+'</p>'
+                    },{
+                        xtype: 'modx-grid-user-group-resource-group'
+                        ,preventRender: true
+                        ,usergroup: config.usergroup
+                        ,autoHeight: true
+                        ,listeners: {
+                            'afterRemoveRow': {fn:function() {
+                                this.fireEvent('fieldChange');
+                            },scope:this}
+                        }
+                    }]
+                }]
             }]
         }]
         ,listeners: {
@@ -78,6 +122,8 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
                 action: 'get'
                 ,id: this.config.usergroup
                 ,getUsers: true
+                ,getContexts: true
+                ,getResourceGroups: true
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -85,9 +131,11 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
                     Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+r.object.name+'</h2>');
                     
                     var d = Ext.decode(r.object.users);
-                    var g = Ext.getCmp('modx-grid-user-group-users');
-                    var s = g.getStore();
-                    s.loadData(d);
+                    var s = Ext.getCmp('modx-grid-user-group-users').getStore().loadData(d);
+                    d = Ext.decode(r.object.contexts);
+                    var s = Ext.getCmp('modx-grid-user-group-contexts').getStore().loadData(d);
+                    d = Ext.decode(r.object.resourcegroups);
+                    var s = Ext.getCmp('modx-grid-user-group-resource-groups').getStore().loadData(d);
                     this.fireEvent('ready',r.object);
                 },scope:this}
             }
@@ -95,14 +143,17 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
     }
     
     ,beforeSubmit: function(o) {
-        var g = Ext.getCmp('modx-grid-user-group-users');
         Ext.apply(o.form.baseParams,{
-            users: g.encode()
+            users: Ext.getCmp('modx-grid-user-group-users').encode()
+            ,contexts: Ext.getCmp('modx-grid-user-group-contexts').encode()
+            ,resource_groups: Ext.getCmp('modx-grid-user-group-resource-groups').encode()
         });
     }
     
     ,success: function(o) {
         Ext.getCmp('modx-grid-user-group-users').getStore().commitChanges();
+        Ext.getCmp('modx-grid-user-group-contexts').getStore().commitChanges();
+        Ext.getCmp('modx-grid-user-group-resource-groups').getStore().commitChanges();
     }
 });
 Ext.reg('modx-panel-user-group',MODx.panel.UserGroup);

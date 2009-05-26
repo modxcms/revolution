@@ -38,4 +38,62 @@ if (isset($_REQUEST['getUsers']) && $_REQUEST['getUsers']) {
     $ug->set('users','(' . $modx->toJSON($data) . ')');
 }
 
+if (!empty($_REQUEST['getContexts'])) {
+    $c = $modx->newQuery('modAccessContext');
+    $c->where(array(
+        'principal_class' => 'modUserGroup',
+        'principal' => $ug->get('id'),
+    ));
+    $c->sortby('principal','ASC');
+    $objectGraph = '{"Target":{},"Policy":{}}';
+    $ctxaccess = $modx->getCollectionGraph('modAccessContext', $objectGraph, $c);
+
+    $data = array();
+    foreach ($ctxaccess as $contextAccess) {
+        $objdata= array(
+            $contextAccess->get('id'),
+            $contextAccess->get('target'),
+            $contextAccess->Target->get('key'),
+            $contextAccess->get('principal_class'),
+            $contextAccess->get('principal'),
+            $contextAccess->get('name'),
+            $contextAccess->get('authority'),
+            $contextAccess->get('policy'),
+            $contextAccess->Policy->get('name'),
+        );
+        $data[] = $objdata;
+    }
+    $ug->set('contexts','(' . $modx->toJSON($data) . ')');
+}
+
+
+if (!empty($_REQUEST['getResourceGroups'])) {
+    $c = $modx->newQuery('modAccessResourceGroup');
+    $c->where(array(
+        'principal_class' => 'modUserGroup',
+        'principal' => $ug->get('id'),
+    ));
+    $c->sortby('principal','ASC');
+    $objectGraph = '{"Target":{},"Policy":{}}';
+    $ctxaccess = $modx->getCollectionGraph('modAccessContext', $objectGraph, $c);
+
+    $data = array();
+    foreach ($ctxaccess as $acl) {
+        $objdata= array(
+            $acl->get('id'),
+            $acl->get('target'),
+            $acl->Target->get('name'),
+            $acl->get('principal_class'),
+            $acl->get('principal'),
+            $acl->get('name'),
+            $acl->get('authority'),
+            $acl->get('policy'),
+            $acl->Policy->get('name'),
+            $acl->get('context_key'),
+        );
+        $data[] = $objdata;
+    }
+    $ug->set('resourcegroups','(' . $modx->toJSON($data) . ')');
+}
+
 return $modx->error->success('',$ug);

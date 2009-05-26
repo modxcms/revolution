@@ -62,20 +62,6 @@
     border: 0;
 }
 
-.modx-accordion .x-panel-header-text {
-    /*background: transparent url(../../images/restyle/i/bg-x-accordion-hd.png) right top;*/
-    /*
-    height: 32px;    
-    display: block;
-    position: absolute;
-    margin-left: -30px;
-    text-indent: 24px;
-    width: 100%;
-    z-index: 4;
-    */
-    
-}
-
 .modx-accordion .x-tool-toggle {
     width: 24px;
     height: 24px;
@@ -87,10 +73,7 @@
     background-position: 0 0;
 }
 
-/*
-.modx-accordion div:hover.x-tool-toggle {
-    background-position: 0 100%;
-}*/ /* other stuff */
+/* other stuff */
 .modx-tree .x-toolbar {
     background: #eee;
     /*border: 1px solid #fff;*/
@@ -121,7 +104,7 @@
 	background: transparent url(../../images/restyle/i/bg-x-accordion-hd2.png) 0 0;
 }
 .modx-accordion .x-panel-header-text,
-.x-panel-animated .x-panel-header-text {
+.modx-accordion .x-panel-animated .x-panel-header-text {
 	margin-right: -10px !important;
     background: transparent url(../../images/restyle/i/bg-x-accordion-hd2.png) 100% 0 !important;
 	display: block;
