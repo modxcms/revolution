@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Export lexicon now prompts for download of exported file
 - Enhanced User Group update/create screen to now have grids that allow you to assign Resource Group / Context permissions to that user group. This will help clear up confusion with the access relationships.
 - Fixed scope issue in accordion.css that was causing odd behaviours with panels in the main content
 - Adjusted setup procedures to allow for more lexicon support for pre-load checks

@@ -13,6 +13,23 @@ $modx->lexicon->load('lexicon');
 
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
+/* if downloading the file last exported */
+if (!empty($_REQUEST['download'])) {
+    $file = $_REQUEST['download'];
+    $f = $modx->getOption('core_path').'export/lexicon/'.$file;
+
+    if (!is_file($f)) return '';
+
+    $o = file_get_contents($f);
+    $bn = basename($file);
+
+    header("Content-Type: application/force-download");
+    header("Content-Disposition: attachment; filename=\"{$bn}\"");
+
+    return $o;
+}
+
+
 if (!isset($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
 $namespace = $modx->getObject('modNamespace',$_POST['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
@@ -35,9 +52,10 @@ foreach ($entries as $entry) {
     $o .= "\$_lang['".$entry->get('name')."'] = '".$value."';\n";
 }
 
-$fileName = $modx->getOption('core_path').'export/lexicon/'.$namespace->get('name').'/'.$topic->get('name').'.inc.php';
+$file = $namespace->get('name').'/'.$topic->get('name').'.inc.php';
+$fileName = $modx->getOption('core_path').'export/lexicon/'.$file;
 
 $cacheManager = $modx->getCacheManager();
 $s = $cacheManager->writeFile($fileName,$o);
 
-return $modx->error->success();
+return $modx->error->success($file);

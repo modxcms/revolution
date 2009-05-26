@@ -125,7 +125,16 @@ MODx.grid.Lexicon = function(config) {
         },{
             xtype: 'button'
             ,text: _('lexicon_export')
-            ,handler: function(btn,e) { this.loadWindow2(btn,e,{ xtype: 'modx-window-lexicon-export'}); }
+            ,handler: function(btn,e) {
+                this.loadWindow2(btn,e,{ 
+                    xtype: 'modx-window-lexicon-export'
+                    ,listeners: {
+                        'success': {fn:function(o) {
+                            location.href = MODx.config.connectors_url+'workspace/lexicon/index.php?action=export&download='+o.a.result.message;
+                        },scope:this}
+                    }
+                }); 
+            }
             ,scope: this
         }]
     });
