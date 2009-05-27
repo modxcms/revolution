@@ -108,7 +108,18 @@ unset ($collection, $c, $attributes);
 
 $xpdo->log(XPDO_LOG_LEVEL_INFO,'Default workspace packaged.'); flush();
 
-/* modx wtf provisioner */
+/* modxcms.com extras provisioner */
+$c = $xpdo->newQuery('transport.modTransportProvider');
+$c->where(array(
+    'service_url' => 'http://wtf.modxcms.com/addons2.js ',
+));
+$c->orCondition(array(
+    'service_url' => 'http://wtf.modxcms.com/repos/addons.js',
+));
+$oldProviders = $xpdo->getCollection('transport.modTransportProvider',$c);
+if (!empty($oldProviders)) {
+    foreach ($oldProviders as $k => $p) { $p->remove(); }
+}
 $collection = array ();
 $collection['1'] = $xpdo->newObject('transport.modTransportProvider');
 $collection['1']->fromArray(array (
@@ -128,7 +139,7 @@ foreach ($collection as $c) {
 }
 unset ($collection, $c, $attributes);
 
-$xpdo->log(XPDO_LOG_LEVEL_INFO,'Packaged in MODx Web Transport Facility reference.'); flush();
+$xpdo->log(XPDO_LOG_LEVEL_INFO,'Packaged in modxcms.com provisioner reference.'); flush();
 
 /* modAction */
 $collection= array();
