@@ -185,6 +185,9 @@ class modRequest {
                             return null;
                         }
                     }
+                    if (!$resource->checkPolicy('view')) {
+                        $this->modx->sendUnauthorizedPage();
+                    }
                     $this->modx->documentObject = & $resource->_fields;
                     if ($tvs = $resource->getMany('modTemplateVar', 'all')) {
                         foreach ($tvs as $tv) {
@@ -205,6 +208,9 @@ class modRequest {
                     if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
                         return null;
                     }
+                }
+                if (!$resource->checkPolicy('view')) {
+                    $this->modx->sendUnauthorizedPage();
                 }
             } else {
                 return null;

@@ -141,8 +141,8 @@ class modResource extends modAccessibleSimpleObject {
         $id = $this->get('id') ? (string) $this->get('id') : '0';
         $context = $this->_contextKey ? $this->_contextKey : 'web';
         if (strpos($this->_cacheKey, '[') !== false) {
-            $this->_cacheKey= str_replace('[contextKey]', $this->_contextKey, $this->_cacheKey);
-            $this->_cacheKey= str_replace('[id]', (string) $this->get('id'), $this->_cacheKey);
+            $this->_cacheKey= str_replace('[contextKey]', $context, $this->_cacheKey);
+            $this->_cacheKey= str_replace('[id]', $id, $this->_cacheKey);
         }
         return $this->_cacheKey;
     }

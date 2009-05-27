@@ -144,11 +144,11 @@ if ($loginContext == 'mgr') {
 } else {
     $modx->invokeEvent("OnWebLogin", $postLoginAttributes);
 }
-
-$response = array('url' => $modx->getOption('site_url'));
+$returnUrl = isset($_REQUEST['returnUrl']) ? $_REQUEST['returnUrl'] : $modx->getOption('site_url');
+$response = array('url' => $returnUrl);
 switch ($loginContext) {
     case 'mgr':
-        $manager_login_startup_url = $modx->getOption('manager_url');
+        $manager_login_startup_url = $modx->getOption('manager_url', null, $returnUrl);
         if (!empty($manager_login_startup)) {
             $manager_login_startup= intval($manager_login_startup);
             if ($manager_login_startup) $manager_login_startup_url .= '?id=' . $manager_login_startup;
@@ -157,7 +157,7 @@ switch ($loginContext) {
         break;
     case 'web':
     default:
-        $login_startup_url = $modx->getOption('site_url');
+        $login_startup_url = $returnUrl;
         if (!empty($login_startup)) {
             $login_startup = intval($login_startup);
             if ($login_startup) $login_startup_url = $modx->makeUrl($login_startup, $loginContext, '', 'full');

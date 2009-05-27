@@ -128,7 +128,9 @@ class modLexicon {
             if ($nspos === false) {
                 foreach ($this->_paths as $namespace => $path) {
                     $_lang = $this->loadCache($namespace,$topic);
-                    $this->_lexicon = array_merge($this->_lexicon,$_lang);
+                    if (is_array($_lang)) {
+                        $this->_lexicon = is_array($this->_lexicon) ? array_merge($this->_lexicon,$_lang) : $_lang;
+                    }
                 }
             } else { /* if namespace, search specified lexicon */
                 $params = explode(':',$topic);
@@ -143,7 +145,9 @@ class modLexicon {
                 }
 
                 $_lang = $this->loadCache($namespace,$topic_parsed,$language);
-                $this->_lexicon = array_merge($this->_lexicon,$_lang);
+                if (is_array($_lang)) {
+                    $this->_lexicon = is_array($this->_lexicon) ? array_merge($this->_lexicon, $_lang) : $_lang;
+                }
             }
         }
     }

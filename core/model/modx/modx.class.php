@@ -906,18 +906,8 @@ class modX extends xPDO {
             }
         } else {
             $this->user = $this->newObject('modUser', array(
-                    'id' => '0',
+                    'id' => 0,
                     'username' => '(anonymous)'
-                )
-            );
-            $this->user->_attributes = array(
-                'modAccessContext' => array(
-                    $contextKey => array(
-                        '0' => array(
-                            'authority' => 9999,
-                            'policy' => array('load' => true)
-                        )
-                    )
                 )
             );
         }

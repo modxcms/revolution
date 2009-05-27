@@ -823,3 +823,12 @@ $collection['88']->fromArray(array (
   'area' => 'caching',
   'editedon' => NULL,
 ), '', true, true);
+$collection['89']= $xpdo->newObject('modSystemSetting');
+$collection['89']->fromArray(array (
+  'key' => 'request_controller',
+  'value' => 'index.php',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => '',
+  'editedon' => NULL,
+), '', true, true);

@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added request_controller system setting to indicate the front-controller file (default=index.php).
+- Fixed array_merge warnings in modLexicon.
+- Added back support for anonymous user access control.
+- Added support for returnUrl parameter to be sent to login processor to allow unauthorized responses to return to the original requested page directly (NOTE: this overrides manager_login_startup and login_startup parameters, but does not work with POST requests: these will simply return to the URL with only GET parameters).
 - Export lexicon now prompts for download of exported file
 - Enhanced User Group update/create screen to now have grids that allow you to assign Resource Group / Context permissions to that user group. This will help clear up confusion with the access relationships.
 - Fixed scope issue in accordion.css that was causing odd behaviours with panels in the main content
