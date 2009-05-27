@@ -63,14 +63,14 @@ if (file_exists($delegateProcessor)) {
 
 $resource = $modx->newObject($resourceClass);
 
-$_POST['hidemenu'] = !isset($_POST['hidemenu']) ? 0 : 1;
-$_POST['isfolder'] = !isset($_POST['isfolder']) ? 0 : 1;
-$_POST['richtext'] = !isset($_POST['richtext']) ? 0 : 1;
-$_POST['donthit'] = !isset($_POST['donthit']) ? 0 : 1;
-$_POST['published'] = !isset($_POST['published']) ? 0 : 1;
-$_POST['cacheable'] = !isset($_POST['cacheable']) ? 0 : 1;
-$_POST['searchable'] = !isset($_POST['searchable']) ? 0 : 1;
-$_POST['syncsite'] = !isset($_POST['syncsite']) ? 0 : 1;
+$_POST['hidemenu'] = empty($_POST['hidemenu']) ? 0 : 1;
+$_POST['isfolder'] = empty($_POST['isfolder']) ? 0 : 1;
+$_POST['richtext'] = empty($_POST['richtext']) ? 0 : 1;
+$_POST['donthit'] = empty($_POST['donthit']) ? 0 : 1;
+$_POST['published'] = empty($_POST['published']) ? 0 : 1;
+$_POST['cacheable'] = empty($_POST['cacheable']) ? 0 : 1;
+$_POST['searchable'] = empty($_POST['searchable']) ? 0 : 1;
+$_POST['syncsite'] = empty($_POST['syncsite']) ? 0 : 1;
 
 /* specific data escaping */
 $_POST['pagetitle'] = trim($_POST['pagetitle']);
