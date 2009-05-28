@@ -19,7 +19,7 @@
     <!-- Set some common build properties -->
     <property name="build.dir" value="${basedir}" />
     <property name="build.src.url"
-              value="http://svn.modxcms.com/svn/tattoo/tattoo/branches/2.0"
+              value="http://svn.modxcms.com/svn/tattoo/tattoo/branches/revolution"
     />
     <property name="build.image.basedir" value="${basedir}/image" />
     <property name="build.image.dir" value="${basedir}/image/modx-${modx.core.version}-${modx.core.release}" />
@@ -50,19 +50,19 @@
           target: complete              
          ================================= -->
     <target name="complete" description="--> Complete Build">
-        <antcall target="svn-export-build-image-wc"></antcall>
+        <antcall target="svn-export-build-image"></antcall>
         <antcall target="modext-minify"></antcall>
         <antcall target="modext-concat-min"></antcall>
         <antcall target="modext-concat"></antcall>
         <antcall target="copy-prepared-js"></antcall>
         <antcall target="generate-core-transport"></antcall>
-        <antcall target="generate-phpdocs"></antcall>
+        <!--<antcall target="generate-phpdocs"></antcall>-->
         <antcall target="prepare-build-image"></antcall>
         <antcall target="copy-core-transport"></antcall>
         
         <buildnumber />
         
-        <antcall target="build-sdk"></antcall>
+        <!--<antcall target="build-sdk"></antcall>-->
         <antcall target="build-traditional"></antcall>
         <antcall target="build-advanced"></antcall>
     </target>
@@ -341,12 +341,10 @@ General Public License for more details.
     <target name="build-sdk" description="create the traditional distribution package">
         <replace file="${build.image.dir}/setup/includes/config.core.php" token="@svn" value="@sdk" />
         <delete dir="${build.image.dir}/core/packages/core" />
-        <unzip src="${build.image.dir}/core/packages/core.transport.zip" dest="${build.image.dir}/core/packages/">
-            <patternset>
-                <include name="core/manifest.php" />
-                <include name="core/*/*.php" />
-            </patternset>
-        </unzip>
+        <unzip src="${build.image.dir}/core/packages/core.transport.zip" dest="${build.image.dir}/core/packages/" />
+        <copy todir="${build.image.dir}/docs">
+            <fileset dir="${build.apidocs.dir}" />
+        </copy>
         <copy file="${build.dir}/config.core.php.txt" tofile="${build.image.dir}/config.core.php">
             <filterset>
                 <filter token="core-path" value="dirname(__FILE__) . '/core/'" />
@@ -369,6 +367,7 @@ General Public License for more details.
         <delete file="${build.image.dir}/config.core.php" />
         <delete file="${build.image.dir}/manager/config.core.php" />
         <delete file="${build.image.dir}/connectors/config.core.php" />
+        <delete dir="${build.image.dir}/docs" />
     </target>
 
     <!-- Build a traditional MODx distrib with all files in place and extracted -->
@@ -378,7 +377,9 @@ General Public License for more details.
         <unzip src="${build.image.dir}/core/packages/core.transport.zip" dest="${build.image.dir}/core/packages/">
             <patternset>
                 <include name="core/manifest.php" />
-                <include name="core/*/*.php" />
+                <include name="core/*/*.vehicle" />
+                <include name="core/*/*.resolver" />
+                <include name="core/*/*.validator" />
             </patternset>
         </unzip>
         <copy file="${build.dir}/config.core.php.txt" tofile="${build.image.dir}/config.core.php">
