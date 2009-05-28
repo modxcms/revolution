@@ -158,15 +158,6 @@ MODx.panel.ResourceData = function(config) {
                         ,width: '90%'
                         ,grow: true
                     }]
-                },{
-                    title: _('preview')
-                    ,collapsed: true
-                    ,defaults: { border: false ,msgTarget: 'side' }
-                    ,items: [{
-                        autoLoad: {
-                            url: '../index.php?id='+config.resource+'&z=manprev'
-                        }
-                    }]
                 }]
             }]
         }]

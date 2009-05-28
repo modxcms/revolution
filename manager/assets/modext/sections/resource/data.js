@@ -19,21 +19,12 @@ MODx.page.ResourceData = function(config) {
             process: 'edit'
             ,text: _('edit')
             ,params: { a: MODx.action['resource/update'] }
-        },'-',/*{
-            process: 'duplicate'
-            ,text: _('duplicate')
-            ,method: 'remote'
-            ,confirm: _('resource_duplicate_confirm')
-        },{
-            process: 'delete'
-            ,text: _('delete')
-            ,method: 'remote'
-            ,confirm: _('resource_delete_confirm')
-            ,refresh: {
-            	tree: 'modx_resource_tree'
-            	,node: config.ctx+'_'+config.id
-            }
-        },'-',*/{
+        },'-',{
+            process: 'preview'
+            ,text: _('preview')
+            ,handler: this.preview.createDelegate(this,[config.id])
+            ,scope: this
+        },'-',{
             process: 'cancel'
             ,text: _('cancel')
             ,params: { a: MODx.action['welcome'] }
@@ -49,5 +40,10 @@ MODx.page.ResourceData = function(config) {
 	});
 	MODx.page.ResourceData.superclass.constructor.call(this,config);	
 };
-Ext.extend(MODx.page.ResourceData,MODx.Component);
+Ext.extend(MODx.page.ResourceData,MODx.Component,{
+    preview: function(id) {
+        window.open(MODx.config.base_url+'index.php?id='+id);
+        return false;
+    }
+});
 Ext.reg('modx-page-resource-data',MODx.page.ResourceData);
