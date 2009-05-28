@@ -30,7 +30,7 @@ if ($_REQUEST['attr'] == 'setup-options') {
         ? XPDO_TRANSPORT_ACTION_INSTALL
         : XPDO_TRANSPORT_ACTION_UPGRADE;
     $f = $modx->getOption('core_path').'packages/'.$attr;
-    if (file_exists($f)) {
+    if (file_exists($f) && $attr != '') {
         $attr = include $f;
     } else { $attr = false; }
     ob_end_clean();
