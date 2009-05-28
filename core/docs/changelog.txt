@@ -4,6 +4,13 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Updated xPDO to revision 333.
+- Fix issues with Page settings defaulting to 1 on resource creation
+- Adjusted order of JS utils loading to make for easier min-concat loading
+- Cleanups to JS to prepare for beta-1
+- Lexicon updates
+- Updating outdated copyright notices in source code headers.
+- Fixed hardcoded version number in setup.
 - Added request_controller system setting to indicate the front-controller file (default=index.php).
 - Fixed array_merge warnings in modLexicon.
 - Added back support for anonymous user access control.
