@@ -19,7 +19,7 @@
     <!-- Set some common build properties -->
     <property name="build.dir" value="${basedir}" />
     <property name="build.src.url"
-              value="http://svn.modxcms.com/svn/tattoo/tattoo/branches/revolution"
+              value="http://svn.modxcms.com/svn/tattoo/tattoo/branches/2.0"
     />
     <property name="build.image.basedir" value="${basedir}/image" />
     <property name="build.image.dir" value="${basedir}/image/modx-${modx.core.version}-${modx.core.release}" />
