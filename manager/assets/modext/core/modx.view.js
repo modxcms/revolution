@@ -80,7 +80,6 @@ Ext.extend(MODx.DataView,Ext.DataView,{
                 ,scope: this
                 ,options: options
                 ,handler: h
-                //,cls: (options.header ? 'x-menu-item-active' : '')
             });
         }
     }

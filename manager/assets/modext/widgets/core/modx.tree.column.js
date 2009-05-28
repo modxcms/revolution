@@ -8,7 +8,7 @@
  */
 Ext.tree.ColumnTree = Ext.extend(Ext.tree.TreePanel, {
     lines:false,
-    borderWidth: Ext.isBorderBox ? 0 : 2, // the combined left/right border for each cell
+    borderWidth: Ext.isBorderBox ? 0 : 2, /* the combined left/right border for each cell */
     cls:'x-column-tree modx-tree',
     
     onRender : function(){
@@ -32,13 +32,13 @@ Ext.tree.ColumnTree = Ext.extend(Ext.tree.TreePanel, {
              });
         }
         this.headers.createChild({cls:'x-clear'});
-        // prevent floats from wrapping when clipped
+        /* prevent floats from wrapping when clipped */
         this.headers.setWidth(totalWidth);
         this.innerCt.setWidth(totalWidth);
     }
 });
 Ext.tree.ColumnNodeUI = Ext.extend(Ext.tree.TreeNodeUI, {
-    focus: Ext.emptyFn, // prevent odd scrolling behavior
+    focus: Ext.emptyFn, /* prevent odd scrolling behavior */
 
     renderElements : function(n, a, targetNode, bulkRender){
         this.indentMarkup = n.parentNode ? n.parentNode.ui.getChildIndent() : '';
@@ -193,11 +193,7 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
             }
             return resultNode;
         }
-        
-        // JSON-encode our tree
         var encNodes = Ext.encode(simplifyNodes(dropEvent.tree.root));
-        
-        // send it to the backend to save
         MODx.Ajax.request({
             url: this.config.url
             ,params: {

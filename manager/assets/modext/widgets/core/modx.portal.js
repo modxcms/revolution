@@ -70,12 +70,12 @@ Ext.extend(Ext.ux.Portal.DropZone, Ext.dd.DropTarget, {
     notifyOver : function(dd, e, data){
         var xy = e.getXY(), portal = this.portal, px = dd.proxy;
 
-        // case column widths
+        /* case column widths */
         if(!this.grid){
             this.grid = this.getGrid();
         }
 
-        // handle case scroll where scrollbars appear during drag
+        /* handle case scroll where scrollbars appear during drag */
         var cw = portal.body.dom.clientWidth;
         if(!this.lastCW){
             this.lastCW = cw;
@@ -85,7 +85,7 @@ Ext.extend(Ext.ux.Portal.DropZone, Ext.dd.DropTarget, {
             this.grid = this.getGrid();
         }
 
-        // determine column
+        /* determine column */
         var col = 0, xs = this.grid.columnX, cmatch = false;
         for(var len = xs.length; col < len; col++){
             if(xy[0] < (xs[col].x + xs[col].w)){
@@ -93,12 +93,12 @@ Ext.extend(Ext.ux.Portal.DropZone, Ext.dd.DropTarget, {
                 break;
             }
         }
-        // no match, fix last index
+        /* no match, fix last index */
         if(!cmatch){
             col--;
         }
 
-        // find insert position
+        /* find insert position */
         var p, match = false, pos = 0,
             c = portal.items.itemAt(col),
             items = c.items.items, overSelf = false;
@@ -121,7 +121,7 @@ Ext.extend(Ext.ux.Portal.DropZone, Ext.dd.DropTarget, {
         if(portal.fireEvent('validatedrop', overEvent) !== false &&
            portal.fireEvent('beforedragover', overEvent) !== false){
 
-            // make sure proxy width is fluid
+            /* make sure proxy width is fluid */
             px.getProxy().setWidth('auto');
 
             if(p){
@@ -175,7 +175,7 @@ Ext.extend(Ext.ux.Portal.DropZone, Ext.dd.DropTarget, {
 
             this.portal.fireEvent('drop', dropEvent);
 
-            // scroll position is lost on drop, fix it
+            /* scroll position is lost on drop, fix it */
             var st = this.scrollPos.top;
             if(st){
                 var d = this.portal.body.dom;
@@ -188,7 +188,7 @@ Ext.extend(Ext.ux.Portal.DropZone, Ext.dd.DropTarget, {
         delete this.lastPos;
     },
 
-    // internal cache of body and column coords
+    /* internal cache of body and column coords */
     getGrid : function(){
         var box = this.portal.bwrap.getBox();
         box.columnX = [];
@@ -198,9 +198,9 @@ Ext.extend(Ext.ux.Portal.DropZone, Ext.dd.DropTarget, {
         return box;
     },
 
-    // unregister the dropzone from ScrollManager
+    /* unregister the dropzone from ScrollManager */
     unreg: function() {
-        //Ext.dd.ScrollManager.unregister(this.portal.body);
+        /*Ext.dd.ScrollManager.unregister(this.portal.body); */
         Ext.ux.Portal.DropZone.superclass.unreg.call(this);
     }
 });

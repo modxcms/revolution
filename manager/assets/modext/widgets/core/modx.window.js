@@ -46,7 +46,6 @@ MODx.Window = function(config) {
         ,failure: true
     });
 	this._loadForm();
-    this.on('show',this._onShow,this);
 };
 Ext.extend(MODx.Window,Ext.Window,{
 	/**
@@ -56,7 +55,7 @@ Ext.extend(MODx.Window,Ext.Window,{
 		if (this.checkIfLoaded(this.config.record || null)) { return false; }		
 		
         var r = this.config.record;
-        // set values here, since setValue after render seems to be broken
+        /* set values here, since setValue after render seems to be broken */
         if (this.config.fields) {
             var l = this.config.fields.length;
             for (var i=0;i<l;i++) {
@@ -100,12 +99,6 @@ Ext.extend(MODx.Window,Ext.Window,{
 			});
 		}
 	}
-    
-    ,_onShow: function() {
-        /*if (Ext.isSafari) return false;
-        var p = this.getPosition();
-        this.setPosition(p[0],10);*/
-    }
 	
 	/**
 	 * Creates the FormPanel with preset options
@@ -141,7 +134,7 @@ Ext.extend(MODx.Window,Ext.Window,{
 	 */
 	,checkIfLoaded: function(r) {
 		r = r || {};
-		if (this.fp && this.fp.getForm()) { // so as not to duplicate form
+		if (this.fp && this.fp.getForm()) { /* so as not to duplicate form */
 			this.fp.getForm().reset();
 			this.fp.getForm().setValues(r);
 			return true;

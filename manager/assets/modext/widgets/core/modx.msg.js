@@ -35,7 +35,6 @@ Ext.extend(MODx.Msg,Ext.Component,{
      * @param {Object} options An object of options to initialize with.
      */
     ,confirm: function(config) {
-    	// reloads listeners, prevents past listeners from occurring
     	this.purgeListeners();
     	if (config.listeners) {
     		for (var i in config.listeners) {

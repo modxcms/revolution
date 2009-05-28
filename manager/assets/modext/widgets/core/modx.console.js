@@ -100,7 +100,7 @@ Ext.extend(MODx.Console,Ext.Window,{
     }
     
     ,shutdown: function() {
-                this.mgr.stopAutoRefresh();
+        this.mgr.stopAutoRefresh();
         if (MODx.util.LoadingBox) { MODx.util.LoadingBox.enable(); }
     	MODx.Ajax.request({
     	    url: this.config.url

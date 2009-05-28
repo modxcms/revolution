@@ -151,7 +151,7 @@ function $(el){
     }
     if (type !== 'element') { return null; }
     return el;
-}
+};
 
 
 Array.prototype.in_array = function(p_val) {
@@ -188,34 +188,22 @@ Ext.form.getCheckboxMask = function(cbgroup) {
 
 
 Ext.form.BasicForm.prototype.append = function() {
-  // Create a new layout object
   var layout = new Ext.form.Layout();
-  // Keep track of added fields that are form fields (isFormField)
   var fields = [];
-  // Add all the fields on to the layout stack
   layout.stack.push.apply(layout.stack, arguments);
-
-  // Add only those fields that are form fields to the 'fields' array
   for(var i = 0; i < arguments.length; i=i+1) {
     if(arguments[i].isFormField) {
       fields.push(arguments[i]);
     }
   }
-
-  // Render the layout
   layout.render(this.el);
 
-  // If we found form fields add them to the form's items collection and render the
-  // fields into their containers created by the layout
   if(fields.length > 0) {
     this.items.addAll(fields);
-
-    // Render each field
     for(var f=0;f<fields.length;f=f+1) {
       fields[f].render('x-form-el-' + fields[f].id);
     }
   }
-
   return this;
 };
 
@@ -223,35 +211,35 @@ Ext.form.BasicForm.prototype.append = function() {
 Ext.form.AMPMField = function(id,v) {
     return new Ext.form.ComboBox({
         store: new Ext.data.SimpleStore({
-            fields: ['ampm'],
-            data: [['am'],['pm']]
-        }),
-        displayField: 'ampm',
-        hiddenName: id,
-        mode: 'local',
-        editable: false,
-        forceSelection: true,
-        triggerAction: 'all',
-        width: 60,
-        value: v || 'am'
+            fields: ['ampm']
+            ,data: [['am'],['pm']]
+        })
+        ,displayField: 'ampm'
+        ,hiddenName: id
+        ,mode: 'local'
+        ,editable: false
+        ,forceSelection: true
+        ,triggerAction: 'all'
+        ,width: 60
+        ,value: v || 'am'
     });
 };
 
 Ext.form.HourField = function(id,name,v){
     return new Ext.form.ComboBox({
         store: new Ext.data.SimpleStore({
-            fields: ['hour'],
-            data: [[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12]]
-        }),
-        displayField: 'hour',
-        mode: 'local',
-        triggerAction: 'all',
-        width: 60,
-        forceSelection: true,
-        rowHeight: false,
-        editable: false,
-        value: v || 1,
-        transform: id
+            fields: ['hour']
+            ,data: [[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12]]
+        })
+        ,displayField: 'hour'
+        ,mode: 'local'
+        ,triggerAction: 'all'
+        ,width: 60
+        ,forceSelection: true
+        ,rowHeight: false
+        ,editable: false
+        ,value: v || 1
+        ,transform: id
     }); 
 };
 
@@ -264,27 +252,25 @@ Ext.override(Ext.tree.TreeNodeUI,{
 });
 
 
-// allows for messages in JSON responses
+/* allows for messages in JSON responses */
 Ext.override(Ext.form.Action.Submit,{         
     handleResponse : function(response){        
-        var m = Ext.decode(response.responseText); // shaun 7/11/07
-        if(this.form.errorReader){
+        var m = Ext.decode(response.responseText); /* shaun 7/11/07 */
+        if (this.form.errorReader) {
             var rs = this.form.errorReader.read(response);
             var errors = [];
-            if(rs.records){
+            if (rs.records) {
                 for(var i = 0, len = rs.records.length; i < len; i=i+1) {
                     var r = rs.records[i];
                     errors[i] = r.data;
                 }
             }
-            if(errors.length < 1){
-                errors = null;
-            }
+            if (errors.length < 1) { errors = null; }
             return {
-                success : rs.success,
-                message : m.message, // shaun 7/11/07
-                object : m.object, // shaun 7/18/07
-                errors : errors
+                success : rs.success
+                ,message : m.message /* shaun 7/11/07 */
+                ,object : m.object /* shaun 7/18/07 */
+                ,errors : errors
             };
         }
         return Ext.decode(response.responseText);
@@ -339,7 +325,6 @@ Ext.extend(Ext.form.ColorField, Ext.form.TriggerField,  {
      * A DomHelper element spec, or true for a default element spec (defaults to
      * {tag: "input", type: "text", size: "10", autocomplete: "off"})
      */
-    // private
     defaultAutoCreate : {tag: "input", type: "text", size: "10",
                          autocomplete: "off", maxlength:"6"},
     
@@ -349,8 +334,6 @@ Ext.extend(Ext.form.ColorField, Ext.form.TriggerField,  {
      * not 3 or 6, i.e. 'fff' or 'ffccff'.
      */
     lengthText: "Color hex values must be either 3 or 6 characters.",
-    
-    //text to use if blank and allowBlank is false
     blankText: "Must have a hexidecimal value in the format ABCDEF.",
     
     /**
@@ -361,13 +344,8 @@ Ext.extend(Ext.form.ColorField, Ext.form.TriggerField,  {
     defaultColor: '',
     
     maskRe: /[a-f0-9]/i,
-    // These regexes limit input and validation to hex values
     regex: /[a-f0-9]/i,
-
-    //private
     curColor: '',
-    
-    // private
     validateValue : function(value){
         if(!this.showHexValue) {
             return true;
@@ -385,14 +363,9 @@ Ext.extend(Ext.form.ColorField, Ext.form.TriggerField,  {
         this.setColor(value);
         return true;
     },
-
-    // private
     validateBlur : function(){
         return !this.menu || !this.menu.isVisible();
     },
-    
-    // Manually apply the invalid line image since the background
-    // was previously cleared so the color would show through.
     markInvalid : function( msg ) {
         Ext.form.ColorField.superclass.markInvalid.call(this, msg);
         this.el.setStyle({
@@ -431,16 +404,7 @@ Ext.extend(Ext.form.ColorField, Ext.form.TriggerField,  {
             'background-color': h,
             'background-image': 'none'
         });
-        if(!this.showHexValue) {
-            /*this.el.setStyle({
-                'text-indent': '-100px'
-            });
-            if(Ext.isIE) {
-                this.el.setStyle({
-                    'margin-left': '100px'
-                });
-            }*/
-        }
+        if(!this.showHexValue) {}
     },
     
     handleRender: function() {
@@ -451,12 +415,11 @@ Ext.extend(Ext.form.ColorField, Ext.form.TriggerField,  {
         this.setValue(this.defaultColor);
     },
 
-    // private
     menuListeners : {
         select: function(m, d){
             this.setValue(d);
         },
-        show : function(){ // retain focus styling
+        show : function(){
             this.onFocus();
         },
         hide : function(){
@@ -467,14 +430,9 @@ Ext.extend(Ext.form.ColorField, Ext.form.TriggerField,  {
             this.menu.un("hide", ml.hide,  this);
         }
     },
-    
-    //private
     handleSelect : function(palette, selColor) {
         this.setValue(selColor);
     },
-
-    // private
-    // Implements the default empty TriggerField.onTriggerClick function to display the ColorPicker
     onTriggerClick : function(){
         if(this.disabled){
             return;
@@ -493,9 +451,7 @@ Ext.extend(Ext.form.ColorField, Ext.form.TriggerField,  {
 
 
 
-/**
- * QTips to form fields
- */
+/* QTips to form fields */
 Ext.form.Field.prototype.afterRender = Ext.form.Field.prototype.afterRender.createSequence(function() { 
     if (this.description) {
         Ext.QuickTips.register({
@@ -517,8 +473,6 @@ Ext.applyIf(Ext.form.Field,{
     findLabel: function(field) {
         var wrapDiv = null;
         var label = null;
-        
-        //find form-element and label?
         wrapDiv = field.getEl().up('div.x-form-element');
         if(wrapDiv){
             label = wrapDiv.child('label');
@@ -526,7 +480,6 @@ Ext.applyIf(Ext.form.Field,{
         if(label){
             return label;
         }
-        //find form-item and label
         wrapDiv = field.getEl().up('div.x-form-item');
         if(wrapDiv) {
             label = wrapDiv.child('label');        
@@ -576,6 +529,7 @@ Ext.override(Ext.grid.GridView, {
     }
 });
 
+/* allow copying to clipboard */
 MODx.util.Clipboard = function() {
     return {
         escape: function(text){
@@ -686,11 +640,4 @@ Ext.override(Ext.form.Checkbox, {
 });
 Ext.override(Ext.form.Radio, {
     checkedCls: 'x-form-radio-checked'
-});
-
-Ext.onReady(function() {
-    MODx.util.LoadingBox = MODx.load({ xtype: 'modx-loading-box' });
-    MODx.util.JSONReader = MODx.load({ xtype: 'modx-json-reader' });
-    MODx.form.Handler = MODx.load({ xtype: 'modx-form-handler' });
-    MODx.msg = MODx.load({ xtype: 'modx-msg' });
 });

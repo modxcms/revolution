@@ -50,38 +50,12 @@ MODx.combo.ComboBox = function(config,getStore) {
         },this);
     }
 };
-Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox,{
-	/**
-     * @var {Boolean} isLoaded If the combo's store has been loaded.
-     */
-    isLoaded: false
-    /**
-	 * Set a value to the combobox correctly by loading the store.
-	 * @param {Object} v The value to set.
-     * @param {boolean} b True to bypass check
-	 */
-	/*,setValue: function(v,b) {
-        if (this.isLoaded || b === true || this.mode == 'local' || v === '') {
-            MODx.combo.ComboBox.superclass.setValue.call(this,v);
-        } else {
-            this.store.load({
-                params: this.baseParams
-                ,callback: function(r,o,s) {
-                    this.isLoaded = true;
-                    if (s) { MODx.combo.ComboBox.superclass.setValue.call(this,v); }
-                    this.collapse();
-                }
-                ,scope: this
-            });
-        }
-    }*/
-});
+Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox);
 Ext.reg('modx-combo',MODx.combo.ComboBox);
 
 /**
  * Helps with rendering of comboboxes in grids.
  * @class MODx.combo.Renderer
- * @constructor
  * @param {Ext.form.ComboBox} combo The combo to display
  */
 MODx.combo.Renderer = function(combo) {

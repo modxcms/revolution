@@ -99,7 +99,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	    
 	    this.root = new Ext.tree.AsyncTreeNode({
 	        text: config.root_name || ''
-	        ,draggable: false // disable root node dragging
+	        ,draggable: false
 	        ,id: config.root_id || 'root'
 	    });
 	    this.setRootNode(this.root);
@@ -108,7 +108,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	    this.on('load',this._initExpand,this,{single: true});
 	    this.root.expand();
 	    
-	    // render the tree
 	    this._loadToolbar();
         if (config.el) { this.render(); }
 	}
@@ -137,49 +136,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             a[i].scope = this;
             this.cm.add(a[i]);
         }
-        /* @deprecated
-			var options = a[i];
-			
-			if (options == '-') {
-				this.cm.add('-');
-				continue;
-			}
-            var h = Ext.emptyFn;
-			if (options.handler) {
-				h = options.handler;//eval(options.handler);
-			} else {
-				h = function(itm,e) {
-					var o = itm.options;
-					var id = this.cm.activeNode.id.split('_'); id = id[1];
-					var w = Ext.get('modx_content');
-					if (o.confirm) {
-						Ext.Msg.confirm('',o.confirm,function(e) {
-							if (e == 'yes') {
-								var a = Ext.urlEncode(o.params || {action: o.action});
-								var s = 'index.php?id='+id+'&'+a;
-								if (w === null) {
-									location.href = s;
-								} else { w.dom.src = s; }
-							}
-						},this);
-					} else {
-						var a = Ext.urlEncode(o.params);
-						var s = 'index.php?id='+id+'&'+a;
-						if (w === null) {
-							location.href = s;
-						} else { w.dom.src = s; }
-					}
-				};
-			}
-			this.cm.add({
-				id: options.id
-				,text: options.text
-				,scope: this
-				,options: options
-				,handler: h
-				//,cls: (options.header ? 'x-menu-item-active' : '')
-			});
-		}*/
 	}
 	
     /**
@@ -340,10 +296,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 			return resultNode;
 		}
 		
-        // JSON-encode our tree
 		var encNodes = Ext.encode(simplifyNodes(dropEvent.tree.root));
-		
-		// send it to the backend to save
 		MODx.Ajax.request({
 			url: this.config.url
 			,params: {

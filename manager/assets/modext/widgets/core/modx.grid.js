@@ -369,7 +369,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,scope: this
                 ,options: options
                 ,handler: h
-                //,cls: (options.header ? 'x-menu-item-active' : '')
             });
         }
     }
@@ -595,16 +594,12 @@ Ext.extend(Ext.grid.RowExpander, Ext.util.Observable, {
             this.fireEvent('collapse', this, record, body, row.rowIndex);
         }
     }
-    
-    // Expand all rows
     ,expandAll : function() {
         var aRows = this.grid.getView().getRows();
         for(var i = 0; i < aRows.length; i++) {
             this.expandRow(aRows[i]);
         }
     }
-
-    // Collapse all rows
     ,collapseAll : function() {
         var aRows = this.grid.getView().getRows();
         for(var i = 0; i < aRows.length; i++) {

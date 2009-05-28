@@ -102,7 +102,6 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         if (this.config.columns) {
             var c = this.config.columns;
             for (var i=0;i<c.length;i++) {
-                // if specifying custom editor/renderer
                 if (typeof(c[i].editor) == 'string') {
                     c[i].editor = eval(c[i].editor);
                 }

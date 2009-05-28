@@ -1,9 +1,9 @@
 /**
  * Generates the Top Menubar in Ext
  * 
+ * @deprecated
  * @class MODx.toolbar.TopMenu
  * @extends Ext.Toolbar
- * @constructor
  * @param {Object} config An object of configuration properties
  * @xtype modx-topmenu
  */
