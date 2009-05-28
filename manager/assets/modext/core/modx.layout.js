@@ -10,8 +10,7 @@ MODx.Layout = function(config){
     config = config || {};
     this.config = config;
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext2/resources/images/default/s.gif';
-
-    this.loadUtils();    
+    
     this.loadTrees();
     
     Ext.applyIf(config,{
@@ -19,15 +18,8 @@ MODx.Layout = function(config){
     });
     MODx.Layout.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.Layout,Ext.Component,{
-    loadUtils: function() {
-        MODx.util.LoadingBox = MODx.load({ xtype: 'modx-loading-box' });
-        MODx.util.JSONReader = MODx.load({ xtype: 'modx-json-reader' });
-        MODx.form.Handler = MODx.load({ xtype: 'modx-form-handler' });
-        MODx.msg = MODx.load({ xtype: 'modx-msg' });
-    }
-    
-    ,loadTrees: function() {
+Ext.extend(MODx.Layout,Ext.Component,{    
+    loadTrees: function() {
         var a = Ext.get('modx-accordion');
         if (!a) return;
         

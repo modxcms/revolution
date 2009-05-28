@@ -234,6 +234,7 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
             ,cacheable: 0
             ,syncsite: 0            
         });    
+        Ext.apply(o.form.baseParams,vs);
         var g = Ext.getCmp('modx-grid-resource-security');
         Ext.apply(o.form.baseParams,{
             resource_groups: g.encodeModified()

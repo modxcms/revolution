@@ -641,3 +641,11 @@ Ext.override(Ext.form.Checkbox, {
 Ext.override(Ext.form.Radio, {
     checkedCls: 'x-form-radio-checked'
 });
+
+
+Ext.onReady(function() {
+    MODx.util.LoadingBox = MODx.load({ xtype: 'modx-loading-box' });
+    MODx.util.JSONReader = MODx.load({ xtype: 'modx-json-reader' });
+    MODx.form.Handler = MODx.load({ xtype: 'modx-form-handler' });
+    MODx.msg = MODx.load({ xtype: 'modx-msg' });
+});

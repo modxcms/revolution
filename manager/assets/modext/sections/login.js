@@ -2,12 +2,6 @@ Ext.onReady(function() {
     if (top.frames.length !== 0) {
         top.location=self.document.location;
     }
-    
-    MODx.util.LoadingBox = MODx.load({ xtype: 'modx-loading-box' });
-    MODx.util.JSONReader = MODx.load({ xtype: 'modx-json-reader' });
-    MODx.form.Handler = MODx.load({ xtype: 'modx-form-handler' });
-    MODx.msg = MODx.load({ xtype: 'modx-msg' });
-    MODx.load({ xtype: 'modx-page-login' });
 });
 var loginHandler = function(opt,s,r) {
     r = Ext.decode(r.responseText);
