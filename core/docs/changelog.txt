@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed issue with package attributes and skipping blank options
 - [#MODX-723] Fixed issue where preview pane was picking up CSS from preview
 - Updated xPDO to revision 333.
 - Fix issues with Page settings defaulting to 1 on resource creation

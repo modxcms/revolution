@@ -85,7 +85,7 @@ Ext.extend(MODx.panel.PILicense,MODx.panel.WizardPanel,{
                 'success': {fn:function(r) {
                     var a = r.object.attr;
                     var b = Ext.getCmp('modx-pi-license-box');
-                    if (a !== null && a !== 'null') {
+                    if (a !== null && a !== 'null' && a !== '') {
                         b.setValue(a);
                     } else {
                         b.setValue('');
@@ -140,7 +140,7 @@ Ext.extend(MODx.panel.PIReadme,MODx.panel.WizardPanel,{
                 'success': {fn:function(r) {
                     var a = r.object.attr;
                     var b = Ext.getCmp('modx-pi-readme-box');
-                    if (a !== null && a !== 'null') {
+                    if (a !== null && a !== 'null' && a !== '') {
                         b.setValue(a);
                     } else {
                         b.setValue('');
