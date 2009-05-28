@@ -1,7 +1,7 @@
 <?php
 /*
  * MODx Revolution
- * 
+ *
  * Copyright 2006, 2007, 2008, 2009 by the MODx Team.
  * All rights reserved.
  *
@@ -58,8 +58,10 @@ class modInstallRequest {
     function handle() {
         $install =& $this->install;
 
-        $this->parser->assign('app_name', 'MODx Revolution');
-        $this->parser->assign('app_version', '2.0.0-alpha');
+        $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
+
+        $this->parser->assign('app_name', 'MODx '.$currentVersion['code_name']);
+        $this->parser->assign('app_version', $currentVersion['full_version']);
 
         $agreed= isset ($_REQUEST['agreed']) ? true : false;
         $agreedChecked= $agreed ? ' checked="checked"' : '';
