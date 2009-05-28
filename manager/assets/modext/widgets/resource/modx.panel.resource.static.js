@@ -230,7 +230,7 @@ Ext.extend(MODx.panel.Static,MODx.FormPanel,{
                     if (r.object.unpub_date == '0') { r.object.unpub_date = ''; }
                     r.object['parent-cmb'] = r.object.parent;
                     
-                    Ext.getCmp('modx-static-settings-fp').getForm().setValues(r.object);
+                    Ext.getCmp('modx-static-settings-fp').getForm().setValues(r.object);                    
                     Ext.getCmp('modx-static-header').getEl().update('<h2>'+_('static_resource')+': '+r.object.pagetitle+'</h2>');
                     
                     this.getForm().setValues(r.object);
@@ -393,8 +393,8 @@ MODx.loadAccordionPanels = function() {
         xtype: 'checkbox'
         ,fieldLabel: _('resource_cacheable')
         ,description: _('resource_cacheable_help')
-        ,name: 'syncsite'
-        ,id: 'modx-static-syncsite'
+        ,name: 'cacheable'
+        ,id: 'modx-static-cacheable'
         ,inputValue: 1
         ,checked: true
         ,listeners: {

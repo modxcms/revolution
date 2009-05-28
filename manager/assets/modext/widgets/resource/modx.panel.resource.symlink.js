@@ -369,8 +369,8 @@ MODx.loadAccordionPanels = function() {
         xtype: 'checkbox'
         ,fieldLabel: _('resource_cacheable')
         ,description: _('resource_cacheable_help')
-        ,name: 'syncsite'
-        ,id: 'modx-symlink-syncsite'
+        ,name: 'cacheable'
+        ,id: 'modx-symlink-cacheable'
         ,listeners: {
             'focus': {fn:oc,scope:this}
         }
