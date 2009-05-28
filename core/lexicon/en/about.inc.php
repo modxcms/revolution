@@ -1,12 +1,13 @@
 <?php
-$_lang['about_msg'] = 'MODx is a <a href="http://modxcms.com/what-is-modx.html" target="_blank">PHP Application Framework and Content Management System</a> licensed under the <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> and any later version.';
+$_lang['about_msg'] = 'MODx is a <a href="http://modxcms.com/what-is-modx.html" target="_blank">PHP Application Framework and Content Management System</a> licensed under the <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> and (at your option) any later version.';
 $_lang['about_title'] = 'About MODx';
 $_lang['credits'] = 'Credits';
 $_lang['credits_mysql'] = 'MODx is powered by MySQL!';
 $_lang['credits_php'] = 'MODx is powered by PHP!';
 $_lang['credits_xpdo'] = 'MODx uses the database ORM <a href="http://www.xpdo.org/" target="_blank">xPDO</a>.';
 $_lang['credits_shouts_msg'] = '
-</style>
+<p><a href="mailto:martin@sandersdesign.com">Martin Sanders</a> of <a href="http://www.sandersdesign.com">Sanders Design</a> for coming up with the inspiration for the current manager design!</p>
+
 <h3>Founders &amp; Project Leaders</h3>
 <p>The folks that started it all.</p>
 <ul>
@@ -37,16 +38,16 @@ $_lang['credits_shouts_msg'] = '
 <p>Creating all the cool stuff that works with MODx.</p>
 <ul>
     <li>Bob Ray (BobRay)</li>
-    <li>Mark Kaplan (Mark)</li>
     <li>Jeff Whitfield (Bravado)</li>
+    <li>Mark Kaplan (Mark)</li>
     <li>Anssi Rajakallio (doze)</li>
+    <li>Kyle Jaebker (kylej)</li>
     <li>Armand Pondman (bS)</li>
     <li>Olivier Deland (ConseilsWeb)</li>
     <li>Mike Schell (netProphET)</li>
     <li>Jelle Jager (tobyL)</li>
     <li>Mike Reid (pixelchutes)</li>
     <li>Brian Stanback (ApoXX)</li>
-    <li>Scotty Delicious (Scotty Delicious)</li>
     <li>Frederic Million (heliotrope)</li>
     <li>Brunaud Devillard (coroico)</li>
 </ul>
@@ -54,10 +55,10 @@ $_lang['credits_shouts_msg'] = '
 <h3>Marketing &amp; Design</h3>
 <p>Creating the look and messaging for MODx.</p>
 <ul>
-    <li>Martin Sanders (modxPowered) - Special thanks for coming up with the current manager design!</li>
+    <li>Jay Gilmore (smashingred)</li>
+    <li>Martin Sanders (modxPowered)</li>
     <li>David Molliere (davidm)</li>
     <li>Zaigham Rana (zi)</li>
-    <li>Jay Gilmore (smashingred)</li>
     <li>Debbie Munoz (Mrs Communication)</li>
 </ul>
 
@@ -68,27 +69,28 @@ $_lang['credits_shouts_msg'] = '
     <li>Michael Henderson (mdhender)</li>
 </ul>
 
-<h3>QA &amp; Support</h3>
+<h3>Support &amp; Testing</h3>
 <p>Internal testing and community support ambassadors.</p>
 <ul>
-    <li>Dimitri Hilverda (Dimmy)</li>
-    <li>Nicola Lambathakis (banzai)</li>
     <li>Laurent Carbonnel (laurentc)</li>
+    <li>Dimitri Hilverda (Dimmy)</li>
     <li>Shane Sponagle (dev_cw)</li>
     <li>Dragan Nikolic (ganeshXL)</li>
     <li>David Piaser (Soda)</li></ul>
+    <li>Adam Crownoble (aNoble)</li>
+</ul>
 
 <h3>Emeritus</h3>
 <p>Helpful folks who\'ve since moved on... Thanks for the assistance!</p>
 <ul>
+    <li>Scotty Delicious (Scotty Delicious)</li>
+    <li>Nicola Lambathakis (banzai)</li>
     <li>Dave Denis</li>
     <li>Al Bates (redman)</li>
     <li>Brian Oberkirch (lightbox5)</li>
     <li>Carsten Richter (carsten)</li>
     <li>Travis Sitzlar (Infoclipper)</li>
     <li>John Vilsack</li>
-    <li>Adam Crownoble (aNoble)</li>
-    <li>Kyle Jaebker (kylej)</li>
     <li>Lucian Slatineanu</li>
     <li>Andreas Viklund (andreasviklund)</li>
     <li>Richard Quinn (ricardosanX)</li>

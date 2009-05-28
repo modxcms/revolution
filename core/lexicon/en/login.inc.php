@@ -6,7 +6,7 @@ $_lang['login_blocked_time'] = 'You are not allowed to login at this time. Pleas
 $_lang['login_blocked_too_many_attempts'] = 'You have been blocked due to too many failed login attempts.';
 $_lang['login_button'] = 'Login';
 $_lang['login_cannot_locate_account'] = 'That account could not be located.  Check the username and re-type the password to try again.';
-$_lang['login_copyright'] = '&copy; 2005-2008 by the <a href="http://modxcms.com/" target="_blank" style="text-decoration: none;">MODx CMF Team</a>. <strong>MODx</strong>&trade; is licensed under the GPLv2.';
+$_lang['login_copyright'] = '&copy; 2005-2009 by the <a href="http://modxcms.com/" target="_blank" style="text-decoration: none;">MODx Team</a>. <strong>MODx</strong>&trade; is licensed under the GPLv2 or later.';
 $_lang['login_hostname_error'] = 'Your hostname does not point back to your IP address.';
 $_lang['login_message'] = 'Please enter your login credentials to start your Manager session. Your username and password are case-sensitive, so please enter them carefully!';
 $_lang['login_modx_support'] = '<p>Supported By:</p><p style="font-size: x-small;"><a href="http://www.modxcms.com/forums/" target="_blank" style="text-decoration: none;"><strong>The MODx Community</strong></a></p>';
