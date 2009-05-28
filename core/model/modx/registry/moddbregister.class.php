@@ -121,11 +121,12 @@ class modDbRegister extends modRegister {
                     $stmt->bindValue(':topicmsg', basename($topic));
                     if ($stmt->execute()) {
                         foreach ($stmt->fetchAll(PDO_FETCH_OBJ) as $msg) {
-                            if ($newMsg = $this->_readMessage($msg, $removeRead)) {
+                            $newMsg = $this->_readMessage($msg, $removeRead);
+                            if ($newMsg !== null) {
                                 $topicMessages[] = $newMsg;
                                 $msgCount++;
                             } else {
-                                $this->modx->log(MODX_LOG_LEVEL_ERROR, 'Error reading message: ' . print_r($msg, 1));
+                                $this->modx->log(MODX_LOG_LEVEL_INFO, 'Message was null or expired: ' . print_r($msg, 1));
                             }
                             if ($this->__kill) break;
                         }
