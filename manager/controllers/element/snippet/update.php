@@ -44,7 +44,7 @@ Ext.onReady(function() {
         ,category: "'.$snippet->get('category').'"
     });
 });
-var onSnipFormRender = "'.$onSnipFormRender.'";
+MODx.onSnipFormRender = "'.$onSnipFormRender.'";
 MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 // ]]>
 </script>');

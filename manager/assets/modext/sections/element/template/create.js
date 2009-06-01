@@ -37,6 +37,7 @@ MODx.page.CreateTemplate = function(config) {
             ,template: 0
             ,category: config.category || 0
             ,name: ''
+            ,baseParams: { action: 'create', category: MODx.request.category }
         }]
 	});
 	MODx.page.CreateTemplate.superclass.constructor.call(this,config);

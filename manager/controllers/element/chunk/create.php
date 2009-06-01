@@ -60,7 +60,7 @@ Ext.onReady(function() {
         ,category: "'.(isset($category) && $category != null ? $category->get('id') : '').'"
     });
 });
-var onChunkFormRender = "'.$onChunkFormRender.'";
+MODx.onChunkFormRender = "'.$onChunkFormRender.'";
 MODx.perm.unlock_element_properties = '.($modx->hasPermission('unlock_element_properties') ? 1 : 0).';
 // ]]>
 </script>');

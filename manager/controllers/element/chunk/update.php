@@ -22,11 +22,6 @@ if ($chunk->get('locked') && !$modx->hasPermission('edit_locked')) {
 $category = $chunk->getOne('modCategory');
 $modx->smarty->assign('chunk',$chunk);
 
-/* assign RTE if being overridden */
-$which_editor = isset($_POST['which_editor']) ? $_POST['which_editor'] : 'none';
-$modx->smarty->assign('which_editor',$which_editor);
-
-
 /* invoke OnChunkFormPrerender event */
 $onChunkFormPrerender = $modx->invokeEvent('OnChunkFormPrerender',array('id' => $_REQUEST['id']));
 if (is_array($onChunkFormPrerender)) {
@@ -41,7 +36,6 @@ if (is_array($onChunkFormRender)) {
 	$onChunkFormRender = implode('', $onChunkFormRender);
 }
 $modx->smarty->assign('onChunkFormRender',$onChunkFormRender);
-
 
 /* invoke OnRichTextEditorInit event */
 if ($modx->getOption('use_editor') == 1) {
@@ -74,7 +68,7 @@ Ext.onReady(function() {
         ,category: "'.$chunk->get('category').'"
     });
 });
-var onChunkFormRender = "'.$onChunkFormRender.'";
+MODx.onChunkFormRender = "'.$onChunkFormRender.'";
 MODx.perm.unlock_element_properties = '.($modx->hasPermission('unlock_element_properties') ? 1 : 0).';
 // ]]>
 </script>');

@@ -18,7 +18,7 @@ MODx.page.ResourceData = function(config) {
         ,buttons: [{
             process: 'edit'
             ,text: _('edit')
-            ,params: { a: MODx.action['resource/update'] }
+            ,params: { a: MODx.action['resource/update'], id: config.id }
         },'-',{
             process: 'preview'
             ,text: _('preview')

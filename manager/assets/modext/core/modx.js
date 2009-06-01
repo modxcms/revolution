@@ -70,6 +70,25 @@ Ext.extend(MODx,Ext.Component,{
         });
     }
     
+    ,releaseLock: function(id) {
+        MODx.Ajax.request({
+            url: MODx.config.connectors_url+'resource/locks.php'
+            ,params: {
+                action: 'release'
+                ,id: id
+            }
+        });
+    }
+    
+    ,sleep: function(ms) {
+        var s = new Date().getTime();
+        for (var i=0;i < 1e7;i++) {
+            if ((new Date().getTime() - s) > ms){
+                break;
+            }
+        }
+    }
+    
     ,logout: function() {
         MODx.msg.confirm({
             title: _('logout')
@@ -119,6 +138,7 @@ Ext.extend(MODx.Ajax,Ext.Component,{
         Ext.applyIf(config,{
             success: function(r,o) {
                 r = Ext.decode(r.responseText);
+                if (!r) return false;
                 r.options = o;
                 if (r.success) {
                     this.fireEvent('success',r);
@@ -128,6 +148,7 @@ Ext.extend(MODx.Ajax,Ext.Component,{
             }
             ,failure: function(r,o) {
             	r = Ext.decode(r.responseText);
+                if (!r) return false;
             	r.options = o;
             	if (this.fireEvent('failure',r)) {
             		MODx.form.Handler.errorJSON(r);

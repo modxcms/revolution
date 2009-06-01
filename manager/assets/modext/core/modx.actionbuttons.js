@@ -9,21 +9,23 @@
  */
 MODx.toolbar.ActionButtons = function(config) {
     config = config || {};
-	MODx.toolbar.ActionButtons.superclass.constructor.call(this,config);
-	this.id = id;
-	Ext.applyIf(config,{
-		actions: { 'close': MODx.action.welcome }
+    Ext.applyIf(config,{
+        actions: { 'close': MODx.action.welcome }
+        ,formpanel: false
+        ,id: 'modx-action-buttons'
+        ,loadStay: false
         ,params: {}
-	});
-	if (config.loadStay === true) {
-		if (!config.items) { config.items = []; }
-		config.items.push(this.getStayMenu());
-	}
-	if (config.formpanel) {
-		this.setupDirtyButtons(config.formpanel);
-	}	
+        ,items: []
+        ,renderTo: 'modAB'
+    });
+    if (config.formpanel) {
+        this.setupDirtyButtons(config.formpanel);
+    }
+    if (config.loadStay === true) {
+        config.items.push('-',this.getStayMenu());
+    }
+	MODx.toolbar.ActionButtons.superclass.constructor.call(this,config);
 	this.config = config;
-	this.render('modAB');
 };
 Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
 	/**
@@ -44,78 +46,58 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
 	,stay: 'stay' 
 	
 	,checkDirtyBtns: []
-	
-	/**
-	 * Add in an action button. Takes multiple button configs as arguments.
-	 */
-	,create: function() {
-		var a = arguments, l = a.length;
-        for(var i=0;i<l;i=i+1) {
-			var options = a[i];
-			/* if - sent, create a toolbar delimiter */
-			if (options === '-') {
-				this.add(this,'-');
-				continue;
-			}
-            Ext.applyIf(options,{
-                xtype: 'button'
-            });
-			if (options.icon) {
-				options.cls = 'x-btn-icon bmenu';
-			}
-            if (options.button) {
-                this.add(this,options);
+    
+    ,add: function() {
+        var a = arguments, l = a.length;
+        for(var i = 0; i < l; i++) {
+            var el = a[i];
+            var ex = ['-','->','<-','',' '];
+            if (ex.indexOf(el) != -1 || (el.xtype && el.xtype == 'switch')) {
+                MODx.toolbar.ActionButtons.superclass.add.call(this,el);
                 continue;
             }
-			Ext.applyIf(options,{
-				cls: 'x-btn-text bmenu' 
-				,scope: this /* reference self for inline functions to have accurate scope */
-			});
-			/* if handler is specified for a button, execute that instead
-			   this can be used for doing document-specific actions
-			   such as using a Ext.menu.DateMenu in the action buttons
-			   or some other item that opens up more options...you get the idea */
-			if (options.handler === null && options.menu === null) {
-				options.handler = this.checkConfirm;
-			} else if (options.handler) {
-				if (options.confirm) {
-					var f = options.handler;
-					var c = options.confirm;
-					var s = options.scope || this;
-					options.handler = function() {
-						Ext.Msg.confirm(_('warning'),c,function(e) {
-						  if (e === 'yes') {
-						      Ext.callback(f,this);
-						  }
-						},s);
-					};
-				}
-			} else { options.handler = this.handleClick; }
-						      			
-			/* create the button */	
-			var b = new Ext.Toolbar.Button(options);
+            Ext.applyIf(el,{
+                xtype: 'button'
+                ,cls: (el.icon ? 'x-btn-icon bmenu' : 'x-btn-text bmenu')
+                ,scope: this
+            });
+            if (el.button) {
+                MODx.toolbar.ActionButtons.superclass.add.call(this,el);
+            }
             
-			
+            
+            if (el.handler === null && el.menu === null) {
+                el.handler = this.checkConfirm;
+            } else if (el.confirm && el.handler) {
+                el.handler = function() {
+                    Ext.Msg.confirm(_('warning'),el.confirm,function(e) {
+                      if (e === 'yes') { Ext.callback(el.handler,this); }
+                    },el.scope || this);
+                };
+            } else if (el.handler) {} else { el.handler = this.handleClick; }
+                                        
+            /* create the button */
+            var b = new Ext.Toolbar.Button(el);        
+            
             /* if checkDirty, disable until field change */
-            if (options.checkDirty) {
+            if (el.checkDirty) {
                 b.setDisabled(true);
                 this.checkDirtyBtns.push(b);
             }
-			
-			/* if javascript is specified, run it when button is click, before this.checkConfirm is run */
-			if (options.javascript) {
-    			b.addListener('click',this.evalJS,this);
-			}
-			
-			/* add button to toolbar */
-			this.add(this,b);
             
+            /* if javascript is specified, run it when button is click, before this.checkConfirm is run */
+            if (el.javascript) {
+                b.addListener('click',this.evalJS,this);
+            }
             
-            if (options.keys) {
+            /* add button to toolbar */
+            MODx.toolbar.ActionButtons.superclass.add.call(this,b);
+            
+            if (el.keys) {
                 var map = new Ext.KeyMap(Ext.get(document));
-                var y = options.keys.length;
+                var y = el.keys.length;
                 for (var x=0;x<y;x=x+1) {
-                    var k = options.keys[x];
+                    var k = el.keys[x];
                     Ext.applyIf(k,{
                         scope: this
                         ,stopEvent: true
@@ -124,9 +106,8 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     map.addBinding(k);
                 }
             }
-		}
-		return false;
-	}
+        }
+    }
     
     ,evalJS: function(itm,e) {
         if (!eval(itm.javascript)) {
@@ -242,10 +223,8 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
 				}
 			}
         } else {	/* this is any other action besides remote */
-			var id = o.id || 0; /* append the ID of the element if specified */
 			Ext.applyIf(itm.params || {},o.baseParams || {});
-			var loc = 'index.php?id='+id+'&'+Ext.urlEncode(itm.params);
-			location.href = loc;
+			location.href = '?'+Ext.urlEncode(itm.params);
 		}
 		return false;
 	}
@@ -272,29 +251,22 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
 		switch (MODx.config.stay) {
 			case 'new': /* if user selected 'new', then always redirect */
                 if (MODx.request.parent) a = a+'&parent='+MODx.request.parent;
-				location.href = 'index.php?a='+o.actions['new']+'&'+a;
+				location.href = '?a='+o.actions['new']+'&'+a;
 				break;
 			case 'stay':
 				/* if Continue Editing, then don't reload the page - just hide the Progress bar
 				   unless the user is on a 'Create' page...if so, then redirect
 				   to the proper Edit page */
                 if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id !== null) {
-					location.href = 'index.php?a='+o.actions.edit+'&id='+res.object.id+'&'+a;
+					location.href = '?a='+o.actions.edit+'&id='+res.object.id+'&'+a;
 				} else if (itm.process === 'delete') {
-					location.href = 'index.php?a='+o.actions.cancel+'&'+a;
+					location.href = '?a='+o.actions.cancel+'&'+a;
 				} else { Ext.Msg.hide(); }
 				break;
 			case 'close': /* redirect to the cancel action */
-				location.href = 'index.php?a='+o.actions.cancel+'&'+a;
+				location.href = '?a='+o.actions.cancel+'&'+a;
 				break;
 		}
-	}
-	
-	/**
-	 * Adds the stay menu to the toolbar.
-	 */
-	,loadStay: function() {
-		this.add('-',this.getStayMenu(),' ',' ',' ');
 	}
 	
 	/**
@@ -303,22 +275,25 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
 	,getStayMenu: function() {
 		return {
             xtype:'switch'
-            ,id: 'stayMenu'
+            ,id: 'modx-stay-menu'
             ,activeItem: MODx.config.stay === 'new' ? 0 : 1 
             ,items: [{
                 tooltip: _('stay_new')
                 ,value: 'new'
                 ,menuIndex: 0
+                ,id: 'modx-stay-new'
                 ,iconCls:'icon-list-new'
             },{
             	tooltip: _('stay')
                 ,value: 'stay'
                 ,menuIndex: 1
+                ,id: 'modx-stay-stay'
                 ,iconCls:'icon-mark-active'
             },{
                 tooltip: _('close')
                 ,value: 'close'
                 ,menuIndex: 2
+                ,id: 'modx-stay-close'
                 ,iconCls:'icon-mark-complete'
             }]
             ,listeners: {

@@ -49,7 +49,7 @@ Ext.onReady(function() {
         ,category: "'.$plugin->get('category').'"
     });
 });
-var onPluginFormRender = "'.$onPluginFormRender.'";
+MODx.onPluginFormRender = "'.$onPluginFormRender.'";
 MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 // ]]>
 </script>');

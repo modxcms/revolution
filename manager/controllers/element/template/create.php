@@ -42,7 +42,7 @@ Ext.onReady(function() {
         ,category: "'.($category != null ? $category->get('id') : ''). '"
     });
 });
-var onTempFormRender = "'.$onTempFormRender.'";
+MODx.onTempFormRender = "'.$onTempFormRender.'";
 MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 // ]]>
 </script>');

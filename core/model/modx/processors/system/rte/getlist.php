@@ -16,5 +16,7 @@ if (is_array($rs)) {
     foreach ($rs as $r) {
 	   $rtes[] = array('value' => $r);
     }
+} elseif (is_string($rs)) {
+    $rtes[] = array('value' => $rs);
 }
 return $this->outputArray($rtes,$count);

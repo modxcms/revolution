@@ -34,6 +34,7 @@ MODx.page.CreateChunk = function(config) {
             ,chunk: 0
             ,category: config.category || 0
             ,name: ''
+            ,baseParams: { action: 'create', category: MODx.request.category }
         }]
 	});
 	MODx.page.CreateChunk.superclass.constructor.call(this,config);

@@ -84,7 +84,7 @@ MODx.panel.Plugin = function(config) {
                         ,name: 'locked'
                         ,id: 'modx-plugin-locked'
                     },{
-                        html: onPluginFormRender
+                        html: MODx.onPluginFormRender
                         ,border: false
                     },{
                         html: '<br />'+_('plugin_code')
@@ -166,6 +166,11 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         Ext.apply(o.form.baseParams,{
             events: g.encodeModified()
         });
+        this.cleanupEditor();
+        return this.fireEvent('save',{
+            values: this.getForm().getValues()
+            ,stay: MODx.config.stay
+        });
     }
     ,success: function(o) {
         Ext.getCmp('modx-grid-element-properties').save();
@@ -175,6 +180,23 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         var c = Ext.getCmp('modx-plugin-category').getValue();
         var u = c != '' && c != null ? 'n_plugin_category_'+c : 'n_type_plugin'; 
         t.refreshNode(u,true);
+    }    
+    ,changeEditor: function() {
+        this.cleanupEditor();
+        this.on('success',function(o) {
+            var id = o.result.object.id;
+            var w = Ext.getCmp('modx-plugin-which-editor').getValue();
+            MODx.request.a = MODx.action['element/plugin/update'];
+            var u = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
+            location.href = u;
+        });
+        this.submit();
+    }    
+    ,cleanupEditor: function() {
+        if (MODx.onSaveEditor) {
+            var fld = Ext.getCmp('modx-plugin-plugincode');
+            MODx.onSaveEditor(fld);
+        }
     }
 });
 Ext.reg('modx-panel-plugin',MODx.panel.Plugin);

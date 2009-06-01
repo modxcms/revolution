@@ -43,7 +43,7 @@ Ext.onReady(function() {
         ,category: "'.($category != null ? $category->get('id') : '').'"
     });
 });
-var onPluginFormRender = "'.$onPluginFormRender.'";
+MODx.onPluginFormRender = "'.$onPluginFormRender.'";
 MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 // ]]>
 </script>');

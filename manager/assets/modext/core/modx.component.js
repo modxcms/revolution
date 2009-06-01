@@ -55,28 +55,15 @@ Ext.extend(MODx.Component,Ext.Component,{
      * @access protected
      */
 	,_loadActionButtons: function() {
-		if (!this.config.buttons) { return false; }
-		this.ab = MODx.load({
+		if (!this.config.buttons) { return false; }        
+        this.ab = MODx.load({
             xtype: 'modx-actionbuttons'
             ,form: this.form || null
             ,formpanel: this.config.formpanel || null
             ,actions: this.config.actions || null
-            ,id: this.config.id || null 
+            ,items: this.config.buttons || []
+            ,loadStay: this.config.loadStay || false
         });
-        
-        if (!this.config.buttons) {
-            this.config.buttons = [];
-        }        
-        var l = this.config.buttons.length;
-        for (var i=0;i<l;i=i+1) {
-        	var b = this.config.buttons[i];
-        	if (b.refresh) {
-        		b.onComplete = this.ab.refreshTreeNode.createDelegate(this,[b.refresh.tree,b.refresh.node,b.refresh.self || false]);
-        	}
-        	this.ab.create(b);
-        }
-        
-        if (this.config.loadStay) { this.ab.loadStay(); }
 	}
 	
     /**

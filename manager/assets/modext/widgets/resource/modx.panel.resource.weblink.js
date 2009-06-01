@@ -239,6 +239,10 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
         Ext.apply(o.form.baseParams,{
             resource_groups: g.encodeModified()
         });
+        return this.fireEvent('save',{
+            values: this.getForm().getValues()
+            ,stay: MODx.config.stay
+        });
     }
 
     ,success: function(o) {

@@ -49,7 +49,7 @@ Ext.onReady(function() {
         ,category: "'.$template->get('category'). '"
     });
 });
-var onTempFormRender = "'.$onTempFormRender.'";
+MODx.onTempFormRender = "'.$onTempFormRender.'";
 MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 // ]]>
 </script>');

@@ -290,6 +290,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         Ext.apply(o.form.baseParams,{
             resource_groups: g.encodeModified()
         });
+        this.cleanupEditor();
+        return this.fireEvent('save',{
+            values: this.getForm().getValues()
+            ,stay: MODx.config.stay
+        });
     }
 
     ,success: function(o) {
@@ -326,6 +331,24 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     t.reset();
                 }
             },this);
+        }
+    }
+    
+    ,changeEditor: function() {
+        this.cleanupEditor();
+        this.on('success',function(o) {
+            var id = o.result.object.id;
+            var w = Ext.getCmp('modx-resource-which-editor').getValue();
+            MODx.request.a = MODx.action['resource/update'];
+            var u = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
+            location.href = u;
+        });
+        this.submit();
+    }    
+    ,cleanupEditor: function() {
+        if (MODx.onSaveEditor) {
+            var fld = Ext.getCmp('ta');
+            MODx.onSaveEditor(fld);
         }
     }
 });

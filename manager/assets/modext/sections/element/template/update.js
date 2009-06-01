@@ -37,6 +37,7 @@ MODx.page.UpdateTemplate = function(config) {
             ,renderTo: 'modx-panel-template'
             ,template: config.id
             ,name: ''
+            ,baseParams: { action: 'update' ,id: config.id }
         }]
 	});
 	MODx.page.UpdateTemplate.superclass.constructor.call(this,config);

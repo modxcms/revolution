@@ -52,6 +52,7 @@ MODx.FormPanel = function(config) {
         ,beforeSubmit: true
         ,success: true
         ,failure: true
+        ,save: true
     });
     this.getForm().addEvents({
         success: true
@@ -101,7 +102,10 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                     }
                 });
             }
+        } else {
+            return false;
         }
+        return true;
     }
     
     ,addChangeEvent: function(items) {

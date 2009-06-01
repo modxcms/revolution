@@ -233,6 +233,10 @@ Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
         var g = Ext.getCmp('modx-grid-resource-security');
         Ext.apply(o.form.baseParams,{
             resource_groups: g.encodeModified()
+        });        
+        return this.fireEvent('save',{
+            values: this.getForm().getValues()
+            ,stay: MODx.config.stay
         });
     }
 

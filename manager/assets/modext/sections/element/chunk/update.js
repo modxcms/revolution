@@ -35,6 +35,7 @@ MODx.page.UpdateChunk = function(config) {
             ,renderTo: 'modx-panel-chunk'
             ,chunk: config.id
             ,name: config.name
+            ,baseParams: { action: 'update' ,id: config.id }
         }]
 	});
 	MODx.page.UpdateChunk.superclass.constructor.call(this,config);

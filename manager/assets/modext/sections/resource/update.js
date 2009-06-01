@@ -64,6 +64,11 @@ MODx.page.UpdateResource = function(config) {
         }]
     });
     MODx.page.UpdateResource.superclass.constructor.call(this,config);
+    Ext.EventManager.on(window, 'beforeunload',function(e) {
+        MODx.releaseLock(this.config.id);
+        MODx.sleep(400);
+        e.browserEvent.returnValue = '';
+    }, this);
 };
 Ext.extend(MODx.page.UpdateResource,MODx.Component,{
     preview: function(id) {
@@ -89,34 +94,17 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
 
     ,cancel: function(btn,e) {
         var fp = Ext.getCmp(this.config.formpanel);
-        if (fp != 'undefined' && fp.isDirty()) {
-            MODx.msg.confirm({
-                text: _('resource_cancel_dirty_confirm')
-                ,url: MODx.config.connectors_url+'resource/locks.php'
-                ,params: {
-                    action: 'release'
-                    ,id: this.config.id
+        if (fp && fp.isDirty()) {
+            Ext.Msg.confirm(_('warning'),_('resource_cancel_dirty_confirm'),function(e) {
+                if (e == 'yes') {
+                    MODx.releaseLock(id);
+                    MODx.sleep(400);
+                    location.href = '?a='+MODx.action['welcome'];                    
                 }
-                ,listeners: {
-                    success: {fn:function(r) {
-                        location.href = '?a='+MODx.action['welcome'];
-                    },scope:this}
-                }
-            });
+            },this);
         } else {
-            MODx.Ajax.request({
-                url: MODx.config.connectors_url+'resource/locks.php'
-                ,params: {
-                    action: 'release'
-                    ,id: this.config.id
-                }
-                ,listeners: {
-                    success: {fn:function(r) {
-                        location.href = '?a='+MODx.action['welcome'];
-                    },scope:this}
-                }
-            });
-        }
+            MODx.releaseLock(id);
+        };
     }
 });
 Ext.reg('modx-page-resource-update',MODx.page.UpdateResource);

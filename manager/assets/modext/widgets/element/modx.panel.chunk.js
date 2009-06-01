@@ -19,7 +19,7 @@ MODx.panel.Chunk = function(config) {
             ,border: false
             ,cls: 'modx-page-header'
             ,id: 'modx-chunk-header'
-        },{            
+        },{
             xtype: 'portal'
             ,items: [{
                 columnWidth: 1
@@ -88,7 +88,7 @@ MODx.panel.Chunk = function(config) {
                         ,inputValue: 1
                         ,checked: true
                     },{
-                        html: onChunkFormRender
+                        html: MODx.onChunkFormRender
                         ,border: false
                     },{
                         html: '<br />'+_('chunk_code')
@@ -104,18 +104,15 @@ MODx.panel.Chunk = function(config) {
                     },{
                         xtype: 'modx-combo-rte'
                         ,fieldLabel: _('which_editor_title')
+                        ,labelSeparator: ''
                         ,id: 'modx-chunk-which-editor'
                         ,editable: false
                         ,listWidth: 300
                         ,triggerAction: 'all'
                         ,allowBlank: true
+                        ,value: (MODx.request.which_editor ? MODx.request.which_editor : MODx.config.which_editor)
                         ,listeners: {
-                            'select': {fn:function() {
-                                var w = Ext.getCmp('modx-chunk-which-editor').getValue();
-                                this.form.submit();
-                                var u = '?a='+MODx.action['element/chunk/create']+'&which_editor='+w+'&category='+this.config.category;
-                                location.href = u;
-                            },scope:this}
+                            'select': {fn:this.changeEditor,scope:this}
                         }
                     }]
                 },{
@@ -166,7 +163,11 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         });
     }
     ,beforeSubmit: function(o) {
-        return true;
+        this.cleanupEditor();
+        return this.fireEvent('save',{
+            values: this.getForm().getValues()
+            ,stay: MODx.config.stay
+        });
     }
     ,success: function(r) {
         Ext.getCmp('modx-grid-element-properties').save();
@@ -175,6 +176,25 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         var t = parent.Ext.getCmp('modx_element_tree');
         if (t) {
             t.refreshNode(n,true);
+        }
+    }
+    
+    ,changeEditor: function() {
+        this.cleanupEditor();
+        this.on('success',function(o) {
+            var id = o.result.object.id;
+            var w = Ext.getCmp('modx-chunk-which-editor').getValue();
+            MODx.request.a = MODx.action['element/chunk/update'];
+            var u = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
+            location.href = u;
+        });
+        this.submit();
+    }
+    
+    ,cleanupEditor: function() {
+        if (MODx.onSaveEditor) {
+            var fld = Ext.getCmp('modx-chunk-snippet');
+            MODx.onSaveEditor(fld);
         }
     }
 });

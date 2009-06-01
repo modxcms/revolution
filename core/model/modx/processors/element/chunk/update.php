@@ -115,4 +115,4 @@ if (isset($_POST['clearCache']) && $_POST['clearCache']) {
     $cacheManager->clearCache();
 }
 
-return $modx->error->success();
+return $modx->error->success('',$chunk->get(array('id', 'name', 'description', 'locked', 'category')));
