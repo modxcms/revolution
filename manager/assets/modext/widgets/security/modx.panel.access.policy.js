@@ -11,6 +11,7 @@ MODx.panel.AccessPolicy = function(config) {
         url: MODx.config.connectors_url+'security/access/policy.php'
         ,baseParams: {
             action: 'update'
+            ,id: MODx.request.id
         }
         ,id: 'modx-panel-access-policy'
         ,class_key: 'modAccessPolicy'
@@ -68,7 +69,7 @@ MODx.panel.AccessPolicy = function(config) {
                     ,bodyStyle: ''
                     ,items: [{
                         xtype: 'modx-grid-policy-property'
-                        ,policy: null
+                        ,policy: MODx.request.id
                         ,source: null
                         ,autoHeight: true
                     }]
@@ -162,6 +163,7 @@ Ext.extend(MODx.grid.PolicyProperty,Ext.grid.PropertyGrid,{
                     ,listeners: {
                     	'success': {fn:function(r) {
                     		var s = this.getSource();
+                            if (!s) return false;
                     		s[v] = true;
                     		this.setSource(s);
                     	},scope:this}
