@@ -170,29 +170,30 @@ class modAccessibleObject extends xPDOObject {
                 $principal = is_object($this->xpdo->user) ? $this->xpdo->user->getAttributes($targets) : array();
                 foreach ($policy as $policyAccess => $access) {
                     foreach ($access as $targetId => $targetPolicy) {
-                        foreach ($targetPolicy as $principalId => $applicablePolicy) {
+                        foreach ($targetPolicy as $policyIndex => $applicablePolicy) {
                             if ($this->xpdo->getDebug() === true)
                                 $this->xpdo->log(MODX_LOG_LEVEL_DEBUG, 'target pk='. $this->getPrimaryKey() .'; evaluating policy: ' . print_r($applicablePolicy, 1) . ' against principal for user id=' . $this->xpdo->getLoginUserID() .': ' . print_r($principal, 1));
                             $principalPolicyData = array();
                             $principalAuthority = 9999;
-                            if (isset($principal[$policyAccess][$targetId][$principalId])) {
-                                $principalAuthority = intval($principal[$policyAccess][$targetId][$principalId]['authority']);
-                                $principalPolicyData = $principal[$policyAccess][$targetId][$principalId]['policy'];
-                                if ($principalAuthority <= $applicablePolicy['authority']) {
-                                    if (!$applicablePolicy['policy']) {
-                                        return true;
-                                    }
-                                    if ($matches = array_intersect_assoc($principalPolicyData, $applicablePolicy['policy'])) {
-                                        if ($this->xpdo->getDebug() === true)
-                                            $this->xpdo->log(MODX_LOG_LEVEL_DEBUG, 'Evaluating policy matches: ' . print_r($matches, 1));
-                                        $matched = array_diff_assoc($criteria, $matches);
-                                         if (empty($matched)) {
+                            foreach ($principal[$policyAccess][$targetId] as $acl) {
+                                $principalAuthority = intval($acl['authority']);
+                                $principalPolicyData = $acl['policy'];
+                                $principalId = $acl['principal'];
+                                if ($applicablePolicy['principal'] == $principalId) {
+                                    if ($principalAuthority <= $applicablePolicy['authority']) {
+                                        if (!$applicablePolicy['policy']) {
                                             return true;
+                                        }
+                                        if ($matches = array_intersect_assoc($principalPolicyData, $applicablePolicy['policy'])) {
+                                            if ($this->xpdo->getDebug() === true)
+                                                $this->xpdo->log(MODX_LOG_LEVEL_DEBUG, 'Evaluating policy matches: ' . print_r($matches, 1));
+                                            $matched = array_diff_assoc($criteria, $matches);
+                                             if (empty($matched)) {
+                                                return true;
+                                            }
                                         }
                                     }
                                 }
-                            } elseif ($principalId == '0' && $principalAuthority <= $applicablePolicy['authority'] && !$applicablePolicy['policy']) {
-                                return true;
                             }
                         }
                     }

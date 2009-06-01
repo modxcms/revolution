@@ -91,7 +91,8 @@ class modContext extends modAccessibleObject {
             $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
             if ($query->stmt && $query->stmt->execute()) {
                 while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
-                    $policy['modAccessContext'][$row['target']][$row['principal']] = array(
+                    $policy['modAccessContext'][$row['target']][] = array(
+                        'principal' => $row['principal'],
                         'authority' => $row['authority'],
                         'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
                     );

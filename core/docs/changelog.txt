@@ -2,7 +2,11 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODx Revolution 2.0.0-beta-1 ($LastChangedRevision$, $LastChangedDate$)
+MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
+====================================
+- Fixed access control defect which prevented multiple policies from being respected per principal.
+
+MODx Revolution 2.0.0-beta-1 (LastChangedRevision: 5070 , LastChangedDate: 2009-05-28 16:20:08 -0500 (Thu, 28 May 2009))
 ====================================
 - Fixed issue with cacheable toggle on derivative Resource pages
 - Fix error message when reading expired messages in modDBRegister.

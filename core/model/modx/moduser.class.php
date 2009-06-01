@@ -63,7 +63,8 @@ class modUser extends modPrincipal {
                         $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                         if ($query->stmt && $query->stmt->execute()) {
                             while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
-                                $this->_attributes[$context][$target][$row['target']][$row['principal']] = array(
+                                $this->_attributes[$context][$target][$row['target']][] = array(
+                                    'principal' => $row['principal'],
                                     'authority' => $row['authority'],
                                     'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
                                 );
@@ -87,7 +88,8 @@ class modUser extends modPrincipal {
                         $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                         if ($query->stmt && $query->stmt->execute()) {
                             while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
-                                $this->_attributes[$context][$target][$row['target']][$row['principal']] = array(
+                                $this->_attributes[$context][$target][$row['target']][] = array(
+                                    'principal' => $row['principal'],
                                     'authority' => $row['authority'],
                                     'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
                                 );
@@ -111,7 +113,8 @@ class modUser extends modPrincipal {
                         $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                         if ($query->stmt && $query->stmt->execute()) {
                             while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
-                                $this->_attributes[$context][$target][$row['target']][$row['principal']] = array(
+                                $this->_attributes[$context][$target][$row['target']][] = array(
+                                    'principal' => $row['principal'],
                                     'authority' => $row['authority'],
                                     'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
                                 );
@@ -137,7 +140,8 @@ class modUser extends modPrincipal {
                         $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                         if ($query->stmt && $query->stmt->execute()) {
                             while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
-                                $this->_attributes[$context][$target][$row['target']][$row['principal']] = array(
+                                $this->_attributes[$context][$target][$row['target']][] = array(
+                                    'principal' => 0,
                                     'authority' => $row['authority'],
                                     'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
                                 );
@@ -155,7 +159,8 @@ class modUser extends modPrincipal {
                         $query = new xPDOCriteria($this->xpdo, $sql);
                         if ($query->stmt && $query->stmt->execute()) {
                             while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
-                                $this->_attributes[$context][$target][$row['target']][$row['principal']] = array(
+                                $this->_attributes[$context][$target][$row['target']][] = array(
+                                    'principal' => 0,
                                     'authority' => $row['authority'],
                                     'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
                                 );
@@ -175,7 +180,8 @@ class modUser extends modPrincipal {
                         $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                         if ($query->stmt && $query->stmt->execute()) {
                             while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
-                                $this->_attributes[$context][$target][$row['target']][$row['principal']] = array(
+                                $this->_attributes[$context][$target][$row['target']][] = array(
+                                    'principal' => 0,
                                     'authority' => $row['authority'],
                                     'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
                                 );
