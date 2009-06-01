@@ -5,6 +5,14 @@ development release, and is only shown to give an idea of what's currently in th
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
 - Fixed access control defect which prevented multiple policies from being respected per principal.
+- Fixed issue with Policy Attributes not adding b/c id was not passed in
+- Added 'save' event fire to Element/Resource formpanels
+- Properly setup on*FormRender events for Element classes
+- Added MODx.onSaveEditor check, which will fire on form save, that allows 3rd Party Components to execute JS code on Element/Resource saves
+- Major refactoring to modx.actionbuttons, to render faster, as well as properly register events and button configs
+- Allowed OnRichTextEditorRegister to return a string as well as an array
+- Added MODx.releaseLock(id), which releases the lock on a Resource for a given ID
+- Added MODx.sleep(ms), which sleeps the UI for a given number of milliseconds (useful in async calls)
 
 MODx Revolution 2.0.0-beta-1 (LastChangedRevision: 5070 , LastChangedDate: 2009-05-28 16:20:08 -0500 (Thu, 28 May 2009))
 ====================================
