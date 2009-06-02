@@ -193,7 +193,7 @@ class modUser extends modPrincipal {
                 }
             }
             if (!isset($this->_attributes[$context][$target])) {
-                $this->_attributes[$context][$target] = null;
+                $this->_attributes[$context][$target] = array();
             }
             $_SESSION["modx.user.{$this->id}.attributes"] = $this->_attributes;
         }
