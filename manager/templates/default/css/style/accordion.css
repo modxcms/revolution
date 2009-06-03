@@ -9,17 +9,17 @@
     width: 23%;
     float: left;
     height: 100%;
-    /*height:600px;*/
     background: #d4d4d4 url(../../images/restyle/i/bg-tree.png) repeat-x;
-    /*background-color: #d4d4d4;
-    background-image: none;*/
     position: relative;
     overflow: visible;
     z-index: 0;
-    padding: 0 7px 7px 7px;
     clear: left;
     margin: 1% 0 1% 1%;
+	padding: 0;
 }
+	#modx-accordion-content {
+		padding: 0 7px 7px 7px;
+	}
 	.modx-accordion-panel {
 	    margin-top: 7px;
 	}
