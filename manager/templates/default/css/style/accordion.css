@@ -16,11 +16,13 @@
     position: relative;
     overflow: visible;
     z-index: 0;
-    padding: .5%;
+    padding: 0 7px 7px 7px;
     clear: left;
     margin: 1% 0 1% 1%;
 }
-
+	.modx-accordion-panel {
+	    margin-top: 7px;
+	}
 .modx-accordion .tl,.modx-accordion .tr,.modx-accordion .bl,.modx-accordion .br {
     background: transparent url(../../images/restyle/i/corner-tree-20.png) no-repeat;
     position: absolute;
@@ -28,26 +30,22 @@
     height: 20px;
     z-index: 1;
 }
-
-.modx-accordion .tl {
-    top: -10px;
-    left: -10px;
-}
-
-.modx-accordion .tr {
-    top: -10px;
-    right: -10px;
-}
-
-.modx-accordion .br {
-    bottom: -10px;
-    right: -10px;
-}
-
-.modx-accordion .bl {
-    bottom: -10px;
-    left: -10px;
-}
+	.modx-accordion .tl {
+	    top: -10px;
+	    left: -10px;
+	}
+	.modx-accordion .tr {
+	    top: -10px;
+	    right: -10px;
+	}
+	.modx-accordion .br {
+	    bottom: -10px;
+	    right: -10px;
+	}
+	.modx-accordion .bl {
+	    bottom: -10px;
+	    left: -10px;
+	}
 
 .modx-accordion .x-accordion-hd {
     height: 25px;
@@ -76,7 +74,6 @@
 /* other stuff */
 .modx-tree .x-toolbar {
     background: #eee;
-    /*border: 1px solid #fff;*/
     border: 0;
 }
 
@@ -93,8 +90,6 @@
     padding: .4em;
 }
 
-
-
 .modx-accordion .x-accordion-hd {
 	margin-right: 10px;
 	overflow: visible;
@@ -110,22 +105,18 @@
 	display: block;
 	line-height: 32px;
 }
-.modx-accordion .x-panel .x-panel-animated div.x-panel-header {
-	overflow: visible !important;
-}
-#modx-resource-tree-panel .x-accordion-hd {
-    background-position: 0 0;
-}
-#modx-element-tree-panel .x-accordion-hd {
-    background-position: 0 -32px;
-}
-#modx-file-tree-panel .x-accordion-hd {
+	.modx-accordion .x-panel .x-panel-animated div.x-panel-header {
+		overflow: visible !important;
+	}
+	#modx-resource-tree-panel .x-accordion-hd {
+	    background-position: 0 0;
+	}
+	#modx-element-tree-panel .x-accordion-hd {
+	    background-position: 0 -32px;
+	}
+	#modx-file-tree-panel .x-accordion-hd {
 	    background-position: 0 -64px;
 	}
-#modx-static-page-settings .x-accordion-hd {
-    background-position: 0 -96px;
-}
-#modx-element-tree-panel,
-#modx-file-tree-panel {
-    margin-top: 7px;
-}
+	#modx-static-page-settings .x-accordion-hd {
+	    background-position: 0 -96px;
+	}
