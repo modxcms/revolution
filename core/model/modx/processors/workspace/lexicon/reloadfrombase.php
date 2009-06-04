@@ -15,7 +15,7 @@ $invdirs = array('.','..','.svn','country');
 $d = MODX_CORE_PATH.'/lexicon/';
 $i = 0;
 
-// loop through cultures
+/* loop through cultures */
 $dir = dir($d);
 while (false !== ($culture = $dir->read())) {
     if (in_array($culture,$invdirs)) continue;
@@ -31,7 +31,7 @@ while (false !== ($culture = $dir->read())) {
         $modx->log(MODX_LOG_LEVEL_INFO,'Created language: '.$culture);
     }
 
-    // loop through topics
+    /* loop through topics */
     $fdir = $d.$culture.'/';
     $fd = dir($fdir);
     while (false !== ($entry = $fd->read())) {
@@ -51,7 +51,7 @@ while (false !== ($culture = $dir->read())) {
               'namespace' => 'core',
             ), '', true, true);
             $topic->save();
-            $modx->log(MODX_LOG_LEVEL_INFO,'Created topic: '.$foc);
+            $modx->log(MODX_LOG_LEVEL_INFO,'Created topic: '.$top);
         }
 
         $f = $fdir.$entry;
