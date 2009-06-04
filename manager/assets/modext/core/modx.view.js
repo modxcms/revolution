@@ -95,6 +95,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
             }
             ,root: config.root || 'results'
             ,fields: config.fields
+            ,totalProperty: 'total'
             ,listeners: {
                 'load': {fn:function(){ this.select(0); }, scope:this, single:true}
             }
