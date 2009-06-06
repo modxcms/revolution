@@ -71,6 +71,7 @@ $_POST['published'] = empty($_POST['published']) ? 0 : 1;
 $_POST['cacheable'] = empty($_POST['cacheable']) ? 0 : 1;
 $_POST['searchable'] = empty($_POST['searchable']) ? 0 : 1;
 $_POST['syncsite'] = empty($_POST['syncsite']) ? 0 : 1;
+$_POST['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
 
 /* specific data escaping */
 $_POST['pagetitle'] = trim($_POST['pagetitle']);
