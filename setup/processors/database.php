@@ -17,16 +17,19 @@ if (!$install->xpdo->connect()) {
 if ($mode == MODX_INSTALL_MODE_NEW) {
     /* validate admin user data */
     $install->getAdminUser();
-    if (empty ($install->config['cmsadmin'])) {
+    if (empty ($_POST['cmsadmin'])) {
         $this->error->addField('cmsadmin',$install->lexicon['username_err_ns']);
     }
-    if (empty ($install->config['cmsadminemail'])) {
+    if (empty ($_POST['cmsadminemail'])) {
         $this->error->addField('cmsadminemail',$install->lexicon['email_err_ns']);
     }
-    if (empty ($install->config['cmspassword'])) {
+    if (empty ($_POST['cmspassword'])) {
         $this->error->addField('cmspassword',$install->lexicon['password_err_ns']);
     }
-    if ($install->config['cmspasswordconfirm'] != $install->config['cmspassword']) {
+    if (empty ($_POST['cmspasswordconfirm'])) {
+        $this->error->addField('cmspasswordconfirm',$install->lexicon['password_err_ns']);
+    }
+    if ($_POST['cmspasswordconfirm'] != $_POST['cmspassword']) {
     	$this->error->addField('cmspasswordconfirm',$install->lexicon['password_err_nomatch']);
     }
     if (count($error->fields)) {
