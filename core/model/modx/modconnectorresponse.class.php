@@ -29,7 +29,6 @@ class modConnectorResponse extends modResponse {
         $modx =& $this->modx;
 
         /* backwards compat */
-        $_lang =& $this->modx->lexicon;
         $error =& $this->modx->error;
 
         /* verify the location and action */
