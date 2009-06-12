@@ -19,14 +19,21 @@ $modx->lexicon->load('template','category');
 
 if (!$modx->hasPermission('new_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if ($_POST['templatename'] == '') $_POST['templatename'] = $modx->lexicon('template_untitled');
+/* set default name if necessary */
+if (empty($_POST['templatename'])) $_POST['templatename'] = $modx->lexicon('template_untitled');
 
-/* sanity check on name */
-$_POST['templatename'] = str_replace('>','',$_POST['templatename']);
-$_POST['templatename'] = str_replace('<','',$_POST['templatename']);
+/* get rid of invalid chars */
+$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+$_POST['templatename'] = str_replace($invchars,'',$_POST['templatename']);
 
-$name_exists = $modx->getObject('modTemplate',array('templatename' => $_POST['templatename']));
-if ($name_exists != null) $modx->error->addField('templatename',$modx->lexicon('template_err_exists_name'));
+/* check to see if a template already exists with that name */
+$name_exists = $modx->getObject('modTemplate',array(
+    'templatename' => $_POST['templatename'],
+));
+if ($name_exists != null) {
+    $modx->error->addField('templatename',$modx->lexicon('template_err_exists_name'));
+}
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
@@ -56,10 +63,10 @@ $modx->invokeEvent('OnBeforeTempFormSave',array(
 
 $template = $modx->newObject('modTemplate');
 $template->fromArray($_POST);
-$template->set('locked', isset($_POST['locked']));
+$template->set('locked',!empty($_POST['locked']));
 $template->set('category',$category->get('id'));
 $properties = null;
-if (isset($_POST['propdata'])) {
+if (!empty($_POST['propdata'])) {
     $properties = $_POST['propdata'];
     $properties = $modx->fromJSON($properties);
 }

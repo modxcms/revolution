@@ -22,8 +22,10 @@ if (!$modx->hasPermission('new_snippet')) return $modx->error->failure($modx->le
 if ($_POST['name'] == '') $_POST['name'] = $modx->lexicon('snippet_untitled');
 
 /* get rid of invalid chars */
-$_POST['name'] = str_replace('>','',$_POST['name']);
-$_POST['name'] = str_replace('<','',$_POST['name']);
+$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+$_POST['name'] = str_replace($invchars,'',$_POST['name']);
+
 
 $name_exists = $modx->getObject('modSnippet',array('name' => $_POST['name']));
 if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('snippet_err_exists_name'));
@@ -57,7 +59,7 @@ $modx->invokeEvent('OnBeforeSnipFormSave',array(
 /* create new snippet */
 $snippet = $modx->newObject('modSnippet');
 $snippet->fromArray($_POST);
-$snippet->set('locked',isset($_POST['locked']));
+$snippet->set('locked',!empty($_POST['locked']));
 $snippet->set('category',$category->get('id'));
 $properties = null;
 if (isset($_POST['propdata'])) {
@@ -66,7 +68,7 @@ if (isset($_POST['propdata'])) {
 }
 if (is_array($properties)) $snippet->setProperties($properties);
 
-
+/* save snippet */
 if ($snippet->save() == false) {
     return $modx->error->failure($modx->lexicon('snippet_err_create'));
 }

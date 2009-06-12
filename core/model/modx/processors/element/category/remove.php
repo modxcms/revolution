@@ -10,8 +10,11 @@
  */
 $modx->lexicon->load('category');
 
+if (!$modx->hasPermission('remove')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('category_err_ns'));
 $category = $modx->getObject('modCategory',$_REQUEST['id']);
-if ($category == null) return $modx->error->failure($modx->lexicon('category_err_not_found'));
+if ($category == null) return $modx->error->failure($modx->lexicon('category_err_nf'));
 
 /* Hey friends! It's reset time! */
 $plugins = $modx->getCollection('modPlugin',array('category' => $category->get('id')));
@@ -44,6 +47,7 @@ foreach ($tvs as $tv) {
 	$tv->save();
 }
 
+/* remove category */
 if ($category->remove() == false) {
     return $modx->error->failure($modx->lexicon('category_err_remove'));
 }

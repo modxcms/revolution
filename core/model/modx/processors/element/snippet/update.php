@@ -20,7 +20,8 @@ $modx->lexicon->load('snippet','category');
 if (!$modx->hasPermission('save_snippet')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get snippet */
-$snippet = $modx->getObject('modSnippet',$_REQUEST['id']);
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
+$snippet = $modx->getObject('modSnippet',$_POST['id']);
 if ($snippet == null) return $modx->error->failure($modx->lexicon('snippet_err_not_found'));
 
 /* check if locked, if so, prevent access */
@@ -29,24 +30,31 @@ if ($snippet->get('locked') && $modx->hasPermission('edit_locked') == false) {
 }
 
 /* validation */
-if ($_POST['name'] == '') $modx->error->addField('name',$modx->lexicon('snippet_err_not_specified_name'));
+if (empty($_POST['name'])) {
+    $modx->error->addField('name',$modx->lexicon('snippet_err_not_specified_name'));
+}
 
-/* sanity check on name */
-$_POST['name'] = str_replace('>','',$_POST['name']);
-$_POST['name'] = str_replace('<','',$_POST['name']);
+/* get rid of invalid chars */
+$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+$_POST['name'] = str_replace($invchars,'',$_POST['name']);
 
+/* check to see if name already exists */
 $name_exists = $modx->getObject('modSnippet',array(
     'id:!=' => $snippet->get('id'),
     'name' => $_POST['name']
 ));
-if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('snippet_err_exists_name'));
+if ($name_exists != null) {
+    $modx->error->addField('name',$modx->lexicon('snippet_err_exists_name'));
+}
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
 /* category */
+$category == null;
 if (is_numeric($_POST['category'])) {
     $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
-} else {
+} elseif (!empty($_POST['category'])) {
     $category = $modx->getObject('modCategory',array('category' => $_POST['category']));
 }
 if ($category == null) {
@@ -68,7 +76,7 @@ $modx->invokeEvent('OnBeforeSnipFormSave',array(
 ));
 
 $snippet->fromArray($_POST);
-$snippet->set('locked',isset($_POST['locked']));
+$snippet->set('locked',!empty($_POST['locked']));
 $snippet->set('category',$category->get('id'));
 $properties = null;
 if (isset($_POST['propdata'])) {

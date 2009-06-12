@@ -720,3 +720,10 @@ $collection['109']->fromArray(array (
   'service' => 5,
   'groupname' => '',
 ), '', true, true);
+$collection['110']= $xpdo->newObject('modEvent');
+$collection['110']->fromArray(array (
+  'id' => 110,
+  'name' => 'OnPluginEventRemove',
+  'service' => 1,
+  'groupname' => 'modPluginEvent',
+), '', true, true);

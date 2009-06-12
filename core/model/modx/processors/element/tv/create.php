@@ -55,9 +55,16 @@ $modx->invokeEvent('OnBeforeTVFormSave',array(
 $name_exists = $modx->getObject('modTemplateVar',array('name' => $_POST['name']));
 if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name'));
 
-if (!isset($_POST['name']) || $_POST['name'] == '') $_POST['name'] = $modx->lexicon('untitled_tv');
-if ($_POST['caption'] == '')
+if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('untitled_tv');
+
+/* get rid of invalid chars */
+$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+$_POST['name'] = str_replace($invchars,'',$_POST['name']);
+
+if ($_POST['caption'] == '') {
     $_POST['caption'] = $_POST['name'];
+}
 
 if ($modx->error->hasError()) return $modx->error->failure();
 

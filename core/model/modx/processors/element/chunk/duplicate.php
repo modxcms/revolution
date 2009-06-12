@@ -13,20 +13,27 @@ $modx->lexicon->load('chunk');
 if (!$modx->hasPermission('new_chunk')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* Get old chunk */
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
 $old_chunk = $modx->getObject('modChunk',$_POST['id']);
 if ($old_chunk == null) return $modx->error->failure($modx->lexicon('chunk_err_not_found'));
 
+/* check name */
 $newname = isset($_POST['name'])
     ? $_POST['name']
     : $modx->lexicon('duplicate_of').$old_chunk->get('name');
+
+/* get rid of invalid chars */
+$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+$newname = str_replace($invchars,'',$newname);
 
 /* duplicate chunk */
 $chunk = $modx->newObject('modChunk');
 $chunk->fromArray($old_chunk->toArray());
 $chunk->set('name',$newname);
 
+/* save new chunk */
 if ($chunk->save() === false) {
-    $modx->log(MODX_LOG_LEVEL_ERROR,$modx->lexicon('chunk_err_duplicate').print_r($chunk->toArray(),true));
     return $modx->error->failure($modx->lexicon('chunk_err_duplicate'));
 }
 

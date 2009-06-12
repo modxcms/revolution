@@ -15,13 +15,28 @@
  */
 $modx->lexicon->load('template');
 
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'rank';
+if (!isset($_REQUEST['sortAlias'])) $_REQUEST['sortAlias'] = 'modTemplateVar';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $c = $modx->newQuery('modTemplateVar');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+
+if (!empty($_REQUEST['template'])) {
+    $c->leftJoin('modTemplateVarTemplate','modTemplateVarTemplate','
+        modTemplateVarTemplate.tmplvarid = modTemplateVar.id
+    AND modTemplateVarTemplate.templateid = '.$_REQUEST['template'].'
+    ');
+    $c->select('modTemplateVar.*,
+        IF(ISNULL(modTemplateVarTemplate.tmplvarid),0,1) AS access,
+        modTemplateVarTemplate.rank AS rank
+    ');
+}
+
+$c->sortby($_REQUEST['sortAlias'].'.'.$_REQUEST['sort'],$_REQUEST['dir']);
 $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 
 $tvs = $modx->getCollection('modTemplateVar',$c);
@@ -29,20 +44,7 @@ $count = $modx->getCount('modTemplateVar');
 
 $ts = array();
 foreach ($tvs as $tv) {
-    if (isset($_REQUEST['template'])) {
-        $tvt = $modx->getObject('modTemplateVarTemplate',array(
-            'templateid' => $_REQUEST['template'],
-            'tmplvarid' => $tv->get('id'),
-        ));
-    } else $tvt = null;
-
-    if ($tvt == null) {
-        $tv->set('access',false);
-        $tv->set('rank',0);
-    } else {
-        $tv->set('access',true);
-        $tv->set('rank',$tvt->get('rank'));
-    }
+    $tv->set('access',$tv->get('access') ? 1 : 0);
 	$ts[] = $tv->toArray();
 }
 return $this->outputArray($ts,$count);

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['context'] = 'Context';
 $_lang['context_add'] = 'Add Context';
 $_lang['context_create'] = 'Create Context';

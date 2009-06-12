@@ -5,10 +5,15 @@
  */
 $modx->lexicon->load('plugin');
 
-if ($_POST['priority'] == '') $_POST['priority'] = 0;
-if (!isset($_POST['plugin']) || !isset($_POST['event'])) {
+if (!$modx->hasPermission('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+/* validation */
+if (empty($_POST['priority'])) $_POST['priority'] = 0;
+if (empty($_POST['plugin']) || empty($_POST['event'])) {
     return $modx->error->failure($modx->lexicon('plugin_event_err_ns'));
 }
+
+/* get plugin event */
 $pe = $modx->getObject('modPluginEvent',array(
     'pluginid' => $_POST['plugin'],
     'evtid' => $_POST['id'],

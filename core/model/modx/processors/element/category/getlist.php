@@ -13,8 +13,12 @@
  */
 $modx->lexicon->load('category');
 
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+$limit = !empty($_REQUEST['limit']);
+$showNone = !empty($_REQUEST['showNone']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-/* if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20; */
+if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'parent,category';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
@@ -23,15 +27,18 @@ $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
 $c->where(array(
     'parent' => 0,
 ));
-if (isset($_REQUEST['limit'])) {
+if ($limit) {
 	$c->limit($_REQUEST['limit'],$_REQUEST['start']);
 }
 $categories = $modx->getCollection('modCategory',$c);
-$cs = array('0' => array(
-    'id' => '',
-    'category' => $modx->lexicon('none'),
-    'name' => $modx->lexicon('none'),
-));
+
+if ($showNone) {
+    $cs = array('0' => array(
+        'id' => '',
+        'category' => $modx->lexicon('none'),
+        'name' => $modx->lexicon('none'),
+    ));
+}
 
 foreach ($categories as $category) {
     $ca = $category->toArray();

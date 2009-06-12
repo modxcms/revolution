@@ -21,8 +21,15 @@ $modx->lexicon->load('plugin','category');
 
 if (!$modx->hasPermission('new_plugin')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if ($_POST['name'] == '') $_POST['name'] = $modx->lexicon('plugin_untitled');
+/* set default name */
+if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('plugin_untitled');
 
+/* get rid of invalid chars */
+$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+$_POST['name'] = str_replace($invchars,'',$_POST['name']);
+
+/* check to see if name already exists */
 $name_exists = $modx->getObject('modPlugin',array('name' => $_POST['name']));
 if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('plugin_err_exists_name'));
 
@@ -54,7 +61,7 @@ $modx->invokeEvent('OnBeforePluginFormSave',array(
 
 $plugin = $modx->newObject('modPlugin');
 $plugin->fromArray($_POST);
-$plugin->set('locked',isset($_POST['locked']));
+$plugin->set('locked',!empty($_POST['locked']));
 $plugin->set('category',$category->get('id'));
 $properties = null;
 if (isset($_POST['propdata'])) {

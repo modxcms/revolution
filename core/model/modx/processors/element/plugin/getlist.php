@@ -13,6 +13,8 @@
  */
 $modx->lexicon->load('plugin');
 
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';

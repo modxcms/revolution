@@ -13,14 +13,16 @@
  */
 $modx->lexicon->load('chunk');
 
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+$limit = !empty($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $c = $modx->newQuery('modChunk');
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-
-if (isset($_REQUEST['limit'])) {
+if ($limit) {
     $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 }
 $chunks = $modx->getCollection('modChunk',$c);

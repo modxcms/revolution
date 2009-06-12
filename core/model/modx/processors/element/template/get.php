@@ -9,6 +9,10 @@
  */
 $modx->lexicon->load('template');
 
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+/* get template */
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
 $template = $modx->getObject('modTemplate',$_REQUEST['id']);
 if ($template == null) return $modx->error->failure($modx->lexicon('template_err_not_found'));
 

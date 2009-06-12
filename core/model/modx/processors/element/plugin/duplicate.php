@@ -13,12 +13,20 @@ $modx->lexicon->load('plugin');
 if (!$modx->hasPermission('new_plugin')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get old snippet */
-$old_plugin = $modx->getObject('modPlugin',$_REQUEST['id']);
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
+$old_plugin = $modx->getObject('modPlugin',$_POST['id']);
 if ($old_plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_not_found'));
 
-$newname = isset($_POST['name'])
+/* format new name */
+$newname = !empty($_POST['name'])
     ? $_POST['name']
     : $modx->lexicon('duplicate_of').$old_plugin->get('name');
+
+/* get rid of invalid chars */
+$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+$newname = str_replace($invchars,'',$newname);
+
 
 /* duplicate plugin */
 $plugin = $modx->newObject('modPlugin');
@@ -26,6 +34,7 @@ $plugin->fromArray($old_plugin->toArray());
 $plugin->set('name',$newname);
 
 if ($plugin->save() === false) {
+    $modx->log(MODX_LOG_LEVEL_ERROR,$modx->lexicon('plugin_err_save').print_r($plugin->toArray(),true));
     return $modx->error->failure($modx->lexicon('plugin_err_save'));
 }
 

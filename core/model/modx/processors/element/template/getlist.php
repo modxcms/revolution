@@ -13,6 +13,8 @@
  */
 $modx->lexicon->load('template');
 
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
 $limit = isset($_REQUEST['limit']) ? true : false;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
@@ -34,7 +36,7 @@ $list = array();
 if (isset($_REQUEST['combo'])) {
     $empty = array(
         'id' => 0,
-        'templatename' => '(empty)',
+        'templatename' => $modx->lexicon('template_empty'),
         'description' => '',
         'editor_type' => 0,
         'icon' => '',

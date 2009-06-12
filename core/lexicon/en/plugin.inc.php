@@ -1,4 +1,10 @@
 <?php
+/**
+ * Plugin English lexicon topic
+ *
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['plugin'] = 'Plugin';
 $_lang['plugin_code'] = 'Plugin code (php)';
 $_lang['plugin_config'] = 'Plugin configuration';
@@ -9,7 +15,9 @@ $_lang['plugin_duplicate_confirm'] = 'Are you sure you want to duplicate this pl
 $_lang['plugin_err_create'] = 'An error occurred while creating the plugin.';
 $_lang['plugin_err_exists_name'] = 'A plugin already exists with that name.';
 $_lang['plugin_err_not_found'] = 'Plugin not found!';
+$_lang['plugin_err_ns'] = 'Plugin not specified.';
 $_lang['plugin_err_not_specified_name'] = 'Please specify a name for the plugin.';
+$_lang['plugin_err_remove'] = 'An error occurred while remove the plugin.';
 $_lang['plugin_err_save'] = 'An error occurred while saving the plugin.';
 $_lang['plugin_event_err_duplicate'] = 'An error occurred when trying to duplicate the plugin events';
 $_lang['plugin_event_err_nf'] = 'Plugin event not found.';

@@ -13,14 +13,16 @@
  */
 $modx->lexicon->load('snippet');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+if (empty($_REQUEST['start'])) $_REQUEST['start'] = 0;
+if (empty($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
+if (empty($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $c = $modx->newQuery('modSnippet');
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
 
-if (isset($_REQUEST['limit'])) {
+if (!empty($_REQUEST['limit'])) {
     $c = $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 }
 $snippets = $modx->getCollection('modSnippet',$c);

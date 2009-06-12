@@ -16,7 +16,6 @@ if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('template_e
 $template = $modx->getObject('modTemplate',$_POST['id']);
 if ($template == null) return $modx->error->failure($modx->lexicon('template_err_not_found'));
 
-
 /* check to make sure it doesn't have any resources using it */
 $resources = $modx->getCollection('modResource',array(
 	'deleted' => 0,
@@ -40,9 +39,11 @@ if ($template->get('id') == $default_template) {
 $modx->invokeEvent('OnBeforeTempFormDelete',array('id' => $template->get('id')));
 
 /* remove template var maps */
-$template->ttvs = $template->getMany('modTemplateVarTemplate');
-foreach ($template->ttvs as $ttv) {
-	if (!$ttv->remove()) return $modx->error->failure($modx->lexicon('tvt_err_remove'));
+$templateTVs = $template->getMany('modTemplateVarTemplate');
+foreach ($templateTVs as $ttv) {
+	if ($ttv->remove() == false) {
+        $modx->log(MODX_LOG_LEVEL_ERROR,$modx->lexicon('tvt_err_remove'));
+    }
 }
 
 /* delete template */

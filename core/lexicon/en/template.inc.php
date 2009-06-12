@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template English lexicon topic
+ *
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['access'] = 'Access';
 $_lang['rank'] = 'Rank';
 $_lang['template'] = 'Template';
@@ -8,6 +14,7 @@ $_lang['template_desc'] = 'Description';
 $_lang['template_delete_confirm'] = 'Are you sure you want to delete this template?';
 $_lang['template_duplicate_confirm'] = 'Are you sure you want to duplicate this template?';
 $_lang['template_edit_tab'] = 'Edit Template';
+$_lang['template_empty'] = '(empty)';
 $_lang['template_err_default_template'] = 'This template is set as the default template. Please choose a different default template in the MODx configuration before deleting this template.<br />';
 $_lang['template_err_delete'] = 'An error occurred while deleting the template.';
 $_lang['template_err_duplicate'] = 'An error occured while duplicating the template.';
@@ -15,7 +22,9 @@ $_lang['template_err_exists_name'] = 'A template already exists with that name.'
 $_lang['template_err_in_use'] = 'This template is in use. Please set the documents using the template to another template. Documents using this template:<br />';
 $_lang['template_err_locked'] = 'Template is locked from editing.';
 $_lang['template_err_not_found'] = 'Template not found!';
+$_lang['template_err_ns'] = 'Template not specified.';
 $_lang['template_err_not_specified_name'] = 'Please specify a name for the template.';
+$_lang['template_err_remove'] = 'An error occurred while removing the template.';
 $_lang['template_err_save'] = 'An error occurred while saving the template.';
 $_lang['template_lock'] = 'Lock template for editing';
 $_lang['template_lock_msg'] = 'Users must have the edit_locked attribute to edit this template.';

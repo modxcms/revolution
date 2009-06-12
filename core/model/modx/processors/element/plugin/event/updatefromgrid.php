@@ -5,9 +5,13 @@
  */
 $modx->lexicon->load('plugin');
 
-$_DATA = $modx->fromJSON($_POST['data']);
-if ($_DATA['priority'] == '') $_DATA['priority'] = 0;
+if (!$modx->hasPermission('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
+/* validation and data formatting */
+$_DATA = $modx->fromJSON($_POST['data']);
+if (empty($_DATA['priority'])) $_DATA['priority'] = 0;
+
+/* get plugin event */
 $pe = $modx->getObject('modPluginEvent',array(
     'pluginid' => $_DATA['plugin'],
     'evtid' => $_DATA['id'],

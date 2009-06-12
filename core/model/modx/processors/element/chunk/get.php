@@ -9,6 +9,9 @@
  */
 $modx->lexicon->load('chunk','category');
 
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+/* get chunk */
 if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
 $chunk = $modx->getObject('modChunk',$_POST['id']);
 if ($chunk == null) {
@@ -18,6 +21,7 @@ if ($chunk == null) {
 $properties = $chunk->get('properties');
 if (!is_array($properties)) $properties = array();
 
+/* process data */
 $data = array();
 foreach ($properties as $property) {
     $data[] = array(

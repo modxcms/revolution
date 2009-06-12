@@ -12,12 +12,19 @@ $modx->lexicon->load('context');
 
 if (!$modx->hasPermission('edit_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['key'])) return $modx->error->failure($modx->lexicon('context_err_ns'));
-$context= $modx->getObject('modContext', $_REQUEST['key']);
-if ($context == null) return $modx->error->failure($modx->lexicon('context_err_nfs',array('key' => $_REQUEST['key'])));
+/* validate pk */
+if (empty($_POST['key'])) {
+    return $modx->error->failure($modx->lexicon('context_err_ns'));
+}
 
+/* get context */
+$context= $modx->getObject('modContext', $_POST['key']);
+if ($context == null) return $modx->error->failure($modx->lexicon('context_err_nfs',array('key' => $_POST['key'])));
+
+/* set values */
 $context->fromArray($_POST);
 
+/* save context */
 if ($context->save() === false) {
 	return $modx->error->failure($modx->lexicon('context_err_save'));
 }

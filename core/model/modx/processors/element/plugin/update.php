@@ -22,22 +22,33 @@ $modx->lexicon->load('plugin','category');
 
 if (!$modx->hasPermission('save_plugin')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$plugin = $modx->getObject('modPlugin',$_REQUEST['id']);
+/* get plugin */
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
+$plugin = $modx->getObject('modPlugin',$_POST['id']);
 if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_not_found'));
 
+/* check for locks */
 if ($plugin->get('locked') && $modx->hasPermission('edit_locked') == false) {
     return $modx->error->failure($modx->lexicon('plugin_err_locked'));
 }
 
 /* Validation and data escaping */
-if ($_POST['name'] == '') $modx->error->addField('name',$modx->lexicon('plugin_err_not_specified_name'));
+if (empty($_POST['name'])) {
+    $modx->error->addField('name',$modx->lexicon('plugin_err_not_specified_name'));
+}
 
+/* get rid of invalid chars */
+$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+$_POST['name'] = str_replace($invchars,'',$_POST['name']);
+
+/* check to see if name exists */
 $name_exists = $modx->getObject('modPlugin',array(
     'id:!=' => $plugin->get('id'),
-    'name' => $_POST['name']
+    'name' => $_POST['name'],
 ));
-
 if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('plugin_err_exists_name'));
+
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
@@ -66,9 +77,9 @@ $modx->invokeEvent('OnBeforePluginFormSave',array(
 ));
 
 $plugin->fromArray($_POST);
-$plugin->set('locked', isset($_POST['locked']));
+$plugin->set('locked',!empty($_POST['locked']));
 $plugin->set('category',$category->get('id'));
-$plugin->set('disabled',isset($_POST['disabled']));
+$plugin->set('disabled',!empty($_POST['disabled']));
 $properties = null;
 if (isset($_POST['propdata'])) {
     $properties = $_POST['propdata'];

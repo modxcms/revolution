@@ -9,9 +9,10 @@
  */
 $modx->lexicon->load('snippet');
 
-if (!$modx->hasPermission('delete_snippet')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get snippet */
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
 $snippet = $modx->getObject('modSnippet',$_REQUEST['id']);
 if ($snippet == null) return $modx->error->failure($modx->lexicon('snippet_err_not_found'));
 

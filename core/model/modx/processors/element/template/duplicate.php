@@ -15,13 +15,18 @@ $modx->lexicon->load('template');
 if (!$modx->hasPermission('new_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get old template */
-$old_template = $modx->getObject('modTemplate',$_REQUEST['id']);
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
+$old_template = $modx->getObject('modTemplate',$_POST['id']);
 if ($old_template == null) {
     return $modx->error->failure($modx->lexicon('template_err_not_found'));
 }
-$newname = isset($_POST['name'])
-    ? $_POST['name']
-    : $modx->lexicon('duplicate_of').$old_template->get('templatename');
+/* format new name */
+$newname = !empty($_POST['name']) ? $_POST['name'] : $modx->lexicon('duplicate_of').$old_template->get('templatename');
+
+/* get rid of invalid chars */
+$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+$newname = str_replace($invchars,'',$newname);
 
 /* duplicate template */
 $template = $modx->newObject('modTemplate');

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Snippet English lexicon topic
+ *
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['snippet'] = 'Snippet';
 $_lang['snippets_available'] = 'Snippets available for you to include in your page';
 $_lang['snippet_code'] = 'Snippet code (php)';
@@ -12,7 +18,9 @@ $_lang['snippet_err_duplicate'] = 'An error occured while trying to duplicate th
 $_lang['snippet_err_exists_name'] = 'A snippet already exists with that name.';
 $_lang['snippet_err_locked'] = 'This snippet is locked for editing.';
 $_lang['snippet_err_not_found'] = 'Snippet not found!';
+$_lang['snippet_err_ns'] = 'Snippet not specified.';
 $_lang['snippet_err_not_specified_name'] = 'Please specify a name for the snippet.';
+$_lang['snippet_err_remove'] = 'An error occurred while remove the snippet.';
 $_lang['snippet_err_save'] = 'An error occurred while saving the snippet.';
 $_lang['snippet_execonsave'] = 'Execute snippet after saving.';
 $_lang['snippet_lock'] = 'Lock snippet for editing';

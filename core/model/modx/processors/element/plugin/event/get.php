@@ -5,7 +5,9 @@
  */
 $modx->lexicon->load('plugin');
 
-if (!isset($_POST['plugin']) || !isset($_POST['event'])) {
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+if (empty($_POST['plugin']) || empty($_POST['event'])) {
     return $modx->error->failure($modx->lexicon('plugin_event_err_ns'));
 }
 $pe = $modx->getObject('modPluginEvent',array(

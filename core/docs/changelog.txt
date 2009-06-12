@@ -4,6 +4,16 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added WARN log message when executing a system event that doesnt exist
+- Filled out missing access policy checks in element processors
+- Fixed incorrect and missing permission check in snippet get/getList processors
+- Fixed invalid lexicon reference in template processors
+- Optimized templateTV getList processor to use only one query
+- Optimized plugin event getList processor to use only one query
+- [#MODX-194] Added sanity checks to element names
+- [#MODX-792] Added check to prevent user from creating blank context, other sanity checks
+- [#MODX-475] Prevented adding contexts with _ in name; will auto-strip
+- [#MODX-796] Fixed check for valid passwords in setup
 - Fixed problematic reference to $_lang
 - Fixed improper log message reference in lexicon's reloadFromBase processor
 - Additional access control defects and warning messages resolved for anonymous users.

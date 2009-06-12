@@ -67,6 +67,13 @@ if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('tv_err_e
 if (!isset($_POST['name']) || $_POST['name'] == '') $_POST['name'] = $modx->lexicon('untitled_tv');
 if ($_POST['caption'] == '') $_POST['caption'] = $_POST['name'];
 
+
+/* get rid of invalid chars */
+$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+$_POST['name'] = str_replace($invchars,'',$_POST['name']);
+
+
 /* extract widget properties */
 $display_params = '';
 foreach ($_POST as $key => $value) {
