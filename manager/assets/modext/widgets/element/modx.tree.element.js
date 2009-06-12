@@ -13,7 +13,7 @@ MODx.tree.Element = function(config) {
 		,enableDrag: true
 		,enableDrop: true
 		,title: ''
-		,url: MODx.config.connectors_url+'layout/tree/element.php'
+		,url: MODx.config.connectors_url+'element/index.php'
 	});
 	MODx.tree.Element.superclass.constructor.call(this,config);
 };
