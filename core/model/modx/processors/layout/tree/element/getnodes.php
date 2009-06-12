@@ -155,7 +155,7 @@ switch ($g[0]) {
             );
             $menu[] = '-';
             $menu[] = array(
-                'text' => sprintf($modx->lexicon('add_to_category_this'),$elementType),
+                'text' => $modx->lexicon('add_to_category_this',array('type' => $elementType)),
                 'handler' => 'function(itm,e) {
                     this._createElement(itm,e);
                 }',
@@ -426,7 +426,7 @@ switch ($g[0]) {
                         )
                         ,'-',
                         array(
-                            'text' => sprintf($modx->lexicon('add_to_category_this'),$elementType),
+                            'text' => $modx->lexicon('add_to_category_this',array('type' => $elementType)),
                             'handler' => 'function(itm,e) {
                                 this._createElement(itm,e);
                             }',

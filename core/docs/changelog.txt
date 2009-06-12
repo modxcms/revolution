@@ -4,7 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
-- Added WARN log message when executing a system event that doesnt exist
+- [#MODX-771] Fixed invalid lexicon string reference in element tree
+- Added WARN log message when executing a system event that doesn't exist
 - Filled out missing access policy checks in element processors
 - Fixed incorrect and missing permission check in snippet get/getList processors
 - Fixed invalid lexicon reference in template processors
