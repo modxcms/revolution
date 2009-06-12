@@ -16,6 +16,37 @@ class modPlugin extends modScript {
     }
 
     /**
+     * Overrides modElement::save to add custom error logging.
+     *
+     * {@inheritdoc}
+     */
+    function save($cacheFlag = null) {
+        $isNew = $this->isNew();
+        $success = parent::save($cacheFlag);
+
+        if (!$success && !empty($this->xpdo->lexicon)) {
+            $msg = $isNew ? $this->xpdo->lexicon('plugin_err_create') : $this->xpdo->lexicon('plugin_err_save');
+            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$msg.$this->toArray());
+        }
+        return $success;
+    }
+
+    /**
+     * Overrides modElement::remove to add custom error logging.
+     *
+     * {@inheritdoc}
+     */
+    function remove($ancestors= array ()) {
+        $success = parent :: remove($ancestors);
+
+        if (!$success && !empty($this->xpdo->lexicon)) {
+            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('plugin_err_remove').$this->toArray());
+        }
+
+        return $success;
+    }
+
+    /**
      * Get the source content of this plugin.
      */
     function getContent($options = array()) {

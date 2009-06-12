@@ -33,6 +33,37 @@ class modTemplateVar extends modElement {
     }
 
     /**
+     * Overrides modElement::save to add custom error logging.
+     *
+     * {@inheritdoc}
+     */
+    function save($cacheFlag = null) {
+        $isNew = $this->isNew();
+        $success = parent::save($cacheFlag);
+
+        if (!$success && !empty($this->xpdo->lexicon)) {
+            $msg = $isNew ? $this->xpdo->lexicon('tv_err_create') : $this->xpdo->lexicon('tv_err_save');
+            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$msg.$this->toArray());
+        }
+        return $success;
+    }
+
+    /**
+     * Overrides modElement::remove to add custom error logging.
+     *
+     * {@inheritdoc}
+     */
+    function remove($ancestors= array ()) {
+        $success = parent :: remove($ancestors);
+
+        if (!$success && !empty($this->xpdo->lexicon)) {
+            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('tv_err_remove').$this->toArray());
+        }
+
+        return $success;
+    }
+
+    /**
      * Process the template variable and return the output.
      *
      * {@inheritdoc}

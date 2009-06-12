@@ -62,7 +62,7 @@ if (isset($_POST['category'])) {
     $categoryPk = $_POST['category'];
     $c = is_numeric($categoryPk)
         ? array('id' => $categoryPk)
-        : array('name' => $categoryPk);
+        : array('category' => $categoryPk);
     $category = $modx->getObject('modCategory',$c);
     if ($category == null) {
         $category = $modx->newObject('modCategory');

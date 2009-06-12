@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed invalid category reference on chunk update processor
+- Added log error messages if save()/remove() fails on modElement derivatives
 - [#MODX-771] Fixed invalid lexicon string reference in element tree
 - Added WARN log message when executing a system event that doesn't exist
 - Filled out missing access policy checks in element processors
