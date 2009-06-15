@@ -26,7 +26,7 @@ $modx->lexicon->load('tv','category');
 
 if (!$modx->hasPermission('new_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_POST['template'])) $_POST['template'] = array();
+if (empty($_POST['template'])) $_POST['template'] = array();
 
 /* category */
 if (is_numeric($_POST['category'])) {
@@ -62,9 +62,7 @@ $invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
     '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
 $_POST['name'] = str_replace($invchars,'',$_POST['name']);
 
-if ($_POST['caption'] == '') {
-    $_POST['caption'] = $_POST['name'];
-}
+if (empty($_POST['caption'])) { $_POST['caption'] = $_POST['name']; }
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
@@ -82,8 +80,8 @@ $tv = $modx->newObject('modTemplateVar');
 $tv->fromArray($_POST);
 $tv->set('elements',$_POST['els']);
 $tv->set('display_params',$display_params);
-$tv->set('rank',isset($_POST['rank']) ? $_POST['rank'] : 0);
-$tv->set('locked',isset($_POST['locked']));
+$tv->set('rank',!empty($_POST['rank']) ? $_POST['rank'] : 0);
+$tv->set('locked',!empty($_POST['locked']));
 $tv->set('category', $category->get('id'));
 $properties = null;
 if (isset($_POST['propdata'])) {
