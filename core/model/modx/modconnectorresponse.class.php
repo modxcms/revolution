@@ -119,7 +119,9 @@ class modConnectorResponse extends modResponse {
      * @return string The extended JSON-encoded string.
      */
     function toJSON($data) {
-        array_walk_recursive($data, array(&$this, '_encodeLiterals'));
+        if (is_array($data)) {
+            array_walk_recursive($data, array(&$this, '_encodeLiterals'));
+        }
         return $this->_decodeLiterals($this->modx->toJSON($data));
     }
 
