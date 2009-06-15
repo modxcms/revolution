@@ -20,6 +20,8 @@ if (!isset($_POST['namespace'])) return $modx->error->failure($modx->lexicon('na
 $namespace = $modx->getObject('modNamespace',$_POST['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
+/* get setting */
+if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
 $setting = $modx->getObject('modSystemSetting',array(
     'key' => $_POST['key'],
 ));

@@ -17,10 +17,13 @@ $modx->lexicon->load('setting','namespace');
 
 if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
+/* get namespace */
 if (!isset($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
 $namespace = $modx->getObject('modNamespace',$_POST['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
+/* prevent empty or already existing settings */
+if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
 $ae = $modx->getObject('modSystemSetting',array(
     'key' => $_POST['key'],
 ));
