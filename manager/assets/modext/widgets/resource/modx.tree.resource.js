@@ -16,7 +16,7 @@ MODx.tree.Resource = function(config) {
 		,sortBy: 'menuindex'
 		,title: ''
 		,remoteToolbar: true
-		,url: MODx.config.connectors_url+'layout/tree/resource.php'
+		,url: MODx.config.connectors_url+'resource/index.php'
 	});
 	MODx.tree.Resource.superclass.constructor.call(this,config);
     if (config.el) {
