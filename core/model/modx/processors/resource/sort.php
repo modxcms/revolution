@@ -9,6 +9,8 @@
  */
 $modx->lexicon->load('resource');
 
+if (!$modx->hasPermission('save_document')) return $modx->error->failure($modx->lexicon('access_denied'));
+
 $data = urldecode($_POST['data']);
 $data = $modx->fromJSON($data);
 $nodes = array();

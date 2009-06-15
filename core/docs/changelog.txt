@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Consolidated resource getNodes processor, added access policy checks
 - Added sanity check to toJSON function in modConnectorResponse
 - Properly refactor element tree to point to correct processor
 - Added delegate processors for different modes in element tree
