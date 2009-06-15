@@ -32,7 +32,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
 	
 	,createMenu: function(n,e) {
         var r = {};
-        if (this.cm.activeNode) {
+        if (this.cm && this.cm.activeNode) {
             r['parent'] = this.cm.activeNode.attributes.data.id;
         }
         if (!this.windows.create_menu) {
@@ -42,9 +42,8 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
                 ,success: this.refresh
                 ,record: r
             });
-        } else {
-            this.windows.create_menu.setValues(r);
         }
+        this.windows.create_menu.setValues(r);
         this.windows.create_menu.show(e.target);
 	}
 	
@@ -226,6 +225,7 @@ MODx.combo.Action = function(config) {
         ,displayField: 'controller'
         ,valueField: 'id'
 		,listWidth: 300
+        ,editable: false
 	});
 	MODx.combo.Action.superclass.constructor.call(this,config);
 };
@@ -251,6 +251,7 @@ MODx.combo.Menu = function(config) {
         ,displayField: 'text'
         ,valueField: 'id'
         ,listWidth: 300
+        ,editable: false
     });
     MODx.combo.Menu.superclass.constructor.call(this,config);
 };

@@ -12,6 +12,9 @@
  */
 $modx->lexicon->load('action','menu','topmenu');
 
+if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+$limit = !empty($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
 if (!isset($_REQUEST['id'])) $_REQUEST['id'] = 'n_0';
@@ -20,8 +23,10 @@ $id = str_replace('n_','',$_REQUEST['id']);
 
 $c = $modx->newQuery('modMenu');
 $c->leftJoin('modMenu','Children');
+$c->leftJoin('modAction','Action');
 $c->select('
     `modMenu`.*,
+    `Action`.`controller` AS `controller`,
     COUNT(`Children`.`id`) AS `childrenCount`
 ');
 $c->where(array(
@@ -29,13 +34,17 @@ $c->where(array(
 ));
 $c->sortby('modMenu.menuindex','ASC');
 $c->groupby('modMenu.id');
+if ($limit) {
+    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+}
 $menus = $modx->getCollection('modMenu',$c);
 
 
 $as = array();
 foreach ($menus as $menu) {
-	$action = $menu->getOne('Action');
-	$controller = $action != NULL && $action->get('controller') != '' ? $action->get('controller') : '';
+    $controller = $menu->get('controller');
+    if (empty($controller)) $controller = '';
+
 	if (strlen($controller) > 1 && substr($controller,strlen($controller)-4,strlen($controller)) != '.php') {
 		if (!file_exists($modx->getOption('manager_path').'controllers/'.$controller.'.php')) {
 			$controller .= '/index.php';

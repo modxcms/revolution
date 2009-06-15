@@ -11,7 +11,7 @@ $modx->lexicon->load('action','menu');
 
 if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
 $action = $modx->getObject('modAction',$_POST['id']);
 if ($action == null) return $modx->error->failure($modx->lexicon('action_err_nf'));
 

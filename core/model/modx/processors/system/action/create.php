@@ -26,25 +26,21 @@ if (!isset($_POST['controller']) || $_POST['controller'] == '') {
 
 /* verify parent */
 if (!isset($_POST['parent'])) return $modx->error->failure($modx->lexicon('action_parent_err_ns'));
-if ($_POST['parent'] == 0) {
-	$parent = $modx->newObject('modAction');
-	$parent->set('id',0);
-} else {
+if (!empty($_POST['parent'])) {
 	$parent = $modx->getObject('modAction',$_POST['parent']);
 	if ($parent == null) return $modx->error->failure($modx->lexicon('action_parent_err_nf'));
 }
 
 /* verify namespace */
-if (!isset($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
+if (empty($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 $namespace = $modx->getObject('modNamespace',$_POST['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
 /* create action */
 $action = $modx->newObject('modAction');
-$action->set('namespace',$namespace->get('name'));
-$action->set('parent',$parent->get('id'));
 $action->fromArray($_POST);
 
+/* save action */
 if ($action->save() == false) {
     return $modx->error->failure($modx->lexicon('action_err_create'));
 }
