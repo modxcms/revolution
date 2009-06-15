@@ -16,6 +16,9 @@
 $modx->lexicon->load('workspace');
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
+/* TODO: remove this line when xPDO::getCount is fixed */
+$modx->addPackage('modx.transport',$modx->getOption('core_path').'model/');
+
 $useLimit = !empty($_REQUEST['limit']);
 $start = isset($_REQUEST['start']) ? $_REQUEST['start'] : 0;
 $limit = isset($_REQUEST['limit']) ? $_REQUEST['limit'] : 10;
@@ -23,24 +26,18 @@ $workspace = !empty($_REQUEST['workspace']) ? $_REQUEST['workspace'] : 1;
 $dateFormat = !empty($_REQUEST['dateFormat']) ? $_REQUEST['dateFormat'] : '%b %d, %Y %I:%M %p';
 
 /* get packages */
-$c = $modx->newQuery('transport.modTransportPackage');
+$c = $modx->newQuery('modTransportPackage');
 $c->where(array(
     'workspace' => $workspace,
 ));
+$count = $modx->getCount('modTransportPackage',$c);
 
 $c->sortby('`modTransportPackage`.`disabled`', 'ASC');
 $c->sortby('`modTransportPackage`.`signature`', 'ASC');
 if ($useLimit) {
     $c->limit($limit,$start);
 }
-$packages = $modx->getCollection('transport.modTransportPackage',$c);
-
-/* get around xpdo bug */
-$c = new xPDOCriteria($modx,'
-    SELECT COUNT(*) AS ct FROM `modx_transport_packages`
-    WHERE workspace = '.$workspace.'
-');
-$count = $modx->getCount('transport.modTransportPackage',$c);
+$packages = $modx->getCollection('modTransportPackage',$c);
 
 /* hide prior versions */
 $priorVersions = array();
