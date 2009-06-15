@@ -16,48 +16,59 @@
  */
 $modx->lexicon->load('lexicon');
 
+if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+$limit = !empty($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['namespace'])) $_REQUEST['namespace'] = 'core';
-if (!isset($_REQUEST['language'])) $_REQUEST['language'] = 'en';
+if (empty($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
+if (empty($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+if (empty($_REQUEST['namespace'])) $_REQUEST['namespace'] = 'core';
+if (empty($_REQUEST['language'])) $_REQUEST['language'] = 'en';
 
-if (!isset($_POST['topic']) || $_POST['topic'] == '') {
+/* if specifying a topic */
+if (empty($_REQUEST['topic'])) {
     $topic = $modx->getObject('modLexiconTopic',array(
         'name' => 'default',
         'namespace' => 'core',
     ));
 } else {
-    $topic = $modx->getObject('modLexiconTopic',$_POST['topic']);
+    $topic = $modx->getObject('modLexiconTopic',$_REQUEST['topic']);
     if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
 }
-
 $wa = array(
     'namespace' => $_REQUEST['namespace'],
     'topic' => $topic->get('id'),
     'language' => $_REQUEST['language'],
 );
-if (isset($_REQUEST['name']) && $_REQUEST['name'] != '') {
+/* if filtering by name */
+if (!empty($_REQUEST['name'])) {
 	$wa['name:LIKE'] = '%'.$_REQUEST['name'].'%';
 }
 
+/* setup query */
 $c = $modx->newQuery('modLexiconEntry');
 $c->where($wa);
-$c->sortby('name', 'ASC');
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+if ($limit) {
+    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+}
 
+/* get entries */
 $entries = $modx->getCollection('modLexiconEntry',$c);
 $count = $modx->getCount('modLexiconEntry',$wa);
 
-
-$ps = array();
+/* loop through */
+$list = array();
 foreach ($entries as $entry) {
-    $pa = $entry->toArray();
+    $entryArray = $entry->toArray();
 
-    $pa['editedon'] = $entry->get('editedon') == '0000-00-00 00:00:00' || $entry->get('editedon') == null
+    $entryArray['editedon'] = $entry->get('editedon') == '0000-00-00 00:00:00'
+                           || $entry->get('editedon') == null
         ? ''
-        : strftime('%b %d, %Y %I:%M %p',$entry->get('editedon'));
+        : strftime('%b %d, %Y %I:%M %p',strtotime($entry->get('editedon')));
 
-    $pa['menu'] = array(
+    $entryArray['menu'] = array(
         array(
             'text' => $modx->lexicon('entry_update'),
             'handler' => array( 'xtype' => 'modx-window-lexicon-entry-update' ),
@@ -68,7 +79,7 @@ foreach ($entries as $entry) {
             'handler' => 'this.remove.createDelegate(this,["entry_remove_confirm"])',
         ),
     );
-    $ps[] = $pa;
+    $list[] = $entryArray;
 }
 
-return $this->outputArray($ps,$count);
+return $this->outputArray($list,$count);

@@ -11,23 +11,25 @@ if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexic
 
 $_DATA = $modx->fromJSON($_POST['data']);
 
-if (!isset($_DATA['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));
+/* get entry */
+if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));
 $entry = $modx->getObject('modLexiconEntry',$_DATA['id']);
 if ($entry == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('entry_err_nfs'),$_DATA['id']));
+    return $modx->error->failure($modx->lexicon('entry_err_nfs',array('key' => $_DATA['id'])));
 }
 
-if (!isset($_DATA['name']) || $_DATA['name'] == '') {
+/* validation */
+if (empty($_DATA['name'])) {
     return $modx->error->failure($modx->lexicon('entry_err_ns_name'));
 }
 
-$entry->set('name',$_DATA['name']);
-$entry->set('value',$_DATA['value']);
-
+/* set and save entry */
+$entry->fromArray($_DATA);
 if ($entry->save() == false) {
     return $modx->error->failure($modx->lexicon('entry_err_save'));
 }
 
+/* clear cache */
 $entry->clearCache();
 
 /* log manager action */

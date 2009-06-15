@@ -11,28 +11,33 @@
  */
 $modx->lexicon->load('lexicon');
 
-if (isset($_REQUEST['limit'])) $limit = true;
+if (!$modx->hasPermission('languages')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+$limit = !empty($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
+if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
+if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $c = $modx->newQuery('modLexiconLanguage');
-$c->where($wa);
-$c->sortby('name', 'ASC');
+
+$c->sortby($_REQUEST['sort'], $_REQUEST['dir']);
 if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+
 $languages = $modx->getCollection('modLexiconLanguage',$c);
-$count = $modx->getCount('modLexiconLanguage',$wa);
+$count = $modx->getCount('modLexiconLanguage');
 
 $ps = array();
 foreach ($languages as $language) {
     $pa = $language->toArray();
 
     if ($language->get('name') != 'en') {
-    $pa['menu'] = array(
-        array(
-            'text' => $modx->lexicon('language_remove'),
-            'handler' => 'this.remove.createDelegate(this,["language_remove_confirm"])',
-        ),
-    );
+        $pa['menu'] = array(
+            array(
+                'text' => $modx->lexicon('language_remove'),
+                'handler' => 'this.remove.createDelegate(this,["language_remove_confirm"])',
+            ),
+        );
     }
     $ps[] = $pa;
 }

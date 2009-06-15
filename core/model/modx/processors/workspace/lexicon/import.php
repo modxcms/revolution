@@ -20,12 +20,12 @@ if ($_FILE['error'] != 0) return $modx->error->failure($modx->lexicon('lexicon_i
 
 
 /* get namespace */
-if (!isset($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
+if (empty($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
 $namespace = $modx->getObject('modNamespace',$_POST['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
 /* get topic */
-if (!isset($_POST['topic']) || $_POST['topic'] == '') {
+if (empty($_POST['topic'])) {
     return $modx->error->failure($modx->lexicon('topic_err_ns'));
 }
 $topic = $modx->getObject('modLexiconTopic',array(

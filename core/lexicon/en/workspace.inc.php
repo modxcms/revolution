@@ -29,6 +29,7 @@ $_lang['package_confirm_install'] = 'Are you sure you want to install this packa
 $_lang['package_confirm_remove'] = 'Are you sure you want to delete this package?';
 $_lang['package_confirm_uninstall'] = 'Are you sure you want to uninstall this package?';
 $_lang['package_created'] = 'Created new transport package with signature: [[+signature]]';
+$_lang['package_download_err'] = 'Could not download package at: [[+location]]';
 $_lang['package_download_err_create'] = 'Could not download and create transport package with signature: [[+signature]]';
 $_lang['package_download_err_ns'] = 'Please select at least one package version to download.';
 $_lang['package_err_create'] = 'Could not create the package.';

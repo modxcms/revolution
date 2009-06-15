@@ -11,18 +11,18 @@ $modx->lexicon->load('workspace');
 
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['signature'])) {
-    return $modx->error->failure($modx->lexicon('package_err_ns'));
-}
+if (empty($_REQUEST['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
 $modx->log(MODX_LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_find',array('signature' => $_REQUEST['signature'])));
-
 $package = $modx->getObject('transport.modTransportPackage', $_REQUEST['signature']);
 if ($package == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('package_err_nfs'),$_REQUEST['signature']));
+    return $modx->error->failure($modx->lexicon('package_err_nfs',array(
+        'signature' =>  $_REQUEST['signature'],
+    )));
 }
 
 $modx->log(MODX_LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_prep'));
 
+/* uninstall package */
 $options = array(
     'preexisting_mode' => $_POST['preexisting_mode'],
 );

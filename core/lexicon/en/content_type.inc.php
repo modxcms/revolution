@@ -1,5 +1,7 @@
 <?php
 /**
+ * Content Type English lexicon topic
+ *
  * @package modx
  * @subpackage lexicon
  */

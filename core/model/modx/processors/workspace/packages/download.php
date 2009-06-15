@@ -5,8 +5,7 @@
  * @package modx
  * @subpackage processors.workspace.packages
  */
-
-if (!isset($_POST['info'])) return $modx->error->failure('No package selected to download.');
+if (empty($_POST['info'])) return $modx->error->failure($modx->lexicon('package_download_err_ns'));
 
 /* grab location and signature */
 $a = split('::',$_POST['info']);
@@ -25,14 +24,16 @@ $package->set('provider',$_POST['provider']);
 
 /* download package */
 if (!$package->transferPackage($location,$_package_cache)) {
-    $msg = 'Could not download package at: '.$location;
+    $msg = $modx->lexicon('package_download_err',array('location' => $location));
     $modx->log(MODX_LOG_LEVEL_ERROR,$msg);
     return $modx->error->failure($msg);
 }
 
 /* now save */
 if ($package->save() == false) {
-    $modx->log(MODX_LOG_LEVEL_ERROR,$modx->lexicon('package_download_err_create',array('signature' => $signature)));
+    $msg = $modx->lexicon('package_download_err_create',array('signature' => $signature));
+    $modx->log(MODX_LOG_LEVEL_ERROR,$msg);
+    return $modx->error->failure($msg);
 }
 
 /* log manager action */

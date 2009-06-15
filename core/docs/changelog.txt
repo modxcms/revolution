@@ -3,7 +3,13 @@ This file shows the changes in recent releases of MODx. The most current release
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
-====================================
+==================================== 
+- Added indexes on modLexiconEntry table
+- Properly formatted lexicon strings still using sprintf
+- Fixed bug where created was not set on transport package creation
+- Made sure package grid paginates correctly if number of packages installed exceeds 20
+- Fixed Last Modified On on Lexicon grid
+- Optimized action, menu, language, content-type, lexicon, namespace processors
 - [#MODX-765] Added fix to prevent creation of blank system settings
 - Fixed bug in Safari with TV widget properties rendering
 - Consolidated resource getNodes processor, added access policy checks

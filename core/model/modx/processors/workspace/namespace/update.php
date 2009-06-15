@@ -12,14 +12,13 @@ $modx->lexicon->load('workspace','lexicon');
 
 if (!$modx->hasPermission('namespaces')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_POST['name']) || $_POST['name'] == '') {
-    return $modx->error->failure($modx->lexicon('namespace_err_ns'));
-}
+/* get namespace */
+if (empty($_POST['name'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
 $namespace = $modx->getObject('modNamespace',$_POST['name']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
-$namespace->set('path',$_POST['path']);
-
+/* set and save */
+$namespace->fromArray($_POST);
 if ($namespace->save() === false) {
     return $modx->error->failure($modx->lexicon('namespace_err_save'));
 }

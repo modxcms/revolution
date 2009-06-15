@@ -19,12 +19,16 @@ if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $c = $modx->newQuery('modWorkspace');
+$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+if ($limit) {
+    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+}
 $workspaces = $modx->getCollection('modWorkspace',$c);
 $count = $modx->getCount('modWorkspace');
 
-$ws = array();
+$list = array();
 foreach ($workspaces as $workspace) {
-    $wa = $workspace->toArray();
-    $ws[] = $wa;
+    $workspaceArray = $workspace->toArray();
+    $list[] = $workspaceArray;
 }
-return $this->outputArray($ws,$count);
+return $this->outputArray($list,$count);

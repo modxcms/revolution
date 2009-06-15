@@ -11,14 +11,13 @@ if (!$modx->hasPermission('namespaces')) return $modx->error->failure($modx->lex
 
 $_DATA = $modx->fromJSON($_POST['data']);
 
-if (!isset($_DATA['name']) || $_DATA['name'] == '') {
-    return $modx->error->failure($modx->lexicon('namespace_err_ns'));
-}
+/* get namespace */
+if (empty($_DATA['name'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
 $namespace = $modx->getObject('modNamespace',$_DATA['name']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
-$namespace->set('path',$_DATA['path']);
-
+/* set and save namespace */
+$namespace->fromArray($_DATA);
 if ($namespace->save() === false) {
     return $modx->error->failure($modx->lexicon('namespace_err_save'));
 }

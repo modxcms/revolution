@@ -14,13 +14,9 @@ if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexic
 $modx->log(XPDO_LOG_LEVEL_INFO,$modx->lexicon('package_install_info_start',array('signature' => $_REQUEST['signature'] )));
 
 /* find package */
-if (!isset($_REQUEST['signature'])) {
-    return $modx->error->failure($modx->lexicon('package_err_ns'));
-}
+if (empty($_REQUEST['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
 $package= $modx->getObject('transport.modTransportPackage',$_REQUEST['signature']);
-if ($package == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('package_err_nfs'),$_REQUEST['signature']));
-}
+if ($package == null) return $modx->error->failure(sprintf($modx->lexicon('package_err_nfs'),$_REQUEST['signature']));
 
 $modx->log(XPDO_LOG_LEVEL_INFO,$modx->lexicon('package_install_info_found'));
 

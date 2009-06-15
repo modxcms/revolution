@@ -1,9 +1,15 @@
 <?php
+/**
+ * Lexicon English language topic
+ *
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['entry'] = 'Entry';
 $_lang['entry_create'] = 'Create Lexicon Entry';
 $_lang['entry_err_create'] = 'An error occurred while trying to create the lexicon entry.';
 $_lang['entry_err_nf'] = 'Entry not found.';
-$_lang['entry_err_nfs'] = 'Entry not found with key: %s';
+$_lang['entry_err_nfs'] = 'Entry not found with key: [[+key]]';
 $_lang['entry_err_ns'] = 'Entry not specified.';
 $_lang['entry_err_remove'] = 'An error occurred while trying to remove the lexicon entry.';
 $_lang['entry_err_save'] = 'An error occurred while trying to save the lexicon entry.';
@@ -42,7 +48,7 @@ $_lang['topic'] = 'Topic';
 $_lang['topic_create'] = 'Create Topic';
 $_lang['topic_err_create'] = 'An error occurred while trying to create the topic.';
 $_lang['topic_err_nf'] = 'Topic not found.';
-$_lang['topic_err_nfs'] = 'Topic not found with name: %s';
+$_lang['topic_err_nfs'] = 'Topic not found with name: [[+name]]';
 $_lang['topic_err_ns'] = 'Topic not specified.';
 $_lang['topic_err_remove'] = 'An error occurred while trying to remove the topic.';
 $_lang['topic_err_save'] = 'An error occurred while trying to save the topic.';

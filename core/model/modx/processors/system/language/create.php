@@ -11,6 +11,8 @@ $modx->lexicon->load('lexicon');
 
 if (!$modx->hasPermission('languages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
+if (empty($_POST['name'])) return $modx->error->failure($modx->lexicon('language_err_ns'));
+
 $language = $modx->newObject('modLexiconLanguage');
 $language->set('name',$_POST['name']);
 

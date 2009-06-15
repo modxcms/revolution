@@ -16,32 +16,34 @@ $modx->lexicon->load('lexicon');
 
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));
+/* get entry */
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));
 $entry = $modx->getObject('modLexiconEntry',$_POST['id']);
 if ($entry == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('entry_err_nfs'),$_POST['id']));
+    return $modx->error->failure($modx->lexicon('entry_err_nfs',array('key' => $_POST['id'])));
 }
 
-if (!isset($_POST['topic'])) return $modx->error->failure($modx->lexicon('topic_err_ns'));
-$topic = $modx->getObject('modLexiconTopic',$_POST['topic']);
-if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
-
+/* verify topic if set */
+if (!empty($_POST['topic'])) {
+    $topic = $modx->getObject('modLexiconTopic',$_POST['topic']);
+    if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
+}
 
 $old_namespace = $entry->get('namespace');
 $old_topic = $entry->getOne('modLexiconTopic');
 
-if (!isset($_POST['name']) || $_POST['name'] == '') {
+/* validate name */
+if (empty($_POST['name'])) {
     return $modx->error->failure($modx->lexicon('entry_err_ns_name'));
 }
 
-$entry->set('name',$_POST['name']);
-$entry->set('value',$_POST['value']);
-$entry->set('namespace',$_POST['namespace']);
-$entry->set('topic',$topic->get('id'));
-$entry->set('language',$_POST['language']);
+/* save entry */
+$entry->fromArray($_POST);
+if ($entry->save() == false) {
+    return $modx->error->failure($modx->lexicon('entry_err_save'));
+}
 
-if (!$entry->save()) return $modx->error->failure($modx->lexicon('entry_err_save'));
-
+/* clear caches for old and new entries */
 $r = $modx->lexicon->clearCache($old_namespace.'/'.$old_topic->get('name').'.cache.php');
 $r = $modx->lexicon->clearCache($entry->get('namespace').'/'.$topic->get('name').'.cache.php');
 

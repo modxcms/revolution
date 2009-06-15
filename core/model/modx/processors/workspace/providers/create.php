@@ -13,20 +13,21 @@ $modx->lexicon->load('workspace');
 
 if (!$modx->hasPermission('providers')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_POST['name']) || $_POST['name'] == '') {
-    return $modx->error->failure($modx->lexicon('provider_err_ns_name'));
-}
-if (!isset($_POST['service_url']) || $_POST['service_url'] == '') {
-    return $modx->error->failure($modx->lexicon('provider_err_ns_url'));
+/* validation */
+if (empty($_POST['name'])) $modx->error->addField('name',$modx->lexicon('provider_err_ns_name'));
+if (empty($_POST['service_url'])) $modx->error->addField('service_url',$modx->lexicon('provider_err_ns_url'));
+
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
 }
 
 /* TODO: Check for a valid connection to the provider. */
 
+/* create provider */
 $provider = $modx->newObject('transport.modTransportProvider');
-$provider->set('name',$_POST['name']);
-$provider->set('description',$_POST['description']);
-$provider->set('service_url',$_POST['service_url']);
+$provider->fromArray($_POST);
 
+/* save provider */
 if ($provider->save() == false) {
     return $modx->error->failure($modx->lexicon('provider_err_save'));
 }

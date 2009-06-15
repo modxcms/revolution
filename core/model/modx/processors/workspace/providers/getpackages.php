@@ -21,8 +21,8 @@ if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
-
-$provider = $modx->getObject('transport.modTransportProvider',$_REQUEST['provider']);
+if (empty($_POST['provider'])) return $modx->error->failure($modx->lexicon('provider_err_ns'));
+$provider = $modx->getObject('transport.modTransportProvider',$_POST['provider']);
 if ($provider == null) {
     return $modx->error->failure($modx->lexicon('provider_err_nf'));
 }

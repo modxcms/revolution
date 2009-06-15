@@ -11,16 +11,19 @@ $modx->lexicon->load('lexicon');
 
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));
+/* get entry */
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));
 $entry = $modx->getObject('modLexiconEntry',$_POST['id']);
 if ($entry == null) {
     return $modx->error->failure(sprintf($modx->lexicon('entry_err_nfs'),$_POST['id']));
 }
 
+/* remove entry */
 if ($entry->remove() === false) {
     return $modx->error->failure($modx->lexicon('entry_err_save'));
 }
 
+/* clear cache */
 $entry->clearCache();
 
 /* log manager action */

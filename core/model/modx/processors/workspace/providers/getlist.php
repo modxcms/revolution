@@ -15,6 +15,7 @@ $modx->lexicon->load('workspace');
 
 if (!$modx->hasPermission('providers')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
+$limit = !empty($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
@@ -22,13 +23,16 @@ if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $c = $modx->newQuery('transport.modTransportProvider');
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+if ($limit) {
+    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+}
 $providers = $modx->getCollection('transport.modTransportProvider',$c);
 $count = $modx->getCount('transport.modTransportProvider');
 
-$ps = array();
+$list = array();
 foreach ($providers as $provider) {
-    $pa = $provider->toArray();
-    $pa['menu'] = array(
+    $providerArray = $provider->toArray();
+    $providerArray['menu'] = array(
         array(
             'text' => $modx->lexicon('provider_update'),
             'handler' => array( 'xtype' => 'modx-window-provider-update' ),
@@ -39,7 +43,7 @@ foreach ($providers as $provider) {
             'handler' => 'this.remove.createDelegate(this,["provider_confirm_remove"])',
         )
     );
-    $ps[] = $pa;
+    $list[] = $providerArray;
 }
 
-return $this->outputArray($ps,$count);
+return $this->outputArray($list,$count);

@@ -9,10 +9,10 @@ $modx->lexicon->load('lexicon');
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 $modx->lexicon->clearCache();
-$invdirs = array('.','..','.svn','country');
+$invdirs = array('.','..','.svn','country','.DS_Store','.settings');
 @ini_set('memory_limit','128M');
 
-$d = MODX_CORE_PATH.'/lexicon/';
+$d = $modx->getOption('core_path').'/lexicon/';
 $i = 0;
 
 /* loop through cultures */

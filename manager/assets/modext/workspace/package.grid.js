@@ -19,6 +19,7 @@ MODx.grid.Package = function(config) {
         ,url: MODx.config.connectors_url+'workspace/packages.php'
         ,fields: ['signature','created','updated','installed','state','workspace','provider','disabled','source','manifest','attributes','readme','menu']
         ,plugins: [this.exp]
+        ,pageSize: 20
         ,columns: [this.exp,{
                header: _('package_signature') ,dataIndex: 'signature' }
             ,{ header: _('created') ,dataIndex: 'created' }

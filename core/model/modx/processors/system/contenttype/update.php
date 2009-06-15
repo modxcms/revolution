@@ -19,9 +19,8 @@ $modx->lexicon->load('content_type');
 
 if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$_DATA = $modx->fromJSON($_POST['data']);
-
-if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('content_type_err_ns'));
+/* get content type */
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('content_type_err_ns'));
 $contenttype = $modx->getObject('modContentType',$_POST['id']);
 if ($contenttype == null) {
     return $modx->error->failure($modx->lexicon('content_type_err_nfs',array(
@@ -29,6 +28,7 @@ if ($contenttype == null) {
     )));
 }
 
+/* save content type */
 $contenttype->fromArray($_POST);
 if ($contenttype->save() == false) {
     $modx->error->checkValidation($contenttype);

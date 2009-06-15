@@ -11,23 +11,23 @@ if (!$modx->hasPermission('providers')) return $modx->error->failure($modx->lexi
 
 $_DATA = $modx->fromJSON($_POST['data']);
 
-if (!isset($_DATA['id'])) return $modx->error->failure($modx->lexicon('provider_err_ns'));
+/* get provider */
+if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('provider_err_ns'));
 $provider = $modx->getObject('transport.modTransportProvider',$_DATA['id']);
 if ($provider == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('provider_err_nfs'),$_DATA['id']));
+    return $modx->error->failure($modx->lexicon('provider_err_nfs',array('id' => $_DATA['id'])));
 }
 
-if (!isset($_DATA['name']) || $_DATA['name'] == '') {
-    return $modx->error->failure($modx->lexicon('provider_err_ns_name'));
-}
-if (!isset($_DATA['service_url']) || $_DATA['service_url'] == '') {
-    return $modx->error->failure($modx->lexicon('provider_err_ns_url'));
+/* validation */
+if (empty($_DATA['name'])) $modx->error->addField('name',$modx->lexicon('provider_err_ns_name'));
+if (empty($_DATA['service_url'])) $modx->error->addField('service_url',$modx->lexicon('provider_err_ns_url'));
+
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
 }
 
-$provider->set('name',$_DATA['name']);
-$provider->set('service_url',$_DATA['service_url']);
-$provider->set('description',$_DATA['description']);
-
+/* set fields and save */
+$provider->fromArray($_DATA);
 if ($provider->save() == false) {
     return $modx->error->failure($modx->lexicon('provider_err_save'));
 }

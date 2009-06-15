@@ -14,33 +14,41 @@
  */
 $modx->lexicon->load('workspace','namespace');
 
-if (isset($_REQUEST['limit'])) $limit = true;
+if (!$modx->hasPermission('namespaces')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+$limit = !empty($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
-
+/* build query */
 $c = $modx->newQuery('modNamespace');
-if (isset($_REQUEST['name']) && $_REQUEST['name'] != '') {
-    $c->where(array('name:LIKE' => '%'.$_REQUEST['name'].'%'));
+if (!empty($_REQUEST['name'])) {
+    $c->where(array(
+        'name:LIKE' => '%'.$_REQUEST['name'].'%',
+    ));
 }
 
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+if ($limit) {
+    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+}
+/* get namespaces */
 $namespaces = $modx->getCollection('modNamespace',$c);
 $count = $modx->getCount('modNamespace');
 
-$ps = array();
+/* loop through */
+$list = array();
 foreach ($namespaces as $namespace) {
-    $pa = $namespace->toArray();
-    $pa['menu'] = array(
+    $namespaceArray = $namespace->toArray();
+    $namespaceArray['menu'] = array(
         array(
             'text' => $modx->lexicon('namespace_remove'),
             'handler' => 'this.remove.createDelegate(this,["namespace_remove_confirm"])',
         )
     );
-    $ps[] = $pa;
+    $list[] = $namespaceArray;
 }
 
-return $this->outputArray($ps,$count);
+return $this->outputArray($list,$count);

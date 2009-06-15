@@ -19,14 +19,15 @@ $modx->lexicon->load('content_type');
 
 if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
+/* loop through content types */
 $_DATA = $modx->fromJSON($_POST['data']);
-
 foreach ($_DATA as $ct) {
-    if (!isset($ct['id'])) continue;
-
+    /* get content type */
+    if (empty($ct['id'])) continue;
     $contenttype = $modx->getObject('modContentType',$ct['id']);
     if ($contenttype == null) continue;
 
+    /* save content type */
     $contenttype->fromArray($ct);
     if ($contenttype->save() == false) {
         $modx->error->checkValidation($contenttype);

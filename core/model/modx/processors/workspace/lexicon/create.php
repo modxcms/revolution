@@ -15,26 +15,32 @@ $modx->lexicon->load('lexicon');
 
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
+/* verify namespace */
+if (empty($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
 $namespace = $modx->getObject('modNamespace',$_POST['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
-if (!isset($_POST['topic'])) return $modx->error->failure($modx->lexicon('topic_err_ns'));
+/* verify topic */
+if (empty($_POST['topic'])) return $modx->error->failure($modx->lexicon('topic_err_ns'));
 $topic = $modx->getObject('modLexiconTopic',$_POST['topic']);
 if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
 
+/* validation */
+if (empty($_POST['name'])) {
+    return $modx->error->failure($modx->lexicon('entry_err_ns_name'));
+}
+
+/* create entry */
 $entry = $modx->newObject('modLexiconEntry');
-$entry->set('name',$_POST['name']);
-$entry->set('namespace',$namespace->get('name'));
-$entry->set('topic',$topic->get('id'));
-$entry->set('language',$_POST['language']);
-$entry->set('value',$_POST['value']);
+$entry->fromArray($_POST);
 $entry->set('createdon',date('Y-m-d h:i:s'));
 
+/* save entry */
 if ($entry->save() === false) {
     return $modx->error->failure($modx->lexicon('entry_err_create'));
 }
 
+/* clear entry cache */
 $entry->clearCache();
 
 /* log manager action */

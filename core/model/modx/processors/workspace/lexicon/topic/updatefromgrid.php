@@ -11,16 +11,19 @@ if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexic
 
 $_DATA = $modx->fromJSON($_POST['data']);
 
-if (!isset($_DATA['id'])) return $modx->error->failure($modx->lexicon('topic_err_ns'));
+/* get topic */
+if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('topic_err_ns'));
 $topic = $modx->newObject('modLexiconTopic',$_DATA['id']);
 if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
 
-if (!isset($_DATA['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
-$namespace = $modx->newObject('modNamespace',$_DATA['namespace']);
-if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
+/* validate namespace if specified */
+if (!empty($_DATA['namespace'])) {
+    $namespace = $modx->newObject('modNamespace',$_DATA['namespace']);
+    if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
+}
 
-$topic->set('namespace',$namespace->get('name'));
-
+/* set and save topic */
+$topic->fromArray($_DATA);
 if ($topic->save() === false) {
     return $modx->error->failure($modx->lexicon('topic_err_save'));
 }

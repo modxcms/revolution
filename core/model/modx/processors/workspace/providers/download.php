@@ -12,7 +12,7 @@ $modx->lexicon->load('workspace');
 
 if (!$modx->hasPermission('providers')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_POST['provider'])) return $modx->error->failure($modx->lexicon('provider_err_ns'));
+if (empty($_POST['provider'])) return $modx->error->failure($modx->lexicon('provider_err_ns'));
 $provider = $modx->getObject('transport.modTransportProvider',$_POST['provider']);
 if ($provider == null) return $modx->error->failure($modx->lexicon('provider_err_nf'));
 

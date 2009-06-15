@@ -13,6 +13,9 @@
  */
 $modx->lexicon->load('content_type');
 
+if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+$limit = !empty($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
@@ -20,9 +23,10 @@ if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $c = $modx->newQuery('modContentType');
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
+if ($limit) {
+    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+}
 $types = $modx->getCollection('modContentType',$c);
-
 $count = $modx->getCount('modContentType');
 
 $cts = array();

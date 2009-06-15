@@ -17,13 +17,16 @@ $modx->lexicon->load('content_type');
 
 if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_POST['name']) || $_POST['name'] == '') {
+/* prevent empty name */
+if (empty($_POST['name'])) {
     return $modx->error->failure($modx->lexicon('content_type_err_ns_name'));
 }
 
+/* create content type */
 $ct = $modx->newObject('modContentType');
 $ct->fromArray($_POST);
 
+/* save content type */
 if ($ct->save() == false) {
     $modx->error->checkValidation($ct);
     return $modx->error->failure($modx->lexicon('content_type_err_create'));

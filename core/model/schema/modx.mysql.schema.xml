@@ -188,11 +188,11 @@
         <composite alias="modResourceKeyword" class="modResourceKeyword" key="id" local="id" foreign="keyword_id" cardinality="many" owner="local" />
     </object>
     <object class="modLexiconEntry" table="lexicon_entries" extends="xPDOSimpleObject">
-        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="value" dbtype="text" phptype="string" null="false" default="" />
-        <field key="topic" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="1" />
-        <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
-        <field key="language" dbtype="varchar" precision="20" phptype="string" null="false" default="en" />
+        <field key="topic" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="1" index="index" />
+        <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" index="index" />
+        <field key="language" dbtype="varchar" precision="20" phptype="string" null="false" default="en" index="index" />
         <field key="createdon" dbtype="datetime" phptype="datetime" />
         <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         <aggregate alias="modNamespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
