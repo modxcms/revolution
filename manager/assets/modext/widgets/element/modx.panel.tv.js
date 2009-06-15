@@ -134,18 +134,8 @@ MODx.panel.TV = function(config) {
                             'select': {fn:this.showParameters,scope:this}
                         }
                     },{
-                        autoLoad: {
-                            url: MODx.config.connectors_url+'element/tv/renders.php'
-                            ,method: 'GET'
-                            ,params: {
-                               'action': 'getProperties'
-                               ,'context': 'mgr'
-                               ,'tv': config.tv
-                               ,'type': config.type || 'default' 
-                            }
-                            ,scripts: true
-                        }
-                        ,id: 'modx-widget-props'
+                        id: 'modx-widget-props'
+                        ,autoHeight: true
                     }]
                 },{
                     xtype: 'modx-panel-element-properties'
@@ -192,6 +182,7 @@ MODx.panel.TV = function(config) {
     });
     MODx.panel.TV.superclass.constructor.call(this,config);
     setTimeout("Ext.getCmp('modx-element-tree-panel').expand();",1000);
+    this.on('render',function() { this.showParameters(); },this);
 };
 Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     initialized: false
@@ -245,7 +236,10 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     }
     
     ,showParameters: function(cb,rc,i) {
-        Ext.get('modx-widget-props').load({
+        var pu = Ext.get('modx-widget-props').getUpdater();
+        pu.loadScripts = true;
+        
+        pu.update({
             url: MODx.config.connectors_url+'element/tv/renders.php'
             ,method: 'GET'
             ,params: {
@@ -256,6 +250,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             }
             ,scripts: true
         });
+        
     }
 });
-Ext.reg('modx-panel-tv',MODx.panel.TV);
+Ext.reg('modx-panel-tv',MODx.panel.TV); 

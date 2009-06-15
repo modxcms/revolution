@@ -1,5 +1,5 @@
 {literal}
-<div id="tv-wprops-form"></div>
+<div id="modx-tv-wprops-form"></div>
 
 <script type="text/javascript">
 var params = {
@@ -34,9 +34,9 @@ MODx.load({
         ,forceSelection: true
         ,typeAhead: false
         ,triggerAction: 'all'
-        ,value: params.default || 'no'
+        ,value: params['default'] || 'no'
     }]
-    ,renderTo: 'tv-wprops-form'
+    ,renderTo: 'modx-tv-wprops-form'
 });
 </script>
 {/literal}
