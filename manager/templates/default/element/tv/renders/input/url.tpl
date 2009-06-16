@@ -7,5 +7,5 @@
 	type="text"
 	value="{$tv->get('value')}"
 	style="width: 250px;"
-	onchange="javascript:triggerDirtyField(this);"
+	onchange="MODx.fireResourceFormChange();"
 />

@@ -4,7 +4,7 @@
 		type="checkbox" 
 		value="{$item.value}"
 		{if $item.checked} checked="checked"{/if}
-		onchange="javascript:triggerDirtyField(this);"
+		onchange="MODx.fireResourceFormChange();"
 	/>
 	{$item.text}
 	</label>

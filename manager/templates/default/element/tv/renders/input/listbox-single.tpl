@@ -1,5 +1,5 @@
 <select id="tv{$tv->id}" name="tv{$tv->id}"
-	onchange="javascript:triggerDirtyField(this);"
+	onchange="MODx.fireResourceFormChange();"
 	size="8"
 >
 {foreach from=$opts item=item}

@@ -1,7 +1,7 @@
 <input id="tv{$tv->id}" name="tv{$tv->id}"
 	type="text" class="datefield"
 	value="{$tv->get('value')}"
-	onblur="javascript:triggerDirtyField(this);"
+	onblur="MODx.fireResourceFormChange();"
 />
 
 <script type="text/javascript">

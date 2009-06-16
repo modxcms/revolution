@@ -11,7 +11,7 @@ MODx.panel.ResourceTV = function(config) {
     Ext.applyIf(config,{
         contentEl: 'modx-tab-tvs'
         ,id: 'modx-panel-resource-tv'
-        ,title: _('settings_templvars')
+        ,title: _('template_variables')
         ,class_key: ''
         ,resource: ''
         ,autoLoad: this.autoload(config)

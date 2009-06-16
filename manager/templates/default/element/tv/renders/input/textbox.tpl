@@ -3,5 +3,5 @@
 	value="{$tv->get('value')|escape}"
 	{$style}
 	tvtype="{$tv->type}"
-	onchange="javascript:triggerDirtyField(this);" 
+	onchange="MODx.fireResourceFormChange();" 
 />

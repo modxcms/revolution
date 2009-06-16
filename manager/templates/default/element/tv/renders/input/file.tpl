@@ -2,11 +2,11 @@
 	type="text"
 	value="{$tv->get('value')}"
 	{$style}
-	onchange="javascript:triggerDirtyField(this);" 
+	onchange="MODx.fireResourceFormChange();" 
 />&nbsp;
 <input type="button" 
 	value="{$_lang.insert}"
-	onclick="loadBrowser('tv{$tv->id}'); return false;" 
+	onclick="loadBrowser('tv{$tv->id}'); MODx.fireResourceFormChange();" 
 />
 <div id="browser_tv{$tv->id}"></div>
 

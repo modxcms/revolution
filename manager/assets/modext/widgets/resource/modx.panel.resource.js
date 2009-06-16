@@ -362,11 +362,12 @@ MODx.triggerRTEOnChange = function() {
 }
 
 
+MODx.fireResourceFormChange = function(f,nv,ov) {
+    Ext.getCmp('modx-panel-resource').fireEvent('fieldChange');
+};
 MODx.loadAccordionPanels = function() {
     var va = [];
-    var oc = function(f,nv,ov) {
-        Ext.getCmp('modx-panel-resource').fireEvent('fieldChange');
-    };
+    var oc = MODx.fireResourceFormChange;
     va.push({
         xtype: 'checkbox'
         ,fieldLabel: _('resource_folder')
