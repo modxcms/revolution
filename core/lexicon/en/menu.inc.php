@@ -1,7 +1,8 @@
 <?php
 /**
- * English language strings for Menus
+ * Menu English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

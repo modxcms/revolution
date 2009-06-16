@@ -1,4 +1,11 @@
 <?php
+/**
+ * Package Builder English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['as_system_settings'] = 'System Settings';
 $_lang['as_context_settings'] = 'Context Settings';
 $_lang['as_lexicon_entries'] = 'Lexicon Entries';

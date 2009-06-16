@@ -81,11 +81,11 @@ MODx.grid.ElementProperties = function(config) {
             ,scope: this
         }]
         ,bbar: [{
-            text: 'Import Properties'
+            text: _('properties_import')
             ,handler: this.importProperties
             ,scope: this
         },'-',{
-            text: 'Export Properties'
+            text: _('properties_export')
             ,handler: this.exportProperties
             ,scope: this
         }]

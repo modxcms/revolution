@@ -1,4 +1,11 @@
 <?php
+/**
+ * Namespace English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['namespace'] = 'Namespace';
 $_lang['namespace_create'] = 'Create Namespace';
 $_lang['namespace_err_create'] = 'An error occurred while trying to create the namespace.';

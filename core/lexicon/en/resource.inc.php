@@ -1,4 +1,11 @@
 <?php
+/**
+ * Resource English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['access'] = 'Access';
 $_lang['changes'] = 'Changes';
 $_lang['class_key'] = 'Class Key';

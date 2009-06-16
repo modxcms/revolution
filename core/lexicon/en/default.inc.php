@@ -1,8 +1,6 @@
 <?php
 /**
- * Default English language strings
- *
- * TODO: clean out deprecated strings
+ * Default English lexicon topic
  *
  * @language english
  * @package modx
@@ -109,6 +107,47 @@ $_lang['event_id'] = 'Event Id';
 $_lang['existing_category'] = 'Existing Category';
 $_lang['expand_all'] = 'Expand All';
 $_lang['expand_tree'] = 'Expand tree';
+$_lang['ext_afterpage'] = 'of {0}';
+$_lang['ext_beforepage'] = 'Page';
+$_lang['ext_checkboxinv'] = 'You must select at least one item in this group';
+$_lang['ext_choosemonth'] = 'Choose a month (Control+Up/Down to move years)';
+$_lang['ext_column_lock'] = 'Lock Column';
+$_lang['ext_column_unlock'] = 'Unlock Column';
+$_lang['ext_columns'] = 'Columns';
+$_lang['ext_dateinv'] = '{0} is not a valid date - it must be in the format {1}';
+$_lang['ext_datemax'] = 'The date in this field must be before {0}';
+$_lang['ext_datemin'] = 'The date in this field must be after {0}';
+$_lang['ext_displaying'] = 'Displaying {0} - {1} of {2}';
+$_lang['ext_emptygroup'] = '(None)';
+$_lang['ext_emptymsg'] = 'No data to display';
+$_lang['ext_first'] = 'First Page';
+$_lang['ext_groupby'] = 'Group By This Field';
+$_lang['ext_inv_alpha'] = 'This field should only contain letters and _';
+$_lang['ext_inv_alphanum'] = 'This field should only contain letters, numbers and _';
+$_lang['ext_inv_email'] = 'This field should be an e-mail address in the format "user@domain.com"';
+$_lang['ext_inv_url'] = 'This field should be a URL in the format "http://www.domain.com"';
+$_lang['ext_invalidfield'] = 'The value in this field is invalid.';
+$_lang['ext_last'] = 'Last Page';
+$_lang['ext_mindate'] = 'This date is before the minimum date.';
+$_lang['ext_minlenfield'] = 'The minimum length for this field is {minLength}';
+$_lang['ext_minvalfield'] = 'The minimum value for this field is {0}';
+$_lang['ext_maxdate'] = 'This date is before the maximum date.';
+$_lang['ext_maxlenfield'] = 'The maximum length for this field is {maxLength}';
+$_lang['ext_maxvalfield'] = 'The maximum value for this field is {0}';
+$_lang['ext_nanfield'] = '{0} is not a valid number.';
+$_lang['ext_next'] = 'Next Page';
+$_lang['ext_nextmonth'] = 'Next Month (Control+Right)';
+$_lang['ext_prev'] = 'Previous Page';
+$_lang['ext_prevmonth'] = 'Previous Month (Control+Left)';
+$_lang['ext_refresh'] = 'Refresh';
+$_lang['ext_showgroups'] = 'Show in Groups';
+$_lang['ext_sortasc'] = 'Sort Ascending';
+$_lang['ext_sortdesc'] = 'Sort Descending';
+$_lang['ext_tabclose'] = 'Close this tab';
+$_lang['ext_timeinv'] = '{0} is not a valid time';
+$_lang['ext_timemax'] = 'The time in this field must be equal to or before {0}';
+$_lang['ext_timemin'] = 'The time in this field must be equal to or after {0}';
+$_lang['ext_today_tip'] = '{0} (Spacebar)';
 $_lang['failure'] = 'Failure';
 $_lang['female'] = 'Female';
 $_lang['files'] = 'Files';
@@ -303,6 +342,7 @@ $_lang['title'] = 'Title';
 $_lang['tmplvar'] = 'Template Variable';
 $_lang['tmplvars'] = 'Template Variables';
 $_lang['to'] = 'to';
+$_lang['today'] = 'Today';
 $_lang['total'] = 'total';
 $_lang['track_visitors_title'] = 'Track Visitors';
 $_lang['tree_collapse'] = 'Collapse tree';
@@ -343,3 +383,24 @@ $_lang['xtype'] = 'Field Type';
 $_lang['xtype_desc'] = 'The field type of the setting. This can be: textfield, textarea, or boolean.';
 $_lang['yes'] = 'Yes';
 $_lang['yesno'] = 'Yes/No';
+
+$_lang['january'] = 'January';
+$_lang['february'] = 'February';
+$_lang['march'] = 'March';
+$_lang['april'] = 'April';
+$_lang['may'] = 'May';
+$_lang['june'] = 'June';
+$_lang['july'] = 'July';
+$_lang['august'] = 'August';
+$_lang['september'] = 'September';
+$_lang['october'] = 'October';
+$_lang['november'] = 'November';
+$_lang['december'] = 'December';
+
+$_lang['sunday'] = 'Sunday';
+$_lang['monday'] = 'Monday';
+$_lang['tuesday'] = 'Tuesday';
+$_lang['wednesday'] = 'Wednesday';
+$_lang['thursday'] = 'Thursday';
+$_lang['friday'] = 'Friday';
+$_lang['saturday'] = 'Saturday';

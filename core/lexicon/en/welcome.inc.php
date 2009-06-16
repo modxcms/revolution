@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Welcome English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['modx_news'] = 'MODx News';
 $_lang['security_notices'] = 'Security Notices';
 $_lang['welcome_messages'] = 'Your Inbox contains <strong>%d</strong> message(s), of which <strong>%s</strong> are unread.';

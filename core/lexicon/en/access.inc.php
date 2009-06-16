@@ -1,8 +1,8 @@
 <?php
 /**
- * Default Access English language strings
+ * Access English lexicon topic
  *
- * @language english
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

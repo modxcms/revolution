@@ -1,4 +1,11 @@
 <?php
+/**
+ * System Info English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['database_charset'] = 'Database charset';
 $_lang['database_name'] = 'Database name';
 $_lang['database_server'] = 'Database server';

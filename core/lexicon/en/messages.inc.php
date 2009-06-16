@@ -1,4 +1,11 @@
 <?php
+/**
+ * Messages English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['all'] = 'All';
 $_lang['date_sent'] = 'Date Sent';
 $_lang['forward'] = 'Forward';

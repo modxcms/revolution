@@ -1,4 +1,11 @@
 <?php
+/**
+ * TV English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['has_access'] = 'Has Access?';
 $_lang['rank'] = 'Rank';
 $_lang['rendering_options'] = 'Rendering Options';

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Manager Log English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['action'] = 'Action';
 $_lang['date_end'] = 'End Date';
 $_lang['date_start'] = 'Start Date';

@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ==================================== 
+- [#MODX-762] Added in missing lexicon entries to hardcoded strings
+- Added modx.localization.js for i18n translations
 - Added indexes on modLexiconEntry table
 - Properly formatted lexicon strings still using sprintf
 - Fixed bug where created was not set on transport package creation

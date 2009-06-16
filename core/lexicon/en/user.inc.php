@@ -1,15 +1,16 @@
 <?php
 /**
- * English User language files
+ * User English lexicon topic
  *
- * @language english
+ * @language en
  * @package modx
- * @subpackage processors
+ * @subpackage lexicon
  */
 $_lang['authority'] = 'Authority';
 $_lang['change_password'] = 'Change Password';
 $_lang['change_password_confirm'] = 'Confirm password';
 $_lang['change_password_new'] = 'New password';
+$_lang['login_options'] = 'Login Options';
 $_lang['password'] = 'Password';
 $_lang['password_confirm'] = 'Confirm Password';
 $_lang['password_gen_gen'] = 'Let MODx generate a password.';

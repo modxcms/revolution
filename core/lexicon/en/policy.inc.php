@@ -1,4 +1,11 @@
 <?php
+/**
+ * Access Policy English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['policies'] = 'Access Policies';
 $_lang['policy'] = 'Access Policy';
 $_lang['policy_create'] = 'Create Access Policy';

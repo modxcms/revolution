@@ -1,4 +1,11 @@
 <?php
+/**
+ * File English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['file_cm_addText'] = 'Add';
 $_lang['file_cm_clickRemoveText'] = 'Click to remove';
 $_lang['file_cm_clickStopText'] = 'Click to stop';

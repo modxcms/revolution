@@ -1,4 +1,11 @@
 <?php
+/**
+ * TV Widget English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['attributes'] = 'Attributes';
 $_lang['capitalize'] = 'Capitalize';
 $_lang['checkbox'] = 'Check Box';

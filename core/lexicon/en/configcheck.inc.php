@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Config Check English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['configcheck_admin'] = 'Please contact a systems administrator and warn them about this message!';
 $_lang['configcheck_cache'] = 'cache directory not writable';
 $_lang['configcheck_cache_msg'] = 'MODx cannot write to the cache directory. MODx will still function as expected, but no caching will take place. To solve this, make the /_cache/ directory writable.';

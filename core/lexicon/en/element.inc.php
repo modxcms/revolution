@@ -10,3 +10,5 @@ $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Element not found.';
 $_lang['element_err_ns'] = 'Element not specified.';
 $_lang['quick_create'] = 'Quick Create';
+$_lang['properties_export'] = 'Export Properties';
+$_lang['properties_import'] = 'Import Properties';

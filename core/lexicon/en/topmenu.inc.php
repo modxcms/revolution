@@ -1,6 +1,10 @@
 <?php
 /**
+ * Top Menu English lexicon topic
+ *
+ * @language en
  * @package modx
+ * @subpackage lexicon
  */
 $_lang['edit_menu'] = 'Actions';
 $_lang['edit_menu_desc'] = 'Manage Actions and the Top Menu structure.';
@@ -41,6 +45,7 @@ $_lang['messages'] = 'Messages';
 $_lang['messages_desc'] = 'View your messages and send new ones to users.';
 $_lang['namespaces'] = 'Namespaces';
 $_lang['namespaces_desc'] = 'Handle namespaces, which distinguish between different custom-added components.';
+$_lang['new_document'] = 'New Document';
 $_lang['new_resource'] = 'New Resource';
 $_lang['new_static_resource'] = 'New Static Resource';
 $_lang['new_symlink'] = 'New Symlink';

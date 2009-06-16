@@ -1,5 +1,8 @@
 <?php
 /**
+ * Context English lexicon topic
+ *
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

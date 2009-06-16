@@ -1,7 +1,8 @@
 <?php
 /**
- * English language strings for MODx Dashboard
+ * Welcome Page English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

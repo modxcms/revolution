@@ -9,17 +9,21 @@ MODx = function(config) {
     config = config || {};
     MODx.superclass.constructor.call(this,config);
     this.config = config;
-    this.initQuickTips();
-    this.request = this.getURLParameters();
-    this.Ajax = this.load({ xtype: 'modx-ajax' });
-    Ext.override(Ext.form.Field,{
-        defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on" }
-    });
+    this.startup();
 };
 Ext.extend(MODx,Ext.Component,{
     config: {}
     ,util:{},window:{},panel:{},tree:{},form:{},grid:{},combo:{},toolbar:{},page:{},msg:{}
     ,Ajax:{}
+    
+    ,startup: function() {
+        this.initQuickTips();
+        this.request = this.getURLParameters();
+        this.Ajax = this.load({ xtype: 'modx-ajax' });
+        Ext.override(Ext.form.Field,{
+            defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on" }
+        });
+    }
     
     ,load: function() {
         var a = arguments, l = a.length;
@@ -105,7 +109,6 @@ Ext.extend(MODx,Ext.Component,{
     }
 });
 Ext.reg('modx',MODx);
-
 
 /**
  * An override class for Ext.Ajax, which adds success/failure events.

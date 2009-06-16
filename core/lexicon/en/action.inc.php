@@ -1,4 +1,11 @@
 <?php
+/**
+ * Action English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['action'] = 'Action';
 $_lang['action_confirm_remove'] = 'Are you sure you want to remove this action? This could potentially break your MODx manager interface.';
 $_lang['action_create'] = 'Create Action';

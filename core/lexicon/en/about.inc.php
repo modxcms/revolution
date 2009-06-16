@@ -1,4 +1,11 @@
 <?php
+/**
+ * About English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
 $_lang['about_msg'] = 'MODx is a <a href="http://modxcms.com/what-is-modx.html" target="_blank">PHP Application Framework and Content Management System</a> licensed under the <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> and (at your option) any later version.';
 $_lang['about_title'] = 'About MODx';
 $_lang['credits'] = 'Credits';

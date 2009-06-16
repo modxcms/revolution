@@ -1,7 +1,8 @@
 <?php
 /**
- * English Language Topic for property sets
+ * Property Set English lexicon topic
  *
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

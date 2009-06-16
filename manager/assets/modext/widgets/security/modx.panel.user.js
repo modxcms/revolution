@@ -277,7 +277,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 }]
             },{
                 id: 'modx-user-fs-blocked'
-                ,title: 'Login Options'
+                ,title: _('login_options')
                 ,xtype: 'fieldset'
                 ,items: [{
                     id: 'modx-user-logincount'
