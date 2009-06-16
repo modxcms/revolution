@@ -102,11 +102,6 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
             ,sortable: true
 			,editor: { xtype: 'textfield' }
 		},{
-            header: _('role')
-            ,dataIndex: 'role'
-            ,sortable: true
-            ,editor: { xtype: 'modx-combo-role' ,renderer: true }
-        },{
 			header: _('user_block')
             ,dataIndex: 'blocked'
 			,width: 80
