@@ -3,7 +3,8 @@ This file shows the changes in recent releases of MODx. The most current release
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
-==================================== 
+====================================
+- [#MODX-745] Added 'cancel' button to go back to policy page when updating a policy 
 - [#MODX-573] Removed no-longer-applicable 'role' column from users grid, fixed capitalization issues in processors
 - [#MODX-762] Added in missing lexicon entries to hardcoded strings
 - Added modx.localization.js for i18n translations

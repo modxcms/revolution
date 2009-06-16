@@ -14,6 +14,16 @@ MODx.page.UpdateAccessPolicy = function(config) {
             ,renderTo: 'modx-panel-access-policy'
             ,policy: config.policy
         }]
+        ,actions: {
+            'new': MODx.action['security/access/policy']
+            ,edit: MODx.action['security/access/policy/update']
+            ,cancel: MODx.action['security/access/policy']
+        }
+        ,buttons: [{
+            process: 'cancel'
+            ,text: _('cancel')
+            ,params: {a:MODx.action['security/access/policy']}
+        }]
     });
     MODx.page.UpdateAccessPolicy.superclass.constructor.call(this,config);
 };
