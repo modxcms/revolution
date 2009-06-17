@@ -23,4 +23,15 @@ class modLexiconLanguage extends xPDOObject {
         }
         return false;
     }
+
+    /**
+     * Overrides xPDOObject::save to clear lexicon cache on saving.
+     *
+     * {@inheritdoc}
+     */
+    function save($cacheFlag= null) {
+        $rt= parent :: save($cacheFlag);
+        $this->clearCache();
+        return $rt;
+    }
 }

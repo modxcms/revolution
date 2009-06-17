@@ -1,5 +1,10 @@
 <?php
 /**
+ * modContext
+ *
+ * @package modx
+ */
+/**
  * Represents a virtual site context within a modX repository.
  *
  * @package modx
@@ -30,6 +35,7 @@ class modContext extends modAccessibleObject {
      * preparing the context for use.
      * {@internal You can override this behavior here, but you will only need to
      * override the modCacheManager::generateContext() method in most cases}}
+     * @access public
      * @param boolean $regenerate If true, the existing cache file will be ignored
      * and regenerated.
      * @return boolean Indicates if the context was successfully prepared.
@@ -58,6 +64,7 @@ class modContext extends modAccessibleObject {
     /**
      * Returns the file name representing this context in the cache.
      *
+     * @access public
      * @return string The cache filename.
      */
     function getCacheKey() {
@@ -112,6 +119,7 @@ class modContext extends modAccessibleObject {
      * initialized for the modX instance, and the scheme is not specified, an
      * empty string, or abs, the method will force the scheme to full.
      *
+     * @access public
      * @param integer $id The id of a resource.
      * @param string $args A query string to append to the generated URL.
      * @param mixed $scheme The scheme indicates in what format the URL is generated.<br>
@@ -158,7 +166,7 @@ class modContext extends modAccessibleObject {
 
             if ($found) {
                 if ($args != '' && $config['friendly_urls'] == 1) {
-                    // add ? to $args if missing
+                    /* add ? to $args if missing */
                     $c= substr($args, 0, 1);
                     if (strpos($config['friendly_url_prefix'], '?') === false) {
                         if ($c == '&')
@@ -171,7 +179,7 @@ class modContext extends modAccessibleObject {
                     }
                 }
                 elseif ($args != '') {
-                    // add & to $args if missing
+                    /* add & to $args if missing */
                     $c= substr($args, 0, 1);
                     if ($c == '?')
                         $args= '&' . substr($args, 1);

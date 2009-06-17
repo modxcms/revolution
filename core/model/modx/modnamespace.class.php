@@ -1,7 +1,13 @@
 <?php
 /**
+ * modNamespace
+ *
  * @package modx
- * @subpackage mysql
+ */
+/**
+ * Represents a Component in the MODx framework.
+ *
+ * @package modx
  */
 class modNamespace extends xPDOObject {
     function modNamespace(& $xpdo) {
@@ -11,4 +17,3 @@ class modNamespace extends xPDOObject {
         parent :: __construct($xpdo);
     }
 }
-?>

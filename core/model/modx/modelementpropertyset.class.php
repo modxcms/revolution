@@ -1,7 +1,12 @@
 <?php
 /**
+ * modElementPropertySet
+ *
+ * @package modx
+ */
+/**
  * Represents a modPropertySet relation to a specific modElement.
- * 
+ *
  * @package modx
  * @subpackage mysql
  */
@@ -15,6 +20,8 @@ class modElementPropertySet extends xPDOObject {
 
     /**
      * Returns related modElement instances based on the element_class column.
+     *
+     * {@inheritDoc}
      */
     function & getOne($alias, $criteria= null, $cacheFlag= true) {
         if ($alias == 'Element') {

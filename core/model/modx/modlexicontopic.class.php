@@ -19,8 +19,19 @@ class modLexiconTopic extends xPDOSimpleObject {
      */
     function clearCache() {
         if ($this->xpdo && $this->xpdo->lexicon) {
-            return $this->xpdo->lexicon->clearCache($this->get('language').'/'.$this->get('namespace').'/'.$this->get('topic'));
+            return $this->xpdo->lexicon->clearCache($this->get('language').'/'.$this->get('namespace').'/'.$this->get('name'));
         }
         return false;
+    }
+
+    /**
+     * Overrides xPDOObject::save to clear lexicon cache on saving.
+     *
+     * {@inheritdoc}
+     */
+    function save($cacheFlag= null) {
+        $rt= parent :: save($cacheFlag);
+        $this->clearCache();
+        return $rt;
     }
 }

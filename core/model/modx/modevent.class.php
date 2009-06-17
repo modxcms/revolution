@@ -1,5 +1,10 @@
 <?php
 /**
+ * modEvent
+ *
+ * @package modx
+ */
+/**
  * Represents a system or user-defined event that can be invoked.
  *
  * @package modx

@@ -19,13 +19,16 @@
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
-
+/**
+ * modLexicon
+ *
+ * @package modx
+ */
 /**
  * The lexicon handling class.
  * Eventually needs to be reworked to allow for context/area-specific lexicons.
  *
  * @package modx
- * @subpackage mysql
  */
 class modLexicon {
     /**
@@ -37,6 +40,10 @@ class modLexicon {
     var $modx = null;
     /**
      * The actual language array.
+     *
+     * @todo Separate into separate arrays for each namespace (and maybe topic)
+     * so that no namespacing in lexicon entries is needed. Maybe keep a master
+     * array of entries, but then have subarrays for topic-specific referencing.
      *
      * @var array $_lexicon
      * @access private
@@ -51,9 +58,17 @@ class modLexicon {
      */
     var $_paths = array();
 
+    /**#@+
+     * Creates the modLexicon instance.
+     *
+     * @constructor
+     * @param modX &$modx A reference to the modX instance.
+     * @return modLexicon
+     */
     function modLexicon(&$modx) {
         $this->__construct($modx);
     }
+    /** @ignore */
     function __construct(&$modx) {
         $this->modx =& $modx;
         $this->_paths = array(
@@ -61,6 +76,7 @@ class modLexicon {
         );
         $this->_lexicon = array();
     }
+    /**#@-*/
 
     /**
      * Clears the lexicon cache for the specified path.
