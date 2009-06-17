@@ -33,25 +33,14 @@ $_POST['name'] = str_replace($invchars,'',$_POST['name']);
 $name_exists = $modx->getObject('modPlugin',array('name' => $_POST['name']));
 if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('plugin_err_exists_name'));
 
-if ($modx->error->hasError()) return $modx->error->failure();
 
 /* category */
-if (is_numeric($_POST['category'])) {
+if (!empty($_POST['category'])) {
     $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
-} else {
-    $category = $modx->getObject('modCategory',array('category' => $_POST['category']));
+    if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
-if ($category == null) {
-    $category = $modx->newObject('modCategory');
-    if ($_POST['category'] == '' || $_POST['category'] == 'null') {
-        $category->set('id',0);
-    } else {
-        $category->set('category',$_POST['category']);
-        if ($category->save() == false) {
-            return $modx->error->failure($modx->lexicon('category_err_save'));
-        }
-    }
-}
+
+if ($modx->error->hasError()) return $modx->error->failure();
 
 /* invoke OnBeforePluginFormSave event */
 $modx->invokeEvent('OnBeforePluginFormSave',array(
@@ -62,7 +51,6 @@ $modx->invokeEvent('OnBeforePluginFormSave',array(
 $plugin = $modx->newObject('modPlugin');
 $plugin->fromArray($_POST);
 $plugin->set('locked',!empty($_POST['locked']));
-$plugin->set('category',$category->get('id'));
 $properties = null;
 if (isset($_POST['propdata'])) {
     $properties = $_POST['propdata'];
@@ -111,7 +99,8 @@ $modx->invokeEvent('OnPluginFormSave',array(
 $modx->logManagerAction('new_plugin','modPlugin',$plugin->get('id'));
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
-
+if (!empty($_POST['clearCache'])) {
+    $cacheManager= $modx->getCacheManager();
+    $cacheManager->clearCache();
+}
 return $modx->error->success('',$plugin->get(array_diff(array_keys($plugin->_fields), array('plugincode'))));

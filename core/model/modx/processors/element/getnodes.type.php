@@ -112,10 +112,10 @@ foreach ($elements as $element) {
             }',
         );
     }
-    if ($elementClassKey == 'modChunk' && $modx->hasPermission('edit_chunk')) {
+    if ($modx->hasPermission('edit_'.$g[1])) {
         $menu[] = array(
-            'text' => $modx->lexicon('chunk_update_quick'),
-            'handler' => 'function(itm,e) { this.quickUpdateChunk(itm,e); }',
+            'text' => $modx->lexicon('quick_update_'.$g[1]),
+            'handler' => 'function(itm,e) { this.quickUpdate(itm,e,"'.$g[1].'"); }',
         );
     }
     if ($modx->hasPermission('new_'.$g[1])) {

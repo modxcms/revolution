@@ -240,7 +240,7 @@ Ext.reg('modx-window-namespace-create',MODx.window.CreateNamespace);
 MODx.window.QuickCreateChunk = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
-		title: _('chunk_create_quick')
+		title: _('quick_create_chunk')
 		,width: 600
 		,url: MODx.config.connectors_url+'element/chunk.php'
 		,action: 'create'
@@ -276,12 +276,10 @@ MODx.window.QuickCreateChunk = function(config) {
 Ext.extend(MODx.window.QuickCreateChunk,MODx.Window);
 Ext.reg('modx-window-quick-create-chunk',MODx.window.QuickCreateChunk);
 
-
-
 MODx.window.QuickUpdateChunk = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('chunk_update_quick')
+        title: _('quick_update_chunk')
         ,width: 600
         ,url: MODx.config.connectors_url+'element/chunk.php'
         ,action: 'update'
@@ -320,7 +318,7 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,id: 'modx-quc-snippet'
             ,fieldLabel: _('code')
             ,width: 400
-            ,grow: true
+            ,height: 380 
         }]
         ,keys: []
     });
@@ -328,3 +326,437 @@ MODx.window.QuickUpdateChunk = function(config) {
 };
 Ext.extend(MODx.window.QuickUpdateChunk,MODx.Window);
 Ext.reg('modx-window-quick-update-chunk',MODx.window.QuickUpdateChunk);
+
+
+
+MODx.window.QuickCreateTemplate = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('quick_create_template')
+        ,width: 600
+        ,url: MODx.config.connectors_url+'element/template.php'
+        ,action: 'create'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'category'
+            ,id: 'modx-qct-category'
+        },{
+            xtype: 'textfield'
+            ,name: 'templatename'
+            ,id: 'modx-qct-name'
+            ,fieldLabel: _('name')
+            ,width: 300
+        },{
+            xtype: 'textarea'
+            ,name: 'description'
+            ,id: 'modx-qct-description'
+            ,fieldLabel: _('description')
+            ,width: 300
+            ,rows: 2
+        },{
+            xtype: 'textarea'
+            ,name: 'content'
+            ,id: 'modx-qct-content'
+            ,fieldLabel: _('code')
+            ,width: 400
+            ,grow: true
+        }]
+        ,keys: []
+    });
+    MODx.window.QuickCreateTemplate.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.QuickCreateTemplate,MODx.Window);
+Ext.reg('modx-window-quick-create-template',MODx.window.QuickCreateTemplate);
+
+MODx.window.QuickUpdateTemplate = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('quick_update_template')
+        ,width: 600
+        ,url: MODx.config.connectors_url+'element/template.php'
+        ,action: 'update'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+            ,id: 'modx-qut-id'
+        },{
+            xtype: 'textfield'
+            ,name: 'templatename'
+            ,id: 'modx-qut-name'
+            ,fieldLabel: _('name')
+            ,width: 300
+        },{
+            xtype: 'textarea'
+            ,name: 'description'
+            ,id: 'modx-qut-description'
+            ,fieldLabel: _('description')
+            ,width: 300
+            ,rows: 2
+        },{
+            xtype: 'checkbox'
+            ,name: 'clearCache'
+            ,id: 'modx-qut-clearcache'
+            ,fieldLabel: _('clear_cache_on_save')
+            ,description: _('clear_cache_on_save_msg')
+            ,inputValue: 1
+            ,checked: true
+        },{
+            xtype: 'textarea'
+            ,name: 'content'
+            ,id: 'modx-qut-content'
+            ,fieldLabel: _('code')
+            ,width: 400
+            ,height: 380 
+        }]
+        ,keys: []
+    });
+    MODx.window.QuickUpdateTemplate.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.QuickUpdateTemplate,MODx.Window);
+Ext.reg('modx-window-quick-update-template',MODx.window.QuickUpdateTemplate);
+
+
+MODx.window.QuickCreateSnippet = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('quick_create_snippet')
+        ,width: 600
+        ,url: MODx.config.connectors_url+'element/snippet.php'
+        ,action: 'create'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'category'
+            ,id: 'modx-qcs-category'
+        },{
+            xtype: 'textfield'
+            ,name: 'name'
+            ,id: 'modx-qcs-name'
+            ,fieldLabel: _('name')
+            ,width: 300
+        },{
+            xtype: 'textarea'
+            ,name: 'description'
+            ,id: 'modx-qcs-description'
+            ,fieldLabel: _('description')
+            ,width: 300
+            ,rows: 2
+        },{
+            xtype: 'textarea'
+            ,name: 'snippet'
+            ,id: 'modx-qcs-snippet'
+            ,fieldLabel: _('code')
+            ,width: 400
+            ,grow: true
+        }]
+        ,keys: []
+    });
+    MODx.window.QuickCreateSnippet.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.QuickCreateSnippet,MODx.Window);
+Ext.reg('modx-window-quick-create-snippet',MODx.window.QuickCreateSnippet);
+
+MODx.window.QuickUpdateSnippet = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('quick_update_snippet')
+        ,width: 600
+        ,url: MODx.config.connectors_url+'element/snippet.php'
+        ,action: 'update'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+            ,id: 'modx-qus-id'
+        },{
+            xtype: 'textfield'
+            ,name: 'name'
+            ,id: 'modx-qus-name'
+            ,fieldLabel: _('name')
+            ,width: 300
+        },{
+            xtype: 'textarea'
+            ,name: 'description'
+            ,id: 'modx-qus-description'
+            ,fieldLabel: _('description')
+            ,width: 300
+            ,rows: 2
+        },{
+            xtype: 'checkbox'
+            ,name: 'clearCache'
+            ,id: 'modx-qus-clearcache'
+            ,fieldLabel: _('clear_cache_on_save')
+            ,description: _('clear_cache_on_save_msg')
+            ,inputValue: 1
+            ,checked: true
+        },{
+            xtype: 'textarea'
+            ,name: 'snippet'
+            ,id: 'modx-qus-snippet'
+            ,fieldLabel: _('code')
+            ,width: 400
+            ,height: 380 
+        }]
+        ,keys: []
+    });
+    MODx.window.QuickUpdateSnippet.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.QuickUpdateSnippet,MODx.Window);
+Ext.reg('modx-window-quick-update-snippet',MODx.window.QuickUpdateSnippet);
+
+
+
+MODx.window.QuickCreatePlugin = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('quick_create_plugin')
+        ,width: 600
+        ,url: MODx.config.connectors_url+'element/plugin.php'
+        ,action: 'create'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'category'
+            ,id: 'modx-qcp-category'
+        },{
+            xtype: 'textfield'
+            ,name: 'name'
+            ,id: 'modx-qcp-name'
+            ,fieldLabel: _('name')
+            ,width: 300
+        },{
+            xtype: 'textarea'
+            ,name: 'description'
+            ,id: 'modx-qcp-description'
+            ,fieldLabel: _('description')
+            ,width: 300
+            ,rows: 2
+        },{
+            xtype: 'textarea'
+            ,name: 'plugincode'
+            ,id: 'modx-qcp-plugincode'
+            ,fieldLabel: _('code')
+            ,width: 400
+            ,grow: true
+        }]
+        ,keys: []
+    });
+    MODx.window.QuickCreatePlugin.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.QuickCreatePlugin,MODx.Window);
+Ext.reg('modx-window-quick-create-plugin',MODx.window.QuickCreatePlugin);
+
+MODx.window.QuickUpdatePlugin = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('quick_update_plugin')
+        ,width: 600
+        ,url: MODx.config.connectors_url+'element/plugin.php'
+        ,action: 'update'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+            ,id: 'modx-qup-id'
+        },{
+            xtype: 'textfield'
+            ,name: 'name'
+            ,id: 'modx-qup-name'
+            ,fieldLabel: _('name')
+            ,width: 300
+        },{
+            xtype: 'textarea'
+            ,name: 'description'
+            ,id: 'modx-qup-description'
+            ,fieldLabel: _('description')
+            ,width: 300
+            ,rows: 2
+        },{
+            xtype: 'checkbox'
+            ,name: 'clearCache'
+            ,id: 'modx-qup-clearcache'
+            ,fieldLabel: _('clear_cache_on_save')
+            ,description: _('clear_cache_on_save_msg')
+            ,inputValue: 1
+            ,checked: true
+        },{
+            xtype: 'textarea'
+            ,name: 'plugincode'
+            ,id: 'modx-qup-plugincode'
+            ,fieldLabel: _('code')
+            ,width: 400
+            ,height: 380 
+        }]
+        ,keys: []
+    });
+    MODx.window.QuickUpdatePlugin.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.QuickUpdatePlugin,MODx.Window);
+Ext.reg('modx-window-quick-update-plugin',MODx.window.QuickUpdatePlugin);
+
+
+MODx.window.QuickCreateTV = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('quick_create_tv')
+        ,width: 600
+        ,url: MODx.config.connectors_url+'element/tv.php'
+        ,action: 'create'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'category'
+            ,id: 'modx-qctv-category'
+        },{
+            xtype: 'textfield'
+            ,name: 'name'
+            ,id: 'modx-qctv-name'
+            ,fieldLabel: _('name')
+            ,width: 300
+        },{
+            xtype: 'textarea'
+            ,name: 'description'
+            ,id: 'modx-qctv-description'
+            ,fieldLabel: _('description')
+            ,width: 300
+            ,rows: 2
+        },{
+            xtype: 'modx-combo-tv-input-type'
+            ,fieldLabel: _('tv_type')
+            ,name: 'type'
+            ,id: 'modx-qctv-type'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('tv_elements')
+            ,name: 'els'
+            ,id: 'modx-qctv-elements'
+            ,width: 250
+        },{
+            xtype: 'textarea'
+            ,fieldLabel: _('tv_default')
+            ,name: 'default_text'
+            ,id: 'modx-qctv-default-text'
+            ,width: 300
+            ,grow: true
+        },{
+            xtype: 'modx-combo-tv-widget'
+            ,fieldLabel: _('tv_output_type')
+            ,name: 'display'
+            ,hiddenName: 'display'
+            ,id: 'modx-qctv-display'
+            ,listeners: {
+                'select': {fn:this.showParameters,scope:this}
+            }
+        },{
+            id: 'modx-qctv-widget-props'
+            ,autoHeight: true
+        }]
+        ,keys: []
+    });
+    MODx.window.QuickCreateTV.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.QuickCreateTV,MODx.Window,{
+    showParameters: function(cb,rc,i) {
+        var pu = Ext.get('modx-qctv-widget-props').getUpdater();
+        pu.loadScripts = true;
+        
+        pu.update({
+            url: MODx.config.connectors_url+'element/tv/renders.php'
+            ,method: 'GET'
+            ,params: {
+               'action': 'getProperties'
+               ,'context': 'mgr'
+               ,'type': cb.getValue() || 'default'
+            }
+            ,scripts: true
+        });
+        
+    }
+});
+Ext.reg('modx-window-quick-create-tv',MODx.window.QuickCreateTV);
+
+MODx.window.QuickUpdateTV = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('quick_update_tv')
+        ,width: 600
+        ,url: MODx.config.connectors_url+'element/tv.php'
+        ,action: 'update'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+            ,id: 'modx-qutv-id'
+        },{
+            xtype: 'textfield'
+            ,name: 'name'
+            ,id: 'modx-qutv-name'
+            ,fieldLabel: _('name')
+            ,width: 300
+        },{
+            xtype: 'textarea'
+            ,name: 'description'
+            ,id: 'modx-qutv-description'
+            ,fieldLabel: _('description')
+            ,width: 300
+            ,rows: 2
+        },{
+            xtype: 'checkbox'
+            ,name: 'clearCache'
+            ,id: 'modx-qutv-clearcache'
+            ,fieldLabel: _('clear_cache_on_save')
+            ,description: _('clear_cache_on_save_msg')
+            ,inputValue: 1
+            ,checked: true
+        },{
+            xtype: 'modx-combo-tv-input-type'
+            ,fieldLabel: _('tv_type')
+            ,name: 'type'
+            ,id: 'modx-qutv-type'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('tv_elements')
+            ,name: 'els'
+            ,id: 'modx-qutv-elements'
+            ,width: 250
+        },{
+            xtype: 'textarea'
+            ,fieldLabel: _('tv_default')
+            ,name: 'default_text'
+            ,id: 'modx-qutv-default-text'
+            ,width: 300
+            ,grow: true
+        },{
+            xtype: 'modx-combo-tv-widget'
+            ,fieldLabel: _('tv_output_type')
+            ,name: 'display'
+            ,hiddenName: 'display'
+            ,id: 'modx-qutv-display'
+            ,listeners: {
+                'select': {fn:this.showParameters,scope:this}
+            }
+        },{
+            id: 'modx-qutv-widget-props'
+            ,autoHeight: true
+        }]
+        ,keys: []
+    });
+    MODx.window.QuickUpdateTV.superclass.constructor.call(this,config);
+    this.on('show',function() {
+        this.showParameters(Ext.getCmp('modx-qutv-display'));
+    },this);
+};
+Ext.extend(MODx.window.QuickUpdateTV,MODx.Window,{
+    showParameters: function(cb,rc,i) {
+        var pu = Ext.get('modx-qutv-widget-props').getUpdater();
+        pu.loadScripts = true;
+        
+        pu.update({
+            url: MODx.config.connectors_url+'element/tv/renders.php'
+            ,method: 'GET'
+            ,params: {
+               'action': 'getProperties'
+               ,'context': 'mgr'
+               ,'tv': this.config.record.id
+               ,'type': cb.getValue() || 'default'
+            }
+            ,scripts: true
+        });
+        
+    }
+});
+Ext.reg('modx-window-quick-update-tv',MODx.window.QuickUpdateTV);

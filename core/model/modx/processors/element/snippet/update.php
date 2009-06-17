@@ -48,26 +48,14 @@ if ($name_exists != null) {
     $modx->error->addField('name',$modx->lexicon('snippet_err_exists_name'));
 }
 
-if ($modx->error->hasError()) return $modx->error->failure();
 
 /* category */
-$category == null;
-if (is_numeric($_POST['category'])) {
+if (!empty($_POST['category'])) {
     $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
-} elseif (!empty($_POST['category'])) {
-    $category = $modx->getObject('modCategory',array('category' => $_POST['category']));
+    if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
-if ($category == null) {
-    $category = $modx->newObject('modCategory');
-    if ($_POST['category'] == '' || $_POST['category'] == 'null') {
-        $category->set('id',0);
-    } else {
-        $category->set('category',$_POST['category']);
-        if ($category->save() == false) {
-            return $modx->error->failure($modx->lexicon('category_err_save'));
-        }
-    }
-}
+
+if ($modx->error->hasError()) return $modx->error->failure();
 
 /* invoke OnBeforeSnipFormSave event */
 $modx->invokeEvent('OnBeforeSnipFormSave',array(
@@ -77,7 +65,6 @@ $modx->invokeEvent('OnBeforeSnipFormSave',array(
 
 $snippet->fromArray($_POST);
 $snippet->set('locked',!empty($_POST['locked']));
-$snippet->set('category',$category->get('id'));
 $properties = null;
 if (isset($_POST['propdata'])) {
     $properties = $_POST['propdata'];
@@ -99,7 +86,9 @@ $modx->invokeEvent('OnSnipFormSave',array(
 $modx->logManagerAction('snippet_update','modSnippet',$snippet->get('id'));
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+if (!empty($_POST['clearCache'])) {
+    $cacheManager= $modx->getCacheManager();
+    $cacheManager->clearCache();
+}
 
 return $modx->error->success();

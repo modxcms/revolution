@@ -30,25 +30,14 @@ $_POST['name'] = str_replace($invchars,'',$_POST['name']);
 $name_exists = $modx->getObject('modSnippet',array('name' => $_POST['name']));
 if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('snippet_err_exists_name'));
 
+/* category */
+if (!empty($_POST['category'])) {
+    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
+    if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
+}
+
 if ($modx->error->hasError()) return $modx->error->failure();
 
-/* category */
-if (is_numeric($_POST['category'])) {
-    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
-} else {
-    $category = $modx->getObject('modCategory',array('category' => $_POST['category']));
-}
-if ($category == null) {
-    $category = $modx->newObject('modCategory');
-    if ($_POST['category'] == '' || $_POST['category'] == 'null') {
-        $category->set('id',0);
-    } else {
-        $category->set('category',$_POST['category']);
-        if ($category->save() == false) {
-            return $modx->error->failure($modx->lexicon('category_err_save'));
-        }
-    }
-}
 
 /* invoke OnBeforeSnipFormSave event */
 $modx->invokeEvent('OnBeforeSnipFormSave',array(
@@ -60,7 +49,6 @@ $modx->invokeEvent('OnBeforeSnipFormSave',array(
 $snippet = $modx->newObject('modSnippet');
 $snippet->fromArray($_POST);
 $snippet->set('locked',!empty($_POST['locked']));
-$snippet->set('category',$category->get('id'));
 $properties = null;
 if (isset($_POST['propdata'])) {
     $properties = $_POST['propdata'];
@@ -83,7 +71,9 @@ $modx->invokeEvent('OnSnipFormSave',array(
 $modx->logManagerAction('snippet_create','modSnippet',$snippet->get('id'));
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+if (!empty($_POST['clearCache'])) {
+    $cacheManager= $modx->getCacheManager();
+    $cacheManager->clearCache();
+}
 
 return $modx->error->success('',$snippet->get(array_diff(array_keys($snippet->_fields), array('snippet'))));

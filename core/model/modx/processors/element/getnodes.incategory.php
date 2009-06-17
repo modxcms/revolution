@@ -5,9 +5,9 @@
 $nodes = array();
 /* 0: type,  1: element/category  2: elID  3: catID */
 $categoryId = isset($g[3]) ? $g[3] : ($g[1] == 'category' ? $g[2] : 0);
-$elementIdentifer = $g[0];
-$elementType = ucfirst($elementIdentifer);
-$elementClassKey = $ar_typemap[$elementIdentifer];
+$elementIdentifier = $g[0];
+$elementType = ucfirst($elementIdentifier);
+$elementClassKey = $ar_typemap[$elementIdentifier];
 
 /* first handle subcategories */
 $c = $modx->newQuery('modCategory');
@@ -25,7 +25,7 @@ $categories = $modx->getCollection('modCategory',$c);
 /* setup category menu */
 $categoryMenu = array();
 $categoryMenu[] = '-';
-if ($modx->hasPermission('new_'.$elementIdentifer)) {
+if ($modx->hasPermission('new_'.$elementIdentifier)) {
     $categoryMenu[] = array(
         'text' => $modx->lexicon('add_to_category_this',array('type' => $elementType)),
         'handler' => 'function(itm,e) {
@@ -71,7 +71,7 @@ foreach ($categories as $category) {
         'leaf' => false,
         'cls' => 'icon-category',
         'href' => '',
-        'type' => $elementIdentifer,
+        'type' => $elementIdentifier,
         'menu' => array('items' => $categoryMenu),
     );
     array_shift($categoryMenu);
@@ -83,11 +83,11 @@ $c = $modx->newQuery($elementClassKey);
 $c->where(array(
     'category' => $categoryId
 ));
-$c->sortby($elementIdentifer == 'template' ? 'templatename' : 'name','ASC');
+$c->sortby($elementIdentifier == 'template' ? 'templatename' : 'name','ASC');
 
 $elements = $modx->getCollection($elementClassKey,$c);
 foreach ($elements as $element) {
-    $name = $elementIdentifer == 'template' ? $element->get('templatename') : $element->get('name');
+    $name = $elementIdentifier == 'template' ? $element->get('templatename') : $element->get('name');
 
     $menu = array();
     $menu[] = array(
@@ -97,7 +97,7 @@ foreach ($elements as $element) {
         'header' => true,
     );
     $menu[] = '-';
-    if ($modx->hasPermission('edit_'.$elementIdentifer)) {
+    if ($modx->hasPermission('edit_'.$elementIdentifier)) {
         $menu[] = array(
             'text' => $modx->lexicon('edit').' '.$elementType,
             'handler' => 'function() {
@@ -107,16 +107,14 @@ foreach ($elements as $element) {
                  . '";
             }',
         );
-    }
-    if ($modx->hasPermission('edit_chunk') && $elementType == 'Chunk') {
         $menu[] = array(
-            'text' => $modx->lexicon('chunk_update_quick'),
+            'text' => $modx->lexicon('quick_update_'.$elementIdentifier),
             'handler' => 'function(itm,e) {
-                this.quickUpdateChunk(itm,e);
+                this.quickUpdate(itm,e,"'.$elementIdentifier.'");
             }',
         );
     }
-    if ($modx->hasPermission('new_'.$elementIdentifer)) {
+    if ($modx->hasPermission('new_'.$elementIdentifier)) {
         $menu[] = array(
             'text' => $modx->lexicon('duplicate').' '.$elementType,
             'handler' => 'function(itm,e) {
@@ -124,7 +122,7 @@ foreach ($elements as $element) {
             }',
         );
     }
-    if ($modx->hasPermission('delete_'.$elementIdentifer)) {
+    if ($modx->hasPermission('delete_'.$elementIdentifier)) {
         $menu[] = '-';
         $menu[] = array(
             'text' => $modx->lexicon('remove').' '.$elementType,
@@ -140,9 +138,9 @@ foreach ($elements as $element) {
         'pk' => $element->get('id'),
         'category' => $cat_id,
         'leaf' => 1,
-        'cls' => 'icon-'.$elementIdentifer,
-        'href' => 'index.php?a='.$ar_actionmap[$elementIdentifer].'&id='.$element->get('id'),
-        'type' => $elementIdentifer,
+        'cls' => 'icon-'.$elementIdentifier,
+        'href' => 'index.php?a='.$ar_actionmap[$elementIdentifier].'&id='.$element->get('id'),
+        'type' => $elementIdentifier,
         'menu' => array('items' => $menu),
     );
 }

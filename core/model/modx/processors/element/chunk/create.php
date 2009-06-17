@@ -35,32 +35,21 @@ if ($name_exists != null) {
     )));
 }
 
+/* category */
+if (!empty($_POST['category'])) {
+    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
+    if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
+}
+
 /* if has any errors, return */
 if ($modx->error->hasError()) {
     return $modx->error->failure();
-}
-
-/* category */
-if (is_numeric($_POST['category'])) {
-    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
-} else {
-    $category = $modx->getObject('modCategory',array('category' => $_POST['category']));
-}
-if ($category == null) {
-	$category = $modx->newObject('modCategory');
-	if ($_POST['category'] == '' || $_POST['category'] == 'null') {
-		$category->set('id',0);
-	} else {
-		$category->set('category',$_POST['category']);
-		$category->save();
-	}
 }
 
 /* set fields for the new chunk */
 $chunk = $modx->newObject('modChunk', $_POST);
 $chunk->fromArray($_POST);
 $chunk->set('locked',!empty($_POST['locked']));
-$chunk->set('category',$category->get('id'));
 
 /* invoke OnBeforeChunkFormSave event */
 $modx->invokeEvent('OnBeforeChunkFormSave',array(

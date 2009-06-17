@@ -35,21 +35,9 @@ if ($tv->get('locked') && $modx->hasPermission('edit_locked') == false) {
 }
 
 /* category */
-if (is_numeric($_POST['category'])) {
+if (!empty($_POST['category'])) {
     $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
-} else {
-    $category = $modx->getObject('modCategory',array('category' => $_POST['category']));
-}
-if ($category == null) {
-    $category = $modx->newObject('modCategory');
-    if ($_POST['category'] == '' || $_POST['category'] == 'null') {
-        $category->set('id',0);
-    } else {
-        $category->set('category',$_POST['category']);
-        if ($category->save() === false) {
-            return $modx->error->failure($modx->lexicon('category_err_save'));
-        }
-    }
+    if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
 /* invoke OnBeforeTVFormSave event */
@@ -90,7 +78,6 @@ $tv->set('elements',$_POST['els']);
 $tv->set('display_params',$display_params);
 $tv->set('rank', !empty($_POST['rank']) ? $_POST['rank'] : 0);
 $tv->set('locked', !empty($_POST['locked']));
-$tv->set('category',$category->get('id'));
 $properties = null;
 if (isset($_POST['propdata'])) {
     $properties = $_POST['propdata'];
@@ -166,7 +153,9 @@ $modx->invokeEvent('OnTVFormSave',array(
 $modx->logManagerAction('tv_update','modTemplateVar',$tv->get('id'));
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+if (!empty($_POST['clearCache'])) {
+    $cacheManager= $modx->getCacheManager();
+    $cacheManager->clearCache();
+}
 
 return $modx->error->success();

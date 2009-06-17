@@ -13,6 +13,12 @@ if ($modx->hasPermission('view_template')) {
             'text' => $modx->lexicon('new').' '.$modx->lexicon('template'),
             'handler' => 'function(itm,e) { this._createElement(itm,e); }',
         );
+        $templateMenu[] = array(
+            'text' => $modx->lexicon('quick_create_template'),
+            'handler' => 'function(itm,e) {
+                this.quickCreate(itm,e,"template");
+            }',
+        );
     }
     if (!empty($templateMenu)) $templateMenu[] = '-';
     if ($modx->hasPermission('new_category')) {
@@ -42,6 +48,12 @@ if ($modx->hasPermission('view_tv')) {
             'text' => $modx->lexicon('new').' '.$modx->lexicon('tmplvar'),
             'handler' => 'function(itm,e) {
                 this._createElement(itm,e);
+            }',
+        );
+        $tvMenu[] = array(
+            'text' => $modx->lexicon('quick_create_tv'),
+            'handler' => 'function(itm,e) {
+                this.quickCreate(itm,e,"tv");
             }',
         );
     }
@@ -77,12 +89,10 @@ if ($modx->hasPermission('view_chunk')) {
                 this._createElement(itm,e);
             }',
         );
-    }
-    if ($modx->hasPermission('new_chunk')) {
         $chunkMenu[] = array(
-            'text' => $modx->lexicon('chunk_create_quick'),
+            'text' => $modx->lexicon('quick_create_chunk'),
             'handler' => 'function(itm,e) {
-                this.quickCreateChunk(itm,e);
+                this.quickCreate(itm,e,"chunk");
             }',
         );
     }
@@ -118,6 +128,12 @@ if ($modx->hasPermission('view_snippet')) {
                 this._createElement(itm,e);
             }',
         );
+        $snippetMenu[] = array(
+            'text' => $modx->lexicon('quick_create_snippet'),
+            'handler' => 'function(itm,e) {
+                this.quickCreate(itm,e,"snippet");
+            }',
+        );
     }
     if (!empty($snippetMenu)) $snippetMenu[] = '-';
     if ($modx->hasPermission('new_category')) {
@@ -149,6 +165,12 @@ if ($modx->hasPermission('view_plugin')) {
             'text' => $modx->lexicon('new').' '.$modx->lexicon('plugin'),
             'handler' => 'function(itm,e) {
                 this._createElement(itm,e);
+            }',
+        );
+        $pluginMenu[] = array(
+            'text' => $modx->lexicon('quick_create_plugin'),
+            'handler' => 'function(itm,e) {
+                this.quickCreate(itm,e,"plugin");
             }',
         );
     }

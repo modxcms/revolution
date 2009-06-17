@@ -47,26 +47,13 @@ $name_exists = $modx->getObject('modTemplate',array(
 ));
 if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('template_err_exists_name'));
 
-if ($modx->error->hasError()) return $modx->error->failure();
-
 /* category */
-if (is_numeric($_POST['category'])) {
+if (!empty($_POST['category'])) {
     $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
-} else {
-    $category = $modx->getObject('modCategory',array('category' => $_POST['category']));
-}
-if ($category == null) {
-    $category = $modx->newObject('modCategory');
-    if ($_POST['category'] == '' || $_POST['category'] == 'null') {
-        $category->set('id',0);
-    } else {
-        $category->set('category',$_POST['category']);
-        if ($category->save() == false) {
-            return $modx->error->failure($modx->lexicon('category_err_save'));
-        }
-    }
+    if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
+if ($modx->error->hasError()) return $modx->error->failure();
 
 /* invoke OnBeforeTempFormSave event */
 $modx->invokeEvent('OnBeforeTempFormSave',array(
@@ -76,7 +63,6 @@ $modx->invokeEvent('OnBeforeTempFormSave',array(
 
 $template->fromArray($_POST);
 $template->set('locked',!empty($_POST['locked']));
-$template->set('category',$category->get('id'));
 $properties = null;
 if (isset($_POST['propdata'])) {
     $properties = $_POST['propdata'];
@@ -127,7 +113,9 @@ $modx->invokeEvent('OnTempFormSave',array(
 $modx->logManagerAction('template_update','modTemplate',$template->get('id'));
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+if (!empty($_POST['clearCache'])) {
+    $cacheManager= $modx->getCacheManager();
+    $cacheManager->clearCache();
+}
 
 return $modx->error->success();

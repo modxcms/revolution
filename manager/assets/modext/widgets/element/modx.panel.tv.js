@@ -96,6 +96,14 @@ MODx.panel.TV = function(config) {
                         ,allowBlank: false
                         ,value: 0
                     },{
+                        xtype: 'checkbox'
+                        ,fieldLabel: _('clear_cache_on_save')
+                        ,description: _('clear_cache_on_save_msg')
+                        ,name: 'clearCache'
+                        ,id: 'modx-tv-clear-cache'
+                        ,inputValue: 1
+                        ,checked: true
+                    },{
                         html: onTVFormRender
                         ,border: false
                     }]

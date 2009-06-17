@@ -289,6 +289,7 @@ MODx.combo.Category = function(config) {
 		,editable: false
         ,enableKeyEvents: true
 		,url: MODx.config.connectors_url+'element/category.php'
+        ,baseParams: { action: 'getList' ,showNone: true }
 	});
 	MODx.combo.Category.superclass.constructor.call(this,config);
 };

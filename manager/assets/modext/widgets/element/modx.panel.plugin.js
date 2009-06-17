@@ -84,6 +84,14 @@ MODx.panel.Plugin = function(config) {
                         ,name: 'locked'
                         ,id: 'modx-plugin-locked'
                     },{
+                        xtype: 'checkbox'
+                        ,fieldLabel: _('clear_cache_on_save')
+                        ,description: _('clear_cache_on_save_msg')
+                        ,name: 'clearCache'
+                        ,id: 'modx-plugin-clear-cache'
+                        ,inputValue: 1
+                        ,checked: true
+                    },{
                         html: MODx.onPluginFormRender
                         ,border: false
                     },{

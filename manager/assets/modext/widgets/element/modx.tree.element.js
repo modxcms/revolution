@@ -115,44 +115,44 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 		});
 	}
     
-    ,quickCreateChunk: function(itm,e) {
+    ,quickCreate: function(itm,e,type) {
         var r = {
             category: this.cm.activeNode.attributes.pk || ''
         };
         
-        if (!this.windows.quickCreateChunk) {
-            this.windows.quickCreateChunk = MODx.load({
-                xtype: 'modx-window-quick-create-chunk'
+        if (!this.windows['quick-create-'+type]) {
+            this.windows['quick-create-'+type] = MODx.load({
+                xtype: 'modx-window-quick-create-'+type
                 ,record: r
                 ,listeners: {
                     'success':{fn:function() { this.refreshNode(this.cm.activeNode.id); },scope:this}
                 }
             });
         }
-        this.windows.quickCreateChunk.setValues(r);
-        this.windows.quickCreateChunk.show(e.target);
+        this.windows['quick-create-'+type].setValues(r);
+        this.windows['quick-create-'+type].show(e.target);
     }
     
-    ,quickUpdateChunk: function(itm,e) {
+    ,quickUpdate: function(itm,e,type) {
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'element/chunk.php'
+            url: MODx.config.connectors_url+'element/'+type+'.php'
             ,params: {
                 action: 'get'
                 ,id: this.cm.activeNode.attributes.pk
             }
             ,listeners: {
-                'success': {fn:function(r) {                           
-                    if (!this.windows.quickUpdateChunk) {
-                        this.windows.quickUpdateChunk = MODx.load({
-                            xtype: 'modx-window-quick-update-chunk'
+                'success': {fn:function(r) {
+                    if (!this.windows['quick-update-'+type]) {
+                        this.windows['quick-update-'+type] = MODx.load({
+                            xtype: 'modx-window-quick-update-'+type
                             ,record: r.object
                             ,listeners: {
                                 'success':{fn:function() { this.refreshNode(this.cm.activeNode.id); },scope:this}
                             }
                         });
                     }
-                    this.windows.quickUpdateChunk.setValues(r.object);
-                    this.windows.quickUpdateChunk.show(e.target);
+                    this.windows['quick-update-'+type].setValues(r.object);
+                    this.windows['quick-update-'+type].show(e.target);
                 },scope:this}
             }
         });

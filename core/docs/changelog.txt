@@ -4,6 +4,11 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added Quick Create/Update for all Element types
+- Fixed bugs with category setting in Element processors
+- Added Clear Cache checkbox option to all Element type forms
+- Fixed bug with Category dropdown
+- Fixed tv input properties forms from double-rendering 
 - [#MODX-804] TV fields now fire resource change event
 - Fixed bug in Safari with TV fields being uneditable if panel is dragged 
 - [#MODX-745] Added 'cancel' button to go back to policy page when updating a policy 

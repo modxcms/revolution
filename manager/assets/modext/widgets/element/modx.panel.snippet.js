@@ -83,6 +83,14 @@ MODx.panel.Snippet = function(config) {
                         ,name: 'locked'
                         ,id: 'modx-snippet-locked'
                     },{
+                        xtype: 'checkbox'
+                        ,fieldLabel: _('clear_cache_on_save')
+                        ,description: _('clear_cache_on_save_msg')
+                        ,name: 'clearCache'
+                        ,id: 'modx-snippet-clear-cache'
+                        ,inputValue: 1
+                        ,checked: true
+                    },{
                         html: MODx.onSnipFormRender
                         ,border: false
                     },{

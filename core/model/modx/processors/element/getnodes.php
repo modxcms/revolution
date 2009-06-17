@@ -43,7 +43,16 @@ if ($modx->hasPermission('new_chunk')) {
         'text' => $modx->lexicon('chunk'),
         'scope' => 'this',
         'handler' => 'function(itm,e) {
-            Ext.getCmp("modx_element_tree").quickCreateChunk(itm,e);
+            Ext.getCmp("modx_element_tree").quickCreate(itm,e,"chunk");
+        }',
+    );
+}
+if ($modx->hasPermission('new_template')) {
+    $quickCreateMenu[] = array(
+        'text' => $modx->lexicon('template'),
+        'scope' => 'this',
+        'handler' => 'function(itm,e) {
+            Ext.getCmp("modx_element_tree").quickCreate(itm,e,"template");
         }',
     );
 }

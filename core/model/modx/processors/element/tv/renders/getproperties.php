@@ -21,9 +21,8 @@ if (!isset($modx->smarty)) {
         'template_dir' => $modx->getOption('manager_path') . 'templates/' . $modx->getOption('manager_theme') . '/',
     ));
 }
-
 $settings = array();
-if (isset($_REQUEST['tv']) && $_REQUEST['tv'] != '') {
+if (!empty($_REQUEST['tv'])) {
 	$tv = $modx->getObject('modTemplateVar',$_REQUEST['tv']);
     if ($tv != null) {
         $params = $tv->get('display_params');
@@ -33,6 +32,7 @@ if (isset($_REQUEST['tv']) && $_REQUEST['tv'] != '') {
             if ($p[0] != '') $settings[$param[0]] = $param[1];
         }
     }
+    $modx->smarty->assign('tv',$_REQUEST['tv']);
 }
 $modx->smarty->assign('params',$settings);
 
