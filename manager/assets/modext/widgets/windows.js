@@ -633,41 +633,12 @@ MODx.window.QuickCreateTV = function(config) {
             ,id: 'modx-qctv-default-text'
             ,width: 300
             ,grow: true
-        },{
-            xtype: 'modx-combo-tv-widget'
-            ,fieldLabel: _('tv_output_type')
-            ,name: 'display'
-            ,hiddenName: 'display'
-            ,id: 'modx-qctv-display'
-            ,listeners: {
-                'select': {fn:this.showParameters,scope:this}
-            }
-        },{
-            id: 'modx-qctv-widget-props'
-            ,autoHeight: true
         }]
         ,keys: []
     });
     MODx.window.QuickCreateTV.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.QuickCreateTV,MODx.Window,{
-    showParameters: function(cb,rc,i) {
-        var pu = Ext.get('modx-qctv-widget-props').getUpdater();
-        pu.loadScripts = true;
-        
-        pu.update({
-            url: MODx.config.connectors_url+'element/tv/renders.php'
-            ,method: 'GET'
-            ,params: {
-               'action': 'getProperties'
-               ,'context': 'mgr'
-               ,'type': cb.getValue() || 'default'
-            }
-            ,scripts: true
-        });
-        
-    }
-});
+Ext.extend(MODx.window.QuickCreateTV,MODx.Window);
 Ext.reg('modx-window-quick-create-tv',MODx.window.QuickCreateTV);
 
 MODx.window.QuickUpdateTV = function(config) {
@@ -720,43 +691,10 @@ MODx.window.QuickUpdateTV = function(config) {
             ,id: 'modx-qutv-default-text'
             ,width: 300
             ,grow: true
-        },{
-            xtype: 'modx-combo-tv-widget'
-            ,fieldLabel: _('tv_output_type')
-            ,name: 'display'
-            ,hiddenName: 'display'
-            ,id: 'modx-qutv-display'
-            ,listeners: {
-                'select': {fn:this.showParameters,scope:this}
-            }
-        },{
-            id: 'modx-qutv-widget-props'
-            ,autoHeight: true
         }]
         ,keys: []
     });
     MODx.window.QuickUpdateTV.superclass.constructor.call(this,config);
-    this.on('show',function() {
-        this.showParameters(Ext.getCmp('modx-qutv-display'));
-    },this);
 };
-Ext.extend(MODx.window.QuickUpdateTV,MODx.Window,{
-    showParameters: function(cb,rc,i) {
-        var pu = Ext.get('modx-qutv-widget-props').getUpdater();
-        pu.loadScripts = true;
-        
-        pu.update({
-            url: MODx.config.connectors_url+'element/tv/renders.php'
-            ,method: 'GET'
-            ,params: {
-               'action': 'getProperties'
-               ,'context': 'mgr'
-               ,'tv': this.config.record.id
-               ,'type': cb.getValue() || 'default'
-            }
-            ,scripts: true
-        });
-        
-    }
-});
+Ext.extend(MODx.window.QuickUpdateTV,MODx.Window);
 Ext.reg('modx-window-quick-update-tv',MODx.window.QuickUpdateTV);
