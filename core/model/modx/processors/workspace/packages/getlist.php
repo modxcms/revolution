@@ -51,7 +51,6 @@ foreach ($packages as $key => $package) {
         /* if package is newer and installed, hide old one */
         if (version_compare($oldVers,$newVers,'<') && $package->get('installed')) {
             unset($packages[$name.'-'.$oldVers]);
-            $count--; /* make sure to decrease total count */
         }
     }
     $priorVersions[$name] = $newVers;
