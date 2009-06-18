@@ -224,7 +224,7 @@ while ($item) {
                     'id' => 'cm-context-resource-qupdate',
                     'text' => $modx->lexicon('quick_update_resource'),
                     'handler' => 'function(itm,e) {
-                        Ext.getCmp("modx_resource_tree").quickUpdate(itm,e,"modResource","'.$item->get('key').'","'.$item->get('id').'");
+                        Ext.getCmp("modx_resource_tree").quickUpdate(itm,e,"'.$item->get('class_key').'","'.$item->get('key').'","'.$item->get('id').'");
                     }',
                 );
             }
