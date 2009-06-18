@@ -54,10 +54,12 @@ MODx.panel.ManagerLog = function(config) {
             ,border: false
             ,cls: 'modx-page-header'
             ,id: 'manager-log-header'
-        },{            
+        },{
             xtype: 'portal'
+            ,id: 'modx-portal-manager-log'
             ,items: [{
                 columnWidth: 1
+                ,id: 'modx-col-manager-log'
                 ,items: [{
                     title: _('mgrlog_query')
                     ,layout: 'form'

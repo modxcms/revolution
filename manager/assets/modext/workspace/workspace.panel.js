@@ -10,8 +10,10 @@ MODx.panel.Workspace = function(config) {
             ,id: 'modx-workspace-header'
         },{
             xtype: 'portal'
+            ,id: 'modx-portal-workspace'
             ,items: [{
                 columnWidth: 1
+                ,id: 'modx-col-packages'
                 ,items: [{
                     title: _('packages')
                     ,items: [{
