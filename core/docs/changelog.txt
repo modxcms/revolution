@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed issue with Quick Update Resource content field being too long
+- Fixed invalid lexicon entry reference for quick create resource
 - Added Quick Create/Update Resource
 - Preview context menu option now is "smart" and builds FURLs and separate context references
 - Fixed invalid topic reference issue with modLexiconEntry::clearCache()

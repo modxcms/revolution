@@ -434,7 +434,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,hideLabel: true
                 ,labelSeparator: ''
                 ,width: '97%'
-                ,grow: true
+                ,height: 300
             };
             break;
     }
