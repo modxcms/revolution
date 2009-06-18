@@ -17,10 +17,12 @@ MODx.panel.Actions = function(config) {
             ,border: false
             ,cls: 'modx-page-header'
             ,id: 'modx-actions-header'
-        },{            
+        },{
             xtype: 'portal'
+            ,id: 'modx-action-portal'
             ,items: [{
                 columnWidth: .47
+                ,id: 'modx-action-col'
                 ,items: [{
                     title: _('actions')
                     ,layout: 'form'
@@ -33,6 +35,7 @@ MODx.panel.Actions = function(config) {
                 }]
             },{
                 columnWidth: .47
+                ,id: 'modx-menu-col'
                 ,items: [{
                     title: _('topmenu')
                     ,layout: 'form'
