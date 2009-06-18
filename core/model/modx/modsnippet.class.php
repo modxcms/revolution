@@ -3,14 +3,22 @@
  * A modScript derivative representing a MODx PHP code snippet.
  *
  * @package modx
+ * @extends modScript
  */
 class modSnippet extends modScript {
+    /**#@+
+     * Creates an instance of a modSnippet.
+     *
+     * {@inheritDoc}
+     */
     function modSnippet(& $xpdo) {
         $this->__construct($xpdo);
     }
+    /** @ignore */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
     }
+    /**#@-*/
 
     /**
      * Overrides modElement::save to add custom error logging.
@@ -45,6 +53,8 @@ class modSnippet extends modScript {
 
     /**
      * Get the source content of this snippet.
+     *
+     * {@inheritdoc}
      */
     function getContent($options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {
@@ -59,9 +69,10 @@ class modSnippet extends modScript {
 
     /**
      * Set the source content of this snippet.
+     *
+     * {@inheritdoc}
      */
     function setContent($content, $options = array()) {
         return $this->set('snippet', $content);
     }
 }
-?>

@@ -5,19 +5,29 @@
  * {@inheritdoc}
  *
  * @package modx
+ * @extends modResource
  */
 class modSymLink extends modResource {
+    /**#@+
+     * Creates a modSymLink instance.
+     *
+     * {@inheritDoc}
+     */
     function modSymLink(& $xpdo) {
         $this->__construct($xpdo);
     }
+    /** @ignore */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('type', 'reference');
         $this->set('class_key', 'modSymLink');
     }
+    /**#@-*/
 
     /**
      * Process the modSymLink and forward to the specified resource.
+     *
+     * {@inheritDoc}
      */
     function process() {
         $this->_content= $this->get('content');

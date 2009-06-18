@@ -101,17 +101,21 @@ class modTemplate extends modElement {
      * Grabs an array of Template Variables associated with this Template,
      * bypassing the many-to-many relationship.
      *
+     * @todo Refactor this to use one query.
+     *
      * @return array An array of TVs.
      */
     function getTVs() {
         $c = $this->xpdo->newQuery('modTemplateVarTemplate');
-        $c->where(array('templateid' => $this->id));
+        $c->where(array(
+            'templateid' => $this->get('id'),
+        ));
         $c->sortby('rank','ASC');
         $tvts = $this->xpdo->getCollection('modTemplateVarTemplate',$c);
         $tvs = array();
         foreach ($tvts as $tvt) {
             $tv = $tvt->getOne('modTemplateVar');
-            if ($tv != NULL) {
+            if ($tv != null) {
                 $tv->category = $tv->getOne('modCategory');
                 $tvs[$tvt->tmplvarid] = $tv;
             }

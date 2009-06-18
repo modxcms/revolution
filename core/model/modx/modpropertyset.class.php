@@ -6,25 +6,34 @@
  * and can be called via a tag syntax or programatically.
  *
  * @package modx
- * @subpackage mysql
+ * @extends xPDOSimpleObject
  */
 class modPropertySet extends xPDOSimpleObject {
     /**
      * The property value array for the element.
      * @var array
+     * @access private
      */
     var $_properties= null;
 
+    /**#@+
+     * Creates an instance of a modPropertySet.
+     *
+     * {@inheritdoc}
+     */
     function modPropertySet(& $xpdo) {
         $this->__construct($xpdo);
     }
+    /** @ignore */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
     }
+    /**#@-*/
 
     /**
      * Get all the modElement instances this property set is available to.
      *
+     * @access public
      * @return array An array of modElement instances.
      */
     function getElements() {
@@ -40,6 +49,7 @@ class modPropertySet extends xPDOSimpleObject {
     /**
      * Get the properties for this element instance for processing.
      *
+     * @access public
      * @param array|string $properties An array or string of properties to
      * apply.
      * @return array A simple array of properties ready to use for processing.
@@ -56,6 +66,7 @@ class modPropertySet extends xPDOSimpleObject {
     /**
      * Set properties for this modPropertySet instance.
      *
+     * @access public
      * @param array|string $properties A property array or property string.
      * @param boolean $merge Indicates if properties should be merged with
      * existing ones.

@@ -8,15 +8,23 @@ class modUser extends modPrincipal {
     /**
      * A collection of contexts which the current principal is authenticated in.
      * @var array
+     * @access public
      */
     var $sessionContexts= array ();
 
+    /**#@+
+     * Creates a modUser instance.
+     *
+     * {@inheritDoc}
+     */
     function modUser(& $xpdo) {
         $this->__construct($xpdo);
     }
+    /** @ignore */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
     }
+    /**#@-*/
 
     /**
      * Loads the principal attributes that define a modUser security profile.
@@ -251,25 +259,25 @@ class modUser extends modPrincipal {
                 $contextKey= $this->xpdo->context->get('key');
                 switch ($contextKey) {
                     case 'web':
-                        $this->xpdo->invokeEvent("OnWebChangePassword", array (
-                            "userid" => $this->get('id'),
-                            "username" => $this->get('username'),
-                            "userpassword" => $newPassword)
-                        );
+                        $this->xpdo->invokeEvent('OnWebChangePassword', array (
+                            'userid' => $this->get('id'),
+                            'username' => $this->get('username'),
+                            'userpassword' => $newPassword,
+                        ));
                         break;
                     case 'mgr':
-                        $this->xpdo->invokeEvent("OnManagerChangePassword", array (
-                            "userid" => $this->get('id'),
-                            "username" => $this->get('username'),
-                            "userpassword" => $newPassword)
-                        );
+                        $this->xpdo->invokeEvent('OnManagerChangePassword', array (
+                            'userid' => $this->get('id'),
+                            'username' => $this->get('username'),
+                            'userpassword' => $newPassword,
+                        ));
                         break;
                     default:
-                        $this->xpdo->invokeEvent("OnUserChangePassword", array (
-                            "userid" => $this->get('id'),
-                            "username" => $this->get('username'),
-                            "userpassword" => $newPassword)
-                        );
+                        $this->xpdo->invokeEvent('OnUserChangePassword', array (
+                            'userid' => $this->get('id'),
+                            'username' => $this->get('username'),
+                            'userpassword' => $newPassword,
+                        ));
                         break;
                 }
             }
@@ -279,6 +287,9 @@ class modUser extends modPrincipal {
 
     /**
      * Returns an array of user session context keys.
+     *
+     * @access public
+     * @return array An array of session contexts.
      */
     function getSessionContexts() {
         if (!is_array($this->sessionContexts) || empty ($this->sessionContexts)) {
@@ -303,6 +314,9 @@ class modUser extends modPrincipal {
 
     /**
      * Adds a new context to the user session context array.
+     *
+     * @access public
+     * @param string $context The context to add to the user session.
      */
     function addSessionContext($context) {
         $this->getSessionContexts();
@@ -386,6 +400,7 @@ class modUser extends modPrincipal {
     /**
      * Removes a user session context.
      *
+     * @access public
      * @param string|array $context The context key or an array of context keys.
      */
     function removeSessionContext($context) {
@@ -408,6 +423,7 @@ class modUser extends modPrincipal {
     /**
      * Removes the session vars associated with a specific context.
      *
+     * @access public
      * @param string $context The context key.
      */
     function removeSessionContextVars($context) {
@@ -450,12 +466,25 @@ class modUser extends modPrincipal {
         }
     }
 
+    /**
+     * Removes a session cookie for a user.
+     *
+     * @todo Implement this.
+     *
+     * @access public
+     * @param string $context The context to remove.
+     */
     function removeSessionCookie($context) {
 
     }
 
     /**
      * Checks if the user has a specific session context.
+     *
+     * @access public
+     * @param mixed $context Either a name of a context or array of context
+     * names to check against.
+     * @return boolean True if the user has the context(s) specified.
      */
     function hasSessionContext($context) {
         $hasContext= false;
@@ -474,6 +503,13 @@ class modUser extends modPrincipal {
         return $hasContext;
     }
 
+    /**
+     * Gets a count of {@link modUserMessage} objects ascribed to the user.
+     *
+     * @access public
+     * @param mixed $read
+     * @return integer The number of messages.
+     */
     function countMessages($read = '') {
         if ($read == 'read') { $read = 1; } elseif ($read == 'unread') { $read = 0; }
         $criteria= array ('recipient' => $this->get('id'));
@@ -484,18 +520,27 @@ class modUser extends modPrincipal {
     }
 
     /**
-     * Gets settings in array format
+     * Gets all user settings in array format.
+     *
+     * @access public
+     * @return array A key -> value array of settings.
      */
     function getSettings() {
         $settings = array();
-        $uss = $this->xpdo->getCollection('modUserSetting',array('user' => $this->id));
+        $uss = $this->getMany('modUserSetting');
         foreach ($uss as $us) {
-            $settings[$us->get('key')] = $us->value;
+            $settings[$us->get('key')] = $us->get('value');
         }
         $this->settings = $settings;
         return $settings;
     }
 
+    /**
+     * Gets all Resource Groups this user is assigned to.
+     *
+     * @access public
+     * @return array An array of Resource Group names.
+     */
     function getResourceGroups() {
         $resourceGroups= array ();
         if (isset($_SESSION["modx.user.{$this->id}.resourceGroups"])) {
@@ -505,7 +550,7 @@ class modUser extends modPrincipal {
                 foreach ($memberships as $membership) {
                     if ($documentGroupAccess= $membership->getMany('modUserGroupResourceGroup')) {
                         foreach ($documentGroupAccess as $dga) {
-                            $resourceGroups[]= $dga->documentgroup;
+                            $resourceGroups[]= $dga->get('documentgroup');
                         }
                     }
                 }
@@ -515,6 +560,12 @@ class modUser extends modPrincipal {
         return $resourceGroups;
     }
 
+    /**
+     * Gets all the User Group IDs of the groups this user belongs to.
+     *
+     * @access public
+     * @return array An array of User Group IDs.
+     */
     function getUserGroups() {
         $groups= array();
         if (isset($_SESSION["modx.user.{$this->id}.userGroups"])) {
@@ -529,6 +580,12 @@ class modUser extends modPrincipal {
         return $groups;
     }
 
+    /**
+     * Gets all the User Group names of the groups this user belongs to.
+     *
+     * @access public
+     * @return array An array of User Group names.
+     */
     function getUserGroupNames() {
         $groupNames= array();
         if (isset($_SESSION["modx.user.{$this->id}.userGroupNames"])) {
@@ -543,6 +600,16 @@ class modUser extends modPrincipal {
         return $groupNames;
     }
 
+    /**
+     * States whether a user is a member of a group or groups. You may specify
+     * either a string name of the group, or an array of names.
+     *
+     * @access public
+     * @param mixed $groups Either a string of a group name or an array of
+     * names.
+     * @return boolean True if the user is a member of any of the groups
+     * specified.
+     */
     function isMember($groups) {
         $isMember= false;
         $groupNames= $this->getUserGroupNames();
@@ -557,4 +624,3 @@ class modUser extends modPrincipal {
         return $isMember;
     }
 }
-?>

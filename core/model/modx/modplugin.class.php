@@ -5,6 +5,7 @@
  * {@inheritdoc}
  *
  * @package modx
+ * @extends modScript
  */
 class modPlugin extends modScript {
     function modPlugin(& $xpdo) {
@@ -47,7 +48,10 @@ class modPlugin extends modScript {
     }
 
     /**
-     * Get the source content of this plugin.
+     * Overrides modElement::getContent to get the source content of this
+     * plugin.
+     *
+     * {@inheritdoc}
      */
     function getContent($options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {
@@ -61,12 +65,21 @@ class modPlugin extends modScript {
     }
 
     /**
-     * Set the source content of this plugin.
+     * Overrides modElement::setContent to set the source content of this
+     * plugin.
+     *
+     * {@inheritdoc}
      */
     function setContent($content, $options = array()) {
         return $this->set('plugincode', $content);
     }
 
+    /**
+     * Overrides modElement::getPropertySet to handle separate plugin event
+     * property set calls.
+     *
+     * {@inheritdoc}
+     */
     function getPropertySet($setName = null) {
         if (empty($setName) && !empty($this->xpdo->event->propertySet)) {
             $setName = $this->xpdo->event->propertySet;
@@ -74,4 +87,3 @@ class modPlugin extends modScript {
         return parent :: getPropertySet($setName);
     }
 }
-?>

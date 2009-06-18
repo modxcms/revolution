@@ -121,7 +121,7 @@ class modPHPMailer extends modMail {
     /**
      * Adds an address to the mailer
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     function address($type, $email, $name= '') {
         $set= false;
@@ -155,7 +155,7 @@ class modPHPMailer extends modMail {
     /**
      * Adds a custom header to the mailer
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     function header($header) {
         $set= parent :: header($header);
@@ -214,7 +214,7 @@ class modPHPMailer extends modMail {
     /**
      * Attaches a file to the mailer.
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     function attach($file) {
         parent :: attach($file);
@@ -224,7 +224,7 @@ class modPHPMailer extends modMail {
     /**
      * Clears all existing attachments.
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     function clearAttachments() {
         parent :: clearAttachments();

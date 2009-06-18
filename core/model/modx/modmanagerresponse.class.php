@@ -1,6 +1,10 @@
 <?php
-require_once(MODX_CORE_PATH . 'model/modx/modresponse.class.php');
-
+/**
+ * modManagerResponse
+ *
+ * @package modx
+ */
+require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
 /**
  * Encapsulates an HTTP response from the MODx manager.
  *
@@ -9,13 +13,26 @@ require_once(MODX_CORE_PATH . 'model/modx/modresponse.class.php');
  * @package modx
  */
 class modManagerResponse extends modResponse {
+    /**#@+
+     * Creates a modManagerResponse instance.
+     *
+     * {@inheritdoc}
+     */
     function modManagerResponse(& $modx) {
         $this->__construct($modx);
     }
+    /** @ignore */
     function __construct(& $modx) {
         parent :: __construct($modx);
     }
+    /**#@-*/
 
+    /**
+     * Overrides modResponse::outputContent to provide mgr-context specific
+     * response.
+     *
+     * {@inheritdoc}
+     */
     function outputContent($options = array()) {
         $modx= & $this->modx;
         $error= & $this->modx->error;

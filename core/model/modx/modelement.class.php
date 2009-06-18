@@ -1,4 +1,24 @@
 <?php
+/*
+ * MODx Revolution
+ *
+ * Copyright 2006, 2007, 2008, 2009 by the MODx Team.
+ * All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA 02111-1307 USA
+ */
 /**
  * Represents an element of source content managed by MODx.
  *
@@ -9,26 +29,31 @@
  * @package modx
  * @abstract Implement a derivative of this class to represent an element which
  * can be processed within the MODx framework.
+ * @extends modAccessibleSimpleObject
  */
 class modElement extends modAccessibleSimpleObject {
     /**
      * The property value array for the element.
      * @var array
+     * @access private
      */
     var $_properties= null;
     /**
      * The string representation of the element properties.
      * @var string
+     * @access private
      */
     var $_propertyString= '';
     /**
      * The source content of the element.
      * @var string
+     * @access private
      */
     var $_content= '';
     /**
      * The output of the element.
      * @var string
+     * @access private
      */
     var $_output= '';
     /**
@@ -36,37 +61,58 @@ class modElement extends modAccessibleSimpleObject {
      *
      * This is typically only applicable to elements that use PHP source content.
      * @var boolean
+     * @access private
      */
     var $_result= true;
     /**
      * The tag signature of the element instance.
+     * @var string
+     * @access private
      */
     var $_tag= null;
     /**
      * The character token which helps identify the element class in tag string.
      * @var string
+     * @access private
      */
     var $_token= '';
     /**
      * @var boolean If the element is cacheable or not.
+     * @access private
      */
     var $_cacheable= true;
     /**
      * @var boolean Indicates if the element was processed already.
+     * @access private
      */
     var $_processed= false;
     /**
      * @var array Optional filters that can be used during processing.
+     * @access private
      */
     var $_filters= array ();
 
+    /**#@+
+     * Creates an instance of a modElement object. This should not be called
+     * directly, but rather extended for derivative modElement classes.
+     *
+     * {@inheritdoc}
+     */
     function modElement(& $xpdo) {
         $this->__construct($xpdo);
     }
+    /** @ignore */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
     }
+    /**#@-*/
 
+    /**
+     * Overrides xPDOObject::get to handle when retrieving the properties field
+     * for an Element.
+     *
+     * {@inheritdoc}
+     */
     function get($k, $format= null, $formatTemplate= null) {
         $value = parent :: get($k, $format, $formatTemplate);
         if ($k === 'properties' && is_a($this->xpdo, 'modX') && $this->xpdo->getParser() && empty($value)) {
@@ -77,6 +123,12 @@ class modElement extends modAccessibleSimpleObject {
         return $value;
     }
 
+    /**
+     * Overrides xPDOObject::remove to remove all Property Sets that are related
+     * to this object.
+     *
+     * {@inheritdoc}
+     */
     function remove($ancestors= array ()) {
         $this->xpdo->removeCollection('modElementPropertySet', array('element' => $this->get('id'), 'element_class' => $this->_class));
         $result = parent :: remove($ancestors);
@@ -86,6 +138,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Constructs a valid tag representation of the element.
      *
+     * @access public
      * @return string A tag representation of the element.
      */
     function getTag() {
@@ -123,6 +176,7 @@ class modElement extends modAccessibleSimpleObject {
      * Process the element source content to produce a result.
      *
      * @abstract Implement this to define behavior for a MODx content element.
+     * @access public
      * @param array|string $properties A set of configuration properties for the
      * element.
      * @param string $content Optional content to use in place of any persistent
@@ -146,6 +200,8 @@ class modElement extends modAccessibleSimpleObject {
 
     /**
      * Cache the current output of this element instance by tag signature.
+     *
+     * @access public
      */
     function cache() {
         if ($this->isCacheable()) {
@@ -158,6 +214,8 @@ class modElement extends modAccessibleSimpleObject {
      *
      * This is called by default in {@link modElement::process()} after the
      * element properties have been parsed.
+     *
+     * @access protected
      */
     function filterInput() {
         $filter= null;
@@ -184,6 +242,8 @@ class modElement extends modAccessibleSimpleObject {
      * Call this method in your {modElement::process()} implementation when it
      * is appropriate, typically once all processing has been completed, but
      * before any caching takes place.
+     *
+     * @access protected
      */
     function filterOutput() {
         $filter= null;
@@ -243,6 +303,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Gets the raw, unprocessed source content for this element.
      *
+     * @access public
      * @param array $options An array of options implementations can use to
      * accept language, revision identifiers, or other information to alter the
      * behavior of the method.
@@ -262,6 +323,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Set the raw source content for this element.
      *
+     * @access public
      * @param mixed $content The source content; implementations can decide if
      * it can only be a string, or some other source from which to retrieve it.
      * @param array $options An array of options implementations can use to
@@ -276,6 +338,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Get the properties for this element instance for processing.
      *
+     * @access public
      * @param array|string $properties An array or string of properties to
      * apply.
      * @return array A simple array of properties ready to use for processing.
@@ -307,6 +370,7 @@ class modElement extends modAccessibleSimpleObject {
      *      &PropertyKey2=`PropertyValue2`
      *  ]]
      *
+     * @access public
      * @param string|null $setName An explicit property set name to search for.
      * @return array|null An array of properties or null if no set is found.
      */
@@ -342,6 +406,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Set default properties for this element instance.
      *
+     * @access public
      * @param array|string $properties A property array or property string.
      * @param boolean $merge Indicates if properties should be merged with
      * existing ones.
@@ -395,6 +460,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Add a property set to this element, making it available for use.
      *
+     * @access public
      * @param string|modPropertySet $propertySet A modPropertySet object or the
      * name of a modPropertySet object to create a relationship with.
      * @return boolean True if a relationship was created or already exists.
@@ -424,6 +490,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Remove a property set from this element, making it unavailable for use.
      *
+     * @access public
      * @param string|modPropertySet $propertySet A modPropertySet object or the
      * name of a modPropertySet object to dissociate from.
      * @return boolean True if a relationship was destroyed.
@@ -444,6 +511,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Indicates if the element is cacheable.
      *
+     * @access public
      * @return boolean True if the element can be stored to or retrieved from
      * the element cache.
      */
@@ -454,6 +522,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Sets the runtime cacheability of the element.
      *
+     * @access public
      * @param boolean $cacheable Indicates the value to set for cacheability of
      * this element.
      */
@@ -464,6 +533,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Turns associative arrays into placeholders in the scope of this element.
      *
+     * @access public
      * @param array $placeholders An associative array of placeholders to set.
      * @return array An array of placeholders overwritten from the containing
      * scope you can use to restore values from, or an empty array if no

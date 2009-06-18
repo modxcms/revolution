@@ -18,7 +18,6 @@
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
-
 /**
  * Default database session handler class for MODx.
  *
@@ -28,19 +27,29 @@ class modSessionHandler {
     /**
      * @var modX A reference to the modX instance controlling this session
      * handler.
+     * @access public
      */
     var $modx= null;
 
+    /**#@+
+     * Creates an instance of a modSessionHandler class.
+     *
+     * @param modX &$modx A reference to a {@link modX} instance.
+     * @return modSessionHandler
+     */
     function modSessionHandler(& $modx) {
         $this->__construct($modx);
     }
+    /** @ignore */
     function __construct(& $modx) {
         $this->modx= & $modx;
     }
+    /**#@-*/
 
     /**
      * Opens the connection for the session handler.
      *
+     * @access public
      * @return boolean Always returns true; actual connection is managed by
      * {@link modX}.
      */
@@ -51,6 +60,7 @@ class modSessionHandler {
     /**
      * Closes the connection for the session handler.
      *
+     * @access public
      * @return boolean Always returns true; actual connection is managed by
      * {@link modX}
      */
@@ -58,6 +68,13 @@ class modSessionHandler {
         return true;
     }
 
+    /**
+     * Reads a specific {@link modSession} record's data.
+     *
+     * @access public
+     * @param integer $id The pk of the {@link modSession} object.
+     * @return string The data read from the {@link modSession} object.
+     */
     function read($id) {
         $data= '';
         if ($session= $this->_getSession($id)) {
@@ -68,6 +85,14 @@ class modSessionHandler {
         return (string) $data;
     }
 
+    /**
+     * Writes data to a specific {@link modSession} object.
+     *
+     * @access public
+     * @param integer $id The PK of the modSession object.
+     * @param mixed $data The data to write to the session.
+     * @return boolean True if successfully written.
+     */
     function write($id, $data) {
         $written= false;
         $gcMaxlifetime = $this->modx->getOption('session_gc_maxlifetime', array(), @ini_get('session.gc_max_lifetime'));
@@ -85,6 +110,13 @@ class modSessionHandler {
         return $written;
     }
 
+    /**
+     * Destroy a specific {@link modSession} record.
+     *
+     * @access public
+     * @param integer $id
+     * @return boolean True if the session record was destroyed.
+     */
     function destroy($id) {
         $destroyed= false;
         if ($session= $this->_getSession($id)) {
@@ -95,6 +127,14 @@ class modSessionHandler {
         return $destroyed;
     }
 
+    /**
+     * Remove any expired sessions.
+     *
+     * @access public
+     * @param integer $max The amount of time since now to expire any session
+     * longer than.
+     * @return boolean True if session records were removed.
+     */
     function gc($max) {
         $max = (integer) $this->modx->getOption('session_gc_maxlifetime', array(), $max);
         $maxtime= time() - $max;
@@ -102,6 +142,17 @@ class modSessionHandler {
         return $result;
     }
 
+    /**
+     * Gets the {@link modSession} object, respecting cache values by the
+     * cache_db_session value.
+     *
+     * @access private
+     * @param integer $id The PK of the {@link modSession} record.
+     * @param boolean $autoCreate If true, will automatically create the session
+     * record if none is found.
+     * @return modSession The {@link modSession} instance related to the passed
+     * ID.
+     */
     function _getSession($id, $autoCreate= false) {
         $session= $this->modx->getObject('modSession', array('id' => $id), $this->modx->getOption('cache_db_session', array(), false));
         if ($autoCreate && !is_object($session)) {

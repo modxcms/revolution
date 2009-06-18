@@ -1,6 +1,10 @@
 <?php
-require_once(MODX_CORE_PATH . 'model/modx/modrequest.class.php');
-
+/**
+ * modManagerRequest
+ *
+ * @package modx
+ */
+require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
 /**
  * Encapsulates the interaction of MODx manager with an HTTP request.
  *
@@ -31,13 +35,20 @@ class modManagerRequest extends modRequest {
      */
     var $defaultAction = 0;
 
+    /**#@+
+     * Instantiates a modManagerRequest object.
+     *
+     * {@inheritdoc}
+     */
     function modManagerRequest(& $modx) {
         $this->__construct($modx);
     }
+    /** @ignore */
     function __construct(& $modx) {
         parent :: __construct($modx);
         $this->initialize();
     }
+    /**#@-*/
 
     /**
      * Initializes the manager request.

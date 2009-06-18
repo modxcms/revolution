@@ -9,6 +9,7 @@
 class modTemplateVar extends modElement {
     /**
      * @var array Supported bindings for MODx
+     * @access public
      */
     var $bindings= array (
         'FILE',
@@ -21,16 +22,24 @@ class modTemplateVar extends modElement {
     );
     /**
      * @var integer Indicates a value is loaded for a specified resource.
+     * @access public
      */
     var $resourceId= 0;
 
+    /**#@+
+     * Creates a modTemplateVar instance, and sets the token of the class to *
+     *
+     * {@inheritdoc}
+     */
     function modTemplateVar(& $xpdo) {
         $this->__construct($xpdo);
     }
+    /** @ignore */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->_token = '*';
     }
+    /**#@-*/
 
     /**
      * Overrides modElement::save to add custom error logging.
@@ -103,6 +112,8 @@ class modTemplateVar extends modElement {
 
     /**
      * Get the source content of this template variable.
+     *
+     * {@inheritdoc}
      */
     function getContent($options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {
@@ -117,6 +128,8 @@ class modTemplateVar extends modElement {
 
     /**
      * Set the source content of this template variable.
+     *
+     * {@inheritdoc}
      */
     function setContent($content, $options = array()) {
         return $this->set('default_text', $content);
@@ -125,6 +138,7 @@ class modTemplateVar extends modElement {
     /**
      * Get the value of a template variable for a resource.
      *
+     * @access public
      * @param integer $resourceId The id of the resource; 0 defaults to the
      * current resource.
      * @return mixed The raw value of the template variable in context of the
@@ -158,6 +172,7 @@ class modTemplateVar extends modElement {
     /**
      * Set the value of a template variable for a resource.
      *
+     * @access public
      * @param integer $resourceId The id of the resource; 0 defaults to the
      * current resource.
      * @param mixed $value The value to give the template variable for the
@@ -191,6 +206,7 @@ class modTemplateVar extends modElement {
     /**
      * Returns the processed output of a template variable.
      *
+     * @access public
      * @param integer $resourceId The id of the resource; 0 defaults to the
      * current resource.
      * @return mixed The processed output of the template variable.
@@ -237,6 +253,7 @@ class modTemplateVar extends modElement {
     /**
      * Renders input forms for the template variable.
      *
+     * @access public
      * @param integer $resourceId The id of the resource; 0 defaults to the
      * current resource.
      * @param string $style Extra style parameters.
@@ -288,6 +305,7 @@ class modTemplateVar extends modElement {
     /**
      * Decodes special function-based chars from a parameter value.
      *
+     * @access public
      * @param string $s The string to decode.
      * @return string The decoded string.
      */
@@ -300,6 +318,7 @@ class modTemplateVar extends modElement {
     /**
      * Returns an string if a delimiter is present. Returns array if is a recordset is present.
      *
+     * @access public
      * @param mixed $src Source object, either a recordset, PDO object, array or string.
      * @param string $delim Delimiter for string parsing.
      * @param string $type Type to return, either 'string' or 'array'.
@@ -337,6 +356,7 @@ class modTemplateVar extends modElement {
     /**
      * Parses input options sent through postback.
      *
+     * @access public
      * @param mixed $v The options to parse, either a resource, array or string.
      * @return mixed The parsed options.
      */
@@ -353,6 +373,7 @@ class modTemplateVar extends modElement {
     /**
      * Process bindings assigned to a template variable.
      *
+     * @access public
      * @param string $value The value specified from the binding.
      * @param integer $resourceId The resource in which the TV is assigned.
      * @return string The processed value.
@@ -370,8 +391,7 @@ class modTemplateVar extends modElement {
                     break;
 
                 case 'CHUNK':       /* retrieve a chunk and process it's content */
-                    $chunk = $this->xpdo->getChunk($param);
-                    $output = $chunk;
+                    $output = $this->xpdo->getChunk($param);
                     break;
 
                 case 'RESOURCE':
@@ -443,6 +463,7 @@ class modTemplateVar extends modElement {
     /**
      * Parses bindings to an appropriate format.
      *
+     * @access public
      * @param string $binding_string The binding to parse.
      * @return array The parsed binding, now in array format.
      */
@@ -463,6 +484,7 @@ class modTemplateVar extends modElement {
     /**
      * Special parsing for file bindings.
      *
+     * @access public
      * @param string $file The absolute location of the file in the binding.
      * @return string The file buffer from the read file.
      */

@@ -11,6 +11,7 @@ require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
  * {@inheritdoc}
  *
  * @package modx
+ * @extends modResponse
  */
 class modConnectorResponse extends modResponse {
     /**
@@ -24,7 +25,7 @@ class modConnectorResponse extends modResponse {
     /**#@+
      * Creates a modConnectorResponse object.
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     function modConnectorResponse(& $modx) {
         $this->__construct($modx);
@@ -40,7 +41,7 @@ class modConnectorResponse extends modResponse {
      * Overrides modResponse::outputContent to provide connector-specific
      * processing.
      *
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     function outputContent($options = array()) {
         /* variable pointer for easier access */
