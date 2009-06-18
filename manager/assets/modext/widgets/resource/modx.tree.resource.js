@@ -376,8 +376,7 @@ Ext.reg('modx-window-quick-update-modResource',MODx.window.QuickUpdateResource);
 
 MODx.getQRContentField = function(id,cls) {
     id = id || 'qur';
-    cls = cls || 'modResource';
-    
+    cls = cls || 'modResource';    
     var o = {};
     switch (cls) {
         case 'modSymLink':
@@ -441,23 +440,24 @@ MODx.getQRContentField = function(id,cls) {
     return o;
 };
 
-MODx.getQRSettings = function(id,pa) {
+MODx.getQRSettings = function(id,va) {
     id = id || 'qur';
+    console.log(va);
     return [{
         xtype: 'hidden'
         ,name: 'parent'
         ,id: 'modx-'+id+'-parent'
-        ,value: pa['parent']
+        ,value: va['parent']
     },{
         xtype: 'hidden'
         ,name: 'context_key'
         ,id: 'modx-'+id+'-context_key'
-        ,value: pa['context_key']
+        ,value: va['context_key']
     },{
         xtype: 'hidden'
         ,name: 'class_key'
         ,id: 'modx-'+id+'-class_key'
-        ,value: pa['class_key']
+        ,value: va['class_key']
     },{
         xtype: 'checkbox'
         ,name: 'published'
@@ -465,14 +465,15 @@ MODx.getQRSettings = function(id,pa) {
         ,fieldLabel: _('resource_published')
         ,description: _('resource_published_help')
         ,inputValue: 1
-        ,checked: MODx.config.publish_default == '1' ? true : false
+        ,checked: va['published'] != undefined ? va['published'] : (MODx.config.publish_default == '1' ? true : false)
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_folder')
         ,description: _('resource_folder_help')
         ,name: 'isfolder'
         ,id: 'modx-'+id+'-isfolder'
-        ,inputValue: 1                
+        ,inputValue: 1
+        ,checked: va['isfolder'] != undefined ? va['isfolder'] : false
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_richtext')
@@ -480,7 +481,7 @@ MODx.getQRSettings = function(id,pa) {
         ,name: 'richtext'
         ,id: 'modx-'+id+'-richtext'
         ,inputValue: 1
-        ,checked: true                
+        ,checked: va['richtext'] != undefined ? va['richtext'] : true                
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_searchable')
@@ -488,7 +489,7 @@ MODx.getQRSettings = function(id,pa) {
         ,name: 'searchable'
         ,id: 'modx-'+id+'-searchable'
         ,inputValue: 1
-        ,checked: MODx.config.search_default == '1' ? true : false            
+        ,checked: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? true : false)            
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_cacheable')
@@ -496,7 +497,7 @@ MODx.getQRSettings = function(id,pa) {
         ,name: 'cacheable'
         ,id: 'modx-'+id+'-cacheable'
         ,inputValue: 1
-        ,checked: MODx.config.cache_default == '1' ? true : false                
+        ,checked: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? true : false)                
     },{
         xtype: 'checkbox'
         ,name: 'clearCache'
