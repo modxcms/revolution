@@ -310,6 +310,7 @@ while ($item) {
                 'cls' => $class,
                 'type' => 'modResource',
                 'qtip' => $qtip,
+                'preview_url' => $modx->makeUrl($item->get('id')),
                 'href' => '?a='.$actions['resource/data'].'&id='.$item->id,
                 'menu' => array('items' => $menu),
             );

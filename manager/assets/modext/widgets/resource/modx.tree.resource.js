@@ -68,9 +68,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 	}
 	
     ,preview: function(item,e) {
-        var node = this.cm.activeNode;
-        var id = node.id.split('_'); id = id[1];
-        window.open(MODx.config.base_url+'index.php?id='+id);
+        window.open(this.cm.activeNode.attributes.preview_url);
     }
     
 	,deleteDocument: function(item,e) {
