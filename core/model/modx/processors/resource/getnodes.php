@@ -135,16 +135,57 @@ while ($item) {
                         ),
                     ),
                 );
+                $menu[] = array(
+                    'text' => $modx->lexicon('quick_create'),
+                    'handler' => 'new Function("return false;")',
+                    'menu' => array(
+                        'items' => array(
+                            array(
+                                'id' => 'cm-context-resource-qcreate',
+                                'text' => $modx->lexicon('resource'),
+                                'scope' => 'this',
+                                'handler' => 'function(itm,e) {
+                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modResource","'.$item->get('key').'",0);
+                                }',
+                            ),
+                            array(
+                                'id' => 'cm-weblink-qcreate',
+                                'text' => $modx->lexicon('weblink'),
+                                'scope' => 'this',
+                                'handler' => 'function(itm,e) {
+                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modWebLink","'.$item->get('key').'","0");
+                                }',
+                            ),
+                            array(
+                                'id' => 'cm-symlink-qcreate',
+                                'text' => $modx->lexicon('symlink'),
+                                'scope' => 'this',
+                                'handler' => 'function(itm,e) {
+                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modSymLink","'.$item->get('key').'","0");
+                                }',
+                            ),
+                            array(
+                                'id' => 'cm-static-qcreate',
+                                'text' => $modx->lexicon('static_resource'),
+                                'scope' => 'this',
+                                'handler' => 'function(itm,e) {
+                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modStaticResource","'.$item->get('key').'","0");
+                                }',
+                            ),
+                        ),
+                    ),
+                );
             }
 
             $items[] = array(
                 'text' => $item->get('key'),
                 'id' => $item->get('key') . '_0',
+                'pk' => $item->get('key'),
                 'leaf' => false,
                 'cls' => $class,
                 'qtip' => $item->get('description'),
                 'type' => 'context',
-                'href' => 'index.php?a='.$actions['context/update'].'&key='.$item->get('key'),
+                'href' => '?a='.$actions['context/update'].'&key='.$item->get('key'),
                 'menu' => array('items' => $menu),
             );
         } else {
@@ -177,6 +218,13 @@ while ($item) {
                     'text' => $modx->lexicon('resource_edit'),
                     'handler' => 'function() {
                         this.loadAction("a='.$actions['resource/update'].'");
+                    }',
+                );
+                $menu[] = array(
+                    'id' => 'cm-context-resource-qupdate',
+                    'text' => $modx->lexicon('quick_update_resource'),
+                    'handler' => 'function(itm,e) {
+                        Ext.getCmp("modx_resource_tree").quickUpdate(itm,e,"modResource","'.$item->get('key').'","'.$item->get('id').'");
                     }',
                 );
             }
@@ -254,6 +302,47 @@ while ($item) {
                         ),
                     ),
                 );
+
+                $menu[] = array(
+                    'text' => $modx->lexicon('quick_create'),
+                    'handler' => 'new Function("return false;")',
+                    'menu' => array(
+                        'items' => array(
+                            array(
+                                'id' => 'cm-resource-qcreate',
+                                'text' => $modx->lexicon('resource'),
+                                'scope' => 'this',
+                                'handler' => 'function(itm,e) {
+                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modResource","'.$item->context_key.'","'.$item->get('id').'");
+                                }',
+                            ),
+                            array(
+                                'id' => 'cm-weblink-qcreate',
+                                'text' => $modx->lexicon('weblink'),
+                                'scope' => 'this',
+                                'handler' => 'function(itm,e) {
+                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modWebLink","'.$item->context_key.'","'.$item->get('id').'");
+                                }',
+                            ),
+                            array(
+                                'id' => 'cm-symlink-qcreate',
+                                'text' => $modx->lexicon('symlink'),
+                                'scope' => 'this',
+                                'handler' => 'function(itm,e) {
+                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modSymLink","'.$item->context_key.'","'.$item->get('id').'");
+                                }',
+                            ),
+                            array(
+                                'id' => 'cm-static-qcreate',
+                                'text' => $modx->lexicon('static_resource'),
+                                'scope' => 'this',
+                                'handler' => 'function(itm,e) {
+                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modStaticResource","'.$item->context_key.'","'.$item->id.'");
+                                }',
+                            ),
+                        ),
+                    ),
+                );
             }
 
             $menu[] = '-';
@@ -306,6 +395,7 @@ while ($item) {
             $items[] = array(
                 'text' => $item->pagetitle.' ('.$item->id.')',
                 'id' => $item->context_key . '_'.$item->id,
+                'pk' => $item->id,
                 'leaf' => $item->isfolder ? 0 : 1,
                 'cls' => $class,
                 'type' => 'modResource',

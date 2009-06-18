@@ -1,4 +1,3 @@
-<div id="modx-browser"></div>
 <div id="modx-panel-static"></div>
 
 {include file='resource/_javascript.tpl'}

@@ -515,7 +515,7 @@ MODx.loadAccordionPanels = function() {
         ,name: 'class_key'
         ,id: 'modx-resource-class-key'
         ,allowBlank: false
-        ,value: 'modDocument'    
+        ,value: 'modDocument'
         ,width: 100
         ,listeners: {
             'focus': {fn:oc,scope:this}

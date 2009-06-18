@@ -57,6 +57,7 @@
 </head>
 <body>
 
+<div id="modx-browser"></div>
 <div id="modx-container">
     <div id="modx-topbar">
         <div id="modx-logo"><a href="http://modxcms.com"><img src="templates/{$_config.manager_theme}/images/style/modx_logo_header.png" target="_blank" alt="" /></a></div>
