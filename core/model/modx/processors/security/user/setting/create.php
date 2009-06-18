@@ -43,6 +43,10 @@ if ($topic == null) {
     $topic->save();
 }
 
+
+/* only set name/description lexicon entries if they dont exist
+ * for user settings
+ */
 $entry = $modx->getObject('modLexiconEntry',array(
     'namespace' => $namespace->get('name'),
     'name' => 'setting_'.$_POST['key'],

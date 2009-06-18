@@ -44,7 +44,9 @@ if ($topic == null) {
     $topic->save();
 }
 
-
+/* only set name/description lexicon entries if they dont exist
+ * for context settings
+ */
 $entry = $modx->getObject('modLexiconEntry',array(
     'namespace' => $setting->get('namespace'),
     'name' => 'setting_'.$_POST['key'],
@@ -54,10 +56,10 @@ if ($entry == null) {
     $entry->set('namespace',$setting->get('namespace'));
     $entry->set('name','setting_'.$_POST['key']);
     $entry->set('topic',$topic->get('id'));
+    $entry->set('value',$_POST['name']);
+    $entry->save();
+    $entry->clearCache();
 }
-$entry->set('value',$_POST['name']);
-$entry->save();
-$entry->clearCache();
 
 $description = $modx->getObject('modLexiconEntry',array(
     'namespace' => $setting->get('namespace'),
@@ -68,11 +70,10 @@ if ($description == null) {
     $description->set('namespace',$setting->get('namespace'));
     $description->set('name','setting_'.$_POST['key'].'_desc');
     $description->set('topic',$topic->get('id'));
+    $description->set('value',$_POST['description']);
+    $description->clearCache();
+    $description->save();
 }
-
-$description->set('value',$_POST['description']);
-$description->save();
-$description->clearCache();
 
 
 if ($setting->save() === false) {
