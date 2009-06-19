@@ -11,8 +11,8 @@ MODx.tree.Resource = function(config) {
 	Ext.applyIf(config,{
 		rootVisible: false
 		,expandFirst: true
-		,enableDrag: true
-		,enableDrop: true
+        ,enableDD: true
+        ,ddGroup: 'modx-treedrop-dd'
 		,sortBy: 'menuindex'
 		,title: ''
 		,remoteToolbar: true
@@ -203,7 +203,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 		this.filterBar.destroy();
 		this._filterVisible = false;
 	}
-	
 	
     ,_handleDrop:  function(e){
         var dropNode = e.dropNode;

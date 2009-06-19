@@ -153,6 +153,7 @@ foreach ($elements as $element) {
         'pk' => $element->get('id'),
         'category' => 0,
         'leaf' => true,
+        'name' => $name,
         'cls' => 'icon-'.$g[1],
         'href' => '?a='.$ar_actionmap[$g[1]].'&id='.$element->get('id'),
         'type' => $g[1],
