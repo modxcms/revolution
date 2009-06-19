@@ -19,7 +19,7 @@ if (empty($_POST['name'])) {
 
 /* create and save namespace */
 $namespace = $modx->newObject('modNamespace');
-$namespace->fromArray($_POST);
+$namespace->fromArray($_POST,'',true,true);
 if ($namespace->save() === false) {
 	return $modx->error->failure($modx->lexicon('namespace_err_create'));
 }

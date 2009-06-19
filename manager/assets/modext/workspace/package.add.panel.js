@@ -94,7 +94,7 @@ MODx.panel.PDFirst = function(config) {
         id: 'modx-pd-start'
         ,back: 'modx-pd-start'
         ,autoHeight: true
-        ,defaults: { labelSeparator: '', border: false }
+        ,defaults: { labelSeparator: '', border: false ,autoHeight: true }
         ,bodyStyle: 'padding: 3em 3em'
         ,items: [{
             html: '<h2>'+_('package_retriever')+'</h2>'
@@ -160,6 +160,7 @@ MODx.panel.PDSelProv = function(config) {
         id: 'modx-pd-selprov'
         ,back: 'modx-pd-start'
         ,autoHeight: true
+        ,hideMode:'offsets'
         ,defaults: {border: false}
         ,bodyStyle: 'padding: 3em'
         ,items: [{

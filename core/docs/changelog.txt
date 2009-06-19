@@ -4,6 +4,12 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Removed Spotlight effect on dialogs; was unnecessary.
+- Fixed bug in Namespace creation window that was preventing namespace from creating
+- Added refreshes to comboboxes in Lexicon Management to refresh combos on Namespace/Topic creation to keep panels up-to-date
+- Fixed Safari issue with Element tree displaying funky on certain pages
+- Fixed issue in Safari where combobox trigger was on left side
+- Only set lexicon entries for context/user settings if they dont exist as system settings
 - Fixed issue with Actions panel causing accordion DOM to bug
 - Fixed issue with Quick Update not persisting class_key
 - Fixed some issues with persistent settings for Quick Update Resource

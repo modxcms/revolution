@@ -70,11 +70,21 @@ MODx.grid.Lexicon = function(config) {
             ,xtype: 'button'
             ,menu: [{
                 text: _('entry')
-                ,handler: this.loadWindow2.createDelegate(this,[{ xtype: 'modx-window-lexicon-entry-create'}],true)
+                ,handler: this.loadWindow2.createDelegate(this,[{ 
+                    xtype: 'modx-window-lexicon-entry-create'
+                }],true)
                 ,scope: this
             },{
                 text: _('topic')
-                ,handler: this.loadWindow2.createDelegate(this,[{ xtype: 'modx-window-lexicon-topic-create'}],true)
+                ,handler: this.loadWindow2.createDelegate(this,[{ 
+                    xtype: 'modx-window-lexicon-topic-create'
+                    ,listeners: {
+                        'success': {fn:function() {
+                            Ext.getCmp('modx-lexicon-filter-topic').store.reload();
+                            Ext.getCmp('modx-grid-lexicon-topic').refresh();
+                        },scope:this}
+                    }
+                }],true)
                 ,scope: this
             },{
                 text: _('namespace')
@@ -83,6 +93,8 @@ MODx.grid.Lexicon = function(config) {
                 	   ,listeners: {
                             'success':{fn: function() {
                     	       Ext.getCmp('modx-lexicon-filter-namespace').store.reload();
+                               var cb = Ext.getCmp('modx-lexicon-topic-filter-namespace');
+                               if (cb) { cb.store.reload(); }
                             },scope: this}
                 	   }
                 }],true)
@@ -120,7 +132,11 @@ MODx.grid.Lexicon = function(config) {
         ,{
             xtype: 'button'
             ,text: _('lexicon_import')
-            ,handler: function(btn,e) { this.loadWindow2(btn,e,{ xtype: 'modx-window-lexicon-import'}); }
+            ,handler: function(btn,e) {
+                this.loadWindow2(btn,e,{ 
+                    xtype: 'modx-window-lexicon-import'
+                }); 
+            }
             ,scope: this
         },{
             xtype: 'button'

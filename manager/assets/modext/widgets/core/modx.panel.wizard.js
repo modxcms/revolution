@@ -100,6 +100,7 @@ MODx.panel.WizardPanel = function(config) {
     Ext.applyIf(config,{
         autoHeight: true
         ,bodyStyle: 'padding: 3em 3em'
+        ,hideMode: 'offsets'
     });
     MODx.panel.WizardPanel.superclass.constructor.call(this,config);
     this.config = config;

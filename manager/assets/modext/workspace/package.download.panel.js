@@ -14,6 +14,7 @@ MODx.panel.PackageDownload = function(config) {
         ,width: Ext.isIE ? 650 : '95%'
         ,items: [{
             xtype: 'modx-tree-package-download'
+            ,id: 'modx-tree-package-download'
             ,columnWidth: 0.7
             ,width: Ext.isIE ? 300 : '60%'
             ,height: 270
@@ -21,6 +22,7 @@ MODx.panel.PackageDownload = function(config) {
             ,preventRender: true
         },{
             columnWidth: 0.3
+            ,id: 'modx-package-info-col'
             ,height: 270
             ,width: Ext.isIE ? 250 : '35%'
             ,border: false
@@ -188,8 +190,7 @@ Ext.reg('modx-window-package-more-info',MODx.window.PackageMoreInfo);
 MODx.tree.PackageDownload = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        id: 'modx-tree-package-download'
-        ,baseParams: {
+        baseParams: {
             action: 'getPackages'
             ,provider: ''
         }

@@ -16,7 +16,6 @@
 <script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a}" type="text/javascript"></script>
 
 <script src="{$_config.manager_url}assets/modext/core/modx.localization.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/util/spotlight.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/util/utilities.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/util/switchbutton.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/core/modx.form.handler.js" type="text/javascript"></script>

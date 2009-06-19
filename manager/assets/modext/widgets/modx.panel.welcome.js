@@ -12,7 +12,7 @@ MODx.panel.Welcome = function(config) {
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+MODx.config.site_name+'</h2>'
-            ,id: 'welcome-header'
+            ,id: 'modx-welcome-header'
             ,cls: 'modx-page-header'
             ,border: false
         },{
@@ -25,8 +25,10 @@ MODx.panel.Welcome = function(config) {
             ,hidden: !config.displayConfigCheck
         },{
             xtype: 'portal'
+            ,id: 'modx-welcome-portal'
             ,items: [{
                 columnWidth: Ext.isSafari ? .46 : .48
+                ,id: 'modx-welcome-col-left'
                 ,defaults: {
                     height: 300
                     ,autoHeight: false
@@ -56,6 +58,7 @@ MODx.panel.Welcome = function(config) {
                 }]
             },{
                 columnWidth: Ext.isSafari ? .46 : .48
+                ,id: 'modx-welcome-col-right'
                 ,defaults: {
                     height: 300
                     ,autoHeight: false

@@ -290,6 +290,7 @@ MODx.panel.WizardPanel = function(config) {
         wizard: null
         ,checkDirty: false
         ,bodyStyle: 'padding: 3em 3em'
+        ,hideMode: 'offsets'
 	});
 	MODx.panel.WizardPanel.superclass.constructor.call(this,config);
 };

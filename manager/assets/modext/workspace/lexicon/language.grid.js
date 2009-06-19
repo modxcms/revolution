@@ -25,7 +25,16 @@ MODx.grid.Language = function(config) {
         }]
         ,tbar: [{
             text: _('language_create')
-            ,handler: { xtype: 'modx-window-language-create' }
+            ,handler: { 
+                xtype: 'modx-window-language-create'
+                ,listeners: {
+                    'success':{fn:function() {
+                        this.refresh();
+                        var cb = Ext.getCmp('modx-lexicon-filter-language');
+                        if (cb) { cb.store.reload(); }
+                    },scope:this}
+                }
+            }
             ,scope: this
         }]
     });
@@ -55,6 +64,7 @@ MODx.window.CreateLanguage = function(config) {
             ,name: 'name'
             ,width: 250
             ,maxLength: 100
+            ,allowBlank: false
         }]
     });
     MODx.window.CreateLanguage.superclass.constructor.call(this,config);

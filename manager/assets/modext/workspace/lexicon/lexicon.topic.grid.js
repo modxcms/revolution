@@ -65,11 +65,29 @@ MODx.grid.LexiconTopic = function(config) {
             ,xtype: 'button'
             ,menu: [{
                 text: _('topic')
-                ,handler: this.loadWindow2.createDelegate(this,['modx-window-lexicon-topic-create'],true)
+                ,handler: this.loadWindow2.createDelegate(this,[{
+                    xtype: 'modx-window-lexicon-topic-create'
+                    ,listeners: {
+                        'success':{fn:function() {
+                            this.refresh();
+                            var cb = Ext.getCmp('modx-lexicon-filter-topic');
+                            if (cb) { cb.store.reload(); }
+                        },scope: this}
+                    }
+                }],true)
                 ,scope: this
             },{
                 text: _('namespace')
-                ,handler: this.loadWindow2.createDelegate(this,['modx-window-namespace-create'],true)
+                ,handler: this.loadWindow2.createDelegate(this,[{
+                    xtype: 'modx-window-namespace-create'
+                    ,listeners: {
+                        'success':{fn:function() {
+                            Ext.getCmp('modx-lexicon-topic-filter-namespace').store.reload();
+                            var cb = Ext.getCmp('modx-lexicon-filter-namespace');
+                            if (cb) { cb.store.reload(); }
+                        },scope: this}
+                    }
+                }],true)
                 ,scope: this
             }]
         }]
@@ -83,13 +101,11 @@ Ext.extend(MODx.grid.LexiconTopic,MODx.grid.Grid,{
         this.config.saveParams[name] = nv;
         this.refresh();
     }
-    ,loadWindow2: function(btn,e,xtype) {
+    ,loadWindow2: function(btn,e,o) {
         this.menu.record = {
             'namespace': Ext.getCmp('modx-lexicon-topic-filter-namespace').getValue()
         };
-        this.loadWindow(btn, e, {
-            xtype: xtype
-        });
+        this.loadWindow(btn,e,o);
     }
 });
 Ext.reg('modx-grid-lexicon-topic',MODx.grid.LexiconTopic);
