@@ -190,7 +190,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         var n = this.config.record.name;
         var f = this.fp.getForm();
         
-        if (f.findField('cached').getValue()) {
+        if (f.findField('cached').getValue() != true) {
             v = v+'!';
         }
         switch (this.config.record.classKey) {
