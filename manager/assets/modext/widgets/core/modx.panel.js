@@ -37,6 +37,8 @@ MODx.FormPanel = function(config) {
         ,border: false
         ,method: 'POST'
         ,cls: 'modx-form'
+        ,ddGroup: 'modx-treedrop-dd'
+        ,allowDrop: true
         ,errorReader: MODx.util.JSONReader
         ,checkDirty: true
     });
@@ -160,6 +162,22 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     
     ,onReady: function(r) {
     	this.isReady = true;
+        if (this.config.allowDrop) { this.loadDropZones(); }
+    }
+    
+    ,loadDropZones: function() {        
+        var flds = this.getForm().items;
+        flds.each(function(fld) {
+            if (fld.isFormField && (
+                fld.isXType('textfield') || fld.isXType('textarea')
+            ) && !fld.isXType('combo')) {
+                new MODx.load({
+                    xtype: 'modx-treedrop'
+                    ,target: fld
+                    ,targetEl: fld.getEl().dom
+                });
+            }
+        });
     }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);

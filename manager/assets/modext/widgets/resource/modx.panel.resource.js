@@ -12,7 +12,6 @@ MODx.panel.Resource = function(config) {
         ,baseParams: {}
         ,id: 'modx-panel-resource'
         ,class_key: 'modResource'
-        ,ddGroup: 'modx-treedrop-dd'
         ,resource: ''
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
@@ -243,13 +242,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         Ext.getCmp('modx-resource-settings-fp').getForm().setValues(this.config.record);
     }
     ,setup: function() {
-        var el = Ext.getCmp('ta');
-        this.treedrop = new MODx.load({
-            xtype: 'modx-treedrop'
-            ,target: el
-            ,targetEl: el.getEl().dom
-        });
-        
         if (this.config.resource === '' || this.config.resource === 0) {
             this.fireEvent('ready');
             return false;
