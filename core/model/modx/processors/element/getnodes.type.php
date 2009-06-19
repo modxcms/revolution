@@ -157,6 +157,7 @@ foreach ($elements as $element) {
         'cls' => 'icon-'.$g[1],
         'href' => '?a='.$ar_actionmap[$g[1]].'&id='.$element->get('id'),
         'type' => $g[1],
+        'classKey' => $elementClassKey,
         'qtip' => $element->get('description'),
         'menu' => array(
             'items' => $menu,

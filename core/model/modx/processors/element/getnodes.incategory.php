@@ -142,6 +142,7 @@ foreach ($elements as $element) {
         'cls' => 'icon-'.$elementIdentifier,
         'href' => 'index.php?a='.$ar_actionmap[$elementIdentifier].'&id='.$element->get('id'),
         'type' => $elementIdentifier,
+        'classKey' => $elementClassKey,
         'menu' => array('items' => $menu),
     );
 }
