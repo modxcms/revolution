@@ -15,6 +15,7 @@ MODx.panel.Plugin = function(config) {
         ,plugin: ''
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
+        ,allowDrop: false
         ,items: [{
             html: '<h2>'+_('plugin_new')+'</h2>'
             ,id: 'modx-plugin-header'

@@ -14,6 +14,7 @@ MODx.panel.Snippet = function(config) {
         ,plugin: ''
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
+        ,allowDrop: false
         ,items: [{
             html: '<h2>'+_('snippet_new')+'</h2>'
             ,id: 'modx-snippet-header'
