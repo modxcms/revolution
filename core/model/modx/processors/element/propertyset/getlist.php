@@ -18,6 +18,8 @@
  */
 $modx->lexicon->load('propertyset');
 
+$limit = !empty($_REQUEST['limit']);
+if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
@@ -25,14 +27,12 @@ if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 $c = $modx->newQuery('modPropertySet');
 
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if (isset($_REQUEST['limit'])) {
-    $c = $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 $sets = $modx->getCollection('modPropertySet',$c);
 $count = $modx->getCount('modPropertySet');
 
 
-if (isset($_REQUEST['showNotAssociated']) && $_REQUEST['showNotAssociated']) {
+if (!empty($_REQUEST['showNotAssociated'])) {
     $eps = $modx->getCollection('modElementPropertySet',array(
         'element' => $_REQUEST['elementId'],
         'element_class' => $_REQUEST['elementType'],
@@ -44,7 +44,7 @@ if (isset($_REQUEST['showNotAssociated']) && $_REQUEST['showNotAssociated']) {
             unset($sets[$psId]);
         }
     }
-} elseif (isset($_REQUEST['showAssociated']) && $_REQUEST['showAssociated']) {
+} elseif (!empty($_REQUEST['showAssociated'])) {
     $eps = $modx->getCollection('modElementPropertySet',array(
         'element' => $_REQUEST['elementId'],
         'element_class' => $_REQUEST['elementType'],
@@ -69,7 +69,7 @@ if (isset($_REQUEST['showNotAssociated']) && $_REQUEST['showNotAssociated']) {
 
 
 $cs = array();
-if (isset($_REQUEST['elementId']) && isset($_REQUEST['elementType'])) {
+if (!empty($_REQUEST['elementId']) && !empty($_REQUEST['elementType'])) {
     $properties = array();
     $element = $modx->getObject($_POST['elementType'],$_POST['elementId']);
     if ($element) {
@@ -77,7 +77,7 @@ if (isset($_REQUEST['elementId']) && isset($_REQUEST['elementType'])) {
         if (!is_array($properties)) $properties = array();
     }
 
-    if (!isset($_REQUEST['showNotAssociated']) || !$_REQUEST['showNotAssociated']) {
+    if (empty($_REQUEST['showNotAssociated'])) {
         $cs[] = array('id' => 0, 'name' => $modx->lexicon('default'), 'description' => '', 'properties' => $properties);
         $count++;
     }

@@ -394,6 +394,16 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                 ,handler: this.revert
             });
         }
+        if (r.overridden == 2 && !def) {
+            m.push({
+                text: _('property_remove')
+                ,scope: this
+                ,handler: this.remove.createDelegate(this,[{
+                    title: _('warning')
+                    ,text: _('property_remove_confirm')
+                }])
+            });
+        }
         
         if (r.overridden != 1 && def) {
             m.push({

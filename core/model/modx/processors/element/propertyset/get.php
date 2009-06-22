@@ -33,7 +33,7 @@ if ($_REQUEST['id'] != 0) {
     $set->set('properties',$default);
 }
 
-if (!isset($set) || $set == null) {
+if (empty($set)) {
     return $modx->error->failure($modx->lexicon('propertyset_err_nfs',array('id' => $_REQUEST['id'])));
 }
 
