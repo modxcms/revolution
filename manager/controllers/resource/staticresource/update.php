@@ -3,6 +3,8 @@
  * @package modx
  * @subpackage controllers.resource.staticresource
  */
+if (!$modx->hasPermission('edit_document')) return $modx->error->failure($modx->lexicon('access_denied'));
+
 $resource = $modx->getObject('modResource',$_REQUEST['id']);
 if ($resource == null) return $modx->error->failure(sprintf($modx->lexicon('resource_with_id_not_found'), $_REQUEST['id']));
 

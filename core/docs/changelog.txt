@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-770] Fixed bug with creating Symlink
 - Fixed issues with creating and editing a static resource
 - Fixed bug with treedrop that set boolean values to string representations; changed to 1/0
 - Fixed missing context menu item to remove new properties in a property set
