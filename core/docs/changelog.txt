@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added functionality for Element Tag Builder to use descriptions of properties
 - [#MODX-817] Redid Clear Cache window to use MODx.Console
 - Lexiconized missing "Copy to Clipboard" string
 - Slight tweaks to MODx.Console to get messages to display final ending messages properly
