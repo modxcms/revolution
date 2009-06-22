@@ -14,6 +14,7 @@ MODx.Msg = function(config) {
         ,'failure': true
         ,'cancel': true
     });
+    Ext.MessageBox.minWidth = 200;
 };
 Ext.extend(MODx.Msg,Ext.Component,{
     confirm: function(config) {

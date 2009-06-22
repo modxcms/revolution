@@ -41,7 +41,7 @@ MODx.Console = function(config) {
             ,cls: 'modx-console'            
         }]
         ,buttons: [{
-            text: 'Copy to Clipboard'
+            text: _('copy_to_clipboard')
             ,handler: this.copyToClipboard
             ,scope: this
         },{
@@ -51,26 +51,29 @@ MODx.Console = function(config) {
             ,scope: this
             ,handler: this.hideConsole
         }]
-        ,listeners: {
-        	'show': {fn:this.init ,scope:this}
-        }
 	});
 	MODx.Console.superclass.constructor.call(this,config);
 	this.config = config;
+    this.addEvents({
+        'shutdown': true
+        ,'complete': true
+    });
+    this.on('show',this.init,this);
+    this.on('complete',this.complete,this);
 };
 Ext.extend(MODx.Console,Ext.Window,{
     mgr: null
     ,running: false
     
     ,init: function() {
-       Ext.Msg.hide();
-       if (MODx.util.LoadingBox) { MODx.util.LoadingBox.disable(); }
-       Ext.get('console-body').update('');
-       if (this.running !== true) {
-           this.mgr = new Ext.Updater('console-body');
-       }
-       this.mgr.startAutoRefresh('.5',this.config.url,this.config.baseParams || {},this.renderMsg,true);
-       this.running = true;
+        Ext.Msg.hide();
+        if (MODx.util.LoadingBox) { MODx.util.LoadingBox.disable(); }
+        Ext.get('console-body').update('');
+        if (this.running !== true) {
+            this.mgr = new Ext.Updater('console-body');
+        }
+        this.mgr.startAutoRefresh('.5',this.config.url,this.config.baseParams || {},this.renderMsg,true);
+        this.running = true;
     }
     
     ,copyToClipboard: function() {
@@ -91,16 +94,17 @@ Ext.extend(MODx.Console,Ext.Window,{
     
     ,hideConsole: function() {
         Ext.getCmp('modx-console-ok').setDisabled(true);
+        this.shutdown();
         this.hide();
     }
     
     ,complete: function() {
     	Ext.getCmp('modx-console-ok').setDisabled(false);
-        this.shutdown();
+        this.mgr.refresh();
+        this.mgr.stopAutoRefresh();
     }
     
     ,shutdown: function() {
-        this.mgr.stopAutoRefresh();
         if (MODx.util.LoadingBox) { MODx.util.LoadingBox.enable(); }
     	MODx.Ajax.request({
     	    url: this.config.url
@@ -114,6 +118,8 @@ Ext.extend(MODx.Console,Ext.Window,{
             ,listeners: {
             	'success': {fn:function(r) {                    
                     Ext.getCmp('console-body').getEl().update(r.message);
+                    this.mgr.stopAutoRefresh();
+                    this.fireEvent('shutdown',r);
         	    },scope:this}
             }
     	});

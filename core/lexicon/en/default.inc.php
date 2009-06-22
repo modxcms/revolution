@@ -65,6 +65,7 @@ $_lang['console'] = 'Console';
 $_lang['console_running'] = 'Console running...';
 $_lang['content'] = 'Content';
 $_lang['content_elements'] = 'Content Elements';
+$_lang['copy_to_clipboard'] = 'Copy to Clipboard';
 $_lang['correct_errors'] = 'Please correct the errors in your form before submitting.';
 $_lang['create'] = 'Create';
 $_lang['create_document_here'] = 'Create document here';

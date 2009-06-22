@@ -61,14 +61,29 @@ Ext.extend(MODx,Ext.Component,{
     ,loadAccordionPanels: function() { return []; }
     
     ,clearCache: function() {
+        var topic = '/clearcache/';
+        if (this.console == null || this.console == undefined) {
+            this.console = MODx.load({
+               xtype: 'modx-console'
+               ,register: 'mgr'
+               ,topic: topic
+               ,listeners: {
+                    'shutdown': {fn:function() {
+                        Ext.getCmp('modx-layout').refreshTrees();
+                    }}
+               }
+            });
+        } else {
+            this.console.setRegister('mgr',topic);
+        }
+        this.console.show(Ext.getBody());
+        
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'system/index.php'
-            ,params: { action: 'clearCache' }
+            ,params: { action: 'clearCache',register: 'mgr' ,topic: topic }
             ,listeners: {
-                'success':{fn:function(r) {
-                    MODx.msg.alert(_('success'),r.message,function() {
-                        Ext.getCmp('modx-layout').refreshTrees();
-                    },this);
+                'success':{fn:function() {
+                    this.console.fireEvent('complete');
                 },scope:this}
             }
         });

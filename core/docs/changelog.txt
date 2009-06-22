@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-817] Redid Clear Cache window to use MODx.Console
+- Lexiconized missing "Copy to Clipboard" string
+- Slight tweaks to MODx.Console to get messages to display final ending messages properly
+- Changed invokeEvent missing event warning to debug msg to prevent it from logging in every console output
 - [#MODX-818] Fixed issues with Quick Create where it didnt work in FF, missing lexicon strings
 - Added Visual Element tag builder when you drag/drop an element into a field
 - Resources/Elements can now be dragged from tree straight to Resource Content pane.

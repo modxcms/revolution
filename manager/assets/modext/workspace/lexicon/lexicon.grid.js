@@ -218,7 +218,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     	   ,params: { action: 'reloadFromBase' ,register: 'mgr' ,topic: topic }
     	   ,listeners: {
     	       'success': {fn:function(r) {
-        	       this.console.complete();
+        	       this.console.fireEvent('complete');
                    this.refresh();
         	   },scope:this}
 	       }

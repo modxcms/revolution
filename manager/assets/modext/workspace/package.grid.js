@@ -143,13 +143,13 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             ,params: va
             ,listeners: {
                 'success': {fn:function(r) {
-                    this.console.complete();
+                    this.console.fireEvent('complete');
                     Ext.Msg.hide();
                     this.refresh();
                     parent.Ext.getCmp('modx-layout').refreshTrees();
                 },scope:this}
                 ,'failure': {fn:function(r) {
-                    this.console.complete();
+                    this.console.fireEvent('complete');
                     Ext.Msg.hide();
                     this.refresh();
                 },scope:this}
@@ -197,13 +197,13 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                 'success': {fn:function() {
                     Ext.getCmp('modx-window-package-installer').hide();
                     this.refresh();
-                    this.console.complete();
+                    this.console.fireEvent('complete');
                     parent.Ext.getCmp('modx-layout').refreshTrees();
                 },scope:this}
                 ,'failure': {fn:function() {
                     Ext.Msg.hide();
                     this.refresh();
-                    this.console.complete();
+                    this.console.fireEvent('complete');
                 },scope:this}
             }
         });
@@ -267,7 +267,7 @@ Ext.extend(MODx.window.RemovePackage,MODx.Window,{
                 ,failure: function(frm,a) {
                     this.fireEvent('failure',frm,a);
                     var g = Ext.getCmp('modx-grid-package');
-                    g.getConsole().complete();
+                    g.getConsole().fireEvent('complete');
                     g.refresh();
                     Ext.Msg.hide();
                     this.hide();
@@ -275,7 +275,7 @@ Ext.extend(MODx.window.RemovePackage,MODx.Window,{
                 ,success: function(frm,a) {
                     this.fireEvent('success',{f:frm,a:a});
                     var g = Ext.getCmp('modx-grid-package');
-                    g.getConsole().complete();
+                    g.getConsole().fireEvent('complete');
                     g.refresh();
                     Ext.Msg.hide();
                     this.hide();

@@ -32,7 +32,7 @@ $results= $modx->cacheManager->clearCache($paths, $options);
 /* invoke OnSiteRefresh event */
 $modx->invokeEvent('OnSiteRefresh');
 
-$o = '<div style="font-size: .8em;">';
+$o = '';
 $num_rows_pub = isset($results['publishing']['published']) ? $results['publishing']['published'] : 0;
 $num_rows_unpub = isset($results['publishing']['unpublished']) ? $results['publishing']['unpublished'] : 0;
 $o .= $modx->lexicon('refresh_published',array( 'num' => $num_rows_pub )).'<br />';
@@ -45,6 +45,7 @@ if (count($results['deleted_files_count']) > 0) {
     }
     $o .= '</ul>';
 }
-$o .= '</div>';
+
+$modx->log(MODX_LOG_LEVEL_INFO,$o);
 
 return $modx->error->success($o);
