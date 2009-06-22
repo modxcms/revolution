@@ -3,6 +3,20 @@
  * @package modx
  * @subpackage controllers.resource.staticresource
  */
+$resource = $modx->getObject('modResource',$_REQUEST['id']);
+if ($resource == null) return $modx->error->failure(sprintf($modx->lexicon('resource_with_id_not_found'), $_REQUEST['id']));
+
+if (!$resource->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('access_permission_denied'));
+}
+
+$lockedBy = $resource->addLock($modx->user->get('id'));
+if (!empty($lockedBy) && $lockedBy !== true) {
+    if ($user = $modx->getObject('modUser', $lockedBy)) {
+        $lockedBy = $user->get('username');
+    }
+    return $modx->error->failure($modx->lexicon('resource_locked_by', array('user' => $lockedBy, 'id' => $resource->get('id'))));
+}
 
 if (isset($_REQUEST['template'])) $resource->set('template',$_REQUEST['template']);
 

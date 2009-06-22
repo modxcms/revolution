@@ -9,12 +9,13 @@ $resource = $modx->newObject($resourceClass);
 
 /* specific data escaping */
 $_POST['pagetitle'] = trim($_POST['pagetitle']);
-if (empty($_POST['menuindex'])) $_POST['menuindex'] = 0;
 $_POST['variablesmodified'] = isset($_POST['variablesmodified'])
     ? explode(',',$_POST['variablesmodified'])
     : array();
-$_POST['parent'] = $_POST['parent'] != '' ? $_POST['parent'] : 0;
 
+$_POST['parent'] = empty($_POST['parent']) ? 0 : intval($_POST['parent']);
+$_POST['context_key']= empty($_POST['context_key']) ? 'web' : $_POST['context_key'];
+$_POST['parent'] = empty($_POST['parent']) ? 0 : intval($_POST['parent']);
 $_POST['isfolder'] = empty($_POST['isfolder']) ? 0 : 1;
 $_POST['hidemenu'] = empty($_POST['hidemenu']) ? 1 : 0;
 $_POST['richtext'] = empty($_POST['richtext']) ? 0 : 1;
@@ -23,12 +24,13 @@ $_POST['published'] = empty($_POST['published']) ? 0 : 1;
 $_POST['cacheable'] = empty($_POST['cacheable']) ? 0 : 1;
 $_POST['searchable'] = empty($_POST['searchable']) ? 0 : 1;
 $_POST['syncsite'] = empty($_POST['syncsite']) ? 0 : 1;
+$_POST['menuindex'] = empty($_POST['menuindex']) ? 0 : $_POST['menuindex'];
 $_POST['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
 
 /* default pagetitle */
-if ($_POST['pagetitle'] == '') $_POST['pagetitle'] = $modx->lexicon('untitled_resource');
+if (empty($_POST['pagetitle'])) $_POST['pagetitle'] = $modx->lexicon('untitled_resource');
 
-$_POST['context_key']= !isset($_POST['context_key']) || $_POST['context_key'] == '' ? 'web' : $_POST['context_key'];
+$_POST['context_key']= empty($_POST['context_key']) ? 'web' : $_POST['context_key'];
 
 /* friendly url alias checks */
 if ($modx->getOption('friendly_alias_urls')) {
@@ -84,27 +86,30 @@ if ($modx->error->hasError()) return $modx->error->failure();
 
 /* publish and unpublish dates */
 $now = time();
-if (empty($_POST['pub_date'])) {
-    $_POST['pub_date'] = 0;
-} else {
-    list ($d, $m, $Y, $H, $M, $S) = sscanf($_POST['pub_date'],"%2d-%2d-%4d %2d:%2d:%2d");
-    $_POST['pub_date'] = mktime($H, $M, $S, $m, $d, $Y);
-    if ($_POST['pub_date'] < $now) $_POST['published'] = 1;
-    if ($_POST['pub_date'] > $now) $_POST['published'] = 0;
+if (isset($_POST['pub_date'])) {
+    if (empty($_POST['pub_date'])) {
+        $_POST['pub_date'] = 0;
+    } else {
+        list ($d, $m, $Y, $H, $M, $S) = sscanf($_POST['pub_date'],"%2d-%2d-%4d %2d:%2d:%2d");
+        $_POST['pub_date'] = mktime($H, $M, $S, $m, $d, $Y);
+        if ($_POST['pub_date'] < $now) $_POST['published'] = 1;
+        if ($_POST['pub_date'] > $now) $_POST['published'] = 0;
+    }
 }
-
-if (empty($_POST['unpub_date'])) {
-    $_POST['unpub_date'] = 0;
-} else {
-    list ($d, $m, $Y, $H, $M, $S) = sscanf($_POST['unpub_date'], "%2d-%2d-%4d %2d:%2d:%2d");
-    $_POST['unpub_date'] = mktime($H, $M, $S, $m, $d, $Y);
-    if ($_POST['unpub_date'] < $now) {
-        $_POST['published'] = 0;
+if (isset($_POST['unpub_date'])) {
+    if (empty($_POST['unpub_date'])) {
+        $_POST['unpub_date'] = 0;
+    } else {
+        list ($d, $m, $Y, $H, $M, $S) = sscanf($_POST['unpub_date'], "%2d-%2d-%4d %2d:%2d:%2d");
+        $_POST['unpub_date'] = mktime($H, $M, $S, $m, $d, $Y);
+        if ($_POST['unpub_date'] < $now) {
+            $_POST['published'] = 0;
+        }
     }
 }
 
 
-if ($_POST['template'] && ($template = $modx->getObject('modTemplate', $_POST['template']))) {
+if (!empty($_POST['template']) && ($template = $modx->getObject('modTemplate', $_POST['template']))) {
     $tmplvars = array();
     $c = $modx->newQuery('modTemplateVar');
     $c->select('DISTINCT modTemplateVar.*, modTemplateVar.default_text AS value');
@@ -165,18 +170,21 @@ if (!$modx->hasPermission('publish_document')) {
     $_POST['published'] = 0;
 }
 
-if (!isset($_POST['publishedon']) || $_POST['publishedon'] == '') {
-    $_POST['publishedon'] = $_POST['published'] ? time() : 0;
-} else {
-    $_POST['publishedon'] = strtotime($_POST['publishedon']);
+if (isset($_POST['published'])) {
+    if (empty($_POST['publishedon'])) {
+        $_POST['publishedon'] = $_POST['published'] ? time() : 0;
+    } else {
+        $_POST['publishedon'] = strtotime($_POST['publishedon']);
+    }
+    $_POST['publishedby'] = $_POST['published'] ? $modx->user->get('id') : 0;
 }
-$_POST['publishedby'] = $_POST['published'] ? $modx->user->get('id') : 0;
 
 /* set fields */
 $resource->fromArray($_POST);
 
 /* increase menu index if this is a new resource */
-if (!empty($modx->getOption('auto_menuindex'))) {
+$auto_menuindex = $modx->getOption('auto_menuindex');
+if (!empty($auto_menuindex)) {
     $menuindex = $modx->getCount('modResource',array('parent' => $resource->get('parent')));
 }
 $resource->set('menuindex',isset($menuindex) ? $menuindex : 0);
@@ -202,45 +210,10 @@ if (is_array($_POST['docgroups'])) {
     }
 }
 
-if ($_POST['parent'] != 0) {
+if (!empty($_POST['parent'])) {
     $parent = $modx->getObject('modResource', $_POST['parent']);
     $parent->set('isfolder', 1);
     $parent->save();
-}
-
-/* Save META Keywords */
-if ($modx->hasPermission('edit_doc_metatags')) {
-    /* keywords - remove old keywords first */
-    $okws = $modx->getCollection('modResourceKeyword',array('content_id' => $resource->get('id')));
-    foreach ($okws as $kw) $kw->remove();
-
-    if (is_array($keywords)) {
-        foreach ($keywords as $keyword) {
-            $kw = $modx->newObject('modResourceKeyword');
-            $kw->set('content_id',$resource->get('id'));
-            $kw->set('keyword_id',$keyword);
-            $kw->save();
-        }
-    }
-
-    /* meta tags - remove old tags first */
-    $omts = $modx->getCollection('modResourceMetatag',array('content_id' => $resource->get('id')));
-    foreach ($omts as $mt) $mt->remove();
-
-    if (is_array($metatags)) {
-        foreach ($metatags as $metatag) {
-            $mt = $modx->newObject('modResourceMetatag');
-            $mt->set('content_id',$resource->get('id'));
-            $mt->set('metatag_id',$metatag);
-            $mt->save();
-        }
-    }
-
-    if ($resource != null) {
-        $resource->set('haskeywords',count($keywords) ? 1 : 0);
-        $resource->set('hasmetatags',count($metatags) ? 1 : 0);
-        $resource->save();
-    }
 }
 
 /* invoke OnDocFormSave event */
@@ -250,7 +223,7 @@ $modx->invokeEvent('OnDocFormSave',array(
     'resource' => & $resource
 ));
 
-if ($_POST['syncsite'] == 1) {
+if (!empty($_POST['syncsite']) || !empty($_POST['clearCache'])) {
     /* empty cache */
     $cacheManager= $modx->getCacheManager();
     $cacheManager->clearCache(array (

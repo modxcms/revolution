@@ -77,7 +77,7 @@ $_POST['cacheable'] = empty($_POST['cacheable']) ? 0 : 1;
 $_POST['searchable'] = empty($_POST['searchable']) ? 0 : 1;
 $_POST['syncsite'] = empty($_POST['syncsite']) ? 0 : 1;
 $_POST['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
-$_POST['menuindex'] = empty($_POST['menuindex']) ? 0 : 1;
+$_POST['menuindex'] = empty($_POST['menuindex']) ? 0 : $_POST['menuindex'];
 
 /* specific data escaping */
 $_POST['pagetitle'] = trim($_POST['pagetitle']);
@@ -241,10 +241,11 @@ if (!$resource->get('class_key')) {
 }
 
 /* increase menu index if this is a new resource */
-if ($modx->getOption('auto_menuindex')) {
+$auto_menuindex = $modx->getOption('auto_menuindex');
+if (!empty($auto_menuindex)) {
     $menuindex = $modx->getCount('modResource',array('parent' => $resource->get('parent')));
 }
-$resource->set('menuindex',isset($menuindex) ? $menuindex : 0);
+$resource->set('menuindex',!empty($menuindex) ? $menuindex : 0);
 
 /* save data */
 if ($resource->save() == false) {
