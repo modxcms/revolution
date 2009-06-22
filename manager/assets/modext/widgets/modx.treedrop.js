@@ -207,6 +207,8 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         for (var i=0;i<this.modps.length;i++) {
             var fld = this.modps[i];
             var val = Ext.getCmp('modx-iprop-'+fld).getValue();
+            if (val == true) val = 1;
+            if (val == false) val = 0;
             v = v+' &'+fld+'=`'+val+'`';
         }
         v = v+']]';
