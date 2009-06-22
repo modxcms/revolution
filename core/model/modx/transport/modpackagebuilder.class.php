@@ -31,32 +31,45 @@
 class modPackageBuilder {
     /**
     * @var string The directory in which the package file is located.
+    * @access public
     */
     var $directory;
     /**
     * @var string The unique signature for the package.
+    * @access public
     */
     var $signature;
     /**
     * @var string The filename of the actual package.
+    * @access public
     */
     var $filename;
     /**
     * @var string The xPDOTransport package object.
+    * @access public
     */
     var $package;
     /**
      * @var string The modNamespace that the package is associated with.
+     * @access public
      */
     var $namespace;
     /**
      * @var array An array of classnames to automatically select by namespace
+     * @access public
      */
     var $autoselects;
 
+    /**#@+
+     * Creates an instance of the modPackageBuilder class.
+     *
+     * @param modX &$modx A reference to a modX instance.
+     * @return modPackageBuilder
+     */
     function modPackageBuilder(& $modx) {
         $this->__construct($modx);
     }
+    /** @ignore */
     function __construct(& $modx) {
         $this->modx = & $modx;
         $this->modx->loadClass('transport.modTransportVehicle', '', false, true);
@@ -72,12 +85,14 @@ class modPackageBuilder {
         $this->modx->lexicon->load('workspace');
         $this->autoselects = array ();
     }
+    /**#@-*/
 
     /**
     * Allows for customization of the package workspace.
     *
+    * @access public
     * @param integer $workspace_id The ID of the workspace to select.
-    * @returns modWorkspace The workspace set, false if invalid.
+    * @return modWorkspace The workspace set, false if invalid.
     */
     function setWorkspace($workspace_id) {
         if (!is_numeric($workspace_id)) {
@@ -94,6 +109,7 @@ class modPackageBuilder {
 
     /**
      * @deprecated
+     * @see modPackageBuilder::createPackage
      */
     function create($name, $version, $release = '') {
         $this->createPackage($name, $version, $release);
@@ -102,11 +118,12 @@ class modPackageBuilder {
     /**
     * Creates a new xPDOTransport package.
     *
+    * @access public
     * @param string $name The name of the component the package represents.
     * @param string $version A string representing the version of the package.
     * @param string $release A string describing the specific release of this version of the
     * package.
-    * @returns xPDOTransport The xPDOTransport package object.
+    * @return xPDOTransport The xPDOTransport package object.
     */
     function createPackage($name, $version, $release = '') {
         /* setup the signature and filename */
@@ -145,7 +162,9 @@ class modPackageBuilder {
      * Sets the classes that are to automatically be included and built into the
      * package.
      *
+     * @access public
      * @param array An array of class names to build in
+     * @return null
      */
     function setAutoSelects($classes = array ()) {
         $this->autoselects = $classes;
@@ -154,9 +173,10 @@ class modPackageBuilder {
     /**
     * Creates the modTransportVehicle for the specified object.
     *
+    * @access public
     * @param xPDOObject $obj The xPDOObject being abstracted as a vehicle.
     * @param array $attr Attributes for the vehicle.
-    * @returns modTransportVehicle The createed modTransportVehicle instance.
+    * @return modTransportVehicle The createed modTransportVehicle instance.
     */
     function createVehicle($obj, $attr) {
         if ($this->namespace) {
@@ -250,6 +270,7 @@ class modPackageBuilder {
     /**
     * Puts the vehicle into the package.
     *
+    * @access public
     * @param modTransportVehicle $vehicle The vehicle to insert into the package.
     * @return boolean True if successful.
     */
@@ -262,6 +283,9 @@ class modPackageBuilder {
     /**
     * Packs the package.
     *
+    * @see xPDOTransport::pack
+    *
+    * @access public
     * @return boolean True if successful.
     */
     function pack() {
@@ -430,8 +454,10 @@ class modPackageBuilder {
     /**
      * Set an array of attributes into the xPDOTransport manifest.
      *
+     * @access public
      * @param array $attributes An array of attributes to set in the
      * manifest of the package being built.
+     * @return null
      */
     function setPackageAttributes($attributes = array ()) {
         if ($this->package !== null) {

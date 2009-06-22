@@ -20,14 +20,28 @@ class modTransportProvider extends xPDOSimpleObject {
      */
     var $client = null;
 
+    /**#@+
+     * Creates an instance of the modTransportProvider class
+     *
+     * {@inheritdoc}
+     */
     function modTransportProvider(& $xpdo) {
         $this->__construct($xpdo);
     }
+    /** @ignore */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('created', strftime('%Y-%m-%d %H:%M:%S'));
     }
+    /**#@-*/
 
+    /**
+     * Handles the response from the provider. Returns response in array format.
+     *
+     * @access public
+     * @param jsonrpcresp $response The json-rpc response.
+     * @return array The parsed response.
+     */
     function handleResponse($response) {
         $result = array();
         if (!is_a($response, 'jsonrpcresp')) {
@@ -51,6 +65,7 @@ class modTransportProvider extends xPDOSimpleObject {
     /**
      * Scan the provider for new packages available for installation.
      *
+     * @access public
      * @return array A collection of metadata describing the packages.
      */
     function scanForPackages() {
@@ -78,6 +93,7 @@ class modTransportProvider extends xPDOSimpleObject {
     /**
      * Scan the provider for available updates to existing packages installed in the workspace.
      *
+     * @access public
      * @return array A collection of metadata describing the packages.
      */
     function scanForUpdates() {
@@ -119,6 +135,7 @@ class modTransportProvider extends xPDOSimpleObject {
     /**
      * Get the RPC client responsible for communicating with the provider.
      *
+     * @access public
      * @return jsonrpc_client The JSON-RPC client instance.
      */
     function getClient() {
@@ -134,6 +151,7 @@ class modTransportProvider extends xPDOSimpleObject {
     /**
      * Send a request to the provider service and get the response.
      *
+     * @access public
      * @param jsonrpcmsg $payload The JSON-RPC message to send.
      * @param integer $timeout The maximum number of seconds to wait for a server response.
      * @param string $protocol The protocol to use for the connection, http or https.
@@ -148,4 +166,3 @@ class modTransportProvider extends xPDOSimpleObject {
         return $response;
     }
 }
-?>

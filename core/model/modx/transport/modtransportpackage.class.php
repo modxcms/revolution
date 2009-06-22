@@ -32,12 +32,19 @@ class modTransportPackage extends xPDOObject {
      */
     var $package = null;
 
+    /**#@+
+     * Creates an instance of a modTransportPackage.
+     *
+     * {@inheritdoc}
+     */
     function modTransportPackage(& $xpdo) {
         $this->__construct($xpdo);
     }
+    /** @ignore */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
     }
+    /**#@-*/
 
     /**
      * Overrides xPDOObject::save to set a default created time if new.
@@ -72,6 +79,7 @@ class modTransportPackage extends xPDOObject {
     /**
      * Parses the signature.
      *
+     * @access public
      * @return boolean True if successful.
      */
     function parseSignature() {
@@ -91,6 +99,8 @@ class modTransportPackage extends xPDOObject {
 
     /**
      * Gets the package's transport mechanism.
+     *
+     * @access public
      * @param integer $state The state of the package.
      * @return mixed The package.
      */
@@ -167,6 +177,7 @@ class modTransportPackage extends xPDOObject {
     /**
      * Installs the package.
      *
+     * @access public
      * @return boolean True if successful.
      */
     function install($options = array()) {
@@ -193,6 +204,7 @@ class modTransportPackage extends xPDOObject {
     /**
      * Uninstalls the package.
      *
+     * @access public
      * @return boolean True if successful.
      */
     function uninstall($options = array()) {
@@ -223,6 +235,7 @@ class modTransportPackage extends xPDOObject {
     /**
      * Transfers the package from one directory to another.
      *
+     * @access public
      * @param string $sourceFile The file to transfer.
      * @param string $targetDir The directory to transfer into.
      * @return boolean True if successful.

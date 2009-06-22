@@ -33,36 +33,50 @@
 class modTransportVehicle {
     /**
      * @var array The collection of attributes to attach to the vehicle.
+     * @access public
      */
     var $attributes;
     /**
     * @var array The collection of dependencies to resolve post-install/upgrade.
+    * @access public
     */
     var $resolvers;
     /**
     * @var string The collection of dependences to validate against pre-install/upgrade.
+    * @access public
     */
     var $validators;
     /**
     * @var mixed The actual object or artifact payload that the vehicle represents.
+    * @access public
     */
     var $obj;
 
+    /**#@+
+     * Creates an instance of the modTransportVehicle class.
+     *
+     * @param mixed $obj The object that the vehicle represents.
+     * @param array $attr An array of attributes for the object.
+     */
     function modTransportVehicle($obj, $attr = array ()) {
         $this->__construct($obj, $attr);
     }
+    /** @ignore */
     function __construct($obj, $attr = array ()) {
         $this->obj = $obj;
         $this->attributes = $attr;
         $this->validators = array ();
         $this->resolvers = array ();
     }
+    /**#@-*/
 
     /**
     * Adds a pre-creation validator to the vehicle.
     *
+    * @access public
     * @param string $type The type of validator (php,file,etc)
     * @param array $options An array of options for the validator.
+    * @return array The added validator.
     */
     function validate($type, $options) {
         $options['type'] = $type;
@@ -73,8 +87,10 @@ class modTransportVehicle {
     /**
     * Adds a post-save resolver to the vehicle.
     *
+    * @access public
     * @param string $type The type of resolver (php,file,etc)
     * @param array $options An array of options for the resolver.
+    * @return array The added resolver.
     */
     function resolve($type, $options) {
         $options['type'] = $type;
@@ -84,6 +100,9 @@ class modTransportVehicle {
 
     /**
     * Compiles the attributes array to pass on to the modPackageBuilder instance.
+    *
+    * @access public
+    * @return array An array of added attributes.
     */
     function compile() {
         $attributes = array_merge($this->attributes, array (
@@ -96,6 +115,9 @@ class modTransportVehicle {
 
     /**
     * Returns the artifact payload associated with the vehicle.
+    *
+    * @access public
+    * @return mixed The payload for this vehicle.
     */
     function fetch() {
         return $this->obj;

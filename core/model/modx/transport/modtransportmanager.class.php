@@ -1,7 +1,7 @@
 <?php
 /*
  * MODx Revolution
- * 
+ *
  * Copyright 2006, 2007, 2008, 2009 by the MODx Team.
  * All rights reserved.
  *
@@ -43,26 +43,37 @@ class modTransportManager {
      */
     var $workspace = null;
 
+    /**#@+
+     * Creates an instance of the modTransportManager class.
+     *
+     * @param modX &$modx A reference to a modX instance.
+     * @return modTransportManager
+     */
     function modTransportManager(& $modx) {
         $this->__construct($modx);
     }
+    /** @ignore */
     function __construct(& $modx) {
         $this->modx = & $modx;
         $this->getActiveWorkspace();
         $this->modx->loadClass('transport.xPDOTransport', XPDO_CORE_PATH . 'om/', true, true);
     }
+    /**#@-*/
 
 	/**
 	 * Get a list of providers for the transports.
 	 *
-	 * @param boolean $refresh If true, refresh the list of providers.
+     * @access public
+	 * @param boolean $refresh If true, refresh the list of providers. Defaults
+	 * to false.
 	 * @return array A list of providers.
 	 */
     function getProviders($refresh = false) {
-        if (empty ($this->providers) || $refresh) {
-            if (!$this->providers = $this->modx->getCollection('transport.modTransportProvider', array (
-                'disabled' => false
-            ))) {
+        if (empty($this->providers) || $refresh) {
+            $this->providers = $this->modx->getCollection('transport.modTransportProvider', array (
+                'disabled' => false,
+            ));
+            if (!$this->providers) {
                 $this->modx->log(MODX_LOG_LEVEL_ERROR, "Could not find any active transport providers.");
             }
         }
@@ -72,6 +83,7 @@ class modTransportManager {
 	/**
 	 * Get the active workspace for the MODx installation.
 	 *
+     * @access public
 	 * @return modWorkspace
 	 */
     function getActiveWorkspace() {
@@ -86,6 +98,7 @@ class modTransportManager {
 	/**
 	 * Change the active workspace in MODx.
 	 *
+     * @access public
 	 * @param integer $workspaceId The PK of the modWorkspace.
 	 * @return modWorkspace
 	 */
@@ -108,6 +121,7 @@ class modTransportManager {
 	/**
 	 * Scans all providers for a list of updates for all packages.
 	 *
+     * @access public
 	 * @return array An array of updates for packages.
 	 */
     function scanForUpdates() {
@@ -124,6 +138,7 @@ class modTransportManager {
 	/**
 	 * Scans all providers for a list of packages.
 	 *
+     * @access public
 	 * @return array An array of packages.
 	 */
     function scanForPackages() {
@@ -137,4 +152,3 @@ class modTransportManager {
         return $packages;
     }
 }
-?>
