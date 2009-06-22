@@ -35,6 +35,7 @@ if ($modx->hasPermission('view_template')) {
         'cls' => 'icon-template',
         'href' => '',
         'type' => 'template',
+        'draggable' => false,
         'menu' => array('items' => $templateMenu),
     );
     unset($templateMenu);
@@ -74,6 +75,7 @@ if ($modx->hasPermission('view_tv')) {
         'cls' => 'icon-tv',
         'href' => '',
         'type' => 'tv',
+        'draggable' => false,
         'menu' => array('items' => $tvMenu),
     );
     unset($tvMenu);
@@ -113,6 +115,7 @@ if ($modx->hasPermission('view_chunk')) {
         'cls' => 'icon-chunk',
         'href' => '',
         'type' => 'chunk',
+        'draggable' => false,
         'menu' => array('items' => $chunkMenu),
     );
     unset($chunkMenu);
@@ -152,6 +155,7 @@ if ($modx->hasPermission('view_snippet')) {
         'cls' => 'icon-snippet',
         'href' => '',
         'type' => 'snippet',
+        'draggable' => false,
         'menu' => array('items' => $snippetMenu),
     );
     unset($snippetMenu);
@@ -190,6 +194,7 @@ if ($modx->hasPermission('view_plugin')) {
         'cls' => 'icon-plugin',
         'href' => '',
         'type' => 'plugin',
+        'draggable' => false,
         'menu' => array('items' => $pluginMenu),
     );
     unset($pluginMenu);
@@ -214,6 +219,7 @@ if ($modx->hasPermission('view_category')) {
         'cls' => 'icon-category',
         'href' => '',
         'type' => 'category',
+        'draggable' => false,
         'menu' => array('items' => $categoryMenu),
     );
     unset($categoryMenu);

@@ -21,6 +21,8 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                 ddTarget.getEl().frame();
             }
             ,notifyDrop: function(ddSource, e, data) {
+                if (!data.node || !data.node.attributes || !data.node.attributes.type) return false;
+                if (data.node.attributes.leaf != true) return false;
                 var v = '';
                 var win = false;
                 switch (data.node.attributes.type) {
@@ -145,7 +147,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
     changePropertySet: function(cb) {
         var fp = Ext.getCmp('modx-iprops-fp');
         if (fp) fp.destroy();
-        
+
         var u = Ext.getCmp('modx-dise-proplist').getUpdater();
         u.update({
             url: MODx.config.connectors_url+'element/index.php'
@@ -169,6 +171,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
     }
     ,onPropFormLoad: function(el,s,r) {
         var vs = Ext.decode(r.responseText);
+        if (!vs || vs.length <= 0) { return false; }
         for (var i=0;i<vs.length;i++) {
             if (vs[i].store) {
                 vs[i].store = this.createStore(vs[i].store);

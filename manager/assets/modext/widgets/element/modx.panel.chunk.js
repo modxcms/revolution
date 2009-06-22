@@ -21,8 +21,10 @@ MODx.panel.Chunk = function(config) {
             ,id: 'modx-chunk-header'
         },{
             xtype: 'portal'
+            ,id: 'modx-chunk-portal'
             ,items: [{
                 columnWidth: 1
+                ,id: 'modx-chunk-col'
                 ,items: [{
                     title: _('chunk_title')
                     ,bodyStyle: 'padding: 1.5em;'
