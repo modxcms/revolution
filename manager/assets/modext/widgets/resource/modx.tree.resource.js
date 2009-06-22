@@ -234,6 +234,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,listeners: {
                 'success':{fn:function() { this.refreshNode(this.cm.activeNode.id); },scope:this}
                 ,'hide':{fn:function() { this.destroy(); }}
+                ,'show':{fn:function() {this.center();}}
             }
         });
         this.windows['quick-create-resource'].setValues(r);
@@ -316,7 +317,7 @@ MODx.window.QuickCreateResource = function(config) {
             id: 'modx-qcr-settings'
             ,title: _('settings')
             ,collapsible: true
-            ,collapsed: false
+            ,collapsed: true
             ,xtype: 'fieldset'
             ,autoHeight: true
             ,defaults: { autoHeight: true ,border: false }
@@ -441,7 +442,6 @@ MODx.getQRContentField = function(id,cls) {
 
 MODx.getQRSettings = function(id,va) {
     id = id || 'qur';
-    console.log(va);
     return [{
         xtype: 'hidden'
         ,name: 'parent'
