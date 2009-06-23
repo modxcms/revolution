@@ -8,17 +8,20 @@ MODx.TreeDrop = function(config) {
     this.config = config;
     this.setup();
 };
-Ext.extend(MODx.TreeDrop,Ext.Component,{
-    
+Ext.extend(MODx.TreeDrop,Ext.Component,{    
     setup: function() {
         var ddTarget = this.config.target;
         var ddTargetEl = this.config.targetEl;
+        var cfg = this.config;
         
         this.targetEl = new Ext.dd.DropTarget(this.config.targetEl, {
             ddGroup: this.config.ddGroup
             
             ,notifyEnter: function(ddSource, e, data) {
-                ddTarget.getEl().frame();
+                if (ddTarget.getEl) {
+                    var el = ddTarget.getEl();
+                    if (el) { el.frame(); }
+                }
             }
             ,notifyDrop: function(ddSource, e, data) {
                 if (!data.node || !data.node.attributes || !data.node.attributes.type) return false;
@@ -39,9 +42,16 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                         ,name: data.node.attributes.name
                         ,output: v
                         ,ddTargetEl: ddTargetEl
+                        ,iframe: cfg.iframe
+                        ,iframeEl: cfg.iframeEl
+                        ,onInsert: cfg.onInsert
                     });
                 } else {
-                    MODx.insertAtCursor(ddTargetEl,v);
+                    if (cfg.iframe) {
+                        MODx.insertForRTE(cfg.iframeEl,v,cfg.onInsert);
+                    } else {
+                        MODx.insertAtCursor(ddTargetEl,v,cfg.onInsert);
+                    }
                 }
                 return true;
             }
@@ -75,6 +85,18 @@ MODx.insertAtCursor = function(myField, myValue) {
         myField.value = myField.value.substring(0, startPos)+ myValue+ myField.value.substring(endPos, myField.value.length); 
     } else { 
         myField.value += myValue; 
+    }
+};
+MODx.insertForRTE = function(el,v,fn) {
+    if (fn) {
+        fn(v,el);
+    } else {
+        var ta = window.frames[0].document.getElementById(el);
+        if (ta.value) {
+            ta.value = ta.value + v;
+        } else {
+            ta.innerHTML = ta.innerHTML + v;
+        }
     }
 };
 
@@ -142,6 +164,7 @@ MODx.window.InsertElement = function(config) {
         }]
     });
     MODx.window.InsertElement.superclass.constructor.call(this,config);
+    this.on('show',function() { this.center(); },this);
 };
 Ext.extend(MODx.window.InsertElement,MODx.Window,{
     changePropertySet: function(cb) {
@@ -216,7 +239,11 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         }
         v = v+']]';
         
-        MODx.insertAtCursor(this.config.record.ddTargetEl,v);
+        if (this.config.record.iframe) {
+            MODx.insertForRTE(this.config.record.iframeEl,v,this.config.record.onInsert);
+        } else {
+            MODx.insertAtCursor(this.config.record.ddTargetEl,v);
+        }
         this.hide();
         return true;
     }
