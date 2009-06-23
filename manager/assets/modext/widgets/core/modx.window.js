@@ -45,6 +45,7 @@ MODx.Window = function(config) {
     this.addEvents({
         success: true
         ,failure: true
+        ,beforeSubmit: true
     });
 	this._loadForm();
     this.on('show',function() {
@@ -85,8 +86,9 @@ Ext.extend(MODx.Window,Ext.Window,{
 	 * Default handler for Window Form submissions. Allows for callbacks.
 	 */
 	,submit: function() {
-		if (this.fp.getForm().isValid()) {
-			this.fp.getForm().submit({ 
+        var f = this.fp.getForm();
+		if (f.isValid() && this.fireEvent('beforeSubmit',f.getValues())) {
+			f.submit({ 
 				waitMsg: _('saving')
 				,scope: this
 				,failure: function(frm,a) {

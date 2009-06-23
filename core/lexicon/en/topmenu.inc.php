@@ -71,6 +71,7 @@ $_lang['search_desc'] = 'Search for resources.';
 $_lang['security'] = 'Security';
 $_lang['site'] = 'Site';
 $_lang['support'] = 'Support';
+$_lang['support_desc'] = '';
 $_lang['site_schedule'] = 'Site Schedule';
 $_lang['site_schedule_desc'] = 'View Resources with upcoming publish or unpublish dates.';
 $_lang['system'] = 'System';

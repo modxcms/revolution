@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added ability to update plugin events and dynamically manage plugins associated with them by right-clicking on them in the Plugin Event grid
+- Added 'beforeSubmit' listener to MODx.Window
 - Adjusted TreeDrop code to allow for RTEs to utilize drag/drop features
 - [#MODX-827] Fixed typo in resource container help string
 - Added prevention fix to prevent dragging of non-elements/resources into content panes

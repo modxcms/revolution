@@ -7,6 +7,8 @@
  * @subpackage lexicon
  */
 $_lang['plugin'] = 'Plugin';
+$_lang['plugin_add'] = 'Add Plugin';
+$_lang['plugin_add_to_event'] = 'Add Plugin to Event';
 $_lang['plugin_code'] = 'Plugin code (php)';
 $_lang['plugin_config'] = 'Plugin configuration';
 $_lang['plugin_desc'] = 'Description';
@@ -26,6 +28,8 @@ $_lang['plugin_event_err_ns'] = 'Plugin event not specified.';
 $_lang['plugin_event_err_remove'] = 'An error occurred while removing the plugin event.';
 $_lang['plugin_event_err_save'] = 'An error occurred while saving the plugin event.';
 $_lang['plugin_event_msg'] = 'Select the events that you would like this plugin to listen to.';
+$_lang['plugin_event_plugin_remove_confirm'] = 'Are you sure you want to remove this plugin from this event?';
+$_lang['plugin_event_update'] = 'Update Plugin Event';
 $_lang['plugin_lock'] = 'Lock plugin for editing';
 $_lang['plugin_lock_msg'] = 'Users must have the edit_locked attribute in order to edit this plugin.';
 $_lang['plugin_locked_message'] = 'This plugin is locked.';
