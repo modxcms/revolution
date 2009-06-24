@@ -4,7 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
-- Added some key-events: CTRL+H for hiding accordion, CTRL+Z for clearing cache, CTRL+N for Quick Create Resource (PC users will need to add SHIFT to all those calls)
+- Changed clearCache key shortcut to CTRL+U (CTRL+SHIFT+U for PC users)
+- Fixed issue where folder resources couldnt be drag/dropped
+- Added some key-events: CTRL+H for hiding accordion, CTRL+U for clearing cache, CTRL+N for Quick Create Resource (PC users will need to add SHIFT to all those calls)
 - Fixed portal issues with Safari
 - Added a few events to MODx. JS object, cleaned up code
 - Added sanity checks to context/category create/update processors

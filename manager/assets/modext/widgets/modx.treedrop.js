@@ -25,7 +25,7 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
             }
             ,notifyDrop: function(ddSource, e, data) {
                 if (!data.node || !data.node.attributes || !data.node.attributes.type) return false;
-                if (data.node.attributes.leaf != true) return false;
+                if (data.node.attributes.type != 'modResource' && data.node.attributes.leaf != true) return false;
                 var v = '';
                 var win = false;
                 switch (data.node.attributes.type) {

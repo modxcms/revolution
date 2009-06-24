@@ -96,7 +96,7 @@ Ext.extend(MODx.Layout,Ext.Component,{
             ,stopEvent: true
         });
         k.addBinding({
-            key: Ext.EventObject.Z
+            key: Ext.EventObject.U
             ,ctrl: true
             ,shift: Ext.isMac ? false : true
             ,fn: MODx.clearCache
