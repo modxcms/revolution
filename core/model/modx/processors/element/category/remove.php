@@ -12,8 +12,8 @@ $modx->lexicon->load('category');
 
 if (!$modx->hasPermission('remove')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('category_err_ns'));
-$category = $modx->getObject('modCategory',$_REQUEST['id']);
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('category_err_ns'));
+$category = $modx->getObject('modCategory',$_POST['id']);
 if ($category == null) return $modx->error->failure($modx->lexicon('category_err_nf'));
 
 /* Hey friends! It's reset time! */

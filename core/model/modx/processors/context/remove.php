@@ -12,6 +12,7 @@ $modx->lexicon->load('context');
 if (!$modx->hasPermission('delete_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get context */
+if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('context_err_ns'));
 $context= $modx->getObject('modContext', $_POST['key']);
 if ($context == null) return $modx->error->failure($modx->lexicon('context_err_nf'));
 

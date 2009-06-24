@@ -17,6 +17,7 @@ MODx.Layout = function(config){
         id: 'modx-layout'
     });
     MODx.Layout.superclass.constructor.call(this,config);
+    this.loadKeys();
 };
 Ext.extend(MODx.Layout,Ext.Component,{    
     loadTrees: function() {
@@ -74,6 +75,36 @@ Ext.extend(MODx.Layout,Ext.Component,{
         });
     }
     
+    ,loadKeys: function() {
+        Ext.KeyMap.prototype.stopEvent = true;
+        var k = new Ext.KeyMap(Ext.get(document));        
+        k.addBinding({
+            key: Ext.EventObject.H
+            ,ctrl: true
+            ,shift: Ext.isMac ? false : true
+            ,fn: this.toggleAccordion
+            ,scope: this
+            ,stopEvent: true
+        });
+        k.addBinding({
+            key: Ext.EventObject.N
+            ,ctrl: true
+            ,shift: Ext.isMac ? false : true
+            ,fn: function() {
+                Ext.getCmp('modx_resource_tree').quickCreate(document,{},'modResource','web',0);
+            }
+            ,stopEvent: true
+        });
+        k.addBinding({
+            key: Ext.EventObject.Z
+            ,ctrl: true
+            ,shift: Ext.isMac ? false : true
+            ,fn: MODx.clearCache
+            ,scope: this
+            ,stopEvent: true
+        });
+    }
+    
     ,refreshTrees: function() {
         this.rtree.refresh();
         this.eltree.refresh();
@@ -110,11 +141,39 @@ Ext.extend(MODx.Layout,Ext.Component,{
         
         return it;
     }
-    ,removeAccordion: function() {
+    ,accordionVisible: true
+    ,toggleAccordion: function() {
+        this.accordionVisible ? this.removeAccordion(.3) : this.showAccordion(.3);
+        this.accordionVisible = !this.accordionVisible;
+    }
+    ,removeAccordion: function(d) {
+        this.cleanupContent(false);
+        Ext.get('modx-accordion').slideOut('l',{
+            remove: false
+            ,useDisplay: true
+            ,duration: d || .1
+        });
+    }
+    ,showAccordion: function(d) {
+        this.cleanupContent(true);
+        Ext.get('modx-accordion').slideIn('l',{
+            remove: false
+            ,useDisplay: true
+            ,duration: d || .1
+        });
+    }
+    ,cleanupContent: function(mode) {
         var c = Ext.get('modx-content');
-        c.setStyle('width','95%');
+        c.setStyle('width',mode ? '74%' : '98%');
         c.repaint();
-        Ext.get('modx-accordion').setStyle('display','none');
+        Ext.select('.x-portlet, .x-column-inner, .x-panel-body').each(function(el,ar,i) {
+            el.setStyle('width','100%');
+            el.repaint();
+        },this);
+        Ext.select('.x-portal-column').each(function(el,ar,i) {
+            el.setStyle('width','97%');
+            el.repaint();
+        },this);
     }
 });
 Ext.reg('modx-layout',MODx.Layout);

@@ -1,9 +1,6 @@
 /**
  * Automatically sends forms through AJAX calls, returns the result
- * (and parses any JS script within response), and if not TRUE, then
- * outputs that response to an 'errormsg' div. Also allows you to
- * specify the ?action= parameter in _GET, which utilitizes
- * PHP connectors to access their respective processor files.
+ * (and parses any JS script within response).
  *  
  * @class MODx.form.Handler
  * @extends Ext.Component
@@ -16,34 +13,7 @@ MODx.form.Handler = function(config) {
 };
 Ext.extend(MODx.form.Handler,Ext.Component,{
     fields: []
-    /**
-     * Sends the request to the connector. Use Ext.Ajax instead from now on.
-     * @param {String,Object} fid The form ID
-     * @param {String} a The action for the connector.
-     * @param {Function} h An optional callback function.
-     * @param {Object} The scope to execute the handler in
-     * @deprecated
-     */ 
-    ,send: function(fid,a,h,scope) {
-        var Frm = Ext.get(fid);
-        this.unhighlightFields();
         
-        Ext.Ajax.request({
-            url: Frm.dom.action+'?action='+a
-            ,params: Ext.Ajax.serializeForm(fid)
-            ,method: 'post'
-            ,scope: scope || this
-            ,callback: h === null ? this.handle : h
-        });
-        return false;
-    }
-    
-    /**
-     * Default handler for Ajax responses.
-     * @param {Object} o The options for the Ajax request.
-     * @param {Object} s Whether or not the Ajax request succeeded.
-     * @param {Object} r The xhr response.
-     */
     ,handle: function(o,s,r) {
         r = Ext.decode(r.responseText);
         if (!r.success) {
@@ -104,8 +74,6 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
         }
     }
     
-    ,closeError: function() {
-        MODx.msg.hide();
-    }
+    ,closeError: function() { MODx.msg.hide(); }
 });
 Ext.reg('modx-form-handler',MODx.form.Handler);

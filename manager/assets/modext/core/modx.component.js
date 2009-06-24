@@ -1,11 +1,3 @@
-/**
- * Renders pages and abstracts component creation to xtypes.
- * 
- * @class MODx.Component
- * @extends Ext.Component
- * @constructor
- * @param {Object} config A configuration object.
- */
 MODx.Component = function(config) {
     config = config || {};
     MODx.Component.superclass.constructor.call(this,config);
@@ -19,17 +11,8 @@ MODx.Component = function(config) {
     this._loadActionButtons();
 };
 Ext.extend(MODx.Component,Ext.Component,{
-	/**
-     * @var {Object} The form fields for this component.
-     * @access protected
-     */
     fields: {}
     
-    /**
-     * Loads the form for the component.
-     * 
-     * @access protected
-     */
 	,_loadForm: function() {
 		if (!this.config.form) { return false; }
         this.form = new Ext.form.BasicForm(Ext.get(this.config.form),{ errorReader : MODx.util.JSONReader });
@@ -49,11 +32,6 @@ Ext.extend(MODx.Component,Ext.Component,{
         this.form.render();
     }
     
-    /**
-     * Loads ActionButtons for the component.
-     * 
-     * @access protected
-     */
 	,_loadActionButtons: function() {
 		if (!this.config.buttons) { return false; }        
         this.ab = MODx.load({
@@ -66,11 +44,6 @@ Ext.extend(MODx.Component,Ext.Component,{
         });
 	}
 	
-    /**
-     * Loads MODx.Tabs
-     * 
-     * @access protected
-     */
 	,_loadTabs: function() {
 		if (!this.config.tabs) { return false; }
         var o = this.config.tabOptions || {};
@@ -82,11 +55,6 @@ Ext.extend(MODx.Component,Ext.Component,{
         MODx.load(o);
 	}
     
-    /**
-     * Loads all components by their xtype.
-     * 
-     * @access protected
-     */
     ,_loadComponents: function() {
         if (!this.config.components) { return false; }
         var l = this.config.components.length;

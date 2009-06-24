@@ -30,7 +30,7 @@ if ($context->save() === false) {
 }
 
 /* update context settings */
-if (isset($_POST['settings'])) {
+if (isset($_POST['settings']) && !empty($_POST['settings'])) {
     $_SETTINGS = $modx->fromJSON($_POST['settings']);
     foreach ($_SETTINGS as $id => $st) {
         $setting = $modx->getObject('modContextSetting',array(

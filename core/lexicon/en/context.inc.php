@@ -10,6 +10,7 @@ $_lang['context'] = 'Context';
 $_lang['context_add'] = 'Add Context';
 $_lang['context_create'] = 'Create Context';
 $_lang['context_data'] = 'Context Data';
+$_lang['context_err_ae'] = 'A context with that name already exists.';
 $_lang['context_err_create'] = 'An error occurred while creating the context.';
 $_lang['context_err_load_data'] = 'Error loading context data.';
 $_lang['context_err_nf'] = 'Context not found!';

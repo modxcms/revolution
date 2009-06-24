@@ -224,7 +224,7 @@ MODx.portal.Column = Ext.extend(Ext.Container,{
 Ext.reg('portalcolumn', MODx.portal.Column);
 
 MODx.portal.Portlet = Ext.extend(Ext.Panel,{
-    anchor: '100%'
+    anchor: '98%'
     ,frame:true
     ,collapsible:true
     ,draggable:true

@@ -16,6 +16,13 @@ $invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
     '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
 $_POST['category'] = str_replace($invchars,'',$_POST['category']);
 
+/* prevent empty names */
+if (empty($_POST['category'])) $modx->error->addField('category',$modx->lexicon('category_err_ns'));
+
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
+}
+
 /* create category object */
 $category = $modx->newObject('modCategory');
 $category->fromArray($_POST);
