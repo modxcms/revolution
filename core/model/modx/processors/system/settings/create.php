@@ -18,16 +18,26 @@ $modx->lexicon->load('setting','namespace');
 if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get namespace */
-if (!isset($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
+if (empty($_POST['namespace'])) $modx->error->addField('namespace',$modx->lexicon('namespace_err_ns'));
 $namespace = $modx->getObject('modNamespace',$_POST['namespace']);
-if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
+if ($namespace == null) $modx->error->addField('namespace',$modx->lexicon('namespace_err_nf'));
 
 /* prevent empty or already existing settings */
-if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
+if (empty($_POST['key'])) $modx->error->addField('key',$modx->lexicon('setting_err_ns'));
 $ae = $modx->getObject('modSystemSetting',array(
     'key' => $_POST['key'],
 ));
-if ($ae != null) return $modx->error->failure($modx->lexicon('setting_err_ae'));
+if ($ae != null) $modx->error->addField('key',$modx->lexicon('setting_err_ae'));
+
+/* prevent keys starting with numbers */
+$nums = explode(',','1,2,3,4,5,6,7,8,9,0');
+if (in_array(substr($_POST['key'],0,1),$nums)) {
+    $modx->error->addField('key',$modx->lexicon('setting_err_startint'));
+}
+
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
+}
 
 /* value parsing */
 if ($_POST['xtype'] == 'combo-boolean' && !is_numeric($_POST['value'])) {

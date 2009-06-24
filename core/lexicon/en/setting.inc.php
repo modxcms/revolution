@@ -29,6 +29,7 @@ $_lang['setting_err_nf'] = 'Setting not found.';
 $_lang['setting_err_ns'] = 'Setting not specified';
 $_lang['setting_err_remove'] = 'An error occurred while trying to remove the setting.';
 $_lang['setting_err_save'] = 'An error occurred while trying to save the setting.';
+$_lang['setting_err_startint'] = 'Settings may not start with an integer.';
 $_lang['setting_err_invalid_document'] = 'There is no document with ID %d. Please specify an existing document.';
 $_lang['setting_remove'] = 'Remove Setting';
 $_lang['setting_remove_confirm'] = 'Are you sure you want to remove this setting? This might break your MODx installation.';

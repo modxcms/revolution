@@ -1040,22 +1040,29 @@ class modX extends xPDO {
 
     /**
      * Initialize, cleanse, and process a request made to a modX site.
+     *
+     * @return mixed The result of the request handler.
      */
     function handleRequest() {
         if ($this->getRequest()) {
-            $this->request->handleRequest();
+            return $this->request->handleRequest();
         }
     }
 
     /**
      * Attempt to load the request handler class, if not already loaded.
      *
+     * @access public
+     * @param $string The class name of the response class to load. Defaults to
+     * modResponse; is ignored if the Setting "modResponse.class" is set.
+     * @param $path The absolute path by which to load the response class from.
+     * Defaults to the current MODx model path.
      * @return boolean Returns true if a valid request handler object was
      * loaded on this or any previous call to the function, false otherwise.
      */
     function getRequest($class= 'modRequest', $path= '') {
         if ($this->request === null || !is_a($this->request, 'modRequest')) {
-            $requestClass= isset ($this->config['modRequest.class']) ? $this->config['modRequest.class'] : $class;
+            $requestClass = $this->getOption('modRequest.class',$this->config,$class);
             if ($className= $this->loadClass($requestClass, $path, !empty($path), true))
                 $this->request= new $className ($this);
         }
@@ -1065,11 +1072,16 @@ class modX extends xPDO {
     /**
      * Attempt to load the response handler class, if not already loaded.
      *
+     * @access public
+     * @param $string The class name of the response class to load. Defaults to
+     * modResponse; is ignored if the Setting "modResponse.class" is set.
+     * @param $path The absolute path by which to load the response class from.
+     * Defaults to the current MODx model path.
      * @return boolean Returns true if a valid response handler object was
      * loaded on this or any previous call to the function, false otherwise.
      */
     function getResponse($class= 'modResponse', $path= '') {
-        $responseClass= isset ($this->config['modResponse.class']) ? $this->config['modResponse.class'] : $class;
+        $responseClass= $this->getOption('modResponse.class',$this->config,$class);
         $className= $this->loadClass($responseClass, $path, !empty($path), true);
         if ($this->response === null || !is_a($this->response, $className)) {
             if ($className) $this->response= new $className ($this);
@@ -1159,6 +1171,9 @@ class modX extends xPDO {
 
     /**
      * Returns all registered JavaScript and HTML blocks.
+     *
+     * @access public
+     * @return string The parsed HTML of the client scripts.
      */
     function getRegisteredClientScripts() {
         $string= '';
@@ -1170,6 +1185,9 @@ class modX extends xPDO {
 
     /**
      * Returns all registered startup CSS, JavaScript, or HTML blocks.
+     *
+     * @access public
+     * @return string The parsed HTML of the startup scripts.
      */
     function getRegisteredClientStartupScripts() {
         $string= '';
@@ -1199,6 +1217,7 @@ class modX extends xPDO {
     /**
      * Invokes a specified Event with an optional array of parameters.
      *
+     * @access public
      * @param string $eventName Name of an event to invoke.
      * @param array $params Optional params provided to the elements registered with an event.
      * @todo refactor this completely, yuck!!
@@ -1252,6 +1271,19 @@ class modX extends xPDO {
         return $results;
     }
 
+    /**
+     * Executes a specific processor. The only argument is an array, which can
+     * take the following values:
+     *
+     * - action - The action to take, similar to connector handling.
+     * - processors_path - If specified, will override the default MODx
+     * processors path.
+     * - location - A prefix to load processor files from, will prepend to the
+     * action parameter.
+     *
+     * @param array $options An array of options.
+     * @return mixed $result The result of the processor.
+     */
     function executeProcessor($options) {
         $result = null;
         if (is_array($options) && !empty($options) && isset($options['action']) && $this->getRequest()) {
