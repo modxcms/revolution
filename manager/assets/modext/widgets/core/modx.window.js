@@ -49,6 +49,7 @@ MODx.Window = function(config) {
     });
 	this._loadForm();
     this.on('show',function() {
+        if (this.config.blankValues) { this.fp.getForm().reset(); }
         if (this.config.allowDrop) { this.loadDropZones(); }
     },this);
 };
