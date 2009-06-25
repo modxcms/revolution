@@ -67,7 +67,6 @@ Ext.extend(MODx.Console,Ext.Window,{
     
     ,init: function() {
         Ext.Msg.hide();
-        if (MODx.util.LoadingBox) { MODx.util.LoadingBox.disable(); }
         Ext.get('console-body').update('');
         if (this.running !== true) {
             this.mgr = new Ext.Updater('console-body');
@@ -105,7 +104,6 @@ Ext.extend(MODx.Console,Ext.Window,{
     }
     
     ,shutdown: function() {
-        if (MODx.util.LoadingBox) { MODx.util.LoadingBox.enable(); }
     	MODx.Ajax.request({
     	    url: this.config.url
     	    ,params: {

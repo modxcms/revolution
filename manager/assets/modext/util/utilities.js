@@ -1,43 +1,5 @@
 Ext.namespace('MODx.util.Progress');
 /**
- * Shows a Loading display when ajax calls are happening
- * 
- * @class MODx.util.LoadingBox
- * @extends Ext.Component
- * @param {Object} config An object of configuration properties
- * @xtype modx-loading-box
- */
-MODx.util.LoadingBox = function(config) {
-	config = config || {};
-		
-    Ext.Ajax.on('beforerequest',this.show,this);
-    Ext.Ajax.on('requestcomplete',this.hide,this);
-    Ext.Ajax.on('requestexception',this.hide,this);
-};
-Ext.override(MODx.util.LoadingBox,{
-    enabled: true
-    ,hide: function() {
-        if (this.enabled) { Ext.Msg.hide(); }
-    }
-    ,show: function() {
-        if (this.enabled) {
-            Ext.Msg.show({
-                title: _('please_wait')
-                ,msg: _('loading')
-                ,width:240
-                ,modal: false
-                ,cls: 'modx-loading-box'
-                ,progress:true
-                ,closable:false
-            });
-        }
-    }
-    ,disable: function() { this.enabled = false; }
-    ,enable: function() { this.enabled = true; }
-});
-Ext.reg('modx-loading-box',MODx.util.LoadingBox);
-
-/**
  * A JSON Reader specific to MODExt
  * 
  * @class MODx.util.JSONReader
@@ -644,7 +606,6 @@ Ext.override(Ext.form.Radio, {
 
 
 Ext.onReady(function() {
-    MODx.util.LoadingBox = MODx.load({ xtype: 'modx-loading-box' });
     MODx.util.JSONReader = MODx.load({ xtype: 'modx-json-reader' });
     MODx.form.Handler = MODx.load({ xtype: 'modx-form-handler' });
     MODx.msg = MODx.load({ xtype: 'modx-msg' });
