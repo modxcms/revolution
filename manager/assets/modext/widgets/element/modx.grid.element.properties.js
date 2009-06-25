@@ -109,12 +109,14 @@ MODx.grid.ElementProperties = function(config) {
     this.on('celldblclick',this.onDirty,this);
     
     if (this.config.lockProperties) {
-        this.lockMask = MODx.load({
-            xtype: 'modx-lockmask'
-            ,el: this.getGridEl()
-            ,msg: _('properties_default_locked')
-        });
-        this.lockMask.toggle();
+        this.on('render',function() {
+            this.lockMask = MODx.load({
+                xtype: 'modx-lockmask'
+                ,el: this.getGridEl()
+                ,msg: _('properties_default_locked')
+            });
+            this.lockMask.toggle();
+        },this);
     }
 };
 Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
