@@ -57,12 +57,16 @@ MODx.grid.ElementProperties = function(config) {
             }
         },{
             text: _('property_create')
+            ,id: 'modx-btn-property-create'
             ,handler: this.create
             ,scope: this
+            ,disabled: true
         },'-',{
             text: _('property_revert_all')
+            ,id: 'modx-btn-property-revert-all'
             ,handler: this.revertAll
             ,scope:this
+            ,disabled: true
         },'-',{
             text: _('properties_default_locked')
             ,id: 'modx-btn-propset-lock'
@@ -207,7 +211,13 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
         if (ps == 0 || ps == _('default')) {
             Ext.getCmp('modx-btn-propset-lock').setText(this.lockMask.locked ? _('properties_default_unlocked') : _('properties_default_locked'));
             this.lockMask.toggle();
+            this.toggleButtons(this.lockMask.locked);
         }
+    }
+    
+    ,toggleButtons: function(v) {
+        Ext.getCmp('modx-btn-property-create').setDisabled(v);
+        Ext.getCmp('modx-btn-property-revert-all').setDisabled(v);
     }
     
     ,changePropertySet: function(cb) {
@@ -218,10 +228,12 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             }
             if (this.lockMask.locked) {
                 this.lockMask.show();
+                this.toggleButtons(true);
             }
         } else {
             Ext.getCmp('modx-btn-propset-lock').setDisabled(true);
             this.lockMask.hide();
+            this.toggleButtons(false);
         }
         
         MODx.Ajax.request({

@@ -55,6 +55,8 @@ Ext.extend(MODx.LockMask,Ext.LoadMask,{
             this.locked = true;
         }
     }
+    ,lock: function() { this.locked = true; this.show(); }
+    ,unlock: function() { this.locked = false; this.hide(); }
 });
 Ext.reg('modx-lockmask',MODx.LockMask);
 
