@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added parameter to the getNodes processor for resources/elements called 'stringLiterals' which, when true, does not encode the JS literals
 - Layout can now be toggled between tabs (default) and portal panels via the setting 'manager_use_tabs'
 - Nuked the Loading Box in MODExt
 - Changed clearCache key shortcut to CTRL+U (CTRL+SHIFT+U for PC users)

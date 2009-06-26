@@ -12,7 +12,8 @@
  */
 $modx->lexicon->load('resource','context');
 
-if (!isset($_REQUEST['sortBy'])) $_REQUEST['sortBy'] = 'menuindex';
+$_REQUEST['sortBy'] = !empty($_REQUEST['sortBy']) ? $_REQUEST['sortBy'] : 'menuindex';
+$stringLiterals = !empty($_REQUEST['stringLiterals']) ? true : false;
 
 if (!isset($_REQUEST['id'])) {
     $context= 'root';
@@ -410,4 +411,8 @@ while ($item) {
 }
 unset($collection, $item, $actions);
 
-return $this->toJSON($items);
+if ($stringLiterals) {
+    return $modx->toJSON($items);
+} else {
+    return $this->toJSON($items);
+}

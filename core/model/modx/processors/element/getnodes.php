@@ -11,6 +11,8 @@ $modx->lexicon->load('category','element');
 
 if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
+$stringLiterals = !empty($_REQUEST['stringLiterals']) ? true : false;
+
 /* process ID prefixes */
 $_REQUEST['id'] = !isset($_REQUEST['id']) ? 0 : (substr($_REQUEST['id'],0,2) == 'n_' ? substr($_REQUEST['id'],2) : $_REQUEST['id']);
 $grab = $_REQUEST['id'];
@@ -76,4 +78,8 @@ switch ($g[0]) {
         break;
 }
 
-return $this->toJSON($nodes);
+if ($stringLiterals) {
+    return $modx->toJSON($nodes);
+} else {
+    return $this->toJSON($nodes);
+}
