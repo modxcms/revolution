@@ -348,6 +348,12 @@ MODx.window.QuickUpdateResource = function(config) {
             ,fieldLabel: _('pagetitle')
             ,width: 300
         },{
+            xtype: 'textfield'
+            ,name: 'alias'
+            ,id: 'modx-qur-alias'
+            ,fieldLabel: _('alias')
+            ,width: 300
+        },{
             xtype: 'textarea'
             ,name: 'description'
             ,id: 'modx-qur-description'
