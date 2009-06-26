@@ -194,10 +194,11 @@ Ext.extend(MODx.panel.PIInstall,MODx.panel.WizardPanel,{
                 'success': {fn:function(r) {
                     var a = r.object.attr;
                     var el = Ext.getCmp('modx-setup-options').getEl();
-                    if (a !== null && a !== 'null') {
+                    if (a !== null && a !== 'null' && a !== '') {
                         el.update(a);
                     } else {
-                        el.update('');
+                        var va = this.getForm().getValues();
+                        Ext.getCmp('modx-window-package-installer').fireEvent('finish',va);
                     }
                 },scope:this}
             }
