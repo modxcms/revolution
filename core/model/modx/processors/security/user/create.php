@@ -61,6 +61,7 @@ if ($user->profile->save() == false) {
 /* invoke OnManagerSaveUser event */
 $modx->invokeEvent('OnManagerSaveUser',array(
 	'mode' => 'new',
+    'user' => &$user,
 	'userid' => $user->get('id'),
 	'username' => $_POST['newusername'],
 	'userpassword' => $_POST['newpassword'],
@@ -74,6 +75,7 @@ $modx->invokeEvent('OnManagerSaveUser',array(
 /* invoke OnUserFormSave event */
 $modx->invokeEvent('OnUserFormSave',array(
 	'mode' => 'new',
+    'user' => &$user,
 	'id' => $user->get('id'),
 ));
 

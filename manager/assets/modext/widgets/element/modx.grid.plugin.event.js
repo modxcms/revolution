@@ -8,15 +8,15 @@
  */
 MODx.grid.PluginEvent = function(config) {
     config = config || {};
+    this.ident = config.ident || 'grid-pluge'+Ext.id();
     var ec = MODx.load({
         xtype: 'checkbox-column'
         ,header: _('enabled')
         ,dataIndex: 'enabled'
         ,editable: true
-        ,width: 50
+        ,width: 80
         ,sortable: false
     });
-
     Ext.applyIf(config,{
         title: _('system_events')
         ,id: 'modx-grid-plugin-event'
@@ -28,43 +28,55 @@ MODx.grid.PluginEvent = function(config) {
         ,saveParams: {
             plugin: config.plugin
         }
+        ,enableColumnResize: true
+        ,enableColumnMove: true
+        
         ,fields: ['id','name','service','groupname','enabled','priority','propertyset','menu']
         ,paging: true
         ,remoteSort: true
+        ,viewConfig: {
+            forceFit: false
+            ,enableRowBody: true
+            ,autoFill: false
+            ,showPreview: true
+        }
         ,plugins: ec
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
+            ,id: 'modx-'+this.ident+'-col-id'
             ,width: 80
             ,sortable: true
         },{
             header: _('name')
             ,dataIndex: 'name'
-            ,width: 150
+            ,id: 'modx-'+this.ident+'-col-name'
+            ,width: 250
             ,sortable: true
-        },
-        ec
+        },ec
         ,{
             header: _('propertyset')
             ,dataIndex: 'propertyset'
-            ,width: 150
+            ,id: 'modx-'+this.ident+'-col-propertyset'
+            ,width: 180
             ,editor: { xtype: 'modx-combo-property-set' ,renderer: true }
         },{
             header: _('priority')
             ,dataIndex: 'priority'
+            ,id: 'modx-'+this.ident+'-priority'
             ,width: 100
             ,editor: { xtype: 'textfield' ,allowBlank: false }
         }]
         ,tbar: [{
             xtype: 'textfield'
             ,name: 'name_filter'
-            ,id: 'name_filter'
+            ,id: 'modx-'+this.ident+'-filter-name'
             ,emptyText: _('filter_by_name')
             ,listeners: {
                 'change': {fn:this.filterByName,scope:this}
                 ,'render': {fn:function(tf) {
                     tf.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
-                        tf.fireEvent('change'); 
+                        tf.fireEvent('change');
                     },this);
                 }}
             }
@@ -83,6 +95,7 @@ Ext.extend(MODx.grid.PluginEvent,MODx.grid.Grid,{
             params: {
                 start: 0
                 ,limit: 20
+                ,plugin: this.config.plugin
             }
             ,scope: this
             ,callback: this.refresh
@@ -107,6 +120,7 @@ Ext.reg('modx-grid-plugin-event',MODx.grid.PluginEvent);
 
 MODx.window.UpdatePluginEvent = function(config) {
     config = config || {};
+    this.ident = config.ident || 'upluge'+Ext.id();
     Ext.applyIf(config,{
         title: _('plugin_event_update')
         ,id: 'modx-window-plugin-event-update'
@@ -117,14 +131,15 @@ MODx.window.UpdatePluginEvent = function(config) {
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
+            ,id: 'modx-'+this.ident+'-id'
         },{
             fieldLabel: _('name')
             ,name: 'name'
-            ,id: 'modx-upe-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'statictextfield'
             ,width: 150
         },{
-            id: 'modx-grid-plugin-event-assoc-ct'
+            id: 'modx-grid-'+this.ident+'-assoc-ct'
             ,autoHeight: true
         }]
     });
@@ -134,10 +149,10 @@ MODx.window.UpdatePluginEvent = function(config) {
     (function() {
     MODx.load({
         xtype: 'modx-grid-plugin-event-assoc'
-        ,id: 'modx-grid-plugin-event-assoc'
+        ,id: 'modx-grid-'+this.ident+'-assoc'
         ,autoHeight: true
         ,plugin: config.plugin
-        ,renderTo: 'modx-grid-plugin-event-assoc-ct'
+        ,renderTo: 'modx-grid-'+this.ident+'-assoc-ct'
     });
     }).defer(50,this);
 };
@@ -153,12 +168,13 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
             ,listeners: {
                 'success':{fn:function(r) {
                     var data = r.object;
-                    var g = Ext.getCmp('modx-grid-plugin-event-assoc');
+                    var g = Ext.getCmp('modx-grid-'+this.ident+'-assoc');
                     var s = g.getStore();
                     s.removeAll();
                     if (data.length > 0) {
                         s.loadData(data);
                     }
+                    this.center();
                 },scope:this}
             }
         });
@@ -166,7 +182,7 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
     ,beforeSubmit: function(vs) {
         this.fp.getForm().baseParams = {
             action: 'associate'
-            ,plugins: Ext.getCmp('modx-grid-plugin-event-assoc').encode()
+            ,plugins: Ext.getCmp('modx-grid-'+this.ident+'-assoc').encode()
         };
     }
 });
@@ -175,9 +191,10 @@ Ext.reg('modx-window-plugin-event-update',MODx.window.UpdatePluginEvent);
 
 MODx.grid.PluginEventAssoc = function(config) {
     config = config || {};
+    this.ident = config.ident || 'grid-pluge-assoc'+Ext.id();
     Ext.applyIf(config,{
         title: _('plugins')
-        ,id: 'modx-grid-plugin-event-assoc'
+        ,id: this.ident
         ,url: MODx.config.connectors_url+'element/plugin/event.php'
         ,baseParams: {
             action: 'getPlugins'
@@ -270,9 +287,10 @@ Ext.reg('modx-grid-plugin-event-assoc',MODx.grid.PluginEventAssoc);
 
 MODx.window.AddPluginToEvent = function(config) {
     config = config || {};
+    this.ident = config.ident || 'apluge'+Ext.id();
     Ext.applyIf(config,{
         title: _('plugin_add_to_event')
-        ,id: 'modx-window-plugin-event-add-plugin'
+        ,id: this.ident
         ,url: MODx.config.connectors_url+'element/plugin/event.php'
         ,action: 'addplugin'
         ,height: 250
@@ -281,13 +299,13 @@ MODx.window.AddPluginToEvent = function(config) {
             xtype: 'modx-combo-plugin'
             ,fieldLabel: _('plugin')
             ,name: 'plugin'
-            ,id: 'modx-apte-plugin'
+            ,id: 'modx-'+this.ident+'-plugin'
             ,width: 150
         },{
             xtype: 'numberfield'
             ,name: 'priority'
             ,fieldLabel: _('priority')
-            ,id: 'modx-apte-priority'
+            ,id: 'modx-'+this.ident+'-priority'
             ,value: 0
             ,allowBlank: false
         }]

@@ -28,6 +28,7 @@ if ($_POST['passwordnotifymethod'] == 'e') {
 /* invoke OnBeforeUserFormSave event */
 $modx->invokeEvent('OnBeforeUserFormSave',array(
 	'mode' => 'upd',
+    'user' => &$user,
 	'id' => $_POST['id'],
 ));
 
@@ -80,6 +81,7 @@ if ($user->profile->save() == false) {
 /* invoke OnManagerSaveUser event */
 $modx->invokeEvent('OnManagerSaveUser',array(
 	'mode' => 'upd',
+    'user' => &$user,
 	'userid' => $_POST['id'],
 	'username' => $_POST['newusername'],
 	'userpassword' => $_POST['newpassword'],
@@ -93,6 +95,7 @@ $modx->invokeEvent('OnManagerSaveUser',array(
 /* invoke OnUserFormSave event */
 $modx->invokeEvent('OnUserFormSave',array(
 	'mode' => 'upd',
+    'user' => &$user,
 	'id' => $user->get('id'),
 ));
 

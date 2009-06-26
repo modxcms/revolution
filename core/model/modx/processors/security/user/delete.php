@@ -22,6 +22,7 @@ if ($user->get('id') == $modx->user->get('id')) {
 
 /* invoke OnBeforeUserFormDelete event */
 $modx->invokeEvent('OnBeforeUserFormDelete',array(
+    'user' => &$user,
 	'id' => $user->get('id'),
 ));
 
@@ -32,6 +33,7 @@ if ($user->remove() == false) {
 
 /* invoke OnManagerDeleteUser event */
 $modx->invokeEvent('OnManagerDeleteUser',array(
+    'user' => &$user,
 	'userid'	=> $user->get('id'),
 	'username'	=> $user->get('username'),
 ));
