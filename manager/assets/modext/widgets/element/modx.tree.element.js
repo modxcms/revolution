@@ -120,17 +120,15 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             category: this.cm.activeNode.attributes.pk || ''
         };
         
-        if (!this.windows['quick-create-'+type]) {
-            this.windows['quick-create-'+type] = MODx.load({
-                xtype: 'modx-window-quick-create-'+type
-                ,record: r
-                ,listeners: {
-                    'success':{fn:function() { this.refreshNode(this.cm.activeNode.id); },scope:this}
-                }
-            });
-        }
-        this.windows['quick-create-'+type].setValues(r);
-        this.windows['quick-create-'+type].show(e.target);
+        var w = MODx.load({
+            xtype: 'modx-window-quick-create-'+type
+            ,record: r
+            ,listeners: {
+                'success':{fn:function() { this.refreshNode(this.cm.activeNode.id); },scope:this}
+            }
+        });
+        w.setValues(r);
+        w.show(e.target);
     }
     
     ,quickUpdate: function(itm,e,type) {
@@ -142,17 +140,15 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    if (!this.windows['quick-update-'+type]) {
-                        this.windows['quick-update-'+type] = MODx.load({
-                            xtype: 'modx-window-quick-update-'+type
-                            ,record: r.object
-                            ,listeners: {
-                                'success':{fn:function() { this.refreshNode(this.cm.activeNode.id); },scope:this}
-                            }
-                        });
-                    }
-                    this.windows['quick-update-'+type].setValues(r.object);
-                    this.windows['quick-update-'+type].show(e.target);
+                    var w = MODx.load({
+                        xtype: 'modx-window-quick-update-'+type
+                        ,record: r.object
+                        ,listeners: {
+                            'success':{fn:function() { this.refreshNode(this.cm.activeNode.id); },scope:this}
+                        }
+                    });
+                    w.setValues(r.object);
+                    w.show(e.target);
                 },scope:this}
             }
         });

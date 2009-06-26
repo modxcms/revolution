@@ -8,8 +8,10 @@
  */
 MODx.window.DuplicateResource = function(config) {
 	config = config || {};
+    this.ident = config.ident || 'dupres'+Ext.id();
 	Ext.applyIf(config,{
 		title: _('duplication_options')
+        ,id: this.ident
 		,width: 400
 	});
 	MODx.window.DuplicateResource.superclass.constructor.call(this,config);
@@ -30,6 +32,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
                 xtype: 'checkbox'
                 ,fieldLabel: _('duplicate_children')
                 ,name: 'duplicate_children'
+                ,id: 'modx-'+this.ident+'-duplicate-children'
                 ,checked: true
                 ,listeners: {
                     'check': {fn: function(cb,checked) { 
@@ -44,7 +47,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
 		}
 		items.push({
             xtype: 'textfield'
-            ,id: 'modx-dupres-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('resource_name_new')
             ,name: 'name'
             ,width: 150
@@ -69,18 +72,12 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
 });
 Ext.reg('modx-window-resource-duplicate',MODx.window.DuplicateResource);
 
-/** 
- * Generates the Create User Group window.
- *  
- * @class MODx.window.CreateUserGroup
- * @extends MODx.Window
- * @param {Object} config An object of options.
- * @xtype modx-window-usergroup-create
- */
 MODx.window.CreateUserGroup = function(config) {
 	config = config || {};
+    this.ident = config.ident || 'cugrp'+Ext.id();
 	Ext.applyIf(config,{
 		title: _('create_user_group')
+        ,id: this.ident
 		,height: 150
 		,width: 375
         ,url: MODx.config.connectors_url+'security/group.php'
@@ -88,10 +85,12 @@ MODx.window.CreateUserGroup = function(config) {
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'name'
+            ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
             ,width: 150
         },{
             name: 'parent'
+            ,id: 'modx-'+this.ident+'-parent'
             ,xtype: 'hidden'
         }]
 	});
@@ -100,18 +99,12 @@ MODx.window.CreateUserGroup = function(config) {
 Ext.extend(MODx.window.CreateUserGroup,MODx.Window);
 Ext.reg('modx-window-usergroup-create',MODx.window.CreateUserGroup);
 
-/** 
- * Generates the Add User to User Group window.
- *  
- * @class MODx.window.AddUserToUserGroup
- * @extends MODx.Window
- * @param {Object} config An object of options.
- * @xtype modx-window-usergroup-adduser
- */
 MODx.window.AddUserToUserGroup = function(config) {
 	config = config || {};
+    this.ident = config.ident || 'adtug'+Ext.id();
 	Ext.applyIf(config,{
 		title: _('user_group_user_add')
+        ,id: this.ident
 		,height: 150
 		,width: 375
         ,url: MODx.config.connectors_url+'security/group.php'
@@ -121,9 +114,11 @@ MODx.window.AddUserToUserGroup = function(config) {
             ,name: 'member'
             ,hiddenName: 'member'
             ,xtype: 'modx-combo-user'
+            ,id: 'modx-'+this.ident+'-member'
         },{
             name: 'user_group'
             ,xtype: 'hidden'
+            ,id: 'modx-'+this.ident+'-user-group'
         }]
 	});
 	MODx.window.AddUserToUserGroup.superclass.constructor.call(this,config);
@@ -131,19 +126,12 @@ MODx.window.AddUserToUserGroup = function(config) {
 Ext.extend(MODx.window.AddUserToUserGroup,MODx.Window);
 Ext.reg('modx-window-usergroup-adduser',MODx.window.AddUserToUserGroup);
 
-/** 
- * Generates the Create Resource Group window.
- *  
- * @class MODx.window.CreateResourceGroup
- * @extends MODx.Window
- * @param {Object} config An object of options.
- * @xtype modx-window-resourcegroup-create
- */
 MODx.window.CreateResourceGroup = function(config) {
 	config = config || {};
+    this.ident = config.ident || 'crgrp'+Ext.id();
 	Ext.applyIf(config,{
 		title: _('resource_group_create')
-        ,id: 'modx-window-resourcegroup-create'
+        ,id: this.ident
 		,height: 150
 		,width: 350
         ,url: MODx.config.connectors_url+'security/documentgroup.php'
@@ -151,7 +139,7 @@ MODx.window.CreateResourceGroup = function(config) {
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'name'
-            ,id: 'modx-crgrp-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
             ,width: 150
         }]
@@ -161,19 +149,12 @@ MODx.window.CreateResourceGroup = function(config) {
 Ext.extend(MODx.window.CreateResourceGroup,MODx.Window);
 Ext.reg('modx-window-resourcegroup-create',MODx.window.CreateResourceGroup);
 
-/** 
- * Generates the Create Category window.
- *  
- * @class MODx.window.CreateCategory
- * @extends MODx.Window
- * @param {Object} config An object of options.
- * @xtype modx-window-category-create
- */
 MODx.window.CreateCategory = function(config) {
 	config = config || {};
+    this.ident = config.ident || 'ccat'+Ext.id();
 	Ext.applyIf(config,{
 		title: _('new_category')
-        ,id: 'modx-window-category-create'
+        ,id: this.ident
 		,height: 150
 		,width: 350
         ,url: MODx.config.connectors_url+'element/category.php'
@@ -181,14 +162,14 @@ MODx.window.CreateCategory = function(config) {
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'category'
-            ,id: 'modx-ccat-category'
+            ,id: 'modx-'+this.ident+'-category'
             ,xtype: 'textfield'
             ,width: 150
         },{
         	fieldLabel: 'Parent'
         	,name: 'parent'
         	,hiddenName: 'parent'
-        	,id: 'modx-ccat-parent'
+        	,id: 'modx-'+this.ident+'-parent'
     		,xtype: 'modx-combo-category'
         	,width: 200
         }]
@@ -199,19 +180,13 @@ Ext.extend(MODx.window.CreateCategory,MODx.Window);
 Ext.reg('modx-window-category-create',MODx.window.CreateCategory);
 
 
-/**
- * Generates the create namespace window.
- *  
- * @class MODx.window.CreateNamespace
- * @extends MODx.Window
- * @param {Object} config An object of options.
- * @xtype modx-window-namespace-create
- */
 MODx.window.CreateNamespace = function(config) {
     config = config || {};
     var r = config.record;
+    this.ident = config.ident || 'cns'+Ext.id();
     Ext.applyIf(config,{
         title: _('namespace_create')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'workspace/namespace.php'
         ,action: 'create'
@@ -219,7 +194,7 @@ MODx.window.CreateNamespace = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
-            ,id: 'modx-cns-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,width: 250
             ,maxLength: 100
         },{
@@ -227,7 +202,7 @@ MODx.window.CreateNamespace = function(config) {
             ,fieldLabel: _('path')
             ,description: _('namespace_path_desc')
             ,name: 'path'
-            ,id: 'modx-cns-path'
+            ,id: 'modx-'+this.ident+'-path'
             ,width: 400
         }]
     });
@@ -239,32 +214,34 @@ Ext.reg('modx-window-namespace-create',MODx.window.CreateNamespace);
 
 MODx.window.QuickCreateChunk = function(config) {
 	config = config || {};
+    this.ident = config.ident || 'qcc'+Ext.id();
 	Ext.applyIf(config,{
 		title: _('quick_create_chunk')
+        ,id: this.ident
 		,width: 600
 		,url: MODx.config.connectors_url+'element/chunk.php'
 		,action: 'create'
 		,fields: [{
 			xtype: 'hidden'
 			,name: 'category'
-			,id: 'modx-qcc-category'
+			,id: 'modx-'+this.ident+'-category'
 		},{
             xtype: 'textfield'
             ,name: 'name'
-            ,id: 'modx-qcc-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
 		},{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-qcc-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
         },{
             xtype: 'textarea'
             ,name: 'snippet'
-            ,id: 'modx-qcc-snippet'
+            ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,width: 400
             ,grow: true
@@ -278,36 +255,38 @@ Ext.reg('modx-window-quick-create-chunk',MODx.window.QuickCreateChunk);
 
 MODx.window.QuickUpdateChunk = function(config) {
     config = config || {};
+    this.ident = config.ident || 'quc'+Ext.id();
     Ext.applyIf(config,{
         title: _('quick_update_chunk')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'element/chunk.php'
         ,action: 'update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
-            ,id: 'modx-quc-id'
+            ,id: 'modx-'+this.ident+'-id'
         },{
             xtype: 'hidden'
             ,name: 'category'
-            ,id: 'modx-quc-category'
+            ,id: 'modx-'+this.ident+'-category'
         },{
             xtype: 'textfield'
             ,name: 'name'
-            ,id: 'modx-quc-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
         },{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-quc-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
         },{
             xtype: 'checkbox'
             ,name: 'clearCache'
-            ,id: 'modx-quc-clearcache'
+            ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
             ,description: _('clear_cache_on_save_msg')
             ,inputValue: 1
@@ -315,7 +294,7 @@ MODx.window.QuickUpdateChunk = function(config) {
         },{
             xtype: 'textarea'
             ,name: 'snippet'
-            ,id: 'modx-quc-snippet'
+            ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,width: 400
             ,height: 380 
@@ -331,32 +310,34 @@ Ext.reg('modx-window-quick-update-chunk',MODx.window.QuickUpdateChunk);
 
 MODx.window.QuickCreateTemplate = function(config) {
     config = config || {};
+    this.ident = config.ident || 'qct'+Ext.id();
     Ext.applyIf(config,{
         title: _('quick_create_template')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'element/template.php'
         ,action: 'create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'category'
-            ,id: 'modx-qct-category'
+            ,id: 'modx-'+this.ident+'-category'
         },{
             xtype: 'textfield'
             ,name: 'templatename'
-            ,id: 'modx-qct-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
         },{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-qct-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
         },{
             xtype: 'textarea'
             ,name: 'content'
-            ,id: 'modx-qct-content'
+            ,id: 'modx-'+this.ident+'-content'
             ,fieldLabel: _('code')
             ,width: 400
             ,grow: true
@@ -370,32 +351,34 @@ Ext.reg('modx-window-quick-create-template',MODx.window.QuickCreateTemplate);
 
 MODx.window.QuickUpdateTemplate = function(config) {
     config = config || {};
+    this.ident = config.ident || 'qut'+Ext.id();
     Ext.applyIf(config,{
         title: _('quick_update_template')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'element/template.php'
         ,action: 'update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
-            ,id: 'modx-qut-id'
+            ,id: 'modx-'+this.ident+'-id'
         },{
             xtype: 'textfield'
             ,name: 'templatename'
-            ,id: 'modx-qut-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
         },{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-qut-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
         },{
             xtype: 'checkbox'
             ,name: 'clearCache'
-            ,id: 'modx-qut-clearcache'
+            ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
             ,description: _('clear_cache_on_save_msg')
             ,inputValue: 1
@@ -403,7 +386,7 @@ MODx.window.QuickUpdateTemplate = function(config) {
         },{
             xtype: 'textarea'
             ,name: 'content'
-            ,id: 'modx-qut-content'
+            ,id: 'modx-'+this.ident+'-content'
             ,fieldLabel: _('code')
             ,width: 400
             ,height: 380 
@@ -418,32 +401,34 @@ Ext.reg('modx-window-quick-update-template',MODx.window.QuickUpdateTemplate);
 
 MODx.window.QuickCreateSnippet = function(config) {
     config = config || {};
+    this.ident = config.ident || 'qcs'+Ext.id();
     Ext.applyIf(config,{
         title: _('quick_create_snippet')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'element/snippet.php'
         ,action: 'create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'category'
-            ,id: 'modx-qcs-category'
+            ,id: 'modx-'+this.ident+'-category'
         },{
             xtype: 'textfield'
             ,name: 'name'
-            ,id: 'modx-qcs-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
         },{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-qcs-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
         },{
             xtype: 'textarea'
             ,name: 'snippet'
-            ,id: 'modx-qcs-snippet'
+            ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,width: 400
             ,grow: true
@@ -457,32 +442,34 @@ Ext.reg('modx-window-quick-create-snippet',MODx.window.QuickCreateSnippet);
 
 MODx.window.QuickUpdateSnippet = function(config) {
     config = config || {};
+    this.ident = config.ident || 'qus'+Ext.id();
     Ext.applyIf(config,{
         title: _('quick_update_snippet')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'element/snippet.php'
         ,action: 'update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
-            ,id: 'modx-qus-id'
+            ,id: 'modx-'+this.ident+'-id'
         },{
             xtype: 'textfield'
             ,name: 'name'
-            ,id: 'modx-qus-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
         },{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-qus-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
         },{
             xtype: 'checkbox'
             ,name: 'clearCache'
-            ,id: 'modx-qus-clearcache'
+            ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
             ,description: _('clear_cache_on_save_msg')
             ,inputValue: 1
@@ -490,7 +477,7 @@ MODx.window.QuickUpdateSnippet = function(config) {
         },{
             xtype: 'textarea'
             ,name: 'snippet'
-            ,id: 'modx-qus-snippet'
+            ,id: 'modx-'+this.ident+'-snippet'
             ,fieldLabel: _('code')
             ,width: 400
             ,height: 380 
@@ -506,32 +493,34 @@ Ext.reg('modx-window-quick-update-snippet',MODx.window.QuickUpdateSnippet);
 
 MODx.window.QuickCreatePlugin = function(config) {
     config = config || {};
+    this.ident = config.ident || 'qcp'+Ext.id();
     Ext.applyIf(config,{
         title: _('quick_create_plugin')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'element/plugin.php'
         ,action: 'create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'category'
-            ,id: 'modx-qcp-category'
+            ,id: 'modx-'+this.ident+'-category'
         },{
             xtype: 'textfield'
             ,name: 'name'
-            ,id: 'modx-qcp-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
         },{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-qcp-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
         },{
             xtype: 'textarea'
             ,name: 'plugincode'
-            ,id: 'modx-qcp-plugincode'
+            ,id: 'modx-'+this.ident+'-plugincode'
             ,fieldLabel: _('code')
             ,width: 400
             ,grow: true
@@ -545,32 +534,34 @@ Ext.reg('modx-window-quick-create-plugin',MODx.window.QuickCreatePlugin);
 
 MODx.window.QuickUpdatePlugin = function(config) {
     config = config || {};
+    this.ident = config.ident || 'qup'+Ext.id();
     Ext.applyIf(config,{
         title: _('quick_update_plugin')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'element/plugin.php'
         ,action: 'update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
-            ,id: 'modx-qup-id'
+            ,id: 'modx-'+this.ident+'-id'
         },{
             xtype: 'textfield'
             ,name: 'name'
-            ,id: 'modx-qup-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
         },{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-qup-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
         },{
             xtype: 'checkbox'
             ,name: 'clearCache'
-            ,id: 'modx-qup-clearcache'
+            ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
             ,description: _('clear_cache_on_save_msg')
             ,inputValue: 1
@@ -578,7 +569,7 @@ MODx.window.QuickUpdatePlugin = function(config) {
         },{
             xtype: 'textarea'
             ,name: 'plugincode'
-            ,id: 'modx-qup-plugincode'
+            ,id: 'modx-'+this.ident+'-plugincode'
             ,fieldLabel: _('code')
             ,width: 400
             ,height: 380 
@@ -593,25 +584,27 @@ Ext.reg('modx-window-quick-update-plugin',MODx.window.QuickUpdatePlugin);
 
 MODx.window.QuickCreateTV = function(config) {
     config = config || {};
+    this.ident = config.ident || 'qctv'+Ext.id();
     Ext.applyIf(config,{
         title: _('quick_create_tv')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'element/tv.php'
         ,action: 'create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'category'
-            ,id: 'modx-qctv-category'
+            ,id: 'modx-'+this.ident+'-category'
         },{
             xtype: 'textfield'
             ,name: 'name'
-            ,id: 'modx-qctv-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
         },{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-qctv-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
@@ -619,18 +612,18 @@ MODx.window.QuickCreateTV = function(config) {
             xtype: 'modx-combo-tv-input-type'
             ,fieldLabel: _('tv_type')
             ,name: 'type'
-            ,id: 'modx-qctv-type'
+            ,id: 'modx-'+this.ident+'-type'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('tv_elements')
             ,name: 'els'
-            ,id: 'modx-qctv-elements'
+            ,id: 'modx-'+this.ident+'-elements'
             ,width: 250
         },{
             xtype: 'textarea'
             ,fieldLabel: _('tv_default')
             ,name: 'default_text'
-            ,id: 'modx-qctv-default-text'
+            ,id: 'modx-'+this.ident+'-default-text'
             ,width: 300
             ,grow: true
         }]
@@ -643,32 +636,34 @@ Ext.reg('modx-window-quick-create-tv',MODx.window.QuickCreateTV);
 
 MODx.window.QuickUpdateTV = function(config) {
     config = config || {};
+    this.ident = config.ident || 'qutv'+Ext.id();
     Ext.applyIf(config,{
         title: _('quick_update_tv')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'element/tv.php'
         ,action: 'update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
-            ,id: 'modx-qutv-id'
+            ,id: 'modx-'+this.ident+'-id'
         },{
             xtype: 'textfield'
             ,name: 'name'
-            ,id: 'modx-qutv-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
         },{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-qutv-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
         },{
             xtype: 'checkbox'
             ,name: 'clearCache'
-            ,id: 'modx-qutv-clearcache'
+            ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
             ,description: _('clear_cache_on_save_msg')
             ,inputValue: 1
@@ -677,18 +672,18 @@ MODx.window.QuickUpdateTV = function(config) {
             xtype: 'modx-combo-tv-input-type'
             ,fieldLabel: _('tv_type')
             ,name: 'type'
-            ,id: 'modx-qutv-type'
+            ,id: 'modx-'+this.ident+'-type'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('tv_elements')
             ,name: 'els'
-            ,id: 'modx-qutv-elements'
+            ,id: 'modx-'+this.ident+'-elements'
             ,width: 250
         },{
             xtype: 'textarea'
             ,fieldLabel: _('tv_default')
             ,name: 'default_text'
-            ,id: 'modx-qutv-default-text'
+            ,id: 'modx-'+this.ident+'-default-text'
             ,width: 300
             ,grow: true
         }]

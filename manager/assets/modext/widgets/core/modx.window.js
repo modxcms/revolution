@@ -54,9 +54,6 @@ MODx.Window = function(config) {
     },this);
 };
 Ext.extend(MODx.Window,Ext.Window,{
-	/**
-	 * Abstract loader for FormPanel creation
-	 */
 	_loadForm: function() {
 		if (this.checkIfLoaded(this.config.record || null)) { return false; }		
 		
@@ -83,9 +80,6 @@ Ext.extend(MODx.Window,Ext.Window,{
 		this.renderForm();
 	}
 	
-	/**
-	 * Default handler for Window Form submissions. Allows for callbacks.
-	 */
 	,submit: function() {
         var f = this.fp.getForm();
 		if (f.isValid() && this.fireEvent('beforeSubmit',f.getValues())) {
@@ -107,10 +101,6 @@ Ext.extend(MODx.Window,Ext.Window,{
 		}
 	}
 	
-	/**
-	 * Creates the FormPanel with preset options
-	 * @param {Object} options
-	 */
 	,createForm: function(config) {
 		config = config || {};
 		Ext.applyIf(config,{
@@ -128,17 +118,10 @@ Ext.extend(MODx.Window,Ext.Window,{
 		return new Ext.FormPanel(config);
 	}
 	
-	/**
-	 * Renders the FormPanel into the Window
-	 */
 	,renderForm: function() {
 		this.add(this.fp);
 	}
 	
-	/**
-	 * Checks to see if the window has already been created or not.
-	 * @param {Object} r
-	 */
 	,checkIfLoaded: function(r) {
 		r = r || {};
 		if (this.fp && this.fp.getForm()) { /* so as not to duplicate form */
@@ -148,28 +131,19 @@ Ext.extend(MODx.Window,Ext.Window,{
 		}
 		return false;
 	}
-    /**
-     * Sets the form values for the dialog.
-     * @param {Object} r An object of values to set.
-     */
+    
     ,setValues: function(r) {
         if (r === null) { return false; }
         this.fp.getForm().setValues(r);
     }
-    /**
-     * Hides a field in the form.
-     * @param {Ext.form.Field} f An Ext Form Field to hide.
-     */
+    
     ,hideField: function(f) {
         f.disable();
         f.hide();
         var d = f.getEl().up('.x-form-item');
         if (d) { d.setDisplayed(false); }
     }
-    /**
-     * Shows a field in the form.
-     * @param {Ext.form.Field} f An Ext Form Field to show.
-     */
+
     ,showField: function(f) {
         f.enable();
         f.show();
@@ -177,10 +151,6 @@ Ext.extend(MODx.Window,Ext.Window,{
         if (d) { d.setDisplayed(true); }
     }
     
-    /**
-     * If set for the window, displays a help dialog.
-     * @abstract
-     */
     ,help: function() {
         Ext.Msg.alert(_('help'),_('help_not_yet'));
     }

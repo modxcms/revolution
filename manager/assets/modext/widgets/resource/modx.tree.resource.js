@@ -52,19 +52,16 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 		    resource: id
 		    ,is_folder: node.getUI().hasClass('folder')
 	    };
-		if (this.windows.duplicate) {
-           this.windows.duplicate.destroy(); 
-        }
-        this.windows.duplicate = MODx.load({
+        var w = MODx.load({
         	xtype: 'modx-window-resource-duplicate'
             ,resource: id
-            ,is_folder: node.getUI().hasClass('folder')
+            ,is_folder: !node.attributes.leaf
             ,listeners: {
             	'success': {fn:function() { this.refreshNode(node.id); },scope:this}
             }
         });
-		this.windows.duplicate.setValues(r);
-		this.windows.duplicate.show(e.target);
+		w.setValues(r);
+		w.show(e.target);
 	}
 	
     ,preview: function(item,e) {
@@ -228,7 +225,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,"parent": p || 0
         };
         
-        this.windows['quick-create-resource'] = MODx.load({
+        var w = MODx.load({
             xtype: 'modx-window-quick-create-modResource'
             ,record: r
             ,listeners: {
@@ -237,8 +234,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 ,'show':{fn:function() {this.center();}}
             }
         });
-        this.windows['quick-create-resource'].setValues(r);
-        this.windows['quick-create-resource'].show(e.target);
+        w.setValues(r);
+        w.show(e.target);
     }
     
     ,quickUpdate: function(itm,e,cls) {        
@@ -253,7 +250,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     var pr = r.object;
                     pr.class_key = cls;
                     
-                    this.windows['quick-update-resource'] = MODx.load({
+                    var w = MODx.load({
                         xtype: 'modx-window-quick-update-modResource'
                         ,record: pr
                         ,listeners: {
@@ -263,8 +260,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                             ,'hide':{fn:function() { this.destroy(); }}
                         }
                     });
-                    this.windows['quick-update-resource'].setValues(r.object);
-                    this.windows['quick-update-resource'].show(e.target);
+                    w.setValues(r.object);
+                    w.show(e.target);
                 },scope:this}
             }
         });
@@ -276,34 +273,36 @@ Ext.reg('modx-tree-resource',MODx.tree.Resource);
 
 MODx.window.QuickCreateResource = function(config) {
     config = config || {};
+    this.ident = config.ident || 'qcr'+Ext.id();
     Ext.applyIf(config,{
         title: _('quick_create_resource')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'resource/index.php'
         ,action: 'create'
         ,fields: [{
             xtype: 'textfield'
             ,name: 'pagetitle'
-            ,id: 'modx-qcr-pagetitle'
+            ,id: 'modx-'+this.ident+'-pagetitle'
             ,fieldLabel: _('pagetitle')
             ,width: 300
         },{
             xtype: 'textfield'
             ,name: 'alias'
-            ,id: 'modx-qcr-alias'
+            ,id: 'modx-'+this.ident+'-alias'
             ,fieldLabel: _('alias')
             ,width: 300
         },{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-qcr-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
         },{
             xtype: 'modx-combo-template'
             ,name: 'template'
-            ,id: 'modx-qcr-template'
+            ,id: 'modx-'+this.ident+'-template'
             ,fieldLabel: _('template')
             ,editable: false
             ,width: 300
@@ -312,16 +311,16 @@ MODx.window.QuickCreateResource = function(config) {
                 ,combo: '1'
             }
         },
-        MODx.getQRContentField('qcr',config.record.class_key)
+        MODx.getQRContentField(this.ident,config.record.class_key)
         ,{
-            id: 'modx-qcr-settings'
+            id: 'modx-'+this.ident+'-settings'
             ,title: _('settings')
             ,collapsible: true
             ,collapsed: true
             ,xtype: 'fieldset'
             ,autoHeight: true
             ,defaults: { autoHeight: true ,border: false }
-            ,items: MODx.getQRSettings('qcr',config.record)
+            ,items: MODx.getQRSettings(this.ident,config.record)
         }]
         ,keys: []
     });
@@ -332,45 +331,47 @@ Ext.reg('modx-window-quick-create-modResource',MODx.window.QuickCreateResource);
 
 MODx.window.QuickUpdateResource = function(config) {
     config = config || {};
+    this.ident = config.ident || 'qur'+Ext.id();
     Ext.applyIf(config,{
         title: _('quick_update_resource')
+        ,id: this.ident
         ,width: 600
         ,url: MODx.config.connectors_url+'resource/index.php'
         ,action: 'update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
-            ,id: 'modx-qur-id'
+            ,id: 'modx-'+this.ident+'-id'
         },{
             xtype: 'textfield'
             ,name: 'pagetitle'
-            ,id: 'modx-qur-pagetitle'
+            ,id: 'modx-'+this.ident+'-pagetitle'
             ,fieldLabel: _('pagetitle')
             ,width: 300
         },{
             xtype: 'textfield'
             ,name: 'alias'
-            ,id: 'modx-qur-alias'
+            ,id: 'modx-'+this.ident+'-alias'
             ,fieldLabel: _('alias')
             ,width: 300
         },{
             xtype: 'textarea'
             ,name: 'description'
-            ,id: 'modx-qur-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
         },
-        MODx.getQRContentField('qur',config.record.class_key)
+        MODx.getQRContentField(this.ident,config.record.class_key)
         ,{
-            id: 'modx-qur-settings'
+            id: 'modx-'+this.ident+'-settings'
             ,title: _('settings')
             ,collapsible: true
             ,collapsed: true
             ,xtype: 'fieldset'
             ,autoHeight: true
             ,defaults: { autoHeight: true ,border: false }
-            ,items: MODx.getQRSettings('qur',config.record)
+            ,items: MODx.getQRSettings(this.ident,config.record)
         }]
         ,keys: []
     });
