@@ -17,27 +17,27 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('tag_name')
         ,name: 'prop_tagname'
-        ,value: params.tagname || 'div'
+        ,value: params['tagname'] || 'div'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('tag_id')
         ,name: 'prop_tagid'
-        ,value: params.tagid || ''
+        ,value: params['tagid'] || ''
     },{
         xtype: 'textfield'
         ,fieldLabel: _('class')
         ,name: 'prop_class'
-        ,value: params.class || ''
+        ,value: params['class'] || ''
     },{
         xtype: 'textfield'
         ,fieldLabel: _('style')
         ,name: 'prop_style'
-        ,value: params.style || ''
+        ,value: params['style'] || ''
     },{
         xtype: 'textfield'
         ,fieldLabel: _('attributes')
         ,name: 'prop_attrib'
-        ,value: params.attrib || ''
+        ,value: params['attrib'] || ''
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
 });

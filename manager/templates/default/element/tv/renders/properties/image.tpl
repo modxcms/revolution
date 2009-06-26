@@ -17,22 +17,26 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('image_alt')
         ,name: 'prop_alttext'
-        ,value: params.alttext || ''
+        ,value: params['alttext'] || ''
+        ,width: 300
     },{
         xtype: 'numberfield'
         ,fieldLabel: _('image_hspace')
         ,name: 'prop_hspace'
-        ,value: params.hspace || ''
+        ,value: params['hspace'] || ''
+        ,width: 300
     },{
         xtype: 'numberfield'
         ,fieldLabel: _('image_vspace')
         ,name: 'prop_vspace'
-        ,value: params.vspace || ''
+        ,value: params['vspace'] || ''
+        ,width: 300
     },{
         xtype: 'numberfield'
         ,fieldLabel: _('image_border_size')
         ,name: 'prop_borsize'
-        ,value: params.borsize || ''
+        ,value: params['borsize'] || ''
+        ,width: 300
     },{
         xtype: 'combo'
         ,name: 'prop_align'
@@ -49,32 +53,38 @@ MODx.load({
         ,forceSelection: false
         ,typeAhead: false
         ,triggerAction: 'all'
-        ,value: params.align || 'none'
+        ,value: params['align'] || 'none'
+        ,width: 300
     },{
         xtype: 'textfield'
         ,fieldLabel: _('name')
         ,name: 'prop_name'
-        ,value: params.name || ''
+        ,value: params['name'] || ''
+        ,width: 300
     },{
         xtype: 'textfield'
         ,fieldLabel: _('class')
         ,name: 'prop_class'
-        ,value: params.class || ''
+        ,value: params['class'] || ''
+        ,width: 300
     },{
         xtype: 'textfield'
         ,fieldLabel: _('id')
         ,name: 'prop_id'
-        ,value: params.id || ''
+        ,value: params['id'] || ''
+        ,width: 300
     },{
         xtype: 'textfield'
         ,fieldLabel: _('style')
         ,name: 'prop_style'
-        ,value: params.style || ''
+        ,value: params['style'] || ''
+        ,width: 300
     },{
         xtype: 'textfield'
         ,fieldLabel: _('attributes')
         ,name: 'prop_attributes'
-        ,value: params.attributes || ''
+        ,value: params['attributes'] || ''
+        ,width: 300
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
 });

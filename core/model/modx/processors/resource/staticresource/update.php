@@ -202,6 +202,7 @@ if ($resource->save() == false) {
 }
 
 foreach ($tmplvars as $field => $value) {
+    if (!isset($_POST['tv'.$tv->get('id')])) continue;
      if (!is_array($value)) {
         /* delete unused variable */
         $tvc = $modx->getObject('modTemplateVarResource',array(

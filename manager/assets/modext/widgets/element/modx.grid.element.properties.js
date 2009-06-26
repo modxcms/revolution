@@ -20,6 +20,7 @@ MODx.grid.ElementProperties = function(config) {
         ,sortBy: 'name'
         ,width: '100%'
         ,sm: new Ext.grid.RowSelectionModel({singleSelect:false})
+        ,loadMask: true
         ,lockProperties: true
         ,plugins: [this.exp]
         ,columns: [this.exp,{

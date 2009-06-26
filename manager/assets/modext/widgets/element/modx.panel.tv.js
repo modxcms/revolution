@@ -101,44 +101,44 @@ MODx.panel.TV = function(config) {
             },{
                 html: onTVFormRender
                 ,border: false
-            }]
-        },{
-            title: _('rendering_options')
-            ,defaults: { border: false ,msgTarget: 'side' }
-            ,bodyStyle: 'padding: 1.5em;'
-            ,layout: 'form'
-            ,id: 'modx-tv-render-options'
-            ,labelWidth: 150
-            ,items: [{
-                xtype: 'modx-combo-tv-input-type'
-                ,fieldLabel: _('tv_type')
-                ,name: 'type'
-                ,id: 'modx-tv-type'
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('tv_elements')
-                ,name: 'els'
-                ,id: 'modx-tv-elements'
-                ,width: 250
-            },{
-                xtype: 'textarea'
-                ,fieldLabel: _('tv_default')
-                ,name: 'default_text'
-                ,id: 'modx-tv-default-text'
-                ,width: 300
-                ,grow: true
-            },{
-                xtype: 'modx-combo-tv-widget'
-                ,fieldLabel: _('tv_output_type')
-                ,name: 'display'
-                ,hiddenName: 'display'
-                ,id: 'modx-tv-display'
-                ,listeners: {
-                    'select': {fn:this.showParameters,scope:this}
-                }
-            },{
-                id: 'modx-widget-props'
+            },MODx.PanelSpacer,{
+                xtype: 'fieldset'
+                ,title: _('rendering_options')
                 ,autoHeight: true
+                ,border: true
+                ,collapsible: true
+                ,defaults: { autoHeight: true }
+                ,items: [{
+                    xtype: 'modx-combo-tv-input-type'
+                    ,fieldLabel: _('tv_type')
+                    ,name: 'type'
+                    ,id: 'modx-tv-type'
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('tv_elements')
+                    ,name: 'els'
+                    ,id: 'modx-tv-elements'
+                    ,width: 250
+                },{
+                    xtype: 'textarea'
+                    ,fieldLabel: _('tv_default')
+                    ,name: 'default_text'
+                    ,id: 'modx-tv-default-text'
+                    ,width: 300
+                    ,grow: true
+                },{
+                    xtype: 'modx-combo-tv-widget'
+                    ,fieldLabel: _('tv_output_type')
+                    ,name: 'display'
+                    ,hiddenName: 'display'
+                    ,id: 'modx-tv-display'
+                    ,listeners: {
+                        'select': {fn:this.showParameters,scope:this}
+                    }
+                },{
+                    id: 'modx-widget-props'
+                    ,autoHeight: true
+                }]
             }]
         },{
             xtype: 'modx-panel-element-properties'

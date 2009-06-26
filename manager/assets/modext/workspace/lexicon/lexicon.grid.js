@@ -131,6 +131,7 @@ MODx.grid.Lexicon = function(config) {
         ,'-'
         ,{
             xtype: 'button'
+            ,id: 'modx-lexicon-import-btn'
             ,text: _('lexicon_import')
             ,handler: function(btn,e) {
                 this.loadWindow2(btn,e,{ 
@@ -140,6 +141,7 @@ MODx.grid.Lexicon = function(config) {
             ,scope: this
         },{
             xtype: 'button'
+            ,id: 'modx-lexicon-export-btn'
             ,text: _('lexicon_export')
             ,handler: function(btn,e) {
                 this.loadWindow2(btn,e,{ 

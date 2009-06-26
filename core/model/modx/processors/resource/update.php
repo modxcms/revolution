@@ -272,6 +272,7 @@ $c->sortby('tv.rank');
 
 $tvs = $modx->getCollection('modTemplateVar',$c);
 foreach ($tvs as $tv) {
+    if (!isset($_POST['tv'.$tv->get('id')])) continue;
     $tmplvar = '';
     if ($tv->get('type') == 'url') {
         $tmplvar = $_POST['tv'.$tv->get('id')];

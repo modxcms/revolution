@@ -29,7 +29,7 @@ MODx.load({
         ,forceSelection: true
         ,typeAhead: false
         ,triggerAction: 'all'
-        ,value: params.format || ''
+        ,value: params['format'] || ''
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
 });

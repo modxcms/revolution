@@ -17,7 +17,7 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('date_format')
         ,name: 'prop_format'
-        ,value: params.format || '%A %d, %B %Y'
+        ,value: params['format'] || '%A %d, %B %Y'
     },{
         xtype: 'combo'
         ,fieldLabel: _('date_use_current')

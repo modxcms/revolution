@@ -17,7 +17,8 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('delimiter')
         ,name: 'prop_delimiter'
-        ,value: params.delimiter || ''
+        ,value: params['delimiter'] || ''
+        ,width: 300
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
 });

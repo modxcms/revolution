@@ -17,12 +17,12 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('width')
         ,name: 'prop_w'
-        ,value: params.w || '100%'
+        ,value: params['w'] || '100%'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('height')
         ,name: 'prop_h'
-        ,value: params.h || '300px'
+        ,value: params['h'] || '300px'
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
 });
