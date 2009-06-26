@@ -14,38 +14,27 @@ MODx.panel.GroupsRoles = function(config) {
             ,border: false
             ,cls: 'modx-page-header'
             ,id: 'modx-access-permissions-header'
-        },{
-            xtype: 'portal'
+        },MODx.getPageStructure([{
+            title: _('user_groups')
+            ,bodyStyle: 'padding: 1.5em;'
+            ,autoHeight: true
             ,items: [{
-                columnWidth: 1
-                ,style:'padding:10px;'
-                ,defaults: {
-                    collapsible: true
-                    ,autoHeight: true
-                    ,titleCollapse: true
-                    ,draggable: true
-                    ,style: 'padding: 5px 0;'
-                    ,bodyStyle: 'padding: 10px'
-                }
-                ,items: [{
-                    title: _('user_groups')
-                    ,items: [{
-                        html: '<p>'+_('user_group_management_msg')+'</p>'
-                        ,border: false
-                    },{
-                        xtype: 'modx-tree-usergroup'
-                        ,title: ''
-                    }]
-                },{
-                    title: _('roles')
-                    ,items: [{
-                        xtype: 'modx-grid-role'
-                        ,title: ''
-                        ,preventRender: true
-                    }]
-                }]
+                html: '<p>'+_('user_group_management_msg')+'</p>'
+                ,border: false
+            },{
+                xtype: 'modx-tree-usergroup'
+                ,title: ''
             }]
-        }]
+        },{
+            title: _('roles')
+            ,bodyStyle: 'padding: 1.5em;'
+            ,autoHeight: true
+            ,items: [{
+                xtype: 'modx-grid-role'
+                ,title: ''
+                ,preventRender: true
+            }]
+        }])]
     });
     MODx.panel.GroupsRoles.superclass.constructor.call(this,config);
 };

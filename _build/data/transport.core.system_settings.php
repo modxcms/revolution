@@ -832,3 +832,12 @@ $collection['89']->fromArray(array (
   'area' => '',
   'editedon' => NULL,
 ), '', true, true);
+$collection['90']= $xpdo->newObject('modSystemSetting');
+$collection['90']->fromArray(array (
+  'key' => 'manager_use_tabs',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);

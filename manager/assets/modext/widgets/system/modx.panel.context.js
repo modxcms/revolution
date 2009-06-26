@@ -13,47 +13,49 @@ MODx.panel.Context = function(config) {
         ,class_key: 'modContext'
         ,plugin: ''
         ,bodyStyle: ''
-        ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+_('context')+': '+config.context+'</h2>'
             ,border: false
             ,id: 'modx-context-name'
             ,cls: 'modx-page-header'
-        },{
-            xtype: 'portal'
+        },MODx.getPageStructure([{
+            title: _('general_information')
+            ,autoHeight: true
+            ,layout: 'form'
+            ,bodyStyle: 'padding: 1.5em'
+            ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
-                columnWidth: 1
-                ,items: [{
-                    title: _('general_information')
-                    ,defaults: { border: false ,msgTarget: 'side' }
-                    ,items: [{
-                        xtype: 'statictextfield'
-                        ,fieldLabel: _('key')
-                        ,name: 'key'
-                        ,width: 300
-                        ,maxLength: 255
-                        ,enableKeyEvents: true
-                        ,allowBlank: false
-                        ,value: config.context
-                        ,submitValue: true
-                    },{
-                        xtype: 'textarea'
-                        ,fieldLabel: _('description')
-                        ,name: 'description'
-                        ,width: 300
-                        ,grow: true
-                    }]
-                },{
-                    title: _('context_settings')
-                    ,items: [{
-                        xtype: 'modx-grid-context-settings'
-                        ,title: ''
-                        ,preventRender: true
-                        ,context_key: config.context
-                    }]
-                }]
+                xtype: 'statictextfield'
+                ,fieldLabel: _('key')
+                ,name: 'key'
+                ,width: 300
+                ,maxLength: 255
+                ,enableKeyEvents: true
+                ,allowBlank: false
+                ,value: config.context
+                ,submitValue: true
+            },{
+                xtype: 'textarea'
+                ,fieldLabel: _('description')
+                ,name: 'description'
+                ,width: 300
+                ,grow: true
             }]
-        }]
+        },{
+            title: _('context_settings')
+            ,bodyStyle: 'padding: 1.5em;'
+            ,autoHeight: true
+            ,items: [{
+                html: '<p>'+_('context_settings_desc')+'</p>'
+                ,id: 'modx-context-settings-desc'
+                ,border: false
+            },{
+                xtype: 'modx-grid-context-settings'
+                ,title: ''
+                ,preventRender: true
+                ,context_key: config.context
+            }]
+        }])]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
         }

@@ -8,37 +8,32 @@ MODx.panel.Workspace = function(config) {
             ,border: false
             ,cls: 'modx-page-header'
             ,id: 'modx-workspace-header'
-        },{
-            xtype: 'portal'
-            ,id: 'modx-portal-workspace'
+        },MODx.getPageStructure([{
+            title: _('packages')
+            ,bodyStyle: 'padding: 1.5em;'
+            ,autoHeight: true
             ,items: [{
-                columnWidth: 1
-                ,id: 'modx-col-packages'
-                ,items: [{
-                    title: _('packages')
-                    ,items: [{
-                        html: '<p>'+_('packages_desc')+'</p>'
-                        ,border: false
-                    },{
-                        xtype: 'modx-grid-package'
-                        ,id: 'modx-grid-package'
-                        ,preventRender: true
-                    }]
-                },{
-                    title: _('providers')
-                    ,collapsed: true
-                    ,items: [{
-                        html: '<p>'+_('providers_desc')+'</p>'
-                        ,border: false
-                    },{
-                        xtype: 'modx-grid-provider'
-                        ,id: 'modx-grid-provider'
-                        ,title: ''
-                        ,preventRender: true
-                    }]
-                }]
+                html: '<p>'+_('packages_desc')+'</p>'
+                ,border: false
+            },{
+                xtype: 'modx-grid-package'
+                ,id: 'modx-grid-package'
+                ,preventRender: true
             }]
-        }]
+        },{
+            title: _('providers')
+            ,bodyStyle: 'padding: 1.5em;'
+            ,autoHeight: true
+            ,items: [{
+                html: '<p>'+_('providers_desc')+'</p>'
+                ,border: false
+            },{
+                xtype: 'modx-grid-provider'
+                ,id: 'modx-grid-provider'
+                ,title: ''
+                ,preventRender: true
+            }]
+        }])]
     });
     MODx.panel.Workspace.superclass.constructor.call(this,config);
 };

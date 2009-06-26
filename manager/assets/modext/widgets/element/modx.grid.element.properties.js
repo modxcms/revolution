@@ -40,6 +40,7 @@ MODx.grid.ElementProperties = function(config) {
             ,id: 'value'
             ,width: 250
             ,renderer: this.renderDynField.createDelegate(this,[this],true)
+            ,editor: { xtype: 'textfield' }
             ,sortable: true
         }]
         ,tbar: [{

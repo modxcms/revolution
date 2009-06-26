@@ -13,107 +13,95 @@ MODx.panel.Snippet = function(config) {
         ,class_key: 'modSnippet'
         ,plugin: ''
         ,bodyStyle: ''
-        ,defaults: { collapsible: false ,autoHeight: true }
         ,allowDrop: false
         ,items: [{
             html: '<h2>'+_('snippet_new')+'</h2>'
             ,id: 'modx-snippet-header'
             ,cls: 'modx-page-header'
             ,border: false
-        },{
-            xtype: 'portal'
+        },MODx.getPageStructure([{
+            title: _('snippet_title')
+            ,defaults: { border: false ,msgTarget: 'side' }
+            ,bodyStyle: 'padding: 1.5em;'
+            ,layout: 'form'
+            ,id: 'modx-snippet-form'
+            ,labelWidth: 150
             ,items: [{
-                columnWidth: 1
-                ,items: [{
-                    title: _('snippet_title')
-                    ,defaults: { border: false ,msgTarget: 'side' }
-                    ,bodyStyle: 'padding: 1.5em;'
-                    ,layout: 'form'
-                    ,id: 'modx-snippet-form'
-                    ,labelWidth: 150
-                    ,items: [{
-                        html: '<p>'+_('snippet_msg')+'</p>'
-                        ,id: 'modx-snippet-msg'
-                    },{
-                        xtype: 'hidden'
-                        ,name: 'id'
-                        ,id: 'modx-snippet-id'
-                        ,value: config.snippet
-                    },{
-                        xtype: 'hidden'
-                        ,name: 'props'
-                        ,id: 'modx-snippet-props'
-                        ,value: null
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('snippet_name')
-                        ,name: 'name'
-                        ,id: 'modx-snippet-name'
-                        ,width: 300
-                        ,maxLength: 255
-                        ,enableKeyEvents: true
-                        ,allowBlank: false
-                        ,listeners: {
-                            'keyup': {scope:this,fn:function(f,e) {
-                                Ext.getCmp('modx-snippet-header').getEl().update('<h2>'+_('snippet')+': '+f.getValue()+'</h2>');
-                            }}
-                        }
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('snippet_desc')
-                        ,name: 'description'
-                        ,id: 'modx-snippet-description'
-                        ,width: 300
-                        ,maxLength: 255
-                    },{
-                        xtype: 'modx-combo-category'
-                        ,fieldLabel: _('category')
-                        ,name: 'category'
-                        ,id: 'modx-snippet-category'
-                        ,width: 250
-                        ,value: config.category || null
-                    },/*{
-                        xtype: 'checkbox'
-                        ,fieldLabel: _('snippet_execonsave')
-                        ,name: 'runsnippet'
-                        ,id: 'modx-snippet-runsnippet'
-                    },*/{
-                        xtype: 'checkbox'
-                        ,fieldLabel: _('snippet_lock')
-                        ,description: _('snippet_lock_msg')
-                        ,name: 'locked'
-                        ,id: 'modx-snippet-locked'
-                    },{
-                        xtype: 'checkbox'
-                        ,fieldLabel: _('clear_cache_on_save')
-                        ,description: _('clear_cache_on_save_msg')
-                        ,name: 'clearCache'
-                        ,id: 'modx-snippet-clear-cache'
-                        ,inputValue: 1
-                        ,checked: true
-                    },{
-                        html: MODx.onSnipFormRender
-                        ,border: false
-                    },{
-                        html: '<br />'+_('snippet_code')
-                    },{
-                        xtype: 'textarea'
-                        ,hideLabel: true
-                        ,name: 'snippet'
-                        ,id: 'modx-snippet-snippet'
-                        ,width: '95%'
-                        ,height: 400
-                        ,value: "<?php\n\n?>"
-                        
-                    }]
-                },{
-                    xtype: 'modx-panel-element-properties'
-                    ,elementPanel: 'modx-panel-snippet'
-                    ,elementId: config.snippet
-                    ,elementType: 'modSnippet'
-                }]
+                html: '<p>'+_('snippet_msg')+'</p>'
+                ,id: 'modx-snippet-msg'
+            },{
+                xtype: 'hidden'
+                ,name: 'id'
+                ,id: 'modx-snippet-id'
+                ,value: config.snippet
+            },{
+                xtype: 'hidden'
+                ,name: 'props'
+                ,id: 'modx-snippet-props'
+                ,value: null
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('snippet_name')
+                ,name: 'name'
+                ,id: 'modx-snippet-name'
+                ,width: 300
+                ,maxLength: 255
+                ,enableKeyEvents: true
+                ,allowBlank: false
+                ,listeners: {
+                    'keyup': {scope:this,fn:function(f,e) {
+                        Ext.getCmp('modx-snippet-header').getEl().update('<h2>'+_('snippet')+': '+f.getValue()+'</h2>');
+                    }}
+                }
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('snippet_desc')
+                ,name: 'description'
+                ,id: 'modx-snippet-description'
+                ,width: 300
+                ,maxLength: 255
+            },{
+                xtype: 'modx-combo-category'
+                ,fieldLabel: _('category')
+                ,name: 'category'
+                ,id: 'modx-snippet-category'
+                ,width: 250
+                ,value: config.category || null
+            },{
+                xtype: 'checkbox'
+                ,fieldLabel: _('snippet_lock')
+                ,description: _('snippet_lock_msg')
+                ,name: 'locked'
+                ,id: 'modx-snippet-locked'
+            },{
+                xtype: 'checkbox'
+                ,fieldLabel: _('clear_cache_on_save')
+                ,description: _('clear_cache_on_save_msg')
+                ,name: 'clearCache'
+                ,id: 'modx-snippet-clear-cache'
+                ,inputValue: 1
+                ,checked: true
+            },{
+                html: MODx.onSnipFormRender
+                ,border: false
+            },{
+                html: '<br />'+_('snippet_code')
+            },{
+                xtype: 'textarea'
+                ,hideLabel: true
+                ,name: 'snippet'
+                ,id: 'modx-snippet-snippet'
+                ,width: '95%'
+                ,height: 400
+                ,value: "<?php\n\n?>"
+                
             }]
-        }]
+        },{
+            xtype: 'modx-panel-element-properties'
+            ,elementPanel: 'modx-panel-snippet'
+            ,elementId: config.snippet
+            ,elementType: 'modSnippet'
+        }])]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}

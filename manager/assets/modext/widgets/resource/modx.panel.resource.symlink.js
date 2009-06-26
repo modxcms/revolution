@@ -19,162 +19,161 @@ MODx.panel.SymLink = function(config) {
             ,id: 'modx-symlink-header'
             ,cls: 'modx-page-header'
             ,border: false
-        },{
-            xtype: 'portal'
+        },MODx.getPageStructure([{
+            title: _('resource_settings')
+            ,layout: 'form'
+            ,bodyStyle: 'padding: 1.5em;'
+            ,autoHeight: true
+            ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
-                columnWidth: 1
-                ,items: [{
-                    title: _('resource_settings')
-                    ,defaults: { border: false ,msgTarget: 'side' }
-                    ,items: [{
-                        xtype: 'hidden'
-                        ,name: 'id'
-                        ,value: config.resource
-                        ,id: 'modx-symlink-id'
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_pagetitle')
-                        ,description: _('resource_pagetitle_help')
-                        ,name: 'pagetitle'
-                        ,id: 'modx-symlink-pagetitle'
-                        ,width: 300
-                        ,maxLength: 255
-                        ,allowBlank: false
-                        
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_longtitle')
-                        ,description: _('resource_longtitle_help')
-                        ,name: 'longtitle'
-                        ,id: 'modx-symlink-longtitle'
-                        ,width: 300
-                        ,maxLength: 255
-                        
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_description')
-                        ,description: _('resource_description_help')
-                        ,name: 'description'
-                        ,id: 'modx-symlink-description'
-                        ,width: 300
-                        ,maxLength: 255
-                        
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_alias')
-                        ,description: _('resource_alias_help')
-                        ,name: 'alias'
-                        ,id: 'modx-symlink-alias'
-                        ,width: 300
-                        ,maxLength: 100
-                        
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_link_attributes')
-                        ,description: _('resource_link_attributes_help')
-                        ,name: 'link_attributes'
-                        ,id: 'modx-symlink-link-attributes'
-                        ,width: 300
-                        ,maxLength: 255
-                        
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('symlink')
-                        ,description: _('symlink_help')
-                        ,name: 'content'
-                        ,id: 'modx-symlink-content'
-                        ,width: 300
-                        ,maxLength: 255
-                        
-                    },{
-                        xtype: 'textarea'
-                        ,fieldLabel: _('resource_summary')
-                        ,description: _('resource_summary_help')
-                        ,name: 'introtext'
-                        ,id: 'modx-symlink-introtext'
-                        ,width: 300
-                        ,grow: true
-                        
-                    },{
-                        xtype: 'modx-combo-template'
-                        ,fieldLabel: _('resource_template')
-                        ,description: _('resource_template_help')
-                        ,name: 'template'
-                        ,id: 'modx-symlink-template'
-                        ,width: 300
-                        ,baseParams: {
-                            action: 'getList'
-                            ,combo: '1'
-                        }
-                        ,listeners: {
-                            'select': {fn: this.templateWarning,scope: this}
-                        }
-                        ,value: config.record.template
-                    },{
-                        xtype: 'modx-field-parent-change'
-                        ,fieldLabel: _('resource_parent')
-                        ,description: _('resource_parent_help')
-                        ,name: 'parent-cmb'
-                        ,editable: false
-                        ,id: 'modx-symlink-parent'
-                        ,width: 300
-                        ,value: config.record.parent || 0
-                    },{
-                        xtype: 'hidden'
-                        ,name: 'parent'
-                        ,value: config.record.parent || 0
-                        ,id: 'modx-resource-parent-hidden'
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_menutitle')
-                        ,description: _('resource_menutitle_help')
-                        ,name: 'menutitle'
-                        ,id: 'modx-symlink-menutitle'
-                        ,width: 300
-                        ,maxLength: 255
-                        
-                    },{
-                        xtype: 'numberfield'
-                        ,fieldLabel: _('resource_menuindex')
-                        ,description: _('resource_menuindex_help')
-                        ,name: 'menuindex'
-                        ,id: 'modx-symlink-menuindex'
-                        ,width: 60
-                        
-                    },{
-                        xtype: 'checkbox'
-                        ,fieldLabel: _('resource_hide_from_menus')
-                        ,description: _('resource_hide_from_menus_help')
-                        ,name: 'hidemenu'
-                        ,id: 'modx-symlink-hidemenu'
-                        ,inputValue: 1
-                        ,checked: false
-                        
-                    }]
-                },{
-                    xtype: 'modx-panel-resource-tv'
-                    ,resource: config.resource
-                    ,class_key: config.record.class_key
-                    ,template: config.record.template
-                    
-                },(config.access_permissions ? {
-                    id: 'modx-resource-access-permissions'
-                    ,collapsed: false
-                    ,title: _('access_permissions')
-                    ,layout: 'form'
-                    ,items: [{
-                        html: '<p>'+_('resource_access_message')+'</p>'
-                    },{
-                        xtype: 'modx-grid-resource-security'
-                        ,preventRender: true
-                        ,resource: config.resource
-                        ,listeners: {
-                            'afteredit': {fn:this.fieldChangeEvent,scope:this}
-                        }
-                    }]
-                } : {})]
+                xtype: 'hidden'
+                ,name: 'id'
+                ,value: config.resource
+                ,id: 'modx-symlink-id'
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_pagetitle')
+                ,description: _('resource_pagetitle_help')
+                ,name: 'pagetitle'
+                ,id: 'modx-symlink-pagetitle'
+                ,width: 300
+                ,maxLength: 255
+                ,allowBlank: false
+                
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_longtitle')
+                ,description: _('resource_longtitle_help')
+                ,name: 'longtitle'
+                ,id: 'modx-symlink-longtitle'
+                ,width: 300
+                ,maxLength: 255
+                
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_description')
+                ,description: _('resource_description_help')
+                ,name: 'description'
+                ,id: 'modx-symlink-description'
+                ,width: 300
+                ,maxLength: 255
+                
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_alias')
+                ,description: _('resource_alias_help')
+                ,name: 'alias'
+                ,id: 'modx-symlink-alias'
+                ,width: 300
+                ,maxLength: 100
+                
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_link_attributes')
+                ,description: _('resource_link_attributes_help')
+                ,name: 'link_attributes'
+                ,id: 'modx-symlink-link-attributes'
+                ,width: 300
+                ,maxLength: 255
+                
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('symlink')
+                ,description: _('symlink_help')
+                ,name: 'content'
+                ,id: 'modx-symlink-content'
+                ,width: 300
+                ,maxLength: 255
+                
+            },{
+                xtype: 'textarea'
+                ,fieldLabel: _('resource_summary')
+                ,description: _('resource_summary_help')
+                ,name: 'introtext'
+                ,id: 'modx-symlink-introtext'
+                ,width: 300
+                ,grow: true
+                
+            },{
+                xtype: 'modx-combo-template'
+                ,fieldLabel: _('resource_template')
+                ,description: _('resource_template_help')
+                ,name: 'template'
+                ,id: 'modx-symlink-template'
+                ,width: 300
+                ,baseParams: {
+                    action: 'getList'
+                    ,combo: '1'
+                }
+                ,listeners: {
+                    'select': {fn: this.templateWarning,scope: this}
+                }
+                ,value: config.record.template
+            },{
+                xtype: 'modx-field-parent-change'
+                ,fieldLabel: _('resource_parent')
+                ,description: _('resource_parent_help')
+                ,name: 'parent-cmb'
+                ,editable: false
+                ,id: 'modx-symlink-parent'
+                ,width: 300
+                ,value: config.record.parent || 0
+            },{
+                xtype: 'hidden'
+                ,name: 'parent'
+                ,value: config.record.parent || 0
+                ,id: 'modx-resource-parent-hidden'
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_menutitle')
+                ,description: _('resource_menutitle_help')
+                ,name: 'menutitle'
+                ,id: 'modx-symlink-menutitle'
+                ,width: 300
+                ,maxLength: 255
+                
+            },{
+                xtype: 'numberfield'
+                ,fieldLabel: _('resource_menuindex')
+                ,description: _('resource_menuindex_help')
+                ,name: 'menuindex'
+                ,id: 'modx-symlink-menuindex'
+                ,width: 60
+                
+            },{
+                xtype: 'checkbox'
+                ,fieldLabel: _('resource_hide_from_menus')
+                ,description: _('resource_hide_from_menus_help')
+                ,name: 'hidemenu'
+                ,id: 'modx-symlink-hidemenu'
+                ,inputValue: 1
+                ,checked: false
+                
             }]
-        }]
+        },{
+            xtype: 'modx-panel-resource-tv'
+            ,resource: config.resource
+            ,class_key: config.record.class_key
+            ,template: config.record.template
+            
+        },(config.access_permissions ? {
+            id: 'modx-resource-access-permissions'
+            ,title: _('access_permissions')
+            ,layout: 'form'
+            ,bodyStyle: 'padding: 1.5em;'
+            ,autoHeight: true
+            ,items: [{
+                html: '<p>'+_('resource_access_message')+'</p>'
+                ,border: false
+            },{
+                xtype: 'modx-grid-resource-security'
+                ,preventRender: true
+                ,resource: config.resource
+                ,listeners: {
+                    'afteredit': {fn:this.fieldChangeEvent,scope:this}
+                }
+            }]
+        } : {})])]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}

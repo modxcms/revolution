@@ -19,169 +19,168 @@ MODx.panel.WebLink = function(config) {
             ,id: 'modx-weblink-header'
             ,cls: 'modx-page-header'
             ,border: false
-        },{
-            xtype: 'portal'
+        },MODx.getPageStructure([{
+            title: _('resource_settings')
+            ,bodyStyle: 'padding: 1.5em;'
+            ,autoHeight: true
+            ,layout: 'form'
+            ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
-                columnWidth: 1
-                ,items: [{
-                    title: _('resource_settings')
-                    ,defaults: { border: false ,msgTarget: 'side' }
-                    ,items: [{
-                        xtype: 'hidden'
-                        ,name: 'id'
-                        ,value: config.resource
-                        ,id: 'modx-weblink-id'
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_pagetitle')
-                        ,description: _('resource_pagetitle_help')
-                        ,name: 'pagetitle'
-                        ,id: 'modx-weblink-pagetitle'
-                        ,width: 300
-                        ,maxLength: 255
-                        ,allowBlank: false
-                        
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_longtitle')
-                        ,description: _('resource_longtitle_help')
-                        ,name: 'longtitle'
-                        ,id: 'modx-weblink-longtitle'
-                        ,width: 300
-                        ,maxLength: 255
-                        
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_description')
-                        ,description: _('resource_description_help')
-                        ,name: 'description'
-                        ,id: 'modx-weblink-description'
-                        ,width: 300
-                        ,maxLength: 255
-                        
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_alias')
-                        ,description: _('resource_alias_help')
-                        ,name: 'alias'
-                        ,id: 'modx-weblink-alias'
-                        ,width: 300
-                        ,maxLength: 100
-                        
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_link_attributes')
-                        ,description: _('resource_link_attributes_help')
-                        ,name: 'link_attributes'
-                        ,id: 'modx-weblink-link-attributes'
-                        ,width: 300
-                        ,maxLength: 255
-                        
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('weblink')
-                        ,description: _('weblink_help')
-                        ,name: 'content'
-                        ,id: 'modx-weblink-content'
-                        ,width: 300
-                        ,maxLength: 255
-                        ,value: 'http://'
-                        ,allowBlank: false
-                        
-                    },{
-                        xtype: 'textarea'
-                        ,fieldLabel: _('resource_summary')
-                        ,description: _('resource_summary_help')
-                        ,name: 'introtext'
-                        ,id: 'modx-weblink-introtext'
-                        ,width: 300
-                        ,grow: true
-                        
-                    },{
-                        xtype: 'modx-combo-template'
-                        ,fieldLabel: _('resource_template')
-                        ,description: _('resource_template_help')
-                        ,name: 'template'
-                        ,id: 'modx-weblink-template'
-                        ,editable: false
-                        ,width: 300
-                        ,baseParams: {
-                            action: 'getList'
-                            ,combo: '1'
-                        }
-                        ,listeners: {
-                            'select': {fn: this.templateWarning,scope: this}
-                        }
-                        ,value: config.record.template
-                    },{
-                        xtype: 'modx-field-parent-change'
-                        ,fieldLabel: _('resource_parent')
-                        ,description: _('resource_parent_help')
-                        ,name: 'parent-cmb'
-                        ,editable: false
-                        ,id: 'modx-weblink-parent'
-                        ,width: 300
-                        ,value: config.record.parent || 0
-                    },{
-                        xtype: 'hidden'
-                        ,name: 'parent'
-                        ,value: config.record.parent || 0
-                        ,id: 'modx-resource-parent-hidden'
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('resource_menutitle')
-                        ,description: _('resource_menutitle_help')
-                        ,name: 'menutitle'
-                        ,id :'modx-weblink-menutitle'
-                        ,width: 300
-                        ,maxLength: 255
-                        
-                    },{
-                        xtype: 'numberfield'
-                        ,fieldLabel: _('resource_menuindex')
-                        ,description: _('resource_menuindex_help')
-                        ,name: 'menuindex'
-                        ,id: 'modx-weblink-menuindex'
-                        ,width: 60
-                        
-                    },{
-                        xtype: 'checkbox'
-                        ,fieldLabel: _('resource_hide_from_menus')
-                        ,description: _('resource_hide_from_menus_help')
-                        ,name: 'hidemenu'
-                        ,id: 'modx-weblink-hidemenu'
-                        ,inputValue: 1
-                        ,checked: false
-                        
-                    },{
-                        xtype: 'hidden'
-                        ,name: 'type'
-                        ,value: 'document'                        
-                    }]
-                },{
-                    xtype: 'modx-panel-resource-tv'
-                    ,resource: config.resource
-                    ,class_key: config.record.class_key
-                    ,template: config.record.template
-                    
-                },(config.access_permissions ? {
-                    id: 'modx-resource-access-permissions'
-                    ,collapsed: false
-                    ,title: _('access_permissions')
-                    ,layout: 'form'
-                    ,items: [{
-                        html: '<p>'+_('resource_access_message')+'</p>'
-                    },{
-                        xtype: 'modx-grid-resource-security'
-                        ,preventRender: true
-                        ,resource: config.resource
-                        ,listeners: {
-                            'afteredit': {fn:this.fieldChangeEvent,scope:this}
-                        }
-                    }]
-                } : {})]
+                xtype: 'hidden'
+                ,name: 'id'
+                ,value: config.resource
+                ,id: 'modx-weblink-id'
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_pagetitle')
+                ,description: _('resource_pagetitle_help')
+                ,name: 'pagetitle'
+                ,id: 'modx-weblink-pagetitle'
+                ,width: 300
+                ,maxLength: 255
+                ,allowBlank: false
+                
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_longtitle')
+                ,description: _('resource_longtitle_help')
+                ,name: 'longtitle'
+                ,id: 'modx-weblink-longtitle'
+                ,width: 300
+                ,maxLength: 255
+                
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_description')
+                ,description: _('resource_description_help')
+                ,name: 'description'
+                ,id: 'modx-weblink-description'
+                ,width: 300
+                ,maxLength: 255
+                
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_alias')
+                ,description: _('resource_alias_help')
+                ,name: 'alias'
+                ,id: 'modx-weblink-alias'
+                ,width: 300
+                ,maxLength: 100
+                
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_link_attributes')
+                ,description: _('resource_link_attributes_help')
+                ,name: 'link_attributes'
+                ,id: 'modx-weblink-link-attributes'
+                ,width: 300
+                ,maxLength: 255
+                
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('weblink')
+                ,description: _('weblink_help')
+                ,name: 'content'
+                ,id: 'modx-weblink-content'
+                ,width: 300
+                ,maxLength: 255
+                ,value: 'http://'
+                ,allowBlank: false
+                
+            },{
+                xtype: 'textarea'
+                ,fieldLabel: _('resource_summary')
+                ,description: _('resource_summary_help')
+                ,name: 'introtext'
+                ,id: 'modx-weblink-introtext'
+                ,width: 300
+                ,grow: true
+                
+            },{
+                xtype: 'modx-combo-template'
+                ,fieldLabel: _('resource_template')
+                ,description: _('resource_template_help')
+                ,name: 'template'
+                ,id: 'modx-weblink-template'
+                ,editable: false
+                ,width: 300
+                ,baseParams: {
+                    action: 'getList'
+                    ,combo: '1'
+                }
+                ,listeners: {
+                    'select': {fn: this.templateWarning,scope: this}
+                }
+                ,value: config.record.template
+            },{
+                xtype: 'modx-field-parent-change'
+                ,fieldLabel: _('resource_parent')
+                ,description: _('resource_parent_help')
+                ,name: 'parent-cmb'
+                ,editable: false
+                ,id: 'modx-weblink-parent'
+                ,width: 300
+                ,value: config.record.parent || 0
+            },{
+                xtype: 'hidden'
+                ,name: 'parent'
+                ,value: config.record.parent || 0
+                ,id: 'modx-resource-parent-hidden'
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('resource_menutitle')
+                ,description: _('resource_menutitle_help')
+                ,name: 'menutitle'
+                ,id :'modx-weblink-menutitle'
+                ,width: 300
+                ,maxLength: 255
+                
+            },{
+                xtype: 'numberfield'
+                ,fieldLabel: _('resource_menuindex')
+                ,description: _('resource_menuindex_help')
+                ,name: 'menuindex'
+                ,id: 'modx-weblink-menuindex'
+                ,width: 60
+                
+            },{
+                xtype: 'checkbox'
+                ,fieldLabel: _('resource_hide_from_menus')
+                ,description: _('resource_hide_from_menus_help')
+                ,name: 'hidemenu'
+                ,id: 'modx-weblink-hidemenu'
+                ,inputValue: 1
+                ,checked: false
+                
+            },{
+                xtype: 'hidden'
+                ,name: 'type'
+                ,value: 'document'                        
             }]
-        }]
+        },{
+            xtype: 'modx-panel-resource-tv'
+            ,resource: config.resource
+            ,class_key: config.record.class_key
+            ,template: config.record.template
+            
+        },(config.access_permissions ? {
+            id: 'modx-resource-access-permissions'
+            ,autoHeight: true
+            ,bodyStyle: 'padding: 1.5em;'
+            ,title: _('access_permissions')
+            ,layout: 'form'
+            ,items: [{
+                html: '<p>'+_('resource_access_message')+'</p>'
+                ,border: false
+            },{
+                xtype: 'modx-grid-resource-security'
+                ,preventRender: true
+                ,resource: config.resource
+                ,listeners: {
+                    'afteredit': {fn:this.fieldChangeEvent,scope:this}
+                }
+            }]
+        } : {})])]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}

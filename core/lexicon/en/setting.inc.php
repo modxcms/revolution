@@ -180,6 +180,9 @@ $_lang['setting_manager_login_start_desc'] = 'Enter the ID of the document you w
 $_lang['setting_manager_theme'] = 'Manager Theme';
 $_lang['setting_manager_theme_desc'] = 'Select the Theme for the Content Manager.';
 
+$_lang['setting_manager_use_tabs'] = 'Use Tabs in Manager Layout';
+$_lang['setting_manager_use_tabs_desc'] = 'If true, the manager will use tabs for rendering the content panes. Otherwise, it will use portals.';
+
 $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 

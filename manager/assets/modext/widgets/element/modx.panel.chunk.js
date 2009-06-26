@@ -13,118 +13,109 @@ MODx.panel.Chunk = function(config) {
         ,class_key: 'modChunk'
         ,chunk: ''
         ,bodyStyle: ''
-        ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+_('chunk_new')+'</h2>'
             ,border: false
             ,cls: 'modx-page-header'
             ,id: 'modx-chunk-header'
-        },{
-            xtype: 'portal'
-            ,id: 'modx-chunk-portal'
+        },MODx.getPageStructure([{
+            title: _('chunk_title')
+            ,bodyStyle: 'padding: 1.5em;'
+            ,defaults: { border: false ,msgTarget: 'side' }
+            ,layout: 'form'
+            ,id: 'modx-chunk-form'
+            ,labelWidth: 150
             ,items: [{
-                columnWidth: 1
-                ,id: 'modx-chunk-col'
-                ,items: [{
-                    title: _('chunk_title')
-                    ,bodyStyle: 'padding: 1.5em;'
-                    ,defaults: { border: false ,msgTarget: 'side' }
-                    ,layout: 'form'
-                    ,id: 'modx-chunk-form'
-                    ,labelWidth: 150
-                    ,items: [{
-                        html: '<p>'+_('chunk_msg')+'</p>'
-                        ,id: 'modx-chunk-msg'
-                        ,border: false
-                    },{
-                        xtype: 'hidden'
-                        ,name: 'id'
-                        ,id: 'modx-chunk-id'
-                        ,value: config.chunk
-                    },{
-                        xtype: 'hidden'
-                        ,name: 'props'
-                        ,id: 'modx-chunk-props'
-                        ,value: null
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('name')
-                        ,name: 'name'
-                        ,id: 'modx-chunk-name'
-                        ,width: 300
-                        ,maxLength: 255
-                        ,enableKeyEvents: true
-                        ,allowBlank: false
-                        ,listeners: {
-                            'keyup': {scope:this,fn:function(f,e) {
-                                Ext.getCmp('modx-chunk-header').getEl().update('<h2>'+_('chunk')+': '+f.getValue()+'</h2>');
-                            }}
-                        }
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('description')
-                        ,name: 'description'
-                        ,id: 'modx-chunk-description'
-                        ,width: 300
-                        ,maxLength: 255
-                    },{
-                        xtype: 'modx-combo-category'
-                        ,fieldLabel: _('category')
-                        ,name: 'category'
-                        ,id: 'modx-chunk-category'
-                        ,width: 250
-                        ,value: config.category || null
-                    },{
-                        xtype: 'checkbox'
-                        ,fieldLabel: _('chunk_lock')
-                        ,description: _('chunk_lock_msg')
-                        ,name: 'locked'
-                        ,id: 'modx-chunk-locked'
-                        ,inputValue: true
-                    },{
-                        xtype: 'checkbox'
-                        ,fieldLabel: _('clear_cache_on_save')
-                        ,description: _('clear_cache_on_save_msg')
-                        ,name: 'clearCache'
-                        ,id: 'modx-chunk-clear-cache'
-                        ,inputValue: 1
-                        ,checked: true
-                    },{
-                        html: MODx.onChunkFormRender
-                        ,border: false
-                    },{
-                        html: '<br />'+_('chunk_code')
-                        ,border: false
-                    },{
-                        xtype: 'textarea'
-                        ,hideLabel: true
-                        ,name: 'snippet'
-                        ,id: 'modx-chunk-snippet'
-                        ,width: '95%'
-                        ,height: 400
-                        ,value: ''
-                    },{
-                        xtype: 'modx-combo-rte'
-                        ,fieldLabel: _('which_editor_title')
-                        ,labelSeparator: ''
-                        ,id: 'modx-chunk-which-editor'
-                        ,editable: false
-                        ,listWidth: 300
-                        ,triggerAction: 'all'
-                        ,allowBlank: true
-                        ,value: (MODx.request.which_editor ? MODx.request.which_editor : MODx.config.which_editor)
-                        ,listeners: {
-                            'select': {fn:this.changeEditor,scope:this}
-                        }
-                    }]
-                },{
-                    xtype: 'modx-panel-element-properties'
-                    ,elementPanel: 'modx-panel-chunk'
-                    ,elementId: config.chunk
-                    ,elementType: 'modChunk'
-                }]
+                html: '<p>'+_('chunk_msg')+'</p>'
+                ,id: 'modx-chunk-msg'
+                ,border: false
+            },{
+                xtype: 'hidden'
+                ,name: 'id'
+                ,id: 'modx-chunk-id'
+                ,value: config.chunk
+            },{
+                xtype: 'hidden'
+                ,name: 'props'
+                ,id: 'modx-chunk-props'
+                ,value: null
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('name')
+                ,name: 'name'
+                ,id: 'modx-chunk-name'
+                ,width: 300
+                ,maxLength: 255
+                ,enableKeyEvents: true
+                ,allowBlank: false
+                ,listeners: {
+                    'keyup': {scope:this,fn:function(f,e) {
+                        Ext.getCmp('modx-chunk-header').getEl().update('<h2>'+_('chunk')+': '+f.getValue()+'</h2>');
+                    }}
+                }
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('description')
+                ,name: 'description'
+                ,id: 'modx-chunk-description'
+                ,width: 300
+                ,maxLength: 255
+            },{
+                xtype: 'modx-combo-category'
+                ,fieldLabel: _('category')
+                ,name: 'category'
+                ,id: 'modx-chunk-category'
+                ,width: 250
+                ,value: config.category || null
+            },{
+                xtype: 'checkbox'
+                ,fieldLabel: _('chunk_lock')
+                ,description: _('chunk_lock_msg')
+                ,name: 'locked'
+                ,id: 'modx-chunk-locked'
+                ,inputValue: true
+            },{
+                xtype: 'checkbox'
+                ,fieldLabel: _('clear_cache_on_save')
+                ,description: _('clear_cache_on_save_msg')
+                ,name: 'clearCache'
+                ,id: 'modx-chunk-clear-cache'
+                ,inputValue: 1
+                ,checked: true
+            },{
+                html: MODx.onChunkFormRender
+                ,border: false
+            },{
+                html: '<br />'+_('chunk_code')
+                ,border: false
+            },{
+                xtype: 'textarea'
+                ,hideLabel: true
+                ,name: 'snippet'
+                ,id: 'modx-chunk-snippet'
+                ,width: '95%'
+                ,height: 400
+                ,value: ''
+            },{
+                xtype: 'modx-combo-rte'
+                ,fieldLabel: _('which_editor_title')
+                ,labelSeparator: ''
+                ,id: 'modx-chunk-which-editor'
+                ,editable: false
+                ,listWidth: 300
+                ,triggerAction: 'all'
+                ,allowBlank: true
+                ,value: (MODx.request.which_editor ? MODx.request.which_editor : MODx.config.which_editor)
+                ,listeners: {
+                    'select': {fn:this.changeEditor,scope:this}
+                }
             }]
-        }]
+        },{
+            xtype: 'modx-panel-element-properties'
+            ,elementPanel: 'modx-panel-chunk'
+            ,elementId: config.chunk
+            ,elementType: 'modChunk'
+        }])]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}

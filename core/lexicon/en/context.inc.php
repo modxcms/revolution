@@ -25,6 +25,7 @@ $_lang['context_refresh'] = 'Refresh Context';
 $_lang['context_remove'] = 'Remove Context';
 $_lang['context_remove_confirm'] = 'Are you sure you want to remove this context? This is permanent and irreversible.';
 $_lang['context_settings'] = 'Context Settings';
+$_lang['context_settings_desc'] = 'Here you can set settings specific to this context. Context settings will override any System Settings with the same key.';
 $_lang['context_update'] = 'Update Context';
 $_lang['context_with_key_not_found'] = 'Context with key %s not found!';
 $_lang['contexts'] = 'Contexts';

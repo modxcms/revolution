@@ -14,123 +14,116 @@ MODx.panel.Plugin = function(config) {
         ,class_key: 'modPlugin'
         ,plugin: ''
         ,bodyStyle: ''
-        ,defaults: { collapsible: false ,autoHeight: true }
         ,allowDrop: false
         ,items: [{
             html: '<h2>'+_('plugin_new')+'</h2>'
             ,id: 'modx-plugin-header'
             ,cls: 'modx-page-header'
             ,border: false
-        },{
-            xtype: 'portal'
+        },MODx.getPageStructure([{
+            title: _('plugin_title')
+            ,bodyStyle: 'padding: 1.5em;'
+            ,layout: 'form'
+            ,id: 'modx-plugin-form'
+            ,labelWidth: 150
+            ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
-                columnWidth: 1
-                ,items: [{
-                    title: _('plugin_title')
-                    ,bodyStyle: 'padding: 1.5em;'
-                    ,layout: 'form'
-                    ,id: 'modx-plugin-form'
-                    ,labelWidth: 150
-                    ,defaults: { border: false ,msgTarget: 'side' }
-                    ,items: [{
-                        html: '<p>'+_('plugin_msg')+'</p>'
-                        ,id: 'modx-plugin-msg'
-                    },{
-                        xtype: 'hidden'
-                        ,name: 'id'
-                        ,id: 'modx-plugin-id'
-                        ,value: config.plugin
-                    },{
-                        xtype: 'hidden'
-                        ,name: 'props'
-                        ,id: 'modx-plugin-props'
-                        ,value: null
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('plugin_name')
-                        ,name: 'name'
-                        ,id: 'modx-plugin-name'
-                        ,width: 300
-                        ,maxLength: 255
-                        ,enableKeyEvents: true
-                        ,allowBlank: false
-                        ,listeners: {
-                            'keyup': {scope:this,fn:function(f,e) {
-                                Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+f.getValue()+'</h2>');
-                            }}
-                        }
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('plugin_desc')
-                        ,name: 'description'
-                        ,id: 'modx-plugin-description'
-                        ,width: 300
-                        ,maxLength: 255
-                    },{
-                        xtype: 'modx-combo-category'
-                        ,fieldLabel: _('category')
-                        ,name: 'category'
-                        ,id: 'modx-plugin-category'
-                        ,width: 250
-                        ,value: config.category || null
-                    },{
-                        xtype: 'checkbox'
-                        ,fieldLabel: _('plugin_disabled')
-                        ,name: 'disabled'
-                        ,id: 'modx-plugin-disabled'
-                    },{
-                        xtype: 'checkbox'
-                        ,fieldLabel: _('plugin_lock')
-                        ,description: _('plugin_lock_msg')
-                        ,name: 'locked'
-                        ,id: 'modx-plugin-locked'
-                    },{
-                        xtype: 'checkbox'
-                        ,fieldLabel: _('clear_cache_on_save')
-                        ,description: _('clear_cache_on_save_msg')
-                        ,name: 'clearCache'
-                        ,id: 'modx-plugin-clear-cache'
-                        ,inputValue: 1
-                        ,checked: true
-                    },{
-                        html: MODx.onPluginFormRender
-                        ,border: false
-                    },{
-                        html: '<br />'+_('plugin_code')
-                    },{
-                        xtype: 'textarea'
-                        ,hideLabel: true
-                        ,name: 'plugincode'
-                        ,id: 'modx-plugin-plugincode'
-                        ,width: '95%'
-                        ,height: 400
-                        ,value: "<?php\n\n?>"
-                        
-                    }]
-                },{
-                    title: _('system_events')
-                    ,bodyStyle: 'padding: 1.5em;'
-                    ,id: 'modx-plugin-sysevents'
-                    ,items: [{
-                        html: '<p>'+_('plugin_event_msg')+'</p>'
-                        ,id: 'modx-plugin-sysevents-msg'
-                        ,border: false
-                    },{
-                        xtype: 'modx-grid-plugin-event'
-                        ,preventRender: true
-                        ,plugin: config.plugin
-                        ,listeners: {
-                            'afteredit': {fn:this.fieldChangeEvent,scope:this}
-                        }
-                    }]             
-                },{
-                    xtype: 'modx-panel-element-properties'
-                    ,elementPanel: 'modx-panel-plugin'
-                    ,elementId: config.plugin
-                    ,elementType: 'modPlugin'
-                }]
+                html: '<p>'+_('plugin_msg')+'</p>'
+                ,id: 'modx-plugin-msg'
+            },{
+                xtype: 'hidden'
+                ,name: 'id'
+                ,id: 'modx-plugin-id'
+                ,value: config.plugin
+            },{
+                xtype: 'hidden'
+                ,name: 'props'
+                ,id: 'modx-plugin-props'
+                ,value: null
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('plugin_name')
+                ,name: 'name'
+                ,id: 'modx-plugin-name'
+                ,width: 300
+                ,maxLength: 255
+                ,enableKeyEvents: true
+                ,allowBlank: false
+                ,listeners: {
+                    'keyup': {scope:this,fn:function(f,e) {
+                        Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+f.getValue()+'</h2>');
+                    }}
+                }
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('plugin_desc')
+                ,name: 'description'
+                ,id: 'modx-plugin-description'
+                ,width: 300
+                ,maxLength: 255
+            },{
+                xtype: 'modx-combo-category'
+                ,fieldLabel: _('category')
+                ,name: 'category'
+                ,id: 'modx-plugin-category'
+                ,width: 250
+                ,value: config.category || null
+            },{
+                xtype: 'checkbox'
+                ,fieldLabel: _('plugin_disabled')
+                ,name: 'disabled'
+                ,id: 'modx-plugin-disabled'
+            },{
+                xtype: 'checkbox'
+                ,fieldLabel: _('plugin_lock')
+                ,description: _('plugin_lock_msg')
+                ,name: 'locked'
+                ,id: 'modx-plugin-locked'
+            },{
+                xtype: 'checkbox'
+                ,fieldLabel: _('clear_cache_on_save')
+                ,description: _('clear_cache_on_save_msg')
+                ,name: 'clearCache'
+                ,id: 'modx-plugin-clear-cache'
+                ,inputValue: 1
+                ,checked: true
+            },{
+                html: MODx.onPluginFormRender
+                ,border: false
+            },{
+                html: '<br />'+_('plugin_code')
+            },{
+                xtype: 'textarea'
+                ,hideLabel: true
+                ,name: 'plugincode'
+                ,id: 'modx-plugin-plugincode'
+                ,width: '95%'
+                ,height: 400
+                ,value: "<?php\n\n?>"
+                
             }]
-        }]
+        },{
+            title: _('system_events')
+            ,bodyStyle: 'padding: 1.5em;'
+            ,id: 'modx-plugin-sysevents'
+            ,items: [{
+                html: '<p>'+_('plugin_event_msg')+'</p>'
+                ,id: 'modx-plugin-sysevents-msg'
+                ,border: false
+            },{
+                xtype: 'modx-grid-plugin-event'
+                ,preventRender: true
+                ,plugin: config.plugin
+                ,listeners: {
+                    'afteredit': {fn:this.fieldChangeEvent,scope:this}
+                }
+            }]             
+        },{
+            xtype: 'modx-panel-element-properties'
+            ,elementPanel: 'modx-panel-plugin'
+            ,elementId: config.plugin
+            ,elementType: 'modPlugin'
+        }])]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}

@@ -145,6 +145,12 @@ Ext.extend(MODx,Ext.Component,{
             });
         }
     }
+    
+    ,getPageStructure: function(v) {
+        return MODx.config.manager_use_tabs
+            ? {xtype: 'modx-tabs',style: 'margin-top: .5em;',items: v}
+            : {xtype:'portal',items:[{columnWidth:1,items: v}]};
+    }
 });
 Ext.reg('modx',MODx);
 
