@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access'] = 'Access';
+$_lang['cache_output'] = 'Cache Output';
 $_lang['changes'] = 'Changes';
 $_lang['class_key'] = 'Class Key';
 $_lang['context'] = 'Context';
@@ -16,8 +17,10 @@ $_lang['document_create_here'] = 'Create a Document Here';
 $_lang['document_new'] = 'New Document';
 $_lang['documents'] = 'Documents';
 $_lang['duplicate_alias_found'] = 'Resource [[+id]] is already using the alias [[+alias]]. Please enter a unique alias.';
+$_lang['empty_template'] = '(empty)';
 $_lang['general'] = 'General';
 $_lang['markup'] = 'Markup/Structure';
+$_lang['none'] = 'None';
 $_lang['page_settings'] = 'Page Settings';
 $_lang['preview'] = 'Preview';
 $_lang['resource_access_message'] = 'Here you can select which Resource Groups this Resource belongs to.';
@@ -98,6 +101,7 @@ $_lang['resource_publishdate'] = 'Publish Date';
 $_lang['resource_publishdate_help'] = 'If you set a publish date, the resource will be published as soon as the publish date is reached. Click on the calendar icon to select a date, or leave it blank to set it so the resource is never automatically published.';
 $_lang['resource_published'] = 'Published';
 $_lang['resource_published_help'] = 'When published the resource is available to the public immediately after saving it.';
+$_lang['resource_publishedby'] = 'Published By';
 $_lang['resource_publishedon'] = 'Published On';
 $_lang['resource_publishedon_help'] = 'The date the resource was published.';
 $_lang['resource_refresh'] = 'Refresh Resource';
@@ -119,6 +123,7 @@ $_lang['resource_unpublish'] = 'Unpublish Resource';
 $_lang['resource_unpublish_confirm'] = 'Un-publishing this resource now will remove any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead. <br /><br />Proceed?';
 $_lang['resource_unpublishdate'] = 'Un-publish date';
 $_lang['resource_unpublishdate_help'] = 'If you set an unpublish date, the resource will be unpublished as soon as the unpublish date is reached. Click on the calendar icon to select a date, or leave it blank to set it so the resource is never automatically unpublished.';
+$_lang['resource_unpublished'] = 'Unpublished';
 $_lang['resource_untitled'] = 'Untitled Resource';
 $_lang['resource_with_id_not_found'] = 'Resource with ID %s not found!';
 $_lang['resource_view'] = 'View Resource';

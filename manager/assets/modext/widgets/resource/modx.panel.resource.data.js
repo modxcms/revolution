@@ -24,6 +24,7 @@ MODx.panel.ResourceData = function(config) {
             ,cls: 'modx-page-header'
         },MODx.getPageStructure([{
             title: _('general')
+            ,id: 'modx-rdata-tab-general'
             ,layout: 'form'
             ,autoHeight: true
             ,bodyStyle: 'padding: 1.5em;'
@@ -63,6 +64,7 @@ MODx.panel.ResourceData = function(config) {
             }]
         },{
             title: _('changes')
+            ,id: 'modx-rdata-tab-changes'
             ,defaults: df
             ,layout: 'form'
             ,autoHeight: true
@@ -80,9 +82,16 @@ MODx.panel.ResourceData = function(config) {
             },{
                 name: 'editedon_by'
                 ,fieldLabel: _('resource_editedby')
+            },{
+                name: 'publishedon_adjusted'
+                ,fieldLabel: _('resource_publishedon')
+            },{
+                name: 'publishedon_by'
+                ,fieldLabel: _('resource_publishedby')
             }]
         },{
             title: _('status')
+            ,id: 'modx-rdata-tab-status'
             ,defaults: df
             ,layout: 'form'
             ,bodyStyle: 'padding: 1.5em;'
@@ -115,7 +124,7 @@ MODx.panel.ResourceData = function(config) {
                 ,description: _('resource_searchable_help')
                 ,xtype: 'staticboolean'
             },{
-                name: 'showmenu'
+                name: 'hidemenu'
                 ,fieldLabel: _('resource_hide_from_menus')
                 ,description: _('resource_hide_from_menus_help')
                 ,xtype: 'staticboolean'
@@ -123,9 +132,14 @@ MODx.panel.ResourceData = function(config) {
                 name: 'menutitle'
                 ,fieldLabel: _('resource_menutitle')
                 ,description: _('resource_menutitle_help')
+            },{
+                name: 'menuindex'
+                ,fieldLabel: _('resource_menuindex')
+                ,description: _('resource_menuindex_help')
             }]
         },{
             title: _('markup')
+            ,id: 'modx-rdata-tab-markup'
             ,defaults: df
             ,layout: 'form'
             ,bodyStyle: 'padding: 1.5em;'
@@ -146,17 +160,21 @@ MODx.panel.ResourceData = function(config) {
                 ,xtype: 'staticboolean'
             }]
         },{
-            title: _('source')
+            title: _('cache_output')
             ,bodyStyle: 'padding: 1.5em;'
             ,autoHeight: true
+            ,id: 'modx-rdata-tab-source'
             ,items: [{
                 name: 'buffer'
+                ,id: 'modx-rdata-buffer'
                 ,xtype: 'textarea'
                 ,hideLabel: true
                 ,width: '90%'
                 ,grow: true
             }]
-        }])]
+        }],{
+            deferredRender: false
+        })]
         ,listeners: {
             'setup':{fn:this.setup,scope:this}
         }

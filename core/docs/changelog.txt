@@ -4,6 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-853] Changed source caption of view resource data
+- [#MODX-809] Adjusted formatting of View Resource data fields 
+- Fixed bugs with Resource data page not loading fully, glitching tree
 - [#MODX-772] Fixed bug where plugin events were not showing enabled if filtered by name
 - Fixed user system event calls to pass proper arguments
 - Fixed bug where you could only load 1 Quick window at a time

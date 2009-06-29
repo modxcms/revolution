@@ -171,11 +171,14 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             if (fld.isFormField && (
                 fld.isXType('textfield') || fld.isXType('textarea')
             ) && !fld.isXType('combo')) {
-                new MODx.load({
-                    xtype: 'modx-treedrop'
-                    ,target: fld
-                    ,targetEl: fld.getEl().dom
-                });
+                var el = fld.getEl();
+                if (el) {
+                    new MODx.load({
+                        xtype: 'modx-treedrop'
+                        ,target: fld
+                        ,targetEl: el.dom
+                    });
+                }
             }
         });
     }
