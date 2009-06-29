@@ -21,9 +21,13 @@ if (!is_array($properties)) {
 
 $data = array();
 foreach ($properties as $property) {
+    $desc = empty($property['desc']) ? '' : $property['desc'];
+    /* backwards compat */
+    if (empty($desc)) { $desc = empty($property['description']) ? '' : $property['description']; }
+    $desc = htmlspecialchars(str_replace("'",'"',$desc));
     $data[] = array(
         $property['name'],
-        empty($property['desc']) ? '' : $property['desc'],
+        $desc,
         $property['xtype'],
         $property['options'],
         $property['value'],

@@ -8,14 +8,14 @@ MODx.grid.ElementProperties = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
-            '<p style="padding: .7em 1em .3em;"><i>{description}</i></p>'
+            '<p style="padding: .7em 1em .3em;"><i>{desc}</i></p>'
         )
     });
     Ext.applyIf(config,{
         title: _('properties')
         ,id: 'modx-grid-element-properties'
         ,maxHeight: 300
-        ,fields: ['name','description','xtype','options','value','overridden']
+        ,fields: ['name','desc','xtype','options','value','overridden']
         ,autoExpandColumn: 'value'
         ,sortBy: 'name'
         ,width: '100%'
@@ -266,7 +266,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                     
                     var rec = new this.propRecord({
                         name: r.name
-                        ,description: r.description
+                        ,desc: r.desc
                         ,xtype: r.xtype
                         ,options: r.options
                         ,value: r.value
@@ -290,7 +290,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                     var s = this.getStore();
                     var rec = s.getAt(this.menu.recordIndex);
                     rec.set('name',r.name);
-                    rec.set('description',r.description);
+                    rec.set('desc',r.desc);
                     rec.set('xtype',r.xtype);
                     rec.set('options',r.options);
                     rec.set('value',r.value);
@@ -308,7 +308,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                 var d = this.defaultProperties[ri];
                 var rec = this.getStore().getAt(ri);
                 rec.set('name',d[0]);
-                rec.set('description',d[1]);
+                rec.set('desc',d[1]);
                 rec.set('xtype',d[2]);
                 rec.set('options',d[3]);
                 rec.set('value',d[4]);
@@ -532,8 +532,8 @@ MODx.window.CreateElementProperty = function(config) {
             ,allowBlank: false
         },{
             fieldLabel: _('description')
-            ,name: 'description'
-            ,id: 'modx-cep-description'
+            ,name: 'desc'
+            ,id: 'modx-cep-desc'
             ,xtype: 'textarea'
             ,width: 150
         },{
@@ -619,8 +619,8 @@ MODx.window.UpdateElementProperty = function(config) {
             ,width: 150
         },{
             fieldLabel: _('description')
-            ,name: 'description'
-            ,id: 'modx-uep-description'
+            ,name: 'desc'
+            ,id: 'modx-uep-desc'
             ,xtype: 'textarea'
             ,width: 150
         },{
@@ -654,6 +654,7 @@ MODx.window.UpdateElementProperty = function(config) {
         },{
             id: 'modx-uep-grid-element-property-options'
             ,xtype: 'modx-grid-element-property-options'
+            ,autoHeight: true
         }]
     });
     MODx.window.UpdateElementProperty.superclass.constructor.call(this,config);
@@ -681,6 +682,11 @@ Ext.extend(MODx.window.UpdateElementProperty,MODx.Window,{
     ,onShow: function() {
         var g = Ext.getCmp('modx-uep-grid-element-property-options');
         if (!g) return;
+        if (this.fp.getForm().findField('xtype').getValue() == 'list') {
+            g.show();
+        } else {
+            g.hide();
+        }
         g.getStore().removeAll();
         var opt = this.config.record.options;
         var opts = [];
@@ -690,11 +696,6 @@ Ext.extend(MODx.window.UpdateElementProperty,MODx.Window,{
           }
         }
         g.getStore().loadData(opts);
-        if (this.config.record.xtype == 'list') {
-            g.show();
-        } else {
-            g.hide();
-        }
         this.syncSize();
         this.center();
     }
