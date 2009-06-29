@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug where ExtJS couldnt handle text/json header responses with fileUpload set to true in form panels
 - Fixed some DOM issues with Package Management
 - [#MODX-833] Temporary fix for modManagerLog message showing up in console
 - [#MODX-853] Changed source caption of view resource data
