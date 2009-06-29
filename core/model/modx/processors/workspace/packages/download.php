@@ -36,7 +36,4 @@ if ($package->save() == false) {
     return $modx->error->failure($msg);
 }
 
-/* log manager action */
-$modx->logManagerAction('package_download','transport.modTransportPackage',$package->get('id'));
-
 return $modx->error->success('',$package);

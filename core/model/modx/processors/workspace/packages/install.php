@@ -27,9 +27,6 @@ $installed = $package->install($_POST);
 $cacheManager= $modx->getCacheManager();
 $cacheManager->clearCache();
 
-/* log manager action */
-$modx->logManagerAction('package_install','transport.modTransportPackage',$package->get('id'));
-
 if (!$installed) {
     $msg = $modx->lexicon('package_err_install',array('signature' => $package->get('signature')));
     $modx->log(XPDO_LOG_LEVEL_ERROR,$msg);
