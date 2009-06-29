@@ -35,9 +35,11 @@ MODx.panel.PILicense = function(config) {
         ,defaults: { labelSeparator: '', border: false }
         ,items: [{
             html: '<h2>'+_('license_agreement')+'</h2>'
+            ,autoHeight: true
         },{
             html: '<p>'+_('license_agreement_desc')+'</p>'   
             ,style: 'padding-bottom: 2em'
+            ,autoHeight: true
         },{
             xtype: 'textarea'
             ,style: 'font: arial; font-size: .9em'
@@ -107,9 +109,11 @@ MODx.panel.PIReadme = function(config) {
         ,defaults: { labelSeparator: '', border: false }
         ,items: [{
             html: '<h2>'+_('readme')+'</h2>'
+            ,autoHeight: true
         },{
             html: '<p>'+_('readme_desc')+'</p>'   
             ,style: 'padding-bottom: 2em'
+            ,autoHeight: true
         },{
             xtype: 'textarea'
             ,style: 'font: arial; font-size: .9em'

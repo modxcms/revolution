@@ -98,25 +98,30 @@ MODx.panel.PDFirst = function(config) {
         ,bodyStyle: 'padding: 3em 3em'
         ,items: [{
             html: '<h2>'+_('package_retriever')+'</h2>'
+            ,autoHeight: true
         },{
             html: '<p>'+_('package_obtain_method')+'</p>'   
             ,style: 'padding-bottom: 2em'
+            ,autoHeight: true
         },{
             boxLabel: _('provider_select')
             ,xtype: 'radio'
             ,inputValue: 'selprov'
             ,name: 'method'
+            ,id: 'modx-pdfirst-selprov'
             ,checked: true
         },{
             boxLabel: _('provider_add')
             ,xtype: 'radio'
             ,inputValue: 'newprov'
             ,name: 'method'
+            ,id: 'modx-pdfirst-newprov'
         },{
             boxLabel: _('package_search_local_title')
             ,xtype: 'radio'
             ,inputValue: 'local'
             ,name: 'method'
+            ,id: 'modx-pdfirst-local'
         }]
     });
     MODx.panel.PDFirst.superclass.constructor.call(this,config);
@@ -165,16 +170,20 @@ MODx.panel.PDSelProv = function(config) {
         ,bodyStyle: 'padding: 3em'
         ,items: [{
             html: '<h2>'+ _('provider_select')+'</h2>'
+            ,autoHeight: true
         },{
             html: '<p>'+_('provider_select_desc')+'</p>'
             ,style: 'padding-bottom: 2em;'
+            ,autoHeight: true
         },{
             fieldLabel: _('provider')
             ,xtype: 'modx-combo-provider'
+            ,id: 'modx-pdselprov-provider'
             ,allowBlank: false
         },{
             text: _('provider_add_or')
             ,xtype: 'button'
+            ,id: 'modx-pdselprov-addnew'
             ,style: 'padding-top: 2em;'
             ,scope: this
             ,handler: function() {
@@ -212,21 +221,25 @@ MODx.panel.PDNewProv = function(config) {
         }
         ,items: [{
             html: '<h2>'+_('provider_add')+'</h2>'
+            ,autoHeight: true
         },{
             fieldLabel: _('name')
             ,xtype: 'textfield'
             ,name: 'name'
+            ,id: 'modx-pdnewprov-name'
             ,allowBlank: false
             ,width: 200
         },{
             fieldLabel: _('description')
             ,xtype: 'textarea'
             ,name: 'description'
+            ,id: 'modx-pdnewprov-description'
             ,width: 200
         },{
             fieldLabel: _('provider_url')
             ,xtype: 'textfield'
             ,name: 'service_url'
+            ,id: 'modx-pdnewprov-service-url'
             ,vtype: 'url'
             ,allowBlank: false
             ,width: 300
@@ -272,11 +285,15 @@ MODx.panel.PDSelPackage = function(config) {
         }
         ,items: [{
             html: '<h2>'+_('package_select_download')+'</h2>'
+            ,id: 'modx-pdselpackage-header'
             ,border: false
+            ,autoHeight: true
         },{
             html: '<p>'+_('package_select_download_desc')+'</p>'
+            ,id: 'modx-pdselpackage-desc'
             ,style: 'padding-bottom: 2em'
             ,border: false
+            ,autoHeight: true
         },{
             xtype: 'modx-panel-package-download'
         }]

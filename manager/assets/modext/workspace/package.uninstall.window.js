@@ -7,10 +7,11 @@ MODx.window.PackageUninstall = function(config) {
         ,height: 400
         ,width: 500
         ,id: 'modx-window-package-uninstall'
-        ,saveBtnText: 'Uninstall'
+        ,saveBtnText: _('uninstall')
         ,fields: [{
             html: _('preexisting_mode_select')
             ,border: false
+            ,autoHeight: true
         },MODx.PanelSpacer,{
             xtype: 'radio'
             ,name: 'preexisting_mode'
