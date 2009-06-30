@@ -46,6 +46,9 @@
 .icon-mark-active { background-image:url(../images/restyle/icons/layout_edit.png) !important; }
 .icon-mark-complete { background-image:url(../images/restyle/icons/layout_header.png) !important; }
 
+.icon-package { background-image:url(../images/restyle/icons/package.png) !important; padding-right: 5px !important; }
+    
+
 /* stay options */
 .x-rbtn button{
     background-color:transparent;

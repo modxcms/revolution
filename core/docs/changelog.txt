@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added in icon for package files
+- Added fsockopen as a fallback for transport package if allow_url_fopen or cURL is not enabled
 - [#MODX-856] Added cURL method of grabbing transport packages when allow_url_fopen is set to false
 - Fixed bug in property update where list grid was not hiding if list xtype was previously selected but not now
 - Fixed import properties where it was not properly handling descriptions
