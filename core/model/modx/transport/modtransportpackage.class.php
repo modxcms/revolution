@@ -276,9 +276,9 @@ class modTransportPackage extends xPDOObject {
                 $content = curl_exec($ch);
                 curl_close($ch);
 
+            /* and as last-ditch resort, try fsockopen */
             } else {
-                $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'You must enable allow_url_fopen or cURL to use remote transport packaging.');
-                return false;
+                $content = $this->_getByFsockopen($source);
             }
 
             if ($content) {
@@ -287,6 +287,8 @@ class modTransportPackage extends xPDOObject {
                     $target= $targetDir . $filename;
                     $transferred= $cacheManager->writeFile($target, $content);
                 }
+            } else {
+                $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'MODx could not download the file. You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.');
             }
         } else {
              $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_target_write',array(
@@ -324,4 +326,49 @@ class modTransportPackage extends xPDOObject {
         }
         return $value;
     }
+
+    /**
+     * If for some reason the server does not have allow_url_fopen or cURL
+     * enabled, use this function to get the file via fsockopen.
+     *
+     * @access private
+     * @param string $url The source URL to retrieve
+     * @return string The response from the server
+     */
+    function _getByFsockopen($url) {
+        $purl = parse_url($url);
+        $host = $purl['host'];
+        $path = !empty($purl['path']) ? $purl['path'] : '/';
+        if (!empty($purl['query'])) { $path .= '?'.$purl['query']; }
+        $port = !empty($purl['port']) ? $purl['port'] : '80';
+
+        $timeout = 10;
+        $response = '';
+        $fp = @fsockopen($host,$port,$errno,$errstr,$timeout);
+
+        if( !$fp ) {
+            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'Could not retrieve from '.$url);
+        } else {
+            fwrite($fp, "GET $path HTTP/1.0\r\n" .
+                "Host: $host\r\n" .
+                "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3\r\n" .
+                "Accept: */*\r\n" .
+                "Accept-Language: en-us,en;q=0.5\r\n" .
+                "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\n" .
+                "Keep-Alive: 300\r\n" .
+                "Connection: keep-alive\r\n" .
+                "Referer: http://$host\r\n\r\n");
+
+          while ($line = fread($fp, 4096)) {
+             $response .= $line;
+          }
+          fclose($fp);
+
+          $pos = strpos($response, "\r\n\r\n");
+          $response = substr($response, $pos + 4);
+       }
+       return $response;
+    }
+
+
 }
