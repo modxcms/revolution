@@ -54,9 +54,5 @@ if (!file_exists($f)) {
     $modx->log(XPDO_LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tdir'));
 }
 
-/* log manager action */
-$modx->logManagerAction('package_remove','transport.modTransportPackage',$package->get('id'));
-
-
 $modx->log(MODX_LOG_LEVEL_WARN,$modx->lexicon('package_remove_info_success'));
 return $modx->error->success();

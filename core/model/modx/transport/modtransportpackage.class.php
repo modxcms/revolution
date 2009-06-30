@@ -245,22 +245,42 @@ class modTransportPackage extends xPDOObject {
         $content= '';
         if (is_dir($targetDir) && is_writable($targetDir)) {
             $source= $this->get('service_url') . $sourceFile;
-            if ($handle= @ fopen($source, 'rb')) {
-                $filesize= @ filesize($source);
-                $memory_limit= @ ini_get('memory_limit');
-                if (!$memory_limit) $memory_limit= '8M';
-                $byte_limit= $this->_bytes($memory_limit) * .5;
-                if (strpos($source, '://') !== false || $filesize > $byte_limit) {
-                    $content= @ file_get_contents($source);
+
+            /* see if user has allow_url_fopen on */
+            if (ini_get('allow_url_fopen')) {
+                if ($handle= @ fopen($source, 'rb')) {
+                    $filesize= @ filesize($source);
+                    $memory_limit= @ ini_get('memory_limit');
+                    if (!$memory_limit) $memory_limit= '8M';
+                    $byte_limit= $this->_bytes($memory_limit) * .5;
+                    if (strpos($source, '://') !== false || $filesize > $byte_limit) {
+                        $content= @ file_get_contents($source);
+                    } else {
+                        $content= @ fread($handle, $filesize);
+                    }
+                    @ fclose($handle);
                 } else {
-                    $content= @ fread($handle, $filesize);
+                    $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_file_read',array(
+                        'source' => $source,
+                    )));
                 }
-                @ fclose($handle);
+
+            /* if not, try curl */
+            } else if (function_exists('curl_init')) {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $source);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_TIMEOUT,120);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                $content = curl_exec($ch);
+                curl_close($ch);
+
             } else {
-                $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_file_read',array(
-                    'source' => $source,
-                )));
+                $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'You must enable allow_url_fopen or cURL to use remote transport packaging.');
+                return false;
             }
+
             if ($content) {
                 if ($cacheManager= $this->xpdo->getCacheManager()) {
                     $filename= $this->signature.'.transport.zip';
@@ -269,7 +289,7 @@ class modTransportPackage extends xPDOObject {
                 }
             }
         } else {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_target_write',array(
+             $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_target_write',array(
                 'targetDir' => $targetDir,
             )));
         }
