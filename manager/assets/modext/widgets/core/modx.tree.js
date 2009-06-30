@@ -110,6 +110,16 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	    
 	    this._loadToolbar();
         if (config.el) { this.render(); }
+                
+        var tl = this.getLoader();
+        Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')}) });
+        tl.fullMask.removeMask=false;                                  
+        tl.on({
+            'load' : function(){this.fullMask.hide();}
+            ,'loadexception' : function(){this.fullMask.hide();}
+            ,'beforeload' : function(){this.fullMask.show();}
+            ,scope : tl
+        });
 	}
 	
 	/**

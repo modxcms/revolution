@@ -198,7 +198,18 @@ MODx.tree.PackageDownload = function(config) {
     MODx.tree.PackageDownload.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.tree.PackageDownload,MODx.tree.CheckboxTree,{
-    setProvider: function(p) {
+    setProvider: function(p) {        
+        var tl = this.getLoader();
+        Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')}) });
+        tl.fullMask.removeMask=false;
+        tl.on({
+            'load' : function(){this.fullMask.hide();}
+            ,'loadexception' : function(){this.fullMask.hide();}
+            ,'beforeload' : function(){this.fullMask.show();}
+            ,scope : tl
+        });
+        tl.fullMask.show();
+        
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'workspace/providers.php'
             ,params: {
@@ -208,6 +219,7 @@ Ext.extend(MODx.tree.PackageDownload,MODx.tree.CheckboxTree,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.loadRemoteData(r.object);
+                    tl.fullMask.hide();
                 },scope:this}
             }
         });
