@@ -6,6 +6,9 @@ textarea.x-form-field {
     font-weight: normal;
 }
 
+.ext-el-mask { z-index: 10; }
+.modx-lockmask { z-index: 11; }
+
 .x-menu a {
     text-decoration: none !important;
 }

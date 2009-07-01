@@ -13,8 +13,8 @@
     padding: 6px 0 0;
     margin-left: 1em;
     position: relative;
-    z-index: 55555800;
     width: 78%;
+    z-index: 13;
 }
 
 #modx-topnav {
@@ -62,8 +62,7 @@ li.top li.last {
     padding: 0 0 0 24px;
     height: 12px;
     line-height: 12px;
-    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat 0
-        0;
+    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat 0 0;
     float: none;
     clear: left;
     position: relative;

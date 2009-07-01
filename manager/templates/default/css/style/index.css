@@ -74,7 +74,7 @@ body, html {
 	padding-top: 6px 1.3em 0 0;
 	height: 25px;
     vertical-align: middle;
-    z-index: 600;
+    z-index: 1;
 	color: #aaa;
 }
 #rightlogin span {
@@ -117,7 +117,7 @@ h2 {
     top: 8em;
     right: 2em;
     text-align: right;
-    z-index: 400;
+    z-index: 12;
     border-width: 1px;
     border-style: solid;
     border-color: #c9c8c9;
