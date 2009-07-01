@@ -77,7 +77,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         	   ,config: this.config
         	})) {
                 fm.submit({
-                    waitMsg: _('saving')
+                    waitMsg: this.config.saveMsg || _('saving')
                     ,scope: this
                     ,failure: function(f,a) {
                     	if (this.fireEvent('failure',{

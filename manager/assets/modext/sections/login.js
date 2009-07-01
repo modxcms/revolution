@@ -57,6 +57,7 @@ MODx.panel.Login = function(config) {
        ,defaults: { 
            labelSeparator: ''
        }
+       ,saveMsg: _('loading')
        ,items: [{
            html: '<h2>'+SITE_NAME+'</h2>'
            ,border: false
