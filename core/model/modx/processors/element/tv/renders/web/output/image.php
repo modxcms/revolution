@@ -12,14 +12,19 @@ foreach ($images as $image) {
     }
     $src= $image[0];
     if ($src) {
-        $id= ($params['id'] ? 'id="' . $params['id'] . '"' : '');
-        $alt= htmlspecialchars($params['alttext']);
-        $class= $params['class'];
-        $style= $params['style'];
-        $attributes= $params['attrib'];
-$o .=<<<EOD
-<img {$id} src="{$src}" alt="{$alt}" class="{$class}" style="{$style}" {$attributes} />
-EOD;
+        $attributes = '';
+        $attr = array(
+            'class' => $params['class'],
+            'src' => $src,
+            'id' => ($params['id'] ? $params['id'] : ''),
+            'alt' => htmlspecialchars($params['alttext']),
+            'style' => $params['style']
+        );
+        foreach ($attr as $k => $v) $attributes.= ($v ? ' '.$k.'="'.$v.'"' : '');
+        $attributes .= ' '.$params['attrib'];
+
+        /* Output the image with attributes */
+        $o .= '<img'.rtrim($attributes).' />';
     }
 }
 return $o;
