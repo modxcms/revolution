@@ -17,30 +17,35 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('image_alt')
         ,name: 'prop_alttext'
+        ,id: 'prop_alttext{/literal}{$tv}{literal}'
         ,value: params['alttext'] || ''
         ,width: 300
     },{
         xtype: 'numberfield'
         ,fieldLabel: _('image_hspace')
         ,name: 'prop_hspace'
+        ,id: 'prop_hspace{/literal}{$tv}{literal}'
         ,value: params['hspace'] || ''
         ,width: 300
     },{
         xtype: 'numberfield'
         ,fieldLabel: _('image_vspace')
         ,name: 'prop_vspace'
+        ,id: 'prop_vspace{/literal}{$tv}{literal}'
         ,value: params['vspace'] || ''
         ,width: 300
     },{
         xtype: 'numberfield'
         ,fieldLabel: _('image_border_size')
         ,name: 'prop_borsize'
+        ,id: 'prop_borsize{/literal}{$tv}{literal}'
         ,value: params['borsize'] || ''
         ,width: 300
     },{
         xtype: 'combo'
         ,name: 'prop_align'
         ,hiddenName: 'prop_align'
+        ,id: 'prop_align{/literal}{$tv}{literal}'
         ,fieldLabel: _('image_align')
         ,store: new Ext.data.SimpleStore({
             fields: ['v']
@@ -59,30 +64,35 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('name')
         ,name: 'prop_name'
+        ,id: 'prop_name{/literal}{$tv}{literal}'
         ,value: params['name'] || ''
         ,width: 300
     },{
         xtype: 'textfield'
         ,fieldLabel: _('class')
         ,name: 'prop_class'
+        ,id: 'prop_class{/literal}{$tv}{literal}'
         ,value: params['class'] || ''
         ,width: 300
     },{
         xtype: 'textfield'
         ,fieldLabel: _('id')
         ,name: 'prop_id'
+        ,id: 'prop_id{/literal}{$tv}{literal}'
         ,value: params['id'] || ''
         ,width: 300
     },{
         xtype: 'textfield'
         ,fieldLabel: _('style')
         ,name: 'prop_style'
+        ,id: 'prop_style{/literal}{$tv}{literal}'
         ,value: params['style'] || ''
         ,width: 300
     },{
         xtype: 'textfield'
         ,fieldLabel: _('attributes')
         ,name: 'prop_attributes'
+        ,id: 'prop_attributes{/literal}{$tv}{literal}'
         ,value: params['attributes'] || ''
         ,width: 300
     }]

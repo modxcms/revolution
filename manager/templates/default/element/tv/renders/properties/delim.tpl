@@ -17,6 +17,7 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('delimiter')
         ,name: 'prop_delimiter'
+        ,id: 'prop_delimiter{/literal}{$tv}{literal}'
         ,value: params['delimiter'] || ''
         ,width: 300
     }]

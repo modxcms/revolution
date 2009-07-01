@@ -17,12 +17,14 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('date_format')
         ,name: 'prop_format'
+        ,id: 'prop_format{/literal}{$tv}{literal}'
         ,value: params['format'] || '%A %d, %B %Y'
     },{
         xtype: 'combo'
         ,fieldLabel: _('date_use_current')
         ,name: 'prop_default'
         ,hiddenName: 'prop_default'
+        ,id: 'prop_default{/literal}{$tv}{literal}'
         ,store: new Ext.data.SimpleStore({
             fields: ['v','d']
             ,data: [['yes',_('yes')],['no',_('no')]]

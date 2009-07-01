@@ -17,26 +17,31 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('tag_name')
         ,name: 'prop_tagname'
+        ,id: 'prop_tagname{/literal}{$tv}{literal}'
         ,value: params['tagname'] || 'div'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('tag_id')
         ,name: 'prop_tagid'
+        ,id: 'prop_tagid{/literal}{$tv}{literal}'
         ,value: params['tagid'] || ''
     },{
         xtype: 'textfield'
         ,fieldLabel: _('class')
         ,name: 'prop_class'
+        ,id: 'prop_class{/literal}{$tv}{literal}'
         ,value: params['class'] || ''
     },{
         xtype: 'textfield'
         ,fieldLabel: _('style')
         ,name: 'prop_style'
+        ,id: 'prop_style{/literal}{$tv}{literal}'
         ,value: params['style'] || ''
     },{
         xtype: 'textfield'
         ,fieldLabel: _('attributes')
         ,name: 'prop_attrib'
+        ,id: 'prop_attrib{/literal}{$tv}{literal}'
         ,value: params['attrib'] || ''
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'

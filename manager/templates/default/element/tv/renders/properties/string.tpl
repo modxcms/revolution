@@ -18,6 +18,7 @@ MODx.load({
         ,fieldLabel: _('string_format')
         ,name: 'prop_format'
         ,hiddenName: 'prop_format'
+        ,id: 'prop_format{/literal}{$tv}{literal}'
         ,store: new Ext.data.SimpleStore({
             fields: ['v','d']
             ,data: [['',_('none')],['Upper Case',_('upper_case')],['Lower Case',_('lower_case')],['Sentence Case',_('sentence_case')],['Capitalize',_('capitalize')]]
