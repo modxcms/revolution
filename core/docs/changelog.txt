@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug with tree mask rendering before panel is rendered
 - [#MODX-747] Fixed issues with access grids update windows
 - [#MODX-803] Fixed DOM issues with TV mgr input property renders
 - [#MODX-805] Fixed attribute issues with TV web output renders
