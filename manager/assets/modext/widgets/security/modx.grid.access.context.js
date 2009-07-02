@@ -43,7 +43,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
         });
 		if (!this.windows.create_acl) {
 			this.windows.create_acl = MODx.load({
-                xtype: 'modx-window-access-context'
+                xtype: 'modx-window-access-context-create'
 	            ,record: r
 	            ,listeners: {
 	            	'success': {fn:function(o) {    	                
@@ -71,10 +71,11 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
             context: r.target
             ,user_group: r.principal
         });
+        
         if (!this.windows.update_acl) {
 			this.windows.update_acl = MODx.load({
-	            xtype: 'modx-window-access-context'
-	            ,id: r.id
+	            xtype: 'modx-window-access-context-update'
+	            ,acl: r.id
 	            ,record: r
 	            ,listeners: {
 	            	'success': {fn:this.refresh,scope:this}
@@ -94,7 +95,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
             ,params: {
                 action: 'removeAcl'
                 ,id: this.menu.record.id
-                ,type: this.config.type
+                ,type: this.config.type || 'modAccessContext'
             }
             ,listeners: {
             	'success': {fn:this.refresh,scope:this}
@@ -118,6 +119,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
 	,getToolbar: function() {
 		this.combos.ug = MODx.load({ 
             xtype: 'modx-combo-usergroup'
+            ,id: 'modx-acctx-filter-usergroup'
             ,listeners: {
               	'select': {fn:function(btn,e) {
                     this.getStore().baseParams = {
@@ -132,6 +134,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
 		});
 	    this.combos.ctx = MODx.load({ 
             xtype: 'modx-combo-context'
+            ,id: 'modx-acctx-filter-context'
             ,listeners: {
                	'select': {fn:function(btn,e) {
                     this.getStore().baseParams = {
@@ -168,110 +171,124 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
 });
 Ext.reg('modx-grid-access-context',MODx.grid.AccessContext);
 
-/** 
- * Generates the modAccessContext window.
- *  
- * @class MODx.window.AccessContext
- * @extends MODx.Window
- * @param {Object} An object of configuration options.
- * @xtype modx-window-access-context
- */
-MODx.window.AccessContext = function(config) {
+MODx.window.UpdateAccessContext = function(config) {
     config = config || {};
+    var r = config.record;
+    this.ident = config.ident || 'uactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugc_mutate')
+        ,url: MODx.config.connectors_url+'security/access/index.php'
+        ,baseParams: { action: 'updateAcl', type: config.type || 'modAccessContext' }
         ,height: 250
         ,width: 350
         ,type: 'modAccessContext'
-        ,id: 0
-    });
-    MODx.window.AccessContext.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.window.AccessContext,MODx.Window,{
-    combos: {}
-	
-    ,_loadForm: function() {
-        if (this.checkIfLoaded(this.config.record)) { return false; }
-        if (this.config.id) {
-            MODx.Ajax.request({
-                url: MODx.config.connectors_url+'security/access/index.php'
-                ,params: {
-                    action: 'getAcl'
-                    ,id: this.config.id
-                    ,type: this.config.type
-                }
-                ,listeners: {
-                	'success':{fn:this.prepareForm,scope:this}
-                }
-            });
-        } else {
-            this.prepareForm(null,null);
-        }
-    }
-	
-    ,prepareForm: function(r,o) {
-        var data = {};
-        if (r) {
-            r = Ext.decode(r.responseText);
-            if (r.success) {
-                data = r.object;
-                this.config.baseParams = {
-                    action: 'updateAcl',
-                    type: this.config.type
-                };
+        ,acl: 0
+        ,fields: [{
+            xtype: 'modx-combo-context'
+            ,fieldLabel: _('context')
+            ,name: 'target'
+            ,hiddenName: 'target'
+            ,id: 'modx-'+this.ident+'-context'
+            ,value: r.context
+        },{
+            xtype: 'modx-combo-usergroup'
+            ,fieldLabel: _('user_group')
+            ,name: 'principal'
+            ,hiddenName: 'principal'
+            ,id: 'modx-'+this.ident+'-principal'
+            ,value: r.principal || ''
+            ,baseParams: {
+                action: 'getList'
+                ,combo: '1'
             }
-        }
-        this.config.values = data;		
-				
-        this.fp = this.createForm({
-            url: this.config.url || MODx.config.connectors_url+'security/access/index.php'
-            ,baseParams: this.config.baseParams || { action: 'addAcl', type: this.config.type }
-			,items: [ 
-            	{
-                    fieldLabel: _('context')
-                    ,name: 'target'
-                    ,hiddenName: 'target'
-                    ,xtype: 'modx-combo-context'
-                    ,value: data.context
-                },{
-                    fieldLabel: _('user_group')
-                    ,name: 'principal'
-                    ,hiddenName: 'principal'
-                    ,xtype: 'modx-combo-usergroup'
-                    ,value: data.principal || ''
-                    ,baseParams: {
-                        action: 'getList'
-                        ,combo: '1'
-                    }
-                },{
-	                fieldLabel: _('authority')
-	                ,name: 'authority'
-                    ,xtype: 'textfield'
-	                ,width: 40
-	                ,value: data.authority
-	            },{
-                    fieldLabel: _('policy')
-                    ,name: 'policy'
-                    ,hiddenName: 'policy'
-                    ,xtype: 'modx-combo-policy'
-                    ,value: data.policy || ''
-                    ,baseParams: {
-                        action: 'getList'
-                        ,combo: '1'
-                    }
-                },{
-	                name: 'principal_class'
-                    ,xtype: 'hidden'
-	                ,value: 'modUserGroup'
-	            },{
-	                name: 'id'
-                    ,xtype: 'hidden'
-	                ,value: data.id
-	            }
-			]
-        });
-        
-        this.renderForm();
-    }
-});
-Ext.reg('modx-window-access-context',MODx.window.AccessContext);
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('authority')
+            ,name: 'authority'
+            ,id: 'modx-'+this.ident+'-authority'
+            ,width: 40
+            ,value: r.authority
+        },{
+            xtype: 'modx-combo-policy'
+            ,fieldLabel: _('policy')
+            ,name: 'policy'
+            ,hiddenName: 'policy'
+            ,id: 'modx-'+this.ident+'-policy'
+            ,value: r.policy || ''
+            ,baseParams: {
+                action: 'getList'
+                ,combo: '1'
+            }
+        },{
+            xtype: 'hidden'
+            ,name: 'principal_class'
+            ,id: 'modx-'+this.ident+'-principal-class'
+            ,value: 'modUserGroup'
+        },{
+            xtype: 'hidden'
+            ,name: 'id'
+            ,id: 'modx-'+this.ident+'-id'
+            ,value: r.id
+        }]
+    });
+    MODx.window.UpdateAccessContext.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.UpdateAccessContext,MODx.Window);
+Ext.reg('modx-window-access-context-update',MODx.window.UpdateAccessContext);
+
+
+MODx.window.CreateAccessContext = function(config) {
+    config = config || {};
+    var r = config.record;
+    this.ident = config.ident || 'cactx'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('ugc_mutate')
+        ,url: MODx.config.connectors_url+'security/access/index.php'
+        ,baseParams: { action: 'addAcl', type: config.type || 'modAccessContext' }
+        ,height: 250
+        ,width: 350
+        ,type: 'modAccessContext'
+        ,acl: 0
+        ,fields: [{
+            xtype: 'modx-combo-context'
+            ,fieldLabel: _('context')
+            ,name: 'target'
+            ,hiddenName: 'target'
+            ,id: 'modx-'+this.ident+'-context'
+        },{
+            xtype: 'modx-combo-usergroup'
+            ,fieldLabel: _('user_group')
+            ,name: 'principal'
+            ,hiddenName: 'principal'
+            ,id: 'modx-'+this.ident+'-usergroup'
+            ,baseParams: {
+                action: 'getList'
+                ,combo: '1'
+            }
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('authority')
+            ,name: 'authority'
+            ,id: 'modx-'+this.ident+'-authority'
+            ,width: 40
+        },{
+            xtype: 'modx-combo-policy'
+            ,fieldLabel: _('policy')
+            ,name: 'policy'
+            ,hiddenName: 'policy'
+            ,id: 'modx-'+this.ident+'-policy'
+            ,baseParams: {
+                action: 'getList'
+                ,combo: '1'
+            }
+        },{
+            xtype: 'hidden'
+            ,name: 'principal_class'
+            ,id: 'modx-'+this.ident+'-principal-class'
+            ,value: 'modUserGroup'
+        }]
+    });
+    MODx.window.CreateAccessContext.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.CreateAccessContext,MODx.Window);
+Ext.reg('modx-window-access-context-create',MODx.window.CreateAccessContext);

@@ -40,7 +40,7 @@ Ext.extend(MODx.grid.AccessResourceGroup,MODx.grid.Grid,{
         var r = this.menu.record;
         if (!this.windows.create_arg) {
             this.windows.create_arg = MODx.load({
-                xtype: 'modx-window-access-resource-group'
+                xtype: 'modx-window-access-resource-group-create'
                 ,record: r
                 ,listeners: {
                 	'success': {fn: function(frm,a) {
@@ -65,8 +65,8 @@ Ext.extend(MODx.grid.AccessResourceGroup,MODx.grid.Grid,{
         var r = this.menu.record;
         if (!this.windows.update_arg) {
             this.windows.update_arg = MODx.load({
-                xtype: 'modx-window-access-resource-group'
-                ,id: r.id
+                xtype: 'modx-window-access-resource-group-update'
+                ,acl: r.id
                 ,record: r
                 ,listeners: {
                 	'success': {fn:this.refresh,scope:this}
@@ -161,114 +161,136 @@ Ext.reg('modx-grid-access-resource-group',MODx.grid.AccessResourceGroup);
  * @param {Object} config An object of options.
  * @xtype modx-window-access-resource-group
  */
-MODx.window.AccessResourceGroup = function(config) {
+MODx.window.CreateAccessResourceGroup = function(config) {
     config = config || {};
+    this.ident = config.ident || 'caccrg'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugrg_mutate')
+        ,url: MODx.config.connectors_url+'security/access/index.php'
+        ,baseParams: { action: 'addAcl', type: 'modAccessResourceGroup' }
         ,autoHeight: true
         ,width: 350
         ,type: 'modAccessResourceGroup'
-        ,id: 0
-    });
-    MODx.window.AccessResourceGroup.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.window.AccessResourceGroup,MODx.Window,{
-    combos: {}
-    ,_loadForm: function() {
-        if (this.checkIfLoaded(this.config.record)) { return false; }
-        if (this.config.id) {
-            MODx.Ajax.request({
-                url: MODx.config.connectors_url+'security/access/index.php'
-                ,params: {
-                    action: 'getAcl'
-                    ,id: this.config.id
-                    ,type: this.config.type
-                }
-                ,listeners: {
-                	'success': {fn:this.prepareForm,scope:this}
-                }
-            });
-        } else {
-            this.prepareForm(null,null);
-        }
-    }
-    
-    ,prepareForm: function(r) {
-        var data = {};
-        if (r) {
-            r = Ext.decode(r.responseText);
-            if (r.success) {
-                data = r.object;
-                this.config.baseParams = {
-                    action: 'updateAcl'
-                    ,type: this.config.type
-                };
+        ,acl: 0
+        ,fields: [{
+            xtype: 'modx-combo-resourcegroup'
+            ,fieldLabel: _('resource_group')
+            ,name: 'target'
+            ,hiddenName: 'target'
+            ,id: 'modx-'+this.ident+'-target'
+        },{
+            xtype: 'modx-combo-usergroup'
+            ,fieldLabel: _('user_group')
+            ,name: 'principal'
+            ,hiddenName: 'principal'
+            ,id: 'modx-'+this.ident+'-principal'
+            ,baseParams: {
+                action: 'getList'
+                ,combo: '1'
             }
-        }
-        this.options.values = data;
-                
-        this.fp = this.createForm({
-            url: this.config.url || MODx.config.connectors_url+'security/access/index.php'
-            ,baseParams: this.config.baseParams || { action: 'addAcl', type: this.config.type }
-            ,items: [
-                {
-                    fieldLabel: _('resource_group')
-                    ,name: 'target'
-                    ,hiddenName: 'target'
-                    ,id: 'modx-arg-target'
-                    ,xtype: 'modx-combo-resourcegroup'
-                    ,value: data.target
-                },{
-                    fieldLabel: _('user_group')
-                    ,name: 'principal'
-                    ,hiddenName: 'principal'
-                    ,id: 'modx-arg-principal'
-                    ,xtype: 'modx-combo-usergroup'
-                    ,value: data.principal || ''
-                    ,baseParams: {
-                        action: 'getList'
-                        ,combo: '1'
-                    }
-                },{
-                    fieldLabel: _('authority')
-                    ,name: 'authority'
-                    ,id: 'modx-arg-authority'
-                    ,xtype: 'textfield'
-                    ,width: 40
-                    ,value: data.authority
-                },{
-                    fieldLabel: _('policy')
-                    ,name: 'policy'
-                    ,hiddenName: 'policy'
-                    ,id: 'modx-arg-policy'
-                    ,xtype: 'modx-combo-policy'
-                    ,value: data.policy || ''
-                    ,baseParams: {
-                        action: 'getList'
-                        ,combo: '1'
-                    }
-                },{
-                    fieldLabel: _('context')
-                    ,name: 'context_key'
-                    ,hiddenName: 'context_key'
-                    ,id: 'modx-arg-context-key'
-                    ,xtype: 'modx-combo-context'
-                    ,value: data.context_key || ''
-                },{
-                    name: 'principal_class'
-                    ,id: 'modx-arg-principal-class'
-                    ,xtype: 'hidden'
-                    ,value: 'modUserGroup'
-                },{
-                    name: 'id'
-                    ,id: 'modx-arg-id'
-                    ,xtype: 'hidden'
-                    ,value: data.id
-                }
-            ]
-        });
-        
-        this.renderForm();
-    }
-});
-Ext.reg('modx-window-access-resource-group',MODx.window.AccessResourceGroup);
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('authority')
+            ,name: 'authority'
+            ,id: 'modx-'+this.ident+'-authority'
+            ,width: 40
+        },{
+            xtype: 'modx-combo-policy'
+            ,fieldLabel: _('policy')
+            ,name: 'policy'
+            ,hiddenName: 'policy'
+            ,id: 'modx-'+this.ident+'-policy'
+            ,baseParams: {
+                action: 'getList'
+                ,combo: '1'
+            }
+        },{
+            xtype: 'modx-combo-context'
+            ,fieldLabel: _('context')
+            ,name: 'context_key'
+            ,hiddenName: 'context_key'
+            ,id: 'modx-'+this.ident+'-context-key'
+        },{
+            xtype: 'hidden'
+            ,name: 'principal_class'
+            ,id: 'modx-'+this.ident+'-principal-class'
+            ,value: 'modUserGroup'
+        }]
+    });
+    MODx.window.CreateAccessResourceGroup.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.CreateAccessResourceGroup,MODx.Window);
+Ext.reg('modx-window-access-resource-group-create',MODx.window.CreateAccessResourceGroup);
+
+
+MODx.window.UpdateAccessResourceGroup = function(config) {
+    config = config || {};
+    var r = config.record;
+    this.ident = config.ident || 'uaccrg'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('ugrg_mutate')
+        ,url: MODx.config.connectors_url+'security/access/index.php'
+        ,baseParams: { action: 'updateAcl', type: 'modAccessResourceGroup' }
+        ,autoHeight: true
+        ,width: 350
+        ,type: 'modAccessResourceGroup'
+        ,acl: 0
+        ,fields: [{
+            xtype: 'modx-combo-resourcegroup'
+            ,fieldLabel: _('resource_group')
+            ,name: 'target'
+            ,hiddenName: 'target'
+            ,id: 'modx-'+this.ident+'-target'
+            ,value: r.target
+        },{
+            xtype: 'modx-combo-usergroup'
+            ,fieldLabel: _('user_group')
+            ,name: 'principal'
+            ,hiddenName: 'principal'
+            ,id: 'modx-'+this.ident+'-principal'
+            ,value: r.principal || ''
+            ,baseParams: {
+                action: 'getList'
+                ,combo: '1'
+            }
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('authority')
+            ,name: 'authority'
+            ,id: 'modx-'+this.ident+'-authority'
+            ,width: 40
+            ,value: r.authority
+        },{
+            xtype: 'modx-combo-policy'
+            ,fieldLabel: _('policy')
+            ,name: 'policy'
+            ,hiddenName: 'policy'
+            ,id: 'modx-'+this.ident+'-policy'
+            ,value: r.policy || ''
+            ,baseParams: {
+                action: 'getList'
+                ,combo: '1'
+            }
+        },{
+            xtype: 'modx-combo-context'
+            ,fieldLabel: _('context')
+            ,name: 'context_key'
+            ,hiddenName: 'context_key'
+            ,id: 'modx-'+this.ident+'-context-key'
+            ,value: r.context_key || ''
+        },{
+            xtype: 'hidden'
+            ,name: 'principal_class'
+            ,id: 'modx-'+this.ident+'-principal-class'
+            ,value: 'modUserGroup'
+        },{
+            xtype: 'hidden'
+            ,name: 'id'
+            ,id: 'modx-'+this.ident+'-id'
+            ,value: r.id
+        }]
+    });
+    MODx.window.UpdateAccessResourceGroup.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.UpdateAccessResourceGroup,MODx.Window);
+Ext.reg('modx-window-access-resource-group-update',MODx.window.UpdateAccessResourceGroup);

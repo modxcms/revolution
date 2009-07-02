@@ -20,10 +20,10 @@ MODx.combo.ComboBox = function(config,getStore) {
         }
         ,width: 150
         ,listWidth: 300
-        ,editable: true
+        ,editable: false
         ,resizable: true
-        ,typeAhead: true
-        ,forceSelection: false
+        ,typeAhead: false
+        ,forceSelection: true
         ,minChars: 3
         ,cls: 'modx-combo'
     });
