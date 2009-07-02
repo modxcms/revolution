@@ -498,6 +498,14 @@ MODx.getQRSettings = function(id,va) {
         ,checked: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? true : false)            
     },{
         xtype: 'checkbox'
+        ,fieldLabel: _('resource_hide_from_menus')
+        ,description: _('resource_hide_from_menus_help')
+        ,name: 'hidemenu'
+        ,id: 'modx-'+id+'-hidemenu'
+        ,inputValue: 1
+        ,checked: va['hidemenu'] != undefined ? va['hidemenu'] : false                
+    },{
+        xtype: 'checkbox'
         ,fieldLabel: _('resource_cacheable')
         ,description: _('resource_cacheable_help')
         ,name: 'cacheable'
