@@ -41,7 +41,13 @@ MODx.grid.SettingsGrid = function(config) {
         ,emptyText: _('search_by_key')+'...'
         ,listeners: {
             'change': {fn: this.filterByKey, scope: this}
-            ,'render': {fn: this._addEnterKeyHandler}
+            ,'render': {fn: function(cmp) {
+                new Ext.KeyMap(cmp.getEl(), {
+                    key: Ext.EventObject.ENTER
+                    ,fn: function() { this.fireEvent('change',this.getValue()); }
+                    ,scope: cmp
+                });
+            },scope:this}
         }
     },{
         xtype: 'button'
@@ -147,7 +153,8 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
      * Filters the grid by the key column.
      */
     ,filterByKey: function(tf,newValue,oldValue) {
-        this.getStore().baseParams.key = newValue;
+        var nv = newValue || tf;
+        this.getStore().baseParams.key = nv;
         this.refresh();
         this.getBottomToolbar().changePage(1);
     }
