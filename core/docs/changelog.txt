@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-869] Added missing descriptions for certain menu items
 - [#MODX-868] Fixed bug on settings grid where filter box was not firing on enter key
 - Fixed bug where hidemenu was not persisting in Quick Update Resource
 - Fixed bug with tree mask rendering before panel is rendered

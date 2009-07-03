@@ -99,8 +99,10 @@ Ext.extend(MODx.Console,Ext.Window,{
     
     ,complete: function() {
     	Ext.getCmp('modx-console-ok').setDisabled(false);
-        this.mgr.refresh();
-        this.mgr.stopAutoRefresh();
+        if (this.mgr) {
+            this.mgr.refresh();
+            this.mgr.stopAutoRefresh();
+        }
     }
     
     ,shutdown: function() {
