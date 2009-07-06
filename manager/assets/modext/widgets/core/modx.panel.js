@@ -182,6 +182,24 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             }
         });
     }
+    
+    ,hideField: function(f) {
+        if (typeof f == 'string') { f = Ext.getCmp(f); }
+        if (!f) return;
+        f.disable();
+        f.hide();
+        var d = f.getEl().up('.x-form-item');
+        if (d) { d.setDisplayed(false); }
+    }
+
+    ,showField: function(f) {
+        if (typeof f == 'string') { f = Ext.getCmp(f); }
+        if (!f) return;
+        f.enable();
+        f.show();
+        var d = f.getEl().up('.x-form-item');
+        if (d) { d.setDisplayed(true); }
+    }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);
 
