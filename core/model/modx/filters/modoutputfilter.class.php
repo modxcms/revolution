@@ -145,16 +145,18 @@ class modOutputFilter {
                     case "cat": /* appends the options value (if not empty) to the input value */
                         if (!empty($m_val))
                             $output = $output . $m_val;
+                        break;
                     case "lcase" : /* See PHP's strtolower - http://www.php.net/manual/en/function.strtolower.php */
                         $output= strtolower($output);
                         break;
                     case "ucase" : /* See PHP's strtoupper - http://www.php.net/manual/en/function.strtoupper.php */
                         $output= strtoupper($output);
                         break;
+                    case 'ucwords' : /* See PHP's ucwords - http://www.php.net/manual/en/function.ucwords.php */
+                        $output= ucwords($output);
+                        break;
                     case "ucfirst" : /* See PHP's ucfirst - http://www.php.net/manual/en/function.ucfirst.php */
-                        if (empty($m_val))
-                            $m_val = false;
-                        $output= ucfirst($output, $m_val);
+                        $output= ucfirst($output);
                         break;
                     case "htmlent" : /* See PHP's htmlentities - http://www.php.net/manual/en/function.htmlentities.php */
                         $output= htmlentities($output, ENT_QUOTES, $this->modx->getOption('modx_charset'));
