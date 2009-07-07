@@ -506,7 +506,17 @@ $collection['55']->fromArray(array (
 $collection['56']= $xpdo->newObject('modSystemSetting');
 $collection['56']->fromArray(array (
   'key' => 'signupemail_message',
-  'value' => 'Hello [[+uid]]      Here are your login details for [[+sname]] Content Manager:      Username: [[+uid]]     Password: [[+pwd]]      Once you log into the Content Manager at [[+surl]], you can change your password.      Regards,     Site Administrator',
+  'value' => '<p>Hello [[+uid]],</p>
+    <p>Here are your login details for the [[+sname]] MODx Manager:</p>
+
+    <p>
+        <strong>Username:</strong> [[+uid]]<br />
+        <strong>Password:</strong> [[+pwd]]<br />
+    </p>
+
+    <p>Once you log into the MODx Manager at [[+surl]], you can change your password.</p>
+
+    <p>Regards,<br />Site Administrator</p>',
   'xtype' => 'textarea',
   'namespace' => 'core',
   'area' => 'authentication',
@@ -704,20 +714,20 @@ $collection['77']->fromArray(array (
 $collection['78']= $xpdo->newObject('modSystemSetting');
 $collection['78']->fromArray(array (
   'key' => 'webpwdreminder_message',
-  'value' => 'Hello [[+uid]]
+  'value' => "<p>Hello [[+uid]],</p>
 
-    To active you new password click the following link:
+    <p>To activate your new password click the following link:</p>
 
-    [[+surl]]
+    <p>[[+surl]]</p>
 
-    If successful you can use the following password to login:
+    <p>If successful you can use the following password to login:</p>
 
-    Password:[[+pwd]]
+    <p><strong>Password:</strong> [[+pwd]]</p>
 
-    If you did not request this email then please ignore it.
+    <p>If you did not request this email then please ignore it.</p>
 
-    Regards,
-    Site Administrator',
+    <p>Regards,<br />
+    Site Administrator</p>",
   'xtype' => 'textarea',
   'namespace' => 'core',
   'area' => 'authentication',
@@ -726,17 +736,17 @@ $collection['78']->fromArray(array (
 $collection['79']= $xpdo->newObject('modSystemSetting');
 $collection['79']->fromArray(array (
   'key' => 'websignupemail_message',
-  'value' => 'Hello [[+uid]]
+  'value' => '<p>Hello [[+uid]],</p>
 
-    Here are your login details for [[+sname]]:
+    <p>Here are your login details for [[+sname]]:</p>
 
-    Username: [[+uid]]
-    Password: [[+pwd]]
+    <p><strong>Username:</strong> [[+uid]]<br />
+    <strong>Password:</strong> [[+pwd]]</p>
 
-    Once you log into [[+sname]] at [[+surl]], you can change your password.
+    <p>Once you log into [[+sname]] at [[+surl]], you can change your password.</p>
 
-    Regards,
-    Site Administrator',
+    <p>Regards,<br />
+    Site Administrator</p>',
   'xtype' => 'textarea',
   'namespace' => 'core',
   'area' => 'authentication',

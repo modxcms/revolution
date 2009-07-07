@@ -21,7 +21,7 @@ $newPassword= false;
 include_once $modx->getOption('processors_path').'security/user/_validation.php';
 
 if ($_POST['passwordnotifymethod'] == 'e') {
-	sendMailMessage($_POST['email'], $_POST['username'],$user->get('password'),$_POST['fullname']);
+	sendMailMessage($_POST['email'], $_POST['username'],$newPassword,$_POST['fullname']);
 }
 
 
@@ -134,6 +134,7 @@ function sendMailMessage($email, $uid, $pwd, $ufn) {
     $modx->mail->set(MODX_MAIL_SUBJECT, $modx->getOption('emailsubject'));
     $modx->mail->address('to', $email, $ufn);
     $modx->mail->address('reply-to', $modx->getOption('emailsender'));
+    $modx->mail->setHTML(true);
     if ($modx->mail->send() == false) {
         return $modx->error->failure($modx->lexicon('error_sending_email_to').$email);
     }
