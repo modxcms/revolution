@@ -9,10 +9,10 @@
  */
 $modx->lexicon->load('tv');
 
-if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'));
-$tv = $modx->getObject('modTemplateVar',$_POST['id']);
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'));
+$tv = $modx->getObject('modTemplateVar',$_REQUEST['id']);
 if ($tv == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('tv_err_nfs'),$_POST['id']));
+    return $modx->error->failure(sprintf($modx->lexicon('tv_err_nfs'),$_REQUEST['id']));
 }
 
 $tv->set('els',$tv->get('elements'));

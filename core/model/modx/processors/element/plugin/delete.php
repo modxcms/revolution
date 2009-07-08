@@ -12,7 +12,7 @@ $modx->lexicon->load('plugin');
 if (!$modx->hasPermission('delete_plugin')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get plugin */
-$plugin = $modx->getObject('modPlugin', $_REQUEST['id']);
+$plugin = $modx->getObject('modPlugin', $_POST['id']);
 if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_not_found'));
 
 /* remove plugin */

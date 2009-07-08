@@ -12,10 +12,10 @@ $modx->lexicon->load('chunk','category');
 if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get chunk */
-if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
-$chunk = $modx->getObject('modChunk',$_POST['id']);
+if (!isset($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
+$chunk = $modx->getObject('modChunk',$_REQUEST['id']);
 if ($chunk == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('chunk_err_id_not_found'),$_POST['id']));
+    return $modx->error->failure(sprintf($modx->lexicon('chunk_err_id_not_found'),$_REQUEST['id']));
 }
 
 $properties = $chunk->get('properties');

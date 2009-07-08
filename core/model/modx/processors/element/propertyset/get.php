@@ -8,8 +8,8 @@
 $modx->lexicon->load('propertyset');
 
 /* if getting properties for an element as well */
-if (isset($_POST['elementId']) && isset($_POST['elementType'])) {
-    $element = $modx->getObject($_POST['elementType'],$_POST['elementId']);
+if (isset($_REQUEST['elementId']) && isset($_REQUEST['elementType'])) {
+    $element = $modx->getObject($_REQUEST['elementType'],$_REQUEST['elementId']);
     if ($element) {
         $default = $element->get('properties');
         if (!is_array($default)) $default = array();

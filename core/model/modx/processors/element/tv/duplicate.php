@@ -13,7 +13,7 @@ $modx->lexicon->load('tv');
 if (!$modx->hasPermission('new_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get TV */
-$old_tv = $modx->getObject('modTemplateVar',$_REQUEST['id']);
+$old_tv = $modx->getObject('modTemplateVar',$_POST['id']);
 if ($old_tv == null) return $modx->error->failure($modx->lexicon('tv_err_not_found'));
 
 $old_tv->templates = $old_tv->getMany('modTemplateVarTemplate');

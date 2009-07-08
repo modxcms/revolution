@@ -14,7 +14,7 @@ if (!$modx->hasPermission('delete_template')) return $modx->error->failure($modx
 $forced = true;
 
 /* get tv */
-$tv = $modx->getObject('modTemplateVar',$_REQUEST['id']);
+$tv = $modx->getObject('modTemplateVar',$_POST['id']);
 if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_not_found'));
 
 /* get tv relational tables */

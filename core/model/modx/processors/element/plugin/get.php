@@ -12,7 +12,7 @@ $modx->lexicon->load('plugin');
 if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get plugin */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
 $plugin = $modx->getObject('modPlugin', $_REQUEST['id']);
 if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_not_found'));
 
