@@ -8,16 +8,21 @@
  */
 MODx.Layout = function(config){
     config = config || {};
-    this.config = config;
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext2/resources/images/default/s.gif';
-    
-    this.loadTrees();
-    
     Ext.applyIf(config,{
         id: 'modx-layout'
     });
     MODx.Layout.superclass.constructor.call(this,config);
+    this.config = config;
+    
+    this.loadTrees();
+    this.addEvents({
+        'afterLayout': true
+        ,'loadKeyMap': true
+        ,'loadAccordion': true
+    });
     this.loadKeys();
+    this.fireEvent('afterLayout');
 };
 Ext.extend(MODx.Layout,Ext.Component,{    
     loadTrees: function() {
@@ -103,6 +108,10 @@ Ext.extend(MODx.Layout,Ext.Component,{
             ,scope: this
             ,stopEvent: true
         });
+        
+        this.fireEvent('loadKeyMap',{
+            keymap: k
+        });
     }
     
     ,refreshTrees: function() {
@@ -137,6 +146,10 @@ Ext.extend(MODx.Layout,Ext.Component,{
             ,contentEl: 'modx_ft_div'
             ,resizeEl: 'modx_file_tree'
             ,id: 'modx-file-tree-panel'
+        });
+        
+        this.fireEvent('loadAccordion',{
+            items: it
         });
         
         return it;

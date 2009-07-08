@@ -38,3 +38,36 @@ MODx.panel.ImageTV = function(config) {
 };
 Ext.extend(MODx.panel.ImageTV,MODx.Panel);
 Ext.reg('modx-panel-tv-image',MODx.panel.ImageTV);
+
+MODx.panel.FileTV = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        layout: 'form'
+        ,autoHeight: true
+        ,border: false
+        ,hideLabels: true
+        ,defaults: {
+            autoHeight: true
+            ,border: false
+        }
+        ,width: 400
+        ,items: [{
+            xtype: 'modx-combo-browser'
+            ,browserEl: 'tvbrowser'+config.tv
+            ,name: 'tv'+config.tv
+            ,id: 'tv'+config.tv
+            ,value: config.value
+            ,hideFiles: true
+            ,listeners: {
+                'change': {fn:triggerDirtyField,scope:this}
+                ,'select': {fn:function(data) {
+                    
+                },scope:this}
+            }
+            ,width: 200
+        }] 
+    });
+    MODx.panel.FileTV.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.panel.FileTV,MODx.Panel);
+Ext.reg('modx-panel-tv-file',MODx.panel.FileTV);
