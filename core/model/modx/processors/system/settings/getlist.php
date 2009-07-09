@@ -25,35 +25,30 @@ $c = $modx->newQuery('modSystemSetting');
 $cc = $modx->newQuery('modSystemSetting');
 if (isset($_REQUEST['key']) && $_REQUEST['key'] != '') {
     $c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",modSystemSetting.key) = Entry.name');
-    $cc->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",modSystemSetting.key) = Entry.name');
-
-    $wa = array(
+    $c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",modSystemSetting.key,"_desc") = Description.name');
+    $c->where(array(
         'modSystemSetting.key:LIKE' => '%'.$_REQUEST['key'].'%',
-    );
-    $na = array(
+    ));
+    $c->orCondition(array(
         'Entry.value:LIKE' => '%'.$_REQUEST['key'].'%',
-    );
-    $va = array(
+    ));
+    $c->orCondition(array(
         'modSystemSetting.value:LIKE' => '%'.$_REQUEST['key'].'%',
-    );
-    $c->where($wa);
-    $cc->where($wa);
-    $c->orCondition($na);
-    $cc->orCondition($na);
-    $c->orCondition($va);
-    $cc->orCondition($va);
+    ));
+    $c->orCondition(array(
+        'Description.value:LIKE' => '%'.$_REQUEST['key'].'%',
+    ));
 }
 
 if (isset($_REQUEST['namespace'])) {
     $c->where(array('namespace' => $_REQUEST['namespace']));
-    $cc->where(array('namespace' => $_REQUEST['namespace']));
 }
 
 $c->sortby('`modSystemSetting`.`area`,`modSystemSetting`.`'.$_REQUEST['sort'].'`',$_REQUEST['dir']);
 $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 
 $settings = $modx->getCollection('modSystemSetting',$c);
-$count = $modx->getCount('modSystemSetting',$cc);
+$count = $modx->getCount('modSystemSetting',$c);
 
 $ss = array();
 foreach ($settings as $setting) {
