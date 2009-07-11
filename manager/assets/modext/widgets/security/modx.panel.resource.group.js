@@ -30,6 +30,7 @@ MODx.panel.ResourceGroups = function(config) {
                     ,items: [{
                         xtype: 'modx-tree-resource-group'
                         ,id: 'modx-gr-tree-resourcegroup'
+                        ,ddGroup: 'rg2resource'
                         ,height: 400
                     }]
                 },{
@@ -39,6 +40,7 @@ MODx.panel.ResourceGroups = function(config) {
                     ,items: [{
                         xtype: 'modx-tree-resource'
                         ,id: 'modx-gr-tree-resource'
+                        ,ddGroup: 'rg2resource'
                         ,title: _('resources')
                         ,width: 300
                         ,remoteToolbar: false
