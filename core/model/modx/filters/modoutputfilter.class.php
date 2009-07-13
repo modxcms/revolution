@@ -62,75 +62,95 @@ class modOutputFilter {
                 switch ($m_cmd) {
                     /* conditional operators */
                     /* @todo these conditionals should be removed because there are cleaner ways to do this now */
-                    case "input" :
-                    case "if" :
+                    case 'input':
+                    case 'if':
                         $output= $m_val;
                         break;
-                    case "equals" :
-                    case "is" :
-                    case "eq" :
+                    case 'eq':
+                    case 'is':
+                    case 'equals':
+                    case 'equalto':
                         $condition[]= intval(($output == $m_val));
                         break;
-                    case "notequals" :
-                    case "isnot" :
-                    case "isnt" :
-                    case "ne" :
+                    case 'ne':
+                    case 'neq':
+                    case 'isnot':
+                    case 'isnt':
+                    case 'notequals':
                         $condition[]= intval(($output != $m_val));
                         break;
-                    case "isgreaterthan" :
-                    case "isgt" :
-                    case "eg" :
+                    case 'gte':
+                    case 'isgte':
+                    case 'eg':
+                    case 'ge':
+                    case 'equalorgreaterthan':
+                    case 'greaterthanorequalto':
                         $condition[]= intval(($output >= $m_val));
                         break;
-                    case "islowerthan" :
-                    case "islt" :
-                    case "el" :
+                    case 'lte':
+                    case 'islte':
+                    case 'le':
+                    case 'el':
+                    case 'lessthanorequalto':
+                    case 'equaltoorlessthan':
                         $condition[]= intval(($output <= $m_val));
                         break;
-                    case "greaterthan" :
-                    case "gt" :
+                    case 'gt':
+                    case 'isgt':
+                    case 'greaterthan':
+                    case 'isgreaterthan':
                         $condition[]= intval(($output > $m_val));
                         break;
-                    case "lowerthan" :
-                    case "lt" :
+                    case 'lt':
+                    case 'islt':
+                    case 'lessthan':
+                    case 'lowerthan':
+                    case 'islessthan':
+                    case 'islowerthan':
                         $condition[]= intval(($output < $m_val));
                         break;
-                    case "isinrole" :
-                    case "memberof" :
-                    case "mo" : /* Is Member Of  (same as inrole but this one can be stringed as a conditional) */
+                    case 'isinrole':
+                    case 'memberof':
+                    case 'mo': /* Is Member Of  (same as inrole but this one can be stringed as a conditional) */
                         /* @todo: fix or possibly remove */
                         if ($output == "&_PHX_INTERNAL_&")
                             $output= $this->user["id"];
                         $grps= (strlen($m_val) > 0) ? explode(",", $m_val) : array ();
                         $condition[]= intval($this->isMemberOfWebGroupByUserId($output, $grps));
                         break;
-                    case "or" :
+                    case 'or':
                         $condition[]= "||";
                         break;
-                    case "and" :
+                    case 'and':
                         $condition[]= "&&";
                         break;
-                    case "show" :
+                    case 'hide':
                         $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
-                        if (!$m_con) {
-                            $output= NULL;
+                        if ($m_con) {
+                            $output= null;
                         }
                         break;
-                    case "then" :
+                    case 'show':
+                        $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
+                        if (!$m_con) {
+                            $output= null;
+                        }
+                        break;
+                    case 'then':
                         $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
                         if ($m_con) {
                             $output= $m_val;
                         } else {
-                            $output= NULL;
+                            $output= null;
                         }
                         break;
-                    case "else" :
+                    case 'else':
                         $m_con = intval(eval("return (" . join(' ', $condition) . ");"));
                         if (!$m_con) {
                             $output= $m_val;
                         }
                         break;
-                    case "select" :
+                    case 'select':
                         $raw= explode("&", $m_val);
                         $map= array ();
                         for ($m= 0; $m < (count($raw)); $m++) {
@@ -142,59 +162,89 @@ class modOutputFilter {
                         /* #####  End of Conditional Modifiers */
 
                     /* #####  String Modifiers */
-                    case "cat": /* appends the options value (if not empty) to the input value */
+                    case 'cat': /* appends the options value (if not empty) to the input value */
                         if (!empty($m_val))
                             $output = $output . $m_val;
                         break;
-                    case "lcase" : /* See PHP's strtolower - http://www.php.net/manual/en/function.strtolower.php */
+                    case 'lcase':
+                    case 'lowercase':
+                    case 'strtolower':
+                        /* See PHP's strtolower - http://www.php.net/manual/en/function.strtolower.php */
                         $output= strtolower($output);
                         break;
-                    case "ucase" : /* See PHP's strtoupper - http://www.php.net/manual/en/function.strtoupper.php */
+                    case 'ucase':
+                    case 'uppercase':
+                    case 'strtoupper':
+                        /* See PHP's strtoupper - http://www.php.net/manual/en/function.strtoupper.php */
                         $output= strtoupper($output);
                         break;
-                    case 'ucwords' : /* See PHP's ucwords - http://www.php.net/manual/en/function.ucwords.php */
+                    case 'ucwords':
+                        /* See PHP's ucwords - http://www.php.net/manual/en/function.ucwords.php */
                         $output= ucwords($output);
                         break;
-                    case "ucfirst" : /* See PHP's ucfirst - http://www.php.net/manual/en/function.ucfirst.php */
+                    case 'ucfirst':
+                        /* See PHP's ucfirst - http://www.php.net/manual/en/function.ucfirst.php */
                         $output= ucfirst($output);
                         break;
-                    case "htmlent" : /* See PHP's htmlentities - http://www.php.net/manual/en/function.htmlentities.php */
+                    case 'htmlent':
+                    case 'htmlentities':
+                        /* See PHP's htmlentities - http://www.php.net/manual/en/function.htmlentities.php */
                         $output= htmlentities($output, ENT_QUOTES, $this->modx->getOption('modx_charset'));
                         break;
-                    case "esc" :
-                    case "escape" :
+                    case 'esc':
+                    case 'escape':
                         $output= preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars($output));
                         $output= str_replace(array ("[", "]", "`"), array ("&#91;", "&#93;", "&#96;"), $output);
                         break;
-                    case "strip" : /* Replaces all linebreaks, tabs and multiple spaces with just one space */
+                    case 'strip':
+                        /* Replaces all linebreaks, tabs and multiple spaces with just one space */
                         $output= preg_replace("~([\n|\r|\t|\s]+)~", " ", $output);
                         break;
-                    case "notags" : /* See PHP's strip_tags - http://www.php.net/manual/en/function.strip_tags.php */
+                    case 'notags':
+                    case 'striptags':
+                    case 'strip_tags':
+                        /* See PHP's strip_tags - http://www.php.net/manual/en/function.strip_tags.php */
                         $output= strip_tags($output);
                         break;
-                    case "length" : /* See PHP's strlen - http://www.php.net/manual/en/function.strlen.php */
-                    case "len" :
+                    case 'length':
+                    case 'len':
+                    case 'strlen':
+                        /* See PHP's strlen - http://www.php.net/manual/en/function.strlen.php */
                         $output= strlen($output);
                         break;
-                    case "reverse" : /* See PHP's strrev - http://www.php.net/manual/en/function.strrev.php */
+                    case 'reverse':
+                    case 'strrev':
+                        /* See PHP's strrev - http://www.php.net/manual/en/function.strrev.php */
                         $output= strrev($output);
                         break;
-                    case "wordwrap" : /* See PHP's wordwrap - http://www.php.net/manual/en/function.wordwrap.php */
+                    case 'wordwrap':
+                        /* See PHP's wordwrap - http://www.php.net/manual/en/function.wordwrap.php */
                         $wrapat= intval($m_val);
                         if ($wrapat) {
-                            $output= wordwrap($output, $wrapat, " ", 1);
+                            $output= wordwrap($output, $wrapat,"<br />\n ", 0);
                         } else {
-                            $output= wordwrap($output, 70, " ", 1);
+                            $output= wordwrap($output, 70,"<br />\n", 0);
                         }
                         break;
-                    case "limit" : /* default: 100 */
+                    case 'wordwrapcut':
+                        /* See PHP's wordwrap - http://www.php.net/manual/en/function.wordwrap.php */
+                        $wrapat= intval($m_val);
+                        if ($wrapat) {
+                            $output= wordwrap($output, $wrapat,"<br />\n ", 1);
+                        } else {
+                            $output= wordwrap($output, 70,"<br />\n", 1);
+                        }
+                        break;
+                    case 'limit':
+                        /* default: 100 */
                         $limit= intval($m_val) ? intval($m_val) : 100;
                         $output= substr($output, 0, $limit);
                         break;
 
                     /* #####  Special functions */
 
-                    case "tag": /* Displays the raw element tag without :tag */
+                    case 'tag':
+                        /* Displays the raw element tag without :tag */
                         $tag = $element->_tag;
                         $tag = htmlentities($tag, ENT_QUOTES, $this->modx->getOption('modx_charset'));
                         $tag = str_replace(array ("[", "]", "`"), array ("&#91;", "&#93;", "&#96;"), $tag);
@@ -202,60 +252,77 @@ class modOutputFilter {
                         $output = $tag;
                         break;
 
-                    case "math": /* Returns the result of an advanced calculation (expensive) */
+                    case 'math':
+                        /* Returns the result of an advanced calculation (expensive) */
                     	$filter= preg_replace("~([a-zA-Z\n\r\t\s])~", "", $m_val);
                         $filter= str_replace('?', $output, $filter);
                         $output= eval("return " . $filter . ";");
                         break;
 
-                    case "add": /* Returns input incremented by option (default: +1) */
-                    case "increment":
-                    case "incr":
+                    case 'add':
+                    case 'increment':
+                    case 'incr':
+                        /* Returns input incremented by option (default: +1) */
                     	if (empty($m_val))
                             $m_val = 1;
                     	$output = intval($output) + intval($m_val);
                     	break;
 
-                    case "subtract":
-                    case "decrement": /* Returns input decremented by option (default: -1) */
-                    case "decr":
+                    case 'subtract':
+                    case 'decrement':
+                    case 'decr':
+                        /* Returns input decremented by option (default: -1) */
                         if (empty($m_val))
                             $m_val = 1;
                         $output = intval($output) - intval($m_val);
                         break;
 
-                    case "multiply": /* Returns input multiplied by option (default: *2) */
-                    case "mpy":
+                    case 'multiply':
+                    case 'mpy':
+                        /* Returns input multiplied by option (default: *2) */
                         if (empty($m_val))
                             $m_val = 1;
                         $output = intval($output) * intval($m_val);
                         break;
 
-                    case "divide": /* Returns input divided by option (default: /2) */
-                    case "div":
+                    case 'divide':
+                    case 'div':
+                        /* Returns input divided by option (default: /2) */
                         if (empty($m_val))
                             $m_val = 2;
                         $output = intval($output) / intval($m_val);
                         break;
 
-                    case "modulus": /* Returns the option modulus on input (default: %2, returns 0 or 1) */
-                    case "mod":
+                    case 'modulus':
+                    case 'mod':
+                        /* Returns the option modulus on input (default: %2, returns 0 or 1) */
                         if (empty($m_val))
                             $m_val = 2;
                         $output = intval($output) % intval($m_val);
                         break;
 
-                    case "default" : /* Returns the input value if empty */
-                    case "ifempty" :
+                    case 'default':
+                    case 'ifempty':
+                    case 'isempty':
+                        /* Returns the input value if empty */
                         if (empty($output))
                             $output= $m_val;
                         break;
 
-                    case "nl2br" : /* See PHP's nl2br - http://www.php.net/manual/en/function.nl2br.php */
+                    case 'ifnotempty':
+                    case 'isnotempty':
+                        /* returns input value if not empty */
+                        if (!empty($output))
+                            $output= $m_val;
+                        break;
+
+                    case 'nl2br':
+                        /* See PHP's nl2br - http://www.php.net/manual/en/function.nl2br.php */
                         $output= nl2br($output);
                         break;
 
-                    case "date": /* See PHP's strftime - http://www.php.net/manual/en/function.strftime.php */
+                    case 'date':
+                        /* See PHP's strftime - http://www.php.net/manual/en/function.strftime.php */
                         if (empty($m_val))
                             $m_val = "%A, %d %B %Y %H:%M:%S"; /* @todo this should be modx default date/time format? Lexicon? */
                         $value = 0 + $output;
@@ -266,7 +333,8 @@ class modOutputFilter {
                         }
                         break;
 
-                    case "strtotime": /* See PHP's strtotime() function - http://www.php.net/strtotime */
+                    case 'strtotime':
+                        /* See PHP's strtotime() function - http://www.php.net/strtotime */
                         if (!empty($output)) {
                             $output = strtotime($output);
                         } else {
@@ -274,14 +342,28 @@ class modOutputFilter {
                         }
                         break;
 
-                    case "md5" : /* See PHP's md5 - http://www.php.net/manual/en/function.md5.php */
+                    case 'md5':
+                        /* See PHP's md5 - http://www.php.net/manual/en/function.md5.php */
                         $output= md5($output);
                         break;
 
-                    case "userinfo" : /* Returns the requested user data (input: userid) */
+                    case 'userinfo':
+                        /* Returns the requested user data (input: userid) */
                         $key = (!empty($m_val)) ? $m_val : 'username';
                     	$user = $this->modx->getUserInfo($output);
                         $output = $user ? $user[$key] : null;
+                        break;
+
+                    case 'isloggedin':
+                        /* returns true if user is logged in */
+                        $output= $this->modx->user->isAuthenticated($this->modx->context->get('key'));
+                        $output= $output ? true : false;
+                        break;
+
+                    case 'isnotloggedin':
+                        /* returns true if user is not logged in */
+                        $output= $this->modx->user->isAuthenticated($this->modx->context->get('key'));
+                        $output= $output ? false : true;
                         break;
 
                     /* Default, custom modifier (run snippet with modifier name) */
