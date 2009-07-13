@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added ability to load lexicon topics via tag: [[%key? &namespace=`mynamespace` &topic=`mytopic`]]
 - [#MODX-910] Fixed issues with gte/lte/gt/lt output filters
 - [#MODX-921] Added "isempty" as an alias of "ifempty" in output filters
 - [#MODX-920] Fixed wordwrap output filter
