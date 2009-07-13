@@ -15,15 +15,15 @@ MODx.page.Profile = function(config) {
         ]
         ,components: [{
             xtype: 'modx-panel-profile-update'
-            ,renderTo: 'modx-info-panel'
+            ,renderTo: 'modx-info-panel-div'
             ,user: config.user
         },{
             xtype: 'modx-panel-profile-password-change'
-            ,renderTo: 'modx-password-change-panel'
+            ,renderTo: 'modx-password-change-panel-div'
             ,user: config.user
         },{
             xtype: 'modx-grid-user-recent-resource'
-            ,renderTo: 'modx-grid-recent-resource'
+            ,renderTo: 'modx-grid-recent-resource-div'
             ,user: config.user
         }]
 	});

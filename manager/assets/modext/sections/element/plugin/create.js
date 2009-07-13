@@ -29,7 +29,7 @@ MODx.page.CreatePlugin = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-plugin'
-            ,renderTo: 'modx-panel-plugin'
+            ,renderTo: 'modx-panel-plugin-div'
             ,plugin: 0
             ,category: config.category || 0
             ,name: ''

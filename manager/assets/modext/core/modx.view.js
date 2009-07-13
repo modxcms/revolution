@@ -25,7 +25,7 @@ MODx.DataView = function(config) {
     });
     MODx.DataView.superclass.constructor.call(this,config);
     this.config = config;
-    this.cm = new Ext.menu.Menu(Ext.id());
+    this.cm = new Ext.menu.Menu();
 };
 Ext.extend(MODx.DataView,Ext.DataView,{
     lookup: {}
@@ -110,7 +110,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
         m.removeAll();
         if (data.menu) {
             this._addContextMenuItem(data.menu);
-            m.show(n,'t?');
+            m.show(n,'tl-c?');
         }
         m.activeNode = n;
     }

@@ -611,6 +611,7 @@ MODx.window.UpdateElementProperty = function(config) {
         ,height: 250
         ,width: 450
         ,saveBtnText: _('done')
+        ,forceLayout: true
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'name'
@@ -688,14 +689,18 @@ Ext.extend(MODx.window.UpdateElementProperty,MODx.Window,{
             g.hide();
         }
         g.getStore().removeAll();
-        var opt = this.config.record.options;
-        var opts = [];
-        for (var x in opt) {
-          if (opt.hasOwnProperty(x)) {
-            opts.push([opt[x].name,opt[x].value]);
-          }
+        var gp = Ext.getCmp('modx-grid-element-properties');
+        var rec = gp.getSelectionModel().getSelected();
+        if (rec) {
+            var opt = rec.data.options;
+            var opts = [];
+            for (var x in opt) {
+              if (opt.hasOwnProperty(x)) {
+                opts.push([opt[x].name,opt[x].value]);
+              }
+            }
+            g.getStore().loadData(opts);
         }
-        g.getStore().loadData(opts);
         this.syncSize();
         this.center();
     }
@@ -878,6 +883,7 @@ MODx.window.AddPropertySet = function(config) {
             ,autoHeight: true
             ,checkboxToggle: true
             ,collapsed: true
+            ,forceLayout: true
             ,id: 'modx-aps-propertyset-new-fs'
             ,listeners: {
                 'expand': {fn:function(p) {

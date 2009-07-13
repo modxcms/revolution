@@ -4,14 +4,13 @@
 <title>MODx :: {$_config.site_name}</title>
 <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
 
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext2/resources/css/ext-all.css" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext2/resources/css/xtheme-gray.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/xtheme-gray-extend.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
 
-<script src="{$_config.manager_url}assets/ext2/adapter/ext/ext-base.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/ext2/ext-all.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
-<script src="assets/modext/util/eventfix.js" type="text/javascript"></script>
 <script src="{$_config.connectors_url}lang.js.php?topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a}" type="text/javascript"></script>
 <script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a}" type="text/javascript"></script>
 
@@ -89,3 +88,4 @@
         
         <div id="modAB"></div>
         <div id="modx-content">
+            <div id="modx-panel-holder"></div>

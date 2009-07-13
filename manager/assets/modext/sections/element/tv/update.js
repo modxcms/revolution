@@ -33,7 +33,7 @@ MODx.page.UpdateTV = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-tv'
-            ,renderTo: 'modx-panel-tv'
+            ,renderTo: 'modx-panel-tv-div'
             ,tv: config.id
             ,name: ''
         }]

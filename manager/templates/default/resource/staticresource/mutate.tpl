@@ -1,4 +1,4 @@
-<div id="modx-panel-static"></div>
+<div id="modx-panel-static-div"></div>
 
 {include file='resource/_javascript.tpl'}
 
@@ -18,7 +18,7 @@
     <h2>{$_lang.security}</h2>
     
     <p>{$_lang.resource_access_message}</p>
-    <div id="modx-grid-resource-security"></div>
+    <div id="modx-grid-resource-security-div"></div>
 </div>
 <!-- END Access Permissions -->
     

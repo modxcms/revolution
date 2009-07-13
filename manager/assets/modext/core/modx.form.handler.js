@@ -43,7 +43,7 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
     
     ,errorJSON: function(e) {
         if (e === '') { return this.showError(e); }
-        if (e.data !== null) {
+        if (e.data && e.data !== null) {
             for (var p=0;p<e.data.length;p=p+1) {
                 this.highlightField(e.data[p]);
             }

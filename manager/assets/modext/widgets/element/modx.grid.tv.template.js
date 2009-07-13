@@ -8,9 +8,8 @@
  */
 MODx.grid.TemplateVarTemplate = function(config) {
     config = config || {};
-    var tt = MODx.load({
-        xtype: 'checkbox-column'
-        ,header: _('access')
+    var tt = new Ext.ux.grid.CheckColumn({
+        header: _('access')
         ,dataIndex: 'access'
         ,width: 40
         ,sortable: false

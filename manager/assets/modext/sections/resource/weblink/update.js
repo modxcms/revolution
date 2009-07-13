@@ -21,7 +21,7 @@ MODx.page.UpdateWebLink = function(config) {
         }
         ,components: [{
             xtype: 'modx-panel-weblink'
-            ,renderTo: 'modx-panel-weblink'
+            ,renderTo: 'modx-panel-weblink-div'
             ,resource: config.id
             ,record: {
                 class_key: config.class_key

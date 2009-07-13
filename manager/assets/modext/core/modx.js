@@ -14,7 +14,7 @@ MODx = function(config) {
 Ext.extend(MODx,Ext.Component,{
     config: {}
     ,util:{},window:{},panel:{},tree:{},form:{},grid:{},combo:{},toolbar:{},page:{},msg:{}
-    ,Ajax:{}
+    //,Ajax:{}
     
     ,startup: function() {
         this.initQuickTips();
@@ -181,12 +181,12 @@ Ext.extend(MODx.Ajax,Ext.Component,{
             for (var i in config.listeners) {
               if (config.listeners.hasOwnProperty(i)) {
                 var l = config.listeners[i];
-                this.addListener(i,l.fn,l.scope || this,l.options || {});
+                this.on(i,l.fn,l.scope || this,l.options || {});
               }
             }
         }
         
-        Ext.applyIf(config,{
+        Ext.apply(config,{
             success: function(r,o) {
                 r = Ext.decode(r.responseText);
                 if (!r) return false;
@@ -206,6 +206,7 @@ Ext.extend(MODx.Ajax,Ext.Component,{
             	}
             }
             ,scope: this
+            ,headers: { 'modx': 'modx' }
         });
         Ext.Ajax.request(config);
     }

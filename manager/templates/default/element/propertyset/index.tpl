@@ -1,1 +1,1 @@
-<div id="modx-panel-property-sets"></div>
+<div id="modx-panel-property-sets-div"></div>

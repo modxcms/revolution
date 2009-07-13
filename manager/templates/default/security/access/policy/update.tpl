@@ -1,1 +1,1 @@
-<div id="modx-panel-access-policy"></div>
+<div id="modx-panel-access-policy-div"></div>

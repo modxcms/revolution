@@ -1,26 +1,11 @@
-.x-form-check-group .x-form-check-wrap,.x-form-radio-group .x-form-radio-wrap{height:auto;}
-.ext-ie .x-form-check-group .x-form-check-wrap,.ext-ie .x-form-radio-group .x-form-radio-wrap{height:auto;}
-.x-form-check-wrap,.x-form-radio-wrap{padding:1px 0 3px;line-height:18px;}
-.ext-ie .x-form-check-wrap,.ext-ie .x-form-radio-wrap{padding-top:3px;}
-.ext-strict .ext-ie7 .x-form-check-wrap,.ext-strict .ext-ie7 .x-form-radio-wrap{padding-bottom:1px;}
-.x-form-check-wrap-inner,.x-form-radio-wrap-inner{display:inline;padding:0;}
-.x-form-check,.x-form-radio{height:13px;width:13px;vertical-align:bottom;margin:2px 0;}
-.ext-ie .x-form-check,.ext-ie .x-form-radio{margin-top:1px;}
-.ext-strict .ext-ie7 .x-form-check,.ext-strict .ext-ie7 .x-form-radio{margin-bottom:4px;}
-.ext-opera .x-form-check,.ext-opera .x-form-radio{margin-top:3px;}
-.x-form-check-focus .x-form-check,.x-form-check-over .x-form-check,.x-form-check-focus .x-form-radio,.x-form-check-over .x-form-radio{background-position:-13px 0;}
-.x-form-check-down .x-form-check,.x-form-check-down .x-form-radio{background-position:-26px 0;}
-.x-item-disabled .x-form-check,.x-item-disabled .x-form-radio{background-position:-39px 0;}
-.x-form-check-checked,.x-form-radio-checked{ background-position:0 -13px !important; }
-.x-form-check-focus .x-form-check-checked,.x-form-check-over .x-form-check-checked,.x-form-check-focus .x-form-radio-checked,.x-form-check-over .x-form-radio-checked{ 
-	   background-position:-13px -13px !important; 
-}
-.x-form-check-down .x-form-check-checked,.x-form-check-down .x-form-radio-checked{background-position:-26px -13px;}
-.x-item-disabled .x-form-check-checked,.x-item-disabled .x-form-radio-checked{background-position:-39px -13px;}
-.x-form-check-wrap-inner input,.x-form-radio-wrap-inner input{
-	position:absolute;
-	-ms-filter:"alpha(opacity=0)";
-	filter:alpha(opacity=0);
-	-moz-opacity:0;
-	opacity:0;
+
+
+/* fix safari triggerfield */
+.ext-safari input,.ext-safari textarea{outline:none;}
+.ext-strict .ext-safari .x-small-editor .x-form-text { height: 18px !important; }
+.ext-safari .x-form-field-wrap .x-form-trigger{
+    height: 21px;
+    position:static;
+    top:auto;
+    vertical-align:top;
 }

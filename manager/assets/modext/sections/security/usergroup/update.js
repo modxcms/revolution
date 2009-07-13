@@ -31,7 +31,7 @@ MODx.page.UpdateUserGroup = function(config) {
         }]
         ,components: [{
             xtype: 'modx-panel-user-group'
-            ,renderTo: 'modx-panel-user-group'
+            ,renderTo: 'modx-panel-user-group-div'
             ,usergroup: MODx.request.id
         }]
     });

@@ -21,7 +21,7 @@ MODx.page.UpdateStatic = function(config) {
         }
         ,components: [{
             xtype: 'modx-panel-static'
-            ,renderTo: 'modx-panel-static'
+            ,renderTo: 'modx-panel-static-div'
             ,resource: config.id
             ,record: {
                 class_key: config.class_key

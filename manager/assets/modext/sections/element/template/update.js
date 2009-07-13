@@ -34,7 +34,7 @@ MODx.page.UpdateTemplate = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-template'
-            ,renderTo: 'modx-panel-template'
+            ,renderTo: 'modx-panel-template-div'
             ,template: config.id
             ,name: ''
             ,baseParams: { action: 'update' ,id: config.id }

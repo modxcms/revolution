@@ -15,7 +15,7 @@ MODx.page.Contexts = function(config) {
 	Ext.applyIf(config,{
 		components: [{
             xtype: 'modx-panel-contexts'
-            ,renderTo: 'modx-panel-contexts'
+            ,renderTo: 'modx-panel-contexts-div'
         }]
 	});
 	MODx.page.Contexts.superclass.constructor.call(this,config);

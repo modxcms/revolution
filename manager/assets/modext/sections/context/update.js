@@ -39,7 +39,7 @@ MODx.page.UpdateContext = function(config) {
         }]
         ,components: [{
             xtype: 'modx-panel-context'
-            ,renderTo: 'modx-panel-context'
+            ,renderTo: 'modx-panel-context-div'
             ,context: config.context
         }]
     });

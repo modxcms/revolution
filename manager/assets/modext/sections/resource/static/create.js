@@ -30,7 +30,7 @@ MODx.page.CreateStatic = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-static'
-            ,renderTo: 'modx-panel-static'
+            ,renderTo: 'modx-panel-static-div'
             ,resource: 0
             ,record: {
                 class_key: config.class_key

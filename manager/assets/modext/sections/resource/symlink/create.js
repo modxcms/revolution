@@ -30,7 +30,7 @@ MODx.page.CreateSymLink = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-symlink'
-            ,renderTo: 'modx-panel-symlink'
+            ,renderTo: 'modx-panel-symlink-div'
             ,resource: 0
             ,record: {
                 class_key: config.class_key

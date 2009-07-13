@@ -119,7 +119,6 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         var r = {
             category: this.cm.activeNode.attributes.pk || ''
         };
-        
         var w = MODx.load({
             xtype: 'modx-window-quick-create-'+type
             ,record: r
@@ -129,6 +128,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
         w.setValues(r);
         w.show(e.target);
+        w.on('hide',function() { delete w; },this);
     }
     
     ,quickUpdate: function(itm,e,type) {

@@ -33,7 +33,7 @@ MODx.page.UpdateSnippet = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-snippet'
-            ,renderTo: 'modx-panel-snippet'
+            ,renderTo: 'modx-panel-snippet-div'
             ,snippet: config.id
             ,name: ''
         }]

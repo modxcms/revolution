@@ -16,7 +16,7 @@ MODx.page.Messages = function(config) {
         }]
         ,components: [{
             xtype: 'modx-grid-message'
-            ,renderTo: 'modx-grid-message'
+            ,renderTo: 'modx-grid-message-div'
         }]
     });
     MODx.page.Messages.superclass.constructor.call(this,config);

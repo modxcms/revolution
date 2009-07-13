@@ -13,6 +13,8 @@ MODx.window.PackageInstaller = function(config) {
         ,id: 'modx-window-package-installer'
         ,firstPanel: 'modx-pi-license'
         ,lastPanel: 'modx-pi-install'
+        ,autoHeight: true
+        ,forceLayout: true
         ,items: [{
             xtype: 'modx-panel-pi-license'
         },{
@@ -42,7 +44,6 @@ MODx.panel.PILicense = function(config) {
             ,autoHeight: true
         },{
             xtype: 'textarea'
-            ,style: 'font: arial; font-size: .9em'
             ,name: 'license'
             ,id: 'modx-pi-license-box'
             ,width: '90%'
@@ -116,7 +117,6 @@ MODx.panel.PIReadme = function(config) {
             ,autoHeight: true
         },{
             xtype: 'textarea'
-            ,style: 'font: arial; font-size: .9em'
             ,name: 'readme'
             ,id: 'modx-pi-readme-box'
             ,width: '90%'

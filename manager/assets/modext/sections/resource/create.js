@@ -36,7 +36,7 @@ MODx.page.CreateResource = function(config) {
     	,loadStay: true
         ,components: [{
             xtype: 'modx-panel-resource'
-            ,renderTo: 'modx-panel-resource'
+            ,renderTo: 'modx-panel-resource-div'
             ,resource: 0
             ,record: {
                 context_key: MODx.request.context_key || 'web'

@@ -10,8 +10,10 @@ MODx.panel.PackageDownload = function(config) {
         border: false
         ,id: 'modx-panel-package-download'
         ,layout: 'column'
-        ,height: 280
+        ,border: true
+        ,autoHeight: true
         ,width: Ext.isIE ? 650 : '95%'
+        ,autoScroll: true
         ,items: [{
             xtype: 'modx-tree-package-download'
             ,id: 'modx-tree-package-download'
@@ -68,8 +70,7 @@ Ext.extend(MODx.panel.PackageDownload,MODx.Panel,{
                 ,data: this.curData
             });
         }
-        this.mi.show(btn);
-        this.mi.setTpl(this.curData);
+        this.mi.showTpl(btn,this.curData);        
     }
     ,loadTemplates: function() {
         this.tpls = {
@@ -133,12 +134,14 @@ MODx.window.PackageMoreInfo = function(config) {
     Ext.applyIf(config,{
         title: _('package_information')
         ,width: 600
+        ,autoHeight: true
         ,url: MODx.config.connectors_url+'workspace/packages.php'
         ,action: 'info'
         ,autoScroll: true
         ,fields: [{
             html: '<div id="modx-pmi-content" style="overflow: auto; width: 100%;"></div>'
             ,autoScroll: true
+            ,height: 500
         }]
         ,buttons: [{
             text: _('ok')
@@ -175,8 +178,11 @@ Ext.extend(MODx.window.PackageMoreInfo,MODx.Window,{
         return this.tpl;
     }
     
-    ,setTpl: function(data) {
-        this.tpl.overwrite('modx-pmi-content',data);
+    ,showTpl: function(btn,data) {
+        this.show(btn,function() { 
+            this.tpl.overwrite('modx-pmi-content',data);
+            this.center();
+        },this);
     }
 });
 Ext.reg('modx-window-package-more-info',MODx.window.PackageMoreInfo);
@@ -194,21 +200,21 @@ MODx.tree.PackageDownload = function(config) {
             action: 'getPackages'
             ,provider: ''
         }
+        ,loaderConfig: {
+            preloadChildren: false
+        }
+        ,rootVisible: false
     });
     MODx.tree.PackageDownload.superclass.constructor.call(this,config);
+    this.on('render',this.setupMask,this);
 };
-Ext.extend(MODx.tree.PackageDownload,MODx.tree.CheckboxTree,{
-    setProvider: function(p) {        
-        var tl = this.getLoader();
-        Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')}) });
-        tl.fullMask.removeMask=false;
-        tl.on({
-            'load' : function(){this.fullMask.hide();}
-            ,'loadexception' : function(){this.fullMask.hide();}
-            ,'beforeload' : function(){this.fullMask.show();}
-            ,scope : tl
-        });
-        tl.fullMask.show();
+Ext.extend(MODx.tree.PackageDownload,MODx.tree.Tree,{
+    setProvider: function(p) {
+        var m = this.getLoader().fullMask;
+        if (!m) {
+            m = this.setupMask();
+        }
+        m.show();
         
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'workspace/providers.php'
@@ -219,10 +225,22 @@ Ext.extend(MODx.tree.PackageDownload,MODx.tree.CheckboxTree,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.loadRemoteData(r.object);
-                    tl.fullMask.hide();
+                    this.getLoader().fullMask.hide();
                 },scope:this}
             }
         });
+    }
+    ,setupMask: function() {
+        var tl = this.getLoader();
+        Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')}) });
+        tl.fullMask.removeMask=false;
+        tl.on({
+            'load' : function(){this.fullMask.hide();}
+            ,'loadexception' : function(){this.fullMask.hide();}
+            ,'beforeload' : function(){this.fullMask.show();}
+            ,scope : tl
+        });
+        return tl.fullMask;
     }
 });
 Ext.reg('modx-tree-package-download',MODx.tree.PackageDownload);

@@ -15,7 +15,7 @@ MODx.page.Workspace = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-workspace'
-            ,renderTo: 'modx-panel-workspace'
+            ,renderTo: 'modx-panel-workspace-div'
         }]
     });
     MODx.page.Workspace.superclass.constructor.call(this,config);

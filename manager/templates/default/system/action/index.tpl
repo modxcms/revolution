@@ -1,1 +1,1 @@
-<div id="modx-panel-actions"></div>
+<div id="modx-panel-actions-div"></div>

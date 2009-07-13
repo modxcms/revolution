@@ -33,7 +33,7 @@ MODx.page.CreateWebLink = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-weblink'
-            ,renderTo: 'modx-panel-weblink'
+            ,renderTo: 'modx-panel-weblink-div'
             ,resource: 0
             ,record: {
                 class_key: config.class_key

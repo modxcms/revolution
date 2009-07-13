@@ -1,1 +1,1 @@
-<div id="modx-panel-namespaces"></div>
+<div id="modx-panel-namespaces-div"></div>

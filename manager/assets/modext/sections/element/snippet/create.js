@@ -29,7 +29,7 @@ MODx.page.CreateSnippet = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-snippet'
-            ,renderTo: 'modx-panel-snippet'
+            ,renderTo: 'modx-panel-snippet-div'
             ,snippet: 0
             ,category: config.category || 0
             ,name: ''

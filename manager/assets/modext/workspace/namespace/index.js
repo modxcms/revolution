@@ -13,7 +13,7 @@ MODx.page.Namespaces = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-namespaces'
-            ,renderTo: 'modx-panel-namespaces'
+            ,renderTo: 'modx-panel-namespaces-div'
         }]
     });
     MODx.page.Namespaces.superclass.constructor.call(this,config);

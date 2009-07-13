@@ -15,10 +15,10 @@ MODx.page.SystemInfo = function(config) {
 	Ext.applyIf(config,{
         components: [{
             xtype: 'modx-grid-databasetables'
-            ,renderTo: 'modx-grid-databasetables'
+            ,renderTo: 'modx-grid-databasetables-div'
         },{
             xtype: 'modx-grid-resource-active'
-            ,renderTo: 'modx-grid-resource-active'
+            ,renderTo: 'modx-grid-resource-active-div'
         }]
         ,tabs: [{
             contentEl: 'modx-tab-server', title: _('server')

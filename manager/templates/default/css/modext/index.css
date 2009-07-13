@@ -27,7 +27,7 @@ textarea.x-form-field {
 .error { color: red !important; }
 
 .folder .x-tree-node-icon {
-    background-image:url(../../../../assets/ext2/resources/images/default/tree/folder.gif) !important; 
+    background-image:url(../../../../assets/ext3/resources/images/default/tree/folder.gif) !important; 
 }
 .weblink .x-tree-node-icon {
     background-image:url(../../images/restyle/icons/weblink.gif) !important;   

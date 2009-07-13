@@ -15,7 +15,7 @@ MODx.page.AccessPolicies = function(config) {
     Ext.applyIf(config,{
         components: [{ 
             xtype: 'modx-panel-access-policies'
-            ,renderTo: 'modx-panel-access-policies'
+            ,renderTo: 'modx-panel-access-policies-div'
         }] 
     });
 	MODx.page.AccessPolicies.superclass.constructor.call(this,config);

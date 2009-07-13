@@ -14,7 +14,7 @@ MODx.page.PackageBuilder = function(config) {
         components: [{
             xtype: 'panel-package-builder'
             ,id: 'panel-package-builder'
-            ,renderTo: 'panel-package-builder'
+            ,renderTo: 'panel-package-builder-div'
         }]
     });
     MODx.page.PackageBuilder.superclass.constructor.call(this,config);

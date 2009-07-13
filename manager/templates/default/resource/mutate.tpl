@@ -1,4 +1,4 @@
-<div id="modx-panel-resource"></div>
+<div id="modx-panel-resource-div"></div>
 
 {include file='resource/_javascript.tpl'}
 {modblock name='ab'}{/modblock}

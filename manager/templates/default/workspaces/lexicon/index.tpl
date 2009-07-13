@@ -1,1 +1,1 @@
-<div id="modx-panel-lexicon"></div>
+<div id="modx-panel-lexicon-div"></div>

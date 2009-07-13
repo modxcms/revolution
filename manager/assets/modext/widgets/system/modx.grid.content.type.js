@@ -85,9 +85,8 @@ Ext.reg('modx-panel-content-type',MODx.panel.ContentType);
  */
 MODx.grid.ContentType = function(config) {
     config = config || {};
-    var binaryColumn = MODx.load({
-        xtype: 'checkbox-column'
-        ,header: _('binary')
+    var binaryColumn = new Ext.ux.grid.CheckColumn({
+        header: _('binary')
         ,dataIndex: 'binary'
         ,width: 40
         ,sortable: true

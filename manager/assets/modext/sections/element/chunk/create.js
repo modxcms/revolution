@@ -30,7 +30,7 @@ MODx.page.CreateChunk = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-chunk'
-            ,renderTo: 'modx-panel-chunk'
+            ,renderTo: 'modx-panel-chunk-div'
             ,chunk: 0
             ,category: config.category || 0
             ,name: ''

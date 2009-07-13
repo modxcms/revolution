@@ -15,7 +15,7 @@ MODx.page.Users = function(config) {
 	Ext.applyIf(config,{
 		components: [{
             xtype: 'modx-panel-users'
-            ,renderTo: 'modx-panel-users'
+            ,renderTo: 'modx-panel-users-div'
         }]
 	});
 	MODx.page.Users.superclass.constructor.call(this,config);

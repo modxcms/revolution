@@ -59,7 +59,7 @@ Ext.extend(MODx.Component,Ext.Component,{
         if (!this.config.components) { return false; }
         var l = this.config.components.length;
         for (var i=0;i<l;i=i+1) {
-            Ext.ComponentMgr.create(this.config.components[i]);
+            MODx.load(this.config.components[i]);
         }
     }	
 });

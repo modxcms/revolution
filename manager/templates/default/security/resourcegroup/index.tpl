@@ -1,1 +1,1 @@
-<div id="modx-panel-resource-groups"></div>
+<div id="modx-panel-resource-groups-div"></div>

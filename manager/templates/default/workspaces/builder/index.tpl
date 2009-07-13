@@ -1,7 +1,7 @@
 <div class="padding">
 <h2>{$_lang.package_builder}</h2>
 
-<div id="panel-package-builder"></div>
+<div id="panel-package-builder-div"></div>
 <div id="grid-vehicle"></div>
 </div>
 

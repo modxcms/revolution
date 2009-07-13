@@ -47,13 +47,15 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
              contextmenu: this.cm
             ,buttonsAt: 'tbar'
             ,singleUpload: false
-            ,enableProgress: true
+            ,enableProgress: false
             ,maxFileSize: 10485760
             ,baseParams: {
                 action: 'upload'
                 ,prependPath: this.config.prependPath || null
                 ,prependUrl: this.config.prependUrl || null
             }
+            ,hideOnClick:false
+            ,cmd:'upload-panel'
         });
         this.uploader.on({
             beforeupload:{scope:this, fn:this.onBeforeUpload}
@@ -68,10 +70,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,handler: this.refreshActiveNode
         });
         m.add('-');
-        m.add(new Ext.menu.Adapter(this.uploader,{
-             hideOnClick:false
-            ,cmd:'upload-panel'
-        }));
+        m.add(this.uploader);
         
         m.show(node.ui.getEl(),'t?');
         m.activeNode = node;

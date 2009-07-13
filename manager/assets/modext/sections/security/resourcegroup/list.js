@@ -15,7 +15,7 @@ MODx.page.ResourceGroups = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-resource-groups'
-            ,renderTo: 'modx-panel-resource-groups'
+            ,renderTo: 'modx-panel-resource-groups-div'
         }]
     });
     MODx.page.ResourceGroups.superclass.constructor.call(this,config);

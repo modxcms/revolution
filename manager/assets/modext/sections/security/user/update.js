@@ -25,7 +25,7 @@ MODx.page.UpdateUser = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-user'
-            ,renderTo: 'modx-panel-user'
+            ,renderTo: 'modx-panel-user-div'
             ,user: config.user
             ,name: ''
         }]

@@ -39,7 +39,7 @@ Ext.reg('modx-browser',MODx.Browser);
  */
 MODx.browser.Window = function(config) {
     config = config || {};
-    this.ident = Ext.id(); // generate unique id
+    this.ident = Ext.id();
     this.view = MODx.load({
         xtype: 'modx-browser-view'
         ,onSelect: {fn: this.onSelect, scope: this}
@@ -108,7 +108,7 @@ MODx.browser.Window = function(config) {
             ,scope: this
         }]
         ,keys: {
-            key: 27 // Esc key
+            key: 27
             ,handler: this.hide
             ,scope: this
         }

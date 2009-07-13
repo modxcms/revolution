@@ -1,1 +1,1 @@
-<div id="modx-panel-resource-data"></div>
+<div id="modx-panel-resource-data-div"></div>

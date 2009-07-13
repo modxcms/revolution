@@ -15,7 +15,7 @@ MODx.page.Search = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-search'
-            ,renderTo: 'modx-panel-search'
+            ,renderTo: 'modx-panel-search-div'
         }]
     });
 	MODx.page.Search.superclass.constructor.call(this,config);

@@ -45,7 +45,7 @@ var onManagerLoginFormRender = '{$onManagerLoginFormRender}';
 <div id="mx_loginbox">
     {$onManagerLoginFormPrerender}
     <br />
-    <div id="modx-panel-login"></div>
+    <div id="modx-panel-login-div"></div>
     <form id="modx-login-form" method="post">
     <input type="text" id="modx-login-username" name="username" />
     <input type="password" id="modx-login-password" name="password" />

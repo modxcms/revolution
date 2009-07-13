@@ -280,6 +280,8 @@ Ext.ux.UploadPanel = Ext.extend(Ext.Panel, {
 				,listeners:{click:{scope:this, fn:this.onViewClick}}
 
 			}]
+            ,forceLayout: true
+            ,autoHeight: true
             ,width: 300
 		});
 		// }}}
@@ -409,6 +411,8 @@ Ext.ux.UploadPanel = Ext.extend(Ext.Panel, {
 		this.addBtn = Ext.getCmp(tb.items.first().id);
 		this.uploadBtn = Ext.getCmp(tb.items.itemAt(1).id);
 		this.removeAllBtn = Ext.getCmp(tb.items.last().id);
+        
+        tb.doLayout(false,true);
 	} // eo function onRender
 	// }}}
 

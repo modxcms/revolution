@@ -139,18 +139,18 @@ MODx.grid.PolicyProperty = function(config) {
         ,tbar: [{
             text: _('policy_property_new')
             ,scope: this
-            ,handler: this.create
+            ,handler: this.createAttribute
         }]
     });
     MODx.grid.PolicyProperty.superclass.constructor.call(this,config);
     this.config = config;
     
-    this.on('afteredit',this.update,this);
+    this.on('afteredit',this.updateAttribute,this);
     this.menu = new Ext.menu.Menu({ defaultAlign: 'tl-b?' });
     this.on('rowcontextmenu',this.showMenu,this);
 };
 Ext.extend(MODx.grid.PolicyProperty,Ext.grid.PropertyGrid,{
-    create: function() {
+    createAttribute: function() {
         Ext.Msg.prompt(_('policy_property_create'),_('policy_property_specify_name'),function(btn,v) {
             if (btn == 'ok') {
                 MODx.Ajax.request({
@@ -173,7 +173,7 @@ Ext.extend(MODx.grid.PolicyProperty,Ext.grid.PropertyGrid,{
         },this);
     }
     
-    ,remove: function() {
+    ,removeAttribute: function() {
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'security/access/policy.php'
             ,params: {
@@ -191,7 +191,7 @@ Ext.extend(MODx.grid.PolicyProperty,Ext.grid.PropertyGrid,{
         });
     }
     
-    ,update: function(e) {
+    ,updateAttribute: function(e) {
         MODx.Ajax.request({
            url: MODx.config.connectors_url+'security/access/policy.php'
            ,params: {
@@ -218,7 +218,7 @@ Ext.extend(MODx.grid.PolicyProperty,Ext.grid.PropertyGrid,{
         this.menu.add({
             text: _('policy_property_remove')
             ,scope: this
-            ,handler: this.remove
+            ,handler: this.removeAttribute
         });
         
         this.menu.show(e.target);

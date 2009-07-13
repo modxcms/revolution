@@ -76,7 +76,8 @@ MODx.panel.ManagerLog = function(config) {
                     }]
                 },{
                     xtype: 'modx-grid-manager-log'
-                    ,bodyStyle: ''
+                    ,bodyStyle: 'padding: 0 !important;'
+                    ,width: '98%'
                     ,preventRender: true
                 }]
             }]

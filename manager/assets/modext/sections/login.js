@@ -25,7 +25,7 @@ MODx.page.Login = function(config) {
     Ext.applyIf(config,{
        components: [{
            xtype: 'modx-panel-login'
-           ,renderTo: 'modx-panel-login'
+           ,renderTo: 'modx-panel-login-div'
        }]
     });
     MODx.page.Login.superclass.constructor.call(this,config);

@@ -11,7 +11,7 @@ MODx.Window = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
 		modal: false
-		,layout: 'fit'
+		,layout: 'auto'
 		,closeAction: 'hide'
 		,shadow: true
 		,resizable: true
@@ -51,6 +51,7 @@ MODx.Window = function(config) {
     this.on('show',function() {
         if (this.config.blankValues) { this.fp.getForm().reset(); }
         if (this.config.allowDrop) { this.loadDropZones(); }
+        this.syncSize();
     },this);
 };
 Ext.extend(MODx.Window,Ext.Window,{

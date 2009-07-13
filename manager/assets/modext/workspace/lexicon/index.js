@@ -13,7 +13,7 @@ MODx.page.LexiconManagement = function(config) {
     Ext.applyIf(config,{
         components: [{
         	xtype: 'modx-panel-lexicon'
-            ,renderTo: 'modx-panel-lexicon'
+            ,renderTo: 'modx-panel-lexicon-div'
         }]
     });
     MODx.page.LexiconManagement.superclass.constructor.call(this,config);

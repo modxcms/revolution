@@ -21,7 +21,7 @@ MODx.page.UpdateSymLink = function(config) {
         }
         ,components: [{
             xtype: 'modx-panel-symlink'
-            ,renderTo: 'modx-panel-symlink'
+            ,renderTo: 'modx-panel-symlink-div'
             ,resource: config.id
             ,record: {
                 class_key: config.class_key

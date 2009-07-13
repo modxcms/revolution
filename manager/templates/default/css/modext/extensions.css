@@ -8,14 +8,6 @@ input.x-static-text-field {
     filter: alpha(opacity=100);
 }
 
-/*
- * Ext JS Library 2.2
- * Copyright(c) 2006-2008, Ext JS, LLC.
- * licensing@extjs.com
- * 
- * http://extjs.com/license
- */
-
 .x-portal .x-panel-dd-spacer {
     margin-bottom:10px;
 }
@@ -51,14 +43,20 @@ input.x-static-text-field {
     height:2px;
 }
 
-
-/*
- * Ext JS Library 2.2
- * Copyright(c) 2006-2008, Ext JS, LLC.
+/*!
+ * Ext JS Library 3.0.0
+ * Copyright(c) 2006-2009 Ext JS, LLC
  * licensing@extjs.com
- * 
- * http://extjs.com/license
+ * http://www.extjs.com/license
  */
+.x-column-tree .x-panel-header {
+    padding: 3px 0px 0px 0px;
+    border-bottom-width: 0px;
+}
+
+.x-column-tree .x-panel-header .x-panel-header-text {
+    margin-left: 3px
+}
 
 .x-column-tree .x-tree-node {
     zoom:1;
@@ -89,6 +87,7 @@ input.x-static-text-field {
 }
 
 .x-tree-col-text, .x-tree-hd-text {
+    color:#000;
     overflow:hidden;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
@@ -98,7 +97,8 @@ input.x-static-text-field {
 }
 
 .x-tree-headers {
-    background: #f9f9f9 url(../../resources/images/default/grid/grid3-hrow.gif) repeat-x 0 bottom;
+    margin-top: 3px;
+    background: #f9f9f9 url(../../../resources/images/default/grid/grid3-hrow.gif) repeat-x 0 bottom;
     cursor:default;
     zoom:1;
 }

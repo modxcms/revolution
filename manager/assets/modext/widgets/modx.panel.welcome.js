@@ -27,13 +27,12 @@ MODx.panel.Welcome = function(config) {
             xtype: 'portal'
             ,id: 'modx-welcome-portal'
             ,items: [{
-                columnWidth: Ext.isSafari ? .46 : .48
+                columnWidth: .46
                 ,id: 'modx-welcome-col-left'
                 ,defaults: {
                     height: 300
                     ,autoHeight: false
                     ,autoScroll: true
-                    ,bodyStyle: 'padding: 1.5em;'
                     ,titleCollapse: true
                 }
                 ,items: [{
@@ -43,6 +42,7 @@ MODx.panel.Welcome = function(config) {
                     title: _('recent_docs')
                     ,id: 'modx-recent'
                     ,collapsed: true
+                    ,bodyStyle: 'padding: 1.5em;'
                     ,items: [{
                         html: '<p>'+_('activity_message')
                         ,border: false
@@ -55,15 +55,15 @@ MODx.panel.Welcome = function(config) {
                     title: _('online')
                     ,contentEl: 'modx-online'
                     ,collapsed: true
+                    ,bodyStyle: 'padding: 1.5em;'
                 }]
             },{
-                columnWidth: Ext.isSafari ? .46 : .48
+                columnWidth: .46
                 ,id: 'modx-welcome-col-right'
                 ,defaults: {
                     height: 300
                     ,autoHeight: false
                     ,autoScroll: true
-                    ,bodyStyle: 'padding: 1.5em;'
                     ,titleCollapse: true
                 }
                 ,items: [{
@@ -72,6 +72,7 @@ MODx.panel.Welcome = function(config) {
                 },{
                     title: _('info')
                     ,contentEl: 'modx-info'
+                    ,bodyStyle: 'padding: 1.5em;'
                     ,collapsed: true
                 }]
             }]

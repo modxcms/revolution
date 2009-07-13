@@ -84,6 +84,7 @@ Ext.extend(MODx.Wizard,Ext.Window,{
             this.getBottomToolbar().items.item(1).setText(_('next'));
         }
         Ext.getCmp(panel).fireEvent('fetch');
+        this.syncSize();
         this.center();
     }
 });
@@ -100,7 +101,6 @@ MODx.panel.WizardPanel = function(config) {
     Ext.applyIf(config,{
         autoHeight: true
         ,bodyStyle: 'padding: 3em 3em'
-        ,hideMode: 'offsets'
     });
     MODx.panel.WizardPanel.superclass.constructor.call(this,config);
     this.config = config;

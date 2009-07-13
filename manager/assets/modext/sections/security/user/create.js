@@ -27,7 +27,7 @@ MODx.page.CreateUser = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-user'
-            ,renderTo: 'modx-panel-user'
+            ,renderTo: 'modx-panel-user-div'
             ,user: 0
             ,name: ''
         }]

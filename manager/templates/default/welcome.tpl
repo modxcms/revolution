@@ -1,10 +1,10 @@
-<div id="modx-panel-welcome"></div>
+<div id="modx-panel-welcome-div"></div>
 
 <div id="welcome_tabs"></div>
 
 <div id="modx-news">
 	{foreach from=$newsfeed item=article}
-	<div class="news_article">
+	<div class="news_article" style="padding: 1.5em;">
 		<h2>
 			<a href="{$article.link}" target="_blank">{$article.title}</a>
 		</h2>
@@ -16,7 +16,7 @@
 
 <div id="modx-security">
 	{foreach from=$securefeed item=article}
-    <div class="news_article">
+    <div class="news_article" style="padding: 1.5em;">
 		<h2>
 			<a href="{$article.link}" target="_blank">{$article.title}</a>
 		</h2>

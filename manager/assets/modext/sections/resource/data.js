@@ -31,7 +31,7 @@ MODx.page.ResourceData = function(config) {
         }]
         ,components: [{
             xtype: 'modx-panel-resource-data'
-            ,renderTo: 'modx-panel-resource-data'
+            ,renderTo: 'modx-panel-resource-data-div'
             ,resource: config.id
             ,context: config.ctx
             ,class_key: config.class_key

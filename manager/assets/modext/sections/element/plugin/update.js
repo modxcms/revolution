@@ -33,7 +33,7 @@ MODx.page.UpdatePlugin = function(config) {
 		,loadStay: true
         ,components: [{
             xtype: 'modx-panel-plugin'
-            ,renderTo: 'modx-panel-plugin'
+            ,renderTo: 'modx-panel-plugin-div'
             ,plugin: config.id
             ,category: config.category
             ,name: ''

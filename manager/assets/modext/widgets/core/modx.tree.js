@@ -9,45 +9,69 @@ Ext.namespace('MODx.tree');
  * @xtype modx-tree
  */
 MODx.tree.Tree = function(config) {
-	config = config || {};
-	if (config.url === null) { return false; }
-    config.action = config.action || 'getNodes';
-    
+	config = config || {};    
 	Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
     Ext.applyIf(config,{
         baseParams: {}
+        ,action: 'getNodes'
+        ,loaderConfig: {}
     });
     if (config.action) {
         config.baseParams.action = config.action;
-    }	
-    this.config = config;
-    
-	var tl = new Ext.tree.TreeLoader({
-		dataUrl: config.url
-		,baseParams: config.baseParams
+    }
+    config.loaderConfig.dataUrl = config.url;
+    config.loaderConfig.baseParams = config.baseParams;
+    Ext.applyIf(config.loaderConfig,{
+        preloadChildren: true
         ,clearOnLoad: true
-	});
-	tl.on('beforeload',function(loader,node) {
-		tl.dataUrl = this.config.url+'?action='+this.config.action+'&id='+node.attributes.id;
-        if (node.attributes.type) {
-            tl.dataUrl += '&type='+node.attributes.type;
-        }
-	},this);
-	
+    });
+        
+    this.config = config;
+    if (this.config.url) {
+    	var tl = new Ext.tree.TreeLoader(config.loaderConfig);
+    	tl.on('beforeload',function(loader,node) {
+    		tl.dataUrl = this.config.url+'?action='+this.config.action+'&id='+node.attributes.id;
+            if (node.attributes.type) {
+                tl.dataUrl += '&type='+node.attributes.type;
+            }
+    	},this);
+        var root = {
+            nodeType: 'async'
+            ,text: config.root_name || ''
+            ,draggable: false
+            ,id: config.root_id || 'root'
+        };
+    } else {        
+        var tl = new Ext.tree.TreeLoader({
+            preloadChildren: true
+            ,baseAttrs: {
+                uiProvider: MODx.tree.CheckboxNodeUI
+            }
+        });
+        var root = new Ext.tree.TreeNode({
+            text: this.config.rootName || ''
+            ,draggable: false
+            ,id: this.config.rootId || 'root'
+            ,children: this.config.data || []
+        });
+    }
 	Ext.applyIf(config,{
-		animate:true
-		,autoHeight: true
-		,enableDrag: true
-		,enableDrop: true
+        useArrows: true
+        ,autoScroll: true
+        ,animate: true
+        ,enableDD: true
+        ,enableDrop: true
 		,ddAppendOnly: false
+        ,containerScroll: true
+        ,collapsible: true
+        ,border: false
+		,autoHeight: true
 		,rootVisible: true
 		,loader: tl
-		,collapsible: true
 		,hideBorders: true
 		,bodyBorder: false
-		,containerScroll: true
-		,autoScroll: true
         ,cls: 'modx-tree'
+        ,root: root
 	});
 	if (config.remoteToolbar === true && (config.tbar === undefined || config.tbar === null)) {
 		Ext.Ajax.request({
@@ -55,13 +79,19 @@ MODx.tree.Tree = function(config) {
 			,params: {
                 action: 'getToolbar'
             }
-            ,scope: this
-            ,success: function(r,o) {
+            ,success:function(r) {
                 r = Ext.decode(r.responseText);
-				config.tbar = this._formatToolbar(r);
-                this.setup(config);
+                var itms = this._formatToolbar(r.results);
+                var tb = this.getTopToolbar();
+                var l = r.results;
+                for (var i=0;i<itms.length;i++) {
+                    tb.add(itms[i]);
+                }
+                tb.doLayout();
             }
-		});
+            ,scope:this
+        });
+        config.tbar = {bodyStyle: 'padding: 0'};
 	} else {
 		var tb = this.getToolbar();
         if (config.tbar && config.useDefaultToolbar) {
@@ -72,14 +102,15 @@ MODx.tree.Tree = function(config) {
         } else if (config.tbar) {
             tb = config.tbar;
         }
-        Ext.apply(config,{tbar: tb});		
-		this.setup(config);
+        Ext.apply(config,{tbar: tb});
 	}
+    this.setup(config);
     this.config = config;
 };
 Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	menu: null
 	,options: {}
+    ,disableHref: false
 	
 	/**
 	 * Sets up the tree and initializes it with the specified options.
@@ -87,8 +118,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	 */
 	,setup: function(config) {
 	    MODx.tree.Tree.superclass.constructor.call(this,config);
-	    this.cm = new Ext.menu.Menu(Ext.id(),{});
-	    
+	    this.cm = new Ext.menu.Menu();
 	    this.on('contextmenu',this._showContextMenu,this);
 	    this.on('beforenodedrop',this._handleDrop,this);
 	    this.on('nodedragover',this._handleDrop,this);
@@ -97,24 +127,14 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.on('contextmenu',this._saveState,this);
         this.on('click',this._handleClick,this);
 	    
-	    this.root = new Ext.tree.AsyncTreeNode({
-	        text: config.root_name || ''
-	        ,draggable: false
-	        ,id: config.root_id || 'root'
-	    });
-	    this.setRootNode(this.root);
-	    
 	    this.treestate_id = this.config.id || Ext.id();
 	    this.on('load',this._initExpand,this,{single: true});
-	    this.root.expand();
+        this.root.expand();
 	    
-	    this._loadToolbar();
-        if (config.el) { this.render(); }
-        
         this.on('render',function() {
             var tl = this.getLoader();
             Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')}) });
-            tl.fullMask.removeMask=false;                                  
+            tl.fullMask.removeMask=false;
             tl.on({
                 'load' : function(){this.fullMask.hide();}
                 ,'loadexception' : function(){this.fullMask.hide();}
@@ -165,6 +185,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             this.addContextMenuItem(node.attributes.menu.items);
             this.cm.show(node.ui.getEl(),'t?');
         }
+        e.stopEvent();
     }
     
 	/**
@@ -197,6 +218,22 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 		}
 		return true;
 	}
+    
+    ,removeChildren: function(node) {
+        while(node.firstChild){
+             var c = node.firstChild;
+             node.removeChild(c);
+             c.destroy();
+        }
+    }
+    ,loadRemoteData: function(data) {
+        this.removeChildren(this.getRootNode());
+        for (var c in data) {
+            if (typeof data[c] === 'object') {
+                this.getRootNode().appendChild(data[c]);
+            }
+        }
+    }
 	
 	,reloadNode: function(n) {
         this.getLoader().load(n);
@@ -239,7 +276,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	/**
 	 * Expand the tree and all children.
 	 */
-	,expand: function() {
+	,expandNodes: function() {
 		if (this.root) {
             this.root.expand();
             this.root.expandChildNodes();
@@ -249,7 +286,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	/**
 	 * Completely collapse the tree.
 	 */
-	,collapse: function() {
+	,collapseNodes: function() {
 		if (this.root) {
             this.root.collapseChildNodes();
             this.root.collapse();
@@ -269,35 +306,44 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @param {Object} n The node clicked 
      */
 	,_handleClick: function (n,e) {
-        e.preventDefault();
         e.stopEvent();
+        
+        if (this.disableHref) return false;
+        if (e.ctrlKey) return false;
         if (n.attributes.href && n.attributes.href !== '') {
             location.href = n.attributes.href;
         }
     }
     
+    
+    ,encode: function(node) {
+        if (!node) { node = this.getRootNode(); }
+        var _encode = function(node) {
+            var resultNode = {};
+            var kids = node.childNodes;
+            for (var i = 0;i < kids.length;i=i+1) {
+                var n = kids[i];
+                resultNode[n.id] = {
+                    id: n.id
+                    ,checked: n.ui.isChecked()
+                    ,type: n.attributes.type || ''
+                    ,data: n.attributes.data || {}
+                    ,children: _encode(n)
+                };
+            }
+            return resultNode;
+        };
+        var nodes = _encode(node);
+        return Ext.encode(nodes);
+    }
+    
+    
+    
 	/**
 	 * Handles all drag events into the tree.
 	 * @param {Object} dropEvent The node dropped on the parent node.
 	 */
-	,_handleDrag: function(dropEvent) {
-		Ext.Msg.show({
-			title: _('please_wait')
-			,msg: _('saving')
-			,width: 240
-			,progress:true
-			,closable:false
-		});
-		
-		MODx.util.Progress.reset();
-		for(var i = 1; i < 20; i++) {
-			setTimeout('MODx.util.Progress.time('+i+','+MODx.util.Progress.id+')',i*1000);
-		}
-		
-		/**
-		 * Simplify nodes into JSON format.
-		 * @param {Object} node
-		 */
+	,_handleDrag: function(dropEvent) {		
 		function simplifyNodes(node) {
 			var resultNode = {};
 			var kids = node.childNodes;
@@ -317,13 +363,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 			}
 			,listeners: {
 				'success': {fn:function(r) {
-                    MODx.util.Progress.reset();
-    				Ext.Msg.hide();
     				this.reloadNode(dropEvent.target.parentNode);
 				},scope:this}
 				,'failure': {fn:function(r) {
-					MODx.util.Progress.reset();
-					Ext.Msg.hide();
                     MODx.form.Handler.errorJSON(r);
                     return false;
 				},scope:this}
@@ -452,10 +494,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	,_formatToolbar: function(a) {
 		var l = a.length;
 		for (var i = 0; i < l; i++) {
-			
-			if (a[i].handler) { 
-				a[i].handler = eval(a[i].handler); 
-			}
+            if (a[i].handler) {
+                a[i].handler = eval(a[i].handler);
+            }
 			Ext.applyIf(a[i],{
 				scope: this
 				,cls: 'x-btn-icon'

@@ -6,6 +6,7 @@ MODx.panel.ErrorLog = function(config) {
         ,baseParams: {
             action: 'clear'
         }
+        ,buttonAlign: 'center'
         ,items: [{
             html: '<h2>'+_('error_log')+'</h2>'
             ,id: 'modx-error-log-header'
@@ -25,7 +26,7 @@ MODx.panel.ErrorLog = function(config) {
                 xtype: 'textarea'
                 ,name: 'log'
                 ,grow: true
-                ,width: '100%'
+                ,width: '98%'
             }]
         }]
         ,buttons: [{

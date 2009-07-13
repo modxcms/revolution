@@ -14,7 +14,7 @@ MODx.page.SystemSettings = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-system-settings'
-            ,renderTo: 'modx-panel-system-settings'
+            ,renderTo: 'modx-panel-system-settings-div'
         }]
     });
 	MODx.page.SystemSettings.superclass.constructor.call(this,config);

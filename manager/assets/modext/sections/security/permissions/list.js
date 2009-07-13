@@ -15,7 +15,7 @@ MODx.page.GroupsRoles = function(config) {
 	Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-groups-roles'
-            ,renderTo: 'modx-panel-groups-roles'
+            ,renderTo: 'modx-panel-groups-roles-div'
         }]
 	});
 	MODx.page.GroupsRoles.superclass.constructor.call(this,config);

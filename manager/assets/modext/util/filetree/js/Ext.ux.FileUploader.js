@@ -174,6 +174,7 @@ Ext.extend(Ext.ux.FileUploader, Ext.util.Observable, {
 			,method:'post'
 			,cls:'x-hidden'
 			,id:Ext.id()
+            ,forceLayout: true
 			,cn:[{
 				 tag:'input'
 				,type:'hidden'

@@ -235,7 +235,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
         });
         w.setValues(r);
-        w.show(e.target);
+        w.show(e.target,function() {
+            Ext.isSafari ? w.setPosition(null,30) : w.center();
+        },this);
     }
     
     ,quickUpdate: function(itm,e,cls) {        
@@ -262,6 +264,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     });
                     w.setValues(r.object);
                     w.show(e.target);
+                    w.setPosition(null,30);
                 },scope:this}
             }
         });
@@ -317,14 +320,20 @@ MODx.window.QuickCreateResource = function(config) {
             ,title: _('settings')
             ,collapsible: true
             ,collapsed: true
+            ,animCollapse: true
             ,xtype: 'fieldset'
             ,autoHeight: true
+            ,forceLayout: true
             ,defaults: { autoHeight: true ,border: false }
             ,items: MODx.getQRSettings(this.ident,config.record)
         }]
         ,keys: []
     });
     MODx.window.QuickCreateResource.superclass.constructor.call(this,config);
+    this.on('show',function() {
+        Ext.getCmp('modx-'+this.ident+'-settings').collapse(false);
+        this.syncSize();
+    },this);
 };
 Ext.extend(MODx.window.QuickCreateResource,MODx.Window);
 Ext.reg('modx-window-quick-create-modResource',MODx.window.QuickCreateResource);
@@ -338,6 +347,7 @@ MODx.window.QuickUpdateResource = function(config) {
         ,width: 600
         ,url: MODx.config.connectors_url+'resource/index.php'
         ,action: 'update'
+        ,autoHeight: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -368,8 +378,10 @@ MODx.window.QuickUpdateResource = function(config) {
             ,title: _('settings')
             ,collapsible: true
             ,collapsed: true
+            ,animCollapse: true
             ,xtype: 'fieldset'
             ,autoHeight: true
+            ,forceLayout: true
             ,defaults: { autoHeight: true ,border: false }
             ,items: MODx.getQRSettings(this.ident,config.record)
         }]

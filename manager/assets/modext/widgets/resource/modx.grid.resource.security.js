@@ -9,9 +9,8 @@
  */
 MODx.grid.ResourceSecurity = function(config) {
     config = config || {};
-    var ac = MODx.load({
-        xtype: 'checkbox-column'
-        ,header: _('access')
+    var ac = new Ext.ux.grid.CheckColumn({
+        header: _('access')
         ,dataIndex: 'access'
         ,width: 40
         ,sortable: false

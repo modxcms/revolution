@@ -33,7 +33,7 @@ MODx.page.CreateTemplate = function(config) {
 		,loadStay: true
         ,components: [{
             xtype: 'modx-panel-template'
-            ,renderTo: 'modx-panel-template'
+            ,renderTo: 'modx-panel-template-div'
             ,template: 0
             ,category: config.category || 0
             ,name: ''

@@ -9,7 +9,7 @@ MODx.page.EditFile = function(config) {
     Ext.applyIf(config,{
         components: [{
             xtype: 'panel-file-edit'
-            ,renderTo: 'panel-file-edit'
+            ,renderTo: 'panel-file-edit-div'
             ,file: config.file
         }]
     });
@@ -73,7 +73,7 @@ MODx.panel.EditFile = function(config) {
         }]
     });
     MODx.panel.EditFile.superclass.constructor.call(this,config);
-    Ext.getCmp('modx-file-tree-panel').expand();
+    Ext.getCmp('modx_file_tree').expand();
     this.config = config;
     this.setup();
 };

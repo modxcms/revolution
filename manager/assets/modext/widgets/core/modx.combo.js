@@ -582,7 +582,6 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
         if (this.browser === null) {
             this.browser = MODx.load({
                 xtype: 'modx-browser'
-                ,el: this.config.browserEl
                 ,prependPath: this.config.prependPath || null
                 ,prependUrl: this.config.prependUrl || null
                 ,hideFiles: this.config.hideFiles || false
@@ -595,7 +594,7 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 }
             });
         }
-        this.browser.show(this.config.browserEl);
+        this.browser.show();
     }
     
     ,onDestroy: function(){
@@ -677,10 +676,10 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         
         this.setValue(_('resource_parent_select_node'));
         
-        Ext.getCmp('modx-resource-tree-panel').expand();
-        
+        t.expand();
         t.removeListener('click',t._handleClick,t);
         t.on('click',this.handleChangeParent,this);
+        t.disableHref = true;
     }
     
     
@@ -690,6 +689,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         
         var t = Ext.getCmp('modx_resource_tree');
         if (!t) return;
+        t.disableHref = true;
         
         var id = node.id.split('_'); id = id[1];
         if (id == MODx.request.id) {
@@ -704,6 +704,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         t.on('click',t._handleClick,t);
         
         Ext.getCmp('modx-panel-resource').fireEvent('fieldChange');
+        t.disableHref = false;
         return false;
     }
 });

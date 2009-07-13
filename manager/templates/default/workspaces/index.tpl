@@ -1,1 +1,1 @@
-<div id="modx-panel-workspace"></div>
+<div id="modx-panel-workspace-div"></div>

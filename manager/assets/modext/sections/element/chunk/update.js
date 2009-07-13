@@ -32,7 +32,7 @@ MODx.page.UpdateChunk = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-chunk'
-            ,renderTo: 'modx-panel-chunk'
+            ,renderTo: 'modx-panel-chunk-div'
             ,chunk: config.id
             ,name: config.name
             ,baseParams: { action: 'update' ,id: config.id }

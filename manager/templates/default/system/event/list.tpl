@@ -1,1 +1,1 @@
-<div id="modx-panel-error-log"></div>
+<div id="modx-panel-error-log-div"></div>

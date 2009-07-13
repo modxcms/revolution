@@ -31,7 +31,6 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.grid.element.properties.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.element.properties.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.snippet.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/snippet/common.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/snippet/create.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">

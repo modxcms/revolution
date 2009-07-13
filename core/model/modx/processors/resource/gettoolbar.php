@@ -65,4 +65,6 @@ if ($modx->hasPermission('purge_deleted')) {
         'handler' => 'this.emptyRecycleBin',
     );
 }
-return $modx->toJSON($items);
+
+return $this->outputArray($items);
+//return $modx->error->success('',$items);

@@ -9,9 +9,8 @@
 MODx.grid.PluginEvent = function(config) {
     config = config || {};
     this.ident = config.ident || 'grid-pluge'+Ext.id();
-    var ec = MODx.load({
-        xtype: 'checkbox-column'
-        ,header: _('enabled')
+    var ec = new Ext.ux.grid.CheckColumn({
+        header: _('enabled')
         ,dataIndex: 'enabled'
         ,editable: true
         ,width: 80
@@ -29,8 +28,7 @@ MODx.grid.PluginEvent = function(config) {
             plugin: config.plugin
         }
         ,enableColumnResize: true
-        ,enableColumnMove: true
-        
+        ,enableColumnMove: true        
         ,fields: ['id','name','service','groupname','enabled','priority','propertyset','menu']
         ,paging: true
         ,remoteSort: true
@@ -126,7 +124,7 @@ MODx.window.UpdatePluginEvent = function(config) {
         ,id: 'modx-window-plugin-event-update'
         ,url: MODx.config.connectors_url+'element/plugin/event.php'
         ,action: 'associate'
-        ,height: 250
+        ,autoHeight: true
         ,width: 600
         ,fields: [{
             xtype: 'hidden'
@@ -137,24 +135,17 @@ MODx.window.UpdatePluginEvent = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'statictextfield'
-            ,width: 150
+            ,width: 300
         },{
-            id: 'modx-grid-'+this.ident+'-assoc-ct'
+            xtype: 'modx-grid-plugin-event-assoc'
+            ,id: 'modx-grid-'+this.ident+'-assoc'
             ,autoHeight: true
+            ,plugin: config.plugin
         }]
     });
     MODx.window.UpdatePluginEvent.superclass.constructor.call(this,config);
     this.on('show',this.onShow,this);
     this.on('beforeSubmit',this.beforeSubmit,this);
-    (function() {
-    MODx.load({
-        xtype: 'modx-grid-plugin-event-assoc'
-        ,id: 'modx-grid-'+this.ident+'-assoc'
-        ,autoHeight: true
-        ,plugin: config.plugin
-        ,renderTo: 'modx-grid-'+this.ident+'-assoc-ct'
-    });
-    }).defer(50,this);
 };
 Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
     onShow: function() {

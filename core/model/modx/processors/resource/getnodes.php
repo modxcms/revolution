@@ -69,7 +69,7 @@ while ($item) {
             $menu = array();
             if ($modx->hasPermission('edit_context')) {
                 $menu[] = array(
-                    'id' => 'cm-context-edit',
+                   // 'id' => 'cm-context-edit',
                     'text' => $modx->lexicon('edit_context'),
                     'handler' => 'function() {
                         this.loadAction("a=' . $actions['context/update']
@@ -93,7 +93,7 @@ while ($item) {
                     'menu' => array(
                         'items' => array(
                             array(
-                                'id' => 'cm-context-resource-create',
+                               // 'id' => 'cm-context-resource-create',
                                 'text' => $modx->lexicon('document_create_here'),
                                 'scope' => 'this',
                                 'handler' => 'function() {
@@ -104,7 +104,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-context-weblink-create',
+                               // 'id' => 'cm-context-weblink-create',
                                 'text' => $modx->lexicon('weblink_create_here'),
                                 'handler' => 'function() {
                                     Ext.getCmp("modx_resource_tree").loadAction("'
@@ -114,7 +114,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-context-symlink-create',
+                               // 'id' => 'cm-context-symlink-create',
                                 'text' => $modx->lexicon('symlink_create_here'),
                                 'handler' => 'function() {
                                     Ext.getCmp("modx_resource_tree").loadAction("'
@@ -124,7 +124,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-context-staticresource-create',
+                               // 'id' => 'cm-context-staticresource-create',
                                 'text' => $modx->lexicon('static_resource_create_here'),
                                 'handler' => 'function() {
                                     Ext.getCmp("modx_resource_tree").loadAction("'
@@ -142,7 +142,7 @@ while ($item) {
                     'menu' => array(
                         'items' => array(
                             array(
-                                'id' => 'cm-context-resource-qcreate',
+                               // 'id' => 'cm-context-resource-qcreate',
                                 'text' => $modx->lexicon('resource'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
@@ -150,7 +150,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-weblink-qcreate',
+                              //  'id' => 'cm-weblink-qcreate',
                                 'text' => $modx->lexicon('weblink'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
@@ -158,7 +158,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-symlink-qcreate',
+                             //   'id' => 'cm-symlink-qcreate',
                                 'text' => $modx->lexicon('symlink'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
@@ -166,7 +166,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-static-qcreate',
+                             //   'id' => 'cm-static-qcreate',
                                 'text' => $modx->lexicon('static_resource'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
@@ -197,7 +197,7 @@ while ($item) {
 
             $menu = array();
             $menu[] = array(
-                'id' => 'cm-resource-header',
+               // 'id' => 'cm-resource-header',
                 'text' => '<b>'.$item->pagetitle.'</b> <i>('.$item->id.')</i>',
                 'params' => '',
                 'handler' => 'function() { return false; }',
@@ -206,7 +206,7 @@ while ($item) {
             $menu[] = '-';
             if ($modx->hasPermission('view_document')) {
                 $menu[] = array(
-                    'id' => 'cm-resource-view',
+                    //'id' => 'cm-resource-view',
                     'text' => $modx->lexicon('resource_view'),
                     'handler' => 'function() {
                         this.loadAction("a='.$actions['resource/data'].'");
@@ -215,14 +215,14 @@ while ($item) {
             }
             if ($modx->hasPermission('edit_document')) {
                 $menu[] = array(
-                    'id' => 'cm-resource-edit',
+                   // 'id' => 'cm-resource-edit',
                     'text' => $modx->lexicon('resource_edit'),
                     'handler' => 'function() {
                         this.loadAction("a='.$actions['resource/update'].'");
                     }',
                 );
                 $menu[] = array(
-                    'id' => 'cm-context-resource-qupdate',
+                   // 'id' => 'cm-context-resource-qupdate',
                     'text' => $modx->lexicon('quick_update_resource'),
                     'handler' => 'function(itm,e) {
                         Ext.getCmp("modx_resource_tree").quickUpdate(itm,e,"'.$item->get('class_key').'","'.$item->get('key').'","'.$item->get('id').'");
@@ -231,7 +231,7 @@ while ($item) {
             }
             if ($modx->hasPermission('new_document')) {
                 $menu[] = array(
-                    'id' => 'cm-resource-duplicate',
+                   // 'id' => 'cm-resource-duplicate',
                     'text' => $modx->lexicon('resource_duplicate'),
                     'handler' => 'function(itm,e) {
                         this.duplicateResource(itm,e);
@@ -239,7 +239,7 @@ while ($item) {
                 );
             }
             $menu[] = array(
-                'id' => 'cm-resource-refresh',
+               // 'id' => 'cm-resource-refresh',
                 'text' => $modx->lexicon('resource_refresh'),
                 'handler' => 'function() {
                     this.refreshNode("'.$item->context_key.'_'.$item->id.'");
@@ -256,7 +256,7 @@ while ($item) {
                     'menu' => array(
                         'items' => array(
                             array(
-                                'id' => 'cm-resource-create',
+                              //  'id' => 'cm-resource-create',
                                 'text' => $modx->lexicon('document_create_here'),
                                 'scope' => 'this',
                                 'handler' => 'function() {
@@ -268,7 +268,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-weblink-create',
+                              //  'id' => 'cm-weblink-create',
                                 'text' => $modx->lexicon('weblink_create_here'),
                                 'handler' => 'function() {
                                     Ext.getCmp("modx_resource_tree").loadAction("'
@@ -279,7 +279,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-symlink-create',
+                               // 'id' => 'cm-symlink-create',
                                 'text' => $modx->lexicon('symlink_create_here'),
                                 'handler' => 'function() {
                                     Ext.getCmp("modx_resource_tree").loadAction("'
@@ -290,7 +290,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-staticresource-create',
+                              //  'id' => 'cm-staticresource-create',
                                 'text' => $modx->lexicon('static_resource_create_here'),
                                 'handler' => 'function() {
                                     Ext.getCmp("modx_resource_tree").loadAction("'
@@ -310,7 +310,7 @@ while ($item) {
                     'menu' => array(
                         'items' => array(
                             array(
-                                'id' => 'cm-resource-qcreate',
+                              //  'id' => 'cm-resource-qcreate',
                                 'text' => $modx->lexicon('resource'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
@@ -318,7 +318,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-weblink-qcreate',
+                             //   'id' => 'cm-weblink-qcreate',
                                 'text' => $modx->lexicon('weblink'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
@@ -326,7 +326,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-symlink-qcreate',
+                              //  'id' => 'cm-symlink-qcreate',
                                 'text' => $modx->lexicon('symlink'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
@@ -334,7 +334,7 @@ while ($item) {
                                 }',
                             ),
                             array(
-                                'id' => 'cm-static-qcreate',
+                              //  'id' => 'cm-static-qcreate',
                                 'text' => $modx->lexicon('static_resource'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
@@ -350,7 +350,7 @@ while ($item) {
 
             if ($item->get('published') && $modx->hasPermission('save_document')) {
                 $menu[] = array(
-                    'id' => 'cm-resource-unpublish',
+                 //   'id' => 'cm-resource-unpublish',
                     'text' => $modx->lexicon('resource_unpublish'),
                     'handler' => 'function(itm,e) {
                         this.unpublishDocument(itm,e);
@@ -358,7 +358,7 @@ while ($item) {
                 );
             } elseif ($modx->hasPermission('save_document')) {
                 $menu[] = array(
-                    'id' => 'cm-resource-publish',
+                   // 'id' => 'cm-resource-publish',
                     'text' => $modx->lexicon('resource_publish'),
                     'handler' => 'function(itm,e) {
                         this.publishDocument(itm,e);
@@ -367,7 +367,7 @@ while ($item) {
             }
             if ($item->get('deleted') && $modx->hasPermission('save_document')) {
                 $menu[] = array(
-                    'id' => 'cm-resource-undelete',
+                  //  'id' => 'cm-resource-undelete',
                     'text' => $modx->lexicon('resource_undelete'),
                     'handler' => 'function(itm,e) {
                         this.undeleteDocument(itm,e);
@@ -375,7 +375,7 @@ while ($item) {
                 );
             } elseif ($modx->hasPermission('save_document')) {
                 $menu[] = array(
-                    'id' => 'cm-resource-delete',
+                   // 'id' => 'cm-resource-delete',
                     'text' => $modx->lexicon('resource_delete'),
                     'handler' => 'function(itm,e) {
                         this.deleteDocument(itm,e);

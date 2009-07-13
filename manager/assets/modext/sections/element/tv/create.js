@@ -31,7 +31,7 @@ MODx.page.CreateTV = function(config) {
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-tv'
-            ,renderTo: 'modx-panel-tv'
+            ,renderTo: 'modx-panel-tv-div'
             ,tv: 0
             ,category: config.category || 0
             ,name: ''

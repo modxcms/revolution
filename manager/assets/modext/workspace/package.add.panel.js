@@ -11,9 +11,6 @@ MODx.window.PackageDownloader = function(config) {
     Ext.applyIf(config,{
         title: _('package_retriever')
         ,id: 'modx-window-package-downloader'
-        ,layout: 'card'
-        ,activeItem: 0
-        ,closeAction: 'hide'
         ,resizable: true
         ,collapsible: true
         ,maximizable: true
@@ -21,20 +18,8 @@ MODx.window.PackageDownloader = function(config) {
         ,width: '90%'
         ,firstPanel: 'modx-pd-start'
         ,lastPanel: 'modx-pd-selpackage'
-        ,defaults: { border: false }
+        ,bodyStyle: 'background-color: white;'
         ,modal: Ext.isIE ? false : true
-        ,bbar: [{
-            id: 'modx-pd-btn-bck'
-            ,text: _('back')
-            ,handler: this.navHandler.createDelegate(this,[-1])
-            ,scope: this
-            ,disabled: true
-        },{
-            id: 'modx-pd-btn-fwd'
-            ,text: _('next')
-            ,handler: this.navHandler.createDelegate(this,[1])
-            ,scope: this
-        }]
         ,items: [{
             xtype: 'modx-panel-pd-first'
         },{
@@ -46,45 +31,8 @@ MODx.window.PackageDownloader = function(config) {
         }]
     });
     MODx.window.PackageDownloader.superclass.constructor.call(this,config);
-    this.config = config;
-    this.lastActiveItem = this.config.firstPanel;
-    this.on('show',this.onShow,this);
 };
-Ext.extend(MODx.window.PackageDownloader,Ext.Window,{
-    windows: {}
-    
-    ,onShow: function() {
-        this.getBottomToolbar().items.item(1).setText(_('next'));
-        this.proceed('modx-pd-start');
-    }
-    
-    ,navHandler: function(dir) {
-        this.doLayout();
-        var a = this.getLayout().activeItem;
-        if (dir === -1) {
-            this.proceed(a.config.back || a.config.id);
-        } else {
-            a.submit({
-                scope: this
-                ,proceed: this.proceed
-            });
-        }
-    }
-    
-    ,proceed: function(id) {
-        this.getLayout().setActiveItem(id);
-        if (id === this.config.firstPanel) {
-            this.getBottomToolbar().items.item(0).setDisabled(true);
-        } else if (id === this.config.lastPanel) {
-            this.getBottomToolbar().items.item(1).setText(_('finish'));
-        } else {
-            this.getBottomToolbar().items.item(0).setDisabled(false);
-            this.getBottomToolbar().items.item(1).setText(_('next'));
-        }
-        this.doLayout();
-        this.center();
-    }
-});
+Ext.extend(MODx.window.PackageDownloader,MODx.Wizard);
 Ext.reg('modx-window-package-downloader',MODx.window.PackageDownloader);
 
 
@@ -93,9 +41,7 @@ MODx.panel.PDFirst = function(config) {
     Ext.applyIf(config,{
         id: 'modx-pd-start'
         ,back: 'modx-pd-start'
-        ,autoHeight: true
         ,defaults: { labelSeparator: '', border: false ,autoHeight: true }
-        ,bodyStyle: 'padding: 3em 3em'
         ,items: [{
             html: '<h2>'+_('package_retriever')+'</h2>'
             ,autoHeight: true
@@ -125,9 +71,8 @@ MODx.panel.PDFirst = function(config) {
         }]
     });
     MODx.panel.PDFirst.superclass.constructor.call(this,config);
-    this.config = config;
 };
-Ext.extend(MODx.panel.PDFirst,Ext.FormPanel,{
+Ext.extend(MODx.panel.PDFirst,MODx.panel.WizardPanel,{
     submit: function(o) {
         var va = this.getForm().getValues();
         if (!va.method) {
@@ -135,7 +80,7 @@ Ext.extend(MODx.panel.PDFirst,Ext.FormPanel,{
         } else if (va.method === 'local') {
            this.searchLocal();
         } else {
-           Ext.callback(o.proceed,o.scope || this,['modx-pd-'+va.method]);
+            Ext.getCmp('modx-window-package-downloader').fireEvent('proceed','modx-pd-'+va.method);
         }
     }
     
@@ -164,10 +109,7 @@ MODx.panel.PDSelProv = function(config) {
     Ext.applyIf(config,{
         id: 'modx-pd-selprov'
         ,back: 'modx-pd-start'
-        ,autoHeight: true
-        ,hideMode:'offsets'
         ,defaults: {border: false}
-        ,bodyStyle: 'padding: 3em'
         ,items: [{
             html: '<h2>'+ _('provider_select')+'</h2>'
             ,autoHeight: true
@@ -192,15 +134,14 @@ MODx.panel.PDSelProv = function(config) {
         }]
     });
     MODx.panel.PDSelProv.superclass.constructor.call(this,config);
-    this.config = config;
 };
-Ext.extend(MODx.panel.PDSelProv,Ext.FormPanel,{
+Ext.extend(MODx.panel.PDSelProv,MODx.panel.WizardPanel,{
     submit: function(o) {
         if (this.getForm().isValid()) {
             var vs = this.getForm().getValues();
+            Ext.getCmp('modx-window-package-downloader').fireEvent('proceed','modx-pd-selpackage');
             Ext.getCmp('modx-tree-package-download').setProvider(vs.provider);
             Ext.getCmp('modx-pd-selpackage').provider = vs.provider;
-            Ext.callback(o.proceed,o.scope || this,['modx-pd-selpackage']);
         }
     }
 });
@@ -212,9 +153,7 @@ MODx.panel.PDNewProv = function(config) {
     Ext.applyIf(config,{
         id: 'modx-pd-newprov'
         ,back: 'modx-pd-start'
-        ,autoHeight: true
         ,defaults: { border: false }
-        ,bodyStyle: 'padding: 3em'
         ,url: MODx.config.connectors_url+'workspace/providers.php'
         ,baseParams: {
             action: 'create'
@@ -246,9 +185,8 @@ MODx.panel.PDNewProv = function(config) {
         }]
     });
     MODx.panel.PDNewProv.superclass.constructor.call(this,config);
-    this.config = config;
 };
-Ext.extend(MODx.panel.PDNewProv,Ext.FormPanel,{
+Ext.extend(MODx.panel.PDNewProv,MODx.panel.WizardPanel,{
     submit: function(o) {
         if (this.getForm().isValid()) {
             this.getForm().submit({
@@ -259,10 +197,9 @@ Ext.extend(MODx.panel.PDNewProv,Ext.FormPanel,{
                 }
                 ,success: function(f,a) {
                     var p = a.result.object;
+                    Ext.getCmp('modx-window-package-downloader').fireEvent('proceed','modx-pd-selpackage');
                     Ext.getCmp('modx-tree-package-download').setProvider(p.id);
                     Ext.getCmp('modx-pd-selpackage').provider = p.id;
-                    Ext.callback(o.proceed,o.scope || this,['modx-pd-selpackage']);
-                    Ext.getCmp('modx-window-package-downloader').center();
                 }
             });
         }
@@ -277,12 +214,11 @@ MODx.panel.PDSelPackage = function(config) {
     Ext.applyIf(config,{
         id: 'modx-pd-selpackage'
         ,back: 'modx-pd-selprov'
-        ,autoHeight: true
-        ,bodyStyle: 'padding: 3em'
         ,url: MODx.config.connectors_url+'workspace/providers.php'
         ,baseParams: {
             action: 'download'
         }
+        ,autoHeight: true
         ,items: [{
             html: '<h2>'+_('package_select_download')+'</h2>'
             ,id: 'modx-pdselpackage-header'
@@ -299,13 +235,18 @@ MODx.panel.PDSelPackage = function(config) {
         }]
     });
     MODx.panel.PDSelPackage.superclass.constructor.call(this,config);
-    this.config = config;
+    this.on('show',function() {
+        var pd = Ext.getCmp('modx-window-package-downloader');
+        pd.setHeight(600);
+        pd.center();
+    },this);
+    
 };
-Ext.extend(MODx.panel.PDSelPackage,Ext.FormPanel,{
+Ext.extend(MODx.panel.PDSelPackage,MODx.panel.WizardPanel,{
     provider: null
     
     ,submit: function(o) {
-        var pkgs = Ext.getCmp('modx-tree-package-download').encode();        
+        var pkgs = Ext.getCmp('modx-tree-package-download').encode();
         if (pkgs.length > 0) {
             this.getForm().submit({
                 waitMsg: _('downloading')

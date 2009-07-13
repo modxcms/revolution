@@ -458,47 +458,101 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
 });
 
 
-
-/*
- * Ext JS Library 2.0.2
- * Copyright(c) 2006-2008, Ext JS, LLC.
+/*!
+ * Ext JS Library 3.0.0
+ * Copyright(c) 2006-2009 Ext JS, LLC
  * licensing@extjs.com
- * 
- * http://extjs.com/license
+ * http://www.extjs.com/license
  */
-Ext.grid.RowExpander = function(config){
-    Ext.apply(this, config);
+Ext.ns('Ext.ux.grid');
 
-    this.addEvents({
-        beforeexpand : true,
-        expand: true,
-        beforecollapse: true,
-        collapse: true
-    });
+/**
+ * @class Ext.ux.grid.RowExpander
+ * @extends Ext.util.Observable
+ * Plugin (ptype = 'rowexpander') that adds the ability to have a Column in a grid which enables
+ * a second row body which expands/contracts.  The expand/contract behavior is configurable to react
+ * on clicking of the column, double click of the row, and/or hitting enter while a row is selected.
+ *
+ * @ptype rowexpander
+ */
+Ext.ux.grid.RowExpander = Ext.extend(Ext.util.Observable, {
+    /**
+     * @cfg {Boolean} expandOnEnter
+     * <tt>true</tt> to toggle selected row(s) between expanded/collapsed when the enter
+     * key is pressed (defaults to <tt>true</tt>).
+     */
+    expandOnEnter : true,
+    /**
+     * @cfg {Boolean} expandOnDblClick
+     * <tt>true</tt> to toggle a row between expanded/collapsed when double clicked
+     * (defaults to <tt>true</tt>).
+     */
+    expandOnDblClick : true,
 
-    Ext.grid.RowExpander.superclass.constructor.call(this);
-
-    if(this.tpl){
-        if(typeof this.tpl == 'string'){
-            this.tpl = new Ext.Template(this.tpl);
-        }
-        this.tpl.compile();
-    }
-
-    this.state = {};
-    this.bodyContent = {};
-};
-
-Ext.extend(Ext.grid.RowExpander, Ext.util.Observable, {
-    header: "",
-    width: 20,
-    sortable: false,
-    fixed:true,
-    menuDisabled:true,
-    dataIndex: '',
-    id: 'expander',
+    header : '',
+    width : 20,
+    sortable : false,
+    fixed : true,
+    menuDisabled : true,
+    dataIndex : '',
+    id : 'expander',
     lazyRender : true,
-    enableCaching: true,
+    enableCaching : true,
+
+    constructor: function(config){
+        Ext.apply(this, config);
+
+        this.addEvents({
+            /**
+             * @event beforeexpand
+             * Fires before the row expands. Have the listener return false to prevent the row from expanding.
+             * @param {Object} this RowExpander object.
+             * @param {Object} Ext.data.Record Record for the selected row.
+             * @param {Object} body body element for the secondary row.
+             * @param {Number} rowIndex The current row index.
+             */
+            beforeexpand: true,
+            /**
+             * @event expand
+             * Fires after the row expands.
+             * @param {Object} this RowExpander object.
+             * @param {Object} Ext.data.Record Record for the selected row.
+             * @param {Object} body body element for the secondary row.
+             * @param {Number} rowIndex The current row index.
+             */
+            expand: true,
+            /**
+             * @event beforecollapse
+             * Fires before the row collapses. Have the listener return false to prevent the row from collapsing.
+             * @param {Object} this RowExpander object.
+             * @param {Object} Ext.data.Record Record for the selected row.
+             * @param {Object} body body element for the secondary row.
+             * @param {Number} rowIndex The current row index.
+             */
+            beforecollapse: true,
+            /**
+             * @event collapse
+             * Fires after the row collapses.
+             * @param {Object} this RowExpander object.
+             * @param {Object} Ext.data.Record Record for the selected row.
+             * @param {Object} body body element for the secondary row.
+             * @param {Number} rowIndex The current row index.
+             */
+            collapse: true
+        });
+
+        Ext.ux.grid.RowExpander.superclass.constructor.call(this);
+
+        if(this.tpl){
+            if(typeof this.tpl == 'string'){
+                this.tpl = new Ext.Template(this.tpl);
+            }
+            this.tpl.compile();
+        }
+
+        this.state = {};
+        this.bodyContent = {};
+    },
 
     getRowClass : function(record, rowIndex, p, ds){
         p.cols = p.cols-1;
@@ -520,9 +574,47 @@ Ext.extend(Ext.grid.RowExpander, Ext.util.Observable, {
 
         view.enableRowBody = true;
 
-        grid.on('render', function(){
-            view.mainBody.on('mousedown', this.onMouseDown, this);
-        }, this);
+
+        grid.on('render', this.onRender, this);
+        grid.on('destroy', this.onDestroy, this);
+    },
+
+    // @private
+    onRender: function() {
+        var grid = this.grid;
+        var mainBody = grid.getView().mainBody;
+        mainBody.on('mousedown', this.onMouseDown, this, {delegate: '.x-grid3-row-expander'});
+        if (this.expandOnEnter) {
+            this.keyNav = new Ext.KeyNav(this.grid.getGridEl(), {
+                'enter' : this.onEnter,
+                scope: this
+            });
+        }
+        if (this.expandOnDblClick) {
+            grid.on('rowdblclick', this.onRowDblClick, this);
+        }
+    },
+    
+    // @private    
+    onDestroy: function() {
+        this.keyNav.disable();
+        delete this.keyNav;
+        var mainBody = this.grid.getView().mainBody;
+        mainBody.un('mousedown', this.onMouseDown, this);
+    },
+    // @private
+    onRowDblClick: function(grid, rowIdx, e) {
+        this.toggleRow(rowIdx);
+    },
+
+    onEnter: function(e) {
+        var g = this.grid;
+        var sm = g.getSelectionModel();
+        var sels = sm.getSelections();
+        for (var i = 0, len = sels.length; i < len; i++) {
+            var rowIdx = g.getStore().indexOf(sels[i]);
+            this.toggleRow(rowIdx);
+        }
     },
 
     getBodyContent : function(record, index){
@@ -538,16 +630,13 @@ Ext.extend(Ext.grid.RowExpander, Ext.util.Observable, {
     },
 
     onMouseDown : function(e, t){
-        if(t.className == 'x-grid3-row-expander'){
-            e.stopEvent();
-            var row = e.getTarget('.x-grid3-row');
-            this.toggleRow(row);
-        }
+        e.stopEvent();
+        var row = e.getTarget('.x-grid3-row');
+        this.toggleRow(row);
     },
 
     renderer : function(v, p, record){
         p.cellAttr = 'rowspan="2"';
-        if (record.data.description !== null && record.data.description === '') { return ''; }
         return '<div class="x-grid3-row-expander">&#160;</div>';
     },
 
@@ -594,29 +683,30 @@ Ext.extend(Ext.grid.RowExpander, Ext.util.Observable, {
             this.fireEvent('collapse', this, record, body, row.rowIndex);
         }
     }
-    ,expandAll : function() {
-        var aRows = this.grid.getView().getRows();
-        for(var i = 0; i < aRows.length; i++) {
-            this.expandRow(aRows[i]);
-        }
-    }
-    ,collapseAll : function() {
-        var aRows = this.grid.getView().getRows();
-        for(var i = 0; i < aRows.length; i++) {
-            this.collapseRow(aRows[i]);
-        }
-    }
 });
 
-Ext.grid.CheckColumn = function(config){
+Ext.preg('rowexpander', Ext.ux.grid.RowExpander);
+//backwards compat
+Ext.grid.RowExpander = Ext.ux.grid.RowExpander;
+/*!
+ * Ext JS Library 3.0.0
+ * Copyright(c) 2006-2009 Ext JS, LLC
+ * licensing@extjs.com
+ * http://www.extjs.com/license
+ */
+Ext.ns('Ext.ux.grid');
+/**
+ * Checkcolumn for ext3
+ */
+Ext.ux.grid.CheckColumn = function(config){
     Ext.apply(this, config);
     if(!this.id){
         this.id = Ext.id();
     }
     this.renderer = this.renderer.createDelegate(this);
-    Ext.grid.CheckColumn.superclass.constructor.call(this,config);
 };
-Ext.extend(Ext.grid.CheckColumn,Ext.Component,{
+
+Ext.ux.grid.CheckColumn.prototype ={
     init : function(grid){
         this.grid = grid;
         this.grid.on('render', function(){
@@ -631,7 +721,6 @@ Ext.extend(Ext.grid.CheckColumn,Ext.Component,{
             var index = this.grid.getView().findRowIndex(t);
             var record = this.grid.store.getAt(index);
             record.set(this.dataIndex, !record.data[this.dataIndex]);
-            this.grid.fireEvent('afteredit');
         }
     },
 
@@ -639,5 +728,120 @@ Ext.extend(Ext.grid.CheckColumn,Ext.Component,{
         p.css += ' x-grid3-check-col-td'; 
         return '<div class="x-grid3-check-col'+(v?'-on':'')+' x-grid3-cc-'+this.id+'">&#160;</div>';
     }
+};
+
+// register ptype
+Ext.preg('checkcolumn', Ext.ux.grid.CheckColumn);
+
+// backwards compat
+Ext.grid.CheckColumn = Ext.ux.grid.CheckColumn;
+
+
+/**
+ * Fix for property grid
+ */
+Ext.grid.PropertyColumnModel = function(grid, store){
+    var g = Ext.grid,
+        f = Ext.form;
+        
+    this.grid = grid;
+    g.PropertyColumnModel.superclass.constructor.call(this, [
+        {header: this.nameText, width:50, sortable: true, dataIndex:'name', id: 'name', menuDisabled:true},
+        {header: this.valueText, width:50, resizable:false, dataIndex: 'value', id: 'value', menuDisabled:true}
+    ]);
+    this.store = store;
+
+    var bfield = new f.Field({
+        autoCreate: {tag: 'select', children: [
+            {tag: 'option', value: 'true', html: 'true'},
+            {tag: 'option', value: 'false', html: 'false'}
+        ]},
+        getValue : function(){
+            return this.el.dom.value == 'true';
+        }
+    });
+    this.editors = {
+        'date' : new g.GridEditor(new f.DateField({selectOnFocus:true})),
+        'string' : new g.GridEditor(new f.TextField({selectOnFocus:true})),
+        'number' : new g.GridEditor(new f.NumberField({selectOnFocus:true, style:'text-align:left;'})),
+        'boolean' : new g.GridEditor(bfield)
+    };
+    this.renderCellDelegate = this.renderCell.createDelegate(this);
+    this.renderPropDelegate = this.renderProp.createDelegate(this);
+};
+Ext.extend(Ext.grid.PropertyColumnModel, Ext.grid.ColumnModel, {
+    // private - strings used for locale support
+    nameText : 'Name',
+    valueText : 'Value',
+    dateFormat : 'm/j/Y',
+
+    // private
+    renderDate : function(dateVal){
+        return dateVal.dateFormat(this.dateFormat);
+    },
+
+    // private
+    renderBool : function(bVal){
+        return bVal ? 'true' : 'false';
+    },
+
+    // private
+    isCellEditable : function(colIndex, rowIndex){
+        return colIndex == 1;
+    },
+
+    // private
+    getRenderer : function(col){
+        return col == 1 ?
+            this.renderCellDelegate : this.renderPropDelegate;
+    },
+
+    // private
+    renderProp : function(v){
+        return this.getPropertyName(v);
+    },
+
+    // private
+    renderCell : function(val){
+        var rv = val;
+        if(Ext.isDate(val)){
+            rv = this.renderDate(val);
+        }else if(typeof val == 'boolean'){
+            rv = this.renderBool(val);
+        }
+        return Ext.util.Format.htmlEncode(rv);
+    },
+
+    // private
+    getPropertyName : function(name){
+        var pn = this.grid.propertyNames;
+        return pn && pn[name] ? pn[name] : name;
+    },
+
+    // private
+    getCellEditor : function(colIndex, rowIndex){
+        var p = this.store.getProperty(rowIndex),
+            n = p.data.name, 
+            val = p.data.value;
+        if(this.grid.customEditors[n]){
+            return this.grid.customEditors[n];
+        }
+        if(Ext.isDate(val)){
+            return this.editors.date;
+        }else if(typeof val == 'number'){
+            return this.editors.number;
+        }else if(typeof val == 'boolean'){
+            return this.editors['boolean'];
+        }else{
+            return this.editors.string;
+        }
+    },
+
+    // inherit docs
+    destroy : function(){
+        Ext.grid.PropertyColumnModel.superclass.destroy.call(this);
+        for(var ed in this.editors){
+            Ext.destroy(ed);
+        }
+    }
 });
-Ext.reg('checkbox-column',Ext.grid.CheckColumn);

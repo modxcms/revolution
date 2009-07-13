@@ -1,1 +1,1 @@
-<div id="modx-panel-manager-log"></div>
+<div id="modx-panel-manager-log-div"></div>

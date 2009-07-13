@@ -26,7 +26,6 @@ $welcome_back = $modx->lexicon('welcome_back',array('name' => $modx->getLoginUse
 $modx->smarty->assign('welcome_back',$welcome_back);
 unset($welcome_back);
 
-
 /* register JS scripts */
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">

@@ -147,7 +147,8 @@ Ext.ux.form.BrowseButton = Ext.extend(Ext.Button, {
 	 */
 	onRender: function(ct, position){
 		Ext.ux.form.BrowseButton.superclass.onRender.call(this, ct, position); // render the Ext.Button
-		this.buttonCt = this.el.child('.x-btn-center em');
+		//this.buttonCt = this.el.child('.x-btn-center em');
+        this.buttonCt = this.el.child('.x-btn-mc em');
 		this.buttonCt.position('relative'); // this is important!
 		var styleCfg = {
 			position: 'absolute',

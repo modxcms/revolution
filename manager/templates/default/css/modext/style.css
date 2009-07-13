@@ -22,8 +22,9 @@
 
 /* context menus */
 .x-menu a.x-menu-item {
-    font-size: 12px;
-    padding: 4px 21px 4px 3px;
+    font-size: 13px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 	}
 
 /* tabs */
@@ -46,9 +47,12 @@
 	padding-top: 4px;
 	} 
 	
-.modx-form .x-form-field-wrap .x-form-trigger {
-    height: 28px;
-    }
+.modx-form .x-form-trigger, .x-toolbar .x-form-trigger { height: 28px !important; }
+
+/* windows */
+.modx-window .x-form-item label { font-size: 13px; }
+.modx-window .x-form-text, .modx-window .x-form.textarea { font-size: 13px; }
+.ext-gecko .modx-form .x-form-text { padding-top: 4px; }
 
 /* grids */
 .modx-grid {}

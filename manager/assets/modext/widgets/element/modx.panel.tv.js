@@ -188,7 +188,7 @@ MODx.panel.TV = function(config) {
         }
     });
     MODx.panel.TV.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-element-tree-panel').expand();",1000);
+    setTimeout("Ext.getCmp('modx_element_tree').expand();",1000);
     this.on('render',function() { this.showParameters(); },this);
 };
 Ext.extend(MODx.panel.TV,MODx.FormPanel,{

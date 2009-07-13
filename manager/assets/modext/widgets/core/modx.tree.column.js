@@ -1,23 +1,29 @@
-
-/*
- * Ext JS Library 2.2
- * Copyright(c) 2006-2008, Ext JS, LLC.
+/*!
+ * Ext JS Library 3.0.0
+ * Copyright(c) 2006-2009 Ext JS, LLC
  * licensing@extjs.com
- * 
- * http://extjs.com/license
+ * http://www.extjs.com/license
  */
-Ext.tree.ColumnTree = Ext.extend(Ext.tree.TreePanel, {
-    lines:false,
-    borderWidth: Ext.isBorderBox ? 0 : 2, /* the combined left/right border for each cell */
-    cls:'x-column-tree modx-tree',
-    
+Ext.ns('Ext.ux.tree');
+
+/**
+ * @class Ext.ux.tree.ColumnTree
+ * @extends Ext.tree.TreePanel
+ * 
+ * @xtype columntree
+ */
+Ext.ux.tree.ColumnTree = Ext.extend(Ext.tree.TreePanel, {
+    lines : false,
+    borderWidth : Ext.isBorderBox ? 0 : 2, // the combined left/right border for each cell
+    cls : 'x-column-tree',
+
     onRender : function(){
         Ext.tree.ColumnTree.superclass.onRender.apply(this, arguments);
-        this.headers = this.body.createChild(
-            {cls:'x-tree-headers'},this.innerCt.dom);
+        this.headers = this.header.createChild({cls:'x-tree-headers'});
 
         var cols = this.columns, c;
         var totalWidth = 0;
+        var scrollOffset = 19; // similar to Ext.grid.GridView default
 
         for(var i = 0, len = cols.length; i < len; i++){
              c = cols[i];
@@ -32,13 +38,24 @@ Ext.tree.ColumnTree = Ext.extend(Ext.tree.TreePanel, {
              });
         }
         this.headers.createChild({cls:'x-clear'});
-        /* prevent floats from wrapping when clipped */
-        this.headers.setWidth(totalWidth);
+        // prevent floats from wrapping when clipped
+        this.headers.setWidth(totalWidth+scrollOffset);
         this.innerCt.setWidth(totalWidth);
     }
 });
-Ext.tree.ColumnNodeUI = Ext.extend(Ext.tree.TreeNodeUI, {
-    focus: Ext.emptyFn, /* prevent odd scrolling behavior */
+
+Ext.reg('columntree', Ext.ux.tree.ColumnTree);
+
+//backwards compat
+Ext.tree.ColumnTree = Ext.ux.tree.ColumnTree;
+
+
+/**
+ * @class Ext.ux.tree.ColumnNodeUI
+ * @extends Ext.tree.TreeNodeUI
+ */
+Ext.ux.tree.ColumnNodeUI = Ext.extend(Ext.tree.TreeNodeUI, {
+    focus: Ext.emptyFn, // prevent odd scrolling behavior
 
     renderElements : function(n, a, targetNode, bulkRender){
         this.indentMarkup = n.parentNode ? n.parentNode.ui.getChildIndent() : '';
@@ -47,6 +64,7 @@ Ext.tree.ColumnNodeUI = Ext.extend(Ext.tree.TreeNodeUI, {
         var cols = t.columns;
         var bw = t.borderWidth;
         var c = cols[0];
+
         var buf = [
              '<li class="x-tree-node"><div ext:tree-node-id="',n.id,'" class="x-tree-node-el x-tree-node-leaf ', a.cls,'">',
                 '<div class="x-tree-col" style="width:',c.width-bw,'px;">',
@@ -87,6 +105,9 @@ Ext.tree.ColumnNodeUI = Ext.extend(Ext.tree.TreeNodeUI, {
     }
 });
 
+//backwards compat
+Ext.tree.ColumnNodeUI = Ext.ux.tree.ColumnNodeUI;
+
 /**
  * @class MODx.tree.ColumnTree
  * @extends Ext.tree.ColumnTree
@@ -100,9 +121,10 @@ MODx.tree.ColumnTree = function(config) {
         rootVisible: false
         ,autoScroll: true
         ,autoHeight: true
-        ,root: new Ext.tree.AsyncTreeNode({
-            text: config.rootText || ''
-        })
+        ,root: {
+             nodeType: 'async'
+            ,text: config.rootText || ''
+        }
         ,loader: new Ext.tree.TreeLoader({
             dataUrl: config.url
             ,baseParams: config.baseParams || {}
@@ -127,7 +149,7 @@ MODx.tree.ColumnTree = function(config) {
     this.on('contextmenu',this._showContextMenu,this);
     this.on('nodedragover',this._handleDrop,this);
     this.on('nodedrop',this._handleDrag,this);
-    this.cm = new Ext.menu.Menu(Ext.id(),{});
+    this.cm = new Ext.menu.Menu();
     this.config = config;
 };
 Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{

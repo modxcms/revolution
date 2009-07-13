@@ -11,6 +11,7 @@ MODx.panel.Search = function(config) {
     Ext.applyIf(config,{
         id: 'modx-panel-search'
         ,bodyStyle: 'padding: 0'
+        ,autoHeight: true
         ,items: [{
             html: '<h2>'+_('search')+'</h2>'
             ,border: false
@@ -32,7 +33,8 @@ MODx.panel.Search = function(config) {
                 },{
                     xtype: 'modx-grid-search'
                     ,preventRender: true
-                    ,bodyStyle: ''
+                    ,bodyStyle: 'padding: 0'
+                    ,width: '98%'
                 }]
             }]
         }]

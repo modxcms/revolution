@@ -11,7 +11,7 @@ MODx.page.Welcome = function(config) {
 	Ext.applyIf(config,{
 		components: [{
             xtype: 'modx-panel-welcome'
-            ,renderTo: 'modx-panel-welcome'
+            ,renderTo: 'modx-panel-welcome-div'
             ,displayConfigCheck: config.displayConfigCheck
         }]
 	});
