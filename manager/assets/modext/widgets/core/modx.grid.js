@@ -637,6 +637,7 @@ Ext.ux.grid.RowExpander = Ext.extend(Ext.util.Observable, {
 
     renderer : function(v, p, record){
         p.cellAttr = 'rowspan="2"';
+        if (record.data.description !== null && record.data.description === '') { return ''; }
         return '<div class="x-grid3-row-expander">&#160;</div>';
     },
 
@@ -681,6 +682,18 @@ Ext.ux.grid.RowExpander = Ext.extend(Ext.util.Observable, {
             this.state[record.id] = false;
             Ext.fly(row).replaceClass('x-grid3-row-expanded', 'x-grid3-row-collapsed');
             this.fireEvent('collapse', this, record, body, row.rowIndex);
+        }
+    }
+    ,expandAll : function() {
+        var aRows = this.grid.getView().getRows();
+        for(var i = 0; i < aRows.length; i++) {
+            this.expandRow(aRows[i]);
+        }
+    }
+    ,collapseAll : function() {
+        var aRows = this.grid.getView().getRows();
+        for(var i = 0; i < aRows.length; i++) {
+            this.collapseRow(aRows[i]);
         }
     }
 });
