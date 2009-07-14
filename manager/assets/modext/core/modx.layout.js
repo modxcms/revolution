@@ -60,7 +60,7 @@ Ext.extend(MODx.Layout,Ext.Panel,{
         k.addBinding({
             key: Ext.EventObject.H
             ,ctrl: true
-            ,shift: Ext.isMac ? false : true
+            ,shift: true
             ,fn: this.toggleAccordion
             ,scope: this
             ,stopEvent: true
@@ -68,7 +68,7 @@ Ext.extend(MODx.Layout,Ext.Panel,{
         k.addBinding({
             key: Ext.EventObject.N
             ,ctrl: true
-            ,shift: Ext.isMac ? false : true
+            ,shift: true
             ,fn: function() {
                 Ext.getCmp('modx_resource_tree').quickCreate(document,{},'modResource','web',0);
             }
@@ -77,7 +77,7 @@ Ext.extend(MODx.Layout,Ext.Panel,{
         k.addBinding({
             key: Ext.EventObject.U
             ,ctrl: true
-            ,shift: Ext.isMac ? false : true
+            ,shift: true
             ,fn: MODx.clearCache
             ,scope: this
             ,stopEvent: true

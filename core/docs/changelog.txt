@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Changed key shortcuts to always require ctrl+shift to prevent browser collisions
 - Added in field for description key in modMenu windows
 - [#MODX-931] Added isequal, isequalto, and notequalto as modifier aliases to default Output Filter
 - Fixed issues with pagination on settings grids
