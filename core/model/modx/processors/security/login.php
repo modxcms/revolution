@@ -144,7 +144,7 @@ if ($loginContext == 'mgr') {
 } else {
     $modx->invokeEvent("OnWebLogin", $postLoginAttributes);
 }
-$returnUrl = isset($_REQUEST['returnUrl']) ? $_REQUEST['returnUrl'] : $modx->getOption('site_url');
+$returnUrl = isset($_REQUEST['returnUrl']) ? $_REQUEST['returnUrl'] : '';
 $response = array('url' => $returnUrl);
 switch ($loginContext) {
     case 'mgr':

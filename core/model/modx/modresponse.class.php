@@ -60,7 +60,7 @@ class modResponse {
 
             /* collect any uncached element tags in the content and process them */
             $this->modx->getParser();
-            $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
+            $maxIterations= intval($this->modx->getOption('parser_max_iterations', $options, 10));
             $this->modx->parser->processElementTags('', $this->modx->resource->_output, true, false, '[[', ']]', array(), $maxIterations);
             $this->modx->parser->processElementTags('', $this->modx->resource->_output, true, true, '[[', ']]', array(), $maxIterations);
 
