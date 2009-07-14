@@ -70,6 +70,8 @@ class modOutputFilter {
                     case 'is':
                     case 'equals':
                     case 'equalto':
+                    case 'isequal':
+                    case 'isequalto':
                         $condition[]= intval(($output == $m_val));
                         break;
                     case 'ne':
@@ -77,6 +79,7 @@ class modOutputFilter {
                     case 'isnot':
                     case 'isnt':
                     case 'notequals':
+                    case 'notequalto':
                         $condition[]= intval(($output != $m_val));
                         break;
                     case 'gte':
