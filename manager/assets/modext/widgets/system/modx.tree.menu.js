@@ -110,6 +110,13 @@ MODx.window.CreateMenu = function(config) {
             ,allowBlank: false
             ,width: 200
         },{
+            fieldLabel: _('description')
+            ,name: 'text'
+            ,id: 'modx-cmen-description'
+            ,xtype: 'textfield'
+            ,allowBlank: false
+            ,width: 200
+        },{
             fieldLabel: _('action')
             ,name: 'action_id'
             ,hiddenName: 'action_id'
@@ -171,6 +178,13 @@ MODx.window.UpdateMenu = function(config) {
             fieldLabel: _('text')
             ,name: 'text'
             ,id: 'modx-umen-text'
+            ,xtype: 'textfield'
+            ,allowBlank: false
+            ,width: 200
+        },{
+            fieldLabel: _('description')
+            ,name: 'text'
+            ,id: 'modx-umen-description'
             ,xtype: 'textfield'
             ,allowBlank: false
             ,width: 200
