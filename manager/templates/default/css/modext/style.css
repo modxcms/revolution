@@ -27,7 +27,7 @@
 .modx-form .x-form-trigger, .x-toolbar .x-form-trigger { height: 28px !important; }
 
 /* windows */
-.modx-window .x-form-clear-left { padding-top: 3px; height: 5px; }
+.x-form-check-wrap { height: auto !important; }
 .modx-window .x-form-text, .modx-window .x-form.textarea { font-size: 13px; }
 .ext-gecko .modx-form .x-form-text { padding-top: 4px; }
 
