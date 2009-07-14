@@ -327,7 +327,12 @@ MODx.window.QuickCreateResource = function(config) {
             ,defaults: { autoHeight: true ,border: false }
             ,items: MODx.getQRSettings(this.ident,config.record)
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.QuickCreateResource.superclass.constructor.call(this,config);
     this.on('show',function() {
@@ -385,7 +390,12 @@ MODx.window.QuickUpdateResource = function(config) {
             ,defaults: { autoHeight: true ,border: false }
             ,items: MODx.getQRSettings(this.ident,config.record)
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.QuickUpdateResource.superclass.constructor.call(this,config);
 };

@@ -349,22 +349,6 @@ Ext.extend(MODx.window.CreateSetting,MODx.Window);
 Ext.reg('modx-window-setting-create',MODx.window.CreateSetting);
 
 
-/**
- * Fixes problem with PagingToolbar and loading different renderers for each row
- */
-Ext.override(Ext.PagingToolbar,{
-    doLoad : function(start){
-        var o = {}, pn = this.paramNames;
-        o[pn.start] = start;
-        o[pn.limit] = this.pageSize;
-        this.store.load({
-            params:o
-            ,scope: this
-            ,callback: function() { this.store.reload(); }
-        });
-    }
-});
-
 
 /**
  * Displays a xtype combobox

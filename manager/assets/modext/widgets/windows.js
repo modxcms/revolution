@@ -246,7 +246,12 @@ MODx.window.QuickCreateChunk = function(config) {
             ,width: 400
             ,grow: true
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
 	});
 	MODx.window.QuickCreateChunk.superclass.constructor.call(this,config);
 };
@@ -299,7 +304,12 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,width: 400
             ,height: 380 
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.QuickUpdateChunk.superclass.constructor.call(this,config);
 };
@@ -342,7 +352,12 @@ MODx.window.QuickCreateTemplate = function(config) {
             ,width: 400
             ,grow: true
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.QuickCreateTemplate.superclass.constructor.call(this,config);
 };
@@ -391,7 +406,12 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,width: 400
             ,height: 380 
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.QuickUpdateTemplate.superclass.constructor.call(this,config);
 };
@@ -433,7 +453,12 @@ MODx.window.QuickCreateSnippet = function(config) {
             ,width: 400
             ,grow: true
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.QuickCreateSnippet.superclass.constructor.call(this,config);
 };
@@ -482,7 +507,12 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,width: 400
             ,height: 380 
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.QuickUpdateSnippet.superclass.constructor.call(this,config);
 };
@@ -525,7 +555,12 @@ MODx.window.QuickCreatePlugin = function(config) {
             ,width: 400
             ,grow: true
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.QuickCreatePlugin.superclass.constructor.call(this,config);
 };
@@ -574,7 +609,12 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,width: 400
             ,height: 380 
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.QuickUpdatePlugin.superclass.constructor.call(this,config);
 };
@@ -627,7 +667,12 @@ MODx.window.QuickCreateTV = function(config) {
             ,width: 300
             ,grow: true
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.QuickCreateTV.superclass.constructor.call(this,config);
 };
@@ -687,7 +732,12 @@ MODx.window.QuickUpdateTV = function(config) {
             ,width: 300
             ,grow: true
         }]
-        ,keys: []
+       ,keys: [{
+            key: Ext.EventObject.ENTER
+            ,shift: true
+            ,fn: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.QuickUpdateTV.superclass.constructor.call(this,config);
 };

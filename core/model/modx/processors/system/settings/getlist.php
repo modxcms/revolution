@@ -43,12 +43,12 @@ if (isset($_REQUEST['key']) && $_REQUEST['key'] != '') {
 if (isset($_REQUEST['namespace'])) {
     $c->where(array('namespace' => $_REQUEST['namespace']));
 }
+$count = $modx->getCount('modSystemSetting',$c);
 
 $c->sortby('`modSystemSetting`.`area`,`modSystemSetting`.`'.$_REQUEST['sort'].'`',$_REQUEST['dir']);
 $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 
 $settings = $modx->getCollection('modSystemSetting',$c);
-$count = $modx->getCount('modSystemSetting',$c);
 
 $ss = array();
 foreach ($settings as $setting) {
