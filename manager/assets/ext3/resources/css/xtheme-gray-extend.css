@@ -285,10 +285,6 @@ ul.x-tab-strip-bottom{
 	font:normal 11px arial, tahoma, helvetica, sans-serif;
 }
 
-.x-form-item {
-    font:normal 11px arial, tahoma, helvetica, sans-serif;
-}
-
 .x-form-invalid-msg {
     color:#c0272b;
     font:normal 11px arial, tahoma, helvetica, sans-serif;
@@ -1406,7 +1402,6 @@ a.x-menu-item {
 }
 
 .x-panel-mc {
-    font: normal 11px arial,tahoma,helvetica,sans-serif;
     background-color:#efefef;
 }
 
@@ -1475,7 +1470,6 @@ a.x-menu-item {
 
 .x-window-mc {
     border-color:#d0d0d0;
-    font: normal 11px arial,tahoma,helvetica,sans-serif;
     background-color:#e7e7e7;
 }
 
