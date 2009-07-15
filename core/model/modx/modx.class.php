@@ -445,8 +445,9 @@ class modX extends xPDO {
                 $class= $name;
             }
             if ($className= $this->loadClass($class, $path, false, true)) {
-                if ($service= & new $className ($this, $params)) {
-                    $this->services[$name]= $service;
+                $service = new $className ($this, $params);
+                if ($service) {
+                    $this->services[$name]=& $service;
                     $this->$name= & $this->services[$name];
                 }
             }
