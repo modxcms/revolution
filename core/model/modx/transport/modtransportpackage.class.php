@@ -112,20 +112,13 @@ class modTransportPackage extends xPDOObject {
                     if ($sourceFile = $this->get('source')) {
                         $transferred= file_exists($packageDir . $sourceFile);
                         if (!$transferred) {
-                            if (@ ini_get('allow_url_fopen')) {
-                                if (!$transferred= $this->transferPackage($sourceFile, $packageDir)) {
-                                    $this->xpdo->log(XPDO_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_transfer',array(
-                                    'sourceFile' => $sourceFile,
-                                    'packageDir' => $packageDir,
-                                )));
-                                } else {
-                                    $sourceFile= basename($sourceFile);
-                                }
+                            if (!$transferred= $this->transferPackage($sourceFile, $packageDir)) {
+                                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_transfer',array(
+                                'sourceFile' => $sourceFile,
+                                'packageDir' => $packageDir,
+                            )));
                             } else {
-                                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_transfer_fopen',array(
-                                    'sourceFile' => $sourceFile,
-                                    'packageDir' => $packageDir,
-                                )));
+                                $sourceFile= basename($sourceFile);
                             }
                         }
                         if ($transferred) {
