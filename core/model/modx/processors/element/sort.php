@@ -33,7 +33,7 @@ function sortNodesHelper($objs,$xname,$currentCategoryId = 0) {
     global $modx;
 
     foreach ($objs as $objar => $kids) {
-        $oar = split('_',$objar);
+        $oar = explode('_',$objar);
         $nodeArray = processID($oar);
 
         if ($nodeArray['type'] == 'category') {

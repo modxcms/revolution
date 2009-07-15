@@ -36,7 +36,7 @@ $ar_actionmap = array(
 );
 
 /* split the array */
-$g = split('_',$grab);
+$g = explode('_',$grab);
 
 /* quick create Menu */
 $quickCreateMenu = array();

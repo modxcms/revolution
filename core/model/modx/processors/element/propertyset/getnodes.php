@@ -13,7 +13,7 @@ $_REQUEST['id'] = !isset($_REQUEST['id']) ? 0 : (substr($_REQUEST['id'],0,2) == 
 $nodeId = $_REQUEST['id'];
 
 /* split the array */
-$node = split('_',$nodeId);
+$node = explode('_',$nodeId);
 $list = array();
 
 switch ($node[0]) {

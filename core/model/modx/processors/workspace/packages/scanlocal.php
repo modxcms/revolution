@@ -33,7 +33,7 @@ while(false !== ($name = $odir->read())) {
 	$pname = substr($name,0,strlen($name)-14);
 
 	/* must have a name and version at least */
-	$p = split('-',$pname);
+	$p = explode('-',$pname);
 	if (count($p) < 2) continue;
 
 	$packages[] = $pname;

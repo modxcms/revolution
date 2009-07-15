@@ -8,7 +8,7 @@
 if (empty($_POST['info'])) return $modx->error->failure($modx->lexicon('package_download_err_ns'));
 
 /* grab location and signature */
-$a = split('::',$_POST['info']);
+$a = explode('::',$_POST['info']);
 $location = $a[0];
 $signature = $a[1];
 
