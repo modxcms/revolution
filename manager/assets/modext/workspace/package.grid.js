@@ -74,18 +74,18 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             ,listeners: {
                 'success':{fn:function(r) {
                     var p = r.object;
-                    this.loadWindow(btn,e,{
-                        xtype: 'modx-window-package-downloader'
-                        ,listeners: {
-                            'ready':{fn:function() {
-                                var pd = Ext.getCmp('modx-window-package-downloader');
-                                if (pd.fireEvent('proceed','modx-pd-selpackage')) {
-                                    Ext.getCmp('modx-tree-package-download').setProvider(p.id);
-                                    Ext.getCmp('modx-pd-selpackage').provider = p.id;
-                                }                                
-                            },scope:this,options: {single:true}}
-                        }
-                    })
+                    var x = 'modx-window-package-downloader';
+                    if (!this.windows[x]) {
+                        this.windows[x] = MODx.load({ xtype: x  });
+                    }
+                    this.windows[x].on('ready',function() {
+                        var pd = Ext.getCmp('modx-window-package-downloader');
+                        pd.fireEvent('proceed','modx-pd-selpackage');
+                        Ext.getCmp('modx-tree-package-download').setProvider(p.id);
+                        Ext.getCmp('modx-pd-selpackage').provider = p.id;
+                    },this,{single:true});
+                    
+                    this.windows[x].show(e.target);
                 },scope:this}
             }
         });
