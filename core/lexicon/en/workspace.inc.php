@@ -10,6 +10,7 @@ $_lang['autoincludes_packaging'] = 'Packaging in autoincludes: [[+autoincludes]]
 $_lang['by'] = 'by';
 $_lang['core_err_invalid'] = 'You must have a valid core installation with an active workspace to run the build.';
 $_lang['description'] = 'Description';
+$_lang['download_extras'] = 'Download Extras';
 $_lang['downloads'] = 'Downloads';
 $_lang['installation_instructions'] = 'Installation Instructions';
 $_lang['lexicon_autobuilding'] = 'Auto-building in lexicon from path: [[+path]]';

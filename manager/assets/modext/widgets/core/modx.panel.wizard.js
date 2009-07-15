@@ -41,6 +41,7 @@ MODx.Wizard = function(config) {
         ,'backward': true
         ,'proceed': true
         ,'finish': true
+        ,'ready': true
     });
     
     this.on('show',this.onShow,this);
@@ -60,7 +61,9 @@ Ext.extend(MODx.Wizard,Ext.Window,{
     
     ,onShow: function() {
         this.getBottomToolbar().items.item(1).setText(_('next'));
-        this.fireEvent('proceed',this.config.firstPanel);
+        if (this.fireEvent('proceed',this.config.firstPanel)) {
+            this.fireEvent('ready');
+        }
     }
     
     ,navHandler: function(dir) {
@@ -86,6 +89,7 @@ Ext.extend(MODx.Wizard,Ext.Window,{
         Ext.getCmp(panel).fireEvent('fetch');
         this.syncSize();
         this.center();
+        return true;
     }
 });
 Ext.reg('modx-wizard',MODx.Wizard);

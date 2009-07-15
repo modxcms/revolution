@@ -42,6 +42,9 @@ MODx.grid.Package = function(config) {
         ,tbar: [{
             text: _('package_add')
             ,handler: { xtype: 'modx-window-package-downloader' }
+        },{
+            text: _('download_extras')
+            ,handler: this.loadMainProvider
         }]
         ,tools: [{
             id: 'plus'
@@ -60,6 +63,33 @@ MODx.grid.Package = function(config) {
 };
 Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     console: null
+    
+    ,loadMainProvider: function(btn,e) {
+        MODx.Ajax.request({
+            url: MODx.config.connectors_url+'workspace/providers.php'
+            ,params: {
+                action: 'get'
+                ,name: 'modxcms.com'
+            }
+            ,listeners: {
+                'success':{fn:function(r) {
+                    var p = r.object;
+                    this.loadWindow(btn,e,{
+                        xtype: 'modx-window-package-downloader'
+                        ,listeners: {
+                            'ready':{fn:function() {
+                                var pd = Ext.getCmp('modx-window-package-downloader');
+                                if (pd.fireEvent('proceed','modx-pd-selpackage')) {
+                                    Ext.getCmp('modx-tree-package-download').setProvider(p.id);
+                                    Ext.getCmp('modx-pd-selpackage').provider = p.id;
+                                }                                
+                            },scope:this,options: {single:true}}
+                        }
+                    })
+                },scope:this}
+            }
+        });
+    }
     
     ,update: function(btn,e) {        
         MODx.Ajax.request({
