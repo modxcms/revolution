@@ -11,8 +11,8 @@ if ($element == null) return $modx->lexicon('element_err_nf');
 
 $properties = $element->get('properties');
 
-if (!empty($_POST['propertySet'])) {
-    $set = $modx->getObject('modPropertySet',$_POST['propertySet']);
+if (!empty($_REQUEST['propertySet'])) {
+    $set = $modx->getObject('modPropertySet',$_REQUEST['propertySet']);
     if ($set == null) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
 
     $setProperties = $set->get('properties');

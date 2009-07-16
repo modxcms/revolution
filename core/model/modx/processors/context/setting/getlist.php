@@ -24,11 +24,11 @@ if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 $wa = array(
     'context_key' => $_REQUEST['context_key'],
 );
-if (!$context = $modx->getObject('modContext', $_POST['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
+if (!$context = $modx->getObject('modContext', $_REQUEST['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 if (!$context->checkPolicy('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (isset($_POST['key']) && $_POST['key'] != '') {
-    $wa['key:LIKE'] = '%'.$_POST['key'].'%';
+if (isset($_REQUEST['key']) && $_REQUEST['key'] != '') {
+    $wa['key:LIKE'] = '%'.$_REQUEST['key'].'%';
 }
 
 $c = $modx->newQuery('modContextSetting');

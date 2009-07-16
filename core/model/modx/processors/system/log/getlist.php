@@ -22,19 +22,19 @@ if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'occurred';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $wa = array();
-if (isset($_POST['action_type']) && $_POST['action_type'] != '') {
-    $wa['action:LIKE'] = '%'.$_POST['action_type'].'%';
+if (isset($_REQUEST['action_type']) && $_REQUEST['action_type'] != '') {
+    $wa['action:LIKE'] = '%'.$_REQUEST['action_type'].'%';
 }
-if (isset($_POST['user']) && $_POST['user'] != '') {
-    $wa['user'] = $_POST['user'];
+if (isset($_REQUEST['user']) && $_REQUEST['user'] != '') {
+    $wa['user'] = $_REQUEST['user'];
 }
-if (isset($_POST['date_start']) && $_POST['date_start'] != '') {
-    $_POST['date_start'] = strftime('%Y-%m-%d',strtotime($_POST['date_start'].' 00:00:00'));
-    $wa['occurred:>='] = $_POST['date_start'];
+if (isset($_REQUEST['date_start']) && $_REQUEST['date_start'] != '') {
+    $_REQUEST['date_start'] = strftime('%Y-%m-%d',strtotime($_REQUEST['date_start'].' 00:00:00'));
+    $wa['occurred:>='] = $_REQUEST['date_start'];
 }
-if (isset($_POST['date_end']) && $_POST['date_end'] != '') {
-    $_POST['date_end'] = strftime('%Y-%m-%d',strtotime($_POST['date_end'].' 23:59:59'));
-    $wa['occurred:<='] = $_POST['date_end'];
+if (isset($_REQUEST['date_end']) && $_REQUEST['date_end'] != '') {
+    $_REQUEST['date_end'] = strftime('%Y-%m-%d',strtotime($_REQUEST['date_end'].' 23:59:59'));
+    $wa['occurred:<='] = $_REQUEST['date_end'];
 }
 
 $c = $modx->newQuery('modManagerLog');

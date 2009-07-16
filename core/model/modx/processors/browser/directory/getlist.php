@@ -16,8 +16,8 @@ $modx->lexicon->load('file');
 
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$_POST['hideFiles'] = isset($_POST['hideFiles']) &&
-    ($_POST['hideFiles'] === true || $_POST['hideFiles'] === 'true') ? true : false;
+$_REQUEST['hideFiles'] = isset($_REQUEST['hideFiles']) &&
+    ($_REQUEST['hideFiles'] === true || $_REQUEST['hideFiles'] === 'true') ? true : false;
 
 $dir = !isset($_REQUEST['id']) || $_REQUEST['id'] == 'root' ? '' : str_replace('n_','',$_REQUEST['id']);
 
@@ -27,8 +27,8 @@ $ls = array();
 
 $actions = $modx->request->getAllActionIDs();
 
-$root = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
-    ? $_POST['prependPath']
+$root = isset($_REQUEST['prependPath']) && $_REQUEST['prependPath'] != 'null' && $_REQUEST['prependPath'] != null
+    ? $_REQUEST['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
 $fullpath = $root.($dir != '' ? $dir : '');
 $odir = dir($fullpath);

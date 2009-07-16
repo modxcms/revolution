@@ -15,11 +15,11 @@ $modx->lexicon->load('file');
 
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$dir = !isset($_POST['dir']) || $_POST['dir'] == 'root' ? '' : $_POST['dir'];
+$dir = !isset($_REQUEST['dir']) || $_REQUEST['dir'] == 'root' ? '' : $_REQUEST['dir'];
 $dir = trim($dir,'/');
 
-$root = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
-    ? $_POST['prependPath']
+$root = isset($_REQUEST['prependPath']) && $_REQUEST['prependPath'] != 'null' && $_REQUEST['prependPath'] != null
+    ? $_REQUEST['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
 $fullpath = $root.'/'.$dir;
 $odir = dir($fullpath);
@@ -38,8 +38,8 @@ while(false !== ($name = $odir->read())) {
 		}
 		$fileClass = $this->fileClass . $fileExtension;
 		$size = @filesize($fullname);
-		if (isset($_POST['prependUrl']) && $_POST['prependUrl'] != null) {
-            $url = $_POST['prependUrl'].$dir.'/'.$name;
+		if (isset($_REQUEST['prependUrl']) && $_REQUEST['prependUrl'] != null) {
+            $url = $_REQUEST['prependUrl'].$dir.'/'.$name;
         } else {
             $url = $modx->getOption('rb_base_url').$dir.'/'.$name;
         }

@@ -11,7 +11,7 @@ $modx->lexicon->load('file');
 
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$file = rawurldecode($_POST['file']);
+$file = rawurldecode($_REQUEST['file']);
 
 if (!file_exists($file)) return $modx->error->failure($modx->lexicon('file_err_nf'));
 
