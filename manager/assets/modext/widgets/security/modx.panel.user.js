@@ -119,6 +119,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,xtype: 'fieldset'
                 ,checkboxToggle: true
                 ,collapsed: (config.user ? true : false)
+                ,forceLayout: true
                 ,listeners: {
                     'expand': {fn:function(p) {
                         Ext.getCmp('modx-user-newpassword').setValue(true);

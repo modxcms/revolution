@@ -19,7 +19,6 @@ MODx.page.Users = function(config) {
         }]
 	});
 	MODx.page.Users.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-layout').removeAccordion();",1000);
 };
 Ext.extend(MODx.page.Users,MODx.Component);
 Ext.reg('modx-page-users',MODx.page.Users);

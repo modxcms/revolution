@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-962] Fixed issues with User panel screen
 - Replace deprecated split() call in magpierss class with explode(). 
 
 MODx Revolution 2.0.0-beta-2 (LastChangedRevision: 5416, LastChangedDate: 2009-07-16 13:15:41 -0600 (Thu, 16 Jul 2009))
