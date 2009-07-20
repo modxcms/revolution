@@ -12,6 +12,8 @@ MODx.panel.Resource = function(config) {
         ,layout: 'form'
         ,bodyStyle: 'padding: 1.5em;'
         ,autoHeight: true
+        ,collapsible: true
+        ,titleCollapse: true
         ,items: [{
             xtype: 'textarea'
             ,name: 'ta'
