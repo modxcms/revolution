@@ -2,7 +2,11 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODx Revolution 2.0.0-beta-2 ($LastChangedRevision$, $LastChangedDate$)
+MODx Revolution 2.0.0-beta-3 ($LastChangedRevision$, $LastChangedDate$)
+====================================
+- Replace deprecated split() call in magpierss class with explode(). 
+
+MODx Revolution 2.0.0-beta-2 (LastChangedRevision: 5416, LastChangedDate: 2009-07-16 13:15:41 -0600 (Thu, 16 Jul 2009))
 ====================================
 - Updated version info for beta2 release
 - [#MODX-942] Made sure all get-based processors use REQUEST, not POST
