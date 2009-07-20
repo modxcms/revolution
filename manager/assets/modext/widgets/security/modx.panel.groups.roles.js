@@ -10,7 +10,7 @@ MODx.panel.GroupsRoles = function(config) {
         id: 'modx-panel-groups-roles'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{ 
-             html: '<h2>'+_('access_permissions')+'</h2>'
+             html: '<h2>'+_('user_group_management')+'</h2>'
             ,border: false
             ,cls: 'modx-page-header'
             ,id: 'modx-access-permissions-header'
