@@ -13,9 +13,10 @@ MODx.tree.Directory = function(config) {
 		,root_id: 'root'
 		,root_name: _('files')
 		,title: _('files')
-		,enableDrag: false
-		,enableDrop: false
 		,ddAppendOnly: true
+        ,enableDrag: true
+        ,enableDrop: true
+        ,ddGroup: 'modx-treedrop-dd'
 		,url: MODx.config.connectors_url+'browser/directory.php'
 		,baseParams: {
 			prependPath: config.prependPath || null
@@ -32,6 +33,7 @@ MODx.tree.Directory = function(config) {
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 	windows: {}
+    ,_handleDrop: function(e) { return false; }
     ,_showContextMenu: function(node,e) {
         node.select();
         this.cm.activeNode = node;

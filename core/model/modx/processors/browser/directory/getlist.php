@@ -16,7 +16,7 @@ $modx->lexicon->load('file');
 
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$_REQUEST['hideFiles'] = isset($_REQUEST['hideFiles']) &&
+$hideFiles = isset($_REQUEST['hideFiles']) &&
     ($_REQUEST['hideFiles'] === true || $_REQUEST['hideFiles'] === 'true') ? true : false;
 
 $dir = !isset($_REQUEST['id']) || $_REQUEST['id'] == 'root' ? '' : str_replace('n_','',$_REQUEST['id']);
@@ -74,14 +74,13 @@ while(false !== ($name = $odir->read())) {
 	}
 
     /* get files in current dir */
-    if (!is_dir($fullname) && $_POST['hideFiles'] != true) {
+    if (!is_dir($fullname) && !$hideFiles) {
         $ext = pathinfo($fullname,PATHINFO_EXTENSION);
         $files[$name] = array(
             'id' => $dir.'/'.$name,
             'text' => $name,
             'cls' => 'icon-file icon-'.$ext,
             'type' => 'file',
-            'disabled' => is_writable($fullname),
             'leaf' => true,
             'menu' => array(
                 'items' => array(
