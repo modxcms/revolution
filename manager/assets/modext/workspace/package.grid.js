@@ -30,12 +30,7 @@ MODx.grid.Package = function(config) {
                 ,dataIndex: 'provider'
                 ,editor: { xtype: 'modx-combo-provider' ,renderer: true }
                 ,editable: false
-            },{
-                header: _('disabled')
-                ,dataIndex: 'disabled'
-                ,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
-            }
-        ]
+            }]
         ,primaryKey: 'signature'
         ,paging: true
         ,autosave: true
