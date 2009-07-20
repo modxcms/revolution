@@ -22,7 +22,7 @@ $pkgs = $modx->fromJSON($_POST['packages']);
 $packages = array();
 getNodesFormatted($packages,$pkgs);
 
-if (count($packages) == 0) {
+if (count($packages) < 1) {
     return $modx->error->failure($modx->lexicon('package_download_err_ns'));
 }
 

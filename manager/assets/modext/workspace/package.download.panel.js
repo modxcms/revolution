@@ -204,6 +204,13 @@ MODx.tree.PackageDownload = function(config) {
             preloadChildren: false
         }
         ,rootVisible: false
+        ,tbar: [{
+            icon: MODx.config.template_url+'images/restyle/icons/refresh.png'
+            ,cls: 'x-btn-icon'
+            ,scope: this
+            ,tooltip: {text: _('tree_refresh')}
+            ,handler: this.loadDataFromProvider
+        }]
     });
     MODx.tree.PackageDownload.superclass.constructor.call(this,config);
     this.on('render',this.setupMask,this);
@@ -215,12 +222,16 @@ Ext.extend(MODx.tree.PackageDownload,MODx.tree.Tree,{
             m = this.setupMask();
         }
         m.show();
-        
+        this.provider = p;
+        this.loadDataFromProvider();
+    }
+    ,loadDataFromProvider: function() {     
+        this.getLoader().fullMask.show();
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'workspace/providers.php'
             ,params: {
                 action: 'getPackages'
-                ,provider: p
+                ,provider: this.provider
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -230,6 +241,7 @@ Ext.extend(MODx.tree.PackageDownload,MODx.tree.Tree,{
             }
         });
     }
+    
     ,setupMask: function() {
         var tl = this.getLoader();
         Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')}) });

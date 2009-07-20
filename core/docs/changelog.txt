@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-964] Fixed issue with toolbar buttons in package download tree by removing unneeded buttons, fixing refresh button
+- [#MODX-966] Changed Package Management grid to be easier to read, removed unnecessary information
 - [#MODX-962] Fixed issues with User panel screen
 - Replace deprecated split() call in magpierss class with explode(). 
 

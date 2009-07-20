@@ -17,13 +17,13 @@ MODx.grid.Package = function(config) {
         title: _('packages')
         ,id: 'modx-grid-package'
         ,url: MODx.config.connectors_url+'workspace/packages.php'
-        ,fields: ['signature','created','updated','installed','state','workspace','provider','disabled','source','manifest','attributes','readme','menu']
+        ,fields: ['signature','name','version','release','created','updated','installed','state','workspace','provider','disabled','source','manifest','attributes','readme','menu']
         ,plugins: [this.exp]
         ,pageSize: 20
         ,columns: [this.exp,{
-               header: _('package_signature') ,dataIndex: 'signature' }
-            ,{ header: _('created') ,dataIndex: 'created' }
-            ,{ header: _('updated') ,dataIndex: 'updated' }
+              header: _('name') ,dataIndex: 'name' }
+           ,{ header: _('version') ,dataIndex: 'version' }
+           ,{ header: _('release') ,dataIndex: 'release' }
             ,{ header: _('installed') ,dataIndex: 'installed' ,renderer: this._rins }
             ,{ 
                 header: _('provider')
