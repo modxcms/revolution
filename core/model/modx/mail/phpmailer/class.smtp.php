@@ -2,7 +2,7 @@
 /*~ class.smtp.php
 .---------------------------------------------------------------------------.
 |  Software: PHPMailer - PHP email class                                    |
-|   Version: 2.0.0 rc1                                                      |
+|   Version: 2.0.4                                                          |
 |   Contact: via sourceforge.net support pages (also www.codeworxtech.com)  |
 |      Info: http://phpmailer.sourceforge.net                               |
 |   Support: http://sourceforge.net/projects/phpmailer/                     |
@@ -24,37 +24,51 @@
 | - Oursourcing (highly qualified programmers and graphic designers)        |
 '---------------------------------------------------------------------------'
 
-/* SMTP is rfc 821 compliant and implements all the rfc 821 SMTP
+/**
+ * SMTP is rfc 821 compliant and implements all the rfc 821 SMTP
  * commands except TURN which will always return a not implemented
  * error. SMTP also provides some utility methods for sending mail
  * to an SMTP server.
+ * @package PHPMailer
+ * @author Chris Ryan
  */
 
 class SMTP
 {
-  /* SMTP server port
-   * @var int
+  /**
+   *  SMTP server port
+   *  @var int
    */
   var $SMTP_PORT = 25;
 
-  /* SMTP reply line ending
-   * @var string
+  /**
+   *  SMTP reply line ending
+   *  @var string
    */
   var $CRLF = "\r\n";
 
-  /* Sets whether debugging is turned on
-   * @var bool
+  /**
+   *  Sets whether debugging is turned on
+   *  @var bool
    */
   var $do_debug;       # the level of debug to perform
 
-  /*
+  /**
+   *  Sets VERP use on/off (default is off)
+   *  @var bool
+   */
+  var $do_verp = false;
+
+  /**#@+
    * @access private
    */
   var $smtp_conn;      # the socket to the server
   var $error;          # error if any on the last call
   var $helo_rply;      # the reply the server sent to us for HELO
+  /**#@-*/
 
-  /* Initialize the class so that the data is in a known state.
+  /**
+   * Initialize the class so that the data is in a known state.
    * @access public
    * @return void
    */
@@ -66,9 +80,12 @@ class SMTP
     $this->do_debug = 0;
   }
 
-  /* CONNECTION FUNCTIONS */
+  /*************************************************************
+   *                    CONNECTION FUNCTIONS                  *
+   ***********************************************************/
 
-  /* Connect to the server specified on the port specified.
+  /**
+   * Connect to the server specified on the port specified.
    * If the port is not specified use the default SMTP_PORT.
    * If tval is specified then a connection will try and be
    * established with the server for that number of seconds.
@@ -135,7 +152,8 @@ class SMTP
     return true;
   }
 
-  /* Performs SMTP authentication.  Must be run after running the
+  /**
+   * Performs SMTP authentication.  Must be run after running the
    * Hello() method.  Returns true if successfully authenticated.
    * @access public
    * @return bool
@@ -198,7 +216,8 @@ class SMTP
     return true;
   }
 
-  /* Returns true if connected to a server otherwise false
+  /**
+   * Returns true if connected to a server otherwise false
    * @access private
    * @return bool
    */
@@ -220,7 +239,8 @@ class SMTP
     return false;
   }
 
-  /* Closes the socket and cleans up the state of the class.
+  /**
+   * Closes the socket and cleans up the state of the class.
    * It is not considered good to use this function without
    * first trying to use QUIT.
    * @access public
@@ -236,10 +256,12 @@ class SMTP
     }
   }
 
+  /***************************************************************
+   *                        SMTP COMMANDS                       *
+   *************************************************************/
 
-  /* SMTP COMMANDS */
-
-  /* Issues a data command and sends the msg_data to the server
+  /**
+   * Issues a data command and sends the msg_data to the server
    * finializing the mail transaction. $msg_data is the message
    * that is to be send with the headers. Each header needs to be
    * on a single line followed by a <CRLF> with the message headers
@@ -380,7 +402,8 @@ class SMTP
     return true;
   }
 
-  /* Expand takes the name and asks the server to list all the
+  /**
+   * Expand takes the name and asks the server to list all the
    * people who are members of the _list_. Expand will return
    * back and array of the result or false if an error occurs.
    * Each value in the array returned has the format of:
@@ -434,7 +457,8 @@ class SMTP
     return $list;
   }
 
-  /* Sends the HELO command to the smtp server.
+  /**
+   * Sends the HELO command to the smtp server.
    * This makes sure that we and the server are in
    * the same known state.
    *
@@ -472,7 +496,8 @@ class SMTP
     return true;
   }
 
-  /* Sends a HELO/EHLO command.
+  /**
+   * Sends a HELO/EHLO command.
    * @access private
    * @return bool
    */
@@ -503,7 +528,8 @@ class SMTP
     return true;
   }
 
-  /* Gets help information on the keyword specified. If the keyword
+  /**
+   * Gets help information on the keyword specified. If the keyword
    * is not specified then returns generic help, ussually contianing
    * A list of keywords that help is available on. This function
    * returns the results back to the user. It is up to the user to
@@ -555,7 +581,8 @@ class SMTP
     return $rply;
   }
 
-  /* Starts a mail transaction from the email address specified in
+  /**
+   * Starts a mail transaction from the email address specified in
    * $from. Returns true if successful or false otherwise. If True
    * the mail transaction is started and then one or more Recipient
    * commands may be called followed by a Data command.
@@ -577,7 +604,8 @@ class SMTP
       return false;
     }
 
-    fputs($this->smtp_conn,"MAIL FROM:<" . $from . ">" . $this->CRLF);
+    $useVerp = ($this->do_verp ? "XVERP" : "");
+    fputs($this->smtp_conn,"MAIL FROM:<" . $from . ">" . $useVerp . $this->CRLF);
 
     $rply = $this->get_lines();
     $code = substr($rply,0,3);
@@ -600,7 +628,8 @@ class SMTP
     return true;
   }
 
-  /* Sends the command NOOP to the SMTP server.
+  /**
+   * Sends the command NOOP to the SMTP server.
    *
    * Implements from rfc 821: NOOP <CRLF>
    *
@@ -641,7 +670,8 @@ class SMTP
     return true;
   }
 
-  /* Sends the quit command to the server and then closes the socket
+  /**
+   * Sends the quit command to the server and then closes the socket
    * if there is no error or the $close_on_error argument is true.
    *
    * Implements from rfc 821: QUIT <CRLF>
@@ -693,7 +723,8 @@ class SMTP
     return $rval;
   }
 
-  /* Sends the command RCPT to the SMTP server with the TO: argument of $to.
+  /**
+   * Sends the command RCPT to the SMTP server with the TO: argument of $to.
    * Returns true if the recipient was accepted false if it was rejected.
    *
    * Implements from rfc 821: RCPT <SP> TO:<forward-path> <CRLF>
@@ -736,7 +767,8 @@ class SMTP
     return true;
   }
 
-  /* Sends the RSET command to abort and transaction that is
+  /**
+   * Sends the RSET command to abort and transaction that is
    * currently in progress. Returns true if successful false
    * otherwise.
    *
@@ -780,7 +812,8 @@ class SMTP
     return true;
   }
 
-  /* Starts a mail transaction from the email address specified in
+  /**
+   * Starts a mail transaction from the email address specified in
    * $from. Returns true if successful or false otherwise. If True
    * the mail transaction is started and then one or more Recipient
    * commands may be called followed by a Data command. This command
@@ -827,7 +860,8 @@ class SMTP
     return true;
   }
 
-  /* Starts a mail transaction from the email address specified in
+  /**
+   * Starts a mail transaction from the email address specified in
    * $from. Returns true if successful or false otherwise. If True
    * the mail transaction is started and then one or more Recipient
    * commands may be called followed by a Data command. This command
@@ -874,7 +908,8 @@ class SMTP
     return true;
   }
 
-  /* Starts a mail transaction from the email address specified in
+  /**
+   * Starts a mail transaction from the email address specified in
    * $from. Returns true if successful or false otherwise. If True
    * the mail transaction is started and then one or more Recipient
    * commands may be called followed by a Data command. This command
@@ -921,7 +956,8 @@ class SMTP
     return true;
   }
 
-  /* This is an optional command for SMTP that this class does not
+  /**
+   * This is an optional command for SMTP that this class does not
    * support. This method is here to make the RFC821 Definition
    * complete for this class and __may__ be implimented in the future
    *
@@ -942,7 +978,8 @@ class SMTP
     return false;
   }
 
-  /* Verifies that the name is recognized by the server.
+  /**
+   * Verifies that the name is recognized by the server.
    * Returns false if the name could not be verified otherwise
    * the response from the server is returned.
    *
@@ -986,9 +1023,12 @@ class SMTP
     return $rply;
   }
 
-  /* INTERNAL FUNCTIONS */
+  /*******************************************************************
+   *                       INTERNAL FUNCTIONS                       *
+   ******************************************************************/
 
-  /* Read in as many lines as possible
+  /**
+   * Read in as many lines as possible
    * either before eof or socket timeout occurs on the operation.
    * With SMTP we can tell if we have more lines to read if the
    * 4th character is '-' symbol. If it is a space then we don't

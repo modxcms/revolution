@@ -1,21 +1,23 @@
 <?php
 /**
- * PHPMailer language file.  
+ * PHPMailer language file.
  * Portuguese Version
  * By Paulo Henrique Garcia - paulo@controllerweb.com.br
  */
 
 $PHPMAILER_LANG = array();
-$PHPMAILER_LANG["provide_address"] = 'Voc� deve fornecer pelo menos um endere�o de destinat�rio de email.';
-$PHPMAILER_LANG["mailer_not_supported"] = ' mailer n�o suportado.';
-$PHPMAILER_LANG["execute"] = 'N�o foi poss�vel executar: ';
-$PHPMAILER_LANG["instantiate"] = 'N�o foi poss�vel instanciar a fun��o mail.';
-$PHPMAILER_LANG["authenticate"] = 'Erro de SMTP: N�o foi poss�vel autenticar.';
-$PHPMAILER_LANG["from_failed"] = 'Os endere�os de rementente a seguir falharam: ';
-$PHPMAILER_LANG["recipients_failed"] = 'Erro de SMTP: Os endere�os de destinat�rio a seguir falharam: ';
-$PHPMAILER_LANG["data_not_accepted"] = 'Erro de SMTP: Dados n�o aceitos.';
-$PHPMAILER_LANG["connect_host"] = 'Erro de SMTP: N�o foi poss�vel conectar com o servidor SMTP.';
-$PHPMAILER_LANG["file_access"] = 'N�o foi poss�vel acessar o arquivo: ';
-$PHPMAILER_LANG["file_open"] = 'Erro de Arquivo: N�o foi poss�vel abrir o arquivo: ';
-$PHPMAILER_LANG["encoding"] = 'Codifica��o desconhecida: ';
+$PHPMAILER_LANG['provide_address']      = 'Você deve fornecer pelo menos um endereço de destinatário de email.';
+$PHPMAILER_LANG['mailer_not_supported'] = ' mailer não suportado.';
+$PHPMAILER_LANG['execute']              = 'Não foi possível executar: ';
+$PHPMAILER_LANG['instantiate']          = 'Não foi possível instanciar a função mail.';
+$PHPMAILER_LANG['authenticate']         = 'Erro de SMTP: Não foi possível autenticar.';
+$PHPMAILER_LANG['from_failed']          = 'Os endereços de rementente a seguir falharam: ';
+$PHPMAILER_LANG['recipients_failed']    = 'Erro de SMTP: Os endereços de destinatário a seguir falharam: ';
+$PHPMAILER_LANG['data_not_accepted']    = 'Erro de SMTP: Dados não aceitos.';
+$PHPMAILER_LANG['connect_host']         = 'Erro de SMTP: Não foi possível conectar com o servidor SMTP.';
+$PHPMAILER_LANG['file_access']          = 'Não foi possível acessar o arquivo: ';
+$PHPMAILER_LANG['file_open']            = 'Erro de Arquivo: Não foi possível abrir o arquivo: ';
+$PHPMAILER_LANG['encoding']             = 'Codificação desconhecida: ';
+$PHPMAILER_LANG['signing']              = 'Signing Error: ';
+$PHPMAILER_LANG['smtp_error']           = 'SMTP server error: ';
 ?>
