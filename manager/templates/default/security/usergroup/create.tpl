@@ -1,1 +1,1 @@
-<div id="modx-panel-user-group"></div>
+<div id="modx-panel-user-group-div"></div>
