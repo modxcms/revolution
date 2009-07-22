@@ -226,7 +226,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
      * @access protected
 	 */
 	,_loadMenu: function() {
-		this.menu = new Ext.menu.Menu({ defaultAlign: 'tl-b?' });
+		this.menu = new Ext.menu.Menu({ defaultAlign: 'tl-b?' ,enableScrolling: false });
 	}
     
 	/**
