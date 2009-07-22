@@ -18,6 +18,7 @@ if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->l
 
 $hideFiles = isset($_REQUEST['hideFiles']) &&
     ($_REQUEST['hideFiles'] === true || $_REQUEST['hideFiles'] === 'true') ? true : false;
+$stringLiterals = !empty($_REQUEST['stringLiterals']) ? true : false;
 
 $dir = !isset($_REQUEST['id']) || $_REQUEST['id'] == 'root' ? '' : str_replace('n_','',$_REQUEST['id']);
 
@@ -116,4 +117,9 @@ foreach ($files as $file) {
     $ls[] = $file;
 }
 
-return $this->toJSON($ls);
+
+if ($stringLiterals) {
+    return $modx->toJSON($ls);
+} else {
+    return $this->toJSON($ls);
+}
