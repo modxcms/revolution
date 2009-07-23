@@ -39,6 +39,8 @@ $modx->setLogTarget('FILE');
 /* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $modx->initialize($ctx);
+if (defined('MODX_REQP') && MODX_REQP === false) {
+} else if (!$modx->user->isAuthenticated($ctx)) { die(); }
 
 /* handle the request */
 $connectorRequestClass = $modx->getOption('modConnectorRequest.class',null,'modConnectorRequest');
