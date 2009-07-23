@@ -13,6 +13,7 @@
 $stay = isset($_SESSION['modx.stay']) ? $_SESSION['modx.stay'] : 'stay';
 $modx->getVersionData();
 
+if (!$modx->user->isAuthenticated('mgr')) { return ''; }
 $template_url = $modx->getOption('manager_url').'templates/'.$modx->getOption('manager_theme').'/';
 $c = array(
     'stay' => $stay,
@@ -36,6 +37,9 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] != '' && isset($modx->acti
 $actions = $modx->request->getAllActionIDs();
 
 $c = array_merge($modx->config,$c);
+
+unset($c['password']);
+unset($c['username']);
 
 $o = "Ext.namespace('MODx'); MODx.config = ";
 $o .= $modx->toJSON($c);
