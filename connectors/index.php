@@ -40,7 +40,7 @@ $modx->setLogTarget('FILE');
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $modx->initialize($ctx);
 if (defined('MODX_REQP') && MODX_REQP === false) {
-} else if (!$modx->user->isAuthenticated($ctx)) { die(); }
+} else if (!$modx->context->checkPolicy('load')) { die(); }
 
 /* handle the request */
 $connectorRequestClass = $modx->getOption('modConnectorRequest.class',null,'modConnectorRequest');
