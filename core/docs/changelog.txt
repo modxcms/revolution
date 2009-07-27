@@ -20,6 +20,7 @@ MODx Revolution 2.0.0-beta-3 ($LastChangedRevision$, $LastChangedDate$)
 
 MODx Revolution 2.0.0-beta-2 (LastChangedRevision: 5416, LastChangedDate: 2009-07-16 13:15:41 -0600 (Thu, 16 Jul 2009))
 ====================================
+- [#MODX-1029] Fixed incorrect URL references in browser controller template
 - Updated version info for beta2 release
 - [#MODX-942] Made sure all get-based processors use REQUEST, not POST
 - [#MODX-937] Added 'Download Extras' button to package grid which loads modxcms.com provider
