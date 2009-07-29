@@ -2,17 +2,11 @@ Ext.onReady(function() {
     if (top.frames.length !== 0) {
         top.location=self.document.location;
     }
+    Ext.override(Ext.form.Field,{
+        defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on" }
+    });
     MODx.load({ xtype: 'modx-page-login' });
 });
-var loginHandler = function(opt,s,r) {
-    r = Ext.decode(r.responseText);
-    if (r.success) {
-       top.document.location.href = (r.object.url !== undefined) ? r.object.url : './';
-    } else { MODx.form.Handler.errorExt(r); }
-};
-var doLogin = function() {
-    return MODx.form.Handler.send('loginfrm', 'login', loginHandler);
-};
 
 /**
  * @class MODx.page.Login
@@ -45,6 +39,8 @@ MODx.panel.Login = function(config) {
     config = config || {};
     Ext.applyIf(config,{
        title: _('login')
+       ,id: 'modx-login-form-panel'
+       ,formId: 'modx-login-form'
        ,url: CONNECTORS_URL+'security/login.php'
        ,baseParams: {
         

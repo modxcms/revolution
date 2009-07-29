@@ -47,9 +47,9 @@ var onManagerLoginFormRender = '{$onManagerLoginFormRender}';
     <br />
     <div id="modx-panel-login-div"></div>
     <form id="modx-login-form" method="post">
-    <input type="text" id="modx-login-username" name="username" />
-    <input type="password" id="modx-login-password" name="password" />
-    <input type="checkbox" id="modx-login-rememberme" name="rememberme" />
+    <input type="text" id="modx-login-username" name="username" autocomplete="on" />
+    <input type="password" id="modx-login-password" name="password" autocomplete="on" />
+    <input type="checkbox" id="modx-login-rememberme" name="rememberme" autocomplete="on" />
     </form>
 </div>
 
