@@ -118,7 +118,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	 */
 	,setup: function(config) {
 	    MODx.tree.Tree.superclass.constructor.call(this,config);
-	    this.cm = new Ext.menu.Menu();
+	    this.cm = new Ext.menu.Menu({ defaultAlign: 'tl-b?' ,enableScrolling: false });
 	    this.on('contextmenu',this._showContextMenu,this);
 	    this.on('beforenodedrop',this._handleDrop,this);
 	    this.on('nodedragover',this._handleDrop,this);
