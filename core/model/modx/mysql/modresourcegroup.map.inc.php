@@ -44,7 +44,7 @@ $xpdo_meta_map['modResourceGroup']= array (
   ),
   'composites' => 
   array (
-    'modResourceGroupResource' => 
+    'ResourceGroupResources' => 
     array (
       'class' => 'modResourceGroupResource',
       'local' => 'id',

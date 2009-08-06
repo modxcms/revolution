@@ -68,7 +68,7 @@ $xpdo_meta_map['modActiveUser']= array (
   ),
   'aggregates' => 
   array (
-    'modUser' => 
+    'User' => 
     array (
       'class' => 'modUser',
       'local' => 'internalKey',

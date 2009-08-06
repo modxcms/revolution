@@ -86,7 +86,7 @@ class modTemplate extends modElement {
                 modTemplateVar.default_text AS value');
             $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
                 '`tvtpl`.`tmplvarid` = `modTemplateVar`.`id`',
-                '`tvtpl`.templateid' => $this->id,
+                '`tvtpl`.templateid' => $this->get('id'),
             ));
             $c->sortby('`tvtpl`.`rank`,`modTemplateVar`.`rank`');
 
@@ -114,10 +114,10 @@ class modTemplate extends modElement {
         $tvts = $this->xpdo->getCollection('modTemplateVarTemplate',$c);
         $tvs = array();
         foreach ($tvts as $tvt) {
-            $tv = $tvt->getOne('modTemplateVar');
+            $tv = $tvt->getOne('TemplateVar');
             if ($tv != null) {
-                $tv->category = $tv->getOne('modCategory');
-                $tvs[$tvt->tmplvarid] = $tv;
+                $tv->category = $tv->getOne('Category');
+                $tvs[$tvt->get('tmplvarid')] = $tv;
             }
         }
         return $tvs;

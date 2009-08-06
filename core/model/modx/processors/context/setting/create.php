@@ -53,7 +53,7 @@ $topic = $modx->getObject('modLexiconTopic',array(
 if ($topic == null) {
     $topic = $modx->newObject('modLexiconTopic');
     $topic->set('name','default');
-    $topic->set('namespace',$setting->namespace);
+    $topic->set('namespace',$setting->get('namespace'));
     $topic->save();
 }
 

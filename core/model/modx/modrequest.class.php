@@ -189,7 +189,7 @@ class modRequest {
                         $this->modx->sendUnauthorizedPage();
                     }
                     $this->modx->documentObject = & $resource->_fields;
-                    if ($tvs = $resource->getMany('modTemplateVar', 'all')) {
+                    if ($tvs = $resource->getMany('TemplateVars', 'all')) {
                         foreach ($tvs as $tv) {
                             $this->modx->documentObject[$tv->get('name')] = array (
                                 $tv->get('name'),

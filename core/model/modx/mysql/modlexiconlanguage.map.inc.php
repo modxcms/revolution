@@ -24,7 +24,7 @@ $xpdo_meta_map['modLexiconLanguage']= array (
   ),
   'aggregates' => 
   array (
-    'modLexiconEntry' => 
+    'Entries' => 
     array (
       'class' => 'modLexiconEntry',
       'local' => 'name',

@@ -55,7 +55,7 @@ class modCacheManager extends xPDOCacheManager {
 
             // generate the ContextSettings
             $results['config']= array();
-            if ($settings= $obj->getMany('modContextSetting')) {
+            if ($settings= $obj->getMany('ContextSettings')) {
                 foreach ($settings as $setting) {
                     $k= $setting->get('key');
                     $v= $setting->get('value');
@@ -268,7 +268,7 @@ class modCacheManager extends xPDOCacheManager {
                     $results['contentType']= $contentType->toArray('', true);
                 }
                 /* TODO: remove legacy docGroups and cache ABAC policies instead */
-                if ($docGroups= $obj->getMany('modResourceGroupResource')) {
+                if ($docGroups= $obj->getMany('ResourceGroupResources')) {
                     $groups= array();
                     foreach ($docGroups as $docGroupPk => $docGroup) {
                         $groups[(string) $docGroupPk] = $docGroup->toArray('', true);
@@ -336,7 +336,7 @@ class modCacheManager extends xPDOCacheManager {
         foreach ($actions as $action) {
             $objArray = $action->toArray('',true);
             $objArray['namespace_path'] = $this->modx->config['manager_path'];
-            $ns = $action->getOne('modNamespace');
+            $ns = $action->getOne('Namespace');
             if ($ns != null && $ns->get('name') != 'core') {
                 $bp = $ns->get('path');
                 if ($bp != null && $bp != '') {

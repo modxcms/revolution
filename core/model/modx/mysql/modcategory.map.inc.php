@@ -53,6 +53,55 @@ $xpdo_meta_map['modCategory']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
+    'Chunks' => 
+    array (
+      'class' => 'modChunk',
+      'key' => 'id',
+      'local' => 'id',
+      'foreign' => 'category',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Snippets' => 
+    array (
+      'class' => 'modSnippet',
+      'local' => 'id',
+      'foreign' => 'category',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Plugins' => 
+    array (
+      'class' => 'modPlugin',
+      'local' => 'id',
+      'foreign' => 'category',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Templates' => 
+    array (
+      'class' => 'modTemplate',
+      'local' => 'id',
+      'foreign' => 'category',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'TemplateVars' => 
+    array (
+      'class' => 'modTemplateVar',
+      'local' => 'id',
+      'foreign' => 'category',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'PropertySets' => 
+    array (
+      'class' => 'modPropertySet',
+      'local' => 'id',
+      'foreign' => 'category',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
     'modChunk' => 
     array (
       'class' => 'modChunk',

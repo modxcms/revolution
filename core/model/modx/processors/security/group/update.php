@@ -22,7 +22,7 @@ $ug->set('name',$_POST['name']);
 $ug->set('parent',$_POST['parent']);
 
 /* users */
-$ous = $ug->getMany('modUserGroupMember');
+$ous = $ug->getMany('UserGroupMembers');
 foreach ($ous as $ou) { $ou->remove(); }
 $users = $modx->fromJSON($_POST['users']);
 foreach ($users as $ua) {

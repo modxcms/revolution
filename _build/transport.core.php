@@ -435,7 +435,7 @@ foreach ($topics as $t) {
         XPDO_TRANSPORT_UNIQUE_KEY => array ('name', 'namespace'),
         XPDO_TRANSPORT_RELATED_OBJECTS => true,
         XPDO_TRANSPORT_RELATED_OBJECT_ATTRIBUTES => array (
-            'modLexiconEntry' => array (
+            'Entries' => array (
                 XPDO_TRANSPORT_PRESERVE_KEYS => false,
                 XPDO_TRANSPORT_UPDATE_OBJECT => true,
                 XPDO_TRANSPORT_UNIQUE_KEY => array ('name', 'topic', 'language'),

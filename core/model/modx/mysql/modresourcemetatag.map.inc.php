@@ -34,7 +34,7 @@ $xpdo_meta_map['modResourceMetatag']= array (
   ),
   'aggregates' => 
   array (
-    'modResource' => 
+    'Resource' => 
     array (
       'class' => 'modResource',
       'key' => 'id',
@@ -43,7 +43,7 @@ $xpdo_meta_map['modResourceMetatag']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modMetatag' => 
+    'Metatag' => 
     array (
       'class' => 'modMetatag',
       'key' => 'id',

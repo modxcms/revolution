@@ -27,7 +27,7 @@ if ($role->get('name') == 'Member' || $role->get('name') == 'Super User') {
 /* don't delete if this role is assigned */
 $cc = $modx->newQuery('modUserGroupMember');
 $cc = $cc->where(array('role' => $role->get('id')));
-if ($modx->getCount('modUserProfile',$cc) > 0) {
+if ($modx->getCount('modUserGroupMember',$cc) > 0) {
     return $modx->error->failure($modx->lexicon('role_err_has_users'));
 }
 

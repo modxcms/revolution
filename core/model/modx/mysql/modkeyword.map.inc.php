@@ -24,7 +24,7 @@ $xpdo_meta_map['modKeyword']= array (
   ),
   'composites' => 
   array (
-    'modResourceKeyword' => 
+    'ResourceKeywords' => 
     array (
       'class' => 'modResourceKeyword',
       'key' => 'id',

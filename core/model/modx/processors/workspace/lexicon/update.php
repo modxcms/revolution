@@ -30,7 +30,7 @@ if (!empty($_POST['topic'])) {
 }
 
 $old_namespace = $entry->get('namespace');
-$old_topic = $entry->getOne('modLexiconTopic');
+$old_topic = $entry->getOne('Topic');
 
 /* validate name */
 if (empty($_POST['name'])) {

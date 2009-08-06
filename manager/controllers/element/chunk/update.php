@@ -19,7 +19,7 @@ if ($chunk->get('locked') && !$modx->hasPermission('edit_locked')) {
 
 
 /* grab category for chunk, assign to parser */
-$category = $chunk->getOne('modCategory');
+$category = $chunk->getOne('Category');
 $modx->smarty->assign('chunk',$chunk);
 
 /* invoke OnChunkFormPrerender event */

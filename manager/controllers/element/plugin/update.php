@@ -10,7 +10,7 @@ if (!$modx->hasPermission('edit_plugin')) return $modx->error->failure($modx->le
 /* load plugin */
 $plugin = $modx->getObject('modPlugin',$_REQUEST['id']);
 if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_not_found'));
-$plugin->category = $plugin->getOne('modCategory');
+$plugin->category = $plugin->getOne('Category');
 
 /* invoke OnPluginFormPrerender event */
 $onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array('id' => $_REQUEST['id']));

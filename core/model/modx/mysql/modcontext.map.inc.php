@@ -27,21 +27,9 @@ $xpdo_meta_map['modContext']= array (
       'phptype' => 'string',
     ),
   ),
-  'aggregates' => 
-  array (
-    'modResource' => 
-    array (
-      'class' => 'modResource',
-      'key' => 'key',
-      'local' => 'key',
-      'foreign' => 'context_key',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-  ),
   'composites' => 
   array (
-    'modContextResource' => 
+    'ContextResources' => 
     array (
       'class' => 'modContextResource',
       'local' => 'key',
@@ -49,10 +37,9 @@ $xpdo_meta_map['modContext']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modContextSetting' => 
+    'ContextSettings' => 
     array (
       'class' => 'modContextSetting',
-      'key' => 'key',
       'local' => 'key',
       'foreign' => 'context_key',
       'cardinality' => 'many',
@@ -68,6 +55,5 @@ $xpdo_meta_map['modContext']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modContext']['aggregates']= array_merge($xpdo_meta_map['modContext']['aggregates'], array_change_key_case($xpdo_meta_map['modContext']['aggregates']));
 if (XPDO_PHP4_MODE) $xpdo_meta_map['modContext']['composites']= array_merge($xpdo_meta_map['modContext']['composites'], array_change_key_case($xpdo_meta_map['modContext']['composites']));
 $xpdo_meta_map['modcontext']= & $xpdo_meta_map['modContext'];

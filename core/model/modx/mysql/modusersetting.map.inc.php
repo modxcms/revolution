@@ -75,12 +75,19 @@ $xpdo_meta_map['modUserSetting']= array (
   ),
   'aggregates' => 
   array (
-    'modUser' => 
+    'User' => 
     array (
       'class' => 'modUser',
-      'key' => 'id',
       'local' => 'user',
       'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Namespace' => 
+    array (
+      'class' => 'modNamespace',
+      'local' => 'namespace',
+      'foreign' => 'name',
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),

@@ -24,10 +24,10 @@ if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
 $c = $modx->newQuery('modUserGroupMember');
 $c->select('modUserGroupMember.*, '
-    . 'modUserGroupRole.name AS rolename, '
-    . 'modUserGroup.name AS name');
-$c->innerJoin('modUserGroupRole','modUserGroupRole');
-$c->innerJoin('modUserGroup','modUserGroup');
+    . 'UserGroupRole.name AS rolename, '
+    . 'UserGroup.name AS name');
+$c->innerJoin('modUserGroupRole','UserGroupRole');
+$c->innerJoin('modUserGroup','UserGroup');
 $c->where(array(
     'member' => $user->get('id'),
 ));

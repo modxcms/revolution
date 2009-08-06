@@ -23,7 +23,7 @@ if (!$resource->checkPolicy('view')) return $modx->error->failure($modx->lexicon
 $resource->getOne('CreatedBy');
 $resource->getOne('EditedBy');
 $resource->getOne('PublishedBy');
-$resource->getOne('modTemplate');
+$resource->getOne('Template');
 
 $ra = $resource->toArray();
 
@@ -34,7 +34,7 @@ $ra['unpub_date'] = !empty($ra['unpub_date']) && $ra['unpub_date'] != $emptyDate
 $ra['status'] = $ra['published'] ? $modx->lexicon('resource_published') : $modx->lexicon('resource_unpublished');
 
 /* keywords */
-$dkws = $resource->getMany('modResourceKeyword');
+$dkws = $resource->getMany('ResourceKeywords');
 $resource->keywords = array();
 foreach ($dkws as $dkw) {
     $resource->keywords[$dkw->get('keyword_id')] = $dkw->getOne('modKeyword');

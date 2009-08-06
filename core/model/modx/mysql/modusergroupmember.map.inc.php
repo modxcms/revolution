@@ -45,7 +45,7 @@ $xpdo_meta_map['modUserGroupMember']= array (
   ),
   'aggregates' => 
   array (
-    'modUserGroupRole' => 
+    'UserGroupRole' => 
     array (
       'class' => 'modUserGroupRole',
       'local' => 'role',
@@ -53,7 +53,7 @@ $xpdo_meta_map['modUserGroupMember']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modUserGroup' => 
+    'UserGroup' => 
     array (
       'class' => 'modUserGroup',
       'local' => 'user_group',
@@ -61,7 +61,7 @@ $xpdo_meta_map['modUserGroupMember']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modUser' => 
+    'User' => 
     array (
       'class' => 'modUser',
       'local' => 'member',

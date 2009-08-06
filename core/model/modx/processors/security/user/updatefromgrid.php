@@ -18,7 +18,7 @@ $_DATA = $modx->fromJSON($_POST['data']);
 $user = $modx->getObject('modUser',$_DATA['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_not_found'));
 
-$up = $user->getOne('modUserProfile');
+$up = $user->getOne('Profile');
 if ($up == null) return $modx->error->failure($modx->lexicon('user_profile_err_not_found'));
 
 $up->fromArray($_DATA);

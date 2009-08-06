@@ -8,7 +8,7 @@
 if(!$modx->hasPermission('edit_context')) return $modx->error->failure($modx->lexicon('access_denied'));
 
 /* get context by key */
-$context= $modx->getObjectGraph('modContext', '{"modContextSetting":{}}', $_REQUEST['key']);
+$context= $modx->getObjectGraph('modContext', '{"ContextSettings":{}}', $_REQUEST['key']);
 if ($context == null) {
     return $modx->error->failure(sprintf($modx->lexicon('context_with_key_not_found'), $_REQUEST['key']));
 }

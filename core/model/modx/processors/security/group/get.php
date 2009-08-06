@@ -23,8 +23,8 @@ if (isset($_REQUEST['getUsers']) && $_REQUEST['getUsers']) {
 
     $data = array();
     foreach ($ugms as $ugm) {
-        $user = $ugm->getOne('modUser');
-        $role = $ugm->getOne('modUserGroupRole');
+        $user = $ugm->getOne('User');
+        $role = $ugm->getOne('UserGroupRole');
         if ($user) {
             $role_name = $role != null ? $role->get('name') : '';
             $data[] = array(

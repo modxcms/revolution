@@ -31,7 +31,7 @@ $xpdo_meta_map['modNamespace']= array (
   ),
   'composites' => 
   array (
-    'modLexiconTopic' => 
+    'LexiconTopics' => 
     array (
       'class' => 'modLexiconTopic',
       'local' => 'name',
@@ -39,7 +39,7 @@ $xpdo_meta_map['modNamespace']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modLexiconEntry' => 
+    'LexiconEntries' => 
     array (
       'class' => 'modLexiconEntry',
       'local' => 'name',
@@ -47,7 +47,7 @@ $xpdo_meta_map['modNamespace']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modSystemSetting' => 
+    'SystemSettings' => 
     array (
       'class' => 'modSystemSetting',
       'local' => 'name',
@@ -55,7 +55,7 @@ $xpdo_meta_map['modNamespace']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modContextSetting' => 
+    'ContextSettings' => 
     array (
       'class' => 'modContextSetting',
       'local' => 'name',
@@ -63,7 +63,7 @@ $xpdo_meta_map['modNamespace']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modUserSetting' => 
+    'UserSettings' => 
     array (
       'class' => 'modUserSetting',
       'local' => 'name',
@@ -71,7 +71,7 @@ $xpdo_meta_map['modNamespace']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modAction' => 
+    'Actions' => 
     array (
       'class' => 'modAction',
       'local' => 'name',

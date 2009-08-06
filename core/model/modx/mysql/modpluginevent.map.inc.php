@@ -55,7 +55,7 @@ $xpdo_meta_map['modPluginEvent']= array (
   ),
   'aggregates' => 
   array (
-    'modPlugin' => 
+    'Plugin' => 
     array (
       'class' => 'modPlugin',
       'local' => 'pluginid',
@@ -63,7 +63,7 @@ $xpdo_meta_map['modPluginEvent']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modEvent' => 
+    'Event' => 
     array (
       'class' => 'modEvent',
       'local' => 'evtid',
@@ -71,7 +71,7 @@ $xpdo_meta_map['modPluginEvent']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modPropertySet' => 
+    'PropertySet' => 
     array (
       'class' => 'modPropertySet',
       'local' => 'propertyset',

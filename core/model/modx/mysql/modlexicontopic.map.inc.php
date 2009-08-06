@@ -36,6 +36,14 @@ $xpdo_meta_map['modLexiconTopic']= array (
   ),
   'composites' => 
   array (
+    'Entries' => 
+    array (
+      'class' => 'modLexiconEntry',
+      'local' => 'id',
+      'foreign' => 'topic',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
     'modLexiconEntry' => 
     array (
       'class' => 'modLexiconEntry',
@@ -47,6 +55,14 @@ $xpdo_meta_map['modLexiconTopic']= array (
   ),
   'aggregates' => 
   array (
+    'Namespace' => 
+    array (
+      'class' => 'modNamespace',
+      'local' => 'namespace',
+      'foreign' => 'key',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
     'modNamespace' => 
     array (
       'class' => 'modNamespace',

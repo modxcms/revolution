@@ -32,7 +32,7 @@ $xpdo_meta_map['modUserGroupDocumentGroup']= array (
   ),
   'aggregates' => 
   array (
-    'modUserGroup' => 
+    'UserGroup' => 
     array (
       'class' => 'modUserGroup',
       'key' => 'id',
@@ -41,7 +41,7 @@ $xpdo_meta_map['modUserGroupDocumentGroup']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modDocumentGroup' => 
+    'DocumentGroup' => 
     array (
       'class' => 'modDocumentGroup',
       'key' => 'id',

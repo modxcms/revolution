@@ -65,5 +65,25 @@ $xpdo_meta_map['modSystemSetting']= array (
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
     ),
   ),
+  'aggregates' => 
+  array (
+    'ContextSetting' => 
+    array (
+      'class' => 'modContextSetting',
+      'local' => 'key',
+      'foreign' => 'key',
+      'cardinality' => 'one',
+      'owner' => 'local',
+    ),
+    'Namespace' => 
+    array (
+      'class' => 'modNamespace',
+      'local' => 'namespace',
+      'foreign' => 'name',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+  ),
 );
+if (XPDO_PHP4_MODE) $xpdo_meta_map['modSystemSetting']['aggregates']= array_merge($xpdo_meta_map['modSystemSetting']['aggregates'], array_change_key_case($xpdo_meta_map['modSystemSetting']['aggregates']));
 $xpdo_meta_map['modsystemsetting']= & $xpdo_meta_map['modSystemSetting'];

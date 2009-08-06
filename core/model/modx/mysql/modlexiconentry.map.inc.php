@@ -25,6 +25,7 @@ $xpdo_meta_map['modLexiconEntry']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+      'index' => 'index',
     ),
     'value' => 
     array (
@@ -41,6 +42,7 @@ $xpdo_meta_map['modLexiconEntry']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 1,
+      'index' => 'index',
     ),
     'namespace' => 
     array (
@@ -49,6 +51,7 @@ $xpdo_meta_map['modLexiconEntry']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => 'core',
+      'index' => 'index',
     ),
     'language' => 
     array (
@@ -57,6 +60,7 @@ $xpdo_meta_map['modLexiconEntry']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => 'en',
+      'index' => 'index',
     ),
     'createdon' => 
     array (
@@ -73,6 +77,30 @@ $xpdo_meta_map['modLexiconEntry']= array (
   ),
   'aggregates' => 
   array (
+    'Namespace' => 
+    array (
+      'class' => 'modNamespace',
+      'local' => 'namespace',
+      'foreign' => 'name',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Topic' => 
+    array (
+      'class' => 'modLexiconTopic',
+      'local' => 'topic',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Language' => 
+    array (
+      'class' => 'modLexiconLanguage',
+      'local' => 'language',
+      'foreign' => 'name',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
     'modNamespace' => 
     array (
       'class' => 'modNamespace',

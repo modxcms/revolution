@@ -61,7 +61,7 @@ class modResource extends modAccessibleSimpleObject {
             $this->_content= '';
             $this->_output= '';
             $this->xpdo->getParser();
-            if ($baseElement= $this->getOne('modTemplate')) {
+            if ($baseElement= $this->getOne('Template')) {
                 if ($baseElement->process()) {
                     $this->_content= $baseElement->_output;
                     $this->_processed= true;
@@ -160,7 +160,7 @@ class modResource extends modAccessibleSimpleObject {
      */
     function getMany($class, $criteria= null, $cacheFlag= false) {
         $collection= array ();
-        if ($class === 'modTemplateVar' && ($criteria === null || strtolower($criteria) === 'all')) {
+        if ($class === 'TemplateVars' && ($criteria === null || strtolower($criteria) === 'all')) {
             $c = $this->xpdo->newQuery('modTemplateVar');
             $c->select('
                 DISTINCT modTemplateVar.*,

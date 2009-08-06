@@ -66,7 +66,7 @@ $xpdo_meta_map['modAction']= array (
   ),
   'aggregates' => 
   array (
-    'modNamespace' => 
+    'Namespace' => 
     array (
       'class' => 'modNamespace',
       'local' => 'namespace',

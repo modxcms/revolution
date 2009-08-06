@@ -419,7 +419,7 @@ class modPackageBuilder {
                     ),
                     XPDO_TRANSPORT_RELATED_OBJECTS => true,
                     XPDO_TRANSPORT_RELATED_OBJECT_ATTRIBUTES => array (
-                        'modLexiconEntry' => array (
+                        'Entries' => array (
                             XPDO_TRANSPORT_PRESERVE_KEYS => false,
                             XPDO_TRANSPORT_UPDATE_OBJECT => true,
                             XPDO_TRANSPORT_UNIQUE_KEY => array (

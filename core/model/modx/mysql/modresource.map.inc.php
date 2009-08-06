@@ -397,7 +397,6 @@ $xpdo_meta_map['modResource']= array (
     'Parent' => 
     array (
       'class' => 'modResource',
-      'key' => 'parent',
       'local' => 'parent',
       'foreign' => 'id',
       'cardinality' => 'one',
@@ -406,25 +405,14 @@ $xpdo_meta_map['modResource']= array (
     'Children' => 
     array (
       'class' => 'modResource',
-      'key' => 'id',
       'local' => 'id',
       'foreign' => 'parent',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modTemplate' => 
-    array (
-      'class' => 'modTemplate',
-      'key' => 'id',
-      'local' => 'template',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
     'CreatedBy' => 
     array (
       'class' => 'modUser',
-      'key' => 'createdby',
       'local' => 'createdby',
       'foreign' => 'id',
       'cardinality' => 'one',
@@ -433,7 +421,6 @@ $xpdo_meta_map['modResource']= array (
     'EditedBy' => 
     array (
       'class' => 'modUser',
-      'key' => 'editedby',
       'local' => 'editedby',
       'foreign' => 'id',
       'cardinality' => 'one',
@@ -442,7 +429,6 @@ $xpdo_meta_map['modResource']= array (
     'DeletedBy' => 
     array (
       'class' => 'modUser',
-      'key' => 'deletedby',
       'local' => 'deletedby',
       'foreign' => 'id',
       'cardinality' => 'one',
@@ -451,25 +437,30 @@ $xpdo_meta_map['modResource']= array (
     'PublishedBy' => 
     array (
       'class' => 'modUser',
-      'key' => 'publishedby',
       'local' => 'publishedby',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modTemplateVar' => 
+    'Template' => 
+    array (
+      'class' => 'modTemplate',
+      'local' => 'template',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'TemplateVars' => 
     array (
       'class' => 'modTemplateVar',
-      'key' => 'id',
       'local' => 'id:template',
       'foreign' => 'contentid:templateid',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modTemplateVarTemplate' => 
+    'TemplateVarTemplates' => 
     array (
       'class' => 'modTemplateVarTemplate',
-      'key' => 'template',
       'local' => 'template',
       'foreign' => 'templateid',
       'cardinality' => 'many',
@@ -494,37 +485,33 @@ $xpdo_meta_map['modResource']= array (
   ),
   'composites' => 
   array (
-    'modTemplateVarResource' => 
+    'TemplateVarResources' => 
     array (
       'class' => 'modTemplateVarResource',
-      'key' => 'id',
       'local' => 'id',
       'foreign' => 'contentid',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modResourceGroupResource' => 
+    'ResourceGroupResources' => 
     array (
       'class' => 'modResourceGroupResource',
-      'key' => 'id',
       'local' => 'id',
       'foreign' => 'document',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modResourceKeyword' => 
+    'ResourceKeywords' => 
     array (
       'class' => 'modResourceKeyword',
-      'key' => 'id',
       'local' => 'id',
       'foreign' => 'content_id',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modResourceMetatag' => 
+    'ResourceMetatags' => 
     array (
       'class' => 'modResourceMetatag',
-      'key' => 'id',
       'local' => 'id',
       'foreign' => 'content_id',
       'cardinality' => 'many',

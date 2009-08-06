@@ -39,7 +39,7 @@ if ($template->get('id') == $default_template) {
 $modx->invokeEvent('OnBeforeTempFormDelete',array('id' => $template->get('id')));
 
 /* remove template var maps */
-$templateTVs = $template->getMany('modTemplateVarTemplate');
+$templateTVs = $template->getMany('TemplateVarTemplates');
 foreach ($templateTVs as $ttv) {
 	if ($ttv->remove() == false) {
         $modx->log(MODX_LOG_LEVEL_ERROR,$modx->lexicon('tvt_err_remove'));

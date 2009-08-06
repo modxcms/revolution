@@ -23,7 +23,7 @@ switch ($node[0]) {
         $categories = $modx->getCollection('modCategory',$c);
 
         foreach ($categories as $category) {
-            $ps = $category->getMany('modPropertySet');
+            $ps = $category->getMany('PropertySets');
             if (count($ps) < 1) continue;
 
             $ca = array(

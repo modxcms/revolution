@@ -70,7 +70,7 @@ $xpdo_meta_map['modPlugin']= array (
   ),
   'composites' => 
   array (
-    'modPluginEvent' => 
+    'PluginEvents' => 
     array (
       'class' => 'modPluginEvent',
       'local' => 'id',

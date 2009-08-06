@@ -54,10 +54,9 @@ $xpdo_meta_map['modUserGroup']= array (
   ),
   'composites' => 
   array (
-    'modUserGroupMember' => 
+    'UserGroupMembers' => 
     array (
       'class' => 'modUserGroupMember',
-      'key' => 'user_group',
       'local' => 'id',
       'foreign' => 'user_group',
       'cardinality' => 'many',

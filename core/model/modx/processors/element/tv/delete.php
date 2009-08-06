@@ -18,9 +18,9 @@ $tv = $modx->getObject('modTemplateVar',$_POST['id']);
 if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_not_found'));
 
 /* get tv relational tables */
-$tv->templates = $tv->getMany('modTemplateVarTemplate');
-$tv->resources = $tv->getMany('modTemplateVarResource');
-$tv->resource_groups = $tv->getMany('modTemplateVarResourceGroup');
+$tv->templates = $tv->getMany('TemplateVarTemplates');
+$tv->resources = $tv->getMany('TemplateVarResources');
+$tv->resource_groups = $tv->getMany('TemplateVarResourceGroups');
 
 /* check for relations */
 if (!$forced) {
@@ -31,7 +31,7 @@ if (!$forced) {
 	if (count($tv->resources) > 0) {
         $o = '<p>'.$modx->lexicon('tmplvar_inuse').'</p><ul>';
 		foreach ($tv->resources as $tvd) {
-            $tvi = $tvd->getOne('modTemplateVar');
+            $tvi = $tvd->getOne('TemplateVar');
             if ($tvi == null) {
                 $tvd->remove();
                 continue;

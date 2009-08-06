@@ -27,9 +27,9 @@ class modUserGroup extends xPDOSimpleObject {
 	 */
 	function getUsersIn() {
         $c = $this->xpdo->newQuery('modUser');
-        $c->innerJoin('modUserGroupMember','modUserGroupMember');
+        $c->innerJoin('modUserGroupMember','UserGroupMembers');
         $c->where(array(
-            'modUserGroupMember.user_group' => $this->get('id'),
+            'UserGroupMembers.user_group' => $this->get('id'),
         ));
         $users = $this->xpdo->getCollection('modUser',$c);
         return $users;

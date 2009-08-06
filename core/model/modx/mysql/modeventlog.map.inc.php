@@ -76,7 +76,7 @@ $xpdo_meta_map['modEventLog']= array (
   ),
   'composites' => 
   array (
-    'modEvent' => 
+    'Event' => 
     array (
       'class' => 'modEvent',
       'key' => 'id',

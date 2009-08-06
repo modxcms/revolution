@@ -32,19 +32,17 @@ $xpdo_meta_map['modTemplateVarResourceGroup']= array (
   ),
   'aggregates' => 
   array (
-    'modTemplateVar' => 
+    'TemplateVar' => 
     array (
       'class' => 'modTemplateVar',
-      'key' => 'id',
       'local' => 'tmplvarid',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modResourceGroup' => 
+    'ResourceGroup' => 
     array (
       'class' => 'modResourceGroup',
-      'key' => 'id',
       'local' => 'documentgroup',
       'foreign' => 'id',
       'cardinality' => 'one',

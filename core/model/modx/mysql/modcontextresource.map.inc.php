@@ -33,7 +33,7 @@ $xpdo_meta_map['modContextResource']= array (
   ),
   'aggregates' => 
   array (
-    'modContext' => 
+    'Context' => 
     array (
       'class' => 'modContext',
       'local' => 'context_key',
@@ -41,7 +41,7 @@ $xpdo_meta_map['modContextResource']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modResource' => 
+    'Resource' => 
     array (
       'class' => 'modResource',
       'local' => 'resource',

@@ -125,10 +125,9 @@ $xpdo_meta_map['modTemplateVar']= array (
   ),
   'aggregates' => 
   array (
-    'modCategory' => 
+    'Category' => 
     array (
       'class' => 'modCategory',
-      'key' => 'id',
       'local' => 'category',
       'foreign' => 'id',
       'cardinality' => 'one',
@@ -137,28 +136,25 @@ $xpdo_meta_map['modTemplateVar']= array (
   ),
   'composites' => 
   array (
-    'modTemplateVarTemplate' => 
+    'TemplateVarTemplates' => 
     array (
       'class' => 'modTemplateVarTemplate',
-      'key' => 'id',
       'local' => 'id',
       'foreign' => 'tmplvarid',
       'cardinality' => 'many',
       'owner' => 'foreign',
     ),
-    'modTemplateVarResource' => 
+    'TemplateVarResources' => 
     array (
       'class' => 'modTemplateVarResource',
-      'key' => 'id',
       'local' => 'id',
       'foreign' => 'tmplvarid',
       'cardinality' => 'many',
       'owner' => 'foreign',
     ),
-    'modTemplateVarResourceGroup' => 
+    'TemplateVarResourceGroups' => 
     array (
       'class' => 'modTemplateVarResourceGroup',
-      'key' => 'id',
       'local' => 'id',
       'foreign' => 'tmplvarid',
       'cardinality' => 'many',

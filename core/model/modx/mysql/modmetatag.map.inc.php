@@ -50,7 +50,7 @@ $xpdo_meta_map['modMetatag']= array (
   ),
   'composites' => 
   array (
-    'modResourceMetatag' => 
+    'ResourceMetatags' => 
     array (
       'class' => 'modResourceMetatag',
       'key' => 'id',

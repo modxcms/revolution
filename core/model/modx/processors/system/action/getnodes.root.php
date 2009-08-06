@@ -8,13 +8,14 @@
 $list = array();
 
 $c = $modx->newQuery('modNamespace');
+$c->setClassAlias('Namespace');
 $c->select('
-    `modNamespace`.*,
-    COUNT(`modAction`.`id`) AS `actionCount`
+    Namespace.*,
+    COUNT(Actions.id) AS `actionCount`
 ');
-$c->leftJoin('modAction','modAction');
+$c->leftJoin('modAction','Actions');
 $c->sortby('name','ASC');
-$c->groupby('modNamespace.name');
+$c->groupby('Namespace.name');
 $namespaces = $modx->getCollection('modNamespace',$c);
 
 foreach ($namespaces as $namespace) {

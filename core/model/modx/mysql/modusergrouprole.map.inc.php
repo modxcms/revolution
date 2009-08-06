@@ -40,7 +40,7 @@ $xpdo_meta_map['modUserGroupRole']= array (
   ),
   'aggregates' => 
   array (
-    'modUserGroupMember' => 
+    'UserGroupMembers' => 
     array (
       'class' => 'modUserGroupMember',
       'local' => 'id',

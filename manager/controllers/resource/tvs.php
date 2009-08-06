@@ -39,9 +39,9 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
     $tvs = array();
     if ($template) {
         if (!$resource->isNew()) {
-            $tvs = $resource->getMany('modTemplateVar');
+            $tvs = $resource->getMany('TemplateVars');
         } else {
-            $tvs = $template->getMany('modTemplateVar');
+            $tvs = $template->getMany('TemplateVars');
         }
         foreach ($tvs as $tv) {
             if ($tv->type == 'richtext') {

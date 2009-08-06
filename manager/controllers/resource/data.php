@@ -25,12 +25,12 @@ if (file_exists($delegateView)) {
 
 $resource->getOne('CreatedBy');
 $resource->getOne('EditedBy');
-$resource->getOne('modTemplate');
+$resource->getOne('Template');
 
-$dkws = $resource->getMany('modResourceKeyword');
+$dkws = $resource->getMany('ResourceKeywords');
 $resource->keywords = array();
 foreach ($dkws as $dkw) {
-	$resource->keywords[$dkw->get('keyword_id')] = $dkw->getOne('modKeyword');
+	$resource->keywords[$dkw->get('keyword_id')] = $dkw->getOne('Keyword');
 }
 $keywords = array();
 foreach ($resource->keywords as $kw) {

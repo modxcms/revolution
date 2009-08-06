@@ -52,7 +52,7 @@ $xpdo_meta_map['modScript']= array (
   ),
   'aggregates' => 
   array (
-    'modCategory' => 
+    'Category' => 
     array (
       'class' => 'modCategory',
       'key' => 'id',

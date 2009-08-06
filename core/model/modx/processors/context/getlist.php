@@ -25,7 +25,6 @@ $c->sortby('`' . $_REQUEST['sort'] . '`', $_REQUEST['dir']);
 $c->limit($_REQUEST['limit'], $_REQUEST['start']);
 
 $collection = $modx->getCollection('modContext', $c);
-$actions = $modx->request->getAllActionIDs();
 
 $list = array();
 foreach ($collection as $key => $object) {

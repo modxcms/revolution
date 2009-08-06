@@ -27,7 +27,7 @@ if ($_REQUEST['sort'] == 'username_link') $_REQUEST['sort'] = 'username';
 
 $limit = true;
 $c = $modx->newQuery('modUser');
-$c->bindGraph('{"modUserProfile":{}}');
+$c->bindGraph('{"Profile":{}}');
 
 if (isset($_REQUEST['username']) && $_REQUEST['username'] != '') {
     $c->where(array(
@@ -40,13 +40,13 @@ $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
 if ($limit) {
     $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 }
-$users = $modx->getCollectionGraph('modUser', '{"modUserProfile":{}}', $c);
+$users = $modx->getCollectionGraph('modUser', '{"Profile":{}}', $c);
 
 $count = $modx->getCount('modUser');
 
 $list = array();
 foreach ($users as $user) {
-	$profileArray = $user->modUserProfile->toArray();
+	$profileArray = $user->Profile->toArray();
 	$userArray = $user->toArray();
 	$userArray = array_merge($profileArray,$userArray);
     $userArray['menu'] = array(

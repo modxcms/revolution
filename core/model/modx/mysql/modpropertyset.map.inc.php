@@ -50,7 +50,7 @@ $xpdo_meta_map['modPropertySet']= array (
   ),
   'aggregates' => 
   array (
-    'modCategory' => 
+    'Category' => 
     array (
       'class' => 'modCategory',
       'key' => 'id',

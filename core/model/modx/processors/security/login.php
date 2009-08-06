@@ -41,7 +41,7 @@ if (is_array($rt)) {
     unset($key,$value);
 }
 
-$user= $modx->getObjectGraph('modUser', '{"modUserProfile":{},"modUserSetting":{}}', array ('modUser.username' => $username));
+$user= $modx->getObjectGraph('modUser', '{"Profile":{},"UserSettings":{}}', array ('modUser.username' => $username));
 if (!$user) {
     $ru = $modx->invokeEvent("OnUserNotFound", array(
         'user' => $user,
@@ -65,8 +65,8 @@ if (!$user) {
     }
 }
 
-$up= & $user->modUserProfile;
-$us= & $user->modUserSetting;
+$up= & $user->Profile;
+$us= & $user->UserSettings;
 foreach ($us as $settingPK => $setting) {
     $sname= $setting->get('key');
     $$sname= $setting->get('value');

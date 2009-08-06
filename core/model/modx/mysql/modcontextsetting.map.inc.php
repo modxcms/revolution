@@ -73,7 +73,7 @@ $xpdo_meta_map['modContextSetting']= array (
   ),
   'aggregates' => 
   array (
-    'modContext' => 
+    'Context' => 
     array (
       'class' => 'modContext',
       'key' => 'context_key',
@@ -82,7 +82,7 @@ $xpdo_meta_map['modContextSetting']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modSystemSetting' => 
+    'SystemSetting' => 
     array (
       'class' => 'modSystemSetting',
       'key' => 'key',

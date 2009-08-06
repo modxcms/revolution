@@ -34,7 +34,7 @@ $modx->invokeEvent('OnBeforeUserFormSave',array(
 
 
 /* remove prior user group links */
-$ugms = $user->getMany('modUserGroupMember');
+$ugms = $user->getMany('UserGroupMembers');
 foreach ($ugms as $ugm) { $ugm->remove(); }
 
 /* create user group links */
@@ -47,14 +47,14 @@ foreach ($groups as $group) {
     $ugm->set('member',$user->get('id'));
     $ugms[] = $ugm;
 }
-$user->addMany($ugms,'modUserGroupMember');
+$user->addMany($ugms,'UserGroupMembers');
 
 /* update user */
 if ($user->save() == false) {
     return $modx->error->failure($modx->lexicon('user_err_save'));
 }
 
-$user->profile = $user->getOne('modUserProfile');
+$user->profile = $user->getOne('Profile');
 
 $user->profile->set('fullname',$_POST['fullname']);
 $user->profile->set('role',$_POST['role']);

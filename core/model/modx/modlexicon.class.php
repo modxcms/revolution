@@ -186,11 +186,11 @@ class modLexicon {
             $results= false;
 
             $c= $this->modx->newQuery('modLexiconEntry');
-            $c->innerJoin('modLexiconTopic','modLexiconTopic');
-            $c->innerJoin('modNamespace','modNamespace','modNamespace.name = modLexiconTopic.namespace');
+            $c->innerJoin('modLexiconTopic','Topic');
+            $c->innerJoin('modNamespace','Namespace','Namespace.name = Topic.namespace');
             $c->where(array(
-                'modLexiconTopic.name' => $topic,
-                'modNamespace.name' => $namespace,
+                'Topic.name' => $topic,
+                'Namespace.name' => $namespace,
                 'modLexiconEntry.language' => $language,
             ));
             $c->sortby('`modLexiconEntry`.`name`','ASC');

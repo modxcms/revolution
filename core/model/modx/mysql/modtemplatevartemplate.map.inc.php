@@ -43,7 +43,7 @@ $xpdo_meta_map['modTemplateVarTemplate']= array (
   ),
   'aggregates' => 
   array (
-    'modTemplateVar' => 
+    'TemplateVar' => 
     array (
       'class' => 'modTemplateVar',
       'key' => 'id',
@@ -52,7 +52,7 @@ $xpdo_meta_map['modTemplateVarTemplate']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modTemplate' => 
+    'Template' => 
     array (
       'class' => 'modTemplate',
       'key' => 'id',

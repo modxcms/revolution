@@ -17,7 +17,7 @@ if (!isset($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_e
 $user = $modx->getObject('modUser',$_REQUEST['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 
-$user->profile = $user->getOne('modUserProfile');
+$user->profile = $user->getOne('Profile');
 
 
 
@@ -28,8 +28,8 @@ if (isset($_REQUEST['getGroups']) && $_REQUEST['getGroups']) {
 
     $data = array();
     foreach ($ugms as $ugm) {
-        $role = $ugm->getOne('modUserGroupRole');
-        $usergroup = $ugm->getOne('modUserGroup');
+        $role = $ugm->getOne('UserGroupRole');
+        $usergroup = $ugm->getOne('UserGroup');
         $role_name = $role != null ? $role->get('name') : '';
         $data[] = array(
             $usergroup->get('id'),

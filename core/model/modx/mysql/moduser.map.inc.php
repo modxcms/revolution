@@ -52,55 +52,49 @@ $xpdo_meta_map['modUser']= array (
   ),
   'aggregates' => 
   array (
-    'CreatedBy' => 
+    'CreatedResources' => 
     array (
       'class' => 'modResource',
-      'key' => 'createdby',
       'local' => 'id',
       'foreign' => 'createdby',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'EditedBy' => 
+    'EditedResources' => 
     array (
       'class' => 'modResource',
-      'key' => 'editedby',
       'local' => 'id',
       'foreign' => 'editedby',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'DeletedBy' => 
+    'DeletedResources' => 
     array (
       'class' => 'modResource',
-      'key' => 'deletedby',
       'local' => 'id',
       'foreign' => 'deletedby',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'PublishedBy' => 
+    'PublishedResources' => 
     array (
       'class' => 'modResource',
-      'key' => 'publishedby',
       'local' => 'id',
       'foreign' => 'publishedby',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'Sender' => 
+    'SentMessages' => 
     array (
       'class' => 'modUserMessage',
-      'key' => 'sender',
       'local' => 'id',
       'foreign' => 'sender',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'Recipient' => 
+    'ReceivedMessages' => 
     array (
       'class' => 'modUserMessage',
-      'key' => 'recipient',
       'local' => 'id',
       'foreign' => 'recipient',
       'cardinality' => 'many',
@@ -109,28 +103,25 @@ $xpdo_meta_map['modUser']= array (
   ),
   'composites' => 
   array (
-    'modUserProfile' => 
+    'Profile' => 
     array (
       'class' => 'modUserProfile',
-      'key' => 'internalKey',
       'local' => 'id',
       'foreign' => 'internalKey',
       'cardinality' => 'one',
       'owner' => 'local',
     ),
-    'modUserSetting' => 
+    'UserSettings' => 
     array (
       'class' => 'modUserSetting',
-      'key' => 'user',
       'local' => 'id',
       'foreign' => 'user',
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'modUserGroupMember' => 
+    'UserGroupMembers' => 
     array (
       'class' => 'modUserGroupMember',
-      'key' => 'member',
       'local' => 'id',
       'foreign' => 'member',
       'cardinality' => 'many',

@@ -85,7 +85,7 @@ $xpdo_meta_map['modChunk']= array (
   ),
   'aggregates' => 
   array (
-    'modCategory' => 
+    'Category' => 
     array (
       'class' => 'modCategory',
       'key' => 'id',

@@ -9,7 +9,7 @@ $modx->lexicon->load('user');
 
 if (!$modx->hasPermission('change_profile')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$profile = $modx->user->getOne('modUserProfile');
+$profile = $modx->user->getOne('Profile');
 if ($profile == null) return $modx->error->failure($modx->lexicon('user_profile_err_not_found'));
 
 $_POST['dob'] = strtotime($_POST['dob']);

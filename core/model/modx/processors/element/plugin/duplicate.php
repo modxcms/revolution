@@ -39,7 +39,7 @@ if ($plugin->save() === false) {
 }
 
 /* duplicate events */
-$old_plugin->events = $old_plugin->getMany('modPluginEvent');
+$old_plugin->events = $old_plugin->getMany('PluginEvents');
 foreach($old_plugin->events as $old_event) {
 	$new_event = $modx->newObject('modPluginEvent');
 	$new_event->set('pluginid',$plugin->get('id'));

@@ -357,8 +357,8 @@ class modUser extends modPrincipal {
             }
         }
 
-        $this->getOne('modUserProfile');
-        $ua= & $this->modUserProfile;
+        $this->getOne('Profile');
+        $ua= & $this->Profile;
         if ($ua && is_a($ua, 'modUserProfile')) {
             if ($context == 'web') {
                 $_SESSION['webShortname']= $this->get('username');
@@ -536,8 +536,11 @@ class modUser extends modPrincipal {
     }
 
     /**
-     * Gets all Resource Groups this user is assigned to.
+     * Gets all Resource Groups this user is assigned to. This may not work in
+     * the new model.
      *
+     * @deprecated
+     * @todo refactor this to actually work.
      * @access public
      * @return array An array of Resource Group names.
      */
@@ -546,9 +549,9 @@ class modUser extends modPrincipal {
         if (isset($_SESSION["modx.user.{$this->id}.resourceGroups"])) {
             $resourceGroups= $_SESSION["modx.user.{$this->id}.resourceGroups"];
         } else {
-            if ($memberships= $this->getMany('modUserGroupMember')) {
+            if ($memberships= $this->getMany('UserGroupMembers')) {
                 foreach ($memberships as $membership) {
-                    if ($documentGroupAccess= $membership->getMany('modUserGroupResourceGroup')) {
+                    if ($documentGroupAccess= $membership->getMany('UserGroupResourceGroups')) {
                         foreach ($documentGroupAccess as $dga) {
                             $resourceGroups[]= $dga->get('documentgroup');
                         }
@@ -571,7 +574,7 @@ class modUser extends modPrincipal {
         if (isset($_SESSION["modx.user.{$this->id}.userGroups"])) {
             $groups= $_SESSION["modx.user.{$this->id}.userGroups"];
         } else {
-            $memberGroups= $this->xpdo->getCollectionGraph('modUserGroup', '{"modUserGroupMember":{}}', array('`modUserGroupMember`.`member`' => $this->get('id')));
+            $memberGroups= $this->xpdo->getCollectionGraph('modUserGroup', '{"UserGroupMembers":{}}', array('`UserGroupMembers`.`member`' => $this->get('id')));
             if ($memberGroups) {
                 foreach ($memberGroups as $group) $groups[]= $group->get('id');
             }
@@ -591,7 +594,7 @@ class modUser extends modPrincipal {
         if (isset($_SESSION["modx.user.{$this->id}.userGroupNames"])) {
             $groupNames= $_SESSION["modx.user.{$this->id}.userGroupNames"];
         } else {
-            $memberGroups= $this->xpdo->getCollectionGraph('modUserGroup', '{"modUserGroupMember":{}}', array('`modUserGroupMember`.`member`' => $this->get('id')));
+            $memberGroups= $this->xpdo->getCollectionGraph('modUserGroup', '{"UserGroupMembers":{}}', array('`UserGroupMembers`.`member`' => $this->get('id')));
             if ($memberGroups) {
                 foreach ($memberGroups as $group) $groupNames[]= $group->get('name');
             }

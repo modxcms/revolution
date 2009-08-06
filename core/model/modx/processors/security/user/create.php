@@ -40,7 +40,7 @@ foreach ($groups as $group) {
     $ugm->set('role',$group['role']);
     $ugms[] = $ugm;
 }
-$user->addMany($ugms,'modUserGroupMember');
+$user->addMany($ugms,'UserGroupMembers');
 
 /* update user */
 if ($user->save() == false) {

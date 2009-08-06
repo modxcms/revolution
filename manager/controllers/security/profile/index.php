@@ -7,7 +7,7 @@
  */
 if (!$modx->hasPermission('change_profile')) return $modx->error->failure($modx->lexicon('access_denied'));
 
-$modx->user->profile = $modx->user->getOne('modUserProfile');
+$modx->user->profile = $modx->user->getOne('Profile');
 $modx->smarty->assign('user',$modx->user);
 
 

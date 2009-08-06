@@ -16,9 +16,9 @@ if (!$modx->hasPermission('new_template')) return $modx->error->failure($modx->l
 $old_tv = $modx->getObject('modTemplateVar',$_POST['id']);
 if ($old_tv == null) return $modx->error->failure($modx->lexicon('tv_err_not_found'));
 
-$old_tv->templates = $old_tv->getMany('modTemplateVarTemplate');
-$old_tv->resources = $old_tv->getMany('modTemplateVarResource');
-$old_tv->resource_groups = $old_tv->getMany('modTemplateVarResourceGroup');
+$old_tv->templates = $old_tv->getMany('TemplateVarTemplates');
+$old_tv->resources = $old_tv->getMany('TemplateVarResources');
+$old_tv->resource_groups = $old_tv->getMany('TemplateVarResourceGroups');
 
 $newname = isset($_POST['name'])
     ? $_POST['name']

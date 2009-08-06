@@ -10,7 +10,7 @@ if(!$modx->hasPermission('edit_user')) return $modx->error->failure($modx->lexic
 $user = $modx->getObject('modUser',$_REQUEST['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
-$user->profile = $user->getOne('modUserProfile',array('internalKey' => $user->get('id')));
+$user->profile = $user->getOne('Profile');
 $user->getSettings();
 
 /* load Roles */

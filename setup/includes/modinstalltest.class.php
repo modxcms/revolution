@@ -70,8 +70,8 @@ class modInstallTest {
         $ml = ini_get('memory_limit');
         $bytes = $this->return_bytes($ml);
 
-        if ($bytes < 33554432) { /* 32M = 33554432 */
-            $success = @ini_set('memory_limit','32M');
+        if ($bytes < 67108864) { /* 32M = 33554432, 64M = 67108864 */
+            $success = @ini_set('memory_limit','128M');
             $success = $success !== false ? true : false;
         } else {
             $success = true;
