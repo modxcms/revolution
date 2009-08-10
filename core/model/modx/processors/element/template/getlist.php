@@ -23,8 +23,8 @@ if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 
 $c = $modx->newQuery('modTemplate');
-$c->leftJoin('modCategory','modCategory');
-$c->select('modTemplate.*,modCategory.category AS category');
+$c->leftJoin('modCategory','Category');
+$c->select('modTemplate.*,Category.category AS category');
 
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
 if ($limit) { $c->limit($_REQUEST['limit'],$_REQUEST['start']); }
