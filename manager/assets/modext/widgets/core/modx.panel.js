@@ -183,8 +183,17 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         });
     }
     
+    ,getField: function(f) {
+        var fld = false;
+        if (typeof f == 'string') {
+            fld = this.getForm().findField(f);
+            if (!fld) fld = Ext.getCmp(f);
+        }
+        return fld;
+    }
+    
     ,hideField: function(f) {
-        if (typeof f == 'string') { f = Ext.getCmp(f); }
+        f = this.getField(f);
         if (!f) return;
         f.disable();
         f.hide();
@@ -193,14 +202,21 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     ,showField: function(f) {
-        if (typeof f == 'string') { f = Ext.getCmp(f); }
+        f = this.getField(f);
         if (!f) return;
         f.enable();
         f.show();
         var d = f.getEl().up('.x-form-item');
         if (d) { d.setDisplayed(true); }
     }
-});
+    
+    ,setLabel: function(fld,text){
+        var f = this.getField(fld);
+        if (!f) return;
+        var r = f.getEl().up('div.x-form-item');
+        r.dom.firstChild.firstChild.nodeValue = String.format('{0}', text);
+    }
+}); 
 Ext.reg('modx-formpanel',MODx.FormPanel);
 
 /**
