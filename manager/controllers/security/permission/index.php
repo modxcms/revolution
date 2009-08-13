@@ -9,6 +9,7 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 
 
 /* register JS scripts */
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.access.policy.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.tree.user.group.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.role.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.panel.groups.roles.js');

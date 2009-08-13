@@ -409,16 +409,6 @@ $collection['47']->fromArray(array (
   'lang_topics' => 'messages',
   'assets' => '',
 ), '', true, true);
-$collection['48']= $xpdo->newObject('modAction');
-$collection['48']->fromArray(array (
-  'id' => 48,
-  'namespace' => 'core',
-  'parent' => 46,
-  'controller' => 'security/access',
-  'haslayout' => 1,
-  'lang_topics' => 'user,policy,access',
-  'assets' => '',
-), '', true, true);
 $collection['49']= $xpdo->newObject('modAction');
 $collection['49']->fromArray(array (
   'id' => 49,
@@ -559,16 +549,6 @@ $collection['64']->fromArray(array (
   'lang_topics' => '',
   'assets' => '',
 ), '', true, true);
-$collection['65']= $xpdo->newObject('modAction');
-$collection['65']->fromArray(array (
-  'id' => 65,
-  'namespace' => 'core',
-  'parent' => 48,
-  'controller' => 'security/access/policy',
-  'haslayout' => 1,
-  'lang_topics' => 'user,policy',
-  'assets' => '',
-), '', true, true);
 $collection['66']= $xpdo->newObject('modAction');
 $collection['66']->fromArray(array (
   'id' => 66,
@@ -576,7 +556,7 @@ $collection['66']->fromArray(array (
   'parent' => 46,
   'controller' => 'security/permission',
   'haslayout' => 1,
-  'lang_topics' => 'user',
+  'lang_topics' => 'user,access,policy',
   'assets' => '',
 ), '', true, true);
 $collection['67']= $xpdo->newObject('modAction');

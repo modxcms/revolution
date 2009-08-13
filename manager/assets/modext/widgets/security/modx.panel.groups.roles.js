@@ -34,6 +34,17 @@ MODx.panel.GroupsRoles = function(config) {
                 ,title: ''
                 ,preventRender: true
             }]
+        },{
+            title: _('policies')
+            ,bodyStyle: 'padding: 1.5em'
+            ,autoHeight: true
+            ,items: [{
+                html: '<p>'+_('policy_management_msg')+'</p>'
+                ,border: false
+            },{
+                xtype: 'modx-grid-access-policy'
+                ,preventRender: true
+            }]
         }])]
     });
     MODx.panel.GroupsRoles.superclass.constructor.call(this,config);

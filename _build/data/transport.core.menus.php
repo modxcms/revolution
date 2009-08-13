@@ -189,18 +189,6 @@ $collection['19']->fromArray(array (
   'params' => '',
   'handler' => '',
 ), '', true, true);
-$collection['20']= $xpdo->newObject('modMenu');
-$collection['20']->fromArray(array (
-  'id' => 20,
-  'parent' => 8,
-  'action' => 48,
-  'text' => 'access_permissions',
-  'description' => 'access_permissions_desc',
-  'icon' => 'images/icons/password.gif',
-  'menuindex' => 3,
-  'params' => '',
-  'handler' => '',
-), '', true, true);
 $collection['21']= $xpdo->newObject('modMenu');
 $collection['21']->fromArray(array (
   'id' => 21,
@@ -463,18 +451,6 @@ $collection['42']->fromArray(array (
   'menuindex' => 2,
   'params' => '',
   'handler' => 'window.open("http://svn.modxcms.com/jira/browse/MODX");',
-), '', true, true);
-$collection['43']= $xpdo->newObject('modMenu');
-$collection['43']->fromArray(array (
-  'id' => 43,
-  'parent' => 8,
-  'action' => 65,
-  'text' => 'policy_management',
-  'description' => 'policy_management_desc',
-  'icon' => 'images/icons/logging.gif',
-  'menuindex' => 4,
-  'params' => '',
-  'handler' => '',
 ), '', true, true);
 $collection['44']= $xpdo->newObject('modMenu');
 $collection['44']->fromArray(array (
