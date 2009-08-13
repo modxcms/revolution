@@ -2,7 +2,11 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODx Revolution 2.0.0-beta-3 ($LastChangedRevision$, $LastChangedDate$)
+MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
+====================================
+- [#MODX-1124] Took Templates off the list of attachable elements in Tools | Property Sets
+
+MODx Revolution 2.0.0-beta-3 (LastChangedRevision: 5593, LastChangedDate: 2009-07-30 11:14:17 -0500 (Thu, 30 Jul 2009))
 ====================================
 - Fixed issue with scrollbars and height in tree context menus
 - [#MODX-963] Fixed issue with scrollbars and height in grid context menus

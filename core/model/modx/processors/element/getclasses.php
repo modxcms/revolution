@@ -11,7 +11,6 @@ $classes = array(
     'modChunk',
     'modSnippet',
     'modPlugin',
-    'modTemplate',
     'modTemplateVar',
 );
 
