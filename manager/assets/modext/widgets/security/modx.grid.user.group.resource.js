@@ -13,10 +13,10 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,dataIndex: 'target_name'
             ,width: 100
         },{
-            header: _('authority')
+            header: _('minimum_role')
             ,dataIndex: 'authority'
             ,width: 50
-            ,editor: { xtype: 'textfield' ,allowBlank: false }
+            ,editor: { xtype: 'modx-combo-authority' ,allowBlank: false }
         },{
             header: _('policy')
             ,dataIndex: 'policy_name'
@@ -111,10 +111,9 @@ MODx.window.CreateUGRG = function(config) {
             ,hiddenName: 'target'
             ,editable: false
         },{
-            xtype: 'textfield'
-            ,fieldLabel: _('authority')
+            xtype: 'modx-combo-authority'
+            ,fieldLabel: _('minimum_role')
             ,name: 'authority'
-            ,width: 40
             ,value: 0
         },{
             xtype: 'modx-combo-policy'
@@ -149,14 +148,14 @@ Ext.extend(MODx.window.CreateUGRG,MODx.Window,{
         var r = f.getValues();
         r.policy_name = f.findField('policy').getRawValue();
         r.target_name = f.findField('target').getRawValue();
-        
+        /*
         var g = Ext.getCmp('modx-grid-user-group-resource-groups');
         var s = g.getStore();
         var v = s.query('id',r.id).items;
         if (v.length > 0) {
             MODx.msg.alert(_('error'),_('user_group_resourcegroup_err_ae'));
             return false;
-        }
+        }*/
         
         this.fireEvent('success',r);
         this.hide();

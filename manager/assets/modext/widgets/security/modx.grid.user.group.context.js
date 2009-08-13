@@ -13,10 +13,10 @@ MODx.grid.UserGroupContext = function(config) {
             ,dataIndex: 'target_name'
             ,width: 100
         },{
-            header: _('authority')
+            header: _('minimum_role')
             ,dataIndex: 'authority'
             ,width: 50
-            ,editor: { xtype: 'textfield' ,allowBlank: false }
+            ,editor: { xtype: 'modx-combo-authority' ,allowBlank: false }
         },{
             header: _('policy')
             ,dataIndex: 'policy_name'
@@ -105,10 +105,9 @@ MODx.window.CreateUGAccessContext = function(config) {
             ,hiddenName: 'target'
             ,editable: false
         },{
-            xtype: 'textfield'
-            ,fieldLabel: _('authority')
+            xtype: 'modx-combo-authority'
+            ,fieldLabel: _('minimum_role')
             ,name: 'authority'
-            ,width: 40
             ,value: 0
         },{
             xtype: 'modx-combo-policy'
@@ -138,13 +137,14 @@ Ext.extend(MODx.window.CreateUGAccessContext,MODx.Window,{
         r.policy_name = f.findField('policy').getRawValue();
         r.target_name = f.findField('target').getRawValue();
         
+        /*
         var g = Ext.getCmp('modx-grid-user-group-contexts');
         var s = g.getStore();
         var v = s.query('id',r.id).items;
         if (v.length > 0) {
             MODx.msg.alert(_('error'),_('user_group_context_err_ae'));
-            return false;
-        }
+           return false;
+        }*/
         
         this.fireEvent('success',r);
         this.hide();

@@ -9,6 +9,7 @@ MODx.panel.Resource = function(config) {
     
     var ct = {
         title: _('resource_content')
+        ,id: 'modx-resource-content'
         ,layout: 'form'
         ,bodyStyle: 'padding: 1.5em;'
         ,autoHeight: true
@@ -45,6 +46,7 @@ MODx.panel.Resource = function(config) {
     var it = [];
     it.push({
         title: _('resource_settings')
+        ,id: 'modx-resource-settings'
         ,layout: 'form'
         ,labelWidth: 200
         ,bodyStyle: 'padding: 1.5em;'
@@ -221,7 +223,7 @@ MODx.panel.Resource = function(config) {
         ,cls: 'modx-page-header'
         ,border: false
     });
-    its.push(MODx.getPageStructure(it));
+    its.push(MODx.getPageStructure(it,{id:'modx-resource-tabs'}));
     
     if (MODx.config.manager_use_tabs) {
         ct.style = 'margin-top: 1.0em;';
