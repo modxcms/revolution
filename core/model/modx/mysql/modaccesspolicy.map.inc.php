@@ -65,6 +65,9 @@ $xpdo_meta_map['modAccessPolicy']= array (
       'owner' => 'foreign',
       'cardinality' => 'one',
     ),
+  ),
+  'composites' => 
+  array (
     'Children' => 
     array (
       'class' => 'modAccessPolicy',
@@ -73,7 +76,16 @@ $xpdo_meta_map['modAccessPolicy']= array (
       'owner' => 'local',
       'cardinality' => 'many',
     ),
+    'Permissions' => 
+    array (
+      'class' => 'modAccessPermission',
+      'local' => 'id',
+      'foreign' => 'policy',
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
   ),
 );
 if (XPDO_PHP4_MODE) $xpdo_meta_map['modAccessPolicy']['aggregates']= array_merge($xpdo_meta_map['modAccessPolicy']['aggregates'], array_change_key_case($xpdo_meta_map['modAccessPolicy']['aggregates']));
+if (XPDO_PHP4_MODE) $xpdo_meta_map['modAccessPolicy']['composites']= array_merge($xpdo_meta_map['modAccessPolicy']['composites'], array_change_key_case($xpdo_meta_map['modAccessPolicy']['composites']));
 $xpdo_meta_map['modaccesspolicy']= & $xpdo_meta_map['modAccessPolicy'];

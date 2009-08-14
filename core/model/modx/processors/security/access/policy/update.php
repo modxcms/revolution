@@ -12,23 +12,46 @@
  * @package modx
  * @subpackage processors.security.access.policy
  */
-$modx->lexicon->load('policy');
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('policy');
 
-if (!isset($_REQUEST['id'])) {
-    return $modx->error->failure('Policy id not specified!');
-}
-$id = $_REQUEST['id'];
+/* get policy */
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('policy_err_ns'));
+$policy = $modx->getObject('modAccessPolicy',$_POST['id']);
+if ($policy == null) return $modx->error->failure($modx->lexicon('policy_err_nf'));
 
-if ($policy = $modx->getObject('modAccessPolicy', $id)) {
-    $policy->fromArray($_REQUEST);
-    if ($policy->save() == false) {
-        return $modx->error->failure('Error saving policy!');
+/* save fields */
+$policy->fromArray($_POST);
+
+/* wipe all the current permissions for that policy */
+$permissions = $modx->removeCollection('modAccessPermission',array(
+    'policy' => $policy->get('id'),
+));
+
+/* now store the permissions into the modAccessPermission table */
+/* and cache the data into the policy table */
+if (isset($_POST['permissions'])) {
+    $permData = array();
+    $permissionsArray = $modx->fromJSON($_POST['permissions']);
+
+    $permissions = array();
+    foreach ($permissionsArray as $permissionArray) {
+        $permission = $modx->newObject('modAccessPermission');
+        $permission->fromArray($permissionArray);
+
+        $permissions[] = $permission;
+        /* feed into cache array for policy table */
+        $permData[] = array($permissionArray['name'] => true);
     }
-} else {
-    return $modx->error->failure('Could not locate policy for update!');
+
+    $policy->addMany($permissions);
+    $policy->set('data',$permData);
 }
 
+/* save policy */
+if ($policy->save() == false) {
+    return $modx->error->failure($modx->lexicon('policy_err_save'));
+}
 
 /* log manager action */
 $modx->logManagerAction('save_access_policy','modAccessPolicy',$policy->get('id'));

@@ -6,6 +6,18 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['permission'] = 'Permission';
+$_lang['permission_err_ae'] = 'Permission already exists for this policy.';
+$_lang['permission_err_nf'] = 'Permission not found.';
+$_lang['permission_err_ns'] = 'Permission not specified.';
+$_lang['permission_err_remove'] = 'An error occurred while trying to remove this permission.';
+$_lang['permission_err_save'] = 'An error occurred while trying to save this permission.';
+$_lang['permission_new'] = 'New Permission';
+$_lang['permission_remove'] = 'Remove Permission';
+$_lang['permission_remove_confirm'] = 'Are you sure you want to remove this permission?';
+$_lang['permission_update'] = 'Update Permission';
+$_lang['permissions'] = 'Permissions';
+$_lang['permissions_desc'] = 'Here you can define specific permissions that this policy will contain. All user groups with this policy will inherit these permissions.';
 $_lang['policies'] = 'Access Policies';
 $_lang['policy'] = 'Access Policy';
 $_lang['policy_create'] = 'Create Access Policy';

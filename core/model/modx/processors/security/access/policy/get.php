@@ -11,25 +11,32 @@ $modx->lexicon->load('policy');
 
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['id'])) {
-    return $modx->error->failure('Policy id not specified!');
-}
-$objId = $_REQUEST['id'];
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('policy_err_ns'));
+$policy = $modx->getObject('modAccessPolicy', $_REQUEST['id']);
+if ($policy == null) return $modx->error->failure($modx->lexicon('policy_err_nf'));
 
-$data = array();
-if ($obj = $modx->getObject('modAccessPolicy', $objId)) {
-    $dataCol = array('data');
-    $data = $obj->get(array(
-        'id',
-        'name',
-        'description',
-        'class',
-        'parent'
-    ));
-    $policyData = trim($obj->_fields['data']);
-    if ($policySplit = xPDO :: escSplit(',', trim($policyData, '{}'), '"')) {
-        $policyData = '{' . "\n" . implode(",\n", $policySplit) . "\n" . '}';
-    }
-    $data['policy_data'] = $policyData;
+
+/* get permissions for policy */
+$c = $modx->newQuery('modAccessPermission');
+$c->sortby('name','ASC');
+$permissions = $policy->getMany('Permissions',$c);
+
+$policyArray = $policy->get(array(
+    'id',
+    'name',
+    'description',
+    'class',
+    'parent',
+));
+
+$list = array();
+foreach ($permissions as $permission) {
+    $list[] = array(
+        $permission->get('name'),
+        $permission->get('description'),
+        $permission->get('value'),
+    );
 }
-return $modx->error->success('', $data);
+$policyArray['permissions'] = $list;
+
+return $modx->error->success('', $policyArray);

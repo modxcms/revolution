@@ -68,7 +68,17 @@
         <field key="data" dbtype="text" phptype="json" default="{}" />
         
         <aggregate alias="Parent" class="modAccessPolicy" local="parent" foreign="id" owner="foreign" cardinality="one" />
-        <aggregate alias="Children" class="modAccessPolicy" local="id" foreign="parent" owner="local" cardinality="many" />
+        <composite alias="Children" class="modAccessPolicy" local="id" foreign="parent" owner="local" cardinality="many" />
+        <composite alias="Permissions" class="modAccessPermission" local="id" foreign="policy" owner="local" cardinality="many" />
+    </object>
+    
+    <object class="modAccessPermission" table="access_permissions" extends="xPDOSimpleObject">
+        <field key="policy" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="value" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
+        
+        <aggregate alias="Policy" class="modAccessPolicy" local="policy" foreign="id" cardinality="one" owner="foreign" /> 
     </object>
     
     <object class="modAccessResource" table="access_resources" extends="modAccess">

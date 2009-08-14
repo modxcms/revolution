@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Cleaned up access policy grid
+- Default sort roles by authority
 - Removed no-longer needed Security pages; now done in Access Control and User Group edit screens
 - Started cleanup of Security system; changed 'Authority' listing on User Group page to a more correct "Minimum Role".
 - Added some IDs to resource edit page

@@ -20,7 +20,7 @@ if (!$modx->hasPermission(array('access_permissions' => true, 'edit_role' => tru
 
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
+if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'authority';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 if ($_REQUEST['sort'] == 'rolename_link') $_REQUEST['sort'] = 'name';
 
