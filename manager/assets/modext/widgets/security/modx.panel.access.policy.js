@@ -57,27 +57,28 @@ MODx.panel.AccessPolicy = function(config) {
                         ,name: 'description'
                         ,width: 300
                         ,grow: true
-                    },{
-                        xtype: 'button'
-                        ,text: _('save')
-                        ,handler: this.submit
-                        ,scope: this
                     }]
                 },{
-                    title: _('policy_data')
+                    title: _('permissions')
                     ,layout: 'form'
                     ,bodyStyle: ''
                     ,items: [{
-                        xtype: 'modx-grid-policy-property'
+                        html: '<p>'+_('permissions_desc')+'</p>'
+                        ,border: false
+                    },{
+                        xtype: 'modx-grid-permissions'
                         ,policy: MODx.request.id
-                        ,source: null
                         ,autoHeight: true
+                        ,preventRender: true
+                        ,frame: true
                     }]
                 }]
             }]
         }]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
+            ,'success': {fn:this.success,scope:this}
+            ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
         }
     });
     MODx.panel.AccessPolicy.superclass.constructor.call(this,config);
@@ -97,11 +98,14 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
             ,listeners: {
             	'success':{fn:function(r) {
                     this.getForm().setValues(r.object);
-                    var data = Ext.util.JSON.decode(r.object.policy_data);
-                    var g = Ext.getCmp('modx-grid-policy-property');
-                    g.setSource(data);
-                    g.config.policy = r.object.id;
-                    g.getView().refresh();
+                    //var data = Ext.util.JSON.decode(r.object.policy_data);
+                    //var g = Ext.getCmp('modx-grid-policy-property');
+                    
+                    //var d = Ext.decode(r.object.policy_data);
+                    var g = Ext.getCmp('modx-grid-permissions').getStore().loadData(r.object.permissions);
+                    //g.setSource(data);
+                    //g.config.policy = r.object.id;
+                    //g.getView().refresh();
                     
                     Ext.getCmp('modx-policy-header').getEl().update('<h2>'+_('policy')+': '+r.object.name+'</h2>');
                     this.fireEvent('ready');
@@ -109,119 +113,137 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
             }
         });
     }
+    ,beforeSubmit: function(o) {
+        var g = Ext.getCmp('modx-grid-permissions');
+        Ext.apply(o.form.baseParams,{
+            permissions: g ? g.encode() : {}
+        });
+    }
+    
+    ,success: function(o) {
+        Ext.getCmp('modx-grid-permissions').getStore().commitChanges();
+    }
 });
 Ext.reg('modx-panel-access-policy',MODx.panel.AccessPolicy);
 
 
 
-
-/**
- * Loads a property grid of modAccessPolicies properties.
- * 
- * @class MODx.grid.PolicyProperty
- * @extends Ext.grid.PropertyGrid
- * @param {Object} config An object of options.
- * @xtype modx-grid-policy-property
- */
-MODx.grid.PolicyProperty = function(config) {
+MODx.grid.Permissions = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        id: 'modx-grid-policy-property'
-        ,source: null
+        id: 'modx-grid-permissions'
+        ,url: MODx.config.connectors_url+'security/access/policy/index.php'
+        ,baseParams: {
+            action: 'getAttributes'
+        }
+        ,fields: ['name','description','value','menu']
+        ,columns: [{
+            header: _('name')
+            ,dataIndex: 'name'
+            ,width: 150
+            ,editor: { xtype: 'textfield', renderer: true }
+        },{
+            header: _('description')
+            ,dataIndex: 'description'
+            ,width: 250
+            ,editor: { xtype: 'textfield', renderer: true }
+        }]
+        ,data: []
+        ,width: '90%'
         ,height: 300
         ,maxHeight: 300
-        ,autoHeight: true
-        ,minColumnWidth: 250
+        ,autosave: false
         ,autoExpandColumn: 'name'
-        ,autoWidth: true
-        ,collapsible: true
-        ,stripeRows: true
         ,tbar: [{
-            text: _('policy_property_new')
+            text: _('permission_new')
             ,scope: this
             ,handler: this.createAttribute
         }]
     });
-    MODx.grid.PolicyProperty.superclass.constructor.call(this,config);
-    this.config = config;
-    
-    this.on('afteredit',this.updateAttribute,this);
-    this.menu = new Ext.menu.Menu({ defaultAlign: 'tl-b?' });
-    this.on('rowcontextmenu',this.showMenu,this);
+    MODx.grid.Permissions.superclass.constructor.call(this,config);
+    this.propRecord = new Ext.data.Record.create([{name: 'name'},{name: 'description'},{name:'value'}]);
 };
-Ext.extend(MODx.grid.PolicyProperty,Ext.grid.PropertyGrid,{
-    createAttribute: function() {
-        Ext.Msg.prompt(_('policy_property_create'),_('policy_property_specify_name'),function(btn,v) {
-            if (btn == 'ok') {
-                MODx.Ajax.request({
-                    url: MODx.config.connectors_url+'security/access/policy.php'
-                    ,params: {
-                        action: 'createPolicyData'
-                        ,id: this.config.policy
-                        ,key: v
-                    }
-                    ,listeners: {
-                    	'success': {fn:function(r) {
-                    		var s = this.getSource();
-                            if (!s) return false;
-                    		s[v] = true;
-                    		this.setSource(s);
-                    	},scope:this}
-                    }
-                });
-            }
-        },this);
-    }
-    
-    ,removeAttribute: function() {
-        MODx.Ajax.request({
-            url: MODx.config.connectors_url+'security/access/policy.php'
-            ,params: {
-                action: 'removePolicyData'
-                ,id: this.config.policy
-                ,key: this.menu.record
-            }
+Ext.extend(MODx.grid.Permissions,MODx.grid.LocalGrid,{
+    createAttribute: function(btn,e) {        
+        this.loadWindow(btn,e,{
+            xtype: 'modx-window-permission-create'
+            ,record: {}
             ,listeners: {
-            	'success': {fn:function(r) {
-                    var s = this.getSource();
-                    s[this.menu.record] = null;
-                    this.setSource(s);            		
-            	},scope:this}
+                'success': {fn:function(r) {
+                    var s = this.getStore();
+                    var rec = new this.propRecord(r);
+                    s.add(rec);
+                    
+                    Ext.getCmp('modx-panel-access-policy').fireEvent('fieldChange');
+                },scope:this}
             }
         });
+        return true;
     }
-    
-    ,updateAttribute: function(e) {
-        MODx.Ajax.request({
-           url: MODx.config.connectors_url+'security/access/policy.php'
-           ,params: {
-               action: 'updatePolicyData'
-               ,id: this.config.policy
-               ,key: e.record.data.name
-               ,value: e.value
-           }
-           ,listeners: {
-               'success': {fn:function(r) {
-                   e.record.commit();
-               },scope:this}
-           }
-        });
-    }
-    
-    ,showMenu: function(g,ri,e) {
+        
+    ,_showMenu: function(g,ri,e) {
         e.stopEvent();
         e.preventDefault();
-        var sm = this.getSelectionModel();
-                
-        this.menu.removeAll();
-        this.menu.record = sm.selection.record.id;
-        this.menu.add({
-            text: _('policy_property_remove')
+        var m = this.menu;
+        m.recordIndex = ri;
+        m.record = this.getStore().getAt(ri).data;
+        if (!this.getSelectionModel().isSelected(ri)) {
+            this.getSelectionModel().selectRow(ri);
+        }
+        m.removeAll();
+        m.add({
+            text: _('permission_remove')
             ,scope: this
-            ,handler: this.removeAttribute
-        });
-        
-        this.menu.show(e.target);
+            ,handler: this.remove
+        });        
+        m.show(e.target);
     }
 });
-Ext.reg('modx-grid-policy-property',MODx.grid.PolicyProperty);
+Ext.reg('modx-grid-permissions',MODx.grid.Permissions);
+
+
+MODx.window.NewPermission = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'polpc'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('permission_new')
+        ,height: 150
+        ,width: 475
+        ,url: MODx.config.connectors_url+'security/access/policy/index.php'
+        ,action: 'addProperty'
+        ,saveBtnText: _('add')
+        ,fields: [{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'name'
+            ,id: 'modx-'+this.ident+'-name'
+            ,width: 250
+            ,allowBlank: false
+        },{
+            xtype: 'textarea'
+            ,fieldLabel: _('description')
+            ,name: 'description'
+            ,id: 'modx-'+this.ident+'-description'
+            ,width: 250
+            ,grow: true
+        }]
+    });
+    MODx.window.NewPermission.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.NewPermission,MODx.Window,{
+    submit: function() {
+        var r = this.fp.getForm().getValues();
+        
+        var g = Ext.getCmp('modx-grid-permissions');
+        var s = g.getStore();
+        var v = s.query('name',r.name).items;
+        if (v.length > 0) {
+            MODx.msg.alert(_('error'),_('permission_err_ae'));
+            return false;
+        }
+        this.fireEvent('success',r);
+        this.hide();
+        return false;
+    }
+});
+Ext.reg('modx-window-permission-create',MODx.window.NewPermission);

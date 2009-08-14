@@ -18,6 +18,9 @@ if ($policy == null) return $modx->error->failure($modx->lexicon('policy_err_nf'
 
 /* get permissions for policy */
 $c = $modx->newQuery('modAccessPermission');
+$c->where(array(
+    'policy' => $policy->get('id'),
+));
 $c->sortby('name','ASC');
 $permissions = $policy->getMany('Permissions',$c);
 

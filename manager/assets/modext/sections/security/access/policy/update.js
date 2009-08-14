@@ -9,20 +9,31 @@
 MODx.page.UpdateAccessPolicy = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        components: [{ 
-            xtype: 'modx-panel-access-policy'
-            ,renderTo: 'modx-panel-access-policy-div'
-            ,policy: config.policy
-        }]
+        formpanel: 'modx-panel-access-policy'
         ,actions: {
             'new': MODx.action['security/access/policy']
             ,edit: MODx.action['security/access/policy/update']
             ,cancel: MODx.action['security/access/policy']
         }
         ,buttons: [{
+            process: 'update'
+            ,text: _('save')
+            ,method: 'remote'
+            ,checkDirty: false
+            ,keys: [{
+                key: 's'
+                ,alt: true
+                ,ctrl: true
+            }]
+        },{
             process: 'cancel'
             ,text: _('cancel')
             ,params: {a:MODx.action['security/access/policy']}
+        }]
+        ,components: [{ 
+            xtype: 'modx-panel-access-policy'
+            ,renderTo: 'modx-panel-access-policy-div'
+            ,policy: config.policy
         }]
     });
     MODx.page.UpdateAccessPolicy.superclass.constructor.call(this,config);

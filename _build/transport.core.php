@@ -74,7 +74,11 @@ if (file_exists($packageDirectory . 'core.transport.zip')) {
     unlink($packageDirectory . 'core.transport.zip');
 }
 if (file_exists($packageDirectory . 'core') && is_dir($packageDirectory . 'core')) {
-    $cacheManager->deleteTree($packageDirectory . 'core', true);
+    $cacheManager->deleteTree($packageDirectory . 'core',array(
+        'deleteTop' => true,
+        'skipDirs' => false,
+        'extensions' => '*',
+    ));
 }
 $xpdo->log(XPDO_LOG_LEVEL_INFO,'Removed pre-existing core/ and core.transport.zip.'); flush();
 
@@ -397,6 +401,14 @@ $attributes = array (
     XPDO_TRANSPORT_PRESERVE_KEYS => false,
     XPDO_TRANSPORT_UNIQUE_KEY => array('name'),
     XPDO_TRANSPORT_UPDATE_OBJECT => true,
+    XPDO_TRANSPORT_RELATED_OBJECTS => true,
+    XPDO_TRANSPORT_RELATED_OBJECT_ATTRIBUTES => array (
+        'Permissions' => array (
+            XPDO_TRANSPORT_PRESERVE_KEYS => false,
+            XPDO_TRANSPORT_UPDATE_OBJECT => true,
+            XPDO_TRANSPORT_UNIQUE_KEY => array ('policy','name'),
+        )
+    )
 );
 foreach ($collection as $c) {
     $package->put($c, $attributes);

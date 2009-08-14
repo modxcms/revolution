@@ -480,6 +480,9 @@ class modInstall {
                     }
                 }
             }
+
+            /* empty sessions table to prevent old permissions from loading */
+            $this->xpdo->removeCollection('modSession');
         }
 
         return $results;

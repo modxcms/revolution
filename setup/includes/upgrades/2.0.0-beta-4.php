@@ -48,3 +48,12 @@ $c->orCondition(array(
 $menus = $this->install->xpdo->getCollection('modMenu',$c);
 foreach ($menus as $menu) { $menu->remove(); }
 unset($c,$menus,$menu);
+
+/* remove old security policy */
+$c = $this->install->xpdo->newQuery('modAccessPolicy');
+$c->where(array(
+    'name' => 'Context',
+));
+$policy = $this->install->xpdo->getObject('modAccessPolicy',$c);
+if ($policy != null) { $policy->remove(); }
+unset($c,$policy);
