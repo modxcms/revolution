@@ -41,7 +41,7 @@ if (isset($_POST['permissions'])) {
 
         $permissions[] = $permission;
         /* feed into cache array for policy table */
-        $permData[] = array($permissionArray['name'] => true);
+        $permData[$permissionArray['name']] = true;
     }
 
     $policy->addMany($permissions);

@@ -8,7 +8,7 @@
 function bld_policyFormatData($permissions) {
     $data = array();
     foreach ($permissions as $permission) {
-        $data[] = array($permission->get('name') => true);
+        $data[$permission->get('name')] = true;
     }
     return $data;
 }

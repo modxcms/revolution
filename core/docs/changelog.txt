@@ -4,6 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added modAccessPermission class to properly handle access policy permissions
+- Adjusted UI to handle model change
+- Added logic in setup install to clear sessions table after install to prevent access permission changing problems (and is a good general practice anyway); users will have to re-login after setup/ is run.
 - Cleaned up access policy grid
 - Default sort roles by authority
 - Removed no-longer needed Security pages; now done in Access Control and User Group edit screens
