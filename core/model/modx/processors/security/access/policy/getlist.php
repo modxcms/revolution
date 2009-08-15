@@ -17,16 +17,17 @@ $modx->lexicon->load('policy');
 
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = '';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+$limit = isset($_REQUEST['limit']);
+if (empty($_REQUEST['start'])) $_REQUEST['start'] = 0;
+if (empty($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
+if (empty($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
+if (empty($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $c = $modx->newQuery('modAccessPolicy');
-if ($_REQUEST['sort']) {
-    $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-}
-$collection = $modx->getCollection('modAccessPolicy', $c);
+$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+
+$policies = $modx->getCollection('modAccessPolicy', $c);
 
 $data = array();
 if (isset($_REQUEST['combo'])) {
@@ -35,9 +36,10 @@ if (isset($_REQUEST['combo'])) {
         ,'name' => ' (no policy) '
     );
 }
-foreach ($collection as $key => $object) {
-    $da = $object->toArray();
-    $da['menu'] = array(
+
+foreach ($policies as $key => $policy) {
+    $policyArray = $policy->toArray();
+    $policyArray['menu'] = array(
         array(
             'text' => $modx->lexicon('edit'),
             'handler' => 'this.editPolicy',
@@ -52,6 +54,7 @@ foreach ($collection as $key => $object) {
             'handler' => 'this.confirm.createDelegate(this,["remove","policy_remove_confirm"])',
         ),
     );
-    $data[]= $da;
+    $data[] = $policyArray;
 }
+
 return $this->outputArray($data);

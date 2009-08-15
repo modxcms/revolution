@@ -7,11 +7,10 @@
  * @package modx
  * @subpackage processors.security.role
  */
-$modx->lexicon->load('user');
-
 if (!$modx->hasPermission(array('access_permissions' => true, 'delete_role' => true))) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
+$modx->lexicon->load('user');
 
 $role = $modx->getObject('modUserGroupRole',$_POST['id']);
 if ($role == null) {
@@ -31,6 +30,7 @@ if ($modx->getCount('modUserGroupMember',$cc) > 0) {
     return $modx->error->failure($modx->lexicon('role_err_has_users'));
 }
 
+/* remove role */
 if ($role->remove() == false) {
     return $modx->error->failure($modx->lexicon('role_err_save'));
 }

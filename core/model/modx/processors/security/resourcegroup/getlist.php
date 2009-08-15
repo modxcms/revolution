@@ -14,18 +14,20 @@
  */
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
+$limit = isset($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $c = $modx->newQuery('modResourceGroup');
+$count = $modx->getCount('modResourceGroup');
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 $groups = $modx->getCollection('modResourceGroup',$c);
 
-$gs = array();
-foreach ($groups as $g) {
-	$gs[] = $g->toArray();
+$list = array();
+foreach ($groups as $grp) {
+	$list[] = $grp->toArray();
 }
-$count= count($gs);
-return $this->outputArray($gs,$count);
+return $this->outputArray($list,$count);

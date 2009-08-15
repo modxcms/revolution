@@ -12,19 +12,21 @@ $modx->lexicon->load('policy');
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* Get old policy */
-$old_policy = $modx->getObject('modAccessPolicy',$_REQUEST['id']);
-if ($old_policy == null) return $modx->error->failure($modx->lexicon('policy_err_nf'));
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('policy_err_ns'));
+$oldPolicy = $modx->getObject('modAccessPolicy',$_POST['id']);
+if ($oldPolicy == null) return $modx->error->failure($modx->lexicon('policy_err_nf'));
 
 /* duplicate policy */
-$policy = $modx->newObject('modAccessPolicy');
-$policy->fromArray($old_policy->toArray('',true), '', false, true);
-$policy->set('name',$modx->lexicon('duplicate_of').$policy->get('name'));
+$newPolicy = $modx->newObject('modAccessPolicy');
+$newPolicy->fromArray($oldPolicy->toArray('',true), '', false, true);
+$newPolicy->set('name',$modx->lexicon('duplicate_of').$newPolicy->get('name'));
 
-if ($policy->save() === false) {
+/* save new policy */
+if ($newPolicy->save() === false) {
     return $modx->error->failure($modx->lexicon('policy_err_duplicate'));
 }
 
 /* log manager action */
-$modx->logManagerAction('policy_duplicate','modAccessPolicy',$policy->get('id'));
+$modx->logManagerAction('policy_duplicate','modAccessPolicy',$newPolicy->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$newPolicy);

@@ -11,25 +11,30 @@
  * @package modx
  * @subpackage processors.security.access.policy
  */
+if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('policy');
 
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* validate */
+if (empty($_POST['name'])) $modx->error->addError('name',$modx->lexicon('policy_err_name_ns'));
 
-$name = isset($_POST['name']) ? $_POST['name'] : '';
-if (!$name) {
-    return $modx->error->failure('No name specified for policy!');
+/* make sure policy with name does not already exist */
+$ae = $modx->getObject('modAccessPolicy',array(
+    'name' => $_POST['name'],
+));
+if ($ae != null) $modx->error->addError('name',$modx->lexicon('policy_err_ae'));
+
+/* if errors, return */
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
 }
 
-$c = array('name' => $name);
-$policy = $modx->getObject('modAccessPolicy', $c);
-if ($policy === null) {
-    $policy = $modx->newObject('modAccessPolicy');
-    $policy->fromArray($_POST);
-    if ($policy->save() == false) {
-        return $modx->error->failure('Error saving policy!');
-    }
-} else {
-    return $modx->error->failure('Policy already exists!');
+/* create new policy object */
+$policy = $modx->newObject('modAccessPolicy');
+$policy->fromArray($_POST);
+
+/* save policy */
+if ($policy->save() == false) {
+    return $modx->error->failure('Error saving policy!');
 }
 
 /* log manager action */

@@ -20,7 +20,7 @@ $policy = $modx->getObject('modAccessPolicy', $policyId);
 $da = array();
 if ($policy == null) {
     $da[] = array(
-        'text' => 'Policies',
+        'text' => $modx->lexicon('policies'),
         'id' => 'n_0',
         'leaf' => false,
         'type' => 'policy',

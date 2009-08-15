@@ -12,12 +12,12 @@
  * @package modx
  * @subpackage processors.security.role
  */
-$modx->lexicon->load('user');
-
 if (!$modx->hasPermission(array('access_permissions' => true, 'edit_role' => true))) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
+$modx->lexicon->load('user');
 
+$limit = isset($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'authority';
@@ -25,23 +25,23 @@ if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 if ($_REQUEST['sort'] == 'rolename_link') $_REQUEST['sort'] = 'name';
 
 $c = $modx->newQuery('modUserGroupRole');
+$count = $modx->getCount('modUserGroupRole');
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
+if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 $roles = $modx->getCollection('modUserGroupRole', $c);
 
-$rs = array();
-if (isset($_REQUEST['addNone']) && $_REQUEST['addNone']) {
-    $rs[] = array('id' => 0, 'name' => $modx->lexicon('none'));
+$list = array();
+if (!empty($_REQUEST['addNone'])) {
+    $list[] = array('id' => 0, 'name' => $modx->lexicon('none'));
 }
-
-foreach ($roles as $r) {
-	$ra = $r->toArray();
-    $ra['menu'] = array(
+foreach ($roles as $role) {
+	$roleArray = $role->toArray();
+    $roleArray['menu'] = array(
         array(
             'text' => $modx->lexicon('role_remove'),
             'handler' => 'this.remove.createDelegate(this,["role_remove_confirm"])',
         )
     );
-	$rs[] = $ra;
+	$list[] = $roleArray;
 }
-return $this->outputArray($rs);
+return $this->outputArray($list,$count);
