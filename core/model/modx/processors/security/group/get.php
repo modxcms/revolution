@@ -7,93 +7,106 @@
  * @package modx
  * @subpackage processors.security.group
  */
+if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-if (!isset($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_group_err_not_specified'));
-
-$ug = $modx->getObject('modUserGroup',$_REQUEST['id']);
-if ($ug == null) return $modx->error->failure($modx->lexicon('user_group_err_not_found'));
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_group_err_not_specified'));
+$usergroup = $modx->getObject('modUserGroup',$_REQUEST['id']);
+if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_not_found'));
 
 if (isset($_REQUEST['getUsers']) && $_REQUEST['getUsers']) {
-    $ugms = $modx->getCollection('modUserGroupMember',array(
-        'user_group' => $ug->get('id'),
+    $c = $modx->newQuery('modUserGroupMember');
+    $c->select('
+        modUserGroupMember.*,
+        User.username AS username,
+        UserGroupRole.name AS role_name
+    ');
+    $c->innerJoin('modUser','User');
+    $c->leftJoin('modUserGroupRole','UserGroupRole');
+    $c->where(array(
+        'user_group' => $usergroup->get('id'),
     ));
+    $usergroupMembers = $modx->getCollection('modUserGroupMember',$c);
 
     $data = array();
-    foreach ($ugms as $ugm) {
-        $user = $ugm->getOne('User');
-        $role = $ugm->getOne('UserGroupRole');
-        if ($user) {
-            $role_name = $role != null ? $role->get('name') : '';
-            $data[] = array(
-                $user->get('id'),
-                $user->get('username'),
-                $ugm->get('role'),
-                $role_name,
-            );
-        }
+    foreach ($usergroupMembers as $member) {
+        $roleName = $member->get('role_name');
+        $data[] = array(
+            $member->get('member'),
+            $member->get('username'),
+            $member->get('role'),
+            empty($roleName) ? '' : $roleName,
+        );
     }
-    $ug->set('users','(' . $modx->toJSON($data) . ')');
+    $usergroup->set('users','(' . $modx->toJSON($data) . ')');
 }
 
 if (!empty($_REQUEST['getContexts'])) {
     $c = $modx->newQuery('modAccessContext');
+    $c->select('
+        modAccessContext.*,
+        Policy.name AS policy_name
+    ');
+    $c->innerJoin('modAccessPolicy','Policy');
     $c->where(array(
         'principal_class' => 'modUserGroup',
-        'principal' => $ug->get('id'),
+        'principal' => $usergroup->get('id'),
     ));
     $c->sortby('principal','ASC');
-    $objectGraph = '{"Target":{},"Policy":{}}';
-    $ctxaccess = $modx->getCollectionGraph('modAccessContext', $objectGraph, $c);
+    $ctxaccess = $modx->getCollection('modAccessContext',$c);
 
     $data = array();
     foreach ($ctxaccess as $contextAccess) {
         $objdata= array(
             $contextAccess->get('id'),
             $contextAccess->get('target'),
-            $contextAccess->Target->get('key'),
+            $contextAccess->get('target'),
             $contextAccess->get('principal_class'),
             $contextAccess->get('principal'),
             $contextAccess->get('name'),
             $contextAccess->get('authority'),
             $contextAccess->get('policy'),
-            $contextAccess->Policy->get('name'),
+            $contextAccess->get('policy_name'),
         );
         $data[] = $objdata;
     }
-    $ug->set('contexts','(' . $modx->toJSON($data) . ')');
+    $usergroup->set('contexts','(' . $modx->toJSON($data) . ')');
 }
 
 
 if (!empty($_REQUEST['getResourceGroups'])) {
     $c = $modx->newQuery('modAccessResourceGroup');
+    $c->select('
+        modAccessResourceGroup.*,
+        Policy.name AS policy_name,
+        Target.name AS resurce_group_name
+    ');
+    $c->innerJoin('modAccessPolicy','Policy');
+    $c->innerJoin('modResourceGroup','Target');
     $c->where(array(
         'principal_class' => 'modUserGroup',
-        'principal' => $ug->get('id'),
+        'principal' => $usergroup->get('id'),
     ));
     $c->sortby('principal','ASC');
-    $objectGraph = '{"Target":{},"Policy":{}}';
-    $ctxaccess = $modx->getCollectionGraph('modAccessContext', $objectGraph, $c);
+    $rgaccess = $modx->getCollection('modAccessResourceGroup', $c);
 
     $data = array();
-    foreach ($ctxaccess as $acl) {
+    foreach ($rgaccess as $acl) {
         $objdata= array(
             $acl->get('id'),
             $acl->get('target'),
-            $acl->Target->get('name'),
+            $acl->get('resource_group_name'),
             $acl->get('principal_class'),
             $acl->get('principal'),
             $acl->get('name'),
             $acl->get('authority'),
             $acl->get('policy'),
-            $acl->Policy->get('name'),
+            $acl->get('policy_name'),
             $acl->get('context_key'),
         );
         $data[] = $objdata;
     }
-    $ug->set('resourcegroups','(' . $modx->toJSON($data) . ')');
+    $usergroup->set('resourcegroups','(' . $modx->toJSON($data) . ')');
 }
 
-return $modx->error->success('',$ug);
+return $modx->error->success('',$usergroup);

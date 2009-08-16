@@ -29,7 +29,7 @@ foreach ($users as $ua) {
     $ugm = $modx->newObject('modUserGroupMember');
     $ugm->set('user_group',$ug->get('id'));
     $ugm->set('member',$ua['id']);
-    $ugm->set('role',$ua['role']);
+    $ugm->set('role',empty($ua['role']) ? 0 : $ua['role']);
 
     $ugm->save();
 }
