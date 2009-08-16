@@ -16,7 +16,7 @@ MODx.grid.UserGroupContext = function(config) {
             header: _('minimum_role')
             ,dataIndex: 'authority'
             ,width: 50
-            ,editor: { xtype: 'modx-combo-authority' ,allowBlank: false }
+            ,editor: { xtype: 'modx-combo-authority' ,allowBlank: false, renderer: true }
         },{
             header: _('policy')
             ,dataIndex: 'policy_name'

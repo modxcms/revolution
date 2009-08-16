@@ -26,6 +26,7 @@ if (isset($_REQUEST['getUsers']) && $_REQUEST['getUsers']) {
     $c->where(array(
         'user_group' => $usergroup->get('id'),
     ));
+    $c->sortby('UserGroupRole.authority','ASC');
     $usergroupMembers = $modx->getCollection('modUserGroupMember',$c);
 
     $data = array();

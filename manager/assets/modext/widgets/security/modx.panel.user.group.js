@@ -131,11 +131,14 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
                     Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+r.object.name+'</h2>');
                     
                     var d = Ext.decode(r.object.users);
-                    var s = Ext.getCmp('modx-grid-user-group-users').getStore().loadData(d);
+                    Ext.getCmp('modx-grid-user-group-users').getStore().loadData(d);
+                    
                     d = Ext.decode(r.object.contexts);
-                    var s = Ext.getCmp('modx-grid-user-group-contexts').getStore().loadData(d);
+                    Ext.getCmp('modx-grid-user-group-contexts').getStore().loadData(d);
+                    
                     d = Ext.decode(r.object.resourcegroups);
-                    var s = Ext.getCmp('modx-grid-user-group-resource-groups').getStore().loadData(d);
+                    Ext.getCmp('modx-grid-user-group-resource-groups').getStore().loadData(d);
+                    
                     this.fireEvent('ready',r.object);
                 },scope:this}
             }
