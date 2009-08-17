@@ -66,7 +66,7 @@ class modManagerRequest extends modRequest {
             'template_dir' => $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme',null,'default') . '/',
         ));
         /* load context-specific cache dir */
-        $this->modx->smarty->setCachePath($this->modx->context->get('key').'/smarty/');
+        $this->modx->smarty->setCachePath($this->modx->context->get('key').'/smarty');
 
         $this->modx->smarty->assign('_config',$this->modx->config);
         $this->modx->smarty->assign_by_ref('modx',$this->modx);
