@@ -16,14 +16,17 @@ MODx.tree.Resource = function(config) {
 		,sortBy: 'menuindex'
 		,title: ''
 		,remoteToolbar: true
+        ,tbarCfg: {
+            id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
+        }
 		,url: MODx.config.connectors_url+'resource/index.php'
 	});
 	MODx.tree.Resource.superclass.constructor.call(this,config);
-    if (config.el) {
-        var el = Ext.get(config.el);
+    this.on('render',function() {
+        var el = Ext.get('modx_resource_tree');
         el.createChild({ tag: 'div', id: 'modx_resource_tree_tb' });
         el.createChild({ tag: 'div', id: 'modx_resource_tree_filter' });
-    }
+    });
 };
 Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 	forms: {}
@@ -149,9 +152,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 	,showFilter: function(itm,e) {
 		if (this._filterVisible) { return false; }
 		
-		var t = Ext.get('modx_resource_tree_filter');
-		var fbd = t.createChild({tag: 'div'});
-		var tb = new Ext.Toolbar(fbd);
+		var t = Ext.get(this.config.id+'-tbar');
+		var fbd = t.createChild({tag: 'div' ,cls: 'modx-formpanel' ,autoHeight: true});
+		var tb = new Ext.Toolbar({
+            applyTo: fbd
+            ,autoHeight: true
+            ,width: '100%'
+        });
 		var cb = new Ext.form.ComboBox({
 			store: new Ext.data.SimpleStore({
 				fields: ['name','value']
@@ -179,10 +186,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 		tb.addField(cb);
 		tb.add('-',{
 			scope: this
-			,cls: 'x-btn-icon'
-			,icon: MODx.config.template_url+'images/icons/close.gif'
+			,cls: 'x-btn-text'
+            ,text: _('close')
 			,handler: this.hideFilter
 		});
+        tb.doLayout();
 		this.filterBar = tb;
 		this._filterVisible = true;
 	}
