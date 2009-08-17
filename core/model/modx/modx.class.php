@@ -315,7 +315,7 @@ class modX extends xPDO {
                     PDO_MYSQL_ATTR_USE_BUFFERED_QUERY => true
                 )
             );
-            $this->setPackage('modx', MODX_CORE_PATH . 'model/');
+            $this->setPackage('modx', MODX_CORE_PATH . 'model/', $table_prefix);
             $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
         } else {
             $this->sendError($this->getOption('error_type', null, 'unavailable'), $options);
