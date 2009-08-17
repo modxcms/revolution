@@ -482,7 +482,10 @@ class modInstall {
             }
 
             /* empty sessions table to prevent old permissions from loading */
-            $this->xpdo->removeCollection('modSession');
+            $tableName = $this->xpdo->getTableName('modSession');
+            $this->xpdo->exec('
+                TRUNCATE '.$tableName.'
+            ');
         }
 
         return $results;
