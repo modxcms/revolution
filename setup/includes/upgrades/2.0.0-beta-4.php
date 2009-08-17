@@ -55,5 +55,8 @@ $c->where(array(
     'name' => 'Context',
 ));
 $policy = $this->install->xpdo->getObject('modAccessPolicy',$c);
-if ($policy != null) { $policy->remove(); }
+if ($policy != null) {
+    $policy->set('name','Administrator');
+    $policy->save();
+}
 unset($c,$policy);
