@@ -36,6 +36,7 @@ MODx.combo.ComboBox = function(config,getStore) {
             ,errorReader: MODx.util.JSONReader
             ,baseParams: config.baseParams || {}
             ,remoteSort: config.remoteSort || false
+            ,autoDestroy: true
         })
     });
 	if (getStore === true) {
@@ -61,7 +62,7 @@ Ext.reg('modx-combo',MODx.combo.ComboBox);
 MODx.combo.Renderer = function(combo) {
     var loaded = false;
     return (function(v) {
-        if (!combo.store || !combo.store.proxy) { return v; }
+        if (!combo.store) { return v; }
         var idx,rec;
         if (!loaded) { 
            combo.store.load();

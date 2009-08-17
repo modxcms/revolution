@@ -271,6 +271,8 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                     ,direction: this.config.sortDir || 'ASC'
                 }
                 ,groupField: this.config.groupBy || 'name'
+                ,storeId: this.config.storeId || Ext.id()
+                ,autoDestroy: true
             });
         } else {
             this.store = new Ext.data.JsonStore({
@@ -280,6 +282,8 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     			,root: 'results'
     			,totalProperty: 'total'
     			,remoteSort: this.config.remoteSort || false
+                ,storeId: this.config.storeId || Ext.id()
+                ,autoDestroy: true
     		});
         }
 	}
