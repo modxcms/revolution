@@ -24,7 +24,7 @@ MODx.panel.Static = function(config) {
             ,cls: 'modx-page-header'
             ,border: false
         },MODx.getPageStructure([{
-            title: _('resource_settings')
+            title: _('createedit_static')
             ,layout: 'form'
             ,bodyStyle: 'padding: 1.5em;'
             ,autoHeight: true

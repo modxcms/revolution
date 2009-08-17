@@ -45,7 +45,7 @@ MODx.panel.Resource = function(config) {
     };
     var it = [];
     it.push({
-        title: _('resource_settings')
+        title: _('createedit_document')
         ,id: 'modx-resource-settings'
         ,layout: 'form'
         ,labelWidth: 200
