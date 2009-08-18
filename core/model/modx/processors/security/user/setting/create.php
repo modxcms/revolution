@@ -87,6 +87,7 @@ if ($description == null) {
     $description->save();
 }
 
+/* save setting */
 if ($setting->save() === false) {
     $modx->error->checkValidation($setting);
     return $modx->error->failure($modx->lexicon('setting_err_save'));

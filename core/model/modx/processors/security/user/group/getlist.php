@@ -5,23 +5,18 @@
  * @package modx
  * @subpackage processors.security.user
  */
-$modx->lexicon->load('user');
-
 if (!$modx->hasPermission(array('access_permissions' => true, 'edit_user' => true))) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
+$modx->lexicon->load('user');
 
+$limit = !empty($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
-
-if (!isset($_REQUEST['user'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
-$user = $modx->getObject('modUser',$_REQUEST['user']);
-if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
-
-
+/* get memberships */
 $c = $modx->newQuery('modUserGroupMember');
 $c->select('modUserGroupMember.*, '
     . 'UserGroupRole.name AS rolename, '
@@ -29,15 +24,15 @@ $c->select('modUserGroupMember.*, '
 $c->innerJoin('modUserGroupRole','UserGroupRole');
 $c->innerJoin('modUserGroup','UserGroup');
 $c->where(array(
-    'member' => $user->get('id'),
+    'member' => $_REQUEST['user'],
 ));
-$ugms = $modx->getCollection('modUserGroupMember',$c);
+if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$members = $modx->getCollection('modUserGroupMember',$c);
 
 $list = array();
-foreach ($ugms as $ugm) {
-    $ua = $ugm->toArray();
-
-    $list[] = $ua;
+foreach ($members as $member) {
+    $memberArray = $member->toArray();
+    $list[] = $memberArray;
 }
 
 return $this->outputArray($list);

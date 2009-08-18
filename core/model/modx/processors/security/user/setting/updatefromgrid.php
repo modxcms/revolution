@@ -13,6 +13,7 @@ $modx->lexicon->load('setting');
 
 $_DATA = $modx->fromJSON($_POST['data']);
 
+/* get setting */
 $setting = $modx->getObject('modUserSetting',array(
     'key' => $_DATA['key'],
     'user' => $_DATA['user'],
@@ -20,6 +21,7 @@ $setting = $modx->getObject('modUserSetting',array(
 
 $setting->set('value',$_DATA['value']);
 
+/* save setting */
 if ($setting->save() == false) {
     return $modx->error->failure($modx->lexicon('setting_err_save'));
 }

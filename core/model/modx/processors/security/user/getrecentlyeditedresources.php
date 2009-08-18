@@ -14,25 +14,30 @@
  */
 $modx->lexicon->load('resource','user');
 
+$limit = !empty($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'editedon';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'DESC';
 
+/* get user */
 if (!isset($_REQUEST['user'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
 $user = $modx->getObject('modUser',$_REQUEST['user']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 
+/* get resources */
 $c = $modx->newQuery('modResource');
 $c->where(array('editedby' => $user->get('id')));
 $c->orCondition(array('createdby' => $user->get('id')));
 $count= $modx->getCount('modResource',$c);
+
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
+if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+
 $resources= $modx->getCollection('modResource',$c);
 
+/* process into array */
 $actions = $modx->request->getAllActionIDs();
-
 $rs = array();
 foreach ($resources as $resource) {
     $ra = $resource->toArray();

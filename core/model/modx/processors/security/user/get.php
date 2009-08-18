@@ -12,13 +12,15 @@ if (!$modx->hasPermission(array('access_permissions' => true, 'edit_user' => tru
 }
 $modx->lexicon->load('user');
 
+/* get user */
 if (!isset($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
 $user = $modx->getObject('modUser',$_REQUEST['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 
 $user->profile = $user->getOne('Profile');
 
-if (isset($_REQUEST['getGroups']) && $_REQUEST['getGroups']) {
+/* if set, get groups for user */
+if (!empty($_REQUEST['getGroups'])) {
     $c = $modx->newQuery('modUserGroupMember');
     $c->select('
         modUserGroupMember.*,

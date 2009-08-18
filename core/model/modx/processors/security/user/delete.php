@@ -7,13 +7,13 @@
  * @package modx
  * @subpackage processors.security.user
  */
+if (!$modx->hasPermission(array('access_permissions' => true, 'delete_user' => true))) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (!$modx->hasPermission(array('access_permissions' => true, 'delete_user' => true))) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-$user = $modx->getObject('modUser',$_REQUEST['id']);
+/* get user */
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+$user = $modx->getObject('modUser',$_POST['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
-
 
 /* check if we are deleting our own record */
 if ($user->get('id') == $modx->user->get('id')) {
