@@ -157,6 +157,9 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
     }
     ,beforeSubmit: function(o) {
         this.cleanupEditor();
+        Ext.apply(o.form.baseParams,{
+            propdata: Ext.getCmp('modx-grid-element-properties').encode()
+        });
         return this.fireEvent('save',{
             values: this.getForm().getValues()
             ,stay: MODx.config.stay

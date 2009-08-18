@@ -78,12 +78,6 @@ $tv->set('elements',$_POST['els']);
 $tv->set('display_params',$display_params);
 $tv->set('rank', !empty($_POST['rank']) ? $_POST['rank'] : 0);
 $tv->set('locked', !empty($_POST['locked']));
-$properties = null;
-if (isset($_POST['propdata'])) {
-    $properties = $_POST['propdata'];
-    $properties = $modx->fromJSON($properties);
-}
-if (is_array($properties)) $tv->setProperties($properties);
 
 if ($tv->save() === false) {
     return $modx->error->failure($modx->lexicon('tv_err_save'));

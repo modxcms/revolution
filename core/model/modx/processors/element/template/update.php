@@ -63,12 +63,6 @@ $modx->invokeEvent('OnBeforeTempFormSave',array(
 
 $template->fromArray($_POST);
 $template->set('locked',!empty($_POST['locked']));
-$properties = null;
-if (isset($_POST['propdata'])) {
-    $properties = $_POST['propdata'];
-    $properties = $modx->fromJSON($properties);
-}
-if (is_array($properties)) $template->setProperties($properties);
 
 if ($template->save() === false) {
     return $modx->error->failure($modx->lexicon('template_err_save'));

@@ -69,12 +69,6 @@ $modx->invokeEvent('OnBeforePluginFormSave',array(
 $plugin->fromArray($_POST);
 $plugin->set('locked',!empty($_POST['locked']));
 $plugin->set('disabled',!empty($_POST['disabled']));
-$properties = null;
-if (isset($_POST['propdata'])) {
-    $properties = $_POST['propdata'];
-    $properties = $modx->fromJSON($properties);
-}
-if (is_array($properties)) $plugin->setProperties($properties);
 
 if ($plugin->save() == false) {
     return $modx->error->failure($modx->lexicon('plugin_err_save'));

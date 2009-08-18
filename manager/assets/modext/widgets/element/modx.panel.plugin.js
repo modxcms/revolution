@@ -167,6 +167,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         var g = Ext.getCmp('modx-grid-plugin-event');
         Ext.apply(o.form.baseParams,{
             events: g.encodeModified()
+            ,propdata: Ext.getCmp('modx-grid-element-properties').encode()
         });
         this.cleanupEditor();
         return this.fireEvent('save',{

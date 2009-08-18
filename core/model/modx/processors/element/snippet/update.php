@@ -65,12 +65,6 @@ $modx->invokeEvent('OnBeforeSnipFormSave',array(
 
 $snippet->fromArray($_POST);
 $snippet->set('locked',!empty($_POST['locked']));
-$properties = null;
-if (isset($_POST['propdata'])) {
-    $properties = $_POST['propdata'];
-    $properties = $modx->fromJSON($properties);
-}
-if (is_array($properties)) $snippet->setProperties($properties);
 
 if ($snippet->save() == false) {
     return $modx->error->failure($modx->lexicon('snippet_err_save'));

@@ -229,6 +229,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         Ext.apply(o.form.baseParams,{
             templates: g.encodeModified()
             ,resource_groups: rg.encodeModified()
+            ,propdata: Ext.getCmp('modx-grid-element-properties').encode()
         });
     }
     ,success: function(o) {

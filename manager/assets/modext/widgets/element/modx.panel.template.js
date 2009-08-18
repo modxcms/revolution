@@ -155,6 +155,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         var g = Ext.getCmp('modx-grid-template-tv');
         Ext.apply(o.form.baseParams,{
             tvs: g.encodeModified()
+            ,propdata: Ext.getCmp('modx-grid-element-properties').encode()
         });
         this.cleanupEditor();
         return this.fireEvent('save',{

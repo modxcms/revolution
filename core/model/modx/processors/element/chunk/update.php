@@ -74,14 +74,6 @@ $modx->invokeEvent('OnBeforeChunkFormSave',array(
 $chunk->fromArray($_POST);
 $chunk->set('locked',!empty($_POST['locked']));
 
-/* set properties */
-$properties = null;
-if (isset($_POST['propdata'])) {
-    $properties = $_POST['propdata'];
-    $properties = $modx->fromJSON($properties);
-}
-if (is_array($properties)) { $chunk->setProperties($properties); }
-
 /* save the chunk */
 if ($chunk->save() == false) {
     return $modx->error->failure($modx->lexicon('chunk_err_save'));
