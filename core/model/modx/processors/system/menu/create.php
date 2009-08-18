@@ -39,6 +39,7 @@ $count = $modx->getCount('modMenu',array('parent' => $parent->get('id')));
 /* create menu */
 $menu = $modx->newObject('modMenu');
 $menu->fromArray($_POST);
+$menu->set('action',$_POST['action_id']);
 $menu->set('menuindex',$count);
 
 /* save menu */

@@ -41,6 +41,7 @@ if (!empty($_POST['parent'])) {
 
 /* save menu */
 $menu->fromArray($_POST);
+$menu->set($_POST['action_id']);
 if ($menu->save() == false) {
     return $modx->error->failure($modx->lexicon('menu_err_save'));
 }

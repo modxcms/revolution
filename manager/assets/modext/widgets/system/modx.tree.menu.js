@@ -111,7 +111,7 @@ MODx.window.CreateMenu = function(config) {
             ,width: 200
         },{
             fieldLabel: _('description')
-            ,name: 'text'
+            ,name: 'description'
             ,id: 'modx-cmen-description'
             ,xtype: 'textfield'
             ,allowBlank: false
@@ -183,7 +183,7 @@ MODx.window.UpdateMenu = function(config) {
             ,width: 200
         },{
             fieldLabel: _('description')
-            ,name: 'text'
+            ,name: 'description'
             ,id: 'modx-umen-description'
             ,xtype: 'textfield'
             ,allowBlank: false
