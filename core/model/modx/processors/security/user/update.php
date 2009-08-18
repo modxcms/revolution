@@ -7,23 +7,24 @@
  * @package modx
  * @subpackage processors.security.user
  */
-$modx->lexicon->load('user');
-
 if (!$modx->hasPermission(array('access_permissions' => true, 'save_user' => true))) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
+$modx->lexicon->load('user');
 
+/* get user */
+if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
 $user = $modx->getObject('modUser',$_POST['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 
+/* validate post */
+$_POST['blocked'] = empty($_POST['blocked']) ? 0 : 1;
 
 $newPassword= false;
 include_once $modx->getOption('processors_path').'security/user/_validation.php';
-
 if ($_POST['passwordnotifymethod'] == 'e') {
 	sendMailMessage($_POST['email'], $_POST['username'],$newPassword,$_POST['fullname']);
 }
-
 
 /* invoke OnBeforeUserFormSave event */
 $modx->invokeEvent('OnBeforeUserFormSave',array(

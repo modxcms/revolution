@@ -446,7 +446,7 @@ $collection['54']->fromArray(array (
   'parent' => 53,
   'controller' => 'security/user/create',
   'haslayout' => 1,
-  'lang_topics' => 'user,setting',
+  'lang_topics' => 'user,setting,access',
   'assets' => '',
 ), '', true, true);
 $collection['55']= $xpdo->newObject('modAction');
@@ -456,7 +456,7 @@ $collection['55']->fromArray(array (
   'parent' => 53,
   'controller' => 'security/user/update',
   'haslayout' => 1,
-  'lang_topics' => 'user,setting',
+  'lang_topics' => 'user,setting,access',
   'assets' => '',
 ), '', true, true);
 $collection['56']= $xpdo->newObject('modAction');

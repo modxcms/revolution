@@ -7,11 +7,10 @@
  * @package modx
  * @subpackage processors.security.user
  */
-$modx->lexicon->load('user');
-
 if (!$modx->hasPermission(array('access_permissions' => true, 'edit_user' => true))) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
+$modx->lexicon->load('user');
 
 if (!isset($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
 $user = $modx->getObject('modUser',$_REQUEST['id']);
@@ -19,42 +18,40 @@ if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_fou
 
 $user->profile = $user->getOne('Profile');
 
-
-
 if (isset($_REQUEST['getGroups']) && $_REQUEST['getGroups']) {
-    $ugms = $modx->getCollection('modUserGroupMember',array(
+    $c = $modx->newQuery('modUserGroupMember');
+    $c->select('
+        modUserGroupMember.*,
+        UserGroupRole.name AS role_name,
+        UserGroup.name AS user_group_name
+    ');
+    $c->innerJoin('modUserGroupRole','UserGroupRole');
+    $c->innerJoin('modUserGroup','UserGroup');
+    $c->where(array(
         'member' => $user->get('id'),
     ));
+    $members = $modx->getCollection('modUserGroupMember',$c);
 
     $data = array();
-    foreach ($ugms as $ugm) {
-        $role = $ugm->getOne('UserGroupRole');
-        $usergroup = $ugm->getOne('UserGroup');
-        $role_name = $role != null ? $role->get('name') : '';
+    foreach ($members as $member) {
+        $roleName = $member->get('role_name');
         $data[] = array(
-            $usergroup->get('id'),
-            $usergroup->get('name'),
-            $user->get('id'),
-            $ugm->get('role'),
-            $role_name,
+            $member->get('user_group'),
+            $member->get('user_group_name'),
+            $member->get('member'),
+            $member->get('role'),
+            empty($roleName) ? '' : $roleName,
         );
     }
     $user->set('groups','(' . $modx->toJSON($data) . ')');
 }
 
-
 $ua = $user->toArray();
 $ua = array_merge($ua,$user->profile->toArray());
-$ua['dob'] = $ua['dob'] != '0'
-    ? strftime('%m/%d/%Y',$ua['dob'])
-    : '';
-$ua['blockeduntil'] = $ua['blockeduntil'] != '0'
-    ? strftime('%m/%d/%Y %I:%M %p',$ua['blockeduntil'])
-    : '';
-$ua['blockedafter'] = $ua['blockedafter'] != '0'
-    ? strftime('%m/%d/%Y %I:%M %p',$ua['blockedafter'])
-    : '';
-
+$ua['dob'] = !empty($ua['dob']) ? strftime('%m/%d/%Y',$ua['dob']) : '';
+$ua['blockeduntil'] = !empty($ua['blockeduntil']) ? strftime('%m/%d/%Y %I:%M %p',$ua['blockeduntil']) : '';
+$ua['blockedafter'] = !empty($ua['blockedafter']) ? strftime('%m/%d/%Y %I:%M %p',$ua['blockedafter']) : '';
+$ua['lastlogin'] = !empty($ua['lastlogin']) ? strftime('%m/%d/%Y',$ua['lastlogin']) : '';
 
 
 return $modx->error->success('',$ua);

@@ -28,13 +28,11 @@ if (isset($_REQUEST['key']) && $_REQUEST['key'] != '') {
 
 $c = $modx->newQuery('modUserSetting');
 $c->where($wa);
+$count = $modx->getCount('modUserSetting',$c);
+
 $c->sortby('`'.$_REQUEST['sort'].'`',$_REQUEST['dir']);
 $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 $settings = $modx->getCollection('modUserSetting',$c);
-
-$cc = $modx->newQuery('modUserSetting');
-$cc->where($wa);
-$count = $modx->getCount('modUserSetting',$cc);
 
 $ss = array();
 foreach ($settings as $setting) {

@@ -5,70 +5,34 @@
  * @package modx
  * @subpackage manager.security.user
  */
-if(!$modx->hasPermission('edit_user')) return $modx->error->failure($modx->lexicon('access_denied'));
+if (!$modx->hasPermission('edit_user')) return $modx->error->failure($modx->lexicon('access_denied'));
 
+/* get user */
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
 $user = $modx->getObject('modUser',$_REQUEST['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
-$user->profile = $user->getOne('Profile');
-$user->getSettings();
-
-/* load Roles */
-$roles = $modx->getCollection('modUserRole');
-$modx->smarty->assign('roles',$roles);
-
 /* invoke OnUserFormPrerender event */
-$onUserFormPrerender = $modx->invokeEvent('OnUserFormPrerender', array('id' => $_REQUEST['id']));
+$onUserFormPrerender = $modx->invokeEvent('OnUserFormPrerender', array(
+    'id' => $user->get('id'),
+    'user' => &$user,
+    'mode' => 'upd',
+));
 if (is_array($onUserFormPrerender)) {
 	$onUserFormPrerender = implode('',$onUserFormPrerender);
 }
 $modx->smarty->assign('onUserFormPrerender',$onUserFormPrerender);
 
-$blockedmode = ($user->profile->get('blocked')
-     || ($user->profile->get('blockeduntil') > time() && $user->profile->get('blockeduntil') != 0)
-     || ($user->profile->get('blockedafter') < time() && $user->profile->get('blockedafter') != 0)
-      || $user->profile->get('failedlogins') > 3) ? true : false;
-$modx->smarty->assign('blockedmode',$blockedmode);
-
-
-/* include the country list language file */
-$_country_lang = array();
-include_once $modx->getOption('core_path').'lexicon/country/en.inc.php';
-if ($modx->getOption('manager_language') != 'en' && file_exists($modx->getOption('core_path').'lexicon/country/'.$modx->getOption('manager_language').'.inc.php')) {
-    include_once $modx->getOption('core_path').'lexicon/country/'.$modx->getOption('manager_language').'.inc.php';
-}
-$modx->smarty->assign('_country_lang',$_country_lang);
-
-
-
 /* invoke onInterfaceSettingsRender event */
-$onInterfaceSettingsRender = $modx->invokeEvent('OnInterfaceSettingsRender', array('id' => $user->get('id')));
+$onInterfaceSettingsRender = $modx->invokeEvent('OnInterfaceSettingsRender', array(
+    'id' => $user->get('id'),
+    'user' => &$user,
+    'mode' => 'upd',
+));
 if (is_array($onInterfaceSettingsRender)) {
 	$onInterfaceSettingsRender = implode('', $onInterfaceSettingsRender);
 }
 $modx->smarty->assign('onInterfaceSettingsRender',$onInterfaceSettingsRender);
-
-
-/* load Access Permissions */
-$groupsarray = array();
-$usergroups = $modx->getCollection('modUserGroup');
-$ugus = $modx->getCollection('modUserGroupMember',array('member' => $user->get('id')));
-
-foreach ($ugus as $g) {
-    $groupsarray[] = $g->get('user_group');
-}
-
-/* retain selected doc groups between post */
-if (is_array($_POST['user_groups'])) {
-    foreach ($_POST['user_groups'] as $n => $v)
-        $groupsarray[] = $v;
-}
-$modx->smarty->assign('usergroups',$usergroups);
-$modx->smarty->assign('groupsarray',$groupsarray);
-
-/* assign user to smarty */
-$modx->smarty->assign('user',$user);
-
 
 /* register JS scripts */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.grid.settings.js');
@@ -83,8 +47,6 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-user-update"
         ,user: "'.$user->get('id').'"
-        ,manager_language: "'.$user->get('language').'"
-        ,which_editor: "'.$user->settings['which_editor'].'"
     });
 });
 // ]]>

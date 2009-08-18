@@ -13,10 +13,9 @@ MODx.panel.User = function(config) {
         ,defaults: { collapsible: false ,autoHeight: true }
         ,bodyStyle: ''
         ,items: {
-            xtype: 'tabpanel'
-            ,activeTab: 0
+            xtype: 'modx-tabs'
             ,deferredRender: false
-            ,border: false
+            ,border: true
             ,defaults: {
                 autoHeight: true
                 ,layout: 'form'
@@ -255,6 +254,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     id: 'modx-user-country'
                     ,fieldLabel: _('user_country')
                     ,xtype: 'modx-combo-country'
+                    ,value: ''
                 },{
                     id: 'modx-user-dob'
                     ,name: 'dob'
@@ -334,6 +334,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     xtype: 'modx-grid-user-settings'
                     ,preventRender: true
                     ,user: config.user
+                    ,width: '97%'
                 }]
             })
         }
@@ -346,9 +347,10 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 html: _('access_permissions_user_message')
             },MODx.PanelSpacer,{            
                 xtype: 'modx-grid-user-groups'
-                ,title: _('user_groups')
+                ,title: ''
                 ,preventRender: true
                 ,user: config.user
+                ,width: '97%'
             }]
         });
         return f;

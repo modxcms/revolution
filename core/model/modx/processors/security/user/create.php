@@ -14,11 +14,13 @@ if (!$modx->hasPermission(array('access_permissions' => true, 'new_user' => true
 
 $user = $modx->newObject('modUser');
 
-if ($_POST['newusername'] == '')
-	$modx->error->addField('new_user_name',$modx->lexicon('user_err_not_specified_username'));
+
+/* validate post */
+$_POST['blocked'] = empty($_POST['blocked']) ? 0 : 1;
+
+if (empty($_POST['newusername'])) $modx->error->addField('new_user_name',$modx->lexicon('user_err_not_specified_username'));
 
 $newPassword= '';
-
 $s = include_once $modx->getOption('processors_path').'security/user/_validation.php';
 
 if ($_POST['passwordnotifymethod'] == 'e') {
