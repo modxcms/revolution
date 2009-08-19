@@ -35,6 +35,6 @@ $collection['2']->fromArray(array (
   'class' => '',
 ), '', true, true);
 $permissions = include dirname(__FILE__).'/permissions/transport.policy.administrator.php';
-$collection['2']->addMany($permissions,'Permissions');
+$collection['2']->addMany($permissions);
 $collection['2']->set('data',bld_policyFormatData($permissions));
 unset($permissions);
