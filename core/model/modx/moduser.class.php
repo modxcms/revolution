@@ -574,7 +574,7 @@ class modUser extends modPrincipal {
         if (isset($_SESSION["modx.user.{$this->id}.userGroups"])) {
             $groups= $_SESSION["modx.user.{$this->id}.userGroups"];
         } else {
-            $memberGroups= $this->xpdo->getCollectionGraph('modUserGroup', '{"UserGroupMembers":{}}', array('`UserGroupMembers`.`member`' => $this->get('id')));
+            $memberGroups= $this->xpdo->getCollectionGraph('modUserGroup', '{"UserGroupMembers":{}}', array('`UserGroupMembers`.member' => $this->get('id')));
             if ($memberGroups) {
                 foreach ($memberGroups as $group) $groups[]= $group->get('id');
             }
@@ -594,7 +594,7 @@ class modUser extends modPrincipal {
         if (isset($_SESSION["modx.user.{$this->id}.userGroupNames"])) {
             $groupNames= $_SESSION["modx.user.{$this->id}.userGroupNames"];
         } else {
-            $memberGroups= $this->xpdo->getCollectionGraph('modUserGroup', '{"UserGroupMembers":{}}', array('`UserGroupMembers`.`member`' => $this->get('id')));
+            $memberGroups= $this->xpdo->getCollectionGraph('modUserGroup', '{"UserGroupMembers":{}}', array('`UserGroupMembers`.member' => $this->get('id')));
             if ($memberGroups) {
                 foreach ($memberGroups as $group) $groupNames[]= $group->get('name');
             }
