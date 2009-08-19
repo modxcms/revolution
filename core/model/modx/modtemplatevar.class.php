@@ -319,7 +319,7 @@ class modTemplateVar extends modElement {
      * Returns an string if a delimiter is present. Returns array if is a recordset is present.
      *
      * @access public
-     * @param mixed $src Source object, either a recordset, PDO object, array or string.
+     * @param mixed $src Source object, either a recordset, PDOStatement, array or string.
      * @param string $delim Delimiter for string parsing.
      * @param string $type Type to return, either 'string' or 'array'.
      *
@@ -357,7 +357,7 @@ class modTemplateVar extends modElement {
      * Parses input options sent through postback.
      *
      * @access public
-     * @param mixed $v The options to parse, either a resource, array or string.
+     * @param mixed $v The options to parse, either a recordset, PDOStatement, array or string.
      * @return mixed The parsed options.
      */
     function parseInputOptions($v) {
@@ -365,6 +365,8 @@ class modTemplateVar extends modElement {
         if(is_array($v)) return $v;
         else if(is_resource($v)) {
             while ($cols = mysql_fetch_row($v)) $a[] = $cols;
+        } else if (is_object($v)) {
+            $a = $v->fetchAll(PDO_FETCH_ASSOC);
         }
         else $a = explode("||", $v);
         return $a;
@@ -406,8 +408,7 @@ class modTemplateVar extends modElement {
                     $dbtags['PREFIX'] = $this->xpdo->db->config['table_prefix'];
                     foreach($dbtags as $key => $pValue)
                         $param = str_replace('[[+'.$key.']]', $pValue, $param);
-                    $rs = $this->xpdo->db->query('SELECT '.$param);
-                    $output = $rs;
+                    $output = $this->xpdo->db->query('SELECT '.$param);
                     break;
 
                 case 'EVAL':        /* evaluates text as php codes return the results */
