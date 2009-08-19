@@ -63,6 +63,7 @@ MODx.combo.Renderer = function(combo) {
     var loaded = false;
     return (function(v) {
         var idx,rec;
+        if (!combo.store) return v;
         if (!loaded) {
             if (combo.store.proxy !== undefined && combo.store.proxy !== null) {
                 combo.store.load();
