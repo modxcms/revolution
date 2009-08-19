@@ -11,6 +11,7 @@ $classes= array (
     'modAccessContext',
     'modAccessElement',
     'modAccessMenu',
+    'modAccessPermission',
     'modAccessPolicy',
     'modAccessResource',
     'modAccessResourceGroup',
