@@ -63,7 +63,6 @@ $classes= array (
     'modLexiconTopic',
 );
 
-$this->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/');
 $this->xpdo->getManager();
 /* $this->xpdo->setLogLevel(XPDO_LOG_LEVEL_INFO); */
 $connected= $this->xpdo->connect();

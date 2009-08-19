@@ -207,6 +207,7 @@ class modInstall {
                 )
             ));
             $this->xpdo->setLogLevel(XPDO_LOG_LEVEL_WARN);
+            $this->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/', $this->config['table_prefix']);
         }
         return $this->xpdo;
     }
@@ -341,8 +342,6 @@ class modInstall {
         if ($this->xpdo) {
             /* add required core data */
             $this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
-
-            $this->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/');
 
             $packageDirectory = MODX_CORE_PATH . 'packages/';
             $packageState = $this->config['unpacked'] == 1 ? XPDO_TRANSPORT_STATE_UNPACKED : XPDO_TRANSPORT_STATE_PACKED;
@@ -622,8 +621,6 @@ class modInstall {
             if (!is_object($modx) || !is_a($modx, 'modX')) {
                 $errors[] = '<p>'.$this->lexicon['modx_err_instantiate'].'</p>';
             } else {
-                $modx->setPackage('modx', MODX_CORE_PATH . 'model/');
-
                 /* try to initialize the mgr context */
                 $modx->initialize('mgr');
                 if (!$modx->_initialized) {

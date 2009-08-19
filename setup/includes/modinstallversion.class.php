@@ -80,7 +80,6 @@ class modInstallVersion {
     function install() {
         $this->results = array();
 
-        $this->install->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/');
         $connected = $this->install->xpdo->connect();
         if ($connected) {
             $this->install->xpdo->getManager();
