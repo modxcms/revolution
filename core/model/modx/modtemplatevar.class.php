@@ -181,24 +181,26 @@ class modTemplateVar extends modElement {
     function setValue($resourceId= 0, $value= null) {
         $oldValue= '';
         if (intval($resourceId)) {
-            $tvd = $this->xpdo->getObject('modTemplateVarResource',array(
+            $templateVarResource = $this->xpdo->getObject('modTemplateVarResource',array(
                 'tmplvarid' => $this->get('id'),
                 'contentid' => $resourceId,
             ),true);
 
-            if (!$tvd) {
-                $tvd= $this->xpdo->newObject('modTemplateVarResource');
+            if (!$templateVarResource) {
+                $templateVarResource= $this->xpdo->newObject('modTemplateVarResource');
             }
+
             if ($value !== $this->get('default_text')) {
-                if (!$tvd->_new) {
-                    $tvd->set('value', $value);
+                if (!$templateVarResource->isNew()) {
+                    $templateVarResource->set('value', $value);
                 } else {
-                    $tvd->set('contentid', $resourceId);
-                    $tvd->set('value', $value);
-                    $this->addOne($tvd);
+                    $templateVarResource->set('contentid', $resourceId);
+                    $templateVarResource->set('value', $value);
                 }
-            } elseif (!$tvd->_new && ($value === null || $value === $this->get('default_text'))) {
-                $tvd->remove();
+                $this->addMany($templateVarResource);
+            } elseif (!$templateVarResource->isNew()
+                  && ($value === null || $value === $this->get('default_text'))) {
+                $templateVarResource->remove();
             }
         }
     }

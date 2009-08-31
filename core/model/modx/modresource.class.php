@@ -398,4 +398,26 @@ class modResource extends modAccessibleSimpleObject {
         ));
         return $this->xpdo->getCount('modResource',$c);
     }
+
+    /**
+     * Gets the value of a TV for the Resource.
+     *
+     * @access public
+     * @param mixed $pk Either the ID of the TV, or the name of the TV.
+     * @return null/mixed The value of the TV for the Resource, or null if the
+     * TV is not found.
+     */
+    function getTVValue($pk) {
+        $c = $this->xpdo->newQuery('modTemplateVarResource');
+        if (is_string($pk)) {
+            $c->innerJoin('modTemplateVar','TemplateVar');
+            $c->where(array('TemplateVar.name' => $pk));
+        } else {
+            $c->where(array('modTemplateVarResource.tmplvarid' => $pk));
+        }
+        $templateVarResource = $this->xpdo->getObject('modTemplateVarResource',$c);
+        if ($templateVarResource == null) return null;
+
+        return $templateVarResource == null ? null : $templateVarResource->get('value');
+    }
 }

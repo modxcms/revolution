@@ -142,7 +142,7 @@ $xpdo_meta_map['modTemplateVar']= array (
       'local' => 'id',
       'foreign' => 'tmplvarid',
       'cardinality' => 'many',
-      'owner' => 'foreign',
+      'owner' => 'local',
     ),
     'TemplateVarResources' => 
     array (
@@ -150,7 +150,7 @@ $xpdo_meta_map['modTemplateVar']= array (
       'local' => 'id',
       'foreign' => 'tmplvarid',
       'cardinality' => 'many',
-      'owner' => 'foreign',
+      'owner' => 'local',
     ),
     'TemplateVarResourceGroups' => 
     array (
@@ -158,7 +158,7 @@ $xpdo_meta_map['modTemplateVar']= array (
       'local' => 'id',
       'foreign' => 'tmplvarid',
       'cardinality' => 'many',
-      'owner' => 'foreign',
+      'owner' => 'local',
     ),
   ),
 );

@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1189] Fixed issue with TV values not setting properly with modTemplateVar->setValue
+- Added modResource->getTVValue, which gets the value of a specified TV for the Resource
 - [#MODX-1177] Adjusted Lexicon Management text to properly represent functionality
 - Added more metadata to Lexicon Topic exports
 - [#MODX-1191] Fixed issue where Namespace combo was conflicting with other DOM IDs in Lexicon Management

@@ -79,7 +79,7 @@ class modTemplate extends modElement {
      */
     function getMany($class, $criteria= null, $cacheFlag= false) {
         $collection= array ();
-        if ($class === 'modTemplateVar' && ($criteria === null || strtolower($criteria) === 'all')) {
+        if (($class === 'TemplateVars' || $class === 'modTemplateVar') && ($criteria === null || strtolower($criteria) === 'all')) {
             $c = $this->xpdo->newQuery('modTemplateVar');
             $c->select('
                 DISTINCT modTemplateVar.*,

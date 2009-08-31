@@ -531,9 +531,9 @@
         <field key="properties" dbtype="text" phptype="array" null="true" />
         
         <aggregate alias="Category" class="modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
-        <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="tmplvarid" cardinality="many" owner="foreign" />
-        <composite alias="TemplateVarResources" class="modTemplateVarResource" local="id" foreign="tmplvarid" cardinality="many" owner="foreign" />
-        <composite alias="TemplateVarResourceGroups" class="modTemplateVarResourceGroup" local="id" foreign="tmplvarid" cardinality="many" owner="foreign" />
+        <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
+        <composite alias="TemplateVarResources" class="modTemplateVarResource" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
+        <composite alias="TemplateVarResourceGroups" class="modTemplateVarResourceGroup" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
     </object>
     
     <object class="modTemplateVarResource" table="site_tmplvar_contentvalues" extends="xPDOSimpleObject">
