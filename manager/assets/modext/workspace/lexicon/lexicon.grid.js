@@ -239,6 +239,7 @@ Ext.reg('modx-grid-lexicon',MODx.grid.Lexicon);
  */
 MODx.window.CreateLexiconEntry = function(config) {
     config = config || {};
+    this.ident = config.ident || 'cle'+Ext.id();
     var r = config.record;
     Ext.applyIf(config,{
         title: _('entry_create')
@@ -248,14 +249,14 @@ MODx.window.CreateLexiconEntry = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('key')
             ,name: 'name'
-            ,id: 'modx-cle-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,width: 250
             ,maxLength: 100
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
-            ,id: 'modx-cle-namespace'
+            ,id: 'modx-'+this.ident+'-namespace'
             ,value: r['namespace']
             ,listeners: {
             	'select': {fn: function(cb,r,i) {
@@ -269,19 +270,19 @@ MODx.window.CreateLexiconEntry = function(config) {
             xtype: 'modx-combo-lexicon-topic'
             ,fieldLabel: _('topic')
             ,name: 'topic'
-            ,id: 'modx-cle-topic'
+            ,id: 'modx-'+this.ident+'-topic'
             ,value: r.topic
         },{
             xtype: 'modx-combo-language'
             ,fieldLabel: _('language')
             ,name: 'language'
-            ,id: 'modx-cle-language'
+            ,id: 'modx-'+this.ident+'-language'
             ,value: r.language
         },{
             xtype: 'textarea'
             ,fieldLabel: _('value')
             ,name: 'value'
-            ,id: 'modx-cle-value'
+            ,id: 'modx-'+this.ident+'-value'
             ,width: 300
             ,grow: true
         }]
@@ -315,6 +316,7 @@ Ext.reg('modx-window-lexicon-entry-create',MODx.window.CreateLexiconEntry);
  */
 MODx.window.UpdateLexiconEntry = function(config) {
     config = config || {};
+    this.ident = config.ident || 'ule'+Ext.id();
     var r = config.record;
     Ext.applyIf(config,{
         title: _('entry_update')
@@ -323,13 +325,13 @@ MODx.window.UpdateLexiconEntry = function(config) {
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
-            ,id: 'modx-ule-id'
+            ,id: 'modx-'+this.ident+'-id'
             ,value: r.id
         },{
             xtype: 'textfield'
             ,fieldLabel: _('key')
             ,name: 'name'
-            ,id: 'modx-ule-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,width: 250
             ,maxLength: 100
             ,value: r.name
@@ -337,13 +339,13 @@ MODx.window.UpdateLexiconEntry = function(config) {
             xtype: 'modx-combo-lexicon-topic'
             ,fieldLabel: _('topic')
             ,name: 'topic'
-            ,id: 'modx-ule-topic'
+            ,id: 'modx-'+this.ident+'-topic'
             ,value: r.topic
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
-            ,id: 'modx-ule-namespace'
+            ,id: 'modx-'+this.ident+'-namespace'
             ,value: r['namespace']
             ,listeners: {
                 'select': {fn: function(cb,r,i) {
@@ -357,13 +359,13 @@ MODx.window.UpdateLexiconEntry = function(config) {
             xtype: 'modx-combo-language'
             ,fieldLabel: _('language')
             ,name: 'language'
-            ,id: 'modx-ule-language'
+            ,id: 'modx-'+this.ident+'-language'
             ,value: r.language
         },{
             xtype: 'textarea'
             ,fieldLabel: _('value')
             ,name: 'value'
-            ,id: 'modx-ule-value'
+            ,id: 'modx-'+this.ident+'-value'
             ,width: 300
             ,grow: true
             ,value: r.value
@@ -397,6 +399,7 @@ Ext.reg('modx-window-lexicon-entry-update',MODx.window.UpdateLexiconEntry);
  */
 MODx.window.CreateLexiconTopic = function(config) {
     config = config || {};
+    this.ident = config.ident || 'clt'+Ext.id();
     var r = config.record;
     Ext.applyIf(config,{
         title: _('topic_create')
@@ -406,14 +409,14 @@ MODx.window.CreateLexiconTopic = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
-            ,id: 'modx-clt-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,width: 250
             ,maxLength: 100
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
-            ,id: 'modx-clt-namespace'
+            ,id: 'modx-'+this.ident+'-namespace'
             ,value: r['namespace']
         }]
     });
@@ -433,6 +436,7 @@ Ext.reg('modx-window-lexicon-topic-create',MODx.window.CreateLexiconTopic);
  */
 MODx.window.ImportLexicon = function(config) {
     config = config || {};
+    this.ident = config.ident || 'implex'+Ext.id();
     var r = config.record;
     Ext.applyIf(config,{
         title: _('lexicon_import')
@@ -443,28 +447,29 @@ MODx.window.ImportLexicon = function(config) {
             html: _('lexicon_import_desc')
             ,border: false
             ,bodyStyle: 'margin: 1em;'
+            ,id: 'modx-'+this.ident+'-desc'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('lexicon')
             ,name: 'lexicon'
-            ,id: 'modx-clt-lexicon'
+            ,id: 'modx-'+this.ident+'-lexicon'
             ,width: 250
             ,inputType: 'file'
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
-            ,id: 'modx-clt-namespace'
+            ,id: 'modx-'+this.ident+'-namespace'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('topic')
             ,name: 'topic'
-            ,id: 'modx-clt-topic'
+            ,id: 'modx-'+this.ident+'-topic'
         },{
             xtype: 'modx-combo-language'
             ,fieldLabel: _('language')
             ,name: 'language'
-            ,id: 'modx-clt-language'
+            ,id: 'modx-'+this.ident+'-language'
         }]
     });
     MODx.window.ImportLexicon.superclass.constructor.call(this,config);
@@ -484,6 +489,7 @@ Ext.reg('modx-window-lexicon-import',MODx.window.ImportLexicon);
  */
 MODx.window.ExportLexicon = function(config) {
     config = config || {};
+    this.ident = config.ident || 'explex'+Ext.id();
     var r = config.record;
     Ext.applyIf(config,{
         title: _('lexicon_export')
@@ -494,11 +500,12 @@ MODx.window.ExportLexicon = function(config) {
             html: _('lexicon_export_desc')
             ,border: false
             ,bodyStyle: 'margin: 1em;'
+            ,id: 'modx-'+this.ident+'-desc'
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
-            ,id: 'modx-elex-namespace'
+            ,id: 'modx-'+this.ident+'-namespace'
             ,listeners: {
                 'select': {fn: function(cb,r,i) {
                     cle = Ext.getCmp('modx-elex-topic');
@@ -511,12 +518,12 @@ MODx.window.ExportLexicon = function(config) {
             xtype: 'modx-combo-lexicon-topic'
             ,fieldLabel: _('topic')
             ,name: 'topic'
-            ,id: 'modx-elex-topic'
+            ,id: 'modx-'+this.ident+'-topic'
         },{
             xtype: 'modx-combo-language'
             ,fieldLabel: _('language')
             ,name: 'language'
-            ,id: 'modx-elex-language'
+            ,id: 'modx-'+this.ident+'-language'
         }]
     });
     MODx.window.ExportLexicon.superclass.constructor.call(this,config);
