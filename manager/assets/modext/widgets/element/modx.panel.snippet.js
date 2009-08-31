@@ -109,7 +109,7 @@ MODx.panel.Snippet = function(config) {
         }
     });
     MODx.panel.Snippet.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx_element_tree').expand();",1000);
+    setTimeout("Ext.getCmp('modx-element-tree').expand();",1000);
 };
 Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
     initialized: false
@@ -155,7 +155,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
     ,success: function(r) {
         Ext.getCmp('modx-grid-element-properties').save();
         
-        var t = parent.Ext.getCmp('modx_element_tree');
+        var t = parent.Ext.getCmp('modx-element-tree');
         var c = Ext.getCmp('modx-snippet-category').getValue();
         var u = c != '' && c != null ? 'n_snippet_category_'+c : 'n_type_snippet'; 
         t.refreshNode(u,true);

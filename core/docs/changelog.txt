@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Changed Accordion to Tabs in left menu
+- In all Resource panels, Moved Page Settings back to right side, moved Template to top, moved Published to top right 
 - [#MODX-1173] Added modResource->hasChildren() function. Returns # of children for the Resource.
 - [#MODX-689] Fixed error when using @SELECT binding with Template Variable Input Option values.
 - Fixed issues with modMenu creation/editing

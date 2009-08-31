@@ -46,7 +46,7 @@ MODx.panel.PropertySet = function(config) {
         }]
     });
     MODx.panel.PropertySet.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx_element_tree').expand();",1000);
+    setTimeout("Ext.getCmp('modx-element-tree').expand();",1000);
     
     /* load after b/c of safari/ie focus bug */
     (function() {

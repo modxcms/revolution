@@ -36,7 +36,7 @@ MODx.panel.ErrorLog = function(config) {
         }]
     });
     MODx.panel.ErrorLog.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-layout').removeAccordion();",1000);
+    setTimeout("Ext.getCmp('modx-layout').hideLeftbar();",1000);
     this.setup();
 };
 Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{

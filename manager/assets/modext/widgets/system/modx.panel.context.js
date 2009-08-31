@@ -93,7 +93,7 @@ Ext.extend(MODx.panel.Context,MODx.FormPanel,{
     ,success: function(o) {
         Ext.getCmp('modx-grid-context-settings').getStore().commitChanges();
         
-        var t = parent.Ext.getCmp('modx_element_tree');        
+        var t = parent.Ext.getCmp('modx-resource-tree');        
         t.refreshNode(this.config.context+'_0',true);
     }
 });

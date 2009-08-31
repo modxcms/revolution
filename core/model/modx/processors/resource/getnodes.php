@@ -97,7 +97,7 @@ while ($item) {
                                 'text' => $modx->lexicon('document_create_here'),
                                 'scope' => 'this',
                                 'handler' => 'function() {
-                                    Ext.getCmp("modx_resource_tree").loadAction("'
+                                    Ext.getCmp("modx-resource-tree").loadAction("'
                                         . 'a=' . $actions['resource/create']
                                         . '&context_key=' . $item->get('key')
                                      . '");
@@ -107,7 +107,7 @@ while ($item) {
                                // 'id' => 'cm-context-weblink-create',
                                 'text' => $modx->lexicon('weblink_create_here'),
                                 'handler' => 'function() {
-                                    Ext.getCmp("modx_resource_tree").loadAction("'
+                                    Ext.getCmp("modx-resource-tree").loadAction("'
                                         . 'a=' . $actions['resource/create']
                                         . '&class_key=' . 'modWebLink'
                                         . '&context_key=' . $item->get('key') . '");
@@ -117,7 +117,7 @@ while ($item) {
                                // 'id' => 'cm-context-symlink-create',
                                 'text' => $modx->lexicon('symlink_create_here'),
                                 'handler' => 'function() {
-                                    Ext.getCmp("modx_resource_tree").loadAction("'
+                                    Ext.getCmp("modx-resource-tree").loadAction("'
                                         . 'a=' . $actions['resource/create']
                                         . '&class_key=' . 'modSymLink'
                                         . '&context_key=' . $item->get('key') . '");
@@ -127,7 +127,7 @@ while ($item) {
                                // 'id' => 'cm-context-staticresource-create',
                                 'text' => $modx->lexicon('static_resource_create_here'),
                                 'handler' => 'function() {
-                                    Ext.getCmp("modx_resource_tree").loadAction("'
+                                    Ext.getCmp("modx-resource-tree").loadAction("'
                                         . 'a=' . $actions['resource/create']
                                         . '&class_key=' . 'modStaticResource'
                                         . '&context_key=' . $item->get('key') . '");
@@ -146,7 +146,7 @@ while ($item) {
                                 'text' => $modx->lexicon('resource'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
-                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modResource","'.$item->get('key').'",0);
+                                    Ext.getCmp("modx-resource-tree").quickCreate(itm,e,"modResource","'.$item->get('key').'",0);
                                 }',
                             ),
                             array(
@@ -154,7 +154,7 @@ while ($item) {
                                 'text' => $modx->lexicon('weblink'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
-                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modWebLink","'.$item->get('key').'","0");
+                                    Ext.getCmp("modx-resource-tree").quickCreate(itm,e,"modWebLink","'.$item->get('key').'","0");
                                 }',
                             ),
                             array(
@@ -162,7 +162,7 @@ while ($item) {
                                 'text' => $modx->lexicon('symlink'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
-                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modSymLink","'.$item->get('key').'","0");
+                                    Ext.getCmp("modx-resource-tree").quickCreate(itm,e,"modSymLink","'.$item->get('key').'","0");
                                 }',
                             ),
                             array(
@@ -170,7 +170,7 @@ while ($item) {
                                 'text' => $modx->lexicon('static_resource'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
-                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modStaticResource","'.$item->get('key').'","0");
+                                    Ext.getCmp("modx-resource-tree").quickCreate(itm,e,"modStaticResource","'.$item->get('key').'","0");
                                 }',
                             ),
                         ),
@@ -225,7 +225,7 @@ while ($item) {
                    // 'id' => 'cm-context-resource-qupdate',
                     'text' => $modx->lexicon('quick_update_resource'),
                     'handler' => 'function(itm,e) {
-                        Ext.getCmp("modx_resource_tree").quickUpdate(itm,e,"'.$item->get('class_key').'","'.$item->get('key').'","'.$item->get('id').'");
+                        Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,"'.$item->get('class_key').'","'.$item->get('key').'","'.$item->get('id').'");
                     }',
                 );
             }
@@ -260,7 +260,7 @@ while ($item) {
                                 'text' => $modx->lexicon('document_create_here'),
                                 'scope' => 'this',
                                 'handler' => 'function() {
-                                    Ext.getCmp("modx_resource_tree").loadAction("'
+                                    Ext.getCmp("modx-resource-tree").loadAction("'
                                         . 'a=' . $actions['resource/create']
                                         . '&parent=' . $item->id
                                         . '&context_key=' . $item->context_key
@@ -271,7 +271,7 @@ while ($item) {
                               //  'id' => 'cm-weblink-create',
                                 'text' => $modx->lexicon('weblink_create_here'),
                                 'handler' => 'function() {
-                                    Ext.getCmp("modx_resource_tree").loadAction("'
+                                    Ext.getCmp("modx-resource-tree").loadAction("'
                                         . 'a=' . $actions['resource/create']
                                         . '&class_key=' . 'modWebLink'
                                         . '&parent=' . $item->id
@@ -282,7 +282,7 @@ while ($item) {
                                // 'id' => 'cm-symlink-create',
                                 'text' => $modx->lexicon('symlink_create_here'),
                                 'handler' => 'function() {
-                                    Ext.getCmp("modx_resource_tree").loadAction("'
+                                    Ext.getCmp("modx-resource-tree").loadAction("'
                                         . 'a=' . $actions['resource/create']
                                         . '&class_key=' . 'modSymLink'
                                         . '&parent=' . $item->id
@@ -293,7 +293,7 @@ while ($item) {
                               //  'id' => 'cm-staticresource-create',
                                 'text' => $modx->lexicon('static_resource_create_here'),
                                 'handler' => 'function() {
-                                    Ext.getCmp("modx_resource_tree").loadAction("'
+                                    Ext.getCmp("modx-resource-tree").loadAction("'
                                         . 'a=' . $actions['resource/create']
                                         . '&class_key=' . 'modStaticResource'
                                         . '&parent=' . $item->id
@@ -314,7 +314,7 @@ while ($item) {
                                 'text' => $modx->lexicon('resource'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
-                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modResource","'.$item->context_key.'","'.$item->get('id').'");
+                                    Ext.getCmp("modx-resource-tree").quickCreate(itm,e,"modResource","'.$item->context_key.'","'.$item->get('id').'");
                                 }',
                             ),
                             array(
@@ -322,7 +322,7 @@ while ($item) {
                                 'text' => $modx->lexicon('weblink'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
-                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modWebLink","'.$item->context_key.'","'.$item->get('id').'");
+                                    Ext.getCmp("modx-resource-tree").quickCreate(itm,e,"modWebLink","'.$item->context_key.'","'.$item->get('id').'");
                                 }',
                             ),
                             array(
@@ -330,7 +330,7 @@ while ($item) {
                                 'text' => $modx->lexicon('symlink'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
-                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modSymLink","'.$item->context_key.'","'.$item->get('id').'");
+                                    Ext.getCmp("modx-resource-tree").quickCreate(itm,e,"modSymLink","'.$item->context_key.'","'.$item->get('id').'");
                                 }',
                             ),
                             array(
@@ -338,7 +338,7 @@ while ($item) {
                                 'text' => $modx->lexicon('static_resource'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
-                                    Ext.getCmp("modx_resource_tree").quickCreate(itm,e,"modStaticResource","'.$item->context_key.'","'.$item->id.'");
+                                    Ext.getCmp("modx-resource-tree").quickCreate(itm,e,"modStaticResource","'.$item->context_key.'","'.$item->id.'");
                                 }',
                             ),
                         ),

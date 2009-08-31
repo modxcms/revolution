@@ -73,7 +73,7 @@ MODx.panel.EditFile = function(config) {
         }]
     });
     MODx.panel.EditFile.superclass.constructor.call(this,config);
-    Ext.getCmp('modx_file_tree').expand();
+    Ext.getCmp('modx-file-tree').expand();
     this.config = config;
     this.setup();
 };

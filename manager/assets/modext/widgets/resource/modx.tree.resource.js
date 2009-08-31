@@ -23,9 +23,9 @@ MODx.tree.Resource = function(config) {
 	});
 	MODx.tree.Resource.superclass.constructor.call(this,config);
     this.on('render',function() {
-        var el = Ext.get('modx_resource_tree');
-        el.createChild({ tag: 'div', id: 'modx_resource_tree_tb' });
-        el.createChild({ tag: 'div', id: 'modx_resource_tree_filter' });
+        var el = Ext.get('modx-resource-tree');
+        el.createChild({ tag: 'div', id: 'modx-resource-tree_tb' });
+        el.createChild({ tag: 'div', id: 'modx-resource-tree_filter' });
     });
 };
 Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{

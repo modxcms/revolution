@@ -188,7 +188,7 @@ MODx.panel.TV = function(config) {
         }
     });
     MODx.panel.TV.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx_element_tree').expand();",1000);
+    setTimeout("Ext.getCmp('modx-element-tree').expand();",1000);
     this.on('render',function() { this.showParameters(); },this);
 };
 Ext.extend(MODx.panel.TV,MODx.FormPanel,{
@@ -237,7 +237,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         Ext.getCmp('modx-grid-tv-security').getStore().commitChanges();
         Ext.getCmp('modx-grid-element-properties').save();
         
-        var t = parent.Ext.getCmp('modx_element_tree');
+        var t = parent.Ext.getCmp('modx-element-tree');
         var c = Ext.getCmp('modx-tv-category').getValue();
         var u = c != '' && c != null ? 'n_tv_category_'+c : 'n_type_tv'; 
         t.refreshNode(u,true);

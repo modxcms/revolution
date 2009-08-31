@@ -88,7 +88,7 @@ while(false !== ($name = $odir->read())) {
                     array(
                         'text' => $modx->lexicon('file_edit'),
                         'handler' => 'function() {
-                            Ext.getCmp("modx_file_tree").loadAction("'
+                            Ext.getCmp("modx-file-tree").loadAction("'
                                 . 'a=' . $actions['system/file/edit']
                                 . '&file=' . rawurlencode($fullname)
                              . '");

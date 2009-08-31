@@ -670,7 +670,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
             return false;
         }
         
-        var t = Ext.getCmp('modx_resource_tree');
+        var t = Ext.getCmp('modx-resource-tree');
         if (!t) return;
         
         this.setValue(_('resource_parent_select_node'));
@@ -680,13 +680,12 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         t.on('click',this.handleChangeParent,this);
         t.disableHref = true;
     }
-    
-    
+        
     ,handleChangeParent: function(node,e) {
         e.preventDefault();
         e.stopEvent();
         
-        var t = Ext.getCmp('modx_resource_tree');
+        var t = Ext.getCmp('modx-resource-tree');
         if (!t) return;
         t.disableHref = true;
         

@@ -47,7 +47,7 @@ foreach ($qcm as $type) {
             'text' => $modx->lexicon($type),
             'scope' => 'this',
             'handler' => 'function(itm,e) {
-                Ext.getCmp("modx_element_tree").quickCreate(itm,e,"'.$type.'");
+                Ext.getCmp("modx-element-tree").quickCreate(itm,e,"'.$type.'");
             }',
         );
     }
