@@ -383,5 +383,19 @@ class modResource extends modAccessibleSimpleObject {
         }
         return $policy;
     }
+
+    /**
+     * Checks to see if the Resource has children or not. Returns the number of
+     * children.
+     *
+     * @access public
+     * @return integer The number of children of the Resource
+     */
+    function hasChildren() {
+        $c = $this->xpdo->newQuery('modResource');
+        $c->where(array(
+            'parent' => $this->get('id'),
+        ));
+        return $this->xpdo->getCount('modResource',$c);
+    }
 }
-?>
