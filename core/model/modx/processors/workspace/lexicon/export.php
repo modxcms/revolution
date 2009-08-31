@@ -49,6 +49,11 @@ $entries = $modx->getCollection('modLexiconEntry',array(
 
 /* setup output content */
 $o = "<?php\n";
+$o = "/*\n
+ * @topic ".$topic->get('name')."\n
+ * @namespace ".$namespace->get('name')."\n
+ * @language ".$_POST['language']."
+ */\n";
 foreach ($entries as $entry) {
     $value = str_replace("'","\'",$entry->get('value'));
     $o .= "\$_lang['".$entry->get('name')."'] = '".$value."';\n";

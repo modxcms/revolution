@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added more metadata to Lexicon Topic exports
 - [#MODX-1191] Fixed issue where Namespace combo was conflicting with other DOM IDs in Lexicon Management
 - Changed Accordion to Tabs in left menu
 - In all Resource panels, Moved Page Settings back to right side, moved Template to top, moved Published to top right 
