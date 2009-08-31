@@ -110,6 +110,12 @@ class modResource extends modAccessibleSimpleObject {
         return $this->set('content', $content);
     }
 
+    /**
+     * Merge in Keywords into content.
+     *
+     * @access public
+     * @deprecated 2.0
+     */
     function mergeKeywords() {
         if ($this->get('haskeywords')) {
             $keywords = implode(", ",$this->xpdo->getKeywords());
@@ -118,6 +124,12 @@ class modResource extends modAccessibleSimpleObject {
         }
     }
 
+    /**
+     * Merge in META tags to content.
+     *
+     * @access public
+     * @deprecated 2.0
+     */
     function mergeMetaTags() {
         if ($this->get('hasmetatags')) {
             if ($tags = $this->xpdo->getMETATags()) {
@@ -160,7 +172,7 @@ class modResource extends modAccessibleSimpleObject {
      */
     function getMany($class, $criteria= null, $cacheFlag= false) {
         $collection= array ();
-        if ($class === 'TemplateVars' && ($criteria === null || strtolower($criteria) === 'all')) {
+        if ($class === 'TemplateVars' || $class === 'modTemplateVar' && ($criteria === null || strtolower($criteria) === 'all')) {
             $c = $this->xpdo->newQuery('modTemplateVar');
             $c->select('
                 DISTINCT modTemplateVar.*,
@@ -293,6 +305,14 @@ class modResource extends modAccessibleSimpleObject {
         $this->save();
     }
 
+    /**
+     * Adds a lock on the Resource
+     *
+     * @access public
+     * @param integer $user
+     * @param array $options An array of options for the lock.
+     * @return boolean True if the lock was successful.
+     */
     function addLock($user = 0, $options = array()) {
         $locked = false;
         if (is_a($this->xpdo, 'modX')) {
@@ -311,6 +331,12 @@ class modResource extends modAccessibleSimpleObject {
         return $locked;
     }
 
+    /**
+     * Gets the lock on the Resource.
+     *
+     * @access public
+     * @return int
+     */
     function getLock() {
         $lock = 0;
         if (is_a($this->xpdo, 'modX')) {
@@ -327,6 +353,12 @@ class modResource extends modAccessibleSimpleObject {
         return $lock;
     }
 
+    /**
+     * Removes all locks on a Resource.
+     *
+     * @access public
+     * @return boolean True if locks were removed.
+     */
     function removeLock($user = 0) {
         $removed = false;
         if (is_a($this->xpdo, 'modX')) {

@@ -487,7 +487,7 @@ class modX extends xPDO {
     function getParentIds($id= null, $height= 10) {
         $parentId= 0;
         $parents= array ();
-        if ($id && $height >= 0) {
+        if ($id && $height > 0) {
             foreach ($this->resourceMap as $parentId => $mapNode) {
                 if (array_search($id, $mapNode) !== false) {
                     $parents[]= $parentId;
@@ -495,7 +495,8 @@ class modX extends xPDO {
                 }
             }
             if ($parentId && !empty($parents)) {
-                $parents= array_merge($parents, $this->getParentIds($parentId, $height--));
+                $height--;
+                $parents= array_merge($parents, $this->getParentIds($parentId,$height));
             }
         }
         return $parents;
