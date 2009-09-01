@@ -357,7 +357,7 @@ class modInstall {
                 define('MODX_CONNECTORS_PATH', $this->config['connectors_path']);
 
             $package->install(array (
-                XPDO_TRANSPORT_RESOLVE_FILES => ($this->config['inplace'] == 0 ? 1 : 0)
+                XPDO_TRANSPORT_RESOLVE_FILES => ($this->config['inplace'] == 0 ? 1 : 0),
             ));
 
             /* set default workspace path */
@@ -602,7 +602,7 @@ class modInstall {
                 'msg' => '<p>'.$this->lexicon['config_file_perms_notset'].'</p>'
             );
         }
-        return $written;
+        return $results;
     }
 
     /**
@@ -711,7 +711,8 @@ class modInstall {
             $xpdo = new xPDO($dsn, $user, $password, array(
                     XPDO_OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
                     XPDO_OPT_TABLE_PREFIX => $prefix,
-                    XPDO_OPT_LOADER_CLASSES => array('modAccessibleObject')
+                    XPDO_OPT_LOADER_CLASSES => array('modAccessibleObject'),
+                    XPDO_OPT_SETUP => true,
                 ),
                 array (
                     PDO_ATTR_ERRMODE => PDO_ERRMODE_WARNING,
@@ -745,7 +746,9 @@ class modInstall {
 
         /* to validate installation, instantiate the modX class and run a few tests */
         if (include_once (MODX_CORE_PATH . 'model/modx/modx.class.php')) {
-            $modx = new modX(MODX_CORE_PATH . 'config/');
+            $modx = new modX(MODX_CORE_PATH . 'config/',array(
+                XPDO_OPT_SETUP => true,
+            ));
             if (!is_object($modx) || !is_a($modx, 'modX')) {
                 $errors[] = '<p>'.$this->lexicon['modx_err_instantiate'].'</p>';
             } else {

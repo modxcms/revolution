@@ -18,9 +18,11 @@ class modAction extends modAccessibleSimpleObject {
      * {@inheritdoc}
      */
     function save($cacheFlag = null) {
-        $r = parent::save($cacheFlag);
-        $this->rebuildCache();
-        return $r;
+        $saved = parent::save($cacheFlag);
+        if ($saved && empty($this->xpdo->config[XPDO_OPT_SETUP])) {
+            $this->rebuildCache();
+        }
+        return $saved;
     }
 
     /**
@@ -29,9 +31,11 @@ class modAction extends modAccessibleSimpleObject {
      * {@inheritdoc}
      */
     function remove($ancestors = array()) {
-        $r = parent::remove($ancestors);
-        $this->rebuildCache();
-        return $r;
+        $removed = parent::remove($ancestors);
+        if ($removed && empty($this->xpdo->config[XPDO_OPT_SETUP])) {
+            $this->rebuildCache();
+        }
+        return $removed;
     }
 
     /**
@@ -42,13 +46,11 @@ class modAction extends modAccessibleSimpleObject {
      */
     function rebuildCache($options = array()) {
         $rebuilt = false;
-        if (is_a($this->xpdo, 'modX')) {
-            $this->modx =& $this->xpdo;
-            $cacheKey= $this->modx->context->get('key') . '/actions';
-            $this->modx->getCacheManager();
-            if ($this->modx->cacheManager->generateActionMap($cacheKey, $options)) {
-                $rebuilt = true;
-            }
+        $this->modx =& $this->xpdo;
+        $cacheKey= $this->modx->context->get('key') . '/actions';
+        $this->modx->getCacheManager();
+        if ($this->modx->cacheManager->generateActionMap($cacheKey, $options)) {
+            $rebuilt = true;
         }
         return $rebuilt;
     }

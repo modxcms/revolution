@@ -27,6 +27,7 @@ $xpdo_meta_map['modMenu']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
     ),
     'action' => 
     array (
@@ -36,6 +37,7 @@ $xpdo_meta_map['modMenu']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
     ),
     'text' => 
     array (
@@ -43,6 +45,7 @@ $xpdo_meta_map['modMenu']= array (
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
+      'index' => 'index',
     ),
     'description' => 
     array (

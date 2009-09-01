@@ -5,8 +5,8 @@
 $mode= isset ($_POST['installmode']) ? intval($_POST['installmode']) : MODX_INSTALL_MODE_NEW;
 
 /* validate database settings */
-$install->setConfig();
-$err = $install->getConnection();
+$install->setConfig($mode);
+$err = $install->getConnection($mode);
 if (!is_a($err,'xPDO')) { $this->error->failure($err); }
 
 if (!is_a($install->xpdo,'xPDO') || !$install->xpdo->connect()) {

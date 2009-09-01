@@ -60,3 +60,28 @@ if ($policy != null) {
     $policy->save();
 }
 unset($c,$policy);
+
+/* add modAction indexes */
+$class = 'modAction';
+$table = $this->install->xpdo->getTableName($class);
+$sql = "ALTER TABLE {$table} ADD INDEX `namespace` ( `namespace` )";
+$description = sprintf($this->install->lexicon['add_index'],'namespace',$table);
+$this->processResults($class, $description, $sql);
+$sql = "ALTER TABLE {$table} ADD INDEX `controller` ( `controller` )";
+$description = sprintf($this->install->lexicon['add_index'],'controller',$table);
+$this->processResults($class, $description, $sql);
+unset($class,$table,$sql,$description);
+
+/* add modMenu indexes */
+$class = 'modMenu';
+$table = $this->install->xpdo->getTableName($class);
+$sql = "ALTER TABLE {$table} ADD INDEX `parent` ( `parent` )";
+$description = sprintf($this->install->lexicon['add_index'],'parent',$table);
+$this->processResults($class, $description, $sql);
+$sql = "ALTER TABLE {$table} ADD INDEX `action` ( `action` )";
+$description = sprintf($this->install->lexicon['add_index'],'action',$table);
+$this->processResults($class, $description, $sql);
+$sql = "ALTER TABLE {$table} ADD INDEX `text` ( `text` )";
+$description = sprintf($this->install->lexicon['add_index'],'text',$table);
+$this->processResults($class, $description, $sql);
+unset($class,$table,$sql,$description);

@@ -18,7 +18,7 @@ class modLexiconEntry extends xPDOSimpleObject {
      * @return boolean True if successful
      */
     function clearCache() {
-    	if ($this->xpdo && $this->xpdo->lexicon) {
+        if ($this->xpdo && $this->xpdo->lexicon) {
             $topic = $this->getOne('Topic');
             if ($topic == null) return false;
 
@@ -36,8 +36,10 @@ class modLexiconEntry extends xPDOSimpleObject {
         if ($this->_new) {
             if (!$this->get('createdon')) $this->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
         }
-        $rt= parent :: save($cacheFlag);
-        $this->clearCache();
-        return $rt;
+        $saved= parent :: save($cacheFlag);
+        if ($saved && empty($this->xpdo->config[XPDO_OPT_SETUP])) {
+            $this->clearCache();
+        }
+        return $saved;
     }
 }

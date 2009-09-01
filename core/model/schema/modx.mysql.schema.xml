@@ -94,9 +94,9 @@
     </object>
     
     <object class="modAction" table="actions" extends="modAccessibleSimpleObject">
-        <field key="namespace" dbtype="varchar" precision="100" phptype="string" null="false" default="core" />
+        <field key="namespace" dbtype="varchar" precision="100" phptype="string" null="false" default="core" index="index" />
         <field key="parent" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
-        <field key="controller" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="controller" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
         <field key="haslayout" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="1" />
         <field key="lang_topics" dbtype="text" phptype="string" null="false" />
         <field key="assets" dbtype="text" phptype="string" null="false" />
@@ -297,9 +297,9 @@
     </object>
     
     <object class="modMenu" table="menus" extends="modAccessibleSimpleObject">
-        <field key="parent" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" />
-        <field key="action" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" />
-        <field key="text" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="parent" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="text" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
         <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="icon" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="menuindex" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" />

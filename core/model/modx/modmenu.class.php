@@ -17,8 +17,11 @@ class modMenu extends modAccessibleSimpleObject {
      * {@inheritdoc}
      */
     function save($cacheFlag = null) {
-        if (is_a($this->xpdo, 'modX')) $this->rebuildCache();
-        return parent::save($cacheFlag);
+        $saved = parent::save($cacheFlag);
+        if ($saved && empty($this->xpdo->config[XPDO_OPT_SETUP])) {
+            $this->rebuildCache();
+        }
+        return $saved;
     }
 
     /**
@@ -27,8 +30,11 @@ class modMenu extends modAccessibleSimpleObject {
      * {@inheritdoc}
      */
     function remove() {
-        if (is_a($this->xpdo, 'modX')) $this->rebuildCache();
-        return parent::remove();
+        $removed = parent::remove();
+        if ($removed && empty($this->xpdo->config[XPDO_OPT_SETUP])) {
+            $this->rebuildCache();
+        }
+        return $removed;
     }
 
     /**

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @package modx
+ * @subpackage build
+ */
+$collection = array();
 $collection['1']= $xpdo->newObject('modAction');
 $collection['1']->fromArray(array (
   'id' => 1,
@@ -709,3 +714,5 @@ $collection['82']->fromArray(array (
   'lang_topics' => 'element,category,propertyset',
   'assets' => '',
 ), '', true, true);
+
+return $collection;

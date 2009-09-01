@@ -30,8 +30,10 @@ class modLexiconTopic extends xPDOSimpleObject {
      * {@inheritdoc}
      */
     function save($cacheFlag= null) {
-        $rt= parent :: save($cacheFlag);
-        $this->clearCache();
-        return $rt;
+        $saved = parent :: save($cacheFlag);
+        if ($saved && empty($this->xpdo->config[XPDO_OPT_SETUP])) {
+            $this->clearCache();
+        }
+        return $saved;
     }
 }

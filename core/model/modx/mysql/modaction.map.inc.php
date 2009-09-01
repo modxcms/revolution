@@ -24,6 +24,7 @@ $xpdo_meta_map['modAction']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => 'core',
+      'index' => 'index',
     ),
     'parent' => 
     array (
@@ -41,6 +42,7 @@ $xpdo_meta_map['modAction']= array (
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
+      'index' => 'index',
     ),
     'haslayout' => 
     array (

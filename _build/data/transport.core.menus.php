@@ -1,4 +1,9 @@
 <?php
+/**
+ * @package modx
+ * @subpackage build
+ */
+$collection = array();
 $collection['1']= $xpdo->newObject('modMenu');
 $collection['1']->fromArray(array (
   'id' => 1,
@@ -548,3 +553,5 @@ $collection['57']->fromArray(array (
   'params' => '',
   'handler' => 'MODx.logout(); return false;',
 ), '', true, true);
+
+return $collection;
