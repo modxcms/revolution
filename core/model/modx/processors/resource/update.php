@@ -112,7 +112,7 @@ $_POST['searchable'] = empty($_POST['searchable']) ? 0 : 1;
 $_POST['syncsite'] = empty($_POST['syncsite']) ? 0 : 1;
 
 /* friendly url alias checks */
-if ($modx->getOption('friendly_alias_urls')) {
+if ($modx->getOption('friendly_alias_urls') && isset($_POST['alias'])) {
     /* auto assign alias */
     if (empty($_POST['alias']) && $modx->getOption('automatic_alias')) {
         $_POST['alias'] = $resource->cleanAlias(strtolower(trim($_POST['pagetitle'])));
