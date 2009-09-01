@@ -85,6 +85,7 @@ MODx.grid.ElementProperties = function(config) {
             text: _('propertyset_save')
             ,handler: this.save
             ,scope: this
+            ,hidden: MODx.request.id ? false : true
         }]
         ,bbar: [{
             text: _('properties_import')

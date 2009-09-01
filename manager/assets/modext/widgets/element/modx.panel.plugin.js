@@ -176,7 +176,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         });
     }
     ,success: function(o) {
-        Ext.getCmp('modx-grid-element-properties').save();
+        if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         Ext.getCmp('modx-grid-plugin-event').getStore().commitChanges();
         
         var t = parent.Ext.getCmp('modx-element-tree');

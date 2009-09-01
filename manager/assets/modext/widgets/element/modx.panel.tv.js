@@ -235,7 +235,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     ,success: function(o) {
         Ext.getCmp('modx-grid-tv-template').getStore().commitChanges();
         Ext.getCmp('modx-grid-tv-security').getStore().commitChanges();
-        Ext.getCmp('modx-grid-element-properties').save();
+        if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         
         var t = parent.Ext.getCmp('modx-element-tree');
         var c = Ext.getCmp('modx-tv-category').getValue();

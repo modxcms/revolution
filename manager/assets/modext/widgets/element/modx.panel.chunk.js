@@ -166,7 +166,8 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         });
     }
     ,success: function(r) {
-        Ext.getCmp('modx-grid-element-properties').save();
+        if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
+        
         var c = Ext.getCmp('modx-chunk-category').getValue();
         var n = c !== '' && c !== null ? 'n_chunk_category_'+c : 'n_type_chunk';
         var t = parent.Ext.getCmp('modx-element-tree');

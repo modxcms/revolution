@@ -153,7 +153,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
         });
     }
     ,success: function(r) {
-        Ext.getCmp('modx-grid-element-properties').save();
+        if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         
         var t = parent.Ext.getCmp('modx-element-tree');
         var c = Ext.getCmp('modx-snippet-category').getValue();
