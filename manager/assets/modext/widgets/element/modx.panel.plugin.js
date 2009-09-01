@@ -115,7 +115,7 @@ MODx.panel.Plugin = function(config) {
                 ,preventRender: true
                 ,plugin: config.plugin
                 ,listeners: {
-                    'afteredit': {fn:this.fieldChangeEvent,scope:this}
+                    'rowclick': {fn:this.fieldChangeEvent,scope:this}
                 }
             }]
         },{

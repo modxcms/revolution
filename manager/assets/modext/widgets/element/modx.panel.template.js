@@ -108,7 +108,7 @@ MODx.panel.Template = function(config) {
            ,width: '100%'
            ,template: config.template
            ,listeners: {
-                'rowdblclick': {fn:this.fieldChangeEvent,scope:this}
+                'rowclick': {fn:this.fieldChangeEvent,scope:this}
            }
         }])]
         ,listeners: {

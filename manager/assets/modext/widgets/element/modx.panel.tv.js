@@ -160,7 +160,7 @@ MODx.panel.TV = function(config) {
                 ,preventRender: true
                 ,width: '100%'
                 ,listeners: {
-                    'afteredit': {fn:this.fieldChangeEvent,scope:this}
+                    'rowclick': {fn:this.fieldChangeEvent,scope:this}
                 }
             }]
         },{
@@ -177,7 +177,7 @@ MODx.panel.TV = function(config) {
                 ,tv: config.tv
                 ,preventRender: true
                 ,listeners: {
-                    'afteredit': {fn:this.fieldChangeEvent,scope:this}
+                    'rowclick': {fn:this.fieldChangeEvent,scope:this}
                 }
             }]
         }])]

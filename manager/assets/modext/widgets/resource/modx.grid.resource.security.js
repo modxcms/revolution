@@ -38,6 +38,7 @@ MODx.grid.ResourceSecurity = function(config) {
         },ac]
     });
     MODx.grid.ResourceSecurity.superclass.constructor.call(this,config);
+    this.on('rowclick',MODx.fireResourceFormChange);
 };
 Ext.extend(MODx.grid.ResourceSecurity,MODx.grid.Grid);
 Ext.reg('modx-grid-resource-security',MODx.grid.ResourceSecurity);
