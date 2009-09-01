@@ -191,11 +191,6 @@ while ($item) {
                 'menu' => array('items' => $menu),
             );
         } else {
-            $class = 'icon-'.strtolower(str_replace('mod','',$item->get('class_key')));
-            $class .= ($item->get('published') ? '' : ' unpublished')
-                .($item->get('deleted') ? ' deleted' : '')
-                .($item->get('hidemenu') == 1 ? ' hidemenu' : '');
-
             $menu = array();
             $menu[] = array(
                // 'id' => 'cm-resource-header',
@@ -392,13 +387,18 @@ while ($item) {
                 }',
             );
 
+            $class = 'icon-'.strtolower(str_replace('mod','',$item->get('class_key')));
+            $class .= $item->isfolder ? ' icon-folder' : ' x-tree-node-leaf';
+            $class .= ($item->get('published') ? '' : ' unpublished')
+                .($item->get('deleted') ? ' deleted' : '')
+                .($item->get('hidemenu') == 1 ? ' hidemenu' : '');
             $qtip = ($item->longtitle != '' ? '<b>'.$item->longtitle.'</b><br />' : '').'<i>'.$item->description.'</i>';
 
             $items[] = array(
                 'text' => $item->pagetitle.' ('.$item->id.')',
                 'id' => $item->context_key . '_'.$item->id,
                 'pk' => $item->id,
-                'leaf' => $item->isfolder ? 0 : 1,
+                'leaf' => $item->hasChildren() ? false : true,//$item->isfolder ? 0 : 1,
                 'cls' => $class,
                 'type' => 'modResource',
                 'qtip' => $qtip,
