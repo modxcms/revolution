@@ -415,3 +415,6 @@ var triggerDirtyField = function(fld) {
 MODx.triggerRTEOnChange = function(i) {
     triggerDirtyField(Ext.getCmp('ta'));
 };
+MODx.fireResourceFormChange = function(f,nv,ov) {
+    Ext.getCmp('modx-panel-symlink').fireEvent('fieldChange');
+};
