@@ -56,6 +56,7 @@ if (empty($context) || $context == 'root') {
 
 /* grab actions */
 $actions = $modx->request->getAllActionIDs();
+$hasEditPerm = $modx->hasPermission('edit_document');
 
 $collection = $modx->getCollection($itemClass, $c);
 
@@ -402,14 +403,14 @@ while ($item) {
                 'type' => 'modResource',
                 'qtip' => $qtip,
                 'preview_url' => $modx->makeUrl($item->get('id')),
-                'href' => '?a='.$actions['resource/data'].'&id='.$item->id,
+                'href' => '?a='.($hasEditPerm ? $actions['resource/update'] : $actions['resource/data']).'&id='.$item->id,
                 'menu' => array('items' => $menu),
             );
         }
     }
     $item = next($collection);
 }
-unset($collection, $item, $actions);
+unset($collection, $item, $actions, $hasEditPerm);
 
 if ($stringLiterals) {
     return $modx->toJSON($items);
