@@ -24,8 +24,8 @@ foreach ($menus as $menu) {
         _modProcessMenus($output,$menu['children']);
         $output .= '</ul>'."\n";
     }
-    $output .= '</li>'."\n";
     $output .= '</div>'."\n";
+    $output .= '</li>'."\n";
     $order++;
 }
 function _modProcessMenus(&$output,$menus) {
