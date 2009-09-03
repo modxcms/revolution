@@ -39,6 +39,7 @@ class modActionDom extends modAccessibleSimpleObject {
                     $rule = 'Ext.getCmp("'.$this->get('container').'").hideField("'.$this->get('name').'");';
                 }
                 break;
+            case 'fieldLabel':
             case 'fieldTitle':
                 $rule = 'Ext.getCmp("'.$this->get('container').'").setLabel("'.$this->get('name').'","'.$this->get('value').'");';
                 break;
@@ -47,6 +48,7 @@ class modActionDom extends modAccessibleSimpleObject {
                 break;
             case 'panelTitle':
             case 'tabTitle':
+            case 'tabLabel':
                 $rule = 'Ext.getCmp("'.$this->get('name').'").setTitle("'.$this->get('value').'")';
                 break;
             case 'tabVisible':
