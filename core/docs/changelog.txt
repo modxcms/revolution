@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added "Form Customization" page, which emulates Evolution ManagerManager functionality and integrates it into the core
+- Revamped modMenu DB structure to allow for more proper dynamic menus; 3PCs will need to now refer to the Components menu as 'components', as the "id" field has been dropped and "text" is now the PK
+- Fixed DOM issue with Profile page
+- Improved core transport build script, lowered build times
 - Fixed issue where hiding the alias field would cause it to be erased
 - [#MODX-1169] Fixed issue where unchecking Container on a Resource that had children would hide them from the tree
 - [#MODX-1125] Fixed issue where Properties were being lost on new Elements

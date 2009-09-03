@@ -45,7 +45,13 @@ class modManagerResponse extends modResponse {
         }
 
         $this->modx->lexicon->load('dashboard','topmenu','file');
-        if ($action == 0) $action = 1;
+        if ($action == 0) {
+            $action = $this->modx->getObject('modAction',array(
+                'namespace' => 'core',
+                'controller' => 'welcome',
+            ));
+            $action = $action->get('id');
+        }
 
         if ($this->modx->hasPermission('frames')) {
             if (isset($this->modx->actionMap[$action])) {
@@ -89,6 +95,8 @@ class modManagerResponse extends modResponse {
                     $this->modx->log(MODX_LOG_LEVEL_FATAL,'Could not find action file at: '.$f);
                 }
 
+                $this->registerActionDomRules($action);
+
                 /* reset path to core modx path for header/footer */
                 $this->modx->smarty->setTemplatePath($modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme',null,'default') . '/');
 
@@ -105,6 +113,8 @@ class modManagerResponse extends modResponse {
                 if ($act['haslayout']) {
                     $this->body .= include_once $this->modx->getOption('manager_path').'controllers/footer.php';
                 }
+
+
             } else {
                 $this->body = $this->modx->error->failure('No action with ID '.$action.' found.');
             }
@@ -122,5 +132,36 @@ class modManagerResponse extends modResponse {
             echo $this->body;
         }
         exit();
+    }
+
+    function registerActionDomRules($action) {
+        /* now do action dom rules */
+        $userGroups = $this->modx->user->getUserGroups();
+        $c = $this->modx->newQuery('modActionDom');
+        $c->leftJoin('modAccessActionDom','Access');
+        $c->where(array(
+            'action' => $action,
+        ));
+        $c->andCondition(array(
+            'Access.principal_class' => 'modUserGroup',
+            'Access.principal IN ('.implode(',',$userGroups).')',
+        ),null,2);
+        $c->orCondition(array(
+            'Access.principal IS NULL',
+        ),null,2);
+        //$c->prepare(); echo $c->toSql(); die();
+        $domRules = $this->modx->getCollection('modActionDom',$c);
+        $rules = array();
+        foreach ($domRules as $rule) {
+            $r = $rule->apply();
+            if (!empty($r)) $rules[] = $r;
+        }
+        $ruleOutput = '';
+        if (!empty($rules)) {
+            $ruleOutput .= '<script type="text/javascript">Ext.onReady(function() {';
+            $ruleOutput .= implode("\n",$rules);
+            $ruleOutput .= '});</script>';
+            $this->modx->regClientStartupHTMLBlock($ruleOutput);
+        }
     }
 }

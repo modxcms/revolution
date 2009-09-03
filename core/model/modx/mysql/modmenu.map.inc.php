@@ -8,25 +8,33 @@ $xpdo_meta_map['modMenu']= array (
   'table' => 'menus',
   'fields' => 
   array (
-    'parent' => 0,
+    'text' => '',
+    'parent' => '',
     'action' => 0,
-    'text' => NULL,
     'description' => '',
     'icon' => '',
     'menuindex' => 0,
-    'params' => NULL,
-    'handler' => NULL,
+    'params' => '',
+    'handler' => '',
   ),
   'fieldMeta' => 
   array (
+    'text' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+      'index' => 'pk',
+    ),
     'parent' => 
     array (
-      'dbtype' => 'int',
-      'precision' => '11',
-      'attributes' => 'unsigned',
-      'phptype' => 'integer',
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
       'null' => false,
-      'default' => 0,
+      'default' => '',
       'index' => 'index',
     ),
     'action' => 
@@ -37,14 +45,6 @@ $xpdo_meta_map['modMenu']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
-      'index' => 'index',
-    ),
-    'text' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => false,
       'index' => 'index',
     ),
     'description' => 
@@ -77,12 +77,14 @@ $xpdo_meta_map['modMenu']= array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
+      'default' => '',
     ),
     'handler' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
+      'default' => '',
     ),
   ),
   'aggregates' => 
@@ -99,14 +101,14 @@ $xpdo_meta_map['modMenu']= array (
     array (
       'class' => 'modMenu',
       'local' => 'parent',
-      'foreign' => 'id',
+      'foreign' => 'text',
       'owner' => 'foreign',
       'cardinality' => 'one',
     ),
     'Children' => 
     array (
       'class' => 'modMenu',
-      'local' => 'id',
+      'local' => 'text',
       'foreign' => 'parent',
       'owner' => 'local',
       'cardinality' => 'many',
@@ -117,7 +119,7 @@ $xpdo_meta_map['modMenu']= array (
     'Acls' => 
     array (
       'class' => 'modAccessMenu',
-      'local' => 'id',
+      'local' => 'text',
       'foreign' => 'target',
       'owner' => 'local',
       'cardinality' => 'many',

@@ -215,27 +215,3 @@ MODx.window.UpdateAction = function(config) {
 };
 Ext.extend(MODx.window.UpdateAction,MODx.Window);
 Ext.reg('modx-window-action-update',MODx.window.UpdateAction);
-
-
-/**
- * Displays a dropdown list of modActions.
- * 
- * @class MODx.combo.Action
- * @extends MODx.combo.ComboBox
- * @xtype modx-combo-action
- */
-MODx.combo.Action = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'action'
-        ,hiddenName: 'action'
-        ,displayField: 'controller'
-        ,valueField: 'id'
-        ,fields: ['id','controller']
-        ,url: MODx.config.connectors_url+'system/action/index.php'
-    });
-    MODx.combo.Action.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.combo.Action,MODx.combo.ComboBox);
-Ext.reg('modx-combo-action',MODx.combo.Action);
-

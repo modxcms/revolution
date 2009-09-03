@@ -748,3 +748,18 @@ MODx.combo.TVInputType = function(config) {
 };
 Ext.extend(MODx.combo.TVInputType,MODx.combo.ComboBox);
 Ext.reg('modx-combo-tv-input-type',MODx.combo.TVInputType);
+
+MODx.combo.Action = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'action'
+        ,hiddenName: 'action'
+        ,displayField: 'controller'
+        ,valueField: 'id'
+        ,fields: ['id','controller']
+        ,url: MODx.config.connectors_url+'system/action/index.php'
+    });
+    MODx.combo.Action.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.Action,MODx.combo.ComboBox);
+Ext.reg('modx-combo-action',MODx.combo.Action);

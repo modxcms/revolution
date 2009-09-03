@@ -16,7 +16,7 @@ $output = '';
 $order = 0;
 foreach ($menus as $menu) {
     $output .= '<li id="limenu'.$menu['id'].'" class="top'.($order == 0 ? ' active' : '').'">'."\n";
-    $output .= '<a href="javascript:;" onmouseover="MODx.changeMenu(this,\'menu'.$menu['id'].'\');">'.$menu['text'].'</a>'."\n";
+    $output .= '<a>'.$menu['text'].'</a>'."\n";
     $output .= '<div class="zone">'."\n";
 
     if (!empty($menu['children'])) {
@@ -57,8 +57,9 @@ $modx->smarty->assign('navb',$output);
 
 
 /* assign logged in text and link */
+$profile = $modx->getObject('modMenu','profile');
 $logged_in_as = $modx->lexicon('logged_in_as',array(
-    'username' => '<a id="modx-login-user" onclick="MODx.loadPage(49);">'.$modx->getLoginUserName().'</a>',
+    'username' => '<a id="modx-login-user" onclick="MODx.loadPage('.$profile->get('action').');">'.$modx->getLoginUserName().'</a>',
 ));
 $modx->smarty->assign('logged_in_as',$logged_in_as);
 unset($logged_in_as);

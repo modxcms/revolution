@@ -10,7 +10,7 @@ MODx.tree.Menu = function(config) {
 	config = config || {};
     Ext.applyIf(config,{
         id: 'modx-tree-menu'
-        ,root_id: 'n_0'
+        ,root_id: 'n_'
         ,root_name: _('menu_top')
 		,rootVisible: true
         ,expandFirst: true
@@ -18,6 +18,7 @@ MODx.tree.Menu = function(config) {
         ,enableDrop: true
         ,url: MODx.config.connectors_url + 'system/menu.php'
 		,action: 'getNodes'
+        ,primaryKey: 'text'
         ,useDefaultToolbar: true
         ,tbar: [{
             text: _('menu_create')
@@ -33,7 +34,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
 	,createMenu: function(n,e) {
         var r = {};
         if (this.cm && this.cm.activeNode) {
-            r['parent'] = this.cm.activeNode.attributes.data.id;
+            r['parent'] = this.cm.activeNode.attributes.data.text;
         }
         if (!this.windows.create_menu) {
             this.windows.create_menu = MODx.load({
@@ -72,7 +73,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
 			,url: this.config.url
 			,params: {
 				action: 'remove'
-				,id: this.cm.activeNode.attributes.pk
+				,text: this.cm.activeNode.attributes.pk
 			}
             ,listeners: {
                 'success':{fn:this.refresh,scope:this}
@@ -114,7 +115,7 @@ MODx.window.CreateMenu = function(config) {
             ,name: 'description'
             ,id: 'modx-cmen-description'
             ,xtype: 'textfield'
-            ,allowBlank: false
+            ,allowBlank: true
             ,width: 200
         },{
             fieldLabel: _('action')
@@ -167,10 +168,6 @@ MODx.window.UpdateMenu = function(config) {
         ,url: MODx.config.connectors_url+'system/menu.php'
         ,action: 'update'
         ,fields: [{
-            name: 'id'
-            ,id: 'modx-umen-id'
-            ,xtype: 'hidden'
-        },{
             name: 'parent'
             ,id: 'modx-umen-parent'
             ,xtype: 'hidden'
@@ -186,7 +183,7 @@ MODx.window.UpdateMenu = function(config) {
             ,name: 'description'
             ,id: 'modx-umen-description'
             ,xtype: 'textfield'
-            ,allowBlank: false
+            ,allowBlank: true
             ,width: 200
         },{
             fieldLabel: _('action')
@@ -261,9 +258,9 @@ MODx.combo.Menu = function(config) {
         name: 'menu'
         ,hiddenName: 'menu'
         ,url: MODx.config.connectors_url+'system/menu.php'
-        ,fields: ['id','text']
-        ,displayField: 'text'
-        ,valueField: 'id'
+        ,fields: ['text','text_lex']
+        ,displayField: 'text_lex'
+        ,valueField: 'text'
         ,listWidth: 300
         ,editable: false
     });

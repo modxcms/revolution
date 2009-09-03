@@ -112,7 +112,7 @@ class modManagerRequest extends modRequest {
             $itemid= isset ($_REQUEST[$this->modx->getOption('request_param_id')]) ? $_REQUEST[$this->modx->getOption('request_param_id')] : 0;
             $lasthittime= time();
             $a= isset ($_REQUEST['a']) ? $_REQUEST['a'] : '';
-            if ($a != 1) {
+            if ($a != 1 && $a != 0) {
                 $itemid= intval($itemid);
                 $activeUserTbl= $this->modx->getTableName('modActiveUser');
                 $sql= "REPLACE INTO {$activeUserTbl} (internalKey, username, lasthit, action, id, ip) values(" . $this->modx->getLoginUserID('mgr') . ", '{$_SESSION['mgrShortname']}', '{$lasthittime}', '{$a}', {$itemid}, '{$ip}')";

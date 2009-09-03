@@ -20,6 +20,7 @@ MODx.panel.ResourceTV = function(config) {
         ,templateField: 'modx-resource-template'
     });
     MODx.panel.ResourceTV.superclass.constructor.call(this,config);
+    this.addEvents({ load: true });
 };
 Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
     /**
@@ -40,6 +41,10 @@ Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
                ,'resource': config.resource
             }
             ,scripts: true
+            ,callback: function() {
+                this.fireEvent('load');
+            }
+            ,scope: this
         };
         return a;        	
     }

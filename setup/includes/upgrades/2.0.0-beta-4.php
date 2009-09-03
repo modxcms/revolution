@@ -85,3 +85,38 @@ $sql = "ALTER TABLE {$table} ADD INDEX `text` ( `text` )";
 $description = sprintf($this->install->lexicon['add_index'],'text',$table);
 $this->processResults($class, $description, $sql);
 unset($class,$table,$sql,$description);
+
+/* change modMenu text/parent field */
+$class = 'modMenu';
+$table = $this->install->xpdo->getTableName($class);
+$sql = "ALTER TABLE {$table} CHANGE `parent` `parent` VARCHAR( 100 ) NOT NULL DEFAULT ''";
+$description = sprintf($this->install->lexicon['change_column'],'parent','parent varchar',$table);
+$this->processResults($class,$description,$sql);
+
+$description = '';
+$sql = "ALTER TABLE {$table} DROP PRIMARY KEY";
+$this->processResults($class,$description,$sql);
+$description = '';
+$sql = "ALTER TABLE {$table} CHANGE `text` `text` VARCHAR( 255 ) UNSIGNED NOT NULL PRIMARY KEY FIRST";
+$pkChanged = $this->processResults($class,$description,$sql);
+if (!$pkChanged) {
+    $description = '';
+    $sql = "ALTER TABLE {$table} ADD PRIMARY KEY (`text`)";
+    $this->processResults($class,$description,$sql);
+}
+$sql = "DROP INDEX `text` ON {$table}";
+$description = sprintf($this->install->lexicon['drop_index'],'text',$table);
+$this->processResults($class, $description, $sql);
+unset($class,$description,$sql,$table);
+
+/* fix 3PC component menus */
+$c = $this->install->xpdo->newQuery('modMenu');
+$c->where(array(
+    'parent' => 2,
+));
+$menus = $this->install->xpdo->getCollection('modMenu',$c);
+foreach ($menus as $menu) {
+    $menu->set('parent','components');
+    $menu->save();
+}
+unset($c,$menus,$menu);

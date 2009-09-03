@@ -1,4 +1,4 @@
-<select id="tv{$tv->id}[]" name="tv{$tv->id}[]"
+<select id="tv{$tv->id}" name="tv{$tv->id}[]"
 	multiple="multiple"
 	onchange="MODx.fireResourceFormChange();"
 	size="8"

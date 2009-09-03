@@ -18,7 +18,7 @@ getNodesFormatted($nodes,$data);
 
 /* readjust cache */
 foreach ($nodes as $ar_node) {
-	$node = $modx->getObject('modMenu',$ar_node['id']);
+	$node = $modx->getObject('modMenu',$ar_node['text']);
 	if ($node == null) continue;
 	$old_parent_id = $node->get('parent');
 
@@ -44,7 +44,7 @@ function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0) {
 		$id = explode('_',$id);
 		$id = $id[1];
 		$ar_nodes[] = array(
-			'id' => $id,
+			'text' => $id,
 			'parent' => $parent,
 			'order' => $order,
 		);

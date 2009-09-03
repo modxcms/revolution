@@ -34,7 +34,7 @@ $ms = array();
 
 foreach ($menus as $menu) {
 	$ma = $menu->toArray();
-    $ma['text'] = $modx->lexicon($ma['text']);
+    $ma['text_lex'] = $modx->lexicon($ma['text']);
     $ms[] = $ma;
 }
 return $this->outputArray($ms,$count);

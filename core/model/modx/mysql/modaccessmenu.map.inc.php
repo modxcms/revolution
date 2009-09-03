@@ -12,7 +12,7 @@ $xpdo_meta_map['modAccessMenu']= array (
     array (
       'class' => 'modMenu',
       'local' => 'target',
-      'foreign' => 'id',
+      'foreign' => 'text',
       'owner' => 'foreign',
       'cardinality' => 'one',
     ),

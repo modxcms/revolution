@@ -62,6 +62,8 @@ $classes= array (
     'modLexiconEntry',
     'modLexiconLanguage',
     'modLexiconTopic',
+    'modAccessActionDom',
+    'modActionDom',
 );
 
 $this->xpdo->getManager();

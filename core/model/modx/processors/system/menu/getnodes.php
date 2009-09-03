@@ -17,9 +17,10 @@ if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon(
 $limit = !empty($_REQUEST['limit']);
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['id'])) $_REQUEST['id'] = 'n_0';
+if (!isset($_REQUEST['id'])) $_REQUEST['id'] = 'n_';
 
 $id = str_replace('n_','',$_REQUEST['id']);
+if (empty($id)) $id = '';
 
 $c = $modx->newQuery('modMenu');
 $c->leftJoin('modMenu','Children');
@@ -27,13 +28,13 @@ $c->leftJoin('modAction','Action');
 $c->select('
     `modMenu`.*,
     `Action`.`controller` AS `controller`,
-    COUNT(`Children`.`id`) AS `childrenCount`
+    COUNT(`Children`.`text`) AS `childrenCount`
 ');
 $c->where(array(
     'modMenu.parent' => $id,
 ));
 $c->sortby('modMenu.menuindex','ASC');
-$c->groupby('modMenu.id');
+$c->groupby('modMenu.text');
 if ($limit) {
     $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 }
@@ -57,10 +58,10 @@ foreach ($menus as $menu) {
 
 	$as[] = array(
 		'text' => $text.($controller != '' ? ' <i>('.$controller.')</i>' : ''),
-		'id' => 'n_'.$menu->get('id'),
+		'id' => 'n_'.$menu->get('text'),
         'cls' => 'menu',
 		'type' => 'menu',
-        'pk' => $menu->get('id'),
+        'pk' => $menu->get('text'),
 		'leaf' => $menu->get('childrenCount') <= 0 ? true : false,
         'data' => $menu->toArray(),
 		'menu' => array(

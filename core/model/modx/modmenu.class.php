@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage mysql
  */
-class modMenu extends modAccessibleSimpleObject {
+class modMenu extends modAccessibleObject {
     function modMenu(& $xpdo) {
         $this->__construct($xpdo);
     }
@@ -44,7 +44,7 @@ class modMenu extends modAccessibleSimpleObject {
      * @param integer $start The start menu to build from recursively.
      * @return array An array of modMenu objects, in tree form.
      */
-    function rebuildCache($start = 0) {
+    function rebuildCache($start = '') {
         $menus = $this->getSubMenus($start);
 
         if ($this->xpdo->cacheManager->set('mgr/menus',$menus) == false) {
@@ -61,7 +61,7 @@ class modMenu extends modAccessibleSimpleObject {
      * @param integer $start The top menu to load from.
      * @return array An array of modMenu objects, in tree form.
      */
-    function getSubMenus($start = 0) {
+    function getSubMenus($start = '') {
         if (!$this->xpdo->lexicon) {
             $this->xpdo->getService('lexicon','modLexicon');
         }
@@ -100,7 +100,7 @@ class modMenu extends modAccessibleSimpleObject {
             } else {
                 $ma['description'] = '';
             }
-            $ma['children'] = $this->getSubMenus($menu->get('id'));
+            $ma['children'] = $menu->get('text') != '' ? $this->getSubMenus($menu->get('text')) : array();
 
             if ($menu->get('controller')) {
                 $ma['controller'] = $menu->get('controller');
