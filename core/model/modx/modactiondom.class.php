@@ -44,6 +44,7 @@ class modActionDom extends modAccessibleSimpleObject {
                 $rule = 'Ext.getCmp("'.$this->get('container').'").setLabel("'.$this->get('name').'","'.$this->get('value').'");';
                 break;
             case 'fieldDefault':
+            case 'fieldDefaultValue':
                 $rule = 'Ext.getCmp("'.$this->get('container').'").getForm().findField("'.$this->get('name').'").setValue("'.$this->get('value').'");';
                 break;
             case 'panelTitle':
@@ -63,12 +64,14 @@ class modActionDom extends modAccessibleSimpleObject {
 });';
                 }
                 break;
+            case 'tvLabel':
             case 'tvTitle':
                 $rule = 'Ext.getCmp("modx-panel-resource-tv").on("load",function() {
     Ext.get("'.$this->get('name').'").up("tr").child("th").update("<label>'.$this->get('value').'</label><br />");
 });';
                 break;
             case 'tvDefault':
+            case 'tvDefaultValue':
                 if (!$this->get('value')) {
                     $rule = 'Ext.getCmp("modx-panel-resource-tv").on("load",function() {
     Ext.get("'.$this->get('name').'").set("value","'.$this->get('value').'");
