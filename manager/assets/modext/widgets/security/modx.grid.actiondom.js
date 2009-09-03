@@ -38,6 +38,8 @@ MODx.grid.ActionDom = function(config) {
             header: _('usergroup')
             ,dataIndex: 'principal'
             ,width: 200
+            ,editor: { xtype: 'modx-combo-usergroup' ,renderer: true }
+            ,editable: false
         }]
         ,tbar: [{
             text: _('add')
