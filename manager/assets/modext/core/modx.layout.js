@@ -8,6 +8,9 @@
  */
 MODx.Layout = function(config){
     config = config || {};
+    Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
+        expires: new Date(new Date().getTime()+(1000*60*60*24))
+    }));
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext3/resources/images/default/s.gif';
     Ext.applyIf(config,{
         id: 'modx-layout'
@@ -17,6 +20,7 @@ MODx.Layout = function(config){
         ,border: false
         ,items: [{
             xtype: 'modx-tabs'
+            ,id: 'modx-leftbar-tabs'
             ,width: '100%'
             ,plain: true
             ,defaults: {
@@ -25,6 +29,13 @@ MODx.Layout = function(config){
             }
             ,border: false
             ,deferredRender: false
+            ,activeTab: 0
+            ,stateful: true
+            ,stateId: 'tabpanel'
+            ,stateEvents: ['tabchange']
+            ,getState:function() {
+                return {activeTab:this.items.indexOf(this.getActiveTab())};
+            }
             ,items: [{
                 xtype: 'modx-tree-resource'
                 ,title: _('resources')

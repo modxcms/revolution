@@ -9,8 +9,7 @@ Ext.namespace('MODx.tree');
  * @xtype modx-tree
  */
 MODx.tree.Tree = function(config) {
-	config = config || {};    
-	Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+	config = config || {};
     Ext.applyIf(config,{
         baseParams: {}
         ,action: 'getNodes'
