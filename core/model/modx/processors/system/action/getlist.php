@@ -22,7 +22,8 @@ if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'controller';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $c = $modx->newQuery('modAction');
-$c->sortby('namespace,'.$_REQUEST['sort'],$_REQUEST['dir']);
+$c->sortby('namespace','ASC');
+$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
 if ($limit) {
     $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 }
