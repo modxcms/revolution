@@ -1,7 +1,7 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
+ * @deprecated 2.0.0
  */
 class modResourceKeyword extends xPDOObject {
     function modResourceKeyword(& $xpdo) {

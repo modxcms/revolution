@@ -4,7 +4,6 @@
  * Policy.
  *
  * @package modx
- * @subpackage mysql
  */
 class modAccessPermission extends xPDOSimpleObject {
     function modAccessPermission(& $xpdo) {

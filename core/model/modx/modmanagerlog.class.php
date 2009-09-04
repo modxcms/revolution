@@ -1,7 +1,6 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
  */
 class modManagerLog extends xPDOSimpleObject {
     function modManagerLog(& $xpdo) {

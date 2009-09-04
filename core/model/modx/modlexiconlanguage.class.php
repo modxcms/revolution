@@ -1,7 +1,6 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
  */
 class modLexiconLanguage extends xPDOObject {
     function modLexiconLanguage(& $xpdo) {

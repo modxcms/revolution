@@ -1,7 +1,6 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
  */
 class modResourceGroupResource extends xPDOSimpleObject {
     function modResourceGroupResource(& $xpdo) {

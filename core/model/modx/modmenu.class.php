@@ -1,7 +1,8 @@
 <?php
 /**
+ * Represents a menu item at the top of the MODx manager.
+ *
  * @package modx
- * @subpackage mysql
  */
 class modMenu extends modAccessibleObject {
     function modMenu(& $xpdo) {

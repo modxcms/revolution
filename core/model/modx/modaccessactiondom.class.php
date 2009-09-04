@@ -1,7 +1,6 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
  */
 class modAccessActionDom extends modAccess {
     function modAccessActionDom(& $xpdo) {

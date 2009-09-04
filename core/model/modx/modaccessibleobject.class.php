@@ -3,7 +3,6 @@
  * Defines an interface to provide configurable access policies for principals.
  *
  * @package modx
- * @subpackage mysql
  */
 class modAccessibleObject extends xPDOObject {
     /**

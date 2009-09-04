@@ -1,7 +1,7 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
+ * @deprecated 2.0.0
  */
 class modResourceMetatag extends xPDOObject {
     function modResourceMetatag(& $xpdo) {
@@ -11,4 +11,3 @@ class modResourceMetatag extends xPDOObject {
         parent :: __construct($xpdo);
     }
 }
-?>

@@ -5,7 +5,6 @@
  * {@inheritdoc}
  *
  * @package modx
- * @subpackage mysql
  */
 class modAccessAction extends modAccess {
     function modAccessAction(& $xpdo) {

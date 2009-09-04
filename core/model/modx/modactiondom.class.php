@@ -3,7 +3,6 @@
  * Adds custom manager adjustments based upon modAction objects
  *
  * @package modx
- * @subpackage mysql
  */
 class modActionDom extends modAccessibleSimpleObject {
     function modActionDom(& $xpdo) {

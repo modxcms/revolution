@@ -1,7 +1,6 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
  */
 class modUserGroupRole extends xPDOSimpleObject {
     function modUserGroupRole(& $xpdo) {

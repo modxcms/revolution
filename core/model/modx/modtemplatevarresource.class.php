@@ -1,7 +1,6 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
  */
 class modTemplateVarResource extends xPDOSimpleObject {
     function modTemplateVarResource(& $xpdo) {

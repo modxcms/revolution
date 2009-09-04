@@ -1,7 +1,6 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
  */
 class modAccessTemplateVar extends modAccessElement {
     function modAccessTemplateVar(& $xpdo) {

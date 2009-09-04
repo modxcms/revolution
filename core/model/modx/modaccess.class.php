@@ -8,7 +8,6 @@
  *
  * @abstract
  * @package modx
- * @subpackage mysql
  */
 class modAccess extends xPDOSimpleObject {
     function modAccess(& $xpdo) {

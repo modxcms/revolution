@@ -1,7 +1,6 @@
 <?php
 /**
  * @package modx
- * @subpackage mysql
  */
 class modLexiconTopic extends xPDOSimpleObject {
     function modLexiconTopic(& $xpdo) {
