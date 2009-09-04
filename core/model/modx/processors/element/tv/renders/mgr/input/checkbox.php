@@ -12,7 +12,7 @@ while (list($item, $itemvalue) = each ($index_list)) {
     list($item,$itemvalue) =  (is_array($itemvalue)) ? $itemvalue : explode("==",$itemvalue);
     if (strlen($itemvalue)==0) $itemvalue = $item;
     $opts[] = array(
-        'value' => htmlspecialchars($itemvalue),
+        'value' => htmlspecialchars($itemvalue,ENT_COMPAT,'UTF-8'),
         'text' => htmlspecialchars($item),
         'checked' => in_array($itemvalue,$this->get('value')),
     );
