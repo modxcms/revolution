@@ -232,7 +232,8 @@ if ($resource->save() == false) {
     return $modx->error->failure($modx->lexicon('resource_err_save'));
 }
 
-/* if parent changed, change folder status of old and new parents */
+/* if parent changed, change folder status of old and new parents
+ * also verify context, if changed  */
 if ($resource->get('parent') != $oldparent_id) {
     $oldparent = $modx->getObject('modResource',$oldparent_id);
     if ($oldparent != null) {
@@ -247,6 +248,10 @@ if ($resource->get('parent') != $oldparent_id) {
     if ($newparent != null) {
         $newparent->set('isfolder',true);
         $newparent->save();
+
+        /* set context to new parent context */
+        $resource->set('context_key',$newparent->get('context_key'));
+        $resource->save();
     }
 }
 
