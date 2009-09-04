@@ -757,7 +757,7 @@ MODx.combo.Action = function(config) {
         ,displayField: 'controller'
         ,valueField: 'id'
         ,fields: ['id','controller']
-        ,url: MODx.config.connectors_url+'system/action/index.php'
+        ,url: MODx.config.connectors_url+'system/action.php'
     });
     MODx.combo.Action.superclass.constructor.call(this,config);
 };
