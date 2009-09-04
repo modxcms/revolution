@@ -7,6 +7,8 @@
  */
 /* handle new class creation */
 $classes = array(
+    'modAccessActionDom',
+    'modActionDom',
 );
 if (!empty($classes)) {
     $this->createTable($classes);
