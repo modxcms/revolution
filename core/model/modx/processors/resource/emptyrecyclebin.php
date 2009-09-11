@@ -15,8 +15,8 @@ if (!$modx->hasPermission('purge_deleted')) return $modx->error->failure($modx->
 $resources = $modx->getCollection('modResource',array('deleted' => true));
 
 foreach ($resources as $resource) {
-    $resource->groups = $resource->getMany('modResourceGroupResource');
-    $resource->tvds = $resource->getMany('modTemplateVarResource');
+    $resource->groups = $resource->getMany('ResourceGroupResources');
+    $resource->tvds = $resource->getMany('TemplateVarResources');
 
     foreach ($resource->groups as $pair) {
        $pair->remove();

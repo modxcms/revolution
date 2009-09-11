@@ -65,7 +65,7 @@ if (!empty($ra['publishedon']) && $resource->PublishedBy) {
 }
 
 /* template */
-$ra['template'] = $resource->modTemplate ? $resource->modTemplate->get('templatename') : $modx->lexicon('empty_template');
+$ra['template'] = $resource->Template ? $resource->Template->get('templatename') : $modx->lexicon('empty_template');
 
 /* source */
 $resource->_contextKey= $resource->get('context_key');

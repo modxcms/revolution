@@ -70,7 +70,7 @@ function duplicateResource($resource,$newname = '',$duplicate_children = true,$_
 	}
 
 	/* duplicate resource TVs */
-	$resource->tvds = $resource->getMany('modTemplateVarResource');
+	$resource->tvds = $resource->getMany('TemplateVarResources');
 	foreach ($resource->tvds as $old_tvd) {
 		$new_tvd = $modx->newObject('modTemplateVarResource');
 		$new_tvd->set('contentid',$new_resource->get('id'));
@@ -79,31 +79,13 @@ function duplicateResource($resource,$newname = '',$duplicate_children = true,$_
 		$new_tvd->save();
 	}
 
-	/* duplicate resource keywords */
-	$resource->keywords = $resource->getMany('modResourceKeyword');
-	foreach ($resource->keywords as $old_kw) {
-		$new_kw = $modx->newObject('modResourceKeyword');
-		$new_kw->set('content_id',$new_resource->get('id'));
-		$new_kw->set('keyword_id',$old_kw->get('keyword_id'));
-		$new_kw->save();
-	}
-
 	/* duplicate resource groups */
-	$resource->groups = $resource->getMany('modResourceGroupResource');
+	$resource->groups = $resource->getMany('ResourceGroupResources');
 	foreach ($resource->groups as $old_group) {
 		$new_group = $modx->newObject('modResourceGroupResource');
 		$new_group->set('document_group',$old_group->get('document_group'));
 		$new_group->set('document',$new_resource->get('id'));
 		$new_group->save();
-	}
-
-	/* duplicate resource metatags */
-	$resource->metatags = $resource->getMany('modResourceMetatag');
-	foreach ($resource->metatags as $old_mt) {
-		$new_mt = $modx->newObject('modResourceMetatag');
-		$new_mt->set('content_id',$new_resource->get('id'));
-		$new_mt->set('metatag_id',$old_mt->get('id'));
-		$new_mt->save();
 	}
 
 	/* duplicate resource, recursively */

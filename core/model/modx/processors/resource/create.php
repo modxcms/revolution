@@ -169,9 +169,9 @@ if (!empty($_POST['template']) && ($template = $modx->getObject('modTemplate', $
     $tmplvars = array();
     $c = $modx->newQuery('modTemplateVar');
     $c->select('DISTINCT modTemplateVar.*, modTemplateVar.default_text AS value');
-    $c->innerJoin('modTemplateVarTemplate','modTemplateVarTemplate');
+    $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplates');
     $c->where(array(
-        'modTemplateVarTemplate.templateid' => $_POST['template'],
+        'TemplateVarTemplates.templateid' => $_POST['template'],
     ));
     $c->sortby('modTemplateVar.rank');
 
