@@ -41,7 +41,7 @@ $collection['7']->fromArray(array (
   'parent' => 6,
   'controller' => 'context/create',
   'haslayout' => 1,
-  'lang_topics' => 'context,setting',
+  'lang_topics' => 'context,setting,access,policy,user',
   'assets' => '',
 ), '', true, true);
 $collection['8']= $xpdo->newObject('modAction');
@@ -51,7 +51,7 @@ $collection['8']->fromArray(array (
   'parent' => 6,
   'controller' => 'context/update',
   'haslayout' => 1,
-  'lang_topics' => 'context,setting',
+  'lang_topics' => 'context,setting,access,policy,user',
   'assets' => '',
 ), '', true, true);
 $collection['9']= $xpdo->newObject('modAction');

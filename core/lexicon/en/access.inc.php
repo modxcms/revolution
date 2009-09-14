@@ -43,6 +43,7 @@ $_lang['access_policy_grid_paginate'] = 'Displaying policies {0} - {1} of {2}';
 $_lang['access_resourcegroup_management_msg'] = 'Manage User Group member access to Resource Groups and optionally apply access policies.';
 $_lang['access_to_contexts'] = 'Access to Contexts';
 $_lang['access_to_resource_groups'] = 'Access to Resource Groups';
+$_lang['acl_add'] = 'Add Access Control';
 $_lang['authority'] = 'Authority';
 $_lang['resource_group'] = 'Resource Group';
 $_lang['resource_group_add'] = 'Add Resource Group';

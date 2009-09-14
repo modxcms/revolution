@@ -55,6 +55,16 @@ MODx.panel.Context = function(config) {
                 ,preventRender: true
                 ,context_key: config.context
             }]
+        },{
+            title: _('access_permissions')
+            ,bodyStyle: 'padding: 1.5em'
+            ,autoHeight: true
+            ,items:[{
+                xtype: 'modx-grid-access-context'
+                ,title: ''
+                ,preventRender: true
+                ,context_key: config.context
+            }]
         }])]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
