@@ -96,10 +96,10 @@ $description = sprintf($this->install->lexicon['change_column'],'parent','parent
 $this->processResults($class,$description,$sql);
 
 $description = '';
-$sql = "ALTER TABLE {$table} DROP PRIMARY KEY";
+$sql = "ALTER TABLE {$table} DROP PRIMARY KEY, ADD PRIMARY KEY (`text`)";
 $this->processResults($class,$description,$sql);
 $description = '';
-$sql = "ALTER TABLE {$table} CHANGE `text` `text` VARCHAR( 255 ) UNSIGNED NOT NULL PRIMARY KEY FIRST";
+$sql = "ALTER TABLE {$table} CHANGE `text` `text` VARCHAR( 255 ) NOT NULL";
 $pkChanged = $this->processResults($class,$description,$sql);
 if (!$pkChanged) {
     $description = '';
