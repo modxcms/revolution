@@ -71,3 +71,9 @@ MODx.panel.FileTV = function(config) {
 };
 Ext.extend(MODx.panel.FileTV,MODx.Panel);
 Ext.reg('modx-panel-tv-file',MODx.panel.FileTV);
+
+MODx.checkTV = function(id) {
+    var cb = Ext.get('tv'+id);
+    Ext.get('tvh'+id).dom.value = cb.dom.checked ? cb.dom.value : '';
+     
+};

@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1178] Fixed issue where checkbox TVs were unable to be set to false; properly rendered values into a hidden field
+- [#MODX-1204] Implemented $matchAll for modUser::isMember, that allows exclusive and inclusive group membership checks
 - [#MODX-1203] Now preserves state of open tabs in left bar
 - Added "Form Customization" page, which emulates Evolution ManagerManager functionality and integrates it into the core
 - Revamped modMenu DB structure to allow for more proper dynamic menus; 3PCs will need to now refer to the Components menu as 'components', as the "id" field has been dropped and "text" is now the PK
