@@ -608,18 +608,26 @@ class modUser extends modPrincipal {
      * either a string name of the group, or an array of names.
      *
      * @access public
-     * @param mixed $groups Either a string of a group name or an array of
-     * names.
+     * @param string/array $groups Either a string of a group name or an array
+     * of names.
+     * @param boolean $matchAll If true, requires the user to be a member of all
+     * the groups specified. If false, the user can be a member of only one to
+     * pass. Defaults to false.
      * @return boolean True if the user is a member of any of the groups
      * specified.
      */
-    function isMember($groups) {
+    function isMember($groups,$matchAll = false) {
         $isMember= false;
         $groupNames= $this->getUserGroupNames();
         if ($groupNames) {
             if (is_array($groups)) {
-                $matches= array_diff($groups, $groupNames);
-                $isMember= empty($matches);
+                if ($matchAll) {
+                    $matches= array_diff($groups, $groupNames);
+                    $isMember= empty($matches);
+                } else {
+                    $matches= array_intersect($groups, $groupNames);
+                    $isMember= !empty($matches);
+                }
             } else {
                 $isMember= (array_search($groups, $groupNames) !== false);
             }
