@@ -1,6 +1,7 @@
 <?php
 /**
- *
+ * @package modx
+ * @subpackage controllers.resource.weblink
  */
 if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('access_denied'));
 
@@ -14,6 +15,7 @@ if (isset($_REQUEST['parent'])) {
     }
 }
 
+/* handle switch template */
 if (isset ($_REQUEST['newtemplate'])) {
     foreach ($_POST as $key => $val) {
         $resource->set($key,$val);

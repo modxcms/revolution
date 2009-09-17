@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1213] Fixed issues with WebLink creation and loading
 - [#MODX-1178] Fixed issue where checkbox TVs were unable to be set to false; properly rendered values into a hidden field
 - [#MODX-1204] Implemented $matchAll for modUser::isMember, that allows exclusive and inclusive group membership checks
 - [#MODX-1203] Now preserves state of open tabs in left bar
