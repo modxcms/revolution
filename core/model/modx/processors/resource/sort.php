@@ -31,16 +31,6 @@ foreach ($nodes as $ar_node) {
 
         /* save new parent */
         $node->set('parent',$ar_node['parent']);
-
-        /* check if old parent has children left */
-        $old_parent = $modx->getObject('modResource',$old_parent_id);
-        if ($old_parent != null) $old_parent->checkChildren();
-
-        /* change new parent to folder */
-        if ($ar_node['parent'] != 0) {
-            $parent->set('isfolder',1);
-            $parent->save();
-        }
     }
     $old_context_key = $node->get('context_key');
     if ($old_context_key != $ar_node['context']) {

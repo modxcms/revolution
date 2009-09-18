@@ -297,15 +297,6 @@ class modResource extends modAccessibleSimpleObject {
     }
 
     /**
-     * Resolve isfolder for the resource based on if it has children.
-     */
-    function checkChildren() {
-        $kids = $this->xpdo->getCount('modResource', array('parent' => $this->get('id')));
-        $this->set('isfolder', $kids > 0);
-        $this->save();
-    }
-
-    /**
      * Adds a lock on the Resource
      *
      * @access public
