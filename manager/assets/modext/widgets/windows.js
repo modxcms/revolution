@@ -222,16 +222,17 @@ MODx.window.QuickCreateChunk = function(config) {
 		,url: MODx.config.connectors_url+'element/chunk.php'
 		,action: 'create'
 		,fields: [{
-			xtype: 'hidden'
-			,name: 'category'
-			,id: 'modx-'+this.ident+'-category'
-		},{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
 		},{
+            xtype: 'modx-combo-category'
+            ,name: 'category'
+            ,fieldLabel: _('category')
+            ,id: 'modx-'+this.ident+'-category'
+        },{
             xtype: 'textarea'
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
@@ -272,15 +273,16 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,name: 'id'
             ,id: 'modx-'+this.ident+'-id'
         },{
-            xtype: 'hidden'
-            ,name: 'category'
-            ,id: 'modx-'+this.ident+'-category'
-        },{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
+        },{
+            xtype: 'modx-combo-category'
+            ,name: 'category'
+            ,fieldLabel: _('category')
+            ,id: 'modx-'+this.ident+'-category'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -328,15 +330,16 @@ MODx.window.QuickCreateTemplate = function(config) {
         ,url: MODx.config.connectors_url+'element/template.php'
         ,action: 'create'
         ,fields: [{
-            xtype: 'hidden'
-            ,name: 'category'
-            ,id: 'modx-'+this.ident+'-category'
-        },{
             xtype: 'textfield'
             ,name: 'templatename'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
+        },{
+            xtype: 'modx-combo-category'
+            ,name: 'category'
+            ,fieldLabel: _('category')
+            ,id: 'modx-'+this.ident+'-category'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -384,6 +387,11 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,fieldLabel: _('name')
             ,width: 300
         },{
+            xtype: 'modx-combo-category'
+            ,name: 'category'
+            ,fieldLabel: _('category')
+            ,id: 'modx-'+this.ident+'-category'
+        },{
             xtype: 'textarea'
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
@@ -429,15 +437,16 @@ MODx.window.QuickCreateSnippet = function(config) {
         ,url: MODx.config.connectors_url+'element/snippet.php'
         ,action: 'create'
         ,fields: [{
-            xtype: 'hidden'
-            ,name: 'category'
-            ,id: 'modx-'+this.ident+'-category'
-        },{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
+        },{
+            xtype: 'modx-combo-category'
+            ,name: 'category'
+            ,fieldLabel: _('category')
+            ,id: 'modx-'+this.ident+'-category'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -485,6 +494,11 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,fieldLabel: _('name')
             ,width: 300
         },{
+            xtype: 'modx-combo-category'
+            ,name: 'category'
+            ,fieldLabel: _('category')
+            ,id: 'modx-'+this.ident+'-category'
+        },{
             xtype: 'textarea'
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
@@ -531,15 +545,16 @@ MODx.window.QuickCreatePlugin = function(config) {
         ,url: MODx.config.connectors_url+'element/plugin.php'
         ,action: 'create'
         ,fields: [{
-            xtype: 'hidden'
-            ,name: 'category'
-            ,id: 'modx-'+this.ident+'-category'
-        },{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
+        },{
+            xtype: 'modx-combo-category'
+            ,name: 'category'
+            ,fieldLabel: _('category')
+            ,id: 'modx-'+this.ident+'-category'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -587,6 +602,11 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,fieldLabel: _('name')
             ,width: 300
         },{
+            xtype: 'modx-combo-category'
+            ,name: 'category'
+            ,fieldLabel: _('category')
+            ,id: 'modx-'+this.ident+'-category'
+        },{
             xtype: 'textarea'
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
@@ -632,15 +652,16 @@ MODx.window.QuickCreateTV = function(config) {
         ,url: MODx.config.connectors_url+'element/tv.php'
         ,action: 'create'
         ,fields: [{
-            xtype: 'hidden'
-            ,name: 'category'
-            ,id: 'modx-'+this.ident+'-category'
-        },{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
+        },{
+            xtype: 'modx-combo-category'
+            ,name: 'category'
+            ,fieldLabel: _('category')
+            ,id: 'modx-'+this.ident+'-category'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -698,6 +719,11 @@ MODx.window.QuickUpdateTV = function(config) {
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,width: 300
+        },{
+            xtype: 'modx-combo-category'
+            ,name: 'category'
+            ,fieldLabel: _('category')
+            ,id: 'modx-'+this.ident+'-category'
         },{
             xtype: 'textarea'
             ,name: 'description'

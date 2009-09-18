@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-649] Fixed issue where comboboxes were not loading proper displayValue when first rendered
+- Added category combobox to quick update/create windows
 - [#MODX-1019] Added missing site_unavailable_page System Setting.
 - [#MODX-1226] Removed modResource->checkChildren() method; isfolder should not be set based on presence/absence of children.
 - [#MODX-1213] Fixed issues with WebLink creation and loading

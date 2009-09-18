@@ -1,4 +1,27 @@
 Ext.namespace('MODx.combo');
+/* fixes combobox value loading issue */
+Ext.override(Ext.form.ComboBox, {
+    loaded: false
+    ,setValue: Ext.form.ComboBox.prototype.setValue.createSequence(function(v) {
+        var idx = this.store.find(this.valueField, v);
+
+        if (v && v !== 0 && this.mode == 'remote' && idx == -1 && !this.loaded) {
+            var p = {};
+            p[this.valueField] = v;
+            this.loaded = true;
+
+            this.store.load({
+                scope: this,
+                params: p,
+                callback: function() {
+                    this.setValue(v);
+                    this.collapse();
+                }
+            });
+        }
+    })
+});
+
 /**
  * An abstraction of Ext.form.ComboBox with connector ability.
  * 
@@ -45,11 +68,6 @@ MODx.combo.ComboBox = function(config,getStore) {
 	}
 	MODx.combo.ComboBox.superclass.constructor.call(this,config);
     this.config = config;
-    if (!config.preventRender) {
-        this.on('render',function() {
-            this.store.load();
-        },this);
-    }
 };
 Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox);
 Ext.reg('modx-combo',MODx.combo.ComboBox);
