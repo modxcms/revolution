@@ -49,7 +49,7 @@ $entries = $modx->getCollection('modLexiconEntry',array(
 
 /* setup output content */
 $o = "<?php\n";
-$o = "/*\n
+$o .= "/*\n
  * @topic ".$topic->get('name')."\n
  * @namespace ".$namespace->get('name')."\n
  * @language ".$_POST['language']."

@@ -37,12 +37,12 @@ MODx.Console = function(config) {
             ,border: false
         },{
             xtype: 'modx-panel'
-            ,id: 'console-body'
+            ,id: 'modx-console-body'
             ,cls: 'modx-console'            
         }]
         ,buttons: [{
-            text: _('copy_to_clipboard')
-            ,handler: this.copyToClipboard
+            text: 'Download Output to File'
+            ,handler: this.download
             ,scope: this
         },{
             text: _('ok')
@@ -67,18 +67,28 @@ Ext.extend(MODx.Console,Ext.Window,{
     
     ,init: function() {
         Ext.Msg.hide();
-        Ext.get('console-body').update('');
+        Ext.get('modx-console-body').update('');
         if (this.running !== true) {
-            this.mgr = new Ext.Updater('console-body');
+            this.mgr = new Ext.Updater('modx-console-body');
         }
         this.mgr.startAutoRefresh('.5',this.config.url,this.config.baseParams || {},this.renderMsg,true);
         this.running = true;
     }
     
-    ,copyToClipboard: function() {
-    	var c = Ext.get('console-body').dom.innerHTML;
-    	c = Ext.util.Format.stripTags(c);
-    	MODx.util.Clipboard.copy(c);
+    ,download: function() {
+        var c = Ext.get('modx-console-body').dom.innerHTML;
+        MODx.Ajax.request({
+            url: MODx.config.connectors_url+'system/index.php'
+            ,params: {
+                action: 'downloadOutput'
+                ,data: c
+            }
+            ,listeners: {
+                'success':{fn:function(r) {
+                    location.href = MODx.config.connectors_url+'system/index.php?action=downloadOutput&download='+r.message;
+                },scope:this}
+            }            
+        });
     }
     
     ,renderMsg: function(el,s,r,o) {
@@ -117,7 +127,7 @@ Ext.extend(MODx.Console,Ext.Window,{
             }
             ,listeners: {
             	'success': {fn:function(r) {                    
-                    Ext.getCmp('console-body').getEl().update(r.message);
+                    Ext.getCmp('modx-console-body').getEl().update(r.message);
                     this.mgr.stopAutoRefresh();
                     this.fireEvent('shutdown',r);
         	    },scope:this}
