@@ -45,17 +45,30 @@ $modx->smarty->assign('docgroups',$dgs);
 
 /* get available RichText Editors */
 $RTEditors = '';
-$evtOut = $modx->invokeEvent('OnRichTextEditorRegister',array('forfrontend' => true));
+$evtOut = $modx->invokeEvent('OnRichTextEditorRegister',array(
+    'forfrontend' => true,
+    'id' => $tv->get('id'),
+    'tv' => &$tv,
+    'mode' => 'upd',
+));
 if(is_array($evtOut)) $RTEditors = implode(',',$evtOut);
 $modx->smarty->assign('RTEditors',$RTEditors);
 
 /* invoke OnTVFormPrerender event */
-$onTVFormPrerender = $modx->invokeEvent('OnTVFormPrerender',array('id' => $_REQUEST['id']));
+$onTVFormPrerender = $modx->invokeEvent('OnTVFormPrerender',array(
+    'id' => $tv->get('id'),
+    'tv' => &$tv,
+    'mode' => 'upd',
+));
 if(is_array($onTVFormPrerender)) $onTVFormPrerender = implode('',$onTVFormPrerender);
 $modx->smarty->assign('onTVFormPrerender',$onTVFormPrerender);
 
 /* invoke OnTVFormRender event */
-$onTVFormRender = $modx->invokeEvent('OnTVFormRender',array('id' => $_REQUEST['id']));
+$onTVFormRender = $modx->invokeEvent('OnTVFormRender',array(
+    'id' => $tv->get('id'),
+    'tv' => &$tv,
+    'mode' => 'upd',
+));
 if (is_array($onTVFormRender)) $onTVFormRender = implode('',$onTVFormRender);
 $modx->smarty->assign('onTVFormRender',$onTVFormRender);
 

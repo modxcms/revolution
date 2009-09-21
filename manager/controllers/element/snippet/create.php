@@ -14,12 +14,18 @@ if (isset($_REQUEST['category'])) {
 } else { $category = null; }
 
 /* invoke OnSnipFormPrerender event */
-$onSnipFormPrerender = $modx->invokeEvent('OnSnipFormPrerender',array('id' => 0));
+$onSnipFormPrerender = $modx->invokeEvent('OnSnipFormPrerender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
 if (is_array($onSnipFormPrerender)) $onSnipFormPrerender = implode('',$onSnipFormPrerender);
 $modx->smarty->assign('onSnipFormPrerender',$onSnipFormPrerender);
 
 /* invoke onSnipFormRender event */
-$onSnipFormRender = $modx->invokeEvent('OnSnipFormRender',array('id' => 0));
+$onSnipFormRender = $modx->invokeEvent('OnSnipFormRender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
 if (is_array($onSnipFormRender)) $onSnipFormRender = implode('',$onSnipFormRender);
 $modx->smarty->assign('onSnipFormRender',$onSnipFormRender);
 

@@ -19,6 +19,26 @@ if (!$context->prepare()) {
     return $modx->error->failure($modx->lexicon('context_err_load_data'), $context->toArray());
 }
 
+
+/* invoke OnContextFormPrerender event */
+$onContextFormPrerender = $modx->invokeEvent('OnContextFormPrerender',array(
+    'key' => $context->get('key'),
+    'context' => &$context,
+    'mode' => 'upd',
+));
+if (is_array($onContextFormPrerender)) $onContextFormPrerender = implode('',$onContextFormPrerender);
+$modx->smarty->assign('OnContextFormPrerender',$onContextFormPrerender);
+
+/* invoke OnContextFormRender event */
+$onContextFormRender = $modx->invokeEvent('OnContextFormRender',array(
+    'key' => $context->get('key'),
+    'context' => &$context,
+    'mode' => 'upd',
+));
+if (is_array($onContextFormRender)) $onContextFormRender = implode('',$onContextFormRender);
+$modx->smarty->assign('OnContextFormRender',$onContextFormRender);
+
+
 /*  assign context to smarty and display */
 $modx->smarty->assign('context', $context);
 
@@ -28,5 +48,10 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.context.settings.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.panel.context.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/context/update.js');
+$modx->regClientStartupHTMLBlock('<script type="text/javascript">
+// <![CDATA[
+MODx.onContextFormRender = "'.$onContextFormRender.'";
+// ]]>
+</script>');
 
 return $modx->smarty->fetch('context/update.tpl');

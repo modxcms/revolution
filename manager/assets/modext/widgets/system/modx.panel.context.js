@@ -40,6 +40,9 @@ MODx.panel.Context = function(config) {
                 ,name: 'description'
                 ,width: 300
                 ,grow: true
+            },{
+                html: MODx.onContextFormRender 
+                ,border: false
             }]
         },{
             title: _('context_settings')

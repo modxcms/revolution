@@ -24,7 +24,11 @@ if (!empty($lockedBy) && $lockedBy !== true) {
 if (isset($_REQUEST['template'])) $resource->set('template',$_REQUEST['template']);
 
 /* invoke OnDocFormPrerender event */
-$onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array('id' => 0));
+$onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
+    'id' => $resource->get('id'),
+    'resource' => &$resource,
+    'mode' => 'upd',
+));
 if (is_array($onDocFormPrerender)) {
     $onDocFormPrerender = implode('',$onDocFormPrerender);
 }
@@ -59,7 +63,11 @@ $modx->smarty->assign('hasdocgroups',count($docgroups) > 0);
 
 
 /* invoke OnDocFormRender event */
-$onDocFormRender = $modx->invokeEvent('OnDocFormRender',array('id' => 0));
+$onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(
+    'id' => $resource->get('id'),
+    'resource' => &$resource,
+    'mode' => 'upd',
+));
 if (is_array($onDocFormRender)) {
     $onDocFormRender = implode('',$onDocFormRender);
 }

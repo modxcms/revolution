@@ -36,7 +36,10 @@ if (isset ($_REQUEST['newtemplate'])) {
 }
 
 /* invoke OnDocFormPrerender event */
-$onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array('id' => 0));
+$onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
 if (is_array($onDocFormPrerender)) {
     $onDocFormPrerender = implode('',$onDocFormPrerender);
 }
@@ -81,7 +84,10 @@ $modx->smarty->assign('hasdocgroups',count($docgroups) > 0);
 
 
 /* invoke OnDocFormRender event */
-$onDocFormRender = $modx->invokeEvent('OnDocFormRender',array('id' => 0));
+$onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
 if (is_array($onDocFormRender)) {
     $onDocFormRender = implode('',$onDocFormRender);
 }

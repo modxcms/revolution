@@ -14,12 +14,18 @@ if (isset($_REQUEST['category'])) {
 } else { $category = null; }
 
 /* invoke OnTempFormPrerender event */
-$onTempFormPrerender = $modx->invokeEvent('OnTempFormPrerender',array('id' => 0));
+$onTempFormPrerender = $modx->invokeEvent('OnTempFormPrerender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
 if (is_array($onTempFormPrerender)) $onTempFormPrerender = implode('',$onTempFormPrerender);
 $modx->smarty->assign('onTempFormPrerender',$onTempFormPrerender);
 
 /* invoke OnTempFormRender event */
-$onTempFormRender = $modx->invokeEvent('OnTempFormRender',array('id' => 0));
+$onTempFormRender = $modx->invokeEvent('OnTempFormRender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
 if (is_array($onTempFormRender)) $onTempFormRender = implode('',$onTempFormRender);
 $modx->smarty->assign('onTempFormRender',$onTempFormRender);
 

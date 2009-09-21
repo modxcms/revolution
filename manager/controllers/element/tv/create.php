@@ -15,17 +15,27 @@ if (isset($_REQUEST['category'])) {
 
 /* get available RichText Editors */
 $RTEditors = '';
-$evtOut = $modx->invokeEvent('OnRichTextEditorRegister',array('forfrontend' => 1));
+$evtOut = $modx->invokeEvent('OnRichTextEditorRegister',array(
+    'forfrontend' => 1,
+    'id' => 0,
+    'mode' => 'new',
+));
 if(is_array($evtOut)) $RTEditors = implode(',',$evtOut);
 $modx->smarty->assign('RTEditors',$RTEditors);
 
 /* invoke OnTVFormPrerender event */
-$onTVFormPrerender = $modx->invokeEvent('OnTVFormPrerender',array('id' => 0));
+$onTVFormPrerender = $modx->invokeEvent('OnTVFormPrerender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
 if(is_array($onTVFormPrerender)) $onTVFormPrerender = implode('',$onTVFormPrerender);
 $modx->smarty->assign('onTVFormPrerender',$onTVFormPrerender);
 
 /* invoke OnTVFormRender event */
-$onTVFormRender = $modx->invokeEvent('OnTVFormRender',array('id' => 0));
+$onTVFormRender = $modx->invokeEvent('OnTVFormRender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
 if (is_array($onTVFormRender)) $onTVFormRender = implode('',$onTVFormRender);
 $modx->smarty->assign('onTVFormRender',$onTVFormRender);
 

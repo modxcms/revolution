@@ -37,7 +37,11 @@ if (isset($_REQUEST['template'])) $resource->set('template',$_REQUEST['template'
 
 
 /* invoke OnDocFormPrerender event */
-$onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array('id' => $resource->get('id')));
+$onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
+    'id' => $resource->get('id'),
+    'resource' => &$resource,
+    'mode' => 'upd',
+));
 if (is_array($onDocFormPrerender)) {
     $onDocFormPrerender = implode('',$onDocFormPrerender);
 }
@@ -77,7 +81,11 @@ $modx->smarty->assign('hasdocgroups',count($docgroups) > 0);
 
 
 /* invoke OnDocFormRender event */
-$onDocFormRender = $modx->invokeEvent('OnDocFormRender',array('id' => $resource->get('id')));
+$onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(
+    'id' => $resource->get('id'),
+    'resource' => &$resource,
+    'mode' => 'upd',
+));
 if (is_array($onDocFormRender)) {
     $onDocFormRender = implode('',$onDocFormRender);
 }
@@ -101,6 +109,7 @@ if ($modx->getOption('use_editor')) {
     $onRichTextEditorInit = $modx->invokeEvent('OnRichTextEditorInit',array(
         'editor' => $rte,
         'elements' => $replace_richtexteditor,
+        'id' => $resource->get('id'),
         'resource' => &$resource,
         'mode' => 'upd',
     ));

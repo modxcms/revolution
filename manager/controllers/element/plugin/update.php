@@ -13,12 +13,20 @@ if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_not_fou
 $plugin->category = $plugin->getOne('Category');
 
 /* invoke OnPluginFormPrerender event */
-$onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array('id' => $_REQUEST['id']));
+$onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array(
+    'id' => $plugin->get('id'),
+    'plugin' => &$plugin,
+    'mode' => 'upd',
+));
 if (is_array($onPluginFormPrerender)) $onPluginFormPrerender = implode('',$onPluginFormPrerender);
 $modx->smarty->assign('onPluginFormPrerender',$onPluginFormPrerender);
 
 /* invoke OnPluginFormRender event */
-$onPluginFormRender = $modx->invokeEvent('OnPluginFormRender',array('id' => $_REQUEST['id']));
+$onPluginFormRender = $modx->invokeEvent('OnPluginFormRender',array(
+    'id' => $plugin->get('id'),
+    'plugin' => &$plugin,
+    'mode' => 'upd',
+));
 if (is_array($onPluginFormRender)) $onPluginFormRender = implode('',$onPluginFormRender);
 $modx->smarty->assign('onPluginFormRender',$onPluginFormRender);
 

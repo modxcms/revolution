@@ -18,14 +18,20 @@ $which_editor = isset($_POST['which_editor']) ? $_POST['which_editor'] : 'none';
 $modx->smarty->assign('which_editor',$which_editor);
 
 /* invoke OnChunkFormPrerender event */
-$onChunkFormPrerender = $modx->invokeEvent('OnChunkFormPrerender',array('id' => 0));
+$onChunkFormPrerender = $modx->invokeEvent('OnChunkFormPrerender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
 if (is_array($onChunkFormPrerender)) {
 	$onChunkFormPrerender = implode('',$onChunkFormPrerender);
 }
 $modx->smarty->assign('onChunkFormPrerender',$onChunkFormPrerender);
 
 /* invoke OnChunkFormRender event */
-$onChunkFormRender = $modx->invokeEvent('OnChunkFormRender',array('id' => 0));
+$onChunkFormRender = $modx->invokeEvent('OnChunkFormRender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
 if (is_array($onChunkFormRender)) {
 	$onChunkFormRender = implode('', $onChunkFormRender);
 }

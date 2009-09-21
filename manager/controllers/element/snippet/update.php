@@ -15,12 +15,20 @@ if ($snippet->get('locked') && !$modx->hasPermission('edit_locked')) {
 }
 
 /* invoke OnSnipFormPrerender event */
-$onSnipFormPrerender = $modx->invokeEvent('OnSnipFormPrerender',array('id' => 0));
+$onSnipFormPrerender = $modx->invokeEvent('OnSnipFormPrerender',array(
+    'id' => $snippet->get('id'),
+    'snippet' => &$snippet,
+    'mode' => 'upd',
+));
 if (is_array($onSnipFormPrerender)) $onSnipFormPrerender = implode('',$onSnipFormPrerender);
 $modx->smarty->assign('onSnipFormPrerender',$onSnipFormPrerender);
 
 /* invoke onSnipFormRender event */
-$onSnipFormRender = $modx->invokeEvent('OnSnipFormRender',array('id' => 0));
+$onSnipFormRender = $modx->invokeEvent('OnSnipFormRender',array(
+    'id' => $snippet->get('id'),
+    'snippet' => &$snippet,
+    'mode' => 'upd',
+));
 if (is_array($onSnipFormRender)) $onSnipFormRender = implode('',$onSnipFormRender);
 $modx->smarty->assign('onSnipFormRender',$onSnipFormRender);
 

@@ -38,10 +38,11 @@ if (is_array($onChunkFormRender)) {
 $modx->smarty->assign('onChunkFormRender',$onChunkFormRender);
 
 /* invoke OnRichTextEditorInit event */
-if ($modx->getOption('use_editor') == 1) {
+if ($modx->getOption('use_editor')) {
 	$onRTEInit = $modx->invokeEvent('OnRichTextEditorInit',array(
 		'editor' => $which_editor,
 		'elements' => array('post'),
+        'chunk' => &$chunk,
 	));
 	if (is_array($onRTEInit))
 		$onRTEInit = implode('', $onRTEInit);

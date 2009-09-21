@@ -17,12 +17,20 @@ if ($template->get('locked') && !$modx->hasPermission('edit_locked')) {
 $template->category = $template->getOne('Category');
 
 /* invoke OnTempFormPrerender event */
-$onTempFormPrerender = $modx->invokeEvent('OnTempFormPrerender',array('id' => $_REQUEST['id']));
+$onTempFormPrerender = $modx->invokeEvent('OnTempFormPrerender',array(
+    'id' => $template->get('id'),
+    'template' => &$template,
+    'mode' => 'upd',
+));
 if (is_array($onTempFormPrerender)) $onTempFormPrerender = implode('',$onTempFormPrerender);
 $modx->smarty->assign('onTempFormPrerender',$onTempFormPrerender);
 
 /* invoke OnTempFormRender event */
-$onTempFormRender = $modx->invokeEvent('OnTempFormRender',array('id' => $_REQUEST['id']));
+$onTempFormRender = $modx->invokeEvent('OnTempFormRender',array(
+    'id' => $template->get('id'),
+    'template' => &$template,
+    'mode' => 'upd',
+));
 if (is_array($onTempFormRender)) $onTempFormRender = implode('',$onTempFormRender);
 $modx->smarty->assign('onTempFormRender',$onTempFormRender);
 
