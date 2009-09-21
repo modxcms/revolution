@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added some extra variables for RTE firing; also made sure MODx.loadRTE fires on new resource creation. Fixes [#TINYMCE-9], [#TINYMCE-8]
 - [#MODX-523] Fixed copy issue in console by providing "Download to File" link
 - [#MODX-649] Fixed issue where comboboxes were not loading proper displayValue when first rendered
 - Added category combobox to quick update/create windows

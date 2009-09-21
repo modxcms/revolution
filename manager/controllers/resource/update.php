@@ -102,6 +102,7 @@ if ($modx->getOption('use_editor')) {
         'editor' => $rte,
         'elements' => $replace_richtexteditor,
         'resource' => &$resource,
+        'mode' => 'upd',
     ));
     if (is_array($onRichTextEditorInit)) {
         $onRichTextEditorInit = implode('',$onRichTextEditorInit);

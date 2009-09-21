@@ -118,6 +118,7 @@ if ($modx->getOption('use_editor')) {
 	$onRichTextEditorInit = $modx->invokeEvent('OnRichTextEditorInit',array(
 		'editor' => $rte,
 		'elements' => $replace_richtexteditor,
+        'mode' => 'new',
 	));
 	if (is_array($onRichTextEditorInit)) {
 		$onRichTextEditorInit = implode('',$onRichTextEditorInit);
