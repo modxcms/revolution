@@ -48,7 +48,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         this.uploader = new Ext.ux.UploadPanel({
              contextmenu: this.cm
             ,buttonsAt: 'tbar'
-            ,singleUpload: false
+            ,singleUpload: true
             ,enableProgress: false
             ,maxFileSize: 10485760
             ,baseParams: {

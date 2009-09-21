@@ -147,7 +147,7 @@ Ext.ux.form.BrowseButton = Ext.extend(Ext.Button, {
 	 */
 	onRender: function(ct, position){
 		Ext.ux.form.BrowseButton.superclass.onRender.call(this, ct, position); // render the Ext.Button
-		//this.buttonCt = this.el.child('.x-btn-center em');
+		//this.buttonCt = this.el.child('.x-btn-center em'); /* shaun 20090921 */
         this.buttonCt = this.el.child('.x-btn-mc em');
 		this.buttonCt.position('relative'); // this is important!
 		var styleCfg = {
@@ -254,7 +254,7 @@ Ext.ux.form.BrowseButton = Ext.extend(Ext.Button, {
 				position: 'absolute',
 				cursor: 'pointer',
 				right: '0px',
-				top: '0px'
+                top: Ext.isIE ? '10px' :'0px' // Also another IE fix
 			}
 		});
 		this.inputFileEl = this.inputFileEl.child('input') || this.inputFileEl;

@@ -174,7 +174,6 @@ Ext.extend(Ext.ux.FileUploader, Ext.util.Observable, {
 			,method:'post'
 			,cls:'x-hidden'
 			,id:Ext.id()
-            ,forceLayout: true
 			,cn:[{
 				 tag:'input'
 				,type:'hidden'
@@ -193,7 +192,9 @@ Ext.extend(Ext.ux.FileUploader, Ext.util.Observable, {
 			}]
 		});
 		if(record) {
-			record.set('form', form);
+			//record.set('form', form);
+            if(Ext.isIE) record.set('form', undefined);  // IE fix, without this it throws an exception
+            else record.set('form', form); 
 			record.set('progressId', progressId);
 		}
 		else {

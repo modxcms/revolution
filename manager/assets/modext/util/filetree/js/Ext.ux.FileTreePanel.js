@@ -849,7 +849,8 @@ Ext.ux.FileTreePanel = Ext.extend(Ext.tree.TreePanel, {
 			this.contextmenu = new Ext.ux.FileTreeMenu(config);
 			this.contextmenu.on({click:{scope:this, fn:this.onContextClick}});
 
-			this.uploadPanel = this.contextmenu.getItemByCmd('upload-panel').component;
+			//this.uploadPanel = this.contextmenu.getItemByCmd('upload-panel').component; /* shaun 20090921 */
+            this.uploadPanel = this.contextmenu.getItemByCmd('upload-panel');
 			this.uploadPanel.on({
 				 beforeupload:{scope:this, fn:this.onBeforeUpload}
 				,allfinished:{scope:this, fn:this.onAllFinished}
@@ -1459,6 +1460,8 @@ Ext.ux.FileTreePanel = Ext.extend(Ext.tree.TreePanel, {
 		menu.getItemByCmd('upload-panel').setVisible(this.enableUpload);
 		menu.getItemByCmd('sep-upload').setVisible(this.enableUpload);
 		menu.getItemByCmd('sep-collapse').setVisible(this.enableNewDir || this.enableDelete || this.enableRename);
+        
+        menu.render(); /* shaun 20090921 */
 
 		// select node
 		node.select();

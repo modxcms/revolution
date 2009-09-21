@@ -280,8 +280,8 @@ Ext.ux.UploadPanel = Ext.extend(Ext.Panel, {
 				,listeners:{click:{scope:this, fn:this.onViewClick}}
 
 			}]
-            ,forceLayout: true
-            ,autoHeight: true
+            //,forceLayout: true
+            //,autoHeight: true
             ,width: 300
 		});
 		// }}}
@@ -412,7 +412,7 @@ Ext.ux.UploadPanel = Ext.extend(Ext.Panel, {
 		this.uploadBtn = Ext.getCmp(tb.items.itemAt(1).id);
 		this.removeAllBtn = Ext.getCmp(tb.items.last().id);
         
-        tb.doLayout(false,true);
+        //tb.doLayout(false,true);
 	} // eo function onRender
 	// }}}
 
@@ -525,6 +525,8 @@ Ext.ux.UploadPanel = Ext.extend(Ext.Panel, {
 
 		this.uploadBtn.enable();
 		this.removeAllBtn.enable();
+        
+        this.ownerCt.doLayout();  /* shaun 20090921 */
 
 		if(true !== this.eventsSuspended) {
 			this.fireEvent('fileadd', this, this.store, rec);
