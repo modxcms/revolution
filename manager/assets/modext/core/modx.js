@@ -49,6 +49,7 @@ Ext.extend(MODx,Ext.Component,{
         Ext.QuickTips.init();
         Ext.apply(Ext.QuickTips.getQuickTip(), {
             dismissDelay: 2300
+            ,interceptTitles: true
         });
     }
     

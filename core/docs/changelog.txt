@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1120] Now shows TV names in tag form below the caption in the TV editing panel in Resource editing 
 - Fixes to plugin event calls in controllers
 - Fixes to filetree to enable in Ext3
 - [#MODX-1112] Fixed issue where checkboxes in grids werent firing dirty statuses

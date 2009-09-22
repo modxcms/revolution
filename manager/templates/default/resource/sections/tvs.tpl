@@ -10,8 +10,9 @@
     {foreach from=$category->tvs item=tv name='tv'}
     <tr class="{cycle values=',odd'}">
         <th width="150">
-            <label class="dashed" ext:qtip="{$tv->description}">{$tv->caption}</label>
+            <label class="dashed" style="cursor: pointer;" title="{$tv->description}" for="tv{$tv->id}">{$tv->caption}</label>
             <br />
+            <span style="font-size: .8em; font-weight: normal">[[*{$tv->name}]]</span>
         </th>
         <td valign="top" style="position:relative" class="x-form-element">
             {$tv->get('formElement')}
@@ -44,7 +45,6 @@ Ext.onReady(function() {
             }
         ]
     });*/
-  
 });
 // ]]>
 </script>
