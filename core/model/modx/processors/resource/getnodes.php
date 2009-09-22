@@ -185,7 +185,7 @@ while ($item) {
                 'pk' => $item->get('key'),
                 'leaf' => false,
                 'cls' => $class,
-                'qtip' => $item->get('description'),
+                'qtip' => $item->get('description') != '' ? $item->get('description') : '',
                 'type' => 'context',
                 'href' => '?a='.$actions['context/update'].'&key='.$item->get('key'),
                 'menu' => array('items' => $menu),
@@ -392,7 +392,14 @@ while ($item) {
             $class .= ($item->get('published') ? '' : ' unpublished')
                 .($item->get('deleted') ? ' deleted' : '')
                 .($item->get('hidemenu') == 1 ? ' hidemenu' : '');
-            $qtip = ($item->longtitle != '' ? '<b>'.$item->longtitle.'</b><br />' : '').'<i>'.$item->description.'</i>';
+
+            $qtip = '';
+            if ($item->longtitle != '') {
+                $qtip = '<b>'.$item->longtitle.'</b><br />';
+            }
+            if ($item->description != '') {
+                $qtip = '<i>'.$item->description.'</i>';
+            }
 
             $items[] = array(
                 'text' => $item->pagetitle.' ('.$item->id.')',
@@ -406,6 +413,7 @@ while ($item) {
                 'href' => '?a='.($hasEditPerm ? $actions['resource/update'] : $actions['resource/data']).'&id='.$item->id,
                 'menu' => array('items' => $menu),
             );
+            unset($qtip,$class,$menu);
         }
     }
     $item = next($collection);
