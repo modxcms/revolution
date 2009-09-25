@@ -407,7 +407,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
     ,setup: function() {
         if (this.config.resource === '' || this.config.resource === 0) {
-            if (MODx.config.use_editor) MODx.loadRTE('ta');
+            if (MODx.config.use_editor && MODx.loadRTE) MODx.loadRTE('ta');
             this.fireEvent('ready');
             return false;
         }
