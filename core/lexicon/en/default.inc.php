@@ -309,6 +309,7 @@ $_lang['select_date'] = 'Select a date';
 $_lang['select_el_opts'] = 'Select Element Options';
 $_lang['send'] = 'Send';
 $_lang['service_url'] = 'Service URL';
+$_lang['set_to_default'] = 'Set to Default';
 $_lang['setting'] = 'Setting';
 $_lang['settings'] = 'Settings';
 $_lang['settings_general'] = 'General';

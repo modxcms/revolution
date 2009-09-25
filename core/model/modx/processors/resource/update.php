@@ -267,7 +267,7 @@ $c->innerJoin('modTemplateVarTemplate', 'tvtpl', array(
 ));
 $c->leftJoin('modTemplateVarResource', 'tvc', array(
     'tvc.tmplvarid = tv.id',
-    'tvc.contentid' => $resource->get('id')
+    'tvc.contentid' => $resource->get('id'),
 ));
 $c->select(array(
     'DISTINCT tv.*',
@@ -277,63 +277,55 @@ $c->sortby('tv.rank');
 
 $tvs = $modx->getCollection('modTemplateVar',$c);
 foreach ($tvs as $tv) {
-    if (!isset($_POST['tv'.$tv->get('id')])) continue;
-    $tmplvar = '';
-    if ($tv->get('type') == 'url') {
-        $tmplvar = $_POST['tv'.$tv->get('id')];
-        if ($_POST['tv'.$tv->get('id').'_prefix'] != '--') {
-            $tmplvar = str_replace(array('ftp://','http://'),'', $tmplvar);
-            $tmplvar = $_POST['tv'.$tv->get('id').'_prefix'].$tmplvar;
-        }
-    } elseif ($tv->get('type') == 'file') {
-        $tmplvar = $_POST['tv'.$tv->get('id')];
-    } elseif ($tv->get('type') == 'date') {
-        $tmplvar = $_POST['tv'.$tv->get('id')] != ''
-            ? strftime('%Y-%m-%d %H:%M:%S',strtotime($_POST['tv'.$tv->get('id')]))
-            : '';
-    } else {
-        if (is_array($_POST['tv'.$tv->get('id')])) {
-            /* handles checkboxes & multiple selects elements */
-            $feature_insert = array ();
-            $lst = $_POST['tv'.$tv->get('id')];
-            while (list($featureValue, $feature_item) = each($lst)) {
-                $feature_insert[count($feature_insert)] = $feature_item;
-            }
-            $tmplvar = implode('||',$feature_insert);
-        } else {
-            $tmplvar = $_POST['tv'.$tv->get('id')];
-        }
-    }
-    if (strlen($tmplvar) > 0 && $tmplvar != $tv->get('default_text')) {
-        $tmplvars[$tv->get('id')] = array (
-            $tv->get('id'),
-            $tmplvar,
-        );
-    } else $tmplvars[$tv->get('id')] = $tv->get('id');
-}
+    /* set value of TV */
+    $value = isset($_POST['tv'.$tv->get('id')]) ? $_POST['tv'.$tv->get('id')] : $tv->get('default_text');
 
-foreach ($tmplvars as $field => $value) {
-     if (!is_array($value)) {
-        /* delete unused variable */
-        $tvc = $modx->getObject('modTemplateVarResource',array(
-            'tmplvarid' => $value,
-            'contentid' => $resource->get('id'),
-        ));
-        if ($tvc != null) $tvc->remove();
-    } else {
+    /* validation for different types */
+    switch ($tv->get('type')) {
+        case 'url':
+            if ($_POST['tv'.$tv->get('id').'_prefix'] != '--') {
+                $value = str_replace(array('ftp://','http://'),'', $value);
+                $value = $_POST['tv'.$tv->get('id').'_prefix'].$value;
+            }
+            break;
+        case 'date':
+            $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
+        default:
+            /* handles checkboxes & multiple selects elements */
+            if (is_array($value)) {
+                $featureInsert = array();
+                while (list($featureValue, $featureItem) = each($value)) {
+                    $featureInsert[count($featureInsert)] = $featureItem;
+                }
+                $value = implode('||',$featureInsert);
+            }
+            break;
+    }
+
+    /* if different than default and set, set TVR record */
+    if ($value != $tv->get('default_text')) {
+
         /* update the existing record */
         $tvc = $modx->getObject('modTemplateVarResource',array(
-            'tmplvarid' => $value[0],
+            'tmplvarid' => $tv->get('id'),
             'contentid' => $resource->get('id'),
         ));
         if ($tvc == null) {
             /* add a new record */
             $tvc = $modx->newObject('modTemplateVarResource');
-            $tvc->set('tmplvarid',$value[0]);
+            $tvc->set('tmplvarid',$tv->get('id'));
             $tvc->set('contentid',$resource->get('id'));
         }
-        $tvc->set('value',$value[1]);
+        $tvc->set('value',$value);
         $tvc->save();
+
+    /* if equal to default value, erase TVR record */
+    } else {
+        $tvc = $modx->getObject('modTemplateVarResource',array(
+            'tmplvarid' => $tv->get('id'),
+            'contentid' => $resource->get('id'),
+        ));
+        if ($tvc != null) $tvc->remove();
     }
 }
 /* end save TVs */

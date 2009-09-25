@@ -178,33 +178,32 @@ if (!empty($_POST['template']) && ($template = $modx->getObject('modTemplate', $
     $tvs = $modx->getCollection('modTemplateVar',$c);
 
     foreach ($tvs as $tv) {
-        $tmplvar = '';
-        if ($tv->get('type') == 'url') {
-            $tmplvar = $_POST['tv'.$tv->get('id')];
-            if ($_POST['tv' . $row['name'] . '_prefix'] != '--') {
-                $tmplvar = str_replace(array('ftp://','http://'),'', $tmplvar);
-                $tmplvar = $_POST['tv'.$tv->get('id').'_prefix'].$tmplvar;
-            }
-        } elseif ($tv->get('type') == 'file') {
-            $tmplvar = $_POST['tv'.$tv->get('id')];
-        } else {
-            if (is_array($_POST['tv'.$tv->get('id')])) {
-                /* handles checkboxes & multiple selects elements */
-                $feature_insert = array ();
-                $lst = $_POST['tv'.$tv->get('id')];
-                while (list($featureValue, $feature_item) = each($lst)) {
-                    $feature_insert[count($feature_insert)] = $feature_item;
+        $value = isset($_POST['tv'.$tv->get('id')]) ? $_POST['tv'.$tv->get('id')] : $tv->get('default_text');
+
+        switch ($tv->get('type')) {
+            case 'url':
+                if ($_POST['tv' . $row['name'] . '_prefix'] != '--') {
+                    $value = str_replace(array('ftp://','http://'),'', $value);
+                    $value = $_POST['tv'.$tv->get('id').'_prefix'].$value;
                 }
-                $tmplvar = implode('||',$feature_insert);
-            } else {
-                $tmplvar = $_POST['tv'.$tv->get('id')];
-            }
+                break;
+            default:
+                /* handles checkboxes & multiple selects elements */
+                if (is_array($value)) {
+                    $featureInsert = array();
+                    while (list($featureValue, $featureItem) = each($value)) {
+                        $featureInsert[count($featureInsert)] = $featureItem;
+                    }
+                    $tmplvar = implode('||',$featureInsert);
+                }
+                break;
         }
+
         /* save value if it was modified */
-        if (strlen($tmplvar) > 0 && $tmplvar != $tv->get('default_text')) {
+        if ($value != $tv->get('default_text')) {
             $tvr = $modx->newObject('modTemplateVarResource');
             $tvr->set('tmplvarid',$tv->get('id'));
-            $tvr->set('value',$tmplvar);
+            $tvr->set('value',$value);
             $tmplvars[] = $tvr;
         }
     }

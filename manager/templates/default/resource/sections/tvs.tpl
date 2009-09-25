@@ -15,7 +15,11 @@
             <span style="font-size: .8em; font-weight: normal">[[*{$tv->name}]]</span>
         </th>
         <td valign="top" style="position:relative" class="x-form-element">
-            {$tv->get('formElement')}
+            <input type="hidden" id="tvdef{$tv->id}" value="{$tv->default_text}" />
+            {$tv->get('formElement')}  
+        </td>
+        <td>
+            <input type="button" onclick="MODx.resetTV({$tv->get('id')});" value="{$_lang.set_to_default}" />
         </td>
     </tr>
     {foreachelse}
@@ -34,17 +38,13 @@
 <script type="text/javascript">
 // <![CDATA[
 Ext.onReady(function() {
-    /*var tvtabs = new MODx.Tabs({
-        renderTo: 'tvtabs_div'
-        ,items: [
-            {
-            {/literal}
-                contentEl: 'tvtab{$category->id}'
-                ,title: '{$category->category|capitalize} ({$category->tvs|@count})'
-            {literal}
-            }
-        ]
-    });*/
+    MODx.resetTV = function(id) {
+        var i = Ext.get('tv'+id);
+        var d = Ext.get('tvdef'+id);
+        
+        i.dom.value = d.dom.value;
+        i.dom.checked = d.dom.value ? true : false;        
+    };
 });
 // ]]>
 </script>

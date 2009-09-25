@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed issues with TVs setting values incorrectly
+- Added "Set to Default" button on TVs that will reset the TV's value to it's default value. TV Resource values can now be set to blank as a valid value.
 - [#MODX-924] Fixed errors in various system setting descriptions
 - [#MODX-935] Tooltips in Resource tree now do not show if no description or longtitle is set
 - [#MODX-1120] Now shows TV names in tag form below the caption in the TV editing panel in Resource editing 
