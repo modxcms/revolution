@@ -8,7 +8,8 @@ MODx.load({
     xtype: 'modx-panel-tv-file'
     ,renderTo: 'tvpanel{$tv->id}'
     ,tv: '{$tv->id}'
-    ,value: '{$tv->value}' 
+    ,value: '{$tv->value}'
+    ,width: 300
 {literal}
 });
 {/literal}

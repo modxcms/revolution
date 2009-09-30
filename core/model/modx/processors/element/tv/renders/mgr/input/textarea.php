@@ -5,4 +5,4 @@
  */
 $this->xpdo->lexicon->load('tv_widget');
 
-return $this->xpdo->smarty->fetch('element/tv/renders/input/richtext.tpl');
+return $this->xpdo->smarty->fetch('element/tv/renders/input/textarea.tpl');

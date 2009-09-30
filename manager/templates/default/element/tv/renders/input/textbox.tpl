@@ -5,3 +5,16 @@
 	tvtype="{$tv->type}"
 	onchange="MODx.fireResourceFormChange();" 
 />
+
+<script type="text/javascript">
+{literal}
+MODx.load({
+{/literal}
+    xtype: 'textfield'
+    ,applyTo: 'tv{$tv->id}'
+    ,value: '{$tv->value}'
+    ,width: 300
+{literal}
+});
+{/literal}
+</script>

@@ -11,7 +11,8 @@ MODx.load({
     xtype: 'datefield'
     ,applyTo: 'tv{$tv->id}'
     ,format: 'Y-m-d'
-    ,value: '{$tv->value}' 
+    ,value: '{$tv->value}'
+    ,width: 300
 {literal}
 });
 {/literal}

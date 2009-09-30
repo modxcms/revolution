@@ -1,7 +1,7 @@
 <textarea id="tv{$tv->id}" name="tv{$tv->id}"
 	class="textarea"
-	cols="40" rows="5"
-	onchange="MODx.fireResourceFormChange();"
+	cols="40" rows="15"
+	{literal}onchange="MODx.fireResourceFormChange();"{/literal}
 >{$tv->get('value')|escape}</textarea>
 
 
@@ -13,7 +13,7 @@ MODx.load({
     ,applyTo: 'tv{$tv->id}'
     ,value: '{$tv->value|escape}'
     ,width: 300
-    ,grow: true
+    ,height: 140
 {literal}
 });
 {/literal}
