@@ -7,15 +7,13 @@
 	/>
 	</label>
 	<br />
-	
 	<script type="text/javascript">
 	{literal}
 	MODx.load({
 	{/literal}
 	    xtype: 'checkbox'
 	    ,applyTo: 'tv{$tv->id}-{$k}'
-	    ,value: '{$item.value}'
-	    ,boxLabel: '{$item.text}'
+	    ,boxLabel: '{$item.text|escape:'javascript'}'
 	    ,width: 300
 	    ,checked: {if $item.checked}true{else}false{/if}    
 	{literal}

@@ -8,7 +8,7 @@ MODx.load({
     xtype: 'modx-panel-tv-image'
     ,renderTo: 'tvpanel{$tv->id}'
     ,tv: '{$tv->id}'
-    ,value: '{$tv->value}'
+    ,value: '{$tv->value|escape}'
     ,width: 300
 {literal}
 });

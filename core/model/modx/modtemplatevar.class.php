@@ -273,6 +273,8 @@ class modTemplateVar extends modElement {
         if (!$value || $value == '') {
             $this->set('value',$this->getValue($resourceId));
         }
+        //$v = htmlentities($v);
+        //$this->set('value',$v);
         $this->xpdo->smarty->assign('tv',$this);
 
 

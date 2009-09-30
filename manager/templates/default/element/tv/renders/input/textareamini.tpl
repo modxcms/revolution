@@ -4,14 +4,12 @@
 	onchange="MODx.fireResourceFormChange();"
 >{$tv->get('value')|escape}</textarea>
 
-
 <script type="text/javascript">
 {literal}
 MODx.load({
 {/literal}
     xtype: 'textarea'
     ,applyTo: 'tv{$tv->id}'
-    ,value: '{$tv->value|escape}'
     ,width: 300
     ,grow: true
 {literal}
