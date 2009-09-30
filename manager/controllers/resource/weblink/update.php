@@ -71,6 +71,9 @@ if (is_array($onDocFormRender)) {
 }
 $modx->smarty->assign('onDocFormRender',$onDocFormRender);
 
+/* get url for resource for preview window */
+$url = $modx->makeUrl($resource->get('id'));
+
 /* assign weblink to smarty */
 $modx->smarty->assign('resource',$resource);
 
@@ -109,6 +112,7 @@ Ext.onReady(function() {
         ,edit_doc_metatags: "'.$edit_doc_metatags.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
+        ,preview_url: "'.$url.'"
     });
 });
 // ]]>

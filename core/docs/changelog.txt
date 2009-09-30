@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1241] Fixed Preview button on update panels
 - Prettying up of TV fields
 - Now display SVN revision number with version in top left of mgr header
 - Fixed issues with TVs setting values incorrectly

@@ -50,7 +50,7 @@ MODx.page.UpdateWebLink = function(config) {
         ,{
             process: 'preview'
             ,text: _('preview')
-            ,handler: this.preview.createDelegate(this,[config.id])
+            ,handler: this.preview
             ,scope: this
         },{
             process: 'cancel'
@@ -62,8 +62,8 @@ MODx.page.UpdateWebLink = function(config) {
     MODx.page.UpdateWebLink.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
-    preview: function(id) {
-        window.open(MODx.config.base_url+'index.php?id='+id);
+    preview: function() {
+        window.open(this.config.preview_url);
         return false;
     }
     

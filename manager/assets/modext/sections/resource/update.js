@@ -54,7 +54,7 @@ MODx.page.UpdateResource = function(config) {
         },'-',{
             process: 'preview'
             ,text: _('preview')
-            ,handler: this.preview.createDelegate(this,[config.id])
+            ,handler: this.preview
             ,scope: this
         },'-',{
             process: 'cancel'
@@ -71,8 +71,8 @@ MODx.page.UpdateResource = function(config) {
     }, this);
 };
 Ext.extend(MODx.page.UpdateResource,MODx.Component,{
-    preview: function(id) {
-        window.open(MODx.config.base_url+'index.php?id='+id);
+    preview: function() {
+        window.open(this.config.preview_url);
         return false;
     }
     

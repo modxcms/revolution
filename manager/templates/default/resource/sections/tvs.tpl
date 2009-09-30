@@ -1,7 +1,6 @@
 <div style="float: right;">
     <button id="modx-tv-refresh" onclick="MODx.refreshTVs();">{$_lang.reload}</button>
 </div>
-<h2>{$_lang.tmplvars}</h2>
 
 <div id="tvtabs_div">
 {foreach from=$categories item=category}
