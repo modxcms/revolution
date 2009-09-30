@@ -1,3 +1,6 @@
+<div style="float: right;">
+    <button id="modx-tv-refresh" onclick="MODx.refreshTVs();">{$_lang.reload}</button>
+</div>
 <h2>{$_lang.tmplvars}</h2>
 
 <div id="tvtabs_div">
@@ -44,6 +47,9 @@ Ext.onReady(function() {
         
         i.dom.value = d.dom.value;
         i.dom.checked = d.dom.value ? true : false;        
+    };
+    MODx.refreshTVs = function() {
+        Ext.getCmp('modx-panel-resource-tv').refreshTVs();
     };
 });
 // ]]>

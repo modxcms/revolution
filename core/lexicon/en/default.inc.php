@@ -270,6 +270,7 @@ $_lang['refresh_tree'] = 'Refresh tree';
 $_lang['refresh_unpublished'] = '<strong>[[+num]]</strong> documents were unpublished.';
 $_lang['refreshing_tree'] = 'Refreshing tree...';
 $_lang['release'] = 'Release';
+$_lang['reload'] = 'Reload';
 $_lang['remember_username'] = 'Remember me';
 $_lang['remove'] = 'Remove';
 $_lang['remove_category'] = 'Remove Category';
