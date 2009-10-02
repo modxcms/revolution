@@ -2,6 +2,8 @@
     <button id="modx-tv-refresh" onclick="MODx.refreshTVs();">{$_lang.reload}</button>
 </div>
 
+<input type="hidden" name="tvs" value="1" />
+
 <div id="tvtabs_div">
 {foreach from=$categories item=category}
 {if count($category->tvs) > 0}

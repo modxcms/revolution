@@ -173,75 +173,78 @@ if (isset($_POST['resource_groups'])) {
 }
 
 /* TVs save */
-$c = $modx->newQuery('modTemplateVar');
-$c->_alias = 'tv';
-$c->innerJoin('modTemplateVarTemplate', 'tvtpl', array(
-    'tvtpl.tmplvarid = tv.id',
-    'tvtpl.templateid' => $_POST['template']
-));
-$c->leftJoin('modTemplateVarResource', 'tvc', array(
-    'tvc.tmplvarid = tv.id',
-    'tvc.contentid' => $resource->get('id'),
-));
-$c->select(array(
-    'DISTINCT tv.*',
-    "IF(tvc.value != '',tvc.value,tv.default_text) AS value"
-));
-$c->sortby('tv.rank');
+if (!empty($_POST['tvs'])) {
+    $c = $modx->newQuery('modTemplateVar');
+    $c->_alias = 'tv';
+    $c->innerJoin('modTemplateVarTemplate', 'tvtpl', array(
+        'tvtpl.tmplvarid = tv.id',
+        'tvtpl.templateid' => $_POST['template']
+    ));
+    $c->leftJoin('modTemplateVarResource', 'tvc', array(
+        'tvc.tmplvarid = tv.id',
+        'tvc.contentid' => $resource->get('id'),
+    ));
+    $c->select(array(
+        'DISTINCT tv.*',
+        "IF(tvc.value != '',tvc.value,tv.default_text) AS value"
+    ));
+    $c->sortby('tv.rank');
 
-$tvs = $modx->getCollection('modTemplateVar',$c);
-foreach ($tvs as $tv) {
-    /* set value of TV */
-    $value = isset($_POST['tv'.$tv->get('id')]) ? $_POST['tv'.$tv->get('id')] : $tv->get('default_text');
+    $tvs = $modx->getCollection('modTemplateVar',$c);
+    foreach ($tvs as $tv) {
+        /* set value of TV */
+        $value = isset($_POST['tv'.$tv->get('id')]) ? $_POST['tv'.$tv->get('id')] : $tv->get('default_text');
 
-    /* validation for different types */
-    switch ($tv->get('type')) {
-        case 'url':
-            if ($_POST['tv'.$tv->get('id').'_prefix'] != '--') {
-                $value = str_replace(array('ftp://','http://'),'', $value);
-                $value = $_POST['tv'.$tv->get('id').'_prefix'].$value;
-            }
-            break;
-        case 'date':
-            $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
-        default:
-            /* handles checkboxes & multiple selects elements */
-            if (is_array($value)) {
-                $featureInsert = array();
-                while (list($featureValue, $featureItem) = each($value)) {
-                    $featureInsert[count($featureInsert)] = $featureItem;
+        /* validation for different types */
+        switch ($tv->get('type')) {
+            case 'url':
+                if ($_POST['tv'.$tv->get('id').'_prefix'] != '--') {
+                    $value = str_replace(array('ftp://','http://'),'', $value);
+                    $value = $_POST['tv'.$tv->get('id').'_prefix'].$value;
                 }
-                $value = implode('||',$featureInsert);
-            }
-            break;
-    }
-
-    /* if different than default and set, set TVR record */
-    if ($value != $tv->get('default_text')) {
-
-        /* update the existing record */
-        $tvc = $modx->getObject('modTemplateVarResource',array(
-            'tmplvarid' => $tv->get('id'),
-            'contentid' => $resource->get('id'),
-        ));
-        if ($tvc == null) {
-            /* add a new record */
-            $tvc = $modx->newObject('modTemplateVarResource');
-            $tvc->set('tmplvarid',$tv->get('id'));
-            $tvc->set('contentid',$resource->get('id'));
+                break;
+            case 'date':
+                $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
+            default:
+                /* handles checkboxes & multiple selects elements */
+                if (is_array($value)) {
+                    $featureInsert = array();
+                    while (list($featureValue, $featureItem) = each($value)) {
+                        $featureInsert[count($featureInsert)] = $featureItem;
+                    }
+                    $value = implode('||',$featureInsert);
+                }
+                break;
         }
-        $tvc->set('value',$value);
-        $tvc->save();
 
-    /* if equal to default value, erase TVR record */
-    } else {
-        $tvc = $modx->getObject('modTemplateVarResource',array(
-            'tmplvarid' => $tv->get('id'),
-            'contentid' => $resource->get('id'),
-        ));
-        if ($tvc != null) $tvc->remove();
+        /* if different than default and set, set TVR record */
+        if ($value != $tv->get('default_text')) {
+
+            /* update the existing record */
+            $tvc = $modx->getObject('modTemplateVarResource',array(
+                'tmplvarid' => $tv->get('id'),
+                'contentid' => $resource->get('id'),
+            ));
+            if ($tvc == null) {
+                /* add a new record */
+                $tvc = $modx->newObject('modTemplateVarResource');
+                $tvc->set('tmplvarid',$tv->get('id'));
+                $tvc->set('contentid',$resource->get('id'));
+            }
+            $tvc->set('value',$value);
+            $tvc->save();
+
+        /* if equal to default value, erase TVR record */
+        } else {
+            $tvc = $modx->getObject('modTemplateVarResource',array(
+                'tmplvarid' => $tv->get('id'),
+                'contentid' => $resource->get('id'),
+            ));
+            if ($tvc != null) $tvc->remove();
+        }
     }
 }
+/* end save TVs */
 
 /* Save META Keywords */
 if ($modx->hasPermission('edit_doc_metatags')) {
