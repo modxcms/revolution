@@ -63,6 +63,7 @@ foreach ($categories as $category) {
         'text' => $category->get('category') . ' (' . $category->get('id') . ')',
         'id' => 'n_category_'.$category->get('id'),
         'pk' => $category->get('id'),
+        'data' => $category->toArray(),
         'category' => $category->get('id'),
         'leaf' => $category->get('childrenCount') > 0 ? false : true,
         'cls' => 'icon-category folder',

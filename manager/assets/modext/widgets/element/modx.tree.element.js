@@ -24,7 +24,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 		
 	,createCategory: function(node,e) {
 		var r = {
-			'parent': this.cm.activeNode.attributes.category
+			'parent': this.cm.activeNode.attributes.data.category
 		};
 		
 		if (!this.windows.createCategory) {
@@ -41,26 +41,22 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 	}
 
 	,renameCategory: function(node,e) {
-        var id = this.cm.activeNode.id.substr(2).split('_'); id = id[1];
-        
+        var r = this.cm.activeNode.attributes.data;        
         if (!this.windows.renameCategory) {
             this.windows.renameCategory = MODx.load({
                 xtype: 'modx-window-category-rename'
-                ,record: { 
-                    id: id
-                    ,name: this.cm.activeNode.text
-                }
+                ,record: r
                 ,listeners: {
                 	'success':{fn:function() { this.refreshNode(this.cm.activeNode.id); },scope:this}
                 }
             });
         }
+        this.windows.renameCategory.setValues(r);
         this.windows.renameCategory.show(e.target);
     }
 		
 	,removeCategory: function(item,e) {
-		var id = this.cm.activeNode.id.substr(2).split('_');
-        id = id.length > 2 ? id[2] : id[1];
+		var id = this.cm.activeNode.attributes.data.id;
 		MODx.msg.confirm({
 			title: _('warning')
 			,text: _('category_confirm_delete')
@@ -237,6 +233,7 @@ Ext.reg('modx-window-element-duplicate',MODx.window.DuplicateElement);
  */
 MODx.window.RenameCategory = function(config) {
     config = config || {};
+    this.ident = config.ident || 'rencat-'+Ext.id();
     Ext.applyIf(config,{
         title: _('category_rename')
         ,height: 150
@@ -246,15 +243,15 @@ MODx.window.RenameCategory = function(config) {
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
-            ,id: 'modx-rencat-id'
+            ,id: 'modx-'+this.ident+'-id'
             ,value: config.record.id
         },{
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'category'
-            ,id: 'modx-rencat-category'
+            ,id: 'modx-'+this.ident+'-category'
             ,width: 150
-            ,value: config.record.name
+            ,value: config.record.category
         }]
     });
     MODx.window.RenameCategory.superclass.constructor.call(this,config);
