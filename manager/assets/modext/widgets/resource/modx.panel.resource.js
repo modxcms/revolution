@@ -7,6 +7,21 @@
 MODx.panel.Resource = function(config) {
     config = config || {};
     
+    var rte = [{
+        xtype: 'textarea'
+        ,name: 'ta'
+        ,id: 'ta'
+        ,hideLabel: true
+        ,width: '97%'
+        ,height: 400
+        ,grow: false
+    }];
+    if (MODx.config.use_editor) {
+        rte.push({
+            html: '<button class="modx-richtext-content-toggle" id="ta-toggle">'+_('toggle_richtext')+'</button>'
+            ,border: false
+        });
+    }
     var ct = {
         title: _('resource_content')
         ,id: 'modx-resource-content'
@@ -15,34 +30,9 @@ MODx.panel.Resource = function(config) {
         ,autoHeight: true
         ,collapsible: true
         ,titleCollapse: true
-        ,items: [{
-            xtype: 'textarea'
-            ,name: 'ta'
-            ,id: 'ta'
-            ,hideLabel: true
-            ,width: '97%'
-            ,height: 400
-            ,grow: false
-        },{
-            xtype: 'modx-combo-rte'
-            ,fieldLabel: _('which_editor_title')
-            ,id: 'modx-resource-which-editor'
-            ,name: 'which_editor'
-            ,value: config.record.which_editor
-            ,editable: false
-            ,listWidth: 300
-            ,triggerAction: 'all'
-            ,allowBlank: true
-            ,listeners: {
-                'select': {fn:function() {
-                    var w = Ext.getCmp('modx-resource-which-editor').getValue();
-                    this.form.submit();
-                    var u = '?a='+MODx.request.a+'&id='+MODx.request.id+'&which_editor='+w;
-                    location.href = u;
-                },scope:this}
-            }
-        }]
+        ,items: rte
     };
+    delete rte;
     var it = [];
     it.push({
         title: _('createedit_document')

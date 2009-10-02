@@ -351,6 +351,7 @@ $_lang['tmplvar'] = 'Template Variable';
 $_lang['tmplvars'] = 'Template Variables';
 $_lang['to'] = 'to';
 $_lang['today'] = 'Today';
+$_lang['toggle_richtext'] = 'Toggle Richtext';
 $_lang['total'] = 'total';
 $_lang['track_visitors_title'] = 'Track Visitors';
 $_lang['tree_collapse'] = 'Collapse tree';

@@ -17,6 +17,9 @@
             <label class="dashed" style="cursor: pointer;" title="{$tv->description}" for="tv{$tv->id}">{$tv->caption}</label>
             <br />
             <span style="font-size: .8em; font-weight: normal">[[*{$tv->name}]]</span>
+            {if $tv->get('type') EQ 'richtext'}
+            <br /><button id="tv{$tv->id}-toggle" class="modx-richtext-toggle">{$_lang.toggle_richtext}</button>
+            {/if}
         </th>
         <td valign="top" style="position:relative" class="x-form-element">
             <input type="hidden" id="tvdef{$tv->id}" value="{$tv->default_text|escape}" />
