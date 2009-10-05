@@ -25,7 +25,6 @@ MODx.panel.ResourceGroups = function(config) {
                 ,defaults: { border: false }
                 ,items: [{
                     columnWidth: .4
-                    ,layout: 'fit'
                     ,style: 'padding: .4em;'
                     ,items: [{
                         xtype: 'modx-tree-resource-group'
@@ -35,16 +34,16 @@ MODx.panel.ResourceGroups = function(config) {
                     }]
                 },{
                     columnWidth: .4
-                    ,layout: 'fit'
                     ,style: 'padding: .4em;'
+                    ,defaults: { autoHeight: true }
                     ,items: [{
-                        xtype: 'modx-tree-resource'
+                        xtype: 'modx-tree-resource-simple'
                         ,id: 'modx-gr-tree-resource'
+                        ,url: MODx.config.connectors_url+'resource/index.php'
                         ,ddGroup: 'rg2resource'
                         ,title: _('resources')
-                        ,width: 300
-                        ,remoteToolbar: false
-                        ,enableDrop: true
+                        ,enableDrop: false
+                        ,rootVisible: false
                     }]
                 }]
             }]
