@@ -47,5 +47,7 @@ $o .= '; MODx.action = ';
 $o .= $modx->toJSON($actions);
 $o .= '; MODx.perm = {};';
 
+header('Content-Type: application/x-javascript');
+
 echo $o;
 die();

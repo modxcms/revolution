@@ -62,8 +62,8 @@ if ($modx->getOption('cache_lang_js',null,false)) {
     }
 } else {
     /* just output JS with no server caching */
-    header('Content-Length: '.strlen($output));
-    //header('Content-Type: application/x-javascript');
+    //header('Content-Length: '.strlen($output));
+    header('Content-Type: application/x-javascript');
     echo $output;
 }
 exit();

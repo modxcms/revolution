@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Make sure config.js.php outputs proper headers
 - Commented out Content-Length headers on lang.js.php, for some reason was slowing down servers
 - [#MODX-1256] Fixed issue with Resource tree not being visible in Resource Groups page
 - Fixed issues with Import HTML/Resources pages; properly convert to MODExt
