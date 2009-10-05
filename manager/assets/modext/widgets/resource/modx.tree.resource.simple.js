@@ -13,6 +13,10 @@ MODx.tree.SimpleResource = function(config) {
 		,root_name: _('resources')
 		,enableDrag: true
 		,enableDrop: true
+        ,baseParams: {
+            action: 'getNodes'
+            ,nohref: true
+        }
 	});	
 	MODx.tree.SimpleResource.superclass.constructor.call(this,config);
 };

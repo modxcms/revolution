@@ -3,9 +3,8 @@
  * @package modx
  * @subpackage processors.system.import
  */
-$modx->lexicon->load('import');
-
 if (!$modx->hasPermission('import_static')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('import');
 
 if (!function_exists('getFiles')) {
     function getFiles(& $modx, & $results, & $filesfound, $directory, $listing= array (), $count= 0) {
@@ -152,7 +151,7 @@ if (!function_exists('aliasCheck')) {
 
         $isHtml= true;
         $extension= '';
-        $containerSuffix= isset ($modx->getOption('container_suffix')) ? $modx->getOption('container_suffix') : '';
+        $containerSuffix= $modx->getOption('container_suffix',null,'');
         if ($contentType= $modx->getObject('modContentType', 1)) {
             $extension= $contentType->getExtension();
             $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
@@ -211,7 +210,7 @@ if (isset ($_POST['import_parent'])) {
     $parent= intval($_POST['import_parent']);
 }
 $element= isset ($_POST['content_element']) ? $_POST['content_element'] : 'body';
-$filepath= isset ($_POST['filepath']) ? $_POST['filepath'] : $modx->config['core_path'] . 'import/';
+$filepath= isset ($_POST['filepath']) ? $_POST['filepath'] : $modx->getOption('core_path') . 'import/';
 $filesfound= 0;
 
 $files= getFiles($modx, $results, $filesfound, $filepath);

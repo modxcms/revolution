@@ -187,7 +187,7 @@ while ($item) {
                 'cls' => $class,
                 'qtip' => $item->get('description') != '' ? $item->get('description') : '',
                 'type' => 'context',
-                'href' => '?a='.$actions['context/update'].'&key='.$item->get('key'),
+                'href' => empty($_REQUEST['nohref']) ? '?a='.$actions['context/update'].'&key='.$item->get('key') : '',
                 'menu' => array('items' => $menu),
             );
         } else {
@@ -410,7 +410,7 @@ while ($item) {
                 'type' => 'modResource',
                 'qtip' => $qtip,
                 'preview_url' => $modx->makeUrl($item->get('id')),
-                'href' => '?a='.($hasEditPerm ? $actions['resource/update'] : $actions['resource/data']).'&id='.$item->id,
+                'href' => empty($_REQUEST['nohref']) ? '?a='.($hasEditPerm ? $actions['resource/update'] : $actions['resource/data']).'&id='.$item->id : '',
                 'menu' => array('items' => $menu),
             );
             unset($qtip,$class,$menu);

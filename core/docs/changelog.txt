@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed issues with Import HTML/Resources pages; properly convert to MODExt
 - [#MODX-1202] Fixed issue where Element name was missing in Duplicate window
 - [#MODX-1233] Fixed bug where categories could only be renamed once before needing to reload page
 - [#MODX-1248] Fix bug that could wipe TV values if tab wasnt loaded

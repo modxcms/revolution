@@ -3,9 +3,8 @@
  * @package modx
  * @subpackage processors.system.import
  */
-$modx->lexicon->load('import');
-
 if (!$modx->hasPermission('import_static')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('import');
 
 $importstart= $modx->getMicroTime();
 
@@ -31,7 +30,7 @@ if (isset ($_POST['import_context'])) {
 if (isset ($_POST['import_parent'])) {
     $parent= intval($_POST['import_parent']);
 }
-$filepath= MODX_CORE_PATH . 'import/';
+$filepath= $modx->getOption('core_path') . 'import/';
 $basefilepath= $filepath;
 if (isset ($_POST['import_base_path']) && !empty($_POST['import_base_path'])) {
     $filepath= $_POST['import_base_path'];
@@ -39,10 +38,12 @@ if (isset ($_POST['import_base_path']) && !empty($_POST['import_base_path'])) {
 } else {
     if ($contextObj= $modx->getObject('modContext', $context)) {
         $contextObj->prepare();
-        if (isset ($contextObj->getOption('resource_static_path'))) {
+        $crsp = $contextObj->getOption('resource_static_path');
+        $rsp = $modx->getOption('resource_static_path');
+        if (!empty($crsp)) {
             $filepath= $contextObj->getOption('resource_static_path');
             $basefilepath= $contextObj->getOption('resource_static_path');
-        } elseif (isset ($modx->getOption('resource_static_path'))) {
+        } elseif (!empty($rsp)) {
             $filepath= $modx->getOption('resource_static_path');
             $basefilepath= $modx->getOption('resource_static_path');
         }
