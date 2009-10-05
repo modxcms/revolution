@@ -40,7 +40,7 @@ $resources= $modx->getCollection('modResource',$c);
 $actions = $modx->request->getAllActionIDs();
 $rs = array();
 foreach ($resources as $resource) {
-    $ra = $resource->toArray();
+    $ra = $resource->get(array('id','pagetitle','description','published','deleted'));
     $ra['menu'] = array(
         array(
             'text' => $modx->lexicon('resource_view'),
