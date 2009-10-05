@@ -469,7 +469,7 @@ class modUser extends modPrincipal {
     /**
      * Removes a session cookie for a user.
      *
-     * @todo Implement this.
+     * TODO Implement this.
      *
      * @access public
      * @param string $context The context to remove.
@@ -633,5 +633,76 @@ class modUser extends modPrincipal {
             }
         }
         return $isMember;
+    }
+
+    /**
+     * Join a User Group, and optionally assign a Role.
+     *
+     * @access public
+     * @param mixed $groupId Either the name or ID of the User Group to join.
+     * @param mixed $roleId Optional. Either the name or ID of the Role to
+     * assign to for the group.
+     * @return boolean True if successful.
+     */
+    function joinGroup($groupId,$roleId = null) {
+        $joined = false;
+
+        $groupPk = is_string($groupId) ? array('name' => $groupId) : $groupId;
+        $usergroup = $this->xpdo->getObject('modUserGroup',$groupPk);
+        if ($usergroup == null) {
+            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'User Group not found with key: '.$groupId);
+            return $joined;
+        }
+
+        if (!empty($roleId)) {
+            $rolePk = is_string($roleId) ? array('name' => $roleId) : $roleId;
+            $role = $this->xpdo->getObject('modUserGroupRole',$rolePk);
+            if ($role == null) {
+                $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'Role not found with key: '.$role);
+                return $joined;
+            }
+        }
+
+        $member = $this->xpdo->newObject('modUserGroupMember');
+        $member->set('member',$this->get('id'));
+        $member->set('user_group',$usergroup->get('id'));
+        if (!empty($role)) {
+            $member->set('role',$role->get('id'));
+        }
+        $saved = $member->save();
+        if (!$saved) {
+            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'An unknown error occurred preventing adding the User to the User Group.');
+        }
+        return $saved;
+    }
+
+    /**
+     * Removes the User from the specified User Group.
+     *
+     * @access public
+     * @param mixed $groupId Either the name or ID of the User Group to join.
+     * @return boolean True if successful.
+     */
+    function leaveGroup($groupId) {
+        $left = false;
+
+        $c = $this->xpdo->newQuery('modUserGroupMember');
+        $c->innerJoin('modUserGroup','UserGroup');
+        $c->where(array('member' => $this->get('id')));
+
+        $fk = is_string($groupId) ? 'name' : 'id';
+        $c->where(array(
+            'member' => $this->get('id'),
+            'UserGroup.'.$fk => $groupId,
+        ));
+
+        $member = $this->xpdo->getObject('modUserGroupMember',$c);
+        if ($member == false) {
+            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'User could not leave group with key "'.$groupId.'" because the User was not a part of that group.');
+            return $left;
+        }
+
+        $left = $member->remove();
+        return $left;
     }
 }
