@@ -101,25 +101,22 @@ class modTemplate extends modElement {
      * Grabs an array of Template Variables associated with this Template,
      * bypassing the many-to-many relationship.
      *
-     * @todo Refactor this to use one query.
-     *
+     * @access public
      * @return array An array of TVs.
      */
-    function getTVs() {
-        $c = $this->xpdo->newQuery('modTemplateVarTemplate');
+    function getTemplateVars() {
+        $c = $this->xpdo->newQuery('modTemplateVar');
+        $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplates');
         $c->where(array(
-            'templateid' => $this->get('id'),
+            'TemplateVarTemplates.templateid' => $this->get('id'),
         ));
-        $c->sortby('rank','ASC');
-        $tvts = $this->xpdo->getCollection('modTemplateVarTemplate',$c);
-        $tvs = array();
-        foreach ($tvts as $tvt) {
-            $tv = $tvt->getOne('TemplateVar');
-            if ($tv != null) {
-                $tv->category = $tv->getOne('Category');
-                $tvs[$tvt->get('tmplvarid')] = $tv;
-            }
-        }
-        return $tvs;
+        $c->sortby('TemplateVarTemplates.rank','ASC');
+        return $this->xpdo->getCollection('modTemplateVar',$c);
+    }
+    /**
+     * @deprecated 2009-10-05 Use getTemplateVars instead.
+     */
+    function getTVs() {
+        return $this->getTemplateVars();
     }
 }

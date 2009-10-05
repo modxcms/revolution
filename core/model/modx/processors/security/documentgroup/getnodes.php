@@ -13,7 +13,7 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 
 $_REQUEST['id'] = !isset($_REQUEST['id']) ? 0 : str_replace('n_dg_','',$_REQUEST['id']);
 
-$g = $modx->getObject('modResourceGroup',$_REQUEST['id']);
+$resourceGroup = $modx->getObject('modResourceGroup',$_REQUEST['id']);
 $groups = $modx->getCollection('modResourceGroup');
 
 $da = array();
@@ -46,7 +46,7 @@ if ($g == null) {
 		);
 	}
 } else {
-	$resources = $g->getDocumentsIn();
+	$resources = $resourceGroup->getResources();
 	foreach ($resources as $resource) {
 		$da[] = array(
 			'text' => $resource->get('pagetitle'),

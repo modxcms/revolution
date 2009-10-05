@@ -1,7 +1,6 @@
 <?php
 /**
  * Gets a dynamic toolbar for the Resource tree.
- * TODO: Implement security for emptying recycle bin and creating resources.
  *
  * @package modx
  * @subpackage processors.layout.tree.resource

@@ -8,44 +8,13 @@
  * @package modx
  * @subpackage processors.element.category
  */
+if (!$modx->hasPermission('remove')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('category');
 
-if (!$modx->hasPermission('remove')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
+/* get category */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('category_err_ns'));
 $category = $modx->getObject('modCategory',$_POST['id']);
 if ($category == null) return $modx->error->failure($modx->lexicon('category_err_nf'));
-
-/* Hey friends! It's reset time! */
-$plugins = $modx->getCollection('modPlugin',array('category' => $category->get('id')));
-foreach ($plugins as $plugin) {
-	$plugin->set('category',0);
-	$plugin->save();
-}
-
-$snippets = $modx->getCollection('modSnippet',array('category' => $category->get('id')));
-foreach ($snippets as $snippet) {
-	$snippet->set('category',0);
-	$snippet->save();
-}
-
-$chunks = $modx->getCollection('modChunk',array('category' => $category->get('id')));
-foreach ($chunks as $chunk) {
-	$chunk->set('category',0);
-	$chunk->save();
-}
-
-$templates = $modx->getCollection('modTemplate',array('category' => $category->get('id')));
-foreach ($templates as $template) {
-	$template->set('category',0);
-	$template->save();
-}
-
-$tvs = $modx->getCollection('modTemplateVar',array('category' => $category->get('id')));
-foreach ($tvs as $tv) {
-	$tv->set('category',0);
-	$tv->save();
-}
 
 /* remove category */
 if ($category->remove() == false) {

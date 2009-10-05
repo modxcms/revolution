@@ -28,7 +28,7 @@ if ($g == null) {
 		);
 	}
 } else {
-	$ugs = $g->getUserGroupsIn();
+	$ugs = $g->getUserGroups();
 	foreach ($ugs as $ug) {
 		$da[] = array(
 			'text' => $ug->get('name'),

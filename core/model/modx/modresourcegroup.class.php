@@ -10,26 +10,25 @@ class modResourceGroup extends modAccessibleSimpleObject {
         parent :: __construct($xpdo);
     }
 
-    function getDocumentsIn() {
-        $criteria= $this->xpdo->newQuery('modResource');
-        $criteria->innerJoin('modResourceGroupResource', 'dgd', array (
+    function getResources() {
+        $c= $this->xpdo->newQuery('modResource');
+        $c->innerJoin('modResourceGroupResource', 'dgd', array (
             '`modResource`.`id` = `dgd`.`document`',
         ));
-        $criteria->where(array ('dgd.document_group' => $this->id));
-        $collection= $this->xpdo->getCollection('modResource', $criteria);
+        $c->where(array ('dgd.document_group' => $this->get('id')));
+        $collection= $this->xpdo->getCollection('modResource', $c);
         return $collection;
     }
 
-    function getUserGroupsIn() {
-        $ugdgs= $this->xpdo->getCollection('modAccessResourceGroup', array (
-            'target' => $this->id,
+    function getUserGroups() {
+        $access= $this->xpdo->getCollection('modAccessResourceGroup', array (
+            'target' => $this->get('id'),
             'principal_class' => 'modUserGroup',
         ));
-        $dgs= array ();
-        foreach ($ugdgs as $ugdg) {
-            $dgs[$ugdg->membergroup]= $ugdg->getOne('Target');
+        $groups= array();
+        foreach ($access as $arg) {
+            $groups[$arg->get('membergroup')]= $arg->getOne('Target');
         }
-        return $dgs;
+        return $groups;
     }
 }
-?>
