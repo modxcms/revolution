@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Cleaned up usergroup processors
+- Added sanity checks to usergroup processors
+- Prevent possible issue on usergroup update that would wipe related objects
+- Prevent possible issue that would allow user to remove Administrator group
 - Removed some legacy todo statements
 - Moved Element category reset on modCategory object remove to modCategory class
 - Cleaned up modResourceGroup, modTemplate helper methods
