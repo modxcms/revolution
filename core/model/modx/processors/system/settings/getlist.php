@@ -12,79 +12,87 @@
  * @package modx
  * @subpackage processors.system.settings
  */
+if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
-if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,20);
+$sort = $modx->getOption('sort',$_REQUEST,'key');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$key = $modx->getOption('key',$_REQUEST,'');
+$namespace = $modx->getOption('namespace',$_REQUEST,'');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'key';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* build query */
 $c = $modx->newQuery('modSystemSetting');
-$cc = $modx->newQuery('modSystemSetting');
-if (isset($_REQUEST['key']) && $_REQUEST['key'] != '') {
+if (!empty($key)) {
     $c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",modSystemSetting.key) = Entry.name');
     $c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",modSystemSetting.key,"_desc") = Description.name');
     $c->where(array(
-        'modSystemSetting.key:LIKE' => '%'.$_REQUEST['key'].'%',
+        'modSystemSetting.key:LIKE' => '%'.$key.'%',
     ));
     $c->orCondition(array(
-        'Entry.value:LIKE' => '%'.$_REQUEST['key'].'%',
+        'Entry.value:LIKE' => '%'.$key.'%',
     ));
     $c->orCondition(array(
-        'modSystemSetting.value:LIKE' => '%'.$_REQUEST['key'].'%',
+        'modSystemSetting.value:LIKE' => '%'.$key.'%',
     ));
     $c->orCondition(array(
-        'Description.value:LIKE' => '%'.$_REQUEST['key'].'%',
+        'Description.value:LIKE' => '%'.$key.'%',
     ));
 }
 
-if (isset($_REQUEST['namespace'])) {
-    $c->where(array('namespace' => $_REQUEST['namespace']));
+if (!empty($namespace)) {
+    $c->where(array('namespace' => $namespace));
 }
 $count = $modx->getCount('modSystemSetting',$c);
 
-$c->sortby('`modSystemSetting`.`area`,`modSystemSetting`.`'.$_REQUEST['sort'].'`',$_REQUEST['dir']);
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->sortby('`modSystemSetting`.`area`,`modSystemSetting`.`'.$sort.'`',$dir);
+$c->limit($limit,$start);
 
 $settings = $modx->getCollection('modSystemSetting',$c);
 
-$ss = array();
+$list = array();
 foreach ($settings as $setting) {
-    $sa = $setting->toArray();
-    $k = 'setting_'.$sa['key'];
-
+    $settingArray = $setting->toArray();
+    $k = 'setting_'.$settingArray['key'];
 
     /* if 3rd party setting, load proper text */
     $modx->lexicon->load($setting->get('namespace').':default');
 
+    /* get translated area text */
     if ($modx->lexicon->exists('area_'.$setting->get('area'))) {
-        $sa['area_text'] = $modx->lexicon('area_'.$setting->get('area'));
-    } else $sa['area_text'] = $sa['area'];
+        $settingArray['area_text'] = $modx->lexicon('area_'.$setting->get('area'));
+    } else {
+        $settingArray['area_text'] = $settingArray['area'];
+    }
 
-    $sa['description'] = $modx->lexicon->exists($k.'_desc')
+    /* get translated name and description text */
+    $settingArray['description'] = $modx->lexicon->exists($k.'_desc')
         ? $modx->lexicon($k.'_desc')
         : '';
-    $sa['name'] = $modx->lexicon->exists($k)
+    $settingArray['name'] = $modx->lexicon->exists($k)
         ? $modx->lexicon($k)
-        : $sa['key'];
-    $sa['oldkey'] = $sa['key'];
-    $sa['editedon'] = $sa['editedon'] == '0000-00-00 00:00:00' || $sa['editedon'] == null
+        : $settingArray['key'];
+
+
+    $settingArray['oldkey'] = $settingArray['key'];
+    $settingArray['editedon'] = $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
         ? ''
         : strftime('%b %d, %Y %I:%M %p',strtotime($setting->get('editedon')));
 
-    $sa['menu'] = array(
-        array(
-            'text' => $modx->lexicon('setting_update'),
-            'handler' => array( 'xtype' => 'modx-window-setting-update' ),
-        ),
-        '-',
-        array(
-            'text' => $modx->lexicon('setting_remove'),
-            'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm"])',
-        ),
+    $settingArray['menu'] = array();
+    $settingArray['menu'][] = array(
+        'text' => $modx->lexicon('setting_update'),
+        'handler' => array( 'xtype' => 'modx-window-setting-update' ),
     );
-    $ss[] = $sa;
+    $settingArray['menu'][] = '-';
+    $settingArray['menu'][] = array(
+        'text' => $modx->lexicon('setting_remove'),
+        'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm"])',
+    );
+
+    $list[] = $settingArray;
 }
-return $this->outputArray($ss,$count);
+return $this->outputArray($list,$count);

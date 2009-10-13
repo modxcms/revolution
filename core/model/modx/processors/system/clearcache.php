@@ -30,7 +30,9 @@ if ($modx->getOption('cache_db')) $options['objects'] = '*';
 $results= $modx->cacheManager->clearCache($paths, $options);
 
 /* invoke OnSiteRefresh event */
-$modx->invokeEvent('OnSiteRefresh');
+$modx->invokeEvent('OnSiteRefresh',array(
+    'results' => $results,
+));
 
 $o = '';
 $num_rows_pub = isset($results['publishing']['published']) ? $results['publishing']['published'] : 0;

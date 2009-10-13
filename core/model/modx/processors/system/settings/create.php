@@ -13,9 +13,8 @@
  * @package modx
  * @subpackage processors.system.settings
  */
-$modx->lexicon->load('setting','namespace');
-
 if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('setting','namespace');
 
 /* get namespace */
 if (empty($_POST['namespace'])) $modx->error->addField('namespace',$modx->lexicon('namespace_err_ns'));
@@ -100,4 +99,4 @@ if ($setting->save() === false) {
 
 $modx->reloadConfig();
 
-return $modx->error->success();
+return $modx->error->success('',$setting);

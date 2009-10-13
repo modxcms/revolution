@@ -11,30 +11,29 @@
  * @package modx
  * @subpackage processors.system.menu
  */
+if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('action','menu','topmenu');
 
-if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'menuindex');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'menuindex';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* get menus */
 $c = $modx->newQuery('modMenu');
 $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
-$menus = $modx->getCollection('modMenu',$c);
+if ($isLimit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 
+$menus = $modx->getCollection('modMenu',$c);
 $count = $modx->getCount('modMenu');
 
-$ms = array();
+$list = array();
 
 foreach ($menus as $menu) {
-	$ma = $menu->toArray();
-    $ma['text_lex'] = $modx->lexicon($ma['text']);
-    $ms[] = $ma;
+	$menuArray = $menu->toArray();
+    $menuArray['text_lex'] = $modx->lexicon($menuArray['text']);
+    $list[] = $menuArray;
 }
-return $this->outputArray($ms,$count);
+return $this->outputArray($list,$count);

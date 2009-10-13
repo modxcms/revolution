@@ -9,37 +9,37 @@
  * @package modx
  * @subpackage processors.system.language
  */
+if (!$modx->hasPermission('languages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('lexicon');
 
-if (!$modx->hasPermission('languages')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
 $c = $modx->newQuery('modLexiconLanguage');
 
-$c->sortby($_REQUEST['sort'], $_REQUEST['dir']);
-if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 
 $languages = $modx->getCollection('modLexiconLanguage',$c);
 $count = $modx->getCount('modLexiconLanguage');
 
-$ps = array();
+$list = array();
 foreach ($languages as $language) {
-    $pa = $language->toArray();
+    $languageArray = $language->toArray();
 
     if ($language->get('name') != 'en') {
-        $pa['menu'] = array(
+        $languageArray['menu'] = array(
             array(
                 'text' => $modx->lexicon('language_remove'),
                 'handler' => 'this.remove.createDelegate(this,["language_remove_confirm"])',
             ),
         );
     }
-    $ps[] = $pa;
+    $list[] = $languageArray;
 }
 
-return $this->outputArray($ps,$count);
+return $this->outputArray($list,$count);

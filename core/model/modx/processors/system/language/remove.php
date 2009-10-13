@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.system.language
  */
-$modx->lexicon->load('lexicon');
-
 if (!$modx->hasPermission('languages')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('lexicon');
 
 /* get language */
 if (empty($_POST['name'])) return $modx->error->failure($modx->lexicon('language_err_ns'));
@@ -26,4 +25,4 @@ if ($language->remove() === false) {
     return $modx->error->failure($modx->lexicon('language_err_remove'));
 }
 
-return $modx->error->success();
+return $modx->error->success('',$language);

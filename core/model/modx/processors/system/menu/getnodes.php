@@ -10,16 +10,16 @@
  * @package modx
  * @subpackage processors.system.menu
  */
+if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('action','menu','topmenu');
 
-if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$id = $modx->getOption('id',$_REQUEST,'');
 
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['id'])) $_REQUEST['id'] = 'n_';
-
-$id = str_replace('n_','',$_REQUEST['id']);
+$id = str_replace('n_','',$id);
 if (empty($id)) $id = '';
 
 $c = $modx->newQuery('modMenu');
@@ -35,13 +35,10 @@ $c->where(array(
 ));
 $c->sortby('modMenu.menuindex','ASC');
 $c->groupby('modMenu.text');
-if ($limit) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+if ($isLimit) $c->limit($limit,$start);
 $menus = $modx->getCollection('modMenu',$c);
 
-
-$as = array();
+$list = array();
 foreach ($menus as $menu) {
     $controller = $menu->get('controller');
     if (empty($controller)) $controller = '';
@@ -56,7 +53,23 @@ foreach ($menus as $menu) {
 	}
 	$text = $modx->lexicon($menu->get('text'));
 
-	$as[] = array(
+    $contextMenu = array();
+    $contextMenu[] = array(
+        'text' => $modx->lexicon('menu_update'),
+        'handler' => 'function(itm,e) { this.updateMenu(itm,e); }',
+    );
+    $contextMenu[] = '-';
+    $contextMenu[] = array(
+        'text' => $modx->lexicon('action_place_here'),
+        'handler' => 'function(itm,e) { this.createMenu(itm,e); }',
+    );
+    $contextMenu[] = '-';
+    $contextMenu[] = array(
+        'text' => $modx->lexicon('menu_remove'),
+        'handler' => 'function(itm,e) { this.removeMenu(itm,e); }',
+    );
+
+	$list[] = array(
 		'text' => $text.($controller != '' ? ' <i>('.$controller.')</i>' : ''),
 		'id' => 'n_'.$menu->get('text'),
         'cls' => 'menu',
@@ -64,31 +77,8 @@ foreach ($menus as $menu) {
         'pk' => $menu->get('text'),
 		'leaf' => $menu->get('childrenCount') <= 0 ? true : false,
         'data' => $menu->toArray(),
-		'menu' => array(
-            'items' => array(
-                array(
-                    'text' => $modx->lexicon('menu_update'),
-                    'handler' => 'function(itm,e) {
-                        this.updateMenu(itm,e);
-                    }',
-                ),
-                '-',
-                array(
-                    'text' => $modx->lexicon('action_place_here'),
-                    'handler' => 'function(itm,e) {
-                        this.createMenu(itm,e);
-                    }',
-                ),
-                '-',
-                array(
-                    'text' => $modx->lexicon('menu_remove'),
-                    'handler' => 'function(itm,e) {
-                        this.removeMenu(itm,e);
-                    }',
-                ),
-            ),
-        )
+		'menu' => array('items' => $contextMenu),
 	);
 }
 
-return $this->toJSON($as);
+return $this->toJSON($list);

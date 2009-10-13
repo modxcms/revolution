@@ -11,7 +11,7 @@ if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon(
 $modx->lexicon->load('action','menu');
 
 /* get menu */
-if (!isset($_POST['text'])) return $modx->error->failure($modx->lexicon('menu_err_ns'));
+if (empty($_POST['text'])) return $modx->error->failure($modx->lexicon('menu_err_ns'));
 $menu = $modx->getObject('modMenu',array('text' => $_POST['text']));
 if ($menu == null) return $modx->error->failure($modx->lexicon('menu_err_nf'));
 
@@ -23,4 +23,4 @@ if ($menu->remove() == false) {
 /* log manager action */
 $modx->logManagerAction('menu_delete','modMenu',$menu->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$menu);

@@ -19,6 +19,7 @@ $_lang['entry_remove_confirm'] = 'Are you sure you want to remove this Lexicon E
 $_lang['entry_update'] = 'Update Lexicon Entry';
 $_lang['language'] = 'Language';
 $_lang['language_create'] = 'Create Language';
+$_lang['language_err_ae'] = 'A Language already exists with that name.';
 $_lang['language_err_create'] = 'An error occurred while trying to create the language.';
 $_lang['language_err_nf'] = 'Language not found.';
 $_lang['language_err_ns'] = 'Language not specified.';

@@ -13,10 +13,11 @@
  * @package modx
  * @subpackage processors.system.settings
  */
-$modx->lexicon->load('setting','namespace');
 if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('setting','namespace');
 
-if (!isset($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
+/* verify namespace */
+if (empty($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
 $namespace = $modx->getObject('modNamespace',$_POST['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
@@ -78,6 +79,7 @@ $description->set('value',$_POST['description']);
 $description->save();
 $description->clearCache();
 
+/* save setting */
 if ($setting->save() === false) {
     $modx->error->checkValidation($setting);
     return $modx->error->failure($modx->lexicon('setting_err_save'));
@@ -86,4 +88,4 @@ if ($setting->save() === false) {
 
 $modx->reloadConfig();
 
-return $modx->error->success();
+return $modx->error->success('',$setting);

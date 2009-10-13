@@ -15,27 +15,26 @@
  * @package modx
  * @subpackage processors.system.contenttype
  */
-$modx->lexicon->load('content_type');
-
 if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('content_type');
 
 /* get content type */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('content_type_err_ns'));
-$contenttype = $modx->getObject('modContentType',$_POST['id']);
-if ($contenttype == null) {
+$contentType = $modx->getObject('modContentType',$_POST['id']);
+if ($contentType == null) {
     return $modx->error->failure($modx->lexicon('content_type_err_nfs',array(
         'id' => $_POST['id'],
     )));
 }
 
 /* save content type */
-$contenttype->fromArray($_POST);
-if ($contenttype->save() == false) {
-    $modx->error->checkValidation($contenttype);
+$contentType->fromArray($_POST);
+if ($contentType->save() == false) {
+    $modx->error->checkValidation($contentType);
     return $modx->error->failure($modx->lexicon('content_type_err_save'));
 }
 
 /* log manager action */
-$modx->logManagerAction('content_type_save','modContentType',$contenttype->get('id'));
+$modx->logManagerAction('content_type_save','modContentType',$contentType->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$contentType);

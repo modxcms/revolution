@@ -7,10 +7,10 @@
  * @package modx
  * @subpackage processors.system.menu
  */
+if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('action','menu');
 
-if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
+if (empty($_POST['data'])) return $modx->error->failure();
 $data = urldecode($_POST['data']);
 $data = $modx->fromJSON($data);
 $nodes = array();

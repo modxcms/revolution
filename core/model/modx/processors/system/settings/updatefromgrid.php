@@ -12,15 +12,19 @@
  * @package modx
  * @subpackage processors.system.settings
  */
+if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
-if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
+/* get data */
+if (empty($_POST['data'])) return $modx->error->failure();
 $_DATA = $modx->fromJSON($_POST['data']);
 
+/* get setting */
+if (empty($_DATA['key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
 $setting = $modx->getObject('modSystemSetting',array(
     'key' => $_DATA['key'],
 ));
+if ($setting == null) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 
 /* set new value */
 $setting->set('value',$_DATA['value']);
@@ -37,6 +41,7 @@ if ($entry != null) {
     $entry->clearCache();
 }
 
+/* save setting */
 if ($setting->save() == false) {
     return $modx->error->failure($modx->lexicon('setting_err_save'));
 }
@@ -44,4 +49,4 @@ if ($setting->save() == false) {
 
 $modx->reloadConfig();
 
-return $modx->error->success();
+return $modx->error->success('',$setting);

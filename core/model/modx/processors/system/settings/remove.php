@@ -7,11 +7,11 @@
  * @package modx
  * @subpackage processors.system.settings
  */
+if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
-if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-if (!isset($_POST['key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
+/* get setting */
+if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
 $setting = $modx->getObject('modSystemSetting',$_POST['key']);
 if ($setting == null) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 
@@ -28,10 +28,11 @@ $description = $modx->getObject('modLexiconEntry',array(
 ));
 if ($description != null) $description->remove();
 
+/* remove setting */
 if ($setting->remove() == false) {
     return $modx->error->failure($modx->lexicon('setting_err_remove'));
 }
 
 $modx->reloadConfig();
 
-return $modx->error->success();
+return $modx->error->success('',$setting);

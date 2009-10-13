@@ -8,7 +8,7 @@
 $cacheManager = $modx->getCacheManager();
 if (!empty($_REQUEST['download'])) {
     $dl = $_REQUEST['download'];
-    $dl = str_replace(array('../','..'),'',$dl);
+    $dl = str_replace(array('../','..','config'),'',$dl);
     $dl = ltrim('/');
 
     $f = $modx->getOption('core_path').$dl;

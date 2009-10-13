@@ -15,27 +15,28 @@
  * @package modx
  * @subpackage processors.system.contenttype
  */
+if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('content_type');
 
-if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
 /* loop through content types */
+if (empty($_POST['data'])) return $modx->error->failure();
 $_DATA = $modx->fromJSON($_POST['data']);
+
 foreach ($_DATA as $ct) {
     /* get content type */
     if (empty($ct['id'])) continue;
-    $contenttype = $modx->getObject('modContentType',$ct['id']);
-    if ($contenttype == null) continue;
+    $contentType = $modx->getObject('modContentType',$ct['id']);
+    if ($contentType == null) continue;
 
     /* save content type */
-    $contenttype->fromArray($ct);
-    if ($contenttype->save() == false) {
-        $modx->error->checkValidation($contenttype);
+    $contentType->fromArray($ct);
+    if ($contentType->save() == false) {
+        $modx->error->checkValidation($contentType);
         return $modx->error->failure($modx->lexicon('content_type_err_save'));
     }
 
     /* log manager action */
-    $modx->logManagerAction('content_type_save','modContentType',$contenttype->get('id'));
+    $modx->logManagerAction('content_type_save','modContentType',$contentType->get('id'));
 }
 
-return $modx->error->success();
+return $modx->error->success('',$contentType);

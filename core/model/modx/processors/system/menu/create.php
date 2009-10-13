@@ -15,9 +15,8 @@
  * @package modx
  * @subpackage processors.system.menu
  */
-$modx->lexicon->load('action','menu');
-
 if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('action','menu');
 
 /* verify action */
 if (!isset($_POST['action_id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
@@ -50,4 +49,4 @@ if ($menu->save() == false) {
 /* log manager action */
 $modx->logManagerAction('menu_create','modMenu',$menu->get('text'));
 
-return $modx->error->success();
+return $modx->error->success('',$menu);

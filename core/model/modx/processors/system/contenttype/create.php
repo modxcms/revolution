@@ -13,27 +13,23 @@
  * @package modx
  * @subpackage processors.system.contenttype
  */
+if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('content_type');
 
-if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
 /* prevent empty name */
-if (empty($_POST['name'])) {
-    return $modx->error->failure($modx->lexicon('content_type_err_ns_name'));
-}
+if (empty($_POST['name'])) return $modx->error->failure($modx->lexicon('content_type_err_ns_name'));
 
 /* create content type */
-$ct = $modx->newObject('modContentType');
-$ct->fromArray($_POST);
+$contentType = $modx->newObject('modContentType');
+$contentType->fromArray($_POST);
 
 /* save content type */
-if ($ct->save() == false) {
+if ($contentType->save() == false) {
     $modx->error->checkValidation($ct);
     return $modx->error->failure($modx->lexicon('content_type_err_create'));
 }
 
-
 /* log manager action */
-$modx->logManagerAction('content_type_create','modContentType',$ct->get('id'));
+$modx->logManagerAction('content_type_create','modContentType',$contentType->get('id'));
 
-return $modx->error->success('',$ct);
+return $modx->error->success('',$contentType);
