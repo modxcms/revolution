@@ -8,20 +8,22 @@
  * @package modx
  * @subpackage processors.security.documentgroup
  */
-$modx->lexicon->load('access','resource');
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('access','resource');
 
-if (!isset($_POST['document_group'])) return $modx->error->failure($modx->lexicon('resource_group_err_ns'));
-if (!isset($_POST['document'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
+if (empty($_POST['document_group'])) return $modx->error->failure($modx->lexicon('resource_group_err_ns'));
+if (empty($_POST['document'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
 
-$dgd = $modx->getObject('modResourceGroupResource',array(
+/* get resource group resource */
+$resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
 	'document_group' => $_POST['document_group'],
 	'document' => $_POST['document'],
 ));
-if ($dgd == null) return $modx->error->failure($modx->lexicon('resource_group_resource_err_nf'));
+if ($resourceGroupResource == null) return $modx->error->failure($modx->lexicon('resource_group_resource_err_nf'));
 
-if ($dgd->remove() == false) {
+/* remove association */
+if ($resourceGroupResource->remove() == false) {
     return $modx->error->failure($modx->lexicon('resource_group_resource_err_remove'));
 }
 
-return $modx->error->success();
+return $modx->error->success('',$resourceGroupResource);

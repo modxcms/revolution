@@ -7,14 +7,15 @@
  * @package modx
  * @subpackage processors.system.action
  */
+if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('action','menu');
 
-if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
+/* get action */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
 $action = $modx->getObject('modAction',$_POST['id']);
 if ($action == null) return $modx->error->failure($modx->lexicon('action_err_nf'));
 
+/* remove action */
 if ($action->remove() == false) {
     return $modx->error->failure($modx->lexicon('action_err_remove'));
 }
@@ -22,4 +23,4 @@ if ($action->remove() == false) {
 /* log manager action */
 $modx->logManagerAction('action_delete','modAction',$action->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$action);

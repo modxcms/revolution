@@ -44,7 +44,7 @@ if (is_array($rt)) {
 $user= $modx->getObjectGraph('modUser', '{"Profile":{},"UserSettings":{}}', array ('modUser.username' => $username));
 if (!$user) {
     $ru = $modx->invokeEvent("OnUserNotFound", array(
-        'user' => $user,
+        'user' => &$user,
         'username' => $username,
         'password' => $password,
         array (

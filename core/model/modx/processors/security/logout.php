@@ -19,11 +19,13 @@ if ($loginContext == 'mgr') {
     $modx->invokeEvent('OnBeforeManagerLogout',array(
         'userid' => $modx->user->get('id'),
         'username' => $modx->user->get('username'),
+        'user' => &$modx->user,
     ));
 } else {
     $modx->invokeEvent('OnBeforeWebLogout',array(
         'userid' => $modx->user->get('id'),
         'username' => $modx->user->get('username'),
+        'user' => &$modx->user,
     ));
 }
 
@@ -34,11 +36,13 @@ if ($loginContext == 'mgr') {
     $modx->invokeEvent('OnManagerLogout',array(
         'userid' => $modx->user->get('id'),
         'username' => $modx->user->get('username'),
+        'user' => &$modx->user,
     ));
 } else {
     $modx->invokeEvent('OnWebLogout',array(
         'userid' => $modx->user->get('id'),
         'username' => $modx->user->get('username'),
+        'user' => &$modx->user,
     ));
 }
 

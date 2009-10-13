@@ -11,21 +11,22 @@
  * @package modx
  * @subpackage processors.system.action
  */
+if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('action','menu');
 
-if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'controller');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'controller';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* get actions */
 $c = $modx->newQuery('modAction');
 $c->sortby('namespace','ASC');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->sortby($sort,$dir);
+if ($isLimit) {
+    $c->limit($limit,$start);
 }
 $actions = $modx->getCollection('modAction',$c);
 $count = $modx->getCount('modAction');
@@ -33,19 +34,22 @@ $count = $modx->getCount('modAction');
 $list = array();
 $list[] = array('id' => 0, 'controller' => $modx->lexicon('action_none'));
 foreach ($actions as $action) {
-	$aa = $action->toArray();
+	$actionArray = $action->toArray();
 
-	if (strlen($aa['controller']) > 1 && substr($aa['controller'],strlen($aa['controller'])-4,strlen($aa['controller'])) != '.php') {
+    $controller = $actionArray['controller'];
+    $controllerLength = strlen($controller);
+
+	if ($controllerLength > 1 && substr($controller,($controllerLength-4),$controllerLength) != '.php') {
 		if (!file_exists($modx->getOption('manager_path').'controllers/'.$aa['controller'].'.php')) {
-			$aa['controller'] .= '/index.php';
-			$aa['controller'] = strtr($aa['controller'],'//','/');
+			$actionArray['controller'] .= '/index.php';
+			$actionArray['controller'] = strtr($actionArray['controller'],'//','/');
 		} else {
-			$aa['controller'] .= '.php';
+			$actionArray['controller'] .= '.php';
 		}
 	}
 
-    $aa['controller'] = $aa['namespace'].' - '.$aa['controller'];
+    $actionArray['controller'] = $actionArray['namespace'].' - '.$actionArray['controller'];
 
-	$list[] = $aa;
+	$list[] = $actionArray;
 }
 return $this->outputArray($list,$count);

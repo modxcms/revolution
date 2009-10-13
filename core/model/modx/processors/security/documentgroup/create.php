@@ -7,21 +7,24 @@
  * @package modx
  * @subpackage processors.security.documentgroup
  */
-$modx->lexicon->load('access');
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('access');
 
-if (!isset($_POST['name'])) $_POST['name'] = $modx->lexicon('resource_group_untitled');
+if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('resource_group_untitled');
 
-$dg = $modx->getObject('modResourceGroup',array('name' => $_POST['name']));
-if ($dg != null) return $modx->error->failure($modx->lexicon('resource_group_err_ae'));
+/* make sure name is unique */
+$alreadyExists = $modx->getObject('modResourceGroup',array('name' => $_POST['name']));
+if ($alreadyExists) return $modx->error->failure($modx->lexicon('resource_group_err_ae'));
 
-$dg = $modx->newObject('modResourceGroup');
-$dg->set('name',$_POST['name']);
-if ($dg->save() == false) {
+/* create resource group */
+$resourceGroup = $modx->newObject('modResourceGroup');
+$resourceGroup->fromArray($_POST);
+
+if ($resourceGroup->save() == false) {
     return $modx->error->failure($modx->lexicon('resource_group_err_create'));
 }
 
 /* log manager action */
-$modx->logManagerAction('new_resource_group','modResourceGroup',$dg->get('id'));
+$modx->logManagerAction('new_resource_group','modResourceGroup',$resourceGroup->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$resourceGroup);

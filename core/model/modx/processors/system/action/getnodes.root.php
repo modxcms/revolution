@@ -19,6 +19,11 @@ $c->groupby('Namespace.name');
 $namespaces = $modx->getCollection('modNamespace',$c);
 
 foreach ($namespaces as $namespace) {
+    $menu = array();
+    $menu[] = array(
+        'text' => $modx->lexicon('action_create_here'),
+        'handler' => 'function(itm,e) { this.createAction(itm,e); }',
+    );
     $list[] = array(
         'text' => $namespace->get('name'),
         'id' => 'n_namespace_'.$namespace->get('name'),
@@ -27,14 +32,7 @@ foreach ($namespaces as $namespace) {
         'pk' => $namespace->get('name'),
         'data' => $namespace->toArray(),
         'type' => 'namespace',
-        'menu' => array( 'items' => array(
-            array(
-                'text' => $modx->lexicon('action_create_here'),
-                'handler' => 'function(itm,e) {
-                    this.createAction(itm,e);
-                }',
-            ),
-        )),
+        'menu' => array('items' => $menu),
     );
 }
 return $list;

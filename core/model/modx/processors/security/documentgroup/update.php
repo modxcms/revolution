@@ -1,6 +1,6 @@
 <?php
 /**
- * Remove a resource group
+ * Update a resource group
  *
  * @param integer $id The ID of the resource group
  *
@@ -15,12 +15,20 @@ if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('resource_g
 $resourceGroup = $modx->getObject('modResourceGroup',$_POST['id']);
 if ($resourceGroup == null) return $modx->error->failure($modx->lexicon('resource_group_err_nf'));
 
-/* remove resource group */
-if ($resourceGroup->remove() == false) {
+/* make sure name is unique */
+$alreadyExists = $modx->getObject('modResourceGroup',array(
+    'name' => $_POST['name'],
+    'id:!=' => $resourceGroup->get('id'),
+));
+if ($alreadyExists) return $modx->error->failure($modx->lexicon('resource_group_err_ae'));
+
+/* save resource group */
+$resourceGroup->fromArray($_POST);
+if ($resourceGroup->save() == false) {
     return $modx->error->failure($modx->lexicon('resource_group_err_remove'));
 }
 
 /* log manager action */
-$modx->logManagerAction('delete_resource_group','modResourceGroup',$resourceGroup->get('id'));
+$modx->logManagerAction('update_resource_group','modResourceGroup',$resourceGroup->get('id'));
 
 return $modx->error->success('',$resourceGroup);

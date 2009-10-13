@@ -11,19 +11,22 @@
  * @package modx
  * @subpackage processors.security.profile
  */
+if (!$modx->hasPermission('change_password')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (!$modx->hasPermission('change_password')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
+/* if changing the password */
 if (isset($_POST['password_reset'])) {
-    if (md5($_POST['password_old']) != $modx->user->get('password'))
+    if (md5($_POST['password_old']) != $modx->user->get('password')) {
         return $modx->error->failure($modx->lexicon('user_err_password_invalid_old'));
+    }
 
-    if ($_POST['password_new'] != $_POST['password_confirm'])
+    if ($_POST['password_new'] != $_POST['password_confirm']) {
         return $modx->error->failure($modx->lexicon('user_err_passwords_no_match'));
+    }
 
-    if (strlen($_POST['password_new']) < 6)
+    if (strlen($_POST['password_new']) < $modx->getOption('password_min_length',null,8)) {
         return $modx->error->failure($modx->lexicon('user_err_password_too_short'));
+    }
 
     $modx->user->set('password',md5($_POST['password_new']));
     $modx->user->save();

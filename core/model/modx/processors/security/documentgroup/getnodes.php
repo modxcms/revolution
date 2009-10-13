@@ -7,65 +7,61 @@
  * @package modx
  * @subpackage processors.security.documentgroup
  */
-$modx->lexicon->load('access');
-
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('access');
 
 $_REQUEST['id'] = !isset($_REQUEST['id']) ? 0 : str_replace('n_dg_','',$_REQUEST['id']);
 
 $resourceGroup = $modx->getObject('modResourceGroup',$_REQUEST['id']);
 $groups = $modx->getCollection('modResourceGroup');
 
-$da = array();
-
-if ($g == null) {
+$list = array();
+if ($resourceGroup == null) {
 	foreach ($groups as $group) {
-		$da[] = array(
+        $menu = array();
+        $menu[] = array(
+            'text' => $modx->lexicon('resource_group_create'),
+            'handler' => 'function(itm,e) {
+                this.create(itm,e);
+            }',
+        );
+        $menu[] = '-';
+        $menu[] = array(
+            'text' => $modx->lexicon('resource_group_remove'),
+            'handler' => 'function(itm,e) {
+                this.remove(itm,e);
+            }',
+        );
+
+		$list[] = array(
 			'text' => $group->get('name'),
 			'id' => 'n_dg_'.$group->get('id'),
 			'leaf' => 0,
 			'type' => 'modResourceGroup',
 			'cls' => 'icon-resourcegroup',
-            'menu' => array(
-                'items' => array(
-                    array(
-                        'text' => $modx->lexicon('resource_group_create'),
-                        'handler' => 'function(itm,e) {
-                            this.create(itm,e);
-                        }',
-                    ),
-                    '-',
-                    array(
-                        'text' => $modx->lexicon('resource_group_remove'),
-                        'handler' => 'function(itm,e) {
-                            this.remove(itm,e);
-                        }',
-                    ),
-                ),
-            ),
+            'menu' => array('items' => $menu),
 		);
 	}
 } else {
 	$resources = $resourceGroup->getResources();
 	foreach ($resources as $resource) {
-		$da[] = array(
+        $menu = array();
+        $menu[] = array(
+            'text' => $modx->lexicon('resource_group_access_remove'),
+            'handler' => 'function(itm,e) {
+                this.removeResource(itm,e);
+            }',
+        );
+
+		$list[] = array(
 			'text' => $resource->get('pagetitle'),
 			'id' => 'n_'.$resource->get('id'),
 			'leaf' => 1,
 			'type' => 'modResource',
 			'cls' => 'icon-'.$resource->get('class_key'),
-            'menu' => array(
-                'items' => array(
-                    array(
-                        'text' => $modx->lexicon('resource_group_access_remove'),
-                        'handler' => 'function(itm,e) {
-                            this.removeResource(itm,e);
-                        }',
-                    )
-                ),
-            ),
+            'menu' => array('items' => $menu),
 		);
 	}
 }
 
-return $this->toJSON($da);
+return $this->toJSON($list);

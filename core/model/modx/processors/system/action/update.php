@@ -13,9 +13,9 @@
  * @package modx
  * @subpackage processors.system.action
  */
+if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('action','menu','namespace');
 
-if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 $_POST['haslayout'] = !empty($_POST['haslayout']);
 
@@ -25,21 +25,15 @@ $action = $modx->getObject('modAction',$_POST['id']);
 if ($action == null) return $modx->error->failure($modx->lexicon('action_err_nf'));
 
 /* verify controller */
-if (empty($_POST['controller'])) {
-	return $modx->error->failure($modx->lexicon('controller_err_ns'));
-}
+if (empty($_POST['controller'])) return $modx->error->failure($modx->lexicon('controller_err_ns'));
 
 /* verify parent */
-if (!isset($_POST['parent'])) return $modx->error->failure($modx->lexicon('action_parent_err_ns'));
-if (!empty($_POST['parent'])) {
-	$parent = $modx->getObject('modAction',$_POST['parent']);
-	if ($parent == null) return $modx->error->failure($modx->lexicon('action_parent_err_nf'));
-}
+if (empty($_POST['parent'])) return $modx->error->failure($modx->lexicon('action_parent_err_ns'));
+$parent = $modx->getObject('modAction',$_POST['parent']);
+if ($parent == null) return $modx->error->failure($modx->lexicon('action_parent_err_nf'));
 
 /* verify namespace */
-if (empty($_POST['namespace'])) {
-    return $modx->error->failure($modx->lexicon('namespace_err_nf'));
-}
+if (empty($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 $namespace = $modx->getObject('modNamespace',$_POST['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
@@ -52,4 +46,4 @@ if ($action->save() == false) {
 /* log manager action */
 $modx->logManagerAction('action_update','modAction',$action->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$action);

@@ -7,15 +7,14 @@
  * @package modx
  * @subpackage processors.system.action
  */
+if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('action','menu');
 
-if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$id = $modx->getOption('id',$_REQUEST,'n_0');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['id'])) $_REQUEST['id'] = 'n_0';
-
-$ar = explode('_',$_REQUEST['id']);
+$ar = explode('_',$id);
 $type = $ar[1];
 $pk = $ar[2];
 
