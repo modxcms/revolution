@@ -8,12 +8,10 @@
  * @package modx
  * @subpackage processors.security.user
  */
+if (!$modx->hasPermission(array('access_permissions' => true, 'new_user' => true))) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (!$modx->hasPermission(array('access_permissions' => true, 'new_user' => true))) return $modx->error->failure($modx->lexicon('permission_denied'));
-
 $user = $modx->newObject('modUser');
-
 
 /* validate post */
 $_POST['blocked'] = empty($_POST['blocked']) ? 0 : 1;

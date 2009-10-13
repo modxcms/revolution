@@ -20,7 +20,8 @@ if (isset($_POST['newpassword']) && $_POST['newpassword'] != 'false' || $_POST['
 		$modx->error->addField('password_notify_method',$modx->lexicon('user_err_not_specified_notification_method'));
 	}
 	if ($_POST['passwordgenmethod'] == 'g') {
-		$autoPassword = generate_password(8);
+        $len = $modx->getOption('password_generated_length',null,6);
+		$autoPassword = generate_password($len);
 		$user->set('password', $user->encode($autoPassword));
 		$newPassword= $autoPassword;
 	} else {
@@ -28,7 +29,7 @@ if (isset($_POST['newpassword']) && $_POST['newpassword'] != 'false' || $_POST['
 			$modx->error->addField('password',$modx->lexicon('user_err_not_specified_password'));
 		} elseif ($_POST['specifiedpassword'] != $_POST['confirmpassword']) {
 			$modx->error->addField('password',$modx->lexicon('user_err_password_no_match'));
-		} elseif (strlen($_POST['specifiedpassword']) < 6) {
+		} elseif (strlen($_POST['specifiedpassword']) < $modx->getOption('password_min_length',null,6)) {
 			$modx->error->addField('password',$modx->lexicon('user_err_password_too_short'));
 		} else {
 			$user->set('password',$user->encode($_POST['specifiedpassword']));

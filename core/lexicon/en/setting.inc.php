@@ -207,6 +207,12 @@ $_lang['setting_number_of_results'] = 'Number of Results';
 $_lang['setting_number_of_results_desc'] = 'Enter the number of results to show in the data grid when viewing listings and search results.';
 $_lang['setting_number_of_results_err'] = 'Please state the default number of results to view in search requests.';
 
+$_lang['setting_password_generated_length'] = 'Password Auto-Generated Length';
+$_lang['setting_password_generated_length_desc'] = 'The length of the auto-generated password for a User.';
+
+$_lang['setting_password_min_length'] = 'Minimum Password Length';
+$_lang['setting_password_min_length_desc'] = 'The minimum length for a password for a User.';
+
 $_lang['setting_publish_default'] = 'Published default';
 $_lang['setting_publish_default_desc'] = 'Select \'Yes\' to make all new resources published by default.';
 $_lang['setting_publish_default_err'] = 'Please state whether or not you want documents to be published by default.';
