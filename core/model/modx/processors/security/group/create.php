@@ -10,64 +10,64 @@
  * @package modx
  * @subpackage processors.security.group
  */
+if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* field validation */
+if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('user_group_untitled');
+if (empty($_POST['parent'])) $_POST['parent'] = 0;
 
-if (!isset($_POST['name'])) $_POST['name'] = $modx->lexicon('user_group_untitled');
-if (!isset($_POST['parent'])) $_POST['parent'] = 0;
+/* check to see if group already exists */
+$alreadyExists = $modx->getObject('modUserGroup',array('name' => $_POST['name']));
+if ($alreadyExists) return $modx->error->failure($modx->lexicon('user_group_err_already_exists'));
 
-$ug = $modx->getObject('modUserGroup',array('name' => $_POST['name']));
-if ($ug != null) return $modx->error->failure($modx->lexicon('user_group_err_already_exists'));
-
-$ug = $modx->newObject('modUserGroup');
-$ug->set('name',$_POST['name']);
-$ug->set('parent',$_POST['parent']);
+/* add group */
+$usergroup = $modx->newObject('modUserGroup');
+$usergroup->set('name',$_POST['name']);
+$usergroup->set('parent',$_POST['parent']);
 
 /* users */
 $users = $modx->fromJSON($_POST['users']);
-$ugms = array();
-foreach ($users as $ua) {
-    $ugm = $modx->newObject('modUserGroupMember');
-    $ugm->set('user_group',$ug->get('id'));
-    $ugm->set('member',$ua['id']);
-    $ugm->set('role',$ua['role']);
-    $ugms[] = $ugm;
+$members = array();
+foreach ($users as $userArray) {
+    $member = $modx->newObject('modUserGroupMember');
+    $member->set('user_group',$usergroup->get('id'));
+    $member->set('member',$userArray['id']);
+    $member->set('role',$userArray['role']);
+    $ugms[] = $member;
 }
-$ug->addMany($ugms);
+$usergroup->addMany($members);
 
-if ($ug->save() == false) {
+/* save usergroup */
+if ($usergroup->save() == false) {
     return $modx->error->failure($modx->lexicon('user_group_err_create'));
 }
 
-
 /* contexts */
-$contexts = $modx->fromJSON($_POST['contexts']);
-foreach ($contexts as $context) {
-    $acl = $modx->newObject('modAccessContext');
-    $acl->set('target',$context['target']);
-    $acl->set('principal',$ug->get('id'));
-    $acl->set('principal_class','modUserGroup');
-    $acl->set('authority',$context['authority']);
-    $acl->set('policy',$context['policy']);
-    $acl->save();
+if (!empty($_POST['contexts'])) {
+    $contexts = $modx->fromJSON($_POST['contexts']);
+    foreach ($contexts as $context) {
+        $acl = $modx->newObject('modAccessContext');
+        $acl->fromArray($context);
+        $acl->set('principal',$usergroup->get('id'));
+        $acl->set('principal_class','modUserGroup');
+        $acl->save();
+    }
 }
 
 /* resource groups */
-$resourceGroups = $modx->fromJSON($_POST['resource_groups']);
-foreach ($resourceGroups as $resourceGroup) {
-    $acl = $modx->newObject('modAccessResourceGroup');
-    $acl->set('target',$resourceGroup['target']);
-    $acl->set('principal',$ug->get('id'));
-    $acl->set('principal_class','modUserGroup');
-    $acl->set('authority',$resourceGroup['authority']);
-    $acl->set('policy',$resourceGroup['policy']);
-    $acl->set('context_key',$resourceGroup['context_key']);
-    $acl->save();
+if (!empty($_POST['resource_groups'])) {
+    $resourceGroups = $modx->fromJSON($_POST['resource_groups']);
+    foreach ($resourceGroups as $resourceGroup) {
+        $acl = $modx->newObject('modAccessResourceGroup');
+        $acl->fromArray($resourceGroup);
+        $acl->set('principal',$usergroup->get('id'));
+        $acl->set('principal_class','modUserGroup');
+        $acl->save();
+    }
 }
 
-
 /* log manager action */
-$modx->logManagerAction('new_user_group','modUserGroup',$ug->get('id'));
+$modx->logManagerAction('new_user_group','modUserGroup',$usergroup->get('id'));
 
-return $modx->error->success('',$ug);
+return $modx->error->success('',$usergroup);

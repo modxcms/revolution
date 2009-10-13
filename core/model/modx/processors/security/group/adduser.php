@@ -8,33 +8,34 @@
  * @package modx
  * @subpackage processors.security.group
  */
+if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-if (!isset($_POST['user_group'])) return $modx->error->failure($modx->lexicon('user_group_err_not_specified'));
+/* get user */
 if (!isset($_POST['member'])) return $modx->error->failure($modx->lexicon('user_err_not_specified'));
-
 $user = $modx->getObject('modUser',$_POST['member']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 
-$group = $modx->getObject('modUserGroup',$_POST['user_group']);
-if ($group == null) return $modx->error->failure($modx->lexicon('user_group_err_not_found'));
+/* get usergroup */
+if (!isset($_POST['user_group'])) return $modx->error->failure($modx->lexicon('user_group_err_not_specified'));
+$usergroup = $modx->getObject('modUserGroup',$_POST['user_group']);
+if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_not_found'));
 
-$ugu = $modx->getObject('modUserGroupMember',array(
-	'user_group' => $group->get('id'),
+/* check to see if member is already in group */
+$member = $modx->getObject('modUserGroupMember',array(
+	'user_group' => $usergroup->get('id'),
 	'member' => $user->get('id'),
 ));
-if ($ugu != null) {
-    return $modx->error->failure($modx->lexicon('user_group_member_err_already_in'));
-}
+if ($member) return $modx->error->failure($modx->lexicon('user_group_member_err_already_in'));
 
-$ugu = $modx->newObject('modUserGroupMember');
-$ugu->set('user_group',$_POST['user_group']);
-$ugu->set('member',$_POST['member']);
+/* create membership */
+$member = $modx->newObject('modUserGroupMember');
+$member->set('user_group',$usergroup->get('id'));
+$member->set('member',$user->get('id'));
 
-if ($ugu->save() == false) {
+/* save membership */
+if ($member->save() == false) {
     return $modx->error->failure($modx->lexicon('user_group_member_err_save'));
 }
 
-return $modx->error->success();
+return $modx->error->success('',$member);

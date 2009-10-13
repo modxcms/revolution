@@ -12,9 +12,8 @@
  * @package modx
  * @subpackage processors.security.group
  */
-$modx->lexicon->load('user');
-
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('user');
 
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
@@ -27,22 +26,22 @@ $groups = $modx->getCollection('modUserGroup',$c);
 
 $count = $modx->getCount('modUserGroup');
 
-$gs = array();
-if (isset($_REQUEST['addNone']) && $_REQUEST['addNone']) {
-    $gs[] = array(
-        'id' => '0',
+$list = array();
+if (!empty($_REQUEST['addNone'])) {
+    $list[] = array(
+        'id' => 0,
         'name' => $modx->lexicon('none'),
-        'parent' => '0',
+        'parent' => 0,
     );
 }
-if (isset($_REQUEST['combo'])) {
-    $gs[] = array(
-        'id' => ''
-        ,'name' => ' (anonymous) '
-        ,'parent' => '0'
+if (!empty($_REQUEST['combo'])) {
+    $list[] = array(
+        'id' => '',
+        'name' => ' ('.$modx->lexicon('anonymous').') ',
+        'parent' => 0,
     );
 }
-foreach ($groups as $g) {
-	$gs[] = $g->toArray();
+foreach ($groups as $group) {
+	$list[] = $group->toArray();
 }
-return $this->outputArray($gs,$count);
+return $this->outputArray($list,$count);

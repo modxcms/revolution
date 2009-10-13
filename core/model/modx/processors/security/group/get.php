@@ -14,7 +14,7 @@ if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_gr
 $usergroup = $modx->getObject('modUserGroup',$_REQUEST['id']);
 if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_not_found'));
 
-if (isset($_REQUEST['getUsers']) && $_REQUEST['getUsers']) {
+if (!empty($_REQUEST['getUsers'])) {
     $c = $modx->newQuery('modUserGroupMember');
     $c->select('
         modUserGroupMember.*,

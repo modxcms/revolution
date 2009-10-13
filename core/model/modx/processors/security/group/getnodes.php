@@ -7,76 +7,77 @@
  * @package modx
  * @subpackage processors.security.group
  */
-$modx->lexicon->load('user');
-
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('user');
 
 $_REQUEST['id'] = !isset($_REQUEST['id']) ? 0 : str_replace('n_ug_','',$_REQUEST['id']);
 
-$g = $modx->getObject('modUserGroup',$_REQUEST['id']);
+$usergroup = $modx->getObject('modUserGroup',$_REQUEST['id']);
 $groups = $modx->getCollection('modUserGroup',array('parent' => $_REQUEST['id']));
 
-$da = array();
+$list = array();
 foreach ($groups as $group) {
-	$da[] = array(
+    $menu = array();
+    $menu[] = array(
+        'text' => $modx->lexicon('user_group_user_add'),
+        'handler' => 'function(itm,e) {
+            this.addUser(itm,e);
+        }'
+    );
+    $menu[] = '-';
+    $menu[] = array(
+        'text' => $modx->lexicon('user_group_create'),
+        'handler' => 'function(itm,e) {
+            this.create(itm,e);
+        }',
+    );
+    $menu[] = array(
+        'text' => $modx->lexicon('user_group_update'),
+        'handler' => 'function(itm,e) {
+            this.update(itm,e);
+        }',
+    );
+    if ($group->get('id') != 1) {
+        $menu[] = '-';
+        $menu[] = array(
+            'text' => $modx->lexicon('user_group_remove'),
+            'handler' => 'function(itm,e) {
+                this.remove(itm,e);
+            }',
+        );
+    }
+
+	$list[] = array(
 		'text' => $group->get('name'),
 		'id' => 'n_ug_'.$group->get('id'),
 		'leaf' => 0,
 		'type' => 'usergroup',
 		'cls' => 'icon-group',
         'menu' => array(
-            'items' => array(
-                array(
-                    'text' => $modx->lexicon('user_group_user_add'),
-                    'handler' => 'function(itm,e) {
-                        this.addUser(itm,e);
-                    }',
-                ),
-                '-',
-                array(
-                    'text' => $modx->lexicon('user_group_create'),
-                    'handler' => 'function(itm,e) {
-                        this.create(itm,e);
-                    }',
-                ),
-                array(
-                    'text' => $modx->lexicon('user_group_update'),
-                    'handler' => 'function(itm,e) {
-                        this.update(itm,e);
-                    }',
-                ),
-                '-',
-                array(
-                    'text' => $modx->lexicon('user_group_remove'),
-                    'handler' => 'function(itm,e) {
-                        this.remove(itm,e);
-                    }',
-                ),
-            ),
+            'items' => $menu,
         ),
 	);
 }
-if ($g != null) {
-	$users = $g->getUsersIn();
+if ($usergroup != null) {
+	$users = $usergroup->getMany('Users');
 	foreach ($users as $user) {
-		$da[] = array(
+        $menu = array();
+        $menu[] = array(
+            'text' => $modx->lexicon('user_group_user_remove'),
+            'handler' => 'function(itm,e) {
+                this.removeUser(itm,e);
+            }',
+        );
+
+		$list[] = array(
 			'text' => $user->get('username'),
 			'id' => 'n_user_'.$user->get('id'),
 			'leaf' => 1,
 			'type' => 'user',
 			'cls' => 'icon-user',
-            'menu' => array(
-                'items' => array(
-                    array(
-                        'text' => $modx->lexicon('user_group_user_remove'),
-                        'handler' => 'function(itm,e) {
-                            this.removeUser(itm,e);
-                        }',
-                    ),
-                ),
-            ),
+            'menu' => array('items' => $menu),
 		);
 	}
 }
 
-return $this->toJSON($da);
+return $this->toJSON($list);

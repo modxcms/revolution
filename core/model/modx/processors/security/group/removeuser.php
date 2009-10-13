@@ -8,17 +8,18 @@
  * @package modx
  * @subpackage processors.security.group
  */
+if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-$ugu = $modx->getObject('modUserGroupMember',array(
+/* get member */
+$member = $modx->getObject('modUserGroupMember',array(
 	'user_group' => $_POST['group_id'],
 	'member' => $_POST['user_id'],
 ));
-if ($ugu == null) return $modx->error->failure($modx->lexicon('user_group_member_err_not_found'));
+if ($member == null) return $modx->error->failure($modx->lexicon('user_group_member_err_not_found'));
 
-if ($ugu->remove() == false) {
+/* remove member */
+if ($member->remove() == false) {
     return $modx->error->failure($modx->lexicon('user_group_member_err_remove'));
 }
 

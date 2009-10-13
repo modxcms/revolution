@@ -8,10 +8,10 @@
  * @package modx
  * @subpackage processors.security.group
  */
+if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
+if (empty($_POST['data'])) return $modx->error->failure();
 $data = urldecode($_POST['data']);
 $data = $modx->fromJSON($data);
 

@@ -25,6 +25,7 @@ $_lang['add_tv'] = 'Add TV';
 $_lang['add_weblink'] = 'New Weblink';
 $_lang['add_symlink'] = 'New Symlink';
 $_lang['alias'] = 'Alias';
+$_lang['anonymous'] = 'anonymous';
 $_lang['assets'] = 'Assets';
 $_lang['at'] = 'At';
 $_lang['attachment'] = 'Attachment';

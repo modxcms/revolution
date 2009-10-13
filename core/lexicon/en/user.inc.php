@@ -6,6 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['administrator'] = 'Administrator';
 $_lang['authority'] = 'Authority';
 $_lang['change_password'] = 'Change Password';
 $_lang['change_password_confirm'] = 'Confirm password';
@@ -105,6 +106,7 @@ $_lang['user_group_err_create'] = 'An error occurred while trying to create the 
 $_lang['user_group_err_not_found'] = 'User group not found!';
 $_lang['user_group_err_not_specified'] = 'No user group specified!';
 $_lang['user_group_err_remove'] = 'An error occurred while trying to remove the user group.';
+$_lang['user_group_err_remove_admin'] = 'You cannot remove the Administrator group.';
 $_lang['user_group_err_save'] = 'An error occurred while trying to save the user group.';
 $_lang['user_group_management_msg'] = 'Manage user memberships in groups and apply roles.';
 $_lang['user_group_member_err_already_in'] = 'User is already in this user group!';
@@ -114,7 +116,7 @@ $_lang['user_group_member_err_remove'] = 'An error occurred while trying to remo
 $_lang['user_group_member_err_save'] = 'An error occurred while trying to add the user to the group.';
 $_lang['user_group_new'] = 'New User Group';
 $_lang['user_group_parent'] = 'Parent Group';
-$_lang['user_group_remove'] = 'Remove User from User Group';
+$_lang['user_group_remove'] = 'Remove User Group';
 $_lang['user_group_remove_confirm'] = 'Are you sure you want to remove this User Group?';
 $_lang['user_group_untitled'] = 'Untitled User Group';
 $_lang['user_group_update'] = 'Update User Group';
