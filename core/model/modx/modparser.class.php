@@ -916,6 +916,7 @@ class modLinkTag extends modTag {
                     $this->_output= $this->modx->aliasMap[$this->_output];
                 }
                 if (!empty($this->_output)) {
+                    $qs = '';
                     $context = '';
                     if (is_array($this->_properties) && !empty($this->_properties)) {
                         $qs = array();
