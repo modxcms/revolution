@@ -100,7 +100,7 @@ class modInstallTest {
     function return_bytes($val) {
         $val = trim($val);
         $num = intval(substr($val,0,strlen($val)-1));
-        $last = strtolower(substr($val,strlen($val/1),1));
+        $last = strtolower(substr($val,strlen($val),1));
         switch ($last) {
             case 'g':
                 $num *= 1024;
