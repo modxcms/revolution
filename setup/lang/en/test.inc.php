@@ -16,7 +16,7 @@ $_lang['test_dependencies_fail_zlib'] = 'Your PHP installation does not have the
 $_lang['test_directory_exists'] = 'Checking if <span class="mono">%s</span> directory exists: ';
 $_lang['test_directory_writable'] = 'Checking if <span class="mono">%s</span> directory is writable: ';
 $_lang['test_memory_limit'] = 'Checking if memory limit is set to at least 64M: ';
-$_lang['test_memory_limit_fail'] = 'MODx found your memory_limit setting to be below the recommended setting of 64M. MODx attempted to set the memory_limit to 128M, but was unsuccessful. Please set the memory_limit setting in your php.ini file to 64M or higher before proceeding. MODx recommends 128M.';
+$_lang['test_memory_limit_fail'] = 'MODx found your memory_limit setting to be below the recommended setting of 64M. MODx attempted to set the memory_limit to 128M, but was unsuccessful. Please set the memory_limit setting in your php.ini file to 64M or higher before proceeding. If you are still having trouble (such as getting a blank white screen on install), set to 128M.';
 $_lang['test_php_version_fail'] = 'You are running on PHP %s, and MODx Revolution requires PHP 4.3.0 or later';
 $_lang['test_php_version_sn'] = 'While MODx will work on your PHP version (%s), usage of MODx on this version is not recommended. Your version of PHP is vulnerable to numerous security holes. Please upgrade to PHP version is 4.3.11 or higher, which patches these holes. It is recommended you upgrade to this version for the security of your own website.';
 $_lang['test_php_version_start'] = 'Checking PHP version:';
