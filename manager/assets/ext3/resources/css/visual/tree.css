@@ -1,5 +1,5 @@
 /*!
- * Ext JS Library 3.0.0
+ * Ext JS Library 3.0.2
  * Copyright(c) 2006-2009 Ext JS, LLC
  * licensing@extjs.com
  * http://www.extjs.com/license
@@ -27,11 +27,6 @@
 .x-tree-node-loading a span{
 	 font-style: italic;
 	 color:#444444;
-}
-
-.ext-ie .x-tree-node-el input {
-    width:15px;
-    height:15px;
 }
 
 .x-tree-lines .x-tree-elbow{

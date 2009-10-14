@@ -1,5 +1,5 @@
 /*!
- * Ext JS Library 3.0.0
+ * Ext JS Library 3.0.2
  * Copyright(c) 2006-2009 Ext JS, LLC
  * licensing@extjs.com
  * http://www.extjs.com/license
@@ -419,7 +419,7 @@
     width:auto;
 }
 
-.ext-gecko2 .x-panel-btns-right .x-toolbar-ct {
+.ext-ie .x-panel-btns-right .x-toolbar-ct, .ext-gecko2 .x-panel-btns-right .x-toolbar-ct {
     width:auto;
 }
 

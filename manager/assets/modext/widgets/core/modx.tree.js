@@ -68,6 +68,7 @@ MODx.tree.Tree = function(config) {
 		,autoHeight: true
 		,rootVisible: true
 		,loader: tl
+        ,header: false
 		,hideBorders: true
 		,bodyBorder: false
         ,cls: 'modx-tree'

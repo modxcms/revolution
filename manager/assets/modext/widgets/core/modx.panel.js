@@ -12,6 +12,7 @@ MODx.Panel = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         cls: 'modx-panel'
+        ,title: ''
     });
     MODx.Panel.superclass.constructor.call(this,config);
     this.config = config;
@@ -35,6 +36,8 @@ MODx.FormPanel = function(config) {
         ,collapsible: true
         ,bodyStyle: 'padding: 1em'
         ,border: false
+        ,header: false
+        ,title: ''
         ,method: 'POST'
         ,cls: 'modx-form'
         ,ddGroup: 'modx-treedrop-dd'

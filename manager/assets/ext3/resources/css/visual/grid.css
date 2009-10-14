@@ -1,5 +1,5 @@
 /*!
- * Ext JS Library 3.0.0
+ * Ext JS Library 3.0.2
  * Copyright(c) 2006-2009 Ext JS, LLC
  * licensing@extjs.com
  * http://www.extjs.com/license
@@ -261,10 +261,6 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 
 .x-grid-with-col-lines .x-grid3-row td.x-grid3-cell {
     border-right-color:#ededed;
-}
-
-.x-grid-with-col-lines .x-grid3-row{
-    border-top-color:#ededed;
 }
 
 .x-grid-with-col-lines .x-grid3-row-selected {

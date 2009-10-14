@@ -46,7 +46,7 @@ while(false !== ($name = $odir->read())) {
 			'text' => $name,
 			'cls' => 'folder',
 			'type' => 'dir',
-			'disabled' => is_writable($fullname),
+			//'disabled' => is_writable($fullname),
             'leaf' => false,
             'menu' => array(
                 'items' => array(

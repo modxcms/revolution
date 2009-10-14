@@ -37,6 +37,7 @@ MODx.grid.LocalGrid = function(config) {
         ,collapsible: true
         ,stripeRows: true
         ,enableColumnMove: true
+        ,header: false
         ,cls: 'modx-grid'
         ,viewConfig: {
             forceFit: true

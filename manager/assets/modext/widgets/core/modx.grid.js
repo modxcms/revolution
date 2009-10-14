@@ -23,6 +23,7 @@ MODx.grid.Grid = function(config) {
 		,autoHeight: true
         ,collapsible: true
         ,stripeRows: true
+        ,header: false
         ,cls: 'modx-grid'
 		,viewConfig: {
 			forceFit: true

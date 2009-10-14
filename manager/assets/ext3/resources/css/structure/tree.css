@@ -1,5 +1,5 @@
 /*!
- * Ext JS Library 3.0.0
+ * Ext JS Library 3.0.2
  * Copyright(c) 2006-2009 Ext JS, LLC
  * licensing@extjs.com
  * http://www.extjs.com/license
@@ -35,27 +35,38 @@
 }
 
 /* checkboxes */
-.ext-ie input.x-tree-node-cb {
-    width:15px;
-    height:15px;
-}
 
 input.x-tree-node-cb {
     margin-left:1px;
+    height: 19px;
+	vertical-align: bottom;
 }
 
 .ext-ie input.x-tree-node-cb {
     margin-left:0;
+    margin-top: 1px;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+.ext-strict .ext-ie8 input.x-tree-node-cb{
+    margin: 1px 1px;
+    height: 14px;
+    vertical-align: bottom;
+}
+
+.ext-strict .ext-ie8 input.x-tree-node-cb + a{
+    vertical-align: bottom;
+}
+
+.ext-opera input.x-tree-node-cb {
+    height: 14px;
+    vertical-align: middle;
 }
 
 .x-tree-noicon .x-tree-node-icon{
 	width:0; height:0;
-}
-
-/* loading icon */
-.ext-ie .x-tree-node-el input {
-    width:15px;
-    height:15px;
 }
 
 /* No line styles */
