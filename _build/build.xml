@@ -194,11 +194,9 @@ General Public License for more details.
             <fileset dir="${build.image.modext.dir}/build/util"
                 includes="**/*.js"
                   excludes="filetree/**" />
-                  <!--
             <fileset dir="${build.image.modext.dir}/build/widgets/core"
                 includes="**/*.js"
-                excludes="modx.msg-min.js,modx.grid-min.js" />
-                -->
+                excludes="" />
         </concat>
     </target>
     

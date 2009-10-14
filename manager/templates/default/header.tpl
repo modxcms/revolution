@@ -10,32 +10,13 @@
 
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/modext/{if $_config.compress_js}build/core/modx-min{else}core/modx{/if}.js" type="text/javascript"></script>
 <script src="{$_config.connectors_url}lang.js.php?topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a}" type="text/javascript"></script>
 <script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a}" type="text/javascript"></script>
 
-<script src="{$_config.manager_url}assets/modext/core/modx.localization.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/util/utilities.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/util/switchbutton.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/core/modx.form.handler.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/core/modx.component.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/core/modx.actionbuttons.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/core/modx.msg.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/core/modx.panel.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/core/modx.tabs.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/core/modx.window.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/core/modx.tree.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/core/modx.combo.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/core/modx.grid.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/core/modx.grid.local.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/core/modx.console.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/core/modx.portal.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/modx.treedrop.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/windows.js" type="text/javascript"></script>
-
-<script src="{$_config.manager_url}assets/modext/widgets/resource/modx.tree.resource.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/element/modx.tree.element.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/modext/widgets/system/modx.tree.directory.js" type="text/javascript"></script>
+{foreach from=$cssjs item=scr}
+{$scr}
+{/foreach}
 
 <script src="{$_config.manager_url}assets/modext/util/filetree/js/Ext.ux.form.BrowseButton.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/util/filetree/js/Ext.ux.FileUploader.js" type="text/javascript"></script>
@@ -44,11 +25,6 @@
 <link href="{$_config.manager_url}assets/modext/util/filetree/css/filetype.css" rel="stylesheet" type="text/css" />
 <link href="{$_config.manager_url}assets/modext/util/filetree/css/filetree.css" rel="stylesheet" type="text/css" />
 
-<script src="{$_config.manager_url}assets/modext/core/modx.layout.js" type="text/javascript"></script>
-
-{foreach from=$cssjs item=scr}
-{$scr}
-{/foreach}
 
 <!--[if IE]>
 <link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/ie.css" />

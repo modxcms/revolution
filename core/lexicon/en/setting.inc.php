@@ -106,7 +106,7 @@ $_lang['setting_cache_resource_expires'] = 'Expiration Time for Partial Resource
 $_lang['setting_cache_resource_expires_desc'] = '';
 
 $_lang['setting_compress_js'] = 'Use Compressed Javascript Libraries';
-$_lang['setting_compress_js_desc'] = 'When this is enabled, MODx will use a compressed version of its custom JavaScript libraries. This greatly reduces load and execution time. Disable only if you are modifying core elements. LEAVE OFF UNTIL 097-final IS RELEASED!';
+$_lang['setting_compress_js_desc'] = 'When this is enabled, MODx will use a compressed version of its custom JavaScript libraries. This greatly reduces load and execution time. Disable only if you are modifying core elements.';
 
 $_lang['setting_default_template'] = 'Default template';
 $_lang['setting_default_template_desc'] = 'Select the default template you wish to use for new documents. You can still select a different template in the document editor, this setting just pre-selects one of your templates for you.';

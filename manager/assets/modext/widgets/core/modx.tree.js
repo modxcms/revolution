@@ -26,28 +26,29 @@ MODx.tree.Tree = function(config) {
     });
         
     this.config = config;
+    var tl,root;
     if (this.config.url) {
-    	var tl = new Ext.tree.TreeLoader(config.loaderConfig);
-    	tl.on('beforeload',function(loader,node) {
-    		tl.dataUrl = this.config.url+'?action='+this.config.action+'&id='+node.attributes.id;
+        tl = new Ext.tree.TreeLoader(config.loaderConfig);
+        tl.on('beforeload',function(loader,node) {
+            tl.dataUrl = this.config.url+'?action='+this.config.action+'&id='+node.attributes.id;
             if (node.attributes.type) {
                 tl.dataUrl += '&type='+node.attributes.type;
             }
-    	},this);
-        var root = {
+        },this);
+        root = {
             nodeType: 'async'
             ,text: config.root_name || ''
             ,draggable: false
             ,id: config.root_id || 'root'
         };
     } else {        
-        var tl = new Ext.tree.TreeLoader({
+        tl = new Ext.tree.TreeLoader({
             preloadChildren: true
             ,baseAttrs: {
                 uiProvider: MODx.tree.CheckboxNodeUI
             }
         });
-        var root = new Ext.tree.TreeNode({
+        root = new Ext.tree.TreeNode({
             text: this.config.rootName || ''
             ,draggable: false
             ,id: this.config.rootId || 'root'
@@ -83,11 +84,13 @@ MODx.tree.Tree = function(config) {
                 r = Ext.decode(r.responseText);
                 var itms = this._formatToolbar(r.results);
                 var tb = this.getTopToolbar();
-                var l = r.results;
-                for (var i=0;i<itms.length;i++) {
-                    tb.add(itms[i]);
+                if (tb) {
+                    var l = r.results;
+                    for (var i=0;i<itms.length;i++) {
+                        tb.add(itms[i]);
+                    }
+                    tb.doLayout();
                 }
-                tb.doLayout();
             }
             ,scope:this
         });
@@ -208,9 +211,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	,refresh: function(func,scope,args) {
 		var treeState = Ext.state.Manager.get(this.treestate_id);
 		this.root.reload();
-		treeState === undefined
-			? this.root.expand(null,null)
-			: this.expandPath(treeState,null);
+		if (treeState === undefined) { this.root.expand(null,null); } else { this.expandPath(treeState,null); }
 		if (func) {
 			scope = scope || this;
 			args = args || [];
@@ -255,7 +256,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             ,url: this.config.url
             ,params: p
             ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
+                'success': {fn:this.refresh,scope:this}
             }
         }); 
     }
@@ -308,8 +309,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	,_handleClick: function (n,e) {
         e.stopEvent();
         
-        if (this.disableHref) return false;
-        if (e.ctrlKey) return false;
+        if (this.disableHref) { return false; }
+        if (e.ctrlKey) { return false; }
         if (n.attributes.href && n.attributes.href !== '') {
             location.href = n.attributes.href;
         }
@@ -363,7 +364,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 			}
 			,listeners: {
 				'success': {fn:function(r) {
-    				this.reloadNode(dropEvent.target.parentNode);
+                    this.reloadNode(dropEvent.target.parentNode);
 				},scope:this}
 				,'failure': {fn:function(r) {
                     MODx.form.Handler.errorJSON(r);
@@ -446,7 +447,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @param {String} id The node's ID
      */
     ,removeNode: function(id) {
-    	var node = this.getNodeById(id);
+        var node = this.getNodeById(id);
         if (node) {
             node.remove(); 
         }

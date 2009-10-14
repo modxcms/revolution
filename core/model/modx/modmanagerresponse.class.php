@@ -65,6 +65,9 @@ class modManagerResponse extends modResponse {
                 $this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
                 $this->modx->smarty->assign('_ctx',$this->modx->context->get('key'));
 
+                $this->registerBaseScripts();
+                $this->registerActionDomRules($action);
+
                 $this->body = '';
 
                 /* find context path */
@@ -95,14 +98,15 @@ class modManagerResponse extends modResponse {
                     $this->modx->log(MODX_LOG_LEVEL_FATAL,'Could not find action file at: '.$f);
                 }
 
-                $this->registerActionDomRules($action);
 
                 /* reset path to core modx path for header/footer */
                 $this->modx->smarty->setTemplatePath($modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme',null,'default') . '/');
 
+                /* load header */
                 if ($act['haslayout']) {
                     $this->body .= include $this->modx->getOption('manager_path') . 'controllers/header.php';
                 }
+
                 /* assign later to allow for css/js registering */
                 if (is_array($cbody)) {
                     $this->modx->smarty->assign('_e', $cbody);
@@ -163,5 +167,49 @@ class modManagerResponse extends modResponse {
             $ruleOutput .= '});</script>';
             $this->modx->regClientStartupHTMLBlock($ruleOutput);
         }
+    }
+
+    /**
+     * Registers the core and base JS scripts
+     *
+     * @access public
+     */
+    function registerBaseScripts() {
+        $managerUrl = $this->modx->getOption('manager_url');
+
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.localization.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/util/utilities.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/util/switchbutton.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.form.handler.js');
+
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.component.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.actionbuttons.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.msg.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.panel.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.tabs.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.window.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.tree.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.combo.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.grid.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.grid.local.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.console.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.portal.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/modx.treedrop.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/windows.js');
+
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.tree.element.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/system/modx.tree.directory.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.layout.js');
+
+        $this->modx->regClientStartupHTMLBlock('
+        <script type="text/javascript">
+        Ext.onReady(function() {
+            MODx.load({
+                xtype: "modx-layout"
+                ,accordionPanels: MODx.accordionPanels || []
+            });
+        });
+        </script>');
     }
 }

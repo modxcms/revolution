@@ -81,18 +81,21 @@ $welcome_back = $modx->lexicon('welcome_back',array('name' => $modx->getLoginUse
 $modx->smarty->assign('welcome_back',$welcome_back);
 unset($welcome_back);
 
-/* register JS scripts */
-$modx->regClientStartupHTMLBlock('
-<script type="text/javascript">
-Ext.onReady(function() {
-    MODx.load({
-        xtype: "modx-layout"
-        ,accordionPanels: MODx.accordionPanels || []
-    });
-});
-</script>');
-if (!empty($modx->sjscripts)) {
-    $modx->smarty->assign('cssjs',$modx->sjscripts);
+/* if true, use compressed JS */
+if ($modx->getOption('compress_js',null,false)) {
+    foreach ($modx->sjscripts as &$scr) {
+        $pos = strpos($scr,'.js');
+        if ($pos) {
+            $scr = substr($scr,0,$pos).'-min'.substr($scr,$pos,strlen($scr));
+        }
+        $pos = strpos($scr,'modext/');
+        if ($pos) {
+            $pos = $pos+7;
+            $scr = substr($scr,0,$pos).'build/'.substr($scr,$pos,strlen($scr));
+        }
+    }
 }
+/* assign css/js to header */
+$modx->smarty->assign('cssjs',$modx->sjscripts);
 
 return $modx->smarty->fetch('header.tpl');

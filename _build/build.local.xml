@@ -71,7 +71,7 @@
     <target name="modext-minify" depends="cleanup-build-modext-image" description="Create minimized MODExt scripts from the working copy">
         <echo>Creating minimized js scripts from your working copy</echo>
 
-        <yuicompress warn="false" munge="no" preserveallsemicolons="true" outputsuffix="-min" 
+        <yuicompress warn="false" munge="yes" preserveallsemicolons="true" outputsuffix="-min" 
             outputfolder="${build.image.modext.dir}/build" >
             <fileset dir="${project.manager.dir}/assets/modext"
                 includes="**/*.js" 
@@ -113,11 +113,9 @@ General Public License for more details.
             <fileset dir="${build.image.modext.dir}/build/util"
                 includes="**/*.js"
                   excludes="filetree/**" />
-                  <!--
             <fileset dir="${build.image.modext.dir}/build/widgets/core"
                 includes="**/*.js"
-                excludes="modx.msg-min.js,modx.grid-min.js" />
-                -->
+                excludes="" />
         </concat>
     </target>
     
