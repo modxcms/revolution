@@ -34,6 +34,18 @@ if (is_array($onInterfaceSettingsRender)) {
 }
 $modx->smarty->assign('onInterfaceSettingsRender',$onInterfaceSettingsRender);
 
+/* invoke OnUserFormRender event */
+$onUserFormRender = $modx->invokeEvent('OnUserFormRender', array(
+    'id' => 0,
+    'mode' => 'new',
+));
+if (is_array($onUserFormRender)) $onUserFormRender = implode('',$onUserFormRender);
+$modx->regClientStartupHTMLBlock('<script type="text/javascript">
+// <![CDATA[
+MODx.onUserFormRender = "'.$onUserFormRender.'";
+// ]]>
+</script>');
+
 /* register JS scripts */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.grid.settings.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.settings.js');

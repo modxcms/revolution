@@ -275,6 +275,9 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'textarea'
                     ,width: 300
                     ,grow: true
+                },{
+                    html: MODx.onUserFormRender
+                    ,border: false
                 }]
             },{
                 id: 'modx-user-fs-blocked'
