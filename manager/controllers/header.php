@@ -86,12 +86,22 @@ if ($modx->getOption('compress_js',null,false)) {
     foreach ($modx->sjscripts as &$scr) {
         $pos = strpos($scr,'.js');
         if ($pos) {
-            $scr = substr($scr,0,$pos).'-min'.substr($scr,$pos,strlen($scr));
-        }
-        $pos = strpos($scr,'modext/');
+            $newUrl = substr($scr,0,$pos).'-min'.substr($scr,$pos,strlen($scr));
+        } else { continue; }
+        $pos = strpos($newUrl,'modext/');
         if ($pos) {
             $pos = $pos+7;
-            $scr = substr($scr,0,$pos).'build/'.substr($scr,$pos,strlen($scr));
+            $newUrl = substr($newUrl,0,$pos).'build/'.substr($newUrl,$pos,strlen($newUrl));
+        }
+
+        $path = str_replace(array(
+            $modx->getOption('manager_url').'assets/modext/',
+            '<script type="text/javascript" src="',
+            '"></script>',
+        ),'',$newUrl);
+
+        if (file_exists($modx->getOption('manager_path').'assets/modext/'.$path)) {
+            $scr = $newUrl;
         }
     }
 }
