@@ -79,6 +79,13 @@ $modx->invokeEvent('OnUserFormSave',array(
 	'id' => $user->get('id'),
 ));
 
+/* invoke OnUserCreate event */
+$modx->invokeEvent('OnUserCreate',array(
+    'mode' => 'new',
+    'user' => &$user,
+    'id' => $user->get('id'),
+));
+
 /* converts date format dd-mm-yyyy to php date */
 function convertDate($date) {
 	if ($date == '')

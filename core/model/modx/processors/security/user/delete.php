@@ -44,6 +44,13 @@ $modx->invokeEvent('OnUserFormDelete',array(
     'user' => &$user,
 ));
 
+/* invoke OnUserDelete event */
+$modx->invokeEvent('OnUserDelete',array(
+    'mode' => 'del',
+    'user' => &$user,
+    'id' => $user->get('id'),
+));
+
 /* log manager action */
 $modx->logManagerAction('user_delete','modUser',$user->get('id'));
 

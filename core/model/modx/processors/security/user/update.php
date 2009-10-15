@@ -100,6 +100,13 @@ $modx->invokeEvent('OnUserFormSave',array(
 	'id' => $user->get('id'),
 ));
 
+/* invoke OnUserUpdate event */
+$modx->invokeEvent('OnUserUpdate',array(
+    'mode' => 'upd',
+    'user' => &$user,
+    'id' => $user->get('id'),
+));
+
 /* converts date format dd-mm-yyyy to php date */
 function convertDate($date) {
 	if ($date == '')
