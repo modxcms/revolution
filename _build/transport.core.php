@@ -72,7 +72,7 @@ $xpdo->log(XPDO_LOG_LEVEL_INFO,'Beginning build script processes...'); flush();
 
 /* remove pre-existing package files and directory */
 if (file_exists($packageDirectory . 'core.transport.zip')) {
-    unlink($packageDirectory . 'core.transport.zip');
+    @unlink($packageDirectory . 'core.transport.zip');
 }
 if (file_exists($packageDirectory . 'core') && is_dir($packageDirectory . 'core')) {
     $cacheManager->deleteTree($packageDirectory . 'core',array(
@@ -81,7 +81,11 @@ if (file_exists($packageDirectory . 'core') && is_dir($packageDirectory . 'core'
         'extensions' => '*',
     ));
 }
-$xpdo->log(XPDO_LOG_LEVEL_INFO,'Removed pre-existing core/ and core.transport.zip.'); flush();
+if (!file_exists($packageDirectory . 'core') && !file_exists($packageDirectory . 'core.transport.zip')) {
+    $xpdo->log(XPDO_LOG_LEVEL_INFO,'Removed pre-existing core/ and core.transport.zip.'); flush();
+} else {
+    $xpdo->log(XPDO_LOG_LEVEL_ERROR,'Could not remove core/ and core.transport.zip before starting build.'); flush();
+}
 
 /* create core transport package */
 $package = new xPDOTransport($xpdo, 'core', $packageDirectory);

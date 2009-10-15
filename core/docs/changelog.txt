@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-938] Added check to build to check if core+core.transport.zip were removed before build starts. 
 - [#MODX-629] Added missing automatic_alias setting to build
 - [#MODX-790] Fixed issue where couldnt browse back to root directory with MODx.Browser
 - [#MODX-902] Fixed empty warning message for removing category
