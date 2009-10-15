@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1170] Fixed issues with Export Topic
 - [#MODX-912] Fixed isinrole/ismember output filter
 - [#MODX-677] Made capitalization consistent on Resource edit/create screen
 - [#MODX-1251] Fixed issue with server offset displaying incorrectly

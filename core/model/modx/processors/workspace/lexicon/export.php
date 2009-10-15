@@ -9,9 +9,8 @@
  * @package modx
  * @subpackage processors.workspace.lexicon.focus
  */
-$modx->lexicon->load('lexicon');
-
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('lexicon');
 
 /* if downloading the file last exported */
 if (!empty($_REQUEST['download'])) {
@@ -31,11 +30,16 @@ if (!empty($_REQUEST['download'])) {
 
 /* verify inputs */
 if (empty($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
-$namespace = $modx->getObject('modNamespace',$_POST['namespace']);
+$namespace = $modx->getObject('modNamespace',is_numeric($_POST['namespace']) ? $_POST['namespace'] : array('name' => $_POST['namespace']));
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
 if (empty($_POST['topic'])) return $modx->error->failure($modx->lexicon('topic_err_ns'));
-$topic = $modx->getObject('modLexiconTopic',$_POST['topic']);
+$c = array(
+    'namespace' => $_POST['namespace'],
+);
+if (is_numeric($_POST['topic'])) { $c['id'] = $_POST['topic']; }
+  else { $c['name'] = $_POST['topic']; }
+$topic = $modx->getObject('modLexiconTopic',$c);
 if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
 
 if (empty($_POST['language'])) $_POST['language'] = 'en';
@@ -48,10 +52,10 @@ $entries = $modx->getCollection('modLexiconEntry',array(
 ));
 
 /* setup output content */
-$o = "<?php\n";
-$o .= "/*\n
- * @topic ".$topic->get('name')."\n
- * @namespace ".$namespace->get('name')."\n
+$o = "<?php
+/*
+ * @topic ".$topic->get('name')."
+ * @namespace ".$namespace->get('name')."
  * @language ".$_POST['language']."
  */\n";
 foreach ($entries as $entry) {
