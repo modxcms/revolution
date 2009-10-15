@@ -441,13 +441,15 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,stay: MODx.config.stay
         });
     }
-
     ,success: function(o) {
         Ext.getCmp('modx-grid-resource-security').getStore().commitChanges();
-        var t = parent.Ext.getCmp('modx-resource-tree');
+        var t = Ext.getCmp('modx-resource-tree');
         var ctx = Ext.getCmp('modx-resource-context-key').getValue();
         var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
-        t.refreshNode(ctx+'_'+pa,true);
+        var v = ctx+'_'+pa;
+        var n = t.getNodeById(v);
+        n.leaf = false;
+        t.refreshNode(v,true);
     }
     
     ,templateWarning: function() {

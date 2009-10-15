@@ -373,7 +373,7 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
 
     ,success: function(o) {
         Ext.getCmp('modx-grid-resource-security').getStore().commitChanges();
-        var t = parent.Ext.getCmp('modx-resource-tree');
+        var t = Ext.getCmp('modx-resource-tree');
         var ctx = Ext.getCmp('modx-weblink-context-key').getValue();
         var pa = Ext.getCmp('modx-weblink-parent').getValue();
         t.refreshNode(ctx+'_'+pa,true);
