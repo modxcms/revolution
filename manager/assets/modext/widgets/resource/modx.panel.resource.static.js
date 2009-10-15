@@ -138,6 +138,7 @@ MODx.panel.Static = function(config) {
             ,editable: false
             ,id: 'modx-static-parent'
             ,value: config.record.parent || 0
+            ,formpanel: 'modx-panel-static'
         },{
             xtype: 'hidden'
             ,name: 'parent'

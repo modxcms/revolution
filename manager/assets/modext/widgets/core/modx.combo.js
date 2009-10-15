@@ -679,29 +679,58 @@ MODx.ChangeParentField = function(config) {
         triggerAction: 'all'
         ,editable: false
         ,readOnly: true
+        ,formpanel: 'modx-panel-resource'
     });    
     MODx.ChangeParentField.superclass.constructor.call(this,config);
+    this.on('blur',this.loseFocus,this);
+    this.on('click',this.onTriggerClick,this);
+    this.addEvents({ end: true });
+    this.on('end',this.end,this);
 };
 Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
-    onTriggerClick: function() {
-        if (this.disabled) {
+    oldValue: false
+    ,oldDisplayValue: false
+    ,end: function(p) {
+        var t = Ext.getCmp('modx-resource-tree');
+        if (!t) return;
+        p.d = p.d || p.v;
+        
+        t.removeListener('click',this.handleChangeParent,this);
+        t.on('click',t._handleClick,t);
+        t.disableHref = false;
+        
+        Ext.getCmp('modx-resource-parent-hidden').setValue(p.v);
+        
+        this.setValue(p.d);
+        this.oldValue = false;
+    }
+    ,onTriggerClick: function() {
+        if (this.disabled) { return false; }
+        if (this.oldValue) {
+            this.fireEvent('end',{
+                v: this.oldValue
+                ,d: this.oldDisplayValue
+            });
             return false;
         }
         
         var t = Ext.getCmp('modx-resource-tree');
         if (!t) return;
         
+        this.oldDisplayValue = this.getValue();
+        this.oldValue = Ext.getCmp('modx-resource-parent-hidden').getValue();
+        
         this.setValue(_('resource_parent_select_node'));
         
         t.expand();
-        t.removeListener('click',t._handleClick,t);
+        t.removeListener('click',t._handleClick);
         t.on('click',this.handleChangeParent,this);
         t.disableHref = true;
+        
+        Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
     }
         
     ,handleChangeParent: function(node,e) {
-        e.preventDefault();
-        e.stopEvent();
         
         var t = Ext.getCmp('modx-resource-tree');
         if (!t) return;
@@ -713,15 +742,13 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
             return;
         }
         
-        Ext.getCmp('modx-resource-parent-hidden').setValue(id);
-        this.setValue(node.text);
-        
-        t.removeListener('click',this.handleChangeParent,this);
-        t.on('click',t._handleClick,t);
-        
-        Ext.getCmp('modx-panel-resource').fireEvent('fieldChange');
-        t.disableHref = false;
-        return false;
+        this.fireEvent('end',{
+            v: id
+            ,d: node.text
+        })
+        e.preventDefault();
+        e.stopEvent();
+        return;
     }
 });
 Ext.reg('modx-field-parent-change',MODx.ChangeParentField);

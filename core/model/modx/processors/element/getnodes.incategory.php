@@ -70,7 +70,7 @@ foreach ($categories as $category) {
         'category' => $category->get('id'),
         'leaf' => false,
         'cls' => 'icon-category',
-        'href' => '',
+        'page' => '',
         'type' => $elementIdentifier,
         'menu' => array('items' => $categoryMenu),
     );
@@ -140,7 +140,7 @@ foreach ($elements as $element) {
         'leaf' => 1,
         'name' => $name,
         'cls' => 'icon-'.$elementIdentifier,
-        'href' => 'index.php?a='.$ar_actionmap[$elementIdentifier].'&id='.$element->get('id'),
+        'page' => 'index.php?a='.$ar_actionmap[$elementIdentifier].'&id='.$element->get('id'),
         'type' => $elementIdentifier,
         'classKey' => $elementClassKey,
         'menu' => array('items' => $menu),

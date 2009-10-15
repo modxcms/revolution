@@ -309,12 +309,14 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      */
 	,_handleClick: function (n,e) {
         e.stopEvent();
+        e.preventDefault();
         
-        if (this.disableHref) { return false; }
-        if (e.ctrlKey) { return false; }
-        if (n.attributes.href && n.attributes.href !== '') {
-            location.href = n.attributes.href;
+        if (this.disableHref) { return true; }
+        if (e.ctrlKey) { return true; }
+        if (n.attributes.page && n.attributes.page !== '') {
+            location.href = n.attributes.page;
         }
+        return true;
     }
     
     

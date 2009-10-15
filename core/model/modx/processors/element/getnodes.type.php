@@ -70,7 +70,7 @@ foreach ($categories as $category) {
         'category' => $category->get('id'),
         'leaf' => false,
         'cls' => 'icon-category',
-        'href' => '',
+        'page' => '',
         'type' => $g[1],
         'menu' => array(
             'items' => $categoryMenu,
@@ -155,7 +155,7 @@ foreach ($elements as $element) {
         'leaf' => true,
         'name' => $name,
         'cls' => 'icon-'.$g[1],
-        'href' => '?a='.$ar_actionmap[$g[1]].'&id='.$element->get('id'),
+        'page' => '?a='.$ar_actionmap[$g[1]].'&id='.$element->get('id'),
         'type' => $g[1],
         'classKey' => $elementClassKey,
         'qtip' => $element->get('description'),
