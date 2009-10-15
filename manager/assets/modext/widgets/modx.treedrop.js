@@ -51,7 +51,12 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                     if (cfg.iframe) {
                         MODx.insertForRTE(cfg.iframeEl,v,cfg.onInsert);
                     } else {
-                        MODx.insertAtCursor(ddTargetEl,v,cfg.onInsert);
+                        var el = Ext.get(ddTargetEl);
+                        if (el.dom.id == 'modx-symlink-content' || el.dom.id == 'modx-weblink-content') {
+                            MODx.insertAtCursor(ddTargetEl,data.node.attributes.pk,cfg.onInsert);
+                        } else {
+                            MODx.insertAtCursor(ddTargetEl,v,cfg.onInsert);
+                        }
                     }
                 }
                 return true;

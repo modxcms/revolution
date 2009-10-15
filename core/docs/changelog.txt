@@ -4,11 +4,13 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1230] Fixed issue where drag Resource to symlink/weblink content field would add tags as well
 - [#MODX-1273] Added OnLoadWebPageCache event invocation to modRequest->getResource().
 - [#MODX-1273] Fixed events in User update/create form
 - Enabled compression of manager JS scripts by changing the Setting "compress_js" to true.
+- Upgraded ExtJS to ExtJS 3.0.2
 - [#MODX-1270] OnManagerCreateGroup and OnWebCreateGroup events now fire
-- [#MODX-1237] Fixed warning in modParser with regards to unitialized variable
+- [#MODX-1237] Fixed warning in modParser with regards to uninitialized variable
 - [#MODX-979] Added password_generated_length (the length of the auto-generated password) and password_min_length (the minimum length for a password)
 - Cleaned up usergroup processors
 - Added sanity checks to usergroup processors
