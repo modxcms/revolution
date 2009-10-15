@@ -682,7 +682,7 @@ MODx.ChangeParentField = function(config) {
         ,formpanel: 'modx-panel-resource'
     });    
     MODx.ChangeParentField.superclass.constructor.call(this,config);
-    this.on('blur',this.loseFocus,this);
+    this.config = config;
     this.on('click',this.onTriggerClick,this);
     this.addEvents({ end: true });
     this.on('end',this.end,this);
@@ -703,6 +703,8 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         
         this.setValue(p.d);
         this.oldValue = false;
+        
+        Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
     }
     ,onTriggerClick: function() {
         if (this.disabled) { return false; }
@@ -726,8 +728,6 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         t.removeListener('click',t._handleClick);
         t.on('click',this.handleChangeParent,this);
         t.disableHref = true;
-        
-        Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
     }
         
     ,handleChangeParent: function(node,e) {
@@ -745,7 +745,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         this.fireEvent('end',{
             v: id
             ,d: node.text
-        })
+        });
         e.preventDefault();
         e.stopEvent();
         return;
