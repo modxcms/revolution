@@ -24,4 +24,4 @@ if ($category->remove() == false) {
 /* log manager action */
 $modx->logManagerAction('category_delete','modCategory',$category->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$category);

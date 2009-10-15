@@ -29,7 +29,7 @@ class modCategory extends xPDOSimpleObject {
             );
 
             foreach ($elementClasses as $classKey) {
-                $elements = $modx->getCollection($classKey,array('category' => $this->get('id')));
+                $elements = $this->xpdo->getCollection($classKey,array('category' => $this->get('id')));
                 foreach ($elements as $element) {
                     $element->set('category',0);
                     $element->save();

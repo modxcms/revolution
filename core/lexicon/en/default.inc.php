@@ -40,6 +40,7 @@ $_lang['cached'] = 'Cached';
 $_lang['cancel'] = 'Cancel';
 $_lang['categories'] = 'Categories';
 $_lang['category'] = 'Category';
+$_lang['category_confirm_delete'] = 'Are you sure you want to remove this category? All Elements within it will revert to having no category.';
 $_lang['chunk'] = 'Chunk';
 $_lang['chunks'] = 'Chunks';
 $_lang['class_key'] = 'Class Key';

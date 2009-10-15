@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-902] Fixed empty warning message for removing category
+- Fixed bug with removing categories
 - Fixed issue where couldn't drag a resource onto a resource with no children
 - [#MODX-1130] Fixed issue with parent triggerfield; also redid how tree hrefs load so that clicking on a node in the tree to load url can be disabled
 - [#MODX-1133] Fixed issues with hotkey behavior
