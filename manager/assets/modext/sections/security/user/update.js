@@ -17,6 +17,11 @@ MODx.page.UpdateUser = function(config) {
        }
         ,buttons: [{
             process: 'update', text: _('save'), method: 'remote'
+            ,keys: [{
+                key: 's'
+                ,alt: true
+                ,ctrl: true
+            }]
         },{
             process: 'delete', text: _('delete'), method: 'remote', confirm: _('user_confirm_remove')
         },{

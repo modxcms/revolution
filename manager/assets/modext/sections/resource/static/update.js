@@ -38,6 +38,11 @@ MODx.page.UpdateStatic = function(config) {
             ,javascript: config.which_editor != 'none' ? "cleanupRTE('"+config.which_editor+"');" : ';'
             ,text: _('save')
             ,method: 'remote'
+            ,keys: [{
+                key: 's'
+                ,alt: true
+                ,ctrl: true
+            }]
         }
         ,'-'
         ,{

@@ -25,6 +25,11 @@ MODx.page.CreateWebLink = function(config) {
                 class_key: 'modWebLink'
             }
             ,javascript: config.which_editor != 'none' ? "cleanupRTE('"+config.which_editor+"');" : ';'
+            ,keys: [{
+                key: 's'
+                ,alt: true
+                ,ctrl: true
+            }]
         },{
             process: 'cancel'
             ,text: _('cancel')

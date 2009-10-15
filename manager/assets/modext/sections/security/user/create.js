@@ -21,6 +21,11 @@ MODx.page.CreateUser = function(config) {
        }
         ,buttons: [{
             process: 'create', text: _('save'), method: 'remote'
+            ,keys: [{
+                key: 's'
+                ,alt: true
+                ,ctrl: true
+            }]
         },{
             process: 'cancel', text: _('cancel'), params: {a:MODx.action['security/user']}
         }]

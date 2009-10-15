@@ -64,6 +64,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 ,scope: this
                 ,disabled: el.checkDirty ? true : false
                 ,listeners: {}
+                ,id: id
             });
             if (el.button) {
                 MODx.toolbar.ActionButtons.superclass.add.call(this,el);
@@ -104,7 +105,10 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     Ext.applyIf(k,{
                         scope: this
                         ,stopEvent: true
-                        ,fn: function(e) { this.checkConfirm(b,e); }
+                        ,fn: function(e) {
+                            var b = Ext.getCmp(id);
+                            if (b) this.checkConfirm(b,e);
+                        }
                     });
                     map.addBinding(k);
                 }
