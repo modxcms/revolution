@@ -115,9 +115,10 @@ MODx.panel.Static = function(config) {
             ,value: ''
             ,listeners: {
                 'select':{fn:function(data) {
-                    if (data.url.substring(0,1) == '/') {
-                        Ext.getCmp('modx-static-content').setValue(data.url.substring(1));
-                    }   
+                    var str = data.url;
+                    str = str.replace(MODx.config.base_url,'');
+                    if (str.substring(0,1) == '/') str = str.substring(1);
+                    Ext.getCmp('modx-static-content').setValue(str);
                 },scope:this}
             }
             
