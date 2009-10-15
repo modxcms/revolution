@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1251] Fixed issue with server offset displaying incorrectly
 - [#MODX-896] Fixed issue with server_offset setting description
 - [#MODX-928] Fixed issue where parent resource wasnt refreshing properly
 - [#MODX-777] Made consistent the checkDirty behaviour of save buttons across manager
