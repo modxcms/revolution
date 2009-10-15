@@ -104,7 +104,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     Ext.applyIf(k,{
                         scope: this
                         ,stopEvent: true
-                        //,fn: function(e) { this.checkConfirm(b,e); }
+                        ,fn: function(e) { this.checkConfirm(b,e); }
                     });
                     map.addBinding(k);
                 }
