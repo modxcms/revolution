@@ -401,19 +401,25 @@ while ($item) {
                 $qtip = '<i>'.$item->description.'</i>';
             }
 
-            $items[] = array(
+            $hasChildren = $item->hasChildren() ? false : true;
+            $itemArray = array(
                 'text' => $item->pagetitle.' ('.$item->id.')',
                 'id' => $item->context_key . '_'.$item->id,
                 'pk' => $item->id,
-                'leaf' => $item->hasChildren() ? false : true,//$item->isfolder ? 0 : 1,
                 'cls' => $class,
                 'type' => 'modResource',
                 'qtip' => $qtip,
                 'preview_url' => $modx->makeUrl($item->get('id')),
                 'page' => empty($_REQUEST['nohref']) ? '?a='.($hasEditPerm ? $actions['resource/update'] : $actions['resource/data']).'&id='.$item->id : '',
+                'allowDrop' => true,
                 'menu' => array('items' => $menu),
             );
-            unset($qtip,$class,$menu);
+            if ($hasChildren) {
+                $itemArray['children'] = array();
+                $itemArray['expanded'] = true;
+            }
+            $items[] = $itemArray;
+            unset($qtip,$class,$menu,$itemArray,$hasChildren);
         }
     }
     $item = next($collection);
