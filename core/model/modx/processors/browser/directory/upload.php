@@ -9,9 +9,8 @@
  * @package modx
  * @subpackage processors.browser.directory
  */
-$modx->lexicon->load('file');
-
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('file');
 
 if (!isset($_POST['dir']) || $_POST['dir'] == '')
 	return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
@@ -36,5 +35,11 @@ foreach ($_FILES as $file) {
 		return $modx->error->failure($modx->lexicon('file_err_upload'));
 	}
 }
+
+/* invoke event */
+$modx->invokeEvent('OnFileManagerUpload',array(
+    'files' => &$_FILES,
+    'directory' => $directory,
+));
 
 return $modx->error->success();

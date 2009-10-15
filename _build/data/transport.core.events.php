@@ -41,20 +41,6 @@ $collection['6']->fromArray(array (
   'service' => 3,
   'groupname' => '',
 ), '', true, true);
-$collection['7']= $xpdo->newObject('modEvent');
-$collection['7']->fromArray(array (
-  'id' => 7,
-  'name' => 'OnWebSaveUser',
-  'service' => 3,
-  'groupname' => '',
-), '', true, true);
-$collection['8']= $xpdo->newObject('modEvent');
-$collection['8']->fromArray(array (
-  'id' => 8,
-  'name' => 'OnWebDeleteUser',
-  'service' => 3,
-  'groupname' => '',
-), '', true, true);
 $collection['9']= $xpdo->newObject('modEvent');
 $collection['9']->fromArray(array (
   'id' => 9,
@@ -440,48 +426,6 @@ $collection['63']->fromArray(array (
   'service' => 1,
   'groupname' => 'Users',
 ), '', true, true);
-$collection['64']= $xpdo->newObject('modEvent');
-$collection['64']->fromArray(array (
-  'id' => 64,
-  'name' => 'OnWUsrFormPrerender',
-  'service' => 1,
-  'groupname' => 'Web Users',
-), '', true, true);
-$collection['65']= $xpdo->newObject('modEvent');
-$collection['65']->fromArray(array (
-  'id' => 65,
-  'name' => 'OnWUsrFormRender',
-  'service' => 1,
-  'groupname' => 'Web Users',
-), '', true, true);
-$collection['66']= $xpdo->newObject('modEvent');
-$collection['66']->fromArray(array (
-  'id' => 66,
-  'name' => 'OnBeforeWUsrFormSave',
-  'service' => 1,
-  'groupname' => 'Web Users',
-), '', true, true);
-$collection['67']= $xpdo->newObject('modEvent');
-$collection['67']->fromArray(array (
-  'id' => 67,
-  'name' => 'OnWUsrFormSave',
-  'service' => 1,
-  'groupname' => 'Web Users',
-), '', true, true);
-$collection['68']= $xpdo->newObject('modEvent');
-$collection['68']->fromArray(array (
-  'id' => 68,
-  'name' => 'OnBeforeWUsrFormDelete',
-  'service' => 1,
-  'groupname' => 'Web Users',
-), '', true, true);
-$collection['69']= $xpdo->newObject('modEvent');
-$collection['69']->fromArray(array (
-  'id' => 69,
-  'name' => 'OnWUsrFormDelete',
-  'service' => 1,
-  'groupname' => 'Web Users',
-), '', true, true);
 $collection['70']= $xpdo->newObject('modEvent');
 $collection['70']->fromArray(array (
   'id' => 70,
@@ -528,34 +472,6 @@ $collection['82']= $xpdo->newObject('modEvent');
 $collection['82']->fromArray(array (
   'id' => 82,
   'name' => 'OnSiteSettingsRender',
-  'service' => 1,
-  'groupname' => 'System Settings',
-), '', true, true);
-$collection['83']= $xpdo->newObject('modEvent');
-$collection['83']->fromArray(array (
-  'id' => 83,
-  'name' => 'OnFriendlyURLSettingsRender',
-  'service' => 1,
-  'groupname' => 'System Settings',
-), '', true, true);
-$collection['84']= $xpdo->newObject('modEvent');
-$collection['84']->fromArray(array (
-  'id' => 84,
-  'name' => 'OnUserSettingsRender',
-  'service' => 1,
-  'groupname' => 'System Settings',
-), '', true, true);
-$collection['85']= $xpdo->newObject('modEvent');
-$collection['85']->fromArray(array (
-  'id' => 85,
-  'name' => 'OnInterfaceSettingsRender',
-  'service' => 1,
-  'groupname' => 'System Settings',
-), '', true, true);
-$collection['86']= $xpdo->newObject('modEvent');
-$collection['86']->fromArray(array (
-  'id' => 86,
-  'name' => 'OnMiscSettingsRender',
   'service' => 1,
   'groupname' => 'System Settings',
 ), '', true, true);
@@ -612,13 +528,6 @@ $collection['94']= $xpdo->newObject('modEvent');
 $collection['94']->fromArray(array (
   'id' => 94,
   'name' => 'OnWebPageComplete',
-  'service' => 5,
-  'groupname' => '',
-), '', true, true);
-$collection['95']= $xpdo->newObject('modEvent');
-$collection['95']->fromArray(array (
-  'id' => 95,
-  'name' => 'OnLogPageHit',
   'service' => 5,
   'groupname' => '',
 ), '', true, true);
@@ -726,4 +635,18 @@ $collection['110']->fromArray(array (
   'name' => 'OnPluginEventRemove',
   'service' => 1,
   'groupname' => 'modPluginEvent',
+), '', true, true);
+$collection['111']= $xpdo->newObject('modEvent');
+$collection['111']->fromArray(array (
+  'id' => 111,
+  'name' => 'OnDocGroupRemove',
+  'service' => 1,
+  'groupname' => 'modResourceGroup',
+), '', true, true);
+$collection['112']= $xpdo->newObject('modEvent');
+$collection['112']->fromArray(array (
+  'id' => 112,
+  'name' => 'OnBeforeDocGroupRemove',
+  'service' => 1,
+  'groupname' => 'modResourceGroup',
 ), '', true, true);

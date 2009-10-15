@@ -56,6 +56,10 @@ if (isset($_POST['settings']) && !empty($_POST['settings'])) {
     }
 }
 
+/* run event */
+$modx->invokeEvent('OnContextUpdate',array(
+    'context' => &$context,
+));
 
 /* log manager action */
 $modx->logManagerAction('context_update','modContext',$context->get('key'));

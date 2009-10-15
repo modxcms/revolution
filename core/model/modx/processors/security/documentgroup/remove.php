@@ -15,10 +15,18 @@ if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('resource_g
 $resourceGroup = $modx->getObject('modResourceGroup',$_POST['id']);
 if ($resourceGroup == null) return $modx->error->failure($modx->lexicon('resource_group_err_nf'));
 
+$modx->invokeEvent('OnBeforeDocGroupRemove',array(
+    'group' => &$resourceGroup,
+));
+
 /* remove resource group */
 if ($resourceGroup->remove() == false) {
     return $modx->error->failure($modx->lexicon('resource_group_err_remove'));
 }
+
+$modx->invokeEvent('OnDocGroupRemove',array(
+    'group' => &$resourceGroup,
+));
 
 /* log manager action */
 $modx->logManagerAction('delete_resource_group','modResourceGroup',$resourceGroup->get('id'));

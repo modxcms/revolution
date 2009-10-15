@@ -7,12 +7,14 @@
  * @package modx
  * @subpackage processors.resource
  */
+if (!$modx->hasPermission('purge_deleted')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
-if (!$modx->hasPermission('purge_deleted')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->invokeEvent('OnBeforeEmptyTrash');
 
 /* get resources */
 $resources = $modx->getCollection('modResource',array('deleted' => true));
+$count = count($resources);
 
 foreach ($resources as $resource) {
     $resource->groups = $resource->getMany('ResourceGroupResources');
@@ -40,6 +42,10 @@ foreach ($resources as $resource) {
 //      }
 //  }
 }
+
+$modx->invokeEvent('OnEmptyTrash',array(
+    'num_deleted' => $count,
+));
 
 /* empty cache */
 $cacheManager= $modx->getCacheManager();

@@ -26,6 +26,8 @@ MODx.panel.SystemSettings = function(config) {
                 html: '<p>'+_('settings_desc')+'</p>'
             },{
                 id: 'modx-system-settings-grid-ct'
+            },{
+                html: MODx.onSiteSettingsRender
             }]
         }]
     });

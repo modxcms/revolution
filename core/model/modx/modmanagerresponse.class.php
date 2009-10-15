@@ -13,6 +13,8 @@ require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
  * @package modx
  */
 class modManagerResponse extends modResponse {
+    var $action = array();
+
     /**#@+
      * Creates a modManagerResponse instance.
      *
@@ -55,13 +57,13 @@ class modManagerResponse extends modResponse {
 
         if ($this->modx->hasPermission('frames')) {
             if (isset($this->modx->actionMap[$action])) {
-                $act = $this->modx->actionMap[$action];
+                $this->action = $this->modx->actionMap[$action];
 
                 /* assign custom action topics to smarty, so can load custom topics for each page */
                 $this->modx->lexicon->load('action');
-                $topics = explode(',',$act['lang_topics']);
+                $topics = explode(',',$this->action['lang_topics']);
                 foreach ($topics as $topic) { $this->modx->lexicon->load($topic); }
-                $this->modx->smarty->assign('_lang_topics',$act['lang_topics']);
+                $this->modx->smarty->assign('_lang_topics',$this->action['lang_topics']);
                 $this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
                 $this->modx->smarty->assign('_ctx',$this->modx->context->get('key'));
 
@@ -70,40 +72,23 @@ class modManagerResponse extends modResponse {
 
                 $this->body = '';
 
-                /* find context path */
-                if (!isset($act['namespace']) || $act['namespace'] == 'core') {
-                    $f = $act['namespace_path'].'controllers/'.$act['controller'];
+                $f = $this->getNamespacePath();
+                $f = $this->getControllerFilename($f);
 
-                } else { /* if a custom 3rd party path */
-                     $f = $act['namespace_path'].$act['controller'];
-                }
+                if ($f) {
+                    $this->modx->invokeEvent('OnBeforeManagerPageInit',array(
+                        'action' => $this->action,
+                        'filename' => $f,
+                    ));
 
-                /* set context url and path */
-                $this->modx->config['namespace_path'] = $act['namespace_path'];
-
-                /* if action is a directory, load base index.php */
-                if (substr($f,strlen($f)-1,1) == '/') {
-                    $f .= 'index';
-                }
-                /* append .php */
-                $cbody = '';
-                if (file_exists($f.'.php')) {
-                    $f = $f.'.php';
                     $cbody = include $f;
-                /* for actions that don't have trailing / but reference index */
-                } elseif (file_exists($f.'/index.php')) {
-                    $f = $f.'/index.php';
-                    $cbody = include $f;
-                } else {
-                    $this->modx->log(MODX_LOG_LEVEL_FATAL,'Could not find action file at: '.$f);
                 }
-
 
                 /* reset path to core modx path for header/footer */
                 $this->modx->smarty->setTemplatePath($modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme',null,'default') . '/');
 
                 /* load header */
-                if ($act['haslayout']) {
+                if ($this->action['haslayout']) {
                     $this->body .= include $this->modx->getOption('manager_path') . 'controllers/header.php';
                 }
 
@@ -114,7 +99,7 @@ class modManagerResponse extends modResponse {
                 }
                 $this->body .= $cbody;
 
-                if ($act['haslayout']) {
+                if ($this->action['haslayout']) {
                     $this->body .= include_once $this->modx->getOption('manager_path').'controllers/footer.php';
                 }
 
@@ -138,6 +123,38 @@ class modManagerResponse extends modResponse {
         exit();
     }
 
+    function getNamespacePath() {
+        /* set context url and path */
+        $this->modx->config['namespace_path'] = $this->action['namespace_path'];
+
+        /* find context path */
+        if (!isset($this->action['namespace']) || $this->action['namespace'] == 'core') {
+            $f = $this->action['namespace_path'].'controllers/'.$this->action['controller'];
+
+        } else { /* if a custom 3rd party path */
+            $f = $this->action['namespace_path'].$this->action['controller'];
+        }
+
+        return $f;
+    }
+
+    function getControllerFilename($f) {
+        /* if action is a directory, load base index.php */
+        if (substr($f,strlen($f)-1,1) == '/') { $f .= 'index'; }
+        /* append .php */
+        $cbody = '';
+        if (file_exists($f.'.php')) {
+            $f = $f.'.php';
+        /* for actions that don't have trailing / but reference index */
+        } elseif (file_exists($f.'/index.php')) {
+            $f = $f.'/index.php';
+        } else {
+            $this->modx->log(MODX_LOG_LEVEL_FATAL,'Could not find action file at: '.$f);
+            $f = false;
+        }
+        return $f;
+    }
+
     function registerActionDomRules($action) {
         /* now do action dom rules */
         $userGroups = $this->modx->user->getUserGroups();
@@ -153,7 +170,6 @@ class modManagerResponse extends modResponse {
         $c->orCondition(array(
             'Access.principal IS NULL',
         ),null,2);
-        //$c->prepare(); echo $c->toSql(); die();
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
         foreach ($domRules as $rule) {

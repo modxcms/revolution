@@ -29,6 +29,11 @@ if ($context->remove() == false) {
 /* log manager action */
 $modx->logManagerAction('context_delete','modContext',$context->get('id'));
 
+/* invoke event */
+$modx->invokeEvent('OnContextDelete',array(
+    'context' => &$context,
+));
+
 /* clear cache */
 $cacheManager= $modx->getCacheManager();
 $cacheManager->clearCache();

@@ -7,20 +7,28 @@
  * @package modx
  * @subpackage processors.context
  */
+if (!$modx->hasPermission('edit_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('context');
 
-if (!$modx->hasPermission('edit_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
+if (empty($_POST['data'])) return $modx->error->failure();
 $_DATA = $modx->fromJSON($_POST['data']);
 
+/* get context */
+if (empty($_DATA['key'])) return $modx->error->failure($modx->lexicon('context_err_ns'));
 $context= $modx->getObject('modContext', $_DATA['key']);
 if ($context == null) return $modx->error->failure($modx->lexicon('context_err_nf'));
 
+/* set and save context */
 $context->fromArray($_DATA);
-
 if ($context->save() == false) {
     return $modx->error->failure($modx->lexicon('context_err_save'));
 }
+
+/* run event */
+$modx->invokeEvent('OnContextUpdate',array(
+    'context' => &$context,
+));
+
 
 /* log manager action */
 $modx->logManagerAction('context_update','modContext',$context->get('id'));
