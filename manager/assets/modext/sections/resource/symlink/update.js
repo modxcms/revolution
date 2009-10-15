@@ -38,6 +38,7 @@ MODx.page.UpdateSymLink = function(config) {
             ,javascript: config.which_editor != 'none' ? "cleanupRTE('"+config.which_editor+"');" : ';'
             ,text: _('save')
             ,method: 'remote'
+            ,checkDirty: true
             ,keys: [{
                 key: 's'
                 ,alt: true

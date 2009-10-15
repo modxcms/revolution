@@ -19,6 +19,7 @@ MODx.page.UpdateChunk = function(config) {
             process: 'update'
             ,text: _('save')
             ,method: 'remote'
+            ,checkDirty: true
             ,keys: [{
                 key: 's'
                 ,alt: true

@@ -127,6 +127,7 @@ MODx.panel.WebLink = function(config) {
             ,editable: false
             ,id: 'modx-weblink-parent'
             ,value: config.record.parent || 0
+            ,formpanel: 'modx-panel-weblink'
         },{
             xtype: 'hidden'
             ,name: 'parent'

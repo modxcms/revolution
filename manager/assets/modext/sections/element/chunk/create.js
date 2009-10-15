@@ -19,6 +19,7 @@ MODx.page.CreateChunk = function(config) {
             process: 'create'
             ,text: _('save')
             ,method: 'remote'
+            ,checkDirty: true
             ,keys: [{
                 key: 's'
                 ,alt: true

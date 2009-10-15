@@ -24,6 +24,7 @@ MODx.page.CreateWebLink = function(config) {
             ,params: {
                 class_key: 'modWebLink'
             }
+            ,checkDirty: true
             ,javascript: config.which_editor != 'none' ? "cleanupRTE('"+config.which_editor+"');" : ';'
             ,keys: [{
                 key: 's'

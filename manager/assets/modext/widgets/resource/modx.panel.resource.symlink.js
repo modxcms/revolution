@@ -124,6 +124,7 @@ MODx.panel.SymLink = function(config) {
             ,editable: false
             ,id: 'modx-symlink-parent'
             ,value: config.record.parent || 0
+            ,formpanel: 'modx-panel-symlink'
         },{
             xtype: 'hidden'
             ,name: 'parent'

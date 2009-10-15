@@ -17,6 +17,7 @@ MODx.page.UpdateUser = function(config) {
        }
         ,buttons: [{
             process: 'update', text: _('save'), method: 'remote'
+            ,checkDirty: true
             ,keys: [{
                 key: 's'
                 ,alt: true
