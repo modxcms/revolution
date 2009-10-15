@@ -214,6 +214,7 @@ class modRequest {
             } else {
                 return null;
             }
+            $this->modx->invokeEvent('OnLoadWebPageCache');
         }
         return $resource;
     }
