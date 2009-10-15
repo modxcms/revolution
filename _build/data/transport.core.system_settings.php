@@ -878,3 +878,12 @@ $collection['93']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$collection['94']= $xpdo->newObject('modSystemSetting');
+$collection['94']->fromArray(array (
+  'key' => 'automatic_alias',
+  'value' => '0',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
