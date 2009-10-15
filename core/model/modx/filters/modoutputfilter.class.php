@@ -115,11 +115,12 @@ class modOutputFilter {
                     case 'isinrole':
                     case 'memberof':
                     case 'mo': /* Is Member Of  (same as inrole but this one can be stringed as a conditional) */
-                        /* @todo: fix or possibly remove */
-                        if ($output == "&_PHX_INTERNAL_&")
-                            $output= $this->user["id"];
-                        $grps= (strlen($m_val) > 0) ? explode(",", $m_val) : array ();
-                        $condition[]= intval($this->isMemberOfWebGroupByUserId($output, $grps));
+                        if (empty($output) || $output == "&_PHX_INTERNAL_&") {
+                            $output= $this->modx->user->get('id');
+                        }
+                        $grps= (strlen($m_val) > 0) ? explode(',', $m_val) : array ();
+                        $user = $this->modx->getObject('modUser',$output);
+                        $condition[]= $user->isMember($grps);
                         break;
                     case 'or':
                         $condition[]= "||";
