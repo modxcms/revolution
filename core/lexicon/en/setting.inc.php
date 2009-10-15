@@ -234,7 +234,7 @@ $_lang['setting_search_default_desc'] = 'Select \'Yes\' to make all new resource
 $_lang['setting_search_default_err'] = 'Please specify whether or not you want documents to be searchable by default.';
 
 $_lang['setting_server_offset_time'] = 'Server offset time';
-$_lang['setting_server_offset_time_desc'] = 'Select the number of hours time difference between where you are and where the server is. Current time on server is <strong>[%s]</strong>, current time on server using the currently saved offset is <strong>[%s]</strong>.';
+$_lang['setting_server_offset_time_desc'] = 'Select the number of hours time difference between where you are and where the server is.';
 
 $_lang['setting_server_protocol'] = 'Server type';
 $_lang['setting_server_protocol_desc'] = 'If your site is on a https connection, please specify so here.';
