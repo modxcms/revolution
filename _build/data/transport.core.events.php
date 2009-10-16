@@ -671,3 +671,17 @@ $collection['115']->fromArray(array (
   'service' => 1,
   'groupname' => 'modUser',
 ), '', true, true);
+$collection['116']= $xpdo->newObject('modEvent');
+$collection['116']->fromArray(array (
+  'id' => 116,
+  'name' => 'OnBeforeUserActivate',
+  'service' => 1,
+  'groupname' => 'modUser',
+), '', true, true);
+$collection['117']= $xpdo->newObject('modEvent');
+$collection['117']->fromArray(array (
+  'id' => 117,
+  'name' => 'OnUserActivate',
+  'service' => 1,
+  'groupname' => 'modUser',
+), '', true, true);
