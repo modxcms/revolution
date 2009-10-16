@@ -14,10 +14,9 @@ $modx->lexicon->load('lexicon');
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* verify file exists */
-if (!isset($_FILES['lexicon'])) return $modx->error->failure($modx->lexicon('lexicon_import_err_ns'));
+if (empty($_FILES['lexicon'])) return $modx->error->failure($modx->lexicon('lexicon_import_err_ns'));
 $_FILE = $_FILES['lexicon'];
 if ($_FILE['error'] != 0) return $modx->error->failure($modx->lexicon('lexicon_import_err_upload'));
-
 
 /* get namespace */
 if (empty($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
@@ -41,7 +40,7 @@ if ($topic == null) {
 }
 
 /* get language */
-if (!isset($_POST['language'])) return $modx->error->failure($modx->lexicon('language_err_nf'));
+if (empty($_POST['language'])) return $modx->error->failure($modx->lexicon('language_err_nf'));
 $language = $modx->getObject('modLexiconLanguage',$_POST['language']);
 /* if new language, create */
 if ($language == null) {
@@ -50,8 +49,11 @@ if ($language == null) {
     $language->save();
 }
 
+ob_start();
 $_lang = array();
 @include $_FILE['tmp_name'];
+ob_end_clean();
+
 
 foreach ($_lang as $key => $str) {
 	$entry = $modx->getObject('modLexiconEntry',array(

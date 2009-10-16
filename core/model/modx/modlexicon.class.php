@@ -143,9 +143,9 @@ class modLexicon {
             /* if no namespace, search all lexicons */
             if ($nspos === false) {
                 foreach ($this->_paths as $namespace => $path) {
-                    $_lang = $this->loadCache($namespace,$topic);
-                    if (is_array($_lang)) {
-                        $this->_lexicon = is_array($this->_lexicon) ? array_merge($this->_lexicon,$_lang) : $_lang;
+                    $entries = $this->loadCache($namespace,$topic);
+                    if (is_array($entries)) {
+                        $this->_lexicon = is_array($this->_lexicon) ? array_merge($this->_lexicon,$entries) : $entries;
                     }
                 }
             } else { /* if namespace, search specified lexicon */
@@ -160,9 +160,9 @@ class modLexicon {
                     $topic_parsed = $params[2];
                 }
 
-                $_lang = $this->loadCache($namespace,$topic_parsed,$language);
-                if (is_array($_lang)) {
-                    $this->_lexicon = is_array($this->_lexicon) ? array_merge($this->_lexicon, $_lang) : $_lang;
+                $entries = $this->loadCache($namespace,$topic_parsed,$language);
+                if (is_array($entries)) {
+                    $this->_lexicon = is_array($this->_lexicon) ? array_merge($this->_lexicon, $entries) : $entries;
                 }
             }
         }

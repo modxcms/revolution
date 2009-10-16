@@ -10,17 +10,17 @@ define('MODX_REQP',false);
 require_once dirname(__FILE__).'/index.php';
 ob_clean();
 
-if (isset($_REQUEST['topic']) && $_REQUEST['topic'] != '') {
+if (!empty($_REQUEST['topic'])) {
     $topics = explode(',',$_REQUEST['topic']);
     foreach($topics as $topic) $modx->lexicon->load($topic);
 }
 
-$_lang = $modx->lexicon->fetch();
+$entries = $modx->lexicon->fetch();
 echo '
 var _ = function(s,v) {
     var _lang = {';
     $s = '';
-    while (list($k,$v) = each ($_lang)) {
+    while (list($k,$v) = each ($entries)) {
         $s .= "'$k': ".'"'.esc($v).'",';
     }
     $s = trim($s,',');

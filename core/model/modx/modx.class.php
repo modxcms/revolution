@@ -2492,7 +2492,6 @@ class modX extends xPDO {
      * @access protected
      */
     function _initCulture() {
-        global $_lang;
         $this->getService('lexicon','modLexicon');
         $this->invokeEvent('OnInitCulture');
     }
