@@ -122,3 +122,10 @@ foreach ($menus as $menu) {
     $menu->save();
 }
 unset($c,$menus,$menu);
+
+/* add active field to modUser */
+$class = 'modUser';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['add_column'],'active',$table);
+$sql = "ALTER TABLE {$table} ADD COLUMN `active` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER `class_key`";
+$this->processResults($class,$description,$sql);

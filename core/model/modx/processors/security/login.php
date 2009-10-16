@@ -42,6 +42,11 @@ if (is_array($rt)) {
 }
 
 $user= $modx->getObjectGraph('modUser', '{"Profile":{},"UserSettings":{}}', array ('modUser.username' => $username));
+
+if (!$user->get('active')) {
+    return $modx->error->failure($modx->lexicon('login_user_inactive'));
+}
+
 if (!$user) {
     $ru = $modx->invokeEvent("OnUserNotFound", array(
         'user' => &$user,

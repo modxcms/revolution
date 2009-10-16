@@ -21,3 +21,4 @@ $_lang['login_password'] = 'Password: ';
 $_lang['login_title'] = 'MODx CMF Manager Login';
 $_lang['login_username'] = 'Username: ';
 $_lang['login_username_password_incorrect'] = 'The username or password you entered is incorrect.  Please check the username, re-type the password, and try again.';
+$_lang['login_user_inactive'] = 'Your user account has been disabled. Please contact your system administrator to enable the account.';

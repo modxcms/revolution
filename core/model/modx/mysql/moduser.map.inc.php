@@ -12,6 +12,7 @@ $xpdo_meta_map['modUser']= array (
     'password' => '',
     'cachepwd' => '',
     'class_key' => 'modUser',
+    'active' => 1,
   ),
   'fieldMeta' => 
   array (
@@ -48,6 +49,15 @@ $xpdo_meta_map['modUser']= array (
       'null' => false,
       'default' => 'modUser',
       'index' => 'index',
+    ),
+    'active' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'boolean',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 1,
     ),
   ),
   'aggregates' => 

@@ -19,6 +19,7 @@ if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_fou
 
 /* validate post */
 $_POST['blocked'] = empty($_POST['blocked']) ? 0 : 1;
+$_POST['active'] = empty($_POST['active']) ? 0 : 1;
 
 $newPassword= false;
 include_once $modx->getOption('processors_path').'security/user/_validation.php';
@@ -49,6 +50,8 @@ foreach ($groups as $group) {
     $ugms[] = $ugm;
 }
 $user->addMany($ugms,'UserGroupMembers');
+
+$user->fromArray($_POST);
 
 /* update user */
 if ($user->save() == false) {

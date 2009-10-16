@@ -7,23 +7,25 @@
  * @package modx
  * @subpackage processors.security.user
  */
-$modx->lexicon->load('user');
-
 if (!$modx->hasPermission(array('access_permissions' => true, 'save_user' => true))) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
+$modx->lexicon->load('user');
+
 
 $_DATA = $modx->fromJSON($_POST['data']);
 
 $user = $modx->getObject('modUser',$_DATA['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_not_found'));
 
+$user->fromArray($_DATA);
+
 $up = $user->getOne('Profile');
 if ($up == null) return $modx->error->failure($modx->lexicon('user_profile_err_not_found'));
 
 $up->fromArray($_DATA);
 
-if ($up->save() == false) {
+if ($user->save() == false || $up->save() == false) {
     return $modx->error->failure($modx->lexicon('user_err_save'));
 }
 

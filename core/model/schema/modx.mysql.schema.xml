@@ -587,6 +587,7 @@
         <field key="password" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="cachepwd" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="modUser" index="index" />
+        <field key="active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
         
         <aggregate alias="CreatedResources" class="modResource" local="id" foreign="createdby" cardinality="many" owner="local" />
         <aggregate alias="EditedResources" class="modResource" local="id" foreign="editedby" cardinality="many" owner="local" />

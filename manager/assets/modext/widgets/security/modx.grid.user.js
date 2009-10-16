@@ -47,10 +47,42 @@ MODx.grid.User = function(config) {
 	Ext.applyIf(config,{
 		url: MODx.config.connectors_url+'security/user.php'
 		,fields: ['id','username','fullname','email'
-            ,'gender','blocked','role','menu']
-        ,columns: this.getColumns()
+            ,'gender','blocked','role','active','menu']
         ,paging: true
 		,autosave: true
+        ,columns: [{
+            header: _('id')
+            ,dataIndex: 'id'
+            ,width: 50
+            ,sortable: false
+        },{
+            header: _('name')
+            ,dataIndex: 'username'
+            ,width: 150
+            ,sortable: true
+        },{
+            header: _('user_full_name')
+            ,dataIndex: 'fullname'
+            ,width: 180
+            ,sortable: true
+            ,editor: { xtype: 'textfield' }
+        },{
+            header: _('email')
+            ,dataIndex: 'email'
+            ,width: 180
+            ,sortable: true
+            ,editor: { xtype: 'textfield' }
+        },{
+            header: _('active')
+            ,dataIndex: 'active'
+            ,width: 80
+            ,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
+        },{
+            header: _('user_block')
+            ,dataIndex: 'blocked'
+            ,width: 80
+            ,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
+        }]
 		,tbar: [{
             text: _('user_new')
             ,handler: this.createUser
@@ -73,43 +105,7 @@ MODx.grid.User = function(config) {
 	MODx.grid.User.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.User,MODx.grid.Grid,{
-	getColumns: function() {		
-		var gs = new Ext.data.SimpleStore({
-			fields: ['text','value']
-			,data: [['-',0],[_('male'),1],[_('female'),2]]
-		});
-		
-		return [{
-			header: _('id')
-            ,dataIndex: 'id'
-			,width: 50
-            ,sortable: false
-		},{
-			header: _('name')
-            ,dataIndex: 'username'
-			,width: 150
-            ,sortable: true
-		},{
-			header: _('user_full_name')
-            ,dataIndex: 'fullname'
-			,width: 180
-            ,sortable: true
-			,editor: { xtype: 'textfield' }
-		},{
-			header: _('email')
-            ,dataIndex: 'email'
-			,width: 180
-            ,sortable: true
-			,editor: { xtype: 'textfield' }
-		},{
-			header: _('user_block')
-            ,dataIndex: 'blocked'
-			,width: 80
-			,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
-        }];
-	}
-    
-    ,createUser: function() {
+	createUser: function() {
         location.href = 'index.php?a='+MODx.action['security/user/create'];
     }
     
