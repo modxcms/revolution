@@ -12,6 +12,7 @@ MODx.page.UpdateResource = function(config) {
         url: MODx.config.connectors_url+'resource/index.php'
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
+        ,id: 'modx-page-update-resource'
         ,actions: {
             'new': MODx.action['resource/create']
             ,edit: MODx.action['resource/update']
@@ -22,7 +23,7 @@ MODx.page.UpdateResource = function(config) {
         ,components: [{
             xtype: 'modx-panel-resource'
             ,renderTo: 'modx-panel-resource-div'
-            ,resource: config.id
+            ,resource: config.resource
             ,record: {
                 class_key: config.class_key
                 ,context_key: config.context_key
@@ -65,7 +66,7 @@ MODx.page.UpdateResource = function(config) {
     });
     MODx.page.UpdateResource.superclass.constructor.call(this,config);
     Ext.EventManager.on(window, 'beforeunload',function(e) {
-        MODx.releaseLock(this.config.id);
+        MODx.releaseLock(this.config.resource);
         MODx.sleep(400);
         e.browserEvent.returnValue = '';
     }, this);
@@ -82,7 +83,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,url: MODx.config.connectors_url+'resource/index.php'
             ,params: {
                 action: 'duplicate'
-                ,id: this.config.id
+                ,id: this.config.resource
             }
             ,listeners: {
                 success: {fn:function(r) {

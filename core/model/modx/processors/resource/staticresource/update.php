@@ -308,5 +308,7 @@ if ($_POST['syncsite'] == 1) {
 if (!isset($_POST['modx-ab-stay']) || $_POST['modx-ab-stay'] !== 'stay') {
     $resource->removeLock();
 }
+$resourceArray = $resource->get(array('id','alias'));
+$resourceArray['preview_url'] = $modx->makeUrl($resource->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$resourceArray);

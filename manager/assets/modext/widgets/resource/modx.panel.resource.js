@@ -450,6 +450,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         var n = t.getNodeById(v);
         n.leaf = false;
         t.refreshNode(v,true);
+        Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
     }
     
     ,templateWarning: function() {

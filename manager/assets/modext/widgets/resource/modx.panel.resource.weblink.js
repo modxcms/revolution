@@ -375,8 +375,12 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
         Ext.getCmp('modx-grid-resource-security').getStore().commitChanges();
         var t = Ext.getCmp('modx-resource-tree');
         var ctx = Ext.getCmp('modx-weblink-context-key').getValue();
-        var pa = Ext.getCmp('modx-weblink-parent').getValue();
-        t.refreshNode(ctx+'_'+pa,true);
+        var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
+        var v = ctx+'_'+pa;
+        var n = t.getNodeById(v);
+        n.leaf = false;
+        t.refreshNode(v,true);
+        Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
     }
     
     ,templateWarning: function() {

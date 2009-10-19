@@ -100,7 +100,7 @@ MODx.config.publish_document = "'.$publish_document.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-weblink-update"
-        ,id: "'.$resource->get('id').'"
+        ,resource: "'.$resource->get('id').'"
         ,template: "'.$resource->get('template').'"
         ,content_type: "'.$resource->get('content_type').'"
         ,class_key: "'.$resource->get('class_key').'"

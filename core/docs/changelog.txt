@@ -4,8 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1294] Fixed possible obscure problem when using Preview after changing the alias in a Resource
 - [#MODX-1278] Fixed issues with checkbox TVs and default values, fixed the 'set to default' button for complex inputs
-- [#MODX-1280] Fixes to the user create processor
+- [#MODX-1280] Fixed issues with the user create processor
 - Added OnBeforeUserActivate, OnUserActivate events
 - Added 'active' boolean field to modUser. Defaults to 1.
 - Added OnCreateUser, OnDeleteUser, OnUpdateUser events

@@ -11,6 +11,7 @@ MODx.page.CreateSymLink = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
         ,formpanel: 'modx-panel-symlink'
+        ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,actions: {
             'new': MODx.action['resource/symlink/create']

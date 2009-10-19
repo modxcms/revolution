@@ -11,6 +11,7 @@ MODx.page.CreateStatic = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
         ,formpanel: 'modx-panel-static'
+        ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,actions: {
             'new': MODx.action['resource/staticresource/create']

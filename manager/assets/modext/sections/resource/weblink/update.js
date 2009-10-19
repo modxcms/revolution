@@ -13,6 +13,7 @@ MODx.page.UpdateWebLink = function(config) {
         url: MODx.config.connectors_url+'resource/index.php'
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-weblink'
+        ,id: 'modx-page-update-resource'
         ,actions: {
             'new': MODx.action['resource/create']
             ,edit: MODx.action['resource/update']
@@ -22,7 +23,7 @@ MODx.page.UpdateWebLink = function(config) {
         ,components: [{
             xtype: 'modx-panel-weblink'
             ,renderTo: 'modx-panel-weblink-div'
-            ,resource: config.id
+            ,resource: config.resource
             ,record: {
                 class_key: config.class_key
                 ,context_key: config.context_key
@@ -79,7 +80,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
             ,url: MODx.config.connectors_url+'resource/index.php'
             ,params: {
                 action: 'duplicate'
-                ,id: this.config.id
+                ,id: this.config.resource
             }
             ,listeners: {
                 success: {fn:function(r) {
@@ -97,7 +98,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
                 ,url: MODx.config.connectors_url+'resource/locks.php'
                 ,params: {
                     action: 'release'
-                    ,id: this.config.id
+                    ,id: this.config.resource
                 }
                 ,listeners: {
                     success: {fn:function(r) {
@@ -110,7 +111,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
                 url: MODx.config.connectors_url+'resource/locks.php'
                 ,params: {
                     action: 'release'
-                    ,id: this.config.id
+                    ,id: this.config.resource
                 }
                 ,listeners: {
                     success: {fn:function(r) {

@@ -372,8 +372,12 @@ Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
         Ext.getCmp('modx-grid-resource-security').getStore().commitChanges();
         var t = Ext.getCmp('modx-resource-tree');
         var ctx = Ext.getCmp('modx-symlink-context-key').getValue();
-        var pa = Ext.getCmp('modx-symlink-parent').getValue();
-        t.refreshNode(ctx+'_'+pa,true);
+        var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
+        var v = ctx+'_'+pa;
+        var n = t.getNodeById(v);
+        n.leaf = false;
+        t.refreshNode(v,true);
+        Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
     }
     
     ,templateWarning: function() {
