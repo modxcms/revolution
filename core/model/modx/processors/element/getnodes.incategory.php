@@ -68,6 +68,7 @@ foreach ($categories as $category) {
         'id' => 'n_'.$g[0].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
         'pk' => $category->get('id'),
         'category' => $category->get('id'),
+        'data' => $category->toArray(),
         'leaf' => false,
         'cls' => 'icon-category',
         'page' => '',
