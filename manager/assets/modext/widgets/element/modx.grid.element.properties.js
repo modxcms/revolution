@@ -219,23 +219,27 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
     }
     
     ,toggleButtons: function(v) {
-        Ext.getCmp('modx-btn-property-create').setDisabled(v);
-        Ext.getCmp('modx-btn-property-revert-all').setDisabled(v);
+        var btn = Ext.getCmp('modx-btn-property-create');
+        if (btn) {
+            Ext.getCmp('modx-btn-property-create').setDisabled(v);
+            Ext.getCmp('modx-btn-property-revert-all').setDisabled(v);
+        }
     }
     
     ,changePropertySet: function(cb) {
         var ps = cb.getValue();
+        var lockbtn = Ext.getCmp('modx-btn-propset-lock');
         if (ps == 0 || ps == _('default')) {
             if (MODx.perm.unlock_element_properties) {
-                Ext.getCmp('modx-btn-propset-lock').setDisabled(false);
+                if (lockbtn) { lockbtn.setDisabled(false); }
             }
-            if (this.lockMask.locked) {
+            if (this.lockMask && this.lockMask.locked) {
                 this.lockMask.show();
                 this.toggleButtons(true);
             }
         } else {
-            Ext.getCmp('modx-btn-propset-lock').setDisabled(true);
-            this.lockMask.hide();
+            if (lockbtn) { lockbtn.setDisabled(true); }
+            if (this.lockMask) this.lockMask.hide();
             this.toggleButtons(false);
         }
         
