@@ -12,7 +12,6 @@ $tstart = $mtime;
 unset($mtime);
 /* get rid of time limit */
 set_time_limit(0);
-echo '<pre>';
 
 error_reporting(E_ALL); ini_set('display_errors',true);
 
@@ -63,7 +62,7 @@ $xpdo = new xPDO(XPDO_DSN, XPDO_DB_USER, XPDO_DB_PASS,
 );
 $cacheManager= $xpdo->getCacheManager();
 $xpdo->setLogLevel(XPDO_LOG_LEVEL_INFO);
-$xpdo->setLogTarget('ECHO');
+$xpdo->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
 
 $xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
 $packageDirectory = MODX_CORE_PATH . 'packages/';
