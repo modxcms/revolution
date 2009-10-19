@@ -14,16 +14,11 @@ $modx->lexicon->load('user');
 $user = $modx->newObject('modUser');
 
 /* validate post */
-$_POST['blocked'] = empty($_POST['blocked']) ? 0 : 1;
-
-if (empty($_POST['newusername'])) $modx->error->addField('new_user_name',$modx->lexicon('user_err_not_specified_username'));
+$blocked = empty($_POST['blocked']) ? false : true;
 
 $newPassword= '';
 $s = include_once $modx->getOption('processors_path').'security/user/_validation.php';
 
-if ($_POST['passwordnotifymethod'] == 'e') {
-	sendMailMessage($_POST['email'], $_POST['newusername'],$newPassword,$_POST['fullname']);
-}
 
 /* invoke OnBeforeUserFormSave event */
 $modx->invokeEvent('OnBeforeUserFormSave',array(
@@ -51,12 +46,19 @@ if ($user->save() == false) {
 $user->profile = $modx->newObject('modUserProfile');
 $user->profile->fromArray($_POST);
 $user->profile->set('internalKey',$user->get('id'));
-$user->profile->set('blocked', isset($_POST['blocked']) && $_POST['blocked'] ? true : false);
+$user->profile->set('blocked',$blocked);
 $user->profile->set('photo','');
 
 if ($user->profile->save() == false) {
+    $user->remove();
 	return $modx->error->failure($modx->lexicon('user_err_save_attributes'));
 }
+
+/* send email */
+if ($_POST['passwordnotifymethod'] == 'e') {
+    sendMailMessage($_POST['email'], $_POST['username'],$newPassword,$_POST['fullname']);
+}
+
 
 /* invoke OnManagerSaveUser event */
 $modx->invokeEvent('OnManagerSaveUser',array(
@@ -130,7 +132,9 @@ function sendMailMessage($email, $uid, $pwd, $ufn) {
 $modx->logManagerAction('user_create','modUser',$user->get('id'));
 
 if ($_POST['passwordnotifymethod'] == 's') {
-	return $modx->error->success($modx->lexicon('user_created_password_message').$newPassword,$user);
+	return $modx->error->success($modx->lexicon('user_created_password_message',array(
+        'password' => $newPassword,
+    )),$user);
 } else {
 	return $modx->error->success('',$user);
 }

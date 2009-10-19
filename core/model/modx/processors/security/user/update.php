@@ -59,23 +59,7 @@ if ($user->save() == false) {
 }
 
 $user->profile = $user->getOne('Profile');
-
-$user->profile->set('fullname',$_POST['fullname']);
-$user->profile->set('role',$_POST['role']);
-$user->profile->set('email',$_POST['email']);
-$user->profile->set('phone',$_POST['phone']);
-$user->profile->set('mobilephone',$_POST['mobilephone']);
-$user->profile->set('fax',$_POST['fax']);
-$user->profile->set('zip',$_POST['zip']);
-$user->profile->set('state',$_POST['state']);
-$user->profile->set('country',$_POST['country']);
-$user->profile->set('gender',$_POST['gender']);
-$user->profile->set('dob',$_POST['dob']);
-$user->profile->set('photo',$_POST['photo']);
-$user->profile->set('comment',$_POST['comment']);
-$user->profile->set('blocked',$_POST['blocked']);
-$user->profile->set('blockeduntil',$_POST['blockeduntil']);
-$user->profile->set('blockedafter',$_POST['blockedafter']);
+$user->profile->fromArray($_POST);
 
 if ($user->profile->save() == false) {
 	return $modx->error->failure($modx->lexicon('user_profile_err_save'));
@@ -156,7 +140,9 @@ function sendMailMessage($email, $uid, $pwd, $ufn) {
 $modx->logManagerAction('user_update','modUser',$user->get('id'));
 
 if ($newPassword && $_POST['passwordnotifymethod'] == 's') {
-	return $modx->error->success($modx->lexicon('user_updated_password_message').$newPassword);
+	return $modx->error->success($modx->lexicon('user_updated_password_message',array(
+        'password' => $newPassword,
+    )),$user);
 } else {
 	return $modx->error->success('',$user);
 }

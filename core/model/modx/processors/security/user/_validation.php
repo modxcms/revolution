@@ -5,17 +5,19 @@
  */
 /* BEGIN VALIDATION */
 
-/* new username */
-if (isset($_POST['username']) && $_POST['username'] != '' && $_POST['username'] != $user->get('username')) {
-	$user_name = $modx->getObject('modUser',array('username' => $_POST['newusername']));
-	if ($user_name != null) {
-		$modx->error->addField('new_user_name',$modx->lexicon('user_err_already_exists'));
-	}
+/* username */
+if (empty($_POST['username'])) {
+    $modx->error->addField('username',$modx->lexicon('user_err_not_specified_username'));
+
+} else if (!empty($_POST['username']) && $_POST['username'] != $user->get('username')) {
+	$alreadyExists = $modx->getObject('modUser',array('username' => $_POST['newusername']));
+	if ($alreadyExists) $modx->error->addField('new_user_name',$modx->lexicon('user_err_already_exists'));
 	$user->set('username',$_POST['username']);
 }
 
+
 /* password */
-if (isset($_POST['newpassword']) && $_POST['newpassword'] != 'false' || $_POST['id'] == 0) {
+if (isset($_POST['newpassword']) && $_POST['newpassword'] != 'false' || empty($_POST['id'])) {
 	if (!isset($_POST['passwordnotifymethod'])) {
 		$modx->error->addField('password_notify_method',$modx->lexicon('user_err_not_specified_notification_method'));
 	}
@@ -25,7 +27,7 @@ if (isset($_POST['newpassword']) && $_POST['newpassword'] != 'false' || $_POST['
 		$user->set('password', $user->encode($autoPassword));
 		$newPassword= $autoPassword;
 	} else {
-		if ($_POST['specifiedpassword'] == '') {
+		if (empty($_POST['specifiedpassword'])) {
 			$modx->error->addField('password',$modx->lexicon('user_err_not_specified_password'));
 		} elseif ($_POST['specifiedpassword'] != $_POST['confirmpassword']) {
 			$modx->error->addField('password',$modx->lexicon('user_err_password_no_match'));
@@ -39,19 +41,18 @@ if (isset($_POST['newpassword']) && $_POST['newpassword'] != 'false' || $_POST['
 }
 
 /* email */
-if (!isset($_POST['email']) || $_POST['email'] == '')
-	$modx->error->addField('email',$modx->lexicon('user_err_not_specified_email'));
+if (empty($_POST['email'])) $modx->error->addField('email',$modx->lexicon('user_err_not_specified_email'));
 
 /* check if the email address already exists */
-$user_email = $modx->getObject('modUserProfile',array('email' => $_POST['email']));
-if ($user_email != null) {
+$emailExists = $modx->getObject('modUserProfile',array('email' => $_POST['email']));
+if ($emailExists) {
 	if ($user_email->get('internalKey') != $_POST['id']) {
 		$modx->error->addField('email',$modx->lexicon('user_err_already_exists_email'));
     }
 }
 
 /* phone number */
-if (isset($_POST['phone']) && $_POST['phone'] != '') {
+if (!empty($_POST['phone'])) {
 	$_POST['phone'] = str_replace(' ','',$_POST['phone']);
 	$_POST['phone'] = str_replace('-','',$_POST['phone']);
 	$_POST['phone'] = str_replace('(','',$_POST['phone']);
@@ -64,7 +65,7 @@ if (isset($_POST['phone']) && $_POST['phone'] != '') {
 }
 
 /* mobilephone number */
-if (isset($_POST['mobilephone']) && $_POST['mobilephone'] != '') {
+if (!empty($_POST['mobilephone'])) {
 	$_POST['mobilephone'] = str_replace(' ','',$_POST['mobilephone']);
 	$_POST['mobilephone'] = str_replace('-','',$_POST['mobilephone']);
 	$_POST['mobilephone'] = str_replace('(','',$_POST['mobilephone']);
@@ -77,7 +78,7 @@ if (isset($_POST['mobilephone']) && $_POST['mobilephone'] != '') {
 }
 
 /* birthdate */
-if (isset($_POST['dob']) && $_POST['dob'] != '') {
+if (!empty($_POST['dob'])) {
 	$_POST['dob'] = str_replace('-','/',$_POST['dob']);
 	if (!$_POST['dob'] = strtotime($_POST['dob']))
 		$modx->error->addField('dob',$modx->lexicon('user_err_not_specified_dob'));
@@ -85,14 +86,14 @@ if (isset($_POST['dob']) && $_POST['dob'] != '') {
 
 
 /* blocked until */
-if (isset($_POST['blockeduntil']) && $_POST['blockeduntil'] != '') {
+if (!empty($_POST['blockeduntil'])) {
 	$_POST['blockeduntil'] = str_replace('-','/',$_POST['blockeduntil']);
 	if (!$_POST['blockeduntil'] = strtotime($_POST['blockeduntil']))
 		$modx->error->addField('blockeduntil',$modx->lexicon('user_err_not_specified_blockeduntil'));
 }
 
 /* blocked after */
-if (isset($_POST['blockedafter']) && $_POST['blockedafter'] != '') {
+if (!empty($_POST['blockedafter'])) {
 	$_POST['blockedafter'] = str_replace('-','/',$_POST['blockedafter']);
 	if (!$_POST['blockedafter'] = strtotime($_POST['blockedafter']))
 		$modx->error->addField('blockedafter',$modx->lexicon('user_err_not_specified_blockedafter'));
