@@ -13,6 +13,7 @@ MODx.load({
 {/literal}
     xtype: 'combo'
     ,transform: 'tv{$tv->id}'
+    ,id: 'tv{$tv->id}'
     ,triggerAction: 'all'
     ,typeAhead: false
     ,editable: false

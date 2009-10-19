@@ -49,8 +49,23 @@ Ext.onReady(function() {
         var i = Ext.get('tv'+id);
         var d = Ext.get('tvdef'+id);
         
-        i.dom.value = d.dom.value;
-        i.dom.checked = d.dom.value ? true : false;        
+        if (i) {
+            i.dom.value = d.dom.value;
+            i.dom.checked = d.dom.value ? true : false;
+        }
+        var c = Ext.getCmp('tv'+id);
+        if (c) {
+            if (c.xtype == 'checkboxgroup') {
+                var cbs = d.dom.value.split(',');                                
+                for (var i=0;i<c.items.length;i++) {
+                    if (c.items.items[i]) {
+                        c.items.items[i].setValue(cbs.indexOf(c.items.items[i].id) != -1 ? true : false);
+                    }
+                } 
+            } else {
+                c.setValue(d.dom.value);
+            }
+        }
     };
     MODx.refreshTVs = function() {
         Ext.getCmp('modx-panel-resource-tv').refreshTVs();
