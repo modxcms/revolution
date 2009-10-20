@@ -28,7 +28,7 @@ class modInstallTest {
 
         $this->checkDependencies();
         $this->checkPHPVersion();
-        $this->checkMemoryLimit();
+        //$this->checkMemoryLimit();
         $this->checkSessions();
         $this->checkCache();
         $this->checkExport();

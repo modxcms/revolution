@@ -16,7 +16,7 @@ class modInstallTestAdvanced extends modInstallTest {
     function run($mode = MODX_INSTALL_MODE_NEW) {
         $this->results = parent::run($mode);
 
-        $this->checkZipMemLimit();
+        //$this->checkZipMemLimit();
 
         return $this->results;
     }
