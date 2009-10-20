@@ -1,12 +1,12 @@
 <?php
 /**
- * Handles all advanced build-specific checks
+ * Handles all SVN build-specific checks
  *
  * @package setup
  * @subpackage tests
  */
-class modInstallTestAdvanced extends modInstallTest {
-    function modInstallTestAdvanced(&$install) {
+class modInstallTestSvn extends modInstallTest {
+    function modInstallTestSvn(&$install) {
         $this->__construct($install);
     }
     function __construct(&$install) {

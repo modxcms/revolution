@@ -256,19 +256,20 @@ class modInstall {
         return $this->config;
     }
 
+    /**
+     * Load distribution-specific test handlers
+     */
     function loadTestHandler($class = 'modInstallTest') {
         $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
         $included = @include $path;
         if ($included) {
             $this->loadLang('test');
-            /* now load build-specific test class if not @svn */
-            if (MODX_SETUP_KEY != '@svn') {
-                $class = $class.ucfirst(str_replace('@','',MODX_SETUP_KEY));
-                $versionPath = dirname(__FILE__).'/checks/'.strtolower($class).'.class.php';
-                $included = @include $versionPath;
-                if (!$included) {
-                    $this->_fatalError(sprintf($this->lexicon['test_version_class_nf'],$versionPath));
-                }
+
+            $class = $class.ucfirst(str_replace('@','',MODX_SETUP_KEY));
+            $versionPath = dirname(__FILE__).'/checks/'.strtolower($class).'.class.php';
+            $included = @include $versionPath;
+            if (!$included) {
+                $this->_fatalError(sprintf($this->lexicon['test_version_class_nf'],$versionPath));
             }
             $this->test = new $class($this);
             return $this->test;
