@@ -16,7 +16,7 @@ class modInstallTestAdvanced extends modInstallTest {
     function run($mode = MODX_INSTALL_MODE_NEW) {
         $this->results = parent::run($mode);
 
-        //$this->checkZipMemLimit();
+        $this->checkZipMemLimit();
 
         return $this->results;
     }
@@ -29,8 +29,8 @@ class modInstallTestAdvanced extends modInstallTest {
         $ml = ini_get('memory_limit');
         $bytes = $this->return_bytes($ml);
 
-        if ($bytes < 67108864) { /* 64M = 67108864 */
-            $success = @ini_set('memory_limit','128M');
+        if ($bytes < 25165824) { /* 24M = 25165824, 64M = 67108864 */
+            $success = @ini_set('memory_limit','24M');
             $success = $success !== false ? true : false;
         } else {
             $success = true;

@@ -28,7 +28,7 @@ class modInstallTest {
 
         $this->checkDependencies();
         $this->checkPHPVersion();
-        //$this->checkMemoryLimit();
+        $this->checkMemoryLimit();
         $this->checkSessions();
         $this->checkCache();
         $this->checkExport();
@@ -70,8 +70,8 @@ class modInstallTest {
         $ml = ini_get('memory_limit');
         $bytes = $this->return_bytes($ml);
 
-        if ($bytes < 67108864) { /* 32M = 33554432, 64M = 67108864 */
-            $success = @ini_set('memory_limit','128M');
+        if ($bytes < 25165824) { /* 24M = 25165824, 32M = 33554432, 64M = 67108864 */
+            $success = @ini_set('memory_limit','24M');
             $success = $success !== false ? true : false;
         } else {
             $success = true;
