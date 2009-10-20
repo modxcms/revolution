@@ -14,6 +14,10 @@ $this->parser->assign('config', $install->config);
 $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
 
 if ($installMode == MODX_INSTALL_MODE_UPGRADE_REVO) {
+    if ($mode === MODX_INSTALL_MODE_UPGRADE_REVO) {
+        @ include_once MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
+    }
+
     $this->parser->assign('context_web_path', defined('MODX_BASE_PATH') ? MODX_BASE_PATH : MODX_INSTALL_PATH);
     $this->parser->assign('context_web_url', defined('MODX_BASE_URL') ? MODX_BASE_URL : $webUrl);
     $this->parser->assign('context_connectors_path', defined('MODX_CONNECTORS_PATH') ? MODX_CONNECTORS_PATH : MODX_INSTALL_PATH . 'connectors/');
