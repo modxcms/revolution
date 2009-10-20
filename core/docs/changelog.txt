@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Updated to xPDO 1.0 revision 363 to fix "Error saving changes to parent object fk field action" messages being logged during install.
 - Fixed issues with category remove dialog and lexicon topic grid
 - [#MODX-1294] Fixed possible obscure problem when using Preview after changing the alias in a Resource
 - [#MODX-1278] Fixed issues with checkbox TVs and default values, fixed the 'set to default' button for complex inputs
