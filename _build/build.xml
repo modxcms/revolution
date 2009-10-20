@@ -396,9 +396,8 @@ General Public License for more details.
             </filterset>
         </copy>
         <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-${build.number}.zip">
-            <fileset dir="${build.image.basedir}">
-                <include name="${project.name}-${modx.core.version}-${modx.core.release}/**" />
-                <exclude name="${project.name}-${modx.core.version}-${modx.core.release}/_build/**" />
+            <fileset dir="${build.image.dir}">
+                <exclude name="_build/**" />
             </fileset>
         </zip>
         <replace file="${build.image.dir}/setup/includes/config.core.php" token="@traditional" value="@svn" />
