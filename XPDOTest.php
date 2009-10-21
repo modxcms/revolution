@@ -1,14 +1,17 @@
 <?php
-require_once 'PHPUnit2/Framework/TestCase.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 
-class XPDOTest extends PHPUnit2_Framework_TestCase {
+//uncomment to force emulated XPDO_MODE even if PDO exists
+//define ('XPDO_MODE', 2);
+
+class XPDOTest extends PHPUnit_Framework_TestCase {
     protected $xpdo= null;
     protected $properties= array ();
 
     protected function setUp() {
         $properties= array ();
         include (strtr(realpath(dirname(__FILE__)) . '/properties.inc.php', '\\', '/'));
-        include_once (strtr(realpath(dirname(__FILE__)) . '/../xpdo/xpdo.class.php', '\\', '/'));
+        include_once (strtr(realpath(dirname(dirname(__FILE__))) . '/xpdo/xpdo.class.php', '\\', '/'));
         $this->properties= $properties;
     }
 
@@ -16,9 +19,10 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
         $xpdo= new xPDO($this->properties['xpdo_string_dsn_test'], $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
         if (is_object($xpdo)) {
             $xpdo->setAttribute(PDO_ATTR_ERRMODE, PDO_ERRMODE_SILENT);
-            $xpdo->setPackage('sample');
-            $xpdo->setDebug(false); // set to true for debugging during tests only
-//            $xpdo->setLogTarget('HTML'); // set to 'HTML' for running through browser
+            $xpdo->setPackage('sample', strtr(realpath(dirname(dirname(__FILE__))) . '/model/', '\\', '/'));
+//            $xpdo->setDebug(false); // set to true for debugging during tests only
+            $xpdo->setLogLevel(XPDO_LOG_LEVEL_WARN); // set to 'HTML' for running through browser
+            $xpdo->setLogTarget('ECHO'); // set to 'HTML' for running through browser
         }
         return $xpdo;
     }
@@ -26,8 +30,9 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
     public function testConnectionError() {
         $string_dsn= 'mysql:host= nosuchhost;dbname=nosuchdb';
         $mypdo= new xPDO($string_dsn, "nonesuchuser", "nonesuchpass");
+        $result= $mypdo->connect();
         // Should be an error set since we gave bogus info
-        $this->assertTrue(strlen($mypdo->errorCode()) > 0 || substr($mypdo->errorCode, 3) == '000', "Error code not being set on PDO object");
+        $this->assertTrue($result == false, "Connection was successful with bogus information.");
     }
 
     public function testInitialize() {
@@ -43,6 +48,7 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
 
     public function testCreateDatabase() {
         $config= xPDO :: parseDSN($this->properties['xpdo_string_dsn_test']);
+        if ($config['dbtype'] === 'sqlite2') $config['dbtype']= 'sqlite';
         include_once (strtr(realpath(dirname(__FILE__)) . '/../xpdo/om/' . $config['dbtype'] . '/xpdomanager.class.php', '\\', '/'));
         $created= xPDOManager :: createSourceContainer($this->properties['xpdo_string_dsn_test'], $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
         $this->assertTrue($created == true, "Could not create database");
@@ -51,37 +57,34 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
 
     public function testConnection() {
         $xpdo= $this->getXPDOObject();
+        $result= $xpdo->connect();
         // Should be no errors if we connected successfully to the database that was created
-        $this->assertTrue(is_object($xpdo), "Could not connect to database");
+        $this->assertTrue(is_object($xpdo), "Could not get an xPDO instance");
+        $this->assertTrue($result == true, "Could not connect to database");
     }
 
     public function testSaveObject() {
         $result= false;
         $xpdo= $this->getXPDOObject();
-//        $xpdo->setDebug(true);
         $person= $xpdo->newObject('Person');
         $person->set('first_name', 'Bob');
         $person->set('last_name', 'Bla');
         $person->set('middle_name', 'La');
-//        $person->set('date_modified', date('Y-m-d H:i:s'));
         $person->set('dob', '1971-07-22');
-        $person->set('gender', 'M');
-        $person->set('blood_type', 'AB-');
         $person->set('password', 'b0bl4bl4');
         $person->set('username', 'boblabla');
         $person->set('security_level', 1);
+        $person->set('gender', 'M');
         $result= $person->save();
-        $xpdo->_log(XPDO_LOG_LEVEL_DEBUG, "Object after save: " . print_r($person->_fields['date_modified'], true));
-//        $xpdo->setDebug(false);
+        $xpdo->_log(XPDO_LOG_LEVEL_DEBUG, "Object after save: " . print_r($person->toArray(), true));
         $this->assertTrue($result, "Error saving data.");
-//        exit();
     }
 
     public function testGetObjectByPK() {
         $result= false;
         $xpdo= $this->getXPDOObject();
-        $person= $xpdo->getObject('Person', '1');
-        $result= ($person->getPrimaryKey() === 1);
+        $person= $xpdo->getObject('Person', 1);
+        $result= (is_object($person) && $person->getPrimaryKey() == 1);
         $xpdo->_log(XPDO_LOG_LEVEL_DEBUG, "Object after retrieval: " . print_r($person, true));
         $this->assertTrue($result, "Error retrieving object by primary key");
     }
@@ -93,36 +96,37 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
         $person->set('first_name', 'Bob');
         $person->set('last_name', 'Bla');
         $person->set('middle_name', 'Lu');
-//        $person->set('date_modified', date('Y-m-d H:i:s'));
         $person->set('dob', '1971-07-21');
         $person->set('gender', 'M');
-        $person->set('blood_type', 'O+');
         $person->set('password', 'b0blubl4!');
         $person->set('username', 'boblubla');
         $person->set('security_level', 1);
-//        $person->save();
 
-        $phone= $xpdo->newObject('Phone');
-        $phone->set('type', 'home');
-        $phone->set('number', '+1 555 555 5555');
-//        $phone->set('date_modified', date('Y-m-d H:i:s'));
-        $phone->save();
+        $phone1= $xpdo->newObject('Phone');
+        $phone1->set('type', 'home');
+        $phone1->set('number', '+1 555 555 5555');
 
-//        $xpdo->setDebug(true);
-        $personPhone= $xpdo->newObject('PersonPhone');
-//        $personPhone->addOne($person);
-        $personPhone->addOne($phone);
-        $personPhone->set('is_primary', false);
+        $phone2= $xpdo->newObject('Phone');
+        $phone2->set('type', 'work');
+        $phone2->set('number', '+1 555 555 4444');
 
-        $xpdo->_log(XPDO_LOG_LEVEL_DEBUG, "Person\n" . print_r($person, true));
-        
+        $personPhone1= $xpdo->newObject('PersonPhone');
+        $personPhone1->addOne($phone1);
+        $personPhone1->set('is_primary', false);
+
+        $personPhone2= $xpdo->newObject('PersonPhone');
+        $personPhone2->addOne($phone2);
+        $personPhone2->set('is_primary', true);
+
+        $personPhone= array($personPhone1, $personPhone2);
+
         $person->addMany($personPhone);
-//        $result= $personPhone->save();
+
         $result= $person->save();
-//        $xpdo->setDebug(false);
         $this->assertTrue($result == true, "Error saving data.");
+        $this->assertTrue(count($person->_relatedObjects['PersonPhone']) == 2, "Error saving related object data.");
     }
-    
+
     public function testDeepCascadeSave() {
         //TODO: implement this
     }
@@ -139,10 +143,43 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
         $this->assertTrue($phone instanceof Phone, "Error retrieving Phone object by primary key");
         $this->assertTrue($personPhone instanceof PersonPhone, "Error retrieving PersonPhone object by primary key");
     }
-    
+
+    public function testGetObjectGraphsByPK() {
+        $xpdo= $this->getXPDOObject();
+        //JSON method
+        $person= $xpdo->getObjectGraph('Person', array ('PersonPhone' => array ('Phone' => array ())), 2);
+        $personPhoneColl= $person->getMany('PersonPhone');
+        $phone= null;
+        foreach ($personPhoneColl as $personPhone) {
+            if ($personPhone->get('phone') == 1) {
+                $phone= $personPhone->getOne('Phone');
+                break;
+            }
+        }
+        $this->assertTrue(is_a($person, 'Person'), "Error retrieving Person object by primary key via getObjectGraph");
+        $this->assertTrue(is_a($personPhone, 'PersonPhone'), "Error retrieving retreiving related PersonPhone collection via getObjectGraph");
+        $this->assertTrue(is_a($phone, 'Phone'), "Error retrieving related Phone object via getObjectGraph");
+    }
+
+    public function testGetObjectGraphsJSONByPK() {
+        $xpdo= $this->getXPDOObject();
+        //JSON method
+        $person= $xpdo->getObjectGraph('Person', '{"PersonPhone":{"Phone":{}}}', 2);
+        $personPhoneColl= $person->getMany('PersonPhone');
+        $phone= null;
+        foreach ($personPhoneColl as $personPhone) {
+            if ($personPhone->get('phone') == 1) {
+                $phone= $personPhone->getOne('Phone');
+                break;
+            }
+        }
+        $this->assertTrue(is_a($person, 'Person'), "Error retrieving Person object by primary key via getObjectGraph, JSON graph");
+        $this->assertTrue(is_a($personPhone, 'PersonPhone'), "Error retrieving retreiving related PersonPhone collection via getObjectGraph, JSON graph");
+        $this->assertTrue(is_a($phone, 'Phone'), "Error retrieving related Phone object via getObjectGraph, JSON graph");
+    }
+
     public function testGetOne() {
         $xpdo= $this->getXPDOObject();
-//        $xpdo->setDebug(true);
         $personPhone= $xpdo->getObject('PersonPhone', array (
             2,
             1
@@ -153,7 +190,7 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
         $this->assertTrue($person instanceof Person, "Error retrieving related Person object");
         $this->assertTrue($phone instanceof Phone, "Error retrieving related Phone object");
     }
-    
+
     public function testGetAll() {
         $xpdo= $this->getXPDOObject();
         $people= $xpdo->getCollection('Person');
@@ -162,17 +199,38 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
         $this->assertTrue(count($people) == 2, "Error retrieving all objects.");
     }
 
+    public function testGetCollectionGraph() {
+        $xpdo= $this->getXPDOObject();
+        $people= $xpdo->getCollectionGraph('Person', array ('PersonPhone' => array ('Phone' => array ())));
+
+        $this->assertTrue(is_a($people['1'], 'Person'), "Error retrieving all objects.");
+        $this->assertTrue(is_a($people['2'], 'Person'), "Error retrieving all objects.");
+        $this->assertTrue(is_a($people['2']->_relatedObjects['PersonPhone']['2-1'], 'PersonPhone'), "Error retrieving all objects.");
+        $this->assertTrue(is_a($people['2']->_relatedObjects['PersonPhone']['2-1']->_relatedObjects['Phone'], 'Phone'), "Error retrieving all objects.");
+        $this->assertTrue(count($people) == 2, "Error retrieving all objects.");
+    }
+
+    public function testGetCollectionGraphJSON() {
+        $xpdo= $this->getXPDOObject();
+        $people= $xpdo->getCollectionGraph('Person', '{"PersonPhone":{"Phone":{}}}');
+
+        $this->assertTrue(is_a($people['1'], 'Person'), "Error retrieving all objects.");
+        $this->assertTrue(is_a($people['2'], 'Person'), "Error retrieving all objects.");
+        $this->assertTrue(is_a($people['2']->_relatedObjects['PersonPhone']['2-1'], 'PersonPhone'), "Error retrieving all objects.");
+        $this->assertTrue(is_a($people['2']->_relatedObjects['PersonPhone']['2-1']->_relatedObjects['Phone'], 'Phone'), "Error retrieving all objects.");
+        $this->assertTrue(count($people) == 2, "Error retrieving all objects.");
+    }
+
     public function testGetMany() {
         $xpdo= $this->getXPDOObject();
-//        $xpdo->setDebug(true);
         $person= $xpdo->getObject('Person', 2);
         $collPersonPhone= $person->getMany('PersonPhone');
-//        $xpdo->_log(XPDO_LOG_LEVEL_DEBUG, print_r($collPersonPhone, true));
         $this->assertTrue($collPersonPhone['2-1'] instanceof PersonPhone, "Error retrieving related objects with getMany().");
-        $this->assertTrue(count($collPersonPhone) == 1, "Error retrieving proper objects with getMany().");
+        $this->assertTrue(count($collPersonPhone) == 2, "Error retrieving proper objects with getMany().");
     }
 
     public function testRemoveObject() {
+//        return true;
         $result= false;
         $xpdo= $this->getXPDOObject();
         if ($person= $xpdo->getObject('Person', '1')) {
@@ -182,6 +240,7 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
     }
 
     public function testRemoveDependentObject() {
+//        return true;
         $xpdo= $this->getXPDOObject();
         $result= false;
         if ($phone= $xpdo->getObject('Phone', '1')) {
@@ -190,7 +249,27 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
         $this->assertTrue($result == true, "Error removing data.");
     }
 
+    public function testRemoveCircularComposites() {
+//        return true;
+        $xpdo= $this->getXPDOObject();
+        $result= false;
+        if ($personPhone= $xpdo->getObject('PersonPhone', array (2, 2))) {
+            $result= $personPhone->remove();
+            unset($personPhone);
+            if ($result) {
+                if ($personPhone= $xpdo->getObject('PersonPhone', array (2, 2))) {
+                    $this->assertTrue(false, "Parent object was not removed.");
+                }
+                if ($phone= $xpdo->getObject('Phone', 2)) {
+                    $this->assertTrue(false, "Child object was not removed.");
+                }
+            }
+        }
+        $this->assertTrue($result == true, "Error removing objects with circular composite relationships.");
+    }
+
     public function testDoNotOverwriteSourceContainer() {
+//        return true;
         // by default, if the connection fails, it should just error out
         // Should be an error set since we gave bogus info
         $xpdo= $this->getXPDOObject();
@@ -200,7 +279,7 @@ class XPDOTest extends PHPUnit2_Framework_TestCase {
     }
 
     public function testRemoveSourceContainer() {
-        return;
+//        return true;
         $xpdo= $this->getXPDOObject();
         $manager= & $xpdo->getManager();
         $result= $manager->removeSourceContainer();
