@@ -44,7 +44,8 @@
  * DAMAGE.
  *
  * @category
- * @package     xpdo.json
+ * @package     xpdo
+ * @subpackage  json
  * @author      Michal Migurski <mike-json@teczno.com>
  * @author      Matt Knapp <mdknapp[at]gmail[dot]com>
  * @author      Brett Stimmerman <brettstimmerman[at]gmail[dot]com>
@@ -109,6 +110,9 @@ define('SERVICES_JSON_SUPPRESS_ERRORS', 32);
  * $input = file_get_contents('php://input', 1000000);
  * $value = $json->decode($input);
  * </code>
+ *
+ * @package xpdo
+ * @subpackage json
  */
 class Services_JSON
 {
@@ -664,7 +668,7 @@ class Services_JSON
                                 // element in an associative array,
                                 // for now
                                 $parts = array();
-                                
+
                                 if (preg_match('/^\s*(["\'].*[^\\\]["\'])\s*:\s*(\S.*),?$/Uis', $slice, $parts)) {
                                     // "name":value pair
                                     $key = $this->decode($parts[1]);
@@ -758,9 +762,6 @@ class Services_JSON
         }
     }
 
-    /**
-     * @todo Ultimately, this should just call PEAR::isError()
-     */
     function isError($data, $code = null)
     {
         if (class_exists('pear')) {
@@ -775,7 +776,10 @@ class Services_JSON
 }
 
 if (class_exists('PEAR_Error')) {
-
+    /**
+     * @package xpdo
+     * @subpackage json
+     */
     class Services_JSON_Error extends PEAR_Error
     {
         function Services_JSON_Error($message = 'unknown error', $code = null,
@@ -788,7 +792,8 @@ if (class_exists('PEAR_Error')) {
 } else {
 
     /**
-     * @todo Ultimately, this class shall be descended from PEAR_Error
+     * @package xpdo
+     * @subpackage json
      */
     class Services_JSON_Error
     {

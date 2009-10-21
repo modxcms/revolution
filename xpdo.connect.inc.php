@@ -19,20 +19,16 @@
  */
 
 /**
- * Metadata map for the xPDOSimpleObject class.
- * 
- * Provides an integer primary key column which uses MySQL's native 
- * auto_increment primary key generation facilities.
- * 
- * @see xPDOSimpleObject
+ * Contains a try/catch block for catching native PDO connection exceptions.
+ *
+ * This is only used in PHP 5 with native PDO.
+ *
  * @package xpdo
- * @subpackage om.mysql
  */
-$xpdo_meta_map['xPDOSimpleObject']['table']= null;
-$xpdo_meta_map['xPDOSimpleObject']['fields']= array (
-   'id' => null,
-);
-$xpdo_meta_map['xPDOSimpleObject']['fieldMeta']= array (
-   'id' => array('dbtype' => 'INTEGER', 'phptype' => 'integer', 'null' => false, 'index' => 'pk', 'generated' => 'native', 'attributes' => 'unsigned', ),
-);
-$xpdo_meta_map['xpdosimpleobject']= & $xpdo_meta_map['xPDOSimpleObject'];
+try {
+    $this->pdo= new $pdo_classname($this->config['dsn'], $this->config['username'], $this->config['password'], $this->config['driverOptions']);
+    $errorCode= $this->pdo->errorCode();
+} catch (PDOException $xe) {
+    $this->pdo= null;
+}
+return (is_object($this->pdo) && (empty($errorCode) || $errorCode == PDO_ERR_NONE));

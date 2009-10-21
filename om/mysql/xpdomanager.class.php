@@ -1,86 +1,89 @@
 <?php
 /*
- * OpenExpedio (xPDO)
- * Copyright (C) 2006 Jason Coward <xpdo@opengeek.com>
+ * Copyright 2006, 2007, 2008, 2009 by  Jason Coward <xpdo@opengeek.com>
+ *
+ * This file is part of xPDO.
  * 
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
+ * xPDO is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
  * Foundation; either version 2 of the License, or (at your option) any later
  * version.
  * 
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
+ * xPDO is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * xPDO; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * Suite 330, Boston, MA 02111-1307 USA
  */
 
 /**
  * The MySQL implementation of the xPDOManager class.
  * 
- * @package xpdo.om.mysql
+ * @package xpdo
+ * @subpackage om.mysql
  */
 
 /**
- * Provides data source management for an xPDO instance.
+ * Include the parent {@link xPDOManager} class.
+ */
+require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/xpdomanager.class.php');
+
+/**
+ * Provides MySQL data source management for an xPDO instance.
  * 
  * These are utility functions that only need to be loaded under special
  * circumstances, such as creating tables, adding indexes, altering table
  * structures, etc.  xPDOManager class implementations are specific to a
  * database driver and this instance is implemented for MySQL.
  * 
- * @package xpdo.om.mysql
+ * @package xpdo
+ * @subpackage om.mysql
  */
-class xPDOManager {
-    /**
-     * @var xPDO A reference to the XPDO instance using this manager.
-     * @access public
-     */
-    var $xpdo= null;
-    /**
-     * @var xPDOGenerator The generator class for forward and reverse
-     * engineering tasks (loaded only on demand).
-     */
-    var $generator= null;
-    /**
-     * @var xPDOTransport The data transport class for migrating data.
-     */
-    var $transport= null;
-
-    var $action; // legacy action directive
-
+class xPDOManager_mysql extends xPDOManager {
     /**
      * Get a xPDOManager instance.
      * 
      * @param object $xpdo A reference to a specific modDataSource instance.
      */
-    function xPDOManager(& $xpdo) {
-        if ($xpdo !== null && $xpdo instanceof xPDO) {
-            $this->xpdo= & $xpdo;
-        }
-        global $action;
-        $this->action= $action; // set action directive
+    function xPDOManager_mysql(& $xpdo) {
+        $this->dbtypes['integer']= array('INT','INTEGER','TINYINT','BOOLEAN','SMALLINT','MEDIUMINT','BIGINT');
+        $this->dbtypes['boolean']= array('BOOLEAN','BOOL');
+        $this->dbtypes['float']= array('DECIMAL','DEC','NUMERIC','FLOAT','DOUBLE','DOUBLE PRECISION','REAL');
+        $this->dbtypes['string']= array('CHAR','VARCHAR','BINARY','VARBINARY','TINYTEXT','TEXT','MEDIUMTEXT','LONGTEXT','ENUM','SET','TIME','YEAR');
+        $this->dbtypes['timestamp']= array('TIMESTAMP');
+        $this->dbtypes['datetime']= array('DATETIME');
+        $this->dbtypes['date']= array('DATE');
+        $this->dbtypes['binary']= array('TINYBLOB','BLOB','MEDIUMBLOB','LONGBLOB');
+        $this->dbtypes['bit']= array('BIT');
     }
 
     /**
-     * Creates the physical data container represented by a data source
+     * Creates the physical data container represented by a data source.
+     *
+     * @param array $dsnArray An array of xPDO configuration properties.
+     * @param string $username Database username with privileges to create tables.
+     * @param string $password Database user password.
+     * @param array $containerOptions An array of options for controlling the creation of the container.
+     * @return boolean True only if the database is created successfully.
      */
-    function createSourceContainer($dsn, $username= '', $password= '', $containerOptions= null) {
+    function createSourceContainer($dsnArray, $username= '', $password= '', $containerOptions= array ()) {
         $created= false;
-        if (XPDO_ATTR_CREATE_TABLES) {
-            if ($dsnArray= xPDO :: parseDSN($dsn)) {
+        if (is_array($dsnArray)) {
                 $sql= 'CREATE DATABASE `' . $dsnArray['dbname'] . '`';
+            if (isset ($containerOptions['collation']) && isset ($containerOptions['charset'])) {
+                $sql.= ' CHARACTER SET ' . $containerOptions['charset'];
+                $sql.= ' COLLATE ' . $containerOptions['collation'];
+            }
                 if ($conn= mysql_connect($dsnArray['host'], $username, $password, true)) {
                     if (!$rt= @ mysql_select_db($dsnArray['dbname'], $conn)) {
                         @ mysql_query($sql, $conn);
-                        $created= mysql_errno($conn) ? false : true;
+                    $errorNo= @ mysql_errno($conn);
+                    $created= $errorNo ? false : true;
                     }
                 }
             }
-        }
         return $created;
     }
 
@@ -88,7 +91,7 @@ class xPDOManager {
      * Drops a physical data container, if it exists.
      * 
      * @param string $dsn Represents the database connection string.
-     * @param string $username Database username with priveleges to drop tables.
+     * @param string $username Database username with privileges to drop tables.
      * @param string $password Database user password.
      * @return int Returns 1 on successful drop, 0 on failure, and -1 if the db
      * does not exist.
@@ -110,6 +113,29 @@ class xPDOManager {
         return $removed;
     }
 
+
+    /**
+     * Drops a table, if it exists.
+     *
+     * @param string $className The object table to drop.
+     * @return int Returns 1 on successful drop, 0 on failure, and -1 if the table
+     * does not exist.
+     */
+    function removeObjectContainer($className) {
+        $removed= 0;
+        if ($instance= $this->xpdo->newObject($className)) {
+            $sql= 'DROP TABLE ' . $this->xpdo->getTableName($className);
+            $removed= $this->xpdo->exec($sql);
+            if (!$removed && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO_ERR_NONE) {
+                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Could not drop table ' . $className . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
+            } else {
+                $removed= true;
+                $this->xpdo->log(XPDO_LOG_LEVEL_INFO, 'Dropped table' . $className . "\nSQL: {$sql}\n");
+            }
+        }
+        return $removed;
+    }
+
     /**
      * Creates the container for a persistent data object.  In this
      * implementation, a source container is a synonym for a MySQL database
@@ -123,37 +149,50 @@ class xPDOManager {
      */
     function createObjectContainer($className) {
         $created= false;
-        if ($className= $this->xpdo->loadClass($className)) {
-            if ($instance= new $className ($this->xpdo)) {
+        if ($instance= $this->xpdo->newObject($className)) {
                 $tableName= $instance->_table;
-                $exists= $this->xpdo->query("SELECT COUNT(*) FROM {$tableName}");
-                if (is_object($exists) && $exists->fetchAll()) {
+            $existsStmt = $this->xpdo->prepare("SELECT COUNT(*) FROM {$tableName}");
+            $exists = $existsStmt->execute();
+            if ($exists && $existsStmt->fetchAll()) {
                     return true;
                 }
-                $tableType= $instance->_tableType;
+            $tableType= isset($instance->_tableMeta['engine']) ? $instance->_tableMeta['engine'] : 'MyISAM';
+            $numerics= array_merge($this->dbtypes['integer'], $this->dbtypes['boolean'], $this->dbtypes['float']);
+            $datetimeStrings= array_merge($this->dbtypes['timestamp'], $this->dbtypes['datetime']);
+            $dateStrings= $this->dbtypes['date'];
                 $pk= $this->xpdo->getPK($className);
                 $pktype= $this->xpdo->getPKType($className);
                 $fulltextIndexes= array ();
                 $uniqueIndexes= array ();
                 $indexes= array ();
+            $lobs= array ('TEXT', 'BLOB');
+            $lobsPattern= '/(' . implode('|', $lobs) . ')/';
                 $sql= 'CREATE TABLE ' . $tableName . ' (';
-                foreach ($instance->_fieldMeta as $key => $meta) {
+            while (list($key, $meta)= each($instance->_fieldMeta)) {
+                $dbtype= strtoupper($meta['dbtype']);
                     $precision= isset ($meta['precision']) ? '(' . $meta['precision'] . ')' : '';
-                    $null= (isset ($meta['null']) && $meta['null'] == 'false') ? ' NOT NULL' : ' NULL';
-                    if (isset ($instance->_fields[$key]) && $instance->_fields[$key] === 'NULL' || $instance->_fields[$key] === 'CURRENT_TIMESTAMP') {
-                        $default= ' DEFAULT ' . $instance->_fields[$key];
-                    } else {
-                        $default= isset ($instance->_fields[$key]) ? ' DEFAULT \'' . $instance->_fields[$key] . '\'' : '';
-                    }
+                $notNull= !isset ($meta['null'])
+                    ? false
+                    : ($meta['null'] === 'false' || empty($meta['null']));
+                $null= $notNull ? ' NOT NULL' : ' NULL';
                     $extra= (isset ($meta['index']) && $meta['index'] == 'pk' && !is_array($pk) && $pktype == 'integer' && isset ($meta['generated']) && $meta['generated'] == 'native') ? ' AUTO_INCREMENT' : '';
                     if (empty ($extra) && isset ($meta['extra'])) {
                         $extra= ' ' . $meta['extra'];
                     }
+                $default= '';
+                if (isset ($meta['default']) && !preg_match($lobsPattern, $dbtype)) {
+                    $defaultVal= $meta['default'];
+                    if (($defaultVal === null || strtoupper($defaultVal) === 'NULL') || (in_array($dbtype, $datetimeStrings) && $defaultVal === 'CURRENT_TIMESTAMP')) {
+                        $default= ' DEFAULT ' . $defaultVal;
+                    } else {
+                        $default= ' DEFAULT \'' . $defaultVal . '\'';
+                    }
+                }
                     $attributes= (isset ($meta['attributes'])) ? ' ' . $meta['attributes'] : '';
                     if (strpos(strtolower($attributes), 'unsigned') !== false) {
-                        $sql .= '`' . $key . '` ' . $meta['dbtype'] . $precision . $attributes . $null . $default . $extra . ',';
+                    $sql .= '`' . $key . '` ' . $dbtype . $precision . $attributes . $null . $default . $extra . ',';
                     } else {
-                        $sql .= '`' . $key . '` ' . $meta['dbtype'] . $precision . $null . $default . $attributes . $extra . ',';
+                    $sql .= '`' . $key . '` ' . $dbtype . $precision . $null . $default . $attributes . $extra . ',';
                     }
                     if (isset ($meta['index']) && $meta['index'] !== 'pk') {
                         if ($meta['index'] === 'fulltext') {
@@ -241,52 +280,14 @@ class xPDOManager {
                     }
                 }
                 $sql .= ") TYPE={$tableType}";
-                if (($created= $this->xpdo->exec($sql)) === false) {
-                    $this->xpdo->_log(XPDO_LOG_LEVEL_FATAL, 'Could not create table ' . $tableName . "\nSQL: {$sql}\n" . print_r($this->xpdo->errorInfo(), true));
+            $created= $this->xpdo->exec($sql);
+            if (!$created && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO_ERR_NONE) {
+                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
                 } else {
-                    $this->xpdo->_log(XPDO_LOG_LEVEL_INFO, 'Created table' . $tableName . "\nSQL: {$sql}\n");
                     $created= true;
+                $this->xpdo->log(XPDO_LOG_LEVEL_INFO, 'Created table' . $tableName . "\nSQL: {$sql}\n");
                 }
             }
-        }
         return $created;
-    }
-
-    /**
-     * Gets an XML schema parser / generator for this manager instance.
-     * 
-     * @return xPDOGenerator A generator class for this manager.
-     */
-    function getGenerator() {
-        if ($this->generator === null || !is_a($this->generator, 'xPDOGenerator')) {
-            if (!isset($this->xpdo->config['xPDOGenerator.'.$this->xpdo->config['dbtype'].'.class']) || !$generatorClass= $this->xpdo->loadClass($this->xpdo->config['xPDOGenerator.'.$this->xpdo->config['dbtype'].'.class'], XPDO_CORE_PATH, true, true)) {
-                $generatorClass= $this->xpdo->loadClass($this->xpdo->config['dbtype'] . '.xPDOGenerator', '', true, true);
-            }
-            if ($generatorClass) {
-                $this->generator= new $generatorClass ($this);
-            } 
-            if ($this->generator === null || !is_a($this->generator, 'xPDOGenerator')) {
-                $this->xpdo->_log(XPDO_LOG_LEVEL_ERROR, "Could not load xPDOGenerator [{$generatorClass}] class.");
-            }
-        }
-        return $this->generator;
-    }
-
-    /**
-     * Gets a data transport mechanism for this xPDOManager instance. 
-     */
-    function getTransport() {
-        if ($this->transport === null || !is_a($this->transport, 'xPDOTransport')) {
-            if (!isset($this->xpdo->config['xPDOTransport.class']) || !$transportClass= $this->xpdo->loadClass($this->xpdo->config['xPDOTransport.class'], XPDO_CORE_PATH, true, true)) { 
-                $transportClass= $this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
-            }
-            if ($transportClass) {
-                $this->transport= new $transportClass ($this);
-            } 
-            if ($this->transport === null || !is_a($this->transport, 'xPDOTransport')) {
-                $this->xpdo->_log(XPDO_LOG_LEVEL_ERROR, "Could not load xPDOTransport [{$transportClass}] class.");
-            }
-        }
-        return $this->transport;
     }
 }

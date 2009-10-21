@@ -1,21 +1,28 @@
 <?php
 /*
- * OpenExpedio (xPDO)
- * Copyright (C) 2006 Jason Coward <xpdo@opengeek. com>
+ * Copyright 2006, 2007, 2008, 2009 by  Jason Coward <xpdo@opengeek.com>
  * 
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
+ * This file is part of xPDO.
+ *
+ * xPDO is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
  * Foundation; either version 2 of the License, or (at your option) any later
  * version.
- * 
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- * 
+ *
+ * xPDO is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
  * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * xPDO; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * Suite 330, Boston, MA 02111-1307 USA
+ */
+
+/**
+ * A table rendering and processing helper class for xPDO.
+ * 
+ * @package xpdo
+ * @subpackage table
  */
 
 /**
@@ -28,7 +35,8 @@
  * forms, search forms, and object navigation grids in MODx 0.9.x.  Many
  * features of this class depend on {@link http://modxcms.com/ MODx CMS 0.9.x}.
  * 
- * @package xpdo.table
+ * @package xpdo
+ * @subpackage table
  */
 class MakeTable {
     var $xpdo= null;
@@ -65,7 +73,8 @@ class MakeTable {
     var $pageSizes= array (10, 25, 50, 100, 250);
     var $pageNavAtTop= false;
     var $pageNavAtBottom= true;
-    
+    var $cellspacing = '';
+
     function MakeTable(& $xpdo) {
         $this->xpdo= & $xpdo;
         if (isset ($_REQUEST['orderby'])) {
@@ -112,6 +121,16 @@ class MakeTable {
         $this->tableWidth= $value;
     }
     
+    /**
+     * Sets the cellspacing attribute of the main HTML TABLE as there is no
+     * reliable CSS method for accomplishing the same
+     *
+     * @param $value A valid cellspacing attribute for the HTML cellspacing tag
+     */
+    function setCellspacing($value){
+    	$this->cellspacing = $value;
+    }
+
     /**
      * Sets the class attribute of the main HTML TABLE.
      * 
@@ -435,7 +454,7 @@ class MakeTable {
                 $table .= "\t\t<td{$msgColspan}>{$this->noRecordsMsg}</td>\n";
                 $table .= "\t</tr>\n";
             }
-            $table= "\n".'<table'. ($this->tableWidth ? ' width="'.$this->tableWidth.'"' : ''). ($this->tableClass ? ' class="'.$this->tableClass.'"' : '').">\n". ($header ? "\t<thead><tr class=\"".$this->rowHeaderClass."\">\n".$header."\t</tr></thead>\n" : '')."<tbody>".$table."</tbody></table>\n";
+            $table= "\n".'<table'. ($this->tableWidth ? ' width="'.$this->tableWidth.'"' : ''). (($this->cellspacing !== '') ? ' cellspacing="'.$this->cellspacing.'"' : ''). ($this->tableClass ? ' class="'.$this->tableClass.'"' : '').">\n". ($header ? "\t<thead><tr class=\"".$this->rowHeaderClass."\">\n".$header."\t</tr></thead>\n" : '')."<tbody>".$table."</tbody></table>\n";
             if ($this->formElementType) {
                 $table= "\n".'<form id="'.$this->formName.'" name="'.$this->formName.'" action="'.$this->formAction.'" method="POST">'.$table;
             }
@@ -485,7 +504,7 @@ class MakeTable {
     function createPagingNavigation($qs='', $currentURL= '') {
         $nav= '';
         $currentPage= (is_numeric($this->currentPage) ? $this->currentPage : 1);
-        if ($this->xpdo->getDebug() === true) $this->xpdo->_log(XPDO_LOG_LEVEL_DEBUG, "Total records: {$this->totalRecords}, Display records: {$this->displayRecords}");
+        if ($this->xpdo->getDebug() === true) $this->xpdo->log(XPDO_LOG_LEVEL_DEBUG, "Total records: {$this->totalRecords}, Display records: {$this->displayRecords}");
         if (!$this->totalRecords) {
             return $nav;
         }
