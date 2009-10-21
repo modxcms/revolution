@@ -31,7 +31,7 @@ class modInstallTestAdvanced extends modInstallTest {
         $bytes = $this->return_bytes($ml);
 
         if ($bytes < 25165824) { /* 24M = 25165824, 64M = 67108864 */
-            $success = @ini_set('memory_limit','24M');
+            $success = @ini_set('memory_limit','128M');
             $success = $success !== false ? true : false;
         } else {
             $success = true;
