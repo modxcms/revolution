@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright 2006, 2007, 2008, 2009 by  Jason Coward <xpdo@opengeek.com>
- * 
+ *
  * This file is part of xPDO.
  *
  * xPDO is free software; you can redistribute it and/or modify it under the
@@ -20,11 +20,10 @@
 
 /**
  * Metadata map for the base xPDOObject class.
- * 
+ *
  * @see xPDOObject
  * @package xpdo
  * @subpackage om.mysql
  */
 $xpdo_meta_map['xPDOObject']['table']= null;
 $xpdo_meta_map['xPDOObject']['tableMeta']['engine']= 'MyISAM';
-$xpdo_meta_map['xpdoobject']= & $xpdo_meta_map['xPDOObject'];

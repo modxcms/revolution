@@ -20,44 +20,28 @@
 
 /**
  * Classes implementing a default cache implementation for xPDO.
- * 
+ *
  * @package xpdo
  * @subpackage cache
  */
-if (!defined('XPDO_CACHE_PHP')) {
-    /**
-     * A flag to indicate cacheing to executable PHP format.
-     * @var integer
-     */
-    define('XPDO_CACHE_PHP', 0);
-    /**
-     * A flag to indicate cacheing to JSON format.
-     * @var integer
-     */
-    define('XPDO_CACHE_JSON', 1);
-    /**
-     * The default cache directory for criteria result sets.
-     * @var string
-     */
-    define('XPDO_CACHE_DIR', 'objects/');
-    /**
-     * The default log directory for xPDO.
-     * @var string
-     */
-    define('XPDO_LOG_DIR', 'logs/');
-}
+
 /**
  * The default cache manager implementation for xPDO.
- * 
+ *
  * @package xpdo
  * @subpackage cache
  */
 class xPDOCacheManager {
-    var $xpdo= null;
-    var $caches= array();
-    var $options= array();
-    
-    function xPDOCacheManager(& $xpdo) {
+    const CACHE_PHP = 0;
+    const CACHE_JSON = 1;
+    const CACHE_DIR = 'objects/';
+    const LOG_DIR = 'logs/';
+
+    protected $xpdo= null;
+    protected $caches= array();
+    protected $options= array();
+
+    public function __construct(& $xpdo, $options = array()) {
         $this->xpdo= & $xpdo;
         $this->options= $options;
     }
@@ -65,20 +49,20 @@ class xPDOCacheManager {
     /**
      * Get an instance of a provider which implements the xPDOCache interface.
      */
-    function & getCacheProvider($key = '', $options = array()) {
+    public function & getCacheProvider($key = '', $options = array()) {
         $objCache = null;
         if (empty($key)) {
-            $key = $this->getOption(XPDO_OPT_CACHE_KEY, $options, 'default');
+            $key = $this->getOption(xPDO::OPT_CACHE_KEY, $options, 'default');
         }
         $objCacheClass= 'xPDOFileCache';
         if (!isset($this->caches[$key]) || !is_object($this->caches[$key])) {
-            if ($cacheClass = $this->getOption($key . '_' . XPDO_OPT_CACHE_HANDLER, $options, $this->getOption(XPDO_OPT_CACHE_HANDLER, $options))) {
+            if ($cacheClass = $this->getOption($key . '_' . xPDO::OPT_CACHE_HANDLER, $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options))) {
                 $cacheClass = $this->xpdo->loadClass($cacheClass, XPDO_CORE_PATH, false, true);
                 if ($cacheClass) {
                     $objCacheClass= $cacheClass;
                 }
             }
-            $options[XPDO_OPT_CACHE_KEY]= $key;
+            $options[xPDO::OPT_CACHE_KEY]= $key;
             $this->caches[$key] = new $objCacheClass($this->xpdo, $options);
             if (empty($this->caches[$key]) || !$this->caches[$key]->isInitialized()) {
                 $this->caches[$key] = new xPDOFileCache($this->xpdo, $options);
@@ -102,7 +86,7 @@ class xPDOCacheManager {
      * @param mixed $default An optional default value to return if no value is found.
      * @return mixed The value of the option.
      */
-    function getOption($key, $options = array(), $default = null) {
+    public function getOption($key, $options = array(), $default = null) {
         $option = $default;
         if (is_array($key)) {
             if (!is_array($option)) {
@@ -130,7 +114,7 @@ class xPDOCacheManager {
      * @access public
      * @return string The absolute path of the xPDO cache directory.
      */
-    function getCachePath() {
+    public function getCachePath() {
         $cachePath= false;
         if (empty($this->xpdo->cachePath)) {
             if (!isset ($this->xpdo->config['cache_path'])) {
@@ -190,7 +174,7 @@ class xPDOCacheManager {
      * @param array $options An array of options for the function.
      * @return boolean Returns true if the file was successfully written.
      */
-    function writeFile($filename, $content, $mode= 'wb', $options= array()) {
+    public function writeFile($filename, $content, $mode= 'wb', $options= array()) {
         $written= false;
         if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_dir_permissions' => $options) : array();
         $dirname= dirname($filename);
@@ -215,7 +199,7 @@ class xPDOCacheManager {
      * a permissions mode to write new directories with, though this is deprecated.
      * @return boolean Returns true if the directory was successfully written.
      */
-    function writeTree($dirname, $options= array()) {
+    public function writeTree($dirname, $options= array()) {
         $written= false;
         if (!empty ($dirname)) {
             if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_dir_permissions' => $options) : array();
@@ -248,14 +232,14 @@ class xPDOCacheManager {
      * @return boolean|array Returns true if the copy operation was successful, or a single element
      * array with filename as key and stat results of the successfully copied file as a result.
      */
-    function copyFile($source, $target, $options = array()) {
+    public function copyFile($source, $target, $options = array()) {
         $copied= false;
         if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_file_permissions' => $options) : array();
         if (func_num_args() === 4) $options['new_dir_permissions'] = func_get_arg(3);
         if ($this->writeTree(dirname($target), $options)) {
             $existed= file_exists($target);
             if ($existed && $this->getOption('copy_newer_only', $options, false) && (($ttime = filemtime($target)) > ($stime = filemtime($source)))) {
-                $this->xpdo->log(XPDO_LOG_LEVEL_INFO, "xPDOCacheManager->copyFile(): Skipping copy of newer file {$target} ({$ttime}) from {$source} ({$stime})");
+                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, "xPDOCacheManager->copyFile(): Skipping copy of newer file {$target} ({$ttime}) from {$source} ({$stime})");
             } else {
                 $copied= copy($source, $target);
             }
@@ -276,7 +260,7 @@ class xPDOCacheManager {
             }
         }
         if (!$copied) {
-            $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "xPDOCacheManager->copyFile(): Could not copy file {$source} to {$target}");
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOCacheManager->copyFile(): Could not copy file {$source} to {$target}");
         }
         return $copied;
     }
@@ -291,7 +275,7 @@ class xPDOCacheManager {
      * @param array $options An array of options for this function.
      * @return array|boolean Returns an array of all files and folders that were copied or false.
      */
-    function copyTree($source, $target, $options= array()) {
+    public function copyTree($source, $target, $options= array()) {
         $copied= false;
         $source= strtr($source, '\\', '/');
         $target= strtr($target, '\\', '/');
@@ -308,7 +292,7 @@ class xPDOCacheManager {
                     $dirMode = $this->getOption('new_dir_permissions', $options, 0775);
                     if (is_string($dirMode)) $dirMode = octdec($dirMode);
                     if (! @ chmod($target, $dirMode)) {
-                        $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "{$target} is not writable and permissions could not be modified.");
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "{$target} is not writable and permissions could not be modified.");
                     }
                 }
                 if ($handle= @ opendir($source)) {
@@ -324,33 +308,33 @@ class xPDOCacheManager {
                         $to= $target . '/' . $item;
                         if (is_dir($from)) {
                             if (!($copied= $this->copyTree($from, $to, $options))) {
-                                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not copy directory {$from} to {$to}");
+                                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not copy directory {$from} to {$to}");
                                 $error = true;
                             } else {
                                 $copiedFiles = array_merge($copiedFiles, $copied);
                             }
                         } elseif (is_file($from)) {
                             if (!$copied= $this->copyFile($from, $to, $options)) {
-                                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not copy file {$from} to {$to}; could not create directory.");
+                                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not copy file {$from} to {$to}; could not create directory.");
                                 $error = true;
                             } else {
                                 $copiedFiles[] = $to;
                             }
                         } else {
-                            $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not copy {$from} to {$to}");
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not copy {$from} to {$to}");
                         }
                     }
                     @ closedir($handle);
                     if (!$error) $copiedFiles[] = $target;
                     $copied = $copiedFiles;
                 } else {
-                    $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not read source directory {$source}");
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not read source directory {$source}");
                 }
             } else {
-                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not create target directory {$target}");
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create target directory {$target}");
             }
         } else {
-            $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Source directory {$source} does not exist.");
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Source directory {$source} does not exist.");
         }
         return $copied;
     }
@@ -363,7 +347,7 @@ class xPDOCacheManager {
      * @param array $options An array of options for this function.
      * @return boolean Returns true if the deletion was successful.
      */
-    function deleteTree($dirname, $options= array('deleteTop' => false, 'skipDirs' => false, 'extensions' => array('.cache.php'))) {
+    public function deleteTree($dirname, $options= array('deleteTop' => false, 'skipDirs' => false, 'extensions' => array('.cache.php'))) {
         $result= false;
         if (is_dir($dirname)) { /* Operate on dirs only */
             if (substr($dirname, -1) != '/') {
@@ -433,7 +417,7 @@ class xPDOCacheManager {
      * @param string|array $pattern The pattern or an array of patterns to check against.
      * @return boolean True if the string ends with the pattern or any of the patterns provided.
      */
-    function endsWith($string, $pattern) {
+    public function endsWith($string, $pattern) {
         $matched= false;
         if (is_string($string) && ($stringLen= strlen($string))) {
             if (is_array($pattern)) {
@@ -460,7 +444,7 @@ class xPDOCacheManager {
      * @param string|array $pattern The pattern or an array of patterns to check against.
      * @return boolean True if the string matched the pattern or any of the patterns provided.
      */
-    function matches($string, $pattern) {
+    public function matches($string, $pattern) {
         $matched= false;
         if (is_string($string) && ($stringLen= strlen($string))) {
             if (is_array($pattern)) {
@@ -493,10 +477,10 @@ class xPDOCacheManager {
      * @param string $objRef The reference to the xPDO instance, in string
      * format.
      * @param boolean $format The format to cache in. Defaults to
-     * XPDO_CACHE_PHP, which is set to cache in executable PHP format.
+     * xPDOCacheManager::CACHE_PHP, which is set to cache in executable PHP format.
      * @return string The source map file, in string format.
      */
-    function generateObject($obj, $objName, $generateObjVars= false, $generateRelated= false, $objRef= 'this->xpdo', $format= XPDO_CACHE_PHP) {
+    public function generateObject($obj, $objName, $generateObjVars= false, $generateRelated= false, $objRef= 'this->xpdo', $format= xPDOCacheManager::CACHE_PHP) {
         $source= false;
         if (is_object($obj) && $obj instanceof xPDOObject) {
             $className= $obj->_class;
@@ -523,18 +507,18 @@ class xPDOCacheManager {
         }
         return $source;
     }
-    
+
     /**
      * Add a key-value pair to a cache provider if it does not already exist.
-     * 
+     *
      * @param string $key A unique key identifying the item being stored.
      * @param mixed & $var A reference to the PHP variable representing the item.
      * @param integer $lifetime Seconds the item will be valid in cache.
      * @param array $options Additional options for the cache add operation.
      */
-    function add($key, & $var, $lifetime= 0, $options= array()) {
+    public function add($key, & $var, $lifetime= 0, $options= array()) {
         $return= false;
-        if ($cache = $this->getCacheProvider($this->getOption(XPDO_OPT_CACHE_KEY, $options))) {
+        if ($cache = $this->getCacheProvider($this->getOption(xPDO::OPT_CACHE_KEY, $options))) {
             $value= null;
             if (is_object($var) && $var instanceof xPDOObject) {
                 $value= $var->toArray('', true);
@@ -556,9 +540,9 @@ class xPDOCacheManager {
      * @param array $options Additional options for the cache replace operation.
      * @return boolean True if the replace was successful.
      */
-    function replace($key, & $var, $lifetime= 0, $options= array()) {
+    public function replace($key, & $var, $lifetime= 0, $options= array()) {
         $return= false;
-        if ($cache = $this->getCacheProvider($this->getOption(XPDO_OPT_CACHE_KEY, $options), $options)) {
+        if ($cache = $this->getCacheProvider($this->getOption(xPDO::OPT_CACHE_KEY, $options), $options)) {
             $value= null;
             if (is_object($var) && $var instanceof xPDOObject) {
                 $value= $var->toArray('', true);
@@ -580,9 +564,9 @@ class xPDOCacheManager {
      * @param array $options Additional options for the cache set operation.
      * @return boolean True if the set was successful
      */
-    function set($key, & $var, $lifetime= 0, $options= array()) {
+    public function set($key, & $var, $lifetime= 0, $options= array()) {
         $return= false;
-        if ($cache = $this->getCacheProvider($this->getOption(XPDO_OPT_CACHE_KEY, $options), $options)) {
+        if ($cache = $this->getCacheProvider($this->getOption(xPDO::OPT_CACHE_KEY, $options), $options)) {
             $value= null;
             if (is_object($var) && $var instanceof xPDOObject) {
                 $value= $var->toArray('', true);
@@ -591,7 +575,7 @@ class xPDOCacheManager {
             }
             $return= $cache->set($key, $value, $lifetime, $options);
         } else {
-            $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'No cache implementation found.');
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'No cache implementation found.');
         }
         return $return;
     }
@@ -604,9 +588,9 @@ class xPDOCacheManager {
      * @param array $options Additional options for the cache deletion.
      * @return boolean True if the deletion was successful.
      */
-    function delete($key, $options = array()) {
+    public function delete($key, $options = array()) {
         $return= false;
-        if ($cache = $this->getCacheProvider($this->getOption(XPDO_OPT_CACHE_KEY, $options), $options)) {
+        if ($cache = $this->getCacheProvider($this->getOption(xPDO::OPT_CACHE_KEY, $options), $options)) {
             $return= $cache->delete($key, $options);
         }
         return $return;
@@ -620,9 +604,9 @@ class xPDOCacheManager {
      * @param array $options Additional options for the cache retrieval.
      * @return mixed The value of the object cache key
      */
-    function get($key, $options = array()) {
+    public function get($key, $options = array()) {
         $return= false;
-        if ($cache = $this->getCacheProvider($this->getOption(XPDO_OPT_CACHE_KEY, $options), $options)) {
+        if ($cache = $this->getCacheProvider($this->getOption(xPDO::OPT_CACHE_KEY, $options), $options)) {
             $return= $cache->get($key, $options);
         }
         return $return;
@@ -635,22 +619,22 @@ class xPDOCacheManager {
      * @param array $options Additional options for the cache flush.
      * @return boolean True if the flush was successful.
      */
-    function clean($options = array()) {
+    public function clean($options = array()) {
         $return= false;
-        if ($cache = $this->getCacheProvider($this->getOption(XPDO_OPT_CACHE_KEY, $options), $options)) {
+        if ($cache = $this->getCacheProvider($this->getOption(xPDO::OPT_CACHE_KEY, $options), $options)) {
             $return= $cache->flush($options);
         }
         return $return;
     }
-    
+
     /**
      * Escapes all single quotes in a string
-     * 
+     *
      * @access public
      * @param string $s  The string to escape single quotes in.
      * @return string  The string with single quotes escaped.
      */
-    function escapeSingleQuotes($s) {
+    public function escapeSingleQuotes($s) {
         $q1= array (
             "\\",
             "'"
@@ -664,24 +648,21 @@ class xPDOCacheManager {
 }
 
 /**
- * An interface class that defines the methods a cache provider must implement.
+ * An abstract class that defines the methods a cache provider must implement.
  *
  * @package xpdo
  * @subpackage cache
  */
-class xPDOCache {
-    var $xpdo= null;
-    var $options= array();
-    var $key= '';
-    var $initialized= false;
+abstract class xPDOCache {
+    public $xpdo= null;
+    protected $options= array();
+    protected $key= '';
+    protected $initialized= false;
 
-    function xPDOCache(& $xpdo, $options = array()) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo, $options = array()) {
+    public function __construct(& $xpdo, $options = array()) {
         $this->xpdo= & $xpdo;
         $this->options= $options;
-        $this->key = $this->getOption(XPDO_OPT_CACHE_KEY, $options, 'default');
+        $this->key = $this->getOption(xPDO::OPT_CACHE_KEY, $options, 'default');
     }
 
     /**
@@ -689,7 +670,7 @@ class xPDOCache {
      *
      * @return boolean true if the implementation was initialized successfully.
      */
-    function isInitialized() {
+    public function isInitialized() {
         return (boolean) $this->initialized;
     }
 
@@ -702,7 +683,7 @@ class xPDOCache {
      * @param mixed $default An optional default value to return if no value is found.
      * @return mixed The value of the option.
      */
-    function getOption($key, $options = array(), $default = null) {
+    public function getOption($key, $options = array(), $default = null) {
         $option = $default;
         if (is_array($key)) {
             if (!is_array($option)) {
@@ -732,7 +713,7 @@ class xPDOCache {
      * @return string The identifier with any implementation specific prefixes or other
      * transformations applied.
      */
-    function getCacheKey($key, $options = array()) {
+    public function getCacheKey($key, $options = array()) {
         $prefix = $this->getOption('cache_prefix', $options);
         if (!empty($prefix)) $key = $prefix . $key;
         return $key;
@@ -748,7 +729,7 @@ class xPDOCache {
      * @param array $options Additional options for the operation.
      * @return boolean True if successful
      */
-    function add($key, $var, $expire= 0, $options= array()) {}
+    abstract public function add($key, $var, $expire= 0, $options= array());
 
     /**
      * Sets a value in the cache.
@@ -760,7 +741,7 @@ class xPDOCache {
      * @param array $options Additional options for the operation.
      * @return boolean True if successful
      */
-    function set($key, $var, $expire= 0, $options= array()) {}
+    abstract public function set($key, $var, $expire= 0, $options= array());
 
     /**
      * Replaces a value in the cache.
@@ -772,7 +753,7 @@ class xPDOCache {
      * @param array $options Additional options for the operation.
      * @return boolean True if successful
      */
-    function replace($key, $var, $expire= 0, $options= array()) {}
+    abstract public function replace($key, $var, $expire= 0, $options= array());
 
     /**
      * Deletes a value from the cache.
@@ -782,7 +763,7 @@ class xPDOCache {
      * @param array $options Additional options for the operation.
      * @return boolean True if successful
      */
-    function delete($key, $options= array()) {}
+    abstract public function delete($key, $options= array());
 
     /**
      * Gets a value from the cache.
@@ -792,7 +773,7 @@ class xPDOCache {
      * @param array $options Additional options for the operation.
      * @return mixed The value retrieved from the cache.
      */
-    function get($key, $options= array()) {}
+    public function get($key, $options= array()) {}
 
     /**
      * Flush all values from the cache.
@@ -801,37 +782,34 @@ class xPDOCache {
      * @param array $options Additional options for the operation.
      * @return boolean True if successful.
      */
-    function flush($options= array()) {}
+    abstract public function flush($options= array());
 }
 
 /**
  * A simple file-based caching implementation using executable PHP.
- * 
+ *
  * This can be used to relieve database loads, though the overall performance is
  * about the same as without the file-based cache.  For maximum performance and
  * scalability, use a server with memcached and the PHP memcache extension
  * configured.
- * 
+ *
  * @package xpdo
  * @subpackage cache
  */
 class xPDOFileCache extends xPDOCache {
-    function xPDOFileCache(& $xpdo, $options = array()) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo, $options = array()) {
+    public function __construct(& $xpdo, $options = array()) {
         parent :: __construct($xpdo, $options);
         $this->initialized = true;
     }
-    
-    function getCacheKey($key, $options = array()) {
+
+    public function getCacheKey($key, $options = array()) {
         $cachePath = $this->getOption('cache_path', $options);
         $cacheExt = $this->getOption('cache_ext', $options, '.cache.php');
         $key = parent :: getCacheKey($key, $options);
         return $cachePath . $key . $cacheExt;
     }
-    
-    function add($key, $var, $expire= 0, $options= array()) {
+
+    public function add($key, $var, $expire= 0, $options= array()) {
         $added= false;
         if (!file_exists($this->getCacheKey($key, $options))) {
             if ($expire === true)
@@ -840,8 +818,8 @@ class xPDOFileCache extends xPDOCache {
         }
         return $added;
     }
-    
-    function set($key, $var, $expire= 0, $options= array()) {
+
+    public function set($key, $var, $expire= 0, $options= array()) {
         $set= false;
         if ($var !== null) {
             if ($expire === true)
@@ -852,7 +830,7 @@ class xPDOFileCache extends xPDOCache {
                 $expireContent= 'if(time() > ' . $expirationTS . '){return null;}';
             }
             $fileName= $this->getCacheKey($key, $options);
-            if (!empty($options['format']) && $options['format'] == XPDO_CACHE_JSON) {
+            if (!empty($options['format']) && $options['format'] == xPDOCacheManager::CACHE_JSON) {
                 $content= !is_scalar($var) ? $this->xpdo->toJSON($var) : $var;
             } else {
             $content= '<?php ' . $expireContent . ' return ' . var_export($var, true) . ';';
@@ -861,8 +839,8 @@ class xPDOFileCache extends xPDOCache {
         }
         return $set;
     }
-    
-    function replace($key, $var, $expire= 0, $options= array()) {
+
+    public function replace($key, $var, $expire= 0, $options= array()) {
         $replaced= false;
         if (file_exists($this->getCacheKey($key, $options))) {
             if ($expire === true)
@@ -871,8 +849,8 @@ class xPDOFileCache extends xPDOCache {
         }
         return $replaced;
     }
-    
-    function delete($key, $options= array()) {
+
+    public function delete($key, $options= array()) {
         $deleted= false;
         $cacheKey= $this->getCacheKey($key, array_merge($options, array('cache_ext' => '')));
         if (file_exists($cacheKey) && is_dir($cacheKey)) {
@@ -885,12 +863,12 @@ class xPDOFileCache extends xPDOCache {
         }
         return $deleted;
     }
-    
-    function get($key, $options= array()) {
+
+    public function get($key, $options= array()) {
         $value= null;
         $cacheKey= $this->getCacheKey($key, $options);
         if (file_exists($cacheKey)) {
-            if (!empty($options['format']) && $options['format'] == XPDO_CACHE_JSON) {
+            if (!empty($options['format']) && $options['format'] == xPDOCacheManager::CACHE_JSON) {
                 $value= file_get_contents($cacheKey);
             } else {
                 $value= @ include ($cacheKey);
@@ -901,8 +879,8 @@ class xPDOFileCache extends xPDOCache {
         }
         return $value;
     }
-    
-    function flush($options= array()) {
+
+    public function flush($options= array()) {
         $cacheKey= $this->getCacheKey('', array_merge($options, array('cache_ext' => '')));
         return $this->xpdo->cacheManager->deleteTree($cacheKey, false, true);
     }

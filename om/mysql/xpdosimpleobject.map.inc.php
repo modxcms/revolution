@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright 2006, 2007, 2008, 2009 by  Jason Coward <xpdo@opengeek.com>
- * 
+ *
  * This file is part of xPDO.
  *
  * xPDO is free software; you can redistribute it and/or modify it under the
@@ -20,10 +20,10 @@
 
 /**
  * Metadata map for the xPDOSimpleObject class.
- * 
- * Provides an integer primary key column which uses MySQL's native 
+ *
+ * Provides an integer primary key column which uses MySQL's native
  * auto_increment primary key generation facilities.
- * 
+ *
  * @see xPDOSimpleObject
  * @package xpdo
  * @subpackage om.mysql
@@ -35,4 +35,3 @@ $xpdo_meta_map['xPDOSimpleObject']['fields']= array (
 $xpdo_meta_map['xPDOSimpleObject']['fieldMeta']= array (
    'id' => array('dbtype' => 'INTEGER', 'phptype' => 'integer', 'null' => false, 'index' => 'pk', 'generated' => 'native', 'attributes' => 'unsigned', ),
 );
-$xpdo_meta_map['xpdosimpleobject']= & $xpdo_meta_map['xPDOSimpleObject'];

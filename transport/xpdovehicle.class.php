@@ -38,9 +38,9 @@ class xPDOVehicle {
      * Represents the artifact and related attributes stored in the vehicle.
      * @var array
      */
-    var $payload = array ();
+    public $payload = array ();
 
-    var $class = 'xPDOVehicle';
+    public $class = 'xPDOVehicle';
 
     /**
      * Build a manifest entry to be registered in a transport for this vehicle.
@@ -50,7 +50,7 @@ class xPDOVehicle {
      * @return array An array of vehicle attributes that will be registered into
      * an xPDOTransport manifest.
      */
-    function register(& $transport) {
+    public function register(& $transport) {
         $vPackage = isset($this->payload['vehicle_package']) ? $this->payload['vehicle_package'] : 'transport';
         $vClass = isset($this->payload['vehicle_class']) ? $this->payload['vehicle_class'] : $this->class;
         $class = isset($this->payload['class']) ? $this->payload['class'] : $vClass;
@@ -84,7 +84,7 @@ class xPDOVehicle {
      * part of the artifact to operate on.  If not specified, the root element
      * of the payload is used.
      */
-    function get(& $transport, $options = array (), $element = null) {
+    public function get(& $transport, $options = array (), $element = null) {
         $artifact = null;
         if ($element === null) $element = $this->payload;
         $artifact = array_merge($options, $element);
@@ -101,8 +101,8 @@ class xPDOVehicle {
      * @return boolean True if the installation of the vehicle artifact was
      * successful.
      */
-    function install(& $transport, $options) {
-        $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'You must extend xPDOVehicle and implement the install() method to install a vehicle.');
+    public function install(& $transport, $options) {
+        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'You must extend xPDOVehicle and implement the install() method to install a vehicle.');
         return false;
     }
 
@@ -115,8 +115,8 @@ class xPDOVehicle {
      * @param array $options An array of options for altering the uninstallation
      * of the artifact.
      */
-    function uninstall(& $transport, $options) {
-        $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'You must extend xPDOVehicle and implement the uninstall() method to uninstall a vehicle.');
+    public function uninstall(& $transport, $options) {
+        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'You must extend xPDOVehicle and implement the uninstall() method to uninstall a vehicle.');
         return false;
     }
 
@@ -131,23 +131,23 @@ class xPDOVehicle {
      * @param array $options Additional options for the resolution process.
      * @return boolean Indicates if the resolution was successful.
      */
-    function resolve(& $transport, & $object, $options = array ()) {
+    public function resolve(& $transport, & $object, $options = array ()) {
         $resolved = false;
         if (isset ($this->payload['resolve'])) {
             while (list ($rKey, $r) = each($this->payload['resolve'])) {
                 $type = $r['type'];
                 $body = $r['body'];
-                $preExistingMode = XPDO_TRANSPORT_PRESERVE_PREEXISTING;
-                if (!empty ($options[XPDO_TRANSPORT_PREEXISTING_MODE])) {
-                    $preExistingMode = intval($options[XPDO_TRANSPORT_PREEXISTING_MODE]);
+                $preExistingMode = xPDOTransport::PRESERVE_PREEXISTING;
+                if (!empty ($options[xPDOTransport::PREEXISTING_MODE])) {
+                    $preExistingMode = intval($options[xPDOTransport::PREEXISTING_MODE]);
                 }
                 switch ($type) {
                     case 'file' :
-                        if (isset ($options[XPDO_TRANSPORT_RESOLVE_FILES]) && !$options[XPDO_TRANSPORT_RESOLVE_FILES]) {
+                        if (isset ($options[xPDOTransport::RESOLVE_FILES]) && !$options[xPDOTransport::RESOLVE_FILES]) {
                             continue;
                         }
                         if ($transport->xpdo->getDebug() === true) {
-                            $transport->xpdo->log(XPDO_LOG_LEVEL_DEBUG, "Resolving transport files: " . print_r($this, true));
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Resolving transport files: " . print_r($this, true));
                         }
                         $fileMeta = xPDO :: fromJSON($body, true);
                         $fileName = $fileMeta['name'];
@@ -155,13 +155,13 @@ class xPDOVehicle {
                         $fileTarget = eval ($fileMeta['target']);
                         $preservedArchive = $transport->path . $transport->signature . '/' . $this->payload['class'] . '/' . $this->payload['signature'] . '.' . $rKey . '.preserved.zip';
                         $cacheManager = $transport->xpdo->getCacheManager();
-                        switch ($options[XPDO_TRANSPORT_PACKAGE_ACTION]) {
-                            case XPDO_TRANSPORT_ACTION_UPGRADE:
-                            case XPDO_TRANSPORT_ACTION_INSTALL: // if package is installing
+                        switch ($options[xPDOTransport::PACKAGE_ACTION]) {
+                            case xPDOTransport::ACTION_UPGRADE:
+                            case xPDOTransport::ACTION_INSTALL: // if package is installing
                                 if ($cacheManager && file_exists($fileSource) && !empty ($fileTarget)) {
                                     $copied = array();
-                                    if ($preExistingMode === XPDO_TRANSPORT_PRESERVE_PREEXISTING && file_exists($fileTarget) && is_dir($fileTarget)) {
-                                        $transport->xpdo->log(XPDO_LOG_LEVEL_INFO, "Attempting to preserve files at {$fileTarget} into archive {$preservedArchive}");
+                                    if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && file_exists($fileTarget) && is_dir($fileTarget)) {
+                                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Attempting to preserve files at {$fileTarget} into archive {$preservedArchive}");
                                         $preserved = xPDOTransport::_pack($transport->xpdo, $preservedArchive, $fileTarget, $fileName);
                                     }
                                     if (is_dir($fileSource)) {
@@ -170,9 +170,9 @@ class xPDOVehicle {
                                         $copied = $cacheManager->copyFile($fileSource, $fileTarget, array_merge($options, array('copy_return_file_stat' => true)));
                                     }
                                     if (empty($copied)) {
-                                        $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not copy {$fileSource} to {$fileTarget}");
+                                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not copy {$fileSource} to {$fileTarget}");
                                     } else {
-                                        if ($preExistingMode === XPDO_TRANSPORT_PRESERVE_PREEXISTING && is_array($copied)) {
+                                        if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && is_array($copied)) {
                                             foreach ($copied as $copiedFile => $stat) {
                                                 if (isset($stat['overwritten'])) $transport->_preserved[$options['guid']]['files'][$copiedFile]= $stat;
                                             }
@@ -180,33 +180,33 @@ class xPDOVehicle {
                                         $resolved = true;
                                     }
                                 } else {
-                                    $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not copy {$fileSource} to {$fileTarget}");
+                                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not copy {$fileSource} to {$fileTarget}");
                                 }
                                 break;
-                            case XPDO_TRANSPORT_ACTION_UNINSTALL: /* if package is uninstalling
+                            case xPDOTransport::ACTION_UNINSTALL: /* if package is uninstalling
                                    user can override whether or not files from resolver are removed
                                    however default action is to remove */
-                                if (!isset($options[XPDO_TRANSPORT_RESOLVE_FILES_REMOVE]) || $options[XPDO_TRANSPORT_RESOLVE_FILES_REMOVE] !== false) {
+                                if (!isset($options[xPDOTransport::RESOLVE_FILES_REMOVE]) || $options[xPDOTransport::RESOLVE_FILES_REMOVE] !== false) {
                                     $path = $fileTarget.$fileName;
-                                    $transport->xpdo->log(XPDO_LOG_LEVEL_INFO,'Removing files in file resolver: '.$path);
+                                    $transport->xpdo->log(xPDO::LOG_LEVEL_INFO,'Removing files in file resolver: '.$path);
                                     if ($cacheManager && file_exists($path)) {
                                         if (is_dir($path) && $cacheManager->deleteTree($path, array_merge(array('deleteTop' => true, 'skipDirs' => false, 'extensions' => array()), $options))) {
                                             $resolved = true;
                                         } elseif (is_file($path) && unlink($path)) {
                                             $resolved = true;
                                         } else {
-                                            $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR,'Could not remove files from path: '.$path);
+                                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not remove files from path: '.$path);
                                         }
                                     } else {
-                                        $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR,'Could not find files to remove.');
+                                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not find files to remove.');
                                     }
                                 } else {
                                     /* action was chosen not to remove, send log message and continue */
-                                    $transport->xpdo->log(XPDO_LOG_LEVEL_INFO,'Skipping removing of files according to vehicle attributes.');
+                                    $transport->xpdo->log(xPDO::LOG_LEVEL_INFO,'Skipping removing of files according to vehicle attributes.');
                                     $resolved = true;
                                 }
-                                if ($preExistingMode === XPDO_TRANSPORT_RESTORE_PREEXISTING && file_exists($preservedArchive)) {
-                                    $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Attempting to restore files to {$fileTarget} from archive {$preservedArchive}");
+                                if ($preExistingMode === xPDOTransport::RESTORE_PREEXISTING && file_exists($preservedArchive)) {
+                                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempting to restore files to {$fileTarget} from archive {$preservedArchive}");
                                     $resolved = xPDOTransport::_unpack($transport->xpdo, $preservedArchive, $fileTarget);
                                 }
                                 break;
@@ -214,19 +214,19 @@ class xPDOVehicle {
                         break;
 
                     case 'php' :
-                        if (isset ($options[XPDO_TRANSPORT_RESOLVE_PHP]) && !$options[XPDO_TRANSPORT_RESOLVE_PHP]) {
+                        if (isset ($options[xPDOTransport::RESOLVE_PHP]) && !$options[xPDOTransport::RESOLVE_PHP]) {
                             continue;
                         }
                         $fileMeta = xPDO :: fromJSON($body, true);
                         $fileName = $fileMeta['name'];
                         $fileSource = $transport->path . $fileMeta['source'];
                         if (!$resolved = include ($fileSource)) {
-                            $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Error executing PHP script {$fileSource}");
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error executing PHP script {$fileSource}");
                         }
                         break;
 
                     default :
-                        $transport->xpdo->log(XPDO_LOG_LEVEL_WARN, "No modVehicle resolver found for type {$type}.");
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, "No modVehicle resolver found for type {$type}.");
                         break;
                 }
             }
@@ -246,7 +246,7 @@ class xPDOVehicle {
      * @param array $options Additional options for the validation process.
      * @return boolean Indicating if the validation was successful.
      */
-    function validate(& $transport, & $object, $options = array ()) {
+    public function validate(& $transport, & $object, $options = array ()) {
         $validated = true;
         if (isset ($this->payload['validate'])) {
             while (list ($rKey, $r) = each($this->payload['validate'])) {
@@ -254,19 +254,19 @@ class xPDOVehicle {
                 $body = $r['body'];
                 switch ($type) {
                     case 'php' :
-                        if (isset ($options[XPDO_TRANSPORT_VALIDATE_PHP]) && !$options[XPDO_TRANSPORT_VALIDATE_PHP]) {
+                        if (isset ($options[xPDOTransport::VALIDATE_PHP]) && !$options[xPDOTransport::VALIDATE_PHP]) {
                             continue;
                         }
                         $fileMeta = xPDO :: fromJSON($body, true);
                         $fileName = $fileMeta['name'];
                         $fileSource = $transport->path . $fileMeta['source'];
                         if (!$validated = include ($fileSource)) {
-                            $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Error executing xPDOVehicle validator: type php ({$fileSource})");
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error executing xPDOVehicle validator: type php ({$fileSource})");
                         }
                         break;
 
                     default :
-                        $transport->xpdo->log(XPDO_LOG_LEVEL_WARN, "xPDOVehicle does not support validators of type {$type}.");
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, "xPDOVehicle does not support validators of type {$type}.");
                         break;
                 }
             }
@@ -286,13 +286,13 @@ class xPDOVehicle {
      * @param array $attributes Additional attributes represented in the
      * vehicle.
      */
-    function put(& $transport, & $object, $attributes = array ()) {
+    public function put(& $transport, & $object, $attributes = array ()) {
         $this->payload = array_merge($this->payload, $attributes);
         if (!isset($this->payload['guid'])) {
             $this->payload['guid'] = md5(uniqid(rand(), true));
         }
         if (!isset ($this->payload['package'])) {
-            if (is_a($object, 'xPDOObject')) {
+            if ($object instanceof xPDOObject) {
                 $packageName = $object->_package;
             } else {
                 $packageName = '';
@@ -302,7 +302,7 @@ class xPDOVehicle {
         if (!isset($this->payload['class'])) {
             $className = 'xPDOVehicle';
             if (is_object($object)) {
-                if (is_a($object, 'xPDOObject')) {
+                if ($object instanceof xPDOObject) {
                     $className = $object->_class;
                 } else {
                     $className = get_class($object);
@@ -317,7 +317,7 @@ class xPDOVehicle {
             $nativeKey = null;
             $nativeKeyAttr = isset($this->payload['native_key_attribute']) ? $this->payload['native_key_attribute'] : null;
             if (is_object($object)) {
-                if (is_a($object, 'xPDOObject')) {
+                if ($object instanceof xPDOObject) {
                     $nativeKey = $object->getPrimaryKey();
                 } elseif (!empty($nativeKeyAttr) && isset($object->$nativeKeyAttr)) {
                     $nativeKey = $object->$nativeKeyAttr;
@@ -336,7 +336,7 @@ class xPDOVehicle {
             $this->payload['resolve'] = (array) $attributes['resolve'];
         }
         if (isset ($attributes['namespace'])) {
-            if (is_a($attributes['namespace'],'xPDOObject')) {
+            if ($attributes['namespace'] instanceof xPDOObject) {
                 $this->payload['namespace'] = $attributes['namespace']->get('name');
             } else {
                 $this->payload['namespace'] = $attributes['namespace'];
@@ -350,7 +350,7 @@ class xPDOVehicle {
      * @param xPDOTransport &$transport The transport to store the vehicle in.
      * @return boolean Indicates if the vehicle was stored in the transport.
      */
-    function store(& $transport) {
+    public function store(& $transport) {
         $stored = false;
         $cacheManager = $transport->xpdo->getCacheManager();
         if ($cacheManager && !empty ($this->payload)) {
@@ -362,7 +362,7 @@ class xPDOVehicle {
             $this->payload['filename'] = $this->payload['signature'] . '.vehicle';
             $vFileName = $transport->path . $transport->signature . '/' . $this->payload['class'] . '/' . $this->payload['filename'];
             if (!($stored = $cacheManager->writeFile($vFileName, $content))) {
-                $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Could not store vehicle to file ' . $vFileName);
+                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not store vehicle to file ' . $vFileName);
             }
         }
         return $stored;
@@ -374,7 +374,7 @@ class xPDOVehicle {
      * @access protected
      * @param xPDOTransport &$transport A reference to the transport the vehicle is being stored in.
      */
-    function _compilePayload(& $transport) {
+    protected function _compilePayload(& $transport) {
         $cacheManager = $transport->xpdo->getCacheManager();
         if ($cacheManager) {
             if (isset ($this->payload['resolve']) && is_array($this->payload['resolve'])) {
@@ -401,11 +401,11 @@ class xPDOVehicle {
                                     $copied = $cacheManager->copyFile($fileSource, $fileTarget . $fileName);
                                 }
                                 if (!$copied) {
-                                    $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not copy file from {$fileSource} to {$fileTarget}{$fileName}");
+                                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not copy file from {$fileSource} to {$fileTarget}{$fileName}");
                                     $body = null;
                                 }
                             } else {
-                                $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Source file {$fileSource} is missing or {$fileTarget} is not writable");
+                                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Source file {$fileSource} is missing or {$fileTarget} is not writable");
                                 $body = null;
                             }
                             break;
@@ -418,12 +418,12 @@ class xPDOVehicle {
                             $body['name'] = $scriptName;
                             $body = array_merge($r, $body);
                             if (!$cacheManager->copyFile($fileSource, $fileTarget)) {
-                                $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Source file {$fileSource} is missing or {$fileTarget} could not be written");
+                                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Source file {$fileSource} is missing or {$fileTarget} could not be written");
                             }
                             break;
 
                         default :
-                            $transport->xpdo->log(XPDO_LOG_LEVEL_WARN, "xPDOVehicle does not support resolvers of type {$type}.");
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, "xPDOVehicle does not support resolvers of type {$type}.");
                             break;
                     }
                     if ($body) {
@@ -450,12 +450,12 @@ class xPDOVehicle {
                             $body['name'] = $scriptName;
                             $body = array_merge($r, $body);
                             if (!$cacheManager->copyFile($fileSource, $fileTarget)) {
-                                $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Source file {$fileSource} is missing or {$fileTarget} could not be written");
+                                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Source file {$fileSource} is missing or {$fileTarget} could not be written");
                             }
                             break;
 
                         default :
-                            $transport->xpdo->log(XPDO_LOG_LEVEL_WARN, "xPDOVehicle does not support validators of type {$type}.");
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, "xPDOVehicle does not support validators of type {$type}.");
                             break;
                     }
                     if ($body) {

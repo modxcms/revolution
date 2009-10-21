@@ -49,11 +49,11 @@ class xPDOZip {
             if (is_writable(dirname($this->_filename))) {
                 if ($this->getOption('create', null, false)) {
                     if ($this->_archive->open($this->_filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE) !== true) {
-                        $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "xPDOZip: Could not create archive at {$this->_filename}");
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Could not create archive at {$this->_filename}");
                     }
                 } else {
                     if ($this->_archive->open($this->_filename) !== true) {
-                        $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "xPDOZip: Could not open archive at {$this->_filename}");
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Could not open archive at {$this->_filename}");
                     }
                 }
             }

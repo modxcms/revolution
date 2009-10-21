@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright 2006, 2007, 2008, 2009 by  Jason Coward <xpdo@opengeek.com>
- * 
+ *
  * This file is part of xPDO.
  *
  * xPDO is free software; you can redistribute it and/or modify it under the
@@ -20,11 +20,11 @@
 
 /**
  * Contains a derivative of the xPDOObject class for MySQL.
- * 
+ *
  * This file contains the base persistent object classes for MySQL, which your
  * user-defined classes will extend when implementing an xPDO object model
  * targeted at the MySQL platform.
- * 
+ *
  * @package xpdo
  * @subpackage om.mysql
  */
@@ -36,50 +36,46 @@ if (!class_exists('xPDOObject')) {
 
 /**
  * Implements extensions to the base xPDOObject class for MySQL.
- * 
+ *
  * {@inheritdoc}
- * 
+ *
  * @package xpdo
  * @subpackage om.mysql
  */
 class xPDOObject_mysql extends xPDOObject {
-    var $_currentTimestamps= array (
+    protected $_currentTimestamps= array (
         'CURRENT_TIMESTAMP',
         'CURRENT_TIMESTAMP()',
-        'NOW()', 
+        'NOW()',
         'LOCALTIME',
         'LOCALTIME()',
-        'LOCALTIMESTAMP', 
+        'LOCALTIMESTAMP',
         'LOCALTIMESTAMP()',
         'SYSDATE()'
     );
-    var $_currentDates= array (
+    protected $_currentDates= array (
         'CURDATE()',
         'CURRENT_DATE',
         'CURRENT_DATE()'
     );
 
-    /**#@+
+    /**
      * {@inheritdoc}
      * @returns xPDOObject_mysql
      */
-    function xPDOObject_mysql(& $xpdo) {
-        $this->__construct($xpdo);
-    }
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
     }
-    /**#@-*/
 
     /**
      * Initializes the field names with the qualified table name.
-     * 
+     *
      * Once this is called, you can lookup the qualified name by the field name
      * itself.
-     * 
+     *
      * @access protected
      */
-    function _initFields() {
+    protected function _initFields() {
         reset($this->_fieldMeta);
         while (list ($k, $v)= each($this->_fieldMeta)) {
             $this->fieldNames[$k]= "`{$this->_table}`.`{$k}`";
@@ -89,16 +85,12 @@ class xPDOObject_mysql extends xPDOObject {
 
 /**
  * Extend this abstract class to define a class having an integer primary key.
- * 
+ *
  * @package xpdo
  * @subpackage om.mysql
  */
 class xPDOSimpleObject_mysql extends xPDOSimpleObject {
-    function xPDOSimpleObject_mysql(& $xpdo) {
-        $this->__construct($xpdo);
-    }
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
     }
 }
-?>

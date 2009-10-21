@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright 2006, 2007, 2008, 2009 by  Jason Coward <xpdo@opengeek.com>
- * 
+ *
  * This file is part of xPDO.
  *
  * xPDO is free software; you can redistribute it and/or modify it under the
@@ -42,33 +42,28 @@ class xPDOManager {
      * @var xPDO A reference to the XPDO instance using this manager.
      * @access public
      */
-    var $xpdo= null;
+    public $xpdo= null;
     /**
      * @var xPDOGenerator The generator class for forward and reverse
      * engineering tasks (loaded only on demand).
      */
-    var $generator= null;
+    public $generator= null;
     /**
      * @var xPDOTransport The data transport class for migrating data.
      */
-    var $transport= null;
+    public $transport= null;
     /**
      * @var array Describes the physical database types.
      */
-    var $dbtypes= array ();
-
-    var $action; // legacy action directive
+    public $dbtypes= array ();
 
     /**
      * Get a xPDOManager instance.
      *
      * @param object $xpdo A reference to a specific modDataSource instance.
      */
-    function xPDOManager(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        if ($xpdo !== null && is_a($xpdo, 'xPDO')) {
+    public function __construct(& $xpdo) {
+        if ($xpdo !== null && $xpdo instanceof xPDO) {
             $this->xpdo= & $xpdo;
         }
     }
@@ -78,7 +73,7 @@ class xPDOManager {
      *
      * @todo Refactor this to work on an xPDO instance rather than as a static call.
      */
-    function createSourceContainer($dsn, $username= '', $password= '', $containerOptions= null) {
+    public function createSourceContainer($dsn, $username= '', $password= '', $containerOptions= null) {
         $created= false;
         if ($dsnArray= xPDO :: parseDSN($dsn)) {
             switch ($dsnArray['dbtype']) {
@@ -106,8 +101,8 @@ class xPDOManager {
      *
      * @return xPDOGenerator A generator class for this manager.
      */
-    function getGenerator() {
-        if ($this->generator === null || !is_a($this->generator, 'xPDOGenerator')) {
+    public function getGenerator() {
+        if ($this->generator === null || !$this->generator instanceof xPDOGenerator) {
             if (!isset($this->xpdo->config['xPDOGenerator.'.$this->xpdo->config['dbtype'].'.class']) || !$generatorClass= $this->xpdo->loadClass($this->xpdo->config['xPDOGenerator.'.$this->xpdo->config['dbtype'].'.class'], '', false, true)) {
                 $generatorClass= $this->xpdo->loadClass($this->xpdo->config['dbtype'] . '.xPDOGenerator', '', false, true);
             }
@@ -115,8 +110,8 @@ class xPDOManager {
                 $generatorClass .= '_' . $this->xpdo->config['dbtype'];
                 $this->generator= new $generatorClass ($this);
             }
-            if ($this->generator === null || !is_a($this->generator, 'xPDOGenerator')) {
-                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not load xPDOGenerator [{$generatorClass}] class.");
+            if ($this->generator === null || !$this->generator instanceof xPDOGenerator) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load xPDOGenerator [{$generatorClass}] class.");
             }
         }
         return $this->generator;
@@ -125,16 +120,16 @@ class xPDOManager {
     /**
      * Gets a data transport mechanism for this xPDOManager instance.
      */
-    function getTransport() {
-        if ($this->transport === null || !is_a($this->transport, 'xPDOTransport')) {
+    public function getTransport() {
+        if ($this->transport === null || !$this->transport instanceof xPDOTransport) {
             if (!isset($this->xpdo->config['xPDOTransport.class']) || !$transportClass= $this->xpdo->loadClass($this->xpdo->config['xPDOTransport.class'], '', false, true)) {
                 $transportClass= $this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
             }
             if ($transportClass) {
                 $this->transport= new $transportClass ($this);
             }
-            if ($this->transport === null || !is_a($this->transport, 'xPDOTransport')) {
-                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not load xPDOTransport [{$transportClass}] class.");
+            if ($this->transport === null || !$this->transport instanceof xPDOTransport) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load xPDOTransport [{$transportClass}] class.");
             }
         }
         return $this->transport;

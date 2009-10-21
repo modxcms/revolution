@@ -31,12 +31,12 @@
  * @subpackage transport
  */
 class xPDOFileVehicle extends xPDOVehicle {
-    var $class = 'xPDOFileVehicle';
+    public $class = 'xPDOFileVehicle';
 
     /**
      * Install a file set represented by and stored in this vehicle.
      */
-    function install(& $transport, $options) {
+    public function install(& $transport, $options) {
         $installed = $this->_installFiles($transport, $options);
         return $installed;
     }
@@ -44,20 +44,20 @@ class xPDOFileVehicle extends xPDOVehicle {
     /**
      * Uninstall a file set represented by and stored in this vehicle.
      */
-    function uninstall(& $transport, $options) {
+    public function uninstall(& $transport, $options) {
         $uninstalled = $this->_uninstallFiles($transport, $options);
         return $uninstalled;
     }
 
     /**
      * Install files or folders represented by and stored in this vehicle.
-     * 
+     *
      * @access protected
      * @param xPDOTransport &$transport A reference the transport this vehicle is stored in.
      * @param array $options Optional attributes that can be applied to vehicle install process.
      * @return boolean True if the files are installed successfully.
      */
-    function _installFiles($transport, $options) {
+    protected function _installFiles($transport, $options) {
         $installed = false;
         $copied = false;
         $vOptions = $this->get($transport, $options);
@@ -69,28 +69,28 @@ class xPDOFileVehicle extends xPDOVehicle {
             $cacheManager = $transport->xpdo->getCacheManager();
             if ($this->validate($transport, $object, $vOptions)) {
                 if ($cacheManager && file_exists($fileSource) && !empty ($fileTarget)) {
-                    if (isset ($vOptions[XPDO_TRANSPORT_RESOLVE_FILES]) && !$vOptions[XPDO_TRANSPORT_RESOLVE_FILES]) {
-                        $transport->xpdo->log(XPDO_LOG_LEVEL_INFO, "Skipping installion of files from {$fileSource} to {$fileTarget}");
+                    if (isset ($vOptions[xPDOTransport::RESOLVE_FILES]) && !$vOptions[xPDOTransport::RESOLVE_FILES]) {
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Skipping installion of files from {$fileSource} to {$fileTarget}");
                         $installed = true;
                     } else {
-                        $transport->xpdo->log(XPDO_LOG_LEVEL_INFO, "Installing files from {$fileSource} to {$fileTarget}");
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Installing files from {$fileSource} to {$fileTarget}");
                         if (is_dir($fileSource) || is_file($fileSource)) {
                             $copied = $cacheManager->copyTree($fileSource, $fileTarget);
                         }
                         if (!$copied) {
-                            $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not install files from {$fileSource} to {$fileTarget}");
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install files from {$fileSource} to {$fileTarget}");
                         } else {
                             $installed = true;
                         }
                     }
                     if (!$this->resolve($transport, $object, $vOptions)) {
-                        $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
                     }
                 } else {
-                    $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not install files from {$fileSource} to {$fileTarget}");
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install files from {$fileSource} to {$fileTarget}");
                 }
             } else {
-                $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Could not validate vehicle: ' . print_r($vOptions, true));
+                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle: ' . print_r($vOptions, true));
             }
         }
         return $installed;
@@ -98,13 +98,13 @@ class xPDOFileVehicle extends xPDOVehicle {
 
     /**
      * Uninstall files or folders represented by and stored in this vehicle.
-     * 
+     *
      * @access protected
      * @param xPDOTransport &$transport A reference the transport this vehicle is stored in.
      * @param array $options Optional attributes that can be applied to vehicle uninstall process.
      * @return boolean True if the files are uninstalled successfully.
      */
-    function _uninstallFiles($transport, $options) {
+    protected function _uninstallFiles($transport, $options) {
         $uninstalled = false;
         $vOptions = $this->get($transport, $options);
         if (isset ($vOptions['object']) && isset ($vOptions['object']['source']) && isset ($vOptions['object']['target'])) {
@@ -114,24 +114,24 @@ class xPDOFileVehicle extends xPDOVehicle {
             $fileTarget = eval ($object['target']);
             $cacheManager = $transport->xpdo->getCacheManager();
             $path = $fileTarget . $fileName;
-            $transport->xpdo->log(XPDO_LOG_LEVEL_INFO, 'Uninstalling files from xPDOFileVehicle: ' . $path);
+            $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Uninstalling files from xPDOFileVehicle: ' . $path);
             if ($this->validate($transport, $object, $vOptions)) {
                 $uninstalled = true;
                 if ($cacheManager && file_exists($path)) {
-                    if (isset ($vOptions[XPDO_TRANSPORT_RESOLVE_FILES_REMOVE]) && !$vOptions[XPDO_TRANSPORT_RESOLVE_FILES_REMOVE]) {
-                        $transport->xpdo->log(XPDO_LOG_LEVEL_INFO, "Skipping removal of files from {$path}");
+                    if (isset ($vOptions[xPDOTransport::RESOLVE_FILES_REMOVE]) && !$vOptions[xPDOTransport::RESOLVE_FILES_REMOVE]) {
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Skipping removal of files from {$path}");
                     } elseif (!$cacheManager->deleteTree($path, true, false, array ())) {
                         $uninstalled = false;
-                        $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Could not uninstall files from path: ' . $path);
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not uninstall files from path: ' . $path);
                     }
                 } else {
-                    $transport->xpdo->log(XPDO_LOG_LEVEL_WARN, 'Could not find files to uninstall.');
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, 'Could not find files to uninstall.');
                 }
                 if (!$this->resolve($transport, $object, $vOptions)) {
-                    $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
                 }
             } else {
-                $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Could not validate vehicle: ' . print_r($vOptions, true));
+                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle: ' . print_r($vOptions, true));
             }
         }
         return $uninstalled;
@@ -140,7 +140,7 @@ class xPDOFileVehicle extends xPDOVehicle {
     /**
      * Adds the file definition object to the payload.
      */
-    function put(& $transport, & $object, $attributes = array ()) {
+    public function put(& $transport, & $object, $attributes = array ()) {
         if (!isset ($this->payload['class'])) {
             $this->payload['class'] = 'xPDOFileVehicle';
         }
@@ -154,7 +154,7 @@ class xPDOFileVehicle extends xPDOVehicle {
     /**
      * Copies the files into the vehicle and transforms the payload for storage.
      */
-    function _compilePayload(& $transport) {
+    protected function _compilePayload(& $transport) {
         parent :: _compilePayload($transport);
         $body = array ();
         $cacheManager = $transport->xpdo->getCacheManager();
@@ -179,11 +179,11 @@ class xPDOFileVehicle extends xPDOVehicle {
                         $copied = $cacheManager->copyFile($fileSource, $fileTarget . $fileName);
                     }
                     if (!$copied) {
-                        $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not copy file from {$fileSource} to {$fileTarget}{$fileName}");
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not copy file from {$fileSource} to {$fileTarget}{$fileName}");
                         $body = null;
                     }
                 } else {
-                    $transport->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Source file {$fileSource} is missing or {$fileTarget} is not writable");
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Source file {$fileSource} is missing or {$fileTarget} is not writable");
                     $body = null;
                 }
             }

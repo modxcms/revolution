@@ -3,16 +3,16 @@
  * Copyright 2006, 2007, 2008, 2009 by  Jason Coward <xpdo@opengeek.com>
  *
  * This file is part of xPDO.
- * 
+ *
  * xPDO is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation; either version 2 of the License, or (at your option) any later
  * version.
- * 
+ *
  * xPDO is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * xPDO; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
@@ -20,7 +20,7 @@
 
 /**
  * The MySQL implementation of the xPDOManager class.
- * 
+ *
  * @package xpdo
  * @subpackage om.mysql
  */
@@ -32,22 +32,23 @@ require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/xpdoman
 
 /**
  * Provides MySQL data source management for an xPDO instance.
- * 
+ *
  * These are utility functions that only need to be loaded under special
  * circumstances, such as creating tables, adding indexes, altering table
  * structures, etc.  xPDOManager class implementations are specific to a
  * database driver and this instance is implemented for MySQL.
- * 
+ *
  * @package xpdo
  * @subpackage om.mysql
  */
 class xPDOManager_mysql extends xPDOManager {
     /**
      * Get a xPDOManager instance.
-     * 
+     *
      * @param object $xpdo A reference to a specific modDataSource instance.
      */
-    function xPDOManager_mysql(& $xpdo) {
+    function __construct(& $xpdo) {
+        parent :: __construct($xpdo);
         $this->dbtypes['integer']= array('INT','INTEGER','TINYINT','BOOLEAN','SMALLINT','MEDIUMINT','BIGINT');
         $this->dbtypes['boolean']= array('BOOLEAN','BOOL');
         $this->dbtypes['float']= array('DECIMAL','DEC','NUMERIC','FLOAT','DOUBLE','DOUBLE PRECISION','REAL');
@@ -68,35 +69,35 @@ class xPDOManager_mysql extends xPDOManager {
      * @param array $containerOptions An array of options for controlling the creation of the container.
      * @return boolean True only if the database is created successfully.
      */
-    function createSourceContainer($dsnArray, $username= '', $password= '', $containerOptions= array ()) {
+    public function createSourceContainer($dsnArray, $username= '', $password= '', $containerOptions= array ()) {
         $created= false;
         if (is_array($dsnArray)) {
-                $sql= 'CREATE DATABASE `' . $dsnArray['dbname'] . '`';
+            $sql= 'CREATE DATABASE `' . $dsnArray['dbname'] . '`';
             if (isset ($containerOptions['collation']) && isset ($containerOptions['charset'])) {
                 $sql.= ' CHARACTER SET ' . $containerOptions['charset'];
                 $sql.= ' COLLATE ' . $containerOptions['collation'];
             }
-                if ($conn= mysql_connect($dsnArray['host'], $username, $password, true)) {
-                    if (!$rt= @ mysql_select_db($dsnArray['dbname'], $conn)) {
-                        @ mysql_query($sql, $conn);
-                    $errorNo= @ mysql_errno($conn);
-                    $created= $errorNo ? false : true;
-                    }
+            if ($conn= mysql_connect($dsnArray['host'], $username, $password, true)) {
+                if (!$rt= @ mysql_select_db($dsnArray['dbname'], $conn)) {
+                    @ mysql_query($sql, $conn);
+                $errorNo= @ mysql_errno($conn);
+                $created= $errorNo ? false : true;
                 }
             }
+        }
         return $created;
     }
 
     /**
      * Drops a physical data container, if it exists.
-     * 
+     *
      * @param string $dsn Represents the database connection string.
      * @param string $username Database username with privileges to drop tables.
      * @param string $password Database user password.
      * @return int Returns 1 on successful drop, 0 on failure, and -1 if the db
      * does not exist.
      */
-    function removeSourceContainer() {
+    public function removeSourceContainer() {
         $removed= 0;
         if ($dsnArray= & $this->xpdo->config) {
             $sql= 'DROP DATABASE `' . $dsnArray['dbname'] . '`';
@@ -121,16 +122,16 @@ class xPDOManager_mysql extends xPDOManager {
      * @return int Returns 1 on successful drop, 0 on failure, and -1 if the table
      * does not exist.
      */
-    function removeObjectContainer($className) {
+    public function removeObjectContainer($className) {
         $removed= 0;
         if ($instance= $this->xpdo->newObject($className)) {
             $sql= 'DROP TABLE ' . $this->xpdo->getTableName($className);
             $removed= $this->xpdo->exec($sql);
             if (!$removed && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO_ERR_NONE) {
-                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Could not drop table ' . $className . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not drop table ' . $className . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
             } else {
                 $removed= true;
-                $this->xpdo->log(XPDO_LOG_LEVEL_INFO, 'Dropped table' . $className . "\nSQL: {$sql}\n");
+                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Dropped table' . $className . "\nSQL: {$sql}\n");
             }
         }
         return $removed;
@@ -140,14 +141,14 @@ class xPDOManager_mysql extends xPDOManager {
      * Creates the container for a persistent data object.  In this
      * implementation, a source container is a synonym for a MySQL database
      * table.
-     * 
+     *
      * @todo Add more robust index support.
      * @todo Add constraint support.
-     * 
+     *
      * @param string $className The class of object to create a source container
      * for.
      */
-    function createObjectContainer($className) {
+    public function createObjectContainer($className) {
         $created= false;
         if ($instance= $this->xpdo->newObject($className)) {
                 $tableName= $instance->_table;
@@ -282,10 +283,10 @@ class xPDOManager_mysql extends xPDOManager {
                 $sql .= ") TYPE={$tableType}";
             $created= $this->xpdo->exec($sql);
             if (!$created && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO_ERR_NONE) {
-                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
                 } else {
                     $created= true;
-                $this->xpdo->log(XPDO_LOG_LEVEL_INFO, 'Created table' . $tableName . "\nSQL: {$sql}\n");
+                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table' . $tableName . "\nSQL: {$sql}\n");
                 }
             }
         return $created;

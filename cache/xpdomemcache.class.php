@@ -27,15 +27,11 @@
  * @subpackage cache
  */
 class xPDOMemCache extends xPDOCache {
-    var $key = '';
-    var $memcache = null;
+    protected $memcache = null;
 
-    function xPDOMemCache(& $xpdo, $options = array()) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo, $options = array()) {
+    public function __construct(& $xpdo, $options = array()) {
         parent :: __construct($xpdo, $options);
-        if (class_exists('Memcache')) {
+        if (class_exists('Memcache', true)) {
             $this->memcache= new Memcache();
             if ($this->memcache) {
                 $servers = explode(',', $this->getOption($this->key . '_memcached_server', $options, $this->getOption('memcached_server', $options, 'localhost:11211')));
@@ -57,44 +53,44 @@ class xPDOMemCache extends xPDOCache {
                 $this->initialized = true;
             } else {
                 $this->memcache = null;
-                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "xPDOMemCache[{$this->key}]: Error creating memcache provider for server(s): " . $this->getOption($this->key . '_memcached_server', $options, $this->getOption('memcached_server', $options, 'localhost:11211')));
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOMemCache[{$this->key}]: Error creating memcache provider for server(s): " . $this->getOption($this->key . '_memcached_server', $options, $this->getOption('memcached_server', $options, 'localhost:11211')));
             }
         } else {
-            $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "xPDOMemCache[{$this->key}]: Error creating memcache provider; xPDOMemCache requires the PHP memcache extension.");
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOMemCache[{$this->key}]: Error creating memcache provider; xPDOMemCache requires the PHP memcache extension.");
         }
     }
 
-    function add($key, $var, $expire= 0, $options= array()) {
+    public function add($key, $var, $expire= 0, $options= array()) {
         $added= $this->memcache->add(
             $this->getCacheKey($key),
             $var,
-            $this->getOption($this->key . XPDO_OPT_CACHE_COMPRESS, $options, $this->getOption(XPDO_OPT_CACHE_COMPRESS, $options, false)),
+            $this->getOption($this->key . xPDO::OPT_CACHE_COMPRESS, $options, $this->getOption(xPDO::OPT_CACHE_COMPRESS, $options, false)),
             $expire
         );
         return $added;
     }
 
-    function set($key, $var, $expire= 0, $options= array()) {
+    public function set($key, $var, $expire= 0, $options= array()) {
         $set= $this->memcache->set(
             $this->getCacheKey($key),
             $var,
-            $this->getOption($this->key . XPDO_OPT_CACHE_COMPRESS, $options, $this->getOption(XPDO_OPT_CACHE_COMPRESS, $options, false)),
+            $this->getOption($this->key . xPDO::OPT_CACHE_COMPRESS, $options, $this->getOption(xPDO::OPT_CACHE_COMPRESS, $options, false)),
             $expire
         );
         return $set;
     }
 
-    function replace($key, $var, $expire= 0, $options= array()) {
+    public function replace($key, $var, $expire= 0, $options= array()) {
         $replaced= $this->memcache->replace(
             $this->getCacheKey($key),
             $var,
-            $this->getOption($this->key . XPDO_OPT_CACHE_COMPRESS, $options, $this->getOption(XPDO_OPT_CACHE_COMPRESS, $options, false)),
+            $this->getOption($this->key . xPDO::OPT_CACHE_COMPRESS, $options, $this->getOption(xPDO::OPT_CACHE_COMPRESS, $options, false)),
             $expire
         );
         return $replaced;
     }
 
-    function delete($key, $options= array()) {
+    public function delete($key, $options= array()) {
         $deleted = false;
         if (!isset($options['multiple_object_delete']) || empty($options['multiple_object_delete'])) {
             $deleted= $this->memcache->delete($this->getCacheKey($key));
@@ -102,12 +98,12 @@ class xPDOMemCache extends xPDOCache {
         return $deleted;
     }
 
-    function get($key, $options= array()) {
+    public function get($key, $options= array()) {
         $value= $this->memcache->get($this->getCacheKey($key));
         return $value;
     }
 
-    function flush($options= array()) {
+    public function flush($options= array()) {
         return $this->memcache->flush();
     }
 }

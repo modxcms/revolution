@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright 2006, 2007, 2008, 2009 by  Jason Coward <xpdo@opengeek.com>
- * 
+ *
  * This file is part of xPDO.
  *
  * xPDO is free software; you can redistribute it and/or modify it under the
@@ -35,15 +35,12 @@ include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../xpdoquery.cla
  * @subpackage om.mysql
  */
 class xPDOQuery_mysql extends xPDOQuery {
-    function xPDOQuery_mysql(& $xpdo, $class, $criteria= null) {
-        $this->__construct($xpdo, $class, $criteria);
-    }
-    function __construct(& $xpdo, $class, $criteria= null) {
+    public function __construct(& $xpdo, $class, $criteria= null) {
         parent :: __construct($xpdo, $class, $criteria);
         $this->query['priority']= '';
     }
 
-    function select($columns= '*') {
+    public function select($columns= '*') {
         if (!is_array($columns)) {
             $columns= trim($columns);
             if ($columns == '*' || $columns === $this->_alias . '.*' || $columns === '`' . $this->_alias . '`.*') {
@@ -61,7 +58,7 @@ class xPDOQuery_mysql extends xPDOQuery {
         return $this;
     }
 
-    function join($class, $alias= '', $type= XPDO_SQL_JOIN_CROSS, $conditions= array (), $conjunction= XPDO_SQL_AND, $binding= null, $condGroup= 0) {
+    public function join($class, $alias= '', $type= xPDOQuery::SQL_JOIN_CROSS, $conditions= array (), $conjunction= xPDOQuery::SQL_AND, $binding= null, $condGroup= 0) {
         if ($this->xpdo->loadClass($class)) {
             $alias= $alias ? $alias : $class;
             $target= & $this->query['from']['joins'];
@@ -86,7 +83,7 @@ class xPDOQuery_mysql extends xPDOQuery {
         return $this;
     }
 
-    function bindGraph($graph) {
+    public function bindGraph($graph) {
         if (is_string($graph)) {
             $graph= $this->xpdo->fromJSON($graph);
         }
@@ -111,7 +108,7 @@ class xPDOQuery_mysql extends xPDOQuery {
         return $this;
     }
 
-    function bindGraphNode($parentClass, $parentAlias, $classAlias, $relations) {
+    public function bindGraphNode($parentClass, $parentAlias, $classAlias, $relations) {
         if ($fkMeta= $this->xpdo->getFKDefinition($parentClass, $classAlias)) {
             $class= $fkMeta['class'];
             $local= $fkMeta['local'];
@@ -127,7 +124,7 @@ class xPDOQuery_mysql extends xPDOQuery {
         }
     }
 
-    function construct() {
+    public function construct() {
         $constructed= false;
         $this->bindings= array ();
         $command= strtoupper($this->query['command']);
@@ -214,7 +211,7 @@ class xPDOQuery_mysql extends xPDOQuery {
         return (!empty ($this->sql));
     }
 
-    function parseConditions($conditions) {
+    public function parseConditions($conditions) {
         $result= array ();
         $pk= $this->xpdo->getPK($this->_class);
         $pktype= $this->xpdo->getPKType($this->_class);
@@ -237,7 +234,7 @@ class xPDOQuery_mysql extends xPDOQuery {
                         'type' => $isString ? PDO_PARAM_STR : PDO_PARAM_INT,
                         'length' => 0
                     );
-                    $result[$iteration]['__conjunction']= XPDO_SQL_AND;
+                    $result[$iteration]['__conjunction']= xPDOQuery::SQL_AND;
                     $iteration++;
                 }
             } else {
@@ -253,12 +250,12 @@ class xPDOQuery_mysql extends xPDOQuery {
                             $result[]= $val;
                             continue;
                         } else {
-                            $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Error parsing condition with key {$key}: " . print_r($val, true));
+                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing condition with key {$key}: " . print_r($val, true));
                         }
                     }
                     $alias= $command == 'SELECT' ? $this->_class : trim($this->xpdo->getTableName($this->_class, false), $this->xpdo->_escapeChar);
                     $operator= '=';
-                    $conjunction= XPDO_SQL_AND;
+                    $conjunction= xPDOQuery::SQL_AND;
                     $key_operator= explode(':', $key);
                     if ($key_operator && count($key_operator) === 2) {
                         $key= $key_operator[0];
@@ -308,7 +305,7 @@ class xPDOQuery_mysql extends xPDOQuery {
             }
             $result['__sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$pk}{$this->xpdo->_escapeChar} = ?";
             $result['__binding']= array ('value' => $conditions, 'type' => $param_type, 'length' => 0);
-            $result['__conjunction']= XPDO_SQL_AND;
+            $result['__conjunction']= xPDOQuery::SQL_AND;
         }
         return $result;
     }

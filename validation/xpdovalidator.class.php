@@ -36,14 +36,11 @@
  * @subpackage validation
  */
 class xPDOValidator {
-    var $object = null;
-    var $results = array();
-    var $messages = array();
+    public $object = null;
+    public $results = array();
+    public $messages = array();
 
-    function xPDOValidator(& $object) {
-        $this->__construct($object);
-    }
-    function __construct(& $object) {
+    public function __construct(& $object) {
         $this->object = & $object;
         $this->object->_loadValidation(true);
     }
@@ -54,7 +51,7 @@ class xPDOValidator {
      * @param array $parameters A collection of parameters.
      * @return boolean Either true or false indicating valid or invalid.
      */
-    function validate($parameters = array()) {
+    public function validate($parameters = array()) {
         $validated= false;
         $this->reset();
         $stopOnFail= isset($parameters['stopOnFail']) && $parameters['stopOnFail']
@@ -78,14 +75,14 @@ class xPDOValidator {
                                      $result= call_user_func_array($callable, array($this->object->_fields[$column],$rule['parameters']));
                                     if (!$result) $this->addMessage($column, $ruleName, isset($rule['parameters']['message']) ? $rule['parameters']['message'] : $ruleName . ' failed');
                                 } else {
-                                    $this->object->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Validation function {$callable} is not a valid callable function.");
+                                    $this->object->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Validation function {$callable} is not a valid callable function.");
                                 }
                                 break;
                             case 'preg_match':
                                 $result= (boolean) preg_match($rule['rule'], $this->object->_fields[$column]);
                                 if (!$result) $this->addMessage($column, $ruleName, isset($rule['parameters']['message']) ? $rule['parameters']['message'] : $ruleName . ' failed');
                                 if ($this->object->xpdo->getDebug() === true)
-                                    $this->object->xpdo->log(XPDO_LOG_LEVEL_DEBUG, "preg_match validation against {$rule['rule']} resulted in " . print_r($result, 1));
+                                    $this->object->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "preg_match validation against {$rule['rule']} resulted in " . print_r($result, 1));
                                 break;
                             case 'xPDOValidationRule':
                                 if ($ruleClass= $this->object->xpdo->loadClass($rule['rule'], '', false, true)) {
@@ -95,15 +92,15 @@ class xPDOValidator {
                                             $callableParams= array($this->object->_fields[$column], $rule['parameters']);
                                             $result= call_user_func_array($callable, $callableParams);
                                         } else {
-                                            $this->object->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Validation rule class {$rule['rule']} does not have an isValid() method.");
+                                            $this->object->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Validation rule class {$rule['rule']} does not have an isValid() method.");
                                         }
                                     }
                                 } else {
-                                    $this->object->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Could not load validation rule class: {$rule['rule']}");
+                                    $this->object->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load validation rule class: {$rule['rule']}");
                                 }
                                 break;
                             default:
-                                $this->object->xpdo->log(XPDO_LOG_LEVEL_ERROR, "Unsupported validation rule: " . print_r($rule, true));
+                                $this->object->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Unsupported validation rule: " . print_r($rule, true));
                                 break;
                         }
                         $columnResults[$ruleName]= $result;
@@ -123,12 +120,12 @@ class xPDOValidator {
             if (empty($this->results) || !in_array(false, $this->results, true)) {
                 $validated = true;
                 if ($this->object->xpdo->getDebug() === true)
-                    $this->object->xpdo->log(XPDO_LOG_LEVEL_WARN, "Validation succeeded: " . print_r($this->results, true));
+                    $this->object->xpdo->log(xPDO::LOG_LEVEL_WARN, "Validation succeeded: " . print_r($this->results, true));
             } elseif ($this->object->xpdo->getDebug() === true) {
-                $this->object->xpdo->log(XPDO_LOG_LEVEL_WARN, "Validation failed: " . print_r($this->results, true));
+                $this->object->xpdo->log(xPDO::LOG_LEVEL_WARN, "Validation failed: " . print_r($this->results, true));
             }
         } else {
-            if ($this->object->xpdo->getDebug() === true) $this->object->xpdo->log(XPDO_LOG_LEVEL_DEBUG, "Validation called but no rules were found.");
+            if ($this->object->xpdo->getDebug() === true) $this->object->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Validation called but no rules were found.");
             $validated = true;
         }
         return $validated;
@@ -142,7 +139,7 @@ class xPDOValidator {
      * @param mixed $message An optional message; the name of the rule is used
      * if no message is specified.
      */
-    function addMessage($field, $name, $message= null) {
+    public function addMessage($field, $name, $message= null) {
         if (empty($message)) $message= $name;
         array_push($this->messages, array(
             'field' => $field,
@@ -156,7 +153,7 @@ class xPDOValidator {
      *
      * @return boolean True if messages were generated.
      */
-    function hasMessages() {
+    public function hasMessages() {
         return (count($this->messages) > 0);
     }
 
@@ -165,7 +162,7 @@ class xPDOValidator {
      *
      * @return array An array of validation messages.
      */
-    function getMessages() {
+    public function getMessages() {
         return $this->messages;
     }
 
@@ -174,16 +171,14 @@ class xPDOValidator {
      *
      * @return array An array of boolean validation results.
      */
-    function getResults() {
+    public function getResults() {
         return $this->results;
     }
 
     /**
      * Reset the validation results and messages.
-     *
-     * @access protected
      */
-    function reset() {
+    public function reset() {
         $this->results= array();
         $this->messages= array();
     }
@@ -196,15 +191,12 @@ class xPDOValidator {
  * @subpackage validation
  */
 class xPDOValidationRule {
-    var $validator = null;
-    var $field = '';
-    var $name = '';
-    var $message = '';
+    public $validator = null;
+    public $field = '';
+    public $name = '';
+    public $message = '';
 
-    function xPDOValidationRule(& $validator, $field, $name, $message= '') {
-        $this->__construct($validator, $field, $name, $message);
-    }
-    function __construct(& $validator, $field, $name, $message= '') {
+    public function __construct(& $validator, $field, $name, $message= '') {
         $this->validator = & $validator;
         $this->field = $field;
         $this->name = $name;
@@ -222,14 +214,14 @@ class xPDOValidationRule {
      * @param mixed $value The value of the field being validated.
      * @param array $options Any options expected by the rule.
      */
-    function isValid($value, $options = array()) {
+    public function isValid($value, $options = array()) {
         if (isset($options['message'])) {
             $this->setMessage($options['message']);
         }
         return true;
     }
 
-    function setMessage($message= '') {
+    public function setMessage($message= '') {
         if (!empty($message) && $message !== '0') {
             $this->message= $message;
         }
@@ -237,14 +229,7 @@ class xPDOValidationRule {
 }
 
 class xPDOMinLengthValidationRule extends xPDOValidationRule {
-    function xPDOMinLengthValidationRule(& $validator, $field, $name, $message= '') {
-        $this->__construct($validator, $field, $name, $message);
-    }
-    function __construct(& $validator, $field, $name, $message= '') {
-        parent :: __construct($validator, $field, $name, $message);
-    }
-
-    function isValid($value, $options) {
+    public function isValid($value, $options) {
         $result= parent :: isValid($value, $options);
         $minLength= isset($options['value']) ? intval($options['value']) : 0;
         $result= (is_string($value) && strlen($value) >= $minLength);
@@ -255,14 +240,7 @@ class xPDOMinLengthValidationRule extends xPDOValidationRule {
     }
 }
 class xPDOMaxLengthValidationRule extends xPDOValidationRule {
-    function xPDOMaxLengthValidationRule(& $validator, $field, $name, $message= '') {
-        $this->__construct($validator, $field, $name, $message);
-    }
-    function __construct(& $validator, $field, $name, $message= '') {
-        parent :: __construct($validator, $field, $name, $message);
-    }
-
-    function isValid($value, $options) {
+    public function isValid($value, $options) {
         $result= parent :: isValid($value, $options);
         $maxLength= isset($options['value']) ? intval($options['value']) : 0;
         $result= ($maxLength > 0 && is_string($value) && strlen($value) <= $maxLength);
@@ -272,14 +250,7 @@ class xPDOMaxLengthValidationRule extends xPDOValidationRule {
     }
 }
 class xPDOMinValueValidationRule extends xPDOValidationRule {
-    function xPDOMinValueValidationRule(& $validator, $field, $name, $message= '') {
-        $this->__construct($validator, $field, $name, $message);
-    }
-    function __construct(& $validator, $field, $name, $message= '') {
-        parent :: __construct($validator, $field, $name, $message);
-    }
-
-    function isValid($value, $options) {
+    public function isValid($value, $options) {
         $result= parent :: isValid($value, $options);
         $minValue= isset($options['value']) ? intval($options['value']) : 0;
         $result= ($value >= $minValue);
@@ -289,14 +260,7 @@ class xPDOMinValueValidationRule extends xPDOValidationRule {
     }
 }
 class xPDOMaxValueValidationRule extends xPDOValidationRule {
-    function xPDOMaxValueValidationRule(& $validator, $field, $name, $message= '') {
-        $this->__construct($validator, $field, $name, $message);
-    }
-    function __construct(& $validator, $field, $name, $message= '') {
-        parent :: __construct($validator, $field, $name, $message);
-    }
-
-    function isValid($value, $options) {
+    public function isValid($value, $options) {
         $result= parent :: isValid($value, $options);
         $maxValue= isset($options['value']) ? intval($options['value']) : 0;
         $result= ($value <= $maxValue);
@@ -306,14 +270,7 @@ class xPDOMaxValueValidationRule extends xPDOValidationRule {
     }
 }
 class xPDOObjectExistsValidationRule extends xPDOValidationRule {
-    function xPDOObjectExistsValidationRule(& $validator, $field, $name, $message= '') {
-        $this->__construct($validator, $field, $name, $message);
-    }
-    function __construct(& $validator, $field, $name, $message= '') {
-        parent :: __construct($validator, $field, $name, $message);
-    }
-
-    function isValid($value, $options) {
+    public function isValid($value, $options) {
         if (!isset($options['pk']) || !isset($options['className'])) return false;
 
         $result= parent :: isValid($value, $options);
@@ -328,14 +285,7 @@ class xPDOObjectExistsValidationRule extends xPDOValidationRule {
     }
 }
 class xPDOForeignKeyConstraint extends xPDOValidationRule {
-    function xPDOForeignKeyConstraint(& $validator, $field, $name, $message= '') {
-        $this->__construct($validator, $field, $name, $message);
-    }
-    function __construct(& $validator, $field, $name, $message= '') {
-        parent :: __construct($validator, $field, $name, $message);
-    }
-
-    function isValid($value, $options) {
+    public function isValid($value, $options) {
         if (!isset($options['alias'])) return false;
         parent :: isValid($value, $options);
         $result= false;
