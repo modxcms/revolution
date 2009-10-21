@@ -1,9 +1,6 @@
 <?php
 require_once 'PHPUnit/Framework/TestCase.php';
 
-//uncomment to force emulated XPDO_MODE even if PDO exists
-//define ('XPDO_MODE', 2);
-
 class XPDOTest extends PHPUnit_Framework_TestCase {
     protected $xpdo= null;
     protected $properties= array ();
@@ -21,7 +18,7 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
             $xpdo->setAttribute(PDO_ATTR_ERRMODE, PDO_ERRMODE_SILENT);
             $xpdo->setPackage('sample', strtr(realpath(dirname(dirname(__FILE__))) . '/model/', '\\', '/'));
 //            $xpdo->setDebug(false); // set to true for debugging during tests only
-            $xpdo->setLogLevel(XPDO_LOG_LEVEL_WARN); // set to 'HTML' for running through browser
+            $xpdo->setLogLevel(xPDO::LOG_LEVEL_WARN); // set to 'HTML' for running through browser
             $xpdo->setLogTarget('ECHO'); // set to 'HTML' for running through browser
         }
         return $xpdo;
@@ -76,7 +73,7 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
         $person->set('security_level', 1);
         $person->set('gender', 'M');
         $result= $person->save();
-        $xpdo->_log(XPDO_LOG_LEVEL_DEBUG, "Object after save: " . print_r($person->toArray(), true));
+        $xpdo->_log(xPDO::LOG_LEVEL_DEBUG, "Object after save: " . print_r($person->toArray(), true));
         $this->assertTrue($result, "Error saving data.");
     }
 
@@ -85,7 +82,7 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
         $xpdo= $this->getXPDOObject();
         $person= $xpdo->getObject('Person', 1);
         $result= (is_object($person) && $person->getPrimaryKey() == 1);
-        $xpdo->_log(XPDO_LOG_LEVEL_DEBUG, "Object after retrieval: " . print_r($person, true));
+        $xpdo->_log(xPDO::LOG_LEVEL_DEBUG, "Object after retrieval: " . print_r($person, true));
         $this->assertTrue($result, "Error retrieving object by primary key");
     }
 
@@ -156,9 +153,9 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
                 break;
             }
         }
-        $this->assertTrue(is_a($person, 'Person'), "Error retrieving Person object by primary key via getObjectGraph");
-        $this->assertTrue(is_a($personPhone, 'PersonPhone'), "Error retrieving retreiving related PersonPhone collection via getObjectGraph");
-        $this->assertTrue(is_a($phone, 'Phone'), "Error retrieving related Phone object via getObjectGraph");
+        $this->assertTrue($person instanceof Person, "Error retrieving Person object by primary key via getObjectGraph");
+        $this->assertTrue($personPhone instanceof PersonPhone, "Error retrieving retreiving related PersonPhone collection via getObjectGraph");
+        $this->assertTrue($phone instanceof Phone, "Error retrieving related Phone object via getObjectGraph");
     }
 
     public function testGetObjectGraphsJSONByPK() {
@@ -173,9 +170,9 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
                 break;
             }
         }
-        $this->assertTrue(is_a($person, 'Person'), "Error retrieving Person object by primary key via getObjectGraph, JSON graph");
-        $this->assertTrue(is_a($personPhone, 'PersonPhone'), "Error retrieving retreiving related PersonPhone collection via getObjectGraph, JSON graph");
-        $this->assertTrue(is_a($phone, 'Phone'), "Error retrieving related Phone object via getObjectGraph, JSON graph");
+        $this->assertTrue($person instanceof Person, "Error retrieving Person object by primary key via getObjectGraph, JSON graph");
+        $this->assertTrue($personPhone instanceof PersonPhone, "Error retrieving retreiving related PersonPhone collection via getObjectGraph, JSON graph");
+        $this->assertTrue($phone instanceof Phone, "Error retrieving related Phone object via getObjectGraph, JSON graph");
     }
 
     public function testGetOne() {
@@ -203,10 +200,10 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
         $xpdo= $this->getXPDOObject();
         $people= $xpdo->getCollectionGraph('Person', array ('PersonPhone' => array ('Phone' => array ())));
 
-        $this->assertTrue(is_a($people['1'], 'Person'), "Error retrieving all objects.");
-        $this->assertTrue(is_a($people['2'], 'Person'), "Error retrieving all objects.");
-        $this->assertTrue(is_a($people['2']->_relatedObjects['PersonPhone']['2-1'], 'PersonPhone'), "Error retrieving all objects.");
-        $this->assertTrue(is_a($people['2']->_relatedObjects['PersonPhone']['2-1']->_relatedObjects['Phone'], 'Phone'), "Error retrieving all objects.");
+        $this->assertTrue($people['1'] instanceof Person, "Error retrieving all objects.");
+        $this->assertTrue($people['2'] instanceof Person, "Error retrieving all objects.");
+        $this->assertTrue($people['2']->_relatedObjects['PersonPhone']['2-1'] instanceof PersonPhone, "Error retrieving all objects.");
+        $this->assertTrue($people['2']->_relatedObjects['PersonPhone']['2-1']->_relatedObjects['Phone'] instanceof Phone, "Error retrieving all objects.");
         $this->assertTrue(count($people) == 2, "Error retrieving all objects.");
     }
 
@@ -214,10 +211,10 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
         $xpdo= $this->getXPDOObject();
         $people= $xpdo->getCollectionGraph('Person', '{"PersonPhone":{"Phone":{}}}');
 
-        $this->assertTrue(is_a($people['1'], 'Person'), "Error retrieving all objects.");
-        $this->assertTrue(is_a($people['2'], 'Person'), "Error retrieving all objects.");
-        $this->assertTrue(is_a($people['2']->_relatedObjects['PersonPhone']['2-1'], 'PersonPhone'), "Error retrieving all objects.");
-        $this->assertTrue(is_a($people['2']->_relatedObjects['PersonPhone']['2-1']->_relatedObjects['Phone'], 'Phone'), "Error retrieving all objects.");
+        $this->assertTrue($people['1'] instanceof Person, "Error retrieving all objects.");
+        $this->assertTrue($people['2'] instanceof Person, "Error retrieving all objects.");
+        $this->assertTrue($people['2']->_relatedObjects['PersonPhone']['2-1'] instanceof PersonPhone, "Error retrieving all objects.");
+        $this->assertTrue($people['2']->_relatedObjects['PersonPhone']['2-1']->_relatedObjects['Phone'] instanceof Phone, "Error retrieving all objects.");
         $this->assertTrue(count($people) == 2, "Error retrieving all objects.");
     }
 
