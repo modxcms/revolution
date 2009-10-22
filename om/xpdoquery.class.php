@@ -32,7 +32,7 @@
  * @package xpdo
  * @subpackage om
  */
-class xPDOQuery extends xPDOCriteria {
+abstract class xPDOQuery extends xPDOCriteria {
     const SQL_AND = 'AND';
     const SQL_OR = 'OR';
     const SQL_JOIN_CROSS = 'JOIN';
@@ -115,6 +115,14 @@ class xPDOQuery extends xPDOCriteria {
         }
     }
 
+    public function getClass() {
+        return $this->_class;
+    }
+
+    public function getAlias() {
+        return $this->_alias;
+    }
+
     /**
      * Set the type of SQL command you want to build.
      *
@@ -151,10 +159,7 @@ class xPDOQuery extends xPDOCriteria {
      * @param string $columns Columns to return from the query.
      * @return xPDOQuery Returns the current object for convenience.
      */
-    public function select($columns= '*') {
-        $this->xpdo->_log(xPDO::LOG_LEVEL_ERROR, 'xPDOQuery must be loaded for a specific database platform.');
-        return $this;
-    }
+    abstract public function select($columns= '*');
 
     /**
      * Join a table represented by the specified class.
@@ -174,10 +179,7 @@ class xPDOQuery extends xPDOCriteria {
      * to a specific set of conjoined expressions.
      * @return xPDOQuery Returns the current object for convenience.
      */
-    public function join($class, $alias= '', $type= xPDOQuery::SQL_JOIN_CROSS, $conditions= array (), $conjunction= xPDOQuery::SQL_AND, $binding= null, $condGroup= 0) {
-        $this->xpdo->_log(xPDO::LOG_LEVEL_ERROR, 'xPDOQuery must be loaded for a specific database platform.');
-        return $this;
-    }
+    abstract public function join($class, $alias= '', $type= xPDOQuery::SQL_JOIN_CROSS, $conditions= array (), $conjunction= xPDOQuery::SQL_AND, $binding= null, $condGroup= 0);
 
     public function innerJoin($class, $alias= '', $conditions= array (), $conjunction= xPDOQuery::SQL_AND, $binding= null, $condGroup= 0) {
         return $this->join($class, $alias, xPDOQuery::SQL_JOIN_CROSS, $conditions, $conjunction, $binding, $condGroup);
@@ -327,10 +329,7 @@ class xPDOQuery extends xPDOCriteria {
      * @param mixed $graph An array or JSON graph of related objects.
      * @return xPDOQuery Returns the instance.
      */
-    public function bindGraph($graph) {
-        $this->xpdo->_log(xPDO::LOG_LEVEL_ERROR, 'xPDOQuery must be loaded for a specific database platform.');
-        return $this;
-    }
+    abstract public function bindGraph($graph);
 
     /**
      * Bind the node of an object graph to the query.
@@ -340,9 +339,7 @@ class xPDOQuery extends xPDOCriteria {
      * @param string $classAlias The class representing the related graph node.
      * @param array $relations Child relations of the current graph node.
      */
-    public function bindGraphNode($parentClass, $parentAlias, $classAlias, $relations) {
-        $this->xpdo->_log(xPDO::LOG_LEVEL_ERROR, 'xPDOQuery must be loaded for a specific database platform.');
-    }
+    abstract public function bindGraphNode($parentClass, $parentAlias, $classAlias, $relations);
 
     /**
      * Hydrates a graph of related objects from a single result set.
@@ -357,7 +354,7 @@ class xPDOQuery extends xPDOCriteria {
             if ($cacheFlag && $this->xpdo->_cacheEnabled && $collectionCaching > 0) {
                 $cacheRows = array();
             }
-            while ($row = $rows->fetch(PDO_FETCH_ASSOC)) {
+            while ($row = $rows->fetch(PDO::FETCH_ASSOC)) {
                 $this->hydrateGraphParent($instances, $row);
                 if ($cacheFlag && $this->xpdo->_cacheEnabled && $collectionCaching > 0) {
                     $cacheRows[]= $row;
@@ -441,10 +438,7 @@ class xPDOQuery extends xPDOCriteria {
      *
      * @return boolean Returns true if a SQL statement was successfully constructed.
      */
-    public function construct() {
-        $this->xpdo->_log(xPDO::LOG_LEVEL_ERROR, 'xPDOQuery must be loaded for a specific database platform.');
-        return (!empty ($this->sql));
-    }
+    abstract public function construct();
 
     /**
      * Prepares the xPDOQuery for execution.
@@ -467,9 +461,7 @@ class xPDOQuery extends xPDOCriteria {
      *
      * @param mixed $conditions A valid xPDO condition expression.
      */
-    public function parseConditions($conditions) {
-        $this->xpdo->_log(xPDO::LOG_LEVEL_ERROR, 'xPDOQuery must be loaded for a specific database platform.');
-    }
+    abstract public function parseConditions($conditions);
 
     /**
      * Determines if a string contains a conditional operator.

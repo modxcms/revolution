@@ -127,7 +127,7 @@ class xPDOManager_mysql extends xPDOManager {
         if ($instance= $this->xpdo->newObject($className)) {
             $sql= 'DROP TABLE ' . $this->xpdo->getTableName($className);
             $removed= $this->xpdo->exec($sql);
-            if (!$removed && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO_ERR_NONE) {
+            if (!$removed && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not drop table ' . $className . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
             } else {
                 $removed= true;
@@ -151,35 +151,37 @@ class xPDOManager_mysql extends xPDOManager {
     public function createObjectContainer($className) {
         $created= false;
         if ($instance= $this->xpdo->newObject($className)) {
-                $tableName= $instance->_table;
+            $tableName= $this->xpdo->getTableName($className);
             $existsStmt = $this->xpdo->prepare("SELECT COUNT(*) FROM {$tableName}");
             $exists = $existsStmt->execute();
             if ($exists && $existsStmt->fetchAll()) {
-                    return true;
-                }
-            $tableType= isset($instance->_tableMeta['engine']) ? $instance->_tableMeta['engine'] : 'MyISAM';
+                return true;
+            }
+            $tableMeta= $this->xpdo->getTableMeta($className);
+            $tableType= isset($tableMeta['engine']) ? $tableMeta['engine'] : 'MyISAM';
             $numerics= array_merge($this->dbtypes['integer'], $this->dbtypes['boolean'], $this->dbtypes['float']);
             $datetimeStrings= array_merge($this->dbtypes['timestamp'], $this->dbtypes['datetime']);
             $dateStrings= $this->dbtypes['date'];
-                $pk= $this->xpdo->getPK($className);
-                $pktype= $this->xpdo->getPKType($className);
-                $fulltextIndexes= array ();
-                $uniqueIndexes= array ();
-                $indexes= array ();
+            $pk= $this->xpdo->getPK($className);
+            $pktype= $this->xpdo->getPKType($className);
+            $fulltextIndexes= array ();
+            $uniqueIndexes= array ();
+            $indexes= array ();
             $lobs= array ('TEXT', 'BLOB');
             $lobsPattern= '/(' . implode('|', $lobs) . ')/';
-                $sql= 'CREATE TABLE ' . $tableName . ' (';
-            while (list($key, $meta)= each($instance->_fieldMeta)) {
+            $sql= 'CREATE TABLE ' . $tableName . ' (';
+            $fieldMeta = $this->xpdo->getFieldMeta($className);
+            while (list($key, $meta)= each($fieldMeta)) {
                 $dbtype= strtoupper($meta['dbtype']);
-                    $precision= isset ($meta['precision']) ? '(' . $meta['precision'] . ')' : '';
+                $precision= isset ($meta['precision']) ? '(' . $meta['precision'] . ')' : '';
                 $notNull= !isset ($meta['null'])
                     ? false
                     : ($meta['null'] === 'false' || empty($meta['null']));
                 $null= $notNull ? ' NOT NULL' : ' NULL';
-                    $extra= (isset ($meta['index']) && $meta['index'] == 'pk' && !is_array($pk) && $pktype == 'integer' && isset ($meta['generated']) && $meta['generated'] == 'native') ? ' AUTO_INCREMENT' : '';
-                    if (empty ($extra) && isset ($meta['extra'])) {
-                        $extra= ' ' . $meta['extra'];
-                    }
+                $extra= (isset ($meta['index']) && $meta['index'] == 'pk' && !is_array($pk) && $pktype == 'integer' && isset ($meta['generated']) && $meta['generated'] == 'native') ? ' AUTO_INCREMENT' : '';
+                if (empty ($extra) && isset ($meta['extra'])) {
+                    $extra= ' ' . $meta['extra'];
+                }
                 $default= '';
                 if (isset ($meta['default']) && !preg_match($lobsPattern, $dbtype)) {
                     $defaultVal= $meta['default'];
@@ -189,106 +191,106 @@ class xPDOManager_mysql extends xPDOManager {
                         $default= ' DEFAULT \'' . $defaultVal . '\'';
                     }
                 }
-                    $attributes= (isset ($meta['attributes'])) ? ' ' . $meta['attributes'] : '';
-                    if (strpos(strtolower($attributes), 'unsigned') !== false) {
+                $attributes= (isset ($meta['attributes'])) ? ' ' . $meta['attributes'] : '';
+                if (strpos(strtolower($attributes), 'unsigned') !== false) {
                     $sql .= '`' . $key . '` ' . $dbtype . $precision . $attributes . $null . $default . $extra . ',';
-                    } else {
-                    $sql .= '`' . $key . '` ' . $dbtype . $precision . $null . $default . $attributes . $extra . ',';
-                    }
-                    if (isset ($meta['index']) && $meta['index'] !== 'pk') {
-                        if ($meta['index'] === 'fulltext') {
-                            if (isset ($meta['indexgrp'])) {
-                                $fulltextIndexes[$meta['indexgrp']][]= $key;
-                            } else {
-                                $fulltextIndexes[$key]= $key;
-                            }
-                        }
-                        elseif ($meta['index'] === 'unique') {
-                            if (isset ($meta['indexgrp'])) {
-                                $uniqueIndexes[$meta['indexgrp']][]= $key;
-                            } else {
-                                $uniqueIndexes[$key]= $key;
-                            }
-                        }
-                        elseif ($meta['index'] === 'fk') {
-                            if (isset ($meta['indexgrp'])) {
-                                $indexes[$meta['indexgrp']][]= $key;
-                            } else {
-                                $indexes[$key]= $key;
-                            }
-                        } else {
-                            if (isset ($meta['indexgrp'])) {
-                                $indexes[$meta['indexgrp']][]= $key;
-                            } else {
-                                $indexes[$key]= $key;
-                            }
-                        }
-                    }
-                }
-                $sql= substr($sql, 0, strlen($sql) - 1);
-                if (is_array($pk)) {
-                    $pkarray= array ();
-                    foreach ($pk as $k) {
-                        $pkarray[]= '`' . $k . '`';
-                    }
-                    $pk= implode(',', $pkarray);
-                }
-                elseif ($pk) {
-                    $pk= '`' . $pk . '`';
-                }
-                if ($pk)
-                    $sql .= ', PRIMARY KEY (' . $pk . ')';
-                if (!empty ($indexes)) {
-                    foreach ($indexes as $indexkey => $index) {
-                        if (is_array($index)) {
-                            $indexset= array ();
-                            foreach ($index as $indexmember) {
-                                $indexset[]= "`{$indexmember}`";
-                            }
-                            $indexset= implode(',', $indexset);
-                        } else {
-                            $indexset= "`{$indexkey}`";
-                        }
-                        $sql .= ", INDEX `{$indexkey}` ({$indexset})";
-                    }
-                }
-                if (!empty ($uniqueIndexes)) {
-                    foreach ($uniqueIndexes as $indexkey => $index) {
-                        if (is_array($index)) {
-                            $indexset= array ();
-                            foreach ($index as $indexmember) {
-                                $indexset[]= "`{$indexmember}`";
-                            }
-                            $indexset= implode(',', $indexset);
-                        } else {
-                            $indexset= $indexkey;
-                        }
-                        $sql .= ", UNIQUE INDEX `{$indexkey}` ({$indexset})";
-                    }
-                }
-                if (!empty ($fulltextIndexes)) {
-                    foreach ($fulltextIndexes as $indexkey => $index) {
-                        if (is_array($index)) {
-                            $indexset= array ();
-                            foreach ($index as $indexmember) {
-                                $indexset[]= "`{$indexmember}`";
-                            }
-                            $indexset= implode(',', $indexset);
-                        } else {
-                            $indexset= $indexkey;
-                        }
-                        $sql .= ", FULLTEXT INDEX `{$indexkey}` ({$indexset})";
-                    }
-                }
-                $sql .= ") TYPE={$tableType}";
-            $created= $this->xpdo->exec($sql);
-            if (!$created && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO_ERR_NONE) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
                 } else {
-                    $created= true;
-                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table' . $tableName . "\nSQL: {$sql}\n");
+                    $sql .= '`' . $key . '` ' . $dbtype . $precision . $null . $default . $attributes . $extra . ',';
+                }
+                if (isset ($meta['index']) && $meta['index'] !== 'pk') {
+                    if ($meta['index'] === 'fulltext') {
+                        if (isset ($meta['indexgrp'])) {
+                            $fulltextIndexes[$meta['indexgrp']][]= $key;
+                        } else {
+                            $fulltextIndexes[$key]= $key;
+                        }
+                    }
+                    elseif ($meta['index'] === 'unique') {
+                        if (isset ($meta['indexgrp'])) {
+                            $uniqueIndexes[$meta['indexgrp']][]= $key;
+                        } else {
+                            $uniqueIndexes[$key]= $key;
+                        }
+                    }
+                    elseif ($meta['index'] === 'fk') {
+                        if (isset ($meta['indexgrp'])) {
+                            $indexes[$meta['indexgrp']][]= $key;
+                        } else {
+                            $indexes[$key]= $key;
+                        }
+                    } else {
+                        if (isset ($meta['indexgrp'])) {
+                            $indexes[$meta['indexgrp']][]= $key;
+                        } else {
+                            $indexes[$key]= $key;
+                        }
+                    }
                 }
             }
+            $sql= substr($sql, 0, strlen($sql) - 1);
+            if (is_array($pk)) {
+                $pkarray= array ();
+                foreach ($pk as $k) {
+                    $pkarray[]= '`' . $k . '`';
+                }
+                $pk= implode(',', $pkarray);
+            }
+            elseif ($pk) {
+                $pk= '`' . $pk . '`';
+            }
+            if ($pk)
+                $sql .= ', PRIMARY KEY (' . $pk . ')';
+            if (!empty ($indexes)) {
+                foreach ($indexes as $indexkey => $index) {
+                    if (is_array($index)) {
+                        $indexset= array ();
+                        foreach ($index as $indexmember) {
+                            $indexset[]= "`{$indexmember}`";
+                        }
+                        $indexset= implode(',', $indexset);
+                    } else {
+                        $indexset= "`{$indexkey}`";
+                    }
+                    $sql .= ", INDEX `{$indexkey}` ({$indexset})";
+                }
+            }
+            if (!empty ($uniqueIndexes)) {
+                foreach ($uniqueIndexes as $indexkey => $index) {
+                    if (is_array($index)) {
+                        $indexset= array ();
+                        foreach ($index as $indexmember) {
+                            $indexset[]= "`{$indexmember}`";
+                        }
+                        $indexset= implode(',', $indexset);
+                    } else {
+                        $indexset= $indexkey;
+                    }
+                    $sql .= ", UNIQUE INDEX `{$indexkey}` ({$indexset})";
+                }
+            }
+            if (!empty ($fulltextIndexes)) {
+                foreach ($fulltextIndexes as $indexkey => $index) {
+                    if (is_array($index)) {
+                        $indexset= array ();
+                        foreach ($index as $indexmember) {
+                            $indexset[]= "`{$indexmember}`";
+                        }
+                        $indexset= implode(',', $indexset);
+                    } else {
+                        $indexset= $indexkey;
+                    }
+                    $sql .= ", FULLTEXT INDEX `{$indexkey}` ({$indexset})";
+                }
+            }
+            $sql .= ") TYPE={$tableType}";
+            $created= $this->xpdo->exec($sql);
+            if (!$created && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->errorInfo(), true));
+            } else {
+                $created= true;
+                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table' . $tableName . "\nSQL: {$sql}\n");
+            }
+        }
         return $created;
     }
 }

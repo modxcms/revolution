@@ -64,10 +64,6 @@ if (!defined('XPDO_CORE_PATH')) {
      * Use of this constant is recommended for use when building any path in
      * your xPDO code.
      *
-     * WARNING: DO NOT undefine XPDO_CORE_PATH at any point or any additional
-     * attempts to include this file will fail as the code tries to redefine the
-     * additional XPDO_ and PDO_ constants, causing a fatal PHP parser error.
-     *
      * @access public
      */
     define('XPDO_CORE_PATH', $xpdo_core_path);
@@ -161,12 +157,12 @@ class xPDO {
      * @var xPDOManager
      * @access public
      */
-    protected $manager= null;
+    public $manager= null;
     /**
      * @var xPDOCacheManager The cache service provider registered for this xPDO
      * instance.
      */
-    protected $cacheManager= null;
+    public $cacheManager= null;
     /**
      * @var string A root path for file-based caching services to use.
      */
@@ -175,15 +171,15 @@ class xPDO {
      * @var float Start time of the request, initialized when the constructor is
      * called.
      */
-    protected $startTime= 0;
+    public $startTime= 0;
     /**
      * @var int The number of direct DB queries executed during a request.
      */
-    protected $executedQueries= 0;
+    public $executedQueries= 0;
     /**
      * @var int The amount of request handling time spent with DB queries.
      */
-    protected $queryTime= 0;
+    public $queryTime= 0;
 
     /**
      * @var integer The logging level for the XPDO instance.
@@ -204,15 +200,15 @@ class xPDO {
     /**
      * A global cache flag that can be used to enable/disable all xPDO caching.
      * @var boolean All caching is disabled by default.
-     * @access protected
+     * @access public
      */
-    protected $_cacheEnabled= false;
+    public $_cacheEnabled= false;
     /**
      * Indicates the escape character used for a particular database engine.
      * @var string
-     * @access protected
+     * @access public
      */
-    protected $_escapeChar= '';
+    public $_escapeChar= '';
 
     /**#@+
      * The xPDO Constructor.
@@ -283,15 +279,22 @@ class xPDO {
     }
     /**#@-*/
 
-    protected function connect($driverOptions= array ()) {
+    public function connect($driverOptions= array ()) {
         if ($this->pdo === null) {
             if (!empty ($driverOptions)) {
                 $this->config['driverOptions']= array_merge($this->config['driverOptions'], $driverOptions);
             }
-            $connected= include (XPDO_CORE_PATH . 'xpdo.connect.inc.php');
+            try {
+                $this->pdo= new PDO($this->config['dsn'], $this->config['username'], $this->config['password'], $this->config['driverOptions']);
+                $errorCode= $this->pdo->errorCode();
+            } catch (PDOException $xe) {
+                $this->pdo= null;
+            }
+
+            $connected= (is_object($this->pdo) && (empty($errorCode) || $errorCode == PDO::ERR_NONE));
             if ($connected) {
                 if ($this->config['dbtype'] === null) {
-                    $this->config['dbtype']= $this->getAttribute(PDO_ATTR_DRIVER_NAME);
+                    $this->config['dbtype']= $this->getAttribute(PDO::ATTR_DRIVER_NAME);
                 }
                 $connectFile = XPDO_CORE_PATH . 'om/' . $this->config['dbtype'] . '/connect.inc.php';
                 if (!empty($this->config['connect_file']) && file_exists($this->config['connect_file'])) {
@@ -683,7 +686,7 @@ class xPDO {
             $query->select(array ("COUNT(DISTINCT {$expr})"));
             if ($stmt= $query->prepare()) {
                 if ($stmt->execute()) {
-                    if ($results= $stmt->fetchAll(PDO_FETCH_COLUMN)) {
+                    if ($results= $stmt->fetchAll(PDO::FETCH_COLUMN)) {
                         $count= reset($results);
                         $count= intval($count);
                     }
@@ -1400,7 +1403,7 @@ class xPDO {
      * @todo Have this method handle all methods of DSN specification as handled
      * by latest native PDO implementation.
      */
-    protected function parseDSN($string) {
+    public static function parseDSN($string) {
         $result= array ();
         $pos= strpos($string, ':');
         $parameters= explode(';', substr($string, ($pos +1)));
@@ -1728,7 +1731,7 @@ class xPDO {
     /**
      * @see http://php.net/manual/en/function.pdo-quote.php
      */
-    public function quote($string, $parameter_type= PDO_PARAM_STR) {
+    public function quote($string, $parameter_type= PDO::PARAM_STR) {
         if (!$this->connect()) {
             return false;
         }
@@ -1859,10 +1862,10 @@ class xPDO {
                 }
                 if (!$v) {
                     switch ($type) {
-                        case PDO_PARAM_INT:
+                        case PDO::PARAM_INT:
                             $v= '0';
                             break;
-                        case PDO_PARAM_BOOL:
+                        case PDO::PARAM_BOOL:
                             $v= '0';
                             break;
                         default:
@@ -1891,10 +1894,10 @@ class xPDO {
 
     public function getPDOType($value) {
         $type= null;
-        if (is_null($value)) $type= PDO_PARAM_NULL;
+        if (is_null($value)) $type= PDO::PARAM_NULL;
         elseif (is_scalar($value)) {
-            if (is_int($value)) $type= PDO_PARAM_INT;
-            else $type= PDO_PARAM_STR;
+            if (is_int($value)) $type= PDO::PARAM_INT;
+            else $type= PDO::PARAM_STR;
         }
         return $type;
     }
@@ -1910,7 +1913,7 @@ class xPDOCriteria {
     protected $sql= '';
     public $stmt= null;
     public $bindings= array ();
-    protected $cacheFlag= false;
+    public $cacheFlag= false;
 
     /**#@+
      * The constructor for a new xPDOCriteria instance.
@@ -1975,12 +1978,12 @@ class xPDOCriteria {
             reset($this->bindings);
             while (list ($key, $val)= each($this->bindings)) {
                 if (is_array($val)) {
-                    $type= isset ($val['type']) ? $val['type'] : PDO_PARAM_STR;
+                    $type= isset ($val['type']) ? $val['type'] : PDO::PARAM_STR;
                     $length= isset ($val['length']) ? $val['length'] : 0;
                     $value= & $val['value'];
                 } else {
                     $value= & $val;
-                    $type= PDO_PARAM_STR;
+                    $type= PDO::PARAM_STR;
                     $length= 0;
                 }
                 if (is_int($key)) $key= $key + 1;

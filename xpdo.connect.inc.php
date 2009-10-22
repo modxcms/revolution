@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright 2006, 2007, 2008, 2009 by  Jason Coward <xpdo@opengeek.com>
- * 
+ *
  * This file is part of xPDO.
  *
  * xPDO is free software; you can redistribute it and/or modify it under the
@@ -26,9 +26,9 @@
  * @package xpdo
  */
 try {
-    $this->pdo= new $pdo_classname($this->config['dsn'], $this->config['username'], $this->config['password'], $this->config['driverOptions']);
+    $this->pdo= new PDO($this->config['dsn'], $this->config['username'], $this->config['password'], $this->config['driverOptions']);
     $errorCode= $this->pdo->errorCode();
 } catch (PDOException $xe) {
     $this->pdo= null;
 }
-return (is_object($this->pdo) && (empty($errorCode) || $errorCode == PDO_ERR_NONE));
+return (is_object($this->pdo) && (empty($errorCode) || $errorCode == PDO::ERR_NONE));

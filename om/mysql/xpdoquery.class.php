@@ -231,7 +231,7 @@ class xPDOQuery_mysql extends xPDOQuery {
                     $result[$iteration]['__sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$k}{$this->xpdo->_escapeChar} = ?";
                     $result[$iteration]['__binding']= array (
                         'value' => $conditions[$iteration],
-                        'type' => $isString ? PDO_PARAM_STR : PDO_PARAM_INT,
+                        'type' => $isString ? PDO::PARAM_STR : PDO::PARAM_INT,
                         'length' => 0
                     );
                     $result[$iteration]['__conjunction']= xPDOQuery::SQL_AND;
@@ -275,13 +275,13 @@ class xPDOQuery_mysql extends xPDOQuery {
                         $field= array ();
                         $field['__sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$key}{$this->xpdo->_escapeChar} " . $operator . ' ?';
                         if ($val === null || strtolower($val) == 'null') {
-                            $type= PDO_PARAM_NULL;
+                            $type= PDO::PARAM_NULL;
                         }
                         elseif (isset($fieldMeta[$key]) && !in_array($fieldMeta[$key]['phptype'], $this->_quotable)) {
-                            $type= PDO_PARAM_INT;
+                            $type= PDO::PARAM_INT;
                         }
                         else {
-                            $type= PDO_PARAM_STR;
+                            $type= PDO::PARAM_STR;
                         }
                         $field['__binding']= array (
                             'value' => $val,
@@ -299,9 +299,9 @@ class xPDOQuery_mysql extends xPDOQuery {
         }
         elseif (($pktype == 'integer' && is_numeric($conditions)) || ($pktype == 'string' && is_string($conditions))) {
             if ($pktype == 'integer') {
-                $param_type= PDO_PARAM_INT;
+                $param_type= PDO::PARAM_INT;
             } else {
-                $param_type= PDO_PARAM_STR;
+                $param_type= PDO::PARAM_STR;
             }
             $result['__sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$pk}{$this->xpdo->_escapeChar} = ?";
             $result['__binding']= array ('value' => $conditions, 'type' => $param_type, 'length' => 0);

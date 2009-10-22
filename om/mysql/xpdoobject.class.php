@@ -43,7 +43,7 @@ if (!class_exists('xPDOObject')) {
  * @subpackage om.mysql
  */
 class xPDOObject_mysql extends xPDOObject {
-    protected $_currentTimestamps= array (
+    public $_currentTimestamps= array (
         'CURRENT_TIMESTAMP',
         'CURRENT_TIMESTAMP()',
         'NOW()',
@@ -53,19 +53,11 @@ class xPDOObject_mysql extends xPDOObject {
         'LOCALTIMESTAMP()',
         'SYSDATE()'
     );
-    protected $_currentDates= array (
+    public $_currentDates= array (
         'CURDATE()',
         'CURRENT_DATE',
         'CURRENT_DATE()'
     );
-
-    /**
-     * {@inheritdoc}
-     * @returns xPDOObject_mysql
-     */
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
 
     /**
      * Initializes the field names with the qualified table name.
@@ -89,8 +81,4 @@ class xPDOObject_mysql extends xPDOObject {
  * @package xpdo
  * @subpackage om.mysql
  */
-class xPDOSimpleObject_mysql extends xPDOSimpleObject {
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
+class xPDOSimpleObject_mysql extends xPDOSimpleObject {}

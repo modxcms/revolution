@@ -76,26 +76,26 @@ class xPDOObject {
      * The actual class name of an instance.
      * @var string
      */
-    protected $_class= null;
+    public $_class= null;
 
     /**
      * The package the class is a part of.
      * @var string
      */
-    protected $_package= null;
+    public $_package= null;
 
     /**
      * An alias for this instance of the class.
      * @var string
      */
-    protected $_alias= null;
+    public $_alias= null;
 
     /**
      * The primary key field (or an array of primary key fields) for this object.
      * @var string|array
-     * @access protected
+     * @access public
      */
-    protected $_pk= null;
+    public $_pk= null;
 
     /**
      * The php native type of the primary key field.
@@ -103,125 +103,125 @@ class xPDOObject {
      * NOTE: Will be an array if multiple primary keys are specified for the object.
      *
      * @var string|array
-     * @access protected
+     * @access public
      */
-    protected $_pktype= null;
+    public $_pktype= null;
 
     /**
      * Name of the actual table representing this class.
      * @var string
-     * @access protected
+     * @access public
      */
-    protected $_table= null;
+    public $_table= null;
 
     /**
      * An array of meta data for the table.
      * @var string
-     * @access protected
+     * @access public
      */
-    protected $_tableMeta= null;
+    public $_tableMeta= null;
 
     /**
      * An array of field names that have been modified.
      * @var array
-     * @access protected
+     * @access public
      */
-    protected $_dirty= array ();
+    public $_dirty= array ();
 
     /**
      * An array of field names that have not been loaded from the source.
      * @var array
-     * @access protected
+     * @access public
      */
-    protected $_lazy= array ();
+    public $_lazy= array ();
 
     /**
      * An array of key-value pairs representing the fields of the instance.
      * @var array
-     * @access protected
+     * @access public
      */
-    protected $_fields= array ();
+    public $_fields= array ();
 
     /**
      * An array of metadata definitions for each field in the class.
      * @var array
-     * @access protected
+     * @access public
      */
-    protected $_fieldMeta= array ();
+    public $_fieldMeta= array ();
 
     /**
      * An array of aggregate foreign key relationships for the class.
      * @var array
-     * @access protected
+     * @access public
      */
-    protected $_aggregates= array ();
+    public $_aggregates= array ();
 
     /**
      * An array of composite foreign key relationships for the class.
      * @var array
-     * @access protected
+     * @access public
      */
-    protected $_composites= array ();
+    public $_composites= array ();
 
     /**
      * An array of object instances related to this object instance.
      * @var array
-     * @access protected
+     * @access public
      */
-    protected $_relatedObjects= array ();
+    public $_relatedObjects= array ();
 
     /**
      * A validator object responsible for this object instance.
      * @var xPDOValidator
-     * @access protected
+     * @access public
      */
-    protected $_validator = null;
+    public $_validator = null;
 
     /**
      * An array of validation rules for this object instance.
      * @var array
-     * @access protected
+     * @access public
      */
-    protected $_validationRules = array();
+    public $_validationRules = array();
 
     /**
      * An array of field names that have been already validated.
      * @var array
-     * @access protected
+     * @access public
      */
-    protected $_validated= array ();
+    public $_validated= array ();
 
     /**
      * Indicates if the validation map has been loaded.
      * @var boolean
-     * @access protected
+     * @access public
      */
-    protected $_validationLoaded= false;
+    public $_validationLoaded= false;
 
     /**
      * Indicates if the instance is transient (and thus new).
      * @var boolean
-     * @access protected
+     * @access public
      */
-    protected $_new= true;
+    public $_new= true;
 
     /**
      * Indicates the cacheability of the instance.
      * @var boolean
      */
-    protected $_cacheFlag= true;
+    public $_cacheFlag= true;
 
     /**
      * A collection of various options that can be used on the instance.
      * @var array
      */
-    protected $_options= array();
+    public $_options= array();
 
     /**
      * An array of DB constants/functions that represent timestamp values.
      * @var array
      */
-    protected $_currentTimestamps= array (
+    public $_currentTimestamps= array (
         'CURRENT_TIMESTAMP',
         'CURRENT_TIMESTAMP()',
         'NOW()',
@@ -236,7 +236,7 @@ class xPDOObject {
      * An array of DB constants/functions that represent date values.
      * @var array
      */
-    protected $_currentDates= array (
+    public $_currentDates= array (
         'CURDATE()',
         'CURRENT_DATE',
         'CURRENT_DATE()'
@@ -301,8 +301,8 @@ class xPDOObject {
     protected static function _loadInstance(& $xpdo, $className, $criteria, $row) {
         $rowPrefix= '';
         if (is_object($criteria) && $criteria instanceof xPDOQuery) {
-            $alias = $criteria->_alias;
-            $actualClass = $criteria->_class;
+            $alias = $criteria->getAlias();
+            $actualClass = $criteria->getClass();
         } else {
             $alias = $className;
             $actualClass= $className;
@@ -406,7 +406,7 @@ class xPDOObject {
                 }
                 if ($row === null || !is_array($row)) {
                     if ($rows= xPDOObject :: _loadRows($xpdo, $className, $criteria)) {
-                        $row= $rows->fetch(PDO_FETCH_ASSOC);
+                        $row= $rows->fetch(PDO::FETCH_ASSOC);
                         $rows->closeCursor();
                     }
                 } else {
@@ -471,7 +471,7 @@ class xPDOObject {
             }
         } elseif (is_object($rows)) {
             $cacheRows = array();
-            while ($row = $rows->fetch(PDO_FETCH_ASSOC)) {
+            while ($row = $rows->fetch(PDO::FETCH_ASSOC)) {
                 xPDOObject :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag);
                 if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag && !$fromCache) $cacheRows[] = $row;
             }
@@ -577,11 +577,11 @@ class xPDOObject {
      * }
      * </code>
      *
-     * @access protected
+     * @access public
      * @param xPDO &$xpdo A reference to a valid xPDO instance.
      * @return xPDOObject
      */
-    protected function __construct(& $xpdo) {
+    public function __construct(& $xpdo) {
         $this->container= $xpdo->config['dbname'];
         $this->_class= get_class($this);
         $pos= strrpos($this->_class, '_');
@@ -1202,7 +1202,7 @@ class xPDOObject {
                 if ($this->_fieldMeta[$_k]['phptype'] === 'password') {
                     $this->_fields[$_k]= $this->encode($this->_fields[$_k], 'password');
                 }
-                $fieldType= PDO_PARAM_STR;
+                $fieldType= PDO::PARAM_STR;
                 $fieldValue= $this->_fields[$_k];
                 if (in_array($this->_fieldMeta[$_k]['phptype'], array ('datetime', 'timestamp')) && !empty($this->_fieldMeta[$_k]['attributes']) && $this->_fieldMeta[$_k]['attributes'] == 'ON UPDATE CURRENT_TIMESTAMP') {
                     $this->_fields[$_k]= strftime('%Y-%m-%d %H:%M:%S');
@@ -1210,7 +1210,7 @@ class xPDOObject {
                 }
                 elseif ($fieldValue === null || $fieldValue === 'NULL') {
                     if ($this->_new) continue;
-                    $fieldType= PDO_PARAM_NULL;
+                    $fieldType= PDO::PARAM_NULL;
                     $fieldValue= null;
                 }
                 elseif (in_array($this->_fieldMeta[$_k]['phptype'], array ('timestamp', 'datetime')) && in_array($fieldValue, $this->_currentTimestamps, true)) {
@@ -1222,10 +1222,10 @@ class xPDOObject {
                     continue;
                 }
                 elseif ($this->_fieldMeta[$_k]['phptype'] == 'timestamp' && substr(strtolower($this->_fieldMeta[$_k]['dbtype']), 0, 3) == 'int') {
-                    $fieldType= PDO_PARAM_INT;
+                    $fieldType= PDO::PARAM_INT;
                 }
                 elseif (!in_array($this->_fieldMeta[$_k]['phptype'], array ('string','password','datetime','timestamp','date','time','array','json'))) {
-                    $fieldType= PDO_PARAM_INT;
+                    $fieldType= PDO::PARAM_INT;
                 }
                 if ($this->_new) {
                     $cols[$_k]= $this->xpdo->_escapeChar . "{$_k}" . $this->xpdo->_escapeChar;
@@ -1245,9 +1245,9 @@ class xPDOObject {
                         $iteration= 0;
                         $where= '';
                         foreach ($pkn as $k => $v) {
-                            $vt= PDO_PARAM_INT;
+                            $vt= PDO::PARAM_INT;
                             if ($this->_fieldMeta[$k]['phptype'] == 'string') {
-                                $vt= PDO_PARAM_STR;
+                                $vt= PDO::PARAM_STR;
                             }
                             if ($iteration) {
                                 $where .= " AND ";
@@ -1259,9 +1259,9 @@ class xPDOObject {
                         }
                     } else {
                         $pkn= $this->getPK();
-                        $pkt= PDO_PARAM_INT;
+                        $pkt= PDO::PARAM_INT;
                         if ($this->_fieldMeta[$pkn]['phptype'] == 'string') {
-                            $pkt= PDO_PARAM_STR;
+                            $pkt= PDO::PARAM_STR;
                         }
                         $bindings[":{$pkn}"]['value']= $pk;
                         $bindings[":{$pkn}"]['type']= $pkt;
@@ -2181,11 +2181,4 @@ class xPDOObject {
  * @package xpdo
  * @subpackage om
  */
-class xPDOSimpleObject extends xPDOObject {
-    /**
-     * @return xPDOSimpleObject
-     */
-    protected function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
+class xPDOSimpleObject extends xPDOObject {}

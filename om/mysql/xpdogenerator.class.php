@@ -77,7 +77,7 @@ class xPDOGenerator_mysql extends xPDOGenerator {
         $tableLike= ($tablePrefix && $restrictPrefix) ? " LIKE '{$tablePrefix}%'" : '';
         $tablesStmt= $this->manager->xpdo->prepare("SHOW TABLES FROM {$dbname}{$tableLike}");
         $tablesStmt->execute();
-        $tables= $tablesStmt->fetchAll(PDO_FETCH_NUM);
+        $tables= $tablesStmt->fetchAll(PDO::FETCH_NUM);
         if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($tables, true));
         foreach ($tables as $table) {
             $xmlObject= '';
@@ -89,7 +89,7 @@ class xPDOGenerator_mysql extends xPDOGenerator {
             $extends= $baseClass;
             $fieldsStmt= $this->manager->xpdo->prepare("SHOW COLUMNS FROM `{$table[0]}`");
             $fieldsStmt->execute();
-            $fields= $fieldsStmt->fetchAll(PDO_FETCH_ASSOC);
+            $fields= $fieldsStmt->fetchAll(PDO::FETCH_ASSOC);
             if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($fields, true));
             foreach ($fields as $field) {
                 $Field= '';
