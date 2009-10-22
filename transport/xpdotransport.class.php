@@ -45,7 +45,6 @@ class xPDOTransport {
     const RESOLVE_PHP = 'resolve_php';
     const PACKAGE_ACTION = 'package_action';
     const PACKAGE_STATE = 'package_state';
-    const NAMESPACE = 'namespace';
     const RELATED_OBJECTS = 'related_objects';
     const RELATED_OBJECT_ATTRIBUTES = 'related_object_attributes';
     const MANIFEST_ATTRIBUTES = 'manifest-attributes';
