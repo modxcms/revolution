@@ -15,7 +15,7 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
     protected function getXPDOObject() {
         $xpdo= new xPDO($this->properties['xpdo_string_dsn_test'], $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
         if (is_object($xpdo)) {
-            $xpdo->setAttribute(PDO_ATTR_ERRMODE, PDO_ERRMODE_SILENT);
+            $xpdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
             $xpdo->setPackage('sample', strtr(realpath(dirname(dirname(__FILE__))) . '/model/', '\\', '/'));
 //            $xpdo->setDebug(false); // set to true for debugging during tests only
             $xpdo->setLogLevel(xPDO::LOG_LEVEL_WARN); // set to 'HTML' for running through browser
@@ -73,7 +73,7 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
         $person->set('security_level', 1);
         $person->set('gender', 'M');
         $result= $person->save();
-        $xpdo->_log(xPDO::LOG_LEVEL_DEBUG, "Object after save: " . print_r($person->toArray(), true));
+        $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Object after save: " . print_r($person->toArray(), true));
         $this->assertTrue($result, "Error saving data.");
     }
 
@@ -82,7 +82,7 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
         $xpdo= $this->getXPDOObject();
         $person= $xpdo->getObject('Person', 1);
         $result= (is_object($person) && $person->getPrimaryKey() == 1);
-        $xpdo->_log(xPDO::LOG_LEVEL_DEBUG, "Object after retrieval: " . print_r($person, true));
+        $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Object after retrieval: " . print_r($person, true));
         $this->assertTrue($result, "Error retrieving object by primary key");
     }
 
