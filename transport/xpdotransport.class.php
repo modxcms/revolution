@@ -281,7 +281,7 @@ class xPDOTransport {
         return $this->_pack($this->xpdo, $fileName, $path, $this->signature);
     }
 
-    protected function _pack(& $xpdo, $filename, $path, $source) {
+    public function _pack(& $xpdo, $filename, $path, $source) {
         $packed = false;
         $packResults = false;
         /*if (class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
