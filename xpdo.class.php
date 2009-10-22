@@ -144,13 +144,13 @@ class xPDO {
      * @var string
      * @access public
      */
-    protected $package= '';
+    public $package= '';
     /**
      * An array storing packages and package-specific information.
      * @var array
      * @access public
      */
-    protected $packages= array ();
+    public $packages= array ();
     /**
      * {@link xPDOManager} instance, loaded only if needed to manage datasource
      * containers, data structures, etc.
