@@ -1791,11 +1791,11 @@ class xPDOObject {
     /**
      * Used to load validation from the object map.
      *
-     * @access private
+     * @access public
      * @param boolean $reload Indicates if the schema validation rules should be
      * reloaded.
      */
-    protected function _loadValidation($reload= false) {
+    public function _loadValidation($reload= false) {
         if (!$this->_validationLoaded || $reload == true) {
             $validation= $this->xpdo->getValidationRules($this->_class);
             $this->_validationLoaded= true;
