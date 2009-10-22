@@ -1225,6 +1225,13 @@ class xPDO {
     }
 
     /**
+     * @return integer The current log level.
+     */
+    public function getLogLevel() {
+        return $this->logLevel;
+    }
+
+    /**
      * Sets the log target for xPDO::_log() calls.
      *
      * Valid target values include:
@@ -1246,6 +1253,13 @@ class xPDO {
         $oldTarget = $this->logTarget;
         $this->logTarget= $target;
         return $oldTarget;
+    }
+
+    /**
+     * @return integer The current log level.
+     */
+    public function getLogTarget() {
+        return $this->logTarget;
     }
 
     /**
