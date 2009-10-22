@@ -73,7 +73,7 @@ class xPDOCacheManager {
             $objCache =& $this->caches[$key];
             $objCacheClass= get_class($objCache);
         }
-        if ($this->xpdo->getDebug() === true) $this->xpdo->log(MODX_LOG_LEVEL_DEBUG, "Returning {$objCacheClass}:{$key} cache provider from available providers: " . print_r(array_keys($this->caches), 1));
+        if ($this->xpdo->getDebug() === true) $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Returning {$objCacheClass}:{$key} cache provider from available providers: " . print_r(array_keys($this->caches), 1));
         return $objCache;
     }
 
