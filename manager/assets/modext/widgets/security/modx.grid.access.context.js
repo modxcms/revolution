@@ -40,6 +40,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
 	,createAcl: function(itm,e) {
         var r = {
             target: this.config.context_key
+            ,principal_class: 'modUserGroup'
         };
 		if (!this.windows.create_acl) {
 			this.windows.create_acl = MODx.load({
@@ -53,7 +54,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
 	        });
 		}
         this.windows.create_acl.fp.getForm().reset();
-		this.windows.create_acl.setValues(r);		        
+		this.windows.create_acl.setValues(r);
         this.windows.create_acl.show(e.target);
 	}
     
@@ -178,6 +179,11 @@ MODx.window.CreateAccessContext = function(config) {
             ,name: 'target'
             ,id: 'modx-'+this.ident+'-target'
         },{
+            xtype: 'hidden'
+            ,name: 'principal_class'
+            ,id: 'modx-'+this.ident+'-principal-class'
+            ,value: 'modUserGroup'
+        },{
             xtype: 'modx-combo-usergroup'
             ,fieldLabel: _('user_group')
             ,name: 'principal'
@@ -203,11 +209,6 @@ MODx.window.CreateAccessContext = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
-        },{
-            xtype: 'hidden'
-            ,name: 'principal_class'
-            ,id: 'modx-'+this.ident+'-principal-class'
-            ,value: 'modUserGroup'
         }]
     });
     MODx.window.CreateAccessContext.superclass.constructor.call(this,config);
