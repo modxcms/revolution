@@ -445,13 +445,13 @@ abstract class xPDOQuery extends xPDOCriteria {
      *
      * @return xPDOStatement The xPDOStatement representing the prepared query.
      */
-    public function prepare() {
+    public function prepare($bindings= array (), $byValue= true, $cacheFlag= null) {
         $this->stmt= null;
         if (empty ($this->sql)) {
             $this->construct();
         }
         if (!empty ($this->sql) && $this->stmt= $this->xpdo->prepare($this->sql)) {
-            $this->bind();
+            $this->bind($bindings, $byValue, $cacheFlag);
         }
         return $this->stmt;
     }

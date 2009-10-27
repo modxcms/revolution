@@ -348,7 +348,7 @@ class xPDOObject {
      * @param boolean|integer $cacheFlag Indicates if the objects should be cached and
      * optionally, by specifying an integer value, for how many seconds.
      */
-    protected static function _loadCollectionInstance(& $xpdo, & $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag) {
+    protected static function _loadCollectionInstance(xPDO & $xpdo, array & $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag=true) {
         $loaded = false;
         if ($obj= xPDOObject :: _loadInstance($xpdo, $className, $criteria, $row)) {
             if (($cacheKey= $obj->getPrimaryKey()) && !$obj->isLazy()) {
@@ -389,7 +389,7 @@ class xPDOObject {
      * @return object|null An instance of the requested class, or null if it
      * could not be instantiated.
      */
-    public static function load(& $xpdo, $className, $criteria, $cacheFlag= true) {
+    public static function load(xPDO & $xpdo, $className, $criteria, $cacheFlag= true) {
         $instance= null;
         $fromCache= false;
         $sql= '';
@@ -448,7 +448,7 @@ class xPDOObject {
      * seconds.
      * @return array An array of xPDOObject instances or an empty array if no instances are loaded.
      */
-    public static function loadCollection(& $xpdo, $className, $criteria= null, $cacheFlag= true) {
+    public static function loadCollection(xPDO & $xpdo, $className, $criteria= null, $cacheFlag= true) {
         $objCollection= array ();
         $fromCache = false;
         if (!$className= $xpdo->loadClass($className)) return $objCollection;
@@ -499,7 +499,7 @@ class xPDOObject {
      * seconds.
      * @return array An array of xPDOObject instances or an empty array if no instances are loaded.
      */
-    public static function loadCollectionGraph(& $xpdo, $className, $graph, $criteria, $cacheFlag) {
+    public static function loadCollectionGraph(xPDO & $xpdo, $className, $graph, $criteria, $cacheFlag) {
         $objCollection = array();
         if ($query= $xpdo->newQuery($className, $criteria, $cacheFlag)) {
             $query->bindGraph($graph);
@@ -534,7 +534,7 @@ class xPDOObject {
      * or excluded from the set of results.
      * @return string A comma-delimited list of the field names for use in a SELECT clause.
      */
-    public static function getSelectColumns(& $xpdo, $className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false) {
+    public static function getSelectColumns(xPDO & $xpdo, $className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false) {
         $columnarray= array ();
         if ($aColumns= $xpdo->getFields($className)) {
             if (!empty ($tableAlias)) {
@@ -581,7 +581,7 @@ class xPDOObject {
      * @param xPDO &$xpdo A reference to a valid xPDO instance.
      * @return xPDOObject
      */
-    public function __construct(& $xpdo) {
+    public function __construct(xPDO & $xpdo) {
         $this->container= $xpdo->config['dbname'];
         $this->_class= get_class($this);
         $pos= strrpos($this->_class, '_');
@@ -1431,7 +1431,7 @@ class xPDOObject {
      * removed to prevent loop with circular references.
      * @return boolean Returns true on success, false on failure.
      */
-    public function remove($ancestors= array ()) {
+    public function remove(array $ancestors= array ()) {
         $result= false;
         if ($pk= $this->getPrimaryKey()) {
             if (!empty ($this->_composites)) {
@@ -1733,7 +1733,7 @@ class xPDOObject {
      * @param string $rule The rule definition.
      * @param array $parameters Any input parameters for the rule.
      */
-    public function addValidationRule($field, $name, $type, $rule, $parameters= array()) {
+    public function addValidationRule($field, $name, $type, $rule, array $parameters= array()) {
         if (!$this->_validationLoaded) $this->_loadValidation();
         if (!isset($this->_validationRules[$field])) $this->_validationRules[$field]= array();
         $this->_validationRules[$field][$name]= array(
@@ -1754,7 +1754,7 @@ class xPDOObject {
      * @param array $rules An optional array of rule names to remove if a single
      * field is specified.  If $field is null, this parameter is ignored.
      */
-    public function removeValidationRules($field = null, $rules = array()) {
+    public function removeValidationRules($field = null, array $rules = array()) {
         if (!$this->_validationLoaded) $this->_loadValidation();
         if (empty($rules) && is_string($field)) {
             unset($this->_validationRules[$field]);
@@ -1814,7 +1814,7 @@ class xPDOObject {
      * @param array $options An array of options to pass to the validator.
      * @return boolean True if validation was successful.
      */
-    public function validate($options = array()) {
+    public function validate(array $options = array()) {
         $validated= false;
         if ($validator= $this->getValidator()) {
             $validated= $this->_validator->validate($options);
