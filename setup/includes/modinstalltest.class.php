@@ -5,13 +5,10 @@
  * @package setup
  * @subpackage tests
  */
-class modInstallTest {
-    var $results = array();
-    var $mode;
+abstract class modInstallTest {
+    public $results = array();
+    public $mode;
 
-    function modInstallTest(&$install) {
-        $this->__construct($install);
-    }
     function __construct(&$install) {
         $this->install =& $install;
     }
@@ -22,20 +19,21 @@ class modInstallTest {
      * @param integer $mode The install mode.
      * @return array An array of result messages collected during the process.
      */
-    function run($mode = MODX_INSTALL_MODE_NEW) {
+    public function run($mode = modInstall::MODE_NEW) {
         $this->results = array();
         $this->mode = $mode;
 
-        $this->checkDependencies();
-        $this->checkPHPVersion();
-        $this->checkMemoryLimit();
-        $this->checkSessions();
-        $this->checkCache();
-        $this->checkExport();
-        $this->checkPackages();
-        $this->checkContexts();
-        $this->checkConfig();
-        $this->checkDatabase();
+        $this->_checkDependencies();
+        $this->_checkPHPVersion();
+        $this->_checkMySQLVersion();
+        $this->_checkMemoryLimit();
+        $this->_checkSessions();
+        $this->_checkCache();
+        $this->_checkExport();
+        $this->_checkPackages();
+        $this->_checkContexts();
+        $this->_checkConfig();
+        $this->_checkDatabase();
 
         return $this->results;
     }
@@ -43,32 +41,58 @@ class modInstallTest {
     /**
      * Checks PHP version
      */
-    function checkPHPVersion() {
+    protected function _checkPHPVersion() {
         $this->results['php_version']['msg'] = '<p>'.$this->install->lexicon['test_php_version_start'].' ';
-        $php_ver_comp = version_compare(phpversion(),'4.3.0');
-        $php_ver_comp2 = version_compare(phpversion(), '4.3.11');
+        $phpVersion = phpversion();
+        $php_ver_comp = version_compare($phpVersion,'5.1.1');
+        $php_ver_comp2 = version_compare($phpVersion, '5.1.6');
         /* -1 if left is less, 0 if equal, +1 if left is higher */
         if ($php_ver_comp < 0) {
-            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span> - '.sprintf($this->install->lexicon['test_php_version_fail'],phpversion()).'</p>';
+            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span> - '.sprintf($this->install->lexicon['test_php_version_fail'],$phpVersion).'</p>';
             $this->results['php_version']['class'] = 'testFailed';
+
+        } else if ($php_ver_comp2 == 0) {
+            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span><p>'.sprintf($this->install->lexicon['test_php_version_516'],$phpVersion).'</p>';
+            $this->results['php_version']['class'] = 'testFailed';
+
         } else {
+            $this->results['php_version']['class'] = 'testPassed';
             $this->results['php_version']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
-            if ($php_ver_comp2 < 0) {
-                $this->results['php_version']['msg'] .= '<div class="notes"><h3>'.$this->install->lexicon['security_notice'].'</h3><p>'.sprintf($this->install->lexicon['test_php_version_sn'],phpversion()).'</p></div>';
-                $this->results['php_version']['class'] = 'testWarn';
-            } else {
-                $this->results['php_version']['class'] = 'testPassed';
-            }
+        }
+    }
+
+    /**
+     * Checks MySQL version
+     */
+    protected function _checkMySQLVersion() {
+        $this->results['mysql_version']['msg'] = '<p>'.$this->install->lexicon['test_mysql_version_start'].' ';
+        $mysqlVersion = mysql_get_server_info();
+
+        $mysql_ver_comp = version_compare($mysqlVersion,'4.1.20');
+        $mysql_ver_comp_5051 = version_compare($mysqlVersion,'5.0.51');
+        $mysql_ver_comp_5051a = version_compare($mysqlVersion,'5.0.51a');
+
+        if ($mysql_ver_comp < 0) {
+            $this->results['mysql_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span> - '.sprintf($this->install->lexicon['test_mysql_version_fail'],$mysqlVersion).'</p>';
+            $this->results['mysql_version']['class'] = 'testFailed';
+
+        } else if ($mysql_ver_comp_5051 == 0 || $mysql_ver_comp_5051a == 0) {
+            $this->results['mysql_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span><p>'.sprintf($this->install->lexicon['test_mysql_version_5051'],$mysqlVersion).'</p>';
+            $this->results['mysql_version']['class'] = 'testFailed';
+
+        } else {
+            $this->results['mysql_version']['class'] = 'testPassed';
+            $this->results['mysql_version']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
         }
     }
 
     /**
      * Check memory limit, to make sure it is set at least to 32M
      */
-    function checkMemoryLimit() {
+    protected function _checkMemoryLimit() {
         $success = false;
         $ml = ini_get('memory_limit');
-        $bytes = $this->return_bytes($ml);
+        $bytes = $this->_returnBytes($ml);
 
         if ($bytes < 25165824) { /* 24M = 25165824, 32M = 33554432, 64M = 67108864 */
             $success = @ini_set('memory_limit','24M');
@@ -97,10 +121,10 @@ class modInstallTest {
      * @param string $val The byte string
      * @return integer The string converted into a proper integer bytes
      */
-    function return_bytes($val) {
+    protected function _returnBytes($val) {
         $val = trim($val);
         $num = intval(substr($val,0,strlen($val)-1));
-        $last = strtolower(substr($val,strlen($val),1));
+        $last = strtolower(substr($val,-1));
         switch ($last) {
             case 'g':
                 $num *= 1024;
@@ -117,7 +141,7 @@ class modInstallTest {
      *
      * @access public
      */
-    function checkDependencies() {
+    protected function _checkDependencies() {
         $this->results['dependencies']['msg'] = '<p>'.$this->install->lexicon['test_dependencies'].' ';
         if (!extension_loaded('zlib')) {
             $s = '<span class="notok">'.$this->install->lexicon['failed'].'</span>';
@@ -135,7 +159,7 @@ class modInstallTest {
     /**
      * Check sessions
      */
-    function checkSessions() {
+    protected function _checkSessions() {
         $this->results['sessions']['msg'] = '<p>'.$this->install->lexicon['test_sessions_start'].' ';
         if ($_SESSION['session_test'] != 1) {
             $this->results['sessions']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
@@ -150,7 +174,7 @@ class modInstallTest {
     /**
      * Check if cache exists and is writable
      */
-    function checkCache() {
+    protected function _checkCache() {
         /* cache exists? */
         $this->results['cache_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],'core/cache');
         if (!file_exists(MODX_CORE_PATH . 'cache')) {
@@ -175,7 +199,7 @@ class modInstallTest {
     /**
      * Check if core/export exists and is writable
      */
-    function checkExport() {
+    protected function _checkExport() {
         /* export exists? */
         $this->results['assets_export_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],'core/export');
         if (!file_exists(MODX_CORE_PATH . 'export')) {
@@ -200,7 +224,7 @@ class modInstallTest {
     /**
      * Verify if core/packages exists and is writable
      */
-    function checkPackages() {
+    protected function _checkPackages() {
         /* core/packages exists? */
         $this->results['core_packages_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],'core/packages');
         if (!file_exists(MODX_CORE_PATH . 'packages')) {
@@ -225,7 +249,7 @@ class modInstallTest {
     /**
      * Check context paths if inplace, else make sure paths can be written
      */
-    function checkContexts() {
+    protected function _checkContexts() {
         $coreConfigsExist = false;
         if ($this->install->config['inplace']) {
             /* web_path */
@@ -268,7 +292,7 @@ class modInstallTest {
     /**
      * Config file writable?
      */
-    function checkConfig() {
+    protected function _checkConfig() {
         $configFileDisplay= 'config/' . MODX_CONFIG_KEY . '.inc.php';
         $configFilePath= MODX_CORE_PATH . $configFileDisplay;
         $this->results['config_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_config_file'],'core/' . $configFileDisplay);
@@ -291,12 +315,12 @@ class modInstallTest {
     /**
      * Check connection to database, as well as table prefix
      */
-    function checkDatabase() {
+    protected function _checkDatabase() {
         /* connect to the database */
         $this->results['dbase_connection']['msg'] = '<p>'.$this->install->lexicon['test_db_check'];
         $xpdo = $this->install->getConnection();
         if (!$xpdo || !$xpdo->connect()) {
-            if ($this->mode > MODX_INSTALL_MODE_NEW) {
+            if ($this->mode > modInstall::MODE_NEW) {
                 $this->results['dbase_connection']['msg'] .= '<span class="notok">'.$this->install->lexicon['test_db_failed'].'</span><p />'.$this->install->lexicon['test_db_check_conn'].'</p>';
                 $this->results['dbase_connection']['class'] = 'testFailed';
             } else {
@@ -335,7 +359,7 @@ class modInstallTest {
                 $count = $stmt->fetchColumn();
                 $stmt->closeCursor();
             }
-            if ($this->mode == MODX_INSTALL_MODE_NEW) { /* if new install */
+            if ($this->mode == modInstall::MODE_NEW) { /* if new install */
                 if ($count > 0) {
                     $this->results['table_prefix']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></b> - '.$this->install->lexicon['test_table_prefix_inuse'].'</p>';
                     $this->results['table_prefix']['class'] = 'testFailed';
@@ -361,11 +385,11 @@ class modInstallTest {
     /**
      * Checks to see if a given path is in a writable container.
      *
-     * @access private
+     * @access protected
      * @param string $path The file path to test.
      * @return boolean Returns true if the path is in a writable container.
      */
-    function _inWritableContainer($path) {
+    protected function _inWritableContainer($path) {
         $writable = false;
         if (file_exists($path) && is_dir($path))
             $writable = is_writable($path);

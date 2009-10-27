@@ -30,13 +30,10 @@
  * @package setup
  */
 class modInstallVersion {
-    var $results = array();
+    public $results = array();
 
-    function modInstallVersion(&$install) {
-        $this->__construct($install);
-    }
-    function __construct(&$install) {
-        $this->install = $install;
+    function __construct(modInstall &$install) {
+        $this->install =& $install;
         $this->_getVersion();
     }
 
@@ -47,7 +44,7 @@ class modInstallVersion {
      * @param string/array $class A class name or array of class names
      * @return boolean True if successful
      */
-    function createTable($class) {
+    public function createTable($class) {
         if (is_array($class)) {
             $dbcreated = true;
             foreach ($class as $c) {
@@ -77,7 +74,7 @@ class modInstallVersion {
      * @access public
      * @return array An array of results
      */
-    function install() {
+    public function install() {
         $this->results = array();
 
         $connected = $this->install->xpdo->connect();
@@ -102,7 +99,7 @@ class modInstallVersion {
      * @access public
      * @return boolean True if successful
      */
-    function processResults($class,$description,$sql) {
+    public function processResults($class,$description,$sql) {
         if (!$this->install->xpdo->exec($sql)) {
             $this->results[] = array (
                 'class' => 'warning',
@@ -125,7 +122,7 @@ class modInstallVersion {
      * @access private
      * @return array An array of script filenames to load
      */
-    function _getUpgradeScripts() {
+    private function _getUpgradeScripts() {
         $scripts = array();
         $path = dirname(__FILE__).'/upgrades/';
         $sc = '';
@@ -147,7 +144,7 @@ class modInstallVersion {
      * @access private
      * @return string The full version of the MODx installation
      */
-    function _getVersion() {
+    private function _getVersion() {
         $installVersion = '2.0.0-alpha-1';
         if ($settings_version = $this->install->xpdo->getObject('modSystemSetting', array(
                 'key' => 'settings_version'

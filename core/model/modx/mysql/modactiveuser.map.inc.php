@@ -78,5 +78,3 @@ $xpdo_meta_map['modActiveUser']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modActiveUser']['aggregates']= array_merge($xpdo_meta_map['modActiveUser']['aggregates'], array_change_key_case($xpdo_meta_map['modActiveUser']['aggregates']));
-$xpdo_meta_map['modactiveuser']= & $xpdo_meta_map['modActiveUser'];

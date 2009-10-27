@@ -93,5 +93,3 @@ $xpdo_meta_map['modContextSetting']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modContextSetting']['aggregates']= array_merge($xpdo_meta_map['modContextSetting']['aggregates'], array_change_key_case($xpdo_meta_map['modContextSetting']['aggregates']));
-$xpdo_meta_map['modcontextsetting']= & $xpdo_meta_map['modContextSetting'];

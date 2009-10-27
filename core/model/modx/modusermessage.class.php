@@ -5,14 +5,7 @@
  * @package modx
  */
 class modUserMessage extends xPDOSimpleObject {
-    function modUserMessage(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-
-    function getOne($alias, $criteria= null) {
+    public function getOne($alias, $criteria= null) {
         if (($alias === 'Recipient' || $alias === 'Sender') && $criteria === null) {
             if ($fkMeta= $this->getFKDefinition($alias)) {
                 if ($userid= $this->get($fkMeta['local'])) {
@@ -26,7 +19,7 @@ class modUserMessage extends xPDOSimpleObject {
                     $userTable= $this->xpdo->getTableName($class);
                     $sql= "SELECT * FROM {$userTable} WHERE `id` = :user_id";
                     $bindings= array(
-                        ':user_id' => array ('value' => $userid, 'type' => PDO_PARAM_INT)
+                        ':user_id' => array ('value' => $userid, 'type' => PDO::PARAM_INT)
                     );
                     $criteria= new xPDOCriteria($this->xpdo, $sql, $bindings, true);
                 }
@@ -34,6 +27,5 @@ class modUserMessage extends xPDOSimpleObject {
         }
         return parent :: getOne($alias, $criteria);
     }
-    
+
 }
-?>

@@ -658,7 +658,7 @@
 						else
 						{
 							// log if receiveing something strange, even though we set the value to false anyway
-							if ($GLOBALS['_xh']['ac']!='0' && strcasecmp($_xh[$parser]['ac'], 'false') != 0)
+							if ($GLOBALS['_xh']['ac']!='0' && strcasecmp($GLOBALS['_xh'][$parser]['ac'], 'false') != 0)
 								error_log('XML-RPC: invalid value received in BOOLEAN: '.$GLOBALS['_xh']['ac']);
 							$GLOBALS['_xh']['value']=false;
 						}
@@ -1725,7 +1725,7 @@
 					}
 					else
 					{
-						if (is_a($results, 'xmlrpcresp'))
+						if ($results instanceof xmlrpcresp)
 						{
 							$result = $results;
 						}
@@ -1945,7 +1945,7 @@
 				if ($valtyp == '')
 				{
 					// user did not declare type of response value: try to guess it
-					if (is_object($this->val) && is_a($this->val, 'xmlrpcval'))
+					if (is_object($this->val) && $this->val instanceof xmlrpcval)
 					{
 						$this->valtyp = 'xmlrpcvals';
 					}
@@ -2038,7 +2038,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 			}
 			else
 			{
-				if(!is_object($this->val) || !is_a($this->val, 'xmlrpcval'))
+				if(!is_object($this->val) || !($this->val instanceof xmlrpcval))
 				{
 					if (is_string($this->val) && $this->valtyp == 'xml')
 					{
@@ -2177,7 +2177,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 		function addParam($par)
 		{
 			// add check: do not add to self params which are not xmlrpcvals
-			if(is_object($par) && is_a($par, 'xmlrpcval'))
+			if(is_object($par) && $par instanceof xmlrpcval)
 			{
 				$this->params[]=$par;
 				return true;
@@ -2351,6 +2351,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 									$val = explode('=', $val, 2);
 									$tag = trim($val[0]);
 									$val = trim(@$val[1]);
+                                    $cookiename = $tag;
 									/// @todo with version 1 cookies, we should strip leading and trailing " chars
 									if ($pos == 0)
 									{
@@ -3390,7 +3391,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 				}
 				break;
 			case 'object':
-				if(is_a($php_val, 'xmlrpcval'))
+				if($php_val instanceof xmlrpcval)
 				{
 					$xmlrpc_val = $php_val;
 				}

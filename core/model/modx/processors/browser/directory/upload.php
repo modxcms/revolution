@@ -12,8 +12,8 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-if (!isset($_POST['dir']) || $_POST['dir'] == '')
-	return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+if (empty($_POST['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+
 
 $d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
     ? $_POST['prependPath']

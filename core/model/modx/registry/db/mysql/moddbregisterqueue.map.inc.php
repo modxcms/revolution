@@ -39,5 +39,3 @@ $xpdo_meta_map['modDbRegisterQueue']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modDbRegisterQueue']['composites']= array_merge($xpdo_meta_map['modDbRegisterQueue']['composites'], array_change_key_case($xpdo_meta_map['modDbRegisterQueue']['composites']));
-$xpdo_meta_map['moddbregisterqueue']= & $xpdo_meta_map['modDbRegisterQueue'];

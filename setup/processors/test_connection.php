@@ -2,14 +2,14 @@
 /**
  * @package setup
  */
-$mode= isset ($_POST['installmode']) ? intval($_POST['installmode']) : MODX_INSTALL_MODE_NEW;
+$mode= isset ($_POST['installmode']) ? intval($_POST['installmode']) : modInstall::MODE_NEW;
 
 /* validate database settings */
 $install->setConfig($mode);
 $err = $install->getConnection($mode);
-if (!is_a($err,'xPDO')) { $this->error->failure($err); }
+if (!($err instanceof xPDO)) { $this->error->failure($err); }
 
-if (!is_a($install->xpdo,'xPDO') || !$install->xpdo->connect()) {
+if (!($install->xpdo instanceof xPDO) || !$install->xpdo->connect()) {
     $this->error->failure('<p>'.$install->lexicon['db_err_connect'].'</p><pre>' . print_r($install->config, true) . '</pre>');
 }
 $this->error->setType('success');

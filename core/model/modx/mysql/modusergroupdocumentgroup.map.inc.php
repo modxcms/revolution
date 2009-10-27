@@ -52,5 +52,3 @@ $xpdo_meta_map['modUserGroupDocumentGroup']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modUserGroupDocumentGroup']['aggregates']= array_merge($xpdo_meta_map['modUserGroupDocumentGroup']['aggregates'], array_change_key_case($xpdo_meta_map['modUserGroupDocumentGroup']['aggregates']));
-$xpdo_meta_map['modusergroupdocumentgroup']= & $xpdo_meta_map['modUserGroupDocumentGroup'];

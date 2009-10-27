@@ -64,6 +64,3 @@ $xpdo_meta_map['modUserGroup']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modUserGroup']['aggregates']= array_merge($xpdo_meta_map['modUserGroup']['aggregates'], array_change_key_case($xpdo_meta_map['modUserGroup']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modUserGroup']['composites']= array_merge($xpdo_meta_map['modUserGroup']['composites'], array_change_key_case($xpdo_meta_map['modUserGroup']['composites']));
-$xpdo_meta_map['modusergroup']= & $xpdo_meta_map['modUserGroup'];

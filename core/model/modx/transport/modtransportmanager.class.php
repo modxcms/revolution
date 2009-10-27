@@ -29,36 +29,31 @@ class modTransportManager {
 	/**
 	 * @var MODx A reference to the MODx object.
 	 */
-    var $modx = null;
+    public $modx = null;
     /**
      * @var array The configuration array for the TransportManager.
      */
-    var $config = array ();
+    public $config = array ();
     /**
      * @var array An array of active providers.
      */
-    var $providers = array ();
+    public $providers = array ();
     /**
      * @var modWorkspace The active MODx workspace.
      */
-    var $workspace = null;
+    public $workspace = null;
 
-    /**#@+
+    /**
      * Creates an instance of the modTransportManager class.
      *
      * @param modX &$modx A reference to a modX instance.
      * @return modTransportManager
      */
-    function modTransportManager(& $modx) {
-        $this->__construct($modx);
-    }
-    /** @ignore */
-    function __construct(& $modx) {
-        $this->modx = & $modx;
+    function __construct(xPDO &$modx) {
+        $this->modx = &$modx;
         $this->getActiveWorkspace();
         $this->modx->loadClass('transport.xPDOTransport', XPDO_CORE_PATH . 'om/', true, true);
     }
-    /**#@-*/
 
 	/**
 	 * Get a list of providers for the transports.
@@ -68,13 +63,13 @@ class modTransportManager {
 	 * to false.
 	 * @return array A list of providers.
 	 */
-    function getProviders($refresh = false) {
+    public function getProviders($refresh = false) {
         if (empty($this->providers) || $refresh) {
             $this->providers = $this->modx->getCollection('transport.modTransportProvider', array (
                 'disabled' => false,
             ));
             if (!$this->providers) {
-                $this->modx->log(MODX_LOG_LEVEL_ERROR, "Could not find any active transport providers.");
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "Could not find any active transport providers.");
             }
         }
         return $this->providers;
@@ -86,10 +81,10 @@ class modTransportManager {
      * @access public
 	 * @return modWorkspace
 	 */
-    function getActiveWorkspace() {
+    public function getActiveWorkspace() {
         if ($this->workspace == null) {
             if (!$this->workspace = $this->modx->getObject('transport.modWorkspace', array ('active' => true))) {
-                $this->modx->log(MODX_LOG_LEVEL_ERROR, "Could not find an active workspace!");
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "Could not find an active workspace!");
             }
         }
         return $this->workspace;
@@ -102,7 +97,7 @@ class modTransportManager {
 	 * @param integer $workspaceId The PK of the modWorkspace.
 	 * @return modWorkspace
 	 */
-    function changeActiveWorkspace($workspaceId) {
+    public function changeActiveWorkspace($workspaceId) {
         $workspace = $this->modx->getObject('transport.modWorkspace', $workspaceId);
         if ($workspace) {
             if ($this->workspace) {
@@ -113,7 +108,7 @@ class modTransportManager {
             $workspace->save();
             $this->workspace = $workspace;
         } else {
-            $this->modx->log(MODX_LOG_LEVEL_ERROR, "Could not change to workspace with id = {$workspaceId}");
+            $this->modx->log(modX::LOG_LEVEL_ERROR, "Could not change to workspace with id = {$workspaceId}");
         }
         return $this->workspace;
     }
@@ -124,7 +119,7 @@ class modTransportManager {
      * @access public
 	 * @return array An array of updates for packages.
 	 */
-    function scanForUpdates() {
+    public function scanForUpdates() {
         $updates = array ();
         $this->getProviders();
         foreach ($this->providers as $providerId => $provider) {
@@ -141,7 +136,7 @@ class modTransportManager {
      * @access public
 	 * @return array An array of packages.
 	 */
-    function scanForPackages() {
+    public function scanForPackages() {
         $packages = array ();
         $this->getProviders();
         foreach ($this->providers as $providerId => $provider) {

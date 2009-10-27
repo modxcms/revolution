@@ -18,22 +18,17 @@ class modTransportProvider extends xPDOSimpleObject {
      * The JSON-RPC client instance that will communicate with the server.
      * @var jsonrpc_client
      */
-    var $client = null;
+    public $client = null;
 
-    /**#@+
+    /**
      * Creates an instance of the modTransportProvider class
      *
      * {@inheritdoc}
      */
-    function modTransportProvider(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    /** @ignore */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('created', strftime('%Y-%m-%d %H:%M:%S'));
     }
-    /**#@-*/
 
     /**
      * Handles the response from the provider. Returns response in array format.
@@ -42,16 +37,16 @@ class modTransportProvider extends xPDOSimpleObject {
      * @param jsonrpcresp $response The json-rpc response.
      * @return array The parsed response.
      */
-    function handleResponse($response) {
+    public function handleResponse($response) {
         $result = array();
-        if (!is_a($response, 'jsonrpcresp')) {
+        if (!($response instanceof jsonrpcresp)) {
             $msg = $this->xpdo->lexicon('provider_err_no_response',array('provider' => $this->get('service_url')));
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR, $msg);
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $msg);
             return $msg;
         }
         if ($response->faultCode()) {
             $msg = $this->xpdo->lexicon('provider_err_connect',array('error' => $response->faultString()));
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$msg);
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR,$msg);
             return $msg;
         }
         elseif ($value = $response->value()) {
@@ -68,7 +63,7 @@ class modTransportProvider extends xPDOSimpleObject {
      * @access public
      * @return array A collection of metadata describing the packages.
      */
-    function scanForPackages() {
+    public function scanForPackages() {
         $packages = array ();
         $installed = array ();
         if ($installedPkgs = $this->getMany('Packages')) {
@@ -96,7 +91,7 @@ class modTransportProvider extends xPDOSimpleObject {
      * @access public
      * @return array A collection of metadata describing the packages.
      */
-    function scanForUpdates() {
+    public function scanForUpdates() {
         $updates = array ();
         $installed = array ();
         if ($installedPkgs = $this->getMany('Packages')) {
@@ -120,7 +115,7 @@ class modTransportProvider extends xPDOSimpleObject {
      * @param modTransportPackage $package The package to grab updates for
      * @return array An array of available updates for the package
      */
-    function getUpdatesForPackage($package) {
+    public function getUpdatesForPackage($package) {
         $updates = array ();
         $pa = $package->toArray();
 
@@ -138,7 +133,7 @@ class modTransportProvider extends xPDOSimpleObject {
      * @access public
      * @return jsonrpc_client The JSON-RPC client instance.
      */
-    function getClient() {
+    public function getClient() {
         if ($this->client == null) {
             if ($url = $this->get('service_url')) {
                 $this->client = new jsonrpc_client($url);
@@ -158,7 +153,7 @@ class modTransportProvider extends xPDOSimpleObject {
      * @return jsonrpcresp|boolean The JSON-RPC formatted response, or false on encountering some
      * errors.
      */
-    function sendRequest($payload, $timeout = 0, $protocol = '') {
+    public function sendRequest($payload, $timeout = 0, $protocol = '') {
         $response = false;
         if ($this->getClient()) {
             $response = $this->client->send($payload, $timeout, $protocol);

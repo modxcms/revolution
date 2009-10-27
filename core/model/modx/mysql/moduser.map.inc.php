@@ -139,6 +139,3 @@ $xpdo_meta_map['modUser']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modUser']['aggregates']= array_merge($xpdo_meta_map['modUser']['aggregates'], array_change_key_case($xpdo_meta_map['modUser']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modUser']['composites']= array_merge($xpdo_meta_map['modUser']['composites'], array_change_key_case($xpdo_meta_map['modUser']['composites']));
-$xpdo_meta_map['moduser']= & $xpdo_meta_map['modUser'];

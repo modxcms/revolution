@@ -84,5 +84,3 @@ $xpdo_meta_map['modAccess']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modAccess']['aggregates']= array_merge($xpdo_meta_map['modAccess']['aggregates'], array_change_key_case($xpdo_meta_map['modAccess']['aggregates']));
-$xpdo_meta_map['modaccess']= & $xpdo_meta_map['modAccess'];

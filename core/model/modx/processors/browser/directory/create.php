@@ -10,16 +10,13 @@
  * @package modx
  * @subpackage processors.browser.directory
  */
+if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (empty($_POST['name'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+if (empty($_POST['parent'])) $_POST['parent'] = '';
 
-if (!isset($_POST['name']) || $_POST['name'] == '')
-	return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
-if (!isset($_POST['parent'])) {
-	$_POST['parent'] = '';
-}
 $d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
     ? $_POST['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');

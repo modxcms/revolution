@@ -11,14 +11,7 @@ class modScript extends modElement {
     var $_scriptName= null;
     var $_scriptCacheKey= null;
 
-    function modScript(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-
-    function set($k, $v= null, $vType= '') {
+    public function set($k, $v= null, $vType= '') {
         if (in_array($k,array('snippet','plugincode'))) {
             $v= trim($v);
             if (strncmp($v, '<?', 2) == 0) {

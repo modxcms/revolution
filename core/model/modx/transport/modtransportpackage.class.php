@@ -15,43 +15,38 @@ class modTransportPackage extends xPDOObject {
      * @var string The unique identifier of a package.
      * @access public
      */
-    var $identifier = null;
+    public $identifier = null;
     /**
      * @var string The version number of a package.
      * @access public
      */
-    var $version = null;
+    public $version = null;
     /**
      * @var string The release number of a package.
      * @access public
      */
-    var $release = null;
+    public $release = null;
     /**
      * @var mixed The package to transport.
      * @access protected
      */
-    var $package = null;
+    public $package = null;
 
-    /**#@+
+    /**
      * Creates an instance of a modTransportPackage.
      *
      * {@inheritdoc}
      */
-    function modTransportPackage(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    /** @ignore */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
     }
-    /**#@-*/
 
     /**
      * Overrides xPDOObject::save to set a default created time if new.
      *
      * {@inheritdoc}
      */
-    function save($cacheFlag= null) {
+    public function save($cacheFlag= null) {
         if ($this->_new && !$this->get('created')) {
             $this->set('created', strftime('%Y-%m-%d %H:%M:%S'));
         }
@@ -65,7 +60,7 @@ class modTransportPackage extends xPDOObject {
      *
      * {@inheritdoc}
      */
-    function set($k, $v, $vType = '') {
+    public function set($k, $v, $vType = '') {
         $set = parent :: set($k, $v, $vType);
         if ($k == 'signature') {
             $this->parseSignature();
@@ -82,7 +77,7 @@ class modTransportPackage extends xPDOObject {
      * @access public
      * @return boolean True if successful.
      */
-    function parseSignature() {
+    public function parseSignature() {
         $parsed = false;
         $sig = $this->get('signature');
         if ($sig != NULL) {
@@ -104,8 +99,8 @@ class modTransportPackage extends xPDOObject {
      * @param integer $state The state of the package.
      * @return mixed The package.
      */
-    function getTransport($state = -1) {
-        if (!is_object($this->package) || !is_a($this->package, 'xPDOTransport')) {
+    public function getTransport($state = -1) {
+        if (!is_object($this->package) || !($this->package instanceof xPDOTransport)) {
             if ($this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true)) {
                 if ($workspace = $this->getOne('Workspace')) {
                     $packageDir = $workspace->get('path') . 'packages/';
@@ -113,7 +108,7 @@ class modTransportPackage extends xPDOObject {
                         $transferred= file_exists($packageDir . $sourceFile);
                         if (!$transferred) {
                             if (!$transferred= $this->transferPackage($sourceFile, $packageDir)) {
-                                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_transfer',array(
+                                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_transfer',array(
                                 'sourceFile' => $sourceFile,
                                 'packageDir' => $packageDir,
                             )));
@@ -124,21 +119,23 @@ class modTransportPackage extends xPDOObject {
                         if ($transferred) {
                             if ($state < 0) $state = $this->get('state');
                             if ($this->package = xPDOTransport :: retrieve($this->xpdo, $packageDir . $sourceFile, $packageDir, $state)) {
-                                if ($state == XPDO_TRANSPORT_STATE_PACKED) {
-                                    $this->set('state', XPDO_TRANSPORT_STATE_UNPACKED);
+                                if ($state == xPDOTransport::STATE_PACKED) {
+                                    $this->set('state', xPDOTransport::STATE_UNPACKED);
                                 }
                                 $this->set('source', $sourceFile);
+                                /*
 //                                $this->set('manifest', array(
-//                                    XPDO_TRANSPORT_MANIFEST_VERSION => $this->package->manifestVersion,
-//                                    XPDO_TRANSPORT_MANIFEST_ATTRIBUTES => $this->package->attributes,
-//                                    XPDO_TRANSPORT_MANIFEST_VEHICLES => $this->package->vehicles
+//                                    xPDOTransport::MANIFEST_VERSION => $this->package->manifestVersion,
+//                                    xPDOTransport::MANIFEST_ATTRIBUTES => $this->package->attributes,
+//                                    xPDOTransport::MANIFEST_VEHICLES => $this->package->vehicles
 //                                ));
+ */
                                 $this->set('attributes', $this->package->attributes);
                                 $this->save();
                             }
                         }
                     } else {
-                        $this->xpdo->log(XPDO_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_source_nf'));
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_source_nf'));
                     }
                 }
             }
@@ -151,7 +148,7 @@ class modTransportPackage extends xPDOObject {
      *
      * {@inheritdoc}
      */
-    function remove($force = false,$ancestors = array()) {
+    public function remove($force = false,array $ancestors = array()) {
         $removed = false;
         if ($this->get('installed') == null || $this->get('installed') == '0000-00-00 00:00:00') {
             $uninstalled = true;
@@ -173,17 +170,17 @@ class modTransportPackage extends xPDOObject {
      * @access public
      * @return boolean True if successful.
      */
-    function install($options = array()) {
+    public function install(array $options = array()) {
         $installed = false;
         if ($this->getTransport()) {
-            $this->xpdo->log(XPDO_LOG_LEVEL_INFO,$this->xpdo->lexicon('workspace_grabbing'));
+            $this->xpdo->log(xPDO::LOG_LEVEL_INFO,$this->xpdo->lexicon('workspace_grabbing'));
             $this->getOne('Workspace');
             $wc = isset($this->Workspace->config) && is_array($this->Workspace->config) ? $this->Workspace->config : array();
             $at = is_array($this->get('attributes')) ? $this->get('attributes') : array();
             $attributes = array_merge($wc, $at);
             $attributes = array_merge($attributes, $options);
             @ini_set('max_execution_time', 0);
-            $this->xpdo->log(XPDO_LOG_LEVEL_INFO,$this->xpdo->lexicon('package_installing'));
+            $this->xpdo->log(xPDO::LOG_LEVEL_INFO,$this->xpdo->lexicon('package_installing'));
             if ($this->package->install($attributes)) {
                 $installed = true;
                 $this->set('installed', strftime('%Y-%m-%d %H:%M:%S'));
@@ -200,7 +197,7 @@ class modTransportPackage extends xPDOObject {
      * @access public
      * @return boolean True if successful.
      */
-    function uninstall($options = array()) {
+    public function uninstall(array $options = array()) {
         $uninstalled = false;
         if ($this->getTransport()) {
             $this->getOne('Workspace');
@@ -215,12 +212,12 @@ class modTransportPackage extends xPDOObject {
                 $this->set('attributes',$attributes);
                 $this->save();
             } else {
-                $this->xpdo->log(XPDO_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_uninstall',array(
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_uninstall',array(
                     'signature' => $this->package->get('signature'),
                 )));
             }
         } else {
-            $this->xpdo->log(XPDO_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_load'));
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_load'));
         }
         return $uninstalled;
     }
@@ -233,7 +230,7 @@ class modTransportPackage extends xPDOObject {
      * @param string $targetDir The directory to transfer into.
      * @return boolean True if successful.
      */
-    function transferPackage($sourceFile, $targetDir) {
+    public function transferPackage($sourceFile, $targetDir) {
         $transferred= false;
         $content= '';
         if (is_dir($targetDir) && is_writable($targetDir)) {
@@ -253,7 +250,7 @@ class modTransportPackage extends xPDOObject {
                     }
                     @ fclose($handle);
                 } else {
-                    $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_file_read',array(
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_file_read',array(
                         'source' => $source,
                     )));
                 }
@@ -281,10 +278,10 @@ class modTransportPackage extends xPDOObject {
                     $transferred= $cacheManager->writeFile($target, $content);
                 }
             } else {
-                $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'MODx could not download the file. You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.');
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'MODx could not download the file. You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.');
             }
         } else {
-             $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_target_write',array(
+             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_target_write',array(
                 'targetDir' => $targetDir,
             )));
         }
@@ -302,11 +299,11 @@ class modTransportPackage extends xPDOObject {
      *  <li>K = kilobytes</li>
      * </ul>
      *
-     * @access private
+     * @access protected
      * @param string $value Number of bytes represented in PHP ini value format.
      * @return integer The value converted to bytes.
      */
-    function _bytes($value) {
+    protected function _bytes($value) {
         $value = trim($value);
         $modifier = strtolower($value{strlen($value)-1});
         switch($modifier) {
@@ -324,11 +321,11 @@ class modTransportPackage extends xPDOObject {
      * If for some reason the server does not have allow_url_fopen or cURL
      * enabled, use this function to get the file via fsockopen.
      *
-     * @access private
+     * @access protected
      * @param string $url The source URL to retrieve
      * @return string The response from the server
      */
-    function _getByFsockopen($url) {
+    protected function _getByFsockopen($url) {
         $purl = parse_url($url);
         $host = $purl['host'];
         $path = !empty($purl['path']) ? $purl['path'] : '/';
@@ -340,7 +337,7 @@ class modTransportPackage extends xPDOObject {
         $fp = @fsockopen($host,$port,$errno,$errstr,$timeout);
 
         if( !$fp ) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'Could not retrieve from '.$url);
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not retrieve from '.$url);
         } else {
             fwrite($fp, "GET $path HTTP/1.0\r\n" .
                 "Host: $host\r\n" .
@@ -362,6 +359,4 @@ class modTransportPackage extends xPDOObject {
        }
        return $response;
     }
-
-
 }

@@ -29,6 +29,3 @@ $xpdo_meta_map['modElement']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modElement']['aggregates']= array_merge($xpdo_meta_map['modElement']['aggregates'], array_change_key_case($xpdo_meta_map['modElement']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modElement']['composites']= array_merge($xpdo_meta_map['modElement']['composites'], array_change_key_case($xpdo_meta_map['modElement']['composites']));
-$xpdo_meta_map['modelement']= & $xpdo_meta_map['modElement'];

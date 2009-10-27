@@ -8,13 +8,10 @@
  * @package modx
  * @subpackage processors.browser.file
  */
+if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-if (!isset($_REQUEST['path']) || $_REQUEST['path'] == '') {
-    return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
-}
+if (empty($_REQUEST['path'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
 $d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
     ? $_POST['prependPath']
@@ -24,7 +21,7 @@ $directory = realpath($d.$_REQUEST['path']);
 $errors = array();
 foreach ($_FILES as $id => $file) {
     if ($file['error'] != 0) continue;
-    if ($file['name'] == '') continue;
+    if (empty($file['name'])) continue;
 
     if (!is_dir($directory)) {
         $errors[$id] = $modx->lexicon('file_folder_err_invalid').': '.$directory;
@@ -34,7 +31,6 @@ foreach ($_FILES as $id => $file) {
         $errors[$id] = $modx->lexicon('file_folder_err_perms_upload');
         continue;
     }
-
 
     $newloc = strtr($directory.'/'.$file['name'],'\\','/');
 

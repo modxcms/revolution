@@ -77,11 +77,11 @@ class modResponse {
                 }
             }
 
-            $this->modx->_beforeRender();
+            $this->modx->beforeRender();
 
             /* invoke OnWebPagePrerender event */
             if (!isset($options['noEvent']) || empty($options['noEvent'])) {
-                $this->modx->invokeEvent("OnWebPagePrerender");
+                $this->modx->invokeEvent('OnWebPagePrerender');
             }
 
             $mtime= microtime();
@@ -90,7 +90,7 @@ class modResponse {
             $totalTime= ($mtime - $this->modx->startTime);
             $queries= 0;
             $queryTime= 0;
-            if ($this->modx->db !== null && is_a($this->modx->db, 'DBAPI')) {
+            if ($this->modx->db !== null && $this->modx->db instanceof DBAPI) {
                 $queryTime= $this->modx->queryTime;
                 $queryTime= sprintf("%2.4f s", $queryTime);
                 $queries= isset ($this->modx->executedQueries) ? $this->modx->executedQueries : 0;
@@ -190,18 +190,18 @@ class modResponse {
      */
     function sendRedirect($url, $count_attempts= 0, $type= '') {
         if (empty ($url)) {
-            $this->modx->log(MODX_LOG_LEVEL_ERROR, "Attempted to redirect to an empty URL.");
+            $this->modx->log(modX::LOG_LEVEL_ERROR, "Attempted to redirect to an empty URL.");
             return false;
         }
         if (!$this->modx->getRequest()) {
-            $this->modx->log(MODX_LOG_LEVEL_FATAL, "Could not load request class.");
+            $this->modx->log(modX::LOG_LEVEL_FATAL, "Could not load request class.");
         }
         $this->modx->request->preserveRequest('referrer.redirected');
         if ($count_attempts == 1) {
             /* append the redirect count string to the url */
             $currentNumberOfRedirects= isset ($_REQUEST['err']) ? $_REQUEST['err'] : 0;
             if ($currentNumberOfRedirects > 3) {
-                $this->modx->log(MODX_LOG_LEVEL_FATAL, 'Redirection attempt failed - please ensure the resource you\'re trying to redirect to exists. <p>Redirection URL: <i>' . $url . '</i></p>');
+                $this->modx->log(modX::LOG_LEVEL_FATAL, 'Redirection attempt failed - please ensure the resource you\'re trying to redirect to exists. <p>Redirection URL: <i>' . $url . '</i></p>');
             } else {
                 $currentNumberOfRedirects += 1;
                 if (strpos($url, "?") > 0) {

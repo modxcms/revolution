@@ -105,5 +105,3 @@ $xpdo_meta_map['modDbRegisterMessage']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modDbRegisterMessage']['aggregates']= array_merge($xpdo_meta_map['modDbRegisterMessage']['aggregates'], array_change_key_case($xpdo_meta_map['modDbRegisterMessage']['aggregates']));
-$xpdo_meta_map['moddbregistermessage']= & $xpdo_meta_map['modDbRegisterMessage'];

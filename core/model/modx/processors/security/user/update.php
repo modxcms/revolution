@@ -122,11 +122,11 @@ function sendMailMessage($email, $uid, $pwd, $ufn) {
 	$message = str_replace("[[+surl]]", $modx->getOption('url_scheme') . $modx->getOption('http_host') . $modx->getOption('manager_url'), $message);
 
     $modx->getService('mail', 'mail.modPHPMailer');
-    $modx->mail->set(MODX_MAIL_BODY, $message);
-    $modx->mail->set(MODX_MAIL_FROM, $modx->getOption('emailsender'));
-    $modx->mail->set(MODX_MAIL_FROM_NAME, $modx->getOption('site_name'));
-    $modx->mail->set(MODX_MAIL_SENDER, $modx->getOption('emailsender'));
-    $modx->mail->set(MODX_MAIL_SUBJECT, $modx->getOption('emailsubject'));
+    $modx->mail->set(modMail::MAIL_BODY, $message);
+    $modx->mail->set(modMail::MAIL_FROM, $modx->getOption('emailsender'));
+    $modx->mail->set(modMail::MAIL_FROM_NAME, $modx->getOption('site_name'));
+    $modx->mail->set(modMail::MAIL_SENDER, $modx->getOption('emailsender'));
+    $modx->mail->set(modMail::MAIL_SUBJECT, $modx->getOption('emailsubject'));
     $modx->mail->address('to', $email, $ufn);
     $modx->mail->address('reply-to', $modx->getOption('emailsender'));
     $modx->mail->setHTML(true);

@@ -32,4 +32,3 @@ $xpdo_meta_map['modManagerUser']= array (
     ),
   ),
 );
-$xpdo_meta_map['modmanageruser']= & $xpdo_meta_map['modManagerUser'];

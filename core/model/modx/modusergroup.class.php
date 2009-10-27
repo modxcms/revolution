@@ -5,20 +5,6 @@
  * @package modx
  */
 class modUserGroup extends xPDOSimpleObject {
-    /**#@+
-     * Creates a modUserGroup instance.
-     *
-     * {@inheritdoc}
-     */
-	function modUserGroup(&$xpdo) {
-		$this->__construct($xpdo);
-	}
-    /** @ignore */
-	function __construct(&$xpdo) {
-		parent::__construct($xpdo);
-	}
-    /**#@-*/
-
     /**
      * Gets a collection of objects related by aggregate or composite relations.
      *
@@ -30,7 +16,7 @@ class modUserGroup extends xPDOSimpleObject {
      *
      * @todo Refactor to use the new ABAC security model.
      */
-    function getMany($alias, $criteria= null, $cacheFlag= false) {
+    public function getMany($alias, $criteria= null, $cacheFlag= false) {
         $collection = array();
         switch ($alias) {
             case 'Users':
@@ -55,7 +41,7 @@ class modUserGroup extends xPDOSimpleObject {
      * @access public
 	 * @return array An array of {@link modUser} objects.
 	 */
-	function getUsersIn() {
+	public function getUsersIn() {
         $c = $this->xpdo->newQuery('modUser');
         $c->innerJoin('modUserGroupMember','UserGroupMembers');
         $c->where(array(
@@ -74,7 +60,7 @@ class modUserGroup extends xPDOSimpleObject {
      * @param $start The starting index for the limit query.
 	 * @return array An array of resource groups.
 	 */
-  	function getResourceGroups($limit = false,$start = 0) {
+  	public function getResourceGroups($limit = false,$start = 0) {
         $c = $this->xpdo->newQuery('modResourceGroup');
         $c->innerJoin('modAccessResourceGroup','Acls',array(
             'Acls.principal_class' => 'modUserGroup',

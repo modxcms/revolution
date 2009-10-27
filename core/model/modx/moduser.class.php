@@ -10,21 +10,7 @@ class modUser extends modPrincipal {
      * @var array
      * @access public
      */
-    var $sessionContexts= array ();
-
-    /**#@+
-     * Creates a modUser instance.
-     *
-     * {@inheritDoc}
-     */
-    function modUser(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    /** @ignore */
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-    /**#@-*/
+    public $sessionContexts= array ();
 
     /**
      * Loads the principal attributes that define a modUser security profile.
@@ -33,7 +19,7 @@ class modUser extends modPrincipal {
      *
      * @todo Remove the legacy docgroup support.
      */
-    function loadAttributes($target, $context = '', $reload = false) {
+    public function loadAttributes($target, $context = '', $reload = false) {
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if ($this->_attributes === null || $reload) {
             $this->_attributes = array();
@@ -70,7 +56,7 @@ class modUser extends modPrincipal {
                         );
                         $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                         if ($query->stmt && $query->stmt->execute()) {
-                            while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
+                            while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => $row['principal'],
                                     'authority' => $row['authority'],
@@ -95,7 +81,7 @@ class modUser extends modPrincipal {
                         );
                         $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                         if ($query->stmt && $query->stmt->execute()) {
-                            while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
+                            while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => $row['principal'],
                                     'authority' => $row['authority'],
@@ -120,7 +106,7 @@ class modUser extends modPrincipal {
                         );
                         $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                         if ($query->stmt && $query->stmt->execute()) {
-                            while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
+                            while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => $row['principal'],
                                     'authority' => $row['authority'],
@@ -147,7 +133,7 @@ class modUser extends modPrincipal {
                         );
                         $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                         if ($query->stmt && $query->stmt->execute()) {
-                            while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
+                            while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => 0,
                                     'authority' => $row['authority'],
@@ -166,7 +152,7 @@ class modUser extends modPrincipal {
                                 "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
                         $query = new xPDOCriteria($this->xpdo, $sql);
                         if ($query->stmt && $query->stmt->execute()) {
-                            while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
+                            while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => 0,
                                     'authority' => $row['authority'],
@@ -187,7 +173,7 @@ class modUser extends modPrincipal {
                         );
                         $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                         if ($query->stmt && $query->stmt->execute()) {
-                            while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
+                            while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => 0,
                                     'authority' => $row['authority'],
@@ -213,12 +199,13 @@ class modUser extends modPrincipal {
      * Separate session contexts can allow users to login/out of specific sub-sites
      * individually (or in collections).
      *
+     * @access public
      * @param string $sessionContext The context to determine if the user is
      * authenticated in.
      * @return boolean true, if the user is authenticated in the specified
      * context, false otherwise.
      */
-    function isAuthenticated($sessionContext= 'web') {
+    public function isAuthenticated($sessionContext= 'web') {
         $isAuthenticated= false;
         if (!empty ($sessionContext) && is_string($sessionContext)) {
             if ($this->hasSessionContext($sessionContext)) {
@@ -233,8 +220,10 @@ class modUser extends modPrincipal {
 
     /**
      * Ends a user session completely, including all contexts.
+     *
+     * @access public
      */
-    function endSession() {
+    public function endSession() {
         $this->getSessionContexts();
         if (!empty($this->sessionContexts)) {
             $this->removeSessionContext($this->sessionContexts);
@@ -245,12 +234,13 @@ class modUser extends modPrincipal {
     /**
      * Change the user password.
      *
+     * @access public
      * @param string $newPassword Password to set.
      * @param string $oldPassword Current password for validation.
      * @return boolean Indicates if password was successfully changed.
      * @todo Add support for configurable password encoding.
      */
-    function changePassword($newPassword, $oldPassword) {
+    public function changePassword($newPassword, $oldPassword) {
         $changed= false;
         if ($this->get('password') === md5($oldPassword)) {
             if (!empty ($newPassword)) {
@@ -291,7 +281,7 @@ class modUser extends modPrincipal {
      * @access public
      * @return array An array of session contexts.
      */
-    function getSessionContexts() {
+    public function getSessionContexts() {
         if (!is_array($this->sessionContexts) || empty ($this->sessionContexts)) {
             $this->sessionContexts= array ();
             if (isset ($_SESSION['modx.user.contextTokens'])) {
@@ -318,7 +308,7 @@ class modUser extends modPrincipal {
      * @access public
      * @param string $context The context to add to the user session.
      */
-    function addSessionContext($context) {
+    public function addSessionContext($context) {
         $this->getSessionContexts();
         $regenerated= false;
         if (version_compare(XPDO_PHP_VERSION, '4.3.2', '>=')) {
@@ -329,18 +319,11 @@ class modUser extends modPrincipal {
                 $oldSessionId= session_id();
                 session_regenerate_id();
                 if (!version_compare(XPDO_PHP_VERSION, '4.3.3','>=')) {
-                    if (isset ($this->config['session_cookie_path'])) {
-                        $cookiePath= $this->config['session_cookie_path'];
-                    } else {
-                        $cookiePath= $this->config['base_path'];
-                    }
+                    $cookiePath = $this->xpdo->getOption('session_cookie_path',null,$this->xpdo->getOption('base_path'));
 
                     $cookieExpiration= 0;
-                    if (!isset($this->xpdo->config['session_cookie_lifetime'])) {
-                        $cookieLifetime= @ini_get('session.cookie_lifetime');
-                    } else {
-                        $cookieLifetime= intval($this->xpdo->config['session_cookie_lifetime']);
-                    }
+                    $cookieLifetime= intval($this->xpdo->getOption('session_cookie_lifetime',null,(@ini_get('session.cookie_lifetime'))));
+
                     if (isset ($_SESSION['modx.' . $context . '.session.cookie.lifetime']) && is_numeric($_SESSION['modx.' . $context . '.session.cookie.lifetime'])) {
                         $cookieLifetime= intval($_SESSION['modx.' . $context . '.session.cookie.lifetime']);
                     }
@@ -358,8 +341,8 @@ class modUser extends modPrincipal {
         }
 
         $this->getOne('Profile');
-        $ua= & $this->Profile;
-        if ($ua && is_a($ua, 'modUserProfile')) {
+        if ($this->Profile && $this->Profile instanceof modUserProfile) {
+            $ua= & $this->Profile;
             if ($context == 'web') {
                 $_SESSION['webShortname']= $this->get('username');
                 $_SESSION['webFullname']= $ua->get('fullname');
@@ -403,7 +386,7 @@ class modUser extends modPrincipal {
      * @access public
      * @param string|array $context The context key or an array of context keys.
      */
-    function removeSessionContext($context) {
+    public function removeSessionContext($context) {
         if ($this->getSessionContexts()) {
             $contextToken= array ();
             if (is_array($context)) {
@@ -426,7 +409,7 @@ class modUser extends modPrincipal {
      * @access public
      * @param string $context The context key.
      */
-    function removeSessionContextVars($context) {
+    public function removeSessionContextVars($context) {
         if (is_string($context) && !empty ($context)) {
             switch ($context) {
                 case 'web' :
@@ -474,7 +457,7 @@ class modUser extends modPrincipal {
      * @access public
      * @param string $context The context to remove.
      */
-    function removeSessionCookie($context) {
+    public function removeSessionCookie($context) {
 
     }
 
@@ -486,7 +469,7 @@ class modUser extends modPrincipal {
      * names to check against.
      * @return boolean True if the user has the context(s) specified.
      */
-    function hasSessionContext($context) {
+    public function hasSessionContext($context) {
         $hasContext= false;
         if ($this->getSessionContexts()) {
             $contextTokens= array ();
@@ -510,7 +493,7 @@ class modUser extends modPrincipal {
      * @param mixed $read
      * @return integer The number of messages.
      */
-    function countMessages($read = '') {
+    public function countMessages($read = '') {
         if ($read == 'read') { $read = 1; } elseif ($read == 'unread') { $read = 0; }
         $criteria= array ('recipient' => $this->get('id'));
         if ($read) {
@@ -525,7 +508,7 @@ class modUser extends modPrincipal {
      * @access public
      * @return array A key -> value array of settings.
      */
-    function getSettings() {
+    public function getSettings() {
         $settings = array();
         $uss = $this->getMany('modUserSetting');
         foreach ($uss as $us) {
@@ -544,7 +527,7 @@ class modUser extends modPrincipal {
      * @access public
      * @return array An array of Resource Group names.
      */
-    function getResourceGroups() {
+    public function getResourceGroups() {
         $resourceGroups= array ();
         if (isset($_SESSION["modx.user.{$this->id}.resourceGroups"])) {
             $resourceGroups= $_SESSION["modx.user.{$this->id}.resourceGroups"];
@@ -569,7 +552,7 @@ class modUser extends modPrincipal {
      * @access public
      * @return array An array of User Group IDs.
      */
-    function getUserGroups() {
+    public function getUserGroups() {
         $groups= array();
         if (isset($_SESSION["modx.user.{$this->id}.userGroups"])) {
             $groups= $_SESSION["modx.user.{$this->id}.userGroups"];
@@ -589,7 +572,7 @@ class modUser extends modPrincipal {
      * @access public
      * @return array An array of User Group names.
      */
-    function getUserGroupNames() {
+    public function getUserGroupNames() {
         $groupNames= array();
         if (isset($_SESSION["modx.user.{$this->id}.userGroupNames"])) {
             $groupNames= $_SESSION["modx.user.{$this->id}.userGroupNames"];
@@ -616,7 +599,7 @@ class modUser extends modPrincipal {
      * @return boolean True if the user is a member of any of the groups
      * specified.
      */
-    function isMember($groups,$matchAll = false) {
+    public function isMember($groups,$matchAll = false) {
         $isMember= false;
         $groupNames= $this->getUserGroupNames();
         if ($groupNames) {
@@ -644,13 +627,13 @@ class modUser extends modPrincipal {
      * assign to for the group.
      * @return boolean True if successful.
      */
-    function joinGroup($groupId,$roleId = null) {
+    public function joinGroup($groupId,$roleId = null) {
         $joined = false;
 
         $groupPk = is_string($groupId) ? array('name' => $groupId) : $groupId;
         $usergroup = $this->xpdo->getObject('modUserGroup',$groupPk);
         if ($usergroup == null) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'User Group not found with key: '.$groupId);
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'User Group not found with key: '.$groupId);
             return $joined;
         }
 
@@ -658,7 +641,7 @@ class modUser extends modPrincipal {
             $rolePk = is_string($roleId) ? array('name' => $roleId) : $roleId;
             $role = $this->xpdo->getObject('modUserGroupRole',$rolePk);
             if ($role == null) {
-                $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'Role not found with key: '.$role);
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Role not found with key: '.$role);
                 return $joined;
             }
         }
@@ -671,7 +654,7 @@ class modUser extends modPrincipal {
         }
         $saved = $member->save();
         if (!$saved) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'An unknown error occurred preventing adding the User to the User Group.');
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'An unknown error occurred preventing adding the User to the User Group.');
         }
         return $saved;
     }
@@ -683,7 +666,7 @@ class modUser extends modPrincipal {
      * @param mixed $groupId Either the name or ID of the User Group to join.
      * @return boolean True if successful.
      */
-    function leaveGroup($groupId) {
+    public function leaveGroup($groupId) {
         $left = false;
 
         $c = $this->xpdo->newQuery('modUserGroupMember');
@@ -698,7 +681,7 @@ class modUser extends modPrincipal {
 
         $member = $this->xpdo->getObject('modUserGroupMember',$c);
         if ($member == false) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'User could not leave group with key "'.$groupId.'" because the User was not a part of that group.');
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'User could not leave group with key "'.$groupId.'" because the User was not a part of that group.');
             return $left;
         }
 

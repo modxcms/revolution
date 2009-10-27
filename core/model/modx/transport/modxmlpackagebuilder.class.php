@@ -31,16 +31,9 @@ require_once MODX_CORE_PATH . 'model/modx/transport/modpackagebuilder.class.php'
  */
 class modXMLPackageBuilder extends modPackageBuilder {
 
-    function modXMLPackageBuilder(&$modx) {
-        $this->__construct($modx);
-    }
-    function __construct(&$modx) {
-        parent :: __construct($modx);
-    }
-
-    function build($fileName) {
+    public function build($fileName) {
         if (!$this->parseXML($fileName)) {
-            $this->modx->log(MODX_LOG_LEVEL_ERROR,'XML parsing failed for '.$fileName);
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'XML parsing failed for '.$fileName);
             return false;
         }
 
@@ -50,11 +43,11 @@ class modXMLPackageBuilder extends modPackageBuilder {
 
         /* set up some attributes that define install behavior */
         $attributes= array(
-            XPDO_TRANSPORT_UNIQUE_KEY => 'name',
-            XPDO_TRANSPORT_UPDATE_OBJECT => true,
-            XPDO_TRANSPORT_RESOLVE_FILES => true,
-            XPDO_TRANSPORT_RESOLVE_PHP => true,
-            XPDO_TRANSPORT_PRESERVE_KEYS => false,
+            xPDOTransport::UNIQUE_KEY => 'name',
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::RESOLVE_FILES => true,
+            xPDOTransport::RESOLVE_PHP => true,
+            xPDOTransport::PRESERVE_KEYS => false,
         );
 
         foreach ($this->build['vehicles'] as $signature => $vehicle) {
@@ -79,14 +72,14 @@ class modXMLPackageBuilder extends modPackageBuilder {
         return true;
     }
 
-    function parseXML($fileName) {
+    public function parseXML($fileName) {
         $this->build = array(
             'autoincludes' => array(),
             'vehicles' => array(),
         );
 
         if (!is_file($fileName)) {
-            $this->modx->log(XPDO_LOG_LEVEL_ERROR, "Could not find specified XML build file {$fileName}");
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Could not find specified XML build file {$fileName}");
             return false;
         } else {
             $fileContent= @ file($fileName);
@@ -105,7 +98,7 @@ class modXMLPackageBuilder extends modPackageBuilder {
         if (!xml_parse($this->xmlParser, $this->buildXML)) {
             $ln= xml_get_current_line_number($this->xmlParser);
             $msg= xml_error_string(xml_get_error_code($this->xmlParser));
-            $this->modx->log(XPDO_LOG_LEVEL_ERROR, "Error parsing XML schema on line $ln: $msg");
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Error parsing XML schema on line $ln: $msg");
             return false;
         }
 
@@ -117,7 +110,7 @@ class modXMLPackageBuilder extends modPackageBuilder {
         return $this->build;
     }
 
-    function _handleOpenElement(& $parser, & $element, & $attributes) {
+    protected function _handleOpenElement(& $parser, & $element, & $attributes) {
         $element= strtolower($element);
         switch ($element) {
             case 'component':
@@ -168,7 +161,7 @@ class modXMLPackageBuilder extends modPackageBuilder {
         }
     }
 
-    function _handleCloseElement(& $parser, & $element) {
+    protected function _handleCloseElement(& $parser, & $element) {
         switch ($element) {
             case 'vehicle':
                 $this->openVehicle = '';
@@ -176,5 +169,5 @@ class modXMLPackageBuilder extends modPackageBuilder {
         }
     }
 
-    function _handleCData(& $parser, & $data) {}
+    protected function _handleCData(& $parser, & $data) {}
 }

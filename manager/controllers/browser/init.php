@@ -14,7 +14,7 @@ $modx= new modX();
 
 /* set debugging/logging options */
 $modx->setDebug(E_ALL & ~E_NOTICE);
-$modx->setLogLevel(MODX_LOG_LEVEL_ERROR);
+$modx->setLogLevel(modX::LOG_LEVEL_ERROR);
 $modx->setLogTarget('FILE');
 
 /* initialize the proper context */

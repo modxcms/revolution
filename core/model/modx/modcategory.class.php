@@ -5,19 +5,13 @@
  * @package modx
  */
 class modCategory extends xPDOSimpleObject {
-    function modCategory(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
 
     /**
      * Overrides xPDOObject::remove to reset all Element categories back to 0.
      *
      * {@inheritDoc}
      */
-    function remove($ancestors = array()) {
+    public function remove(array $ancestors = array()) {
         $removed = parent::remove($ancestors);
         if ($removed) {
             $elementClasses = array(

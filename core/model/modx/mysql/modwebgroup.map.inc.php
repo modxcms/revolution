@@ -44,5 +44,3 @@ $xpdo_meta_map['modWebGroup']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modWebGroup']['composites']= array_merge($xpdo_meta_map['modWebGroup']['composites'], array_change_key_case($xpdo_meta_map['modWebGroup']['composites']));
-$xpdo_meta_map['modwebgroup']= & $xpdo_meta_map['modWebGroup'];

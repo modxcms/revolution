@@ -18,5 +18,3 @@ $xpdo_meta_map['modAccessMenu']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modAccessMenu']['aggregates']= array_merge($xpdo_meta_map['modAccessMenu']['aggregates'], array_change_key_case($xpdo_meta_map['modAccessMenu']['aggregates']));
-$xpdo_meta_map['modaccessmenu']= & $xpdo_meta_map['modAccessMenu'];

@@ -127,5 +127,3 @@ $xpdo_meta_map['modLexiconEntry']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modLexiconEntry']['aggregates']= array_merge($xpdo_meta_map['modLexiconEntry']['aggregates'], array_change_key_case($xpdo_meta_map['modLexiconEntry']['aggregates']));
-$xpdo_meta_map['modlexiconentry']= & $xpdo_meta_map['modLexiconEntry'];

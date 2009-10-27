@@ -4,12 +4,4 @@
  *
  * @package modx
  */
-class modUserSetting extends xPDOObject {
-    function modUserSetting(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
-?>
+class modUserSetting extends xPDOObject {}

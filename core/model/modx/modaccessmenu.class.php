@@ -6,12 +6,4 @@
  *
  * @package modx
  */
-class modAccessMenu extends modAccess {
-    function modAccessMenu(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
-?>
+class modAccessMenu extends modAccess {}

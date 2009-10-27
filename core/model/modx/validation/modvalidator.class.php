@@ -7,9 +7,6 @@
  */
 class modValidator extends xPDOValidator {
 
-    function modValidator(& $object) {
-        $this->__construct($object);
-    }
     function __construct(& $object) {
         $this->object = & $object;
         $this->object->_loadValidation(true);
@@ -23,7 +20,7 @@ class modValidator extends xPDOValidator {
      * @param array $parameters An associative array of config parameters.
      * @return boolean Either true or false indicating valid or invalid.
      */
-    function validate(& $object, $parameters= array()) {
+    public function validate(&$object, array $parameters= array()) {
         $result= parent :: validate($object,$parameters);
         if (!empty($this->messages)) {
             reset($this->messages);

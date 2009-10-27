@@ -54,5 +54,3 @@ $xpdo_meta_map['modResourceKeyword']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modResourceKeyword']['aggregates']= array_merge($xpdo_meta_map['modResourceKeyword']['aggregates'], array_change_key_case($xpdo_meta_map['modResourceKeyword']['aggregates']));
-$xpdo_meta_map['modresourcekeyword']= & $xpdo_meta_map['modResourceKeyword'];

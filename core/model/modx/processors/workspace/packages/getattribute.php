@@ -29,9 +29,9 @@ if ($transport) {
 if ($_REQUEST['attr'] == 'setup-options') {
     ob_start();
     $options = $package->toArray();
-    $options[XPDO_TRANSPORT_PACKAGE_ACTION] = empty($package->installed)
-        ? XPDO_TRANSPORT_ACTION_INSTALL
-        : XPDO_TRANSPORT_ACTION_UPGRADE;
+    $options[xPDOTransport::PACKAGE_ACTION] = empty($package->installed)
+        ? xPDOTransport::ACTION_INSTALL
+        : xPDOTransport::ACTION_UPGRADE;
     $f = $modx->getOption('core_path').'packages/'.$attr;
     if (file_exists($f) && $attr != '') {
         $attr = include $f;

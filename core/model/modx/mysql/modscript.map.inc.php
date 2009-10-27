@@ -63,5 +63,3 @@ $xpdo_meta_map['modScript']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modScript']['aggregates']= array_merge($xpdo_meta_map['modScript']['aggregates'], array_change_key_case($xpdo_meta_map['modScript']['aggregates']));
-$xpdo_meta_map['modscript']= & $xpdo_meta_map['modScript'];

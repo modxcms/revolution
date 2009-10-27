@@ -4,12 +4,4 @@
  *
  * @package modx
  */
-class modPluginEvent extends xPDOObject {
-    function modPluginEvent(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
-?>
+class modPluginEvent extends xPDOObject {}

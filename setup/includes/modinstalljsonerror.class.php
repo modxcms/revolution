@@ -22,21 +22,17 @@
 require_once MODX_SETUP_PATH . 'includes/modinstallerror.class.php';
 
 class modInstallJSONError extends modInstallError {
-    var $fields;
-    var $message;
-    var $type;
+    public $fields;
+    public $type;
 
-    function modInstallJSONError(& $modx, $message= '', $type= 'error') {
-        $this->__construct($message, $type);
-    }
-    function __construct(& $modx, $message= '', $type= 'error') {
+    function __construct(&$modx, $message= '', $type= 'error') {
         $this->message= $message;
         $this->fields= array ();
         $this->type= $type;
         parent :: __construct($modx, $message);
     }
 
-    function process($message= '', $status = false, $object = null) {
+    public function process($message= '', $status = false, $object = null) {
         $objarray= parent :: process($message, $status, $object);
         @header("Content-Type: text/json; charset=UTF-8");
         if ($message != '') $this->message= $message;
@@ -50,33 +46,33 @@ class modInstallJSONError extends modInstallError {
         ));
     }
 
-    function addField($name, $error) {
+    public function addField($name, $error) {
         $this->fields[]= array (
             'name' => $name,
             'error' => $error
         );
     }
 
-    function getFields() {
+    public function getFields() {
         $f= array ();
         foreach ($this->fields as $fi) $f[]= $fi['name'];
         return $f;
     }
 
-    function hasError() {
+    public function hasError() {
         return count($this->fields) > 0 || ($this->message != '' && $this->type == 'error');
     }
 
-    function setType($type= 'error') {
+    public function setType($type= 'error') {
         $this->type= $type;
     }
 
-    function failure($message = '', $object = null) {
+    public function failure($message = '', $object = null) {
         while (@ ob_end_clean()) {}
         die($this->process($message, false, $object));
     }
 
-    function success($message = '', $object = null) {
+    public function success($message = '', $object = null) {
         die($this->process($message, true, $object));
     }
 }

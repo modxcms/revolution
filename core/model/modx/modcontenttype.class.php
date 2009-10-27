@@ -10,12 +10,6 @@
  * @package modx
  */
 class modContentType extends xPDOSimpleObject {
-    function modContentType(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
 
     /**
      * Returns the first extension of this Content Type.
@@ -23,7 +17,7 @@ class modContentType extends xPDOSimpleObject {
      * @access public
      * @return string
      */
-    function getExtension() {
+    public function getExtension() {
         $extension= '';
         if ($extensions= explode(',', $this->get('file_extensions'))) {
             $extension= $extensions[0];

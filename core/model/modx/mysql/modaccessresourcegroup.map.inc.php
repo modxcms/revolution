@@ -34,5 +34,3 @@ $xpdo_meta_map['modAccessResourceGroup']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modAccessResourceGroup']['aggregates']= array_merge($xpdo_meta_map['modAccessResourceGroup']['aggregates'], array_change_key_case($xpdo_meta_map['modAccessResourceGroup']['aggregates']));
-$xpdo_meta_map['modaccessresourcegroup']= & $xpdo_meta_map['modAccessResourceGroup'];

@@ -96,5 +96,3 @@ $xpdo_meta_map['modChunk']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modChunk']['aggregates']= array_merge($xpdo_meta_map['modChunk']['aggregates'], array_change_key_case($xpdo_meta_map['modChunk']['aggregates']));
-$xpdo_meta_map['modchunk']= & $xpdo_meta_map['modChunk'];

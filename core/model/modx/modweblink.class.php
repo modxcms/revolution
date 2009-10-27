@@ -7,9 +7,6 @@
  * @package modx
  */
 class modWebLink extends modResource {
-    function modWebLink(& $xpdo) {
-        $this->__construct($xpdo);
-    }
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->set('type', 'reference');
@@ -19,7 +16,7 @@ class modWebLink extends modResource {
     /**
      * Process the modWebLink and redirect to the specified resource.
      */
-    function process() {
+    public function process() {
         $this->_content= $this->get('content');
         if (empty ($this->_content)) {
             $this->xpdo->sendErrorPage();
@@ -39,4 +36,3 @@ class modWebLink extends modResource {
         $this->xpdo->sendRedirect($this->_output);
     }
 }
-?>

@@ -160,7 +160,7 @@ class modSessionHandler {
             $session->set('id', $id);
         }
         if (!is_object($session) || $id != $session->get('id')) {
-            $this->modx->log(XPDO_LOG_LEVEL_INFO, 'There was an error retrieving or creating session id: ' . $id);
+            $this->modx->log(modX::LOG_LEVEL_INFO, 'There was an error retrieving or creating session id: ' . $id);
         }
         return $session;
     }

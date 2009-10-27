@@ -55,13 +55,13 @@ if (!$user) {
     ));
     if (!empty($ru)) {
         foreach ($ru as $obj) {
-            if (is_object($obj) && is_a($obj, 'modUser')) {
+            if (is_object($obj) && $obj instanceof modUser) {
                 $user = $obj;
                 break;
             }
         }
     }
-    if (!is_object($user) || !is_a($user, 'modUser')) {
+    if (!is_object($user) || !($user instanceof modUser)) {
         return $modx->error->failure($modx->lexicon('login_cannot_locate_account'));
     }
 }

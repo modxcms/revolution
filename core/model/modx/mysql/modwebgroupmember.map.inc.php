@@ -52,5 +52,3 @@ $xpdo_meta_map['modWebGroupMember']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modWebGroupMember']['aggregates']= array_merge($xpdo_meta_map['modWebGroupMember']['aggregates'], array_change_key_case($xpdo_meta_map['modWebGroupMember']['aggregates']));
-$xpdo_meta_map['modwebgroupmember']= & $xpdo_meta_map['modWebGroupMember'];

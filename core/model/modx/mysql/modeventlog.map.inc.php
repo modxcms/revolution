@@ -87,5 +87,3 @@ $xpdo_meta_map['modEventLog']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modEventLog']['composites']= array_merge($xpdo_meta_map['modEventLog']['composites'], array_change_key_case($xpdo_meta_map['modEventLog']['composites']));
-$xpdo_meta_map['modeventlog']= & $xpdo_meta_map['modEventLog'];

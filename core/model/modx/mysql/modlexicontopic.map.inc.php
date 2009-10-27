@@ -73,6 +73,3 @@ $xpdo_meta_map['modLexiconTopic']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modLexiconTopic']['aggregates']= array_merge($xpdo_meta_map['modLexiconTopic']['aggregates'], array_change_key_case($xpdo_meta_map['modLexiconTopic']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modLexiconTopic']['composites']= array_merge($xpdo_meta_map['modLexiconTopic']['composites'], array_change_key_case($xpdo_meta_map['modLexiconTopic']['composites']));
-$xpdo_meta_map['modlexicontopic']= & $xpdo_meta_map['modLexiconTopic'];

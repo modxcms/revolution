@@ -38,9 +38,6 @@ define("IN_PARSER_MODE", "true");
  */
 define("IN_MANAGER_MODE", false);
 
-/* [OPTIONAL]: for forcing emulated PDO when required native PDO drivers are not available */
-/* define('XPDO_MODE', 2); */
-
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODx request handler */
 if (!defined('MODX_API_MODE')) {
@@ -55,10 +52,11 @@ $modx_cache_disabled= false;
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__FILE__) . '/core/');
 
 /* include the modX class */
-if (!@require_once (MODX_CORE_PATH . "model/modx/modx.class.php")) {
+if (!@include_once (MODX_CORE_PATH . "model/modx/modx.class.php")) {
+    $errorMessage = 'Site temporarily unavailable';
     @include(MODX_CORE_PATH . 'error/unavailable.include.php');
     header('HTTP/1.1 503 Service Unavailable');
-    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>Site temporarily unavailable</p></body></html>";
+    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
     exit();
 }
 
@@ -67,11 +65,13 @@ ob_start();
 
 /* Create an instance of the modX class */
 if (empty($options) || !is_array($options)) $options = array();
-if (!$modx= new modX('', $options)) {
+$modx= new modX('', $options);
+if (!is_object($modx) || !($modx instanceof modX)) {
     @ob_end_flush();
+    $errorMessage = '<a href="setup/">MODx not installed. Install now?</a>';
     @include(MODX_CORE_PATH . 'error/unavailable.include.php');
     header('HTTP/1.1 503 Service Unavailable');
-    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>Site temporarily unavailable</p></body></html>";
+    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
     exit();
 }
 
@@ -79,7 +79,7 @@ if (!$modx= new modX('', $options)) {
 $modx->startTime= $tstart;
 
 /* Set additional logging options including level and target: */
-$modx->setLogLevel(MODX_LOG_LEVEL_ERROR);
+$modx->setLogLevel(modX::LOG_LEVEL_ERROR);
 $modx->setLogTarget('FILE');
 
 /* Set debugging mode (i.e. error_reporting): */

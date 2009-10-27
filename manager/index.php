@@ -30,9 +30,9 @@
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE__)) . '/core/');
 
 /* check for correct version of php */
-$php_ver_comp = version_compare(phpversion(),'4.3.3');
+$php_ver_comp = version_compare(phpversion(),'5.1.0');
 if ($php_ver_comp < 0) {
-    die('Wrong php version! You\'re using PHP version "'.phpversion().'", and MODx only works on 4.3.3 or higher.');
+    die('Wrong php version! You\'re using PHP version "'.phpversion().'", and MODx Revolution only works on 5.1.0 or higher.');
 }
 
 /* set the document_root */
@@ -43,9 +43,6 @@ if(!isset($_SERVER['DOCUMENT_ROOT']) || empty($_SERVER['DOCUMENT_ROOT'])) {
 /* we use this to make sure files are accessed through the manager instead of separately. */
 define('IN_MANAGER_MODE',true);
 
-/* optional: for forcing emulated PDO when required native PDO drivers are not available */
-/* define('XPDO_MODE', 2); */
-
 /* include the modX class */
 if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
     include MODX_CORE_PATH . 'error/unavailable.include.php';
@@ -55,14 +52,16 @@ if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 /* create the modX object */
 if (empty($options) || !is_array($options)) $options = array();
 $modx= new modX('', $options);
-
-if (!is_object($modx) || !is_a($modx, 'modX')) {
+if (!is_object($modx) || !($modx instanceof modX)) {
+    $errorMessage = '<a href="../setup/">MODx not installed. Install now?</a>';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
-    die('Site temporarily unavailable!');
+    header('HTTP/1.1 503 Service Unavailable');
+    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
+    exit();
 }
 
 $modx->setDebug(E_ALL & ~E_NOTICE);
-$modx->setLogLevel(MODX_LOG_LEVEL_ERROR);
+$modx->setLogLevel(modX::LOG_LEVEL_ERROR);
 $modx->setLogTarget('FILE');
 
 $modx->initialize('mgr');
@@ -70,9 +69,9 @@ $modx->initialize('mgr');
 $modx->getRequest();
 $modx->getParser();
 
-if (isset($modx) && is_object($modx)) {
+if (isset($modx) && is_object($modx) && $modx instanceof modX) {
     if (!$modx->getRequest()) {
-        $modx->log(MODX_LOG_LEVEL_FATAL,"Could not load the MODx manager request object.");
+        $modx->log(modX::LOG_LEVEL_FATAL,"Could not load the MODx manager request object.");
     }
     $modx->request->handleRequest();
 }

@@ -8,7 +8,7 @@
 /**
  * Include the modUser class so it doesn't have to be manually loaded.
  */
-include_once (MODX_CORE_PATH . 'model/modx/moduser.class.php');
+include_once MODX_CORE_PATH . 'model/modx/moduser.class.php';
 
 /**
  * Represents the web_users table that is no longer used in MODx.
@@ -19,21 +19,14 @@ include_once (MODX_CORE_PATH . 'model/modx/moduser.class.php');
  * @package modx
  */
 class modWebUser extends modUser {
-    function modWebUser(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-
-    function getOne($class, $criteria= null) {
+    public function getOne($class, $criteria= null) {
         if ($criteria === null && $class === 'modActiveUser') {
             if ($userid= $this->get('id')) {
                 $userid= $userid * -1;
                 $activeUserTable= $this->xpdo->getTableName('modActiveUser');
                 $sql= "SELECT * FROM {$activeUserTable} WHERE `id` = :user_id LIMIT 1";
                 $bindings= array(
-                    ':user_id' => array ('value' => $userid, 'type' => PDO_PARAM_INT)
+                    ':user_id' => array ('value' => $userid, 'type' => PDO::PARAM_INT)
                 );
                 $criteria= new xPDOCriteria($this->xpdo, $sql, $bindings, true);
             }
@@ -41,4 +34,3 @@ class modWebUser extends modUser {
         return parent :: getOne($class, $criteria);
     }
 }
-?>

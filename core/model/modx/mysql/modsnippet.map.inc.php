@@ -56,4 +56,3 @@ $xpdo_meta_map['modSnippet']= array (
     ),
   ),
 );
-$xpdo_meta_map['modsnippet']= & $xpdo_meta_map['modSnippet'];

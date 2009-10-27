@@ -32,15 +32,11 @@ include_once strtr(realpath(MODX_CORE_PATH . 'model/smarty/Smarty.class.php'),'\
  * @package setup
  */
 class modInstallSmarty extends Smarty {
-    var $smarty;
-    var $_blocks;
-    var $_derived;
+    public $smarty = null;
+    public $_blocks;
+    public $_derived;
 
-    function modInstallSmarty($params= array ()) {
-        $this->__construct($params);
-    }
-
-    function __construct($params= array ()) {
+    function __construct(array $params= array ()) {
         parent :: Smarty();
 
         /* Set up configuration variables for Smarty. */
@@ -65,11 +61,11 @@ class modInstallSmarty extends Smarty {
         $this->_derived = NULL;
     }
 
-    function display($resource_name) {
+    public function display($resource_name) {
         echo $this->fetch($resource_name);
     }
 
-    function fetch($resource_name) {
+    public function fetch($resource_name) {
         $ret = parent::fetch($resource_name);
         while ($resource = $this->_derived) {
             $this->_derived = null;
@@ -85,7 +81,7 @@ class modInstallSmarty extends Smarty {
      * @param string $dirname The directory to write
      * @return boolean Returns true if the directory was successfully written.
      */
-    function writeTree($dirname) {
+    public function writeTree($dirname) {
         $written= false;
         if (!empty ($dirname)) {
             $dirname= strtr(trim($dirname), '\\', '/');

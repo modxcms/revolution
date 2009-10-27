@@ -12,15 +12,9 @@ class modPrincipal extends xPDOSimpleObject {
     /**
      * Stores a collection of key-value pairs identifying policy authority.
      * @var array
+     * @access protected
      */
-    var $_attributes = null;
-
-    function modPrincipal(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
+    protected $_attributes = null;
 
     /**
      * Load attributes of the principal that define access to secured objects.
@@ -31,18 +25,18 @@ class modPrincipal extends xPDOSimpleObject {
      *
      * @abstract
      * @access protected
-     * @param string $targets The target modAccess classes to load attributes
-     * from.
+     * @param string|array $targets The target modAccess classes to load
+     * attributes from.
      * @param string $context Context to check within, defaults to current
      * context.
      * @param boolean $reload If true, the attributes will be reloaded and
      * the session updated.
      */
-    function loadAttributes($target, $context = '', $reload = false) {
+    public function loadAttributes($target, $context = '', $reload = false) {
         $this->_attributes = array();
     }
 
-    function getAttributes($targets = array(), $context = '', $reload = false) {
+    public function getAttributes($targets = array(), $context = '', $reload = false) {
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (is_null($targets) || empty($targets))
             $targets = array('modAccessContext', 'modAccessResourceGroup', 'modAccessElement');
@@ -58,4 +52,3 @@ class modPrincipal extends xPDOSimpleObject {
         return $this->_attributes[$context];
     }
 }
-?>

@@ -51,5 +51,3 @@ $xpdo_meta_map['modContextResource']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modContextResource']['aggregates']= array_merge($xpdo_meta_map['modContextResource']['aggregates'], array_change_key_case($xpdo_meta_map['modContextResource']['aggregates']));
-$xpdo_meta_map['modcontextresource']= & $xpdo_meta_map['modContextResource'];

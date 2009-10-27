@@ -11,9 +11,8 @@
  * @package modx
  * @subpackage processors.browser.directory
  */
-$modx->lexicon->load('file');
-
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('file');
 
 $dir = !isset($_REQUEST['dir']) || $_REQUEST['dir'] == 'root' ? '' : $_REQUEST['dir'];
 $dir = trim($dir,'/');
@@ -22,35 +21,32 @@ $root = isset($_REQUEST['prependPath']) && $_REQUEST['prependPath'] != 'null' &&
     ? $_REQUEST['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
 $fullpath = $root.'/'.$dir;
-$odir = dir($fullpath);
 
 $files = array();
-while(false !== ($name = $odir->read())) {
-	if('.' == $name || '..' == $name || '.svn' == $name) continue;
+foreach (new DirectoryIterator($fullpath) as $file) {
+	if (in_array($file,array('.','..','.svn','_notes'))) continue;
+    if (!$file->isReadable()) continue;
 
-	$fullname = $fullpath.'/'.$name;
-	if(!is_readable($fullname)) continue;
+    $fileName = $file->getFilename();
+    $filePathName = $file->getPathname();
 
-	if(!is_dir($fullname)) {
-		$atmp = explode(".", $name);
-		if (1 == sizeof($atmp)) { $fileExtension = ''; } else {
-			$fileExtension = strtolower(array_pop($atmp));
-		}
-		$fileClass = $this->fileClass . $fileExtension;
+	if (!$file->isDir()) {
+        $fileExtension = pathinfo($filePathName,PATHINFO_EXTENSION);
+
 		$size = @filesize($fullname);
 		if (isset($_REQUEST['prependUrl']) && $_REQUEST['prependUrl'] != null) {
-            $url = $_REQUEST['prependUrl'].$dir.'/'.$name;
+            $url = $_REQUEST['prependUrl'].$dir.'/'.$fileName;
         } else {
-            $url = $modx->getOption('rb_base_url').$dir.'/'.$name;
+            $url = $modx->getOption('rb_base_url').$dir.'/'.$fileName;
         }
 		$files[] = array(
-			'name' => $name,
+			'name' => $fileName,
 			'cls' => 'icon-'.$fileExtension,
 			'url' => $modx->getOption('base_url').$url,
 			'ext' => $fileExtension,
-			'pathname' => $fullname,
-			'lastmod' => filemtime($fullname),
-			'disabled' => is_writable($fullname),
+			'pathname' => $filePathname,
+			'lastmod' => $file->getMTime(),
+			'disabled' => false,//$file->isWritable(),
 			'leaf' => true,
 			'size' => $size,
             'menu' => array(

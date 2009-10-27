@@ -93,5 +93,3 @@ $xpdo_meta_map['modUserSetting']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modUserSetting']['aggregates']= array_merge($xpdo_meta_map['modUserSetting']['aggregates'], array_change_key_case($xpdo_meta_map['modUserSetting']['aggregates']));
-$xpdo_meta_map['modusersetting']= & $xpdo_meta_map['modUserSetting'];

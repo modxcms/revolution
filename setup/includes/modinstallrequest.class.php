@@ -35,27 +35,22 @@ class modInstallRequest {
      * @var modInstall $install A reference to the modInstall object.
      * @access public
      */
-    var $install = null;
+    public $install = null;
 
-    /**#@+
+    /**
      * Initializes the modInstallRequest object.
      *
      * @constructor
-     * @param modInstall &$modInstall A reference to the modInstall object.
+     * @param modInstall &$installer A reference to the modInstall object.
      */
-    function modInstallRequest(&$modInstall) {
-        $this->__construct($modInstall);
+    function __construct(modInstall &$installer) {
+        $this->install =& $installer;
     }
-    /** @ignore */
-    function __construct(&$modInstall) {
-        $this->install =& $modInstall;
-    }
-    /**@#- */
 
     /**
      * Handles the request and loads the appropriate controller.
      */
-    function handle() {
+    public function handle() {
         $install =& $this->install;
 
         $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
@@ -77,7 +72,7 @@ class modInstallRequest {
      * Loads the Smarty parser
      * @return boolean True if successful.
      */
-    function loadParser() {
+    public function loadParser() {
         $loaded = false;
         if (!@require_once (MODX_SETUP_PATH . 'includes/modinstallsmarty.class.php')) {
             if (!@include (MODX_SETUP_PATH . 'provisioner/bootstrap.php')) {

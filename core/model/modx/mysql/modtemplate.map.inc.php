@@ -125,6 +125,3 @@ $xpdo_meta_map['modTemplate']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modTemplate']['aggregates']= array_merge($xpdo_meta_map['modTemplate']['aggregates'], array_change_key_case($xpdo_meta_map['modTemplate']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modTemplate']['composites']= array_merge($xpdo_meta_map['modTemplate']['composites'], array_change_key_case($xpdo_meta_map['modTemplate']['composites']));
-$xpdo_meta_map['modtemplate']= & $xpdo_meta_map['modTemplate'];

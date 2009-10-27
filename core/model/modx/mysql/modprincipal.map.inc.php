@@ -17,5 +17,3 @@ $xpdo_meta_map['modPrincipal']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modPrincipal']['composites']= array_merge($xpdo_meta_map['modPrincipal']['composites'], array_change_key_case($xpdo_meta_map['modPrincipal']['composites']));
-$xpdo_meta_map['modprincipal']= & $xpdo_meta_map['modPrincipal'];

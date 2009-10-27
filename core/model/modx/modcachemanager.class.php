@@ -22,14 +22,11 @@
  * @package modx
  */
 class modCacheManager extends xPDOCacheManager {
-    var $modx= null;
+    public $modx= null;
 
-    function modCacheManager(& $xpdo, $options = array()) {
-        $this->__construct($xpdo, $options);
-    }
-    function __construct(& $xpdo, $options = array()) {
+    function __construct(& $xpdo, array $options = array()) {
         parent :: __construct($xpdo, $options);
-        $this->modx= & $this->xpdo;
+        $this->modx =& $this->xpdo;
     }
 
     /**
@@ -47,13 +44,13 @@ class modCacheManager extends xPDOCacheManager {
      * @param array $options Options for system settings generation.
      * @return array An array containing all the context variable values.
      */
-    function generateContext($key, $options = array()) {
+    public function generateContext($key, array $options = array()) {
         $results = array();
         $obj= $this->modx->getObject('modContext', $key, true);
-        if (is_object($obj) && is_a($obj, 'modContext') && $obj->get('key')) {
+        if (is_object($obj) && $obj instanceof modContext && $obj->get('key')) {
             $contextConfig= $this->modx->config;
 
-            // generate the ContextSettings
+            /* generate the ContextSettings */
             $results['config']= array();
             if ($settings= $obj->getMany('ContextSettings')) {
                 foreach ($settings as $setting) {
@@ -76,7 +73,7 @@ class modCacheManager extends xPDOCacheManager {
                 }
             }
 
-            // generate the documentMap, aliasMap, and resourceListing
+            /* generate the documentMap, aliasMap, and resourceListing */
             $tblResource= $this->modx->getTableName('modResource');
             $tblContextResource= $this->modx->getTableName('modContextResource');
             $resourceFields= 'id,parent,alias,isfolder,content_type';
@@ -85,8 +82,8 @@ class modCacheManager extends xPDOCacheManager {
             }
             $resourceCols= $this->modx->getSelectColumns('modResource', 'r', '', explode(',', $resourceFields));
             $bindings= array (
-                ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO_PARAM_STR)
-                ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO_PARAM_STR)
+                ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
+                ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
             );
             $criteria= new xPDOCriteria($this->modx, "SELECT {$resourceCols} FROM {$tblResource} `r` LEFT JOIN {$tblContextResource} `cr` ON `cr`.`context_key` = :context_key1 AND `r`.`id` = `cr`.`resource` WHERE `r`.`id` != `r`.`parent` AND (`r`.`context_key` = :context_key2 OR `cr`.`context_key` IS NOT NULL) AND `r`.`deleted` = 0 GROUP BY `r`.`id` ORDER BY `r`.`parent` ASC, `r`.`menuindex` ASC", $bindings, false);
             if (!$collContentTypes= $this->modx->getCollection('modContentType')) {
@@ -107,7 +104,7 @@ class modCacheManager extends xPDOCacheManager {
                 $results['aliasMap']= array ();
                 $results['documentMap']= array ();
                 $containerSuffix= isset ($contextConfig['container_suffix']) ? $contextConfig['container_suffix'] : '';
-                while ($r = $collResources->fetch(PDO_FETCH_OBJ)) {
+                while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
                     $parentId= isset($r->parent) ? strval($r->parent) : "0";
                     $results['documentMap'][]= array("{$parentId}" => (string) $r->id);
                     $results['resourceMap']["{$parentId}"][] = (string) $r->id;
@@ -131,7 +128,7 @@ class modCacheManager extends xPDOCacheManager {
                                     if ($parentStmt= $this->modx->prepare($parentSql)) {
                                         $parentStmt->bindParam(':parent', $pathParentId);
                                         if ($parentStmt->execute()) {
-                                            while ($hasParent && $currResource= $parentStmt->fetch(PDO_FETCH_OBJ)) {
+                                            while ($hasParent && $currResource= $parentStmt->fetch(PDO::FETCH_OBJ)) {
                                                 $parentAlias= $currResource->alias;
                                                 if (empty ($parentAlias))
                                                     $parentAlias= "{$pathParentId}";
@@ -163,7 +160,7 @@ class modCacheManager extends xPDOCacheManager {
                         $resPath .= '/';
                     }
                     if (isset ($results['aliasMap'][$resPath . $resAlias])) {
-                        $this->modx->log(XPDO_LOG_LEVEL_ERROR, "Resource alias {$resPath}{$resAlias} already exists for resource id = {$results['aliasMap'][$resPath . $resAlias]}; skipping duplicate resource alias for resource id = {$r->id}");
+                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource alias {$resPath}{$resAlias} already exists for resource id = {$results['aliasMap'][$resPath . $resAlias]}; skipping duplicate resource alias for resource id = {$r->id}");
                         continue;
                     }
                     $results['aliasMap'][$resPath . $resAlias]= $r->id;
@@ -171,7 +168,7 @@ class modCacheManager extends xPDOCacheManager {
                 }
             }
 
-            // generate the eventMap and pluginCache
+            /* generate the eventMap and pluginCache */
             $results['eventMap'] = array();
             $results['pluginCache'] = array();
             $eventMap= $this->modx->getEventMap($obj->get('key'));
@@ -198,11 +195,11 @@ class modCacheManager extends xPDOCacheManager {
                 }
             }
             if ($this->getOption('cache_context_settings', $options, true)) {
-                $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'default');
-                $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_context_settings_handler', $options);
-                $lifetime = intval($this->getOption(XPDO_OPT_CACHE_EXPIRES, $options, 0));
+                $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'default');
+                $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_context_settings_handler', $options);
+                $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
                 if (!$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
-                    $this->modx->log(MODX_LOG_LEVEL_ERROR, 'Could not cache context settings for ' . $obj->get('key') . '.');
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache context settings for ' . $obj->get('key') . '.');
                 }
             }
         }
@@ -215,7 +212,7 @@ class modCacheManager extends xPDOCacheManager {
      * @param array $options Options for system settings generation.
      * @return array The generated system settings array.
      */
-    function generateConfig($options = array()) {
+    public function generateConfig(array $options = array()) {
         $config = array();
         if ($collection= $this->modx->getCollection('modSystemSetting')) {
             foreach ($collection as $setting) {
@@ -237,11 +234,11 @@ class modCacheManager extends xPDOCacheManager {
             }
         }
         if (!empty($config) && $this->getOption('cache_system_settings', $options, true)) {
-            $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_system_settings_key', $options, 'default');
-            $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_system_settings_handler', $options);
-            $lifetime = intval($this->getOption(XPDO_OPT_CACHE_EXPIRES, $options, 0));
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_system_settings_key', $options, 'default');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_system_settings_handler', $options);
+            $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set('config', $config, $lifetime, $options)) {
-                $this->modx->log(MODX_LOG_LEVEL_ERROR, 'Could not cache system settings.');
+                $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache system settings.');
             }
         }
         return $config;
@@ -256,14 +253,14 @@ class modCacheManager extends xPDOCacheManager {
      * @param array $options Options for resource generation.
      * @return array The generated resource representation.
      */
-    function generateResource(& $obj, $options = array()) {
+    public function generateResource(modResource & $obj, array $options = array()) {
         $results= array();
         if ($this->getOption('cache_resource', $options, true)) {
-            if (is_object($obj) && is_a($obj, 'modResource') && $obj->_processed && $obj->get('cacheable') && $obj->get('id')) {
+            if (is_object($obj) && $obj instanceof modResource && $obj->getProcessed() && $obj->get('cacheable') && $obj->get('id')) {
                 $results['resourceClass']= $obj->_class;
                 $results['resource']= $obj->toArray('', true);
                 $results['resource']['_content']= $obj->_content;
-                $results['resource']['_processed']= $obj->_processed;
+                $results['resource']['_processed']= $obj->getProcessed();
                 if ($contentType = $obj->getOne('ContentType')) {
                     $results['contentType']= $contentType->toArray('', true);
                 }
@@ -288,11 +285,11 @@ class modCacheManager extends xPDOCacheManager {
                     $results['loadedjscripts']= $this->modx->loadedjscripts;
                 }
             }
-            $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_resource_key', $options, 'default');
-            $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_resource_handler', $options);
-            $lifetime = intval($this->getOption(XPDO_OPT_CACHE_EXPIRES, $options, 0));
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_resource_key', $options, 'default');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_resource_handler', $options);
+            $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (empty($results) || !$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
-                $this->modx->log(MODX_LOG_LEVEL_ERROR, "Error caching resource " . $obj->get('id'));
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching resource " . $obj->get('id'));
             }
         }
         return $results;
@@ -307,13 +304,13 @@ class modCacheManager extends xPDOCacheManager {
      * @param array $options An optional array of caching options.
      * @return array An array representing the lexicon topic cache.
      */
-    function generateLexiconTopic($cacheKey, $entries = array(), $options = array()) {
+    public function generateLexiconTopic($cacheKey, $entries = array(), $options = array()) {
         if (!empty($entries) && $this->getOption('cache_lexicon_topics', $options, true)) {
-            $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_lexicon_topics_key', $options, 'default');
-            $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_lexicon_topics_handler', $options);
-            $lifetime = intval($this->getOption(XPDO_OPT_CACHE_EXPIRES, $options, 0));
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_lexicon_topics_key', $options, 'default');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_lexicon_topics_handler', $options);
+            $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $entries, $lifetime, $options)) {
-                $this->modx->log(MODX_LOG_LEVEL_ERROR, "Error caching lexicon topic " . $cacheKey);
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching lexicon topic " . $cacheKey);
             }
         }
         return $entries;
@@ -326,33 +323,44 @@ class modCacheManager extends xPDOCacheManager {
      * @param string $cacheKey The key to use when caching the action map.
      * @return array An array representing the action map.
      */
-    function generateActionMap($cacheKey, $options = array()) {
+    public function generateActionMap($cacheKey, array $options = array()) {
         $results= array();
         $c = $this->modx->newQuery('modAction');
+        $c->select('modAction.*, Namespace.name AS namespace_name, Namespace.path AS namespace_path');
+        $c->innerJoin('modNamespace','Namespace');
         $c->sortby('namespace','ASC');
         $c->sortby('controller','ASC');
         $actions = $this->modx->getCollection('modAction',$c);
 
         foreach ($actions as $action) {
             $objArray = $action->toArray('',true);
-            $objArray['namespace_path'] = $this->modx->config['manager_path'];
-            $ns = $action->getOne('Namespace');
-            if ($ns != null && $ns->get('name') != 'core') {
-                $bp = $ns->get('path');
-                if ($bp != null && $bp != '') {
-                    $bp = str_replace('{core_path}',$this->modx->config['core_path'],$bp);
-                    $bp = str_replace('{base_path}',$this->modx->config['base_path'],$bp);
-                    $objArray['namespace_path'] = $bp;
+            if (empty($objArray['namespace_path']) || $action->get('namespace_name') == 'core') {
+                $objArray['namespace_path'] = $this->modx->getOption('manager_path');
+            }
+
+            if ($action->get('namespace_name') != 'core') {
+                $nsPath = $action->get('namespace_path');
+                if (!empty($nsPath)) {
+                    $nsPath = str_replace(array(
+                        '{core_path}',
+                        '{base_path}',
+                        '{assets_path}',
+                    ),array(
+                        $this->modx->getOption('core_path'),
+                        $this->modx->getOption('base_path'),
+                        $this->modx->getOption('assets_path'),
+                    ),$nsPath);
+                    $objArray['namespace_path'] = $nsPath;
                 }
             }
             $results[$action->get('id')] = $objArray;
         }
         if (!empty($results) && $this->getOption('cache_action_map', $options, true)) {
-            $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_action_map_key', $options, 'default');
-            $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_action_map_handler', $options);
-            $lifetime = intval($this->getOption(XPDO_OPT_CACHE_EXPIRES, $options, 0));
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_action_map_key', $options, 'default');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_action_map_handler', $options);
+            $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $results, $lifetime, $options)) {
-                $this->modx->log(MODX_LOG_LEVEL_ERROR, "Error caching action map {$cacheKey}");
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching action map {$cacheKey}");
             }
         }
         return $results;
@@ -370,9 +378,9 @@ class modCacheManager extends xPDOCacheManager {
      * actual generated content of the function if $returnFunction is true;
      * false otherwise.
      */
-    function generateScript($objElement, $objContent= null, $options= array()) {
+    public function generateScript(modScript &$objElement, $objContent= null, array $options= array()) {
         $results= false;
-        if (is_object($objElement) && is_a($objElement, 'modScript')) {
+        if (is_object($objElement) && $objElement instanceof modScript) {
             $scriptContent= $objElement->getContent(is_string($objContent) ? array('content' => $objContent) : array());
             $scriptName= $objElement->getScriptName();
 
@@ -388,11 +396,11 @@ class modCacheManager extends xPDOCacheManager {
             }
             $results = $content;
             if ($this->getOption('cache_scripts', $options, true)) {
-                $options[XPDO_OPT_CACHE_KEY] = $this->getOption('cache_scripts_key', $options, 'default');
-                $options[XPDO_OPT_CACHE_HANDLER] = $this->getOption('cache_scripts_handler', $options);
-                $lifetime = $this->getOption(XPDO_OPT_CACHE_EXPIRES) ? intval($this->getOption(XPDO_OPT_CACHE_EXPIRES)) : 0;
+                $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_scripts_key', $options, 'default');
+                $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_scripts_handler', $options);
+                $lifetime = $this->getOption(xPDO::OPT_CACHE_EXPIRES) ? intval($this->getOption(xPDO::OPT_CACHE_EXPIRES)) : 0;
                 if (empty($results) || !$this->set($objElement->getScriptCacheKey(), $results, $lifetime, $options)) {
-                    $this->modx->log(MODX_LOG_LEVEL_ERROR, "Error caching script " . $objElement->getScriptCacheKey());
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching script " . $objElement->getScriptCacheKey());
                 }
             }
         }
@@ -402,18 +410,19 @@ class modCacheManager extends xPDOCacheManager {
     /**
      * Clear part or all of the MODx cache.
      *
-     * @param array $paths An optional array of paths, relative to the cachePath, to be deleted.
+     * @param array $paths An optional array of paths, relative to the cache
+     * path, to be deleted.
      * @param array $options An optional associative array of cache clearing options: <ul>
      * <li><strong>objects</strong>: an array of objects or paths to flush from the db object cache</li>
      * <li><strong>extensions</strong>: an array of file extensions to match when deleting the cache directories</li>
      * </ul>
      */
-    function clearCache($paths= array(), $options= array()) {
+    public function clearCache(array $paths= array(), array $options= array()) {
         $results= array();
         $delObjs= array();
         if ($clearObjects = $this->getOption('objects', $options)) {
-            $objectOptions = array_merge($options, array('cache_prefix' => $this->getOption('cache_db_prefix', $options, XPDO_CACHE_DIR)));
-            // clear object cache by key, or * = flush entire object cache
+            $objectOptions = array_merge($options, array('cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR)));
+            /* clear object cache by key, or * = flush entire object cache */
             if (is_array($clearObjects)) {
                 foreach ($clearObjects as $key) {
                     if ($this->delete($key, $objectOptions))
@@ -432,7 +441,7 @@ class modCacheManager extends xPDOCacheManager {
         $delFiles= array();
         foreach ($paths as $pathIdx => $path) {
             $deleted= false;
-            $abspath= $this->modx->cachePath . $path;
+            $abspath= $this->modx->getOption(xPDO::OPT_CACHE_PATH) . $path;
             if (file_exists($abspath)) {
                 if (is_dir($abspath)) {
                     $deleted= $this->deleteTree($abspath, false, true, $extensions);
@@ -451,7 +460,7 @@ class modCacheManager extends xPDOCacheManager {
 
         $publishingResults= array();
         if (isset($options['publishing']) && $options['publishing']) {
-            // publish and unpublish resources using pub_date and unpub_date checks
+            /* publish and unpublish resources using pub_date and unpub_date checks */
             $rows_pub = $this->modx->getCollection('modResource',array(
                 'pub_date:!=' => 0,
                 'pub_date:<' => time(),
@@ -473,7 +482,7 @@ class modCacheManager extends xPDOCacheManager {
             $publishingResults['published']= count($rows_pub);
             $publishingResults['unpublished']= count($rows_unpub);
 
-            // update publish time file
+            /* update publish time file */
             $timesArr= array ();
             $minpub= 0;
             $minunpub= 0;
@@ -482,7 +491,7 @@ class modCacheManager extends xPDOCacheManager {
             if ($stmt) {
                 $stmt->bindValue(1, time());
                 if ($stmt->execute()) {
-                    foreach ($stmt->fetchAll(PDO_FETCH_NUM) as $value) {
+                    foreach ($stmt->fetchAll(PDO::FETCH_NUM) as $value) {
                         $minpub= $value[0];
                         unset($value);
                         break;
@@ -501,7 +510,7 @@ class modCacheManager extends xPDOCacheManager {
             if ($stmt) {
                 $stmt->bindValue(1, time());
                 if ($stmt->execute()) {
-                    foreach ($stmt->fetchAll(PDO_FETCH_NUM) as $value) {
+                    foreach ($stmt->fetchAll(PDO::FETCH_NUM) as $value) {
                         $minunpub= $value[0];
                         unset($value);
                         break;
@@ -520,8 +529,8 @@ class modCacheManager extends xPDOCacheManager {
                 $nextevent= "0";
             }
 
-            // write the file
-            $filename= $this->modx->cachePath . 'sitePublishing.idx.php';
+            /* write the file */
+            $filename= $this->modx->getOption(xPDO::OPT_CACHE_PATH) . 'sitePublishing.idx.php';
             $somecontent= "<?php \$cacheRefreshTime={$nextevent};";
             if (!$this->writeFile($filename, $somecontent)) {
                 $publishingResults['errors'][]= $this->modx->lexicon('cache_sitepublishing_file_error');
@@ -529,7 +538,7 @@ class modCacheManager extends xPDOCacheManager {
             $results['publishing']= $publishingResults;
         }
 
-        // invoke OnCacheUpdate event
+        /* invoke OnCacheUpdate event */
         $this->modx->invokeEvent('OnCacheUpdate', array(
             'results' => $results,
         ));
@@ -537,4 +546,3 @@ class modCacheManager extends xPDOCacheManager {
         return $results;
     }
 }
-?>

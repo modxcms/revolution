@@ -38,4 +38,3 @@ $xpdo_meta_map['modSession']= array (
     ),
   ),
 );
-$xpdo_meta_map['modsession']= & $xpdo_meta_map['modSession'];

@@ -17,8 +17,11 @@ $_lang['test_directory_exists'] = 'Checking if <span class="mono">%s</span> dire
 $_lang['test_directory_writable'] = 'Checking if <span class="mono">%s</span> directory is writable: ';
 $_lang['test_memory_limit'] = 'Checking if memory limit is set to at least 24M: ';
 $_lang['test_memory_limit_fail'] = 'MODx found your memory_limit setting to be below the recommended setting of 24M. MODx attempted to set the memory_limit to 24M, but was unsuccessful. Please set the memory_limit setting in your php.ini file to at least 24M or higher before proceeding. If you are still having trouble (such as getting a blank white screen on install), set to 32M, 64M or higher.';
-$_lang['test_php_version_fail'] = 'You are running on PHP %s, and MODx Revolution requires PHP 4.3.0 or later';
-$_lang['test_php_version_sn'] = 'While MODx will work on your PHP version (%s), usage of MODx on this version is not recommended. Your version of PHP is vulnerable to numerous security holes. Please upgrade to PHP version is 4.3.11 or higher, which patches these holes. It is recommended you upgrade to this version for the security of your own website.';
+$_lang['test_mysql_version_fail'] = 'You are running on MySQL %s, and MODx Revolution requires MySQL 4.1.20 or later. Please upgrade MySQL to at least 4.1.20.';
+$_lang['test_mysql_version_5051'] = 'MODx will have issues on your MySQL version (%s), because of the many bugs related to the PDO drivers on this version. Please upgrade MySQL to patch these problems. Even if you choose not to use MODx, it is recommended you upgrade to this version for the security and stability of your own website.';
+$_lang['test_mysql_version_start'] = 'Checking MySQL version:';
+$_lang['test_php_version_fail'] = 'You are running on PHP %s, and MODx Revolution requires PHP 5.1.1 or later. Please upgrade PHP to at least 5.1.1. MODx recommends upgrading to 5.3.0.';
+$_lang['test_php_version_516'] = 'MODx will have issues on your PHP version (%s), because of the many bugs related to the PDO drivers on this version. Please upgrade PHP to version 5.2.0 or higher, which patches these problems. MODx recommends upgrading to 5.3.0. Even if you choose not to use MODx, it is recommended you upgrade to this version for the security and stability of your own website.';
 $_lang['test_php_version_start'] = 'Checking PHP version:';
 $_lang['test_sessions_start'] = 'Checking if sessions are properly configured:';
 $_lang['test_table_prefix'] = 'Checking table prefix `%s`: ';

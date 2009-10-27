@@ -527,6 +527,3 @@ $xpdo_meta_map['modResource']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modResource']['aggregates']= array_merge($xpdo_meta_map['modResource']['aggregates'], array_change_key_case($xpdo_meta_map['modResource']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modResource']['composites']= array_merge($xpdo_meta_map['modResource']['composites'], array_change_key_case($xpdo_meta_map['modResource']['composites']));
-$xpdo_meta_map['modresource']= & $xpdo_meta_map['modResource'];

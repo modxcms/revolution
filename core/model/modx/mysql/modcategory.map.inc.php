@@ -169,6 +169,3 @@ $xpdo_meta_map['modCategory']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modCategory']['aggregates']= array_merge($xpdo_meta_map['modCategory']['aggregates'], array_change_key_case($xpdo_meta_map['modCategory']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modCategory']['composites']= array_merge($xpdo_meta_map['modCategory']['composites'], array_change_key_case($xpdo_meta_map['modCategory']['composites']));
-$xpdo_meta_map['modcategory']= & $xpdo_meta_map['modCategory'];

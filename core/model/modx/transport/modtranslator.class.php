@@ -12,30 +12,27 @@ class modTranslator extends modTranslate095 {
     /**
     * @var array An array of files (with full paths) to be translated
     */
-    var $files;
+    public $files;
     /**
     * @var array Paths of files, according to the patterns, to be translated (recursive)
     */
-    var $paths;
+    public $paths;
     /**
     * @var string File patterns to limit the file types to be included for translation in the paths
     */
-    var $patterns;
+    public $patterns;
     /**
     * @var array Can either be an array of array of classname => fields to translate,
     *  empty to skip classes or null to process all standard content
     *  fields for MODx (use processAllFields())
     */
-    var $classes;
+    public $classes;
     /**
     * @var boolean If true, paths added will be recursively translated.
     */
-    var $recursive;
+    public $recursive;
 
-    function modTranslator(&$modx, $recursive = true) {
-        $this->__construct($modx, $recursive);
-    }
-    function __construct(&$modx, $recursive = true) {
+    function __construct(xPDO &$modx, $recursive = true) {
         parent :: __construct($modx);
         $this->recursive = $recursive;
         $this->files = array();
@@ -48,7 +45,7 @@ class modTranslator extends modTranslate095 {
     * Adds a file to be translated.
     * Can have an unlimited number of arguments.
     */
-    function addFile() {
+    public function addFile() {
         $args = func_get_args();
         $c = count($args);
         for ($i=0;$i<$c;$i++) {
@@ -57,12 +54,12 @@ class modTranslator extends modTranslate095 {
             $this->files[] = $file;
         }
     }
-    
+
     /**
     * Adds a path to be translated.
     * Can have an unlimited number of arguments.
     */
-    function addPath() {
+    public function addPath() {
         $args = func_get_args();
         $c = count($args);
         for ($i=0;$i<$c;$i++) {
@@ -80,7 +77,7 @@ class modTranslator extends modTranslate095 {
     *
     * @param string $path The path to recursively search in.
     */
-    function getAllSubdirs($path) {
+    public function getAllSubdirs($path) {
         if (file_exists($path) && is_dir($path)) {
             $handle = opendir($path);
             if ($handle) {
@@ -100,7 +97,7 @@ class modTranslator extends modTranslate095 {
     *
     * @param boolean $b If false, will revert to an empty array of classes.
     */
-    function processAllFields($b = true) {
+    public function processAllFields($b = true) {
         $this->classes = $b ? NULL : array();
     }
 
@@ -108,7 +105,7 @@ class modTranslator extends modTranslate095 {
     * Adds a pattern to be translated.
     * Can have an unlimited number of arguments.
     */
-    function addPattern() {
+    public function addPattern() {
         $args = func_get_args();
         $c = count($args);
         for ($i=0;$i<$c;$i++) {
@@ -120,7 +117,7 @@ class modTranslator extends modTranslate095 {
     * Adds a class to be translated.
     * Can have an unlimited number of arguments.
     */
-    function addClass() {
+    public function addClass() {
         $args = func_get_args();
         $c = count($args);
         for ($i=0;$i<$c;$i++) {
@@ -136,7 +133,7 @@ class modTranslator extends modTranslate095 {
     *  and/or files (changes are permanent if true)
     * @param boolean $toFile A path to a file where a log of the translation session is written
     */
-    function translateSite($save = false,$toFile = false) {
+    public function translateSite($save = false,$toFile = false) {
         if (!empty($this->paths)) {
             $c = count($this->paths);
             for ($i=0;$i<$c;$i++) {

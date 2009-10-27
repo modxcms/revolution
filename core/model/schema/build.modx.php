@@ -13,9 +13,9 @@ $xpdo= new xPDO(
     XPDO_DB_PASS,
     XPDO_TABLE_PREFIX,
     array (
-        PDO_ATTR_ERRMODE => PDO_ERRMODE_SILENT,
-        PDO_ATTR_PERSISTENT => false,
-        PDO_MYSQL_ATTR_USE_BUFFERED_QUERY => true
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
+        PDO::ATTR_PERSISTENT => false,
+        PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
     )
 );
 $xpdo->setPackage('modx', XPDO_CORE_PATH . '../model/');
@@ -37,12 +37,6 @@ $generator->classTemplate= <<<EOD
  * [+phpdoc-subpackage+]
  */
 class [+class+] extends [+extends+] {
-    function [+class+](& \$xpdo) {
-        \$this->__construct(\$xpdo);
-    }
-    function __construct(& \$xpdo) {
-        parent :: __construct(\$xpdo);
-    }
 }
 ?>
 EOD;
@@ -54,12 +48,6 @@ $generator->platformTemplate= <<<EOD
  */
 require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\\\', '/') . '/[+class-lowercase+].class.php');
 class [+class+]_[+platform+] extends [+class+] {
-    function [+class+]_[+platform+](& \$xpdo) {
-        \$this->__construct(\$xpdo);
-    }
-    function __construct(& \$xpdo) {
-        parent :: __construct(\$xpdo);
-    }
 }
 ?>
 EOD;

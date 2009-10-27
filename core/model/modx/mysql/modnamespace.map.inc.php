@@ -81,5 +81,3 @@ $xpdo_meta_map['modNamespace']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modNamespace']['composites']= array_merge($xpdo_meta_map['modNamespace']['composites'], array_change_key_case($xpdo_meta_map['modNamespace']['composites']));
-$xpdo_meta_map['modnamespace']= & $xpdo_meta_map['modNamespace'];

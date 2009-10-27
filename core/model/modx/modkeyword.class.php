@@ -6,11 +6,4 @@
  * when it is implemented.
  * @package modx
  */
-class modKeyword extends xPDOSimpleObject {
-   function modKeyword(& $xpdo) {
-      $this->__construct($xpdo);
-   }
-   function __construct(& $xpdo) {
-      parent :: __construct($xpdo);
-   }
-}
+class modKeyword extends xPDOSimpleObject {}

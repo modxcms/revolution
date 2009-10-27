@@ -3,20 +3,13 @@
  * @package modx
  */
 class modLexiconTopic extends xPDOSimpleObject {
-    function modLexiconTopic(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-
     /**
      * Clears the cache for the topic
      *
      * @access public
      * @return boolean True if successful
      */
-    function clearCache() {
+    public function clearCache() {
         if ($this->xpdo && $this->xpdo->lexicon) {
             return $this->xpdo->lexicon->clearCache($this->get('language').'/'.$this->get('namespace').'/'.$this->get('name'));
         }
@@ -28,9 +21,9 @@ class modLexiconTopic extends xPDOSimpleObject {
      *
      * {@inheritdoc}
      */
-    function save($cacheFlag= null) {
+    public function save($cacheFlag= null) {
         $saved = parent :: save($cacheFlag);
-        if ($saved && empty($this->xpdo->config[XPDO_OPT_SETUP])) {
+        if ($saved && empty($this->xpdo->config[xPDO::OPT_SETUP])) {
             $this->clearCache();
         }
         return $saved;

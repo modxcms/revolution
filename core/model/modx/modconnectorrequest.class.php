@@ -101,7 +101,7 @@ class modConnectorRequest extends modManagerRequest {
      */
     function setDirectory($dir = '') {
         if (!$this->modx->getResponse('modConnectorResponse')) {
-            $this->modx->log(MODX_LOG_LEVEL_FATAL, 'Could not load response class: modConnectorResponse');
+            $this->modx->log(modX::LOG_LEVEL_FATAL, 'Could not load response class: modConnectorResponse');
         }
         $this->modx->response->setDirectory($dir);
     }

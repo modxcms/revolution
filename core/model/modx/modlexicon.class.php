@@ -37,7 +37,7 @@ class modLexicon {
      * @var modX $modx
      * @access protected
      */
-    var $modx = null;
+    public $modx = null;
     /**
      * The actual language array.
      *
@@ -46,37 +46,33 @@ class modLexicon {
      * array of entries, but then have subarrays for topic-specific referencing.
      *
      * @var array $_lexicon
-     * @access private
+     * @access protected
      */
-    var $_lexicon = array();
+    protected $_lexicon = array();
     /**
      * Directories to search for language strings in.
      *
      * @deprecated
      * @var array $_paths
-     * @access private
+     * @access protected
      */
-    var $_paths = array();
+    protected $_paths = array();
 
-    /**#@+
+    /**
      * Creates the modLexicon instance.
      *
      * @constructor
      * @param modX &$modx A reference to the modX instance.
      * @return modLexicon
      */
-    function modLexicon(&$modx) {
-        $this->__construct($modx);
-    }
-    /** @ignore */
-    function __construct(&$modx) {
+    function __construct(xPDO &$modx,array $config = array()) {
         $this->modx =& $modx;
         $this->_paths = array(
              'core' => $this->modx->getOption('core_path') . 'cache/lexicon/',
         );
         $this->_lexicon = array();
+        $this->config = array_merge($config,array());
     }
-    /**#@-*/
 
     /**
      * Clears the lexicon cache for the specified path.
@@ -85,7 +81,7 @@ class modLexicon {
      * @param string $path The path to clear.
      * @return string The results of the cache clearing.
      */
-    function clearCache($path = '') {
+    public function clearCache($path = '') {
         $path = 'lexicon/'.$path;
         return $this->modx->cacheManager->clearCache(array($path));
     }
@@ -97,7 +93,7 @@ class modLexicon {
      * @param string $index
      * @return boolean True if exists.
      */
-    function exists($index) {
+    public function exists($index) {
         return (is_string($index) && isset($this->_lexicon[$index]));
     }
 
@@ -107,14 +103,20 @@ class modLexicon {
      * @access public
      * @return array The internal lexicon.
      */
-    function fetch() {
+    public function fetch() {
         return $this->_lexicon;
     }
 
     /**
      * Return the cache key representing the specified lexicon topic.
+     *
+     * @access public
+     * @param string $namespace The namespace for the topic
+     * @param string $topic The topic to grab
+     * @param string $language The language for the topic
+     * @return string The cache key for the specified topic
      */
-    function getCacheKey($namespace = 'core',$topic = 'default',$language = '') {
+    public function getCacheKey($namespace = 'core',$topic = 'default',$language = '') {
         if (empty($namespace)) $namespace = 'core';
         if (empty($topic)) $topic = 'default';
         if (empty($language)) $language = $this->modx->cultureKey;
@@ -132,7 +134,7 @@ class modLexicon {
      *
      * @access public
      */
-    function load() {
+    public function load() {
         $topics = func_get_args(); /* allow for dynamic number of lexicons to load */
 
         foreach ($topics as $topic) {
@@ -178,7 +180,7 @@ class modLexicon {
      * @param string $language The language to load. Defaults to 'en'.
      * @return array The loaded lexicon array.
      */
-    function loadCache($namespace = 'core', $topic = 'default', $language = '') {
+    public function loadCache($namespace = 'core', $topic = 'default', $language = '') {
         if (empty($language)) $language = $this->modx->cultureKey;
         $key = $this->getCacheKey($namespace, $topic, $language);
 
@@ -205,7 +207,7 @@ class modLexicon {
             $cached = $this->modx->cacheManager->generateLexiconTopic($key,$results);
         }
         if (empty($cached)) {
-            $this->modx->log(MODX_LOG_LEVEL_ERROR, "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
         }
         return $cached;
     }
@@ -219,10 +221,10 @@ class modLexicon {
      * keys and values to parse
      * @return string The text of the lexicon key, blank if not found.
      */
-    function process($key,$params = array()) {
+    public function process($key,array $params = array()) {
         /* make sure key exists */
         if (!is_string($key) || !isset($this->_lexicon[$key])) {
-            $this->modx->log(XPDO_LOG_LEVEL_WARN,'Language string not found: "'.$key.'"');
+            $this->modx->log(xPDO::LOG_LEVEL_WARN,'Language string not found: "'.$key.'"');
             return $key;
         }
         /* if params are passed, allow for parsing of [[+key]] values to strings */
@@ -240,7 +242,7 @@ class modLexicon {
      * a key string.
      * @param string $text The text to set, if the first parameter is a string.
      */
-    function set($keys, $text = '') {
+    public function set($keys, $text = '') {
         if (is_array($keys)) {
             foreach ($keys as $key => $str) {
                 if ($key == '') continue;
@@ -260,7 +262,7 @@ class modLexicon {
      * @param array $params An associative array of keys to replace
      * @return string The processed string
      */
-    function _parse($str,$params) {
+    private function _parse($str,$params) {
         if (!$str) return '';
         if (empty($params)) return $str;
 

@@ -5,21 +5,15 @@
  * @package modx
  */
 class modMenu extends modAccessibleObject {
-    function modMenu(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
 
     /**
      * Overrides xPDOObject::save to cache the menus.
      *
      * {@inheritdoc}
      */
-    function save($cacheFlag = null) {
+    public function save($cacheFlag = null) {
         $saved = parent::save($cacheFlag);
-        if ($saved && empty($this->xpdo->config[XPDO_OPT_SETUP])) {
+        if ($saved && empty($this->xpdo->config[xPDO::OPT_SETUP])) {
             $this->rebuildCache();
         }
         return $saved;
@@ -30,9 +24,9 @@ class modMenu extends modAccessibleObject {
      *
      * {@inheritdoc}
      */
-    function remove() {
-        $removed = parent::remove();
-        if ($removed && empty($this->xpdo->config[XPDO_OPT_SETUP])) {
+    public function remove(array $ancestors = array()) {
+        $removed = parent::remove($ancestors);
+        if ($removed && empty($this->xpdo->config[xPDO::OPT_SETUP])) {
             $this->rebuildCache();
         }
         return $removed;
@@ -45,11 +39,11 @@ class modMenu extends modAccessibleObject {
      * @param integer $start The start menu to build from recursively.
      * @return array An array of modMenu objects, in tree form.
      */
-    function rebuildCache($start = '') {
+    public function rebuildCache($start = '') {
         $menus = $this->getSubMenus($start);
 
         if ($this->xpdo->cacheManager->set('mgr/menus',$menus) == false) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'The menu cache could not be written.');
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'The menu cache could not be written.');
         }
 
         return $menus;
@@ -62,7 +56,7 @@ class modMenu extends modAccessibleObject {
      * @param integer $start The top menu to load from.
      * @return array An array of modMenu objects, in tree form.
      */
-    function getSubMenus($start = '') {
+    public function getSubMenus($start = '') {
         if (!$this->xpdo->lexicon) {
             $this->xpdo->getService('lexicon','modLexicon');
         }

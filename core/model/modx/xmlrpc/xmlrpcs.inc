@@ -586,6 +586,10 @@
 				$this->debugmsg("+++GOT+++\n" . $data . "\n+++END+++");
 			}
 
+            if (isset($GLOBALS['req_charset'])) $req_charset = $GLOBALS['req_charset'];
+            if (isset($GLOBALS['resp_charset'])) $resp_charset = $GLOBALS['resp_charset'];
+            if (isset($GLOBALS['resp_encoding'])) $resp_encoding = $GLOBALS['resp_encoding'];
+
 			$r = $this->parseRequestHeaders($data, $req_charset, $resp_charset, $resp_encoding);
 			if (!$r)
 			{
@@ -1082,10 +1086,10 @@
 				{
 					$r = call_user_func($func, $m);
 				}
-				if (!is_a($r, 'xmlrpcresp'))
+				if (!($r instanceof xmlrpcresp))
 				{
 					error_log("XML-RPC: xmlrpc_server::execute: function $func registered as method handler does not return an xmlrpcresp object");
-					if (is_a($r, 'xmlrpcval'))
+					if ($r instanceof xmlrpcval)
 					{
 						$r =& new xmlrpcresp($r);
 					}
@@ -1132,7 +1136,7 @@
 					}
 				}
 				// the return type can be either an xmlrpcresp object or a plain php value...
-				if (!is_a($r, 'xmlrpcresp'))
+				if (!($r instanceof xmlrpcresp))
 				{
 					// what should we assume here about automatic encoding of datetimes
 					// and php classes instances???

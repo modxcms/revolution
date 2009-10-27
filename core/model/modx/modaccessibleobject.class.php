@@ -9,21 +9,14 @@ class modAccessibleObject extends xPDOObject {
      * A local cache of access policies for the instance.
      * @var array
      */
-    var $_policies = array();
-
-    function modAccessibleObject(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
+    protected $_policies = array();
 
     /**
      * Custom instance loader for collections that respects policy checking.
      *
      * {@inheritdoc}
      */
-    function _loadCollectionInstance(& $xpdo, & $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag) {
+    protected static function _loadCollectionInstance(xPDO & $xpdo, array & $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag=true) {
         $loaded = false;
         if ($obj= xPDOObject :: _loadInstance($xpdo, $className, $criteria, $row)) {
             if (($cacheKey= $obj->getPrimaryKey()) && !$obj->isLazy()) {
@@ -33,7 +26,7 @@ class modAccessibleObject extends xPDOObject {
                     $pkval= $cacheKey;
                 }
                 if ($obj->checkPolicy('load')) {
-                    if ($xpdo->getOption(XPDO_OPT_CACHE_DB_COLLECTIONS, array(), 1) == 2 && $xpdo->_cacheEnabled && $cacheFlag) {
+                    if ($xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1) == 2 && $xpdo->_cacheEnabled && $cacheFlag) {
                         if (!$fromCache) {
                             $pkCriteria = $xpdo->newQuery($className, $cacheKey, $cacheFlag);
                             $xpdo->toCache($criteria, $obj, $cacheFlag);
@@ -59,7 +52,7 @@ class modAccessibleObject extends xPDOObject {
      *
      * {@inheritdoc}
      */
-    function load(& $xpdo, $className, $criteria, $cacheFlag= true) {
+    public static function load(xPDO & $xpdo, $className, $criteria, $cacheFlag= true) {
         $object = null;
         $object = xPDOObject :: load($xpdo, $className, $criteria, $cacheFlag);
         if ($object && !$object->checkPolicy('load')) {
@@ -67,7 +60,7 @@ class modAccessibleObject extends xPDOObject {
             if (!$userid) {
                 $userid = '0';
             }
-            $xpdo->log(XPDO_LOG_LEVEL_INFO, "Principal {$userid} does not have access to requested object of class {$object->_class} with primary key " . print_r($object->getPrimaryKey(false), true));
+            $xpdo->log(xPDO::LOG_LEVEL_INFO, "Principal {$userid} does not have access to requested object of class {$object->_class} with primary key " . print_r($object->getPrimaryKey(false), true));
             $object = null;
         }
         return $object;
@@ -78,12 +71,12 @@ class modAccessibleObject extends xPDOObject {
      *
      * {@inheritdoc}
      */
-    function loadCollection(& $xpdo, $className, $criteria, $cacheFlag= true) {
+    public static function loadCollection(xPDO & $xpdo, $className, $criteria= null, $cacheFlag= true) {
         $objCollection= array ();
         if (!$className= $xpdo->loadClass($className)) return $objCollection;
         $rows= false;
         $fromCache= false;
-        $collectionCaching = (integer) $xpdo->getOption(XPDO_OPT_CACHE_DB_COLLECTIONS, array(), 1);
+        $collectionCaching = (integer) $xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1);
         if (!is_object($criteria)) {
             $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
         }
@@ -103,7 +96,7 @@ class modAccessibleObject extends xPDOObject {
                     }
                 }
             } elseif (is_object($rows)) {
-                while ($row = $rows->fetch(PDO_FETCH_ASSOC)) {
+                while ($row = $rows->fetch(PDO::FETCH_ASSOC)) {
                     if (modAccessibleObject :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag)) {
                         if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag && !$fromCache) $cacheRows[] = $row;
                     }
@@ -113,7 +106,7 @@ class modAccessibleObject extends xPDOObject {
                 $xpdo->toCache($criteria, $cacheRows, $cacheFlag);
             }
         } else {
-            $xpdo->log(XPDO_LOG_LEVEL_ERROR, 'modAccessibleObject::loadCollection() - No valid statement could be found in or generated from the given criteria.');
+            $xpdo->log(xPDO::LOG_LEVEL_ERROR, 'modAccessibleObject::loadCollection() - No valid statement could be found in or generated from the given criteria.');
         }
         return $objCollection;
     }
@@ -123,7 +116,7 @@ class modAccessibleObject extends xPDOObject {
      *
      * {@inheritdoc}
      */
-    function save($cacheFlag = null) {
+    public function save($cacheFlag = null) {
         $saved = false;
         if (!$this->checkPolicy('save')) {
             $this->xpdo->error->failure($this->xpdo->lexicon('permission_denied'));
@@ -137,7 +130,7 @@ class modAccessibleObject extends xPDOObject {
      *
      * {@inheritdoc}
      */
-    function remove($ancestors= array ()) {
+    public function remove(array $ancestors= array ()) {
         $removed = false;
         if (!$this->checkPolicy('remove')) {
             $this->xpdo->error->failure($this->xpdo->lexicon('permission_denied'));
@@ -159,8 +152,8 @@ class modAccessibleObject extends xPDOObject {
      * @return boolean Returns true if the policy is satisfied or no policy
      * exists.
      */
-    function checkPolicy($criteria, $targets = null) {
-        if ($criteria && is_a($this->xpdo, 'modX') && $this->xpdo->getSessionState() == MODX_SESSION_STATE_INITIALIZED) {
+    public function checkPolicy($criteria, $targets = null) {
+        if ($criteria && $this->xpdo instanceof modX && $this->xpdo->getSessionState() == modX::SESSION_STATE_INITIALIZED) {
             if (!is_array($criteria) && is_scalar($criteria)) {
                 $criteria = array("{$criteria}" => true);
             }
@@ -172,7 +165,7 @@ class modAccessibleObject extends xPDOObject {
                         foreach ($access as $targetId => $targetPolicy) {
                             foreach ($targetPolicy as $policyIndex => $applicablePolicy) {
                                 if ($this->xpdo->getDebug() === true)
-                                    $this->xpdo->log(MODX_LOG_LEVEL_DEBUG, 'target pk='. $this->getPrimaryKey() .'; evaluating policy: ' . print_r($applicablePolicy, 1) . ' against principal for user id=' . $this->xpdo->getLoginUserID() .': ' . print_r($principal, 1));
+                                    $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'target pk='. $this->getPrimaryKey() .'; evaluating policy: ' . print_r($applicablePolicy, 1) . ' against principal for user id=' . $this->xpdo->getLoginUserID() .': ' . print_r($principal, 1));
                                 $principalPolicyData = array();
                                 $principalAuthority = 9999;
                                 if (isset($principal[$policyAccess][$targetId]) && is_array($principal[$policyAccess][$targetId])) {
@@ -187,7 +180,7 @@ class modAccessibleObject extends xPDOObject {
                                                 }
                                                 if ($matches = array_intersect_assoc($principalPolicyData, $applicablePolicy['policy'])) {
                                                     if ($this->xpdo->getDebug() === true)
-                                                        $this->xpdo->log(MODX_LOG_LEVEL_DEBUG, 'Evaluating policy matches: ' . print_r($matches, 1));
+                                                        $this->xpdo->log(modX::LOG_LEVEL_DEBUG, 'Evaluating policy matches: ' . print_r($matches, 1));
                                                     $matched = array_diff_assoc($criteria, $matches);
                                                      if (empty($matched)) {
                                                         return true;
@@ -210,6 +203,8 @@ class modAccessibleObject extends xPDOObject {
     /**
      * Find access policies applicable to this object in a specific context.
      *
+     * TODO: Write this.
+     *
      * @access protected
      * @param string $context A key identifying a specific context to use when
      * searching for the applicable policies. If not provided, the current
@@ -217,8 +212,7 @@ class modAccessibleObject extends xPDOObject {
      * @return array An array of access policies for this object; an empty
      * array is returned if no policies are assigned to the object.
      */
-    function findPolicy($context = '') {
+    public function findPolicy($context = '') {
         return array();
     }
 }
-?>

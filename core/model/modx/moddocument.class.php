@@ -12,12 +12,8 @@
  * @package modx
  */
 class modDocument extends modResource {
-    function modDocument(& $xpdo) {
-        $this->__construct($xpdo);
-    }
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->_fields['class_key']= 'modDocument';
     }
 }
-?>

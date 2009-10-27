@@ -102,5 +102,3 @@ $xpdo_meta_map['modUserMessage']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modUserMessage']['aggregates']= array_merge($xpdo_meta_map['modUserMessage']['aggregates'], array_change_key_case($xpdo_meta_map['modUserMessage']['aggregates']));
-$xpdo_meta_map['modusermessage']= & $xpdo_meta_map['modUserMessage'];

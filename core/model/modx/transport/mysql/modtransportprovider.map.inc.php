@@ -59,5 +59,3 @@ $xpdo_meta_map['modTransportProvider']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modTransportProvider']['aggregates']= array_merge($xpdo_meta_map['modTransportProvider']['aggregates'], array_change_key_case($xpdo_meta_map['modTransportProvider']['aggregates']));
-$xpdo_meta_map['modtransportprovider']= & $xpdo_meta_map['modTransportProvider'];

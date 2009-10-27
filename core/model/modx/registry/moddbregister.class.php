@@ -6,7 +6,7 @@
  * @subpackage registry
  */
 /** Make sure the modRegister class is included. */
-require_once(dirname(__FILE__) . '/modregister.class.php');
+require_once dirname(__FILE__) . '/modregister.class.php';
 
 /**
  * A simple, file-based implementation of modRegister.
@@ -17,33 +17,30 @@ require_once(dirname(__FILE__) . '/modregister.class.php');
 class modDbRegister extends modRegister {
     /**
      * A polling flag that will terminate additional polling when true.
-     * @var boolean
+     * @access protected
+     * @var boolean $__kill
      */
-    var $__kill = false;
+    public $__kill = false;
     /**
      * The queue object representing this modRegister instance.
-     * @var modDbRegisterQueue
+     * @access protected
+     * @var modDbRegisterQueue $_queue
      */
-    var $_queue = null;
+    protected $_queue = null;
 
-    /**#@+
+    /**
      * Construct a new modDbRegister instance.
      *
      * @param modX &$modx A reference to a modX instance.
      * @param string $key A unique identifier for this register.
      * @param array $options Optional array of register-specific options.
      */
-    function modDbRegister(& $modx, $key, $options = array()) {
-        $this->__construct($modx, $key, $options);
-    }
-    /**@ignore*/
-    function __construct(& $modx, $key, $options = array()) {
+    function __construct(modX &$modx, $key, array $options = array()) {
         parent :: __construct($modx, $key, $options);
         $this->_queue = $this->_initQueue($key, $options);
     }
-    /**#@-*/
 
-    function _initQueue($key, $options) {
+    protected function _initQueue($key, $options) {
         $queue = $this->modx->getObject('registry.db.modDbRegisterQueue', array(
             'name' => $key
         ));
@@ -63,7 +60,7 @@ class modDbRegister extends modRegister {
      *
      * {@inheritdoc}
      */
-    function connect($attributes = array()) {
+    public function connect(array $attributes = array()) {
         return true;
     }
 
@@ -85,7 +82,7 @@ class modDbRegister extends modRegister {
      * Default is true.</li>
      * </ul>
      */
-    function read($options = array()) {
+    public function read(array $options = array()) {
         $this->__kill = false;
         $messages = array();
         $msgLimit = isset($options['msg_limit']) ? intval($options['msg_limit']) : 5;
@@ -120,21 +117,21 @@ class modDbRegister extends modRegister {
                     $stmt->bindValue(':topicbase', dirname($topic) . '/');
                     $stmt->bindValue(':topicmsg', basename($topic));
                     if ($stmt->execute()) {
-                        foreach ($stmt->fetchAll(PDO_FETCH_OBJ) as $msg) {
+                        foreach ($stmt->fetchAll(PDO::FETCH_OBJ) as $msg) {
                             $newMsg = $this->_readMessage($msg, $removeRead);
                             if ($newMsg !== null) {
                                 $topicMessages[] = $newMsg;
                                 $msgCount++;
                             } else {
-                                $this->modx->log(MODX_LOG_LEVEL_INFO, 'Message was null or expired: ' . print_r($msg, 1));
+                                $this->modx->log(modX::LOG_LEVEL_INFO, 'Message was null or expired: ' . print_r($msg, 1));
                             }
                             if ($this->__kill) break;
                         }
                     } else {
-                        $this->modx->log(MODX_LOG_LEVEL_ERROR, 'Error executing statement from sql: ' . $sql);
+                        $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error executing statement from sql: ' . $sql);
                     }
                 } else {
-                    $this->modx->log(MODX_LOG_LEVEL_ERROR, 'Error preparing statement from sql: ' . $sql);
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error preparing statement from sql: ' . $sql);
                 }
             }
             if (!empty($topicMessages)) {
@@ -150,11 +147,11 @@ class modDbRegister extends modRegister {
      *
      * @todo Implement support for reading various message types, other than
      * executable PHP format.
-     * @access private
+     * @access protected
      * @param object $obj The message data to read.
      * @param boolean $remove Indicates if the message should be deleted once it is read.
      */
-    function _readMessage($obj, $remove = true) {
+    protected function _readMessage($obj, $remove = true) {
         $message = null;
         if (is_object($obj) && !empty($obj->payload)) {
             $message = eval($obj->payload);
@@ -195,7 +192,7 @@ class modDbRegister extends modRegister {
      * @todo Implement support for sending various message types, other than
      * executable PHP format.
      */
-    function send($topic, $message, $options = array()) {
+    public function send($topic, $message, array $options = array()) {
         $sent = false;
         if (empty($topic) || $topic[0] != '/') $topic = $this->_currentTopic . $topic;
         $topicIdx = array_search($topic, $this->subscriptions);
@@ -251,11 +248,16 @@ class modDbRegister extends modRegister {
                     }
                 }
             } else {
-                $this->modx->log(MODX_LOG_LEVEL_ERROR, "Could not send message to queue {$queueId}, topic {$topic}. Message payload is " . print_r($message, 1));
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "Could not send message to queue {$queueId}, topic {$topic}. Message payload is " . print_r($message, 1));
             }
         }
-        if (!$sent) $this->modx->log(MODX_LOG_LEVEL_ERROR, "Could not send message to queue {$queueId}, topic {$topic}. Message payload is " . print_r($message, 1));
+        if (!$sent) $this->modx->log(modX::LOG_LEVEL_ERROR, "Could not send message to queue {$queueId}, topic {$topic}. Message payload is " . print_r($message, 1));
         return $sent;
     }
+
+    public function close() {}
+    public function acknowledge($messageKey, $transactionKey) {}
+    public function begin($transactionKey) {}
+    public function commit($transactionKey) {}
+    public function abort($transactionKey) {}
 }
-?>

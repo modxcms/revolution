@@ -4,12 +4,4 @@
  *
  * @package modx
  */
-class modTemplateVarTemplate extends xPDOObject {
-   function modTemplateVarTemplate(& $xpdo) {
-      $this->__construct($xpdo); 
-   }
-   function __construct(& $xpdo) {
-      parent :: __construct($xpdo);
-   }
-}
-?>
+class modTemplateVarTemplate extends xPDOObject {}

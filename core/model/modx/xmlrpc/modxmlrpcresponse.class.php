@@ -20,20 +20,13 @@ class modXMLRPCResponse extends modResponse {
      * @var xmlrpc_server
      * @access public
      */
-    var $server= null;
+    public $server= null;
     /**
      * A collection of services attached to this response
      * @var array
      * @access public
      */
-    var $services= array ();
-
-    function modXMLRPCResponse(& $modx) {
-        $this->__construct($modx);
-    }
-    function __construct(& $modx) {
-        parent :: __construct($modx);
-    }
+    public $services= array ();
 
     /**
      * Output the content of the resource
@@ -41,12 +34,12 @@ class modXMLRPCResponse extends modResponse {
      * @access public
      * @param boolean $noEvent Unused.
      */
-    function outputContent($options= array()) {
-        if (!isset($options['rpc_type'])) $options['rpc_type']= 'XML';
+    public function outputContent(array $options= array()) {
+        if (empty($options['rpc_type'])) $options['rpc_type']= 'XML';
 
         $resourceClass = 'mod' . $options['rpc_type'] . 'RPCResource';
-        if (!is_a($this->modx->resource, $resourceClass)) {
-            $this->modx->log(MODX_LOG_LEVEL_FATAL, 'Could not load ' . $options['rpc_type'] . '-RPC Server class.');
+        if (!($this->modx->resource instanceof $resourceClass)) {
+            $this->modx->log(modX::LOG_LEVEL_FATAL, 'Could not load ' . $options['rpc_type'] . '-RPC Server class.');
         }
 
         $this->modx->resource->process();
@@ -59,7 +52,7 @@ class modXMLRPCResponse extends modResponse {
         $this->modx->parser->processElementTags('', $this->modx->resource->_output, true, true, '[[', ']]', array(), $maxIterations);
 
         if (!$this->getServer()) {
-            $this->modx->log(MODX_LOG_LEVEL_FATAL, 'Could not load ' . $options['rpc_type'] . '-RPC Server.');
+            $this->modx->log(modX::LOG_LEVEL_FATAL, 'Could not load ' . $options['rpc_type'] . '-RPC Server.');
         }
 
         $this->server->service();
@@ -76,11 +69,11 @@ class modXMLRPCResponse extends modResponse {
      * load it
      * @return boolean True if the server initialized an instance correctly
      */
-    function getServer($execute= false) {
-        if ($this->server === null || !is_a($this->server, 'xmlrpc_server')) {
+    public function getServer($execute= false) {
+        if ($this->server === null || !($this->server instanceof xmlrpc_server)) {
             $this->server= new xmlrpc_server($this->services, $execute);
         }
-        return is_a($this->server, 'xmlrpc_server');
+        return $this->server instanceof xmlrpc_server;
     }
 
     /**
@@ -90,7 +83,7 @@ class modXMLRPCResponse extends modResponse {
      * @param string $key The name of the service
      * @param string $signature The signature of the service
      */
-    function registerService($key, $signature) {
+    public function registerService($key, $signature) {
         $this->services[$key]= $signature;
     }
 
@@ -100,7 +93,7 @@ class modXMLRPCResponse extends modResponse {
      * @access public
      * @param string $key The name of the service
      */
-    function unregisterService($key) {
+    public function unregisterService($key) {
         unset($this->services[$key]);
     }
 }

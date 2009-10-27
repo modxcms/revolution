@@ -26,14 +26,14 @@ $sources= array (
 );
 /* set up some default attributes that define install behavior */
 $attributes= array(
-    XPDO_TRANSPORT_UNIQUE_KEY => 'name',
-    XPDO_TRANSPORT_PRESERVE_KEYS => false,
-    XPDO_TRANSPORT_UPDATE_OBJECT => true,
-    XPDO_TRANSPORT_RESOLVE_FILES => true,
-    XPDO_TRANSPORT_RESOLVE_PHP => true,
+    xPDOTransport::UNIQUE_KEY => 'name',
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::RESOLVE_FILES => true,
+    xPDOTransport::RESOLVE_PHP => true,
 );
 
-$modx->log(MODX_LOG_LEVEL_INFO,'Loading vehicles into package.');
+$modx->log(modX::LOG_LEVEL_INFO,'Loading vehicles into package.');
 foreach ($_PACKAGE['vehicles'] as $vehicle) {
     $c = $modx->getObject($vehicle['class_key'],$vehicle['object']);
     if ($c == null) continue;
@@ -51,10 +51,10 @@ foreach ($_PACKAGE['vehicles'] as $vehicle) {
 }
 
 /* zip up the package */
-$modx->log(MODX_LOG_LEVEL_INFO,'Attempting to pack package.');
+$modx->log(modX::LOG_LEVEL_INFO,'Attempting to pack package.');
 $builder->pack();
 
 $filename = $modx->getOption('core_path').'packages/'.$_PACKAGE['name'].'-'.$_PACKAGE['version'].'-'.$_PACKAGE['release'].'.transport.zip';
 
-$modx->log(MODX_LOG_LEVEL_WARN,$modx->lexicon('package_built').' - '.$filename);
+$modx->log(modX::LOG_LEVEL_WARN,$modx->lexicon('package_built').' - '.$filename);
 return $modx->error->success($modx->lexicon('package_built').' - '.$filename);

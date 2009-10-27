@@ -74,6 +74,3 @@ $xpdo_meta_map['modDbRegisterTopic']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modDbRegisterTopic']['aggregates']= array_merge($xpdo_meta_map['modDbRegisterTopic']['aggregates'], array_change_key_case($xpdo_meta_map['modDbRegisterTopic']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modDbRegisterTopic']['composites']= array_merge($xpdo_meta_map['modDbRegisterTopic']['composites'], array_change_key_case($xpdo_meta_map['modDbRegisterTopic']['composites']));
-$xpdo_meta_map['moddbregistertopic']= & $xpdo_meta_map['modDbRegisterTopic'];

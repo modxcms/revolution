@@ -1243,7 +1243,7 @@
 				}
 				break;
 			case 'object':
-				if(is_a($php_val, 'jsonrpcval'))
+				if($php_val instanceof jsonrpcval)
 				{
 					$jsonrpc_val = $php_val;
 				}
@@ -1393,7 +1393,7 @@
 		}
 		else
 		{
-			if(!is_object($resp->val) || !is_a($resp->val, 'xmlrpcval'))
+			if(!is_object($resp->val) || !($resp->val instanceof xmlrpcval))
 			{
 				if (is_string($resp->val) && $resp->valtyp == 'json')
 				{

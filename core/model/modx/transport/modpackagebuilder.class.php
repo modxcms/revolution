@@ -78,7 +78,7 @@ class modPackageBuilder {
         if (!$workspace = $this->modx->getObject('modWorkspace', array (
                 'active' => 1
             ))) {
-            $this->modx->log(MODX_LOG_LEVEL_FATAL,$this->modx->lexicon('core_err_invalid'));
+            $this->modx->log(modX::LOG_LEVEL_FATAL,$this->modx->lexicon('core_err_invalid'));
             exit ();
         }
         $this->directory = $workspace->get('path') . 'packages/';
@@ -151,7 +151,7 @@ class modPackageBuilder {
 
         /* create the transport package */
         $this->package = new xPDOTransport($this->modx, $this->signature, $this->directory);
-        $this->modx->log(MODX_LOG_LEVEL_INFO, $this->modx->lexicon('package_created',array(
+        $this->modx->log(modX::LOG_LEVEL_INFO, $this->modx->lexicon('package_created',array(
             'signature' => $this->signature,
         )));
 
@@ -202,7 +202,7 @@ class modPackageBuilder {
      * @return boolean True if successful.
      */
     function registerNamespace($ns = 'core', $autoincludes = true, $packageNamespace = true, $path = '') {
-        if (!is_a($ns, 'modNamespace')) {
+        if (!($ns instanceof modNamespace)) {
             $namespace = $this->modx->getObject('modNamespace', $ns);
             if ($namespace == null) {
                 $namespace = $this->modx->newObject('modNamespace');
@@ -214,17 +214,17 @@ class modPackageBuilder {
         }
         $this->namespace = $namespace;
 
-        $this->modx->log(MODX_LOG_LEVEL_INFO, $this->modx->lexicon('namespace_registered',array(
+        $this->modx->log(modX::LOG_LEVEL_INFO, $this->modx->lexicon('namespace_registered',array(
             'namespace' => $this->namespace->get('name'),
         )));
 
         /* define some basic attributes */
         $attributes = array (
-            XPDO_TRANSPORT_UNIQUE_KEY => 'name',
-            XPDO_TRANSPORT_PRESERVE_KEYS => true,
-            XPDO_TRANSPORT_UPDATE_OBJECT => true,
-            XPDO_TRANSPORT_RESOLVE_FILES => true,
-            XPDO_TRANSPORT_RESOLVE_PHP => true,
+            xPDOTransport::UNIQUE_KEY => 'name',
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::RESOLVE_FILES => true,
+            xPDOTransport::RESOLVE_PHP => true,
 
         );
         if ($packageNamespace) {
@@ -235,14 +235,14 @@ class modPackageBuilder {
             if (!$this->putVehicle($v)) {
                 return false;
             }
-            $this->modx->log(MODX_LOG_LEVEL_INFO, $this->modx->lexicon('namespace_packaged',array(
+            $this->modx->log(modX::LOG_LEVEL_INFO, $this->modx->lexicon('namespace_packaged',array(
                 'namespace' => $this->namespace->get('name'),
             )));
         }
 
         /* Can automatically package in certain classes based upon their namespace values */
         if ($autoincludes == true || (is_array($autoincludes) && !empty ($autoincludes))) {
-            $this->modx->log(MODX_LOG_LEVEL_INFO, $this->modx->lexicon('autoincludes_packaging',array(
+            $this->modx->log(modx::LOG_LEVEL_INFO, $this->modx->lexicon('autoincludes_packaging',array(
                 'autoincludes' => print_r($autoincludes, true),
             )));
             if (is_array($autoincludes)) {
@@ -336,12 +336,12 @@ class modPackageBuilder {
         $entries = array ();
 
         if (!is_dir($path)) {
-            $this->modx->log(MODX_LOG_LEVEL_FATAL,$this->modx->lexicon('lexicon_err_path_nf',array(
+            $this->modx->log(modX::LOG_LEVEL_FATAL,$this->modx->lexicon('lexicon_err_path_nf',array(
                 'path' => $path,
             )));
         }
 
-        $this->modx->log(MODX_LOG_LEVEL_INFO, $this->modx->lexicon('lexicon_autobuilding',array(
+        $this->modx->log(modX::LOG_LEVEL_INFO, $this->modx->lexicon('lexicon_autobuilding',array(
             'path' => $path
         )));
 
@@ -411,18 +411,18 @@ class modPackageBuilder {
                 $topic->addMany($entries);
 
                 $vehicle = $this->createVehicle($topic, array (
-                    XPDO_TRANSPORT_PRESERVE_KEYS => false,
-                    XPDO_TRANSPORT_UPDATE_OBJECT => true,
-                    XPDO_TRANSPORT_UNIQUE_KEY => array (
+                    xPDOTransport::PRESERVE_KEYS => false,
+                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UNIQUE_KEY => array (
                         'name',
                         'namespace'
                     ),
-                    XPDO_TRANSPORT_RELATED_OBJECTS => true,
-                    XPDO_TRANSPORT_RELATED_OBJECT_ATTRIBUTES => array (
+                    xPDOTransport::RELATED_OBJECTS => true,
+                    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
                         'Entries' => array (
-                            XPDO_TRANSPORT_PRESERVE_KEYS => false,
-                            XPDO_TRANSPORT_UPDATE_OBJECT => true,
-                            XPDO_TRANSPORT_UNIQUE_KEY => array (
+                            xPDOTransport::PRESERVE_KEYS => false,
+                            xPDOTransport::UPDATE_OBJECT => true,
+                            xPDOTransport::UNIQUE_KEY => array (
                                 'name',
                                 'topic',
                                 'namespace',
@@ -438,9 +438,9 @@ class modPackageBuilder {
 
         /* package in languages */
         $attributes = array (
-            XPDO_TRANSPORT_UNIQUE_KEY => 'name',
-            XPDO_TRANSPORT_PRESERVE_KEYS => true,
-            XPDO_TRANSPORT_UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => 'name',
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => true,
 
         );
         foreach ($languages as $language) {
@@ -464,7 +464,7 @@ class modPackageBuilder {
             foreach ($attributes as $k => $v)
                 $this->package->setAttribute($k, $v);
         } else {
-            $this->modx->log(MODX_LOG_LEVEL_ERROR, $this->modx->lexicon('package_err_spa'));
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon('package_err_spa'));
         }
     }
 }

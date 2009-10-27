@@ -4,9 +4,8 @@
  */
 $installMode= $install->getInstallMode();
 $this->parser->assign('installmode', $installMode);
-
 $install->setConfig($installMode);
-if ($installMode == MODX_INSTALL_MODE_NEW) {
+if ($installMode == modInstall::MODE_NEW) {
     $install->getAdminUser();
 }
 $install->getContextPaths();

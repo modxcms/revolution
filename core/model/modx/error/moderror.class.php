@@ -1,7 +1,7 @@
 <?php
 /*
  * MODx Revolution
- * 
+ *
  * Copyright 2006, 2007, 2008, 2009 by the MODx Team.
  * All rights reserved.
  *
@@ -39,45 +39,43 @@ class modError {
     /**
     * @var array The array of errors
     */
-    var $errors;
+    public $errors;
     /**
     * @var string The error message to output.
     */
-    var $message;
+    public  $message;
     /**
     * @var modX A reference to the $modx object.
     */
-    var $modx;
+    public  $modx;
     /**
     * @var integer The total number of errors.
     */
-    var $total = 0;
+    public  $total = 0;
     /**
      * @var boolean Indicates failure or success.
      */
-    var $status = false;
-    var $_objects = array();
+    public  $status = false;
+    protected $_objects = array();
 
-    function modError(& $modx, $message = '') {
-        $this->__construct($modx, $message);
-    }
-    function __construct(& $modx, $message = '') {
-        $this->modx = & $modx;
+    function __construct(modX &$modx, $message = '') {
+        $this->modx =& $modx;
         $this->message = $message;
         $this->errors = array ();
     }
-    
+
     /**
      * Adds an object to the validation queue.
+     *
      * @access public
      * @param xPDOObject $obj An xPDOObject to validate.
      */
-    function addObjectToValidate(&$obj) {
-        if (is_object($obj) && is_a($obj,'xPDOObject')) {
+    public function addObjectToValidate(xPDOObject &$obj) {
+        if (is_object($obj) && $obj instanceof xPDOObject) {
             $this->_objects[]= $obj;
         }
     }
-    
+
     /**
      * Checks validation, and if any errors are found, returns them. Error
      * handlers that derive from this can determine their own behaviour should
@@ -87,7 +85,7 @@ class modError {
      * add to the validation queue.
      * @return string The validation message returned.
      */
-    function checkValidation($objs= array()) {
+    public function checkValidation(array $objs= array()) {
         if (is_object($objs)) {
             $this->addObjectToValidate($objs);
         }
@@ -98,14 +96,14 @@ class modError {
         }
         return $this->_validate();
     }
-    
+
     /**
      * Grabs formatted validation messages for all objects in the validation
      * queue.
-     * @access private
+     * @access protected
      * @return string The compiled validation message returned.
      */
-    function _validate() {
+    protected function _validate() {
         $s = '';
         foreach ($this->_objects as $obj) {
             if ($validator= $obj->getValidator()) {
@@ -128,7 +126,7 @@ class modError {
      * @param object|array $object The object to send back to output.
      * @return string|object|array The transformed object data array.
      */
-    function process($message = '', $status = false, $object = null) {
+    public function process($message = '', $status = false, $object = null) {
         if (isset($this->modx->registry) && $this->modx->registry->isLogging()) {
             $this->modx->registry->resetLogging();
         }
@@ -140,14 +138,14 @@ class modError {
             }
         }
         $this->status = (boolean) $status;
-        
+
         if ($message != '') {
             $this->message = $message;
         }
         $objarray = array ();
         if (is_array($object)) {
             $obj = reset($object);
-            if (is_object($obj) && is_a($obj, 'xPDOObject')) {
+            if (is_object($obj) && $obj instanceof xPDOObject) {
                 $this->total = count($object);
             }
             unset ($obj);
@@ -168,7 +166,7 @@ class modError {
      * @param string $name The id of the field.
      * @param string $error The error message.
      */
-    function addField($name, $error) {
+    public function addField($name, $error) {
         $this->errors[] = array (
             'id' => $name,
             'msg' => $error
@@ -180,7 +178,7 @@ class modError {
      *
      * @return array An array of errors for specific fields.
      */
-    function getFields() {
+    public function getFields() {
         $f = array ();
         $errors = array_values(array_filter($this->errors, array($this, 'isFieldError')));
         foreach ($errors as $fi) {
@@ -191,17 +189,17 @@ class modError {
 
     /**
      * Add an error to the error queue.
-     * 
+     *
      * @param string|array $msg An error message string or custom error array.
      */
-    function addError($msg) {
+    public function addError($msg) {
         $this->errors[] = $msg;
     }
 
     /**
      * Return all of the errors in the error queue.
      */
-    function getErrors($includeFields = false) {
+    public function getErrors($includeFields = false) {
         $errors = $this->errors;
         if (!$includeFields) {
             $errors = array_values(array_filter($this->errors, array($this, 'isNotFieldError')));
@@ -211,21 +209,21 @@ class modError {
 
     /**
      * Returns true if the error passed to it represents a field error.
-     * 
+     *
      * @param mixed $error An element of modError::errors.
      * @return boolean True if the error is a field error.
      */
-    function isFieldError($error) {
+    public function isFieldError($error) {
         return (is_array($error) && isset($error['msg']) && isset($error['id']) && count($error) == 2);
     }
 
     /**
      * Returns true if the error passed to it does not represent a field error.
-     * 
+     *
      * @param mixed $error An element of modError::errors.
      * @return boolean True if the error is not a field error.
      */
-    function isNotFieldError($error) {
+    public function isNotFieldError($error) {
         return (!is_array($error) || !(isset($error['msg']) && isset($error['id']) && count($error) == 2));
     }
 
@@ -234,7 +232,7 @@ class modError {
      *
      * @return boolean True if there are errors or a message has been specified.
      */
-    function hasError() {
+    public function hasError() {
         return count($this->errors) > 0 || $this->message != '';
     }
 
@@ -244,7 +242,7 @@ class modError {
      * @param string $message The error message to send.
      * @param object|array|string $object An object to send back to the output.
      */
-    function failure($message = '', $object = null) {
+    public function failure($message = '', $object = null) {
         return $this->process($message, false, $object);
     }
 
@@ -254,7 +252,7 @@ class modError {
      * @param string $message The error message to send.
      * @param object|array|string $object An object to send back to the output.
      */
-    function success($message = '', $object = null) {
+    public function success($message = '', $object = null) {
         return $this->process($message, true, $object);
     }
 
@@ -267,7 +265,7 @@ class modError {
      * @param array|object $object An array or object to process.
      * @return array Returns an array representation of the object(s).
      */
-    function toArray($object) {
+    public function toArray($object) {
         $array = array ();
         if (is_array($object)) {
             while (list ($key, $value) = each($object)) {
@@ -281,15 +279,14 @@ class modError {
             }
         }
         elseif (is_object($object)) {
-            if (is_a($object, 'xPDOObject')) {
+            if ($object instanceof xPDOObject) {
                 $array = $this->toArray($object->toArray());
             } else {
                 $array = $this->toArray(get_object_vars($object));
             }
         }
         if ($this->modx->getDebug() === true)
-            $this->modx->log(XPDO_LOG_LEVEL_DEBUG, "modError::toArray() -- " . print_r($array, true));
+            $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "modError::toArray() -- " . print_r($array, true));
         return $array;
     }
 }
-?>

@@ -25,40 +25,6 @@
  * @package modx
  * @subpackage mail
  */
-
-/**#@+
- * modMail service constants representing mail attribute keys.
- * @var string
- */
-define('MODX_MAIL_BODY',            'mail_body');
-define('MODX_MAIL_BODY_TEXT',       'mail_body_text');
-define('MODX_MAIL_CHARSET',         'mail_charset');
-define('MODX_MAIL_CONTENT_TYPE',    'mail_content_type');
-define('MODX_MAIL_ENCODING',        'mail_encoding');
-define('MODX_MAIL_ENGINE',          'mail_engine');
-define('MODX_MAIL_ENGINE_PATH',     'mail_engine_path');
-define('MODX_MAIL_ERROR_INFO',      'mail_error_info');
-define('MODX_MAIL_FROM',            'mail_from');
-define('MODX_MAIL_FROM_NAME',       'mail_from_name');
-define('MODX_MAIL_HOSTNAME',        'mail_hostname');
-define('MODX_MAIL_LANGUAGE',        'mail_language');
-define('MODX_MAIL_PRIORITY',        'mail_priority');
-define('MODX_MAIL_READ_TO',         'mail_read_to');
-define('MODX_MAIL_SENDER',          'mail_sender');
-define('MODX_MAIL_SERVICE',         'mail_service');
-define('MODX_MAIL_SMTP_AUTH',       'mail_smtp_auth');
-define('MODX_MAIL_SMTP_HELO',       'mail_smtp_helo');
-define('MODX_MAIL_SMTP_HOSTS',      'mail_smtp_hosts');
-define('MODX_MAIL_SMTP_KEEPALIVE',  'mail_smtp_keepalive');
-define('MODX_MAIL_SMTP_PASS',       'mail_smtp_pass');
-define('MODX_MAIL_SMTP_PORT',       'mail_smtp_port');
-define('MODX_MAIL_SMTP_PREFIX',     'mail_smtp_prefix');
-define('MODX_MAIL_SMTP_SINGLE_TO',  'mail_smtp_single_to');
-define('MODX_MAIL_SMTP_TIMEOUT',    'mail_smtp_timeout');
-define('MODX_MAIL_SMTP_USER',       'mail_smtp_user');
-define('MODX_MAIL_SUBJECT',         'mail_subject');
-/**#@-*/
-
 /**
  * Defines the interface for the modX email service.
  *
@@ -66,32 +32,60 @@ define('MODX_MAIL_SUBJECT',         'mail_subject');
  * @package modx
  * @subpackage mail
  */
-class modMail {
+abstract class modMail {
+    const MAIL_BODY = 'mail_body';
+    const MAIL_BODY_TEXT = 'mail_body_text';
+    const MAIL_CHARSET = 'mail_charset';
+    const MAIL_CONTENT_TYPE = 'mail_content_type';
+    const MAIL_ENCODING = 'mail_encoding';
+    const MAIL_ENGINE = 'mail_engine';
+    const MAIL_ENGINE_PATH = 'mail_engine_path';
+    const MAIL_ERROR_INFO = 'mail_error_info';
+    const MAIL_FROM = 'mail_from';
+    const MAIL_FROM_NAME = 'mail_from_name';
+    const MAIL_HOSTNAME = 'mail_hostname';
+    const MAIL_LANGUAGE = 'mail_language';
+    const MAIL_PRIORITY = 'mail_priority';
+    const MAIL_READ_TO = 'mail_read_to';
+    const MAIL_SENDER = 'mail_sender';
+    const MAIL_SERVICE = 'mail_service';
+    const MAIL_SMTP_AUTH = 'mail_smtp_auth';
+    const MAIL_SMTP_HELO = 'mail_smtp_helo';
+    const MAIL_SMTP_HOSTS = 'mail_smtp_hosts';
+    const MAIL_SMTP_KEEPALIVE = 'mail_smtp_keepalive';
+    const MAIL_SMTP_PASS = 'mail_smtp_pass';
+    const MAIL_SMTP_PORT = 'mail_smtp_port';
+    const MAIL_SMTP_PREFIX = 'mail_smtp_prefix';
+    const MAIL_SMTP_SINGLE_TO = 'mail_smtp_single_to';
+    const MAIL_SMTP_TIMEOUT = 'mail_smtp_timeout';
+    const MAIL_SMTP_USER = 'mail_smtp_user';
+    const MAIL_SUBJECT = 'mail_subject';
+
     /**
      * A reference to the modX instance communicating with this service instance.
      * @var modX
      */
-    var $modx= null;
+    public $modx= null;
     /**
      * A collection of attributes defining all of the details of email communication.
      * @var array
      */
-    var $attributes= array();
+    public $attributes= array();
     /**
      * The mailer object responsible for implementing the modMail methods.
      * @var object
      */
-    var $mailer= null;
+    public $mailer= null;
     /**
      * A collection of all the current headers for the object.
      * @var array
      */
-    var $headers= array();
+    public $headers= array();
     /**
      * An array of address types: to, cc, bcc, reply-to
      * @var array
      */
-    var $addresses= array(
+    public $addresses= array(
         'to' => array(),
         'cc' => array(),
         'bcc' => array(),
@@ -101,18 +95,14 @@ class modMail {
      * An array of attached files
      * @var array
      */
-    var $files= array();
+    public $files= array();
 
-    /**#@+
+    /**
      * Constructs a new instance of the modMail class.
      *
      * {@inheritdoc}
      */
-    function modMail(& $modx, $attributes= array()) {
-        $this->_construct($modx, $attributes);
-    }
-    /** @ignore */
-    function __construct(& $modx, $attributes= array()) {
+    function __construct(modX &$modx, array $attributes= array()) {
         $this->modx= & $modx;
         if (!$this->modx->lexicon) {
             $this->modx->getService('lexicon','modLexicon');
@@ -122,7 +112,6 @@ class modMail {
             $this->attributes= $attributes;
         }
     }
-    /**#@-*/
 
     /**
      * Gets a reference to an attribute of the mail object.
@@ -131,7 +120,7 @@ class modMail {
      * @param string $key The attribute key.
      * @return mixed A reference to the attribute, or null if no attribute value is set for the key.
      */
-    function & get($key) {
+    public function & get($key) {
         $value= null;
         if (isset($this->attributes[$key])) {
             $value = & $this->attributes[$key];
@@ -152,7 +141,7 @@ class modMail {
      * @param string $key The key of the attribute to set.
      * @param mixed $value The value of the attribute.
      */
-    function set($key, $value) {
+    public function set($key, $value) {
         $this->attributes[$key]= $value;
     }
 
@@ -165,7 +154,7 @@ class modMail {
      * @param string $name An optional name for the addressee.
      * @return boolean Indicates if the address was set/unset successfully.
      */
-    function address($type, $email, $name= '') {
+    public function address($type, $email, $name= '') {
         $set= false;
         $type = strtolower($type);
         if (isset($this->addresses[$type])) {
@@ -187,7 +176,7 @@ class modMail {
      * @param string $header The HTTP header to send.
      * @return boolean True if the header is valid and is set.
      */
-    function header($header) {
+    public function header($header) {
         $set= false;
         $parsed= explode(':', $header, 2);
         if ($parsed && count($parsed) == 2) {
@@ -207,7 +196,7 @@ class modMail {
      * @param array $attributes Attributes to override any existing attributes before sending.
      * @return boolean Indicates if the email was sent successfully.
      */
-    function send($attributes= array()) {
+    public function send(array $attributes= array()) {
         if (is_array($attributes)) {
             while (list($attrKey, $attrVal) = each($attributes)) {
                 $this->set($attrKey, $attrVal);
@@ -222,7 +211,7 @@ class modMail {
      * @access public
      * @param array $attributes An optional array of attributes to apply after reset.
      */
-    function reset($attributes= null) {
+    public function reset($attributes= null) {
         $this->addresses= array(
             'to' => array(),
             'cc' => array(),
@@ -249,10 +238,7 @@ class modMail {
      * @access protected
      * @return boolean Indicates if the mailer class was instantiated successfully.
      */
-    function _getMailer() {
-        $this->modx->log(XPDO_LOG_LEVEL_ERROR, $this->modx->lexicon('mail_err_derive_getmailer'));
-        return false;
-    }
+    abstract protected function _getMailer();
 
     /**
      * Attach a file to the attachments queue.
@@ -260,7 +246,7 @@ class modMail {
      * @access public
      * @param string $file The absolute path to the file
      */
-    function attach($file) {
+    public function attach($file) {
         array_push($this->files,$file);
     }
 
@@ -269,7 +255,7 @@ class modMail {
      *
      * @access public
      */
-    function clearAttachments() {
+    public function clearAttachments() {
         $this->files = array();
     }
 }

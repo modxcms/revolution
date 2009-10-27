@@ -117,7 +117,7 @@ class modManagerRequest extends modRequest {
                 $activeUserTbl= $this->modx->getTableName('modActiveUser');
                 $sql= "REPLACE INTO {$activeUserTbl} (internalKey, username, lasthit, action, id, ip) values(" . $this->modx->getLoginUserID('mgr') . ", '{$_SESSION['mgrShortname']}', '{$lasthittime}', '{$a}', {$itemid}, '{$ip}')";
                 if (!$rs= $this->modx->exec($sql)) {
-                    $this->modx->log(XPDO_LOG_LEVEL_ERROR, 'Error logging active user information! SQL: ' . $sql . "\n" . print_r($this->modx->errorInfo(), 1));
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error logging active user information! SQL: ' . $sql . "\n" . print_r($this->modx->errorInfo(), 1));
                 }
             }
         }
@@ -193,7 +193,7 @@ class modManagerRequest extends modRequest {
      */
     function prepareResponse($options = array()) {
         if (!$this->modx->getResponse('modManagerResponse')) {
-            $this->modx->log(MODX_LOG_LEVEL_FATAL, 'Could not load response class.');
+            $this->modx->log(modX::LOG_LEVEL_FATAL, 'Could not load response class.');
         }
         $this->modx->response->outputContent($options);
     }

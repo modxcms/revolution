@@ -84,5 +84,3 @@ $xpdo_meta_map['modContentType']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modContentType']['aggregates']= array_merge($xpdo_meta_map['modContentType']['aggregates'], array_change_key_case($xpdo_meta_map['modContentType']['aggregates']));
-$xpdo_meta_map['modcontenttype']= & $xpdo_meta_map['modContentType'];

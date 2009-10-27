@@ -3,7 +3,7 @@
  * @package setup
  */
 $output= '';
-$mode= isset ($_POST['installmode']) ? intval($_POST['installmode']) : MODX_INSTALL_MODE_NEW;
+$mode= isset ($_POST['installmode']) ? intval($_POST['installmode']) : modInstall::MODE_NEW;
 /* validate database settings */
 require_once MODX_CORE_PATH . 'xpdo/xpdo.class.php';
 if (isset ($_REQUEST['search']) && $_REQUEST['search']) {

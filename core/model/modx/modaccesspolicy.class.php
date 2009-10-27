@@ -4,12 +4,4 @@
  *
  * @package modx
  */
-class modAccessPolicy extends xPDOSimpleObject {
-    function modAccessPolicy(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
-?>
+class modAccessPolicy extends xPDOSimpleObject {}

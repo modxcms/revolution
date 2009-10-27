@@ -31,27 +31,21 @@
  * @package setup
  */
 class modInstallConnector {
-
-    /**#@+
+    /**
      * Constructor for modInstallConnector object.
      *
      * @constructor
      * @param modInstall &$modInstall A reference to the modInstall object.
      */
-    function modInstallConnector(&$modInstall) {
-        $this->__construct($modInstall);
-    }
-    /** @ignore */
-    function __construct(&$modInstall) {
+    function __construct(modInstall &$modInstall) {
         $this->install =& $modInstall;
         $this->loadError();
     }
-    /**#@- */
 
     /**
      * Loads error processing tool
      */
-    function loadError() {
+    public function loadError() {
         require_once MODX_SETUP_PATH . 'includes/modinstalljsonerror.class.php';
         $this->error = new modInstallJSONError($this->install);
     }
@@ -59,8 +53,8 @@ class modInstallConnector {
     /**
      * Handles connector requests.
      */
-    function handle($action = '') {
-        if (!isset($_REQUEST['action'])) $this->error->failure('No processor specified!');
+    public function handle($action = '') {
+        if (empty($_REQUEST['action'])) $this->error->failure('No processor specified!');
         $this->action = $_REQUEST['action'];
 
         $f = MODX_SETUP_PATH . 'processors/' . $this->action . '.php';

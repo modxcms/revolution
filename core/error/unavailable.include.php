@@ -36,7 +36,7 @@ a {
 <body>
 <div class="message">
     <h1>503 Error</h1>
-    <p>Site temporarily unavailable.</p>
+    <p><?php echo $errorMessage ? $errorMessage : 'Site temporarily unavailable.'; ?></p>
 </div>
 </body>
 <?php

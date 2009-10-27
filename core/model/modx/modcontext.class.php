@@ -10,19 +10,16 @@
  * @package modx
  */
 class modContext extends modAccessibleObject {
-    var $config= null;
-    var $aliasMap= null;
-    var $resourceMap= null;
-    var $resourceListing= null;
-    var $documentListing= null;
-    var $documentMap= null;
-    var $eventMap= null;
-    var $pluginCache= null;
-    var $_cacheKey= '[contextKey]/context';
+    public $config= null;
+    public $aliasMap= null;
+    public $resourceMap= null;
+    public $resourceListing= null;
+    public $documentListing= null;
+    public $documentMap= null;
+    public $eventMap= null;
+    public $pluginCache= null;
+    protected $_cacheKey= '[contextKey]/context';
 
-    function modContext(& $xpdo) {
-        $this->__construct($xpdo);
-    }
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->documentListing= & $this->resourceListing;
@@ -40,7 +37,7 @@ class modContext extends modAccessibleObject {
      * and regenerated.
      * @return boolean Indicates if the context was successfully prepared.
      */
-    function prepare($regenerate= false) {
+    public function prepare($regenerate= false) {
         $prepared= false;
         if ($this->config === null || $regenerate) {
             if ($this->xpdo->getCacheManager()) {
@@ -67,7 +64,7 @@ class modContext extends modAccessibleObject {
      * @access public
      * @return string The cache filename.
      */
-    function getCacheKey() {
+    public function getCacheKey() {
         if ($this->get('key')) {
             $this->_cacheKey= str_replace('[contextKey]', $this->get('key'), $this->_cacheKey);
         } else {
@@ -81,7 +78,7 @@ class modContext extends modAccessibleObject {
      *
      * {@inheritdoc}
      */
-    function findPolicy($context = '') {
+    public function findPolicy($context = '') {
         $policy = array();
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (empty($this->_policies) || !isset($this->_policies[$context])) {
@@ -97,7 +94,7 @@ class modContext extends modAccessibleObject {
             );
             $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
             if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
+                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
                     $policy['modAccessContext'][$row['target']][] = array(
                         'principal' => $row['principal'],
                         'authority' => $row['authority'],
@@ -134,7 +131,7 @@ class modContext extends modAccessibleObject {
      * </pre>
      * @return string The URL for the resource.
      */
-    function makeUrl($id, $args = '', $scheme = -1) {
+    public function makeUrl($id, $args = '', $scheme = -1) {
         $url = '';
         $found = false;
         if ($id= intval($id)) {
@@ -155,7 +152,7 @@ class modContext extends modAccessibleObject {
                     $alias= array_search($id, $this->aliasMap);
                     if (!$alias) {
                         $alias= '';
-                        $this->xpdo->log(MODX_LOG_LEVEL_WARN, '`' . $id . '` was requested but no alias was located.');
+                        $this->xpdo->log(xPDO::LOG_LEVEL_WARN, '`' . $id . '` was requested but no alias was located.');
                     } else {
                         $found= true;
                     }
@@ -195,7 +192,7 @@ class modContext extends modAccessibleObject {
                 $host= '';
                 if ($scheme !== -1 && $scheme !== '') {
                     if ($scheme === 1 || $scheme === 0) {
-                        $https_port= isset ($config['https_port']) ? $config['https_port'] : 443;
+                        $https_port= $this->xpdo->getOption('https_port',$config,443);
                         $isSecure= ($_SERVER['SERVER_PORT'] == $https_port || (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'])=='on')) ? 1 : 0;
                         if ($scheme != $isSecure) {
                             $scheme = $isSecure ? 'http' : 'https';
@@ -219,7 +216,7 @@ class modContext extends modAccessibleObject {
             }
         }
         if ($this->xpdo->getDebug() === true) {
-            $this->xpdo->log(MODX_LOG_LEVEL_DEBUG, "modContext[" . $this->get('key') . "]->makeUrl({$id}) = {$url}");
+            $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "modContext[" . $this->get('key') . "]->makeUrl({$id}) = {$url}");
         }
         return $url;
     }

@@ -9,12 +9,11 @@
  * @package modx
  * @subpackage processors.browser.directory
  */
+if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (empty($_POST['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
-if (!isset($_POST['dir']) || $_POST['dir'] == '')
-	return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
 $d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
     ? $_POST['prependPath']
@@ -22,41 +21,20 @@ $d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['
 $directory = $d.$_POST['dir'];
 
 /* in case rootVisible is true */
-$directory = str_replace('root/','',$directory);
-$directory = str_replace('undefined/','',$directory);
+$directory = str_replace(array(
+    'root/',
+    'undefined/',
+),'',$directory);
 
 if (!is_dir($directory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
-
 if (!is_readable($directory) || !is_writable($directory))
 	return $modx->error->failure($modx->lexicon('file_folder_err_perms_remove'));
 
-if (!rmdirr($directory)) return $modx->error->failure($modx->lexicon('file_folder_err_remove'));
-
-return $modx->error->success();
-
-function rmdirr($dr) {
-	if (!is_writable($dr)) {
-		if (!@chmod($dr,0777)) {
-			return false;
-		}
-	}
-	$d = dir($dr);
-	if (!is_object($d)) return false;
-	while (false !== ($entry = $d->read())) {
-		if ($entry == '.' || $entry == '..') continue;
-		$entry = $dr.'/'.$entry;
-		if (is_dir($entry)) {
-			if (!rrmdir($entry)) return false;
-			continue;
-		}
-		if (!@unlink($entry)) {
-			$d->close();
-			return false;
-		}
-	}
-	$d->close();
-	rmdir($dr);
-	return true;
-}
+$success = $modx->cacheManager->deleteTree($directory,array(
+    'deleteTop' => true,
+    'skipDirs' => false,
+    'extensions' => '',
+));
+if (!$success) return $modx->error->failure($modx->lexicon('file_folder_err_remove'));
 
 return $modx->error->success();

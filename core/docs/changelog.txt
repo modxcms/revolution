@@ -2,7 +2,12 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODx Revolution 2.0.0-beta-4 ($LastChangedRevision$, $LastChangedDate$)
+MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
+====================================
+- Fixed locking
+- Lots of PHP5-only optimizations
+
+MODx Revolution 2.0.0-beta-4 (LastChangedRevision: 5880, LastChangedDate: 2009-10-19 09:04:47 -0500 (Mon, 19 Oct 2009))
 ====================================
 - If memory limit is lower than 24M, force to 128M if possible
 - Fixing setup text for memory limit checks.

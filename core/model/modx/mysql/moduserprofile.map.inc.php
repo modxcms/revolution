@@ -232,5 +232,3 @@ $xpdo_meta_map['modUserProfile']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modUserProfile']['aggregates']= array_merge($xpdo_meta_map['modUserProfile']['aggregates'], array_change_key_case($xpdo_meta_map['modUserProfile']['aggregates']));
-$xpdo_meta_map['moduserprofile']= & $xpdo_meta_map['modUserProfile'];

@@ -80,5 +80,3 @@ $xpdo_meta_map['modPlugin']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modPlugin']['composites']= array_merge($xpdo_meta_map['modPlugin']['composites'], array_change_key_case($xpdo_meta_map['modPlugin']['composites']));
-$xpdo_meta_map['modplugin']= & $xpdo_meta_map['modPlugin'];

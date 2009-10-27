@@ -23,4 +23,3 @@ $xpdo_meta_map['modAccessibleSimpleObject']= array (
     ),
   ),
 );
-$xpdo_meta_map['modaccessiblesimpleobject']= & $xpdo_meta_map['modAccessibleSimpleObject'];

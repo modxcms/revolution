@@ -35,34 +35,31 @@
  * @package modx
  * @subpackage error
  */
-class modInstallError {
+abstract class modInstallError {
     /**
     * @var array The array of errors
     */
-    var $errors;
+    public $errors;
     /**
     * @var string The error message to output.
     */
-    var $message;
+    public $message;
     /**
     * @var modX A reference to the $modx object.
     */
-    var $modx;
+    public $modx;
     /**
     * @var integer The total number of errors.
     */
-    var $total = 0;
+    public $total = 0;
     /**
      * @var boolean Indicates failure or success.
      */
-    var $status = false;
-    var $_objects = array();
+    public $status = false;
+    protected $_objects = array();
 
-    function modInstallError(& $modx, $message = '') {
-        $this->__construct($modx, $message);
-    }
-    function __construct(& $modx, $message = '') {
-        $this->modx = & $modx;
+    function __construct(&$modx, $message = '') {
+        $this->modx =& $modx;
         $this->message = $message;
         $this->errors = array ();
     }
@@ -72,8 +69,8 @@ class modInstallError {
      * @access public
      * @param xPDOObject $obj An xPDOObject to validate.
      */
-    function addObjectToValidate(&$obj) {
-        if (is_object($obj) && is_a($obj,'xPDOObject')) {
+    public function addObjectToValidate(&$obj) {
+        if (is_object($obj) && $obj instanceof xPDOObject) {
             $this->_objects[]= $obj;
         }
     }
@@ -87,7 +84,7 @@ class modInstallError {
      * add to the validation queue.
      * @return string The validation message returned.
      */
-    function checkValidation($objs= array()) {
+    public function checkValidation($objs= array()) {
         if (is_object($objs)) {
             $this->addObjectToValidate($objs);
         }
@@ -105,7 +102,7 @@ class modInstallError {
      * @access private
      * @return string The compiled validation message returned.
      */
-    function _validate() {
+    protected function _validate() {
         $s = '';
         foreach ($this->_objects as $obj) {
             if ($validator= $obj->getValidator()) {
@@ -128,7 +125,7 @@ class modInstallError {
      * @param object|array $object The object to send back to output.
      * @return string|object|array The transformed object data array.
      */
-    function process($message = '', $status = false, $object = null) {
+    public function process($message = '', $status = false, $object = null) {
         if ($status === true) {
             $s = $this->_validate();
             if ($s !== '') {
@@ -144,7 +141,7 @@ class modInstallError {
         $objarray = array ();
         if (is_array($object)) {
             $obj = reset($object);
-            if (is_object($obj) && is_a($obj, 'xPDOObject')) {
+            if (is_object($obj) && $obj instanceof xPDOObject) {
                 $this->total = count($object);
             }
             unset ($obj);
@@ -159,7 +156,7 @@ class modInstallError {
      * @param string $name The id of the field.
      * @param string $error The error message.
      */
-    function addField($name, $error) {
+    public function addField($name, $error) {
         $this->errors[] = array (
             'id' => $name,
             'msg' => $error
@@ -171,7 +168,7 @@ class modInstallError {
      *
      * @return array An array of errors for specific fields.
      */
-    function getFields() {
+    public function getFields() {
         $f = array ();
         foreach ($this->errors as $fi)
             $f[] = $fi['msg'];
@@ -184,7 +181,7 @@ class modInstallError {
      *
      * @return boolean True if there are errors or a message has been specified.
      */
-    function hasError() {
+    public function hasError() {
         return count($this->errors) > 0 || $this->message != '';
     }
 
@@ -195,7 +192,7 @@ class modInstallError {
      * @param string $message The error message to send.
      * @param object|array|string $object An object to send back to the output.
      */
-    function failure($message = '', $object = null) {}
+    abstract public function failure($message = '', $object = null);
 
     /**
      * Send a success error message.
@@ -205,7 +202,7 @@ class modInstallError {
      * @param object|array|string $object An object to send back to the output.
      * @param boolean $notxpdo If $object is not an xPDOObject, then set to true.
      */
-    function success($message = '', $object = null, $notxpdo = false) {}
+    abstract public function success($message = '', $object = null);
 
     /**
      * Converts an object or objects embedded in an array, to arrays.
@@ -216,7 +213,7 @@ class modInstallError {
      * @param array|object $object An array or object to process.
      * @return array Returns an array representation of the object(s).
      */
-    function toArray($object) {
+    public function toArray($object) {
         $array = array ();
         if (is_array($object)) {
             while (list ($key, $value) = each($object)) {
@@ -230,7 +227,7 @@ class modInstallError {
             }
         }
         elseif (is_object($object)) {
-            if (is_a($object, 'xPDOObject')) {
+            if ($object instanceof xPDOObject) {
                 $array = $this->toArray($object->toArray());
             } else {
                 $array = $this->toArray(get_object_vars($object));
@@ -239,4 +236,3 @@ class modInstallError {
         return $array;
     }
 }
-?>

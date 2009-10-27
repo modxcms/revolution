@@ -9,12 +9,4 @@
  * @abstract
  * @package modx
  */
-class modAccess extends xPDOSimpleObject {
-    function modAccess(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
-?>
+class modAccess extends xPDOSimpleObject {}

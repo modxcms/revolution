@@ -21,7 +21,7 @@ $modx= new modX();
 $modx->initialize('mgr');
 
 $cacheManager= $modx->getCacheManager();
-$modx->setLogLevel(MODX_LOG_LEVEL_ERROR);
+$modx->setLogLevel(xPDO::LOG_LEVEL_ERROR);
 $modx->setLogTarget('ECHO');
 
 

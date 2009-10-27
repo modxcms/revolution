@@ -134,11 +134,10 @@
 				{
 					$r = call_user_func($func, $m);
 				}
-				if (!is_a($r, 'xmlrpcresp'))
+				if (!($r instanceof xmlrpcresp))
 				{
 					error_log("XML-RPC: jsonrpc_server::execute: function $func registered as method handler does not return an xmlrpcresp object");
-					if (is_a($r, 'xmlrpcval'))
-					{
+					if ($r instanceof xmlrpcval) {
 						$r = new jsonrpcresp($r);
 					}
 					else
@@ -184,7 +183,7 @@
 					}
 				}
 				// the return type can be either an xmlrpcresp object or a plain php value...
-				if (!is_a($r, 'xmlrpcresp'))
+				if (!($r instanceof xmlrpcresp))
 				{
 					// what should we assume here about automatic encoding of datetimes
 					// and php classes instances???
@@ -192,7 +191,7 @@
 				}
 			}
 			// here $r is either an xmlrpcresp or jsonrpcresp
-			if (!is_a($r, 'jsonrpcresp'))
+			if (!($r instanceof jsonrpcresp))
 			{
 
 				// dirty trick: user has given us back an xmlrpc response,

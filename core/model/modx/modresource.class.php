@@ -12,12 +12,12 @@ class modResource extends modAccessibleSimpleObject {
      * result of processing cacheable tags within the raw source content.
      * @var string
      */
-    var $_content= '';
+    public $_content= '';
     /**
      * Represents the output the resource produces.
      * @var string
      */
-    var $_output= '';
+    public $_output= '';
     /**
      * The context the resource is requested from.
      *
@@ -25,26 +25,23 @@ class modResource extends modAccessibleSimpleObject {
      * primary context for the resource.
      * @var string
      */
-    var $_contextKey= null;
+    protected $_contextKey= null;
     /**
      * Indicates if the resource has already been processed.
      * @var boolean
      */
-    var $_processed= false;
+    protected $_processed= false;
     /**
      * The cache filename for the resource in the context.
      * @var string
      */
-    var $_cacheKey= null;
+    public $_cacheKey= null;
     /**
      * Indicates if the site cache should be refreshed when saving changes.
      * @var boolean
      */
-    var $_refreshCache= true;
+    protected $_refreshCache= true;
 
-    function modResource(& $xpdo) {
-        $this->__construct($xpdo);
-    }
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->_contextKey= isset ($this->xpdo->context) ? $this->xpdo->context->get('key') : 'web';
@@ -56,7 +53,7 @@ class modResource extends modAccessibleSimpleObject {
      *
      * @return string The processed cacheable content of a resource.
      */
-    function process() {
+    public function process() {
         if (!$this->get('cacheable') || !$this->_processed || !$this->_content) {
             $this->_content= '';
             $this->_output= '';
@@ -86,7 +83,7 @@ class modResource extends modAccessibleSimpleObject {
      * behavior of the method.
      * @return string The raw source content for the resource.
      */
-    function getContent($options = array()) {
+    public function getContent(array $options = array()) {
         $content = '';
         if (isset($options['content'])) {
             $content = $options['content'];
@@ -106,7 +103,7 @@ class modResource extends modAccessibleSimpleObject {
      * behavior of the method.
      * @return boolean True indicates the content was set.
      */
-    function setContent($content, $options = array()) {
+    public function setContent($content, array $options = array()) {
         return $this->set('content', $content);
     }
 
@@ -116,7 +113,7 @@ class modResource extends modAccessibleSimpleObject {
      * @access public
      * @deprecated 2.0
      */
-    function mergeKeywords() {
+    public function mergeKeywords() {
         if ($this->get('haskeywords')) {
             $keywords = implode(", ",$this->xpdo->getKeywords());
             $metas = "<meta name=\"keywords\" content=\"{$keywords}\" />\n";
@@ -130,7 +127,7 @@ class modResource extends modAccessibleSimpleObject {
      * @access public
      * @deprecated 2.0
      */
-    function mergeMetaTags() {
+    public function mergeMetaTags() {
         if ($this->get('hasmetatags')) {
             if ($tags = $this->xpdo->getMETATags()) {
                 foreach ($tags as $n=>$col) {
@@ -149,7 +146,7 @@ class modResource extends modAccessibleSimpleObject {
      *
      * @return string The cache key.
      */
-    function getCacheKey() {
+    public function getCacheKey() {
         $id = $this->get('id') ? (string) $this->get('id') : '0';
         $context = $this->_contextKey ? $this->_contextKey : 'web';
         if (strpos($this->_cacheKey, '[') !== false) {
@@ -170,9 +167,9 @@ class modResource extends modAccessibleSimpleObject {
      *
      * @todo Refactor to use the new ABAC security model.
      */
-    function getMany($class, $criteria= null, $cacheFlag= false) {
+    public function & getMany($alias, $criteria= null, $cacheFlag= false) {
         $collection= array ();
-        if ($class === 'TemplateVars' || $class === 'modTemplateVar' && ($criteria === null || strtolower($criteria) === 'all')) {
+        if ($alias === 'TemplateVars' || $alias === 'modTemplateVar' && ($criteria === null || strtolower($criteria) === 'all')) {
             $c = $this->xpdo->newQuery('modTemplateVar');
             $c->select('
                 DISTINCT modTemplateVar.*,
@@ -191,7 +188,7 @@ class modResource extends modAccessibleSimpleObject {
 
             $collection = $this->xpdo->getCollection('modTemplateVar', $c);
         } else {
-            $collection= parent :: getMany($class, $criteria);
+            $collection= parent :: getMany($alias, $criteria, $cacheFlag);
         }
         return $collection;
     }
@@ -206,7 +203,7 @@ class modResource extends modAccessibleSimpleObject {
      *  -contentType: Calls {@link modResource::addOne()} to sync contentType
      *  -content_type: Sets the contentType field appropriately
      */
-    function set($k, $v= null, $vType= '') {
+    public function set($k, $v= null, $vType= '') {
         $rt= false;
         switch ($k) {
             case 'alias' :
@@ -232,8 +229,7 @@ class modResource extends modAccessibleSimpleObject {
                 }
                 break;
         }
-        $rt= parent :: set($k, $v);
-        return $rt;
+        return parent :: set($k, $v, $vType);
     }
 
     /**
@@ -244,9 +240,9 @@ class modResource extends modAccessibleSimpleObject {
      * Adds legacy support for keeping the existing contentType field in sync
      * when a modContentType is set using this function.
      */
-    function addOne(& $obj, $alias= '') {
+    public function addOne(& $obj, $alias= '') {
         $added= parent :: addOne($obj, $alias);
-        if (is_a($obj, 'modContentType') && $alias= 'ContentType') {
+        if ($obj instanceof modContentType && $alias= 'ContentType') {
             $this->_fields['contentType']= $obj->get('mime_type');
             $this->_dirty['contentType']= 'contentType';
         }
@@ -262,7 +258,7 @@ class modResource extends modAccessibleSimpleObject {
      * @param string $alias A string to sanitize.
      * @return string The sanitized string.
      */
-    function cleanAlias($alias) {
+    public function cleanAlias($alias) {
         $charset = $this->xpdo->getOption('modx_charset',null,'UTF-8');
         if (!empty($charset) || strtoupper($charset) == 'UTF-8') {
             $alias= utf8_decode($alias);
@@ -287,13 +283,22 @@ class modResource extends modAccessibleSimpleObject {
      * If the modResource is new, the createdon and createdby fields will be set
      * using the current time and user authenticated in the context.
      */
-    function save($cacheFlag= null) {
+    public function save($cacheFlag= null) {
         if ($this->_new) {
             if (!$this->get('createdon')) $this->set('createdon', time());
-            if (!$this->get('createdby') && is_a($this->xpdo, 'modX')) $this->set('createdby', $this->xpdo->getLoginUserID());
+            if (!$this->get('createdby') && $this->xpdo instanceof modX) $this->set('createdby', $this->xpdo->getLoginUserID());
         }
         $rt= parent :: save($cacheFlag);
         return $rt;
+    }
+
+    /**
+     * Return whether or not the resource has been processed.
+     *
+     * @access public
+     */
+    public function getProcessed() {
+        return $this->_processed;
     }
 
     /**
@@ -304,9 +309,9 @@ class modResource extends modAccessibleSimpleObject {
      * @param array $options An array of options for the lock.
      * @return boolean True if the lock was successful.
      */
-    function addLock($user = 0, $options = array()) {
+    public function addLock($user = 0, array $options = array()) {
         $locked = false;
-        if (is_a($this->xpdo, 'modX')) {
+        if ($this->xpdo instanceof modX) {
             if (!$user) {
                 $user = $this->xpdo->user->get('id');
             }
@@ -328,9 +333,9 @@ class modResource extends modAccessibleSimpleObject {
      * @access public
      * @return int
      */
-    function getLock() {
+    public function getLock() {
         $lock = 0;
-        if (is_a($this->xpdo, 'modX')) {
+        if ($this->xpdo instanceof modX) {
             if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
                 $this->xpdo->registry->addRegister('locks', 'registry.modDbRegister', array('directory' => 'locks'));
                 $this->xpdo->registry->locks->connect();
@@ -350,9 +355,9 @@ class modResource extends modAccessibleSimpleObject {
      * @access public
      * @return boolean True if locks were removed.
      */
-    function removeLock($user = 0) {
+    public function removeLock($user = 0) {
         $removed = false;
-        if (is_a($this->xpdo, 'modX')) {
+        if ($this->xpdo instanceof modX) {
             if (!$user) {
                 $user = $this->xpdo->user->get('id');
             }
@@ -372,7 +377,7 @@ class modResource extends modAccessibleSimpleObject {
      *
      * {@inheritdoc}
      */
-    function findPolicy($context = '') {
+    public function findPolicy($context = '') {
         $policy = array();
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (empty($this->_policies) || !isset($this->_policies[$context])) {
@@ -392,7 +397,7 @@ class modResource extends modAccessibleSimpleObject {
             );
             $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
             if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
+                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
                     $policy['modAccessResourceGroup'][$row['target']][] = array(
                         'principal' => $row['principal'],
                         'authority' => $row['authority'],
@@ -414,7 +419,7 @@ class modResource extends modAccessibleSimpleObject {
      * @access public
      * @return integer The number of children of the Resource
      */
-    function hasChildren() {
+    public function hasChildren() {
         $c = $this->xpdo->newQuery('modResource');
         $c->where(array(
             'parent' => $this->get('id'),
@@ -430,7 +435,7 @@ class modResource extends modAccessibleSimpleObject {
      * @return null/mixed The value of the TV for the Resource, or null if the
      * TV is not found.
      */
-    function getTVValue($pk) {
+    public function getTVValue($pk) {
         if (is_string($pk)) {
             $pk = array('name' => $pk);
         }

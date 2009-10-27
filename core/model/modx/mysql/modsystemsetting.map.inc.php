@@ -85,5 +85,3 @@ $xpdo_meta_map['modSystemSetting']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modSystemSetting']['aggregates']= array_merge($xpdo_meta_map['modSystemSetting']['aggregates'], array_change_key_case($xpdo_meta_map['modSystemSetting']['aggregates']));
-$xpdo_meta_map['modsystemsetting']= & $xpdo_meta_map['modSystemSetting'];

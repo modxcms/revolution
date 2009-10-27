@@ -34,12 +34,6 @@ if (!defined('MODX_CORE_PATH')) {
 if (!defined('MODX_CONFIG_KEY')) {
     define('MODX_CONFIG_KEY', 'config');
 }
-if (!defined('MODX_SESSION_STATE_UNINITIALIZED')) {
-    define('MODX_SESSION_STATE_UNAVAILABLE',   -1);
-    define('MODX_SESSION_STATE_UNINITIALIZED',  0);
-    define('MODX_SESSION_STATE_INITIALIZED',    1);
-    define('MODX_SESSION_STATE_EXTERNAL',       2);
-}
 require_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php');
 
 /**
@@ -52,137 +46,147 @@ require_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php');
  * @package modx
  */
 class modX extends xPDO {
+    const LOG_LEVEL_FATAL = 0;
+    const LOG_LEVEL_ERROR = 1;
+    const LOG_LEVEL_WARN = 2;
+    const LOG_LEVEL_INFO = 3;
+    const LOG_LEVEL_DEBUG = 4;
+
+    const SESSION_STATE_UNAVAILABLE = -1;
+    const SESSION_STATE_UNINITIALIZED = 0;
+    const SESSION_STATE_INITIALIZED = 1;
+    const SESSION_STATE_EXTERNAL = 2;
     /**
      * @var modContext The Context represents a unique section of the site which
      * this modX instance is controlling.
      */
-    var $context= null;
+    public $context= null;
     /**
      * @var array An array of secondary contexts loaded on demand.
      */
-    var $contexts= array();
+    public $contexts= array();
     /**
      * @var modRequest Represents a web request and provides helper methods for
      * dealing with request parameters and other attributes of a request.
      */
-    var $request= null;
+    public $request= null;
     /**
      * @var modResponse Represents a web response, providing helper methods for
      * managing response header attributes and the body containing the content of
      * the response.
      */
-    var $response= null;
+    public $response= null;
     /**
      * @var modParser The modParser registered for this modX instance,
      * responsible for content tag parsing, and loaded only on demand.
      */
-    var $parser= null;
+    public $parser= null;
     /**
      * @var array An array of supplemental service classes for this modX instance.
      */
-    var $services= array ();
+    public $services= array ();
     /**
      * @var array A listing of site Resources and Context-specific meta data.
      */
-    var $resourceListing= null;
+    public $resourceListing= null;
     /**
      * @var array A hierarchy map of Resources.
      */
-    var $resourceMap= null;
+    public $resourceMap= null;
     /**
      * @var array A lookup listing of Resource alias values and associated
      * Resource Ids
      */
-    var $aliasMap= null;
+    public $aliasMap= null;
     /**
      * @var modEvent The current event being handled by modX.
      */
-    var $event= null;
+    public $event= null;
     /**
      * @var array A map of elements registered to specific events.
      */
-    var $eventMap= null;
+    public $eventMap= null;
     /**
      * @var array A map of actions registered to the manager interface.
      */
-    var $actionMap= null;
+    public $actionMap= null;
     /**
      * @var array A map of already processed Elements.
      */
-    var $elementCache= array ();
+    public $elementCache= array ();
     /**
      * @var array An array of key=> value pairs that can be used by any Resource
      * or Element.
      */
-    var $placeholders= array ();
+    public $placeholders= array ();
     /**
      * @var modResource An instance of the current modResource controlling the
      * request.
      */
-    var $resource= null;
+    public $resource= null;
     /**
      * @var string The preferred Culture key for the current request.
      */
-    var $cultureKey= 'en';
+    public $cultureKey= 'en';
     /**
      * @var array Represents a localized dictionary of common words and phrases.
      */
-    var $lexicon= null;
+    public $lexicon= null;
     /**
      * @var modUser The current user object, if one is authenticated for the
      * current request and context.
      */
-    var $user= null;
+    public $user= null;
     /**
      * @var array Represents the modContentType instances that can be delivered
      * by this modX deployment.
      */
-    var $contentTypes= null;
+    public $contentTypes= null;
     /**
      * @var mixed The resource id or alias being requested.
      */
-    var $resourceIdentifier= null;
+    public $resourceIdentifier= null;
     /**
      * @var string The method to use to locate the Resource, 'id' or 'alias'.
      */
-    var $resourceMethod= null;
+    public $resourceMethod= null;
     /**
      * @var boolean Indicates if the resource was generated during this request.
      */
-    var $resourceGenerated= true;
+    public $resourceGenerated= true;
     /**
      * @var array Version information for this MODx deployment.
      */
-    var $version= null;
+    public $version= null;
     /**
      * @var boolean Indicates if modX has been successfully initialized for a
      * modContext.
      */
-    var $_initialized= false;
+    protected $_initialized= false;
     /**
      * @var array An array of javascript content to be inserted into the HEAD
      * of an HTML resource.
      */
-    var $sjscripts= array ();
+    public $sjscripts= array ();
     /**
      * @var array An array of javascript content to be inserted into the BODY
      * of an HTML resource.
      */
-    var $jscripts= array ();
-    var $loadedjscripts= array ();
+    public $jscripts= array ();
+    public $loadedjscripts= array ();
     /**
      * @var string Stores the virtual path for a request to MODx if the
      * friendly_alias_paths option is enabled.
      */
-    var $virtualDir;
+    public $virtualDir;
     /**
      * @var object An error_handler for the modX instance.
      */
-    var $errorHandler= null;
+    public $errorHandler= null;
     /**
      * @var array An array of regex patterns regulary cleansed from content.
      */
-    var $sanitizePatterns = array(
+    public $sanitizePatterns = array(
         'scripts'   => '@<script[^>]*?>.*?</script>@si',
         'entities'  => '@&#(\d+);@e',
         'tags'      => '@\[\[(.*?)\]\]@si',
@@ -190,44 +194,44 @@ class modX extends xPDO {
     /**
      * @var integer An integer representing the session state of modX.
      */
-    var $_sessionState= MODX_SESSION_STATE_UNINITIALIZED;
+    protected $_sessionState= modX::SESSION_STATE_UNINITIALIZED;
     /**
      * @var array A config array that stores the bootstrap settings.
      */
-    var $_config= null;
+    protected $_config= null;
     /**
      * @var array A config array that stores the system-wide settings.
      */
-    var $_systemConfig= null;
+    public $_systemConfig= null;
     /**
      * @var array A config array that stores the user settings.
      */
-    var $_userConfig= array();
-    var $_logSequence= 0;
+    public $_userConfig= array();
+    protected $_logSequence= 0;
 
     /**
      * @var DBAPI An instance of the DBAPI helper class.
      * @deprecated Aug 28, 2006 For legacy component support only; use xPDO
      * methods inherited by modX class instead. To be removed in 2.1.
      */
-    var $db= null;
+    public $db= null;
 
-    var $pluginCache= array ();
+    public $pluginCache= array ();
 
     /**#@+
      * @deprecated 2006-09-15 To be removed in 2.1
      */
-    var $Event= null;
-    var $documentMap= null;
-    var $documentListing= null;
-    var $documentIdentifier= null;
-    var $documentMethod= null;
-    var $documentContent= null;
-    var $documentOutput= null;
-    var $documentObject= null;
-    var $documentGenerated= false;
-    var $stopOnNotice= false;
-    var $dumpSQL= false;
+    public $Event= null;
+    public $documentMap= null;
+    public $documentListing= null;
+    public $documentIdentifier= null;
+    public $documentMethod= null;
+    public $documentContent= null;
+    public $documentOutput= null;
+    public $documentObject= null;
+    public $documentGenerated= false;
+    public $stopOnNotice= false;
+    public $dumpSQL= false;
     /**#@-*/
 
     /**
@@ -235,7 +239,7 @@ class modX extends xPDO {
      *
      * @static
      */
-    function protect() {
+    public static function protect() {
         if (isset ($_SERVER['QUERY_STRING']) && strpos(urldecode($_SERVER['QUERY_STRING']), chr(0)) !== false) die();
         if (@ ini_get('register_globals') && isset ($_REQUEST)) {
             while (list($key, $value)= each($_REQUEST)) {
@@ -260,7 +264,7 @@ class modX extends xPDO {
      * target contains values that are arrays.
      * @return array The sanitized array.
      */
-    function sanitize(& $target, $patterns= array(), $depth= 3) {
+    public function sanitize(array &$target, array $patterns= array(), $depth= 3) {
         while (list($key, $value)= each($target)) {
             if (is_array($value) && $depth > 0) {
                 modX :: sanitize($value, $patterns, $depth--);
@@ -277,10 +281,7 @@ class modX extends xPDO {
         return $target;
     }
 
-    function modX($configPath= '', $options = array()) {
-        $this->__construct($configPath, $options);
-    }
-    function __construct($configPath= '', $options = array()) {
+    function __construct($configPath= '', array $options = array()) {
         global $database_type, $database_server, $dbase, $database_user,
                $database_password, $database_connection_charset, $table_prefix;
         modX :: protect();
@@ -292,14 +293,14 @@ class modX extends xPDO {
             if (MODX_CONFIG_KEY !== 'config') $cachePath .= MODX_CONFIG_KEY . '/';
             $options = array_merge(
                 array (
-                    XPDO_OPT_CACHE_PATH => $cachePath,
-                    XPDO_OPT_TABLE_PREFIX => $table_prefix,
-                    XPDO_OPT_HYDRATE_FIELDS => true,
-                    XPDO_OPT_HYDRATE_RELATED_OBJECTS => true,
-                    XPDO_OPT_HYDRATE_ADHOC_FIELDS => true,
-                    XPDO_OPT_LOADER_CLASSES => array('modAccessibleObject'),
-                    XPDO_OPT_VALIDATOR_CLASS => 'validation.modValidator',
-                    XPDO_OPT_VALIDATE_ON_SAVE => true,
+                    xPDO::OPT_CACHE_PATH => $cachePath,
+                    xPDO::OPT_TABLE_PREFIX => $table_prefix,
+                    xPDO::OPT_HYDRATE_FIELDS => true,
+                    xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
+                    xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
+                    xPDO::OPT_LOADER_CLASSES => array('modAccessibleObject'),
+                    xPDO::OPT_VALIDATOR_CLASS => 'validation.modValidator',
+                    xPDO::OPT_VALIDATE_ON_SAVE => true,
                     'cache_system_settings' => true
                 ),
                 $options
@@ -310,9 +311,9 @@ class modX extends xPDO {
                 $database_password,
                 $options,
                 array (
-                    PDO_ATTR_ERRMODE => PDO_ERRMODE_SILENT,
-                    PDO_ATTR_PERSISTENT => false,
-                    PDO_MYSQL_ATTR_USE_BUFFERED_QUERY => true
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
+                    PDO::ATTR_PERSISTENT => false,
+                    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
                 )
             );
             $this->setPackage('modx', MODX_CORE_PATH . 'model/', $table_prefix);
@@ -333,7 +334,7 @@ class modX extends xPDO {
      * @param string Indicates the context to initialize.
      * @return void
      */
-    function initialize($contextKey= 'web') {
+    public function initialize($contextKey= 'web') {
         if (!$this->_initialized) {
             if (!$this->startTime) {
                 $mtime= microtime();
@@ -391,7 +392,7 @@ class modX extends xPDO {
      * encountering PHP errors of type E_NOTICE.
      * @return boolean|int The previous value.
      */
-    function setDebug($debug= true, $stopOnNotice= false) {
+    public function setDebug($debug= true, $stopOnNotice= false) {
         $oldValue= $this->getDebug();
         if ($debug === true) {
             error_reporting(E_ALL);
@@ -412,7 +413,7 @@ class modX extends xPDO {
      *
      * @return object A modCacheManager registered for this modX instance.
      */
-    function getCacheManager() {
+    public function getCacheManager() {
         if ($this->cacheManager === null) {
             if ($this->loadClass('cache.xPDOCacheManager', XPDO_CORE_PATH, true, true)) {
                 $cacheManagerClass= $this->getOption('modCacheManager.class', array(), 'modCacheManager');
@@ -436,7 +437,7 @@ class modX extends xPDO {
      * class constructor.
      * @return object The service class instance or null if it could not be loaded.
      */
-    function getService($name, $class= '', $path= '', $params= array ()) {
+    public function getService($name, $class= '', $path= '', $params= array ()) {
         $service= null;
         if (!isset ($this->services[$name]) || !is_object($this->services[$name])) {
             if (empty ($class) && isset ($this->config[$name . '.class'])) {
@@ -456,9 +457,9 @@ class modX extends xPDO {
             $service= & $this->services[$name];
         } else {
             if ($this->getDebug() === true) {
-                $this->log(MODX_LOG_LEVEL_DEBUG, "Problem getting service {$name}, instance of class {$class}, from path {$path}, with params " . print_r($params, true));
+                $this->log(modX::LOG_LEVEL_DEBUG, "Problem getting service {$name}, instance of class {$class}, from path {$path}, with params " . print_r($params, true));
             } else {
-                $this->log(MODX_LOG_LEVEL_ERROR, "Problem getting service {$name}, instance of class {$class}, from path {$path}");
+                $this->log(modX::LOG_LEVEL_ERROR, "Problem getting service {$name}, instance of class {$class}, from path {$path}");
             }
         }
         return $service;
@@ -473,7 +474,7 @@ class modX extends xPDO {
      *
      * @return object The modParser for this modX instance.
      */
-    function getParser() {
+    public function getParser() {
         return $this->getService('parser', 'modParser');
     }
 
@@ -484,7 +485,7 @@ class modX extends xPDO {
      * @param integer $height How many levels max to search for parents (default 10).
      * @return array An array of all the parent resource ids for the specified resource.
      */
-    function getParentIds($id= null, $height= 10) {
+    public function getParentIds($id= null, $height= 10) {
         $parentId= 0;
         $parents= array ();
         if ($id && $height > 0) {
@@ -509,14 +510,14 @@ class modX extends xPDO {
      * @param integer $depth How many levels max to search for children (default 10).
      * @return array An array of all the child resource ids for the specified resource.
      */
-    function getChildIds($id= null, $depth= 10) {
+    public function getChildIds($id= null, $depth= 10) {
         $children= array ();
         if ($id !== null && intval($depth) >= 1) {
             $id= intval($id);
             if (isset ($this->resourceMap["{$id}"])) {
                 if ($children= $this->resourceMap["{$id}"]) {
                     foreach ($children as $child) {
-                    	$processDepth = $depth - 1;
+                        $processDepth = $depth - 1;
                         if ($c= $this->getChildIds($child, $processDepth)) {
                             $children= array_merge($children, $c);
                         }
@@ -535,7 +536,7 @@ class modX extends xPDO {
      * @param int $depth The maximum depth to build the tree (default 10).
      * @return array An array containing the tree structure.
      */
-    function getTree($id= null, $depth= 10) {
+    public function getTree($id= null, $depth= 10) {
         $tree= array ();
         if ($id !== null) {
             if (is_array ($id)) {
@@ -563,7 +564,7 @@ class modX extends xPDO {
      * placeholder.
      * @param mixed $value The value to set the placeholder to.
      */
-    function setPlaceholder($key, $value) {
+    public function setPlaceholder($key, $value) {
         if (is_string($key)) {
             $this->placeholders["{$key}"]= $value;
         }
@@ -583,7 +584,7 @@ class modX extends xPDO {
      * @param array|object $placeholders An array of values or object to set as placeholders.
      * @param string $namespace A namespace prefix to prepend to each placeholder key.
      */
-    function setPlaceholders($placeholders, $namespace= '') {
+    public function setPlaceholders($placeholders, $namespace= '') {
         $this->toPlaceholders($placeholders, $namespace, '');
     }
 
@@ -598,9 +599,9 @@ class modX extends xPDO {
      * @param string $separator A separator to place in between the prefixes and keys. Default is a
      * dot or period: '.'.
      */
-    function toPlaceholders($subject, $prefix= '', $separator= '.') {
+    public function toPlaceholders($subject, $prefix= '', $separator= '.') {
         if (is_object($subject)) {
-            if (is_a($subject, 'xPDOObject')) {
+            if ($subject instanceof xPDOObject) {
                 $subject= $subject->toArray();
             } else {
                 $subject= get_object_vars($subject);
@@ -623,7 +624,7 @@ class modX extends xPDO {
      * @param string $separator A separator placed in between the prefix and the key. Default is a
      * dot or period: '.'.
      */
-    function toPlaceholder($key, $value, $prefix= '', $separator= '.') {
+    public function toPlaceholder($key, $value, $prefix= '', $separator= '.') {
         if (!empty($prefix) && !empty($separator)) {
             $prefix .= $separator;
         }
@@ -640,7 +641,7 @@ class modX extends xPDO {
      * @param string $key The key of the placeholder to a return a value from.
      * @return mixed The value of the requested placeholder, or an empty string if not located.
      */
-    function getPlaceholder($key) {
+    public function getPlaceholder($key) {
         $placeholder= null;
         if (is_string($key) && array_key_exists($key, $this->placeholders)) {
             $placeholder= & $this->placeholders["{$key}"];
@@ -653,7 +654,7 @@ class modX extends xPDO {
      *
      * @param string $key The key of the placeholder to unset.
      */
-    function unsetPlaceholder($key) {
+    public function unsetPlaceholder($key) {
         if (is_string($key) && array_key_exists($key, $this->placeholders)) {
             unset($this->placeholders[$key]);
         }
@@ -665,7 +666,7 @@ class modX extends xPDO {
      * @param string|array $keys A string prefix or an array of keys indicating
      * the placeholders to unset.
      */
-    function unsetPlaceholders($keys) {
+    public function unsetPlaceholders($keys) {
         if (is_array($keys)) {
             foreach ($keys as $key) {
                 if (is_string($key)) $this->unsetPlaceholder($key);
@@ -697,7 +698,7 @@ class modX extends xPDO {
      * </pre>
      * @return string The URL for the resource.
      */
-    function makeUrl($id, $context= '', $args= '', $scheme= -1) {
+    public function makeUrl($id, $context= '', $args= '', $scheme= -1) {
         $url= '';
         if ($validid = intval($id)) {
             $id = $validid;
@@ -708,7 +709,7 @@ class modX extends xPDO {
                 $ctx= null;
                 if ($context == '') {
                     if ($results = $this->query("SELECT `context_key` FROM " . $this->getTableName('modResource') . " WHERE `id` = {$id}")) {
-                        $contexts= $results->fetchAll(PDO_FETCH_COLUMN);
+                        $contexts= $results->fetchAll(PDO::FETCH_COLUMN);
                         if ($contextKey = reset($contexts)) {
                             $ctx = $this->getContext($contextKey);
                         }
@@ -725,7 +726,7 @@ class modX extends xPDO {
                 $url= preg_replace("/&(?!amp;)/","&amp;", $url);
             }
         } else {
-            $this->log(MODX_LOG_LEVEL_ERROR, '`' . $id . '` is not a valid integer and may not be passed to makeUrl()');
+            $this->log(modX::LOG_LEVEL_ERROR, '`' . $id . '` is not a valid integer and may not be passed to makeUrl()');
         }
         return $url;
     }
@@ -736,7 +737,7 @@ class modX extends xPDO {
      * @param string $type The type of error to present.
      * @param array $options An array of options to provide for the error file.
      */
-    function sendError($type = '', $options = array()) {
+    public function sendError($type = '', $options = array()) {
         if (!is_string($type) || empty($type)) $type = $this->getOption('error_type', $options, 'unavailable');
         while (@ob_end_clean()) {}
         if (file_exists(MODX_CORE_PATH . "error/{$type}.include.php")) {
@@ -763,9 +764,9 @@ class modX extends xPDO {
      * @param integer $count_attempts The number of times to attempt redirection.
      * @param string $type The type of redirection to attempt.
      */
-    function sendRedirect($url, $count_attempts= 0, $type= '') {
+    public function sendRedirect($url, $count_attempts= 0, $type= '') {
         if (!$this->getResponse()) {
-            $this->log(MODX_LOG_LEVEL_FATAL, "Could not load response class.");
+            $this->log(modX::LOG_LEVEL_FATAL, "Could not load response class.");
         }
         $this->response->sendRedirect($url, $count_attempts, $type);
     }
@@ -776,9 +777,9 @@ class modX extends xPDO {
      * @param integer $id The resource identifier.
      * @param string $options An array of options for the process.
      */
-    function sendForward($id, $options = null) {
+    public function sendForward($id, $options = null) {
         if (!$this->getRequest()) {
-            $this->log(MODX_LOG_LEVEL_FATAL, "Could not load request class.");
+            $this->log(modX::LOG_LEVEL_FATAL, "Could not load request class.");
         }
         $idInt = intval($id);
         if (is_string($options) && !empty($options)) {
@@ -818,7 +819,7 @@ class modX extends xPDO {
      * @param array $options An array of options to provide for the OnPageNotFound event and error
      * page.
      */
-    function sendErrorPage($options = null) {
+    public function sendErrorPage($options = null) {
         if (!is_array($options)) $options = array();
         $options= array_merge(
             array(
@@ -842,7 +843,7 @@ class modX extends xPDO {
      * @param array $options An array of options to provide for the OnPageUnauthorized
      * event and unauthorized page.
      */
-    function sendUnauthorizedPage($options = null) {
+    public function sendUnauthorizedPage($options = null) {
         if (!is_array($options)) $options = array();
         $options= array_merge(
             array(
@@ -864,7 +865,7 @@ class modX extends xPDO {
      * @param string $contextKey An optional context to get the user from.
      * @return modUser The user object authenticated for the request.
      */
-    function getUser($contextKey= '') {
+    public function getUser($contextKey= '') {
         if ($contextKey == '') {
             if ($this->context !== null) {
                 $contextKey= $this->context->get('key');
@@ -923,7 +924,7 @@ class modX extends xPDO {
      * by default.
      * @return unknown
      */
-    function getAuthenticatedUser($contextKey= '') {
+    public function getAuthenticatedUser($contextKey= '') {
         $user= null;
         if ($contextKey == '') {
             if ($this->context !== null) {
@@ -945,7 +946,7 @@ class modX extends xPDO {
      * @param string $sessionContext The context to test for a session key in.
      * @return boolean True if the user is valid in the context specified.
      */
-    function checkSession($sessionContext= 'web') {
+    public function checkSession($sessionContext= 'web') {
         $hasSession = false;
         if ($this->user !== null) {
             $hasSession = $this->user->hasSessionContext($sessionContext);
@@ -958,7 +959,7 @@ class modX extends xPDO {
      *
      * @return array The version data loaded from the config version file.
      */
-    function getVersionData() {
+    public function getVersionData() {
         if ($this->version === null) {
             $this->version= @ include_once MODX_CORE_PATH . "docs/version.inc.php";
         }
@@ -970,12 +971,12 @@ class modX extends xPDO {
      *
      * @return array An associative array of configuration key/values
      */
-    function reloadConfig() {
+    public function reloadConfig() {
         $cacheManager= $this->getCacheManager();
         $cacheManager->clearCache();
 
         if (!$this->_loadConfig()) {
-            $this->log(MODX_LOG_LEVEL_ERROR, "Could not reload core MODx configuration!");
+            $this->log(modX::LOG_LEVEL_ERROR, 'Could not reload core MODx configuration!');
         }
         return $this->config;
     }
@@ -985,7 +986,7 @@ class modX extends xPDO {
      *
      * @return array An associate array of configuration key/values
      */
-    function getConfig() {
+    public function getConfig() {
         if (!$this->_initialized || !is_array($this->config) || empty ($this->config)) {
             if (!isset ($this->config['base_url']))
                 $this->config['base_url']= MODX_BASE_URL;
@@ -1024,7 +1025,7 @@ class modX extends xPDO {
 
             $this->_config= $this->config;
             if (!$this->_loadConfig()) {
-                $this->log(MODX_LOG_LEVEL_FATAL, "Could not load core MODx configuration!");
+                $this->log(modX::LOG_LEVEL_FATAL, "Could not load core MODx configuration!");
                 return null;
             }
         }
@@ -1035,7 +1036,7 @@ class modX extends xPDO {
      * Alias for getConfig().
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getSettings() {
+    public function getSettings() {
         $this->getConfig();
         return $this->config;
     }
@@ -1045,7 +1046,7 @@ class modX extends xPDO {
      *
      * @return mixed The result of the request handler.
      */
-    function handleRequest() {
+    public function handleRequest() {
         if ($this->getRequest()) {
             return $this->request->handleRequest();
         }
@@ -1062,13 +1063,13 @@ class modX extends xPDO {
      * @return boolean Returns true if a valid request handler object was
      * loaded on this or any previous call to the function, false otherwise.
      */
-    function getRequest($class= 'modRequest', $path= '') {
-        if ($this->request === null || !is_a($this->request, 'modRequest')) {
+    public function getRequest($class= 'modRequest', $path= '') {
+        if ($this->request === null || !($this->request instanceof modRequest)) {
             $requestClass = $this->getOption('modRequest.class',$this->config,$class);
             if ($className= $this->loadClass($requestClass, $path, !empty($path), true))
                 $this->request= new $className ($this);
         }
-        return is_object($this->request) && is_a($this->request, 'modRequest');
+        return is_object($this->request) && $this->request instanceof modRequest;
     }
 
     /**
@@ -1082,13 +1083,13 @@ class modX extends xPDO {
      * @return boolean Returns true if a valid response handler object was
      * loaded on this or any previous call to the function, false otherwise.
      */
-    function getResponse($class= 'modResponse', $path= '') {
+    public function getResponse($class= 'modResponse', $path= '') {
         $responseClass= $this->getOption('modResponse.class',$this->config,$class);
         $className= $this->loadClass($responseClass, $path, !empty($path), true);
-        if ($this->response === null || !is_a($this->response, $className)) {
+        if ($this->response === null || !($this->response instanceof $className)) {
             if ($className) $this->response= new $className ($this);
         }
-        return is_a($this->response, $className);
+        return $this->response instanceof $className;
     }
 
     /**
@@ -1097,7 +1098,7 @@ class modX extends xPDO {
      * @param string $src The CSS to be injected before the closing HEAD tag in
      * an HTML response.
      */
-    function regClientCSS($src) {
+    public function regClientCSS($src) {
         if (isset ($this->loadedjscripts[$src]) && $this->loadedjscripts[$src]) {
             return '';
         }
@@ -1117,7 +1118,7 @@ class modX extends xPDO {
      * @param boolean $plaintext Optional param to treat the $src as plaintext
      * rather than assuming it is JavaScript.
      */
-    function regClientStartupScript($src, $plaintext= false) {
+    public function regClientStartupScript($src, $plaintext= false) {
         if (!empty ($src) && !array_key_exists($src, $this->loadedjscripts)) {
             if (isset ($this->loadedjscripts[$src]))
                 return '';
@@ -1140,7 +1141,7 @@ class modX extends xPDO {
      * @param boolean $plaintext Optional param to treat the $src as plaintext
      * rather than assuming it is JavaScript.
      */
-    function regClientScript($src, $plaintext= false) {
+    public function regClientScript($src, $plaintext= false) {
         if (isset ($this->loadedjscripts[$src]))
             return '';
         $this->loadedjscripts[$src]= true;
@@ -1158,7 +1159,7 @@ class modX extends xPDO {
      *
      * @param string $html The HTML to be injected.
      */
-    function regClientStartupHTMLBlock($html) {
+    public function regClientStartupHTMLBlock($html) {
         return $this->regClientStartupScript($html, true);
     }
 
@@ -1167,7 +1168,7 @@ class modX extends xPDO {
      *
      * @param string $html The HTML to be injected.
      */
-    function regClientHTMLBlock($html) {
+    public function regClientHTMLBlock($html) {
         return $this->regClientScript($html, true);
     }
 
@@ -1177,7 +1178,7 @@ class modX extends xPDO {
      * @access public
      * @return string The parsed HTML of the client scripts.
      */
-    function getRegisteredClientScripts() {
+    public function getRegisteredClientScripts() {
         $string= '';
         if (is_array($this->jscripts)) {
             $string= implode("\n",$this->jscripts);
@@ -1191,7 +1192,7 @@ class modX extends xPDO {
      * @access public
      * @return string The parsed HTML of the startup scripts.
      */
-    function getRegisteredClientStartupScripts() {
+    public function getRegisteredClientStartupScripts() {
         $string= '';
         if (is_array ($this->sjscripts)) {
             $string= implode("\n", $this->sjscripts);
@@ -1207,9 +1208,9 @@ class modX extends xPDO {
      * @return array An associative array containing all the document data.
      * @deprecated 0.9.7 - Jan 18, 2007
      */
-    function getDocumentObject($method, $identifier) {
+    public function getDocumentObject($method, $identifier) {
         if (!$this->getRequest()) {
-            $this->log(MODX_LOG_LEVEL_FATAL, 'Could not load request class.');
+            $this->log(modX::LOG_LEVEL_FATAL, 'Could not load request class.');
         }
         $this->resource= $this->request->getResource($method, $identifier);
         $documentObject= & $this->documentObject;
@@ -1224,13 +1225,13 @@ class modX extends xPDO {
      * @param array $params Optional params provided to the elements registered with an event.
      * @todo refactor this completely, yuck!!
      */
-    function invokeEvent($eventName, $params= array ()) {
+    public function invokeEvent($eventName, array $params= array ()) {
         if (!$eventName)
             return false;
         if ($this->eventMap === null)
             $this->_initEventMap($this->context->get('key'));
         if (!isset ($this->eventMap[$eventName])) {
-            $this->log(MODX_LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
+            $this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
             return false;
         }
         $results= array ();
@@ -1239,7 +1240,7 @@ class modX extends xPDO {
             foreach ($this->eventMap[$eventName] as $pluginId => $pluginPropset) {
                 $plugin= null;
                 $this->Event= & $this->event;
-                $this->event->_resetEventObject();
+                $this->event->resetEventObject();
                 $this->event->name= $eventName;
                 if (isset ($this->pluginCache[$pluginId])) {
                     $plugin= $this->newObject('modPlugin');
@@ -1258,9 +1259,9 @@ class modX extends xPDO {
                     $msg= $plugin->process($params);
                     $results[]= $this->event->_output;
                     if ($msg && is_string($msg)) {
-                        $this->log(MODX_LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);
+                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);
                     } elseif ($msg === false) {
-                        $this->log(MODX_LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin failed!');
+                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin failed!');
                     }
                     $this->event->activePlugin= '';
                     $this->event->propertySet= '';
@@ -1286,7 +1287,7 @@ class modX extends xPDO {
      * @param array $options An array of options.
      * @return mixed $result The result of the processor.
      */
-    function executeProcessor($options) {
+    public function executeProcessor($options) {
         $result = null;
         if (is_array($options) && !empty($options) && isset($options['action']) && $this->getRequest()) {
             $processor = isset($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
@@ -1309,7 +1310,7 @@ class modX extends xPDO {
      * the current user ID from a different context than the current.
      * @return string The ID of the current user.
      */
-    function getLoginUserID($context= '') {
+    public function getLoginUserID($context= '') {
         if ($context && isset ($_SESSION[$context . 'Validated'])) {
             return $_SESSION[$context . 'InternalKey'];
         }
@@ -1328,7 +1329,7 @@ class modX extends xPDO {
      * the username from a different context than the current.
      * @return string The username of the current user.
      */
-    function getLoginUserName($context= '') {
+    public function getLoginUserName($context= '') {
         if ($context && isset ($_SESSION[$context . 'Validated'])) {
             return $_SESSION[$context . 'Shortname'];
         }
@@ -1346,7 +1347,7 @@ class modX extends xPDO {
      * @deprecated 2007-09-17 To be removed in 1.0.
      * @return string 'web', 'manager' or an empty string.
      */
-    function getLoginUserType() {
+    public function getLoginUserType() {
         if ($this->isFrontend() && isset ($_SESSION['webValidated'])) {
             return 'web';
         }
@@ -1358,13 +1359,23 @@ class modX extends xPDO {
     }
 
     /**
+     * Returns whether modX instance has been initialized or not.
+     *
+     * @access public
+     * @return boolean
+     */
+    public function isInitialized() {
+        return $this->_initialized;
+    }
+
+    /**
      * Determines if the current webuser is a member of the specified webgroups.
      *
      * @param array $groupNames An array of groups to check against.
      * @return boolean True if the user is a member of any one of the supplied
      * group names, false otherwise.
      */
-    function isMemberOfWebGroup($groupNames= array ()) {
+    public function isMemberOfWebGroup(array $groupNames= array ()) {
         if (!is_array($groupNames))
             return false;
         // check cache
@@ -1396,7 +1407,7 @@ class modX extends xPDO {
      * Get persistent data from a specific document.
      * @deprecated 2007-09-17 To be removed in 2.1.
      */
-    function getDocument($id=0,$fields="*",$published=1, $deleted=0) {
+    public function getDocument($id=0,$fields="*",$published=1, $deleted=0) {
         if($id==0) {
             return false;
         } else {
@@ -1414,7 +1425,7 @@ class modX extends xPDO {
      * Get persistent data from a collection of specified documents.
      * @deprecated 2008-10-10 To be removed in 2.1.
      */
-    function getDocuments($ids=array(), $published=1, $deleted=0, $fields="*", $where='', $sort="menuindex", $dir="ASC", $limit="") {
+    public function getDocuments(array $ids=array(), $published=1, $deleted=0, $fields="*", $where='', $sort="menuindex", $dir="ASC", $limit="") {
         $collection = array();
         $criteria = $this->newQuery('modResource');
         $criteria->setClassAlias('sc');
@@ -1438,8 +1449,8 @@ class modX extends xPDO {
     /**
      * Legacy fatal error message.
      */
-    function messageQuit($msg='unspecified error', $query='', $is_error=true, $nr='', $file='', $source='', $text='', $line='') {
-        $this->log(MODX_LOG_LEVEL_FATAL, 'msg: ' . $msg . "\n" . 'query: ' . $query . "\n" . 'nr: ' . $nr . "\n" . 'file: ' . $file . "\n" . 'source: ' . $source . "\n" . 'text: ' . $text . "\n" . 'line: ' . $line . "\n");
+    public function messageQuit($msg='unspecified error', $query='', $is_error=true, $nr='', $file='', $source='', $text='', $line='') {
+        $this->log(modX::LOG_LEVEL_FATAL, 'msg: ' . $msg . "\n" . 'query: ' . $query . "\n" . 'nr: ' . $nr . "\n" . 'file: ' . $file . "\n" . 'source: ' . $source . "\n" . 'text: ' . $text . "\n" . 'line: ' . $line . "\n");
     }
 
 
@@ -1451,7 +1462,7 @@ class modX extends xPDO {
      * snippet.
      * @return string The processed output of the snippet.
      */
-    function runSnippet($snippetName, $params= array ()) {
+    public function runSnippet($snippetName, array $params= array ()) {
         $output= '';
         if ($snippet= $this->getObject('modSnippet', array ('name' => $snippetName), true)) {
             $snippet->setCacheable(false);
@@ -1468,7 +1479,7 @@ class modX extends xPDO {
      * the chunk with.
      * @return string The processed output of the chunk.
      */
-    function getChunk($chunkName, $properties= array ()) {
+    public function getChunk($chunkName, array $properties= array ()) {
         $output= '';
         if ($chunk= $this->getObject('modChunk', array ('name' => $chunkName), true)) {
             $chunk->setCacheable(false);
@@ -1486,7 +1497,7 @@ class modX extends xPDO {
      * @param string $suffix The placeholder suffix, defaults to ]].
      * @return string The processed chunk with the placeholders replaced.
      */
-    function parseChunk($chunkName, $chunkArr, $prefix='[[+', $suffix=']]') {
+    public function parseChunk($chunkName, $chunkArr, $prefix='[[+', $suffix=']]') {
         $chunk= '';
         if ($chunk= $this->getChunk($chunkName)) {
             if(is_array($chunkArr)) {
@@ -1502,7 +1513,7 @@ class modX extends xPDO {
     /**
      * Strip unwanted HTML and PHP tags and supplied patterns from content.
      */
-    function stripTags($html, $allowed= '', $patterns= array()) {
+    public function stripTags($html, $allowed= '', $patterns= array()) {
         $stripped= strip_tags($html, $allowed);
         if (is_array($patterns)) {
             if (empty($patterns)) {
@@ -1525,7 +1536,7 @@ class modX extends xPDO {
      * @return mixed An array of document group ids, names, false or empty string.
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getUserDocGroups($resolveIds= false) {
+    public function getUserDocGroups($resolveIds= false) {
         $dgn= false;
         if ($this->isFrontend() && isset ($_SESSION['webDocgroups']) && isset ($_SESSION['webValidated'])) {
             $dg= $_SESSION['webDocgroups'];
@@ -1566,7 +1577,7 @@ class modX extends xPDO {
      * @deprecated Aug 28, 2006 Use {@link getTableName($className)} instead. To
      * be removed in 2.1.
      */
-    function getFullTableName($tbl){
+    public function getFullTableName($tbl){
         return '`' . $this->db->config['dbase']. '`.`' .$this->db->config['table_prefix'].$tbl . '`';
     }
 
@@ -1574,7 +1585,7 @@ class modX extends xPDO {
      * Get children of the specified resource without regard to status.
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getAllChildren($id=0, $sort='menuindex', $dir='ASC', $fields='id, pagetitle, description, parent, alias, menutitle, class_key, context_key') {
+    public function getAllChildren($id=0, $sort='menuindex', $dir='ASC', $fields='id, pagetitle, description, parent, alias, menutitle, class_key, context_key') {
         $collection = array();
         $criteria = $this->newQuery('modResource');
         $criteria->select($fields);
@@ -1593,7 +1604,7 @@ class modX extends xPDO {
      * Get all published children documents of the specified document.
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getActiveChildren($id=0, $sort='menuindex', $dir='ASC', $fields='id, pagetitle, description, parent, alias, menutitle, class_key, context_key') {
+    public function getActiveChildren($id=0, $sort='menuindex', $dir='ASC', $fields='id, pagetitle, description, parent, alias, menutitle, class_key, context_key') {
         $collection = array();
         $criteria = $this->newQuery('modResource');
         $criteria->setClassAlias('sc');
@@ -1617,7 +1628,7 @@ class modX extends xPDO {
      * Get all children documents of the specified document.
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getDocumentChildren($parentid= 0, $published= 1, $deleted= 0, $fields= "*", $where= '', $sort= "menuindex", $dir= "ASC", $limit= "") {
+    public function getDocumentChildren($parentid= 0, $published= 1, $deleted= 0, $fields= "*", $where= '', $sort= "menuindex", $dir= "ASC", $limit= "") {
         $collection = array();
         $criteria = $this->newQuery('modResource');
         $criteria->setClassAlias('sc');
@@ -1642,7 +1653,7 @@ class modX extends xPDO {
     /**
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getDocumentChildrenTVars($parentid=0, $tvidnames=array(), $published=1, $docsort="menuindex", $docsortdir="ASC", $tvfields="*", $tvsort="rank", $tvsortdir="ASC") {
+    public function getDocumentChildrenTVars($parentid=0, array $tvidnames=array(), $published=1, $docsort="menuindex", $docsortdir="ASC", $tvfields="*", $tvsort="rank", $tvsortdir="ASC") {
         $collection = array();
         $all= ($tvidnames=="*");
         $byName= (is_numeric($tvidnames[0]) == false);
@@ -1685,7 +1696,7 @@ class modX extends xPDO {
      * @return mixed An array of the template variable fields or false.
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getTemplateVar($idname="", $fields = "*", $resourceId="", $published=1) {
+    public function getTemplateVar($idname="", $fields = "*", $resourceId="", $published=1) {
         if($idname=="") {
             return false;
         }
@@ -1702,7 +1713,7 @@ class modX extends xPDO {
      * the template assigned to the current resource.
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getTemplateVars($idnames=array(), $fields = "*", $resourceId="", $published=1, $sort="tv.rank,tvtpl.rank", $dir="ASC,ASC") {
+    public function getTemplateVars(array $idnames=array(), $fields = "*", $resourceId="", $published=1, $sort="tv.rank,tvtpl.rank", $dir="ASC,ASC") {
         if(($idnames!='*' && !is_array($idnames)) || count($idnames)==0) {
             return false;
         }
@@ -1783,7 +1794,7 @@ class modX extends xPDO {
      * @return mixed
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getTemplateVarOutput($idnames=array(), $resourceId="", $published=1) {
+    public function getTemplateVarOutput(array $idnames=array(), $resourceId="", $published=1) {
         if(count($idnames)==0) {
             return false;
         }
@@ -1838,7 +1849,7 @@ class modX extends xPDO {
      * @return mixed
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getParent($pid=-1, $active=1, $fields='id, pagetitle, description, alias, parent, class_key, context_key') {
+    public function getParent($pid=-1, $active=1, $fields='id, pagetitle, description, alias, parent, class_key, context_key') {
         if($pid==-1) {
             $pid = $this->documentObject['parent'];
             return ($pid==0)? false:$this->getPageInfo($pid,$active,$fields);
@@ -1860,7 +1871,7 @@ class modX extends xPDO {
      * @return mixed
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getPageInfo($pageid=-1, $active=1, $fields='id, pagetitle, description, alias, class_key, context_key') {
+    public function getPageInfo($pageid=-1, $active=1, $fields='id, pagetitle, description, alias, class_key, context_key') {
         $data = false;
         $pageid = intval($pageid);
         if ($pageid == -1) {
@@ -1889,7 +1900,7 @@ class modX extends xPDO {
      * @return mixed
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getUserInfo($uid) {
+    public function getUserInfo($uid) {
         $userInfo= false;
         if ($user= $this->getObject('modUser', $uid, true)) {
             $userInfo= $user->get(array ('username', 'password'));
@@ -1907,7 +1918,7 @@ class modX extends xPDO {
      * @return mixed
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getWebUserInfo($uid) {
+    public function getWebUserInfo($uid) {
         $userInfo= $this->getUserInfo($uid);
         return $userInfo;
     }
@@ -1916,7 +1927,7 @@ class modX extends xPDO {
      * Alias of getUserDocGroups().
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function getDocGroups() {
+    public function getDocGroups() {
         $docGroups= $this->getUserDocGroups();
         return $docGroups;
     }
@@ -1925,7 +1936,7 @@ class modX extends xPDO {
      * Alias of changePassword().
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function changeWebUserPassword($oldPwd, $newPwd) {
+    public function changeWebUserPassword($oldPwd, $newPwd) {
         $rt= $this->changePassword($oldPwd, $newPwd);
         return $rt;
     }
@@ -1938,7 +1949,7 @@ class modX extends xPDO {
      * @return mixed true if successful, otherwise return error message.
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function changePassword($o, $n) {
+    public function changePassword($o, $n) {
         $rt= false;
         if ($this->getUser()) {
             $rt= $this->user->changePassword($n, $o);
@@ -1954,9 +1965,9 @@ class modX extends xPDO {
      * @return string|integer
      * @deprecated 2007-09-17 TO be removed in 2.1
      */
-    function cleanDocumentIdentifier($qOrig) {
+    public function cleanDocumentIdentifier($qOrig) {
         if (!$this->getRequest()) {
-            $this->log(MODX_LOG_LEVEL_FATAL, 'Could not load request class.');
+            $this->log(modX::LOG_LEVEL_FATAL, 'Could not load request class.');
         }
         $return= $this->request->_cleanResourceIdentifier($qOrig);
         return $return;
@@ -1969,9 +1980,9 @@ class modX extends xPDO {
      * @return string|integer The requested document alias or id.
      * @deprecated 2007-09-17 TO be removed in 2.1
      */
-    function getDocumentIdentifier($method) {
+    public function getDocumentIdentifier($method) {
         if (!$this->getRequest()) {
-            $this->log(MODX_LOG_LEVEL_FATAL, 'Could not load request class.');
+            $this->log(modX::LOG_LEVEL_FATAL, 'Could not load request class.');
         }
         return $this->request->getResourceIdentifier($method);
     }
@@ -1982,9 +1993,9 @@ class modX extends xPDO {
      * @return string 'id', 'alias', or 'none'.
      * @deprecated 2007-09-17 TO be removed in 2.1
      */
-    function getDocumentMethod() {
+    public function getDocumentMethod() {
         if (!$this->getRequest()) {
-            $this->log(MODX_LOG_LEVEL_FATAL, 'Could not load request class.');
+            $this->log(modX::LOG_LEVEL_FATAL, 'Could not load request class.');
         }
         return $this->request->getResourceMethod();
     }
@@ -1995,7 +2006,7 @@ class modX extends xPDO {
      * @return boolean
      * @deprecated 2007-09-17 TO be removed in 2.1
      */
-    function checkPreview() {
+    public function checkPreview() {
         $preview= false;
         if ($this->getResponse()) {
             $preview= $this->response->checkPreview();
@@ -2009,7 +2020,7 @@ class modX extends xPDO {
      * @param string $pm Permission key to check.
      * @return boolean
      */
-    function hasPermission($pm) {
+    public function hasPermission($pm) {
         $state = $this->context->checkPolicy($pm);
         return $state;
     }
@@ -2023,7 +2034,7 @@ class modX extends xPDO {
      * @param string $source Default is 'Parser'.
      * @deprecated 2007-09-17 TO be removed in 1.0
      */
-    function logEvent($evtid,$type,$msg,$source='Parser') {
+    public function logEvent($evtid,$type,$msg,$source='Parser') {
         $eventLog= $this->newObject('modEventLog');
         $evtid = intval($evtid);
         if ($type<1) $type = 1; else if($type>3) $type = 3;
@@ -2051,7 +2062,7 @@ class modX extends xPDO {
      * with
      * @return modManagerLog The newly created modManagerLog object
      */
-    function logManagerAction($action,$class_key,$item) {
+    public function logManagerAction($action,$class_key,$item) {
         $ml = $this->newObject('modManagerLog');
         $ml->set('user',$this->user->get('id'));
         $ml->set('occurred',date('Y-m-d H:i:s'));
@@ -2060,7 +2071,7 @@ class modX extends xPDO {
         $ml->set('item',$item);
 
         if (!$ml->save()) {
-            $this->log(XPDO_LOG_LEVEL_ERROR,$this->lexicon('manager_log_err_save'));
+            $this->log(modX::LOG_LEVEL_ERROR,$this->lexicon('manager_log_err_save'));
             return null;
         }
         return $ml;
@@ -2073,7 +2084,7 @@ class modX extends xPDO {
      * web server document root.
      * @deprecated 2007-09-17 Use MODX_MANAGER_URL or modX :: config['manager_url']
      */
-    function getManagerPath() {
+    public function getManagerPath() {
         return MODX_MANAGER_URL;
     }
 
@@ -2083,7 +2094,7 @@ class modX extends xPDO {
      * @return mixed An array of authenticated user data or false.
      * @deprecated 2007-09-17 To be removed in 2.1
      */
-    function userLoggedIn() {
+    public function userLoggedIn() {
         $userdetails = array();
         if($this->isFrontend() && isset($_SESSION['webValidated'])) {
             $userdetails['loggedIn']=true;
@@ -2110,7 +2121,7 @@ class modX extends xPDO {
      * @param integer $id A document id, defaults to current document id.
      * @return array An array of keyword data for the specified document.
      */
-    function getKeywords($id=0) {
+    public function getKeywords($id=0) {
         if (intval($id) == 0) {
             $id = intval($this->resource->id);
         }
@@ -2120,7 +2131,7 @@ class modX extends xPDO {
         $keywords = array();
         if ($stmt = $query->prepare()) {
             if ($stmt->execute()) {
-                $keywords= $stmt->fetchAll(PDO_FETCH_COLUMN);
+                $keywords= $stmt->fetchAll(PDO::FETCH_COLUMN);
             }
         }
         return $keywords;
@@ -2132,7 +2143,7 @@ class modX extends xPDO {
      * @param integer $id A document id, defaults to current document id.
      * @return array An array of META tag data for the specified document.
      */
-    function getMETATags($id=0) {
+    public function getMETATags($id=0) {
         if (intval($id) == 0) {
             $id = intval($this->resource->id);
         }
@@ -2143,7 +2154,7 @@ class modX extends xPDO {
         $metatags = array();
         if ($stmt = $query->prepare()) {
             if ($stmt->execute()) {
-                while ($row = $stmt->fetch(PDO_FETCH_ASSOC)) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $metatags[$row['name']] = array("tag"=>$row['tag'],"tagvalue"=>$row['tagvalue'],"http_equiv"=>$row['http_equiv']);
                 }
             }
@@ -2155,7 +2166,7 @@ class modX extends xPDO {
      * Processes document content tags.
      * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
      */
-    function mergeDocumentContent($content) {
+    public function mergeDocumentContent($content) {
         $this->getParser();
         $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('*'));
         return $content;
@@ -2165,7 +2176,7 @@ class modX extends xPDO {
      * Processes document setting tags (and placeholders).
      * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
      */
-    function mergeSettingsContent($content) {
+    public function mergeSettingsContent($content) {
         $this->getParser();
         $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('+'));
         return $content;
@@ -2175,7 +2186,7 @@ class modX extends xPDO {
      * Processes chunk content tags.
      * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
      */
-    function mergeChunkContent($content) {
+    public function mergeChunkContent($content) {
         $this->getParser();
         $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('$'));
         return $content;
@@ -2185,7 +2196,7 @@ class modX extends xPDO {
      * Processes placeholder content tags.
      * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
      */
-    function mergePlaceholderContent($content) {
+    public function mergePlaceholderContent($content) {
         $this->getParser();
         $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('+'));
         return $content;
@@ -2198,7 +2209,7 @@ class modX extends xPDO {
      * @return boolean false if the event parameter is not specified or is not
      * present in the eventMap.
      */
-    function removeEventListener($event) {
+    public function removeEventListener($event) {
         $removed = false;
         if (!empty($event) && isset($this->eventMap[$event])) {
             unset ($this->eventMap[$event]);
@@ -2210,7 +2221,7 @@ class modX extends xPDO {
     /**
      * Remove all registered events for the current request.
      */
-    function removeAllEventListener() {
+    public function removeAllEventListener() {
         unset ($this->eventMap);
         $this->eventMap= array ();
     }
@@ -2221,7 +2232,7 @@ class modX extends xPDO {
      * @deprecated 2007-09-15: Use the context key to identify a specific context.
      * @return boolean true if the context is 'mgr'.
      */
-    function isBackend() {
+    public function isBackend() {
         return $this->insideManager() ? true : false;
     }
 
@@ -2231,7 +2242,7 @@ class modX extends xPDO {
      * @deprecated 2007-09-15: Use the context key to identify a specific context.
      * @return boolean true if the context is not 'mgr'.
      */
-    function isFrontend() {
+    public function isFrontend() {
         return !$this->insideManager() ? true : false;
     }
 
@@ -2241,7 +2252,7 @@ class modX extends xPDO {
      * @deprecated 2007-09-15: Use the context key to identify a specific context.
      * @return boolean true if the request is executing in the mgr context.
      */
-    function insideManager() {
+    public function insideManager() {
         return is_object($this->context) && ($this->context->get('key') === 'mgr');
     }
 
@@ -2252,7 +2263,7 @@ class modX extends xPDO {
      * @param integer $pluginId Plugin identifier to add to the event.
      * @return boolean true if the event is successfully added, otherwise false.
      */
-    function addEventListener($event, $pluginId) {
+    public function addEventListener($event, $pluginId) {
         $added = false;
         if ($event && $pluginId) {
             if (!isset($this->eventMap[$event]) || empty ($this->eventMap[$event])) {
@@ -2269,7 +2280,7 @@ class modX extends xPDO {
      *
      * @deprecated 9/15/2007 Use getChunk instead; to be removed in 2.1.
      */
-    function putChunk($chunkName) {
+    public function putChunk($chunkName) {
         return $this->getChunk($chunkName);
     }
 
@@ -2285,7 +2296,7 @@ class modX extends xPDO {
      * @param string $contextKey The key of the context to switch to.
      * @return boolean True if the switch was successful, otherwise false.
      */
-    function switchContext($contextKey) {
+    public function switchContext($contextKey) {
         $switched= false;
         if ($this->context->key != $contextKey) {
             $switched= $this->_initContext($contextKey);
@@ -2305,7 +2316,7 @@ class modX extends xPDO {
      * @return &$modContext A modContext object retrieved from cache or
      * database.
      */
-    function getContext($contextKey) {
+    public function getContext($contextKey) {
         if (!isset($this->contexts[$contextKey])) {
             $this->contexts[$contextKey]= $this->getObject('modContext', $contextKey);
             if ($this->contexts[$contextKey]) {
@@ -2321,7 +2332,7 @@ class modX extends xPDO {
      * @param string $contextKey Context identifier.
      * @return array A map of events and registered plugins for each.
      */
-    function getEventMap($contextKey) {
+    public function getEventMap($contextKey) {
         $eventElementMap= array ();
         if ($contextKey) {
             switch ($contextKey) {
@@ -2338,7 +2349,7 @@ class modX extends xPDO {
             $sql= "SELECT ev.`name` AS `event`, ee.`pluginid`, ps.`name` AS `propertyset` FROM {$eeTbl} ee INNER JOIN {$pluginTbl} pl ON pl.`id` = ee.`pluginid` AND pl.`disabled` = 0 INNER JOIN {$eventTbl} ev ON {$service} ev.`id` = ee.`evtid` LEFT JOIN {$propsetTbl} ps ON ee.`propertyset` = ps.`id` ORDER BY ev.`name`, ee.`priority` ASC";
             $stmt= $this->prepare($sql);
             if ($stmt && $stmt->execute()) {
-                while ($ee = $stmt->fetch(PDO_FETCH_ASSOC)) {
+                while ($ee = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $eventElementMap[$ee['event']][(string) $ee['pluginid']]= $ee['pluginid'] . (!empty($ee['propertyset']) ? ':' . $ee['propertyset'] : '');
                 }
             }
@@ -2353,7 +2364,7 @@ class modX extends xPDO {
      * @param string $action The action identifying what is locked.
      * @param string $type Message indicating the kind of lock being checked.
      */
-    function checkForLocks($id,$action,$type) {
+    public function checkForLocks($id,$action,$type) {
         $msg= false;
         $id= intval($id);
         if (!$id) $id= $this->getLoginUserID();
@@ -2373,11 +2384,11 @@ class modX extends xPDO {
      * @param string $key
      * @param array $params
      */
-    function lexicon($key,$params = array()) {
+    public function lexicon($key,$params = array()) {
         if ($this->lexicon) {
             return $this->lexicon->process($key,$params);
         } else {
-            $this->log(XPDO_LOG_LEVEL_ERROR,'Culture not initialized; cannot use lexicon.');
+            $this->log(modX::LOG_LEVEL_ERROR,'Culture not initialized; cannot use lexicon.');
         }
     }
 
@@ -2386,20 +2397,20 @@ class modX extends xPDO {
      *
      * The possible values for session state are:
      *
-     * MODX_SESSION_STATE_UNINITIALIZED
-     * MODX_SESSION_STATE_UNAVAILABLE
-     * MODX_SESSION_STATE_EXTERNAL
-     * MODX_SESSION_STATE_INITIALIZED
+     * modX::SESSION_STATE_UNINITIALIZED
+     * modX::SESSION_STATE_UNAVAILABLE
+     * modX:: SESSION_STATE_EXTERNAL
+     * modX:: SESSION_STATE_INITIALIZED
      *
      * @return integer Returns an integer representing the session state.
      */
-    function getSessionState() {
-        if ($this->_sessionState == MODX_SESSION_STATE_UNINITIALIZED) {
+    public function getSessionState() {
+        if ($this->_sessionState == modX::SESSION_STATE_UNINITIALIZED) {
             if (XPDO_CLI_MODE) {
-                $this->_sessionState = MODX_SESSION_STATE_UNAVAILABLE;
+                $this->_sessionState = modX::SESSION_STATE_UNAVAILABLE;
             }
             elseif (isset($_SESSION)) {
-                $this->_sessionState = MODX_SESSION_STATE_EXTERNAL;
+                $this->_sessionState = modX::SESSION_STATE_EXTERNAL;
             }
         }
         return $this->_sessionState;
@@ -2408,9 +2419,9 @@ class modX extends xPDO {
     /**
      * Executed before parser processing of an element.
      *
-     * @access protected
+     * @access public
      */
-    function _beforeProcessing() {
+    public function beforeProcessing() {
         $this->documentIdentifier= & $this->resourceIdentifier;
         $this->documentMethod= & $this->resourceMethod;
         $this->documentContent= & $this->resource->_content;
@@ -2423,16 +2434,16 @@ class modX extends xPDO {
      *
      * @access protected
      */
-    function _beforeRender() {
+    public function beforeRender() {
         $this->documentOutput= & $this->resource->_output;
     }
 
     /**
      * Executed before the handleRequest function.
      *
-     * @access protected
+     * @access public
      */
-    function _beforeRequest() {}
+    public function beforeRequest() {}
 
     /**
      * Determines the current site_status.
@@ -2440,7 +2451,7 @@ class modX extends xPDO {
      * @return boolean True if the site is online or the user has a valid
      * user session in the 'mgr' context; false otherwise.
      */
-    function _checkSiteStatus() {
+    public function checkSiteStatus() {
         $status = false;
         if ($this->config['site_status'] == '1' || $this->hasPermission('view_offline')) {
             $status = true;
@@ -2457,7 +2468,7 @@ class modX extends xPDO {
      * @access protected
      * @param string $contextKey A context identifier.
      */
-    function _initContext($contextKey) {
+    protected function _initContext($contextKey) {
         $initialized= false;
         if (isset($this->contexts[$contextKey])) {
             $this->context= & $this->contexts[$contextKey];
@@ -2467,7 +2478,7 @@ class modX extends xPDO {
         }
         if ($this->context) {
             if (!$this->context->prepare()) {
-                $this->log(MODX_LOG_LEVEL_ERROR, 'Could not load context: ' . $contextKey);
+                $this->log(modX::LOG_LEVEL_ERROR, 'Could not load context: ' . $contextKey);
             } else {
                 $this->aliasMap= & $this->context->aliasMap;
                 $this->resourceMap= & $this->context->resourceMap;
@@ -2491,7 +2502,7 @@ class modX extends xPDO {
      *
      * @access protected
      */
-    function _initCulture() {
+    protected function _initCulture() {
         $this->getService('lexicon','modLexicon');
         $this->invokeEvent('OnInitCulture');
     }
@@ -2500,14 +2511,14 @@ class modX extends xPDO {
      * Loads the error handler for this instance.
      * @access protected
      */
-    function _initErrorHandler() {
+    protected function _initErrorHandler() {
         if ($this->errorHandler == null || !is_object($this->errorHandler)) {
             if (isset ($this->config['error_handler_class']) && strlen($this->config['error_handler_class']) > 1) {
                 if ($ehClass= $this->loadClass($this->config['error_handler_class'], '', false, true)) {
                     if ($this->errorHandler= new $ehClass($this)) {
                         $result= set_error_handler(array ($this->errorHandler, 'handleError'));
                         if ($result === false) {
-                            $this->log(XPDO_LOG_LEVEL_ERROR, 'Could not set error handler.  Make sure your class has a function called handleError(). Result: ' . print_r($result, true));
+                            $this->log(modX::LOG_LEVEL_ERROR, 'Could not set error handler.  Make sure your class has a function called handleError(). Result: ' . print_r($result, true));
                         }
                     }
                 }
@@ -2521,7 +2532,7 @@ class modX extends xPDO {
      * @access protected
      * @param string $contextKey Context identifier.
      */
-    function _initEventMap($contextKey) {
+    protected function _initEventMap($contextKey) {
         if ($this->eventMap === null) {
             $this->eventMap= $this->getEventMap($contextKey);
         }
@@ -2531,9 +2542,9 @@ class modX extends xPDO {
      * Loads the session handler and starts the session.
      * @access protected
      */
-    function _initSession() {
+    protected function _initSession() {
         $contextKey= $this->context->get('key');
-        if ($this->getSessionState() == MODX_SESSION_STATE_UNINITIALIZED) {
+        if ($this->getSessionState() == modX::SESSION_STATE_UNINITIALIZED) {
             $sh= false;
             if (isset ($this->config['session_handler_class']) && $this->config['session_handler_class']) {
                 if ($shClass= $this->loadClass($this->config['session_handler_class'], '', false, true)) {
@@ -2567,7 +2578,7 @@ class modX extends xPDO {
             $site_sessionname= isset ($this->config['session_name']) ? $this->config['session_name'] : $GLOBALS['site_sessionname'];
             session_name($site_sessionname);
             session_start();
-            $this->_sessionState = MODX_SESSION_STATE_INITIALIZED;
+            $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
             $this->getUser($contextKey);
             $cookieExpiration= 0;
             if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime']) && is_numeric($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
@@ -2586,7 +2597,7 @@ class modX extends xPDO {
      * @access protected
      * @return boolean True if successful.
      */
-    function _loadConfig() {
+    protected function _loadConfig() {
         $this->config= $this->_config;
 
         $this->getCacheManager();
@@ -2612,7 +2623,7 @@ class modX extends xPDO {
      *
      * {@inheritdoc}
      */
-    function _log($level, $msg, $target= '', $def= '', $file= '', $line= '') {
+    protected function _log($level, $msg, $target= '', $def= '', $file= '', $line= '') {
         if (empty($target)) {
             $target = $this->logTarget;
         }
@@ -2621,8 +2632,8 @@ class modX extends xPDO {
             if (isset($target['options'])) $targetOptions = $target['options'];
             $target = isset($target['target']) ? $target['target'] : 'ECHO';
         }
-        if (is_object($target) && is_a($target, 'modRegister')) {
-            if ($level === XPDO_LOG_LEVEL_FATAL) {
+        if (is_object($target) && $target instanceof modRegister) {
+            if ($level === modX::LOG_LEVEL_FATAL) {
                 if (empty ($file)) $file= (isset ($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : (isset ($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '');
                 $this->_logInRegister($target, $level, $msg, $def, $file, $line);
                 $this->sendError('fatal');
@@ -2632,11 +2643,11 @@ class modX extends xPDO {
                 $this->_logInRegister($target, $level, $msg, $def, $file, $line);
             }
         } else {
-            if ($level === XPDO_LOG_LEVEL_FATAL) {
+            if ($level === modX::LOG_LEVEL_FATAL) {
                 while (@ob_end_clean()) {}
                 if ($target == 'FILE' && $cacheManager= $this->getCacheManager()) {
                     $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
-                    $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . XPDO_LOG_DIR;
+                    $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
                     $cacheManager->writeFile($filepath . $filename, '[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''), 'a');
                 }
                 $this->sendError('fatal');
@@ -2650,7 +2661,7 @@ class modX extends xPDO {
      *
      * @access protected
      */
-    function _logInRegister($register, $level, $msg, $def, $file, $line) {
+    protected function _logInRegister($register, $level, $msg, $def, $file, $line) {
         $timestamp = strftime('%Y-%m-%d %H:%M:%S');
         $messageKey = (string) time();
         $messageKey .= '-' . sprintf("%06d", $this->_logSequence);
@@ -2663,7 +2674,7 @@ class modX extends xPDO {
             'line' => $line
         );
         $options = array();
-        if ($level === XPDO_LOG_LEVEL_FATAL) {
+        if ($level === xPDO::LOG_LEVEL_FATAL) {
             $options['kill'] = true;
         }
         $register->send('', array($messageKey => $message), $options);
@@ -2675,9 +2686,9 @@ class modX extends xPDO {
      *
      * @access protected
      */
-    function _postProcess() {
+    public function _postProcess() {
         if ($this->getOption('cache_resource', array(), true)) {
-            if (is_object($this->resource) && $this->resource->get('cacheable')) {
+            if (is_object($this->resource) && $this->resource instanceof modResource && $this->resource->get('cacheable')) {
                 $this->invokeEvent('OnBeforeSaveWebPageCache');
                 $this->cacheManager->generateResource($this->resource);
             }
@@ -2695,26 +2706,26 @@ class modSystemEvent {
      * @deprecated 2007-09-18 Will be delegated in 1.0 or sooner.
      * @var string
      */
-    var $name = '';
-    var $activePlugin = '';
-    var $propertySet = '';
+    public $name = '';
+    public $activePlugin = '';
+    public $propertySet = '';
     /**
      * @var boolean
      */
-    var $_propagate;
-    var $_output;
+    protected $_propagate;
+    public $_output;
     /**
      * @var boolean
      */
-    var $activated;
+    public $activated;
     /**
      * @var mixed
      */
-    var $returnedValues;
+    public $returnedValues;
     /**
      * @var array
      */
-    var $params;
+    public $params;
     /**@#-*/
 
     /**
@@ -2725,7 +2736,7 @@ class modSystemEvent {
      * context.  Use {@link modX::_log()} in the meantime.
      * @param string $msg The message to display.
      */
-    function alert($msg) {
+    public function alert($msg) {
         global $SystemAlertMsgQueque;
         if($msg=="") return;
         if (is_array($SystemAlertMsgQueque)) {
@@ -2738,21 +2749,21 @@ class modSystemEvent {
      * Render output from the event.
      * @param string $output The output to render.
      */
-    function output($output) {
+    public function output($output) {
         $this->_output .= $output;
     }
 
     /**
      * Stop further execution of plugins for this event.
      */
-    function stopPropagation(){
+    public function stopPropagation(){
         $this->_propagate = false;
     }
 
     /**
      * Reset the event instance for reuse.
      */
-    function _resetEventObject(){
+    public function resetEventObject(){
         $this->returnedValues = null;
         $this->name = "";
         $this->_output = "";
@@ -2760,4 +2771,3 @@ class modSystemEvent {
         $this->activated = false;
     }
 }
-?>

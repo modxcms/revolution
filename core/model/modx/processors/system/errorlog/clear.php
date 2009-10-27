@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage processors.system.errorlog
  */
-$file = $modx->cachePath.'logs/error.log';
+$file = $modx->getOption(xPDO::OPT_CACHE_PATH).'logs/error.log';
 
 $content = '';
 if (file_exists($file)) {

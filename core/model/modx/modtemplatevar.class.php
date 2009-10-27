@@ -11,7 +11,7 @@ class modTemplateVar extends modElement {
      * @var array Supported bindings for MODx
      * @access public
      */
-    var $bindings= array (
+    public $bindings= array (
         'FILE',
         'CHUNK',
         'DOCUMENT',
@@ -24,35 +24,30 @@ class modTemplateVar extends modElement {
      * @var integer Indicates a value is loaded for a specified resource.
      * @access public
      */
-    var $resourceId= 0;
+    public $resourceId= 0;
 
-    /**#@+
+    /**
      * Creates a modTemplateVar instance, and sets the token of the class to *
      *
      * {@inheritdoc}
      */
-    function modTemplateVar(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    /** @ignore */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->_token = '*';
     }
-    /**#@-*/
 
     /**
      * Overrides modElement::save to add custom error logging.
      *
      * {@inheritdoc}
      */
-    function save($cacheFlag = null) {
+    public function save($cacheFlag = null) {
         $isNew = $this->isNew();
         $success = parent::save($cacheFlag);
 
         if (!$success && !empty($this->xpdo->lexicon)) {
             $msg = $isNew ? $this->xpdo->lexicon('tv_err_create') : $this->xpdo->lexicon('tv_err_save');
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$msg.$this->toArray());
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.$this->toArray());
         }
         return $success;
     }
@@ -62,11 +57,11 @@ class modTemplateVar extends modElement {
      *
      * {@inheritdoc}
      */
-    function remove($ancestors= array ()) {
+    public function remove(array $ancestors= array ()) {
         $success = parent :: remove($ancestors);
 
         if (!$success && !empty($this->xpdo->lexicon)) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('tv_err_remove').$this->toArray());
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('tv_err_remove').$this->toArray());
         }
 
         return $success;
@@ -77,7 +72,7 @@ class modTemplateVar extends modElement {
      *
      * {@inheritdoc}
      */
-    function process($properties= null, $content= null) {
+    public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $this->_content= $this->renderOutput($this->xpdo->resourceIdentifier);
@@ -115,7 +110,7 @@ class modTemplateVar extends modElement {
      *
      * {@inheritdoc}
      */
-    function getContent($options = array()) {
+    public function getContent(array $options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
@@ -131,7 +126,7 @@ class modTemplateVar extends modElement {
      *
      * {@inheritdoc}
      */
-    function setContent($content, $options = array()) {
+    public function setContent($content, array $options = array()) {
         return $this->set('default_text', $content);
     }
 
@@ -144,7 +139,7 @@ class modTemplateVar extends modElement {
      * @return mixed The raw value of the template variable in context of the
      * specified (or current) resource.
      */
-    function getValue($resourceId= 0) {
+    public function getValue($resourceId= 0) {
         $value= null;
         $resourceId = intval($resourceId);
         if ($resourceId) {
@@ -178,7 +173,7 @@ class modTemplateVar extends modElement {
      * @param mixed $value The value to give the template variable for the
      * specified document.
      */
-    function setValue($resourceId= 0, $value= null) {
+    public function setValue($resourceId= 0, $value= null) {
         $oldValue= '';
         if (intval($resourceId)) {
             $templateVarResource = $this->xpdo->getObject('modTemplateVarResource',array(
@@ -213,7 +208,7 @@ class modTemplateVar extends modElement {
      * current resource.
      * @return mixed The processed output of the template variable.
      */
-    function renderOutput($resourceId= 0) {
+    public function renderOutput($resourceId= 0) {
         $value= $this->getValue($resourceId);
 
         /* process any TV commands in value */
@@ -261,7 +256,7 @@ class modTemplateVar extends modElement {
      * @param string $style Extra style parameters.
      * @return mixed The rendered input for the template variable.
      */
-    function renderInput($resourceId= 0, $style= '') {
+    public function renderInput($resourceId= 0, $style= '') {
         if (!isset($this->smarty)) {
             $this->xpdo->getService('smarty', 'smarty.modSmarty', '', array(
                 'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme',null,'default') . '/',
@@ -311,7 +306,7 @@ class modTemplateVar extends modElement {
      * @param string $s The string to decode.
      * @return string The decoded string.
      */
-    function decodeParamValue($s) {
+    public function decodeParamValue($s) {
         $s= str_replace("%3D", '=', $s);
         $s= str_replace("%26", '&', $s);
         return $s;
@@ -327,7 +322,7 @@ class modTemplateVar extends modElement {
      *
      * @return string|array If delimiter present, returns string, otherwise array.
      */
-    function parseInput($src, $delim= "||", $type= "string") {
+    public function parseInput($src, $delim= "||", $type= "string") {
         if (is_resource($src)) {
             /* must be a recordset */
             $rows= array ();
@@ -335,7 +330,7 @@ class modTemplateVar extends modElement {
                 $rows[]= ($type == "array") ? $cols : implode(" ", $cols);
             return ($type == "array") ? $rows : implode($delim, $rows);
         } elseif (is_object($src)) {
-            $rs= $src->fetchAll(PDO_FETCH_ASSOC);
+            $rs= $src->fetchAll(PDO::FETCH_ASSOC);
             if ($type != "array") {
                 foreach ($rs as $row) {
                     $rows[]= implode(" ", $row);
@@ -362,13 +357,13 @@ class modTemplateVar extends modElement {
      * @param mixed $v The options to parse, either a recordset, PDOStatement, array or string.
      * @return mixed The parsed options.
      */
-    function parseInputOptions($v) {
+    public function parseInputOptions($v) {
         $a = array();
         if(is_array($v)) return $v;
         else if(is_resource($v)) {
             while ($cols = mysql_fetch_row($v)) $a[] = $cols;
         } else if (is_object($v)) {
-            $a = $v->fetchAll(PDO_FETCH_ASSOC);
+            $a = $v->fetchAll(PDO::FETCH_ASSOC);
         }
         else $a = explode("||", $v);
         return $a;
@@ -382,7 +377,7 @@ class modTemplateVar extends modElement {
      * @param integer $resourceId The resource in which the TV is assigned.
      * @return string The processed value.
      */
-    function processBindings($value= '', $resourceId= 0) {
+    public function processBindings($value= '', $resourceId= 0) {
         $modx =& $this->xpdo;
         $nvalue= trim($value);
         if (substr($nvalue,0,1)!='@') return $value;
@@ -470,7 +465,7 @@ class modTemplateVar extends modElement {
      * @param string $binding_string The binding to parse.
      * @return array The parsed binding, now in array format.
      */
-    function parseBinding($binding_string) {
+    public function parseBinding($binding_string) {
         $match= array ();
         $binding_string= trim($binding_string);
         $regexp= '/@(' . implode('|', $this->bindings) . ')\s*(.*)/is'; /* Split binding on whitespace */
@@ -491,7 +486,7 @@ class modTemplateVar extends modElement {
      * @param string $file The absolute location of the file in the binding.
      * @return string The file buffer from the read file.
      */
-    function processFileBinding($file) {
+    public function processFileBinding($file) {
         if (file_exists($file) && @ $handle= fopen($file,'r')) {
             $buffer= "";
             while (!feof($handle)) {
@@ -509,7 +504,7 @@ class modTemplateVar extends modElement {
      *
      * {@inheritdoc}
      */
-    function findPolicy($context = '') {
+    public function findPolicy($context = '') {
         $policy = array();
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (empty($this->_policies) || !isset($this->_policies[$context])) {
@@ -529,7 +524,7 @@ class modTemplateVar extends modElement {
             );
             $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
             if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO_FETCH_ASSOC)) {
+                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
                     $policy['modAccessResourceGroup'][$row['target']][] = array(
                         'principal' => $row['principal'],
                         'authority' => $row['authority'],

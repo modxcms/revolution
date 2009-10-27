@@ -1,20 +1,20 @@
 <?php
-$mode= isset ($_POST['installmode']) ? intval($_POST['installmode']) : MODX_INSTALL_MODE_NEW;
+$mode= isset ($_POST['installmode']) ? intval($_POST['installmode']) : modInstall::MODE_NEW;
 /* validate database settings */
 $install->setConfig($mode);
 $err = $install->getConnection($mode);
-if (!is_a($err,'xPDO')) { $this->error->failure($err); }
+if (!($err instanceof xPDO)) { $this->error->failure($err); }
 
-if (!is_object($install->xpdo)) {
+if (!is_object($install->xpdo) || !($install->xpdo instanceof xPDO)) {
     $this->error->failure('<p>'.$install->lexicon['xpdo_err_ins'].'</p>');
 }
 if (!$install->xpdo->connect()) {
     /* allow this to pass for new installs only; will attempt to create during installation */
-    if ($mode != MODX_INSTALL_MODE_NEW) {
+    if ($mode != modInstall::MODE_NEW) {
         $this->error->failure('<p>'.$install->lexicon['db_err_connect_upgrade'].'</p>');
     }
 }
-if ($mode == MODX_INSTALL_MODE_NEW) {
+if ($mode == modInstall::MODE_NEW) {
     /* validate admin user data */
     $install->getAdminUser();
     if (empty ($_POST['cmsadmin'])) {

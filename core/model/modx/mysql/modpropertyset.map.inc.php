@@ -72,6 +72,3 @@ $xpdo_meta_map['modPropertySet']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modPropertySet']['aggregates']= array_merge($xpdo_meta_map['modPropertySet']['aggregates'], array_change_key_case($xpdo_meta_map['modPropertySet']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modPropertySet']['composites']= array_merge($xpdo_meta_map['modPropertySet']['composites'], array_change_key_case($xpdo_meta_map['modPropertySet']['composites']));
-$xpdo_meta_map['modpropertyset']= & $xpdo_meta_map['modPropertySet'];

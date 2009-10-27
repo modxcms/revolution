@@ -5,9 +5,7 @@
  * @package modx
  */
 class modTemplate extends modElement {
-    function modTemplate(& $xpdo) {
-        $this->__construct($xpdo);
-    }
+
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->_cacheable= false;
@@ -18,13 +16,13 @@ class modTemplate extends modElement {
      *
      * {@inheritdoc}
      */
-    function save($cacheFlag = null) {
+    public function save($cacheFlag = null) {
         $isNew = $this->isNew();
         $success = parent::save($cacheFlag);
 
         if (!$success && !empty($this->xpdo->lexicon)) {
             $msg = $isNew ? $this->xpdo->lexicon('template_err_create') : $this->xpdo->lexicon('template_err_save');
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$msg.$this->toArray());
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.$this->toArray());
         }
         return $success;
     }
@@ -34,11 +32,11 @@ class modTemplate extends modElement {
      *
      * {@inheritdoc}
      */
-    function remove($ancestors= array ()) {
+    public function remove(array $ancestors= array ()) {
         $success = parent :: remove($ancestors);
 
         if (!$success && !empty($this->xpdo->lexicon)) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('template_err_remove').$this->toArray());
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('template_err_remove').$this->toArray());
         }
 
         return $success;
@@ -49,7 +47,7 @@ class modTemplate extends modElement {
      *
      * {@inheritdoc}
      */
-    function process($properties= null, $content= null) {
+    public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $this->_output= $this->_content;
@@ -104,7 +102,7 @@ class modTemplate extends modElement {
      * @access public
      * @return array An array of TVs.
      */
-    function getTemplateVars() {
+    public function getTemplateVars() {
         $c = $this->xpdo->newQuery('modTemplateVar');
         $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplates');
         $c->where(array(
@@ -116,7 +114,7 @@ class modTemplate extends modElement {
     /**
      * @deprecated 2009-10-05 Use getTemplateVars instead.
      */
-    function getTVs() {
+    public function getTVs() {
         return $this->getTemplateVars();
     }
 }

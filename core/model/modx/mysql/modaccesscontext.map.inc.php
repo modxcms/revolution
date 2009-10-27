@@ -18,5 +18,3 @@ $xpdo_meta_map['modAccessContext']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modAccessContext']['aggregates']= array_merge($xpdo_meta_map['modAccessContext']['aggregates'], array_change_key_case($xpdo_meta_map['modAccessContext']['aggregates']));
-$xpdo_meta_map['modaccesscontext']= & $xpdo_meta_map['modAccessContext'];

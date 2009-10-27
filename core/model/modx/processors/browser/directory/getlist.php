@@ -12,12 +12,10 @@
  * @package modx
  * @subpackage processors.browser.directory
  */
+if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-$hideFiles = isset($_REQUEST['hideFiles']) &&
-    ($_REQUEST['hideFiles'] === true || $_REQUEST['hideFiles'] === 'true') ? true : false;
+$hideFiles = !empty($_REQUEST['hideFiles']) && $_REQUEST['hideFiles'] != 'false' ? true : false;
 $stringLiterals = !empty($_REQUEST['stringLiterals']) ? true : false;
 
 $dir = !isset($_REQUEST['id']) || $_REQUEST['id'] == 'root' ? '' : str_replace('n_','',$_REQUEST['id']);
@@ -28,25 +26,26 @@ $ls = array();
 
 $actions = $modx->request->getAllActionIDs();
 
-$root = isset($_REQUEST['prependPath']) && $_REQUEST['prependPath'] != 'null' && $_REQUEST['prependPath'] != null
+$root = !empty($_REQUEST['prependPath']) && $_REQUEST['prependPath'] != 'null'
     ? $_REQUEST['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
-$fullpath = $root.($dir != '' ? $dir : '');
-$odir = dir($fullpath);
-while(false !== ($name = $odir->read())) {
-	if(in_array($name,array('.','..','.svn','_notes'))) continue;
 
-	$fullname = $fullpath.'/'.$name;
-	if(!is_readable($fullname)) continue;
+$fullpath = $root.($dir != '' ? $dir : '');
+foreach (new DirectoryIterator($fullpath) as $file) {
+	if (in_array($file,array('.','..','.svn','_notes'))) continue;
+	if (!$file->isReadable()) continue;
+
+    $fileName = $file->getFilename();
+    $filePathName = $file->getPathname();
 
 	/* handle dirs */
-	if(is_dir($fullname)) {
-		$directories[$name] = array(
-			'id' => $dir.'/'.$name,
-			'text' => $name,
+	if ($file->isDir()) {
+		$directories[$fileName] = array(
+			'id' => $dir.'/'.$fileName,
+			'text' => $fileName,
 			'cls' => 'folder',
 			'type' => 'dir',
-			//'disabled' => is_writable($fullname),
+			//'disabled' => $file->isWritable(),
             'leaf' => false,
             'menu' => array(
                 'items' => array(
@@ -75,11 +74,11 @@ while(false !== ($name = $odir->read())) {
 	}
 
     /* get files in current dir */
-    if (!is_dir($fullname) && !$hideFiles) {
-        $ext = pathinfo($fullname,PATHINFO_EXTENSION);
-        $files[$name] = array(
-            'id' => $dir.'/'.$name,
-            'text' => $name,
+    if ($file->isFile() && !$hideFiles) {
+        $ext = pathinfo($filePathName,PATHINFO_EXTENSION);
+        $files[$fileName] = array(
+            'id' => $dir.'/'.$fileName,
+            'text' => $fileName,
             'cls' => 'icon-file icon-'.$ext,
             'type' => 'file',
             'leaf' => true,
@@ -90,7 +89,7 @@ while(false !== ($name = $odir->read())) {
                         'handler' => 'function() {
                             Ext.getCmp("modx-file-tree").loadAction("'
                                 . 'a=' . $actions['system/file/edit']
-                                . '&file=' . rawurlencode($fullname)
+                                . '&file=' . rawurlencode($filePathName)
                              . '");
                         }',
                     ),

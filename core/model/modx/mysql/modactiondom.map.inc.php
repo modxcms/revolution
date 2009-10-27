@@ -123,6 +123,3 @@ $xpdo_meta_map['modActionDom']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modActionDom']['aggregates']= array_merge($xpdo_meta_map['modActionDom']['aggregates'], array_change_key_case($xpdo_meta_map['modActionDom']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modActionDom']['composites']= array_merge($xpdo_meta_map['modActionDom']['composites'], array_change_key_case($xpdo_meta_map['modActionDom']['composites']));
-$xpdo_meta_map['modactiondom']= & $xpdo_meta_map['modActionDom'];

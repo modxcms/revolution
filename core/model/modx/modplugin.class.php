@@ -8,9 +8,6 @@
  * @extends modScript
  */
 class modPlugin extends modScript {
-    function modPlugin(& $xpdo) {
-        $this->__construct($xpdo);
-    }
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->_cacheable= false;
@@ -21,13 +18,13 @@ class modPlugin extends modScript {
      *
      * {@inheritdoc}
      */
-    function save($cacheFlag = null) {
+    public function save($cacheFlag = null) {
         $isNew = $this->isNew();
         $success = parent::save($cacheFlag);
 
         if (!$success && !empty($this->xpdo->lexicon)) {
             $msg = $isNew ? $this->xpdo->lexicon('plugin_err_create') : $this->xpdo->lexicon('plugin_err_save');
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$msg.$this->toArray());
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.$this->toArray());
         }
         return $success;
     }
@@ -37,11 +34,11 @@ class modPlugin extends modScript {
      *
      * {@inheritdoc}
      */
-    function remove($ancestors= array ()) {
+    public function remove(array $ancestors= array ()) {
         $success = parent :: remove($ancestors);
 
         if (!$success && !empty($this->xpdo->lexicon)) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('plugin_err_remove').$this->toArray());
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('plugin_err_remove').$this->toArray());
         }
 
         return $success;
@@ -53,7 +50,7 @@ class modPlugin extends modScript {
      *
      * {@inheritdoc}
      */
-    function getContent($options = array()) {
+    public function getContent(array $options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
@@ -70,7 +67,7 @@ class modPlugin extends modScript {
      *
      * {@inheritdoc}
      */
-    function setContent($content, $options = array()) {
+    public function setContent($content, array $options = array()) {
         return $this->set('plugincode', $content);
     }
 
@@ -80,7 +77,7 @@ class modPlugin extends modScript {
      *
      * {@inheritdoc}
      */
-    function getPropertySet($setName = null) {
+    public function getPropertySet($setName = null) {
         if (empty($setName) && !empty($this->xpdo->event->propertySet)) {
             $setName = $this->xpdo->event->propertySet;
         }

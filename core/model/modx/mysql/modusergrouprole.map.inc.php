@@ -50,5 +50,3 @@ $xpdo_meta_map['modUserGroupRole']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modUserGroupRole']['aggregates']= array_merge($xpdo_meta_map['modUserGroupRole']['aggregates'], array_change_key_case($xpdo_meta_map['modUserGroupRole']['aggregates']));
-$xpdo_meta_map['modusergrouprole']= & $xpdo_meta_map['modUserGroupRole'];

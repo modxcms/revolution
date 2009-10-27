@@ -39,7 +39,7 @@ class modStaticImport extends modImport {
         $maxIdxQuery= $this->modx->newQuery('modResource', array ('parent' => $parent));
         $maxIdxQuery->select('MAX(menuindex)');
         if ($maxIdxQuery->prepare() && $maxIdxQuery->stmt->execute()) {
-            $menuindex = $maxIdxQuery->stmt->fetch(PDO_FETCH_COLUMN);
+            $menuindex = $maxIdxQuery->stmt->fetch(PDO::FETCH_COLUMN);
             $maxIdxQuery->stmt->closeCursor();
         }
         $menuindex= intval($menuindex);

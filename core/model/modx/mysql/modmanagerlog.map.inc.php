@@ -69,5 +69,3 @@ $xpdo_meta_map['modManagerLog']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modManagerLog']['aggregates']= array_merge($xpdo_meta_map['modManagerLog']['aggregates'], array_change_key_case($xpdo_meta_map['modManagerLog']['aggregates']));
-$xpdo_meta_map['modmanagerlog']= & $xpdo_meta_map['modManagerLog'];

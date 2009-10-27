@@ -30,7 +30,7 @@
 <link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/ie.css" />
 <![endif]-->
 </head>
-<body>
+<body id="modx-body-tag">
 
 <div id="modx-browser"></div>
 <div id="modx-container">

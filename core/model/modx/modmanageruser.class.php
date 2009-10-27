@@ -8,12 +8,4 @@
  * @deprecated 2007-09-19 To be removed in 1.0
  * @package modx
  */
-class modManagerUser extends modUser {
-    function modManagerUser(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
-?>
+class modManagerUser extends modUser {}

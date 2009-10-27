@@ -4,12 +4,4 @@
  *
  * @package modx
  */
-class modUserGroupDocumentGroup extends xPDOSimpleObject {
-    function modUserGroupDocumentGroup(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
-?>
+class modUserGroupDocumentGroup extends xPDOSimpleObject {}

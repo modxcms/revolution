@@ -35,40 +35,35 @@ class modTransportVehicle {
      * @var array The collection of attributes to attach to the vehicle.
      * @access public
      */
-    var $attributes;
+    public $attributes;
     /**
     * @var array The collection of dependencies to resolve post-install/upgrade.
     * @access public
     */
-    var $resolvers;
+    public $resolvers;
     /**
     * @var string The collection of dependences to validate against pre-install/upgrade.
     * @access public
     */
-    var $validators;
+    public $validators;
     /**
     * @var mixed The actual object or artifact payload that the vehicle represents.
     * @access public
     */
-    var $obj;
+    public $obj;
 
-    /**#@+
+    /**
      * Creates an instance of the modTransportVehicle class.
      *
      * @param mixed $obj The object that the vehicle represents.
      * @param array $attr An array of attributes for the object.
      */
-    function modTransportVehicle($obj, $attr = array ()) {
-        $this->__construct($obj, $attr);
-    }
-    /** @ignore */
-    function __construct($obj, $attr = array ()) {
+    function __construct($obj, array $attr = array ()) {
         $this->obj = $obj;
         $this->attributes = $attr;
         $this->validators = array ();
         $this->resolvers = array ();
     }
-    /**#@-*/
 
     /**
     * Adds a pre-creation validator to the vehicle.
@@ -78,7 +73,7 @@ class modTransportVehicle {
     * @param array $options An array of options for the validator.
     * @return array The added validator.
     */
-    function validate($type, $options) {
+    public function validate($type, $options) {
         $options['type'] = $type;
         array_push($this->validators, $options);
         return $options;
@@ -92,7 +87,7 @@ class modTransportVehicle {
     * @param array $options An array of options for the resolver.
     * @return array The added resolver.
     */
-    function resolve($type, $options) {
+    public function resolve($type, $options) {
         $options['type'] = $type;
         array_push($this->resolvers, $options);
         return $options;
@@ -104,7 +99,7 @@ class modTransportVehicle {
     * @access public
     * @return array An array of added attributes.
     */
-    function compile() {
+    public function compile() {
         $attributes = array_merge($this->attributes, array (
             'resolve' => empty ($this->resolvers) ? null : $this->resolvers,
             'validate' => empty ($this->validators) ? null : $this->validators,
@@ -119,7 +114,7 @@ class modTransportVehicle {
     * @access public
     * @return mixed The payload for this vehicle.
     */
-    function fetch() {
+    public function fetch() {
         return $this->obj;
     }
 }

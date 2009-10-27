@@ -12,23 +12,9 @@ class modPropertySet extends xPDOSimpleObject {
     /**
      * The property value array for the element.
      * @var array
-     * @access private
+     * @access protected
      */
-    var $_properties= null;
-
-    /**#@+
-     * Creates an instance of a modPropertySet.
-     *
-     * {@inheritdoc}
-     */
-    function modPropertySet(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    /** @ignore */
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-    /**#@-*/
+    protected $_properties= null;
 
     /**
      * Get all the modElement instances this property set is available to.
@@ -36,7 +22,7 @@ class modPropertySet extends xPDOSimpleObject {
      * @access public
      * @return array An array of modElement instances.
      */
-    function getElements() {
+    public function getElements() {
         $elements = array();
         $links = $this->getMany('Elements');
         foreach ($links as $link) {
@@ -54,7 +40,7 @@ class modPropertySet extends xPDOSimpleObject {
      * apply.
      * @return array A simple array of properties ready to use for processing.
      */
-    function getProperties($properties = null) {
+    public function getProperties($properties = null) {
         $this->xpdo->getParser();
         $this->_properties= $this->xpdo->parser->parseProperties($this->get('properties'));
         if (!empty($properties)) {
@@ -72,7 +58,7 @@ class modPropertySet extends xPDOSimpleObject {
      * existing ones.
      * @return boolean true if the properties are set.
      */
-    function setProperties($properties, $merge = false) {
+    public function setProperties($properties, $merge = false) {
         $set = false;
         $propertyArray = array();
         if (is_string($properties)) {

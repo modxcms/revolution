@@ -64,5 +64,3 @@ $xpdo_meta_map['modElementPropertySet']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modElementPropertySet']['aggregates']= array_merge($xpdo_meta_map['modElementPropertySet']['aggregates'], array_change_key_case($xpdo_meta_map['modElementPropertySet']['aggregates']));
-$xpdo_meta_map['modelementpropertyset']= & $xpdo_meta_map['modElementPropertySet'];

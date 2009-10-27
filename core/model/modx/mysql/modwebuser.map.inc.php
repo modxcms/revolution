@@ -37,5 +37,3 @@ $xpdo_meta_map['modWebUser']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modWebUser']['composites']= array_merge($xpdo_meta_map['modWebUser']['composites'], array_change_key_case($xpdo_meta_map['modWebUser']['composites']));
-$xpdo_meta_map['modwebuser']= & $xpdo_meta_map['modWebUser'];

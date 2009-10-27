@@ -5,21 +5,15 @@
  * @package modx
  */
 class modAction extends modAccessibleSimpleObject {
-    function modAction(& $modx) {
-        $this->__construct($modx);
-    }
-    function __construct(& $modx) {
-        parent :: __construct($modx);
-    }
 
     /**
      * Overrides xPDOObject::save to cache the actionMap.
      *
      * {@inheritdoc}
      */
-    function save($cacheFlag = null) {
+    public function save($cacheFlag = null) {
         $saved = parent::save($cacheFlag);
-        if ($saved && empty($this->xpdo->config[XPDO_OPT_SETUP])) {
+        if ($saved && empty($this->xpdo->config[xPDO::OPT_SETUP])) {
             $this->rebuildCache();
         }
         return $saved;
@@ -30,9 +24,9 @@ class modAction extends modAccessibleSimpleObject {
      *
      * {@inheritdoc}
      */
-    function remove($ancestors = array()) {
+    public function remove(array $ancestors = array()) {
         $removed = parent::remove($ancestors);
-        if ($removed && empty($this->xpdo->config[XPDO_OPT_SETUP])) {
+        if ($removed && empty($this->xpdo->config[xPDO::OPT_SETUP])) {
             $this->rebuildCache();
         }
         return $removed;
@@ -44,7 +38,7 @@ class modAction extends modAccessibleSimpleObject {
      * @access public
      * @return boolean True if successful.
      */
-    function rebuildCache($options = array()) {
+    public function rebuildCache(array $options = array()) {
         $rebuilt = false;
         $this->modx =& $this->xpdo;
         $cacheKey= $this->modx->context->get('key') . '/actions';

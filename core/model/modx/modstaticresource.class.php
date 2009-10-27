@@ -11,20 +11,17 @@ class modStaticResource extends modResource {
      * @var string Path of the file containing the source content, relative to
      * the {@link modStaticResource::$_sourcePath}.
      */
-    var $_sourceFile= '';
+    protected $_sourceFile= '';
     /**
      * @var integer Size of the source file content in bytes.
      */
-    var $_sourceFileSize= 0;
+    protected $_sourceFileSize= 0;
     /**
      * @var string An absolute base filesystem path where the source file
      * exists.
      */
-    var $_sourcePath= '';
+    protected $_sourcePath= '';
 
-    function modStaticResource(& $xpdo) {
-        $this->__construct($xpdo);
-    }
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->_fields['class_key']= 'modStaticResource';
@@ -35,7 +32,7 @@ class modStaticResource extends modResource {
      *
      * {@inheritdoc}
      */
-    function getContent($options = array()) {
+    public function getContent(array $options = array()) {
         $content = '';
         $filename = parent :: getContent($options);
         if (!file_exists($filename)) {
@@ -59,13 +56,13 @@ class modStaticResource extends modResource {
                 $content= $this->getFileContent($this->_sourceFile);
                 if ($content === false) {
                     $content = '';
-                    $this->xpdo->log(MODX_LOG_LEVEL_ERROR, "No content could be retrieved from source file: {$this->_sourceFile}");
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "No content could be retrieved from source file: {$this->_sourceFile}");
                 }
             } else {
-                $this->xpdo->log(MODX_LOG_LEVEL_ERROR, "Could not locate source file: {$this->_sourceFile}");
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not locate source file: {$this->_sourceFile}");
             }
         } else {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR, "No source file specified.");
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "No source file specified.");
         }
         return $content;
     }
@@ -73,11 +70,12 @@ class modStaticResource extends modResource {
     /**
      * Retrieve the resource content stored in a physical file.
      *
+     * @access public
      * @param string $file A path to the file representing the resource content.
      * @return string The content of the file, of false if it could not be
      * retrieved.
      */
-    function getFileContent($file) {
+    public function getFileContent($file) {
         $content= false;
         $memory_limit= ini_get('memory_limit');
         if (!$memory_limit) $memory_limit= '8M';
@@ -136,7 +134,7 @@ class modStaticResource extends modResource {
                 $content = file_get_contents($file);
             }
             if (!is_string($content)) {
-                $this->xpdo->log(MODX_LOG_LEVEL_ERROR, "modStaticResource->getFileContent({$file}): Could not get content from file.");
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "modStaticResource->getFileContent({$file}): Could not get content from file.");
             }
         }
         return $content;
@@ -152,11 +150,11 @@ class modStaticResource extends modResource {
      * 	<li>K = kilobytes</li>
      * </ul>
      *
-     * @access private
+     * @access protected
      * @param string $value Number of bytes represented in PHP ini value format.
      * @return integer The value converted to bytes.
      */
-    function _bytes($value) {
+    protected function _bytes($value) {
         $value = trim($value);
         $modifier = strtolower($value{strlen($value)-1});
         switch($modifier) {
@@ -170,4 +168,3 @@ class modStaticResource extends modResource {
         return $value;
     }
 }
-?>

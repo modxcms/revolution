@@ -62,5 +62,3 @@ $xpdo_meta_map['modResourceGroup']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modResourceGroup']['composites']= array_merge($xpdo_meta_map['modResourceGroup']['composites'], array_change_key_case($xpdo_meta_map['modResourceGroup']['composites']));
-$xpdo_meta_map['modresourcegroup']= & $xpdo_meta_map['modResourceGroup'];

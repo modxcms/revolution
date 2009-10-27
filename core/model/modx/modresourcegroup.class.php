@@ -3,14 +3,7 @@
  * @package modx
  */
 class modResourceGroup extends modAccessibleSimpleObject {
-    function modResourceGroup(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-
-    function getResources() {
+    public function getResources() {
         $c= $this->xpdo->newQuery('modResource');
         $c->innerJoin('modResourceGroupResource', 'dgd', array (
             '`modResource`.`id` = `dgd`.`document`',
@@ -20,7 +13,7 @@ class modResourceGroup extends modAccessibleSimpleObject {
         return $collection;
     }
 
-    function getUserGroups() {
+    public function getUserGroups() {
         $access= $this->xpdo->getCollection('modAccessResourceGroup', array (
             'target' => $this->get('id'),
             'principal_class' => 'modUserGroup',

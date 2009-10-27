@@ -2,11 +2,11 @@
 /**
  * @package setup
  */
-$mode= isset ($_POST['installmode']) ? intval($_POST['installmode']) : MODX_INSTALL_MODE_NEW;
+$mode= isset ($_POST['installmode']) ? intval($_POST['installmode']) : modInstall::MODE_NEW;
 
 /* validate database settings */
 $install->setConfig($mode);
-if ($mode == MODX_INSTALL_MODE_NEW) {
+if ($mode == modInstall::MODE_NEW) {
     $install->getAdminUser();
 }
 

@@ -9,11 +9,4 @@
  *
  * @package modx
  */
-class modNamespace extends xPDOObject {
-    function modNamespace(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
+class modNamespace extends xPDOObject {}

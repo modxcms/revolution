@@ -5,12 +5,6 @@
  * @package modx
  */
 class modActionDom extends modAccessibleSimpleObject {
-    function modActionDom(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
 
     /**
      * Apply the rule to the current page.
@@ -18,7 +12,7 @@ class modActionDom extends modAccessibleSimpleObject {
      * @access public
      * @return string The generated code that applies the rule.
      */
-    function apply() {
+    public function apply() {
         $rule = '';
         /* first check to see if there is any constraints on this rule */
         $constraint = $this->get('constraint');

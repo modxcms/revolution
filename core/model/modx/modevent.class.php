@@ -12,12 +12,4 @@
  * will allow chained and dependent execution of sequenced plugins or even sets
  * of nested plugins
  */
-class modEvent extends xPDOSimpleObject {
-    function modEvent(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
-?>
+class modEvent extends xPDOSimpleObject {}

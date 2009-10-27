@@ -70,7 +70,7 @@ class modSmarty extends Smarty {
 
 		/* set up configuration variables for Smarty. */
         $this->template_dir = $modx->getOption('manager_path') . 'templates/';
-        $this->compile_dir  = $modx->cachePath . 'smarty/';
+        $this->compile_dir  = $modx->getOption(xPDO::OPT_CACHE_PATH) . 'mgr/smarty/';
         $this->config_dir   = $modx->getOption('core_path') . 'model/smarty/configs';
         $this->plugins_dir  = array(
             $this->modx->getOption('core_path') . 'model/smarty/plugins',
@@ -81,7 +81,6 @@ class modSmarty extends Smarty {
             $this->$paramKey= $paramValue;
         }
 
-        $this->compile_dir= $this->modx->cachePath . 'smarty/';
         if (!is_dir($this->compile_dir)) {
             $this->modx->getCacheManager();
             $this->modx->cacheManager->writeTree($this->compile_dir);
@@ -101,7 +100,7 @@ class modSmarty extends Smarty {
      * defaults to $this->modx->cachePath.
      */
     function setCachePath($path = '') {
-    	$path = $this->modx->cachePath.$path;
+    	$path = $this->modx->getOption(xPDO::OPT_CACHE_PATH).$path;
         if (!is_dir($path)) {
             $this->modx->getCacheManager();
             $this->modx->cacheManager->writeTree($path);

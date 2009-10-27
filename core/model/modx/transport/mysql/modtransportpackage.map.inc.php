@@ -122,5 +122,3 @@ $xpdo_meta_map['modTransportPackage']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modTransportPackage']['aggregates']= array_merge($xpdo_meta_map['modTransportPackage']['aggregates'], array_change_key_case($xpdo_meta_map['modTransportPackage']['aggregates']));
-$xpdo_meta_map['modtransportpackage']= & $xpdo_meta_map['modTransportPackage'];

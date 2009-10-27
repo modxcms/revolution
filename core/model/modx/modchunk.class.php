@@ -5,9 +5,6 @@
  * @package modx
  */
 class modChunk extends modElement {
-    function modChunk(& $xpdo) {
-        $this->__construct($xpdo);
-    }
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->_token = '$';
@@ -18,7 +15,7 @@ class modChunk extends modElement {
      *
      * {@inheritdoc}
      */
-    function save($cacheFlag = null) {
+    public function save($cacheFlag = null) {
         $isNew = $this->isNew();
         $success = parent::save($cacheFlag);
 
@@ -34,7 +31,7 @@ class modChunk extends modElement {
      *
      * {@inheritdoc}
      */
-    function remove($ancestors= array ()) {
+    public function remove(array $ancestors= array ()) {
         $success = parent :: remove($ancestors);
 
         if (!$success && !empty($this->xpdo->lexicon)) {
@@ -50,7 +47,7 @@ class modChunk extends modElement {
 	 *
 	 * {@inheritdoc}
 	 */
-    function process($properties= null, $content= null) {
+    public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             /* copy the content into the output buffer */
@@ -78,8 +75,12 @@ class modChunk extends modElement {
 
     /**
      * Get the source content of this chunk.
+     *
+     * @access public
+     * @param array $options
+     * @return string The source content.
      */
-    function getContent($options = array()) {
+    public function getContent(array $options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
@@ -92,8 +93,13 @@ class modChunk extends modElement {
 
     /**
      * Set the source content of this chunk.
+     *
+     * @access public
+     * @param string $content
+     * @param array $options
+     * @return string True if successfully set
      */
-    function setContent($content, $options = array()) {
+    public function setContent($content, array $options = array()) {
         return $this->set('snippet', $content);
     }
 }

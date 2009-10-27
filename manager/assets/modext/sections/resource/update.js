@@ -98,13 +98,13 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         if (fp && fp.isDirty()) {
             Ext.Msg.confirm(_('warning'),_('resource_cancel_dirty_confirm'),function(e) {
                 if (e == 'yes') {
-                    MODx.releaseLock(id);
+                    MODx.releaseLock(MODx.request.id);
                     MODx.sleep(400);
                     location.href = '?a='+MODx.action['welcome'];                    
                 }
             },this);
         } else {
-            MODx.releaseLock(id);
+            MODx.releaseLock(MODx.request.id);
         };
     }
 });

@@ -35,5 +35,3 @@ $xpdo_meta_map['modKeyword']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modKeyword']['composites']= array_merge($xpdo_meta_map['modKeyword']['composites'], array_change_key_case($xpdo_meta_map['modKeyword']['composites']));
-$xpdo_meta_map['modkeyword']= & $xpdo_meta_map['modKeyword'];

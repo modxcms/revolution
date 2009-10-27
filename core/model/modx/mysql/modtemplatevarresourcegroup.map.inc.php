@@ -50,5 +50,3 @@ $xpdo_meta_map['modTemplateVarResourceGroup']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modTemplateVarResourceGroup']['aggregates']= array_merge($xpdo_meta_map['modTemplateVarResourceGroup']['aggregates'], array_change_key_case($xpdo_meta_map['modTemplateVarResourceGroup']['aggregates']));
-$xpdo_meta_map['modtemplatevarresourcegroup']= & $xpdo_meta_map['modTemplateVarResourceGroup'];

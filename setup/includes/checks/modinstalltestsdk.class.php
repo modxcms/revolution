@@ -6,18 +6,12 @@
  * @subpackage tests
  */
 class modInstallTestSdk extends modInstallTest {
-    function modInstallTestSdk(&$install) {
-        $this->__construct($install);
-    }
-    function __construct(&$install) {
-        $this->install =& $install;
-    }
 
-    function run($mode = MODX_INSTALL_MODE_NEW) {
+    public function run($mode = modInstall::MODE_NEW) {
         $this->results = parent::run($mode);
 
-        $this->checkZipMemLimit();
-        $this->checkAdvPaths();
+        $this->_checkZipMemLimit();
+        $this->_checkAdvPaths();
 
         return $this->results;
     }
@@ -25,7 +19,7 @@ class modInstallTestSdk extends modInstallTest {
     /**
      * Check memory limit, to make sure it is set at least to 64M for zip status
      */
-    function checkZipMemLimit() {
+    protected function _checkZipMemLimit() {
         $success = false;
         $ml = ini_get('memory_limit');
         $bytes = $this->return_bytes($ml);
@@ -53,7 +47,7 @@ class modInstallTestSdk extends modInstallTest {
     /**
      * Check paths for writability
      */
-    function checkAdvPaths() {
+    protected function _checkAdvPaths() {
         /* web_path */
         $this->results['context_web_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],$this->install->config['web_path']);
         if (!$this->_inWritableContainer($this->install->config['web_path'])) {

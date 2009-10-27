@@ -39,7 +39,7 @@ class DBAPI {
                 $pre
             );
         }
-        if (is_object($this->xpdo) && is_a($this->xpdo, 'xPDO')) {
+        if (is_object($this->xpdo) && $this->xpdo instanceof xPDO) {
             $this->config['host']= $this->xpdo->config['host'];
             $this->config['dbase']= $this->xpdo->config['dbname'];
             $this->config['user']= $this->xpdo->config['username'];
@@ -100,7 +100,7 @@ class DBAPI {
      */
     function connect($host= '', $dbase= '', $uid= '', $pwd= '', $persist= 0) {
         $tstart= $this->xpdo->getMicroTime();
-        if (!$this->conn= $this->xpdo->connect(array (PDO_ATTR_PERSISTENT => $persist ? true : false))) {
+        if (!$this->conn= $this->xpdo->connect(array (PDO::ATTR_PERSISTENT => $persist ? true : false))) {
             $modx->messageQuit("Failed to create the database connection!");
             exit;
         } else {
@@ -119,7 +119,7 @@ class DBAPI {
     }
 
     function escape($s) {
-        $s= $this->xpdo->quote($s, PDO_PARAM_STR);
+        $s= $this->xpdo->quote($s, PDO::PARAM_STR);
         $s= substr($s, 1, strlen($s) - 2);
         return $s;
     }
@@ -130,13 +130,13 @@ class DBAPI {
      * Developers should use select, update, insert, delete where possible
      */
     function query($sql) {
-        if (empty ($this->conn) || !is_a('PDO', $this->conn)) {
+        if (empty ($this->conn) || !($this->conn instanceof PDO)) {
             $this->connect();
         }
         $tstart= $this->xpdo->getMicroTime();
         $result= $this->xpdo->query($sql);
         if (!$result) {
-            $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Execution of a query to the database failed: ' . $sql . "\n" . print_r($this->xpdo->errorInfo(), true) . "\n" . ($this->xpdo->getDebug() === true ? print_r(debug_backtrace(), true) : ''));
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Execution of a query to the database failed: ' . $sql . "\n" . print_r($this->xpdo->errorInfo(), true) . "\n" . ($this->xpdo->getDebug() === true ? print_r(debug_backtrace(), true) : ''));
         }
         $this->affectedRows= $this->getRecordCount($result);
         $tend= $this->xpdo->getMicroTime();
@@ -228,13 +228,13 @@ class DBAPI {
     }
 
     function exec($sql) {
-        if (empty ($this->conn) || !is_a('xPDO', $this->conn)) {
+        if (empty ($this->conn) || !($this->conn instanceof PDO)) {
             $this->connect();
         }
         $tstart= $this->xpdo->getMicroTime();
         $result= $this->xpdo->exec($sql);
         if ($result === false) {
-            $this->xpdo->log(XPDO_LOG_LEVEL_ERROR, 'Execution of a query to the database failed: ' . $sql . "\n" . print_r($this->xpdo->errorInfo(), true));
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Execution of a query to the database failed: ' . $sql . "\n" . print_r($this->xpdo->errorInfo(), true));
         }
         $this->affectedRows= $result;
         $tend= $this->xpdo->getMicroTime();
@@ -311,13 +311,13 @@ class DBAPI {
         } elseif (is_object($ds)) {
             switch ($mode) {
             	case 'num':
-            		$fetchMode= PDO_FETCH_NUM;
+            		$fetchMode= PDO::FETCH_NUM;
             		break;
             	case 'both':
-            		$fetchMode= PDO_FETCH_BOTH;
+            		$fetchMode= PDO::FETCH_BOTH;
             		break;
             	default:
-                    $fetchMode= PDO_FETCH_ASSOC;
+                    $fetchMode= PDO::FETCH_ASSOC;
             		break;
             }
             return $ds->fetch($fetchMode);
@@ -494,7 +494,7 @@ class DBAPI {
         if (!is_resource($dsq))
             $dsq= $this->query($dsq);
         if ($dsq) {
-            $dsq= $dsq->fetchAll(PDO_FETCH_ASSOC);
+            $dsq= $dsq->fetchAll(PDO::FETCH_ASSOC);
             include_once MODX_BASE_PATH . "/manager/includes/controls/datagrid.class.php";
             $grd= new DataGrid('', $dsq);
 

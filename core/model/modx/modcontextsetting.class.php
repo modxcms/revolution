@@ -8,12 +8,4 @@
  *
  * @package modx
  */
-class modContextSetting extends xPDOObject {
-   function modContextSetting(& $xpdo) {
-      $this->__construct($xpdo);
-   }
-   function __construct(& $xpdo) {
-      parent :: __construct($xpdo);
-   }
-}
-?>
+class modContextSetting extends xPDOObject {}

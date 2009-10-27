@@ -13,107 +13,103 @@ require_once MODX_CORE_PATH . 'model/modx/mail/modmail.class.php';
  * {@inheritdoc}
  */
 class modPHPMailer extends modMail {
-    /**#@+
+    /**
      * Constructs a new instance of the modPHPMailer class.
      *
      * {@inheritdoc}
      */
-    function modPHPMailer(& $modx, $attributes= array()) {
-        $this->_construct($modx, $attributes);
-    }
-    /** @ignore */
-    function __construct(& $modx, $attributes= array()) {
+    function __construct(modX &$modx, array $attributes= array()) {
         parent :: __construct($modx, $attributes);
-        require_once MODX_CORE_PATH . 'model/modx/mail/phpmailer/class.phpmailer.php';
+        require_once $modx->getOption('core_path') . 'model/modx/mail/phpmailer/class.phpmailer.php';
         $this->_getMailer();
     }
-    /**#@-*/
 
     /**
-     * Sets a PHPMailer attribute corresponding to the MODX_EMAIL_* constants or a custom key.
+     * Sets a PHPMailer attribute corresponding to the modX::MAIL_* constants or
+     * a custom key.
      *
      * {@inheritdoc}
      */
-    function set($key, $value) {
+    public function set($key, $value) {
         parent :: set($key, $value);
         switch ($key) {
-            case MODX_MAIL_BODY :
+            case modMail::MAIL_BODY :
                 $this->mailer->Body= $this->attributes[$key];
                 break;
-            case MODX_MAIL_BODY_TEXT :
+            case modMail::MAIL_BODY_TEXT :
                 $this->mailer->AltBody= $this->attributes[$key];
                 break;
-            case MODX_MAIL_CHARSET :
+            case modMail::MAIL_CHARSET :
                 $this->mailer->CharSet= $this->attributes[$key];
                 break;
-            case MODX_MAIL_CONTENT_TYPE :
+            case modMail::MAIL_CONTENT_TYPE :
                 $this->mailer->ContentType= $this->attributes[$key];
                 break;
-            case MODX_MAIL_ENCODING :
+            case modMail::MAIL_ENCODING :
                 $this->mailer->Encoding= $this->attributes[$key];
                 break;
-            case MODX_MAIL_ENGINE :
+            case modMail::MAIL_ENGINE :
                 $this->mailer->Mailer= $this->attributes[$key];
                 break;
-            case MODX_MAIL_ENGINE_PATH :
+            case modMail::MAIL_ENGINE_PATH :
                 $this->mailer->Sendmail= $this->attributes[$key];
                 break;
-            case MODX_MAIL_FROM :
+            case modMail::MAIL_FROM :
                 $this->mailer->From= $this->attributes[$key];
                 break;
-            case MODX_MAIL_FROM_NAME :
+            case modMail::MAIL_FROM_NAME :
                 $this->mailer->FromName= $this->attributes[$key];
                 break;
-            case MODX_MAIL_HOSTNAME :
+            case modMail::MAIL_HOSTNAME :
                 $this->mailer->Hostname= $this->attributes[$key];
                 break;
-            case MODX_MAIL_LANGUAGE :
+            case modMail::MAIL_LANGUAGE :
                 $this->mailer->SetLanguage($this->attributes[$key]);
                 break;
-            case MODX_MAIL_PRIORITY :
+            case modMail::MAIL_PRIORITY :
                 $this->mailer->Priority= $this->attributes[$key];
                 break;
-            case MODX_MAIL_READ_TO :
+            case modMail::MAIL_READ_TO :
                 $this->mailer->ConfirmReadingTo= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SENDER :
+            case modMail::MAIL_SENDER :
                 $this->mailer->Sender= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SMTP_AUTH :
+            case modMail::MAIL_SMTP_AUTH :
                 $this->mailer->SMTPAuth= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SMTP_HELO :
+            case modMail::MAIL_SMTP_HELO :
                 $this->mailer->Helo= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SMTP_HOSTS :
+            case modMail::MAIL_SMTP_HOSTS :
                 $this->mailer->Host= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SMTP_KEEPALIVE :
+            case modMail::MAIL_SMTP_KEEPALIVE :
                 $this->mailer->SMTPKeepAlive= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SMTP_PASS :
+            case modMail::MAIL_SMTP_PASS :
                 $this->mailer->Password= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SMTP_PORT :
+            case modMail::MAIL_SMTP_PORT :
                 $this->mailer->Port= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SMTP_PREFIX :
+            case modMail::MAIL_SMTP_PREFIX :
                 $this->mailer->SMTPSecure= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SMTP_SINGLE_TO :
+            case modMail::MAIL_SMTP_SINGLE_TO :
                 $this->mailer->SingleTo= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SMTP_TIMEOUT :
+            case modMail::MAIL_SMTP_TIMEOUT :
                 $this->mailer->Timeout= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SMTP_USER :
+            case modMail::MAIL_SMTP_USER :
                 $this->mailer->Username= $this->attributes[$key];
                 break;
-            case MODX_MAIL_SUBJECT :
+            case modMail::MAIL_SUBJECT :
                 $this->mailer->Subject= $this->attributes[$key];
                 break;
             default :
-                $this->modx->log(MODX_LOG_LEVEL_WARN, $this->modx->lexicon('mail_err_attr_nv',array('attr' => $key)));
+                $this->modx->log(modX::LOG_LEVEL_WARN, $this->modx->lexicon('mail_err_attr_nv',array('attr' => $key)));
                 break;
         }
     }
@@ -123,7 +119,7 @@ class modPHPMailer extends modMail {
      *
      * {@inheritdoc}
      */
-    function address($type, $email, $name= '') {
+    public function address($type, $email, $name= '') {
         $set= false;
         if ($email) {
             $set= parent :: address($type, $email, $name);
@@ -145,9 +141,9 @@ class modPHPMailer extends modMail {
                 }
             }
         } elseif ($email === null) {
-            $this->modx->log(MODX_LOG_LEVEL_ERROR, $this->modx->lexicon('mail_err_unset_spec'));
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon('mail_err_unset_spec'));
         } else {
-            $this->modx->log(MODX_LOG_LEVEL_ERROR, $this->modx->lexicon('mail_err_address_ns'));
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon('mail_err_address_ns'));
         }
         return $set;
     }
@@ -157,7 +153,7 @@ class modPHPMailer extends modMail {
      *
      * {@inheritdoc}
      */
-    function header($header) {
+    public function header($header) {
         $set= parent :: header($header);
         if ($set) {
             $this->mailer->AddCustomHeader($header);
@@ -170,7 +166,7 @@ class modPHPMailer extends modMail {
      *
      * {@inheritdoc}
      */
-    function send($attributes= array()) {
+    public function send(array $attributes= array()) {
         $sent = parent :: send($attributes);
         $sent = $this->mailer->Send();
         return $sent;
@@ -181,7 +177,7 @@ class modPHPMailer extends modMail {
      *
      * {@inheritdoc}
      */
-    function reset($attributes= array()) {
+    public function reset($attributes= array()) {
         parent :: reset($attributes);
         $this->mailer->ClearAllRecipients();
         $this->mailer->ClearAttachments();
@@ -193,17 +189,17 @@ class modPHPMailer extends modMail {
      *
      * {@inheritdoc}
      */
-    function _getMailer() {
+    protected function _getMailer() {
         $success= false;
-        if (!$this->mailer || !is_a($this->mailer, 'PHPMailer')) {
+        if (!$this->mailer || !($this->mailer instanceof PHPMailer)) {
             if ($this->mailer= new PHPMailer()) {
                 if (!empty($this->attributes)) {
                     foreach ($this->attributes as $attrKey => $attrVal) {
                         $this->set($attrKey, $attrVal);
                     }
                 }
-                if (!isset($this->attributes[MODX_MAIL_LANGUAGE])) {
-                    $this->set(MODX_MAIL_LANGUAGE, $this->modx->config['manager_language']);
+                if (!isset($this->attributes[modMail::MAIL_LANGUAGE])) {
+                    $this->set(modMail::MAIL_LANGUAGE, $this->modx->config['manager_language']);
                 }
                 $success= true;
             }
@@ -216,7 +212,7 @@ class modPHPMailer extends modMail {
      *
      * {@inheritdoc}
      */
-    function attach($file) {
+    public function attach($file) {
         parent :: attach($file);
         $this->mailer->AddAttachment($file);
     }
@@ -226,7 +222,7 @@ class modPHPMailer extends modMail {
      *
      * {@inheritdoc}
      */
-    function clearAttachments() {
+    public function clearAttachments() {
         parent :: clearAttachments();
         $this->mailer->ClearAttachments();
     }
@@ -237,7 +233,7 @@ class modPHPMailer extends modMail {
      * @access public
      * @param boolean $toggle True to set to HTML.
      */
-    function setHTML($toggle) {
+    public function setHTML($toggle) {
         $this->mailer->IsHTML($toggle);
     }
 }

@@ -1326,7 +1326,7 @@ class PHPMailer {
     if (function_exists('mb_strlen')) {
       return (strlen($str) > mb_strlen($str, $this->CharSet));
     } else { // Assume no multibytes (we can't handle without mbstring functions anyway)
-      return False;
+      return false;
     }
   }
 

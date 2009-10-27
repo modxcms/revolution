@@ -6,19 +6,12 @@
  * @extends xPDOObject
  */
 class modElementPropertySet extends xPDOObject {
-    function modElementPropertySet(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-
     /**
      * Returns related modElement instances based on the element_class column.
      *
      * {@inheritdoc}
      */
-    function & getOne($alias, $criteria= null, $cacheFlag= true) {
+    public function & getOne($alias, $criteria= null, $cacheFlag= true) {
         if ($alias == 'Element') {
             $criteria = $this->xpdo->newQuery($this->get('element_class'), $criteria);
         }

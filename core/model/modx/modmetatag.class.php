@@ -8,11 +8,4 @@
  *
  * @package modx
  */
-class modMetatag extends xPDOSimpleObject {
-    function modMetatag(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
+class modMetatag extends xPDOSimpleObject {}

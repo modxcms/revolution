@@ -13,21 +13,7 @@ require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
  * @package modx
  */
 class modManagerResponse extends modResponse {
-    var $action = array();
-
-    /**#@+
-     * Creates a modManagerResponse instance.
-     *
-     * {@inheritdoc}
-     */
-    function modManagerResponse(& $modx) {
-        $this->__construct($modx);
-    }
-    /** @ignore */
-    function __construct(& $modx) {
-        parent :: __construct($modx);
-    }
-    /**#@-*/
+    public $action = array();
 
     /**
      * Overrides modResponse::outputContent to provide mgr-context specific
@@ -35,7 +21,7 @@ class modManagerResponse extends modResponse {
      *
      * {@inheritdoc}
      */
-    function outputContent($options = array()) {
+    public function outputContent(array $options = array()) {
         $modx= & $this->modx;
         $error= & $this->modx->error;
 
@@ -72,16 +58,18 @@ class modManagerResponse extends modResponse {
 
                 $this->body = '';
 
-                $f = $this->getNamespacePath();
+                $f = $this->prepareNamespacePath();
                 $f = $this->getControllerFilename($f);
 
-                if ($f) {
+                if (file_exists($f)) {
                     $this->modx->invokeEvent('OnBeforeManagerPageInit',array(
                         'action' => $this->action,
                         'filename' => $f,
                     ));
 
                     $cbody = include $f;
+                } else {
+                    $cbody = 'Could not find action file at: '.$f;
                 }
 
                 /* reset path to core modx path for header/footer */
@@ -123,39 +111,15 @@ class modManagerResponse extends modResponse {
         exit();
     }
 
-    function getNamespacePath() {
-        /* set context url and path */
-        $this->modx->config['namespace_path'] = $this->action['namespace_path'];
+    /**
+     * Register ActionDom rules that hide/show fields
+     *
+     * @access public
+     * @param integer $action The ID of the modAction object
+     */
+    public function registerActionDomRules($action) {
+        if (empty($action)) return false;
 
-        /* find context path */
-        if (!isset($this->action['namespace']) || $this->action['namespace'] == 'core') {
-            $f = $this->action['namespace_path'].'controllers/'.$this->action['controller'];
-
-        } else { /* if a custom 3rd party path */
-            $f = $this->action['namespace_path'].$this->action['controller'];
-        }
-
-        return $f;
-    }
-
-    function getControllerFilename($f) {
-        /* if action is a directory, load base index.php */
-        if (substr($f,strlen($f)-1,1) == '/') { $f .= 'index'; }
-        /* append .php */
-        $cbody = '';
-        if (file_exists($f.'.php')) {
-            $f = $f.'.php';
-        /* for actions that don't have trailing / but reference index */
-        } elseif (file_exists($f.'/index.php')) {
-            $f = $f.'/index.php';
-        } else {
-            $this->modx->log(MODX_LOG_LEVEL_FATAL,'Could not find action file at: '.$f);
-            $f = false;
-        }
-        return $f;
-    }
-
-    function registerActionDomRules($action) {
         /* now do action dom rules */
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
@@ -190,7 +154,7 @@ class modManagerResponse extends modResponse {
      *
      * @access public
      */
-    function registerBaseScripts() {
+    public function registerBaseScripts() {
         $managerUrl = $this->modx->getOption('manager_url');
 
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.localization.js');
@@ -228,4 +192,51 @@ class modManagerResponse extends modResponse {
         });
         </script>');
     }
+
+    /**
+     * Prepares the Namespace Path for usage
+     *
+     * @access protected
+     * @return string The formatted Namespace path
+     */
+    protected function prepareNamespacePath() {
+        /* set context url and path */
+        $this->modx->config['namespace_path'] = $this->action['namespace_path'];
+
+        /* find context path */
+        if (!isset($this->action['namespace']) || $this->action['namespace'] == 'core') {
+            $f = $this->action['namespace_path'].'controllers/'.$this->action['controller'];
+
+        } else { /* if a custom 3rd party path */
+            $f = $this->action['namespace_path'].$this->action['controller'];
+        }
+
+        return $f;
+    }
+
+    /**
+     * Gets the parsed controller filename and checks for its existence.
+     *
+     * @access protected
+     * @param string $f The filename to parse.
+     * @return mixed The parsed filename, or boolean false if invalid.
+     */
+    protected function getControllerFilename($f = '') {
+        if (empty($f)) return false;
+
+        /* if action is a directory, load base index.php */
+        if (substr($f,strlen($f)-1,1) == '/') { $f .= 'index'; }
+        /* append .php */
+        if (file_exists($f.'.php')) {
+            $f = $f.'.php';
+        /* for actions that don't have trailing / but reference index */
+        } elseif (file_exists($f.'/index.php')) {
+            $f = $f.'/index.php';
+        } else {
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not find action file at: '.$f);
+            $f = $f.'.php';
+        }
+        return $f;
+    }
+
 }

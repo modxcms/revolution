@@ -86,6 +86,3 @@ $xpdo_meta_map['modAccessPolicy']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modAccessPolicy']['aggregates']= array_merge($xpdo_meta_map['modAccessPolicy']['aggregates'], array_change_key_case($xpdo_meta_map['modAccessPolicy']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['modAccessPolicy']['composites']= array_merge($xpdo_meta_map['modAccessPolicy']['composites'], array_change_key_case($xpdo_meta_map['modAccessPolicy']['composites']));
-$xpdo_meta_map['modaccesspolicy']= & $xpdo_meta_map['modAccessPolicy'];

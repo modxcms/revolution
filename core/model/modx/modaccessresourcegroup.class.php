@@ -6,12 +6,4 @@
  *
  * @package modx
  */
-class modAccessResourceGroup extends modAccess {
-    function modAccessResourceGroup(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
-?>
+class modAccessResourceGroup extends modAccess {}

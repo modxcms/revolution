@@ -1,7 +1,7 @@
 <?php
 /*
  * MODx Revolution
- * 
+ *
  * Copyright 2006, 2007, 2008, 2009 by the MODx Team.
  * All rights reserved.
  *
@@ -45,19 +45,19 @@ class modRegistry {
      * @var modX
      * @access public
      */
-    var $modx = null;
+    public $modx = null;
     /**
      * An array of global options applied to the registry.
      * @var array
      * @access protected
      */
-    var $_options = array();
+    public $_options = array();
     /**
      * An array of register keys that are reserved from use.
      * @var array
      * @access protected
      */
-    var $_invalidKeys = array(
+    protected $_invalidKeys = array(
         'modx',
     );
     /**
@@ -65,33 +65,29 @@ class modRegistry {
      * @var array
      * @access private
      */
-    var $_registers = array();
-    
-    var $_loggingRegister = null;
-    var $_prevLogTarget = null;
-    var $_prevLogLevel = null;
+    protected $_registers = array();
 
-    /**#@+
+    protected $_loggingRegister = null;
+    protected $_prevLogTarget = null;
+    protected $_prevLogLevel = null;
+
+    /**
      * Construct a new registry instance.
      *
      * @param modX &$modx A reference to a modX instance.
      * @param array $options Optional array of registry options.
      */
-    function modRegistry(& $modx, $options = array()) {
-        $this->__construct($modx, $options);
-    }
-    /**@ignore*/
-    function __construct(& $modx, $options = array()) {
+    function __construct(modX &$modx, array $options = array()) {
         $this->modx =& $modx;
         $this->_options = $options;
     }
-    /**#@-*/
-    
+
     /**
      * Get a modRegister instance from the registry.
-     * 
+     *
      * If the register does not exist, it is added to the registry.
-     * 
+     *
+     * @access public
      * @param string $key A unique name for the register in the registry. Must
      * be a valid PHP variable string.
      * @param string $class The actual modRegister derivative which implements
@@ -99,7 +95,7 @@ class modRegistry {
      * @param array $options An optional array of register options.
      * @return modRegister A modRegister instance.
      */
-    function getRegister($key, $class, $options = array()) {
+    public function getRegister($key, $class, array $options = array()) {
         if (isset($this->_registers[$key])) {
             if ($this->_registers[$key] !== $class) {
                 $this->addRegister($key, $class, $options);
@@ -116,13 +112,14 @@ class modRegistry {
      * Once a register is added, it is available directly from this registry
      * instance by the key provided, e.g. $registry->key.
      *
+     * @access public
      * @param string $key A unique name for the register in the registry. Must
      * be a valid PHP variable string.
      * @param string $class The actual modRegister derivative which implements
      * the register functionality.
      * @param array $options An optional array of register options.
      */
-    function addRegister($key, $class, $options = array()) {
+    public function addRegister($key, $class, array $options = array()) {
         if (!in_array($key, $this->_invalidKeys) && substr($key, 0, 1) !== '_' && preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $key)) {
             $this->_registers[$key] = $class;
             $this->$key = $this->_initRegister($key, $class, $options);
@@ -132,9 +129,10 @@ class modRegistry {
     /**
      * Remove a modRegister instance from the registry.
      *
+     * @access public
      * @param string $key The unique name of the register to remove.
      */
-    function removeRegister($key) {
+    public function removeRegister($key) {
         if (!in_array($key, $this->_invalidKeys) && substr($key, 0, 1) !== '_' && preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $key)) {
             $this->_registers[$key] = null;
             $this->$key = null;
@@ -150,44 +148,61 @@ class modRegistry {
      * @param array $options An optional array of register options.
      * @return modRegister The register instance.
      */
-    function _initRegister($key, $class, $options = array()) {
+    protected function _initRegister($key, $class, array $options = array()) {
         $register = null;
         if ($className = $this->modx->loadClass($class, '', false, true)) {
             $register = new $className($this->modx, $key, $options);
         }
         return $register;
     }
-    
-    function setLogging(& $register, $topic, $level = MODX_LOG_LEVEL_ERROR) {
+
+    /**
+     * Set the logging level for the topic.
+     *
+     * @access public
+     * @param modRegister &$register
+     * @param string $topic
+     * @param int $level
+     * @return boolean True if successful.
+     */
+    public function setLogging(modRegister &$register, $topic, $level = modX::LOG_LEVEL_ERROR) {
         $set = false;
-        if (is_object($register) && is_a($register, 'modRegister')) {
-            $this->_loggingRegister = & $register;
-            if (isset($topic) && !empty($topic)) {
-                $topic = trim($topic);
-                if ($this->_loggingRegister->connect()) {
-                    $this->_prevLogTarget = $this->modx->logTarget;
-                    $this->_prevLogLevel = $this->modx->logLevel;
-                    $this->_loggingRegister->subscribe($topic);
-                    $this->_loggingRegister->setCurrentTopic($topic);
-                    $this->modx->setLogTarget($this->_loggingRegister);
-                    $this->modx->setLogLevel($level);
-                    $set = true;
-                }
+        $this->_loggingRegister = &$register;
+        if (isset($topic) && !empty($topic)) {
+            $topic = trim($topic);
+            if ($this->_loggingRegister->connect()) {
+                $this->_prevLogTarget = $this->modx->getLogTarget();
+                $this->_prevLogLevel = $this->modx->getLogLevel();
+                $this->_loggingRegister->subscribe($topic);
+                $this->_loggingRegister->setCurrentTopic($topic);
+                $this->modx->setLogTarget($this->_loggingRegister);
+                $this->modx->setLogLevel($level);
+                $set = true;
             }
         }
         return $set;
     }
-    
-    function resetLogging() {
+
+    /**
+     * Reset the current logging.
+     *
+     * @access public
+     */
+    public function resetLogging() {
         if ($this->_loggingRegister && $this->_prevLogTarget && $this->_prevLogLevel) {
             $this->modx->setLogTarget($this->_prevLogTarget);
             $this->modx->setLogLevel($this->_prevLogLevel);
             $this->_loggingRegister = null;
         }
     }
-    
-    function isLogging() {
+
+    /**
+     * Check if logging is currently active
+     *
+     * @access public
+     * @return boolean
+     */
+    public function isLogging() {
         return $this->_loggingRegister !== null;
     }
 }
-?>
