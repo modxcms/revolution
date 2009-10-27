@@ -363,7 +363,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 			url: this.config.url
 			,params: {
 				data: encodeURIComponent(encNodes)
-				,action: 'sort'
+				,action: this.config.sortAction || 'sort'
 			}
 			,listeners: {
 				'success': {fn:function(r) {
