@@ -33,15 +33,6 @@ class modTransportPackage extends xPDOObject {
     public $package = null;
 
     /**
-     * Creates an instance of a modTransportPackage.
-     *
-     * {@inheritdoc}
-     */
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-
-    /**
      * Overrides xPDOObject::save to set a default created time if new.
      *
      * {@inheritdoc}

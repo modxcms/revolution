@@ -81,7 +81,6 @@ class modTransportProvider extends xPDOSimpleObject {
         $request->addParam($options);
         $request->addParam($installed);
         $response = $this->sendRequest($request);
-
         return $this->handleResponse($response);
     }
 
@@ -121,7 +120,10 @@ class modTransportProvider extends xPDOSimpleObject {
 
         $signature = new jsonrpcval($package->get('signature'),'string');
         $options = new jsonrpcval($this->xpdo->transport->config,'struct');
-        $request = new jsonrpcmsg('modx.modx_update_package',array($signature,$options));
+        $request = new jsonrpcmsg('modx.modx_update_package',array(
+            $signature,
+            $options,
+        ));
         $response = $this->sendRequest($request);
 
         return $this->handleResponse($response);

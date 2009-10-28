@@ -168,13 +168,13 @@
 						// an eror response
 						if (is_array($r) && array_key_exists('faultCode', $r) && array_key_exists('faultString', $r))
 						{
-							$r =& new jsonrpcresp(0, (integer)$r['faultCode'], (string)$r['faultString']);
+							$r = new jsonrpcresp(0, (integer)$r['faultCode'], (string)$r['faultString']);
 						}
 						else
 						{
 							// functions using EPI api should NOT return resp objects,
 							// so make sure we encode the return type correctly
-							$r =& new jsonrpcresp(php_xmlrpc_encode($r, array('extension_api')));
+							$r = new jsonrpcresp(php_xmlrpc_encode($r, array('extension_api')));
 						}
 					}
 					else
@@ -232,7 +232,7 @@
 
 			if (!jsonrpc_parse_req($data, $this->functions_parameters_type == 'phpvals' || $this->functions_parameters_type == 'epivals', false, $content_encoding))
 			{
-				$r =& new jsonrpcresp(0,
+				$r = new jsonrpcresp(0,
 					$GLOBALS['xmlrpcerr']['invalid_request'],
 					$GLOBALS['xmlrpcstr']['invalid_request'] . ' ' . $GLOBALS['_xh']['isf_reason']);
 			}
@@ -249,7 +249,7 @@
 				else
 				{
 					// build an xmlrpcmsg object with data parsed from xml
-					$m =& new jsonrpcmsg($GLOBALS['_xh']['method'], 0, $GLOBALS['_xh']['id']);
+					$m = new jsonrpcmsg($GLOBALS['_xh']['method'], 0, $GLOBALS['_xh']['id']);
 					// now add parameters in
 					/// @todo for more speeed, we could just substitute the array...
 					for($i = 0; $i < sizeof($GLOBALS['_xh']['params']); $i++)
