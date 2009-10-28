@@ -261,7 +261,7 @@ if ($resource->get('parent') != $oldparent_id) {
 if (!empty($_POST['tvs'])) {
     $tmplvars = array ();
     $c = $modx->newQuery('modTemplateVar');
-    $c->_alias = 'tv';
+    $c->setClassAlias('tv');
     $c->innerJoin('modTemplateVarTemplate', 'tvtpl', array(
         'tvtpl.tmplvarid = tv.id',
         'tvtpl.templateid' => $resource->get('template'),
