@@ -1265,7 +1265,7 @@ class modX extends xPDO {
                     }
                     $this->event->activePlugin= '';
                     $this->event->propertySet= '';
-                    if ($this->event->_propagate != true) {
+                    if (!$this->event->isPropagatable()) {
                         break;
                     }
                 }
@@ -2712,7 +2712,7 @@ class modSystemEvent {
     /**
      * @var boolean
      */
-    protected $_propagate;
+    protected $_propagate = true;
     public $_output;
     /**
      * @var boolean
@@ -2736,14 +2736,7 @@ class modSystemEvent {
      * context.  Use {@link modX::_log()} in the meantime.
      * @param string $msg The message to display.
      */
-    public function alert($msg) {
-        global $SystemAlertMsgQueque;
-        if($msg=="") return;
-        if (is_array($SystemAlertMsgQueque)) {
-            if($this->name && $this->activePlugin) $title = "<div><b>".$this->activePlugin."</b> - <span style='color:maroon;'>".$this->name."</span></div>";
-            $SystemAlertMsgQueque[] = "$title<div style='margin-left:10px;margin-top:3px;'>$msg</div>";
-        }
-    }
+    public function alert($msg) {}
 
     /**
      * Render output from the event.
@@ -2756,8 +2749,18 @@ class modSystemEvent {
     /**
      * Stop further execution of plugins for this event.
      */
-    public function stopPropagation(){
+    public function stopPropagation() {
         $this->_propagate = false;
+    }
+
+    /**
+     * Returns whether the event will propagate or not.
+     *
+     * @access public
+     * @return boolean
+     */
+    public function isPropagatable() {
+        return $this->_propagate;
     }
 
     /**
@@ -2765,8 +2768,8 @@ class modSystemEvent {
      */
     public function resetEventObject(){
         $this->returnedValues = null;
-        $this->name = "";
-        $this->_output = "";
+        $this->name = '';
+        $this->_output = '';
         $this->_propagate = true;
         $this->activated = false;
     }
