@@ -11,42 +11,43 @@
  * @package modx
  * @subpackage processors.element.category
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('category');
 
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,20);
+$sort = $modx->getOption('sort',$_REQUEST,'parent,category');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$showNone = $modx->getOption('showNone',$_REQUEST,false);
 
-$limit = !empty($_REQUEST['limit']);
-$showNone = !empty($_REQUEST['showNone']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'parent,category';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* query for categories */
 $c = $modx->newQuery('modCategory');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+$c->sortby($sort,$dir);
 $c->where(array(
     'parent' => 0,
 ));
-if ($limit) {
-	$c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+if ($isLimit) $c->limit($limit,$start);
 $categories = $modx->getCollection('modCategory',$c);
 
+$list = array();
 if ($showNone) {
-    $cs = array('0' => array(
+    $list = array('0' => array(
         'id' => '',
         'category' => $modx->lexicon('none'),
         'name' => $modx->lexicon('none'),
     ));
 }
 
+/* iterate through categories */
 foreach ($categories as $category) {
     $ca = $category->toArray();
 
     $childrenCount = $modx->getCount('modCategory',array('parent' => $category->get('id')));
 
     $ca['name'] = $category->get('category');
-	$cs[] = $ca;
+	$list[] = $ca;
 
     if ($childrenCount > 0) {
         $c = $modx->newQuery('modCategory');
@@ -56,9 +57,9 @@ foreach ($categories as $category) {
         foreach ($children as $subcat) {
             $ca = $subcat->toArray();
             $ca['name'] = $category->get('category').' - '.$subcat->get('category');
-            $cs[] = $ca;
+            $list[] = $ca;
         }
     }
 }
 
-return $this->outputArray($cs);
+return $this->outputArray($list);

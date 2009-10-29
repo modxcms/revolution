@@ -10,24 +10,28 @@
  * @package modx
  * @subpackage processors.element.tv
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* get default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
+/* query for tvs */
 $c = $modx->newQuery('modTemplateVar');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 
-if (isset($_REQUEST['limit'])) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
 $tvs = $modx->getCollection('modTemplateVar',$c);
 $count = $modx->getCount('modTemplateVar');
 
-$cs = array();
+/* iterate through tvs */
+$list = array();
 foreach ($tvs as $tv) {
-    $cs[] = $tv->toArray();
+    $list[] = $tv->toArray();
 }
 
-return $this->outputArray($cs,$count);
+return $this->outputArray($list,$count);

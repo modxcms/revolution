@@ -11,29 +11,31 @@
  * @package modx
  * @subpackage processors.element.template
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('template');
 
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* get default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,20);
+$sort = $modx->getOption('sort',$_REQUEST,'templatename');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$combo = $modx->getOption('combo',$_REQUEST,false);
 
-$limit = isset($_REQUEST['limit']) ? true : false;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'templatename';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
-
+/* query templates */
 $c = $modx->newQuery('modTemplate');
 $c->leftJoin('modCategory','Category');
 $c->select('modTemplate.*,Category.category AS category');
 
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) { $c->limit($_REQUEST['limit'],$_REQUEST['start']); }
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 
 $templates = $modx->getCollection('modTemplate',$c);
 $count = $modx->getCount('modTemplate');
 
+/* iterate through templates */
 $list = array();
-if (isset($_REQUEST['combo'])) {
+if ($combo) {
     $empty = array(
         'id' => 0,
         'templatename' => $modx->lexicon('template_empty'),
@@ -48,9 +50,9 @@ if (isset($_REQUEST['combo'])) {
     $list[] = $empty;
 }
 foreach ($templates as $template) {
-	$array = $template->toArray();
-	$array['category'] = $template->get('category') != null ? $template->get('category') : '';
-	$list[] = $array;
+	$templateArray = $template->toArray();
+	$templateArray['category'] = $template->get('category') != null ? $template->get('category') : '';
+	$list[] = $templateArray;
 }
 
 return $this->outputArray($list,$count);

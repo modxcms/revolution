@@ -13,44 +13,38 @@
  * @package modx
  * @subpackage processors.element.template.tv.resourcegroup
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,20);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$tv = $modx->getOption('tv',$_REQUEST,false);
 
-if (isset($_REQUEST['tv']) && $_REQUEST['tv'] != 0) {
-    $tv = $modx->getObject('modTemplateVar',$_REQUEST['tv']);
-    if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
-}
-
+/* query for resource groups */
 $c = $modx->newQuery('modResourceGroup');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if (isset($_REQUEST['limit'])) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
-$groups = $modx->getCollection('modResourceGroup',$c);
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
+$resourceGroups = $modx->getCollection('modResourceGroup',$c);
 $count = $modx->getCount('modResourceGroup');
 
-$ts = array();
-foreach ($groups as $group) {
-    if (isset($_REQUEST['tv']) && $_REQUEST['tv'] != 0) {
+/* iterate through groups */
+$list = array();
+foreach ($resourceGroups as $resourceGroup) {
+    if ($tv) {
         $rgtv = $modx->getObject('modTemplateVarResourceGroup',array(
-            'tmplvarid' => $tv->get('id'),
-            'documentgroup' => $group->get('id'),
+            'tmplvarid' => $tv,
+            'documentgroup' => $resourceGroup->get('id'),
         ));
     } else $rgtv = null;
+    $resourceGroup->set('access',($rgtv ? true : false));
 
-    if ($rgtv != null) {
-        $group->set('access',true);
-    } else {
-        $group->set('access',false);
-    }
-    $ta = $group->toArray();
-    $ta['menu'] = array(
-    );
-    $ts[] = $ta;
+    $resourceGroupArray = $resourceGroup->toArray();
+    $resourceGroupArray['menu'] = array();
+    $list[] = $resourceGroupArray;
 }
 
-return $this->outputArray($ts,$count);
+return $this->outputArray($list,$count);

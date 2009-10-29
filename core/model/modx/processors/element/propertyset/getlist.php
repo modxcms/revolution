@@ -16,43 +16,50 @@
  * @package modx
  * @subpackage processors.element.propertyset
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset');
 
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
+$showNotAssociated = $modx->getOption('showNotAssociated',$_REQUEST,false);
+$showAssociated = $modx->getOption('showAssociated',$_REQUEST,false);
+$elementId = $modx->getOption('elementId',$_REQUEST,false);
+$elementType = $modx->getOption('elementType',$_REQUEST,false);
+
+/* query for sets */
 $c = $modx->newQuery('modPropertySet');
-
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->sortby($sort,$dir);
+if ($limit) $c->limit($limit,$start);
 $sets = $modx->getCollection('modPropertySet',$c);
 $count = $modx->getCount('modPropertySet');
 
-
-if (!empty($_REQUEST['showNotAssociated'])) {
-    $eps = $modx->getCollection('modElementPropertySet',array(
-        'element' => $_REQUEST['elementId'],
-        'element_class' => $_REQUEST['elementType'],
+/* if showing unassociated/associated sets */
+if ($showNotAssociated) {
+    $elementPropertySets = $modx->getCollection('modElementPropertySet',array(
+        'element' => $elementId,
+        'element_class' => $elementType,
     ));
 
-    foreach ($eps as $ep) {
-        $psId = $ep->get('property_set');
+    foreach ($elementPropertySets as $elementPropertySet) {
+        $psId = $elementPropertySet->get('property_set');
         if (array_key_exists($psId,$sets)) {
             unset($sets[$psId]);
         }
     }
-} elseif (!empty($_REQUEST['showAssociated'])) {
-    $eps = $modx->getCollection('modElementPropertySet',array(
-        'element' => $_REQUEST['elementId'],
-        'element_class' => $_REQUEST['elementType'],
+} elseif ($showAssociated) {
+    $elementPropertySets = $modx->getCollection('modElementPropertySet',array(
+        'element' => $elementId,
+        'element_class' => $elementType,
     ));
 
     $exists = array();
-    foreach ($eps as $ep) {
-        $psId = $ep->get('property_set');
+    foreach ($elementPropertySets as $elementPropertySet) {
+        $psId = $elementPropertySet->get('property_set');
         if (array_key_exists($psId,$sets)) {
             $exists[] = $psId;
         }
@@ -68,23 +75,25 @@ if (!empty($_REQUEST['showNotAssociated'])) {
 
 
 
-$cs = array();
-if (!empty($_REQUEST['elementId']) && !empty($_REQUEST['elementType'])) {
+$list = array();
+/* if limiting to an Element */
+if ($elementId && $elementType) {
     $properties = array();
-    $element = $modx->getObject($_POST['elementType'],$_POST['elementId']);
+    $element = $modx->getObject($elementType,$elementId);
     if ($element) {
         $properties = $element->get('properties');
         if (!is_array($properties)) $properties = array();
     }
 
-    if (empty($_REQUEST['showNotAssociated'])) {
-        $cs[] = array('id' => 0, 'name' => $modx->lexicon('default'), 'description' => '', 'properties' => $properties);
+    if (empty($showNotAssociated)) {
+        $list[] = array('id' => 0, 'name' => $modx->lexicon('default'), 'description' => '', 'properties' => $properties);
         $count++;
     }
 }
 
+/* iterate through sets */
 foreach ($sets as $set) {
-    $cs[] = $set->toArray();
+    $list[] = $set->toArray();
 }
 
-return $this->outputArray($cs,$count);
+return $this->outputArray($list,$count);

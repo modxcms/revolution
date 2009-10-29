@@ -11,26 +11,27 @@
  * @package modx
  * @subpackage processors.element.snippet
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('snippet');
 
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,20);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
-if (empty($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (empty($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (empty($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* query for snippets */
 $c = $modx->newQuery('modSnippet');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-
-if (!empty($_REQUEST['limit'])) {
-    $c = $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $snippets = $modx->getCollection('modSnippet',$c);
 $count = $modx->getCount('modSnippet');
 
-$cs = array();
+/* iterate through snippets */
+$list = array();
 foreach ($snippets as $snippet) {
-    $cs[] = $snippet->toArray();
+    $list[] = $snippet->toArray();
 }
 
-return $this->outputArray($cs,$count);
+return $this->outputArray($list,$count);

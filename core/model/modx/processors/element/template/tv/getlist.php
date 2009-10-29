@@ -13,9 +13,17 @@
  * @package modx
  * @subpackage processors.element.template.tv
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('template');
 
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* get default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,20);
+$sort = $modx->getOption('sort',$_REQUEST,'rank');
+$sortAlias = $modx->getOption('sort',$_REQUEST,'modTemplateVar');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$template = $modx->getOption('template',$_REQUEST,false);
 
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
@@ -25,26 +33,26 @@ if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
 $c = $modx->newQuery('modTemplateVar');
 
-if (!empty($_REQUEST['template'])) {
+if ($template) {
     $c->leftJoin('modTemplateVarTemplate','modTemplateVarTemplate','
         modTemplateVarTemplate.tmplvarid = modTemplateVar.id
-    AND modTemplateVarTemplate.templateid = '.$_REQUEST['template'].'
+    AND modTemplateVarTemplate.templateid = '.$template.'
     ');
     $c->select('modTemplateVar.*,
         IF(ISNULL(modTemplateVarTemplate.tmplvarid),0,1) AS access,
         modTemplateVarTemplate.rank AS rank
     ');
 }
+$count = $modx->getCount('modTemplateVar',$c);
 
-$c->sortby($_REQUEST['sortAlias'].'.'.$_REQUEST['sort'],$_REQUEST['dir']);
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
-
+$c->sortby($sortAlias.'.'.$sort,$dir);
+$c->limit($limit,$start);
 $tvs = $modx->getCollection('modTemplateVar',$c);
-$count = $modx->getCount('modTemplateVar');
 
-$ts = array();
+/* iterate through tvs */
+$list = array();
 foreach ($tvs as $tv) {
     $tv->set('access',$tv->get('access') ? 1 : 0);
-	$ts[] = $tv->toArray();
+	$list[] = $tv->toArray();
 }
-return $this->outputArray($ts,$count);
+return $this->outputArray($list,$count);

@@ -11,26 +11,28 @@
  * @package modx
  * @subpackage processors.element.chunk
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('chunk');
 
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,20);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* query for chunks */
 $c = $modx->newQuery('modChunk');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
+
 $chunks = $modx->getCollection('modChunk',$c);
 $count = $modx->getCount('modChunk');
 
-$cs = array();
+/* iterate through chunks */
+$list = array();
 foreach ($chunks as $chunk) {
-    $cs[] = $chunk->toArray();
+    $list[] = $chunk->toArray();
 }
 
-return $this->outputArray($cs,$count);
+return $this->outputArray($list,$count);

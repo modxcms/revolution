@@ -12,31 +12,30 @@
  * @package modx
  * @subpackage processors.element.template.tv
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'templatename';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'templatename');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$tv = $modx->getOption('tv',$_REQUEST,false);
 
-if (isset($_REQUEST['tv']) && $_REQUEST['tv'] != 0) {
-    $tv = $modx->getObject('modTemplateVar',$_REQUEST['tv']);
-    if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
-}
-
+/* query for templates */
 $c = $modx->newQuery('modTemplate');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if (isset($_REQUEST['limit'])) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $templates = $modx->getCollection('modTemplate',$c);
 $count = $modx->getCount('modTemplate');
 
-$ts = array();
+/* iterate through templates */
+$list = array();
 foreach ($templates as $template) {
-    if (isset($_REQUEST['tv']) && $_REQUEST['tv'] != 0) {
+    if ($tv) {
         $tvt = $modx->getObject('modTemplateVarTemplate',array(
-            'tmplvarid' => $tv->get('id'),
+            'tmplvarid' => $tv,
             'templateid' => $template->get('id'),
         ));
     } else $tvt = null;
@@ -48,12 +47,12 @@ foreach ($templates as $template) {
         $template->set('access',false);
         $template->set('rank','');
     }
-    $ta = $template->toArray();
-    unset($ta['content']);
+    $templateArray = $template->toArray();
+    unset($templateArray['content']);
 
-    $ta['menu'] = array();
+    $templateArray['menu'] = array();
 
-    $ts[] = $ta;
+    $list[] = $templateArray;
 }
 
-return $this->outputArray($ts,$count);
+return $this->outputArray($list,$count);

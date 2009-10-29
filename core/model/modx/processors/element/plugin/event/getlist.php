@@ -5,24 +5,25 @@
  * @package modx
  * @subpackage processors.element.plugin.event
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('plugin','system_events');
 
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$name = $modx->getOption('name',$_REQUEST,false);
+$plugin = $modx->getOption('plugin',$_REQUEST,false);
 
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* query for events */
 $c = $modx->newQuery('modEvent');
-if (!empty($_REQUEST['name'])) {
-     $c->where(array('name:LIKE' => '%'.$_REQUEST['name'].'%'));
-}
-if (!empty($_REQUEST['plugin'])) {
+if ($name) $c->where(array('name:LIKE' => '%'.$name.'%'));
+if ($plugin) {
     $c->leftJoin('modPluginEvent','modPluginEvent','
         modPluginEvent.evtid = modEvent.id
-    AND modPluginEvent.pluginid = '.$_REQUEST['plugin'].'
+    AND modPluginEvent.pluginid = '.$plugin.'
     ');
     $c->select('modEvent.*,
         IF(ISNULL(modPluginEvent.pluginid),0,1) AS enabled,
@@ -30,23 +31,24 @@ if (!empty($_REQUEST['plugin'])) {
         modPluginEvent.propertyset AS propertyset
     ');
 }
-$count = $modx->getCount('modEvent',$cc);
+$count = $modx->getCount('modEvent',$c);
 
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $events = $modx->getCollection('modEvent',$c);
 
-$es = array();
+/* iterate through events */
+$list = array();
 foreach ($events as $event) {
-    $ea = $event->toArray();
-    $ea['enabled'] = $event->get('enabled') ? 1 : 0;
+    $eventArray = $event->toArray();
+    $eventArray['enabled'] = $event->get('enabled') ? 1 : 0;
 
-    $ea['menu'] = array(
+    $eventArray['menu'] = array(
         array(
             'text' => 'Update Event',
             'handler' => 'this.updateEvent',
         )
     );
-    $es[] = $ea;
+    $list[] = $eventArray;
 }
-return $this->outputArray($es,$count);
+return $this->outputArray($list,$count);

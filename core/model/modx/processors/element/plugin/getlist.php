@@ -11,26 +11,28 @@
  * @package modx
  * @subpackage processors.element.plugin
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('plugin');
 
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,20);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* query plugins */
 $c = $modx->newQuery('modPlugin');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if (isset($_REQUEST['limit'])) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 
 $plugins = $modx->getCollection('modPlugin',$c);
 $count = $modx->getCount('modPlugin');
 
-$cs = array();
+/* iterate through plugins */
+$list = array();
 foreach ($plugins as $plugin) {
-    $cs[] = $plugin->toArray();
+    $list[] = $plugin->toArray();
 }
 
-return $this->outputArray($cs,$count);
+return $this->outputArray($list,$count);
