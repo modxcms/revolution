@@ -96,9 +96,9 @@ MODx.grid.User = function(config) {
                 'change': {fn:this.filterByName,scope:this}
                 ,'render': {fn:function(tf) {
                     tf.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
-                        tf.fireEvent('change'); 
+                        this.filterByName(tf,tf.getValue());
                     },this);
-                }}
+                },scope:this}
             }
         }]
 	});
@@ -142,16 +142,9 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     ,filterByName: function(tf,newValue,oldValue) {
         this.getStore().baseParams = {
             action: 'getList'
-            ,username: newValue            
+            ,username: newValue
         };
-        this.getStore().load({
-            params: {
-                start: 0
-                ,limit: 15
-            }
-            ,scope: this
-            ,callback: this.refresh
-        });
+        this.getBottomToolbar().changePage(1);        
     }
 });
 Ext.reg('modx-grid-user',MODx.grid.User);

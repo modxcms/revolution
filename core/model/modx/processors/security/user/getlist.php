@@ -13,37 +13,37 @@
  * @package modx
  * @subpackage processors.security.user
  */
-$modx->lexicon->load('user');
-
 if (!$modx->hasPermission(array('access_permissions' => true, 'edit_user' => true))) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
+$modx->lexicon->load('user');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'username';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-if ($_REQUEST['sort'] == 'username_link') $_REQUEST['sort'] = 'username';
 
-$limit = true;
+/* setup default properties */
+$isLimit = isset($_REQUEST['limit']) ? true : false;
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'username');
+if ($sort == 'username_link') $sort = 'username';
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$username = $modx->getOption('username',$_REQUEST,'');
+
+/* query for users */
 $c = $modx->newQuery('modUser');
-$c->bindGraph('{"Profile":{}}');
-
-if (isset($_REQUEST['username']) && $_REQUEST['username'] != '') {
+if (!empty($username)) {
     $c->where(array(
         'username LIKE "%'.$_REQUEST['username'].'%"',
     ));
-    $limit = false;
 }
+$count = $modx->getCount('modUser',$c);
 
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
+
+$c->bindGraph('{"Profile":{}}');
 $users = $modx->getCollectionGraph('modUser', '{"Profile":{}}', $c);
 
-$count = $modx->getCount('modUser');
-
+/* iterate through users */
 $list = array();
 foreach ($users as $user) {
 	$profileArray = $user->Profile->toArray();
