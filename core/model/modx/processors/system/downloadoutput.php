@@ -5,20 +5,21 @@
  * @package modx
  * @subpackage processors.system
  */
-$cacheManager = $modx->getCacheManager();
 if (!empty($_REQUEST['download'])) {
     $dl = $_REQUEST['download'];
     $dl = str_replace(array('../','..','config'),'',$dl);
-    $dl = ltrim('/');
+    $dl = ltrim($dl,'/');
 
     $f = $modx->getOption('core_path').$dl;
-    if (!is_file($f)) return '';
+    $o = $modx->cacheManager->get($dl);
+    if (!$o) return '';
 
-    $o = $cacheManager->get($dl);
+    $modx->cacheManager->delete($dl);
+
     $bn = basename($f);
 
     header("Content-Type: application/force-download");
-    header("Content-Disposition: attachment; filename=\"{$bn}-".date('Y-m-d H:i:s').".txt\"");
+    header("Content-Disposition: attachment; filename=\"{$bn}-".date('Y-m-d Hi').".txt\"");
 
     return $o;
     exit();
@@ -41,8 +42,8 @@ $o = "/*
 /* setup filenames and write to file */
 $file = 'export/console/output';
 $fileName = $modx->getOption('core_path').$file;
-if (file_exists($fileName)) $cacheManager->delete($fileName);
-$s = $cacheManager->set($file,$o);
+if (file_exists($fileName)) $modx->cacheManager->delete($fileName);
+$s = $modx->cacheManager->set($file,$o);
 
 
 return $modx->error->success($file);
