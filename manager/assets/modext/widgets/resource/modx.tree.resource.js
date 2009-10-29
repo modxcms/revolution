@@ -311,6 +311,12 @@ MODx.window.QuickCreateResource = function(config) {
             ,width: 300
             ,rows: 2
         },{
+            xtype: 'textfield'
+            ,name: 'menutitle'
+            ,id: 'modx-'+this.ident+'-menutitle'
+            ,fieldLabel: _('resource_menutitle')
+            ,width: 300
+        },{
             xtype: 'modx-combo-template'
             ,name: 'template'
             ,id: 'modx-'+this.ident+'-template'
@@ -376,6 +382,12 @@ MODx.window.QuickUpdateResource = function(config) {
             ,name: 'alias'
             ,id: 'modx-'+this.ident+'-alias'
             ,fieldLabel: _('alias')
+            ,width: 300
+        },{
+            xtype: 'textfield'
+            ,name: 'menutitle'
+            ,id: 'modx-'+this.ident+'-menutitle'
+            ,fieldLabel: _('resource_menutitle')
             ,width: 300
         },{
             xtype: 'textarea'
