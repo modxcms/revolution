@@ -46,7 +46,7 @@ if (empty($_POST['email'])) $modx->error->addField('email',$modx->lexicon('user_
 /* check if the email address already exists */
 $emailExists = $modx->getObject('modUserProfile',array('email' => $_POST['email']));
 if ($emailExists) {
-	if ($user_email->get('internalKey') != $_POST['id']) {
+	if ($emailExists->get('internalKey') != $_POST['id']) {
 		$modx->error->addField('email',$modx->lexicon('user_err_already_exists_email'));
     }
 }
