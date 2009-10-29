@@ -307,7 +307,7 @@ while ($item) {
                         'items' => array(
                             array(
                               //  'id' => 'cm-resource-qcreate',
-                                'text' => $modx->lexicon('resource'),
+                                'text' => $modx->lexicon('document'),
                                 'scope' => 'this',
                                 'handler' => 'function(itm,e) {
                                     Ext.getCmp("modx-resource-tree").quickCreate(itm,e,"modResource","'.$item->context_key.'","'.$item->get('id').'");

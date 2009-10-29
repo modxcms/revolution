@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1317] Fixed erroneous label for quick create resource; should be Document
 - [#MODX-1316] Added menu title to quick create/update resource
 - Fixed issues with User grid
 - [#MODX-1325] Fixed console's download to file functionality
