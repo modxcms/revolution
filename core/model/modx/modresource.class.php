@@ -25,7 +25,7 @@ class modResource extends modAccessibleSimpleObject {
      * primary context for the resource.
      * @var string
      */
-    protected $_contextKey= null;
+    public $_contextKey= null;
     /**
      * Indicates if the resource has already been processed.
      * @var boolean
