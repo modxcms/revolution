@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage processors.element.propertyset
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 if (!isset($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
 $set = $modx->getObject('modPropertySet',$_REQUEST['id']);

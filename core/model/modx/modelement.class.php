@@ -46,13 +46,13 @@ class modElement extends modAccessibleSimpleObject {
      * @var string
      * @access private
      */
-    var $_propertyString= '';
+    public $_propertyString= '';
     /**
      * The source content of the element.
      * @var string
      * @access private
      */
-    var $_content= '';
+    public $_content= '';
     /**
      * The output of the element.
      * @var string
@@ -66,24 +66,24 @@ class modElement extends modAccessibleSimpleObject {
      * @var boolean
      * @access private
      */
-    var $_result= true;
+    public $_result= true;
     /**
      * The tag signature of the element instance.
      * @var string
      * @access private
      */
-    var $_tag= null;
+    public $_tag= null;
     /**
      * The character token which helps identify the element class in tag string.
      * @var string
      * @access private
      */
-    var $_token= '';
+    public $_token= '';
     /**
      * @var boolean If the element is cacheable or not.
      * @access private
      */
-    var $_cacheable= true;
+    public $_cacheable= true;
     /**
      * @var boolean Indicates if the element was processed already.
      * @access private
@@ -93,7 +93,31 @@ class modElement extends modAccessibleSimpleObject {
      * @var array Optional filters that can be used during processing.
      * @access private
      */
-    var $_filters= array ();
+    public $_filters= array ();
+
+    /**
+     * @var array A list of invalid characters in the name of an Element.
+     * @access protected
+     */
+    protected $_invalidCharacters = array('!','@','#','$','%','^','&','*',
+    '(',')','+','=','[',']','{','}','\'','"',':',';','\\','/','<','>','?'
+    ,' ',',','`','~');
+
+    /**
+     * Overrides xPDOObject::set to strip invalid characters from element names.
+     *
+     * {@inheritDoc}
+     */
+    public function set($k, $v= null, $vType= '') {
+        switch ($k) {
+            case 'name':
+            case 'templatename':
+                $v = str_replace($this->_invalidCharacters,'',$v);
+                break;
+            default: break;
+        }
+        return parent::set($k,$v,$vType);
+    }
 
     /**
      * Overrides xPDOObject::get to handle when retrieving the properties field

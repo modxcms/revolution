@@ -13,23 +13,15 @@
  * @package modx
  * @subpackage processors.element.chunk
  */
+if (!$modx->hasPermission('new_chunk')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('chunk');
 
-if (!$modx->hasPermission('new_chunk')) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
-
 /* default values */
-if (empty($_POST['name'])) { $_POST['name'] = $modx->lexicon('chunk_untitled'); }
-
-/* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$_POST['name'] = str_replace($invchars,'',$_POST['name']);
+if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('chunk_untitled');
 
 /* verify chunk with that name does not already exist */
-$name_exists = $modx->getObject('modChunk',array('name' => $_POST['name']));
-if ($name_exists != null) {
+$nameExists = $modx->getObject('modChunk',array('name' => $_POST['name']));
+if ($nameExists != null) {
     $modx->error->addField('name',$modx->lexicon('chunk_err_exists_name',array(
         'name' => $_POST['name'],
     )));
@@ -55,6 +47,7 @@ $chunk->set('locked',!empty($_POST['locked']));
 $modx->invokeEvent('OnBeforeChunkFormSave',array(
     'mode'  => 'new',
     'data' => $chunk->toArray(),
+    'chunk' => &$chunk,
 ));
 
 /* set properties */
@@ -74,6 +67,7 @@ if ($chunk->save() == false) {
 $modx->invokeEvent('OnChunkFormSave',array(
 	'mode' => 'new',
 	'id'   => $chunk->get('id'),
+    'chunk' => &$chunk,
 ));
 
 /* log manager action */

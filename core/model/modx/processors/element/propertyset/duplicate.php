@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage processors.element.propertyset
  */
+if (!$modx->hasPermission('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset','category');
 
 $_POST['copyels'] = !isset($_POST['copyels']) ? 0 : 1;
@@ -37,4 +38,4 @@ if ($set->save() === false) {
     return $modx->error->failure($modx->lexicon('propertyset_err_create'));
 }
 
-return $modx->error->success();
+return $modx->error->success('',$set);

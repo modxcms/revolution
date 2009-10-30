@@ -7,11 +7,8 @@
  * @package modx
  * @subpackage processors.element.chunk
  */
+if (!$modx->hasPermission('delete_chunk')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('chunk');
-
-if (!$modx->hasPermission('delete_chunk')) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
 
 /* get the chunk */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
@@ -23,7 +20,10 @@ if ($chunk == null) {
 }
 
 /* invoke OnBeforeChunkFormDelete event */
-$modx->invokeEvent('OnBeforeChunkFormDelete',array('id' => $chunk->get('id')));
+$modx->invokeEvent('OnBeforeChunkFormDelete',array(
+    'id' => $chunk->get('id'),
+  //  'chunk' => &$chunk,
+));
 
 /* remove chunk */
 if ($chunk->remove() == false) {
@@ -31,7 +31,10 @@ if ($chunk->remove() == false) {
 }
 
 /* invoke OnChunkFormDelete event */
-$modx->invokeEvent('OnChunkFormDelete',array('id' => $chunk->get('id')));
+$modx->invokeEvent('OnChunkFormDelete',array(
+    'id' => $chunk->get('id'),
+    //'chunk' => &$chunk,
+));
 
 /* log manager action */
 $modx->logManagerAction('chunk_delete','modChunk',$chunk->get('id'));

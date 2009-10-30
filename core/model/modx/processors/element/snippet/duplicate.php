@@ -9,32 +9,22 @@
  * @package modx
  * @subpackage processors.element.snippet
  */
-$modx->lexicon->load('snippet');
-
 if (!$modx->hasPermission('new_snippet')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('snippet');
 
 /* get old snippet */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
 $old_snippet = $modx->getObject('modSnippet',$_POST['id']);
-if ($old_snippet == null) {
-    return $modx->error->failure($modx->lexicon('snippet_err_not_found'));
-}
+if (!$old_snippet) return $modx->error->failure($modx->lexicon('snippet_err_not_found'));
 
 /* format new name */
 $newname = !empty($_POST['name']) ? $_POST['name'] : $modx->lexicon('duplicate_of').$old_snippet->get('name');
 
-/* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$newname = str_replace($invchars,'',$newname);
-
 /* check for duplicate name */
-$ae = $modx->getObject('modSnippet',array(
+$alreadyExists = $modx->getObject('modSnippet',array(
     'name' => $newname,
 ));
-if ($ae != null) {
-    return $modx->error->failure($modx->lexicon('snippet_err_exists_name'));
-}
+if ($alreadyExists) return $modx->error->failure($modx->lexicon('snippet_err_exists_name'));
 
 /* duplicate snippet */
 $snippet = $modx->newObject('modSnippet');

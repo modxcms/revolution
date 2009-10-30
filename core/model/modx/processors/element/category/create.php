@@ -7,14 +7,8 @@
  * @package modx
  * @subpackage processors.element.category
  */
-$modx->lexicon->load('category');
-
 if (!$modx->hasPermission('create')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-/* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$_POST['category'] = str_replace($invchars,'',$_POST['category']);
+$modx->lexicon->load('category');
 
 /* prevent empty names */
 if (empty($_POST['category'])) $modx->error->addField('category',$modx->lexicon('category_err_ns'));

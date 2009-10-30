@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Moved name character sanity checks for Elements to element class.
+- Cleaned up element processors, added missing permission checks, filled out plugin event calls
 - [#MODX-1355] Fixed erroneous label for quick create resource on Contexts
 - [#MODX-1352] Remove stay-buttons from user update screen 
 - [#MODX-1349] onDirty now fires on triggerfield-based TVs

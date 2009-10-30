@@ -14,21 +14,15 @@
  * @package modx
  * @subpackage processors.element.snippet
  */
+if (!$modx->hasPermission('new_snippet')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('snippet','category');
 
-if (!$modx->hasPermission('new_snippet')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
 /* data escaping */
-if ($_POST['name'] == '') $_POST['name'] = $modx->lexicon('snippet_untitled');
+if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('snippet_untitled');
 
-/* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$_POST['name'] = str_replace($invchars,'',$_POST['name']);
-
-
-$name_exists = $modx->getObject('modSnippet',array('name' => $_POST['name']));
-if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('snippet_err_exists_name'));
+/* make sure name isnt taken */
+$nameExists = $modx->getObject('modSnippet',array('name' => $_POST['name']));
+if ($nameExists) $modx->error->addField('name',$modx->lexicon('snippet_err_exists_name'));
 
 /* category */
 if (!empty($_POST['category'])) {
@@ -37,13 +31,6 @@ if (!empty($_POST['category'])) {
 }
 
 if ($modx->error->hasError()) return $modx->error->failure();
-
-
-/* invoke OnBeforeSnipFormSave event */
-$modx->invokeEvent('OnBeforeSnipFormSave',array(
-    'mode' => 'new',
-    'id' => 0,
-));
 
 /* create new snippet */
 $snippet = $modx->newObject('modSnippet');
@@ -56,6 +43,13 @@ if (isset($_POST['propdata'])) {
 }
 if (is_array($properties)) $snippet->setProperties($properties);
 
+/* invoke OnBeforeSnipFormSave event */
+$modx->invokeEvent('OnBeforeSnipFormSave',array(
+    'mode' => 'new',
+    'id' => 0,
+    'snippet' => &$snippet,
+));
+
 /* save snippet */
 if ($snippet->save() == false) {
     return $modx->error->failure($modx->lexicon('snippet_err_create'));
@@ -65,6 +59,7 @@ if ($snippet->save() == false) {
 $modx->invokeEvent('OnSnipFormSave',array(
     'mode' => 'new',
     'id' => $snippet->get('id'),
+    'snippet' => &$snippet,
 ));
 
 /* log manager action */
@@ -76,4 +71,4 @@ if (!empty($_POST['clearCache'])) {
     $cacheManager->clearCache();
 }
 
-return $modx->error->success('',$snippet->get(array_diff(array_keys($snippet->_fields), array('snippet'))));
+return $modx->error->success('',$snippet->get(array('id','name','description','category','locked')));

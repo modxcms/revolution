@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.element.category
  */
-$modx->lexicon->load('category');
-
 if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('category');
 
 /* get category */
 if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('category_err_ns'));

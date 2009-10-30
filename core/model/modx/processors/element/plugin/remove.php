@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.element.plugin
  */
-$modx->lexicon->load('plugin');
-
 if (!$modx->hasPermission('delete_plugin')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('plugin');
 
 /* get plugin */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
@@ -24,6 +23,7 @@ if ($plugin->remove() == false) {
 /* invoke OnPluginFormDelete event */
 $modx->invokeEvent('OnPluginFormDelete',array(
 	'id' => $plugin->get('id'),
+    'plugin' => &$plugin,
 ));
 
 /* log manager action */

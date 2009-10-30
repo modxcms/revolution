@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.element.snippet
  */
-$modx->lexicon->load('snippet');
-
 if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('snippet');
 
 /* get snippet */
 if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));

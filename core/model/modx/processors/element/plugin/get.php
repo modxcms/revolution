@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.element.plugin
  */
-$modx->lexicon->load('plugin');
-
 if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('plugin');
 
 /* get plugin */
 if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));

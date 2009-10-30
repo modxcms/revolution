@@ -8,9 +8,8 @@
  * @package modx
  * @subpackage processors.element.plugin
  */
-$modx->lexicon->load('plugin');
-
 if (!$modx->hasPermission('new_plugin')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('plugin');
 
 /* get old snippet */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
@@ -22,19 +21,13 @@ $newname = !empty($_POST['name'])
     ? $_POST['name']
     : $modx->lexicon('duplicate_of').$old_plugin->get('name');
 
-/* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$newname = str_replace($invchars,'',$newname);
-
-
 /* duplicate plugin */
 $plugin = $modx->newObject('modPlugin');
 $plugin->fromArray($old_plugin->toArray());
 $plugin->set('name',$newname);
 
 if ($plugin->save() === false) {
-    $modx->log(MODX_LOG_LEVEL_ERROR,$modx->lexicon('plugin_err_save').print_r($plugin->toArray(),true));
+    $modx->log(modX::LOG_LEVEL_ERROR,$modx->lexicon('plugin_err_save').print_r($plugin->toArray(),true));
     return $modx->error->failure($modx->lexicon('plugin_err_save'));
 }
 

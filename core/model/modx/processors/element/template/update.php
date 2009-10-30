@@ -16,14 +16,13 @@
  * @package modx
  * @subpackage processors.element.template
  */
-$modx->lexicon->load('template','category');
-
 if (!$modx->hasPermission('save_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('template','category');
 
 /* get template */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
 $template = $modx->getObject('modTemplate',$_POST['id']);
-if ($template == null) return $modx->error->failure($modx->lexicon('template_err_not_found'));
+if (!$template) return $modx->error->failure($modx->lexicon('template_err_not_found'));
 
 /* check locked status */
 if ($template->get('locked') && $modx->hasPermission('edit_locked') == false) {
@@ -31,21 +30,14 @@ if ($template->get('locked') && $modx->hasPermission('edit_locked') == false) {
 }
 
 /* Validation and data escaping */
-if (empty($_POST['templatename'])) {
-    $modx->error->addField('templatename',$modx->lexicon('template_err_not_specified_name'));
-}
-
-/* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$_POST['templatename'] = str_replace($invchars,'',$_POST['templatename']);
+if (empty($_POST['templatename'])) $modx->error->addField('templatename',$modx->lexicon('template_err_not_specified_name'));
 
 /* check to see if name already exists */
-$name_exists = $modx->getObject('modTemplate',array(
+$alreadyExists = $modx->getObject('modTemplate',array(
     'id:!=' => $template->get('id'),
-    'templatename' => $_POST['templatename']
+    'templatename' => $_POST['templatename'],
 ));
-if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('template_err_exists_name'));
+if ($alreadyExists) $modx->error->addField('name',$modx->lexicon('template_err_exists_name'));
 
 /* category */
 if (!empty($_POST['category'])) {
@@ -55,15 +47,18 @@ if (!empty($_POST['category'])) {
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
+/* set fields */
+$template->fromArray($_POST);
+$template->set('locked',!empty($_POST['locked']));
+
 /* invoke OnBeforeTempFormSave event */
 $modx->invokeEvent('OnBeforeTempFormSave',array(
     'mode' => 'new',
     'id' => $template->get('id'),
+    'template' => &$template,
 ));
 
-$template->fromArray($_POST);
-$template->set('locked',!empty($_POST['locked']));
-
+/* save template */
 if ($template->save() === false) {
     return $modx->error->failure($modx->lexicon('template_err_save'));
 }
@@ -101,6 +96,7 @@ if (isset($_POST['tvs'])) {
 $modx->invokeEvent('OnTempFormSave',array(
     'mode' => 'new',
     'id' => $template->get('id'),
+    'template' => &$template,
 ));
 
 /* log manager action */
@@ -112,4 +108,4 @@ if (!empty($_POST['clearCache'])) {
     $cacheManager->clearCache();
 }
 
-return $modx->error->success();
+return $modx->error->success('',$template->get(array_diff(array_keys($template->_fields), array('content'))));

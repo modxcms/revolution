@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.layout.tree.element
  */
-$modx->lexicon->load('category');
-
 if (!$modx->hasPermission('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('category');
 
 $data = urldecode($_POST['data']);
 $data = $modx->fromJSON($data);

@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage processors.element
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* TODO: make this dynamic */
 $classes = array(

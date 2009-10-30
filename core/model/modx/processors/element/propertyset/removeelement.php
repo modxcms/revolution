@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage processors.element.propertyset
  */
+if (!$modx->hasPermission('delete')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset','element');
 
 if (!isset($_POST['element_class']) || !isset($_POST['element'])) {
@@ -24,4 +25,4 @@ if ($pse->remove() === false) {
     return $modx->error->failure($modx->lexicon('propertyset_err_element_remove'));
 }
 
-return $modx->error->success();
+return $modx->error->success('',$pse);

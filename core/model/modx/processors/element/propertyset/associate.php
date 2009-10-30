@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage processors.element.propertyset
  */
+if (!$modx->hasPermission('create')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset');
 
 /* get element */

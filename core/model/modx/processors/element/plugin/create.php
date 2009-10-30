@@ -17,22 +17,15 @@
  * @package modx
  * @subpackage processors.element.plugin
  */
-$modx->lexicon->load('plugin','category');
-
 if (!$modx->hasPermission('new_plugin')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('plugin','category');
 
 /* set default name */
 if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('plugin_untitled');
 
-/* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$_POST['name'] = str_replace($invchars,'',$_POST['name']);
-
 /* check to see if name already exists */
-$name_exists = $modx->getObject('modPlugin',array('name' => $_POST['name']));
-if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('plugin_err_exists_name'));
-
+$nameExists = $modx->getObject('modPlugin',array('name' => $_POST['name']));
+if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('plugin_err_exists_name'));
 
 /* category */
 if (!empty($_POST['category'])) {
@@ -41,12 +34,6 @@ if (!empty($_POST['category'])) {
 }
 
 if ($modx->error->hasError()) return $modx->error->failure();
-
-/* invoke OnBeforePluginFormSave event */
-$modx->invokeEvent('OnBeforePluginFormSave',array(
-    'mode' => 'new',
-    'id' => 0
-));
 
 $plugin = $modx->newObject('modPlugin');
 $plugin->fromArray($_POST);
@@ -58,6 +45,14 @@ if (isset($_POST['propdata'])) {
 }
 if (is_array($properties)) $plugin->setProperties($properties);
 
+/* invoke OnBeforePluginFormSave event */
+$modx->invokeEvent('OnBeforePluginFormSave',array(
+    'mode' => 'new',
+    'id' => 0,
+    'plugin' => &$plugin,
+));
+
+
 if ($plugin->save() == false) {
     return $modx->error->failure($modx->lexicon('plugin_err_create'));
 }
@@ -66,25 +61,25 @@ if ($plugin->save() == false) {
 if (isset($_POST['events'])) {
     $_EVENTS = $modx->fromJSON($_POST['events']);
     foreach ($_EVENTS as $id => $event) {
-        if ($event['enabled']) {
-            $pe = $modx->getObject('modPluginEvent',array(
+        if (!empty($event['enabled'])) {
+            $pluginEvent = $modx->getObject('modPluginEvent',array(
                 'pluginid' => $plugin->get('id'),
                 'evtid' => $event['id'],
             ));
-            if ($pe == null) {
-                $pe = $modx->newObject('modPluginEvent');
+            if ($pluginEvent == null) {
+                $pluginEvent = $modx->newObject('modPluginEvent');
             }
-            $pe->set('pluginid',$plugin->get('id'));
-            $pe->set('evtid',$event['id']);
-            $pe->set('priority',$event['priority']);
-            $pe->save();
+            $pluginEvent->set('pluginid',$plugin->get('id'));
+            $pluginEvent->set('evtid',$event['id']);
+            $pluginEvent->set('priority',$event['priority']);
+            $pluginEvent->save();
         } else {
-            $pe = $modx->getObject('modPluginEvent',array(
+            $pluginEvent = $modx->getObject('modPluginEvent',array(
                 'pluginid' => $plugin->get('id'),
                 'evtid' => $event['id'],
             ));
-            if ($pe == null) continue;
-            $pe->remove();
+            if ($pluginEvent == null) continue;
+            $pluginEvent->remove();
         }
     }
 }
@@ -93,6 +88,7 @@ if (isset($_POST['events'])) {
 $modx->invokeEvent('OnPluginFormSave',array(
     'mode' => 'new',
     'id' => $plugin->get('id'),
+    'plugin' => &$plugin,
 ));
 
 /* log manager action */

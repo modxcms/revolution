@@ -14,20 +14,11 @@
  * @package modx
  * @subpackage processors.element.chunk
  */
+if (!$modx->hasPermission('save_chunk')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('chunk','category');
 
-if (!$modx->hasPermission('save_chunk')) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
-
 /* make sure a name was specified */
-if ($_POST['name'] == '') {
-    $modx->error->addField('name',$modx->lexicon('chunk_err_not_specified_name'));
-}
-/* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$_POST['name'] = str_replace($invchars,'',$_POST['name']);
+if (empty($_POST['name'])) $modx->error->addField('name',$modx->lexicon('chunk_err_not_specified_name'));
 
 /* grab chunk */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
@@ -67,7 +58,8 @@ if ($modx->error->hasError()) {
 /* invoke OnBeforeChunkFormSave event */
 $modx->invokeEvent('OnBeforeChunkFormSave',array(
     'mode' => 'upd',
-    'id' => $_POST['id'],
+    'id' => $chunk->get('id'),
+    'chunk' => &$chunk,
 ));
 
 /* propogate values */
@@ -83,6 +75,7 @@ if ($chunk->save() == false) {
 $modx->invokeEvent('OnChunkFormSave',array(
     'mode'  => 'upd',
     'id'    => $chunk->get('id'),
+    'chunk' => &$chunk,
 ));
 
 /* log manager action */

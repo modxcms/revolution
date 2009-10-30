@@ -25,12 +25,6 @@ $sortAlias = $modx->getOption('sort',$_REQUEST,'modTemplateVar');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 $template = $modx->getOption('template',$_REQUEST,false);
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'rank';
-if (!isset($_REQUEST['sortAlias'])) $_REQUEST['sortAlias'] = 'modTemplateVar';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
 $c = $modx->newQuery('modTemplateVar');
 
 if ($template) {

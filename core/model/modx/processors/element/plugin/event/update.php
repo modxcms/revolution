@@ -3,9 +3,8 @@
  * @package modx
  * @subpackage processors.element.plugin.event
  */
-$modx->lexicon->load('plugin');
-
 if (!$modx->hasPermission('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('plugin');
 
 /* validation */
 if (empty($_POST['priority'])) $_POST['priority'] = 0;
@@ -14,32 +13,31 @@ if (empty($_POST['plugin']) || empty($_POST['event'])) {
 }
 
 /* get plugin event */
-$pe = $modx->getObject('modPluginEvent',array(
+$pluginEvent = $modx->getObject('modPluginEvent',array(
     'pluginid' => $_POST['plugin'],
     'evtid' => $_POST['id'],
 ));
-
 if ($_POST['enabled']) {
     /* enabling system event or editing priority */
-    if ($pe == null) {
-        $pe = $modx->newObject('modPluginEvent');
+    if (!$pluginEvent) {
+        $pluginEvent = $modx->newObject('modPluginEvent');
     }
-    $pe->set('pluginid',$_POST['plugin']);
-    $pe->set('evtid',$_POST['id']);
-    $pe->set('priority',$_POST['priority']);
+    $pluginEvent->set('pluginid',$_POST['plugin']);
+    $pluginEvent->set('evtid',$_POST['id']);
+    $pluginEvent->set('priority',$_POST['priority']);
 
-    if ($pe->save() == false) {
+    if ($pluginEvent->save() == false) {
         return $modx->error->failure($modx->lexicon('plugin_event_err_save'));
     }
 } else {
     /* removing access */
-    if ($pe == null) {
+    if (!$pluginEvent) {
         return $modx->error->failure($modx->lexicon('plugin_event_err_nf'));
     }
 
-    if ($pe->remove() == false) {
+    if ($pluginEvent->remove() == false) {
         return $modx->error->failure($modx->lexicon('plugin_event_err_remove'));
     }
 }
 
-return $modx->error->success();
+return $modx->error->success('',$pluginEvent);

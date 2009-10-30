@@ -5,13 +5,14 @@
  * @package modx
  * @subpackage processors.element.propertyset
  */
+if (!$modx->hasPermission('create')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset');
 
 /* make sure set with that name doesn't already exist */
-$ae = $modx->getCount('modPropertySet',array(
+$alreadyExists = $modx->getCount('modPropertySet',array(
     'name' => $_POST['name'],
 ));
-if ($ae > 0) return $modx->error->failure($modx->lexicon('propertyset_err_ae'));
+if ($alreadyExists > 0) return $modx->error->failure($modx->lexicon('propertyset_err_ae'));
 
 /* create property set */
 $set = $modx->newObject('modPropertySet');
@@ -32,4 +33,4 @@ if ($set->save() === false) {
     return $modx->error->failure($modx->lexicon('propertyset_err_create'));
 }
 
-return $modx->error->success();
+return $modx->error->success('',$set);

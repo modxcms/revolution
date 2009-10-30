@@ -8,9 +8,8 @@
  * @package modx
  * @subpackage processors.element.chunk
  */
-$modx->lexicon->load('chunk');
-
 if (!$modx->hasPermission('new_chunk')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('chunk');
 
 /* Get old chunk */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
@@ -21,11 +20,6 @@ if ($old_chunk == null) return $modx->error->failure($modx->lexicon('chunk_err_n
 $newname = isset($_POST['name'])
     ? $_POST['name']
     : $modx->lexicon('duplicate_of').$old_chunk->get('name');
-
-/* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$newname = str_replace($invchars,'',$newname);
 
 /* duplicate chunk */
 $chunk = $modx->newObject('modChunk');

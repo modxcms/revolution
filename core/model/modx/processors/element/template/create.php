@@ -15,25 +15,17 @@
  * @package modx
  * @subpackage processors.element.template
  */
-$modx->lexicon->load('template','category');
-
 if (!$modx->hasPermission('new_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('template','category');
 
 /* set default name if necessary */
 if (empty($_POST['templatename'])) $_POST['templatename'] = $modx->lexicon('template_untitled');
 
-/* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$_POST['templatename'] = str_replace($invchars,'',$_POST['templatename']);
-
 /* check to see if a template already exists with that name */
-$name_exists = $modx->getObject('modTemplate',array(
+$nameExists = $modx->getObject('modTemplate',array(
     'templatename' => $_POST['templatename'],
 ));
-if ($name_exists != null) {
-    $modx->error->addField('templatename',$modx->lexicon('template_err_exists_name'));
-}
+if ($nameExists) $modx->error->addField('templatename',$modx->lexicon('template_err_exists_name'));
 
 /* category */
 if (!empty($_POST['category'])) {
@@ -43,12 +35,7 @@ if (!empty($_POST['category'])) {
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
-/* invoke OnBeforeTempFormSave event */
-$modx->invokeEvent('OnBeforeTempFormSave',array(
-    'mode' => 'new',
-    'id' => 0,
-));
-
+/* set fields */
 $template = $modx->newObject('modTemplate');
 $template->fromArray($_POST);
 $template->set('locked',!empty($_POST['locked']));
@@ -59,6 +46,14 @@ if (!empty($_POST['propdata'])) {
 }
 if (is_array($properties)) $template->setProperties($properties);
 
+/* invoke OnBeforeTempFormSave event */
+$modx->invokeEvent('OnBeforeTempFormSave',array(
+    'mode' => 'new',
+    'id' => 0,
+    'template' => &$template,
+));
+
+/* save template */
 if ($template->save() === false) {
     return $modx->error->failure($modx->lexicon('template_err_save'));
 }
@@ -95,6 +90,7 @@ if (isset($_POST['tvs'])) {
 $modx->invokeEvent('OnTempFormSave',array(
     'mode' => 'new',
     'id' => $template->get('id'),
+    'template' => &$template,
 ));
 
 /* log manager action */

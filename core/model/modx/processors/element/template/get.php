@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.element.template
  */
-$modx->lexicon->load('template');
-
 if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('template');
 
 /* get template */
 if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));

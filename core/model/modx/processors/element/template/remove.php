@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.element.template
  */
-$modx->lexicon->load('template','tv');
-
 if (!$modx->hasPermission('delete_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('template','tv');
 
 /* get template and related tables */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
@@ -31,18 +30,21 @@ if (count($resources) > 0) {
 }
 
 /* make sure isn't default template */
-if ($template->get('id') == $default_template) {
+if ($template->get('id') == $modx->getOption('default_template',null,1)) {
 	return $modx->error->failure($modx->lexicon('template_err_default_template'));
 }
 
 /* invoke OnBeforeTempFormDelete event */
-$modx->invokeEvent('OnBeforeTempFormDelete',array('id' => $template->get('id')));
+$modx->invokeEvent('OnBeforeTempFormDelete',array(
+    'id' => $template->get('id'),
+    'template' => &$template,
+));
 
 /* remove template var maps */
 $templateTVs = $template->getMany('TemplateVarTemplates');
 foreach ($templateTVs as $ttv) {
 	if ($ttv->remove() == false) {
-        $modx->log(MODX_LOG_LEVEL_ERROR,$modx->lexicon('tvt_err_remove'));
+        $modx->log(modX::LOG_LEVEL_ERROR,$modx->lexicon('tvt_err_remove'));
     }
 }
 
@@ -52,7 +54,10 @@ if ($template->remove() == false) {
 }
 
 /* invoke OnTempFormDelete event */
-$modx->invokeEvent('OnTempFormDelete',array('id' => $template->get('id')));
+$modx->invokeEvent('OnTempFormDelete',array(
+    'id' => $template->get('id'),
+    'template' => &$template,
+));
 
 /* log manager action */
 $modx->logManagerAction('template_delete','modTemplate',$template->get('id'));
@@ -61,4 +66,4 @@ $modx->logManagerAction('template_delete','modTemplate',$template->get('id'));
 $cacheManager= $modx->getCacheManager();
 $cacheManager->clearCache();
 
-return $modx->error->success();
+return $modx->error->success('',$template->get(array_diff(array_keys($template->_fields), array('content'))));
