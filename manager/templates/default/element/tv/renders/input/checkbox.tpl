@@ -9,6 +9,7 @@ MODx.load({
     ,fieldLabel: 'test'
     ,width: 300
     ,vertical: true
+    ,columns: 3
     ,renderTo: 'tv{$tv->id}-cb'
     ,name: 'tv-{$tv->id}'
     

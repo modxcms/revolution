@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed column alignment with radio/checkbox TV inputs
+- [#MODX-1350] Fixed issue where reset to default wasnt working with radio TV inputs 
 - [#MODX-1360] Fixed issue where publishedon was being reset in quick update
 - Sanity fixes to misc processors
 - Added access modifiers to methods in modElement
