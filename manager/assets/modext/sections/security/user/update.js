@@ -28,7 +28,6 @@ MODx.page.UpdateUser = function(config) {
         },{
             process: 'cancel', text: _('cancel'), params: {a:MODx.action['security/user']}
         }]
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-user'
             ,renderTo: 'modx-panel-user-div'
