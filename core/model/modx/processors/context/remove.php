@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.context
  */
-$modx->lexicon->load('context');
-
 if (!$modx->hasPermission('delete_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('context');
 
 /* get context */
 if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('context_err_ns'));

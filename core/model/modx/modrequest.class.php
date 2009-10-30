@@ -442,18 +442,18 @@ class modRequest {
         }
     }
 
-    function getAllActionIDs($namespace = '') {
+    public function getAllActionIDs($namespace = '') {
         $c = array();
-        if ($namespace != '') $c['namespace'] = $namespace;
+        if (!empty($namespace)) $c['namespace'] = $namespace;
         $actions = $this->modx->getCollection('modAction',$c);
 
-        $as = array();
+        $actionList = array();
         foreach ($actions as $action) {
-            $as[$action->get('controller')] = $action->get('id');
+            $actionList[$action->get('controller')] = $action->get('id');
         }
-        return $as;
+        return $actionList;
     }
-    function getActionIDs($actions = array(), $namespace = 'core') {
+    public function getActionIDs($actions = array(), $namespace = 'core') {
         if (!is_array($actions)) return false;
         $as = array();
         foreach ($actions as $action) {

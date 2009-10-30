@@ -20,8 +20,8 @@ $_POST['key'] = str_replace('_','',$_POST['key']);
 if (empty($_POST['key'])) $modx->error->addError('key',$modx->lexicon('context_err_ns'));
 
 /* prevent duplicate contexts */
-$ae = $modx->getObject('modContext',$_POST['key']);
-if ($ae != null) $modx->error->addField('key',$modx->lexicon('context_err_ae'));
+$alreadyExists = $modx->getObject('modContext',$_POST['key']);
+if ($alreadyExists != null) $modx->error->addField('key',$modx->lexicon('context_err_ae'));
 
 /* if any errors, return */
 if ($modx->error->hasError()) {

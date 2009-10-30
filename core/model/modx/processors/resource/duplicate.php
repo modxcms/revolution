@@ -11,14 +11,15 @@
  * @package modx
  * @subpackage processors.resource
  */
+if (!$modx->hasPermission('create')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
 $duplicate_children = isset($_POST['duplicate_children']);
 $newname = isset($_POST['name']) && $_POST['name'] != '' ? $_POST['name'] : '';
 
 /* get resource */
-$old_resource = $modx->getObject('modResource',$_REQUEST['id']);
-if ($old_resource == null) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_REQUEST['id'])));
+$old_resource = $modx->getObject('modResource',$_POST['id']);
+if ($old_resource == null) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_POST['id'])));
 
 if (!$modx->hasPermission('new_document')) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
@@ -35,7 +36,7 @@ if ($parent && !$parent->checkPolicy('add_children')) {
 /* get resource's children */
 $old_resource->children = getChildren($old_resource);
 
-$new_id = $_REQUEST['id'];
+$new_id = $_POST['id'];
 $new_resource = duplicateResource($old_resource,$newname,$duplicate_children);
 
 

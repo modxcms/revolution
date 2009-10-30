@@ -11,40 +11,43 @@
  * @package modx
  * @subpackage processors.context
  */
+if (!$modx->hasPermission('view_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('context');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'key';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-if ($_REQUEST['sort'] == 'key_link') $_REQUEST['sort'] = 'key';
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'key');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
+/* query contexts */
 $c = $modx->newQuery('modContext');
-$c->select($modx->getSelectColumns('modContext'));
-$c->sortby('`' . $_REQUEST['sort'] . '`', $_REQUEST['dir']);
-$c->limit($_REQUEST['limit'], $_REQUEST['start']);
+$c->sortby('`'.$sort.'`',$dir);
+if ($isLimit) $c->limit($limit,$start);
+$contexts = $modx->getCollection('modContext',$c);
+$count = $modx->getCount('modContext');
 
-$collection = $modx->getCollection('modContext', $c);
-
+/* iterate through contexts */
 $list = array();
-foreach ($collection as $key => $object) {
-    if (!$object->checkPolicy('list')) continue;
-	$la = $object->toArray();
-    $la['menu'] = array(
-        array(
+foreach ($contexts as $context) {
+    if (!$context->checkPolicy('list')) continue;
+
+    $contextArray = $context->toArray();
+    $contextArray['menu'] = array();
+    if ($modx->hasPermission('edit_context')) {
+        $contextArray['menu'][] = array(
             'text' => $modx->lexicon('context_update'),
-            'handler' => 'this.update'
-        ),
-    );
-    if (!in_array($key,array('mgr','web'))) {
-        array_push($la['menu'],
-            '-',
-            array(
-                'text' => $modx->lexicon('context_remove'),
-                'handler' => 'this.remove.createDelegate(this,["context_remove_confirm"])',
-            )
+            'handler' => 'this.update',
         );
     }
-    $list[]= $la;
+    if (!in_array($context->get('key'),array('mgr','web')) && $modx->hasPermission('delete_context')) {
+        $contextArray['menu'][] = '-';
+        $contextArray['menu'][] = array(
+            'text' => $modx->lexicon('context_remove'),
+            'handler' => 'this.remove.createDelegate(this,["context_remove_confirm"])',
+        );
+    }
+    $list[]= $contextArray;
 }
-return $this->outputArray($list);
+return $this->outputArray($list,$count);

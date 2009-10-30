@@ -58,7 +58,7 @@ foreach ($groups as $group) {
         ),
 	);
 }
-if ($usergroup != null) {
+if ($usergroup) {
 	$users = $usergroup->getMany('Users');
 	foreach ($users as $user) {
         $menu = array();

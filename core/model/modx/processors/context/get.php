@@ -7,6 +7,7 @@
  * @package modx
  * @subpackage processors.context
  */
+if (!$modx->hasPermission('view_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('context');
 
 if (!isset($_REQUEST['key'])) {

@@ -67,7 +67,7 @@
 			{
 				$methName = $m;
 			}
-			$sysCall = $this->allow_system_funcs && ereg("^system\.", $methName);
+			$sysCall = $this->allow_system_funcs && @ereg("^system\.", $methName);
 			$dmap = $sysCall ? $GLOBALS['_xmlrpcs_dmap'] : $this->dmap;
 
 			if(!isset($dmap[$methName]['function']))

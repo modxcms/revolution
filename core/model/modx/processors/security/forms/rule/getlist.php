@@ -14,13 +14,14 @@
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('formcustomization');
 
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'action');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
-$limit = isset($_REQUEST['limit']);
-if (empty($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (empty($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (empty($_REQUEST['sort'])) $_REQUEST['sort'] = 'action';
-if (empty($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* query for rules */
 $c = $modx->newQuery('modActionDom');
 $c->innerJoin('modAction','Action');
 $c->leftJoin('modAccessActionDom','Access');
@@ -32,29 +33,35 @@ $c->select('modActionDom.*,
     Access.principal_class AS principal_class
 ');
 
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->sortby($sort,$dir);
+if ($limit) $c->limit($limit,$start);
 
 $rules = $modx->getCollection('modActionDom', $c);
 
+/* iterate through rules */
 $data = array();
+$canEdit = $modx->hasPermission('edit');
+$canRemove = $modx->hasPermission('remove');
 foreach ($rules as $rule) {
     $ruleArray = $rule->toArray();
 
     if ($ruleArray['principal'] == null) $ruleArray['principal'] = 0;
     if ($ruleArray['principal_class'] == null) $ruleArray['principal_class'] = '';
 
-    $ruleArray['menu'] = array(
-        array(
+    $ruleArray['menu'] = array();
+    if ($canEdit) {
+        $ruleArray['menu'][] = array(
             'text' => $modx->lexicon('edit'),
             'handler' => 'this.updateRule',
-        ),
-        '-',
-        array(
+        );
+        $ruleArray['menu'][] = '-';
+    }
+    if ($canRemove) {
+        $ruleArray['menu'][] = array(
             'text' => $modx->lexicon('remove'),
             'handler' => 'this.confirm.createDelegate(this,["remove","rule_remove_confirm"])',
-        ),
-    );
+        );
+    }
     $data[] = $ruleArray;
 }
 

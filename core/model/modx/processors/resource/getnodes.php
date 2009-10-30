@@ -10,6 +10,7 @@
  * @package modx
  * @subpackage processors.layout.tree.resource
  */
+if (!$modx->hasPermission('list')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource','context');
 
 $_REQUEST['sortBy'] = !empty($_REQUEST['sortBy']) ? $_REQUEST['sortBy'] : 'menuindex';

@@ -8,18 +8,13 @@
  * @package modx
  * @subpackage processors.context
  */
+if (!$modx->hasPermission('edit_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('context');
 
-if (!$modx->hasPermission('edit_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-/* validate pk */
-if (empty($_POST['key'])) {
-    return $modx->error->failure($modx->lexicon('context_err_ns'));
-}
-
 /* get context */
+if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('context_err_ns'));
 $context= $modx->getObject('modContext', $_POST['key']);
-if ($context == null) return $modx->error->failure($modx->lexicon('context_err_nfs',array('key' => $_POST['key'])));
+if (!$context) return $modx->error->failure($modx->lexicon('context_err_nfs',array('key' => $_POST['key'])));
 
 /* set values */
 $context->fromArray($_POST);

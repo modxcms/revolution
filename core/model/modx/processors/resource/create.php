@@ -47,10 +47,10 @@
  * @package modx
  * @subpackage processors.resource
  */
+if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 global $resource;
 $modx->lexicon->load('resource');
 
-if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* load delegate processor */
 $resourceClass = !empty($_POST['class_key']) ? $_POST['class_key'] : 'modDocument';

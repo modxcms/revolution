@@ -12,24 +12,29 @@
  * @package modx
  * @subpackage processors.resource
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'pagetitle';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'pagetitle');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
+/* query for resources */
 $c = $modx->newQuery('modResource');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+$count = $modx->getCount('modResource',$c);
 
-if (isset($_REQUEST['limit'])) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $resources = $modx->getCollection('modResource',$c);
 
-$cs = array();
+/* iterate through resources */
+$list = array();
 foreach ($resources as $resource) {
     if ($resource->checkPolicy('list')) {
-        $cs[] = $resource->toArray();
+        $list[] = $resource->toArray();
     }
 }
-return $this->outputArray($cs);
+return $this->outputArray($list,$count);
