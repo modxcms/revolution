@@ -27,7 +27,7 @@ if ($menus == null) {
 $output = '';
 $order = 0;
 foreach ($menus as $menu) {
-    $output .= '<li id="limenu'.$menu['id'].'" class="top'.($order == 0 ? ' active' : '').'">'."\n";
+    $output .= '<li id="limenu-'.$menu['text'].'" class="top'.($order == 0 ? ' active' : '').'">'."\n";
     $output .= '<a>'.$menu['text'].'</a>'."\n";
     $output .= '<div class="zone">'."\n";
 
