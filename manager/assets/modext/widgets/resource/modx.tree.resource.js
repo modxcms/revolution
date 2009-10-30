@@ -507,6 +507,11 @@ MODx.getQRSettings = function(id,va) {
         ,id: 'modx-'+id+'-class_key'
         ,value: va['class_key']
     },{
+        xtype: 'hidden'
+        ,name: 'publishedon'
+        ,id: 'modx-'+id+'-publishedon'
+        ,value: va['publishedon']
+    },{
         xtype: 'checkbox'
         ,name: 'published'
         ,id: 'modx-'+id+'-published'
