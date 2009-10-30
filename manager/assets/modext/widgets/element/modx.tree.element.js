@@ -101,7 +101,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 			,text: _('remove_this_confirm')+' '+oar[0]+'?'
 			,url: MODx.config.connectors_url+'element/'+oar[0]+'.php'
 			,params: {
-				action: 'delete'
+				action: 'remove'
 				,id: oar[2]
 			}
 			,listeners: {

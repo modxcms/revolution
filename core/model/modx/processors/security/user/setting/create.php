@@ -13,6 +13,7 @@
  * @package modx
  * @subpackage processors.context.setting
  */
+if (!$modx->hasPermission('create')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting','namespace');
 
 /* get namespace */
@@ -27,11 +28,11 @@ if (in_array(substr($_POST['key'],0,1),$nums)) {
 }
 
 /* prevent duplicate keys */
-$ae = $modx->getObject('modUserSetting',array(
+$alreadyExists = $modx->getObject('modUserSetting',array(
     'key' => $_POST['key'],
     'user' => $_POST['user'],
 ));
-if ($ae != null) return $modx->error->failure($modx->lexicon('setting_err_ae'));
+if ($alreadyExists) return $modx->error->failure($modx->lexicon('setting_err_ae'));
 
 
 if ($modx->error->hasError) {
@@ -95,4 +96,4 @@ if ($setting->save() === false) {
 
 $modx->reloadConfig();
 
-return $modx->error->success();
+return $modx->error->success('',$setting);

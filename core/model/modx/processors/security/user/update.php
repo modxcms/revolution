@@ -31,7 +31,7 @@ if ($_POST['passwordnotifymethod'] == 'e') {
 $modx->invokeEvent('OnBeforeUserFormSave',array(
 	'mode' => 'upd',
     'user' => &$user,
-	'id' => $_POST['id'],
+	'id' => $user->get('id'),
 ));
 
 

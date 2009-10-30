@@ -24,6 +24,7 @@ $s = include_once $modx->getOption('processors_path').'security/user/_validation
 $modx->invokeEvent('OnBeforeUserFormSave',array(
 	'mode' => 'new',
 	'id' => $_POST['id'],
+    'user' => &$user,
 ));
 
 /* create user group links */

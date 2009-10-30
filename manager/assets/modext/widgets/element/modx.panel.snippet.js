@@ -154,6 +154,7 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
     }
     ,success: function(r) {
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
+        this.getForm().setValues(r.result.object);
         
         var t = parent.Ext.getCmp('modx-element-tree');
         var c = Ext.getCmp('modx-snippet-category').getValue();

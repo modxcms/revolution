@@ -153,7 +153,7 @@ class modElement extends modAccessibleSimpleObject {
      * @access public
      * @return string A tag representation of the element.
      */
-    function getTag() {
+    public function getTag() {
         if (empty($this->_tag)) {
             $propTemp = array();
             if (empty($this->_propertyString) && !empty($this->_properties)) {
@@ -195,7 +195,7 @@ class modElement extends modAccessibleSimpleObject {
      * content associated with the element.
      * @return mixed The result of processing.
      */
-    function process($properties= null, $content= null) {
+    public function process($properties= null, $content= null) {
         $this->xpdo->getParser();
         $this->getProperties($properties);
         $this->getTag();
@@ -215,7 +215,7 @@ class modElement extends modAccessibleSimpleObject {
      *
      * @access public
      */
-    function cache() {
+    public function cache() {
         if ($this->isCacheable()) {
             $this->xpdo->elementCache[$this->_tag]= $this->_output;
         }
@@ -229,7 +229,7 @@ class modElement extends modAccessibleSimpleObject {
      *
      * @access protected
      */
-    function filterInput() {
+    public function filterInput() {
         $filter= null;
         if (!isset ($this->_filters['input']) || !is_a($this->_filters['input'], 'modInputFilter')) {
             if (!$inputFilterClass= $this->get('input_filter')) {
@@ -255,7 +255,7 @@ class modElement extends modAccessibleSimpleObject {
      *
      * @access protected
      */
-    function filterOutput() {
+    public function filterOutput() {
         $filter= null;
         if (!isset ($this->_filters['output']) || is_a($this->_filters['output'], 'modOutputFilter')) {
             if (!$outputFilterClass= $this->get('output_filter')) {
@@ -277,7 +277,7 @@ class modElement extends modAccessibleSimpleObject {
      *
      * {@inheritdoc}
      */
-    function findPolicy($context = '') {
+    public function findPolicy($context = '') {
         $policy = array();
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (empty($this->_policies) || !isset($this->_policies[$context])) {
@@ -319,7 +319,7 @@ class modElement extends modAccessibleSimpleObject {
      * behavior of the method.
      * @return string The raw source content for the element.
      */
-    function getContent($options = array()) {
+    public function getContent(array $options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
@@ -341,7 +341,7 @@ class modElement extends modAccessibleSimpleObject {
      * behavior of the method.
      * @return boolean True indicates the content was set.
      */
-    function setContent($content, $options = array()) {
+    public function setContent($content, array $options = array()) {
         return $this->set('content', $content);
     }
 
@@ -353,7 +353,7 @@ class modElement extends modAccessibleSimpleObject {
      * apply.
      * @return array A simple array of properties ready to use for processing.
      */
-    function getProperties($properties = null) {
+    public function getProperties($properties = null) {
         $this->xpdo->getParser();
         $this->_properties= $this->xpdo->parser->parseProperties($this->get('properties'));
         $set= $this->getPropertySet();
@@ -384,7 +384,7 @@ class modElement extends modAccessibleSimpleObject {
      * @param string|null $setName An explicit property set name to search for.
      * @return array|null An array of properties or null if no set is found.
      */
-    function getPropertySet($setName = null) {
+    public function getPropertySet($setName = null) {
         $propertySet= null;
         if ($setName === null) {
             $name = $this->get('name');
@@ -422,7 +422,7 @@ class modElement extends modAccessibleSimpleObject {
      * existing ones.
      * @return boolean true if the properties are set.
      */
-    function setProperties($properties, $merge = false) {
+    public function setProperties($properties, $merge = false) {
         $set = false;
         $propertyArray = array();
         if (is_string($properties)) {
@@ -475,7 +475,7 @@ class modElement extends modAccessibleSimpleObject {
      * name of a modPropertySet object to create a relationship with.
      * @return boolean True if a relationship was created or already exists.
      */
-    function addPropertySet($propertySet) {
+    public function addPropertySet($propertySet) {
         $added= false;
         if (!empty($propertySet)) {
             if (is_string($propertySet)) {
@@ -505,13 +505,13 @@ class modElement extends modAccessibleSimpleObject {
      * name of a modPropertySet object to dissociate from.
      * @return boolean True if a relationship was destroyed.
      */
-    function removePropertySet($propertySet) {
+    public function removePropertySet($propertySet) {
         $removed = false;
         if (!empty($propertySet)) {
             if (is_string($propertySet)) {
                 $propertySet = $this->xpdo->getObject('modPropertySet', array('name' => $propertySet));
             }
-            if (is_object($propertySet) && is_a($propertySet, 'modPropertySet')) {
+            if (is_object($propertySet) && $propertySet instanceof modPropertySet) {
                 $removed = $this->xpdo->removeObject('modElementPropertySet', array('element' => $this->get('id'), 'element_class' => $this->_class, 'property_set' => $propertySet->get('id')));
             }
         }
@@ -525,7 +525,7 @@ class modElement extends modAccessibleSimpleObject {
      * @return boolean True if the element can be stored to or retrieved from
      * the element cache.
      */
-    function isCacheable() {
+    public function isCacheable() {
         return $this->_cacheable;
     }
 
@@ -536,7 +536,7 @@ class modElement extends modAccessibleSimpleObject {
      * @param boolean $cacheable Indicates the value to set for cacheability of
      * this element.
      */
-    function setCacheable($cacheable = true) {
+    public function setCacheable($cacheable = true) {
         $this->_cacheable = (boolean) $cacheable;
     }
 
@@ -549,7 +549,7 @@ class modElement extends modAccessibleSimpleObject {
      * scope you can use to restore values from, or an empty array if no
      * placeholders were overwritten.
      */
-    function toPlaceholders($placeholders) {
+    public function toPlaceholders($placeholders) {
         $restore = array();
         if (is_array($placeholders) && !empty($placeholders)) {
             $restoreKeys = array_keys($placeholders);

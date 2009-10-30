@@ -167,6 +167,7 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
     }
     ,success: function(r) {
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
+        this.getForm().setValues(r.result.object);
         
         var c = Ext.getCmp('modx-chunk-category').getValue();
         var n = c !== '' && c !== null ? 'n_chunk_category_'+c : 'n_type_chunk';

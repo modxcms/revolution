@@ -4,9 +4,8 @@
  * @subpackage processors.security.user.setting
  * @deprecated
  */
-$modx->lexicon->load('user');
-
 if (!$modx->hasPermission('save_user')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('user');
 
 /* array of post values to ignore in this function */
 $ignore = array (

@@ -232,10 +232,11 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             ,propdata: Ext.getCmp('modx-grid-element-properties').encode()
         });
     }
-    ,success: function(o) {
+    ,success: function(r) {
         Ext.getCmp('modx-grid-tv-template').getStore().commitChanges();
         Ext.getCmp('modx-grid-tv-security').getStore().commitChanges();
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
+        this.getForm().setValues(r.result.object);
         
         var t = parent.Ext.getCmp('modx-element-tree');
         var c = Ext.getCmp('modx-tv-category').getValue();

@@ -163,9 +163,10 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
             ,stay: MODx.config.stay
         });
     }
-    ,success: function(o) {
+    ,success: function(r) {
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         Ext.getCmp('modx-grid-template-tv').getStore().commitChanges();
+        this.getForm().setValues(r.result.object);
         
         var t = parent.Ext.getCmp('modx-element-tree');
         var c = Ext.getCmp('modx-template-category').getValue();

@@ -9,6 +9,7 @@
  * @package modx
  * @subpackage processors.security.user.setting
  */
+if (!$modx->hasPermission('save_user')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
 $_DATA = $modx->fromJSON($_POST['data']);

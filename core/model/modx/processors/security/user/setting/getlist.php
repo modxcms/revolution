@@ -12,54 +12,63 @@
  * @package modx
  * @subpackage processors.system.settings
  */
+if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'key';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'key');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$user = $modx->getOption('user',$_REQUEST,0);
+$key = $modx->getOption('key',$_REQUEST,false);
 
-$wa = array(
-    'user' => $_REQUEST['user'],
+/* setup criteria and get settings */
+$where = array(
+    'user' => $user,
 );
-if (!empty($_REQUEST['key'])) $wa['key:LIKE'] = '%'.$_REQUEST['key'].'%';
+if ($key) $where['key:LIKE'] = '%'.$key.'%';
 
 $c = $modx->newQuery('modUserSetting');
-$c->where($wa);
+$c->where($where);
 $count = $modx->getCount('modUserSetting',$c);
 
-$c->sortby('`'.$_REQUEST['sort'].'`',$_REQUEST['dir']);
-if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $settings = $modx->getCollection('modUserSetting',$c);
 
-$ss = array();
+/* iterate through settings */
+$list = array();
 foreach ($settings as $setting) {
-    $sa = $setting->toArray();
-    $k = 'setting_'.$sa['key'];
+    $settingArray = $setting->toArray();
+    $k = 'setting_'.$settingArray['key'];
 
     /* if 3rd party setting, load proper text */
-    $modx->lexicon->load($setting->namespace.':default');
+    $modx->lexicon->load($setting->get('namespace').':default');
 
+    /* set area text if has a lexicon string for it */
     if ($modx->lexicon->exists('area_'.$setting->get('area'))) {
-        $sa['area_text'] = $modx->lexicon('area_'.$setting->get('area'));
+        $settingArray['area_text'] = $modx->lexicon('area_'.$setting->get('area'));
     } else {
-        $sa['area_text'] = $sa['area'];
+        $settingArray['area_text'] = $settingArray['area'];
     }
 
-    $sa['description'] = $modx->lexicon->exists($k.'_desc')
+    /* load name/desc text */
+    $settingArray['description'] = $modx->lexicon->exists($k.'_desc')
         ? $modx->lexicon($k.'_desc')
         : '';
-    $sa['name'] = $modx->lexicon->exists($k)
+    $settingArray['name'] = $modx->lexicon->exists($k)
         ? $modx->lexicon($k)
-        : $sa['key'];
+        : $settingArray['key'];
 
-    $sa['menu'] = array(
-        array(
-            'text' => $modx->lexicon('setting_remove'),
-            'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm"])',
-        ),
+
+    $menu = array();
+    $menu[] = array(
+        'text' => $modx->lexicon('setting_remove'),
+        'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm"])',
     );
-    $ss[] = $sa;
+    $settingArray['menu'] = $menu;
+    $list[] = $settingArray;
 }
-return $this->outputArray($ss,$count);
+return $this->outputArray($list,$count);

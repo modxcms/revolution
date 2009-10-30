@@ -8,6 +8,7 @@
  * @package modx
  * @subpackage processors.security.user.setting
  */
+if (!$modx->hasPermission('delete')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
 if (!isset($_POST['key'],$_POST['user'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
