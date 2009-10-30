@@ -3,7 +3,6 @@
 	value="{$tv->get('value')|escape}"
 	{$style}
 	tvtype="{$tv->type}"
-	onchange="MODx.fireResourceFormChange();" 
 />
 
 <script type="text/javascript">
@@ -14,6 +13,7 @@ MODx.load({
     ,applyTo: 'tv{$tv->id}'
     ,width: 300
 {literal}
+    ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 {/literal}
 </script>

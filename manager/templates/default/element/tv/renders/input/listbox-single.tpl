@@ -1,5 +1,6 @@
 <select id="tv{$tv->id}" name="tv{$tv->id}"
 	onchange="MODx.fireResourceFormChange();"
+	onselect="MODx.fireResourceFormChange();"
 	size="8"
 	style="width: 300px;"
 >

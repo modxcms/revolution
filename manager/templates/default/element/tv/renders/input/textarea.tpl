@@ -1,7 +1,4 @@
-<textarea id="tv{$tv->id}" name="tv{$tv->id}"
-	cols="40" rows="15"
-	{literal}onchange="MODx.fireResourceFormChange();"{/literal}
->{$tv->get('value')|escape}</textarea>
+<textarea id="tv{$tv->id}" name="tv{$tv->id}" cols="40" rows="15">{$tv->get('value')|escape}</textarea>
 
 <script type="text/javascript">
 {literal}
@@ -13,6 +10,7 @@ MODx.load({
     ,width: 300
     ,height: 140
 {literal}
+    ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 {/literal}
 </script>

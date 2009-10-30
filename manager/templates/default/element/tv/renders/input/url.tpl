@@ -1,4 +1,4 @@
-<select id="tv{$tv->id}_prefix" name="tv{$tv->id}_prefix" onchange="javascript:triggerDirtyField(this);">
+<select id="tv{$tv->id}_prefix" name="tv{$tv->id}_prefix" onchange="MODx.fireResourceFormChange();">
 {foreach from=$urls item=url}
 	<option value="{$url}" {if $url EQ $selected}selected="selected"{/if}>{$url}</option>
 {/foreach}

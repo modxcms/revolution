@@ -13,6 +13,7 @@ MODx.load({
     ,format: 'Y-m-d'
     ,width: 300
 {literal}
+    ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 {/literal}
 </script>
