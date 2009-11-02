@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1370] Fixed quick create to set modResource type to modDocument properly
 - [#MODX-1373] getLoginUserName and getLoginUserId now return boolean false if no user is logged in
 - [#MODX-1369] Fixed validation errors and possible loophole in error processing for user processor flow
 - Fixed column alignment with radio/checkbox TV inputs
