@@ -1057,7 +1057,7 @@ class modX extends xPDO {
      *
      * @access public
      * @param $string The class name of the response class to load. Defaults to
-     * modResponse; is ignored if the Setting "modResponse.class" is set.
+     * modRequest; is ignored if the Setting "modRequest.class" is set.
      * @param $path The absolute path by which to load the response class from.
      * Defaults to the current MODx model path.
      * @return boolean Returns true if a valid request handler object was
@@ -1173,7 +1173,7 @@ class modX extends xPDO {
     }
 
     /**
-     * Returns all registered JavaScript and HTML blocks.
+     * Returns all registered JavaScripts.
      *
      * @access public
      * @return string The parsed HTML of the client scripts.
