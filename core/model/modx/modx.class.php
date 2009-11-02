@@ -1373,6 +1373,7 @@ class modX extends xPDO {
     /**
      * Determines if the current webuser is a member of the specified webgroups.
      *
+     * @deprecated 2009-11-01 To be removed in 2.1
      * @param array $groupNames An array of groups to check against.
      * @return boolean True if the user is a member of any one of the supplied
      * group names, false otherwise.
@@ -2120,6 +2121,7 @@ class modX extends xPDO {
     /**
      * Gets keyword data associated with a document.
      *
+     * @deprecated 2009-11-01 To be removed in 2.1
      * @param integer $id A document id, defaults to current document id.
      * @return array An array of keyword data for the specified document.
      */
@@ -2142,6 +2144,7 @@ class modX extends xPDO {
     /**
      * Gets META tag data associated with a document.
      *
+     * @deprecated 2009-11-01 To be removed in 2.1
      * @param integer $id A document id, defaults to current document id.
      * @return array An array of META tag data for the specified document.
      */

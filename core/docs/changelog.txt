@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1372],[#MODX-1376] Marked deprecated functions as so in phpdoc comments
 - [#MODX-1378] Fixed bug with adding a None role to a user group in the User -> Access Permissions tab
 - [#MODX-1375] Fixed documentation for modX.getRequest
 - [#MODX-1374] Fixed documentation for modX.getRegisteredClientScripts
