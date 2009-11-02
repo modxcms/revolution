@@ -111,11 +111,12 @@ if (!empty($fs)) {
 $fields .= '</ul>';
 
 if ($modx->error->hasError() && !empty($fs)) {
-	return $modx->error->failure(sprintf($modx->lexicon('check_fields_error').$fields));
+	return $modx->error->failure($fields);
 }
 
 /* END VALIDATION */
 
+return true;
 
 /* Generate password */
 function generate_password($length = 10) {

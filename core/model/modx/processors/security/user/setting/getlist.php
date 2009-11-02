@@ -34,7 +34,7 @@ $c = $modx->newQuery('modUserSetting');
 $c->where($where);
 $count = $modx->getCount('modUserSetting',$c);
 
-$c->sortby($sort,$dir);
+$c->sortby('`'.$sort.'`',$dir);
 if ($isLimit) $c->limit($limit,$start);
 $settings = $modx->getCollection('modUserSetting',$c);
 

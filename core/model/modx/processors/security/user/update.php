@@ -22,7 +22,9 @@ $_POST['blocked'] = empty($_POST['blocked']) ? 0 : 1;
 $_POST['active'] = empty($_POST['active']) ? 0 : 1;
 
 $newPassword= false;
-include_once $modx->getOption('processors_path').'security/user/_validation.php';
+$result = include_once $modx->getOption('processors_path').'security/user/_validation.php';
+if ($result !== true) return $result;
+
 if ($_POST['passwordnotifymethod'] == 'e') {
 	sendMailMessage($_POST['email'], $_POST['username'],$newPassword,$_POST['fullname']);
 }

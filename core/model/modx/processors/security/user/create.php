@@ -17,7 +17,8 @@ $user = $modx->newObject('modUser');
 $blocked = empty($_POST['blocked']) ? false : true;
 
 $newPassword= '';
-$s = include_once $modx->getOption('processors_path').'security/user/_validation.php';
+$result = include_once $modx->getOption('processors_path').'security/user/_validation.php';
+if ($result !== true) return $result;
 
 
 /* invoke OnBeforeUserFormSave event */

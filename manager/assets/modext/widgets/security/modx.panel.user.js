@@ -180,7 +180,6 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         ,xtype: 'textfield'
                         ,inputType: 'password'
                         ,width: 175
-                        ,minLength: 6
                     },{
                         id: 'modx-user-confirmpassword'
                         ,name: 'confirmpassword'
@@ -188,7 +187,6 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         ,xtype: 'textfield'
                         ,inputType: 'password'
                         ,width: 175
-                        ,minLength: 6
                     }]
                 }]
             },{
