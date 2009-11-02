@@ -60,10 +60,6 @@ class modSmarty extends Smarty {
      */
     var $_derived;
 
-	function modSmarty(& $modx, $params= array ()) {
-		$this->__construct($modx, $params);
-	}
-
 	function __construct(& $modx, $params= array ()) {
 		parent :: Smarty();
         $this->modx= & $modx;

@@ -483,6 +483,15 @@ class modInstall {
             $this->xpdo->exec('
                 TRUNCATE '.$tableName.'
             ');
+
+            /* clear cache */
+            $this->xpdo->cacheManager->deleteTree(MODX_CORE_PATH.'cache/',array(
+                'skipDirs' => false,
+                'extensions' => array(
+                    '.cache.php',
+                    '.tpl.php',
+                ),
+            ));
         }
 
         return $results;
