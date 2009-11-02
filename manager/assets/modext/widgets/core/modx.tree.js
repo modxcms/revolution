@@ -472,21 +472,21 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         return [{
             icon: iu+'arrow_down.png'
             ,cls: 'x-btn-icon'
-            ,scope: this
             ,tooltip: {text: _('tree_expand')}
-            ,handler: this.expand
+            ,handler: function() { this.getRootNode().expandChildNodes(); }
+            ,scope: this
         },{
             icon: iu+'arrow_up.png'
             ,cls: 'x-btn-icon'
-            ,scope: this
             ,tooltip: {text: _('tree_collapse')}
-            ,handler: this.collapse
+            ,handler: function() { this.getRootNode().collapseChildNodes(); }
+            ,scope: this
         },'-',{
             icon: iu+'refresh.png'
             ,cls: 'x-btn-icon'
-            ,scope: this
             ,tooltip: {text: _('tree_refresh')}
             ,handler: this.refresh
+            ,scope: this
         }];
     }
 	

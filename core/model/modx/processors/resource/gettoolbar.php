@@ -15,12 +15,12 @@ $items = array();
 $items[] = array(
     'icon' => $p.'arrow_down.png',
     'tooltip' => $modx->lexicon('expand_tree'),
-    'handler' => 'this.expand',
+    'handler' => 'new Function("this.getRootNode().expandChildNodes();");',
 );
 $items[] = array(
     'icon' => $p.'arrow_up.png',
     'tooltip' => $modx->lexicon('collapse_tree'),
-    'handler' => 'this.collapse',
+    'handler' => 'new Function("this.getRootNode().collapseChildNodes();");',
 );
 $items[] = '-';
 if ($modx->hasPermission('new_document')) {
