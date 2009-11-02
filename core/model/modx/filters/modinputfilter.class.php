@@ -1,7 +1,7 @@
 <?php
 /*
  * MODx Revolution
- * 
+ *
  * Copyright 2006, 2007, 2008, 2009 by the MODx Team.
  * All rights reserved.
  *
@@ -35,8 +35,8 @@
 class modInputFilter {
     var $modx= null;
 
-    function modInputFilter(& $modx) {
-        $this->modx= & $modx;
+    function __construct(modX &$modx) {
+        $this->modx = &$modx;
     }
 
     /**
@@ -44,7 +44,7 @@ class modInputFilter {
      *
      * @param modElement &$element The element to apply filtering to.
      */
-    function filter(& $element) {
+    public function filter(&$element) {
         /* split commands and modifiers and store them as properties for the output filtering */
         $output= $element->get('name');
         $name= $output;

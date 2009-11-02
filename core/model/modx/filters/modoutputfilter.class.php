@@ -37,11 +37,11 @@
 class modOutputFilter {
     var $modx= null;
 
-    function modOutputFilter(& $modx) {
-        $this->modx= & $modx;
+    function __construct(modX &$modx) {
+        $this->modx= &$modx;
     }
 
-    function filter(& $element) {
+    public function filter(&$element) {
 
         $output= & $element->_output;
         if (isset ($element->_properties['filter_commands'])) {
@@ -308,6 +308,7 @@ class modOutputFilter {
                     case 'default':
                     case 'ifempty':
                     case 'isempty':
+                    case 'empty':
                         /* Returns the input value if empty */
                         if (empty($output))
                             $output= $m_val;
@@ -315,6 +316,8 @@ class modOutputFilter {
 
                     case 'ifnotempty':
                     case 'isnotempty':
+                    case 'notempty':
+                    case '!empty':
                         /* returns input value if not empty */
                         if (!empty($output))
                             $output= $m_val;
@@ -390,8 +393,9 @@ class modOutputFilter {
         }
     }
 
-    function log( $msg ) {
-         if ($this->modx->getDebug() === true)
+    public function log($msg) {
+         if ($this->modx->getDebug() === true) {
              $this->modx->log(modX::LOG_LEVEL_DEBUG, $msg);
+         }
     }
 }
