@@ -21,3 +21,15 @@ $sql = "ALTER TABLE  {$table} ADD UNIQUE `uniqentry` (`name`,`topic`,`namespace`
 $this->processResults($class, $description, $sql);
 unset($class,$table,$sql,$description);
 
+
+/* add city field to modUserProfile */
+$class = 'modUserProfile';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['add_column'],'city',$table);
+$sql = "ALTER TABLE {$table} ADD COLUMN `city` VARCHAR(255) NOT NULL DEFAULT '' AFTER `country`";
+$this->processResults($class,$description,$sql);
+
+/* adjust country field to modUserProfile */
+$description = sprintf($this->install->lexicon['add_column'],'city',$table);
+$sql = "ALTER TABLE {$table} CHANGE `country` `country` VARCHAR( 255 ) NOT NULL DEFAULT ''";
+$this->processResults($class,$description,$sql);
