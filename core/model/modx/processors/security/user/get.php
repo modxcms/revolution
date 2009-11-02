@@ -27,7 +27,7 @@ if (!empty($_REQUEST['getGroups'])) {
         UserGroupRole.name AS role_name,
         UserGroup.name AS user_group_name
     ');
-    $c->innerJoin('modUserGroupRole','UserGroupRole');
+    $c->leftJoin('modUserGroupRole','UserGroupRole');
     $c->innerJoin('modUserGroup','UserGroup');
     $c->where(array(
         'member' => $user->get('id'),
@@ -37,6 +37,7 @@ if (!empty($_REQUEST['getGroups'])) {
     $data = array();
     foreach ($members as $member) {
         $roleName = $member->get('role_name');
+        if ($member->get('role') == 0) { $roleName = $modx->lexicon('none'); }
         $data[] = array(
             $member->get('user_group'),
             $member->get('user_group_name'),
