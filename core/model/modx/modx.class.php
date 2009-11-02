@@ -1320,6 +1320,7 @@ class modX extends xPDO {
         elseif (!$context && $this->isBackend() && isset ($_SESSION['mgrValidated'])) {
             return $_SESSION['mgrInternalKey'];
         }
+        return false;
     }
 
     /**
@@ -1339,6 +1340,7 @@ class modX extends xPDO {
         elseif ($this->isBackend() && isset ($_SESSION['mgrValidated'])) {
             return $_SESSION['mgrShortname'];
         }
+        return false;
     }
 
     /**
