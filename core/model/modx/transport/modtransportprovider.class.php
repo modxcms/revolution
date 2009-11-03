@@ -118,10 +118,16 @@ class modTransportProvider extends xPDOSimpleObject {
         $updates = array ();
         $pa = $package->toArray();
 
+
+        $this->xpdo->getVersionData();
+        $productVersion = $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'];
+
         $signature = new jsonrpcval($package->get('signature'),'string');
+        $productVersion = new jsonrpcval($productVersion,'string');
         $options = new jsonrpcval($this->xpdo->transport->config,'struct');
-        $request = new jsonrpcmsg('modx.modx_update_package',array(
+        $request = new jsonrpcmsg('modx.modx_update_version',array(
             $signature,
+            $productVersion,
             $options,
         ));
         $response = $this->sendRequest($request);

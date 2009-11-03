@@ -36,6 +36,9 @@ if ($installedPkgs = $provider->getMany('Packages')) {
     }
 }
 
+$modx->getVersionData();
+$modxVersion = $modx->version['code_name'].'-'.$modx->version['full_version'];
+
 $map = array();
 $repositories = array();
 foreach ($payload as $repositoryKey => $repository) {
@@ -87,11 +90,22 @@ foreach ($payload as $repositoryKey => $repository) {
                     'checked' => false,
                 );
 
+                /* check versions */
+                if (!in_array($modxVersion,$version['data']['supports'])) {
+                    if (!empty($_REQUEST['debug'])) {
+                        echo 'Does not support: '.$modxVersion.' -> '.print_r($version['data']['supports'],true).'<br />';
+                    }
+                    continue;
+                }
+                $versArray['data']['supports'] = implode(', ',$version['data']['supports']);
+
+                /* check installed */
                 if (in_array($version['data']['signature'],$installed)) {
                     $versArray['disabled'] = true;
                     $versArray['cls'] = 'icon-package-installed';
                     $versArray['text'] = $versArray['text'].' (<i>'.$modx->lexicon('installed').'</i>)';
                 }
+
 
                 $packArray['children'][] = $versArray;
 

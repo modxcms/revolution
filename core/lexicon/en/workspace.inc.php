@@ -127,6 +127,7 @@ $_lang['readme_desc'] = 'Please review the README for this package.';
 $_lang['released_on'] = 'Released On';
 $_lang['setup_options'] = 'Setup Options';
 $_lang['setup_options_desc'] = 'Please choose the appropriate options (if applicable) and click Finish to install the package.';
+$_lang['supports'] = 'Supports';
 $_lang['transport_package_create'] = 'Create new package';
 $_lang['transport_package_install'] = 'Install package';
 $_lang['transport_package_scan_for_updates'] = 'Check for updates';
