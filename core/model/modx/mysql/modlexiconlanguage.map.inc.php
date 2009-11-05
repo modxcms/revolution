@@ -22,7 +22,7 @@ $xpdo_meta_map['modLexiconLanguage']= array (
       'index' => 'pk',
     ),
   ),
-  'aggregates' => 
+  'composites' => 
   array (
     'Entries' => 
     array (
