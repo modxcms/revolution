@@ -838,7 +838,7 @@ class modX extends xPDO {
     /**
      * Send the user to the MODx unauthorized page.
      *
-     * @uses invokeEvent() The OnPageNotFound event is invoked before the unauthorized page is
+     * @uses invokeEvent() The OnPageUnauthorized event is invoked before the unauthorized page is
      * forwarded to.
      * @param array $options An array of options to provide for the OnPageUnauthorized
      * event and unauthorized page.
