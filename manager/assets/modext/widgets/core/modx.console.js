@@ -29,6 +29,7 @@ MODx.Console = function(config) {
         ,autoScroll: true
         ,height: 400
         ,width: 550
+        ,refreshRate: 2
         ,bodyStyle: 'background-color: white; padding: .75em; font-family: Courier'
         ,cls: 'modx-window'
         ,items: [{
@@ -71,7 +72,7 @@ Ext.extend(MODx.Console,Ext.Window,{
         if (this.running !== true) {
             this.mgr = new Ext.Updater('modx-console-body');
         }
-        this.mgr.startAutoRefresh('.5',this.config.url,this.config.baseParams || {},this.renderMsg,true);
+        this.mgr.startAutoRefresh(this.config.refreshRate,this.config.url,this.config.baseParams || {},this.renderMsg,true);
         this.running = true;
     }
     

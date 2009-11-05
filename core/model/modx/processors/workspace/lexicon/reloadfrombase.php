@@ -28,7 +28,7 @@ while (false !== ($culture = $dir->read())) {
             'name' => $culture,
         ),'',true,true);
         $language->save();
-        $modx->log(MODX_LOG_LEVEL_INFO,'Created language: '.$culture);
+        $modx->log(modX::LOG_LEVEL_INFO,'Created language: '.$culture);
     }
 
     /* loop through topics */
@@ -51,7 +51,7 @@ while (false !== ($culture = $dir->read())) {
               'namespace' => 'core',
             ), '', true, true);
             $topic->save();
-            $modx->log(MODX_LOG_LEVEL_INFO,'Created topic: '.$top);
+            $modx->log(modX::LOG_LEVEL_INFO,'Created topic: '.$top);
         }
 
         $f = $fdir.$entry;
@@ -76,13 +76,13 @@ while (false !== ($culture = $dir->read())) {
                       'language' => $culture,
                     ), '', true, true);
                     $entry->save();
-                    $modx->log(MODX_LOG_LEVEL_INFO,'Created lexicon entry: "'.$key.'": '.$value);
+                    $modx->log(modX::LOG_LEVEL_INFO,'Created lexicon entry: "'.$key.'": '.$value);
                     $i++;
                 } else {
                     if ($entry->get('value') != $value) {
                         $entry->set('value',$value);
                         $entry->save();
-                        $modx->log(MODX_LOG_LEVEL_INFO,'Reloaded entry: "'.$entry->get('name').'": '.$value);
+                        $modx->log(modX::LOG_LEVEL_INFO,'Reloaded entry: "'.$entry->get('name').'": '.$value);
                         $i++;
                     }
                 }
@@ -92,5 +92,5 @@ while (false !== ($culture = $dir->read())) {
 }
 $dir->close();
 
-$modx->log(MODX_LOG_LEVEL_WARN,'Successfully reloaded '.$i.' strings.');
+$modx->log(modX::LOG_LEVEL_WARN,'Successfully reloaded '.$i.' strings.');
 return $modx->error->success(intval($i));
