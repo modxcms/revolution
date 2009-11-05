@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Optimized setup pre-install checks, now checks both mysql client and server versions
+- [#MODX-1404] Fixed mysql version checks to only show a warning if the client/server is incorrectly setup to where PHP cannot determine the versions. 
 - Package Management now restricts downloading/updating Extras to their supported MODx versions (ie, you can't download packages that support only beta-3 if you have beta-4 or beta-2)
 - [#MODX-1310] Fixed expand/collapse toolbar items in trees
 - [#MODX-1361] Make sure cache (including Smarty files) is cleared after install 

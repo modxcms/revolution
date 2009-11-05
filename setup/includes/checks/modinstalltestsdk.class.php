@@ -33,7 +33,7 @@ class modInstallTestSdk extends modInstallTest {
 
         $this->results['zip_memory_limit']['msg'] = '<p>'.$this->install->lexicon['test_zip_memory_limit'].' ';
         if ($success) {
-            $this->results['zip_memory_limit']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['zip_memory_limit']['msg'] .= '<span class="ok">'.sprintf($this->install->lexicon['test_memory_limit_success'],$ml).'</span></p>';
             $this->results['zip_memory_limit']['class'] = 'testPassed';
         } else {
             $s = '<span class="notok">'.$this->install->lexicon['failed'].'</span>';
