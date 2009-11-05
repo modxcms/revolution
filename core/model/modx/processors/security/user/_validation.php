@@ -44,10 +44,12 @@ if (isset($_POST['newpassword']) && $_POST['newpassword'] != 'false' || empty($_
 if (empty($_POST['email'])) $modx->error->addField('email',$modx->lexicon('user_err_not_specified_email'));
 
 /* check if the email address already exists */
-$emailExists = $modx->getObject('modUserProfile',array('email' => $_POST['email']));
-if ($emailExists) {
-	if ($emailExists->get('internalKey') != $_POST['id']) {
-		$modx->error->addField('email',$modx->lexicon('user_err_already_exists_email'));
+if (!$modx->getOption('allow_multiple_users_per_email',null,true)) {
+    $emailExists = $modx->getObject('modUserProfile',array('email' => $_POST['email']));
+    if ($emailExists) {
+    	if ($emailExists->get('internalKey') != $_POST['id']) {
+    		$modx->error->addField('email',$modx->lexicon('user_err_already_exists_email'));
+        }
     }
 }
 

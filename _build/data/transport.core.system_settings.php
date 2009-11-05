@@ -1,4 +1,7 @@
 <?php
+/**
+ * Default System Settings for MODx Revolution
+ */
 $collection['0']= $xpdo->newObject('modSystemSetting');
 $collection['0']->fromArray(array (
   'key' => 'allow_tags_in_post',
@@ -885,5 +888,14 @@ $collection['94']->fromArray(array (
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$collection['95']= $xpdo->newObject('modSystemSetting');
+$collection['95']->fromArray(array (
+  'key' => 'allow_multiple_emails',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);

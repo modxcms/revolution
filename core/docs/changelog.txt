@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added system setting "allow_multiple_users_per_email" to allow users to have a single email shared across users. Defaults to true.
 - [#MODX-972] Fixed bug when property description was changed, grid wasnt updating
 - [#MODX-1390] Fixed docs for $modx->sendUnauthorizedPage();
 - [#MODX-895] Fixed possible rendering issue with error log scroll bar
