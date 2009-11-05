@@ -502,7 +502,7 @@ Ext.ux.grid.RowExpander = Ext.extend(Ext.util.Observable, {
     dataIndex : '',
     id : 'expander',
     lazyRender : true,
-    enableCaching : true,
+    enableCaching : false,
 
     constructor: function(config){
         Ext.apply(this, config);

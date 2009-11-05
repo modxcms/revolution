@@ -300,6 +300,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                     rec.set('options',r.options);
                     rec.set('value',r.value);
                     rec.set('overridden',r.overridden == 2 ? 2 : (!def ? 1 : 0));
+                    this.getView().refresh();
                     this.onDirty();
                 },scope:this}
             }
