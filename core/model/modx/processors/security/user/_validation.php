@@ -10,8 +10,8 @@ if (empty($_POST['username'])) {
     $modx->error->addField('username',$modx->lexicon('user_err_not_specified_username'));
 
 } else if (!empty($_POST['username']) && $_POST['username'] != $user->get('username')) {
-	$alreadyExists = $modx->getObject('modUser',array('username' => $_POST['newusername']));
-	if ($alreadyExists) $modx->error->addField('new_user_name',$modx->lexicon('user_err_already_exists'));
+	$alreadyExists = $modx->getObject('modUser',array('username' => $_POST['username']));
+	if ($alreadyExists) $modx->error->addField('username',$modx->lexicon('user_err_already_exists'));
 	$user->set('username',$_POST['username']);
 }
 
