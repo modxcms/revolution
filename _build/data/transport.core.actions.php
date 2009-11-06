@@ -30,7 +30,7 @@ $collection['5']->fromArray(array (
   'namespace' => 'core',
   'parent' => 0,
   'controller' => 'browser',
-  'haslayout' => 1,
+  'haslayout' => 0,
   'lang_topics' => 'file',
   'assets' => '',
 ), '', true, true);

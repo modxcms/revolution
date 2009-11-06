@@ -81,31 +81,4 @@ $welcome_back = $modx->lexicon('welcome_back',array('name' => $modx->getLoginUse
 $modx->smarty->assign('welcome_back',$welcome_back);
 unset($welcome_back);
 
-/* if true, use compressed JS */
-if ($modx->getOption('compress_js',null,false)) {
-    foreach ($modx->sjscripts as &$scr) {
-        $pos = strpos($scr,'.js');
-        if ($pos) {
-            $newUrl = substr($scr,0,$pos).'-min'.substr($scr,$pos,strlen($scr));
-        } else { continue; }
-        $pos = strpos($newUrl,'modext/');
-        if ($pos) {
-            $pos = $pos+7;
-            $newUrl = substr($newUrl,0,$pos).'build/'.substr($newUrl,$pos,strlen($newUrl));
-        }
-
-        $path = str_replace(array(
-            $modx->getOption('manager_url').'assets/modext/',
-            '<script type="text/javascript" src="',
-            '"></script>',
-        ),'',$newUrl);
-
-        if (file_exists($modx->getOption('manager_path').'assets/modext/'.$path)) {
-            $scr = $newUrl;
-        }
-    }
-}
-/* assign css/js to header */
-$modx->smarty->assign('cssjs',$modx->sjscripts);
-
 return $modx->smarty->fetch('header.tpl');

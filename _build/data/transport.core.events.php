@@ -685,3 +685,10 @@ $collection['117']->fromArray(array (
   'service' => 1,
   'groupname' => 'modUser',
 ), '', true, true);
+$collection['118']= $xpdo->newObject('modEvent');
+$collection['118']->fromArray(array (
+  'id' => 118,
+  'name' => 'OnRichTextBrowserInit',
+  'service' => 1,
+  'groupname' => 'RichText Editor',
+), '', true, true);

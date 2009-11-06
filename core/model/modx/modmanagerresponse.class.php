@@ -53,7 +53,7 @@ class modManagerResponse extends modResponse {
                 $this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
                 $this->modx->smarty->assign('_ctx',$this->modx->context->get('key'));
 
-                $this->registerBaseScripts();
+                $this->registerBaseScripts($this->action['haslayout'] ? true : false);
                 $this->registerActionDomRules($action);
 
                 $this->body = '';
@@ -72,6 +72,8 @@ class modManagerResponse extends modResponse {
                     $cbody = 'Could not find action file at: '.$f;
                 }
 
+                $this->registerCssJs();
+
                 /* reset path to core modx path for header/footer */
                 $this->modx->smarty->setTemplatePath($modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme',null,'default') . '/');
 
@@ -79,6 +81,7 @@ class modManagerResponse extends modResponse {
                 if ($this->action['haslayout']) {
                     $this->body .= include $this->modx->getOption('manager_path') . 'controllers/header.php';
                 }
+
 
                 /* assign later to allow for css/js registering */
                 if (is_array($cbody)) {
@@ -154,7 +157,7 @@ class modManagerResponse extends modResponse {
      *
      * @access public
      */
-    public function registerBaseScripts() {
+    public function registerBaseScripts($loadLayout = true) {
         $managerUrl = $this->modx->getOption('manager_url');
 
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.localization.js');
@@ -180,17 +183,19 @@ class modManagerResponse extends modResponse {
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.tree.element.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/system/modx.tree.directory.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.layout.js');
 
-        $this->modx->regClientStartupHTMLBlock('
-        <script type="text/javascript">
-        Ext.onReady(function() {
-            MODx.load({
-                xtype: "modx-layout"
-                ,accordionPanels: MODx.accordionPanels || []
+        if ($loadLayout) {
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.layout.js');
+            $this->modx->regClientStartupHTMLBlock('
+            <script type="text/javascript">
+            Ext.onReady(function() {
+                MODx.load({
+                    xtype: "modx-layout"
+                    ,accordionPanels: MODx.accordionPanels || []
+                });
             });
-        });
-        </script>');
+            </script>');
+        }
     }
 
     /**
@@ -237,6 +242,38 @@ class modManagerResponse extends modResponse {
             $f = $f.'.php';
         }
         return $f;
+    }
+
+    /**
+     * Registers CSS/JS to manager interface
+     */
+    public function registerCssJs() {
+        /* if true, use compressed JS */
+        if ($this->modx->getOption('compress_js',null,false)) {
+            foreach ($this->modx->sjscripts as &$scr) {
+                $pos = strpos($scr,'.js');
+                if ($pos) {
+                    $newUrl = substr($scr,0,$pos).'-min'.substr($scr,$pos,strlen($scr));
+                } else { continue; }
+                $pos = strpos($newUrl,'modext/');
+                if ($pos) {
+                    $pos = $pos+7;
+                    $newUrl = substr($newUrl,0,$pos).'build/'.substr($newUrl,$pos,strlen($newUrl));
+                }
+
+                $path = str_replace(array(
+                    $this->modx->getOption('manager_url').'assets/modext/',
+                    '<script type="text/javascript" src="',
+                    '"></script>',
+                ),'',$newUrl);
+
+                if (file_exists($this->modx->getOption('manager_path').'assets/modext/'.$path)) {
+                    $scr = $newUrl;
+                }
+            }
+        }
+        /* assign css/js to header */
+        $this->modx->smarty->assign('cssjs',$this->modx->sjscripts);
     }
 
 }
