@@ -100,7 +100,7 @@ class modElement extends modAccessibleSimpleObject {
      * @access protected
      */
     protected $_invalidCharacters = array('!','@','#','$','%','^','&','*',
-    '(',')','+','=','[',']','{','}','\'','"',':',';','\\','/','<','>','?'
+    '(',')','+','=','[',']','{','}','\'','"',';',':','\\','/','<','>','?'
     ,' ',',','`','~');
 
     /**
@@ -109,6 +109,7 @@ class modElement extends modAccessibleSimpleObject {
      * {@inheritDoc}
      */
     public function set($k, $v= null, $vType= '') {
+        /* TODO: make into validation, so that this doesnt break tag processing
         switch ($k) {
             case 'name':
             case 'templatename':
@@ -116,6 +117,7 @@ class modElement extends modAccessibleSimpleObject {
                 break;
             default: break;
         }
+        */
         return parent::set($k,$v,$vType);
     }
 
