@@ -15,19 +15,18 @@ $modx->lexicon->load('template');
 
 /* get old template */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
-$old_template = $modx->getObject('modTemplate',$_POST['id']);
-if ($old_template == null) {
-    return $modx->error->failure($modx->lexicon('template_err_not_found'));
-}
+$oldTemplate = $modx->getObject('modTemplate',$_POST['id']);
+if (!$oldTemplate) return $modx->error->failure($modx->lexicon('template_err_not_found'));
+
 /* format new name */
-$newname = !empty($_POST['name']) ? $_POST['name'] : $modx->lexicon('duplicate_of').$old_template->get('templatename');
+$newTemplateName = !empty($_POST['name']) ? $_POST['name'] : $modx->lexicon('duplicate_of').$old_template->get('templatename');
 
 /* duplicate template */
 $template = $modx->newObject('modTemplate');
-$template->set('templatename',$newname);
-$template->fromArray($old_template->toArray());
+$template->fromArray($oldTemplate->toArray());
+$template->set('templatename',$newTemplateName);
 
-if ($template->save() === false) {
+if (!$template->save()) {
 	return $modx->error->failure($modx->lexicon('template_err_duplicate'));
 }
 
