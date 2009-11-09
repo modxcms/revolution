@@ -80,7 +80,7 @@ if (!empty($_REQUEST['getResourceGroups'])) {
     $c->select('
         modAccessResourceGroup.*,
         Policy.name AS policy_name,
-        Target.name AS resurce_group_name
+        Target.name AS resource_group_name
     ');
     $c->innerJoin('modAccessPolicy','Policy');
     $c->innerJoin('modResourceGroup','Target');
