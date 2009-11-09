@@ -44,7 +44,10 @@ MODx.grid.SettingsGrid = function(config) {
             ,'render': {fn: function(cmp) {
                 new Ext.KeyMap(cmp.getEl(), {
                     key: Ext.EventObject.ENTER
-                    ,fn: function() { this.fireEvent('change',this.getValue()); }
+                    ,fn: function() { 
+                        this.fireEvent('change',this.getValue());
+                        this.blur();
+                        return true; }
                     ,scope: cmp
                 });
             },scope:this}
@@ -143,8 +146,8 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     	this.getStore().baseParams = {
     		action: 'getList'
     	};
-        Ext.getCmp('modx-filter-namespace').setValue('');
-        Ext.getCmp('modx-filter-key').setValue('');
+        Ext.getCmp('modx-filter-namespace').reset();
+        Ext.getCmp('modx-filter-key').reset();
     	this.refresh();
     	this.getBottomToolbar().changePage(1);
     }
@@ -157,6 +160,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         this.getStore().baseParams.key = nv;
         this.refresh();
         this.getBottomToolbar().changePage(1);
+        return true;
     }
     /**
      * Filters the grid by the namespace column
