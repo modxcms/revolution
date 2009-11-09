@@ -17,38 +17,33 @@ class modManagerRequest extends modRequest {
      * @var string The action to load.
      * @access public
      */
-    var $action= null;
+    public $action= null;
     /**
      * @deprecated 2.0.0 Use $modx->error instead.
      * @var modError The error handler for the request.
      * @access public
      */
-    var $error= null;
+    public $error= null;
     /**
      * @var string The REQUEST parameter to load actions by.
      * @access public
      */
-    var $actionVar = 'a';
+    public $actionVar = 'a';
     /**
      * @var mixed The default action to load from.
      * @access public
      */
-    var $defaultAction = 0;
+    public $defaultAction = 0;
 
-    /**#@+
+    /**
      * Instantiates a modManagerRequest object.
      *
      * {@inheritdoc}
      */
-    function modManagerRequest(& $modx) {
-        $this->__construct($modx);
-    }
-    /** @ignore */
-    function __construct(& $modx) {
+    function __construct(modX & $modx) {
         parent :: __construct($modx);
         $this->initialize();
     }
-    /**#@-*/
 
     /**
      * Initializes the manager request.
@@ -56,7 +51,7 @@ class modManagerRequest extends modRequest {
      * @access public
      * @return boolean True if successful.
      */
-    function initialize() {
+    public function initialize() {
         if (!defined('MODX_INCLUDES_PATH')) {
             define('MODX_INCLUDES_PATH',$this->modx->getOption('manager_path').'includes/');
         }
@@ -141,7 +136,7 @@ class modManagerRequest extends modRequest {
      * @access public
      * @return boolean True if a request is handled without interruption.
      */
-    function handleRequest() {
+    public function handleRequest() {
         /* Load error handling class */
         $this->loadErrorHandler();
 
@@ -159,7 +154,7 @@ class modManagerRequest extends modRequest {
      * This implementation adds register logging capabilities via $_POST vars
      * when the error handler is loaded.
      */
-    function loadErrorHandler($class = 'modError') {
+    public function loadErrorHandler($class = 'modError') {
         parent :: loadErrorHandler($class);
         $this->registerLogging($_POST);
     }
@@ -170,7 +165,7 @@ class modManagerRequest extends modRequest {
      * @access public
      * @return boolean True if successful.
      */
-    function loadActionMap() {
+    public function loadActionMap() {
         $loaded = false;
         $cacheKey= $this->modx->context->get('key') . '/actions';
         $map = $this->modx->cacheManager->get($cacheKey);
@@ -191,7 +186,7 @@ class modManagerRequest extends modRequest {
      * @param array $options An array of options
      * @return boolean True if the response is properly prepared.
      */
-    function prepareResponse($options = array()) {
+    public function prepareResponse(array $options = array()) {
         if (!$this->modx->getResponse('modManagerResponse')) {
             $this->modx->log(modX::LOG_LEVEL_FATAL, 'Could not load response class.');
         }

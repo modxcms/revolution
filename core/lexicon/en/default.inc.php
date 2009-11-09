@@ -9,6 +9,7 @@
 $_lang['access'] = 'Access';
 $_lang['access_denied'] = 'Access denied.';
 $_lang['action'] = 'Action';
+$_lang['action_err_nfs'] = 'No action with [[+id]] found.';
 $_lang['actions'] = 'Actions';
 $_lang['active_users_none'] = 'No active users found.';
 $_lang['activity_message'] = 'This list shows the last resources you created or edited:';
@@ -246,6 +247,7 @@ $_lang['password'] = 'Password';
 $_lang['path'] = 'Path';
 $_lang['permissions'] = 'Permissions';
 $_lang['permission_denied'] = 'Permission denied!';
+$_lang['permission_denied_msg'] = 'You do not have the proper access policy permissions to view this page. If you feel this is in error, please contact your systems administrator.';
 $_lang['please_wait'] = 'Please wait...';
 $_lang['plugin'] = 'Plugin';
 $_lang['plugins'] = 'Plugins';

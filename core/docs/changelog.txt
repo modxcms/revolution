@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1326] Fixed the access denied logout form, added styling
 - [#MODX-1423] Fixed error with duplicating a template
 - [#MODX-1409], [#MODX-919] Fixed issue where tag symbols were being stripped in Elements and breaking filtering and nested tag functionality
 - [#MODX-1347] Fixed user validation for username missing error

@@ -96,11 +96,17 @@ class modManagerResponse extends modResponse {
 
 
             } else {
-                $this->body = $this->modx->error->failure('No action with ID '.$action.' found.');
+                $this->body = $this->modx->error->failure($modx->lexicon('action_err_nfs',array(
+                    'id' => $action,
+                )));
             }
         } else {
-            $logoutLink = '[ <a href="' . $modx->getOption('connectors_url') . 'security/logout.php" title="' . $this->modx->lexicon('logout') . '">' . $this->modx->lexicon('logout') . '</a> ]';
-            $this->body = $this->modx->error->failure($this->modx->lexicon('permission_denied') . " <small>{$logoutLink}</small>");
+            /* doesnt have permissions to view manager */
+            $this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
+            $this->modx->smarty->assign('_ctx',$this->modx->context->get('key'));
+
+            $this->body = include_once $this->modx->getOption('manager_path').'controllers/security/logout.php';
+
         }
         if (empty($this->body)) {
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
