@@ -24,6 +24,7 @@ $xpdo_meta_map['modUserProfile']= array (
     'sessionid' => '',
     'dob' => 0,
     'gender' => 0,
+    'address' => '',
     'country' => '',
     'city' => '',
     'state' => '',
@@ -163,6 +164,13 @@ $xpdo_meta_map['modUserProfile']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+    ),
+    'address' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
     'country' => 
     array (

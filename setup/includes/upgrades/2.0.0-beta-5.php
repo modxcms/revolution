@@ -33,3 +33,11 @@ $this->processResults($class,$description,$sql);
 $description = sprintf($this->install->lexicon['add_column'],'city',$table);
 $sql = "ALTER TABLE {$table} CHANGE `country` `country` VARCHAR( 255 ) NOT NULL DEFAULT ''";
 $this->processResults($class,$description,$sql);
+
+
+/* add address field to modUserProfile */
+$class = 'modUserProfile';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['add_column'],'city',$table);
+$sql = "ALTER TABLE {$table} ADD COLUMN `address` TEXT NOT NULL DEFAULT '' AFTER `gender`";
+$this->processResults($class,$description,$sql);

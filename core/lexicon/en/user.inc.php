@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['active'] = 'Active';
+$_lang['address'] = 'Address';
 $_lang['administrator'] = 'Administrator';
 $_lang['authority'] = 'Authority';
 $_lang['change_password'] = 'Change Password';
