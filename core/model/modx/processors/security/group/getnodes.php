@@ -18,7 +18,7 @@ $usergroup = $modx->getObject('modUserGroup',$_REQUEST['id']);
 $groups = $modx->getCollection('modUserGroup',array('parent' => $_REQUEST['id']));
 
 $list = array();
-if ($showAnonymous) {
+if ($showAnonymous && empty($_REQUEST['id'])) {
     $menu = array();
     $menu[] = array(
         'text' => $modx->lexicon('user_group_update'),
