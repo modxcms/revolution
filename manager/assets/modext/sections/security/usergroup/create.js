@@ -37,7 +37,6 @@ MODx.page.CreateUserGroup = function(config) {
         ,components: [{
             xtype: 'modx-panel-user-group'
             ,renderTo: 'modx-panel-user-group-div'
-            ,usergroup: 0
         }]
     });
     MODx.page.CreateUserGroup.superclass.constructor.call(this,config);

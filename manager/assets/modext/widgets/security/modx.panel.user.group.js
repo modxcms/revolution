@@ -37,6 +37,7 @@ MODx.panel.UserGroup = function(config) {
                         ,fieldLabel: _('name')
                         ,allowBlank: false
                         ,enableKeyEvents: true
+                        ,disabled: config.usergroup === 0 ? true : false
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
                                 Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+f.getValue()+'</h2>');
@@ -49,6 +50,7 @@ MODx.panel.UserGroup = function(config) {
                         ,xtype: 'modx-combo-usergroup'
                         ,fieldLabel: _('user_group_parent')
                         ,editable: false
+                        ,disabled: config.usergroup === 0 ? true : false
                         ,baseParams: {
                             action: 'getList'
                             ,addNone: true
@@ -56,6 +58,7 @@ MODx.panel.UserGroup = function(config) {
                     }]
                 },{
                     title: _('users')
+                    ,hidden: config.usergroup === 0 ? true : false
                     ,items: [{
                         html: '<p>'+_('user_group_user_access_msg')+'</p>'
                     },{
@@ -112,7 +115,7 @@ MODx.panel.UserGroup = function(config) {
 };
 Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
     setup: function() {
-        if (this.config.usergroup === '' || this.config.usergroup === 0) {
+        if (this.config.usergroup === '' || this.config.usergroup == undefined) {
             this.fireEvent('ready');
             return false;
         }
@@ -130,8 +133,10 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
                     this.getForm().setValues(r.object);
                     Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+r.object.name+'</h2>');
                     
-                    var d = Ext.decode(r.object.users);
-                    Ext.getCmp('modx-grid-user-group-users').getStore().loadData(d);
+                    if (r.object.users) {
+                        var d = Ext.decode(r.object.users);
+                        Ext.getCmp('modx-grid-user-group-users').getStore().loadData(d);
+                    }
                     
                     d = Ext.decode(r.object.contexts);
                     Ext.getCmp('modx-grid-user-group-contexts').getStore().loadData(d);

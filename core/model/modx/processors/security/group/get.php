@@ -10,11 +10,17 @@
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_group_err_not_specified'));
-$usergroup = $modx->getObject('modUserGroup',$_REQUEST['id']);
-if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_not_found'));
+//if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_group_err_not_specified'));
+if (empty($_REQUEST['id'])) {
+    $usergroup = $modx->newObject('modUserGroup');
+    $usergroup->set('id',0);
+    $usergroup->set('name','('.$modx->lexicon('anonymous').')');
+} else {
+    $usergroup = $modx->getObject('modUserGroup',$_REQUEST['id']);
+    if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_not_found'));
+}
 
-if (!empty($_REQUEST['getUsers'])) {
+if (!empty($_REQUEST['getUsers']) && !empty($_REQUEST['id'])) {
     $c = $modx->newQuery('modUserGroupMember');
     $c->select('
         modUserGroupMember.*,
