@@ -23,15 +23,14 @@ $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
 /* query for rules */
 $c = $modx->newQuery('modActionDom');
-$c->innerJoin('modAction','Action');
-$c->leftJoin('modAccessActionDom','Access');
-$count = $modx->getCount('modActionDom',$c);
-
 $c->select('modActionDom.*,
     Action.controller AS controller,
     Access.principal AS principal,
     Access.principal_class AS principal_class
 ');
+$c->innerJoin('modAction','Action');
+$c->leftJoin('modAccessActionDom','Access');
+$count = $modx->getCount('modActionDom',$c);
 
 $c->sortby($sort,$dir);
 if ($limit) $c->limit($limit,$start);
@@ -40,7 +39,7 @@ $rules = $modx->getCollection('modActionDom', $c);
 
 /* iterate through rules */
 $data = array();
-$canEdit = $modx->hasPermission('edit');
+$canEdit = $modx->hasPermission('save');
 $canRemove = $modx->hasPermission('remove');
 foreach ($rules as $rule) {
     $ruleArray = $rule->toArray();
@@ -51,7 +50,7 @@ foreach ($rules as $rule) {
     $ruleArray['menu'] = array();
     if ($canEdit) {
         $ruleArray['menu'][] = array(
-            'text' => $modx->lexicon('edit'),
+            'text' => $modx->lexicon('edit').':'.$rule->get('principal_class'),
             'handler' => 'this.updateRule',
         );
         $ruleArray['menu'][] = '-';

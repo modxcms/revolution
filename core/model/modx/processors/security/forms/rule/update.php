@@ -22,7 +22,7 @@ if (isset($_POST['principal'])) {
 
     /* if changing to a new usergroup, create access record */
     if (!empty($_POST['principal'])) {
-        $access = $modx->newObject('modAccessAction');
+        $access = $modx->newObject('modAccessActionDom');
         $access->set('principal',$_POST['principal']);
         $access->set('principal_class','modUserGroup');
         $access->set('target',$rule->get('id'));
