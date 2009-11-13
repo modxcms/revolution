@@ -54,7 +54,6 @@ class modManagerResponse extends modResponse {
                 $this->modx->smarty->assign('_ctx',$this->modx->context->get('key'));
 
                 $this->registerBaseScripts($this->action['haslayout'] ? true : false);
-                $this->registerActionDomRules($action);
 
                 $this->body = '';
 
@@ -72,6 +71,8 @@ class modManagerResponse extends modResponse {
                     $cbody = 'Could not find action file at: '.$f;
                 }
 
+
+                $this->registerActionDomRules($action);
                 $this->registerCssJs();
 
                 /* reset path to core modx path for header/footer */
@@ -81,7 +82,6 @@ class modManagerResponse extends modResponse {
                 if ($this->action['haslayout']) {
                     $this->body .= include $this->modx->getOption('manager_path') . 'controllers/header.php';
                 }
-
 
                 /* assign later to allow for css/js registering */
                 if (is_array($cbody)) {

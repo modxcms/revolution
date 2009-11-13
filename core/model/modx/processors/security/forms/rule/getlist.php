@@ -50,7 +50,7 @@ foreach ($rules as $rule) {
     $ruleArray['menu'] = array();
     if ($canEdit) {
         $ruleArray['menu'][] = array(
-            'text' => $modx->lexicon('edit').':'.$rule->get('principal_class'),
+            'text' => $modx->lexicon('edit'),
             'handler' => 'this.updateRule',
         );
         $ruleArray['menu'][] = '-';
