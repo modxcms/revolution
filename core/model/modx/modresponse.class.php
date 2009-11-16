@@ -28,14 +28,11 @@
  * @package modx
  */
 class modResponse {
-    var $modx= null;
-    var $header= null;
-    var $body= null;
+    public $modx= null;
+    public $header= null;
+    public $body= null;
 
-    function modResponse(& $modx) {
-        $this->__construct($modx);
-    }
-    function __construct(& $modx) {
+    function __construct(modX &$modx) {
         $this->modx= & $modx;
     }
 
@@ -44,7 +41,7 @@ class modResponse {
      *
      * @param array $options Various options that can be set.
      */
-    function outputContent($options = array()) {
+    public function outputContent(array $options = array()) {
         if (!($contentType = $this->modx->resource->getOne('ContentType'))) {
             if ($this->modx->getDebug() === true) {
                 $this->modx->log(modX::LOG_LEVEL_DEBUG, "No valid content type for RESOURCE: " . print_r($this->modx->resource->toArray(), true));
@@ -188,7 +185,7 @@ class modResponse {
      * @param integer $count_attempts The number of times to attempt redirection.
      * @param string $type The type of redirection to attempt.
      */
-    function sendRedirect($url, $count_attempts= 0, $type= '') {
+    public function sendRedirect($url, $count_attempts= 0, $type= '') {
         if (empty ($url)) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, "Attempted to redirect to an empty URL.");
             return false;
@@ -234,7 +231,7 @@ class modResponse {
      *
      * @return boolean
      */
-    function checkPreview() {
+    public function checkPreview() {
         $preview= false;
         if ($this->modx->checkSession('mgr') === true) {
             if (isset ($_REQUEST['z']) && $_REQUEST['z'] == 'manprev') {
