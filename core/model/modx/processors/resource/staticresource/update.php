@@ -175,7 +175,7 @@ if (isset($_POST['resource_groups'])) {
 /* TVs save */
 if (!empty($_POST['tvs'])) {
     $c = $modx->newQuery('modTemplateVar');
-    $c->_alias = 'tv';
+    $c->setClassAlias('tv');
     $c->innerJoin('modTemplateVarTemplate', 'tvtpl', array(
         'tvtpl.tmplvarid = tv.id',
         'tvtpl.templateid' => $_POST['template']
