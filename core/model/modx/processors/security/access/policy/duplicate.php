@@ -26,6 +26,15 @@ if ($newPolicy->save() === false) {
     return $modx->error->failure($modx->lexicon('policy_err_duplicate'));
 }
 
+/* save permissions */
+$permissions = $oldPolicy->getMany('Permissions');
+foreach ($permissions as $permission) {
+    $newPerm = $modx->newObject('modAccessPermission');
+    $newPerm->fromArray($permission->toArray());
+    $newPerm->set('policy',$newPolicy->get('id'));
+    $newPerm->save();
+}
+
 /* log manager action */
 $modx->logManagerAction('policy_duplicate','modAccessPolicy',$newPolicy->get('id'));
 
