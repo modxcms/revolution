@@ -47,9 +47,9 @@ class modResponse {
     function outputContent($options = array()) {
         if (!($contentType = $this->modx->resource->getOne('ContentType'))) {
             if ($this->modx->getDebug() === true) {
-                $this->modx->log(MODX_LOG_LEVEL_DEBUG, "No valid content type for RESOURCE: " . print_r($this->modx->resource->toArray(), true));
+                $this->modx->log(modX::LOG_LEVEL_DEBUG, "No valid content type for RESOURCE: " . print_r($this->modx->resource->toArray(), true));
             }
-            $this->modx->log(MODX_LOG_LEVEL_FATAL, "The requested resource has no valid content type specified.");
+            $this->modx->log(modX::LOG_LEVEL_FATAL, "The requested resource has no valid content type specified.");
         }
 
         if (!$contentType->get('binary')) {
@@ -105,7 +105,7 @@ class modResponse {
             $this->modx->resource->_output= str_replace("[^t^]", $totalTime, $this->modx->resource->_output);
             $this->modx->resource->_output= str_replace("[^s^]", $source, $this->modx->resource->_output);
         } else {
-            $this->modx->_beforeRender();
+            $this->modx->beforeRender();
 
             /* invoke OnWebPagePrerender event */
             if (!isset($options['noEvent']) || empty($options['noEvent'])) {
