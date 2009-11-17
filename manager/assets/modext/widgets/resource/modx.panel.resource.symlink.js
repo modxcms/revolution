@@ -315,7 +315,7 @@ MODx.panel.SymLink = function(config) {
             ,id: 'modx-symlink-header'
             ,cls: 'modx-page-header'
             ,border: false
-        },MODx.getPageStructure(it)]
+        },MODx.getPageStructure(it,{id:'modx-resource-tabs' ,forceLayout: true ,deferredRender: false })]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}

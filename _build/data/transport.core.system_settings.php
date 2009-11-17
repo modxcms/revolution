@@ -236,33 +236,6 @@ $collection['25']->fromArray(array (
   'area' => 'furls',
   'editedon' => NULL,
 ), '', true, true);
-$collection['26']= $xpdo->newObject('modSystemSetting');
-$collection['26']->fromArray(array (
-  'key' => 'friendly_url_prefix',
-  'value' => '',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'furls',
-  'editedon' => NULL,
-), '', true, true);
-$collection['27']= $xpdo->newObject('modSystemSetting');
-$collection['27']->fromArray(array (
-  'key' => 'friendly_url_suffix',
-  'value' => '.html',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'furls',
-  'editedon' => NULL,
-), '', true, true);
-$collection['28']= $xpdo->newObject('modSystemSetting');
-$collection['28']->fromArray(array (
-  'key' => 'mail_check_timeperiod',
-  'value' => '60',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'system',
-  'editedon' => NULL,
-), '', true, true);
 $collection['29']= $xpdo->newObject('modSystemSetting');
 $collection['29']->fromArray(array (
   'key' => 'manager_direction',
@@ -333,24 +306,6 @@ $collection['36']->fromArray(array (
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',
-  'editedon' => NULL,
-), '', true, true);
-$collection['37']= $xpdo->newObject('modSystemSetting');
-$collection['37']->fromArray(array (
-  'key' => 'number_of_messages',
-  'value' => '30',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'authentication',
-  'editedon' => NULL,
-), '', true, true);
-$collection['38']= $xpdo->newObject('modSystemSetting');
-$collection['38']->fromArray(array (
-  'key' => 'number_of_results',
-  'value' => '20',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'system',
   'editedon' => NULL,
 ), '', true, true);
 $collection['39']= $xpdo->newObject('modSystemSetting');
@@ -577,42 +532,6 @@ $collection['62']->fromArray(array (
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'file',
-  'editedon' => NULL,
-), '', true, true);
-$collection['63']= $xpdo->newObject('modSystemSetting');
-$collection['63']->fromArray(array (
-  'key' => 'tinymce_custom_buttons1',
-  'value' => 'undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,link,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => '',
-  'editedon' => NULL,
-), '', true, true);
-$collection['64']= $xpdo->newObject('modSystemSetting');
-$collection['64']->fromArray(array (
-  'key' => 'tinymce_custom_buttons2',
-  'value' => 'bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,styleselect,formatselect,separator,styleprops',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => '',
-  'editedon' => NULL,
-), '', true, true);
-$collection['65']= $xpdo->newObject('modSystemSetting');
-$collection['65']->fromArray(array (
-  'key' => 'tinymce_custom_plugins',
-  'value' => 'style,advimage,advlink,searchreplace,print,contextmenu,paste,fullscreen,noneditable,nonbreaking,xhtmlxtras,visualchars,media',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => '',
-  'editedon' => NULL,
-), '', true, true);
-$collection['66']= $xpdo->newObject('modSystemSetting');
-$collection['66']->fromArray(array (
-  'key' => 'tinymce_editor_theme',
-  'value' => 'editor',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => '',
   'editedon' => NULL,
 ), '', true, true);
 $collection['67']= $xpdo->newObject('modSystemSetting');

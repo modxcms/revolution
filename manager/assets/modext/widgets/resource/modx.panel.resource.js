@@ -318,6 +318,8 @@ MODx.panel.Resource = function(config) {
         id: 'modx-page-settings'
         ,title: _('page_settings')
         ,layout: 'form'
+        ,forceLayout: true
+        ,deferredRender: false
         ,labelWidth: 200
         ,bodyStyle: 'padding: 1.5em;'
         ,autoHeight: true
@@ -361,8 +363,9 @@ MODx.panel.Resource = function(config) {
         ,id: 'modx-resource-header'
         ,cls: 'modx-page-header'
         ,border: false
+        ,forceLayout: true
     });
-    its.push(MODx.getPageStructure(it,{id:'modx-resource-tabs'}));
+    its.push(MODx.getPageStructure(it,{id:'modx-resource-tabs' ,forceLayout: true ,deferredRender: false }));
     
     if (MODx.config.manager_use_tabs) {
         ct.style = 'margin-top: 1.0em;';
@@ -376,6 +379,7 @@ MODx.panel.Resource = function(config) {
         ,resource: ''
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
+        ,forceLayout: true
         ,items: its
         ,listeners: {
             'setup': {fn:this.setup,scope:this}

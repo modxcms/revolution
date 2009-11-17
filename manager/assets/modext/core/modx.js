@@ -150,9 +150,9 @@ Ext.extend(MODx,Ext.Component,{
     ,getPageStructure: function(v,c) {
         c = c || {};
         if (MODx.config.manager_use_tabs) {
-            Ext.applyIf(c,{xtype: 'modx-tabs',style: 'margin-top: .5em;',items: v});
+            Ext.applyIf(c,{xtype: 'modx-tabs',style: 'margin-top: .5em;',items: v,forceLayout: true});
         } else {
-            Ext.applyIf(c,{xtype:'portal',items:[{columnWidth:1,items: v}]});
+            Ext.applyIf(c,{xtype:'portal',items:[{columnWidth:1,items: v,forceLayout: true}]});
         }
         return c;
     }

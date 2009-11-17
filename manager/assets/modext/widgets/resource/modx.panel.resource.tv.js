@@ -9,8 +9,7 @@
 MODx.panel.ResourceTV = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        contentEl: 'modx-tab-tvs'
-        ,id: 'modx-panel-resource-tv'
+        id: 'modx-panel-resource-tv'
         ,title: _('template_variables')
         ,class_key: ''
         ,resource: ''
