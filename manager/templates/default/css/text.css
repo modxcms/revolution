@@ -1,17 +1,17 @@
 #modx_container p {
-    margin-bottom: 1.3em;
+    margin-bottom: 13px;
 }
 
 
 h2 {
-    margin: 0 0 1em;
-    font: normal 1.7em Helvetica, Tahoma, Arial, Helvetica, sans-serif;
+    margin: 0 0 10px;
+    font: normal 21px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
     padding-bottom: 4px;
     border-bottom: 1px solid #acacac;
 }
 
 h3 {
-    margin: 0 0 .8em;
+    margin: 0 0 18px;
     font: bold 1.3em Helvetica, Tahoma, Arial, Helvetica, sans-serif;
 }
 
@@ -20,7 +20,7 @@ h3 {
 }
 
 .news_article {
-    padding-bottom: 3em;
+    padding-bottom: 30px;
 }
 .news_article a {
     color: #535d6c;

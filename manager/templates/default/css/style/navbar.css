@@ -11,7 +11,7 @@
 #modx-topnav-div {
     background: transparent;
     padding: 6px 0 0;
-    margin-left: 1em;
+    margin-left: 12px;
     position: relative;
     width: 78%;
     z-index: 13;
@@ -121,7 +121,7 @@ li.top li.last span {
     display: block;
     clear: left;
     line-height: 1.1;
-    font-size: .9em;
+    font-size: 12px;
     color: #999;
     margin-top: -4px;
     padding-bottom: 6px;

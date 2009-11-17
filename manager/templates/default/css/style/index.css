@@ -1,7 +1,7 @@
 @import url(./navbar.css);
 @import url(./leftbar.css);
 
-html {height: 100%;}
+html, body {height: 100%;}
 
 body, html {
     margin: 0;
@@ -21,7 +21,7 @@ body, html {
 
 /* top bar */
 #modx-topbar {
-    height: 3em;
+    height: 33px;
     /*border: 1px solid red;*/
     background-color: #222;
     color: white;
@@ -32,20 +32,20 @@ body, html {
     }
     
 #modx-site-name {
-    padding: .3em 0 0 1em;
+    padding: 3px 0 0 10px;
     }
     
 .modx-version {
     display: block;
     clear: left;
     color: #888;
-    font-size: .8em;
+    font-size: 11px;
     font-style: italic;
 }
 
 #modx-logo {
     float: right;
-    margin: .4em 1em 0 0;
+    margin: 4px 10px 0 0;
     }
 #modx-logo img {   
     width: 94px;
@@ -71,7 +71,7 @@ body, html {
 	right: 12px;
 	bottom: 0;
     line-height: 25px;
-	padding-top: 6px 1.3em 0 0;
+	padding-top: 6px 13px 0 0;
 	height: 25px;
     vertical-align: middle;
     z-index: 1;
@@ -113,19 +113,18 @@ h2 {
 
 #modAB {
     position: fixed;
-    /*width: 16em;*/
-    top: 8em;
-    right: 2em;
+    top: 78px;
+    right: 22px;
     text-align: right;
     z-index: 12;
     border-width: 1px;
     border-style: solid;
     border-color: #c9c8c9;
-    }
+}
 #modAB .x-toolbar {
     background: #fff;
     border: 1px solid #fff;
-    }
+}
     
 /* panel stylings */
 .modx-page-header, .modx-page-header div {
@@ -137,8 +136,8 @@ h2 {
     
 .modx-page-header h2 {
     border-bottom: 0;
-    margin: .3em .5em 0;
+    margin: 3px 5px 0;
 }
 .modx-form p {
-    padding-bottom: 1em;
+    padding-bottom: 10px;
 }
