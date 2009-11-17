@@ -17,32 +17,29 @@ $nodes = array();
 getNodesFormatted($nodes,$data);
 
 /* readjust cache */
-foreach ($nodes as $ar_node) {
-	$node = $modx->getObject('modMenu',$ar_node['text']);
-	if ($node == null) continue;
-	$old_parent_id = $node->get('parent');
+foreach ($nodes as $node) {
+	$menu = $modx->getObject('modMenu',$node['text']);
+	if ($menu == null) continue;
 
-	if ($old_parent_id != $ar_node['parent']) {
+	if ($menu->get('parent') != $node['parent']) {
 		/* get new parent, if invalid, skip, unless is root */
-		if ($ar_node['parent'] != 0) {
-			$parent = $modx->getObject('modMenu',$ar_node['parent']);
-			if ($parent == null) continue;
+		if ($node['parent'] != 0) {
+			$parentMenu = $modx->getObject('modMenu',$node['parent']);
+			if ($parentMenu == null) continue;
 		}
 
 		/* save new parent */
-		$node->set('parent',$ar_node['parent']);
+		$menu->set('parent',$node['parent']);
 	}
-	$node->set('menuindex',$ar_node['order']);
-	$node->save();
+	$menu->set('menuindex',$node['order']);
+	$menu->save();
 }
-
 return $modx->error->success();
 
-function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0) {
+function getNodesFormatted(&$ar_nodes,$cur_level,$parent = '') {
 	$order = 0;
 	foreach ($cur_level as $id => $children) {
-		$id = explode('_',$id);
-		$id = $id[1];
+		$id = str_replace('n_','',$id);
 		$ar_nodes[] = array(
 			'text' => $id,
 			'parent' => $parent,

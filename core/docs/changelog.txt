@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1443] Tree sorting now works for modMenus
 - Removed deprecated system settings from build
 - [#MODX-1448] Fixed issue with container checkbox not persisting
 - [#MODX-1426] Fixed issue with MySQL checks on non-standard 
