@@ -62,12 +62,22 @@ abstract class modInstallTest {
         }
     }
 
+    private function _sanitizeMySqlVersion($mysqlVersion) {
+        $mysqlVersion = str_replace(array(
+            'mysqlnd ',
+            '-dev',
+            ' ',
+        ),'',$mysqlVersion);
+        return $mysqlVersion;
+    }
+
     /**
      * Checks MySQL server version
      */
     protected function _checkMySQLServerVersion() {
         $this->results['mysql_server_version']['msg'] = '<p>'.$this->install->lexicon['test_mysql_version_server_start'].' ';
         $mysqlVersion = mysql_get_server_info();
+        $mysqlVersion = $this->_sanitizeMySqlVersion($mysqlVersion);
         if (empty($mysqlVersion)) {
             $this->results['mysql_server_version']['msg'] = '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
             $this->results['mysql_server_version']['msg'] .= '<div class="notes"><h3>'.$this->install->lexicon['test_mysql_version_server_nf'].'</h3><p>'.$this->install->lexicon['test_mysql_version_server_nf_msg'].'</p></div>';
@@ -98,6 +108,7 @@ abstract class modInstallTest {
     protected function _checkMySQLClientVersion() {
         $this->results['mysql_client_version']['msg'] = '<p>'.$this->install->lexicon['test_mysql_version_client_start'].' ';
         $mysqlVersion = mysql_get_client_info();
+        $mysqlVersion = $this->_sanitizeMySqlVersion($mysqlVersion);
         if (empty($mysqlVersion)) {
             $this->results['mysql_client_version']['msg'] = '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
             $this->results['mysql_client_version']['msg'] .= '<div class="notes"><h3>'.$this->install->lexicon['test_mysql_version_client_nf'].'</h3><p>'.$this->install->lexicon['test_mysql_version_client_nf_msg'].'</p></div>';
