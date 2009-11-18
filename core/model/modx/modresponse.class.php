@@ -162,9 +162,12 @@ class modResponse {
             "_postProcess"
         ));
 
-        if ($contentType->get('binary')) {
+        if ($this->modx->resource instanceof modStaticResource && $contentType->get('binary')) {
             $this->modx->resource->process();
         } else {
+            if ($contentType->get('binary')) {
+                $this->modx->resource->_output = $this->modx->resource->process();
+            }
             echo $this->modx->resource->_output;
             while (@ ob_end_flush()) {}
             exit();
