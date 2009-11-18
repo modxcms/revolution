@@ -389,15 +389,15 @@ $collection['47']->fromArray(array (
   'area' => 'system',
   'editedon' => NULL,
 ), '', true, true);
-$collection['48']= $xpdo->newObject('modSystemSetting');
-$collection['48']->fromArray(array (
-  'key' => 'session_cookie_domain',
-  'value' => 'localhost',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'session',
-  'editedon' => NULL,
-), '', true, true);
+//$collection['48']= $xpdo->newObject('modSystemSetting');
+//$collection['48']->fromArray(array (
+//  'key' => 'session_cookie_domain',
+//  'value' => '',
+//  'xtype' => 'textfield',
+//  'namespace' => 'core',
+//  'area' => 'session',
+//  'editedon' => NULL,
+//), '', true, true);
 $collection['49']= $xpdo->newObject('modSystemSetting');
 $collection['49']->fromArray(array (
   'key' => 'session_cookie_lifetime',
@@ -407,15 +407,15 @@ $collection['49']->fromArray(array (
   'area' => 'session',
   'editedon' => NULL,
 ), '', true, true);
-$collection['50']= $xpdo->newObject('modSystemSetting');
-$collection['50']->fromArray(array (
-  'key' => 'session_cookie_path',
-  'value' => '/',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'session',
-  'editedon' => NULL,
-), '', true, true);
+//$collection['50']= $xpdo->newObject('modSystemSetting');
+//$collection['50']->fromArray(array (
+//  'key' => 'session_cookie_path',
+//  'value' => '',
+//  'xtype' => 'textfield',
+//  'namespace' => 'core',
+//  'area' => 'session',
+//  'editedon' => NULL,
+//), '', true, true);
 $collection['51']= $xpdo->newObject('modSystemSetting');
 $collection['51']->fromArray(array (
   'key' => 'session_cookie_secure',
@@ -434,15 +434,15 @@ $collection['52']->fromArray(array (
   'area' => 'session',
   'editedon' => NULL,
 ), '', true, true);
-$collection['53']= $xpdo->newObject('modSystemSetting');
-$collection['53']->fromArray(array (
-  'key' => 'session_name',
-  'value' => 'modxcmssession',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'session',
-  'editedon' => NULL,
-), '', true, true);
+//$collection['53']= $xpdo->newObject('modSystemSetting');
+//$collection['53']->fromArray(array (
+//  'key' => 'session_name',
+//  'value' => '',
+//  'xtype' => 'textfield',
+//  'namespace' => 'core',
+//  'area' => 'session',
+//  'editedon' => NULL,
+//), '', true, true);
 $collection['54']= $xpdo->newObject('modSystemSetting');
 $collection['54']->fromArray(array (
   'key' => 'set_header',

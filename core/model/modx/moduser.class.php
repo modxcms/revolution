@@ -228,7 +228,7 @@ class modUser extends modPrincipal {
         if (!empty($this->sessionContexts)) {
             $this->removeSessionContext($this->sessionContexts);
         }
-        @ session_destroy();
+        session_destroy();
     }
 
     /**
@@ -310,35 +310,7 @@ class modUser extends modPrincipal {
      */
     public function addSessionContext($context) {
         $this->getSessionContexts();
-        $regenerated= false;
-        if (version_compare(XPDO_PHP_VERSION, '4.3.2', '>=')) {
-            if (version_compare(XPDO_PHP_VERSION, '5.1.0', '>=')) {
-                session_regenerate_id(true);
-                $regenerated= true;
-            } else {
-                $oldSessionId= session_id();
-                session_regenerate_id();
-                if (!version_compare(XPDO_PHP_VERSION, '4.3.3','>=')) {
-                    $cookiePath = $this->xpdo->getOption('session_cookie_path',null,$this->xpdo->getOption('base_path'));
-
-                    $cookieExpiration= 0;
-                    $cookieLifetime= intval($this->xpdo->getOption('session_cookie_lifetime',null,(@ini_get('session.cookie_lifetime'))));
-
-                    if (isset ($_SESSION['modx.' . $context . '.session.cookie.lifetime']) && is_numeric($_SESSION['modx.' . $context . '.session.cookie.lifetime'])) {
-                        $cookieLifetime= intval($_SESSION['modx.' . $context . '.session.cookie.lifetime']);
-                    }
-                    if ($cookieLifetime) {
-                        $cookieExpiration= time() + $cookieLifetime;
-                    }
-                    setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath);
-                }
-                /* HACK: [PHP < 5.1.0] Removing the old session object from the database so it can't be hijacked. */
-                if ($oldSession= $this->xpdo->getObject('modSession', array ('id' => $oldSessionId), false)) {
-                    $oldSession->remove();
-                }
-                $regenerated= true;
-            }
-        }
+        session_regenerate_id(true);
 
         $this->getOne('Profile');
         if ($this->Profile && $this->Profile instanceof modUserProfile) {
@@ -445,7 +417,6 @@ class modUser extends modPrincipal {
                 default :
                     break;
             }
-            $this->removeSessionCookie($context);
         }
     }
 
@@ -457,9 +428,7 @@ class modUser extends modPrincipal {
      * @access public
      * @param string $context The context to remove.
      */
-    public function removeSessionCookie($context) {
-
-    }
+    public function removeSessionCookie($context) {}
 
     /**
      * Checks if the user has a specific session context.

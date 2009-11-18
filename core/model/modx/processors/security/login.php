@@ -14,6 +14,7 @@ $username = $_POST['username'];
 $givenPassword = $_POST['password'];
 
 $rememberme= isset ($_POST['rememberme']) ? ($_POST['rememberme'] == 'on' || $_POST['rememberme'] == true) : false;
+$lifetime= (integer) $modx->getOption('lifetime', $_POST, $modx->getOption('session_cookie_lifetime', null, 0));
 $loginContext= isset ($_POST['login_context']) ? $_POST['login_context'] : $modx->context->get('key');
 
 $onBeforeLoginParams = array(
@@ -21,6 +22,7 @@ $onBeforeLoginParams = array(
     'password' => $givenPassword,
     'attributes' => array(
         'rememberme' => & $rememberme,
+        'lifetime' => & $lifetime,
         'loginContext' => & $loginContext
     )
 );
@@ -50,6 +52,7 @@ if (!$user) {
         'password' => $password,
         array (
             'rememberme' => $rememberme,
+            'lifetime' => $lifetime,
             'loginContext' => $loginContext,
         )
     ));
@@ -114,7 +117,8 @@ if (isset ($allowed_days) && $allowed_days) {
 $loginAttributes = array(
     "user"       => & $user,
     "password"   => $givenPassword,
-    "rememberme" => $rememberme
+    "rememberme" => $rememberme,
+    "lifetime" => $lifetime
 );
 if ($loginContext == 'mgr') {
     $rt = $modx->invokeEvent("OnManagerAuthentication", $loginAttributes);
@@ -132,7 +136,7 @@ if (!$rt || (is_array($rt) && !in_array(true, $rt))) {
 $user->addSessionContext($loginContext);
 
 if ($rememberme) {
-    $_SESSION['modx.' . $loginContext . '.session.cookie.lifetime']= intval($modx->getOption('session_cookie_lifetime'));
+    $_SESSION['modx.' . $loginContext . '.session.cookie.lifetime']= $lifetime;
 } else {
     $_SESSION['modx.' . $loginContext . '.session.cookie.lifetime']= 0;
 }
@@ -141,6 +145,7 @@ $postLoginAttributes = array(
     'user' => $user,
     'attributes' => array(
         'rememberme' => $rememberme,
+        'lifetime' => $lifetime,
         'loginContext' => $loginContext
     )
 );

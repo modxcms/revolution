@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1207] Changed modSession.id column to varchar(40) to support session.hash_function=1 with session.hash_bytes_per_char=4.
+- Simplified and optimized session handling, removing older PHP workarounds and adjusting preset system settings.
 - Make sure non-static Resources with binary content types get processed and output.
 - [#MODX-1450] Added paging to Template combobox to allow for large numbers of templates
 - [#MODX-1443] Tree sorting now works for modMenus

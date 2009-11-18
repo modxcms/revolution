@@ -2551,8 +2551,8 @@ class modX extends xPDO {
         $contextKey= $this->context->get('key');
         if ($this->getSessionState() == modX::SESSION_STATE_UNINITIALIZED) {
             $sh= false;
-            if (isset ($this->config['session_handler_class']) && $this->config['session_handler_class']) {
-                if ($shClass= $this->loadClass($this->config['session_handler_class'], '', false, true)) {
+            if ($sessionHandlerClass = $this->getOption('session_handler_class')) {
+                if ($shClass= $this->loadClass($sessionHandlerClass, '', false, true)) {
                     if ($sh= new $shClass($this)) {
                         session_set_save_handler(
                             array (& $sh, 'open'),
@@ -2566,32 +2566,34 @@ class modX extends xPDO {
                 }
             }
             if (!$sh) {
-                if (isset ($this->config['session_save_path']) && is_writable($this->config['session_save_path'])) {
-                    session_save_path($this->config['session_save_path']);
+                if ($sessionSavePath = $this->getOption('session_save_path') && is_writable($sessionSavePath)) {
+                    session_save_path($sessionSavePath);
                 }
             }
-            if (isset ($this->config['session_gc_maxlifetime'])) {
-                ini_set('session.gc_maxlifetime', (integer) $this->config['session_gc_maxlifetime']);
+            $cookieDomain= $this->getOption('session_cookie_domain', null, '');
+            $cookiePath= $this->getOption('session_cookie_path', null, MODX_BASE_URL);
+            if (empty($cookiePath)) $cookiePath = $this->getOption('base_url', null, MODX_BASE_URL);
+            $cookieSecure= (boolean) $this->getOption('session_cookie_secure', null, false);
+            $cookieLifetime= (integer) $this->getOption('session_cookie_lifetime', null, 0);
+            $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime', null, $cookieLifetime);
+            if ($gcMaxlifetime > 0) {
+                ini_set('session.gc_maxlifetime', $gcMaxlifetime);
             }
-            $cookieLifetime= 0;
-            if (isset ($this->config['session_cookie_lifetime'])) {
-                $cookieLifetime= intval($this->config['session_cookie_lifetime']);
-            }
-            $cookiePath= isset ($this->config['session_cookie_path']) ? $this->config['session_cookie_path'] : $this->config['base_path'];
-            ini_set('session.cookie_lifetime', $cookieLifetime);
-            ini_set('session.cookie_path', $cookiePath);
-            $site_sessionname= isset ($this->config['session_name']) ? $this->config['session_name'] : $GLOBALS['site_sessionname'];
-            session_name($site_sessionname);
+            $site_sessionname= $this->getOption('session_name', null, '');
+            if (!empty($site_sessionname)) session_name($site_sessionname);
+            session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure);
             session_start();
             $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
             $this->getUser($contextKey);
             $cookieExpiration= 0;
-            if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime']) && is_numeric($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
-                $cookieLifetime= intval($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime']);
-                if ($cookieLifetime) {
-                    $cookieExpiration= time() + $cookieLifetime;
+            if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
+                $sessionCookieLifetime= (integer) $_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
+                if ($sessionCookieLifetime !== $cookieLifetime) {
+                    if ($sessionCookieLifetime) {
+                        $cookieExpiration= time() + $sessionCookieLifetime;
+                    }
+                    setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain, $cookieSecure);
                 }
-                setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath);
             }
         }
     }

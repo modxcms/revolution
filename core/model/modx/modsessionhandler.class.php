@@ -1,6 +1,6 @@
 <?php
 /*
- * MODx Revolution  *
+ * MODx Revolution
  * Copyright 2006, 2007, 2008, 2009 by the MODx Team.
  * All rights reserved.
  *

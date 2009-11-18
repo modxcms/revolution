@@ -30,7 +30,7 @@ $sql = "ALTER TABLE {$table} ADD COLUMN `city` VARCHAR(255) NOT NULL DEFAULT '' 
 $this->processResults($class,$description,$sql);
 
 /* adjust country field to modUserProfile */
-$description = sprintf($this->install->lexicon['add_column'],'city',$table);
+$description = sprintf($this->install->lexicon['add_column'],'country',$table);
 $sql = "ALTER TABLE {$table} CHANGE `country` `country` VARCHAR( 255 ) NOT NULL DEFAULT ''";
 $this->processResults($class,$description,$sql);
 
@@ -38,6 +38,13 @@ $this->processResults($class,$description,$sql);
 /* add address field to modUserProfile */
 $class = 'modUserProfile';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'city',$table);
+$description = sprintf($this->install->lexicon['add_column'],'address',$table);
 $sql = "ALTER TABLE {$table} ADD COLUMN `address` TEXT NOT NULL DEFAULT '' AFTER `gender`";
+$this->processResults($class,$description,$sql);
+
+/* change session.id field to precision 40 */
+$class = 'modSession';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['change_column'],'id varchar(32)','id varchar(40)',$table);
+$sql = "ALTER TABLE {$table} CHANGE `id` `id` VARCHAR(40) NOT NULL";
 $this->processResults($class,$description,$sql);
