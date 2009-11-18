@@ -271,6 +271,7 @@ MODx.combo.Template = function(config) {
 		,hiddenName: 'template'
 		,displayField: 'templatename'
 		,valueField: 'id'
+        ,pageSize: 20
 		,fields: ['id','templatename','description','category']
 		,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{templatename}</span>'
 							   ,' - <span style="font-style:italic">{category}</span>'

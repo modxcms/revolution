@@ -15,7 +15,7 @@ if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('
 $modx->lexicon->load('template');
 
 /* get default properties */
-$isLimit = empty($_REQUEST['limit']);
+$isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,20);
 $sort = $modx->getOption('sort',$_REQUEST,'templatename');
@@ -52,6 +52,7 @@ if ($combo) {
 foreach ($templates as $template) {
 	$templateArray = $template->toArray();
 	$templateArray['category'] = $template->get('category') != null ? $template->get('category') : '';
+    unset($templateArray['content']);
 	$list[] = $templateArray;
 }
 
