@@ -33,44 +33,40 @@ class modPackageBuilder {
     * @var string The directory in which the package file is located.
     * @access public
     */
-    var $directory;
+    public $directory;
     /**
     * @var string The unique signature for the package.
     * @access public
     */
-    var $signature;
+    public $signature;
     /**
     * @var string The filename of the actual package.
     * @access public
     */
-    var $filename;
+    public $filename;
     /**
     * @var string The xPDOTransport package object.
     * @access public
     */
-    var $package;
+    public $package;
     /**
      * @var string The modNamespace that the package is associated with.
      * @access public
      */
-    var $namespace;
+    public $namespace;
     /**
      * @var array An array of classnames to automatically select by namespace
      * @access public
      */
-    var $autoselects;
+    public $autoselects;
 
-    /**#@+
+    /**
      * Creates an instance of the modPackageBuilder class.
      *
      * @param modX &$modx A reference to a modX instance.
      * @return modPackageBuilder
      */
-    function modPackageBuilder(& $modx) {
-        $this->__construct($modx);
-    }
-    /** @ignore */
-    function __construct(& $modx) {
+    function __construct(modX &$modx) {
         $this->modx = & $modx;
         $this->modx->loadClass('transport.modTransportVehicle', '', false, true);
         $this->modx->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
@@ -85,7 +81,6 @@ class modPackageBuilder {
         $this->modx->lexicon->load('workspace');
         $this->autoselects = array ();
     }
-    /**#@-*/
 
     /**
     * Allows for customization of the package workspace.
@@ -94,7 +89,7 @@ class modPackageBuilder {
     * @param integer $workspace_id The ID of the workspace to select.
     * @return modWorkspace The workspace set, false if invalid.
     */
-    function setWorkspace($workspace_id) {
+    public function setWorkspace($workspace_id) {
         if (!is_numeric($workspace_id)) {
             return false;
         }
@@ -111,7 +106,7 @@ class modPackageBuilder {
      * @deprecated
      * @see modPackageBuilder::createPackage
      */
-    function create($name, $version, $release = '') {
+    public function create($name, $version, $release = '') {
         $this->createPackage($name, $version, $release);
     }
 
@@ -125,7 +120,7 @@ class modPackageBuilder {
     * package.
     * @return xPDOTransport The xPDOTransport package object.
     */
-    function createPackage($name, $version, $release = '') {
+    public function createPackage($name, $version, $release = '') {
         /* setup the signature and filename */
         $s['name'] = $name;
         $s['version'] = $version;
@@ -166,7 +161,7 @@ class modPackageBuilder {
      * @param array An array of class names to build in
      * @return null
      */
-    function setAutoSelects($classes = array ()) {
+    public function setAutoSelects(array $classes = array ()) {
         $this->autoselects = $classes;
     }
 
@@ -178,9 +173,9 @@ class modPackageBuilder {
     * @param array $attr Attributes for the vehicle.
     * @return modTransportVehicle The createed modTransportVehicle instance.
     */
-    function createVehicle($obj, $attr) {
-        if ($this->namespace) {
-            $attr['namespace'] = $this->namespace; /* package the namespace into the metadata */
+    public function createVehicle($obj, $attr) {
+        if ($this->{'namespace'}) {
+            $attr['namespace'] = $this->{'namespace'}; /* package the namespace into the metadata */
         }
         $vehicle = new modTransportVehicle($obj, $attr);
 
@@ -201,21 +196,24 @@ class modPackageBuilder {
      * @param string $path The path for the namespace to be created.
      * @return boolean True if successful.
      */
-    function registerNamespace($ns = 'core', $autoincludes = true, $packageNamespace = true, $path = '') {
+    public function registerNamespace($ns = 'core', $autoincludes = true, $packageNamespace = true, $path = '') {
         if (!($ns instanceof modNamespace)) {
             $namespace = $this->modx->getObject('modNamespace', $ns);
-            if ($namespace == null) {
+            if (!$namespace) {
                 $namespace = $this->modx->newObject('modNamespace');
                 $namespace->set('name', $ns);
+                $namespace->set('path',$path);
+            }
+            if (!empty($path)) {
                 $namespace->set('path',$path);
             }
         } else {
             $namespace = $ns;
         }
-        $this->namespace = $namespace;
+        $this->{'namespace'} = $namespace;
 
         $this->modx->log(modX::LOG_LEVEL_INFO, $this->modx->lexicon('namespace_registered',array(
-            'namespace' => $this->namespace->get('name'),
+            'namespace' => $this->{'namespace'}->get('name'),
         )));
 
         /* define some basic attributes */
@@ -236,7 +234,7 @@ class modPackageBuilder {
                 return false;
             }
             $this->modx->log(modX::LOG_LEVEL_INFO, $this->modx->lexicon('namespace_packaged',array(
-                'namespace' => $this->namespace->get('name'),
+                'namespace' => $this->{'namespace'}->get('name'),
             )));
         }
 
@@ -274,7 +272,7 @@ class modPackageBuilder {
     * @param modTransportVehicle $vehicle The vehicle to insert into the package.
     * @return boolean True if successful.
     */
-    function putVehicle($vehicle) {
+    public function putVehicle($vehicle) {
         $attr = $vehicle->compile();
         $obj = $vehicle->fetch();
         return $this->package->put($obj, $attr);
@@ -288,7 +286,7 @@ class modPackageBuilder {
     * @access public
     * @return boolean True if successful.
     */
-    function pack() {
+    public function pack() {
         return $this->package->pack();
     }
 
@@ -298,7 +296,7 @@ class modPackageBuilder {
      * @access public
      * @return string The signature of the included package.
      */
-    function getSignature() {
+    public function getSignature() {
         return $this->package->signature;
     }
 
@@ -310,7 +308,7 @@ class modPackageBuilder {
      * @param string $schema The schema file to generate from.
      * @return boolean true if successful
      */
-    function buildSchema($model, $schema) {
+    public function buildSchema($model, $schema) {
         $manager = $this->modx->getManager();
         $generator = $manager->getGenerator();
         $generator->parseSchema($schema, $model);
@@ -323,7 +321,7 @@ class modPackageBuilder {
      * @access public
      * @return boolean True if successful
      */
-    function buildLexicon($path) {
+    public function buildLexicon($path) {
         $invdirs = array (
             '.',
             '..',
@@ -375,14 +373,14 @@ class modPackageBuilder {
 
                 $topic = $this->modx->getObject('modLexiconTopic', array (
                     'name' => $top,
-                    'namespace' => $this->namespace->get('name'),
+                    'namespace' => $this->{'namespace'}->get('name'),
                 ));
                 if ($topic == null) {
                     $topic = $this->modx->newObject('modLexiconTopic');
                     $topic->fromArray(array (
                         'id' => $ti,
                         'name' => $top,
-                        'namespace' => $this->namespace->get('name'),
+                        'namespace' => $this->{'namespace'}->get('name'),
                     ), '', true, true);
                     $ti++;
                 }
@@ -392,7 +390,7 @@ class modPackageBuilder {
                 $entries = array ();
                 if (file_exists($f)) {
                     $_lang = array ();
-                    @ include $f;
+                    @include $f;
 
                     foreach ($_lang as $key => $value) {
                         $entry = $this->modx->newObject('modLexiconEntry');
@@ -401,7 +399,7 @@ class modPackageBuilder {
                             'name' => $key,
                             'value' => $value,
                             'topic' => $topic->get('id'),
-                            'namespace' => $this->namespace->get('name'),
+                            'namespace' => $this->{'namespace'}->get('name'),
                             'language' => $culture,
                         ), '', true, true);
                         $entries[] = $entry;
@@ -459,7 +457,7 @@ class modPackageBuilder {
      * manifest of the package being built.
      * @return null
      */
-    function setPackageAttributes($attributes = array ()) {
+    public function setPackageAttributes(array $attributes = array ()) {
         if ($this->package !== null) {
             foreach ($attributes as $k => $v)
                 $this->package->setAttribute($k, $v);
