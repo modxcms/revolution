@@ -9,9 +9,9 @@ $mode = $install->settings->get('installmode');
 
 $xpdo = $install->_connect($install->settings->get('database_type')
  . ':host=' . $install->settings->get('database_server')
- . ';dbname=' . trim($install->settings->get('dbase'), '`')
- . ';charset=' . $install->settings->get('database_connection_charset')
- . ';collation=' . $install->settings->get('database_collation')
+ //. ';dbname=' . trim($install->settings->get('dbase'), '`')
+ //. ';charset=' . $install->settings->get('database_connection_charset')
+ //. ';collation=' . $install->settings->get('database_collation')
  ,$install->settings->get('database_user')
  ,$install->settings->get('database_password')
  ,$install->settings->get('table_prefix'));
@@ -30,7 +30,6 @@ if (!$xpdo->connect()) {
 
 
 $data = array();
-
 /* get default collation */
 if (!$stmt = @$xpdo->query("SHOW SESSION VARIABLES LIKE 'collation_database'")) {
     $stmt = @$xpdo->query("SHOW SESSION VARIABLES LIKE 'collation_server'");
@@ -44,9 +43,10 @@ if ($stmt && $stmt instanceof PDOStatement) {
 if (empty($data['collation'])) {
     $data['collation'] = 'utf8_general_ci';
 }
+unset($stmt);
 
 /* get list of collations */
-$stmt = $xpdo->query('SHOW COLLATION');
+$stmt = @$xpdo->query('SHOW COLLATION');
 if ($stmt && $stmt instanceof PDOStatement) {
     $data['collations'] = array();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -58,6 +58,7 @@ if ($stmt && $stmt instanceof PDOStatement) {
     }
     $stmt->closeCursor();
 }
+unset($stmt);
 
 /* set default charset */
 $data['charset'] = substr($data['collation'], 0, strpos($data['collation'], '_'));

@@ -7,18 +7,23 @@ unset($settings['action']);
 $install->settings->store($settings);
 $mode = $install->settings->get('installmode');
 
-$xpdo = $install->getConnection($mode);
-if (!($xpdo instanceof xPDO)) { $this->error->failure($xpdo); }
-
-if (!$xpdo->connect()) {
-    /* allow this to pass for new installs only; will attempt to create during installation */
-    if ($mode != modInstall::MODE_NEW) {
-        $this->error->failure($install->lexicon['db_err_connect_upgrade']);
-    }
-}
-
 $data = array();
 if ($mode == modInstall::MODE_NEW) {
+    $xpdo = $install->_connect($install->settings->get('database_type')
+         . ':host=' . $install->settings->get('database_server')
+         . ';dbname=information_schema'
+         . ';charset=' . $install->settings->get('database_connection_charset')
+         . ';collation=' . $install->settings->get('database_collation')
+         ,$install->settings->get('database_user')
+         ,$install->settings->get('database_password')
+         ,$install->settings->get('table_prefix'));
+
+    if (!($xpdo instanceof xPDO)) { $this->error->failure($xpdo); }
+
+    if (!$xpdo->connect()) {
+        $this->error->failure('Could not connect to the mysql server.');
+    }
+
     $manager = $xpdo->getManager();
 
     $dbname = trim($install->settings->get('dbase'), '`');
@@ -47,9 +52,34 @@ if ($mode == modInstall::MODE_NEW) {
         $this->error->failure($install->lexicon['db_err_create_database']);
     }
 
-    /* now create system settings table */
-    $xpdo->addPackage('modx',MODX_CORE_PATH.'model/');
-    $created = $manager->createObjectContainer('modSystemSetting');
+
+}
+
+/* now connect to db */
+$xpdo = $install->_connect($install->settings->get('database_type')
+     . ':host=' . $install->settings->get('database_server')
+     . ';dbname=' . trim($install->settings->get('dbase'), '`')
+     . ';charset=' . $install->settings->get('database_connection_charset')
+     . ';collation=' . $install->settings->get('database_collation')
+     ,$install->settings->get('database_user')
+     ,$install->settings->get('database_password')
+     ,$install->settings->get('table_prefix'));
+if (!($xpdo instanceof xPDO)) { $this->error->failure($xpdo); }
+
+if (!$xpdo->connect()) {
+    /* allow this to pass for new installs only; will attempt to create during installation */
+    if ($mode != modInstall::MODE_NEW) {
+        $this->error->failure($install->lexicon['db_err_connect_upgrade']);
+    }
+}
+
+
+/* now create system settings table */
+if ($mode == modInstall::MODE_NEW) {
+    if ($xpdo instanceof xPDO) {
+        $xpdo->addPackage('modx',MODX_CORE_PATH.'model/');
+        $created = $manager->createObjectContainer('modSystemSetting');
+    }
 }
 
 /* test table prefix */
