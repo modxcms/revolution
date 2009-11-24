@@ -49,11 +49,11 @@ if (empty($data['collation'])) {
 $stmt = $xpdo->query('SHOW COLLATION');
 if ($stmt && $stmt instanceof PDOStatement) {
     $data['collations'] = array();
-    while ($row = $stmt->fetch()) {
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $col = array();
-        $col['selected'] = $row[0]==$data['collation'] ? ' selected="selected"' : '';
-        $col['value'] = $row[0];
-        $col['name'] = $row[0];
+        $col['selected'] = $row['Collation']==$data['collation'] ? ' selected="selected"' : '';
+        $col['value'] = $row['Collation'];
+        $col['name'] = $row['Collation'];
         $data['collations'][] = $col;
     }
 }
@@ -61,6 +61,20 @@ if ($stmt && $stmt instanceof PDOStatement) {
 /* set default charset */
 $data['charset'] = substr($data['collation'], 0, strpos($data['collation'], '_'));
 $data['connection_charset'] = $data['charset'];
+
+/* get charsets */
+$stmt = $xpdo->query('SHOW CHARSET');
+if ($stmt && $stmt instanceof PDOStatement) {
+    $data['charsets'] = array();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $col = array();
+        $col['selected'] = $row['Charset']==$data['charset'] ? ' selected="selected"' : '';
+        $col['value'] = $row['Charset'];
+        $col['name'] = $row['Charset'];
+        $data['charsets'][] = $col;
+    }
+}
+
 $install->settings->store(array(
     'database_charset' => $data['charset'],
     'database_connection_charset' => $data['charset'],

@@ -21,6 +21,22 @@ MODx.DB = function() {
                         if (ch) {
                             ch.set({value:r.object.charset});
                         }
+                        /*
+                        var c = Ext.get('database-connection-charset');
+                        if (c) {
+                            c.update('');
+                            if (r.object.charsets) {
+                                for (var i=0;i<r.object.charsets.length;i++) {
+                                    MODx.DB.optionTpl.append('database-connection-charset',r.object.charsets[i]);
+                                }
+                            } else {
+                                MODx.DB.optionTpl.append('database-connection-charset',{
+                                    name: r.object.collation
+                                    ,value: r.object.collation
+                                });
+                            }
+                        }
+                        */
                         
                         var c = Ext.get('database-collation');
                         if (c) {
