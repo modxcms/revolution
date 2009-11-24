@@ -37,8 +37,8 @@ if (!$stmt = @$xpdo->query("SHOW SESSION VARIABLES LIKE 'collation_database'")) 
 }
 if ($stmt && $stmt instanceof PDOStatement) {
     $data['collation'] = array();
-    $row = $stmt->fetch();
-    $data['collation'] = $row[1];
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $data['collation'] = $row['Value'];
     $stmt->closeCursor();
 }
 if (empty($data['collation'])) {
@@ -56,6 +56,7 @@ if ($stmt && $stmt instanceof PDOStatement) {
         $col['name'] = $row['Collation'];
         $data['collations'][] = $col;
     }
+    $stmt->closeCursor();
 }
 
 /* set default charset */
@@ -73,6 +74,7 @@ if ($stmt && $stmt instanceof PDOStatement) {
         $col['name'] = $row['Charset'];
         $data['charsets'][] = $col;
     }
+    $stmt->closeCursor();
 }
 
 $install->settings->store(array(

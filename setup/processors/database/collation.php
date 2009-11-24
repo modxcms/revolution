@@ -25,9 +25,10 @@ if ($mode == modInstall::MODE_NEW) {
     $stmt = $xpdo->query("SELECT SCHEMA_NAME FROM information_schema.schemata WHERE schema_name = '{$dbname}'");
     $created = false;
     if ($stmt) {
-        $row = $stmt->fetch();
-        $created = $row[0];
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $created = $row['SCHEMA_NAME'];
     }
+    $stmt->closeCursor();
 
     if (!$created) {
         $created = $manager->createSourceContainer(array(
@@ -37,8 +38,8 @@ if ($mode == modInstall::MODE_NEW) {
         $install->settings->get('database_user'),
         $install->settings->get('database_password'),
         array(
-            'charset' => $install->settings->get('charset'),
-            'collation' => $install->settings->get('collation'),
+            'charset' => $install->settings->get('database_charset'),
+            'collation' => $install->settings->get('database_collation'),
         ));
     }
 
@@ -52,11 +53,11 @@ if ($mode == modInstall::MODE_NEW) {
 }
 
 /* test table prefix */
-$stmt = $xpdo->query('SELECT COUNT(*) FROM '.$install->settings->get('dbase').'.`'.$install->settings->get('table_prefix').'site_content`');
+$stmt = $xpdo->query('SELECT COUNT(*) AS ct FROM '.$install->settings->get('dbase').'.`'.$install->settings->get('table_prefix').'site_content`');
 
 if ($mode == modInstall::MODE_NEW && $stmt) {
-    $row = $stmt->fetch();
-    if ($row[0] > 0) {
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row['ct'] > 0) {
         $this->error->failure($install->lexicon['test_table_prefix_inuse']);
     }
 } else if (!$stmt) {
