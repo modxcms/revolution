@@ -64,19 +64,15 @@ $xpdo = $install->_connect($install->settings->get('database_type')
 if (!($xpdo instanceof xPDO)) { $this->error->failure($xpdo); }
 
 if (!$xpdo->connect()) {
-    /* allow this to pass for new installs only; will attempt to create during installation */
-    if ($mode != modInstall::MODE_NEW) {
-        $this->error->failure($install->lexicon['db_err_connect_upgrade']);
-    }
+    $this->error->failure($install->lexicon['db_err_connect_upgrade']);
 }
 
 
 /* now create system settings table */
 if ($mode == modInstall::MODE_NEW) {
-    if ($xpdo instanceof xPDO) {
-        $xpdo->addPackage('modx',MODX_CORE_PATH.'model/');
-        $created = $manager->createObjectContainer('modSystemSetting');
-    }
+    $xpdo->setPackage('modx',MODX_CORE_PATH.'model/',$install->settings->get('table_prefix'));
+    $manager = $xpdo->getManager();
+    $created = $manager->createObjectContainer('modSystemSetting');
 }
 
 /* test table prefix */

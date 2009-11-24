@@ -30,16 +30,16 @@ if (!$xpdo->connect()) {
 
 
 $data = array();
-/* get default collation */
+/* get default collation/charset */
 if (!$stmt = @$xpdo->query("SHOW SESSION VARIABLES LIKE 'collation_database'")) {
     $stmt = @$xpdo->query("SHOW SESSION VARIABLES LIKE 'collation_server'");
 }
 if ($stmt && $stmt instanceof PDOStatement) {
-    $data['collation'] = array();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    $data['collation'] = $row['Value'];
+    $dbCollation = $row['Value'];
     $stmt->closeCursor();
 }
+$data['collation'] = $install->settings->get('database_collation',$dbCollation);
 if (empty($data['collation'])) {
     $data['collation'] = 'utf8_general_ci';
 }
@@ -61,8 +61,9 @@ if ($stmt && $stmt instanceof PDOStatement) {
 unset($stmt);
 
 /* set default charset */
-$data['charset'] = substr($data['collation'], 0, strpos($data['collation'], '_'));
-$data['connection_charset'] = $data['charset'];
+$dbCharset = substr($data['collation'], 0, strpos($data['collation'], '_'));
+$data['charset'] = $install->settings->get('database_charset',$dbCharset);
+$data['connection_charset'] = $install->settings->get('database_connection_charset',$data['charset']);
 
 /* get charsets */
 $stmt = $xpdo->query('SHOW CHARSET');
@@ -80,7 +81,7 @@ if ($stmt && $stmt instanceof PDOStatement) {
 
 $install->settings->store(array(
     'database_charset' => $data['charset'],
-    'database_connection_charset' => $data['charset'],
+    'database_connection_charset' => $data['connection_charset'],
     'database_collation' => $data['collation'],
 ));
 

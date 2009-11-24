@@ -12,19 +12,19 @@
 <p class="error">{$error_message}</p>
 
 <div class="labelHolder">
-	<label for="database-server">{$_lang.connection_database_host}</label>
-	<input id="database-server" value="{$config.database_server}" name="database_server" />
-	&nbsp;<span class="field_error" id="database-server-error"></span>
+    <label for="database-server">{$_lang.connection_database_host}</label>
+    <input id="database-server" value="{$config.database_server}" name="database_server" />
+    &nbsp;<span class="field_error" id="database-server-error"></span>
 </div>
 <div class="labelHolder">
-	<label for="database-user">{$_lang.connection_database_login}</label>
-	<input id="database-user" name="database_user" value="{$config.database_user}" />
-	&nbsp;<span class="field_error" id="database-user-error"></span>
+    <label for="database-user">{$_lang.connection_database_login}</label>
+    <input id="database-user" name="database_user" value="{$config.database_user}" />
+    &nbsp;<span class="field_error" id="database-user-error"></span>
 </div>
 <div class="labelHolder">
-	<label for="database-password">{$_lang.connection_database_pass}</label>
-	<input id="database-password" type="password" name="database_password"  value="{$config.database_password}" />
-	&nbsp;<span class="field_error" id="database-password-error"></span>
+    <label for="database-password">{$_lang.connection_database_pass}</label>
+    <input id="database-password" type="password" name="database_password"  value="{$config.database_password}" />
+    &nbsp;<span class="field_error" id="database-password-error"></span>
 </div>
 <div class="labelHolder">
     <label for="dbase">{$_lang.connection_database_name}</label>
@@ -41,13 +41,12 @@
 <p id="modx-db-step1-msg" class="modx-hidden">{$_lang.db_connecting}<span></span></p>
 <div id="modx-db-step2" class="modx-hidden">
 
-{if $installmode NEQ 0}
 <div class="labelHolder">
     <label for="database-connection-charset">{$_lang.connection_character_set}</label>
     <select id="database-connection-charset" value="{$config.database_connection_charset}" name="database_connection_charset"></select>
     &nbsp;<span class="field_error" id="database_connection_charset_error"></span>
 </div>
-{else}
+{if $installmode EQ 0}
 <div class="labelHolder">
     <label for="database-collation">{$_lang.connection_collation}</label>
     <select id="database-collation" value="{$config.database_collation}" name="database_collation"></select>
@@ -62,28 +61,28 @@
 {if $installmode EQ 0}
 <div id="modx-db-step3" class="modx-hidden">
     <p class="title">{$_lang.connection_default_admin_user}</p>
-	<p>{$_lang.connection_default_admin_note}</p>
+    <p>{$_lang.connection_default_admin_note}</p>
 
-	<div class="labelHolder">
-		<label for="cmsadmin">{$_lang.connection_default_admin_login}</label>
-		<input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin}" />
-		&nbsp;<span class="field_error" id="cmsadmin_error">{$error_cmsadmin}</span>
-	</div>
-	<div class="labelHolder">
-		<label for="cmsadminemail">{$_lang.connection_default_admin_email}</label>
-		<input type="text" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail}" />
-		&nbsp;<span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail}</span>
-	</div>
-	<div class="labelHolder">
-		<label for="cmspassword">{$_lang.connection_default_admin_password}</label>
-		<input type="password" id="cmspassword" name="cmspassword" value="{$config.cmspassword}" />
-		&nbsp;<span class="field_error" id="cmspassword_error">{$error_cmspassword}</span>
-	</div>
-	<div class="labelHolder">
-		<label for="cmspasswordconfirm">{$_lang.connection_default_admin_password_confirm}</label>
-		<input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspassword}" />
-		&nbsp;<span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm}</span>
-	</div>
+    <div class="labelHolder">
+        <label for="cmsadmin">{$_lang.connection_default_admin_login}</label>
+        <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin}" />
+        &nbsp;<span class="field_error" id="cmsadmin_error">{$error_cmsadmin}</span>
+    </div>
+    <div class="labelHolder">
+        <label for="cmsadminemail">{$_lang.connection_default_admin_email}</label>
+        <input type="text" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail}" />
+        &nbsp;<span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail}</span>
+    </div>
+    <div class="labelHolder">
+        <label for="cmspassword">{$_lang.connection_default_admin_password}</label>
+        <input type="password" id="cmspassword" name="cmspassword" value="{$config.cmspassword}" />
+        &nbsp;<span class="field_error" id="cmspassword_error">{$error_cmspassword}</span>
+    </div>
+    <div class="labelHolder">
+        <label for="cmspasswordconfirm">{$_lang.connection_default_admin_password_confirm}</label>
+        <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspassword}" />
+        &nbsp;<span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm}</span>
+    </div>
 </div>
 {/if}
 <br />

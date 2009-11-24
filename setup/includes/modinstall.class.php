@@ -145,9 +145,6 @@ class modInstall {
                 $database_server = isset ($_POST['databasehost']) ? $_POST['databasehost'] : 'localhost';
                 $database_user = isset ($_POST['databaseloginname']) ? $_POST['databaseloginname'] : '';
                 $database_password = isset ($_POST['databaseloginpassword']) ? $_POST['databaseloginpassword'] : '';
-                $database_collation = isset ($_POST['database_collation']) ? $_POST['database_collation'] : 'utf8_unicode_ci';
-                $database_charset = substr($database_collation, 0, strpos($database_collation, '_'));
-                $database_connection_charset = isset ($_POST['database_connection_charset']) ? $_POST['database_connection_charset'] : $database_charset;
                 $dbase = isset ($_POST['database_name']) ? $_POST['database_name'] : 'modx';
                 $table_prefix = isset ($_POST['tableprefix']) ? $_POST['tableprefix'] : 'modx_';
                 $https_port = isset ($_POST['httpsport']) ? $_POST['httpsport'] : '443';
@@ -161,9 +158,6 @@ class modInstall {
             'dbase' => trim($dbase,'`'),
             'database_user' => $database_user,
             'database_password' => $database_password,
-            'database_collation' => isset ($database_collation) ? $database_collation : 'utf8_unicode_ci',
-            'database_charset' => $database_charset,
-            'database_connection_charset' => $database_connection_charset,
             'table_prefix' => $table_prefix,
             'https_port' => isset ($https_port) ? $https_port : '443',
             'site_sessionname' => isset ($site_sessionname) ? $site_sessionname : 'SN' . uniqid(''),

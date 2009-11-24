@@ -4,6 +4,7 @@
  */
 if (!empty($_POST['proceed'])) {
     unset($_POST['proceed']);
+    $_POST['database_charset'] = $_POST['database_connection_charset'];
     $install->settings->store($_POST);
     $mode = $install->settings->get('installmode');
 
