@@ -506,6 +506,7 @@ class modX extends xPDO {
     /**
      * Gets all of the child resource ids for a given resource.
      *
+     * @see getTree for heirarchical node results
      * @param integer $id The resource id for the starting node.
      * @param integer $depth How many levels max to search for children (default 10).
      * @return array An array of all the child resource ids for the specified resource.
@@ -531,6 +532,7 @@ class modX extends xPDO {
     /**
      * Get a site tree from a single or multiple modResource instances.
      *
+     * @see getChildIds for linear results
      * @param int|array $id A single or multiple modResource ids to build the
      * tree from.
      * @param int $depth The maximum depth to build the tree (default 10).
