@@ -110,12 +110,10 @@ table.options td {
 .notok { color: red; }
 
 .error {
-    border: 1px solid red;
-    background-color: #f8c7c7;
+    color: red;
 }
 .success {
-	border: 1px solid green;
-    background-color: #CAFF9A;
+    color: green;
 }
 .finalsuccess { border: 0 !important; }
 .right { float: right; }
@@ -138,11 +136,9 @@ table.options td {
 	border-top: 1px solid #e0e0e0;
     padding: 2em;
 }
-.setup_navbar button {
+.setup_navbar button, .setup_navbar input {
     float:right;
     width:100px;
     cursor: pointer;
     margin-right: 1em;
-}
-.setup_navbar input {
 }

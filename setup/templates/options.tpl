@@ -1,4 +1,4 @@
-{include file='header.tpl'}
+<form id="install" action="?action=options" method="post">
 <h2>{$_lang.options_title}</h2>
 
 <hr />
@@ -19,15 +19,6 @@
 		<strong>{$_lang.options_install_new_note}</strong>
 	</td>
 </tr>
-{if $installmode GT 0}
-<tr>
-	<th>&nbsp;</th>
-	<td style="background: #fffdbb; padding:0 1em; border:2px solid #CBD499">
-		<h3>{$_lang.options_important_upgrade}</h3>
-		<p>{$_lang.options_important_upgrade_note}</p>
-	</td>
-</tr>
-{/if}
 <tr>
 	<th>
 		<img src="assets/images/im_inst_upgrade.gif" width="32" height="32" alt=""/>
@@ -39,6 +30,15 @@
 	</th>
 	<td>{$_lang.options_upgrade_existing_note}</td>
 </tr>
+{if $installmode GT 0}
+<tr>
+    <th>&nbsp;</th>
+    <td style="background: #fffdbb; padding:0 1em; border:2px solid #CBD499">
+        <h3>{$_lang.options_important_upgrade}</h3>
+        <p>{$_lang.options_important_upgrade_note}</p>
+    </td>
+</tr>
+{/if}
 <tr>
 	<th>
 		<img src="assets/images/im_inst_upgrade.gif" width="32" height="32" alt="" />
@@ -75,4 +75,10 @@
 </tbody>
 </table>
 <br />
-{include file='footer.tpl'}
+
+
+<div class="setup_navbar">
+    <input type="submit" name="proceed" value="{$_lang.next}" />
+    <input type="button" onclick="MODx.go('welcome');" value="{$_lang.back}" />
+</div>
+</form>

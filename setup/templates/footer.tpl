@@ -1,6 +1,4 @@
-            <div class="setup_navbar">{$navbar}</div>
         </div>
-        </form>
         <!-- end content -->
         <div class="clear">&nbsp;</div>
     </div>

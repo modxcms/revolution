@@ -2,21 +2,56 @@
 /**
  * @package setup
  */
-$installMode= $install->getInstallMode();
-$this->parser->assign('installmode', $installMode);
+if (!empty($_POST['proceed'])) {
+    unset($_POST['proceed']);
+    $install->settings->store($_POST);
+    $mode = $install->settings->get('installmode');
 
+    $errors = array();
 
-$install->getConfig($installMode);
-if ($installMode == 0) {
-    $install->getAdminUser();
+    $install->getConnection();
+
+    if (!is_object($install->xpdo) || !($install->xpdo instanceof xPDO)) {
+        $errors['message'] = $install->lexicon['xpdo_err_ins'];
+    } else if (!$install->xpdo->connect()) {
+        /* allow this to pass for new installs only; will attempt to create during installation */
+        if ($mode != modInstall::MODE_NEW) {
+            $errors['message'] = $install->lexicon['db_err_connect_upgrade'];
+        }
+    }
+
+    if ($mode == modInstall::MODE_NEW) {
+        /* validate admin user data */
+        if (empty ($_POST['cmsadmin'])) {
+            $errors['cmsadmin'] = $install->lexicon['username_err_ns'];
+        }
+        if (empty ($_POST['cmsadminemail'])) {
+            $errors['cmsadminemail'] = $install->lexicon['email_err_ns'];
+        }
+        if (empty ($_POST['cmspassword'])) {
+            $errors['cmspassword'] = $install->lexicon['password_err_ns'];
+        }
+        if (empty ($_POST['cmspasswordconfirm'])) {
+            $errors['cmspasswordconfirm'] = $install->lexicon['password_err_ns'];
+        }
+        if ($_POST['cmspasswordconfirm'] != $_POST['cmspassword']) {
+            $errors['cmspasswordconfirm'] = $install->lexicon['password_err_nomatch'];
+        }
+    }
+    /* TODO: need to do more error checking here... */
+
+    /* if errors, output */
+    if (!empty($errors)) {
+        $this->parser->assign('errors_message',$install->lexicon['err_occ']);
+        foreach ($errors as $k => $v) {
+            $this->parser->assign('error_'.$k,$v);
+        }
+    } else { /* proceed to contexts page */
+        $this->proceed('contexts');
+    }
 }
-$this->parser->assign('config', $install->config);
+$mode = $install->settings->get('installmode');
+$this->parser->assign('installmode', $mode);
+$this->parser->assign('action',MODX_SETUP_KEY == '@traditional' ? 'summary' : 'contexts');
 
-$action = MODX_SETUP_KEY == '@traditional' ? 'goAction(\'summary\')' : 'doAction(\'database\')';
-
-$navbar= '
-<button id="cmdnext" name="cmdnext" onclick="return ' . $action . ';" />'.$install->lexicon['next'].'</button>
-<button id="cmdback" name="cmdback" onclick="return goAction(\'options\');">'.$install->lexicon['back'].'</button>
-';
-$this->parser->assign('navbar', $navbar);
-$this->parser->display('database.tpl');
+return $this->parser->fetch('database.tpl');

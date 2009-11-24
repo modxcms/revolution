@@ -49,8 +49,8 @@ class modInstallTestAdvanced extends modInstallTest {
      */
     protected function _checkAdvPaths() {
         /* web_path */
-        $this->results['context_web_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],$this->install->config['web_path']);
-        if (!$this->_inWritableContainer($this->install->config['web_path'])) {
+        $this->results['context_web_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],$this->install->settings->get('context_web_path'));
+        if (!$this->_inWritableContainer($this->install->settings->get('context_web_path'))) {
             $this->results['context_web_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
             $this->results['context_web_writable']['class'] = 'testFailed';
         } else {
@@ -59,8 +59,8 @@ class modInstallTestAdvanced extends modInstallTest {
         }
 
         /* mgr_path */
-        $this->results['context_mgr_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],$this->install->config['mgr_path']);
-        if (!$this->_inWritableContainer($this->install->config['mgr_path'])) {
+        $this->results['context_mgr_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],$this->install->settings->get('context_mgr_path'));
+        if (!$this->_inWritableContainer($this->install->settings->get('context_mgr_path'))) {
             $this->results['context_mgr_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
             $this->results['context_mgr_writable']['class'] = 'testFailed';
         } else {
@@ -69,8 +69,8 @@ class modInstallTestAdvanced extends modInstallTest {
         }
 
         /* connectors_path */
-        $this->results['context_connectors_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],$this->install->config['connectors_path']);
-        if (!$this->_inWritableContainer($this->install->config['connectors_path'])) {
+        $this->results['context_connectors_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],$this->install->settings->get('context_connectors_path'));
+        if (!$this->_inWritableContainer($this->install->settings->get('context_connectors_path'))) {
             $this->results['context_connectors_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
             $this->results['context_connectors_writable']['class'] = 'testFailed';
         } else {

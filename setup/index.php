@@ -72,4 +72,5 @@ $modInstall->loadLang();
 $modInstall->doPreloadChecks();
 $modInstall->loadRequestHandler();
 $modInstall->request->loadParser();
-$modInstall->request->handle();
+echo $modInstall->request->handle();
+exit();

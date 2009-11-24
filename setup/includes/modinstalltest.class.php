@@ -299,10 +299,10 @@ abstract class modInstallTest {
      */
     protected function _checkContexts() {
         $coreConfigsExist = false;
-        if ($this->install->config['inplace']) {
+        if ($this->install->settings->get('inplace')) {
             /* web_path */
-            $this->results['context_web_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->config['web_path']);
-            if (!file_exists($this->install->config['web_path'])) {
+            $this->results['context_web_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('context_web_path'));
+            if (!file_exists($this->install->settings->get('context_web_path'))) {
                 $this->results['context_web_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
                 $this->results['context_web_exists']['class'] = 'testFailed';
             } else {
@@ -311,8 +311,8 @@ abstract class modInstallTest {
             }
 
             /* mgr_path */
-            $this->results['context_mgr_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->config['mgr_path']);
-            if (!file_exists($this->install->config['mgr_path'])) {
+            $this->results['context_mgr_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('context_mgr_path'));
+            if (!file_exists($this->install->settings->get('context_mgr_path'))) {
                 $this->results['context_mgr_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
                 $this->results['context_mgr_exists']['class'] = 'testFailed';
             } else {
@@ -321,17 +321,17 @@ abstract class modInstallTest {
             }
 
             /* connectors_path */
-            $this->results['context_connectors_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->config['connectors_path']);
-            if (!file_exists($this->install->config['connectors_path'])) {
+            $this->results['context_connectors_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('context_connectors_path'));
+            if (!file_exists($this->install->settings->get('context_connectors_path'))) {
                 $this->results['context_connectors_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
                 $this->results['context_connectors_exists']['class'] = 'testFailed';
             } else {
                 $this->results['context_connectors_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
                 $this->results['context_connectors_exists']['class'] = 'testPassed';
             }
-            if (file_exists($this->install->config['web_path'] . 'config.core.php') &&
-                file_exists($this->install->config['connectors_path'] . 'config.core.php') &&
-                file_exists($this->install->config['mgr_path'] . 'config.core.php')) {
+            if (file_exists($this->install->settings->get('context_web_path') . 'config.core.php') &&
+                file_exists($this->install->settings->get('context_connectors_path') . 'config.core.php') &&
+                file_exists($this->install->settings->get('context_mgr_path') . 'config.core.php')) {
                 $coreConfigsExist = true;
             }
         }
@@ -401,9 +401,9 @@ abstract class modInstallTest {
 
         /* check table prefix */
         if ($xpdo && $xpdo->connect()) {
-            $this->results['table_prefix']['msg'] = '<p>'.sprintf($this->install->lexicon['test_table_prefix'],$this->install->config['table_prefix']);
+            $this->results['table_prefix']['msg'] = '<p>'.sprintf($this->install->lexicon['test_table_prefix'],$this->install->settings->get('table_prefix'));
             $count = 0;
-            if ($stmt = $xpdo->query('SELECT COUNT(*) FROM `' . $this->install->config['table_prefix'] . 'system_settings`')) {
+            if ($stmt = $xpdo->query('SELECT COUNT(*) FROM `' . $this->install->settings->get('table_prefix') . 'system_settings`')) {
                 $count = $stmt->fetchColumn();
                 $stmt->closeCursor();
             }

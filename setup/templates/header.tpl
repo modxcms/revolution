@@ -16,10 +16,8 @@
     {if $_lang.additional_css NEQ ''}
     <style type="text/css">{$_lang.additional_css}</style>
     {/if}
-    <script type="text/javascript" src="assets/js/mootools.js"></script>
-    <script type="text/javascript" src="assets/js/moodx.js"></script>
-    <script type="text/javascript" src="assets/js/formhandler.js"></script>
-    <script type="text/javascript" src="assets/js/modx-setup.js"></script>
+    <script type="text/javascript" src="assets/js/ext-core.js"></script>
+    <script type="text/javascript" src="assets/js/modx.setup.js"></script>
     <!--[if lt IE 7]>
     {literal}
         <script type="text/javascript" src="assets/js/inc/say.no.to.ie.6.js"></script>
@@ -56,17 +54,9 @@
 </div>
 <!-- end header -->
 
-
 <div id="contentarea">
     <div class="container_16">
        <!-- start content -->
         <div id="content" class="grid_12">
- 
-            <form id="install" action="processors/connector.php" method="post">
-            <div id="modx_error">
-                <span class="close">[&nbsp;<a href="javascript:;" onclick="FormHandler.closeError();">{$_lang.close}</a>&nbsp;]</span>
-                <span id="modx_error_content" class="content"></span>
-                <br class="clear" />
-            </div>
 
         

@@ -61,6 +61,7 @@ class modInstallConnector {
         if (!file_exists($f)) $this->error->failure('Could not load requested processor for action ' . $this->action . '.');
 
         $install =& $this->install;
+        $install->loadSettings();
         $error =& $this->error;
 
         if (!@include($f)) $this->error->failure('Could not load requested processor for action ' . $this->action . '.');

@@ -2,6 +2,18 @@
 /**
  * @package setup
  */
+if (!empty($_POST['proceed'])) {
+    unset($_POST['proceed']);
+    $_POST['installmode'] = isset ($_POST['installmode']) ? intval($_POST['installmode']) : modInstall::MODE_NEW;
+
+    /* if upgrading from evo/revo, get old settings */
+    $settings = $install->getConfig($_POST['installmode']);
+    /* merge those with POST */
+    $settings = array_merge($settings,$_POST);
+    /* then store in cache */
+    $install->settings->store($settings);
+    $this->proceed('database');
+}
 $this->parser->assign('installmode',$install->getInstallMode());
 
 $files_exist= 0;
@@ -30,9 +42,4 @@ $this->parser->assign('files_exist', $files_exist);
 $this->parser->assign('manifest', $manifest);
 $this->parser->assign('unpacked', $unpacked);
 
-$navbar= '
-<button id="cmdnext" name="cmdnext" onclick="return doAction(\'options\');">'.$install->lexicon['next'].'</button>
-<button id="cmdback" name="cmdback" onclick="return goAction(\'welcome\');">'.$install->lexicon['back'].'</button>
-';
-$this->parser->assign('navbar', $navbar);
-$this->parser->display('options.tpl');
+return $this->parser->fetch('options.tpl');

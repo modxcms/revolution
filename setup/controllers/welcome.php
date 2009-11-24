@@ -2,9 +2,8 @@
 /**
  * @package setup
  */
-$navbar= '
-<button name="cmdnext" onclick="return doAction(\'welcome\');" >'.$install->lexicon['next'].'</button>
-';
-$this->parser->assign('navbar', $navbar);
+if (!empty($_POST['proceed'])) {
+    $this->proceed('options');
+}
 
-$this->parser->display('welcome.tpl');
+return $this->parser->fetch('welcome.tpl');

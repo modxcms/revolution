@@ -1,5 +1,5 @@
-{include file='header.tpl'}
-
+<script type="text/javascript" src="assets/js/sections/install.js"></script>
+<form id="install" action="?action=install" method="post">
 <h2>{$_lang.install_summary}</h2>
 {if $failed}
 <p>{$_lang.errors_occurred}</p>
@@ -8,8 +8,8 @@
     {$_lang.install_success}
     <br />(<a style="font-size: .9em" href="#continuebtn">{$_lang.skip_to_bottom}</a>)
     <br /><br />
-    <a href="javascript:toggleMsg('success');">{$_lang.toggle_success}</a> | 
-    <a href="javascript:toggleMsg('warning');">{$_lang.toggle_warnings}</a>
+    <a href="javascript:void(0);" class="modx-toggle-success">{$_lang.toggle_success}</a> | 
+    <a href="javascript:void(0);" class="modx-toggle-warning">{$_lang.toggle_warnings}</a>
     
 </p>
 {/if}
@@ -19,60 +19,16 @@
 {/foreach}
 </ul>
 
-{literal}
-<script type="text/javascript">
-var toggleMsg = function(type) {
-    var es = $$('.'+type);
-    es.each(function(el) {
-        if (el.getStyle('display') == 'none') {
-            el.setStyle('display','');
-        } else { el.setStyle('display','none'); }
-    });
-    
-};
-</script>
-{/literal}
-
-<input type="hidden" id="installmode" name="installmode" value="{$installmode}" />
-{if $config.unpacked EQ 1}
-<input type="hidden" id="unpacked" name="unpacked" value="1" />
-{/if}
-{if $config.inplace EQ 1}
-<input type="hidden" id="inplace" name="inplace" value="1" />
-{/if}
-<input type="hidden" id="httpsport" name="httpsport" value="{$config.https_port}" />
-<input type="hidden" id="cachedisabled" name="cachedisabled" value="{$config.cache_disabled}" />
-<input type="hidden" id="database_name" value="{$config.dbase}" name="database_name" />
-<input type="hidden" id="tableprefix" value="{$config.table_prefix}" name="tableprefix" />
-{if $installmode EQ 0}
-<input type="hidden" id="database_collation" value="{$config.database_collation}" name="database_collation" />
-<input type="hidden" id="database_charset" value="{$config.database_charset}" name="database_charset" />
-{/if}
-<input type="hidden" id="database_connection_charset" value="{$config.database_connection_charset}" name="database_connection_charset" />
-<input type="hidden" id="databasehost" value="{$config.database_server}" name="databasehost" />
-<input type="hidden" id="databaseloginname" name="databaseloginname" value="{$config.database_user}" />
-<input type="hidden" id="databaseloginpassword" name="databaseloginpassword"  value="{$config.database_password}" />
-{if $installmode EQ 0}
-<input type="hidden" id="cmsadmin" value="{$config.cmsadmin}" name="cmsadmin" />
-<input type="hidden" id="cmsadminemail" value="{$config.cmsadminemail}" name="cmsadminemail" />
-<input type="hidden" id="cmspassword" name="cmspassword" value="{$config.cmspassword}" />
-<input type="hidden" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm}" />
-{/if}
-<input type="hidden" id="context_web_path" name="context_web_path" value="{$config.web_path}" />
-<input type="hidden" id="context_web_path_toggle" name="context_web_path_toggle" value="{$config.web_path_auto}" />
-<input type="hidden" id="context_web_url" name="context_web_url" value="{$config.web_url}" />
-<input type="hidden" id="context_web_url_toggle" name="context_web_url_toggle" value="{$config.web_url_auto}" />
-<input type="hidden" id="context_connectors_path" name="context_connectors_path" value="{$config.connectors_path}" />
-<input type="hidden" id="context_connectors_path_toggle" name="context_connectors_path_toggle" value="{$config.connectors_path_auto}" />
-<input type="hidden" id="context_connectors_url" name="context_connectors_url" value="{$config.connectors_url}" />
-<input type="hidden" id="context_connectors_url_toggle" name="context_connectors_url_toggle" value="{$config.connectors_url_auto}" />
-<input type="hidden" id="context_mgr_path" name="context_mgr_path" value="{$config.mgr_path}" />
-<input type="hidden" id="context_mgr_path_toggle" name="context_mgr_path_toggle" value="{$config.mgr_path_auto}" />
-<input type="hidden" id="context_mgr_url" name="context_mgr_url" value="{$config.mgr_url}" />
-<input type="hidden" id="context_mgr_url_toggle" name="context_mgr_url_toggle" value="{$config.mgr_url_auto}" />
-
 <br />
 
 <a id="continuebtn"></a>
 
-{include file='footer.tpl'}
+<div class="setup_navbar">
+{if $failed}
+    <button type="button" id="modx-next" onclick="MODx.go('install');">{$_lang.retry}</button>
+    <button type="button" id="modx-back" onclick="MODx.go('summary');">{$_lang.back}</button>
+{else}
+    <input type="submit" id="modx-next" name="proceed" value="{$_lang.next}" />
+{/if}
+</div>
+</form>

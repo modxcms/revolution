@@ -2,17 +2,15 @@
 /**
  * @package setup
  */
-$installMode= $install->getInstallMode();
-$this->parser->assign('installmode', $installMode);
-
-$install->setConfig($installMode);
-if ($installMode == modInstall::MODE_NEW) {
-    $install->getAdminUser();
+if (!empty($_POST['proceed'])) {
+    unset($_POST['proceed']);
+    $install->settings->store($_POST);
+    $this->proceed('complete');
 }
-$install->getContextPaths();
-$this->parser->assign('config', $install->config);
 
-$results= $install->execute($installMode);
+
+$mode = $install->settings->get('installmode');
+$results= $install->execute($mode);
 $this->parser->assign('results', $results);
 
 $failed= false;
@@ -24,12 +22,4 @@ foreach ($results as $item) {
 }
 $this->parser->assign('failed', $failed);
 $this->parser->assign('itemClass', $failed ? 'error' : '');
-
-$nextButton= $failed ? $install->lexicon['retry'] : $install->lexicon['continue'];
-$nextAction= $failed ? 'return goAction(\'install\')' : 'return doAction(\'install\');';
-$backButton= $failed ? '<button id="cmdback" name="cmdback" onclick="return goAction(\'contexts\');">'.$install->lexicon['back'].'</button>' : '';
-$navbar= '
-<button id="cmdnext" name="cmdnext" onclick="' . $nextAction . '" >'.$nextButton.'</button>
-';
-$this->parser->assign('navbar', $navbar);
-$this->parser->display('install.tpl');
+return $this->parser->fetch('install.tpl');

@@ -52,6 +52,8 @@ class modInstallRequest {
      */
     public function handle() {
         $install =& $this->install;
+        $install->loadSettings();
+        $this->parser->assign('config',$install->settings->fetch());
 
         $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
 
@@ -64,8 +66,12 @@ class modInstallRequest {
         $this->action= isset ($_REQUEST['action']) ? $_REQUEST['action'] : 'language';
         $this->parser->assign('action',$this->action);
         $this->parser->assign('_lang',$this->install->lexicon);
-        @include (MODX_SETUP_PATH . 'controllers/' . $this->action . '.php');
-        exit;
+
+        $output = $this->parser->fetch('header.tpl');
+        $output .= include MODX_SETUP_PATH . 'controllers/' . $this->action . '.php';
+        $output .= $this->parser->fetch('footer.tpl');
+
+        return $output;
     }
 
     /**
@@ -82,5 +88,14 @@ class modInstallRequest {
         $this->parser = new modInstallSmarty();
         $this->parser->caching= false;
         return $loaded;
+    }
+
+    public function proceed($action) {
+        $this->sendRedirect('?action='.$action);
+    }
+    public function sendRedirect($url) {
+        $header= 'Location: ' . $url;
+        header($header);
+        exit();
     }
 }

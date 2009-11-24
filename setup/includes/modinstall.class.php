@@ -72,7 +72,29 @@ class modInstall {
     }
 
     /**
+     * Load settings class
+     *
+     * @access public
+     * @param string $class The settings class to load.
+     * @return boolean True if successful.
+     */
+    public function loadSettings($class = 'modInstallSettings') {
+        $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
+        $included = @include_once $path;
+        if ($included) {
+            $this->settings = new $class($this);
+        } else {
+            $this->_fatalError(sprintf($this->lexicon['settings_handler_err_nf'],$path));
+        }
+        return $included;
+    }
+
+    /**
      * Load the language strings.
+     *
+     * @access public
+     * @param string $topic The topic to load.
+     * @return array The loaded lexicon.
      */
     public function loadLang($topic = 'default') {
         $_lang= array ();
@@ -154,32 +176,6 @@ class modInstall {
     }
 
     /**
-     * Set the install configuration settings.
-     *
-     * @param integer $mode The install mode.
-     */
-    public function setConfig($mode = modInstall::MODE_NEW) {
-        $config = array(
-            'database_type' => 'mysql',
-            'database_server' => isset ($_POST['databasehost']) ? $_POST['databasehost'] : 'localhost',
-            'database_user' => isset ($_POST['databaseloginname']) ? $_POST['databaseloginname'] : '',
-            'database_password' => isset ($_POST['databaseloginpassword']) ? $_POST['databaseloginpassword'] : '',
-            'database_collation' => isset ($_POST['database_collation']) ? $_POST['database_collation'] : 'utf8_unicode_ci',
-            'dbase' => isset ($_POST['database_name']) ? $_POST['database_name'] : 'modx',
-            'table_prefix' => isset ($_POST['tableprefix']) ? $_POST['tableprefix'] : 'modx_',
-            'https_port' => isset ($_POST['httpsport']) ? $_POST['httpsport'] : '443',
-            'cache_disabled' => isset ($_POST['cachedisabled']) ? $_POST['cachedisabled'] : 'false',
-            'site_sessionname' => isset ($_POST['site_sessionname']) ? $_POST['site_sessionname'] : 'SN' . uniqid(''),
-            'inplace' => isset ($_POST['inplace']) ? 1 : 0,
-            'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
-        );
-        $config['database_charset'] = substr($config['database_collation'], 0, strpos($config['database_collation'], '_'));
-        $config['database_connection_charset'] = isset($_POST['database_connection_charset']) ? $_POST['database_connection_charset'] : $config['database_charset'];
-
-        $this->config = array_merge($this->config, $config);
-    }
-
-    /**
      * Get an xPDO connection to the database.
      *
      * @return xPDO A copy of the xpdo object.
@@ -189,12 +185,20 @@ class modInstall {
             $errors = array ();
             $this->xpdo = $this->_modx($errors);
         } else if (!is_object($this->xpdo)) {
-            $this->xpdo = $this->_connect($this->config['database_type'] . ':host=' . $this->config['database_server'] . ';dbname=' . trim($this->config['dbase'], '`') . ';charset=' . $this->config['database_connection_charset'] . ';collation=' . $this->config['database_collation'], $this->config['database_user'], $this->config['database_password'], $this->config['table_prefix']);
+            $this->xpdo = $this->_connect($this->settings->get('database_type')
+                 . ':host=' . $this->settings->get('database_server')
+                 . ';dbname=' . trim($this->settings->get('dbase'), '`')
+                 . ';charset=' . $this->settings->get('database_connection_charset')
+                 . ';collation=' . $this->settings->get('database_collation')
+                 ,$this->settings->get('database_user')
+                 ,$this->settings->get('database_password')
+                 ,$this->settings->get('table_prefix'));
+
             if (!($this->xpdo instanceof xPDO)) { return $this->xpdo; }
 
-            $this->xpdo->config['cache_path'] = MODX_CORE_PATH . 'cache/';
+            $this->xpdo->setOption('cache_path',MODX_CORE_PATH . 'cache/');
         }
-        if (is_object($this->xpdo)) {
+        if (is_object($this->xpdo) && $this->xpdo instanceof xPDO) {
             $this->xpdo->setDebug(E_ALL & ~E_STRICT);
             $this->xpdo->setLogTarget(array(
                 'target' => 'FILE',
@@ -203,53 +207,9 @@ class modInstall {
                 )
             ));
             $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_WARN);
-            $this->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/', $this->config['table_prefix']);
+            $this->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/', $this->settings->get('table_prefix'));
         }
         return $this->xpdo;
-    }
-
-    /**
-     * Get the initial admin user settings indicated by user.
-     *
-     * @return array A copy of the install config array merged with the retrieved admin user attributes.
-     */
-    public function getAdminUser() {
-        $config = array (
-            'cmsadmin' => $_POST['cmsadmin'],
-            'cmsadminemail' => $_POST['cmsadminemail'],
-            'cmspassword' => $_POST['cmspassword'],
-            'cmspasswordconfirm' => $_POST['cmspasswordconfirm'],
-        );
-        $this->config = array_merge($this->config, $config);
-        return $this->config;
-    }
-
-    /**
-     * Get the installation paths indicated by user.
-     *
-     * @return array A copy of the install config array merged with the retrieved context paths.
-     */
-    public function getContextPaths() {
-        $config = array ();
-        $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
-        $config['core_path'] = MODX_CORE_PATH;
-        $config['web_path_auto'] = isset ($_POST['context_web_path_toggle']) && $_POST['context_web_path_toggle'] ? 1 : 0;
-        $config['web_path'] = isset($_POST['context_web_path']) ? $_POST['context_web_path'] : MODX_INSTALL_PATH;
-        $config['web_url_auto'] = isset ($_POST['context_web_url_toggle']) && $_POST['context_web_url_toggle'] ? 1 : 0;
-        $config['web_url'] = isset($_POST['context_web_url']) ? $_POST['context_web_url'] : $webUrl;
-        $config['mgr_path_auto'] = isset ($_POST['context_mgr_path_toggle']) && $_POST['context_mgr_path_toggle'] ? 1 : 0;
-        $config['mgr_path'] = isset($_POST['context_mgr_path']) ? $_POST['context_mgr_path'] : MODX_INSTALL_PATH . 'manager/';
-        $config['mgr_url_auto'] = isset ($_POST['context_mgr_url_toggle']) && $_POST['context_mgr_url_toggle'] ? 1 : 0;
-        $config['mgr_url'] = isset($_POST['context_mgr_url']) ? $_POST['context_mgr_url'] : $webUrl . 'manager/';
-        $config['connectors_path_auto'] = isset ($_POST['context_connectors_path_toggle']) && $_POST['context_connectors_path_toggle'] ? 1 : 0;
-        $config['connectors_path'] = isset($_POST['context_connectors_path']) ? $_POST['context_connectors_path'] : MODX_INSTALL_PATH . 'connectors/';
-        $config['connectors_url_auto'] = isset ($_POST['context_connectors_url_toggle']) && $_POST['context_connectors_url_toggle'] ? 1 : 0;
-        $config['connectors_url'] = isset($_POST['context_connectors_url']) ? $_POST['context_connectors_url'] : $webUrl . 'connectors/';
-        $config['processors_path'] = MODX_CORE_PATH . 'model/modx/processors/';
-        $config['assets_path'] = $config['web_path'] . 'assets/';
-        $config['assets_url'] = $config['web_url'] . 'assets/';
-        $this->config = array_merge($this->config, $config);
-        return $this->config;
     }
 
     /**
@@ -287,6 +247,12 @@ class modInstall {
         return $results;
     }
 
+    /**
+     * Load version-specific installer.
+     *
+     * @access public
+     * @param string $class The class to load.
+     */
     public function loadVersionInstaller($class = 'modInstallVersion') {
         $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
         $included = @include $path;
@@ -342,20 +308,20 @@ class modInstall {
             $this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
 
             $packageDirectory = MODX_CORE_PATH . 'packages/';
-            $packageState = $this->config['unpacked'] == 1 ? xPDOTransport::STATE_UNPACKED : xPDOTransport::STATE_PACKED;
+            $packageState = $this->settings->get('unpacked') == 1 ? xPDOTransport::STATE_UNPACKED : xPDOTransport::STATE_PACKED;
             $package = xPDOTransport :: retrieve($this->xpdo, $packageDirectory . 'core.transport.zip', $packageDirectory, $packageState);
 
             if (!defined('MODX_BASE_PATH'))
-                define('MODX_BASE_PATH', $this->config['web_path']);
+                define('MODX_BASE_PATH', $this->settings->get('context_web_path'));
             if (!defined('MODX_ASSETS_PATH'))
-                define('MODX_ASSETS_PATH', $this->config['assets_path']);
+                define('MODX_ASSETS_PATH', $this->settings->get('context_assets_path'));
             if (!defined('MODX_MANAGER_PATH'))
-                define('MODX_MANAGER_PATH', $this->config['mgr_path']);
+                define('MODX_MANAGER_PATH', $this->settings->get('context_mgr_path'));
             if (!defined('MODX_CONNECTORS_PATH'))
-                define('MODX_CONNECTORS_PATH', $this->config['connectors_path']);
+                define('MODX_CONNECTORS_PATH', $this->settings->get('context_connectors_path'));
 
             $package->install(array (
-                xPDOTransport::RESOLVE_FILES => ($this->config['inplace'] == 0 ? 1 : 0),
+                xPDOTransport::RESOLVE_FILES => ($this->settings->get('inplace') == 0 ? 1 : 0),
             ));
 
             /* set default workspace path */
@@ -398,13 +364,13 @@ class modInstall {
 
                 /* add default admin user */
                 $user = $this->xpdo->newObject('modUser');
-                $user->set('username', $this->config['cmsadmin']);
-                $user->set('password', md5($this->config['cmspassword']));
+                $user->set('username', $this->settings->get('cmsadmin'));
+                $user->set('password', md5($this->settings->get('cmspassword')));
                 if ($saved = $user->save()) {
                     $userProfile = $this->xpdo->newObject('modUserProfile');
                     $userProfile->set('internalKey', $user->get('id'));
                     $userProfile->set('fullname', $this->lexicon['default_admin_user']);
-                    $userProfile->set('email', $this->config['cmsadminemail']);
+                    $userProfile->set('email', $this->settings->get('cmsadminemail'));
                     $userProfile->set('role', 1);
                     $saved = $userProfile->save();
                     if ($saved) {
@@ -503,7 +469,7 @@ class modInstall {
      * @param integer $mode Indicates the installation mode.
      * @return array An array of error messages collected during the process.
      */
-    public function verify($mode) {
+    public function verify() {
         $errors = array ();
         if ($modx = $this->_modx($errors)) {
             if ($modx->getCacheManager()) {
@@ -562,14 +528,16 @@ class modInstall {
         $written = false;
         $configTpl = MODX_CORE_PATH . 'config/config.inc.tpl';
         $configFile = MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
-        $this->config['last_install_time'] = time();
+
+        $settings = $this->settings->fetch();
+        $settings['last_install_time'] = time();
         if (file_exists($configTpl)) {
             if ($tplHandle = @ fopen($configTpl, 'rb')) {
                 $content = @ fread($tplHandle, filesize($configTpl));
                 @ fclose($tplHandle);
                 if ($content) {
                     $replace = array ();
-                    while (list ($key, $value) = each($this->config)) {
+                    while (list ($key, $value) = each($settings)) {
                         $replace['{' . $key . '}'] = "{$value}";
                     }
                     $content = str_replace(array_keys($replace), array_values($replace), $content);
@@ -713,7 +681,7 @@ class modInstall {
      * @access private
      * @return xPDO The xPDO instance to be used by the installation.
      */
-    private function _connect($dsn, $user = '', $password = '', $prefix = '') {
+    public function _connect($dsn, $user = '', $password = '', $prefix = '') {
         if (include_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php')) {
             $xpdo = new xPDO($dsn, $user, $password, array(
                     xPDO::OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
