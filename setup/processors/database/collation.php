@@ -12,11 +12,8 @@ if ($mode == modInstall::MODE_NEW) {
     $xpdo = $install->_connect($install->settings->get('database_type')
          . ':host=' . $install->settings->get('database_server')
          . ';dbname=information_schema'
-         . ';charset=' . $install->settings->get('database_connection_charset')
-         . ';collation=' . $install->settings->get('database_collation')
          ,$install->settings->get('database_user')
-         ,$install->settings->get('database_password')
-         ,$install->settings->get('table_prefix'));
+         ,$install->settings->get('database_password'));
 
     if (!($xpdo instanceof xPDO)) { $this->error->failure($xpdo); }
 
