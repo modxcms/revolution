@@ -44,7 +44,7 @@
 {if $installmode NEQ 0}
 <div class="labelHolder">
     <label for="database-connection-charset">{$_lang.connection_character_set}</label>
-    <input type="text" id="database-connection-charset" name="database_connection_charset" value="{$config.database_connection_charset}">
+    <select id="database-connection-charset" value="{$config.database_connection_charset}" name="database_connection_charset"></select>
     &nbsp;<span class="field_error" id="database_connection_charset_error"></span>
 </div>
 {else}

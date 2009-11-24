@@ -13,30 +13,25 @@ MODx.DB = function() {
                     r = Ext.decode(r.responseText);
                     var msg = Ext.select('#modx-db-step1-msg');
                     msg.show();
-                    Ext.select('#modx-db-step1-msg span').update(r.message);
+                    Ext.select('#modx-db-step1-msg span').update('&nbsp;'+r.message);
                     if (r.success) {
                         Ext.select('#modx-db-step2').fadeIn();
                         
+                        
                         var ch = Ext.get('database-connection-charset');
                         if (ch) {
-                            ch.set({value:r.object.charset});
-                        }
-                        /*
-                        var c = Ext.get('database-connection-charset');
-                        if (c) {
-                            c.update('');
+                            ch.update('');
                             if (r.object.charsets) {
                                 for (var i=0;i<r.object.charsets.length;i++) {
                                     MODx.DB.optionTpl.append('database-connection-charset',r.object.charsets[i]);
                                 }
                             } else {
                                 MODx.DB.optionTpl.append('database-connection-charset',{
-                                    name: r.object.collation
-                                    ,value: r.object.collation
+                                    name: r.object.charset
+                                    ,value: r.object.charset
                                 });
                             }
                         }
-                        */
                         
                         var c = Ext.get('database-collation');
                         if (c) {
