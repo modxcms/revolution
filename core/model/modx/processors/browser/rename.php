@@ -11,18 +11,17 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-if (empty($_POST['file'])) return $modx->error->failure($modx->lexicon('file_err_ns'));
+if (empty($_POST['path'])) return $modx->error->failure($modx->lexicon('file_err_ns'));
 
 $d = isset($_POST['prependPath']) && $_POST['prependPath'] != null
     ? $_POST['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
-$old_file = realpath($d.$_POST['file']);
+$old_file = realpath($d.$_POST['path']);
 
 if (!is_readable($old_file) || !is_writable($old_file))
     return $modx->error->failure($modx->lexicon('file_err_perms_rename'));
 
-
-$new_file = strtr(dirname($old_file).'/'.$_POST['new_name'],'\\','/');
+$new_file = strtr(dirname($old_file).'/'.$_POST['newname'],'\\','/');
 
 if (!@rename($old_file,$new_file)) {
     return $modx->error->failure($modx->lexicon('file_err_rename'));

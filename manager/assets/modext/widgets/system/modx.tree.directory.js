@@ -137,6 +137,26 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 		});
 	}
 	
+    ,renameFile: function(item,e) {
+        var node = this.cm.activeNode;
+        var r = {
+            oldname: node.text
+            ,newname: node.text
+            ,path: node.id
+        };
+        if (!this.windows.rename) {
+            this.windows.rename = MODx.load({
+                xtype: 'modx-window-file-rename'
+                ,record: r
+                ,prependPath: this.config.prependPath || null
+                ,listeners: {
+                    'success':{fn:this.refresh,scope:this}
+                }
+            });
+        }
+        this.windows.rename.setValues(r);
+        this.windows.rename.show(e.target);
+    }
 	,createDirectory: function(item,e) {
 		var node = this.cm.activeNode;
         var r = {parent: node.id};
@@ -265,3 +285,43 @@ MODx.window.ChmodDirectory = function(config) {
 };
 Ext.extend(MODx.window.ChmodDirectory,MODx.Window);
 Ext.reg('modx-window-directory-chmod',MODx.window.ChmodDirectory);
+
+
+MODx.window.RenameFile = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('rename')
+        ,width: 430
+        ,height: 200
+        ,url: MODx.config.connectors_url+'browser/index.php'
+        ,action: 'rename'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'prependPath'
+            ,value: config.prependPath || null
+        },{
+            fieldLabel: _('path')
+            ,name: 'path'
+            ,xtype: 'statictextfield'
+            ,submitValue: true
+        },{
+            fieldLabel: _('old_name')
+            ,name: 'oldname'
+            ,xtype: 'statictextfield'
+            ,width: 300
+        },{
+            fieldLabel: _('new_name')
+            ,name: 'newname'
+            ,xtype: 'textfield'
+            ,width: 300
+            ,allowBlank: false
+        },{
+            name: 'dir'
+            ,xtype: 'hidden'
+            ,width: 200
+        }]
+    });
+    MODx.window.RenameFile.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.RenameFile,MODx.Window);
+Ext.reg('modx-window-file-rename',MODx.window.RenameFile);

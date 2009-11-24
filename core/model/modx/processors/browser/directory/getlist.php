@@ -55,10 +55,17 @@ foreach (new DirectoryIterator($fullpath) as $file) {
                             this.createDirectory(itm,e);
                         }',
                     ),
+                    '-',
                     array(
                         'text' => $modx->lexicon('file_folder_chmod'),
                         'handler' => 'function(itm,e) {
                             this.chmodDirectory(itm,e);
+                        }',
+                    ),
+                    array(
+                        'text' => $modx->lexicon('rename'),
+                        'handler' => 'function(itm,e) {
+                            this.renameFile(itm,e);
                         }',
                     ),
                     '-',
@@ -91,6 +98,12 @@ foreach (new DirectoryIterator($fullpath) as $file) {
                                 . 'a=' . $actions['system/file/edit']
                                 . '&file=' . rawurlencode($filePathName)
                              . '");
+                        }',
+                    ),
+                    array(
+                        'text' => $modx->lexicon('rename'),
+                        'handler' => 'function(itm,e) {
+                            this.renameFile(itm,e);
                         }',
                     ),
                     '-',
