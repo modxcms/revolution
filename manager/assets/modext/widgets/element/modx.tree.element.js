@@ -162,9 +162,8 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 		
 	,_handleDrop: function(e) {
 		var target = e.target;
-		if(e.point == 'above' || e.point == 'below') {
-			target = e.target.parentNode;
-		}
+        if (e.target.attributes.type == 'category' && e.point == 'append') { return true; }
+		if(e.point == 'above' || e.point == 'below') { return false; }
         if (!this.isCorrectType(e.dropNode,target)) { return false; }
 		
 		return e.target.getDepth() > 0;
