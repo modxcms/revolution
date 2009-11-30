@@ -396,12 +396,22 @@ MODx.panel.Resource = function(config) {
 };
 Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     rteLoaded: false
+    ,initialized: false
     ,onLoad: function() {
         this.getForm().setValues(this.config.record);
     }
     ,setup: function() {
-        if (this.config.resource === '' || this.config.resource === 0) {
-            if (MODx.config.use_editor && MODx.loadRTE) MODx.loadRTE('ta');
+        if (this.config.resource === '' || this.config.resource === 0 || this.initialized) {
+            if (MODx.config.use_editor && MODx.loadRTE) {
+                var f = this.getForm().findField('richtext');
+                if (f && f.getValue()) {
+                    MODx.loadRTE('ta');
+                    Ext.get('ta-toggle').show();
+                } else {
+                    if (MODx.unloadRTE) MODx.unloadRTE('ta');
+                    Ext.get('ta-toggle').hide();
+                }
+            }
             this.fireEvent('ready');
             return false;
         }
@@ -424,7 +434,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     if (r.object.richtext && MODx.config.use_editor && MODx.loadRTE && !this.rteLoaded) {
                     	MODx.loadRTE('ta');
                         this.rteLoaded = true;
+                        Ext.get('ta-toggle').show();
+                    } else {
+                        if (MODx.unloadRTE) MODx.unloadRTE('ta');
+                        Ext.get('ta-toggle').hide();
                     }
+                    this.initialized = true;
                     this.fireEvent('ready');
             	},scope:this}
             }
