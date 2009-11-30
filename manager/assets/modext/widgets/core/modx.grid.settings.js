@@ -77,6 +77,7 @@ MODx.grid.SettingsGrid = function(config) {
             ,autoFill: true
             ,showPreview: true
             ,enableRowBody: true
+            ,scrollOffset: 0
         }
         ,grouping: true
         ,groupBy: 'area_text'

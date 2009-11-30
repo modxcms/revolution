@@ -14,6 +14,7 @@ MODx.grid.LocalGrid = function(config) {
         Ext.applyIf(config,{
           view: new Ext.grid.GroupingView({ 
             forceFit: true 
+            ,scrollOffset: 0
             ,groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
                 +(config.pluralText || _('records')) + '" : "'
                 +(config.singleText || _('record'))+'"]})' 
@@ -44,6 +45,7 @@ MODx.grid.LocalGrid = function(config) {
             ,enableRowBody: true
             ,autoFill: true
             ,showPreview: true
+            ,scrollOffset: 0
         }
     });
     

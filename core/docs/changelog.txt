@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1471] Added scrollOffset: 0 to grids to hide empty space on right side
 - [#MODX-1469] Fixed dir handling in setup
 - [#MODX-1388] Updated documentation for modX.getTree and modX.getChildIds
 - [#MODX-1318] Prevent ordering of elements in dragdrop since order defaults to alphanumeric
