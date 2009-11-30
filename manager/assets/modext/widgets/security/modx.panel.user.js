@@ -241,6 +241,13 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,width: 300
                     ,grow: true
                 },{
+                    id: 'modx-user-city'
+                    ,name: 'city'
+                    ,fieldLabel: _('city')
+                    ,xtype: 'textfield'
+                    ,width: 300
+                    ,maxLength: 255
+                },{
                     id: 'modx-user-fax'
                     ,name: 'fax'
                     ,fieldLabel: _('user_fax')

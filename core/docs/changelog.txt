@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added city field to user UI
 - Optimizations to Resource panel
 - [#MODX-1466] Made "back" from Access Policy edit redirect to Access Controls page, made Access Controls tabs stateful
 - [#MODX-1471] Added scrollOffset: 0 to grids to hide empty space on right side
