@@ -98,14 +98,7 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
             ,listeners: {
             	'success':{fn:function(r) {
                     this.getForm().setValues(r.object);
-                    //var data = Ext.util.JSON.decode(r.object.policy_data);
-                    //var g = Ext.getCmp('modx-grid-policy-property');
-                    
-                    //var d = Ext.decode(r.object.policy_data);
                     var g = Ext.getCmp('modx-grid-permissions').getStore().loadData(r.object.permissions);
-                    //g.setSource(data);
-                    //g.config.policy = r.object.id;
-                    //g.getView().refresh();
                     
                     Ext.getCmp('modx-policy-header').getEl().update('<h2>'+_('policy')+': '+r.object.name+'</h2>');
                     this.fireEvent('ready');

@@ -13,7 +13,7 @@ MODx.page.UpdateAccessPolicy = function(config) {
         ,actions: {
             'new': MODx.action['security/access/policy']
             ,edit: MODx.action['security/access/policy/update']
-            ,cancel: MODx.action['security/access/policy']
+            ,cancel: MODx.action['security/permission']
         }
         ,buttons: [{
             process: 'update'
@@ -28,7 +28,7 @@ MODx.page.UpdateAccessPolicy = function(config) {
         },{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: {a:MODx.action['security/access/policy']}
+            ,params: {a:MODx.action['security/permission']}
         }]
         ,components: [{ 
             xtype: 'modx-panel-access-policy'

@@ -45,7 +45,14 @@ MODx.panel.GroupsRoles = function(config) {
                 xtype: 'modx-grid-access-policy'
                 ,preventRender: true
             }]
-        }])]
+        }],{
+            stateful: true
+            ,stateId: 'access-tabpanel'
+            ,stateEvents: ['tabchange']
+            ,getState:function() {
+                return {activeTab:this.items.indexOf(this.getActiveTab())};
+            }
+        })]
     });
     MODx.panel.GroupsRoles.superclass.constructor.call(this,config);
 };
