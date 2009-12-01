@@ -1522,6 +1522,7 @@ a.x-menu-item {
 .x-panel-body {
     background-color:#FFFFFF;
 	border: 1px solid #AFAFAF;
+	border-width: 1px 1px 1px;
 }
 
 .x-panel-bbar .x-toolbar, .x-panel-tbar .x-toolbar {
