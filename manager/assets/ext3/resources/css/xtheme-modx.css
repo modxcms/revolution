@@ -1515,8 +1515,7 @@ a.x-menu-item {
     background-image: url(../images/modx/panel/white-top-bottom.gif);
     
     background-color: #5F5F5F;
-    background-image: none;
-    color: white;
+   	background:#EFEFEF url(../images/modx/form/button-bg.png) repeat-x scroll 0 0;
     text-transform: uppercase;
 }
 
@@ -1544,9 +1543,7 @@ a.x-menu-item {
     color:#434343;
 	font:bold 11px arial,tahoma,verdana,sans-serif;
 	
-    background-color: #5F5F5F;
-    background-image: none;
-    color: white;
+   	background:#EFEFEF url(../images/modx/form/button-bg.png) repeat-x scroll 0 0;
     text-transform: uppercase;
 }
 
@@ -1555,10 +1552,8 @@ a.x-menu-item {
 }
 
 .x-panel-tl, .x-panel-tr, .x-panel-bl,  .x-panel-br{
-	/*background-image: url(../images/modx/panel/corners-sprite.gif);
-    border-bottom-color: #d0d0d0;*/
-    background-color: #5F5F5F;
-    background-image: none;
+    border-bottom-color: #d0d0d0;
+   	background:#EFEFEF url(../images/modx/form/button-bg.png) repeat-x scroll 0 0;
 }
 
 .x-panel-bc {
