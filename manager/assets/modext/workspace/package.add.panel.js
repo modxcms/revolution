@@ -126,7 +126,6 @@ MODx.panel.PDSelProv = function(config) {
             text: _('provider_add_or')
             ,xtype: 'button'
             ,id: 'modx-pdselprov-addnew'
-            ,style: 'padding-top: 2em;'
             ,scope: this
             ,handler: function() {
                 Ext.getCmp('modx-window-package-downloader').proceed('modx-pd-newprov');
