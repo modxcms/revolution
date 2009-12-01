@@ -158,6 +158,8 @@ class modInstall {
             'dbase' => trim($dbase,'`'),
             'database_user' => $database_user,
             'database_password' => $database_password,
+            'database_connection_charset' => $database_connection_charset,
+            'database_charset' => $database_connection_charset,
             'table_prefix' => $table_prefix,
             'https_port' => isset ($https_port) ? $https_port : '443',
             'site_sessionname' => isset ($site_sessionname) ? $site_sessionname : 'SN' . uniqid(''),
