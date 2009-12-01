@@ -13,9 +13,9 @@ if (!$modx->hasPermission(array('access_permissions' => true, 'edit_user' => tru
 $modx->lexicon->load('user');
 
 /* get user */
-if (!isset($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
 $user = $modx->getObject('modUser',$_REQUEST['id']);
-if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_found'));
+if (!$user) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 
 $user->profile = $user->getOne('Profile');
 
@@ -49,12 +49,12 @@ if (!empty($_REQUEST['getGroups'])) {
     $user->set('groups','(' . $modx->toJSON($data) . ')');
 }
 
-$ua = $user->toArray();
-$ua = array_merge($ua,$user->profile->toArray());
-$ua['dob'] = !empty($ua['dob']) ? strftime('%m/%d/%Y',$ua['dob']) : '';
-$ua['blockeduntil'] = !empty($ua['blockeduntil']) ? strftime('%m/%d/%Y %I:%M %p',$ua['blockeduntil']) : '';
-$ua['blockedafter'] = !empty($ua['blockedafter']) ? strftime('%m/%d/%Y %I:%M %p',$ua['blockedafter']) : '';
-$ua['lastlogin'] = !empty($ua['lastlogin']) ? strftime('%m/%d/%Y',$ua['lastlogin']) : '';
+$userArray = $user->toArray();
+$userArray = array_merge($user->profile->toArray(),$userArray);
+$userArray['dob'] = !empty($userArray['dob']) ? strftime('%m/%d/%Y',$userArray['dob']) : '';
+$userArray['blockeduntil'] = !empty($userArray['blockeduntil']) ? strftime('%m/%d/%Y %I:%M %p',$userArray['blockeduntil']) : '';
+$userArray['blockedafter'] = !empty($userArray['blockedafter']) ? strftime('%m/%d/%Y %I:%M %p',$userArray['blockedafter']) : '';
+$userArray['lastlogin'] = !empty($userArray['lastlogin']) ? strftime('%m/%d/%Y',$userArray['lastlogin']) : '';
 
 
-return $modx->error->success('',$ua);
+return $modx->error->success('',$userArray);
