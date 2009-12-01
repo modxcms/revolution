@@ -386,12 +386,14 @@ ul.x-tab-strip li.x-tab-strip-active  {
     color:#434343;
 }
 
-.x-btn{
+.x-btn {
 	/*-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border:3px solid #BCCFA8;*/
 	-moz-box-shadow:0 0 2px #5e5e5e;
 	-webkit-box-shadow:0 0 2px #5e5e5e;	
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;	
 	background:#EFEFEF url(../images/modx/form/button-bg.png) repeat-x scroll 0 0;
 	line-height: 1;
 	padding:1px;
@@ -1563,14 +1565,12 @@ a.x-menu-item {
 
 .x-panel-mc {
 	background-color: white;
-	/*
-    background-color:#efefef;
-    */
+	/* background-color:#efefef; */
 }
 
 .x-panel-ml {
 	background-color: #fff;
-/*    background-image:url(../images/modx/panel/left-right.gif); */
+	/* background-image:url(../images/modx/panel/left-right.gif); */
 }
 
 .x-panel-mr {
@@ -1602,33 +1602,62 @@ a.x-menu-item {
     border-color:#d0d0d0;
 }
 
+.x-window .x-btn, .x-window .x-btn-noicon, .x-window .x-btn-small .x-btn-text {
+    color: #222;
+}
+.x-window .x-btn-over .x-btn-small .x-btn-text { color: white; }
+
+.x-window {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;	
+	border: 1px solid #4f4f4f;
+}
 .x-window-tl .x-window-header {
-    color:#434343;
-	font:bold 11px arial,tahoma,verdana,sans-serif;
+	font:bold 13px arial,tahoma,verdana,sans-serif;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+    background-color:#4f4f4f;
+	text-shadow:1px 1px 0 black;
+	background-image:none;
+	color: white;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .x-window-tc {
-	background-image: url(../images/modx/window/top-bottom.png);
+/*	background-image: url(../images/modx/window/top-bottom.png); */
+    background-color:#4f4f4f;
+    background-image:none;
 }
 
 .x-window-tl {
-	background-image: url(../images/modx/window/left-corners.png);
+/*	background-image: url(../images/modx/window/left-corners.png); */
+    background-color:#4f4f4f;
+    background-image:none;
 }
 
 .x-window-tr {
-	background-image: url(../images/modx/window/right-corners.png);
+/*	background-image: url(../images/modx/window/right-corners.png); */
+    background-color:#4f4f4f;
+    background-image:none;
 }
 
 .x-window-bc {
-	background-image: url(../images/modx/window/top-bottom.png);
+/*	background-image: url(../images/modx/window/top-bottom.png); */
+    background-color:#4f4f4f;
+    background-image:none;
 }
 
 .x-window-bl {
-	background-image: url(../images/modx/window/left-corners.png);
+/*	background-image: url(../images/modx/window/left-corners.png); */
+    background-color:#4f4f4f;
+    background-image:none;
 }
 
 .x-window-br {
-	background-image: url(../images/modx/window/right-corners.png);
+/*	background-image: url(../images/modx/window/right-corners.png); */        
+	background-color:#4f4f4f;
+    background-image:none;
 }
 
 .x-window-mc {
@@ -1637,11 +1666,17 @@ a.x-menu-item {
 }
 
 .x-window-ml {
-	background-image: url(../images/modx/window/left-right.png);
+/*	background-image: url(../images/modx/window/left-right.png); */
+	background-color:#4f4f4f;
+    background-image:none;
+
 }
 
 .x-window-mr {
-	background-image: url(../images/modx/window/left-right.png);
+/*	background-image: url(../images/modx/window/left-right.png); */
+	background-color:#4f4f4f;
+    background-image:none;
+
 }
 
 .x-window-maximized .x-window-tc {
