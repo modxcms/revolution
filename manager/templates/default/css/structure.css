@@ -4,8 +4,9 @@ html, body, form, fieldset {
 }
 html {
     font-size: 100.01%; /* avoids obscure font-size bug */
-    line-height: 17px;
-    font: normal 11px Verdana,Arial,Tahoma;
+    line-height: 1.7em; 
+    /*font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;*/
+    font: normal 1.1em Verdana,Arial,Tahoma;
     height: 100%;
     color: #111;
 }
@@ -30,11 +31,11 @@ hr {
     background-color: #a1b7c4;
     height: 1px;
     border: 0;
-    margin: 20px;
+    margin: 2em;
 }
 
 .padding {
-    padding: 10px;
+    padding: 1em;
     background-color: #fff;
 }
 
@@ -50,12 +51,12 @@ div.phpeditor .header h3 {
     font: bold 1em "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
     letter-spacing: .2em;
     text-transform: uppercase;
-    padding: 5px 5px 5px 10px;
+    padding: .5em .5em .5em 1em;
 }
 div.phpeditor .header .wrap {
     float: right;
 }
 
 div.phpeditor textarea {
-    margin: 10px;
+    margin: 1em;
 }

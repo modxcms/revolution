@@ -1,12 +1,12 @@
 @import url(./navbar.css);
 @import url(./leftbar.css);
 
-html, body {height: 100%;}
+html {height: 100%;}
 
 body, html {
     margin: 0;
     padding: 0;
-    background-color: #ececec;
+    background-color: #f4f4f4;
     font-size: 13px;
 	font-family: Arial, Helvetica, sans-serif;
 	margin-bottom: 1px;
@@ -21,7 +21,7 @@ body, html {
 
 /* top bar */
 #modx-topbar {
-    height: 33px;
+    height: 3em;
     /*border: 1px solid red;*/
     background-color: #222;
     color: white;
@@ -32,20 +32,20 @@ body, html {
     }
     
 #modx-site-name {
-    padding: 3px 0 0 10px;
+    padding: .3em 0 0 1em;
     }
     
 .modx-version {
     display: block;
     clear: left;
     color: #888;
-    font-size: 11px;
+    font-size: .8em;
     font-style: italic;
 }
 
 #modx-logo {
     float: right;
-    margin: 4px 10px 0 0;
+    margin: .4em 1em 0 0;
     }
 #modx-logo img {   
     width: 94px;
@@ -56,43 +56,59 @@ body, html {
 
 /* 2nd row, navbar */
 #modx-navbar {
-    background-color: #555;
-    height: 31px;
-    background-image:url(../../images/restyle/header_sub.jpg);
+    background-color: #4E4E4E;
+	border-top: 1px solid #1E1E1E;
+	border-bottom: 1px solid #1E1E1E;
+    height: 45px;
+    /*background-image:url(../../images/restyle/header_sub.jpg);*/
     background-repeat:repeat-x;
 	position: relative;
+	text-shadow:1px -1px 0 #1f1f1f;
 }
 #modx-login-user {
 	font-weight: bold;
 	color: #eee;
 }
 #rightlogin {
-	position: absolute;
-	right: 12px;
-	bottom: 0;
-    line-height: 25px;
-	padding-top: 6px 13px 0 0;
-	height: 25px;
-    vertical-align: middle;
-    z-index: 1;
-	color: #aaa;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border:1px solid #4E4E4E;
+	bottom:10px;
+	color:#AAAAAA;
+	height:26px;
+	line-height:26px;
+	position:absolute;
+	right:12px;
+	z-index:1;
 }
 #rightlogin span {
-    vertical-align: middle;
-    margin-right: 1.3em;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background-color:#363636;
+	border:1px solid #1F1F1F;
+	float:left;
+	height:26px;
+	padding:0 0 0 12px;
 }
 #rightlogin a.modx-logout {
-    color: #ddd;
-    background: #333;
-    text-decoration: none;
-    padding: 0 12px 0;
-	height: 25px;
-	line-height: 25px;
-	display: block;
-	float: right;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	background-color:#3e3e3e;
+	border:1px solid #4e4e4e;
+    color:#DDDDDD;
+	display:block;
+	float:right;
+	height:24px;
+	margin:0 0 1px 7px;
+	padding:0 12px;
+	text-decoration:none;
+	text-shadow:1px -1px 0 #5e5e5e;
 }
 #rightlogin a.modx-logout:hover {
-    background: #6e9b38;
+    background-color: #6e9b38;
+	border-color: #88BF47;
 	color: #fff;
 }
 
@@ -113,17 +129,25 @@ h2 {
 
 #modAB {
     position: fixed;
-    top: 78px;
-    right: 22px;
+    /*width: 16em;*/
+    top: 8em;
+    right: 2em;
     text-align: right;
     z-index: 12;
+    /*
     border-width: 1px;
     border-style: solid;
     border-color: #c9c8c9;
-}
+    */
+    }
 #modAB .x-toolbar {
+    /*
     background: #fff;
     border: 1px solid #fff;
+    */
+    }
+#modx-action-buttons {
+    background: transparent !important;
 }
     
 /* panel stylings */
@@ -136,8 +160,12 @@ h2 {
     
 .modx-page-header h2 {
     border-bottom: 0;
-    margin: 3px 5px 0;
+    margin: .3em .5em 0;
 }
 .modx-form p {
-    padding-bottom: 10px;
+    padding-bottom: 1em;
+}
+
+#modx-mainpanel{
+	border-top: 1px solid #ffffff;
 }

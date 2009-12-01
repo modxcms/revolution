@@ -13,7 +13,7 @@ $_lang['credits_mysql'] = 'MODx is powered by MySQL!';
 $_lang['credits_php'] = 'MODx is powered by PHP!';
 $_lang['credits_xpdo'] = 'MODx uses the database ORM <a href="http://www.xpdo.org/" target="_blank">xPDO</a>.';
 $_lang['credits_shouts_msg'] = '
-<p><a href="mailto:martin@sandersdesign.com">Martin Sanders</a> of <a href="http://www.sandersdesign.com">Sanders Design</a> for coming up with the inspiration for the current manager design!</p>
+<p><a href="mailto:martin@sandersdesign.com">Martin Sanders</a> of <a href="http://www.sandersdesign.com">Sanders Design</a> for coming up with the inspiration for the current manager design! Also thanks to Stephane "lossendae" Boulard for the work on the design!</p>
 
 <h3>Founders &amp; Project Leaders</h3>
 <p>The folks that started it all.</p>
@@ -63,6 +63,7 @@ $_lang['credits_shouts_msg'] = '
 <p>Creating the look and messaging for MODx.</p>
 <ul>
     <li>Jay Gilmore (smashingred)</li>
+    <li>Stephane Boulard (lossendae)</li>
     <li>Martin Sanders (modxPowered)</li>
     <li>David Molliere (davidm)</li>
     <li>Zaigham Rana (zi)</li>

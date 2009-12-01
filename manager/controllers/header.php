@@ -27,16 +27,14 @@ if ($menus == null) {
 $output = '';
 $order = 0;
 foreach ($menus as $menu) {
-    $output .= '<li id="limenu-'.$menu['text'].'" class="top'.($order == 0 ? ' active' : '').'">'."\n";
+    $output .= '<li id="limenu-'.$menu['text'].'" class="top'.'">'."\n";
     $output .= '<a>'.$menu['text'].'</a>'."\n";
-    $output .= '<div class="zone">'."\n";
 
     if (!empty($menu['children'])) {
         $output .= '<ul class="modx-subnav">'."\n";
         _modProcessMenus($output,$menu['children']);
         $output .= '</ul>'."\n";
     }
-    $output .= '</div>'."\n";
     $output .= '</li>'."\n";
     $order++;
 }
@@ -63,7 +61,6 @@ function _modProcessMenus(&$output,$menus) {
         }
         $output .= '</li>';
     }
-    $output .= '<li class="last"><span>&nbsp;</span></li>'."\n";
 }
 $modx->smarty->assign('navb',$output);
 

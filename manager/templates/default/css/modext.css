@@ -10,7 +10,7 @@
 }
 
 .x-tree-checkbox {
-    background:url(../../../assets/ext3/resources/images/default/form/checkbox.gif) no-repeat 0 0;
+    background:url('../../../assets/ext3/resources/images/default/form/checkbox.gif') no-repeat 0 0;
     height:13px;
     width:13px;
     margin:0 1px;

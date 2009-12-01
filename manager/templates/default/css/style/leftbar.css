@@ -6,10 +6,12 @@
 }
 
 .modx-leftbar {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;	
     width: 23%;
     float: left;
     height: 100%;
-    background: #d4d4d4 url(../../images/restyle/i/bg-tree.png) repeat-x;
+    background-color:#5E5E5E;
     position: relative;
     overflow: visible;
     z-index: 0;
@@ -26,29 +28,21 @@
 	.modx-leftbar-panel {
 	    margin-top: 7px;
 	}
-.modx-leftbar .tl,.modx-leftbar .tr,.modx-leftbar .bl,.modx-leftbar .br {
-    background: transparent url(../../images/restyle/i/corner-tree-20.png) no-repeat;
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    z-index: 1;
+	
+.modx-leftbar ul.x-tab-strip li.x-tab-strip-active {
+	background-color:#EFEFEF;
+	border-color:#EFEFEF;
 }
-	.modx-leftbar .tl {
-	    top: -10px;
-	    left: -10px;
-	}
-	.modx-leftbar .tr {
-	    top: -10px;
-	    right: -10px;
-	}
-	.modx-leftbar .br {
-	    bottom: -10px;
-	    right: -10px;
-	}
-	.modx-leftbar .bl {
-	    bottom: -10px;
-	    left: -10px;
-	}
+
+.modx-leftbar  .x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer{
+	background-color:#EEEEEE;
+	border:1px solid #EEEEEE;
+}
+
+.modx-leftbar .x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text{
+	color:#5e5e5e;
+	text-shadow:none;
+}
 
 .modx-leftbar .x-tab-strip-wrap li {
     color: #f7f7f7;
@@ -86,7 +80,18 @@
     background-color: #eee !important;
 }
 
+.modx-leftbar .x-tab-panel-body-top {
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-bottom-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+}
+
 .modx-leftbar .x-tree-root-ct {
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-bottom-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
     background-color: #eee;
     padding: .4em;
 }

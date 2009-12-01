@@ -2,8 +2,8 @@
 .x-grid3-cell-inner, .x-grid3-hd-inner { padding:5px 5px 5px 7px; }
 .x-grid3-cell-text, .x-grid3-hd-text { padding: 5px 7px 5px 7px; }
 .x-grid3-row-expander { height: 23px; }
-.x-grid3-row-collapsed .x-grid3-row-expander { background-position: 4px; }
-.x-grid3-row-expanded .x-grid3-row-expander { background-position:-21px 4px; }
+.x-grid3-row-collapsed .x-grid3-row-expander { background-position:6px 55%; }
+.x-grid3-row-expanded .x-grid3-row-expander { background-position:-30px 6px; }
 
 /* form : checkboxes : cursor point */
 .x-form-check:hover { cursor: pointer; }
@@ -36,10 +36,13 @@
 .modx-form .x-form-field-wrap .x-form-trigger { height: 28px; }
 
 .x-small-editor .x-form-field {
-    padding: 5px 0 1px !important;
-    font-size: 11px !important;
+    padding: 5px 5px 1px !important;
+    font-size: 1em !important;
     height: 18px !important;
 }
 .x-small-editor .x-form-field-wrap .x-form-trigger {
-    height: 23px;
+    height: 24px !important;
+}
+.x-form-field-wrap .x-form-trigger {
+    height: 26px !important;
 }

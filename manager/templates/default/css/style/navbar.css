@@ -10,8 +10,7 @@
 
 #modx-topnav-div {
     background: transparent;
-    padding: 6px 0 0;
-    margin-left: 12px;
+    margin-left: 1em;
     position: relative;
     width: 78%;
     z-index: 13;
@@ -21,144 +20,131 @@
     width: 100%;
 }
 
-#modx-topnav-div ul,#modx-topnav-div li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+ul#modx-topnav {
+	float:left;
+	font-size:1em;
+	font-weight:bold;
+	height:45px;
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	text-shadow:-1px 1px 0 #1F1F1F;
+	border-bottom: 1px solid #1E1E1E;
+}
+ul#modx-topnav li {
+	float: left;
+	margin: 0;    
+	padding:5px 20px;
+	position: relative;
+	background:transparent url(../../images/style/separator/menu_sep.png) no-repeat scroll right 0;
+}
+ul#modx-topnav li a{
+	padding:12px 5px 13px;
+	color: #fff;
+	display: block;
+	text-decoration: none;
+	float: left;
+}
+ul#modx-topnav li ul.modx-subnav {
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	list-style: none;
+	position: absolute; /*--Important - Keeps modx-subnav from affecting main navigation flow--*/
+	left: 0; 
+	top: 46px;
+	background: #333;
+	margin: 0; padding: 0;
+	display: none;
+	float: left;
+	width: 225px;
+	opacity:0.97;
+	border: 1px solid #111;
+}
+ul#modx-topnav li:hover ul.modx-subnav {
+	display:block;
 }
 
-#modx-topnav-div li.top {
-    display: block;
-    float: left;
-    margin-right: 9px;
+ul#modx-topnav li ul.modx-subnav li{
+	margin: 0; padding: 0;
+	border-top: 1px solid #252525; /*--Create bevel effect--*/
+	border-bottom: 1px solid #444; /*--Create bevel effect--*/
+	clear: both;
+	width: 100%;
+}
+ul#modx-topnav li ul.modx-subnav li a span {
+	color:#AFAFAF;
+	display:block;
+	float:none;
+	font-size:0.9em;
+	font-weight:normal;
+	margin-top:5px;
+	width:100%;
+}
+ul#modx-topnav li.active a {
+	background:transparent url(../../images/style/separator/menu_current.png) no-repeat scroll center bottom;
 }
 
-#modx-topnav-div a {
-    padding: 0 12px;
-    color: #fff;
-    background-color: #333;
-    line-height: 25px;
-    display: block;
-    float: left;
-    text-decoration: none;
-    cursor: pointer;
+ul#modx-topnav li.active:hover a {
+	background-image:none;
 }
 
-#modx-topnav-div a:hover {
-    background-color: #222;
+html ul#modx-topnav li ul.modx-subnav li a {
+	float: left;
+	width: 205px;
+	background-color: #333;
+	padding:12px 10px 14px;
+}
+html ul#modx-topnav li ul.modx-subnav li a:hover { /*--Hover effect for modx-subnav links--*/
+	background-color: #222;
+	text-shadow:-1px 1px 0 #4F4F4F;
+}
+html ul#modx-topnav li ul.modx-subnav li a:hover{
+	background-color:#5C7F17;
+}
+ul#modx-topnav li ul.modx-subnav li a:hover span {
+	color:#ffffff;
 }
 
-#modx-topnav-div li .zone {
-    display: none
+ul#modx-topnav li ul.modx-subnav li ul {
+	display:none;
+	-moz-border-radius: 5px;
+	position: absolute;
+	left:220px;
+	top:30%;
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	border: 1px solid #252525;
+	padding-left:0;
+	z-index: 100000;
 }
 
-#modx-topnav-div li.top ul {
-    width: 224px;
-    clear: left;
+ul#modx-topnav li ul.modx-subnav li ul li a {
+	background-color:#3F3F3F;
 }
 
-li.top li.last {
-    margin: 0;
-    padding: 0 0 0 24px;
-    height: 12px;
-    line-height: 12px;
-    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat 0 0;
-    float: none;
-    clear: left;
-    position: relative;
-    overflow: visible;
+ul#modx-topnav li ul.modx-subnav li ul li {
+	border-bottom: 1px solid #4f4f4f;
 }
 
-li.top li.last span {
-    display: block;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 24px;
-    background: transparent url(../../images/restyle/i/bg-drop-last.png) no-repeat 100% 0;
+ul#modx-topnav li ul.modx-subnav li ul li:first-child, ul#modx-topnav li ul.modx-subnav li ul li:first-child a {
+	-moz-border-radius-topleft: 2px;
+	-moz-border-radius-topright: 2px;
+	-webkit-border-top-right-radius: 2px;
+	-webkit-border-top-left-radius: 2px;
 }
 
-#modx-topnav-div li:hover .zone {
-    display: block;
-    padding: 5px 30px 60px;
+ul#modx-topnav li ul.modx-subnav li ul li:last-child, ul#modx-topnav li ul.modx-subnav li ul li:last-child a {
+	-moz-border-radius-bottomleft: 2px;
+	-moz-border-radius-bottomright: 2px;
+	-webkit-border-bottom-left-radius: 2px;
+	-webkit-border-bottom-right-radius: 2px;
 }
 
-#modx-topnav-div li:hover .zone .zone {
-    display: none;
-    padding: 30px 30px 30px 5px;
-}
-
-#modx-topnav-div .top li:hover .zone {
-    display: block;
-}
-
-#modx-topnav-div li.top,#modx-topnav-div li.flyout {
-    position: relative;
-}
-
-#modx-topnav-div li.top li {
-    display: block;
-    float: none;
-    width: 200px;
-}
-
-#modx-topnav-div li.top .zone {
-    position: absolute;
-    top: 20px;
-    left: -30px;
-    opacity: 1;
-}
-
-#modx-topnav-div .zone a {
-    display: block;
-    width: 100%;
-    background: #333;
-    line-height: 25px;
-    float: none;
-}
-
-#modx-topnav-div .zone span.description {
-    display: block;
-    clear: left;
-    line-height: 1.1;
-    font-size: 12px;
-    color: #999;
-    margin-top: -4px;
-    padding-bottom: 6px;
-}
-
-#modx-topnav-div .zone a:hover {
-    background-color: #222 !important;
-}
-
-#modx-topnav-div .zone a:hover span.description {
-    color: #ddd !important;
-}
-
-#modx-topnav-div li.flyout .zone {
-    position: absolute;
-    left: 219px;
-    top: 35px;
-    _top: 0;
-    opacity: 1.0;
-}
-
-#modx-topnav-div li.last li.flyout .zone {
-    left: -228px; /* reverse the last one */
-}
-
-
-/*Sub level menu items */
-#modx-topnav-div ul ul ul {
-    float: left;
-    position: absolute;
-    top: 100px;
-    clear: left;
-    display: none;
-}
-#modx-topnav-div ul ul li ul li{}
-#modx-topnav-div ul ul li ul li a:hover{}
-#modx-topnav-div ul ul li:hover ul {
-    display: block;
-    left: 254px;
+ul#modx-topnav li ul.modx-subnav li:hover ul  {
+	display:block;
 }
