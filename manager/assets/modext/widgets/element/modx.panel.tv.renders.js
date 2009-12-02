@@ -26,15 +26,15 @@ MODx.panel.ImageTV = function(config) {
             ,value: config.value
             ,hideFiles: true
             ,listeners: {
-                'change': {fn:triggerDirtyField,scope:this}
-                ,'select': {fn:function(data) {
-                    
+                'select': {fn:function(data) {
+                    this.fireEvent('select',data);
                 },scope:this}
             }
             ,width: 200
         }] 
     });
     MODx.panel.ImageTV.superclass.constructor.call(this,config);
+    this.addEvents({select: true});
 };
 Ext.extend(MODx.panel.ImageTV,MODx.Panel);
 Ext.reg('modx-panel-tv-image',MODx.panel.ImageTV);
@@ -59,21 +59,20 @@ MODx.panel.FileTV = function(config) {
             ,value: config.value
             ,hideFiles: true
             ,listeners: {
-                'change': {fn:triggerDirtyField,scope:this}
-                ,'select': {fn:function(data) {
-                    
+                'select': {fn:function(data) {
+                    this.fireEvent('select',data);                    
                 },scope:this}
             }
             ,width: 200
         }] 
     });
     MODx.panel.FileTV.superclass.constructor.call(this,config);
+    this.addEvents({select: true});
 };
 Ext.extend(MODx.panel.FileTV,MODx.Panel);
 Ext.reg('modx-panel-tv-file',MODx.panel.FileTV);
 
 MODx.checkTV = function(id) {
     var cb = Ext.get('tv'+id);
-    Ext.get('tvh'+id).dom.value = cb.dom.checked ? cb.dom.value : '';
-     
+    Ext.get('tvh'+id).dom.value = cb.dom.checked ? cb.dom.value : '';     
 };

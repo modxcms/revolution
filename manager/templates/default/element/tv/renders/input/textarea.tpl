@@ -9,8 +9,9 @@ MODx.load({
     ,value: '{$tv->get('value')|escape:'javascript'}'
     ,width: 300
     ,height: 140
+    ,enableKeyEvents: true
 {literal}
-    ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
+    ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 {/literal}
 </script>

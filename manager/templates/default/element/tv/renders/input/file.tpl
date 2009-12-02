@@ -11,7 +11,7 @@ MODx.load({
     ,value: '{$tv->value|escape}'
     ,width: 300
 {literal}
-    ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
+    ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 {/literal}
 </script>

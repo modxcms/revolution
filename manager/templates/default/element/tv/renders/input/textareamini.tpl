@@ -11,8 +11,9 @@ MODx.load({
     ,applyTo: 'tv{$tv->id}'
     ,width: 300
     ,grow: true
+    ,enableKeyEvents: true
 {literal}
-    ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
+    ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 {/literal}
 </script>
