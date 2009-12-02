@@ -7,6 +7,9 @@
 <div id="tvtabs_div">
 {foreach from=$categories item=category}
 {if count($category->tvs) > 0}
+
+    <br />
+    <h2>{$category->category|default:$_lang.uncategorized|ucfirst}</h2>
     <div id="tvtab{$category->id}">
     
     <table class="classy">
@@ -26,7 +29,9 @@
             {$tv->get('formElement')}  
         </td>
         <td>
+            {if $tv->get('inherited')}<em>({$_lang.tv_value_inherited})</em>{/if}
             <input type="button" onclick="MODx.resetTV({$tv->get('id')});" value="{$_lang.set_to_default}" />
+            
         </td>
     </tr>
     {foreachelse}

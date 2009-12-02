@@ -369,6 +369,7 @@ $_lang['tv'] = 'TV';
 $_lang['tv_default'] = 'Default Value';
 $_lang['tv_elements'] = 'Input Option Values';
 $_lang['tv_type'] = 'Input Type';
+$_lang['tv_value_inherited'] = 'Value Inherited';
 $_lang['type'] = 'Type';
 $_lang['uncategorized'] = 'uncategorized';
 $_lang['undelete'] = 'Undelete';
