@@ -286,8 +286,8 @@ $_lang['setting_site_start_desc'] = 'Enter the ID of the document you want to us
 $_lang['setting_site_start'] = 'Please specify a document ID that is the site start.';
 
 $_lang['setting_site_status'] = 'Site status';
-$_lang['setting_site_status_desc'] = 'Select \'Online\' to publish your site on the web. If you select \'Offline\', your visitors will see the \'Site unavailable message\', and won\'t be able to browse the site.';
-$_lang['setting_site_status_err'] = 'Please select whether or not the site is online or offline.';
+$_lang['setting_site_status_desc'] = 'Select \'Yes\' to publish your site on the web. If you select \'No\', your visitors will see the \'Site unavailable message\', and won\'t be able to browse the site.';
+$_lang['setting_site_status_err'] = 'Please select whether or not the site is online (Yes) or offline (No).';
 
 $_lang['setting_site_unavailable_message'] = 'Site unavailable message';
 $_lang['setting_site_unavailable_message_desc'] = 'Message to show when the site is offline or if an error occurs. <strong>Note: This message will only be displayed if the Site unavailable page option is not set.</strong>';
