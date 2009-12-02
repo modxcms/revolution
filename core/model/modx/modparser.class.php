@@ -155,8 +155,6 @@ class modParser {
                     if ($removeUnprocessed) {
                         $tagMap[$tag[0]]= '';
                     }
-                    $collected--;
-                    continue;
                 }
                 elseif (!empty ($tokens) && !in_array($token, $tokens)) {
                     $collected--;
@@ -167,7 +165,7 @@ class modParser {
                     $processed++;
                     continue;
                 }
-                $tagOutput= $this->processTag($tag);
+                $tagOutput= $this->processTag($tag, $processUncacheable);
                 if (($tagOutput === null || $tagOutput === false) && $removeUnprocessed) {
                     $tagMap[$tag[0]]= '';
                     $processed++;
@@ -326,7 +324,7 @@ class modParser {
      * @return mixed The output of the processed element represented by the
      * specified tag.
      */
-    function processTag($tag) {
+    function processTag($tag, $processUncacheable = true) {
         $element= null;
         $elementOutput= null;
 
@@ -347,6 +345,9 @@ class modParser {
         $tokenOffset= 0;
         $cacheable= true;
         if ($token === '!') {
+            if (!$processUncacheable) {
+                return $outerTag;
+            }
             $cacheable= false;
             $tokenOffset++;
             $token= substr($tagName, $tokenOffset, 1);
