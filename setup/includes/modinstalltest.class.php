@@ -76,7 +76,7 @@ abstract class modInstallTest {
      */
     protected function _checkMySQLServerVersion() {
         $this->results['mysql_server_version']['msg'] = '<p>'.$this->install->lexicon['test_mysql_version_server_start'].' ';
-        $mysqlVersion = mysql_get_server_info();
+        $mysqlVersion = @mysql_get_server_info();
         $mysqlVersion = $this->_sanitizeMySqlVersion($mysqlVersion);
         if (empty($mysqlVersion)) {
             $this->results['mysql_server_version']['msg'] = '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
@@ -107,7 +107,7 @@ abstract class modInstallTest {
      */
     protected function _checkMySQLClientVersion() {
         $this->results['mysql_client_version']['msg'] = '<p>'.$this->install->lexicon['test_mysql_version_client_start'].' ';
-        $mysqlVersion = mysql_get_client_info();
+        $mysqlVersion = @mysql_get_client_info();
         $mysqlVersion = $this->_sanitizeMySqlVersion($mysqlVersion);
         if (empty($mysqlVersion)) {
             $this->results['mysql_client_version']['msg'] = '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';

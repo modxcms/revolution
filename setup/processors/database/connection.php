@@ -7,14 +7,18 @@ unset($settings['action']);
 $install->settings->store($settings);
 $mode = $install->settings->get('installmode');
 
-$xpdo = $install->_connect($install->settings->get('database_type')
- . ':host=' . $install->settings->get('database_server')
- //. ';dbname=' . trim($install->settings->get('dbase'), '`')
- //. ';charset=' . $install->settings->get('database_connection_charset')
- //. ';collation=' . $install->settings->get('database_collation')
- ,$install->settings->get('database_user')
- ,$install->settings->get('database_password')
- ,$install->settings->get('table_prefix'));
+if ($mode == modInstall::MODE_UPGRADE_REVO) {
+    $xpdo = $install->getConnection();
+} else {
+    $xpdo = $install->_connect($install->settings->get('database_type')
+     . ':host=' . $install->settings->get('database_server')
+     //. ';dbname=' . trim($install->settings->get('dbase'), '`')
+     //. ';charset=' . $install->settings->get('database_connection_charset')
+     //. ';collation=' . $install->settings->get('database_collation')
+     ,$install->settings->get('database_user')
+     ,$install->settings->get('database_password')
+     ,$install->settings->get('table_prefix'));
+}
 
 if (!($xpdo instanceof xPDO)) { $this->error->failure($err); }
 
