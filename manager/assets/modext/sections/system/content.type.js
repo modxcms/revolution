@@ -22,8 +22,11 @@ MODx.page.ContentType = function(config) {
                 ,alt: true
                 ,ctrl: true
             }]
-        },{
+        },'-',{
             process: 'cancel', text: _('cancel'), params: {a:MODx.action['welcome']}
+        },'-',{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
         }]
 		,components: [{
             xtype: 'modx-panel-content-type'

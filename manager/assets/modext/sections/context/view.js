@@ -62,6 +62,10 @@ Ext.extend(MODx.page.ViewContext,MODx.Component,{
 	            a: MODx.action['context']
 	        }
 	    });
+        b.push('-',{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        });
 	    return b;
 	}
 });

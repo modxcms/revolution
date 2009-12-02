@@ -32,6 +32,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] != '' && isset($modx->acti
     $action = $modx->actionMap[$_REQUEST['action']];
     $c['namespace'] = $action['namespace'];
     $c['namespace_path'] = $action['namespace_path'];
+    $c['help_url'] = $action['help_url'];
 }
 
 $actions = $modx->request->getAllActionIDs();

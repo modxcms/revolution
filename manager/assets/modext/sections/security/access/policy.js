@@ -17,6 +17,10 @@ MODx.page.AccessPolicies = function(config) {
             xtype: 'modx-panel-access-policies'
             ,renderTo: 'modx-panel-access-policies-div'
         }] 
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
     });
 	MODx.page.AccessPolicies.superclass.constructor.call(this,config);
 };

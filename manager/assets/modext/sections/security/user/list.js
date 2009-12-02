@@ -17,6 +17,10 @@ MODx.page.Users = function(config) {
             xtype: 'modx-panel-users'
             ,renderTo: 'modx-panel-users-div'
         }]
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
 	});
 	MODx.page.Users.superclass.constructor.call(this,config);
 };

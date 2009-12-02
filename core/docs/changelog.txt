@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added inline help that loads official MODx documentation in a window
 - [#MODX-900] Fixed erroneous text on site_status setting description
 - Added (Inherited Value) flag to TVs that are inheriting their value
 - Added category titles to TV editing panel

@@ -17,6 +17,10 @@ MODx.page.PropertySets = function(config) {
             xtype: 'modx-panel-property-sets'
             ,renderTo: 'modx-panel-property-sets-div'
         }]
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
     });
     MODx.page.PropertySets.superclass.constructor.call(this,config);    
 };

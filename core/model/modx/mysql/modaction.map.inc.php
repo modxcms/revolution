@@ -13,7 +13,8 @@ $xpdo_meta_map['modAction']= array (
     'controller' => NULL,
     'haslayout' => 1,
     'lang_topics' => NULL,
-    'assets' => NULL,
+    'assets' => '',
+    'help_url' => '',
   ),
   'fieldMeta' => 
   array (
@@ -64,6 +65,14 @@ $xpdo_meta_map['modAction']= array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
+      'default' => '',
+    ),
+    'help_url' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
   ),
   'aggregates' => 

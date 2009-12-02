@@ -103,7 +103,8 @@
         <field key="controller" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
         <field key="haslayout" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="1" />
         <field key="lang_topics" dbtype="text" phptype="string" null="false" />
-        <field key="assets" dbtype="text" phptype="string" null="false" />
+        <field key="assets" dbtype="text" phptype="string" null="false" default="" />
+        <field key="help_url" dbtype="text" phptype="string" null="false" default="" />
         
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" owner="foreign" cardinality="one" />
         <aggregate alias="Parent" class="modAction" local="parent" foreign="id" owner="foreign" cardinality="one" />

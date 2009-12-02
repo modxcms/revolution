@@ -21,6 +21,10 @@ MODx.page.AccessPermissions = function(config) {
             ,el: 'access_resourcegroup_grid'
         }]
         ,deferredRender: true
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
 	});
 	MODx.page.AccessPermissions.superclass.constructor.call(this,config);
 };

@@ -17,6 +17,10 @@ MODx.page.GroupsRoles = function(config) {
             xtype: 'modx-panel-groups-roles'
             ,renderTo: 'modx-panel-groups-roles-div'
         }]
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
 	});
 	MODx.page.GroupsRoles.superclass.constructor.call(this,config);
 };

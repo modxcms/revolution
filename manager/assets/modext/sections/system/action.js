@@ -17,6 +17,10 @@ MODx.page.Actions = function(config) {
             xtype: 'modx-panel-actions'
             ,renderTo: 'modx-panel-actions-div'
         }]
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
 	});
 	MODx.page.Actions.superclass.constructor.call(this,config);
 };

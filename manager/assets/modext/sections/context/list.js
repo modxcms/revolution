@@ -17,6 +17,10 @@ MODx.page.Contexts = function(config) {
             xtype: 'modx-panel-contexts'
             ,renderTo: 'modx-panel-contexts-div'
         }]
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
 	});
 	MODx.page.Contexts.superclass.constructor.call(this,config);
 };

@@ -26,10 +26,13 @@ MODx.page.UpdateTemplate = function(config) {
                 ,alt: true
                 ,ctrl: true
             }]
-        },{
+        },'-',{
             process: 'cancel'
             ,text: _('cancel')
             ,params: {a:MODx.action['welcome']}
+        },'-',{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
         }]
         ,loadStay: true
         ,components: [{

@@ -9,6 +9,10 @@ MODx.page.ActionDom = function(config) {
             xtype: 'modx-panel-actiondom'
             ,renderTo: 'modx-panel-actiondom-div'
         }]
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
 	});
 	MODx.page.ActionDom.superclass.constructor.call(this,config);
 };

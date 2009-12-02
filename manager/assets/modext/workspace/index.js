@@ -17,6 +17,10 @@ MODx.page.Workspace = function(config) {
             xtype: 'modx-panel-workspace'
             ,renderTo: 'modx-panel-workspace-div'
         }]
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
     });
     MODx.page.Workspace.superclass.constructor.call(this,config);
     Ext.Ajax.timeout = 0;

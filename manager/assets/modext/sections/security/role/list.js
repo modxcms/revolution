@@ -17,6 +17,9 @@ MODx.page.ListRoles = function(config) {
             process: 'new', text: _('new'), params: {a:MODx.action['security/role/create']}
         },'-',{
             process: 'cancel', text: _('cancel'), params: {a:MODx.action['welcome']}
+        },'-',{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
         }]
         ,components: [{
             xtype: 'grid-role'

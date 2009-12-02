@@ -48,3 +48,12 @@ $table = $this->install->xpdo->getTableName($class);
 $description = sprintf($this->install->lexicon['change_column'],'id varchar(32)','id varchar(40)',$table);
 $sql = "ALTER TABLE {$table} CHANGE `id` `id` VARCHAR(40) NOT NULL";
 $this->processResults($class,$description,$sql);
+
+
+/* add help_url field to modAction */
+$class = 'modAction';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['add_column'],'help_url',$table);
+$sql = "ALTER TABLE {$table} ADD COLUMN `help_url` TEXT NOT NULL DEFAULT ''";
+$this->processResults($class,$description,$sql);
+

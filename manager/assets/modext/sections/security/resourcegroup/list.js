@@ -17,6 +17,10 @@ MODx.page.ResourceGroups = function(config) {
             xtype: 'modx-panel-resource-groups'
             ,renderTo: 'modx-panel-resource-groups-div'
         }]
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
     });
     MODx.page.ResourceGroups.superclass.constructor.call(this,config);
 };

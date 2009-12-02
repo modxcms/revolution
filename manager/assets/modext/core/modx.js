@@ -156,6 +156,26 @@ Ext.extend(MODx,Ext.Component,{
         }
         return c;
     }
+    
+    ,loadHelpPane: function() {
+        var url = MODx.config.help_url;
+        if (!url) return false;
+        MODx.helpWindow = new Ext.Window({
+            title: _('help')
+            ,width: 850
+            ,height: 500
+            ,modal: true
+            ,layout: 'fit'
+            ,bodyStyle: 'padding: 5px;'
+            ,html: '<iframe onload="parent.MODx.helpWindow.getEl().unmask();" src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
+            ,listeners: {
+                show: function(o) {
+                    o.getEl().mask(_('help_loading'));
+                }
+            }
+        });
+        MODx.helpWindow.show();
+    }
 });
 Ext.reg('modx',MODx);
 

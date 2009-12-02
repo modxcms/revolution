@@ -16,6 +16,10 @@ MODx.page.SystemSettings = function(config) {
             xtype: 'modx-panel-system-settings'
             ,renderTo: 'modx-panel-system-settings-div'
         }]
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
     });
 	MODx.page.SystemSettings.superclass.constructor.call(this,config);
 };

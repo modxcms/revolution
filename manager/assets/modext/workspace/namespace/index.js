@@ -15,6 +15,10 @@ MODx.page.Namespaces = function(config) {
             xtype: 'modx-panel-namespaces'
             ,renderTo: 'modx-panel-namespaces-div'
         }]
+        ,buttons: [{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        }]
     });
     MODx.page.Namespaces.superclass.constructor.call(this,config);
 };
