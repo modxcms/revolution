@@ -14,7 +14,7 @@ while (list($item, $itemvalue) = each ($index_list)) {
     $opts[] = array(
         'value' => htmlspecialchars($itemvalue),
         'text' => htmlspecialchars($item),
-        'selected' => in_array($itemvalue,$this->get('value')),
+        'selected' => in_array($itemvalue,$this->get('processedValue')),
     );
 }
 

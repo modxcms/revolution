@@ -152,7 +152,7 @@ class modTemplateVar extends modElement {
                     'tmplvarid' => $this->get('id'),
                     'contentid' => $resourceId,
                 ),true);
-                if ($resource != null) {
+                if ($resource && $resource instanceof modTemplateVarResource) {
                     $value= $resource->get('value');
                     $this->set('resourceId', $resourceId);
                 }
@@ -265,9 +265,16 @@ class modTemplateVar extends modElement {
         $field_html= '';
         $this->xpdo->smarty->assign('style',$style);
         $value = $this->get('value');
+
+        /* process any TV commands in value */
+        $value= $this->processBindings($value, $resourceId);
+
         if (!$value || $value == '') {
-            $this->set('value',$this->getValue($resourceId));
+            $this->set('processedValue',$this->getValue($resourceId));
+        } else {
+            $this->set('processedValue',$value);
         }
+
         $this->xpdo->smarty->assign('tv',$this);
 
 
@@ -414,7 +421,15 @@ class modTemplateVar extends modElement {
 
                 case 'INHERIT':
                     $output = $param; /* Default to param value if no content from parents */
-                    $doc = array('id' => $this->xpdo->resourceIdentifier, 'parent' => $this->xpdo->resource->get('parent'));
+                    $resource = null;
+                    if ($resourceId && (!($this->xpdo->resource instanceof modResource) || $this->xpdo->resource->get('id') != $resourceId)) {
+                        $resource = $this->xpdo->getObject('modResource',$resourceId);
+                    } else if ($this->xpdo->resource instanceof modResource) {
+                        $resource =& $this->xpdo->resource;
+                    }
+                    if (!$resource) break;
+                    $doc = array('id' => $resource->get('id'), 'parent' => $resource->get('parent'));
+
                     while($doc['parent'] != 0) {
                         $parent_id = $doc['parent'];
                         if(!$doc = $this->xpdo->getDocument($parent_id, 'id,parent')) {

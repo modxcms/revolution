@@ -20,7 +20,7 @@ while (list($item, $itemvalue) = each ($index_list)) {
     $opts[] = array(
         'value' => htmlspecialchars($itemvalue,ENT_COMPAT,'UTF-8'),
         'text' => htmlspecialchars($item),
-        'checked' => in_array($itemvalue,$this->get('value')),
+        'checked' => in_array($itemvalue,$this->get('processedValue')),
     );
     $i++;
 }

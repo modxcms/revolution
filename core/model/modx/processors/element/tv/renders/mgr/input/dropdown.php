@@ -12,7 +12,8 @@ while (list($item, $itemvalue) = each ($index_list)) {
     if (strlen($itemvalue)==0) $itemvalue = $item;
     $items[] = array(
         'text' => htmlspecialchars($item),
-        'value' => $itemvalue
+        'value' => $itemvalue,
+        'selected' => $itemvalue == $this->get('processedValue'),
     );
 }
 
