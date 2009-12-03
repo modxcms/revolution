@@ -154,6 +154,7 @@ class modRequest {
             $resource = $this->modx->newObject($cachedResource['resourceClass']);
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
+                $this->modx->documentObject = & $resource->_fields;
                 if (isset($cachedResource['contentType'])) {
                     $contentType = $this->modx->newObject('modContentType');
                     $contentType->fromArray($cachedResource['contentType'], '', true, true, true);
