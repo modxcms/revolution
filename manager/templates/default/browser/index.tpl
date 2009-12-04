@@ -14,13 +14,9 @@
 <script src="{$_config.connectors_url}lang.js.php?topic=category,file,resource&action={$smarty.get.a}" type="text/javascript"></script>
 <script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a}" type="text/javascript"></script>
 
-
 {foreach from=$cssjs item=scr}
 {$scr}
 {/foreach}
-
-<script src="{$_config.manager_url}assets/modext/util/filetree/js/Ext.ux.form.BrowseButton.js" type="text/javascript"></script>
-<link href="{$_config.manager_url}assets/modext/util/filetree/css/index.css" rel="stylesheet" type="text/css" />
 
 {$rteincludes}
 <!--[if IE]>
@@ -34,16 +30,13 @@
 Ext.onReady(function() {
     Ext.QuickTips.init();
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext3/resources/images/default/s.gif';
-    
     var b = MODx.load({
        xtype: 'modx-browser'
        ,el: 'browser'
        ,hideFiles: true
        ,onSelect: {/literal}{$rtecallback}{literal}
-    });
-    
+    });    
     b.show();
-    
 });
 </script>
 {/literal}

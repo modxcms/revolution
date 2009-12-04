@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Consolidated filetree css/js into main css/js files
 - Fixed logic error that caused removing setup directory to fail
 - Combined some common JS files, cleaned up login page css, other optimizations
 - Consolidated filetree extension CSS, removed unnecessary filetree files
