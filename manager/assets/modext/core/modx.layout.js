@@ -18,6 +18,8 @@ MODx.Layout = function(config){
         ,width: '100%'
         ,autoHeight: true
         ,border: false
+        ,unstyled: true
+        ,monitorResize: true
         ,items: [{
             xtype: 'modx-tabs'
             ,id: 'modx-leftbar-tabs'
@@ -51,7 +53,7 @@ MODx.Layout = function(config){
                 ,hideFiles: false
             }]
         }]
-    });        
+    });
     MODx.Layout.superclass.constructor.call(this,config);
     this.config = config;
     
@@ -62,6 +64,18 @@ MODx.Layout = function(config){
     });
     this.loadKeys();
     this.fireEvent('afterLayout');
+    
+    this.resizer = new Ext.Resizable('modx-leftbar', {
+        handles: 'e'
+        ,minWidth: 20
+        ,minHeight: 100
+        ,pinned: false
+        ,animate: true
+    });
+    this.resizer.on('resize',function(r,w,h,e) {
+        Ext.getCmp('modx-leftbar-tabs').setWidth(w-10);
+    });
+    
 };
 Ext.extend(MODx.Layout,Ext.Panel,{
     

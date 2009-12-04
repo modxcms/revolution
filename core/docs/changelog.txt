@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added resizability to leftbar tree
+- Removed no-longer-necessary js file references in resource controllers
 - Consolidated filetree css/js into main css/js files
 - Fixed logic error that caused removing setup directory to fail
 - Combined some common JS files, cleaned up login page css, other optimizations
