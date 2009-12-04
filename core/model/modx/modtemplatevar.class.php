@@ -408,11 +408,27 @@ class modTemplateVar extends modElement {
                     break;
 
                 case 'SELECT': /* selects a record from the cms database */
+                    $dbtags = array();
                     $dbtags['DBASE'] = $this->xpdo->db->config['dbase'];
                     $dbtags['PREFIX'] = $this->xpdo->db->config['table_prefix'];
-                    foreach($dbtags as $key => $pValue)
+                    foreach($dbtags as $key => $pValue) {
                         $param = str_replace('[[+'.$key.']]', $pValue, $param);
-                    $output = $this->xpdo->db->query('SELECT '.$param);
+                    }
+                    $stmt = $this->xpdo->query('SELECT '.$param);
+                    if ($stmt && $stmt instanceof PDOStatement) {
+                        $data = '';
+                        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+                            $col = '';
+                            if (isset($row[1])) {
+                                $col = $row[0].'=='.$row[1];
+                            } else {
+                                $col = $row[0];
+                            }
+                            $data .= (!empty($data) ? '||' : '').$col;
+                        }
+                        $stmt->closeCursor();
+                    }
+                    $output = $data;
                     break;
 
                 case 'EVAL':        /* evaluates text as php codes return the results */
