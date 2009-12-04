@@ -65,17 +65,6 @@ MODx.FormPanel = function(config) {
     });
     this.on('ready',this.onReady);
     this.fireEvent('setup',config);
-    this.resizer = new Ext.Resizable(this.getEl(), {
-        handles: 'all'
-        ,minWidth: 20
-        ,minHeight: 100
-        ,pinned: false
-        ,animate: true
-        ,transparent: true
-    });
-    this.resizer.on('resize',function(r,w,h,e) {
-        Ext.getCmp('modx-leftbar-tabs').setWidth(w-10);
-    });
 };
 Ext.extend(MODx.FormPanel,Ext.FormPanel,{
 	isReady: false
