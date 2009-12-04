@@ -87,6 +87,8 @@ foreach ($packages as $key => $package) {
 
     /* setup menu */
     $not_installed = $package->get('installed') == null || $package->get('installed') == '0000-00-00 00:00:00';
+    $packageArray['iconaction'] = $not_installed ? 'icon-install' : 'icon-uninstall';
+    $packageArray['textaction'] = $not_installed ? $modx->lexicon('install') : $modx->lexicon('uninstall');
     $packageArray['menu'] = array();
     if ($package->get('provider') != 0) {
         $packageArray['menu'][] = array(

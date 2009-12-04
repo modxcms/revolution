@@ -30,16 +30,16 @@ MODx.Console = function(config) {
         ,height: 400
         ,width: 550
         ,refreshRate: 2
-        ,bodyStyle: 'background-color: white; padding: .75em; font-family: Courier'
-        ,cls: 'modx-window'
+        ,cls: 'modx-window modx-console'
         ,items: [{
-            id: 'console-header'
+            id: 'modx-console-header'
+            ,cls: 'modx-console-text'
             ,html: _('console_running')
             ,border: false
         },{
             xtype: 'modx-panel'
             ,id: 'modx-console-body'
-            ,cls: 'modx-console'            
+            ,cls: 'modx-console-text'            
         }]
         ,buttons: [{
             text: 'Download Output to File'

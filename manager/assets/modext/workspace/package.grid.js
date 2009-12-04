@@ -10,15 +10,30 @@ MODx.grid.Package = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
-            '<p style="padding: .7em 1em .3em;"><i>{readme}</i></p>'
+            '<p class="package-readme"><i>{readme}</i></p>'
         )
     });
+    this.action = new Ext.ux.grid.RowActions({
+         actions: [{
+             iconIndex: 'iconaction'
+            ,textIndex: 'textaction'
+        }]
+        ,widthSlope:125
+    });
+    this.action.on('action',function(g,r, a,ri) {
+        this.menu.record = r.data;        
+        switch (a) {
+            case 'icon-install': this.install(this.action,{}); break;
+            case 'icon-uninstall': this.uninstall(this.action,{}); break;
+        }
+    },this);
+    
     Ext.applyIf(config,{
         title: _('packages')
         ,id: 'modx-grid-package'
         ,url: MODx.config.connectors_url+'workspace/packages.php'
-        ,fields: ['signature','name','version','release','created','updated','installed','state','workspace','provider','disabled','source','manifest','attributes','readme','menu']
-        ,plugins: [this.exp]
+        ,fields: ['signature','name','version','release','created','updated','installed','state','workspace','provider','disabled','source','manifest','attributes','readme','menu','install','textaction','iconaction']
+        ,plugins: [this.action,this.exp]
         ,pageSize: 20
         ,columns: [this.exp,{
               header: _('name') ,dataIndex: 'name' }
@@ -30,7 +45,7 @@ MODx.grid.Package = function(config) {
                 ,dataIndex: 'provider'
                 ,editor: { xtype: 'modx-combo-provider' ,renderer: true }
                 ,editable: false
-            }]
+            },this.action]
         ,primaryKey: 'signature'
         ,paging: true
         ,autosave: true
