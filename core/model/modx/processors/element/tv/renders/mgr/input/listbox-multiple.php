@@ -5,7 +5,8 @@
  */
 $this->xpdo->lexicon->load('tv_widget');
 
-$this->set('value',explode("||",$this->get('value')));
+$value = explode("||",$this->get('processedValue'));
+
 $index_list = $this->parseInputOptions($this->processBindings($this->get('elements'),$this->get('name')));
 $opts = array();
 while (list($item, $itemvalue) = each ($index_list)) {
@@ -14,7 +15,7 @@ while (list($item, $itemvalue) = each ($index_list)) {
     $opts[] = array(
         'value' => htmlspecialchars($itemvalue),
         'text' => htmlspecialchars($item),
-        'selected' => in_array($itemvalue,$this->get('processedValue')),
+        'selected' => in_array($itemvalue,$value),
     );
 }
 
