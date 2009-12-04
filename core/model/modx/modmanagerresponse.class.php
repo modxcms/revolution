@@ -168,19 +168,14 @@ class modManagerResponse extends modResponse {
 
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.localization.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/util/utilities.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/util/switchbutton.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.form.handler.js');
 
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.component.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.actionbuttons.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.msg.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.panel.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.tabs.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.window.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.tree.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.combo.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.grid.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.grid.local.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.console.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.portal.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/modx.treedrop.js');

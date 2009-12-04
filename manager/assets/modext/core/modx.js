@@ -236,3 +236,128 @@ Ext.reg('modx-ajax',MODx.Ajax);
 
 
 MODx = new MODx();
+
+
+MODx.form.Handler = function(config) {
+    config = config || {};
+    MODx.form.Handler.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.form.Handler,Ext.Component,{
+    fields: []
+        
+    ,handle: function(o,s,r) {
+        r = Ext.decode(r.responseText);
+        if (!r.success) {
+            this.showError(r.message);
+            return false;
+        }
+        return true;
+    }
+    
+    ,highlightField: function(f) {
+        if (f.id !== undefined && f.id !== 'forEach' && f.id !== '') {
+            Ext.get(f.id).dom.style.border = '1px solid red';
+            var ef = Ext.get(f.id+'_error');
+            if (ef) { ef.innerHTML = f.msg; }
+            this.fields.push(f.id);
+        }
+    }
+    
+    ,unhighlightFields: function() {
+        for (var i=0;i<this.fields.length;i=i+1) {
+            Ext.get(this.fields[i]).dom.style.border = '';
+            var ef = Ext.get(this.fields[i]+'_error');
+            if (ef) { ef.innerHTML = ''; }
+        }
+        this.fields = [];
+    }
+    
+    ,errorJSON: function(e) {
+        if (e === '') { return this.showError(e); }
+        if (e.data && e.data !== null) {
+            for (var p=0;p<e.data.length;p=p+1) {
+                this.highlightField(e.data[p]);
+            }
+        }
+
+        this.showError(e.message);
+        return false;
+    }
+    
+    ,errorExt: function(r,frm) {
+        this.unhighlightFields();
+        if (r.errors !== null && frm) {
+            frm.markInvalid(r.errors);
+        }
+        if (r.message !== undefined && r.message !== '') { 
+            this.showError(r.message);
+        } else {
+            MODx.msg.hide();    
+        }
+        return false;
+    }
+    
+    ,showError: function(e) {
+        if (e === '') {
+            MODx.msg.hide();
+        } else {
+            MODx.msg.alert(_('error'),e,Ext.emptyFn);
+        }
+    }
+    
+    ,closeError: function() { MODx.msg.hide(); }
+});
+Ext.reg('modx-form-handler',MODx.form.Handler);
+
+MODx.Msg = function(config) {
+    config = config || {};
+    MODx.Msg.superclass.constructor.call(this,config);
+    this.addEvents({
+        'success': true
+        ,'failure': true
+        ,'cancel': true
+    });
+    Ext.MessageBox.minWidth = 200;
+};
+Ext.extend(MODx.Msg,Ext.Component,{
+    confirm: function(config) {
+        this.purgeListeners();
+        if (config.listeners) {
+            for (var i in config.listeners) {
+              var l = config.listeners[i];
+              this.addListener(i,l.fn,l.scope || this,l.options || {});
+            }
+        }
+        Ext.Msg.confirm(config.title || _('warning'),config.text,function(e) {
+            if (e == 'yes') {
+                MODx.Ajax.request({
+                    url: config.url
+                    ,params: config.params || {}
+                    ,method: 'post'
+                    ,scope: this
+                    ,listeners: {
+                        'success':{fn:function(r) {
+                            this.fireEvent('success',r);
+                        },scope:this}
+                        ,'failure':{fn:function(r) {
+                            return this.fireEvent('failure',r);
+                        },scope:this}
+                    }
+                });
+            } else {
+                this.fireEvent('cancel',config);
+            }
+        },this);
+    }
+    
+    ,getWindow: function() {
+        return Ext.Msg.getDialog();
+    }
+    
+    ,alert: function(title,text,fn,scope) {
+        fn = fn || Ext.emptyFn;
+        scope = scope || this;
+        Ext.Msg.alert(title,text,fn,scope);
+    }
+});
+Ext.reg('modx-msg',MODx.Msg);

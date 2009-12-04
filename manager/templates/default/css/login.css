@@ -16,22 +16,22 @@ body {
     font-size: 75%; /* 12px 62.5% for 10px*/
     height: 100%;
     margin-bottom: 1px; /* avoid jumping scrollbars */
-    background: #F4F4F4
-    }
+    background-color: #fffffa;
+}
 #mx_loginbox img, #mx_loginbox a img {
     border: 0 !important;
     text-decoration: none;
     padding: 0;
     margin: 0;
-    }
+}
 h1, h2, h3, h4, h5, h6, p, pre,
 blockquote, ul, ol, dl, address {
     margin: 0 0 .5em; /* Reset vertical margins on selected elements */
     padding: 0;
-    }
+}
 #mx_loginbox li, #mx_loginbox dd, #mx_loginbox blockquote {
     margin-left: 1em; /* Left margin only where needed */
-    }
+}
 
 /* Headers and Paragraphs:
 ---------------------------------------------------------------- */
