@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1480] Fixed bug with wrong permission reference in property set remove processor
+- Added emptyText to local and property grids
 - [#MODX-1477] Added emptyText config param with default 'No data to display' message to empty MODx grids
 - documentObject was not getting set from cached Resources.
 - Added inline help that loads official MODx documentation in a window
