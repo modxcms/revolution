@@ -4,6 +4,9 @@
  *
  * @package setup
  */
+if ($install->settings->get('cleanup')) {
+    $install->removeSetupDirectory();
+}
 $managerUrl= $install->getManagerLoginUrl();
 header('Location: ' . $managerUrl);
 exit();

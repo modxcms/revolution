@@ -3,12 +3,10 @@
  * @package setup
  */
 if (!empty($_POST['proceed'])) {
+    $install->settings->store($_POST);
     /* validate database settings */
     $errors= $install->cleanup($_POST);
 
-    if (isset($_POST['cleanup']) && $_POST['cleanup']) {
-        $install->removeSetupDirectory($_POST);
-    }
     if (!empty ($errors)) {
         $this->parser->assign('errors',implode('', $errors));
     } else {
