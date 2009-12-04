@@ -465,14 +465,17 @@ class modTemplateVar extends modElement {
                     break;
 
                 case 'DIRECTORY':
-                    $files = array();
                     $path = $this->xpdo->getOption('base_path').$param;
-                    if(substr($path,-1,1)!='/') { $path.='/'; }
-                    if(!is_dir($path)) { die($path); break;}
-                    $dir = dir($path);
-                    while(($file = $dir->read())!==false) {
-                        if(substr($file,0,1)!='.') {
-                            $files[] = "{$file}=={$param}{$file}";
+                    if (substr($path,-1,1) != '/') { $path .= '/'; }
+                    if (!is_dir($path)) { break; }
+
+                    $files = array();
+                    $invalid = array('.','..','.svn','.DS_Store');
+                    foreach (new DirectoryIterator($path) as $file) {
+                        if (!$file->isReadable()) continue;
+                        $basename = $file->getFilename();
+                        if(!in_array($basename,$invalid)) {
+                            $files[] = "{$basename}=={$param}{$basename}";
                         }
                     }
                     asort($files);

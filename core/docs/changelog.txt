@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Improved code in @DIRECTORY binding to be more efficient and take advantage of DirectoryIterator
 - [#MODX-1478] Fixed @SELECT binding
 - [#MODX-1474] Fixed bug with multiple list-boxes
 - [#MODX-1476] Fixed bug with TV default values with non-inherit tvs, also bug with radios/checkboxes and set to default
