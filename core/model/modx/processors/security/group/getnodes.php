@@ -92,7 +92,7 @@ if ($usergroup) {
 
 		$list[] = array(
 			'text' => $user->get('username'),
-			'id' => 'n_user_'.$user->get('id'),
+			'id' => 'n_user_'.$user->get('id').'_'.$usergroup->get('id'),
 			'leaf' => 1,
 			'type' => 'user',
 			'cls' => 'icon-user',
