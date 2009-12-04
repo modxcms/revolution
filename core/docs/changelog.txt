@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1476] Fixed bug with TV default values with non-inherit tvs, also bug with radios/checkboxes and set to default
 - [#MODX-1479] Fixed bug with duplicate DOM ids in User Group tree
 - [#MODX-1480] Fixed bug with wrong permission reference in property set remove processor
 - Added emptyText to local and property grids

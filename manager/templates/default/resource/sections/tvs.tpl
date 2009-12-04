@@ -60,7 +60,7 @@ Ext.onReady(function() {
         }
         var c = Ext.getCmp('tv'+id);
         if (c) {
-            if (c.xtype == 'checkboxgroup') {
+            if (c.xtype == 'checkboxgroup' || c.xtype == 'radiogroup') {
                 var cbs = d.dom.value.split(',');                                
                 for (var i=0;i<c.items.length;i++) {
                     if (c.items.items[i]) {
