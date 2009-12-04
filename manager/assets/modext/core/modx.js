@@ -157,7 +157,7 @@ Ext.extend(MODx,Ext.Component,{
         return c;
     }
     
-    ,loadHelpPane: function() {
+    ,loadHelpPane: function(b) {
         var url = MODx.config.help_url;
         if (!url) return false;
         MODx.helpWindow = new Ext.Window({
@@ -174,7 +174,7 @@ Ext.extend(MODx,Ext.Component,{
                 }
             }
         });
-        MODx.helpWindow.show();
+        MODx.helpWindow.show(b);
     }
 });
 Ext.reg('modx',MODx);

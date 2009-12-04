@@ -31,6 +31,7 @@ MODx.grid.Grid = function(config) {
             ,autoFill: true
 			,showPreview: true
             ,scrollOffset: 0
+            ,emptyText: config.emptyText || _('ext_emptymsg')
 		}
 	});
 	if (config.paging) {
