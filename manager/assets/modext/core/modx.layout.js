@@ -33,10 +33,24 @@ MODx.Layout = function(config){
             ,deferredRender: false
             ,activeTab: 0
             ,stateful: true
-            ,stateId: 'tabpanel'
-            ,stateEvents: ['tabchange']
+            ,stateId: 'modx-leftbar-tabs'
+            ,stateEvents: ['tabchange','resize']
             ,getState:function() {
-                return {activeTab:this.items.indexOf(this.getActiveTab())};
+                return {
+                    activeTab:this.items.indexOf(this.getActiveTab())
+                    ,width: this.getWidth()
+                };
+            }
+            ,listeners: {
+                'staterestore': {fn:function(c,s) {
+                    var w = s.width;
+                    var wi = Ext.get('modx-body-tag').getWidth();
+                    Ext.get('modx-leftbar').setWidth(w);
+                    Ext.getCmp('modx-leftbar-tabs').setWidth(w);
+                    var ct = Ext.get('modx-content');
+                    ct.setWidth((wi-w)-30);
+                    ct.setStyle('float','left');
+                },scope:this}
             }
             ,items: [{
                 xtype: 'modx-tree-resource'
@@ -74,10 +88,14 @@ MODx.Layout = function(config){
     });
     this.resizer.on('resize',function(r,w,h,e) {
         var wi = Ext.get('modx-body-tag').getWidth();
-        Ext.getCmp('modx-leftbar-tabs').setWidth(w-10);        
+        Ext.get('modx-leftbar').setWidth(w);
+        var tbs = Ext.getCmp('modx-leftbar-tabs');
+        tbs.setWidth(w);
+        tbs.fireEvent('resize');
         var ct = Ext.get('modx-content');
         ct.setWidth((wi-w)-20);
-        ct.setStyle('float','left');        
+        ct.setStyle('float','left');
+        Ext.getCmp('modx-layout').fireEvent('resize');
     });
     
 };

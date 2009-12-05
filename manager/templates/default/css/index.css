@@ -32,6 +32,7 @@ hr {
     padding: .5%;
     float: left;
 }
+#modx-leftbar { width: 24%; }
 
 #modx-container {
     height: 100%;
