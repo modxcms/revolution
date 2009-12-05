@@ -73,7 +73,11 @@ MODx.Layout = function(config){
         ,animate: true
     });
     this.resizer.on('resize',function(r,w,h,e) {
-        Ext.getCmp('modx-leftbar-tabs').setWidth(w-10);
+        var wi = Ext.get('modx-body-tag').getWidth();
+        Ext.getCmp('modx-leftbar-tabs').setWidth(w-10);        
+        var ct = Ext.get('modx-content');
+        ct.setWidth((wi-w)-20);
+        ct.setStyle('float','left');        
     });
     
 };
