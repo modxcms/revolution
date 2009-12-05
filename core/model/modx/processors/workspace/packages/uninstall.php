@@ -12,15 +12,15 @@ $modx->lexicon->load('workspace');
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 if (empty($_REQUEST['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
-$modx->log(MODX_LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_find',array('signature' => $_REQUEST['signature'])));
+$modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_find',array('signature' => $_REQUEST['signature'])));
 $package = $modx->getObject('transport.modTransportPackage', $_REQUEST['signature']);
-if ($package == null) {
+if (empty($package)) {
     return $modx->error->failure($modx->lexicon('package_err_nfs',array(
         'signature' =>  $_REQUEST['signature'],
     )));
 }
 
-$modx->log(MODX_LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_prep'));
+$modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_prep'));
 
 /* uninstall package */
 $options = array(
@@ -30,8 +30,9 @@ if ($package->uninstall($options) == false) {
     return $modx->error->failure(sprintf($modx->lexicon('package_err_uninstall'),$package->getPrimaryKey()));
 }
 
-
-$modx->log(MODX_LOG_LEVEL_WARN,$modx->lexicon('package_uninstall_info_success',array('signature' => $package->get('signature'))));
+$modx->log(modX::LOG_LEVEL_WARN,$modx->lexicon('package_uninstall_info_success',array('signature' => $package->get('signature'))));
+sleep(2);
+$modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 
 /* empty cache */
 $cacheManager= $modx->getCacheManager();

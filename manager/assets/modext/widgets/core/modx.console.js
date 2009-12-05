@@ -12,14 +12,6 @@ MODx.Console = function(config) {
 	Ext.Updater.defaults.showLoadIndicator = false;
 	Ext.applyIf(config,{
         title: _('console')
-	    ,url: MODx.config.connectors_url+'system/registry/register.php'
-	    ,baseParams: {
-	    	action: 'read'
-	    	,register: config.register || ''
-	    	,topic: config.topic || ''
-	    	,format: 'html_log'
-	    	,remove_read: 0
-	    }
 	    ,modal: Ext.isIE ? false : true
         ,shadow: true
         ,resizable: false
@@ -28,7 +20,7 @@ MODx.Console = function(config) {
         ,maximizable: true
         ,autoScroll: true
         ,height: 400
-        ,width: 550
+        ,width: 650
         ,refreshRate: 2
         ,cls: 'modx-window modx-console'
         ,items: [{
@@ -37,9 +29,9 @@ MODx.Console = function(config) {
             ,html: _('console_running')
             ,border: false
         },{
-            xtype: 'modx-panel'
+            xtype: 'panel'
             ,id: 'modx-console-body'
-            ,cls: 'modx-console-text'            
+            ,cls: 'x-form-text modx-console-text'
         }]
         ,buttons: [{
             text: 'Download Output to File'
@@ -60,7 +52,10 @@ MODx.Console = function(config) {
         ,'complete': true
     });
     this.on('show',this.init,this);
-    this.on('complete',this.complete,this);
+    this.on('hide',function() {
+        Ext.getCmp('modx-console-body').el.update('');
+    });
+    
 };
 Ext.extend(MODx.Console,Ext.Window,{
     mgr: null
@@ -68,12 +63,35 @@ Ext.extend(MODx.Console,Ext.Window,{
     
     ,init: function() {
         Ext.Msg.hide();
-        Ext.get('modx-console-body').update('');
-        if (this.running !== true) {
-            this.mgr = new Ext.Updater('modx-console-body');
-        }
-        this.mgr.startAutoRefresh(this.config.refreshRate,this.config.url,this.config.baseParams || {},this.renderMsg,true);
-        this.running = true;
+        Ext.getCmp('modx-console-ok').setDisabled(true);
+        Ext.getCmp('modx-console-body').el.dom.innerHTML = '';
+        
+        this.provider = new Ext.direct.PollingProvider({
+            type:'polling'
+            ,url: MODx.config.connectors_url+'system/index.php'
+            ,interval: 1000
+            ,baseParams: {
+                action: 'console'
+                ,register: this.config.register || ''
+                ,topic: this.config.topic || ''
+                ,show_filename: this.config.show_filename || 0
+                ,format: this.config.format || 'html_log'
+            }
+        });
+        Ext.Direct.addProvider(this.provider);
+        Ext.Direct.on('message', function(e,p) {
+            if (e.data.search('COMPLETED') != -1) {
+                this.provider.disconnect();
+                this.fireEvent('complete');
+                Ext.getCmp('modx-console-ok').setDisabled(false);
+            } else {
+                var out = Ext.getCmp('modx-console-body');
+                out.el.insertHtml('beforeEnd',e.data);
+                e.data = '';
+                out.el.scroll('b', out.el.getHeight(), true);
+            }
+            delete e;
+        },this);
     }
     
     ,download: function() {
@@ -91,49 +109,16 @@ Ext.extend(MODx.Console,Ext.Window,{
             }            
         });
     }
-    
-    ,renderMsg: function(el,s,r,o) {
-        r = Ext.decode(r.responseText);
-        el.update(r.message);
-    }
-    
+        
     ,setRegister: function(register,topic) {
-    	this.config.baseParams.register = register;
-        this.config.baseParams.topic = topic;
+    	this.config.register = register;
+        this.config.topic = topic;
     }
     
     ,hideConsole: function() {
-        Ext.getCmp('modx-console-ok').setDisabled(true);
-        this.shutdown();
+        this.provider.disconnect();
+        this.fireEvent('shutdown');
         this.hide();
-    }
-    
-    ,complete: function() {
-    	Ext.getCmp('modx-console-ok').setDisabled(false);
-        if (this.mgr) {
-            this.mgr.refresh();
-            this.mgr.stopAutoRefresh();
-        }
-    }
-    
-    ,shutdown: function() {
-    	MODx.Ajax.request({
-    	    url: this.config.url
-    	    ,params: {
-                action: 'read'
-                ,register: this.config.baseParams.register || ''
-                ,topic: this.config.baseParams.topic || ''
-                ,format: 'html_log'
-                ,remove_read: 1
-            }
-            ,listeners: {
-            	'success': {fn:function(r) {                    
-                    Ext.getCmp('modx-console-body').getEl().update(r.message);
-                    this.mgr.stopAutoRefresh();
-                    this.fireEvent('shutdown',r);
-        	    },scope:this}
-            }
-    	});
     }
 });
 Ext.reg('modx-console',MODx.Console);

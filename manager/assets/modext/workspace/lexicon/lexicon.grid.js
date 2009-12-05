@@ -213,6 +213,10 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         } else {
             this.console.setRegister('mgr',topic);
         }
+        
+        this.console.on('complete',function(){
+            this.refresh();
+        },this);
         this.console.show(Ext.getBody());
     	
     	MODx.Ajax.request({
@@ -220,8 +224,8 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     	   ,params: { action: 'reloadFromBase' ,register: 'mgr' ,topic: topic }
     	   ,listeners: {
     	       'success': {fn:function(r) {
-        	       this.console.fireEvent('complete');
-                   this.refresh();
+        	       //this.console.fireEvent('complete');
+                   //this.refresh();
         	   },scope:this}
 	       }
     	});

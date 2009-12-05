@@ -183,13 +183,13 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             ,params: va
             ,listeners: {
                 'success': {fn:function(r) {
-                    this.console.fireEvent('complete');
+                    //this.console.fireEvent('complete');
                     Ext.Msg.hide();
                     this.refresh();
-                    parent.Ext.getCmp('modx-layout').refreshTrees();
+                    Ext.getCmp('modx-layout').refreshTrees();
                 },scope:this}
                 ,'failure': {fn:function(r) {
-                    this.console.fireEvent('complete');
+                    //this.console.fireEvent('complete');
                     Ext.Msg.hide();
                     this.refresh();
                 },scope:this}
@@ -237,13 +237,13 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                 'success': {fn:function() {
                     Ext.getCmp('modx-window-package-installer').hide();
                     this.refresh();
-                    this.console.fireEvent('complete');
-                    parent.Ext.getCmp('modx-layout').refreshTrees();
+                    //this.console.fireEvent('complete');
+                    Ext.getCmp('modx-layout').refreshTrees();
                 },scope:this}
                 ,'failure': {fn:function() {
                     Ext.Msg.hide();
                     this.refresh();
-                    this.console.fireEvent('complete');
+                    //this.console.fireEvent('complete');
                 },scope:this}
             }
         });

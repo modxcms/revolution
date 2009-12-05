@@ -1,6 +1,6 @@
 <?php
 /**
- * Read from the registry
+ * Read from the registry to console
  *
  * @param string $register The register to read from
  * @param string $topic The topic in the register to read from
@@ -34,13 +34,14 @@ $register_class = isset($_POST['register_class']) ? trim($_POST['register_class'
 $topic = trim($_POST['topic']);
 $format = isset($_POST['format']) ? trim($_POST['format']) : 'json';
 
-$options = array();
-$options['poll_limit'] = (isset($_POST['poll_limit']) && intval($_POST['poll_limit'])) ? intval($_POST['poll_limit']) : 1;
-$options['poll_interval'] = (isset($_POST['poll_interval']) && intval($_POST['poll_interval'])) ? intval($_POST['poll_interval']) : 1;
-$options['time_limit'] = (isset($_POST['time_limit']) && intval($_POST['time_limit'])) ? intval($_POST['time_limit']) : 10;
-$options['msg_limit'] = (isset($_POST['message_limit']) && intval($_POST['message_limit'])) ? intval($_POST['message_limit']) : 200;
-$options['remove_read'] = isset($_POST['remove_read']) ? (boolean) $_POST['remove_read'] : true;
-$options['show_filename'] = (isset($_POST['show_filename']) && !empty($_POST['show_filename'])) ? true : false;
+$options = array(
+    'poll_limit' => $modx->getOption('poll_limit',$_POST,1),
+    'poll_interval' => $modx->getOption('poll_interval',$_POST,1),
+    'time_limit' => $modx->getOption('time_limit',$_POST,10),
+    'msg_limit' => $modx->getOption('message_limit',$_POST,200),
+    'show_filename' => $modx->getOption('show_filename',$_POST,true),
+    'remove_read' => true,
+);
 
 $modx->getService('registry', 'registry.modRegistry');
 $modx->registry->addRegister($register, $register_class, array('directory' => $register));
@@ -49,24 +50,31 @@ if (!$modx->registry->$register->connect()) return $modx->error->failure($modx->
 $modx->registry->$register->subscribe($topic);
 
 $msgs = $modx->registry->$register->read($options);
+
+$message = '';
+
 if (!empty($msgs)) {
-    if ($format == 'html_log') {
-        $message = '';
-        foreach ($msgs as $msgKey => $msg) {
-            if (!empty ($msg['def'])) $msg['def']= $msg['def'].' ';
-            if (!empty ($msg['file'])) $msg['file']= '@ '.$msg['file'].' ';
-            if (!empty ($msg['line'])) $msg['line']= 'line '.$msg['line'].' ';
-            $message .= '<span class="' . strtolower($msg['level']) . '">';
-            if ($options['show_filename']) {
-                $message .= '<small>(' . trim($msg['def'] . $msg['file'] . $msg['line']) . ')</small>';
-            }
-            $message .= $msg['msg']."</span><br />\n";
+    $message = array(
+        'type' => 'event',
+        'name' => 'message',
+        'data' => '',
+    );
+    foreach ($msgs as $msgKey => $msg) {
+        if ($msg['msg'] == 'COMPLETED') {
+            $message['data'] = 'COMPLETED';
+            continue;
         }
-        if (!empty($message)) {
-            return $modx->error->success($message);
+        if (!empty ($msg['def'])) $msg['def']= $msg['def'].' ';
+        if (!empty ($msg['file'])) $msg['file']= '@ '.$msg['file'].' ';
+        if (!empty ($msg['line'])) $msg['line']= 'line '.$msg['line'].' ';
+        $message['data'] .= '<span class="' . strtolower($msg['level']) . '">';
+        if ($options['show_filename']) {
+            $message['data'] .= '<small>(' . trim($msg['def'] . $msg['file'] . $msg['line']) . ')</small>';
         }
-    } elseif (!empty($msgs)) {
-        return $modx->error->success($modx->toJSON($msgs));
+        $message['data'] .= $msg['msg']."</span><br />\n";
+    }
+    if (!empty($message)) {
+        return $modx->toJSON($message);
     }
 }
-return $modx->error->success('');
+return $modx->toJSON(array());

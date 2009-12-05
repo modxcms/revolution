@@ -11,12 +11,15 @@ $modx->lexicon->load('workspace');
 
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_install_info_start',array('signature' => $_REQUEST['signature'] )));
+$modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('package_install_info_start',array('signature' => $_REQUEST['signature'] )));
 
 /* find package */
 if (empty($_REQUEST['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
 $package= $modx->getObject('transport.modTransportPackage',$_REQUEST['signature']);
-if ($package == null) return $modx->error->failure(sprintf($modx->lexicon('package_err_nfs'),$_REQUEST['signature']));
+if ($package == null) {
+    $modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
+    return $modx->error->failure(sprintf($modx->lexicon('package_err_nfs'),$_REQUEST['signature']));
+}
 
 $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_install_info_found'));
 
@@ -29,11 +32,17 @@ $cacheManager->clearCache();
 
 if (!$installed) {
     $msg = $modx->lexicon('package_err_install',array('signature' => $package->get('signature')));
-    $modx->log(xPDO::LOG_LEVEL_ERROR,$msg);
+    $modx->log(modX::LOG_LEVEL_ERROR,$msg);
+    sleep(2);
+    $modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
     return $modx->error->failure($msg);
 } else {
     $msg = $modx->lexicon('package_install_info_success',array('signature' => $package->get('signature')));
-    $modx->log(xPDO::LOG_LEVEL_WARN,$msg);
+    $modx->log(modX::LOG_LEVEL_WARN,$msg);
+    sleep(2);
+    $modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
     return $modx->error->success($msg);
 }
+sleep(1);
+$modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 return $modx->error->failure($modx->lexicon('package_err_install_gen'));

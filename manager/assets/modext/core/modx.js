@@ -78,6 +78,7 @@ Ext.extend(MODx,Ext.Component,{
                xtype: 'modx-console'
                ,register: 'mgr'
                ,topic: topic
+               ,show_filename: 0
                ,listeners: {
                     'shutdown': {fn:function() {
                         if (this.fireEvent('afterClearCache')) {

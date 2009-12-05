@@ -299,17 +299,6 @@ textarea.x-form-field {
     float: right;
     font-style: italic;
 }
-
-/* console */
-.modx-console .debug { color: gray; }
-.modx-console .success { color: green; }
-.modx-console .warn { color: blue; }
-.modx-console .error { color: red; }
-.modx-console-text { 
-    background-color: white;
-    padding: .75em;
-    font: 11px Courier;
-}
     
 /* tables */
 table.classy {
@@ -743,6 +732,17 @@ input.x-static-text-field {
     -moz-opacity: 1;
     opacity: 1;
     filter: alpha(opacity=100);
+}
+
+/* console */
+.modx-console .debug { color: gray; }
+.modx-console .success { color: green; }
+.modx-console .warn { color: blue; }
+.modx-console .error { color: red; }
+.modx-console-text { 
+    background-color: white;
+    padding: .75em;
+    font: 11px Courier !important;
 }
 
 /* portlets */

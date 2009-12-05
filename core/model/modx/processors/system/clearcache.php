@@ -37,17 +37,18 @@ $modx->invokeEvent('OnSiteRefresh',array(
 $o = '';
 $num_rows_pub = isset($results['publishing']['published']) ? $results['publishing']['published'] : 0;
 $num_rows_unpub = isset($results['publishing']['unpublished']) ? $results['publishing']['unpublished'] : 0;
-$o .= $modx->lexicon('refresh_published',array( 'num' => $num_rows_pub )).'<br />';
-$o .= $modx->lexicon('refresh_unpublished',array( 'num' => $num_rows_unpub )).'<hr />';
-$o .= $modx->lexicon('cache_files_deleted');
+
+sleep(1);
+$modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('refresh_published',array( 'num' => $num_rows_pub )));
+$modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('refresh_unpublished',array( 'num' => $num_rows_unpub )).'<hr />');
+$modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('cache_files_deleted'));
 if (count($results['deleted_files_count']) > 0) {
-    $o .= '<ul>';
     foreach ($results['deleted_files'] as $file) {
-        $o .= '<li>'.$file.'</li>';
+        $modx->log(modX::LOG_LEVEL_INFO,$file);
     }
-    $o .= '</ul>';
 }
 
-$modx->log(MODX_LOG_LEVEL_INFO,$o);
+sleep(1);
+$modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 
 return $modx->error->success($o);

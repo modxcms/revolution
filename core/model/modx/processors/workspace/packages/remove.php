@@ -55,4 +55,6 @@ if (!file_exists($f)) {
 }
 
 $modx->log(modX::LOG_LEVEL_WARN,$modx->lexicon('package_remove_info_success'));
+sleep(2);
+$modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 return $modx->error->success();
