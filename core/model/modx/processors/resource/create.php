@@ -194,7 +194,7 @@ if (!empty($_POST['template']) && ($template = $modx->getObject('modTemplate', $
                     while (list($featureValue, $featureItem) = each($value)) {
                         $featureInsert[count($featureInsert)] = $featureItem;
                     }
-                    $tmplvar = implode('||',$featureInsert);
+                    $value = implode('||',$featureInsert);
                 }
                 break;
         }
