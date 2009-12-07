@@ -36,7 +36,7 @@ class modTranslate095 {
     }
 
     function getParser() {
-        if (!is_object($this->parser) || !is_a($this->parser, 'modParser095')) {
+        if (!is_object($this->parser) || !($this->parser instanceof modParser095)) {
             $this->parser= & $this->modx->getService('parser095', 'modParser095');
         }
         return $this->parser;

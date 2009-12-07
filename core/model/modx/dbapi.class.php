@@ -10,18 +10,15 @@
  * @package modx
  */
 class DBAPI {
-    var $xpdo;
-    var $conn;
-    var $config;
-    var $isConnected;
-    var $affectedRows= false;
+    public $xpdo;
+    public $conn;
+    public $config;
+    public $isConnected;
+    public $affectedRows= false;
 
     /**
-     * @name:  DBAPI
+     * DBAPI constructor
      */
-    function DBAPI($host= '', $dbase= '', $uid= '', $pwd= '', $pre= '', $dbtype= '') {
-        $this->__construct($host, $dbase, $uid, $pwd, $pre);
-    }
     function __construct($host= '', $dbase= '', $uid= '', $pwd= '', $pre= '', $dbtype= '') {
         if (!$host || !$dbase || !$uid || !$pwd) {
             global $modx;
@@ -49,11 +46,12 @@ class DBAPI {
     }
 
     /**
-     * @name:  initDataTypes
-     * @desc:  called in the constructor to set up arrays containing the types
-     *         of database fields that can be used with specific PHP types
+     * Called in the constructor to set up arrays containing the types of
+     * database fields that can be used with specific PHP types
+     *
+     * @access public
      */
-    function initDataTypes() {
+    public function initDataTypes() {
         $this->dataTypes['numeric']= array (
             'INT',
             'INTEGER',
@@ -96,12 +94,14 @@ class DBAPI {
     }
 
     /**
-     * @name:  connect
+     * Connect to database.
+     *
+     * @access public
      */
-    function connect($host= '', $dbase= '', $uid= '', $pwd= '', $persist= 0) {
+    public function connect($host= '', $dbase= '', $uid= '', $pwd= '', $persist= 0) {
         $tstart= $this->xpdo->getMicroTime();
         if (!$this->conn= $this->xpdo->connect(array (PDO::ATTR_PERSISTENT => $persist ? true : false))) {
-            $modx->messageQuit("Failed to create the database connection!");
+            $this->xpdo->log(xPDO::LOG_LEVEL_FATAL,"Failed to create the database connection!");
             exit;
         } else {
             $tend= $this->xpdo->getMicroTime();
@@ -112,24 +112,34 @@ class DBAPI {
     }
 
     /**
-     * @name:  disconnect
+     * Disconnect from the DB
+     *
+     * @access public
      */
-    function disconnect() {
+    public function disconnect() {
         return true;
     }
 
-    function escape($s) {
+    /**
+     * Escape field data
+     *
+     * @access public
+     * @param string $s
+     * @return string
+     */
+    public function escape($s) {
         $s= $this->xpdo->quote($s, PDO::PARAM_STR);
         $s= substr($s, 1, strlen($s) - 2);
         return $s;
     }
 
     /**
-     * @name:  query
-     * @desc:  Mainly for internal use.
-     * Developers should use select, update, insert, delete where possible
+     * Mainly for internal use. Developers should use select, update, insert,
+     * delete where possible
+     *
+     * @access public
      */
-    function query($sql) {
+    public function query($sql) {
         if (empty ($this->conn) || !($this->conn instanceof PDO)) {
             $this->connect();
         }
@@ -147,10 +157,15 @@ class DBAPI {
     }
 
     /**
-     * @name:  delete
+     * Delete a record from the DB
      *
+     * @access public
+     * @param string $from
+     * @param string $where
+     * @param string $fields
+     * @return boolean
      */
-    function delete($from, $where= "",$fields='') {
+    public function delete($from, $where= "",$fields='') {
         if (!$from)
             return false;
         else {
@@ -161,10 +176,17 @@ class DBAPI {
     }
 
     /**
-     * @name:  select
+     * Select a record from the DB
      *
+     * @access public
+     * @param string $fields
+     * @param string $from
+     * @param string $where
+     * @param string $orderby
+     * @param string $limit
+     * @return mixed
      */
-    function select($fields= "*", $from= "", $where= "", $orderby= "", $limit= "") {
+    public function select($fields= "*", $from= "", $where= "", $orderby= "", $limit= "") {
         if (!$from)
             return false;
         else {
@@ -177,10 +199,15 @@ class DBAPI {
     }
 
     /**
-     * @name:  update
+     * Update a record in the DB
      *
+     * @access public
+     * @param mixed $fields
+     * @param string $table
+     * @param string $where
+     * @return mixed
      */
-    function update($fields, $table, $where= "") {
+    public function update($fields, $table, $where= "") {
         if (!$table)
             return false;
         else {
@@ -201,10 +228,18 @@ class DBAPI {
     }
 
     /**
-     * @name:  insert
-     * @desc:  returns either last id inserted or the result from the query
+     * Insert a record into the DB.
+     *
+     * @access public
+     * @param mixed $fields
+     * @param string $intotable
+     * @param string $fromfields
+     * @param string $fromtable
+     * @param string $where
+     * @param string $limit
+     * @return mixed Either last id inserted or the result from the query
      */
-    function insert($fields, $intotable, $fromfields= "*", $fromtable= "", $where= "", $limit= "") {
+    public function insert($fields, $intotable, $fromfields= "*", $fromtable= "", $where= "", $limit= "") {
         if (!$intotable)
             return false;
         else {
@@ -227,7 +262,14 @@ class DBAPI {
         }
     }
 
-    function exec($sql) {
+    /**
+     * Execute an SQL query
+     *
+     * @access public
+     * @param string $sql
+     * @return boolean Result of query.
+     */
+    public function exec($sql) {
         if (empty ($this->conn) || !($this->conn instanceof PDO)) {
             $this->connect();
         }
@@ -245,34 +287,44 @@ class DBAPI {
     }
 
     /**
-     * @name:  getInsertId
+     * Get the last INSERTed primary key
      *
+     * @access public
+     * @param mixed $conn
+     * @return mixed
      */
-    function getInsertId($conn= null) {
+    public function getInsertId($conn= null) {
         return $this->xpdo->lastInsertId();
     }
 
     /**
-     * @name:  getAffectedRows
+     * Get affected rows by last query
      *
+     * @access public
+     * @param mixed $conn
+     * @return integer
      */
-    function getAffectedRows($conn= null) {
+    public function getAffectedRows($conn= null) {
         return $this->affectedRows;
     }
 
     /**
-     * @name:  getLastError
+     * Get last error from DB
      *
+     * @access public
+     * @return string
      */
-    function getLastError() {
+    public function getLastError() {
         return $this->xpdo->errorInfo();
     }
 
     /**
-     * @name:  getRecordCount
+     * Get record count from last query
      *
+     * @access public
+     * @return integer
      */
-    function getRecordCount($ds) {
+    public function getRecordCount($ds) {
         $count= false;
         if (is_object($ds)) {
             return $ds->rowCount();
@@ -287,12 +339,14 @@ class DBAPI {
     }
 
     /**
-     * @name:  getRow
-     * @desc:  returns an array of column values
-     * @param: $dsq - dataset
+     * Gets a row of values from a result set
      *
+     * @access public
+     * @param mixed $ds
+     * @param string $mode
+     * @return array The row of column name - value pairs
      */
-    function getRow($ds, $mode= 'assoc') {
+    public function getRow($ds, $mode= 'assoc') {
         if (is_resource($ds)) {
             if ($ds) {
                 if ($mode == 'assoc') {
@@ -345,11 +399,14 @@ class DBAPI {
     }
 
     /**
-     * @name:  getColumn
-     * @desc:  returns an array of the values found on colun $name
-     * @param: $dsq - dataset or query string
+     * Get an array of values for a column
+     *
+     * @access public
+     * @param string $name
+     * @param mixed $dsq
+     * @return array
      */
-    function getColumn($name, $dsq) {
+    public function getColumn($name, $dsq) {
         if (!is_resource($dsq))
             $dsq= $this->query($dsq);
         if ($dsq) {
@@ -362,11 +419,13 @@ class DBAPI {
     }
 
     /**
-     * @name:  getColumnNames
-     * @desc:  returns an array containing the column $name
-     * @param: $dsq - dataset or query string
+     * Returns an array of all the column names
+     *
+     * @access public
+     * @param mixed $dsq
+     * @return array
      */
-    function getColumnNames($dsq) {
+    public function getColumnNames($dsq) {
         if (!is_resource($dsq))
             $dsq= $this->query($dsq);
         if ($dsq) {
@@ -380,11 +439,13 @@ class DBAPI {
     }
 
     /**
-     * @name:  getValue
-     * @desc:  returns the value from the first column in the set
-     * @param: $dsq - dataset or query string
+     * Returns the value from the first column in the set
+     *
+     * @access public
+     * @param mixed $dsq Dataset or query string
+     * @return mixed
      */
-    function getValue($dsq) {
+    public function getValue($dsq) {
         if (!is_resource($dsq))
             $dsq= $this->query($dsq);
         if ($dsq) {
@@ -394,10 +455,13 @@ class DBAPI {
     }
 
     /**
-     * @name:  getXML
-     * @desc:  returns an XML formay of the dataset $ds
+     * Returns an XML format of the dataset $ds
+     *
+     * @access public
+     * @param mixed $dsq The dataset or query string
+     * @return string
      */
-    function getXML($dsq) {
+    public function getXML($dsq) {
         if (!is_resource($dsq))
             $dsq= $this->query($dsq);
         $xmldata= "<xml>\r\n<recordset>\r\n";
@@ -415,12 +479,13 @@ class DBAPI {
     }
 
     /**
-     * @name:  getTableMetaData
-     * @desc:  returns an array of MySQL structure detail for each column of a
-     *         table
-     * @param: $table: the full name of the database table
+     * Returns an array of MySQL structure detail for each column of a table
+     *
+     * @access public
+     * @param string $table the full name of the database table
+     * @return array
      */
-    function getTableMetaData($table) {
+    public function getTableMetaData($table) {
         $metadata= false;
         if (!empty ($table)) {
             $sql= "SHOW FIELDS FROM $table";
@@ -435,14 +500,16 @@ class DBAPI {
     }
 
     /**
-     * @name:  prepareDate
-     * @desc:  prepares a date in the proper format for specific database types
-     *         given a UNIX timestamp
-     * @param: $timestamp: a UNIX timestamp
-     * @param: $fieldType: the type of field to format the date for
-     *         (in MySQL, you have DATE, TIME, YEAR, and DATETIME)
+     * Prepares a date in the proper format for specific database types
+     * given a UNIX timestamp
+     *
+     * @acecss public
+     * @param $timestamp A UNIX timestamp
+     * @param $fieldType The type of field to format the date for (in MySQL, you
+     * have DATE, TIME, YEAR, and DATETIME)
+     * @return string
      */
-    function prepareDate($timestamp, $fieldType= 'DATETIME') {
+    public function prepareDate($timestamp, $fieldType= 'DATETIME') {
         $date= '';
         if (!$timestamp === false && $timestamp > 0) {
             switch ($fieldType) {
@@ -464,31 +531,16 @@ class DBAPI {
     }
 
     /**
-     * @name:  getHTMLGrid
-     * @param: $params: Data grid parameters
-     *         columnHeaderClass
-     *         tableClass
-     *         itemClass
-     *         altItemClass
-     *         columnHeaderStyle
-     *         tableStyle
-     *         itemStyle
-     *         altItemStyle
-     *         columns
-     *         fields
-     *         colWidths
-     *         colAligns
-     *         colColors
-     *         colTypes
-     *         cellPadding
-     *         cellSpacing
-     *         header
-     *         footer
-     *         pageSize
-     *         pagerLocation
-     *         pagerClass
-     *         pagerStyle
+     * Get an HTML grid
      *
+     * @access public
+     * @param $params Data grid parameters         columnHeaderClass tableClass
+     * itemClass         altItemClass columnHeaderStyle         tableStyle
+     * itemStyle altItemStyle         columns         fields         colWidths
+     * colAligns         colColors         colTypes         cellPadding
+     * cellSpacing         header         footer         pageSize pagerLocation
+     * pagerClass         pagerStyle
+     * @return string
      */
     function getHTMLGrid($dsq, $params) {
         if (!is_resource($dsq))
@@ -530,16 +582,15 @@ class DBAPI {
     }
 
     /**
-    * @name:  makeArray
-    * @desc:  turns a recordset into a multidimensional array
-    * @return: an array of row arrays from recordset, or empty array
-    *          if the recordset was empty, returns false if no recordset
-    *          was passed
-    * @param: $rs Recordset to be packaged into an array
-    */
-    function makeArray($rs= '') {
-        if (!$rs)
-            return false;
+     * Turns a recordset into a multidimensional array
+     *
+     * @access public
+     * @param $rs Recordset to be packaged into an array
+     * @return An array of row arrays from recordset, or empty array if the
+     * recordset was empty, returns false if no recordset was passed
+     */
+    public function makeArray($rs= '') {
+        if (!$rs) return false;
         $rsArray= array ();
         $qty= $this->getRecordCount($rs);
         for ($i= 0; $i < $qty; $i++) {

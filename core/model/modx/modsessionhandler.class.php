@@ -29,22 +29,17 @@ class modSessionHandler {
      * handler.
      * @access public
      */
-    var $modx= null;
+    public $modx= null;
 
-    /**#@+
+    /**
      * Creates an instance of a modSessionHandler class.
      *
      * @param modX &$modx A reference to a {@link modX} instance.
      * @return modSessionHandler
      */
-    function modSessionHandler(& $modx) {
-        $this->__construct($modx);
-    }
-    /** @ignore */
-    function __construct(& $modx) {
+    function __construct(modX &$modx) {
         $this->modx= & $modx;
     }
-    /**#@-*/
 
     /**
      * Opens the connection for the session handler.
@@ -53,7 +48,7 @@ class modSessionHandler {
      * @return boolean Always returns true; actual connection is managed by
      * {@link modX}.
      */
-    function open() {
+    public function open() {
         return true;
     }
 
@@ -64,7 +59,7 @@ class modSessionHandler {
      * @return boolean Always returns true; actual connection is managed by
      * {@link modX}
      */
-    function close() {
+    public function close() {
         return true;
     }
 
@@ -75,7 +70,7 @@ class modSessionHandler {
      * @param integer $id The pk of the {@link modSession} object.
      * @return string The data read from the {@link modSession} object.
      */
-    function read($id) {
+    public function read($id) {
         $data= '';
         if ($session= $this->_getSession($id)) {
             $data= $session->get('data');
@@ -93,7 +88,7 @@ class modSessionHandler {
      * @param mixed $data The data to write to the session.
      * @return boolean True if successfully written.
      */
-    function write($id, $data) {
+    public function write($id, $data) {
         $written= false;
         $gcMaxlifetime = $this->modx->getOption('session_gc_maxlifetime', array(), @ini_get('session.gc_max_lifetime'));
         $cacheLifetime = $this->modx->getOption('cache_db_session_lifetime', array(), intval($gcMaxlifetime / 4));
@@ -117,7 +112,7 @@ class modSessionHandler {
      * @param integer $id
      * @return boolean True if the session record was destroyed.
      */
-    function destroy($id) {
+    public function destroy($id) {
         $destroyed= false;
         if ($session= $this->_getSession($id)) {
             $destroyed= $session->remove();
@@ -135,7 +130,7 @@ class modSessionHandler {
      * longer than.
      * @return boolean True if session records were removed.
      */
-    function gc($max) {
+    public function gc($max) {
         $max = (integer) $this->modx->getOption('session_gc_maxlifetime', array(), $max);
         $maxtime= time() - $max;
         $result = $this->modx->removeCollection('modSession', array("`access` < {$maxtime}"));
@@ -146,14 +141,14 @@ class modSessionHandler {
      * Gets the {@link modSession} object, respecting cache values by the
      * cache_db_session value.
      *
-     * @access private
+     * @access protected
      * @param integer $id The PK of the {@link modSession} record.
      * @param boolean $autoCreate If true, will automatically create the session
      * record if none is found.
      * @return modSession The {@link modSession} instance related to the passed
      * ID.
      */
-    function _getSession($id, $autoCreate= false) {
+    protected function _getSession($id, $autoCreate= false) {
         $session= $this->modx->getObject('modSession', array('id' => $id), $this->modx->getOption('cache_db_session', array(), false));
         if ($autoCreate && !is_object($session)) {
             $session= $this->modx->newObject('modSession');

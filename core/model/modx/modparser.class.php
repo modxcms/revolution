@@ -28,11 +28,8 @@
  * @package modx
  */
 class modParser {
-    var $modx= null;
+    public $modx= null;
 
-    function modParser(&$modx) {
-        $this->__construct($modx);
-    }
     function __construct(&$modx) {
         $this->modx= & $modx;
     }
@@ -49,7 +46,7 @@ class modParser {
      * (default= "]]").
      * @return integer The number of tags collected from the content.
      */
-    function collectElementTags($origContent, & $matches, $prefix= '[[', $suffix= ']]') {
+    public function collectElementTags($origContent, array &$matches, $prefix= '[[', $suffix= ']]') {
         $matchCount= 0;
         if (!empty ($origContent) && is_string($origContent) && strpos($origContent, $prefix) !== false) {
             $openCount= 0;
@@ -138,7 +135,7 @@ class modParser {
      * @param integer $depth The maximum iterations to recursively process tags
      * returned by prior passes, 0 by default.
      */
-    function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
+    public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
         $depth = intval($depth);
         $depth = $depth > 0 ? $depth - 1 : 0;
         $processed= 0;
@@ -191,7 +188,7 @@ class modParser {
      * @param string $content The content to merge the tag output with (passed by
      * reference).
      */
-    function mergeTagOutput($tagMap, & $content) {
+    public function mergeTagOutput(array $tagMap, & $content) {
         if (!empty ($content) && is_array($tagMap) && !empty ($tagMap)) {
             $content= str_replace(array_keys($tagMap), array_values($tagMap), $content);
         }
@@ -205,7 +202,7 @@ class modParser {
      * @return array An associative array of property values parsed from
      * the property string or array definition.
      */
-    function parseProperties($propSource) {
+    public function parseProperties($propSource) {
         $properties= array ();
         if (!empty ($propSource)) {
             if (is_string($propSource)) {
@@ -230,7 +227,7 @@ class modParser {
      * @param boolean $valuesOnly Indicates only the property value should be
      * returned.
      */
-    function parsePropertyString($string, $valuesOnly = false) {
+    public function parsePropertyString($string, $valuesOnly = false) {
         $properties = array();
         $tagProps= xPDO :: escSplit("&", $string);
         foreach ($tagProps as $prop) {
@@ -287,11 +284,11 @@ class modParser {
     /**
      * Converts legacy property string types to xtypes.
      *
-     * @access private
+     * @access protected
      * @param string $type A property type string.
      * @return string A valid xtype.
      */
-    function _XType($type) {
+    protected function _XType($type) {
         $xtype = $type;
         switch ($type) {
             case 'string':
@@ -324,7 +321,7 @@ class modParser {
      * @return mixed The output of the processed element represented by the
      * specified tag.
      */
-    function processTag($tag, $processUncacheable = true) {
+    public function processTag($tag, $processUncacheable = true) {
         $element= null;
         $elementOutput= null;
 
@@ -433,7 +430,7 @@ class modParser {
      * @param string $unfiltered The unfiltered name of a {@link modElement}.
      * @return string The name minus any filter modifiers.
      */
-    function realname($unfiltered) {
+    public function realname($unfiltered) {
         $filtered= $unfiltered;
         $split= xPDO :: escSplit(':', $filtered);
         if ($split && isset($split[0])) {
@@ -454,7 +451,7 @@ class modParser {
      * @param string tag The tag signature representing the element instance.
      * @return string The cached output from the element instance.
      */
-    function loadFromCache($tag) {
+    public function loadFromCache($tag) {
         $elementOutput= null;
         if (isset ($this->modx->elementCache[$tag])) {
             $elementOutput= (string) $this->modx->elementCache[$tag];
@@ -471,29 +468,26 @@ class modParser {
  * character token at the beginning of the tag string.
  * @package modx
  */
-class modTag {
-    var $modx= null;
-    var $name;
-    var $properties;
-    var $_content= null;
-    var $_output= '';
-    var $_result= true;
-    var $_propertyString= '';
-    var $_properties= array ();
-    var $_processed= false;
-    var $_tag= '';
-    var $_token= '';
-    var $_fields= array (
+abstract class modTag {
+    public $modx= null;
+    public $name;
+    public $properties;
+    public $_content= null;
+    public $_output= '';
+    public $_result= true;
+    public $_propertyString= '';
+    public $_properties= array ();
+    public $_processed= false;
+    public $_tag= '';
+    public $_token= '';
+    public $_fields= array (
         'name' => '',
         'properties' => ''
     );
-    var $_cacheable= true;
-    var $_filters= array ();
+    public $_cacheable= true;
+    public $_filters= array ();
 
-    function modTag(& $modx) {
-        $this->__construct($modx);
-    }
-    function __construct(& $modx) {
+    function __construct(modX &$modx) {
         $this->modx =& $modx;
         $this->name =& $this->_fields['name'];
         $this->properties =& $this->_fields['properties'];
@@ -506,7 +500,7 @@ class modTag {
      * @param string $k The field key.
      * @return mixed The value of the field or null if it is not set.
      */
-    function get($k) {
+    public function get($k) {
         $value = null;
         if (array_key_exists($k, $this->_fields)) {
             if ($k == 'properties') {
@@ -526,7 +520,7 @@ class modTag {
      * @param string $k The field key.
      * @param mixed $v The value to assign to the field.
      */
-    function set($k, $v) {
+    public function set($k, $v) {
         if ($k == 'properties') {
             $v = is_array($v) ? serialize($v) : $v;
         }
@@ -536,7 +530,7 @@ class modTag {
      * Cache the element into the elementCache by tag signature.
      * @see modElement::cache()
      */
-    function cache() {
+    public function cache() {
         if ($this->isCacheable()) {
             $this->modx->elementCache[$this->_tag]= $this->_output;
         }
@@ -545,7 +539,7 @@ class modTag {
     /**
      * Gets a tag representation of the modTag instance.
      */
-    function getTag() {
+    public function getTag() {
         if (empty($this->_tag) && ($name = $this->get('name'))) {
             $propTemp = array();
             if (empty($this->_propertyString) && !empty($this->_properties)) {
@@ -581,7 +575,7 @@ class modTag {
      * processing.
      * @return mixed The result of processing the tag.
      */
-    function process($properties= null, $content= null) {
+    public function process($properties= null, $content= null) {
         $this->modx->getParser();
         $this->getProperties($properties);
         $this->getTag();
@@ -604,7 +598,7 @@ class modTag {
      *
      * @see modElement::filterInput()
      */
-    function filterInput() {
+    public function filterInput() {
         $filter= null;
         if (!isset ($this->_filters['input'])) {
             if (!$inputFilterClass= $this->get('input_filter')) {
@@ -616,7 +610,7 @@ class modTag {
                 }
             }
         }
-        if (isset ($this->_filters['input']) && is_a($this->_filters['input'], 'modInputFilter')) {
+        if (isset ($this->_filters['input']) && $this->_filters['input'] instanceof modInputFilter) {
             $this->_filters['input']->filter($this);
         }
     }
@@ -627,7 +621,7 @@ class modTag {
      * appropriate, typically once all processing has been completed, but before
      * any caching takes place.
      */
-    function filterOutput() {
+    public function filterOutput() {
         $filter= null;
         if (!isset ($this->_filters['output'])) {
             if (!$outputFilterClass= $this->get('output_filter')) {
@@ -639,7 +633,7 @@ class modTag {
                 }
             }
         }
-        if (isset ($this->_filters['output']) && is_a($this->_filters['output'], 'modOutputFilter')) {
+        if (isset ($this->_filters['output']) && $this->_filters['output'] instanceof modOutputFilter) {
             $this->_filters['output']->filter($this);
         }
     }
@@ -652,7 +646,7 @@ class modTag {
      * behavior of the method.
      * @return string The raw source content for the element.
     */
-    function getContent($options = array()) {
+    public function getContent(array $options = array()) {
         if (!$this->isCacheable() || !is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
@@ -666,7 +660,7 @@ class modTag {
     /**
      * Set the raw source content for the tag element.
      */
-    function setContent($content, $options = array()) {
+    public function setContent($content, array $options = array()) {
         return $this->set('name', $content);
     }
 
@@ -677,7 +671,7 @@ class modTag {
      * apply.
      * @return array A simple array of properties ready to use for processing.
      */
-    function getProperties($properties = null) {
+    public function getProperties($properties = null) {
         $this->_properties= $this->modx->parser->parseProperties($this->get('properties'));
         if ($properties !== null && !empty($properties)) {
             $this->_properties= array_merge($this->_properties, $this->modx->parser->parseProperties($properties));
@@ -693,7 +687,7 @@ class modTag {
      * existing ones.
      * @return boolean true if the properties are set.
      */
-    function setProperties($properties, $merge = false) {
+    public function setProperties($properties, $merge = false) {
         $set = false;
         $propertyArray = array();
         if (is_string($properties)) {
@@ -744,7 +738,7 @@ class modTag {
      * @return boolean True if the element can be stored to or retrieved from
      * the element cache.
      */
-    function isCacheable() {
+    public function isCacheable() {
         return $this->_cacheable;
     }
 
@@ -754,7 +748,7 @@ class modTag {
      * @param boolean $cacheable Indicates the value to set for cacheability of
      * this element.
      */
-    function setCacheable($cacheable = true) {
+    public function setCacheable($cacheable = true) {
         $this->_cacheable = (boolean) $cacheable;
     }
 }
@@ -767,10 +761,7 @@ class modTag {
  * @package modx
  */
 class modFieldTag extends modTag {
-    function modFieldTag(& $modx) {
-        $this->__construct($modx);
-    }
-    function __construct(& $modx) {
+    function __construct(modX & $modx) {
         parent :: __construct($modx);
         $this->_token = '*';
     }
@@ -778,7 +769,7 @@ class modFieldTag extends modTag {
     /**
      * Process the modFieldTag and return the output.
      */
-    function process($properties= null, $content= null) {
+    public function process($properties= null, $content= null) {
         if ($this->get('name') === 'content') $this->setCacheable(false);
         parent :: process($properties, $content);
         if (!$this->_processed) {
@@ -799,7 +790,7 @@ class modFieldTag extends modTag {
     /**
      * Get the raw source content of the field.
      */
-    function getContent($options = array()) {
+    public function getContent(array $options = array()) {
         if (!$this->isCacheable() || !is_string($this->_content) || $this->_content === '') {
             if (isset($options['content']) && !empty($options['content'])) {
                 $this->_content = $options['content'];
@@ -824,10 +815,7 @@ class modFieldTag extends modTag {
  * @package modx
  */
 class modPlaceholderTag extends modTag {
-    function modPlaceholderTag(& $modx) {
-        $this->__construct($modx);
-    }
-    function __construct(& $modx) {
+    function __construct(modX & $modx) {
         parent :: __construct($modx);
         $this->_cacheable = false;
         $this->_token = '+';
@@ -840,7 +828,7 @@ class modPlaceholderTag extends modTag {
      * tag element are processed.  Non-cacheable nested tags are only processed
      * if this tag element is also non-cacheable.
      */
-    function process($properties= null, $content= null) {
+    public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $this->_output= $this->_content;
@@ -860,7 +848,7 @@ class modPlaceholderTag extends modTag {
     /**
      * Get the raw source content of the field.
      */
-    function getContent($options = array()) {
+    public function getContent(array $options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
@@ -876,14 +864,14 @@ class modPlaceholderTag extends modTag {
      *
      * @return boolean Always returns false.
      */
-    function isCacheable() {
+    public function isCacheable() {
         return false;
     }
 
     /**
      * modPlaceholderTag instances cannot be cacheable.
      */
-    function setCacheable($cacheable = true) {}
+    public function setCacheable($cacheable = true) {}
 }
 
 /**
@@ -894,10 +882,7 @@ class modPlaceholderTag extends modTag {
  * @package modx
  */
 class modLinkTag extends modTag {
-    function modLinkTag(& $modx) {
-        $this->__construct($modx);
-    }
-    function __constructor(& $modx) {
+    function __constructor(modX & $modx) {
         parent :: __construct($modx);
         $this->_token = '~';
     }
@@ -905,7 +890,7 @@ class modLinkTag extends modTag {
     /**
      * Processes the modLinkTag, recursively processing nested tags.
      */
-    function process($properties= null, $content= null) {
+    public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $this->_output= $this->_content;
@@ -956,10 +941,7 @@ class modLinkTag extends modTag {
  * @package modx
  */
 class modLexiconTag extends modTag {
-    function modLexiconTag(& $modx) {
-        $this->__construct($modx);
-    }
-    function __construct(& $modx) {
+    function __construct(modX & $modx) {
         parent :: __construct($modx);
         $this->_token = '%';
     }
@@ -967,7 +949,7 @@ class modLexiconTag extends modTag {
     /**
      * Processes a modLexiconTag, recursively processing nested tags.
      */
-    function process($properties= null, $content= null) {
+    public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $this->_output= $this->_content;
@@ -987,7 +969,7 @@ class modLexiconTag extends modTag {
     /**
      * Get the raw source content of the link.
      */
-    function getContent($options = array()) {
+    public function getContent(array $options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];

@@ -233,7 +233,7 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function filterInput() {
         $filter= null;
-        if (!isset ($this->_filters['input']) || !is_a($this->_filters['input'], 'modInputFilter')) {
+        if (!isset ($this->_filters['input']) || !($this->_filters['input'] instanceof modInputFilter)) {
             if (!$inputFilterClass= $this->get('input_filter')) {
                 $inputFilterClass = $this->xpdo->getOption('input_filter',null,'filters.modInputFilter');
             }
@@ -243,7 +243,7 @@ class modElement extends modAccessibleSimpleObject {
                 }
             }
         }
-        if (isset ($this->_filters['input']) && is_a($this->_filters['input'], 'modInputFilter')) {
+        if (isset ($this->_filters['input']) && $this->_filters['input'] instanceof modInputFilter) {
             $this->_filters['input']->filter($this);
         }
     }
@@ -259,7 +259,7 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function filterOutput() {
         $filter= null;
-        if (!isset ($this->_filters['output']) || is_a($this->_filters['output'], 'modOutputFilter')) {
+        if (!isset ($this->_filters['output']) || !($this->_filters['output'] instanceof modOutputFilter)) {
             if (!$outputFilterClass= $this->get('output_filter')) {
                 $outputFilterClass = $this->xpdo->getOption('output_filter',null,'filters.modOutputFilter');
             }
@@ -269,7 +269,7 @@ class modElement extends modAccessibleSimpleObject {
                 }
             }
         }
-        if (isset ($this->_filters['output']) && is_a($this->_filters['output'], 'modOutputFilter')) {
+        if (isset ($this->_filters['output']) && $this->_filters['output'] instanceof modOutputFilter) {
             $this->_filters['output']->filter($this);
         }
     }

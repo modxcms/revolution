@@ -31,15 +31,12 @@
  * @package modx
  */
 class modRequest {
-    var $modx = null;
-    var $method = null;
-    var $parameters = null;
-    var $headers = null;
+    public $modx = null;
+    public $method = null;
+    public $parameters = null;
+    public $headers = null;
 
-    function modRequest(& $modx) {
-        $this->__construct($modx);
-    }
-    function __construct(& $modx) {
+    function __construct(modX &$modx) {
         $this->modx = & $modx;
     }
 
@@ -48,7 +45,7 @@ class modRequest {
      *
      * @return boolean True if a request is handled without interruption.
      */
-    function handleRequest() {
+    public function handleRequest() {
         $this->loadErrorHandler();
 
         $this->sanitizeRequest();
@@ -103,7 +100,7 @@ class modRequest {
      * @param array $options An array of options
      * @return boolean True if the response is properly prepared.
      */
-    function prepareResponse($options = array()) {
+    public function prepareResponse(array $options = array()) {
         $this->modx->beforeProcessing();
         $this->modx->invokeEvent("OnLoadWebDocument");
 
@@ -118,7 +115,7 @@ class modRequest {
      *
      * @return string 'alias', 'id', or an empty string.
      */
-    function getResourceMethod() {
+    public function getResourceMethod() {
         $method = '';
         if (isset ($_REQUEST[$this->modx->getOption('request_param_alias', null, 'q')]))
             $method = "alias";
@@ -137,7 +134,7 @@ class modRequest {
      * @return modResource The requested modResource instance or request
      * is forwarded to the error page, or unauthorized page.
      */
-    function getResource($method, $identifier) {
+    public function getResource($method, $identifier) {
         $resource = null;
         if ($method == 'alias') {
             $resourceId = $this->modx->aliasMap[$identifier];
@@ -179,7 +176,7 @@ class modRequest {
             $criteria = array('id' => $resourceId, 'deleted' => '0');
             if (!$this->modx->hasPermission('view_unpublished')) $criteria['published']= 1;
             if ($resource = $this->modx->getObject('modResource', $criteria)) {
-                if (is_object($resource)) {
+                if ($resource instanceof modResource) {
                     if ($resource->get('context_key') !== $this->modx->context->get('key')) {
                         if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
                             return null;
@@ -202,7 +199,7 @@ class modRequest {
                     }
                 }
             }
-        } elseif ($fromCache && is_object($resource) && !$resource->get('deleted')) {
+        } elseif ($fromCache && $resource instanceof modResource && !$resource->get('deleted')) {
             if ($resource->get('published') || $this->modx->hasPermission('view_unpublished')) {
                 if ($resource->get('context_key') !== $this->modx->context->get('key')) {
                     if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
@@ -226,7 +223,7 @@ class modRequest {
      * @param string $method 'alias' or 'id'.
      * @return string The identifier for the requested resource.
      */
-    function getResourceIdentifier($method) {
+    public function getResourceIdentifier($method) {
         $identifier = '';
         switch ($method) {
             case 'alias' :
@@ -249,7 +246,7 @@ class modRequest {
      * @param string $identifier The raw identifier.
      * @return string|integer The cleansed identifier.
      */
-    function _cleanResourceIdentifier($identifier) {
+    public function _cleanResourceIdentifier($identifier) {
         if (empty ($identifier)) {
             $identifier = $this->modx->getOption('site_start',null,1);
             $this->modx->resourceMethod = 'id';
@@ -288,7 +285,7 @@ class modRequest {
     /**
      * Harden GPC variables by removing any MODx tags, Javascript, or entities.
      */
-    function sanitizeRequest() {
+    public function sanitizeRequest() {
         $modxtags = array_values($this->modx->sanitizePatterns);
         modX :: sanitize($_GET, $modxtags, 0);
         if ($this->modx->getOption('allow_tags_in_post',null,true)) {
@@ -309,7 +306,7 @@ class modRequest {
      *
      * @param string $class The class to use as the error handler.
      */
-    function loadErrorHandler($class = 'modError') {
+    public function loadErrorHandler($class = 'modError') {
         if ($className = $this->modx->loadClass('error.'.$class,'',false,true)) {
             $this->modx->error = new $className($this->modx);
         } else {
@@ -333,7 +330,7 @@ class modRequest {
      * @param array $options An array containing all the options required to
      * initiate and configure logging to a modRegister instance.
      */
-    function registerLogging($options = array()) {
+    public function registerLogging(array $options = array()) {
         if (isset($options['register']) && isset($options['topic'])) {
             if ($this->modx->getService('registry','registry.modRegistry')) {
                 $register_class = isset($options['register_class']) ? $options['register_class'] : 'registry.modFileRegister';
@@ -351,7 +348,7 @@ class modRequest {
      *
      * @param string $key A key to save the $_REQUEST as; default is 'referrer'.
      */
-    function preserveRequest($key = 'referrer') {
+    public function preserveRequest($key = 'referrer') {
         if (isset ($_SESSION)) {
             $_SESSION['modx.request.' . $key] = $_REQUEST;
         }
@@ -362,7 +359,7 @@ class modRequest {
      *
      * @param string $key A key to identify a specific $_REQUEST; default is 'referrer'.
      */
-    function retrieveRequest($key = 'referrer') {
+    public function retrieveRequest($key = 'referrer') {
         $request = null;
         if (isset ($_SESSION['modx.request.' . $key])) {
             $request = $_SESSION['modx.request.' . $key];
@@ -370,7 +367,7 @@ class modRequest {
         return $request;
     }
 
-    function getHeaders($ucKeys = false) {
+    public function getHeaders($ucKeys = false) {
         if (!isset($this->headers)) {
             $headers = array ();
             foreach ($_SERVER as $name => $value) {
@@ -390,7 +387,7 @@ class modRequest {
      * Checks the current status of timed publishing events.
      * @todo refactor checkPublishStatus...offload to cachemanager?
      */
-    function checkPublishStatus() {
+    public function checkPublishStatus() {
         $cacheRefreshTime= 0;
         if (file_exists($this->modx->getOption(xPDO::OPT_CACHE_PATH) . "sitePublishing.idx.php"))
             include ($this->modx->getOption(xPDO::OPT_CACHE_PATH) . "sitePublishing.idx.php");
@@ -414,7 +411,7 @@ class modRequest {
             } else {
                 $result= $result->fetchAll(PDO::FETCH_ASSOC);
                 $minpub= $result[0]['minpub'];
-                if ($minpub != NULL) {
+                if ($minpub != null) {
                     $timesArr[]= $minpub;
                 }
             }
@@ -424,7 +421,7 @@ class modRequest {
             } else {
                 $result= $result->fetchAll(PDO::FETCH_ASSOC);
                 $minunpub= $result[0]['minunpub'];
-                if ($minunpub != NULL) {
+                if ($minunpub != null) {
                     $timesArr[]= $minunpub;
                 }
             }
@@ -454,8 +451,7 @@ class modRequest {
         }
         return $actionList;
     }
-    public function getActionIDs($actions = array(), $namespace = 'core') {
-        if (!is_array($actions)) return false;
+    public function getActionIDs(array $actions = array(), $namespace = 'core') {
         $as = array();
         foreach ($actions as $action) {
             $act = $this->modx->getObject('modAction',array(
