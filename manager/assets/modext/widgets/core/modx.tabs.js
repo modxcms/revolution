@@ -1,12 +1,3 @@
-/**
- * Custom class that extends Ext2.0 tab functionality for MODx.
- * 
- * @class MODx.Tabs
- * @extends Ext.TabPanel
- * @constructor
- * @param {Object} config A configuration object.
- * @xtype modx-tabs
- */
 MODx.Tabs = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{

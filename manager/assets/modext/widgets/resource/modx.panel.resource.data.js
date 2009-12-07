@@ -1,9 +1,3 @@
-/**
- * @class MODx.panel.ResourceData
- * @extends MODx.FormPanel
- * @param {Object} config An object of configuration parameters
- * @xtype modx-panel-resource-data
- */
 MODx.panel.ResourceData = function(config) {
     config = config || {};
     var df = { 

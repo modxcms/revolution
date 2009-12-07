@@ -1,9 +1,3 @@
-/**
- * @class MODx.Wizard
- * @extends Ext.Window
- * @param {Object} config An object of configuration properties
- * @xtype modx-wizard
- */
 MODx.Wizard = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -94,12 +88,6 @@ Ext.extend(MODx.Wizard,Ext.Window,{
 });
 Ext.reg('modx-wizard',MODx.Wizard);
 
-/**
- * @class MODx.panel.WizardPanel
- * @extends MODx.FormPanel
- * @param {Object} config An object of configuration properties
- * @xtype panel-wizard-panel
- */
 MODx.panel.WizardPanel = function(config) {
     config = config || {};
     Ext.applyIf(config,{

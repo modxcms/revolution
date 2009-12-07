@@ -1,12 +1,5 @@
 Ext.namespace('MODx.grid');
-/**
- * An abstract class for Ext Grids in MODx. 
- * 
- * @class MODx.grid.Grid
- * @extends Ext.grid.EditorGridPanel
- * @constructor
- * @param {Object} config An object of config options.
- */
+
 MODx.grid.Grid = function(config) {
 	config = config || {};
 	this.config = config;
@@ -87,24 +80,15 @@ MODx.grid.Grid = function(config) {
             ,limit: config.pageSize || 20
         }
 		,scope: this
-		,callback: function() { this.getStore().reload(); } // fixes comboeditor bug
+		,callback: function() { this.getStore().reload(); } /* fixes comboeditor bug */
 	});
     this.config = config;
 };
 Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
-	/**
-     * @var {Object} All the windows loaded in the grid.
-     * @access protected
-     */
+	
     windows: {}
     
-    /**
-	 * Saves the record after editing if autosave is on.
-     * 
-     * @access public
-	 * @param {Object} e The edit event.
-	 */
-	,saveRecord: function(e) {
+    ,saveRecord: function(e) {
 		e.record.data.menu = null;
         var p = this.config.saveParams || {};
         Ext.apply(e.record.data,p);
@@ -128,15 +112,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
 		});
 	}
     
-    /**
-     * Dynamically loads a window based on its xtype
-     * 
-     * @access public
-     * @param {Object} btn The item that was pressed.
-     * @param {Ext.EventObject} e The EventObject that occurred.
-     * @param {Object} win The window config object
-     * @param {Object} or Any overrides to use
-     */
     ,loadWindow: function(btn,e,win,or) {
         var r = this.menu.record;
         if (!this.windows[win.xtype] || win.force) {  
@@ -158,14 +133,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         this.windows[win.xtype].show(e.target);
     }
     
-    /**
-     * An abstracted confirm dialog that can be loaded via JSON. 
-     * Use createDelegate to implement.
-     * 
-     * @access public
-     * @param {String} type The action to connect to
-     * @param {String} text The lexicon key for the confirm prompt
-     */
     ,confirm: function(type,text) {
         var p = { action: type };
         var k = this.config.primaryKey || 'id';
@@ -182,13 +149,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         });
     }
     
-    /**
-     * An abstracted remove dialog that can be loaded via JSON. 
-     * Use createDelegate to implement.
-     * 
-     * @access public
-     * @param {String} text The lexicon key for the remove prompt
-     */
     ,remove: function(text) {
         var r = this.menu.record;
         text = text || 'confirm_remove';
@@ -214,33 +174,15 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
     }
     
-    /**
-     * Removes the actively selected row from the grid.
-     * 
-     * @access public
-     */
     ,removeActiveRow: function() {
         var rx = this.getSelectionModel().getSelected();
         this.getStore().remove(rx);
     }
     
-	/**
-	 * Loads the context menu for the grid.
-     * 
-     * @access protected
-	 */
 	,_loadMenu: function() {
 		this.menu = new Ext.menu.Menu({ defaultAlign: 'tl-b?' ,enableScrolling: false });
 	}
     
-	/**
-	 * Displays the grid's context menu.
-     * 
-     * @access protected
-	 * @param {Object} g The grid object.
-	 * @param {Number} ri The index of the row clicked.
-	 * @param {Ext.EventObject} e The event object.
-	 */
 	,_showMenu: function(g,ri,e) {
 		e.stopEvent();
 		e.preventDefault();
@@ -255,11 +197,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
 	}
     
-	/**
-	 * Loads the grid's store.
-     * 
-     * @access protected
-	 */
 	,_loadStore: function() {
 		if (this.config.grouping) {
             this.store = new Ext.data.GroupingStore({
@@ -292,11 +229,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
 	}
     
-	/**
-	 * Loads the grid's column model.
-     * 
-     * @access protected
-	 */
 	,_loadColumnModel: function() {
         if (this.config.columns) {
             var c = this.config.columns;
@@ -326,12 +258,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
     }
     
-    /**
-     * Adds menu items to the grid context menu
-     * 
-     * @access public
-     * @param {Object} items
-     */
     ,addContextMenuItem: function(items) {
         var a = items, l = a.length;
         for(var i = 0; i < l; i++) {
@@ -381,23 +307,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
     }
     
-    /**
-     * Reloads the grid store.
-     * 
-     * @access public
-     */
     ,refresh: function() {
         this.getStore().reload();
     }
     
-    /**
-     * Render the row to a colored Yes/No value.
-     * 
-     * @access public
-     * @param {Object} d The data record
-     * @param {Object} c The dom properties
-     * @return {String} The value to return
-     */
     ,rendYesNo: function(d,c) {
         switch(d) {
             case '':
@@ -411,12 +324,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
     }
     
-    /**
-     * Create an editor combobox for Yes/No editing
-     * 
-     * @access public
-     * @param {Object} r An object of configuration options
-     */
     ,editorYesNo: function(r) {
     	r = r || {};
     	Ext.applyIf(r,{
@@ -434,11 +341,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         return new Ext.form.ComboBox(r);
     }
     
-    /**
-     * Encodes modified record data into JSON array for form sending
-     * 
-     * @access public
-     */
     ,encodeModified: function() {
         var p = this.getStore().getModifiedRecords();
         var rs = {};
@@ -608,10 +510,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
     ,getMenu: function() {
         return this.menu.record.menu;
     }
-    /**
-     * Adds menu items to the grid context menu
-     * @param {Object} items
-     */
+    
     ,addContextMenuItem: function(items) {
         var a = items, l = a.length;
         for(var i = 0; i < l; i++) {
@@ -674,11 +573,6 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         }
     }
     
-    /**
-     * Encodes modified record data into JSON array for form sending
-     * 
-     * @access public
-     */
     ,encode: function() {
         var s = this.getStore();
         var ct = s.getCount();

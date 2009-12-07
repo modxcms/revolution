@@ -1,9 +1,3 @@
-/**
- * @class MODx.grid.LocalProperty
- * @extends MODx.grid.LocalGrid
- * @param {Object} config An object of configuration properties
- * @xtype grid-local-property
- */
 MODx.grid.LocalProperty = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -16,13 +10,6 @@ MODx.grid.LocalProperty = function(config) {
     this.propRecord = Ext.data.Record.create(config.propertyRecord);
 };
 Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
-    /**
-     * Dynamically change the editor for the row via its xtype property.
-     * @param {MODx.grid.SettingsGrid} g The grid object
-     * @param {Integer} ri The row index
-     * @param {Integer} ci The column index
-     * @param {Ext.EventObject} e The event object that occurred
-     */
     onCellDblClick: function(g,ri,ci,e) {
         var cm = this.getColumnModel();
         if (cm.getColumnId(ci) != this.config.dynField) {
@@ -35,13 +22,6 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
         }
     }
     
-    /**
-     * Initializes the editor for the cell
-     * @param {Ext.grid.ColumnModel} cm The column model for the grid
-     * @param {Integer} ri The row index
-     * @param {Integer} ci The column index
-     * @param {Object} r The data record for the cell
-     */
     ,initEditor: function(cm,ci,ri,r) {
         cm.setEditable(ci,true);
         var xtype = this.config.dynProperty;
@@ -57,16 +37,6 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
         return ed;
     }
     
-    /**
-     * A custom renderer that renders the custom xtype editor
-     * @param {String} v The raw value
-     * @param {Object} md The metadata for the cell
-     * @param {Object} rec The store data record
-     * @param {Integer} ri The row index
-     * @param {Integer} ci The column index
-     * @param {Ext.data.Store} s The store for the grid
-     * @param {MODx.grid.SettingsGrid} g The grid object 
-     */
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {
         var r = s.getAt(ri).data;
         var f;

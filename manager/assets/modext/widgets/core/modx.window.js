@@ -152,10 +152,6 @@ Ext.extend(MODx.Window,Ext.Window,{
         if (d) { d.setDisplayed(true); }
     }
     
-    ,help: function() {
-        Ext.Msg.alert(_('help'),_('help_not_yet'));
-    }
-    
     ,loadDropZones: function() {
         if (this._dzLoaded) return false;
         var flds = this.fp.getForm().items;

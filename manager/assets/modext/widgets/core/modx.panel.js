@@ -1,13 +1,5 @@
 Ext.namespace('MODx.panel');
-/**
- * An abstract class for Ext Panels in MODx. 
- * 
- * @class MODx.Panel
- * @extends Ext.Panel
- * @constructor
- * @param {Object} config An object of config options.
- * @xtype modx-panel
- */
+
 MODx.Panel = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -20,15 +12,6 @@ MODx.Panel = function(config) {
 Ext.extend(MODx.Panel,Ext.Panel);
 Ext.reg('modx-panel',MODx.Panel);
 
-/**
- * An abstract class for Ext FormPanels in MODx. 
- * 
- * @class MODx.FormPanel
- * @extends Ext.FormPanel
- * @constructor
- * @param {Object} config An object of config options.
- * @xtype modx-formpanel
- */
 MODx.FormPanel = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -68,9 +51,7 @@ MODx.FormPanel = function(config) {
 };
 Ext.extend(MODx.FormPanel,Ext.FormPanel,{
 	isReady: false
-	/**
-     * Submits the form to the connector.
-     */
+
     ,submit: function(o) {
         var fm = this.getForm();
         if (fm.isValid()) {
@@ -222,33 +203,6 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
 }); 
 Ext.reg('modx-formpanel',MODx.FormPanel);
 
-/**
- * Adds clearDirty functionality to Ext.form.BasicForm
- */
-Ext.override(Ext.form.BasicForm,{
-    clearDirty : function(nodeToRecurse){
-        nodeToRecurse = nodeToRecurse || this;
-        nodeToRecurse.items.each(function(f){
-            if(f.items){
-                this.clearDirty(f);
-            } else if(f.originalValue != f.getValue()){
-                f.originalValue = f.getValue();
-            }
-        },this);
-    }
-});
-
-
-
-/**
- * An abstract class for Wizard panels in MODx
- * 
- * @class MODx.panel.Wizard
- * @extends Ext.Panel
- * @constructor
- * @param {Object} config An object of config options.
- * @xtype modx-wizard
- */
 MODx.panel.Wizard = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -285,28 +239,13 @@ MODx.panel.Wizard = function(config) {
     this._go();
 };
 Ext.extend(MODx.panel.Wizard,Ext.Panel,{
-    /**
-     * @var {Object} windows The object collection of windows
-     * @access private
-     */
     windows: {}
     
-    /**
-     * Launches the wizard.
-     * 
-     * @access private
-     */
     ,_go: function() {
         this.getBottomToolbar().items.item(1).setText(this.config.txtNext);
         this.proceed(this.config.firstPanel);
     }
     
-    /**
-     * Handles navigation between panels
-     * 
-     * @access public
-     * @param {Integer} dir Either 1 for forward, or -1 for backward
-     */
     ,navHandler: function(dir) {
         this.doLayout();
         var a = this.getLayout().activeItem;
@@ -320,12 +259,6 @@ Ext.extend(MODx.panel.Wizard,Ext.Panel,{
         }
     }
     
-    /**
-     * Proceeds to the next frame
-     * 
-     * @access public
-     * @param {String} id The id of the panel to proceed to
-     */
     ,proceed: function(id) {
         this.doLayout();
         this.getLayout().setActiveItem(id);

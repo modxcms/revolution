@@ -1,14 +1,5 @@
 Ext.namespace('MODx.browser');
-/**
- * MODx.Browser
- * Handles file selection and manipulation.
- * 
- * @class MODx.Browser
- * @extends Ext.Component
- * @constructor
- * @param {Object} config An object of config options.
- * @xtype cp-browser
- */
+
 MODx.Browser = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -28,15 +19,6 @@ Ext.extend(MODx.Browser,Ext.Component,{
 });
 Ext.reg('modx-browser',MODx.Browser);
 
-/**
- * The window layout for the browser
- * 
- * @class MODx.Browser.Window
- * @extends Ext.Window
- * @constructor
- * @param {Object} config An object of config options.
- * @xtype modx-browser-window
- */
 MODx.browser.Window = function(config) {
     config = config || {};
     this.ident = Ext.id();
@@ -54,7 +36,7 @@ MODx.browser.Window = function(config) {
         ,prependPath: config.prependPath || null
         ,hideFiles: config.hideFiles || false
         ,ident: this.ident
-        ,rootVisible: true //config.rootVisible
+        ,rootVisible: true
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
         }
@@ -221,15 +203,6 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
 });
 Ext.reg('modx-browser-window',MODx.browser.Window);
 
-/**
- * The DataView for the Browser
- * 
- * @class MODx.browser.View
- * @extends MODx.DataView
- * @constructor
- * @param {Object} config An object of config options.
- * @xtype cp-browser-view 
- */
 MODx.browser.View = function(config) {
     config = config || {};
     

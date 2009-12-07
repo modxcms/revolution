@@ -1,12 +1,3 @@
-/**
- * Displays a running console showing logs until a success messsage is sent
- * from the processor.
- * 
- * @class MODx.Console
- * @extends Ext.Window
- * @param {Object} config An object of configuration properties
- * @xtype modx-console
- */
 MODx.Console = function(config) {
 	config = config || {};
 	Ext.Updater.defaults.showLoadIndicator = false;

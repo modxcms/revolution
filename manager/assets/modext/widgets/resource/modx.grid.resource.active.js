@@ -1,11 +1,3 @@
-/**
- * Loads a grid of recently-edited modResources.
- * 
- * @class MODx.grid.ActiveResources
- * @extends MODx.grid.Grid
- * @param {Object} config An object of options.
- * @xtype modx-grid-resource-active
- */
 MODx.grid.ActiveResources = function(config) {
     config = config || {};
 	Ext.applyIf(config,{

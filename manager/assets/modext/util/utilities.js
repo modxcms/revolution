@@ -60,6 +60,20 @@ Ext.extend(MODx.LockMask,Ext.LoadMask,{
 });
 Ext.reg('modx-lockmask',MODx.LockMask);
 
+/** add clearDirty to basicform */
+Ext.override(Ext.form.BasicForm,{
+    clearDirty : function(nodeToRecurse){
+        nodeToRecurse = nodeToRecurse || this;
+        nodeToRecurse.items.each(function(f){
+            if(f.items){
+                this.clearDirty(f);
+            } else if(f.originalValue != f.getValue()){
+                f.originalValue = f.getValue();
+            }
+        },this);
+    }
+});
+
 
 /** 
  * Static Textfield

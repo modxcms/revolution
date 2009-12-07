@@ -508,13 +508,5 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 		}
 		return a;
 	}
-	
-    /**
-     * If set for the tree, displays a help dialog.
-     * @abstract
-     */
-    ,help: function() {
-        MODx.msg.alert(_('help'),_('help_not_yet'));
-    }
 });
 Ext.reg('modx-tree',MODx.tree.Tree);

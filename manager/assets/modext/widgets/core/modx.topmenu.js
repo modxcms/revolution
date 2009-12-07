@@ -21,9 +21,6 @@ MODx.toolbar.TopMenu = function(config) {
 Ext.extend(MODx.toolbar.TopMenu,Ext.Toolbar,{
 	menus: {}
 	
-	/**
-	 * Initializes the top menu, grabbing it from the JSON-based connector.
-	 */
 	,init: function() {
 		MODx.Ajax.request({
 			url: MODx.config.connectors_url+'system/menu.php'
@@ -37,11 +34,7 @@ Ext.extend(MODx.toolbar.TopMenu,Ext.Toolbar,{
 			}
 		});
 	}
-	
-	/**
-	 * Loads the menus from JSON data.
-	 * @param {Object} data JSON object menus.
-	 */
+    
 	,_loadMenus: function(data) {
 		for (var i=0; i<data.length; i++) {
 			var mi = data[i];
@@ -83,20 +76,12 @@ Ext.extend(MODx.toolbar.TopMenu,Ext.Toolbar,{
 		this.addMenu('->',MODx.config.version);
 	}
 	
-	/**
-	 * Default click handler.
-	 * @param {Ext.menu.Item} item The menu item clicked. 
-	 * @param {Ext.EventObject} e
-	 */
 	,handleClick: function(itm,e) {
 		e.preventDefault();
         e.stopPropagation();
 		Ext.get('modx_content').dom.src = '?a='+itm.action;
 	}
 
-	/**
-	 * Add a menu to the Top Bar.
-	 */
 	,addMenu: function() {
 		var a = arguments, l = a.length;
         for(var i = 0; i < l; i++) {
@@ -119,10 +104,6 @@ Ext.extend(MODx.toolbar.TopMenu,Ext.Toolbar,{
 		}
 	}
 	
-	/**
-	 * Add a menu item to a top bar menu.
-	 * @param {String} menu_id The menu id to load into. 
-	 */
 	,addMenuItem: function(menu_id) {
 		var a = arguments, l = a.length;
         for(var i = 1; i < l; i++) {

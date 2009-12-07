@@ -1,36 +1,7 @@
 Ext.namespace('MODx.combo');
 /* fixes combobox value loading issue */
-Ext.override(Ext.form.ComboBox, {
-    loaded: false
-    ,setValue: Ext.form.ComboBox.prototype.setValue.createSequence(function(v) {
-        var idx = this.store.find(this.valueField, v);
+Ext.override(Ext.form.ComboBox,{loaded:false,setValue:Ext.form.ComboBox.prototype.setValue.createSequence(function(v){var a=this.store.find(this.valueField,v);if(v&&v!==0&&this.mode=='remote'&&a==-1&&!this.loaded){var p={};p[this.valueField]=v;this.loaded=true;this.store.load({scope:this,params:p,callback:function(){this.setValue(v);this.collapse()}})}})});
 
-        if (v && v !== 0 && this.mode == 'remote' && idx == -1 && !this.loaded) {
-            var p = {};
-            p[this.valueField] = v;
-            this.loaded = true;
-
-            this.store.load({
-                scope: this,
-                params: p,
-                callback: function() {
-                    this.setValue(v);
-                    this.collapse();
-                }
-            });
-        }
-    })
-});
-
-/**
- * An abstraction of Ext.form.ComboBox with connector ability.
- * 
- * @class MODx.combo.ComboBox
- * @extends Ext.form.ComboBox
- * @constructor
- * @param {Object} config An object of config properties
- * @param {Boolean} getStore If true, will return the store.
- */
 MODx.combo.ComboBox = function(config,getStore) {
 	config = config || {};
     Ext.applyIf(config,{
@@ -72,11 +43,6 @@ MODx.combo.ComboBox = function(config,getStore) {
 Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox);
 Ext.reg('modx-combo',MODx.combo.ComboBox);
 
-/**
- * Helps with rendering of comboboxes in grids.
- * @class MODx.combo.Renderer
- * @param {Ext.form.ComboBox} combo The combo to display
- */
 MODx.combo.Renderer = function(combo) {
     var loaded = false;
     return (function(v) {
@@ -94,13 +60,6 @@ MODx.combo.Renderer = function(combo) {
     });
 };
 
-/**
- * Displays a yes/no combobox
- * 
- * @class MODx.combo.Boolean
- * @extends Ext.form.ComboBox
- * @xtype modx-combo-boolean
- */
 MODx.combo.Boolean = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -122,13 +81,6 @@ Ext.extend(MODx.combo.Boolean,MODx.combo.ComboBox);
 Ext.reg('combo-boolean',MODx.combo.Boolean);
 Ext.reg('modx-combo-boolean',MODx.combo.Boolean);
 
-/**
- * Displays a dropdown list of modUsers
- * 
- * @class MODx.combo.User
- * @extends MODx.combo.ComboBox
- * @xtype modx-combo-user
- */
 MODx.combo.User = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
@@ -144,13 +96,6 @@ MODx.combo.User = function(config) {
 Ext.extend(MODx.combo.User,MODx.combo.ComboBox);
 Ext.reg('modx-combo-user',MODx.combo.User);
 
-/**
- * Displays a dropdown list of modUsers
- * 
- * @class MODx.combo.User
- * @extends MODx.combo.ComboBox
- * @xtype modx-combo-usergroup
- */
 MODx.combo.UserGroup = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
@@ -167,13 +112,6 @@ MODx.combo.UserGroup = function(config) {
 Ext.extend(MODx.combo.UserGroup,MODx.combo.ComboBox);
 Ext.reg('modx-combo-usergroup',MODx.combo.UserGroup);
 
-/**
- * Displays a dropdown list of modUserGroupRoles.
- * 
- * @class MODx.combo.UserGroupRole
- * @extends MODx.combo.ComboBox
- * @xtype modx-combo-usergrouprole
- */
 MODx.combo.UserGroupRole = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
@@ -189,13 +127,6 @@ MODx.combo.UserGroupRole = function(config) {
 Ext.extend(MODx.combo.UserGroupRole,MODx.combo.ComboBox);
 Ext.reg('modx-combo-usergrouprole',MODx.combo.UserGroupRole);
 
-/**
- * Displays a dropdown list of modResourceGroups.
- * 
- * @class MODx.combo.ResourceGroup
- * @extends MODx.combo.ComboBox
- * @xtype modx-combo-resourcegroup
- */
 MODx.combo.ResourceGroup = function(config) {
 	config = config || {};
     Ext.applyIf(config,{
@@ -211,13 +142,6 @@ MODx.combo.ResourceGroup = function(config) {
 Ext.extend(MODx.combo.ResourceGroup,MODx.combo.ComboBox);
 Ext.reg('modx-combo-resourcegroup',MODx.combo.ResourceGroup);
 
-/**
- * Displays a dropdown list of modContexts.
- * 
- * @class MODx.combo.Context
- * @extends MODx.combo.ComboBox
- * @xtype modx-combo-context
- */
 MODx.combo.Context = function(config) {
 	config = config || {};
     Ext.applyIf(config,{
@@ -233,13 +157,6 @@ MODx.combo.Context = function(config) {
 Ext.extend(MODx.combo.Context,MODx.combo.ComboBox);
 Ext.reg('modx-combo-context',MODx.combo.Context);
 
-/**
- * Displays a dropdown list of modPolicies.
- * 
- * @class MODx.combo.Policy
- * @extends MODx.combo.ComboBox
- * @xtype modx-combo-policy
- */
 MODx.combo.Policy = function(config) {
 	config = config || {};
     Ext.applyIf(config,{
@@ -257,13 +174,6 @@ MODx.combo.Policy = function(config) {
 Ext.extend(MODx.combo.Policy,MODx.combo.ComboBox);
 Ext.reg('modx-combo-policy',MODx.combo.Policy);
 
-/**
- * Displays a dropdown list of modTemplates.
- * 
- * @class MODx.combo.Template
- * @extends MODx.combo.ComboBox
- * @xtype modx-combo-template
- */
 MODx.combo.Template = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
@@ -285,13 +195,6 @@ MODx.combo.Template = function(config) {
 Ext.extend(MODx.combo.Template,MODx.combo.ComboBox);
 Ext.reg('modx-combo-template',MODx.combo.Template);
 
-/**
- * Displays a dropdown list of modCategories.
- * 
- * @class MODx.combo.Category
- * @extends MODx.combo.ComboBox
- * @xtype combo-category
- */
 MODx.combo.Category = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
@@ -320,13 +223,6 @@ Ext.extend(MODx.combo.Category,MODx.combo.ComboBox,{
 });
 Ext.reg('modx-combo-category',MODx.combo.Category);
 
-/**
- * Displays a dropdown list of languages.
- * 
- * @class MODx.combo.Language
- * @extends MODx.combo.ComboBox
- * @xtype modx-combo-language
- */
 MODx.combo.Language = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
@@ -346,14 +242,6 @@ MODx.combo.Language = function(config) {
 Ext.extend(MODx.combo.Language,MODx.combo.ComboBox);
 Ext.reg('modx-combo-language',MODx.combo.Language);
 
-/**
- * Displays a dropdown list of available charsets.
- * 
- * @class MODx.combo.Charset
- * @extends MODx.combo.ComboBox
- * @constructor
- * @xtype combo-charset
- */
 MODx.combo.Charset = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
@@ -374,14 +262,6 @@ MODx.combo.Charset = function(config) {
 Ext.extend(MODx.combo.Charset,MODx.combo.ComboBox);
 Ext.reg('modx-combo-charset',MODx.combo.Charset);
 
-/**
- * Displays a dropdown list of available RTEs.
- * 
- * @class MODx.combo.RTE
- * @extends MODx.combo.ComboBox
- * @constructor
- * @xtype combo-rte
- */
 MODx.combo.RTE = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
@@ -402,13 +282,6 @@ MODx.combo.RTE = function(config) {
 Ext.extend(MODx.combo.RTE,MODx.combo.ComboBox);
 Ext.reg('modx-combo-rte',MODx.combo.RTE);
 
-/**
- * Displays a dropdown list of available Roles.
- * 
- * @class MODx.combo.Role
- * @extends MODx.combo.ComboBox
- * @xtype combo-role
- */
 MODx.combo.Role = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -427,13 +300,6 @@ MODx.combo.Role = function(config) {
 Ext.extend(MODx.combo.Role,MODx.combo.ComboBox);
 Ext.reg('modx-combo-role',MODx.combo.Role);
 
-/**
- * Displays a dropdown list of available Content Types.
- * 
- * @class MODx.combo.ContentType
- * @extends MODx.combo.ComboBox
- * @xtype modx-combo-content-type
- */
 MODx.combo.ContentType = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -452,14 +318,6 @@ MODx.combo.ContentType = function(config) {
 Ext.extend(MODx.combo.ContentType,MODx.combo.ComboBox);
 Ext.reg('modx-combo-content-type',MODx.combo.ContentType);
 
-/**
- * Displays a content disposition combo
- * 
- * @class MODx.combo.ContentDisposition
- * @extends Ext.form.ComboBox
- * @constructor
- * @xtype combo-boolean
- */
 MODx.combo.ContentDisposition = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -483,15 +341,6 @@ MODx.combo.ContentDisposition = function(config) {
 Ext.extend(MODx.combo.ContentDisposition,Ext.form.ComboBox);
 Ext.reg('modx-combo-content-disposition',MODx.combo.ContentDisposition);
 
-
-/**
- * Displays a dropdown list of class keys
- * 
- * @class MODx.combo.ClassKey
- * @extends MODx.combo.ComboBox
- * @param {Object} config An object of options.
- * @xtype modx-combo-class-key
- */
 MODx.combo.ClassKey = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -511,16 +360,6 @@ MODx.combo.ClassKey = function(config) {
 Ext.extend(MODx.combo.ClassKey,MODx.combo.ComboBox);
 Ext.reg('modx-combo-class-key',MODx.combo.ClassKey);
 
-
-/**
- * Displays a dropdown list of various objects, dynamically chosen
- * by a class key
- * 
- * @class MODx.combo.Object
- * @extends MODx.combo.ComboBox
- * @param {Object} config An object of options.
- * @xtype modx-combo-object
- */
 MODx.combo.Object = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -542,13 +381,6 @@ MODx.combo.Object = function(config) {
 Ext.extend(MODx.combo.Object,MODx.combo.ComboBox);
 Ext.reg('modx-combo-object',MODx.combo.Object);
 
-/**
- * Displays a dropdown list of available Content Types.
- * 
- * @class MODx.combo.ContentType
- * @extends MODx.combo.ComboBox
- * @xtype modx-combo-namespace
- */
 MODx.combo.Namespace = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -569,16 +401,6 @@ MODx.combo.Namespace = function(config) {
 Ext.extend(MODx.combo.Namespace,MODx.combo.ComboBox);
 Ext.reg('modx-combo-namespace',MODx.combo.Namespace);
 
-
-
-/**
- * Launches MODx.Browser in a nice, clean way.
- * 
- * @class MODx.combo.Browser
- * @extends Ext.form.TriggerField
- * @param {Object} config An object of configuration properties
- * @xtype modx-combo-browser
- */
 MODx.combo.Browser = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -621,15 +443,6 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
 });
 Ext.reg('modx-combo-browser',MODx.combo.Browser);
 
-
-/**
- * Displays a dropdown list of available countries.
- * 
- * @class MODx.combo.Country
- * @extends MODx.combo.ComboBox
- * @param {Object} config An object of configuration properties
- * @xtype modx-combo-country
- */
 MODx.combo.Country = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -647,15 +460,6 @@ MODx.combo.Country = function(config) {
 Ext.extend(MODx.combo.Country,MODx.combo.ComboBox);
 Ext.reg('modx-combo-country',MODx.combo.Country);
 
-
-/**
- * Displays a dropdown list of property sets.
- * 
- * @class MODx.combo.PropertySet
- * @extends MODx.combo.ComboBox
- * @param {Object} config An object of configuration properties
- * @xtype modx-combo-property-set
- */
 MODx.combo.PropertySet = function(config) {
     config = config || {};
     Ext.applyIf(config,{

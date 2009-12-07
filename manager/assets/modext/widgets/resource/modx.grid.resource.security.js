@@ -1,12 +1,3 @@
-/**
- * Loads a grid of resource groups assigned to a resource. 
- * 
- * @class MODx.grid.ResourceSecurity
- * @extends MODx.grid.Grid
- * @constructor
- * @param {Object} config An object of options.
- * @xtype grid-resource-security
- */
 MODx.grid.ResourceSecurity = function(config) {
     config = config || {};
     var ac = new Ext.ux.grid.CheckColumn({

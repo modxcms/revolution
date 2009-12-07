@@ -99,13 +99,6 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
         return Ext.encode(nodes);
     }
     
-    
-    
-    /**
-     * Shows the current context menu.
-     * @param {Ext.tree.TreeNode} node The 
-     * @param {Ext.EventObject} e The event object run.
-     */
     ,_showContextMenu: function(node,e) {
         node.select();
         this.cm.activeNode = node;
@@ -118,12 +111,6 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
         }
     }
     
-    
-    
-    /**
-     * Add context menu items to the tree.
-     * @param {Object, Array} items Either an Object config or array of Object configs.  
-     */
     ,addContextMenuItem: function(items) {
         var a = items, l = a.length;
         for(var i = 0; i < l; i++) {
@@ -149,10 +136,6 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
         }
     }
     
-    /**
-     * Removes specified node
-     * @param {String} id The node's ID
-     */
     ,removeNode: function(id) {
         var node = this.getNodeById(id);
         if (node) {
@@ -160,18 +143,10 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
         }
     }
     
-    /**
-     * Dynamically removes active node
-     * @access public 
-     */
     ,removeActiveNode: function() {
         this.cm.activeNode.remove();
     }
     
-    /**
-     * Refreshes the tree and fires refresh event.
-     * @return {Boolean} True if successful.
-     */
     ,refresh: function() {
         var treeState = Ext.state.Manager.get(this.treestateId);
         var root = this.getRootNode();
@@ -185,9 +160,6 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
         return true;
     }
     
-    /**
-     * Expand the tree and all children.
-     */
     ,expand: function() {
         if (this.root) {
             this.root.expand();
@@ -195,9 +167,6 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
         }
     }
     
-    /**
-     * Completely collapse the tree.
-     */
     ,collapse: function() {
         if (this.root) {
             this.root.collapseChildNodes();
@@ -205,9 +174,6 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
         }
     }
     
-    /**
-     * Gets a default toolbar setup
-     */
     ,getToolbar: function() {
         var iu = MODx.config.template_url+'images/restyle/icons/';
         return [{
@@ -233,305 +199,5 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
 });
 Ext.reg('tree-checkbox',MODx.tree.CheckboxTree);
 
-
-
-MODx.tree.CheckboxNodeUI = Ext.extend(Ext.tree.TreeNodeUI, {
-    onCheckChange :function(){
-        MODx.tree.CheckboxNodeUI.superclass.onCheckChange.apply(this, arguments);
-        var p;
-        if((p = this.node.parentNode) && p.getUI().updateParent) {
-            p.getUI().updateParent();
-        }
-    },
-    toggleCheck :function(){
-        var checked = MODx.tree.CheckboxNodeUI.superclass.toggleCheck.apply(this, arguments);
-        this.updateChild(checked);
-        return checked;
-    },
-    renderElements :function(n, a, targetNode, bulkRender){
-        MODx.tree.CheckboxNodeUI.superclass.renderElements.apply(this, arguments);
-        this.updateChild(this.node.attributes.checked);
-    },
-    updateParent :function(){
-        var checked;
-        this.node.eachChild(function(n){
-            if(checked === undefined){
-                checked = n.attributes.checked;
-            }else if (checked !== n.attributes.checked) {
-                checked = this.grayedValue;
-                return false;
-            }
-        }, this);
-        this.toggleCheck(checked);
-    },
-    updateChild:function(checked){
-        if(this.checkbox && false){
-            if(checked === true){
-                Ext.fly(this.ctNode).replaceClass('x-tree-branch-unchecked', 'x-tree-branch-checked');
-            } else if(checked === false){
-                Ext.fly(this.ctNode).replaceClass('x-tree-branch-checked', 'x-tree-branch-unchecked');
-            } else {
-                Ext.fly(this.ctNode).removeClass(['x-tree-branch-checked', 'x-tree-branch-unchecked']);
-            }
-        }
-    }
-});
-
-
-Ext.override(Ext.tree.TreeNodeUI, {
-    grayedValue:null,
-    onDisableChange :function(node, state){
-        this.disabled = state;
-        this[state ? 'addClass' :'removeClass']("x-tree-node-disabled");
-    },
-    initEvents :function(){
-        this.node.on("move", this.onMove, this);
-        this.addClass('x-tree-checkboxnode');
-        if(this.node.disabled){
-            this.addClass("x-tree-node-disabled");
-        }
-        if(this.node.hidden){
-            this.hide();
-        }
-        var ot = this.node.getOwnerTree();
-        var dd = ot.enableDD || ot.enableDrag || ot.enableDrop;
-        if(dd && (!this.node.isRoot || ot.rootVisible)){
-            Ext.dd.Registry.register(this.elNode, {
-                node:this.node,
-                handles:this.getDDHandles(),
-                isHandle:false
-            });
-        }
-    },
-    onDblClick :function(e){
-        e.preventDefault();
-        if(this.disabled){
-            return;
-        }
-        if(!this.animating && this.node.isExpandable()){
-            this.node.toggle();
-        }
-        this.fireEvent("dblclick", this.node, e);
-    },
-    onCheckChange :function(){
-        var checked = this.isChecked();
-        this.node.attributes.checked = checked;
-        this.fireEvent('checkchange', this.node, checked);
-    },
-    toggleCheck :function(checked){
-        var cb = this.checkbox;
-        if(!cb){
-            return false;
-        }
-        if(checked === undefined){
-            checked = this.isChecked() === false;
-        }
-        if(checked === true){
-            Ext.fly(cb).replaceClass('x-tree-node-grayed', 'x-tree-node-checked');
-        } else if(checked !== false){
-            Ext.fly(cb).replaceClass('x-tree-node-checked', 'x-tree-node-grayed');
-        } else {
-            Ext.fly(cb).removeClass(['x-tree-node-checked', 'x-tree-node-grayed']);
-        }
-        this.onCheckChange();
-        return checked;
-    },
-    onCheckboxClick:function() {
-        if(!this.disabled){
-            this.toggleCheck();
-        }
-    },
-    onCheckboxOver:function() {
-        this.addClass('x-tree-checkbox-over');
-    },
-    onCheckboxOut:function() {
-        this.removeClass('x-tree-checkbox-over');
-    },
-    onCheckboxDown:function() {
-        this.addClass('x-tree-checkbox-down');
-    },
-    onCheckboxUp:function() {
-        this.removeClass('x-tree-checkbox-down');
-    },
-    renderElements :function(n, a, targetNode, bulkRender){
-        this.indentMarkup = n.parentNode ? n.parentNode.ui.getChildIndent() :'';
-        var cb = a.checked !== undefined;
-        var href = a.href ? a.href :Ext.isGecko ? "" :"#";
-        var buf = ['<li class="x-tree-node"><div ext:tree-node-id="',n.id,'" class="x-tree-node-el x-tree-node-leaf x-unselectable ', a.cls,'" unselectable="on">',
-            '<span class="x-tree-node-indent">',this.indentMarkup,"</span>",
-            '<img src="', this.emptyIcon, '" class="x-tree-ec-icon x-tree-elbow" />',
-            '<img src="', a.icon || this.emptyIcon, '" class="x-tree-node-icon',(a.icon ? " x-tree-node-inline-icon" :""),(a.iconCls ? " "+a.iconCls :""),'" unselectable="on" />',
-            cb ? ('<img src="'+this.emptyIcon+'" class="x-tree-checkbox'+(a.checked === true ? ' x-tree-node-checked' :(a.checked !== false ? ' x-tree-node-grayed' :''))+'" />') :'',
-            '<a hidefocus="on" class="x-tree-node-anchor" href="',href,'" tabIndex="1" ',(a.hrefTarget ? ' target="'+a.hrefTarget+'"' :""), '>',
-            '<span unselectable="on">',n.text,'</span>',
-            '</a>',
-            '</div><ul class="x-tree-node-ct" style="display:none;"></ul>',
-            "</li>"].join('');
-        var nel;
-        if(bulkRender !== true && n.nextSibling && (nel = n.nextSibling.ui.getEl())){
-            this.wrap = Ext.DomHelper.insertHtml("beforeBegin", nel, buf);
-        }else{
-            this.wrap = Ext.DomHelper.insertHtml("beforeEnd", targetNode, buf);
-        }
-        this.elNode = this.wrap.childNodes[0];
-        this.ctNode = this.wrap.childNodes[1];
-        var cs = this.elNode.childNodes;
-        this.indentNode = cs[0];
-        this.ecNode = cs[1];
-        this.iconNode = cs[2];
-        var index = 3;
-        if(cb){
-            this.checkbox = cs[3];
-            index=index+1;
-        }
-        this.anchor = cs[index];
-        this.textNode = cs[index].firstChild;
-        var z;
-        if (a.description && this.textNode) {
-            z = new Ext.ToolTip({
-                target: this.textNode
-                ,html: a.description
-            });
-        }
-    },
-    isChecked :function(){
-        return this.checkbox
-            ? (Ext.fly(this.checkbox).hasClass('x-tree-node-checked')
-                ? true
-                :Ext.fly(this.checkbox).hasClass('x-tree-node-grayed')
-                    ? this.grayedValue
-                    :false)
-            :false;
-    }
-});
-Ext.override(Ext.tree.TreeEventModel, {
-    initEvents :function(){
-        var el = this.tree.getTreeEl();
-        el.on('click', this.delegateClick, this);
-        if(this.tree.trackMouseOver !== false){
-            el.on('mouseover', this.delegateOver, this);
-            el.on('mouseout', this.delegateOut, this);
-        }
-        el.on('mousedown', this.delegateDown, this);
-        el.on('mouseup', this.delegateUp, this);
-        el.on('dblclick', this.delegateDblClick, this);
-        el.on('contextmenu', this.delegateContextMenu, this);
-    },
-    delegateOver :function(e, t){
-        if(!this.beforeEvent(e)){
-            return;
-        }
-        if(this.lastEcOver){
-            this.onIconOut(e, this.lastEcOver);
-            delete this.lastEcOver;
-        }
-        if(this.lastCbOver){
-            this.onCheckboxOut(e, this.lastCbOver);
-            delete this.lastCbOver;
-        }
-        if(e.getTarget('.x-tree-ec-icon', 1)){
-            this.lastEcOver = this.getNode(e);
-            this.onIconOver(e, this.lastEcOver);
-        }
-        else if(e.getTarget('.x-tree-checkbox', 1)){
-            this.lastCbOver = this.getNode(e);
-            this.onCheckboxOver(e, this.lastCbOver);
-        }
-        t = this.getNodeTarget(e);
-        if (t) {
-            this.onNodeOver(e, this.getNode(e));
-        }
-    },
-    delegateOut :function(e, t){
-        if(!this.beforeEvent(e)){
-            return;
-        }
-        var n;
-        if(e.getTarget('.x-tree-ec-icon', 1)){
-            n = this.getNode(e);
-            this.onIconOut(e, n);
-            if(n === this.lastEcOver){
-                delete this.lastEcOver;
-            }
-        }
-        else if(e.getTarget('.x-tree-checkbox', 1)){
-            n = this.getNode(e);
-            this.onCheckboxOut(e, n);
-            if(n === this.lastCbOver){
-                delete this.lastCbOver;
-            }
-        }
-        t = this.getNodeTarget(e);
-        if(t && !e.within(t, true)){
-            this.onNodeOut(e, this.getNode(e));
-        }
-    },
-    delegateDown :function(e, t){
-        if(!this.beforeEvent(e)){
-            return;
-        }
-        if(e.getTarget('.x-tree-checkbox', 1)){
-            this.onCheckboxDown(e, this.getNode(e));
-        }
-    },
-    delegateUp :function(e, t){
-        if(!this.beforeEvent(e)){
-            return;
-        }
-        if(e.getTarget('.x-tree-checkbox', 1)){
-            this.onCheckboxUp(e, this.getNode(e));
-        }
-    },
-    delegateOut :function(e, t){
-        if(!this.beforeEvent(e)){
-            return;
-        }
-        var n;
-        if(e.getTarget('.x-tree-ec-icon', 1)){
-            n = this.getNode(e);
-            this.onIconOut(e, n);
-            if(n === this.lastEcOver){
-                delete this.lastEcOver;
-            }
-        }
-        else if(e.getTarget('.x-tree-checkbox', 1)){
-            n = this.getNode(e);
-            this.onCheckboxOut(e, n);
-            if(n === this.lastCbOver){
-                delete this.lastCbOver;
-            }
-        }
-        if((t = this.getNodeTarget(e)) && !e.within(t, true)){
-            this.onNodeOut(e, this.getNode(e));
-        }
-    },
-    delegateClick :function(e, t){
-        if(!this.beforeEvent(e)){
-            return;
-        }
-        if(e.getTarget('.x-tree-checkbox', 1)){
-            this.onCheckboxClick(e, this.getNode(e));
-        }
-        else if(e.getTarget('.x-tree-ec-icon', 1)){
-            this.onIconClick(e, this.getNode(e));
-        }
-        else if(this.getNodeTarget(e)){
-            this.onNodeClick(e, this.getNode(e));
-        }
-    },
-    onCheckboxClick :function(e, node){
-        node.ui.onCheckboxClick();
-    },
-    onCheckboxOver :function(e, node){
-        node.ui.onCheckboxOver();
-    },
-    onCheckboxOut :function(e, node){
-        node.ui.onCheckboxOut();
-    },
-    onCheckboxDown :function(e, node){
-        node.ui.onCheckboxDown();
-    },
-    onCheckboxUp :function(e, node){
-        node.ui.onCheckboxUp();
-    }
-});
+/* checkbox node ui */
+MODx.tree.CheckboxNodeUI=Ext.extend(Ext.tree.TreeNodeUI,{onCheckChange:function(){MODx.tree.CheckboxNodeUI.superclass.onCheckChange.apply(this,arguments);var p;if((p=this.node.parentNode)&&p.getUI().updateParent){p.getUI().updateParent()}},toggleCheck:function(){var a=MODx.tree.CheckboxNodeUI.superclass.toggleCheck.apply(this,arguments);this.updateChild(a);return a},renderElements:function(n,a,b,c){MODx.tree.CheckboxNodeUI.superclass.renderElements.apply(this,arguments);this.updateChild(this.node.attributes.checked)},updateParent:function(){var a;this.node.eachChild(function(n){if(a===undefined){a=n.attributes.checked}else if(a!==n.attributes.checked){a=this.grayedValue;return false}},this);this.toggleCheck(a)},updateChild:function(a){if(this.checkbox&&false){if(a===true){Ext.fly(this.ctNode).replaceClass('x-tree-branch-unchecked','x-tree-branch-checked')}else if(a===false){Ext.fly(this.ctNode).replaceClass('x-tree-branch-checked','x-tree-branch-unchecked')}else{Ext.fly(this.ctNode).removeClass(['x-tree-branch-checked','x-tree-branch-unchecked'])}}}});Ext.override(Ext.tree.TreeNodeUI,{grayedValue:null,onDisableChange:function(a,b){this.disabled=b;this[b?'addClass':'removeClass']("x-tree-node-disabled")},initEvents:function(){this.node.on("move",this.onMove,this);this.addClass('x-tree-checkboxnode');if(this.node.disabled){this.addClass("x-tree-node-disabled")}if(this.node.hidden){this.hide()}var a=this.node.getOwnerTree();var b=a.enableDD||a.enableDrag||a.enableDrop;if(b&&(!this.node.isRoot||a.rootVisible)){Ext.dd.Registry.register(this.elNode,{node:this.node,handles:this.getDDHandles(),isHandle:false})}},onDblClick:function(e){e.preventDefault();if(this.disabled){return}if(!this.animating&&this.node.isExpandable()){this.node.toggle()}this.fireEvent("dblclick",this.node,e)},onCheckChange:function(){var a=this.isChecked();this.node.attributes.checked=a;this.fireEvent('checkchange',this.node,a)},toggleCheck:function(a){var b=this.checkbox;if(!b){return false}if(a===undefined){a=this.isChecked()===false}if(a===true){Ext.fly(b).replaceClass('x-tree-node-grayed','x-tree-node-checked')}else if(a!==false){Ext.fly(b).replaceClass('x-tree-node-checked','x-tree-node-grayed')}else{Ext.fly(b).removeClass(['x-tree-node-checked','x-tree-node-grayed'])}this.onCheckChange();return a},onCheckboxClick:function(){if(!this.disabled){this.toggleCheck()}},onCheckboxOver:function(){this.addClass('x-tree-checkbox-over')},onCheckboxOut:function(){this.removeClass('x-tree-checkbox-over')},onCheckboxDown:function(){this.addClass('x-tree-checkbox-down')},onCheckboxUp:function(){this.removeClass('x-tree-checkbox-down')},renderElements:function(n,a,b,c){this.indentMarkup=n.parentNode?n.parentNode.ui.getChildIndent():'';var d=a.checked!==undefined;var e=a.href?a.href:Ext.isGecko?"":"#";var f=['<li class="x-tree-node"><div ext:tree-node-id="',n.id,'" class="x-tree-node-el x-tree-node-leaf x-unselectable ',a.cls,'" unselectable="on">','<span class="x-tree-node-indent">',this.indentMarkup,"</span>",'<img src="',this.emptyIcon,'" class="x-tree-ec-icon x-tree-elbow" />','<img src="',a.icon||this.emptyIcon,'" class="x-tree-node-icon',(a.icon?" x-tree-node-inline-icon":""),(a.iconCls?" "+a.iconCls:""),'" unselectable="on" />',d?('<img src="'+this.emptyIcon+'" class="x-tree-checkbox'+(a.checked===true?' x-tree-node-checked':(a.checked!==false?' x-tree-node-grayed':''))+'" />'):'','<a hidefocus="on" class="x-tree-node-anchor" href="',e,'" tabIndex="1" ',(a.hrefTarget?' target="'+a.hrefTarget+'"':""),'>','<span unselectable="on">',n.text,'</span>','</a>','</div><ul class="x-tree-node-ct" style="display:none;"></ul>',"</li>"].join('');var g;if(c!==true&&n.nextSibling&&(g=n.nextSibling.ui.getEl())){this.wrap=Ext.DomHelper.insertHtml("beforeBegin",g,f)}else{this.wrap=Ext.DomHelper.insertHtml("beforeEnd",b,f)}this.elNode=this.wrap.childNodes[0];this.ctNode=this.wrap.childNodes[1];var h=this.elNode.childNodes;this.indentNode=h[0];this.ecNode=h[1];this.iconNode=h[2];var i=3;if(d){this.checkbox=h[3];i=i+1}this.anchor=h[i];this.textNode=h[i].firstChild;var z;if(a.description&&this.textNode){z=new Ext.ToolTip({target:this.textNode,html:a.description})}},isChecked:function(){return this.checkbox?(Ext.fly(this.checkbox).hasClass('x-tree-node-checked')?true:Ext.fly(this.checkbox).hasClass('x-tree-node-grayed')?this.grayedValue:false):false}});Ext.override(Ext.tree.TreeEventModel,{initEvents:function(){var a=this.tree.getTreeEl();a.on('click',this.delegateClick,this);if(this.tree.trackMouseOver!==false){a.on('mouseover',this.delegateOver,this);a.on('mouseout',this.delegateOut,this)}a.on('mousedown',this.delegateDown,this);a.on('mouseup',this.delegateUp,this);a.on('dblclick',this.delegateDblClick,this);a.on('contextmenu',this.delegateContextMenu,this)},delegateOver:function(e,t){if(!this.beforeEvent(e)){return}if(this.lastEcOver){this.onIconOut(e,this.lastEcOver);delete this.lastEcOver}if(this.lastCbOver){this.onCheckboxOut(e,this.lastCbOver);delete this.lastCbOver}if(e.getTarget('.x-tree-ec-icon',1)){this.lastEcOver=this.getNode(e);this.onIconOver(e,this.lastEcOver)}else if(e.getTarget('.x-tree-checkbox',1)){this.lastCbOver=this.getNode(e);this.onCheckboxOver(e,this.lastCbOver)}t=this.getNodeTarget(e);if(t){this.onNodeOver(e,this.getNode(e))}},delegateOut:function(e,t){if(!this.beforeEvent(e)){return}var n;if(e.getTarget('.x-tree-ec-icon',1)){n=this.getNode(e);this.onIconOut(e,n);if(n===this.lastEcOver){delete this.lastEcOver}}else if(e.getTarget('.x-tree-checkbox',1)){n=this.getNode(e);this.onCheckboxOut(e,n);if(n===this.lastCbOver){delete this.lastCbOver}}t=this.getNodeTarget(e);if(t&&!e.within(t,true)){this.onNodeOut(e,this.getNode(e))}},delegateDown:function(e,t){if(!this.beforeEvent(e)){return}if(e.getTarget('.x-tree-checkbox',1)){this.onCheckboxDown(e,this.getNode(e))}},delegateUp:function(e,t){if(!this.beforeEvent(e)){return}if(e.getTarget('.x-tree-checkbox',1)){this.onCheckboxUp(e,this.getNode(e))}},delegateOut:function(e,t){if(!this.beforeEvent(e)){return}var n;if(e.getTarget('.x-tree-ec-icon',1)){n=this.getNode(e);this.onIconOut(e,n);if(n===this.lastEcOver){delete this.lastEcOver}}else if(e.getTarget('.x-tree-checkbox',1)){n=this.getNode(e);this.onCheckboxOut(e,n);if(n===this.lastCbOver){delete this.lastCbOver}}if((t=this.getNodeTarget(e))&&!e.within(t,true)){this.onNodeOut(e,this.getNode(e))}},delegateClick:function(e,t){if(!this.beforeEvent(e)){return}if(e.getTarget('.x-tree-checkbox',1)){this.onCheckboxClick(e,this.getNode(e))}else if(e.getTarget('.x-tree-ec-icon',1)){this.onIconClick(e,this.getNode(e))}else if(this.getNodeTarget(e)){this.onNodeClick(e,this.getNode(e))}},onCheckboxClick:function(e,a){a.ui.onCheckboxClick()},onCheckboxOver:function(e,a){a.ui.onCheckboxOver()},onCheckboxOut:function(e,a){a.ui.onCheckboxOut()},onCheckboxDown:function(e,a){a.ui.onCheckboxDown()},onCheckboxUp:function(e,a){a.ui.onCheckboxUp()}});
