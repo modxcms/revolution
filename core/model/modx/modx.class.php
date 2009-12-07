@@ -916,6 +916,7 @@ class modX extends xPDO {
                 )
             );
         }
+        $this->toPlaceholders($this->user->get(array('id','username')),'modx.user');
         return $this->user;
     }
 
