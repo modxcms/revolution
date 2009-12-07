@@ -5,7 +5,7 @@
  */
 $this->xpdo->lexicon->load('tv_widget');
 
-$value = $this->get('processedValue');
+$value = $this->get('value');
 
 // handles radio buttons
 $index_list = $this->parseInputOptions($this->processBindings($this->get('elements'),$this->get('name')));

@@ -5,7 +5,9 @@
  */
 $this->xpdo->lexicon->load('tv_widget');
 
-$value = explode("||",$this->get('processedValue'));
+$value = explode("||",$this->get('value'));
+
+$default = explode("||",$this->get('default_text'));
 
 $index_list = $this->parseInputOptions($this->processBindings($this->get('elements'),$this->get('name')));
 $opts = array();
@@ -18,6 +20,8 @@ while (list($item, $itemvalue) = each ($index_list)) {
 
     if (in_array($itemvalue,$value)) {
         $checked = true;
+    }
+    if (in_array($itemvalue,$default)) {
         $defaults[] = 'tv'.$this->get('id').'-'.$i;
     }
 
