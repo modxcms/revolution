@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Prevent tree from expanding too much on quick create
 - Assigned user id/username to [[+modx.user.id]] and [[+modx.user.username]] for easier access
 - Cleaned up last PHP4 remnants to PHP5-only
 - [#MODX-1483] Fixed bug with TV saving in resource create processors

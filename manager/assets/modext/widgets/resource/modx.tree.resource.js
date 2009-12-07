@@ -242,9 +242,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     if (node) {
                         var n = node.parentNode ? node.parentNode : node;
                         this.getLoader().load(n,function() {
-                            n.expand(false,false,function() {
-                                n.expandChildNodes();
-                            },this);
+                            n.expand();
                         },this);
                     }
                 },scope:this}
