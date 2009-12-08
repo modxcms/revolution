@@ -27,6 +27,7 @@ $onTempFormRender = $modx->invokeEvent('OnTempFormRender',array(
     'mode' => 'new',
 ));
 if (is_array($onTempFormRender)) $onTempFormRender = implode('',$onTempFormRender);
+$onTempFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onTempFormRender);
 $modx->smarty->assign('onTempFormRender',$onTempFormRender);
 
 /* check unlock default element properties permission */

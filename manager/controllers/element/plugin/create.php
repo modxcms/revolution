@@ -27,6 +27,7 @@ $onPluginFormRender = $modx->invokeEvent('OnPluginFormRender',array(
     'mode' => 'new',
 ));
 if (is_array($onPluginFormRender)) $onPluginFormRender = implode('',$onPluginFormRender);
+$onPluginFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onPluginFormRender);
 $modx->smarty->assign('onPluginFormRender',$onPluginFormRender);
 
 /* check unlock default element properties permission */

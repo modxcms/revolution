@@ -32,9 +32,8 @@ $onChunkFormRender = $modx->invokeEvent('OnChunkFormRender',array(
     'id' => 0,
     'mode' => 'new',
 ));
-if (is_array($onChunkFormRender)) {
-	$onChunkFormRender = implode('', $onChunkFormRender);
-}
+if (is_array($onChunkFormRender)) $onChunkFormRender = implode('', $onChunkFormRender);
+$onChunkFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onChunkFormRender);
 $modx->smarty->assign('onChunkFormRender',$onChunkFormRender);
 
 

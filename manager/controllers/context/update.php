@@ -36,6 +36,7 @@ $onContextFormRender = $modx->invokeEvent('OnContextFormRender',array(
     'mode' => 'upd',
 ));
 if (is_array($onContextFormRender)) $onContextFormRender = implode('',$onContextFormRender);
+$onContextFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onContextFormRender);
 $modx->smarty->assign('OnContextFormRender',$onContextFormRender);
 
 

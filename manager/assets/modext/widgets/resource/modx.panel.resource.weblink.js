@@ -166,6 +166,8 @@ MODx.panel.WebLink = function(config) {
             ,name: 'context_key'
             ,id: 'modx-weblink-context-key'
             ,value: 'web'
+        },{
+            html: MODx.onDocFormRender, border: false
         }]
     });
     

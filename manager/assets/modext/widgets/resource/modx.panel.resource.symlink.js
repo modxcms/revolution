@@ -163,6 +163,8 @@ MODx.panel.SymLink = function(config) {
             ,name: 'context_key'
             ,id: 'modx-symlink-context-key'
             ,value: 'web'
+        },{
+            html: MODx.onDocFormRender, border: false
         }]
     });
     

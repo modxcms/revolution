@@ -32,9 +32,8 @@ $modx->smarty->assign('onChunkFormPrerender',$onChunkFormPrerender);
 
 /* invoke OnChunkFormRender event */
 $onChunkFormRender = $modx->invokeEvent('OnChunkFormRender',array('id' => $_REQUEST['id']));
-if (is_array($onChunkFormRender)) {
-	$onChunkFormRender = implode('', $onChunkFormRender);
-}
+if (is_array($onChunkFormRender)) $onChunkFormRender = implode('', $onChunkFormRender);
+$onChunkFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onChunkFormRender);
 $modx->smarty->assign('onChunkFormRender',$onChunkFormRender);
 
 /* invoke OnRichTextEditorInit event */

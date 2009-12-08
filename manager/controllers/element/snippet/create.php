@@ -27,6 +27,7 @@ $onSnipFormRender = $modx->invokeEvent('OnSnipFormRender',array(
     'mode' => 'new',
 ));
 if (is_array($onSnipFormRender)) $onSnipFormRender = implode('',$onSnipFormRender);
+$onSnipFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onSnipFormRender);
 $modx->smarty->assign('onSnipFormRender',$onSnipFormRender);
 
 /* check unlock default element properties permission */

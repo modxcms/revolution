@@ -88,9 +88,8 @@ $onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(
     'id' => 0,
     'mode' => 'new',
 ));
-if (is_array($onDocFormRender)) {
-    $onDocFormRender = implode('',$onDocFormRender);
-}
+if (is_array($onDocFormRender)) $onDocFormRender = implode('',$onDocFormRender);
+$onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocFormRender);
 $modx->smarty->assign('onDocFormRender',$onDocFormRender);
 
 /* assign resource to smarty */
@@ -115,6 +114,7 @@ $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[
 MODx.config.publish_document = "'.$publish_document.'";
+MODx.onDocFormRender = "'.$onDocFormRender.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-weblink-create"

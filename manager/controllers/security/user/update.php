@@ -40,6 +40,7 @@ $onUserFormRender = $modx->invokeEvent('OnUserFormRender', array(
     'mode' => 'new',
 ));
 if (is_array($onUserFormRender)) $onUserFormRender = implode('',$onUserFormRender);
+$onUserFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onUserFormRender);
 $modx->regClientStartupHTMLBlock('<script type="text/javascript">
 // <![CDATA[
 MODx.onUserFormRender = "'.$onUserFormRender.'";

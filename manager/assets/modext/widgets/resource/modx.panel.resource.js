@@ -194,6 +194,8 @@ MODx.panel.Resource = function(config) {
             xtype: 'hidden'
             ,name: 'content'
             ,id: 'hiddenContent'
+        },{
+            html: MODx.onDocFormRender, border: false
         }]
     });
     if (!MODx.config.manager_use_tabs) {

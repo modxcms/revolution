@@ -177,6 +177,8 @@ MODx.panel.Static = function(config) {
             ,name: 'context_key'
             ,id: 'modx-static-context-key'
             ,value: 'web'
+        },{
+            html: MODx.onDocFormRender, border: false
         }]
     });
     

@@ -70,6 +70,7 @@ $onTVFormRender = $modx->invokeEvent('OnTVFormRender',array(
     'mode' => 'upd',
 ));
 if (is_array($onTVFormRender)) $onTVFormRender = implode('',$onTVFormRender);
+$onTVFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onTVFormRender);
 $modx->smarty->assign('onTVFormRender',$onTVFormRender);
 
 /* check unlock default element properties permission */

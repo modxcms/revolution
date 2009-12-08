@@ -29,9 +29,8 @@ $onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
     'resource' => &$resource,
     'mode' => 'upd',
 ));
-if (is_array($onDocFormPrerender)) {
-    $onDocFormPrerender = implode('',$onDocFormPrerender);
-}
+if (is_array($onDocFormPrerender)) $onDocFormPrerender = implode('',$onDocFormPrerender);
+$onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocFormRender);
 $modx->smarty->assign('onDocFormPrerender',$onDocFormPrerender);
 
 /* handle default parent */
@@ -98,6 +97,7 @@ $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[
 MODx.config.publish_document = "'.$publish_document.'";
+MODx.onDocFormRender = "'.$onDocFormRender.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-symlink-update"
