@@ -301,7 +301,6 @@ ul.x-tab-strip li.x-tab-strip-active  {
 	background:transparent url(../images/modx/form/combo-bck.png) repeat-x scroll 0 bottom}
 
 .x-form-field-wrap .x-form-date-trigger{
-    background-image: url(../images/modx/form/date-trigger.gif);
 }
 
 .x-form-field-wrap .x-form-clear-trigger{
@@ -1130,7 +1129,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-date-middle .x-btn .x-btn-text {
-    color:#fff;
+    color:#7F7F7F;
 }
 
 .x-date-middle .x-btn-mc em.x-btn-arrow {
