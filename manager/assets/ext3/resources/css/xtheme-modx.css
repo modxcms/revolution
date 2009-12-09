@@ -269,8 +269,6 @@ ul.x-tab-strip li.x-tab-strip-active  {
 	-webkit-border-top-right-radius:0;
 	-webkit-border-bottom-right-radius:0;
 	border-right: 0 none;
-	color:#5E5E5E;
-	font-weight:bold;
 	padding-right:3px;
 	text-shadow:1px -1px 0 #FFFFFF;
 }
@@ -415,7 +413,6 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-btn-noicon .x-btn-small .x-btn-text {
-	color:#7F7F7F;
 	font-weight:bold;
 	text-shadow:1px 1px 0 #FFFFFF;
 }
