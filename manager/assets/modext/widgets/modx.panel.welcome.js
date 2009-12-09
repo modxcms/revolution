@@ -8,7 +8,6 @@ MODx.panel.Welcome = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-welcome'
-        ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+MODx.config.site_name+'</h2>'
@@ -27,7 +26,7 @@ MODx.panel.Welcome = function(config) {
             xtype: 'portal'
             ,id: 'modx-welcome-portal'
             ,items: [{
-                columnWidth: .46
+                columnWidth: .47
                 ,id: 'modx-welcome-col-left'
                 ,defaults: {
                     height: 300
@@ -38,11 +37,16 @@ MODx.panel.Welcome = function(config) {
                 ,items: [{
                     title: _('modx_news')
                     ,contentEl: 'modx-news'
+					,cls: 'x-panel-header'
+					,style: 'padding: .5em; margin-bottom: 5px;'
+					,bodyStyle: 'text-transform: none; font-weight: Normal;'
                 },{
                     title: _('recent_docs')
                     ,id: 'modx-recent'
+					,cls: 'x-panel-header'
+					,style: 'padding: .5em; margin-bottom: 5px;'
+					,bodyStyle: 'text-transform: none; font-weight: Normal;'
                     ,collapsed: true
-                    ,bodyStyle: 'padding: 1.5em;'
                     ,items: [{
                         html: '<p>'+_('activity_message')
                         ,border: false
@@ -55,10 +59,12 @@ MODx.panel.Welcome = function(config) {
                     title: _('online')
                     ,contentEl: 'modx-online'
                     ,collapsed: true
-                    ,bodyStyle: 'padding: 1.5em;'
+					,cls: 'x-panel-header'
+					,style: 'padding: .5em; margin-bottom: 5px;'
+					,bodyStyle: 'text-transform: none; font-weight: Normal;'
                 }]
             },{
-                columnWidth: .46
+                columnWidth: .47
                 ,id: 'modx-welcome-col-right'
                 ,defaults: {
                     height: 300
@@ -69,10 +75,15 @@ MODx.panel.Welcome = function(config) {
                 ,items: [{
                     title: _('security_notices')
                     ,contentEl: 'modx-security'
+					,cls: 'x-panel-header'
+					,style: 'padding: .5em; margin-bottom: 5px;'
+					,bodyStyle: 'text-transform: none; font-weight: Normal;'
                 },{
                     title: _('info')
                     ,contentEl: 'modx-info'
-                    ,bodyStyle: 'padding: 1.5em;'
+					,cls: 'x-panel-header x-panel-footer'
+					,style: 'padding: .5em; margin-bottom: 5px;'
+                    ,bodyStyle: 'text-transform: none; font-weight: Normal;'
                     ,collapsed: true
                 }]
             }]
