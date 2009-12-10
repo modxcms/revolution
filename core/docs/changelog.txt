@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1426] Added connect check to assist with mysql_get_server_info in setup
 - Fixed some issues with OnDocFormSave, plus standardized how to render fields/html to update forms
 - Fixed bug with default values, @ bindings and other things on checkbox/radio TVs
 - Prevent tree from expanding too much on quick create, cleaned up js
