@@ -600,9 +600,9 @@ ul#modx-topnav li ul.modx-subnav li a span {
     color:#AFAFAF;
     display:block;
     float:none;
-    font-size:0.9em;
+    font-size:1em;
     font-weight:normal;
-    margin-top:0px;
+    margin-top:5px;
     width:100%;
 }
 ul#modx-topnav li.active a {
