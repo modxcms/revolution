@@ -12,7 +12,7 @@ class modCategory extends xPDOSimpleObject {
      */
     protected $_invalidCharacters = array('!','@','#','$','%','^','&','*',
     '(',')','+','=','[',']','{','}','\'','"',':',';','\\','/','<','>','?'
-    ,' ',',','`','~');
+    ,',','`','~');
 
     /**
      * Overrides xPDOObject::set to strip invalid characters from element names.
