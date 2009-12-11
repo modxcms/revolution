@@ -19,9 +19,12 @@ MODx.panel.Search = function(config) {
         },{
             xtype: 'portal'
             ,items: [{
-                columnWidth: 1
+                columnWidth: .977
                 ,items: [{
                     title: _('search_criteria')
+					,cls: 'x-panel-header'
+					,style: 'padding: .5em;'
+					,bodyStyle: 'text-transform: none; font-weight: Normal;'
                     ,layout: 'form'
                     ,border: false
                     ,defaults: { 
@@ -34,7 +37,7 @@ MODx.panel.Search = function(config) {
                     xtype: 'modx-grid-search'
                     ,preventRender: true
                     ,bodyStyle: 'padding: 0'
-                    ,width: '98%'
+                    ,width: '100.7%'
                 }]
             }]
         }]
