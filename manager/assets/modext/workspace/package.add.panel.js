@@ -138,9 +138,21 @@ Ext.extend(MODx.panel.PDSelProv,MODx.panel.WizardPanel,{
     submit: function(o) {
         if (this.getForm().isValid()) {
             var vs = this.getForm().getValues();
+            MODx.provider = vs.provider;
             Ext.getCmp('modx-window-package-downloader').fireEvent('proceed','modx-pd-selpackage');
-            Ext.getCmp('modx-tree-package-download').setProvider(vs.provider);
-            Ext.getCmp('modx-pd-selpackage').provider = vs.provider;
+            var t = Ext.getCmp('modx-package-browser-tree');
+            if (t) {
+                t.getLoader().baseParams.provider = vs.provider;
+                t.refresh();
+                t.renderProviderInfo();
+                t.getRootNode().setText(Ext.getCmp('modx-pdselprov-provider').getRawValue());
+            }
+            var g = Ext.getCmp('modx-package-browser-grid');
+            if (g) {
+                g.getStore().baseParams.provider = vs.provider;
+                g.getStore().removeAll();
+            }
+            Ext.getCmp('package-browser-view').show();
         }
     }
 });
@@ -196,9 +208,21 @@ Ext.extend(MODx.panel.PDNewProv,MODx.panel.WizardPanel,{
                 }
                 ,success: function(f,a) {
                     var p = a.result.object;
+                    MODx.provider = p.id;
                     Ext.getCmp('modx-window-package-downloader').fireEvent('proceed','modx-pd-selpackage');
-                    Ext.getCmp('modx-tree-package-download').setProvider(p.id);
-                    Ext.getCmp('modx-pd-selpackage').provider = p.id;
+                    var t = Ext.getCmp('modx-package-browser-tree');
+                    if (t) {
+                        t.getLoader().baseParams.provider = vs.provider;
+                        t.refresh();
+                        t.renderProviderInfo();
+                        t.getRootNode().setText(p.name);
+                    }
+                    var g = Ext.getCmp('modx-package-browser-grid');
+                    if (g) {
+                        g.getStore().baseParams.provider = vs.provider;
+                        g.getStore().removeAll();
+                    }
+                    Ext.getCmp('package-browser-view').show();
                 }
             });
         }
@@ -230,7 +254,7 @@ MODx.panel.PDSelPackage = function(config) {
             ,border: false
             ,autoHeight: true
         },{
-            xtype: 'modx-panel-package-download'
+            xtype: 'modx-package-browser'
         }]
     });
     MODx.panel.PDSelPackage.superclass.constructor.call(this,config);
@@ -245,24 +269,7 @@ Ext.extend(MODx.panel.PDSelPackage,MODx.panel.WizardPanel,{
     provider: null
     
     ,submit: function(o) {
-        var pkgs = Ext.getCmp('modx-tree-package-download').encode();
-        if (pkgs.length > 0) {
-            this.getForm().submit({
-                waitMsg: _('downloading')
-                ,params: {
-                    packages: pkgs
-                    ,provider: this.provider
-                }
-                ,scope: this
-                ,failure: function(f,a) {
-                    MODx.form.Handler.errorExt(a.result,f);
-                }
-                ,success: function(f,a) {
-                    Ext.getCmp('modx-grid-package').refresh();
-                    Ext.getCmp('modx-window-package-downloader').hide();
-                }
-            });
-        } else { Ext.Msg.alert('',_('package_select_download_ns')); }
+        Ext.getCmp('modx-window-package-downloader').hide();
     }
 });
 Ext.reg('modx-panel-pd-selpackage',MODx.panel.PDSelPackage);

@@ -384,14 +384,12 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-btn {
-	/*-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border:3px solid #BCCFA8;*/
 	-moz-box-shadow:0 0 2px #5e5e5e;
 	-webkit-box-shadow:0 0 2px #5e5e5e;	
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;	
 	background:#EFEFEF url(../images/modx/form/button-bg.png) repeat-x scroll 0 0;
+	color: #333;
 	line-height: 1;
 	padding:1px;
 	margin:0 1px 1px 0;

@@ -3,9 +3,12 @@
  * Download a package by passing in its location
  *
  * @package modx
- * @subpackage processors.workspace.packages
+ * @subpackage processors.workspace.packages.rest
  */
 if (empty($_POST['info'])) return $modx->error->failure($modx->lexicon('package_download_err_ns'));
+
+if (empty($_POST['provider'])) $_POST['provider'] = 2;
+
 
 /* grab location and signature */
 $a = explode('::',$_POST['info']);
@@ -21,7 +24,6 @@ $package->set('state',1);
 $package->set('workspace',1);
 $package->set('created',date('Y-m-d h:i:s'));
 $package->set('provider',$_POST['provider']);
-
 /* download package */
 if (!$package->transferPackage($location,$_package_cache)) {
     $msg = $modx->lexicon('package_download_err',array('location' => $location));

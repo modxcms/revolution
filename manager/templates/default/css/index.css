@@ -71,7 +71,6 @@ h3 {
 
 /* modext stylings */
 .not-installed { color: red; }
-.package-readme { padding: .7em 1em .3em; }
 .red { color: red !important; }
 .green { color: green !important; }
 .error { color: red !important; }
@@ -784,7 +783,7 @@ input.x-static-text-field {
 .x-column-tree .x-panel-header{ padding:3px 0px 0px 0px; border-bottom-width:0px}.x-column-tree .x-panel-header .x-panel-header-text{ margin-left:3px}.x-column-tree .x-tree-node{ zoom:1}.x-column-tree .x-tree-node-el{ zoom:1}.x-column-tree .x-tree-selected{ background:#d9e8fb}.x-column-tree .x-tree-node a{ line-height:18px; vertical-align:middle}.x-column-tree .x-tree-node .x-tree-selected a span{ background:transparent; color:#000}.x-tree-col{ float:left; overflow:hidden; padding:0 1px; zoom:1}.x-tree-col-text,.x-tree-hd-text{ color:#000; overflow:hidden; -o-text-overflow:ellipsis; text-overflow:ellipsis; padding:3px 3px 3px 5px; white-space:nowrap; font:normal 11px arial,tahoma,helvetica,sans-serif}.x-tree-headers{ margin-top:3px; cursor:default; zoom:1}.x-tree-hd{ float:left; overflow:hidden; border-left:1px solid #eee; border-right:1px solid #d0d0d0}
 
 /* rowactions */
-.ux-row-action-cell .x-grid3-cell-inner{padding:1px 0 0 0}.ux-row-action-item{float:left;min-width:16px;height:16px;background-repeat:no-repeat;margin:0 3px 0 2px;cursor:pointer;overflow:hidden}.ext-ie .ux-row-action-item{width:16px}.ext-ie .ux-row-action-text{width:auto}.ux-row-action-item span{vertical-align:middle;padding:0 0 0 20px;line-height:18px}.ext-ie .ux-row-action-item span{width:auto}.x-grid-group-hd div{position:relative;height:16px}.ux-grow-action-item{min-width:16px;height:16px;background-repeat:no-repeat;background-position:0 50% ! important;margin:0 0 0 4px;padding:0 ! important;cursor:pointer;float:left}.ext-ie .ux-grow-action-item{width:16px}.ux-action-right{float:right;margin:0 3px 0 2px;padding:0 ! important}.ux-grow-action-text{padding:0 !important;margin:0 !important;background:transparent none !important;float:left}.ux-row-action-item{-moz-border-radius:3px;-webkit-border-radius:3px;-moz-box-shadow:0 0 2px #5e5e5e;-webkit-box-shadow:0 0 2px #5e5e5e;background:#EFEFEF url(../images/style/go-next.png) no-repeat scroll 4px 4px !important;padding:3px 5px 3px;margin:1px 2px 5px;font-weight:bold;color:#7F7F7F;text-shadow:1px 1px 0 #FFF;position:relative;cursor:pointer}.ux-row-action-item:hover{background-color:#CFCFCF !important;color:#4F4F4F !important}.ux-row-action-item:active{margin:2px 1px 4px 2px}
+.ux-row-action-cell .x-grid3-cell-inner{padding:1px 0 0 0}.ux-row-action-item{float:left;min-width:16px;height:16px;background-repeat:no-repeat;margin:0 3px 0 2px;cursor:pointer;overflow:hidden}.ext-ie .ux-row-action-item{width:16px}.ext-ie .ux-row-action-text{width:auto}.ux-row-action-item span{vertical-align:middle;padding:0 0 0 20px;line-height:18px}.ext-ie .ux-row-action-item span{width:auto}.x-grid-group-hd div{position:relative;height:16px}.ux-grow-action-item{min-width:16px;height:16px;background-repeat:no-repeat;background-position:0 50% ! important;margin:0 0 0 4px;padding:0 ! important;cursor:pointer;float:left}.ext-ie .ux-grow-action-item{width:16px}.ux-action-right{float:right;margin:0 3px 0 2px;padding:0 ! important}.ux-grow-action-text{padding:0 !important;margin:0 !important;background:transparent none !important;float:left}.ux-row-action-item{-moz-border-radius:3px;-webkit-border-radius:3px;-moz-box-shadow:0 0 2px #5e5e5e;-webkit-box-shadow:0 0 2px #5e5e5e;background:#EFEFEF url(../images/style/go-next.png) no-repeat scroll 4px 4px !important;padding:2px 5px 3px;margin:1px 2px 5px;font-weight:bold;color:#444;text-shadow:1px 1px 0 #FFF;position:relative;cursor:pointer}.ux-row-action-item:hover{background-color:#CFCFCF !important;color:#4F4F4F !important}.ux-row-action-item:active{margin:2px 1px 4px 2px}
 
 /* checkbox tree */
 .x-tree-checkbox{ background:url(../../../assets/ext3/resources/images/default/form/checkbox.gif) no-repeat 0 0; height:13px; width:13px; margin:0 1px; vertical-align:middle}.x-tree-checkbox-over .x-tree-checkbox{ background-position:-13px 0}.x-tree-checkbox-down .x-tree-checkbox{ background-position:-26px 0}.x-tree-node-disabled .x-tree-checkbox{ background-position:-39px 0}.x-tree-node-checked{ background-position:0 -13px}.x-tree-checkbox-over .x-tree-node-checked{ background-position:-13px -13px}.x-tree-checkbox-down .x-tree-node-checked{ background-position:-26px -13px}.x-tree-node-disabled .x-tree-node-checked{ background-position:-39px -13px}.x-tree-node-grayed{ background-position:0 -26px}.x-tree-checkbox-over .x-tree-node-grayed{ background-position:-13px -26px}.x-tree-checkbox-down .x-tree-node-grayed{ background-position:-26px -26px}.x-tree-node-disabled .x-tree-node-grayed{ background-position:-39px -26px}.x-tree-branch-unchecked .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-node-grayed{ background-position:0 0}.x-tree-branch-unchecked .x-tree-checkbox-over .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-checkbox-over .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-checkbox-over .x-tree-node-grayed{ background-position:-13px 0}.x-tree-branch-unchecked .x-tree-checkbox-down .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-checkbox-down .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-checkbox-down .x-tree-node-grayed{ background-position:-26px 0}.x-tree-branch-unchecked .x-tree-node-disabled .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-node-disabled .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-node-disabled .x-tree-node-grayed{ background-position:-39px 0}.x-tree-branch-checked .x-tree-checkbox,.x-tree-branch-checked .x-tree-node-checked,.x-tree-branch-checked .x-tree-node-grayed{ background-position:0 -13px}.x-tree-branch-checked .x-tree-checkbox-over .x-tree-checkbox,.x-tree-branch-checked .x-tree-checkbox-over .x-tree-node-checked,.x-tree-branch-checked .x-tree-checkbox-over .x-tree-node-grayed{ background-position:-13px -13px}.x-tree-branch-checked .x-tree-checkbox-down .x-tree-checkbox,.x-tree-branch-checked .x-tree-checkbox-down .x-tree-node-checked,.x-tree-branch-checked .x-tree-checkbox-down .x-tree-node-grayed{ background-position:-26px -13px}.x-tree-branch-checked .x-tree-node-disabled .x-tree-checkbox,.x-tree-branch-checked .x-tree-node-disabled .x-tree-node-checked,.x-tree-branch-checked .x-tree-node-disabled .x-tree-node-grayed{ background-position:-39px -13px}
@@ -807,3 +806,27 @@ input.x-static-text-field {
     top:auto;
     vertical-align:top;
 }
+
+/* package management */
+.clear { clear: left; }
+.package-readme { padding: .7em 1em .3em; }
+.package-installed { 
+	opacity: .5;
+	color: gray;
+	}
+.bold { font-weight: bold; }
+.pbr-provider-box {
+	width: 250px;
+	float: left;
+	margin-top: 10px;
+}
+.pbr-provider-home {
+	padding: 10px;
+}
+.pbr-repository-view {
+	padding: 10px;
+}
+.pbr-tag-view {
+	padding: 10px;
+}
+.pbr-details-right { float: right !important; text-align: right !important; }

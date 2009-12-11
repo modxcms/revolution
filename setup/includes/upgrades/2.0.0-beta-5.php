@@ -57,3 +57,15 @@ $description = sprintf($this->install->lexicon['add_column'],'help_url',$table);
 $sql = "ALTER TABLE {$table} ADD COLUMN `help_url` TEXT NOT NULL DEFAULT ''";
 $this->processResults($class,$description,$sql);
 
+/* reset provider URL to new provider location */
+$provider = $this->install->xpdo->getObject('transport.modTransportProvider',array(
+    'name' => 'modxcms.com',
+));
+if (empty($provider)) {
+    $provider = $this->install->xpdo->newObject('transport.modTransportProvider');
+    $provider->set('name','modxcms.com');
+    $provider->set('description','The official MODx transport facility for 3rd party components.');
+    $provider->set('created',strftime('%Y-%m-%d %H:%M:%S'));
+}
+$provider->set('service_url','http://rest.modxcms.com/extras/');
+$provider->save();

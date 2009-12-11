@@ -100,9 +100,9 @@ class modTransportPackage extends xPDOObject {
                         if (!$transferred) {
                             if (!$transferred= $this->transferPackage($sourceFile, $packageDir)) {
                                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_transfer',array(
-                                'sourceFile' => $sourceFile,
-                                'packageDir' => $packageDir,
-                            )));
+                                    'sourceFile' => $sourceFile,
+                                    'packageDir' => $packageDir,
+                                )));
                             } else {
                                 $sourceFile= basename($sourceFile);
                             }
