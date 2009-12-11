@@ -29,6 +29,11 @@ MODx.window.PackageDownloader = function(config) {
         },{
             xtype: 'modx-panel-pd-selpackage'
         }]
+        ,keys: [{
+            key: Ext.EventManager.ESC
+            ,handler: function() { this.hide(); }
+            ,scope: this
+        }]
     });
     MODx.window.PackageDownloader.superclass.constructor.call(this,config);
 };

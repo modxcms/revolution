@@ -47,11 +47,6 @@ MODx.panel.PackageBrowser = function(config) {
             ,html: ''
             ,border: false
         }]
-        ,keys: {
-            key: 27
-            ,handler: this.hide
-            ,scope: this
-        }
     });
     MODx.panel.PackageBrowser.superclass.constructor.call(this,config);
 };
