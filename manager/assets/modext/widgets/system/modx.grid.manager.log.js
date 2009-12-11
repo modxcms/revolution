@@ -58,16 +58,19 @@ MODx.panel.ManagerLog = function(config) {
             xtype: 'portal'
             ,id: 'modx-portal-manager-log'
             ,items: [{
-                columnWidth: 1
+                columnWidth: .977
                 ,id: 'modx-col-manager-log'
                 ,items: [{
                     title: _('mgrlog_query')
                     ,layout: 'form'
-                    ,bodyStyle: 'padding: 1.5em;'
+                    ,cls: 'x-panel-header'
+			        ,style: 'padding: .5em;'
+			        ,bodyStyle: 'text-transform: none; font-weight: Normal;'
                     ,items: this.getItems()
                     ,buttonAlign: 'center'
                     ,buttons: [{
                         text: _('filter_clear')
+						,style: 'margin-top: 12px;'
                         ,scope: this
                         ,handler: function() {
                             this.getForm().reset();
@@ -77,7 +80,7 @@ MODx.panel.ManagerLog = function(config) {
                 },{
                     xtype: 'modx-grid-manager-log'
                     ,bodyStyle: 'padding: 0 !important;'
-                    ,width: '98%'
+                    ,width: '100.8%'
                     ,preventRender: true
                 }]
             }]

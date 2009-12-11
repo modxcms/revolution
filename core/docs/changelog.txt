@@ -4,8 +4,13 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed styling on the manager logs page.
 - Fixed triggerfields in windows in Safari
+- Changed the text-size and and top margin of the Main Navbar Submenu span for more readability.
 - [#MODX-1426] Added connect check to assist with mysql_get_server_info in setup
+- Few style changes: Changed Button style text color to black - Previously it appeared that buttons were disabled. Changed Text color inside of combo boxes to black - As before it looked like the element was disabled.
+- Modified the date fields to show a drop-down box rather than the date image. Changed the text-size and spacing of the Main Navbar to 12px.
+- Fixed styling of the welcome panels.
 - Fixed some issues with OnDocFormSave, plus standardized how to render fields/html to update forms
 - Fixed bug with default values, @ bindings and other things on checkbox/radio TVs
 - Prevent tree from expanding too much on quick create, cleaned up js
