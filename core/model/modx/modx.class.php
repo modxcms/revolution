@@ -2071,7 +2071,7 @@ class modX extends xPDO {
     public function logManagerAction($action,$class_key,$item) {
         $ml = $this->newObject('modManagerLog');
         $ml->set('user',$this->user->get('id'));
-        $ml->set('occurred',date('Y-m-d H:i:s'));
+        $ml->set('occurred',strftime('%Y-%m-%d %H:%M:%S'));
         $ml->set('action',$action);
         $ml->set('class_key',$class_key);
         $ml->set('item',$item);

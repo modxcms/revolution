@@ -58,7 +58,33 @@ if ($user->profile->save() == false) {
 
 /* send email */
 if ($_POST['passwordnotifymethod'] == 'e') {
-    sendMailMessage($_POST['email'], $_POST['username'],$newPassword,$_POST['fullname']);
+    $message = $modx->getOption('signupemail_message');
+
+    /* replace placeholders */
+    $placeholders = array(
+        'uid' => $user->get('username'),
+        'pwd' => $newPassword,
+        'ufn' => $user->profile->get('fullname'),
+        'sname' => $modx->getOption('site_name'),
+        'saddr' => $modx->getOption('emailsender'),
+        'semail' => $modx->getOption('emailsender'),
+        'surl' => $modx->getOption('url_scheme') . $modx->getOption('http_host') . $modx->getOption('manager_url'),
+    );
+    foreach ($placeholders as $k => $v) {
+        $message = str_replace('[[+'.$k.']]',$v,$message);
+    }
+    $modx->getService('mail', 'mail.modPHPMailer');
+    $modx->mail->set(modMail::MAIL_BODY, $message);
+    $modx->mail->set(modMail::MAIL_FROM, $modx->getOption('emailsender'));
+    $modx->mail->set(modMail::MAIL_FROM_NAME, $modx->getOption('site_name'));
+    $modx->mail->set(modMail::MAIL_SENDER, $modx->getOption('emailsender'));
+    $modx->mail->set(modMail::MAIL_SUBJECT, $modx->getOption('emailsubject'));
+    $modx->mail->address('to', $user->profile->get('email'),$user->profile->get('fullname'));
+    $modx->mail->address('reply-to', $modx->getOption('emailsender'));
+    if (!$modx->mail->send()) {
+        $modx->log(modX::LOG_LEVEL_ERROR,$modx->lexicon('error_sending_email_to').$user->profile->get('email'));
+    }
+    $modx->mail->reset();
 }
 
 
@@ -101,34 +127,6 @@ function convertDate($date) {
 		return strtotime("$m/$d/$Y $H:$M:$S");
 }
 
-/* Send an email to the user */
-function sendMailMessage($email, $uid, $pwd, $ufn) {
-	global $modx;
-
-	$message = $modx->getOption('signupemail_message');
-	/* replace placeholders */
-	$message = str_replace("[[+uid]]", $uid, $message);
-	$message = str_replace("[[+pwd]]", $pwd, $message);
-	$message = str_replace("[[+ufn]]", $ufn, $message);
-	$message = str_replace("[[+sname]]",$modx->getOption('site_name'), $message);
-	$message = str_replace("[[+saddr]]", $modx->getOption('emailsender'), $message);
-	$message = str_replace("[[+semail]]", $modx->getOption('emailsender'), $message);
-	$message = str_replace("[[+surl]]", $modx->getOption('url_scheme') . $modx->getOption('http_host') . $modx->getOption('manager_url'), $message);
-
-    $modx->getService('mail', 'mail.modPHPMailer');
-    $modx->mail->set(modMail::MAIL_BODY, $message);
-    $modx->mail->set(modMail::MAIL_FROM, $modx->getOption('emailsender'));
-    $modx->mail->set(modMail::MAIL_FROM_NAME, $modx->getOption('site_name'));
-    $modx->mail->set(modMail::MAIL_SENDER, $modx->getOption('emailsender'));
-    $modx->mail->set(modMail::MAIL_SUBJECT, $modx->getOption('emailsubject'));
-    $modx->mail->address('to', $email, $ufn);
-    $modx->mail->address('reply-to', $modx->getOption('emailsender'));
-    if (!$modx->mail->send()) {
-        return $modx->error->failure($modx->lexicon('error_sending_email_to').$email);
-        exit;
-    }
-    $modx->mail->reset();
-}
 
 /* log manager action */
 $modx->logManagerAction('user_create','modUser',$user->get('id'));
