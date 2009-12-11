@@ -25,6 +25,9 @@ MODx.panel.Actions = function(config) {
                 ,id: 'modx-action-col'
                 ,items: [{
                     title: _('actions')
+					,cls: 'x-panel-header'
+			        ,style: 'padding: .5em;'
+			        ,bodyStyle: 'text-transform: none; font-weight: Normal;'
                     ,layout: 'form'
                     ,items: [{
                         html: '<p>'+_('action_desc')+'</p>'
@@ -38,6 +41,9 @@ MODx.panel.Actions = function(config) {
                 ,id: 'modx-menu-col'
                 ,items: [{
                     title: _('topmenu')
+					,cls: 'x-panel-header'
+			        ,style: 'padding: .5em;'
+			        ,bodyStyle: 'text-transform: none; font-weight: Normal;'
                     ,layout: 'form'
                     ,items: [{
                         html: '<p>'+_('topmenu_desc')+'</p>'
