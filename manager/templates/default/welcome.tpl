@@ -36,19 +36,19 @@
 <div id="modx-info">
 	{$_lang.yourinfo_message}
 	<br /><br />
-	<table class="classy">
+	<table class="classy" style="width: 100%;">
+	<thead>
+	<tr>
+	    <th>{$_lang.yourinfo_username}</th>
+		<th>{$_lang.yourinfo_previous_login}</th>
+		<th>{$_lang.yourinfo_total_logins}</th>
+	</tr>
+	</thead>
 	<tbody>
 	<tr>
-		<th width="170">{$_lang.yourinfo_username}</th>
-		<td><strong>{$modx->getLoginUserName()}</strong></td>
-	</tr>
-	<tr>
-		<th>{$_lang.yourinfo_previous_login}</th>
-		<td><strong>{$previous_login}</strong></td>
-	</tr>
-	<tr>
-		<th>{$_lang.yourinfo_total_logins}</th>
-		<td><strong>{$smarty.session.mgrLogincount+1}</strong></td>
+	    <td>{$modx->getLoginUserName()}</td>
+		<td>{$previous_login}</td>
+		<td>{$smarty.session.mgrLogincount+1}</td>
 	</tr>
 	</tbody>
 	</table>
@@ -72,7 +72,7 @@
 	<tbody>
 	{foreach from=$ausers item=user name='au'}
 		<tr class="{cycle values=',odd'}">
-			<td><strong>{$user->username}</strong></td>
+			<td>{$user->username}</td>
 			<td>{$user->internalKey}</td>
 			<td>{$user->ip}</td>
 			<td>{$user->get('lastseen')}</td>

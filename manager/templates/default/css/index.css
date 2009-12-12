@@ -302,6 +302,13 @@ textarea.x-form-field {
 /* tables */
 table.classy {
     border-spacing: 0;
+	border-right: 3px solid #5F5F5F;
+	border-left: 3px solid #5F5F5F;
+	border-bottom: 3px solid #5F5F5F;
+	-moz-border-radius-bottomleft: 3px;
+	-moz-border-radius-bottomright: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
 }
 
 table.classy tbody span {
@@ -310,35 +317,35 @@ table.classy tbody span {
 }
 table.classy th, table.classy td {
     line-height: 1.4em;
-    padding: .5em .5em .5em 1em;
+    padding: .5em .5em .3em 1em;
+	text-decoration: none;
 }
 
 table.classy th {
-    font-weight: bold;
-    color: #535d6c;
+    color: #000000;
     background-color: #d9e3f2;
-    letter-spacing: .1em;
-    border-bottom: 1px dashed #d0d0d0;
-    border-bottom-style: dotted;
 }
 
 table.classy td {
-    border-right: 1px solid #C1DAD7;
-    border-bottom: 1px solid #C1DAD7;
-    color: #597b84;
+    /*border-right: 1px solid #C1DAD7;*/
+    color: #000000;
+	font-size: 11px;
 }
 
 table.classy tbody th {
-    text-align: right;
     vertical-align: top;
-    background-color: #f8f8f8;
-    border-right: 1px solid #c1dad7;
+    background-color: #FFFFFF;
+	font-size: 11px;
 }
 table.classy thead th {
-    font-size: 1.3em;
-    padding: .2em .4em;
-    letter-spacing: .1em;
-    background: url(../../../../assets/ext3/resources/images/default/panel/white-top-bottom.gif) repeat-x;
+    background-color: #5F5F5F;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	font-size: 11px;
+	font-weight: bold;
+	padding-top: 10px;
+	padding-bottom: 8px;
+	text-shadow: 1px -1px 0 #3F3F3F;
 }
 
 table.classy tr.odd td {
