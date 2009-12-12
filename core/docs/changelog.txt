@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Moved TV categories in Resource edit page to tabpanel, also cleaned up button styling
 - Fixed table styling. This is temporary until all tables are ported to ext grids. This affects welcome pane, system info, and online users.
 - Fixed bug where package browser would close on ESC key
 - [#MODX-1489] Allow spaces in Category names

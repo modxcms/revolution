@@ -1,16 +1,15 @@
-<div style="float: right;">
-    <button id="modx-tv-refresh" onclick="MODx.refreshTVs();">{$_lang.reload}</button>
+<div style="float: right; z-index: 200000000;">
+    <div class="ux-row-action" id="modx-tv-refresh" onclick="MODx.refreshTVs();">
+        <div class="ux-row-action-item ux-row-action-text"><span>{$_lang.reload}</span></div>
+    </div>
 </div>
 
 <input type="hidden" name="tvs" value="1" />
-
-<div id="tvtabs_div">
+<div id="modx-tv-tabs">
 {foreach from=$categories item=category}
 {if count($category->tvs) > 0}
 
-    <br />
-    <h2>{$category->category|default:$_lang.uncategorized|ucfirst}</h2>
-    <div id="tvtab{$category->id}">
+    <div id="modx-tv-tab{$category->id}" class="x-tab" title="{$category->category|default:$_lang.uncategorized|ucfirst}">
     
     <table class="classy">
     <tbody>
@@ -29,8 +28,10 @@
             {$tv->get('formElement')}  
         </td>
         <td>
+            <div class="ux-row-action" onclick="MODx.resetTV({$tv->get('id')});">
+                <div class="ux-row-action-item ux-row-action-text"><span>{$_lang.set_to_default}</span></div>
+            </div>
             {if $tv->get('inherited')}<em>({$_lang.tv_value_inherited})</em>{/if}
-            <input type="button" onclick="MODx.resetTV({$tv->get('id')});" value="{$_lang.set_to_default}" />
             
         </td>
     </tr>
@@ -45,11 +46,11 @@
 {/if}
 {/foreach}
 </div>
-
 {literal}
 <script type="text/javascript">
 // <![CDATA[
 Ext.onReady(function() {
+    
     MODx.resetTV = function(id) {
         var i = Ext.get('tv'+id);
         var d = Ext.get('tvdef'+id);
@@ -75,7 +76,19 @@ Ext.onReady(function() {
     MODx.refreshTVs = function() {
         Ext.getCmp('modx-panel-resource-tv').refreshTVs();
     };
-});
+    MODx.load({
+        xtype: 'tabpanel'
+        ,applyTo: 'modx-tv-tabs'
+        ,activeTab: 0
+        ,autoTabs: true
+        ,plain: true
+        ,defaults: {
+            bodyStyle: 'padding: 5px;'
+            ,autoScroll: true
+        }
+        ,deferredRender: false
+    });
+});    
 // ]]>
 </script>
 {/literal}
