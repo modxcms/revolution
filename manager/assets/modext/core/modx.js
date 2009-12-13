@@ -167,7 +167,7 @@ Ext.extend(MODx,Ext.Component,{
             ,height: 500
             ,modal: true
             ,layout: 'fit'
-            ,bodyStyle: 'padding: 5px;'
+            //,bodyStyle: 'padding: 5px;'
             ,html: '<iframe onload="parent.MODx.helpWindow.getEl().unmask();" src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
             ,listeners: {
                 show: function(o) {

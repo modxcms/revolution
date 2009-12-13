@@ -46,11 +46,21 @@ hr {
 }
 
 h2 {
-    color: #626162;
+    color: #5e5e5e;
     margin: 0 0 1em;
     font: normal 1.7em Helvetica, Tahoma, Arial, Helvetica, sans-serif;
     padding-bottom: 4px;
     border-bottom: 1px solid #acacac;
+}
+
+.modx-window h2 {
+	background-color:#E5EFD1;
+    color: #5e5e5e;
+    margin: 0 0 1em;
+    font: bold 0.9em Helvetica, Tahoma, Arial, Helvetica, sans-serif;
+    padding:8px 15px;
+    border-bottom: 1px solid #D6DFC3;
+	text-shadow:0 1px 1px #FFFFFF;
 }
 
 h3 {
