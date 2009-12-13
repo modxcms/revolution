@@ -62,6 +62,9 @@ MODx.page.UpdateResource = function(config) {
             ,text: _('cancel')
             ,handler: this.cancel
             ,scope: this
+        },'-',{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
         }]
     });
     MODx.page.UpdateResource.superclass.constructor.call(this,config);

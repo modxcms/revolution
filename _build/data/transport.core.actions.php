@@ -303,6 +303,7 @@ $collection['40']->fromArray(array (
   'haslayout' => 1,
   'lang_topics' => 'resource',
   'assets' => '',
+  'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Resource',
 ), '', true, true);
 $collection['41']= $xpdo->newObject('modAction');
 $collection['41']->fromArray(array (
@@ -323,6 +324,7 @@ $collection['43']->fromArray(array (
   'haslayout' => 1,
   'lang_topics' => 'resource',
   'assets' => '',
+  'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Resource',
 ), '', true, true);
 $collection['46']= $xpdo->newObject('modAction');
 $collection['46']->fromArray(array (
@@ -457,6 +459,7 @@ $collection['76']->fromArray(array (
   'haslayout' => 1,
   'lang_topics' => 'resource',
   'assets' => '',
+  'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Weblink',
 ), '', true, true);
 $collection['77']= $xpdo->newObject('modAction');
 $collection['77']->fromArray(array (
@@ -467,6 +470,7 @@ $collection['77']->fromArray(array (
   'haslayout' => 1,
   'lang_topics' => 'resource',
   'assets' => '',
+  'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Weblink',
 ), '', true, true);
 $collection['78']= $xpdo->newObject('modAction');
 $collection['78']->fromArray(array (
@@ -477,6 +481,7 @@ $collection['78']->fromArray(array (
   'haslayout' => 1,
   'lang_topics' => 'resource',
   'assets' => '',
+  'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Symlink',
 ), '', true, true);
 $collection['79']= $xpdo->newObject('modAction');
 $collection['79']->fromArray(array (
@@ -487,6 +492,7 @@ $collection['79']->fromArray(array (
   'haslayout' => 1,
   'lang_topics' => 'resource',
   'assets' => '',
+  'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Symlink',
 ), '', true, true);
 $collection['80']= $xpdo->newObject('modAction');
 $collection['80']->fromArray(array (
@@ -497,6 +503,7 @@ $collection['80']->fromArray(array (
   'haslayout' => 1,
   'lang_topics' => 'resource',
   'assets' => '',
+  'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Static+Resource',
 ), '', true, true);
 $collection['81']= $xpdo->newObject('modAction');
 $collection['81']->fromArray(array (
@@ -507,6 +514,7 @@ $collection['81']->fromArray(array (
   'haslayout' => 1,
   'lang_topics' => 'resource',
   'assets' => '',
+  'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Static+Resource',
 ), '', true, true);
 
 return $collection;

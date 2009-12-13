@@ -101,6 +101,7 @@ $children[3]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'resource',
           'assets' => '',
+          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Resource',
         ), '', true, true);
 
 /* new document resource */

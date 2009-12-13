@@ -59,11 +59,14 @@ MODx.page.UpdateWebLink = function(config) {
             ,text: _('preview')
             ,handler: this.preview
             ,scope: this
-        },{
+        },'-',{
             process: 'cancel'
             ,text: _('cancel')
             ,handler: this.cancel
             ,scope: this
+        },'-',{
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
         }]
     });
     MODx.page.UpdateWebLink.superclass.constructor.call(this,config);
