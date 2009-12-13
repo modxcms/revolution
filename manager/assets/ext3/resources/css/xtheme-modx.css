@@ -299,6 +299,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
 	background:transparent url(../images/modx/form/combo-bck.png) repeat-x scroll 0 bottom}
 
 .x-form-field-wrap .x-form-date-trigger{
+    background-image: url(../images/modx/form/date-trigger.gif);
 }
 
 .x-form-field-wrap .x-form-clear-trigger{
@@ -384,25 +385,26 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-btn {
-	-moz-box-shadow:0 0 2px #5e5e5e;
-	-webkit-box-shadow:0 0 2px #5e5e5e;	
+	-moz-box-shadow:0 0 2px rgba(0, 0, 0, 0.20);
+	-webkit-box-shadow:0 0 2px rgba(0, 0, 0, 0.20);
 	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;	
+	-webkit-border-radius: 3px;
+	border:1px solid rgba(0, 0, 0, 0.20);
 	background:#EFEFEF url(../images/modx/form/button-bg.png) repeat-x scroll 0 0;
-	color: #333;
+	color: #555;
 	line-height: 1;
+	margin:0 0 1px 0;
 	padding:1px;
-	margin:0 1px 1px 0;
 }
 
 .x-btn-over{
-	background-color:#779937;
-	border-color: #6B8F23;
+	background: #779937 #779937 url(../images/modx/form/button-bg.png) repeat-x scroll 0 0;
+	border-color: #9CAF78;
 }
 
 .x-btn button{
     font:normal 11px arial,tahoma,verdana,helvetica;
-    color:#333;
+    color:#555;
 }
 
 .x-btn em {
@@ -412,12 +414,11 @@ ul.x-tab-strip li.x-tab-strip-active  {
 
 .x-btn-noicon .x-btn-small .x-btn-text {
 	font-weight:bold;
-	text-shadow:1px 1px 0 #FFFFFF;
+	text-shadow:0 1px 1px #FFFFFF;
 }
 
 .x-btn-over .x-btn-small .x-btn-text {
-	color:#ffffff;
-	text-shadow:1px 1px 0 #6F6F6F;
+	color:#636F4C;
 }
 
 .x-btn-tl, .x-btn-tr, .x-btn-tc, .x-btn-ml, .x-btn-mr, .x-btn-mc, .x-btn-bl, .x-btn-br, .x-btn-bc{
@@ -425,7 +426,13 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-btn-click .x-btn-text, .x-btn-menu-active .x-btn-text, .x-btn-pressed .x-btn-text{
-    color:#000;
+	text-shadow:none;
+}
+
+.x-btn-click, .x-btn-menu-active, .x-btn-pressed {
+	margin:1px 0 0px;
+	background-image:none !important;
+	background-color:#d7d7d7 !important;
 }
 
 .x-btn-disabled *{
@@ -549,6 +556,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
 
 .x-toolbar .xtb-sep {
 	background-image: url(../images/modx/grid/grid-blue-split.gif);
+	margin:0 1px;
 }
 
 .x-tbar-page-first{
@@ -667,6 +675,20 @@ ul.x-tab-strip li.x-tab-strip-active  {
 	font:normal 11px arial, tahoma, helvetica, sans-serif;
 }
 
+.x-grid3-body .x-grid3-row td {
+	padding:5px 0 0;
+}
+
+.x-grid3-row-expanded .x-grid3-row-body {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background-color:#F0F4E8;
+	border:1px solid #DADFD1;
+	color:#3E3E3E;
+	margin:10px 20px 20px 0;
+	padding:5px;
+}
+
 .x-grid3-hd-row td {
 	border-left:0 none;
 	border-right:0 none;
@@ -683,7 +705,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-grid3-row-alt{
-	background-color:#fafafa;
+	background-color:#F5F5F5;
 }
 
 .x-grid3-row-over {
@@ -767,7 +789,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-grid3-row-selected {
-	background-color: #e7e7e7 !important;
+	background-color: #f0eaf1  !important;
 	background-image: none;
 	border-color:#b9b9b9;
 }
@@ -887,7 +909,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-grid-group-hd {
-    border-bottom-color:#d0d0d0;
+    border-bottom-color:#CDDFA7;
 }
 
 .x-grid-group-collapsed .x-grid-group-hd div.x-grid-group-title {
@@ -896,8 +918,8 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 
 .x-grid-group-hd div.x-grid-group-title {
 	color:#82A73D;
-	background:url(../images/modx/grid/group-collapse.png) no-repeat scroll 3px 5px;
-	padding:4px 4px 4px 24px;	
+	background:transparent url(../images/modx/grid/group-collapse.png) no-repeat scroll 3px 10px;
+	padding:10px 4px 6px 24px;	
 }
 
 .x-grid-group-hd div {
@@ -1597,13 +1619,13 @@ a.x-menu-item {
 }
 
 .x-window .x-btn, .x-window .x-btn-noicon, .x-window .x-btn-small .x-btn-text {
-    color: #222;
+    color: #555;
 }
-.x-window .x-btn-over .x-btn-small .x-btn-text { color: white; }
+.x-window .x-btn-over .x-btn-small .x-btn-text { color: #636F4C; }
 
 .x-window {
 	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;	
+	-webkit-border-radius: 3px;
 	border: 1px solid #4f4f4f;
 }
 .x-window-tl .x-window-header {
@@ -1649,7 +1671,7 @@ a.x-menu-item {
 }
 
 .x-window-br {
-/*	background-image: url(../images/modx/window/right-corners.png); */        
+/*	background-image: url(../images/modx/window/right-corners.png); */
 	background-color:#4f4f4f;
     background-image:none;
 }
