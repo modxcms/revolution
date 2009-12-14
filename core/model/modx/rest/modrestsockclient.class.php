@@ -2,9 +2,6 @@
 require_once dirname(__FILE__) . '/modrestclient.class.php';
 
 class modRestSockClient extends modRestClient {
-
-
-
     public function request($host,$path,$method = 'GET',$params = array()) {
         $method = strtoupper($method);
         $purl = parse_url($host);
@@ -45,11 +42,8 @@ class modRestSockClient extends modRestClient {
         }
         fclose($sock);
 
-        $response = trim($response);
-        $response = rtrim($response,'0');
-        $response = rtrim($response);
-        $startPos = strpos($response, "\r\n\r\n");
-        $response = substr($response, $startPos+8);
+        $startPos = strpos($response,'<?xml');
+        $response = substr($response, $startPos);
         return $response;
     }
 
