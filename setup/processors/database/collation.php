@@ -3,6 +3,7 @@
  * @package setup
  */
 $settings = $_POST;
+$settings['database_charset'] = $settings['database_connection_charset'];
 unset($settings['action']);
 $install->settings->store($settings);
 $mode = $install->settings->get('installmode');
@@ -40,7 +41,7 @@ if ($mode == modInstall::MODE_NEW) {
         $install->settings->get('database_user'),
         $install->settings->get('database_password'),
         array(
-            'charset' => $install->settings->get('database_charset'),
+            'charset' => $install->settings->get('database_connection_charset'),
             'collation' => $install->settings->get('database_collation'),
         ));
     }
