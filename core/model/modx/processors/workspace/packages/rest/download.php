@@ -6,8 +6,7 @@
  * @subpackage processors.workspace.packages.rest
  */
 if (empty($_POST['info'])) return $modx->error->failure($modx->lexicon('package_download_err_ns'));
-
-if (empty($_POST['provider'])) $_POST['provider'] = 2;
+if (empty($_POST['provider'])) $_POST['provider'] = 1;
 
 
 /* grab location and signature */
