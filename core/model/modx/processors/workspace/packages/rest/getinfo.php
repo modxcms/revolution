@@ -7,9 +7,9 @@ if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('workspace');
 
 $provider = $modx->getOption('provider',$_REQUEST,false);
-if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_ns'));
+if (empty($provider)) return array();
 $provider = $modx->getObject('transport.modTransportProvider',$provider);
-if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nf'));
+if (empty($provider)) return array();
 
 /* get version */
 $modx->getVersionData();

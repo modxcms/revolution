@@ -24,7 +24,7 @@ hr {
     background-color: #a1b7c4;
     height: 1px;
     border: 0;
-    margin: 2em;
+    margin: 20px;
 }
 
 #modx-content {
@@ -48,24 +48,23 @@ hr {
 h2 {
     color: #5e5e5e;
     margin: 0 0 1em;
-    font: normal 1.7em Helvetica, Tahoma, Arial, Helvetica, sans-serif;
+    font: normal 22px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
     padding-bottom: 4px;
     border-bottom: 1px solid #acacac;
 }
 
 .modx-window h2 {
-	background-color:#E5EFD1;
     color: #5e5e5e;
     margin: 0 0 1em;
-    font: bold 0.9em Helvetica, Tahoma, Arial, Helvetica, sans-serif;
+    font: bold 18px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
     padding:8px 15px;
     border-bottom: 1px solid #D6DFC3;
 	text-shadow:0 1px 1px #FFFFFF;
 }
 
 h3 {
-    margin: 0 0 .8em;
-    font: bold 1.3em Helvetica, Tahoma, Arial, Helvetica, sans-serif;
+    margin: 0 0 8px;
+    font: bold 15px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
 }
 
 .dashed {

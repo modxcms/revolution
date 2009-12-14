@@ -1763,6 +1763,7 @@ a.x-menu-item {
 	-moz-border-radius-bottomright:2px;
 	border-bottom:1px solid #D0D0D0;
 	border-top:1px solid #F7F7F7;
+	background-color: white;
 }
 
 .ext-gecko .x-window-body .x-form-item {
