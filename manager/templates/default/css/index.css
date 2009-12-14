@@ -319,9 +319,6 @@ table.classy {
 	-moz-border-radius-topleft: 3px;
 	-moz-border-radius-topright: 3px;
 }
-
-#modx-tv-tabs table.classy { border: 0px; }
-
 table.classy th, table.classy td {
     line-height: 1.4em;
     padding: .5em .5em .3em 1em;
@@ -359,6 +356,33 @@ table.classy tr.odd td {
     background: #e8eff8;
     color: #7c735c;
 }
+
+/* tv table */
+#modx-tv-tabs tr.alt td, #modx-tv-tabs tr.alt th {
+	background-color: #f0f0f0;
+}
+
+#modx-tv-tabs table { 
+	border: 0px;
+	width: 100%;
+}
+#modx-tv-tabs th { font-weight: bold; }
+#modx-tv-tabs th, #modx-tv-tabs td {
+	padding: 5px;
+	vertical-align: top;
+	border-bottom: 1px solid #ddd;
+}
+#modx-tv-tabs td .x-panel-body {
+	background-color: transparent !important;
+}
+#modx-tv-tabs .tvtag {
+	font-size: .8em;
+	font-weight: normal;
+	color: #666;
+}
+.aleft { text-align: left; }
+.aright { text-align: right; }
+
 
 /* browser */
 .browser-win .details{ 

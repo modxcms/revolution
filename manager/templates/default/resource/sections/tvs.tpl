@@ -11,27 +11,27 @@
 
     <div id="modx-tv-tab{$category->id}" class="x-tab" title="{$category->category|default:$_lang.uncategorized|ucfirst}">
     
-    <table class="classy">
+    <table cellspacing="0">
     <tbody>
     {foreach from=$category->tvs item=tv name='tv'}
-    <tr class="{cycle values=',odd'}">
-        <th width="150">
+    <tr class="{cycle values=',alt'}">
+        <th width="150" class="aright">
             <label class="dashed" style="cursor: pointer;" title="{$tv->description}" for="tv{$tv->id}">{$tv->caption}</label>
             <br />
-            <span style="font-size: .8em; font-weight: normal">[[*{$tv->name}]]</span>
+            <span class="tvtag">[[*{$tv->name}]]</span>
             {if $tv->get('type') EQ 'richtext'}
             <br /><button id="tv{$tv->id}-toggle" class="modx-richtext-toggle">{$_lang.toggle_richtext}</button>
             {/if}
         </th>
-        <td valign="top" style="position:relative" class="x-form-element">
+        <td class="x-form-element">
             <input type="hidden" id="tvdef{$tv->id}" value="{$tv->default_text|escape}" />
             {$tv->get('formElement')}  
         </td>
-        <td>
+        <td class="aleft">
             <div class="ux-row-action" onclick="MODx.resetTV({$tv->get('id')});">
                 <div class="ux-row-action-item ux-row-action-text"><span>{$_lang.set_to_default}</span></div>
             </div>
-            {if $tv->get('inherited')}<em>({$_lang.tv_value_inherited})</em>{/if}
+            {if $tv->get('inherited')}<br class="clear" /><em>({$_lang.tv_value_inherited})</em>{/if}
             
         </td>
     </tr>
@@ -85,8 +85,7 @@ Ext.onReady(function() {
         ,autoWidth: true
         ,border: false
         ,defaults: {
-            bodyStyle: 'padding: 5px;'
-            
+            bodyStyle: 'padding: 5px;'            
         }
         ,deferredRender: false
     });

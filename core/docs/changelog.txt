@@ -4,7 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
-- Fixed styling, width issues in Resource -> TVs pane
+- Fixed styling and JS in TV pane
 - Fixed error with charset reference in setup/
 - Clear Search in Package Browser when clicking on a Tag 
 - Added Search bar to Package Browser, now can search entire repository
