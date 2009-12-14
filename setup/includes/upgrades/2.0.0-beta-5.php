@@ -73,10 +73,12 @@ $provider->save();
 /* add package, metadata fields to modTransportPackage */
 $class = 'transport.modTransportPackage';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'package_name,metadata',$table);
-$sql = "ALTER TABLE  `{$table}` ADD `package_name` VARCHAR( 255 ) NOT NULL DEFAULT '',
-ADD  `metadata` TEXT NULL,
-ADD INDEX (`package_name`)";
+$description = sprintf($this->install->lexicon['add_column'],'package_name',$table);
+$sql = "ALTER TABLE {$table} ADD `package_name` VARCHAR( 255 ) NOT NULL DEFAULT ''";
+$this->processResults($class,$description,$sql);
+$sql = "ALTER TABLE {$table} ADD  `metadata` TEXT NULL";
+$this->processResults($class,$description,$sql);
+$sql = "ALTER TABLE {$table} ADD INDEX (`package_name`)";
 $this->processResults($class,$description,$sql);
 
 /* get current transport packages and add package field data */
