@@ -28,30 +28,55 @@ class modStaticResource extends modResource {
     }
 
     /**
+     * Get the absolute path to the static source file represented by this instance.
+     *
+     * @param array $options An array of options.
+     * @return string The absolute path to the static source file.
+     */
+    public function getSourceFile(array $options = array()) {
+        if (empty($this->_sourceFile)) {
+            $filename = parent :: getContent($options);
+            if (!file_exists($filename)) {
+                $this->_sourcePath= $this->xpdo->getOption('resource_static_path', $options, $this->xpdo->getOption('base_path'));
+                $this->_sourceFile= $this->_sourcePath . $filename;
+            } else {
+                $this->_sourceFile= $filename;
+            }
+            if (!empty($this->_sourceFile)) {
+                $array = array();
+                if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($this->_sourceFile, $array)) {
+                    $this->xpdo->parser->processElementTags('', $this->_sourceFile);
+                }
+            }
+        }
+        return $this->_sourceFile;
+    }
+
+    /**
+     * Get the filesize of the static source file represented by this instance.
+     *
+     * @param array $options An array of options.
+     * @return integer The filesize of the source file in bytes.
+     */
+    public function getSourceFileSize(array $options = array()) {
+        if (empty($this->_sourceFileSize)) {
+            $this->getSourceFile($options);
+            if (file_exists($this->_sourceFile)) {
+                $this->_sourceFileSize = filesize($this->_sourceFile);
+            }
+        }
+        return $this->_sourceFileSize;
+    }
+
+    /**
      * Treats the local content as a filename to load the raw content from.
      *
      * {@inheritdoc}
      */
     public function getContent(array $options = array()) {
         $content = '';
-        $filename = parent :: getContent($options);
-        if (!file_exists($filename)) {
-            $sp = $this->xpdo->getOption('resource_static_path',null,$this->xpdo->getOption('base_path'));
-            if (empty($this->_sourcePath) && !empty($sp)) {
-                $this->_sourcePath= $this->xpdo->getOption('resource_static_path');
-            }
-            if (empty ($this->_sourceFile)) {
-                $this->_sourceFile= $this->_sourcePath . $filename;
-            }
-        } else {
-            $this->_sourceFile= $filename;
-        }
+        $this->getSourceFile($options);
         if (!empty ($this->_sourceFile)) {
-            $array = array();
-            if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($this->_sourceFile, $array)) {
-                $this->xpdo->parser->processElementTags('', $this->_sourceFile);
-            }
-
             if (file_exists($this->_sourceFile)) {
                 $content= $this->getFileContent($this->_sourceFile);
                 if ($content === false) {
@@ -75,12 +100,12 @@ class modStaticResource extends modResource {
      * @return string The content of the file, of false if it could not be
      * retrieved.
      */
-    public function getFileContent($file) {
+    public function getFileContent($file, array $options = array()) {
         $content= false;
         $memory_limit= ini_get('memory_limit');
         if (!$memory_limit) $memory_limit= '8M';
         $byte_limit= $this->_bytes($memory_limit) * .5;
-        $filesize= filesize($file);
+        $filesize= $this->getSourceFileSize($options);
         if ($this->getOne('ContentType')) {
             $type= $this->ContentType->get('mime_type') ? $this->ContentType->get('mime_type') : 'text/html';
             if ($this->ContentType->get('binary') || $filesize > $byte_limit) {
@@ -145,9 +170,9 @@ class modStaticResource extends modResource {
      *
      * PHP ini modifiers for byte values:
      * <ul>
-     * 	<li>G = gigabytes</li>
-     * 	<li>M = megabytes</li>
-     * 	<li>K = kilobytes</li>
+     *  <li>G = gigabytes</li>
+     *  <li>M = megabytes</li>
+     *  <li>K = kilobytes</li>
      * </ul>
      *
      * @access protected

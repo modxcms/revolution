@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added modStaticResource methods: getSourceFile() and getSourceFileSize()
 - Fixed bug in setup/ script with new transport package fields
 - Fixed modCacheManager to not cache reg* calls that will cause breakage on similar calls to reg* method
 - Added 'package_name' and 'metadata' fields to modTransportPackage for future development
