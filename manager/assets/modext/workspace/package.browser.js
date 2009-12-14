@@ -7,9 +7,9 @@ MODx.panel.PackageBrowser = function(config) {
         ,cls: 'browser-win'
         ,layout: 'column'
         ,minWidth: 500
-        ,minHeight: 300
+        ,minHeight: 350
         ,width: '90%'
-        ,height: 500
+        ,height: 420
         ,modal: false
         ,closeAction: 'hide'
         ,border: false

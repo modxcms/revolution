@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed height of Package Browser to not go too far down screen
 - Fixed modRestSockClient to properly strip HTTP headers and return only XML
 - Added modStaticResource methods: getSourceFile() and getSourceFileSize()
 - Fixed bug in setup/ script with new transport package fields
