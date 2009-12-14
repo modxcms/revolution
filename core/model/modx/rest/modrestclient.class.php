@@ -44,7 +44,7 @@ class modRestClient {
             foreach ($attributes as $attributeName => $attributeValue) {
                 $attribName = strtolower(trim((string)$attributeName));
                 $attribVal = trim((string)$attributeValue);
-                $arr[$nextIdx]['@attributes'][$attribName] = $attribVal;
+                $arr[$nextIdx]['attributes'][$attribName] = $attribVal;
             }
             $text = (string)$node;
             $text = trim($text);
