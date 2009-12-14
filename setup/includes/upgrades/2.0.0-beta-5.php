@@ -69,3 +69,23 @@ if (empty($provider)) {
 }
 $provider->set('service_url','http://rest.modxcms.com/extras/');
 $provider->save();
+
+/* add package, metadata fields to modTransportPackage */
+$class = 'transport.modTransportPackage';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['add_column'],'package_name,metadata',$table);
+$sql = "ALTER TABLE  `{$table}` ADD `package_name` VARCHAR( 255 ) NOT NULL DEFAULT '',
+ADD  `metadata` TEXT NULL,
+ADD INDEX (`package_name`)";
+$this->processResults($class,$description,$sql);
+
+/* get current transport packages and add package field data */
+$packages = $this->install->xpdo->getCollection('transport.modTransportPackage');
+foreach ($packages as $package) {
+    $signature = $package->get('signature');
+    $sig = explode('-',$signature);
+    if (is_array($sig)) {
+        $package->set('package_name',$sig[0]);
+        $package->save();
+    }
+}

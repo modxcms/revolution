@@ -14,6 +14,7 @@ if (empty($_POST['provider'])) $_POST['provider'] = 2;
 $a = explode('::',$_POST['info']);
 $location = $a[0];
 $signature = $a[1];
+$sig = explode('-',$signature);
 
 $_package_cache = $modx->getOption('core_path').'packages/';
 
@@ -24,6 +25,29 @@ $package->set('state',1);
 $package->set('workspace',1);
 $package->set('created',date('Y-m-d h:i:s'));
 $package->set('provider',$_POST['provider']);
+
+/* get provider and metadata */
+$provider = $modx->getObject('transport.modTransportProvider',$_POST['provider']);
+if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nfs',$c));
+
+/* get provider client */
+$loaded = $provider->getClient();
+if (!$loaded) return $modx->error->failure($modx->lexicon('provider_err_no_client'));
+
+/* send request to provider and handle response */
+$response = $provider->request('package','GET',array(
+    'signature' => $signature,
+));
+$metadataXml = $provider->handleResponse($response);
+if (!$metadataXml) return $modx->error->failure($modx->lexicon('provider_err_connect'));
+
+
+/* set package metadata */
+$metadata = array();
+$modx->rest->xml2array($metadataXml,$metadata);
+$package->set('metadata',$metadata);
+$package->set('package_name',$sig[0]);
+
 /* download package */
 if (!$package->transferPackage($location,$_package_cache)) {
     $msg = $modx->lexicon('package_download_err',array('location' => $location));

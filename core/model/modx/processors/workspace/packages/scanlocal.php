@@ -7,14 +7,13 @@
  * @package modx
  * @subpackage processors.workspace.packages
  */
-$modx->lexicon->load('workspace');
-
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('workspace');
 
 /* get workspace */
 if (!isset($_POST['workspace'])) $_POST['workspace'] = 1;
 $workspace = $modx->getObject('modWorkspace',$_POST['workspace']);
-if ($workspace == null) return $modx->error->failure($modx->lexicon('workspace_err_nf'));
+if (empty($workspace)) return $modx->error->failure($modx->lexicon('workspace_err_nf'));
 
 $packages = array();
 
@@ -44,13 +43,16 @@ foreach ($packages as $signature) {
 	$package = $modx->getObject('transport.modTransportPackage',array(
 		'signature' => $signature,
 	));
-	if ($package != null) continue;
+	if (!empty($package)) continue;
 
 	$package = $modx->newObject('transport.modTransportPackage');
 	$package->set('signature', $signature);
 	$package->set('state', 1);
     $package->set('created',strftime('%Y-%m-%d %H:%M:%S'));
 	$package->set('workspace', $workspace->get('id'));
+
+    $sig = explode('-',$signature);
+    $package->set('package_name',$sig[0]);
 
 	if ($package->save() === false) {
         return $modx->error->failure($modx->lexicon('package_err_create'));

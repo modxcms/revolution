@@ -42,6 +42,8 @@
         <field key="source" dbtype="tinytext" phptype="string" />
         <field key="manifest" dbtype="text" phptype="array" />
         <field key="attributes" dbtype="mediumtext" phptype="array" />
+        <field key="package" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+        <field key="metadata" dbtype="text" phptype="array" />
         <aggregate alias="Workspace" class="modWorkspace" local="workspace" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Provider" class="transport.modTransportProvider" local="provider" foreign="id" cardinality="one" owner="foreign" />
     </object>

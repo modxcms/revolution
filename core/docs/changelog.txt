@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added 'package_name' and 'metadata' fields to modTransportPackage for future development
 - Fixed styling commits; also fixed bug on Package Management when not selecting default provider
 - Added help buttons to Resource pages
 - Moved TV categories in Resource edit page to tabpanel, also cleaned up button styling

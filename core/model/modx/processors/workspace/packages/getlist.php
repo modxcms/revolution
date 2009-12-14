@@ -32,8 +32,8 @@ $c->where(array(
 ));
 $count = $modx->getCount('modTransportPackage',$c);
 
-$c->sortby('`modTransportPackage`.`disabled`', 'ASC');
 $c->sortby('`modTransportPackage`.`signature`', 'ASC');
+$c->sortby('`modTransportPackage`.`disabled`', 'ASC');
 if ($useLimit) {
     $c->limit($limit,$start);
 }
