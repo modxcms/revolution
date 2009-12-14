@@ -275,6 +275,7 @@ class modCacheManager extends xPDOCacheManager {
                 if (!empty($this->modx->elementCache)) {
                     $results['elementCache']= $this->modx->elementCache;
                 }
+                /* this breaks regClientHTMLBlock when the js is similar but not identical. leave off for now.
                 if (!empty($this->modx->sjscripts)) {
                     $results['sjscripts']= $this->modx->sjscripts;
                 }
@@ -284,6 +285,7 @@ class modCacheManager extends xPDOCacheManager {
                 if (!empty($this->modx->loadedjscripts)) {
                     $results['loadedjscripts']= $this->modx->loadedjscripts;
                 }
+                */
             }
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_resource_key', $options, 'default');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_resource_handler', $options);
