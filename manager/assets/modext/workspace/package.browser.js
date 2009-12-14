@@ -186,6 +186,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
             }
         });
         g.getBottomToolbar().changePage(1);
+        Ext.getCmp('pbr-search-fld').setValue('');
     }
     
     ,setProvider: function(p) {
