@@ -411,7 +411,7 @@ MODx.grid.LocalGrid = function(config) {
         }
     });
     
-    this.menu = new Ext.menu.Menu({ defaultAlign: 'tl-b?' });
+    this.menu = new Ext.menu.Menu({ defaultAlign: 'tl-b?' ,enableScrolling: false });
     this.config = config;
     this._loadColumnModel();
     MODx.grid.LocalGrid.superclass.constructor.call(this,config);

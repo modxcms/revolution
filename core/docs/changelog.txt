@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1496] Fixed issue with scrolling context menus not working on local grids
 - Fixed styling in welcome panel
 - Shrinking top menu a bit to fit in smaller window resolutions
 - Fixed invalid method reference in modInstallTest derivative classes
