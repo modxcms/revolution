@@ -5,8 +5,16 @@
  * @package modx
  * @subpackage processors.workspace.packages.rest
  */
+$modx->lexicon->load('workspace');
+
 if (empty($_POST['info'])) return $modx->error->failure($modx->lexicon('package_download_err_ns'));
-if (empty($_POST['provider'])) $_POST['provider'] = 1;
+if (empty($_POST['provider'])) {
+    $c = $modx->newQuery('transport.modTransportProvider');
+    $c->where(array('name' => 'modxcms.com'));
+    $provider= $modx->getObject('transport.modTransportProvider',$c);
+    if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nf'));
+    $_POST['provider'] = $provider->get('id');
+}
 
 
 /* grab location and signature */
@@ -27,7 +35,7 @@ $package->set('provider',$_POST['provider']);
 
 /* get provider and metadata */
 $provider = $modx->getObject('transport.modTransportProvider',$_POST['provider']);
-if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nfs',$c));
+if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nf'));
 
 /* get provider client */
 $loaded = $provider->getClient();
