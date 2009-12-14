@@ -184,6 +184,7 @@ class modManagerResponse extends modResponse {
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.tree.element.js');
         $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/system/modx.tree.directory.js');
+        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.view.js');
 
         if ($loadLayout) {
             $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.layout.js');
