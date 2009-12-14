@@ -22,7 +22,7 @@ class modInstallTestAdvanced extends modInstallTest {
     protected function _checkZipMemLimit() {
         $success = false;
         $ml = ini_get('memory_limit');
-        $bytes = $this->return_bytes($ml);
+        $bytes = $this->_returnBytes($ml);
 
         if ($bytes < 25165824) { /* 24M = 25165824, 64M = 67108864 */
             $success = @ini_set('memory_limit','128M');
