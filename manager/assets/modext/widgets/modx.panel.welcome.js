@@ -37,15 +37,11 @@ MODx.panel.Welcome = function(config) {
                 ,items: [{
                     title: _('modx_news')
                     ,contentEl: 'modx-news'
-					,cls: 'x-panel-header'
-					,style: 'padding: .5em; margin-bottom: 5px;'
-					,bodyStyle: 'text-transform: none; font-weight: Normal;'
+					,cls: 'x-panel-header x-portal-space'
                 },{
                     title: _('recent_docs')
                     ,id: 'modx-recent'
-					,cls: 'x-panel-header'
-					,style: 'padding: .5em; margin-bottom: 5px;'
-					,bodyStyle: 'text-transform: none; font-weight: Normal;'
+					,cls: 'x-panel-header x-portal-space'
                     ,collapsed: true
                     ,items: [{
                         html: '<p>'+_('activity_message')
@@ -59,9 +55,7 @@ MODx.panel.Welcome = function(config) {
                     title: _('online')
                     ,contentEl: 'modx-online'
                     ,collapsed: true
-					,cls: 'x-panel-header'
-					,style: 'padding: .5em; margin-bottom: 5px;'
-					,bodyStyle: 'text-transform: none; font-weight: Normal;'
+					,cls: 'x-panel-header x-portal-space'
                 }]
             },{
                 columnWidth: .47
@@ -75,15 +69,12 @@ MODx.panel.Welcome = function(config) {
                 ,items: [{
                     title: _('security_notices')
                     ,contentEl: 'modx-security'
-					,cls: 'x-panel-header'
-					,style: 'padding: .5em; margin-bottom: 5px;'
-					,bodyStyle: 'text-transform: none; font-weight: Normal;'
+					,cls: 'x-panel-header x-portal-space'
                 },{
                     title: _('info')
                     ,contentEl: 'modx-info'
-					,cls: 'x-panel-header x-panel-footer'
-					,style: 'padding: .5em; margin-bottom: 5px;'
-                    ,bodyStyle: 'text-transform: none; font-weight: Normal;'
+					,cls: 'x-panel-header x-panel-footer x-portal-space'
+					,style: ''
                     ,collapsed: true
                 }]
             }]

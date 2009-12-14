@@ -1576,7 +1576,7 @@ a.x-menu-item {
 }
 
 .x-panel-tc {
-	background-image: url(../images/modx/panel/top-bottom.gif);
+/*	background-image: url(../images/modx/panel/top-bottom.gif); */
 }
 
 .x-panel-tl, .x-panel-tr, .x-panel-bl,  .x-panel-br{
@@ -1964,4 +1964,23 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-form fieldset legend {
 	font: bold 11px arial, verdana, tahoma, helvetica, sans-serif;
     color: #606060;
+}
+
+/* portal */
+.x-portal .x-panel-tl .x-panel-header {
+	background: none;
+	padding-top: 1px;
+	
+	}
+.x-portal .x-tool {
+	margin-top: 0;
+}
+.x-portal .x-panel-body {
+	text-transform: none;
+	font-weight: normal;
+	padding: 5px;
+	margin-bottom: 5px;
+}
+.x-portal-space {
+	margin-bottom: 5px;
 }
