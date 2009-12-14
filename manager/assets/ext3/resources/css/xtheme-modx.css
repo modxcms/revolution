@@ -1604,6 +1604,7 @@ a.x-menu-item {
 
 .x-tool {
     background-image:url(../images/modx/panel/tool-sprites.gif);
+	margin-top:2px;
 }
 
 .x-panel-ghost {
@@ -1642,14 +1643,21 @@ a.x-menu-item {
 	-moz-border-radius-topright:2px;
 	-webkit-border-top-left-radius:2px;
 	-webkit-border-top-right-radius:2px;
-	font:bold 1.5em arial,tahoma,verdana,sans-serif;
-	text-shadow:0 1px 1px #D6DFC3;
-	border-bottom:1px solid #C7DF99;
-    background-color:#B0CF74;
+	background-color:#E7E7E7;
 	background-image:none;
-	color: #575F47;
+	border-bottom:1px solid #FFFFFF;
+	color:#5E5E5E;
+	font-family:arial,tahoma,verdana,sans-serif;
+	font-size:1.2em;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:bold;
+	line-height:normal;
 	margin-top:9px;
-	padding:8px 8px 8px 15px;
+	padding:8px 15px;
+	text-shadow:0 1px 1px #FFFFFF;
 }
 
 .x-window-tc {
@@ -1704,7 +1712,7 @@ a.x-menu-item {
 }
 
 .x-window-mc {
-    border-color:#A3BF6B;
+    border-color:#D7D7D7;
 	border-style:solid none none;
 	border-width:1px 0 0;
 }
@@ -1754,7 +1762,7 @@ a.x-menu-item {
 	-moz-border-radius-bottomleft:2px;
 	-moz-border-radius-bottomright:2px;
 	border-bottom:1px solid #D0D0D0;
-	border-top:1px solid #F4FFDF;
+	border-top:1px solid #F7F7F7;
 }
 
 .ext-gecko .x-window-body .x-form-item {
