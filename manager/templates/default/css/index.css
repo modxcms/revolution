@@ -580,7 +580,7 @@ table.classy tr.odd td {
 
 ul#modx-topnav {
     float:left;
-    font-size:12px;
+    font-size:13px;
     font-weight:bold;
     height:45px;
     list-style-image:none;
@@ -594,12 +594,12 @@ ul#modx-topnav {
 ul#modx-topnav li {
     float: left;
     margin: 0;    
-    padding:5px 20px;
+    padding:5px 13px;
     position: relative;
     background:transparent url(../images/style/separator/menu_sep.png) no-repeat scroll right 0;
 }
 ul#modx-topnav li a{
-    padding:12px 5px 13px;
+    padding: 12px 5px 13px;
     color: #fff;
     display: block;
     text-decoration: none;
@@ -611,6 +611,7 @@ ul#modx-topnav li ul.modx-subnav {
     -webkit-border-bottom-left-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
     list-style: none;
+    font-size:12px;
     position: absolute; /*--Important - Keeps modx-subnav from affecting main navigation flow--*/
     left: 0; 
     top: 46px;
@@ -619,7 +620,7 @@ ul#modx-topnav li ul.modx-subnav {
     display: none;
     float: left;
     width: 225px;
-    opacity:0.97;
+    opacity: 0.97;
     border: 1px solid #111;
 }
 ul#modx-topnav li:hover ul.modx-subnav {
@@ -627,7 +628,8 @@ ul#modx-topnav li:hover ul.modx-subnav {
 }
 
 ul#modx-topnav li ul.modx-subnav li{
-    margin: 0; padding: 0;
+    margin: 0;
+    padding: 0;
     border-top: 1px solid #252525; /*--Create bevel effect--*/
     border-bottom: 1px solid #444; /*--Create bevel effect--*/
     clear: both;
@@ -637,10 +639,10 @@ ul#modx-topnav li ul.modx-subnav li a span {
     color:#AFAFAF;
     display:block;
     float:none;
-    font-size:1em;
+    font-size: 12px;
     font-weight:normal;
-    margin-top:5px;
     width:100%;
+    opacity: 0.9;
 }
 ul#modx-topnav li.active a {
     background:transparent url(../images/style/separator/menu_current.png) no-repeat scroll center bottom;
@@ -654,7 +656,7 @@ html ul#modx-topnav li ul.modx-subnav li a {
     float: left;
     width: 205px;
     background-color: #333;
-    padding: 8px 10px 9px;
+    padding: 5px 10px 6px;
 }
 html ul#modx-topnav li ul.modx-subnav li a:hover { /*--Hover effect for modx-subnav links--*/
     background-color: #222;
