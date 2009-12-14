@@ -1,6 +1,6 @@
 <div style="float: right; z-index: 200000000;">
-    <div class="ux-row-action" id="modx-tv-refresh" onclick="MODx.refreshTVs();">
-        <div class="ux-row-action-item ux-row-action-text"><span>{$_lang.reload}</span></div>
+    <div class="ux-row-action" id="modx-tv-refresh" style="z-index: 200000000;"onclick="MODx.refreshTVs();">
+        <div class="ux-row-action-item ux-row-action-text" style="z-index: 200000000;"><span>{$_lang.reload}</span></div>
     </div>
 </div>
 
@@ -82,9 +82,11 @@ Ext.onReady(function() {
         ,activeTab: 0
         ,autoTabs: true
         ,plain: true
+        ,autoWidth: true
+        ,border: false
         ,defaults: {
             bodyStyle: 'padding: 5px;'
-            ,autoScroll: true
+            
         }
         ,deferredRender: false
     });

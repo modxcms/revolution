@@ -320,10 +320,8 @@ table.classy {
 	-moz-border-radius-topright: 3px;
 }
 
-table.classy tbody span {
-    display: block;
-    font-size: 1em;
-}
+#modx-tv-tabs table.classy { border: 0px; }
+
 table.classy th, table.classy td {
     line-height: 1.4em;
     padding: .5em .5em .3em 1em;
