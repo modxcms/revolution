@@ -10,10 +10,11 @@ if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_
 $provider = $modx->getObject('transport.modTransportProvider',$provider);
 if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nf'));
 
-if (empty($_REQUEST['tag'])) return array();
+if (empty($_REQUEST['query']) && empty($_REQUEST['tag'])) return array();
 
 /* get default properties */
-$tag = $modx->getOption('tag',$_REQUEST,0);
+$tag = $modx->getOption('tag',$_REQUEST,false);
+$query = $modx->getOption('query',$_REQUEST,false);
 $sorter = $modx->getOption('sorter',$_REQUEST,false);
 $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
@@ -28,15 +29,17 @@ $loaded = $provider->getClient();
 if (!$loaded) return $modx->error->failure($modx->lexicon('provider_err_no_client'));
 
 /* send request and process response */
-$response = $provider->request('package','GET',array(
-    'tag' => $tag,
-    'start' => $start,
-    'limit' => $limit,
+$where = array(
     'page' => $page,
     'supports' => $productVersion,
     'sorter' => $sorter,
-));
+);
+if (!empty($tag)) $where['tag'] = $tag;
+if (!empty($query)) $where['query'] = $query;
+
+$response = $provider->request('package','GET',$where);
 $tag = $provider->handleResponse($response);
+
 if (!$tag) return $modx->error->failure($modx->lexicon('provider_err_connect'));
 
 /* iterate through packages */

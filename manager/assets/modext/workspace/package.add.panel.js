@@ -15,6 +15,7 @@ MODx.window.PackageDownloader = function(config) {
         ,collapsible: true
         ,maximizable: true
         ,autoHeight: true
+        ,autoScroll: true
         ,width: '90%'
         ,firstPanel: 'modx-pd-start'
         ,lastPanel: 'modx-pd-selpackage'
@@ -248,14 +249,8 @@ MODx.panel.PDSelPackage = function(config) {
         }
         ,autoHeight: true
         ,items: [{
-            html: '<h2>'+_('package_select_download')+'</h2>'
+            html: '<h2 style="margin-top: 0">'+_('package_select_download')+'</h2>'
             ,id: 'modx-pdselpackage-header'
-            ,border: false
-            ,autoHeight: true
-        },{
-            html: '<p>'+_('package_select_download_desc')+'</p>'
-            ,id: 'modx-pdselpackage-desc'
-            ,style: 'padding-bottom: 2em'
             ,border: false
             ,autoHeight: true
         },{
@@ -265,8 +260,7 @@ MODx.panel.PDSelPackage = function(config) {
     MODx.panel.PDSelPackage.superclass.constructor.call(this,config);
     this.on('show',function() {
         var pd = Ext.getCmp('modx-window-package-downloader');
-        pd.setHeight(600);
-        pd.center();
+        pd.setPosition(null,0);
     },this);
     
 };

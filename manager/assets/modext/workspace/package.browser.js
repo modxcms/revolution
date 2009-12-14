@@ -9,10 +9,11 @@ MODx.panel.PackageBrowser = function(config) {
         ,minWidth: 500
         ,minHeight: 350
         ,width: '90%'
-        ,height: 420
+        ,autoHeight: true
         ,modal: false
         ,closeAction: 'hide'
         ,border: false
+        ,autoScroll: true
         ,items: [{
             id: this.ident+'-browser-tree'
             ,cls: 'browser-tree'
@@ -84,6 +85,42 @@ MODx.tree.PackageBrowserTree = function(config) {
             ,scope: this
             ,tooltip: {text: _('tree_refresh')}
             ,handler: this.refresh
+        },{
+            xtype: 'textfield'
+            ,emptyText: _('search')
+            ,name: 'search'
+            ,id: 'pbr-search-fld'
+            ,listeners: {
+                'change': {fn:function(tf,newValue) {
+                    var nv = newValue || tf;
+        
+                    var g = Ext.getCmp('modx-package-browser-grid');
+                    var s = g.getStore();
+                    s.removeAll();
+                    s.setBaseParam('query',nv);
+                    s.setBaseParam('tag','');
+                    s.load({
+                        params: {
+                            query: nv
+                            ,tag: ''
+                        }
+                    });
+                    g.getBottomToolbar().changePage(1);
+                    Ext.getCmp('package-browser-view').hide();
+                    Ext.getCmp('package-browser-grid').show();
+                    return true;
+                },scope:this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() { 
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true; }
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
         }]
     });
     MODx.tree.PackageBrowserTree.superclass.constructor.call(this,config);
@@ -141,6 +178,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
         var g = Ext.getCmp('modx-package-browser-grid');
         var s = g.getStore();
         s.removeAll();
+        s.setBaseParam('query','');
         s.setBaseParam('tag',tag.id);
         s.load({
             params: {
@@ -291,6 +329,11 @@ MODx.grid.PackageBrowserGrid = function(config) {
     });
     MODx.grid.PackageBrowserGrid.superclass.constructor.call(this,config);
     this.loadTpls();
+    this.getStore().on('load',function() {
+    
+        Ext.getCmp('modx-window-package-downloader').syncSize();
+        Ext.getCmp('modx-window-package-downloader').doLayout();
+    },this);
 };
 Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{    
     loadTpls: function() {
