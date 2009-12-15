@@ -13,95 +13,102 @@ MODx.panel.UserGroup = function(config) {
             ,cls: 'modx-page-header'
             ,id: 'modx-user-group-header'
         },{            
-            xtype: 'portal'
-            ,items: [{ 
-                columnWidth: 1
+            xtype: 'modx-tabs'
+            ,defaults: { 
+                bodyStyle: 'padding: 1.5em'
+                ,autoHeight: true
+                ,border: true
+            }
+            ,forceLayout: true
+            ,deferredRender: false
+            ,items: [{
+                title: _('general_information')
+                ,bodyStyle: 'padding: 1.5em;'
+                ,defaults: { border: false ,msgTarget: 'side' }
+                ,layout: 'form'
+                ,id: 'modx-chunk-form'
+                ,labelWidth: 150
                 ,items: [{
-                    title: _('general_information')
-                    ,bodyStyle: 'padding: 1.5em;'
-                    ,defaults: { border: false ,msgTarget: 'side' }
-                    ,layout: 'form'
-                    ,id: 'modx-chunk-form'
-                    ,labelWidth: 150
-                    ,items: [{
-                        html: '<p>'+''+'</p>'
-                    },{
-                        xtype: 'hidden'
-                        ,name: 'id'
-                        ,id: 'modx-usergroup-id'
-                        ,value: config.usergroup
-                    },{
-                        name: 'name'
-                        ,id: 'modx-usergroup-name'
-                        ,xtype: 'textfield'
-                        ,fieldLabel: _('name')
-                        ,allowBlank: false
-                        ,enableKeyEvents: true
-                        ,disabled: config.usergroup === 0 ? true : false
-                        ,listeners: {
-                            'keyup': {scope:this,fn:function(f,e) {
-                                Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+f.getValue()+'</h2>');
-                            }}
-                        }
-                    },{
-                        name: 'parent'
-                        ,hiddenName: 'parent'
-                        ,id: 'modx-usergroup-parent'
-                        ,xtype: 'modx-combo-usergroup'
-                        ,fieldLabel: _('user_group_parent')
-                        ,editable: false
-                        ,disabled: config.usergroup === 0 ? true : false
-                        ,baseParams: {
-                            action: 'getList'
-                            ,addNone: true
-                        }
-                    }]
+                    html: '<p>'+''+'</p>'
                 },{
-                    title: _('users')
-                    ,hidden: config.usergroup === 0 ? true : false
-                    ,items: [{
-                        html: '<p>'+_('user_group_user_access_msg')+'</p>'
-                    },{
-                        xtype: 'modx-grid-user-group-users'
-                        ,preventRender: true
-                        ,usergroup: config.usergroup
-                        ,autoHeight: true
-                        ,listeners: {
-                            'afterRemoveRow': {fn:function() {
-                                this.fireEvent('fieldChange');
-                            },scope:this}
-                        }
-                    }]
+                    xtype: 'hidden'
+                    ,name: 'id'
+                    ,id: 'modx-usergroup-id'
+                    ,value: config.usergroup
                 },{
-                    title: _('user_group_context_access')
-                    ,items: [{
-                        html: '<p>'+_('user_group_context_access_msg')+'</p>'
-                    },{
-                        xtype: 'modx-grid-user-group-context'
-                        ,preventRender: true
-                        ,usergroup: config.usergroup
-                        ,autoHeight: true
-                        ,listeners: {
-                            'afterRemoveRow': {fn:function() {
-                                this.fireEvent('fieldChange');
-                            },scope:this}
-                        }
-                    }]
+                    name: 'name'
+                    ,id: 'modx-usergroup-name'
+                    ,xtype: 'textfield'
+                    ,fieldLabel: _('name')
+                    ,allowBlank: false
+                    ,enableKeyEvents: true
+                    ,disabled: config.usergroup === 0 ? true : false
+                    ,listeners: {
+                        'keyup': {scope:this,fn:function(f,e) {
+                            Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+f.getValue()+'</h2>');
+                        }}
+                    }
                 },{
-                    title: _('user_group_resourcegroup_access')
-                    ,items: [{
-                        html: '<p>'+_('user_group_resourcegroup_access_msg')+'</p>'
-                    },{
-                        xtype: 'modx-grid-user-group-resource-group'
-                        ,preventRender: true
-                        ,usergroup: config.usergroup
-                        ,autoHeight: true
-                        ,listeners: {
-                            'afterRemoveRow': {fn:function() {
-                                this.fireEvent('fieldChange');
-                            },scope:this}
-                        }
-                    }]
+                    name: 'parent'
+                    ,hiddenName: 'parent'
+                    ,id: 'modx-usergroup-parent'
+                    ,xtype: 'modx-combo-usergroup'
+                    ,fieldLabel: _('user_group_parent')
+                    ,editable: false
+                    ,disabled: config.usergroup === 0 ? true : false
+                    ,baseParams: {
+                        action: 'getList'
+                        ,addNone: true
+                    }
+                }]
+            },{
+                title: _('users')
+                ,hidden: config.usergroup === 0 ? true : false
+                ,items: [{
+                    html: '<p>'+_('user_group_user_access_msg')+'</p>'
+                    ,border: false
+                },{
+                    xtype: 'modx-grid-user-group-users'
+                    ,preventRender: true
+                    ,usergroup: config.usergroup
+                    ,autoHeight: true
+                    ,listeners: {
+                        'afterRemoveRow': {fn:function() {
+                            this.fireEvent('fieldChange');
+                        },scope:this}
+                    }
+                }]
+            },{
+                title: _('user_group_context_access')
+                ,items: [{
+                    html: '<p>'+_('user_group_context_access_msg')+'</p>'
+                    ,border: false
+                },{
+                    xtype: 'modx-grid-user-group-context'
+                    ,preventRender: true
+                    ,usergroup: config.usergroup
+                    ,autoHeight: true
+                    ,listeners: {
+                        'afterRemoveRow': {fn:function() {
+                            this.fireEvent('fieldChange');
+                        },scope:this}
+                    }
+                }]
+            },{
+                title: _('user_group_resourcegroup_access')
+                ,items: [{
+                    html: '<p>'+_('user_group_resourcegroup_access_msg')+'</p>'
+                    ,border: false
+                },{
+                    xtype: 'modx-grid-user-group-resource-group'
+                    ,preventRender: true
+                    ,usergroup: config.usergroup
+                    ,autoHeight: true
+                    ,listeners: {
+                        'afterRemoveRow': {fn:function() {
+                            this.fireEvent('fieldChange');
+                        },scope:this}
+                    }
                 }]
             }]
         }]

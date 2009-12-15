@@ -4,7 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
-- Fix E_STRICT warning on modX::getCacheManager() [method signature did not match xPDO::getCacheManager()]
+- Fixed panel layout for Access Policies, User Group editing
+- Fixed E_STRICT warning on modX::getCacheManager() [method signature did not match xPDO::getCacheManager()]
 
 MODx Revolution 2.0.0-beta-5 (LastChangedRevision: 6224, LastChangedDate: 2009-12-15 10:03:36 -0700 (Tue, 15 Dec 2009))
 ====================================

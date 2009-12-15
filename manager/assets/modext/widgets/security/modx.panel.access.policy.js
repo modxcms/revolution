@@ -24,54 +24,56 @@ MODx.panel.AccessPolicy = function(config) {
             ,cls: 'modx-page-header'
             ,id: 'modx-policy-header'
         },{
-            xtype: 'portal'
+            xtype: 'modx-tabs'
+            ,defaults: {
+                bodyStyle: 'padding: 1.5em'
+                ,autoHeight: true
+                ,border: true
+            }
+            ,forceLayout: true
+            ,deferredRender: false
             ,items: [{
-                columnWidth: 1
+                title: _('policy')
+                ,layout: 'form'
                 ,items: [{
-                    title: _('policy')
-                    ,layout: 'form'
-                    ,bodyStyle: 'padding: 1.5em;'
-                    ,items: [{
-                        html: '<p>'+_('policy_desc')+'</p>'
-                        ,border: false
-                    },{
-                        xtype: 'hidden'
-                        ,name: 'id'
-                        ,value: config.plugin
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('name')
-                        ,name: 'name'
-                        ,width: 300
-                        ,maxLength: 255
-                        ,enableKeyEvents: true
-                        ,allowBlank: false
-                        ,listeners: {
-                            'keyup': {scope:this,fn:function(f,e) {
-                                Ext.getCmp('modx-policy-header').getEl().update('<h2>'+_('policy')+': '+f.getValue()+'</h2>');
-                            }}
-                        }
-                    },{
-                        xtype: 'textarea'
-                        ,fieldLabel: _('description')
-                        ,name: 'description'
-                        ,width: 300
-                        ,grow: true
-                    }]
+                    html: '<p>'+_('policy_desc')+'</p>'
+                    ,border: false
                 },{
-                    title: _('permissions')
-                    ,layout: 'form'
-                    ,bodyStyle: ''
-                    ,items: [{
-                        html: '<p>'+_('permissions_desc')+'</p>'
-                        ,border: false
-                    },{
-                        xtype: 'modx-grid-permissions'
-                        ,policy: MODx.request.id
-                        ,autoHeight: true
-                        ,preventRender: true
-                        ,frame: true
-                    }]
+                    xtype: 'hidden'
+                    ,name: 'id'
+                    ,value: config.plugin
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('name')
+                    ,name: 'name'
+                    ,width: 300
+                    ,maxLength: 255
+                    ,enableKeyEvents: true
+                    ,allowBlank: false
+                    ,listeners: {
+                        'keyup': {scope:this,fn:function(f,e) {
+                            Ext.getCmp('modx-policy-header').getEl().update('<h2>'+_('policy')+': '+f.getValue()+'</h2>');
+                        }}
+                    }
+                },{
+                    xtype: 'textarea'
+                    ,fieldLabel: _('description')
+                    ,name: 'description'
+                    ,width: 300
+                    ,grow: true
+                }]
+            },{
+                title: _('permissions')
+                ,layout: 'form'
+                ,items: [{
+                    html: '<p>'+_('permissions_desc')+'</p>'
+                    ,border: false
+                },{
+                    xtype: 'modx-grid-permissions'
+                    ,policy: MODx.request.id
+                    ,autoHeight: true
+                    ,preventRender: true
+                    ,frame: true
                 }]
             }]
         }]

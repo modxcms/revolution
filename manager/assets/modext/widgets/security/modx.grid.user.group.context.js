@@ -11,16 +11,16 @@ MODx.grid.UserGroupContext = function(config) {
         ,columns: [{
             header: _('context')
             ,dataIndex: 'target_name'
-            ,width: 100
+            ,width: 120
         },{
             header: _('minimum_role')
             ,dataIndex: 'authority'
-            ,width: 50
+            ,width: 100
             ,editor: { xtype: 'modx-combo-authority' ,allowBlank: false, renderer: true }
         },{
             header: _('policy')
             ,dataIndex: 'policy_name'
-            ,width: 175
+            ,width: 200
             ,editor: { xtype: 'modx-combo-policy' ,allowBlank: false ,renderer: true }
         }]
         ,tbar: [{
