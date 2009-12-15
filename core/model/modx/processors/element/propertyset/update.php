@@ -11,7 +11,7 @@ $modx->lexicon->load('propertyset','category');
 /* get property set */
 if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
 $set = $modx->getObject('modPropertySet',$_POST['id']);
-if (!$set) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
+if (empty($set)) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
 
 /* make sure set with that name doesn't already exist */
 $alreadyExists = $modx->getCount('modPropertySet',array(
@@ -22,10 +22,14 @@ if ($alreadyExists > 0) return $modx->error->failure($modx->lexicon('propertyset
 
 /* set category if specified */
 if (isset($_POST['category'])) {
-    $category = $modx->getObject('modCategory',$_POST['category']);
-    if ($category == null) return $modx->error->failure($modx->lexicon('category_err_nf'));
+    if (!empty($_POST['category'])) {
+        $category = $modx->getObject('modCategory',$_POST['category']);
+        if (empty($category)) return $modx->error->failure($modx->lexicon('category_err_nf'));
 
-    $set->set('category',$_POST['category']);
+        $set->set('category',$_POST['category']);
+    } else {
+        $set->set('category',0);
+    }
 }
 
 /* create property set */

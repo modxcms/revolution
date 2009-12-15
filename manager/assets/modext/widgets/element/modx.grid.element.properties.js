@@ -838,6 +838,7 @@ MODx.combo.PropertySet = function(config) {
         ,fields: ['id','name','description','properties']
         ,editable: false
         ,value: 0
+        ,pageSize: 10
     });
     MODx.combo.PropertySet.superclass.constructor.call(this,config);
 };

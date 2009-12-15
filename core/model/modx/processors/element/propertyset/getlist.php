@@ -20,7 +20,7 @@ if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('
 $modx->lexicon->load('propertyset');
 
 /* setup default properties */
-$isLimit = empty($_REQUEST['limit']);
+$isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
 $sort = $modx->getOption('sort',$_REQUEST,'name');
@@ -34,7 +34,7 @@ $elementType = $modx->getOption('elementType',$_REQUEST,false);
 /* query for sets */
 $c = $modx->newQuery('modPropertySet');
 $c->sortby($sort,$dir);
-if ($limit) $c->limit($limit,$start);
+if ($isLimit) $c->limit($limit,$start);
 $sets = $modx->getCollection('modPropertySet',$c);
 $count = $modx->getCount('modPropertySet');
 
