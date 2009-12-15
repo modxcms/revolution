@@ -413,9 +413,9 @@ class modX extends xPDO {
      *
      * @return object A modCacheManager registered for this modX instance.
      */
-    public function getCacheManager() {
+    public function getCacheManager($class= 'cache.xPDOCacheManager', $options = array('path' => XPDO_CORE_PATH, 'ignorePkg' => true)) {
         if ($this->cacheManager === null) {
-            if ($this->loadClass('cache.xPDOCacheManager', XPDO_CORE_PATH, true, true)) {
+            if ($this->loadClass($class, $options['path'], $options['ignorePkg'], true)) {
                 $cacheManagerClass= $this->getOption('modCacheManager.class', array(), 'modCacheManager');
                 if ($className= $this->loadClass($cacheManagerClass, '', false, true)) {
                     if ($this->cacheManager= new $className ($this)) {
