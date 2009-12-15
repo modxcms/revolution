@@ -11,7 +11,7 @@
 
     <div id="modx-tv-tab{$category->id}" class="x-tab" title="{$category->category|default:$_lang.uncategorized|ucfirst}">
     
-    <table cellspacing="0">
+    <table cellspacing="0" width="90%">
     <tbody>
     {foreach from=$category->tvs item=tv name='tv'}
     <tr class="{cycle values=',alt'}">
@@ -27,7 +27,7 @@
             <input type="hidden" id="tvdef{$tv->id}" value="{$tv->default_text|escape}" />
             {$tv->get('formElement')}  
         </td>
-        <td class="aleft">
+        <td class="aleft" style="width: 150px;">
             <div class="ux-row-action" onclick="MODx.resetTV({$tv->get('id')});">
                 <div class="ux-row-action-item ux-row-action-text"><span>{$_lang.set_to_default}</span></div>
             </div>

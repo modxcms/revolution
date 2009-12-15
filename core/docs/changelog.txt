@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-beta-5 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug where Set to Default on Resource TV panel was hidden unless you clicked Reload
 - Fixed some bugs with Property Sets editing
 - Fixed bug where download wasnt working for package management due to missing provider
 - Fixed bug where quick create Static Resource wasnt loading MODx.Browser
