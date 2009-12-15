@@ -175,6 +175,14 @@ Ext.extend(MODx.grid.Permissions,MODx.grid.LocalGrid,{
         });
         return true;
     }
+    
+    ,remove: function() {
+        var r = this.getSelectionModel().getSelected();
+        if (this.fireEvent('beforeRemoveRow',r)) {
+            this.getStore().remove(r);
+            this.fireEvent('afterRemoveRow',r);
+        }
+    }
         
     ,_showMenu: function(g,ri,e) {
         e.stopEvent();
