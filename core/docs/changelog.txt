@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Add sanity check to make sure languages arent erased on package uninstall
 - Removed confirm dialog for remove action on Access Permissions grid
 - Fixed panel layout for Access Policies, User Group editing
 - Fixed E_STRICT warning on modX::getCacheManager() [method signature did not match xPDO::getCacheManager()]
