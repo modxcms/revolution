@@ -604,6 +604,7 @@ ul#modx-topnav li a{
     display: block;
     text-decoration: none;
     float: left;
+    cursor: pointer;
 }
 ul#modx-topnav li ul.modx-subnav {
     -moz-border-radius-bottomleft: 5px;
