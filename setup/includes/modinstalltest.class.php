@@ -192,6 +192,8 @@ abstract class modInstallTest {
      */
     protected function _checkDependencies() {
         $this->results['dependencies']['msg'] = '<p>'.$this->install->lexicon['test_dependencies'].' ';
+
+        /* check for zlib */
         if (!extension_loaded('zlib')) {
             $s = '<span class="notok">'.$this->install->lexicon['failed'].'</span>';
             $s .= '<div class="notes"><p>'.$this->install->lexicon['test_dependencies_fail_zlib'].'</p></div>';
@@ -201,6 +203,17 @@ abstract class modInstallTest {
         } else {
             $this->results['dependencies']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
             $this->results['dependencies']['class'] = 'testPassed';
+        }
+
+        /* check for SimpleXML */
+        $this->results['simplexml']['msg'] = '<p>'.$this->install->lexicon['test_simplexml'].' ';
+        if (!function_exists('simplexml_load_string')) {
+            $this->results['simplexml']['msg'] = '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['simplexml']['msg'] .= '<div class="notes"><h3>'.$this->install->lexicon['test_simplexml_nf'].'</h3><p>'.$this->install->lexicon['test_simplexml_nf_msg'].'</p></div>';
+            $this->results['simplexml']['class'] = 'testWarn';
+        } else {
+            $this->results['simplexml']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['simplexml']['class'] = 'testPassed';
         }
     }
 
