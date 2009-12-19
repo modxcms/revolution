@@ -620,7 +620,7 @@ class xPDO {
                     } else {
                         $removed= true;
                         if ($this->getOption(xPDO::OPT_CACHE_DB)) {
-                            $this->cacheManager->delete(xPDOCacheManager::CACHE_DIR . $query->_alias, array('multiple_object_delete' => true));
+                            $this->cacheManager->delete(xPDOCacheManager::CACHE_DIR . $query->getAlias(), array('multiple_object_delete' => true));
                         }
                         $callback = $this->getOption(xPDO::OPT_CALLBACK_ON_REMOVE);
                         if ($callback && is_callable($callback)) {
@@ -654,7 +654,7 @@ class xPDO {
                     $this->log(xPDO::LOG_LEVEL_ERROR, "xPDO->removeCollection - Error deleting {$className} instances using query " . $query->toSQL());
                 } else {
                     if ($this->getOption(xPDO::OPT_CACHE_DB)) {
-                        $this->cacheManager->delete(xPDOCacheManager::CACHE_DIR . $query->_alias, array('multiple_object_delete' => true));
+                        $this->cacheManager->delete(xPDOCacheManager::CACHE_DIR . $query->getAlias(), array('multiple_object_delete' => true));
                     }
                     $callback = $this->getOption(xPDO::OPT_CALLBACK_ON_REMOVE);
                     if ($callback && is_callable($callback)) {
