@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Updated xPDO to revision 385 to fix cache_db functionality broken by PHP 5 only changes
 - [#MODX-1514] Added css for pointer cursor to top menus
 - [#MODX-1513] Added check for SimpleXML to installer
 - Add sanity check to make sure languages arent erased on package uninstall
