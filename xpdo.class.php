@@ -1924,7 +1924,7 @@ class xPDO {
  *
  */
 class xPDOCriteria {
-    protected $sql= '';
+    public $sql= '';
     public $stmt= null;
     public $bindings= array ();
     public $cacheFlag= false;
