@@ -1455,7 +1455,7 @@ class xPDO {
                     if ($signature instanceof xPDOCriteria) {
                         if ($signature instanceof xPDOQuery) {
                             $signature->construct();
-                            if (empty($sigClass)) $sigClass= $signature->_alias;
+                            if (empty($sigClass)) $sigClass= $signature->getAlias();
                         }
                         $sigKey= array ($signature->sql, $signature->bindings);
                     }
