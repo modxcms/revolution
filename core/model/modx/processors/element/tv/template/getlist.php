@@ -16,7 +16,7 @@ if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('
 $modx->lexicon->load('tv');
 
 /* setup default properties */
-$isLimit = empty($_REQUEST['limit']);
+$isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
 $sort = $modx->getOption('sort',$_REQUEST,'templatename');

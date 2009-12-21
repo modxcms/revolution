@@ -15,7 +15,7 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('formcustomization');
 
 /* setup default properties */
-$isLimit = empty($_REQUEST['limit']);
+$isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
 $sort = $modx->getOption('sort',$_REQUEST,'action');

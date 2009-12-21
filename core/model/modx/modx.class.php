@@ -2073,7 +2073,7 @@ class modX extends xPDO {
         $ml->set('user',$this->user->get('id'));
         $ml->set('occurred',strftime('%Y-%m-%d %H:%M:%S'));
         $ml->set('action',$action);
-        $ml->set('class_key',$class_key);
+        $ml->set('classKey',$class_key);
         $ml->set('item',$item);
 
         if (!$ml->save()) {

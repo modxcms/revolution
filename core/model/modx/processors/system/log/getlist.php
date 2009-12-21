@@ -16,41 +16,80 @@
  */
 if (!$modx->hasPermission('logs')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'occurred';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,20);
+$sort = $modx->getOption('sort',$_REQUEST,'occurred');
+$dir = $modx->getOption('dir',$_REQUEST,'DESC');
 
+$user = $modx->getOption('user',$_REQUEST,false);
+$actionType = $modx->getOption('actionType',$_REQUEST,false);
+$dateStart = $modx->getOption('dateStart',$_REQUEST,false);
+$dateEnd = $modx->getOption('dateEnd',$_REQUEST,false);
+
+/* check filters */
 $wa = array();
-if (isset($_REQUEST['action_type']) && $_REQUEST['action_type'] != '') {
-    $wa['action:LIKE'] = '%'.$_REQUEST['action_type'].'%';
+if (!empty($actionType)) { $wa['action:LIKE'] = '%'.$actionType.'%'; }
+if (!empty($user)) { $wa['user'] = $user; }
+if (!empty($dateStart)) {
+    $dateStart = strftime('%Y-%m-%d',strtotime($dateStart.' 00:00:00'));
+    $wa['occurred:>='] = $dateStart;
 }
-if (isset($_REQUEST['user']) && $_REQUEST['user'] != '') {
-    $wa['user'] = $_REQUEST['user'];
-}
-if (isset($_REQUEST['date_start']) && $_REQUEST['date_start'] != '') {
-    $_REQUEST['date_start'] = strftime('%Y-%m-%d',strtotime($_REQUEST['date_start'].' 00:00:00'));
-    $wa['occurred:>='] = $_REQUEST['date_start'];
-}
-if (isset($_REQUEST['date_end']) && $_REQUEST['date_end'] != '') {
-    $_REQUEST['date_end'] = strftime('%Y-%m-%d',strtotime($_REQUEST['date_end'].' 23:59:59'));
-    $wa['occurred:<='] = $_REQUEST['date_end'];
+if (!empty($dateEnd)) {
+    $dateEnd = strftime('%Y-%m-%d',strtotime($dateEnd.' 23:59:59'));
+    $wa['occurred:<='] = $dateEnd;
 }
 
+/* build query */
 $c = $modx->newQuery('modManagerLog');
 $c->innerJoin('modUser','User');
 if (!empty($wa)) $c->where($wa);
-$c->sortby($_REQUEST['sort'], $_REQUEST['dir']);
-$c->limit($_REQUEST['limit'], $_REQUEST['start']);
-
 $count = $modx->getCount('modManagerLog',$c);
+
 $c->select('modManagerLog.*,User.username AS username');
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $logs = $modx->getCollection('modManagerLog',$c);
 
 $ls = array();
 foreach ($logs as $log) {
     $la = $log->toArray();
+    if (!empty($la['classKey']) && !empty($la['item'])) {
+        $obj = $modx->getObject($la['classKey'],$la['item']);
+        if ($obj) {
+            $nameField = getNameField($la['classKey']);
+            $la['name'] = $obj->get($nameField).' ('.$obj->get('id').')';
+        }
+    } else {
+        $la['name'] = '';
+    }
     $la['occurred'] = strftime('%a %b %d, %Y %H:%I:%S %p',strtotime($la['occurred']));
     $ls[] = $la;
 }
+
 return $this->outputArray($ls,$count);
+
+function getNameField($classKey) {
+    $field = 'name';
+    switch ($classKey) {
+        case 'modResource':
+        case 'modWeblink':
+        case 'modSymlink':
+        case 'modStaticResource':
+        case 'modDocument':
+            $field = 'pagetitle';
+            break;
+        case 'modTemplate':
+            $field = 'templatename';
+            break;
+        case 'modCategory':
+            $field = 'category';
+            break;
+        case 'modUser':
+            $field = 'username';
+            break;
+        default: break;
+    }
+    return $field;
+}

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed Manager Log page to properly display content, log the right class key, and now display the name of the object edited
 - Enhanced Property Sets page to now allow you to edit specific implementations of Property Sets per element, as well as the default set
 - Added "disabled" checkbox to Quick Update Plugin
 - Fixed bug in modManagerResponse dealing with CMPs and templating paths

@@ -12,7 +12,7 @@ MODx.grid.ManagerLog = function(config) {
         title: _('manager_log')
         ,id: 'modx-grid-manager-log'
         ,url: MODx.config.connectors_url+'system/log.php'
-        ,fields: ['id','user','username','occurred','action','classKey','item','menu']
+        ,fields: ['id','user','username','occurred','action','classKey','item','name','menu']
         ,autosave: true
         ,paging: true
         ,columns: [{
@@ -27,6 +27,10 @@ MODx.grid.ManagerLog = function(config) {
         },{
             header: _('action')
             ,dataIndex: 'action'
+            ,width: 125
+        },{
+            header: 'Object'
+            ,dataIndex: 'name'
             ,width: 125
         }]
     });
@@ -111,18 +115,18 @@ Ext.extend(MODx.panel.ManagerLog,MODx.FormPanel,{
         },{
             xtype: 'textfield'
             ,fieldLabel: _('action')
-            ,name: 'action_type'
+            ,name: 'actionType'
             ,listeners: lsr
         },{
             xtype: 'datefield'
             ,fieldLabel: _('date_start')
-            ,name: 'date_start'
+            ,name: 'dateStart'
             ,allowBlank: true
             ,listeners: lsr
         },{
             xtype: 'datefield'
             ,fieldLabel: _('date_end')
-            ,name: 'date_end'
+            ,name: 'dateEnd'
             ,allowBlank: true
             ,listeners: lsr
         }];

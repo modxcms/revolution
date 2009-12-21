@@ -15,7 +15,7 @@ if (!$modx->hasPermission('view_context')) return $modx->error->failure($modx->l
 $modx->lexicon->load('context');
 
 /* setup default properties */
-$isLimit = empty($_REQUEST['limit']);
+$isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
 $sort = $modx->getOption('sort',$_REQUEST,'key');
