@@ -10,23 +10,29 @@ if (!$modx->hasPermission(array('access_permissions' => true, 'edit_user' => tru
 }
 $modx->lexicon->load('user');
 
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+if (empty($_REQUEST['user'])) return $this->outputArray(array());
+
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
 /* get memberships */
 $c = $modx->newQuery('modUserGroupMember');
-$c->select('modUserGroupMember.*, '
-    . 'UserGroupRole.name AS rolename, '
-    . 'UserGroup.name AS name');
 $c->innerJoin('modUserGroupRole','UserGroupRole');
 $c->innerJoin('modUserGroup','UserGroup');
 $c->where(array(
     'member' => $_REQUEST['user'],
 ));
-if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$count = $modx->getCount('modUserGroupMember');
+$c->select('modUserGroupMember.*, '
+    . 'UserGroupRole.name AS rolename, '
+    . 'UserGroup.name AS name');
+
+$c->sortby('`UserGroup`.`'.$sort.'`','ASC');
+if ($isLimit) $c->limit($limit,$start);
 $members = $modx->getCollection('modUserGroupMember',$c);
 
 $list = array();
@@ -35,4 +41,4 @@ foreach ($members as $member) {
     $list[] = $memberArray;
 }
 
-return $this->outputArray($list);
+return $this->outputArray($list,$count);

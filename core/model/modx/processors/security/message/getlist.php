@@ -12,29 +12,36 @@
  * @package modx
  * @subpackage processors.security.message
  */
+if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('messages','user');
 
-if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'date_sent');
+$dir = $modx->getOption('dir',$_REQUEST,'DESC');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'date_sent';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'DESC';
-
+/* build query */
 $c = $modx->newQuery('modUserMessage');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
-$c->where(array('recipient' => $modx->user->get('id')));
-$messages = $modx->getCollection('modUserMessage', $c);
+$c->innerJoin('modUser','Sender');
+$c->where(array(
+    'recipient' => $modx->user->get('id')
+));
+$count = $modx->getCount('modUserMessage',$c);
+$c->select('
+    modUserMessage.*,
+    Sender.username AS sender_username
+');
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
+$messages = $modx->getCollection('modUserMessage',$c);
 
-$cc = $modx->newQuery('modUserMessage');
-$count = $modx->getCount('modUserMessage',$cc);
-
-$ms = array();
+/* iterate */
+$list = array();
 foreach ($messages as $message) {
 	$ma = $message->toArray();
-    $sender = $modx->getObject('modUser',$message->get('sender'));
-    $ma['sender_name'] = $sender->get('username');
+    $ma['sender_name'] = $message->get('sender_username');
     $ma['read'] = $message->get('read') ? true : false;
     $ma['menu'] = array(
         array(
@@ -61,6 +68,6 @@ foreach ($messages as $message) {
             'handler' => 'this.remove.createDelegate(this,["message_remove_confirm"])'
         ),
     );
-	$ms[] = $ma;
+	$list[] = $ma;
 }
-return $this->outputArray($ms,$count);
+return $this->outputArray($list,$count);

@@ -23,10 +23,11 @@ $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
 /* get content types */
 $c = $modx->newQuery('modContentType');
+$count = $modx->getCount('modContentType',$c);
+
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $contentTypes = $modx->getCollection('modContentType',$c);
-$count = $modx->getCount('modContentType');
 
 $list = array();
 foreach ($contentTypes as $contentType) {

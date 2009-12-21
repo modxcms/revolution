@@ -13,19 +13,22 @@
  */
 $modx->lexicon->load('workspace');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
+/* build query */
 $c = $modx->newQuery('modWorkspace');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
-$workspaces = $modx->getCollection('modWorkspace',$c);
-$count = $modx->getCount('modWorkspace');
+$count = $modx->getCount('modWorkspace',$c);
 
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
+$workspaces = $modx->getCollection('modWorkspace',$c);
+
+/* iterate */
 $list = array();
 foreach ($workspaces as $workspace) {
     $workspaceArray = $workspace->toArray();

@@ -15,17 +15,22 @@
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
+/* build query */
 $c = $modx->newQuery('modUserGroup');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+$count = $modx->getCount('modUserGroup',$c);
+
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $groups = $modx->getCollection('modUserGroup',$c);
 
-$count = $modx->getCount('modUserGroup');
-
+/* iterate */
 $list = array();
 if (!empty($_REQUEST['addNone'])) {
     $list[] = array(

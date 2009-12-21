@@ -17,19 +17,23 @@ if (!$modx->hasPermission(array('access_permissions' => true, 'edit_role' => tru
 }
 $modx->lexicon->load('user');
 
-$limit = isset($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'authority';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-if ($_REQUEST['sort'] == 'rolename_link') $_REQUEST['sort'] = 'name';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'authority');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+if ($sort == 'rolename_link') $sort = 'name';
 
+/* build query */
 $c = $modx->newQuery('modUserGroupRole');
-$count = $modx->getCount('modUserGroupRole');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$count = $modx->getCount('modUserGroupRole',$c);
+
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $roles = $modx->getCollection('modUserGroupRole', $c);
 
+/* iterate */
 $list = array();
 if (!empty($_REQUEST['addNone'])) {
     $list[] = array('id' => 0, 'name' => $modx->lexicon('none'));

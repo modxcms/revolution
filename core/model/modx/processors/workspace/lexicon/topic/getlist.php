@@ -14,33 +14,33 @@
  * @package modx
  * @subpackage processors.workspace.lexicon.topic
  */
+if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('lexicon');
 
-if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (empty($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (empty($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 if (empty($_REQUEST['namespace'])) $_REQUEST['namespace'] = 'core';
 
 /* filter by namespace */
-$wa = array(
+$where = array(
     'namespace' => $_REQUEST['namespace'],
 );
 /* if set, filter by name */
 if (!empty($_REQUEST['name'])) {
-	$wa['name:LIKE'] = '%'.$_REQUEST['name'].'%';
+	$where['name:LIKE'] = '%'.$_REQUEST['name'].'%';
 }
 
 $c = $modx->newQuery('modLexiconTopic');
-$c->where($wa);
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) { $c->limit($_REQUEST['limit'],$_REQUEST['start']); }
+$c->where($where);
+$count = $modx->getCount('modLexiconTopic',$c);
 
+$c->sortby($sort,$dir);
+if ($isLimit) { $c->limit($limit,$start); }
 $topics = $modx->getCollection('modLexiconTopic',$c);
-$count = $modx->getCount('modLexiconTopic',$wa);
 
 /* loop through */
 $list = array();

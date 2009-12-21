@@ -18,22 +18,18 @@ if (!$modx->hasPermission(array('access_permissions' => true, 'edit_user' => tru
 }
 $modx->lexicon->load('user');
 
-
 /* setup default properties */
-$isLimit = isset($_REQUEST['limit']) ? true : false;
+$isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
 $sort = $modx->getOption('sort',$_REQUEST,'username');
 if ($sort == 'username_link') $sort = 'username';
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$username = $modx->getOption('username',$_REQUEST,'');
 
 /* query for users */
 $c = $modx->newQuery('modUser');
-if (!empty($username)) {
-    $c->where(array(
-        'username LIKE "%'.$_REQUEST['username'].'%"',
-    ));
+if (!empty($_REQUEST['username'])) {
+    $c->where(array('username:LIKE' => '%'.$_REQUEST.'%'));
 }
 $count = $modx->getCount('modUser',$c);
 
@@ -46,9 +42,11 @@ $users = $modx->getCollectionGraph('modUser', '{"Profile":{}}', $c);
 /* iterate through users */
 $list = array();
 foreach ($users as $user) {
-	$profileArray = $user->Profile->toArray();
 	$userArray = $user->toArray();
-	$userArray = array_merge($profileArray,$userArray);
+    if ($user->Profile instanceof modUserProfile) {
+       $profileArray = $user->Profile->toArray();
+	   $userArray = array_merge($profileArray,$userArray);
+    }
     $userArray['menu'] = array(
         array(
             'text' => $modx->lexicon('user_update'),

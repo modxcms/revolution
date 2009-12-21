@@ -13,22 +13,25 @@
  * @package modx
  * @subpackage processors.security.access.policy
  */
+if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('policy');
 
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
-$limit = isset($_REQUEST['limit']);
-if (empty($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (empty($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (empty($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (empty($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* build query */
 $c = $modx->newQuery('modAccessPolicy');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$count = $modx->getCount('modAccessPolicy',$c);
 
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $policies = $modx->getCollection('modAccessPolicy', $c);
 
+/* iterate */
 $data = array();
 if (isset($_REQUEST['combo'])) {
     $data[] = array(
@@ -57,4 +60,4 @@ foreach ($policies as $key => $policy) {
     $data[] = $policyArray;
 }
 
-return $this->outputArray($data);
+return $this->outputArray($data,$count);

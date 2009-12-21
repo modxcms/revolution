@@ -21,21 +21,24 @@ $modx->lexicon->load('access');
 
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['type'])) {
+if (empty($_REQUEST['type'])) {
     return $modx->error->failure($modx->lexicon('access_type_err_ns'));
 }
 $accessClass = $_REQUEST['type'];
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = '';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
 $targetClass = str_replace('Access', '', $accessClass);
 $targetId = isset($_REQUEST['target']) ? $_REQUEST['target'] : 0;
 $principalClass = isset($_REQUEST['principal_class']) ? $_REQUEST['principal_class'] : 'modUserGroup';
 $principalId = isset($_REQUEST['principal']) ? intval($_REQUEST['principal']) : 0;
 
+/* build query */
 $c = $modx->newQuery($accessClass);
 if ($targetId) {
     $c->where(array('target' => $targetId));
@@ -44,14 +47,14 @@ $c->where(array('principal_class' => $principalClass));
 if ($principalId) {
     $c->where(array('principal' => $principalId));
 }
-if ($_REQUEST['sort']) {
-    $c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+if (!empty($sort)) {
+    $c->sortby($sort,$dir);
 }
-if ($_REQUEST['sort'] != 'target') $c->sortby('target', 'ASC');
-if ($_REQUEST['sort'] != 'principal_class') $c->sortby('principal_class', 'DESC');
-if ($_REQUEST['sort'] != 'principal') $c->sortby('principal', 'ASC');
-if ($_REQUEST['sort'] != 'authority') $c->sortby('authority', 'ASC');
-if ($_REQUEST['sort'] != 'policy') $c->sortby('policy', 'ASC');
+if ($sort != 'target') $c->sortby('target', 'ASC');
+if ($sort != 'principal_class') $c->sortby('principal_class', 'DESC');
+if ($sort != 'principal') $c->sortby('principal', 'ASC');
+if ($sort != 'authority') $c->sortby('authority', 'ASC');
+if ($sort != 'policy') $c->sortby('policy', 'ASC');
 $objectGraph = '{"Target":{},"Policy":{}}';
 $collection = $modx->getCollectionGraph($accessClass, $objectGraph, $c);
 

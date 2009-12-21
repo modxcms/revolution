@@ -51,6 +51,7 @@ MODx.grid.Namespace = function(config) {
         ,paging: true
         ,autosave: true
         ,primaryKey: 'name'
+        ,remoteSort: true
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'

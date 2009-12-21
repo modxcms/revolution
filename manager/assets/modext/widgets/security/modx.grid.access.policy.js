@@ -50,15 +50,18 @@ MODx.grid.AccessPolicy = function(config) {
         ,fields: ['id','name','description','class','data','parent','menu']
 		,paging: true
         ,autosave: true
+        ,remoteSort: true
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
             ,width: 40
+            ,sortable: true
         },{
             header: _('policy_name')
             ,dataIndex: 'name'
             ,width: 200
             ,editor: { xtype: 'textfield' ,allowBlank: false }
+            ,sortable: true
         },{
             header: _('description')
             ,dataIndex: 'description'

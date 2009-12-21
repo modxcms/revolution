@@ -20,12 +20,12 @@ $sort = $modx->getOption('sort',$_REQUEST,'name');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
 $c = $modx->newQuery('modLexiconLanguage');
+$count = $modx->getCount('modLexiconLanguage',$c);
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 
 $languages = $modx->getCollection('modLexiconLanguage',$c);
-$count = $modx->getCount('modLexiconLanguage');
 
 $list = array();
 foreach ($languages as $language) {

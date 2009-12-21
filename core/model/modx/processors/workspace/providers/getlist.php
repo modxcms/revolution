@@ -11,24 +11,25 @@
  * @package modx
  * @subpackage processors.workspace.providers
  */
+if (!$modx->hasPermission('providers')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('workspace');
 
-if (!$modx->hasPermission('providers')) return $modx->error->failure($modx->lexicon('permission_denied'));
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* build query */
 $c = $modx->newQuery('transport.modTransportProvider');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
-$providers = $modx->getCollection('transport.modTransportProvider',$c);
-$count = $modx->getCount('transport.modTransportProvider');
+$count = $modx->getCount('transport.modTransportProvider',$c);
 
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
+$providers = $modx->getCollection('transport.modTransportProvider',$c);
+
+/* iterate */
 $list = array();
 foreach ($providers as $provider) {
     $providerArray = $provider->toArray();

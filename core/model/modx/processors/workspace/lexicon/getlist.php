@@ -14,15 +14,15 @@
  * @package modx
  * @subpackage processors.workspace.lexicon
  */
+if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('lexicon');
 
-if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (empty($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (empty($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 if (empty($_REQUEST['namespace'])) $_REQUEST['namespace'] = 'core';
 if (empty($_REQUEST['language'])) $_REQUEST['language'] = 'en';
 
@@ -36,27 +36,24 @@ if (empty($_REQUEST['topic'])) {
     $topic = $modx->getObject('modLexiconTopic',$_REQUEST['topic']);
     if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
 }
-$wa = array(
+$where = array(
     'namespace' => $_REQUEST['namespace'],
     'topic' => $topic->get('id'),
     'language' => $_REQUEST['language'],
 );
 /* if filtering by name */
 if (!empty($_REQUEST['name'])) {
-	$wa['name:LIKE'] = '%'.$_REQUEST['name'].'%';
+	$where['name:LIKE'] = '%'.$_REQUEST['name'].'%';
 }
 
 /* setup query */
 $c = $modx->newQuery('modLexiconEntry');
-$c->where($wa);
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) {
-    $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+$c->where($where);
+$count = $modx->getCount('modLexiconEntry',$c);
 
-/* get entries */
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
 $entries = $modx->getCollection('modLexiconEntry',$c);
-$count = $modx->getCount('modLexiconEntry',$wa);
 
 /* loop through */
 $list = array();
