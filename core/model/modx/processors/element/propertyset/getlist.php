@@ -33,62 +33,41 @@ $elementType = $modx->getOption('elementType',$_REQUEST,false);
 
 /* query for sets */
 $c = $modx->newQuery('modPropertySet');
+if ($showNotAssociated) {
+    $c->leftJoin('modElementPropertySet','Elements','
+        Elements.element_class = "'.$elementType.'"
+    AND Elements.element = "'.$elementId.'"
+    AND Elements.property_set = modPropertySet.id
+    ');
+    $c->where(array(
+        'Elements.property_set IS NULL',
+    ));
+} else if ($showAssociated) {
+    $c->leftJoin('modElementPropertySet','Elements','
+        Elements.element_class = "'.$elementType.'"
+    AND Elements.element = "'.$elementId.'"
+    AND Elements.property_set = modPropertySet.id
+    ');
+    $c->where(array(
+        'Elements.property_set IS NOT NULL',
+    ));
+}
+$count = $modx->getCount('modPropertySet',$c);
+
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $sets = $modx->getCollection('modPropertySet',$c);
-$count = $modx->getCount('modPropertySet');
-
-/* if showing unassociated/associated sets */
-if ($showNotAssociated) {
-    $elementPropertySets = $modx->getCollection('modElementPropertySet',array(
-        'element' => $elementId,
-        'element_class' => $elementType,
-    ));
-
-    foreach ($elementPropertySets as $elementPropertySet) {
-        $psId = $elementPropertySet->get('property_set');
-        if (array_key_exists($psId,$sets)) {
-            unset($sets[$psId]);
-        }
-    }
-} elseif ($showAssociated) {
-    $elementPropertySets = $modx->getCollection('modElementPropertySet',array(
-        'element' => $elementId,
-        'element_class' => $elementType,
-    ));
-
-    $exists = array();
-    foreach ($elementPropertySets as $elementPropertySet) {
-        $psId = $elementPropertySet->get('property_set');
-        if (array_key_exists($psId,$sets)) {
-            $exists[] = $psId;
-        }
-    }
-
-    foreach ($sets as $key => $set) {
-        if (!in_array($key,$exists)) {
-            unset($sets[$key]);
-            $count--;
-        }
-    }
-}
-
-
 
 $list = array();
-/* if limiting to an Element */
-if ($elementId && $elementType) {
+/* if limiting to an Element, get default properties */
+if ($elementId && $elementType && empty($showNotAssociated)) {
     $properties = array();
     $element = $modx->getObject($elementType,$elementId);
     if ($element) {
         $properties = $element->get('properties');
         if (!is_array($properties)) $properties = array();
     }
-
-    if (empty($showNotAssociated)) {
-        $list[] = array('id' => 0, 'name' => $modx->lexicon('default'), 'description' => '', 'properties' => $properties);
-        $count++;
-    }
+    $list[] = array('id' => 0, 'name' => $modx->lexicon('default'), 'description' => '', 'properties' => $properties);
 }
 
 /* iterate through sets */
