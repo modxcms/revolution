@@ -36,6 +36,8 @@ $properties = array(
 
 foreach ($info->topdownloaded as $package) {
     $properties['topdownloaded'][] = array(
+        'url' => (string)$info->url,
+        'id' => (string)$package->id,
         'name' => (string)$package->name,
         'downloads' => number_format((string)$package->downloads,0),
     );
@@ -43,6 +45,8 @@ foreach ($info->topdownloaded as $package) {
 
 foreach ($info->newest as $package) {
     $properties['newest'][] = array(
+        'url' => (string)$info->url,
+        'id' => (string)$package->id,
         'name' => (string)$package->name,
         'releasedon' => strftime('%b %d, %Y',strtotime((string)$package->releasedon)),
     );

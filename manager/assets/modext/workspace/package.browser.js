@@ -227,15 +227,25 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
                 ,'<p>'+_('provider_total_downloads')+': {downloads}</p>'
                 ,'<div class="pbr-provider-box"><h3>'+_('most_popular')+'</h3>'
                 ,'<tpl for="topdownloaded">'
-                    ,'<p>{#}. {name} - {downloads}</p>'
+                    ,'<p>{#}. '
+                    ,'<tpl if="this.isEmpty(url) == false"><a href="{url}{id}" target="_blank">{name}</a></tpl>'
+                    ,'<tpl if="this.isEmpty(url) == true">{name}</tpl>'
+                    ,' - {downloads}</p>'
                 ,'</tpl></div>'
                 ,'<div class="pbr-provider-box"><h3>'+_('newest_additions')+'</h3>'
                 ,'<tpl for="newest">'
-                    ,'<p>{#}. {name} - {releasedon}</p>'
+                    ,'<p>{#}. '
+                    ,'<tpl if="this.isEmpty(url) == false"><a href="{url}{id}" target="_blank">{name}</a></tpl>'
+                    ,'<tpl if="this.isEmpty(url) == true">{name}</tpl>'
+                    ,' - {releasedon}</p>'
                 ,'</tpl></div>'
                 ,'<br class="clear" /></div>'
             ,'</tpl>'
-        );
+        ,{
+            isEmpty: function (v) {
+                return (v == '' || v == null || v == undefined);
+            }
+        });
         this.tpls.home.compile();
         
         
