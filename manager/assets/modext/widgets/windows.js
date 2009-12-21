@@ -563,6 +563,13 @@ MODx.window.QuickCreatePlugin = function(config) {
             ,width: 300
             ,rows: 2
         },{
+            xtype: 'checkbox'
+            ,name: 'disabled'
+            ,id: 'modx-'+this.ident+'-disabled'
+            ,fieldLabel: _('disabled')
+            ,inputValue: 1
+            ,checked: false
+        },{
             xtype: 'textarea'
             ,name: 'plugincode'
             ,id: 'modx-'+this.ident+'-plugincode'
@@ -613,6 +620,13 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,fieldLabel: _('description')
             ,width: 300
             ,rows: 2
+        },{
+            xtype: 'checkbox'
+            ,name: 'disabled'
+            ,id: 'modx-'+this.ident+'-disabled'
+            ,fieldLabel: _('disabled')
+            ,inputValue: 1
+            ,checked: false
         },{
             xtype: 'checkbox'
             ,name: 'clearCache'
