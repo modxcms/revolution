@@ -169,7 +169,7 @@ switch ($node[0]) {
             foreach ($els as $el) {
                 $sa = array(
                     'text' => $el->get('name'),
-                    'id' => 'el_'.$el->get('property_set').'_'.$el->get('id'),
+                    'id' => 'el_'.$el->get('property_set').'_'.$el->get('id').'_'.$class,
                     'leaf' => true,
                     'href' => '',
                     'pk' => $el->get('id'),

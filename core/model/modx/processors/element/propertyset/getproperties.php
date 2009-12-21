@@ -9,21 +9,61 @@ if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('
 
 if (!isset($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
 $set = $modx->getObject('modPropertySet',$_REQUEST['id']);
-if ($set == null) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
+if (empty($set)) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
 
 $properties = $set->get('properties');
+if (!is_array($properties)) $properties = array();
+
+if (!empty($_REQUEST['element']) && !empty($_REQUEST['element_class'])) {
+    $element = $modx->getObject($_REQUEST['element_class'],$_REQUEST['element']);
+    if ($element) {
+        $default = $element->get('properties');
+    }
+}
+
 
 $data = array();
-if (is_array($properties)) {
-    foreach ($properties as $property) {
-        $data[] = array(
+
+/* put in default properties for element */
+if (isset($default) && is_array($default)) {
+    foreach ($default as $property) {
+        $data[$property['name']] = array(
             $property['name'],
             $property['desc'],
             $property['type'],
             $property['options'],
             $property['value'],
-            false, /* overridden set to false */
+            0,
         );
     }
 }
-return $modx->error->success('',$data);
+
+foreach ($properties as $property) {
+    $overridden = 0;
+    /* if overridden, set flag */
+    if (isset($data[$property['name']])) {
+        $overridden = 1;
+    }
+    /* if completely new value, unique to set */
+    if (!isset($data[$property['name']]) && isset($_POST['element'])) {
+        $overridden = 2;
+    }
+
+    $data[$property['name']] = array(
+        $property['name'],
+        $property['desc'],
+        $property['type'],
+        $property['options'],
+        $property['value'],
+        $overridden,
+    );
+}
+
+
+/* reformat data array for store */
+$props = array();
+foreach ($data as $key => $d) {
+    $props[] = $d;
+}
+
+return $modx->error->success('',$props);

@@ -95,11 +95,7 @@ MODx.grid.PropertySetProperties = function(config) {
     });
     MODx.grid.PropertySetProperties.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.grid.PropertySetProperties,MODx.grid.ElementProperties,{
-    _renderName: function(v,md,rec,ri) {
-        return '<span>'+v+'</span>';
-    }
-});
+Ext.extend(MODx.grid.PropertySetProperties,MODx.grid.ElementProperties);
 Ext.reg('modx-grid-property-set-properties',MODx.grid.PropertySetProperties);
 
 /**
@@ -144,6 +140,32 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
                         var g = Ext.getCmp('modx-grid-element-properties');
                         var s = g.getStore();
                         g.defaultProperties = d;
+                        delete g.config.elementId;
+                        delete g.config.elementType;
+                        s.removeAll();
+                        s.loadData(d);
+                        
+                        Ext.getCmp('modx-combo-property-set').setValue(ar[1]);
+                    },scope:this}
+                }
+            });
+        } else if (ar[0] == 'el' && ar[2] && ar[3]) {
+            MODx.Ajax.request({
+                url: MODx.config.connectors_url+'element/propertyset.php'
+                ,params: {
+                    action: 'getProperties'
+                    ,id: ar[1]
+                    ,element: ar[2]
+                    ,element_class: ar[3]
+                }
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        var d = r.object;
+                        var g = Ext.getCmp('modx-grid-element-properties');
+                        var s = g.getStore();
+                        g.defaultProperties = d;
+                        g.config.elementId = ar[2];
+                        g.config.elementType = ar[3];
                         s.removeAll();
                         s.loadData(d);
                         
