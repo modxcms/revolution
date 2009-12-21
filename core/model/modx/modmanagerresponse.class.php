@@ -85,11 +85,18 @@ class modManagerResponse extends modResponse {
                 $this->registerCssJs();
 
                 /* reset path to core modx path for header/footer */
-                $this->modx->smarty->setTemplatePath($templatePath);
+                if (!isset($this->action['namespace']) || $this->action['namespace'] == 'core') {
+                    $this->modx->smarty->setTemplatePath($templatePath);
+                }
+
 
                 /* load header */
+                $controllersPath = $this->modx->getOption('manager_path').'controllers/'.$theme.'/';
+                if (!file_exists($controllersPath)) {
+                    $controllersPath = $this->modx->getOption('manager_path').'controllers/default/';
+                }
                 if ($this->action['haslayout']) {
-                    $this->body .= include_once $this->prepareNamespacePath('header',$theme,false).'.php';
+                    $this->body .= include_once $controllersPath.'header.php';
                 }
 
                 /* assign later to allow for css/js registering */
@@ -99,8 +106,9 @@ class modManagerResponse extends modResponse {
                 }
                 $this->body .= $cbody;
 
+                /* load footer */
                 if ($this->action['haslayout']) {
-                    $this->body .= include_once $this->prepareNamespacePath('footer',$theme,false).'.php';
+                    $this->body .= include_once $controllersPath.'footer.php';
                 }
 
 
@@ -215,12 +223,12 @@ class modManagerResponse extends modResponse {
      * @access protected
      * @return string The formatted Namespace path
      */
-    protected function prepareNamespacePath($controller,$theme = 'default',$check3pc = true) {
+    protected function prepareNamespacePath($controller,$theme = 'default') {
         /* set context url and path */
         $this->modx->config['namespace_path'] = $controller;
 
         /* find context path */
-        if (isset($this->action['namespace']) && $this->action['namespace'] != 'core' && $check3pc) {
+        if (isset($this->action['namespace']) && $this->action['namespace'] != 'core') {
             /* if a custom 3rd party path */
             $f = $this->action['namespace_path'].$controller;
 
