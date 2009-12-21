@@ -40,27 +40,27 @@ class modSmarty extends Smarty {
      * @var modX
      * @access protected
      */
-    var $modx= null;
+    public $modx= null;
     /**
      * A reference to the Smarty instance
      * @var Smarty
      * @access protected
      */
-	var $smarty;
+	public $smarty;
     /**
      * Any custom blocks loaded
      * @var array
      * @access private
      */
-    var $_blocks;
+    public $_blocks;
     /**
      * The derived block loaded
      * @var mixed
      * @access private
      */
-    var $_derived;
+    public $_derived;
 
-	function __construct(& $modx, $params= array ()) {
+	function __construct(modX &$modx, $params= array ()) {
 		parent :: Smarty();
         $this->modx= & $modx;
 
@@ -95,7 +95,7 @@ class modSmarty extends Smarty {
      * @param string $path The path to set. Defaults to '', which in turn
      * defaults to $this->modx->cachePath.
      */
-    function setCachePath($path = '') {
+    public function setCachePath($path = '') {
     	$path = $this->modx->getOption(xPDO::OPT_CACHE_PATH).$path;
         if (!is_dir($path)) {
             $this->modx->getCacheManager();
@@ -110,7 +110,7 @@ class modSmarty extends Smarty {
      * @access public
      * @param string $path The path to set.
      */
-    function setTemplatePath($path = '') {
+    public function setTemplatePath($path = '') {
         if ($path == '') return false;
 
         $this->template_dir = $path;
@@ -122,7 +122,7 @@ class modSmarty extends Smarty {
      * @access public
      * @param string $resource_name The resource location
      */
-	function display($resource_name) {
+	public function display($resource_name) {
 		echo $this->fetch($resource_name);
 	}
 
@@ -133,7 +133,7 @@ class modSmarty extends Smarty {
      * @param string $resource_name The resource location
      * @return string The fetched resource output
      */
-	function fetch($resource_name) {
+	public function fetch($resource_name) {
 		$ret = parent::fetch($resource_name);
 		while ($resource = $this->_derived) {
 			$this->_derived = null;

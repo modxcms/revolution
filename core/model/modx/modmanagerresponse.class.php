@@ -45,6 +45,15 @@ class modManagerResponse extends modResponse {
             if (isset($this->modx->actionMap[$action])) {
                 $this->action = $this->modx->actionMap[$action];
 
+                /* get template path */
+                $theme = $this->modx->getOption('manager_theme',null,'default');
+                $templatePath = $this->modx->getOption('manager_path') . 'templates/'.$theme.'/';
+                if (!file_exists($templatePath)) {
+                    $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
+                    $this->modx->config['manager_theme'] = 'default';
+                    $this->modx->smarty->assign('_config',$this->modx->config);
+                }
+
                 /* assign custom action topics to smarty, so can load custom topics for each page */
                 $this->modx->lexicon->load('action');
                 $topics = explode(',',$this->action['lang_topics']);
@@ -57,7 +66,8 @@ class modManagerResponse extends modResponse {
 
                 $this->body = '';
 
-                $f = $this->prepareNamespacePath();
+
+                $f = $this->prepareNamespacePath($this->action['controller'],$theme);
                 $f = $this->getControllerFilename($f);
 
                 if (file_exists($f)) {
@@ -71,16 +81,15 @@ class modManagerResponse extends modResponse {
                     $cbody = 'Could not find action file at: '.$f;
                 }
 
-
                 $this->registerActionDomRules($action);
                 $this->registerCssJs();
 
                 /* reset path to core modx path for header/footer */
-                $this->modx->smarty->setTemplatePath($modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme',null,'default') . '/');
+                $this->modx->smarty->setTemplatePath($templatePath);
 
                 /* load header */
                 if ($this->action['haslayout']) {
-                    $this->body .= include $this->modx->getOption('manager_path') . 'controllers/header.php';
+                    $this->body .= include_once $this->prepareNamespacePath('header',$theme,false).'.php';
                 }
 
                 /* assign later to allow for css/js registering */
@@ -91,7 +100,7 @@ class modManagerResponse extends modResponse {
                 $this->body .= $cbody;
 
                 if ($this->action['haslayout']) {
-                    $this->body .= include_once $this->modx->getOption('manager_path').'controllers/footer.php';
+                    $this->body .= include_once $this->prepareNamespacePath('footer',$theme,false).'.php';
                 }
 
 
@@ -206,18 +215,22 @@ class modManagerResponse extends modResponse {
      * @access protected
      * @return string The formatted Namespace path
      */
-    protected function prepareNamespacePath() {
+    protected function prepareNamespacePath($controller,$theme = 'default',$check3pc = true) {
         /* set context url and path */
-        $this->modx->config['namespace_path'] = $this->action['namespace_path'];
+        $this->modx->config['namespace_path'] = $controller;
 
         /* find context path */
-        if (!isset($this->action['namespace']) || $this->action['namespace'] == 'core') {
-            $f = $this->action['namespace_path'].'controllers/'.$this->action['controller'];
+        if (isset($this->action['namespace']) && $this->action['namespace'] != 'core' && $check3pc) {
+            /* if a custom 3rd party path */
+            $f = $this->action['namespace_path'].$controller;
 
-        } else { /* if a custom 3rd party path */
-            $f = $this->action['namespace_path'].$this->action['controller'];
+        } else {
+            $f = $this->action['namespace_path'].'controllers/'.$theme.'/'.$controller;
+            /* if custom theme doesnt have controller, go to default theme */
+            if (!file_exists($f.'.php')) {
+                $f = $this->action['namespace_path'].'controllers/default/'.$controller;
+            }
         }
-
         return $f;
     }
 

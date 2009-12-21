@@ -57,8 +57,12 @@ class modManagerRequest extends modRequest {
         }
 
         /* load smarty template engine */
+        $templatePath = $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme',null,'default') . '/';
+        if (!file_exists($templatePath)) {
+            $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
+        }
         $this->modx->getService('smarty', 'smarty.modSmarty', '', array(
-            'template_dir' => $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme',null,'default') . '/',
+            'template_dir' => $templatePath,
         ));
         /* load context-specific cache dir */
         $this->modx->smarty->setCachePath($this->modx->context->get('key').'/smarty');
