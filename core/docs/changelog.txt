@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1532] Fixed bug in permissions reference when trying to remove element from property set
 - Fixed bug with login page and new controllers location
 - Enhanced provider home page to allow links for newest/most downloaded packages
 - Added sorting to Access Policy grid, cleaned up getList processors across site
