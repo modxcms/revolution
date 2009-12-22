@@ -90,7 +90,8 @@ class modManagerRequest extends modRequest {
         /* if not validated, load login page */
         $modx = & $this->modx;
         if (!isset($this->modx->user) || !$this->modx->user->isAuthenticated('mgr')) {
-            include_once $this->modx->getOption('manager_path') . 'controllers/security/login.php';
+            $theme = $this->modx->getOption('manager_theme',null,'default');
+            include_once $this->modx->getOption('manager_path') . 'controllers/'.$theme.'/security/login.php';
             exit();
         } else {
             /* log user action */

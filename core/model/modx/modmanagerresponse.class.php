@@ -32,6 +32,8 @@ class modManagerResponse extends modResponse {
             $action =& $this->modx->request->action;
         }
 
+        $theme = $this->modx->getOption('manager_theme',null,'default');
+
         $this->modx->lexicon->load('dashboard','topmenu','file');
         if ($action == 0) {
             $action = $this->modx->getObject('modAction',array(
@@ -46,7 +48,6 @@ class modManagerResponse extends modResponse {
                 $this->action = $this->modx->actionMap[$action];
 
                 /* get template path */
-                $theme = $this->modx->getOption('manager_theme',null,'default');
                 $templatePath = $this->modx->getOption('manager_path') . 'templates/'.$theme.'/';
                 if (!file_exists($templatePath)) {
                     $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
@@ -122,7 +123,7 @@ class modManagerResponse extends modResponse {
             $this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
             $this->modx->smarty->assign('_ctx',$this->modx->context->get('key'));
 
-            $this->body = include_once $this->modx->getOption('manager_path').'controllers/security/logout.php';
+            $this->body = include_once $this->modx->getOption('manager_path').'controllers/'.$theme.'/security/logout.php';
 
         }
         if (empty($this->body)) {

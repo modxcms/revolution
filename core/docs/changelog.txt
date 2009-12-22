@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug with login page and new controllers location
 - Enhanced provider home page to allow links for newest/most downloaded packages
 - Added sorting to Access Policy grid, cleaned up getList processors across site
 - Fixed Manager Log page to properly display content, log the right class key, and now display the name of the object edited
