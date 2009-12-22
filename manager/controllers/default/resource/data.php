@@ -10,7 +10,7 @@ $modx->lexicon->load('resource');
 $resource = $modx->getObject('modResource', $_REQUEST['id']);
 if ($resource == null) return $modx->error->failure(sprintf($modx->lexicon('resource_with_id_not_found'), $_REQUEST['id']));
 
-if (!$resource->checkPolicy('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$resource->checkPolicy('view')) return $modx->error->failure($modx->lexicon('access_denied'));
 
 $resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : $resource->get('class_key');
 $resourceDir= strtolower(substr($resourceClass, 3));

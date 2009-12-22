@@ -11,7 +11,7 @@ $resource = $modx->getObject('modResource',$_REQUEST['id']);
 if ($resource == null) return $modx->error->failure(sprintf($modx->lexicon('resource_with_id_not_found'), $_REQUEST['id']));
 
 if (!$resource->checkPolicy('save')) {
-    return $modx->error->failure($modx->lexicon('access_permission_denied'));
+    return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
 $lockedBy = $resource->addLock($modx->user->get('id'));
