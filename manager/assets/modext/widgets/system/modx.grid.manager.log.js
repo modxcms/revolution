@@ -93,10 +93,6 @@ MODx.panel.ManagerLog = function(config) {
     MODx.panel.ManagerLog.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.ManagerLog,MODx.FormPanel,{
-    /**
-     * Gets the items for this panel
-     * @return array An array of items 
-     */
     getItems: function() {
         var lsr = {
             'change': {fn:this.filter,scope: this}
@@ -131,23 +127,18 @@ Ext.extend(MODx.panel.ManagerLog,MODx.FormPanel,{
             ,listeners: lsr
         }];
     }
-    /**
-     * Filters the grid via the panel fields
-     * @param {Ext.form.Field} tf
-     * @param {String} newValue
-     * @param {String} oldValue
-     */
+    
     ,filter: function(tf,newValue,oldValue) {
         var p = this.getForm().getValues();
         var g = Ext.getCmp('modx-grid-manager-log');
         p.action = 'getList';
         g.getStore().baseParams = p;
-        g.refresh();
+        g.getStore().load({
+            params: p
+        });
         g.getBottomToolbar().changePage(1);
     }
-    /**
-     * Adds an enter key handler to a field
-     */
+    
     ,_addEnterKeyHandler: function() {
         this.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
             this.fireEvent('change'); 
