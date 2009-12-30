@@ -226,11 +226,11 @@ abstract class xPDOQuery extends xPDOCriteria {
         if (!isset ($target[$condGroup])) $target[$condGroup]= array ();
         if (!is_array ($conditions)) {
             if (!$this->isConditionalClause($conditions)) {
-                $parsed= $this->parseConditions($conditions);
+                $parsed= $this->parseConditions($conditions, $conjunction);
                 if (is_array ($parsed) && isset ($parsed['__sql'])) {
                     $target[$condGroup][]= array (
                         'sql' => $parsed['__sql'],
-                        'conjunction' => $conjunction,
+                        'conjunction' => $parsed['__conjunction'],
                         'binding' => $parsed['__binding']
                     );
                 }
@@ -244,11 +244,11 @@ abstract class xPDOQuery extends xPDOCriteria {
         }
         else {
             if (isset ($conditions['__sql'])) {
-                $this->condition($target, $conditions['__sql'], $conjunction, $conditions['__binding'], $condGroup);
+                $this->condition($target, $conditions['__sql'], $conditions['__conjunction'], $conditions['__binding'], $condGroup);
             } else {
-                foreach ($this->parseConditions($conditions) as $condition) {
+                foreach ($this->parseConditions($conditions, $conjunction) as $condition) {
                     if (is_array($condition) && isset ($condition['__sql'])) {
-                        $this->condition($target, $condition['__sql'], $conjunction, $condition['__binding'], $condGroup);
+                        $this->condition($target, $condition['__sql'], $condition['__conjunction'], $condition['__binding'], $condGroup);
                     } else {
                         $this->condition($target, $condition, $conjunction, $binding, $condGroup);
                     }
@@ -460,8 +460,9 @@ abstract class xPDOQuery extends xPDOCriteria {
      * Parses an xPDO condition expression.
      *
      * @param mixed $conditions A valid xPDO condition expression.
+     * @param string $conjunction The optional conjunction for the condition( s ).
      */
-    abstract public function parseConditions($conditions);
+    abstract public function parseConditions($conditions, $conjunction = xPDOQuery::SQL_AND);
 
     /**
      * Determines if a string contains a conditional operator.
@@ -493,10 +494,13 @@ abstract class xPDOQuery extends xPDOCriteria {
         $currentGroup= 1;
         $isFirst= true;
         foreach ($conditions as $groupKey => $group) {
-            if ($groups > 1) $clause .= ' ( ';
-            $clause.= $this->buildConditionalGroupClause($group, $isFirst);
-            if ($groups > 1) $clause .= ' ) ';
-            if ($currentGroup < $groups) $clause .= ' ' . $conjunction . ' ';
+            $groupClause = '';
+            $groupConjunction = $conjunction;
+            if ($groups > 1) $groupClause .= ' ( ';
+            $groupClause.= $this->buildConditionalGroupClause($group, $isFirst, $groupConjunction);
+            if ($groups > 1) $groupClause .= ' ) ';
+            if ($currentGroup > 1 && $currentGroup <= $groups) $groupClause = ' ' . $groupConjunction . ' ' . $groupClause;
+            $clause .= $groupClause;
             $currentGroup++;
             $isFirst= false;
         }
@@ -508,20 +512,26 @@ abstract class xPDOQuery extends xPDOCriteria {
      *
      * @param array $condition
      * @param boolean $isFirst
+     * @param string &$conjunction
      * @return string The clause.
      */
-    public function buildConditionalGroupClause($condition, $isFirst) {
+    public function buildConditionalGroupClause($condition, $isFirst, & $conjunction) {
         $clause= '';
         reset($condition);
         if (is_int(key($condition))) {
+            $origConjunction = $conjunction;
             $isFirst= true;
             foreach ($condition as $subKey => $subGroup) {
-                $clause.= $this->buildConditionalGroupClause($subGroup, $isFirst);
+                $groupConjunction = $origConjunction;
+                $clause.= $this->buildConditionalGroupClause($subGroup, $isFirst, $groupConjunction);
+                if ($isFirst) $conjunction = $groupConjunction;
                 $isFirst= false;
             }
         } elseif (isset ($condition['sql'])) {
             if (!$isFirst) {
                 $clause.= ' ' . $condition['conjunction'] . ' ';
+            } else {
+                $conjunction = $condition['conjunction'];
             }
             $clause.= $condition['sql'];
             if (isset ($condition['binding']) && !empty ($condition['binding'])) {

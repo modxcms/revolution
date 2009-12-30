@@ -211,7 +211,7 @@ class xPDOQuery_mysql extends xPDOQuery {
         return (!empty ($this->sql));
     }
 
-    public function parseConditions($conditions) {
+    public function parseConditions($conditions, $conjunction = xPDOQuery::SQL_AND) {
         $result= array ();
         $pk= $this->xpdo->getPK($this->_class);
         $pktype= $this->xpdo->getPKType($this->_class);
@@ -234,7 +234,7 @@ class xPDOQuery_mysql extends xPDOQuery {
                         'type' => $isString ? PDO::PARAM_STR : PDO::PARAM_INT,
                         'length' => 0
                     );
-                    $result[$iteration]['__conjunction']= xPDOQuery::SQL_AND;
+                    $result[$iteration]['__conjunction']= $conjunction;
                     $iteration++;
                 }
             } else {
@@ -243,7 +243,7 @@ class xPDOQuery_mysql extends xPDOQuery {
                 while (list ($key, $val)= each($conditions)) {
                     if (is_int($key)) {
                         if (is_array($val)) {
-                            $nested= $this->parseConditions($val);
+                            $nested= $this->parseConditions($val, $conjunction);
                             $result = $result + $nested;
                             continue;
                         } elseif ($this->isConditionalClause($val)) {
@@ -255,14 +255,14 @@ class xPDOQuery_mysql extends xPDOQuery {
                     }
                     $alias= $command == 'SELECT' ? $this->_class : trim($this->xpdo->getTableName($this->_class, false), $this->xpdo->_escapeChar);
                     $operator= '=';
-                    $conjunction= xPDOQuery::SQL_AND;
+                    $conj = $conjunction;
                     $key_operator= explode(':', $key);
                     if ($key_operator && count($key_operator) === 2) {
                         $key= $key_operator[0];
                         $operator= $key_operator[1];
                     }
                     elseif ($key_operator && count($key_operator) === 3) {
-                        $conjunction= $key_operator[0];
+                        $conj= $key_operator[0];
                         $key= $key_operator[1];
                         $operator= $key_operator[2];
                     }
@@ -288,7 +288,7 @@ class xPDOQuery_mysql extends xPDOQuery {
                             'type' => $type,
                             'length' => 0
                         );
-                        $field['__conjunction']= $conjunction;
+                        $field['__conjunction']= $conj;
                         $result[]= $field;
 //                    }
                 }
@@ -305,7 +305,7 @@ class xPDOQuery_mysql extends xPDOQuery {
             }
             $result['__sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$pk}{$this->xpdo->_escapeChar} = ?";
             $result['__binding']= array ('value' => $conditions, 'type' => $param_type, 'length' => 0);
-            $result['__conjunction']= xPDOQuery::SQL_AND;
+            $result['__conjunction']= $conjunction;
         }
         return $result;
     }
