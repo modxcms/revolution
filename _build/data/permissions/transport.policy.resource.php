@@ -56,6 +56,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'undelete',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'unpublish',
     'description' => '',
     'value' => true,
