@@ -13,7 +13,7 @@
  * @package modx
  * @subpackage processors.security.user
  */
-if (!$modx->hasPermission(array('access_permissions' => true, 'edit_user' => true))) {
+if (!$modx->hasPermission(array('access_permissions' => true, 'view_user' => true))) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
 $modx->lexicon->load('user');
