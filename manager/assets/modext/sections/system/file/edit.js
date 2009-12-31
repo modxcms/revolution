@@ -1,83 +1,92 @@
-/**
- * @class MODx.page.EditFile
- * @extends MODx.Component
- * @param {Object} config An object of configuration properties
- * @xtype page-file-edit
- */
 MODx.page.EditFile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        components: [{
-            xtype: 'panel-file-edit'
-            ,renderTo: 'panel-file-edit-div'
+        formpanel: 'modx-panel-file-edit'
+        ,components: [{
+            xtype: 'modx-panel-file-edit'
+            ,renderTo: 'modx-panel-file-edit-div'
             ,file: config.file
+        }]
+        ,buttons: [{
+            process: 'update'
+            ,text: _('save')
+            ,method: 'remote'
+            ,keys: [{
+                key: 's'
+                ,alt: true
+                ,ctrl: true
+            }]
+        },'-',{
+            process: 'cancel'
+            ,text: _('cancel')
+            ,params: {a:MODx.action['welcome']}
         }]
     });
     MODx.page.EditFile.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.EditFile,MODx.Component);
-Ext.reg('page-file-edit',MODx.page.EditFile);
+Ext.reg('modx-page-file-edit',MODx.page.EditFile);
 
-/**
- * @class MODx.panel.EditFile
- * @extends MODx.FormPanel
- * @param {Object} config An object of configuration properties
- * @xtype panel-file-edit
- */
 MODx.panel.EditFile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('file_edit')
+        id: 'modx-panel-file-edit'
         ,url: MODx.config.connectors_url+'browser/file.php'
         ,baseParams: {
             action: 'update'
             ,file: config.file
         }
-        ,width: '90%'
-        ,autoHeight: true
-        ,collapsible: true
-        ,buttonAlign: 'center'
-        ,style: 'margin: 1em;'
-        ,bodyStyle: 'padding: 1em;'
+        ,border: false
+        ,bodyStyle: ''
         ,items: [{
-            xtype: 'textfield'
-            ,fieldLabel: _('name')
-            ,name: 'name'
-            ,id: 'file_name'
-            ,width: 300
-        },{
-            xtype: 'statictextfield'
-            ,fieldLabel: _('file_size')
-            ,name: 'size'
-        },{
-            xtype: 'statictextfield'
-            ,fieldLabel: _('file_last_accessed')
-            ,name: 'last_accessed'
-            ,width: 200
-        },{
-            xtype: 'statictextfield'
-            ,fieldLabel: _('file_last_modified')
-            ,name: 'last_modified'
-            ,width: 200
-        },{
-            xtype: 'textarea'
-            ,fieldLabel: _('content')
-            ,name: 'content'
-            ,grow: true
-            ,width: '95%'
-        }]
-        ,buttons: [{
-            text: _('save')
-            ,scope: this
-            ,handler: this.submit
-        }]
+            html: '<h2>'+_('file_edit')+'</h2>'
+            ,border: false
+            ,cls: 'modx-page-header'
+            ,id: 'modx-chunk-header'
+        },MODx.getPageStructure([{
+            title: _('file_edit')
+            ,id: 'modx-form-file-edit'            
+            ,bodyStyle: 'padding: 1.5em;'
+            ,defaults: { border: false ,msgTarget: 'side' }
+            ,layout: 'form'
+            ,labelWidth: 150
+            ,items: [{
+                xtype: 'textfield'
+                ,fieldLabel: _('name')
+                ,name: 'name'
+                ,id: 'file_name'
+                ,width: 300
+            },{
+                xtype: 'statictextfield'
+                ,fieldLabel: _('file_size')
+                ,name: 'size'
+            },{
+                xtype: 'statictextfield'
+                ,fieldLabel: _('file_last_accessed')
+                ,name: 'last_accessed'
+                ,width: 200
+            },{
+                xtype: 'statictextfield'
+                ,fieldLabel: _('file_last_modified')
+                ,name: 'last_modified'
+                ,width: 200
+            },{
+                xtype: 'textarea'
+                ,hideLabel: true
+                ,name: 'content'
+                ,grow: true
+                ,width: '95%'
+                ,style: 'font-size: 11px;'
+            }]
+        }])]
+        ,listeners: {
+            'setup': {fn:this.setup,scope:this}
+            ,'success': {fn:this.success,scope:this}
+        }
     });
     MODx.panel.EditFile.superclass.constructor.call(this,config);
-    Ext.getCmp('modx-file-tree').expand();
-    this.config = config;
-    this.setup();
 };
-Ext.extend(MODx.panel.EditFile,Ext.FormPanel,{
+Ext.extend(MODx.panel.EditFile,MODx.FormPanel,{
     setup: function() {
         MODx.Ajax.request({
             url: this.config.url
@@ -92,21 +101,8 @@ Ext.extend(MODx.panel.EditFile,Ext.FormPanel,{
             }
         });
     }
-    ,submit: function() {
-        if (this.getForm().isValid()) {
-            this.getForm().submit({
-                waitMsg: _('processing')
-                ,reset: false
-                ,scope: this
-                ,failure: function(f,a) {
-                    MODx.form.Handler.errorExt(a.result);
-                }
-                ,success: function(f,a) {
-                    this.config.file = a.result.object.file;
-                    this.getForm().baseParams.file = this.config.file;
-                }
-            });
-        }
+    ,success: function(r) {
+        
     }
 });
-Ext.reg('panel-file-edit',MODx.panel.EditFile);
+Ext.reg('modx-panel-file-edit',MODx.panel.EditFile);
