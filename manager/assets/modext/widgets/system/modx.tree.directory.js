@@ -177,7 +177,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 	
 	,chmodDirectory: function(item,e) {
 		var node = this.cm.activeNode;
-        var r = {dir: node.id};
+        var r = {dir: node.id,perms: node.attributes.perms};
         if (!this.windows.chmod) {
             this.windows.chmod = MODx.load({
     			xtype: 'modx-window-directory-chmod'
@@ -269,6 +269,11 @@ MODx.window.ChmodDirectory = function(config) {
             xtype: 'hidden'
             ,name: 'prependPath'
             ,value: config.prependPath || null
+        },{
+            fieldLabel: _('current')
+            ,name: 'perms'
+            ,xtype: 'statictextfield'
+            ,width: 200            
         },{
             fieldLabel: _('mode')
             ,name: 'mode'

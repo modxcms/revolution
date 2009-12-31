@@ -37,6 +37,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
 
     $fileName = $file->getFilename();
     $filePathName = $file->getPathname();
+    $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
 	/* handle dirs */
 	if ($file->isDir()) {
@@ -47,6 +48,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
 			'type' => 'dir',
 			//'disabled' => $file->isWritable(),
             'leaf' => false,
+            'perms' => $octalPerms,
             'menu' => array(
                 'items' => array(
                     array(
@@ -89,6 +91,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             'cls' => 'icon-file icon-'.$ext,
             'type' => 'file',
             'leaf' => true,
+            'perms' => $octalPerms,
             'menu' => array(
                 'items' => array(
                     array(

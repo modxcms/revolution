@@ -39,6 +39,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
         } else {
             $url = $modx->getOption('rb_base_url').$dir.'/'.$fileName;
         }
+        $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 		$files[] = array(
 			'name' => $fileName,
 			'cls' => 'icon-'.$fileExtension,
@@ -47,6 +48,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
 			'pathname' => $filePathname,
 			'lastmod' => $file->getMTime(),
 			'disabled' => false,//$file->isWritable(),
+            'perms' => $octalPerms,
 			'leaf' => true,
 			'size' => $size,
             'menu' => array(
