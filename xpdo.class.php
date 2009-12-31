@@ -683,6 +683,7 @@ class xPDO {
                 }
                 $expr= $this->getSelectColumns($className, $className, '', $pk);
             }
+            if (isset($query->query['columns'])) $query->query['columns'] = array();
             $query->select(array ("COUNT(DISTINCT {$expr})"));
             if ($stmt= $query->prepare()) {
                 if ($stmt->execute()) {

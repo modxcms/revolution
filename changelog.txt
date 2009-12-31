@@ -2,5 +2,6 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#XPDO-27] Allow getCount() to work with Collection Graphs.
 - [#XPDO-38] Modified xPDOQuery to determine conjunctions for condition groups based on conjunction specified for first condition in the group.
 - Added changelog.txt
