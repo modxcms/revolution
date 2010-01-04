@@ -1,6 +1,24 @@
 MODx.panel.PackageBrowser = function(config) {
     config = config || {};
     this.ident = config.ident || 'modx-pkgb-'+Ext.id();
+    
+    this.view = MODx.load({
+        id: 'modx-package-browser-thumbs-view'
+        ,xtype: 'modx-view-package-browser-thumbs'
+        ,onSelect: {fn:function() { }, scope: this}
+        ,containerScroll: true
+        ,ident: this.ident
+        ,style:'overflow:auto'
+        ,listeners: {
+         //   'dblclick': {fn: this.updateSite ,scope:this }
+        }
+    });
+    this.view.pagingBar = new Ext.PagingToolbar({
+        pageSize: 20
+        ,store: this.view.store
+        ,autoLoad: true
+    });
+    
     Ext.applyIf(config,{
         title: 'Package Browser'
         ,id: 'modx-package-browser'
@@ -45,8 +63,37 @@ MODx.panel.PackageBrowser = function(config) {
             ,width: '75%'
             ,autoScroll: true
             ,autoHeight: true
+            ,hidden: true
             ,html: ''
             ,border: false
+        },{
+            id: 'modx-package-browser-thumbs'
+            ,cls: 'browser-view'
+            ,region: 'east'
+            ,width: '55%'
+            ,height: 450
+            ,autoScroll: true
+            ,border: false
+            ,items: [{
+                xtype: 'modx-combo-package-browser-sort'
+                ,id: 'modx-combo-package-browser-sort'
+                ,listeners: {
+                    'select': {fn:this.view.sortBy, scope:this.view}
+                }
+            },this.view]
+            ,bbar: [this.view.pagingBar]
+            ,hidden: true
+        },{
+            html: ''
+            ,id: 'modx-package-browser-thumbs-detail'
+            ,region: 'east'
+            ,split: true
+            ,autoScroll: true
+            ,width: '20%'
+            ,minWidth: 150
+            ,maxWidth: 250
+            ,height: 450
+            ,hidden: true
         }]
     });
     MODx.panel.PackageBrowser.superclass.constructor.call(this,config);
@@ -91,25 +138,7 @@ MODx.tree.PackageBrowserTree = function(config) {
             ,name: 'search'
             ,id: 'pbr-search-fld'
             ,listeners: {
-                'change': {fn:function(tf,newValue) {
-                    var nv = newValue || tf;
-        
-                    var g = Ext.getCmp('modx-package-browser-grid');
-                    var s = g.getStore();
-                    s.removeAll();
-                    s.setBaseParam('query',nv);
-                    s.setBaseParam('tag','');
-                    s.load({
-                        params: {
-                            query: nv
-                            ,tag: ''
-                        }
-                    });
-                    g.getBottomToolbar().changePage(1);
-                    Ext.getCmp('package-browser-view').hide();
-                    Ext.getCmp('package-browser-grid').show();
-                    return true;
-                },scope:this}
+                'change': {fn:this.search,scope:this}
                 ,'render': {fn: function(cmp) {
                     new Ext.KeyMap(cmp.getEl(), {
                         key: Ext.EventObject.ENTER
@@ -132,23 +161,63 @@ MODx.tree.PackageBrowserTree = function(config) {
 Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
     tpls: {}
     
+    ,search: function(tf,newValue) {
+        var nv = newValue || tf;
+
+        var g = Ext.getCmp('modx-package-browser-grid');
+        var s = g.getStore();
+        s.removeAll();
+        s.setBaseParam('query',nv);
+        s.setBaseParam('tag','');
+        s.load({
+            params: {
+                query: nv
+                ,tag: ''
+            }
+        });
+        g.getBottomToolbar().changePage(1);
+        Ext.getCmp('package-browser-view').hide();
+        Ext.getCmp('modx-package-browser-thumbs').hide();
+        Ext.getCmp('modx-package-browser-thumbs-detail').hide();
+        Ext.getCmp('package-browser-grid').show();
+        return true;
+    }
+    
     ,onNodeClick: function(n,e) {
         switch (n.attributes.type) {
             case 'repository':
                 this.tpls.repository.overwrite('package-browser-view',n.attributes.data);
                 Ext.getCmp('package-browser-grid').hide();
+                Ext.getCmp('modx-package-browser-thumbs').hide();
+                Ext.getCmp('modx-package-browser-thumbs-detail').hide();
                 Ext.getCmp('package-browser-view').show();
                 break;
             case 'tag':
-                this.loadPackagesFromTag(n.attributes.data);
-                this.tpls.tag.overwrite('package-browser-tag',n.attributes.data);
+                var tp = n.parentNode;
+                if (tp && tp.attributes.data.templated == 1) {
+                    var p = Ext.getCmp('modx-package-browser-thumbs-view');
+                    p.store.baseParams.tag = n.attributes.data.id;
+                    p.run();
+                    
+                    Ext.getCmp('package-browser-grid').hide();
+                    Ext.getCmp('modx-package-browser-thumbs').show();
+                    Ext.getCmp('modx-package-browser-thumbs-detail').show();
+                } else {
+                    this.loadPackagesFromTag(n.attributes.data);
+                    this.tpls.tag.overwrite('package-browser-tag',n.attributes.data);
+                    
+                    Ext.getCmp('modx-package-browser-thumbs').hide();
+                    Ext.getCmp('modx-package-browser-thumbs-detail').hide();
+                    Ext.getCmp('package-browser-grid').show();
+                }
                 Ext.getCmp('package-browser-view').hide();
-                Ext.getCmp('package-browser-grid').show();
                 break;
             default:
                 this.tpls.home.overwrite('package-browser-view',this.providerInfo);
-                Ext.getCmp('package-browser-view').show();
+                Ext.getCmp('modx-package-browser-thumbs').hide();
+                Ext.getCmp('modx-package-browser-thumbs-detail').hide();
                 Ext.getCmp('package-browser-grid').hide();
+                Ext.getCmp('package-browser-view').show();
                 break;
         }
     }
@@ -168,7 +237,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
             }
         });
         Ext.getCmp('package-browser-grid').hide();
-        Ext.getCmp('package-browser-view').show();
+        //Ext.getCmp('package-browser-view').show();
     }
     
     
@@ -443,3 +512,177 @@ MODx.combo.PackageBrowserSort = function(config) {
 };
 Ext.extend(MODx.combo.PackageBrowserSort,Ext.form.ComboBox)
 Ext.reg('modx-combo-package-browser-sort',MODx.combo.PackageBrowserSort);
+
+
+MODx.PackageBrowserThumbsView = function(config) {
+    config = config || {};
+    
+    this._initTemplates();
+    Ext.applyIf(config,{
+        url: MODx.config.connectors_url+'workspace/packages-rest.php'
+        ,fields: ['id','version','release','signature','author','description','instructions','createdon','editedon','name'
+                 ,'downloads','releasedon','screenshot','license','supports','location','version-compiled'
+                 ,'downloaded','dlaction-text','dlaction-icon']
+        ,ident: 'scsv'
+        ,baseParams: { 
+            action: 'getList'
+            ,provider: MODx.provider || 1
+        }
+        ,loadingText: _('loading')
+        ,tpl: this.templates.thumb
+        ,listeners: {
+            'dblclick': {fn: this.onDblClick ,scope:this }
+        }
+        ,prepareData: this.formatData.createDelegate(this)
+    });
+    MODx.PackageBrowserThumbsView.superclass.constructor.call(this,config);
+    this.on('selectionchange',this.showDetails,this,{buffer: 100});
+};
+Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
+    templates: {}
+    
+    ,run: function(p) {
+        var v = {};
+        Ext.applyIf(v,this.store.baseParams);
+        Ext.applyIf(v,p);
+        this.store.load({
+            params: v
+        });
+        this.pagingBar.changePage(0);
+    }
+        
+    ,sortBy: function(sel) {
+        var v = sel.getValue();
+        this.store.baseParams.sort = v;
+        this.run();
+        return true;
+    }
+    
+    ,sortDir: function(sel) {
+        var v = sel.getValue();
+        this.store.baseParams.dir = v;
+        this.run();
+    }
+    
+    ,showDetails : function(){
+        var selNode = this.getSelectedNodes();
+        var detailEl = Ext.getCmp('modx-package-browser-thumbs-detail').body;
+        if(selNode && selNode.length > 0){
+            selNode = selNode[0];
+            var data = this.lookup[selNode.id];
+            if (data) {
+                detailEl.hide();
+                this.templates.details.overwrite(detailEl, data);
+                detailEl.slideIn('l', {stopFx:true,duration:'.2'});
+            }
+        }else{
+            detailEl.update('');
+        }
+    }
+    
+    ,formatData: function(data) {
+        var formatSize = function(data){
+            if(data.size < 1024) {
+                return data.size + " bytes";
+            } else {
+                return (Math.round(((data.size*10) / 1024))/10) + " KB";
+            }
+        };
+        data.shortName = Ext.util.Format.ellipsis(data.name, 16);
+        data.sizeString = formatSize(data);
+        data.releasedon = new Date(data.releasedon).format("m/d/Y g:i a");
+        this.lookup['modx-package-thumb-'+data.id] = data;
+        return data;
+    }
+    ,_initTemplates: function() {
+        this.templates.thumb = new Ext.XTemplate(
+            '<tpl for=".">'
+                ,'<div class="thumb-wrap <tpl if="downloaded">pbr-thumb-downloaded</tpl>" id="modx-package-thumb-{id}">'
+                    ,'<div class="pbr-thumb">'
+                        ,'<img src="{screenshot}" title="{name}" class="thumb-img">'
+                    ,'</div>'
+                    ,'<span>{name}</span>'
+                    ,'<span>{downloads} '+_('downloads')+'</span>'
+                    ,'<tpl if="downloaded"><span class="green">'+_('downloaded')+'</span></tpl>'              
+                ,'</div>'
+            ,'</tpl>'
+        );
+
+        this.templates.thumb.compile();
+                
+        this.templates.details = new Ext.XTemplate(
+            '<div class="details">'
+            ,'<tpl for=".">'
+                ,'<img src="{screenshot}" alt="" width="100" height="80" onclick="Ext.getCmp(\'modx-package-browser-thumbs-view\').showScreenshot(\'{id}\'); return false;" style="cursor:pointer;" />'
+                ,'<div class="details-info">'
+                    ,'<h4>{name} {version-compiled}</h4><br />'
+                    ,'<p>{description}</p><br />'
+                    ,'<b>'+_('author')+':</b>'
+                    ,'<span>{author}</span>'
+                    ,'<b>'+_('released_on')+':</b><span>{releasedon}</span>'
+                    ,'<span>{downloads} '+_('downloads')+'</span>'                    
+                    ,'<b>'+_('supports')+':</b><span>{supports}</span>'
+                    ,'<b>'+_('license')+':</b><span>{license}</span>'
+                    
+                    ,'<tpl if="!downloaded">'
+                        ,'<div class="ux-row-action" onclick="Ext.getCmp(\'modx-package-browser-thumbs-view\').download(\'{id}\'); return false;">'
+                            ,'<div class="ux-row-action-item ux-row-action-text"><span>'+_('download')+'</span></div>'
+                        ,'</div>'
+                    ,'</tpl>'
+                    ,'<tpl if="downloaded">'
+                        ,'<div class="ux-row-action pbr-thumb-downloaded">'
+                            ,'<div class="ux-row-action-item ux-row-action-text"><span>'+_('downloaded')+'</span></div>'
+                        ,'</div>'
+                    ,'</tpl>'
+                ,'</div>'
+            ,'</tpl>'
+            ,'</div>'
+        );
+        this.templates.details.compile(); 
+    }
+    ,download: function(id) {
+        var data = this.lookup['modx-package-thumb-'+id];
+        if (!data) return false;
+        /* do download */
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'download'
+                ,info: data.location+'::'+data.signature
+                ,provider: MODx.provider || 1
+            }
+            ,scope: this
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.run();
+                },scope:this}
+            }
+        });
+    }
+    ,showScreenshot: function(id) {
+        var data = this.lookup['modx-package-thumb-'+id];
+        if (!data) return false;
+        
+        if (!this.ssWin) {
+            this.ssWin = new Ext.Window({
+                layout:'fit'
+                ,width: 600
+                ,height: 450
+                ,closeAction:'hide'
+                ,plain: true
+                ,items: [{
+                    id: 'modx-package-thumb-ss'
+                    ,html: ''
+                }]
+                ,buttons: [{
+                    text: _('close')
+                    ,handler: function() { this.ssWin.hide(); }
+                    ,scope: this
+                }]
+            });
+        }
+        this.ssWin.show();
+        Ext.get('modx-package-thumb-ss').update('<img src="'+data.screenshot+'" width="600" height="400" alt="" onclick="Ext.getCmp(\'modx-package-browser-thumbs-view\').ssWin.hide();" />');
+    }
+});
+Ext.reg('modx-view-package-browser-thumbs',MODx.PackageBrowserThumbsView);

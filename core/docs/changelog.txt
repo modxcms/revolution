@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added new browsing view for Templates in Package Management; thumbnail-based browsing.
 - [#MODX-1534] Revamped file edit page to match other page structures
 - [#MODX-1542] Added missing undelete permission to basic Resource policy
 - [#MODX-1539] Added view_user permission to solve dropdown combo users bug that needed "edit_user"; view is more applicable there

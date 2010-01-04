@@ -8,6 +8,7 @@
 if (!$modx->hasPermission('workspaces')) return $modx->error->failure($modx->lexicon('access_denied'));
 
 /* register JS scripts */
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/core/modx.view.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.tree.checkbox.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.panel.wizard.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/workspace/package.browser.js');
