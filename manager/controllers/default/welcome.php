@@ -25,8 +25,10 @@ if (!$success) {
 }
 
 /* user info : TODO: convert to revo */
-if (isset($_SESSION['mgrLastlogin']) && !empty($_SESSION['mgrLastLogin'])) {
-    $previous_login = strftime('%c', $_SESSION['mgrLastlogin']+$modx->getOption('server_offset_time'));
+$profile = $modx->user->getOne('Profile');
+if ($profile && $profile->get('lastlogin') != '') {
+    $offset = $modx->getOption('server_offset_time',null,0) * 60 * 60;
+    $previous_login = strftime('%b %d, %Y %I:%S %p',$profile->get('lastlogin')+$offset);
 } else {
     $previous_login = $modx->lexicon('not_set');
 }

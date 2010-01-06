@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1540] Fixed last login display in Welcome page
 - [#MODX-1567] Enabled sorting in Reports -> System Info -> Recently Edited Documents
 - [#MODX-1522] Restricted user editing to just the save_user permission 
 - Added a "reload" button to the error log
