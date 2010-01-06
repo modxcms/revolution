@@ -74,12 +74,15 @@ MODx.panel.ManagerLog = function(config) {
                     ,buttonAlign: 'center'
                     ,buttons: [{
                         text: _('filter_clear')
-						,style: 'margin-top: 12px;'
                         ,scope: this
                         ,handler: function() {
                             this.getForm().reset();
                             this.filter();
                         }
+                    },{
+                        text: _('mgrlog_clear')
+                        ,scope: this
+                        ,handler: this.clearLog
                     }]
                 },{
                     xtype: 'modx-grid-manager-log'
@@ -143,6 +146,22 @@ Ext.extend(MODx.panel.ManagerLog,MODx.FormPanel,{
         this.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
             this.fireEvent('change'); 
         },this);
+    }
+    
+    ,clearLog: function(btn,e) {        
+        MODx.msg.confirm({
+            title: _('warning')
+            ,text: _('mgrlog_clear_confirm')
+            ,url: MODx.config.connectors_url+'system/log.php'
+            ,params: {
+                action: 'truncate'
+            }
+            ,listeners: {
+                'success': {fn:function() {
+                    Ext.getCmp('modx-grid-manager-log').refresh();
+                },scope:this}
+            }
+        });
     }
 });
 Ext.reg('modx-panel-manager-log',MODx.panel.ManagerLog);
