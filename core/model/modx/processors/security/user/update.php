@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage processors.security.user
  */
-if (!$modx->hasPermission(array('access_permissions' => true, 'save_user' => true))) {
+if (!$modx->hasPermission('save_user')) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
 $modx->lexicon->load('user');
