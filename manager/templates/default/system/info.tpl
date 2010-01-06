@@ -56,6 +56,7 @@
     <div class="padding x-hide-display" id="modx-tab-resources">
         <h2>{$_lang.recent_docs}</h2>
         <p>{$_lang.sysinfo_activity_message}</p>
+        <br />
         <div id="modx-grid-resource-active-div" style="overflow:hidden; width:100%;"></div>
     </div>
     

@@ -4,11 +4,11 @@ MODx.grid.ActiveResources = function(config) {
 		title: _('resources_active')
         ,id: 'modx-grid-resource-active'
         ,url: MODx.config.connectors_url+'system/activeresource.php'
-		,fields: ['id','pagetitle','user','editedon']
+		,fields: ['id','pagetitle','username','editedon']
         ,columns: [
             { header: _('id') ,dataIndex: 'id' ,width: 50 }
             ,{ header: _('page_title') ,dataIndex: 'pagetitle' ,width: 240 }
-            ,{ header: _('sysinfo_userid') ,dataIndex: 'user' ,width: 180 }
+            ,{ header: _('sysinfo_userid') ,dataIndex: 'username' ,width: 180 }
             ,{ header: _('datechanged') ,dataIndex: 'editedon' ,width: 140 }]
 		,paging: true
 	});
