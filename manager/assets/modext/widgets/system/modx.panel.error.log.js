@@ -30,6 +30,10 @@ MODx.panel.ErrorLog = function(config) {
             }]
         }]
         ,buttons: [{
+            text: _('reload')
+            ,handler: this.setup
+            ,scope: this
+        },{
             text: _('clear')
             ,handler: this.clear
             ,scope: this
