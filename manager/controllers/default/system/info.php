@@ -23,7 +23,7 @@ $modx->smarty->assign('database_type',$modx->getOption('dbtype'));
  */
 $stmt= $modx->query("SELECT VERSION()");
 if ($stmt) {
-    $result= $stmt->fetch(PDO_FETCH_COLUMN);
+    $result= $stmt->fetch(PDO::FETCH_COLUMN);
     $stmt->closeCursor();
 } else {
     $result='-';
