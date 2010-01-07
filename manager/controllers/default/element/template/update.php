@@ -16,15 +16,6 @@ if ($template->get('locked') && !$modx->hasPermission('edit_locked')) {
 
 $template->category = $template->getOne('Category');
 
-/* invoke OnTempFormPrerender event */
-$onTempFormPrerender = $modx->invokeEvent('OnTempFormPrerender',array(
-    'id' => $template->get('id'),
-    'template' => &$template,
-    'mode' => 'upd',
-));
-if (is_array($onTempFormPrerender)) $onTempFormPrerender = implode('',$onTempFormPrerender);
-$modx->smarty->assign('onTempFormPrerender',$onTempFormPrerender);
-
 /* invoke OnTempFormRender event */
 $onTempFormRender = $modx->invokeEvent('OnTempFormRender',array(
     'id' => $template->get('id'),
@@ -62,5 +53,15 @@ MODx.onTempFormRender = "'.$onTempFormRender.'";
 MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 // ]]>
 </script>');
+
+/* invoke OnTempFormPrerender event */
+$onTempFormPrerender = $modx->invokeEvent('OnTempFormPrerender',array(
+    'id' => $template->get('id'),
+    'template' => &$template,
+    'mode' => 'upd',
+));
+if (is_array($onTempFormPrerender)) $onTempFormPrerender = implode('',$onTempFormPrerender);
+$modx->smarty->assign('onTempFormPrerender',$onTempFormPrerender);
+
 
 return $modx->smarty->fetch('element/template/update.tpl');

@@ -13,14 +13,6 @@ if (isset($_REQUEST['category'])) {
 	if ($category != null) $modx->smarty->assign('category',$category);
 } else { $category = null; }
 
-/* invoke OnSnipFormPrerender event */
-$onSnipFormPrerender = $modx->invokeEvent('OnSnipFormPrerender',array(
-    'id' => 0,
-    'mode' => 'new',
-));
-if (is_array($onSnipFormPrerender)) $onSnipFormPrerender = implode('',$onSnipFormPrerender);
-$modx->smarty->assign('onSnipFormPrerender',$onSnipFormPrerender);
-
 /* invoke onSnipFormRender event */
 $onSnipFormRender = $modx->invokeEvent('OnSnipFormRender',array(
     'id' => 0,
@@ -52,5 +44,13 @@ MODx.onSnipFormRender = "'.$onSnipFormRender.'";
 MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 // ]]>
 </script>');
+
+/* invoke OnSnipFormPrerender event */
+$onSnipFormPrerender = $modx->invokeEvent('OnSnipFormPrerender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
+if (is_array($onSnipFormPrerender)) $onSnipFormPrerender = implode('',$onSnipFormPrerender);
+$modx->smarty->assign('onSnipFormPrerender',$onSnipFormPrerender);
 
 return $modx->smarty->fetch('element/snippet/create.tpl');

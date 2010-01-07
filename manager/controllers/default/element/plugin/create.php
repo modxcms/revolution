@@ -13,14 +13,6 @@ if (isset($_REQUEST['category'])) {
 	if ($category != null) $modx->smarty->assign('category',$category);
 } else { $category = null; }
 
-/* invoke OnPluginFormPrerender event */
-$onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array(
-    'id' => 0,
-    'mode' => 'new',
-));
-if (is_array($onPluginFormPrerender)) $onPluginFormPrerender = implode('',$onPluginFormPrerender);
-$modx->smarty->assign('onPluginFormPrerender',$onPluginFormPrerender);
-
 /* invoke OnPluginFormRender event */
 $onPluginFormRender = $modx->invokeEvent('OnPluginFormRender',array(
     'id' => 0,
@@ -54,5 +46,13 @@ MODx.onPluginFormRender = "'.$onPluginFormRender.'";
 MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 // ]]>
 </script>');
+
+/* invoke OnPluginFormPrerender event */
+$onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
+if (is_array($onPluginFormPrerender)) $onPluginFormPrerender = implode('',$onPluginFormPrerender);
+$modx->smarty->assign('onPluginFormPrerender',$onPluginFormPrerender);
 
 return $modx->smarty->fetch('element/plugin/create.tpl');

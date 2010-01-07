@@ -23,14 +23,6 @@ $evtOut = $modx->invokeEvent('OnRichTextEditorRegister',array(
 if(is_array($evtOut)) $RTEditors = implode(',',$evtOut);
 $modx->smarty->assign('RTEditors',$RTEditors);
 
-/* invoke OnTVFormPrerender event */
-$onTVFormPrerender = $modx->invokeEvent('OnTVFormPrerender',array(
-    'id' => 0,
-    'mode' => 'new',
-));
-if(is_array($onTVFormPrerender)) $onTVFormPrerender = implode('',$onTVFormPrerender);
-$modx->smarty->assign('onTVFormPrerender',$onTVFormPrerender);
-
 /* invoke OnTVFormRender event */
 $onTVFormRender = $modx->invokeEvent('OnTVFormRender',array(
     'id' => 0,
@@ -64,6 +56,14 @@ var onTVFormRender = "'.$onTVFormRender.'";
 MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 // ]]>
 </script>');
+
+/* invoke OnTVFormPrerender event */
+$onTVFormPrerender = $modx->invokeEvent('OnTVFormPrerender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
+if(is_array($onTVFormPrerender)) $onTVFormPrerender = implode('',$onTVFormPrerender);
+$modx->smarty->assign('onTVFormPrerender',$onTVFormPrerender);
 
 /* display template */
 return $modx->smarty->fetch('element/tv/create.tpl');

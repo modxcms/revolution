@@ -12,14 +12,6 @@ $plugin = $modx->getObject('modPlugin',$_REQUEST['id']);
 if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_not_found'));
 $plugin->category = $plugin->getOne('Category');
 
-/* invoke OnPluginFormPrerender event */
-$onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array(
-    'id' => $plugin->get('id'),
-    'plugin' => &$plugin,
-    'mode' => 'upd',
-));
-if (is_array($onPluginFormPrerender)) $onPluginFormPrerender = implode('',$onPluginFormPrerender);
-$modx->smarty->assign('onPluginFormPrerender',$onPluginFormPrerender);
 
 /* invoke OnPluginFormRender event */
 $onPluginFormRender = $modx->invokeEvent('OnPluginFormRender',array(
@@ -63,4 +55,12 @@ MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 // ]]>
 </script>');
 
+/* invoke OnPluginFormPrerender event */
+$onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array(
+    'id' => $plugin->get('id'),
+    'plugin' => &$plugin,
+    'mode' => 'upd',
+));
+if (is_array($onPluginFormPrerender)) $onPluginFormPrerender = implode('',$onPluginFormPrerender);
+$modx->smarty->assign('onPluginFormPrerender',$onPluginFormPrerender);
 return $modx->smarty->fetch('element/plugin/update.tpl');

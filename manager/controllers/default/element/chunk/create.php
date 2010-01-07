@@ -17,16 +17,6 @@ if (isset($_REQUEST['category'])) {
 $which_editor = isset($_POST['which_editor']) ? $_POST['which_editor'] : 'none';
 $modx->smarty->assign('which_editor',$which_editor);
 
-/* invoke OnChunkFormPrerender event */
-$onChunkFormPrerender = $modx->invokeEvent('OnChunkFormPrerender',array(
-    'id' => 0,
-    'mode' => 'new',
-));
-if (is_array($onChunkFormPrerender)) {
-	$onChunkFormPrerender = implode('',$onChunkFormPrerender);
-}
-$modx->smarty->assign('onChunkFormPrerender',$onChunkFormPrerender);
-
 /* invoke OnChunkFormRender event */
 $onChunkFormRender = $modx->invokeEvent('OnChunkFormRender',array(
     'id' => 0,
@@ -69,6 +59,16 @@ MODx.onChunkFormRender = "'.$onChunkFormRender.'";
 MODx.perm.unlock_element_properties = '.($modx->hasPermission('unlock_element_properties') ? 1 : 0).';
 // ]]>
 </script>');
+
+/* invoke OnChunkFormPrerender event */
+$onChunkFormPrerender = $modx->invokeEvent('OnChunkFormPrerender',array(
+    'id' => 0,
+    'mode' => 'new',
+));
+if (is_array($onChunkFormPrerender)) {
+    $onChunkFormPrerender = implode('',$onChunkFormPrerender);
+}
+$modx->smarty->assign('onChunkFormPrerender',$onChunkFormPrerender);
 
 
 /* display template */

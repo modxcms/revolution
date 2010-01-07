@@ -22,14 +22,6 @@ if ($chunk->get('locked') && !$modx->hasPermission('edit_locked')) {
 $category = $chunk->getOne('Category');
 $modx->smarty->assign('chunk',$chunk);
 
-/* invoke OnChunkFormPrerender event */
-$onChunkFormPrerender = $modx->invokeEvent('OnChunkFormPrerender',array('id' => $_REQUEST['id']));
-if (is_array($onChunkFormPrerender)) {
-	$onChunkFormPrerender = implode('',$onChunkFormPrerender);
-}
-$modx->smarty->assign('onChunkFormPrerender',$onChunkFormPrerender);
-
-
 /* invoke OnChunkFormRender event */
 $onChunkFormRender = $modx->invokeEvent('OnChunkFormRender',array('id' => $_REQUEST['id']));
 if (is_array($onChunkFormRender)) $onChunkFormRender = implode('', $onChunkFormRender);
@@ -72,6 +64,16 @@ MODx.onChunkFormRender = "'.$onChunkFormRender.'";
 MODx.perm.unlock_element_properties = '.($modx->hasPermission('unlock_element_properties') ? 1 : 0).';
 // ]]>
 </script>');
+
+
+/* invoke OnChunkFormPrerender event */
+$onChunkFormPrerender = $modx->invokeEvent('OnChunkFormPrerender',array('id' => $_REQUEST['id']));
+if (is_array($onChunkFormPrerender)) {
+    $onChunkFormPrerender = implode('',$onChunkFormPrerender);
+}
+$modx->smarty->assign('onChunkFormPrerender',$onChunkFormPrerender);
+
+
 
 /* display template */
 return $modx->smarty->fetch('element/chunk/update.tpl');
