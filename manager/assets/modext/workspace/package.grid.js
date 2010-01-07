@@ -105,6 +105,10 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                             g.getStore().removeAll();
                         }
                         
+                        var v = Ext.getCmp('modx-package-browser-thumbs-view');
+                        if (v) {
+                            v.baseParams.provider = p.id;
+                        }
                         pd.fireEvent('proceed','modx-pd-selpackage');
                         pd.setPosition(null,0);
                     },this,{single:true});

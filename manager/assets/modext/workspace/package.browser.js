@@ -9,9 +9,6 @@ MODx.panel.PackageBrowser = function(config) {
         ,containerScroll: true
         ,ident: this.ident
         ,style:'overflow:auto'
-        ,listeners: {
-         //   'dblclick': {fn: this.updateSite ,scope:this }
-        }
     });
     this.view.pagingBar = new Ext.PagingToolbar({
         pageSize: 20
@@ -237,7 +234,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
             }
         });
         Ext.getCmp('package-browser-grid').hide();
-        //Ext.getCmp('package-browser-view').show();
+        Ext.getCmp('package-browser-view').show();
     }
     
     
@@ -524,9 +521,10 @@ MODx.PackageBrowserThumbsView = function(config) {
                  ,'downloads','releasedon','screenshot','license','supports','location','version-compiled'
                  ,'downloaded','dlaction-text','dlaction-icon']
         ,ident: 'scsv'
+        ,id: 'modx-package-browser-thumbs-view'
         ,baseParams: { 
             action: 'getList'
-            ,provider: MODx.provider || 1
+            ,provider: MODx.provider
         }
         ,loadingText: _('loading')
         ,tpl: this.templates.thumb
