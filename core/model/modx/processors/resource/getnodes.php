@@ -179,6 +179,25 @@ while ($item) {
                     ),
                 );
             }
+            if ($modx->hasPermission('new_context')) {
+                $menu[] = array(
+                   // 'id' => 'cm-context-duplicate',
+                    'text' => $modx->lexicon('context_duplicate'),
+                    'handler' => 'function(itm,e) {
+                        this.duplicateContext(itm,e);
+                    }',
+                );
+            }
+            if ($modx->hasPermission('delete_context')) {
+
+                $menu[] = array(
+                   // 'id' => 'cm-context-remove',
+                    'text' => $modx->lexicon('context_remove'),
+                    'handler' => 'function(itm,e) {
+                        this.removeContext(itm,e);
+                    }',
+                );
+            }
 
             $items[] = array(
                 'text' => $item->get('key'),

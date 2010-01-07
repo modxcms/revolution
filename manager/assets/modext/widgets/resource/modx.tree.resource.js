@@ -66,6 +66,43 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 		w.setValues(r);
 		w.show(e.target);
 	}
+    ,duplicateContext: function(itm,e) {
+        var node = this.cm.activeNode;
+        var key = node.attributes.pk;
+        
+        var r = { 
+            key: key
+            ,newkey: ''
+        };
+        if (!this.windows.duplicateContext) {
+            this.windows.duplicateContext = MODx.load({
+                xtype: 'modx-window-context-duplicate'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function() { this.refresh(); },scope:this}
+                }
+            });
+        }
+        this.windows.duplicateContext.setValues(r);
+        this.windows.duplicateContext.show(e.target);
+    }
+    ,removeContext: function(item,e) {
+        var node = this.cm.activeNode;
+        var key = node.attributes.pk;
+        MODx.msg.confirm({
+            title: _('context_remove')
+            ,text: _('context_remove_confirm')
+            ,url: MODx.config.connectors_url+'context/index.php'
+            ,params: {
+                action: 'remove'
+                ,key: key
+            }
+            ,listeners: {
+                'success': {fn:function() { this.refresh(); },scope:this}
+            }
+        });
+    }
+    
 	
     ,preview: function(item,e) {
         window.open(this.cm.activeNode.attributes.preview_url);

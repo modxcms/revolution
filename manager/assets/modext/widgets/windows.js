@@ -783,3 +783,35 @@ MODx.window.QuickUpdateTV = function(config) {
 };
 Ext.extend(MODx.window.QuickUpdateTV,MODx.Window);
 Ext.reg('modx-window-quick-update-tv',MODx.window.QuickUpdateTV);
+
+
+MODx.window.DuplicateContext = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'dupctx'+Ext.id();
+    Ext.Ajax.timeout = 0;
+    Ext.applyIf(config,{
+        title: _('context_duplicate')
+        ,id: this.ident
+        ,url: MODx.config.connectors_url+'context/index.php'
+        ,action: 'duplicate'        
+        ,width: 400
+        ,fields: [{
+            xtype: 'statictextfield'
+            ,id: 'modx-'+this.ident+'-key'
+            ,fieldLabel: _('old_key')
+            ,name: 'key'
+            ,width: 200
+            ,submitValue: true
+        },{
+            xtype: 'textfield'
+            ,id: 'modx-'+this.ident+'-newkey'
+            ,fieldLabel: _('new_key')
+            ,name: 'newkey'
+            ,width: 200
+            ,value: ''
+        }]
+    });
+    MODx.window.DuplicateContext.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.DuplicateContext,MODx.Window);
+Ext.reg('modx-window-context-duplicate',MODx.window.DuplicateContext);
