@@ -4,6 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Updated to xPDO 2.0 revision 389 
+- Added validation to modContext.key field; must be a valid PHP identifier without underscore characters
+- Modified modError::checkValidation() to call modError::addField() for each validation message
 - [#MODX-1562] Cleaned up Site Schedule grid to properly load baseParams during refresh and adjust pagination
 - Cleaned up processor code, plugin invoking, access permission checks in processors
 - [#MODX-1562] Fixed bug in Site Schedule data

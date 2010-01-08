@@ -109,8 +109,16 @@ class modError {
             if ($validator= $obj->getValidator()) {
                 $messages= $validator->getMessages();
                 if (!empty($messages)) {
+                    $fields = array();
                     foreach ($messages as $message) {
                         $s .= $message['message'].'<br />'."\n";
+                        if (!isset($fields[$message['field']])) $fields[$message['field']] = array();
+                        $fields[$message['field']][$message['name']] = $message['message'];
+                    }
+                    foreach ($fields as $fieldKey => $field) {
+                        foreach ($field as $fieldMsgName => $fieldMsg) {
+                            $this->addField($fieldKey, $fieldMsg);
+                        }
                     }
                 }
             }

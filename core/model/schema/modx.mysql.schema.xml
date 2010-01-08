@@ -201,8 +201,11 @@
         <composite alias="ContextResources" class="modContextResource" local="key" foreign="context_key" cardinality="many" owner="local" />
         <composite alias="ContextSettings" class="modContextSetting" local="key" foreign="context_key" cardinality="many" owner="local" />
         <composite alias="Acls" class="modAccessContext" local="key" foreign="target" owner="local" cardinality="many" />
+        <validation>
+            <rule field="key" name="key" type="preg_match" rule="/^[a-zA-Z\x7f-\xff][a-zA-Z0-9\x7f-\xff]*$/" message="context_err_ns_key" />
+        </validation>
     </object>
-    
+
     <object class="modContextSetting" table="context_setting" extends="xPDOObject">
         <field key="context_key" dbtype="varchar" precision="255" phptype="string" null="false" index="pk" />
         <field key="key" dbtype="varchar" precision="50" phptype="string" null="false" index="pk" />

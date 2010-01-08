@@ -10,15 +10,6 @@
 if (!$modx->hasPermission('new_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('context');
 
-/* validate pk */
-if (empty($_POST['key'])) $modx->error->addError('key',$modx->lexicon('context_err_ns'));
-
-/* dont allow contexts with _ in name */
-$_POST['key'] = str_replace('_','',$_POST['key']);
-
-/* check to see if key is empty after strip */
-if (empty($_POST['key'])) $modx->error->addError('key',$modx->lexicon('context_err_ns'));
-
 /* prevent duplicate contexts */
 $alreadyExists = $modx->getObject('modContext',$_POST['key']);
 if ($alreadyExists != null) $modx->error->addField('key',$modx->lexicon('context_err_ae'));
@@ -32,6 +23,7 @@ if ($modx->error->hasError()) {
 $context= $modx->newObject('modContext');
 $context->fromArray($_POST, '', true);
 if ($context->save() == false) {
+    $modx->error->checkValidation($context);
     return $modx->error->failure($modx->lexicon('context_err_create'));
 }
 

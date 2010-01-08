@@ -15,7 +15,8 @@ if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('context_e
 $oldContext= $modx->getObject('modContext', $_POST['key']);
 if (!$oldContext) return $modx->error->failure($modx->lexicon('context_err_nfs',array('key' => $_POST['key'])));
 
-if (empty($_POST['newkey'])) $modx->error->addField('newkey',$modx->lexicon('context_err_ns_key'));
+/* make sure the new key is a valid PHP identifier with no underscore characters */
+if (empty($_POST['newkey']) || !preg_match('/^[a-zA-Z\x7f-\xff][a-zA-Z0-9\x7f-\xff]*$/', $_POST['newkey'])) $modx->error->addField('newkey', $modx->lexicon('context_err_ns_key'));
 
 $alreadyExists = $modx->getCount('modContext',array('key' => $_POST['newkey']));
 if ($alreadyExists > 0) $modx->error->addField('newkey',$modx->lexicon('context_err_ae'));

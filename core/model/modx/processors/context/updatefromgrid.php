@@ -21,6 +21,7 @@ if ($context == null) return $modx->error->failure($modx->lexicon('context_err_n
 /* set and save context */
 $context->fromArray($_DATA);
 if ($context->save() == false) {
+    $modx->error->checkValidation($context);
     return $modx->error->failure($modx->lexicon('context_err_save'));
 }
 

@@ -21,6 +21,7 @@ $context->fromArray($_POST);
 
 /* save context */
 if ($context->save() === false) {
+    $modx->error->checkValidation($context);
 	return $modx->error->failure($modx->lexicon('context_err_save'));
 }
 
