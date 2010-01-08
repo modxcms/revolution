@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1564] Fixed bug causing combo values to get overridden if they were set before the combo store loaded
 - Move element and resource prerender plugin events to after js registering to allow for proper event execution order
 - [#MODX-986] Added "Duplicate Context" to Resource tree, as well as "Remove Context"
 - Fixed bug with default provider on package management UI
