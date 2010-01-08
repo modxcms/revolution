@@ -46,7 +46,7 @@ if (!$saved) return $modx->error->failure($modx->lexicon('resource_err_publish')
 /* invoke OnDocPublished event */
 $modx->invokeEvent('OnDocPublished',array(
     'docid' => $resource->get('id'),
-    'resource' => $resource->get('id'),
+    'resource' => &$resource,
 ));
 
 /* empty the cache */
