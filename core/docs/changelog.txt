@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1562] Cleaned up Site Schedule grid to properly load baseParams during refresh and adjust pagination
 - Cleaned up processor code, plugin invoking, access permission checks in processors
 - [#MODX-1562] Fixed bug in Site Schedule data
 - Fixed OnDocUnpublished and OnDocPublished calls in processors to pass modResource reference
