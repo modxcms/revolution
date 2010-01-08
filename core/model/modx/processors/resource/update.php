@@ -219,6 +219,7 @@ if (!$modx->hasPermission('publish_document')) {
 $modx->invokeEvent('OnBeforeDocFormSave',array(
     'mode' => 'upd',
     'id' => $resource->get('id'),
+    'resource' => &$resource,
 ));
 
 /* Now set and save data */

@@ -12,42 +12,42 @@
  * @package modx
  * @subpackage processors.resource.event
  */
+if (!$modx->hasPermission('list')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-if (!isset($_REQUEST['mode'])) $_REQUEST['mode'] = 'pub_date';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$mode = $modx->getOption('mode',$_REQUEST,'pub_date');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
 $c = $modx->newQuery('modResource');
 $c->where(array(
     $_REQUEST['mode'].':>' => time(),
 ));
-$c->sortby($_REQUEST['mode'],$_REQUEST['dir']);
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
-$publish = $modx->getCollection('modResource',$c);
+$count = $modx->getCount('modResource',$c);
+$c->sortby($mode,$dir);
+$c->limit($limit,$start);
+$resources = $modx->getCollection('modResource',$c);
 
-$cc = $modx->newQuery('modResource');
-$cc->where(array(
-    $_REQUEST['mode'].':>' => time(),
-));
-$count = $modx->getCollection('modResource',$cc);
-
-$ps = array();
-$time_format = '%a %b %d, %Y';
-foreach ($publish as $resource) {
-    $pa = $resource->toArray();
+$list = array();
+$timeFormat = '%a %b %d, %Y';
+$offset = $modx->getOption('server_offset_time',null,0) * 60 * 60;
+foreach ($resources as $resource) {
+    $resourceArray = $resource->toArray();
+    unset($resourceArray['content']);
 
     if ($resource->get('pub_date') != '') {
-        $pd = $resource->get('pub_date')+$modx->getOption('server_offset_time',null,0);
-        $pa['pub_date'] = strftime($time_format,$pd);
+        $pubDate = strtotime($resource->get('pub_date'))+$offset;
+        $resourceArray['pub_date'] = strftime($timeFormat,$pubDate);
     }
 
     if ($resource->get('unpub_date') != '') {
-        $pd = $resource->get('unpub_date')+$modx->getOption('server_offset_time',null,0);
-        $pa['unpub_date'] = strftime($time_format,$pd);
+        $unpubDate = strtotime($resource->get('unpub_date'))+$offset;
+        $resourceArray['unpub_date'] = strftime($timeFormat,$unpubDate);
     }
-    $ps[] = $pa;
+    $list[] = $resourceArray;
 }
 
-return $this->outputArray($ps,$count);
+return $this->outputArray($list,$count);

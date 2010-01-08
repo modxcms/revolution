@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Cleaned up processor code, plugin invoking, access permission checks in processors
+- [#MODX-1562] Fixed bug in Site Schedule data
 - Fixed OnDocUnpublished and OnDocPublished calls in processors to pass modResource reference
 - [#MODX-1564] Fixed bug causing combo values to get overridden if they were set before the combo store loaded
 - Move element and resource prerender plugin events to after js registering to allow for proper event execution order

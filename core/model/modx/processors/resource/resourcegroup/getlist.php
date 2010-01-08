@@ -12,13 +12,20 @@
  * @package modx
  * @subpackage processors.resource.resourcegroup
  */
+if (!$modx->hasPermission('list')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$mode = $modx->getOption('mode',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$resource = $modx->getOption('resource',$_REQUEST,false);
 
+if (empty($resource)) return $this->error->failure($modx->lexicon('resource_err_ns'));
+
+/* build query */
 $c = $modx->newQuery('modResourceGroup');
 $c->leftJoin('modResourceGroupResource','rgr','
     rgr.document_group = modResourceGroup.id
@@ -27,17 +34,18 @@ $c->select('
     modResourceGroup.*,
     IF(ISNULL(rgr.document),0,1) AS access
 ');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
-$rgs = $modx->getCollection('modResourceGroup',$c);
-
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
+$resourceGroups = $modx->getCollection('modResourceGroup',$c);
 $count = $modx->getCount('modResourceGroup');
 
-$rs = array();
-foreach ($rgs as $rg) {
-    $ra = $rg->toArray();
-    $ra['access'] = (boolean)$ra['access'];
-    $rs[] = $ra;
+
+/* iterate */
+$list = array();
+foreach ($resourceGroups as $resourceGroup) {
+    $resourceGroupArray = $resourceGroup->toArray();
+    $resourceGroupArray['access'] = (boolean)$resourceGroupArray['access'];
+    $list[] = $resourceGroupArray;
 }
 
-return $this->outputArray($rs,$count);
+return $this->outputArray($list,$count);

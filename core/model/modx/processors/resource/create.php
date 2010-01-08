@@ -214,6 +214,7 @@ if (!empty($_POST['template']) && ($template = $modx->getObject('modTemplate', $
 $modx->invokeEvent('OnBeforeDocFormSave',array(
 	'mode' => 'new',
 	'id' => 0,
+    'resource' => &$resource,
 ));
 
 /* deny publishing if not permitted */
@@ -290,7 +291,7 @@ if ($resource->get('parent') != 0) {
 $modx->invokeEvent('OnDocFormSave', array(
 	'mode' => 'new',
 	'id' => $resource->get('id'),
-    'resource' => & $resource
+    'resource' => &$resource
 ));
 
 /* log manager action */

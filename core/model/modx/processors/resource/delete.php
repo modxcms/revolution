@@ -69,8 +69,8 @@ foreach ($ar_children as $child) {
 /* invoke OnBeforeDocFormDelete event */
 $modx->invokeEvent('OnBeforeDocFormDelete', array (
     'id' => $resource->get('id'),
+    'resource' => &$resource,
     'children' => $ar_children_ids,
-
 ));
 
 /* delete children */
