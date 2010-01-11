@@ -19,7 +19,7 @@ $modx->lexicon->load('resource');
 $isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
-$mode = $modx->getOption('mode',$_REQUEST,'name');
+$sort = $modx->getOption('sort',$_REQUEST,'name');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 $resource = $modx->getOption('resource',$_REQUEST,false);
 
