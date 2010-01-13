@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1512] Fixed bug with MODx.tree.Tree::refreshNode that caused a strange duplicate node error
 - Updated xPDO to revision 392 to get new nested condition features
 - [#MODX-1515] Fixed date picker CSS
 - [#MODX-923] Added file path to config.inc.php configcheck message on welcome page

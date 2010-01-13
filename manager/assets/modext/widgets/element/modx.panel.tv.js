@@ -238,7 +238,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         if (MODx.request.id) Ext.getCmp('modx-grid-element-properties').save();
         this.getForm().setValues(r.result.object);
         
-        var t = parent.Ext.getCmp('modx-element-tree');
+        var t = Ext.getCmp('modx-element-tree');
         var c = Ext.getCmp('modx-tv-category').getValue();
         var u = c != '' && c != null ? 'n_tv_category_'+c : 'n_type_tv'; 
         t.refreshNode(u,true);
