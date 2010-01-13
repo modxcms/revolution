@@ -283,6 +283,18 @@ ul.x-tab-strip li.x-tab-strip-active  {
 	border-right:1px solid #C5C5C5 !important;
 	border-top:1px solid #C5C5C5 !important;
 }
+/* fix date trigger */
+.x-form-date-trigger {
+	width: 17px !important;
+	height: 22px;
+	border: 0 none !important;
+	border-bottom: 0 none !important;
+	border-top: 0 none !important;
+	border-right: 0 none !important;
+	border-left: 1px solid #C5C5C5 !important;
+	background-position: -34px 0 !important;
+}
+
 
 
 .x-small-editor .x-form-field-wrap .x-form-trigger{	
