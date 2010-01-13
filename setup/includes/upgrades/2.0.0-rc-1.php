@@ -23,7 +23,7 @@ $sql = "ALTER TABLE {$table} ADD `version_minor` TINYINT(4) NOT NULL DEFAULT '0'
 $this->processResults($class,$description,$sql);
 $sql = "ALTER TABLE {$table} ADD `version_patch` TINYINT(4) NOT NULL DEFAULT '0'";
 $this->processResults($class,$description,$sql);
-$sql = "ALTER TABLE {$table} ADD `release` TINYINT(4) NOT NULL DEFAULT ''";
+$sql = "ALTER TABLE {$table} ADD `release` VARCHAR(100) NOT NULL DEFAULT ''";
 $this->processResults($class,$description,$sql);
 $sql = "ALTER TABLE {$table} ADD `release_index` TINYINT(4) NOT NULL DEFAULT '0'";
 $this->processResults($class,$description,$sql);
