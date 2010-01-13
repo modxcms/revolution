@@ -9,8 +9,8 @@
 $_lang['configcheck_admin'] = 'Please contact a systems administrator and warn them about this message!';
 $_lang['configcheck_cache'] = 'cache directory not writable';
 $_lang['configcheck_cache_msg'] = 'MODx cannot write to the cache directory. MODx will still function as expected, but no caching will take place. To solve this, make the /_cache/ directory writable.';
-$_lang['configcheck_configinc'] = 'Config file still writable';
-$_lang['configcheck_configinc_msg'] = 'Very naughty people could potentially wreak some havoc on your site and everything associated with it. <strong>Really.</strong> Please make your config file read only!';
+$_lang['configcheck_configinc'] = 'Config file still writable!';
+$_lang['configcheck_configinc_msg'] = 'Very naughty people could potentially wreak some havoc on your site and everything associated with it. <b>Really.</b> Please make your config file read only! It is located at core/config/config.inc.php';
 $_lang['configcheck_default_msg'] = 'An unspecified warning was found. Which is strange.';
 $_lang['configcheck_errorpage_unavailable'] = 'Your site\'s Error page is not available.';
 $_lang['configcheck_errorpage_unavailable_msg'] = 'This means that your Error page is not accessible to normal web surfers or does not exist. This can lead to a recursive looping condition and many errors in your site logs. Make sure there are no webuser groups assigned to the page.';
