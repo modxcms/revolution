@@ -6,7 +6,7 @@
 $xpdo_meta_map['modTransportPackage']= array (
   'package' => 'modx.transport',
   'table' => 'transport_packages',
-  'fields' =>
+  'fields' => 
   array (
     'signature' => NULL,
     'created' => NULL,
@@ -21,10 +21,15 @@ $xpdo_meta_map['modTransportPackage']= array (
     'attributes' => NULL,
     'package_name' => NULL,
     'metadata' => NULL,
+    'version_major' => 0,
+    'version_minor' => 0,
+    'version_patch' => 0,
+    'release' => '',
+    'release_index' => 0,
   ),
-  'fieldMeta' =>
+  'fieldMeta' => 
   array (
-    'signature' =>
+    'signature' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -32,24 +37,24 @@ $xpdo_meta_map['modTransportPackage']= array (
       'null' => false,
       'index' => 'pk',
     ),
-    'created' =>
+    'created' => 
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
       'null' => false,
     ),
-    'updated' =>
+    'updated' => 
     array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
     ),
-    'installed' =>
+    'installed' => 
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
     ),
-    'state' =>
+    'state' => 
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -58,7 +63,7 @@ $xpdo_meta_map['modTransportPackage']= array (
       'null' => false,
       'default' => 1,
     ),
-    'workspace' =>
+    'workspace' => 
     array (
       'dbtype' => 'integer',
       'precision' => '10',
@@ -68,7 +73,7 @@ $xpdo_meta_map['modTransportPackage']= array (
       'default' => 0,
       'index' => 'fk',
     ),
-    'provider' =>
+    'provider' => 
     array (
       'dbtype' => 'integer',
       'precision' => '10',
@@ -78,7 +83,7 @@ $xpdo_meta_map['modTransportPackage']= array (
       'default' => 0,
       'index' => 'fk',
     ),
-    'disabled' =>
+    'disabled' => 
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -88,22 +93,22 @@ $xpdo_meta_map['modTransportPackage']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'source' =>
+    'source' => 
     array (
       'dbtype' => 'tinytext',
       'phptype' => 'string',
     ),
-    'manifest' =>
+    'manifest' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'array',
     ),
-    'attributes' =>
+    'attributes' => 
     array (
       'dbtype' => 'mediumtext',
       'phptype' => 'array',
     ),
-    'package_name' =>
+    'package_name' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -111,15 +116,64 @@ $xpdo_meta_map['modTransportPackage']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'metadata' =>
+    'metadata' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'array',
     ),
+    'version_major' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '4',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'version_minor' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '4',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'version_patch' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '4',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'release' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+      'index' => 'index',
+    ),
+    'release_index' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '4',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
   ),
-  'aggregates' =>
+  'aggregates' => 
   array (
-    'Workspace' =>
+    'Workspace' => 
     array (
       'class' => 'modWorkspace',
       'local' => 'workspace',
@@ -127,7 +181,7 @@ $xpdo_meta_map['modTransportPackage']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'Provider' =>
+    'Provider' => 
     array (
       'class' => 'transport.modTransportProvider',
       'local' => 'provider',

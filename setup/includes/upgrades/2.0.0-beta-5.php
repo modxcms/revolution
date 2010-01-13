@@ -78,7 +78,7 @@ $sql = "ALTER TABLE {$table} ADD `package_name` VARCHAR( 255 ) NOT NULL DEFAULT 
 $this->processResults($class,$description,$sql);
 $sql = "ALTER TABLE {$table} ADD  `metadata` TEXT NULL";
 $this->processResults($class,$description,$sql);
-$sql = "ALTER TABLE {$table} ADD INDEX (`package_name`)";
+$sql = "ALTER TABLE {$table} ADD INDEX `package_name` (`package_name`)";
 $this->processResults($class,$description,$sql);
 
 /* get current transport packages and add package field data */
