@@ -1,3 +1,6 @@
+{if $showHidden}
+<script type="text/javascript">MODx.showHidden = true;</script>
+{/if}
 <script type="text/javascript" src="assets/js/sections/database.js"></script>
 <form id="install" action="?action=database" method="post">
 <h2>{$_lang.connection_title}</h2>
@@ -38,8 +41,8 @@
 </div>
 <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testconn">{$_lang.db_test_conn_msg}</a></p>
 
-<p id="modx-db-step1-msg" class="modx-hidden">{$_lang.db_connecting}<span></span></p>
-<div id="modx-db-step2" class="modx-hidden">
+<p id="modx-db-step1-msg" class="modx-hidden2">{$_lang.db_connecting}<span></span></p>
+<div id="modx-db-step2" class="modx-hidden2">
 
 <div class="labelHolder">
     <label for="database-connection-charset">{$_lang.connection_character_set}</label>
@@ -56,7 +59,7 @@
 <br />
 <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testcoll">{$_lang.db_test_coll_msg}</a></p>
 
-<p id="modx-db-step2-msg" class="modx-hidden">{$_lang.db_check_db}<span></span></p>
+<p id="modx-db-step2-msg" class="modx-hidden2">{$_lang.db_check_db}<span></span></p>
 </div>
 {if $installmode EQ 0}
 <div id="modx-db-step3" class="modx-hidden">

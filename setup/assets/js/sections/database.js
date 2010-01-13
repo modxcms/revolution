@@ -1,7 +1,11 @@
 Ext.onReady(function() {
     Ext.select('#modx-testconn').on('click',MODx.DB.testConnection);
     Ext.select('#modx-testcoll').on('click',MODx.DB.testCollation);
-    Ext.select('.modx-hidden').hide();
+    
+    Ext.select('.modx-hidden2').hide();
+    if (!MODx.showHidden) {
+        Ext.select('.modx-hidden').hide();
+    }
 });
 
 MODx.DB = function() {
@@ -15,8 +19,7 @@ MODx.DB = function() {
                     msg.show();
                     Ext.select('#modx-db-step1-msg span').update('&nbsp;'+r.message);
                     if (r.success) {
-                        Ext.select('#modx-db-step2').fadeIn();
-                        
+                        Ext.select('#modx-db-step2').fadeIn();                        
                         
                         var ch = Ext.get('database-connection-charset');
                         if (ch) {

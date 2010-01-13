@@ -23,14 +23,42 @@ if (!empty($_POST['proceed'])) {
 
     if ($mode == modInstall::MODE_NEW) {
         /* validate admin user data */
+
+        $invchars = array('/','\'','"','{','}');
+
         if (empty ($_POST['cmsadmin'])) {
             $errors['cmsadmin'] = $install->lexicon['username_err_ns'];
+        } else {
+
+            $found = false;
+            foreach ($invchars as $i) {
+                if (strpos($_POST['cmsadmin'],$i) !== false) {
+                    $found = true;
+                }
+            }
+            if ($found) {
+                $errors['cmsadmin'] = $install->lexicon['username_err_invchars'];
+            }
         }
         if (empty ($_POST['cmsadminemail'])) {
             $errors['cmsadminemail'] = $install->lexicon['email_err_ns'];
         }
         if (empty ($_POST['cmspassword'])) {
             $errors['cmspassword'] = $install->lexicon['password_err_ns'];
+        } else {
+            if (strlen($_POST['cmspassword']) < 6) {
+                $errors['cmspassword'] = $install->lexicon['password_err_short'];
+            }
+
+            $found = false;
+            foreach ($invchars as $i) {
+                if (strpos($_POST['cmspassword'],$i) !== false) {
+                    $found = true;
+                }
+            }
+            if ($found) {
+                $errors['cmspassword'] = $install->lexicon['password_err_invchars'];
+            }
         }
         if (empty ($_POST['cmspasswordconfirm'])) {
             $errors['cmspasswordconfirm'] = $install->lexicon['password_err_ns'];
@@ -39,10 +67,13 @@ if (!empty($_POST['proceed'])) {
             $errors['cmspasswordconfirm'] = $install->lexicon['password_err_nomatch'];
         }
     }
+
     /* TODO: need to do more error checking here... */
 
     /* if errors, output */
     if (!empty($errors)) {
+        $this->parser->assign('config',$install->settings->fetch());
+        $this->parser->assign('showHidden',true);
         $this->parser->assign('errors_message',$install->lexicon['err_occ']);
         foreach ($errors as $k => $v) {
             $this->parser->assign('error_'.$k,$v);
