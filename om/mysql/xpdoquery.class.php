@@ -228,13 +228,15 @@ class xPDOQuery_mysql extends xPDOQuery {
                         $conditions[$iteration]= null;
                     }
                     $isString= in_array($fieldMeta[$k]['phptype'], $this->_quotable);
-                    $result[$iteration]['__sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$k}{$this->xpdo->_escapeChar} = ?";
-                    $result[$iteration]['__binding']= array (
+                    $field= array();
+                    $field['sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$k}{$this->xpdo->_escapeChar} = ?";
+                    $field['binding']= array (
                         'value' => $conditions[$iteration],
                         'type' => $isString ? PDO::PARAM_STR : PDO::PARAM_INT,
                         'length' => 0
                     );
-                    $result[$iteration]['__conjunction']= $conjunction;
+                    $field['conjunction']= $conjunction;
+                    $result[$iteration]= new xPDOQueryCondition($field);
                     $iteration++;
                 }
             } else {
@@ -243,37 +245,36 @@ class xPDOQuery_mysql extends xPDOQuery {
                 while (list ($key, $val)= each($conditions)) {
                     if (is_int($key)) {
                         if (is_array($val)) {
-                            $nested= $this->parseConditions($val, $conjunction);
-                            $result = $result + $nested;
+                            $result[]= $this->parseConditions($val, $conjunction);
                             continue;
                         } elseif ($this->isConditionalClause($val)) {
-                            $result[]= $val;
+                            $result[]= new xPDOQueryCondition(array('sql' => $val, 'binding' => null, 'conjunction' => $conjunction));
                             continue;
                         } else {
                             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing condition with key {$key}: " . print_r($val, true));
+                            continue;
                         }
-                    }
-                    $alias= $command == 'SELECT' ? $this->_class : trim($this->xpdo->getTableName($this->_class, false), $this->xpdo->_escapeChar);
-                    $operator= '=';
-                    $conj = $conjunction;
-                    $key_operator= explode(':', $key);
-                    if ($key_operator && count($key_operator) === 2) {
-                        $key= $key_operator[0];
-                        $operator= $key_operator[1];
-                    }
-                    elseif ($key_operator && count($key_operator) === 3) {
-                        $conj= $key_operator[0];
-                        $key= $key_operator[1];
-                        $operator= $key_operator[2];
-                    }
-                    if (strpos($key, '.') !== false) {
-                        $key_parts= explode('.', $key);
-                        $alias= trim($key_parts[0], " {$this->xpdo->_escapeChar}");
-                        $key= $key_parts[1];
-                    }
-//                    if (array_key_exists($key, $fieldMeta)) {
+                    } elseif (is_scalar($val)) {
+                        $alias= $command == 'SELECT' ? $this->_class : trim($this->xpdo->getTableName($this->_class, false), $this->xpdo->_escapeChar);
+                        $operator= '=';
+                        $conj = $conjunction;
+                        $key_operator= explode(':', $key);
+                        if ($key_operator && count($key_operator) === 2) {
+                            $key= $key_operator[0];
+                            $operator= $key_operator[1];
+                        }
+                        elseif ($key_operator && count($key_operator) === 3) {
+                            $conj= $key_operator[0];
+                            $key= $key_operator[1];
+                            $operator= $key_operator[2];
+                        }
+                        if (strpos($key, '.') !== false) {
+                            $key_parts= explode('.', $key);
+                            $alias= trim($key_parts[0], " {$this->xpdo->_escapeChar}");
+                            $key= $key_parts[1];
+                        }
                         $field= array ();
-                        $field['__sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$key}{$this->xpdo->_escapeChar} " . $operator . ' ?';
+                        $field['sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$key}{$this->xpdo->_escapeChar} " . $operator . ' ?';
                         if ($val === null || strtolower($val) == 'null') {
                             $type= PDO::PARAM_NULL;
                         }
@@ -283,19 +284,23 @@ class xPDOQuery_mysql extends xPDOQuery {
                         else {
                             $type= PDO::PARAM_STR;
                         }
-                        $field['__binding']= array (
+                        $field['binding']= array (
                             'value' => $val,
                             'type' => $type,
                             'length' => 0
                         );
-                        $field['__conjunction']= $conj;
-                        $result[]= $field;
-//                    }
+                        $field['conjunction']= $conj;
+                        $result[]= new xPDOQueryCondition($field);
+                    }
                 }
             }
         }
         elseif ($this->isConditionalClause($conditions)) {
-            $result= $conditions;
+            $result= new xPDOQueryCondition(array(
+                'sql' => $conditions
+                ,'binding' => null
+                ,'conjunction' => $conjunction
+            ));
         }
         elseif (($pktype == 'integer' && is_numeric($conditions)) || ($pktype == 'string' && is_string($conditions))) {
             if ($pktype == 'integer') {
@@ -303,9 +308,10 @@ class xPDOQuery_mysql extends xPDOQuery {
             } else {
                 $param_type= PDO::PARAM_STR;
             }
-            $result['__sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$pk}{$this->xpdo->_escapeChar} = ?";
-            $result['__binding']= array ('value' => $conditions, 'type' => $param_type, 'length' => 0);
-            $result['__conjunction']= $conjunction;
+            $field['sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$pk}{$this->xpdo->_escapeChar} = ?";
+            $field['binding']= array ('value' => $conditions, 'type' => $param_type, 'length' => 0);
+            $field['conjunction']= $conjunction;
+            $result = new xPDOQueryCondition($field);
         }
         return $result;
     }
