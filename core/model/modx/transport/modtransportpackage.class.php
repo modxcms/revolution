@@ -139,11 +139,11 @@ class modTransportPackage extends xPDOObject {
      *
      * {@inheritdoc}
      */
-    public function remove($force = false,array $ancestors = array()) {
+    public function remove($force = false,array $ancestors = array(),$uninstall = true) {
         $removed = false;
         if ($this->get('installed') == null || $this->get('installed') == '0000-00-00 00:00:00') {
             $uninstalled = true;
-        } else {
+        } else if ($uninstall) {
             $uninstalled = $this->uninstall();
         }
 

@@ -516,5 +516,16 @@ $collection['81']->fromArray(array (
   'assets' => '',
   'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Static+Resource',
 ), '', true, true);
+$collection['82']= $xpdo->newObject('modAction');
+$collection['82']->fromArray(array (
+  'id' => 82,
+  'namespace' => 'core',
+  'parent' => 212,
+  'controller' => 'workspaces/package/view',
+  'haslayout' => 1,
+  'lang_topics' => 'workspace,namespace',
+  'assets' => '',
+  'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Package+Management',
+), '', true, true);
 
 return $collection;

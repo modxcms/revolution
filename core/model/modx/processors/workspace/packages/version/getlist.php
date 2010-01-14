@@ -2,16 +2,8 @@
 /**
  * Gets a list of packages
  *
- * @param integer $workspace (optional) The workspace to filter by. Defaults to
- * 1.
- * @param integer $start (optional) The record to start at. Defaults to 0.
- * @param integer $limit (optional) The number of records to limit to. Defaults
- * to 10.
- * @param string $sort (optional) The column to sort by. Defaults to name.
- * @param string $dir (optional) The direction of the sort. Defaults to ASC.
- *
  * @package modx
- * @subpackage processors.workspace.packages
+ * @subpackage processors.workspace.package
  */
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('workspace');
@@ -23,30 +15,34 @@ $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
 $workspace = $modx->getOption('workspace',$_REQUEST,1);
 $dateFormat = $modx->getOption('dateFormat',$_REQUEST,'%b %d, %Y %I:%M %p');
+$signature = $modx->getOption('signature',$_REQUEST,false);
+
+if (empty($signature)) return $this->outputArray(array());
+$signatureArray = explode('-',$signature);
 
 /* get packages */
 $c = $modx->newQuery('transport.modTransportPackage');
+$c->select('
+    `modTransportPackage`.*,
+    `Provider`.`name` AS `provider_name`
+');
+$c->leftJoin('transport.modTransportProvider','Provider');
 $c->where(array(
     'workspace' => $workspace,
-));
-$c->where(array(
-    '(SELECT `signature` FROM '.$modx->getTableName('modTransportPackage').' AS `latestPackage`
-      WHERE `latestPackage`.`package_name` = `modTransportPackage`.`package_name`
-      ORDER BY
-         `latestPackage`.`version_major` DESC,
-         `latestPackage`.`version_minor` DESC,
-         `latestPackage`.`version_patch` DESC,
-         `latestPackage`.`release` DESC,
-         `latestPackage`.`release_index` DESC
-      LIMIT 1) = `modTransportPackage`.`signature`',
+    'package_name' => $signatureArray[0],
 ));
 $count = $modx->getCount('modTransportPackage',$c);
-$c->sortby('`modTransportPackage`.`signature`', 'ASC');
+$c->sortby('`modTransportPackage`.`version_major`', 'DESC');
+$c->sortby('`modTransportPackage`.`version_minor`', 'DESC');
+$c->sortby('`modTransportPackage`.`version_patch`', 'DESC');
+$c->sortby('`modTransportPackage`.`release`', 'DESC');
+$c->sortby('`modTransportPackage`.`release_index`', 'DESC');
 if ($isLimit) $c->limit($limit,$start);
 $packages = $modx->getCollection('transport.modTransportPackage',$c);
 
 /* now create output array */
 $list = array();
+$i = 0;
 foreach ($packages as $key => $package) {
     if ($package->get('installed') == '0000-00-00 00:00:00') $package->set('installed',null);
 
@@ -78,34 +74,14 @@ foreach ($packages as $key => $package) {
     $not_installed = $package->get('installed') == null || $package->get('installed') == '0000-00-00 00:00:00';
     $packageArray['iconaction'] = $not_installed ? 'icon-install' : 'icon-uninstall';
     $packageArray['textaction'] = $not_installed ? $modx->lexicon('install') : $modx->lexicon('uninstall');
-    $packageArray['menu'] = array();
 
-    $packageArray['menu'][] = array(
-        'text' => $modx->lexicon('package_view'),
-        'handler' => 'this.viewPackage',
-    );
-    $packageArray['menu'][] = '-';
-    if ($package->get('provider') != 0) {
+    if ($i > 0) {
+        $packageArray['menu'] = array();
         $packageArray['menu'][] = array(
-            'text' => $modx->lexicon('package_check_for_updates'),
-            'handler' => 'this.update',
+            'text' => $modx->lexicon('package_version_remove'),
+            'handler' => 'this.removePriorVersion',
         );
     }
-    $packageArray['menu'][] = array(
-        'text' => ($not_installed) ? $modx->lexicon('package_install') : $modx->lexicon('package_reinstall'),
-        'handler' => ($not_installed) ? 'this.install' : 'this.install',
-    );
-    if ($not_installed == false) {
-        $packageArray['menu'][] = array(
-            'text' => $modx->lexicon('package_uninstall'),
-            'handler' => 'this.uninstall',
-        );
-    }
-    $packageArray['menu'][] = '-';
-    $packageArray['menu'][] = array(
-        'text' => $modx->lexicon('package_remove'),
-        'handler' => 'this.remove',
-    );
 
     /* setup description, using either metadata or readme */
     $metadata = $package->get('metadata');
@@ -125,7 +101,11 @@ foreach ($packages as $key => $package) {
     }
     unset($packageArray['attributes']);
     unset($packageArray['metadata']);
+    unset($packageArray['manifest']);
     $list[] = $packageArray;
+    if ($package->get('installed') != null) $i++;
 }
 
 return $this->outputArray($list,$count);
+
+return array();

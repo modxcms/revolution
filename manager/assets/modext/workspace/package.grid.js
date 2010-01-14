@@ -32,7 +32,9 @@ MODx.grid.Package = function(config) {
         title: _('packages')
         ,id: 'modx-grid-package'
         ,url: MODx.config.connectors_url+'workspace/packages.php'
-        ,fields: ['signature','name','version','release','created','updated','installed','state','workspace','provider','disabled','source','manifest','attributes','readme','menu','install','textaction','iconaction']
+        ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
+                 ,'provider','disabled','source','attributes','readme','menu'
+                 ,'install','textaction','iconaction']
         ,plugins: [this.action,this.exp]
         ,pageSize: 20
         ,columns: [this.exp,{
@@ -117,6 +119,10 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                 },scope:this}
             }
         });
+    }
+    
+    ,viewPackage: function(btn,e) {
+        location.href = 'index.php?a='+MODx.action['workspaces/package/view']+'&signature='+this.menu.record.signature;
     }
     
     ,update: function(btn,e) {        

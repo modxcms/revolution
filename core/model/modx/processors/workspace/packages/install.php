@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.workspace.packages
  */
-$modx->lexicon->load('workspace');
-
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('workspace');
 
 $modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('package_install_info_start',array('signature' => $_REQUEST['signature'] )));
 

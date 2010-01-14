@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.workspace.packages
  */
-$modx->lexicon->load('workspace');
-
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('workspace');
 
 $collection= array ();
 if (isset($_REQUEST['id']) && $objId= $_REQUEST['id']) {
