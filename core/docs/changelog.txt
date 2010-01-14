@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug in Packages grid to properly show provider name
 - Added modRestResponse class, improved error handling for REST-based package management
 - Added verification for Providers, now check to make sure they can connect before being added or updated
 - Added Package View page to Package Management, allowing you to view more info about a package, view prior installed versions, and remove older package versions

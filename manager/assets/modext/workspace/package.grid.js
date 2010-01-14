@@ -33,21 +33,17 @@ MODx.grid.Package = function(config) {
         ,id: 'modx-grid-package'
         ,url: MODx.config.connectors_url+'workspace/packages.php'
         ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
-                 ,'provider','disabled','source','attributes','readme','menu'
+                 ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction']
         ,plugins: [this.action,this.exp]
         ,pageSize: 20
-        ,columns: [this.exp,{
-              header: _('name') ,dataIndex: 'name' }
-           ,{ header: _('version') ,dataIndex: 'version' }
-           ,{ header: _('release') ,dataIndex: 'release' }
+        ,columns: [this.exp
+            ,{ header: _('name') ,dataIndex: 'name' }
+            ,{ header: _('version') ,dataIndex: 'version' }
+            ,{ header: _('release') ,dataIndex: 'release' }
             ,{ header: _('installed') ,dataIndex: 'installed' ,renderer: this._rins }
-            ,{ 
-                header: _('provider')
-                ,dataIndex: 'provider'
-                ,editor: { xtype: 'modx-combo-provider' ,renderer: true }
-                ,editable: false
-            },this.action]
+            ,{ header: _('provider') ,dataIndex: 'provider_name' }
+            ,this.action]
         ,primaryKey: 'signature'
         ,paging: true
         ,autosave: true

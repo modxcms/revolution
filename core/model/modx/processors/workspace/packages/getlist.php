@@ -26,6 +26,7 @@ $dateFormat = $modx->getOption('dateFormat',$_REQUEST,'%b %d, %Y %I:%M %p');
 
 /* get packages */
 $c = $modx->newQuery('transport.modTransportPackage');
+$c->leftJoin('transport.modTransportProvider','Provider');
 $c->where(array(
     'workspace' => $workspace,
 ));
@@ -41,6 +42,10 @@ $c->where(array(
       LIMIT 1) = `modTransportPackage`.`signature`',
 ));
 $count = $modx->getCount('modTransportPackage',$c);
+$c->select('
+    `modTransportPackage`.*,
+    `Provider`.`name` AS `provider_name`
+');
 $c->sortby('`modTransportPackage`.`signature`', 'ASC');
 if ($isLimit) $c->limit($limit,$start);
 $packages = $modx->getCollection('transport.modTransportPackage',$c);
