@@ -27,10 +27,14 @@ if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('provider_e
 $provider = $modx->getObject('transport.modTransportProvider',$_POST['id']);
 if ($provider == null) return $modx->error->failure($modx->lexicon('provider_err_nfs',array('id' => $_POST['id'])));
 
-/* TODO: Check for a valid connection to the provisioner. */
-
 /* set and save provider */
 $provider->fromArray($_POST);
+
+/* verify provider */
+if (!$provider->verify()) {
+    return $modx->error->failure($modx->lexicon('provider_err_not_verified'));
+}
+
 if ($provider->save() == false) {
     return $modx->error->failure($modx->lexicon('provider_err_save'));
 }

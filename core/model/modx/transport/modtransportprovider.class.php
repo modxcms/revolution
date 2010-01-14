@@ -12,18 +12,9 @@
  */
 class modTransportProvider extends xPDOSimpleObject {
     /**
-     * Creates an instance of the modTransportProvider class
-     *
-     * {@inheritdoc}
-     */
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-        $this->set('created', strftime('%Y-%m-%d %H:%M:%S'));
-    }
-
-    /**
      * Handles the response from the provider. Returns response in array format.
      *
+     * @deprecated 2.0.0-rc1 - Jan 14, 2010
      * @access public
      * @param jsonrpcresp $response The json-rpc response.
      * @return array The parsed response.
@@ -50,30 +41,6 @@ class modTransportProvider extends xPDOSimpleObject {
     }
 
     /**
-     * Grab all updates for a specific package
-     *
-     * @access public
-     * @param modTransportPackage $package The package to grab updates for
-     * @return array An array of available updates for the package
-     */
-    public function getUpdatesForPackage($package) {
-        $updates = array ();
-        $pa = $package->toArray();
-
-        $this->getClient();
-
-        $this->xpdo->getVersionData();
-        $productVersion = $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'];
-
-        $xml = $this->request('package/update','GET',array(
-            'signature' => $package->get('signature'),
-            'supports' => $productVersion,
-        ));
-
-        return $this->handleResponse($xml);
-    }
-
-    /**
      * Get the client responsible for communicating with the provider.
      *
      * @access public
@@ -86,5 +53,35 @@ class modTransportProvider extends xPDOSimpleObject {
             if (!$loaded) return false;
         }
         return $this->xpdo->rest;
+    }
+
+    /**
+     * Verifies the authenticity of the provider
+     *
+     * @access public
+     * @return boolean True if verified
+     */
+    public function verify() {
+        $response = $this->request('verify','GET');
+        if ($response->isError()) {
+            return false;
+        }
+        $status = $response->toXml();
+        if (!$status) return false;
+
+        return (boolean)$status->verified;
+    }
+
+    /**
+     * Overrides xPDOObject::save to set the createdon date.
+     *
+     * {@inheritdoc}
+     */
+    public function save($cacheFlag= null) {
+        if ($this->isNew() && !$this->get('created')) {
+            $this->set('created', strftime('%Y-%m-%d %H:%M:%S'));
+        }
+        $saved= parent :: save($cacheFlag);
+        return $saved;
     }
 }

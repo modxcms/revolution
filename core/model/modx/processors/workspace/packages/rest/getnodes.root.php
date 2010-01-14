@@ -3,10 +3,11 @@
  * @package modx
  * @subpackage processors.workspace.packages.rest
  */
-
 $response = $provider->request('repository');
-$repositories = $provider->handleResponse($response);
-if (!$repositories) return $modx->error->failure($modx->lexicon('provider_err_connect'));
+if ($response->isError()) {
+    return $modx->error->failure($modx->lexicon('provider_err_connect',array('error' => $response->getError())));
+}
+$repositories = $response->toXml();
 
 $list = array();
 foreach ($repositories as $repository) {

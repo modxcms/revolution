@@ -1,7 +1,20 @@
 <?php
+/**
+ * @package modx
+ * @subpackage rest
+ */
 require_once dirname(__FILE__) . '/modrestclient.class.php';
-
+/**
+ * @package modx
+ * @subpackage rest
+ */
 class modRestSockClient extends modRestClient {
+    /**
+     * Extends modRestClient::request to provide socket-specific request
+     * handling
+     *
+     * {@inheritdoc}
+     */
     public function request($host,$path,$method = 'GET',$params = array()) {
         $method = strtoupper($method);
         $purl = parse_url($host);

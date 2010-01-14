@@ -21,11 +21,14 @@ if ($modx->error->hasError()) {
     return $modx->error->failure();
 }
 
-/* TODO: Check for a valid connection to the provider. */
-
 /* create provider */
 $provider = $modx->newObject('transport.modTransportProvider');
 $provider->fromArray($_POST);
+
+/* verify provider */
+if (!$provider->verify()) {
+    return $modx->error->failure($modx->lexicon('provider_err_not_verified'));
+}
 
 /* save provider */
 if ($provider->save() == false) {

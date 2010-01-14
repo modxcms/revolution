@@ -23,8 +23,10 @@ if (!$loaded) return $modx->error->failure($modx->lexicon('provider_err_no_clien
 $response = $provider->request('home','GET',array(
     'supports' => $productVersion,
 ));
-$info = $provider->handleResponse($response);
-if (!$info) return $modx->error->failure($modx->lexicon('provider_err_connect'));
+if ($response->isError()) {
+    return $modx->error->failure($modx->lexicon('provider_err_connect',array('error' => $response->getError())));
+}
+$info = $response->toXml();
 
 /* setup output properties */
 $properties = array(

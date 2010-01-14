@@ -6,8 +6,10 @@
 $response = $provider->request('repository/'.$pk,'GET',array(
     'supports' => $productVersion,
 ));
-$tags = $provider->handleResponse($response);
-if (!$tags) return $modx->error->failure($modx->lexicon('provider_err_connect'));
+if ($response->isError()) {
+    return $modx->error->failure($modx->lexicon('provider_err_connect',array('error' => $response->getError())));
+}
+$tags = $response->toXml();
 
 $list = array();
 foreach ($tags as $tag) {

@@ -1,8 +1,19 @@
 <?php
+/**
+ * @package modx
+ * @subpackage rest
+ */
 require_once dirname(__FILE__) . '/modrestclient.class.php';
-
+/**
+ * @package modx
+ * @subpackage rest
+ */
 class modRestCurlClient extends modRestClient {
-
+    /**
+     * Extends modRestClient::request to provide cURL specific request handling
+     *
+     * {@inheritdoc}
+     */
     public function request($host,$path,$method = 'GET',$params = array()) {
         $q = http_build_query($params);
         $ch = curl_init();

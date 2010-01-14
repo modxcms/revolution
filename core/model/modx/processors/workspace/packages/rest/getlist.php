@@ -7,10 +7,11 @@ $modx->lexicon->load('workspace');
 
 $provider = $modx->getOption('provider',$_REQUEST,false);
 if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_ns'));
+
 $provider = $modx->getObject('transport.modTransportProvider',$provider);
 if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nf'));
 
-if (empty($_REQUEST['query']) && empty($_REQUEST['tag'])) return array();
+if (empty($_REQUEST['query']) && empty($_REQUEST['tag'])) return $this->outputArray(array());
 
 /* get default properties */
 $tag = $modx->getOption('tag',$_REQUEST,false);
@@ -38,9 +39,10 @@ if (!empty($tag)) $where['tag'] = $tag;
 if (!empty($query)) $where['query'] = $query;
 
 $response = $provider->request('package','GET',$where);
-$tag = $provider->handleResponse($response);
-
-if (!$tag) return $modx->error->failure($modx->lexicon('provider_err_connect'));
+if ($response->isError()) {
+    return $modx->error->failure($modx->lexicon('provider_err_connect',array('error' => $response->getError())));
+}
+$tag = $response->toXml();
 
 /* iterate through packages */
 $total = (int)$tag['total'];

@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.workspace.packages
  */
-$modx->lexicon->load('workspace');
-
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('workspace');
 
 $package = $modx->getObject('transport.modTransportPackage',$_REQUEST['signature']);
 if ($package == null) {
@@ -33,7 +32,24 @@ if ($package->provider != 0) { /* if package has a provider */
 }
 
 $modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('package_update_info_provider_scan',array('provider' => $provider->get('name'))));
-$packages = $provider->getUpdatesForPackage($package);
+
+/* get provider client */
+$loaded = $provider->getClient();
+if (!$loaded) return $modx->error->failure($modx->lexicon('provider_err_no_client'));
+
+/* get current version for supportability */
+$modx->getVersionData();
+$productVersion = $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'];
+
+/* send REST request */
+$response = $provider->request('package/update','GET',array(
+    'signature' => $package->get('signature'),
+    'supports' => $productVersion,
+));
+if ($response->isError()) {
+    return $modx->error->failure($modx->lexicon('provider_err_connect',array('error' => $response->getError())));
+}
+$packages = $response->toXml();
 
 /* if no newer packages were found */
 if (count($packages) < 1) {
@@ -42,7 +58,7 @@ if (count($packages) < 1) {
     return $modx->error->failure($msg);
 }
 
-$pa = array();
+$list = array();
 $latest = '';
 foreach ($packages as $p) {
     $packageArray = array(
@@ -54,7 +70,7 @@ foreach ($packages as $p) {
         'location' => (string)$p->location,
         'info' => ((string)$p->location).'::'.((string)$p->signature),
     );
-    $pa[] = $packageArray;
+    $list[] = $packageArray;
 }
 
-return $modx->error->success('',$pa);
+return $modx->error->success('',$list);

@@ -35,8 +35,10 @@ if (!$loaded) return $modx->error->failure($modx->lexicon('provider_err_no_clien
 $response = $provider->request('package','GET',array(
     'signature' => $signature,
 ));
-$metadataXml = $provider->handleResponse($response);
-if (!$metadataXml) return $modx->error->failure($modx->lexicon('provider_err_connect'));
+if ($response->isError()) {
+    return $modx->error->failure($modx->lexicon('provider_err_connect',array('error' => $response->getError())));
+}
+$metadataXml = $response->toXml();
 
 /* set package metadata */
 $metadata = array();
