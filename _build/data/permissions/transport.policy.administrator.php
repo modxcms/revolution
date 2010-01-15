@@ -181,6 +181,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'element_tree',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'empty_cache',
     'description' => '',
     'value' => true,
@@ -197,6 +202,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'file_manager',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'file_tree',
     'description' => '',
     'value' => true,
 ));
@@ -362,6 +372,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'remove_locks',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'resource_tree',
     'description' => '',
     'value' => true,
 ));
