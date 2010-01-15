@@ -144,129 +144,94 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
             ,params: {
                 action: 'get'
                 ,id: this.config.usergroup
-                ,getUsers: true
-                ,getContexts: true
-                ,getResourceGroups: true
             }
             ,listeners: {
                 'success': {fn:function(r) {
                     this.getForm().setValues(r.object);
                     Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+r.object.name+'</h2>');
-                    
-                    if (r.object.users) {
-                        var d = Ext.decode(r.object.users);
-                        Ext.getCmp('modx-grid-user-group-users').getStore().loadData(d);
-                    }
-                    
+                                        
                     this.fireEvent('ready',r.object);
                 },scope:this}
             }
         });
     }
-    
-    ,beforeSubmit: function(o) {
-        Ext.apply(o.form.baseParams,{
-            users: Ext.getCmp('modx-grid-user-group-users').encode()
-        });
-    }
-    
-    ,success: function(o) {
-        Ext.getCmp('modx-grid-user-group-users').getStore().commitChanges();
-    }
+    ,beforeSubmit: function(o) {}
+    ,success: function(o) {}
 });
 Ext.reg('modx-panel-user-group',MODx.panel.UserGroup);
 
-
-/**
- * Loads a grid of Users in a User Group.
- * 
- * @class MODx.grid.UserGroupUsers
- * @extends MODx.grid.Grid
- * @param {Object} config An object of options.
- * @xtype modx-grid-user-group-users
- */
 MODx.grid.UserGroupUsers = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: ''
         ,id: 'modx-grid-user-group-users'
-        ,url: MODx.config.connectors_url+'security/group.php'
-        ,fields: ['id','username','role','rolename']
+        ,url: MODx.config.connectors_url+'security/usergroup/user.php'
+        ,baseParams: {
+            action: 'getList'
+            ,usergroup: config.usergroup
+        }
+        ,paging: true
+        ,fields: ['id','username','role','role_name','menu']
         ,columns: [
             { header: _('id') ,dataIndex: 'id' ,width: 40 }
             ,{ header: _('username') ,dataIndex: 'username' ,width: 175 }
             ,{
                 header: _('role')
-                ,dataIndex: 'rolename'
+                ,dataIndex: 'role'
                 ,width: 175
             }
         ]
         ,tbar: [{
             text: _('user_group_user_add')
-            ,handler: this.addUserToGroup
+            ,handler: this.addMember
         }]
     });
     MODx.grid.UserGroupUsers.superclass.constructor.call(this,config);
-    this.userRecord = new Ext.data.Record.create([{name: 'id'},{name: 'username'},{name:'role'
-    },{name:'rolename'}]);
 };
-Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.LocalGrid,{
+Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
     updateRole: function(btn,e) {
         var r = this.menu.record;
-        r.usergroup = this.config.usergroup
+        r.usergroup = this.config.usergroup;
+        r.user = r.id;
         
         this.loadWindow(btn,e,{
             xtype: 'modx-window-user-group-role-update'
             ,record: r
             ,listeners: {
                 'success': {fn:function(r) {
-                    var s = this.getStore();
-                    var rec = s.getAt(this.menu.recordIndex);
-                    rec.set('role',r.role);
-                    rec.set('rolename',r.rolename);
-                    
+                    this.refresh();                    
                     Ext.getCmp('modx-panel-user-group').fireEvent('fieldChange');
                 },scope:this}
             }
         });
     }
-    ,addUserToGroup: function(btn,e) {
-        
+    ,addMember: function(btn,e) {
         this.loadWindow(btn,e,{
             xtype: 'modx-window-user-group-adduser'
             ,record: {usergroup:this.config.usergroup}
             ,listeners: {
                 'success': {fn:function(r) {
-                    var s = this.getStore();
-                    var rec = new this.userRecord(r);
-                    s.add(rec);
-                    
+                    this.refresh();
                     Ext.getCmp('modx-panel-user-group').fireEvent('fieldChange');
                 },scope:this}
             }
         });
     }
-    
-    ,_showMenu: function(g,ri,e) {
-        e.stopEvent();
-        e.preventDefault();
-        var m = this.menu;
-        m.recordIndex = ri;
-        m.record = this.getStore().getAt(ri).data;
-        if (!this.getSelectionModel().isSelected(ri)) {
-            this.getSelectionModel().selectRow(ri);
-        }
-        m.removeAll();
-        m.add({
-            text: _('user_role_update')
-            ,handler: this.updateRole
-            ,scope: this
-        },'-',{
-            text: _('user_group_user_remove')
-            ,handler: this.remove.createDelegate(this,[{text: _('user_group_user_remove_confirm')}])
-            ,scope: this
+    ,removeUser: function(btn,e) {
+        var r = this.menu.record;
+        MODx.msg.confirm({
+            title: _('warning')
+            ,text: _('user_group_user_remove_confirm') || _('confirm_remove')
+            ,url: this.config.url
+            ,params: {
+                action: 'remove'
+                ,user: r.id
+                ,usergroup: this.config.usergroup
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
         });
-        m.show(e.target);
     }
 });
 Ext.reg('modx-grid-user-group-users',MODx.grid.UserGroupUsers);
@@ -276,14 +241,18 @@ MODx.window.UpdateUserGroupRole = function(config) {
     Ext.applyIf(config,{
         id: 'modx-window-user-group-role-update'
         ,title: _('user_group_user_update_role')
-        ,url: MODx.config.connectors_url+'security/user.php'
-        ,action: 'updateRole'
+        ,url: MODx.config.connectors_url+'security/usergroup/user.php'
+        ,action: 'update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'usergroup'
             ,value: config.usergroup
         },{
-            xtype: 'modx-combo-role'
+            xtype: 'hidden'
+            ,name: 'user'
+            ,value: config.user
+        },{
+            xtype: 'modx-combo-usergrouprole'
             ,id: 'modx-uugr-role'
             ,name: 'role'
             ,fieldLabel: _('role')
@@ -291,15 +260,7 @@ MODx.window.UpdateUserGroupRole = function(config) {
     });
     MODx.window.UpdateUserGroupRole.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.UpdateUserGroupRole,MODx.Window,{
-    submit: function() {
-        var r = this.fp.getForm().getValues();
-        r.rolename = Ext.getCmp('modx-uugr-role').getRawValue();
-        this.fireEvent('success',r);
-        this.hide();
-        return false;
-    }
-});
+Ext.extend(MODx.window.UpdateUserGroupRole,MODx.Window);
 Ext.reg('modx-window-user-group-role-update',MODx.window.UpdateUserGroupRole);
 
 
@@ -309,12 +270,12 @@ MODx.window.AddUserToUserGroup = function(config) {
         title: _('user_group_user_add')
         ,height: 150
         ,width: 375
-        ,url: MODx.config.connectors_url+'security/group.php'
-        ,action: 'addUser'
+        ,url: MODx.config.connectors_url+'security/usergroup/user.php'
+        ,action: 'create'
         ,fields: [{
             fieldLabel: _('user')
-            ,name: 'id'
-            ,hiddenName: 'id'
+            ,name: 'user'
+            ,hiddenName: 'user'
             ,id: 'modx-auug-user'
             ,xtype: 'modx-combo-user'
             ,editable: false
@@ -333,25 +294,7 @@ MODx.window.AddUserToUserGroup = function(config) {
     });
     MODx.window.AddUserToUserGroup.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.AddUserToUserGroup,MODx.Window,{
-    submit: function() {
-        var r = this.fp.getForm().getValues();
-        
-        var g = Ext.getCmp('modx-grid-user-group-users');
-        var s = g.getStore();
-        var v = s.query('id',r.id).items;
-        if (v.length > 0) {
-            MODx.msg.alert(_('error'),_('user_group_member_err_already_in'));
-            return false;
-        }
-        
-        r.rolename = Ext.getCmp('modx-auug-role').getRawValue();
-        r.username = Ext.getCmp('modx-auug-user').getRawValue();
-        this.fireEvent('success',r);
-        this.hide();
-        return false;
-    }
-});
+Ext.extend(MODx.window.AddUserToUserGroup,MODx.Window);
 Ext.reg('modx-window-user-group-adduser',MODx.window.AddUserToUserGroup);
 
 

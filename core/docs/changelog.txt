@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Changed User Group users grid to a non-local grid, now supports pagination and proper validation
 - Enhanced UI for editing User Group Context/ResourceGroup ACLs
 - [#MODX-1525] Added permissions field to modMenu to define policy permissions required to see Top Menu items
 - Fixed bug in Packages grid to properly show provider name
