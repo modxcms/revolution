@@ -85,4 +85,5 @@ $welcome_back = $modx->lexicon('welcome_back',array('name' => $modx->getLoginUse
 $modx->smarty->assign('welcome_back',$welcome_back);
 unset($welcome_back);
 
+
 return $modx->smarty->fetch('header.tpl');

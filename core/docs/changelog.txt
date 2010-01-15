@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1526] Added permissions resource_tree, element_tree, file_tree that restrict rendering/viewing of the left-side trees. Must be applied to access policies.
 - [#MODX-625] Adjusted text in config.inc.php writable warning message
 - [#MODX-1586] Fixed toolbar rendering bug in user settings due to hidden div, now using hideMode: offsets 
 - Added search for user box in usergroup users grid

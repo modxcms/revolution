@@ -12,6 +12,31 @@ MODx.Layout = function(config){
         expires: new Date(new Date().getTime()+(1000*60*60*24))
     }));
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext3/resources/images/default/s.gif';
+    
+    var tabs = [];
+    if (MODx.perm.resource_tree) {
+       tabs.push({
+            xtype: 'modx-tree-resource'
+            ,title: _('resources')
+            ,id: 'modx-resource-tree'
+        }); 
+    }
+    if (MODx.perm.element_tree) {
+        tabs.push({
+            xtype: 'modx-tree-element'
+            ,title: _('elements')
+            ,id: 'modx-element-tree'
+        });   
+    }
+    if (MODx.perm.file_tree) {
+        tabs.push({
+            xtype: 'modx-tree-directory'
+            ,title: _('files')
+            ,id: 'modx-file-tree'
+            ,hideFiles: false
+        });
+    }
+    
     Ext.applyIf(config,{
         id: 'modx-layout'
         ,renderTo: 'modx-leftbar-content'
@@ -52,20 +77,7 @@ MODx.Layout = function(config){
                     ct.setStyle('float','left');
                 },scope:this}
             }
-            ,items: [{
-                xtype: 'modx-tree-resource'
-                ,title: _('resources')
-                ,id: 'modx-resource-tree'
-            },{
-                xtype: 'modx-tree-element'
-                ,title: _('elements')
-                ,id: 'modx-element-tree'
-            },{
-                xtype: 'modx-tree-directory'
-                ,title: _('files')
-                ,id: 'modx-file-tree'
-                ,hideFiles: false
-            }]
+            ,items: tabs
         }]
     });
     MODx.Layout.superclass.constructor.call(this,config);
@@ -117,7 +129,8 @@ Ext.extend(MODx.Layout,Ext.Panel,{
             ,ctrl: true
             ,shift: true
             ,fn: function() {
-                Ext.getCmp('modx-resource-tree').quickCreate(document,{},'modResource','web',0);
+                var t = Ext.getCmp('modx-resource-tree');
+                if (t) { t.quickCreate(document,{},'modResource','web',0); }
             }
             ,stopEvent: true
         });
@@ -136,9 +149,10 @@ Ext.extend(MODx.Layout,Ext.Panel,{
     }
     
     ,refreshTrees: function() {
-        Ext.getCmp('modx-resource-tree').refresh();
-        Ext.getCmp('modx-element-tree').refresh();
-        Ext.getCmp('modx-file-tree').refresh();
+        var t;
+        t = Ext.getCmp('modx-resource-tree'); if (t) { t.refresh(); }
+        t = Ext.getCmp('modx-element-tree'); if (t) { t.refresh(); }
+        t = Ext.getCmp('modx-file-tree'); if (t) { t.refresh(); }
     }
     ,leftbarVisible: true
     ,toggleLeftbar: function() {
