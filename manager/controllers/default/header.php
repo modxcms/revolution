@@ -39,7 +39,14 @@ foreach ($menus as $menu) {
     $order++;
 }
 function _modProcessMenus(&$output,$menus) {
+    global $modx;
     foreach ($menus as $menu) {
+        if (!empty($menu['permissions'])) {
+            $permissions = array();
+            $exploded = explode(',', $menu['permissions']);
+            foreach ($exploded as $permission) $permissions[trim($permission)]= true;
+            if (!empty($permissions) && !$modx->hasPermission($permissions)) continue;
+        }
         $output .= '<li>'."\n";
         $output .= '<a href="javascript:;"'."\n";
         $output .= '   onclick="';

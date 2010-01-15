@@ -143,6 +143,12 @@ MODx.window.CreateMenu = function(config) {
             ,xtype: 'textarea'
             ,width: 320
             ,grow: false
+        },{
+            fieldLabel: _('permissions')
+            ,name: 'permissions'
+            ,id: 'modx-cmen-permissions'
+            ,xtype: 'textfield'
+            ,width: 200
         }]
 	});
 	MODx.window.CreateMenu.superclass.constructor.call(this,config);
@@ -211,6 +217,12 @@ MODx.window.UpdateMenu = function(config) {
             ,xtype: 'textarea'
             ,width: 320
             ,grow: false
+        },{
+            fieldLabel: _('permissions')
+            ,name: 'permissions'
+            ,id: 'modx-umen-permissions'
+            ,xtype: 'textfield'
+            ,width: 200
         }]
 	});
 	MODx.window.UpdateMenu.superclass.constructor.call(this,config);

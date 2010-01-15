@@ -329,6 +329,7 @@
         <field key="menuindex" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="params" dbtype="text" phptype="string" null="false" default="" />
         <field key="handler" dbtype="text" phptype="string" null="false" default="" />
+        <field key="permissions" dbtype="text" phptype="string" null="false" default="" />
         
         <aggregate alias="Action" class="modAction" local="action" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Parent" class="modMenu" local="parent" foreign="text" owner="foreign" cardinality="one" />

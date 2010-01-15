@@ -64,3 +64,10 @@ foreach ($packages as $package) {
         $package->save();
     }
 }
+
+/* add permissions field to modMenu */
+$class = 'modMenu';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['add_column'],'permissions',$table);
+$sql = "ALTER TABLE {$table} ADD `permissions` TEXT NOT NULL DEFAULT ''";
+$this->processResults($class,$description,$sql);

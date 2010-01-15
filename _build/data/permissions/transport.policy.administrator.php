@@ -46,6 +46,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'customize_forms',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'database',
     'description' => '',
     'value' => true,
@@ -327,6 +332,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'packages',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'property_sets',
     'description' => '',
     'value' => true,
 ));

@@ -16,6 +16,7 @@ $xpdo_meta_map['modMenu']= array (
     'menuindex' => 0,
     'params' => '',
     'handler' => '',
+    'permissions' => '',
   ),
   'fieldMeta' => 
   array (
@@ -80,6 +81,13 @@ $xpdo_meta_map['modMenu']= array (
       'default' => '',
     ),
     'handler' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'permissions' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',

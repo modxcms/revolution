@@ -43,6 +43,7 @@ $children[1]->fromArray(array (
   'icon' => 'images/icons/refresh.png',
   'menuindex' => 1,
   'handler' => 'MODx.clearCache(); return false;',
+  'permissions' => 'empty_cache',
 ), '', true, true);
 
 /* remove locks */
@@ -66,6 +67,7 @@ MODx.msg.confirm({
         \'success\': {fn:function() { Ext.getCmp("modx-resource-tree").refresh(); },scope:this}
     }
 });',
+  'permissions' => 'remove_locks',
 ), '', true, true);
 
 /* search */
@@ -77,6 +79,7 @@ $children[3]->fromArray(array (
   'description' => 'search_desc',
   'icon' => 'images/icons/context_view.gif',
   'menuindex' => 3,
+  'permissions' => 'search',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -113,6 +116,7 @@ $children[4]->fromArray(array (
   'description' => 'new_document_desc',
   'icon' => 'images/icons/folder_page_add.png',
   'menuindex' => 4,
+  'permissions' => 'new_document',
 ), '', true, true);
 $children[4]->addOne($action);
 
@@ -126,6 +130,7 @@ $children[5]->fromArray(array (
   'icon' => 'images/icons/link_add.png',
   'menuindex' => 5,
   'params' => '&class_key=modWebLink',
+  'permissions' => 'new_document',
 ), '', true, true);
 $children[5]->addOne($action);
 
@@ -139,6 +144,7 @@ $children[6]->fromArray(array (
   'icon' => 'images/icons/link_add.png',
   'menuindex' => 6,
   'params' => '&class_key=modSymLink',
+  'permissions' => 'new_document',
 ), '', true, true);
 $children[6]->addOne($action);
 
@@ -152,6 +158,7 @@ $children[7]->fromArray(array (
   'icon' => 'images/icons/link_add.png',
   'menuindex' => 7,
   'params' => '&class_key=modStaticResource',
+  'permissions' => 'new_document',
 ), '', true, true);
 $children[7]->addOne($action);
 unset($action);
@@ -197,6 +204,7 @@ $menus[2]->fromArray(array (
   'description' => '',
   'icon' => 'images/icons/lock.gif',
   'menuindex' => 2,
+  'permissions' => 'access_permissions',
 ), '', true, true);
 $children = array();
 
@@ -209,6 +217,7 @@ $children[0]->fromArray(array (
   'description' => 'user_management_desc',
   'icon' => 'images/icons/user.gif',
   'menuindex' => 0,
+  'permissions' => 'view_user',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -232,6 +241,7 @@ $children[1]->fromArray(array (
   'description' => 'user_group_management_desc',
   'icon' => 'images/icons/mnu_users.gif',
   'menuindex' => 1,
+  'permissions' => 'access_permissions',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -255,6 +265,7 @@ $children[2]->fromArray(array (
   'description' => 'resource_groups_desc',
   'icon' => '',
   'menuindex' => 2,
+  'permissions' => 'access_permissions',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -278,6 +289,7 @@ $children[3]->fromArray(array (
   'description' => 'form_customization_desc',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 3,
+  'permissions' => 'customize_forms'
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -312,6 +324,7 @@ $children[4]->fromArray(array (
         \'success\': {fn:function() { location.href = \'./\'; },scope:this}
     }
 });',
+    'permissions' => 'access_permissions',
 ), '', true, true);
 
 /* flush sessions */
@@ -334,6 +347,7 @@ $children[5]->fromArray(array (
         \'success\': {fn:function() { location.href = \'./\'; },scope:this}
     }
 });',
+    'permissions' => 'flush_sessions',
 ), '', true, true);
 
 $menus[2]->addMany($children,'Children');
@@ -361,6 +375,7 @@ $children[0]->fromArray(array (
   'description' => 'import_resources_desc',
   'icon' => 'images/icons/application_side_contract.png',
   'menuindex' => 0,
+  'permissions' => 'import_static',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -383,6 +398,7 @@ $children[1]->fromArray(array (
   'description' => 'import_site_desc',
   'icon' => 'images/icons/application_side_contract.png',
   'menuindex' => 1,
+  'permissions' => 'import_static',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -405,6 +421,7 @@ $children[2]->fromArray(array(
   'description' => 'propertysets_desc',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 2,
+  'permissions' => 'property_sets',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -465,6 +482,7 @@ $children[1]->fromArray(array (
   'description' => 'view_logging_desc',
   'icon' => '',
   'menuindex' => 1,
+  'permissions' => 'logs',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -487,6 +505,7 @@ $children[2]->fromArray(array (
   'description' => 'eventlog_viewer_desc',
   'icon' => 'images/icons/comment.gif',
   'menuindex' => 2,
+  'permissions' => 'view_eventlog',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -509,6 +528,7 @@ $children[3]->fromArray(array (
   'description' => 'view_sysinfo_desc',
   'icon' => 'images/icons/logging.gif',
   'menuindex' => 3,
+  'permissions' => 'view_sysinfo',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -531,6 +551,7 @@ $children[4]->fromArray(array (
   'description' => 'about_desc',
   'icon' => 'images/icons/information.png',
   'menuindex' => 4,
+  'permissions' => 'about',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -568,6 +589,7 @@ $children[0]->fromArray(array (
   'description' => 'contexts_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 0,
+  'permissions' => 'view_context',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -591,6 +613,7 @@ $children[1]->fromArray(array (
   'description' => 'edit_menu_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 1,
+  'permissions' => 'menus,actions',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -614,6 +637,7 @@ $children[2]->fromArray(array (
   'description' => 'manage_workspaces_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 2,
+  'permissions' => 'packages',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -637,6 +661,7 @@ $children[3]->fromArray(array (
   'description' => 'lexicon_management_desc',
   'icon' => 'images/icons/logging.gif',
   'menuindex' => 3,
+  'permissions' => 'lexicons',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -660,6 +685,7 @@ $children[4]->fromArray(array (
   'description' => 'content_types_desc',
   'icon' => 'images/icons/logging.gif',
   'menuindex' => 4,
+  'permissions' => 'content_types',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -683,6 +709,7 @@ $children[5]->fromArray(array (
   'description' => 'namespaces_desc',
   'icon' => '',
   'menuindex' => 5,
+  'permissions' => 'namespaces',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -706,6 +733,7 @@ $children[6]->fromArray(array (
   'description' => 'system_settings_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 6,
+  'permissions' => 'settings',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
@@ -766,6 +794,7 @@ $children[1]->fromArray(array (
   'description' => 'messages_desc',
   'icon' => 'images/icons/messages.gif',
   'menuindex' => 1,
+  'permissions' => 'messages',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
         $action->fromArray(array (
