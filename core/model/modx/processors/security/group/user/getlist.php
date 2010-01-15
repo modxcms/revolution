@@ -23,8 +23,8 @@ $sort = $modx->getOption('sort',$_REQUEST,'username');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
 $usergroup = $modx->getOption('usergroup',$_REQUEST,false);
+$username = !empty($_REQUEST['username']) ? $_REQUEST['username'] : '';
 
-$modx->setLogTarget('ECHO');
 /* build query */
 $c = $modx->newQuery('modUser');
 $c->innerJoin('modUserGroupMember','UserGroupMembers');
@@ -33,6 +33,11 @@ $c->leftJoin('modUserGroupRole','UserGroupRole','UserGroupMembers.role = UserGro
 $c->where(array(
     'UserGroupMembers.user_group' => $usergroup,
 ));
+if (!empty($username)) {
+    $c->where(array(
+        'modUser.username:LIKE' => '%'.$username.'%',
+    ));
+}
 $count = $modx->getCount('modUser',$c);
 
 $c->select('

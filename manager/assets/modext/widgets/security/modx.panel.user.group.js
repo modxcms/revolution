@@ -89,6 +89,7 @@ MODx.panel.UserGroup = function(config) {
                 }]
             },{
                 title: _('user_group_context_access')
+                ,hidden: config.usergroup === 0 ? true : false
                 ,forceLayout: true
                 ,hideMode: 'offsets'
                 ,items: [{
@@ -108,6 +109,8 @@ MODx.panel.UserGroup = function(config) {
                 }]
             },{
                 title: _('user_group_resourcegroup_access')
+                ,hidden: config.usergroup === 0 ? true : false
+                ,hideMode: 'offsets'
                 ,items: [{
                     html: '<p>'+_('user_group_resourcegroup_access_msg')+'</p>'
                     ,border: false
@@ -184,12 +187,49 @@ MODx.grid.UserGroupUsers = function(config) {
         ,tbar: [{
             text: _('user_group_user_add')
             ,handler: this.addMember
+        },'->',{
+            xtype: 'textfield'
+            ,id: 'modx-ugu-filter-username'
+            ,listeners: {
+                'change': {fn:this.searchUser,scope:this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() { 
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true; }
+                        ,scope: cmp
+                    });
+                }}
+            }
+            ,emptyText: _('search')
+            ,scope: this
+        },{
+            text: _('clear_filter')
+            ,id: 'modx-ugu-clear-filter'
+            ,handler: this.clearFilter
+            ,scope: this
         }]
     });
     MODx.grid.UserGroupUsers.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
-    updateRole: function(btn,e) {
+    
+    searchUser: function(tf,nv,ov) {
+        this.getStore().baseParams['username'] = Ext.getCmp('modx-ugu-filter-username').getValue();
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+    
+    ,clearFilter: function(btn,e) {
+        Ext.getCmp('modx-ugu-filter-username').setValue('');
+        this.getStore().baseParams['username'] = '';
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+    
+    ,updateRole: function(btn,e) {
         var r = this.menu.record;
         r.usergroup = this.config.usergroup;
         r.user = r.id;
