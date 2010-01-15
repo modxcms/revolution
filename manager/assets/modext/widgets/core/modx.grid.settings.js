@@ -135,22 +135,22 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-filter-namespace').reset();
         Ext.getCmp('modx-filter-key').reset();
-    	this.refresh();
     	this.getBottomToolbar().changePage(1);
+    	this.refresh();
     }
     
     ,filterByKey: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.key = nv;
-        this.refresh();
         this.getBottomToolbar().changePage(1);
+        this.refresh();
         return true;
     }
     
     ,filterByNamespace: function(cb,rec,ri) {
         this.getStore().baseParams['namespace'] = rec.data['name'];
-        this.refresh();
         this.getBottomToolbar().changePage(1);
+        this.refresh();
     }
     
     ,changeEditor: function(g,ri,ci,e) {

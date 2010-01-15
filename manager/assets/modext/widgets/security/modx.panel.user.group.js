@@ -21,6 +21,12 @@ MODx.panel.UserGroup = function(config) {
             }
             ,forceLayout: true
             ,deferredRender: false
+            ,stateful: true
+            ,stateId: 'modx-usergroup-tabpanel'
+            ,stateEvents: ['tabchange']
+            ,getState:function() {
+                return {activeTab:this.items.indexOf(this.getActiveTab())};
+            }
             ,items: [{
                 title: _('general_information')
                 ,bodyStyle: 'padding: 1.5em;'
@@ -55,6 +61,7 @@ MODx.panel.UserGroup = function(config) {
                     ,xtype: 'modx-combo-usergroup'
                     ,fieldLabel: _('user_group_parent')
                     ,editable: false
+                    ,width: '97%'
                     ,disabled: config.usergroup === 0 ? true : false
                     ,baseParams: {
                         action: 'getList'
@@ -64,6 +71,7 @@ MODx.panel.UserGroup = function(config) {
             },{
                 title: _('users')
                 ,hidden: config.usergroup === 0 ? true : false
+                ,hideMode: 'offsets'
                 ,items: [{
                     html: '<p>'+_('user_group_user_access_msg')+'</p>'
                     ,border: false
@@ -72,6 +80,7 @@ MODx.panel.UserGroup = function(config) {
                     ,preventRender: true
                     ,usergroup: config.usergroup
                     ,autoHeight: true
+                    ,width: '97%'
                     ,listeners: {
                         'afterRemoveRow': {fn:function() {
                             this.fireEvent('fieldChange');
@@ -80,6 +89,8 @@ MODx.panel.UserGroup = function(config) {
                 }]
             },{
                 title: _('user_group_context_access')
+                ,forceLayout: true
+                ,hideMode: 'offsets'
                 ,items: [{
                     html: '<p>'+_('user_group_context_access_msg')+'</p>'
                     ,border: false
@@ -88,6 +99,7 @@ MODx.panel.UserGroup = function(config) {
                     ,preventRender: true
                     ,usergroup: config.usergroup
                     ,autoHeight: true
+                    ,width: '97%'
                     ,listeners: {
                         'afterRemoveRow': {fn:function() {
                             this.fireEvent('fieldChange');
@@ -104,6 +116,7 @@ MODx.panel.UserGroup = function(config) {
                     ,preventRender: true
                     ,usergroup: config.usergroup
                     ,autoHeight: true
+                    ,width: '97%'
                     ,listeners: {
                         'afterRemoveRow': {fn:function() {
                             this.fireEvent('fieldChange');
@@ -145,12 +158,6 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
                         Ext.getCmp('modx-grid-user-group-users').getStore().loadData(d);
                     }
                     
-                    d = Ext.decode(r.object.contexts);
-                    Ext.getCmp('modx-grid-user-group-contexts').getStore().loadData(d);
-                    
-                    d = Ext.decode(r.object.resourcegroups);
-                    Ext.getCmp('modx-grid-user-group-resource-groups').getStore().loadData(d);
-                    
                     this.fireEvent('ready',r.object);
                 },scope:this}
             }
@@ -160,15 +167,11 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
     ,beforeSubmit: function(o) {
         Ext.apply(o.form.baseParams,{
             users: Ext.getCmp('modx-grid-user-group-users').encode()
-            ,contexts: Ext.getCmp('modx-grid-user-group-contexts').encode()
-            ,resource_groups: Ext.getCmp('modx-grid-user-group-resource-groups').encode()
         });
     }
     
     ,success: function(o) {
         Ext.getCmp('modx-grid-user-group-users').getStore().commitChanges();
-        Ext.getCmp('modx-grid-user-group-contexts').getStore().commitChanges();
-        Ext.getCmp('modx-grid-user-group-resource-groups').getStore().commitChanges();
     }
 });
 Ext.reg('modx-panel-user-group',MODx.panel.UserGroup);

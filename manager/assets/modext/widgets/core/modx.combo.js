@@ -54,9 +54,10 @@ MODx.combo.Renderer = function(combo) {
             }
             loaded = true;
         }
-        idx = combo.store.find(combo.valueField,combo.getValue());
+        var v2 = combo.getValue();
+        idx = combo.store.find(combo.valueField,v2 ? v2 : v);
         rec = combo.store.getAt(idx);
-        return (rec === undefined || rec === null ? combo.getValue() : rec.get(combo.displayField));
+        return (rec === undefined || rec === null ? (v2 ? v2 : v) : rec.get(combo.displayField));
     });
 };
 

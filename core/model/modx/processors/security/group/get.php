@@ -48,39 +48,6 @@ if (!empty($_REQUEST['getUsers']) && !empty($_REQUEST['id'])) {
     $usergroup->set('users','(' . $modx->toJSON($data) . ')');
 }
 
-if (!empty($_REQUEST['getContexts'])) {
-    $c = $modx->newQuery('modAccessContext');
-    $c->select('
-        modAccessContext.*,
-        Policy.name AS policy_name
-    ');
-    $c->innerJoin('modAccessPolicy','Policy');
-    $c->where(array(
-        'principal_class' => 'modUserGroup',
-        'principal' => $usergroup->get('id'),
-    ));
-    $c->sortby('principal','ASC');
-    $ctxaccess = $modx->getCollection('modAccessContext',$c);
-
-    $data = array();
-    foreach ($ctxaccess as $contextAccess) {
-        $objdata= array(
-            $contextAccess->get('id'),
-            $contextAccess->get('target'),
-            $contextAccess->get('target'),
-            $contextAccess->get('principal_class'),
-            $contextAccess->get('principal'),
-            $contextAccess->get('name'),
-            $contextAccess->get('authority'),
-            $contextAccess->get('policy'),
-            $contextAccess->get('policy_name'),
-        );
-        $data[] = $objdata;
-    }
-    $usergroup->set('contexts','(' . $modx->toJSON($data) . ')');
-}
-
-
 if (!empty($_REQUEST['getResourceGroups'])) {
     $c = $modx->newQuery('modAccessResourceGroup');
     $c->select('

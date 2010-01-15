@@ -38,45 +38,6 @@ if (isset($_POST['users']) && !empty($_POST['id'])) {
     }
 }
 
-/* contexts */
-if (isset($_POST['contexts'])) {
-    $acls = $modx->getCollection('modAccessContext',array(
-        'principal' => $usergroup->get('id'),
-        'principal_class' => 'modUserGroup',
-    ));
-    foreach ($acls as $acl) { $acl->remove(); }
-    $contexts = $modx->fromJSON($_POST['contexts']);
-    foreach ($contexts as $context) {
-        $acl = $modx->newObject('modAccessContext');
-        $acl->set('target',$context['target']);
-        $acl->set('principal',$usergroup->get('id'));
-        $acl->set('principal_class','modUserGroup');
-        $acl->set('authority',$context['authority']);
-        $acl->set('policy',$context['policy']);
-        $acl->save();
-    }
-}
-
-/* resource groups */
-if (isset($_POST['resource_groups'])) {
-    $acls = $modx->getCollection('modAccessResourceGroup',array(
-        'principal' => $usergroup->get('id'),
-        'principal_class' => 'modUserGroup',
-    ));
-    foreach ($acls as $acl) { $acl->remove(); }
-    $resourceGroups = $modx->fromJSON($_POST['resource_groups']);
-    foreach ($resourceGroups as $resourceGroup) {
-        $acl = $modx->newObject('modAccessResourceGroup');
-        $acl->set('target',$resourceGroup['target']);
-        $acl->set('principal',$usergroup->get('id'));
-        $acl->set('principal_class','modUserGroup');
-        $acl->set('authority',$resourceGroup['authority']);
-        $acl->set('policy',$resourceGroup['policy']);
-        $acl->set('context_key',$resourceGroup['context_key']);
-        $acl->save();
-    }
-}
-
 /* save usergroup if not anonymous */
 if (!empty($_POST['id'])) {
     if ($usergroup->save() === false) {

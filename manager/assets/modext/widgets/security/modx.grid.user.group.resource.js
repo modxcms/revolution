@@ -3,95 +3,121 @@ MODx.grid.UserGroupResourceGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-grid-user-group-resource-groups'
-        ,url: MODx.config.connectors_url+'security/access/index.php'
+        ,url: MODx.config.connectors_url+'security/access/usergroup/resourcegroup.php'
         ,baseParams: {
             action: 'getList'
+            ,usergroup: config.usergroup
         }
-        ,fields: ['id','target','target_name','principal_class','principal','principal_name','authority','policy','policy_name','context_key']
+        ,paging: true
+        ,hideMode: 'offsets'
+        ,fields: ['id','target','name','principal','authority','authority_name','policy','policy_name','context_key','menu']
         ,columns: [{
             header: _('resource_group')
-            ,dataIndex: 'target_name'
+            ,dataIndex: 'name'
             ,width: 120
         },{
             header: _('minimum_role')
-            ,dataIndex: 'authority'
+            ,dataIndex: 'authority_name'
             ,width: 100
-            ,editor: { xtype: 'modx-combo-authority' ,allowBlank: false, renderer: true }
         },{
             header: _('policy')
             ,dataIndex: 'policy_name'
             ,width: 200
-            ,editor: { xtype: 'modx-combo-policy' ,allowBlank: false ,renderer: true ,baseParams: {action: 'getList',combo: '1'} }
         },{
             header: _('context')
             ,dataIndex: 'context_key'
             ,width: 150
-            ,editor: { xtype: 'modx-combo-context' ,allowBlank: false ,renderer: true }
         }]
         ,tbar: [{
             text: _('resource_group_add')
             ,scope: this
-            ,handler: this.addResourceGroup
+            ,handler: this.createAcl
+        },'->',{
+            xtype: 'modx-combo-resourcegroup'
+            ,id: 'modx-ugrg-resourcegroup-filter'
+            ,emptyText: _('filter_by_resource_group')
+            ,width: 200
+            ,allowBlank: true
+            ,listeners: {
+                'select': {fn:this.filterResourceGroup,scope:this}
+            }
+        },{
+            xtype: 'modx-combo-policy'
+            ,id: 'modx-ugrg-policy-filter'
+            ,emptyText: _('filter_by_policy')
+            ,allowBlank: true
+            ,listeners: {
+                'select': {fn:this.filterPolicy,scope:this}
+            }
+        },{
+            text: _('clear_filter')
+            ,id: 'modx-ugrg-clear-filter'
+            ,handler: this.clearFilter
+            ,scope: this
         }]
     });
     MODx.grid.UserGroupResourceGroup.superclass.constructor.call(this,config);
-    this.rgRecord = new Ext.data.Record.create([
-        {name: 'id'}
-        ,{name: 'target'}
-        ,{name:'target_name'}
-        ,{name:'principal_class'}
-        ,{name:'principal'}
-        ,{name:'principal_name'}
-        ,{name:'authority'}
-        ,{name:'policy'}
-        ,{name:'policy_name'}
-        ,{name:'context_key'}
-    ]);
     this.on('afteredit',function() { Ext.getCmp('modx-panel-user-group').fireEvent('fieldChange'); });
 };
-Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.LocalGrid,{
+Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
     combos: {}
     ,windows: {}
     
-    ,addResourceGroup: function(itm,e) {
+    ,filterResourceGroup: function(cb,rec,ri) {
+        this.getStore().baseParams['resourceGroup'] = rec.data['id'];
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+    ,filterPolicy: function(cb,rec,ri) {
+        this.getStore().baseParams['policy'] = rec.data['id'];
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+    
+    ,clearFilter: function(btn,e) {
+        Ext.getCmp('modx-ugrg-resourcegroup-filter').setValue('');
+        this.getStore().baseParams['resourceGroup'] = '';
+        Ext.getCmp('modx-ugrg-policy-filter').setValue('');
+        this.getStore().baseParams['policy'] = '';
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+    ,createAcl: function(itm,e) {
         var r = {
             principal: this.config.usergroup
         };
-        if (!this.windows.addResourceGroup) {
-            this.windows.addResourceGroup = MODx.load({
+        if (!this.windows.createAcl) {
+            this.windows.createAcl = MODx.load({
                 xtype: 'modx-window-user-group-resourcegroup-create'
                 ,record: r
                 ,listeners: {
                     'success': {fn:function(r) {
-                        var s = this.getStore();
-                        var rec = new this.rgRecord(r);
-                        s.add(rec);
-                        
+                        this.refresh();
                         Ext.getCmp('modx-panel-user-group').fireEvent('fieldChange');
                     },scope:this}
                 }
             });
         }
-        this.windows.addResourceGroup.setValues(r);
-        this.windows.addResourceGroup.show(e.target);
+        this.windows.createAcl.setValues(r);
+        this.windows.createAcl.show(e.target);
     }
-    
-    ,_showMenu: function(g,ri,e) {
-        e.stopEvent();
-        e.preventDefault();
-        var m = this.menu;
-        m.recordIndex = ri;
-        m.record = this.getStore().getAt(ri).data;
-        if (!this.getSelectionModel().isSelected(ri)) {
-            this.getSelectionModel().selectRow(ri);
+    ,updateAcl: function(itm,e) {
+        var r = this.menu.record;
+        
+        if (!this.windows.updateAcl) {
+            this.windows.updateAcl = MODx.load({
+                xtype: 'modx-window-user-group-resourcegroup-update'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        this.refresh();                       
+                        Ext.getCmp('modx-panel-user-group').fireEvent('fieldChange');
+                    },scope:this}
+                }
+            });
         }
-        m.removeAll();
-        m.add({
-            text: _('resource_group_remove')
-            ,handler: this.remove.createDelegate(this,[{text: _('user_group_resourcegroup_remove_confirm')}])
-            ,scope: this
-        });
-        m.show(e.target);
+        this.windows.updateAcl.setValues(r);
+        this.windows.updateAcl.show(e.target);
     }
 });
 Ext.reg('modx-grid-user-group-resource-group',MODx.grid.UserGroupResourceGroup);
@@ -101,7 +127,8 @@ MODx.window.CreateUGRG = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('resource_group_add')
-        ,url: MODx.config.connectors_url+'security/access/index.php'
+        ,url: MODx.config.connectors_url+'security/access/usergroup/resourcegroup.php'
+        ,action: 'create'
         ,height: 250
         ,width: 350
         ,fields: [{
@@ -142,24 +169,58 @@ MODx.window.CreateUGRG = function(config) {
     });
     MODx.window.CreateUGRG.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.CreateUGRG,MODx.Window,{
-    submit: function() {
-        var f = this.fp.getForm();
-        var r = f.getValues();
-        r.policy_name = f.findField('policy').getRawValue();
-        r.target_name = f.findField('target').getRawValue();
-        /*
-        var g = Ext.getCmp('modx-grid-user-group-resource-groups');
-        var s = g.getStore();
-        var v = s.query('id',r.id).items;
-        if (v.length > 0) {
-            MODx.msg.alert(_('error'),_('user_group_resourcegroup_err_ae'));
-            return false;
-        }*/
-        
-        this.fireEvent('success',r);
-        this.hide();
-        return false;
-    }
-});
+Ext.extend(MODx.window.CreateUGRG,MODx.Window);
 Ext.reg('modx-window-user-group-resourcegroup-create',MODx.window.CreateUGRG);
+
+
+MODx.window.UpdateUGRG = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('access_rgroup_update')
+        ,url: MODx.config.connectors_url+'security/access/usergroup/resourcegroup.php'
+        ,action: 'update'
+        ,height: 250
+        ,width: 350
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+        },{
+            xtype: 'modx-combo-resourcegroup'
+            ,fieldLabel: _('resource_group')
+            ,name: 'target'
+            ,hiddenName: 'target'
+            ,editable: false
+        },{
+            xtype: 'modx-combo-authority'
+            ,fieldLabel: _('minimum_role')
+            ,name: 'authority'
+            ,value: 0
+        },{
+            xtype: 'modx-combo-policy'
+            ,fieldLabel: _('policy')
+            ,name: 'policy'
+            ,hiddenName: 'policy'
+            ,baseParams: {
+                action: 'getList'
+                ,combo: '1'
+            }
+        },{
+            xtype: 'hidden'
+            ,name: 'principal'
+            ,hiddenName: 'principal'
+        },{
+            xtype: 'hidden'
+            ,name: 'principal_class'
+            ,value: 'modUserGroup'
+        },{
+            xtype: 'modx-combo-context'
+            ,fieldLabel: _('context')
+            ,name: 'context_key'
+            ,hiddenName: 'context_key'
+            ,editable: false
+        }]
+    });
+    MODx.window.UpdateUGRG.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.UpdateUGRG,MODx.Window);
+Ext.reg('modx-window-user-group-resourcegroup-update',MODx.window.UpdateUGRG);
