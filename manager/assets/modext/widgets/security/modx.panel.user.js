@@ -346,6 +346,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 title: _('settings')
                 ,autoHeight: true
                 ,defaults: { autoHeight: true }
+                ,hideMode: 'offsets'
                 ,items: [{
                     html: '<h3>'+_('user_settings')+'</h3>'
                     ,border: false
@@ -365,6 +366,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,layout: 'form'
             ,bodyStyle: 'padding: 1.5em;'
             ,defaults: { border: false ,autoHeight: true }
+            ,hideMode: 'offsets'
             ,items: [{
                 html: _('access_permissions_user_message')
             },MODx.PanelSpacer,{            
