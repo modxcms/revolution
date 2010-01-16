@@ -3,6 +3,7 @@ This file shows the changes in this release of xPDO.
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
 - [#XPDO-4] Allow nesting conditions arbitrarily deep using simple nested array format.
+- [#XPDO-39] Fix SQL error originating from xPDOQuery GROUP BY and ORDER BY when field name is reserved word
 
 xPDO 2.0.0-rc1 (LastChangedRevision: 389, LastChangedDate: 2009-12-31 11:18:40 -0700 (Thu, 31 Dec 2009))
 ====================================
