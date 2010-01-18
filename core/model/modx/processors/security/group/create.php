@@ -27,16 +27,18 @@ $usergroup->set('name',$_POST['name']);
 $usergroup->set('parent',$_POST['parent']);
 
 /* users */
-$users = $modx->fromJSON($_POST['users']);
-$members = array();
-foreach ($users as $userArray) {
-    $member = $modx->newObject('modUserGroupMember');
-    $member->set('user_group',$usergroup->get('id'));
-    $member->set('member',$userArray['id']);
-    $member->set('role',$userArray['role']);
-    $ugms[] = $member;
+if (isset($_POST['users'])) {
+    $users = $modx->fromJSON($_POST['users']);
+    $members = array();
+    foreach ($users as $userArray) {
+        $member = $modx->newObject('modUserGroupMember');
+        $member->set('user_group',$usergroup->get('id'));
+        $member->set('member',$userArray['id']);
+        $member->set('role',$userArray['role']);
+        $ugms[] = $member;
+    }
+    $usergroup->addMany($members);
 }
-$usergroup->addMany($members);
 
 /* save usergroup */
 if ($usergroup->save() == false) {

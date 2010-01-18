@@ -59,9 +59,22 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 		    if (p === undefined) { p = 0; }
         } else { p = 0; }
         
-        location.href = 'index.php'
-            + '?a=' + MODx.action['security/usergroup/create']
-            + '&parent=' + p;
+        var r = {
+            'parent': p
+        };
+        
+        if (!this.windows.createUsergroup) {
+            this.windows.createUsergroup = MODx.load({
+                xtype: 'modx-window-usergroup-create'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:this.refresh,scope:this}
+                }
+            });
+        } else {
+            this.windows.createUsergroup.setValues(r);
+        }
+        this.windows.createUsergroup.show(e.target);
 	}
     
     ,update: function(item,e) {
@@ -112,3 +125,31 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 	}
 });
 Ext.reg('modx-tree-usergroup',MODx.tree.UserGroup);
+
+MODx.window.CreateUserGroup = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('user_group_create')
+        ,height: 150
+        ,width: 400
+        ,url: MODx.config.connectors_url+'security/usergroup/index.php'
+        ,action: 'create'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'parent'
+            ,value: 0
+        },{
+            fieldLabel: _('name')
+            ,name: 'name'
+            ,hiddenName: 'name'
+            ,id: 'modx-cug-name'
+            ,xtype: 'textfield'
+            ,allowBlank: false
+            ,width: 250
+        }]
+    });
+    MODx.window.CreateUserGroup.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.CreateUserGroup,MODx.Window);
+Ext.reg('modx-window-usergroup-create',MODx.window.CreateUserGroup);
+
