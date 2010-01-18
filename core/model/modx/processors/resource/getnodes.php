@@ -421,6 +421,15 @@ while ($item) {
                 $qtip = '<i>'.$item->description.'</i>';
             }
 
+            $locked = $item->getLock();
+            if ($locked && $locked != $modx->user->get('id')) {
+                $class = 'icon-locked';
+                $lockedBy = $modx->getObject('modUser',$locked);
+                if ($lockedBy) {
+                    $qtip .= ' - '.$modx->lexicon('locked_by',array('username' => $lockedBy->get('username')));
+                }
+            }
+
             $hasChildren = $item->hasChildren() ? false : true;
             $itemArray = array(
                 'text' => $item->pagetitle.' ('.$item->id.')',

@@ -197,6 +197,7 @@ $_lang['list'] = 'List';
 $_lang['load_headers'] = 'Load Headers';
 $_lang['loading'] = 'Loading...';
 $_lang['locked'] = 'Locked';
+$_lang['locked_by'] = 'locked by [[+username]]';
 $_lang['lock_msg'] = '[[+name]] is currently editing this [[+object]]. Please wait until the other user has finished and try again.';
 $_lang['logged_in_as'] = 'logged in as [[+username]]';
 $_lang['login'] = 'Login';

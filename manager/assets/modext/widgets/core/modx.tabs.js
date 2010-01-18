@@ -5,6 +5,7 @@ MODx.Tabs = function(config) {
         ,layoutOnTabChange: true
         ,plain: true
         ,deferredRender: true
+        ,hideMode: 'offsets'
 		,defaults: {
 			autoScroll: true
 			,autoHeight: true

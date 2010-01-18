@@ -764,6 +764,8 @@ ul#modx-topnav li ul.modx-subnav li:hover ul  {
 
 .icon-package { background-image:url(../images/restyle/icons/package.png) !important; padding-right: 5px !important; }
 
+.icon-locked .x-tree-node-icon { background-image:url(../images/restyle/icons/lock_edit.png) !important; }
+
 /* ext extensions */
 input.x-static-text-field {
     background: transparent;

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added check for locked status on resources, now shows locked status in tree, as well as who is editing
 - [#MODX-1592] Fixed bug with usergroup create by moving it to a window
 - [#MODX-1590] Fixed missing processors for ACL grids
 - [#MODX-1526] Added permissions resource_tree, element_tree, file_tree that restrict rendering/viewing of the left-side trees. Must be applied to access policies.
