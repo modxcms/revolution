@@ -106,7 +106,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
                 ,record: r
                 ,listeners: {
                     'success': {fn:function(r) {
-                        this.refresh();                       
+                        this.refresh();
                         Ext.getCmp('modx-panel-user-group').fireEvent('fieldChange');
                     },scope:this}
                 }
