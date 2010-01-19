@@ -53,6 +53,27 @@ if (!$package->transferPackage($location,$_package_cache)) {
     return $modx->error->failure($msg);
 }
 
+/* set package version data */
+$sig = explode('-',$signature);
+if (is_array($sig)) {
+    $package->set('package_name',$sig[0]);
+    if (!empty($sig[1])) {
+        $v = explode('.',$sig[1]);
+        if (isset($v[0])) $package->set('version_major',$v[0]);
+        if (isset($v[1])) $package->set('version_minor',$v[1]);
+        if (isset($v[2])) $package->set('version_patch',$v[2]);
+    }
+    if (!empty($sig[2])) {
+        $r = preg_split('/([0-9]+)/',$sig[2],-1,PREG_SPLIT_DELIM_CAPTURE);
+        if (is_array($r) && !empty($r)) {
+            $package->set('release',$r[0]);
+            $package->set('release_index',(isset($r[1]) ? $r[1] : '0'));
+        } else {
+            $package->set('release',$sig[2]);
+        }
+    }
+}
+
 /* now save */
 if ($package->save() == false) {
     $msg = $modx->lexicon('package_download_err_create',array('signature' => $signature));
