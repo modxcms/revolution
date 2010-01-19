@@ -2,6 +2,8 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Updated/fixed xPDOZip implementation and enabled it as the preferred zip provider for xPDOTransport.
+- Made xPDOVehicle an abstract class. 
 - [#XPDO-4] Allow nesting conditions arbitrarily deep using simple nested array format.
 
 xPDO 2.0.0-rc1 (LastChangedRevision: 389, LastChangedDate: 2009-12-31 11:18:40 -0700 (Thu, 31 Dec 2009))

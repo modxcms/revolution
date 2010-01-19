@@ -284,24 +284,37 @@ class xPDOTransport {
     public function _pack(& $xpdo, $filename, $path, $source) {
         $packed = false;
         $packResults = false;
-        /*if (class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
-            $archive = new xPDOZip($xpdo, $filename, array('create' => true));
-            if ($archive) {
-                $packResults = $archive->pack("{$path}{$source}", array('zip_target' => "{$source}/"));
-                $archive->close();
+        $errors = array();
+        if (class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
+            if ($xpdo->getDebug() === true) {
+                $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Using xPDOZip / native ZipArchive", null, __METHOD__, __FILE__, __LINE__);
             }
-        } else*/if (class_exists('PclZip') || include(XPDO_CORE_PATH . 'compression/pclzip.lib.php')) {
+            $archive = new xPDOZip($xpdo, $filename, array(xPDOZip::CREATE => true, xPDOZip::OVERWRITE => true));
+            if ($archive) {
+                $packResults = $archive->pack("{$path}{$source}", array(xPDOZip::ZIP_TARGET => "{$source}/"));
+                $archive->close();
+                if (!$archive->hasError() && !empty($packResults)) {
+                    $packed = true;
+                } else {
+                    $errors = $archive->getErrors();
+                }
+            }
+        } elseif (class_exists('PclZip') || include(XPDO_CORE_PATH . 'compression/pclzip.lib.php')) {
             $archive = new PclZip($filename);
             if ($archive) {
                 $packResults = $archive->create("{$path}{$source}", PCLZIP_OPT_REMOVE_PATH, "{$path}");
+                if ($packResults) {
+                    $packed = true;
+                } else {
+                    $errors = $archive->errorInfo($xpdo->getDebug() === true);
+                }
             }
         }
-        if (!$packResults) {
-            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error packing {$path}{$source} to {$filename}" . $archive->errorInfo(true));
+        if (!$packed) {
+            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error packing {$path}{$source} to {$filename}: " . print_r($errors, true));
         }
-        else {
-            $packed = true;
-            if ($xpdo->getDebug() === true) $xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($packResults, 1));
+        if ($xpdo->getDebug() === true) {
+            $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Results of packing {$path}{$source} to {$filename}: " . print_r($packResults, true), null, __METHOD__, __FILE__, __LINE__);
         }
         return $packed;
     }
@@ -499,13 +512,13 @@ class xPDOTransport {
 
     protected function _unpack(& $xpdo, $from, $to) {
         $resources = false;
-        /*if (!XPDO_PHP4_MODE && class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
+        if (class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
             $archive = new xPDOZip($xpdo, $from);
             if ($archive) {
                 $resources = $archive->unpack($to);
                 $archive->close();
             }
-        } else*/if (class_exists('PclZip') || include(XPDO_CORE_PATH . 'compression/pclzip.lib.php')) {
+        } elseif (class_exists('PclZip') || include(XPDO_CORE_PATH . 'compression/pclzip.lib.php')) {
             $archive = new PclZip($from);
             if ($archive) {
                 $resources = $archive->extract(PCLZIP_OPT_PATH, $to);

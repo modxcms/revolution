@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2006, 2007, 2008, 2009 by  Jason Coward <xpdo@opengeek.com>
+ * Copyright 2006, 2007, 2008, 2009, 2010 by  Jason Coward <xpdo@opengeek.com>
  *
  * This file is part of xPDO.
  *
@@ -18,7 +18,7 @@
  * Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * Defines a class that represents an artifact within a transportable package.
+ * Abstract class that represents an artifact within a transportable package.
  *
  * @package xpdo
  * @subpackage transport
@@ -27,13 +27,15 @@
 /**
  * Represents an individual artifact within an {@link xPDOTransport} package.
  *
- * Extend this class to provide custom xPDOVehicle behavior for various kinds
- * of artifacts (e.g. objects, xPDOObjects, files, database schemas, etc.).
+ * Extend this abstract class to provide custom xPDOVehicle behavior for various kinds of artifacts
+ * (e.g. objects, xPDOObjects, files, database schemas, etc.).
  *
  * @package xpdo
  * @subpackage transport
+ *
+ * @abstract
  */
-class xPDOVehicle {
+abstract class xPDOVehicle {
     /**
      * Represents the artifact and related attributes stored in the vehicle.
      * @var array
@@ -101,10 +103,7 @@ class xPDOVehicle {
      * @return boolean True if the installation of the vehicle artifact was
      * successful.
      */
-    public function install(& $transport, $options) {
-        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'You must extend xPDOVehicle and implement the install() method to install a vehicle.');
-        return false;
-    }
+    abstract public function install(& $transport, $options);
 
     /**
      * Uninstalls the vehicle artifact from a transport host.
@@ -115,10 +114,7 @@ class xPDOVehicle {
      * @param array $options An array of options for altering the uninstallation
      * of the artifact.
      */
-    public function uninstall(& $transport, $options) {
-        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'You must extend xPDOVehicle and implement the uninstall() method to uninstall a vehicle.');
-        return false;
-    }
+    abstract public function uninstall(& $transport, $options);
 
     /**
      * Resolve any dependencies of the artifact represented in this vehicle.

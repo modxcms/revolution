@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2006, 2007, 2008, 2009 by Jason Coward <xpdo@opengeek.com>
+ * Copyright 2006, 2007, 2008, 2009, 2010 by Jason Coward <xpdo@opengeek.com>
  *
  * This file is part of xPDO.
  *
@@ -34,42 +34,71 @@
  * @subpackage compression
  */
 class xPDOZip {
+    const CREATE = 'create';
+    const OVERWRITE = 'overwrite';
+    const ZIP_TARGET = 'zip_target';
+
     public $xpdo = null;
     protected $_filename = '';
     protected $_options = array();
     protected $_archive = null;
     protected $_errors = array();
 
-    public function __construct(& $xpdo, $filename, $options = array()) {
+    /**
+     * Construct an instance representing a specific archive.
+     *
+     * @param xPDO &$xpdo A reference to an xPDO instance.
+     * @param string $filename The name of the archive the instance will represent.
+     * @param array $options An array of options for this instance.
+     */
+    public function __construct(xPDO &$xpdo, $filename, array $options = array()) {
         $this->xpdo =& $xpdo;
         $this->_filename = is_string($filename) ? $filename : '';
         $this->_options = is_array($options) ? $options : array();
         $this->_archive = new ZipArchive();
         if (!empty($this->_filename) && file_exists(dirname($this->_filename))) {
-            if (is_writable(dirname($this->_filename))) {
-                if ($this->getOption('create', null, false)) {
-                    if ($this->_archive->open($this->_filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE) !== true) {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Could not create archive at {$this->_filename}");
+            if (file_exists($this->_filename)) {
+                if ($this->getOption(xPDOZip::OVERWRITE, null, false) && is_writable($this->_filename)) {
+                    if ($this->_archive->open($this->_filename, ZIPARCHIVE::OVERWRITE) !== true) {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Error opening archive at {$this->_filename} for OVERWRITE");
                     }
                 } else {
                     if ($this->_archive->open($this->_filename) !== true) {
-                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Could not open archive at {$this->_filename}");
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Error opening archive at {$this->_filename}");
                     }
                 }
+            } elseif ($this->getOption(xPDOZip::CREATE, null, false) && is_writable(dirname($this->_filename))) {
+                if ($this->_archive->open($this->_filename, ZIPARCHIVE::CREATE) !== true) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: Could not create archive at {$this->_filename}");
+                }
+            } else {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: The location specified is not writable: {$this->_filename}");
             }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOZip: The location specified does not exist: {$this->_filename}");
         }
     }
 
-    public function pack($source, $options = array()) {
+    /**
+     * Pack the contents from the source into the archive.
+     *
+     * @todo Implement custom file filtering options
+     *
+     * @param string $source The path to the source file(s) to pack.
+     * @param array $options An array of options for the operation.
+     * @return array An array of results for the operation.
+     */
+    public function pack($source, array $options = array()) {
         $results = array();
         if ($this->_archive) {
-            $target = $this->getOption('zip_target', $options, '');
+            $target = $this->getOption(xPDOZip::ZIP_TARGET, $options, '');
             if (is_dir($source)) {
                 if ($dh = opendir($source)) {
+                    if ($source[strlen($source) - 1] !== '/') $source .= '/';
                     while (($file = readdir($dh)) !== false) {
                         if (is_dir($source . $file)) {
                             if (($file !== '.') && ($file !== '..')) {
-                                $this->create($source . $file . '/', array_merge($options, array('zip_target' => $target . $file . '/')));
+                                $results = $results + $this->pack($source . $file . '/', array_merge($options, array(xPDOZip::ZIP_TARGET => $target . $file . '/')));
                             }
                         } elseif (is_file($source . $file)) {
                             if ($this->_archive->addFile($source . $file, $target . $file)) {
@@ -78,6 +107,9 @@ class xPDOZip {
                                 $results[$target . $file] = "Error packing {$target}{$file} from {$source}{$file}";
                                 $this->_errors[] = $results[$target . $file];
                             }
+                        } else {
+                            $results[$target . $file] = "Error packing {$target}{$file} from {$source}{$file}";
+                            $this->_errors[] = $results[$target . $file];
                         }
                     }
                 }
@@ -89,11 +121,20 @@ class xPDOZip {
                     $results[$target . $file] = "Error packing {$target}{$file} from {$source}";
                     $this->_errors[] = $results[$target . $file];
                 }
+            } else {
+                $this->_errors[]= "Invalid source specified: {$source}";
             }
         }
         return $results;
     }
 
+    /**
+     * Unpack the compressed contents from the archive to the target.
+     *
+     * @param string $target The path of the target location to unpack the files.
+     * @param array $options An array of options for the operation.
+     * @return array An array of results for the operation.
+     */
     public function unpack($target, $options = array()) {
         $results = false;
         if ($this->_archive) {
@@ -104,12 +145,24 @@ class xPDOZip {
         return $results;
     }
 
+    /**
+     * Close the archive.
+     */
     public function close() {
         if ($this->_archive) {
             $this->_archive->close();
         }
     }
 
+    /**
+     * Get an option from supplied options, the xPDOZip instance options, or xpdo itself.
+     *
+     * @param string $key Unique identifier for the option.
+     * @param array $options A set of explicit options to override those from xPDO or the
+     * xPDOZip instance.
+     * @param mixed $default An optional default value to return if no value is found.
+     * @return mixed The value of the option.
+     */
     public function getOption($key, $options = null, $default = null) {
         $option = $default;
         if (is_array($key)) {
@@ -132,7 +185,19 @@ class xPDOZip {
         return $option;
     }
 
+    /**
+     * Detect if errors occurred during any operations.
+     *
+     * @return boolean True if errors exist, otherwise false.
+     */
     public function hasError() {
         return !empty($this->_errors);
+    }
+
+    /**
+     * Return any errors from operations on the archive.
+     */
+    public function getErrors() {
+        return $this->_errors;
     }
 }
