@@ -254,7 +254,7 @@ class xPDOQuery_mysql extends xPDOQuery {
                             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing condition with key {$key}: " . print_r($val, true));
                             continue;
                         }
-                    } elseif (is_scalar($val)) {
+                    } elseif (is_scalar($val) || $val === null) {
                         $alias= $command == 'SELECT' ? $this->_class : trim($this->xpdo->getTableName($this->_class, false), $this->xpdo->_escapeChar);
                         $operator= '=';
                         $conj = $conjunction;
@@ -273,10 +273,11 @@ class xPDOQuery_mysql extends xPDOQuery {
                             $alias= trim($key_parts[0], " {$this->xpdo->_escapeChar}");
                             $key= $key_parts[1];
                         }
-                        $field= array ();
-                        $field['sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$key}{$this->xpdo->_escapeChar} " . $operator . ' ?';
                         if ($val === null || strtolower($val) == 'null') {
                             $type= PDO::PARAM_NULL;
+                            if (!in_array($operator, array('IS', 'IS NOT'))) {
+                                $operator= $operator === '!=' ? 'IS NOT' : 'IS';
+                            }
                         }
                         elseif (isset($fieldMeta[$key]) && !in_array($fieldMeta[$key]['phptype'], $this->_quotable)) {
                             $type= PDO::PARAM_INT;
@@ -284,6 +285,8 @@ class xPDOQuery_mysql extends xPDOQuery {
                         else {
                             $type= PDO::PARAM_STR;
                         }
+                        $field= array ();
+                        $field['sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$key}{$this->xpdo->_escapeChar} " . $operator . ' ?';
                         $field['binding']= array (
                             'value' => $val,
                             'type' => $type,

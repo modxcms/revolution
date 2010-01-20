@@ -1893,10 +1893,14 @@ class xPDO {
                     }
                     $pattern= '/' . $k . '\b/';
                     array_push($tempf, $pattern);
-                    $v= $this->quote($v, $type);
+                    if ($type > 0) {
+                        $v= $this->quote($v, $type);
+                    } else {
+                        $v= 'NULL';
+                    }
                     array_push($tempr, $v);
                 } else {
-                    $parse= create_function('$d,$v,$t', 'return $d->quote($v, $t);');
+                    $parse= create_function('$d,$v,$t', 'return $t > 0 ? $d->quote($v, $t) : \'NULL\';');
                     $sql= preg_replace("/(\?)/e", '$parse($this,$bindings[$k][\'value\'],$type);', $sql, 1);
                 }
             }
