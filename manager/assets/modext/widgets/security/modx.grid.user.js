@@ -89,14 +89,14 @@ MODx.grid.User = function(config) {
             ,scope: this
         },'-',{
             xtype: 'textfield'
-            ,name: 'username_filter'
-            ,id: 'modx-filter-username'
-            ,emptyText: _('filter_by_username')
+            ,name: 'query'
+            ,id: 'modx-users-search'
+            ,emptyText: _('search')
             ,listeners: {
-                'change': {fn:this.filterByName,scope:this}
+                'change': {fn:this.search,scope:this}
                 ,'render': {fn:function(tf) {
                     tf.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
-                        this.filterByName(tf,tf.getValue());
+                        this.search(tf);
                     },this);
                 },scope:this}
             }
@@ -139,12 +139,13 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
 		}
 	}
     
-    ,filterByName: function(tf,newValue,oldValue) {
+    ,search: function(tf,nv,ov) {
         this.getStore().baseParams = {
             action: 'getList'
-            ,username: newValue
+            ,query: tf.getValue()
         };
-        this.getBottomToolbar().changePage(1);        
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
     }
 });
 Ext.reg('modx-grid-user',MODx.grid.User);
