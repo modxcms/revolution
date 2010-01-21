@@ -521,8 +521,11 @@ unset ($entries, $languages, $topics, $c, $t, $l);
 
 /* zip up package */
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Beginning to zip up transport package...'); flush();
-$package->pack();
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Transport zip created. Build script finished.'); flush();
+if ($package->pack()) {
+    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Transport zip created. Build script finished.'); flush();
+} else {
+    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Error creating transport zip!'); flush();
+}
 
 $mtime = microtime();
 $mtime = explode(" ", $mtime);

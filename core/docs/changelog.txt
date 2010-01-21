@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Updated to xPDO 2.0 revision 396
 - Fixed bug where package version info wasnt being computed on download/scanlocal
 - Added check for locked status on resources, now shows locked status in tree, as well as who is editing
 - [#MODX-1592] Fixed bug with usergroup create by moving it to a window
