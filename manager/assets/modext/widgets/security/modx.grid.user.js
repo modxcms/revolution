@@ -1,11 +1,3 @@
-/**
- * Loads the panel for managing users.
- * 
- * @class MODx.panel.Users
- * @extends MODx.FormPanel
- * @param {Object} config An object of configuration properties
- * @xtype modx-panel-users
- */
 MODx.panel.Users = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -34,14 +26,6 @@ MODx.panel.Users = function(config) {
 Ext.extend(MODx.panel.Users,MODx.FormPanel);
 Ext.reg('modx-panel-users',MODx.panel.Users);
 
-/**
- * Loads a grid of MODx users.
- * 
- * @class MODx.grid.User
- * @extends MODx.grid.Grid
- * @param {Object} config An object of config properties
- * @xtype modx-grid-user
- */
 MODx.grid.User = function(config) {
     config = config || {};
 	Ext.applyIf(config,{
@@ -50,11 +34,12 @@ MODx.grid.User = function(config) {
             ,'gender','blocked','role','active','menu']
         ,paging: true
 		,autosave: true
+        ,remoteSort: true
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
             ,width: 50
-            ,sortable: false
+            ,sortable: true
         },{
             header: _('name')
             ,dataIndex: 'username'

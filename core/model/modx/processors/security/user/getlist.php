@@ -24,6 +24,7 @@ $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
 $sort = $modx->getOption('sort',$_REQUEST,'username');
 if ($sort == 'username_link') $sort = 'username';
+if ($sort == 'id') $sort = 'modUser.id';
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
 /* query for users */

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Enable remote sorting and sorting by ID on Users grid
 - Fixed and enhanced search field on Users grid
 - Fixed bug with duplicating a context where only the first level would duplicate
 - Updated to xPDO 2.0 revision 396
