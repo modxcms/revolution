@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug with duplicating a context where only the first level would duplicate
 - Updated to xPDO 2.0 revision 396
 - Fixed bug where package version info wasnt being computed on download/scanlocal
 - Added check for locked status on resources, now shows locked status in tree, as well as who is editing

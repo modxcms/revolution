@@ -35,7 +35,7 @@ if ($newContext->save() == false) {
 /* now duplicate resources by level */
 duplicateLevel($modx,$oldContext->get('key'),$newContext->get('key'));
 
-function duplicateLevel(modX &$modx,$oldKey,$newKey,$parent = 0) {
+function duplicateLevel(modX &$modx,$oldKey,$newKey,$parent = 0,$newParent = 0) {
     $resources = $modx->getCollection('modResource',array(
         'context_key' => $oldKey,
         'parent' => $parent,
@@ -47,11 +47,11 @@ function duplicateLevel(modX &$modx,$oldKey,$newKey,$parent = 0) {
 
         $newResource = $modx->newObject('modResource');
         $newResource->fromArray($oldResourceArray);
-        $newResource->set('parent',$parent);
+        $newResource->set('parent',$newParent);
         $newResource->set('context_key',$newKey);
         $newResource->save();
 
-        duplicateLevel($modx,$oldKey,$newKey,$oldResourceArray['id']);
+        duplicateLevel($modx,$oldKey,$newKey,$oldResourceArray['id'],$newResource->get('id'));
     }
 }
 
