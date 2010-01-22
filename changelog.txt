@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added xPDOTransportVehicle class to allow transport packages to be embedded in other transport packages.
 - Updated copyright dates.
 - [#XPDO-42] Fixed error with xPDOQuery::parseConditions() ignoring NULL bound values.
 - Fixed xPDOCriteria::toSQL() to properly handle NULL values.
