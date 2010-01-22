@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2006, 2007, 2008, 2009, 2010 by  Jason Coward <xpdo@opengeek.com>
+ * Copyright 2006-2010 by  Jason Coward <xpdo@opengeek.com>
  *
  * This file is part of xPDO.
  *

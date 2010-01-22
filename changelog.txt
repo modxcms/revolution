@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Updated copyright dates.
 - [#XPDO-42] Fixed error with xPDOQuery::parseConditions() ignoring NULL bound values.
 - Fixed xPDOCriteria::toSQL() to properly handle NULL values.
 - Updated/fixed xPDOZip implementation and enabled it as the preferred zip provider for xPDOTransport.

@@ -5,7 +5,7 @@
  * native PDO if available or provides a subset implementation for use with PHP
  * 4 on platforms that do not include the native PDO extensions.
  *
- * Copyright 2006, 2007, 2008, 2009 by  Jason Coward <xpdo@opengeek.com>
+ * Copyright 2006-2010 by  Jason Coward <xpdo@opengeek.com>
  *
  * This file is part of xPDO.
  *
@@ -27,7 +27,7 @@
  * This is the main file to include in your scripts to use xPDO.
  *
  * @author Jason Coward <xpdo@opengeek.com>
- * @copyright Copyright (C) 2006-2009, Jason Coward
+ * @copyright Copyright (C) 2006-2010, Jason Coward
  * @license http://opensource.org/licenses/gpl-2.0.php GNU Public License v2
  * @package xpdo
  */
