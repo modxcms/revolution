@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug in template viewer for package browser that wasnt paginating right
 - Added modRestServer for generic REST request handling
 - Enable remote sorting and sorting by ID on Users grid
 - Fixed and enhanced search field on Users grid

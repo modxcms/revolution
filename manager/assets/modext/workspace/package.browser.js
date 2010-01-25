@@ -11,8 +11,9 @@ MODx.panel.PackageBrowser = function(config) {
         ,style:'overflow:auto'
     });
     this.view.pagingBar = new Ext.PagingToolbar({
-        pageSize: 20
+        pageSize: 10
         ,store: this.view.store
+        ,displayInfo: true
         ,autoLoad: true
     });
     
@@ -543,15 +544,15 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
         var v = {};
         Ext.applyIf(v,this.store.baseParams);
         Ext.applyIf(v,p);
+        this.pagingBar.changePage(1);
         this.store.load({
             params: v
         });
-        this.pagingBar.changePage(0);
     }
         
     ,sortBy: function(sel) {
         var v = sel.getValue();
-        this.store.baseParams.sort = v;
+        this.store.baseParams.sorter = v;
         this.run();
         return true;
     }
