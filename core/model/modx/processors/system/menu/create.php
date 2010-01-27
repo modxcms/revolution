@@ -33,7 +33,7 @@ if (!empty($_POST['parent'])) {
 }
 
 /* get new menuindex */
-$count = $modx->getCount('modMenu',array('parent' => $parent->get('text')));
+$count = $modx->getCount('modMenu',array('parent' => $_POST['parent']));
 
 /* create menu */
 $menu = $modx->newObject('modMenu');

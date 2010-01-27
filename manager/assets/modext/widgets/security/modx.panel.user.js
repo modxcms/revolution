@@ -369,7 +369,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,hideMode: 'offsets'
             ,items: [{
                 html: _('access_permissions_user_message')
-            },MODx.PanelSpacer,{            
+            },MODx.PanelSpacer,{
                 xtype: 'modx-grid-user-groups'
                 ,title: ''
                 ,preventRender: true
