@@ -7,7 +7,7 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('access','user');
 
 /* validate for empty fields */
-if (empty($_POST['principal'])) $modx->error->addField('principal',$modx->lexicon('usergroup_err_ns'));
+if (!isset($_POST['principal'])) $modx->error->addField('principal',$modx->lexicon('usergroup_err_ns'));
 if (empty($_POST['target'])) $modx->error->addField('target',$modx->lexicon('resource_group_err_ns'));
 if (empty($_POST['policy'])) $modx->error->addField('policy',$modx->lexicon('access_policy_err_ns'));
 if (!isset($_POST['authority'])) $modx->error->addField('authority',$modx->lexicon('authority_err_ns'));
@@ -15,9 +15,6 @@ if (!isset($_POST['authority'])) $modx->error->addField('authority',$modx->lexic
 if ($modx->error->hasError()) return $modx->error->failure();
 
 /* validate for invalid data */
-$usergroup = $modx->getObject('modUserGroup',$_POST['principal']);
-if (empty($usergroup)) $modx->error->addField('principal',$modx->lexicon('user_group_err_nf'));
-
 $resourceGroup = $modx->getObject('modResourceGroup',$_POST['target']);
 if (empty($resourceGroup)) $modx->error->addField('target',$modx->lexicon('resource_group_err_nf'));
 

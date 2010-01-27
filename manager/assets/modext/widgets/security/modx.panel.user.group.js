@@ -70,7 +70,7 @@ MODx.panel.UserGroup = function(config) {
                 }]
             },{
                 title: _('users')
-                ,hidden: config.usergroup === 0 ? true : false
+                ,hidden: config.usergroup == 0 ? true : false
                 ,hideMode: 'offsets'
                 ,items: [{
                     html: '<p>'+_('user_group_user_access_msg')+'</p>'
