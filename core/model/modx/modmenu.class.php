@@ -90,11 +90,7 @@ class modMenu extends modAccessibleObject {
             }
 
             $desc = $menu->get('description');
-            if ($desc != '' && $desc != null) {
-                $ma['description'] = $this->xpdo->lexicon($desc);
-            } else {
-                $ma['description'] = '';
-            }
+            $ma['description'] = !empty($desc) ? $this->xpdo->lexicon($desc) : '';
             $ma['children'] = $menu->get('text') != '' ? $this->getSubMenus($menu->get('text')) : array();
 
             if ($menu->get('controller')) {

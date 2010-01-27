@@ -27,6 +27,12 @@ if ($menus == null) {
 $output = '';
 $order = 0;
 foreach ($menus as $menu) {
+    if (!empty($menu['permissions'])) {
+        $permissions = array();
+        $exploded = explode(',', $menu['permissions']);
+        foreach ($exploded as $permission) $permissions[trim($permission)]= true;
+        if (!empty($permissions) && !$modx->hasPermission($permissions)) continue;
+    }
     $output .= '<li id="limenu-'.$menu['text'].'" class="top'.'">'."\n";
     $output .= '<a>'.$menu['text'].'</a>'."\n";
 
