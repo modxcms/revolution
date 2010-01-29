@@ -1293,7 +1293,7 @@ class modX extends xPDO {
     public function executeProcessor($options) {
         $result = null;
         if (is_array($options) && !empty($options) && isset($options['action']) && $this->getRequest()) {
-            $processor = isset($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
+            $processor = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
             if (isset($options['location']) && !empty($options['location'])) $processor .= $options['location'] . '/';
             $processor .= str_replace('../', '', $options['action']) . '.php';
             if (file_exists($processor)) {
@@ -1301,6 +1301,8 @@ class modX extends xPDO {
                 if (!isset($this->error)) $this->request->loadErrorHandler();
                 $modx =& $this;
                 $result = include $processor;
+            } else {
+                $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processor} does not exist; " . print_r($options, true));
             }
         }
         return $result;

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added additional check and error logging for processor_path option in modX::executeProcessor().
 - Added missing view_sysinfo permission to default Administrator policy
 - [#MODX-1595] Fixed bug regarding hiding top menu items with permissions
 - [#MODX-1596] Fixed bug related to creating a new top menu item
