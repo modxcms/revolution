@@ -227,7 +227,7 @@ class xPDO {
      * @param mixed $driverOptions Driver-specific PDO options.
      * @return xPDO A unique xPDO instance.
      */
-    public function xPDO($dsn, $username= '', $password= '', $options= array(), $driverOptions= null) {
+    public function __construct($dsn, $username= '', $password= '', $options= array(), $driverOptions= null) {
         if (is_string($options)) $options= array(xPDO::OPT_TABLE_PREFIX => $options);
         if (!is_array($options)) $options= array(xPDO::OPT_TABLE_PREFIX => '');
         if (!isset($options[xPDO::OPT_TABLE_PREFIX])) $options[xPDO::OPT_TABLE_PREFIX]= '';
@@ -1934,7 +1934,7 @@ class xPDOCriteria {
     public $bindings= array ();
     public $cacheFlag= false;
 
-    /**#@+
+    /**
      * The constructor for a new xPDOCriteria instance.
      *
      * The constructor optionally prepares provided SQL and/or parameter
@@ -1953,7 +1953,7 @@ class xPDOCriteria {
      * criteria is to be cached (true|false) or optionally a TTL in seconds.
      * @return xPDOCriteria
      */
-    public function xPDOCriteria(& $xpdo, $sql= '', $bindings= array (), $cacheFlag= false) {
+    public function __construct(& $xpdo, $sql= '', $bindings= array (), $cacheFlag= false) {
         $this->xpdo= & $xpdo;
         $this->cacheFlag= $cacheFlag;
         if (is_string($sql) && !empty ($sql)) {
@@ -1966,7 +1966,6 @@ class xPDOCriteria {
             }
         }
     }
-    /**#@-*/
 
     /**
      * Binds an array of key/value pairs to the xPDOCriteria prepared statement.

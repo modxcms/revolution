@@ -571,7 +571,7 @@ class xPDOObject {
      * the parent method explicitly before any additional logic is executed, e.g.
      *
      * <code>
-     * protected function __construct(& $xpdo) {
+     * public function __construct(xPDO & $xpdo) {
      *     parent  :: __construct($xpdo);
      *     // Any additional constructor tasks here
      * }
