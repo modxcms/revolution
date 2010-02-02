@@ -20,7 +20,7 @@ class modActionDom extends modAccessibleSimpleObject {
         $constraintClass = $this->get('constraint_class');
         if (!empty($constraintClass) && !empty($constraint) && !empty($constraintField)) {
             $obj = $this->xpdo->getObject($constraintClass,$_REQUEST['id']);
-            if ($obj->get($constraintField) != $constraint) {
+            if ($obj instanceof $constraintClass && $obj->get($constraintField) != $constraint) {
                 return $rule;
             }
         }
