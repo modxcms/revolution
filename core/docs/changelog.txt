@@ -4,6 +4,11 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1617] Fixed bug with tvDefaultValue Form Customization Rule
+- [#MODX-1619] Added sanity check for modActionDom constraint check
+- [#MODX-1620] Fixed missing or incorrect lexicon entries across ui
+- [#MODX-1612] Fixed bug where Create Menu button was not working
+- [#MODX-1616] Renamed "field" to "name" in Form Customization rule windows
 - Removed any non-essential JS from the top menu items
 - Added additional check and error logging for processor_path option in modX::executeProcessor().
 - Added missing view_sysinfo permission to default Administrator policy

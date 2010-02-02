@@ -65,9 +65,10 @@ class modActionDom extends modAccessibleSimpleObject {
                 break;
             case 'tvDefault':
             case 'tvDefaultValue':
-                if (!$this->get('value')) {
+                if ($this->get('value')) {
                     $rule = 'Ext.getCmp("modx-panel-resource-tv").on("load",function() {
-    Ext.get("'.$this->get('name').'").set("value","'.$this->get('value').'");
+    var f = Ext.get("'.$this->get('name').'");
+    if (f) f.dom.value = "'.$this->get('value').'";
 });';
                 }
                 break;
