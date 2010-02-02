@@ -66,6 +66,7 @@ class xPDOFileVehicle extends xPDOVehicle {
             $fileName = $object['name'];
             $fileSource = $transport->path . $object['source'];
             $fileTarget = eval ($object['target']);
+            $fileTargetPath = $fileTarget . $fileName;
             $preExistingMode = xPDOTransport::PRESERVE_PREEXISTING;
             if (isset ($vOptions[xPDOTransport::PREEXISTING_MODE])) {
                 $preExistingMode = (integer) $vOptions[xPDOTransport::PREEXISTING_MODE];
@@ -74,14 +75,14 @@ class xPDOFileVehicle extends xPDOVehicle {
             if ($this->validate($transport, $object, $vOptions)) {
                 if ($cacheManager && file_exists($fileSource) && !empty ($fileTarget)) {
                     if (isset ($vOptions[xPDOTransport::INSTALL_FILES]) && !$vOptions[xPDOTransport::INSTALL_FILES]) {
-                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Skipping installion of files from {$fileSource} to {$fileTarget}");
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Skipping installion of files from {$fileSource} to {$fileTargetPath}");
                         $installed = true;
                     } else {
-                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Installing files from {$fileSource} to {$fileTarget}");
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Installing files from {$fileSource} to {$fileTargetPath}");
                         $copied = array();
-                        if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && file_exists($fileTarget) && is_dir($fileTarget)) {
+                        if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && file_exists($fileTargetPath)) {
                             $preservedArchive = $transport->path . $transport->signature . '/' . $this->payload['class'] . '/' . $this->payload['signature'] . '.preserved.zip';
-                            $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Attempting to preserve files at {$fileTarget} into archive {$preservedArchive}");
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Attempting to preserve files at {$fileTargetPath} into archive {$preservedArchive}");
                             $preserved = xPDOTransport::_pack($transport->xpdo, $preservedArchive, $fileTarget, $fileName);
                         }
                         if (is_dir($fileSource)) {
@@ -90,7 +91,7 @@ class xPDOFileVehicle extends xPDOVehicle {
                             $copied = $cacheManager->copyFile($fileSource, $fileTarget, array_merge($vOptions, array('copy_return_file_stat' => true)));
                         }
                         if (empty($copied)) {
-                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install files from {$fileSource} to {$fileTarget}");
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install files from {$fileSource} to {$fileTargetPath}");
                         } else {
                             if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && is_array($copied)) {
                                 foreach ($copied as $copiedFile => $stat) {

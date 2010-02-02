@@ -149,6 +149,7 @@ abstract class xPDOVehicle {
                         $fileName = $fileMeta['name'];
                         $fileSource = $transport->path . $fileMeta['source'];
                         $fileTarget = eval ($fileMeta['target']);
+                        $fileTargetPath = $fileTarget . $fileName;
                         $preservedArchive = $transport->path . $transport->signature . '/' . $this->payload['class'] . '/' . $this->payload['signature'] . '.' . $rKey . '.preserved.zip';
                         $cacheManager = $transport->xpdo->getCacheManager();
                         switch ($options[xPDOTransport::PACKAGE_ACTION]) {
@@ -156,8 +157,8 @@ abstract class xPDOVehicle {
                             case xPDOTransport::ACTION_INSTALL: // if package is installing
                                 if ($cacheManager && file_exists($fileSource) && !empty ($fileTarget)) {
                                     $copied = array();
-                                    if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && file_exists($fileTarget) && is_dir($fileTarget)) {
-                                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Attempting to preserve files at {$fileTarget} into archive {$preservedArchive}");
+                                    if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && file_exists($fileTargetPath)) {
+                                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Attempting to preserve files at {$fileTargetPath} into archive {$preservedArchive}");
                                         $preserved = xPDOTransport::_pack($transport->xpdo, $preservedArchive, $fileTarget, $fileName);
                                     }
                                     if (is_dir($fileSource)) {
@@ -166,7 +167,7 @@ abstract class xPDOVehicle {
                                         $copied = $cacheManager->copyFile($fileSource, $fileTarget, array_merge($options, array('copy_return_file_stat' => true)));
                                     }
                                     if (empty($copied)) {
-                                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not copy {$fileSource} to {$fileTarget}");
+                                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not copy {$fileSource} to {$fileTargetPath}");
                                     } else {
                                         if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && is_array($copied)) {
                                             foreach ($copied as $copiedFile => $stat) {
@@ -176,7 +177,7 @@ abstract class xPDOVehicle {
                                         $resolved = true;
                                     }
                                 } else {
-                                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not copy {$fileSource} to {$fileTarget}");
+                                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not copy {$fileSource} to {$fileTargetPath}");
                                 }
                                 break;
                             case xPDOTransport::ACTION_UNINSTALL: /* if package is uninstalling

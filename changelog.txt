@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed xPDOVehicle::resolve() and xPDOFileVehicle::install() to prevent them from attempting to preserve files that do not exist.
 - Added xPDOTransport::INSTALL_FILES and xPDOTransport::UNINSTALL_FILES to make xPDOFileVehicle behavior consistent with RESOLVE_FILES and RESOLVE_FILES_REMOVE.
 - Updated xPDOVehicle::resolve() to properly detect if resolved when restoring preserved file archives.
 - Updated xPDO and xPDOCriteria constructors to use proper PHP5 __construct().
