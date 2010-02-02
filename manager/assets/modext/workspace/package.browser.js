@@ -448,10 +448,17 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
         this.detailsTpl.compile();
     }
     
-    ,btnclick: function(g,rec,a,ri) {
+    ,btnclick: function(g,rec,a,ri,ci) {
         switch (a) {
             case 'package-details': this.details(g,rec,a,ri); break;
-            case 'package-download': this.download(g,rec,a,ri); break;
+            case 'package-download':
+                if (!rec.downloading || rec.downloading == undefined) {
+                    var btns = Ext.query('.package-download');
+                    Ext.each(btns,function(btn) { btn.style.opacity = '0.5'; });
+                    rec.downloading = true;
+                    this.download(g,rec,a,ri);
+                }
+            break;
         }
     }
     ,details: function(g,rec,a,ri) {
@@ -476,6 +483,9 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
                 'success': {fn:function(r) {
                     Ext.getCmp('modx-grid-package').refresh();
                     this.refresh();
+                    rec.downloading = false;
+                    var btns = Ext.query('.package-download');
+                    Ext.each(btns,function(btn) { btn.style.opacity = '1.0'; });
                 },scope:this}
             }
         });
