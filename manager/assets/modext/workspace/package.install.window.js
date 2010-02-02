@@ -9,7 +9,7 @@
 MODx.window.PackageInstaller = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: 'Package Installer'
+        title: _('package_installer')
         ,id: 'modx-window-package-installer'
         ,firstPanel: 'modx-pi-license'
         ,lastPanel: 'modx-pi-install'

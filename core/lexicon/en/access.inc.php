@@ -63,6 +63,7 @@ $_lang['filter_by_policy'] = 'Filter by Policy...';
 $_lang['filter_by_resource_group'] = 'Filter by Resource Group...';
 $_lang['resource_group'] = 'Resource Group';
 $_lang['resource_group_add'] = 'Add Resource Group';
+$_lang['resource_group_access_remove'] = 'Remove Resource from Group';
 $_lang['resource_group_access_remove_confirm'] = 'Are you sure you want to remove this resource from the resource group?';
 $_lang['resource_group_create'] = 'Create Resource Group';
 $_lang['resource_group_err_ae'] = 'A resource group with that name already exists.';

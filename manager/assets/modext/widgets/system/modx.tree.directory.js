@@ -67,7 +67,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         
         m.add('-');
         m.add({
-            text: 'Refresh Directory'
+            text: _('directory_refresh')
             ,scope: this
             ,handler: this.refreshActiveNode
         });

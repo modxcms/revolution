@@ -18,7 +18,7 @@ MODx.panel.PackageBrowser = function(config) {
     });
     
     Ext.applyIf(config,{
-        title: 'Package Browser'
+        title: _('package_browser')
         ,id: 'modx-package-browser'
         ,cls: 'browser-win'
         ,layout: 'column'

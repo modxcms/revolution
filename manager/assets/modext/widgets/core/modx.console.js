@@ -25,7 +25,7 @@ MODx.Console = function(config) {
             ,cls: 'x-form-text modx-console-text'
         }]
         ,buttons: [{
-            text: 'Download Output to File'
+            text: _('console_download_output')
             ,handler: this.download
             ,scope: this
         },{

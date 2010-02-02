@@ -22,13 +22,14 @@ $c = $modx->newQuery('modEvent');
 if ($name) $c->where(array('name:LIKE' => '%'.$name.'%'));
 if ($plugin) {
     $c->leftJoin('modPluginEvent','modPluginEvent','
-        modPluginEvent.evtid = modEvent.id
-    AND modPluginEvent.pluginid = '.$plugin.'
+        `modPluginEvent`.`evtid` = `modEvent`.`id`
+    AND `modPluginEvent`.`pluginid` = '.$plugin.'
     ');
-    $c->select('modEvent.*,
-        IF(ISNULL(modPluginEvent.pluginid),0,1) AS enabled,
-        modPluginEvent.priority AS priority,
-        modPluginEvent.propertyset AS propertyset
+    $c->select('
+        `modEvent`.*,
+        IF(ISNULL(`modPluginEvent`.`pluginid`),0,1) AS `enabled`,
+        `modPluginEvent`.`priority` AS `priority`,
+        `modPluginEvent`.`propertyset` AS `propertyset`
     ');
 }
 $count = $modx->getCount('modEvent',$c);
@@ -45,7 +46,7 @@ foreach ($events as $event) {
 
     $eventArray['menu'] = array(
         array(
-            'text' => 'Update Event',
+            'text' => _('plugin_event_update'),
             'handler' => 'this.updateEvent',
         )
     );

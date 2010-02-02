@@ -13,6 +13,7 @@ $_lang['authority'] = 'Authority';
 $_lang['change_password'] = 'Change Password';
 $_lang['change_password_confirm'] = 'Confirm password';
 $_lang['change_password_new'] = 'New password';
+$_lang['city'] = 'City';
 $_lang['login_options'] = 'Login Options';
 $_lang['minimum_role'] = 'Minimum Role';
 $_lang['password'] = 'Password';
