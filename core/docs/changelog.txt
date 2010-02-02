@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1623] Fixed package installation error: attempting to preserve files fails with error message
+- Updated to xPDO 2.0 revision 404
 - Setup upgrades no longer preserve existing data/files on install
 - Fixed issue with setup trying to write connector files regardless if files are already in place
 - Updated to xPDO 2.0 revision 403
