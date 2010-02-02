@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug where plugin properties were not being injected into the plugin event call
 - [#MODX-1617] Fixed bug with tvDefaultValue Form Customization Rule
 - [#MODX-1619] Added sanity check for modActionDom constraint check
 - [#MODX-1620] Fixed missing or incorrect lexicon entries across ui
