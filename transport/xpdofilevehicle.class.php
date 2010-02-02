@@ -73,7 +73,7 @@ class xPDOFileVehicle extends xPDOVehicle {
             $cacheManager = $transport->xpdo->getCacheManager();
             if ($this->validate($transport, $object, $vOptions)) {
                 if ($cacheManager && file_exists($fileSource) && !empty ($fileTarget)) {
-                    if (isset ($vOptions[xPDOFileVehicle::INSTALL_FILES]) && !$vOptions[xPDOFileVehicle::INSTALL_FILES]) {
+                    if (isset ($vOptions[xPDOTransport::INSTALL_FILES]) && !$vOptions[xPDOTransport::INSTALL_FILES]) {
                         $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Skipping installion of files from {$fileSource} to {$fileTarget}");
                         $installed = true;
                     } else {
@@ -137,7 +137,7 @@ class xPDOFileVehicle extends xPDOVehicle {
             $path = $fileTarget . $fileName;
             $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Uninstalling files from xPDOFileVehicle: ' . $path);
             if ($this->validate($transport, $object, $vOptions)) {
-                if (!isset ($vOptions[xPDOFileVehicle::UNINSTALL_FILES]) || $vOptions[xPDOFileVehicle::UNINSTALL_FILES] == true) {
+                if (!isset ($vOptions[xPDOTransport::UNINSTALL_FILES]) || $vOptions[xPDOTransport::UNINSTALL_FILES] == true) {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_INFO,'Removing files from xPDOFileVehicle: '.$path);
                     if ($cacheManager && file_exists($path)) {
                         if (is_dir($path) && $cacheManager->deleteTree($path, array_merge(array('deleteTop' => true, 'skipDirs' => false, 'extensions' => array()), $vOptions))) {
