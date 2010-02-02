@@ -22,6 +22,7 @@ $_lang['field_default'] = 'Field Default Value';
 $_lang['field_label'] = 'Field Label';
 $_lang['field_visible'] = 'Field Visible';
 $_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODx Revolution installation.';
+$_lang['form_rules'] = 'Form Rules';
 $_lang['rule'] = 'Rule';
 $_lang['rule_create'] = 'Create Rule';
 $_lang['rule_desc'] = 'The type of Rule that will be applied to this field.';

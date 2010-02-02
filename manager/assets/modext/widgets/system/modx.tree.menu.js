@@ -33,7 +33,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
 	
 	,createMenu: function(n,e) {
         var r = {};
-        if (this.cm && this.cm.activeNode) {
+        if (this.cm && this.cm.activeNode && this.cm.activeNode.data) {
             r['parent'] = this.cm.activeNode.attributes.data.text;
         }
         if (!this.windows.create_menu) {

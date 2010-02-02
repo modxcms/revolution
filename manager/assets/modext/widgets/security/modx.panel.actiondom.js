@@ -15,7 +15,7 @@ MODx.panel.ActionDom = function(config) {
             ,cls: 'modx-page-header'
             ,id: 'modx-actiondom-header'
         },MODx.getPageStructure([{
-            title: 'Form Rules'
+            title: _('form_rules')
             ,bodyStyle: 'padding: 1.5em;'
             ,autoHeight: true
             ,items: [{

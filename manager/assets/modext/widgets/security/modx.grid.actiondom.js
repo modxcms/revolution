@@ -103,7 +103,7 @@ MODx.window.CreateActionDom = function(config) {
             ,height: 50
             
         },{ html: '<hr />' },{
-            fieldLabel: _('field')
+            fieldLabel: _('name')
             ,description: _('field_desc')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
@@ -204,7 +204,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,height: 50
             
         },{ html: '<hr />' },{
-            fieldLabel: _('field')
+            fieldLabel: _('name')
             ,description: _('field_desc')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
