@@ -51,6 +51,8 @@ class xPDOTransport {
     const MANIFEST_VEHICLES = 'manifest-vehicles';
     const MANIFEST_VERSION = 'manifest-version';
     const PREEXISTING_MODE = 'preexisting_mode';
+    const INSTALL_FILES = 'install_files';
+    const UNINSTALL_FILES = 'uninstall_files';
     /**
      * Indicates how pre-existing objects are treated on install/uninstall.
      * @var integer

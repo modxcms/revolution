@@ -57,7 +57,7 @@ class xPDOFileVehicle extends xPDOVehicle {
      * @param array $options Optional attributes that can be applied to vehicle install process.
      * @return boolean True if the files are installed successfully.
      */
-    protected function _installFiles($transport, $options) {
+    protected function _installFiles(& $transport, $options) {
         $installed = false;
         $copied = false;
         $vOptions = $this->get($transport, $options);
@@ -66,20 +66,37 @@ class xPDOFileVehicle extends xPDOVehicle {
             $fileName = $object['name'];
             $fileSource = $transport->path . $object['source'];
             $fileTarget = eval ($object['target']);
+            $preExistingMode = xPDOTransport::PRESERVE_PREEXISTING;
+            if (isset ($vOptions[xPDOTransport::PREEXISTING_MODE])) {
+                $preExistingMode = (integer) $vOptions[xPDOTransport::PREEXISTING_MODE];
+            }
             $cacheManager = $transport->xpdo->getCacheManager();
             if ($this->validate($transport, $object, $vOptions)) {
                 if ($cacheManager && file_exists($fileSource) && !empty ($fileTarget)) {
-                    if (isset ($vOptions[xPDOTransport::RESOLVE_FILES]) && !$vOptions[xPDOTransport::RESOLVE_FILES]) {
+                    if (isset ($vOptions[xPDOFileVehicle::INSTALL_FILES]) && !$vOptions[xPDOFileVehicle::INSTALL_FILES]) {
                         $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Skipping installion of files from {$fileSource} to {$fileTarget}");
                         $installed = true;
                     } else {
                         $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Installing files from {$fileSource} to {$fileTarget}");
-                        if (is_dir($fileSource) || is_file($fileSource)) {
-                            $copied = $cacheManager->copyTree($fileSource, $fileTarget);
+                        $copied = array();
+                        if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && file_exists($fileTarget) && is_dir($fileTarget)) {
+                            $preservedArchive = $transport->path . $transport->signature . '/' . $this->payload['class'] . '/' . $this->payload['signature'] . '.preserved.zip';
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Attempting to preserve files at {$fileTarget} into archive {$preservedArchive}");
+                            $preserved = xPDOTransport::_pack($transport->xpdo, $preservedArchive, $fileTarget, $fileName);
                         }
-                        if (!$copied) {
+                        if (is_dir($fileSource)) {
+                            $copied = $cacheManager->copyTree($fileSource, $fileTarget, array_merge($vOptions, array('copy_return_file_stat' => true)));
+                        } elseif (is_file($fileSource)) {
+                            $copied = $cacheManager->copyFile($fileSource, $fileTarget, array_merge($vOptions, array('copy_return_file_stat' => true)));
+                        }
+                        if (empty($copied)) {
                             $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install files from {$fileSource} to {$fileTarget}");
                         } else {
+                            if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && is_array($copied)) {
+                                foreach ($copied as $copiedFile => $stat) {
+                                    if (isset($stat['overwritten'])) $transport->_preserved[$vOptions['guid']]['files'][$copiedFile]= $stat;
+                                }
+                            }
                             $installed = true;
                         }
                     }
@@ -104,7 +121,7 @@ class xPDOFileVehicle extends xPDOVehicle {
      * @param array $options Optional attributes that can be applied to vehicle uninstall process.
      * @return boolean True if the files are uninstalled successfully.
      */
-    protected function _uninstallFiles($transport, $options) {
+    protected function _uninstallFiles(& $transport, $options) {
         $uninstalled = false;
         $vOptions = $this->get($transport, $options);
         if (isset ($vOptions['object']) && isset ($vOptions['object']['source']) && isset ($vOptions['object']['target'])) {
@@ -112,23 +129,40 @@ class xPDOFileVehicle extends xPDOVehicle {
             $fileName = $object['name'];
             $fileSource = $transport->path . $object['source'];
             $fileTarget = eval ($object['target']);
+            $preExistingMode = xPDOTransport::PRESERVE_PREEXISTING;
+            if (isset ($vOptions[xPDOTransport::PREEXISTING_MODE])) {
+                $preExistingMode = (integer) $vOptions[xPDOTransport::PREEXISTING_MODE];
+            }
             $cacheManager = $transport->xpdo->getCacheManager();
             $path = $fileTarget . $fileName;
             $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Uninstalling files from xPDOFileVehicle: ' . $path);
             if ($this->validate($transport, $object, $vOptions)) {
-                $uninstalled = true;
-                if ($cacheManager && file_exists($path)) {
-                    if (isset ($vOptions[xPDOTransport::RESOLVE_FILES_REMOVE]) && !$vOptions[xPDOTransport::RESOLVE_FILES_REMOVE]) {
-                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Skipping removal of files from {$path}");
-                    } elseif (!$cacheManager->deleteTree($path, true, false, array ())) {
-                        $uninstalled = false;
-                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not uninstall files from path: ' . $path);
+                if (!isset ($vOptions[xPDOFileVehicle::UNINSTALL_FILES]) || $vOptions[xPDOFileVehicle::UNINSTALL_FILES] == true) {
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_INFO,'Removing files from xPDOFileVehicle: '.$path);
+                    if ($cacheManager && file_exists($path)) {
+                        if (is_dir($path) && $cacheManager->deleteTree($path, array_merge(array('deleteTop' => true, 'skipDirs' => false, 'extensions' => array()), $vOptions))) {
+                            $uninstalled = true;
+                        } elseif (is_file($path) && unlink($path)) {
+                            $uninstalled = true;
+                        } else {
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not remove files from path: '.$path);
+                        }
+                    } else {
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not find files to remove at path: '.$path);
                     }
                 } else {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, 'Could not find files to uninstall.');
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_INFO,'Skipping removal of files according to vehicle attributes.');
+                    $uninstalled = true;
                 }
-                if (!$this->resolve($transport, $object, $vOptions)) {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
+                $preservedArchive = $transport->path . $transport->signature . '/' . $this->payload['class'] . '/' . $this->payload['signature'] . '.preserved.zip';
+                if ($preExistingMode === xPDOTransport::RESTORE_PREEXISTING && file_exists($preservedArchive)) {
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempting to restore files to {$fileTarget} from archive {$preservedArchive}");
+                    $unpackedResult = xPDOTransport::_unpack($transport->xpdo, $preservedArchive, $fileTarget);
+                    if ($unpackedResult > 0) {
+                        $uninstalled = true;
+                    } else {
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error unpacking preserved files from archive {$preservedArchive}");
+                    }
                 }
             } else {
                 $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle: ' . print_r($vOptions, true));

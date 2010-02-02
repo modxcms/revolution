@@ -203,7 +203,12 @@ abstract class xPDOVehicle {
                                 }
                                 if ($preExistingMode === xPDOTransport::RESTORE_PREEXISTING && file_exists($preservedArchive)) {
                                     $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempting to restore files to {$fileTarget} from archive {$preservedArchive}");
-                                    $resolved = xPDOTransport::_unpack($transport->xpdo, $preservedArchive, $fileTarget);
+                                    $unpackedResult = xPDOTransport::_unpack($transport->xpdo, $preservedArchive, $fileTarget);
+                                    if ($unpackedResult > 0) {
+                                        $resolved = true;
+                                    } else {
+                                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error unpacking preserved files from archive {$preservedArchive}");
+                                    }
                                 }
                                 break;
                         }
