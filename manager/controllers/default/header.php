@@ -54,18 +54,15 @@ function _modProcessMenus(&$output,$menus) {
             if (!empty($permissions) && !$modx->hasPermission($permissions)) continue;
         }
         $output .= '<li>'."\n";
-        $output .= '<a href="javascript:;"'."\n";
-        $output .= '   onclick="';
+
+        $description = !empty($menu['description']) ? '<span class="description">'.$menu['description'].'</span>'."\n" : '';
+
         if (!empty($menu['handler'])) {
-            $output .= str_replace('"','\'',$menu['handler']); // escape
+            $output .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].$description.'</a>'."\n";
         } else {
-            $output .= 'MODx.loadPage('.$menu['action'].',\''.$menu['params'].'\');';
+            $url = '?a='.$menu['action'].$menu['params'];
+            $output .= '<a href="'.$url.'">'.$menu['text'].$description.'</a>'."\n";
         }
-        $output .= '">'.$menu['text'];
-        if (!empty($menu['description'])) {
-            $output .= '<span class="description">'.$menu['description'].'</span>'."\n";
-        }
-        $output .= '</a>'."\n";
 
         if (!empty($menu['children'])) {
             $output .= '<ul class="modx-subsubnav">'."\n";
