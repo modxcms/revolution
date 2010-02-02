@@ -317,7 +317,9 @@ class modInstall {
                 define('MODX_CONNECTORS_PATH', $this->settings->get('context_connectors_path'));
 
             $package->install(array (
-                xPDOTransport::RESOLVE_FILES => ($this->settings->get('inplace') == 0 ? 1 : 0),
+                xPDOTransport::RESOLVE_FILES => ($this->settings->get('inplace') == 0 ? 1 : 0)
+                ,xPDOTransport::INSTALL_FILES => ($this->settings->get('inplace') == 0 ? 1 : 0)
+                , xPDOTransport::PREEXISTING_MODE => xPDOTransport::REMOVE_PREEXISTING
             ));
 
             /* set default workspace path */

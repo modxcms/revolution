@@ -4,6 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Setup upgrades no longer preserve existing data/files on install
+- Fixed issue with setup trying to write connector files regardless if files are already in place
+- Updated to xPDO 2.0 revision 403
 - Fixed bug where plugin properties were not being injected into the plugin event call
 - [#MODX-1617] Fixed bug with tvDefaultValue Form Customization Rule
 - [#MODX-1619] Added sanity check for modActionDom constraint check
