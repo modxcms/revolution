@@ -378,6 +378,13 @@ class modInstall {
                         $userGroupMembership->set('role', 2);
                         $saved = $userGroupMembership->save();
                     }
+                    if ($saved) {
+                        $emailsender = $this->xpdo->getObject('modSystemSetting', array('key' => 'emailsender'));
+                        if ($emailsender) {
+                            $emailsender->set('value', $this->settings->get('cmsadminemail'));
+                            $saved = $emailsender->save();
+                        }
+                    }
                 }
                 if (!$saved) {
                     $results[] = array (
