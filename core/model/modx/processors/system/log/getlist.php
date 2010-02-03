@@ -60,6 +60,8 @@ foreach ($logs as $log) {
         if ($obj) {
             $nameField = getNameField($la['classKey']);
             $la['name'] = $obj->get($nameField).' ('.$obj->get('id').')';
+        } else {
+            $la['name'] = $la['classKey'] . ' (' . $la['item'] . ')';
         }
     } else {
         $la['name'] = '';
