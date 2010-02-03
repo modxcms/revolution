@@ -124,12 +124,24 @@ foreach ($elements as $element) {
         );
     }
     if ($modx->hasPermission('delete_'.$elementIdentifier)) {
-        $menu[] = '-';
         $menu[] = array(
             'text' => $modx->lexicon('remove').' '.$elementType,
             'handler' => 'function(itm,e) {
                 this.removeElement(itm,e);
             }',
+        );
+    }
+    $menu[] = '-';
+    if ($modx->hasPermission('new_'.$elementIdentifier)) {
+        $menu[] = array(
+            'text' => $modx->lexicon('add_to_category_this',array('type' => $elementType)),
+            'handler' => 'function(itm,e) { this._createElement(itm,e); }',
+        );
+    }
+    if ($modx->hasPermission('new_category')) {
+        $menu[] = array(
+            'text' => $modx->lexicon('new_category'),
+            'handler' => 'function(itm,e) { this.createCategory(itm,e); }',
         );
     }
 
