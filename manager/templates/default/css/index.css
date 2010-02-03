@@ -727,6 +727,9 @@ ul#modx-topnav li ul.modx-subnav li:hover ul  {
 .icon-weblink .x-tree-node-icon { background-image:url(../images/restyle/icons/weblink.png) !important; }
 .icon-staticresource .x-tree-node-icon { background-image:url(../images/restyle/icons/static-resource.png) !important; }
 
+.icon-menu .x-tree-node-icon { background-image:url(../images/restyle/icons/resources.png) !important; }
+.icon-action .x-tree-node-icon { background-image:url(../images/restyle/icons/application_osx_terminal.png) !important; }
+.icon-namespace .x-tree-node-icon { background-image:url(../images/restyle/icons/computer.png) !important; }
 .icon-propertyset .x-tree-node-icon { background-image:url(../images/restyle/icons/property-set.png) !important; }
 
 .icon-file .x-tree-node-icon { background-image:url(../images/restyle/icons/disk.png) !important; }

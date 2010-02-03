@@ -28,7 +28,7 @@ foreach ($namespaces as $namespace) {
         'text' => $namespace->get('name'),
         'id' => 'n_namespace_'.$namespace->get('name'),
         'leaf' => $namespace->get('actionCount') <= 0,
-        'cls' => 'folder',
+        'cls' => 'icon-namespace',
         'pk' => $namespace->get('name'),
         'data' => $namespace->toArray(),
         'type' => 'namespace',

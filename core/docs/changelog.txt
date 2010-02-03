@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1625] Fixed bugs with menu tree preventing creating child nodes of new items, restyled menu and action icons
 - Added preventative to make sure packages are only downloaded once when in Package Browser
 - [#MODX-1623] Fixed package installation error: attempting to preserve files fails with error message
 - Updated to xPDO 2.0 revision 404

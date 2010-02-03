@@ -72,10 +72,11 @@ foreach ($menus as $menu) {
 	$list[] = array(
 		'text' => $text.($controller != '' ? ' <i>('.$controller.')</i>' : ''),
 		'id' => 'n_'.$menu->get('text'),
-        'cls' => 'menu',
+        'cls' => 'icon-menu',
 		'type' => 'menu',
         'pk' => $menu->get('text'),
-		'leaf' => $menu->get('childrenCount') <= 0 ? true : false,
+		'leaf' => false,
+        //'expandable' => $menu->get('childrenCount') <= 0 ? true : false,
         'data' => $menu->toArray(),
 		'menu' => array('items' => $contextMenu),
 	);

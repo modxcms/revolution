@@ -49,7 +49,7 @@ foreach ($actions as $action) {
         'id' => 'n_action_'.$action->get('id'),
         'pk' => $action->get('id'),
         'leaf' => $action->get('childrenCount') <= 0,
-        'cls' => 'action',
+        'cls' => 'icon-action',
         'type' => 'action',
         'data' => $action->toArray(),
         'menu' => array('items' => $menu),
