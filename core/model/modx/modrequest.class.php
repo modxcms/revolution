@@ -200,7 +200,7 @@ class modRequest {
                 }
             }
         } elseif ($fromCache && $resource instanceof modResource && !$resource->get('deleted')) {
-            if ($resource->get('published') || $this->modx->hasPermission('view_unpublished')) {
+            if ($resource->checkPolicy('load') && ($resource->get('published') || $this->modx->hasPermission('view_unpublished'))) {
                 if ($resource->get('context_key') !== $this->modx->context->get('key')) {
                     if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
                         return null;
