@@ -78,12 +78,44 @@ if (!empty($_POST['proceed'])) {
         foreach ($errors as $k => $v) {
             $this->parser->assign('error_'.$k,$v);
         }
-    } else { /* proceed to contexts page */
-        $this->proceed('contexts');
+    } else { /* proceed to contexts page, or summary if @traditional */
+        switch (MODX_SETUP_KEY) {
+            case '@traditional':
+                $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
+                $settings = array();
+                if ($mode == modInstall::MODE_NEW) {
+                    $settings['core_path'] = MODX_CORE_PATH;
+                    $settings['web_path'] = MODX_INSTALL_PATH;
+                    $settings['web_url'] = $webUrl;
+                    $settings['mgr_path'] = MODX_INSTALL_PATH . 'manager/';
+                    $settings['mgr_url'] = $webUrl . 'manager/';
+                    $settings['connectors_path'] = MODX_INSTALL_PATH . 'connectors/';
+                    $settings['connectors_url'] = $webUrl . 'connectors/';
+                    $settings['processors_path'] = MODX_CORE_PATH . 'model/modx/processors/';
+                    $settings['assets_path'] = $settings['web_path'] . 'assets/';
+                    $settings['assets_url'] = $settings['web_url'] . 'assets/';
+                } elseif ($mode == modInstall::MODE_UPGRADE_REVO) {
+                    include MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
+
+                    $settings['core_path'] = MODX_CORE_PATH;
+                    $settings['web_path'] = defined('MODX_BASE_PATH') ? MODX_BASE_PATH : MODX_INSTALL_PATH;
+                    $settings['web_url'] = defined('MODX_BASE_URL') ? MODX_BASE_URL : $webUrl;
+                    $settings['connectors_path'] = defined('MODX_CONNECTORS_PATH') ? MODX_CONNECTORS_PATH : MODX_INSTALL_PATH . 'connectors/';
+                    $settings['connectors_url'] = defined('MODX_CONNECTORS_URL') ? MODX_CONNECTORS_URL : $webUrl . 'connectors/';
+                    $settings['mgr_path'] = defined('MODX_MANAGER_PATH') ? MODX_MANAGER_PATH : MODX_INSTALL_PATH . 'manager/';
+                    $settings['mgr_url'] = defined('MODX_MANAGER_URL') ? MODX_MANAGER_URL : $webUrl . 'manager/';
+                    $settings['assets_path'] = defined('MODX_ASSETS_PATH') ? MODX_ASSETS_PATH : $settings['web_path'] . 'assets/';
+                    $settings['assets_url'] = defined('MODX_ASSETS_URL') ? MODX_ASSETS_URL : $settings['web_url'] . 'assets/';
+                }
+                $install->settings->store($settings);
+                $this->proceed('summary');
+                break;
+            default:
+                $this->proceed('contexts');
+        }
     }
 }
 $mode = $install->settings->get('installmode');
 $this->parser->assign('installmode', $mode);
-$this->parser->assign('action',MODX_SETUP_KEY == '@traditional' ? 'summary' : 'contexts');
 
 return $this->parser->fetch('database.tpl');

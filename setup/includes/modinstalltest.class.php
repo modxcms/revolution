@@ -315,8 +315,8 @@ abstract class modInstallTest {
         $coreConfigsExist = false;
         if ($this->install->settings->get('inplace')) {
             /* web_path */
-            $this->results['context_web_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('context_web_path'));
-            if (!file_exists($this->install->settings->get('context_web_path'))) {
+            $this->results['context_web_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('web_path'));
+            if (!file_exists($this->install->settings->get('web_path'))) {
                 $this->results['context_web_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
                 $this->results['context_web_exists']['class'] = 'testFailed';
             } else {
@@ -325,8 +325,8 @@ abstract class modInstallTest {
             }
 
             /* mgr_path */
-            $this->results['context_mgr_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('context_mgr_path'));
-            if (!file_exists($this->install->settings->get('context_mgr_path'))) {
+            $this->results['context_mgr_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('mgr_path'));
+            if (!file_exists($this->install->settings->get('mgr_path'))) {
                 $this->results['context_mgr_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
                 $this->results['context_mgr_exists']['class'] = 'testFailed';
             } else {
@@ -335,17 +335,17 @@ abstract class modInstallTest {
             }
 
             /* connectors_path */
-            $this->results['context_connectors_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('context_connectors_path'));
-            if (!file_exists($this->install->settings->get('context_connectors_path'))) {
+            $this->results['context_connectors_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('connectors_path'));
+            if (!file_exists($this->install->settings->get('connectors_path'))) {
                 $this->results['context_connectors_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
                 $this->results['context_connectors_exists']['class'] = 'testFailed';
             } else {
                 $this->results['context_connectors_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
                 $this->results['context_connectors_exists']['class'] = 'testPassed';
             }
-            if (file_exists($this->install->settings->get('context_web_path') . 'config.core.php') &&
-                file_exists($this->install->settings->get('context_connectors_path') . 'config.core.php') &&
-                file_exists($this->install->settings->get('context_mgr_path') . 'config.core.php')) {
+            if (file_exists($this->install->settings->get('web_path') . 'config.core.php') &&
+                file_exists($this->install->settings->get('connectors_path') . 'config.core.php') &&
+                file_exists($this->install->settings->get('mgr_path') . 'config.core.php')) {
                 $coreConfigsExist = true;
             }
         }
