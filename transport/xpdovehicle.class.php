@@ -140,6 +140,7 @@ abstract class xPDOVehicle {
                 switch ($type) {
                     case 'file' :
                         if (isset ($options[xPDOTransport::RESOLVE_FILES]) && !$options[xPDOTransport::RESOLVE_FILES]) {
+                            $resolved = true;
                             continue;
                         }
                         if ($transport->xpdo->getDebug() === true) {

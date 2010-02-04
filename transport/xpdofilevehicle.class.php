@@ -73,39 +73,37 @@ class xPDOFileVehicle extends xPDOVehicle {
             }
             $cacheManager = $transport->xpdo->getCacheManager();
             if ($this->validate($transport, $object, $vOptions)) {
-                if ($cacheManager && file_exists($fileSource) && !empty ($fileTarget)) {
-                    if (isset ($vOptions[xPDOTransport::INSTALL_FILES]) && !$vOptions[xPDOTransport::INSTALL_FILES]) {
-                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Skipping installion of files from {$fileSource} to {$fileTargetPath}");
-                        $installed = true;
-                    } else {
-                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Installing files from {$fileSource} to {$fileTargetPath}");
-                        $copied = array();
-                        if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && file_exists($fileTargetPath)) {
-                            $preservedArchive = $transport->path . $transport->signature . '/' . $this->payload['class'] . '/' . $this->payload['signature'] . '.preserved.zip';
-                            $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Attempting to preserve files at {$fileTargetPath} into archive {$preservedArchive}");
-                            $preserved = xPDOTransport::_pack($transport->xpdo, $preservedArchive, $fileTarget, $fileName);
-                        }
-                        if (is_dir($fileSource)) {
-                            $copied = $cacheManager->copyTree($fileSource, $fileTarget, array_merge($vOptions, array('copy_return_file_stat' => true)));
-                        } elseif (is_file($fileSource)) {
-                            $copied = $cacheManager->copyFile($fileSource, $fileTarget, array_merge($vOptions, array('copy_return_file_stat' => true)));
-                        }
-                        if (empty($copied)) {
-                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install files from {$fileSource} to {$fileTargetPath}");
-                        } else {
-                            if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && is_array($copied)) {
-                                foreach ($copied as $copiedFile => $stat) {
-                                    if (isset($stat['overwritten'])) $transport->_preserved[$vOptions['guid']]['files'][$copiedFile]= $stat;
-                                }
-                            }
-                            $installed = true;
-                        }
+                if (isset ($vOptions[xPDOTransport::INSTALL_FILES]) && !$vOptions[xPDOTransport::INSTALL_FILES]) {
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Skipping installion of files from {$fileSource} to {$fileTargetPath}");
+                    $installed = true;
+                } elseif ($cacheManager && file_exists($fileSource) && !empty ($fileTarget)) {
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Installing files from {$fileSource} to {$fileTargetPath}");
+                    $copied = array();
+                    if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && file_exists($fileTargetPath)) {
+                        $preservedArchive = $transport->path . $transport->signature . '/' . $this->payload['class'] . '/' . $this->payload['signature'] . '.preserved.zip';
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Attempting to preserve files at {$fileTargetPath} into archive {$preservedArchive}");
+                        $preserved = xPDOTransport::_pack($transport->xpdo, $preservedArchive, $fileTarget, $fileName);
                     }
-                    if (!$this->resolve($transport, $object, $vOptions)) {
-                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
+                    if (is_dir($fileSource)) {
+                        $copied = $cacheManager->copyTree($fileSource, $fileTarget, array_merge($vOptions, array('copy_return_file_stat' => true)));
+                    } elseif (is_file($fileSource)) {
+                        $copied = $cacheManager->copyFile($fileSource, $fileTarget, array_merge($vOptions, array('copy_return_file_stat' => true)));
+                    }
+                    if (empty($copied)) {
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error copying files from {$fileSource} to {$fileTargetPath}");
+                    } else {
+                        if ($preExistingMode === xPDOTransport::PRESERVE_PREEXISTING && is_array($copied)) {
+                            foreach ($copied as $copiedFile => $stat) {
+                                if (isset($stat['overwritten'])) $transport->_preserved[$vOptions['guid']]['files'][$copiedFile]= $stat;
+                            }
+                        }
+                        $installed = true;
                     }
                 } else {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install files from {$fileSource} to {$fileTarget}");
+                }
+                if (!$this->resolve($transport, $object, $vOptions)) {
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
                 }
             } else {
                 $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle: ' . print_r($vOptions, true));

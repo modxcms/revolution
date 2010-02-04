@@ -2,6 +2,8 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Modified xPDOVehicle::resolve() to return true if xPDOTransport::RESOLVE_FILES is set to false with file resolver types.
+- Modified xPDOFileVehicle::install() to check xPDOTransport::INSTALL_FILES is not set to false before checking for the existence of the defined fileSource.
 - Fixed xPDOVehicle::resolve() and xPDOFileVehicle::install() to prevent them from attempting to preserve files that do not exist.
 - Added xPDOTransport::INSTALL_FILES and xPDOTransport::UNINSTALL_FILES to make xPDOFileVehicle behavior consistent with RESOLVE_FILES and RESOLVE_FILES_REMOVE.
 - Updated xPDOVehicle::resolve() to properly detect if resolved when restoring preserved file archives.
