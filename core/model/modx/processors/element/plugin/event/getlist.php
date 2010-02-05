@@ -46,7 +46,7 @@ foreach ($events as $event) {
 
     $eventArray['menu'] = array(
         array(
-            'text' => _('plugin_event_update'),
+            'text' => $modx->lexicon('plugin_event_update'),
             'handler' => 'this.updateEvent',
         )
     );
