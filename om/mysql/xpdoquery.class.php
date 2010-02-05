@@ -47,6 +47,7 @@ class xPDOQuery_mysql extends xPDOQuery {
                 $columns= $this->xpdo->getSelectColumns($this->_class, $this->_alias, $this->_alias . '_');
             }
             $columns= explode(',', $columns);
+            foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
         }
         if (is_array ($columns)) {
             if (!is_array($this->query['columns'])) {
