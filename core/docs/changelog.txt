@@ -4,6 +4,17 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed problems with various deprecated functions to increase compatibility with Evo and avoid performance issues:
+    * modX::getDocuments() and modX::getDocument()
+    * modX::getAllChildren()
+    * modX::getActiveChildren()
+    * modX::getDocumentChildren()
+    * modX::getDocumentChildrenTVars()
+    * modX::getParent()
+    * modX::getPageInfo()
+    * modX::getUserInfo()
+- Fixed modX::__construct() declaration to indicate it properly as a public method; added phpdoc comments.
+- Fixed modX::sanitize() declaration to indicate it properly as a static method.
 - Updated to xPDO 2.0 revision 405
 - [#MODX-1614] Fixed issue with cached pages going to unauthorized_page instead of error_page when user does not have load permission 
 - [#MODX-411] Set system setting: emailsender to the admin email address during install
