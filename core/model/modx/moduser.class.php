@@ -224,9 +224,18 @@ class modUser extends modPrincipal {
      * @access public
      */
     public function endSession() {
-        $this->getSessionContexts();
-        if (!empty($this->sessionContexts)) {
-            $this->removeSessionContext($this->sessionContexts);
+        $_SESSION = array();
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params["path"],
+                $params["domain"],
+                $params["secure"],
+                $params["httponly"]
+            );
         }
         session_destroy();
     }
@@ -371,7 +380,11 @@ class modUser extends modPrincipal {
                 $this->removeSessionContextVars($context);
             }
             $this->sessionContexts= array_diff_assoc($this->sessionContexts, $contextToken);
-            $_SESSION['modx.user.contextTokens']= $this->sessionContexts;
+            if (empty($this->sessionContexts)) {
+                $this->endSession();
+            } else {
+                $_SESSION['modx.user.contextTokens']= $this->sessionContexts;
+            }
         }
     }
 

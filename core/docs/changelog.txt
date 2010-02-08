@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed modUser::removeSessionContext() to call modUser::endSession() if no contexts are left
+- Fixed modUser::endSession() to destroy all SESSION data and the session cookie
 - Fixed bug in Plugin -> System Events tab caused by invalid function call in getlist processor
 - Fixed problems with various deprecated functions to increase compatibility with Evo and avoid performance issues:
     * modX::getDocuments() and modX::getDocument()
