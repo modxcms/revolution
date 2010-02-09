@@ -21,23 +21,21 @@ $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
 $sort = $modx->getOption('sort',$_REQUEST,'name');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$resource = $modx->getOption('resource',$_REQUEST,false);
-
-if (empty($resource)) return $this->error->failure($modx->lexicon('resource_err_ns'));
+$resource = $modx->getOption('resource',$_REQUEST,0);
 
 /* build query */
 $c = $modx->newQuery('modResourceGroup');
-$c->leftJoin('modResourceGroupResource','rgr','
-    rgr.document_group = modResourceGroup.id
-AND rgr.document = '.$_REQUEST['resource']);
+$c->leftJoin('modResourceGroupResource','ResourceGroupResource','
+    `ResourceGroupResource`.`document_group` = `modResourceGroup`.`id`
+AND `ResourceGroupResource`.`document` = '.$resource);
+$count = $modx->getCount('modResourceGroup',$c);
 $c->select('
-    modResourceGroup.*,
-    IF(ISNULL(rgr.document),0,1) AS access
+    `modResourceGroup`.*,
+    IF(ISNULL(`ResourceGroupResource`.`document`),0,1) AS access
 ');
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $resourceGroups = $modx->getCollection('modResourceGroup',$c);
-$count = $modx->getCount('modResourceGroup');
 
 
 /* iterate */
