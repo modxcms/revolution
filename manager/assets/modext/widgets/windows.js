@@ -107,16 +107,23 @@ MODx.window.AddUserToUserGroup = function(config) {
         ,id: this.ident
 		,height: 150
 		,width: 375
-        ,url: MODx.config.connectors_url+'security/group.php'
-        ,action: 'addUser'
+        ,url: MODx.config.connectors_url+'security/usergroup/user.php'
+        ,action: 'create'
         ,fields: [{
             fieldLabel: _('name')
-            ,name: 'member'
-            ,hiddenName: 'member'
+            ,name: 'user'
+            ,hiddenName: 'user'
             ,xtype: 'modx-combo-user'
-            ,id: 'modx-'+this.ident+'-member'
+            ,id: 'modx-'+this.ident+'-user'
         },{
-            name: 'user_group'
+            fieldLabel: _('role')
+            ,name: 'role'
+            ,hiddenName: 'role'
+            ,xtype: 'modx-combo-role'
+            ,id: 'modx-'+this.ident+'-role'
+            ,allowBlank: false
+        },{
+            name: 'usergroup'
             ,xtype: 'hidden'
             ,id: 'modx-'+this.ident+'-user-group'
         }]

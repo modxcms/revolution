@@ -34,7 +34,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 		var n = this.cm.activeNode;
 		var ug = n.id.substr(2).split('_'); ug = ug[1];
 		if (ug === undefined) { ug = 0; }
-		var r = {user_group: ug};
+		var r = {usergroup: ug};
         
         if (!this.windows.adduser) {
             this.windows.adduser = MODx.load({
@@ -44,9 +44,8 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
     				'success': {fn:this.refresh,scope:this}
     			}
     		});
-        } else {
-            this.windows.adduser.setValues(r);
         }
+        this.windows.adduser.setValues(r);
 		this.windows.adduser.show(e.target);
 	}
 	
