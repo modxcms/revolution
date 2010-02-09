@@ -155,11 +155,9 @@ class modManagerResponse extends modResponse {
             'action' => $action,
         ));
         $c->andCondition(array(
-            'Access.principal_class' => 'modUserGroup',
-            'Access.principal IN ('.implode(',',$userGroups).')',
-        ),null,2);
-        $c->orCondition(array(
-            'Access.principal IS NULL',
+            '((`Access`.`principal_class` = "modUserGroup"
+          AND `Access`.`principal` IN ('.implode(',',$userGroups).'))
+           OR `Access`.`principal` IS NULL)',
         ),null,2);
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();

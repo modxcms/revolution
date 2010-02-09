@@ -275,6 +275,29 @@ class modTemplateVar extends modElement {
             $this->set('processedValue',$value);
         }
 
+        /* if any FC tvDefault rules, set here */
+        if ($this->xpdo->request && $this->xpdo->user instanceof modUser && empty($resourceId)) {
+            $userGroups = $this->xpdo->user->getUserGroups();
+            $c = $this->xpdo->newQuery('modActionDom');
+            $c->leftJoin('modAccessActionDom','Access');
+            $c->where(array(
+                'rule' => 'tvDefault',
+                'name' => 'tv'.$this->get('id'),
+            ));
+            $c->andCondition(array(
+                '((`Access`.`principal_class` = "modUserGroup"
+              AND `Access`.`principal` IN ('.implode(',',$userGroups).'))
+               OR `Access`.`principal` IS NULL)',
+            ),null,2);
+            $domRules = $this->xpdo->getCollection('modActionDom',$c);
+            foreach ($domRules as $rule) {
+                $v = $rule->get('value');
+                $this->set('value',$v);
+                $this->set('default_text',$v);
+            }
+            unset($domRules,$rule,$userGroups,$v,$c);
+        }
+
         $this->xpdo->smarty->assign('tv',$this);
 
 
