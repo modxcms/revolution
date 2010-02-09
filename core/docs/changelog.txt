@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1606] Added sanity checks and ID standardization to DOM nodes for Package Browser
 - Fixed possible bug with ta-toggle div in resource panel
 - [#MODX-1628] Fixed FC tvDefault rule by doing setting php-side
 - [#MODX-1636] Added ability to assign Role to User when adding them to a User Group from the User Groups tree 

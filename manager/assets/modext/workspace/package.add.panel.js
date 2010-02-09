@@ -158,7 +158,7 @@ Ext.extend(MODx.panel.PDSelProv,MODx.panel.WizardPanel,{
                 g.getStore().baseParams.provider = vs.provider;
                 g.getStore().removeAll();
             }
-            Ext.getCmp('package-browser-view').show();
+            Ext.getCmp('modx-package-browser-view').show();
         }
     }
 });
@@ -228,7 +228,7 @@ Ext.extend(MODx.panel.PDNewProv,MODx.panel.WizardPanel,{
                         g.getStore().baseParams.provider = vs.provider;
                         g.getStore().removeAll();
                     }
-                    Ext.getCmp('package-browser-view').show();
+                    Ext.getCmp('modx-package-browser-view').show();
                 }
             });
         }

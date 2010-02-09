@@ -31,31 +31,33 @@ MODx.panel.PackageBrowser = function(config) {
         ,border: false
         ,autoScroll: true
         ,items: [{
-            id: this.ident+'-browser-tree'
+            id: 'modx-package-browser-tree-panel'
             ,cls: 'browser-tree'
             ,region: 'west'
             ,width: '25%'
             ,items: [{
                 xtype: 'modx-package-browser-tree'
+                ,id: 'modx-package-browser-tree'
             }]
             ,autoScroll: true
             ,border: false
         },{
-            id: 'package-browser-grid'
+            id: 'modx-package-browser-grid-panel'
             ,cls: 'browser-view'
             ,region: 'center'
             ,width: '75%'
             ,items: [{
-                id: 'package-browser-tag'
+                id: 'modx-package-browser-tag'
                 ,border: false
             },{
                 xtype: 'modx-package-browser-grid'
+                ,id: 'modx-package-browser-grid'
                 ,preventRender: true
             }]
             ,hidden: true
             ,border: false
         },{
-            id: 'package-browser-view'
+            id: 'modx-package-browser-view'
             ,cls: 'browser-view'
             ,region: 'east' 
             ,width: '75%'
@@ -98,8 +100,8 @@ MODx.panel.PackageBrowser = function(config) {
 };
 Ext.extend(MODx.panel.PackageBrowser,MODx.Panel,{
     hideDetails: function() {
-        Ext.getCmp('package-browser-view').hide();
-        Ext.getCmp('package-browser-grid').show();
+        Ext.getCmp('modx-package-browser-view').hide();
+        Ext.getCmp('modx-package-browser-grid-panel').show();
     }
 });
 Ext.reg('modx-package-browser',MODx.panel.PackageBrowser);
@@ -134,7 +136,7 @@ MODx.tree.PackageBrowserTree = function(config) {
             xtype: 'textfield'
             ,emptyText: _('search')
             ,name: 'search'
-            ,id: 'pbr-search-fld'
+            ,id: 'modx-pbr-search-fld'
             ,listeners: {
                 'change': {fn:this.search,scope:this}
                 ,'render': {fn: function(cmp) {
@@ -174,21 +176,21 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
             }
         });
         g.getBottomToolbar().changePage(1);
-        Ext.getCmp('package-browser-view').hide();
+        Ext.getCmp('modx-package-browser-view').hide();
         Ext.getCmp('modx-package-browser-thumbs').hide();
         Ext.getCmp('modx-package-browser-thumbs-detail').hide();
-        Ext.getCmp('package-browser-grid').show();
+        Ext.getCmp('modx-package-browser-grid-panel').show();
         return true;
     }
     
     ,onNodeClick: function(n,e) {
         switch (n.attributes.type) {
             case 'repository':
-                this.tpls.repository.overwrite('package-browser-view',n.attributes.data);
-                Ext.getCmp('package-browser-grid').hide();
+                this.tpls.repository.overwrite('modx-package-browser-view',n.attributes.data);
+                Ext.getCmp('modx-package-browser-grid-panel').hide();
                 Ext.getCmp('modx-package-browser-thumbs').hide();
                 Ext.getCmp('modx-package-browser-thumbs-detail').hide();
-                Ext.getCmp('package-browser-view').show();
+                Ext.getCmp('modx-package-browser-view').show();
                 break;
             case 'tag':
                 var tp = n.parentNode;
@@ -197,25 +199,25 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
                     p.store.baseParams.tag = n.attributes.data.id;
                     p.run();
                     
-                    Ext.getCmp('package-browser-grid').hide();
+                    Ext.getCmp('modx-package-browser-grid-panel').hide();
                     Ext.getCmp('modx-package-browser-thumbs').show();
                     Ext.getCmp('modx-package-browser-thumbs-detail').show();
                 } else {
                     this.loadPackagesFromTag(n.attributes.data);
-                    this.tpls.tag.overwrite('package-browser-tag',n.attributes.data);
+                    this.tpls.tag.overwrite('modx-package-browser-tag',n.attributes.data);
                     
                     Ext.getCmp('modx-package-browser-thumbs').hide();
                     Ext.getCmp('modx-package-browser-thumbs-detail').hide();
-                    Ext.getCmp('package-browser-grid').show();
+                    Ext.getCmp('modx-package-browser-grid-panel').show();
                 }
-                Ext.getCmp('package-browser-view').hide();
+                Ext.getCmp('modx-package-browser-view').hide();
                 break;
             default:
-                this.tpls.home.overwrite('package-browser-view',this.providerInfo);
+                this.tpls.home.overwrite('modx-package-browser-view',this.providerInfo);
                 Ext.getCmp('modx-package-browser-thumbs').hide();
                 Ext.getCmp('modx-package-browser-thumbs-detail').hide();
-                Ext.getCmp('package-browser-grid').hide();
-                Ext.getCmp('package-browser-view').show();
+                Ext.getCmp('modx-package-browser-grid-panel').hide();
+                Ext.getCmp('modx-package-browser-view').show();
                 break;
         }
     }
@@ -229,13 +231,13 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    this.tpls.home.overwrite('package-browser-view',r.object);
+                    this.tpls.home.overwrite('modx-package-browser-view',r.object);
                     this.providerInfo = r.object;
                 },scope:this}
             }
         });
-        Ext.getCmp('package-browser-grid').hide();
-        Ext.getCmp('package-browser-view').show();
+        Ext.getCmp('modx-package-browser-grid-panel').hide();
+        Ext.getCmp('modx-package-browser-view').show();
     }
     
     
@@ -253,7 +255,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
             }
         });
         g.getBottomToolbar().changePage(1);
-        Ext.getCmp('pbr-search-fld').setValue('');
+        Ext.getCmp('modx-pbr-search-fld').setValue('');
     }
     
     ,setProvider: function(p) {
@@ -464,9 +466,9 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
     ,details: function(g,rec,a,ri) {
         this.menu.record = rec.data;
         /* do more details */        
-        this.detailsTpl.overwrite('package-browser-view',rec.data);
-        Ext.getCmp('package-browser-view').show();
-        Ext.getCmp('package-browser-grid').hide();
+        this.detailsTpl.overwrite('modx-package-browser-view',rec.data);
+        Ext.getCmp('modx-package-browser-view').show();
+        Ext.getCmp('modx-package-browser-grid-panel').hide();
     }
     ,download: function(g,rec,a,ri) {
         this.menu.record = rec.data;
