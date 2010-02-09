@@ -384,7 +384,8 @@ MODx.panel.Resource = function(config) {
         }
     });
     MODx.panel.Resource.superclass.constructor.call(this,config);
-    Ext.get('ta').on('keydown',this.fieldChangeEvent,this);
+    var ta = Ext.get('ta');
+    if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     /* to deal with combobox bug */
     setTimeout("Ext.getCmp('modx-panel-resource').onLoad();",1000);
     
@@ -402,10 +403,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 var f = this.getForm().findField('richtext');
                 if (f && f.getValue()) {
                     MODx.loadRTE('ta');
-                    Ext.get('ta-toggle').show();
+                    var tt = Ext.get('ta-toggle');
+                    if (tt) { tt.show(); }
                 } else {
                     if (MODx.unloadRTE) MODx.unloadRTE('ta');
-                    Ext.get('ta-toggle').hide();
+                    var tt = Ext.get('ta-toggle');
+                    if (tt) { tt.hide(); }
                 }
             }
             this.fireEvent('ready');
@@ -430,10 +433,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     if (r.object.richtext && MODx.config.use_editor && MODx.loadRTE && !this.rteLoaded) {
                     	MODx.loadRTE('ta');
                         this.rteLoaded = true;
-                        Ext.get('ta-toggle').show();
+                        var tt = Ext.get('ta-toggle');
+                        if (tt) { tt.show(); }
                     } else {
                         if (MODx.unloadRTE) MODx.unloadRTE('ta');
-                        Ext.get('ta-toggle').hide();
+                        var tt = Ext.get('ta-toggle');
+                        if (tt) { tt.hide(); }
                     }
                     this.initialized = true;
                     this.fireEvent('ready');
@@ -443,8 +448,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
     
     ,beforeSubmit: function(o) {        
-        var v = Ext.get('ta').dom.value;
-        Ext.getCmp('hiddenContent').setValue(v);
+        var ta = Ext.get('ta');
+        if (!ta) return false;
+        v = ta.dom.value;
+        var hc = Ext.getCmp('hiddenContent');
+        if (hc) { hc.setValue(v); }
         
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) {
@@ -516,7 +524,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('ta');
-            MODx.onSaveEditor(fld);
+            if (fld) { MODx.onSaveEditor(fld); }
         }
     }
 });
