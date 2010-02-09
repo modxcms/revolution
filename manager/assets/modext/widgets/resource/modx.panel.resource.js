@@ -447,9 +447,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         Ext.getCmp('hiddenContent').setValue(v);
         
         var g = Ext.getCmp('modx-grid-resource-security');
-        Ext.apply(o.form.baseParams,{
-            resource_groups: g.encodeModified()
-        });
+        if (g) {
+            Ext.apply(o.form.baseParams,{
+                resource_groups: g.encodeModified()
+            });
+        }
         this.cleanupEditor();
         return this.fireEvent('save',{
             values: this.getForm().getValues()
@@ -457,14 +459,17 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         });
     }
     ,success: function(o) {
-        Ext.getCmp('modx-grid-resource-security').getStore().commitChanges();
+        var g = Ext.getCmp('modx-grid-resource-security');
+        if (g) { g.getStore().commitChanges(); }
         var t = Ext.getCmp('modx-resource-tree');
-        var ctx = Ext.getCmp('modx-resource-context-key').getValue();
-        var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
-        var v = ctx+'_'+pa;
-        var n = t.getNodeById(v);
-        n.leaf = false;
-        t.refreshNode(v,true);
+        if (t) {
+            var ctx = Ext.getCmp('modx-resource-context-key').getValue();
+            var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
+            var v = ctx+'_'+pa;
+            var n = t.getNodeById(v);
+            n.leaf = false;
+            t.refreshNode(v,true);
+        }
         Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
     }
     
