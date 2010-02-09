@@ -10,23 +10,24 @@ if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->l
 $resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument';
 $resourceDir= strtolower(substr($resourceClass, 3));
 
+/* handle template inheritance */
+if (isset($_REQUEST['parent'])) {
+    $parent = $modx->getObject('modResource',$_REQUEST['parent']);
+    if (!$parent->checkPolicy('add_children')) return $modx->error->failure($modx->lexicon('resource_add_children_access_denied'));
+    if ($parent != null) {
+        $modx->smarty->assign('parent',$parent);
+    }
+} else { $parent = null; }
+
 $delegateView= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
 if (file_exists($delegateView)) {
-    $overridden= include_once ($delegateView);
+    $overridden= include ($delegateView);
     if ($overridden !== false) {
         return $overridden;
     }
 }
 
 $resource = $modx->newObject($resourceClass);
-
-/* handle template inheritance */
-if (isset($_REQUEST['parent'])) {
-    $parent = $modx->getObject('modResource',$_REQUEST['parent']);
-    if ($parent != null) {
-        $modx->smarty->assign('parent',$parent);
-    }
-} else { $parent = null; }
 
 /* handle switch template */
 if (isset ($_REQUEST['newtemplate'])) {

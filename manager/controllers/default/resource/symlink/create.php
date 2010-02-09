@@ -7,14 +7,6 @@ if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->l
 
 $resource = $modx->newObject('modSymLink');
 
-/* handle template inheritance */
-if (isset($_REQUEST['parent'])) {
-    $parent = $modx->getObject('modResource',$_REQUEST['parent']);
-    if ($parent != null) {
-        $modx->smarty->assign('parent',$parent);
-    }
-}
-
 /* handle switch template */
 if (isset ($_REQUEST['newtemplate'])) {
     foreach ($_POST as $key => $val) {

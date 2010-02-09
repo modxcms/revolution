@@ -13,7 +13,7 @@ $xpdo= new xPDO(
     XPDO_DB_PASS,
     XPDO_TABLE_PREFIX,
     array (
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
         PDO::ATTR_PERSISTENT => false,
         PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
     )

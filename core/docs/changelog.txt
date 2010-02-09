@@ -4,6 +4,13 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- controllers/resources/create: Refactored template inheritance to occur before any delegate controller is called.
+- processors/resources/create: Moved OnBeforeDocFormSave event invocation until after POST vars are applied to $resource object.
+- processors/resources/create: Refactored common code to be executed before any delegate processor is called.
+- processors/resources/create: Refactored to respect add_children and new_document_in_root permissions.
+- Added various access_denied lexicons to the resource topic.
+- Added new_document_in_root permission to control access to creating Resources at the root level.
+- Updated to xPDO 2.0 revision 406.
 - [#MODX-1606] Added sanity checks and ID standardization to DOM nodes for Package Browser
 - Fixed possible bug with ta-toggle div in resource panel
 - [#MODX-1628] Fixed FC tvDefault rule by doing setting php-side
