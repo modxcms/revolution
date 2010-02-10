@@ -40,10 +40,12 @@ class xPDOCacheManager {
     protected $xpdo= null;
     protected $caches= array();
     protected $options= array();
+    protected $_umask= null;
 
     public function __construct(& $xpdo, $options = array()) {
         $this->xpdo= & $xpdo;
         $this->options= $options;
+        $this->_umask= umask();
     }
 
     /**
@@ -109,6 +111,28 @@ class xPDOCacheManager {
     }
 
     /**
+     * Get default folder permissions based on umask
+     *
+     * @return integer The default folder permissions.
+     */
+    public function getFolderPermissions() {
+        $perms = 0777;
+        $perms = $perms & (0777 - $this->_umask);
+        return $perms;
+    }
+
+    /**
+     * Get default file permissions based on umask
+     *
+     * @return integer The default file permissions.
+     */
+    public function getFilePermissions() {
+        $perms = 0666;
+        $perms = $perms & (0666 - $this->_umask);
+        return $perms;
+    }
+
+    /**
      * Get the absolute path to a writable directory for storing files.
      *
      * @access public
@@ -149,7 +173,7 @@ class xPDOCacheManager {
             $cachePath= $this->xpdo->cachePath;
         }
         if ($cachePath) {
-            $perms = $this->getOption('new_folder_permissions', null, 0775);
+            $perms = $this->getOption('new_folder_permissions', null, $this->getFolderPermissions());
             if (is_string($perms)) $perms = octdec($perms);
             if (@ $this->writeTree($cachePath, $perms)) {
                 if ($cachePath{strlen($cachePath) - 1} != '/') $cachePath .= '/';
@@ -176,7 +200,7 @@ class xPDOCacheManager {
      */
     public function writeFile($filename, $content, $mode= 'wb', $options= array()) {
         $written= false;
-        if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_dir_permissions' => $options) : array();
+        if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_folder_permissions' => $options) : array();
         $dirname= dirname($filename);
         if (!file_exists($dirname)) {
             if ($this->writeTree($dirname, $options)) {
@@ -202,8 +226,8 @@ class xPDOCacheManager {
     public function writeTree($dirname, $options= array()) {
         $written= false;
         if (!empty ($dirname)) {
-            if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_dir_permissions' => $options) : array();
-            $mode = $this->getOption('new_dir_permissions', $options, 0775);
+            if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_folder_permissions' => $options) : array();
+            $mode = $this->getOption('new_folder_permissions', $options, $this->getFolderPermissions());
             if (is_string($mode)) $mode = octdec($mode);
             $dirname= strtr(trim($dirname), '\\', '/');
             if ($dirname{strlen($dirname) - 1} == '/') $dirname = substr($dirname, 0, strlen($dirname) - 1);
@@ -235,7 +259,7 @@ class xPDOCacheManager {
     public function copyFile($source, $target, $options = array()) {
         $copied= false;
         if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_file_permissions' => $options) : array();
-        if (func_num_args() === 4) $options['new_dir_permissions'] = func_get_arg(3);
+        if (func_num_args() === 4) $options['new_folder_permissions'] = func_get_arg(3);
         if ($this->writeTree(dirname($target), $options)) {
             $existed= file_exists($target);
             if ($existed && $this->getOption('copy_newer_only', $options, false) && (($ttime = filemtime($target)) > ($stime = filemtime($source)))) {
@@ -245,7 +269,7 @@ class xPDOCacheManager {
             }
             if ($copied) {
                 if (!$this->getOption('copy_preserve_permissions', $options, false)) {
-                    $fileMode = $this->getOption('new_file_permissions', $options, 0664);
+                    $fileMode = $this->getOption('new_file_permissions', $options, $this->getFilePermissions());
                     if (is_string($fileMode)) $fileMode = octdec($fileMode);
                     @ chmod($target, $fileMode);
                 }
@@ -282,14 +306,14 @@ class xPDOCacheManager {
         if ($source{strlen($source) - 1} == '/') $source = substr($source, 0, strlen($source) - 1);
         if ($target{strlen($target) - 1} == '/') $target = substr($target, 0, strlen($target) - 1);
         if (is_dir($source . '/')) {
-            if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_dir_permissions' => $options) : array();
+            if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_folder_permissions' => $options) : array();
             if (func_num_args() === 4) $options['new_file_permissions'] = func_get_arg(3);
             if (!is_dir($target . '/')) {
                 $this->writeTree($target . '/', $options);
             }
             if (is_dir($target)) {
                 if (!is_writable($target)) {
-                    $dirMode = $this->getOption('new_dir_permissions', $options, 0775);
+                    $dirMode = $this->getOption('new_folder_permissions', $options, $this->getFolderPermissions());
                     if (is_string($dirMode)) $dirMode = octdec($dirMode);
                     if (! @ chmod($target, $dirMode)) {
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "{$target} is not writable and permissions could not be modified.");

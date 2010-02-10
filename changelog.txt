@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Refactored xPDOCacheManager to determine new folder/file permissions via umask().
 - Modified xPDOQuery_mysql::select() to trim the comma-delimited fields specified after explode()'ing the string.
 - Modified xPDOVehicle::resolve() to return true if xPDOTransport::RESOLVE_FILES is set to false with file resolver types.
 - Modified xPDOFileVehicle::install() to check xPDOTransport::INSTALL_FILES is not set to false before checking for the existence of the defined fileSource.
