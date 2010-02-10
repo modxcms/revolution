@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-197] Refactored Action Buttons JS, added 'actionNew', 'actionContinue', and 'actionClose' events to MODx.FormPanel objects, ensured parent/context_key is persisted through add another resources
 - Added a couple sanity checks to modRestCurlClient
 - Added JS to disable install button when clicked in setup to prevent double-clicks
 - controllers/resources/create: Refactored template inheritance to occur before any delegate controller is called.

@@ -194,61 +194,45 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             }
         },this);
     }
-    
-    ,checkOnComplete: function(o,itm,res) {
-        if (itm.onComplete) {
-            itm.onComplete(o,itm,res);
-        }
-        if (itm.hasListener('success') && res.success) {
-            itm.fireEvent('success',{r:res});
-        }
-        Ext.callback(this.redirectStay,this,[o,itm,res],1000);
-    }
-    
+        
     ,reloadPage: function() {
         location.href = location.href;
     }
     
     ,handleClick: function(itm,e) {
         var o = this.config;
-        /* action buttons handlers, abstracted to all get-out */
+        if (o.formpanel === false || o.formpanel === undefined || o.formpanel === null) return false;
+        
         if (itm.method === 'remote') { /* if using connectors */
-            MODx.util.Progress.reset(); /* reset the Progress Bar */
+            MODx.util.Progress.reset();
+            o.form = Ext.getCmp(o.formpanel);
+            if (!o.form) return false;
             
-            /* if using formpanel */
-            if (o.formpanel !== undefined && o.formpanel !== '' && o.formpanel !== null) {
-                o.form = Ext.getCmp(o.formpanel);
+            var f = o.form.getForm ? o.form.getForm() : o.form;
+            if (f.isValid()) {
+                Ext.applyIf(o.params,{
+                    action: itm.process
+                   ,'modx-ab-stay': MODx.config.stay
+                });
+                
+                Ext.apply(f.baseParams,o.params);
+                
+                o.form.on('success',function(r) {
+                    if (o.form.clearDirty) o.form.clearDirty();
+                    /* allow for success messages */
+                    if (r.result.message != '') {
+                        Ext.Msg.alert(_('success'),r.result.message,function() {
+                            Ext.callback(this.redirectStay,this,[o,itm,r.result],1000);
+                         },this);
+                    } else {
+                        Ext.callback(this.redirectStay,this,[o,itm,r.result],1000);
+                    }
+                },this);
+                o.form.submit();
+            } else {
+                Ext.Msg.alert(_('error'),_('correct_errors'));  
             }
-            
-            /* if using Ext.form */
-            if (o.form !== undefined) {
-                var f = o.form.getForm ? o.form.getForm() : o.form;
-                if (f.isValid()) { /* client-side validation with modHExt */
-                    Ext.applyIf(o.params,{
-                        action: itm.process
-                       ,'modx-ab-stay': MODx.config.stay
-                    });
-                    
-                    Ext.apply(f.baseParams,o.params);
-                    
-                    o.form.on('success',function(r) {                        
-                        /* allow for success messages */
-                        if (r.result.message != '') {
-                            Ext.Msg.alert(_('success'),r.result.message,function() {
-                                this.checkOnComplete(o,itm,r.result);
-                             },this);
-                        } else {
-                            /* pass the handling onto the checkOnComplete func */                                   
-                            this.checkOnComplete(o,itm,r.result);
-                        }
-                        if (o.form.clearDirty) o.form.clearDirty();
-                    },this);
-                    o.form.submit();
-                } else {
-                    Ext.Msg.alert(_('error'),_('correct_errors'));  
-                }
-            }
-        } else {    /* this is any other action besides remote */
+        } else { /* if just doing a URL redirect */
             Ext.applyIf(itm.params || {},o.baseParams || {});
             location.href = '?'+Ext.urlEncode(itm.params);
         }
@@ -261,25 +245,48 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             
     ,redirectStay: function(o,itm,res) {
         o = this.config;
-        Ext.applyIf(itm.params || {},o.baseParams);
-        var a = Ext.urlEncode(itm.params);
+        itm.params = itm.params || {};
+        Ext.applyIf(itm.params,o.baseParams);
         switch (MODx.config.stay) {
             case 'new': /* if user selected 'new', then always redirect */
-                if (MODx.request.parent) a = a+'&parent='+MODx.request.parent;
-                location.href = '?a='+o.actions['new']+'&'+a;
+                if (o.form.hasListener('actionNew')) {
+                    o.form.fireEvent('actionNew',itm.params);
+                } else {
+                    if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
+                    if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
+                    var a = Ext.urlEncode(itm.params);
+                    location.href = '?a='+o.actions['new']+'&'+a;
+                }
                 break;
             case 'stay':
-                /* if Continue Editing, then don't reload the page - just hide the Progress bar
-                   unless the user is on a 'Create' page...if so, then redirect
-                   to the proper Edit page */
-                if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id !== null) {
-                    location.href = '?a='+o.actions.edit+'&id='+res.object.id+'&'+a;
-                } else if (itm.process === 'delete') {
-                    location.href = '?a='+o.actions.cancel+'&'+a;
-                } else { Ext.Msg.hide(); }
+                if (o.form.hasListener('actionContinue')) {
+                    o.form.fireEvent('actionContinue',itm.params);
+                } else {
+                    /* if Continue Editing, then don't reload the page - just hide the Progress bar
+                       unless the user is on a 'Create' page...if so, then redirect
+                       to the proper Edit page */
+                    if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id !== null) {
+                        itm.params.a = o.actions.edit;
+                        itm.params.id = res.object.id;
+                        if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
+                        if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
+                        var url = Ext.urlEncode(itm.params);
+                        location.href = '?'+url;
+                        
+                    } else if (itm.process === 'delete') {
+                        itm.params.a = o.actions.cancel;
+                        var url = Ext.urlEncode(itm.params);
+                        location.href = '?'+url;
+                        
+                    } else { Ext.Msg.hide(); }
+                }
                 break;
             case 'close': /* redirect to the cancel action */
-                location.href = '?a='+o.actions.cancel+'&'+a;
+                if (o.form.hasListener('actionClose')) {
+                    o.form.fireEvent('actionClose',itm.params);
+                } else {
+                    location.href = '?a='+o.actions.cancel+'&'+a;
+                }
                 break;
         }
     }

@@ -41,6 +41,9 @@ MODx.FormPanel = function(config) {
         ,success: true
         ,failure: true
         ,save: true
+        ,actionNew: true
+        ,actionContinue: true
+        ,actionClose: true
     });
     this.getForm().addEvents({
         success: true
