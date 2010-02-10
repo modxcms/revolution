@@ -23,7 +23,7 @@ class modRestCurlClient extends modRestClient {
                 $path .= '?'.$q;
                 break;
             case 'POST':
-                curl_setopt($ch,CURLOPT_POST);
+                curl_setopt($ch,CURLOPT_POST,1);
                 curl_setopt($ch,CURLOPT_POSTFIELDS,$params);
                 break;
         }
@@ -32,7 +32,8 @@ class modRestCurlClient extends modRestClient {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_TIMEOUT,120);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
         $result = trim(curl_exec($ch));
         curl_close($ch);
