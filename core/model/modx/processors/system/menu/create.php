@@ -32,6 +32,10 @@ if (!empty($_POST['parent'])) {
 	if ($parent == null) return $modx->error->failure($modx->lexicon('menu_parent_err_nf'));
 }
 
+/* make sure doesnt exist already */
+$alreadyExists = $modx->getObject('modMenu',$_POST['text']);
+if ($alreadyExists) return $modx->error->failure($modx->lexicon('menu_err_ae'));
+
 /* get new menuindex */
 $count = $modx->getCount('modMenu',array('parent' => $_POST['parent']));
 

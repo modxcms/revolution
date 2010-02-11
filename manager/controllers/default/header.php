@@ -34,7 +34,11 @@ foreach ($menus as $menu) {
         if (!empty($permissions) && !$modx->hasPermission($permissions)) continue;
     }
     $output .= '<li id="limenu-'.$menu['text'].'" class="top'.'">'."\n";
-    $output .= '<a>'.$menu['text'].'</a>'."\n";
+    if (!empty($menu['action'])) {
+        $output .= '<a href="?a='.$menu['action'].$menu['params'].'">'.$menu['text'].'</a>'."\n";
+    } else {
+        $output .= '<a>'.$menu['text'].'</a>'."\n";
+    }
 
     if (!empty($menu['children'])) {
         $output .= '<ul class="modx-subnav">'."\n";

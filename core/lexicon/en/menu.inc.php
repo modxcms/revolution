@@ -9,6 +9,7 @@
 $_lang['lexicon_key'] = 'Lexicon Key';
 $_lang['menu_create'] = 'Create Menu';
 $_lang['menu_confirm_remove'] = 'Are you sure you want to remove this action from the menu?';
+$_lang['menu_err_ae'] = 'A menu already exists with that name. Please specify a different text value.';
 $_lang['menu_err_nf'] = 'Menu not found!';
 $_lang['menu_err_ns'] = 'No menu specified!';
 $_lang['menu_err_remove'] = 'An error occurred while trying to remove the action from the menu.';
