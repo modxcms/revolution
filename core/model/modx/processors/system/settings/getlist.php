@@ -48,7 +48,8 @@ if (!empty($namespace)) {
 }
 $count = $modx->getCount('modSystemSetting',$c);
 
-$c->sortby('`modSystemSetting`.`area`,`modSystemSetting`.`'.$sort.'`',$dir);
+$c->sortby('`modSystemSetting`.`area`','ASC');
+$c->sortby('`modSystemSetting`.`'.$sort.'`',$dir);
 if ($isLimit) $c->limit($limit,$start);
 
 $settings = $modx->getCollection('modSystemSetting',$c);

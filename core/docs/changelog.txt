@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1494] Fixed issue where some settings dont have descriptions, and cleaned up deprecated settings
+- [#MODX-1645] Fixed incorrect lexicon key for setting_site_start_err
 - [#MODX-1646] Fixed issue where download buttons were staying grayed out if there was an error message
 - [#MODX-1644] Added SMTP mail settings to default system settings to allow global SMTP usage for all modMail functions
 - [#MODX-1606] Fixed bug in modRestCurlClient class due to encoded ampersand

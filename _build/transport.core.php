@@ -374,33 +374,33 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default even
 unset ($collection, $c, $attributes);
 
 /* modSystemSetting collection */
-$collection = array ();
-include dirname(__FILE__).'/data/transport.core.system_settings.php';
+$settings = require_once dirname(__FILE__).'/data/transport.core.system_settings.php';
+if (!is_array($settings) || empty($settings)) { $xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not package in settings!'); flush(); }
 $attributes= array (
     xPDOTransport::PRESERVE_KEYS => true
 );
-foreach ($collection as $c) {
-    switch ($c->get('key')) {
+foreach ($settings as $setting) {
+    switch ($setting->get('key')) {
         case 'filemanager_path' :
         case 'rb_base_dir' :
         case 'rb_base_url' :
         case 'site_id' :
             $attributes[xPDOTransport::UPDATE_OBJECT]= true;
-            $c->set('value', '');
+            $setting->set('value', '');
             break;
         case 'session_cookie_path' :
             $attributes[xPDOTransport::UPDATE_OBJECT]= true;
-            $c->set('value', '/');
+            $setting->set('value', '/');
             break;
         default :
             $attributes[xPDOTransport::UPDATE_OBJECT]= false;
             break;
     }
-    $package->put($c, $attributes);
+    $package->put($setting, $attributes);
 }
 
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default system settings.'); flush();
-unset ($collection, $c, $attributes);
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($settings).' default system settings.'); flush();
+unset ($settings, $setting, $attributes);
 
 /* modContextSetting collection */
 $collection = array ();

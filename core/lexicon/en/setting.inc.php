@@ -11,12 +11,13 @@ $_lang['area_authentication'] = 'Authentication and Security';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_file'] = 'File System';
 $_lang['area_furls'] = 'Friendly URL';
+$_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = 'Lexicon and Language';
 $_lang['area_mail'] = 'Mail';
 $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_session'] = 'Session and Cookie';
 $_lang['area_lexicon_string'] = 'Area Lexicon Entry';
-$_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
+$_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>gateway</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
 $_lang['area_site'] = 'Site';
 $_lang['area_system'] = 'System and Server';
 $_lang['areas'] = 'Areas';
@@ -65,74 +66,99 @@ $_lang['setting_allow_duplicate_alias'] = 'Allow duplicate aliases';
 $_lang['setting_allow_duplicate_alias_desc'] = 'If set to \'yes\', this will allow duplicate aliases to be saved. <strong>NOTE: This option should be used with \'Friendly alias path\' option set to \'Yes\' in order to avoid problems when referencing a resource.</strong>';
 
 $_lang['setting_allow_tags_in_post'] = 'Allow HTML Tags in POST';
-$_lang['setting_allow_tags_in_post_desc'] = '';
+$_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST actions within the manager will strip out any tags. MODx Recommends to leave this set at true.';
 
 $_lang['setting_auto_menuindex'] = 'Menu indexing default';
 $_lang['setting_auto_menuindex_desc'] = 'Select \'Yes\' to turn on automatic menu index incrementing by default.';
 
-$_lang['setting_automatic_alias'] = 'Automatically generate alias';
-$_lang['setting_automatic_alias_desc'] = 'Select \'yes\' to have the system automatically generate an alias based on the document\'s page title when saving.';
+$_lang['setting_allow_multiple_emails'] = 'Allow Duplicate Emails for Users';
+$_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the same email address.';
 
+$_lang['setting_automatic_alias'] = 'Automatically generate alias';
+$_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
 
 $_lang['setting_blocked_minutes'] = 'Blocked Minutes';
 $_lang['setting_blocked_minutes_desc'] = 'Here you can enter the number of minutes that a user will be blocked for if they reach their maximum number of allowed failed login attempts. Please enter this value as numbers only (no commas, spaces etc.)';
+
+$_lang['setting_cache_action_map'] = 'Enable Action Map Cache';
+$_lang['setting_cache_action_map_desc'] = 'When enabled, actions (or controller maps) will be cached to reduce manager page load times.';
+
+$_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
+$_lang['setting_cache_context_settings_desc'] = 'When enabled, context settings will be cached to reduce load times.';
 
 $_lang['setting_cache_db'] = 'Enable Database Cache';
 $_lang['setting_cache_db_desc'] = 'When enabled, objects and raw result sets from SQL queries are cached to significantly reduce database loads.';
 
 $_lang['setting_cache_db_expires'] = 'Expiration Time for DB Cache';
-$_lang['setting_cache_db_expires_desc'] = '';
+$_lang['setting_cache_db_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for DB result-set caching.';
 
 $_lang['setting_cache_default'] = 'Cacheable default';
-$_lang['setting_cache_default_desc'] = 'Select \'Yes\' to make all new resources cacheable by default.';
+$_lang['setting_cache_default_desc'] = 'Select \'Yes\' to make all new Resources cacheable by default.';
 $_lang['setting_cache_default_err'] = 'Please state whether or not you want documents to be cached by default.';
 
 $_lang['setting_cache_disabled'] = 'Disable Global Cache Options';
-$_lang['setting_cache_disabled_desc'] = 'Select yes to disable all MODx caching features.';
+$_lang['setting_cache_disabled_desc'] = 'Select \'Yes\' to disable all MODx caching features. MODx does not recommend disabling caching.';
 $_lang['setting_cache_disabled_err'] = 'Please state whether or not you want the cache enabled.';
 
 $_lang['setting_cache_json'] = 'Cache JSON Data';
-$_lang['setting_cache_json_desc'] = '';
+$_lang['setting_cache_json_desc'] = 'Cache any JSON data sent to and from the manager UI.';
+
+$_lang['setting_cache_expires'] = 'Expiration Time for Default Cache';
+$_lang['setting_cache_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for default caching.';
 
 $_lang['setting_cache_json_expires'] = 'Expiration Time for JSON Cache';
-$_lang['setting_cache_json_expires_desc'] = '';
+$_lang['setting_cache_json_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for JSON caching.';
+
+$_lang['setting_cache_handler'] = 'Caching Handler Class';
+$_lang['setting_cache_handler_desc'] = 'The class name of the type handler to use for caching. If set to true, this will use server headers to cache the lexicon strings loaded into JavaScript for the manager interface.';
 
 $_lang['setting_cache_lang_js'] = 'Cache Lexicon JS Strings';
 $_lang['setting_cache_lang_js_desc'] = 'If set to true, this will use server headers to cache the lexicon strings loaded into JavaScript for the manager interface.';
+
+$_lang['setting_cache_lexicon_topics'] = 'Cache Lexicon Topics';
+$_lang['setting_cache_lexicon_topics_desc'] = 'When enabled, all Lexicon Topics will be cached so as to greatly reduce load times for Internationalization functionality. MODx strongly recommends leaving this set to \'Yes\'.';
 
 $_lang['setting_cache_resource'] = 'Enable Partial Resource Cache';
 $_lang['setting_cache_resource_desc'] = 'Partial resource caching is configurable by resource when this feature is enabled.  Disabling this feature will disable it globally.';
 
 $_lang['setting_cache_resource_expires'] = 'Expiration Time for Partial Resource Cache';
-$_lang['setting_cache_resource_expires_desc'] = '';
+$_lang['setting_cache_resource_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for partial Resource caching.';
+
+$_lang['setting_cache_scripts'] = 'Enable Script Cache';
+$_lang['setting_cache_scripts_desc'] = 'When enabled, MODx will cache all Scripts (Snippets and Plugins) to file to reduce load times. MODx recommends leaving this set to \'Yes\'.';
+
+$_lang['setting_cache_system_settings'] = 'Enable System Setting Cache';
+$_lang['setting_cache_system_settings_desc'] = 'When enabled, system settings will be cached to reduce load times. MODx recommends leaving this on.';
 
 $_lang['setting_compress_js'] = 'Use Compressed Javascript Libraries';
-$_lang['setting_compress_js_desc'] = 'When this is enabled, MODx will use a compressed version of its custom JavaScript libraries. This greatly reduces load and execution time. Disable only if you are modifying core elements.';
+$_lang['setting_compress_js_desc'] = 'When this is enabled, MODx will use a compressed version of its custom JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
-$_lang['setting_default_template'] = 'Default template';
-$_lang['setting_default_template_desc'] = 'Select the default template you wish to use for new documents. You can still select a different template in the document editor, this setting just pre-selects one of your templates for you.';
+$_lang['setting_container_suffix'] = 'Container Suffix';
+$_lang['setting_container_suffix_desc'] = 'The suffix to append to Resources set as containers when using FURLs.';
+
+$_lang['setting_default_template'] = 'Default Template';
+$_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
 
 $_lang['setting_editor_css_path'] = 'Path to CSS file';
-$_lang['setting_editor_css_path_desc'] = 'Enter the path to your CSS file that you wish to use within the editor. The best way to enter the path is to enter the path from the root of your server, for example: /assets/site/style.css. If you do not wish to load a style sheet into the editor, leave this field blank.';
+$_lang['setting_editor_css_path_desc'] = 'Enter the path to your CSS file that you wish to use within a richtext editor. The best way to enter the path is to enter the path from the root of your server, for example: /assets/site/style.css. If you do not wish to load a style sheet into a richtext editor, leave this field blank.';
 
 $_lang['setting_editor_css_selectors'] = 'CSS Selectors for Editor';
-$_lang['setting_editor_css_selectors_desc'] = '';
+$_lang['setting_editor_css_selectors_desc'] = 'A comma-separated list of CSS selectors for a richtext editor.';
 
-$_lang['setting_emailsender'] = 'E-mail address';
-$_lang['setting_emailsender_desc'] = 'Here you can specify the e-mail address used when sending users their usernames and passwords.';
+$_lang['setting_emailsender'] = 'Registration E-mail From Address';
+$_lang['setting_emailsender_desc'] = 'Here you can specify the e-mail address used when sending Users their usernames and passwords.';
 $_lang['setting_emailsender_err'] = 'Please state the administration email address.';
 
-$_lang['setting_emailsubject'] = 'E-mail subject';
-$_lang['setting_emailsubject_desc'] = 'The subject line for the default signup email.';
+$_lang['setting_emailsubject'] = 'Registration E-mail Subject';
+$_lang['setting_emailsubject_desc'] = 'The subject line for the default signup email when a User is registered.';
 $_lang['setting_emailsubject_err'] = 'Please state the subject line for the signup email.';
 
-$_lang['setting_error_page'] = 'Error page';
+$_lang['setting_error_page'] = 'Error Page';
 $_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to send users to if they request a document which doesn\'t actually exist. <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
 $_lang['setting_error_page_err'] = 'Please specify a document ID that is the error page.';
 
 $_lang['setting_failed_login_attempts'] = 'Failed Login Attempts';
-$_lang['setting_failed_login_attempts_desc'] = '';
-
+$_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
 
 $_lang['setting_fe_editor_lang'] = 'Front-end Editor Language';
 $_lang['setting_fe_editor_lang_desc'] = 'Choose a language for the editor to use when used as a front-end editor.';
@@ -148,17 +174,10 @@ $_lang['setting_filemanager_path_desc'] = 'IIS often does not populate the docum
 $_lang['setting_filemanager_path_err'] = 'Please state the absoulte document root path for the filemanager.';
 $_lang['setting_filemanager_path_err_invalid'] = 'This filemanager directory either does not exist or cannot be accessed. Please state a valid directory or adjust the permissions of this directory.';
 
-$_lang['setting_friendly_alias_urls'] = 'Use friendly aliases';
-$_lang['setting_friendly_alias_urls_desc'] = 'If you are using friendly URLs, and the resource has an alias, the alias will always have precedence over the friendly URL. By setting this option to \'yes\', the friendly URL prefix and suffix will also be applied to the alias. For example, if your resource with ID 1 has an alias of `introduction`, and you\'ve set a prefix of `` and a suffix of `.html`, setting this option to `yes` will generate `introduction.html`. If there\'s no alias, MODx will generate `1.html` as link.';
+$_lang['setting_friendly_alias_urls'] = 'Use Friendly Aliases';
+$_lang['setting_friendly_alias_urls_desc'] = 'If you are using friendly URLs, and the resource has an alias, the alias will always have precedence over the friendly URL. By setting this option to \'Yes\', the friendly URL prefix and suffix will also be applied to the alias. For example, if your Resource with ID 1 has an alias of `introduction`, and you\'ve set a prefix of `` and a suffix of `.html`, setting this option to `yes` will generate `introduction.html`. If there\'s no alias, MODx will generate `1.html` as link.';
 
-$_lang['setting_friendly_url_prefix'] = 'Prefix for friendly URLs';
-$_lang['setting_friendly_url_prefix_desc'] = 'Here you can specify the prefix to use for friendly URLs. For example, a prefix setting of \'page\' will turn the URL /index.php?id=2 to the friendly URL /page2.html (assuming the suffix is set to .html). This way you can specify what your users (and search engines) see for links on your site.';
-
-$_lang['setting_friendly_url_suffix'] = 'Suffix for friendly URLs';
-$_lang['setting_friendly_url_suffix_desc'] = 'Here you can specify the suffix for Friendly URLs. Specifying \'.html\' will append .html to all your friendly URLs.';
-
-
-$_lang['setting_friendly_urls'] = 'Use friendly URLs';
+$_lang['setting_friendly_urls'] = 'Use Friendly URLs';
 $_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODx. Please note, this only works for MODx installations running on Apache, and you\'ll need to write a .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
 $_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
 
@@ -225,18 +244,6 @@ $_lang['setting_new_file_permissions_desc'] = 'When uploading a new file in the 
 $_lang['setting_new_folder_permissions'] = 'New Folder Permissions';
 $_lang['setting_new_folder_permissions_desc'] = 'When creating a new folder in the File Manager, the File Manager will attempt to change the folder permissions to those entered in this setting. This may not work on some setups, such as IIS, in which case you will need to manually change the permissions.';
 
-$_lang['setting_number_of_logs'] = 'Number of log entries';
-$_lang['setting_number_of_logs_desc'] = 'Enter the number of log entries shown per page when you browse the Audit trail.';
-$_lang['setting_number_of_logs_err'] = 'Please state the number of log entries you wish to show.';
-
-$_lang['setting_number_of_messages'] = 'Number of messages';
-$_lang['setting_number_of_messages_desc'] = 'Enter the number of messages to show in inbox when viewing messages.';
-$_lang['setting_number_of_messages_err'] = 'Please state how many messages you would like to show in the inbox.';
-
-$_lang['setting_number_of_results'] = 'Number of Results';
-$_lang['setting_number_of_results_desc'] = 'Enter the number of results to show in the data grid when viewing listings and search results.';
-$_lang['setting_number_of_results_err'] = 'Please state the default number of results to view in search requests.';
-
 $_lang['setting_password_generated_length'] = 'Password Auto-Generated Length';
 $_lang['setting_password_generated_length_desc'] = 'The length of the auto-generated password for a User.';
 
@@ -255,6 +262,15 @@ $_lang['setting_rb_base_dir_err_invalid'] = 'This resource directory either does
 $_lang['setting_rb_base_url'] = 'Resource URL';
 $_lang['setting_rb_base_url_desc'] = 'Enter the virtual path to resource directory. This setting is usually automatically generated. If you\'re using IIS, however, MODx may not be able to work the URL out on it\'s own, causing the Resource Browser to show an error. In that case, you can enter the URL to the images directory here (the URL as you\'d enter it on Internet Explorer).';
 $_lang['setting_rb_base_url_err'] = 'Please state the resource browser base URL.';
+
+$_lang['setting_request_controller'] = 'Request Controller Filename';
+$_lang['setting_request_controller_desc'] = 'The filename of the main request controller from which MODx is loaded. Most users can leave this as index.php.';
+
+$_lang['setting_request_param_alias'] = 'Request Alias Parameter';
+$_lang['setting_request_param_alias_desc'] = 'The name of the GET parameter to identify Resource aliases when redirecting with FURLs.';
+
+$_lang['setting_request_param_id'] = 'Request ID Parameter';
+$_lang['setting_request_param_id_desc'] = 'The name of the GET parameter to identify Resource IDs when not using FURLs.';
 
 $_lang['setting_resolve_hostnames'] = 'Resolve hostnames';
 $_lang['setting_resolve_hostnames_desc'] = 'Do you want MODx to try to resolve your visitors\' hostnames when they visit your site? Resolving hostnames may create some extra server load, although your visitors won\'t notice this in any way.';
@@ -291,29 +307,22 @@ $_lang['setting_session_name'] = 'Session Name';
 $_lang['setting_session_name_desc'] = 'Use this setting to customize the session name used for the sessions in MODx.';
 
 $_lang['setting_settings_version'] = 'Settings Version';
-$_lang['setting_settings_version_desc'] = '';
+$_lang['setting_settings_version_desc'] = 'The current installed version of MODx.';
 
-$_lang['setting_set_header'] = '';
-$_lang['setting_set_header_desc'] = '';
-
-$_lang['setting_show_preview'] = 'Show Resource Preview';
-$_lang['setting_show_preview_desc'] = '';
-$_lang['setting_show_preview_err'] = 'Please state whether or not you want the document preview window.';
+$_lang['setting_set_header'] = 'Set HTTP Headers';
+$_lang['setting_set_header_desc'] = 'When enabled, MODx will attempt to set the HTTP headers for Resources.';
 
 $_lang['setting_signupemail_message'] = 'Signup e-mail';
 $_lang['setting_signupemail_message_desc'] = 'Here you can set the message sent to your users when you create an account for them and let MODx send them an e-mail containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site url, <br />[[+uid]] - User\'s Login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the e-mail, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]] Content Manager:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
-
-$_lang['setting_site_id'] = '';
-$_lang['setting_site_id_desc'] = '';
 
 $_lang['setting_site_name'] = 'Site name';
 $_lang['setting_site_name_desc'] = 'Enter the name of your site here.';
 $_lang['setting_site_name_err']  = 'Please enter a site name.';
 
 $_lang['setting_site_start'] = 'Site start';
-$_lang['setting_site_start_desc'] = 'Enter the ID of the document you want to use as homepage here. <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
-$_lang['setting_site_start'] = 'Please specify a document ID that is the site start.';
+$_lang['setting_site_start_desc'] = 'Enter the ID of the Resource you want to use as homepage here. <strong>NOTE: make sure this ID you enter belongs to an existing Resource, and that it has been published!</strong>';
+$_lang['setting_site_start_err'] = 'Please specify a Resource ID that is the site start.';
 
 $_lang['setting_site_status'] = 'Site status';
 $_lang['setting_site_status_desc'] = 'Select \'Yes\' to publish your site on the web. If you select \'No\', your visitors will see the \'Site unavailable message\', and won\'t be able to browse the site.';
@@ -323,25 +332,18 @@ $_lang['setting_site_unavailable_message'] = 'Site unavailable message';
 $_lang['setting_site_unavailable_message_desc'] = 'Message to show when the site is offline or if an error occurs. <strong>Note: This message will only be displayed if the Site unavailable page option is not set.</strong>';
 
 $_lang['setting_site_unavailable_page'] = 'Site unavailable page';
-$_lang['setting_site_unavailable_page_desc'] = 'Enter the ID of the document you want to use as an offline page here. <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
+$_lang['setting_site_unavailable_page_desc'] = 'Enter the ID of the Resource you want to use as an offline page here. <strong>NOTE: make sure this ID you enter belongs to an existing Resource, and that it has been published!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'Please specify the document ID for the site unavailable page.';
 
 $_lang['setting_strip_image_paths'] = 'Rewrite browser paths?';
-$_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODx  will write file browser resource src\'s (images, files, flash, etc.) as absolute URLs. Relative URLs are helpful should you wish to move your MODx install, e.g., from a staging site to a production site. If you have no idea what this means, it\'s best just to leave it set to \'Yes\'.';
-
-$_lang['setting_top_howmany'] = 'Top how many';
-$_lang['setting_top_howmany_desc'] = 'When viewing reports, how large should the \'Top ...\' lists be?';
-$_lang['setting_top_howmany_err'] = 'Please state how many records you would like to show.';
-
-$_lang['setting_track_visitors'] = 'Log visits (stats)';
-$_lang['setting_track_visitors_desc'] = 'This setting has no effect unless you have a visitor tracking or statistics resource installed that supports this setting. Logging visits will allow you to view your site\'s website usage statistics.';
+$_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODx will write file browser resource src\'s (images, files, flash, etc.) as absolute URLs. Relative URLs are helpful should you wish to move your MODx install, e.g., from a staging site to a production site. If you have no idea what this means, it\'s best just to leave it set to \'Yes\'.';
 
 $_lang['setting_udperms_allowroot'] = 'Allow root';
-$_lang['setting_udperms_allowroot_desc'] = 'Do you want to allow your users to create new documents in the root of the site? ';
+$_lang['setting_udperms_allowroot_desc'] = 'Do you want to allow your users to create new Resources in the root of the site? ';
 
 $_lang['setting_unauthorized_page'] = 'Unauthorized page';
-$_lang['setting_unauthorized_page_desc'] = 'Enter the ID of the document you want to send users to if they have requested a secured or unauthorized document. <strong>NOTE: make sure the ID you enter belongs to an existing document, and that it has been published and is publicly accessible!</strong>';
-$_lang['setting_unauthorized_page_err'] = 'Please specify a document ID for the unauthorized page.';
+$_lang['setting_unauthorized_page_desc'] = 'Enter the ID of the Resource you want to send users to if they have requested a secured or unauthorized Resource. <strong>NOTE: make sure the ID you enter belongs to an existing Resource, and that it has been published and is publicly accessible!</strong>';
+$_lang['setting_unauthorized_page_err'] = 'Please specify a Resource ID for the unauthorized page.';
 
 $_lang['setting_upload_files'] = 'Uploadable File Types';
 $_lang['setting_upload_files_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/files/\' using the Resource Manager. Please enter the extensions for the filetypes, seperated by commas.';
@@ -369,17 +371,15 @@ $_lang['setting_use_editor'] = 'Enable Rich Text Editor';
 $_lang['setting_use_editor_desc'] = 'Do you want to enable the rich text editor? If you\'re more comfortable writing HTML, then you can turn the editor off using this setting. Note that this setting applies to all documents and all users!';
 $_lang['setting_use_editor_err'] = 'Please state whether or not you want to use an RTE editor.';
 
-$_lang['setting_use_udperms'] = 'Use Access Permissions';
-$_lang['setting_use_udperms_desc'] = 'Access permissions allow you to specify which pages your users are allowed to edit. You\'ll need to assign your users to user groups, your documents to document groups, and then you\'ll need to specify which user groups are allowed to access which document groups. When you first turn this on, only administrators will be allowed to edit any documents.';
-$_lang['setting_use_udperms_err'] = 'Please state whether or not you want to use access permissions.';
-
 $_lang['setting_webpwdreminder_message'] = 'Web Reminder Email';
 $_lang['setting_webpwdreminder_message_desc'] = 'Enter a message to be sent to your web users whenever they request a new password via email. The Content Manager will send an e-mail containing their new password and activation information. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site url, <br />[[+uid]] - User\'s Login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the e-mail, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Hello [[+uid]]\n\nTo active you new password click the following link:\n\n[[+surl]]\n\nIf successful you can use the following password to login:\n\nPassword:[[+pwd]]\n\nIf you did not request this email then please ignore it.\n\nRegrads,\nSite Administrator';
 
-$_lang['setting_websignupemail_messasge'] = 'Web Signup e-mail';
+$_lang['setting_websignupemail_message'] = 'Web Signup e-mail';
 $_lang['setting_websignupemail_message_desc'] = 'Here you can set the message sent to your web users when you create a web account for them and let the Content Manager send them an e-mail containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site url, <br />[[+uid]] - User\'s Login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the e-mail, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]]:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into [[+sname]] ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_which_editor'] = 'Editor to use';
 $_lang['setting_which_editor_desc'] = 'Here you can select which rich text editor you wish to use. You can download and install additional Rich Text editors from the MODx download page.';
+
+

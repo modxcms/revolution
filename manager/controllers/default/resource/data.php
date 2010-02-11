@@ -65,7 +65,6 @@ Ext.onReady(function() {
         ,context_key: "'.$resource->get('context_key').'"
         ,class_key: "'.$resource->get('class_key').'"
         ,pagetitle: "'.$resource->get('pagetitle').'"
-        ,show_preview: "'.($modx->getOption('show_preview') ? 'true' : 'false').'"
     });
 });
 // ]]>
