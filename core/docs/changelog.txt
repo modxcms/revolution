@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1646] Fixed issue where download buttons were staying grayed out if there was an error message
 - [#MODX-1644] Added SMTP mail settings to default system settings to allow global SMTP usage for all modMail functions
 - [#MODX-1606] Fixed bug in modRestCurlClient class due to encoded ampersand
 - [#MODX-197] Refactored Action Buttons JS, added 'actionNew', 'actionContinue', and 'actionClose' events to MODx.FormPanel objects, ensured parent/context_key is persisted through add another resources

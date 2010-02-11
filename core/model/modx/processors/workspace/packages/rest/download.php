@@ -50,7 +50,6 @@ if ($response->isError()) {
 }
 $metadataXml = $response->toXml();
 
-
 /* set package metadata */
 $metadata = array();
 $modx->rest->xml2array($metadataXml,$metadata);

@@ -478,13 +478,18 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
             ,params: {
                 action: 'download'
                 ,info: rec.data.location+'::'+rec.data.signature
-                ,provider: this.provider
+                ,provider: MODx.provider
             }
             ,scope: this
             ,listeners: {
                 'success': {fn:function(r) {
                     Ext.getCmp('modx-grid-package').refresh();
                     this.refresh();
+                    rec.downloading = false;
+                    var btns = Ext.query('.package-download');
+                    Ext.each(btns,function(btn) { btn.style.opacity = '1.0'; });
+                },scope:this}
+                ,'failure': {fn:function(r) {
                     rec.downloading = false;
                     var btns = Ext.query('.package-download');
                     Ext.each(btns,function(btn) { btn.style.opacity = '1.0'; });
