@@ -111,6 +111,20 @@ abstract class modMail {
         if (is_array($attributes)) {
             $this->attributes= $attributes;
         }
+        if ($this->modx->getOption('mail_use_smtp',null,false)) {
+            $this->attributes[modMail::MAIL_ENGINE] = 'smtp';
+            $this->attributes[modMail::MAIL_SMTP_AUTH] = $this->modx->getOption('mail_smtp_auth',null,false);
+            $helo = $this->modx->getOption('mail_smtp_helo',null,'');
+            if (!empty($helo)) { $this->attributes[modMail::MAIL_SMTP_HELO] = $helo; }
+            $this->attributes[modMail::MAIL_SMTP_HOSTS] = $this->modx->getOption('mail_smtp_hosts',null,'localhost');
+            $this->attributes[modMail::MAIL_SMTP_KEEPALIVE] = $this->modx->getOption('mail_smtp_keepalive',null,false);
+            $this->attributes[modMail::MAIL_SMTP_PASS] = $this->modx->getOption('mail_smtp_pass',null,'');
+            $this->attributes[modMail::MAIL_SMTP_PORT] = $this->modx->getOption('mail_smtp_port',null,25);
+            $this->attributes[modMail::MAIL_SMTP_PREFIX] = $this->modx->getOption('mail_smtp_prefix',null,'');
+            $this->attributes[modMail::MAIL_SMTP_SINGLE_TO] = $this->modx->getOption('mail_smtp_single_to',null,false);
+            $this->attributes[modMail::MAIL_SMTP_TIMEOUT] = $this->modx->getOption('mail_smtp_timeout',null,10);
+            $this->attributes[modMail::MAIL_SMTP_USER] = $this->modx->getOption('mail_smtp_user',null,'');
+        }
     }
 
     /**

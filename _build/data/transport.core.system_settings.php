@@ -818,3 +818,103 @@ $collection['95']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+
+$collection['95']= $xpdo->newObject('modSystemSetting');
+$collection['95']->fromArray(array (
+  'key' => 'mail_use_smtp',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
+$collection['96']= $xpdo->newObject('modSystemSetting');
+$collection['96']->fromArray(array (
+  'key' => 'mail_smtp_auth',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
+$collection['97']= $xpdo->newObject('modSystemSetting');
+$collection['97']->fromArray(array (
+  'key' => 'mail_smtp_helo',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
+$collection['98']= $xpdo->newObject('modSystemSetting');
+$collection['98']->fromArray(array (
+  'key' => 'mail_smtp_hosts',
+  'value' => 'localhost',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
+$collection['99']= $xpdo->newObject('modSystemSetting');
+$collection['99']->fromArray(array (
+  'key' => 'mail_smtp_keepalive',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
+$collection['100']= $xpdo->newObject('modSystemSetting');
+$collection['100']->fromArray(array (
+  'key' => 'mail_smtp_pass',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
+$collection['101']= $xpdo->newObject('modSystemSetting');
+$collection['101']->fromArray(array (
+  'key' => 'mail_smtp_port',
+  'value' => '587',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
+$collection['102']= $xpdo->newObject('modSystemSetting');
+$collection['102']->fromArray(array (
+  'key' => 'mail_smtp_prefix',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
+$collection['103']= $xpdo->newObject('modSystemSetting');
+$collection['103']->fromArray(array (
+  'key' => 'mail_smtp_single_to',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
+$collection['104']= $xpdo->newObject('modSystemSetting');
+$collection['104']->fromArray(array (
+  'key' => 'mail_smtp_timeout',
+  'value' => '10',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
+$collection['105']= $xpdo->newObject('modSystemSetting');
+$collection['105']->fromArray(array (
+  'key' => 'mail_smtp_user',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);

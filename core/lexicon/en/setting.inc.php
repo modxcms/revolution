@@ -12,6 +12,7 @@ $_lang['area_caching'] = 'Caching';
 $_lang['area_file'] = 'File System';
 $_lang['area_furls'] = 'Friendly URL';
 $_lang['area_language'] = 'Lexicon and Language';
+$_lang['area_mail'] = 'Mail';
 $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_session'] = 'Session and Cookie';
 $_lang['area_lexicon_string'] = 'Area Lexicon Entry';
@@ -161,9 +162,38 @@ $_lang['setting_friendly_urls'] = 'Use friendly URLs';
 $_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODx. Please note, this only works for MODx installations running on Apache, and you\'ll need to write a .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
 $_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
 
-$_lang['setting_mail_check_timeperiod'] = 'Mail Check Time Period';
-$_lang['setting_mail_check_timeperiod_desc'] = 'How often to check for new mail messages in the Manager, in seconds.';
-$_lang['setting_mail_check_timeperiod_err'] = 'Please state how often you want to check for new messages.';
+$_lang['setting_mail_use_smtp'] = 'Use SMTP';
+$_lang['setting_mail_use_smtp_desc'] = 'If true, MODx will attempt to use SMTP in mail functions.';
+
+$_lang['setting_mail_smtp_auth'] = 'SMTP Authentication';
+$_lang['setting_mail_smtp_auth_desc'] = 'Sets SMTP authentication. Utilizes the mail_smtp_username and mail_smtp_password settings.';
+
+$_lang['setting_mail_smtp_helo'] = 'SMTP Helo Message';
+$_lang['setting_mail_smtp_helo_desc'] = 'Sets the SMTP HELO of the message (Defaults to the hostname).';
+
+$_lang['setting_mail_smtp_hosts'] = 'SMTP Hosts';
+$_lang['setting_mail_smtp_hosts_desc'] = 'Sets the SMTP hosts.  All hosts must be separated by a semicolon.  You can also specify a different port for each host by using this format: [hostname:port] (e.g. "smtp1.example.com:25;smtp2.example.com"). Hosts will be tried in order.';
+
+$_lang['setting_mail_smtp_keepalive'] = 'SMTP Keep-Alive';
+$_lang['setting_mail_smtp_keepalive_desc'] = 'Prevents the SMTP connection from being closed after each mail sending. Not recommended.';
+
+$_lang['setting_mail_smtp_pass'] = 'SMTP Password';
+$_lang['setting_mail_smtp_pass_desc'] = 'The password to authenticate to SMTP against.';
+
+$_lang['setting_mail_smtp_port'] = 'SMTP Port';
+$_lang['setting_mail_smtp_port_desc'] = 'Sets the default SMTP server port.';
+
+$_lang['setting_mail_smtp_prefix'] = 'SMTP Connection Prefix';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Sets connection prefix. Options are "", "ssl" or "tls"';
+
+$_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
+$_lang['setting_mail_smtp_single_to_desc'] = 'Provides the ability to have the TO field process individual emails, instead of sending to entire TO addresses.';
+
+$_lang['setting_mail_smtp_timeout'] = 'SMTP Timeout';
+$_lang['setting_mail_smtp_timeout_desc'] = 'Sets the SMTP server timeout in seconds. This function will not work in win32 servers.';
+
+$_lang['setting_mail_smtp_user'] = 'SMTP User';
+$_lang['setting_mail_smtp_user_desc'] = 'The user to authenticate to SMTP against.';
 
 $_lang['setting_manager_direction'] = 'Manager Text Direction';
 $_lang['setting_manager_direction_desc'] = 'Choose the direction that the text will be rendered in the Manager, left to right or right to left.';
