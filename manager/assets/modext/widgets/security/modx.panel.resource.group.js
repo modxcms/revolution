@@ -40,6 +40,10 @@ MODx.panel.ResourceGroups = function(config) {
                         xtype: 'modx-tree-resource-simple'
                         ,id: 'modx-gr-tree-resource'
                         ,url: MODx.config.connectors_url+'resource/index.php'
+                        ,baseParams: {
+                            action: 'getNodes'
+                            ,noMenu: true
+                        }
                         ,ddGroup: 'rg2resource'
                         ,title: _('resources')
                         ,enableDrop: false

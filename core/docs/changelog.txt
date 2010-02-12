@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1621] Remove unnecessary context menu items from items in Resource Group Resources tree
 - [#MODX-1627] Fixed incorrect menu in resource group tree resources when newly dragged
 - [#MODX-1599] Added manager_date_format system setting for customizing date formats for the manager
 - [#MODX-1651] Increasing width of setup navbar buttons to accommodate translations

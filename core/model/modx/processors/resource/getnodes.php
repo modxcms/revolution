@@ -15,6 +15,7 @@ $modx->lexicon->load('resource','context');
 
 $_REQUEST['sortBy'] = !empty($_REQUEST['sortBy']) ? $_REQUEST['sortBy'] : 'menuindex';
 $stringLiterals = !empty($_REQUEST['stringLiterals']) ? true : false;
+$noMenu = !empty($_REQUEST['noMenu']) ? true : false;
 
 if (!isset($_REQUEST['id'])) {
     $context= 'root';
@@ -208,7 +209,7 @@ while ($item) {
                 'qtip' => $item->get('description') != '' ? $item->get('description') : '',
                 'type' => 'context',
                 'page' => empty($_REQUEST['nohref']) ? '?a='.$actions['context/update'].'&key='.$item->get('key') : '',
-                'menu' => array('items' => $menu),
+                'menu' => $noMenu ? array() : array('items' => $menu),
             );
         } else {
             $menu = array();
@@ -441,7 +442,7 @@ while ($item) {
                 'preview_url' => $modx->makeUrl($item->get('id')),
                 'page' => empty($_REQUEST['nohref']) ? '?a='.($hasEditPerm ? $actions['resource/update'] : $actions['resource/data']).'&id='.$item->id : '',
                 'allowDrop' => true,
-                'menu' => array('items' => $menu),
+                'menu' => $noMenu ? array() : array('items' => $menu),
             );
             if ($hasChildren) {
                 $itemArray['children'] = array();
