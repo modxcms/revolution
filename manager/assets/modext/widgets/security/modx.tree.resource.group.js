@@ -150,12 +150,11 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
                 'success': {fn:function(r,o) {
     				MODx.util.Progress.reset();
     				Ext.Msg.hide();
-    				r = Ext.decode(r.responseText);
     				if (!r.success) {
     					Ext.Msg.alert(_('error'),r.message);
-    					this.refresh();
     					return false;
     				}
+                    this.refresh();
     			},scope:this}
             }
 		});
