@@ -8,7 +8,8 @@ if (!empty($_POST['proceed'])) {
     if (isset ($_REQUEST['language'])) {
         $language= $_REQUEST['language'];
     }
-    setcookie('modx_setup_language', $language, 0, dirname(dirname($_SERVER['REQUEST_URI'])) . '/');
+    $cookiePath = preg_replace('#[/\\\\]$#', '', dirname(dirname($_SERVER['REQUEST_URI'])));
+    setcookie('modx_setup_language', $language, 0, $cookiePath . '/');
     unset($_POST['proceed']);
 
     $settings = $install->getConfig();
@@ -33,10 +34,14 @@ sort($langs);
 $this->parser->assign('langs', $langs);
 unset($path,$file,$handle);
 
+$actualLanguage = 'en';
+if (!empty($_COOKIE['modx_setup_language']) && ($_COOKIE['modx_setup_language'] != 'en')) {
+    $actualLanguage = $_COOKIE['modx_setup_language'];
+}
 $languages = '';
 foreach ($langs as $language) {
     $languages .= '<option value="'.$language.'"'
-        .($language == 'en' ? ' selected="selected"' : '')
+        .($language == $actualLanguage ? ' selected="selected"' : '')
         .'>' . $language . '</option>' . "\n";
 }
 $this->parser->assign('languages',$languages);
