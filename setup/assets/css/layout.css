@@ -138,7 +138,7 @@ table.options td {
 }
 .setup_navbar button, .setup_navbar input {
     float:right;
-    width:100px;
+    width:140px;
     cursor: pointer;
     margin-right: 1em;
 }
