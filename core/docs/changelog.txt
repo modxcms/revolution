@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1649] Fixed bug where Quick Create didn't respect default_template setting
 - [#MODX-1650] Fixed bug with language specification in setup to properly set cookie for Windows machines, and set initial language properly
 - [#MODX-1626] Fixed bug where top menus could not have actions
 - [#MODX-1494] Fixed issue where some settings dont have descriptions, and cleaned up deprecated settings

@@ -372,6 +372,7 @@ MODx.window.QuickCreateResource = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
+            ,value: MODx.config.default_template
         },
         MODx.getQRContentField(this.ident,config.record.class_key)
         ,{
