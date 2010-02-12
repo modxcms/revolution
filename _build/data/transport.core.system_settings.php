@@ -429,6 +429,15 @@ $settings['mail_smtp_user']->fromArray(array (
   'area' => 'mail',
   'editedon' => null,
 ), '', true, true);
+$settings['manager_date_format']= $xpdo->newObject('modSystemSetting');
+$settings['manager_date_format']->fromArray(array (
+  'key' => 'manager_date_format',
+  'value' => 'Y-m-d',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['manager_direction']= $xpdo->newObject('modSystemSetting');
 $settings['manager_direction']->fromArray(array (
   'key' => 'manager_direction',

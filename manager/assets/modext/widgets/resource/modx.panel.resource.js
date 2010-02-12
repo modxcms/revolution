@@ -227,6 +227,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'publishedon'
         ,id: 'modx-resource-publishedon'
         ,allowBlank: true
+        ,dateFormat: MODx.config.manager_date_format
         ,dateWidth: 120
         ,timeWidth: 120
     });
@@ -238,6 +239,7 @@ MODx.panel.Resource = function(config) {
             ,name: 'pub_date'
             ,id: 'modx-resource-pub-date'
             ,allowBlank: true
+            ,dateFormat: MODx.config.manager_date_format
             ,dateWidth: 120
             ,timeWidth: 120
             
@@ -251,6 +253,7 @@ MODx.panel.Resource = function(config) {
             ,name: 'unpub_date'
             ,id: 'modx-resource-unpub-date'
             ,allowBlank: true
+            ,dateFormat: MODx.config.manager_date_format
             ,dateWidth: 120
             ,timeWidth: 120            
         });

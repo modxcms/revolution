@@ -184,6 +184,7 @@ MODx.panel.SymLink = function(config) {
         ,name: 'publishedon'
         ,id: 'modx-symlink-publishedon'
         ,allowBlank: true
+        ,dateFormat: MODx.config.manager_date_format
         ,dateWidth: 120
         ,timeWidth: 120
     });
@@ -194,8 +195,8 @@ MODx.panel.SymLink = function(config) {
             ,description: _('resource_publishdate_help')
             ,name: 'pub_date'
             ,id: 'modx-symlink-pub-date'
-            ,format: 'd-m-Y H:i:s'
             ,allowBlank: true
+            ,dateFormat: MODx.config.manager_date_format
             ,dateWidth: 120
             ,timeWidth: 120
         });
@@ -207,8 +208,8 @@ MODx.panel.SymLink = function(config) {
             ,description: _('resource_unpublishdate_help')
             ,name: 'unpub_date'
             ,id: 'modx-symlink-unpub-date'
-            ,format: 'd-m-Y H:i:s'
             ,allowBlank: true
+            ,dateFormat: MODx.config.manager_date_format
             ,dateWidth: 120
             ,timeWidth: 120   
         });

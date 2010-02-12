@@ -280,7 +280,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'datefield'
                     ,width: 150
                     ,allowBlank: true
-                    ,format: 'm-d-Y'
+                    ,format: MODx.config.manager_date_format
                 },{
                     id: 'modx-user-gender'
                     ,name: 'gender'
@@ -329,7 +329,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'datefield'
                     ,width: 150
                     ,allowBlank: true
-                    ,format: 'm-d-Y'
+                    ,format: MODx.config.manager_date_format
                 },{
                     id: 'modx-user-blockedafter'
                     ,name: 'blockedafter'
@@ -337,7 +337,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'datefield'
                     ,width: 150
                     ,allowBlank: true
-                    ,format: 'm-d-Y'
+                    ,format: MODx.config.manager_date_format
                 }]
             }]
         }];

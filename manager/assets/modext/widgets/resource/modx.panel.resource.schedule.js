@@ -56,12 +56,12 @@ MODx.grid.ResourceSchedule = function(config) {
                 header: _('publish_date')
                 ,dataIndex: 'pub_date'
                 ,width: 150
-                ,editor: { xtype: 'datefield' ,format: 'D M d, Y' }
+                ,editor: { xtype: 'datefield' ,format: MODx.config.manager_date_format }
             },{ 
                 header: _('unpublish_date')
                 ,dataIndex: 'unpub_date'
                 ,width: 150
-                ,editor: { xtype: 'datefield' ,format: 'D M d, Y' }
+                ,editor: { xtype: 'datefield' ,format: MODx.config.manager_date_format }
             }
         ]
         ,tbar: [{

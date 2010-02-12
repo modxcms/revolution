@@ -217,6 +217,9 @@ $_lang['setting_mail_smtp_user_desc'] = 'The user to authenticate to SMTP agains
 $_lang['setting_manager_direction'] = 'Manager Text Direction';
 $_lang['setting_manager_direction_desc'] = 'Choose the direction that the text will be rendered in the Manager, left to right or right to left.';
 
+$_lang['setting_manager_date_format'] = 'Manager Date Format';
+$_lang['setting_manager_date_format_desc'] = 'The format string, in PHP date() format, for the dates represented in the manager.';
+
 $_lang['setting_manager_lang_attribute'] = 'Manager HTML and XML Language Attribute';
 $_lang['setting_manager_lang_attribute_desc'] = 'Enter the language code that best fits with your chosen manager language, this will ensure that the browser can present content in the best format for you.';
 
