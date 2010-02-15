@@ -16,6 +16,7 @@ MODx.panel.ResourceTV = function(config) {
         ,bodyStyle: 'padding: 1.5em;'
         ,autoHeight: true
         ,autoLoad: this.autoload(config)
+        ,width: '97%'
         ,templateField: 'modx-resource-template'
     });
     MODx.panel.ResourceTV.superclass.constructor.call(this,config);
