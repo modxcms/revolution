@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Redo logic order of modPackageBuilder::buildLexicon to ensure languages are packaged in before topics
 - [#MODX-1647] Added width specification to force width of screen to prevent scrolling off of RTE TVs
 - Cleaned up tvTitle Form Customization rule by moving code from JS to PHP
 - Fixed z-index issue for windows due to IE fix
