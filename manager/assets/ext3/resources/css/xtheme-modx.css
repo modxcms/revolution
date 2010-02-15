@@ -1648,7 +1648,8 @@ a.x-menu-item {
 .x-window {
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
-	background: transparent url(../images/modx/window/border.png) repeat scroll 0 0
+	background: transparent url(../images/modx/window/border.png) repeat scroll 0 0;
+	z-index: 99999 !important;
 }
 .x-window-tl .x-window-header {
 	-moz-border-radius-topleft:2px;
