@@ -284,6 +284,7 @@ class modTemplateVar extends modElement {
                 array(
                     'rule:=' => 'tvDefault',
                     'OR:rule:=' => 'tvVisible',
+                    'OR:rule:=' => 'tvTitle',
                 ),
                 'name' => 'tv'.$this->get('id'),
             ));
@@ -304,6 +305,10 @@ class modTemplateVar extends modElement {
                         $v = $rule->get('value');
                         $this->set('value',$v);
                         $this->set('default_text',$v);
+                        break;
+                    case 'tvTitle':
+                        $v = $rule->get('value');
+                        $this->set('caption',$v);
                         break;
                 }
             }
