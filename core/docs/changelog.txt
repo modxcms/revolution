@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1658] Fixed bug where placing a menu item in a submenu would place it in top level
 - [#MODX-1624] Enabled changing of text field in menu items
 - [#MODX-1656], [#MODX-1654] Fixed CSS gap in install summary in setup
 - [#MODX-1655] Fixed hardcoded lexicon strings in setup
