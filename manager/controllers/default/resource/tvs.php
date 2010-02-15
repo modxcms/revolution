@@ -55,6 +55,8 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
                     );
             }
             $fe = $tv->renderInput($resource->id);
+            if (empty($fe)) continue;
+
             if (strpos($tv->get('value'),'@INHERIT') > -1) $tv->set('inherited',true);
             $tv->set('formElement',$fe);
             if (!is_array($categories[$tv->category]->tvs))

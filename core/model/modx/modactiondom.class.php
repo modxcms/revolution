@@ -50,27 +50,11 @@ class modActionDom extends modAccessibleSimpleObject {
                     $rule = 'Ext.getCmp("'.$this->get('container').'").hideTabStripItem("'.$this->get('name').'");';
                 }
                 break;
-            case 'tvVisible':
-                if (!$this->get('value')) {
-                    $rule = 'Ext.getCmp("modx-panel-resource-tv").on("load",function() {
-    Ext.get("'.$this->get('name').'").up("tr").setDisplayed(false);
-});';
-                }
-                break;
             case 'tvLabel':
             case 'tvTitle':
                 $rule = 'Ext.getCmp("modx-panel-resource-tv").on("load",function() {
     Ext.get("'.$this->get('name').'").up("tr").child("th").update("<label>'.$this->get('value').'</label><br />");
 });';
-                break;
-            case 'tvDefault':
-            case 'tvDefaultValue':
-                if ($this->get('value')) {
-                    $rule = 'Ext.getCmp("modx-panel-resource-tv").on("load",function() {
-    var f = Ext.get("'.$this->get('name').'");
-    if (f) f.dom.value = "'.$this->get('value').'";
-});';
-                }
                 break;
             default: break;
         }

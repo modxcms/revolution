@@ -281,7 +281,10 @@ class modTemplateVar extends modElement {
             $c = $this->xpdo->newQuery('modActionDom');
             $c->leftJoin('modAccessActionDom','Access');
             $c->where(array(
-                'rule' => 'tvDefault',
+                array(
+                    'rule:=' => 'tvDefault',
+                    'OR:rule:=' => 'tvVisible',
+                ),
                 'name' => 'tv'.$this->get('id'),
             ));
             $c->andCondition(array(
@@ -291,9 +294,18 @@ class modTemplateVar extends modElement {
             ),null,2);
             $domRules = $this->xpdo->getCollection('modActionDom',$c);
             foreach ($domRules as $rule) {
-                $v = $rule->get('value');
-                $this->set('value',$v);
-                $this->set('default_text',$v);
+                switch ($rule->get('rule')) {
+                    case 'tvVisible':
+                        if ($rule->get('value') == 0) {
+                            return '';
+                        }
+                        break;
+                    case 'tvDefault':
+                        $v = $rule->get('value');
+                        $this->set('value',$v);
+                        $this->set('default_text',$v);
+                        break;
+                }
             }
             unset($domRules,$rule,$userGroups,$v,$c);
         }
