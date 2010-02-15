@@ -41,9 +41,26 @@ if (!empty($_POST['parent'])) {
 /* save menu */
 $menu->fromArray($_POST);
 $menu->set('action',$_POST['action_id']);
+
 if ($menu->save() == false) {
     return $modx->error->failure($modx->lexicon('menu_err_save'));
 }
+
+
+/* if changing key */
+if (!empty($_POST['new_text']) && $_POST['new_text'] != $menu->get('text')) {
+    $alreadyExists = $modx->getObject('modMenu',$_POST['new_text']);
+    if ($alreadyExists) { return $modx->error->failure($modx->lexicon('menu_err_ae')); }
+
+    $newMenu = $modx->newObject('modMenu');
+    $newMenu->fromArray($menu->toArray());
+    $newMenu->set('text',$_POST['new_text']);
+    if ($newMenu->save()) {
+        $menu->remove();
+    }
+}
+
+
 
 /* log manager action */
 $modx->logManagerAction('menu_update','modMenu',$menu->get('text'));

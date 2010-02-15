@@ -52,6 +52,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         var r = this.cm.activeNode.attributes.data;
         Ext.apply(r,{
             action_id: r.action
+            ,new_text: r.text
         });
         if (!this.windows.update_menu) {
             this.windows.update_menu = MODx.load({
@@ -178,9 +179,12 @@ MODx.window.UpdateMenu = function(config) {
             ,id: 'modx-umen-parent'
             ,xtype: 'hidden'
         },{
+            name: 'text'
+            ,xtype: 'hidden'
+        },{
             fieldLabel: _('text')
-            ,name: 'text'
-            ,id: 'modx-umen-text'
+            ,name: 'new_text'
+            ,id: 'modx-umen-new_text'
             ,xtype: 'textfield'
             ,allowBlank: false
             ,width: 200
