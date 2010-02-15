@@ -1,10 +1,14 @@
-<form id="install" action="?action=welcome" method="post">
+<script type="text/javascript" src="assets/js/sections/welcome.js"></script>
+<form id="welcome" action="?action=welcome" method="post">
 <div>
     <h2>{$_lang.welcome}</h2>
     {$_lang.welcome_message}
     <br />
 </div>
-<div>
+
+<p>{$_lang.config_key_change}</p>
+
+<div id="cck-div">
     <h3>{$_lang.config_key}</h3>
     <p><small>{$_lang.config_key_override}</small></p>
     <div class="labelHolder">

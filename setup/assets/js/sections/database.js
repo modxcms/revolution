@@ -2,9 +2,13 @@ Ext.onReady(function() {
     Ext.select('#modx-testconn').on('click',MODx.DB.testConnection);
     Ext.select('#modx-testcoll').on('click',MODx.DB.testCollation);
     
-    Ext.select('.modx-hidden2').hide();
+    var es = Ext.select('.modx-hidden2');
+    es.setVisibilityMode(Ext.Element.DISPLAY);
+    es.hide();
     if (!MODx.showHidden) {
-        Ext.select('.modx-hidden').hide();
+        var ez = Ext.select('.modx-hidden');
+        ez.setVisibilityMode(Ext.Element.DISPLAY);
+        ez.hide();
     }
 });
 

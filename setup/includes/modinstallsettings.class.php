@@ -30,7 +30,9 @@ class modInstallSettings {
         if (file_exists($this->fileName)) {
             $this->settings = include $this->fileName;
         }
-
+    }
+    public function delete($k) {
+        unset($this->settings[$k]);
     }
     public function store(array $settings = array(),$expire = 900) {
         $this->settings = array_merge($this->settings,$settings);

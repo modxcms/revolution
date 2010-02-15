@@ -13,6 +13,16 @@ if (!empty($_POST['proceed'])) {
     $settings = $install->getConfig($_POST['installmode']);
     /* merge those with POST */
     $settings = array_merge($settings,$_POST);
+
+    if (!empty($_POST['new_folder_permissions']) && $_POST['new_folder_permissions'] == $default_folder_permissions) {
+        unset($settings['new_folder_permissions']);
+        $install->settings->delete('new_folder_permissions');
+    }
+    if (!empty($_POST['new_file_permissions']) && $_POST['new_file_permissions'] == $default_file_permissions) {
+        unset($settings['new_file_permissions']);
+        $install->settings->delete('new_file_permissions');
+    }
+
     /* then store in cache */
     $install->settings->store($settings);
     $this->proceed('database');
@@ -40,10 +50,15 @@ if ($manifest && file_exists(MODX_CORE_PATH . 'packages/core/modWorkspace/')) {
 $safe_mode= @ ini_get('safe_mode');
 $this->parser->assign('safe_mode', ($safe_mode ? 1 : 0));
 
+$settings = $install->settings->fetch();
+$nfop = !empty($settings['new_folder_permissions']) ? $settings['new_folder_permissions'] : $default_folder_permissions;
+$nfip = !empty($settings['new_file_permissions']) ? $settings['new_file_permissions'] : $default_file_permissions;
 
 $this->parser->assign('files_exist', $files_exist);
 $this->parser->assign('manifest', $manifest);
 $this->parser->assign('unpacked', $unpacked);
+$this->parser->assign('new_folder_permissions', $nfop);
+$this->parser->assign('new_file_permissions', $nfip);
 $this->parser->assign('default_folder_permissions', $default_folder_permissions);
 $this->parser->assign('default_file_permissions', $default_file_permissions);
 

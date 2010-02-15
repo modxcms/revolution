@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Revamped UI in new setup options, cleared up text, simplified presented options
 - [#MODX-18] Allow editing of MODX_CONFIG_KEY in setup welcome view
 - [#MODX-18] Prompt user for MODX_CORE_PATH if not found at beginning of setup
 - [#MODX-760], [#MODX-1080], [#MODX-1528] Added setup option to set new_file_permissions and new_folder_permissions in welcome view

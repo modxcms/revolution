@@ -6,6 +6,7 @@
  */
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Add-ons';
+$_lang['advanced_options'] = 'Advanced Options';
 $_lang['all'] = 'All';
 $_lang['app_description'] = 'CMS and PHP Application Framework';
 $_lang['app_motto'] = 'MODx Create and Do More with Less';
@@ -17,8 +18,9 @@ $_lang['config_file_err_w'] = 'Error writing config file.';
 $_lang['config_file_perms_notset'] = 'Config file permissions were not updated. You may want to change the permissions on your config file to secure the file from tampering.';
 $_lang['config_file_perms_set'] = 'Config file permissions successfully updated.';
 $_lang['config_file_written'] = 'Config file successfully written.';
-$_lang['config_key'] = 'MODX_CONFIG_KEY';
-$_lang['config_key_override'] = 'If you wish to run setup on a MODX_CONFIG_KEY other than the one currently specified in your setup/includes/config.core.php, specify it below.';
+$_lang['config_key'] = 'MODx Configuration Key';
+$_lang['config_key_change'] = 'If you would like to change the MODx configuration key, <a id="cck-href" href="javascript:void(0);">please click here.</a>';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your setup/includes/config.core.php, please specify it below.';
 $_lang['config_not_writable_err'] = 'You have attempted to change a setting in setup/includes/config.core.php but the file is not writable. Make the file writable or edit the file manually before continuing.';
 $_lang['connection_character_set'] = 'Connection character set:';
 $_lang['connection_collation'] = 'Collation:';
@@ -153,7 +155,7 @@ $_lang['options_important_upgrade'] = 'Important Upgrade Note';
 $_lang['options_important_upgrade_note'] = 'Make sure all Manager users <strong>log out before upgrading</strong> to prevent problems (e.g., not being able to access resources). If you have trouble after upgrading, log out of any Manager sessions, clear your browser cache, then log in again.';
 $_lang['options_new_file_permissions'] = 'New file permissions';
 $_lang['options_new_file_permissions_note'] = 'You can override the permissions new files created via MODx will use, e.g. 0664 or 0666.';
-$_lang['options_new_folder_permissions'] = 'New file permissions';
+$_lang['options_new_folder_permissions'] = 'New folder permissions';
 $_lang['options_new_folder_permissions_note'] = 'You can override the permissions new folders created via MODx will use, e.g. 0775 or 0777.';
 $_lang['options_new_installation'] = 'New Installation';
 $_lang['options_title'] = 'Install Options';
@@ -198,7 +200,7 @@ $_lang['welcome_message'] = '<p>This program will guide you through the rest of 
 ';
 $_lang['workspace_err_nf'] = 'Could not find the active workspace.';
 $_lang['workspace_err_path'] = 'Error setting the active workspace path.';
-$_lang['workspace_path_update'] = 'Updated the active workspace path.';
+$_lang['workspace_path_updated'] = 'Updated the active workspace path.';
 $_lang['versioner_err_nf'] = 'Could not find the Install Versioner at: %s <br />Please make sure you\'ve uploaded all the necessary files.';
 $_lang['xpdo_err_ins'] = 'Could not instantiate xPDO.';
 $_lang['xpdo_err_nf'] = 'MODx could not find the xPDO class at %s. Please make sure it was uploaded correctly.';

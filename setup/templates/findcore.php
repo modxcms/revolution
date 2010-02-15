@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package modx
+ * @subpackage setup
+ */
 $posted = !empty($_POST) && isset($_POST['findcore']) && isset($_POST['core_path']);
 if ($posted) {
     $core_path = $_POST['core_path'];

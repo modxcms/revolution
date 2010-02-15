@@ -1,4 +1,4 @@
-<form id="install" action="?action=options" method="post">
+<form id="options" action="?action=options" method="post">
 <h2>{$_lang.options_title}</h2>
 
 <hr />
@@ -54,28 +54,28 @@
 
 <hr />
 
+<h3>{$_lang.advanced_options}</h3>
+
 {if $installmode EQ 0}
 <table class="options">
 <tbody>
 <tr>
-    <th style="padding-top: 3em;">
+    <th style="padding-top: 1em;">
         <label>
-            <input type="text" name="new_folder_permissions" id="new_folder_permissions" value="" size="5" maxlength="4" />
-            <span>{$default_folder_permissions}</span><br />
+            <input type="text" name="new_folder_permissions" id="new_folder_permissions" value="{$new_folder_permissions}" size="5" maxlength="4" />
             {$_lang.options_new_folder_permissions}
         </label>
     </th>
-    <td style="padding-top: 3em;">{$_lang.options_new_folder_permissions_note}</td>
+    <td style="padding-top: 1em;">{$_lang.options_new_folder_permissions_note}</td>
 </tr>
 <tr>
-    <th style="padding-top: 3em;">
+    <th style="padding-top: 2em;">
         <label>
-            <input type="text" name="new_file_permissions" id="new_file_permissions" value="" size="5" maxlength="4" />
-            <span>{$default_file_permissions}</span><br />
+            <input type="text" name="new_file_permissions" id="new_file_permissions" value="{$new_file_permissions}" size="5" maxlength="4" />
             {$_lang.options_new_file_permissions}
         </label>
     </th>
-    <td style="padding-top: 3em;">{$_lang.options_new_file_permissions_note}</td>
+    <td style="padding-top: 2em;">{$_lang.options_new_file_permissions_note}</td>
 </tr>
 </tbody>
 </table>
@@ -87,13 +87,13 @@
 <table class="options">
 <tbody>
 <tr>
-    <th style="padding-top: 3em;">
+    <th style="padding-top: 2em;">
         <label>
             <input type="checkbox" name="unpacked" id="unpacked" value="1"{if $unpacked EQ 0} disabled="disabled"{/if}{if $unpacked EQ 1} checked="checked"{/if} />
             {$_lang.options_core_unpacked}
         </label>
     </th>
-    <td style="padding-top: 3em;">{$_lang.options_core_unpacked_note}</td>
+    <td style="padding-top: 2em;">{$_lang.options_core_unpacked_note}</td>
 </tr>
 <tr>
     <th>
