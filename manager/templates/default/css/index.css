@@ -614,6 +614,7 @@ ul#modx-topnav li ul.modx-subnav {
     list-style: none;
     font-size:12px;
     position: absolute; /*--Important - Keeps modx-subnav from affecting main navigation flow--*/
+    z-index: 999999;
     left: 0; 
     top: 46px;
     background: #333;
