@@ -292,10 +292,11 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
     }
     
     ,getStayMenu: function() {
+        var stay = Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay');
         return {
             xtype:'switch'
             ,id: 'modx-stay-menu'
-            ,activeItem: MODx.config.stay === 'new' ? 0 : 1 
+            ,activeItem: stay == 'new' ? 0 : 1 
             ,items: [{
                 tooltip: _('stay_new')
                 ,value: 'new'
@@ -317,7 +318,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             }]
             ,listeners: {
                 change: function(btn,itm){
-                    MODx.config.stay = itm.value;
+                    Ext.state.Manager.set('modx.stay.'+MODx.request.a,itm.value);
                 }
                 ,scope: this
                 ,delay: 10

@@ -66,11 +66,6 @@ class modConnectorRequest extends modManagerRequest {
         }
         $options['action'] = strtolower($options['action']);
 
-        /* handle stay options */
-        if (isset($_POST['modx-ab-stay'])) {
-            $_SESSION['modx.stay'] = $_POST['modx-ab-stay'];
-        }
-
         $this->loadErrorHandler();
 
         /* validate manager session
