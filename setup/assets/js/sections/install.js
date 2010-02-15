@@ -4,8 +4,7 @@ Ext.onReady(function(){
 
 MODx.Install = function() {
     return {
-        init: function() {
-            
+        init: function() {            
             Ext.select('.modx-toggle-success').on('click',function() {
                 MODx.Install.toggle('success');
             });
@@ -15,7 +14,9 @@ MODx.Install = function() {
         }
         
         ,toggle: function(type) {
-            var es = Ext.select('.'+type).toggle();
+            var es = Ext.select('.'+type);
+            es.setVisibilityMode(Ext.Element.DISPLAY);
+            es.toggle();
         }
     }
 }();
