@@ -8,6 +8,32 @@
 $modx->lexicon->load('login');
 $modx->smarty->assign('_lang',$modx->lexicon->fetch());
 
+if (!empty($_POST['login'])) {
+    $this->loadErrorHandler();
+    $processor = $modx->getOption('core_path').'model/modx/processors/security/login.php';
+    $response = require_once $processor;
+
+    if (!empty($response) && is_array($response)) {
+        if (!empty($response['success']) && isset($response['object'])) {
+            $url = $modx->getOption('manager_url');
+            $modx->sendRedirect($url);
+        } else {
+            $error_message = '';
+            if (isset($response['errors']) && !empty($response['errors'])) {
+                foreach ($response['errors'] as $error) {
+                    $error_message .= $error.'<br />';
+                }
+            } elseif (isset($response['message']) && !empty($response['message'])) {
+                $error_message = $response['message'];
+            } else {
+                $error_message = $modx->lexicon('login_err_unknown');
+            }
+            $modx->smarty->assign('error_message',$error_message);
+        }
+    }
+    $modx->smarty->assign('_post',$_POST);
+}
+
 /* invoke OnManagerLoginFormPrerender event */
 $eventInfo= $modx->invokeEvent('OnManagerLoginFormPrerender');
 $eventInfo= is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
