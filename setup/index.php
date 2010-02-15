@@ -28,28 +28,27 @@
 @ ini_set('magic_quotes_runtime', 0);
 @ ini_set('magic_quotes_sybase', 0);
 
-/* set error reporting */
-error_reporting(E_ALL & ~E_NOTICE);
-
 /* start session */
 session_start();
 
 /* check for compatible PHP version */
 define('MODX_SETUP_PHP_VERSION', phpversion());
-$php_ver_comp = version_compare(MODX_SETUP_PHP_VERSION, '5.1.0');
+$php_ver_comp = version_compare(MODX_SETUP_PHP_VERSION, '5.1.1');
 if ($php_ver_comp < 0) {
-    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Wrong PHP version! You\'re using PHP version '.MODX_SETUP_PHP_VERSION.', and MODx requires version 5.1.0 or higher.</p></body></html>');
+    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Wrong PHP version! You\'re using PHP version '.MODX_SETUP_PHP_VERSION.', and MODx requires version 5.1.1 or higher.</p></body></html>');
 }
+
+$installBaseUrl= (!isset ($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) != 'on') ? 'http://' : 'https://';
+$installBaseUrl .= $_SERVER['HTTP_HOST'];
+if ($_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
+$installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || isset ($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == 'on') ? '' : ':' . $_SERVER['SERVER_PORT'];
+$installBaseUrl .= $_SERVER['PHP_SELF'];
+define('MODX_SETUP_URL', $installBaseUrl);
 
 /* session loop-back tester */
 if ((!isset($_GET['s']) || $_GET['s'] != 'set') && !isset($_SESSION['session_test'])) {
     $_SESSION['session_test']= 1;
-    $installBaseUrl= (!isset ($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) != 'on') ? 'http://' : 'https://';
-    $installBaseUrl .= $_SERVER['HTTP_HOST'];
-    if ($_SERVER['SERVER_PORT'] != 80)
-        $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl); /* remove port from HTTP_HOST */
-    $installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || isset ($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == 'on') ? '' : ':' . $_SERVER['SERVER_PORT'];
-    echo "<html><head><title>Loading...</title><script>window.location.href='" . $installBaseUrl . $_SERVER['PHP_SELF'] . "?s=set';</script></head><body></body></html>";
+    echo "<html><head><title>Loading...</title><script>window.location.href='" . MODX_SETUP_URL . "?s=set';</script></head><body></body></html>";
     exit ();
 } elseif (isset($_GET['s']) && $_GET['s'] == 'set' && !isset($_SESSION['session_test'])) {
     die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Make sure your PHP session configuration is valid and working.</p></body></html>');
@@ -68,6 +67,7 @@ if (!include(MODX_SETUP_PATH . 'includes/modinstall.class.php')) {
 }
 $modInstall = new modInstall();
 $modInstall->loadLang();
+$modInstall->findCore();
 $modInstall->doPreloadChecks();
 $modInstall->loadRequestHandler();
 $modInstall->request->loadParser();

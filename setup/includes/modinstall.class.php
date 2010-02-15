@@ -48,7 +48,7 @@ class modInstall {
      * @param array $options An array of configuration options.
      */
     function __construct(array $options = array()) {
-    	if (isset ($_REQUEST['action'])) {
+        if (isset ($_REQUEST['action'])) {
             $this->action = $_REQUEST['action'];
         }
         if (is_array($options)) {
@@ -181,6 +181,9 @@ class modInstall {
             $errors = array ();
             $this->xpdo = $this->_modx($errors);
         } else if (!is_object($this->xpdo)) {
+            $options = array();
+            if ($this->settings->get('new_folder_permissions')) $options['new_folder_permissions'] = $this->settings->get('new_folder_permissions');
+            if ($this->settings->get('new_file_permissions')) $options['new_file_permissions'] = $this->settings->get('new_file_permissions');
             $this->xpdo = $this->_connect($this->settings->get('database_type')
                  . ':host=' . $this->settings->get('database_server')
                  . ';dbname=' . trim($this->settings->get('dbase'), '`')
@@ -188,7 +191,9 @@ class modInstall {
                  . ';collation=' . $this->settings->get('database_collation')
                  ,$this->settings->get('database_user')
                  ,$this->settings->get('database_password')
-                 ,$this->settings->get('table_prefix'));
+                 ,$this->settings->get('table_prefix')
+                 ,$options
+             );
 
             if (!($this->xpdo instanceof xPDO)) { return $this->xpdo; }
 
@@ -202,7 +207,7 @@ class modInstall {
                     'filename' => 'install.' . MODX_CONFIG_KEY . '.' . strftime('%Y-%m-%dT%H:%M:%S')
                 )
             ));
-            $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_WARN);
+            $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
             $this->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/', $this->settings->get('table_prefix'));
         }
         return $this->xpdo;
@@ -277,7 +282,6 @@ class modInstall {
 
         /* get connection */
         $this->getConnection($mode);
-        $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
 
         /* run appropriate database routines */
         switch ($mode) {
@@ -396,6 +400,20 @@ class modInstall {
                         'class' => 'success',
                         'msg' => '<p class="ok">'.$this->lexicon['dau_saved'].'</p>'
                     );
+                }
+
+                /* set new_folder_permissions/new_file_permissions if specified */
+                if ($this->settings->get('new_folder_permissions')) {
+                    $settings_folder_perms = $this->xpdo->newObject('modSystemSetting');
+                    $settings_folder_perms->set('key', 'new_folder_permissions');
+                    $settings_folder_perms->set('value', $this->settings->get('new_folder_permissions'));
+                    $settings_folder_perms->save();
+                }
+                if ($this->settings->get('new_file_permissions')) {
+                    $settings_file_perms = $this->xpdo->newObject('modSystemSetting');
+                    $settings_file_perms->set('key', 'new_file_permissions');
+                    $settings_file_perms->set('value', $this->settings->get('new_file_permissions'));
+                    $settings_file_perms->save();
                 }
             /* if upgrade */
             } else {
@@ -686,21 +704,20 @@ class modInstall {
      * @access private
      * @return xPDO The xPDO instance to be used by the installation.
      */
-    public function _connect($dsn, $user = '', $password = '', $prefix = '') {
+    public function _connect($dsn, $user = '', $password = '', $prefix = '', array $options = array()) {
         if (include_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php')) {
-            $xpdo = new xPDO($dsn, $user, $password, array(
+            $xpdo = new xPDO($dsn, $user, $password, array_merge(array(
                     xPDO::OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
                     xPDO::OPT_TABLE_PREFIX => $prefix,
                     xPDO::OPT_LOADER_CLASSES => array('modAccessibleObject'),
                     xPDO::OPT_SETUP => true,
-                ),
+                ), $options),
                 array (
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
                     PDO::ATTR_PERSISTENT => false,
                     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
                 )
             );
-            $xpdo->setDebug(E_ALL & ~E_STRICT);
             $xpdo->setLogTarget(array(
                 'target' => 'FILE',
                 'options' => array(
@@ -752,6 +769,19 @@ class modInstall {
         return $modx;
     }
 
+    public function findCore() {
+        $exists = false;
+        if (file_exists(MODX_CORE_PATH) && is_dir(MODX_CORE_PATH)) {
+            if (file_exists(MODX_CORE_PATH . 'xpdo/xpdo.class.php') && file_exists(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+                $exists = true;
+            }
+        }
+        if (!$exists) {
+            include(MODX_SETUP_PATH . 'templates/findcore.php');
+            die();
+        }
+    }
+
     /**
      * Does all the pre-load checks, before setup loads.
      *
@@ -761,13 +791,13 @@ class modInstall {
         $this->loadLang('preload');
         $errors= array();
 
-        if ((!extension_loaded('mysql') && !function_exists('mysql_connect')) && ((defined('XPDO_MODE') && XPDO_MODE == 2) || (!defined('XPDO_MODE') && version_compare(MODX_SETUP_PHP_VERSION, '5.1') < 0))) {
+        if (!extension_loaded('mysql') && !function_exists('mysql_connect')) {
             $errors[] = $this->lexicon['preload_err_mysql'];
         }
-        if (!extension_loaded('pdo') && ((defined('XPDO_MODE') && XPDO_MODE == 1) || (!defined('XPDO_MODE') && version_compare(MODX_SETUP_PHP_VERSION, '5.1') >= 0))) {
+        if (!extension_loaded('pdo')) {
             $errors[] = $this->lexicon['preload_err_pdo'];
         }
-        if (!extension_loaded('pdo_mysql') && ((defined('XPDO_MODE') && XPDO_MODE == 1) || (!defined('XPDO_MODE') && version_compare(MODX_SETUP_PHP_VERSION, '5.1') >= 0))) {
+        if (!extension_loaded('pdo_mysql')) {
             $errors[] = $this->lexicon['preload_err_pdo_mysql'];
         }
         if (!file_exists(MODX_CORE_PATH) || !is_dir(MODX_CORE_PATH)) {

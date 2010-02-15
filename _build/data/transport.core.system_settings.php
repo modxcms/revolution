@@ -492,24 +492,6 @@ $settings['modx_charset']->fromArray(array (
   'area' => 'language',
   'editedon' => null,
 ), '', true, true);
-$settings['new_file_permissions']= $xpdo->newObject('modSystemSetting');
-$settings['new_file_permissions']->fromArray(array (
-  'key' => 'new_file_permissions',
-  'value' => '0644',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'file',
-  'editedon' => null,
-), '', true, true);
-$settings['new_folder_permissions']= $xpdo->newObject('modSystemSetting');
-$settings['new_folder_permissions']->fromArray(array (
-  'key' => 'new_folder_permissions',
-  'value' => '0755',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'file',
-  'editedon' => null,
-), '', true, true);
 $settings['password_generated_length']= $xpdo->newObject('modSystemSetting');
 $settings['password_generated_length']->fromArray(array (
   'key' => 'password_generated_length',
