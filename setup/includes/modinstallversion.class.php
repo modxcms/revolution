@@ -101,15 +101,16 @@ class modInstallVersion {
      */
     public function processResults($class,$description,$sql) {
         if (!$this->install->xpdo->exec($sql)) {
+            ;
             $this->results[] = array (
                 'class' => 'warning',
-                'msg' => '<p class="notok">Error upgrading table for class ' . $class . '<br /><small>' . nl2br(print_r($this->install->xpdo->errorInfo(), true)) . '</small></p>'
+                'msg' => '<p class="notok">'.sprintf($this->install->lexicon['err_update_table'],$class).'<br /><small>' . nl2br(print_r($this->install->xpdo->errorInfo(), true)) . '</small></p>'
             );
             return false;
         } else {
             $this->results[] = array (
                 'class' => 'success',
-                'msg' => '<p class="ok">Successfully upgraded table for class ' . $class . '<br /><small>' . $description . '</small></p>'
+                'msg' => '<p class="ok">'.sprintf($this->install->lexicon['table_updated'],$class).'<br /><small>' . $description . '</small></p>'
             );
             return true;
         }
