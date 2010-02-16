@@ -315,6 +315,7 @@ $_lang['roles'] = 'Roles';
 $_lang['saturday'] = 'Saturday';
 $_lang['save'] = 'Save';
 $_lang['save_changes'] = 'Save Changes';
+$_lang['save_successful'] = 'Save successful.';
 $_lang['save_tag'] = 'Save tag';
 $_lang['saving'] = 'Saving...';
 $_lang['scroll_dn'] = 'Scroll down';

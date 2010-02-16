@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1663] Added MODx.msg.status, which shows a fading status message on a successful save. This also solves the issue of user feedback. 
 - Removed unnecessary field from recently-edited-resource grid on welcome screen
 - [#MODX-1660], [#MODX-1037] Revamped login screen to HTML/CSS, basic form processing to allow browsers to save password in their password management systems
 - Revamped UI in new setup options, cleared up text, simplified presented options

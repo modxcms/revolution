@@ -360,5 +360,31 @@ Ext.extend(MODx.Msg,Ext.Component,{
         scope = scope || this;
         Ext.Msg.alert(title,text,fn,scope);
     }
+    
+    ,status: function(opt) {    
+        if (!MODx.stMsgCt) {
+            MODx.stMsgCt = Ext.DomHelper.insertFirst(document.body, {id:'modx-status-message-ct'}, true);
+        }
+        MODx.stMsgCt.alignTo(document, 't-t');
+        var markup = this.getStatusMarkup(opt);
+        var m = Ext.DomHelper.overwrite(MODx.stMsgCt, {html:markup}, true);
+        
+        m.slideIn('t');
+        var fadeOpts = {remove:true,useDisplay:true};
+        if (!opt.dontHide) {
+            m.pause(opt.delay || 1.5).ghost("t",fadeOpts);
+        } else {
+            m.on('click',function() {
+                m.ghost('t',fadeOpts);
+            });
+        }
+        
+    }
+    ,getStatusMarkup: function(opt) {
+        var mk = '<div class="modx-status-msg">';
+        if (opt.title) { mk += '<h3>'+opt.title+'</h3>'; }
+        if (opt.message) { mk += '<span class="modx-smsg-message">'+opt.message+'</span>'; }
+        return mk+'</div>';
+    }
 });
 Ext.reg('modx-msg',MODx.Msg);

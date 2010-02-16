@@ -896,3 +896,23 @@ input.x-static-text-field {
     height: 80px; 
     width: 100px; 
 } 
+
+/* status messages */
+.modx-status-msg {
+	position:absolute;
+    left:70%;
+    top:10px;
+    width:25%;
+    z-index:20000;
+    background: #f4f4f4;
+    padding: 5px;
+    opacity: .8;
+	-moz-border-radius-topleft:4px;
+	-moz-border-radius-topright:4px;
+	-moz-border-radius-bottomleft:4px;
+	-moz-border-radius-bottomright:4px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:4px;
+	-webkit-border-bottom-left-radius:4px;
+	-webkit-border-bottom-right-radius:4px;
+}

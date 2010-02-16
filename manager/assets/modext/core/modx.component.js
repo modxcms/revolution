@@ -220,13 +220,12 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 o.form.on('success',function(r) {
                     if (o.form.clearDirty) o.form.clearDirty();
                     /* allow for success messages */
-                    if (r.result.message != '') {
-                        Ext.Msg.alert(_('success'),r.result.message,function() {
-                            Ext.callback(this.redirectStay,this,[o,itm,r.result],1000);
-                         },this);
-                    } else {
-                        Ext.callback(this.redirectStay,this,[o,itm,r.result],1000);
-                    }
+                    MODx.msg.status({
+                        title: _('success')
+                        ,message: _('save_successful')
+                        ,dontHide: r.result.message != '' ? true : false
+                    });
+                    Ext.callback(this.redirectStay,this,[o,itm,r.result],1000);
                 },this);
                 o.form.submit();
             } else {
@@ -247,7 +246,8 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
         o = this.config;
         itm.params = itm.params || {};
         Ext.applyIf(itm.params,o.baseParams);
-        switch (MODx.config.stay) {
+        var stay = Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay');
+        switch (stay) {
             case 'new': /* if user selected 'new', then always redirect */
                 if (o.form.hasListener('actionNew')) {
                     o.form.fireEvent('actionNew',itm.params);
@@ -278,7 +278,9 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                         var url = Ext.urlEncode(itm.params);
                         location.href = '?'+url;
                         
-                    } else { Ext.Msg.hide(); }
+                    } else {
+                        Ext.Msg.hide();
+                    }
                 }
                 break;
             case 'close': /* redirect to the cancel action */
