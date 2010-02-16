@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Make rightlogin div longer to support longer translations
 - [#MODX-1653] Fixed issues with related objects, removal of aggregates, and other packaging bugs. Introduced xPDOTransport::UNINSTALL_OBJECT, which defaults to true. When off, it will prevent an object from being uninstalled. 
 - Updated xPDO to r413
 - [#MODX-761] Fixed language issue in setup, now sets it correctly and loads proper lexicon for login screen
