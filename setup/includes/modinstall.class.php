@@ -426,18 +426,18 @@ class modInstall {
                     $managerTheme->save();
                 }
 
-                /* handle change of default language to proper IANA code (FIXME: just forcing en for now) */
+                /* handle change of default language to proper IANA code based on initial language selection in setup */
                 if ($managerLanguage = $this->xpdo->getObject('modSystemSetting', array(
                         'key' => 'manager_language',
-                        'value:!=' => 'en'
                     ))) {
-                    $managerLanguage->set('value', 'en');
+                    $language = $this->settings->get('language');
+                    $managerLanguage->set('value',!empty($language) ? $language : 'en');
                     $managerLanguage->save();
                 }
 
                 /* update settings_version */
                 $settings_version = $this->xpdo->getObject('modSystemSetting', array(
-                    'key' => 'settings_version'
+                    'key' => 'settings_version',
                 ));
                 if ($settings_version == null) {
                     $settings_version = $this->xpdo->newObject('modSystemSetting');

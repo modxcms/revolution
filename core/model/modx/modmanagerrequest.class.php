@@ -89,7 +89,15 @@ class modManagerRequest extends modRequest {
 
         /* if not validated, load login page */
         $modx = & $this->modx;
-        if (!isset($this->modx->user) || !$this->modx->user->isAuthenticated('mgr')) {
+
+        if ($this->modx->getOption('manager_language')) {
+            $this->modx->cultureKey= $this->modx->getOption('manager_language');
+        }
+
+        /* load default core cache file of lexicon strings */
+        $this->modx->lexicon->load('core:default');
+
+        if (!isset($this->modx->user) || !$this->modx->user->hasSessionContext('mgr')) {
             $theme = $this->modx->getOption('manager_theme',null,'default');
             include_once $this->modx->getOption('manager_path') . 'controllers/'.$theme.'/security/login.php';
             exit();
@@ -121,12 +129,6 @@ class modManagerRequest extends modRequest {
                 }
             }
         }
-        if ($this->modx->getOption('manager_language')) {
-            $this->modx->cultureKey= $this->modx->getOption('manager_language');
-        }
-
-        /* load default core cache file of lexicon strings */
-        $this->modx->lexicon->load('core:default');
 
         if ($this->modx->actionMap === null || !is_array($this->modx->actionMap)) {
             $this->loadActionMap();

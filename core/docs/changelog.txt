@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-761] Fixed language issue in setup, now sets it correctly and loads proper lexicon for login screen
 - Ensure console window appears above other windows
 - [#MODX-1663] Added MODx.msg.status, which shows a fading status message on a successful save. This also solves the issue of user feedback. 
 - Removed unnecessary field from recently-edited-resource grid on welcome screen
