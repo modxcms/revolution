@@ -213,15 +213,22 @@ class xPDOObjectVehicle extends xPDOVehicle {
     /**
      * Uninstalls vehicle artifacts from the transport host.
      */
-    public function uninstall(& $transport, $vOptions) {
+    public function uninstall(& $transport, $options) {
+        return $this->_uninstallObject($transport, $options, $this->payload, null, null);
+    }
+
+    /**
+     * Uninstall the xPDOObjects represented by a vehicle element from the transport host.
+     */
+    public function _uninstallObject(& $transport, $options, $element, & $parentObject, $fkMeta) {
         $uninstalled = false;
         $removed = false;
         $uninstallObject = true;
         $upgrade = false;
         $preExistingMode = xPDOTransport::PRESERVE_PREEXISTING;
-        $object = $this->get($transport, $vOptions);
+        $object = $this->get($transport, $options);
         if (is_object($object) && $object instanceof xPDOObject) {
-            $vOptions = array_merge($vOptions, $this->payload);
+            $vOptions = array_merge($options, $element);
             $vClass = $vOptions['class'];
             if ($this->validate($transport, $object, $vOptions)) {
                 $uninstalled = true;
@@ -272,7 +279,7 @@ class xPDOObjectVehicle extends xPDOVehicle {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, 'Skipping ' . $vClass . ' object (data object does not exist and cannot be removed): ' . print_r($criteria, true));
                 }
                 if (!$this->_uninstallRelated($transport, $object, $element, $options)) {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not install related objects for vehicle: ' . print_r($vOptions, true));
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not uninstall related objects for vehicle: ' . print_r($vOptions, true));
                 }
                 if (!$this->resolve($transport, $object, $vOptions)) {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
@@ -281,7 +288,7 @@ class xPDOObjectVehicle extends xPDOVehicle {
                 $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle object: ' . print_r($vOptions, true));
             }
         } else {
-            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Problem instantiating object from vehicle: ' . print_r($vOptions, true));
+            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Problem instantiating object from vehicle: ' . print_r(array_merge($options, $element), true));
         }
         return $uninstalled;
     }
@@ -297,9 +304,11 @@ class xPDOObjectVehicle extends xPDOVehicle {
                 $parentClass = $parent->_class;
                 $rMeta = $transport->xpdo->getFKDefinition($parentClass, $rAlias);
                 if ($rMeta) {
+                    $results = array();
                     foreach ($rVehicles as $rKey => $rVehicle) {
-                        $uninstalled = $this->_uninstallObject($transport, $options, $rVehicle, $parent, $rMeta);
+                        $results[] = $this->_uninstallObject($transport, $options, $rVehicle, $parent, $rMeta);
                     }
+                    $uninstalled = (array_search(false, $results) === false);
                 }
             }
         }
