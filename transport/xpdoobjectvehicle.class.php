@@ -228,7 +228,7 @@ class xPDOObjectVehicle extends xPDOVehicle {
         $uninstallObject = true;
         $upgrade = false;
         $preExistingMode = xPDOTransport::PRESERVE_PREEXISTING;
-        $object = $this->get($transport, $options);
+        $object = $this->get($transport, $options, $element);
         if (is_object($object) && $object instanceof xPDOObject) {
             $vOptions = array_merge($options, $element);
             $vClass = $vOptions['class'];
