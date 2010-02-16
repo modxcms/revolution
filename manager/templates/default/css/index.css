@@ -786,6 +786,9 @@ input.x-static-text-field {
 }
 
 /* console */
+.modx-console {
+	z-index: 10001;
+}
 .modx-console .debug { color: gray; }
 .modx-console .success { color: green; }
 .modx-console .warn { color: blue; }
