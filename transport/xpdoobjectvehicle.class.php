@@ -283,7 +283,7 @@ class xPDOObjectVehicle extends xPDOVehicle {
                 if (!$this->_uninstallRelated($transport, $object, $element, $options)) {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not uninstall related objects for vehicle: ' . print_r($vOptions, true));
                 }
-                if (!$this->resolve($transport, $object, $vOptions)) {
+                if ($parentObject === null && !$this->resolve($transport, $object, $vOptions)) {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
                 }
             } else {
