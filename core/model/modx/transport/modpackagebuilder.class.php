@@ -414,6 +414,7 @@ class modPackageBuilder {
             xPDOTransport::UNIQUE_KEY => 'name',
             xPDOTransport::PRESERVE_KEYS => true,
             xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNINSTALL_OBJECT => false,
             xPDOTransport::PREEXISTING_MODE => xPDOTransport::PRESERVE_PREEXISTING,
         );
         foreach ($languages as $language) {
@@ -426,21 +427,13 @@ class modPackageBuilder {
         $attributes = array (
             xPDOTransport::PRESERVE_KEYS => false,
             xPDOTransport::UPDATE_OBJECT => true,
-            xPDOTransport::UNIQUE_KEY => array (
-                'name',
-                'namespace'
-            ),
+            xPDOTransport::UNIQUE_KEY => array ('name','namespace'),
             xPDOTransport::RELATED_OBJECTS => true,
             xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
                 'Entries' => array (
                     xPDOTransport::PRESERVE_KEYS => false,
                     xPDOTransport::UPDATE_OBJECT => true,
-                    xPDOTransport::UNIQUE_KEY => array (
-                        'name',
-                        'topic',
-                        'namespace',
-                        'language'
-                    ),
+                    xPDOTransport::UNIQUE_KEY => array ('name','topic','language'),
                 ),
             ),
         );

@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1653] Fixed issues with related objects, removal of aggregates, and other packaging bugs. Introduced xPDOTransport::UNINSTALL_OBJECT, which defaults to true. When off, it will prevent an object from being uninstalled. 
+- Updated xPDO to r413
 - [#MODX-761] Fixed language issue in setup, now sets it correctly and loads proper lexicon for login screen
 - Ensure console window appears above other windows
 - [#MODX-1663] Added MODx.msg.status, which shows a fading status message on a successful save. This also solves the issue of user feedback. 

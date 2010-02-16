@@ -19,12 +19,13 @@ if (empty($package)) {
         'signature' =>  $_REQUEST['signature'],
     )));
 }
+$transport = $package->getTransport();
 
 $modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_prep'));
 
 /* uninstall package */
 $options = array(
-    'preexisting_mode' => $_POST['preexisting_mode'],
+    xPDOTransport::PREEXISTING_MODE => $_POST['preexisting_mode'],
 );
 if ($package->uninstall($options) == false) {
     return $modx->error->failure(sprintf($modx->lexicon('package_err_uninstall'),$package->getPrimaryKey()));
