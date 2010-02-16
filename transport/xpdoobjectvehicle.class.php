@@ -216,6 +216,8 @@ class xPDOObjectVehicle extends xPDOVehicle {
     public function uninstall(& $transport, $vOptions) {
         $uninstalled = false;
         $removed = false;
+        $uninstallObject = true;
+        $upgrade = false;
         $preExistingMode = xPDOTransport::PRESERVE_PREEXISTING;
         $object = $this->get($transport, $vOptions);
         if (is_object($object) && $object instanceof xPDOObject) {
@@ -223,6 +225,9 @@ class xPDOObjectVehicle extends xPDOVehicle {
             $vClass = $vOptions['class'];
             if ($this->validate($transport, $object, $vOptions)) {
                 $uninstalled = true;
+                if (isset($vOptions[xPDOTransport::UNINSTALL_OBJECT])) {
+                    $uninstallObject = !empty($vOptions[xPDOTransport::UNINSTALL_OBJECT]);
+                }
                 $preserveKeys = !empty ($vOptions[xPDOTransport::PRESERVE_KEYS]);
                 if (!empty ($vOptions[xPDOTransport::UNIQUE_KEY])) {
                     $uniqueKey = $object->get($vOptions[xPDOTransport::UNIQUE_KEY]);
@@ -244,14 +249,14 @@ class xPDOObjectVehicle extends xPDOVehicle {
                     $object = $obj;
                 }
                 if ($exists) {
-                    if (!isset ($transport->_preserved[$vOptions['guid']]) || $preExistingMode === xPDOTransport::REMOVE_PREEXISTING) {
+                    if ($uninstallObject && $upgrade && (!isset ($transport->_preserved[$vOptions['guid']]) || $preExistingMode === xPDOTransport::REMOVE_PREEXISTING)) {
                         $removed = $object->remove();
                         if (!$removed) {
                             $uninstalled = false;
                             $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error removing vehicle object: ' . print_r($vOptions, true));
                         }
                     }
-                    if ($preExistingMode === xPDOTransport::RESTORE_PREEXISTING) {
+                    if ($upgrade && $preExistingMode === xPDOTransport::RESTORE_PREEXISTING) {
                         if (isset ($transport->_preserved[$vOptions['guid']])) {
                             $preserved = $transport->_preserved[$vOptions['guid']]['object'];
                             $object->fromArray($preserved, '', true, true);

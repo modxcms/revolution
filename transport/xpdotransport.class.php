@@ -53,6 +53,7 @@ class xPDOTransport {
     const PREEXISTING_MODE = 'preexisting_mode';
     const INSTALL_FILES = 'install_files';
     const UNINSTALL_FILES = 'uninstall_files';
+    const UNINSTALL_OBJECT = 'uninstall_object';
     /**
      * Indicates how pre-existing objects are treated on install/uninstall.
      * @var integer

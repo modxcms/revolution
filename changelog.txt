@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added xPDOTransport::UNINSTALL_OBJECT attribute and support in xPDOObjectVehicle::uninstall() [default value is true].
 - Refactored xPDOCacheManager to determine new folder/file permissions via umask().
 - Modified xPDOQuery_mysql::select() to trim the comma-delimited fields specified after explode()'ing the string.
 - Modified xPDOVehicle::resolve() to return true if xPDOTransport::RESOLVE_FILES is set to false with file resolver types.
