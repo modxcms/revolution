@@ -228,6 +228,7 @@ class xPDOObjectVehicle extends xPDOVehicle {
                 if (isset($vOptions[xPDOTransport::UNINSTALL_OBJECT])) {
                     $uninstallObject = !empty($vOptions[xPDOTransport::UNINSTALL_OBJECT]);
                 }
+                $upgrade = !empty($vOptions[xPDOTransport::UPDATE_OBJECT]);
                 $preserveKeys = !empty ($vOptions[xPDOTransport::PRESERVE_KEYS]);
                 if (!empty ($vOptions[xPDOTransport::UNIQUE_KEY])) {
                     $uniqueKey = $object->get($vOptions[xPDOTransport::UNIQUE_KEY]);
@@ -244,6 +245,7 @@ class xPDOObjectVehicle extends xPDOVehicle {
                 if (!empty ($vOptions[xPDOTransport::PREEXISTING_MODE])) {
                     $preExistingMode = intval($vOptions[xPDOTransport::PREEXISTING_MODE]);
                 }
+                $exists = false;
                 if ($obj = $transport->xpdo->getObject($vClass, $criteria)) {
                     $exists = true;
                     $object = $obj;
@@ -269,6 +271,9 @@ class xPDOObjectVehicle extends xPDOVehicle {
                 } else {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, 'Skipping ' . $vClass . ' object (data object does not exist and cannot be removed): ' . print_r($criteria, true));
                 }
+                if (!$this->_uninstallRelated($transport, $object, $element, $options)) {
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not install related objects for vehicle: ' . print_r($vOptions, true));
+                }
                 if (!$this->resolve($transport, $object, $vOptions)) {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
                 }
@@ -277,6 +282,26 @@ class xPDOObjectVehicle extends xPDOVehicle {
             }
         } else {
             $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Problem instantiating object from vehicle: ' . print_r($vOptions, true));
+        }
+        return $uninstalled;
+    }
+
+    /**
+     * Uninstalls related objects from the vehicle.
+     */
+    public function _uninstallRelated(& $transport, & $parent, $element, $options) {
+        $uninstalled = true;
+        if (is_object($parent) && isset ($element[xPDOTransport::RELATED_OBJECTS]) && is_array($element[xPDOTransport::RELATED_OBJECTS])) {
+            $uninstalled = false;
+            foreach ($element[xPDOTransport::RELATED_OBJECTS] as $rAlias => $rVehicles) {
+                $parentClass = $parent->_class;
+                $rMeta = $transport->xpdo->getFKDefinition($parentClass, $rAlias);
+                if ($rMeta) {
+                    foreach ($rVehicles as $rKey => $rVehicle) {
+                        $uninstalled = $this->_uninstallObject($transport, $options, $rVehicle, $parent, $rMeta);
+                    }
+                }
+            }
         }
         return $uninstalled;
     }
