@@ -214,7 +214,9 @@ class xPDOObjectVehicle extends xPDOVehicle {
      * Uninstalls vehicle artifacts from the transport host.
      */
     public function uninstall(& $transport, $options) {
-        return $this->_uninstallObject($transport, $options, $this->payload, null, null);
+        $parentObj = null;
+        $parentMeta = null;
+        return $this->_uninstallObject($transport, $options, $this->payload, $parentObj, $parentMeta);
     }
 
     /**

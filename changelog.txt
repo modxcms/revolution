@@ -2,7 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
-- Added support for xPDOObjectVehicle::uninstall() to uninstall related_objects.
+- Added support for xPDOObjectVehicle::uninstall() to operate on related_objects.
 - Fixed bug in xPDOObjectVehicle::uninstall() not getting UPDATE_OBJECT value properly.
 - Added xPDOTransport::UNINSTALL_OBJECT attribute and support in xPDOObjectVehicle::uninstall() [default value is true].
 - Refactored xPDOCacheManager to determine new folder/file permissions via umask().
