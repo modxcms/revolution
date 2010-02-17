@@ -16,7 +16,7 @@ if (!empty($_POST['login'])) {
     if (!empty($response) && is_array($response)) {
         if (!empty($response['success']) && isset($response['object'])) {
             $url = $modx->getOption('manager_url');
-            $modx->sendRedirect($url);
+            $modx->sendRedirect($url,'','','full');
         } else {
             $error_message = '';
             if (isset($response['errors']) && !empty($response['errors'])) {

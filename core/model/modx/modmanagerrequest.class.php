@@ -97,7 +97,7 @@ class modManagerRequest extends modRequest {
         /* load default core cache file of lexicon strings */
         $this->modx->lexicon->load('core:default');
 
-        if (!isset($this->modx->user) || !$this->modx->user->hasSessionContext('mgr')) {
+        if (!isset($this->modx->user) || !$this->modx->user->isAuthenticated('mgr')) {
             $theme = $this->modx->getOption('manager_theme',null,'default');
             include_once $this->modx->getOption('manager_path') . 'controllers/'.$theme.'/security/login.php';
             exit();
