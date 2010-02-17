@@ -5,9 +5,7 @@
  * @package modx
  * @subpackage processors.security.role
  */
-if (!$modx->hasPermission(array('access_permissions' => true, 'new_role' => true))) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
+if (!$modx->hasPermission('new_role')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
 /* validate form */

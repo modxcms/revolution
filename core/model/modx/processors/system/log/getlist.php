@@ -47,30 +47,33 @@ $c->innerJoin('modUser','User');
 if (!empty($wa)) $c->where($wa);
 $count = $modx->getCount('modManagerLog',$c);
 
-$c->select('modManagerLog.*,User.username AS username');
+$c->select('
+    `modManagerLog`.*,
+    `User`.`username` AS `username`
+');
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $logs = $modx->getCollection('modManagerLog',$c);
 
-$ls = array();
+$list = array();
 foreach ($logs as $log) {
-    $la = $log->toArray();
-    if (!empty($la['classKey']) && !empty($la['item'])) {
-        $obj = $modx->getObject($la['classKey'],$la['item']);
+    $logArray = $log->toArray();
+    if (!empty($logArray['classKey']) && !empty($logArray['item'])) {
+        $obj = $modx->getObject($logArray['classKey'],$logArray['item']);
         if ($obj) {
-            $nameField = getNameField($la['classKey']);
-            $la['name'] = $obj->get($nameField).' ('.$obj->get('id').')';
+            $nameField = getNameField($logArray['classKey']);
+            $logArray['name'] = $obj->get($nameField).' ('.$obj->get('id').')';
         } else {
-            $la['name'] = $la['classKey'] . ' (' . $la['item'] . ')';
+            $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
         }
     } else {
-        $la['name'] = '';
+        $logArray['name'] = '';
     }
-    $la['occurred'] = strftime('%a %b %d, %Y %H:%I:%S %p',strtotime($la['occurred']));
-    $ls[] = $la;
+    $logArray['occurred'] = strftime('%a %b %d, %Y %H:%I:%S %p',strtotime($logArray['occurred']));
+    $list[] = $logArray;
 }
 
-return $this->outputArray($ls,$count);
+return $this->outputArray($list,$count);
 
 function getNameField($classKey) {
     $field = 'name';

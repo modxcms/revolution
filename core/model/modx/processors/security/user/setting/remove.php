@@ -23,13 +23,13 @@ $entry = $modx->getObject('modLexiconEntry',array(
     'namespace' => $setting->get('namespace'),
     'name' => 'setting_'.$setting->get('key'),
 ));
-if ($entry != null) $entry->remove();
+if (!empty($entry) && $entry instanceof modLexiconEntry) $entry->remove();
 
 $description = $modx->getObject('modLexiconEntry',array(
     'namespace' => $setting->get('namespace'),
     'name' => 'setting_'.$setting->get('key').'_desc',
 ));
-if ($description != null) $description->remove();
+if (!empty($description) && $description instanceof modLexiconEntry) $description->remove();
 
 /* remove setting */
 if ($setting->remove() == null) {

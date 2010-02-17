@@ -7,18 +7,15 @@
  * @package modx
  * @subpackage processors.security.role
  */
-if (!$modx->hasPermission(array('access_permissions' => true, 'save_role' => true))) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
+if (!$modx->hasPermission('save_role')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
 /* parse json data */
 $_DATA = $modx->fromJSON($_POST['data']);
 
+if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('role_err_ns'));
 $role = $modx->getObject('modUserGroupRole',$_DATA['id']);
-if ($role == null) {
-    return $modx->error->failure($modx->lexicon('role_err_nfs',array('role' => $_DATA['id'])));
-}
+if (empty($role)) return $modx->error->failure($modx->lexicon('role_err_nfs',array('role' => $_DATA['id'])));
 
 /* set role data */
 $role->fromArray($_DATA);

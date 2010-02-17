@@ -13,7 +13,7 @@
  * @package modx
  * @subpackage processors.system.activeresource
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
 /* setup default properties */
@@ -29,7 +29,7 @@ $c = $modx->newQuery('modResource');
 $c->innerJoin('modUser','EditedBy');
 $c->where(array(
     'deleted' => 0,
-    '`editedon` IS NOT NULL',
+    'editedon:!=' => null,
 ));
 $total = $modx->getCount('modResource',$cc);
 $c->select('
@@ -43,6 +43,8 @@ $resources = $modx->getCollection('modResource',$c);
 /* iterate */
 $list = array();
 foreach ($resources as $resource) {
+    if (!$resource->checkPolicy('list')) continue;
+
 	$resourceArray = $resource->get(array(
         'id','pagetitle','editedon','username',
     ));

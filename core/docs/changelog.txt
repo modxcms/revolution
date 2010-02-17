@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Cleaned up most processors, fixed wrong permission references, standardized code
+- Fixed welcome panel to only show panels with permission to see
+- Fixed error log view page to restrict viewing and clearing by permission
+- Added descriptive information to Roles grid
 - Lots of permissions fixes, other bugfixes and sanity checks to Element processors/controllers
 - Added propertyset permissions
 - Cleanups to Resource controllers, processors, optimizing of security permission checks

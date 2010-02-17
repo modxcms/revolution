@@ -12,7 +12,7 @@
  * @package modx
  * @subpackage processors.system.settings
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
 /* setup default properties */

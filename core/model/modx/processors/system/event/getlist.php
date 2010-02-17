@@ -11,26 +11,26 @@
  * @package modx
  * @subpackage processors.system.event
  */
+if (!$modx->hasPermission('view_eventlog')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('system_event');
 
-if (!$modx->hasPermission('view_eventlog')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
 $c = $modx->newQuery('modEvent');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$count = $modx->getCount('modEvent',$c);
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $events = $modx->getCollection('modEvent',$c);
 
-$count = $modx->getCount('modEvent');
-
-$ss = array();
+$list = array();
 foreach ($events as $event) {
-    $sa = $event->toArray();
+    $eventArray = $event->toArray();
 
-    $ss[] = $sa;
+    $list[] = $eventArray;
 }
-return $this->outputArray($ss,$count);
+return $this->outputArray($list,$count);

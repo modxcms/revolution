@@ -24,8 +24,6 @@ MODx.page.UpdateUser = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            process: 'delete', text: _('delete'), method: 'remote', confirm: _('user_confirm_remove')
-        },'-',{
             process: 'cancel', text: _('cancel'), params: {a:MODx.action['security/user']}
         },'-',{
             text: _('help_ex')

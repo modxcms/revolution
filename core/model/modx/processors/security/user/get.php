@@ -15,8 +15,6 @@ if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_er
 $user = $modx->getObject('modUser',$_REQUEST['id']);
 if (!$user) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 
-$user->profile = $user->getOne('Profile');
-
 /* if set, get groups for user */
 if (!empty($_REQUEST['getGroups'])) {
     $c = $modx->newQuery('modUserGroupMember');
@@ -48,7 +46,12 @@ if (!empty($_REQUEST['getGroups'])) {
 }
 
 $userArray = $user->toArray();
-$userArray = array_merge($user->profile->toArray(),$userArray);
+
+$profile = $user->getOne('Profile');
+if ($profile) {
+    $userArray = array_merge($profile->toArray(),$userArray);
+}
+
 $userArray['dob'] = !empty($userArray['dob']) ? strftime('%m/%d/%Y',$userArray['dob']) : '';
 $userArray['blockeduntil'] = !empty($userArray['blockeduntil']) ? strftime('%m/%d/%Y %I:%M %p',$userArray['blockeduntil']) : '';
 $userArray['blockedafter'] = !empty($userArray['blockedafter']) ? strftime('%m/%d/%Y %I:%M %p',$userArray['blockedafter']) : '';

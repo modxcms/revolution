@@ -7,9 +7,7 @@
  * @package modx
  * @subpackage processors.security.role
  */
-if (!$modx->hasPermission(array('access_permissions' => true, 'save_role' => true))) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
+if (!$modx->hasPermission('save_role')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
 /* get role */

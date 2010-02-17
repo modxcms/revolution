@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.security.message
  */
-$modx->lexicon->load('messages','user');
-
 if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('messages','user');
 
 /* get message */
 $message = $modx->getObject('modUserMessage',$_POST['id']);

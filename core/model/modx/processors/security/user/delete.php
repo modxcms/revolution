@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage processors.security.user
  */
-if (!$modx->hasPermission(array('access_permissions' => true, 'delete_user' => true))) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('delete_user')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
 /* get user */

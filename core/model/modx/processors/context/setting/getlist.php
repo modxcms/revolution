@@ -13,8 +13,8 @@
  * @package modx
  * @subpackage processors.context.setting
  */
-$modx->lexicon->load('setting');
 if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('setting');
 
 if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
 if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;

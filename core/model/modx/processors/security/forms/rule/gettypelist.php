@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage processors.security.forms.rule
  */
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('customize_forms')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('formcustomization');
 
 $data = array(

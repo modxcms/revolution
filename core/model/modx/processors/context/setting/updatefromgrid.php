@@ -9,6 +9,7 @@
  * @package modx
  * @subpackage processors.context.setting
  */
+if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
 $_DATA = $modx->fromJSON($_POST['data']);

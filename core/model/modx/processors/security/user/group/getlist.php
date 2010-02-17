@@ -5,9 +5,7 @@
  * @package modx
  * @subpackage processors.security.user
  */
-if (!$modx->hasPermission(array('access_permissions' => true, 'edit_user' => true))) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
+if (!$modx->hasPermission('edit_user')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
 if (empty($_REQUEST['user'])) return $this->outputArray(array());
@@ -26,10 +24,12 @@ $c->innerJoin('modUserGroup','UserGroup');
 $c->where(array(
     'member' => $_REQUEST['user'],
 ));
-$count = $modx->getCount('modUserGroupMember');
-$c->select('modUserGroupMember.*, '
-    . 'UserGroupRole.name AS rolename, '
-    . 'UserGroup.name AS name');
+$count = $modx->getCount('modUserGroupMember',$c);
+$c->select('
+    `modUserGroupMember`.*,
+    `UserGroupRole`.`name` AS `rolename`,
+    `UserGroup`.`name` AS `name`
+');
 
 $c->sortby('`UserGroup`.`'.$sort.'`','ASC');
 if ($isLimit) $c->limit($limit,$start);

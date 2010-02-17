@@ -12,7 +12,7 @@
  * @package modx
  * @subpackage processors.security.user
  */
-if (!$modx->hasPermission(array('view_user' => true,'view' => true))) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource','user');
 
 /* setup default properties */
@@ -25,7 +25,7 @@ $dir = $modx->getOption('dir',$_REQUEST,'DESC');
 /* get user */
 if (empty($_REQUEST['user'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
 $user = $modx->getObject('modUser',$_REQUEST['user']);
-if (empty($user)) return $modx->error->failure($modx->lexicon('user_err_not_found'));
+if (empty($user)) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
 /* get resources */
 $c = $modx->newQuery('modResource');

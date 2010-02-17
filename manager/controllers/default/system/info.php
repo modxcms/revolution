@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage controllers.system
  */
-if (!$modx->hasPermission('logs')) return $modx->error->failure($modx->lexicon('access_denied'));
+if (!$modx->hasPermission('view_sysinfo')) return $modx->error->failure($modx->lexicon('access_denied'));
 
 $serverOffset = $modx->getOption('server_offset_time',null,0) * 60 * 60;
 
@@ -36,12 +36,16 @@ $modx->smarty->assign('database_server',$modx->getOption('host'));
 /* active users */
 $timetocheck = strftime('%m-%d-%Y %H:%M:%S',time()-(60*20));
 $c = $modx->newQuery('modManagerLog');
-$c->select('modManagerLog.*, User.username AS username');
+$c->select('
+    `modManagerLog`.*,
+    `User`.`username` AS `username`
+');
 $c->innerJoin('modUser','User');
-$c->where(array('occurred:>' => $timetocheck));
-$c->groupby('user');
+$c->where(array('
+    occurred:>' => $timetocheck,
+));
+$c->groupby('modManagerLog.user');
 $c->sortby('occurred','ASC');
-
 $ausers = $modx->getCollection('modManagerLog',$c);
 
 foreach ($ausers as $user) {

@@ -5,9 +5,8 @@
  * @package modx
  * @subpackage processors.system.databasetable
  */
-$modx->lexicon->load('system_info');
-
 if (!$modx->hasPermission('database')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('system_info');
 
 $c = new xPDOCriteria($modx, 'SHOW TABLE STATUS FROM `'.$modx->getOption('dbname').'`');
 $c->stmt->execute();

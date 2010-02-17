@@ -24,11 +24,12 @@ if (!empty($_REQUEST['download'])) {
     return $o;
     exit();
 }
+if (empty($_POST['data'])) return $modx->error->failure($modx->lexicon('error'));
 
 /* setup output content */
 $data = $_POST['data'];
 $data = strip_tags($data,'<br><span><hr><li>');
-$data = str_replace(array('<li>','<hr>','<br>','<span>'),"\r\n",$data);
+$data = str_replace(array('<li>','<hr>','<br>','<span>','<?php','<?','?>'),"\r\n",$data);
 $data = strip_tags($data);
 $o = "/*
  * MODx Console Output

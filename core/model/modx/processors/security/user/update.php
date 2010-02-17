@@ -7,15 +7,13 @@
  * @package modx
  * @subpackage processors.security.user
  */
-if (!$modx->hasPermission('save_user')) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
+if (!$modx->hasPermission('save_user')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
 /* get user */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
 $user = $modx->getObject('modUser',$_POST['id']);
-if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_found'));
+if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
 /* validate post */
 $_POST['blocked'] = empty($_POST['blocked']) ? 0 : 1;

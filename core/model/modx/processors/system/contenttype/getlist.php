@@ -33,12 +33,10 @@ $list = array();
 foreach ($contentTypes as $contentType) {
     $contentTypeArray = $contentType->toArray();
     $contentTypeArray['menu'] = array();
-    if ($modx->hasPermission('remove')) {
-        $contentTypeArray['menu'][] = array(
-            'text' => $modx->lexicon('content_type_remove'),
-            'handler' => 'this.confirm.createDelegate(this,["remove","'.$modx->lexicon('content_type_remove_confirm').'"])'
-        );
-    }
+    $contentTypeArray['menu'][] = array(
+        'text' => $modx->lexicon('content_type_remove'),
+        'handler' => 'this.confirm.createDelegate(this,["remove","'.$modx->lexicon('content_type_remove_confirm').'"])'
+    );
     if (empty($contentTypeArray['menu'])) unset($contentTypeArray['menu']);
     $list[] = $contentTypeArray;
 }

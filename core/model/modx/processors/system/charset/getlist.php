@@ -5,6 +5,8 @@
  * @package modx
  * @subpackage processors.system.charset
  */
+if (!$modx->hasPermission('charsets')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
 $charsets = array(
 	array(
 		'value' => 'ASMO-708',

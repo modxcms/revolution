@@ -12,32 +12,34 @@
  * @package modx
  * @subpackage processors.security.role
  */
+if (!$modx->hasPermission('view_role')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (!$modx->hasPermission(array('access_permissions' => true, 'edit_role' => true))) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'authority');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
-$limit = isset($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'authority';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* build query */
 $c = $modx->newQuery('modUserGroupRole');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $roles = $modx->getCollection('modUserGroupRole', $c);
 
-$rs = array();
-if (isset($_REQUEST['addNone']) && $_REQUEST['addNone']) {
-    $rs[] = array('id' => 0, 'name' => $modx->lexicon('none'));
+$list = array();
+
+/* if adding none as an option */
+if (!empty($_REQUEST['addNone'])) {
+    $list[] = array('id' => 0, 'name' => $modx->lexicon('none'));
 }
 
+/* iterate */
 foreach ($roles as $role) {
-	$ra = $role->toArray();
-    $ra['name'] = $role->get('name').' - '.$role->get('authority');
-    $ra['id'] = $role->get('authority');
-	$rs[] = $ra;
+	$roleArray = $role->toArray();
+    $roleArray['name'] = $role->get('name').' - '.$role->get('authority');
+    $roleArray['id'] = $role->get('authority');
+	$list[] = $roleArray;
 }
-return $this->outputArray($rs);
+return $this->outputArray($list);

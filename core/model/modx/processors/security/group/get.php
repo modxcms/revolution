@@ -10,22 +10,21 @@
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-//if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_group_err_not_specified'));
 if (empty($_REQUEST['id'])) {
     $usergroup = $modx->newObject('modUserGroup');
     $usergroup->set('id',0);
     $usergroup->set('name','('.$modx->lexicon('anonymous').')');
 } else {
     $usergroup = $modx->getObject('modUserGroup',$_REQUEST['id']);
-    if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_not_found'));
+    if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_nf'));
 }
 
 if (!empty($_REQUEST['getUsers']) && !empty($_REQUEST['id'])) {
     $c = $modx->newQuery('modUserGroupMember');
     $c->select('
-        modUserGroupMember.*,
-        User.username AS username,
-        UserGroupRole.name AS role_name
+        `modUserGroupMember`.*,
+        `User`.`username` AS `username`,
+        `UserGroupRole`.`name` AS `role_name`
     ');
     $c->innerJoin('modUser','User');
     $c->leftJoin('modUserGroupRole','UserGroupRole');
@@ -51,9 +50,9 @@ if (!empty($_REQUEST['getUsers']) && !empty($_REQUEST['id'])) {
 if (!empty($_REQUEST['getResourceGroups'])) {
     $c = $modx->newQuery('modAccessResourceGroup');
     $c->select('
-        modAccessResourceGroup.*,
-        Policy.name AS policy_name,
-        Target.name AS resource_group_name
+        `modAccessResourceGroup`.*,
+        `Policy`.`name` AS `policy_name`,
+        `Target`.`name` AS `resource_group_name`
     ');
     $c->innerJoin('modAccessPolicy','Policy');
     $c->innerJoin('modResourceGroup','Target');

@@ -8,6 +8,7 @@
  * @package modx
  * @subpackage processors.context.setting
  */
+if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
 if (!isset($_POST['key'],$_POST['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));

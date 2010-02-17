@@ -7,10 +7,10 @@
  */
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('access_denied'));
 
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('access_policy_err_ns'));
 $policy = $modx->getObject('modAccessPolicy',$_REQUEST['id']);
-if ($policy == null) {
-    return $modx->error->failure($modx->lexicon('access_policy_err_nf'));
-}
+if (empty($policy)) return $modx->error->failure($modx->lexicon('access_policy_err_nf'));
+
 $modx->smarty->assign('policy',$policy);
 
 /* register JS scripts */

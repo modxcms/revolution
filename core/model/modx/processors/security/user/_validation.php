@@ -22,7 +22,7 @@ if (isset($_POST['newpassword']) && $_POST['newpassword'] != 'false' || empty($_
 		$modx->error->addField('password_notify_method',$modx->lexicon('user_err_not_specified_notification_method'));
 	}
 	if ($_POST['passwordgenmethod'] == 'g') {
-        $len = $modx->getOption('password_generated_length',null,6);
+        $len = $modx->getOption('password_generated_length',null,8);
 		$autoPassword = generate_password($len);
 		$user->set('password', $user->encode($autoPassword));
 		$newPassword= $autoPassword;

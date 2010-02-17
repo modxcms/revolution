@@ -30,6 +30,9 @@ MODx.panel.GroupsRoles = function(config) {
             ,bodyStyle: 'padding: 1.5em;'
             ,autoHeight: true
             ,items: [{
+                html: '<p>'+_('roles_msg')+'</p>'
+                ,border: false
+            },{
                 xtype: 'modx-grid-role'
                 ,title: ''
                 ,preventRender: true

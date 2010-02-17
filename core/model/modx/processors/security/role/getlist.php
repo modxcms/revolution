@@ -12,9 +12,7 @@
  * @package modx
  * @subpackage processors.security.role
  */
-if (!$modx->hasPermission(array('access_permissions' => true, 'edit_role' => true))) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
+if (!$modx->hasPermission('view_role')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
 /* setup default properties */
@@ -38,14 +36,17 @@ $list = array();
 if (!empty($_REQUEST['addNone'])) {
     $list[] = array('id' => 0, 'name' => $modx->lexicon('none'));
 }
+$hasRemove = $modx->hasPermission('delete_role');
 foreach ($roles as $role) {
 	$roleArray = $role->toArray();
-    $roleArray['menu'] = array(
-        array(
+    $menu = array();
+    if ($hasRemove) {
+        $menu[] = array(
             'text' => $modx->lexicon('role_remove'),
             'handler' => 'this.remove.createDelegate(this,["role_remove_confirm"])',
-        )
-    );
+        );
+    }
+    $roleArray['menu'] = $menu;
 	$list[] = $roleArray;
 }
 return $this->outputArray($list,$count);

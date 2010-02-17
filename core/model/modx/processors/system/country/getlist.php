@@ -5,6 +5,8 @@
  * @package modx
  * @subpackage processors.system.country
  */
+if (!$modx->hasPermission('countries')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
 $_country_lang = array();
 include $modx->getOption('core_path').'lexicon/country/en.inc.php';
 if ($modx->getOption('manager_language') != 'en' && file_exists($modx->getOption('core_path').'lexicon/country/'.$modx->getOption('manager_language').'.inc.php')) {

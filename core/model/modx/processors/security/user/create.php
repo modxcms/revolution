@@ -57,7 +57,7 @@ if ($user->profile->save() == false) {
 }
 
 /* send email */
-if ($_POST['passwordnotifymethod'] == 'e') {
+if (!empty($_POST['passwordnotifymethod']) && $_POST['passwordnotifymethod'] == 'e') {
     $message = $modx->getOption('signupemail_message');
 
     /* replace placeholders */
@@ -131,7 +131,7 @@ function convertDate($date) {
 /* log manager action */
 $modx->logManagerAction('user_create','modUser',$user->get('id'));
 
-if ($_POST['passwordnotifymethod'] == 's') {
+if (!empty($_POST['passwordnotifymethod']) && $_POST['passwordnotifymethod'] == 's') {
 	return $modx->error->success($modx->lexicon('user_created_password_message',array(
         'password' => $newPassword,
     )),$user);

@@ -7,9 +7,7 @@
  */
 if (!$modx->hasPermission('change_profile')) return $modx->error->failure($modx->lexicon('access_denied'));
 
-$modx->user->profile = $modx->user->getOne('Profile');
 $modx->smarty->assign('user',$modx->user);
-
 
 /* register JS scripts */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.recent.resource.js');

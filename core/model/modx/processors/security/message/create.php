@@ -12,21 +12,22 @@
  * @package modx
  * @subpackage processors.security.message
  */
+if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('messages','user');
 
-if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$type = $modx->getOption('type',$_POST,'user');
 
 /* validation */
-if (!isset($_POST['subject']) || $_POST['subject'] == '') {
+if (empty($_POST['subject'])) {
 	return $modx->error->failure($modx->lexicon('message_err_not_specified_subject'));
 }
 
 /* process message */
-switch ($_POST['type']) {
+switch ($type) {
 	case 'user':
 		$user = $modx->getObject('modUser',$_POST['user']);
 		if ($user == null) {
-		    return $modx->error->failure($modx->lexicon('user_err_not_found'));
+		    return $modx->error->failure($modx->lexicon('user_err_nf'));
         }
 
 		$message = $modx->newObject('modUserMessage');

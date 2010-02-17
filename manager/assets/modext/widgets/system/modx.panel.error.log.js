@@ -37,6 +37,7 @@ MODx.panel.ErrorLog = function(config) {
             text: _('clear')
             ,handler: this.clear
             ,scope: this
+            ,hidden: MODx.hasEraseErrorLog ? true : false
         }]
     });
     MODx.panel.ErrorLog.superclass.constructor.call(this,config);

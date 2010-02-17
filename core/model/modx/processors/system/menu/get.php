@@ -11,7 +11,7 @@ if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon(
 $modx->lexicon->load('action','menu');
 
 /* get menu */
-if (!isset($_REQUEST['text'])) return $modx->error->failure($modx->lexicon('menu_err_ns'));
+if (empty($_REQUEST['text'])) return $modx->error->failure($modx->lexicon('menu_err_ns'));
 $menu = $modx->getObject('modMenu',$_REQUEST['text']);
 if ($menu == null) return $modx->error->failure($modx->lexicon('menu_err_nf'));
 

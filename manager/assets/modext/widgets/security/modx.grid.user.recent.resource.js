@@ -16,6 +16,7 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
             action: 'getRecentlyEditedResources'
             ,user: config.user
         }
+        ,pageSize: 10
         ,fields: ['id','pagetitle','description','editedon','deleted','published','menu']
         ,columns: [{
             header: _('id')

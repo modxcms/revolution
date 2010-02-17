@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage processors.system.errorlog
  */
+if (!$modx->hasPermission('error_log_erase')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $file = $modx->getOption(xPDO::OPT_CACHE_PATH).'logs/error.log';
 
 $content = '';

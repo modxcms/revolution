@@ -7,25 +7,27 @@
  * @package modx
  * @subpackage processors.security.user
  */
-if (!$modx->hasPermission(array('access_permissions' => true, 'save_user' => true))) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
+if (!$modx->hasPermission('save_user')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
 
 $_DATA = $modx->fromJSON($_POST['data']);
 
+if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
 $user = $modx->getObject('modUser',$_DATA['id']);
-if ($user == null) return $modx->error->failure($modx->lexicon('user_not_found'));
+if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
 $user->fromArray($_DATA);
 
-$up = $user->getOne('Profile');
-if ($up == null) return $modx->error->failure($modx->lexicon('user_profile_err_not_found'));
+$profile = $user->getOne('Profile');
+if (empty($profile)) {
+    $profile = $modx->newObject('modUserProfile');
+    $profile->set('internalKey',$user->get('id'));
+}
 
-$up->fromArray($_DATA);
+$profile->fromArray($_DATA);
 
-if ($user->save() == false || $up->save() == false) {
+if ($user->save() == false || $profile->save() == false) {
     return $modx->error->failure($modx->lexicon('user_err_save'));
 }
 

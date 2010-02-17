@@ -12,12 +12,11 @@
  * @package modx
  * @subpackage processors.security.message
  */
+if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('messages','user');
 
-if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
 /* validation */
-if (!isset($_POST['subject']) || $_POST['subject'] == '') {
+if (empty($_POST['subject'])) {
 	$modx->error->addField('m_reply_subject',$modx->lexicon('message_err_not_specified_subject'));
 }
 

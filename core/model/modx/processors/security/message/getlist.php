@@ -30,8 +30,8 @@ $c->where(array(
 ));
 $count = $modx->getCount('modUserMessage',$c);
 $c->select('
-    modUserMessage.*,
-    Sender.username AS sender_username
+    `modUserMessage`.*,
+    `Sender`.`username` AS `sender_username`
 ');
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);

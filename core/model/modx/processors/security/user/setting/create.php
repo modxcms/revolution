@@ -13,7 +13,7 @@
  * @package modx
  * @subpackage processors.context.setting
  */
-if (!$modx->hasPermission('create')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting','namespace');
 
 /* get namespace */

@@ -43,6 +43,7 @@ MODx.panel.Welcome = function(config) {
                     ,id: 'modx-recent'
 					,cls: 'x-panel-header x-portal-space'
                     ,collapsed: true
+                    ,hidden: MODx.hasViewDocument == 1 ? false : true
                     ,items: [{
                         html: '<p>'+_('activity_message')
                         ,border: false
@@ -56,6 +57,7 @@ MODx.panel.Welcome = function(config) {
                     ,contentEl: 'modx-online'
                     ,collapsed: true
 					,cls: 'x-panel-header x-portal-space'
+                    ,hidden: MODx.hasViewUser == 1 ? false : true
                 }]
             },{
                 columnWidth: .47

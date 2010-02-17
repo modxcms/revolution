@@ -13,6 +13,7 @@ MODx.page.Welcome = function(config) {
             xtype: 'modx-panel-welcome'
             ,renderTo: 'modx-panel-welcome-div'
             ,displayConfigCheck: config.displayConfigCheck
+            ,user: MODx.user.id
         }]
 	});
     MODx.page.Welcome.superclass.constructor.call(this,config);

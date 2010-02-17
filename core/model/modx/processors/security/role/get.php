@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage processors.security.role
  */
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_role')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
 if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('role_err_ns'));

@@ -71,6 +71,9 @@ foreach (array_keys($rss->items) as $key) {
 }
 $modx->smarty->assign('securefeed',$rss->items);
 
+$hasViewDocument = $modx->hasPermission('view_document');
+$hasViewUser = $modx->hasPermission('view_user');
+
 /* load JS scripts for page */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/modx.panel.welcome.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.recent.resource.js');
@@ -79,6 +82,8 @@ $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[
 Ext.onReady(function() {
+    MODx.hasViewDocument = "'.($hasViewDocument ? 1 : 0).'";
+    MODx.hasViewUser = "'.($hasViewUser ? 1 : 0).'";
     MODx.load({
         xtype: "modx-page-welcome"
         ,site_name: "'.htmlentities($modx->getOption('site_name')).'"
