@@ -7,9 +7,7 @@
  * @package modx
  * @subpackage processors.security.user
  */
-if (!$modx->hasPermission(array('access_permissions' => true, 'edit_user' => true))) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
+if (!$modx->hasPermission('view_user')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
 /* get user */
@@ -23,9 +21,9 @@ $user->profile = $user->getOne('Profile');
 if (!empty($_REQUEST['getGroups'])) {
     $c = $modx->newQuery('modUserGroupMember');
     $c->select('
-        modUserGroupMember.*,
-        UserGroupRole.name AS role_name,
-        UserGroup.name AS user_group_name
+        `modUserGroupMember`.*,
+        `UserGroupRole`.`name` AS `role_name`,
+        `UserGroup`.`name` AS `user_group_name`
     ');
     $c->leftJoin('modUserGroupRole','UserGroupRole');
     $c->innerJoin('modUserGroup','UserGroup');
