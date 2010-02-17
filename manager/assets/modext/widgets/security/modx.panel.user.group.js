@@ -49,6 +49,7 @@ MODx.panel.UserGroup = function(config) {
                     ,allowBlank: false
                     ,enableKeyEvents: true
                     ,disabled: config.usergroup === 0 ? true : false
+                    ,width: 300
                     ,listeners: {
                         'keyup': {scope:this,fn:function(f,e) {
                             Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+f.getValue()+'</h2>');

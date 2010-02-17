@@ -10,7 +10,6 @@ MODx.panel.Search = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-search'
-        ,bodyStyle: 'padding: 0'
         ,autoHeight: true
         ,items: [{
             html: '<h2>'+_('search')+'</h2>'
@@ -52,7 +51,6 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             'change': {fn:this.filter,scope: this}
             ,'render': {fn:this._addEnterKeyHandler}
         };
-        var csr = {'check': {fn:this.filter, scope:this}};
         return [{
             xtype: 'textfield'
             ,name: 'id'
@@ -79,33 +77,47 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             xtype: 'checkbox'
             ,name: 'published'
             ,fieldLabel: _('published')
-            ,listeners: csr
+            ,inputValue: 1
+            ,checked: false
+            ,handler: this.filter
+            ,scope: this
         },{
             xtype: 'checkbox'
             ,name: 'unpublished'
             ,fieldLabel: _('unpublished')
-            ,listeners: csr
+            ,inputValue: 1
+            ,checked: false
+            ,handler: this.filter
+            ,scope: this
         },{
             xtype: 'checkbox'
             ,name: 'deleted'
             ,fieldLabel: _('deleted')
-            ,listeners: csr
+            ,inputValue: 1
+            ,checked: false
+            ,handler: this.filter
+            ,scope: this
         },{
             xtype: 'checkbox'
             ,name: 'undeleted'
             ,fieldLabel: _('undeleted')
-            ,listeners: csr
+            ,inputValue: 1
+            ,checked: false
+            ,handler: this.filter
+            ,scope: this
         }];
     }
     
     ,filter: function(tf,newValue,oldValue) {
         var p = this.getForm().getValues();
-        p.start = 0;
-        p.limit = 20;
-        Ext.getCmp('modx-grid-search').getStore().load({
-            params: p
-            ,scope: this
-        });
+        p.action = 'search';
+        
+        var g = Ext.getCmp('modx-grid-search');
+        if (g) {
+            g.getStore().baseParams = p;
+            g.getBottomToolbar().changePage(1);
+            g.refresh();
+        }
     }
         
     ,_addEnterKeyHandler: function() {

@@ -11,8 +11,10 @@
  * @package modx
  * @subpackage processors.resource
  */
-if (!$modx->hasPermission('list')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
+
+$modx->setLogTarget('ECHO');
 
 /* setup default properties */
 $isLimit = !empty($_REQUEST['limit']);
@@ -29,37 +31,32 @@ if (!empty($_REQUEST['pagetitle'])) $where['pagetitle:LIKE'] = '%'.$_REQUEST['pa
 if (!empty($_REQUEST['longtitle'])) $where['longtitle:LIKE'] = '%'.$_REQUEST['longtitle'].'%';
 if (!empty($_REQUEST['content'])) $where['content:LIKE'] = '%'.$_REQUEST['content'].'%';
 
-if (isset($_REQUEST['published']) && $_REQUEST['published'] == 'on') {
-    $where['published'] = true;
-}
-if (isset($_REQUEST['unpublished']) && $_REQUEST['unpublished'] == 'on') {
-    $where['published'] = false;
-}
-if (isset($_REQUEST['deleted']) && $_REQUEST['deleted'] == 'on') {
-    $where['deleted'] = true;
-}
-if (isset($_REQUEST['undeleted']) && $_REQUEST['undeleted'] == 'on') {
-    $where['deleted'] = false;
-}
+if (!empty($_REQUEST['published'])) $where['published'] = true;
+if (!empty($_REQUEST['unpublished'])) $where['published'] = false;
+if (!empty($_REQUEST['deleted'])) $where['deleted'] = true;
+if (!empty($_REQUEST['undeleted'])) $where['deleted'] = false;
 
 $c->where($where);
+$count = $modx->getCount('modResource',$c);
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $resources = $modx->getCollection('modResource',$c);
 $actions = $modx->request->getAllActionIDs();
 
-$rs = array();
+/* iterate */
+$list = array();
 foreach ($resources as $resource) {
     if ($resource->checkPolicy('list')) {
-        $ra = $resource->toArray();
-        $ra['menu'] = array(
-            array(
+        $resourceArray = $resource->toArray();
+        $resourceArray['menu'] = array();
+        if ($modx->hasPermission('edit_document')) {
+            $resourceArray['menu'][] = array(
                 'text' => $modx->lexicon('resource_edit'),
                 'params' => array('a' => $actions['resource/update']),
-            ),
-        );
-        $rs[] = $ra;
+            );
+        }
+        $list[] = $resourceArray;
     }
 }
 
-return $this->outputArray($rs);
+return $this->outputArray($list,$count);
