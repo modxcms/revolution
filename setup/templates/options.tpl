@@ -83,7 +83,6 @@
 {if $smarty.const.MODX_SETUP_KEY EQ '@traditional' AND $unpacked EQ 1 AND $files_exist EQ 1}
 <input type="hidden" name="unpacked" id="unpacked" value="1" />
 {else}
-<input type="hidden" name="inplace" id="inplace" value="1" />
 <table class="options">
 <tbody>
 <tr>
