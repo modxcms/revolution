@@ -12,56 +12,61 @@
  * @package modx
  * @subpackage processors.security.user
  */
+if (!$modx->hasPermission(array('view_user' => true,'view' => true))) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource','user');
 
-$limit = !empty($_REQUEST['limit']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'editedon';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'DESC';
+/* setup default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'editedon');
+$dir = $modx->getOption('dir',$_REQUEST,'DESC');
 
 /* get user */
-if (!isset($_REQUEST['user'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+if (empty($_REQUEST['user'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
 $user = $modx->getObject('modUser',$_REQUEST['user']);
-if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_found'));
+if (empty($user)) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 
 /* get resources */
 $c = $modx->newQuery('modResource');
-$c->where(array('editedby' => $user->get('id')));
-$c->orCondition(array('createdby' => $user->get('id')));
+$c->where(array(
+    'editedby' => $user->get('id'),
+    'OR:createdby:=' => $user->get('id'),
+));
 $count= $modx->getCount('modResource',$c);
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
+$resources = $modx->getCollection('modResource',$c);
 
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($limit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-
-$resources= $modx->getCollection('modResource',$c);
-
-/* process into array */
+/* iterate */
 $actions = $modx->request->getAllActionIDs();
-$rs = array();
+$list = array();
 foreach ($resources as $resource) {
-    $ra = $resource->get(array('id','pagetitle','description','published','deleted'));
-    $ra['menu'] = array(
-        array(
-            'text' => $modx->lexicon('resource_view'),
-            'params' => array(
-                'a' => $actions['resource/data'],
-                'id' => $resource->get('id'),
-            ),
+    if (!$resource->checkPolicy('view')) continue;
+
+    $resourceArray = $resource->get(array('id','pagetitle','description','published','deleted'));
+    $resourceArray['menu'] = array();
+    $resourceArray['menu'][] = array(
+        'text' => $modx->lexicon('resource_view'),
+        'params' => array(
+            'a' => $actions['resource/data'],
+            'id' => $resource->get('id'),
         ),
-        array(
+    );
+    if ($modx->hasPermission('edit_document')) {
+        $resourceArray['menu'][] = array(
             'text' => $modx->lexicon('resource_edit'),
             'params' => array(
                 'a' => $actions['resource/update'],
                 'id' => $resource->get('id'),
             ),
-        ),
-        '-',
-        array(
-            'text' => $modx->lexicon('resource_preview'),
-            'handler' => 'this.preview',
-        ),
+        );
+    }
+    $resourceArray['menu'][] = '-';
+    $resourceArray['menu'][] = array(
+        'text' => $modx->lexicon('resource_preview'),
+        'handler' => 'this.preview',
     );
-    $rs[] = $ra;
+    $list[] = $resourceArray;
 }
-return $this->outputArray($rs,$count);
+return $this->outputArray($list,$count);

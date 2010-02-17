@@ -71,7 +71,7 @@ MODx.grid.AccessPolicy = function(config) {
 		,tbar: [{
         	text: _('add')
         	,scope: this
-        	,handler: { xtype: 'modx-window-access-policy-create' }
+        	,handler: { xtype: 'modx-window-access-policy-create' ,blankValues: true }
 		}]
     });
     MODx.grid.AccessPolicy.superclass.constructor.call(this,config);

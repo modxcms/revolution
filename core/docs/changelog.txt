@@ -4,6 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug with adding policies that prevented partial regexp matches in name
+- Fixed bugs when adding new policies or permissions that showed prior added perm/policy in form
+- Properly secured and refactored recently edited resources grid
 - [#MODX-1670] Adjusted permissions to allow restricted user to edit profile
 - [#MODX-1667] Removed unnecessary opacity CSS rule in menus
 - Fixed bug where page wasnt reloading on login in certain situations

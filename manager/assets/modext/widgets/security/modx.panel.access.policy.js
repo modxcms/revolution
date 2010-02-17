@@ -163,6 +163,7 @@ Ext.extend(MODx.grid.Permissions,MODx.grid.LocalGrid,{
         this.loadWindow(btn,e,{
             xtype: 'modx-window-permission-create'
             ,record: {}
+            ,blankValues: true
             ,listeners: {
                 'success': {fn:function(r) {
                     var s = this.getStore();
@@ -239,8 +240,8 @@ Ext.extend(MODx.window.NewPermission,MODx.Window,{
         
         var g = Ext.getCmp('modx-grid-permissions');
         var s = g.getStore();
-        var v = s.query('name',r.name).items;
-        if (v.length > 0) {
+        var v = s.findExact('name',r.name);
+        if (v != -1) {
             MODx.msg.alert(_('error'),_('permission_err_ae'));
             return false;
         }
