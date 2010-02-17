@@ -843,7 +843,7 @@ $settings['websignupemail_message']->fromArray(array (
 $settings['which_editor']= $xpdo->newObject('modSystemSetting');
 $settings['which_editor']->fromArray(array (
   'key' => 'which_editor',
-  'value' => 'TinyMCE',
+  'value' => '',
   'xtype' => 'modx-combo-rte',
   'namespace' => 'core',
   'area' => 'manager',
