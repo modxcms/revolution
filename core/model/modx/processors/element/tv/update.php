@@ -22,9 +22,8 @@
  * @package modx
  * @subpackage processors.element.tv
  */
+if (!$modx->hasPermission('save_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv','category');
-
-if (!$modx->hasPermission('save_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'));
 $tv = $modx->getObject('modTemplateVar',$_POST['id']);
@@ -44,6 +43,7 @@ if (!empty($_POST['category'])) {
 $modx->invokeEvent('OnBeforeTVFormSave',array(
     'mode' => 'upd',
     'id' => $tv->get('id'),
+    'tv' => &$tv,
 ));
 
 /* check to make sure name doesn't already exist */
@@ -86,52 +86,60 @@ if ($tv->save() === false) {
 
 /* change template access to tvs */
 if (isset($_POST['templates'])) {
-    $_TEMPLATES = $modx->fromJSON($_POST['templates']);
-    foreach ($_TEMPLATES as $id => $template) {
-        if ($template['access']) {
-            $tvt = $modx->getObject('modTemplateVarTemplate',array(
-                'tmplvarid' => $tv->get('id'),
-                'templateid' => $template['id'],
-            ));
-            if ($tvt == null) {
-                $tvt = $modx->newObject('modTemplateVarTemplate');
+    $templateVariables = $modx->fromJSON($_POST['templates']);
+    if (is_array($templateVariables)) {
+        foreach ($templateVariables as $id => $template) {
+            if (!is_array($template)) continue;
+
+            if ($template['access']) {
+                $templateVarTemplate = $modx->getObject('modTemplateVarTemplate',array(
+                    'tmplvarid' => $tv->get('id'),
+                    'templateid' => $template['id'],
+                ));
+                if (empty($templateVarTemplate)) {
+                    $templateVarTemplate = $modx->newObject('modTemplateVarTemplate');
+                }
+                $templateVarTemplate->set('tmplvarid',$tv->get('id'));
+                $templateVarTemplate->set('templateid',$template['id']);
+                $templateVarTemplate->set('rank',$template['rank']);
+                $templateVarTemplate->save();
+            } else {
+                $templateVarTemplate = $modx->getObject('modTemplateVarTemplate',array(
+                    'tmplvarid' => $tv->get('id'),
+                    'templateid' => $template['id'],
+                ));
+                if ($templateVarTemplate && $templateVarTemplate instanceof modTemplateVarTemplate) {
+                    $templateVarTemplate->remove();
+                }
             }
-            $tvt->set('tmplvarid',$tv->get('id'));
-            $tvt->set('templateid',$template['id']);
-            $tvt->set('rank',$template['rank']);
-            $tvt->save();
-        } else {
-            $tvt = $modx->getObject('modTemplateVarTemplate',array(
-                'tmplvarid' => $tv->get('id'),
-                'templateid' => $template['id'],
-            ));
-            if ($tvt == null) continue;
-            $tvt->remove();
         }
     }
 }
 
 /*
- * :TODO: Replace with appropriate ABAC approach check for permission update
- * access
+ * update access
  */
 if ($modx->hasPermission('tv_access_permissions')) {
     if (isset($_POST['resource_groups'])) {
         $docgroups = $modx->fromJSON($_POST['resource_groups']);
-        foreach ($docgroups as $id => $group) {
-            $tvdg = $modx->getObject('modTemplateVarResourceGroup',array(
-                'tmplvarid' => $tv->get('id'),
-                'documentgroup' => $group['id'],
-            ));
+        if (is_array($docgroups)) {
+            foreach ($docgroups as $id => $group) {
+                if (!is_array($group)) continue;
 
-            if ($group['access'] == true) {
-                if ($tvdg != null) continue;
-                $tvdg = $modx->newObject('modTemplateVarResourceGroup');
-                $tvdg->set('tmplvarid',$tv->get('id'));
-                $tvdg->set('documentgroup',$group['id']);
-                $tvdg->save();
-            } else {
-                $tvdg->remove();
+                $templateVarResourceGroup = $modx->getObject('modTemplateVarResourceGroup',array(
+                    'tmplvarid' => $tv->get('id'),
+                    'documentgroup' => $group['id'],
+                ));
+
+                if ($group['access'] == true) {
+                    if (!empty($templateVarResourceGroup)) continue;
+                    $templateVarResourceGroup = $modx->newObject('modTemplateVarResourceGroup');
+                    $templateVarResourceGroup->set('tmplvarid',$tv->get('id'));
+                    $templateVarResourceGroup->set('documentgroup',$group['id']);
+                    $templateVarResourceGroup->save();
+                } else {
+                    $templateVarResourceGroup->remove();
+                }
             }
         }
     }
@@ -141,6 +149,7 @@ if ($modx->hasPermission('tv_access_permissions')) {
 $modx->invokeEvent('OnTVFormSave',array(
     'mode' => 'upd',
     'id' => $tv->get('id'),
+    'tv' => &$tv,
 ));
 
 /* log manager action */

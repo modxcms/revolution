@@ -8,13 +8,12 @@
  * @package modx
  * @subpackage processors.element.tv
  */
+if (!$modx->hasPermission('new_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv');
-
-if (!$modx->hasPermission('new_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get TV */
 $old_tv = $modx->getObject('modTemplateVar',$_POST['id']);
-if ($old_tv == null) return $modx->error->failure($modx->lexicon('tv_err_not_found'));
+if ($old_tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
 
 $old_tv->templates = $old_tv->getMany('TemplateVarTemplates');
 $old_tv->resources = $old_tv->getMany('TemplateVarResources');

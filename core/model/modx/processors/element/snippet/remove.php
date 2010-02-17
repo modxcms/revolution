@@ -13,7 +13,7 @@ $modx->lexicon->load('snippet');
 /* get snippet */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
 $snippet = $modx->getObject('modSnippet',$_POST['id']);
-if (!$snippet) return $modx->error->failure($modx->lexicon('snippet_err_not_found'));
+if (!$snippet) return $modx->error->failure($modx->lexicon('snippet_err_nf'));
 
 /* invoke OnBeforeSnipFormDelete event */
 $modx->invokeEvent('OnBeforeSnipFormDelete',array(

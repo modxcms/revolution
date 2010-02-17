@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage processors.element.propertyset
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('element','propertyset');
 
 $_REQUEST['id'] = !isset($_REQUEST['id']) ? 0 : (substr($_REQUEST['id'],0,2) == 'n_' ? substr($_REQUEST['id'],2) : $_REQUEST['id']);
@@ -17,6 +17,11 @@ $nodeId = $_REQUEST['id'];
 $node = explode('_',$nodeId);
 $list = array();
 
+/* check permissions */
+$hasSave = $modx->hasPermission('save_propertyset');
+$hasRemove = $modx->hasPermission('delete_propertyset');
+$hasNew = $modx->hasPermission('new_propertyset');
+
 switch ($node[0]) {
     case 'root': /* grab all categories and uncategorized property sets */
         $c = $modx->newQuery('modCategory');
@@ -24,23 +29,22 @@ switch ($node[0]) {
         $categories = $modx->getCollection('modCategory',$c);
 
         foreach ($categories as $category) {
-            $ps = $category->getMany('PropertySets');
-            if (count($ps) < 1) continue;
+            $propertySets = $category->getMany('PropertySets');
+            if (count($propertySets) < 1) continue;
 
-            $ca = array(
+            $categoryArray = array(
                 'text' => $category->get('category'),
                 'id' => 'cat_'.$category->get('id'),
                 'leaf' => false,
                 'cls' => 'icon-category',
                 'href' => '',
                 'class_key' => 'modCategory',
-                'menu' => array(
-
-                ),
+                'menu' => array(),
             );
 
-            $list[] = $ca;
+            $list[] = $categoryArray;
         }
+        unset($c,$propertySets,$categories,$category,$categoryArray);
 
 
         $c = $modx->newQuery('modPropertySet');
@@ -49,7 +53,41 @@ switch ($node[0]) {
         $sets = $modx->getCollection('modPropertySet',$c);
 
         foreach ($sets as $set) {
-            $sa = array(
+            $menu = array();
+            if ($hasSave) {
+                $menu[] = array(
+                    'text' => $modx->lexicon('propertyset_element_add'),
+                    'handler' => 'function(itm,e) {
+                        this.addElement(itm,e);
+                    }',
+                );
+                $menu[] = '-';
+                $menu[] = array(
+                    'text' => $modx->lexicon('propertyset_update'),
+                    'handler' => 'function(itm,e) {
+                        this.updateSet(itm,e);
+                    }',
+                );
+            }
+            if ($hasNew && $hasSave) {
+                $menu[] = array(
+                    'text' => $modx->lexicon('propertyset_duplicate'),
+                    'handler' => 'function(itm,e) {
+                        this.duplicateSet(itm,e);
+                    }',
+                );
+            }
+            if ($hasRemove) {
+                $menu[] = '-';
+                $menu[] = array(
+                    'text' => $modx->lexicon('propertyset_remove'),
+                    'handler' => 'function(itm,e) {
+                        this.removeSet(itm,e);
+                    }',
+                );
+            }
+
+            $setArray = array(
                 'text' => $set->get('name'),
                 'id' => 'ps_'.$set->get('id'),
                 'leaf' => false,
@@ -58,38 +96,9 @@ switch ($node[0]) {
                 'class_key' => 'modPropertySet',
                 'data' => $set->toArray(),
                 'qtip' => $set->get('description'),
-                'menu' => array(
-                    'items' => array(
-                        array(
-                            'text' => $modx->lexicon('propertyset_element_add'),
-                            'handler' => 'function(itm,e) {
-                                this.addElement(itm,e);
-                            }',
-                        ),
-                        '-',
-                        array(
-                            'text' => $modx->lexicon('propertyset_update'),
-                            'handler' => 'function(itm,e) {
-                                this.updateSet(itm,e);
-                            }',
-                        ),
-                        array(
-                            'text' => $modx->lexicon('propertyset_duplicate'),
-                            'handler' => 'function(itm,e) {
-                                this.duplicateSet(itm,e);
-                            }',
-                        ),
-                        '-',
-                        array(
-                            'text' => $modx->lexicon('propertyset_remove'),
-                            'handler' => 'function(itm,e) {
-                                this.removeSet(itm,e);
-                            }',
-                        ),
-                    ),
-                ),
+                'menu' => array('items' => $menu),
             );
-            $list[] = $sa;
+            $list[] = $setArray;
         }
         break;
     case 'cat': /* grab all property sets for that category */
@@ -101,7 +110,40 @@ switch ($node[0]) {
         $sets = $modx->getCollection('modPropertySet',$c);
 
         foreach ($sets as $set) {
-            $sa = array(
+            $menu = array();
+            if ($hasSave) {
+                $menu[] = array(
+                    'text' => $modx->lexicon('propertyset_element_add'),
+                    'handler' => 'function(itm,e) {
+                        this.addElement(itm,e);
+                    }',
+                );
+                $menu[] = '-';
+                $menu[] = array(
+                    'text' => $modx->lexicon('propertyset_update'),
+                    'handler' => 'function(itm,e) {
+                        this.updateSet(itm,e);
+                    }',
+                );
+            }
+            if ($hasNew && $hasSave) {
+                $menu[] = array(
+                    'text' => $modx->lexicon('propertyset_duplicate'),
+                    'handler' => 'function(itm,e) {
+                        this.duplicateSet(itm,e);
+                    }',
+                );
+            }
+            if ($hasRemove) {
+                $menu[] = '-';
+                $menu[] = array(
+                    'text' => $modx->lexicon('propertyset_remove'),
+                    'handler' => 'function(itm,e) {
+                        this.removeSet(itm,e);
+                    }',
+                );
+            }
+            $setArray = array(
                 'text' => $set->get('name'),
                 'id' => 'ps_'.$set->get('id'),
                 'leaf' => false,
@@ -110,38 +152,9 @@ switch ($node[0]) {
                 'class_key' => 'modPropertySet',
                 'data' => $set->toArray(),
                 'qtip' => $set->get('description'),
-                'menu' => array(
-                    'items' => array(
-                        array(
-                            'text' => $modx->lexicon('propertyset_element_add'),
-                            'handler' => 'function(itm,e) {
-                                this.addElement(itm,e);
-                            }',
-                        ),
-                        '-',
-                        array(
-                            'text' => $modx->lexicon('propertyset_update'),
-                            'handler' => 'function(itm,e) {
-                                this.updateSet(itm,e);
-                            }',
-                        ),
-                        array(
-                            'text' => $modx->lexicon('propertyset_duplicate'),
-                            'handler' => 'function(itm,e) {
-                                this.duplicateSet(itm,e);
-                            }',
-                        ),
-                        '-',
-                        array(
-                            'text' => $modx->lexicon('propertyset_remove'),
-                            'handler' => 'function(itm,e) {
-                                this.removeSet(itm,e);
-                            }',
-                        ),
-                    ),
-                ),
+                'menu' => array('items' => $menu),
             );
-            $list[] = $sa;
+            $list[] = $setArray;
         }
         break;
     case 'ps': /* grab all elements for property set */
@@ -167,7 +180,16 @@ switch ($node[0]) {
             $els = $modx->getCollection('modElementPropertySet',$c);
 
             foreach ($els as $el) {
-                $sa = array(
+                $menu = array();
+                if ($hasRemove) {
+                    $menu[] = array(
+                        'text' => $modx->lexicon('propertyset_element_remove'),
+                        'handler' => 'function(itm,e) {
+                            this.removeElement(itm,e);
+                        }',
+                    );
+                }
+                $setArray = array(
                     'text' => $el->get('name'),
                     'id' => 'el_'.$el->get('property_set').'_'.$el->get('id').'_'.$class,
                     'leaf' => true,
@@ -177,20 +199,11 @@ switch ($node[0]) {
                     'cls' => 'icon-'.strtolower($alias),
                     'propertyset' => $el->get('property_set'),
                     'element_class' => $class,
-                    'menu' => array(
-                        'items' => array(
-                            array(
-                                'text' => $modx->lexicon('propertyset_element_remove'),
-                                'handler' => 'function(itm,e) {
-                                    this.removeElement(itm,e);
-                                }',
-                            )
-                        ),
-                    ),
+                    'menu' => array('items' => $menu),
                 );
-                $list[] = $sa;
+                $list[] = $setArray;
             }
-            unset($c,$els,$el);
+            unset($c,$els,$el,$menu);
         }
         break;
 }

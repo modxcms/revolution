@@ -7,13 +7,12 @@
  * @package modx
  * @subpackage processors.element.tv
  */
+if (!$modx->hasPermission('view_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv');
 
 if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'));
 $tv = $modx->getObject('modTemplateVar',$_REQUEST['id']);
-if ($tv == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('tv_err_nfs'),$_REQUEST['id']));
-}
+if (empty($tv)) return $modx->error->failure($modx->lexicon('tv_err_nfs',array('id' => $_REQUEST['id'])));
 
 $tv->set('els',$tv->get('elements'));
 $properties = $tv->get('properties');

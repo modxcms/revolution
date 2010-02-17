@@ -15,7 +15,7 @@ $modx->lexicon->load('snippet');
 /* get old snippet */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
 $old_snippet = $modx->getObject('modSnippet',$_POST['id']);
-if (!$old_snippet) return $modx->error->failure($modx->lexicon('snippet_err_not_found'));
+if (!$old_snippet) return $modx->error->failure($modx->lexicon('snippet_err_nf'));
 
 /* format new name */
 $newname = !empty($_POST['name']) ? $_POST['name'] : $modx->lexicon('duplicate_of').$old_snippet->get('name');

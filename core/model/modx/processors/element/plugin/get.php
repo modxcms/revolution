@@ -7,13 +7,13 @@
  * @package modx
  * @subpackage processors.element.plugin
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_plugin')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('plugin');
 
 /* get plugin */
 if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
 $plugin = $modx->getObject('modPlugin', $_REQUEST['id']);
-if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_not_found'));
+if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
 
 $properties = $plugin->get('properties');
 if (!is_array($properties)) $properties = array();

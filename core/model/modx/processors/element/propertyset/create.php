@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage processors.element.propertyset
  */
-if (!$modx->hasPermission('create')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('new_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset');
 
 /* make sure set with that name doesn't already exist */

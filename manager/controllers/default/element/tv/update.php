@@ -5,8 +5,7 @@
  * @package modx
  * @subpackage manager.element.tv
  */
-
-if (!$modx->hasPermission('edit_template')) return $modx->error->failure($modx->lexicon('access_denied'));
+if (!$modx->hasPermission('edit_tv')) return $modx->error->failure($modx->lexicon('access_denied'));
 
 /* get tv */
 $tv = $modx->getObject('modTemplateVar',$_REQUEST['id']);
@@ -14,34 +13,6 @@ if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_not_found')
 if ($tv->get('locked') && !$modx->hasPermission('edit_locked')) {
     return $modx->error->failure($modx->lexicon('tv_err_locked'));
 }
-
-/* load templates */
-$templates = $modx->getCollection('modTemplate');
-foreach ($templates as $template) {
-	$tmplvar = $modx->getObject('modTemplateVarTemplate',array(
-		'templateid' => $template->get('id'),
-		'tmplvarid' => $tv->get('id'),
-	));
-	if ($tmplvar != null) $template->set('checked',true);
-}
-$modx->smarty->assign('templates',$templates);
-
-$notPublic = false;
-$groupsarray = array();
-/* fetch permissions for the variable */
-$resource_groups = $modx->getCollection('modTemplateVarResourceGroup',array('tmplvarid' => $_REQUEST['id']));
-foreach ($resource_groups as $rg) {
-    $groupsarray[] = $rg->get('documentgroup');
-    $notPublic = true;
-}
-
-$rgs = $modx->getCollection('modResourceGroup');
-foreach ($rgs as $rg) {
-    $rg->set('checked',in_array($rg->get('id'),$groupsarray));
-}
-
-$modx->smarty->assign('notPublic',$notPublic);
-$modx->smarty->assign('docgroups',$dgs);
 
 /* get available RichText Editors */
 $RTEditors = '';

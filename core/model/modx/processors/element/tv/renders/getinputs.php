@@ -8,6 +8,7 @@
  * @package modx
  * @subpackage processors.element.tv.renders
  */
+if (!$modx->hasPermission('view_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv_widget');
 
 $context = (isset($_REQUEST['context']) && !empty($_REQUEST['context'])) ? $_REQUEST['context'] : $modx->context->get('key');

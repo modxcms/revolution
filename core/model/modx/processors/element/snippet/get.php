@@ -7,13 +7,13 @@
  * @package modx
  * @subpackage processors.element.snippet
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_snippet')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('snippet');
 
 /* get snippet */
 if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
 $snippet = $modx->getObject('modSnippet',$_REQUEST['id']);
-if ($snippet == null) return $modx->error->failure($modx->lexicon('snippet_err_not_found'));
+if ($snippet == null) return $modx->error->failure($modx->lexicon('snippet_err_nf'));
 
 $properties = $snippet->get('properties');
 if (!is_array($properties)) $properties = array();

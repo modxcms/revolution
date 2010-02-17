@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage manager.element.tv
  */
-if (!$modx->hasPermission('new_template')) return $modx->error->failure($modx->lexicon('access_denied'));
+if (!$modx->hasPermission('new_tv')) return $modx->error->failure($modx->lexicon('access_denied'));
 
 /* preset category if specified */
 if (isset($_REQUEST['category'])) {

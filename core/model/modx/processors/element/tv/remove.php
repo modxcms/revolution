@@ -7,15 +7,14 @@
  * @package modx
  * @subpackage processors.element.tv
  */
+if (!$modx->hasPermission('delete_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv');
-
-if (!$modx->hasPermission('delete_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 $forced = true;
 
 /* get tv */
 $tv = $modx->getObject('modTemplateVar',$_POST['id']);
-if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_not_found'));
+if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
 
 /* get tv relational tables */
 $tv->templates = $tv->getMany('TemplateVarTemplates');
@@ -36,8 +35,8 @@ if (!$forced) {
                 $tvd->remove();
                 continue;
             }
-			$o .= '<li><span style="width: 200px"><a href="index.php?id='.$tvi->get('id').'&a=27">';
-            $o .= $tvi->get('pagetitle').'</a></span>';
+			$o .= '<li><span style="width: 200px">';
+            $o .= $tvi->get('name').' ('.$tvi->get('id').')</span>';
             $o .= $tvi->get('description') != '' ? ' - '.$tvi->get('description') : '';
             $o .= '</li>';
 		}

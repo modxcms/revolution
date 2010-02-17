@@ -8,7 +8,7 @@
  * @package modx
  * @subpackage processors.element.category
  */
-if (!$modx->hasPermission('remove')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('delete_category')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('category');
 
 /* get category */

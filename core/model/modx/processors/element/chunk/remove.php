@@ -13,16 +13,12 @@ $modx->lexicon->load('chunk');
 /* get the chunk */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
 $chunk = $modx->getObject('modChunk',$_POST['id']);
-if ($chunk == null) {
-    return $modx->error->failure($modx->lexicon('chunk_err_nfs',array(
-        'id' => $_POST['id'],
-    )));
-}
+if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $_POST['id'])));
 
 /* invoke OnBeforeChunkFormDelete event */
 $modx->invokeEvent('OnBeforeChunkFormDelete',array(
     'id' => $chunk->get('id'),
-  //  'chunk' => &$chunk,
+    'chunk' => &$chunk,
 ));
 
 /* remove chunk */
@@ -33,7 +29,7 @@ if ($chunk->remove() == false) {
 /* invoke OnChunkFormDelete event */
 $modx->invokeEvent('OnChunkFormDelete',array(
     'id' => $chunk->get('id'),
-    //'chunk' => &$chunk,
+    'chunk' => &$chunk,
 ));
 
 /* log manager action */

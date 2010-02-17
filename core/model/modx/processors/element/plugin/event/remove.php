@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage processors.element.plugin.event
  */
-if (!$modx->hasPermission('remove')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('delete_plugin')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('plugin');
 
 /* get plugin event */

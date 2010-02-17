@@ -14,12 +14,10 @@ $modx->lexicon->load('chunk');
 /* Get old chunk */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
 $old_chunk = $modx->getObject('modChunk',$_POST['id']);
-if ($old_chunk == null) return $modx->error->failure($modx->lexicon('chunk_err_not_found'));
+if (empty($old_chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nf'));
 
 /* check name */
-$newname = isset($_POST['name'])
-    ? $_POST['name']
-    : $modx->lexicon('duplicate_of').$old_chunk->get('name');
+$newname = !empty($_POST['name']) ? $_POST['name'] : $modx->lexicon('duplicate_of').$old_chunk->get('name');
 
 /* duplicate chunk */
 $chunk = $modx->newObject('modChunk');

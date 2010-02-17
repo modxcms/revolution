@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage manager.element.propertyset
  */
+if (!$modx->hasPermission('edit_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* register JS scripts */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.grid.local.property.js');

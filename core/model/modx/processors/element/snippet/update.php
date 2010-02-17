@@ -21,7 +21,7 @@ $modx->lexicon->load('snippet','category');
 /* get snippet */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
 $snippet = $modx->getObject('modSnippet',$_POST['id']);
-if ($snippet == null) return $modx->error->failure($modx->lexicon('snippet_err_not_found'));
+if ($snippet == null) return $modx->error->failure($modx->lexicon('snippet_err_nf'));
 
 /* check if locked, if so, prevent access */
 if ($snippet->get('locked') && $modx->hasPermission('edit_locked') == false) {
@@ -30,7 +30,7 @@ if ($snippet->get('locked') && $modx->hasPermission('edit_locked') == false) {
 
 /* validation */
 if (empty($_POST['name'])) {
-    $modx->error->addField('name',$modx->lexicon('snippet_err_not_specified_name'));
+    $modx->error->addField('name',$modx->lexicon('snippet_err_ns_name'));
 }
 
 /* check to see if name already exists */

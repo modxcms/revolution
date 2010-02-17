@@ -5,13 +5,15 @@
  * @package modx
  * @subpackage processors.element
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_element')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset','element');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
-
+/* get default properties */
+$isLimit = !empty($_REQUEST['limit']);
+$start = $modx->getOption('start',$_REQUEST,0);
+$limit = $modx->getOption('limit',$_REQUEST,10);
+$sort = $modx->getOption('sort',$_REQUEST,'name');
+$dir = $modx->getOption('dir',$_REQUEST,'ASC');
 
 if (!isset($_REQUEST['element_class']) || $_REQUEST['element_class'] == '') {
     return $modx->error->failure($modx->lexicon('element_class_ns'));
@@ -22,14 +24,13 @@ $className = $_REQUEST['element_class'];
 if ($className == 'modTemplate' && $_REQUEST['sort'] == 'name') $_REQUEST['sort'] = 'templatename';
 
 $c = $modx->newQuery($className);
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if (isset($_REQUEST['limit'])) {
-    $c = $c->limit($_REQUEST['limit'],$_REQUEST['start']);
-}
+$count = $modx->getCount($className,$c);
+
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
 $elements = $modx->getCollection($className,$c);
-$count = $modx->getCount($className);
 
-
+/* iterate */
 $list = array();
 foreach ($elements as $element) {
     $el = $element->toArray();

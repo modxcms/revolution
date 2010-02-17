@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage processors.element
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset','element');
 
 /* verify file exists */

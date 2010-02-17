@@ -5,8 +5,10 @@
  * @package modx
  * @subpackage processors.element.template.widget
  */
+if (!$modx->hasPermission('view_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv_widget');
 
+/* TODO: Eventually make TV widget types dynamic */
 $types = array(
     'text',
     'rawtext',
@@ -28,12 +30,12 @@ $types = array(
     'string',
 );
 
-$ts = array();
+$list = array();
 foreach ($types as $type) {
-    $ta = array(
+    $typeArray = array(
         'name' => $modx->lexicon($type),
         'value' => $type,
     );
-    $ts[] = $ta;
+    $list[] = $typeArray;
 }
-return $this->outputArray($ts);
+return $this->outputArray($list);

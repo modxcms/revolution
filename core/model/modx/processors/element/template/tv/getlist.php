@@ -13,11 +13,13 @@
  * @package modx
  * @subpackage processors.element.template.tv
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission(array('view_tv' => true,'view_template' => true))) {
+    return $modx->error->failure($modx->lexicon('permission_denied'));
+}
 $modx->lexicon->load('template');
 
 /* get default properties */
-$isLimit = empty($_REQUEST['limit']);
+$isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,20);
 $sort = $modx->getOption('sort',$_REQUEST,'rank');
@@ -29,12 +31,13 @@ $c = $modx->newQuery('modTemplateVar');
 
 if ($template) {
     $c->leftJoin('modTemplateVarTemplate','modTemplateVarTemplate','
-        modTemplateVarTemplate.tmplvarid = modTemplateVar.id
-    AND modTemplateVarTemplate.templateid = '.$template.'
+        `modTemplateVarTemplate`.`tmplvarid` = `modTemplateVar`.`id`
+    AND `modTemplateVarTemplate`.`templateid` = '.$template.'
     ');
-    $c->select('modTemplateVar.*,
-        IF(ISNULL(modTemplateVarTemplate.tmplvarid),0,1) AS access,
-        modTemplateVarTemplate.rank AS rank
+    $c->select('
+        `modTemplateVar`.*,
+        IF(ISNULL(`modTemplateVarTemplate`.`tmplvarid`),0,1) AS `access`,
+        `modTemplateVarTemplate`.`rank` AS `rank`
     ');
 }
 $count = $modx->getCount('modTemplateVar',$c);

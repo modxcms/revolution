@@ -3,7 +3,7 @@
  * @package modx
  * @subpackage processors.element.plugin.event
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('save_plugin')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('plugin','system_events');
 
 /* get event */

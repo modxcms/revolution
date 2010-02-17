@@ -5,10 +5,10 @@
  * @package modx
  * @subpackage processors.element.propertyset
  */
-if (!$modx->hasPermission('remove')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('delete_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset','element');
 
-if (!isset($_POST['element_class']) || !isset($_POST['element'])) {
+if (empty($_POST['element_class']) || empty($_POST['element'])) {
     return $modx->error->failure($modx->lexicon('element_err_ns'));
 }
 $elementClass = $_POST['element_class'];

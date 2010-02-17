@@ -1,11 +1,11 @@
 <?php
 /**
- * Updates a  property set
+ * Duplicates a property set
  *
  * @package modx
  * @subpackage processors.element.propertyset
  */
-if (!$modx->hasPermission('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('new_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset','category');
 
 $_POST['copyels'] = !isset($_POST['copyels']) ? 0 : 1;

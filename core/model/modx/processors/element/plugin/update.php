@@ -24,7 +24,7 @@ $modx->lexicon->load('plugin','category');
 /* get plugin */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
 $plugin = $modx->getObject('modPlugin',$_POST['id']);
-if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_not_found'));
+if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
 
 /* check for locks */
 if ($plugin->get('locked') && $modx->hasPermission('edit_locked') == false) {
@@ -32,7 +32,7 @@ if ($plugin->get('locked') && $modx->hasPermission('edit_locked') == false) {
 }
 
 /* Validation and data escaping */
-if (empty($_POST['name'])) $modx->error->addField('name',$modx->lexicon('plugin_err_not_specified_name'));
+if (empty($_POST['name'])) $modx->error->addField('name',$modx->lexicon('plugin_err_ns_name'));
 
 /* check to see if name exists */
 $nameExists = $modx->getObject('modPlugin',array(

@@ -22,9 +22,8 @@
  * @package modx
  * @subpackage processors.element.tv
  */
+if (!$modx->hasPermission('new_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv','category');
-
-if (!$modx->hasPermission('new_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 if (empty($_POST['template'])) $_POST['template'] = array();
 
@@ -110,29 +109,32 @@ if (isset($_POST['templates'])) {
 }
 
 /*
- * TODO: Replace with appropriate ABAC approach
  * check for permission update access
  */
 if ($modx->hasPermission('tv_access_permissions')) {
     if (isset($_POST['resource_groups'])) {
         $docgroups = $modx->fromJSON($_POST['resource_groups']);
-        foreach ($docgroups as $id => $group) {
-            $tvdg = $modx->getObject('modTemplateVarResourceGroup',array(
-                'tmplvarid' => $tv->get('id'),
-                'documentgroup' => $group['id'],
-            ));
+        if (is_array($docgroups)) {
+            foreach ($docgroups as $id => $group) {
+                if (!is_array($group)) continue;
 
-            if ($group['access'] == true) {
-                if ($tvdg != null) continue;
-                $tvdg = $modx->newObject('modTemplateVarResourceGroup');
-                $tvdg->set('tmplvarid',$tv->get('id'));
-                $tvdg->set('documentgroup',$group['id']);
-                if ($tvdg->save() == false) {
-                    return $modx->error->failure($modx->lexicon('tvdg_err_save'));
-                }
-            } else {
-                if ($tvdg->remove() == false) {
-                    return $modx->error->failure($modx->lexicon('tvdg_err_remove'));
+                $templateVarResourceGroup = $modx->getObject('modTemplateVarResourceGroup',array(
+                    'tmplvarid' => $tv->get('id'),
+                    'documentgroup' => $group['id'],
+                ));
+
+                if ($group['access'] == true) {
+                    if (!empty($templateVarResourceGroup)) continue;
+                    $templateVarResourceGroup = $modx->newObject('modTemplateVarResourceGroup');
+                    $templateVarResourceGroup->set('tmplvarid',$tv->get('id'));
+                    $templateVarResourceGroup->set('documentgroup',$group['id']);
+                    if ($templateVarResourceGroup->save() == false) {
+                        return $modx->error->failure($modx->lexicon('tvdg_err_save'));
+                    }
+                } else {
+                    if ($templateVarResourceGroup->remove() == false) {
+                        return $modx->error->failure($modx->lexicon('tvdg_err_remove'));
+                    }
                 }
             }
         }
@@ -143,6 +145,7 @@ if ($modx->hasPermission('tv_access_permissions')) {
 $modx->invokeEvent('OnTVFormSave',array(
     'mode' => 'new',
     'id' => $tv->get('id'),
+    'tv' => &$tv,
 ));
 
 /* log manager action */

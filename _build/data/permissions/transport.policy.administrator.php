@@ -91,6 +91,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'delete_propertyset',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_snippet',
     'description' => '',
     'value' => true,
@@ -152,6 +157,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_plugin',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'edit_propertyset',
     'description' => '',
     'value' => true,
 ));
@@ -316,6 +326,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'new_propertyset',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_role',
     'description' => '',
     'value' => true,
@@ -421,6 +436,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'save_propertyset',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save_role',
     'description' => '',
     'value' => true,
@@ -501,6 +521,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'view_element',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_eventlog',
     'description' => '',
     'value' => true,
@@ -512,6 +537,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_plugin',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'view_propertyset',
     'description' => '',
     'value' => true,
 ));

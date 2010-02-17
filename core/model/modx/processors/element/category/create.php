@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage processors.element.category
  */
-if (!$modx->hasPermission('create')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('new_category')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('category');
 
 /* prevent empty names */

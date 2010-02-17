@@ -22,31 +22,36 @@ if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'
 $tv = $modx->getObject('modTemplateVar',$_DATA['id']);
 if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
 
-$tvt = $modx->getObject('modTemplateVarTemplate',array(
+$templateVarTemplate = $modx->getObject('modTemplateVarTemplate',array(
     'templateid' => $_DATA['template'],
     'tmplvarid' => $_DATA['id'],
 ));
 
-if ($tvt == null && $_DATA['access'] == true) {
-    $tvt = $modx->newObject('modTemplateVarTemplate');
-    $tvt->set('templateid',$_DATA['template']);
-    $tvt->set('tmplvarid',$_DATA['id']);
-    $tvt->set('rank',$_DATA['rank']);
-    if ($tvt->save() === false) {
+/* if adding to the template */
+if (empty($templateVarTemplate) && !empty($_DATA['access'])) {
+    $templateVarTemplate = $modx->newObject('modTemplateVarTemplate');
+    $templateVarTemplate->set('templateid',$_DATA['template']);
+    $templateVarTemplate->set('tmplvarid',$_DATA['id']);
+    $templateVarTemplate->set('rank',$_DATA['rank']);
+    if ($templateVarTemplate->save() === false) {
         return $modx->error->failure($modx->lexicon('tvt_err_save'));
     }
-} elseif ($tvt != null && $_DATA['access'] == false) {
-    if ($tvt->remove() === false) {
+
+/* if removing */
+} elseif (!empty($templateVarTemplate) && $_DATA['access'] == false) {
+    if ($templateVarTemplate->remove() === false) {
         return $modx->error->failure($modx->lexicon('tvt_err_remove'));
     }
-} elseif ($tvt != null) {
-    $tvt->set('rank',$_DATA['rank']);
-    if ($tvt->save() === false) {
+
+/* if reordering */
+} elseif (!empty($templateVarTemplate)) {
+    $templateVarTemplate->set('rank',$_DATA['rank']);
+    if ($templateVarTemplate->save() === false) {
         return $modx->error->failure($modx->lexicon('tvt_err_save'));
     }
 }
 
-if (isset($_DATA['name'])) $tv->set('name',$_DATA['name']);
+if (!empty($_DATA['name'])) $tv->set('name',$_DATA['name']);
 if (isset($_DATA['description'])) $tv->set('description',$_DATA['description']);
 $tv->save();
 

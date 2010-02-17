@@ -18,16 +18,12 @@ if (!$modx->hasPermission('save_chunk')) return $modx->error->failure($modx->lex
 $modx->lexicon->load('chunk','category');
 
 /* make sure a name was specified */
-if (empty($_POST['name'])) $modx->error->addField('name',$modx->lexicon('chunk_err_not_specified_name'));
+if (empty($_POST['name'])) $modx->error->addField('name',$modx->lexicon('chunk_err_ns_name'));
 
 /* grab chunk */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
-$chunk = $modx->getObject('modChunk',$_POST['id']);
-if ($chunk == null) {
-    return $modx->error->failure($modx->lexicon('chunk_err_nfs',array(
-        'id' => $_POST['id'],
-    )));
-}
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
+$chunk = $modx->getObject('modChunk',$_REQUEST['id']);
+if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $_REQUEST['id'])));
 
 /* if chunk is locked */
 if ($chunk->get('locked') && $modx->hasPermission('edit_locked') == false) {

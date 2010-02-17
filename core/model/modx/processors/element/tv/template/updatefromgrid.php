@@ -10,6 +10,7 @@
  * @package modx
  * @subpackage processors.element.template.tv
  */
+if (!$modx->hasPermission('save_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv');
 
 $_DATA = $modx->fromJSON($_POST['data']);

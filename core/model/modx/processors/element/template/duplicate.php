@@ -16,7 +16,7 @@ $modx->lexicon->load('template');
 /* get old template */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
 $oldTemplate = $modx->getObject('modTemplate',$_POST['id']);
-if (!$oldTemplate) return $modx->error->failure($modx->lexicon('template_err_not_found'));
+if (!$oldTemplate) return $modx->error->failure($modx->lexicon('template_err_nf'));
 
 /* format new name */
 $newTemplateName = !empty($_POST['name']) ? $_POST['name'] : $modx->lexicon('duplicate_of').$old_template->get('templatename');

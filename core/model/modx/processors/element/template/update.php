@@ -66,27 +66,30 @@ if ($template->save() === false) {
 
 /* change template access to tvs */
 if (isset($_POST['tvs'])) {
-    $_TVS = $modx->fromJSON($_POST['tvs']);
-    foreach ($_TVS as $id => $tv) {
-        if ($tv['access']) {
-            $tvt = $modx->getObject('modTemplateVarTemplate',array(
-                'tmplvarid' => $tv['id'],
-                'templateid' => $template->get('id'),
-            ));
-            if ($tvt == null) {
-                $tvt = $modx->newObject('modTemplateVarTemplate');
+    $templateVariables = $modx->fromJSON($_POST['tvs']);
+    if (is_array($templateVariables)) {
+        foreach ($templateVariables as $id => $tv) {
+            if ($tv['access']) {
+                $templateVarTemplate = $modx->getObject('modTemplateVarTemplate',array(
+                    'tmplvarid' => $tv['id'],
+                    'templateid' => $template->get('id'),
+                ));
+                if (empty($templateVarTemplate)) {
+                    $templateVarTemplate = $modx->newObject('modTemplateVarTemplate');
+                }
+                $templateVarTemplate->set('tmplvarid',$tv['id']);
+                $templateVarTemplate->set('templateid',$template->get('id'));
+                $templateVarTemplate->set('rank',$tv['rank']);
+                $templateVarTemplate->save();
+            } else {
+                $templateVarTemplate = $modx->getObject('modTemplateVarTemplate',array(
+                    'tmplvarid' => $tv['id'],
+                    'templateid' => $template->get('id'),
+                ));
+                if ($templateVarTemplate && $templateVarTemplate instanceof modTemplateVarTemplate) {
+                    $tvt->remove();
+                }
             }
-            $tvt->set('tmplvarid',$tv['id']);
-            $tvt->set('templateid',$template->get('id'));
-            $tvt->set('rank',$tv['rank']);
-            $tvt->save();
-        } else {
-            $tvt = $modx->getObject('modTemplateVarTemplate',array(
-                'tmplvarid' => $tv['id'],
-                'templateid' => $template->get('id'),
-            ));
-            if ($tvt == null) continue;
-            $tvt->remove();
         }
     }
 }

@@ -7,13 +7,13 @@
  * @package modx
  * @subpackage processors.element.template
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('template');
 
 /* get template */
 if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
 $template = $modx->getObject('modTemplate',$_REQUEST['id']);
-if ($template == null) return $modx->error->failure($modx->lexicon('template_err_not_found'));
+if ($template == null) return $modx->error->failure($modx->lexicon('template_err_nf'));
 
 $properties = $template->get('properties');
 if (!is_array($properties)) $properties = array();

@@ -7,16 +7,13 @@
  * @package modx
  * @subpackage processors.element.chunk
  */
+if (!$modx->hasPermission('view_chunk')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('chunk','category');
 
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
 /* get chunk */
-if (!isset($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
 $chunk = $modx->getObject('modChunk',$_REQUEST['id']);
-if ($chunk == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('chunk_err_id_not_found'),$_REQUEST['id']));
-}
+if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $_REQUEST['id'])));
 
 $properties = $chunk->get('properties');
 if (!is_array($properties)) $properties = array();

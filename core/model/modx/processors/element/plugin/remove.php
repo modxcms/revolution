@@ -13,7 +13,7 @@ $modx->lexicon->load('plugin');
 /* get plugin */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
 $plugin = $modx->getObject('modPlugin',$_POST['id']);
-if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_not_found'));
+if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
 
 /* remove plugin */
 if ($plugin->remove() == false) {

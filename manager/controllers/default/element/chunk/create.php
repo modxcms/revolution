@@ -10,7 +10,9 @@ if (!$modx->hasPermission('new_chunk')) return $modx->error->failure($modx->lexi
 /* grab default category if specified */
 if (isset($_REQUEST['category'])) {
 	$category = $modx->getObject('modCategory',$_REQUEST['category']);
-	if ($category != null) $modx->smarty->assign('category',$category);
+	if ($category && $category instanceof modCategory) {
+        $modx->smarty->assign('category',$category);
+    }
 } else { $category = null; }
 
 /* if RTE is being reset, switch */
@@ -52,7 +54,7 @@ $modx->regClientStartupHTMLBlock('
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-chunk-create"
-        ,category: "'.(isset($category) && $category != null ? $category->get('id') : '').'"
+        ,category: "'.(isset($category) && $category instanceof modCategory ? $category->get('id') : '').'"
     });
 });
 MODx.onChunkFormRender = "'.$onChunkFormRender.'";

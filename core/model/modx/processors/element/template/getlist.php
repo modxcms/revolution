@@ -11,7 +11,7 @@
  * @package modx
  * @subpackage processors.element.template
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('template');
 
 /* get default properties */
@@ -25,7 +25,10 @@ $combo = $modx->getOption('combo',$_REQUEST,false);
 /* query templates */
 $c = $modx->newQuery('modTemplate');
 $c->leftJoin('modCategory','Category');
-$c->select('modTemplate.*,Category.category AS category');
+$c->select('
+    `modTemplate`.*,
+    `Category`.`category` AS `category`
+');
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);

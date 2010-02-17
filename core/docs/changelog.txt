@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Lots of permissions fixes, other bugfixes and sanity checks to Element processors/controllers
+- Added propertyset permissions
 - Cleanups to Resource controllers, processors, optimizing of security permission checks
 - Fixed various bugs with search page
 - Fixed bug with adding policies that prevented partial regexp matches in name

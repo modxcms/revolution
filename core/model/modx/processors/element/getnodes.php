@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage processors.layout.tree.element
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('element_tree')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('category','element');
 
 $stringLiterals = !empty($_REQUEST['stringLiterals']) ? true : false;
