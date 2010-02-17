@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1667] Removed unnecessary opacity CSS rule in menus
 - Fixed bug where page wasnt reloading on login in certain situations
 - Make rightlogin div longer to support longer translations
 - [#MODX-1653] Fixed issues with related objects, removal of aggregates, and other packaging bugs. Introduced xPDOTransport::UNINSTALL_OBJECT, which defaults to true. When off, it will prevent an object from being uninstalled. 

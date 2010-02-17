@@ -627,7 +627,6 @@ ul#modx-topnav li ul.modx-subnav {
     display: none;
     float: left;
     width: 225px;
-    opacity: 0.97;
     border: 1px solid #111;
 }
 ul#modx-topnav li:hover ul.modx-subnav {
