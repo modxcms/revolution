@@ -30,9 +30,12 @@ if (isset ($_REQUEST['template'])) {
     $templateId = intval($_REQUEST['template']);
 }
 if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
-    if (!$resourceId || (!$resource = $modx->getObject($resourceClass, $resourceId))) {
+    $resource = $modx->getObject($resourceClass, $resourceId);
+    if (empty($resourceId) || empty($resource)) {
         $resource = $modx->newObject($resourceClass);
         $resourceId = 0;
+    } else if (!empty($resourceId) && !$resource->checkPolicy('view')) {
+        return $modx->error->failure($modx->lexicon('permission_denied'));
     }
     $resource->set('template',$templateId);
 
@@ -54,11 +57,11 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
                         'tv' . $tv->id
                     );
             }
-            $fe = $tv->renderInput($resource->id);
-            if (empty($fe)) continue;
+            $inputForm = $tv->renderInput($resource->id);
+            if (empty($inputForm)) continue;
 
             if (strpos($tv->get('value'),'@INHERIT') > -1) $tv->set('inherited',true);
-            $tv->set('formElement',$fe);
+            $tv->set('formElement',$inputForm);
             if (!is_array($categories[$tv->category]->tvs))
                 $categories[$tv->category]->tvs = array();
             $categories[$tv->category]->tvs[$tv->id] = $tv;

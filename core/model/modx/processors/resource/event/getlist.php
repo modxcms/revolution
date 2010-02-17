@@ -12,7 +12,7 @@
  * @package modx
  * @subpackage processors.resource.event
  */
-if (!$modx->hasPermission('list')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('view_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
 /* setup default properties */
@@ -35,6 +35,8 @@ $list = array();
 $timeFormat = '%a %b %d, %Y';
 $offset = $modx->getOption('server_offset_time',null,0) * 60 * 60;
 foreach ($resources as $resource) {
+    if (!$resource->checkPolicy('view')) continue;
+
     $resourceArray = $resource->toArray();
     unset($resourceArray['content']);
 

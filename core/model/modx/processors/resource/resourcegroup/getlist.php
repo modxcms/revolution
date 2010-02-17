@@ -21,13 +21,23 @@ $start = $modx->getOption('start',$_REQUEST,0);
 $limit = $modx->getOption('limit',$_REQUEST,10);
 $sort = $modx->getOption('sort',$_REQUEST,'name');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$resource = $modx->getOption('resource',$_REQUEST,0);
+$resourceId = $modx->getOption('resource',$_REQUEST,0);
+
+/* get resource */
+if (empty($resourceId)) return $modx->error->failure($modx->lexicon('resource_err_ns'));
+$resource = $modx->getObject('modResource',$resourceId);
+if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $resourceId)));
+
+/* check access */
+if (!$resource->checkPolicy('view')) {
+    return $modx->error->failure($modx->lexicon('permission_denied'));
+}
 
 /* build query */
 $c = $modx->newQuery('modResourceGroup');
 $c->leftJoin('modResourceGroupResource','ResourceGroupResource','
     `ResourceGroupResource`.`document_group` = `modResourceGroup`.`id`
-AND `ResourceGroupResource`.`document` = '.$resource);
+AND `ResourceGroupResource`.`document` = '.$resource->get('id'));
 $count = $modx->getCount('modResourceGroup',$c);
 $c->select('
     `modResourceGroup`.*,

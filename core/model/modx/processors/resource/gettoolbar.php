@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage processors.layout.tree.resource
  */
+if (!$modx->hasPermission('resource_tree')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
 $p = $modx->getOption('manager_url').'templates/'.$modx->getOption('manager_theme').'/images/restyle/icons/';
@@ -66,4 +67,3 @@ if ($modx->hasPermission('purge_deleted')) {
 }
 
 return $this->outputArray($items);
-//return $modx->error->success('',$items);

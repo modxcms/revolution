@@ -11,7 +11,7 @@ $_POST['variablesmodified'] = isset($_POST['variablesmodified'])
     : array();
 
 /* default pagetitle */
-if ($_POST['pagetitle'] == '') $_POST['pagetitle'] = $modx->lexicon('untitled_resource');
+if (empty($_POST['pagetitle'])) $_POST['pagetitle'] = $modx->lexicon('untitled_resource');
 
 $_POST['hidemenu'] = empty($_POST['hidemenu']) ? 0 : 1;
 $_POST['isfolder'] = empty($_POST['isfolder']) ? 0 : 1;
@@ -305,9 +305,8 @@ if ($_POST['syncsite'] == 1) {
     );
 }
 
-if (!isset($_POST['modx-ab-stay']) || $_POST['modx-ab-stay'] !== 'stay') {
-    $resource->removeLock();
-}
+$resource->removeLock();
+
 $resourceArray = $resource->get(array('id','alias'));
 $resourceArray['preview_url'] = $modx->makeUrl($resource->get('id'));
 

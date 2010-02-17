@@ -8,15 +8,13 @@
  * @package modx
  * @subpackage processors.resource
  */
+if (!$modx->hasPermission('publish_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
 /* get resource */
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
 $resource = $modx->getObject('modResource',$_REQUEST['id']);
-if ($resource == null) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_REQUEST['id'])));
-
-if (!$modx->hasPermission('publish_document')) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
+if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_REQUEST['id'])));
 
 /* check permissions on the resource */
 if (!$resource->checkPolicy(array('save'=>true, 'publish'=>true))) {
@@ -26,7 +24,9 @@ if (!$resource->checkPolicy(array('save'=>true, 'publish'=>true))) {
 $locked = $resource->addLock();
 if ($locked !== true) {
     $user = $modx->getObject('modUser', $locked);
-    if ($user) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+    if ($user) {
+        return $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+    }
 }
 
 /* publish resource */
@@ -46,6 +46,7 @@ if (!$saved) return $modx->error->failure($modx->lexicon('resource_err_publish')
 /* invoke OnDocPublished event */
 $modx->invokeEvent('OnDocPublished',array(
     'docid' => $resource->get('id'),
+    'id' => $resource->get('id'),
     'resource' => &$resource,
 ));
 

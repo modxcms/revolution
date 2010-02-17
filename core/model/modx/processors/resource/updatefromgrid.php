@@ -6,21 +6,31 @@
  * @package modx
  * @subpackage processors.resource
  */
-$modx->lexicon->load('resource');
 if (!$modx->hasPermission('save_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('resource');
 
 $_DATA = $modx->fromJSON($_POST['data']);
 
-if (!isset($_DATA['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
+/* get resource */
+if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
 $resource = $modx->getObject('modResource',$_DATA['id']);
-if ($resource == null) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_DATA['id'])));
+if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_DATA['id'])));
 
+/* check policy on resource */
+if (!$resource->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('permission_denied'));
+}
+
+/* check for locks */
 $locked = $resource->addLock();
 if ($locked !== true) {
     $user = $modx->getObject('modUser', $locked);
-    if ($user) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+    if ($user) {
+        return $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+    }
 }
 
+/* save resource */
 $resource->fromArray($_DATA);
 if ($resource->save() === false) {
     $resource->removeLock();

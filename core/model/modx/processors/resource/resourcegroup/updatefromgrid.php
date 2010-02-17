@@ -15,32 +15,39 @@ $modx->lexicon->load('resource');
 
 $_DATA = $modx->fromJSON($_POST['data']);
 
-if (!isset($_DATA['resource'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
+/* get resource */
+if (empty($_DATA['resource'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
 $resource = $modx->getObject('modResource',$_DATA['resource']);
-if ($resource == null) return $modx->error->failure($modx->lexicon('resource_err_nf'));
+if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nf'));
 
-if (!isset($_DATA['id'])) return $modx->error->failure($modx->lexicon('resource_group_err_ns'));
-$rg = $modx->getObject('modResourceGroup',$_DATA['id']);
-if ($rg == null) return $modx->error->failure($modx->lexicon('resource_group_err_nf'));
+if (!$resource->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('permission_denied'));
+}
 
-$rgr = $modx->getObject('modResourceGroupResource',array(
+/* get resource group */
+if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('resource_group_err_ns'));
+$resourceGroup = $modx->getObject('modResourceGroup',$_DATA['id']);
+if (empty($resourceGroup)) return $modx->error->failure($modx->lexicon('resource_group_err_nf'));
+
+/* get access */
+$resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
     'document' => $resource->get('id'),
-    'document_group' => $rg->get('id'),
+    'document_group' => $resourceGroup->get('id'),
 ));
 
-if ($_DATA['access'] == true && $rgr != null) {
+if ($_DATA['access'] == true && $resourceGroupResource != null) {
     return $modx->error->failure($modx->lexicon('resource_group_resource_err_ae'));
 }
-if ($_DATA['access'] == false && $rgr == null) {
+if ($_DATA['access'] == false && $resourceGroupResource == null) {
     return $modx->error->failure($modx->lexicon('resource_group_resource_err_nf'));
 }
 if ($_DATA['access'] == true) {
-    $rgr = $modx->newObject('modResourceGroupResource');
-    $rgr->set('document',$resource->get('id'));
-    $rgr->set('document_group',$rg->get('id'));
-    $rgr->save();
-} else {
-    $rgr->remove();
+    $resourceGroupResource = $modx->newObject('modResourceGroupResource');
+    $resourceGroupResource->set('document',$resource->get('id'));
+    $resourceGroupResource->set('document_group',$resourceGroup->get('id'));
+    $resourceGroupResource->save();
+} else if ($resourceGroupResource instanceof modResourceGroupResource) {
+    $resourceGroupResource->remove();
 }
 
 return $modx->error->success();

@@ -3,6 +3,7 @@ MODx.panel.ResourceData = function(config) {
     var df = { 
         border: false
         ,msgTarget: 'side'
+        ,width: 300
     };
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
@@ -21,12 +22,17 @@ MODx.panel.ResourceData = function(config) {
             ,id: 'modx-rdata-tab-general'
             ,layout: 'form'
             ,autoHeight: true
+            ,labelWidth: 150
             ,bodyStyle: 'padding: 1.5em;'
             ,defaults: df
             ,items: [{
                 name: 'pagetitle'
                 ,fieldLabel: _('resource_pagetitle')
                 ,description: _('resource_pagetitle_help')
+                ,xtype: 'statictextfield'
+            },{
+                name: 'template_name'
+                ,fieldLabel: _('resource_template')
                 ,xtype: 'statictextfield'
             },{
                 name: 'longtitle'
@@ -55,43 +61,7 @@ MODx.panel.ResourceData = function(config) {
                 name: 'context_key'
                 ,fieldLabel: _('context')
                 ,xtype: 'statictextfield'
-            }]
-        },{
-            title: _('changes')
-            ,id: 'modx-rdata-tab-changes'
-            ,defaults: df
-            ,layout: 'form'
-            ,autoHeight: true
-            ,bodyStyle: 'padding: 1.5em'
-            ,defaultType: 'statictextfield'
-            ,items: [{
-                name: 'createdon_adjusted'
-                ,fieldLabel: _('resource_createdon')
             },{
-                name: 'createdon_by'
-                ,fieldLabel: _('resource_createdby')
-            },{
-                name: 'editedon_adjusted'
-                ,fieldLabel: _('resource_editedon')
-            },{
-                name: 'editedon_by'
-                ,fieldLabel: _('resource_editedby')
-            },{
-                name: 'publishedon_adjusted'
-                ,fieldLabel: _('resource_publishedon')
-            },{
-                name: 'publishedon_by'
-                ,fieldLabel: _('resource_publishedby')
-            }]
-        },{
-            title: _('status')
-            ,id: 'modx-rdata-tab-status'
-            ,defaults: df
-            ,layout: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
-            ,autoHeight: true
-            ,defaultType: 'statictextfield'
-            ,items: [{
                 name: 'status'
                 ,fieldLabel: _('resource_status')
                 ,description: _('resource_status_help')
@@ -130,18 +100,6 @@ MODx.panel.ResourceData = function(config) {
                 name: 'menuindex'
                 ,fieldLabel: _('resource_menuindex')
                 ,description: _('resource_menuindex_help')
-            }]
-        },{
-            title: _('markup')
-            ,id: 'modx-rdata-tab-markup'
-            ,defaults: df
-            ,layout: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
-            ,autoHeight: true
-            ,defaultType: 'statictextfield'
-            ,items: [{
-                name: 'template'
-                ,fieldLabel: _('resource_template')
             },{
                 name: 'richtext'
                 ,fieldLabel: _('resource_richtext')
@@ -152,6 +110,33 @@ MODx.panel.ResourceData = function(config) {
                 ,fieldLabel: _('resource_folder')
                 ,description: _('resource_folder_help')
                 ,xtype: 'staticboolean'
+            }]
+        },{
+            title: _('changes')
+            ,id: 'modx-rdata-tab-changes'
+            ,defaults: df
+            ,layout: 'form'
+            ,autoHeight: true
+            ,bodyStyle: 'padding: 1.5em'
+            ,defaultType: 'statictextfield'
+            ,items: [{
+                name: 'createdon_adjusted'
+                ,fieldLabel: _('resource_createdon')
+            },{
+                name: 'createdon_by'
+                ,fieldLabel: _('resource_createdby')
+            },{
+                name: 'editedon_adjusted'
+                ,fieldLabel: _('resource_editedon')
+            },{
+                name: 'editedon_by'
+                ,fieldLabel: _('resource_editedby')
+            },{
+                name: 'publishedon_adjusted'
+                ,fieldLabel: _('resource_publishedon')
+            },{
+                name: 'publishedon_by'
+                ,fieldLabel: _('resource_publishedby')
             }]
         },{
             title: _('cache_output')
@@ -168,6 +153,7 @@ MODx.panel.ResourceData = function(config) {
             }]
         }],{
             deferredRender: false
+            ,hideMode: 'offsets'
         })]
         ,listeners: {
             'setup':{fn:this.setup,scope:this}

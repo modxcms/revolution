@@ -5,13 +5,15 @@
  */
 if (!$modx->hasPermission('edit_document')) return $modx->error->failure($modx->lexicon('access_denied'));
 
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('resource_err_nf'));
 $resource = $modx->getObject('modResource',$_REQUEST['id']);
-if ($resource == null) return $modx->error->failure(sprintf($modx->lexicon('resource_with_id_not_found'), $_REQUEST['id']));
+if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_REQUEST['id'])));
 
 if (!$resource->checkPolicy('save')) {
     return $modx->error->failure($modx->lexicon('access_permission_denied'));
 }
 
+/* check for locks */
 $lockedBy = $resource->addLock($modx->user->get('id'));
 if (!empty($lockedBy) && $lockedBy !== true) {
     if ($user = $modx->getObject('modUser', $lockedBy)) {
@@ -43,22 +45,6 @@ if ($resource->get('parent') != 0) {
 }
 $modx->smarty->assign('parent',$resource->get('parent'));
 $modx->smarty->assign('parentname',$parentname);
-
-$groupsarray = array ();
-$dgds = $modx->getCollection('modResourceGroupResource',array('document' => $resource->get('id')));
-foreach ($dgds as $dgd) {
-    $groupsarray[$dgd->get('id')] = $dgd->get('document_group');
-}
-$c = $modx->newQuery('modResourceGroup');
-$c->sortby('name','ASC');
-$docgroups = $modx->getCollection('modResourceGroup',$c);
-foreach ($docgroups as $docgroup) {
-    $checked = in_array($docgroup->get('id'),$groupsarray);
-    $docgroup->set('selected',$checked);
-}
-$modx->smarty->assign('docgroups',$docgroups);
-$modx->smarty->assign('hasdocgroups',count($docgroups) > 0);
-
 
 /* invoke OnDocFormRender event */
 $onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(

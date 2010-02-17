@@ -17,6 +17,8 @@ $resources = $modx->getCollection('modResource',array('deleted' => true));
 $count = count($resources);
 
 foreach ($resources as $resource) {
+    if (!$resource->checkPolicy('delete')) continue;
+
     $resource->groups = $resource->getMany('ResourceGroupResources');
     $resource->tvds = $resource->getMany('TemplateVarResources');
 
@@ -31,16 +33,6 @@ foreach ($resources as $resource) {
     if ($resource->remove() == false) {
         return $modx->error->failure($modx->lexicon('resource_err_delete'));
     }
-
-    /* see if resource's parent has any children left */
-//  $parent = $modx->getObject('modResource',$resource->get('parent'));
-//  if ($parent != null && $parent->get('id') != null) {
-//      $num_children = $modx->getCount('modResource',array('parent' => $parent->get('id')));
-//      if ($num_children <= 0) {
-//          $parent->set('isfolder',false);
-//          $parent->save();
-//      }
-//  }
 }
 
 $modx->invokeEvent('OnEmptyTrash',array(

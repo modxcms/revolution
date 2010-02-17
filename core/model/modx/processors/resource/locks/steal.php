@@ -8,7 +8,7 @@
 if (!$modx->hasPermission('steal_locks')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 $stolen = false;
-if (isset($_POST['id'])) {
+if (!empty($_POST['id'])) {
     $resource = $modx->getObject('modResource', intval($_POST['id']));
     if ($resource && $resource->checkPolicy('steal_lock')) {
         $lock = $resource->getLock($modx->user->get('id'));

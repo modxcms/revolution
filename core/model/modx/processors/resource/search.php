@@ -14,8 +14,6 @@
 if (!$modx->hasPermission('view_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
-$modx->setLogTarget('ECHO');
-
 /* setup default properties */
 $isLimit = !empty($_REQUEST['limit']);
 $start = $modx->getOption('start',$_REQUEST,0);

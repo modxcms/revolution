@@ -18,15 +18,13 @@ MODx.panel.Search = function(config) {
         },{
             xtype: 'portal'
             ,items: [{
-                columnWidth: .977
+                columnWidth: .97
                 ,items: [{
                     title: _('search_criteria')
 					,cls: 'x-panel-header'
-					,style: 'padding: .5em;'
-					,bodyStyle: 'text-transform: none; font-weight: Normal;'
                     ,layout: 'form'
                     ,border: false
-                    ,defaults: { 
+                    ,defaults: {
                         collapsible: false
                         ,autoHeight: true
                         ,bodyStyle: 'padding: 1.5em;'
@@ -55,16 +53,19 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
             xtype: 'textfield'
             ,name: 'id'
             ,fieldLabel: _('id')
+            ,width: 100
             ,listeners: lsr
         },{
             xtype: 'textfield'
             ,name: 'pagetitle'
             ,fieldLabel: _('pagetitle')
+            ,width: 300
             ,listeners: lsr
         },{
             xtype: 'textfield'
             ,name: 'longtitle'
             ,fieldLabel: _('long_title')
+            ,width: 300
             ,listeners: lsr
         },{
             xtype: 'textarea'

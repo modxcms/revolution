@@ -11,19 +11,17 @@
  * @package modx
  * @subpackage processors.resource
  */
-if (!$modx->hasPermission('create')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
-$duplicate_children = isset($_POST['duplicate_children']);
-$newname = isset($_POST['name']) && $_POST['name'] != '' ? $_POST['name'] : '';
+/* setup default properties */
+$duplicateChildren = !empty($_POST['duplicate_children']);
+$newName = !empty($_POST['name']) ? $_POST['name'] : '';
 
 /* get resource */
 $old_resource = $modx->getObject('modResource',$_POST['id']);
-if ($old_resource == null) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_POST['id'])));
+if (empty($old_resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_POST['id'])));
 
-if (!$modx->hasPermission('new_document')) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
-}
 if (!$old_resource->checkPolicy('copy'))
     return $modx->error->failure($modx->lexicon('permission_denied'));
 
@@ -37,17 +35,20 @@ if ($parent && !$parent->checkPolicy('add_children')) {
 $old_resource->children = getChildren($old_resource);
 
 $new_id = $_POST['id'];
-$new_resource = duplicateResource($old_resource,$newname,$duplicate_children);
+$new_resource = duplicateResource($old_resource,$newName,$duplicateChildren);
+if (!($new_resource instanceof modResource)) {
+    return $new_resource;
+}
 
 
-function duplicateResource($resource,$newname = '',$duplicate_children = true,$_toplevel = 0) {
+function duplicateResource($resource,$newName = '',$duplicateChildren = true,$_toplevel = 0) {
 	global $modx;
 
-	if ($newname == '') $newname = $modx->lexicon('duplicate_of').$resource->get('pagetitle');
+	if (empty($newName)) $newName = $modx->lexicon('duplicate_of').$resource->get('pagetitle');
 	/* duplicate resource */
-	$new_resource = $modx->newObject($resource->_class);
+	$new_resource = $modx->newObject($resource->get('class_key'));
 	$new_resource->fromArray($resource->toArray('', true), '', false, true);
-	$new_resource->set('pagetitle',$newname);
+	$new_resource->set('pagetitle',$newName);
 	$new_resource->set('alias', null);
     /* make sure children get assigned to new parent */
 	$new_resource->set('parent',$_toplevel == 0 ? $resource->get('parent') : $_toplevel);
@@ -65,7 +66,7 @@ function duplicateResource($resource,$newname = '',$duplicate_children = true,$_
 		return $modx->error->failure($modx->lexicon('resource_err_duplicate'));
     }
 
-	if($_toplevel==0) {
+	if ($_toplevel==0) {
 		global $new_id;
 		$new_id = $new_resource->get('id');
 	}
@@ -90,18 +91,16 @@ function duplicateResource($resource,$newname = '',$duplicate_children = true,$_
 	}
 
 	/* duplicate resource, recursively */
-	if ($duplicate_children && count($resource->children) > 0) {
+	if ($duplicateChildren && count($resource->children) > 0) {
 		foreach ($resource->children as $child) {
-			duplicateResource($child,'',true,$new_resource->get('id'));
+			$result = duplicateResource($child,'',true,$new_resource->get('id'));
 		}
 	}
 	return $new_resource;
 }
 
 /* Get Children */
-function getChildren($parent) {
-	global $modx;
-
+function getChildren(&$parent) {
 	$children = $parent->getMany('Children');
 	if (count($children) > 0) {
 		foreach ($children as $child) {

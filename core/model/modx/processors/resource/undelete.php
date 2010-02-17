@@ -8,10 +8,12 @@
  * @package modx
  * @subpackage processors.resource
  */
+if (!$modx->hasPermission('undelete_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
 $resource = $modx->getObject('modResource',$_REQUEST['id']);
-if ($resource == null) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_REQUEST['id'])));
+if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_REQUEST['id'])));
 
 /* check permissions on the resource */
 if (!$resource->checkPolicy(array('save'=>1, 'undelete'=>1))) {
@@ -21,19 +23,18 @@ if (!$resource->checkPolicy(array('save'=>1, 'undelete'=>1))) {
 $locked = $resource->addLock();
 if ($locked !== true) {
     $user = $modx->getObject('modUser', $locked);
-    if ($user) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+    if ($user) {
+        return $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+    }
 }
 
-$deltime = $resource->get('deletedon');
-
-function getChildren($parent) {
-    global $modx;
-    global $deltime;
+function getChildren(&$modx,$parent,$deltime = 0) {
+    if (empty($deltime)) $deltime = time();
+    $success = false;
 
     $kids = $modx->getCollection('modResource',array(
         'parent' => $parent,
-        'deleted' => 1,
-        'deletedon' => $deltime,
+        'deleted' => true,
     ));
 
     if(count($kids) > 0) {
@@ -47,16 +48,16 @@ function getChildren($parent) {
             $kid->set('deleted',0);
             $kid->set('deletedby',0);
             $kid->set('deletedon',0);
-            if (!$kid->save()) {
-                return false;
+            $success = $kid->save();
+            if ($success) {
+                $success = getChildren($modx,$kid->get('id'),$deltime);
             }
-            getChildren($kid->get('id'));
         }
     }
-    return true;
+    return $success;
 }
 
-if (!getChildren($resource->get('id'))) {
+if (!getChildren($modx,$resource->get('id'),$resource->get('deletedon'))) {
     $resource->removeLock();
     $modx->error->failure($modx->lexicon('resource_err_undelete_children'));
 }

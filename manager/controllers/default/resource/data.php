@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage manager.resource
  */
+if (!$modx->hasPermission('view_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
 $resource = $modx->getObject('modResource', $_REQUEST['id']);

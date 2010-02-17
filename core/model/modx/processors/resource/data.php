@@ -12,21 +12,29 @@ if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('
 $modx->lexicon->load('resource');
 
 /* get resource */
-if (!isset($_REQUEST['id'])) {
-    return $modx->error->failure($modx->lexicon('resource_err_ns'));
-}
-$resource = $modx->getObject('modResource', $_REQUEST['id']);
-if ($resource == null) {
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
+$c = $modx->newQuery('modResource');
+$c->select('
+    `modResource`.*,
+    `Template`.`templatename` AS `template_name`,
+    `CreatedBy`.`username` AS `creator`,
+    `EditedBy`.`username` AS `editor`,
+    `PublishedBy`.`username` AS `publisher`
+');
+$c->leftJoin('modTemplate','Template');
+$c->leftJoin('modUser','CreatedBy');
+$c->leftJoin('modUser','EditedBy');
+$c->leftJoin('modUser','PublishedBy');
+$c->where(array(
+    'modResource.id' => $_REQUEST['id'],
+));
+$resource = $modx->getObject('modResource',$c);
+if (empty($resource)) {
     return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_REQUEST['id'])));
 }
 if (!$resource->checkPolicy('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$resource->getOne('CreatedBy');
-$resource->getOne('EditedBy');
-$resource->getOne('PublishedBy');
-$resource->getOne('Template');
-
-$ra = $resource->toArray();
+$ra = $resource->toArray('',true,true);
 
 /* format pub/unpub dates */
 $emptyDate = '0000-00-00 00:00:00';
@@ -34,39 +42,27 @@ $ra['pub_date'] = !empty($ra['pub_date']) && $ra['pub_date'] != $emptyDate ? $ra
 $ra['unpub_date'] = !empty($ra['unpub_date']) && $ra['unpub_date'] != $emptyDate ? $ra['unpub_date'] : $modx->lexicon('none');
 $ra['status'] = $ra['published'] ? $modx->lexicon('resource_published') : $modx->lexicon('resource_unpublished');
 
-/* keywords */
-$dkws = $resource->getMany('ResourceKeywords');
-$resource->keywords = array();
-foreach ($dkws as $dkw) {
-    $resource->keywords[$dkw->get('keyword_id')] = $dkw->getOne('modKeyword');
-}
-$keywords = array();
-foreach ($resource->keywords as $kw) {
-    $keywords[] = $kw->get('keyword');
-}
-$ra['keywords'] = join($keywords,',');
-
 /* get changes */
 $server_offset_time= intval($modx->getOption('server_offset_time',null,0));
 $ra['createdon_adjusted'] = strftime('%c', strtotime($resource->get('createdon')) + $server_offset_time);
-$ra['createdon_by'] = $resource->CreatedBy->get('username');
-if ($resource->EditedBy) {
+$ra['createdon_by'] = $resource->get('creator');
+if (!empty($ra['editedon']) && $ra['editedon'] != $emptyDate) {
     $ra['editedon_adjusted'] = strftime('%c', strtotime($resource->get('editedon')) + $server_offset_time);
-    $ra['editedon_by'] = $resource->EditedBy->get('username');
+    $ra['editedon_by'] = $resource->get('editor');
 } else {
     $ra['editedon_adjusted'] = $modx->lexicon('none');
     $ra['editedon_by'] = $modx->lexicon('none');
 }
-if (!empty($ra['publishedon']) && $resource->PublishedBy) {
+if (!empty($ra['publishedon']) && $ra['publishedon'] != $emptyDate) {
     $ra['publishedon_adjusted'] = strftime('%c', strtotime($resource->get('editedon')) + $server_offset_time);
-    $ra['publishedon_by'] = $resource->PublishedBy->get('username');
+    $ra['publishedon_by'] = $resource->get('publisher');
 } else {
     $ra['publishedon_adjusted'] = $modx->lexicon('none');
     $ra['publishedon_by'] = $modx->lexicon('none');
 }
 
 /* template */
-$ra['template'] = $resource->Template ? $resource->Template->get('templatename') : $modx->lexicon('empty_template');
+if (empty($ra['template_name'])) $ra['template_name'] = $modx->lexicon('empty_template');
 
 /* source */
 $resource->_contextKey= $resource->get('context_key');
@@ -74,13 +70,5 @@ if ($buffer = $modx->cacheManager->get($resource->getCacheKey())) {
     $buffer = htmlspecialchars($buffer['resource']['_content']);
 }
 $ra['buffer'] = !empty($buffer) ? $buffer : $modx->lexicon('resource_notcached');
-
-
-/* set none to blank stuff */
-foreach ($ra as $k => $v) {
-    if (empty($ra[$k])) {
-        $ra[$k] = $modx->lexicon('none');
-    }
-}
 
 return $modx->error->success('',$ra);

@@ -93,8 +93,6 @@ if (!empty($_POST['syncsite']) || !empty($_POST['clearCache'])) {
     );
 }
 
-if (!isset($_POST['modx-ab-stay']) || $_POST['modx-ab-stay'] !== 'stay') {
-    $resource->removeLock();
-}
+$resource->removeLock();
 
 return $modx->error->success('', array('id' => $resource->get('id')));

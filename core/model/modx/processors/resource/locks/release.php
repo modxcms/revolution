@@ -14,4 +14,4 @@ if (isset($_POST['id'])) {
     }
 }
 
-return $modx->error->success('');
+return $modx->error->success();

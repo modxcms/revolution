@@ -52,7 +52,7 @@ $modx->lexicon->load('resource');
 /* get resource */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
 $resource = $modx->getObject('modResource',$_POST['id']);
-if ($resource == null) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_POST['id'])));
+if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_POST['id'])));
 
 /* check permissions */
 if (!$modx->hasPermission('save_document') || !$resource->checkPolicy('save')) {
@@ -74,7 +74,11 @@ if ($locked !== true) {
     if ($locked !== true) {
         $lockedBy = intval($locked);
         $user = $modx->getObject('modUser', $lockedBy);
-        if ($lockedBy) $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+        if ($lockedBy) {
+            return $modx->error->failure($modx->lexicon('resource_locked_by', array('id' => $resource->get('id'), 'user' => $user->get('username'))));
+        } else {
+            $resource->removeLock($locked);
+        }
     }
 }
 
@@ -245,13 +249,13 @@ if ($resource->get('parent') != $oldparent_id) {
         }
     }
 
-    $newparent = $modx->getObject('modResource',$resource->get('parent'));
-    if ($newparent != null) {
-        $newparent->set('isfolder',true);
-        $newparent->save();
+    $newParent = $modx->getObject('modResource',$resource->get('parent'));
+    if ($newParent && $newParent instanceof modResource) {
+        $newParent->set('isfolder',true);
+        $newParent->save();
 
         /* set context to new parent context */
-        $resource->set('context_key',$newparent->get('context_key'));
+        $resource->set('context_key',$newParent->get('context_key'));
         $resource->save();
     }
 }
@@ -335,26 +339,29 @@ if (!empty($_POST['tvs'])) {
 
 /* Save resource groups */
 if (isset($_POST['resource_groups'])) {
-    $_GROUPS = $modx->fromJSON($_POST['resource_groups']);
-    foreach ($_GROUPS as $id => $group) {
-        if ($group['access']) {
-            $rgr = $modx->getObject('modResourceGroupResource',array(
-                'document_group' => $group['id'],
-                'document' => $resource->get('id'),
-            ));
-            if ($rgr == null) {
-                $rgr = $modx->newObject('modResourceGroupResource');
+    $resourceGroups = $modx->fromJSON($_POST['resource_groups']);
+    if (is_array($resourceGroups)) {
+        foreach ($resourceGroups as $id => $resourceGroupAccess) {
+            if ($resourceGroupAccess['access']) {
+                $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
+                    'document_group' => $resourceGroupAccess['id'],
+                    'document' => $resource->get('id'),
+                ));
+                if (empty($resourceGroupResource)) {
+                    $resourceGroupResource = $modx->newObject('modResourceGroupResource');
+                }
+                $resourceGroupResource->set('document_group',$resourceGroupAccess['id']);
+                $resourceGroupResource->set('document',$resource->get('id'));
+                $resourceGroupResource->save();
+            } else {
+                $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
+                    'document_group' => $resourceGroupAccess['id'],
+                    'document' => $resource->get('id'),
+                ));
+                if ($resourceGroupResource && $resourceGroupResource instanceof modResourceGroupResource) {
+                    $resourceGroupResource->remove();
+                }
             }
-            $rgr->set('document_group',$group['id']);
-            $rgr->set('document',$resource->get('id'));
-            $rgr->save();
-        } else {
-            $rgr = $modx->getObject('modResourceGroupResource',array(
-                'document_group' => $group['id'],
-                'document' => $resource->get('id'),
-            ));
-            if ($rgr == null) continue;
-            $rgr->remove();
         }
     }
 }
@@ -383,9 +390,8 @@ if (!empty($_POST['syncsite']) || !empty($_POST['clearCache'])) {
     );
 }
 
-if (!isset($_POST['modx-ab-stay']) || $_POST['modx-ab-stay'] !== 'stay') {
-    $resource->removeLock();
-}
+$resource->removeLock();
+
 $resourceArray = $resource->get(array('id','alias'));
 $resourceArray['preview_url'] = $modx->makeUrl($resource->get('id'));
 

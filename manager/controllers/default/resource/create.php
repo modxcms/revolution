@@ -75,26 +75,6 @@ if (isset ($_REQUEST['parent'])) {
 }
 $modx->smarty->assign('parentname',$parentname);
 
-/* set permissions on the resource based on the permissions of the parent resource
- * TODO: get working in revo, move to get processor
- */
-$groupsarray = array ();
-if (!empty ($_REQUEST['parent'])) {
-    $dgds = $modx->getCollection('modResourceGroupResource',array('document' => $_REQUEST['parent']));
-    foreach ($dgds as $dgd) {
-        $groupsarray[$dgd->get('id')] = $dgd->get('document_group');
-    }
-}
-$c = $modx->newQuery('modResourceGroup');
-$c->sortby('name','ASC');
-$docgroups = $modx->getCollection('modResourceGroup',$c);
-foreach ($docgroups as $docgroup) {
-    $checked = in_array($docgroup->get('id'),$groupsarray);
-    $docgroup->set('selected',$checked);
-}
-$modx->smarty->assign('docgroups',$docgroups);
-$modx->smarty->assign('hasdocgroups',count($docgroups) > 0);
-
 
 /* invoke OnDocFormRender event */
 $onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(

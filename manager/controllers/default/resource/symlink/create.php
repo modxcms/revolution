@@ -7,26 +7,6 @@ if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->l
 
 $resource = $modx->newObject('modSymLink');
 
-/* handle switch template */
-if (isset ($_REQUEST['newtemplate'])) {
-    foreach ($_POST as $key => $val) {
-        $resource->set($key,$val);
-    }
-    $resource->set('content',$_POST['ta']);
-    $pub_date = $resource->get('pub_date');
-    if (!empty($pub_date) && $pub_date != '') {
-        list ($d, $m, $Y, $H, $M, $S) = sscanf($pub_date, "%2d-%2d-%4d %2d:%2d:%2d");
-        $pub_date = strtotime("$m/$d/$Y $H:$M:$S");
-        $resource->set('pub_date',$pub_date);
-    }
-    $unpub_date = $resource->get('unpub_date');
-    if (!empty($unpub_date) && $unpub_date != '') {
-        list ($d, $m, $Y, $H, $M, $S) = sscanf($unpub_date, "%2d-%2d-%4d %2d:%2d:%2d");
-        $unpub_date = strtotime("$m/$d/$Y $H:$M:$S");
-        $resource->set('unpub_date',$unpub_date);
-    }
-}
-
 /* invoke OnDocFormPrerender event */
 $onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
     'id' => 0,
@@ -52,26 +32,6 @@ if (isset ($_REQUEST['parent'])) {
     }
 }
 $modx->smarty->assign('parentname',$parentname);
-
-/* set permissions on the resource based on the permissions of the parent resource
- * TODO: get working in revo, move to get processor
- */
-$groupsarray = array ();
-if (!empty ($_REQUEST['parent'])) {
-    $dgds = $modx->getCollection('modResourceGroupResource',array('document' => $_REQUEST['parent']));
-    foreach ($dgds as $dgd) {
-        $groupsarray[$dgd->get('id')] = $dgd->get('document_group');
-    }
-}
-$c = $modx->newQuery('modResourceGroup');
-$c->sortby('name','ASC');
-$docgroups = $modx->getCollection('modResourceGroup',$c);
-foreach ($docgroups as $docgroup) {
-    $checked = in_array($docgroup->get('id'),$groupsarray);
-    $docgroup->set('selected',$checked);
-}
-$modx->smarty->assign('docgroups',$docgroups);
-$modx->smarty->assign('hasdocgroups',count($docgroups) > 0);
 
 /* invoke OnDocFormRender event */
 $onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(

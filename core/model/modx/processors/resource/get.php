@@ -8,20 +8,15 @@
  * @package modx
  * @subpackage processors.resource
  */
-if (!$modx->hasPermission('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
-
-if (!isset($_REQUEST['id'])) {
-    return $modx->error->failure($modx->lexicon('document_not_specified'));
-}
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
 $resource = $modx->getObject('modResource', $_REQUEST['id']);
-if ($resource == null) {
-    return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_REQUEST['id'])));
-}
+if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_REQUEST['id'])));
 
 if (!$resource->checkPolicy('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if ($modx->getOption('use_editor') == 1) {
+/* TODO: audit this and see if it is still applicable for Revo */
+if ($modx->getOption('use_editor')) {
     /* replace image path */
     $htmlcontent = $resource->get('content');
     if (!empty ($htmlcontent)) {
@@ -50,16 +45,16 @@ if ($modx->getOption('use_editor') == 1) {
 }
 
 
-$ra = $resource->toArray();
-if ($ra['pub_date'] != '0' && $ra['pub_date'] != '' && $ra['pub_date'] != '0000-00-00 00:00:00') {
-    $ra['pub_date'] = strftime('%Y-%m-%d %H:%M:%S',strtotime($ra['pub_date']));
-} else $ra['pub_date'] = '';
-if ($ra['unpub_date'] != '0' && $ra['unpub_date'] != '' && $ra['unpub_date'] != '0000-00-00 00:00:00') {
-    $ra['unpub_date'] = strftime('%Y-%m-%d %H:%M:%S',strtotime($ra['unpub_date']));
-} else $ra['unpub_date'] = '';
-if ($ra['publishedon'] != '0' && $ra['publishedon'] != '' && $ra['publishedon'] != '0000-00-00 00:00:00') {
-    $ra['publishedon'] = strftime('%Y-%m-%d %H:%M:%S',strtotime($ra['publishedon']));
-} else $ra['publishedon'] = '';
+$resourceArray = $resource->toArray();
+if (!empty($resourceArray['pub_date']) && $resourceArray['pub_date'] != '0000-00-00 00:00:00') {
+    $resourceArray['pub_date'] = strftime('%Y-%m-%d %H:%M:%S',strtotime($resourceArray['pub_date']));
+} else $resourceArray['pub_date'] = '';
+if (!empty($resourceArray['unpub_date']) && $resourceArray['unpub_date'] != '0000-00-00 00:00:00') {
+    $resourceArray['unpub_date'] = strftime('%Y-%m-%d %H:%M:%S',strtotime($resourceArray['unpub_date']));
+} else $resourceArray['unpub_date'] = '';
+if (!empty($resourceArray) && $resourceArray['publishedon'] != '0000-00-00 00:00:00') {
+    $resourceArray['publishedon'] = strftime('%Y-%m-%d %H:%M:%S',strtotime($resourceArray['publishedon']));
+} else $resourceArray['publishedon'] = '';
 
 
-return $modx->error->success('',$ra);
+return $modx->error->success('',$resourceArray);

@@ -7,9 +7,8 @@
  * @package modx
  * @subpackage processors.layout.tree.resource
  */
-$modx->lexicon->load('resource');
-
 if (!$modx->hasPermission('save_document')) return $modx->error->failure($modx->lexicon('access_denied'));
+$modx->lexicon->load('resource');
 
 $data = urldecode($_POST['data']);
 $data = $modx->fromJSON($data);
@@ -19,7 +18,10 @@ getNodesFormatted($nodes,$data);
 /* readjust cache */
 foreach ($nodes as $ar_node) {
     $node = $modx->getObject('modResource',$ar_node['id']);
-    if ($node == null) continue;
+    if (empty($node)) continue;
+
+    if (!$node->checkPolicy('save')) continue;
+
     $old_parent_id = $node->get('parent');
 
     if ($old_parent_id != $ar_node['parent']) {
