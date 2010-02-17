@@ -31,7 +31,17 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'charsets',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'content_types',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'countries',
     'description' => '',
     'value' => true,
 ));
@@ -202,6 +212,16 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'error_dialog',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'error_log_erase',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'error_log_view',
     'description' => '',
     'value' => true,
 ));
@@ -542,6 +562,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_propertyset',
+    'description' => '',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'view_role',
     'description' => '',
     'value' => true,
 ));
