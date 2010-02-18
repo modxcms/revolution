@@ -30,17 +30,12 @@
 Ext.onReady(function() {
     Ext.QuickTips.init();
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext3/resources/images/default/s.gif';
-    var b = MODx.load({
-       xtype: 'modx-browser'
-       ,el: 'browser'
-       ,hideFiles: true
-       ,onSelect: {/literal}{$rtecallback}{literal}
-    });    
-    b.show();
+    MODx.onBrowserReturn = {/literal}{$rtecallback}{literal};
+    MODx.load({
+       xtype: 'modx-browser-rte'
+    });
 });
 </script>
 {/literal}
-<br /><br />
-<div id="browser"></div>
 </body>
 </html>

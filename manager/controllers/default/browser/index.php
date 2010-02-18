@@ -8,7 +8,7 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/core/modx.view.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.browser.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.rte.browser.js');
 
 /* invoke OnRichTextBrowserInit */
 $rtecallback = $modx->invokeEvent('OnRichTextBrowserInit');

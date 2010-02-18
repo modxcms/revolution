@@ -388,69 +388,47 @@ table.classy tr.odd td {
 
 
 /* browser */
-.browser-win .details{ 
-    padding: 10px; 
-    text-align: center; 
-} 
-.browser-win .details-info{ 
-    border-top: 1px solid #cccccc; 
-    font: 11px Arial, Helvetica, sans-serif; 
-    margin-top: 5px; 
-    padding-top: 5px; 
-    text-align: left; 
-} 
-.browser-win .details-info b{ 
-    color: #555555; 
-    display: block; 
-    margin-bottom: 4px; 
-} 
-.browser-win .details-info span{ 
-    display: block; 
-    margin-bottom: 5px; 
-    margin-left: 5px; 
-} 
-
-.browser-view { 
+.modx-pb-view-ct { 
     background: white; 
     font: 11px Arial, Helvetica, sans-serif;
 } 
-.browser-view .thumb{ 
+.modx-pb-thumb{ 
     background: #dddddd;
     width: 80px;
     height: 60px; 
     padding: 3px;
 } 
-.browser-view .thumb img{ 
+.modx-pb-thumb img{ 
     height: 60px; 
     width: 80px; 
 } 
-.browser-view .thumb-wrap{ 
+.modx-pb-thumb-wrap { 
     float: left; 
     margin: 4px; 
     margin-right: 0; 
     padding: 5px;
 } 
-.browser-view .thumb-wrap span{ 
+.modx-pb-thumb-wrap span{ 
     display: block; 
     overflow: hidden; 
     text-align: center; 
 } 
-.browser-view .x-view-over{
+.modx-pb-view-ct .x-view-over{
     border:1px solid #dddddd;  
     padding: 4px; 
 }
-.browser-view .x-view-selected{ 
+.modx-pb-view-ct .x-view-selected{ 
     background: #DFEDFF; 
     border: 1px solid #6593cf; 
     padding: 4px; 
 } 
-.browser-view .x-view-selected .thumb{ 
+.modx-pb-view-ct .x-view-selected .thumb{ 
     background:transparent; 
 }
-.browser-view .x-view-selected span{ 
+.modx-pb-view-ct .x-view-selected span{ 
     color:#1A4D8F;
 }
-.browser-view .loading-indicator { 
+.modx-pb-view-ct .loading-indicator { 
     font-size:11px; 
     background-repeat: no-repeat; 
     background-position: left; 
@@ -458,6 +436,32 @@ table.classy tr.odd td {
     margin:10px; 
 } 
 
+.modx-pb-detail-thumb {
+	margin-top: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.modx-pb-details-info { 
+    border-top: 1px solid #cccccc; 
+    font: 11px Arial, Helvetica, sans-serif; 
+    padding: 5px;
+    margin-top: 5px;
+    text-align: left; 
+} 
+.modx-pb-details-info b { 
+    color: #555555; 
+    display: block; 
+    margin-bottom: 4px; 
+} 
+.modx-pb-details-info span{ 
+    display: block; 
+    margin-bottom: 5px; 
+    margin-left: 5px; 
+} 
+.modx-pb-fullview {
+	text-align: center;
+}
 /* leftbar tabs */
 .modx-leftbar {
 	-moz-border-radius: 3px;

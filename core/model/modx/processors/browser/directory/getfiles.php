@@ -22,6 +22,9 @@ $root = isset($_REQUEST['prependPath']) && $_REQUEST['prependPath'] != 'null' &&
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
 $fullpath = $root.'/'.$dir;
 
+
+$imagesExts = array('jpg','jpeg','png','gif');
+
 $files = array();
 foreach (new DirectoryIterator($fullpath) as $file) {
 	if (in_array($file,array('.','..','.svn','_notes'))) continue;
@@ -33,24 +36,45 @@ foreach (new DirectoryIterator($fullpath) as $file) {
 	if (!$file->isDir()) {
         $fileExtension = pathinfo($filePathName,PATHINFO_EXTENSION);
 
-		$size = @filesize($fullname);
-		if (isset($_REQUEST['prependUrl']) && $_REQUEST['prependUrl'] != null) {
+		$filesize = @filesize($filePathName);
+        /* calculate url */
+		if (!empty($_REQUEST['prependUrl'])) {
             $url = $_REQUEST['prependUrl'].$dir.'/'.$fileName;
         } else {
             $url = $modx->getOption('rb_base_url').$dir.'/'.$fileName;
         }
+
+        /* get thumbnail */
+        if (in_array($fileExtension,$imagesExts)) {
+            $thumb = $modx->getOption('base_url').$url;
+            $thumbWidth = 80;
+            $thumbHeight = 60;
+            $size = @getimagesize($filePathName);
+            if (is_array($size)) {
+                $thumbWidth = $size[0];
+                $thumbHeight = $size[1];
+            }
+        } else {
+            $thumb = $modx->getOption('manager_url').'templates/default/images/restyle/nopreview.jpg';
+            $thumbWidth = 80;
+            $thumbHeight = 60;
+        }
         $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 		$files[] = array(
+            'id' => $filePathname,
 			'name' => $fileName,
 			'cls' => 'icon-'.$fileExtension,
+            'image' => $thumb,
+            'image_width' => $thumbWidth,
+            'image_height' => $thumbHeight,
 			'url' => $modx->getOption('base_url').$url,
 			'ext' => $fileExtension,
 			'pathname' => $filePathname,
 			'lastmod' => $file->getMTime(),
-			'disabled' => false,//$file->isWritable(),
+			'disabled' => false,
             'perms' => $octalPerms,
 			'leaf' => true,
-			'size' => $size,
+			'size' => $filesize,
             'menu' => array(
                 array('text' => $modx->lexicon('file_remove'),'handler' => 'this.removeFile'),
             ),

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1674] Fixes and stabilization to MODx.Browser, specifically when used by RTEs
 - Changing default editor from TinyMCE to blank value
 - Fixed bug in setup where inplace setting was being forced to 1
 - Cleaned up most processors, fixed wrong permission references, standardized code
