@@ -1,5 +1,6 @@
 <?php
 require_once 'PHPUnit/Framework/TestCase.php';
+error_reporting(-1);
 
 class XPDOTest extends PHPUnit_Framework_TestCase {
     protected $xpdo= null;
@@ -12,13 +13,13 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
         $this->properties= $properties;
     }
 
-    protected function getXPDOObject() {
-        $xpdo= new xPDO($this->properties['xpdo_string_dsn_test'], $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
+    protected function getXPDOObject($dsnProperty = 'xpdo_string_dsn_test') {
+        $xpdo= new xPDO($this->properties[$dsnProperty], $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
         if (is_object($xpdo)) {
             $xpdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
-            $xpdo->setPackage('sample', strtr(realpath(dirname(dirname(__FILE__))) . '/model/', '\\', '/'));
-//            $xpdo->setDebug(false); // set to true for debugging during tests only
-            $xpdo->setLogLevel(xPDO::LOG_LEVEL_WARN); // set to 'HTML' for running through browser
+            if ($dsnProperty == 'xpdo_string_dsn_test') $xpdo->setPackage('sample', strtr(realpath(dirname(dirname(__FILE__))) . '/model/', '\\', '/'));
+//            $xpdo->setDebug(true); // set to true for debugging during tests only
+            $xpdo->setLogLevel(xPDO::LOG_LEVEL_WARN);
             $xpdo->setLogTarget('ECHO'); // set to 'HTML' for running through browser
         }
         return $xpdo;
@@ -34,20 +35,21 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
 
     public function testInitialize() {
         $xpdo= $this->getXPDOObject();
-        if ($xpdo) {
-            $manager= & $xpdo->getManager();
-            if ($manager->removeSourceContainer()) {
+        if ($xpdo && $xpdo->connect()) {
+            if ($response = $xpdo->getManager()->removeSourceContainer(xPDO::parseDSN($this->properties['xpdo_string_dsn_test']))) {
                 $xpdo= null;
             }
+        } else {
+            $xpdo = null;
         }
         $this->assertTrue($xpdo == null, "Test container exists and could not be removed for initialization");
     }
 
     public function testCreateDatabase() {
-        $config= xPDO :: parseDSN($this->properties['xpdo_string_dsn_test']);
-        if ($config['dbtype'] === 'sqlite2') $config['dbtype']= 'sqlite';
-        include_once (strtr(realpath(dirname(__FILE__)) . '/../xpdo/om/' . $config['dbtype'] . '/xpdomanager.class.php', '\\', '/'));
-        $created= xPDOManager :: createSourceContainer($this->properties['xpdo_string_dsn_test'], $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
+//        $xpdo= $this->getXPDOObject('xpdo_string_dsn_nodb');
+//        $created= $xpdo->getManager()->createSourceContainer(xPDO::parseDSN($this->properties['xpdo_string_dsn_test']), $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
+        $xpdo= $this->getXPDOObject();
+        $created= $xpdo->getManager()->createSourceContainer();
         $this->assertTrue($created == true, "Could not create database");
         //      $this->assertTrue(strlen($xpdo->errorCode()) == 0, "Could not create database");
     }
@@ -270,16 +272,16 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
         // by default, if the connection fails, it should just error out
         // Should be an error set since we gave bogus info
         $xpdo= $this->getXPDOObject();
-        $manager= & $xpdo->getManager();
-        $result= $manager->createSourceContainer($this->properties['xpdo_string_dsn_test'], $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
+        $xpdo->getManager();
+        $result= $xpdo->manager->createSourceContainer($this->properties['xpdo_string_dsn_test'], $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
         $this->assertTrue($result == false, "Error testing overwriting source container with createSourceContainer() method");
     }
 
     public function testRemoveSourceContainer() {
 //        return true;
         $xpdo= $this->getXPDOObject();
-        $manager= & $xpdo->getManager();
-        $result= $manager->removeSourceContainer();
+        $xpdo->getManager();
+        $result= $xpdo->manager->removeSourceContainer();
         $this->assertTrue($result == true, "Error code not being set on PDO object");
     }
 }
