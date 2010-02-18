@@ -2,6 +2,9 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- xPDOManager_mysql::createSourceContainer() and removeSourceContainer() will use provided connection properties or default to current xPDO instance configuration.
+- Removed dependency on mysql extension for xPDOManager_mysql::createSourceContainer() and removeSourceContainer() implementations.
+- Refactored xPDOManager to be an abstract class rather than calling static methods in derivatives.
 - Added support for xPDOObjectVehicle::uninstall() to operate on related_objects.
 - Fixed bug in xPDOObjectVehicle::uninstall() not getting UPDATE_OBJECT value properly.
 - Added xPDOTransport::UNINSTALL_OBJECT attribute and support in xPDOObjectVehicle::uninstall() [default value is true].

@@ -60,74 +60,64 @@ class xPDOManager_mysql extends xPDOManager {
         $this->dbtypes['bit']= array('BIT');
     }
 
-    /**
-     * Creates the physical data container represented by a data source.
-     *
-     * @param array $dsnArray An array of xPDO configuration properties.
-     * @param string $username Database username with privileges to create tables.
-     * @param string $password Database user password.
-     * @param array $containerOptions An array of options for controlling the creation of the container.
-     * @return boolean True only if the database is created successfully.
-     */
-    public function createSourceContainer($dsnArray, $username= '', $password= '', $containerOptions= array ()) {
+    public function createSourceContainer($dsnArray = null, $username= null, $password= null, $containerOptions= array ()) {
         $created= false;
-        if (is_array($dsnArray)) {
+        if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
+        if ($username === null) $username = $this->xpdo->getOption('username', null, '');
+        if ($password === null) $password = $this->xpdo->getOption('password', null, '');
+        if (is_array($dsnArray) && is_string($username) && is_string($password)) {
             $sql= 'CREATE DATABASE `' . $dsnArray['dbname'] . '`';
             if (isset ($containerOptions['collation']) && isset ($containerOptions['charset'])) {
                 $sql.= ' CHARACTER SET ' . $containerOptions['charset'];
                 $sql.= ' COLLATE ' . $containerOptions['collation'];
             }
-            if ($conn= mysql_connect($dsnArray['host'], $username, $password, true)) {
-                if (!$rt= @ mysql_select_db($dsnArray['dbname'], $conn)) {
-                    @ mysql_query($sql, $conn);
-                $errorNo= @ mysql_errno($conn);
-                $created= $errorNo ? false : true;
+            try {
+                $pdo = new PDO("mysql:host={$dsnArray['host']}", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                $result = $pdo->exec($sql);
+                if ($result !== false) {
+                    $created = true;
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create source container:\n{$sql}\nresult = " . var_export($result, true));
                 }
+            } catch (PDOException $pe) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not connect to database server: " . $pe->getMessage());
+            } catch (Exception $e) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create source container: " . $pe->getMessage());
             }
         }
         return $created;
     }
 
-    /**
-     * Drops a physical data container, if it exists.
-     *
-     * @param string $dsn Represents the database connection string.
-     * @param string $username Database username with privileges to drop tables.
-     * @param string $password Database user password.
-     * @return int Returns 1 on successful drop, 0 on failure, and -1 if the db
-     * does not exist.
-     */
-    public function removeSourceContainer() {
-        $removed= 0;
-        if ($dsnArray= & $this->xpdo->config) {
+    public function removeSourceContainer($dsnArray = null, $username= null, $password= null) {
+        $removed= false;
+        if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
+        if ($username === null) $username = $this->xpdo->getOption('username', null, '');
+        if ($password === null) $password = $this->xpdo->getOption('password', null, '');
+        if (is_array($dsnArray) && is_string($username) && is_string($password)) {
             $sql= 'DROP DATABASE `' . $dsnArray['dbname'] . '`';
-            if ($conn= @ mysql_connect($dsnArray['host'], $dsnArray['username'], $dsnArray['password'], true)) {
-                if (@ mysql_select_db($dsnArray['dbname'], $conn)) {
-                    if (@ mysql_query($sql, $conn)) {
-                        $removed= 1;
-                    }
+            try {
+                $pdo = new PDO("mysql:host={$dsnArray['host']}", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                $result = $pdo->exec($sql);
+                if ($result !== false) {
+                    $removed = true;
                 } else {
-                    $removed= -1;
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container:\n{$sql}\nresult = " . var_export($result, true));
                 }
+            } catch (PDOException $pe) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not connect to database server: " . $pe->getMessage());
+            } catch (Exception $e) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container: " . $pe->getMessage());
             }
         }
         return $removed;
     }
 
-
-    /**
-     * Drops a table, if it exists.
-     *
-     * @param string $className The object table to drop.
-     * @return int Returns 1 on successful drop, 0 on failure, and -1 if the table
-     * does not exist.
-     */
     public function removeObjectContainer($className) {
-        $removed= 0;
+        $removed= false;
         if ($instance= $this->xpdo->newObject($className)) {
             $sql= 'DROP TABLE ' . $this->xpdo->getTableName($className);
             $removed= $this->xpdo->exec($sql);
-            if (!$removed && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
+            if ($removed === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not drop table ' . $className . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->pdo->errorInfo(), true));
             } else {
                 $removed= true;
@@ -137,17 +127,6 @@ class xPDOManager_mysql extends xPDOManager {
         return $removed;
     }
 
-    /**
-     * Creates the container for a persistent data object.  In this
-     * implementation, a source container is a synonym for a MySQL database
-     * table.
-     *
-     * @todo Add more robust index support.
-     * @todo Add constraint support.
-     *
-     * @param string $className The class of object to create a source container
-     * for.
-     */
     public function createObjectContainer($className) {
         $created= false;
         if ($instance= $this->xpdo->newObject($className)) {
@@ -284,7 +263,7 @@ class xPDOManager_mysql extends xPDOManager {
             }
             $sql .= ") TYPE={$tableType}";
             $created= $this->xpdo->exec($sql);
-            if (!$created && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
+            if ($created === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->errorInfo(), true));
             } else {
                 $created= true;

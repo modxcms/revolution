@@ -37,7 +37,7 @@
  * @package xpdo
  * @subpackage om
  */
-class xPDOManager {
+abstract class xPDOManager {
     /**
      * @var xPDO A reference to the XPDO instance using this manager.
      * @access public
@@ -69,32 +69,43 @@ class xPDOManager {
     }
 
     /**
-     * Creates the physical data container represented by a data source
+     * Creates the physical data container represented by a data source.
      *
-     * @todo Refactor this to work on an xPDO instance rather than as a static call.
+     * @param array $dsnArray An array of xPDO configuration properties.
+     * @param string $username Database username with privileges to create tables.
+     * @param string $password Database user password.
+     * @param array $containerOptions An array of options for controlling the creation of the container.
+     * @return boolean True if the database is created successfully or already exists.
      */
-    public function createSourceContainer($dsn, $username= '', $password= '', $containerOptions= null) {
-        $created= false;
-        if ($dsnArray= xPDO :: parseDSN($dsn)) {
-            switch ($dsnArray['dbtype']) {
-            	case 'mysql':
-                    include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/mysql/xpdomanager.class.php');
-            		$created= xPDOManager_mysql :: createSourceContainer($dsnArray, $username, $password, $containerOptions);
-            		break;
-            	case 'sqlite':
-                    include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/sqlite/xpdomanager.class.php');
-            		$created= xPDOManager_sqlite :: createSourceContainer($dsnArray, $username, $password, $containerOptions);
-            		break;
-            	case 'pgsql':
-                    include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/pgsql/xpdomanager.class.php');
-            		$created= xPDOManager_pgsql :: createSourceContainer($dsnArray, $username, $password, $containerOptions);
-            		break;
-            	default:
-            		break;
-            }
-        }
-        return $created;
-    }
+    abstract public function createSourceContainer($dsnArray = null, $username= null, $password= null, $containerOptions= array ());
+
+    /**
+     * Drops a physical data container, if it exists.
+     *
+     * @param string $dsn Represents the database connection string.
+     * @param string $username Database username with privileges to drop tables.
+     * @param string $password Database user password.
+     * @return boolean Returns true on successful drop, false on failure.
+     */
+    abstract public function removeSourceContainer($dsnArray = null, $username= null, $password= null);
+
+    /**
+     * Creates the container for a persistent data object.  In this
+     * implementation, a source container is a synonym for a MySQL database
+     * table.
+     *
+     * @param string $className The class of object to create a source container for.
+     * @return boolean Returns true on successful creation, false on failure.
+     */
+    abstract public function createObjectContainer($className);
+
+    /**
+     * Drops a table, if it exists.
+     *
+     * @param string $className The object table to drop.
+     * @return boolean Returns true on successful drop, false on failure.
+     */
+    abstract public function removeObjectContainer($className);
 
     /**
      * Gets an XML schema parser / generator for this manager instance.
