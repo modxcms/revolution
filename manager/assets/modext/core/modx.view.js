@@ -167,7 +167,7 @@ MODx.browser.Window = function(config) {
     
     Ext.applyIf(config,{
         title: _('modx_browser')
-        ,cls: 'browser-win'
+        ,cls: 'modx-pb-win'
         ,layout: 'border'
         ,minWidth: 500
         ,minHeight: 300
@@ -178,7 +178,7 @@ MODx.browser.Window = function(config) {
         ,border: false
         ,items: [{
             id: this.ident+'-browser-tree'
-            ,cls: 'browser-tree'
+            ,cls: 'modx-pb-browser-tree'
             ,region: 'west'
             ,width: 250
             ,height: '100%'
@@ -186,7 +186,7 @@ MODx.browser.Window = function(config) {
             ,autoScroll: true
         },{
             id: this.ident+'-browser-view'
-            ,cls: 'browser-view'
+            ,cls: 'modx-pb-view-ct'
             ,region: 'center'
             ,autoScroll: true
             ,width: 450
@@ -194,6 +194,7 @@ MODx.browser.Window = function(config) {
             ,tbar: this.getToolbar()
         },{
             id: this.ident+'-img-detail-panel'
+            ,cls: 'modx-pb-details-ct'
             ,region: 'east'
             ,split: true
             ,width: 150
