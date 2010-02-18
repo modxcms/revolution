@@ -333,7 +333,7 @@ MODx.browser.View = function(config) {
         url: MODx.config.connectors_url+'browser/directory.php'
         ,id: this.ident
         ,fields: [
-            'name','cls','url','image','image_width','image_height','pathname','ext','disabled'
+            'name','cls','url','relativeUrl','image','image_width','image_height','pathname','ext','disabled'
             ,{name:'size', type: 'float'}
             ,{name:'lastmod', type:'date', dateFormat:'timestamp'}
             ,'menu'
@@ -346,7 +346,7 @@ MODx.browser.View = function(config) {
         ,tpl: this.templates.thumb
         ,listeners: {
             'selectionchange': {fn:this.showDetails, scope:this, buffer:100}
-            ,'dblclick': {fn: config.onSelect.fn, scope: config.onSelect.scope }
+            ,'dblclick': config.onSelect || {fn:Ext.emptyFn,scope:this}
         }
         ,prepareData: this.formatData.createDelegate(this)
     });

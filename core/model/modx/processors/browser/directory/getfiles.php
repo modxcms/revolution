@@ -68,6 +68,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             'image_width' => $thumbWidth,
             'image_height' => $thumbHeight,
 			'url' => $modx->getOption('base_url').$url,
+            'relativeUrl' => $url,
 			'ext' => $fileExtension,
 			'pathname' => $filePathname,
 			'lastmod' => $file->getMTime(),
