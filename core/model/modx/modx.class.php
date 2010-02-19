@@ -127,7 +127,7 @@ class modX extends xPDO {
     /**
      * @var string The preferred Culture key for the current request.
      */
-    public $cultureKey= 'en';
+    public $cultureKey= '';
     /**
      * @var array Represents a localized dictionary of common words and phrases.
      */
@@ -2580,6 +2580,10 @@ class modX extends xPDO {
      * @access protected
      */
     protected function _initCulture() {
+        $cultureKey = $this->getOption('cultureKey',null,'en');
+        if (!empty($_SESSION['cultureKey'])) $cultureKey = $_SESSION['cultureKey'];
+        if (!empty($_REQUEST['cultureKey'])) $cultureKey = $_REQUEST['cultureKey'];
+        $this->cultureKey = $cultureKey;
         $this->getService('lexicon','modLexicon');
         $this->invokeEvent('OnInitCulture');
     }

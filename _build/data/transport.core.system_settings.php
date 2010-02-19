@@ -330,6 +330,15 @@ $settings['friendly_urls']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['cultureKey']= $xpdo->newObject('modSystemSetting');
+$settings['cultureKey']->fromArray(array (
+  'key' => 'cultureKey',
+  'value' => 'en',
+  'xtype' => 'modx-combo-language',
+  'namespace' => 'core',
+  'area' => 'language',
+  'editedon' => null,
+), '', true, true);
 $settings['mail_use_smtp']= $xpdo->newObject('modSystemSetting');
 $settings['mail_use_smtp']->fromArray(array (
   'key' => 'mail_use_smtp',
