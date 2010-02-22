@@ -211,7 +211,7 @@ MODx.window.DuplicateElement = function(config) {
             ,fieldLabel: _('element_name_new')
             ,name: 'name'
             ,id: 'modx-dupel-name'
-            ,width: 250
+            ,anchor: '90%'
         }]
     });
     MODx.window.DuplicateElement.superclass.constructor.call(this,config);
@@ -250,6 +250,7 @@ MODx.window.RenameCategory = function(config) {
             ,id: 'modx-'+this.ident+'-category'
             ,width: 150
             ,value: config.record.category
+            ,anchor: '90%'
         }]
     });
     MODx.window.RenameCategory.superclass.constructor.call(this,config);

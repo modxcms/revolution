@@ -341,33 +341,33 @@ MODx.window.QuickCreateResource = function(config) {
             ,name: 'pagetitle'
             ,id: 'modx-'+this.ident+'-pagetitle'
             ,fieldLabel: _('pagetitle')
-            ,width: 300
+            ,anchor: '80%'
         },{
             xtype: 'textfield'
             ,name: 'alias'
             ,id: 'modx-'+this.ident+'-alias'
             ,fieldLabel: _('alias')
-            ,width: 300
+            ,anchor: '80%'
         },{
             xtype: 'textarea'
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
-            ,width: 300
+            ,anchor: '100%'
             ,rows: 2
         },{
             xtype: 'textfield'
             ,name: 'menutitle'
             ,id: 'modx-'+this.ident+'-menutitle'
             ,fieldLabel: _('resource_menutitle')
-            ,width: 300
+            ,anchor: '80%'
         },{
             xtype: 'modx-combo-template'
             ,name: 'template'
             ,id: 'modx-'+this.ident+'-template'
             ,fieldLabel: _('template')
             ,editable: false
-            ,width: 300
+            ,anchor: '80%'
             ,baseParams: {
                 action: 'getList'
                 ,combo: '1'
@@ -422,25 +422,25 @@ MODx.window.QuickUpdateResource = function(config) {
             ,name: 'pagetitle'
             ,id: 'modx-'+this.ident+'-pagetitle'
             ,fieldLabel: _('pagetitle')
-            ,width: 300
+            ,anchor: '80%'
         },{
             xtype: 'textfield'
             ,name: 'alias'
             ,id: 'modx-'+this.ident+'-alias'
             ,fieldLabel: _('alias')
-            ,width: 300
+            ,anchor: '80%'
         },{
             xtype: 'textfield'
             ,name: 'menutitle'
             ,id: 'modx-'+this.ident+'-menutitle'
             ,fieldLabel: _('resource_menutitle')
-            ,width: 300
+            ,anchor: '80%'
         },{
             xtype: 'textarea'
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
             ,fieldLabel: _('description')
-            ,width: 300
+            ,anchor: '100%'
             ,rows: 2
         },
         MODx.getQRContentField(this.ident,config.record.class_key)
@@ -480,7 +480,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,fieldLabel: _('symlink')
                 ,name: 'content'
                 ,id: 'modx-'+id+'-content'
-                ,width: 300
+                ,anchor: '100%'
                 ,maxLength: 255
                 ,allowBlank: false
             };
@@ -491,7 +491,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,fieldLabel: _('weblink')
                 ,name: 'content'
                 ,id: 'modx-'+id+'-content'
-                ,width: 300
+                ,anchor: '100%'
                 ,maxLength: 255
                 ,value: 'http://'
                 ,allowBlank: false
@@ -507,7 +507,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,fieldLabel: _('static_resource')
                 ,name: 'content'
                 ,id: 'modx-'+id+'-content'
-                ,width: 300
+                ,anchor: '100%'
                 ,maxLength: 255
                 ,value: ''
                 ,listeners: {
@@ -527,7 +527,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,id: 'modx-'+id+'-content'
                 ,hideLabel: true
                 ,labelSeparator: ''
-                ,width: '97%'
+                ,anchor: '100%'
                 ,height: 300
             };
             break;

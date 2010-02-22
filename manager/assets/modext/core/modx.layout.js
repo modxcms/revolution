@@ -41,6 +41,7 @@ MODx.Layout = function(config){
         id: 'modx-layout'
         ,renderTo: 'modx-leftbar-content'
         ,width: '100%'
+        ,anchor: '30%'
         ,autoHeight: true
         ,border: false
         ,unstyled: true
@@ -48,7 +49,7 @@ MODx.Layout = function(config){
         ,items: [{
             xtype: 'modx-tabs'
             ,id: 'modx-leftbar-tabs'
-            ,width: '100%'
+            ,anchor: '100%'
             ,plain: true
             ,defaults: {
                 autoScroll: true
