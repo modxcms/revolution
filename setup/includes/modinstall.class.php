@@ -187,8 +187,8 @@ class modInstall {
             $this->xpdo = $this->_connect($this->settings->get('database_type')
                  . ':host=' . $this->settings->get('database_server')
                  . ';dbname=' . trim($this->settings->get('dbase'), '`')
-                 . ';charset=' . $this->settings->get('database_connection_charset')
-                 . ';collation=' . $this->settings->get('database_collation')
+                 . ';charset=' . $this->settings->get('database_connection_charset', 'utf8')
+                 . ';collation=' . $this->settings->get('database_collation', 'utf8_general_ci')
                  ,$this->settings->get('database_user')
                  ,$this->settings->get('database_password')
                  ,$this->settings->get('table_prefix')
@@ -200,7 +200,6 @@ class modInstall {
             $this->xpdo->setOption('cache_path',MODX_CORE_PATH . 'cache/');
         }
         if (is_object($this->xpdo) && $this->xpdo instanceof xPDO) {
-            $this->xpdo->setDebug(E_ALL & ~E_STRICT);
             $this->xpdo->setLogTarget(array(
                 'target' => 'FILE',
                 'options' => array(
@@ -571,10 +570,9 @@ class modInstall {
                 }
             }
         }
-        /* try to chmod the config file go-rwx (for suexeced php)
-         * FIXME: need some way to configure the actual permissions to set
-         */
-        $chmodSuccess = @ chmod($configFile, 0600);
+        $perms = $this->settings->get('new_file_permissions', sprintf("%04o", 0666 & (0666 - umask())));
+        if (is_string($perms)) $perms = octdec($perms);
+        $chmodSuccess = @ chmod($configFile, $perms);
         if (!is_array($results)) {
             $results = array ();
         }
@@ -748,7 +746,6 @@ class modInstall {
             if (!is_object($modx) || !($modx instanceof modX)) {
                 $errors[] = '<p>'.$this->lexicon['modx_err_instantiate'].'</p>';
             } else {
-                $modx->setDebug(E_ALL & ~E_NOTICE);
                 $modx->setLogTarget(array(
                     'target' => 'FILE',
                     'options' => array(
