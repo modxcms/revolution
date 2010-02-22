@@ -4,6 +4,12 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added OnInitCulture event to core transport data.
+- [#MODX-1672] Refactor collation/connection processors in setup to be more stable
+- Updated xPDO to r414 for improvements in xPDOManager
+- modInstall::writeConfig() uses new_file_permissions if specified or umask() settings by default
+- Removed superfluous calls to xPDO/modX::setDebug() and xPDO/modX::setLogLevel() in modInstall
+- modInstall::getConnection() now uses utf8_general_ci for charset/collation by default
 - [#MODX-1691] Set Quick Create/Update windows to use anchor property rather than width to adjust for resizing
 - Added 'cultureKey' setting to enable easier language translation in contexts/fe/components
 - Fixes to styling for MODx.Browser window
