@@ -224,6 +224,7 @@ class modUser extends modPrincipal {
      * @access public
      */
     public function endSession() {
+        $this->removeLocks();
         $_SESSION = array();
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
@@ -669,5 +670,34 @@ class modUser extends modPrincipal {
 
         $left = $member->remove();
         return $left;
+    }
+
+    /**
+     * Remove any locks held by the user.
+     *
+     * @param array $options An array of options for controlling removal of specific locks or lock
+     * types.
+     * @return boolean True if the process was successful, or false if an error was encountered.
+     */
+    public function removeLocks(array $options = array()) {
+        $removed = false;
+        if ($this->xpdo instanceof modX) {
+            if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
+                $this->xpdo->registry->addRegister('locks', 'registry.modDbRegister', array('directory' => 'locks'));
+                $this->xpdo->registry->locks->connect();
+
+                $this->xpdo->registry->locks->subscribe('/resource/');
+                if ($msgs = $this->xpdo->registry->locks->read(array('remove_read' => false, 'poll_limit' => 1))) {
+                    foreach ($msgs as $resource => $user) {
+                        if ($user == $this->get('id')) {
+                            $this->xpdo->registry->locks->subscribe('/resource/' . md5($resource));
+                            $this->xpdo->registry->locks->read(array('remove_read' => true, 'poll_limit' => 1));
+                        }
+                    }
+                }
+                $removed = true;
+            }
+        }
+        return $removed;
     }
 }

@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added missing registry.db.modDbRegister* classes to setup
+- [#MODX-1642] Logging out doesn't unlock resources: added modUser::removeLocks() and modified modUser::endSession() to call this method
 - Added OnInitCulture event to core transport data.
 - [#MODX-1672] Refactor collation/connection processors in setup to be more stable
 - Updated xPDO to r414 for improvements in xPDOManager

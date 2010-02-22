@@ -8,6 +8,7 @@
 $results= array ();
 $classes= array (
     'modAccessAction',
+    'modAccessActionDom',
     'modAccessContext',
     'modAccessElement',
     'modAccessMenu',
@@ -17,6 +18,7 @@ $classes= array (
     'modAccessResourceGroup',
     'modAccessTemplateVar',
     'modAction',
+    'modActionDom',
     'modActiveUser',
     'modCategory',
     'modChunk',
@@ -28,9 +30,13 @@ $classes= array (
     'modEvent',
     'modEventLog',
     'modKeyword',
+    'modLexiconEntry',
+    'modLexiconLanguage',
+    'modLexiconTopic',
     'modManagerLog',
     'modMenu',
     'modMetatag',
+    'modNamespace',
     'modPlugin',
     'modPluginEvent',
     'modPropertySet',
@@ -47,8 +53,6 @@ $classes= array (
     'modTemplateVarResource',
     'modTemplateVarResourceGroup',
     'modTemplateVarTemplate',
-    'transport.modTransportPackage',
-    'transport.modTransportProvider',
     'modUser',
     'modUserProfile',
     'modUserGroup',
@@ -58,12 +62,11 @@ $classes= array (
     'modUserRole',
     'modUserSetting',
     'modWorkspace',
-    'modNamespace',
-    'modLexiconEntry',
-    'modLexiconLanguage',
-    'modLexiconTopic',
-    'modAccessActionDom',
-    'modActionDom',
+    'registry.db.modDbRegisterMessage',
+    'registry.db.modDbRegisterTopic',
+    'registry.db.modDbRegisterQueue',
+    'transport.modTransportPackage',
+    'transport.modTransportProvider',
 );
 
 $this->xpdo->getManager();
@@ -71,8 +74,8 @@ $connected= $this->xpdo->connect();
 $created= false;
 if (!$connected) {
     $dsnArray= xPDO :: parseDSN($this->xpdo->getOption('dsn'));
-    $containerOptions['charset']= $install->settings->get('database_charset','utf8');
-    $containerOptions['collation']= $install->setttings->get('database_collation','utf8_unicode_ci');
+    $containerOptions['charset']= $install->settings->get('database_charset', 'utf8');
+    $containerOptions['collation']= $install->settings->get('database_collation', 'utf8_general_ci');
     $created= $this->xpdo->manager->createSourceContainer($dsnArray, $this->xpdo->config['username'], $this->xpdo->config['password'], $containerOptions);
     if (!$created) {
         $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">'.$this->lexicon['db_err_create'].'</p>');
