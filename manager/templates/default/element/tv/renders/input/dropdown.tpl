@@ -15,7 +15,7 @@ MODx.load({
     ,triggerAction: 'all'
     ,typeAhead: false
     ,editable: false
-    ,width: 300
+    ,width: '97%'
 {literal}
     ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
 });

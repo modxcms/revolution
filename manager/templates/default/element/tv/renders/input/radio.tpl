@@ -6,7 +6,7 @@ MODx.load({
 {/literal}
     xtype: 'radiogroup'
     ,id: 'tv{$tv->id}'
-    ,width: 300
+    ,width: '97%'
     ,vertical: true
     ,columns: 3
     ,renderTo: 'tv{$tv->id}-cb'

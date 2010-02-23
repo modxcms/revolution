@@ -1,0 +1,91 @@
+<?php
+/**
+ * RTE English lexicon topic
+ *
+ * @language en
+ * @package modx
+ * @subpackage lexicon
+ */
+$_lang['btn_addlink'] = 'Add Link';
+$_lang['btn_addlink_desc'] = 'Add a Link to the selected text.';
+$_lang['btn_aligncenter'] = 'Center Text';
+$_lang['btn_aligncenter_desc'] = 'Center text in the editor.';
+$_lang['btn_alignfull'] = 'Align Text Full';
+$_lang['btn_alignfull_desc'] = 'Align text with full justification.';
+$_lang['btn_alignleft'] = 'Align Text Left';
+$_lang['btn_alignleft_desc'] = 'Align text to the left.';
+$_lang['btn_alignright'] = 'Align Text Right';
+$_lang['btn_alignright_desc'] = 'Align text to the right.';
+$_lang['btn_bold'] = 'Bold (Ctrl+B)';
+$_lang['btn_bold_desc'] = 'Make the selected text bold.';
+$_lang['btn_growtext'] = 'Grow Text';
+$_lang['btn_growtext_desc'] = 'Increase the font size.';
+$_lang['btn_hr'] = 'Insert Horizontal Rule';
+$_lang['btn_hr_ovf'] = 'Horizontal Rule';
+$_lang['btn_image'] = 'Add Image';
+$_lang['btn_image_desc'] = 'Insert an Image into the editor.';
+$_lang['btn_indent'] = 'Indent';
+$_lang['btn_indent_desc'] = 'Indent the text.';
+$_lang['btn_table'] = 'Insert Table';
+$_lang['btn_table_ovf'] = 'Table';
+$_lang['btn_italic'] = 'Italic (Ctrl+I)';
+$_lang['btn_italic_desc'] = 'Italicize the selected text.';
+$_lang['btn_list_bullet'] = 'Bullet List';
+$_lang['btn_list_bullet_desc'] = 'Start a bulleted list.';
+$_lang['btn_list_numbered'] = 'Numbered List';
+$_lang['btn_list_numbered_desc'] = 'Start a numbered list.';
+$_lang['btn_outdent'] = 'Outdent';
+$_lang['btn_outdent_desc'] = 'Outdent the text.';
+$_lang['btn_removeformat'] = 'Remove Formatting';
+$_lang['btn_removeformat_desc'] = 'Strip all formatting from the text.';
+$_lang['btn_removelink'] = 'Remove Link';
+$_lang['btn_removelink_desc'] = 'Remove any links from the selected text.';
+$_lang['btn_shrinktext'] = 'Shrink Text';
+$_lang['btn_shrinktext_desc'] = 'Decrease the font size.';
+$_lang['btn_sourceedit'] = 'Edit Source';
+$_lang['btn_sourceedit_desc'] = 'Switch to source editing mode.';
+$_lang['btn_specchar'] = 'Special Characters';
+$_lang['btn_specchar_ovf'] = 'Insert Special Character';
+$_lang['btn_strikethrough'] = 'Strikethrough';
+$_lang['btn_strikethrough_desc'] = 'Strikethrough the selected text.';
+$_lang['btn_subscript'] = 'Subscript';
+$_lang['btn_subscript_desc'] = 'Make the selected text subscript.';
+$_lang['btn_superscript'] = 'Superscript';
+$_lang['btn_superscript_desc'] = 'Make the selected text superscript.';
+$_lang['btn_underline'] = 'Underline (Ctrl+U)';
+$_lang['btn_underline_desc'] = 'Underline the selected text.';
+$_lang['btn_wordpaste'] = 'Enable Word Pasting';
+$_lang['btn_wordpaste_desc'] = 'Cleanse text pasted from Word or other Rich Text applications.';
+$_lang['cancel'] = 'Cancel';
+$_lang['cm_addlink'] = 'Insert Link';
+$_lang['cm_cut'] = 'Cut';
+$_lang['cm_image'] = 'Insert Image';
+$_lang['cm_unlink'] = 'Unlink';
+$_lang['hr_msg'] = 'Enter the width of the Rule in percentage followed by the % sign at the end, or to set a fixed width ommit the % symbol.';
+$_lang['hr_title'] = 'Insert Horizontal Rule';
+$_lang['insert'] = 'Insert';
+$_lang['opt_advanced'] = 'Advanced';
+$_lang['opt_align'] = 'Alignment';
+$_lang['opt_alt'] = 'Alternate Text';
+$_lang['opt_appearance'] = 'Appearance';
+$_lang['opt_border'] = 'Border';
+$_lang['opt_cellpadding'] = 'Cellpadding';
+$_lang['opt_cellspacing'] = 'Cellspacing';
+$_lang['opt_center'] = 'Center';
+$_lang['opt_class'] = 'Class';
+$_lang['opt_cols'] = 'Columns';
+$_lang['opt_general'] = 'General';
+$_lang['opt_height'] = 'Height';
+$_lang['opt_id'] = 'ID';
+$_lang['opt_left'] = 'Left';
+$_lang['opt_none'] = 'None';
+$_lang['opt_other_attr'] = 'Other Attributes';
+$_lang['opt_preview'] = 'Preview';
+$_lang['opt_rel'] = 'Rel Tag';
+$_lang['opt_rev'] = 'Rev Tag';
+$_lang['opt_right'] = 'Right';
+$_lang['opt_rows'] = 'Rows';
+$_lang['opt_style'] = 'Style';
+$_lang['opt_url'] = 'URL';
+$_lang['opt_title'] = 'Title';
+$_lang['opt_width'] = 'Width';

@@ -92,8 +92,18 @@ $modx->smarty->assign('resource',$resource);
 $publish_document = $modx->hasPermission('publish_document');
 $edit_doc_metatags = $modx->hasPermission('edit_doc_metatags');
 $access_permissions = $modx->hasPermission('access_permissions');
+$richtext = $modx->getOption('richtext_default',null,true);
 
 /* register JS scripts */
+$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $modx->getOption('which_editor');
+$modx->smarty->assign('which_editor',$rte);
+
+if ($modx->getOption('use_editor') && (empty($rte) || $rte == 'MODxEditor')) {
+    $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/rte/modx.rte.js');
+    $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/rte/dom/modx.rte.selection.js');
+    $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/rte/modx.rte.plugins.js');
+}
+
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.security.js');
@@ -113,7 +123,7 @@ Ext.onReady(function() {
         ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument').'"
         ,context_key: "'.(isset($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web').'"
         ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
-        ,which_editor: "'.$which_editor.'"
+        ,richtext: "'.$richtext.'"
         ,edit_doc_metatags: "'.$edit_doc_metatags.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
@@ -125,10 +135,8 @@ Ext.onReady(function() {
 /*
  *  Initialize RichText Editor
  */
-/* Set which RTE */
-$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $modx->getOption('which_editor');
-$modx->smarty->assign('which_editor',$rte);
-if ($modx->getOption('use_editor')) {
+/* Set which RTE if not core */
+if ($modx->getOption('use_editor') && $rte != 'core' && !empty($rte)) {
     /* invoke OnRichTextEditorRegister event */
     $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
     $modx->smarty->assign('text_editors',$text_editors);

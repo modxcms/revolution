@@ -28,9 +28,9 @@ MODx.page.UpdateResource = function(config) {
                 class_key: config.class_key
                 ,context_key: config.context_key
                 ,template: config.template
-                ,which_editor: config.which_editor
-                ,parent: config.parent
-                ,'parent-cmb': config.parent
+                ,richtext: config.richtext
+                ,'parent': config['parent']
+                ,'parent-cmb': config['parent']
             }
             ,publish_document: config.publish_document
             ,edit_doc_metatags: config.edit_doc_metatags

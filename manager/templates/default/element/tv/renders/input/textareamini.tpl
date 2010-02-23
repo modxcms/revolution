@@ -9,7 +9,7 @@ MODx.load({
 {/literal}
     xtype: 'textarea'
     ,applyTo: 'tv{$tv->id}'
-    ,width: 300
+    ,width: '97%'
     ,grow: true
     ,enableKeyEvents: true
 {literal}

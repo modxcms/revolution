@@ -23,6 +23,7 @@ Ext.extend(MODx,Ext.Component,{
         Ext.override(Ext.form.Field,{
             defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on" }
         });
+        Ext.menu.Menu.prototype.enableScrolling = false;
         this.addEvents({
             beforeClearCache: true
             ,beforeLogout: true

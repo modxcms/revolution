@@ -20,6 +20,9 @@ $c = array(
     'icons_url' => $template_url.'images/ext/modext/',
     'manager_url' => $modx->getOption('manager_url'),
     'template_url' => $template_url,
+    'http_host' => MODX_HTTP_HOST,
+    'site_url' => MODX_SITE_URL,
+    'http_host_remote' => MODX_URL_SCHEME.$_SERVER['HTTP_HOST'],
     'user' => $modx->user->get('id'),
     'version' => $modx->version['full_version'],
 );

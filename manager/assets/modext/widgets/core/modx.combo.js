@@ -429,7 +429,7 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 ,rootVisible: this.config.rootVisible || false
                 ,listeners: {
                     'select': {fn: function(data) {
-                        this.setValue(data.url);
+                        this.setValue(data.relativeUrl);
                         this.fireEvent('select',data);
                     },scope:this}
                 }

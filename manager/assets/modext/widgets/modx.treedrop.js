@@ -43,13 +43,14 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                         ,name: data.node.attributes.name
                         ,output: v
                         ,ddTargetEl: ddTargetEl
+                        ,cfg: cfg
                         ,iframe: cfg.iframe
                         ,iframeEl: cfg.iframeEl
                         ,onInsert: cfg.onInsert
                     });
                 } else {
                     if (cfg.iframe) {
-                        MODx.insertForRTE(cfg.iframeEl,v,cfg.onInsert);
+                        MODx.insertForRTE(v,cfg);
                     } else {
                         var el = Ext.get(ddTargetEl);
                         if (el.dom.id == 'modx-static-content') {
@@ -98,11 +99,12 @@ MODx.insertAtCursor = function(myField, myValue) {
         myField.value += myValue; 
     }
 };
-MODx.insertForRTE = function(el,v,fn) {
+MODx.insertForRTE = function(v,cfg) {
+    var fn = cfg.onInsert || false;
     if (fn) {
-        fn(v,el);
+        fn(v,cfg);
     } else {
-        var ta = window.frames[0].document.getElementById(el);
+        var ta = window.frames[0].document.getElementById(cfg.iframeEl);
         if (ta.value) {
             ta.value = ta.value + v;
         } else {
@@ -251,7 +253,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         v = v+']]';
         
         if (this.config.record.iframe) {
-            MODx.insertForRTE(this.config.record.iframeEl,v,this.config.record.onInsert);
+            MODx.insertForRTE(v,this.config.record.cfg);
         } else {
             MODx.insertAtCursor(this.config.record.ddTargetEl,v);
         }

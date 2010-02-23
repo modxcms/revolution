@@ -23,7 +23,6 @@ MODx.page.CreateResource = function(config) {
             ,text: _('save')
             ,method: 'remote'
             ,checkDirty: true
-            ,javascript: config.which_editor != 'none' ? "cleanupRTE('"+config.which_editor+"');" : ';'
             ,keys: [{
                 key: 's'
                 ,alt: true
@@ -45,11 +44,11 @@ MODx.page.CreateResource = function(config) {
             ,record: {
                 context_key: MODx.request.context_key || 'web'
                 ,template: config.template
-                ,parent: config.parent
-                ,'parent-cmb': config.parent
-                ,which_editor: config.which_editor
+                ,'parent': config['parent']
+                ,'parent-cmb': config['parent']
                 ,class_key: config.class_key
                 ,content_type: config.content_type
+                ,richtext: config.richtext
             }
             ,edit_doc_metatags: config.edit_doc_metatags
             ,access_permissions: config.access_permissions

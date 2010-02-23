@@ -81,12 +81,21 @@ $edit_doc_metatags = $modx->hasPermission('edit_doc_metatags');
 $access_permissions = $modx->hasPermission('access_permissions');
 
 /* register JS scripts */
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.security.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.tv.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/resource/update.js');
+$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $modx->getOption('which_editor');
+$modx->smarty->assign('which_editor',$rte);
+
+$managerUrl = $modx->getOption('manager_url');
+if ($modx->getOption('use_editor') && $resource->get('richtext') && (empty($rte) || $rte == 'MODxEditor')) {
+    $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/rte/modx.rte.js');
+    $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/rte/dom/modx.rte.selection.js');
+    $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/rte/modx.rte.plugins.js');
+}
+$modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/sections/resource/update.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[
@@ -103,7 +112,7 @@ Ext.onReady(function() {
         ,parent: "'.$resource->get('parent').'"
         ,deleted: "'.$resource->get('deleted').'"
         ,published: "'.$resource->get('published').'"
-        ,which_editor: "'.$which_editor.'"
+        ,richtext: "'.$resource->get('richtext').'"
         ,edit_doc_metatags: "'.$edit_doc_metatags.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
@@ -117,9 +126,7 @@ Ext.onReady(function() {
  *  Initialize RichText Editor
  */
 /* Set which RTE */
-$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $modx->getOption('which_editor');
-$modx->smarty->assign('which_editor',$rte);
-if ($modx->getOption('use_editor')) {
+if ($modx->getOption('use_editor') && $rte != 'core' && !empty($rte)) {
     /* invoke OnRichTextEditorRegister event */
     $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
     $modx->smarty->assign('text_editors',$text_editors);

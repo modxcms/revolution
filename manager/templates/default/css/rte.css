@@ -1,0 +1,10 @@
+body{
+    border: 0;
+    margin: 0;
+    padding: 3px;
+    height: 98%;
+    cursor: text;
+    
+    font-family: none;
+    font-size: 1em;
+}

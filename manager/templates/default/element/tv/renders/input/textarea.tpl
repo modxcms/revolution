@@ -7,7 +7,7 @@ MODx.load({
     xtype: 'textarea'
     ,applyTo: 'tv{$tv->id}'
     ,value: '{$tv->get('value')|escape:'javascript'}'
-    ,width: 300
+    ,width: '97%'
     ,height: 140
     ,enableKeyEvents: true
 {literal}

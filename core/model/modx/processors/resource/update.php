@@ -296,6 +296,7 @@ if (!empty($_POST['tvs'])) {
                 break;
             case 'date':
                 $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
+                break;
             default:
                 /* handles checkboxes & multiple selects elements */
                 if (is_array($value)) {

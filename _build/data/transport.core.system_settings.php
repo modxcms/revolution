@@ -228,7 +228,7 @@ $settings['editor_css_path']->fromArray(array (
   'value' => '',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'manager',
+  'area' => 'editor',
   'editedon' => null,
 ), '', true, true);
 $settings['editor_css_selectors']= $xpdo->newObject('modSystemSetting');
@@ -237,7 +237,7 @@ $settings['editor_css_selectors']->fromArray(array (
   'value' => '',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'manager',
+  'area' => 'editor',
   'editedon' => null,
 ), '', true, true);
 $settings['emailsender']= $xpdo->newObject('modSystemSetting');
@@ -582,6 +582,15 @@ $settings['resolve_hostnames']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['richtext_default']= $xpdo->newObject('modSystemSetting');
+$settings['richtext_default']->fromArray(array (
+  'key' => 'richtext_default',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['search_default']= $xpdo->newObject('modSystemSetting');
 $settings['search_default']->fromArray(array (
   'key' => 'search_default',
@@ -805,7 +814,7 @@ $settings['use_editor']->fromArray(array (
   'value' => '1',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'manager',
+  'area' => 'editor',
   'editedon' => null,
 ), '', true, true);
 $settings['webpwdreminder_message']= $xpdo->newObject('modSystemSetting');
@@ -855,7 +864,7 @@ $settings['which_editor']->fromArray(array (
   'value' => '',
   'xtype' => 'modx-combo-rte',
   'namespace' => 'core',
-  'area' => 'manager',
+  'area' => 'editor',
   'editedon' => null,
 ), '', true, true);
 

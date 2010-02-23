@@ -9,6 +9,7 @@
 $_lang['area'] = 'Area';
 $_lang['area_authentication'] = 'Authentication and Security';
 $_lang['area_caching'] = 'Caching';
+$_lang['area_editor'] = 'Rich-Text Editor';
 $_lang['area_file'] = 'File System';
 $_lang['area_furls'] = 'Friendly URL';
 $_lang['area_gateway'] = 'Gateway';
@@ -278,7 +279,10 @@ $_lang['setting_request_param_id_desc'] = 'The name of the GET parameter to iden
 $_lang['setting_resolve_hostnames'] = 'Resolve hostnames';
 $_lang['setting_resolve_hostnames_desc'] = 'Do you want MODx to try to resolve your visitors\' hostnames when they visit your site? Resolving hostnames may create some extra server load, although your visitors won\'t notice this in any way.';
 
-$_lang['setting_search_default'] = 'Searchable default';
+$_lang['setting_richtext_default'] = 'Richtext Default';
+$_lang['setting_richtext_default_desc'] = 'Select \'Yes\' to make all new Resources use the Richtext Editor by default.';
+
+$_lang['setting_search_default'] = 'Searchable Default';
 $_lang['setting_search_default_desc'] = 'Select \'Yes\' to make all new resources searchable by default.';
 $_lang['setting_search_default_err'] = 'Please specify whether or not you want documents to be searchable by default.';
 
