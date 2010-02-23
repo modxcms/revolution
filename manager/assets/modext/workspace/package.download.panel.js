@@ -77,7 +77,7 @@ Ext.extend(MODx.panel.PackageDownload,MODx.Panel,{
             version: new Ext.XTemplate(
                 '<div class="details" style="padding: 1em;">'
                 ,'<tpl for=".">'
-                    ,'<div class="details-info">'
+                    ,'<div class="modx-pb-details-info">'
                     ,'<h3>{name}</h3>'
                     ,'<b>'+_('version')+':</b> <span>{version}</span><br />'
                     ,'<b>'+_('release')+':</b> <span>{release}</span><br />'
@@ -92,7 +92,7 @@ Ext.extend(MODx.panel.PackageDownload,MODx.Panel,{
             ,'package': new Ext.XTemplate(
                 '<div class="details" style="padding: 1em;">'
                 ,'<tpl for=".">'
-                    ,'<div class="details-info">'
+                    ,'<div class="modx-pb-details-info">'
                     ,'<h3>{name}</h3>'
                     ,'<p>{description}</p></div>'
                 ,'</tpl></div>'
@@ -100,7 +100,7 @@ Ext.extend(MODx.panel.PackageDownload,MODx.Panel,{
             ,category: new Ext.XTemplate(
                 '<div class="details" style="padding: 1em;">'
                 ,'<tpl for=".">'
-                    ,'<div class="details-info">'
+                    ,'<div class="modx-pb-details-info">'
                     ,'<h3>{name}</h3>'
                     ,'<p>{description}</p></div>'
                 ,'</tpl></div>'
@@ -108,7 +108,7 @@ Ext.extend(MODx.panel.PackageDownload,MODx.Panel,{
             ,repository: new Ext.XTemplate(
                 '<div class="details" style="padding: 1em;">'
                 ,'<tpl for=".">'
-                    ,'<div class="details-info">'
+                    ,'<div class="modx-pb-details-info">'
                     ,'<h3>{name}</h3>'
                     ,'<p>{description}</p></div>'
                 ,'</tpl></div>'

@@ -420,7 +420,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
                 ,'<div class="modx-pb-thumb-wrap" id="{name}">'
-                ,'<div class="modx-pb-thumb"><img src="{image}" title="{name}" width="90" height="90"></div>'
+                ,'<div class="modx-pb-thumb"><img src="{image}" title="{name}" width="90" height="90" /></div>'
                 ,'<span>{shortName}</span></div>'
             ,'</tpl>'
         );

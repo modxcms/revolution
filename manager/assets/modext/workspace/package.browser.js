@@ -58,7 +58,7 @@ MODx.panel.PackageBrowser = function(config) {
             ,border: false
         },{
             id: 'modx-package-browser-view'
-            ,cls: 'browser-view'
+            ,cls: 'modx-pb-view-ct'
             ,region: 'east' 
             ,width: '75%'
             ,autoScroll: true
@@ -68,7 +68,7 @@ MODx.panel.PackageBrowser = function(config) {
             ,border: false
         },{
             id: 'modx-package-browser-thumbs'
-            ,cls: 'browser-view'
+            ,cls: 'modx-pb-view-ct'
             ,region: 'east'
             ,width: '55%'
             ,height: 450
@@ -86,6 +86,7 @@ MODx.panel.PackageBrowser = function(config) {
         },{
             html: ''
             ,id: 'modx-package-browser-thumbs-detail'
+            ,cls: 'modx-pb-details-ct'
             ,region: 'east'
             ,split: true
             ,autoScroll: true
@@ -613,11 +614,11 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
     ,_initTemplates: function() {
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
-                ,'<div class="thumb-wrap <tpl if="downloaded">pbr-thumb-downloaded</tpl>" id="modx-package-thumb-{id}">'
-                    ,'<div class="pbr-thumb">'
-                        ,'<img src="{screenshot}" title="{name}" class="thumb-img">'
+                ,'<div class="modx-pb-thumb-wrap <tpl if="downloaded">pbr-thumb-downloaded</tpl>" id="modx-package-thumb-{id}">'
+                    ,'<div class="modx-pb-thumb">'
+                        ,'<img src="{screenshot}" title="{name}" width="90" height="90" />'
                     ,'</div>'
-                    ,'<span>{name}</span>'
+                    ,'<span>{shortName}</span>'
                     ,'<span>{downloads} '+_('downloads')+'</span>'
                     ,'<tpl if="downloaded"><span class="green">'+_('downloaded')+'</span></tpl>'              
                 ,'</div>'
@@ -629,8 +630,10 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
         this.templates.details = new Ext.XTemplate(
             '<div class="details">'
             ,'<tpl for=".">'
-                ,'<img src="{screenshot}" alt="" width="100" height="80" onclick="Ext.getCmp(\'modx-package-browser-thumbs-view\').showScreenshot(\'{id}\'); return false;" style="cursor:pointer;" />'
-                ,'<div class="details-info">'
+                ,'<div class="modx-pb-detail-thumb">'
+                    ,'<img src="{screenshot}" alt="{name}" width="80" height="60" onclick="Ext.getCmp(\'modx-package-browser-thumbs-view\').showScreenshot(\'{id}\'); return false;" />'
+                ,'</div>'
+                ,'<div class="modx-pb-details-info">'
                     ,'<h4>{name} {version-compiled}</h4><br />'
                     ,'<p>{description}</p><br />'
                     ,'<b>'+_('author')+':</b>'
