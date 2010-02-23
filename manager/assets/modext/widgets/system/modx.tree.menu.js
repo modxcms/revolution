@@ -182,7 +182,7 @@ MODx.window.UpdateMenu = function(config) {
             name: 'text'
             ,xtype: 'hidden'
         },{
-            fieldLabel: _('text')
+            fieldLabel: _('lexicon_key')
             ,name: 'new_text'
             ,id: 'modx-umen-new_text'
             ,xtype: 'textfield'
