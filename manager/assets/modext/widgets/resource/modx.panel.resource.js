@@ -389,6 +389,7 @@ MODx.panel.Resource = function(config) {
         ,defaults: { collapsible: false ,autoHeight: true }
         ,forceLayout: true
         ,items: its
+        ,fileUpload: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}

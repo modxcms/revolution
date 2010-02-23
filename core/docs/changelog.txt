@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Made resource panel be a fileUpload-able panel for plugins
 - [#MODX-1357] Added richtext_default system setting 
 - [#MODX-1685] Added MODxEditor, a core Ext-based RTE to be the default RTE for Revolution
 - [#MODX-1674] Stabilized MODx.Browser to work with core RTE
