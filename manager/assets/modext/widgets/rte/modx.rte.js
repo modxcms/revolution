@@ -136,7 +136,7 @@ MODx.rte.RTE = function(config) {
                 ,text: _('btn_image_desc')
             }
             ,enableToggle: false
-            ,handler: this.addImage
+            ,handler: this.loadImageWindow
             ,scope: this
         }
         ,'-'
@@ -220,49 +220,22 @@ MODx.rte.RTE = function(config) {
     this.config = config;
     if (config.formpanel) {
         this.on('sync',this.fireChange,this);
-    }
-    this.selection = new MODx.rte.Selection(this);
-    
+    }    
     this.on('render',this.onRteRender,this);
-    this.on('init',this.onRteInit,this);
+    this.on('initialize',this.onRteInit,this);
 };
 Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
     windows: {}
     ,iFrameName: false
     
     ,loadMenu: function() {
-        
-        var iframe = Ext.get(this.iframe);
-        
+        var iframe = Ext.get(this.iframe);        
         this.menu = new Ext.menu.Menu({
             autoScroll: false
             ,enableScroll: false
             ,floating: true
             ,plain: true
-            ,items:[{
-                text: _('cm_cut')
-                ,handler: function() {
-                    this.relayCmd('cut');
-                }
-                ,scope:this
-            },'-',{
-                text: _('cm_addlink')
-                ,handler: function() {
-                    this.loadLinkWindow();
-                }
-                ,hidden: Ext.isIE ? true : false
-                ,scope:this
-            },{
-                text: _('cm_unlink')
-                ,handler: function() {
-                    this.relayCmd('unlink');
-                }
-                ,scope:this
-            },'-',{
-                text: _('cm_image')
-                ,handler: function() { this.addImage(); }
-                ,scope: this
-            }]
+            ,items:[]
         });
         this.on('activate',this.activateMenu,this);
     }
@@ -280,18 +253,94 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
                 ,preventDefault: true
             });
         }
-        this.cel.on('contextmenu', function(e){
-            if (!Ext.isIE) { e.stopEvent(); }
-            var pos = e.getPoint();
-            var iframe = Ext.get(this.iframe);
-            pos[0] += iframe.getX();
-            pos[1] += iframe.getY();
-            this.menu.showAt(pos);
-        } , this, opts);
+        this.cel.on('contextmenu',this.showMenu, this, opts);
         
         /* needed for chrome/webkit to show context menu in the entire area */
         var sz = this.el.getSize();
         this.setSize(sz.width, this.height || sz.height);
+    }
+    
+    ,showMenu: function(e){
+                
+        var tagNames = this.selection.getTagsInSelection(true);
+        var tags = this.selection.getTagsInSelection();
+        
+        
+        var itms = [];
+        itms.push({
+            text: _('cm_cut')
+            ,handler: function() {
+                this.relayCmd('cut');
+            }
+            ,scope:this
+        });
+        itms.push('-');
+        if (tagNames.indexOf('A') != -1) {
+            var a = this.selection.getFirstTagInSelection('A',tags);
+            this.selectionAttr = this.selection.getTagAttributes(a);
+            itms.push({
+                text: _('cm_link_edit')
+                ,handler: function() {
+                    this.loadLinkWindow(this.selectionAttr);
+                }
+                ,hidden: Ext.isIE ? true : false
+                ,scope:this
+            });
+            itms.push({
+                text: _('cm_unlink')
+                ,handler: function() {
+                    this.relayCmd('unlink');
+                }
+                ,scope:this
+            });
+        } else {
+            itms.push({
+                text: _('cm_link_add')
+                ,handler: function() {
+                    this.loadLinkWindow();
+                }
+                ,hidden: Ext.isIE ? true : false
+                ,scope:this
+            });
+        }
+        if (tagNames.indexOf('IMG') != -1) {
+            var img = this.selection.getFirstTagInSelection('IMG',tags);
+            var attr = this.selection.getTagAttributes(img);
+            itms.push('-');
+            itms.push({
+                text: _('cm_image_edit')
+                ,handler: function() { 
+                    this.loadImageWindow(attr);
+                }
+                ,scope: this
+            });
+        } else {
+            itms.push('-');
+            itms.push({
+                text: _('cm_image_add')
+                ,handler: function() { this.loadImageWindow(); }
+                ,scope: this
+            });
+        }
+
+             
+        this.menu.removeAll();
+        var l = itms.length;
+        for(var i = 0; i < l; i++) {
+            this.menu.add(itms[i]);
+        }
+        
+        if (!Ext.isIE) { e.stopEvent(); }
+        var pos = e.getPoint();
+        var iframe = Ext.get(this.iframe);
+        pos[0] += iframe.getX();
+        pos[1] += iframe.getY();
+        this.menu.showAt(pos);
+    }
+    
+    ,getMenuItems: function(opts) {
+        opts = opts || {};
+        return itms;
     }
     
     ,fireChange: function() {
@@ -304,9 +353,25 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
             'keyup': this.checkIfPaste
             ,scope: this
         });
-        this.lastValue = this.getValue();
-        this.curLength = this.lastValue.length;
-        this.lastLength = this.lastValue.length;
+        this.wlastValue = this.getRawValue();
+        this.wcurLength = this.wlastValue.length;
+        this.wlastLength = this.wlastValue.length;
+        this.selection = new MODx.rte.Selection(this);
+        
+        var prepareDoc = function() {
+            var doc = (this.iframe.contentWindow || this.iframe.contentDocument);
+            if (doc.document) { doc = doc.document; }            
+            var imgs = doc.getElementsByTagName('img');
+            
+            for (var i = 0; i < imgs.length; i++) { 
+                img = Ext.get(imgs.item(i));
+                img.addClass('modx-rte-image');
+                img.on('mouseover',function() {},this);
+            }
+        };
+        /*prepareDoc.defer(1000,this);*/
+        
+        
     }
     ,onRteRender: function() {
         this.loadMenu();
@@ -328,7 +393,7 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
     
     
     ,getDocMarkup : function(){
-        var ss = MODx.config.manager_url+'templates/'+MODx.config.manager_theme+'/css/rte.css';
+        var ss = MODx.config.manager_url+'templates/'+MODx.config.manager_theme+'/css/rte.css?'+Ext.id();
         return '<html><head>'
             + '<base href="'+MODx.config.site_url+'" />'
             + '<link href="' + ss + '"  rel="stylesheet" type="text/css" />'
@@ -481,6 +546,8 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
         }
         html = html.replace('<br>','<br />');
         
+        html = html.replace('modx-rte-image','');
+        
         if(html == this.defaultValue){
             html = '';
         }
@@ -534,31 +601,30 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
     ,checkIfPaste: function(e){
         
         var diffAt = 0;
-        this.curLength = this.cmp.getValue().length;
+        this.wcurLength = this.getValue().length;
         
         if (e.V == e.getKey() && e.ctrlKey && this.wordPasteEnabled){
             
-            this.cmp.suspendEvents();
+            this.suspendEvents();
             
-            diffAt = this.findValueDiffAt(this.cmp.getValue());
+            diffAt = this.findValueDiffAt(this.getValue());
             var parts = [
-                this.cmp.getValue().substr(0, diffAt),
-                this.fixWordPaste(this.cmp.getValue().substr(diffAt, (this.curLength - this.lastLength))),
-                this.cmp.getValue().substr((this.curLength - this.lastLength)+diffAt, this.curLength)
+                this.getValue().substr(0, diffAt),
+                this.fixWordPaste(this.getValue().substr(diffAt, (this.wcurLength - this.wlastLength))),
+                this.getValue().substr((this.wcurLength - this.wlastLength)+diffAt, this.wcurLength)
             ];
-            this.cmp.setValue(parts.join(''));
+            this.setValue(parts.join(''));
             
-            this.cmp.resumeEvents();
+            this.resumeEvents();
         }
         
-        this.lastLength = this.cmp.getValue().length;
-        this.lastValue = this.cmp.getValue();
+        this.wlastLength = this.getValue().length;
+        this.wlastValue = this.getValue();
         
     }
-    ,findValueDiffAt: function(val){
-        
-        for (i=0;i<this.curLength;i++){
-            if (this.lastValue[i] != val[i]){
+    ,findValueDiffAt: function(val) {        
+        for (i=0;i<this.wcurLength;i++){
+            if (this.wlastValue[i] != val[i]){
                 return i;           
             }
         }
@@ -588,6 +654,7 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
     
     /* special char */
     ,loadSpecialChar: function() {
+        this.storeRange();
         if (!this.windows.spchar) {
             this.windows.spchar = MODx.load({
                 xtype: 'modx-rte-window-special-char'
@@ -609,9 +676,10 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
         }
         this.windows.spchar.show();
     }
-    
+        
     /* hr */
     ,loadHrWindow: function(){
+        this.storeRange();
         if (!this.windows.hr) {
             this.windows.hr = MODx.load({ 
                 xtype: 'modx-rte-window-hr'
@@ -632,23 +700,29 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
         this.windows.hr.show();
     }
     
-    /* links */
-    ,loadLinkWindow: function(){
+    ,storeRange: function() {
         this.oldRange = null;
         if (Ext.isIE) {
             this.oldRange = this.getDoc().selection.createRange();
         }
+    }
+    
+    /* links */
+    ,loadLinkWindow: function(r){
+        r = r || {};
+        this.storeRange();
         if (!this.windows.link) {
             this.windows.link = MODx.load({ 
                 xtype: 'modx-rte-window-link'
+                ,record: r
                 ,listeners: {
                     'submit': {fn:function(vs) {
-                        var url = vs.url;
+                        var href = vs.href;
                         if (Ext.isIE) {
-                            url = url.replace(MODx.config.site_url,'');
+                            href = href.replace(MODx.config.site_url,'');
                         }
                         
-                        var a = '<a href="'+url+'"';
+                        var a = '<a href="'+href+'"';
                         if (vs.title != '') { a += ' title="'+vs.title+'"'; }
                         if (vs['class'] != '') { a += ' class="'+vs['class']+'"'; }
                         if (vs.style != '') { a += ' style="'+vs.style+'"'; }
@@ -661,9 +735,8 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
                     },scope:this}
                 }
             });
-        } else {
-            this.windows.link.getEl().frame();
         }
+        this.windows.link.setValues(r);
         this.windows.link.show();
     }
     
@@ -714,6 +787,7 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
     
     /* table */
     ,loadTableWindow: function(){
+        this.storeRange();
         if (!this.windows.table) {
             this.windows.table = MODx.load({ 
                 xtype: 'modx-rte-window-table'
@@ -760,17 +834,10 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
     ,onEditorEvent: function(e){
         var doc = this.getDoc();
         Ext.each(this.tbtns, function(b,i) {
-            if (b.enableOnSelection || b.disableOnSelection) {
-                var sel = this.getDocSelection()+'';            
-                if (sel) {
-                    sel = sel.toString();
-                    if ((b.enableOnSelection && sel != '') || (b.disableOnSelection && sel == '')) {
-                        b.enable();
-                    } else {
-                        b.disable();
-                    }
-                } else if (doc.selection) {
-                    if ((b.enableOnSelection && doc.selection.createRange().text !== '') || (b.disableOnSelection && doc.selection.createRange().text === '')) {
+            if (b.enableOnSelection || b.disableOnSelection) {                
+                var rng = this.selection.getRange();            
+                if (rng) {
+                    if ((b.enableOnSelection && rng.collapsed == false) || (b.disableOnSelection && rng.collapsed == true)) {
                         b.enable();
                     } else {
                         b.disable();
@@ -785,18 +852,26 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
         }, this);
         this.updateToolbar();
     }
-    
-    ,addImage: function() {
+        
+    ,loadImageWindow: function(r) {
+        r = r || {};
+        this.storeRange();
         if (!this.windows.image) {
             this.windows.image = MODx.load({ 
                 xtype: 'modx-rte-window-image'
+                ,record: r
                 ,listeners: {
                     'submit': {fn:function(vs) {
                         var url = vs.src;
                         var a = '<img src="'+url+'"';
                         if (vs.title != '') { a += ' title="'+vs.title+'"'; }
                         if (vs.alt != '') { a += ' alt="'+vs.alt+'"'; }
-                        if (vs['class'] != '') { a += ' class="'+vs['class']+'"'; }
+                        
+                        var cls = '';
+                        if (vs['class'] != '') {
+                            cls += ' '+vs['class'];
+                        }
+                        a += ' class="'+cls+'"';
                         
                         if (vs.width != '') { a += ' title="'+vs.width+'"'; }
                         if (vs.height != '') { a += ' height="'+vs.height+'"'; }
@@ -806,17 +881,17 @@ Ext.extend(MODx.rte.RTE,Ext.form.HtmlEditor,{
                         if (vs.id != '') { a += ' id="'+vs.id+'"'; }
                         if (vs.style != '') { a += ' style="'+vs.style+'"'; }
                         
-                        if (vs.other != '') { a += vs.other; }                        
-                        
+                        if (vs.other != '') { a += vs.other; }
                         a += ' />';
                         this.insertAtCursor(a);
                     },scope:this}
                 }
             });
         }
+        this.windows.image.setValues(r);
         this.windows.image.show();
     }
-    
+        
     ,addContextMenu: function(myHandler, myTarget) {
         
         var stopDefault = function(e){

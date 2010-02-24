@@ -292,7 +292,7 @@ MODx.rte.window.Link = function(config) {
                 ,items: [{
                     xtype: 'textfield'
                     ,fieldLabel: _('opt_url')
-                    ,name: 'url'
+                    ,name: 'href'
                     ,anchor: '100%'
                 },{
                     xtype: 'textfield'
@@ -369,8 +369,10 @@ MODx.rte.window.Image = function(config) {
                     ,name: 'src'
                     ,anchor: '100%'
                     ,listeners: {
-                        'select': {fn:function(data) {
-                            Ext.get(this.ident+'-preview').update('<img src="'+data.url+'" alt="preview" />');
+                        'select': {fn:function(r) {
+                            data = this.fp.getForm().getValues();
+                            data.src = r.url;
+                            this.showPreview(data);
                         },scope:this}
                     }
                 },{
@@ -480,12 +482,21 @@ MODx.rte.window.Image = function(config) {
     });
     MODx.rte.window.Image.superclass.constructor.call(this,config);
     this.on('show',function() {
-        Ext.get(this.ident+'-preview').update('');
+        var v = this.fp.getForm().getValues();
+        v.src = MODx.config.site_url+v.src;
+        this.showPreview(v);
         this.syncSize();
         this.center();
     },this)
 };
-Ext.extend(MODx.rte.window.Image,MODx.rte.window.ButtonWindow);
+Ext.extend(MODx.rte.window.Image,MODx.rte.window.ButtonWindow,{
+    showPreview: function(data) {
+        var v = data;
+        v.tag = 'img';
+        var m = Ext.DomHelper.markup(v);
+        Ext.get(this.ident+'-preview').update(m);
+    }
+});
 Ext.reg('modx-rte-window-image',MODx.rte.window.Image);
 
 

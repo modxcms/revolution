@@ -5,6 +5,10 @@ body{
     height: 98%;
     cursor: text;
     
-    font-family: none;
-    font-size: 1em;
+    font-family: none !important;
+    font-size: 1em !important;
 }
+
+img {
+	border: 1px solid gray !important;
+	}

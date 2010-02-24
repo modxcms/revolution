@@ -443,17 +443,17 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                                         
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+r.object.pagetitle+'</h2>');
                     
-                    if (r.object.richtext == 1 && MODx.config.use_editor == 1) {                        
-                        if (MODx.config.which_editor == '' || MODx.config.which_editor == 'core') {
+                    if (r.object.richtext == 1 && MODx.config.use_editor == 1) {
+                        if (MODx.config.which_editor == '' || MODx.config.which_editor == 'MODxEditor') {
                             var f = this.getForm().findField('ta');
                             f.setRawValue(r.object.ta);
                             f.pushValue();
-                        }
-                        
-                        if (MODx.loadRTE && !this.rteLoaded) {
-                            MODx.loadRTE('ta');
                         } else {
-                            if (MODx.unloadRTE) { MODx.unloadRTE('ta'); }
+                            if (MODx.loadRTE && !this.rteLoaded) {
+                                MODx.loadRTE('ta');
+                            } else {
+                                if (MODx.unloadRTE) { MODx.unloadRTE('ta'); }
+                            }
                         }
                         this.rteLoaded = true;
                     }
