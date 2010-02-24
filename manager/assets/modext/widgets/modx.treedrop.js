@@ -104,11 +104,15 @@ MODx.insertForRTE = function(v,cfg) {
     if (fn) {
         fn(v,cfg);
     } else {
-        var ta = window.frames[0].document.getElementById(cfg.iframeEl);
-        if (ta.value) {
-            ta.value = ta.value + v;
+        if (typeof cfg.iframeEl == 'object') {
+            var doc = cfg.iframeEl; 
         } else {
-            ta.innerHTML = ta.innerHTML + v;
+            var doc = window.frames[0].document.getElementById(cfg.iframeEl);
+        }
+        if (doc.value) {
+            doc.value = doc.value + v;
+        } else {
+            doc.innerHTML = doc.innerHTML + v;
         }
     }
 };

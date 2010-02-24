@@ -84,12 +84,33 @@ $access_permissions = $modx->hasPermission('access_permissions');
 $rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $modx->getOption('which_editor');
 $modx->smarty->assign('which_editor',$rte);
 
-$managerUrl = $modx->getOption('manager_url');
-if ($modx->getOption('use_editor') && $resource->get('richtext') && (empty($rte) || $rte == 'MODxEditor')) {
-    $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/rte/modx.rte.js');
-    $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/rte/dom/modx.rte.selection.js');
-    $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/rte/modx.rte.plugins.js');
+/*
+ *  Initialize RichText Editor
+ */
+/* Set which RTE */
+if ($modx->getOption('use_editor') && !empty($rte)) {
+    /* invoke OnRichTextEditorRegister event */
+    $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
+    $modx->smarty->assign('text_editors',$text_editors);
+
+    $replace_richtexteditor = array('ta');
+    $modx->smarty->assign('replace_richtexteditor',$replace_richtexteditor);
+
+    /* invoke OnRichTextEditorInit event */
+    $onRichTextEditorInit = $modx->invokeEvent('OnRichTextEditorInit',array(
+        'editor' => $rte,
+        'elements' => $replace_richtexteditor,
+        'id' => $resource->get('id'),
+        'resource' => &$resource,
+        'mode' => 'upd',
+    ));
+    if (is_array($onRichTextEditorInit)) {
+        $onRichTextEditorInit = implode('',$onRichTextEditorInit);
+        $modx->smarty->assign('onRichTextEditorInit',$onRichTextEditorInit);
+    }
 }
+
+$managerUrl = $modx->getOption('manager_url');
 $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
@@ -122,30 +143,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
-/*
- *  Initialize RichText Editor
- */
-/* Set which RTE */
-if ($modx->getOption('use_editor') && $rte != 'core' && !empty($rte)) {
-    /* invoke OnRichTextEditorRegister event */
-    $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
-    $modx->smarty->assign('text_editors',$text_editors);
-
-    $replace_richtexteditor = array('ta');
-    $modx->smarty->assign('replace_richtexteditor',$replace_richtexteditor);
-
-    /* invoke OnRichTextEditorInit event */
-    $onRichTextEditorInit = $modx->invokeEvent('OnRichTextEditorInit',array(
-        'editor' => $rte,
-        'elements' => $replace_richtexteditor,
-        'id' => $resource->get('id'),
-        'resource' => &$resource,
-        'mode' => 'upd',
-    ));
-    if (is_array($onRichTextEditorInit)) {
-        $onRichTextEditorInit = implode('',$onRichTextEditorInit);
-        $modx->smarty->assign('onRichTextEditorInit',$onRichTextEditorInit);
-    }
-}
 
 return $modx->smarty->fetch('resource/update.tpl');

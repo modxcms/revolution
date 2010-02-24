@@ -322,7 +322,7 @@ $collection['43']->fromArray(array (
   'parent' => 36,
   'controller' => 'resource/update',
   'haslayout' => 1,
-  'lang_topics' => 'resource,rte',
+  'lang_topics' => 'resource',
   'assets' => '',
   'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Resource',
 ), '', true, true);

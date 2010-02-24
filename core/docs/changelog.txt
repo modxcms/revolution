@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Removing core RTE; too much work, may take back up in a later version
 - [#MODX-1697] Added ability to edit images and links in RTE
 - Added more robust MODx.rte.Selection API
 - Added missing changes to modActions needed to load lexicon entries for RTE

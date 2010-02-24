@@ -1,19 +1,5 @@
 MODx.panel.Resource = function(config) {
     config = config || {};
-    
-    var coreRte = MODx.config.use_editor == 1
-               && (MODx.config.which_editor == '' || MODx.config.which_editor == 'MODxEditor') 
-               && config.record.richtext == 1 ? true : false;
-    var rte = [{
-        xtype: coreRte ? 'modx-richtext' : 'textarea'
-        ,name: 'ta'
-        ,id: 'ta'
-        ,hideLabel: true
-        ,stylesheet: MODx.config.editor_css_path || ''
-        ,anchor: '97%'
-        ,height: 400
-        ,formpanel: 'modx-panel-resource'
-    }];
     var ct = {
         title: _('resource_content')
         ,id: 'modx-resource-content'
@@ -21,7 +7,15 @@ MODx.panel.Resource = function(config) {
         ,bodyStyle: 'padding: 1.5em;'
         ,autoHeight: true
         ,collapsible: false
-        ,items: rte
+        ,items: {
+            xtype: 'textarea'
+            ,name: 'ta'
+            ,id: 'ta'
+            ,hideLabel: true
+            ,anchor: '97%'
+            ,height: 400
+            ,grow: false
+        }
     };
     delete rte;
     var it = [];
@@ -414,14 +408,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (this.config.resource === '' || this.config.resource === 0 || this.initialized) {
             if (MODx.config.use_editor && MODx.loadRTE) {
                 var f = this.getForm().findField('richtext');
-                if (f && f.getValue()) {
+                if (f && f.getValue() == 1) {
                     MODx.loadRTE('ta');
-                    var tt = Ext.get('ta-toggle');
-                    if (tt) { tt.show(); }
                 } else {
-                    if (MODx.unloadRTE) MODx.unloadRTE('ta');
-                    var tt = Ext.get('ta-toggle');
-                    if (tt) { tt.hide(); }
+                    if (MODx.unloadRTE) {
+                        MODx.unloadRTE('ta');
+                    }
                 }
             }
             this.fireEvent('ready');
@@ -444,18 +436,15 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+r.object.pagetitle+'</h2>');
                     
                     if (r.object.richtext == 1 && MODx.config.use_editor == 1) {
-                        if (MODx.config.which_editor == '' || MODx.config.which_editor == 'MODxEditor') {
-                            var f = this.getForm().findField('ta');
-                            f.setRawValue(r.object.ta);
-                            f.pushValue();
-                        } else {
-                            if (MODx.loadRTE && !this.rteLoaded) {
-                                MODx.loadRTE('ta');
-                            } else {
-                                if (MODx.unloadRTE) { MODx.unloadRTE('ta'); }
-                            }
-                        }
+                        if (MODx.loadRTE && !this.rteLoaded) {
+                            MODx.loadRTE('ta');
+                        }                        
                         this.rteLoaded = true;
+                    } else {
+                        if (MODx.unloadRTE) { 
+                            MODx.unloadRTE('ta'); 
+                        }
+                        this.rteLoaded = false;
                     }
                     this.initialized = true;
                     this.fireEvent('ready');

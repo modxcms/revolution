@@ -102,7 +102,7 @@ $children[3]->fromArray(array (
           'namespace' => 'core',
           'controller' => 'resource/create',
           'haslayout' => 1,
-          'lang_topics' => 'resource,rte',
+          'lang_topics' => 'resource',
           'assets' => '',
           'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Resource',
         ), '', true, true);
