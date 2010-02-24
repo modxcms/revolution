@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1681] Added checks for issue with importing lexicon in Webkit-based browsers
 - Cleanups to TV input widths
 - Removing core RTE; too much work, may take back up in a later version
 - [#MODX-1697] Added ability to edit images and links in RTE

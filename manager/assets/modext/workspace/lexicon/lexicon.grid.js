@@ -52,6 +52,7 @@ MODx.grid.Lexicon = function(config) {
 			xtype: 'modx-combo-lexicon-topic'
 			,id: 'modx-lexicon-filter-topic'
 			,value: 'default'
+            ,pageSize: 20
             ,listeners: {
                 'select': {fn:this.filter.createDelegate(this,['topic'],true),scope:this}
             }
@@ -182,10 +183,15 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     }
     ,changeNamespace: function(cb,nv,ov) {
     	var ft = Ext.getCmp('modx-lexicon-filter-topic');
-        var s = ft.store;
-    	s.baseParams['namespace'] = cb.getValue();
-    	s.reload();
-        ft.setValue('');
+        if (ft) {
+            var s = ft.store;
+            if (s) {
+            	s.baseParams['namespace'] = cb.getValue();
+                s.removeAll();
+            	s.load();
+            }
+            ft.setValue('');
+        }
     	
     	this.filter(cb,null,1,'namespace');
     }
@@ -469,6 +475,7 @@ MODx.window.ImportLexicon = function(config) {
             ,fieldLabel: _('topic')
             ,name: 'topic'
             ,id: 'modx-'+this.ident+'-topic'
+            ,value: 'default'
         },{
             xtype: 'modx-combo-language'
             ,fieldLabel: _('language')
