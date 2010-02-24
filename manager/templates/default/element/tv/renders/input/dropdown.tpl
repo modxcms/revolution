@@ -6,6 +6,7 @@
 
 
 <script type="text/javascript">
+// <![CDATA[
 {literal}
 MODx.load({
 {/literal}
@@ -15,9 +16,10 @@ MODx.load({
     ,triggerAction: 'all'
     ,typeAhead: false
     ,editable: false
-    ,width: '97%'
+    ,width: 300
 {literal}
     ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 {/literal}
+// ]]>
 </script>

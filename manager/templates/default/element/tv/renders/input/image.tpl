@@ -2,6 +2,7 @@
 <div id="tvpanel{$tv->id}"></div>
 
 <script type="text/javascript">
+// <![CDATA[
 {literal}
 MODx.load({
 {/literal}
@@ -9,9 +10,10 @@ MODx.load({
     ,renderTo: 'tvpanel{$tv->id}'
     ,tv: '{$tv->id}'
     ,value: '{$tv->value|escape}'
-    ,width: '97%'
+    ,width: 300
 {literal}
     ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 {/literal}
+// ]]>
 </script>

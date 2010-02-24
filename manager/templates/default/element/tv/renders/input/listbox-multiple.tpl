@@ -3,7 +3,7 @@
 	onselect="MODx.fireResourceFormChange();"
 	onchange="MODx.fireResourceFormChange();"
 	size="8"
-    style="width: 100%;"
+    style="width: 300px;"
 >
 {foreach from=$opts item=item}
 	<option value="{$item.value}" {if $item.selected} selected="selected"{/if}>{$item.text}</option>

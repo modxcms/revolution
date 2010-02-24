@@ -1,12 +1,12 @@
 <div id="tv{$tv->id}-cb"></div>
 
 <script type="text/javascript">
+// <![CDATA[
 {literal}
 MODx.load({
 {/literal}
     xtype: 'radiogroup'
     ,id: 'tv{$tv->id}'
-    ,width: '97%'
     ,vertical: true
     ,columns: 3
     ,renderTo: 'tv{$tv->id}-cb'
@@ -30,4 +30,5 @@ Ext.getCmp('tv{$tv->id}-{$k}').on('check',MODx.fireResourceFormChange);
 {/foreach}
 
 Ext.get('tvdef{$tv->id}').dom.value = "{$cbdefaults}";
+// ]]>
 </script>

@@ -74,12 +74,13 @@ Ext.onReady(function() {
         Ext.getCmp('modx-panel-resource-tv').refreshTVs();
     };
     MODx.load({
-        xtype: 'tabpanel'
+        xtype: 'modx-tabs'
         ,applyTo: 'modx-tv-tabs'
         ,activeTab: 0
+        //,autoHeight: true
         ,autoTabs: true
         ,plain: true
-        ,autoWidth: true
+        ,anchor: '100%'
         ,border: false
         ,defaults: {
             bodyStyle: 'padding: 5px;'            
@@ -90,3 +91,5 @@ Ext.onReady(function() {
 // ]]>
 </script>
 {/literal}
+
+<br class="clear" />

@@ -6,15 +6,17 @@
 />
 
 <script type="text/javascript">
+// <![CDATA[
 {literal}
 MODx.load({
 {/literal}
     xtype: 'textfield'
     ,applyTo: 'tv{$tv->id}'
-    ,width: '97%'
+    ,width: 300
     ,enableKeyEvents: true
 {literal}
     ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 {/literal}
+// ]]>
 </script>

@@ -5,6 +5,7 @@
 />
 
 <script type="text/javascript">
+// <![CDATA[
 {literal}
 MODx.load({
 {/literal}
@@ -16,4 +17,5 @@ MODx.load({
     ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 {/literal}
+// ]]>
 </script>

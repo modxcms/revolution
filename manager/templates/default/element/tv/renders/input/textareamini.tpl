@@ -4,16 +4,18 @@
 >{$tv->get('value')|escape}</textarea>
 
 <script type="text/javascript">
+// <![CDATA[
 {literal}
 MODx.load({
 {/literal}
     xtype: 'textarea'
     ,applyTo: 'tv{$tv->id}'
-    ,width: '97%'
+    ,width: 300
     ,grow: true
     ,enableKeyEvents: true
 {literal}
     ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 {/literal}
+// ]]>
 </script>
