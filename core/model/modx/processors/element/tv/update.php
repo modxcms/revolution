@@ -25,10 +25,12 @@
 if (!$modx->hasPermission('save_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv','category');
 
+/* get tv */
 if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'));
 $tv = $modx->getObject('modTemplateVar',$_POST['id']);
 if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
 
+/* check locks */
 if ($tv->get('locked') && $modx->hasPermission('edit_locked') == false) {
     return $modx->error->failure($modx->lexicon('tv_err_locked'));
 }
@@ -39,6 +41,8 @@ if (!empty($_POST['category'])) {
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
+if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('untitled_tv');
+
 /* invoke OnBeforeTVFormSave event */
 $modx->invokeEvent('OnBeforeTVFormSave',array(
     'mode' => 'upd',
@@ -47,14 +51,11 @@ $modx->invokeEvent('OnBeforeTVFormSave',array(
 ));
 
 /* check to make sure name doesn't already exist */
-$name_exists = $modx->getObject('modTemplateVar',array(
+$nameExists = $modx->getObject('modTemplateVar',array(
     'id:!=' => $tv->get('id'),
-    'name' => $_POST['name']
+    'name' => $_POST['name'],
 ));
-if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name'));
-
-if (!isset($_POST['name']) || $_POST['name'] == '') $_POST['name'] = $modx->lexicon('untitled_tv');
-if ($_POST['caption'] == '') $_POST['caption'] = $_POST['name'];
+if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name'));
 
 
 /* get rid of invalid chars */
