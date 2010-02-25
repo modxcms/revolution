@@ -147,6 +147,8 @@ class modManagerRequest extends modRequest {
         /* Load error handling class */
         $this->loadErrorHandler();
 
+        $this->modx->invokeEvent('OnHandleRequest');
+
         /* save page to manager object. allow custom actionVar choice for extending classes. */
         $this->action = isset($_REQUEST[$this->actionVar]) ? $_REQUEST[$this->actionVar] : $this->defaultAction;
 
