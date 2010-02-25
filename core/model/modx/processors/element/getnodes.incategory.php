@@ -12,7 +12,7 @@ $elementClassKey = $ar_typemap[$elementIdentifier];
 /* first handle subcategories */
 $c = $modx->newQuery('modCategory');
 $c->select('modCategory.*,
-    COUNT(`'.$elementClassKey.'`.`id`) AS elementCount
+    COUNT(`'.$elementClassKey.'`.`id`) AS `elementCount`
 ');
 $c->leftJoin($elementClassKey,$elementClassKey,'`'.$elementClassKey.'`.`category` = `modCategory`.`id`');
 $c->where(array(
@@ -57,14 +57,14 @@ foreach ($categories as $category) {
     if ($category->get('elementCount') <= 0) continue;
 
     array_unshift($categoryMenu,array(
-        'text' => '<b>'.$category->get('category').'</b>',
+        'text' => '<b>'.strip_tags($category->get('category')).'</b>',
         'params' => '',
         'handler' => 'function() { return false; }',
         'header' => true,
     ));
 
     $nodes[] = array(
-        'text' => $category->get('category') . ' (' . $category->get('id') . ')',
+        'text' => strip_tags($category->get('category')) . ' (' . $category->get('id') . ')',
         'id' => 'n_'.$g[0].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
         'pk' => $category->get('id'),
         'category' => $category->get('id'),
@@ -92,7 +92,7 @@ foreach ($elements as $element) {
 
     $menu = array();
     $menu[] = array(
-        'text' => '<b>'.$name.'</b>',
+        'text' => '<b>'.strip_tags($name).'</b>',
         'params' => '',
         'handler' => 'function() { return false; }',
         'header' => true,
@@ -146,7 +146,7 @@ foreach ($elements as $element) {
     }
 
     $nodes[] = array(
-        'text' => $name . ' (' . $element->get('id') . ')',
+        'text' => strip_tags($name) . ' (' . $element->get('id') . ')',
         'id' => 'n_'.$elementIdentifier.'_element_'.$element->get('id').'_'.$element->get('category'),
         'pk' => $element->get('id'),
         'category' => $cat_id,

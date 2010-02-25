@@ -196,7 +196,7 @@ while ($item) {
                 'pk' => $item->get('key'),
                 'leaf' => false,
                 'cls' => $class,
-                'qtip' => $item->get('description') != '' ? $item->get('description') : '',
+                'qtip' => $item->get('description') != '' ? strip_tags($item->get('description')) : '',
                 'type' => 'context',
                 'page' => empty($_REQUEST['nohref']) ? '?a='.$actions['context/update'].'&key='.$item->get('key') : '',
                 'menu' => $noMenu ? array() : array('items' => $menu),
@@ -204,7 +204,7 @@ while ($item) {
         } else {
             $menu = array();
             $menu[] = array(
-                'text' => '<b>'.$item->pagetitle.'</b> <i>('.$item->id.')</i>',
+                'text' => '<b>'.strip_tags($item->pagetitle).'</b> <i>('.$item->id.')</i>',
                 'params' => '',
                 'handler' => 'function() { return false; }',
                 'header' => true,
@@ -388,10 +388,10 @@ while ($item) {
 
             $qtip = '';
             if ($item->longtitle != '') {
-                $qtip = '<b>'.$item->longtitle.'</b><br />';
+                $qtip = '<b>'.strip_tags($item->longtitle).'</b><br />';
             }
             if ($item->description != '') {
-                $qtip = '<i>'.$item->description.'</i>';
+                $qtip = '<i>'.strip_tags($item->description).'</i>';
             }
 
             $locked = $item->getLock();
@@ -405,7 +405,7 @@ while ($item) {
 
             $hasChildren = $item->hasChildren() ? false : true;
             $itemArray = array(
-                'text' => $item->pagetitle.' ('.$item->id.')',
+                'text' => strip_tags($item->pagetitle).' ('.$item->id.')',
                 'id' => $item->context_key . '_'.$item->id,
                 'pk' => $item->id,
                 'cls' => $class,

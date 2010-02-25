@@ -20,8 +20,8 @@ if (!empty($g[1])) {
 }
 
 $c->select('
-    modCategory.*,
-    COUNT(Children.id) AS childrenCount
+    `modCategory`.*,
+    COUNT(`Children`.`id`) AS `childrenCount`
 ');
 $c->leftJoin('modCategory','Children');
 $c->groupby('modCategory.id');
@@ -60,7 +60,7 @@ if ($modx->hasPermission('delete_category')) {
 $categories = $modx->getCollection('modCategory',$c);
 foreach ($categories as $category) {
     $nodes[] = array(
-        'text' => $category->get('category') . ' (' . $category->get('id') . ')',
+        'text' => strip_tags($category->get('category')) . ' (' . $category->get('id') . ')',
         'id' => 'n_category_'.$category->get('id'),
         'pk' => $category->get('id'),
         'data' => $category->toArray(),

@@ -8,9 +8,10 @@ $elementClassKey = $ar_typemap[$g[1]];
 
 /* get elements in this type */
 $c = $modx->newQuery('modCategory');
-$c->select('modCategory.*,
-    COUNT(`'.$elementClassKey.'`.`id`) AS elementCount,
-    COUNT(`Children`.`id`) AS childrenCount
+$c->select('
+    `modCategory`.*,
+    COUNT(`'.$elementClassKey.'`.`id`) AS `elementCount`,
+    COUNT(`Children`.`id`) AS `childrenCount`
 ');
 $c->leftJoin($elementClassKey,$elementClassKey,'`'.$elementClassKey.'`.`category` = `modCategory`.`id`');
 $c->leftJoin('modCategory','Children');
@@ -58,13 +59,13 @@ foreach ($categories as $category) {
     }
 
     array_unshift($categoryMenu,array(
-        'text' => '<b>'.$category->get('category').'</b>',
+        'text' => '<b>'.strip_tags($category->get('category')).'</b>',
         'params' => '',
         'handler' => 'function() { return false; }',
         'header' => true,
     ));
     $nodes[] = array(
-        'text' => $category->get('category') . ' (' . $category->get('id') . ')',
+        'text' => strip_tags($category->get('category')) . ' (' . $category->get('id') . ')',
         'id' => 'n_'.$g[1].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
         'pk' => $category->get('id'),
         'category' => $category->get('id'),
@@ -96,7 +97,7 @@ foreach ($elements as $element) {
 
     $menu = array();
     $menu[] = array(
-        'text' => '<b>'.$name.'</b>',
+        'text' => '<b>'.strip_tags($name).'</b>',
         'params' => '',
         'handler' => 'function() { return false; }',
         'header' => true,
@@ -149,7 +150,7 @@ foreach ($elements as $element) {
     }
 
     $nodes[] = array(
-        'text' => $name . ' (' . $element->get('id') . ')',
+        'text' => strip_tags($name) . ' (' . $element->get('id') . ')',
         'id' => 'n_'.$g[1].'_element_'.$element->get('id').'_0',
         'pk' => $element->get('id'),
         'category' => 0,
@@ -159,7 +160,7 @@ foreach ($elements as $element) {
         'page' => '?a='.$ar_actionmap[$g[1]].'&id='.$element->get('id'),
         'type' => $g[1],
         'classKey' => $elementClassKey,
-        'qtip' => $element->get('description'),
+        'qtip' => strip_tags($element->get('description')),
         'menu' => array(
             'items' => $menu,
         ),

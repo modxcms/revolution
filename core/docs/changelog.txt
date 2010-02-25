@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1706] Ensure that text and qtip fields in Resource/Element trees have any tags stripped
 - [#MODX-1699] Fixed bug in Quick Edit TV where it would erase the caption and replace it with the name
 - [#MODX-1704] Fixed erroneous if statement in clear button hiding in error log panel
 - [#MODX-1675] Added fix for windows paths on Edit File panel
