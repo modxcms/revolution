@@ -27,29 +27,38 @@ if ($menus == null) {
 $output = '';
 $order = 0;
 foreach ($menus as $menu) {
+    $childrenCt = 0;
+
     if (!empty($menu['permissions'])) {
         $permissions = array();
         $exploded = explode(',', $menu['permissions']);
         foreach ($exploded as $permission) $permissions[trim($permission)]= true;
         if (!empty($permissions) && !$modx->hasPermission($permissions)) continue;
     }
-    $output .= '<li id="limenu-'.$menu['text'].'" class="top'.'">'."\n";
-    if (!empty($menu['action'])) {
-        $output .= '<a href="?a='.$menu['action'].$menu['params'].'">'.$menu['text'].'</a>'."\n";
+
+    $menuTpl = '<li id="limenu-'.$menu['text'].'" class="top'.'">'."\n";
+    if (!empty($menu['handler'])) {
+        $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].'</a>'."\n";
+    } else if (!empty($menu['action'])) {
+        $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'">'.$menu['text'].'</a>'."\n";
     } else {
-        $output .= '<a>'.$menu['text'].'</a>'."\n";
+        $menuTpl .= '<a>'.$menu['text'].'</a>'."\n";
     }
 
     if (!empty($menu['children'])) {
-        $output .= '<ul class="modx-subnav">'."\n";
-        _modProcessMenus($output,$menu['children']);
-        $output .= '</ul>'."\n";
+        $menuTpl .= '<ul class="modx-subnav">'."\n";
+        _modProcessMenus($modx,$menuTpl,$menu['children'],$childrenCt);
+        $menuTpl .= '</ul>'."\n";
     }
-    $output .= '</li>'."\n";
+    $menuTpl .= '</li>'."\n";
+
+    /* if has no permissable children, and is not clickable, hide top menu item */
+    if (!empty($childrenCt) && empty($menu['action']) && empty($menu['handler'])) {
+        $output .= $menuTpl;
+    }
     $order++;
 }
-function _modProcessMenus(&$output,$menus) {
-    global $modx;
+function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt) {
     foreach ($menus as $menu) {
         if (!empty($menu['permissions'])) {
             $permissions = array();
@@ -57,23 +66,25 @@ function _modProcessMenus(&$output,$menus) {
             foreach ($exploded as $permission) $permissions[trim($permission)]= true;
             if (!empty($permissions) && !$modx->hasPermission($permissions)) continue;
         }
-        $output .= '<li>'."\n";
+        $smTpl = '<li>'."\n";
 
         $description = !empty($menu['description']) ? '<span class="description">'.$menu['description'].'</span>'."\n" : '';
 
         if (!empty($menu['handler'])) {
-            $output .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].$description.'</a>'."\n";
+            $smTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].$description.'</a>'."\n";
         } else {
             $url = '?a='.$menu['action'].$menu['params'];
-            $output .= '<a href="'.$url.'">'.$menu['text'].$description.'</a>'."\n";
+            $smTpl .= '<a href="'.$url.'">'.$menu['text'].$description.'</a>'."\n";
         }
 
         if (!empty($menu['children'])) {
-            $output .= '<ul class="modx-subsubnav">'."\n";
-            _modProcessMenus($output,$menu['children']);
-            $output .= '</ul>'."\n";
+            $smTpl .= '<ul class="modx-subsubnav">'."\n";
+            _modProcessMenus($modx,$smTpl,$menu['children'],$childrenCt);
+            $smTpl .= '</ul>'."\n";
         }
-        $output .= '</li>';
+        $smTpl .= '</li>';
+        $output .= $smTpl;
+        $childrenCt++;
     }
 }
 $modx->smarty->assign('navb',$output);

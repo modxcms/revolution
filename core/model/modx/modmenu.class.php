@@ -63,7 +63,11 @@ class modMenu extends modAccessibleObject {
         $this->xpdo->lexicon->load('menu','topmenu');
 
         $c = $this->xpdo->newQuery('modMenu');
-        $c->select('modMenu.*,Action.controller AS controller,Action.namespace');
+        $c->select('
+            `modMenu`.*,
+            `Action`.`controller` AS `controller`,
+            `Action`.`namespace` AS `namespace`
+        ');
         $c->leftJoin('modAction','Action');
         $c->where(array(
             'modMenu.parent' => $start,

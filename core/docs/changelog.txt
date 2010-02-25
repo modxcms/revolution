@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Hide top menu items if there are no submenus and if the topmenu is not clickable
 - [#MODX-1690] Fixed text for confirmation dialog when removing an Element to include name and type of Element
 - [#MODX-1707] Added mail_charset and mail_encoding system settings to control charset and encoding in emails
 - [#MODX-1706] Ensure that text and qtip fields in Resource/Element trees have any tags stripped
