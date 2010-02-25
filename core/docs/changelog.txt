@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1675] Added fix for windows paths on Edit File panel
 - [#MODX-1681] Added checks for issue with importing lexicon in Webkit-based browsers
 - Cleanups to TV input widths
 - Removing core RTE; too much work, may take back up in a later version
