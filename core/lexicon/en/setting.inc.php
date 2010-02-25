@@ -182,6 +182,12 @@ $_lang['setting_friendly_urls'] = 'Use Friendly URLs';
 $_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODx. Please note, this only works for MODx installations running on Apache, and you\'ll need to write a .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
 $_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
 
+$_lang['setting_mail_charset'] = 'Mail Charset';
+$_lang['setting_mail_charset_desc'] = 'The (default) charset for e-mails, e.g. \'iso-8859-1\' or \'UTF-8\'';
+
+$_lang['setting_mail_encoding'] = 'Mail Encoding';
+$_lang['setting_mail_encoding_desc'] = 'Sets the Encoding of the message. Options for this are "8bit", "7bit", "binary", "base64", and "quoted-printable".';
+
 $_lang['setting_mail_use_smtp'] = 'Use SMTP';
 $_lang['setting_mail_use_smtp_desc'] = 'If true, MODx will attempt to use SMTP in mail functions.';
 

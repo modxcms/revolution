@@ -125,6 +125,8 @@ abstract class modMail {
             $this->attributes[modMail::MAIL_SMTP_TIMEOUT] = $this->modx->getOption('mail_smtp_timeout',null,10);
             $this->attributes[modMail::MAIL_SMTP_USER] = $this->modx->getOption('mail_smtp_user',null,'');
         }
+        $this->attributes[modMail::MAIL_CHARSET] = $this->modx->getOption('mail_charset',null,'UTF-8');
+        $this->attributes[modMail::MAIL_ENCODING] = $this->modx->getOption('mail_encoding',null,'8bit');
     }
 
     /**

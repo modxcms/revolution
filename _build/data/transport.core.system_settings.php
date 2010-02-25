@@ -213,6 +213,15 @@ $settings['container_suffix']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['cultureKey']= $xpdo->newObject('modSystemSetting');
+$settings['cultureKey']->fromArray(array (
+  'key' => 'cultureKey',
+  'value' => 'en',
+  'xtype' => 'modx-combo-language',
+  'namespace' => 'core',
+  'area' => 'language',
+  'editedon' => null,
+), '', true, true);
 $settings['default_template']= $xpdo->newObject('modSystemSetting');
 $settings['default_template']->fromArray(array (
   'key' => 'default_template',
@@ -330,13 +339,22 @@ $settings['friendly_urls']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
-$settings['cultureKey']= $xpdo->newObject('modSystemSetting');
-$settings['cultureKey']->fromArray(array (
-  'key' => 'cultureKey',
-  'value' => 'en',
-  'xtype' => 'modx-combo-language',
+$settings['mail_charset']= $xpdo->newObject('modSystemSetting');
+$settings['mail_charset']->fromArray(array (
+  'key' => 'mail_charset',
+  'value' => 'UTF-8',
+  'xtype' => 'modx-combo-charset',
   'namespace' => 'core',
-  'area' => 'language',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
+$settings['mail_encoding']= $xpdo->newObject('modSystemSetting');
+$settings['mail_encoding']->fromArray(array (
+  'key' => 'mail_encoding',
+  'value' => '8bit',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
   'editedon' => null,
 ), '', true, true);
 $settings['mail_use_smtp']= $xpdo->newObject('modSystemSetting');
