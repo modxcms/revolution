@@ -18,25 +18,7 @@ MODx.page.CreateStatic = function(config) {
             ,edit: MODx.action['resource/staticresource/update']
             ,cancel: MODx.action['welcome']
         }
-        ,buttons: [{
-            process: 'create'
-            ,text: _('save')
-            ,method: 'remote'
-            ,checkDirty: true
-            ,javascript: config.which_editor != 'none' ? "cleanupRTE('"+config.which_editor+"');" : ';'
-            ,keys: [{
-                key: 's'
-                ,alt: true
-                ,ctrl: true
-            }]
-        },{
-            process: 'cancel'
-            ,text: _('cancel')
-            ,params: { a: MODx.action['welcome'] }
-        },'-',{
-            text: _('help_ex')
-            ,handler: MODx.loadHelpPane
-        }]
+        ,buttons: this.getButtons(config)
         ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-static'
@@ -55,5 +37,34 @@ MODx.page.CreateStatic = function(config) {
     });
     MODx.page.CreateStatic.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.page.CreateStatic,MODx.Component);
+Ext.extend(MODx.page.CreateStatic,MODx.Component,{
+    getButtons: function(cfg) {
+        var btns = [];
+        if (cfg.canSave == 1) {
+            btns.push({
+                process: 'create'
+                ,text: _('save')
+                ,method: 'remote'
+                ,checkDirty: true
+                ,keys: [{
+                    key: 's'
+                    ,alt: true
+                    ,ctrl: true
+                }]
+            });
+            btns.push('-');
+        }
+        btns.push({
+            process: 'cancel'
+            ,text: _('cancel')
+            ,params: { a: MODx.action['welcome'] }
+        });
+        btns.push('-');
+        btns.push({
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        });
+        return btns;
+    }
+});
 Ext.reg('modx-page-static-create',MODx.page.CreateStatic);

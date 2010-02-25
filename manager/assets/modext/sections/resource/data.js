@@ -8,6 +8,28 @@
  */
 MODx.page.ResourceData = function(config) {
 	config = config || {};
+    var btns = [];
+    if (config.canEdit == 1) {
+        btns.push({
+            process: 'edit'
+            ,text: _('edit')
+            ,params: { a: MODx.action['resource/update'], id: config.id }
+            ,hidden: config.canEdit == 1 ? false : true
+        });
+        btns.push('-');
+    }
+    btns.push({
+        process: 'preview'
+        ,text: _('preview')
+        ,handler: this.preview.createDelegate(this,[config.id])
+        ,scope: this
+    });
+    btns.push('-');
+    btns.push({
+        process: 'cancel'
+        ,text: _('cancel')
+        ,params: { a: MODx.action['welcome'] }
+    });
 	Ext.applyIf(config,{
 		form: 'modx-resource-data'
 		,actions: {
@@ -15,20 +37,7 @@ MODx.page.ResourceData = function(config) {
             ,edit: MODx.action['resource/update']
             ,cancel: MODx.action['welcome']
         }
-        ,buttons: [{
-            process: 'edit'
-            ,text: _('edit')
-            ,params: { a: MODx.action['resource/update'], id: config.id }
-        },'-',{
-            process: 'preview'
-            ,text: _('preview')
-            ,handler: this.preview.createDelegate(this,[config.id])
-            ,scope: this
-        },'-',{
-            process: 'cancel'
-            ,text: _('cancel')
-            ,params: { a: MODx.action['welcome'] }
-        }]
+        ,buttons: btns
         ,components: [{
             xtype: 'modx-panel-resource-data'
             ,renderTo: 'modx-panel-resource-data-div'

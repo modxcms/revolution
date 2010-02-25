@@ -101,6 +101,7 @@ Ext.onReady(function() {
         ,edit_doc_metatags: "'.$edit_doc_metatags.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
+        ,canSave: "'.($modx->hasPermission('save_document') ? 1 : 0).'"
     });
 });
 // ]]>

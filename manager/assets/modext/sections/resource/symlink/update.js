@@ -34,40 +34,7 @@ MODx.page.UpdateSymLink = function(config) {
             ,access_permissions: config.access_permissions
         }]
     	,loadStay: true
-        ,buttons: [{
-            process: 'update'
-            ,javascript: config.which_editor != 'none' ? "cleanupRTE('"+config.which_editor+"');" : ';'
-            ,text: _('save')
-            ,method: 'remote'
-            ,checkDirty: true
-            ,keys: [{
-                key: 's'
-                ,alt: true
-                ,ctrl: true
-            }]
-        }
-        ,'-'
-        ,{
-            process: 'duplicate'
-            ,text: _('duplicate')
-            ,handler: this.duplicate
-            ,scope:this
-        }
-        ,'-'
-        ,{
-            process: 'preview'
-            ,text: _('preview')
-            ,handler: this.preview
-            ,scope: this
-        },'-',{
-            process: 'cancel'
-            ,text: _('cancel')
-            ,handler: this.cancel
-            ,scope: this
-        },'-',{
-            text: _('help_ex')
-            ,handler: MODx.loadHelpPane
-        }]
+        ,buttons: this.getButtons(config)
     });
     MODx.page.UpdateSymLink.superclass.constructor.call(this,config);
 };
@@ -106,6 +73,52 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
         } else {
             MODx.releaseLock(MODx.request.id);
         };
+    }
+    
+    ,getButtons: function(cfg) {
+        var btns = [];
+        if (cfg.canSave == 1) {
+            btns.push({
+                process: 'update'
+                ,text: _('save')
+                ,method: 'remote'
+                ,checkDirty: true
+                ,keys: [{
+                    key: 's'
+                    ,alt: true
+                    ,ctrl: true
+                }]
+            });
+            btns.push('-');
+        }
+        if (cfg.canCreate == 1) {
+            btns.push({
+                process: 'duplicate'
+                ,text: _('duplicate')
+                ,handler: this.duplicate
+                ,scope:this
+            });
+            btns.push('-');
+        }
+        btns.push({
+            process: 'preview'
+            ,text: _('preview')
+            ,handler: this.preview
+            ,scope: this
+        });
+        btns.push('-');
+        btns.push({
+            process: 'cancel'
+            ,text: _('cancel')
+            ,handler: this.cancel
+            ,scope: this
+        });
+        btns.push('-');
+        btns.push({
+            text: _('help_ex')
+            ,handler: MODx.loadHelpPane
+        });
+        return btns;
     }
 });
 Ext.reg('modx-page-symlink-update',MODx.page.UpdateSymLink);

@@ -66,6 +66,7 @@ Ext.onReady(function() {
         ,context_key: "'.$resource->get('context_key').'"
         ,class_key: "'.$resource->get('class_key').'"
         ,pagetitle: "'.$resource->get('pagetitle').'"
+        ,canEdit: "'.($modx->hasPermission('edit_document') ? 1 : 0).'"
     });
 });
 // ]]>
