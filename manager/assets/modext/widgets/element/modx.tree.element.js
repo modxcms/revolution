@@ -98,7 +98,10 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 		var oar = id.split('_');
 		MODx.msg.confirm({
 			title: _('warning')
-			,text: _('remove_this_confirm')+' '+oar[0]+'?'
+			,text: _('remove_this_confirm',{
+                type: oar[0]
+                ,name: this.cm.activeNode.attributes.name
+            })
 			,url: MODx.config.connectors_url+'element/'+oar[0]+'.php'
 			,params: {
 				action: 'remove'
