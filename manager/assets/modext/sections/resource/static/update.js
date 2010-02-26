@@ -79,7 +79,6 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
         if (cfg.canSave == 1) {
             btns.push({
                 process: 'update'
-                ,javascript: config.which_editor != 'none' ? "cleanupRTE('"+config.which_editor+"');" : ';'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: true
