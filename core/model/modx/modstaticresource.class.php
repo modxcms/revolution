@@ -36,17 +36,22 @@ class modStaticResource extends modResource {
     public function getSourceFile(array $options = array()) {
         if (empty($this->_sourceFile)) {
             $filename = parent :: getContent($options);
+            if (!empty($filename)) {
+                $array = array();
+
+                if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($filename, $array)) {
+                    $this->xpdo->parser->processElementTags('', $filename);
+                }
+            }
+
             if (!file_exists($filename)) {
                 $this->_sourcePath= $this->xpdo->getOption('resource_static_path', $options, $this->xpdo->getOption('base_path'));
+                if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($this->_sourcePath, $array)) {
+                    $this->xpdo->parser->processElementTags('', $this->_sourcePath);
+                }
                 $this->_sourceFile= $this->_sourcePath . $filename;
             } else {
                 $this->_sourceFile= $filename;
-            }
-            if (!empty($this->_sourceFile)) {
-                $array = array();
-                if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($this->_sourceFile, $array)) {
-                    $this->xpdo->parser->processElementTags('', $this->_sourceFile);
-                }
             }
         }
         return $this->_sourceFile;
