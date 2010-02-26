@@ -393,54 +393,6 @@ abstract class modInstallTest {
             $this->results['dbase_connection']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
             $this->results['dbase_connection']['class'] = 'testPassed';
         }
-        /* check the database collation if not specified in the configuration */
-        /*
-        if (!isset ($database_connection_charset) || empty ($database_connection_charset)) {
-            if (!$rs = @ mysql_query("show session variables like
-'collation_database'")) {
-                $rs = @ mysql_query("show session variables like
-'collation_server'");
-            }
-            if ($rs && $collation = mysql_fetch_row($rs)) {
-                $database_collation = $collation[1];
-            }
-            if (empty ($database_collation)) {
-                $database_collation = 'utf8_unicode_ci';
-            }
-            $database_charset = substr($database_collation, 0, strpos
-($database_collation, '_') - 1);
-            $database_connection_charset = $database_charset;
-        }
-        */
-
-        /* check table prefix */
-        if ($xpdo && $xpdo->connect()) {
-            $this->results['table_prefix']['msg'] = '<p>'.sprintf($this->install->lexicon['test_table_prefix'],$this->install->settings->get('table_prefix'));
-            $count = 0;
-            if ($stmt = $xpdo->query('SELECT COUNT(*) FROM `' . $this->install->settings->get('table_prefix') . 'system_settings`')) {
-                $count = $stmt->fetchColumn();
-                $stmt->closeCursor();
-            }
-            if ($this->mode == modInstall::MODE_NEW) { /* if new install */
-                if ($count > 0) {
-                    $this->results['table_prefix']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></b> - '.$this->install->lexicon['test_table_prefix_inuse'].'</p>';
-                    $this->results['table_prefix']['class'] = 'testFailed';
-                    $this->results['table_prefix']['msg'] .= '<p>'.$this->install->lexicon['test_table_prefix_inuse_desc'].'</p>';
-                } else {
-                    $this->results['table_prefix']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
-                    $this->results['table_prefix']['class'] = 'testPassed';
-                }
-            } else { /* if upgrade */
-                if ($count < 1) {
-                    $this->results['table_prefix']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></b> - '.$this->install->lexicon['test_table_prefix_nf'].'</p>';
-                    $this->results['table_prefix']['class'] = 'testFailed';
-                    $this->results['table_prefix']['msg'] .= '<p>'.$this->install->lexicon['test_table_prefix_nf_desc'].'</p>';
-                } else {
-                    $this->results['table_prefix']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
-                    $this->results['table_prefix']['class'] = 'testPassed';
-                }
-            }
-        }
     }
 
 
