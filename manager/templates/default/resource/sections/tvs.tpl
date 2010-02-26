@@ -23,6 +23,7 @@
         <td class="x-form-element modx-tv-td">
             <input type="hidden" id="tvdef{$tv->id}" value="{$tv->default_text|escape}" />
             {$tv->get('formElement')}  
+            <br class="clear" />
         </td>
         <td class="aleft modx-tv-td" style="width: 200px !important;">
             {if $tv->get('type') NEQ 'richtext'}
@@ -77,13 +78,14 @@ Ext.onReady(function() {
         xtype: 'modx-tabs'
         ,applyTo: 'modx-tv-tabs'
         ,activeTab: 0
-        //,autoHeight: true
         ,autoTabs: true
-        ,plain: true
-        ,anchor: '100%'
         ,border: false
+        ,hideMode: 'offsets'
+        ,autoScroll: true
         ,defaults: {
-            bodyStyle: 'padding: 5px;'            
+            bodyStyle: 'padding: 5px;'
+            ,autoScroll: true
+            ,autoHeight: true
         }
         ,deferredRender: false
     });
