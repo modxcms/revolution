@@ -122,6 +122,7 @@ Ext.onReady(function() {
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
         ,preview_url: "'.$url.'"
+        ,canSave: "'.($modx->hasPermission('save_document') ? 1 : 0).'"
         ,canEdit: "'.($modx->hasPermission('edit_document') ? 1 : 0).'"
         ,canCreate: "'.($modx->hasPermission('new_document') ? 1 : 0).'"
     });
