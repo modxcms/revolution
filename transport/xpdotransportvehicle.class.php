@@ -103,7 +103,7 @@ class xPDOTransportVehicle extends xPDOVehicle {
      */
     public function put(& $transport, & $object, $attributes = array ()) {
         if (!isset ($this->payload['class'])) {
-            $this->payload['class'] = 'xPDOFileVehicle';
+            $this->payload['class'] = 'xPDOTransportVehicle';
         }
         if (is_array($object) && isset ($object['source']) && isset ($object['target'])) {
             if (!isset($object['name'])) $object['name'] = basename($object['source']);
