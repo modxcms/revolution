@@ -2,6 +2,9 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- xPDOTransport: Fix several E_STRICT errors caused by static calls to methods not defined as static.
+- xPDOTransportVehicle: Implemented missing _compilePayload(), and fixed errors in _installTransport() and uninstall().
+- xPDOValidator: Fix several E_STRICT errors caused by inconsistent method signatures in xPDOValidationRule::isValid() derivatives.
 - Fixed bug in xPDOTransportVehicle::put() referring to xPDOFileVehicle.
 - xPDOManager_mysql::createSourceContainer() and removeSourceContainer() will use provided connection properties or default to current xPDO instance configuration.
 - Removed dependency on mysql extension for xPDOManager_mysql::createSourceContainer() and removeSourceContainer() implementations.

@@ -264,9 +264,6 @@ class xPDOTransport {
     /**
      * Pack the {@link xPDOTransport} instance in preparation for distribution.
      *
-     * @uses xpdo/cache/pclzip.lib.php
-     * @todo remove dependency on pclzip, making it optional when php zip
-     * extension is not available
      * @return boolean Indicates if the transport was packed successfully.
      */
     public function pack() {
@@ -281,10 +278,22 @@ class xPDOTransport {
             $path = substr($path, $pos +1);
         }
         $fileName = $path . $this->signature . '.transport.zip';
-        return $this->_pack($this->xpdo, $fileName, $path, $this->signature);
+        return xPDOTransport::_pack($this->xpdo, $fileName, $path, $this->signature);
     }
 
-    public function _pack(& $xpdo, $filename, $path, $source) {
+    /**
+     * Pack the resources from path relative to source into an archive with filename.
+     *
+     * @uses compression.xPDOZip OR compression.PclZip
+     * @todo Refactor this to be implemented in a service class external to xPDOTransport.
+     *
+     * @param xPDO &$xpdo A reference to an xPDO instance.
+     * @param string $filename A valid zip archive filename.
+     * @param string $path An absolute file system path location of the resources to pack.
+     * @param string $source A relative portion of path to include in the archive.
+     * @return boolean True if packed successfully.
+     */
+    public static function _pack(& $xpdo, $filename, $path, $source) {
         $packed = false;
         $packResults = false;
         $errors = array();
@@ -428,13 +437,13 @@ class xPDOTransport {
     /**
      * Get an existing {@link xPDOTransport} instance.
      */
-    public function retrieve(& $xpdo, $source, $target, $state= xPDOTransport::STATE_PACKED) {
+    public static function retrieve(& $xpdo, $source, $target, $state= xPDOTransport::STATE_PACKED) {
         $instance= null;
+        $signature = basename($source, '.transport.zip');
         if (file_exists($source)) {
             if (is_writable($target)) {
                 $manifest = xPDOTransport :: unpack($xpdo, $source, $target, $state);
                 if ($manifest) {
-                    $signature = basename($source, '.transport.zip');
                     $instance = new xPDOTransport($xpdo, $signature, $target);
                     if (!$instance) {
                         $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not instantiate a valid xPDOTransport object from the package {$source} to {$target}. SIG: {$signature} MANIFEST: " . print_r($manifest, 1));
@@ -471,31 +480,27 @@ class xPDOTransport {
     /**
      * Store the package to a specified resource location.
      *
+     * @todo Implement ability to store a package to a specified location, supporting various
+     * transport methods.
      * @param mixed $location The location to store the package.
      */
     public function store($location) {
         $stored= false;
-        if ($this->state === xPDOTransport::PACKED) {
-            //TODO: store the packed package to a specified location (support any resource context)
-        }
+        if ($this->state === xPDOTransport::PACKED) {}
         return $stored;
     }
 
     /**
      * Unpack the package to prepare for installation and return a manifest.
      *
-     * @uses xpdo/cache/pclzip.lib.php
-     * @todo remove dependency on pclzip, making it optional when php zip
-     * extension is not available
-     * @param xPDO $xpdo A reference to an xPDO instance.
-     * @param string $from Filename of the archive containing the transport
-     * package.
-     * @param string $to The root path where the contents of the archive should
-     * be extracted.  This path must be writable by the user executing the PHP
-     * process on the server.
+     * @param xPDO &$xpdo A reference to an xPDO instance.
+     * @param string $from Filename of the archive containing the transport package.
+     * @param string $to The root path where the contents of the archive should be extracted.  This
+     * path must be writable by the user executing the PHP process on the server.
+     * @param integer $state The current state of the package, i.e. packed or unpacked.
      * @return array The manifest which is included after successful extraction.
      */
-    public function unpack(& $xpdo, $from, $to, $state = xPDOTransport::STATE_PACKED) {
+    public static function unpack(& $xpdo, $from, $to, $state = xPDOTransport::STATE_PACKED) {
         $manifest= null;
         if ($state !== xPDOTransport::STATE_UNPACKED) {
             $resources = xPDOTransport::_unpack($xpdo, $from, $to);
@@ -513,7 +518,18 @@ class xPDOTransport {
         return $manifest;
     }
 
-    protected function _unpack(& $xpdo, $from, $to) {
+    /**
+     * Unpack a zip archive to a specified location.
+     *
+     * @uses compression.xPDOZip OR compression.PclZip
+     * @todo Refactor this to be implemented in a service class external to xPDOTransport.
+     *
+     * @param xPDO &$xpdo A reference to an xPDO instance.
+     * @param string $from An absolute file system location to a valid zip archive.
+     * @param string $to A file system location to extract the contents of the archive to.
+     * @return array|boolean An array of unpacked resources or false on failure.
+     */
+    protected static function _unpack(& $xpdo, $from, $to) {
         $resources = false;
         if (class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
             $archive = new xPDOZip($xpdo, $from);
@@ -537,7 +553,7 @@ class xPDOTransport {
      * @param array $manifest A valid xPDOTransport manifest array.
      * @return string Version string of the manifest structure.
      */
-    public function manifestVersion($manifest) {
+    public static function manifestVersion($manifest) {
         $version = false;
         if (is_array($manifest)) {
             if (isset($manifest[xPDOTransport::MANIFEST_VERSION])) {
@@ -562,7 +578,7 @@ class xPDOTransport {
      * format.
      * @return array Vehicle definition structures converted to 1.0 format.
      */
-    protected function _convertManifestVer1_0($manifestVehicles) {
+    protected static function _convertManifestVer1_0($manifestVehicles) {
         $manifest = array();
         foreach ($manifestVehicles as $vClass => $vehicles) {
             foreach ($vehicles as $vKey => $vehicle) {
@@ -588,7 +604,7 @@ class xPDOTransport {
      * @param array $vehicles A structure representing vehicles from a pre-1.1 manifest format.
      * @return array Vehicle definition structures converted to 1.1 format.
      */
-    protected function _convertManifestVer1_1($vehicles) {
+    protected static function _convertManifestVer1_1($vehicles) {
         $manifest = array();
         foreach ($vehicles as $vKey => $vehicle) {
             $entry = $vehicle;

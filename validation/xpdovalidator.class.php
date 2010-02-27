@@ -51,7 +51,7 @@ class xPDOValidator {
      * @param array $parameters A collection of parameters.
      * @return boolean Either true or false indicating valid or invalid.
      */
-    public function validate($parameters = array()) {
+    public function validate(array $parameters = array()) {
         $validated= false;
         $this->reset();
         $stopOnFail= isset($parameters['stopOnFail']) && $parameters['stopOnFail']
@@ -196,6 +196,15 @@ class xPDOValidationRule {
     public $name = '';
     public $message = '';
 
+    /**
+     * Construct a new xPDOValidationRule instance.
+     *
+     * @param xPDOValidator &$validator A reference to the xPDOValidator executing this rule.
+     * @param mixed $field The field being validated.
+     * @param mixed $name The identifying name of the validation rule.
+     * @param string $message An optional message for rule failure.
+     * @return xPDOValidationRule The rule instance.
+     */
     public function __construct(& $validator, $field, $name, $message= '') {
         $this->validator = & $validator;
         $this->field = $field;
@@ -204,23 +213,26 @@ class xPDOValidationRule {
     }
 
     /**
-     * The public interface for executing a validation rule.
+     * The public method for executing a validation rule.
      *
-     * Extend this class to provide a reusable validation rule in your
-     * xPDOValidator instance.
+     * Extend this method to provide a reusable validation rule in your xPDOValidator instance.
      *
-     * @param mixed $field The field being validated.
-     * @param mixed $name The identifying name of the validation rule.
      * @param mixed $value The value of the field being validated.
      * @param array $options Any options expected by the rule.
+     * @return boolean True if the validation rule was passed, otherwise false.
      */
-    public function isValid($value, $options = array()) {
+    public function isValid($value, array $options = array()) {
         if (isset($options['message'])) {
             $this->setMessage($options['message']);
         }
         return true;
     }
 
+    /**
+     * Set the failure message for the rule.
+     *
+     * @param string $message A message intended to convey the reason for rule failure.
+     */
     public function setMessage($message= '') {
         if (!empty($message) && $message !== '0') {
             $this->message= $message;
@@ -229,7 +241,7 @@ class xPDOValidationRule {
 }
 
 class xPDOMinLengthValidationRule extends xPDOValidationRule {
-    public function isValid($value, $options) {
+    public function isValid($value, array $options = array()) {
         $result= parent :: isValid($value, $options);
         $minLength= isset($options['value']) ? intval($options['value']) : 0;
         $result= (is_string($value) && strlen($value) >= $minLength);
@@ -240,7 +252,7 @@ class xPDOMinLengthValidationRule extends xPDOValidationRule {
     }
 }
 class xPDOMaxLengthValidationRule extends xPDOValidationRule {
-    public function isValid($value, $options) {
+    public function isValid($value, array $options = array()) {
         $result= parent :: isValid($value, $options);
         $maxLength= isset($options['value']) ? intval($options['value']) : 0;
         $result= ($maxLength > 0 && is_string($value) && strlen($value) <= $maxLength);
@@ -250,7 +262,7 @@ class xPDOMaxLengthValidationRule extends xPDOValidationRule {
     }
 }
 class xPDOMinValueValidationRule extends xPDOValidationRule {
-    public function isValid($value, $options) {
+    public function isValid($value, array $options = array()) {
         $result= parent :: isValid($value, $options);
         $minValue= isset($options['value']) ? intval($options['value']) : 0;
         $result= ($value >= $minValue);
@@ -260,7 +272,7 @@ class xPDOMinValueValidationRule extends xPDOValidationRule {
     }
 }
 class xPDOMaxValueValidationRule extends xPDOValidationRule {
-    public function isValid($value, $options) {
+    public function isValid($value, array $options = array()) {
         $result= parent :: isValid($value, $options);
         $maxValue= isset($options['value']) ? intval($options['value']) : 0;
         $result= ($value <= $maxValue);
@@ -270,7 +282,7 @@ class xPDOMaxValueValidationRule extends xPDOValidationRule {
     }
 }
 class xPDOObjectExistsValidationRule extends xPDOValidationRule {
-    public function isValid($value, $options) {
+    public function isValid($value, array $options = array()) {
         if (!isset($options['pk']) || !isset($options['className'])) return false;
 
         $result= parent :: isValid($value, $options);
@@ -285,7 +297,7 @@ class xPDOObjectExistsValidationRule extends xPDOValidationRule {
     }
 }
 class xPDOForeignKeyConstraint extends xPDOValidationRule {
-    public function isValid($value, $options) {
+    public function isValid($value, array $options = array()) {
         if (!isset($options['alias'])) return false;
         parent :: isValid($value, $options);
         $result= false;
