@@ -367,7 +367,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 			}
 			,listeners: {
 				'success': {fn:function(r) {
-                    this.reloadNode(dropEvent.target.parentNode);
+                    dropEvent.target.parentNode.getUI().getTextEl().frame();
 				},scope:this}
 				,'failure': {fn:function(r) {
                     MODx.form.Handler.errorJSON(r);
