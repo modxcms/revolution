@@ -45,35 +45,36 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         if (node.attributes.menu) {
             this.addContextMenuItem(node.attributes.menu.items);
         }
-        this.uploader = new Ext.ux.UploadPanel({
-             contextmenu: this.cm
-            ,buttonsAt: 'tbar'
-            ,singleUpload: true
-            ,enableProgress: false
-            ,maxFileSize: 10485760
-            ,baseParams: {
-                action: 'upload'
-                ,prependPath: this.config.prependPath || null
-                ,prependUrl: this.config.prependUrl || null
-            }
-            ,hideOnClick:false
-            ,cmd:'upload-panel'
-        });
-        this.uploader.on({
-            beforeupload:{scope:this, fn:this.onBeforeUpload}
-            ,allfinished:{scope:this, fn:this.onAllFinished}
-        });
-        this.uploader.setUrl(MODx.config.connectors_url+'browser/file.php');
+        if (node.attributes.type == 'dir') {
+            this.uploader = new Ext.ux.UploadPanel({
+                 contextmenu: this.cm
+                ,buttonsAt: 'tbar'
+                ,singleUpload: true
+                ,enableProgress: false
+                ,maxFileSize: 10485760
+                ,baseParams: {
+                    action: 'upload'
+                    ,prependPath: this.config.prependPath || null
+                    ,prependUrl: this.config.prependUrl || null
+                }
+                ,hideOnClick:false
+                ,cmd:'upload-panel'
+            });
+            this.uploader.on({
+                beforeupload:{scope:this, fn:this.onBeforeUpload}
+                ,allfinished:{scope:this, fn:this.onAllFinished}
+            });
+            this.uploader.setUrl(MODx.config.connectors_url+'browser/file.php');
         
-        m.add('-');
-        m.add({
-            text: _('directory_refresh')
-            ,scope: this
-            ,handler: this.refreshActiveNode
-        });
-        m.add('-');
-        m.add(this.uploader);
-        
+            m.add('-');
+            m.add({
+                text: _('directory_refresh')
+                ,scope: this
+                ,handler: this.refreshActiveNode
+            });
+            m.add('-');
+            m.add(this.uploader);
+        }
         m.show(node.ui.getEl(),'t?');
         m.activeNode = node;
     }
