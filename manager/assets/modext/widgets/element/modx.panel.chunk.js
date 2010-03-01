@@ -96,19 +96,6 @@ MODx.panel.Chunk = function(config) {
                 ,width: '95%'
                 ,height: 400
                 ,value: ''
-            },{
-                xtype: 'modx-combo-rte'
-                ,fieldLabel: _('which_editor_title')
-                ,labelSeparator: ''
-                ,id: 'modx-chunk-which-editor'
-                ,editable: false
-                ,listWidth: 300
-                ,triggerAction: 'all'
-                ,allowBlank: true
-                ,value: (MODx.request.which_editor ? MODx.request.which_editor : MODx.config.which_editor)
-                ,listeners: {
-                    'select': {fn:this.changeEditor,scope:this}
-                }
             }]
         },{
             xtype: 'modx-panel-element-properties'
@@ -176,19 +163,7 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
             t.refreshNode(n,true);
         }
     }
-    
-    ,changeEditor: function() {
-        this.cleanupEditor();
-        this.on('success',function(o) {
-            var id = o.result.object.id;
-            var w = Ext.getCmp('modx-chunk-which-editor').getValue();
-            MODx.request.a = MODx.action['element/chunk/update'];
-            var u = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
-            location.href = u;
-        });
-        this.submit();
-    }
-    
+        
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-chunk-snippet');
