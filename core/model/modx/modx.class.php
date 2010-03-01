@@ -282,6 +282,21 @@ class modX extends xPDO {
     }
 
     /**
+     * Turn an associative array into a valid query string.
+     *
+     * @static
+     * @param array $parameters An associative array of parameters.
+     * @return string A valid query string representing the parameters.
+     */
+    public static function toQueryString(array $parameters = array()) {
+        $qs = array();
+        foreach ($parameters as $paramKey => $paramVal) {
+            $qs[] = urlencode($paramKey) . '=' . urlencode($paramVal);
+        }
+        return implode('&', $qs);
+    }
+
+    /**
      * Construct a new modX instance.
      *
      * @param string $configPath An absolute filesystem path to look for the config file.

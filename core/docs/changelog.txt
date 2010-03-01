@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added modRequest::getParameters() method for retrieving various GPC variables or arrays of variables; automatically strips MODx GET parameters as necessary
+- modRequest::__construct() now creates references to all GPC variables in modRequest::$parameters
+- Modified modX::makeUrl()/modContext::makeUrl() to accept query string parameters as an array or string
+- Added modX::toQueryString() static method to turn associative array into a valid query string
 - [#MODX-1709] Fixed issue with encoding of action button parameter
 - [#MODX-1554] Prevented uploading of files to files themselves in directory tree
 - [#MODX-1700] Fixed issue with text referencing setting in lexicon entry

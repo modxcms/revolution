@@ -38,6 +38,10 @@ class modRequest {
 
     function __construct(modX &$modx) {
         $this->modx = & $modx;
+        $this->parameters['GET'] =& $_GET;
+        $this->parameters['POST'] =& $_POST;
+        $this->parameters['COOKIE'] =& $_COOKIE;
+        $this->parameters['REQUEST'] =& $_REQUEST;
     }
 
     /**
@@ -451,6 +455,7 @@ class modRequest {
         }
         return $actionList;
     }
+
     public function getActionIDs(array $actions = array(), $namespace = 'core') {
         $as = array();
         foreach ($actions as $action) {
@@ -465,5 +470,48 @@ class modRequest {
             }
         }
         return $as;
+    }
+
+    /**
+     * Get a GPC/REQUEST variable value or an array of values from the request.
+     *
+     * @param string|array $keys A key or array of keys to retrieve from the GPC variable. An empty
+     * array means get all keys of the variable.
+     * @param string $type The type of GPC variable, GET by default (GET, POST, COOKIE or REQUEST).
+     */
+    public function getParameters($keys = array(), $type = 'GET') {
+        $value = null;
+        if (!is_string($type) || !in_array($type, array('GET', 'POST', 'COOKIE', 'REQUEST'))) {
+            $type = 'GET';
+        }
+        if (is_array($keys)) {
+            $value = array();
+            if (empty($keys) && isset($this->parameters[$type])) {
+                $keys = array_keys($this->parameters[$type]);
+            }
+        }
+        if (isset($this->parameters[$type])) {
+            $method = '';
+            $methodIdentifier = '';
+            if ($type == 'GET') {
+                $method = $this->getResourceMethod();
+                $methodIdentifier = $this->modx->getOption('request_param_' . $method, null, $method);
+            }
+            if (is_array($keys)) {
+                foreach ($keys as $key) {
+                    if ($type != 'GET' || $key != $methodIdentifier) {
+                        $keyValue = $this->getParameters($key, $type);
+                        if ($keyValue !== null) $value[$key] = $keyValue;
+                    }
+                }
+            } else {
+                if ($type != 'GET' || $keys != $methodIdentifier) {
+                    if (array_key_exists($keys, $this->parameters[$type])) {
+                        $value = $this->parameters[$type][$keys];
+                    }
+                }
+            }
+        }
+        return $value;
     }
 }

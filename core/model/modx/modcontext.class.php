@@ -162,6 +162,9 @@ class modContext extends modAccessibleObject {
             }
 
             if ($found) {
+                if (is_array($args)) {
+                    $args = modX::toQueryString($args);
+                }
                 if ($args != '' && $config['friendly_urls'] == 1) {
                     /* add ? to $args if missing */
                     $c= substr($args, 0, 1);
