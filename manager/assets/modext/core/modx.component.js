@@ -266,12 +266,11 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                        unless the user is on a 'Create' page...if so, then redirect
                        to the proper Edit page */
                     if ((itm.process === 'create' || itm.process === 'duplicate' || itm.reload) && res.object.id !== null) {
-                        itm.params.a = o.actions.edit;
                         itm.params.id = res.object.id;
                         if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
                         if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
                         var url = Ext.urlEncode(itm.params);
-                        location.href = '?'+url;
+                        location.href = '?'+o.actions.edit+'&'+url;
                         
                     } else if (itm.process === 'delete') {
                         itm.params.a = o.actions.cancel;

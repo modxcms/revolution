@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1709] Fixed issue with encoding of action button parameter
 - [#MODX-1554] Prevented uploading of files to files themselves in directory tree
 - [#MODX-1700] Fixed issue with text referencing setting in lexicon entry
 - Ensure tags in a Static Resource content are parsed before trying to load the source path
