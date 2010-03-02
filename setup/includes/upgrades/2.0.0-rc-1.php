@@ -71,3 +71,10 @@ $table = $this->install->xpdo->getTableName($class);
 $description = sprintf($this->install->lexicon['add_column'],'permissions',$table);
 $sql = "ALTER TABLE {$table} ADD `permissions` TEXT NOT NULL DEFAULT ''";
 $this->processResults($class,$description,$sql);
+
+/* add website field to modUserProfile */
+$class = 'modUserProfile';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['add_column'],'website',$table);
+$sql = "ALTER TABLE {$table} ADD `website` VARCHAR(255) NOT NULL DEFAULT ''";
+$this->processResults($class,$description,$sql);

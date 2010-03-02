@@ -32,6 +32,7 @@ $xpdo_meta_map['modUserProfile']= array (
     'fax' => '',
     'photo' => '',
     'comment' => '',
+    'website' => '',
   ),
   'fieldMeta' => 
   array (
@@ -221,6 +222,14 @@ $xpdo_meta_map['modUserProfile']= array (
       'default' => '',
     ),
     'comment' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'website' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '255',

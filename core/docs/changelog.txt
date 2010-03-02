@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added website field to modUserProfile
 - Removed unnecessary and problematic editor dropdown in chunk editing screen
 - Sped up drag/drop of reordering in tree by now only framing moved nodes instead of refreshing
 - Added modRequest::getParameters() method for retrieving various GPC variables or arrays of variables; automatically strips MODx GET parameters as necessary
