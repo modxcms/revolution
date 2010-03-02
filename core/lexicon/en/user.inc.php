@@ -156,6 +156,7 @@ $_lang['user_update'] = 'Update User';
 $_lang['user_updated_password_message'] = 'The User has been updated. The password is: [[+password]]';
 $_lang['user_upload_message'] = ' If you wish to stop this user uploading any filetypes in this category, make sure that the \'Use Main Configuration Setting\' checkbox is not ticked and leave the field blank.';
 $_lang['user_use_config'] = 'Use System Configuration Setting';
+$_lang['user_website'] = 'Website';
 $_lang['user_zip'] = 'Zip';
 $_lang['username'] = 'Username';
 $_lang['users'] = 'Users';

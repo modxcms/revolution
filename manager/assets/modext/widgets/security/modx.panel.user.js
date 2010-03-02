@@ -274,6 +274,13 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'modx-combo-country'
                     ,value: ''
                 },{
+                    id: 'modx-user-website'
+                    ,name: 'website'
+                    ,fieldLabel: _('user_website')
+                    ,xtype: 'textfield'
+                    ,width: 300
+                    ,maxLength: 255
+                },{
                     id: 'modx-user-dob'
                     ,name: 'dob'
                     ,fieldLabel: _('user_dob')
