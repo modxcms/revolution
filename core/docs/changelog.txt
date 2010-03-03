@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added in CSS tweaks to accommodate Opera 10.5
 - Fixed bug with users grid if access permissions tab is removed
 - Fixed deprecated method definitions in modConnector classes 
 - Fixed text in language settings to more accurately reflect function
