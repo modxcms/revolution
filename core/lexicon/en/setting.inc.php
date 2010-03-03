@@ -138,6 +138,9 @@ $_lang['setting_compress_js_desc'] = 'When this is enabled, MODx will use a comp
 $_lang['setting_container_suffix'] = 'Container Suffix';
 $_lang['setting_container_suffix_desc'] = 'The suffix to append to Resources set as containers when using FURLs.';
 
+$_lang['setting_cultureKey'] = 'Language';
+$_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
+
 $_lang['setting_default_template'] = 'Default Template';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
 
@@ -231,7 +234,7 @@ $_lang['setting_manager_date_format_desc'] = 'The format string, in PHP date() f
 $_lang['setting_manager_lang_attribute'] = 'Manager HTML and XML Language Attribute';
 $_lang['setting_manager_lang_attribute_desc'] = 'Enter the language code that best fits with your chosen manager language, this will ensure that the browser can present content in the best format for you.';
 
-$_lang['setting_manager_language'] = 'Language';
+$_lang['setting_manager_language'] = 'Manager Language';
 $_lang['setting_manager_language_desc'] = 'Select the language for the MODx Content Manager.';
 
 $_lang['setting_manager_login_start'] = 'Manager Login Startup';
