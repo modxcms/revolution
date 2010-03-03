@@ -23,6 +23,7 @@ $sort = $modx->getOption('sort',$_REQUEST,'key');
 $dir = $modx->getOption('dir',$_REQUEST,'ASC');
 $key = $modx->getOption('key',$_REQUEST,'');
 $namespace = $modx->getOption('namespace',$_REQUEST,'');
+$area = $modx->getOption('area',$_REQUEST,'');
 
 /* build query */
 $c = $modx->newQuery('modSystemSetting');
@@ -45,6 +46,9 @@ if (!empty($key)) {
 
 if (!empty($namespace)) {
     $c->where(array('namespace' => $namespace));
+}
+if (!empty($area)) {
+    $c->where(array('area' => $area));
 }
 $count = $modx->getCount('modSystemSetting',$c);
 

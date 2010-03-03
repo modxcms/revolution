@@ -17,6 +17,15 @@ MODx.grid.SettingsGrid = function(config) {
         }];
     }
     config.tbar.push('->',{
+        xtype: 'modx-combo-area'
+        ,name: 'area'
+        ,id: 'modx-filter-area'
+        ,emptyText: _('area_filter')
+        ,allowBlank: true
+        ,listeners: {
+            'select': {fn: this.filterByArea, scope:this}
+        }
+    },{
         xtype: 'modx-combo-namespace'
         ,name: 'namespace'
         ,id: 'modx-filter-namespace'
@@ -134,6 +143,11 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     		action: 'getList'
     	};
         Ext.getCmp('modx-filter-namespace').reset();
+        var acb = Ext.getCmp('modx-filter-area');
+        if (acb) {
+            acb.store.baseParams['namespace'] = '';
+            acb.reset();
+        }
         Ext.getCmp('modx-filter-key').reset();
     	this.getBottomToolbar().changePage(1);
     	this.refresh();
@@ -149,6 +163,22 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     
     ,filterByNamespace: function(cb,rec,ri) {
         this.getStore().baseParams['namespace'] = rec.data['name'];
+        this.getStore().baseParams['area'] = '';
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        
+        var acb = Ext.getCmp('modx-filter-area');
+        if (acb) {
+            var s = acb.store;
+            s.baseParams['namespace'] = rec.data.name;
+            s.removeAll();
+            s.reload();
+            acb.setValue('');
+        }        
+    }
+    
+    ,filterByArea: function(cb,rec,ri) {
+        this.getStore().baseParams['area'] = rec.data['v'];
         this.getBottomToolbar().changePage(1);
         this.refresh();
     }
@@ -385,3 +415,23 @@ MODx.window.UpdateSetting = function(config) {
 };
 Ext.extend(MODx.window.UpdateSetting,MODx.Window);
 Ext.reg('modx-window-setting-update',MODx.window.UpdateSetting);
+
+
+
+MODx.combo.Area = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'area'
+        ,hiddenName: 'area'
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,fields: ['d','v']
+        ,url: MODx.config.connectors_url+'system/settings.php'
+        ,baseParams: {
+            action: 'getAreas'
+        }
+    });
+    MODx.combo.Area.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.Area,MODx.combo.ComboBox);
+Ext.reg('modx-combo-area',MODx.combo.Area);

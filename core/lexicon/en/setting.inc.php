@@ -11,6 +11,7 @@ $_lang['area_authentication'] = 'Authentication and Security';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_editor'] = 'Rich-Text Editor';
 $_lang['area_file'] = 'File System';
+$_lang['area_filter'] = 'Filter by area...';
 $_lang['area_furls'] = 'Friendly URL';
 $_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = 'Lexicon and Language';
