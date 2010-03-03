@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added events to user's groups grid to ensure dirty firing
+- Added MODx.FormPanel::markDirty
 - Added in CSS tweaks to accommodate Opera 10.5
 - Fixed bug with users grid if access permissions tab is removed
 - Fixed deprecated method definitions in modConnector classes 

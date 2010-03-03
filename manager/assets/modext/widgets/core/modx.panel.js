@@ -137,6 +137,10 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         });
     }
     
+    ,markDirty: function() {
+        this.fireEvent('fieldChange');
+    }
+    
     ,isDirty: function() {
         var f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
     	return f.isDirty();

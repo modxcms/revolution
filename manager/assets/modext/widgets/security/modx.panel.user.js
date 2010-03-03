@@ -386,6 +386,11 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,preventRender: true
                 ,user: config.user
                 ,width: '97%'
+                ,listeners: {
+                    'afterRemoveRow':{fn:this.markDirty,scope:this}
+                    ,'afterUpdateRole':{fn:this.markDirty,scope:this}
+                    ,'afterAddGroup':{fn:this.markDirty,scope:this}
+                }
             }]
         });
         return f;

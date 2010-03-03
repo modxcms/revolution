@@ -29,11 +29,13 @@ MODx.grid.UserGroups = function(config) {
     MODx.grid.UserGroups.superclass.constructor.call(this,config);
     this.userRecord = new Ext.data.Record.create([{name: 'usergroup'}
     ,{name:'name'},{name:'member'},{name:'role'},{name:'rolename'}]);
+    this.addEvents('beforeUpdateRole','afterUpdateRole','beforeAddGroup','afterAddGroup');
 };
 Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
     updateRole: function(btn,e) {
         var r = this.menu.record;
-        r.user = this.config.user
+        r.user = this.config.user;
+        this.fireEvent('beforeUpdateRole',r);
         
         this.loadWindow(btn,e,{
             xtype: 'modx-window-user-groups-role-update'
@@ -45,23 +47,24 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
                     rec.set('role',r.role);
                     rec.set('rolename',r.rolename);
                     
-                    Ext.getCmp('modx-panel-user').fireEvent('fieldChange');
+                    this.fireEvent('afterUpdateRole',r);
                 },scope:this}
             }
         });
     }
     ,addGroup: function(btn,e) {
-        
+        var r = {member:this.config.user};
+        this.fireEvent('beforeUpdateRole',r);
         this.loadWindow(btn,e,{
             xtype: 'modx-window-user-addgroup'
-            ,record: {member:this.config.user}
+            ,record: r
             ,listeners: {
                 'success': {fn:function(r) {
                     var s = this.getStore();
                     var rec = new this.userRecord(r);
                     s.add(rec);
                     
-                    Ext.getCmp('modx-panel-user').fireEvent('fieldChange');
+                    this.fireEvent('afterAddGroup',r);
                 },scope:this}
             }
         });
