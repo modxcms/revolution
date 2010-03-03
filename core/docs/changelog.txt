@@ -5,7 +5,7 @@ development release, and is only shown to give an idea of what's currently in th
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
 - Fixed bug with users grid if access permissions tab is removed
-- Fixed deprecated method definitions in modConnector classes
+- Fixed deprecated method definitions in modConnector classes 
 - Fixed text in language settings to more accurately reflect function
 - Added area filter to Settings grid
 - [#MODX-1721] Disabled unnecessary paging on System Events table

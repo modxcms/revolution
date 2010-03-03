@@ -71,7 +71,7 @@ class modConnectorResponse extends modResponse {
         /* if files sent, this means that the browser needs it in text/plain,
          * so ignore text/json header type
          */
-        if (!isset($_FILES) || empty($_FILES)) {
+        if (!isset($_FILES)) {
             header("Content-Type: text/json; charset=UTF-8");
         }
         if (is_array($this->header)) {
