@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1726] Added sanity check to ensure TV input type is properly set
+- Fixed bug with action buttons and continue stay method
 - Added UI for managing website field in modUserProfile
 - Added website field to modUserProfile
 - Removed unnecessary and problematic editor dropdown in chunk editing screen

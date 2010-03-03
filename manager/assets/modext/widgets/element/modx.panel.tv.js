@@ -219,6 +219,9 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
                     g.defaultProperties = d;
                     g.getStore().loadData(d);
                     this.initialized = true;
+                    
+                    var sv = this.getForm().setValues;
+                    sv.defer(100,this,[r.object]);
                 },scope:this}
             }
         });
