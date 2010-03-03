@@ -30,7 +30,7 @@ MODx.grid.PluginEvent = function(config) {
         ,enableColumnResize: true
         ,enableColumnMove: true        
         ,fields: ['id','name','service','groupname','enabled','priority','propertyset','menu']
-        ,paging: true
+        ,paging: false
         ,remoteSort: true
         ,viewConfig: {
             forceFit: false
@@ -65,7 +65,7 @@ MODx.grid.PluginEvent = function(config) {
             ,width: 100
             ,editor: { xtype: 'textfield' ,allowBlank: false }
         }]
-        ,tbar: [{
+        /*,tbar: [{
             xtype: 'textfield'
             ,name: 'name_filter'
             ,id: 'modx-'+this.ident+'-filter-name'
@@ -78,7 +78,7 @@ MODx.grid.PluginEvent = function(config) {
                     },this);
                 }}
             }
-        }] 
+        }] */
     });
     MODx.grid.PluginEvent.superclass.constructor.call(this,config);
 };
