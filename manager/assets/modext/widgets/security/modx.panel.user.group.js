@@ -83,9 +83,9 @@ MODx.panel.UserGroup = function(config) {
                     ,autoHeight: true
                     ,width: '97%'
                     ,listeners: {
-                        'afterRemoveRow': {fn:function() {
-                            this.fireEvent('fieldChange');
-                        },scope:this}
+                        'afterRemoveRow': {fn:this.markDirty,scope:this}
+                        ,'updateRole': {fn:this.markDirty,scope:this}
+                        ,'addMember': {fn:this.markDirty,scope:this}
                     }
                 }]
             },{
@@ -103,9 +103,10 @@ MODx.panel.UserGroup = function(config) {
                     ,autoHeight: true
                     ,width: '97%'
                     ,listeners: {
-                        'afterRemoveRow': {fn:function() {
-                            this.fireEvent('fieldChange');
-                        },scope:this}
+                        'afterRemoveRow': {fn:this.markDirty,scope:this}
+                        ,'afteredit': {fn:this.markDirty,scope:this}
+                        ,'updateAcl': {fn:this.markDirty,scope:this}
+                        ,'createAcl': {fn:this.markDirty,scope:this}
                     }
                 }]
             },{
@@ -122,9 +123,10 @@ MODx.panel.UserGroup = function(config) {
                     ,autoHeight: true
                     ,width: '97%'
                     ,listeners: {
-                        'afterRemoveRow': {fn:function() {
-                            this.fireEvent('fieldChange');
-                        },scope:this}
+                        'afterRemoveRow': {fn:this.markDirty,scope:this}
+                        ,'afteredit': {fn:this.markDirty,scope:this}
+                        ,'updateAcl': {fn:this.markDirty,scope:this}
+                        ,'createAcl': {fn:this.markDirty,scope:this}
                     }
                 }]
             }]
@@ -214,6 +216,7 @@ MODx.grid.UserGroupUsers = function(config) {
         }]
     });
     MODx.grid.UserGroupUsers.superclass.constructor.call(this,config);
+    this.addEvents('updateRole','addMember');
 };
 Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
     
@@ -240,8 +243,8 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
             ,record: r
             ,listeners: {
                 'success': {fn:function(r) {
-                    this.refresh();                    
-                    Ext.getCmp('modx-panel-user-group').fireEvent('fieldChange');
+                    this.refresh();
+                    this.fireEvent('updateRole',r);
                 },scope:this}
             }
         });
@@ -253,7 +256,7 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.refresh();
-                    Ext.getCmp('modx-panel-user-group').fireEvent('fieldChange');
+                    this.fireEvent('addMember',r);
                 },scope:this}
             }
         });

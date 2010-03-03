@@ -38,31 +38,7 @@ MODx.panel.ContentType = function(config) {
 };
 Ext.extend(MODx.panel.ContentType,MODx.FormPanel,{
     initialized: false
-    ,setup: function() {
-        /* TODO: maybe eventually convert to local grid
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'get'
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    if (r.object.category == '0') { r.object.category = null; }
-                    r.object.plugincode = "<?php\n"+r.object.plugincode+"\n?>";
-                    this.getForm().setValues(r.object);
-                    Ext.getCmp('plugin-header').getEl().update('<h2>'+_('plugin')+': '+r.object.name+'</h2>');
-                    this.fireEvent('ready',r.object);
-                    
-                    var d = Ext.decode(r.object.data);
-                    var g = Ext.getCmp('grid-element-properties');
-                    g.defaultProperties = d;
-                    g.getStore().loadData(d);
-                    this.initialized = true;
-                },scope:this}
-            }
-        });
-        */
-    }
+    ,setup: function() {}
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-content-type');
         Ext.apply(o.form.baseParams,{

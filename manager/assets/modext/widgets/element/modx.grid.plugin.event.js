@@ -81,6 +81,7 @@ MODx.grid.PluginEvent = function(config) {
         }] */
     });
     MODx.grid.PluginEvent.superclass.constructor.call(this,config);
+    this.addEvents('updateEvent');
 };
 Ext.extend(MODx.grid.PluginEvent,MODx.grid.Grid,{
     filterByName: function(tf,newValue,oldValue) {
@@ -107,7 +108,7 @@ Ext.extend(MODx.grid.PluginEvent,MODx.grid.Grid,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.refresh();
-                    Ext.getCmp('modx-panel-plugin').fireEvent('fieldChange');
+                    this.fireEvent('updateEvent',r);
                 },scope:this}
             }
         });

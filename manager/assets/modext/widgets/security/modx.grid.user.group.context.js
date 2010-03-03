@@ -52,7 +52,7 @@ MODx.grid.UserGroupContext = function(config) {
         }]
     });
     MODx.grid.UserGroupContext.superclass.constructor.call(this,config);
-    this.on('afteredit',function() { Ext.getCmp('modx-panel-user-group').fireEvent('fieldChange'); });
+    this.addEvents('createAcl','updateAcl');
 };
 Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
     combos: {}
@@ -89,7 +89,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
                 ,listeners: {
                     'success': {fn:function(r) {
                         this.refresh();
-                        Ext.getCmp('modx-panel-user-group').fireEvent('fieldChange');
+                        this.fireEvent('createAcl',r);
                     },scope:this}
                 }
             });
@@ -107,7 +107,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
                 ,listeners: {
                     'success': {fn:function(r) {
                         this.refresh();
-                        Ext.getCmp('modx-panel-user-group').fireEvent('fieldChange');
+                        this.fireEvent('updateAcl',r);
                     },scope:this}
                 }
             });

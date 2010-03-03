@@ -160,7 +160,9 @@ MODx.panel.TV = function(config) {
                 ,preventRender: true
                 ,width: '100%'
                 ,listeners: {
-                    'rowclick': {fn:this.fieldChangeEvent,scope:this}
+                    'rowclick': {fn:this.markDirty,scope:this}
+                    ,'afteredit': {fn:this.markDirty,scope:this}
+                    ,'afterRemoveRow': {fn:this.markDirty,scope:this}
                 }
             }]
         },{
@@ -177,7 +179,9 @@ MODx.panel.TV = function(config) {
                 ,tv: config.tv
                 ,preventRender: true
                 ,listeners: {
-                    'rowclick': {fn:this.fieldChangeEvent,scope:this}
+                    'rowclick': {fn:this.markDirty,scope:this}
+                    ,'afteredit': {fn:this.markDirty,scope:this}
+                    ,'afterRemoveRow': {fn:this.markDirty,scope:this}
                 }
             }]
         }])]

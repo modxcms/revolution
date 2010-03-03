@@ -47,9 +47,6 @@ MODx.grid.TemplateTV = function(config) {
         }]
 	});
 	MODx.grid.TemplateTV.superclass.constructor.call(this,config);
-    this.on('afteredit',function(e) {
-         Ext.getCmp('modx-panel-template').fireEvent('fieldChange');
-    },this);
 };
 Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid);
 Ext.reg('modx-grid-template-tv',MODx.grid.TemplateTV);
