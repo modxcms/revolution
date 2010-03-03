@@ -29,15 +29,17 @@ $modx->invokeEvent('OnBeforeUserFormSave',array(
 ));
 
 /* create user group links */
-$ugms = array();
-$groups = $modx->fromJSON($_POST['groups']);
-foreach ($groups as $group) {
-    $ugm = $modx->newObject('modUserGroupMember');
-    $ugm->set('user_group',$group['usergroup']);
-    $ugm->set('role',$group['role']);
-    $ugms[] = $ugm;
+if (isset($_POST['groups'])) {
+    $ugms = array();
+    $groups = $modx->fromJSON($_POST['groups']);
+    foreach ($groups as $group) {
+        $ugm = $modx->newObject('modUserGroupMember');
+        $ugm->set('user_group',$group['usergroup']);
+        $ugm->set('role',$group['role']);
+        $ugms[] = $ugm;
+    }
+    $user->addMany($ugms,'UserGroupMembers');
 }
-$user->addMany($ugms,'UserGroupMembers');
 
 /* update user */
 if ($user->save() == false) {

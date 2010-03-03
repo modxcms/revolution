@@ -22,21 +22,9 @@ class modConnectorRequest extends modManagerRequest {
      * @var string
      * @access public
      */
-    var $location;
+    public $location;
 
-    function modConnectorRequest(&$modx) {
-        $this->__construct($modx);
-    }
-    /**
-     * Construct the object, and make sure the default processor path is set.
-     *
-     * @param MODx $modx A reference to the MODx instance.
-     */
-    function __construct(&$modx) {
-        parent::__construct($modx);
-    }
-
-    function initialize() {
+    public function initialize() {
         $ml = $this->modx->getOption('manager_language');
         if (!empty($ml)) {
             $this->modx->cultureKey= $this->modx->getOption('manager_language');
@@ -59,7 +47,7 @@ class modConnectorRequest extends modManagerRequest {
      * @param string $location The base subdirectory in which to look for the processor.
      * @param string $action The requested processor to load.
      */
-    function handleRequest($options = array()) {
+    public function handleRequest(array $options = array()) {
         if (isset($options['action']) && !is_string($options['action'])) return false;
         if ((!isset($options['action']) || $options['action'] == '') && isset($_REQUEST['action'])) {
             $options['action'] = $_REQUEST['action'];
@@ -83,7 +71,7 @@ class modConnectorRequest extends modManagerRequest {
      *
      * @param array $options An array of options
      */
-    function prepareResponse($options = array()) {
+    public function prepareResponse(array $options = array()) {
         $procDir = !empty($options['processors_path']) ? $options['processors_path'] : '';
         $this->setDirectory($procDir);
         $this->modx->response->outputContent($options);
@@ -94,7 +82,7 @@ class modConnectorRequest extends modManagerRequest {
      *
      * @param string $dir The directory to load from
      */
-    function setDirectory($dir = '') {
+    public function setDirectory($dir = '') {
         if (!$this->modx->getResponse('modConnectorResponse')) {
             $this->modx->log(modX::LOG_LEVEL_FATAL, 'Could not load response class: modConnectorResponse');
         }

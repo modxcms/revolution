@@ -20,22 +20,17 @@ class modConnectorResponse extends modResponse {
      * @var string
      * @access private
      */
-    var $_directory;
+    protected $_directory;
 
     /**#@+
      * Creates a modConnectorResponse object.
      *
      * {@inheritdoc}
      */
-    function modConnectorResponse(& $modx) {
-        $this->__construct($modx);
-    }
-    /** @ignore */
-    function __construct(& $modx) {
+    function __construct(modX & $modx) {
         parent :: __construct($modx);
         $this->setDirectory();
     }
-    /**#@-*/
 
     /**
      * Overrides modResponse::outputContent to provide connector-specific
@@ -43,7 +38,7 @@ class modConnectorResponse extends modResponse {
      *
      * {@inheritdoc}
      */
-    function outputContent($options = array()) {
+    public function outputContent(array $options = array()) {
         /* variable pointer for easier access */
         $modx =& $this->modx;
 
@@ -76,7 +71,7 @@ class modConnectorResponse extends modResponse {
         /* if files sent, this means that the browser needs it in text/plain,
          * so ignore text/json header type
          */
-        if (!isset($_FILES) && empty($_FILES)) {
+        if (!isset($_FILES) || empty($_FILES)) {
             header("Content-Type: text/json; charset=UTF-8");
         }
         if (is_array($this->header)) {
@@ -110,7 +105,7 @@ class modConnectorResponse extends modResponse {
      * @param mixed $count The total number of objects. Used for pagination.
      * @return string The JSON output.
      */
-    function outputArray($array,$count = false) {
+    public function outputArray(array $array,$count = false) {
         if (!is_array($array)) return false;
         if ($count === false) { $count = count($array); }
         return '({"total":"'.$count.'","results":'.$this->modx->toJSON($array).'})';
@@ -124,7 +119,7 @@ class modConnectorResponse extends modResponse {
      * @access public
      * @param string $dir The directory to set as the processors directory.
      */
-    function setDirectory($dir = '') {
+    public function setDirectory($dir = '') {
         if ($dir == '') {
             $this->_directory = $this->modx->getOption('processors_path');
         } else {
@@ -142,7 +137,7 @@ class modConnectorResponse extends modResponse {
      * @param mixed $data The PHP data to be converted.
      * @return string The extended JSON-encoded string.
      */
-    function toJSON($data) {
+    public function toJSON($data) {
         if (is_array($data)) {
             array_walk_recursive($data, array(&$this, '_encodeLiterals'));
         }
@@ -156,7 +151,7 @@ class modConnectorResponse extends modResponse {
      * @param mixed &$value A reference to the value to be encoded if it is identified as a literal.
      * @param integer|string $key The array key corresponding to the value.
      */
-    function _encodeLiterals(&$value, $key) {
+    protected function _encodeLiterals(&$value, $key) {
         if (is_string($value)) {
             /* properly handle common literal structures */
             if (strpos($value, 'function(') === 0
@@ -175,7 +170,7 @@ class modConnectorResponse extends modResponse {
      * @param string $string The JSON-encoded string with encoded literals.
      * @return string The JSON-encoded string with literals restored.
      */
-    function _decodeLiterals($string) {
+    protected function _decodeLiterals($string) {
         $pattern = '/"@@(.*?)@@"/';
         $string = preg_replace_callback(
             $pattern,

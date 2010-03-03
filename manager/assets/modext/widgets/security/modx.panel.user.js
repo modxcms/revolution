@@ -53,8 +53,10 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     
                     var d = Ext.decode(r.object.groups);
                     var g = Ext.getCmp('modx-grid-user-groups');
-                    var s = g.getStore();
-                    s.loadData(d);
+                    if (g) {
+                        var s = g.getStore();
+                        if (s) { s.loadData(d); }
+                    }
                     
                     this.fireEvent('ready',r.object);
                 },scope:this}
@@ -62,12 +64,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         });
     }
     ,beforeSubmit: function(o) {
+        var d = {};
         var g = Ext.getCmp('modx-grid-user-settings');
+        if (g) { d.settings = g.encodeModified(); }
+        
         var h = Ext.getCmp('modx-grid-user-groups');
-        Ext.apply(o.form.baseParams,{
-            settings: g ? g.encodeModified() : {}
-            ,groups: h.encode()
-        });
+        if (h) { d.groups = h.encode(); }
+        
+        Ext.apply(o.form.baseParams,d);
     }
     
     ,success: function(o) {

@@ -35,21 +35,23 @@ $modx->invokeEvent('OnBeforeUserFormSave',array(
 ));
 
 
-/* remove prior user group links */
-$ugms = $user->getMany('UserGroupMembers');
-foreach ($ugms as $ugm) { $ugm->remove(); }
+if (isset($_POST['groups'])) {
+    /* remove prior user group links */
+    $ugms = $user->getMany('UserGroupMembers');
+    foreach ($ugms as $ugm) { $ugm->remove(); }
 
-/* create user group links */
-$ugms = array();
-$groups = $modx->fromJSON($_POST['groups']);
-foreach ($groups as $group) {
-    $ugm = $modx->newObject('modUserGroupMember');
-    $ugm->set('user_group',$group['usergroup']);
-    $ugm->set('role',$group['role']);
-    $ugm->set('member',$user->get('id'));
-    $ugms[] = $ugm;
+    /* create user group links */
+    $ugms = array();
+    $groups = $modx->fromJSON($_POST['groups']);
+    foreach ($groups as $group) {
+        $ugm = $modx->newObject('modUserGroupMember');
+        $ugm->set('user_group',$group['usergroup']);
+        $ugm->set('role',$group['role']);
+        $ugm->set('member',$user->get('id'));
+        $ugms[] = $ugm;
+    }
+    $user->addMany($ugms,'UserGroupMembers');
 }
-$user->addMany($ugms,'UserGroupMembers');
 
 $user->fromArray($_POST);
 
