@@ -11,9 +11,9 @@ if (!$modx->hasPermission('view_chunk')) return $modx->error->failure($modx->lex
 $modx->lexicon->load('chunk','category');
 
 /* get chunk */
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
-$chunk = $modx->getObject('modChunk',$_REQUEST['id']);
-if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $_REQUEST['id'])));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
+$chunk = $modx->getObject('modChunk',$scriptProperties['id']);
+if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $scriptProperties['id'])));
 
 $properties = $chunk->get('properties');
 if (!is_array($properties)) $properties = array();

@@ -15,16 +15,16 @@ if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon(
 $modx->lexicon->load('action','menu','topmenu');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'menuindex');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'menuindex');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
 /* get menus */
 $c = $modx->newQuery('modMenu');
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
-if ($isLimit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->sortby($scriptProperties['sort'],$scriptProperties['dir']);
+if ($isLimit) $c->limit($scriptProperties['limit'],$scriptProperties['start']);
 
 $menus = $modx->getCollection('modMenu',$c);
 $count = $modx->getCount('modMenu');

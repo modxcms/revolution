@@ -7,8 +7,8 @@ if (!$modx->hasPermission('customize_forms')) return $modx->error->failure($modx
 $modx->lexicon->load('formcustomization');
 
 /* get rule */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('rule_err_ns'));
-$rule = $modx->getObject('modActionDom',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('rule_err_ns'));
+$rule = $modx->getObject('modActionDom',$scriptProperties['id']);
 if ($rule == null) return $modx->error->failure($modx->lexicon('rule_err_nf'));
 
 /* remove rule */

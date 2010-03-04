@@ -11,8 +11,8 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('user');
 
 /* get usergroup */
-if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('user_group_err_not_specified'));
-$usergroup = $modx->getObject('modUserGroup',$_POST['id']);
+if (!isset($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('user_group_err_not_specified'));
+$usergroup = $modx->getObject('modUserGroup',$scriptProperties['id']);
 if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_not_found'));
 
 /* make sure cannot remove administrator group */

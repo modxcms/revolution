@@ -11,12 +11,12 @@ if (!$modx->hasPermission('view_user')) return $modx->error->failure($modx->lexi
 $modx->lexicon->load('user');
 
 /* get user */
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
-$user = $modx->getObject('modUser',$_REQUEST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+$user = $modx->getObject('modUser',$scriptProperties['id']);
 if (!$user) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 
 /* if set, get groups for user */
-if (!empty($_REQUEST['getGroups'])) {
+if (!empty($scriptProperties['getGroups'])) {
     $c = $modx->newQuery('modUserGroupMember');
     $c->select('
         `modUserGroupMember`.*,

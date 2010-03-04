@@ -12,12 +12,12 @@ if (!$modx->hasPermission('edit_context')) return $modx->error->failure($modx->l
 $modx->lexicon->load('context');
 
 /* get context */
-if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('context_err_ns'));
-$context= $modx->getObject('modContext', $_POST['key']);
-if (!$context) return $modx->error->failure($modx->lexicon('context_err_nfs',array('key' => $_POST['key'])));
+if (empty($scriptProperties['key'])) return $modx->error->failure($modx->lexicon('context_err_ns'));
+$context= $modx->getObject('modContext', $scriptProperties['key']);
+if (!$context) return $modx->error->failure($modx->lexicon('context_err_nfs',array('key' => $scriptProperties['key'])));
 
 /* set values */
-$context->fromArray($_POST);
+$context->fromArray($scriptProperties);
 
 /* save context */
 if ($context->save() === false) {
@@ -26,8 +26,8 @@ if ($context->save() === false) {
 }
 
 /* update context settings */
-if (isset($_POST['settings']) && !empty($_POST['settings'])) {
-    $_SETTINGS = $modx->fromJSON($_POST['settings']);
+if (isset($scriptProperties['settings']) && !empty($scriptProperties['settings'])) {
+    $_SETTINGS = $modx->fromJSON($scriptProperties['settings']);
     foreach ($_SETTINGS as $id => $st) {
         $setting = $modx->getObject('modContextSetting',array(
             'context_key' => $context->get('key'),

@@ -11,8 +11,8 @@ if (!$modx->hasPermission('view_template')) return $modx->error->failure($modx->
 $modx->lexicon->load('template');
 
 /* get template */
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
-$template = $modx->getObject('modTemplate',$_REQUEST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
+$template = $modx->getObject('modTemplate',$scriptProperties['id']);
 if ($template == null) return $modx->error->failure($modx->lexicon('template_err_nf'));
 
 $properties = $template->get('properties');

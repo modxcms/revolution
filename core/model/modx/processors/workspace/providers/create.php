@@ -14,8 +14,8 @@ $modx->lexicon->load('workspace');
 if (!$modx->hasPermission('providers')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* validation */
-if (empty($_POST['name'])) $modx->error->addField('name',$modx->lexicon('provider_err_ns_name'));
-if (empty($_POST['service_url'])) $modx->error->addField('service_url',$modx->lexicon('provider_err_ns_url'));
+if (empty($scriptProperties['name'])) $modx->error->addField('name',$modx->lexicon('provider_err_ns_name'));
+if (empty($scriptProperties['service_url'])) $modx->error->addField('service_url',$modx->lexicon('provider_err_ns_url'));
 
 if ($modx->error->hasError()) {
     return $modx->error->failure();
@@ -23,7 +23,7 @@ if ($modx->error->hasError()) {
 
 /* create provider */
 $provider = $modx->newObject('transport.modTransportProvider');
-$provider->fromArray($_POST);
+$provider->fromArray($scriptProperties);
 
 /* verify provider */
 if (!$provider->verify()) {

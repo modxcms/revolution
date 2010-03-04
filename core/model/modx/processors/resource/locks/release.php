@@ -7,8 +7,8 @@
  */
 
 $released = false;
-if (isset($_POST['id'])) {
-    $resource = $modx->getObject('modResource', intval($_POST['id']));
+if (isset($scriptProperties['id'])) {
+    $resource = $modx->getObject('modResource', intval($scriptProperties['id']));
     if ($resource) {
         $released = $resource->removeLock($modx->user->get('id'));
     }

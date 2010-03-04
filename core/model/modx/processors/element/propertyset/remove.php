@@ -9,8 +9,8 @@ if (!$modx->hasPermission('delete_propertyset')) return $modx->error->failure($m
 $modx->lexicon->load('propertyset');
 
 /* grab the modPropertySet */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
-$set = $modx->getObject('modPropertySet',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
+$set = $modx->getObject('modPropertySet',$scriptProperties['id']);
 if (empty($set)) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
 
 /* remove set */

@@ -17,12 +17,12 @@ if (!$modx->hasPermission('view_document')) return $modx->error->failure($modx->
 $modx->lexicon->load('resource');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'editedon');
-$dir = $modx->getOption('dir',$_REQUEST,'DESC');
-$dateFormat = $modx->getOption('dateFormat',$_REQUEST,'%b %d, %Y %I:%M %p');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'editedon');
+$dir = $modx->getOption('dir',$scriptProperties,'DESC');
+$dateFormat = $modx->getOption('dateFormat',$scriptProperties,'%b %d, %Y %I:%M %p');
 
 /* get resources */
 $c = $modx->newQuery('modResource');

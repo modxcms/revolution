@@ -9,24 +9,24 @@ if (!$modx->hasPermission('save_propertyset')) return $modx->error->failure($mod
 $modx->lexicon->load('propertyset','element');
 
 /* unencode data */
-$data = $modx->fromJSON($_POST['data']);
+$data = $modx->fromJSON($scriptProperties['data']);
 
 /* get element, if necessary */
-if (isset($_POST['elementId']) && isset($_POST['elementType'])) {
-    $element = $modx->getObject($_POST['elementType'],$_POST['elementId']);
+if (isset($scriptProperties['elementId']) && isset($scriptProperties['elementType'])) {
+    $element = $modx->getObject($scriptProperties['elementType'],$scriptProperties['elementId']);
     $default = $element->getProperties();
 }
 
 /* if no id specified */
-if (!isset($_REQUEST['id']) || $_REQUEST['id'] == '') {
+if (!isset($scriptProperties['id']) || $scriptProperties['id'] == '') {
     return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
 }
 /* if grabbing a modPropertySet */
-if ($_REQUEST['id'] != 0) {
-    $set = $modx->getObject('modPropertySet',$_REQUEST['id']);
+if ($scriptProperties['id'] != 0) {
+    $set = $modx->getObject('modPropertySet',$scriptProperties['id']);
     if ($set == null) {
         return $modx->error->failure($modx->lexicon('propertyset_err_nfs',array(
-            'id' => $_REQUEST['id'],
+            'id' => $scriptProperties['id'],
         )));
     }
 

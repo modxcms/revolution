@@ -8,20 +8,20 @@
 if (!$modx->hasPermission('new_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset','category');
 
-$_POST['copyels'] = !isset($_POST['copyels']) ? 0 : 1;
+$scriptProperties['copyels'] = !isset($scriptProperties['copyels']) ? 0 : 1;
 
 /* get property set */
-if (!isset($_POST['id'])) return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
-$old_set = $modx->getObject('modPropertySet',$_POST['id']);
+if (!isset($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
+$old_set = $modx->getObject('modPropertySet',$scriptProperties['id']);
 if ($old_set == null) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
 
 /* create new property set */
 $set = $modx->newObject('modPropertySet');
 $set->fromArray($old_set->toArray());
-$set->set('name',$_POST['new_name']);
+$set->set('name',$scriptProperties['new_name']);
 
 /* if set, copy element associations */
-if ($_POST['copyels']) {
+if ($scriptProperties['copyels']) {
     $els = $old_set->getMany('Elements');
     $pses = array();
     foreach ($els as $el) {

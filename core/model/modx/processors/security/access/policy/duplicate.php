@@ -12,8 +12,8 @@ $modx->lexicon->load('policy');
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* Get old policy */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('policy_err_ns'));
-$oldPolicy = $modx->getObject('modAccessPolicy',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('policy_err_ns'));
+$oldPolicy = $modx->getObject('modAccessPolicy',$scriptProperties['id']);
 if ($oldPolicy == null) return $modx->error->failure($modx->lexicon('policy_err_nf'));
 
 /* duplicate policy */

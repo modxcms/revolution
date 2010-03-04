@@ -7,15 +7,15 @@
  */
 if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
-$set = $modx->getObject('modPropertySet',$_REQUEST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
+$set = $modx->getObject('modPropertySet',$scriptProperties['id']);
 if (empty($set)) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
 
 $properties = $set->get('properties');
 if (!is_array($properties)) $properties = array();
 
-if (!empty($_REQUEST['element']) && !empty($_REQUEST['element_class'])) {
-    $element = $modx->getObject($_REQUEST['element_class'],$_REQUEST['element']);
+if (!empty($scriptProperties['element']) && !empty($scriptProperties['element_class'])) {
+    $element = $modx->getObject($scriptProperties['element_class'],$scriptProperties['element']);
     if ($element) {
         $default = $element->get('properties');
     }
@@ -45,7 +45,7 @@ foreach ($properties as $property) {
         $overridden = 1;
     }
     /* if completely new value, unique to set */
-    if (!isset($data[$property['name']]) && isset($_POST['element'])) {
+    if (!isset($data[$property['name']]) && isset($scriptProperties['element'])) {
         $overridden = 2;
     }
 

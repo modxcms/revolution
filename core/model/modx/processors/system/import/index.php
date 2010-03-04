@@ -12,28 +12,28 @@ $modx->getService('import', 'import.modStaticImport', '', array ());
 
 $results= '';
 $allowedfiles= array ();
-if (isset ($_POST['import_allowed_extensions'])) {
-    $importExts = trim($_POST['import_allowed_extensions'], ' ,');
+if (isset ($scriptProperties['import_allowed_extensions'])) {
+    $importExts = trim($scriptProperties['import_allowed_extensions'], ' ,');
     if (!empty($importExts)) {
-        $allowedfiles= explode(',', trim($_POST['import_allowed_extensions'], ' ,'));
+        $allowedfiles= explode(',', trim($scriptProperties['import_allowed_extensions'], ' ,'));
     }
 }
 $context= 'web';
 $parent= 0;
 $class= 'modStaticResource';
-if (isset ($_POST['import_resource_class'])) {
-    $class= $modx->loadClass($_POST['import_resource_class']);
+if (isset ($scriptProperties['import_resource_class'])) {
+    $class= $modx->loadClass($scriptProperties['import_resource_class']);
 }
-if (isset ($_POST['import_context'])) {
-    $context= $_POST['import_context'];
+if (isset ($scriptProperties['import_context'])) {
+    $context= $scriptProperties['import_context'];
 }
-if (isset ($_POST['import_parent'])) {
-    $parent= intval($_POST['import_parent']);
+if (isset ($scriptProperties['import_parent'])) {
+    $parent= intval($scriptProperties['import_parent']);
 }
 $filepath= $modx->getOption('core_path') . 'import/';
 $basefilepath= $filepath;
-if (isset ($_POST['import_base_path']) && !empty($_POST['import_base_path'])) {
-    $filepath= $_POST['import_base_path'];
+if (isset ($scriptProperties['import_base_path']) && !empty($scriptProperties['import_base_path'])) {
+    $filepath= $scriptProperties['import_base_path'];
     $basefilepath= '';
 } else {
     if ($contextObj= $modx->getObject('modContext', $context)) {
@@ -49,7 +49,7 @@ if (isset ($_POST['import_base_path']) && !empty($_POST['import_base_path'])) {
         }
     }
 }
-$element= isset ($_POST['content_element']) ? $_POST['content_element'] : 'body';
+$element= isset ($scriptProperties['content_element']) ? $scriptProperties['content_element'] : 'body';
 $filesfound= 0;
 
 $files= $modx->import->getFiles($filesfound, $filepath);

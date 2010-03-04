@@ -7,12 +7,12 @@ $modx->lexicon->load('workspace','package_builder');
 
 if (!$modx->hasPermission('package_builder')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$class_key = isset($_POST['classKeyOther']) && $_POST['classKeyOther'] != ''
-    ? $_POST['classKeyOther']
-    : $_POST['classKey'];
+$class_key = isset($scriptProperties['classKeyOther']) && $scriptProperties['classKeyOther'] != ''
+    ? $scriptProperties['classKeyOther']
+    : $scriptProperties['classKey'];
 
 /* needs to be dynamic */
-$pk = $_POST['object'];
+$pk = $scriptProperties['object'];
 switch ($class_key) {
     case 'modDocument':
     case 'modResource':
@@ -30,7 +30,7 @@ switch ($class_key) {
         $name = 'text'; break;
     default:
         $name = 'name';
-        $pk = $_POST['object'];
+        $pk = $scriptProperties['object'];
         break;
 }
 
@@ -38,8 +38,8 @@ $c = $modx->getObject($class_key,$pk);
 if ($c == null) return $modx->error->failure('Object not found!');
 
 $resolvers = array();
-if (isset($_POST['resolvers'])) {
-    $rs = $modx->fromJSON($_POST['resolvers']);
+if (isset($scriptProperties['resolvers'])) {
+    $rs = $modx->fromJSON($scriptProperties['resolvers']);
     foreach ($rs as $resolver) {
         array_push($resolvers,$resolver);
     }
@@ -47,15 +47,15 @@ if (isset($_POST['resolvers'])) {
 
 $vehicle = array(
     'class_key' => $class_key,
-    'object' => $_POST['object'],
+    'object' => $scriptProperties['object'],
     'name' => $c->get($name),
     'resolvers' => $resolvers,
     'attributes' => array(
-        'unique_key' => $_POST['unique_key'] == '' ? 'name' : $_POST['unique_key'],
-        'update_object' => isset($_POST['update_object']) && $_POST['update_object'] == true,
-        'resolve_files' => isset($_POST['resolve_files']) && $_POST['resolve_files'] == true,
-        'resolve_php' => isset($_POST['resolve_php']) && $_POST['resolve_php'] == true,
-        'preserve_keys' => isset($_POST['preserve_keys']) && $_POST['preserve_keys'] == true,
+        'unique_key' => $scriptProperties['unique_key'] == '' ? 'name' : $scriptProperties['unique_key'],
+        'update_object' => isset($scriptProperties['update_object']) && $scriptProperties['update_object'] == true,
+        'resolve_files' => isset($scriptProperties['resolve_files']) && $scriptProperties['resolve_files'] == true,
+        'resolve_php' => isset($scriptProperties['resolve_php']) && $scriptProperties['resolve_php'] == true,
+        'preserve_keys' => isset($scriptProperties['preserve_keys']) && $scriptProperties['preserve_keys'] == true,
     ),
 );
 

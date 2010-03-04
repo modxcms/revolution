@@ -14,19 +14,19 @@ if (!$modx->hasPermission('resource_tree')) return $modx->error->failure($modx->
 $modx->lexicon->load('resource','context');
 
 /* get default properties */
-$sortBy = $modx->getOption('sortBy',$_REQUEST,'menuindex');
-$stringLiterals = $modx->getOption('stringLiterals',$_REQUEST,false);
-$noMenu = $modx->getOption('noMenu',$_REQUEST,false);
+$sortBy = $modx->getOption('sortBy',$scriptProperties,'menuindex');
+$stringLiterals = $modx->getOption('stringLiterals',$scriptProperties,false);
+$noMenu = $modx->getOption('noMenu',$scriptProperties,false);
 
-if (empty($_REQUEST['id'])) {
+if (empty($scriptProperties['id'])) {
     $context= 'root';
 	$node= 0;
 } else {
-    $parts= explode('_', $_REQUEST['id']);
+    $parts= explode('_', $scriptProperties['id']);
     $context= isset($parts[0]) ? $parts[0] : 'root';
     $node = isset($parts[1]) ? intval($parts[1]) : 0;
 }
-if (!empty($_REQUEST['debug'])) echo '<p style="width: 800px; font-family: \'Lucida Console\'; font-size: 11px">';
+if (!empty($scriptProperties['debug'])) echo '<p style="width: 800px; font-family: \'Lucida Console\'; font-size: 11px">';
 
 /* grab resources */
 if (empty($context) || $context == 'root') {
@@ -198,7 +198,7 @@ while ($item) {
                 'cls' => $class,
                 'qtip' => $item->get('description') != '' ? strip_tags($item->get('description')) : '',
                 'type' => 'context',
-                'page' => empty($_REQUEST['nohref']) ? '?a='.$actions['context/update'].'&key='.$item->get('key') : '',
+                'page' => empty($scriptProperties['nohref']) ? '?a='.$actions['context/update'].'&key='.$item->get('key') : '',
                 'menu' => $noMenu ? array() : array('items' => $menu),
             );
         } else {
@@ -412,7 +412,7 @@ while ($item) {
                 'type' => 'modResource',
                 'qtip' => $qtip,
                 'preview_url' => $modx->makeUrl($item->get('id')),
-                'page' => empty($_REQUEST['nohref']) ? '?a='.($hasEditPerm ? $actions['resource/update'] : $actions['resource/data']).'&id='.$item->id : '',
+                'page' => empty($scriptProperties['nohref']) ? '?a='.($hasEditPerm ? $actions['resource/update'] : $actions['resource/data']).'&id='.$item->id : '',
                 'allowDrop' => true,
                 'menu' => $noMenu ? array() : array('items' => $menu),
             );

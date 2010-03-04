@@ -13,8 +13,8 @@ $modx->lexicon->load('user');
 
 /* get member */
 $member = $modx->getObject('modUserGroupMember',array(
-	'user_group' => $_POST['group_id'],
-	'member' => $_POST['user_id'],
+	'user_group' => $scriptProperties['group_id'],
+	'member' => $scriptProperties['user_id'],
 ));
 if ($member == null) return $modx->error->failure($modx->lexicon('user_group_member_err_not_found'));
 

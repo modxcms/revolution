@@ -16,8 +16,8 @@ if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('setting');
 
 /* get data */
-if (empty($_POST['data'])) return $modx->error->failure();
-$_DATA = $modx->fromJSON($_POST['data']);
+if (empty($scriptProperties['data'])) return $modx->error->failure();
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 /* get setting */
 if (empty($_DATA['key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));

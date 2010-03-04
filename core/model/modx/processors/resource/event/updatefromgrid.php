@@ -10,7 +10,7 @@
 if (!$modx->hasPermission('save_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
-$_DATA = $modx->fromJSON($_POST['data']);
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 if (!isset($_DATA['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
 $resource = $modx->getObject($_DATA['class_key'],$_DATA['id']);

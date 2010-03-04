@@ -7,7 +7,7 @@ if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('workspace');
 
 /* get provider */
-$provider = $modx->getOption('provider',$_REQUEST,false);
+$provider = $modx->getOption('provider',$scriptProperties,false);
 if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_ns'));
 $provider = $modx->getObject('transport.modTransportProvider',$provider);
 if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nf'));
@@ -21,7 +21,7 @@ $loaded = $provider->getClient();
 if (!$loaded) return $modx->error->failure($modx->lexicon('provider_err_no_client'));
 
 /* load appropriate processor */
-$id = $modx->getOption('id',$_REQUEST,'n_root_0');
+$id = $modx->getOption('id',$scriptProperties,'n_root_0');
 $ar = explode('_',$id);
 $type = $ar[1];
 $pk = $ar[2];

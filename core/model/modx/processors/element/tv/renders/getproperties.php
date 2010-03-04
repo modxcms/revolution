@@ -14,8 +14,8 @@
 if (!$modx->hasPermission('view_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv_widget');
 
-$context = (isset($_REQUEST['context']) && !empty($_REQUEST['context'])) ? $_REQUEST['context'] : $modx->context->get('key');
-if (!isset($_REQUEST['type'])) $_REQUEST['type'] = 'default';
+$context = (isset($scriptProperties['context']) && !empty($scriptProperties['context'])) ? $scriptProperties['context'] : $modx->context->get('key');
+if (!isset($scriptProperties['type'])) $scriptProperties['type'] = 'default';
 
 if (!isset($modx->smarty)) {
     $modx->getService('smarty', 'smarty.modSmarty', '', array(
@@ -23,8 +23,8 @@ if (!isset($modx->smarty)) {
     ));
 }
 $settings = array();
-if (!empty($_REQUEST['tv'])) {
-	$tv = $modx->getObject('modTemplateVar',$_REQUEST['tv']);
+if (!empty($scriptProperties['tv'])) {
+	$tv = $modx->getObject('modTemplateVar',$scriptProperties['tv']);
     if ($tv != null) {
         $params = $tv->get('display_params');
         $ps = explode('&',$params);
@@ -33,12 +33,12 @@ if (!empty($_REQUEST['tv'])) {
             if ($p[0] != '') $settings[$param[0]] = $param[1];
         }
     }
-    $modx->smarty->assign('tv',$_REQUEST['tv']);
+    $modx->smarty->assign('tv',$scriptProperties['tv']);
 }
 $modx->smarty->assign('params',$settings);
 
 $renderPath = dirname(__FILE__).'/'.$context.'/properties/';
-$renderFile = $renderPath.$_REQUEST['type'].'.php';
+$renderFile = $renderPath.$scriptProperties['type'].'.php';
 
 if (file_exists($renderFile)) {
     $o = require_once $renderFile;

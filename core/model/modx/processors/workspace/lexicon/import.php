@@ -13,38 +13,38 @@ if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('lexicon');
 
 /* verify file exists */
-if (empty($_FILES['lexicon'])) return $modx->error->failure($modx->lexicon('lexicon_import_err_ns'));
-$_FILE = $_FILES['lexicon'];
+if (empty($scriptProperties['lexicon'])) return $modx->error->failure($modx->lexicon('lexicon_import_err_ns'));
+$_FILE = $scriptProperties['lexicon'];
 if (!empty($_FILE['error'])) return $modx->error->failure($modx->lexicon('lexicon_import_err_upload'));
 
 /* get namespace */
-if (empty($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
-$namespace = $modx->getObject('modNamespace',$_POST['namespace']);
+if (empty($scriptProperties['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
+$namespace = $modx->getObject('modNamespace',$scriptProperties['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
 /* get topic */
-if (empty($_POST['topic'])) {
+if (empty($scriptProperties['topic'])) {
     return $modx->error->failure($modx->lexicon('topic_err_ns'));
 }
 $topic = $modx->getObject('modLexiconTopic',array(
-    'name' => $_POST['topic'],
+    'name' => $scriptProperties['topic'],
     'namespace' => $namespace->get('name'),
 ));
 /* if new topic, create */
 if ($topic == null) {
     $topic = $modx->newObject('modLexiconTopic');
-    $topic->set('name',$_POST['topic']);
+    $topic->set('name',$scriptProperties['topic']);
     $topic->set('namespace',$namespace->get('name'));
     $topic->save();
 }
 
 /* get language */
-if (empty($_POST['language'])) return $modx->error->failure($modx->lexicon('language_err_nf'));
-$language = $modx->getObject('modLexiconLanguage',$_POST['language']);
+if (empty($scriptProperties['language'])) return $modx->error->failure($modx->lexicon('language_err_nf'));
+$language = $modx->getObject('modLexiconLanguage',$scriptProperties['language']);
 /* if new language, create */
 if ($language == null) {
     $language = $modx->newObject('modLexiconLanguage');
-    $language->set('name',$_POST['language']);
+    $language->set('name',$scriptProperties['language']);
     $language->save();
 }
 

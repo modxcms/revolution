@@ -11,7 +11,7 @@ if (!$modx->hasPermission('save_role')) return $modx->error->failure($modx->lexi
 $modx->lexicon->load('user');
 
 /* parse json data */
-$_DATA = $modx->fromJSON($_POST['data']);
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('role_err_ns'));
 $role = $modx->getObject('modUserGroupRole',$_DATA['id']);

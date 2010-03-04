@@ -14,11 +14,11 @@ if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('setting');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,20);
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$namespace = $modx->getOption('namespace',$_REQUEST,'');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,20);
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$namespace = $modx->getOption('namespace',$scriptProperties,'');
 
 /* build query */
 $c = $modx->newQuery('modSystemSetting');

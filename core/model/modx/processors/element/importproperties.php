@@ -9,11 +9,11 @@ if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($mod
 $modx->lexicon->load('propertyset','element');
 
 /* verify file exists */
-if (!isset($_FILES['file'])) return $modx->error->failure($modx->lexicon('properties_import_err_upload'));
-$_FILE = $_FILES['file'];
+if (!isset($scriptProperties['file'])) return $modx->error->failure($modx->lexicon('properties_import_err_upload'));
+$_FILE = $scriptProperties['file'];
 if ($_FILE['error'] != 0) return $modx->error->failure($modx->lexicon('properties_import_err_upload'));
 
-$o = file_get_contents($_FILE['tmp_name']);
+$o = file_get_contents($scriptProperties['tmp_name']);
 
 $properties = $modx->fromJSON($o);
 if (!is_array($properties)) {

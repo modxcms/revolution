@@ -11,8 +11,8 @@ if (!$modx->hasPermission('delete_context')) return $modx->error->failure($modx-
 $modx->lexicon->load('context');
 
 /* get context */
-if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('context_err_ns'));
-$context= $modx->getObject('modContext', $_POST['key']);
+if (empty($scriptProperties['key'])) return $modx->error->failure($modx->lexicon('context_err_ns'));
+$context= $modx->getObject('modContext', $scriptProperties['key']);
 if ($context == null) return $modx->error->failure($modx->lexicon('context_err_nf'));
 
 /* prevent removing of mgr/web contexts */

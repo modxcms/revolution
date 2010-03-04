@@ -18,15 +18,15 @@ if (!$modx->hasPermission('new_snippet')) return $modx->error->failure($modx->le
 $modx->lexicon->load('snippet','category');
 
 /* data escaping */
-if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('snippet_untitled');
+if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('snippet_untitled');
 
 /* make sure name isnt taken */
-$nameExists = $modx->getObject('modSnippet',array('name' => $_POST['name']));
+$nameExists = $modx->getObject('modSnippet',array('name' => $scriptProperties['name']));
 if ($nameExists) $modx->error->addField('name',$modx->lexicon('snippet_err_exists_name'));
 
 /* category */
-if (!empty($_POST['category'])) {
-    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
+if (!empty($scriptProperties['category'])) {
+    $category = $modx->getObject('modCategory',array('id' => $scriptProperties['category']));
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
@@ -34,11 +34,11 @@ if ($modx->error->hasError()) return $modx->error->failure();
 
 /* create new snippet */
 $snippet = $modx->newObject('modSnippet');
-$snippet->fromArray($_POST);
-$snippet->set('locked',!empty($_POST['locked']));
+$snippet->fromArray($scriptProperties);
+$snippet->set('locked',!empty($scriptProperties['locked']));
 $properties = null;
-if (isset($_POST['propdata'])) {
-    $properties = $_POST['propdata'];
+if (isset($scriptProperties['propdata'])) {
+    $properties = $scriptProperties['propdata'];
     $properties = $modx->fromJSON($properties);
 }
 if (is_array($properties)) $snippet->setProperties($properties);
@@ -66,7 +66,7 @@ $modx->invokeEvent('OnSnipFormSave',array(
 $modx->logManagerAction('snippet_create','modSnippet',$snippet->get('id'));
 
 /* empty cache */
-if (!empty($_POST['clearCache'])) {
+if (!empty($scriptProperties['clearCache'])) {
     $cacheManager= $modx->getCacheManager();
     $cacheManager->clearCache();
 }

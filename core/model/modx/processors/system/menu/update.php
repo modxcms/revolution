@@ -20,27 +20,27 @@ if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon(
 $modx->lexicon->load('action','menu');
 
 /* get menu */
-if (empty($_POST['text'])) return $modx->error->failure($modx->lexicon('menu_err_ns'));
-$menu = $modx->getObject('modMenu',$_POST['text']);
+if (empty($scriptProperties['text'])) return $modx->error->failure($modx->lexicon('menu_err_ns'));
+$menu = $modx->getObject('modMenu',$scriptProperties['text']);
 if ($menu == null) return $modx->error->failure($modx->lexicon('menu_err_nf'));
 
 /* verify action */
-if (!isset($_POST['action_id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
-if (!empty($_POST['action_id'])) {
-	$action = $modx->getObject('modAction',$_POST['action_id']);
+if (!isset($scriptProperties['action_id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
+if (!empty($scriptProperties['action_id'])) {
+	$action = $modx->getObject('modAction',$scriptProperties['action_id']);
 	if ($action == null) return $modx->error->failure($modx->lexicon('action_err_nf'));
 }
 
 /* verify parent */
-if (!isset($_POST['parent'])) return $modx->error->failure($modx->lexicon('menu_parent_err_ns'));
-if (!empty($_POST['parent'])) {
-	$parent = $modx->getObject('modMenu',$_POST['parent']);
+if (!isset($scriptProperties['parent'])) return $modx->error->failure($modx->lexicon('menu_parent_err_ns'));
+if (!empty($scriptProperties['parent'])) {
+	$parent = $modx->getObject('modMenu',$scriptProperties['parent']);
 	if ($parent == null) return $modx->error->failure($modx->lexicon('menu_parent_err_nf'));
 }
 
 /* save menu */
-$menu->fromArray($_POST);
-$menu->set('action',$_POST['action_id']);
+$menu->fromArray($scriptProperties);
+$menu->set('action',$scriptProperties['action_id']);
 
 if ($menu->save() == false) {
     return $modx->error->failure($modx->lexicon('menu_err_save'));
@@ -48,13 +48,13 @@ if ($menu->save() == false) {
 
 
 /* if changing key */
-if (!empty($_POST['new_text']) && $_POST['new_text'] != $menu->get('text')) {
-    $alreadyExists = $modx->getObject('modMenu',$_POST['new_text']);
+if (!empty($scriptProperties['new_text']) && $scriptProperties['new_text'] != $menu->get('text')) {
+    $alreadyExists = $modx->getObject('modMenu',$scriptProperties['new_text']);
     if ($alreadyExists) { return $modx->error->failure($modx->lexicon('menu_err_ae')); }
 
     $newMenu = $modx->newObject('modMenu');
     $newMenu->fromArray($menu->toArray());
-    $newMenu->set('text',$_POST['new_text']);
+    $newMenu->set('text',$scriptProperties['new_text']);
     if ($newMenu->save()) {
         $menu->remove();
     }

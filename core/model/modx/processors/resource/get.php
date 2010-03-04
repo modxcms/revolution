@@ -9,9 +9,9 @@
  * @subpackage processors.resource
  */
 $modx->lexicon->load('resource');
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
-$resource = $modx->getObject('modResource', $_REQUEST['id']);
-if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_REQUEST['id'])));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
+$resource = $modx->getObject('modResource', $scriptProperties['id']);
+if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $scriptProperties['id'])));
 
 if (!$resource->checkPolicy('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 

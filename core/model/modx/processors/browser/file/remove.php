@@ -12,12 +12,12 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-if (empty($_POST['file'])) return $modx->error->failure($modx->lexicon('file_err_ns'));
+if (empty($scriptProperties['file'])) return $modx->error->failure($modx->lexicon('file_err_ns'));
 
-$d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
-    ? $_POST['prependPath']
+$d = isset($scriptProperties['prependPath']) && $scriptProperties['prependPath'] != 'null' && $scriptProperties['prependPath'] != null
+    ? $scriptProperties['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
-$file = $d.$_POST['file'];
+$file = $d.$scriptProperties['file'];
 
 /* in case rootVisible is true */
 $file = str_replace('root/','',$file);

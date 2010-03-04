@@ -12,10 +12,10 @@ $modx->lexicon->load('lexicon');
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get entry */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));
-$entry = $modx->getObject('modLexiconEntry',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));
+$entry = $modx->getObject('modLexiconEntry',$scriptProperties['id']);
 if ($entry == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('entry_err_nfs'),$_POST['id']));
+    return $modx->error->failure(sprintf($modx->lexicon('entry_err_nfs'),$scriptProperties['id']));
 }
 
 /* remove entry */

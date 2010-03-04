@@ -10,7 +10,7 @@ if (!isset($modx->lexicon) || !is_object($modx->lexicon)) {
 }
 $modx->lexicon->load('login');
 
-$loginContext= isset ($_REQUEST['login_context']) ? $_REQUEST['login_context'] : $modx->context->get('key');
+$loginContext= isset ($scriptProperties['login_context']) ? $scriptProperties['login_context'] : $modx->context->get('key');
 
 if (!$modx->user->isAuthenticated($loginContext)) return $modx->error->failure($modx->lexicon('not_logged_in'));
 

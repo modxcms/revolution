@@ -19,17 +19,17 @@ if (!$modx->hasPermission('new_template')) return $modx->error->failure($modx->l
 $modx->lexicon->load('template','category');
 
 /* set default name if necessary */
-if (empty($_POST['templatename'])) $_POST['templatename'] = $modx->lexicon('template_untitled');
+if (empty($scriptProperties['templatename'])) $scriptProperties['templatename'] = $modx->lexicon('template_untitled');
 
 /* check to see if a template already exists with that name */
 $nameExists = $modx->getObject('modTemplate',array(
-    'templatename' => $_POST['templatename'],
+    'templatename' => $scriptProperties['templatename'],
 ));
 if ($nameExists) $modx->error->addField('templatename',$modx->lexicon('template_err_exists_name'));
 
 /* category */
-if (!empty($_POST['category'])) {
-    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
+if (!empty($scriptProperties['category'])) {
+    $category = $modx->getObject('modCategory',array('id' => $scriptProperties['category']));
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
@@ -37,11 +37,11 @@ if ($modx->error->hasError()) return $modx->error->failure();
 
 /* set fields */
 $template = $modx->newObject('modTemplate');
-$template->fromArray($_POST);
-$template->set('locked',!empty($_POST['locked']));
+$template->fromArray($scriptProperties);
+$template->set('locked',!empty($scriptProperties['locked']));
 $properties = null;
-if (!empty($_POST['propdata'])) {
-    $properties = $_POST['propdata'];
+if (!empty($scriptProperties['propdata'])) {
+    $properties = $scriptProperties['propdata'];
     $properties = $modx->fromJSON($properties);
 }
 if (is_array($properties)) $template->setProperties($properties);
@@ -60,8 +60,8 @@ if ($template->save() === false) {
 
 
 /* change template access to tvs */
-if (isset($_POST['tvs'])) {
-    $templateVariables = $modx->fromJSON($_POST['tvs']);
+if (isset($scriptProperties['tvs'])) {
+    $templateVariables = $modx->fromJSON($scriptProperties['tvs']);
     if (is_array($templateVariables)) {
         foreach ($templateVariables as $id => $tv) {
             if ($tv['access']) {
@@ -100,7 +100,7 @@ $modx->invokeEvent('OnTempFormSave',array(
 $modx->logManagerAction('template_create','modTemplate',$template->get('id'));
 
 /* empty cache */
-if (!empty($_POST['clearCache'])) {
+if (!empty($scriptProperties['clearCache'])) {
     $cacheManager= $modx->getCacheManager();
     $cacheManager->clearCache();
 }

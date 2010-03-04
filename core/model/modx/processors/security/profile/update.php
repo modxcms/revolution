@@ -13,8 +13,8 @@ $profile = $modx->user->getOne('Profile');
 if ($profile == null) return $modx->error->failure($modx->lexicon('user_profile_err_not_found'));
 
 /* format and set data */
-$_POST['dob'] = strtotime($_POST['dob']);
-$profile->fromArray($_POST);
+$scriptProperties['dob'] = strtotime($scriptProperties['dob']);
+$profile->fromArray($scriptProperties);
 
 /* save profile */
 if ($profile->save() == false) {

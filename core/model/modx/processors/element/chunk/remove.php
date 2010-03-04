@@ -11,9 +11,9 @@ if (!$modx->hasPermission('delete_chunk')) return $modx->error->failure($modx->l
 $modx->lexicon->load('chunk');
 
 /* get the chunk */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
-$chunk = $modx->getObject('modChunk',$_POST['id']);
-if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $_POST['id'])));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
+$chunk = $modx->getObject('modChunk',$scriptProperties['id']);
+if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $scriptProperties['id'])));
 
 /* invoke OnBeforeChunkFormDelete event */
 $modx->invokeEvent('OnBeforeChunkFormDelete',array(

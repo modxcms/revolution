@@ -25,21 +25,21 @@
  */
 
 
-if (!isset($_POST['register']) || empty($_POST['register']) || !preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $_POST['register'])) return $modx->error->failure($modx->lexicon('error'));
-if (!isset($_POST['topic']) || empty($_POST['topic'])) return $modx->error->failure($modx->lexicon('error'));
+if (!isset($scriptProperties['register']) || empty($scriptProperties['register']) || !preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $scriptProperties['register'])) return $modx->error->failure($modx->lexicon('error'));
+if (!isset($scriptProperties['topic']) || empty($scriptProperties['topic'])) return $modx->error->failure($modx->lexicon('error'));
 
-$register = trim($_POST['register']);
-$register_class = isset($_POST['register_class']) ? trim($_POST['register_class']) : 'registry.modFileRegister';
+$register = trim($scriptProperties['register']);
+$register_class = isset($scriptProperties['register_class']) ? trim($scriptProperties['register_class']) : 'registry.modFileRegister';
 
-$topic = trim($_POST['topic']);
-$format = isset($_POST['format']) ? trim($_POST['format']) : 'json';
+$topic = trim($scriptProperties['topic']);
+$format = isset($scriptProperties['format']) ? trim($scriptProperties['format']) : 'json';
 
 $options = array(
-    'poll_limit' => $modx->getOption('poll_limit',$_POST,1),
-    'poll_interval' => $modx->getOption('poll_interval',$_POST,1),
-    'time_limit' => $modx->getOption('time_limit',$_POST,10),
-    'msg_limit' => $modx->getOption('message_limit',$_POST,200),
-    'show_filename' => $modx->getOption('show_filename',$_POST,true),
+    'poll_limit' => $modx->getOption('poll_limit',$scriptProperties,1),
+    'poll_interval' => $modx->getOption('poll_interval',$scriptProperties,1),
+    'time_limit' => $modx->getOption('time_limit',$scriptProperties,10),
+    'msg_limit' => $modx->getOption('message_limit',$scriptProperties,200),
+    'show_filename' => $modx->getOption('show_filename',$scriptProperties,true),
     'remove_read' => true,
 );
 

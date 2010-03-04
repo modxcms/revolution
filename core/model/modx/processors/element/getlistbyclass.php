@@ -9,19 +9,19 @@ if (!$modx->hasPermission('view_element')) return $modx->error->failure($modx->l
 $modx->lexicon->load('propertyset','element');
 
 /* get default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'name');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'name');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
-if (!isset($_REQUEST['element_class']) || $_REQUEST['element_class'] == '') {
+if (!isset($scriptProperties['element_class']) || $scriptProperties['element_class'] == '') {
     return $modx->error->failure($modx->lexicon('element_class_ns'));
 }
 
-$className = $_REQUEST['element_class'];
+$className = $scriptProperties['element_class'];
 /* fix for template's different name field */
-if ($className == 'modTemplate' && $_REQUEST['sort'] == 'name') $_REQUEST['sort'] = 'templatename';
+if ($className == 'modTemplate' && $scriptProperties['sort'] == 'name') $scriptProperties['sort'] = 'templatename';
 
 $c = $modx->newQuery($className);
 $count = $modx->getCount($className,$c);

@@ -11,12 +11,12 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-if (empty($_REQUEST['path'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+if (empty($scriptProperties['path'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
-$d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
-    ? $_POST['prependPath']
+$d = isset($scriptProperties['prependPath']) && $scriptProperties['prependPath'] != 'null' && $scriptProperties['prependPath'] != null
+    ? $scriptProperties['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
-$directory = realpath($d.$_REQUEST['path']);
+$directory = realpath($d.$scriptProperties['path']);
 
 $errors = array();
 foreach ($_FILES as $id => $file) {

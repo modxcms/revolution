@@ -12,19 +12,19 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-if (empty($_POST['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
-$d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
-    ? $_POST['prependPath']
+$d = isset($scriptProperties['prependPath']) && $scriptProperties['prependPath'] != 'null' && $scriptProperties['prependPath'] != null
+    ? $scriptProperties['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
-$olddir = realpath($d.$_POST['dir']);
+$olddir = realpath($d.$scriptProperties['dir']);
 
 if (!is_dir($olddir)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
 if (!is_readable($olddir) || !is_writable($olddir)) {
 	return $modx->error->failure($modx->lexicon('file_folder_err_perms'));
 }
 
-$newdir = strtr(dirname($olddir).'/'.$_POST['name'],'\\','/');
+$newdir = strtr(dirname($olddir).'/'.$scriptProperties['name'],'\\','/');
 
 if (!@rename($olddir,$newdir)) {
     return $modx->error->failure($modx->lexicon('file_folder_err_rename'));

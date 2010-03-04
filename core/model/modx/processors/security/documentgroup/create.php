@@ -10,15 +10,15 @@
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('access');
 
-if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('resource_group_untitled');
+if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('resource_group_untitled');
 
 /* make sure name is unique */
-$alreadyExists = $modx->getObject('modResourceGroup',array('name' => $_POST['name']));
+$alreadyExists = $modx->getObject('modResourceGroup',array('name' => $scriptProperties['name']));
 if ($alreadyExists) return $modx->error->failure($modx->lexicon('resource_group_err_ae'));
 
 /* create resource group */
 $resourceGroup = $modx->newObject('modResourceGroup');
-$resourceGroup->fromArray($_POST);
+$resourceGroup->fromArray($scriptProperties);
 
 if ($resourceGroup->save() == false) {
     return $modx->error->failure($modx->lexicon('resource_group_err_create'));

@@ -9,7 +9,7 @@ $modx->lexicon->load('lexicon');
 
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$_DATA = $modx->fromJSON($_POST['data']);
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 /* get entry */
 if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));

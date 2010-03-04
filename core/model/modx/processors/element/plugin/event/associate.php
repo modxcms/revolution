@@ -7,12 +7,12 @@ if (!$modx->hasPermission('save_plugin')) return $modx->error->failure($modx->le
 $modx->lexicon->load('plugin','system_events');
 
 /* get event */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('plugin_event_err_ns'));
-$event = $modx->getObject('modEvent',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('plugin_event_err_ns'));
+$event = $modx->getObject('modEvent',$scriptProperties['id']);
 if ($event == null) return $modx->error->failure($modx->lexicon('plugin_event_err_nf'));
 
 /* get plugins */
-$plugins = $modx->fromJSON($_POST['plugins']);
+$plugins = $modx->fromJSON($scriptProperties['plugins']);
 
 /* first remove all */
 $opes = $modx->getCollection('modPluginEvent',array(

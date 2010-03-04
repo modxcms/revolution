@@ -10,7 +10,7 @@
 $modx->lexicon->load('messages');
 if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$message = $modx->getObject('modUserMessage',$_POST['id']);
+$message = $modx->getObject('modUserMessage',$scriptProperties['id']);
 if ($message == null) return $modx->error->failure($modx->lexicon('message_err_not_found'));
 
 $message->set('messageread',false);

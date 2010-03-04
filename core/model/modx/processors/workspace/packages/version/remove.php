@@ -14,8 +14,8 @@ $modx->lexicon->load('workspace');
 
 /* get package */
 $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_gpack'));
-$package = $modx->getObject('transport.modTransportPackage', $_REQUEST['signature']);
-if ($package == null) return $modx->error->failure($modx->lexicon('package_err_nfs',array('signature' => $_REQUEST['signature'])));
+$package = $modx->getObject('transport.modTransportPackage', $scriptProperties['signature']);
+if ($package == null) return $modx->error->failure($modx->lexicon('package_err_nfs',array('signature' => $scriptProperties['signature'])));
 
 $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tzip_start'));
 

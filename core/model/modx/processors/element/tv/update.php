@@ -26,8 +26,8 @@ if (!$modx->hasPermission('save_tv')) return $modx->error->failure($modx->lexico
 $modx->lexicon->load('tv','category');
 
 /* get tv */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'));
-$tv = $modx->getObject('modTemplateVar',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'));
+$tv = $modx->getObject('modTemplateVar',$scriptProperties['id']);
 if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
 
 /* check locks */
@@ -36,12 +36,12 @@ if ($tv->get('locked') && $modx->hasPermission('edit_locked') == false) {
 }
 
 /* category */
-if (!empty($_POST['category'])) {
-    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
+if (!empty($scriptProperties['category'])) {
+    $category = $modx->getObject('modCategory',array('id' => $scriptProperties['category']));
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
-if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('untitled_tv');
+if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('untitled_tv');
 
 /* invoke OnBeforeTVFormSave event */
 $modx->invokeEvent('OnBeforeTVFormSave',array(
@@ -53,7 +53,7 @@ $modx->invokeEvent('OnBeforeTVFormSave',array(
 /* check to make sure name doesn't already exist */
 $nameExists = $modx->getObject('modTemplateVar',array(
     'id:!=' => $tv->get('id'),
-    'name' => $_POST['name'],
+    'name' => $scriptProperties['name'],
 ));
 if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name'));
 
@@ -61,12 +61,12 @@ if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('tv_err_ex
 /* get rid of invalid chars */
 $invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
     '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$_POST['name'] = str_replace($invchars,'',$_POST['name']);
+$scriptProperties['name'] = str_replace($invchars,'',$scriptProperties['name']);
 
 
 /* extract widget properties */
 $display_params = '';
-foreach ($_POST as $key => $value) {
+foreach ($scriptProperties as $key => $value) {
     $res = strstr($key,'prop_');
     if ($res !== false) {
         $key = str_replace('prop_','',$key);
@@ -74,11 +74,11 @@ foreach ($_POST as $key => $value) {
     }
 }
 
-$tv->fromArray($_POST);
-$tv->set('elements',$_POST['els']);
+$tv->fromArray($scriptProperties);
+$tv->set('elements',$scriptProperties['els']);
 $tv->set('display_params',$display_params);
-$tv->set('rank', !empty($_POST['rank']) ? $_POST['rank'] : 0);
-$tv->set('locked', !empty($_POST['locked']));
+$tv->set('rank', !empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
+$tv->set('locked', !empty($scriptProperties['locked']));
 
 if ($tv->save() === false) {
     return $modx->error->failure($modx->lexicon('tv_err_save'));
@@ -86,8 +86,8 @@ if ($tv->save() === false) {
 
 
 /* change template access to tvs */
-if (isset($_POST['templates'])) {
-    $templateVariables = $modx->fromJSON($_POST['templates']);
+if (isset($scriptProperties['templates'])) {
+    $templateVariables = $modx->fromJSON($scriptProperties['templates']);
     if (is_array($templateVariables)) {
         foreach ($templateVariables as $id => $template) {
             if (!is_array($template)) continue;
@@ -121,8 +121,8 @@ if (isset($_POST['templates'])) {
  * update access
  */
 if ($modx->hasPermission('tv_access_permissions')) {
-    if (isset($_POST['resource_groups'])) {
-        $docgroups = $modx->fromJSON($_POST['resource_groups']);
+    if (isset($scriptProperties['resource_groups'])) {
+        $docgroups = $modx->fromJSON($scriptProperties['resource_groups']);
         if (is_array($docgroups)) {
             foreach ($docgroups as $id => $group) {
                 if (!is_array($group)) continue;
@@ -157,7 +157,7 @@ $modx->invokeEvent('OnTVFormSave',array(
 $modx->logManagerAction('tv_update','modTemplateVar',$tv->get('id'));
 
 /* empty cache */
-if (!empty($_POST['clearCache'])) {
+if (!empty($scriptProperties['clearCache'])) {
     $cacheManager= $modx->getCacheManager();
     $cacheManager->clearCache();
 }

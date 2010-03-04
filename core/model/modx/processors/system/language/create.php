@@ -11,15 +11,15 @@ if (!$modx->hasPermission('languages')) return $modx->error->failure($modx->lexi
 $modx->lexicon->load('lexicon');
 
 /* validate fields */
-if (empty($_POST['name'])) return $modx->error->failure($modx->lexicon('language_err_ns'));
+if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexicon('language_err_ns'));
 
 /* check if name already exists */
-$alreadyExists = $modx->getObject('modLexiconLanguage',array('name' => $_POST['name']));
+$alreadyExists = $modx->getObject('modLexiconLanguage',array('name' => $scriptProperties['name']));
 if ($alreadyExists) return $modx->error->failure($modx->lexicon('language_err_ae'));
 
 /* create language */
 $language = $modx->newObject('modLexiconLanguage');
-$language->set('name',$_POST['name']);
+$language->set('name',$scriptProperties['name']);
 
 /* save language */
 if ($language->save() === false) {

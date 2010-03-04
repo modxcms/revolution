@@ -19,8 +19,8 @@ if (!$modx->hasPermission('save_snippet')) return $modx->error->failure($modx->l
 $modx->lexicon->load('snippet','category');
 
 /* get snippet */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
-$snippet = $modx->getObject('modSnippet',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
+$snippet = $modx->getObject('modSnippet',$scriptProperties['id']);
 if ($snippet == null) return $modx->error->failure($modx->lexicon('snippet_err_nf'));
 
 /* check if locked, if so, prevent access */
@@ -29,28 +29,28 @@ if ($snippet->get('locked') && $modx->hasPermission('edit_locked') == false) {
 }
 
 /* validation */
-if (empty($_POST['name'])) {
+if (empty($scriptProperties['name'])) {
     $modx->error->addField('name',$modx->lexicon('snippet_err_ns_name'));
 }
 
 /* check to see if name already exists */
 $nameExists = $modx->getObject('modSnippet',array(
     'id:!=' => $snippet->get('id'),
-    'name' => $_POST['name'],
+    'name' => $scriptProperties['name'],
 ));
 if ($nameExists) $modx->error->addField('name',$modx->lexicon('snippet_err_exists_name'));
 
 /* category */
-if (!empty($_POST['category'])) {
-    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
+if (!empty($scriptProperties['category'])) {
+    $category = $modx->getObject('modCategory',array('id' => $scriptProperties['category']));
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
 /* set fields */
-$snippet->fromArray($_POST);
-$snippet->set('locked',!empty($_POST['locked']));
+$snippet->fromArray($scriptProperties);
+$snippet->set('locked',!empty($scriptProperties['locked']));
 
 /* invoke OnBeforeSnipFormSave event */
 $modx->invokeEvent('OnBeforeSnipFormSave',array(
@@ -75,7 +75,7 @@ $modx->invokeEvent('OnSnipFormSave',array(
 $modx->logManagerAction('snippet_update','modSnippet',$snippet->get('id'));
 
 /* empty cache */
-if (!empty($_POST['clearCache'])) {
+if (!empty($scriptProperties['clearCache'])) {
     $cacheManager= $modx->getCacheManager();
     $cacheManager->clearCache();
 }

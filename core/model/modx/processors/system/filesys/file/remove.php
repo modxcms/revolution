@@ -6,7 +6,7 @@
 
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$file = $_POST['path'].$_POST['file'];
+$file = $scriptProperties['path'].$scriptProperties['file'];
 
 if (!file_exists($file)) return $modx->error->failure($modx->lexicon('file_err_nf'));
 

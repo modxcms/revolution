@@ -16,7 +16,7 @@ if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('messages','user');
 
 /* validation */
-if (empty($_POST['subject'])) {
+if (empty($scriptProperties['subject'])) {
 	$modx->error->addField('m_reply_subject',$modx->lexicon('message_err_not_specified_subject'));
 }
 
@@ -29,15 +29,15 @@ $fields .= '</ul>';
 if ($modx->error->hasError()) return $modx->error->failure($modx->lexicon('validation_system_settings').$fields);
 
 /* process message */
-switch ($_POST['type']) {
+switch ($scriptProperties['type']) {
 	case 'user':
-		$user = $modx->getObject('modUser',$_POST['user']);
+		$user = $modx->getObject('modUser',$scriptProperties['user']);
 		if ($user == null) return $modx->error->failure($modx->lexicon('user_err_not_found'));
 
 		$message = $modx->newObject('modUserMessage');
 		$message->set('type','Message');
-		$message->set('subject',$_POST['subject']);
-		$message->set('message',$_POST['message']);
+		$message->set('subject',$scriptProperties['subject']);
+		$message->set('message',$scriptProperties['message']);
 		$message->set('sender',$modx->user->get('id'));
 		$message->set('recipient',$user->get('id'));
 		$message->set('private',true);
@@ -48,17 +48,17 @@ switch ($_POST['type']) {
 		break;
 
 	case 'role':
-		$role = $modx->getObject('modUserRole',$_POST['role']);
+		$role = $modx->getObject('modUserRole',$scriptProperties['role']);
 		if ($role == null) return $modx->error->failure($modx->lexicon('role_err_not_found'));
 
-		$users = $modx->getCollection('modUserProfile',array('role' => $_POST['role']));
+		$users = $modx->getCollection('modUserProfile',array('role' => $scriptProperties['role']));
 
 		foreach ($users as $user) {
 			if ($user->get('internalKey') != $modx->user->get('id')) {
 				$message = $modx->newObject('modUserMessage');
 				$message->set('recipient',$user->get('internalKey'));
-				$message->set('subject',$_POST['subject']);
-				$message->set('message',$_POST['message']);
+				$message->set('subject',$scriptProperties['subject']);
+				$message->set('message',$scriptProperties['message']);
 				$message->set('sender',$modx->user->get('id'));
 				$message->set('postdate',time());
 				$message->set('type','Message');
@@ -74,8 +74,8 @@ switch ($_POST['type']) {
 				$message = $modx->newObject('modUserMessage');
 				$message->set('recipient',$user->get('id'));
 				$message->set('sender',$modx->user->get('id'));
-				$message->set('subject',$_POST['subject']);
-				$message->set('message',$_POST['message']);
+				$message->set('subject',$scriptProperties['subject']);
+				$message->set('message',$scriptProperties['message']);
 				$message->set('postdate',time());
 				$message->set('type','Message');
 				$message->set('private',false);

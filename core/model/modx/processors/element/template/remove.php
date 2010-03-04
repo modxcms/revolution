@@ -11,8 +11,8 @@ if (!$modx->hasPermission('delete_template')) return $modx->error->failure($modx
 $modx->lexicon->load('template','tv');
 
 /* get template and related tables */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
-$template = $modx->getObject('modTemplate',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
+$template = $modx->getObject('modTemplate',$scriptProperties['id']);
 if ($template == null) return $modx->error->failure($modx->lexicon('template_err_nf'));
 
 /* check to make sure it doesn't have any resources using it */

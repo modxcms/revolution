@@ -12,7 +12,7 @@
 if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
-$_DATA = $modx->fromJSON($_POST['data']);
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 if (!$context = $modx->getObject('modContext', $_DATA['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 if (!$context->checkPolicy('save')) return $modx->error->failure($modx->lexicon('permission_denied'));

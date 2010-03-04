@@ -12,11 +12,11 @@ $modx->lexicon->load('access');
 
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['type']) || !isset($_REQUEST['id'])) {
+if (!isset($scriptProperties['type']) || !isset($scriptProperties['id'])) {
     return $modx->error->failure($modx->lexicon('access_type_err_ns'));
 }
-$accessClass = $_REQUEST['type'];
-$accessId = $_REQUEST['id'];
+$accessClass = $scriptProperties['type'];
+$accessId = $scriptProperties['id'];
 
 $aclArray = array();
 if ($acl = $modx->getObject($accessClass, $accessId)) {

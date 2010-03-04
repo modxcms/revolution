@@ -11,8 +11,8 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('user','access');
 
 /* get resource group */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('resource_group_err_ns'));
-$resourceGroup = $modx->getObject('modResourceGroup',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('resource_group_err_ns'));
+$resourceGroup = $modx->getObject('modResourceGroup',$scriptProperties['id']);
 if ($resourceGroup == null) return $modx->error->failure($modx->lexicon('resource_group_err_nf'));
 
 $modx->invokeEvent('OnBeforeDocGroupRemove',array(

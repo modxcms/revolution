@@ -11,8 +11,8 @@ if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('workspace');
 
 /* get workspace */
-if (!isset($_POST['workspace'])) $_POST['workspace'] = 1;
-$workspace = $modx->getObject('modWorkspace',$_POST['workspace']);
+if (!isset($scriptProperties['workspace'])) $scriptProperties['workspace'] = 1;
+$workspace = $modx->getObject('modWorkspace',$scriptProperties['workspace']);
 if (empty($workspace)) return $modx->error->failure($modx->lexicon('workspace_err_nf'));
 
 $packages = array();

@@ -10,7 +10,7 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-$file = rawurldecode($_REQUEST['file']);
+$file = rawurldecode($scriptProperties['file']);
 
 if (!file_exists($file)) return $modx->error->failure($modx->lexicon('file_err_nf'));
 

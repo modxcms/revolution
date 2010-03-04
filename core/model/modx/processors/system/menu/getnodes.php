@@ -14,10 +14,10 @@ if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon(
 $modx->lexicon->load('action','menu','topmenu');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$id = $modx->getOption('id',$_REQUEST,'');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$id = $modx->getOption('id',$scriptProperties,'');
 
 $id = str_replace('n_','',$id);
 if (empty($id)) $id = '';

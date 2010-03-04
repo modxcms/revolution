@@ -7,24 +7,24 @@ if (!$modx->hasPermission('save_plugin')) return $modx->error->failure($modx->le
 $modx->lexicon->load('plugin');
 
 /* validation */
-if (empty($_POST['priority'])) $_POST['priority'] = 0;
-if (empty($_POST['plugin']) || empty($_POST['event'])) {
+if (empty($scriptProperties['priority'])) $scriptProperties['priority'] = 0;
+if (empty($scriptProperties['plugin']) || empty($scriptProperties['event'])) {
     return $modx->error->failure($modx->lexicon('plugin_event_err_ns'));
 }
 
 /* get plugin event */
 $pluginEvent = $modx->getObject('modPluginEvent',array(
-    'pluginid' => $_POST['plugin'],
-    'evtid' => $_POST['id'],
+    'pluginid' => $scriptProperties['plugin'],
+    'evtid' => $scriptProperties['id'],
 ));
-if ($_POST['enabled']) {
+if ($scriptProperties['enabled']) {
     /* enabling system event or editing priority */
     if (!$pluginEvent) {
         $pluginEvent = $modx->newObject('modPluginEvent');
     }
-    $pluginEvent->set('pluginid',$_POST['plugin']);
-    $pluginEvent->set('evtid',$_POST['id']);
-    $pluginEvent->set('priority',$_POST['priority']);
+    $pluginEvent->set('pluginid',$scriptProperties['plugin']);
+    $pluginEvent->set('evtid',$scriptProperties['id']);
+    $pluginEvent->set('priority',$scriptProperties['priority']);
 
     if ($pluginEvent->save() == false) {
         return $modx->error->failure($modx->lexicon('plugin_event_err_save'));

@@ -15,7 +15,7 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('policy');
 
 /* parse JSON data */
-$_DATA = $modx->fromJSON($_POST['data']);
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 /* get policy */
 if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('policy_err_ns'));

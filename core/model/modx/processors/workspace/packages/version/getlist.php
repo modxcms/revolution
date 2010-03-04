@@ -10,12 +10,12 @@ $modx->lexicon->load('workspace');
 $modx->addPackage('modx.transport',$modx->getOption('core_path').'model/');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$workspace = $modx->getOption('workspace',$_REQUEST,1);
-$dateFormat = $modx->getOption('dateFormat',$_REQUEST,'%b %d, %Y %I:%M %p');
-$signature = $modx->getOption('signature',$_REQUEST,false);
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$workspace = $modx->getOption('workspace',$scriptProperties,1);
+$dateFormat = $modx->getOption('dateFormat',$scriptProperties,'%b %d, %Y %I:%M %p');
+$signature = $modx->getOption('signature',$scriptProperties,false);
 
 if (empty($signature)) return $this->outputArray(array());
 $signatureArray = explode('-',$signature);

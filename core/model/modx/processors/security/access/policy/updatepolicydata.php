@@ -13,23 +13,23 @@ $modx->lexicon->load('policy');
 
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['id'])) return $modx->error->failure('Policy id not specified!');
+if (!isset($scriptProperties['id'])) return $modx->error->failure('Policy id not specified!');
 
 /* get policy */
-$policy = $modx->getObject('modAccessPolicy',$_REQUEST['id']);
+$policy = $modx->getObject('modAccessPolicy',$scriptProperties['id']);
 if ($policy == null) return $modx->error->failure('Policy not found!');
 
 /* parse data from JSON */
 $ar = $policy->get('data');
 
-if (!isset($ar[$_REQUEST['key']])) return $modx->error->failure('Policy property not found!');
+if (!isset($ar[$scriptProperties['key']])) return $modx->error->failure('Policy property not found!');
 
 /* format policy value */
-if ($_REQUEST['value'] === 'true') $_REQUEST['value'] = true;
-if ($_REQUEST['value'] === 'false') $_REQUEST['value'] = false;
+if ($scriptProperties['value'] === 'true') $scriptProperties['value'] = true;
+if ($scriptProperties['value'] === 'false') $scriptProperties['value'] = false;
 
 /* set policy value */
-$ar[$_REQUEST['key']] = $_REQUEST['value'];
+$ar[$scriptProperties['key']] = $scriptProperties['value'];
 
 $policy->set('data',$modx->toJSON($ar));
 

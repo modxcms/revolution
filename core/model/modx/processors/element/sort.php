@@ -10,7 +10,7 @@
 if (!$modx->hasPermission('element_tree')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('category');
 
-$data = urldecode($_POST['data']);
+$data = urldecode($scriptProperties['data']);
 $data = $modx->fromJSON($data);
 
 sortNodes('modTemplate','template',$data);

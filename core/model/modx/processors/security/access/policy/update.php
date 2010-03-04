@@ -16,12 +16,12 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('policy');
 
 /* get policy */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('policy_err_ns'));
-$policy = $modx->getObject('modAccessPolicy',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('policy_err_ns'));
+$policy = $modx->getObject('modAccessPolicy',$scriptProperties['id']);
 if ($policy == null) return $modx->error->failure($modx->lexicon('policy_err_nf'));
 
 /* save fields */
-$policy->fromArray($_POST);
+$policy->fromArray($scriptProperties);
 
 /* wipe all the current permissions for that policy */
 $permissions = $modx->removeCollection('modAccessPermission',array(
@@ -30,9 +30,9 @@ $permissions = $modx->removeCollection('modAccessPermission',array(
 
 /* now store the permissions into the modAccessPermission table */
 /* and cache the data into the policy table */
-if (isset($_POST['permissions'])) {
+if (isset($scriptProperties['permissions'])) {
     $permData = array();
-    $permissionsArray = $modx->fromJSON($_POST['permissions']);
+    $permissionsArray = $modx->fromJSON($scriptProperties['permissions']);
 
     $permissions = array();
     foreach ($permissionsArray as $permissionArray) {

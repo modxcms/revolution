@@ -1325,6 +1325,11 @@ class modX extends xPDO {
             if (file_exists($processor)) {
                 if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
                 if (!isset($this->error)) $this->request->loadErrorHandler();
+
+                if (!isset($_REQUEST)) $_REQUEST = array();
+                if (!isset($_FILES)) $_FILES = array();
+                $scriptProperties = array_merge($options,$_REQUEST,$_FILES);
+
                 $modx =& $this;
                 $result = include $processor;
             } else {

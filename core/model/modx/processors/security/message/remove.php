@@ -11,7 +11,7 @@ if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('messages','user');
 
 /* get message */
-$message = $modx->getObject('modUserMessage',$_POST['id']);
+$message = $modx->getObject('modUserMessage',$scriptProperties['id']);
 if ($message == null) {
     return $modx->error->failure($modx->lexicon('message_err_not_found'));
 }

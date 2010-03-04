@@ -8,8 +8,8 @@
 if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('action','menu');
 
-if (empty($_POST['data'])) return $modx->error->failure();
-$data = urldecode($_POST['data']);
+if (empty($scriptProperties['data'])) return $modx->error->failure();
+$data = urldecode($scriptProperties['data']);
 $data = $modx->fromJSON($data);
 $nodes = array();
 getNodesFormatted($nodes,$data);

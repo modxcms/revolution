@@ -11,9 +11,9 @@
 if (!$modx->hasPermission('unpublish_document')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
-$resource = $modx->getObject('modResource',$_REQUEST['id']);
-if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_REQUEST['id'])));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
+$resource = $modx->getObject('modResource',$scriptProperties['id']);
+if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $scriptProperties['id'])));
 
 /* check permissions on the resource */
 if (!$resource->checkPolicy(array('save'=>true, 'unpublish'=>true))) {

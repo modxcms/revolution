@@ -17,16 +17,16 @@
 if (!$modx->hasPermission('logs')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,20);
-$sort = $modx->getOption('sort',$_REQUEST,'occurred');
-$dir = $modx->getOption('dir',$_REQUEST,'DESC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,20);
+$sort = $modx->getOption('sort',$scriptProperties,'occurred');
+$dir = $modx->getOption('dir',$scriptProperties,'DESC');
 
-$user = $modx->getOption('user',$_REQUEST,false);
-$actionType = $modx->getOption('actionType',$_REQUEST,false);
-$dateStart = $modx->getOption('dateStart',$_REQUEST,false);
-$dateEnd = $modx->getOption('dateEnd',$_REQUEST,false);
+$user = $modx->getOption('user',$scriptProperties,false);
+$actionType = $modx->getOption('actionType',$scriptProperties,false);
+$dateStart = $modx->getOption('dateStart',$scriptProperties,false);
+$dateEnd = $modx->getOption('dateEnd',$scriptProperties,false);
 
 /* check filters */
 $wa = array();

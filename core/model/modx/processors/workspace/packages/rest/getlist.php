@@ -5,20 +5,20 @@
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('workspace');
 
-$provider = $modx->getOption('provider',$_REQUEST,false);
+$provider = $modx->getOption('provider',$scriptProperties,false);
 if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_ns'));
 
 $provider = $modx->getObject('transport.modTransportProvider',$provider);
 if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nf'));
 
-if (empty($_REQUEST['query']) && empty($_REQUEST['tag'])) return $this->outputArray(array());
+if (empty($scriptProperties['query']) && empty($scriptProperties['tag'])) return $this->outputArray(array());
 
 /* get default properties */
-$tag = $modx->getOption('tag',$_REQUEST,false);
-$query = $modx->getOption('query',$_REQUEST,false);
-$sorter = $modx->getOption('sorter',$_REQUEST,false);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
+$tag = $modx->getOption('tag',$scriptProperties,false);
+$query = $modx->getOption('query',$scriptProperties,false);
+$sorter = $modx->getOption('sorter',$scriptProperties,false);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
 $page = !empty($start) ? round($start / $limit) : 0;
 
 /* get version */

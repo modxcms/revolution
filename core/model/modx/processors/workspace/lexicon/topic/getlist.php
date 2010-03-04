@@ -18,20 +18,20 @@ if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('lexicon');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'name');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-if (empty($_REQUEST['namespace'])) $_REQUEST['namespace'] = 'core';
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'name');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+if (empty($scriptProperties['namespace'])) $scriptProperties['namespace'] = 'core';
 
 /* filter by namespace */
 $where = array(
-    'namespace' => $_REQUEST['namespace'],
+    'namespace' => $scriptProperties['namespace'],
 );
 /* if set, filter by name */
-if (!empty($_REQUEST['name'])) {
-	$where['name:LIKE'] = '%'.$_REQUEST['name'].'%';
+if (!empty($scriptProperties['name'])) {
+	$where['name:LIKE'] = '%'.$scriptProperties['name'].'%';
 }
 
 $c = $modx->newQuery('modLexiconTopic');

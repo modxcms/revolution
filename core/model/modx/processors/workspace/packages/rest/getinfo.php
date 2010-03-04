@@ -6,7 +6,7 @@
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('workspace');
 
-$provider = $modx->getOption('provider',$_REQUEST,false);
+$provider = $modx->getOption('provider',$scriptProperties,false);
 if (empty($provider)) return array();
 $provider = $modx->getObject('transport.modTransportProvider',$provider);
 if (empty($provider)) return array();

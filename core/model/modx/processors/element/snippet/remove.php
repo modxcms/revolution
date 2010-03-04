@@ -11,8 +11,8 @@ if (!$modx->hasPermission('delete_snippet')) return $modx->error->failure($modx-
 $modx->lexicon->load('snippet');
 
 /* get snippet */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
-$snippet = $modx->getObject('modSnippet',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
+$snippet = $modx->getObject('modSnippet',$scriptProperties['id']);
 if (!$snippet) return $modx->error->failure($modx->lexicon('snippet_err_nf'));
 
 /* invoke OnBeforeSnipFormDelete event */

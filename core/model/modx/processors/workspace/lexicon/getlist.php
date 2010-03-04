@@ -18,32 +18,32 @@ if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('lexicon');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'name');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-if (empty($_REQUEST['namespace'])) $_REQUEST['namespace'] = 'core';
-if (empty($_REQUEST['language'])) $_REQUEST['language'] = 'en';
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'name');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+if (empty($scriptProperties['namespace'])) $scriptProperties['namespace'] = 'core';
+if (empty($scriptProperties['language'])) $scriptProperties['language'] = 'en';
 
 /* if specifying a topic */
-if (empty($_REQUEST['topic'])) {
+if (empty($scriptProperties['topic'])) {
     $topic = $modx->getObject('modLexiconTopic',array(
         'name' => 'default',
         'namespace' => 'core',
     ));
 } else {
-    $topic = $modx->getObject('modLexiconTopic',$_REQUEST['topic']);
+    $topic = $modx->getObject('modLexiconTopic',$scriptProperties['topic']);
     if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
 }
 $where = array(
-    'namespace' => $_REQUEST['namespace'],
+    'namespace' => $scriptProperties['namespace'],
     'topic' => $topic->get('id'),
-    'language' => $_REQUEST['language'],
+    'language' => $scriptProperties['language'],
 );
 /* if filtering by name */
-if (!empty($_REQUEST['name'])) {
-	$where['name:LIKE'] = '%'.$_REQUEST['name'].'%';
+if (!empty($scriptProperties['name'])) {
+	$where['name:LIKE'] = '%'.$scriptProperties['name'].'%';
 }
 
 /* setup query */
@@ -52,7 +52,7 @@ $c->where($where);
 $count = $modx->getCount('modLexiconEntry',$c);
 
 $c->sortby($sort,$dir);
-if ($isLimit) $c->limit($_REQUEST['limit'],$_REQUEST['start']);
+if ($isLimit) $c->limit($scriptProperties['limit'],$scriptProperties['start']);
 $entries = $modx->getCollection('modLexiconEntry',$c);
 
 /* loop through */

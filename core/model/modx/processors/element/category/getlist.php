@@ -15,12 +15,12 @@ if (!$modx->hasPermission('view_category')) return $modx->error->failure($modx->
 $modx->lexicon->load('category');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,20);
-$sort = $modx->getOption('sort',$_REQUEST,'parent,category');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$showNone = $modx->getOption('showNone',$_REQUEST,false);
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,20);
+$sort = $modx->getOption('sort',$scriptProperties,'parent,category');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$showNone = $modx->getOption('showNone',$scriptProperties,false);
 
 /* query for categories */
 $c = $modx->newQuery('modCategory');

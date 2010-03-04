@@ -19,21 +19,21 @@ if (!$modx->hasPermission('view_user')) {
 $modx->lexicon->load('user');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'username');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'username');
 if ($sort == 'username_link') $sort = 'username';
 if ($sort == 'id') $sort = 'modUser.id';
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
 /* query for users */
 $c = $modx->newQuery('modUser');
 $c->leftJoin('modUserProfile','Profile');
-if (!empty($_REQUEST['query'])) {
-    $c->where(array('modUser.username:LIKE' => '%'.$_REQUEST['query'].'%'));
-    $c->orCondition(array('Profile.fullname:LIKE' => '%'.$_REQUEST['query'].'%'));
-    $c->orCondition(array('Profile.email:LIKE' => '%'.$_REQUEST['query'].'%'));
+if (!empty($scriptProperties['query'])) {
+    $c->where(array('modUser.username:LIKE' => '%'.$scriptProperties['query'].'%'));
+    $c->orCondition(array('Profile.fullname:LIKE' => '%'.$scriptProperties['query'].'%'));
+    $c->orCondition(array('Profile.email:LIKE' => '%'.$scriptProperties['query'].'%'));
 }
 $count = $modx->getCount('modUser',$c);
 $c->select('

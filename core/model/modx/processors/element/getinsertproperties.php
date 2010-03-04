@@ -7,13 +7,13 @@ if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($mod
 $modx->lexicon->load('element','propertyset');
 $o = '';
 
-$element = $modx->getObject($_REQUEST['classKey'],$_REQUEST['pk']);
+$element = $modx->getObject($scriptProperties['classKey'],$scriptProperties['pk']);
 if ($element == null) return $modx->lexicon('element_err_nf');
 
 $properties = $element->get('properties');
 
-if (!empty($_REQUEST['propertySet'])) {
-    $set = $modx->getObject('modPropertySet',$_REQUEST['propertySet']);
+if (!empty($scriptProperties['propertySet'])) {
+    $set = $modx->getObject('modPropertySet',$scriptProperties['propertySet']);
     if ($set == null) return $modx->error->failure($modx->lexicon('propertyset_err_nf'));
 
     $setProperties = $set->get('properties');

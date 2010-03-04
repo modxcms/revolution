@@ -11,13 +11,13 @@
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('access','resource');
 
-if (empty($_POST['document_group'])) return $modx->error->failure($modx->lexicon('resource_group_err_ns'));
-if (empty($_POST['document'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
+if (empty($scriptProperties['document_group'])) return $modx->error->failure($modx->lexicon('resource_group_err_ns'));
+if (empty($scriptProperties['document'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
 
 /* get resource group resource */
 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
-	'document_group' => $_POST['document_group'],
-	'document' => $_POST['document'],
+	'document_group' => $scriptProperties['document_group'],
+	'document' => $scriptProperties['document'],
 ));
 if ($resourceGroupResource == null) return $modx->error->failure($modx->lexicon('resource_group_resource_err_nf'));
 

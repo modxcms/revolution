@@ -16,7 +16,7 @@
 $modx->lexicon->load('tv','category');
 if (!$modx->hasPermission('save_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$_DATA = $modx->fromJSON($_POST['data']);
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'));
 $tv = $modx->getObject('modTemplateVar',$_DATA['id']);

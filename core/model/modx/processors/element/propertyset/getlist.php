@@ -20,16 +20,16 @@ if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($mod
 $modx->lexicon->load('propertyset');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'name');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'name');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
-$showNotAssociated = $modx->getOption('showNotAssociated',$_REQUEST,false);
-$showAssociated = $modx->getOption('showAssociated',$_REQUEST,false);
-$elementId = $modx->getOption('elementId',$_REQUEST,false);
-$elementType = $modx->getOption('elementType',$_REQUEST,false);
+$showNotAssociated = $modx->getOption('showNotAssociated',$scriptProperties,false);
+$showAssociated = $modx->getOption('showAssociated',$scriptProperties,false);
+$elementId = $modx->getOption('elementId',$scriptProperties,false);
+$elementType = $modx->getOption('elementType',$scriptProperties,false);
 
 /* query for sets */
 $c = $modx->newQuery('modPropertySet');

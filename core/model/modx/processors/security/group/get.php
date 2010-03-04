@@ -10,16 +10,16 @@
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (empty($_REQUEST['id'])) {
+if (empty($scriptProperties['id'])) {
     $usergroup = $modx->newObject('modUserGroup');
     $usergroup->set('id',0);
     $usergroup->set('name','('.$modx->lexicon('anonymous').')');
 } else {
-    $usergroup = $modx->getObject('modUserGroup',$_REQUEST['id']);
+    $usergroup = $modx->getObject('modUserGroup',$scriptProperties['id']);
     if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_nf'));
 }
 
-if (!empty($_REQUEST['getUsers']) && !empty($_REQUEST['id'])) {
+if (!empty($scriptProperties['getUsers']) && !empty($scriptProperties['id'])) {
     $c = $modx->newQuery('modUserGroupMember');
     $c->select('
         `modUserGroupMember`.*,
@@ -47,7 +47,7 @@ if (!empty($_REQUEST['getUsers']) && !empty($_REQUEST['id'])) {
     $usergroup->set('users','(' . $modx->toJSON($data) . ')');
 }
 
-if (!empty($_REQUEST['getResourceGroups'])) {
+if (!empty($scriptProperties['getResourceGroups'])) {
     $c = $modx->newQuery('modAccessResourceGroup');
     $c->select('
         `modAccessResourceGroup`.*,

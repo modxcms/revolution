@@ -12,12 +12,12 @@ $modx->log(MODX_LOG_LEVEL_INFO,'Loading package builder.');
 $modx->loadClass('transport.modXMLPackageBuilder','',false, true);
 $builder = new modXMLPackageBuilder($modx);
 
-if (!isset($_FILES) || !isset($_FILES['file'])) {
+if (!isset($scriptProperties['file'])) {
     $modx->log(MODX_LOG_LEVEL_ERROR,$modx->lexicon('xml_file_err_upload'));
 	return $modx->error->failure($modx->lexicon('xml_file_err_upload'));
 }
-$_FILE = $_FILES['file'];
-if (!isset($_FILE['error']) || $_FILE['error'] != '0') {
+$_FILE = $scriptProperties['file'];
+if (!isset($scriptProperties['error']) || $scriptProperties['error'] != '0') {
     $modx->log(MODX_LOG_LEVEL_ERROR,$modx->lexicon('xml_file_err_upload'));
 	return $modx->error->failure($modx->lexicon('xml_file_err_upload'));
 }

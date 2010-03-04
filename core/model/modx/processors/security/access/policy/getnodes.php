@@ -10,9 +10,9 @@ $modx->lexicon->load('policy');
 
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['id'])) return $modx->error->failure('Id not specified in request!');
+if (!isset($scriptProperties['id'])) return $modx->error->failure('Id not specified in request!');
 
-$policyAttr = explode('_', $_REQUEST['id']);
+$policyAttr = explode('_', $scriptProperties['id']);
 $policyId = count($policyAttr) == 2 ? $policyAttr[1] : '';
 
 $policy = $modx->getObject('modAccessPolicy', $policyId);

@@ -7,7 +7,7 @@ if (!$modx->hasPermission('save_plugin')) return $modx->error->failure($modx->le
 $modx->lexicon->load('plugin');
 
 /* validation and data formatting */
-$_DATA = $modx->fromJSON($_POST['data']);
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 if (empty($_DATA['priority'])) $_DATA['priority'] = 0;
 
 /* get plugin event */

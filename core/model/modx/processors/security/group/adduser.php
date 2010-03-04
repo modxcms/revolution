@@ -12,13 +12,13 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('user');
 
 /* get user */
-if (empty($_POST['member'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
-$user = $modx->getObject('modUser',$_POST['member']);
+if (empty($scriptProperties['member'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+$user = $modx->getObject('modUser',$scriptProperties['member']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
 /* get usergroup */
-if (empty($_POST['user_group'])) return $modx->error->failure($modx->lexicon('user_group_err_ns'));
-$usergroup = $modx->getObject('modUserGroup',$_POST['user_group']);
+if (empty($scriptProperties['user_group'])) return $modx->error->failure($modx->lexicon('user_group_err_ns'));
+$usergroup = $modx->getObject('modUserGroup',$scriptProperties['user_group']);
 if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_nf'));
 
 /* check to see if member is already in group */

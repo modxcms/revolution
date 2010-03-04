@@ -12,9 +12,9 @@ $modx->lexicon->load('lexicon');
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get topic */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('topic_err_ns'));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('topic_err_ns'));
 $topic = $modx->getObject('modLexiconTopic',array(
-    'id' => $_POST['id'],
+    'id' => $scriptProperties['id'],
 ));
 if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
 

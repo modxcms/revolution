@@ -11,7 +11,7 @@ if (!$modx->hasPermission('new_category')) return $modx->error->failure($modx->l
 $modx->lexicon->load('category');
 
 /* prevent empty names */
-if (empty($_POST['category'])) $modx->error->addField('category',$modx->lexicon('category_err_ns'));
+if (empty($scriptProperties['category'])) $modx->error->addField('category',$modx->lexicon('category_err_ns'));
 
 if ($modx->error->hasError()) {
     return $modx->error->failure();
@@ -19,7 +19,7 @@ if ($modx->error->hasError()) {
 
 /* create category object */
 $category = $modx->newObject('modCategory');
-$category->fromArray($_POST);
+$category->fromArray($scriptProperties);
 
 /* save category */
 if ($category->save() == false) {

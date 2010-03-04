@@ -13,13 +13,13 @@ $modx->lexicon->load('lexicon');
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* validate namespace */
-if (empty($_POST['namespace'])) $_POST['namespace'] = 'core';
-$namespace = $modx->getObject('modNamespace',$_POST['namespace']);
+if (empty($scriptProperties['namespace'])) $scriptProperties['namespace'] = 'core';
+$namespace = $modx->getObject('modNamespace',$scriptProperties['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
 /* create topic */
 $topic = $modx->newObject('modLexiconTopic');
-$topic->fromArray($_POST);
+$topic->fromArray($scriptProperties);
 
 /* save topic */
 if ($topic->save() === false) {

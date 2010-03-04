@@ -21,22 +21,22 @@ $modx->lexicon->load('access');
 
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (empty($_REQUEST['type'])) {
+if (empty($scriptProperties['type'])) {
     return $modx->error->failure($modx->lexicon('access_type_err_ns'));
 }
-$accessClass = $_REQUEST['type'];
+$accessClass = $scriptProperties['type'];
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
 $targetClass = str_replace('Access', '', $accessClass);
-$targetId = isset($_REQUEST['target']) ? $_REQUEST['target'] : 0;
-$principalClass = isset($_REQUEST['principal_class']) ? $_REQUEST['principal_class'] : 'modUserGroup';
-$principalId = isset($_REQUEST['principal']) ? intval($_REQUEST['principal']) : 0;
+$targetId = isset($scriptProperties['target']) ? $scriptProperties['target'] : 0;
+$principalClass = isset($scriptProperties['principal_class']) ? $scriptProperties['principal_class'] : 'modUserGroup';
+$principalId = isset($scriptProperties['principal']) ? intval($scriptProperties['principal']) : 0;
 
 /* build query */
 $c = $modx->newQuery($accessClass);

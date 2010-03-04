@@ -10,9 +10,9 @@
 if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('action','menu');
 
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$id = $modx->getOption('id',$_REQUEST,'n_0');
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$id = $modx->getOption('id',$scriptProperties,'n_0');
 
 $ar = explode('_',$id);
 $type = $ar[1];

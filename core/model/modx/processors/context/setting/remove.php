@@ -11,13 +11,13 @@
 if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
-if (!isset($_POST['key'],$_POST['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
-if (!$context = $modx->getObject('modContext', $_POST['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
+if (!isset($scriptProperties['key'],$scriptProperties['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
+if (!$context = $modx->getObject('modContext', $scriptProperties['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 if (!$context->checkPolicy('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 $setting = $modx->getObject('modContextSetting',array(
-    'key' => $_POST['key'],
-    'context_key' => $_POST['context_key'],
+    'key' => $scriptProperties['key'],
+    'context_key' => $scriptProperties['context_key'],
 ));
 if ($setting == null) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 

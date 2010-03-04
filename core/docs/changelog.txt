@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Changed all GPC references in processors to $scriptProperties, which is loaded at entrance points to processors with GPC vars, pushing input handling to the connector
 - [#MODX-1711] Fixed bug with strip output filter
 - Added ellipsis output filter
 - Fixed various event callings across JS implementation to properly modularize modext components

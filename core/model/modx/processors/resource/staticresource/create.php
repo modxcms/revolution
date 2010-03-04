@@ -5,7 +5,7 @@
  */
 
 /* set fields */
-$resource->fromArray($_POST);
+$resource->fromArray($scriptProperties);
 if (!$resource->get('class_key')) {
     $resource->set('class_key', $resourceClass);
 }
@@ -39,8 +39,8 @@ if ($parent && $parent->checkPolicy('save')) {
 }
 
 /* save resource groups */
-if (isset($_POST['resource_groups'])) {
-    $_GROUPS = $modx->fromJSON($_POST['resource_groups']);
+if (isset($scriptProperties['resource_groups'])) {
+    $_GROUPS = $modx->fromJSON($scriptProperties['resource_groups']);
     foreach ($_GROUPS as $id => $group) {
         if ($group['access']) {
             $rgr = $modx->getObject('modResourceGroupResource',array(
@@ -80,7 +80,7 @@ $modx->invokeEvent('OnDocFormSave',array(
 /* log manager action */
 $modx->logManagerAction('save_resource', 'modStaticResource', $resource->get('id'));
 
-if (!empty($_POST['syncsite']) || !empty($_POST['clearCache'])) {
+if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCache'])) {
     /* empty cache */
     $cacheManager= $modx->getCacheManager();
     $cacheManager->clearCache(array (

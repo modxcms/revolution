@@ -11,7 +11,7 @@ if (!$modx->hasPermission('new_context')) return $modx->error->failure($modx->le
 $modx->lexicon->load('context');
 
 /* prevent duplicate contexts */
-$alreadyExists = $modx->getObject('modContext',$_POST['key']);
+$alreadyExists = $modx->getObject('modContext',$scriptProperties['key']);
 if ($alreadyExists != null) $modx->error->addField('key',$modx->lexicon('context_err_ae'));
 
 /* if any errors, return */
@@ -21,7 +21,7 @@ if ($modx->error->hasError()) {
 
 /* create context */
 $context= $modx->newObject('modContext');
-$context->fromArray($_POST, '', true);
+$context->fromArray($scriptProperties, '', true);
 if ($context->save() == false) {
     $modx->error->checkValidation($context);
     return $modx->error->failure($modx->lexicon('context_err_create'));

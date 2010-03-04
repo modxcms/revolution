@@ -13,13 +13,13 @@ $modx->lexicon->load('workspace','lexicon');
 if (!$modx->hasPermission('namespaces')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* validate name */
-if (empty($_POST['name'])) {
+if (empty($scriptProperties['name'])) {
 	return $modx->error->failure($modx->lexicon('namespace_err_ns_name'));
 }
 
 /* create and save namespace */
 $namespace = $modx->newObject('modNamespace');
-$namespace->fromArray($_POST,'',true,true);
+$namespace->fromArray($scriptProperties,'',true,true);
 if ($namespace->save() === false) {
 	return $modx->error->failure($modx->lexicon('namespace_err_create'));
 }

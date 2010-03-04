@@ -10,7 +10,7 @@
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('workspace');
 
-$package = $modx->getObject('transport.modTransportPackage',$_REQUEST['signature']);
+$package = $modx->getObject('transport.modTransportPackage',$scriptProperties['signature']);
 if ($package == null) {
     $msg = $modx->lexicon('package_err_nf');
     $modx->log(modX::LOG_LEVEL_ERROR,$msg);

@@ -19,8 +19,8 @@ if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->
 $modx->lexicon->load('content_type');
 
 /* loop through content types */
-if (empty($_POST['data'])) return $modx->error->failure();
-$_DATA = $modx->fromJSON($_POST['data']);
+if (empty($scriptProperties['data'])) return $modx->error->failure();
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 foreach ($_DATA as $ct) {
     /* get content type */

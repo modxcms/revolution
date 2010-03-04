@@ -6,98 +6,98 @@
 /* BEGIN VALIDATION */
 
 /* username */
-if (empty($_POST['username'])) {
+if (empty($scriptProperties['username'])) {
     $modx->error->addField('username',$modx->lexicon('user_err_not_specified_username'));
 
-} else if (!empty($_POST['username']) && $_POST['username'] != $user->get('username')) {
-	$alreadyExists = $modx->getObject('modUser',array('username' => $_POST['username']));
+} else if (!empty($scriptProperties['username']) && $scriptProperties['username'] != $user->get('username')) {
+	$alreadyExists = $modx->getObject('modUser',array('username' => $scriptProperties['username']));
 	if ($alreadyExists) $modx->error->addField('username',$modx->lexicon('user_err_already_exists'));
-	$user->set('username',$_POST['username']);
+	$user->set('username',$scriptProperties['username']);
 }
 
 
 /* password */
-if (isset($_POST['newpassword']) && $_POST['newpassword'] != 'false' || empty($_POST['id'])) {
-	if (!isset($_POST['passwordnotifymethod'])) {
+if (isset($scriptProperties['newpassword']) && $scriptProperties['newpassword'] != 'false' || empty($scriptProperties['id'])) {
+	if (!isset($scriptProperties['passwordnotifymethod'])) {
 		$modx->error->addField('password_notify_method',$modx->lexicon('user_err_not_specified_notification_method'));
 	}
-	if ($_POST['passwordgenmethod'] == 'g') {
+	if ($scriptProperties['passwordgenmethod'] == 'g') {
         $len = $modx->getOption('password_generated_length',null,8);
 		$autoPassword = generate_password($len);
 		$user->set('password', $user->encode($autoPassword));
 		$newPassword= $autoPassword;
 	} else {
-		if (empty($_POST['specifiedpassword'])) {
+		if (empty($scriptProperties['specifiedpassword'])) {
 			$modx->error->addField('password',$modx->lexicon('user_err_not_specified_password'));
-		} elseif ($_POST['specifiedpassword'] != $_POST['confirmpassword']) {
+		} elseif ($scriptProperties['specifiedpassword'] != $scriptProperties['confirmpassword']) {
 			$modx->error->addField('password',$modx->lexicon('user_err_password_no_match'));
-		} elseif (strlen($_POST['specifiedpassword']) < $modx->getOption('password_min_length',null,6)) {
+		} elseif (strlen($scriptProperties['specifiedpassword']) < $modx->getOption('password_min_length',null,6)) {
 			$modx->error->addField('password',$modx->lexicon('user_err_password_too_short'));
 		} else {
-			$user->set('password',$user->encode($_POST['specifiedpassword']));
-			$newPassword= $_POST['specifiedpassword'];
+			$user->set('password',$user->encode($scriptProperties['specifiedpassword']));
+			$newPassword= $scriptProperties['specifiedpassword'];
 		}
 	}
 }
 
 /* email */
-if (empty($_POST['email'])) $modx->error->addField('email',$modx->lexicon('user_err_not_specified_email'));
+if (empty($scriptProperties['email'])) $modx->error->addField('email',$modx->lexicon('user_err_not_specified_email'));
 
 /* check if the email address already exists */
 if (!$modx->getOption('allow_multiple_users_per_email',null,true)) {
-    $emailExists = $modx->getObject('modUserProfile',array('email' => $_POST['email']));
+    $emailExists = $modx->getObject('modUserProfile',array('email' => $scriptProperties['email']));
     if ($emailExists) {
-    	if ($emailExists->get('internalKey') != $_POST['id']) {
+    	if ($emailExists->get('internalKey') != $scriptProperties['id']) {
     		$modx->error->addField('email',$modx->lexicon('user_err_already_exists_email'));
         }
     }
 }
 
 /* phone number */
-if (!empty($_POST['phone'])) {
-	$_POST['phone'] = str_replace(' ','',$_POST['phone']);
-	$_POST['phone'] = str_replace('-','',$_POST['phone']);
-	$_POST['phone'] = str_replace('(','',$_POST['phone']);
-	$_POST['phone'] = str_replace(')','',$_POST['phone']);
-	$_POST['phone'] = str_replace('+','',$_POST['phone']);
-	if ((strlen($_POST['phone']) < 10) || (strlen($_POST['phone']) > 11)) {
+if (!empty($scriptProperties['phone'])) {
+	$scriptProperties['phone'] = str_replace(' ','',$scriptProperties['phone']);
+	$scriptProperties['phone'] = str_replace('-','',$scriptProperties['phone']);
+	$scriptProperties['phone'] = str_replace('(','',$scriptProperties['phone']);
+	$scriptProperties['phone'] = str_replace(')','',$scriptProperties['phone']);
+	$scriptProperties['phone'] = str_replace('+','',$scriptProperties['phone']);
+	if ((strlen($scriptProperties['phone']) < 10) || (strlen($scriptProperties['phone']) > 11)) {
 		/* phone number is either too big or too small */
 		$modx->error->addField('phone',$modx->lexicon('user_err_not_specified_phonenumber'));
 	}
 }
 
 /* mobilephone number */
-if (!empty($_POST['mobilephone'])) {
-	$_POST['mobilephone'] = str_replace(' ','',$_POST['mobilephone']);
-	$_POST['mobilephone'] = str_replace('-','',$_POST['mobilephone']);
-	$_POST['mobilephone'] = str_replace('(','',$_POST['mobilephone']);
-	$_POST['mobilephone'] = str_replace(')','',$_POST['mobilephone']);
-	$_POST['mobilephone'] = str_replace('+','',$_POST['mobilephone']);
-	if ((strlen($_POST['mobilephone']) < 10) || (strlen($_POST['mobilephone']) > 11)) {
+if (!empty($scriptProperties['mobilephone'])) {
+	$scriptProperties['mobilephone'] = str_replace(' ','',$scriptProperties['mobilephone']);
+	$scriptProperties['mobilephone'] = str_replace('-','',$scriptProperties['mobilephone']);
+	$scriptProperties['mobilephone'] = str_replace('(','',$scriptProperties['mobilephone']);
+	$scriptProperties['mobilephone'] = str_replace(')','',$scriptProperties['mobilephone']);
+	$scriptProperties['mobilephone'] = str_replace('+','',$scriptProperties['mobilephone']);
+	if ((strlen($scriptProperties['mobilephone']) < 10) || (strlen($scriptProperties['mobilephone']) > 11)) {
 		/* phone number is either too big or too small */
 		$modx->error->addField('mobilephone',$modx->lexicon('user_err_not_specified_mobnumber'));
 	}
 }
 
 /* birthdate */
-if (!empty($_POST['dob'])) {
-	$_POST['dob'] = str_replace('-','/',$_POST['dob']);
-	if (!$_POST['dob'] = strtotime($_POST['dob']))
+if (!empty($scriptProperties['dob'])) {
+	$scriptProperties['dob'] = str_replace('-','/',$scriptProperties['dob']);
+	if (!$scriptProperties['dob'] = strtotime($scriptProperties['dob']))
 		$modx->error->addField('dob',$modx->lexicon('user_err_not_specified_dob'));
 }
 
 
 /* blocked until */
-if (!empty($_POST['blockeduntil'])) {
-	$_POST['blockeduntil'] = str_replace('-','/',$_POST['blockeduntil']);
-	if (!$_POST['blockeduntil'] = strtotime($_POST['blockeduntil']))
+if (!empty($scriptProperties['blockeduntil'])) {
+	$scriptProperties['blockeduntil'] = str_replace('-','/',$scriptProperties['blockeduntil']);
+	if (!$scriptProperties['blockeduntil'] = strtotime($scriptProperties['blockeduntil']))
 		$modx->error->addField('blockeduntil',$modx->lexicon('user_err_not_specified_blockeduntil'));
 }
 
 /* blocked after */
-if (!empty($_POST['blockedafter'])) {
-	$_POST['blockedafter'] = str_replace('-','/',$_POST['blockedafter']);
-	if (!$_POST['blockedafter'] = strtotime($_POST['blockedafter']))
+if (!empty($scriptProperties['blockedafter'])) {
+	$scriptProperties['blockedafter'] = str_replace('-','/',$scriptProperties['blockedafter']);
+	if (!$scriptProperties['blockedafter'] = strtotime($scriptProperties['blockedafter']))
 		$modx->error->addField('blockedafter',$modx->lexicon('user_err_not_specified_blockedafter'));
 }
 

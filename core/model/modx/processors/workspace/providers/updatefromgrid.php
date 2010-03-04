@@ -9,7 +9,7 @@ $modx->lexicon->load('workspace');
 
 if (!$modx->hasPermission('providers')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$_DATA = $modx->fromJSON($_POST['data']);
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 /* get provider */
 if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('provider_err_ns'));

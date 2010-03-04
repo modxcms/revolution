@@ -20,20 +20,20 @@ $modx->lexicon->load('setting');
 
 
 /* get context */
-$_POST['context_key'] = isset($_POST['fk']) ? $_POST['fk'] : 0;
-if (!$context = $modx->getObject('modContext', $_POST['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
+$scriptProperties['context_key'] = isset($scriptProperties['fk']) ? $scriptProperties['fk'] : 0;
+if (!$context = $modx->getObject('modContext', $scriptProperties['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 if (!$context->checkPolicy('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* prevent duplicates */
 $ae = $modx->getObject('modContextSetting',array(
-    'key' => $_POST['key'],
-    'context_key' => $_POST['context_key'],
+    'key' => $scriptProperties['key'],
+    'context_key' => $scriptProperties['context_key'],
 ));
 if ($ae != null) $modx->error->addField('key',$modx->lexicon('setting_err_ae'));
 
 /* prevent keys starting with numbers */
 $nums = explode(',','1,2,3,4,5,6,7,8,9,0');
-if (in_array(substr($_POST['key'],0,1),$nums)) {
+if (in_array(substr($scriptProperties['key'],0,1),$nums)) {
     $modx->error->addField('key',$modx->lexicon('setting_err_startint'));
 }
 
@@ -43,7 +43,7 @@ if ($modx->error->hasError()) {
 
 
 $setting= $modx->newObject('modContextSetting');
-$setting->fromArray($_POST,'',true);
+$setting->fromArray($scriptProperties,'',true);
 
 /* set lexicon name/description */
 $topic = $modx->getObject('modLexiconTopic',array(
@@ -62,28 +62,28 @@ if ($topic == null) {
  */
 $entry = $modx->getObject('modLexiconEntry',array(
     'namespace' => $setting->get('namespace'),
-    'name' => 'setting_'.$_POST['key'],
+    'name' => 'setting_'.$scriptProperties['key'],
 ));
 if ($entry == null) {
     $entry = $modx->newObject('modLexiconEntry');
     $entry->set('namespace',$setting->get('namespace'));
-    $entry->set('name','setting_'.$_POST['key']);
+    $entry->set('name','setting_'.$scriptProperties['key']);
     $entry->set('topic',$topic->get('id'));
-    $entry->set('value',$_POST['name']);
+    $entry->set('value',$scriptProperties['name']);
     $entry->save();
     $entry->clearCache();
 }
 
 $description = $modx->getObject('modLexiconEntry',array(
     'namespace' => $setting->get('namespace'),
-    'name' => 'setting_'.$_POST['key'].'_desc',
+    'name' => 'setting_'.$scriptProperties['key'].'_desc',
 ));
 if ($description == null) {
     $description = $modx->newObject('modLexiconEntry');
     $description->set('namespace',$setting->get('namespace'));
-    $description->set('name','setting_'.$_POST['key'].'_desc');
+    $description->set('name','setting_'.$scriptProperties['key'].'_desc');
     $description->set('topic',$topic->get('id'));
-    $description->set('value',$_POST['description']);
+    $description->set('value',$scriptProperties['description']);
     $description->clearCache();
     $description->save();
 }

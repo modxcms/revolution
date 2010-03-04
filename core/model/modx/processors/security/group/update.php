@@ -12,22 +12,22 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('user');
 
 /* get usergroup */
-if (empty($_POST['id'])) {
+if (empty($scriptProperties['id'])) {
     $usergroup = $modx->newObject('modUserGroup');
     $usergroup->set('id',0);
 } else {
-    $usergroup = $modx->getObject('modUserGroup',$_POST['id']);
+    $usergroup = $modx->getObject('modUserGroup',$scriptProperties['id']);
     if ($usergroup == null) return $modx->error->failure($modx->lexicon('user_group_err_not_found'));
 }
 
 /* set fields */
-$usergroup->fromArray($_POST);
+$usergroup->fromArray($scriptProperties);
 
 /* users */
-if (isset($_POST['users']) && !empty($_POST['id'])) {
+if (isset($scriptProperties['users']) && !empty($scriptProperties['id'])) {
     $ous = $usergroup->getMany('UserGroupMembers');
     foreach ($ous as $ou) { $ou->remove(); }
-    $users = $modx->fromJSON($_POST['users']);
+    $users = $modx->fromJSON($scriptProperties['users']);
     foreach ($users as $user) {
         $member = $modx->newObject('modUserGroupMember');
         $member->set('user_group',$usergroup->get('id'));
@@ -39,7 +39,7 @@ if (isset($_POST['users']) && !empty($_POST['id'])) {
 }
 
 /* save usergroup if not anonymous */
-if (!empty($_POST['id'])) {
+if (!empty($scriptProperties['id'])) {
     if ($usergroup->save() === false) {
         return $modx->error->failure($modx->lexicon('user_group_err_save'));
     }

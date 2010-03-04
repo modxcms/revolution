@@ -11,7 +11,7 @@ if (!$modx->hasPermission('save_user')) return $modx->error->failure($modx->lexi
 $modx->lexicon->load('user');
 
 
-$_DATA = $modx->fromJSON($_POST['data']);
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 if (empty($_DATA['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
 $user = $modx->getObject('modUser',$_DATA['id']);

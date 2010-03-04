@@ -16,14 +16,14 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('user');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'username');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'username');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
-$usergroup = $modx->getOption('usergroup',$_REQUEST,false);
-$username = !empty($_REQUEST['username']) ? $_REQUEST['username'] : '';
+$usergroup = $modx->getOption('usergroup',$scriptProperties,false);
+$username = !empty($scriptProperties['username']) ? $scriptProperties['username'] : '';
 
 /* build query */
 $c = $modx->newQuery('modUser');

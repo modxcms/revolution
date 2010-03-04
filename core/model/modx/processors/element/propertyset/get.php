@@ -9,8 +9,8 @@ if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($mod
 $modx->lexicon->load('propertyset');
 
 /* if getting properties for an element as well */
-if (!empty($_REQUEST['elementId']) && !empty($_REQUEST['elementType'])) {
-    $element = $modx->getObject($_REQUEST['elementType'],$_REQUEST['elementId']);
+if (!empty($scriptProperties['elementId']) && !empty($scriptProperties['elementType'])) {
+    $element = $modx->getObject($scriptProperties['elementType'],$scriptProperties['elementId']);
     if ($element) {
         $default = $element->get('properties');
         if (!is_array($default)) $default = array();
@@ -18,12 +18,12 @@ if (!empty($_REQUEST['elementId']) && !empty($_REQUEST['elementType'])) {
 }
 
 /* if no id specified */
-if (!isset($_REQUEST['id']) || $_REQUEST['id'] == '') {
+if (!isset($scriptProperties['id']) || $scriptProperties['id'] == '') {
     return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
 }
 /* if grabbing a modPropertySet */
-if ($_REQUEST['id'] != 0) {
-    $set = $modx->getObject('modPropertySet',$_REQUEST['id']);
+if ($scriptProperties['id'] != 0) {
+    $set = $modx->getObject('modPropertySet',$scriptProperties['id']);
 
 } elseif (isset($default)) {
     /* if grabbing default properties for an element */
@@ -35,7 +35,7 @@ if ($_REQUEST['id'] != 0) {
 }
 
 if (empty($set)) {
-    return $modx->error->failure($modx->lexicon('propertyset_err_nfs',array('id' => $_REQUEST['id'])));
+    return $modx->error->failure($modx->lexicon('propertyset_err_nfs',array('id' => $scriptProperties['id'])));
 }
 
 
@@ -67,7 +67,7 @@ foreach ($properties as $property) {
         $overridden = 1;
     }
     /* if completely new value, unique to set */
-    if (!isset($data[$property['name']]) && !empty($_POST['elementId'])) {
+    if (!isset($data[$property['name']]) && !empty($scriptProperties['elementId'])) {
         $overridden = 2;
     }
 

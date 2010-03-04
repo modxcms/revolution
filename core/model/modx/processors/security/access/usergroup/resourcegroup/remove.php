@@ -11,9 +11,9 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('access');
 
 /* get usergroup acl */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('access_rgroup_err_ns'));
-$acl = $modx->getObject('modAccessResourceGroup',$_POST['id']);
-if (empty($acl)) return $modx->error->failure($modx->lexicon('access_rgroup_err_nf').print_r($_POST,true));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('access_rgroup_err_ns'));
+$acl = $modx->getObject('modAccessResourceGroup',$scriptProperties['id']);
+if (empty($acl)) return $modx->error->failure($modx->lexicon('access_rgroup_err_nf').print_r($scriptProperties,true));
 
 /* remove acl */
 if ($acl->remove() == false) {

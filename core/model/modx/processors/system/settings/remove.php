@@ -11,8 +11,8 @@ if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('setting');
 
 /* get setting */
-if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
-$setting = $modx->getObject('modSystemSetting',$_POST['key']);
+if (empty($scriptProperties['key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
+$setting = $modx->getObject('modSystemSetting',$scriptProperties['key']);
 if ($setting == null) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 
 /* remove relative lexicon strings */

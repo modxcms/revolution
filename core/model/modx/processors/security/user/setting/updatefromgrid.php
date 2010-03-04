@@ -14,7 +14,7 @@ if (!$modx->hasPermission(array('save_user' => true, 'settings' => true))) {
 }
 $modx->lexicon->load('setting');
 
-$_DATA = $modx->fromJSON($_POST['data']);
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 /* get setting */
 if (empty($_DATA['user'])) return $modx->error->failure($modx->lexicon('user_err_ns'));

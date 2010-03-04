@@ -8,9 +8,9 @@ if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->l
 
 $amode = !empty($modx->getOption('new_folder_permissions')) ? octdec($modx->getOption('new_folder_permissions')) : 0777;
 
-$file = $_POST['path'].$_POST['file'];
+$file = $scriptProperties['path'].$scriptProperties['file'];
 
-if (!is_writable($_POST['path']))
+if (!is_writable($scriptProperties['path']))
 	return $modx->error->failure($modx->lexicon('file_err_unzip_invalid_path'));
 
 if (!file_exists($file))
@@ -18,7 +18,7 @@ if (!file_exists($file))
 
 
 
-if(!$err = @unzip(realpath($file),realpath($_POST['path']))) {
+if(!$err = @unzip(realpath($file),realpath($scriptProperties['path']))) {
 	return $modx->error->failure($modx->lexicon('file_err_unzip').($err === 0 ? $modx->lexicon('file_err_unzip_missing_lib') : ''));
 }
 

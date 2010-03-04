@@ -14,12 +14,12 @@ if (!$modx->hasPermission('new_template')) return $modx->error->failure($modx->l
 $modx->lexicon->load('template');
 
 /* get old template */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
-$oldTemplate = $modx->getObject('modTemplate',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
+$oldTemplate = $modx->getObject('modTemplate',$scriptProperties['id']);
 if (!$oldTemplate) return $modx->error->failure($modx->lexicon('template_err_nf'));
 
 /* format new name */
-$newTemplateName = !empty($_POST['name']) ? $_POST['name'] : $modx->lexicon('duplicate_of').$old_template->get('templatename');
+$newTemplateName = !empty($scriptProperties['name']) ? $scriptProperties['name'] : $modx->lexicon('duplicate_of').$old_template->get('templatename');
 
 /* duplicate template */
 $template = $modx->newObject('modTemplate');

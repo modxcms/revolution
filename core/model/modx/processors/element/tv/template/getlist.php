@@ -16,12 +16,12 @@ if (!$modx->hasPermission('view_tv')) return $modx->error->failure($modx->lexico
 $modx->lexicon->load('tv');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'templatename');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$tv = $modx->getOption('tv',$_REQUEST,false);
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'templatename');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$tv = $modx->getOption('tv',$scriptProperties,false);
 
 /* query for templates */
 $c = $modx->newQuery('modTemplate');

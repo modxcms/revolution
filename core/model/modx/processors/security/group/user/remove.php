@@ -12,11 +12,11 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('user');
 
 /* get user */
-if (empty($_POST['user'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
-if (empty($_POST['usergroup'])) return $modx->error->failure($modx->lexicon('user_group_err_ns'));
+if (empty($scriptProperties['user'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+if (empty($scriptProperties['usergroup'])) return $modx->error->failure($modx->lexicon('user_group_err_ns'));
 $member = $modx->getObject('modUserGroupMember',array(
-    'member' => $_POST['user'],
-    'user_group' => $_POST['usergroup'],
+    'member' => $scriptProperties['user'],
+    'user_group' => $scriptProperties['usergroup'],
 ));
 if (!$member) return $modx->error->failure($modx->lexicon('user_group_member_err_nf'));
 

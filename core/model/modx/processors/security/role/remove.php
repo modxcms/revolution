@@ -10,9 +10,9 @@
 if (!$modx->hasPermission('delete_role')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('role_err_nf'));
-$role = $modx->getObject('modUserGroupRole',$_POST['id']);
-if (empty($role)) return $modx->error->failure($modx->lexicon('role_err_nfs',array('role' => $_POST['id'])));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('role_err_nf'));
+$role = $modx->getObject('modUserGroupRole',$scriptProperties['id']);
+if (empty($role)) return $modx->error->failure($modx->lexicon('role_err_nfs',array('role' => $scriptProperties['id'])));
 
 /* don't delete the Member or Super User roles */
 /* TODO: when this is converted in build script, convert to i18n */

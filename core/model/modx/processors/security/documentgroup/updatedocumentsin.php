@@ -10,17 +10,17 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('resource','access');
 
 /* format data */
-$_POST['resource'] = substr(strrchr($_POST['resource'],'_'),1);
-$_POST['resource_group'] = substr(strrchr($_POST['resource_group'],'_'),1);
+$scriptProperties['resource'] = substr(strrchr($scriptProperties['resource'],'_'),1);
+$scriptProperties['resource_group'] = substr(strrchr($scriptProperties['resource_group'],'_'),1);
 
-if (empty($_POST['resource']) || empty($_POST['resource_group'])) return $modx->error->failure('Invalid data.');
+if (empty($scriptProperties['resource']) || empty($scriptProperties['resource_group'])) return $modx->error->failure('Invalid data.');
 
 /* get resource */
-$resource = $modx->getObject('modResource',$_POST['resource']);
-if ($resource == null) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_POST['resource'])));
+$resource = $modx->getObject('modResource',$scriptProperties['resource']);
+if ($resource == null) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $scriptProperties['resource'])));
 
 /* get resource group */
-$resourceGroup = $modx->getObject('modResourceGroup',$_POST['resource_group']);
+$resourceGroup = $modx->getObject('modResourceGroup',$scriptProperties['resource_group']);
 if ($resourceGroup == null) return $modx->error->failure($modx->lexicon('resource_group_err_ns'));
 
 /* check to make sure already isnt in group */

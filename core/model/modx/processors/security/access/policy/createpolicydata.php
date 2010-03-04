@@ -12,18 +12,18 @@ $modx->lexicon->load('policy');
 
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['id'])) return $modx->error->failure('Policy id not specified!');
+if (!isset($scriptProperties['id'])) return $modx->error->failure('Policy id not specified!');
 
 /* get policy */
-$policy = $modx->getObject('modAccessPolicy',$_REQUEST['id']);
+$policy = $modx->getObject('modAccessPolicy',$scriptProperties['id']);
 if ($policy == null) return $modx->error->failure('Policy not found!');
 
 /* parse data from JSON */
 $ar = $policy->get('data');
-if (isset($ar[$_REQUEST['key']])) return $modx->error->failure('Policy property already exists!');
+if (isset($ar[$scriptProperties['key']])) return $modx->error->failure('Policy property already exists!');
 
 /* set policy value */
-$ar[$_REQUEST['key']] = true;
+$ar[$scriptProperties['key']] = true;
 $policy->set('data',$modx->toJSON($ar));
 
 /* save policy */

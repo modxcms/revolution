@@ -12,12 +12,12 @@ if (!$modx->hasPermission('new_plugin')) return $modx->error->failure($modx->lex
 $modx->lexicon->load('plugin');
 
 /* get old snippet */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
-$old_plugin = $modx->getObject('modPlugin',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
+$old_plugin = $modx->getObject('modPlugin',$scriptProperties['id']);
 if ($old_plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
 
 /* format new name */
-$newname = !empty($_POST['name']) ? $_POST['name'] : $modx->lexicon('duplicate_of').$old_plugin->get('name');
+$newname = !empty($scriptProperties['name']) ? $scriptProperties['name'] : $modx->lexicon('duplicate_of').$old_plugin->get('name');
 
 /* duplicate plugin */
 $plugin = $modx->newObject('modPlugin');

@@ -9,8 +9,8 @@ if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($mod
 $modx->lexicon->load('propertyset','element');
 
 $o = '';
-if (empty($_REQUEST['download'])) {
-    $o = $_POST['data'];
+if (empty($scriptProperties['download'])) {
+    $o = $scriptProperties['data'];
 
     $f = 'export.js';
     $fileName = $modx->getOption('core_path').'export/properties/'.$f;
@@ -20,7 +20,7 @@ if (empty($_REQUEST['download'])) {
 
     return $modx->error->success($f);
 } else {
-    $file = $_REQUEST['download'];
+    $file = $scriptProperties['download'];
     $f = $modx->getOption('core_path').'export/properties/'.$file;
 
     if (!is_file($f)) return $o;

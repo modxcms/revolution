@@ -25,11 +25,11 @@
 if (!$modx->hasPermission('new_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv','category');
 
-if (empty($_POST['template'])) $_POST['template'] = array();
+if (empty($scriptProperties['template'])) $scriptProperties['template'] = array();
 
 /* category */
-if (!empty($_POST['category'])) {
-    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
+if (!empty($scriptProperties['category'])) {
+    $category = $modx->getObject('modCategory',array('id' => $scriptProperties['category']));
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
@@ -39,23 +39,23 @@ $modx->invokeEvent('OnBeforeTVFormSave',array(
     'id' => 0,
 ));
 
-$name_exists = $modx->getObject('modTemplateVar',array('name' => $_POST['name']));
+$name_exists = $modx->getObject('modTemplateVar',array('name' => $scriptProperties['name']));
 if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name'));
 
-if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('untitled_tv');
+if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('untitled_tv');
 
 /* get rid of invalid chars */
 $invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
     '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$_POST['name'] = str_replace($invchars,'',$_POST['name']);
+$scriptProperties['name'] = str_replace($invchars,'',$scriptProperties['name']);
 
-if (empty($_POST['caption'])) { $_POST['caption'] = $_POST['name']; }
+if (empty($scriptProperties['caption'])) { $scriptProperties['caption'] = $scriptProperties['name']; }
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
 /* extract widget properties */
 $display_params = '';
-foreach ($_POST as $key => $value) {
+foreach ($scriptProperties as $key => $value) {
     $res = strstr($key,'prop_');
     if ($res !== false) {
         $key = str_replace('prop_','',$key);
@@ -64,14 +64,14 @@ foreach ($_POST as $key => $value) {
 }
 
 $tv = $modx->newObject('modTemplateVar');
-$tv->fromArray($_POST);
-$tv->set('elements',$_POST['els']);
+$tv->fromArray($scriptProperties);
+$tv->set('elements',$scriptProperties['els']);
 $tv->set('display_params',$display_params);
-$tv->set('rank',!empty($_POST['rank']) ? $_POST['rank'] : 0);
-$tv->set('locked',!empty($_POST['locked']));
+$tv->set('rank',!empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
+$tv->set('locked',!empty($scriptProperties['locked']));
 $properties = null;
-if (isset($_POST['propdata'])) {
-    $properties = $_POST['propdata'];
+if (isset($scriptProperties['propdata'])) {
+    $properties = $scriptProperties['propdata'];
     $properties = $modx->fromJSON($properties);
 }
 if (is_array($properties)) $tv->setProperties($properties);
@@ -82,8 +82,8 @@ if ($tv->save() == false) {
 
 
 /* change template access to tvs */
-if (isset($_POST['templates'])) {
-    $_TEMPLATES = $modx->fromJSON($_POST['templates']);
+if (isset($scriptProperties['templates'])) {
+    $_TEMPLATES = $modx->fromJSON($scriptProperties['templates']);
     foreach ($_TEMPLATES as $id => $template) {
         if ($template['access']) {
             $tvt = $modx->getObject('modTemplateVarTemplate',array(
@@ -112,8 +112,8 @@ if (isset($_POST['templates'])) {
  * check for permission update access
  */
 if ($modx->hasPermission('tv_access_permissions')) {
-    if (isset($_POST['resource_groups'])) {
-        $docgroups = $modx->fromJSON($_POST['resource_groups']);
+    if (isset($scriptProperties['resource_groups'])) {
+        $docgroups = $modx->fromJSON($scriptProperties['resource_groups']);
         if (is_array($docgroups)) {
             foreach ($docgroups as $id => $group) {
                 if (!is_array($group)) continue;
@@ -152,7 +152,7 @@ $modx->invokeEvent('OnTVFormSave',array(
 $modx->logManagerAction('tv_create','modTemplateVar',$tv->get('id'));
 
 /* empty cache */
-if (!empty($_POST['clearCache'])) {
+if (!empty($scriptProperties['clearCache'])) {
     $cacheManager= $modx->getCacheManager();
     $cacheManager->clearCache();
 }

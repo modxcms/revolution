@@ -51,46 +51,46 @@ if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->l
 $modx->lexicon->load('resource');
 
 /* default settings */
-$_POST['context_key']= empty($_POST['context_key']) ? 'web' : $_POST['context_key'];
-$_POST['parent'] = empty($_POST['parent']) ? 0 : intval($_POST['parent']);
-$_POST['template'] = empty($_POST['template']) ? 0 : intval($_POST['template']);
-$_POST['hidemenu'] = empty($_POST['hidemenu']) ? 0 : 1;
-$_POST['isfolder'] = empty($_POST['isfolder']) ? 0 : 1;
-$_POST['richtext'] = empty($_POST['richtext']) ? 0 : 1;
-$_POST['donthit'] = empty($_POST['donthit']) ? 0 : 1;
-$_POST['published'] = empty($_POST['published']) ? 0 : 1;
-$_POST['cacheable'] = empty($_POST['cacheable']) ? 0 : 1;
-$_POST['searchable'] = empty($_POST['searchable']) ? 0 : 1;
-$_POST['syncsite'] = empty($_POST['syncsite']) ? 0 : 1;
-$_POST['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
-$_POST['menuindex'] = empty($_POST['menuindex']) ? 0 : $_POST['menuindex'];
+$scriptProperties['context_key']= empty($scriptProperties['context_key']) ? 'web' : $scriptProperties['context_key'];
+$scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);
+$scriptProperties['template'] = empty($scriptProperties['template']) ? 0 : intval($scriptProperties['template']);
+$scriptProperties['hidemenu'] = empty($scriptProperties['hidemenu']) ? 0 : 1;
+$scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
+$scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? 0 : 1;
+$scriptProperties['donthit'] = empty($scriptProperties['donthit']) ? 0 : 1;
+$scriptProperties['published'] = empty($scriptProperties['published']) ? 0 : 1;
+$scriptProperties['cacheable'] = empty($scriptProperties['cacheable']) ? 0 : 1;
+$scriptProperties['searchable'] = empty($scriptProperties['searchable']) ? 0 : 1;
+$scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
+$scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
+$scriptProperties['menuindex'] = empty($scriptProperties['menuindex']) ? 0 : $scriptProperties['menuindex'];
 
 /* make sure parent exists and user can add_children to the parent */
 $parent = null;
-if ($_POST['parent'] > 0) {
-    $parent = $modx->getObject('modResource', $_POST['parent']);
+if ($scriptProperties['parent'] > 0) {
+    $parent = $modx->getObject('modResource', $scriptProperties['parent']);
     if ($parent) {
         if (!$parent->checkPolicy('add_children')) {
             return $modx->error->failure($modx->lexicon('resource_add_children_access_denied'));
         }
     } else {
-        return $modx->error->failure($modx->lexicon('resource_err_nfs', array('id' => $_POST['parent'])));
+        return $modx->error->failure($modx->lexicon('resource_err_nfs', array('id' => $scriptProperties['parent'])));
     }
 } elseif (!$modx->hasPermission('new_document_in_root')) {
     return $modx->error->failure($modx->lexicon('resource_add_children_access_denied'));
 }
 
 /* default pagetitle */
-if (empty($_POST['pagetitle'])) $_POST['pagetitle'] = $modx->lexicon('resource_untitled');
+if (empty($scriptProperties['pagetitle'])) $scriptProperties['pagetitle'] = $modx->lexicon('resource_untitled');
 
 /* specific data escaping */
-$_POST['pagetitle'] = trim($_POST['pagetitle']);
-$_POST['variablesmodified'] = isset($_POST['variablesmodified'])
-    ? explode(',',$_POST['variablesmodified'])
+$scriptProperties['pagetitle'] = trim($scriptProperties['pagetitle']);
+$scriptProperties['variablesmodified'] = isset($scriptProperties['variablesmodified'])
+    ? explode(',',$scriptProperties['variablesmodified'])
     : array();
 
 /* get the class_key to determine resourceClass and resourceDir */
-$resourceClass = !empty($_POST['class_key']) ? $_POST['class_key'] : 'modDocument';
+$resourceClass = !empty($scriptProperties['class_key']) ? $scriptProperties['class_key'] : 'modDocument';
 $resourceDir= strtolower(substr($resourceClass, 3));
 
 /* create the new resource instance using the indicated class */
@@ -101,28 +101,28 @@ if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->le
 /* friendly url alias checks */
 if ($modx->getOption('friendly_alias_urls')) {
     /* auto assign alias */
-    if (empty($_POST['alias']) && $modx->getOption('automatic_alias')) {
-        $_POST['alias'] = strtolower(trim($resource->cleanAlias($_POST['pagetitle'])));
+    if (empty($scriptProperties['alias']) && $modx->getOption('automatic_alias')) {
+        $scriptProperties['alias'] = strtolower(trim($resource->cleanAlias($scriptProperties['pagetitle'])));
     } else {
-        $_POST['alias'] = $resource->cleanAlias($_POST['alias']);
+        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['alias']);
     }
-    $resourceContext= $modx->getObject('modContext', $_POST['context_key']);
+    $resourceContext= $modx->getObject('modContext', $scriptProperties['context_key']);
     $resourceContext->prepare();
 
-    $fullAlias= $_POST['alias'];
+    $fullAlias= $scriptProperties['alias'];
     $isHtml= true;
     $extension= '';
     $containerSuffix= $modx->getOption('container_suffix',null,'');
-    if (isset ($_POST['content_type']) && $contentType= $modx->getObject('modContentType', $_POST['content_type'])) {
+    if (isset ($scriptProperties['content_type']) && $contentType= $modx->getObject('modContentType', $scriptProperties['content_type'])) {
         $extension= $contentType->getExtension();
         $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
     }
-    if ($_POST['isfolder'] && $isHtml && !empty ($containerSuffix)) {
+    if ($scriptProperties['isfolder'] && $isHtml && !empty ($containerSuffix)) {
         $extension= $containerSuffix;
     }
     $aliasPath= '';
     if ($modx->getOption('use_alias_path')) {
-        $pathParentId= intval($_POST['parent']);
+        $pathParentId= intval($scriptProperties['parent']);
         $parentResources= array ();
         $currResource= $modx->getObject('modResource', $pathParentId);
         while ($currResource) {
@@ -150,44 +150,44 @@ if ($modx->error->hasError()) return $modx->error->failure();
 
 /* publish and unpublish dates */
 $now = time();
-if (isset($_POST['pub_date'])) {
-    if (empty($_POST['pub_date'])) {
-        $_POST['pub_date'] = 0;
+if (isset($scriptProperties['pub_date'])) {
+    if (empty($scriptProperties['pub_date'])) {
+        $scriptProperties['pub_date'] = 0;
     } else {
-        $_POST['pub_date'] = strtotime($_POST['pub_date']);
-        if ($_POST['pub_date'] < $now) $_POST['published'] = 1;
-        if ($_POST['pub_date'] > $now) $_POST['published'] = 0;
+        $scriptProperties['pub_date'] = strtotime($scriptProperties['pub_date']);
+        if ($scriptProperties['pub_date'] < $now) $scriptProperties['published'] = 1;
+        if ($scriptProperties['pub_date'] > $now) $scriptProperties['published'] = 0;
     }
 }
 
-if (isset($_POST['unpub_date'])) {
-    if (empty($_POST['unpub_date'])) {
-        $_POST['unpub_date'] = 0;
+if (isset($scriptProperties['unpub_date'])) {
+    if (empty($scriptProperties['unpub_date'])) {
+        $scriptProperties['unpub_date'] = 0;
     } else {
-        $_POST['unpub_date'] = strtotime($_POST['unpub_date']);
-        if ($_POST['unpub_date'] < $now) $_POST['published'] = 0;
+        $scriptProperties['unpub_date'] = strtotime($scriptProperties['unpub_date']);
+        if ($scriptProperties['unpub_date'] < $now) $scriptProperties['published'] = 0;
     }
 }
 
-if (!empty($_POST['template']) && ($template = $modx->getObject('modTemplate', $_POST['template']))) {
+if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modTemplate', $scriptProperties['template']))) {
     $tmplvars = array();
     $c = $modx->newQuery('modTemplateVar');
     $c->select('DISTINCT `modTemplateVar`.*, `modTemplateVar`.`default_text` AS `value`');
     $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplates');
     $c->where(array(
-        'TemplateVarTemplates.templateid' => $_POST['template'],
+        'TemplateVarTemplates.templateid' => $scriptProperties['template'],
     ));
     $c->sortby('modTemplateVar.rank');
     $templateVars = $modx->getCollection('modTemplateVar',$c);
 
     foreach ($templateVars as $tv) {
-        $value = isset($_POST['tv'.$tv->get('id')]) ? $_POST['tv'.$tv->get('id')] : $tv->get('default_text');
+        $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : $tv->get('default_text');
 
         switch ($tv->get('type')) {
             case 'url':
-                if ($_POST['tv' . $row['name'] . '_prefix'] != '--') {
+                if ($scriptProperties['tv' . $row['name'] . '_prefix'] != '--') {
                     $value = str_replace(array('ftp://','http://'),'', $value);
-                    $value = $_POST['tv'.$tv->get('id').'_prefix'].$value;
+                    $value = $scriptProperties['tv'.$tv->get('id').'_prefix'].$value;
                 }
                 break;
             default:
@@ -215,18 +215,18 @@ if (!empty($_POST['template']) && ($template = $modx->getObject('modTemplate', $
 
 /* deny publishing if not permitted */
 if (!$modx->hasPermission('publish_document')) {
-    $_POST['pub_date'] = 0;
-    $_POST['unpub_date'] = 0;
-    $_POST['published'] = 0;
+    $scriptProperties['pub_date'] = 0;
+    $scriptProperties['unpub_date'] = 0;
+    $scriptProperties['published'] = 0;
 }
 
-if (isset($_POST['published'])) {
-    if (empty($_POST['publishedon'])) {
-        $_POST['publishedon'] = $_POST['published'] ? time() : 0;
+if (isset($scriptProperties['published'])) {
+    if (empty($scriptProperties['publishedon'])) {
+        $scriptProperties['publishedon'] = $scriptProperties['published'] ? time() : 0;
     } else {
-        $_POST['publishedon'] = strtotime($_POST['publishedon']);
+        $scriptProperties['publishedon'] = strtotime($scriptProperties['publishedon']);
     }
-    $_POST['publishedby'] = $_POST['published'] ? $modx->user->get('id') : 0;
+    $scriptProperties['publishedby'] = $scriptProperties['published'] ? $modx->user->get('id') : 0;
 }
 
 /* load delegate processor */
@@ -237,10 +237,10 @@ if (file_exists($delegateProcessor)) {
 }
 
 /* modDocument content is posted as ta */
-if (isset($_POST['ta'])) $_POST['content'] = $_POST['ta'];
+if (isset($scriptProperties['ta'])) $scriptProperties['content'] = $scriptProperties['ta'];
 
 /* set fields */
-$resource->fromArray($_POST);
+$resource->fromArray($scriptProperties);
 if (!$resource->get('class_key')) {
     $resource->set('class_key', $resourceClass);
 }
@@ -274,8 +274,8 @@ if ($parent && $parent instanceof modResource && $parent->checkPolicy('save')) {
 }
 
 /* save resource groups */
-if (isset($_POST['resource_groups'])) {
-    $resourceGroups = $modx->fromJSON($_POST['resource_groups']);
+if (isset($scriptProperties['resource_groups'])) {
+    $resourceGroups = $modx->fromJSON($scriptProperties['resource_groups']);
     if (is_array($resourceGroups)) {
         foreach ($resourceGroups as $id => $resourceGroupAccess) {
             if (!empty($resourceGroupAccess['access'])) {
@@ -318,7 +318,7 @@ $modx->invokeEvent('OnDocFormSave', array(
 /* log manager action */
 $modx->logManagerAction('save_resource', $resourceClass, $resource->get('id'));
 
-if (!empty($_POST['syncsite']) || !empty($_POST['clearCache'])) {
+if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCache'])) {
     /* empty cache */
     $cacheManager= $modx->getCacheManager();
     $cacheManager->clearCache(array (

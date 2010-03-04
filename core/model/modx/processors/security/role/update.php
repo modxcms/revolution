@@ -11,17 +11,17 @@ if (!$modx->hasPermission('save_role')) return $modx->error->failure($modx->lexi
 $modx->lexicon->load('user');
 
 /* get role */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('role_err_ns'));
-$role = $modx->getObject('modUserGroupRole',$_POST['id']);
-if ($role == null) return $modx->error->failure($modx->lexicon('role_err_nfs',array('role' => $_POST['id'])));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('role_err_ns'));
+$role = $modx->getObject('modUserGroupRole',$scriptProperties['id']);
+if ($role == null) return $modx->error->failure($modx->lexicon('role_err_nfs',array('role' => $scriptProperties['id'])));
 
 /* do validation */
-if (empty($_POST['name'])) $modx->error->addError('name',$modx->lexicon('role_err_ns_name'));
+if (empty($scriptProperties['name'])) $modx->error->addError('name',$modx->lexicon('role_err_ns_name'));
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
 /* set and save role */
-$role->fromArray($_POST);
+$role->fromArray($scriptProperties);
 if ($role->save() == false) {
 	return $modx->error->failure($modx->lexicon('role_err_save'));
 }

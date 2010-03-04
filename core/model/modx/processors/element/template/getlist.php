@@ -15,12 +15,12 @@ if (!$modx->hasPermission('view_template')) return $modx->error->failure($modx->
 $modx->lexicon->load('template');
 
 /* get default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,20);
-$sort = $modx->getOption('sort',$_REQUEST,'templatename');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$combo = $modx->getOption('combo',$_REQUEST,false);
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,20);
+$sort = $modx->getOption('sort',$scriptProperties,'templatename');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$combo = $modx->getOption('combo',$scriptProperties,false);
 
 /* query templates */
 $c = $modx->newQuery('modTemplate');

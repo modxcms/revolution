@@ -15,12 +15,12 @@ if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->l
 $modx->lexicon->load('resource');
 
 /* setup default properties */
-$duplicateChildren = !empty($_POST['duplicate_children']);
-$newName = !empty($_POST['name']) ? $_POST['name'] : '';
+$duplicateChildren = !empty($scriptProperties['duplicate_children']);
+$newName = !empty($scriptProperties['name']) ? $scriptProperties['name'] : '';
 
 /* get resource */
-$old_resource = $modx->getObject('modResource',$_POST['id']);
-if (empty($old_resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $_POST['id'])));
+$old_resource = $modx->getObject('modResource',$scriptProperties['id']);
+if (empty($old_resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $scriptProperties['id'])));
 
 if (!$old_resource->checkPolicy('copy'))
     return $modx->error->failure($modx->lexicon('permission_denied'));
@@ -34,7 +34,7 @@ if ($parent && !$parent->checkPolicy('add_children')) {
 /* get resource's children */
 $old_resource->children = getChildren($old_resource);
 
-$new_id = $_POST['id'];
+$new_id = $scriptProperties['id'];
 $new_resource = duplicateResource($old_resource,$newName,$duplicateChildren);
 if (!($new_resource instanceof modResource)) {
     return $new_resource;

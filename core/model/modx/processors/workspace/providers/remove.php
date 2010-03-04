@@ -12,10 +12,10 @@ $modx->lexicon->load('workspace');
 if (!$modx->hasPermission('providers')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get provider */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('provider_err_ns'));
-$provider = $modx->getObject('transport.modTransportProvider',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('provider_err_ns'));
+$provider = $modx->getObject('transport.modTransportProvider',$scriptProperties['id']);
 if ($provider == null) {
-    return $modx->error->failure($modx->lexicon('provider_err_nfs',array('id' => $_POST['id'])));
+    return $modx->error->failure($modx->lexicon('provider_err_nfs',array('id' => $scriptProperties['id'])));
 }
 
 /* remove provider */

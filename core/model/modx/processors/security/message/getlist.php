@@ -16,11 +16,11 @@ if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('messages','user');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'date_sent');
-$dir = $modx->getOption('dir',$_REQUEST,'DESC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'date_sent');
+$dir = $modx->getOption('dir',$scriptProperties,'DESC');
 
 /* build query */
 $c = $modx->newQuery('modUserMessage');

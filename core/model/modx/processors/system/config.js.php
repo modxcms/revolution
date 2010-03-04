@@ -28,9 +28,9 @@ $c = array(
 );
 
 /* if custom context, load into MODx.config */
-if (isset($_REQUEST['action']) && $_REQUEST['action'] != '' && isset($modx->actionMap[$_REQUEST['action']])) {
+if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && isset($modx->actionMap[$scriptProperties['action']])) {
 
-    $action = $modx->actionMap[$_REQUEST['action']];
+    $action = $modx->actionMap[$scriptProperties['action']];
     $c['namespace'] = $action['namespace'];
     $c['namespace_path'] = $action['namespace_path'];
     $c['help_url'] = $action['help_url'];

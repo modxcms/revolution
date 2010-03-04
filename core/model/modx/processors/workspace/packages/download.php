@@ -5,10 +5,10 @@
  * @package modx
  * @subpackage processors.workspace.packages
  */
-if (empty($_POST['info'])) return $modx->error->failure($modx->lexicon('package_download_err_ns'));
+if (empty($scriptProperties['info'])) return $modx->error->failure($modx->lexicon('package_download_err_ns'));
 
 /* grab location and signature */
-$a = explode('::',$_POST['info']);
+$a = explode('::',$scriptProperties['info']);
 $location = $a[0];
 $signature = $a[1];
 $sig = explode('-',$signature);
@@ -21,10 +21,10 @@ $package->set('signature',$signature);
 $package->set('state',1);
 $package->set('workspace',1);
 $package->set('created',date('Y-m-d h:i:s'));
-$package->set('provider',$_POST['provider']);
+$package->set('provider',$scriptProperties['provider']);
 
 /* get provider and metadata */
-$provider = $modx->getObject('transport.modTransportProvider',$_POST['provider']);
+$provider = $modx->getObject('transport.modTransportProvider',$scriptProperties['provider']);
 if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nfs',$c));
 
 /* get provider client */

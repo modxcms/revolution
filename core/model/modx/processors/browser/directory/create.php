@@ -13,21 +13,21 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-if (empty($_POST['name'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
-if (empty($_POST['parent'])) $_POST['parent'] = '';
+if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+if (empty($scriptProperties['parent'])) $scriptProperties['parent'] = '';
 
 
-$d = isset($_POST['prependPath']) && $_POST['prependPath'] != 'null' && $_POST['prependPath'] != null
-    ? $_POST['prependPath']
+$d = isset($scriptProperties['prependPath']) && $scriptProperties['prependPath'] != 'null' && $scriptProperties['prependPath'] != null
+    ? $scriptProperties['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
-$parentdir = $d.$_POST['parent'].'/';
+$parentdir = $d.$scriptProperties['parent'].'/';
 
 if (!is_dir($parentdir)) return $modx->error->failure($modx->lexicon('file_folder_err_parent_invalid'));
 if (!is_readable($parentdir) || !is_writable($parentdir)) {
 	return $modx->error->failure($modx->lexicon('file_folder_err_perms_parent'));
 }
 
-$newdir = $parentdir.'/'.$_POST['name'];
+$newdir = $parentdir.'/'.$scriptProperties['name'];
 
 if (file_exists($newdir)) return $modx->error->failure($modx->lexicon('file_folder_err_ae'));
 

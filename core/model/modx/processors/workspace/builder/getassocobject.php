@@ -7,16 +7,16 @@ $modx->lexicon->load('workspace','package_builder');
 
 if (!$modx->hasPermission('package_builder')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'id';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+if (!isset($scriptProperties['start'])) $scriptProperties['start'] = 0;
+if (!isset($scriptProperties['limit'])) $scriptProperties['limit'] = 10;
+if (!isset($scriptProperties['sort'])) $scriptProperties['sort'] = 'id';
+if (!isset($scriptProperties['dir'])) $scriptProperties['dir'] = 'ASC';
 
-if (!isset($_REQUEST['class_key'])) $_REQUEST['class_key'] = 'modResource';
-$class_key = $_REQUEST['class_key'];
+if (!isset($scriptProperties['class_key'])) $scriptProperties['class_key'] = 'modResource';
+$class_key = $scriptProperties['class_key'];
 
 $c = $modx->newQuery($class_key);
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->limit($scriptProperties['limit'],$scriptProperties['start']);
 $objects = $modx->getCollection($class_key,$c);
 $count = $modx->getCount($class_key);
 

@@ -11,8 +11,8 @@ $modx->lexicon->load('policy');
 
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('policy_err_ns'));
-$policy = $modx->getObject('modAccessPolicy', $_REQUEST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('policy_err_ns'));
+$policy = $modx->getObject('modAccessPolicy', $scriptProperties['id']);
 if ($policy == null) return $modx->error->failure($modx->lexicon('policy_err_nf'));
 
 

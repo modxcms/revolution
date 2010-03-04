@@ -10,9 +10,9 @@
 if (!$modx->hasPermission('view_tv')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('tv');
 
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'));
-$tv = $modx->getObject('modTemplateVar',$_REQUEST['id']);
-if (empty($tv)) return $modx->error->failure($modx->lexicon('tv_err_nfs',array('id' => $_REQUEST['id'])));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('tv_err_ns'));
+$tv = $modx->getObject('modTemplateVar',$scriptProperties['id']);
+if (empty($tv)) return $modx->error->failure($modx->lexicon('tv_err_nfs',array('id' => $scriptProperties['id'])));
 
 $tv->set('els',$tv->get('elements'));
 $properties = $tv->get('properties');

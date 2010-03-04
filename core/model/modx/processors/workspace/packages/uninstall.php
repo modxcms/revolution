@@ -11,12 +11,12 @@ $modx->lexicon->load('workspace');
 
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (empty($_REQUEST['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
-$modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_find',array('signature' => $_REQUEST['signature'])));
-$package = $modx->getObject('transport.modTransportPackage', $_REQUEST['signature']);
+if (empty($scriptProperties['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
+$modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_find',array('signature' => $scriptProperties['signature'])));
+$package = $modx->getObject('transport.modTransportPackage', $scriptProperties['signature']);
 if (empty($package)) {
     return $modx->error->failure($modx->lexicon('package_err_nfs',array(
-        'signature' =>  $_REQUEST['signature'],
+        'signature' =>  $scriptProperties['signature'],
     )));
 }
 $transport = $package->getTransport();
@@ -25,7 +25,7 @@ $modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_prep'));
 
 /* uninstall package */
 $options = array(
-    xPDOTransport::PREEXISTING_MODE => $_POST['preexisting_mode'],
+    xPDOTransport::PREEXISTING_MODE => $scriptProperties['preexisting_mode'],
 );
 if ($package->uninstall($options) == false) {
     return $modx->error->failure(sprintf($modx->lexicon('package_err_uninstall'),$package->getPrimaryKey()));

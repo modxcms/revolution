@@ -13,20 +13,20 @@ $modx->lexicon->load('workspace');
 if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get package */
-if (empty($_REQUEST['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
-$package = $modx->getObject('transport.modTransportPackage',$_REQUEST['signature']);
+if (empty($scriptProperties['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
+$package = $modx->getObject('transport.modTransportPackage',$scriptProperties['signature']);
 if ($package == null) return $modx->error->failure($modx->lexicon('package_err_nf'));
 
 /* get transport and attribute */
 $transport = $package->getTransport();
 if ($transport) {
-    $attr = $transport->getAttribute($_REQUEST['attr']);
+    $attr = $transport->getAttribute($scriptProperties['attr']);
 } else {
     return $modx->error->failure($modx->lexicon('package_err_nf'));
 }
 
 /* if setup options, include setup file */
-if ($_REQUEST['attr'] == 'setup-options') {
+if ($scriptProperties['attr'] == 'setup-options') {
     ob_start();
     $options = $package->toArray();
     $options[xPDOTransport::PACKAGE_ACTION] = empty($package->installed)

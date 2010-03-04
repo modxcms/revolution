@@ -16,25 +16,25 @@
 if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 10;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'key';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+if (!isset($scriptProperties['start'])) $scriptProperties['start'] = 0;
+if (!isset($scriptProperties['limit'])) $scriptProperties['limit'] = 10;
+if (!isset($scriptProperties['sort'])) $scriptProperties['sort'] = 'key';
+if (!isset($scriptProperties['dir'])) $scriptProperties['dir'] = 'ASC';
 
 $wa = array(
-    'context_key' => $_REQUEST['context_key'],
+    'context_key' => $scriptProperties['context_key'],
 );
-if (!$context = $modx->getObject('modContext', $_REQUEST['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
+if (!$context = $modx->getObject('modContext', $scriptProperties['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 if (!$context->checkPolicy('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (isset($_REQUEST['key']) && $_REQUEST['key'] != '') {
-    $wa['key:LIKE'] = '%'.$_REQUEST['key'].'%';
+if (isset($scriptProperties['key']) && $scriptProperties['key'] != '') {
+    $wa['key:LIKE'] = '%'.$scriptProperties['key'].'%';
 }
 
 $c = $modx->newQuery('modContextSetting');
 $c->where($wa);
-$c->sortby('`'.$_REQUEST['sort'].'`',$_REQUEST['dir']);
-$c->limit($_REQUEST['limit'],$_REQUEST['start']);
+$c->sortby('`'.$scriptProperties['sort'].'`',$scriptProperties['dir']);
+$c->limit($scriptProperties['limit'],$scriptProperties['start']);
 $settings = $modx->getCollection('modContextSetting',$c);
 
 $cc = $modx->newQuery('modContextSetting');

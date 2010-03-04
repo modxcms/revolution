@@ -10,12 +10,12 @@
 if (!$modx->hasPermission('view_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('context');
 
-if (!isset($_REQUEST['key'])) {
+if (!isset($scriptProperties['key'])) {
     return $modx->error->failure($modx->lexicon('context_err_ns'));
 }
-$context = $modx->getObject('modContext',$_REQUEST['key']);
+$context = $modx->getObject('modContext',$scriptProperties['key']);
 if ($context == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('context_err_nfs'),$_REQUEST['key']));
+    return $modx->error->failure(sprintf($modx->lexicon('context_err_nfs'),$scriptProperties['key']));
 }
 if(!$context->checkPolicy('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 

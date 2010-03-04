@@ -17,25 +17,25 @@ if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('setting','namespace');
 
 /* verify namespace */
-if (empty($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
-$namespace = $modx->getObject('modNamespace',$_POST['namespace']);
+if (empty($scriptProperties['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
+$namespace = $modx->getObject('modNamespace',$scriptProperties['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
 /* get setting */
-if (empty($_POST['key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
+if (empty($scriptProperties['key'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
 $setting = $modx->getObject('modSystemSetting',array(
-    'key' => $_POST['key'],
+    'key' => $scriptProperties['key'],
 ));
 if ($setting == null) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 
 /* value parsing */
-if ($_POST['xtype'] == 'combo-boolean' && !is_numeric($_POST['value'])) {
-    if ($_POST['value'] == 'yes' || $_POST['value'] == 'Yes' || $_POST['value'] == $modx->lexicon('yes')) {
-        $_POST['value'] = 1;
-    } else $_POST['value'] = 0;
+if ($scriptProperties['xtype'] == 'combo-boolean' && !is_numeric($scriptProperties['value'])) {
+    if ($scriptProperties['value'] == 'yes' || $scriptProperties['value'] == 'Yes' || $scriptProperties['value'] == $modx->lexicon('yes')) {
+        $scriptProperties['value'] = 1;
+    } else $scriptProperties['value'] = 0;
 }
 
-$setting->fromArray($_POST,'',true);
+$setting->fromArray($scriptProperties,'',true);
 
 /* set lexicon name/description */
 $topic = $modx->getObject('modLexiconTopic',array(
@@ -51,31 +51,31 @@ if ($topic == null) {
 
 $entry = $modx->getObject('modLexiconEntry',array(
     'namespace' => $namespace->get('name'),
-    'name' => 'setting_'.$_POST['key'],
+    'name' => 'setting_'.$scriptProperties['key'],
 ));
 if ($entry == null) {
     $entry = $modx->newObject('modLexiconEntry');
     $entry->set('namespace',$namespace->get('name'));
-    $entry->set('name','setting_'.$_POST['key']);
+    $entry->set('name','setting_'.$scriptProperties['key']);
     $entry->set('topic',$topic->get('id'));
     $entry->set('language',$modx->cultureKey);
 }
-$entry->set('value',$_POST['name']);
+$entry->set('value',$scriptProperties['name']);
 $entry->save();
 $entry->clearCache();
 
 $description = $modx->getObject('modLexiconEntry',array(
     'namespace' => $namespace->get('name'),
-    'name' => 'setting_'.$_POST['key'].'_desc',
+    'name' => 'setting_'.$scriptProperties['key'].'_desc',
 ));
 if ($description == null) {
     $description = $modx->newObject('modLexiconEntry');
     $description->set('namespace',$namespace->get('name'));
-    $description->set('name','setting_'.$_POST['key'].'_desc');
+    $description->set('name','setting_'.$scriptProperties['key'].'_desc');
     $description->set('language',$modx->cultureKey);
     $description->set('topic',$topic->get('id'));
 }
-$description->set('value',$_POST['description']);
+$description->set('value',$scriptProperties['description']);
 $description->save();
 $description->clearCache();
 

@@ -11,8 +11,8 @@ if (!$modx->hasPermission('view_snippet')) return $modx->error->failure($modx->l
 $modx->lexicon->load('snippet');
 
 /* get snippet */
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
-$snippet = $modx->getObject('modSnippet',$_REQUEST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
+$snippet = $modx->getObject('modSnippet',$scriptProperties['id']);
 if ($snippet == null) return $modx->error->failure($modx->lexicon('snippet_err_nf'));
 
 $properties = $snippet->get('properties');

@@ -17,24 +17,24 @@ if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexico
 $modx->lexicon->load('action','menu','namespace');
 
 /* verify/format data */
-$_POST['haslayout'] = !empty($_POST['haslayout']);
-if (empty($_POST['controller'])) return $modx->error->failure($modx->lexicon('controller_err_ns'));
+$scriptProperties['haslayout'] = !empty($scriptProperties['haslayout']);
+if (empty($scriptProperties['controller'])) return $modx->error->failure($modx->lexicon('controller_err_ns'));
 
 /* verify parent */
-if (!isset($_POST['parent'])) return $modx->error->failure($modx->lexicon('action_parent_err_ns'));
-if (!empty($_POST['parent'])) {
-    $parent = $modx->getObject('modAction',$_POST['parent']);
+if (!isset($scriptProperties['parent'])) return $modx->error->failure($modx->lexicon('action_parent_err_ns'));
+if (!empty($scriptProperties['parent'])) {
+    $parent = $modx->getObject('modAction',$scriptProperties['parent']);
     if ($parent == null) return $modx->error->failure($modx->lexicon('action_parent_err_nf'));
 }
 
 /* verify namespace */
-if (empty($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
-$namespace = $modx->getObject('modNamespace',$_POST['namespace']);
+if (empty($scriptProperties['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
+$namespace = $modx->getObject('modNamespace',$scriptProperties['namespace']);
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
 /* create action */
 $action = $modx->newObject('modAction');
-$action->fromArray($_POST);
+$action->fromArray($scriptProperties);
 
 /* save action */
 if ($action->save() == false) {

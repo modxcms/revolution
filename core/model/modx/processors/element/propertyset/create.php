@@ -10,21 +10,21 @@ $modx->lexicon->load('propertyset');
 
 /* make sure set with that name doesn't already exist */
 $alreadyExists = $modx->getCount('modPropertySet',array(
-    'name' => $_POST['name'],
+    'name' => $scriptProperties['name'],
 ));
 if ($alreadyExists > 0) return $modx->error->failure($modx->lexicon('propertyset_err_ae'));
 
 /* create property set */
 $set = $modx->newObject('modPropertySet');
-$set->set('name',$_POST['name']);
-$set->set('description',$_POST['description']);
+$set->set('name',$scriptProperties['name']);
+$set->set('description',$scriptProperties['description']);
 
 /* set category if specified */
-if (isset($_POST['category']) && $_POST['category'] != 0 && $_POST['category'] != '') {
-    $category = $modx->getObject('modCategory',$_POST['category']);
+if (isset($scriptProperties['category']) && $scriptProperties['category'] != 0 && $scriptProperties['category'] != '') {
+    $category = $modx->getObject('modCategory',$scriptProperties['category']);
     if ($category == null) return $modx->error->failure($modx->lexicon('category_err_nf'));
 
-    $set->set('category',$_POST['category']);
+    $set->set('category',$scriptProperties['category']);
 }
 
 

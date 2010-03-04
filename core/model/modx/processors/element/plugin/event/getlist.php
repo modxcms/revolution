@@ -9,13 +9,13 @@ if (!$modx->hasPermission('view_plugin')) return $modx->error->failure($modx->le
 $modx->lexicon->load('plugin','system_events');
 
 /* setup default properties */
-$isLimit = empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'name');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$name = $modx->getOption('name',$_REQUEST,false);
-$plugin = $modx->getOption('plugin',$_REQUEST,false);
+$isLimit = empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'name');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$name = $modx->getOption('name',$scriptProperties,false);
+$plugin = $modx->getOption('plugin',$scriptProperties,false);
 
 /* query for events */
 $c = $modx->newQuery('modEvent');

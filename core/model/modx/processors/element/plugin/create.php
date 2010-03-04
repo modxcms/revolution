@@ -21,26 +21,26 @@ if (!$modx->hasPermission('new_plugin')) return $modx->error->failure($modx->lex
 $modx->lexicon->load('plugin','category');
 
 /* set default name */
-if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('plugin_untitled');
+if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('plugin_untitled');
 
 /* check to see if name already exists */
-$nameExists = $modx->getObject('modPlugin',array('name' => $_POST['name']));
+$nameExists = $modx->getObject('modPlugin',array('name' => $scriptProperties['name']));
 if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('plugin_err_exists_name'));
 
 /* category */
-if (!empty($_POST['category'])) {
-    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
+if (!empty($scriptProperties['category'])) {
+    $category = $modx->getObject('modCategory',array('id' => $scriptProperties['category']));
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
 $plugin = $modx->newObject('modPlugin');
-$plugin->fromArray($_POST);
-$plugin->set('locked',!empty($_POST['locked']));
+$plugin->fromArray($scriptProperties);
+$plugin->set('locked',!empty($scriptProperties['locked']));
 $properties = null;
-if (isset($_POST['propdata'])) {
-    $properties = $_POST['propdata'];
+if (isset($scriptProperties['propdata'])) {
+    $properties = $scriptProperties['propdata'];
     $properties = $modx->fromJSON($properties);
 }
 if (is_array($properties)) $plugin->setProperties($properties);
@@ -58,8 +58,8 @@ if ($plugin->save() == false) {
 }
 
 /* change system events */
-if (isset($_POST['events'])) {
-    $_EVENTS = $modx->fromJSON($_POST['events']);
+if (isset($scriptProperties['events'])) {
+    $_EVENTS = $modx->fromJSON($scriptProperties['events']);
     foreach ($_EVENTS as $id => $event) {
         if (!empty($event['enabled'])) {
             $pluginEvent = $modx->getObject('modPluginEvent',array(
@@ -95,7 +95,7 @@ $modx->invokeEvent('OnPluginFormSave',array(
 $modx->logManagerAction('new_plugin','modPlugin',$plugin->get('id'));
 
 /* empty cache */
-if (!empty($_POST['clearCache'])) {
+if (!empty($scriptProperties['clearCache'])) {
     $cacheManager= $modx->getCacheManager();
     $cacheManager->clearCache();
 }

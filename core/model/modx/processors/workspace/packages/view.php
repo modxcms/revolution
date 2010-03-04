@@ -11,7 +11,7 @@ if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('workspace');
 
 $collection= array ();
-if (isset($_REQUEST['id']) && $objId= $_REQUEST['id']) {
+if (isset($scriptProperties['id']) && $objId= $scriptProperties['id']) {
     if ($package = $modx->getObject('transport.modTransportPackage', $objId)) {
         $oa = $package->toArray();
         $installed = $package->get('installed');

@@ -12,8 +12,8 @@ if (!$modx->hasPermission('delete_category')) return $modx->error->failure($modx
 $modx->lexicon->load('category');
 
 /* get category */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('category_err_ns'));
-$category = $modx->getObject('modCategory',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('category_err_ns'));
+$category = $modx->getObject('modCategory',$scriptProperties['id']);
 if ($category == null) return $modx->error->failure($modx->lexicon('category_err_nf'));
 
 /* remove category */

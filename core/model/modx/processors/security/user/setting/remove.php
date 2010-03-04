@@ -11,10 +11,10 @@
 if (!$modx->hasPermission('delete')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
-if (!isset($_POST['key'],$_POST['user'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
+if (!isset($scriptProperties['key'],$scriptProperties['user'])) return $modx->error->failure($modx->lexicon('setting_err_ns'));
 $setting = $modx->getObject('modUserSetting',array(
-    'key' => $_POST['key'],
-    'user' => $_POST['user'],
+    'key' => $scriptProperties['key'],
+    'user' => $scriptProperties['user'],
 ));
 if ($setting == null) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 

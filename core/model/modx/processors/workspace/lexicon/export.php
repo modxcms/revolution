@@ -13,8 +13,8 @@ if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('lexicon');
 
 /* if downloading the file last exported */
-if (!empty($_REQUEST['download'])) {
-    $file = $_REQUEST['download'];
+if (!empty($scriptProperties['download'])) {
+    $file = $scriptProperties['download'];
     $f = $modx->getOption('core_path').'export/lexicon/'.$file;
 
     if (!is_file($f)) return '';
@@ -29,26 +29,26 @@ if (!empty($_REQUEST['download'])) {
 }
 
 /* verify inputs */
-if (empty($_POST['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
-$namespace = $modx->getObject('modNamespace',is_numeric($_POST['namespace']) ? $_POST['namespace'] : array('name' => $_POST['namespace']));
+if (empty($scriptProperties['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
+$namespace = $modx->getObject('modNamespace',is_numeric($scriptProperties['namespace']) ? $scriptProperties['namespace'] : array('name' => $scriptProperties['namespace']));
 if ($namespace == null) return $modx->error->failure($modx->lexicon('namespace_err_nf'));
 
-if (empty($_POST['topic'])) return $modx->error->failure($modx->lexicon('topic_err_ns'));
+if (empty($scriptProperties['topic'])) return $modx->error->failure($modx->lexicon('topic_err_ns'));
 $c = array(
-    'namespace' => $_POST['namespace'],
+    'namespace' => $scriptProperties['namespace'],
 );
-if (is_numeric($_POST['topic'])) { $c['id'] = $_POST['topic']; }
-  else { $c['name'] = $_POST['topic']; }
+if (is_numeric($scriptProperties['topic'])) { $c['id'] = $scriptProperties['topic']; }
+  else { $c['name'] = $scriptProperties['topic']; }
 $topic = $modx->getObject('modLexiconTopic',$c);
 if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
 
-if (empty($_POST['language'])) $_POST['language'] = 'en';
+if (empty($scriptProperties['language'])) $scriptProperties['language'] = 'en';
 
 /* get all entries for topic, language and namespace */
 $entries = $modx->getCollection('modLexiconEntry',array(
     'namespace' => $namespace->get('name'),
     'topic' => $topic->get('id'),
-    'language' => $_POST['language'],
+    'language' => $scriptProperties['language'],
 ));
 
 /* setup output content */
@@ -56,7 +56,7 @@ $o = "<?php
 /*
  * @topic ".$topic->get('name')."
  * @namespace ".$namespace->get('name')."
- * @language ".$_POST['language']."
+ * @language ".$scriptProperties['language']."
  */\n";
 foreach ($entries as $entry) {
     $value = str_replace("'","\'",$entry->get('value'));

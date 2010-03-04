@@ -14,21 +14,21 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('user');
 
 /* field validation */
-if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('user_group_untitled');
-if (empty($_POST['parent'])) $_POST['parent'] = 0;
+if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('user_group_untitled');
+if (empty($scriptProperties['parent'])) $scriptProperties['parent'] = 0;
 
 /* check to see if group already exists */
-$alreadyExists = $modx->getObject('modUserGroup',array('name' => $_POST['name']));
+$alreadyExists = $modx->getObject('modUserGroup',array('name' => $scriptProperties['name']));
 if ($alreadyExists) return $modx->error->failure($modx->lexicon('user_group_err_already_exists'));
 
 /* add group */
 $usergroup = $modx->newObject('modUserGroup');
-$usergroup->set('name',$_POST['name']);
-$usergroup->set('parent',$_POST['parent']);
+$usergroup->set('name',$scriptProperties['name']);
+$usergroup->set('parent',$scriptProperties['parent']);
 
 /* users */
-if (isset($_POST['users'])) {
-    $users = $modx->fromJSON($_POST['users']);
+if (isset($scriptProperties['users'])) {
+    $users = $modx->fromJSON($scriptProperties['users']);
     $members = array();
     foreach ($users as $userArray) {
         $member = $modx->newObject('modUserGroupMember');
@@ -46,8 +46,8 @@ if ($usergroup->save() == false) {
 }
 
 /* contexts */
-if (!empty($_POST['contexts'])) {
-    $contexts = $modx->fromJSON($_POST['contexts']);
+if (!empty($scriptProperties['contexts'])) {
+    $contexts = $modx->fromJSON($scriptProperties['contexts']);
     foreach ($contexts as $context) {
         $acl = $modx->newObject('modAccessContext');
         $acl->fromArray($context);
@@ -58,8 +58,8 @@ if (!empty($_POST['contexts'])) {
 }
 
 /* resource groups */
-if (!empty($_POST['resource_groups'])) {
-    $resourceGroups = $modx->fromJSON($_POST['resource_groups']);
+if (!empty($scriptProperties['resource_groups'])) {
+    $resourceGroups = $modx->fromJSON($scriptProperties['resource_groups']);
     foreach ($resourceGroups as $resourceGroup) {
         $acl = $modx->newObject('modAccessResourceGroup');
         $acl->fromArray($resourceGroup);

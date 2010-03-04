@@ -25,22 +25,22 @@
  */
 
 
-if (!isset($_POST['register']) || empty($_POST['register']) || !preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $_POST['register'])) return $modx->error->failure($modx->lexicon('error'));
-if (!isset($_POST['topic']) || empty($_POST['topic'])) return $modx->error->failure($modx->lexicon('error'));
+if (!isset($scriptProperties['register']) || empty($scriptProperties['register']) || !preg_match('/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/', $scriptProperties['register'])) return $modx->error->failure($modx->lexicon('error'));
+if (!isset($scriptProperties['topic']) || empty($scriptProperties['topic'])) return $modx->error->failure($modx->lexicon('error'));
 
-$register = trim($_POST['register']);
-$register_class = isset($_POST['register_class']) ? trim($_POST['register_class']) : 'registry.modFileRegister';
+$register = trim($scriptProperties['register']);
+$register_class = isset($scriptProperties['register_class']) ? trim($scriptProperties['register_class']) : 'registry.modFileRegister';
 
-$topic = trim($_POST['topic']);
-$format = isset($_POST['format']) ? trim($_POST['format']) : 'json';
+$topic = trim($scriptProperties['topic']);
+$format = isset($scriptProperties['format']) ? trim($scriptProperties['format']) : 'json';
 
 $options = array();
-$options['poll_limit'] = (isset($_POST['poll_limit']) && intval($_POST['poll_limit'])) ? intval($_POST['poll_limit']) : 1;
-$options['poll_interval'] = (isset($_POST['poll_interval']) && intval($_POST['poll_interval'])) ? intval($_POST['poll_interval']) : 1;
-$options['time_limit'] = (isset($_POST['time_limit']) && intval($_POST['time_limit'])) ? intval($_POST['time_limit']) : 10;
-$options['msg_limit'] = (isset($_POST['message_limit']) && intval($_POST['message_limit'])) ? intval($_POST['message_limit']) : 200;
-$options['remove_read'] = isset($_POST['remove_read']) ? (boolean) $_POST['remove_read'] : true;
-$options['show_filename'] = (isset($_POST['show_filename']) && !empty($_POST['show_filename'])) ? true : false;
+$options['poll_limit'] = (isset($scriptProperties['poll_limit']) && intval($scriptProperties['poll_limit'])) ? intval($scriptProperties['poll_limit']) : 1;
+$options['poll_interval'] = (isset($scriptProperties['poll_interval']) && intval($scriptProperties['poll_interval'])) ? intval($scriptProperties['poll_interval']) : 1;
+$options['time_limit'] = (isset($scriptProperties['time_limit']) && intval($scriptProperties['time_limit'])) ? intval($scriptProperties['time_limit']) : 10;
+$options['msg_limit'] = (isset($scriptProperties['message_limit']) && intval($scriptProperties['message_limit'])) ? intval($scriptProperties['message_limit']) : 200;
+$options['remove_read'] = isset($scriptProperties['remove_read']) ? (boolean) $scriptProperties['remove_read'] : true;
+$options['show_filename'] = (isset($scriptProperties['show_filename']) && !empty($scriptProperties['show_filename'])) ? true : false;
 
 $modx->getService('registry', 'registry.modRegistry');
 $modx->registry->addRegister($register, $register_class, array('directory' => $register));

@@ -5,8 +5,8 @@
  * @package modx
  * @subpackage processors.system
  */
-if (!empty($_REQUEST['download'])) {
-    $dl = $_REQUEST['download'];
+if (!empty($scriptProperties['download'])) {
+    $dl = $scriptProperties['download'];
     $dl = str_replace(array('../','..','config'),'',$dl);
     $dl = ltrim($dl,'/');
 
@@ -24,10 +24,10 @@ if (!empty($_REQUEST['download'])) {
     return $o;
     exit();
 }
-if (empty($_POST['data'])) return $modx->error->failure($modx->lexicon('error'));
+if (empty($scriptProperties['data'])) return $modx->error->failure($modx->lexicon('error'));
 
 /* setup output content */
-$data = $_POST['data'];
+$data = $scriptProperties['data'];
 $data = strip_tags($data,'<br><span><hr><li>');
 $data = str_replace(array('<li>','<hr>','<br>','<span>','<?php','<?','?>'),"\r\n",$data);
 $data = strip_tags($data);

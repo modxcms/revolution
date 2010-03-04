@@ -9,14 +9,14 @@ if (!$modx->hasPermission('providers')) return $modx->error->failure($modx->lexi
 $modx->lexicon->load('workspace');
 
 /* get provider */
-if (empty($_REQUEST['id']) && empty($_REQUEST['name'])) {
+if (empty($scriptProperties['id']) && empty($scriptProperties['name'])) {
     return $modx->error->failure($modx->lexicon('provider_err_ns'));
 }
 $c = array();
-if (!empty($_REQUEST['id'])) {
-    $c['id'] = $_REQUEST['id'];
+if (!empty($scriptProperties['id'])) {
+    $c['id'] = $scriptProperties['id'];
 } else {
-    $c['name'] = $_REQUEST['name'];
+    $c['name'] = $scriptProperties['name'];
 }
 $provider = $modx->getObject('transport.modTransportProvider',$c);
 if (!$provider) return $modx->error->failure($modx->lexicon('provider_err_nfs',$c));

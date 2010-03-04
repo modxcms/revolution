@@ -10,12 +10,12 @@ if (!isset($modx->lexicon) || !is_object($modx->lexicon)) {
 }
 $modx->lexicon->load('login');
 
-$username = $_POST['username'];
-$givenPassword = $_POST['password'];
+$username = $scriptProperties['username'];
+$givenPassword = $scriptProperties['password'];
 
-$rememberme= isset ($_POST['rememberme']) ? ($_POST['rememberme'] == 'on' || $_POST['rememberme'] == true) : false;
-$lifetime= (integer) $modx->getOption('lifetime', $_POST, $modx->getOption('session_cookie_lifetime', null, 0));
-$loginContext= isset ($_POST['login_context']) ? $_POST['login_context'] : $modx->context->get('key');
+$rememberme= isset ($scriptProperties['rememberme']) ? ($scriptProperties['rememberme'] == 'on' || $scriptProperties['rememberme'] == true) : false;
+$lifetime= (integer) $modx->getOption('lifetime', $scriptProperties, $modx->getOption('session_cookie_lifetime', null, 0));
+$loginContext= isset ($scriptProperties['login_context']) ? $scriptProperties['login_context'] : $modx->context->get('key');
 
 $onBeforeLoginParams = array(
     'username' => $username,
@@ -154,7 +154,7 @@ if ($loginContext == 'mgr') {
 } else {
     $modx->invokeEvent("OnWebLogin", $postLoginAttributes);
 }
-$returnUrl = isset($_REQUEST['returnUrl']) ? $_REQUEST['returnUrl'] : '';
+$returnUrl = isset($scriptProperties['returnUrl']) ? $scriptProperties['returnUrl'] : '';
 $response = array('url' => $returnUrl);
 switch ($loginContext) {
     case 'mgr':

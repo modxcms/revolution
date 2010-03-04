@@ -17,19 +17,19 @@ if (!$modx->hasPermission('new_chunk')) return $modx->error->failure($modx->lexi
 $modx->lexicon->load('chunk');
 
 /* default values */
-if (empty($_POST['name'])) $_POST['name'] = $modx->lexicon('chunk_untitled');
+if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('chunk_untitled');
 
 /* verify chunk with that name does not already exist */
-$nameExists = $modx->getObject('modChunk',array('name' => $_POST['name']));
+$nameExists = $modx->getObject('modChunk',array('name' => $scriptProperties['name']));
 if ($nameExists != null) {
     $modx->error->addField('name',$modx->lexicon('chunk_err_exists_name',array(
-        'name' => $_POST['name'],
+        'name' => $scriptProperties['name'],
     )));
 }
 
 /* category */
-if (!empty($_POST['category'])) {
-    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
+if (!empty($scriptProperties['category'])) {
+    $category = $modx->getObject('modCategory',array('id' => $scriptProperties['category']));
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
@@ -39,9 +39,9 @@ if ($modx->error->hasError()) {
 }
 
 /* set fields for the new chunk */
-$chunk = $modx->newObject('modChunk', $_POST);
-$chunk->fromArray($_POST);
-$chunk->set('locked',!empty($_POST['locked']));
+$chunk = $modx->newObject('modChunk', $scriptProperties);
+$chunk->fromArray($scriptProperties);
+$chunk->set('locked',!empty($scriptProperties['locked']));
 
 /* invoke OnBeforeChunkFormSave event */
 $modx->invokeEvent('OnBeforeChunkFormSave',array(
@@ -52,8 +52,8 @@ $modx->invokeEvent('OnBeforeChunkFormSave',array(
 
 /* set properties */
 $properties = null;
-if (isset($_POST['propdata'])) {
-    $properties = $_POST['propdata'];
+if (isset($scriptProperties['propdata'])) {
+    $properties = $scriptProperties['propdata'];
     $properties = $modx->fromJSON($properties);
 }
 if (is_array($properties)) $chunk->setProperties($properties);

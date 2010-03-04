@@ -15,24 +15,24 @@ if (!$modx->hasPermission('search')) return $modx->error->failure($modx->lexicon
 $modx->lexicon->load('resource');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'pagetitle');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'pagetitle');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
 /* setup query */
 $c = $modx->newQuery('modResource');
 $where = array();
-if (!empty($_REQUEST['id'])) $where['id'] = $_REQUEST['id'];
-if (!empty($_REQUEST['pagetitle'])) $where['pagetitle:LIKE'] = '%'.$_REQUEST['pagetitle'].'%';
-if (!empty($_REQUEST['longtitle'])) $where['longtitle:LIKE'] = '%'.$_REQUEST['longtitle'].'%';
-if (!empty($_REQUEST['content'])) $where['content:LIKE'] = '%'.$_REQUEST['content'].'%';
+if (!empty($scriptProperties['id'])) $where['id'] = $scriptProperties['id'];
+if (!empty($scriptProperties['pagetitle'])) $where['pagetitle:LIKE'] = '%'.$scriptProperties['pagetitle'].'%';
+if (!empty($scriptProperties['longtitle'])) $where['longtitle:LIKE'] = '%'.$scriptProperties['longtitle'].'%';
+if (!empty($scriptProperties['content'])) $where['content:LIKE'] = '%'.$scriptProperties['content'].'%';
 
-if (!empty($_REQUEST['published'])) $where['published'] = true;
-if (!empty($_REQUEST['unpublished'])) $where['published'] = false;
-if (!empty($_REQUEST['deleted'])) $where['deleted'] = true;
-if (!empty($_REQUEST['undeleted'])) $where['deleted'] = false;
+if (!empty($scriptProperties['published'])) $where['published'] = true;
+if (!empty($scriptProperties['unpublished'])) $where['published'] = false;
+if (!empty($scriptProperties['deleted'])) $where['deleted'] = true;
+if (!empty($scriptProperties['undeleted'])) $where['deleted'] = false;
 
 $c->where($where);
 $count = $modx->getCount('modResource',$c);

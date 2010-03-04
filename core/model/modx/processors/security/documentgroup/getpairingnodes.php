@@ -10,9 +10,9 @@ $modx->lexicon->load('access');
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 
-$_REQUEST['id'] = !isset($_REQUEST['id']) ? 0 : str_replace('n_rg_','',$_REQUEST['id']);
+$scriptProperties['id'] = !isset($scriptProperties['id']) ? 0 : str_replace('n_rg_','',$scriptProperties['id']);
 
-$g = $modx->getObject('modResourceGroup',$_REQUEST['id']);
+$g = $modx->getObject('modResourceGroup',$scriptProperties['id']);
 $groups = $modx->getCollection('modResourceGroup');
 
 $da = array();

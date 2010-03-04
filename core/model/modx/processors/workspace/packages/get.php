@@ -11,10 +11,10 @@ if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('workspace');
 $modx->addPackage('modx.transport',$modx->getOption('core_path').'model/');
 
-$dateFormat = $modx->getOption('dateFormat',$_REQUEST,'%b %d, %Y %I:%M %p');
+$dateFormat = $modx->getOption('dateFormat',$scriptProperties,'%b %d, %Y %I:%M %p');
 
 /* get package */
-if (empty($_REQUEST['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
+if (empty($scriptProperties['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
 $c = $modx->newQuery('transport.modTransportPackage');
 $c->select('
     `modTransportPackage`.*,
@@ -22,7 +22,7 @@ $c->select('
 ');
 $c->leftJoin('transport.modTransportProvider','Provider');
 $c->where(array(
-    'signature' => $_REQUEST['signature'],
+    'signature' => $scriptProperties['signature'],
 ));
 $package = $modx->getObject('transport.modTransportPackage',$c);
 if (!$package) return $modx->error->failure($modx->lexicon('package_err_nf'));

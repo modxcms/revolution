@@ -15,11 +15,11 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('policy');
 
 /* validate */
-if (empty($_POST['name'])) $modx->error->addError('name',$modx->lexicon('policy_err_name_ns'));
+if (empty($scriptProperties['name'])) $modx->error->addError('name',$modx->lexicon('policy_err_name_ns'));
 
 /* make sure policy with name does not already exist */
 $ae = $modx->getObject('modAccessPolicy',array(
-    'name' => $_POST['name'],
+    'name' => $scriptProperties['name'],
 ));
 if ($ae != null) $modx->error->addError('name',$modx->lexicon('policy_err_ae'));
 
@@ -30,7 +30,7 @@ if ($modx->error->hasError()) {
 
 /* create new policy object */
 $policy = $modx->newObject('modAccessPolicy');
-$policy->fromArray($_POST);
+$policy->fromArray($scriptProperties);
 
 /* save policy */
 if ($policy->save() == false) {

@@ -16,15 +16,15 @@ if (!$modx->hasPermission('view_document')) return $modx->error->failure($modx->
 $modx->lexicon->load('resource','user');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'editedon');
-$dir = $modx->getOption('dir',$_REQUEST,'DESC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'editedon');
+$dir = $modx->getOption('dir',$scriptProperties,'DESC');
 
 /* get user */
-if (empty($_REQUEST['user'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
-$user = $modx->getObject('modUser',$_REQUEST['user']);
+if (empty($scriptProperties['user'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+$user = $modx->getObject('modUser',$scriptProperties['user']);
 if (empty($user)) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
 /* get resources */

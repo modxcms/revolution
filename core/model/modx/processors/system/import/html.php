@@ -203,14 +203,14 @@ $allowedfiles= array (
 
 $context= 'web';
 $parent= 0;
-if (isset ($_POST['import_context'])) {
-    $context= $_POST['import_context'];
+if (isset ($scriptProperties['import_context'])) {
+    $context= $scriptProperties['import_context'];
 }
-if (isset ($_POST['import_parent'])) {
-    $parent= intval($_POST['import_parent']);
+if (isset ($scriptProperties['import_parent'])) {
+    $parent= intval($scriptProperties['import_parent']);
 }
-$element= isset ($_POST['content_element']) ? $_POST['content_element'] : 'body';
-$filepath= isset ($_POST['filepath']) ? $_POST['filepath'] : $modx->getOption('core_path') . 'import/';
+$element= isset ($scriptProperties['content_element']) ? $scriptProperties['content_element'] : 'body';
+$filepath= isset ($scriptProperties['filepath']) ? $scriptProperties['filepath'] : $modx->getOption('core_path') . 'import/';
 $filesfound= 0;
 
 $files= getFiles($modx, $results, $filesfound, $filepath);

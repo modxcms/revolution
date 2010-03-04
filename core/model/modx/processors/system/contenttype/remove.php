@@ -11,10 +11,10 @@ if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->
 $modx->lexicon->load('content_type');
 
 /* get content type */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('content_type_err_ns'));
-$contentType = $modx->getObject('modContentType',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('content_type_err_ns'));
+$contentType = $modx->getObject('modContentType',$scriptProperties['id']);
 if ($contentType == null) {
-    return $modx->error->failure($modx->lexicon('content_type_err_nfs',array('id' => $_POST['id'])));
+    return $modx->error->failure($modx->lexicon('content_type_err_nfs',array('id' => $scriptProperties['id'])));
 }
 
 /* remove content type */

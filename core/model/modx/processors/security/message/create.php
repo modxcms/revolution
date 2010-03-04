@@ -15,24 +15,24 @@
 if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('messages','user');
 
-$type = $modx->getOption('type',$_POST,'user');
+$type = $modx->getOption('type',$scriptProperties,'user');
 
 /* validation */
-if (empty($_POST['subject'])) {
+if (empty($scriptProperties['subject'])) {
 	return $modx->error->failure($modx->lexicon('message_err_not_specified_subject'));
 }
 
 /* process message */
 switch ($type) {
 	case 'user':
-		$user = $modx->getObject('modUser',$_POST['user']);
+		$user = $modx->getObject('modUser',$scriptProperties['user']);
 		if ($user == null) {
 		    return $modx->error->failure($modx->lexicon('user_err_nf'));
         }
 
 		$message = $modx->newObject('modUserMessage');
-		$message->set('subject',$_POST['subject']);
-		$message->set('message',$_POST['message']);
+		$message->set('subject',$scriptProperties['subject']);
+		$message->set('message',$scriptProperties['message']);
 		$message->set('sender',$modx->user->get('id'));
 		$message->set('recipient',$user->get('id'));
 		$message->set('private',true);
@@ -45,7 +45,7 @@ switch ($type) {
 		break;
 
 	case 'role':
-		$role = $modx->getObject('modUserGroupRole',$_POST['role']);
+		$role = $modx->getObject('modUserGroupRole',$scriptProperties['role']);
 		if ($role == null) {
 		    return $modx->error->failure($modx->lexicon('role_err_not_found'));
         }
@@ -58,8 +58,8 @@ switch ($type) {
 			if ($user->get('internalKey') != $modx->user->get('id')) {
 				$message = $modx->newObject('modUserMessage');
 				$message->set('recipient',$user->get('internalKey'));
-				$message->set('subject',$_POST['subject']);
-				$message->set('message',$_POST['message']);
+				$message->set('subject',$scriptProperties['subject']);
+				$message->set('message',$scriptProperties['message']);
 				$message->set('sender',$modx->user->get('id'));
 				$message->set('date_sent',time());
 				$message->set('private',false);
@@ -70,7 +70,7 @@ switch ($type) {
 		}
 		break;
     case 'usergroup':
-        $group = $modx->getObject('modUserGroup',$_POST['group']);
+        $group = $modx->getObject('modUserGroup',$scriptProperties['group']);
         if ($group == null) {
             return $modx->error->failure($modx->lexicon('group_err_not_found'));
         }
@@ -83,8 +83,8 @@ switch ($type) {
             if ($user->get('internalKey') != $modx->user->get('id')) {
                 $message = $modx->newObject('modUserMessage');
                 $message->set('recipient',$user->get('internalKey'));
-                $message->set('subject',$_POST['subject']);
-                $message->set('message',$_POST['message']);
+                $message->set('subject',$scriptProperties['subject']);
+                $message->set('message',$scriptProperties['message']);
                 $message->set('sender',$modx->user->get('id'));
                 $message->set('date_sent',time());
                 $message->set('private',false);
@@ -101,8 +101,8 @@ switch ($type) {
 				$message = $modx->newObject('modUserMessage');
 				$message->set('recipient',$user->get('id'));
 				$message->set('sender',$modx->user->get('id'));
-				$message->set('subject',$_POST['subject']);
-				$message->set('message',$_POST['message']);
+				$message->set('subject',$scriptProperties['subject']);
+				$message->set('message',$scriptProperties['message']);
 				$message->set('date_sent',time());
 				$message->set('private',false);
 				if ($message->save() === false) {

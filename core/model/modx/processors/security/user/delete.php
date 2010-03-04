@@ -11,8 +11,8 @@ if (!$modx->hasPermission('delete_user')) return $modx->error->failure($modx->le
 $modx->lexicon->load('user');
 
 /* get user */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
-$user = $modx->getObject('modUser',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+$user = $modx->getObject('modUser',$scriptProperties['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
 /* check if we are deleting our own record */

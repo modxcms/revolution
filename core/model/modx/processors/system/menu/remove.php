@@ -11,8 +11,8 @@ if (!$modx->hasPermission('menus')) return $modx->error->failure($modx->lexicon(
 $modx->lexicon->load('action','menu');
 
 /* get menu */
-if (empty($_POST['text'])) return $modx->error->failure($modx->lexicon('menu_err_ns'));
-$menu = $modx->getObject('modMenu',array('text' => $_POST['text']));
+if (empty($scriptProperties['text'])) return $modx->error->failure($modx->lexicon('menu_err_ns'));
+$menu = $modx->getObject('modMenu',array('text' => $scriptProperties['text']));
 if ($menu == null) return $modx->error->failure($modx->lexicon('menu_err_nf'));
 
 /* remove menu */

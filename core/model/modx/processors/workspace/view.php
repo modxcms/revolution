@@ -12,7 +12,7 @@ $modx->lexicon->load('workspace');
 if (!$modx->hasPermission('workspaces')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 $object= null;
-if (isset($_REQUEST['id']) && $nodeId= intval($_REQUEST['id'])) {
+if (isset($scriptProperties['id']) && $nodeId= intval($scriptProperties['id'])) {
     if ($workspace= $modx->getObject('modWorkspace', $nodeId)) {
         $object= $workspace->toArray();
     }

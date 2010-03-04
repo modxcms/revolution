@@ -10,7 +10,7 @@
 if (!$modx->hasPermission('save_document')) return $modx->error->failure($modx->lexicon('access_denied'));
 $modx->lexicon->load('resource');
 
-$data = urldecode($_POST['data']);
+$data = urldecode($scriptProperties['data']);
 $data = $modx->fromJSON($data);
 $nodes = array();
 getNodesFormatted($nodes,$data);

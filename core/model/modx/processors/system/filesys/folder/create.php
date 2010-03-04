@@ -6,18 +6,18 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 // prevent subdir hack
-$_POST['name'] = str_replace("..\\",'',str_replace("../",'',$_POST['name']));
+$scriptProperties['name'] = str_replace("..\\",'',str_replace("../",'',$scriptProperties['name']));
 
 // validate name
-if (!isset($_POST['name']) || $_POST['name'] == '')
+if (!isset($scriptProperties['name']) || $scriptProperties['name'] == '')
 	return $modx->error->failure($modx->lexicon('file_folder_err_ns_name'));
 
-if (!is_dir($_POST['path']))
+if (!is_dir($scriptProperties['path']))
 	return $modx->error->failure($modx->lexicon('file_folder_err_invalid_path'));
 
 // setup vars
 $amode = !empty($modx->getOption('new_folder_permissions')) ? octdec($modx->getOption('new_folder_permissions')) : 0777;
-$new_folder = $_POST['path'].'/'.$_POST['name'];
+$new_folder = $scriptProperties['path'].'/'.$scriptProperties['name'];
 
 if (file_exists($new_folder))
 	return $modx->error->failure($modx->lexicon('file_folder_err_ae'));

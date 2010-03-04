@@ -21,15 +21,15 @@ if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($m
 $modx->lexicon->load('access');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'target');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'target');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
-$usergroup = $modx->getOption('usergroup',$_REQUEST,0);
-$context = $modx->getOption('context',$_REQUEST,false);
-$policy = $modx->getOption('policy',$_REQUEST,false);
+$usergroup = $modx->getOption('usergroup',$scriptProperties,0);
+$context = $modx->getOption('context',$scriptProperties,false);
+$policy = $modx->getOption('policy',$scriptProperties,false);
 
 /* build query */
 $c = $modx->newQuery('modAccessContext');

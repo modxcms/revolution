@@ -10,8 +10,8 @@
 if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('element','propertyset');
 
-$_REQUEST['id'] = !isset($_REQUEST['id']) ? 0 : (substr($_REQUEST['id'],0,2) == 'n_' ? substr($_REQUEST['id'],2) : $_REQUEST['id']);
-$nodeId = $_REQUEST['id'];
+$scriptProperties['id'] = !isset($scriptProperties['id']) ? 0 : (substr($scriptProperties['id'],0,2) == 'n_' ? substr($scriptProperties['id'],2) : $scriptProperties['id']);
+$nodeId = $scriptProperties['id'];
 
 /* split the array */
 $node = explode('_',$nodeId);

@@ -16,11 +16,11 @@ if (!$modx->hasPermission('view_role')) return $modx->error->failure($modx->lexi
 $modx->lexicon->load('user');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'authority');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'authority');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 if ($sort == 'rolename_link') $sort = 'name';
 
 /* build query */
@@ -33,7 +33,7 @@ $roles = $modx->getCollection('modUserGroupRole', $c);
 
 /* iterate */
 $list = array();
-if (!empty($_REQUEST['addNone'])) {
+if (!empty($scriptProperties['addNone'])) {
     $list[] = array('id' => 0, 'name' => $modx->lexicon('none'));
 }
 $hasRemove = $modx->hasPermission('delete_role');

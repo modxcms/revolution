@@ -16,13 +16,13 @@ if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('setting');
 
 /* setup default properties */
-$isLimit = empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$sort = $modx->getOption('sort',$_REQUEST,'key');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
-$user = $modx->getOption('user',$_REQUEST,0);
-$key = $modx->getOption('key',$_REQUEST,false);
+$isLimit = empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'key');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$user = $modx->getOption('user',$scriptProperties,0);
+$key = $modx->getOption('key',$scriptProperties,false);
 
 /* setup criteria and get settings */
 $where = array(

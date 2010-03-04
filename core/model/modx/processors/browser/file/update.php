@@ -12,14 +12,14 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-$file = rawurldecode($_REQUEST['file']);
-$newname = $_POST['name'];
+$file = rawurldecode($scriptProperties['file']);
+$newname = $scriptProperties['name'];
 
 if (!file_exists($file)) return $modx->error->failure($modx->lexicon('file_err_nf'));
 
 /* write file */
 $f = @fopen($file,'w+');
-fwrite($f,$_POST['content']);
+fwrite($f,$scriptProperties['content']);
 fclose($f);
 
 /* rename if necessary */

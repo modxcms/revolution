@@ -12,15 +12,15 @@ if (!$modx->hasPermission('new_tv')) return $modx->error->failure($modx->lexicon
 $modx->lexicon->load('tv');
 
 /* get TV */
-$old_tv = $modx->getObject('modTemplateVar',$_POST['id']);
+$old_tv = $modx->getObject('modTemplateVar',$scriptProperties['id']);
 if ($old_tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
 
 $old_tv->templates = $old_tv->getMany('TemplateVarTemplates');
 $old_tv->resources = $old_tv->getMany('TemplateVarResources');
 $old_tv->resource_groups = $old_tv->getMany('TemplateVarResourceGroups');
 
-$newname = isset($_POST['name'])
-    ? $_POST['name']
+$newname = isset($scriptProperties['name'])
+    ? $scriptProperties['name']
     : $modx->lexicon('duplicate_of').$old_tv->get('name');
 
 /* duplicate TV */

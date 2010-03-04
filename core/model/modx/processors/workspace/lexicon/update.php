@@ -17,15 +17,15 @@ $modx->lexicon->load('lexicon');
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* get entry */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));
-$entry = $modx->getObject('modLexiconEntry',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));
+$entry = $modx->getObject('modLexiconEntry',$scriptProperties['id']);
 if ($entry == null) {
-    return $modx->error->failure($modx->lexicon('entry_err_nfs',array('key' => $_POST['id'])));
+    return $modx->error->failure($modx->lexicon('entry_err_nfs',array('key' => $scriptProperties['id'])));
 }
 
 /* verify topic if set */
-if (!empty($_POST['topic'])) {
-    $topic = $modx->getObject('modLexiconTopic',$_POST['topic']);
+if (!empty($scriptProperties['topic'])) {
+    $topic = $modx->getObject('modLexiconTopic',$scriptProperties['topic']);
     if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
 }
 
@@ -33,12 +33,12 @@ $old_namespace = $entry->get('namespace');
 $old_topic = $entry->getOne('Topic');
 
 /* validate name */
-if (empty($_POST['name'])) {
+if (empty($scriptProperties['name'])) {
     return $modx->error->failure($modx->lexicon('entry_err_ns_name'));
 }
 
 /* save entry */
-$entry->fromArray($_POST);
+$entry->fromArray($scriptProperties);
 if ($entry->save() == false) {
     return $modx->error->failure($modx->lexicon('entry_err_save'));
 }

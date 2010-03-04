@@ -9,7 +9,7 @@ $modx->lexicon->load('workspace','lexicon');
 
 if (!$modx->hasPermission('namespaces')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$_DATA = $modx->fromJSON($_POST['data']);
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 /* get namespace */
 if (empty($_DATA['name'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));

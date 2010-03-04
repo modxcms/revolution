@@ -8,22 +8,22 @@
 if (!$modx->hasPermission('save_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset','element');
 
-if (!isset($_POST['element_class']) || !isset($_POST['element'])) {
+if (!isset($scriptProperties['element_class']) || !isset($scriptProperties['element'])) {
     return $modx->error->failure($modx->lexicon('element_err_ns'));
 }
-$elementClass = $_POST['element_class'];
-$elementId = $_POST['element'];
+$elementClass = $scriptProperties['element_class'];
+$elementId = $scriptProperties['element'];
 
 /* grab element */
 $element = $modx->getObject($elementClass,$elementId);
 if ($element == null) $modx->error->failure($modx->lexicon('element_err_nf'));
 
 /* grab the modPropertySet */
-if (!isset($_POST['propertyset']) || $_POST['propertyset'] == '') {
+if (!isset($scriptProperties['propertyset']) || $scriptProperties['propertyset'] == '') {
     return $modx->error->failure($modx->lexicon('propertyset_err_ns'));
 }
-$set = $modx->getObject('modPropertySet',$_POST['propertyset']);
-if ($set == null) return $modx->error->failure($modx->lexicon('propertyset_err_nfs',array('id' => $_REQUEST['id'])));
+$set = $modx->getObject('modPropertySet',$scriptProperties['propertyset']);
+if ($set == null) return $modx->error->failure($modx->lexicon('propertyset_err_nfs',array('id' => $scriptProperties['id'])));
 
 $pse = $modx->newObject('modElementPropertySet');
 $pse->set('element',$elementId);

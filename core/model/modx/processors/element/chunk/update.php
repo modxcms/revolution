@@ -18,12 +18,12 @@ if (!$modx->hasPermission('save_chunk')) return $modx->error->failure($modx->lex
 $modx->lexicon->load('chunk','category');
 
 /* make sure a name was specified */
-if (empty($_POST['name'])) $modx->error->addField('name',$modx->lexicon('chunk_err_ns_name'));
+if (empty($scriptProperties['name'])) $modx->error->addField('name',$modx->lexicon('chunk_err_ns_name'));
 
 /* grab chunk */
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
-$chunk = $modx->getObject('modChunk',$_REQUEST['id']);
-if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $_REQUEST['id'])));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
+$chunk = $modx->getObject('modChunk',$scriptProperties['id']);
+if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $scriptProperties['id'])));
 
 /* if chunk is locked */
 if ($chunk->get('locked') && $modx->hasPermission('edit_locked') == false) {
@@ -33,7 +33,7 @@ if ($chunk->get('locked') && $modx->hasPermission('edit_locked') == false) {
 /* if changing name, but new one already exists */
 $name_exists = $modx->getObject('modChunk',array(
     'id:!=' => $chunk->get('id'),
-    'name' => $_POST['name'],
+    'name' => $scriptProperties['name'],
 ));
 if ($name_exists != null) {
     $modx->error->addField('name',$modx->lexicon('chunk_err_exists_name'));
@@ -41,8 +41,8 @@ if ($name_exists != null) {
 
 
 /* category */
-if (!empty($_POST['category'])) {
-    $category = $modx->getObject('modCategory',array('id' => $_POST['category']));
+if (!empty($scriptProperties['category'])) {
+    $category = $modx->getObject('modCategory',array('id' => $scriptProperties['category']));
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
@@ -59,8 +59,8 @@ $modx->invokeEvent('OnBeforeChunkFormSave',array(
 ));
 
 /* propogate values */
-$chunk->fromArray($_POST);
-$chunk->set('locked',!empty($_POST['locked']));
+$chunk->fromArray($scriptProperties);
+$chunk->set('locked',!empty($scriptProperties['locked']));
 
 /* save the chunk */
 if ($chunk->save() == false) {
@@ -78,7 +78,7 @@ $modx->invokeEvent('OnChunkFormSave',array(
 $modx->logManagerAction('chunk_update','modChunk',$chunk->get('id'));
 
 /* empty cache */
-if (!empty($_POST['clearCache'])) {
+if (!empty($scriptProperties['clearCache'])) {
     $cacheManager= $modx->getCacheManager();
     $cacheManager->clearCache();
 }

@@ -17,11 +17,11 @@ if (!$modx->hasPermission('content_types')) return $modx->error->failure($modx->
 $modx->lexicon->load('content_type');
 
 /* prevent empty name */
-if (empty($_POST['name'])) return $modx->error->failure($modx->lexicon('content_type_err_ns_name'));
+if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexicon('content_type_err_ns_name'));
 
 /* create content type */
 $contentType = $modx->newObject('modContentType');
-$contentType->fromArray($_POST);
+$contentType->fromArray($scriptProperties);
 
 /* save content type */
 if ($contentType->save() == false) {

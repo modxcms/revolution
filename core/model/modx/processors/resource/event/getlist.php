@@ -16,15 +16,15 @@ if (!$modx->hasPermission('view_document')) return $modx->error->failure($modx->
 $modx->lexicon->load('resource');
 
 /* setup default properties */
-$isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,10);
-$mode = $modx->getOption('mode',$_REQUEST,'pub_date');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$mode = $modx->getOption('mode',$scriptProperties,'pub_date');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
 $c = $modx->newQuery('modResource');
 $c->where(array(
-    $_REQUEST['mode'].':>' => time(),
+    $scriptProperties['mode'].':>' => time(),
 ));
 $count = $modx->getCount('modResource',$c);
 $c->sortby($mode,$dir);

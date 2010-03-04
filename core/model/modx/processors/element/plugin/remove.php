@@ -11,8 +11,8 @@ if (!$modx->hasPermission('delete_plugin')) return $modx->error->failure($modx->
 $modx->lexicon->load('plugin');
 
 /* get plugin */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
-$plugin = $modx->getObject('modPlugin',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
+$plugin = $modx->getObject('modPlugin',$scriptProperties['id']);
 if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
 
 /* remove plugin */

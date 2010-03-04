@@ -15,10 +15,10 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-$hideFiles = !empty($_REQUEST['hideFiles']) && $_REQUEST['hideFiles'] != 'false' ? true : false;
-$stringLiterals = !empty($_REQUEST['stringLiterals']) ? true : false;
+$hideFiles = !empty($scriptProperties['hideFiles']) && $scriptProperties['hideFiles'] != 'false' ? true : false;
+$stringLiterals = !empty($scriptProperties['stringLiterals']) ? true : false;
 
-$dir = !isset($_REQUEST['id']) || $_REQUEST['id'] == 'root' ? '' : str_replace('n_','',$_REQUEST['id']);
+$dir = !isset($scriptProperties['id']) || $scriptProperties['id'] == 'root' ? '' : str_replace('n_','',$scriptProperties['id']);
 
 $directories = array();
 $files = array();
@@ -26,8 +26,8 @@ $ls = array();
 
 $actions = $modx->request->getAllActionIDs();
 
-$root = !empty($_REQUEST['prependPath']) && $_REQUEST['prependPath'] != 'null'
-    ? $_REQUEST['prependPath']
+$root = !empty($scriptProperties['prependPath']) && $scriptProperties['prependPath'] != 'null'
+    ? $scriptProperties['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
 
 $fullpath = $root.($dir != '' ? $dir : '');

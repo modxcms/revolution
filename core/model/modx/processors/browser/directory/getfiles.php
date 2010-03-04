@@ -14,11 +14,11 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-$dir = !isset($_REQUEST['dir']) || $_REQUEST['dir'] == 'root' ? '' : $_REQUEST['dir'];
+$dir = !isset($scriptProperties['dir']) || $scriptProperties['dir'] == 'root' ? '' : $scriptProperties['dir'];
 $dir = trim($dir,'/');
 
-$root = isset($_REQUEST['prependPath']) && $_REQUEST['prependPath'] != 'null' && $_REQUEST['prependPath'] != null
-    ? $_REQUEST['prependPath']
+$root = isset($scriptProperties['prependPath']) && $scriptProperties['prependPath'] != 'null' && $scriptProperties['prependPath'] != null
+    ? $scriptProperties['prependPath']
     : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
 $fullpath = $root.'/'.$dir;
 
@@ -38,8 +38,8 @@ foreach (new DirectoryIterator($fullpath) as $file) {
 
 		$filesize = @filesize($filePathName);
         /* calculate url */
-		if (!empty($_REQUEST['prependUrl'])) {
-            $url = $_REQUEST['prependUrl'].$dir.'/'.$fileName;
+		if (!empty($scriptProperties['prependUrl'])) {
+            $url = $scriptProperties['prependUrl'].$dir.'/'.$fileName;
         } else {
             $url = $modx->getOption('rb_base_url').$dir.'/'.$fileName;
         }

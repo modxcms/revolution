@@ -13,7 +13,7 @@ $modx->lexicon->load('tv');
 $forced = true;
 
 /* get tv */
-$tv = $modx->getObject('modTemplateVar',$_POST['id']);
+$tv = $modx->getObject('modTemplateVar',$scriptProperties['id']);
 if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
 
 /* get tv relational tables */

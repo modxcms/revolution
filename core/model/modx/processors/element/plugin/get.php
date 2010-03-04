@@ -11,8 +11,8 @@ if (!$modx->hasPermission('view_plugin')) return $modx->error->failure($modx->le
 $modx->lexicon->load('plugin');
 
 /* get plugin */
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
-$plugin = $modx->getObject('modPlugin', $_REQUEST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
+$plugin = $modx->getObject('modPlugin', $scriptProperties['id']);
 if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
 
 $properties = $plugin->get('properties');

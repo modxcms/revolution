@@ -11,8 +11,8 @@ if (!$modx->hasPermission('view_category')) return $modx->error->failure($modx->
 $modx->lexicon->load('category');
 
 /* get category */
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('category_err_ns'));
-$category = $modx->getObject('modCategory',$_REQUEST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('category_err_ns'));
+$category = $modx->getObject('modCategory',$scriptProperties['id']);
 if ($category == null) return $modx->error->failure($modx->lexicon('category_err_nf'));
 
 return $modx->error->success('',$category);

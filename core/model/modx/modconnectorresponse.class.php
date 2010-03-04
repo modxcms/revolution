@@ -60,6 +60,10 @@ class modConnectorResponse extends modResponse {
             /* find the appropriate processor */
             $file = $this->_directory.str_replace('\\', '/', $options['location'] . '/' . $options['action']).'.php';
 
+            /* create scriptProperties array from HTTP GPC vars */
+            if (!isset($_FILES)) $_FILES = array();
+            $scriptProperties = array_merge($_REQUEST,$_FILES);
+
             /* verify processor exists */
             if (!file_exists($file)) {
                 $this->body = $this->modx->error->failure($this->modx->lexicon('processor_err_nf').$file);

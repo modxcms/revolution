@@ -10,8 +10,8 @@
 if (!$modx->hasPermission('edit_context')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('context');
 
-if (empty($_POST['data'])) return $modx->error->failure();
-$_DATA = $modx->fromJSON($_POST['data']);
+if (empty($scriptProperties['data'])) return $modx->error->failure();
+$_DATA = $modx->fromJSON($scriptProperties['data']);
 
 /* get context */
 if (empty($_DATA['key'])) return $modx->error->failure($modx->lexicon('context_err_ns'));

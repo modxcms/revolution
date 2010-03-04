@@ -10,7 +10,7 @@
  */
 if (!$modx->hasPermission('delete_eventlog')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-$clearall = $_REQUEST['cls'] == 1 ? true : false;
+$clearall = $scriptProperties['cls'] == 1 ? true : false;
 
 if ($clearall) {
 	$events = $modx->getCollection('modEventLog');
@@ -18,7 +18,7 @@ if ($clearall) {
         $event->remove();
     }
 } else {
-	$event = $modx->getObject('modEventLog', $_REQUEST['id']);
+	$event = $modx->getObject('modEventLog', $scriptProperties['id']);
 	$event->remove();
 }
 

@@ -11,9 +11,9 @@ $modx->lexicon->load('access');
 
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (!isset($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('access_type_err_ns'));
+if (!isset($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('access_type_err_ns'));
 
-$targetAttr = explode('_', $_REQUEST['id']);
+$targetAttr = explode('_', $scriptProperties['id']);
 $targetClass = count($targetAttr) == 3 ? $targetAttr[1] : '';
 $targetId = count($targetAttr) >= 2 ? intval($targetAttr[count($targetAttr)-1]) : 0;
 

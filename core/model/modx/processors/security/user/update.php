@@ -11,20 +11,20 @@ if (!$modx->hasPermission('save_user')) return $modx->error->failure($modx->lexi
 $modx->lexicon->load('user');
 
 /* get user */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
-$user = $modx->getObject('modUser',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('user_err_ns'));
+$user = $modx->getObject('modUser',$scriptProperties['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
 /* validate post */
-$_POST['blocked'] = empty($_POST['blocked']) ? 0 : 1;
-$_POST['active'] = empty($_POST['active']) ? 0 : 1;
+$scriptProperties['blocked'] = empty($scriptProperties['blocked']) ? 0 : 1;
+$scriptProperties['active'] = empty($scriptProperties['active']) ? 0 : 1;
 
 $newPassword= false;
 $result = include_once $modx->getOption('processors_path').'security/user/_validation.php';
 if ($result !== true) return $result;
 
-if ($_POST['passwordnotifymethod'] == 'e') {
-	sendMailMessage($_POST['email'], $_POST['username'],$newPassword,$_POST['fullname']);
+if ($scriptProperties['passwordnotifymethod'] == 'e') {
+	sendMailMessage($scriptProperties['email'], $scriptProperties['username'],$newPassword,$scriptProperties['fullname']);
 }
 
 /* invoke OnBeforeUserFormSave event */
@@ -35,14 +35,14 @@ $modx->invokeEvent('OnBeforeUserFormSave',array(
 ));
 
 
-if (isset($_POST['groups'])) {
+if (isset($scriptProperties['groups'])) {
     /* remove prior user group links */
     $ugms = $user->getMany('UserGroupMembers');
     foreach ($ugms as $ugm) { $ugm->remove(); }
 
     /* create user group links */
     $ugms = array();
-    $groups = $modx->fromJSON($_POST['groups']);
+    $groups = $modx->fromJSON($scriptProperties['groups']);
     foreach ($groups as $group) {
         $ugm = $modx->newObject('modUserGroupMember');
         $ugm->set('user_group',$group['usergroup']);
@@ -53,7 +53,7 @@ if (isset($_POST['groups'])) {
     $user->addMany($ugms,'UserGroupMembers');
 }
 
-$user->fromArray($_POST);
+$user->fromArray($scriptProperties);
 
 /* update user */
 if ($user->save() == false) {
@@ -61,7 +61,7 @@ if ($user->save() == false) {
 }
 
 $user->profile = $user->getOne('Profile');
-$user->profile->fromArray($_POST);
+$user->profile->fromArray($scriptProperties);
 
 if ($user->profile->save() == false) {
 	return $modx->error->failure($modx->lexicon('user_profile_err_save'));
@@ -72,14 +72,14 @@ if ($user->profile->save() == false) {
 $modx->invokeEvent('OnManagerSaveUser',array(
 	'mode' => 'upd',
     'user' => &$user,
-	'userid' => $_POST['id'],
-	'username' => $_POST['newusername'],
-	'userpassword' => $_POST['newpassword'],
-	'useremail' => $_POST['email'],
-	'userfullname' => $_POST['fullname'],
-	'userroleid' => $_POST['role'],
-	'oldusername' => (($_POST['oldusername'] != $_POST['newusername']) ? $_POST['oldusername'] : ''),
-	'olduseremail' => (($_POST['oldemail'] != $_POST['email']) ? $_POST['oldemail'] : '')
+	'userid' => $scriptProperties['id'],
+	'username' => $scriptProperties['newusername'],
+	'userpassword' => $scriptProperties['newpassword'],
+	'useremail' => $scriptProperties['email'],
+	'userfullname' => $scriptProperties['fullname'],
+	'userroleid' => $scriptProperties['role'],
+	'oldusername' => (($scriptProperties['oldusername'] != $scriptProperties['newusername']) ? $scriptProperties['oldusername'] : ''),
+	'olduseremail' => (($scriptProperties['oldemail'] != $scriptProperties['email']) ? $scriptProperties['oldemail'] : '')
 ));
 
 /* invoke OnUserFormSave event */
@@ -141,7 +141,7 @@ function sendMailMessage($email, $uid, $pwd, $ufn) {
 /* log manager action */
 $modx->logManagerAction('user_update','modUser',$user->get('id'));
 
-if ($newPassword && $_POST['passwordnotifymethod'] == 's') {
+if ($newPassword && $scriptProperties['passwordnotifymethod'] == 's') {
 	return $modx->error->success($modx->lexicon('user_updated_password_message',array(
         'password' => $newPassword,
     )),$user);
