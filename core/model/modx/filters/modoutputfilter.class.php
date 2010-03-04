@@ -202,7 +202,7 @@ class modOutputFilter {
                         break;
                     case 'strip':
                         /* Replaces all linebreaks, tabs and multiple spaces with just one space */
-                        $output= preg_replace("~([\n|\r|\t|\s]+)~", " ", $output);
+                        $output= preg_replace("/\s+/"," ",$output);
                         break;
                     case 'notags':
                     case 'striptags':
@@ -244,7 +244,12 @@ class modOutputFilter {
                         $limit= intval($m_val) ? intval($m_val) : 100;
                         $output= substr($output, 0, $limit);
                         break;
-
+                    case 'ellipsis':
+                        $limit= intval($m_val) ? intval($m_val) : 100;
+                        if (strlen($output) > $limit) {
+                            $output = substr($output,0,$limit).'...';
+                        }
+                        break;
                     /* #####  Special functions */
 
                     case 'tag':

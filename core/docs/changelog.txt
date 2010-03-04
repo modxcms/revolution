@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1711] Fixed bug with strip output filter
+- Added ellipsis output filter
 - Fixed various event callings across JS implementation to properly modularize modext components
 - Added events to user's groups grid to ensure dirty firing
 - Added MODx.FormPanel::markDirty
