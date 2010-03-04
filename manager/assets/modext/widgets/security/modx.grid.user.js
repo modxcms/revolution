@@ -75,7 +75,7 @@ MODx.grid.User = function(config) {
         },'-',{
             xtype: 'textfield'
             ,name: 'query'
-            ,id: 'modx-users-search'
+            ,itemId: 'fld-search'
             ,emptyText: _('search')
             ,listeners: {
                 'change': {fn:this.search,scope:this}

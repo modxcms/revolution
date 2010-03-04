@@ -16,15 +16,19 @@ MODx.panel.ContentType = function(config) {
         ,items: [{
             html: '<h2>'+_('content_types')+'</h2>'
             ,cls: 'modx-page-header'
+            ,itemId: 'header'
             ,border: false
         },{
             layout: 'form'
+            ,itemId: 'form'
             ,bodyStyle: 'padding: 1.5em;'
             ,items: [{
                 html: '<p>'+_('content_type_desc')+'</p>'
+                ,itemId: 'description'
                 ,border: false
             },{
                 xtype: 'modx-grid-content-type'
+                ,itemId: 'grid'
                 ,preventRender: true
             }]
         }]
@@ -40,13 +44,13 @@ Ext.extend(MODx.panel.ContentType,MODx.FormPanel,{
     initialized: false
     ,setup: function() {}
     ,beforeSubmit: function(o) {
-        var g = Ext.getCmp('modx-grid-content-type');
+        var g = this.getComponent('form').getComponent('grid');
         Ext.apply(o.form.baseParams,{
             data: g.encodeModified()
         });
     }
     ,success: function(o) {
-        Ext.getCmp('modx-grid-content-type').getStore().commitChanges();
+        this.getComponent('form').getComponent('grid').getStore().commitChanges();
     }
 });
 Ext.reg('modx-panel-content-type',MODx.panel.ContentType);
@@ -69,8 +73,7 @@ MODx.grid.ContentType = function(config) {
     });
 
     Ext.applyIf(config,{
-        id: 'modx-grid-content-type'
-        ,url: MODx.config.connectors_url+'system/contenttype.php'
+        url: MODx.config.connectors_url+'system/contenttype.php'
         ,fields: ['id','name','mime_type','file_extensions','headers','binary','description','menu']
         ,paging: true
         ,remoteSort: true

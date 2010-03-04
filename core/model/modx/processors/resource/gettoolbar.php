@@ -66,4 +66,4 @@ if ($modx->hasPermission('purge_deleted')) {
     );
 }
 
-return $this->outputArray($items);
+return $modx->error->success('',$items);

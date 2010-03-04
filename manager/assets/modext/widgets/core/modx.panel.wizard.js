@@ -14,12 +14,14 @@ MODx.Wizard = function(config) {
         ,cls: 'modx-window'
         ,bbar: [{
             id: 'pi-btn-bck'
+            ,itemId: 'btn-back'
             ,text: _('back')
             ,handler: function() { this.fireEvent('backward'); }
             ,scope: this
             ,disabled: true         
         },{
             id: 'pi-btn-fwd'
+            ,itemId: 'btn-next'
             ,text: _('next')
             ,handler: function() { this.fireEvent('forward'); }
             ,scope: this
@@ -54,7 +56,7 @@ Ext.extend(MODx.Wizard,Ext.Window,{
     }
     
     ,onShow: function() {
-        this.getBottomToolbar().items.item(1).setText(_('next'));
+        this.getBottomToolbar().getComponent('btn-next').setText(_('next'));
         if (this.fireEvent('proceed',this.config.firstPanel)) {
             this.fireEvent('ready');
         }
@@ -71,14 +73,17 @@ Ext.extend(MODx.Wizard,Ext.Window,{
     }
     
     ,proceed: function(panel) {
+        var tb = this.getBottomToolbar();
+        if (!tb) return false;
+        
         this.getLayout().setActiveItem(panel);
         if (panel === this.config.firstPanel) {
-            this.getBottomToolbar().items.item(0).setDisabled(true);
+            tb.getComponent('btn-back').setDisabled(true);
         } else if (panel === this.config.lastPanel) {
-            this.getBottomToolbar().items.item(1).setText(_('finish'));
+            tb.getComponent('btn-next').setText(_('finish'));
         } else {
-            this.getBottomToolbar().items.item(0).setDisabled(false);
-            this.getBottomToolbar().items.item(1).setText(_('next'));
+            tb.getComponent('btn-back').setDisabled(false);
+            tb.getComponent('btn-next').setText(_('next'));
         }
         Ext.getCmp(panel).fireEvent('fetch');
         this.syncSize();

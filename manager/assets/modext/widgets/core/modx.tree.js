@@ -74,26 +74,27 @@ MODx.tree.Tree = function(config) {
         ,cls: 'modx-tree'
         ,root: root
         ,preventRender: false
+        ,menuConfig: { defaultAlign: 'tl-b?' ,enableScrolling: false }
 	});
 	if (config.remoteToolbar === true && (config.tbar === undefined || config.tbar === null)) {
-		Ext.Ajax.request({
+		MODx.Ajax.request({
 			url: config.url
 			,params: {
                 action: 'getToolbar'
             }
-            ,success:function(r) {
-                r = Ext.decode(r.responseText);
-                var itms = this._formatToolbar(r.results);
-                var tb = this.getTopToolbar();
-                if (tb) {
-                    var l = r.results;
-                    for (var i=0;i<itms.length;i++) {
-                        tb.add(itms[i]);
+            ,listeners: {
+                'success': {fn:function(r) {
+                    var itms = this._formatToolbar(r.object);
+                    var tb = this.getTopToolbar();
+                    if (tb) {
+                        var l = r.object;
+                        for (var i=0;i<itms.length;i++) {
+                            tb.add(itms[i]);
+                        }
+                        tb.doLayout();
                     }
-                    tb.doLayout();
-                }
+                },scope:this}
             }
-            ,scope:this
         });
         config.tbar = {bodyStyle: 'padding: 0'};
 	} else {
@@ -122,7 +123,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	 */
 	,setup: function(config) {
 	    MODx.tree.Tree.superclass.constructor.call(this,config);
-	    this.cm = new Ext.menu.Menu({ defaultAlign: 'tl-b?' ,enableScrolling: false });
+	    this.cm = new Ext.menu.Menu(config.menuConfig);
 	    this.on('contextmenu',this._showContextMenu,this);
 	    this.on('beforenodedrop',this._handleDrop,this);
 	    this.on('nodedragover',this._handleDrop,this);

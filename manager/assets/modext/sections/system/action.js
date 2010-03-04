@@ -13,7 +13,7 @@ Ext.onReady(function() {
 MODx.page.Actions = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
-		components: [{
+        components: [{
             xtype: 'modx-panel-actions'
             ,renderTo: 'modx-panel-actions-div'
         }]

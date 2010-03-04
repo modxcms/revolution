@@ -9,22 +9,23 @@
 MODx.panel.Actions = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        id: 'modx-panel-actions'
-        ,bodyStyle: ''
+        bodyStyle: ''
+        ,id: 'modx-panel-actions'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+_('actions')+'</h2>'
             ,border: false
             ,cls: 'modx-page-header'
-            ,id: 'modx-actions-header'
+            ,itemId: 'header'
         },{
             xtype: 'portal'
-            ,id: 'modx-action-portal'
+            ,itemId: 'portal'
             ,items: [{
                 columnWidth: .47
-                ,id: 'modx-action-col'
+                ,itemId: 'col-action'
                 ,items: [{
                     title: _('actions')
+                    ,itemId: 'form-action'
 					,cls: 'x-panel-header'
 			        ,style: 'padding: .5em;'
 			        ,bodyStyle: 'text-transform: none; font-weight: Normal;'
@@ -34,13 +35,15 @@ MODx.panel.Actions = function(config) {
                         ,border: false
                     },{
                         xtype: 'modx-tree-action'
+                        ,itemId: 'tree-action'
                     }]
                 }]
             },{
                 columnWidth: .47
-                ,id: 'modx-menu-col'
+                ,itemId: 'col-menu'
                 ,items: [{
                     title: _('topmenu')
+                    ,itemId: 'form-menu'
 					,cls: 'x-panel-header'
 			        ,style: 'padding: .5em;'
 			        ,bodyStyle: 'text-transform: none; font-weight: Normal;'
@@ -50,6 +53,7 @@ MODx.panel.Actions = function(config) {
                         ,border: false
                     },{
                         xtype: 'modx-tree-menu'
+                        ,itemId: 'tree-menu'
                     }]
                 }]
             }]

@@ -15,13 +15,13 @@ MODx.Console = function(config) {
         ,refreshRate: 2
         ,cls: 'modx-window modx-console'
         ,items: [{
-            id: 'modx-console-header'
+            itemId: 'header'
             ,cls: 'modx-console-text'
             ,html: _('console_running')
             ,border: false
         },{
             xtype: 'panel'
-            ,id: 'modx-console-body'
+            ,itemId: 'body'
             ,cls: 'x-form-text modx-console-text'
         }]
         ,buttons: [{
@@ -31,6 +31,7 @@ MODx.Console = function(config) {
         },{
             text: _('ok')
             ,id: 'modx-console-ok'
+            ,itemId: 'okBtn'
             ,disabled: true
             ,scope: this
             ,handler: this.hideConsole
@@ -44,7 +45,7 @@ MODx.Console = function(config) {
     });
     this.on('show',this.init,this);
     this.on('hide',function() {
-        Ext.getCmp('modx-console-body').el.update('');
+        this.getComponent('body').el.update('');
     });
     
 };
@@ -54,8 +55,8 @@ Ext.extend(MODx.Console,Ext.Window,{
     
     ,init: function() {
         Ext.Msg.hide();
-        Ext.getCmp('modx-console-ok').setDisabled(true);
-        Ext.getCmp('modx-console-body').el.dom.innerHTML = '';
+        this.fbar.getComponent('okBtn').setDisabled(true);
+        this.getComponent('body').el.dom.innerHTML = '';
         
         this.provider = new Ext.direct.PollingProvider({
             type:'polling'
@@ -74,19 +75,21 @@ Ext.extend(MODx.Console,Ext.Window,{
             if (e.data.search('COMPLETED') != -1) {
                 this.provider.disconnect();
                 this.fireEvent('complete');
-                Ext.getCmp('modx-console-ok').setDisabled(false);
+                this.fbar.getComponent('okBtn').setDisabled(false);
             } else {
-                var out = Ext.getCmp('modx-console-body');
-                out.el.insertHtml('beforeEnd',e.data);
-                e.data = '';
-                out.el.scroll('b', out.el.getHeight(), true);
+                var out = this.getComponent('body');
+                if (out) {
+                    out.el.insertHtml('beforeEnd',e.data);
+                    e.data = '';
+                    out.el.scroll('b', out.el.getHeight(), true);
+                }
             }
             delete e;
         },this);
     }
     
     ,download: function() {
-        var c = Ext.get('modx-console-body').dom.innerHTML;
+        var c = this.getComponent('body').dom.innerHTML;
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'system/index.php'
             ,params: {

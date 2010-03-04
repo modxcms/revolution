@@ -14,7 +14,6 @@ MODx = function(config) {
 Ext.extend(MODx,Ext.Component,{
     config: {}
     ,util:{},window:{},panel:{},tree:{},form:{},grid:{},combo:{},toolbar:{},page:{},msg:{}
-    //,Ajax:{}
     
     ,startup: function() {
         this.initQuickTips();
@@ -85,7 +84,7 @@ Ext.extend(MODx,Ext.Component,{
                         if (this.fireEvent('afterClearCache')) {
                             Ext.getCmp('modx-layout').refreshTrees();
                         }
-                    }}
+                    },scope:this}
                }
             });
         } else {
@@ -152,9 +151,9 @@ Ext.extend(MODx,Ext.Component,{
     ,getPageStructure: function(v,c) {
         c = c || {};
         if (MODx.config.manager_use_tabs) {
-            Ext.applyIf(c,{xtype: 'modx-tabs',style: 'margin-top: .5em;',items: v,forceLayout: true});
+            Ext.applyIf(c,{xtype: 'modx-tabs',itemId: 'tabs' ,style: 'margin-top: .5em;',items: v,forceLayout: true});
         } else {
-            Ext.applyIf(c,{xtype:'portal',items:[{columnWidth:1,items: v,forceLayout: true}]});
+            Ext.applyIf(c,{xtype:'portal',itemId: 'tabs' ,items:[{columnWidth:1,items: v,forceLayout: true}]});
         }
         return c;
     }
@@ -168,7 +167,6 @@ Ext.extend(MODx,Ext.Component,{
             ,height: 500
             ,modal: true
             ,layout: 'fit'
-            //,bodyStyle: 'padding: 5px;'
             ,html: '<iframe onload="parent.MODx.helpWindow.getEl().unmask();" src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
             ,listeners: {
                 show: function(o) {

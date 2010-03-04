@@ -229,12 +229,14 @@ MODx.panel.Wizard = function(config) {
         ,txtBack: _('back')
         ,bbar: [{
             id: 'pi-btn-bck'
+            ,itemId: 'btn-back'
             ,text: config.txtBack || _('back')
             ,handler: this.navHandler.createDelegate(this,[-1])
             ,scope: this
             ,disabled: true         
         },{
             id: 'pi-btn-fwd'
+            ,itemId: 'btn-fwd'
             ,text: config.txtNext || _('next')
             ,handler: this.navHandler.createDelegate(this,[1])
             ,scope: this

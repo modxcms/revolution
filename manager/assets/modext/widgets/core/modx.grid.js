@@ -5,7 +5,6 @@ MODx.grid.Grid = function(config) {
 	this.config = config;
 	this._loadStore();
 	this._loadColumnModel();
-	this._loadMenu();
 	
 	Ext.applyIf(config,{
 		store: this.store
@@ -18,6 +17,10 @@ MODx.grid.Grid = function(config) {
         ,stripeRows: true
         ,header: false
         ,cls: 'modx-grid'
+        ,menuConfig: {
+            defaultAlign: 'tl-b?'
+            ,enableScrolling: false
+        }
 		,viewConfig: {
 			forceFit: true
 			,enableRowBody: true
@@ -58,6 +61,7 @@ MODx.grid.Grid = function(config) {
         }
     }
 	MODx.grid.Grid.superclass.constructor.call(this,config);
+    this._loadMenu(config);
     this.addEvents({
         beforeRemoveRow: true
         ,afterRemoveRow: true
@@ -165,22 +169,22 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,params: p
                 ,listeners: {
                 	'success': {fn:function() {
-                        if (this.fireEvent('afterRemoveRow',r)) {
-                            this.removeActiveRow(r);
-                        }
+                        this.removeActiveRow(r);
                     },scope:this}
                 }
             });
         }
     }
     
-    ,removeActiveRow: function() {
-        var rx = this.getSelectionModel().getSelected();
-        this.getStore().remove(rx);
+    ,removeActiveRow: function(r) {
+        if (this.fireEvent('afterRemoveRow',r)) {
+            var rx = this.getSelectionModel().getSelected();
+            this.getStore().remove(rx);
+        }
     }
     
 	,_loadMenu: function() {
-		this.menu = new Ext.menu.Menu({ defaultAlign: 'tl-b?' ,enableScrolling: false });
+		this.menu = new Ext.menu.Menu(this.config.menuConfig);
 	}
     
 	,_showMenu: function(g,ri,e) {
@@ -277,30 +281,25 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 h = function(itm,e) {
                     var o = itm.options;
                     var id = this.menu.record.id;
-                    var w = Ext.get('modx_content');
                     if (o.confirm) {
                         Ext.Msg.confirm('',o.confirm,function(e) {
                             if (e == 'yes') {
                                 var a = Ext.urlEncode(o.params || {action: o.action});
                                 var s = 'index.php?id='+id+'&'+a;
-                                if (w === null) {
-                                    location.href = s;
-                                } else { w.dom.src = s; }
+                                location.href = s;
                             }
                         },this);
                     } else {
                         var a = Ext.urlEncode(o.params || {action: o.action});
                         var s = 'index.php?id='+id+'&'+a;
-                        if (w === null) {
-                            location.href = s;
-                        } else { w.dom.src = s; }
+                        location.href = s;
                     }
                 };
             }
             this.menu.add({
                 id: options.id || Ext.id()
                 ,text: options.text
-                ,scope: this
+                ,scope: options.scope || this
                 ,options: options
                 ,handler: h
             });
@@ -409,9 +408,10 @@ MODx.grid.LocalGrid = function(config) {
             ,scrollOffset: 0
             ,emptyText: config.emptyText || _('ext_emptymsg')
         }
+        ,menuConfig: { defaultAlign: 'tl-b?' ,enableScrolling: false }
     });
     
-    this.menu = new Ext.menu.Menu({ defaultAlign: 'tl-b?' ,enableScrolling: false });
+    this.menu = new Ext.menu.Menu(config.menuConfig);
     this.config = config;
     this._loadColumnModel();
     MODx.grid.LocalGrid.superclass.constructor.call(this,config);

@@ -9,8 +9,7 @@
 MODx.tree.Action = function(config) {
 	config = config || {};
     Ext.applyIf(config,{
-        id: 'modx-tree-action'
-        ,root_id: 'n_root_0'
+        root_id: 'n_root_0'
         ,root_name: _('actions')
         ,rootVisible: true
         ,expandFirst: true
@@ -95,13 +94,11 @@ MODx.window.CreateAction = function(config) {
         ,fields: [{
             fieldLabel: _('controller')
             ,name: 'controller'
-            ,id: 'modx-cact-controller'
             ,xtype: 'textfield'
             ,width: 200
         },{
             fieldLabel: _('namespace')
             ,name: 'namespace'
-            ,id: 'modx-cact-namespace'
             ,xtype: 'modx-combo-namespace'
             ,width: 200
             ,allowBlank: false
@@ -110,14 +107,12 @@ MODx.window.CreateAction = function(config) {
             fieldLabel: _('controller_parent')
             ,name: 'parent'
             ,hiddenName: 'parent'
-            ,id: 'modx-cact-parent'
             ,xtype: 'modx-combo-action'
             ,editable: false
             ,width: 200
         },{
             fieldLabel: _('load_headers')
             ,name: 'haslayout'
-            ,id: 'modx-cact-haslayout'
             ,xtype: 'checkbox'
             ,checked: true
             ,inputValue: 1
@@ -125,13 +120,11 @@ MODx.window.CreateAction = function(config) {
             fieldLabel: _('lang_topics')
             ,description: _('lang_topics_desc')
             ,name: 'lang_topics'
-            ,id: 'modx-cact-lang-topics'
             ,xtype: 'textfield'
             ,width: 200
         },{
             fieldLabel: _('assets')
             ,name: 'assets'
-            ,id: 'modx-cact-assets'
             ,xtype: 'textarea'
             ,width: 200
             ,grow: false
@@ -160,23 +153,19 @@ MODx.window.UpdateAction = function(config) {
         ,action: 'update'
         ,fields: [{
             name: 'id'
-            ,id: 'modx-uact-id'
             ,xtype: 'hidden'
         },{
             name: 'parent'
-            ,id: 'modx-uact-parent'
             ,xtype: 'hidden'
         },{
             fieldLabel: _('controller')
             ,name: 'controller'
-            ,id: 'modx-uact-controller' 
             ,xtype: 'textfield'
             ,width: 200
         },{
             fieldLabel: _('namespace')
             ,name: 'namespace'
             ,hiddenName: 'namespace'
-            ,id: 'modx-uact-namespace'
             ,xtype: 'modx-combo-namespace'
             ,width: 200
             ,allowBlank: false
@@ -184,7 +173,6 @@ MODx.window.UpdateAction = function(config) {
             fieldLabel: _('controller_parent')
             ,name: 'parent'
             ,hiddenName: 'parent'
-            ,id: 'modx-uact-parent-controller'
             ,xtype: 'modx-combo-action'
             ,readOnly: true
             ,editable: false
@@ -192,20 +180,17 @@ MODx.window.UpdateAction = function(config) {
         },{
             fieldLabel: _('load_headers')
             ,name: 'haslayout'
-            ,id: 'modx-uact-haslayout'
             ,xtype: 'checkbox'
             ,checked: true
         },{
             fieldLabel: _('lang_topics')
             ,description: _('lang_topics_desc')
             ,name: 'lang_topics'
-            ,id: 'modx-uact-lang-topics'
             ,xtype: 'textfield'
             ,width: 200
         },{
             fieldLabel: _('assets')
             ,name: 'assets'
-            ,id: 'modx-uact-assets'
             ,xtype: 'textarea'
             ,width: 200
             ,grow: false

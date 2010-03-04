@@ -37,12 +37,13 @@ MODx.tree.ColumnTree = function(config) {
             }
         })
         ,tbar: this._getToolbar()
+        ,menuConfig: { defaultAlign: 'tl-b?' ,enableScrolling: false }
     });
     MODx.tree.ColumnTree.superclass.constructor.call(this,config);
     this.on('contextmenu',this._showContextMenu,this);
     this.on('nodedragover',this._handleDrop,this);
     this.on('nodedrop',this._handleDrag,this);
-    this.cm = new Ext.menu.Menu();
+    this.cm = new Ext.menu.Menu(config.menuConfig);
     this.config = config;
 };
 Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{

@@ -9,8 +9,7 @@
 MODx.tree.Menu = function(config) {
 	config = config || {};
     Ext.applyIf(config,{
-        id: 'modx-tree-menu'
-        ,root_id: 'n_'
+        root_id: 'n_'
         ,root_name: _('menu_top')
 		,rootVisible: true
         ,expandFirst: true
@@ -103,18 +102,15 @@ MODx.window.CreateMenu = function(config) {
         ,fields: [{
             xtype: 'hidden'
             ,name: 'parent'
-            ,id: 'modx-cmen-parent'
         },{
             fieldLabel: _('lexicon_key')
             ,name: 'text'
-            ,id: 'modx-cmen-text'
             ,xtype: 'textfield'
             ,allowBlank: false
             ,width: 200
         },{
             fieldLabel: _('description')
             ,name: 'description'
-            ,id: 'modx-cmen-description'
             ,xtype: 'textfield'
             ,allowBlank: true
             ,width: 200
@@ -122,32 +118,27 @@ MODx.window.CreateMenu = function(config) {
             fieldLabel: _('action')
             ,name: 'action_id'
             ,hiddenName: 'action_id'
-            ,id: 'modx-cmen-action-id'
             ,xtype: 'modx-combo-action'
         },{
             fieldLabel: _('icon')
             ,name: 'icon'
-            ,id: 'modx-cmen-icon'
             ,xtype: 'textfield'
             ,allowBlank: true
             ,width: 200
         },{
             fieldLabel: _('parameters')
             ,name: 'params'
-            ,id: 'modx-cmen-params'
             ,xtype: 'textfield'
             ,width: 200
         },{
             fieldLabel: _('handler')
             ,name: 'handler'
-            ,id: 'modx-cmen-handler'
             ,xtype: 'textarea'
             ,width: 320
             ,grow: false
         },{
             fieldLabel: _('permissions')
             ,name: 'permissions'
-            ,id: 'modx-cmen-permissions'
             ,xtype: 'textfield'
             ,width: 200
         }]
@@ -176,7 +167,6 @@ MODx.window.UpdateMenu = function(config) {
         ,action: 'update'
         ,fields: [{
             name: 'parent'
-            ,id: 'modx-umen-parent'
             ,xtype: 'hidden'
         },{
             name: 'text'
@@ -184,14 +174,12 @@ MODx.window.UpdateMenu = function(config) {
         },{
             fieldLabel: _('lexicon_key')
             ,name: 'new_text'
-            ,id: 'modx-umen-new_text'
             ,xtype: 'textfield'
             ,allowBlank: false
             ,width: 200
         },{
             fieldLabel: _('description')
             ,name: 'description'
-            ,id: 'modx-umen-description'
             ,xtype: 'textfield'
             ,allowBlank: true
             ,width: 200
@@ -199,32 +187,27 @@ MODx.window.UpdateMenu = function(config) {
             fieldLabel: _('action')
             ,name: 'action_id'
             ,hiddenName: 'action_id'
-            ,id: 'modx-umen-action-id'
             ,xtype: 'modx-combo-action'
         },{
             fieldLabel: _('icon')
             ,name: 'icon'
-            ,id: 'modx-umen-icon'
             ,xtype: 'textfield'
             ,allowBlank: true
             ,width: 200
         },{
             fieldLabel: _('parameters')
             ,name: 'params'
-            ,id: 'modx-umen-params'
             ,xtype: 'textfield'
             ,width: 200
         },{
             fieldLabel: _('handler')
             ,name: 'handler'
-            ,id: 'modx-umen-handler'
             ,xtype: 'textarea'
             ,width: 320
             ,grow: false
         },{
             fieldLabel: _('permissions')
             ,name: 'permissions'
-            ,id: 'modx-umen-permissions'
             ,xtype: 'textfield'
             ,width: 200
         }]
