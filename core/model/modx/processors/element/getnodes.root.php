@@ -223,7 +223,7 @@ if ($modx->hasPermission('view_category')) {
         'cls' => 'icon-category',
         'page' => '',
         'data' => array(),
-        'type' => 'category',
+        'type' => 'root-category',
         'draggable' => false,
         'menu' => array('items' => $categoryMenu),
     );

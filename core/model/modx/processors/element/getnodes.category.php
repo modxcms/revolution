@@ -65,7 +65,7 @@ foreach ($categories as $category) {
         'pk' => $category->get('id'),
         'data' => $category->toArray(),
         'category' => $category->get('id'),
-        'leaf' => $category->get('childrenCount') > 0 ? false : true,
+        'leaf' => false,
         'cls' => 'icon-category folder',
         'page' => '',
         'type' => 'category',

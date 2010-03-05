@@ -124,6 +124,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	 */
 	,setup: function(config) {
 	    MODx.tree.Tree.superclass.constructor.call(this,config);
+        this.addEvents('afterSort','beforeSort');
 	    this.cm = new Ext.menu.Menu(config.menuConfig);
 	    this.on('contextmenu',this._showContextMenu,this);
 	    this.on('beforenodedrop',this._handleDrop,this);
@@ -361,6 +362,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 		}
 		
 		var encNodes = Ext.encode(simplifyNodes(dropEvent.tree.root));
+        this.fireEvent('beforeSort',encNodes);
 		MODx.Ajax.request({
 			url: this.config.url
 			,params: {
@@ -369,7 +371,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 			}
 			,listeners: {
 				'success': {fn:function(r) {
-                    dropEvent.target.parentNode.getUI().getTextEl().frame();
+                    var el = dropEvent.dropNode.getUI().getTextEl();
+                    if (el) { Ext.get(el).frame(); }
+                    this.fireEvent('afterSort',{event:dropEvent,result:r});
 				},scope:this}
 				,'failure': {fn:function(r) {
                     MODx.form.Handler.errorJSON(r);

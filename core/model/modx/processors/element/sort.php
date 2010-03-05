@@ -19,6 +19,30 @@ sortNodes('modChunk','chunk',$data);
 sortNodes('modSnippet','snippet',$data);
 sortNodes('modPlugin','plugin',$data);
 
+/* if dropping an element onto a category, do that here */
+if (!empty($data['n_category']) && is_array($data['n_category'])) {
+    foreach ($data['n_category'] as $key => $elements) {
+        if (!is_array($elements) || empty($elements)) continue;
+
+        $key = explode('_',$key);
+        if (empty($key[1]) || empty($key[2]) || $key[1] != 'category') continue;
+
+        foreach ($elements as $elKey => $elArray) {
+            $elKey = explode('_',$elKey);
+            if (empty($elKey[1]) || empty($elKey[3])) continue;
+
+            $className = 'mod'.ucfirst($elKey[1]);
+            if ($className == 'modTv') $className = 'modTemplateVar';
+
+            $element = $modx->getObject($className,$elKey[3]);
+            if ($element) {
+                $element->set('category',$key[2]);
+                $element->save();
+            }
+        }
+
+    }
+}
 
 function sortNodes($xname,$type,$data) {
 	$s = $data['n_type_'.$type];
