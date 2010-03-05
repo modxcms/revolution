@@ -320,7 +320,7 @@ MODx.panel.WebLink = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
         ,baseParams: {}
-        ,id: 'modx-panel-weblink'
+        ,id: 'modx-panel-resource'
         ,class_key: 'modWebLink'
         ,resource: ''
         ,bodyStyle: ''
@@ -338,7 +338,7 @@ MODx.panel.WebLink = function(config) {
         }
     });
     MODx.panel.WebLink.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-panel-weblink').onLoad();",1000);
+    setTimeout("Ext.getCmp('modx-panel-resource').onLoad();",1000);
 };
 Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
     onLoad: function() {

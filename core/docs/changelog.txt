@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Made sure Set to Default fires dirty status for Resource panel
+- Fixed possible width stretching bug in TV panel in Resource edit view
 - [#MODX-1543] Added "Rename Category" to category nodes in element subnodes in Element Tree
 - [#MODX-933] Can now drag/drop Elements into Categories in the Element Tree to assign them to Categories
 - [#MODX-1729] Fixed incorrect filter name to be more appropriate to function

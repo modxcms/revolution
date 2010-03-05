@@ -317,7 +317,7 @@ MODx.panel.SymLink = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
         ,baseParams: {}
-        ,id: 'modx-panel-symlink'
+        ,id: 'modx-panel-resource'
         ,class_key: 'modSymLink'
         ,resource: ''
         ,bodyStyle: ''
@@ -335,7 +335,7 @@ MODx.panel.SymLink = function(config) {
         }
     });
     MODx.panel.SymLink.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-panel-symlink').onLoad();",1000);
+    setTimeout("Ext.getCmp('modx-panel-resource').onLoad();",1000);
 };
 Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
     onLoad: function() {

@@ -331,7 +331,7 @@ MODx.panel.Static = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
         ,baseParams: {}
-        ,id: 'modx-panel-static'
+        ,id: 'modx-panel-resource'
         ,class_key: 'modStaticResource'
         ,resource: ''
         ,bodyStyle: ''
@@ -349,7 +349,7 @@ MODx.panel.Static = function(config) {
         }
     });
     MODx.panel.Static.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-panel-static').onLoad();",1000);
+    setTimeout("Ext.getCmp('modx-panel-resource').onLoad();",1000);
 };
 Ext.extend(MODx.panel.Static,MODx.FormPanel,{
     onLoad: function() {

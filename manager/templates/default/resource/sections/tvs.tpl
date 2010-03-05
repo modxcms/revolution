@@ -70,8 +70,10 @@ Ext.onReady(function() {
                 c.setValue(d.dom.value);
             }
         }
+        Ext.getCmp('modx-panel-resource').markDirty();
     };
     MODx.refreshTVs = function() {
+        if (MODx.unloadTVRTE) { MODx.unloadTVRTE(); }
         Ext.getCmp('modx-panel-resource-tv').refreshTVs();
     };
     MODx.load({
@@ -80,6 +82,8 @@ Ext.onReady(function() {
         ,activeTab: 0
         ,autoTabs: true
         ,border: false
+        ,plain: true
+        ,width: Ext.getCmp('modx-panel-resource-tv').getWidth() - 30
         ,hideMode: 'offsets'
         ,autoScroll: true
         ,defaults: {
