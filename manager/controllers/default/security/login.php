@@ -10,6 +10,7 @@ $modx->smarty->assign('_lang',$modx->lexicon->fetch());
 
 if (!empty($_POST['login'])) {
     $this->loadErrorHandler();
+    $scriptProperties = $_REQUEST;
     $processor = $modx->getOption('core_path').'model/modx/processors/security/login.php';
     $response = require_once $processor;
 
