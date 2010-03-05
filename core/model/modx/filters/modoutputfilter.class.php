@@ -112,7 +112,7 @@ class modOutputFilter {
                     case 'islowerthan':
                         $condition[]= intval(($output < $m_val));
                         break;
-                    case 'isinrole':
+                    case 'ismember':
                     case 'memberof':
                     case 'mo': /* Is Member Of  (same as inrole but this one can be stringed as a conditional) */
                         if (empty($output) || $output == "&_PHX_INTERNAL_&") {
