@@ -7,9 +7,11 @@ MODx.panel.ElementProperties = function(config) {
         ,defaults: { collapsible: false ,autoHeight: true ,border: false }
         ,items: [{
             html: '<p>'+_('element_properties_desc')+'</p>'
+            ,itemId: 'desc-properties'
         },{
             xtype: 'modx-grid-element-properties'
             ,id: 'modx-grid-element-properties'
+            ,itemId: 'grid-properties'
             ,autoHeight: true
             ,border: true
             ,panel: config.elementPanel

@@ -2,11 +2,13 @@
 {literal}
 
 <script type="text/javascript">
+// <![CDATA[
 var params = {
 {/literal}{foreach from=$params key=k item=v name='p'}
  '{$k}': '{$v}'{if NOT $smarty.foreach.p.last},{/if}
 {/foreach}{literal}
 };
+var oc = {'change':{fn:function(){Ext.getCmp('modx-panel-tv').markDirty();},scope:this}};
 MODx.load({
     xtype: 'panel'
     ,layout: 'form'
@@ -20,6 +22,7 @@ MODx.load({
         ,id: 'prop_alttext{/literal}{$tv}{literal}'
         ,value: params['alttext'] || ''
         ,width: 300
+        ,listeners: oc
     },{
         xtype: 'numberfield'
         ,fieldLabel: _('image_hspace')
@@ -27,6 +30,7 @@ MODx.load({
         ,id: 'prop_hspace{/literal}{$tv}{literal}'
         ,value: params['hspace'] || ''
         ,width: 300
+        ,listeners: oc
     },{
         xtype: 'numberfield'
         ,fieldLabel: _('image_vspace')
@@ -34,6 +38,7 @@ MODx.load({
         ,id: 'prop_vspace{/literal}{$tv}{literal}'
         ,value: params['vspace'] || ''
         ,width: 300
+        ,listeners: oc
     },{
         xtype: 'numberfield'
         ,fieldLabel: _('image_border_size')
@@ -41,6 +46,7 @@ MODx.load({
         ,id: 'prop_borsize{/literal}{$tv}{literal}'
         ,value: params['borsize'] || ''
         ,width: 300
+        ,listeners: oc
     },{
         xtype: 'combo'
         ,name: 'prop_align'
@@ -60,6 +66,7 @@ MODx.load({
         ,triggerAction: 'all'
         ,value: params['align'] || 'none'
         ,width: 300
+        ,listeners: oc
     },{
         xtype: 'textfield'
         ,fieldLabel: _('name')
@@ -67,6 +74,7 @@ MODx.load({
         ,id: 'prop_name{/literal}{$tv}{literal}'
         ,value: params['name'] || ''
         ,width: 300
+        ,listeners: oc
     },{
         xtype: 'textfield'
         ,fieldLabel: _('class')
@@ -74,6 +82,7 @@ MODx.load({
         ,id: 'prop_class{/literal}{$tv}{literal}'
         ,value: params['class'] || ''
         ,width: 300
+        ,listeners: oc
     },{
         xtype: 'textfield'
         ,fieldLabel: _('id')
@@ -81,6 +90,7 @@ MODx.load({
         ,id: 'prop_id{/literal}{$tv}{literal}'
         ,value: params['id'] || ''
         ,width: 300
+        ,listeners: oc
     },{
         xtype: 'textfield'
         ,fieldLabel: _('style')
@@ -88,6 +98,7 @@ MODx.load({
         ,id: 'prop_style{/literal}{$tv}{literal}'
         ,value: params['style'] || ''
         ,width: 300
+        ,listeners: oc
     },{
         xtype: 'textfield'
         ,fieldLabel: _('attributes')
@@ -95,8 +106,10 @@ MODx.load({
         ,id: 'prop_attributes{/literal}{$tv}{literal}'
         ,value: params['attributes'] || ''
         ,width: 300
+        ,listeners: oc
     }]
     ,renderTo: 'tv-wprops-form{/literal}{$tv}{literal}'
 });
+// ]]>
 </script>
 {/literal}

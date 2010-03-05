@@ -18,6 +18,7 @@ MODx.panel.TV = function(config) {
         ,items: [{
             html: '<h2>'+_('tv_new')+'</h2>'
             ,id: 'modx-tv-header'
+            ,itemId: 'header'
             ,cls: 'modx-page-header'
             ,border: false
         },MODx.getPageStructure([{
@@ -26,6 +27,7 @@ MODx.panel.TV = function(config) {
             ,bodyStyle: 'padding: 1.5em;'
             ,layout: 'form'
             ,id: 'modx-tv-form'
+            ,itemId: 'form-tv'
             ,labelWidth: 150
             ,items: [{
                 html: '<p>'+_('tv_msg')+'</p>'
@@ -103,6 +105,7 @@ MODx.panel.TV = function(config) {
                 ,border: false
             },MODx.PanelSpacer,{
                 xtype: 'fieldset'
+                ,itemId: 'fs-rendering'
                 ,title: _('rendering_options')
                 ,autoHeight: true
                 ,border: true
@@ -113,17 +116,20 @@ MODx.panel.TV = function(config) {
                     ,fieldLabel: _('tv_type')
                     ,name: 'type'
                     ,id: 'modx-tv-type'
+                    ,itemid: 'fld-type'
                 },{
                     xtype: 'textfield'
                     ,fieldLabel: _('tv_elements')
                     ,name: 'els'
                     ,id: 'modx-tv-elements'
+                    ,itemId: 'fld-els'
                     ,width: 250
                 },{
                     xtype: 'textarea'
                     ,fieldLabel: _('tv_default')
                     ,name: 'default_text'
                     ,id: 'modx-tv-default-text'
+                    ,itemId: 'fld-default_text'
                     ,width: 300
                     ,grow: true
                 },{
@@ -132,6 +138,7 @@ MODx.panel.TV = function(config) {
                     ,name: 'display'
                     ,hiddenName: 'display'
                     ,id: 'modx-tv-display'
+                    ,itemId: 'fld-display'
                     ,listeners: {
                         'select': {fn:this.showParameters,scope:this}
                     }
@@ -142,20 +149,21 @@ MODx.panel.TV = function(config) {
             }]
         },{
             xtype: 'modx-panel-element-properties'
+            ,itemId: 'panel-properties'
             ,elementPanel: 'modx-panel-tv'
             ,elementId: config.tv
             ,elementType: 'modTemplateVar'
         },{ 
             title: _('tv_tmpl_access')
-            ,id: 'modx-tv-template-form'
+            ,itemId: 'form-template'
             ,bodyStyle: 'padding: 1.5em;'
             ,defaults: { autoHeight: true }
             ,items: [{
                 html: '<p>'+_('tv_tmpl_access_msg')+'</p>'
-                ,id: 'modx-tv-template-msg'
                 ,border: false
             },{
                 xtype: 'modx-grid-tv-template'
+                ,itemId: 'grid-template'
                 ,tv: config.tv
                 ,preventRender: true
                 ,width: '100%'
@@ -168,6 +176,7 @@ MODx.panel.TV = function(config) {
         },{
             title: _('access_permissions')
             ,id: 'modx-tv-access-form'
+            ,itemId: 'form-access'
             ,bodyStyle: 'padding: 1.5em;'
             ,defaults: { autoHeight: true }
             ,items: [{
@@ -176,6 +185,7 @@ MODx.panel.TV = function(config) {
                 ,border: false
             },{
                 xtype: 'modx-grid-tv-security'
+                ,itemId: 'grid-access'
                 ,tv: config.tv
                 ,preventRender: true
                 ,listeners: {
@@ -192,8 +202,6 @@ MODx.panel.TV = function(config) {
         }
     });
     MODx.panel.TV.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-element-tree').expand();",1000);
-    this.on('render',function() { this.showParameters(); },this);
 };
 Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     initialized: false
@@ -212,20 +220,22 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
                 'success': {fn:function(r) {
                     if (r.object.category == '0') { r.object.category = null; }
                     this.getForm().setValues(r.object);
-                    Ext.getCmp('modx-tv-header').getEl().update('<h2>'+_('tv')+': '+r.object.name+'</h2>');
+                    this.getComponent('header').getEl().update('<h2>'+_('tv')+': '+r.object.name+'</h2>');
                     
-                    this.showParameters(Ext.getCmp('modx-tv-display'));
                     this.clearDirty();
                     this.fireEvent('ready',r.object);
 
                     var d = Ext.decode(r.object.data);
-                    var g = Ext.getCmp('modx-grid-element-properties');
+                    var g = this.getComponent('tabs').getComponent('panel-properties').getComponent('grid-properties');
                     g.defaultProperties = d;
                     g.getStore().loadData(d);
                     this.initialized = true;
                     
-                    var sv = this.getForm().setValues;
-                    sv.defer(100,this,[r.object]);
+                    var sv = function(vs) { this.getForm().setValues(vs); };
+                    sv.defer(1300,this,[r.object]);
+                    
+                    var dis = this.getComponent('tabs').getComponent('form-tv').getComponent('fs-rendering').getComponent('fld-display');
+                    this.showParameters(dis);
                 },scope:this}
             }
         });
@@ -255,17 +265,19 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         var pu = Ext.get('modx-widget-props').getUpdater();
         pu.loadScripts = true;
         
-        pu.update({
-            url: MODx.config.connectors_url+'element/tv/renders.php'
-            ,method: 'GET'
-            ,params: {
-               'action': 'getProperties'
-               ,'context': 'mgr'
-               ,'tv': this.config.tv
-               ,'type': cb.getValue() || 'default'
-            }
-            ,scripts: true
-        });
+        try {
+            pu.update({
+                url: MODx.config.connectors_url+'element/tv/renders.php'
+                ,method: 'GET'
+                ,params: {
+                   'action': 'getProperties'
+                   ,'context': 'mgr'
+                   ,'tv': this.config.tv
+                   ,'type': cb.getValue() || 'default'
+                }
+                ,scripts: true
+            });
+        } catch(e) { console.log(e); }
         
     }
 });
