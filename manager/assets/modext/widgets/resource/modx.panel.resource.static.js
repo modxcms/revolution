@@ -119,6 +119,7 @@ MODx.panel.Static = function(config) {
                     str = str.replace(MODx.config.base_url,'');
                     if (str.substring(0,1) == '/') str = str.substring(1);
                     Ext.getCmp('modx-static-content').setValue(str);
+                    this.markDirty();
                 },scope:this}
             }
             

@@ -12,7 +12,7 @@ MODx.page.UpdateWebLink = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
         ,which_editor: 'none'
-        ,formpanel: 'modx-panel-weblink'
+        ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,actions: {
             'new': MODx.action['resource/create']

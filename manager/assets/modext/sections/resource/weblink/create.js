@@ -10,7 +10,7 @@ MODx.page.CreateWebLink = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
-        ,formpanel: 'modx-panel-weblink'
+        ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,actions: {

@@ -10,7 +10,7 @@ MODx.page.CreateStatic = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
-        ,formpanel: 'modx-panel-static'
+        ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,actions: {
