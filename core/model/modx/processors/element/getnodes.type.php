@@ -43,6 +43,14 @@ if ($modx->hasPermission('new_category')) {
         }',
     );
 }
+if ($modx->hasPermission('edit_category')) {
+    $categoryMenu[] = array(
+        'text' => $modx->lexicon('category_rename'),
+        'handler' => 'function(itm,e) {
+            this.renameCategory(itm,e);
+        }',
+    );
+}
 if ($modx->hasPermission('delete_category')) {
     $categoryMenu[] = array(
         'text' => $modx->lexicon('remove_category'),
