@@ -233,6 +233,15 @@ MODx.panel.SymLink = function(config) {
         ,checked: true        
     });
     va.push({
+        xtype: 'checkbox'
+        ,fieldLabel: _('resource_syncsite')
+        ,description: _('resource_syncsite_help')
+        ,name: 'syncsite'
+        ,id: 'modx-symlink-syncsite'
+        ,inputValue: 1
+        ,checked: true 
+    });
+    va.push({
         xtype: 'hidden'
         ,name: 'class_key'
         ,id: 'modx-symlink-class-key'
