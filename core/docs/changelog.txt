@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1735] Properly URL encode link tags while still preserving = and &amp; in query string
 - [#MODX-1736] Fixed bug with assigning TVs to Resource Groups
 - [#MODX-1740] Added workaround for SQL code to properly hide TVs with FC rules 
 - [#MODX-1738] Fixed bug with radiogroups and set TV default FC rule

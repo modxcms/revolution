@@ -916,6 +916,7 @@ class modLinkTag extends modTag {
                         }
                         if ($qs= implode('&', $qs)) {
                             $qs= urlencode($qs);
+                            $qs= str_replace(array('%26','%3D'),array('&amp;','='),$qs);
                         }
                     }
                     $this->_output= $this->modx->makeUrl($this->_output, $context, $qs);
