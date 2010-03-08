@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added sanity check for packages with missing provider
 - Added "Updates Available" column to packages grid, auto-checks provider for updates
 - [#MODX-1732] Added duplicate language ability to language grid
 - [#MODX-1741] Fixed possible bug with radio/cb tv labels

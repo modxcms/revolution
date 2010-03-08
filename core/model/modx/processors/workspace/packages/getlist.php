@@ -146,7 +146,9 @@ foreach ($packages as $key => $package) {
             $provider =& $providerCache[$package->get('provider')];
         } else {
             $provider = $package->getOne('Provider');
-            $providerCache[$provider->get('id')] = $provider;
+            if ($provider) {
+                $providerCache[$provider->get('id')] = $provider;
+            }
         }
         if ($provider) {
             $loaded = $provider->getClient();
@@ -155,7 +157,7 @@ foreach ($packages as $key => $package) {
                     'signature' => $package->get('signature'),
                     'supports' => $productVersion,
                 ));
-                if (!$response->isError()) {
+                if ($response && !$response->isError()) {
                     $updates = $response->toXml();
                 }
             }
