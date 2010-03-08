@@ -62,7 +62,9 @@ class modConnectorResponse extends modResponse {
 
             /* create scriptProperties array from HTTP GPC vars */
             if (!isset($_FILES)) $_FILES = array();
-            $scriptProperties = array_merge($_REQUEST,$_FILES);
+            if (!isset($_POST)) $_POST = array();
+            if (!isset($_GET)) $_GET = array();
+            $scriptProperties = array_merge($_GET,$_POST,$_FILES);
 
             /* verify processor exists */
             if (!file_exists($file)) {
@@ -72,12 +74,8 @@ class modConnectorResponse extends modResponse {
                 $this->body = include $file;
             }
         }
-        /* if files sent, this means that the browser needs it in text/plain,
-         * so ignore text/json header type
-         */
-        if (!isset($_FILES)) {
-            header("Content-Type: text/json; charset=UTF-8");
-        }
+
+        header("Content-Type: text/json; charset=UTF-8");
         if (is_array($this->header)) {
             foreach ($this->header as $header) header($header);
         }
