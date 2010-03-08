@@ -31,12 +31,16 @@ $list = array();
 foreach ($languages as $language) {
     $languageArray = $language->toArray();
 
+    $languageArray['menu'] = array();
+    $languageArray['menu'][] = array(
+        'text' => $modx->lexicon('language_duplicate'),
+        'handler' => 'this.duplicateLanguage',
+    );
     if ($language->get('name') != 'en') {
-        $languageArray['menu'] = array(
-            array(
-                'text' => $modx->lexicon('language_remove'),
-                'handler' => 'this.remove.createDelegate(this,["language_remove_confirm"])',
-            ),
+        $languageArray['menu'][] = '-';
+        $languageArray['menu'][] = array(
+            'text' => $modx->lexicon('language_remove'),
+            'handler' => 'this.remove.createDelegate(this,["language_remove_confirm"])',
         );
     }
     $list[] = $languageArray;

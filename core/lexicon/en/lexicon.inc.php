@@ -6,6 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['duplicate'] = 'Duplicate';
 $_lang['entry'] = 'Entry';
 $_lang['entry_create'] = 'Create Lexicon Entry';
 $_lang['entry_err_create'] = 'An error occurred while trying to create the Lexicon Entry.';
@@ -19,14 +20,21 @@ $_lang['entry_remove_confirm'] = 'Are you sure you want to remove this Lexicon E
 $_lang['entry_update'] = 'Update Lexicon Entry';
 $_lang['language'] = 'Language';
 $_lang['language_create'] = 'Create Language';
+$_lang['language_duplicate'] = 'Duplicate Language';
 $_lang['language_err_ae'] = 'A Language already exists with that name.';
 $_lang['language_err_create'] = 'An error occurred while trying to create the language.';
+$_lang['language_err_duplicate'] = 'An error occurred while trying to duplicate the language.';
 $_lang['language_err_nf'] = 'Language not found.';
 $_lang['language_err_ns'] = 'Language not specified.';
+$_lang['language_err_ns_new_name'] = 'New language name not specified.';
 $_lang['language_err_nfs'] = 'Language with code [[+code]] not found.';
 $_lang['language_err_remove'] = 'An error occurred while trying to remove the language.';
 $_lang['language_err_remove_english'] = 'You cannot remove the base english translation from MODx.';
 $_lang['language_err_save'] = 'An error occurred while trying to save the language.';
+$_lang['language_new_name'] = 'New Name';
+$_lang['language_new_name_desc'] = 'If the new name already exists, it will be overwritten with this new language.';
+$_lang['language_recursive'] = 'Duplicate all Entries? <br />(Warning: this may take a while.)';
+$_lang['language_recursive_desc'] = 'If checked, this will duplicate all the Entries associated with this language. This may take some time if the lexicon is large.';
 $_lang['language_remove'] = 'Remove Language';
 $_lang['language_remove_confirm'] = 'Are you sure you want to remove this language?';
 $_lang['languages'] = 'Languages';
