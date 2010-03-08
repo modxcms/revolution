@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1741] Fixed possible bug with radio/cb tv labels
 - [#MODX-1593] Fixed bug where User could not be added with no role in User Groups tree
 - [#MODX-1735] Properly URL encode link tags while still preserving = and &amp; in query string
 - [#MODX-1736] Fixed bug with assigning TVs to Resource Groups

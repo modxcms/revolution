@@ -8,7 +8,7 @@ MODx.load({
     xtype: 'radiogroup'
     ,id: 'tv{$tv->id}'
     ,vertical: true
-    ,columns: 3
+    ,columns: 2
     ,renderTo: 'tv{$tv->id}-cb'
     ,name: 'tv-{$tv->id}'
     ,autoHeight: true
