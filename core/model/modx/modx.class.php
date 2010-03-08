@@ -1327,10 +1327,12 @@ class modX extends xPDO {
                 if (!isset($this->error)) $this->request->loadErrorHandler();
 
                 /* create scriptProperties array from HTTP GPC vars */
-                if (!isset($_FILES)) $_FILES = array();
                 if (!isset($_POST)) $_POST = array();
                 if (!isset($_GET)) $_GET = array();
-                $scriptProperties = array_merge($_GET,$_POST,$_FILES);
+                $scriptProperties = array_merge($_GET,$_POST);
+                if (isset($_FILES) && !empty($_FILES)) {
+                    $scriptProperties = array_merge($scriptProperties,$_FILES);
+                }
 
                 $modx =& $this;
                 $result = include $processor;
