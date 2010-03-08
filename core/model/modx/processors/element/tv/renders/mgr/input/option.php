@@ -20,10 +20,11 @@ while (list($item, $itemvalue) = each ($index_list)) {
     if ($itemvalue == $value) {
         $checked = true;
         $default = 'tv'.$this->get('id').'-'.$i;
+        $this->set('default_text',$default);
     }
 
     $opts[] = array(
-        'value' => htmlspecialchars($itemvalue),
+        'value' => htmlspecialchars($itemvalue,ENT_COMPAT,'UTF-8'),
         'text' => htmlspecialchars($item),
         'checked' => $checked,
     );

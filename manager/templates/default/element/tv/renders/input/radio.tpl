@@ -20,7 +20,7 @@ MODx.load({
         ,boxLabel: '{$item.text|escape:"javascript"}'
         ,checked: {if $item.checked}true{else}false{/if}
         ,inputValue: '{$item.value}'
-        ,value: '{$item.value}'        
+        ,value: '{$item.value}'
     {literal}}{/literal}{if NOT $smarty.foreach.cbs.last},{/if}
     {/foreach}]
 {literal}}{/literal});
@@ -28,7 +28,5 @@ MODx.load({
 {foreach from=$opts item=item key=k name=cbs}
 Ext.getCmp('tv{$tv->id}-{$k}').on('check',MODx.fireResourceFormChange);
 {/foreach}
-
-Ext.get('tvdef{$tv->id}').dom.value = "{$cbdefaults}";
 // ]]>
 </script>
