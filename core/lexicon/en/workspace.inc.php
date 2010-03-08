@@ -163,6 +163,7 @@ $_lang['top_rated'] = 'Top Rated';
 $_lang['transport_package_create'] = 'Create new package';
 $_lang['transport_package_install'] = 'Install package';
 $_lang['transport_package_scan_for_updates'] = 'Check for updates';
+$_lang['updateable'] = 'Updates Available';
 $_lang['uninstall'] = 'Uninstall';
 $_lang['uploaded_on'] = 'Uploaded On';
 $_lang['uploaded_versions'] = 'Uploaded Versions';

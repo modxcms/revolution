@@ -34,14 +34,15 @@ MODx.grid.Package = function(config) {
         ,url: MODx.config.connectors_url+'workspace/packages.php'
         ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
-                 ,'install','textaction','iconaction']
+                 ,'install','textaction','iconaction','updateable']
         ,plugins: [this.action,this.exp]
-        ,pageSize: 20
+        ,pageSize: 10
         ,columns: [this.exp
             ,{ header: _('name') ,dataIndex: 'name' }
             ,{ header: _('version') ,dataIndex: 'version' }
             ,{ header: _('release') ,dataIndex: 'release' }
             ,{ header: _('installed') ,dataIndex: 'installed' ,renderer: this._rins }
+            ,{ header: _('updateable') ,dataIndex: 'updateable' ,renderer: this.rendYesNo }
             ,{ header: _('provider') ,dataIndex: 'provider_name' }
             ,this.action]
         ,primaryKey: 'signature'

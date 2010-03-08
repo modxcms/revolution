@@ -50,6 +50,12 @@ $c->sortby('`modTransportPackage`.`signature`', 'ASC');
 if ($isLimit) $c->limit($limit,$start);
 $packages = $modx->getCollection('transport.modTransportPackage',$c);
 
+
+
+$modx->getVersionData();
+$productVersion = $modx->version['code_name'].'-'.$modx->version['full_version'];
+$providerCache = array();
+
 /* now create output array */
 $list = array();
 foreach ($packages as $key => $package) {
@@ -130,6 +136,33 @@ foreach ($packages as $key => $package) {
     }
     unset($packageArray['attributes']);
     unset($packageArray['metadata']);
+
+
+    /* check for updates */
+    $updates = array();
+    if ($package->get('provider') > 0) {
+        /* cache providers to speed up load time */
+        if (!empty($providerCache[$package->get('provider')])) {
+            $provider =& $providerCache[$package->get('provider')];
+        } else {
+            $provider = $package->getOne('Provider');
+            $providerCache[$provider->get('id')] = $provider;
+        }
+        if ($provider) {
+            $loaded = $provider->getClient();
+            if ($loaded) {
+                $response = $provider->request('package/update','GET',array(
+                    'signature' => $package->get('signature'),
+                    'supports' => $productVersion,
+                ));
+                if (!$response->isError()) {
+                    $updates = $response->toXml();
+                }
+            }
+        }
+    }
+    $packageArray['updateable'] = count($updates) >= 1 ? true : false;
+
     $list[] = $packageArray;
 }
 

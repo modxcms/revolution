@@ -22,7 +22,7 @@ class modRestSockClient extends modRestClient {
         $purl['path'] = !empty($purl['path']) ? $purl['path'] : '/';
         $purl['port'] = !empty($purl['port']) ? $purl['port'] : '80';
 
-        $sock = @fsockopen($purl['host'], $purl['port'],$errno,$errstr,10);
+        $sock = @fsockopen($purl['host'], $purl['port'],$errno,$errstr,30);
 
         /* setup params */
         $q = http_build_query($params);
