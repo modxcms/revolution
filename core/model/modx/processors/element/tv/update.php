@@ -120,7 +120,7 @@ if (isset($scriptProperties['templates'])) {
 /*
  * update access
  */
-if ($modx->hasPermission('tv_access_permissions')) {
+if ($modx->hasPermission('access_permissions')) {
     if (isset($scriptProperties['resource_groups'])) {
         $docgroups = $modx->fromJSON($scriptProperties['resource_groups']);
         if (is_array($docgroups)) {
@@ -138,7 +138,7 @@ if ($modx->hasPermission('tv_access_permissions')) {
                     $templateVarResourceGroup->set('tmplvarid',$tv->get('id'));
                     $templateVarResourceGroup->set('documentgroup',$group['id']);
                     $templateVarResourceGroup->save();
-                } else {
+                } else if ($templateVarResourceGroup && $templateVarResourceGroup instanceof modTemplateVarResourceGroup) {
                     $templateVarResourceGroup->remove();
                 }
             }
