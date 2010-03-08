@@ -282,9 +282,9 @@ class modTemplateVar extends modElement {
             $c->leftJoin('modAccessActionDom','Access');
             $c->where(array(
                 array(
-                    'rule:=' => 'tvDefault',
-                    'OR:rule:=' => 'tvVisible',
-                    'OR:rule:=' => 'tvTitle',
+                    '(`modActionDom`.`rule` = "tvDefault"
+                   OR `modActionDom`.`rule` = "tvVisible"
+                   OR `modActionDom`.`rule` = "tvTitle")'
                 ),
                 'name' => 'tv'.$this->get('id'),
             ));
