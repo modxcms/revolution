@@ -933,3 +933,9 @@ input.x-static-text-field {
     -webkit-border-radius: 4px;
     border-radius: 4px;
 }
+
+iframe[classname="x-hidden"] {visibility:hidden;}
+
+.modx-property-description {
+	padding: .7em 1em .3em;
+}

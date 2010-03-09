@@ -1,14 +1,36 @@
-/**
- * @class MODx.grid.ElementProperties
- * @extends MODx.grid.LocalGrid
- * @param {Object} config An object of configuration properties
- * @xtype grid-element-properties
- */
+MODx.panel.ElementProperties = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        id: 'modx-panel-element-properties'
+        ,title: _('properties')
+        ,header: false
+        ,bodyStyle: 'padding: 1.5em;'
+        ,defaults: { collapsible: false ,autoHeight: true ,border: false }
+        ,items: [{
+            html: '<p>'+_('element_properties_desc')+'</p>'
+            ,itemId: 'desc-properties'
+        },{
+            xtype: 'modx-grid-element-properties'
+            ,id: 'modx-grid-element-properties'
+            ,itemId: 'grid-properties'
+            ,autoHeight: true
+            ,border: true
+            ,panel: config.elementPanel
+            ,elementId: config.elementId
+            ,elementType: config.elementType
+        }]
+    });
+    MODx.panel.ElementProperties.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.panel.ElementProperties,MODx.Panel);
+Ext.reg('modx-panel-element-properties',MODx.panel.ElementProperties);
+
+
 MODx.grid.ElementProperties = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
-            '<p style="padding: .7em 1em .3em;"><i>{desc}</i></p>'
+            '<p class="modx-property-description"><i>{desc}</i></p>'
         )
     });
     Ext.applyIf(config,{

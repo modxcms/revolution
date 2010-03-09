@@ -46,7 +46,6 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.grid.element.properties.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.grid.tv.template.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.grid.tv.security.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.element.properties.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/tv/update.js');
 $modx->regClientStartupHTMLBlock('

@@ -29,7 +29,6 @@ $unlock_element_properties = $modx->hasPermission('unlock_element_properties') ?
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.grid.local.property.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.grid.element.properties.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.grid.plugin.event.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.element.properties.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.plugin.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/plugin/common.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/plugin/create.js');
