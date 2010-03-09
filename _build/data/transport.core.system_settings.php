@@ -198,7 +198,16 @@ $settings['cache_system_settings']->fromArray(array (
 $settings['compress_js']= $xpdo->newObject('modSystemSetting');
 $settings['compress_js']->fromArray(array (
   'key' => 'compress_js',
-  'value' => '',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'caching',
+  'editedon' => null,
+), '', true, true);
+$settings['concat_js']= $xpdo->newObject('modSystemSetting');
+$settings['concat_js']->fromArray(array (
+  'key' => 'concat_js',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',

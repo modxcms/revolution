@@ -181,41 +181,42 @@ class modManagerResponse extends modResponse {
      */
     public function registerBaseScripts($loadLayout = true) {
         $managerUrl = $this->modx->getOption('manager_url');
+        if ($this->modx->getOption('concat_js',null,false)) {
+            if ($this->modx->getOption('compress_js',null,false)) {
+                $this->modx->regClientStartupScript($managerUrl.'assets/modext/modext-min.js');
+            } else {
+                $this->modx->regClientStartupScript($managerUrl.'assets/modext/modext.js');
+            }
+        } else {
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.localization.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/util/utilities.js');
 
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.localization.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/util/utilities.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.component.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.panel.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.tabs.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.window.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.tree.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.combo.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.grid.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.console.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.portal.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/modx.treedrop.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/windows.js');
 
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.component.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.panel.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.tabs.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.window.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.tree.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.combo.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.grid.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.console.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/core/modx.portal.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/modx.treedrop.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/windows.js');
-
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.tree.element.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/system/modx.tree.directory.js');
-        $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.view.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.tree.resource.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.tree.element.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/widgets/system/modx.tree.directory.js');
+            $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.view.js');
+        }
 
         if ($loadLayout) {
             $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.layout.js');
-            $this->modx->regClientStartupHTMLBlock('
-            <script type="text/javascript">
-            Ext.onReady(function() {
-                MODx.perm.resource_tree = "'.$this->modx->hasPermission('resource_tree').'";
-                MODx.perm.element_tree = "'.$this->modx->hasPermission('element_tree').'";
-                MODx.perm.file_tree = "'.$this->modx->hasPermission('file_tree').'";
-                MODx.load({
-                    xtype: "modx-layout"
-                    ,accordionPanels: MODx.accordionPanels || []
-                });
-            });
-            </script>');
+            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(function() {
+    MODx.perm.resource_tree = "'.$this->modx->hasPermission('resource_tree').'";
+    MODx.perm.element_tree = "'.$this->modx->hasPermission('element_tree').'";
+    MODx.perm.file_tree = "'.$this->modx->hasPermission('file_tree').'";
+    MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || []});
+});</script>');
         }
     }
 

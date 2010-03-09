@@ -75,22 +75,21 @@
             outputfolder="${build.image.modext.dir}/build" >
             <fileset dir="${project.manager.dir}/assets/modext"
                 includes="**/*.js" 
-                excludes="build/**,util/filetree/**,modext.js,modext-debug.js"
+                excludes="build/**,util/filetree/**,modext-min.js,modext.js"
             />
         </yuicompress>
     </target>
 
     <!-- Concat the minified MODExt JavaScript libraries -->
-    <target name="modext-concat-min" description="Create modext.js">
+    <target name="modext-concat-min" description="Create modext-min.js">
         <echo>Creating modext.js in ${build.image.modext.dir}</echo>
         
-        <concat destfile="${build.image.modext.dir}/modext.js">
-            <header filtering="no" trimleading="yes">
-/**
+        <concat destfile="${build.image.modext.dir}/modext-min.js">
+            <header filtering="no" trimleading="yes">/**
 MODExt Revolution 1.0
-Copyright (c) 2007-2008, Shaun McCormick
+Copyright (c) 2007-2010, Shaun McCormick
 All rights reserved
-MODx-specific JS extension for ExtJS 2.2
+MODx-specific JS extension for ExtJS 3.0
 
 -------------
 
@@ -107,29 +106,38 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 */
             </header>
-            <fileset dir="${build.image.modext.dir}/build/core"
-                includes="**/*.js"
-                  excludes="modx-min.js,modx.layout-min.js" />
-            <fileset dir="${build.image.modext.dir}/build/util"
-                includes="**/*.js"
-                  excludes="filetree/**" />
-            <fileset dir="${build.image.modext.dir}/build/widgets/core"
-                includes="**/*.js"
-                excludes="" />
+            
+            <filelist dir="${build.image.modext.dir}/build/core" 
+                      files="modx.localization-min.js" />
+            <filelist dir="${build.image.modext.dir}/build/util" 
+                      files="utilities-min.js" />
+            <filelist dir="${build.image.modext.dir}/build/core" 
+                      files="modx.component-min.js" />
+            <filelist dir="${build.image.modext.dir}/build/widgets/core" 
+                      files="modx.panel-min.js,modx.tabs-min.js,modx.window-min.js,modx.tree-min.js,modx.combo-min.js,modx.grid-min.js,modx.console-min.js,modx.portal-min.js" />
+            <filelist dir="${build.image.modext.dir}/build/widgets" 
+                      files="modx.treedrop-min.js,windows-min.js" />
+            <filelist dir="${build.image.modext.dir}/build/widgets/resource" 
+                      files="modx.tree.resource-min.js" />
+            <filelist dir="${build.image.modext.dir}/build/widgets/element" 
+                      files="modx.tree.element-min.js" />
+            <filelist dir="${build.image.modext.dir}/build/widgets/system" 
+                      files="modx.tree.directory-min.js" />
+            <filelist dir="${build.image.modext.dir}/build/core" 
+                      files="modx.view-min.js" />
         </concat>
     </target>
     
     <!-- Concat the non-minified MODExt JavaScript libraries -->
-    <target name="modext-concat" description="Create modext-debug.js">
-        <echo>Creating modext-debug.js in ${build.image.modext.dir}</echo>
+    <target name="modext-concat" description="Create modext.js">
+        <echo>Creating modext.js in ${build.image.modext.dir}</echo>
         
-        <concat destfile="${build.image.modext.dir}/modext-debug.js">
-            <header filtering="no" trimleading="yes">
-/**
+        <concat destfile="${build.image.modext.dir}/modext.js">
+            <header filtering="no" trimleading="yes">/**
 MODExt Revolution 1.0
-Copyright (c) 2007-2008, Shaun McCormick
+Copyright (c) 2007-2010, Shaun McCormick
 All rights reserved
-MODx-specific JS extension for ExtJS 2.2
+MODx-specific JS extension for ExtJS 3.0
 
 -------------
 
@@ -145,26 +153,38 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 */
-            </header>
-            <fileset dir="${project.modext.dir}/core"
-                includes="**/*.js"
-                  excludes="widgets/**,modx.js,modx.layout.js,modx.onready.js" />
-                  
-            <fileset dir="${project.modext.dir}/util"
-                includes="**/*.js"
-                  excludes="filetree/**" />
-                  
+            </header>            
+            <filelist dir="${project.modext.dir}/core" 
+                      files="modx.localization.js" />
+            <filelist dir="${project.modext.dir}/util" 
+                      files="utilities.js" />
+            <filelist dir="${project.modext.dir}/core" 
+                      files="modx.component.js" />
+            <filelist dir="${project.modext.dir}/widgets/core" 
+                      files="modx.panel.js,modx.tabs.js,modx.window.js,modx.tree.js,modx.combo.js,modx.grid.js,modx.console.js,modx.portal.js" />
+            <filelist dir="${project.modext.dir}/widgets" 
+                      files="modx.treedrop.js,windows.js" />
+            <filelist dir="${project.modext.dir}/widgets/resource" 
+                      files="modx.tree.resource.js" />
+            <filelist dir="${project.modext.dir}/widgets/element" 
+                      files="modx.tree.element.js" />
+            <filelist dir="${project.modext.dir}/widgets/system" 
+                      files="modx.tree.directory.js" />
+            <filelist dir="${project.modext.dir}/core" 
+                      files="modx.view.js" />
         </concat>
     </target>
 
     <!-- Copy the minified and concatenated MODExt files to the working copy -->
     <target name="copy-prepared-js" description="copy the minified and concatenated js files to the working copy">
+        <delete file="${project.modext.dir}/modext-min.js" />
         <delete file="${project.modext.dir}/modext.js" />
-        <delete file="${project.modext.dir}/modext-debug.js" />
         <delete dir="${project.modext.dir}/build" />
         <copy todir="${project.modext.dir}">
             <fileset dir="${build.image.modext.dir}" />
         </copy>
+        <copy file="${build.image.modext.dir}/modext-min.js" todir="${project.modext.dir}" />
+        <copy file="${build.image.modext.dir}/modext.js" todir="${project.modext.dir}" />
     </target>
 
     <!-- Run the core data generation script -->

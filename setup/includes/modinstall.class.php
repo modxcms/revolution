@@ -414,6 +414,26 @@ class modInstall {
                     $settings_file_perms->set('value', $this->settings->get('new_file_permissions'));
                     $settings_file_perms->save();
                 }
+
+                /* compress and concat JS on new installs */
+                if (defined('MODX_SETUP_KEY') && MODX_SETUP_KEY != '@svn') {
+                    $concatJavascript = $this->xpdo->getObject('modSystemSetting', array(
+                        'key' => 'concat_js',
+                    ));
+                    if ($concatJavascript) {
+                        $concatJavascript->set('value',1);
+                        $concatJavascript->save();
+                    }
+                    $compressJavascript = $this->xpdo->getObject('modSystemSetting', array(
+                        'key' => 'compress_js',
+                    ));
+                    if ($compressJavascript) {
+                        $compressJavascript->set('value',1);
+                        $compressJavascript->save();
+                    }
+                    unset($concatJavascript,$compressJavascript);
+                }
+
             /* if upgrade */
             } else {
                 /* handle change of manager_theme to default (FIXME: temp hack) */

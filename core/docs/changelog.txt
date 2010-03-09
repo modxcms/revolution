@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added 'concat_js' system setting that will concat all the common JS files into one single file
+- Adjusted lang.js.php to properly use ETag header to cache lang js
 - Added css rule to prevent hidden iframes from being shown
 - Fixed bug where Resource Groups were not editable on Create Resource
 - Added sanity check for packages with missing provider
