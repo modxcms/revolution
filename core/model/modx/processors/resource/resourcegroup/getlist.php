@@ -24,13 +24,17 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $resourceId = $modx->getOption('resource',$scriptProperties,0);
 
 /* get resource */
-if (empty($resourceId)) return $modx->error->failure($modx->lexicon('resource_err_ns'));
-$resource = $modx->getObject('modResource',$resourceId);
-if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $resourceId)));
+if (empty($resourceId)) {
+    $resource = $modx->newObject('modResource');
+    $resource->set('id',0);
+} else {
+    $resource = $modx->getObject('modResource',$resourceId);
+    if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $resourceId)));
 
-/* check access */
-if (!$resource->checkPolicy('view')) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
+    /* check access */
+    if (!$resource->checkPolicy('view')) {
+        return $modx->error->failure($modx->lexicon('permission_denied'));
+    }
 }
 
 /* build query */
