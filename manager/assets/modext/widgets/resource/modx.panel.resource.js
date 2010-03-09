@@ -367,7 +367,12 @@ MODx.panel.Resource = function(config) {
         ,forceLayout: true
         ,anchor: '100%'
     });
-    its.push(MODx.getPageStructure(it,{id:'modx-resource-tabs' ,forceLayout: true ,deferredRender: false }));
+    its.push(MODx.getPageStructure(it,{
+        id:'modx-resource-tabs'
+        ,forceLayout: true
+        ,deferredRender: false
+        ,collapsible: true
+    }));
     
     if (MODx.config.manager_use_tabs) {
         ct.style = 'margin-top: 1.0em;';
