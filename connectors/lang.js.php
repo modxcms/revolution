@@ -48,18 +48,16 @@ ob_end_clean();
 if ($modx->getOption('cache_lang_js',null,false)) {
     $hash = md5($output);
     $headers = $modx->request->getHeaders();
-    header("Content-Type: application/x-javascript");
-    header("Pragma: public");
-    header("Cache-Control: public");
-    header("Last-Modified: ".gmdate("D, d M Y H:i:s", time())." GMT");
-    header("Accept-Ranges: bytes");
-    //header('Content-Length: '.strlen($output));
-    header("ETag: \"{$hash}\"");
 
     /* if Browser sent ID, check if they match */
-    if (isset($headers['If-None-Match']) && (strstr($headers['If-None-Match'],$hash) !== false)) {
+    if (isset($headers['If-None-Match']) && @preg_match($hash, $headers['If-None-Match'])) {
         header('HTTP/1.1 304 Not Modified');
     } else {
+        header("ETag: \"{$hash}\"");
+        header('Accept-Ranges: bytes');
+        //header('Content-Length: '.strlen($output));
+        header('Content-Type: application/x-javascript');
+
         echo $output;
     }
 } else {
@@ -68,4 +66,4 @@ if ($modx->getOption('cache_lang_js',null,false)) {
     header('Content-Type: application/x-javascript');
     echo $output;
 }
-die();
+exit();
