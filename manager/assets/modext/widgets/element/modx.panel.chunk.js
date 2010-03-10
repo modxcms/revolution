@@ -103,6 +103,7 @@ MODx.panel.Chunk = function(config) {
             ,elementId: config.chunk
             ,elementType: 'modChunk'
         }])]
+        ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}

@@ -69,6 +69,7 @@ MODx.panel.Context = function(config) {
                 ,context_key: config.context
             }]
         }])]
+        ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
         }

@@ -102,6 +102,7 @@ MODx.panel.Snippet = function(config) {
             ,elementId: config.snippet
             ,elementType: 'modSnippet'
         }])]
+        ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}

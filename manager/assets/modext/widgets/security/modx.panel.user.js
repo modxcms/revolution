@@ -24,6 +24,7 @@ MODx.panel.User = function(config) {
             }
             ,items: this.getFields(config)
         }
+        ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}

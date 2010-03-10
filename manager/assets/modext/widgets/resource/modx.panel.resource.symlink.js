@@ -328,6 +328,7 @@ MODx.panel.SymLink = function(config) {
             ,cls: 'modx-page-header'
             ,border: false
         },MODx.getPageStructure(it,{id:'modx-resource-tabs' ,forceLayout: true ,deferredRender: false })]
+        ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}

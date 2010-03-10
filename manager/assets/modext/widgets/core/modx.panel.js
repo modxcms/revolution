@@ -27,6 +27,7 @@ MODx.FormPanel = function(config) {
         ,allowDrop: true
         ,errorReader: MODx.util.JSONReader
         ,checkDirty: true
+        ,useLoadingMask: false
     });
     if (config.items) { this.addChangeEvent(config.items); }
     
@@ -50,6 +51,10 @@ MODx.FormPanel = function(config) {
         ,failure: true
     });
     this.on('ready',this.onReady);
+    if (this.config.useLoadingMask) {
+        this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+        this.mask.show();
+    }
     this.fireEvent('setup',config);
 };
 Ext.extend(MODx.FormPanel,Ext.FormPanel,{
@@ -154,6 +159,9 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     ,onReady: function(r) {
     	this.isReady = true;
         if (this.config.allowDrop) { this.loadDropZones(); }
+        if (this.config.useLoadingMask && this.mask) {
+            this.mask.hide();
+        }
     }
     
     ,loadDropZones: function() {        

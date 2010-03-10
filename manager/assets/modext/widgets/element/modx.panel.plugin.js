@@ -125,6 +125,7 @@ MODx.panel.Plugin = function(config) {
             ,elementId: config.plugin
             ,elementType: 'modPlugin'
         }])]
+        ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}

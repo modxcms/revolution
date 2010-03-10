@@ -113,6 +113,7 @@ MODx.panel.Template = function(config) {
                 ,'afterRemoveRow': {fn:this.markDirty,scope:this}
            }
         }])]
+        ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}

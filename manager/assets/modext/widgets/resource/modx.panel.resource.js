@@ -389,6 +389,7 @@ MODx.panel.Resource = function(config) {
         ,forceLayout: true
         ,items: its
         ,fileUpload: true
+        ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
@@ -400,8 +401,7 @@ MODx.panel.Resource = function(config) {
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     /* to deal with combobox bug */
     setTimeout("Ext.getCmp('modx-panel-resource').onLoad();",1000);
-    
-    
+    this.on('ready',this.onReady,this);
 };
 Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     rteLoaded: false
@@ -434,7 +434,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,class_key: this.config.record.class_key
             }
             ,listeners: {
-            	'success': {fn:function(r) {
+                'success': {fn:function(r) {
                     if (r.object.pub_date == '0') { r.object.pub_date = ''; }
                     if (r.object.unpub_date == '0') { r.object.unpub_date = ''; }
                     r.object.ta = r.object.content;
@@ -455,7 +455,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     }
                     this.initialized = true;
                     this.fireEvent('ready',r);
-            	},scope:this}
+                },scope:this}
             }
         });
     }
@@ -549,7 +549,7 @@ var triggerDirtyField = function(fld) {
     Ext.getCmp('modx-panel-resource').fieldChangeEvent(fld);
 };
 MODx.triggerRTEOnChange = function() {
-	triggerDirtyField(Ext.getCmp('ta'));
+    triggerDirtyField(Ext.getCmp('ta'));
 };
 MODx.fireResourceFormChange = function(f,nv,ov) {
     Ext.getCmp('modx-panel-resource').fireEvent('fieldChange');
