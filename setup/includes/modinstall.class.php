@@ -431,7 +431,14 @@ class modInstall {
                         $compressJavascript->set('value',1);
                         $compressJavascript->save();
                     }
-                    unset($concatJavascript,$compressJavascript);
+                    $compressCss = $this->xpdo->getObject('modSystemSetting', array(
+                        'key' => 'compress_css',
+                    ));
+                    if ($compressCss) {
+                        $compressCss->set('value',1);
+                        $compressCss->save();
+                    }
+                    unset($concatJavascript,$compressJavascript,$compressCss);
                 }
 
             /* if upgrade */

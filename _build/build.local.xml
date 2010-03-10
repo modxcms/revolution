@@ -12,6 +12,7 @@
     <property name="project.connectors.dir" value="${project.basedir}/connectors" />
     <property name="project.manager.dir" value="${project.basedir}/manager" />
     <property name="project.modext.dir" value="${project.manager.dir}/assets/modext" />
+    <property name="project.css.dir" value="${project.manager.dir}/templates/default/css" />
 
     <!-- Set the project version -->
     <property name="modx.core.version" value="2.0.0" />
@@ -22,6 +23,7 @@
     <property name="build.image.basedir" value="${build.dir}/image" />
     <property name="build.image.dir" value="${build.dir}/image/modx-${modx.core.version}-${modx.core.release}" />
     <property name="build.image.modext.dir" value="${build.image.basedir}/modext" />
+    <property name="build.image.css.dir" value="${build.image.basedir}/css" />
     <property name="build.distrib.dir" value="${build.dir}/distrib" />
     <property name="build.apidocs.dir" value="${project.basedir}/docs" />
 
@@ -52,7 +54,10 @@
         <antcall target="modext-concat-min"></antcall>
         <antcall target="modext-concat"></antcall>
         <antcall target="copy-prepared-js"></antcall>
-        <antcall target="generate-core-transport"></antcall>
+        <antcall target="css-minify"></antcall>
+        <antcall target="css-concat-min"></antcall>
+        <antcall target="copy-prepared-css"></antcall>
+        <!--<antcall target="generate-core-transport"></antcall>-->
         <!--<antcall target="generate-phpdocs"></antcall>-->
     </target>
 
@@ -62,6 +67,9 @@
     </target>
     <target name="cleanup-build-modext-image" description="empty the MODExt build image directory">
         <delete dir="${build.image.modext.dir}" />
+    </target>
+    <target name="cleanup-build-css-image" description="empty the MODExt build image directory">
+        <delete dir="${build.image.css.dir}" />
     </target>
     <target name="cleanup-build-apidocs" description="empty the build apidocs directory">
         <delete dir="${build.apidocs.dir}" />
@@ -76,6 +84,17 @@
             <fileset dir="${project.manager.dir}/assets/modext"
                 includes="**/*.js" 
                 excludes="build/**,util/filetree/**,modext-min.js,modext.js"
+            />
+        </yuicompress>
+    </target>
+    
+    <target name="css-minify" depends="cleanup-build-css-image" description="Create minimized CSS from the working copy">
+        <echo>Creating minimized js scripts from your working copy</echo>
+
+        <yuicompress warn="false" munge="no" preserveallsemicolons="true" outputsuffix="-min" 
+            outputfolder="${build.image.css.dir}">
+            <fileset dir="${project.manager.dir}/templates/default/css"
+                includes="ie.css,index.css,login.css,xtheme-modx.css"
             />
         </yuicompress>
     </target>
@@ -174,6 +193,20 @@ General Public License for more details.
                       files="modx.view.js" />
         </concat>
     </target>
+    
+    
+    <!-- Concat the minified CSS -->
+    <target name="css-concat-min" description="Create modx-min.css">
+        <echo>Creating modx-min.css in ${build.image.css.dir}</echo>
+        
+        <concat destfile="${build.image.css.dir}/modx-min.css">
+            <header filtering="no" trimleading="yes"></header>
+            
+            <filelist dir="${build.image.css.dir}" 
+                      files="index-min.css,xtheme-modx-min.css" />
+        </concat>
+    </target>
+    
 
     <!-- Copy the minified and concatenated MODExt files to the working copy -->
     <target name="copy-prepared-js" description="copy the minified and concatenated js files to the working copy">
@@ -185,6 +218,16 @@ General Public License for more details.
         </copy>
         <copy file="${build.image.modext.dir}/modext-min.js" todir="${project.modext.dir}" />
         <copy file="${build.image.modext.dir}/modext.js" todir="${project.modext.dir}" />
+    </target>
+    
+    <!-- Copy minified css to working copy -->
+    <target name="copy-prepared-css" description="copy the minified css files to the working copy">
+        <delete file="${project.css.dir}ie-min.css" />
+        <delete file="${project.css.dir}login-min.css" />
+        <delete file="${project.css.dir}modx-min.css" />
+        <copy file="${build.image.css.dir}/ie-min.css" todir="${project.css.dir}" />
+        <copy file="${build.image.css.dir}/login-min.css" todir="${project.css.dir}" />
+        <copy file="${build.image.css.dir}/modx-min.css" todir="${project.css.dir}" />
     </target>
 
     <!-- Run the core data generation script -->

@@ -195,13 +195,22 @@ $settings['cache_system_settings']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['compress_css']= $xpdo->newObject('modSystemSetting');
+$settings['compress_css']->fromArray(array (
+  'key' => 'compress_css',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['compress_js']= $xpdo->newObject('modSystemSetting');
 $settings['compress_js']->fromArray(array (
   'key' => 'compress_js',
   'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'caching',
+  'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
 $settings['concat_js']= $xpdo->newObject('modSystemSetting');
@@ -210,7 +219,7 @@ $settings['concat_js']->fromArray(array (
   'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'caching',
+  'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
 $settings['container_suffix']= $xpdo->newObject('modSystemSetting');
