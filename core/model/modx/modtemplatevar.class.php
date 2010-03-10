@@ -276,7 +276,7 @@ class modTemplateVar extends modElement {
         }
 
         /* if any FC tvDefault rules, set here */
-        if ($this->xpdo->request && $this->xpdo->user instanceof modUser && empty($resourceId)) {
+        if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
             $userGroups = $this->xpdo->user->getUserGroups();
             $c = $this->xpdo->newQuery('modActionDom');
             $c->leftJoin('modAccessActionDom','Access');
@@ -303,7 +303,9 @@ class modTemplateVar extends modElement {
                         break;
                     case 'tvDefault':
                         $v = $rule->get('value');
-                        $this->set('value',$v);
+                        if (empty($resourceId)) {
+                            $this->set('value',$v);
+                        }
                         $this->set('default_text',$v);
                         break;
                     case 'tvTitle':
