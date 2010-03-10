@@ -1283,9 +1283,9 @@ class modX extends xPDO {
                     $this->event->propertySet= (($pspos = strpos($pluginPropset, ':')) > 1) ? substr($pluginPropset, $pspos + 1) : '';
 
                     /* merge in plugin properties */
-                    $params = array_merge($plugin->getProperties(),$params);
+                    $eventParams = array_merge($plugin->getProperties(),$params);
 
-                    $msg= $plugin->process($params);
+                    $msg= $plugin->process($eventParams);
                     $results[]= $this->event->_output;
                     if ($msg && is_string($msg)) {
                         $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);

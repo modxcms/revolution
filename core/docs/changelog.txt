@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug where plugin event properties were getting merged if more than one plugin was associated with the event
 - Added loading mask to editing panels to prevent accidental editing before data is loaded
 - Added sanity check for OnRichTextBrowserInit event processing
 - Added fix for RTE loading in Resource panel, should fix most RTE saving bugs
