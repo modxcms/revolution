@@ -476,7 +476,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             });
         }
         this.cleanupEditor();
-        console.log(this.getForm().getValues());
         return this.fireEvent('save',{
             values: this.getForm().getValues()
             ,stay: MODx.config.stay
