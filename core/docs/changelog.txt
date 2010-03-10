@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed build.local.xml and build.xml scripts
 - Added compress_css system setting for compressed CSS for releases, moved over modx-theme.css to templates css/ dir. Don't use compress_css without first running _build/build.local.xml Ant task.
 - Cleaned up leftover PHP4 function definitions, unescaped SQL code, added proper accessor methods for private vars, other old code 
 - Fixed bug with modLexiconLanguage::clearCache

@@ -57,7 +57,7 @@
         <antcall target="css-minify"></antcall>
         <antcall target="css-concat-min"></antcall>
         <antcall target="copy-prepared-css"></antcall>
-        <!--<antcall target="generate-core-transport"></antcall>-->
+        <antcall target="generate-core-transport"></antcall>
         <!--<antcall target="generate-phpdocs"></antcall>-->
     </target>
 
