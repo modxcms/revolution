@@ -12,7 +12,7 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 
 /* invoke OnRichTextBrowserInit */
 $rtecallback = $modx->invokeEvent('OnRichTextBrowserInit');
-if (is_array($rtecallback)) $rtecallback = implode(',',$rtecallback);
+if (is_array($rtecallback)) $rtecallback = trim(implode(',',$rtecallback),',');
 
 $modx->smarty->assign('rtecallback',$rtecallback);
 
