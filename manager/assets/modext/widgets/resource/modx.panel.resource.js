@@ -413,12 +413,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (this.config.resource === '' || this.config.resource === 0 || this.initialized) {
             if (MODx.config.use_editor && MODx.loadRTE) {
                 var f = this.getForm().findField('richtext');
-                if (f && f.getValue() == 1) {
+                if (f && f.getValue() == 1 && !this.rteLoaded) {
                     MODx.loadRTE('ta');
-                } else {
+                    this.rteLoaded = true;
+                } else if (f && f.getValue() == 0 && this.rteLoaded) {
                     if (MODx.unloadRTE) {
                         MODx.unloadRTE('ta');
                     }
+                    this.rteLoaded = false;
                 }
             }
             this.fireEvent('ready');
@@ -437,22 +439,22 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     if (r.object.unpub_date == '0') { r.object.unpub_date = ''; }
                     r.object.ta = r.object.content;
                     this.getForm().setValues(r.object);
-                                        
+
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+r.object.pagetitle+'</h2>');
-                    
-                    if (r.object.richtext == 1 && MODx.config.use_editor == 1) {
+
+                    if (r.object.richtext == 1 && MODx.config.use_editor == 1 && !this.rteLoaded) {
                         if (MODx.loadRTE && !this.rteLoaded) {
                             MODx.loadRTE('ta');
-                        }                        
+                        }
                         this.rteLoaded = true;
-                    } else {
-                        if (MODx.unloadRTE) { 
-                            MODx.unloadRTE('ta'); 
+                    } else if (r.object.richtext == 0 && this.rteLoaded) {
+                        if (MODx.unloadRTE) {
+                            MODx.unloadRTE('ta');
                         }
                         this.rteLoaded = false;
                     }
                     this.initialized = true;
-                    this.fireEvent('ready');
+                    this.fireEvent('ready',r);
             	},scope:this}
             }
         });
@@ -461,10 +463,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,beforeSubmit: function(o) {        
         var ta = Ext.get('ta');
         if (!ta) return false;
-        v = ta.dom.value;
+        
+        var v = ta.dom.value;
+        
         var hc = Ext.getCmp('hiddenContent');
         if (hc) { hc.setValue(v); }
-                
+
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) {
             Ext.apply(o.form.baseParams,{
@@ -472,6 +476,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             });
         }
         this.cleanupEditor();
+        console.log(this.getForm().getValues());
         return this.fireEvent('save',{
             values: this.getForm().getValues()
             ,stay: MODx.config.stay
