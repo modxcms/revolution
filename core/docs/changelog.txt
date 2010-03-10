@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Cleaned up leftover PHP4 function definitions, unescaped SQL code, added proper accessor methods for private vars, other old code 
+- Fixed bug with modLexiconLanguage::clearCache
 - [#MODX-1738] Fixed issue with FC TV rules not working as expected on Resource Update
 - Fixed bug where plugin event properties were getting merged if more than one plugin was associated with the event
 - Added loading mask to editing panels to prevent accidental editing before data is loaded

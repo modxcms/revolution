@@ -7,7 +7,7 @@
 class modChunk extends modElement {
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
-        $this->_token = '$';
+        $this->setToken('$');
     }
 
     /**

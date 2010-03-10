@@ -33,7 +33,7 @@ class modTemplateVar extends modElement {
      */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
-        $this->_token = '*';
+        $this->setToken('*');
     }
 
     /**
@@ -587,13 +587,13 @@ class modTemplateVar extends modElement {
             $accessTable = $this->xpdo->getTableName('modAccessResourceGroup');
             $policyTable = $this->xpdo->getTableName('modAccessPolicy');
             $resourceGroupTable = $this->xpdo->getTableName('modTemplateVarResourceGroup');
-            $sql = "SELECT acl.target, acl.principal, acl.authority, acl.policy, p.data FROM {$accessTable} acl " .
-                    "LEFT JOIN {$policyTable} p ON p.id = acl.policy " .
-                    "JOIN {$resourceGroupTable} rg ON acl.principal_class = 'modUserGroup' " .
-                    "AND (acl.context_key = :context OR acl.context_key IS NULL OR acl.context_key = '') " .
-                    "AND rg.tmplvarid = :element " .
-                    "AND rg.documentgroup = acl.target " .
-                    "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
+            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
+                    "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
+                    "JOIN {$resourceGroupTable} `ResourceGroup` ON `Acl`.`principal_class` = 'modUserGroup' " .
+                    "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
+                    "AND `ResourceGroup`.`tmplvarid` = :element " .
+                    "AND `ResourceGroup`.`documentgroup` = acl.target " .
+                    "GROUP BY `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`";
             $bindings = array(
                 ':element' => $this->get('id'),
                 ':context' => $context

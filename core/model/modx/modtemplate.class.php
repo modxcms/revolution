@@ -75,7 +75,7 @@ class modTemplate extends modElement {
      * modTemplateVar}, respecting framework security unless specific criteria
      * are provided.
      */
-    function getMany($class, $criteria= null, $cacheFlag= false) {
+    public function getMany($class, $criteria= null, $cacheFlag= false) {
         $collection= array ();
         if (($class === 'TemplateVars' || $class === 'modTemplateVar') && ($criteria === null || strtolower($criteria) === 'all')) {
             $c = $this->xpdo->newQuery('modTemplateVar');

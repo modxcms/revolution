@@ -42,7 +42,7 @@ class modSnippet extends modScript {
      *
      * {@inheritdoc}
      */
-    function getContent($options = array()) {
+    public function getContent(array $options = array()) {
         if (!is_string($this->_content) || $this->_content === '') {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
@@ -58,7 +58,7 @@ class modSnippet extends modScript {
      *
      * {@inheritdoc}
      */
-    function setContent($content, $options = array()) {
+    public function setContent($content, array $options = array()) {
         return $this->set('snippet', $content);
     }
 }

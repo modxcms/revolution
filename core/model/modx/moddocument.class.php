@@ -14,6 +14,6 @@
 class modDocument extends modResource {
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
-        $this->_fields['class_key']= 'modDocument';
+        $this->set('class_key','modDocument');
     }
 }

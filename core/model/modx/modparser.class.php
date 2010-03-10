@@ -358,7 +358,7 @@ class modParser {
                     $tagName= substr($tagName, 1 + $tokenOffset);
                     $element= new modPlaceholderTag($this->modx);
                     $element->set('name', $tagName);
-                    $element->_tag= $outerTag;
+                    $element->setTag($outerTag);
                     $element->setCacheable(false); /* placeholders cannot be cacheable! */
                     $elementOutput= $element->process($tagPropString);
                     break;
@@ -366,7 +366,7 @@ class modParser {
                     $tagName= substr($tagName, 1 + $tokenOffset);
                     $element= new modLexiconTag($this->modx);
                     $element->set('name', $tagName);
-                    $element->_tag= $outerTag;
+                    $element->setTag($outerTag);
                     $element->setCacheable($cacheable);
                     $elementOutput= $element->process($tagPropString);
                     break;
@@ -374,7 +374,7 @@ class modParser {
                     $tagName= substr($tagName, 1 + $tokenOffset);
                     $element= new modLinkTag($this->modx);
                     $element->set('name', $tagName);
-                    $element->_tag= $outerTag;
+                    $element->setTag($outerTag);
                     $element->setCacheable($cacheable);
                     $elementOutput= $element->process($tagPropString);
                     break;
@@ -382,7 +382,7 @@ class modParser {
                     $tagName= substr($tagName, 1 + $tokenOffset);
                     if ($element= $this->modx->getObject('modChunk', array ('name' => $this->realname($tagName)), true)) {
                         $element->set('name', $tagName);
-                        $element->_tag= $outerTag;
+                        $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
                     }
@@ -396,13 +396,13 @@ class modParser {
                     if (is_array($this->modx->resource->_fieldMeta) && in_array($this->realname($tagName), array_keys($this->modx->resource->_fieldMeta))) {
                         $element= new modFieldTag($this->modx);
                         $element->set('name', $tagName);
-                        $element->_tag= $outerTag;
+                        $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
                     }
                     elseif ($element= $this->modx->getObject('modTemplateVar', array ('name' => $this->realname($tagName)), true)) {
                         $element->set('name', $tagName);
-                        $element->_tag= $outerTag;
+                        $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
                     }
@@ -411,7 +411,7 @@ class modParser {
                     $tagName= substr($tagName, $tokenOffset);
                     if ($element= $this->modx->getObject('modSnippet', array ('name' => $this->realname($tagName)), true)) {
                         $element->set('name', $tagName);
-                        $element->_tag= $outerTag;
+                        $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
                     }
@@ -537,6 +537,33 @@ abstract class modTag {
     }
 
     /**
+     * Returns the current token for the tag
+     *
+     * @return string The token for the tag
+     */
+    public function getToken() {
+        return $this->_token;
+    }
+
+    /**
+     * Setter method for the token class var.
+     *
+     * @param string $token The token to use for this element tag.
+     */
+    public function setToken($token) {
+        $this->_token = $token;
+    }
+
+    /**
+     * Setter method for the tag class var.
+     *
+     * @param string $tag The tag to use for this element.
+     */
+    public function setTag($tag) {
+        $this->_tag = $tag;
+    }
+
+    /**
      * Gets a tag representation of the modTag instance.
      */
     public function getTag() {
@@ -551,7 +578,7 @@ abstract class modTag {
                 }
             }
             $tag = '[[';
-            $tag.= $this->_token;
+            $tag.= $this->getToken();
             $tag.= $name;
             if (!empty($this->_propertyString)) {
                 $tag.= $this->_propertyString;
@@ -763,7 +790,7 @@ abstract class modTag {
 class modFieldTag extends modTag {
     function __construct(modX & $modx) {
         parent :: __construct($modx);
-        $this->_token = '*';
+        $this->setToken('*');
     }
 
     /**
@@ -817,8 +844,8 @@ class modFieldTag extends modTag {
 class modPlaceholderTag extends modTag {
     function __construct(modX & $modx) {
         parent :: __construct($modx);
-        $this->_cacheable = false;
-        $this->_token = '+';
+        $this->setCacheable(false);
+        $this->setToken('+');
     }
 
     /**
@@ -884,7 +911,7 @@ class modPlaceholderTag extends modTag {
 class modLinkTag extends modTag {
     function __constructor(modX & $modx) {
         parent :: __construct($modx);
-        $this->_token = '~';
+        $this->setToken('~');
     }
 
     /**
@@ -944,7 +971,7 @@ class modLinkTag extends modTag {
 class modLexiconTag extends modTag {
     function __construct(modX & $modx) {
         parent :: __construct($modx);
-        $this->_token = '%';
+        $this->setToken('%');
     }
 
     /**

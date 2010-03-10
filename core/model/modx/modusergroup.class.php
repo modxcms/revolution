@@ -5,36 +5,6 @@
  * @package modx
  */
 class modUserGroup extends xPDOSimpleObject {
-    /**
-     * Gets a collection of objects related by aggregate or composite relations.
-     *
-     * {@inheritdoc}
-     *
-     * Includes special handling for related objects with alias {@link
-     * modTemplateVar}, respecting framework security unless specific criteria
-     * are provided.
-     *
-     * @todo Refactor to use the new ABAC security model.
-     */
-    public function getMany($alias, $criteria= null, $cacheFlag= false) {
-        $collection = array();
-        switch ($alias) {
-            case 'Users':
-            case 'modUser':
-                $c = $this->xpdo->newQuery('modUser');
-                $c->innerJoin('modUserGroupMember','UserGroupMembers');
-                $c->where(array(
-                    'UserGroupMembers.user_group' => $this->get('id'),
-                ));
-                $collection = $this->xpdo->getCollection('modUser',$c);
-                break;
-            default:
-                $collection = parent::getMany($alias,$criteria,$cacheFlag);
-                break;
-        }
-        return $collection;
-    }
-
 	/**
 	 * Get all users in a user group.
 	 *

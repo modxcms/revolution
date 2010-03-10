@@ -328,7 +328,7 @@ class modCacheManager extends xPDOCacheManager {
     public function generateActionMap($cacheKey, array $options = array()) {
         $results= array();
         $c = $this->modx->newQuery('modAction');
-        $c->select('modAction.*, Namespace.name AS namespace_name, Namespace.path AS namespace_path');
+        $c->select('`modAction`.*, `Namespace`.`name` AS `namespace_name`, `Namespace`.`path` AS `namespace_path`');
         $c->innerJoin('modNamespace','Namespace');
         $c->sortby('namespace','ASC');
         $c->sortby('controller','ASC');

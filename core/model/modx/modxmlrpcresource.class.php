@@ -18,7 +18,7 @@ class modXMLRPCResource extends modResource {
      */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
-        $this->_fields['class_key']= 'modXMLRPCResource';
+        $this->set('class_key','modXMLRPCResource');
     }
 
     /**

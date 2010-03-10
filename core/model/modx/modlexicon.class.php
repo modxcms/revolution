@@ -189,7 +189,7 @@ class modLexicon {
 
             $c= $this->modx->newQuery('modLexiconEntry');
             $c->innerJoin('modLexiconTopic','Topic');
-            $c->innerJoin('modNamespace','Namespace','Namespace.name = Topic.namespace');
+            $c->innerJoin('modNamespace','Namespace','`Namespace`.`name` = `Topic`.`namespace`');
             $c->where(array(
                 'Topic.name' => $topic,
                 'Namespace.name' => $namespace,

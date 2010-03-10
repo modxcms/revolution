@@ -24,7 +24,7 @@ class modStaticResource extends modResource {
 
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
-        $this->_fields['class_key']= 'modStaticResource';
+        $this->set('class_key','modStaticResource');
     }
 
     /**

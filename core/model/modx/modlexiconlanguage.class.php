@@ -12,7 +12,7 @@ class modLexiconLanguage extends xPDOObject {
      */
     public function clearCache() {
         if ($this->xpdo && $this->xpdo->lexicon) {
-            return $this->xpdo->lexicon->clearCache($this->get('language').'/');
+            return $this->xpdo->lexicon->clearCache($this->get('name').'/');
         }
         return false;
     }

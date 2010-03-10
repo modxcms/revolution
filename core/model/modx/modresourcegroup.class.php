@@ -5,10 +5,8 @@
 class modResourceGroup extends modAccessibleSimpleObject {
     public function getResources() {
         $c= $this->xpdo->newQuery('modResource');
-        $c->innerJoin('modResourceGroupResource', 'dgd', array (
-            '`modResource`.`id` = `dgd`.`document`',
-        ));
-        $c->where(array ('dgd.document_group' => $this->get('id')));
+        $c->innerJoin('modResourceGroupResource', 'ResourceGroupResources');
+        $c->where(array ('ResourceGroupResources.document_group' => $this->get('id')));
         $collection= $this->xpdo->getCollection('modResource', $c);
         return $collection;
     }

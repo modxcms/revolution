@@ -8,9 +8,14 @@
  * @package modx
  */
 class modScript extends modElement {
-    var $_scriptName= null;
-    var $_scriptCacheKey= null;
+    public $_scriptName= null;
+    public $_scriptCacheKey= null;
 
+    /**
+     * Override set to properly strip invalid tags from script code
+     *
+     * {@inheritdoc}
+     */
     public function set($k, $v= null, $vType= '') {
         if (in_array($k,array('snippet','plugincode'))) {
             $v= trim($v);
@@ -25,7 +30,12 @@ class modScript extends modElement {
         return $set;
     }
 
-    function process($properties= null, $content= null) {
+    /**
+     * Process specifically script-related functionality for modScript objects.
+     *
+     * {@inheritdoc}
+     */
+    public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $scriptName= $this->getScriptName();
@@ -60,7 +70,7 @@ class modScript extends modElement {
      * @return string The filename containing the function generated from the
      * script element.
      */
-    function getScriptCacheKey() {
+    public function getScriptCacheKey() {
         if ($this->_scriptCacheKey === null) {
             $this->_scriptCacheKey= str_replace('_', '/', $this->getScriptName());
         }
@@ -72,7 +82,7 @@ class modScript extends modElement {
      *
      * @return string The function name representing this script element.
      */
-    function getScriptName() {
+    public function getScriptName() {
         if ($this->_scriptName === null) {
             $className= $this->_class;
             $this->_scriptName= $this->xpdo->context->get('key') . '_elements_' . strtolower($className) . '_' . $this->get('id');
@@ -80,7 +90,12 @@ class modScript extends modElement {
         return $this->_scriptName;
     }
 
-    function loadScript() {
+    /**
+     * Loads and evaluates the script, returing the result.
+     *
+     * @return mixed The result of the script.
+     */
+    public function loadScript() {
         $result = false;
         if (!$script= $this->xpdo->cacheManager->get($this->getScriptCacheKey())) {
             $script= $this->xpdo->cacheManager->generateScript($this);

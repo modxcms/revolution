@@ -80,7 +80,12 @@ foreach ($groups as $group) {
 	);
 }
 if ($usergroup) {
-	$users = $usergroup->getMany('Users');
+    $c = $modx->newQuery('modUser');
+    $c->innerJoin('modUserGroupMember','UserGroupMembers');
+    $c->where(array(
+        'UserGroupMembers.user_group' => $usergroup->get('id'),
+    ));
+	$users = $modx->getCollection('modUser',$c);
 	foreach ($users as $user) {
         $menu = array();
         $menu[] = array(

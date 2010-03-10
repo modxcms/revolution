@@ -463,13 +463,13 @@ class modResource extends modAccessibleSimpleObject {
             $accessTable = $this->xpdo->getTableName('modAccessResourceGroup');
             $policyTable = $this->xpdo->getTableName('modAccessPolicy');
             $resourceGroupTable = $this->xpdo->getTableName('modResourceGroupResource');
-            $sql = "SELECT acl.target, acl.principal, acl.authority, acl.policy, p.data FROM {$accessTable} acl " .
-                    "LEFT JOIN {$policyTable} p ON p.id = acl.policy " .
-                    "JOIN {$resourceGroupTable} rg ON acl.principal_class = 'modUserGroup' " .
-                    "AND (acl.context_key = :context OR acl.context_key IS NULL OR acl.context_key = '') " .
-                    "AND rg.document = :resource " .
-                    "AND rg.document_group = acl.target " .
-                    "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
+            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
+                    "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
+                    "JOIN {$resourceGroupTable} `ResourceGroup` ON `Acl`.`principal_class` = 'modUserGroup' " .
+                    "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
+                    "AND `ResourceGroup`.`document` = :resource " .
+                    "AND `ResourceGroup`.`document_group` = `Acl`.`target` " .
+                    "GROUP BY `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`";
             $bindings = array(
                 ':resource' => $this->get('id'),
                 ':context' => $context
