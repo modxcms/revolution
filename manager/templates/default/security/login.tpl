@@ -3,16 +3,20 @@
 <head>
 	<title>{$_lang.login_title}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme.css" />
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/xtheme-modx.css" />
-	<link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/index.css" />
-    <link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
+	{if $_config.compress_css}
+	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/modx-min.css" />
+	{else}
+	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/xtheme-modx.css" />
+	<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/index.css" />
+	{/if}
+    <link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/login{if $_config.compress_css}-min{/if}.css" />
     
     <script src="assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
     <script src="assets/ext3/ext-all.js" type="text/javascript"></script>
-    <script src="assets/modext/core/modx.js" type="text/javascript"></script>
+    <script src="assets/modext/{if $_config.compress_js}build/core/modx-min{else}core/modx{/if}.js" type="text/javascript"></script>
 	<script src="{$_config.connectors_url}lang.js.php?topic=login" type="text/javascript"></script>
-		
+
 	{if $_config.compress_js}
     <script src="assets/modext/build/core/modx.component-min.js" type="text/javascript"></script>
     <script src="assets/modext/build/util/utilities-min.js" type="text/javascript"></script>
