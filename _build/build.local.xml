@@ -203,7 +203,7 @@ General Public License for more details.
             <header filtering="no" trimleading="yes"></header>
             
             <filelist dir="${build.image.css.dir}" 
-                      files="index-min.css,xtheme-modx-min.css" />
+                      files="xtheme-modx-min.css,index-min.css" />
         </concat>
     </target>
     

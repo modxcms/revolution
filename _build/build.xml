@@ -323,7 +323,7 @@ General Public License for more details.
             <header filtering="no" trimleading="yes"></header>
             
             <filelist dir="${project.manager.dir}/templates/default/css" 
-                      files="index-min.css,xtheme-modx-min.css" />
+                      files="xtheme-modx-min.css,index-min.css" />
         </concat>
     </target>
     
