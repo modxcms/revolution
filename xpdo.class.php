@@ -681,7 +681,7 @@ class xPDO {
                 if (!is_array($pk)) {
                     $pk= array ($pk);
                 }
-                $expr= $this->getSelectColumns($className, $className, '', $pk);
+                $expr= $this->getSelectColumns($className, $query->getAlias(), '', $pk);
             }
             if (isset($query->query['columns'])) $query->query['columns'] = array();
             $query->select(array ("COUNT(DISTINCT {$expr})"));
