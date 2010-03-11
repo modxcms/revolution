@@ -206,9 +206,14 @@ class modOutputFilter {
                         break;
                     case 'notags':
                     case 'striptags':
+                    case 'stripTags':
                     case 'strip_tags':
                         /* See PHP's strip_tags - http://www.php.net/manual/en/function.strip_tags.php */
-                        $output= strip_tags($output);
+                        if (!empty($m_val)) {
+                            $output= strip_tags($output,$m_val);
+                        } else {
+                            $output= strip_tags($output);
+                        }
                         break;
                     case 'length':
                     case 'len':

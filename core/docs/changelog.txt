@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Enhanced striptags output filter to take a parameter of allowed tags
 - Make sure $paths and $options are passed to OnCacheUpdate
 - Added compression/concat references to login and browser tpls
 - Fixed build.local.xml and build.xml scripts
