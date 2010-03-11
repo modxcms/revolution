@@ -543,6 +543,8 @@ class modCacheManager extends xPDOCacheManager {
         /* invoke OnCacheUpdate event */
         $this->modx->invokeEvent('OnCacheUpdate', array(
             'results' => $results,
+            'paths' => $paths,
+            'options' => $options,
         ));
 
         return $results;
