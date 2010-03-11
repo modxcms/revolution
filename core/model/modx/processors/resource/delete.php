@@ -106,7 +106,7 @@ if ($resource->save() == false) {
 $modx->invokeEvent('OnDocFormDelete', array (
     'id' => $resource->get('id'),
     'children' => $childrenIds,
-
+    'resource' => &$resource,
 ));
 
 /* log manager action */

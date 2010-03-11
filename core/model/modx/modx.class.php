@@ -359,9 +359,6 @@ class modX extends xPDO {
     public function initialize($contextKey= 'web') {
         if (!$this->_initialized) {
             if (!$this->startTime) {
-                $mtime= microtime();
-                $mtime= explode(" ", $mtime);
-                $mtime= $mtime[1] + $mtime[0];
                 $this->startTime= $this->getMicroTime();
             }
 
@@ -1522,12 +1519,12 @@ class modX extends xPDO {
     }
 
     /**
-     * Process and return the output from an HTML chunk by name.
+     * Process and return the output from a Chunk by name.
      *
      * @param string $chunkName The name of the chunk.
      * @param array $properties An associative array of properties to process
-     * the chunk with.
-     * @return string The processed output of the chunk.
+     * the Chunk with, treated as placeholders within the scope of the Element.
+     * @return string The processed output of the Chunk.
      */
     public function getChunk($chunkName, array $properties= array ()) {
         $output= '';
