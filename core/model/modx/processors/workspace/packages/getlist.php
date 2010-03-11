@@ -31,13 +31,15 @@ $c->where(array(
     'workspace' => $workspace,
 ));
 $c->where(array(
-    '(SELECT `signature` FROM '.$modx->getTableName('modTransportPackage').' AS `latestPackage`
+    '(SELECT
+        `signature`
+      FROM '.$modx->getTableName('modTransportPackage').' AS `latestPackage`
       WHERE `latestPackage`.`package_name` = `modTransportPackage`.`package_name`
       ORDER BY
          `latestPackage`.`version_major` DESC,
          `latestPackage`.`version_minor` DESC,
          `latestPackage`.`version_patch` DESC,
-         `latestPackage`.`release` DESC,
+         IF(`release` = "" OR `release` = "ga" OR `release` = "pl","z",`release`) DESC,
          `latestPackage`.`release_index` DESC
       LIMIT 1) = `modTransportPackage`.`signature`',
 ));
