@@ -360,7 +360,7 @@ class modTransportPackage extends xPDOObject {
         $v = explode('-',$this->get('signature'));
         array_shift($v);
         $v = implode('-',$v);
-        $v = str_replace('ga','pl',$v);
+        $v = str_replace('-ga','-pl',$v);
         return $v;
     }
 
