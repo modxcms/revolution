@@ -442,16 +442,16 @@ abstract class xPDOVehicle {
 
             if (isset($this->payload['validate']) && is_array($this->payload['validate'])) {
                 foreach ($this->payload['validate'] as $vKey => $v) {
-                    $type = $r['type'];
+                    $type = $v['type'];
                     $body = array ();
                     switch ($type) {
                         case 'php' :
-                            $fileSource = $r['source'];
+                            $fileSource = $v['source'];
                             $scriptName = basename($fileSource, '.php');
                             $body['source'] = $transport->signature . '/' . $this->payload['class'] . '/' . $this->payload['signature'] . '.' . $scriptName . '.validator';
                             $fileTarget = $transport->path . $body['source'];
                             $body['name'] = $scriptName;
-                            $body = array_merge($r, $body);
+                            $body = array_merge($v, $body);
                             if (!$cacheManager->copyFile($fileSource, $fileTarget)) {
                                 $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Source file {$fileSource} is missing or {$fileTarget} could not be written");
                             }
