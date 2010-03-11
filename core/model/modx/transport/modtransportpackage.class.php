@@ -350,4 +350,30 @@ class modTransportPackage extends xPDOObject {
        }
        return $response;
     }
+
+    /**
+     * Gets a version string able to be used by version_compare for checking
+     *
+     * @return string The properly formatted string.
+     */
+    public function getComparableVersion() {
+        $v = explode('-',$this->get('signature'));
+        array_shift($v);
+        $v = implode('-',$v);
+        $v = str_replace('ga','pl',$v);
+        return $v;
+    }
+
+    /**
+     * Compares this version of the package to another
+     *
+     * @param string $version The version to compare to. Must be a PHP-
+     * standardized version.
+     * @param string $direction The direction to compare. Defaults to <=
+     * @return boolean Result of comparison.
+     */
+    public function compareVersion($version,$direction = '<=') {
+        $v = $this->getComparableVersion();
+        return version_compare($version,$v,$direction);
+    }
 }
