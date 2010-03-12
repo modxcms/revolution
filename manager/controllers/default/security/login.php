@@ -105,6 +105,7 @@ if (!empty($_POST)) {
             $modx->mail->set(modMail::MAIL_SUBJECT, $modx->getOption('emailsubject'));
             $modx->mail->address('to', $user->get('email'),$user->get('fullname'));
             $modx->mail->address('reply-to', $modx->getOption('emailsender'));
+            $modx->mail->setHTML(true);
             if (!$modx->mail->send()) {
                 /* if for some reason error in email, tell user */
                 $err = $modx->lexicon('error_sending_email_to').$user->get('email');
