@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added Forgot Login link and form to manager, sends an activation email to specified email if user forgot login/password
 - Fixed SQL sorting algorithm for package versions, added helper methods for comparing package versions
 - Added $resource to properties passed to OnDocFormDelete in resource/delete processor
 - Updated to xPDO 2.0.0 r417 ([#XPDO-40] Fixed getCount to work when passing a criteria with a class alias set)

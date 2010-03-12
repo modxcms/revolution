@@ -55,8 +55,9 @@
        <div class="x-panel-mr">
         <div class="x-panel-mc">
         
-    <form id="modx-login-form" action="" class="x-panel-body x-form" method="post">
+    <form id="modx-login-form" action="" method="post">
 	    <input type="hidden" name="login_context" value="mgr" />
+	    <input type="hidden" name="modahsh" value="{$modahsh}" />
 	    	    
 	    <div class="x-panel x-panel-noborder"><div class="x-panel-bwrap"><div class="x-panel-body x-panel-body-noheader">
 	    <h2>{$_config.site_name}</h2>
@@ -90,8 +91,9 @@
           </div>
 	      <div class="x-form-clear-left"></div>
         </div>
-        
+                
 	    {$onManagerLoginFormRender}
+	    
     
        <table cellspacing="0" class="x-btn x-btn-noicon" style="float: right; width: 71px;" id="modx-login-btn-ct">
        <tbody class="x-btn-small x-btn-icon-small-left">
@@ -115,6 +117,52 @@
        </tbody>
        </table>
     </form>
+    
+        <div class="modx-forgot-login" style="float: left; padding-top: 4px;" >
+        <form id="modx-fl-form" action="" method="post">
+           <a href="javascript:void(0);" id="modx-fl-link" style="{if $_post.email}display:none;{/if}">{$_lang.login_forget_your_login}</a>
+           <div id="modx-forgot-login-form" style="{if NOT $_post.email}display: none;{/if}">
+                          
+               <div class="x-form-item">
+                  <label for="modx-login-email" class="x-form-item-label">{$_lang.login_email_label}</label>
+                  <div class="x-form-element">
+                    <input type="text" id="modx-login-email" style="width: 200px;" name="email" class="x-form-text x-form-field" value="{$_post.email}" />
+                  </div>
+                  <div class="x-form-clear-left"></div>
+               </div>
+               
+               
+	            <table cellspacing="0" class="x-btn x-btn-noicon" style="float: right; width: 71px;" id="modx-fl-btn-ct">
+	               <tbody class="x-btn-small x-btn-icon-small-left">
+	                <tr>
+	                    <td class="x-btn-tl"><em></em></td>
+	                    <td class="x-btn-tc"></td>
+	                    <td class="x-btn-tr"><em></em></td>
+	                </tr>
+	                <tr>
+	                    <td class="x-btn-ml"><em></em></td>
+	                    <td class="x-btn-mc"><em>
+	                        <button class="x-btn-text" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
+	                    </em></td>
+	                    <td class="x-btn-mr"><em></em></td>
+	                </tr>
+	                <tr>
+	                    <td class="x-btn-bl"><em></em></td>
+	                    <td class="x-btn-bc"></td>
+	                    <td class="x-btn-br"><em></em></td>
+	                </tr>
+	               </tbody>
+	           </table>
+	           
+	           <br class="clear" />
+               <br class="clear" />
+               
+           </div>
+        </form>
+        </div>
+        
+        <br class="clear" />
+    
         </div>
        </div>
       </div>      

@@ -339,6 +339,26 @@ $settings['filemanager_path']->fromArray(array (
   'area' => 'file',
   'editedon' => null,
 ), '', true, true);
+$settings['forgot_login_email']= $xpdo->newObject('modSystemSetting');
+$settings['forgot_login_email']->fromArray(array (
+  'key' => 'forgot_login_email',
+  'value' => '<p>Hello [[+username]],</p>
+<p>A request for a password reset has been issued for your MODx user. If you sent this, you may follow this link and use this password to login. If you did not send this request, please ignore this email.</p>
+
+<p>
+    <strong>Activation Link:</strong> [[+url_scheme]][[+http_host]][[+manager_url]]?modahsh=[[+hash]]<br />
+    <strong>Username:</strong> [[+username]]<br />
+    <strong>Password:</strong> [[+password]]<br />
+</p>
+
+<p>After you log into the MODx Manager, you can change your password again, if you wish.</p>
+
+<p>Regards,<br />Site Administrator</p>',
+  'xtype' => 'textarea',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
 $settings['friendly_alias_urls']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_urls']->fromArray(array (
   'key' => 'friendly_alias_urls',
