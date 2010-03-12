@@ -257,9 +257,9 @@ abstract class xPDOVehicle {
                 $body = $r['body'];
                 switch ($type) {
                     case 'php' :
-                        if (isset ($options[xPDOTransport::VALIDATE_PHP]) && !$options[xPDOTransport::VALIDATE_PHP]) {
-                            continue;
-                        }
+//                        if (isset ($options[xPDOTransport::VALIDATE_PHP]) && !$options[xPDOTransport::VALIDATE_PHP]) {
+//                            continue;
+//                        }
                         $fileMeta = xPDO :: fromJSON($body, true);
                         $fileName = $fileMeta['name'];
                         $fileSource = $transport->path . $fileMeta['source'];

@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Commented out deprecated code in xPDOVehicle dealing with PHP validators 
 - Fixed typo in xPDOVehicle where $r should be $v
 - [#XPDO-40] Fixed getCount to work when passing a criteria with a class alias set.
 - xPDOTransport: Fix several E_STRICT errors caused by static calls to methods not defined as static.
