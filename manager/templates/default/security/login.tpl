@@ -51,7 +51,7 @@
       </div>
      </div>
      <div class="x-panel-bwrap">
-      <div class="x-panel-ml" style="padding: 1em;">
+      <div class="x-panel-ml">
        <div class="x-panel-mr">
         <div class="x-panel-mc">
         
@@ -94,6 +94,8 @@
                 
 	    {$onManagerLoginFormRender}
 	    
+	    <br class="clear" />
+	    
     
        <table cellspacing="0" class="x-btn x-btn-noicon" style="float: right; width: 71px;" id="modx-login-btn-ct">
        <tbody class="x-btn-small x-btn-icon-small-left">
@@ -118,7 +120,7 @@
        </table>
     </form>
     
-        <div class="modx-forgot-login" style="float: left; padding-top: 4px;" >
+        <div class="modx-forgot-login">
         <form id="modx-fl-form" action="" method="post">
            <a href="javascript:void(0);" id="modx-fl-link" style="{if $_post.email}display:none;{/if}">{$_lang.login_forget_your_login}</a>
            <div id="modx-forgot-login-form" style="{if NOT $_post.email}display: none;{/if}">
@@ -126,7 +128,7 @@
                <div class="x-form-item">
                   <label for="modx-login-email" class="x-form-item-label">{$_lang.login_email_label}</label>
                   <div class="x-form-element">
-                    <input type="text" id="modx-login-email" style="width: 200px;" name="email" class="x-form-text x-form-field" value="{$_post.email}" />
+                    <input type="text" id="modx-login-email" name="email" class="x-form-text x-form-field" value="{$_post.email}" />
                   </div>
                   <div class="x-form-clear-left"></div>
                </div>

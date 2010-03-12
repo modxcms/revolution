@@ -16,7 +16,7 @@ body {
     font-size: 75%; /* 12px 62.5% for 10px*/
     height: 100%;
     margin-bottom: 1px; /* avoid jumping scrollbars */
-    background-color: #fffffa;
+    background-color: #f7f7f7;
 }
 #mx_loginbox img, #mx_loginbox a img {
     border: 0 !important;
@@ -46,11 +46,6 @@ h6 { font-size: 86%; font-weight: bold; }
 p.caption, p.comment { font-size: 86%; color: #888; }
 .warning { color: #821517; font-weight: bold; }
 .success { color: #090; font-weight: bold; }
-#mx_loginbox a, #mx_loginbox a:active, #mx_loginbox a:visited, #mx_loginbox a:link {
-    color: #1a32c7;
-    text-decoration: underline;
-    }
-#mx_loginbox a:hover { color: #0f1e76; }
 #mx_loginbox {
     width: 460px;
     margin: 70px auto 0;
@@ -67,7 +62,25 @@ img.loginCaptcha {
     font-size: 90%;
     padding-left: 20px;
 }
-.loginLicense a { color: #94B451; }
 
 #modx-login-form-panel { border: 1px solid #ddd; }
 .x-panel-tl, .x-panel-tl .x-panel-header { background: #efefef; } 
+
+.x-panel-ml { padding: 10px 20px 20px; }
+
+.modx-forgot-login {
+	float: left;
+	padding-top: 4px;
+}
+a {
+	color: #526924;
+}
+
+#modx-login-email { width: 200px; }
+
+#modx-panel-login-div {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background-color: white;
+}
