@@ -89,7 +89,7 @@ Ext.extend(MODx.Console,Ext.Window,{
     }
     
     ,download: function() {
-        var c = this.getComponent('body').dom.innerHTML;
+        var c = this.getComponent('body').getEl().dom.innerHTML;
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'system/index.php'
             ,params: {
