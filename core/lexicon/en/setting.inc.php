@@ -186,7 +186,7 @@ $_lang['setting_filemanager_path_err'] = 'Please state the absoulte document roo
 $_lang['setting_filemanager_path_err_invalid'] = 'This filemanager directory either does not exist or cannot be accessed. Please state a valid directory or adjust the permissions of this directory.';
 
 $_lang['setting_friendly_alias_urls'] = 'Use Friendly Aliases';
-$_lang['setting_friendly_alias_urls_desc'] = 'If you are using friendly URLs, and the resource has an alias, the alias will always have precedence over the friendly URL. By setting this option to \'Yes\', the friendly URL prefix and suffix will also be applied to the alias. For example, if your Resource with ID 1 has an alias of `introduction`, and you\'ve set a prefix of `` and a suffix of `.html`, setting this option to `yes` will generate `introduction.html`. If there\'s no alias, MODx will generate `1.html` as link.';
+$_lang['setting_friendly_alias_urls_desc'] = 'If you are using friendly URLs, and the resource has an alias, the alias will always have precedence over the friendly URL. By setting this option to \'Yes\', the Content Type suffix of the Resource will also be applied to the alias. For example, if your Resource with ID 1 has an alias of `introduction`, and you\'ve set a Content Type suffix of `.html`, setting this option to `yes` will generate `introduction.html`. If there\'s no alias, MODx will generate `1.html` as link.';
 
 $_lang['setting_friendly_urls'] = 'Use Friendly URLs';
 $_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODx. Please note, this only works for MODx installations running on Apache, and you\'ll need to write a .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';

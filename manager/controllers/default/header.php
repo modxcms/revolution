@@ -53,7 +53,7 @@ foreach ($menus as $menu) {
     $menuTpl .= '</li>'."\n";
 
     /* if has no permissable children, and is not clickable, hide top menu item */
-    if (!empty($childrenCt) && empty($menu['action']) && empty($menu['handler'])) {
+    if (!empty($childrenCt) || !empty($menu['action']) || !empty($menu['handler'])) {
         $output .= $menuTpl;
     }
     $order++;

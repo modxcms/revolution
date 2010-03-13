@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1751] Fixed erroneous reference in friendly alias setting description
+- [#MODX-1752] Fixed bug where topmenu items without children didnt show even if they had an action
 - Some css tweaks to login page
 - Updated to xPDO 2.0.0 r419 to fix xPDOVehicle bug
 - Fixed bug with Download Output button in MODx.Console
