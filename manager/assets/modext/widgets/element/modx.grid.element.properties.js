@@ -136,6 +136,9 @@ MODx.grid.ElementProperties = function(config) {
     this.on('afteredit', this.propertyChanged, this);
     this.on('afterRemoveRow', this.propertyChanged, this);
     this.on('celldblclick',this.onDirty,this);
+    this.on('render',function() {
+        this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+    },this);
     
     if (this.config.lockProperties) {
         this.on('render',function() {
@@ -195,6 +198,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                 ,elementType: this.config.elementType
             });
         }
+        if (this.mask) { this.mask.show(); }
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'element/propertyset.php'
             ,params: p
@@ -203,6 +207,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                     this.getStore().commitChanges();
                     this.changePropertySet(cb);
                     this.onDirty();
+                    if (this.mask) { this.mask.hide(); }
                 },scope:this}
             }
         });
