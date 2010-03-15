@@ -38,6 +38,7 @@ MODx.panel.Welcome = function(config) {
                     title: _('modx_news')
                     ,contentEl: 'modx-news'
 					,cls: 'x-panel-header x-portal-space'
+                    ,hidden: config.newsEnabled ? false : true
                 },{
                     title: _('recent_docs')
                     ,id: 'modx-recent'
@@ -72,6 +73,7 @@ MODx.panel.Welcome = function(config) {
                     title: _('security_notices')
                     ,contentEl: 'modx-security'
 					,cls: 'x-panel-header x-portal-space'
+                    ,hidden: config.securityEnabled ? false : true
                 },{
                     title: _('info')
                     ,contentEl: 'modx-info'

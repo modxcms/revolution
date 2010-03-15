@@ -180,8 +180,14 @@ $_lang['setting_fe_editor_lang_desc'] = 'Choose a language for the editor to use
 $_lang['setting_feed_modx_news'] = 'MODx News Feed URL';
 $_lang['setting_feed_modx_news_desc'] = 'Set the URL for the RSS feed for the MODx News panel in the manager.';
 
+$_lang['setting_feed_modx_news_enabled'] = 'MODx News Feed Enabled';
+$_lang['setting_feed_modx_news_enabled_desc'] = 'If \'No\', MODx will hide the News feed in the welcome section of the manager.';
+
 $_lang['setting_feed_modx_security'] = 'MODx Security Notices Feed URL';
 $_lang['setting_feed_modx_security_desc'] = 'Set the URL for the RSS feed for the MODx Security Notices panel in the manager.';
+
+$_lang['setting_feed_modx_security_enabled'] = 'MODx Security Feed Enabled';
+$_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODx will hide the Security feed in the welcome section of the manager.';
 
 $_lang['setting_filemanager_path'] = 'File Manager Path';
 $_lang['setting_filemanager_path_desc'] = 'IIS often does not populate the document_root setting properly, which is used by the file manager to determine what you can look at. If you\'re having problems using the file manager, make sure this path points to the root of your MODx installation.';

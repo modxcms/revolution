@@ -56,20 +56,26 @@ $modx->loadClass('xmlrss.modRSSParser','',false,true);
 $rssparser = new modRSSParser($modx);
 
 $url = $modx->getOption('feed_modx_news');
-$rss = $rssparser->parse($url);
-foreach (array_keys($rss->items) as $key) {
-	$item= &$rss->items[$key];
-    $item['pubdate'] = strftime('%c',$item['date_timestamp']);
+$newsEnabled = $modx->getOption('feed_modx_news_enabled',null,true);
+if (!empty($url) && !empty($newsEnabled)) {
+    $rss = $rssparser->parse($url);
+    foreach (array_keys($rss->items) as $key) {
+    	$item= &$rss->items[$key];
+        $item['pubdate'] = strftime('%c',$item['date_timestamp']);
+    }
+    $modx->smarty->assign('newsfeed',$rss->items);
 }
-$modx->smarty->assign('newsfeed',$rss->items);
 
 $url = $modx->getOption('feed_modx_security');
-$rss = $rssparser->parse($url);
-foreach (array_keys($rss->items) as $key) {
-	$item= &$rss->items[$key];
-    $item['pubdate'] = strftime('%c',$item['date_timestamp']);
+$securityEnabled = $modx->getOption('feed_modx_security_enabled',null,true);
+if (!empty($url) && !empty($securityEnabled)) {
+    $rss = $rssparser->parse($url);
+    foreach (array_keys($rss->items) as $key) {
+    	$item= &$rss->items[$key];
+        $item['pubdate'] = strftime('%c',$item['date_timestamp']);
+    }
+    $modx->smarty->assign('securefeed',$rss->items);
 }
-$modx->smarty->assign('securefeed',$rss->items);
 
 $hasViewDocument = $modx->hasPermission('view_document');
 $hasViewUser = $modx->hasPermission('view_user');
@@ -89,6 +95,8 @@ Ext.onReady(function() {
         ,site_name: "'.htmlentities($modx->getOption('site_name')).'"
         ,displayConfigCheck: '.($config_display ? 'true': 'false').'
         ,user: "'.$modx->user->get('id').'"
+        ,newsEnabled: "'.$newsEnabled.'"
+        ,securityEnabled: "'.$securityEnabled.'"
     });
 });
 // ]]>

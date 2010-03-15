@@ -330,11 +330,29 @@ $settings['feed_modx_news']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['feed_modx_news_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['feed_modx_news_enabled']->fromArray(array (
+  'key' => 'feed_modx_news_enabled',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['feed_modx_security']= $xpdo->newObject('modSystemSetting');
 $settings['feed_modx_security']->fromArray(array (
   'key' => 'feed_modx_security',
   'value' => 'http://feeds.feedburner.com/modxsecurity',
   'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
+$settings['feed_modx_security_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['feed_modx_security_enabled']->fromArray(array (
+  'key' => 'feed_modx_security_enabled',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
