@@ -33,6 +33,15 @@ $settings['auto_menuindex']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['auto_check_pkg_updates']= $xpdo->newObject('modSystemSetting');
+$settings['auto_check_pkg_updates']->fromArray(array (
+  'key' => 'auto_check_pkg_updates',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['automatic_alias']= $xpdo->newObject('modSystemSetting');
 $settings['automatic_alias']->fromArray(array (
   'key' => 'automatic_alias',

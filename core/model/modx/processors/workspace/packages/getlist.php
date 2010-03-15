@@ -142,7 +142,7 @@ foreach ($packages as $key => $package) {
 
     /* check for updates */
     $updates = array();
-    if ($package->get('provider') > 0) {
+    if ($package->get('provider') > 0 && $modx->getOption('auto_check_pkg_updates',null,false)) {
         /* cache providers to speed up load time */
         if (!empty($providerCache[$package->get('provider')])) {
             $provider =& $providerCache[$package->get('provider')];

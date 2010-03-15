@@ -73,6 +73,9 @@ $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST actions within t
 $_lang['setting_auto_menuindex'] = 'Menu indexing default';
 $_lang['setting_auto_menuindex_desc'] = 'Select \'Yes\' to turn on automatic menu index incrementing by default.';
 
+$_lang['setting_auto_check_pkg_updates'] = 'Automatic Check for Package Updates';
+$_lang['setting_auto_check_pkg_updates_desc'] = 'If \'Yes\', MODx will automatically check for updates for packages in Package Management. This may slow the loading of the grid.';
+
 $_lang['setting_allow_multiple_emails'] = 'Allow Duplicate Emails for Users';
 $_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the same email address.';
 
