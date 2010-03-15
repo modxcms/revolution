@@ -607,6 +607,18 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         this.tools['minus'].hide();
         this.tools['plus'].show();
     }
+    ,rendYesNo: function(d,c) {
+        switch(d) {
+            case '':
+                return '-';
+            case false:
+                c.css = 'red';
+                return _('no');
+            case true:
+                c.css = 'green';
+                return _('yes');
+        }
+    }
 });
 Ext.reg('grid-local',MODx.grid.LocalGrid);
 
