@@ -4,7 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
-- Fixes to build.xml
+- Tweaked CSS in login panel
+- Updated copyright data in lexicon entries
+- Fixes to build.xml, css compression command
 - Updated copyright dates
 - [#MODX-1750] Lots of procedural and reference fixes to Lexicon grid UI
 - Cleaned up presentation of modAction records in mgr

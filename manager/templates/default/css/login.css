@@ -73,7 +73,11 @@ img.loginCaptcha {
 	padding-top: 4px;
 }
 a {
+	text-decoration: none;
 	color: #526924;
+}
+a:hover {
+	text-decoration: underline;
 }
 
 #modx-login-email { width: 200px; }

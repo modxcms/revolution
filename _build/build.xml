@@ -360,8 +360,8 @@ General Public License for more details.
     
     <!-- copy prepared css -->
     <target name="copy-prepared-css" description="copy the minified and concatenated js files to the image">
-        <copy todir="${build.image.css.dir}">
-            <fileset dir="${build.image.modext.dir}" />
+        <copy todir="${build.image.dir}/manager/templates/default/css">
+            <fileset dir="${build.image.css.dir}" />
         </copy>
     </target>
         
