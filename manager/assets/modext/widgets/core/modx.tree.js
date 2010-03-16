@@ -437,8 +437,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	 * @access public
 	 */
 	,refreshActiveNode: function() {
-        this.getLoader().load(this.cm.activeNode);
-        this.cm.activeNode.expand();
+        this.getLoader().load(this.cm.activeNode,this.cm.activeNode.expand);
     }
     
     /**
@@ -446,8 +445,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @access public
      */
     ,refreshParentNode: function() {
-        this.getLoader().load(this.cm.activeNode.parentNode);
-        this.cm.activeNode.parentNode.expand();
+        this.getLoader().load(this.cm.activeNode.parentNode,this.cm.activeNode.expand);
     }
     
     /**
