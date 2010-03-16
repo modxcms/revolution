@@ -32,6 +32,21 @@
  * @subpackage rest
  */
 class modRestServer {
+    const OPT_AUTH = 'authenticate';
+    const OPT_AUTH_GET = 'authenticateGet';
+    const OPT_AUTH_USER_VAR = 'authUserVar';
+    const OPT_AUTH_PASS_VAR = 'authPassVar';
+    const OPT_ENCODING = 'encoding';
+    const OPT_ERROR_DATA_NODE = 'error_data_node';
+    const OPT_ERROR_NODE = 'error_node';
+    const OPT_ERROR_MESSAGE_NODE = 'error_message_node';
+    const OPT_FORMAT = 'format';
+    const OPT_PROCESSORS_PATH = 'processors_path';
+    const OPT_REQUEST_PATH = 'request_path';
+    const OPT_REQUEST_VAR = 'requestVar';
+    const OPT_REALM = 'realm';
+    const OPT_RENDERERS = 'renderers';
+
     /**
      * @var $error The current error message
      * @access protected
@@ -41,15 +56,19 @@ class modRestServer {
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
         $this->config = array_merge(array(
-            'authenticate' => true,
-            'authenticateGet' => false,
-            'authUserVar' => 'user',
-            'authPassVar' => 'password',
-            'encoding' => 'UTF-8',
-            'format' => 'xml',
-            'processors_path' => '',
-            'requestVar' => 'p',
-            'realm' => 'MODx',
+            modRestServer::OPT_AUTH => true,
+            modRestServer::OPT_AUTH_GET => false,
+            modRestServer::OPT_AUTH_USER_VAR => 'user',
+            modRestServer::OPT_AUTH_PASS_VAR => 'password',
+            modRestServer::OPT_ENCODING => 'UTF-8',
+            modRestServer::OPT_FORMAT => 'xml',
+            modRestServer::OPT_PROCESSORS_PATH => '',
+            modRestServer::OPT_REQUEST_VAR => 'p',
+            modRestServer::OPT_REALM => 'MODx',
+            modRestServer::OPT_RENDERERS => 'renderers',
+            modRestServer::OPT_ERROR_DATA_NODE => 'data',
+            modRestServer::OPT_ERROR_NODE => 'error',
+            modRestServer::OPT_ERROR_MESSAGE_NODE => 'message',
         ),$config);
     }
 
@@ -63,24 +82,30 @@ class modRestServer {
      */
     public function handle() {
         $scriptProperties = array();
-        $scriptProperties['request_path'] = $this->computePath();
+        $scriptProperties[modRestServer::OPT_REQUEST_PATH] = $this->computePath();
 
         $output = '';
-        if (file_exists($scriptProperties['request_path'])) {
+        if (file_exists($scriptProperties[modRestServer::OPT_REQUEST_PATH])) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                if ($this->config['authenticateGet'] && !$this->authenticate()) {
-                    return $this->error('Permission Denied!',array($scriptProperties),'401');
+                if ($this->config[modRestServer::OPT_AUTH_GET]) {
+                    $result = $this->authenticate();
+                    if ($result !== true) {
+                        return $result;
+                    }
                 }
 
                 $scriptProperties = array_merge($scriptProperties,$_GET);
-            } else if ($tmp = file_get_contents('php://input')) {
-                if ($this->config['authenticate'] && !$this->authenticate()) {
-                    return $this->error('Permission Denied!',array($scriptProperties),'401');
+            } else {
+                if ($this->config[modRestServer::OPT_AUTH]) {
+                    $result = $this->authenticate();
+                    if ($result !== true) {
+                        return $result;
+                    }
                 }
 
             }
             $modx =& $this->modx;
-            $output = include $scriptProperties['request_path'];
+            $output = include $scriptProperties[modRestServer::OPT_REQUEST_PATH];
 
         } else {
             return $this->error('404 Not Found',$scriptProperties);
@@ -96,8 +121,8 @@ class modRestServer {
      * @return string The absolute path to the processor to load
      */
     public function computePath() {
-        $path = $this->config['processors_path'];
-        $path .= trim($_REQUEST[$this->config['requestVar']],'/').'/';
+        $path = $this->config[modRestServer::OPT_PROCESSORS_PATH];
+        $path .= trim($_REQUEST[$this->config[modRestServer::OPT_REQUEST_VAR]],'/').'/';
         $path .= strtolower($_SERVER['REQUEST_METHOD']).'.php';
         return $path;
     }
@@ -111,15 +136,36 @@ class modRestServer {
      * @return boolean True if successful.
      */
     public function authenticate() {
-        if (empty($_REQUEST[$this->config['authUserVar']])) return false;
-        if (empty($_REQUEST[$this->config['authPassVar']])) return false;
-        $user = $this->modx->getObject('modUser',array(
-            'username' => $_REQUEST[$this->config['authUserVar']],
-        ));
-        if (empty($user)) return false;
+        $this->modx->getService('lexicon','modLexicon');
+        $this->modx->lexicon->load('user');
 
-        if ($user->get('password') != md5($_REQUEST[$this->config['authPassVar']])) return false;
+        if (empty($_REQUEST[$this->config[modRestServer::OPT_AUTH_USER_VAR]])) {
+            return $this->deny($this->modx->lexicon('user_err_ns'));
+        }
+        if (empty($_REQUEST[$this->config[modRestServer::OPT_AUTH_PASS_VAR]])) {
+            return $this->deny($this->modx->lexicon('user_err_not_specified_password'));
+        }
+
+        $user = $this->modx->getObject('modUser',array(
+            'username' => $_REQUEST[$this->config[modRestServer::OPT_AUTH_USER_VAR]],
+        ));
+        if (empty($user)) return $this->deny($this->modx->lexicon('user_err_nf'));
+
+        if ($user->get('password') != md5($_REQUEST[$this->config[modRestServer::OPT_AUTH_PASS_VAR]])) {
+            return $this->deny($this->modx->lexicon('user_err_password'));
+        }
         return true;
+    }
+
+    /**
+     * Deny access and send a 401.
+     *
+     * @param string $message
+     * @param array $data
+     * @return string
+     */
+    public function deny($message,array $data = array()) {
+        return $this->error($message,$data,'401');
     }
 
     /**
@@ -151,9 +197,9 @@ class modRestServer {
             $this->_err404();
         }
         return $this->encode(array(
-            'message' => $message,
-            'data' => $data,
-        ),'<error>');
+            $this->config[modRestServer::OPT_ERROR_MESSAGE_NODE] => $message,
+            $this->config[modRestServer::OPT_ERROR_DATA_NODE] => $data,
+        ),'<'.$this->config[modRestServer::OPT_ERROR_NODE].'>');
     }
 
     /**
@@ -167,7 +213,7 @@ class modRestServer {
     public function encode($data,$root = '') {
         $output = '';
 
-        $format = $this->modx->getOption('format',$_REQUEST,$this->config['format']);
+        $format = $this->modx->getOption(modRestServer::OPT_FORMAT,$_REQUEST,$this->config[modRestServer::OPT_FORMAT]);
         switch ($format) {
             case 'json':
                 header('Content-Type: application/javascript');
@@ -219,7 +265,7 @@ class modRestServer {
 
     private function _err404($scriptProperties = array()) {
         header("{$_SERVER['SERVER_PROTOCOL']} 404 Not Found");
-        $output = '<h2>404 Error Not Found</h2>';
+        $output = '<h2>404 Not Found</h2>';
         if (!empty($scriptProperties)) {
             $output .= '<p>'.$scriptProperties['called'].' is not a valid request.</p>';
         }
@@ -235,7 +281,7 @@ class modRestServer {
 
     private function _err406($output = '') {
         header($_SERVER['SERVER_PROTOCOL'].' 406 Not Acceptable');
-        $output = join(', ', array_keys($this->config['renderers']));
+        $output = join(', ', array_keys($this->config[modRestServer::OPT_RENDERERS]));
         return $output;
     }
 

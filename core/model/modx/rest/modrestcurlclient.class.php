@@ -32,7 +32,7 @@ class modRestCurlClient extends modRestClient {
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_TIMEOUT,30);
+        curl_setopt($ch, CURLOPT_TIMEOUT,$this->config[modRestClient::OPT_TIMEOUT]);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 

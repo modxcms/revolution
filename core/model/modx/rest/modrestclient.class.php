@@ -12,6 +12,11 @@
  * @subpackage rest
  */
 class modRestClient {
+    const OPT_PATH = 'path';
+    const OPT_PORT = 'port';
+    const OPT_RESPONSE_CLASS = 'restResponse.class';
+    const OPT_TIMEOUT = 'timeout';
+
     /**
      * @var modX $modx A reference to the modX instance.
      * @access public
@@ -45,7 +50,9 @@ class modRestClient {
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
         $this->config = array_merge(array(
-            'port' => 80,
+            modRestClient::OPT_PORT => 80,
+            modRestClient::OPT_TIMEOUT => 30,
+            modRestClient::OPT_PATH => '/',
         ),$config);
     }
 
@@ -88,7 +95,7 @@ class modRestClient {
         $this->host = $host;
         $response = $this->conn->request($this->host,$path,$method,$params);
 
-        $responseClass = $this->modx->getOption('restResponse.class',$this->config,'modRestResponse');
+        $responseClass = $this->modx->getOption(modRestClient::OPT_RESPONSE_CLASS,$this->config,'modRestResponse');
         $this->response = new $responseClass($this,$response);
 
         return $this->response;

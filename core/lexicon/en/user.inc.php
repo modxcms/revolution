@@ -86,6 +86,7 @@ $_lang['user_err_not_specified_resource_baseurl'] = 'Please specify a valid reso
 $_lang['user_err_not_specified_uploadsize'] = 'Please specify a valid max upload size in bytes.';
 $_lang['user_err_not_specified_username'] = 'Please specify a user name.';
 $_lang['user_err_ns'] = 'User not specified.';
+$_lang['user_err_password'] = 'Incorrect password.';
 $_lang['user_err_password_invalid_old'] = 'Invalid old password.';
 $_lang['user_err_password_too_short'] = 'Password is too short!';
 $_lang['user_err_password_no_match'] = 'Passwords do not match.';
