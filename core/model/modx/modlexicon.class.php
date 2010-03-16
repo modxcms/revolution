@@ -2,7 +2,7 @@
 /*
  * MODx Revolution
  *
- * Copyright 2006, 2007, 2008, 2009 by the MODx Team.
+ * Copyright 2006-2010 by the MODx Team.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
