@@ -42,6 +42,7 @@ MODx.grid.LexiconTopic = function(config) {
             xtype: 'modx-combo-namespace'
             ,name: 'namespace'
             ,id: 'modx-lexicon-topic-filter-namespace'
+            ,itemId: 'namespace'
             ,value: 'core'
             ,listeners: {
                 'change': {fn:this.filter.createDelegate(this,['namespace'],true),scope:this}
@@ -52,6 +53,7 @@ MODx.grid.LexiconTopic = function(config) {
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-lexicon-topic-filter-name'
+            ,itemId: 'name'
             ,listeners: {
                 'change': {fn:this.filter.createDelegate(this,['name'],true),scope:this}
                 ,'render': {fn:function(tf) {
@@ -68,10 +70,14 @@ MODx.grid.LexiconTopic = function(config) {
                 ,handler: this.loadWindow2.createDelegate(this,[{
                     xtype: 'modx-window-lexicon-topic-create'
                     ,listeners: {
-                        'success':{fn:function() {
-                            this.refresh();
-                            var cb = Ext.getCmp('modx-lexicon-filter-topic');
-                            if (cb) { cb.store.reload(); }
+                        'success':{fn:function(o) {
+                            var r = o.a.result.object;
+                            this.setNamespace(r['namespace']);
+                            
+                            var g = Ext.getCmp('modx-grid-lexicon');
+                            if (g) {
+                                g.setFilterParams(r['namespace'],r.id);
+                            }                
                         },scope: this}
                     }
                 }],true)
@@ -81,10 +87,14 @@ MODx.grid.LexiconTopic = function(config) {
                 ,handler: this.loadWindow2.createDelegate(this,[{
                     xtype: 'modx-window-namespace-create'
                     ,listeners: {
-                        'success':{fn:function() {
-                            Ext.getCmp('modx-lexicon-topic-filter-namespace').store.reload();
-                            var cb = Ext.getCmp('modx-lexicon-filter-namespace');
-                            if (cb) { cb.store.reload(); }
+                        'success':{fn:function(o) {
+                            var r = o.a.result.object;
+                            this.setNamespace(r.name);
+                            
+                            var g = Ext.getCmp('modx-grid-lexicon');
+                            if (g) {
+                                g.setFilterParams(r.name);
+                            }
                         },scope: this}
                     }
                 }],true)
@@ -104,9 +114,19 @@ Ext.extend(MODx.grid.LexiconTopic,MODx.grid.Grid,{
     }
     ,loadWindow2: function(btn,e,o) {
         this.menu.record = {
-            'namespace': Ext.getCmp('modx-lexicon-topic-filter-namespace').getValue()
+            'namespace': this.getTopToolbar().getComponent('namespace').getValue()
         };
         this.loadWindow(btn,e,o);
+    }
+    
+    ,setNamespace: function(ns) {
+        var ncb = this.getTopToolbar().getComponent('namespace');
+        if (ncb) { ncb.setValue(ns); }
+        this.config.saveParams['namespace'] = ns;
+        
+        this.getBottomToolbar().changePage(1);
+        this.getStore().baseParams['namespace'] = ns;
+        this.refresh();
     }
 });
 Ext.reg('modx-grid-lexicon-topic',MODx.grid.LexiconTopic);
@@ -131,6 +151,7 @@ MODx.window.CreateLexiconTopic = function(config) {
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-clt-name'
+            ,itemId: 'name'
             ,width: 250
             ,maxLength: 100
         },{
@@ -138,6 +159,7 @@ MODx.window.CreateLexiconTopic = function(config) {
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
             ,id: 'modx-clt-namespace'
+            ,itemId: 'namespace'
             ,value: r['namespace']
         }]
     });

@@ -27,5 +27,15 @@ MODx.combo.LexiconTopic = function(config) {
     });
     MODx.combo.LexiconTopic.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.combo.LexiconTopic,MODx.combo.ComboBox);
+Ext.extend(MODx.combo.LexiconTopic,MODx.combo.ComboBox,{
+    setNamespace: function(ns,t) {
+        this.store.baseParams['namespace'] = ns;
+        this.store.load({
+            callback: function() {
+                if (t) { this.setValue(t); }
+            }
+            ,scope: this
+        });
+    }
+});
 Ext.reg('modx-combo-lexicon-topic',MODx.combo.LexiconTopic);

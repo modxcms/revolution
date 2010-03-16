@@ -8,9 +8,8 @@
  * @package modx
  * @subpackage processors.workspace.namespace
  */
-$modx->lexicon->load('workspace','lexicon');
-
 if (!$modx->hasPermission('namespaces')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('workspace','lexicon');
 
 /* validate name */
 if (empty($scriptProperties['name'])) {
@@ -27,4 +26,4 @@ if ($namespace->save() === false) {
 /* log manager action */
 $modx->logManagerAction('namespace_create','modNamespace',$namespace->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$namespace);

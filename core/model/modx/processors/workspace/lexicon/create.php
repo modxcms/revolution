@@ -11,9 +11,8 @@
  * @package modx
  * @subpackage processors.workspace.lexicon.focus
  */
-$modx->lexicon->load('lexicon');
-
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('lexicon');
 
 /* verify namespace */
 if (empty($scriptProperties['namespace'])) return $modx->error->failure($modx->lexicon('namespace_err_ns'));
@@ -46,4 +45,4 @@ $entry->clearCache();
 /* log manager action */
 $modx->logManagerAction('lexicon_entry_create','modLexiconEntry',$entry->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$entry);

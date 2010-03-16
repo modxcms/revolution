@@ -29,4 +29,4 @@ if ($topic->save() === false) {
 /* log manager action */
 $modx->logManagerAction('lexicon_topic_create','modLexiconTopic',$topic->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$topic);

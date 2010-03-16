@@ -10,35 +10,40 @@ MODx.panel.Lexicon = function(config) {
     config = config || {};
     
     Ext.applyIf(config,{
-        id: 'modx-panel-system-settings'
+        id: 'modx-panel-lexicon'
+        ,itemId: 'panel-lexicon'
         ,bodyStyle: ''
         ,defaults: { collapsible: false }
         ,items: [{
             html: '<h2>'+_('lexicon_management')+'</h2>'
             ,border: false
             ,id: 'modx-lexicon-header'
+            ,itemId: 'lexicon-header'
             ,cls: 'modx-page-header'
+            
         },MODx.getPageStructure([{
             title: _('lexicon_management')
             ,layout: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('lexicon_management_desc')+'</p>'
                 ,border: false
             },{
                 xtype: 'modx-grid-lexicon'
+                ,itemId: 'grid-lexicon'
                 ,title: ''
                 ,preventRender: true
             }]
         },{
             title: _('lexicon_topics')
             ,layout: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('lexicon_topics_desc')+'</p>'
                 ,border: false
             },{
                 xtype: 'modx-grid-lexicon-topic'
+                ,itemId: 'grid-topic'
                 ,title: ''
                 ,preventRender: true
                 ,listeners: {
@@ -50,12 +55,13 @@ MODx.panel.Lexicon = function(config) {
         },{
             title: _('languages')
             ,layout: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('languages_desc')+'</p>'
                 ,border: false
             },{
                 xtype: 'modx-grid-language'
+                ,itemId: 'grid-language'
                 ,title: ''
                 ,preventRender: true
                 ,listeners: {

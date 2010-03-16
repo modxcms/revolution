@@ -12,9 +12,8 @@
  * @package modx
  * @subpackage processors.workspace.lexicon
  */
-$modx->lexicon->load('lexicon');
-
 if (!$modx->hasPermission('lexicons')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('lexicon');
 
 /* get entry */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('entry_err_ns'));
@@ -50,4 +49,4 @@ $r = $modx->lexicon->clearCache($entry->get('namespace').'/'.$topic->get('name')
 /* log manager action */
 $modx->logManagerAction('lexicon_entry_update','modLexiconEntry',$entry->get('id'));
 
-return $modx->error->success();
+return $modx->error->success('',$entry);

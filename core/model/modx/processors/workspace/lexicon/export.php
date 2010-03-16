@@ -53,10 +53,11 @@ $entries = $modx->getCollection('modLexiconEntry',array(
 
 /* setup output content */
 $o = "<?php
-/*
+/**
  * @topic ".$topic->get('name')."
  * @namespace ".$namespace->get('name')."
  * @language ".$scriptProperties['language']."
+ * @since ".strftime('%b %d, %Y %H:%M %p')."
  */\n";
 foreach ($entries as $entry) {
     $value = str_replace("'","\'",$entry->get('value'));

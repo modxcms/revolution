@@ -28,10 +28,14 @@ MODx.grid.Language = function(config) {
             ,handler: { 
                 xtype: 'modx-window-language-create'
                 ,listeners: {
-                    'success':{fn:function() {
+                    'success':{fn:function(o) {
+                        var r = o.a.result.object;
                         this.refresh();
-                        var cb = Ext.getCmp('modx-lexicon-filter-language');
-                        if (cb) { cb.store.reload(); }
+                        
+                        var g = Ext.getCmp('modx-grid-lexicon');
+                        if (g) {
+                            g.setFilterParams(null,null,r.name);
+                        }
                     },scope:this}
                 }
             }
@@ -52,6 +56,10 @@ Ext.extend(MODx.grid.Language,MODx.grid.Grid,{
                 'success': {fn:function(r) {
                     Ext.Ajax.timeout = df;
                     this.refresh();
+                    var g = Ext.getCmp('modx-grid-lexicon');
+                    if (g) {
+                        g.setFilterParams(null,null,r.name);
+                    }
                 },scope:this}
             }
         });
@@ -78,6 +86,7 @@ MODx.window.CreateLanguage = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
+            ,itemId: 'name'
             ,width: 250
             ,maxLength: 100
             ,allowBlank: false
@@ -99,6 +108,7 @@ MODx.window.DuplicateLanguage = function(config) {
             xtype: 'statictextfield'
             ,fieldLabel: _('duplicate')
             ,name: 'name'
+            ,itemId: 'name'
             ,width: 300
             ,maxLength: 100
             ,allowBlank: false
@@ -108,6 +118,7 @@ MODx.window.DuplicateLanguage = function(config) {
             ,fieldLabel: _('language_new_name')
             ,description: _('language_new_name_desc')
             ,name: 'new_name'
+            ,itemId: 'new_name'
             ,width: 300
             ,allowBlank: false
         },{
@@ -115,6 +126,7 @@ MODx.window.DuplicateLanguage = function(config) {
             ,boxLabel: _('language_recursive')
             ,description: _('language_recursive_desc')
             ,name: 'recursive'
+            ,itemId: 'recursive'
             ,inputValue: 1
             ,checked: true
         }]

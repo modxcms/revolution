@@ -80,4 +80,7 @@ if (is_array($_lang)) {
     }
 }
 
-return $modx->error->success();
+return $modx->error->success('',array(
+    'namespace' => $namespace->get('name'),
+    'topic' => $topic->get('id'),
+));
