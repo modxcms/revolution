@@ -322,7 +322,7 @@ General Public License for more details.
         <concat destfile="${build.image.css.dir}/modx-min.css">
             <header filtering="no" trimleading="yes"></header>
             
-            <filelist dir="${project.manager.dir}/templates/default/css" 
+            <filelist dir="${build.image.css.dir}" 
                       files="xtheme-modx-min.css,index-min.css" />
         </concat>
     </target>
