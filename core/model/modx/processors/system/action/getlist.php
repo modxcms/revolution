@@ -39,15 +39,6 @@ foreach ($actions as $action) {
     $controller = $actionArray['controller'];
     $controllerLength = strlen($controller);
 
-	if ($controllerLength > 1 && substr($controller,($controllerLength-4),$controllerLength) != '.php') {
-		if (!file_exists($modx->getOption('manager_path').'controllers/'.$aa['controller'].'.php')) {
-			$actionArray['controller'] .= '/index.php';
-			$actionArray['controller'] = strtr($actionArray['controller'],'//','/');
-		} else {
-			$actionArray['controller'] .= '.php';
-		}
-	}
-
     $actionArray['controller'] = $actionArray['namespace'].' - '.$actionArray['controller'];
 
 	$list[] = $actionArray;
