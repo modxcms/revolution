@@ -40,26 +40,27 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {
         var r = s.getAt(ri).data;
         var f;
+        var oz = v;
         var xtype = this.config.dynProperty;
         if (!r[xtype] || r[xtype] == 'combo-boolean') {
             f = MODx.grid.Grid.prototype.rendYesNo;
-            return f(v == 1 ? true : false,md);
+            oz = f(v == 1 ? true : false,md);
         } else if (r[xtype] === 'datefield') {
             f = Ext.util.Format.dateRenderer('Y-m-d');
-            return f(v);
+            oz = f(v);
         } else if (r[xtype].substr(0,5) == 'combo' || r[xtype] == 'list' || r[xtype].substr(0,9) == 'modx-combo') {
             var cm = g.getColumnModel();
             var ed = cm.getCellEditor(ci,ri);
             if (!ed) {
                 r.xtype = r.xtype || 'combo-boolean';
-                var o = this.createCombo(r);
-                ed = new Ext.grid.GridEditor(o);
+                var cb = this.createCombo(r);
+                ed = new Ext.grid.GridEditor(cb);
                 cm.setEditor(ci,ed);
             }
             f = MODx.combo.Renderer(ed.field);
-            return f(v);
+            oz = f(v);
         }
-        return v;
+        return Ext.util.Format.htmlEncode(oz);
     }
     
     ,createCombo: function(p) {
