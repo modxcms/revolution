@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1669] Redid File Uploader in Directory tree to be more cross-browser compatible
 - Cleaned up and enhanced login CSS
 - Standardizing and adding class constants to modRest* classes
 - Updated copyright data in lexicon entries
