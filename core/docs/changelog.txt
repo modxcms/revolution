@@ -4,8 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Cleaned up and enhanced login CSS
 - Standardizing and adding class constants to modRest* classes
-- Tweaked CSS in login panel
 - Updated copyright data in lexicon entries
 - Fixes to build.xml, css compression command
 - Updated copyright dates
