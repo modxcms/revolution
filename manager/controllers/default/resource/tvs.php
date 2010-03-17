@@ -46,6 +46,7 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
         } else {
             $tvs = $template->getMany('TemplateVars');
         }
+        $modx->smarty->assign('tvcount',count($tvs));
         foreach ($tvs as $tv) {
             if ($tv->type == 'richtext') {
                 if (is_array($replace_richtexteditor))
