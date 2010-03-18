@@ -187,6 +187,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                     ,prependUrl: this.config.prependUrl || null
                 }
                 ,reset_on_hide: true
+                ,width: 550
                 ,cls: 'ext-ux-uploaddialog-dialog modx-upload-window'
             });
             this.uploader.on('show',this.beforeUpload,this);
