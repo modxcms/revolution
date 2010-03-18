@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bugs with modMail class and default attributes that prevented attributes from persisting after a reset()
 - Removing deprecated RTE handler code
 - [#MODX-1762] Increased file uploader window size for translations
 - Dont render unnecessary tabs in Resource TV panel if no TVs assigned to Template for that Resource

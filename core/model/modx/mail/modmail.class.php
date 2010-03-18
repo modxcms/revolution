@@ -108,25 +108,37 @@ abstract class modMail {
             $this->modx->getService('lexicon','modLexicon');
         }
         $this->modx->lexicon->load('mail');
-        if (is_array($attributes)) {
-            $this->attributes= $attributes;
-        }
+        $this->defaultAttributes = is_array($attributes) ? $attributes : array();
+        $this->attributes= $this->getDefaultAttributes($attributes);
+    }
+
+    /**
+     * Gets the default attributes for modMail based on system settings
+     *
+     * @param array An optional array of default attributes to override with
+     * @return array An array of default attributes
+     */
+    public function getDefaultAttributes(array $attributes = array()) {
+        $default = array();
         if ($this->modx->getOption('mail_use_smtp',null,false)) {
-            $this->attributes[modMail::MAIL_ENGINE] = 'smtp';
-            $this->attributes[modMail::MAIL_SMTP_AUTH] = $this->modx->getOption('mail_smtp_auth',null,false);
+            $default[modMail::MAIL_ENGINE] = 'smtp';
+            $default[modMail::MAIL_SMTP_AUTH] = $this->modx->getOption('mail_smtp_auth',null,false);
             $helo = $this->modx->getOption('mail_smtp_helo',null,'');
-            if (!empty($helo)) { $this->attributes[modMail::MAIL_SMTP_HELO] = $helo; }
-            $this->attributes[modMail::MAIL_SMTP_HOSTS] = $this->modx->getOption('mail_smtp_hosts',null,'localhost');
-            $this->attributes[modMail::MAIL_SMTP_KEEPALIVE] = $this->modx->getOption('mail_smtp_keepalive',null,false);
-            $this->attributes[modMail::MAIL_SMTP_PASS] = $this->modx->getOption('mail_smtp_pass',null,'');
-            $this->attributes[modMail::MAIL_SMTP_PORT] = $this->modx->getOption('mail_smtp_port',null,25);
-            $this->attributes[modMail::MAIL_SMTP_PREFIX] = $this->modx->getOption('mail_smtp_prefix',null,'');
-            $this->attributes[modMail::MAIL_SMTP_SINGLE_TO] = $this->modx->getOption('mail_smtp_single_to',null,false);
-            $this->attributes[modMail::MAIL_SMTP_TIMEOUT] = $this->modx->getOption('mail_smtp_timeout',null,10);
-            $this->attributes[modMail::MAIL_SMTP_USER] = $this->modx->getOption('mail_smtp_user',null,'');
+            if (!empty($helo)) { $default[modMail::MAIL_SMTP_HELO] = $helo; }
+            $default[modMail::MAIL_SMTP_HOSTS] = $this->modx->getOption('mail_smtp_hosts',null,'localhost');
+            $default[modMail::MAIL_SMTP_KEEPALIVE] = $this->modx->getOption('mail_smtp_keepalive',null,false);
+            $default[modMail::MAIL_SMTP_PASS] = $this->modx->getOption('mail_smtp_pass',null,'');
+            $default[modMail::MAIL_SMTP_PORT] = $this->modx->getOption('mail_smtp_port',null,25);
+            $default[modMail::MAIL_SMTP_PREFIX] = $this->modx->getOption('mail_smtp_prefix',null,'');
+            $default[modMail::MAIL_SMTP_SINGLE_TO] = $this->modx->getOption('mail_smtp_single_to',null,false);
+            $default[modMail::MAIL_SMTP_TIMEOUT] = $this->modx->getOption('mail_smtp_timeout',null,10);
+            $default[modMail::MAIL_SMTP_USER] = $this->modx->getOption('mail_smtp_user',null,'');
         }
-        $this->attributes[modMail::MAIL_CHARSET] = $this->modx->getOption('mail_charset',null,'UTF-8');
-        $this->attributes[modMail::MAIL_ENCODING] = $this->modx->getOption('mail_encoding',null,'8bit');
+        $default[modMail::MAIL_CHARSET] = $this->modx->getOption('mail_charset',null,'UTF-8');
+        $default[modMail::MAIL_ENCODING] = $this->modx->getOption('mail_encoding',null,'8bit');
+
+        /* first start with this method default, then constructor passed-in default, then method passed-in attributes */
+        return array_merge($default,$this->defaultAttributes,$attributes);
     }
 
     /**
@@ -227,14 +239,14 @@ abstract class modMail {
      * @access public
      * @param array $attributes An optional array of attributes to apply after reset.
      */
-    public function reset($attributes= null) {
+    public function reset(array $attributes = array()) {
         $this->addresses= array(
             'to' => array(),
             'cc' => array(),
             'bcc' => array(),
             'reply-to' => array(),
         );
-        if (!is_array($attributes)) $attributes= array();
+        $attributes = $this->getDefaultAttributes($attributes);
         foreach ($this->attributes as $attrKey => $attrVal) {
             if (array_key_exists($attrKey, $attributes)) {
                 $this->set($attrKey, $attributes[$attrKey]);
