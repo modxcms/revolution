@@ -12,7 +12,6 @@ if ($rs == '') $rs == array();
 
 $rtes = array();
 $rtes[] = array('value' => $modx->lexicon('none'));
-$rtes[] = array('value' => 'MODxEditor');
 if (is_array($rs)) {
     foreach ($rs as $r) {
 	   $rtes[] = array('value' => $r);
