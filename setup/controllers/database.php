@@ -83,6 +83,7 @@ if (!empty($_POST['proceed'])) {
             case '@traditional':
                 $webUrl= substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'setup/'));
                 $settings = array();
+
                 if ($mode == modInstall::MODE_NEW) {
                     $settings['core_path'] = MODX_CORE_PATH;
                     $settings['web_path'] = MODX_INSTALL_PATH;

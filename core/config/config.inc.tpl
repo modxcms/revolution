@@ -41,7 +41,7 @@ if (!defined('MODX_BASE_PATH')) {
     define('MODX_BASE_PATH', $modx_base_path);
     define('MODX_BASE_URL', $modx_base_url);
 }
-if(PHP_SAPI == "cli" || PHP_SAPI == "embed") {
+if(defined('PHP_SAPI') && (PHP_SAPI == "cli" || PHP_SAPI == "embed")) {
 	$isSecureRequest = false;
 } else {
 	$isSecureRequest = ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['SERVER_PORT'] == $https_port);
@@ -51,8 +51,8 @@ if (!defined('MODX_URL_SCHEME')) {
     define('MODX_URL_SCHEME', $url_scheme);
 }
 if (!defined('MODX_HTTP_HOST')) {
-	if(PHP_SAPI == "cli" || PHP_SAPI == "embed") {
-		$http_host=null;
+	if(defined('PHP_SAPI') && (PHP_SAPI == "cli" || PHP_SAPI == "embed")) {
+		$http_host='{http_host}';
 		define('MODX_HTTP_HOST', $http_host);
 	} else {
 		$http_host= $_SERVER['HTTP_HOST'];

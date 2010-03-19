@@ -129,6 +129,16 @@ class modInstall {
         if (!is_array($config)) {
             $config = array ();
         }
+
+        /* get http host */
+        $https_port = isset ($_POST['httpsport']) ? $_POST['httpsport'] : '443';
+        $isSecureRequest = ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['SERVER_PORT'] == $https_port);
+        $http_host= $_SERVER['HTTP_HOST'];
+        if ($_SERVER['SERVER_PORT'] != 80) {
+            $http_host= str_replace(':' . $_SERVER['SERVER_PORT'], '', $http_host); /* remove port from HTTP_HOST */
+        }
+        $http_host .= ($_SERVER['SERVER_PORT'] == 80 || $isSecureRequest) ? '' : ':' . $_SERVER['SERVER_PORT'];
+
         switch ($mode) {
             case modInstall::MODE_UPGRADE_EVO :
                 $included = @ include MODX_INSTALL_PATH . 'manager/includes/config.inc.php';
@@ -162,6 +172,7 @@ class modInstall {
             'database_charset' => $database_connection_charset,
             'table_prefix' => $table_prefix,
             'https_port' => isset ($https_port) ? $https_port : '443',
+            'http_host' => defined('MODX_HTTP_HOST') ? MODX_HTTP_HOST : $http_host,
             'site_sessionname' => isset ($site_sessionname) ? $site_sessionname : 'SN' . uniqid(''),
             'cache_disabled' => isset ($cache_disabled) && $cache_disabled ? 'true' : 'false',
             'inplace' => isset ($_POST['inplace']) ? 1 : 0,
