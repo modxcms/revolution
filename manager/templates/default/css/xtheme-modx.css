@@ -2017,7 +2017,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-portal .x-panel-body {
     text-transform: none;
     font-weight: normal;
-    padding: 5px;
+    padding: 0px;
     margin-bottom: 5px;
 }
 .x-portal-space {
