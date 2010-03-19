@@ -60,8 +60,6 @@ if (!empty($scriptProperties['new_text']) && $scriptProperties['new_text'] != $m
     }
 }
 
-
-
 /* log manager action */
 $modx->logManagerAction('menu_update','modMenu',$menu->get('text'));
 

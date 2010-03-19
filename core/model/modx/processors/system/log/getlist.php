@@ -62,7 +62,8 @@ foreach ($logs as $log) {
         $obj = $modx->getObject($logArray['classKey'],$logArray['item']);
         if ($obj) {
             $nameField = getNameField($logArray['classKey']);
-            $logArray['name'] = $obj->get($nameField).' ('.$obj->get('id').')';
+            $pk = $obj->get('id');
+            $logArray['name'] = $obj->get($nameField).(!empty($pk) ? ' ('.$pk.')' : '');
         } else {
             $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
         }
@@ -85,15 +86,12 @@ function getNameField($classKey) {
         case 'modDocument':
             $field = 'pagetitle';
             break;
-        case 'modTemplate':
-            $field = 'templatename';
-            break;
-        case 'modCategory':
-            $field = 'category';
-            break;
-        case 'modUser':
-            $field = 'username';
-            break;
+        case 'modAction': $field = 'controller'; break;
+        case 'modCategory': $field = 'category'; break;
+        case 'modContext': $field = 'key'; break;
+        case 'modTemplate': $field = 'templatename'; break;
+        case 'modUser': $field = 'username'; break;
+        case 'modMenu': $field = 'text'; break;
         default: break;
     }
     return $field;

@@ -22,6 +22,6 @@ if ($namespace->remove() === false) {
 }
 
 /* log manager action */
-$modx->logManagerAction('namespace_remove','modNamespace',$namespace->get('id'));
+$modx->logManagerAction('namespace_remove','modNamespace',$namespace->get('name'));
 
 return $modx->error->success();
