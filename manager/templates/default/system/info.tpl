@@ -59,7 +59,10 @@
     </div>
     
     <!-- database -->
-    <div class="x-hide-display" id="modx-tab-database">
+    <div class="padding x-hide-display" id="modx-tab-database">
+	    <h2>{$_lang.db_header}</h2>
+		<p>{$_lang.db_info}</p>
+		<br />
         <div id="modx-grid-databasetables-div" style="overflow:hidden; width:100%;"></div>       
     </div>
     
