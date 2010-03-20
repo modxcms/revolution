@@ -42,8 +42,11 @@ $where = array(
     'language' => $scriptProperties['language'],
 );
 /* if filtering by name */
-if (!empty($scriptProperties['name'])) {
-	$where['name:LIKE'] = '%'.$scriptProperties['name'].'%';
+if (!empty($scriptProperties['search'])) {
+    $where[] = array(
+        'name:LIKE' => '%'.$scriptProperties['search'].'%',
+        'OR:value:LIKE' => '%'.$scriptProperties['search'].'%',
+    );
 }
 
 /* setup query */

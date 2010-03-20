@@ -136,11 +136,11 @@ MODx.grid.Lexicon = function(config) {
 		,{
 		    xtype: 'textfield'
 		    ,name: 'name'
-		    ,id: 'modx-lexicon-filter-name'
-            ,itemId: 'name'
+		    ,id: 'modx-lexicon-filter-search'
+            ,itemId: 'search'
 		    ,emptyText: _('search')+'...'
             ,listeners: {
-                'change': {fn:this.filter.createDelegate(this,['name'],true),scope:this}
+                'change': {fn:this.filter.createDelegate(this,['search'],true),scope:this}
                 ,'render': {fn:function(tf) {
                     tf.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
                         tf.fireEvent('change'); 
@@ -241,7 +241,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     	tcb.setValue('default');
         
     	tb.getComponent('language').setValue('en');
-        tb.getComponent('name').setValue('');
+        tb.getComponent('search').setValue('');
     	this.refresh();
     }
     ,changeNamespace: function(cb,nv,ov) {
