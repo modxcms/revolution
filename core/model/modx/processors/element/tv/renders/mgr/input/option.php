@@ -6,11 +6,12 @@
 $this->xpdo->lexicon->load('tv_widget');
 
 $value = $this->get('value');
+$default = $this->get('default_text');
 
 // handles radio buttons
 $index_list = $this->parseInputOptions($this->processBindings($this->get('elements'),$this->get('name')));
 $opts = array();
-$default = '';
+$defaultIndex = '';
 $i = 0;
 while (list($item, $itemvalue) = each ($index_list)) {
     $checked = false;
@@ -19,8 +20,10 @@ while (list($item, $itemvalue) = each ($index_list)) {
 
     if ($itemvalue == $value) {
         $checked = true;
-        $default = 'tv'.$this->get('id').'-'.$i;
-        $this->set('default_text',$default);
+    }
+    if ($itemvalue == $default) {
+        $defaultIndex = 'tv'.$this->get('id').'-'.$i;
+        $this->set('default_text',$defaultIndex);
     }
 
     $opts[] = array(
@@ -31,5 +34,5 @@ while (list($item, $itemvalue) = each ($index_list)) {
     $i++;
 }
 $this->xpdo->smarty->assign('opts',$opts);
-$this->xpdo->smarty->assign('cbdefaults',$default);
+$this->xpdo->smarty->assign('cbdefaults',$defaultIndex);
 return $this->xpdo->smarty->fetch('element/tv/renders/input/radio.tpl');
