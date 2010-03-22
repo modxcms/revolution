@@ -941,6 +941,15 @@ $settings['websignupemail_message']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['welcome_screen']= $xpdo->newObject('modSystemSetting');
+$settings['welcome_screen']->fromArray(array (
+  'key' => 'welcome_screen',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['which_editor']= $xpdo->newObject('modSystemSetting');
 $settings['which_editor']->fromArray(array (
   'key' => 'which_editor',

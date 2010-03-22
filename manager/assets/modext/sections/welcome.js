@@ -22,3 +22,21 @@ MODx.page.Welcome = function(config) {
 };
 Ext.extend(MODx.page.Welcome,MODx.Component);
 Ext.reg('modx-page-welcome',MODx.page.Welcome);
+
+MODx.loadWelcomePanel = function(url) {
+    if (!url) return;
+    MODx.helpWindow = new Ext.Window({
+        title: _('welcome')
+        ,width: 850
+        ,height: 500
+        ,modal: true
+        ,layout: 'fit'
+        ,html: '<iframe onload="parent.MODx.helpWindow.getEl().unmask();" src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
+        ,listeners: {
+            show: function(o) {
+                o.getEl().mask(_('help_loading'));
+            }
+        }
+    });
+    MODx.helpWindow.show(Ext.getBody());
+};

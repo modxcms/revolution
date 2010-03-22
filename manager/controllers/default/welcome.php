@@ -102,5 +102,26 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
-
+if ($modx->getOption('welcome_screen',null,false)) {
+    $url = 'http://svn.modxcms.com/docs/display/revolution/Welcome+to+Revolution+2.0.0-rc1';
+    $modx->regClientStartupHTMLBlock('<script type="text/javascript">
+// <![CDATA[
+Ext.onReady(function() { MODx.loadWelcomePanel("'.$url.'"); });
+// ]]>
+</script>');
+    $setting = $modx->getObject('modSystemSetting','welcome_screen');
+    if ($setting) {
+        $setting->set('value',false);
+        $setting->save();
+    }
+    $setting = $modx->getObject('modUserSetting',array(
+        'key' => 'welcome_screen',
+        'user' => $modx->user->get('id'),
+    ));
+    if ($setting) {
+        $setting->set('value',false);
+        $setting->save();
+    }
+    $modx->reloadConfig();
+}
 return $modx->smarty->fetch('welcome.tpl');
