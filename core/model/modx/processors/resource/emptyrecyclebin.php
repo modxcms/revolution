@@ -10,12 +10,21 @@
 if (!$modx->hasPermission('purge_deleted')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('resource');
 
-$modx->invokeEvent('OnBeforeEmptyTrash');
-
 /* get resources */
 $resources = $modx->getCollection('modResource',array('deleted' => true));
 $count = count($resources);
 
+$ids = array();
+foreach ($resources as $resource) {
+    $ids[] = $resource->get('id');
+}
+
+$modx->invokeEvent('OnBeforeEmptyTrash',array(
+    'ids' => $ids,
+));
+
+reset($resources);
+$ids = array();
 foreach ($resources as $resource) {
     if (!$resource->checkPolicy('delete')) continue;
 
@@ -32,11 +41,14 @@ foreach ($resources as $resource) {
 
     if ($resource->remove() == false) {
         return $modx->error->failure($modx->lexicon('resource_err_delete'));
+    } else {
+        $ids[] = $resource->get('id');
     }
 }
 
 $modx->invokeEvent('OnEmptyTrash',array(
     'num_deleted' => $count,
+    'ids' => $ids,
 ));
 
 /* empty cache */
