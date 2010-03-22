@@ -53,6 +53,9 @@ class modResponse {
             $this->modx->resource->process();
 
             $this->modx->resource->_output= $this->modx->resource->_content;
+            $this->modx->resource->_jscripts= $this->modx->jscripts;
+            $this->modx->resource->_sjscripts= $this->modx->sjscripts;
+            $this->modx->resource->_loadedjscripts= $this->modx->loadedjscripts;
 
             /* collect any uncached element tags in the content and process them */
             $this->modx->getParser();
