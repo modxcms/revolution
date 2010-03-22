@@ -41,6 +41,9 @@ class modResource extends modAccessibleSimpleObject {
      * @var boolean
      */
     protected $_refreshCache= true;
+    public $_jscripts = array();
+    public $_sjscripts = array();
+    public $_loadedjscripts = array();
 
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);

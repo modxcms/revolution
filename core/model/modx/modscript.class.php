@@ -85,7 +85,7 @@ class modScript extends modElement {
     public function getScriptName() {
         if ($this->_scriptName === null) {
             $className= $this->_class;
-            $this->_scriptName= $this->xpdo->context->get('key') . '_elements_' . strtolower($className) . '_' . $this->get('id');
+            $this->_scriptName= 'elements_' . strtolower($className) . '_' . $this->get('id');
         }
         return $this->_scriptName;
     }
@@ -96,12 +96,18 @@ class modScript extends modElement {
      * @return mixed The result of the script.
      */
     public function loadScript() {
-        $result = false;
-        if (!$script= $this->xpdo->cacheManager->get($this->getScriptCacheKey())) {
-            $script= $this->xpdo->cacheManager->generateScript($this);
+        $includeFilename = $this->xpdo->getCachePath() . $this->getScriptCacheKey() . '.include.cache.php';
+        $result = file_exists($includeFilename);
+        if (!$result) {
+            if (!$script= $this->xpdo->cacheManager->get($this->getScriptCacheKey())) {
+                $script= $this->xpdo->cacheManager->generateScript($this);
+            }
+            if (!empty($script)) {
+                $result = $this->xpdo->cacheManager->writeFile($includeFilename, "<?php\n" . $script);
+            }
         }
-        if (!empty($script)) {
-            $result = eval($script);
+        if ($result) {
+            $result = include($includeFilename);
         }
         return ($result !== false);
     }

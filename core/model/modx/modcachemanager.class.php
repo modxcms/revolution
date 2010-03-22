@@ -275,17 +275,15 @@ class modCacheManager extends xPDOCacheManager {
                 if (!empty($this->modx->elementCache)) {
                     $results['elementCache']= $this->modx->elementCache;
                 }
-                /* this breaks regClientHTMLBlock when the js is similar but not identical. leave off for now.
-                if (!empty($this->modx->sjscripts)) {
-                    $results['sjscripts']= $this->modx->sjscripts;
+                if (!empty($obj->_sjscripts)) {
+                    $results['resource']['sjscripts']= $obj->_sjscripts;
                 }
-                if (!empty($this->modx->jscripts)) {
-                    $results['jscripts']= $this->modx->jscripts;
+                if (!empty($obj->_jscripts)) {
+                    $results['resource']['jscripts']= $obj->_jscripts;
                 }
-                if (!empty($this->modx->loadedjscripts)) {
-                    $results['loadedjscripts']= $this->modx->loadedjscripts;
+                if (!empty($obj->_loadedjscripts)) {
+                    $results['resource']['loadedjscripts']= $obj->_loadedjscripts;
                 }
-                */
             }
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_resource_key', $options, 'default');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_resource_handler', $options);
@@ -376,9 +374,8 @@ class modCacheManager extends xPDOCacheManager {
      * @param string $objContent Optional script content to override the
      * persistent instance.
      * @param array $options An array of additional options for the operation.
-     * @return boolean|string true if the file is successfully written, or the
-     * actual generated content of the function if $returnFunction is true;
-     * false otherwise.
+     * @return boolean|string The actual generated source content representing the modScript or
+     * false if the source content could not be generated.
      */
     public function generateScript(modScript &$objElement, $objContent= null, array $options= array()) {
         $results= false;

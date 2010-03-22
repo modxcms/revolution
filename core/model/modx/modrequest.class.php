@@ -169,9 +169,9 @@ class modRequest {
                     $resource->addMany($rGroups);
                 }
                 if (isset($cachedResource['elementCache'])) $this->modx->elementCache = $cachedResource['elementCache'];
-                if (isset($cachedResource['sjscripts'])) $this->modx->sjscripts = $cachedResource['sjscripts'];
-                if (isset($cachedResource['jscripts'])) $this->modx->jscripts = $cachedResource['jscripts'];
-                if (isset($cachedResource['loadedjscripts'])) $this->modx->loadedjscripts = $cachedResource['loadedjscripts'];
+                if (isset($resource->_jscripts)) $this->modx->jscripts = array_merge($this->modx->jscripts, $resource->_jscripts);
+                if (isset($resource->_sjscripts)) $this->modx->sjscripts = array_merge($this->modx->sjscripts, $resource->_sjscripts);
+                if (isset($resource->_loadedjscripts)) $this->modx->loadedjscripts = array_merge($this->modx->loadedjscripts, $resource->_loadedjscripts);
                 $fromCache = true;
             }
         }

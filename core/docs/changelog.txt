@@ -4,6 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed regClient*() functions to work again on cacheable scripts
+- Move element source and include cache files outside of context cache directories since they should be cleared only when elements are updated
+- Remove eval() from modScript and re-enable remote debugging of modScript instances by caching function as include in addition to source cache
 - [#MODX-1759] Ensure manager log fires on top menu deletion
 - [#MODX-1772] Ensure array of IDs is passed to OnBeforeEmptyTrash and OnEmptyTrash plugin events
 - Added a welcome screen to show on first login to manager
