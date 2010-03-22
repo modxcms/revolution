@@ -20,7 +20,7 @@
     <!-- Set some common build properties -->
     <property name="build.dir" value="${basedir}" />
     <property name="build.src.url"
-              value="http://svn.modxcms.com/svn/tattoo/tattoo/branches/2.0"
+              value="http://svn.modxcms.com/svn/tattoo/tattoo/branches/revolution"
     />
     <property name="build.image.basedir" value="${basedir}/image" />
     <property name="build.image.dir" value="${basedir}/image/modx-${modx.core.version}-${modx.core.release}" />
@@ -361,6 +361,9 @@ General Public License for more details.
     <!-- copy prepared css -->
     <target name="copy-prepared-css" description="copy the minified and concatenated js files to the image">
         <copy todir="${build.image.dir}/manager/templates/default/css">
+            <fileset dir="${build.image.css.dir}" />
+        </copy>
+        <copy todir="${project.manager.dir}/templates/default/css">
             <fileset dir="${build.image.css.dir}" />
         </copy>
     </target>
