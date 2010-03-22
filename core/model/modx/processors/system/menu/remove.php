@@ -21,6 +21,6 @@ if ($menu->remove() == false) {
 }
 
 /* log manager action */
-$modx->logManagerAction('menu_delete','modMenu',$menu->get('id'));
+$modx->logManagerAction('menu_delete','modMenu',$menu->get('text'));
 
 return $modx->error->success('',$menu);
