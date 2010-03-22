@@ -344,6 +344,9 @@ General Public License for more details.
         <copy todir="${build.image.dir}/manager/assets/modext">
             <fileset dir="${build.image.modext.dir}" />
         </copy>
+        <copy todir="${project.manager.dir}/assets/modext">
+            <fileset dir="${build.image.modext.dir}" />
+        </copy>
     </target>
 
     <!-- Copy the minified and concatenated MODExt files to the working copy -->
