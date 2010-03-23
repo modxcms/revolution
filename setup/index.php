@@ -38,10 +38,11 @@ if ($php_ver_comp < 0) {
     die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Wrong PHP version! You\'re using PHP version '.MODX_SETUP_PHP_VERSION.', and MODx requires version 5.1.1 or higher.</p></body></html>');
 }
 
-$installBaseUrl= (!isset ($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) != 'on') ? 'http://' : 'https://';
+$https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
+$installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
 $installBaseUrl .= $_SERVER['HTTP_HOST'];
 if ($_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
-$installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || isset ($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == 'on') ? '' : ':' . $_SERVER['SERVER_PORT'];
+$installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || ($https !== false || strtolower($https) == 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
 $installBaseUrl .= $_SERVER['PHP_SELF'];
 define('MODX_SETUP_URL', $installBaseUrl);
 

@@ -2,7 +2,11 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODx Revolution 2.0.0-rc-1 ($LastChangedRevision$, $LastChangedDate$)
+MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
+====================================
+- [#MODX-1778] Fixed error that shows up if E_NOTICE set to true in setup/ index due to servers not posting a HTTPS server global
+
+MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-22 16:41:04 -0500 (Mon, 22 Mar 2010))
 ====================================
 - Prepared for rc1 release
 - Fixed CSS compression copying in build.xml 
