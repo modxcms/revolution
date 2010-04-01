@@ -11,7 +11,7 @@ MODx.panel.SymLink = function(config) {
         title: _('createedit_symlink')
         ,layout: 'form'
         ,labelWidth: 200
-        ,bodyStyle: 'padding: 1.5em;'
+        ,bodyStyle: 'padding: 15px;'
         ,autoHeight: true
         ,defaults: { border: false ,msgTarget: 'side' ,width: 400 }
         ,items: [{
@@ -279,7 +279,7 @@ MODx.panel.SymLink = function(config) {
         ,title: _('page_settings')
         ,layout: 'form'
         ,labelWidth: 200
-        ,bodyStyle: 'padding: 1.5em;'
+        ,bodyStyle: 'padding: 15px;'
         ,autoHeight: true
         ,defaults: {
             border: false
@@ -298,7 +298,7 @@ MODx.panel.SymLink = function(config) {
         it.push({
             id: 'modx-resource-access-permissions'
             ,title: _('access_permissions')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
             ,layout: 'form'
             ,items: [{

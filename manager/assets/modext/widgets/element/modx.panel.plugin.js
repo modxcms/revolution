@@ -22,7 +22,7 @@ MODx.panel.Plugin = function(config) {
             ,border: false
         },MODx.getPageStructure([{
             title: _('plugin_title')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,layout: 'form'
             ,id: 'modx-plugin-form'
             ,labelWidth: 150
@@ -104,7 +104,7 @@ MODx.panel.Plugin = function(config) {
             }]
         },{
             title: _('system_events')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,id: 'modx-plugin-sysevents'
             ,items: [{
                 html: '<p>'+_('plugin_event_msg')+'</p>'

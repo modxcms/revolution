@@ -24,7 +24,7 @@ MODx.panel.Resource = function(config) {
         ,id: 'modx-resource-settings'
         ,layout: 'form'
         ,labelWidth: 200
-        ,bodyStyle: 'padding: 1.5em;'
+        ,bodyStyle: 'padding: 15px;'
         ,autoHeight: true
         ,defaults: {
             border: false
@@ -320,7 +320,7 @@ MODx.panel.Resource = function(config) {
         ,forceLayout: true
         ,deferredRender: false
         ,labelWidth: 200
-        ,bodyStyle: 'padding: 1.5em;'
+        ,bodyStyle: 'padding: 15px;'
         ,autoHeight: true
         ,defaults: {
             border: false
@@ -340,7 +340,7 @@ MODx.panel.Resource = function(config) {
     if (config.access_permissions) {
         it.push({
             id: 'modx-resource-access-permissions'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
             ,title: _('access_permissions')
             ,layout: 'form'
@@ -375,7 +375,7 @@ MODx.panel.Resource = function(config) {
     }));
     
     if (MODx.config.manager_use_tabs) {
-        ct.style = 'margin-top: 1.0em;';
+        ct.style = 'margin-top: 10px;';
         its.push(ct);
     }
     Ext.applyIf(config,{

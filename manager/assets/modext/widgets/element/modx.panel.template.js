@@ -22,7 +22,7 @@ MODx.panel.Template = function(config) {
             ,border: false
         },MODx.getPageStructure([{
             title: _('template_title')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,msgTarget: 'side' }
             ,layout: 'form'
             ,id: 'modx-template-form'

@@ -14,7 +14,7 @@ MODx.panel.ErrorLog = function(config) {
             ,border: false
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,hideLabels: true
             ,width: '100%'
             ,autoHeight: true

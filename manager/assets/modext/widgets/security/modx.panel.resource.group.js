@@ -16,7 +16,7 @@ MODx.panel.ResourceGroups = function(config) {
             ,id: 'modx-resource-groups-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,autoHeight: true }
             ,items: [{
                 html: '<p>'+_('rrg_drag')+'</p>'
@@ -25,7 +25,7 @@ MODx.panel.ResourceGroups = function(config) {
                 ,defaults: { border: false }
                 ,items: [{
                     columnWidth: .4
-                    ,style: 'padding: .4em;'
+                    ,style: 'padding: 4px;'
                     ,items: [{
                         xtype: 'modx-tree-resource-group'
                         ,id: 'modx-gr-tree-resourcegroup'
@@ -34,7 +34,7 @@ MODx.panel.ResourceGroups = function(config) {
                     }]
                 },{
                     columnWidth: .4
-                    ,style: 'padding: .4em;'
+                    ,style: 'padding: 4px;'
                     ,defaults: { autoHeight: true }
                     ,items: [{
                         xtype: 'modx-tree-resource-simple'

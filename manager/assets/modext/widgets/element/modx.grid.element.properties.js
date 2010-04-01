@@ -4,7 +4,7 @@ MODx.panel.ElementProperties = function(config) {
         id: 'modx-panel-element-properties'
         ,title: _('properties')
         ,header: false
-        ,bodyStyle: 'padding: 1.5em;'
+        ,bodyStyle: 'padding: 15px;'
         ,defaults: { collapsible: false ,autoHeight: true ,border: false }
         ,items: [{
             html: '<p>'+_('element_properties_desc')+'</p>'

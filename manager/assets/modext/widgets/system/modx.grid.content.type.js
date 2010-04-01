@@ -21,7 +21,7 @@ MODx.panel.ContentType = function(config) {
         },{
             layout: 'form'
             ,itemId: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('content_type_desc')+'</p>'
                 ,itemId: 'description'

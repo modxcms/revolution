@@ -26,7 +26,7 @@ MODx.panel.AccessPolicy = function(config) {
         },{
             xtype: 'modx-tabs'
             ,defaults: {
-                bodyStyle: 'padding: 1.5em'
+                bodyStyle: 'padding: 15px'
                 ,autoHeight: true
                 ,border: true
             }

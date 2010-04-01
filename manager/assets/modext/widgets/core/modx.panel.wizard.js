@@ -28,6 +28,7 @@ MODx.Wizard = function(config) {
         }]
         ,firstPanel: ''
         ,lastPanel: ''
+        ,showFirstPanel: true
     });
     MODx.Wizard.superclass.constructor.call(this,config);
     this.lastActiveItem = config.firstPanel;
@@ -57,7 +58,11 @@ Ext.extend(MODx.Wizard,Ext.Window,{
     
     ,onShow: function() {
         this.getBottomToolbar().getComponent('btn-next').setText(_('next'));
-        if (this.fireEvent('proceed',this.config.firstPanel)) {
+        if (this.config.showFirstPanel) {
+            if (this.fireEvent('proceed',this.config.firstPanel)) {
+                this.fireEvent('ready');
+            }
+        } else {
             this.fireEvent('ready');
         }
     }

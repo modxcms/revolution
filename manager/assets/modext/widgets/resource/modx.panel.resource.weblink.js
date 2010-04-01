@@ -11,7 +11,7 @@ MODx.panel.WebLink = function(config) {
         title: _('createedit_weblink')
         ,layout: 'form'
         ,labelWidth: 200
-        ,bodyStyle: 'padding: 1.5em;'
+        ,bodyStyle: 'padding: 15px;'
         ,autoHeight: true
         ,defaults: { border: false ,msgTarget: 'side' ,width: 400 }
         ,items: [{
@@ -282,7 +282,7 @@ MODx.panel.WebLink = function(config) {
         ,title: _('page_settings')
         ,layout: 'form'
         ,labelWidth: 200
-        ,bodyStyle: 'padding: 1.5em;'
+        ,bodyStyle: 'padding: 15px;'
         ,autoHeight: true
         ,defaults: {
             border: false
@@ -301,7 +301,7 @@ MODx.panel.WebLink = function(config) {
         it.push({
             id: 'modx-resource-access-permissions'
             ,title: _('access_permissions')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
             ,layout: 'form'
             ,items: [{

@@ -13,7 +13,7 @@ MODx.panel.ResourceTV = function(config) {
         ,title: _('template_variables')
         ,class_key: ''
         ,resource: ''
-        ,bodyStyle: 'padding: 1.5em;'
+        ,bodyStyle: 'padding: 15px;'
         ,autoHeight: true
         ,autoLoad: this.autoload(config)
         ,width: '97%'

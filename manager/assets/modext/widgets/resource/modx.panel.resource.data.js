@@ -23,7 +23,7 @@ MODx.panel.ResourceData = function(config) {
             ,layout: 'form'
             ,autoHeight: true
             ,labelWidth: 150
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,defaults: df
             ,items: [{
                 name: 'pagetitle'
@@ -117,7 +117,7 @@ MODx.panel.ResourceData = function(config) {
             ,defaults: df
             ,layout: 'form'
             ,autoHeight: true
-            ,bodyStyle: 'padding: 1.5em'
+            ,bodyStyle: 'padding: 15px'
             ,defaultType: 'statictextfield'
             ,items: [{
                 name: 'createdon_adjusted'
@@ -140,7 +140,7 @@ MODx.panel.ResourceData = function(config) {
             }]
         },{
             title: _('cache_output')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
             ,id: 'modx-rdata-tab-source'
             ,items: [{

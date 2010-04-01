@@ -16,7 +16,7 @@ MODx.panel.ActionDom = function(config) {
             ,id: 'modx-actiondom-header'
         },MODx.getPageStructure([{
             title: _('form_rules')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
             ,items: [{
                 html: '<p>'+_('form_customization_msg')+'</p>'

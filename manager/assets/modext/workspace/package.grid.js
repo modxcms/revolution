@@ -91,7 +91,10 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                     MODx.provider = p.id;
                     var x = 'modx-window-package-downloader';
                     if (!this.windows[x]) {
-                        this.windows[x] = MODx.load({ xtype: x  });
+                        this.windows[x] = MODx.load({ 
+                            xtype: x
+                            ,showFirstPanel: false
+                        });
                     }
                     this.windows[x].on('ready',function() {
                         var pd = Ext.getCmp('modx-window-package-downloader');
@@ -113,6 +116,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                         if (v) {
                             v.baseParams.provider = p.id;
                         }
+
                         pd.fireEvent('proceed','modx-pd-selpackage');
                         pd.setPosition(null,0);
                     },this,{single:true});

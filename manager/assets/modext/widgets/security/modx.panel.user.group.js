@@ -15,7 +15,7 @@ MODx.panel.UserGroup = function(config) {
         },{            
             xtype: 'modx-tabs'
             ,defaults: { 
-                bodyStyle: 'padding: 1.5em'
+                bodyStyle: 'padding: 15px;'
                 ,autoHeight: true
                 ,border: true
             }
@@ -29,7 +29,7 @@ MODx.panel.UserGroup = function(config) {
             }
             ,items: [{
                 title: _('general_information')
-                ,bodyStyle: 'padding: 1.5em;'
+                ,bodyStyle: 'padding: 15px;'
                 ,defaults: { border: false ,msgTarget: 'side' }
                 ,layout: 'form'
                 ,id: 'modx-chunk-form'

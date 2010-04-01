@@ -11,7 +11,7 @@ MODx.panel.ResourceSchedule = function(config) {
             ,id: 'modx-resource-schedule-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('site_schedule_desc')+'</p>'
                 ,border: false

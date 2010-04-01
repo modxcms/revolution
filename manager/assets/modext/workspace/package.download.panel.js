@@ -12,23 +12,26 @@ MODx.panel.PackageDownload = function(config) {
         ,layout: 'column'
         ,border: true
         ,autoHeight: true
-        ,width: Ext.isIE ? 650 : '95%'
+        ,anchor: '97%'
         ,autoScroll: true
+        ,hideMode: 'offsets'
         ,items: [{
             xtype: 'modx-tree-package-download'
             ,id: 'modx-tree-package-download'
             ,columnWidth: 0.7
-            ,width: Ext.isIE ? 300 : '60%'
+            ,anchor: '60%'
             ,height: 270
             ,autoHeight: false
             ,preventRender: true
+            ,hideMode: 'offsets'
         },{
             columnWidth: 0.3
             ,id: 'modx-package-info-col'
             ,height: 270
-            ,width: Ext.isIE ? 250 : '35%'
+            ,anchor: '35%'
             ,border: false
             ,autoScroll: true
+            ,hideMode: 'offsets'
             ,items: [{
                 id: 'modx-panel-package-info'
                 ,xtype: 'panel'
@@ -131,7 +134,7 @@ MODx.window.PackageMoreInfo = function(config) {
     this.tpl = this.createTpl();
     Ext.applyIf(config,{
         title: _('package_information')
-        ,width: 600
+        ,anchor: '95%'
         ,autoHeight: true
         ,url: MODx.config.connectors_url+'workspace/packages.php'
         ,action: 'info'
@@ -209,6 +212,7 @@ MODx.tree.PackageDownload = function(config) {
             ,scope: this
             ,tooltip: {text: _('tree_refresh')}
             ,handler: this.loadDataFromProvider
+            ,hideMode: 'offsets'
         }]
     });
     MODx.tree.PackageDownload.superclass.constructor.call(this,config);

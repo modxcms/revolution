@@ -20,7 +20,7 @@ MODx.panel.User = function(config) {
                 autoHeight: true
                 ,layout: 'form'
                 ,labelWidth: 150
-                ,bodyStyle: 'padding: 1.5em;'
+                ,bodyStyle: 'padding: 15px;'
             }
             ,items: this.getFields(config)
         }
@@ -376,7 +376,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         f.push({
             title: _('access_permissions')
             ,layout: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,autoHeight: true }
             ,hideMode: 'offsets'
             ,items: [{

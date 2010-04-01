@@ -22,7 +22,7 @@ MODx.panel.Context = function(config) {
             title: _('general_information')
             ,autoHeight: true
             ,layout: 'form'
-            ,bodyStyle: 'padding: 1.5em'
+            ,bodyStyle: 'padding: 15px'
             ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
                 xtype: 'statictextfield'

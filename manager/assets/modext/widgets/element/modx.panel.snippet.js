@@ -22,7 +22,7 @@ MODx.panel.Snippet = function(config) {
         },MODx.getPageStructure([{
             title: _('snippet_title')
             ,defaults: { border: false ,msgTarget: 'side' }
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,layout: 'form'
             ,id: 'modx-snippet-form'
             ,labelWidth: 150

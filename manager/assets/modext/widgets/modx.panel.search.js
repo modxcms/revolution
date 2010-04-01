@@ -27,13 +27,13 @@ MODx.panel.Search = function(config) {
                     ,defaults: {
                         collapsible: false
                         ,autoHeight: true
-                        ,bodyStyle: 'padding: 1.5em;'
+                        ,bodyStyle: 'padding: 15px;'
                     }
                     ,items: this.getFields()
                 },{
                     xtype: 'modx-grid-search'
                     ,preventRender: true
-                    ,bodyStyle: 'padding: 0'
+                    ,bodyStyle: 'padding: 0;'
                     ,width: '100.7%'
                 }]
             }]

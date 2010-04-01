@@ -19,7 +19,7 @@ MODx.panel.SystemSettings = function(config) {
             ,cls: 'modx-page-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 1.5em'
+            ,bodyStyle: 'padding: 15px'
             ,autoHeight: true
             ,defaults: { border: false }
             ,items: [{

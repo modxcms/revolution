@@ -16,19 +16,24 @@ MODx.window.PackageDownloader = function(config) {
         ,maximizable: true
         ,autoHeight: true
         ,autoScroll: true
-        ,width: '90%'
+        ,anchor: '90%'
+        ,hideMode: 'offsets'
         ,firstPanel: 'modx-pd-start'
         ,lastPanel: 'modx-pd-selpackage'
         ,bodyStyle: 'background-color: white;'
         ,modal: Ext.isIE ? false : true
         ,items: [{
             xtype: 'modx-panel-pd-first'
+            ,hideMode: 'offsets'
         },{
             xtype: 'modx-panel-pd-selprov'
+            ,hideMode: 'offsets'
         },{
             xtype: 'modx-panel-pd-newprov'
+            ,hideMode: 'offsets'
         },{
             xtype: 'modx-panel-pd-selpackage'
+            ,hideMode: 'offsets'
         }]
         ,keys: [{
             key: Ext.EventManager.ESC
@@ -253,8 +258,11 @@ MODx.panel.PDSelPackage = function(config) {
             ,id: 'modx-pdselpackage-header'
             ,border: false
             ,autoHeight: true
+            ,hideMode: 'offsets'
         },{
             xtype: 'modx-package-browser'
+            ,hideMode: 'offsets'
+            ,anchor: '95%'
         }]
     });
     MODx.panel.PDSelPackage.superclass.constructor.call(this,config);

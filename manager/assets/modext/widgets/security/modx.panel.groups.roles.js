@@ -16,7 +16,7 @@ MODx.panel.GroupsRoles = function(config) {
             ,id: 'modx-access-permissions-header'
         },MODx.getPageStructure([{
             title: _('user_groups')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
             ,items: [{
                 html: '<p>'+_('user_group_management_msg')+'</p>'
@@ -27,7 +27,7 @@ MODx.panel.GroupsRoles = function(config) {
             }]
         },{
             title: _('roles')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
             ,items: [{
                 html: '<p>'+_('roles_msg')+'</p>'
@@ -39,7 +39,7 @@ MODx.panel.GroupsRoles = function(config) {
             }]
         },{
             title: _('policies')
-            ,bodyStyle: 'padding: 1.5em'
+            ,bodyStyle: 'padding: 15px'
             ,autoHeight: true
             ,items: [{
                 html: '<p>'+_('policy_management_msg')+'</p>'

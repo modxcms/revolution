@@ -17,7 +17,7 @@ MODx.FormPanel = function(config) {
     Ext.applyIf(config,{
         autoHeight: true
         ,collapsible: true
-        ,bodyStyle: 'padding: 1em'
+        ,bodyStyle: 'padding: 10px'
         ,border: false
         ,header: false
         ,title: ''

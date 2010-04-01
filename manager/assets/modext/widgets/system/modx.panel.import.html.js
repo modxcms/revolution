@@ -17,7 +17,7 @@ MODx.panel.ImportHTML = function(config) {
             ,border: false
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,labelWidth: 200
             ,width: '100%'
             ,autoHeight: true

@@ -19,7 +19,7 @@ MODx.panel.Namespaces = function(config) {
             ,cls: 'modx-page-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 1.5em'
+            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('namespaces_desc')+'</p>'
                 ,border: false
@@ -47,7 +47,7 @@ MODx.grid.Namespace = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'workspace/namespace.php'
         ,fields: ['id','name','path','menu']
-        ,width: '97%'
+        ,anchor: '100%'
         ,paging: true
         ,autosave: true
         ,primaryKey: 'name'

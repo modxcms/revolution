@@ -24,9 +24,10 @@ MODx.panel.PackageBrowser = function(config) {
         ,layout: 'column'
         ,minWidth: 500
         ,minHeight: 350
-        ,width: '90%'
+        ,anchor: '97%'
         ,autoHeight: true
         ,modal: false
+        ,hideMode: 'offsets'
         ,closeAction: 'hide'
         ,border: false
         ,autoScroll: true
@@ -34,18 +35,18 @@ MODx.panel.PackageBrowser = function(config) {
             id: 'modx-package-browser-tree-panel'
             ,cls: 'browser-tree'
             ,region: 'west'
-            ,width: '25%'
+            ,width: 250
             ,items: [{
                 xtype: 'modx-package-browser-tree'
                 ,id: 'modx-package-browser-tree'
             }]
             ,autoScroll: true
             ,border: false
+            ,hideMode: 'offsets'
         },{
             id: 'modx-package-browser-grid-panel'
             ,cls: 'browser-view'
             ,region: 'center'
-            ,width: '75%'
             ,items: [{
                 id: 'modx-package-browser-tag'
                 ,border: false
@@ -56,21 +57,23 @@ MODx.panel.PackageBrowser = function(config) {
             }]
             ,hidden: true
             ,border: false
+            ,hideMode: 'offsets'
         },{
             id: 'modx-package-browser-view'
             ,cls: 'modx-pb-view-ct'
-            ,region: 'east' 
-            ,width: '75%'
+            ,region: 'center' 
+            //,width: '75%'
             ,autoScroll: true
             ,autoHeight: true
             ,hidden: true
             ,html: ''
             ,border: false
+            ,hideMode: 'offsets'
         },{
             id: 'modx-package-browser-thumbs'
             ,cls: 'modx-pb-view-ct'
-            ,region: 'east'
-            ,width: '55%'
+            ,region: 'center'
+            //,width: '55%'
             ,height: 450
             ,autoScroll: true
             ,border: false
@@ -83,18 +86,20 @@ MODx.panel.PackageBrowser = function(config) {
             },this.view]
             ,bbar: [this.view.pagingBar]
             ,hidden: true
+            ,hideMode: 'offsets'
         },{
             html: ''
             ,id: 'modx-package-browser-thumbs-detail'
             ,cls: 'modx-pb-details-ct'
-            ,region: 'east'
+            ,region: 'center'
             ,split: true
             ,autoScroll: true
-            ,width: '20%'
+            //,width: '20%'
             ,minWidth: 150
             ,maxWidth: 250
             ,height: 450
             ,hidden: true
+            ,hideMode: 'offsets'
         }]
     });
     MODx.panel.PackageBrowser.superclass.constructor.call(this,config);
@@ -127,31 +132,34 @@ MODx.tree.PackageBrowserTree = function(config) {
             ,nodeType: 'async'
             ,id: 'modx-package-browser-tree-root'
         }
+        ,hideMode: 'visibility'
         ,tbar: [{
-            icon: MODx.config.template_url+'images/restyle/icons/refresh.png'
-            ,cls: 'x-btn-icon'
-            ,scope: this
-            ,tooltip: {text: _('tree_refresh')}
-            ,handler: this.refresh
-        },{
-            xtype: 'textfield'
-            ,emptyText: _('search')
-            ,name: 'search'
-            ,id: 'modx-pbr-search-fld'
-            ,listeners: {
-                'change': {fn:this.search,scope:this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: function() { 
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true; }
-                        ,scope: cmp
-                    });
-                },scope:this}
-            }
-        }]
+                icon: MODx.config.template_url+'images/restyle/icons/refresh.png'
+                ,cls: 'x-btn-icon'
+                ,scope: this
+                ,tooltip: {text: _('tree_refresh')}
+                ,handler: this.refresh
+                ,hideMode: 'offsets'
+            },{
+                xtype: 'textfield'
+                ,emptyText: _('search')
+                ,name: 'search'
+                ,id: 'modx-pbr-search-fld'
+                ,hideMode: 'offsets'
+                ,listeners: {
+                    'change': {fn:this.search,scope:this}
+                    ,'render': {fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: function() { 
+                                this.fireEvent('change',this.getValue());
+                                this.blur();
+                                return true; }
+                            ,scope: cmp
+                        });
+                    },scope:this}
+                }
+            }]
     });
     MODx.tree.PackageBrowserTree.superclass.constructor.call(this,config);
     this.on('render',this.setupMask,this);
@@ -367,6 +375,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
         ,paging: true
         ,pageSize: 10
         ,plugins: [this.action,this.exp]
+        ,hideMode: 'offsets'
         ,columns: [this.exp,{
             header: _('name')
             ,dataIndex: 'name'
@@ -392,6 +401,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
         ,tbar: [{
             xtype: 'modx-combo-package-browser-sort'
             ,id: 'modx-combo-package-browser-sort'
+            ,hideMode: 'offsets'
             ,listeners: {
                 'select': {fn:function(cb,rec,idx) {
                     var v = cb.getValue();

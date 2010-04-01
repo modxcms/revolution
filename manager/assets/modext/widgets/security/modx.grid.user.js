@@ -11,7 +11,7 @@ MODx.panel.Users = function(config) {
             ,cls: 'modx-page-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 1.5em'
+            ,bodyStyle: 'padding: 15px;'
             ,items: [{
                 html: '<p>'+_('user_management_msg')+'</p>'
                 ,border: false

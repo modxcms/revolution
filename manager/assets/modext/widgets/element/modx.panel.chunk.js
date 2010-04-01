@@ -20,7 +20,7 @@ MODx.panel.Chunk = function(config) {
             ,id: 'modx-chunk-header'
         },MODx.getPageStructure([{
             title: _('chunk_title')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,msgTarget: 'side' }
             ,layout: 'form'
             ,id: 'modx-chunk-form'

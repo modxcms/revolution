@@ -24,7 +24,7 @@ MODx.panel.TV = function(config) {
         },MODx.getPageStructure([{
             title: _('general_information')
             ,defaults: { border: false ,msgTarget: 'side' }
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,layout: 'form'
             ,id: 'modx-tv-form'
             ,itemId: 'form-tv'
@@ -177,7 +177,7 @@ MODx.panel.TV = function(config) {
             title: _('access_permissions')
             ,id: 'modx-tv-access-form'
             ,itemId: 'form-access'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,defaults: { autoHeight: true }
             ,items: [{
                 html: '<p>'+_('tv_access_msg')+'</p>'
