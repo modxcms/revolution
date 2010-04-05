@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1836] Set default context_key in modResource objects to 'web'
+- Fixed bug with system info page and active users that would cause error in error log
 - [#MODX-1788] File tree now respects filemanager_path setting. Also cleaned up file browsing processors.
 - Upgraded ExtJS to version 3.2
 - Updated version to 2.0.0-rc-2 for svn development and issue tracking

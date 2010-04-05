@@ -431,7 +431,7 @@
         <field key="content_dispo" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
         <field key="hidemenu" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
         <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="modDocument" index="index" />
-        <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="index" />
+        <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="web" index="index" />
         <field key="content_type" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="1" />
         
         <aggregate alias="Parent" class="modResource" local="parent" foreign="id" cardinality="one" owner="foreign" />

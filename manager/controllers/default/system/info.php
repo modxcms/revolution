@@ -32,29 +32,7 @@ $modx->smarty->assign('database_version',$result);
 $modx->smarty->assign('database_charset',$modx->getOption('charset'));
 $modx->smarty->assign('database_name',str_replace('`','',$modx->getOption('dbname')));
 $modx->smarty->assign('database_server',$modx->getOption('host'));
-
-/* active users */
-$timetocheck = strftime('%m-%d-%Y %H:%M:%S',time()-(60*20));
-$c = $modx->newQuery('modManagerLog');
-$c->select('
-    `modManagerLog`.*,
-    `User`.`username` AS `username`
-');
-$c->innerJoin('modUser','User');
-$c->where(array('
-    occurred:>' => $timetocheck,
-));
-$c->groupby('modManagerLog.user');
-$c->sortby('occurred','ASC');
-$ausers = $modx->getCollection('modManagerLog',$c);
-
-foreach ($ausers as $user) {
-    $offset = strtotime($user->get('occurred')) + $serverOffset;
-    $user->set('lasthit',strftime('%b %d, %Y %I:%M %p',$offset));
-}
-$modx->smarty->assign('ausers',$ausers);
 $modx->smarty->assign('now',strftime('%b %d, %Y %I:%M %p',time()));
-
 
 /* register JS scripts */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.databasetables.js');

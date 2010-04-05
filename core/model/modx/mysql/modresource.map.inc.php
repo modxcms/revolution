@@ -45,7 +45,7 @@ $xpdo_meta_map['modResource']= array (
     'content_dispo' => 0,
     'hidemenu' => 0,
     'class_key' => 'modDocument',
-    'context_key' => '',
+    'context_key' => 'web',
     'content_type' => 1,
   ),
   'fieldMeta' => 
@@ -379,7 +379,7 @@ $xpdo_meta_map['modResource']= array (
       'precision' => '100',
       'phptype' => 'string',
       'null' => false,
-      'default' => '',
+      'default' => 'web',
       'index' => 'index',
     ),
     'content_type' => 
