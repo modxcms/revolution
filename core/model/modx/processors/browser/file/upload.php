@@ -13,11 +13,20 @@ $modx->lexicon->load('file');
 
 if (empty($scriptProperties['path'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
-$d = isset($scriptProperties['prependPath']) && $scriptProperties['prependPath'] != 'null' && $scriptProperties['prependPath'] != null
-    ? $scriptProperties['prependPath']
-    : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
-$directory = realpath($d.$scriptProperties['path']);
+/* get base paths and sanitize incoming paths */
+$modx->getService('fileHandler','modFileHandler');
+$root = $modx->fileHandler->getBasePath();
+$directory = $modx->fileHandler->sanitizePath($scriptProperties['path']);
+$directory = $modx->fileHandler->postfixSlash($directory);
+$directory = $root.$directory;
 
+/* verify target path is a directory and writable */
+if (!is_dir($directory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
+if (!is_readable($directory) || !is_writable($directory)) {
+	return $modx->error->failure($modx->lexicon('file_folder_err_perms_upload'));
+}
+
+/* iterate through files */
 $errors = array();
 foreach ($_FILES as $id => $file) {
     if ($file['error'] != 0) continue;
@@ -32,9 +41,10 @@ foreach ($_FILES as $id => $file) {
         continue;
     }
 
-    $newloc = strtr($directory.'/'.$file['name'],'\\','/');
+    $newPath = $modx->fileHandler->sanitizePath($file['name']);
+    $newPath = $directory.$newPath;
 
-    if (!@move_uploaded_file($file['tmp_name'],$newloc)) {
+    if (!@move_uploaded_file($file['tmp_name'],$newPath)) {
         $errors[$id] = $modx->lexicon('file_err_upload');
     }
 }

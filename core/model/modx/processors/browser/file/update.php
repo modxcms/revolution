@@ -12,8 +12,11 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
+/* get base paths and sanitize incoming paths */
+$modx->getService('fileHandler','modFileHandler');
+
 $file = rawurldecode($scriptProperties['file']);
-$newname = $scriptProperties['name'];
+$newName = $scriptProperties['name'];
 
 if (!file_exists($file)) return $modx->error->failure($modx->lexicon('file_err_nf'));
 
@@ -26,11 +29,11 @@ fclose($f);
 $filename = ltrim(strrchr($file,'/'),'/');
 $path = str_replace(strrchr($file,'/'),'',$file);
 
-if ($filename != $newname) {
-    if (!@rename($path.$filename,$path.$newname)) {
+if ($filename != $newName) {
+    if (!@rename($path.$filename,$path.$newName)) {
         return $modx->error->failure($modx->lexicon('file_err_rename'));
     }
-    $fullname = $path.$newname;
+    $fullname = $path.$newName;
 } else {
     $fullname = $file;
 }

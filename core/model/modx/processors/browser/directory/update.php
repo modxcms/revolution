@@ -13,20 +13,27 @@ if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->l
 $modx->lexicon->load('file');
 
 if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
-$d = isset($scriptProperties['prependPath']) && $scriptProperties['prependPath'] != 'null' && $scriptProperties['prependPath'] != null
-    ? $scriptProperties['prependPath']
-    : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
-$olddir = realpath($d.$scriptProperties['dir']);
+/* get base paths and sanitize incoming paths */
+$modx->getService('fileHandler','modFileHandler');
+$root = $modx->fileHandler->getBasePath();
+$oldPath = $modx->fileHandler->sanitizePath($scriptProperties['dir']);
+$oldPath = $modx->fileHandler->postfixSlash($oldPath);
+$oldPath = $root.$oldPath;
 
+/* make sure is a directory and writable */
 if (!is_dir($olddir)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
 if (!is_readable($olddir) || !is_writable($olddir)) {
 	return $modx->error->failure($modx->lexicon('file_folder_err_perms'));
 }
 
-$newdir = strtr(dirname($olddir).'/'.$scriptProperties['name'],'\\','/');
+/* sanitize new path */
+$newPath = $modx->fileHandler->sanitizePath($scriptProperties['name']);
+$newPath = $modx->fileHandler->postfixSlash($newPath);
 
-if (!@rename($olddir,$newdir)) {
+/* rename the dir */
+if (!@rename($oldPath,$newPath)) {
     return $modx->error->failure($modx->lexicon('file_folder_err_rename'));
 }
 

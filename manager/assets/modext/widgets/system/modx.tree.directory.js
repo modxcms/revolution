@@ -7,32 +7,32 @@
  * @xtype modx-tree-directory
  */
 MODx.tree.Directory = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		rootVisible: false
-		,root_id: 'root'
-		,root_name: _('files')
-		,title: _('files')
-		,ddAppendOnly: true
+    config = config || {};
+    Ext.applyIf(config,{
+        rootVisible: false
+        ,root_id: 'root'
+        ,root_name: _('files')
+        ,title: _('files')
+        ,ddAppendOnly: true
         ,enableDrag: true
         ,enableDrop: true
         ,ddGroup: 'modx-treedrop-dd'
-		,url: MODx.config.connectors_url+'browser/directory.php'
-		,baseParams: {
-			prependPath: config.prependPath || null
-			,hideFiles: config.hideFiles || false
-		}
-		,action: 'getList'
+        ,url: MODx.config.connectors_url+'browser/directory.php'
+        ,baseParams: {
+            prependPath: config.prependPath || null
+            ,hideFiles: config.hideFiles || false
+        }
+        ,action: 'getList'
         ,primaryKey: 'dir'
-	});
-	MODx.tree.Directory.superclass.constructor.call(this,config);
+    });
+    MODx.tree.Directory.superclass.constructor.call(this,config);
     this.addEvents({
         'beforeUpload': true
         ,'afterUpload': true
     });
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
-	windows: {}
+    windows: {}
     ,_handleDrop: function(e) { return false; }
     ,_showContextMenu: function(node,e) {
         node.select();
@@ -62,6 +62,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         m.show(node.ui.getEl(),'t?');
         m.activeNode = node;
     }
+    
     ,getPath:function(node) {
         var path, p, a;
 
@@ -86,24 +87,24 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         // full path security checking has to be implemented on server
         path = path.replace(/^[\/\.]*/, '');
         return path+'/';
-    } // eo function getPath
+    }
     
     
     ,renameNode: function(field,nv,ov) {
-		MODx.Ajax.request({
-		    url: MODx.config.connectors_url+'browser/index.php'
-		    ,params: {
-		  	    action: 'rename'
-		  	    ,new_name: nv
-		  	    ,old_name: ov
+        MODx.Ajax.request({
+            url: MODx.config.connectors_url+'browser/index.php'
+            ,params: {
+                action: 'rename'
+                ,new_name: nv
+                ,old_name: ov
                 ,prependPath: this.config.prependPath || null
-		  	    ,file: this.treeEditor.editNode.id
-		    }
-		    ,listeners: {
-		    	'success': {fn:this.refresh,scope:this}
-		    }
-		});
-	}
+                ,file: this.treeEditor.editNode.id
+            }
+            ,listeners: {
+               'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
 	
     ,renameFile: function(item,e) {
         var node = this.cm.activeNode;
@@ -125,43 +126,42 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         this.windows.rename.setValues(r);
         this.windows.rename.show(e.target);
     }
-	,createDirectory: function(item,e) {
-		var node = this.cm.activeNode;
+    
+    ,createDirectory: function(item,e) {
+        var node = this.cm.activeNode;
         var r = {parent: node.id};
         if (!this.windows.create) {
-    		this.windows.create = MODx.load({
-    			xtype: 'modx-window-directory-create'
-    			,record: r
+            this.windows.create = MODx.load({
+                xtype: 'modx-window-directory-create'
+                ,record: r
                 ,prependPath: this.config.prependPath || null
                 ,listeners: {
                     'success':{fn:this.refresh,scope:this}
                 }
-    		});
-        } else {
-            this.windows.create.setValues(r);
+            });
         }
-		this.windows.create.show(e.target);
-	}
+        this.windows.create.setValues(r);
+        this.windows.create.show(e.target);
+    }
 	
-	,chmodDirectory: function(item,e) {
-		var node = this.cm.activeNode;
+    ,chmodDirectory: function(item,e) {
+        var node = this.cm.activeNode;
         var r = {dir: node.id,mode: node.attributes.perms};
         if (!this.windows.chmod) {
             this.windows.chmod = MODx.load({
-    			xtype: 'modx-window-directory-chmod'
-    			,record: r
+                xtype: 'modx-window-directory-chmod'
+                ,record: r
                 ,prependPath: this.config.prependPath || null
                 ,listeners: {
                     'success':{fn:this.refresh,scope:this}
                 }
-    		});
-        } else {
-            this.windows.chmod.setValues(r);
+            });
         }
-		this.windows.chmod.show(e.target);
-	}
+        this.windows.chmod.setValues(r);
+        this.windows.chmod.show(e.target);
+    }
     
-	,removeFile: function(item,e) {
+    ,removeFile: function(item,e) {
         var node = this.cm.activeNode;
         MODx.msg.confirm({
             text: _('file_confirm_remove')
@@ -192,7 +192,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             });
             this.uploader.on('show',this.beforeUpload,this);
             this.uploader.on('uploadsuccess',this.uploadSuccess,this);
-            
         }
         this.uploader.show(btn);
     }
@@ -230,10 +229,10 @@ Ext.reg('modx-tree-directory',MODx.tree.Directory);
  */
 MODx.window.CreateDirectory = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
-		width: 430
-		,height: 200
-		,title: _('file_folder_create')
+    Ext.applyIf(config,{
+        width: 430
+        ,height: 200
+        ,title: _('file_folder_create')
         ,url: MODx.config.connectors_url+'browser/directory.php'
         ,action: 'create'
         ,fields: [{
@@ -252,8 +251,8 @@ MODx.window.CreateDirectory = function(config) {
             ,xtype: 'textfield'
             ,width: 200
         }]
-	});
-	MODx.window.CreateDirectory.superclass.constructor.call(this,config);
+    });
+    MODx.window.CreateDirectory.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.CreateDirectory,MODx.Window);
 Ext.reg('modx-window-directory-create',MODx.window.CreateDirectory);
@@ -268,10 +267,10 @@ Ext.reg('modx-window-directory-create',MODx.window.CreateDirectory);
  */
 MODx.window.ChmodDirectory = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
-		title: _('file_folder_chmod')
+    Ext.applyIf(config,{
+        title: _('file_folder_chmod')
         ,width: 430
-		,height: 200
+        ,height: 200
         ,url: MODx.config.connectors_url+'browser/directory.php'
         ,action: 'chmod'
         ,fields: [{
@@ -289,8 +288,8 @@ MODx.window.ChmodDirectory = function(config) {
             ,xtype: 'hidden'
             ,width: 200
         }]
-	});
-	MODx.window.ChmodDirectory.superclass.constructor.call(this,config);
+    });
+    MODx.window.ChmodDirectory.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.ChmodDirectory,MODx.Window);
 Ext.reg('modx-window-directory-chmod',MODx.window.ChmodDirectory);
@@ -313,6 +312,7 @@ MODx.window.RenameFile = function(config) {
             ,name: 'path'
             ,xtype: 'statictextfield'
             ,submitValue: true
+            ,width: 400
         },{
             fieldLabel: _('old_name')
             ,name: 'oldname'

@@ -15,9 +15,9 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
+/* setup default properties */
 $hideFiles = !empty($scriptProperties['hideFiles']) && $scriptProperties['hideFiles'] != 'false' ? true : false;
 $stringLiterals = !empty($scriptProperties['stringLiterals']) ? true : false;
-
 $dir = !isset($scriptProperties['id']) || $scriptProperties['id'] == 'root' ? '' : str_replace('n_','',$scriptProperties['id']);
 
 $directories = array();
@@ -26,11 +26,17 @@ $ls = array();
 
 $actions = $modx->request->getAllActionIDs();
 
-$root = !empty($scriptProperties['prependPath']) && $scriptProperties['prependPath'] != 'null'
-    ? $scriptProperties['prependPath']
-    : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
+/* get base paths and sanitize incoming paths */
+$modx->getService('fileHandler','modFileHandler');
+$root = $modx->fileHandler->getBasePath();
+$dir = $modx->fileHandler->sanitizePath($dir);
+$dir = $modx->fileHandler->postfixSlash($dir);
+$fullpath = $root.$dir;
 
-$fullpath = $root.($dir != '' ? $dir : '');
+$relativeRootPath = $modx->fileHandler->getBasePath(false);
+$relativeRootPath = $modx->fileHandler->postfixSlash($relativeRootPath);
+
+/* iterate through directories */
 foreach (new DirectoryIterator($fullpath) as $file) {
 	if (in_array($file,array('.','..','.svn','_notes'))) continue;
 	if (!$file->isReadable()) continue;
@@ -39,59 +45,51 @@ foreach (new DirectoryIterator($fullpath) as $file) {
     $filePathName = $file->getPathname();
     $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
-	/* handle dirs */
-	if ($file->isDir()) {
-		$directories[$fileName] = array(
-			'id' => $dir.'/'.$fileName,
-			'text' => $fileName,
-			'cls' => 'folder',
-			'type' => 'dir',
-			//'disabled' => $file->isWritable(),
+    /* handle dirs */
+    if ($file->isDir()) {
+	    $directories[$fileName] = array(
+		    'id' => $dir.$fileName,
+		    'text' => $fileName,
+		    'cls' => 'folder',
+		    'type' => 'dir',
             'leaf' => false,
             'perms' => $octalPerms,
             'menu' => array(
                 'items' => array(
                     array(
                         'text' => $modx->lexicon('file_folder_create_here'),
-                        'handler' => 'function(itm,e) {
-                            this.createDirectory(itm,e);
-                        }',
+                        'handler' => 'function(itm,e) { this.createDirectory(itm,e); }',
                     ),
                     '-',
                     array(
                         'text' => $modx->lexicon('file_folder_chmod'),
-                        'handler' => 'function(itm,e) {
-                            this.chmodDirectory(itm,e);
-                        }',
+                        'handler' => 'function(itm,e) { this.chmodDirectory(itm,e); }',
                     ),
                     array(
                         'text' => $modx->lexicon('rename'),
-                        'handler' => 'function(itm,e) {
-                            this.renameFile(itm,e);
-                        }',
+                        'handler' => 'function(itm,e) { this.renameFile(itm,e); }',
                     ),
                     '-',
                     array(
                         'text' => $modx->lexicon('file_folder_remove'),
-                        'handler' => 'function(itm,e) {
-                            this.remove("file_folder_confirm_remove");
-                        }',
+                        'handler' => 'function(itm,e) { this.remove("file_folder_confirm_remove"); }',
                     ),
                 ),
             ),
-		);
-	}
+	    );
+    }
 
     /* get files in current dir */
     if ($file->isFile() && !$hideFiles) {
         $ext = pathinfo($filePathName,PATHINFO_EXTENSION);
         $files[$fileName] = array(
-            'id' => $dir.'/'.$fileName,
+            'id' => $dir.$fileName,
             'text' => $fileName,
             'cls' => 'icon-file icon-'.$ext,
             'type' => 'file',
             'leaf' => true,
             'perms' => $octalPerms,
+            'path' => $relativeRootPath.$fileName,
             'menu' => array(
                 'items' => array(
                     array(

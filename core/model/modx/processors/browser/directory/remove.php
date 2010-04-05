@@ -14,11 +14,12 @@ $modx->lexicon->load('file');
 
 if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
-
-$d = isset($scriptProperties['prependPath']) && $scriptProperties['prependPath'] != 'null' && $scriptProperties['prependPath'] != null
-    ? $scriptProperties['prependPath']
-    : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
-$directory = $d.$scriptProperties['dir'];
+/* get base paths and sanitize incoming paths */
+$modx->getService('fileHandler','modFileHandler');
+$root = $modx->fileHandler->getBasePath();
+$directory = $modx->fileHandler->sanitizePath($scriptProperties['dir']);
+$directory = $modx->fileHandler->postfixSlash($directory);
+$directory = $root.$directory;
 
 /* in case rootVisible is true */
 $directory = str_replace(array(
@@ -27,14 +28,17 @@ $directory = str_replace(array(
 ),'',$directory);
 
 if (!is_dir($directory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
-if (!is_readable($directory) || !is_writable($directory))
-	return $modx->error->failure($modx->lexicon('file_folder_err_perms_remove'));
+if (!is_readable($directory) || !is_writable($directory)) {
+    return $modx->error->failure($modx->lexicon('file_folder_err_perms_remove'));
+}
 
 $success = $modx->cacheManager->deleteTree($directory,array(
     'deleteTop' => true,
     'skipDirs' => false,
     'extensions' => '',
 ));
-if (!$success) return $modx->error->failure($modx->lexicon('file_folder_err_remove'));
+if (empty($success)) {
+    return $modx->error->failure($modx->lexicon('file_folder_err_remove'));
+}
 
 return $modx->error->success();

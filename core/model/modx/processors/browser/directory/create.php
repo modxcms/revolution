@@ -16,22 +16,24 @@ $modx->lexicon->load('file');
 if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 if (empty($scriptProperties['parent'])) $scriptProperties['parent'] = '';
 
+/* get base paths and sanitize incoming paths */
+$modx->getService('fileHandler','modFileHandler');
+$root = $modx->fileHandler->getBasePath();
+$parentPath = $modx->fileHandler->sanitizePath($scriptProperties['parent']);
+$parentPath = $root.$parentPath;
+$parentPath = $modx->fileHandler->postfixSlash($parentPath);
 
-$d = isset($scriptProperties['prependPath']) && $scriptProperties['prependPath'] != 'null' && $scriptProperties['prependPath'] != null
-    ? $scriptProperties['prependPath']
-    : $modx->getOption('base_path').$modx->getOption('rb_base_dir');
-$parentdir = $d.$scriptProperties['parent'].'/';
-
-if (!is_dir($parentdir)) return $modx->error->failure($modx->lexicon('file_folder_err_parent_invalid'));
-if (!is_readable($parentdir) || !is_writable($parentdir)) {
+if (!is_dir($parentPath)) return $modx->error->failure($modx->lexicon('file_folder_err_parent_invalid'));
+if (!is_readable($parentPath) || !is_writable($parentPath)) {
 	return $modx->error->failure($modx->lexicon('file_folder_err_perms_parent'));
 }
 
-$newdir = $parentdir.'/'.$scriptProperties['name'];
+$newDir = $parentPath.$scriptProperties['name'];
 
-if (file_exists($newdir)) return $modx->error->failure($modx->lexicon('file_folder_err_ae'));
+if (file_exists($newDir)) return $modx->error->failure($modx->lexicon('file_folder_err_ae'));
 
-if (!@mkdir($newdir,0755)) {
+$octalPerms = $modx->getOption('new_folder_permissions',null,0755);
+if (!@mkdir($newDir,$octalPerms)) {
 	return $modx->error->failure($modx->lexicon('file_folder_err_create'));
 }
 

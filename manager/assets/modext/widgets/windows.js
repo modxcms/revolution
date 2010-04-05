@@ -17,25 +17,25 @@ MODx.window.DuplicateResource = function(config) {
 	MODx.window.DuplicateResource.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
-	_loadForm: function() {
-		if (this.checkIfLoaded(this.config.record)) {
-			this.fp.getForm().baseParams = {
-				action: 'duplicate'
-				,id: this.config.resource
-			};
-			return false;
-		}
-		var items = [];
-		
-		if (this.config.is_folder) {
-			items.push({
+    _loadForm: function() {
+        if (this.checkIfLoaded(this.config.record)) {
+            this.fp.getForm().baseParams = {
+                    action: 'duplicate'
+                    ,id: this.config.resource
+            };
+            return false;
+        }
+        var items = [];
+
+        if (this.config.is_folder) {
+            items.push({
                 xtype: 'checkbox'
                 ,fieldLabel: _('duplicate_children')
                 ,name: 'duplicate_children'
                 ,id: 'modx-'+this.ident+'-duplicate-children'
                 ,checked: true
                 ,listeners: {
-                    'check': {fn: function(cb,checked) { 
+                    'check': {fn: function(cb,checked) {
                         if (checked) {
                             this.fp.getForm().findField('modx-'+this.ident+'-name').disable();
                         } else {
@@ -44,44 +44,44 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
                     },scope:this}
                 }
             });
-		}
-        if (!this.config.is_folder) {
-    		items.push({
-                xtype: 'textfield'
-                ,id: 'modx-'+this.ident+'-name'
-                ,fieldLabel: _('resource_name_new')
-                ,name: 'name'
-                ,width: 150
-                ,value: ''
-                ,disabled: this.config.is_folder ? true : false
-            });
         }
-		
-		this.fp = this.createForm({
-			url: this.config.url || MODx.config.connectors_url+'resource/index.php'
-			,baseParams: this.config.baseParams || {
-				action: 'duplicate'
-				,id: this.config.resource
-			}
-			,labelWidth: 125
-			,defaultType: 'textfield'
-			,autoHeight: true
-			,items: items
-		});
-		
-		this.renderForm();
-	}
+        if (!this.config.is_folder) {
+            items.push({
+            xtype: 'textfield'
+            ,id: 'modx-'+this.ident+'-name'
+            ,fieldLabel: _('resource_name_new')
+            ,name: 'name'
+            ,width: 150
+            ,value: ''
+            ,disabled: this.config.is_folder ? true : false
+        });
+    }
+
+        this.fp = this.createForm({
+            url: this.config.url || MODx.config.connectors_url+'resource/index.php'
+            ,baseParams: this.config.baseParams || {
+                action: 'duplicate'
+                ,id: this.config.resource
+            }
+            ,labelWidth: 125
+            ,defaultType: 'textfield'
+            ,autoHeight: true
+            ,items: items
+        });
+
+        this.renderForm();
+    }
 });
 Ext.reg('modx-window-resource-duplicate',MODx.window.DuplicateResource);
 
 MODx.window.CreateUserGroup = function(config) {
-	config = config || {};
+    config = config || {};
     this.ident = config.ident || 'cugrp'+Ext.id();
-	Ext.applyIf(config,{
-		title: _('create_user_group')
+    Ext.applyIf(config,{
+        title: _('create_user_group')
         ,id: this.ident
-		,height: 150
-		,width: 375
+        ,height: 150
+        ,width: 375
         ,url: MODx.config.connectors_url+'security/group.php'
         ,action: 'create'
         ,fields: [{
@@ -95,20 +95,20 @@ MODx.window.CreateUserGroup = function(config) {
             ,id: 'modx-'+this.ident+'-parent'
             ,xtype: 'hidden'
         }]
-	});
-	MODx.window.CreateUserGroup.superclass.constructor.call(this,config);
+    });
+    MODx.window.CreateUserGroup.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.CreateUserGroup,MODx.Window);
 Ext.reg('modx-window-usergroup-create',MODx.window.CreateUserGroup);
 
 MODx.window.AddUserToUserGroup = function(config) {
-	config = config || {};
+    config = config || {};
     this.ident = config.ident || 'adtug'+Ext.id();
-	Ext.applyIf(config,{
-		title: _('user_group_user_add')
+    Ext.applyIf(config,{
+        title: _('user_group_user_add')
         ,id: this.ident
-		,height: 150
-		,width: 375
+        ,height: 150
+        ,width: 375
         ,url: MODx.config.connectors_url+'security/usergroup/user.php'
         ,action: 'create'
         ,fields: [{
@@ -129,20 +129,20 @@ MODx.window.AddUserToUserGroup = function(config) {
             ,xtype: 'hidden'
             ,id: 'modx-'+this.ident+'-user-group'
         }]
-	});
-	MODx.window.AddUserToUserGroup.superclass.constructor.call(this,config);
+    });
+    MODx.window.AddUserToUserGroup.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.AddUserToUserGroup,MODx.Window);
 Ext.reg('modx-window-usergroup-adduser',MODx.window.AddUserToUserGroup);
 
 MODx.window.CreateResourceGroup = function(config) {
-	config = config || {};
+    config = config || {};
     this.ident = config.ident || 'crgrp'+Ext.id();
-	Ext.applyIf(config,{
-		title: _('resource_group_create')
+    Ext.applyIf(config,{
+        title: _('resource_group_create')
         ,id: this.ident
-		,height: 150
-		,width: 350
+        ,height: 150
+        ,width: 350
         ,url: MODx.config.connectors_url+'security/documentgroup.php'
         ,action: 'create'
         ,fields: [{
@@ -152,20 +152,20 @@ MODx.window.CreateResourceGroup = function(config) {
             ,xtype: 'textfield'
             ,width: 150
         }]
-	});
-	MODx.window.CreateResourceGroup.superclass.constructor.call(this,config);
+    });
+    MODx.window.CreateResourceGroup.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.CreateResourceGroup,MODx.Window);
 Ext.reg('modx-window-resourcegroup-create',MODx.window.CreateResourceGroup);
 
 MODx.window.CreateCategory = function(config) {
-	config = config || {};
+    config = config || {};
     this.ident = config.ident || 'ccat'+Ext.id();
-	Ext.applyIf(config,{
-		title: _('new_category')
+    Ext.applyIf(config,{
+        title: _('new_category')
         ,id: this.ident
-		,height: 150
-		,width: 350
+        ,height: 150
+        ,width: 350
         ,url: MODx.config.connectors_url+'element/category.php'
         ,action: 'create'
         ,fields: [{
@@ -175,15 +175,15 @@ MODx.window.CreateCategory = function(config) {
             ,xtype: 'textfield'
             ,anchor: '85%'
         },{
-        	fieldLabel: 'Parent'
-        	,name: 'parent'
-        	,hiddenName: 'parent'
-        	,id: 'modx-'+this.ident+'-parent'
-    		,xtype: 'modx-combo-category'
+            fieldLabel: 'Parent'
+            ,name: 'parent'
+            ,hiddenName: 'parent'
+            ,id: 'modx-'+this.ident+'-parent'
+            ,xtype: 'modx-combo-category'
             ,anchor: '85%'
         }]
-	});
-	MODx.window.CreateCategory.superclass.constructor.call(this,config);
+    });
+    MODx.window.CreateCategory.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.CreateCategory,MODx.Window);
 Ext.reg('modx-window-category-create',MODx.window.CreateCategory);
@@ -222,21 +222,21 @@ Ext.reg('modx-window-namespace-create',MODx.window.CreateNamespace);
 
 
 MODx.window.QuickCreateChunk = function(config) {
-	config = config || {};
+    config = config || {};
     this.ident = config.ident || 'qcc'+Ext.id();
-	Ext.applyIf(config,{
-		title: _('quick_create_chunk')
+    Ext.applyIf(config,{
+        title: _('quick_create_chunk')
         ,id: this.ident
-		,width: 600
-		,url: MODx.config.connectors_url+'element/chunk.php'
-		,action: 'create'
-		,fields: [{
+        ,width: 600
+        ,url: MODx.config.connectors_url+'element/chunk.php'
+        ,action: 'create'
+        ,fields: [{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
             ,anchor: '80%'
-		},{
+        },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
@@ -263,8 +263,8 @@ MODx.window.QuickCreateChunk = function(config) {
             ,fn: this.submit
             ,scope: this
         }]
-	});
-	MODx.window.QuickCreateChunk.superclass.constructor.call(this,config);
+    });
+    MODx.window.QuickCreateChunk.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.QuickCreateChunk,MODx.Window);
 Ext.reg('modx-window-quick-create-chunk',MODx.window.QuickCreateChunk);
@@ -328,8 +328,6 @@ MODx.window.QuickUpdateChunk = function(config) {
 };
 Ext.extend(MODx.window.QuickUpdateChunk,MODx.Window);
 Ext.reg('modx-window-quick-update-chunk',MODx.window.QuickUpdateChunk);
-
-
 
 MODx.window.QuickCreateTemplate = function(config) {
     config = config || {};
