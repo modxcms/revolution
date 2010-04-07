@@ -49,8 +49,8 @@ if (!$user) {
     $ru = $modx->invokeEvent("OnUserNotFound", array(
         'user' => &$user,
         'username' => $username,
-        'password' => $password,
-        array (
+        'password' => $givenPassword,
+        'attributes' => array(
             'rememberme' => $rememberme,
             'lifetime' => $lifetime,
             'loginContext' => $loginContext,

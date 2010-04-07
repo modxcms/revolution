@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1785] Fixed invalid password variable reference in invoke notfound event in login processor
 - [#MODX-1784] Fixed invalid event call on user update, as well as added event invoking into updatefromgrid processor
 - [#MODX-1836] Set default context_key in modResource objects to 'web'
 - Fixed bug with system info page and active users that would cause error in error log
