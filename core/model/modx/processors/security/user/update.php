@@ -89,8 +89,8 @@ $modx->invokeEvent('OnUserFormSave',array(
 	'id' => $user->get('id'),
 ));
 
-/* invoke OnUserUpdate event */
-$modx->invokeEvent('OnUserUpdate',array(
+/* invoke OnUpdateUser event */
+$modx->invokeEvent('OnUpdateUser',array(
     'mode' => 'upd',
     'user' => &$user,
     'id' => $user->get('id'),
