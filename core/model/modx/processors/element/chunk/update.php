@@ -31,11 +31,11 @@ if ($chunk->get('locked') && $modx->hasPermission('edit_locked') == false) {
 }
 
 /* if changing name, but new one already exists */
-$name_exists = $modx->getObject('modChunk',array(
+$nameExists = $modx->getObject('modChunk',array(
     'id:!=' => $chunk->get('id'),
     'name' => $scriptProperties['name'],
 ));
-if ($name_exists != null) {
+if (!empty($nameExists)) {
     $modx->error->addField('name',$modx->lexicon('chunk_err_exists_name'));
 }
 
