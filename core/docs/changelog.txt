@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1789] Added code to attempt to create core/components and assets/components after install. If fails, displays a notice to user to manually create them themselves to allow Package Management to work properly.
 - [#MODX-1839] Fixed grammatical error in forgot login link on login page
 - [#MODX-1846] Fixed invalid markup for username in top right
 - [#MODX-1854] Fixed invalid references to cultureKey that broke cultureKey setting effectiveness

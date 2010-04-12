@@ -4,20 +4,17 @@
  */
 if (!empty($_POST['proceed'])) {
     $install->settings->store($_POST);
-    /* validate database settings */
-    $errors= $install->cleanup($_POST);
-
-    if (!empty ($errors)) {
-        $this->parser->assign('errors',implode('', $errors));
-    } else {
-        $this->proceed('login');
-    }
+    $this->proceed('login');
 }
 
-
 $errors= $install->verify();
+$cleanupErrors = $install->cleanup();
+if (is_array($cleanupErrors) && !empty($cleanupErrors)) {
+    $errors= array_merge($errors,$cleanupErrors);
+}
+
 if (!empty ($errors)) {
-    $this->parser->assign('errors',implode('', $errors));
+    $this->parser->assign('errors',$errors);
 }
 
 return $this->parser->fetch('complete.tpl');

@@ -142,3 +142,17 @@ table.options td {
     cursor: pointer;
     margin-right: 1em;
 }
+
+.note {
+    background: #fffdbb;
+    padding: 20px;
+    border:2px solid #CBD499;
+}
+.note p {
+    margin: 0;
+}
+.note hr {
+    border: 1px solid #CBD499;
+    border-width: 1px 0 0 0;
+    margin: 10px 20px;
+}
