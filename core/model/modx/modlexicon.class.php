@@ -119,7 +119,7 @@ class modLexicon {
     public function getCacheKey($namespace = 'core',$topic = 'default',$language = '') {
         if (empty($namespace)) $namespace = 'core';
         if (empty($topic)) $topic = 'default';
-        if (empty($language)) $language = $this->modx->cultureKey;
+        if (empty($language)) $language = $this->modx->getOption('cultureKey',null,'en');
         return 'lexicon/'.$language.'/'.$namespace.'/'.$topic;
     }
 
@@ -153,7 +153,7 @@ class modLexicon {
             } else { /* if namespace, search specified lexicon */
                 $params = explode(':',$topic);
                 if (count($params) <= 2) {
-                    $language = $this->modx->cultureKey;
+                    $language = $this->modx->getOption('cultureKey',null,'en');
                     $namespace = $params[0];
                     $topic_parsed = $params[1];
                 } else {
@@ -181,7 +181,7 @@ class modLexicon {
      * @return array The loaded lexicon array.
      */
     public function loadCache($namespace = 'core', $topic = 'default', $language = '') {
-        if (empty($language)) $language = $this->modx->cultureKey;
+        if (empty($language)) $language = $this->modx->getOption('cultureKey',null,'en');
         $key = $this->getCacheKey($namespace, $topic, $language);
 
         if (($cached = $this->modx->cacheManager->get($key)) == null) {
