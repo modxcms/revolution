@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1846] Fixed invalid markup for username in top right
 - [#MODX-1854] Fixed invalid references to cultureKey that broke cultureKey setting effectiveness
 - [#MODX-1785] Fixed invalid password variable reference in invoke notfound event in login processor
 - [#MODX-1784] Fixed invalid event call on user update, as well as added event invoking into updatefromgrid processor
