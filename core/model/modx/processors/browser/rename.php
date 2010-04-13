@@ -17,19 +17,20 @@ if (empty($scriptProperties['newname'])) return $modx->error->failure($modx->lex
 $modx->getService('fileHandler','modFileHandler');
 $root = $modx->fileHandler->getBasePath();
 
-$oldFile = $root.$scriptProperties['path'];
-$oldPath = $modx->fileHandler->getDirectoryFromFile($oldFile);
-$oldPath = $modx->fileHandler->sanitizePath($oldPath);
-$oldPath = $modx->fileHandler->postfixSlash($oldPath);
+/* generate modFileSystemResource from path */
+$fsResource = $modx->fileHandler->make($root.$scriptProperties['path']);
+$directory = $fsResource->getParentDirectory();
 
-if (!is_readable($oldPath) || !is_writable($oldPath)) {
-    return $modx->error->failure($modx->lexicon('file_err_perms_rename'));
+/* make sure parent dir is a directory and writable */
+if (!($directory instanceof modDirectory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
+if (!$directory->isReadable() || !$directory->isWritable()) {
+	return $modx->error->failure($modx->lexicon('file_folder_err_perms'));
 }
 
-$newPath = $modx->fileHandler->sanitizePath($scriptProperties['newname']);
-$newPath = $oldPath.$newPath;
+$newPath = $directory->getPath().$scriptProperties['newname'];
 
-if (!@rename($oldFile,$newPath)) {
+/* rename the original file/directory */
+if (!$fsResource->rename($newPath)) {
     return $modx->error->failure($modx->lexicon('file_err_rename'));
 }
 

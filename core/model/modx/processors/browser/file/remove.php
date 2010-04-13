@@ -16,23 +16,26 @@ if (empty($scriptProperties['file'])) return $modx->error->failure($modx->lexico
 
 /* get base paths and sanitize incoming paths */
 $modx->getService('fileHandler','modFileHandler');
-$root = $modx->fileHandler->getBasePath();
-$file = $modx->fileHandler->sanitizePath($scriptProperties['file']);
-$file = $root.$file;
 
 /* in case rootVisible is true */
-$file = str_replace('root/','',$file);
+$file = str_replace('root/','',$scriptProperties['file']);
 $file = str_replace('undefined/','',$file);
 
-if (!file_exists($file)) {
+/* create modFile object */
+$root = $modx->fileHandler->getBasePath();
+$file = $modx->fileHandler->make($root.$file);
+
+/* verify file exists and is writable */
+if (!$file->exists()) {
     return $modx->error->failure($modx->lexicon('file_err_nf').': '.$file);
-} else if (!is_readable($file) || !is_writable($file)) {
+} else if (!$file->isReadable() || !$file->isWritable()) {
     return $modx->error->failure($modx->lexicon('file_err_perms_remove'));
-} else if (!is_file($file)) {
+} else if (!($file instanceof modFile)) {
     return $modx->error->failure($modx->lexicon('file_err_invalid'));
 }
 
-if (!@unlink($file)) {
+/* remove file */
+if (!$file->remove()) {
     return $modx->error->failure($modx->lexicon('file_err_remove'));
 }
 

@@ -17,27 +17,25 @@ if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon
 /* get base paths and sanitize incoming paths */
 $modx->getService('fileHandler','modFileHandler');
 $root = $modx->fileHandler->getBasePath();
-$directory = $modx->fileHandler->sanitizePath($scriptProperties['dir']);
-$directory = $modx->fileHandler->postfixSlash($directory);
-$directory = $root.$directory;
 
 /* in case rootVisible is true */
-$directory = str_replace(array(
+$path = str_replace(array(
     'root/',
     'undefined/',
-),'',$directory);
+),'',$scriptProperties['dir']);
 
-if (!is_dir($directory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
-if (!is_readable($directory) || !is_writable($directory)) {
+/* instantiate modDirectory object */
+$directory = $modx->fileHandler->make($root.$path);
+
+/* validate and check permissions on directory */
+if (!($directory instanceof modDirectory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
+if (!$directory->isReadable() || !$directory->isWritable()) {
     return $modx->error->failure($modx->lexicon('file_folder_err_perms_remove'));
 }
 
-$success = $modx->cacheManager->deleteTree($directory,array(
-    'deleteTop' => true,
-    'skipDirs' => false,
-    'extensions' => '',
-));
-if (empty($success)) {
+/* remove the directory */
+$result = $directory->remove();
+if ($result == false) {
     return $modx->error->failure($modx->lexicon('file_folder_err_remove'));
 }
 

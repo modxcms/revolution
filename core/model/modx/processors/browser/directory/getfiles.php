@@ -25,17 +25,17 @@ $imagesExts = array('jpg','jpeg','png','gif');
 /* iterate */
 $files = array();
 foreach (new DirectoryIterator($fullpath) as $file) {
-	if (in_array($file,array('.','..','.svn','_notes'))) continue;
+    if (in_array($file,array('.','..','.svn','_notes'))) continue;
     if (!$file->isReadable()) continue;
 
     $fileName = $file->getFilename();
     $filePathName = $file->getPathname();
 
-	if (!$file->isDir()) {
+    if (!$file->isDir()) {
         $fileExtension = pathinfo($filePathName,PATHINFO_EXTENSION);
 
 	$filesize = @filesize($filePathName);
-    /* calculate url */
+        /* calculate url */
 	if (!empty($scriptProperties['prependUrl'])) {
             $url = $scriptProperties['prependUrl'].$dir.'/'.$fileName;
         } else {
@@ -58,26 +58,26 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             $thumbHeight = $modx->getOption('filemanager_thumb_height',null,60);
         }
         $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
-		$files[] = array(
+        $files[] = array(
             'id' => $filePathname,
             'name' => $fileName,
-		    'cls' => 'icon-'.$fileExtension,
+            'cls' => 'icon-'.$fileExtension,
             'image' => $thumb,
             'image_width' => $thumbWidth,
             'image_height' => $thumbHeight,
-			'url' => $modx->getOption('base_url').$url,
+            'url' => $modx->getOption('base_url').$url,
             'relativeUrl' => $url,
-			'ext' => $fileExtension,
-			'pathname' => $filePathName,
-			'lastmod' => $file->getMTime(),
-			'disabled' => false,
+            'ext' => $fileExtension,
+            'pathname' => $filePathName,
+            'lastmod' => $file->getMTime(),
+            'disabled' => false,
             'perms' => $octalPerms,
-			'leaf' => true,
-			'size' => $filesize,
+            'leaf' => true,
+            'size' => $filesize,
             'menu' => array(
                 array('text' => $modx->lexicon('file_remove'),'handler' => 'this.removeFile'),
             ),
-		);
-	}
+        );
+    }
 }
 return $this->outputArray($files,$count);

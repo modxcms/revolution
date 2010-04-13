@@ -19,22 +19,23 @@ if (empty($scriptProperties['parent'])) $scriptProperties['parent'] = '';
 /* get base paths and sanitize incoming paths */
 $modx->getService('fileHandler','modFileHandler');
 $root = $modx->fileHandler->getBasePath();
-$parentPath = $modx->fileHandler->sanitizePath($scriptProperties['parent']);
-$parentPath = $root.$parentPath;
-$parentPath = $modx->fileHandler->postfixSlash($parentPath);
 
-if (!is_dir($parentPath)) return $modx->error->failure($modx->lexicon('file_folder_err_parent_invalid'));
-if (!is_readable($parentPath) || !is_writable($parentPath)) {
-	return $modx->error->failure($modx->lexicon('file_folder_err_perms_parent'));
+/* create modDirectory instance for containing directory and validate */
+$parentDirectory = $modx->fileHandler->make($root.$scriptProperties['parent']);
+if (!($parentDirectory instanceof modDirectory)) return $modx->error->failure($modx->lexicon('file_folder_err_parent_invalid'));
+if (!$parentDirectory->isReadable() || !$parentDirectory->isWritable()) {
+    return $modx->error->failure($modx->lexicon('file_folder_err_perms_parent'));
 }
 
-$newDir = $parentPath.$scriptProperties['name'];
+/* create modDirectory instance for new path, validate doesnt already exist */
+$path = $parentDirectory->getPath().$scriptProperties['name'];
+$directory = $modx->fileHandler->make($path,array(),'modDirectory');
+if ($directory->exists()) return $modx->error->failure($modx->lexicon('file_folder_err_ae'));
 
-if (file_exists($newDir)) return $modx->error->failure($modx->lexicon('file_folder_err_ae'));
-
-$octalPerms = $modx->getOption('new_folder_permissions',null,0755);
-if (!@mkdir($newDir,$octalPerms)) {
-	return $modx->error->failure($modx->lexicon('file_folder_err_create'));
+/* actually create the directory */
+$result = $directory->create();
+if ($result !== true) {
+    return $modx->error->failure($modx->lexicon('file_folder_err_create').$result);
 }
 
 return $modx->error->success();

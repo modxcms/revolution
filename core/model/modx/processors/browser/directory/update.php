@@ -18,13 +18,13 @@ if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexico
 /* get base paths and sanitize incoming paths */
 $modx->getService('fileHandler','modFileHandler');
 $root = $modx->fileHandler->getBasePath();
-$oldPath = $modx->fileHandler->sanitizePath($scriptProperties['dir']);
-$oldPath = $modx->fileHandler->postfixSlash($oldPath);
-$oldPath = $root.$oldPath;
+
+/* instantiate modDirectory object */
+$oldDirectory = $modx->fileHandler->make($root.$scriptProperties['dir']);
 
 /* make sure is a directory and writable */
-if (!is_dir($olddir)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
-if (!is_readable($olddir) || !is_writable($olddir)) {
+if (!($oldDirectory instanceof modDirectory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
+if (!$oldDirectory->isReadable() || !$oldDirectory->isWritable()) {
 	return $modx->error->failure($modx->lexicon('file_folder_err_perms'));
 }
 
@@ -33,7 +33,7 @@ $newPath = $modx->fileHandler->sanitizePath($scriptProperties['name']);
 $newPath = $modx->fileHandler->postfixSlash($newPath);
 
 /* rename the dir */
-if (!@rename($oldPath,$newPath)) {
+if (!$oldDirectory->rename($newPath)) {
     return $modx->error->failure($modx->lexicon('file_folder_err_rename'));
 }
 

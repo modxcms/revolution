@@ -10,21 +10,23 @@
 if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
-$file = rawurldecode($scriptProperties['file']);
+/* format filename */
+$filename = rawurldecode($scriptProperties['file']);
 
-if (!file_exists($file)) return $modx->error->failure($modx->lexicon('file_err_nf'));
+$modx->getService('fileHandler','modFileHandler');
+$file = $modx->fileHandler->make($filename);
 
-$filename = ltrim(strrchr($file,'/'),'/');
-
-$fbuffer = @file_get_contents($file);
-$time_format = '%b %d, %Y %H:%I:%S %p';
+if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf'));
+if (!$file->isReadable()) {
+    return $modx->error->failure($modx->lexicon('file_err_perms'));
+}
 
 $fa = array(
-    'name' => $filename,
-    'size' => filesize($file),
-    'last_accessed' => strftime($time_format,fileatime($file)),
-    'last_modified' => strftime($time_format,filemtime($file)),
-    'content' => $fbuffer,
+    'name' => $file->getPath(),
+    'size' => $file->getSize(),
+    'last_accessed' => $file->getLastAccessed(),
+    'last_modified' => $file->getLastModified(),
+    'content' => $file->getContents(),
 );
 
 return $modx->error->success('',$fa);

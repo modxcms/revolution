@@ -13,32 +13,28 @@ if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->l
 $modx->lexicon->load('file');
 
 /* get base paths and sanitize incoming paths */
+$filename = rawurldecode($scriptProperties['file']);
+
+/* create modFile object */
 $modx->getService('fileHandler','modFileHandler');
+$file = $modx->fileHandler->make($filename);
 
-$file = rawurldecode($scriptProperties['file']);
-$newName = $scriptProperties['name'];
-
-if (!file_exists($file)) return $modx->error->failure($modx->lexicon('file_err_nf'));
+/* verify file exists */
+if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf'));
 
 /* write file */
-$f = @fopen($file,'w+');
-fwrite($f,$scriptProperties['content']);
-fclose($f);
+$file->setContent($scriptProperties['content']);
+$file->save();
 
 /* rename if necessary */
-$filename = ltrim(strrchr($file,'/'),'/');
-$path = str_replace(strrchr($file,'/'),'',$file);
+$newPath= $scriptProperties['name'];
 
-if ($filename != $newName) {
-    if (!@rename($path.$filename,$path.$newName)) {
+if ($file->getPath() != $newPath) {
+    if (!$file->rename($newPath)) {
         return $modx->error->failure($modx->lexicon('file_err_rename'));
     }
-    $fullname = $path.$newName;
-} else {
-    $fullname = $file;
 }
 
-
 return $modx->error->success('',array(
-    'file' => rawurlencode($fullname),
+    'file' => rawurlencode($file->getPath()),
 ));

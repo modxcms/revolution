@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Refactored file handling processors to use modFileHandler class with modFile and modDirectory derivative classes to abstract file system processing to abstract for multiple environments
 - [#MODX-1789] Added extra checks in Package Management to make sure that the correct directories are created before using it. Will now prevent usage of PM if those directories do not exist or are not writable.
 - [#MODX-1789] Added code to attempt to create core/components and assets/components after install. If fails, displays a notice to user to manually create them themselves to allow Package Management to work properly.
 - [#MODX-1839] Fixed grammatical error in forgot login link on login page
