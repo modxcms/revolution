@@ -41,13 +41,6 @@ $collection['6']->fromArray(array (
   'service' => 3,
   'groupname' => '',
 ), '', true, true);
-$collection['10']= $xpdo->newObject('modEvent');
-$collection['10']->fromArray(array (
-  'id' => 10,
-  'name' => 'OnWebCreateGroup',
-  'service' => 3,
-  'groupname' => '',
-), '', true, true);
 $collection['11']= $xpdo->newObject('modEvent');
 $collection['11']->fromArray(array (
   'id' => 11,
@@ -80,13 +73,6 @@ $collection['15']= $xpdo->newObject('modEvent');
 $collection['15']->fromArray(array (
   'id' => 15,
   'name' => 'OnManagerDeleteUser',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['17']= $xpdo->newObject('modEvent');
-$collection['17']->fromArray(array (
-  'id' => 17,
-  'name' => 'OnManagerCreateGroup',
   'service' => 2,
   'groupname' => '',
 ), '', true, true);
@@ -684,4 +670,11 @@ $collection['119']->fromArray(array (
   'name' => 'OnInitCulture',
   'service' => 3,
   'groupname' => '',
+), '', true, true);
+$collection['120']= $xpdo->newObject('modEvent');
+$collection['120']->fromArray(array (
+  'id' => 120,
+  'name' => 'OnUserGroupCreate',
+  'service' => 2,
+  'groupname' => 'modUserGroup',
 ), '', true, true);
