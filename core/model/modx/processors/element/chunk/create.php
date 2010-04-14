@@ -46,6 +46,7 @@ $chunk->set('locked',!empty($scriptProperties['locked']));
 /* invoke OnBeforeChunkFormSave event */
 $modx->invokeEvent('OnBeforeChunkFormSave',array(
     'mode'  => 'new',
+    'id' => 0,
     'data' => $chunk->toArray(),
     'chunk' => &$chunk,
 ));
@@ -60,13 +61,13 @@ if (is_array($properties)) $chunk->setProperties($properties);
 
 /* save chunk */
 if ($chunk->save() == false) {
-	return $modx->error->failure($modx->lexicon('chunk_err_save'));
+    return $modx->error->failure($modx->lexicon('chunk_err_save'));
 }
 
 /* invoke OnChunkFormSave event */
 $modx->invokeEvent('OnChunkFormSave',array(
-	'mode' => 'new',
-	'id'   => $chunk->get('id'),
+    'mode' => 'new',
+    'id'   => $chunk->get('id'),
     'chunk' => &$chunk,
 ));
 

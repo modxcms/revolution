@@ -70,16 +70,16 @@ if ($user->profile->save() == false) {
 
 /* invoke OnManagerSaveUser event */
 $modx->invokeEvent('OnManagerSaveUser',array(
-	'mode' => 'upd',
+    'mode' => 'upd',
     'user' => &$user,
-	'userid' => $scriptProperties['id'],
-	'username' => $scriptProperties['newusername'],
-	'userpassword' => $scriptProperties['newpassword'],
-	'useremail' => $scriptProperties['email'],
-	'userfullname' => $scriptProperties['fullname'],
-	'userroleid' => $scriptProperties['role'],
-	'oldusername' => (($scriptProperties['oldusername'] != $scriptProperties['newusername']) ? $scriptProperties['oldusername'] : ''),
-	'olduseremail' => (($scriptProperties['oldemail'] != $scriptProperties['email']) ? $scriptProperties['oldemail'] : '')
+    'userid' => $scriptProperties['id'],
+    'username' => $scriptProperties['newusername'],
+    'userpassword' => $scriptProperties['newpassword'],
+    'useremail' => $scriptProperties['email'],
+    'userfullname' => $scriptProperties['fullname'],
+    'userroleid' => $scriptProperties['role'],
+    'oldusername' => (($scriptProperties['oldusername'] != $scriptProperties['newusername']) ? $scriptProperties['oldusername'] : ''),
+    'olduseremail' => (($scriptProperties['oldemail'] != $scriptProperties['email']) ? $scriptProperties['oldemail'] : '')
 ));
 
 /* invoke OnUserFormSave event */

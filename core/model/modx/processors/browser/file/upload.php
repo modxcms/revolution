@@ -39,7 +39,7 @@ foreach ($_FILES as $file) {
 /* invoke event */
 $modx->invokeEvent('OnFileManagerUpload',array(
     'files' => &$_FILES,
-    'directory' => $directory,
+    'directory' => &$directory,
 ));
 
 return $modx->error->success();

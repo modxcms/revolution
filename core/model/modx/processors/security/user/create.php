@@ -92,16 +92,16 @@ if (!empty($scriptProperties['passwordnotifymethod']) && $scriptProperties['pass
 
 /* invoke OnManagerSaveUser event */
 $modx->invokeEvent('OnManagerSaveUser',array(
-	'mode' => 'new',
+    'mode' => 'new',
     'user' => &$user,
-	'userid' => $user->get('id'),
-	'username' => $scriptProperties['newusername'],
-	'userpassword' => $scriptProperties['newpassword'],
-	'useremail' => $scriptProperties['email'],
-	'userfullname' => $scriptProperties['fullname'],
-	'userroleid' => $scriptProperties['role'],
-	'oldusername' => (($scriptProperties['oldusername'] != $scriptProperties['newusername']) ? $scriptProperties['oldusername'] : ''),
-	'olduseremail' => (($scriptProperties['oldemail'] != $scriptProperties['email']) ? $scriptProperties['oldemail'] : '')
+    'userid' => $user->get('id'),
+    'username' => $scriptProperties['newusername'],
+    'userpassword' => $scriptProperties['newpassword'],
+    'useremail' => $scriptProperties['email'],
+    'userfullname' => $scriptProperties['fullname'],
+    'userroleid' => $scriptProperties['role'],
+    'oldusername' => (($scriptProperties['oldusername'] != $scriptProperties['newusername']) ? $scriptProperties['oldusername'] : ''),
+    'olduseremail' => (($scriptProperties['oldemail'] != $scriptProperties['email']) ? $scriptProperties['oldemail'] : '')
 ));
 
 /* invoke OnUserFormSave event */
@@ -112,7 +112,7 @@ $modx->invokeEvent('OnUserFormSave',array(
 ));
 
 /* invoke OnUserCreate event */
-$modx->invokeEvent('OnUserCreate',array(
+$modx->invokeEvent('OnCreateUser',array(
     'mode' => 'new',
     'user' => &$user,
     'id' => $user->get('id'),

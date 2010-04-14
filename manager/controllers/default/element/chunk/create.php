@@ -9,8 +9,8 @@ if (!$modx->hasPermission('new_chunk')) return $modx->error->failure($modx->lexi
 
 /* grab default category if specified */
 if (isset($_REQUEST['category'])) {
-	$category = $modx->getObject('modCategory',$_REQUEST['category']);
-	if ($category && $category instanceof modCategory) {
+    $category = $modx->getObject('modCategory',$_REQUEST['category']);
+    if ($category && $category instanceof modCategory) {
         $modx->smarty->assign('category',$category);
     }
 } else { $category = null; }
@@ -23,6 +23,7 @@ $modx->smarty->assign('which_editor',$which_editor);
 $onChunkFormRender = $modx->invokeEvent('OnChunkFormRender',array(
     'id' => 0,
     'mode' => 'new',
+    'chunk' => null,
 ));
 if (is_array($onChunkFormRender)) $onChunkFormRender = implode('', $onChunkFormRender);
 $onChunkFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onChunkFormRender);
@@ -31,14 +32,14 @@ $modx->smarty->assign('onChunkFormRender',$onChunkFormRender);
 
 /* invoke OnRichTextEditorInit event */
 if ($modx->getOption('use_editor') == 1) {
-	$onRTEInit = $modx->invokeEvent('OnRichTextEditorInit',array(
-		'editor' => $which_editor,
-		'elements' => array('post'),
-	));
-	if (is_array($onRTEInit)) {
-		$onRTEInit = implode('', $onRTEInit);
+    $onRTEInit = $modx->invokeEvent('OnRichTextEditorInit',array(
+        'editor' => $which_editor,
+        'elements' => array('post'),
+    ));
+    if (is_array($onRTEInit)) {
+        $onRTEInit = implode('', $onRTEInit);
     }
-	$modx->smarty->assign('onRTEInit',$onRTEInit);
+    $modx->smarty->assign('onRTEInit',$onRTEInit);
 }
 
 /* register JS scripts */
@@ -65,12 +66,12 @@ MODx.perm.unlock_element_properties = '.($modx->hasPermission('unlock_element_pr
 $onChunkFormPrerender = $modx->invokeEvent('OnChunkFormPrerender',array(
     'id' => 0,
     'mode' => 'new',
+    'chunk' => null,
 ));
 if (is_array($onChunkFormPrerender)) {
     $onChunkFormPrerender = implode('',$onChunkFormPrerender);
 }
 $modx->smarty->assign('onChunkFormPrerender',$onChunkFormPrerender);
-
 
 /* display template */
 return $modx->smarty->fetch('element/chunk/create.tpl');

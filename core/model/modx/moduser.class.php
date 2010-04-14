@@ -256,29 +256,15 @@ class modUser extends modPrincipal {
             if (!empty ($newPassword)) {
                 $this->set('password', $newPassword);
                 $changed= $this->save();
-                $contextKey= $this->xpdo->context->get('key');
-                switch ($contextKey) {
-                    case 'web':
-                        $this->xpdo->invokeEvent('OnWebChangePassword', array (
-                            'userid' => $this->get('id'),
-                            'username' => $this->get('username'),
-                            'userpassword' => $newPassword,
-                        ));
-                        break;
-                    case 'mgr':
-                        $this->xpdo->invokeEvent('OnManagerChangePassword', array (
-                            'userid' => $this->get('id'),
-                            'username' => $this->get('username'),
-                            'userpassword' => $newPassword,
-                        ));
-                        break;
-                    default:
-                        $this->xpdo->invokeEvent('OnUserChangePassword', array (
-                            'userid' => $this->get('id'),
-                            'username' => $this->get('username'),
-                            'userpassword' => $newPassword,
-                        ));
-                        break;
+                if ($changed) {
+                    $this->xpdo->invokeEvent('OnUserChangePassword', array (
+                        'user' => &$this,
+                        'newpassword' => $newPassword,
+                        'oldpassword' => $oldPassword,
+                        'userid' => $this->get('id'),/* deprecated */
+                        'username' => $this->get('username'),/* deprecated */
+                        'userpassword' => $newPassword,/* deprecated */
+                    ));
                 }
             }
         }
