@@ -38,6 +38,8 @@ MODx.grid.PluginEvent = function(config) {
             ,autoFill: false
             ,showPreview: true
         }
+        ,singleText: _('event')
+        ,pluralText: _('events')
         ,plugins: ec
         ,columns: [{
             header: _('id')
@@ -53,6 +55,12 @@ MODx.grid.PluginEvent = function(config) {
             ,sortable: true
         },ec
         ,{
+            header: _('group')
+            ,dataIndex: 'groupname'
+            ,id: 'modx-'+this.ident+'-col-groupname'
+            ,width: 200
+            ,editor: { xtype: 'textfield' }
+        },{
             header: _('propertyset')
             ,dataIndex: 'propertyset'
             ,id: 'modx-'+this.ident+'-col-propertyset'

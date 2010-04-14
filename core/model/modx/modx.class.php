@@ -2427,6 +2427,14 @@ class modX extends xPDO {
     /**
      * Gets a map of events and registered plugins for the specified context.
      *
+     * Service #s:
+     * 1 - Parser Service Events
+     * 2 - Manager Access Events
+     * 3 - Web Access Service Events
+     * 4 - Cache Service Events
+     * 5 - Template Service Events
+     * 6 - User Defined Events
+     *
      * @param string $contextKey Context identifier.
      * @return array A map of events and registered plugins for each.
      */
@@ -2435,16 +2443,28 @@ class modX extends xPDO {
         if ($contextKey) {
             switch ($contextKey) {
                 case 'mgr':
-                    $service= "ev.`service` IN (1,2,4,5,6) AND";
+                    /* dont load Web Access Service Events */
+                    $service= "`Event`.`service` IN (1,2,4,5,6) AND";
                     break;
                 default:
-                    $service= "ev.`service` IN (1,3,4,5,6) AND (ev.`groupname` = '' OR ev.`groupname` = 'RichText Editor' OR ev.`groupname` = 'modUser') AND";
+                    /* dont load Manager Access Events */
+                    $service= "`Event`.`service` IN (1,3,4,5,6) AND";
             }
-            $eeTbl= $this->getTableName('modPluginEvent');
+            $pluginEventTbl= $this->getTableName('modPluginEvent');
             $eventTbl= $this->getTableName('modEvent');
             $pluginTbl= $this->getTableName('modPlugin');
             $propsetTbl= $this->getTableName('modPropertySet');
-            $sql= "SELECT ev.`name` AS `event`, ee.`pluginid`, ps.`name` AS `propertyset` FROM {$eeTbl} ee INNER JOIN {$pluginTbl} pl ON pl.`id` = ee.`pluginid` AND pl.`disabled` = 0 INNER JOIN {$eventTbl} ev ON {$service} ev.`id` = ee.`evtid` LEFT JOIN {$propsetTbl} ps ON ee.`propertyset` = ps.`id` ORDER BY ev.`name`, ee.`priority` ASC";
+            $sql= "
+                SELECT
+                    `Event`.`name` AS `event`,
+                    `PluginEvent`.`pluginid`,
+                    `PropertySet`.`name` AS `propertyset`
+                FROM {$pluginEventTbl} `PluginEvent`
+                    INNER JOIN {$pluginTbl} `Plugin` ON `Plugin`.`id` = `PluginEvent`.`pluginid` AND `Plugin`.`disabled` = 0
+                    INNER JOIN {$eventTbl} `Event` ON {$service} `Event`.`id` = `PluginEvent`.`evtid`
+                    LEFT JOIN {$propsetTbl} `PropertySet` ON `PluginEvent`.`propertyset` = `PropertySet`.`id`
+                ORDER BY `Event`.`name`, `PluginEvent`.`priority` ASC
+            ";
             $stmt= $this->prepare($sql);
             if ($stmt && $stmt->execute()) {
                 while ($ee = $stmt->fetch(PDO::FETCH_ASSOC)) {
