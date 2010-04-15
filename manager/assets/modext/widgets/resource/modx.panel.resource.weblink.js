@@ -2,7 +2,7 @@
  * @class MODx.panel.WebLink
  * @extends MODx.FormPanel
  * @param {Object} config An object of configuration properties
- * @xtype panel-weblink
+ * @xtype modx-panel-weblink
  */
 MODx.panel.WebLink = function(config) {
     config = config || {};
@@ -18,7 +18,7 @@ MODx.panel.WebLink = function(config) {
             xtype: 'hidden'
             ,name: 'id'
             ,value: config.resource
-            ,id: 'modx-weblink-id'
+            ,id: 'modx-resource-id'
         },{
             layout:'column'
             ,border: false
@@ -32,7 +32,7 @@ MODx.panel.WebLink = function(config) {
                     ,fieldLabel: _('resource_template')
                     ,description: _('resource_template_help')
                     ,name: 'template'
-                    ,id: 'modx-weblink-template'
+                    ,id: 'modx-resource-template'
                     ,width: 300
                     ,editable: false
                     ,baseParams: {
@@ -55,7 +55,7 @@ MODx.panel.WebLink = function(config) {
                     ,boxLabel: _('resource_published')
                     ,description: _('resource_published_help')
                     ,name: 'published'
-                    ,id: 'modx-weblink-published'
+                    ,id: 'modx-resource-published'
                     ,inputValue: 1
                     ,checked: MODx.config.publish_default == '1' ? true : false
                     
@@ -66,7 +66,7 @@ MODx.panel.WebLink = function(config) {
             ,fieldLabel: _('resource_pagetitle')
             ,description: _('resource_pagetitle_help')
             ,name: 'pagetitle'
-            ,id: 'modx-weblink-pagetitle'
+            ,id: 'modx-resource-pagetitle'
             ,maxLength: 255
             ,allowBlank: false
             
@@ -75,7 +75,7 @@ MODx.panel.WebLink = function(config) {
             ,fieldLabel: _('resource_longtitle')
             ,description: _('resource_longtitle_help')
             ,name: 'longtitle'
-            ,id: 'modx-weblink-longtitle'
+            ,id: 'modx-resource-longtitle'
             ,maxLength: 255
             
         },{
@@ -83,7 +83,7 @@ MODx.panel.WebLink = function(config) {
             ,fieldLabel: _('resource_description')
             ,description: _('resource_description_help')
             ,name: 'description'
-            ,id: 'modx-weblink-description'
+            ,id: 'modx-resource-description'
             ,maxLength: 255
             
         },{
@@ -91,7 +91,7 @@ MODx.panel.WebLink = function(config) {
             ,fieldLabel: _('resource_alias')
             ,description: _('resource_alias_help')
             ,name: 'alias'
-            ,id: 'modx-weblink-alias'
+            ,id: 'modx-resource-alias'
             ,maxLength: 100
             
         },{
@@ -106,7 +106,7 @@ MODx.panel.WebLink = function(config) {
             ,fieldLabel: _('weblink')
             ,description: _('weblink_help')
             ,name: 'content'
-            ,id: 'modx-weblink-content'
+            ,id: 'modx-resource-content'
             ,width: 300
             ,maxLength: 255
             ,value: 'http://'
@@ -116,7 +116,7 @@ MODx.panel.WebLink = function(config) {
             ,fieldLabel: _('resource_summary')
             ,description: _('resource_summary_help')
             ,name: 'introtext'
-            ,id: 'modx-weblink-introtext'
+            ,id: 'modx-resource-introtext'
             ,grow: true
             
         },{
@@ -125,9 +125,9 @@ MODx.panel.WebLink = function(config) {
             ,description: _('resource_parent_help')
             ,name: 'parent-cmb'
             ,editable: false
-            ,id: 'modx-weblink-parent'
+            ,id: 'modx-resource-parent'
             ,value: config.record.parent || 0
-            ,formpanel: 'modx-panel-weblink'
+            ,formpanel: 'modx-panel-resource'
         },{
             xtype: 'hidden'
             ,name: 'parent'
@@ -138,7 +138,7 @@ MODx.panel.WebLink = function(config) {
             ,fieldLabel: _('resource_menutitle')
             ,description: _('resource_menutitle_help')
             ,name: 'menutitle'
-            ,id: 'modx-weblink-menutitle'
+            ,id: 'modx-resource-menutitle'
             ,maxLength: 255
             
         },{
@@ -146,7 +146,7 @@ MODx.panel.WebLink = function(config) {
             ,fieldLabel: _('resource_menuindex')
             ,description: _('resource_menuindex_help')
             ,name: 'menuindex'
-            ,id: 'modx-weblink-menuindex'
+            ,id: 'modx-resource-menuindex'
             ,width: 60
             
         },{
@@ -164,7 +164,7 @@ MODx.panel.WebLink = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'context_key'
-            ,id: 'modx-weblink-context-key'
+            ,id: 'modx-resource-context-key'
             ,value: 'web'
         },{
             html: MODx.onDocFormRender, border: false
@@ -177,7 +177,7 @@ MODx.panel.WebLink = function(config) {
         ,fieldLabel: _('resource_folder')
         ,description: _('resource_folder_help')
         ,name: 'isfolder'
-        ,id: 'modx-weblink-isfolder'
+        ,id: 'modx-resource-isfolder'
         ,inputValue: 1        
     });
     va.push({
@@ -185,7 +185,7 @@ MODx.panel.WebLink = function(config) {
         ,fieldLabel: _('resource_publishedon')
         ,description: _('resource_publishedon_help')
         ,name: 'publishedon'
-        ,id: 'modx-weblink-publishedon'
+        ,id: 'modx-resource-publishedon'
         ,allowBlank: true
         ,dateFormat: MODx.config.manager_date_format
         ,dateWidth: 120
@@ -197,7 +197,7 @@ MODx.panel.WebLink = function(config) {
             ,fieldLabel: _('resource_publishdate')
             ,description: _('resource_publishdate_help')
             ,name: 'pub_date'
-            ,id: 'modx-weblink-pub-date'
+            ,id: 'modx-resource-pub-date'
             ,allowBlank: true
             ,dateFormat: MODx.config.manager_date_format
             ,dateWidth: 120
@@ -210,7 +210,7 @@ MODx.panel.WebLink = function(config) {
             ,fieldLabel: _('resource_unpublishdate')
             ,description: _('resource_unpublishdate_help')
             ,name: 'unpub_date'
-            ,id: 'modx-weblink-unpub-date'
+            ,id: 'modx-resource-unpub-date'
             ,allowBlank: true
             ,dateFormat: MODx.config.manager_date_format
             ,dateWidth: 120
@@ -222,7 +222,7 @@ MODx.panel.WebLink = function(config) {
         ,fieldLabel: _('resource_searchable')
         ,description: _('resource_searchable_help')
         ,name: 'searchable'
-        ,id: 'modx-weblink-searchable'
+        ,id: 'modx-resource-searchable'
         ,inputValue: 1
         ,checked: MODx.config.search_default == '1' ? true : false        
     });
@@ -231,7 +231,7 @@ MODx.panel.WebLink = function(config) {
         ,fieldLabel: _('resource_cacheable')
         ,description: _('resource_cacheable_help')
         ,name: 'cacheable'
-        ,id: 'modx-weblink-cacheable'
+        ,id: 'modx-resource-cacheable'
         ,inputValue: 1
         ,checked: true        
     });
@@ -240,14 +240,14 @@ MODx.panel.WebLink = function(config) {
         ,fieldLabel: _('resource_syncsite')
         ,description: _('resource_syncsite_help')
         ,name: 'syncsite'
-        ,id: 'modx-weblink-syncsite'
+        ,id: 'modx-resource-syncsite'
         ,inputValue: 1
         ,checked: true 
     });
     va.push({
         xtype: 'hidden'
         ,name: 'class_key'
-        ,id: 'modx-weblink-class-key'
+        ,id: 'modx-resource-class-key'
         ,value: 'modStaticResource'
         
     });
@@ -256,7 +256,7 @@ MODx.panel.WebLink = function(config) {
         ,fieldLabel: _('resource_content_type')
         ,description: _('resource_content_type_help')
         ,name: 'content_type'
-        ,id: 'modx-weblink-content-type'
+        ,id: 'modx-resource-content-type'
         ,width: 300
         ,value: 1
     });
@@ -265,20 +265,20 @@ MODx.panel.WebLink = function(config) {
         ,fieldLabel: _('resource_contentdispo')
         ,description: _('resource_contentdispo_help')
         ,name: 'content_dispo'
-        ,id: 'modx-weblink-content-dispo'
+        ,id: 'modx-resource-content-dispo'
         ,width: 300
     });
     va.push({
         xtype: 'textfield'
         ,fieldLabel: _('class_key')
         ,name: 'class_key'
-        ,id: 'modx-weblink-class-key'
+        ,id: 'modx-resource-class-key'
         ,allowBlank: false
         ,value: 'modStaticResource'    
         ,width: 250
     });
     it.push({
-        id: 'modx-weblink-page-settings'
+        id: 'modx-resource-page-settings'
         ,title: _('page_settings')
         ,layout: 'form'
         ,labelWidth: 200
@@ -327,7 +327,7 @@ MODx.panel.WebLink = function(config) {
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+_('weblink_new')+'</h2>'
-            ,id: 'modx-weblink-header'
+            ,id: 'modx-resource-header'
             ,cls: 'modx-page-header'
             ,border: false
         },MODx.getPageStructure(it,{id:'modx-resource-tabs' ,forceLayout: true ,deferredRender: false })]
@@ -365,7 +365,7 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
                     if (r.object.unpub_date == '0') { r.object.unpub_date = ''; }
                     r.object['parent-cmb'] = r.object['parent'];
                     
-                    Ext.getCmp('modx-weblink-header').getEl().update('<h2>'+_('weblink')+': '+r.object.pagetitle+'</h2>');
+                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('weblink')+': '+r.object.pagetitle+'</h2>');
                     
                     this.getForm().setValues(r.object);
                     this.fireEvent('ready');
@@ -391,7 +391,7 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
         if (g) { g.getStore().commitChanges(); }
         var t = Ext.getCmp('modx-resource-tree');
         if (t) {
-            var ctx = Ext.getCmp('modx-weblink-context-key').getValue();
+            var ctx = Ext.getCmp('modx-resource-context-key').getValue();
             var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
             var v = ctx+'_'+pa;
             var n = t.getNodeById(v);
@@ -402,7 +402,7 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
     }
     
     ,templateWarning: function() {
-        var t = Ext.getCmp('modx-weblink-template');
+        var t = Ext.getCmp('modx-resource-template');
         if (!t) { return false; }
         if(t.getValue() != t.originalValue) {
             Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
@@ -433,11 +433,11 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
 Ext.reg('modx-panel-weblink',MODx.panel.WebLink);
 
 var triggerDirtyField = function(fld) {
-    Ext.getCmp('modx-panel-weblink').fieldChangeEvent(fld);
+    Ext.getCmp('modx-panel-resource').fieldChangeEvent(fld);
 };
 MODx.triggerRTEOnChange = function(i) {
     triggerDirtyField(Ext.getCmp('ta'));
 };
 MODx.fireResourceFormChange = function(f,nv,ov) {
-    Ext.getCmp('modx-panel-weblink').fireEvent('fieldChange');
+    Ext.getCmp('modx-panel-resource').fireEvent('fieldChange');
 };
