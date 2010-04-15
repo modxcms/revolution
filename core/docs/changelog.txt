@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Sanity checks to prevent user from accidentally removing admin/resource access policies
 - [#MODX-1860] Fixed bug where new password was being hidden too fast when changing user password
 - Added proxy support to modRestCurlClient for Package Management
 - Added a couple refactorings to modRestSockClient to prevent possible errors
