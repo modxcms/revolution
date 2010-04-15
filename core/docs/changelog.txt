@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug where User Settings could not be removed
 - Enabled ability to set absolute path and placeholders for filemanager_path and rb_base_dir
 - [#MODX-1791] modPackageBuilder::createPackage now forces lowercase package name to be more compatible across environments
 - Sanity checks to prevent user from accidentally removing admin/resource access policies
