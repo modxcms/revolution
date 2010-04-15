@@ -192,7 +192,9 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     Ext.callback(callback,scope || this,[itm]);
                 } else { location.href = callback; }
             }
+            return true;
         },this);
+        return true;
     }
         
     ,reloadPage: function() {
@@ -259,6 +261,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 }
                 break;
             case 'stay':
+                var url;
                 if (o.form.hasListener('actionContinue')) {
                     o.form.fireEvent('actionContinue',itm.params);
                 } else {
@@ -269,16 +272,13 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                         itm.params.id = res.object.id;
                         if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
                         if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
-                        var url = Ext.urlEncode(itm.params);
+                        url = Ext.urlEncode(itm.params);
                         location.href = '?a='+o.actions.edit+'&'+url;
                         
                     } else if (itm.process === 'delete') {
                         itm.params.a = o.actions.cancel;
-                        var url = Ext.urlEncode(itm.params);
-                        location.href = '?'+url;
-                        
-                    } else {
-                        Ext.Msg.hide();
+                        url = Ext.urlEncode(itm.params);
+                        location.href = '?'+url;   
                     }
                 }
                 break;

@@ -70,7 +70,7 @@ Ext.extend(MODx,Ext.Component,{
     ,loadAccordionPanels: function() { return []; }
     
     ,clearCache: function() {
-        if (!this.fireEvent('beforeClearCache')) return false;
+        if (!this.fireEvent('beforeClearCache')) { return false; }
         
         var topic = '/clearcache/';
         if (this.console == null || this.console == undefined) {
@@ -101,6 +101,7 @@ Ext.extend(MODx,Ext.Component,{
                 },scope:this}
             }
         });
+        return true;
     }
     
     ,releaseLock: function(id) {
@@ -160,7 +161,7 @@ Ext.extend(MODx,Ext.Component,{
     
     ,loadHelpPane: function(b) {
         var url = MODx.config.help_url;
-        if (!url) return false;
+        if (!url) { return false; }
         MODx.helpWindow = new Ext.Window({
             title: _('help')
             ,width: 850
@@ -175,6 +176,7 @@ Ext.extend(MODx,Ext.Component,{
             }
         });
         MODx.helpWindow.show(b);
+        return true;
     }
 });
 Ext.reg('modx',MODx);
@@ -210,21 +212,23 @@ Ext.extend(MODx.Ajax,Ext.Component,{
         Ext.apply(config,{
             success: function(r,o) {
                 r = Ext.decode(r.responseText);
-                if (!r) return false;
+                if (!r) { return false; }
                 r.options = o;
                 if (r.success) {
                     this.fireEvent('success',r);
                 } else if (this.fireEvent('failure',r)) {
                     MODx.form.Handler.errorJSON(r);
                 }
+                return true;
             }
             ,failure: function(r,o) {
             	r = Ext.decode(r.responseText);
-                if (!r) return false;
+                if (!r) { return false; }
             	r.options = o;
             	if (this.fireEvent('failure',r)) {
-            		MODx.form.Handler.errorJSON(r);
+                    MODx.form.Handler.errorJSON(r);
             	}
+                return true;
             }
             ,scope: this
             ,headers: { 'modx': 'modx' }

@@ -83,13 +83,13 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,msg: o.result.message
                 ,buttons: Ext.Msg.OK
                 ,fn: function(btn) {
-                    if (btn == 'ok') { 
-                        location.href = '?a='+MODx.action['security/user/update']+'&id='+o.result.object.id; 
+                    if (btn == 'ok') {
+                        /*location.href = '?a='+MODx.action['security/user/update']+'&id='+o.result.object.id;*/
                     }
                     return false;
                 }
             });
-        } else if (this.config.user == 0) {            
+        } else if (this.config.user == 0) {
             location.href = '?a='+MODx.action['security/user/update']+'&id='+o.result.object.id;
         }
     }
