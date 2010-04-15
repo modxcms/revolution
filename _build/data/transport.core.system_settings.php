@@ -855,6 +855,15 @@ $settings['strip_image_paths']->fromArray(array (
   'area' => 'file',
   'editedon' => null,
 ), '', true, true);
+$settings['tree_root_id']= $xpdo->newObject('modSystemSetting');
+$settings['tree_root_id']->fromArray(array (
+  'key' => 'tree_root_id',
+  'value' => '0',
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['udperms_allowroot']= $xpdo->newObject('modSystemSetting');
 $settings['udperms_allowroot']->fromArray(array (
   'key' => 'udperms_allowroot',

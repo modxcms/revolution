@@ -18,13 +18,14 @@ $sortBy = $modx->getOption('sortBy',$scriptProperties,'menuindex');
 $stringLiterals = $modx->getOption('stringLiterals',$scriptProperties,false);
 $noMenu = $modx->getOption('noMenu',$scriptProperties,false);
 
+$defaultRootId = $modx->getOption('tree_root_id',null,0);
 if (empty($scriptProperties['id'])) {
     $context= 'root';
-	$node= 0;
+    $node= $defaultRootId;
 } else {
     $parts= explode('_', $scriptProperties['id']);
     $context= isset($parts[0]) ? $parts[0] : 'root';
-    $node = isset($parts[1]) ? intval($parts[1]) : 0;
+    $node = !empty($parts[1]) ? intval($parts[1]) : $defaultRootId;
 }
 if (!empty($scriptProperties['debug'])) echo '<p style="width: 800px; font-family: \'Lucida Console\'; font-size: 11px">';
 
@@ -32,6 +33,11 @@ if (!empty($scriptProperties['debug'])) echo '<p style="width: 800px; font-famil
 if (empty($context) || $context == 'root') {
     $itemClass= 'modContext';
     $c= $modx->newQuery($itemClass, array("`key` != 'mgr'"));
+    if (!empty($defaultRootId)) {
+        $c->where(array(
+            '(SELECT COUNT(*) FROM '.$modx->getTableName('modResource').' WHERE `context_key` = `modContext`.`key` AND `id` = '.$defaultRootId.') > 0',
+        ));
+    }
 } else {
     $itemClass= 'modResource';
     $c= $modx->newQuery($itemClass);
