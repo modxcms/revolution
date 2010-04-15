@@ -122,7 +122,7 @@ class modPackageBuilder {
     */
     public function createPackage($name, $version, $release = '') {
         /* setup the signature and filename */
-        $s['name'] = $name;
+        $s['name'] = strtolower($name);
         $s['version'] = $version;
         $s['release'] = $release;
         $this->signature = $s['name'];
@@ -139,7 +139,8 @@ class modPackageBuilder {
             unlink($this->directory . $this->filename);
         }
         if (file_exists($this->directory . $this->signature) && is_dir($this->directory . $this->signature)) {
-            if ($cacheManager = $this->modx->getCacheManager()) {
+            $cacheManager = $this->modx->getCacheManager();
+            if ($cacheManager) {
                 $cacheManager->deleteTree($this->directory . $this->signature, true, false, array ());
             }
         }
