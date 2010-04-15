@@ -28,18 +28,17 @@ $actions = $modx->request->getAllActionIDs();
 
 /* get base paths and sanitize incoming paths */
 $modx->getService('fileHandler','modFileHandler');
-$root = $modx->fileHandler->getBasePath();
 $dir = $modx->fileHandler->sanitizePath($dir);
 $dir = $modx->fileHandler->postfixSlash($dir);
+$root = $modx->fileHandler->getBasePath();
 $fullpath = $root.$dir;
 
-$relativeRootPath = $modx->fileHandler->getBasePath(false);
-$relativeRootPath = $modx->fileHandler->postfixSlash($relativeRootPath);
+$relativeRootPath = $modx->fileHandler->postfixSlash($root);
 
 /* iterate through directories */
 foreach (new DirectoryIterator($fullpath) as $file) {
-	if (in_array($file,array('.','..','.svn','_notes'))) continue;
-	if (!$file->isReadable()) continue;
+    if (in_array($file,array('.','..','.svn','_notes'))) continue;
+    if (!$file->isReadable()) continue;
 
     $fileName = $file->getFilename();
     $filePathName = $file->getPathname();
@@ -47,11 +46,11 @@ foreach (new DirectoryIterator($fullpath) as $file) {
 
     /* handle dirs */
     if ($file->isDir()) {
-	    $directories[$fileName] = array(
-		    'id' => $dir.$fileName,
-		    'text' => $fileName,
-		    'cls' => 'folder',
-		    'type' => 'dir',
+        $directories[$fileName] = array(
+            'id' => $dir.$fileName,
+            'text' => $fileName,
+            'cls' => 'folder',
+            'type' => 'dir',
             'leaf' => false,
             'perms' => $octalPerms,
             'menu' => array(

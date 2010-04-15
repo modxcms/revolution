@@ -52,11 +52,27 @@ class modFileHandler {
      * to the return value. Defaults to true.
      * @return string The base path
      */
-    public function getBasePath($prependBasePath = true) {
-        $root = $this->modx->getOption('filemanager_path',null,false);
+    public function getBasePath($prependBasePath = false) {
+        $root = $this->modx->getOption('filemanager_path',null,'');
         if (empty($root)) {
             $root = $this->modx->getOption('rb_base_dir');
         }
+        /* expand placeholders */
+        $root = str_replace(array(
+            '{base_path}',
+            '{core_path}',
+            '{assets_path}',
+        ),array(
+            $this->modx->getOption('base_path'),
+            $this->modx->getOption('core_path'),
+            $this->modx->getOption('assets_path'),
+        ),$root);
+
+        /* check for absolute/relative */
+        if (substr($root,0,1) != '/') {
+            $root = $this->modx->getOption('base_path',null,MODX_BASE_PATH).$root;
+        }
+
         $root = ($prependBasePath ? $this->modx->getOption('base_path') : '').$root;
         return $this->postfixSlash($root);
     }
