@@ -17,6 +17,7 @@ $_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = 'Lexicon and Language';
 $_lang['area_mail'] = 'Mail';
 $_lang['area_manager'] = 'Back-end Manager';
+$_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session and Cookie';
 $_lang['area_lexicon_string'] = 'Area Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>gateway</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
@@ -275,6 +276,21 @@ $_lang['setting_new_folder_permissions_desc'] = 'When creating a new folder in t
 
 $_lang['setting_password_generated_length'] = 'Password Auto-Generated Length';
 $_lang['setting_password_generated_length_desc'] = 'The length of the auto-generated password for a User.';
+
+$_lang['setting_proxy_auth_type'] = 'Proxy Authentication Type';
+$_lang['setting_proxy_auth_type_desc'] = 'Supports either BASIC or NTLM.';
+
+$_lang['setting_proxy_host'] = 'Proxy Host';
+$_lang['setting_proxy_host_desc'] = 'If your server is using a proxy, set the hostname here to enable MODx features that might need to use the proxy, such as Package Management.';
+
+$_lang['setting_proxy_password'] = 'Proxy Password';
+$_lang['setting_proxy_password_desc'] = 'The password required to authenticate to your proxy server.';
+
+$_lang['setting_proxy_port'] = 'Proxy Port';
+$_lang['setting_proxy_port_desc'] = 'The port for your proxy server.';
+
+$_lang['setting_proxy_username'] = 'Proxy Username';
+$_lang['setting_proxy_username_desc'] = 'The username to authenticate against with your proxy server.';
 
 $_lang['setting_password_min_length'] = 'Minimum Password Length';
 $_lang['setting_password_min_length_desc'] = 'The minimum length for a password for a User.';

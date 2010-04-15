@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added proxy support to modRestCurlClient for Package Management
+- Added a couple refactorings to modRestSockClient to prevent possible errors
 - Consolidated user group create system events into one event, OnUserGroupCreate
 - Fixed some various plugin event calls
 - Fixed Plugin Event code to restrict groupname to a UI filter only, not in event caching; adjusted UI grid to support groupname in display

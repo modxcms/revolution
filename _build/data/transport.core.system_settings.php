@@ -584,6 +584,51 @@ $settings['modx_charset']->fromArray(array (
   'area' => 'language',
   'editedon' => null,
 ), '', true, true);
+$settings['proxy_auth_type']= $xpdo->newObject('modSystemSetting');
+$settings['proxy_auth_type']->fromArray(array (
+  'key' => 'proxy_auth_type',
+  'value' => 'BASIC',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'proxy',
+  'editedon' => null,
+), '', true, true);
+$settings['proxy_host']= $xpdo->newObject('modSystemSetting');
+$settings['proxy_host']->fromArray(array (
+  'key' => 'proxy_host',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'proxy',
+  'editedon' => null,
+), '', true, true);
+$settings['proxy_password']= $xpdo->newObject('modSystemSetting');
+$settings['proxy_password']->fromArray(array (
+  'key' => 'proxy_password',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'proxy',
+  'editedon' => null,
+), '', true, true);
+$settings['proxy_port']= $xpdo->newObject('modSystemSetting');
+$settings['proxy_port']->fromArray(array (
+  'key' => 'proxy_port',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'proxy',
+  'editedon' => null,
+), '', true, true);
+$settings['proxy_username']= $xpdo->newObject('modSystemSetting');
+$settings['proxy_username']->fromArray(array (
+  'key' => 'proxy_username',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'proxy',
+  'editedon' => null,
+), '', true, true);
 $settings['password_generated_length']= $xpdo->newObject('modSystemSetting');
 $settings['password_generated_length']->fromArray(array (
   'key' => 'password_generated_length',

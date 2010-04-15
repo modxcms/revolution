@@ -33,10 +33,13 @@ class modRestSockClient extends modRestClient {
         $out = $method." ".$purl['path']."/$path HTTP/1.1\r\n"
                 ."Host: $host\r\n"
                 ."User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3\r\n"
+                ."Content-type: text/xml; charset=UTF-8\r\n"
                 ."Accept: */*\r\n"
                 ."Accept-Language: en-us,en;q=0.5\r\n"
                 ."Accept-Charset: utf-8;q=0.7,*;q=0.7\r\n"
+                ."Accept-Encoding: gzip, deflate, compress;q=0.9\r\n"
                 /*."Keep-Alive: 300\r\n" */
+                ."Referer: ".$_SERVER['REMOTE_ADDR']."\r\n"
                 ."Connection: Close\r\n\r\n";
 
         fwrite($sock,$out);
@@ -55,8 +58,11 @@ class modRestSockClient extends modRestClient {
         }
         fclose($sock);
 
-        $startPos = strpos($response,'<?xml');
-        $response = substr($response, $startPos);
+        list($header,$response) = explode('<?xml',$response);
+        $response = '<?xml'.$response;
+        /* commented out for debugging */
+        //echo '<textarea cols="180" rows="50">'.$response.'</textarea>'; die();
+        //echo '<pre>'.htmlentities($xml->asXml()).'</pre>'; die();
         return $response;
     }
 
