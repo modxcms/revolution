@@ -92,3 +92,23 @@ foreach ($deprecatedEvents as $eventName) {
         $event->remove();
     }
 }
+
+
+/* drop modEvent ID field */
+$class = 'modEvent';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['drop_column'],'id',$table);
+$sql = "ALTER TABLE {$table} DROP `id`";
+$this->processResults($class,$description,$sql);
+
+/* drop name unique index */
+$class = 'modEvent';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['drop_column'],'id',$table);
+$sql = "ALTER TABLE {$table} DROP INDEX `name`";
+$this->processResults($class,$description,$sql);
+
+/* add name as PK */
+$sql = "ALTER TABLE {$table} ADD PRIMARY KEY (`name`)";
+$this->install->xpdo->exec($sql);
+

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Dropped unnecessary ID field on modEvent table and made `name` column PK
 - Refactored modX::invokeEvent and modX::getEventMap to take advantage of new plugin event changes
 - Adjusted the modPluginEvent model to reference the event name rather than id
 - Added new model-based System Events to work more effectively in any context

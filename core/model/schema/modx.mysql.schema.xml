@@ -243,14 +243,15 @@
         <aggregate alias="PropertySet" class="modPropertySet" local="property_set" foreign="id" owner="foreign" cardinality="one" />
     </object>
     
-    <object class="modEvent" table="system_eventnames" extends="xPDOSimpleObject">
+    <object class="modEvent" table="system_eventnames" extends="xPDOObject">
         <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="service" dbtype="tinyint" precision="4" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="groupname" dbtype="varchar" precision="20" phptype="string" null="false" default="" />
         
         <aggregate alias="PluginEvents" class="modPluginEvent" local="name" foreign="event" cardinality="many" owner="local" />
     </object>
-    
+
+    <!-- Deprecated -->
     <object class="modEventLog" table="event_log" extends="xPDOSimpleObject">
         <field key="eventid" dbtype="int" precision="11" phptype="integer" null="true" default="0" />
         <field key="createdon" dbtype="int" precision="11" phptype="timestamp" null="false" default="0" />
@@ -260,7 +261,7 @@
         <field key="source" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
         <field key="description" dbtype="text" phptype="string" />
         
-        <composite alias="Event" class="modEvent" key="id" local="eventid" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="Event" class="modEvent" key="id" local="eventid" foreign="name" cardinality="one" owner="foreign" />
     </object>
     
     <object class="modJSONRPCResource" extends="modXMLRPCResource" />

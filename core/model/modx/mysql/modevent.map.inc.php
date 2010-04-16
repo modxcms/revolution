@@ -46,9 +46,8 @@ $xpdo_meta_map['modEvent']= array (
     'PluginEvents' => 
     array (
       'class' => 'modPluginEvent',
-      'key' => 'id',
-      'local' => 'id',
-      'foreign' => 'evtid',
+      'local' => 'name',
+      'foreign' => 'event',
       'cardinality' => 'many',
       'owner' => 'local',
     ),

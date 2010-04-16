@@ -29,7 +29,7 @@ MODx.grid.PluginEvent = function(config) {
         }
         ,enableColumnResize: true
         ,enableColumnMove: true        
-        ,fields: ['id','name','service','groupname','enabled','priority','propertyset','menu']
+        ,fields: ['name','service','groupname','enabled','priority','propertyset','menu']
         ,paging: false
         ,remoteSort: true
         ,viewConfig: {

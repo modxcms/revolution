@@ -46,7 +46,7 @@ foreach ($plugins as $plugin) {
     $list[] = array(
         $pluginArray['id'],
         $pluginArray['name'],
-        $pluginArray['priorityy'],
+        $pluginArray['priority'],
         $pluginArray['propertyset'],
         array(),
     );

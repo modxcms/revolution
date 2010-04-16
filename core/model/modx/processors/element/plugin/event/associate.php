@@ -8,25 +8,27 @@ $modx->lexicon->load('plugin','system_events');
 
 /* get event */
 if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexicon('plugin_event_err_ns'));
-$event = $modx->getObject('modEvent',array('name' => $scriptProperties['name']));
+$event = $modx->getObject('modEvent',$scriptProperties['name']);
 if ($event == null) return $modx->error->failure($modx->lexicon('plugin_event_err_nf'));
 
 /* get plugins */
 $plugins = $modx->fromJSON($scriptProperties['plugins']);
 
-/* first remove all */
-$opes = $modx->getCollection('modPluginEvent',array(
-    'event' => $event->get('name'),
-));
-foreach ($opes as $op) { $op->remove(); }
-/* now add back in */
-foreach ($plugins as $plugin) {
-    $pluginEvent = $modx->newObject('modPluginEvent');
-    $pluginEvent->set('event',$event->get('name'));
-    $pluginEvent->set('pluginid',$plugin['id']);
-    $pluginEvent->set('priority',$plugin['priority']);
-    $pluginEvent->set('propertyset',$plugin['propertyset']);
-    $pluginEvent->save();
+$eventName = $event->get('name');
+foreach ($plugins as $pluginArray) {
+    $pluginEvent = $modx->getObject('modPluginEvent',array(
+        'event' => $eventName,
+    ));
+    if (empty($pluginEvent)) {
+        $pluginEvent = $modx->newObject('modPluginEvent');
+        $pluginEvent->set('event',$eventName);
+        $pluginEvent->set('pluginid',$pluginArray['id']);
+    }
+    $pluginEvent->set('priority',!empty($pluginArray['priority']) ? $pluginArray['priority'] : 0);
+    $pluginEvent->set('propertyset',!empty($pluginArray['propertyset']) ? $pluginArray['propertyset'] : 0);
+    if (!$pluginEvent->save()) {
+        return $modx->error->failure($modx->lexicon('plugin_event_err_save').print_r($pluginEvent->toArray(),true));
+    }
 }
 
 return $modx->error->success();

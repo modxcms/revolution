@@ -81,7 +81,7 @@ $xpdo_meta_map['modEventLog']= array (
       'class' => 'modEvent',
       'key' => 'id',
       'local' => 'eventid',
-      'foreign' => 'id',
+      'foreign' => 'name',
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
