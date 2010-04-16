@@ -53,7 +53,7 @@ $template->set('locked',!empty($scriptProperties['locked']));
 
 /* invoke OnBeforeTempFormSave event */
 $modx->invokeEvent('OnBeforeTempFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $template->get('id'),
     'template' => &$template,
 ));
@@ -97,7 +97,7 @@ if (isset($scriptProperties['tvs'])) {
 
 /* invoke OnTempFormSave event */
 $modx->invokeEvent('OnTempFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $template->get('id'),
     'template' => &$template,
 ));

@@ -45,7 +45,7 @@ if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon
 
 /* invoke OnBeforeTVFormSave event */
 $modx->invokeEvent('OnBeforeTVFormSave',array(
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $tv->get('id'),
     'tv' => &$tv,
 ));
@@ -148,7 +148,7 @@ if ($modx->hasPermission('access_permissions')) {
 
 /* invoke OnTVFormSave event */
 $modx->invokeEvent('OnTVFormSave',array(
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $tv->get('id'),
     'tv' => &$tv,
 ));

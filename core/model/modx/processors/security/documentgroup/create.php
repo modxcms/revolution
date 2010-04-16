@@ -24,10 +24,6 @@ if ($resourceGroup->save() == false) {
     return $modx->error->failure($modx->lexicon('resource_group_err_create'));
 }
 
-$modx->invokeEvent('OnCreateDocGroup',array(
-    'group' => &$resourceGroup,
-));
-
 /* log manager action */
 $modx->logManagerAction('new_resource_group','modResourceGroup',$resourceGroup->get('id'));
 

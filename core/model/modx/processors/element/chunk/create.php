@@ -45,7 +45,7 @@ $chunk->set('locked',!empty($scriptProperties['locked']));
 
 /* invoke OnBeforeChunkFormSave event */
 $modx->invokeEvent('OnBeforeChunkFormSave',array(
-    'mode'  => 'new',
+    'mode'  => modSystemEvent::MODE_NEW,
     'id' => 0,
     'data' => $chunk->toArray(),
     'chunk' => &$chunk,
@@ -66,7 +66,7 @@ if ($chunk->save() == false) {
 
 /* invoke OnChunkFormSave event */
 $modx->invokeEvent('OnChunkFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id'   => $chunk->get('id'),
     'chunk' => &$chunk,
 ));

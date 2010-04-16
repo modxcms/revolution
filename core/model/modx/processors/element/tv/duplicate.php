@@ -29,29 +29,28 @@ $tv->fromArray($old_tv->toArray());
 $tv->set('name',$newname);
 
 if ($tv->save() === false) {
-	return $modx->error->failure($modx->lexicon('tv_err_duplicate'));
+    return $modx->error->failure($modx->lexicon('tv_err_duplicate'));
 }
-
 
 foreach ($old_tv->templates as $old_tvt) {
-	$new_template = $modx->newObject('modTemplateVarTemplate');
-	$new_template->set('tmplvarid',$tv->get('id'));
-	$new_template->set('templateid',$old_tvt->get('templateid'));
-	$new_template->set('rank',$old_tvt->get('rank'));
-	$new_template->save();
+    $new_template = $modx->newObject('modTemplateVarTemplate');
+    $new_template->set('tmplvarid',$tv->get('id'));
+    $new_template->set('templateid',$old_tvt->get('templateid'));
+    $new_template->set('rank',$old_tvt->get('rank'));
+    $new_template->save();
 }
 foreach ($old_tv->resources as $old_tvr) {
-	$new_resource = $modx->newObject('modTemplateVarResource');
-	$new_resource->set('tmplvarid',$tv->get('id'));
-	$new_resource->set('contentid',$old_tvr->get('contentid'));
-	$new_resource->set('value',$old_tvr->get('value'));
-	$new_resource->save();
+    $new_resource = $modx->newObject('modTemplateVarResource');
+    $new_resource->set('tmplvarid',$tv->get('id'));
+    $new_resource->set('contentid',$old_tvr->get('contentid'));
+    $new_resource->set('value',$old_tvr->get('value'));
+    $new_resource->save();
 }
 foreach ($old_tv->resource_groups as $old_tvrg) {
-	$new_rgroup = $modx->newObject('modTemplateVarResourceGroup');
-	$new_rgroup->set('tmplvarid',$tv->get('id'));
-	$new_rgroup->set('documentgroup',$old_tvrg->get('documentgroup'));
-	$new_rgroup->save();
+    $new_rgroup = $modx->newObject('modTemplateVarResourceGroup');
+    $new_rgroup->set('tmplvarid',$tv->get('id'));
+    $new_rgroup->set('documentgroup',$old_tvrg->get('documentgroup'));
+    $new_rgroup->save();
 }
 
 /* log manager action */

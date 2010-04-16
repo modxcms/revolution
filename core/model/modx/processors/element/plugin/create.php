@@ -47,7 +47,7 @@ if (is_array($properties)) $plugin->setProperties($properties);
 
 /* invoke OnBeforePluginFormSave event */
 $modx->invokeEvent('OnBeforePluginFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => 0,
     'plugin' => &$plugin,
 ));
@@ -64,19 +64,19 @@ if (isset($scriptProperties['events'])) {
         if (!empty($event['enabled'])) {
             $pluginEvent = $modx->getObject('modPluginEvent',array(
                 'pluginid' => $plugin->get('id'),
-                'evtid' => $event['id'],
+                'event' => $event['name'],
             ));
             if ($pluginEvent == null) {
                 $pluginEvent = $modx->newObject('modPluginEvent');
             }
             $pluginEvent->set('pluginid',$plugin->get('id'));
-            $pluginEvent->set('evtid',$event['id']);
+            $pluginEvent->set('event',$event['name']);
             $pluginEvent->set('priority',$event['priority']);
             $pluginEvent->save();
         } else {
             $pluginEvent = $modx->getObject('modPluginEvent',array(
                 'pluginid' => $plugin->get('id'),
-                'evtid' => $event['id'],
+                'event' => $event['name'],
             ));
             if ($pluginEvent == null) continue;
             $pluginEvent->remove();
@@ -86,7 +86,7 @@ if (isset($scriptProperties['events'])) {
 
 /* invoke OnPluginFormSave event */
 $modx->invokeEvent('OnPluginFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => $plugin->get('id'),
     'plugin' => &$plugin,
 ));

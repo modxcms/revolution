@@ -13,6 +13,59 @@ class modUser extends modPrincipal {
     public $sessionContexts= array ();
 
     /**
+     * Overrides xPDOObject::save to fire modX-specific events
+     * 
+     * {@inheritDoc}
+     */
+    public function save($cacheFlag = false) {
+        $isNew = $this->isNew();
+        
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnUserBeforeSave',array(
+                'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
+                'user' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
+        }
+
+        $saved = parent :: save($cacheFlag);
+        
+        if ($saved && $this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnUserSave',array(
+                'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
+                'user' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
+        }
+        return $saved;
+    }
+
+    /**
+     * Overrides xPDOObject::remove to fire modX-specific events
+     *
+     * {@inheritDoc}
+     */
+    public function remove(array $ancestors = array()) {
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnUserBeforeRemove',array(
+                'user' => &$this,
+                'ancestors' => $ancestors,
+            ));
+        }
+
+        $removed = parent :: remove($ancestors);
+
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnUserRemove',array(
+                'user' => &$this,
+                'ancestors' => $ancestors,
+            ));
+        }
+
+        return $removed;
+    }
+
+    /**
      * Loads the principal attributes that define a modUser security profile.
      *
      * {@inheritdoc}
@@ -254,7 +307,7 @@ class modUser extends modPrincipal {
         $changed= false;
         if ($this->get('password') === md5($oldPassword)) {
             if (!empty ($newPassword)) {
-                $this->set('password', $newPassword);
+                $this->set('password', md5($newPassword));
                 $changed= $this->save();
                 if ($changed) {
                     $this->xpdo->invokeEvent('OnUserChangePassword', array (
@@ -702,5 +755,33 @@ class modUser extends modPrincipal {
             $pass .= $allowable_characters[mt_rand(0, $ps_len -1)];
         }
         return $pass;
+    }
+
+    /**
+     * Send an email to the user
+     *
+     * @param string $message The body of the email
+     * @param array $options An array of options
+     * @return boolean True if successful
+     */
+    public function sendEmail($message,array $options = array()) {
+        if (!($this->xpdo instanceof modX)) return false;
+        $profile = $this->getOne('Profile');
+        if (empty($profile)) return false;
+
+        $this->xpdo->getService('mail', 'mail.modPHPMailer');
+        $this->xpdo->mail->set(modMail::MAIL_BODY, $message);
+        $this->xpdo->mail->set(modMail::MAIL_FROM, $this->xpdo->getOption('from',$options,$this->xpdo->getOption('emailsender')));
+        $this->xpdo->mail->set(modMail::MAIL_FROM_NAME, $this->xpdo->getOption('fromName',$options,$this->xpdo->getOption('site_name')));
+        $this->xpdo->mail->set(modMail::MAIL_SENDER, $this->xpdo->getOption('sender',$options,$this->xpdo->getOption('emailsender')));
+        $this->xpdo->mail->set(modMail::MAIL_SUBJECT, $this->xpdo->getOption('subject',$options,$this->xpdo->getOption('emailsubject')));
+        $this->xpdo->mail->address('to',$profile->get('email'),$profile->get('fullname'));
+        $this->xpdo->mail->address('reply-to',$this->xpdo->getOption('sender',$options,$this->xpdo->getOption('emailsender')));
+        $this->xpdo->mail->setHTML($this->xpdo->getOption('html',$options,false));
+        if ($this->xpdo->mail->send() == false) {
+            return false;
+        }
+        $modx->mail->reset();
+        return true;
     }
 }

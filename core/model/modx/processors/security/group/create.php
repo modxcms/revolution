@@ -72,9 +72,4 @@ if (!empty($scriptProperties['resource_groups'])) {
 /* log manager action */
 $modx->logManagerAction('new_user_group','modUserGroup',$usergroup->get('id'));
 
-/* fire OnUserGroupCreate */
-$modx->invokeEvent('OnUserGroupCreate',array(
-    'usergroup' => &$usergroup,
-));
-
 return $modx->error->success('',$usergroup);

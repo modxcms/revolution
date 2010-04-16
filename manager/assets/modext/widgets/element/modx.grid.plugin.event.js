@@ -42,12 +42,6 @@ MODx.grid.PluginEvent = function(config) {
         ,pluralText: _('events')
         ,plugins: ec
         ,columns: [{
-            header: _('id')
-            ,dataIndex: 'id'
-            ,id: 'modx-'+this.ident+'-col-id'
-            ,width: 80
-            ,sortable: true
-        },{
             header: _('name')
             ,dataIndex: 'name'
             ,id: 'modx-'+this.ident+'-col-name'
@@ -136,15 +130,12 @@ MODx.window.UpdatePluginEvent = function(config) {
         ,autoHeight: true
         ,width: 600
         ,fields: [{
-            xtype: 'hidden'
-            ,name: 'id'
-            ,id: 'modx-'+this.ident+'-id'
-        },{
             fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'statictextfield'
             ,width: 300
+            ,submitValue: true
         },{
             xtype: 'modx-grid-plugin-event-assoc'
             ,id: 'modx-grid-'+this.ident+'-assoc'
@@ -158,7 +149,7 @@ MODx.window.UpdatePluginEvent = function(config) {
 };
 Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
     onShow: function() {
-        var evt = this.fp.getForm().findField('id').getValue();
+        var evt = this.fp.getForm().findField('name').getValue();
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'element/plugin/event.php'
             ,params: {

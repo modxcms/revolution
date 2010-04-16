@@ -15,7 +15,7 @@ if (empty($scriptProperties['plugin']) || empty($scriptProperties['event'])) {
 /* get plugin event */
 $pluginEvent = $modx->getObject('modPluginEvent',array(
     'pluginid' => $scriptProperties['plugin'],
-    'evtid' => $scriptProperties['id'],
+    'event' => $scriptProperties['event'],
 ));
 if ($scriptProperties['enabled']) {
     /* enabling system event or editing priority */
@@ -23,7 +23,7 @@ if ($scriptProperties['enabled']) {
         $pluginEvent = $modx->newObject('modPluginEvent');
     }
     $pluginEvent->set('pluginid',$scriptProperties['plugin']);
-    $pluginEvent->set('evtid',$scriptProperties['id']);
+    $pluginEvent->set('event',$scriptProperties['event']);
     $pluginEvent->set('priority',$scriptProperties['priority']);
 
     if ($pluginEvent->save() == false) {
@@ -31,7 +31,7 @@ if ($scriptProperties['enabled']) {
     }
 } else {
     /* removing access */
-    if (!$pluginEvent) {
+    if (empty($pluginEvent)) {
         return $modx->error->failure($modx->lexicon('plugin_event_err_nf'));
     }
 

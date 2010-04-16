@@ -1,680 +1,850 @@
 <?php
-$collection['1']= $xpdo->newObject('modEvent');
-$collection['1']->fromArray(array (
-  'id' => 1,
-  'name' => 'OnDocPublished',
-  'service' => 5,
-  'groupname' => '',
-), '', true, true);
-$collection['2']= $xpdo->newObject('modEvent');
-$collection['2']->fromArray(array (
-  'id' => 2,
-  'name' => 'OnDocUnPublished',
-  'service' => 5,
-  'groupname' => '',
-), '', true, true);
-$collection['3']= $xpdo->newObject('modEvent');
-$collection['3']->fromArray(array (
-  'id' => 3,
-  'name' => 'OnWebPagePrerender',
-  'service' => 5,
-  'groupname' => '',
-), '', true, true);
-$collection['4']= $xpdo->newObject('modEvent');
-$collection['4']->fromArray(array (
-  'id' => 4,
-  'name' => 'OnWebLogin',
-  'service' => 3,
-  'groupname' => '',
-), '', true, true);
-$collection['5']= $xpdo->newObject('modEvent');
-$collection['5']->fromArray(array (
-  'id' => 5,
-  'name' => 'OnBeforeWebLogout',
-  'service' => 3,
-  'groupname' => '',
-), '', true, true);
-$collection['6']= $xpdo->newObject('modEvent');
-$collection['6']->fromArray(array (
-  'id' => 6,
-  'name' => 'OnWebLogout',
-  'service' => 3,
-  'groupname' => '',
-), '', true, true);
-$collection['11']= $xpdo->newObject('modEvent');
-$collection['11']->fromArray(array (
-  'id' => 11,
-  'name' => 'OnManagerLogin',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['12']= $xpdo->newObject('modEvent');
-$collection['12']->fromArray(array (
-  'id' => 12,
-  'name' => 'OnBeforeManagerLogout',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['13']= $xpdo->newObject('modEvent');
-$collection['13']->fromArray(array (
-  'id' => 13,
-  'name' => 'OnManagerLogout',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['14']= $xpdo->newObject('modEvent');
-$collection['14']->fromArray(array (
-  'id' => 14,
-  'name' => 'OnManagerSaveUser',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['15']= $xpdo->newObject('modEvent');
-$collection['15']->fromArray(array (
-  'id' => 15,
-  'name' => 'OnManagerDeleteUser',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['18']= $xpdo->newObject('modEvent');
-$collection['18']->fromArray(array (
-  'id' => 18,
-  'name' => 'OnBeforeCacheUpdate',
-  'service' => 4,
-  'groupname' => '',
-), '', true, true);
-$collection['19']= $xpdo->newObject('modEvent');
-$collection['19']->fromArray(array (
-  'id' => 19,
-  'name' => 'OnCacheUpdate',
-  'service' => 4,
-  'groupname' => '',
-), '', true, true);
-$collection['20']= $xpdo->newObject('modEvent');
-$collection['20']->fromArray(array (
-  'id' => 20,
-  'name' => 'OnLoadWebPageCache',
-  'service' => 4,
-  'groupname' => '',
-), '', true, true);
-$collection['21']= $xpdo->newObject('modEvent');
-$collection['21']->fromArray(array (
-  'id' => 21,
-  'name' => 'OnBeforeSaveWebPageCache',
-  'service' => 4,
-  'groupname' => '',
-), '', true, true);
-$collection['22']= $xpdo->newObject('modEvent');
-$collection['22']->fromArray(array (
-  'id' => 22,
-  'name' => 'OnChunkFormPrerender',
+/**
+ *
+ * @package modx
+ */
+$events = array();
+
+/* Plugin Events */
+$events['OnPluginEventBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnPluginEventBeforeSave']->fromArray(array (
+  'name' => 'OnPluginEventBeforeSave',
   'service' => 1,
-  'groupname' => 'Chunks',
+  'groupname' => 'Plugin Events',
 ), '', true, true);
-$collection['23']= $xpdo->newObject('modEvent');
-$collection['23']->fromArray(array (
-  'id' => 23,
-  'name' => 'OnChunkFormRender',
+$events['OnPluginEventSave']= $xpdo->newObject('modEvent');
+$events['OnPluginEventSave']->fromArray(array (
+  'name' => 'OnPluginEventSave',
   'service' => 1,
-  'groupname' => 'Chunks',
+  'groupname' => 'Plugin Events',
 ), '', true, true);
-$collection['24']= $xpdo->newObject('modEvent');
-$collection['24']->fromArray(array (
-  'id' => 24,
-  'name' => 'OnBeforeChunkFormSave',
+$events['OnPluginEventBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnPluginEventBeforeRemove']->fromArray(array (
+  'name' => 'OnPluginEventBeforeRemove',
   'service' => 1,
-  'groupname' => 'Chunks',
+  'groupname' => 'Plugin Events',
 ), '', true, true);
-$collection['25']= $xpdo->newObject('modEvent');
-$collection['25']->fromArray(array (
-  'id' => 25,
-  'name' => 'OnChunkFormSave',
+$events['OnPluginEventRemove']= $xpdo->newObject('modEvent');
+$events['OnPluginEventRemove']->fromArray(array (
+  'name' => 'OnPluginEventRemove',
   'service' => 1,
-  'groupname' => 'Chunks',
+  'groupname' => 'Plugin Events',
 ), '', true, true);
-$collection['26']= $xpdo->newObject('modEvent');
-$collection['26']->fromArray(array (
-  'id' => 26,
-  'name' => 'OnBeforeChunkFormDelete',
+
+/* Resource Groups */
+$events['OnResourceGroupSave']= $xpdo->newObject('modEvent');
+$events['OnResourceGroupSave']->fromArray(array (
+  'name' => 'OnResourceGroupSave',
   'service' => 1,
-  'groupname' => 'Chunks',
+  'groupname' => 'Security',
 ), '', true, true);
-$collection['27']= $xpdo->newObject('modEvent');
-$collection['27']->fromArray(array (
-  'id' => 27,
-  'name' => 'OnChunkFormDelete',
+$events['OnResourceGroupBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnResourceGroupBeforeSave']->fromArray(array (
+  'name' => 'OnResourceGroupBeforeSave',
   'service' => 1,
-  'groupname' => 'Chunks',
+  'groupname' => 'Security',
 ), '', true, true);
-$collection['28']= $xpdo->newObject('modEvent');
-$collection['28']->fromArray(array (
-  'id' => 28,
-  'name' => 'OnDocFormPrerender',
+$events['OnResourceGroupRemove']= $xpdo->newObject('modEvent');
+$events['OnResourceGroupRemove']->fromArray(array (
+  'name' => 'OnResourceGroupRemove',
   'service' => 1,
-  'groupname' => 'Documents',
+  'groupname' => 'Security',
 ), '', true, true);
-$collection['29']= $xpdo->newObject('modEvent');
-$collection['29']->fromArray(array (
-  'id' => 29,
-  'name' => 'OnDocFormRender',
+$events['OnResourceGroupBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnResourceGroupBeforeRemove']->fromArray(array (
+  'name' => 'OnResourceGroupBeforeRemove',
   'service' => 1,
-  'groupname' => 'Documents',
+  'groupname' => 'Security',
 ), '', true, true);
-$collection['30']= $xpdo->newObject('modEvent');
-$collection['30']->fromArray(array (
-  'id' => 30,
-  'name' => 'OnBeforeDocFormSave',
+
+/* Snippets */
+$events['OnSnippetBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnSnippetBeforeSave']->fromArray(array (
+  'name' => 'OnSnippetBeforeSave',
   'service' => 1,
-  'groupname' => 'Documents',
+  'groupname' => 'Snippets',
 ), '', true, true);
-$collection['31']= $xpdo->newObject('modEvent');
-$collection['31']->fromArray(array (
-  'id' => 31,
-  'name' => 'OnDocFormSave',
+$events['OnSnippetSave']= $xpdo->newObject('modEvent');
+$events['OnSnippetSave']->fromArray(array (
+  'name' => 'OnSnippetSave',
   'service' => 1,
-  'groupname' => 'Documents',
+  'groupname' => 'Snippets',
 ), '', true, true);
-$collection['32']= $xpdo->newObject('modEvent');
-$collection['32']->fromArray(array (
-  'id' => 32,
-  'name' => 'OnBeforeDocFormDelete',
+$events['OnSnippetBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnSnippetBeforeRemove']->fromArray(array (
+  'name' => 'OnSnippetBeforeRemove',
   'service' => 1,
-  'groupname' => 'Documents',
+  'groupname' => 'Snippets',
 ), '', true, true);
-$collection['33']= $xpdo->newObject('modEvent');
-$collection['33']->fromArray(array (
-  'id' => 33,
-  'name' => 'OnDocFormDelete',
+$events['OnSnippetRemove']= $xpdo->newObject('modEvent');
+$events['OnSnippetRemove']->fromArray(array (
+  'name' => 'OnSnippetRemove',
   'service' => 1,
-  'groupname' => 'Documents',
+  'groupname' => 'Snippets',
 ), '', true, true);
-$collection['34']= $xpdo->newObject('modEvent');
-$collection['34']->fromArray(array (
-  'id' => 34,
-  'name' => 'OnPluginFormPrerender',
-  'service' => 1,
-  'groupname' => 'Plugins',
-), '', true, true);
-$collection['35']= $xpdo->newObject('modEvent');
-$collection['35']->fromArray(array (
-  'id' => 35,
-  'name' => 'OnPluginFormRender',
-  'service' => 1,
-  'groupname' => 'Plugins',
-), '', true, true);
-$collection['36']= $xpdo->newObject('modEvent');
-$collection['36']->fromArray(array (
-  'id' => 36,
-  'name' => 'OnBeforePluginFormSave',
-  'service' => 1,
-  'groupname' => 'Plugins',
-), '', true, true);
-$collection['37']= $xpdo->newObject('modEvent');
-$collection['37']->fromArray(array (
-  'id' => 37,
-  'name' => 'OnPluginFormSave',
-  'service' => 1,
-  'groupname' => 'Plugins',
-), '', true, true);
-$collection['38']= $xpdo->newObject('modEvent');
-$collection['38']->fromArray(array (
-  'id' => 38,
-  'name' => 'OnBeforePluginFormDelete',
-  'service' => 1,
-  'groupname' => 'Plugins',
-), '', true, true);
-$collection['39']= $xpdo->newObject('modEvent');
-$collection['39']->fromArray(array (
-  'id' => 39,
-  'name' => 'OnPluginFormDelete',
-  'service' => 1,
-  'groupname' => 'Plugins',
-), '', true, true);
-$collection['40']= $xpdo->newObject('modEvent');
-$collection['40']->fromArray(array (
-  'id' => 40,
+$events['OnSnipFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnSnipFormPrerender']->fromArray(array (
   'name' => 'OnSnipFormPrerender',
   'service' => 1,
   'groupname' => 'Snippets',
 ), '', true, true);
-$collection['41']= $xpdo->newObject('modEvent');
-$collection['41']->fromArray(array (
-  'id' => 41,
+$events['OnSnipFormRender']= $xpdo->newObject('modEvent');
+$events['OnSnipFormRender']->fromArray(array (
   'name' => 'OnSnipFormRender',
   'service' => 1,
   'groupname' => 'Snippets',
 ), '', true, true);
-$collection['42']= $xpdo->newObject('modEvent');
-$collection['42']->fromArray(array (
-  'id' => 42,
+$events['OnBeforeSnipFormSave']= $xpdo->newObject('modEvent');
+$events['OnBeforeSnipFormSave']->fromArray(array (
   'name' => 'OnBeforeSnipFormSave',
   'service' => 1,
   'groupname' => 'Snippets',
 ), '', true, true);
-$collection['43']= $xpdo->newObject('modEvent');
-$collection['43']->fromArray(array (
-  'id' => 43,
+$events['OnSnipFormSave']= $xpdo->newObject('modEvent');
+$events['OnSnipFormSave']->fromArray(array (
   'name' => 'OnSnipFormSave',
   'service' => 1,
   'groupname' => 'Snippets',
 ), '', true, true);
-$collection['44']= $xpdo->newObject('modEvent');
-$collection['44']->fromArray(array (
-  'id' => 44,
+$events['OnBeforeSnipFormDelete']= $xpdo->newObject('modEvent');
+$events['OnBeforeSnipFormDelete']->fromArray(array (
   'name' => 'OnBeforeSnipFormDelete',
   'service' => 1,
   'groupname' => 'Snippets',
 ), '', true, true);
-$collection['45']= $xpdo->newObject('modEvent');
-$collection['45']->fromArray(array (
-  'id' => 45,
+$events['OnSnipFormDelete']= $xpdo->newObject('modEvent');
+$events['OnSnipFormDelete']->fromArray(array (
   'name' => 'OnSnipFormDelete',
   'service' => 1,
   'groupname' => 'Snippets',
 ), '', true, true);
-$collection['46']= $xpdo->newObject('modEvent');
-$collection['46']->fromArray(array (
-  'id' => 46,
+
+
+/* Templates */
+$events['OnTemplateBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnTemplateBeforeSave']->fromArray(array (
+  'name' => 'OnTemplateBeforeSave',
+  'service' => 1,
+  'groupname' => 'Templates',
+), '', true, true);
+$events['OnTemplateSave']= $xpdo->newObject('modEvent');
+$events['OnTemplateSave']->fromArray(array (
+  'name' => 'OnTemplateSave',
+  'service' => 1,
+  'groupname' => 'Templates',
+), '', true, true);
+$events['OnTemplateBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnTemplateBeforeRemove']->fromArray(array (
+  'name' => 'OnTemplateBeforeRemove',
+  'service' => 1,
+  'groupname' => 'Templates',
+), '', true, true);
+$events['OnTemplateRemove']= $xpdo->newObject('modEvent');
+$events['OnTemplateRemove']->fromArray(array (
+  'name' => 'OnTemplateRemove',
+  'service' => 1,
+  'groupname' => 'Templates',
+), '', true, true);
+$events['OnTempFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnTempFormPrerender']->fromArray(array (
   'name' => 'OnTempFormPrerender',
   'service' => 1,
   'groupname' => 'Templates',
 ), '', true, true);
-$collection['47']= $xpdo->newObject('modEvent');
-$collection['47']->fromArray(array (
-  'id' => 47,
+$events['OnTempFormRender']= $xpdo->newObject('modEvent');
+$events['OnTempFormRender']->fromArray(array (
   'name' => 'OnTempFormRender',
   'service' => 1,
   'groupname' => 'Templates',
 ), '', true, true);
-$collection['48']= $xpdo->newObject('modEvent');
-$collection['48']->fromArray(array (
-  'id' => 48,
+$events['OnBeforeTempFormSave']= $xpdo->newObject('modEvent');
+$events['OnBeforeTempFormSave']->fromArray(array (
   'name' => 'OnBeforeTempFormSave',
   'service' => 1,
   'groupname' => 'Templates',
 ), '', true, true);
-$collection['49']= $xpdo->newObject('modEvent');
-$collection['49']->fromArray(array (
-  'id' => 49,
+$events['OnTempFormSave']= $xpdo->newObject('modEvent');
+$events['OnTempFormSave']->fromArray(array (
   'name' => 'OnTempFormSave',
   'service' => 1,
   'groupname' => 'Templates',
 ), '', true, true);
-$collection['50']= $xpdo->newObject('modEvent');
-$collection['50']->fromArray(array (
-  'id' => 50,
+$events['OnBeforeTempFormDelete']= $xpdo->newObject('modEvent');
+$events['OnBeforeTempFormDelete']->fromArray(array (
   'name' => 'OnBeforeTempFormDelete',
   'service' => 1,
   'groupname' => 'Templates',
 ), '', true, true);
-$collection['51']= $xpdo->newObject('modEvent');
-$collection['51']->fromArray(array (
-  'id' => 51,
+$events['OnTempFormDelete']= $xpdo->newObject('modEvent');
+$events['OnTempFormDelete']->fromArray(array (
   'name' => 'OnTempFormDelete',
   'service' => 1,
   'groupname' => 'Templates',
 ), '', true, true);
-$collection['52']= $xpdo->newObject('modEvent');
-$collection['52']->fromArray(array (
-  'id' => 52,
+
+
+/* Template Variables */
+$events['OnTemplateVarBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnTemplateVarBeforeSave']->fromArray(array (
+  'name' => 'OnTemplateVarBeforeSave',
+  'service' => 1,
+  'groupname' => 'Template Variables',
+), '', true, true);
+$events['OnTemplateVarSave']= $xpdo->newObject('modEvent');
+$events['OnTemplateVarSave']->fromArray(array (
+  'name' => 'OnTemplateVarSave',
+  'service' => 1,
+  'groupname' => 'Template Variables',
+), '', true, true);
+$events['OnTemplateVarBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnTemplateVarBeforeRemove']->fromArray(array (
+  'name' => 'OnTemplateVarBeforeRemove',
+  'service' => 1,
+  'groupname' => 'Template Variables',
+), '', true, true);
+$events['OnTemplateVarRemove']= $xpdo->newObject('modEvent');
+$events['OnTemplateVarRemove']->fromArray(array (
+  'name' => 'OnTemplateVarRemove',
+  'service' => 1,
+  'groupname' => 'Template Variables',
+), '', true, true);
+$events['OnTVFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnTVFormPrerender']->fromArray(array (
   'name' => 'OnTVFormPrerender',
   'service' => 1,
   'groupname' => 'Template Variables',
 ), '', true, true);
-$collection['53']= $xpdo->newObject('modEvent');
-$collection['53']->fromArray(array (
-  'id' => 53,
+$events['OnTVFormRender']= $xpdo->newObject('modEvent');
+$events['OnTVFormRender']->fromArray(array (
   'name' => 'OnTVFormRender',
   'service' => 1,
   'groupname' => 'Template Variables',
 ), '', true, true);
-$collection['54']= $xpdo->newObject('modEvent');
-$collection['54']->fromArray(array (
-  'id' => 54,
+$events['OnBeforeTVFormSave']= $xpdo->newObject('modEvent');
+$events['OnBeforeTVFormSave']->fromArray(array (
   'name' => 'OnBeforeTVFormSave',
   'service' => 1,
   'groupname' => 'Template Variables',
 ), '', true, true);
-$collection['55']= $xpdo->newObject('modEvent');
-$collection['55']->fromArray(array (
-  'id' => 55,
+$events['OnTVFormSave']= $xpdo->newObject('modEvent');
+$events['OnTVFormSave']->fromArray(array (
   'name' => 'OnTVFormSave',
   'service' => 1,
   'groupname' => 'Template Variables',
 ), '', true, true);
-$collection['56']= $xpdo->newObject('modEvent');
-$collection['56']->fromArray(array (
-  'id' => 56,
+$events['OnBeforeTVFormDelete']= $xpdo->newObject('modEvent');
+$events['OnBeforeTVFormDelete']->fromArray(array (
   'name' => 'OnBeforeTVFormDelete',
   'service' => 1,
   'groupname' => 'Template Variables',
 ), '', true, true);
-$collection['57']= $xpdo->newObject('modEvent');
-$collection['57']->fromArray(array (
-  'id' => 57,
+$events['OnTVFormDelete']= $xpdo->newObject('modEvent');
+$events['OnTVFormDelete']->fromArray(array (
   'name' => 'OnTVFormDelete',
   'service' => 1,
   'groupname' => 'Template Variables',
 ), '', true, true);
-$collection['58']= $xpdo->newObject('modEvent');
-$collection['58']->fromArray(array (
-  'id' => 58,
-  'name' => 'OnUserFormPrerender',
+
+
+/* User Groups */
+$events['OnUserGroupBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnUserGroupBeforeSave']->fromArray(array (
+  'name' => 'OnUserGroupBeforeSave',
   'service' => 1,
-  'groupname' => 'Users',
+  'groupname' => 'User Groups',
 ), '', true, true);
-$collection['59']= $xpdo->newObject('modEvent');
-$collection['59']->fromArray(array (
-  'id' => 59,
-  'name' => 'OnUserFormRender',
+$events['OnUserGroupSave']= $xpdo->newObject('modEvent');
+$events['OnUserGroupSave']->fromArray(array (
+  'name' => 'OnUserGroupSave',
   'service' => 1,
-  'groupname' => 'Users',
+  'groupname' => 'User Groups',
 ), '', true, true);
-$collection['60']= $xpdo->newObject('modEvent');
-$collection['60']->fromArray(array (
-  'id' => 60,
-  'name' => 'OnBeforeUserFormSave',
+$events['OnUserGroupBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnUserGroupBeforeRemove']->fromArray(array (
+  'name' => 'OnUserGroupBeforeRemove',
   'service' => 1,
-  'groupname' => 'Users',
+  'groupname' => 'User Groups',
 ), '', true, true);
-$collection['61']= $xpdo->newObject('modEvent');
-$collection['61']->fromArray(array (
-  'id' => 61,
-  'name' => 'OnUserFormSave',
+$events['OnUserGroupRemove']= $xpdo->newObject('modEvent');
+$events['OnUserGroupRemove']->fromArray(array (
+  'name' => 'OnUserGroupRemove',
   'service' => 1,
-  'groupname' => 'Users',
+  'groupname' => 'User Groups',
 ), '', true, true);
-$collection['62']= $xpdo->newObject('modEvent');
-$collection['62']->fromArray(array (
-  'id' => 62,
-  'name' => 'OnBeforeUserFormDelete',
+
+
+/* Resources */
+$events['OnDocFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnDocFormPrerender']->fromArray(array (
+  'name' => 'OnDocFormPrerender',
   'service' => 1,
-  'groupname' => 'Users',
+  'groupname' => 'Resources',
 ), '', true, true);
-$collection['63']= $xpdo->newObject('modEvent');
-$collection['63']->fromArray(array (
-  'id' => 63,
-  'name' => 'OnUserFormDelete',
+$events['OnDocFormRender']= $xpdo->newObject('modEvent');
+$events['OnDocFormRender']->fromArray(array (
+  'name' => 'OnDocFormRender',
   'service' => 1,
-  'groupname' => 'Users',
+  'groupname' => 'Resources',
 ), '', true, true);
-$collection['70']= $xpdo->newObject('modEvent');
-$collection['70']->fromArray(array (
-  'id' => 70,
-  'name' => 'OnSiteRefresh',
+$events['OnBeforeDocFormSave']= $xpdo->newObject('modEvent');
+$events['OnBeforeDocFormSave']->fromArray(array (
+  'name' => 'OnBeforeDocFormSave',
   'service' => 1,
-  'groupname' => '',
+  'groupname' => 'Resources',
 ), '', true, true);
-$collection['71']= $xpdo->newObject('modEvent');
-$collection['71']->fromArray(array (
-  'id' => 71,
-  'name' => 'OnFileManagerUpload',
+$events['OnDocFormSave']= $xpdo->newObject('modEvent');
+$events['OnDocFormSave']->fromArray(array (
+  'name' => 'OnDocFormSave',
   'service' => 1,
-  'groupname' => '',
+  'groupname' => 'Resources',
 ), '', true, true);
-$collection['78']= $xpdo->newObject('modEvent');
-$collection['78']->fromArray(array (
-  'id' => 78,
-  'name' => 'OnBeforeWebLogin',
-  'service' => 3,
-  'groupname' => '',
-), '', true, true);
-$collection['79']= $xpdo->newObject('modEvent');
-$collection['79']->fromArray(array (
-  'id' => 79,
-  'name' => 'OnWebAuthentication',
-  'service' => 3,
-  'groupname' => '',
-), '', true, true);
-$collection['80']= $xpdo->newObject('modEvent');
-$collection['80']->fromArray(array (
-  'id' => 80,
-  'name' => 'OnBeforeManagerLogin',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['81']= $xpdo->newObject('modEvent');
-$collection['81']->fromArray(array (
-  'id' => 81,
-  'name' => 'OnManagerAuthentication',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['82']= $xpdo->newObject('modEvent');
-$collection['82']->fromArray(array (
-  'id' => 82,
-  'name' => 'OnSiteSettingsRender',
+$events['OnBeforeDocFormDelete']= $xpdo->newObject('modEvent');
+$events['OnBeforeDocFormDelete']->fromArray(array (
+  'name' => 'OnBeforeDocFormDelete',
   'service' => 1,
-  'groupname' => 'System Settings',
+  'groupname' => 'Resources',
 ), '', true, true);
-$collection['87']= $xpdo->newObject('modEvent');
-$collection['87']->fromArray(array (
-  'id' => 87,
+$events['OnDocFormDelete']= $xpdo->newObject('modEvent');
+$events['OnDocFormDelete']->fromArray(array (
+  'name' => 'OnDocFormDelete',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
+$events['OnDocPublished']= $xpdo->newObject('modEvent');
+$events['OnDocPublished']->fromArray(array (
+  'name' => 'OnDocPublished',
+  'service' => 5,
+  'groupname' => 'Resources',
+), '', true, true);
+$events['OnDocUnPublished']= $xpdo->newObject('modEvent');
+$events['OnDocUnPublished']->fromArray(array (
+  'name' => 'OnDocUnPublished',
+  'service' => 5,
+  'groupname' => 'Resources',
+), '', true, true);
+$events['OnBeforeEmptyTrash']= $xpdo->newObject('modEvent');
+$events['OnBeforeEmptyTrash']->fromArray(array (
+  'name' => 'OnBeforeEmptyTrash',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
+$events['OnEmptyTrash']= $xpdo->newObject('modEvent');
+$events['OnEmptyTrash']->fromArray(array (
+  'name' => 'OnEmptyTrash',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
+
+
+/* Richtext Editor */
+$events['OnRichTextEditorRegister']= $xpdo->newObject('modEvent');
+$events['OnRichTextEditorRegister']->fromArray(array (
   'name' => 'OnRichTextEditorRegister',
   'service' => 1,
   'groupname' => 'RichText Editor',
 ), '', true, true);
-$collection['88']= $xpdo->newObject('modEvent');
-$collection['88']->fromArray(array (
-  'id' => 88,
+$events['OnRichTextEditorInit']= $xpdo->newObject('modEvent');
+$events['OnRichTextEditorInit']->fromArray(array (
   'name' => 'OnRichTextEditorInit',
   'service' => 1,
   'groupname' => 'RichText Editor',
 ), '', true, true);
-$collection['89']= $xpdo->newObject('modEvent');
-$collection['89']->fromArray(array (
-  'id' => 89,
-  'name' => 'OnManagerPageInit',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['90']= $xpdo->newObject('modEvent');
-$collection['90']->fromArray(array (
-  'id' => 90,
-  'name' => 'OnWebPageInit',
-  'service' => 5,
-  'groupname' => '',
-), '', true, true);
-$collection['91']= $xpdo->newObject('modEvent');
-$collection['91']->fromArray(array (
-  'id' => 91,
-  'name' => 'OnLoadWebDocument',
-  'service' => 5,
-  'groupname' => '',
-), '', true, true);
-$collection['92']= $xpdo->newObject('modEvent');
-$collection['92']->fromArray(array (
-  'id' => 92,
-  'name' => 'OnParseDocument',
-  'service' => 5,
-  'groupname' => '',
-), '', true, true);
-$collection['93']= $xpdo->newObject('modEvent');
-$collection['93']->fromArray(array (
-  'id' => 93,
-  'name' => 'OnManagerLoginFormRender',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['94']= $xpdo->newObject('modEvent');
-$collection['94']->fromArray(array (
-  'id' => 94,
-  'name' => 'OnWebPageComplete',
-  'service' => 5,
-  'groupname' => '',
-), '', true, true);
-$collection['96']= $xpdo->newObject('modEvent');
-$collection['96']->fromArray(array (
-  'id' => 96,
-  'name' => 'OnBeforeManagerPageInit',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['97']= $xpdo->newObject('modEvent');
-$collection['97']->fromArray(array (
-  'id' => 97,
-  'name' => 'OnBeforeEmptyTrash',
-  'service' => 1,
-  'groupname' => 'Documents',
-), '', true, true);
-$collection['98']= $xpdo->newObject('modEvent');
-$collection['98']->fromArray(array (
-  'id' => 98,
-  'name' => 'OnEmptyTrash',
-  'service' => 1,
-  'groupname' => 'Documents',
-), '', true, true);
-$collection['99']= $xpdo->newObject('modEvent');
-$collection['99']->fromArray(array (
-  'id' => 99,
-  'name' => 'OnManagerLoginFormPrerender',
-  'service' => 2,
-  'groupname' => '',
-), '', true, true);
-$collection['100']= $xpdo->newObject('modEvent');
-$collection['100']->fromArray(array (
-  'id' => 100,
-  'name' => 'OnCreateDocGroup',
-  'service' => 1,
-  'groupname' => 'Documents',
-), '', true, true);
-$collection['101']= $xpdo->newObject('modEvent');
-$collection['101']->fromArray(array (
-  'id' => 101,
-  'name' => 'OnPageUnauthorized',
-  'service' => 1,
-  'groupname' => '',
-), '', true, true);
-$collection['102']= $xpdo->newObject('modEvent');
-$collection['102']->fromArray(array (
-  'id' => 102,
-  'name' => 'OnPageNotFound',
-  'service' => 1,
-  'groupname' => '',
-), '', true, true);
-$collection['103']= $xpdo->newObject('modEvent');
-$collection['103']->fromArray(array (
-  'id' => 103,
-  'name' => 'OnContextCreate',
-  'service' => 2,
-  'groupname' => 'modContext',
-), '', true, true);
-$collection['104']= $xpdo->newObject('modEvent');
-$collection['104']->fromArray(array (
-  'id' => 104,
-  'name' => 'OnContextUpdate',
-  'service' => 2,
-  'groupname' => 'modContext',
-), '', true, true);
-$collection['105']= $xpdo->newObject('modEvent');
-$collection['105']->fromArray(array (
-  'id' => 105,
-  'name' => 'OnContextDelete',
-  'service' => 2,
-  'groupname' => 'modContext',
-), '', true, true);
-$collection['106']= $xpdo->newObject('modEvent');
-$collection['106']->fromArray(array (
-  'id' => 106,
-  'name' => 'OnContextFormPrerender',
-  'service' => 2,
-  'groupname' => 'modContext',
-), '', true, true);
-$collection['107']= $xpdo->newObject('modEvent');
-$collection['107']->fromArray(array (
-  'id' => 107,
-  'name' => 'OnContextFormRender',
-  'service' => 2,
-  'groupname' => 'modContext',
-), '', true, true);
-$collection['108']= $xpdo->newObject('modEvent');
-$collection['108']->fromArray(array (
-  'id' => 108,
-  'name' => 'OnUserNotFound',
-  'service' => 6,
-  'groupname' => 'modUser',
-), '', true, true);
-$collection['109']= $xpdo->newObject('modEvent');
-$collection['109']->fromArray(array (
-  'id' => 109,
-  'name' => 'OnHandleRequest',
-  'service' => 5,
-  'groupname' => '',
-), '', true, true);
-$collection['110']= $xpdo->newObject('modEvent');
-$collection['110']->fromArray(array (
-  'id' => 110,
-  'name' => 'OnPluginEventRemove',
-  'service' => 1,
-  'groupname' => 'modPluginEvent',
-), '', true, true);
-$collection['111']= $xpdo->newObject('modEvent');
-$collection['111']->fromArray(array (
-  'id' => 111,
-  'name' => 'OnDocGroupRemove',
-  'service' => 1,
-  'groupname' => 'modResourceGroup',
-), '', true, true);
-$collection['112']= $xpdo->newObject('modEvent');
-$collection['112']->fromArray(array (
-  'id' => 112,
-  'name' => 'OnBeforeDocGroupRemove',
-  'service' => 1,
-  'groupname' => 'modResourceGroup',
-), '', true, true);
-$collection['113']= $xpdo->newObject('modEvent');
-$collection['113']->fromArray(array (
-  'id' => 113,
-  'name' => 'OnCreateUser',
-  'service' => 1,
-  'groupname' => 'modUser',
-), '', true, true);
-$collection['114']= $xpdo->newObject('modEvent');
-$collection['114']->fromArray(array (
-  'id' => 114,
-  'name' => 'OnDeleteUser',
-  'service' => 1,
-  'groupname' => 'modUser',
-), '', true, true);
-$collection['115']= $xpdo->newObject('modEvent');
-$collection['115']->fromArray(array (
-  'id' => 115,
-  'name' => 'OnUpdateUser',
-  'service' => 1,
-  'groupname' => 'modUser',
-), '', true, true);
-$collection['116']= $xpdo->newObject('modEvent');
-$collection['116']->fromArray(array (
-  'id' => 116,
-  'name' => 'OnBeforeUserActivate',
-  'service' => 1,
-  'groupname' => 'modUser',
-), '', true, true);
-$collection['117']= $xpdo->newObject('modEvent');
-$collection['117']->fromArray(array (
-  'id' => 117,
-  'name' => 'OnUserActivate',
-  'service' => 1,
-  'groupname' => 'modUser',
-), '', true, true);
-$collection['118']= $xpdo->newObject('modEvent');
-$collection['118']->fromArray(array (
-  'id' => 118,
+$events['OnRichTextBrowserInit']= $xpdo->newObject('modEvent');
+$events['OnRichTextBrowserInit']->fromArray(array (
   'name' => 'OnRichTextBrowserInit',
   'service' => 1,
   'groupname' => 'RichText Editor',
 ), '', true, true);
-$collection['119']= $xpdo->newObject('modEvent');
-$collection['119']->fromArray(array (
-  'id' => 119,
+
+
+/* Security */
+$events['OnWebLogin']= $xpdo->newObject('modEvent');
+$events['OnWebLogin']->fromArray(array (
+  'name' => 'OnWebLogin',
+  'service' => 3,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnBeforeWebLogout']= $xpdo->newObject('modEvent');
+$events['OnBeforeWebLogout']->fromArray(array (
+  'name' => 'OnBeforeWebLogout',
+  'service' => 3,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnWebLogout']= $xpdo->newObject('modEvent');
+$events['OnWebLogout']->fromArray(array (
+  'name' => 'OnWebLogout',
+  'service' => 3,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnManagerLogin']= $xpdo->newObject('modEvent');
+$events['OnManagerLogin']->fromArray(array (
+  'name' => 'OnManagerLogin',
+  'service' => 2,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnBeforeManagerLogout']= $xpdo->newObject('modEvent');
+$events['OnBeforeManagerLogout']->fromArray(array (
+  'name' => 'OnBeforeManagerLogout',
+  'service' => 2,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnManagerLogout']= $xpdo->newObject('modEvent');
+$events['OnManagerLogout']->fromArray(array (
+  'name' => 'OnManagerLogout',
+  'service' => 2,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnBeforeWebLogin']= $xpdo->newObject('modEvent');
+$events['OnBeforeWebLogin']->fromArray(array (
+  'name' => 'OnBeforeWebLogin',
+  'service' => 3,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnWebAuthentication']= $xpdo->newObject('modEvent');
+$events['OnWebAuthentication']->fromArray(array (
+  'name' => 'OnWebAuthentication',
+  'service' => 3,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnBeforeManagerLogin']= $xpdo->newObject('modEvent');
+$events['OnBeforeManagerLogin']->fromArray(array (
+  'name' => 'OnBeforeManagerLogin',
+  'service' => 2,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnManagerAuthentication']= $xpdo->newObject('modEvent');
+$events['OnManagerAuthentication']->fromArray(array (
+  'name' => 'OnManagerAuthentication',
+  'service' => 2,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnManagerLoginFormRender']= $xpdo->newObject('modEvent');
+$events['OnManagerLoginFormRender']->fromArray(array (
+  'name' => 'OnManagerLoginFormRender',
+  'service' => 2,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnManagerLoginFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnManagerLoginFormPrerender']->fromArray(array (
+  'name' => 'OnManagerLoginFormPrerender',
+  'service' => 2,
+  'groupname' => 'Security',
+), '', true, true);
+$events['OnPageUnauthorized']= $xpdo->newObject('modEvent');
+$events['OnPageUnauthorized']->fromArray(array (
+  'name' => 'OnPageUnauthorized',
+  'service' => 1,
+  'groupname' => 'Security',
+), '', true, true);
+
+/* Users */
+$events['OnUserFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnUserFormPrerender']->fromArray(array (
+  'name' => 'OnUserFormPrerender',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserFormRender']= $xpdo->newObject('modEvent');
+$events['OnUserFormRender']->fromArray(array (
+  'name' => 'OnUserFormRender',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnBeforeUserFormSave']= $xpdo->newObject('modEvent');
+$events['OnBeforeUserFormSave']->fromArray(array (
+  'name' => 'OnBeforeUserFormSave',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserFormSave']= $xpdo->newObject('modEvent');
+$events['OnUserFormSave']->fromArray(array (
+  'name' => 'OnUserFormSave',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnBeforeUserFormDelete']= $xpdo->newObject('modEvent');
+$events['OnBeforeUserFormDelete']->fromArray(array (
+  'name' => 'OnBeforeUserFormDelete',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserFormDelete']= $xpdo->newObject('modEvent');
+$events['OnUserFormDelete']->fromArray(array (
+  'name' => 'OnUserFormDelete',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserNotFound']= $xpdo->newObject('modEvent');
+$events['OnUserNotFound']->fromArray(array (
+  'name' => 'OnUserNotFound',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnBeforeUserActivate']= $xpdo->newObject('modEvent');
+$events['OnBeforeUserActivate']->fromArray(array (
+  'name' => 'OnBeforeUserActivate',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserActivate']= $xpdo->newObject('modEvent');
+$events['OnUserActivate']->fromArray(array (
+  'name' => 'OnUserActivate',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserChangePassword']= $xpdo->newObject('modEvent');
+$events['OnUserChangePassword']->fromArray(array (
+  'name' => 'OnUserChangePassword',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnUserBeforeSave']->fromArray(array (
+  'name' => 'OnUserBeforeSave',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserSave']= $xpdo->newObject('modEvent');
+$events['OnUserSave']->fromArray(array (
+  'name' => 'OnUserSave',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+$events['OnUserRemove']= $xpdo->newObject('modEvent');
+$events['OnUserRemove']->fromArray(array (
+  'name' => 'OnUserRemove',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
+
+
+/* System */
+$events['OnWebPagePrerender']= $xpdo->newObject('modEvent');
+$events['OnWebPagePrerender']->fromArray(array (
+  'name' => 'OnWebPagePrerender',
+  'service' => 5,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnBeforeCacheUpdate']= $xpdo->newObject('modEvent');
+$events['OnBeforeCacheUpdate']->fromArray(array (
+  'name' => 'OnBeforeCacheUpdate',
+  'service' => 4,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnCacheUpdate']= $xpdo->newObject('modEvent');
+$events['OnCacheUpdate']->fromArray(array (
+  'name' => 'OnCacheUpdate',
+  'service' => 4,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnLoadWebPageCache']= $xpdo->newObject('modEvent');
+$events['OnLoadWebPageCache']->fromArray(array (
+  'name' => 'OnLoadWebPageCache',
+  'service' => 4,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnBeforeSaveWebPageCache']= $xpdo->newObject('modEvent');
+$events['OnBeforeSaveWebPageCache']->fromArray(array (
+  'name' => 'OnBeforeSaveWebPageCache',
+  'service' => 4,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnSiteRefresh']= $xpdo->newObject('modEvent');
+$events['OnSiteRefresh']->fromArray(array (
+  'name' => 'OnSiteRefresh',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnFileManagerUpload']= $xpdo->newObject('modEvent');
+$events['OnFileManagerUpload']->fromArray(array (
+  'name' => 'OnFileManagerUpload',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnManagerPageInit']= $xpdo->newObject('modEvent');
+$events['OnManagerPageInit']->fromArray(array (
+  'name' => 'OnManagerPageInit',
+  'service' => 2,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnWebPageInit']= $xpdo->newObject('modEvent');
+$events['OnWebPageInit']->fromArray(array (
+  'name' => 'OnWebPageInit',
+  'service' => 5,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnLoadWebDocument']= $xpdo->newObject('modEvent');
+$events['OnLoadWebDocument']->fromArray(array (
+  'name' => 'OnLoadWebDocument',
+  'service' => 5,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnParseDocument']= $xpdo->newObject('modEvent');
+$events['OnParseDocument']->fromArray(array (
+  'name' => 'OnParseDocument',
+  'service' => 5,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnWebPageComplete']= $xpdo->newObject('modEvent');
+$events['OnWebPageComplete']->fromArray(array (
+  'name' => 'OnWebPageComplete',
+  'service' => 5,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnBeforeManagerPageInit']= $xpdo->newObject('modEvent');
+$events['OnBeforeManagerPageInit']->fromArray(array (
+  'name' => 'OnBeforeManagerPageInit',
+  'service' => 2,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnPageNotFound']= $xpdo->newObject('modEvent');
+$events['OnPageNotFound']->fromArray(array (
+  'name' => 'OnPageNotFound',
+  'service' => 1,
+  'groupname' => 'System',
+), '', true, true);
+$events['OnHandleRequest']= $xpdo->newObject('modEvent');
+$events['OnHandleRequest']->fromArray(array (
+  'name' => 'OnHandleRequest',
+  'service' => 5,
+  'groupname' => 'System',
+), '', true, true);
+
+
+/* Settings */
+$events['OnSiteSettingsRender']= $xpdo->newObject('modEvent');
+$events['OnSiteSettingsRender']->fromArray(array (
+  'name' => 'OnSiteSettingsRender',
+  'service' => 1,
+  'groupname' => 'Settings',
+), '', true, true);
+
+
+/* Internationalization */
+$events['OnInitCulture']= $xpdo->newObject('modEvent');
+$events['OnInitCulture']->fromArray(array (
   'name' => 'OnInitCulture',
   'service' => 3,
-  'groupname' => '',
+  'groupname' => 'Internationalization',
 ), '', true, true);
-$collection['120']= $xpdo->newObject('modEvent');
-$collection['120']->fromArray(array (
-  'id' => 120,
-  'name' => 'OnUserGroupCreate',
+
+
+/* Categories */
+$events['OnCategorySave']= $xpdo->newObject('modEvent');
+$events['OnCategorySave']->fromArray(array (
+  'name' => 'OnCategorySave',
+  'service' => 1,
+  'groupname' => 'Categories',
+), '', true, true);
+$events['OnCategoryBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnCategoryBeforeSave']->fromArray(array (
+  'name' => 'OnCategoryBeforeSave',
+  'service' => 1,
+  'groupname' => 'Categories',
+), '', true, true);
+$events['OnCategoryRemove']= $xpdo->newObject('modEvent');
+$events['OnCategoryRemove']->fromArray(array (
+  'name' => 'OnCategoryRemove',
+  'service' => 1,
+  'groupname' => 'Categories',
+), '', true, true);
+$events['OnCategoryBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnCategoryBeforeRemove']->fromArray(array (
+  'name' => 'OnCategoryBeforeRemove',
+  'service' => 1,
+  'groupname' => 'Categories',
+), '', true, true);
+
+
+/* Chunks */
+$events['OnChunkSave']= $xpdo->newObject('modEvent');
+$events['OnChunkSave']->fromArray(array (
+  'name' => 'OnChunkSave',
+  'service' => 1,
+  'groupname' => 'Chunks',
+), '', true, true);
+$events['OnChunkBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnChunkBeforeSave']->fromArray(array (
+  'name' => 'OnChunkBeforeSave',
+  'service' => 1,
+  'groupname' => 'Chunks',
+), '', true, true);
+$events['OnChunkRemove']= $xpdo->newObject('modEvent');
+$events['OnChunkRemove']->fromArray(array (
+  'name' => 'OnChunkRemove',
+  'service' => 1,
+  'groupname' => 'Chunks',
+), '', true, true);
+$events['OnChunkBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnChunkBeforeRemove']->fromArray(array (
+  'name' => 'OnChunkBeforeRemove',
+  'service' => 1,
+  'groupname' => 'Chunks',
+), '', true, true);
+$events['OnChunkFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnChunkFormPrerender']->fromArray(array (
+  'name' => 'OnChunkFormPrerender',
+  'service' => 1,
+  'groupname' => 'Chunks',
+), '', true, true);
+$events['OnChunkFormRender']= $xpdo->newObject('modEvent');
+$events['OnChunkFormRender']->fromArray(array (
+  'name' => 'OnChunkFormRender',
+  'service' => 1,
+  'groupname' => 'Chunks',
+), '', true, true);
+$events['OnBeforeChunkFormSave']= $xpdo->newObject('modEvent');
+$events['OnBeforeChunkFormSave']->fromArray(array (
+  'name' => 'OnBeforeChunkFormSave',
+  'service' => 1,
+  'groupname' => 'Chunks',
+), '', true, true);
+$events['OnChunkFormSave']= $xpdo->newObject('modEvent');
+$events['OnChunkFormSave']->fromArray(array (
+  'name' => 'OnChunkFormSave',
+  'service' => 1,
+  'groupname' => 'Chunks',
+), '', true, true);
+$events['OnBeforeChunkFormDelete']= $xpdo->newObject('modEvent');
+$events['OnBeforeChunkFormDelete']->fromArray(array (
+  'name' => 'OnBeforeChunkFormDelete',
+  'service' => 1,
+  'groupname' => 'Chunks',
+), '', true, true);
+$events['OnChunkFormDelete']= $xpdo->newObject('modEvent');
+$events['OnChunkFormDelete']->fromArray(array (
+  'name' => 'OnChunkFormDelete',
+  'service' => 1,
+  'groupname' => 'Chunks',
+), '', true, true);
+
+
+/* Contexts */
+$events['OnContextSave']= $xpdo->newObject('modEvent');
+$events['OnContextSave']->fromArray(array (
+  'name' => 'OnContextSave',
+  'service' => 1,
+  'groupname' => 'Contexts',
+), '', true, true);
+$events['OnContextBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnContextBeforeSave']->fromArray(array (
+  'name' => 'OnContextBeforeSave',
+  'service' => 1,
+  'groupname' => 'Contexts',
+), '', true, true);
+$events['OnContextRemove']= $xpdo->newObject('modEvent');
+$events['OnContextRemove']->fromArray(array (
+  'name' => 'OnContextRemove',
+  'service' => 1,
+  'groupname' => 'Contexts',
+), '', true, true);
+$events['OnContextBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnContextBeforeRemove']->fromArray(array (
+  'name' => 'OnContextBeforeRemove',
+  'service' => 1,
+  'groupname' => 'Contexts',
+), '', true, true);
+$events['OnContextFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnContextFormPrerender']->fromArray(array (
+  'name' => 'OnContextFormPrerender',
   'service' => 2,
-  'groupname' => 'modUserGroup',
+  'groupname' => 'Contexts',
 ), '', true, true);
+$events['OnContextFormRender']= $xpdo->newObject('modEvent');
+$events['OnContextFormRender']->fromArray(array (
+  'name' => 'OnContextFormRender',
+  'service' => 2,
+  'groupname' => 'Contexts',
+), '', true, true);
+
+
+/* Plugins */
+$events['OnPluginSave']= $xpdo->newObject('modEvent');
+$events['OnPluginSave']->fromArray(array (
+  'name' => 'OnPluginSave',
+  'service' => 1,
+  'groupname' => 'Plugins',
+), '', true, true);
+$events['OnPluginBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnPluginBeforeSave']->fromArray(array (
+  'name' => 'OnPluginBeforeSave',
+  'service' => 1,
+  'groupname' => 'Plugins',
+), '', true, true);
+$events['OnPluginRemove']= $xpdo->newObject('modEvent');
+$events['OnPluginRemove']->fromArray(array (
+  'name' => 'OnPluginRemove',
+  'service' => 1,
+  'groupname' => 'Plugins',
+), '', true, true);
+$events['OnPluginBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnPluginBeforeRemove']->fromArray(array (
+  'name' => 'OnPluginBeforeRemove',
+  'service' => 1,
+  'groupname' => 'Plugins',
+), '', true, true);
+$events['OnPluginFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnPluginFormPrerender']->fromArray(array (
+  'name' => 'OnPluginFormPrerender',
+  'service' => 1,
+  'groupname' => 'Plugins',
+), '', true, true);
+$events['OnPluginFormRender']= $xpdo->newObject('modEvent');
+$events['OnPluginFormRender']->fromArray(array (
+  'name' => 'OnPluginFormRender',
+  'service' => 1,
+  'groupname' => 'Plugins',
+), '', true, true);
+$events['OnBeforePluginFormSave']= $xpdo->newObject('modEvent');
+$events['OnBeforePluginFormSave']->fromArray(array (
+  'name' => 'OnBeforePluginFormSave',
+  'service' => 1,
+  'groupname' => 'Plugins',
+), '', true, true);
+$events['OnPluginFormSave']= $xpdo->newObject('modEvent');
+$events['OnPluginFormSave']->fromArray(array (
+  'name' => 'OnPluginFormSave',
+  'service' => 1,
+  'groupname' => 'Plugins',
+), '', true, true);
+$events['OnBeforePluginFormDelete']= $xpdo->newObject('modEvent');
+$events['OnBeforePluginFormDelete']->fromArray(array (
+  'name' => 'OnBeforePluginFormDelete',
+  'service' => 1,
+  'groupname' => 'Plugins',
+), '', true, true);
+$events['OnPluginFormDelete']= $xpdo->newObject('modEvent');
+$events['OnPluginFormDelete']->fromArray(array (
+  'name' => 'OnPluginFormDelete',
+  'service' => 1,
+  'groupname' => 'Plugins',
+), '', true, true);
+
+
+/* Property Sets */
+$events['OnPropertySetSave']= $xpdo->newObject('modEvent');
+$events['OnPropertySetSave']->fromArray(array (
+  'name' => 'OnPropertySetSave',
+  'service' => 1,
+  'groupname' => 'Property Sets',
+), '', true, true);
+$events['OnPropertySetBeforeSave']= $xpdo->newObject('modEvent');
+$events['OnPropertySetBeforeSave']->fromArray(array (
+  'name' => 'OnPropertySetBeforeSave',
+  'service' => 1,
+  'groupname' => 'Property Sets',
+), '', true, true);
+$events['OnPropertySetRemove']= $xpdo->newObject('modEvent');
+$events['OnPropertySetRemove']->fromArray(array (
+  'name' => 'OnPropertySetRemove',
+  'service' => 1,
+  'groupname' => 'Property Sets',
+), '', true, true);
+$events['OnPropertySetBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnPropertySetBeforeRemove']->fromArray(array (
+  'name' => 'OnPropertySetBeforeRemove',
+  'service' => 1,
+  'groupname' => 'Property Sets',
+), '', true, true);
+
+return $events;

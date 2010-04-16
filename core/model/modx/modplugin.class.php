@@ -10,34 +10,63 @@
 class modPlugin extends modScript {
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
-        $this->_cacheable= false;
+        $this->setCacheable(false);
     }
 
     /**
-     * Overrides modElement::save to add custom error logging.
+     * Overrides modElement::save to add custom error logging and fire
+     * modX-specific events.
      *
      * {@inheritdoc}
      */
     public function save($cacheFlag = null) {
         $isNew = $this->isNew();
-        $success = parent::save($cacheFlag);
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnPluginBeforeSave',array(
+                'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
+                'plugin' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
+        }
 
-        if (!$success && !empty($this->xpdo->lexicon)) {
+        $saved = parent :: save($cacheFlag);
+
+        if ($saved && $this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnPluginSave',array(
+                'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
+                'plugin' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
+        } else if (!$saved && !empty($this->xpdo->lexicon)) {
             $msg = $isNew ? $this->xpdo->lexicon('plugin_err_create') : $this->xpdo->lexicon('plugin_err_save');
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.$this->toArray());
         }
-        return $success;
+        
+        return $saved;
     }
 
     /**
-     * Overrides modElement::remove to add custom error logging.
+     * Overrides modElement::remove to add custom error logging and fire
+     * modX-specific events.
      *
      * {@inheritdoc}
      */
     public function remove(array $ancestors= array ()) {
-        $success = parent :: remove($ancestors);
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnPluginBeforeRemove',array(
+                'plugin' => &$this,
+                'ancestors' => $ancestors,
+            ));
+        }
 
-        if (!$success && !empty($this->xpdo->lexicon)) {
+        $removed = parent :: remove($ancestors);
+
+        if ($removed && $this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnPluginRemove',array(
+                'plugin' => &$this,
+                'ancestors' => $ancestors,
+            ));
+        } else if (!$removed && !empty($this->xpdo->lexicon)) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('plugin_err_remove').$this->toArray());
         }
 

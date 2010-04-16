@@ -11,7 +11,7 @@ if (empty($scriptProperties['plugin']) || empty($scriptProperties['event'])) {
 }
 $pluginEvent = $modx->getObject('modPluginEvent',array(
     'pluginid' => $scriptProperties['plugin'],
-    'evtid' => $scriptProperties['event'],
+    'event' => $scriptProperties['event'],
 ));
 if (!$pluginEvent) return $modx->error->failure($modx->lexicon('plugin_event_err_nf'));
 

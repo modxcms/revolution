@@ -31,24 +31,10 @@ if ($user->remove() == false) {
     return $modx->error->failure($modx->lexicon('user_err_remove'));
 }
 
-/* invoke OnManagerDeleteUser event */
-$modx->invokeEvent('OnManagerDeleteUser',array(
-    'user' => &$user,
-    'userid' => $user->get('id'),
-    'username' => $user->get('username'),
-));
-
 /* invoke OnUserFormDelete event */
 $modx->invokeEvent('OnUserFormDelete',array(
     'id' => $user->get('id'),
     'user' => &$user,
-));
-
-/* invoke OnUserDelete event */
-$modx->invokeEvent('OnDeleteUser',array(
-    'mode' => 'del',
-    'user' => &$user,
-    'id' => $user->get('id'),
 ));
 
 /* log manager action */

@@ -27,13 +27,7 @@ if (isset($scriptProperties['password_reset'])) {
         return $modx->error->failure($modx->lexicon('user_err_passwords_no_match'));
     }
 
-    $modx->user->set('password',md5($scriptProperties['password_new']));
-    $modx->user->save();
-
-    $modx->invokeEvent('OnManagerChangePassword',array(
-        'user' => &$modx->user,
-        'newPassword' => $scriptProperties['password_new'],
-    ));
+    $modx->user->changePassword($scriptProperties['password_old'],$scriptProperties['password_new']);
 }
 
 

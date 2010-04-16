@@ -57,7 +57,7 @@ $plugin->set('disabled',!empty($scriptProperties['disabled']));
 
 /* invoke OnBeforeTempFormSave event */
 $modx->invokeEvent('OnBeforePluginFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $plugin->get('id'),
     'plugin' => &$plugin,
 ));
@@ -74,20 +74,20 @@ if (isset($scriptProperties['events'])) {
         if ($event['enabled']) {
             $pe = $modx->getObject('modPluginEvent',array(
                 'pluginid' => $plugin->get('id'),
-                'evtid' => $event['id'],
+                'event' => $event['name'],
             ));
             if ($pe == null) {
                 $pe = $modx->newObject('modPluginEvent');
             }
             $pe->set('pluginid',$plugin->get('id'));
-            $pe->set('evtid',$event['id']);
+            $pe->set('event',$event['name']);
             $pe->set('priority',$event['priority']);
             $pe->set('propertyset',$event['propertyset']);
             $pe->save();
         } else {
             $pe = $modx->getObject('modPluginEvent',array(
                 'pluginid' => $plugin->get('id'),
-                'evtid' => $event['id'],
+                'event' => $event['name'],
             ));
             if ($pe == null) continue;
             $pe->remove();
@@ -97,7 +97,7 @@ if (isset($scriptProperties['events'])) {
 
 /* invoke OnPluginFormSave event */
 $modx->invokeEvent('OnPluginFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $plugin->get('id'),
     'plugin' => &$plugin,
 ));

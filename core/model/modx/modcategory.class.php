@@ -30,13 +30,49 @@ class modCategory extends xPDOSimpleObject {
     }
 
     /**
-     * Overrides xPDOObject::remove to reset all Element categories back to 0.
+     * Overrides xPDOObject::save to fire modX-specific events
+     *
+     * {@inheritDoc}
+     */
+    public function save($cacheFlag = null) {
+        $isNew = $this->isNew();
+        
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnCategoryBeforeSave',array(
+                'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
+                'category' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
+        }
+        $saved = parent :: save($cacheFlag);
+
+        if ($saved && $this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnCategorySave',array(
+                'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
+                'category' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
+        }
+
+        return $saved;
+    }
+
+    /**
+     * Overrides xPDOObject::remove to reset all Element categories back to 0
+     * and fire modX-specific events.
      *
      * {@inheritDoc}
      */
     public function remove(array $ancestors = array()) {
-        $removed = parent::remove($ancestors);
-        if ($removed) {
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnCategoryBeforeRemove',array(
+                'category' => &$this,
+                'ancestors' => $ancestors,
+            ));
+        }
+        $removed = parent :: remove($ancestors);
+
+        if ($removed && $this->xpdo instanceof modX) {
             $elementClasses = array(
                 'modChunk',
                 'modPlugin',
@@ -44,7 +80,6 @@ class modCategory extends xPDOSimpleObject {
                 'modTemplate',
                 'modTemplateVar',
             );
-
             foreach ($elementClasses as $classKey) {
                 $elements = $this->xpdo->getCollection($classKey,array('category' => $this->get('id')));
                 foreach ($elements as $element) {
@@ -52,7 +87,13 @@ class modCategory extends xPDOSimpleObject {
                     $element->save();
                 }
             }
+
+            $this->xpdo->invokeEvent('OnCategoryRemove',array(
+                'category' => &$this,
+                'ancestors' => $ancestors,
+            ));
         }
+
         return $removed;
     }
 }

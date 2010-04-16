@@ -35,7 +35,7 @@ if (!empty($scriptProperties['category'])) {
 
 /* invoke OnBeforeTVFormSave event */
 $modx->invokeEvent('OnBeforeTVFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => 0,
 ));
 
@@ -143,7 +143,7 @@ if ($modx->hasPermission('tv_access_permissions')) {
 
 /* invoke OnTVFormSave event */
 $modx->invokeEvent('OnTVFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => $tv->get('id'),
     'tv' => &$tv,
 ));

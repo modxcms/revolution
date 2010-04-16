@@ -22,7 +22,7 @@ $c = $modx->newQuery('modEvent');
 if ($name) $c->where(array('name:LIKE' => '%'.$name.'%'));
 if ($plugin) {
     $c->leftJoin('modPluginEvent','modPluginEvent','
-        `modPluginEvent`.`evtid` = `modEvent`.`id`
+        `modPluginEvent`.`event` = `modEvent`.`name`
     AND `modPluginEvent`.`pluginid` = '.$plugin.'
     ');
     $c->select('

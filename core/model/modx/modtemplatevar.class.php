@@ -37,34 +37,61 @@ class modTemplateVar extends modElement {
     }
 
     /**
-     * Overrides modElement::save to add custom error logging.
+     * Overrides modElement::save to add custom error logging and fire
+     * modX-specific events.
      *
      * {@inheritdoc}
      */
     public function save($cacheFlag = null) {
         $isNew = $this->isNew();
-        $success = parent::save($cacheFlag);
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnTemplateVarBeforeSave',array(
+                'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
+                'templateVar' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
+        }
+        $saved = parent :: save($cacheFlag);
 
-        if (!$success && !empty($this->xpdo->lexicon)) {
+        if ($saved && $this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnTemplateVarSave',array(
+                'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
+                'templateVar' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
+        } else if (!$saved && !empty($this->xpdo->lexicon)) {
             $msg = $isNew ? $this->xpdo->lexicon('tv_err_create') : $this->xpdo->lexicon('tv_err_save');
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.$this->toArray());
         }
-        return $success;
+        return $saved;
     }
 
     /**
-     * Overrides modElement::remove to add custom error logging.
+     * Overrides modElement::remove to add custom error logging and fire
+     * modX-specific events.
      *
      * {@inheritdoc}
      */
     public function remove(array $ancestors= array ()) {
-        $success = parent :: remove($ancestors);
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnTemplateVarBeforeRemove',array(
+                'templateVar' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
+        }
+        
+        $removed = parent :: remove($ancestors);
 
-        if (!$success && !empty($this->xpdo->lexicon)) {
+        if ($removed && $this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnTemplateVarRemove',array(
+                'templateVar' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
+        } else if (!$removed && !empty($this->xpdo->lexicon)) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('tv_err_remove').$this->toArray());
         }
 
-        return $success;
+        return $removed;
     }
 
     /**

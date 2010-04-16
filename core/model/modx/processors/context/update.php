@@ -22,7 +22,7 @@ $context->fromArray($scriptProperties);
 /* save context */
 if ($context->save() === false) {
     $modx->error->checkValidation($context);
-	return $modx->error->failure($modx->lexicon('context_err_save'));
+    return $modx->error->failure($modx->lexicon('context_err_save'));
 }
 
 /* update context settings */
@@ -51,11 +51,6 @@ if (isset($scriptProperties['settings']) && !empty($scriptProperties['settings']
         }
     }
 }
-
-/* run event */
-$modx->invokeEvent('OnContextUpdate',array(
-    'context' => &$context,
-));
 
 /* log manager action */
 $modx->logManagerAction('context_update','modContext',$context->get('key'));

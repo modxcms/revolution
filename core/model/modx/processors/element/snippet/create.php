@@ -45,7 +45,7 @@ if (is_array($properties)) $snippet->setProperties($properties);
 
 /* invoke OnBeforeSnipFormSave event */
 $modx->invokeEvent('OnBeforeSnipFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => 0,
     'snippet' => &$snippet,
 ));
@@ -57,7 +57,7 @@ if ($snippet->save() == false) {
 
 /* invoke OnSnipFormSave event */
 $modx->invokeEvent('OnSnipFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => $snippet->get('id'),
     'snippet' => &$snippet,
 ));

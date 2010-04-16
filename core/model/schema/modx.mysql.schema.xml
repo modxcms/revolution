@@ -248,7 +248,7 @@
         <field key="service" dbtype="tinyint" precision="4" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="groupname" dbtype="varchar" precision="20" phptype="string" null="false" default="" />
         
-        <aggregate alias="PluginEvents" class="modPluginEvent" key="id" local="id" foreign="evtid" cardinality="many" owner="local" />
+        <aggregate alias="PluginEvents" class="modPluginEvent" local="name" foreign="event" cardinality="many" owner="local" />
     </object>
     
     <object class="modEventLog" table="event_log" extends="xPDOSimpleObject">
@@ -370,12 +370,12 @@
     
     <object class="modPluginEvent" table="site_plugin_events" extends="xPDOObject">
         <field key="pluginid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="pk" />
-        <field key="evtid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="pk" />
+        <field key="event" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="pk" />
         <field key="priority" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="propertyset" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         
         <aggregate alias="Plugin" class="modPlugin" local="pluginid" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="Event" class="modEvent" local="evtid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Event" class="modEvent" local="event" foreign="name" cardinality="one" owner="foreign" />
         <aggregate alias="PropertySet" class="modPropertySet" local="propertyset" foreign="id" cardinality="one" owner="foreign" />
     </object>
     

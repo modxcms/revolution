@@ -54,7 +54,7 @@ $snippet->set('locked',!empty($scriptProperties['locked']));
 
 /* invoke OnBeforeSnipFormSave event */
 $modx->invokeEvent('OnBeforeSnipFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $snippet->get('id'),
     'snippet' => &$snippet,
 ));
@@ -66,7 +66,7 @@ if ($snippet->save() == false) {
 
 /* invoke OnSnipFormSave event */
 $modx->invokeEvent('OnSnipFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $snippet->get('id'),
     'snippet' => &$snippet,
 ));

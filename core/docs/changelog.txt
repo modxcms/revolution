@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Refactored modX::invokeEvent and modX::getEventMap to take advantage of new plugin event changes
+- Adjusted the modPluginEvent model to reference the event name rather than id
+- Added new model-based System Events to work more effectively in any context
+- Removed deprecated system events
 - Added tree_root_id setting that allows you to specify the start parent ID of the left Resource tree
 - Fixed bug where User Settings could not be removed
 - Enabled ability to set absolute path and placeholders for filemanager_path and rb_base_dir

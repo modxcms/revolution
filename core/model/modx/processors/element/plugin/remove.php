@@ -22,7 +22,7 @@ if ($plugin->remove() == false) {
 
 /* invoke OnPluginFormDelete event */
 $modx->invokeEvent('OnPluginFormDelete',array(
-	'id' => $plugin->get('id'),
+    'id' => $plugin->get('id'),
     'plugin' => &$plugin,
 ));
 

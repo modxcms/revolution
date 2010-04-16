@@ -32,19 +32,6 @@ if ($user->save() == false || $profile->save() == false) {
     return $modx->error->failure($modx->lexicon('user_err_save'));
 }
 
-/* invoke OnManagerSaveUser event */
-$modx->invokeEvent('OnManagerSaveUser',array(
-    'mode' => 'upd',
-    'user' => &$user,
-));
-
-/* invoke OnUpdateUser event */
-$modx->invokeEvent('OnUpdateUser',array(
-    'mode' => 'upd',
-    'user' => &$user,
-    'id' => $user->get('id'),
-));
-
 /* log manager action */
 $modx->logManagerAction('user_update','modUser',$user->get('id'));
 

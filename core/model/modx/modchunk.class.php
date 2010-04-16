@@ -11,42 +11,74 @@ class modChunk extends modElement {
     }
 
     /**
-     * Overrides modElement::save to add custom error logging.
+     * Overrides modElement::save to add custom error logging and fire
+     * modX-specific events.
      *
      * {@inheritdoc}
      */
     public function save($cacheFlag = null) {
         $isNew = $this->isNew();
-        $success = parent::save($cacheFlag);
 
-        if (!$success && !empty($this->xpdo->lexicon)) {
-            $msg = $isNew ? $this->xpdo->lexicon('chunk_err_create') : $this->xpdo->lexicon('chunk_err_save');
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$msg.$this->toArray());
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnChunkBeforeSave',array(
+                'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
+                'chunk' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
         }
-        return $success;
+
+        $saved = parent :: save($cacheFlag);
+
+        if ($saved && $this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnChunkSave',array(
+                'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
+                'chunk' => &$this,
+                'cacheFlag' => $cacheFlag,
+            ));
+
+        } else if (!$saved && !empty($this->xpdo->lexicon)) {
+            $msg = $isNew ? $this->xpdo->lexicon('chunk_err_create') : $this->xpdo->lexicon('chunk_err_save');
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.$this->toArray());
+        }
+
+        return $saved;
     }
 
     /**
-     * Overrides modElement::remove to add custom error logging.
+     * Overrides modElement::remove to add custom error logging and fire
+     * modX-specific events.
      *
      * {@inheritdoc}
      */
     public function remove(array $ancestors= array ()) {
-        $success = parent :: remove($ancestors);
-
-        if (!$success && !empty($this->xpdo->lexicon)) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,$this->xpdo->lexicon('chunk_err_remove').$this->toArray());
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnChunkBeforeRemove',array(
+                'chunk' => &$this,
+                'ancestors' => $ancestors,
+            ));
         }
 
-        return $success;
+        $removed = parent :: remove($ancestors);
+
+        if ($removed && $this->xpdo instanceof modX) {
+            $this->xpdo->invokeEvent('OnChunkRemove',array(
+                'chunk' => &$this,
+                'ancestors' => $ancestors,
+            ));
+
+        } else if (!$removed && !empty($this->xpdo->lexicon)) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('chunk_err_remove').$this->toArray());
+        }
+
+        return $removed;
     }
 
-	/**
-	 * Overrides modElement::process to initialize the Chunk into the element cache,
-	 * as well as set placeholders and filter the output.
-	 *
-	 * {@inheritdoc}
-	 */
+    /**
+     * Overrides modElement::process to initialize the Chunk into the element cache,
+     * as well as set placeholders and filter the output.
+     *
+     * {@inheritdoc}
+     */
     public function process($properties= null, $content= null) {
         parent :: process($properties, $content);
         if (!$this->_processed) {

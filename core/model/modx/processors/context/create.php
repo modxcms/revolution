@@ -27,11 +27,6 @@ if ($context->save() == false) {
     return $modx->error->failure($modx->lexicon('context_err_create'));
 }
 
-/* run event */
-$modx->invokeEvent('OnContextCreate',array(
-    'context' => &$context,
-));
-
 /* log manager action */
 $modx->logManagerAction('context_create','modContext',$context->get('id'));
 

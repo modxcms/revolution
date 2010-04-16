@@ -23,7 +23,7 @@ $modx->invokeEvent('OnBeforeSnipFormDelete',array(
 
 /* remove snippet */
 if ($snippet->remove() == false) {
-	return $modx->error->failure($modx->lexicon('snippet_err_delete'));
+    return $modx->error->failure($modx->lexicon('snippet_err_delete'));
 }
 
 /* invoke OnSnipFormDelete event */

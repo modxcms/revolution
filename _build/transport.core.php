@@ -360,18 +360,21 @@ unset ($fileset, $attributes);
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in connectors.'); flush();
 
 /* modEvent collection */
-$collection = array ();
-include dirname(__FILE__).'/data/transport.core.events.php';
-$attributes = array (
-    xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => true,
-    xPDOTransport::UNIQUE_KEY => array ('name'),
-);
-foreach ($collection as $c) {
-    $package->put($c, $attributes);
+$events = include dirname(__FILE__).'/data/transport.core.events.php';
+if (is_array($events) && !empty($events)) {
+    $attributes = array (
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UNIQUE_KEY => array ('name'),
+    );
+    foreach ($events as $evt) {
+        $package->put($evt, $attributes);
+    }
+    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' default events.'); flush();
+} else {
+    $xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not find default events!'); flush();
 }
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default events.'); flush();
-unset ($collection, $c, $attributes);
+unset ($events, $evt, $attributes);
 
 /* modSystemSetting collection */
 $settings = require_once dirname(__FILE__).'/data/transport.core.system_settings.php';

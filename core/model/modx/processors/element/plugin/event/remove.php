@@ -21,10 +21,4 @@ if ($pluginEvent->remove() === false) {
     return $modx->error->failure($modx->lexicon('plugin_event_err_remove'));
 }
 
-/* invoke system event */
-$modx->invokeEvent('OnPluginEventRemove',array(
-    'id' => $pluginEvent->get('id'),
-    'pluginEvent' => &$pluginEvent,
-));
-
 return $modx->error->success('',$pluginEvent);

@@ -53,7 +53,7 @@ if ($modx->error->hasError()) {
 
 /* invoke OnBeforeChunkFormSave event */
 $modx->invokeEvent('OnBeforeChunkFormSave',array(
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $chunk->get('id'),
     'chunk' => &$chunk,
 ));
@@ -69,7 +69,7 @@ if ($chunk->save() == false) {
 
 /* invoke OnChunkFormSave event */
 $modx->invokeEvent('OnChunkFormSave',array(
-    'mode'  => 'upd',
+    'mode'  => modSystemEvent::MODE_UPD,
     'id'    => $chunk->get('id'),
     'chunk' => &$chunk,
 ));

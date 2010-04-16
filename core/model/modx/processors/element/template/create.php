@@ -48,7 +48,7 @@ if (is_array($properties)) $template->setProperties($properties);
 
 /* invoke OnBeforeTempFormSave event */
 $modx->invokeEvent('OnBeforeTempFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => 0,
     'template' => &$template,
 ));
@@ -91,7 +91,7 @@ if (isset($scriptProperties['tvs'])) {
 
 /* invoke OnTempFormSave event */
 $modx->invokeEvent('OnTempFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => $template->get('id'),
     'template' => &$template,
 ));

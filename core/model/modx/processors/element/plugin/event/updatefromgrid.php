@@ -13,7 +13,7 @@ if (empty($_DATA['priority'])) $_DATA['priority'] = 0;
 /* get plugin event */
 $pluginEvent = $modx->getObject('modPluginEvent',array(
     'pluginid' => $_DATA['plugin'],
-    'evtid' => $_DATA['id'],
+    'event' => $_DATA['event'],
 ));
 
 if ($_DATA['enabled']) {
@@ -22,7 +22,7 @@ if ($_DATA['enabled']) {
         $pluginEvent = $modx->newObject('modPluginEvent');
     }
     $pluginEvent->set('pluginid',$_DATA['plugin']);
-    $pluginEvent->set('evtid',$_DATA['id']);
+    $pluginEvent->set('event',$_DATA['event']);
     $pluginEvent->set('priority',$_DATA['priority']);
 
     if ($pluginEvent->save() == false) {

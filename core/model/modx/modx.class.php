@@ -2461,7 +2461,7 @@ class modX extends xPDO {
                     `PropertySet`.`name` AS `propertyset`
                 FROM {$pluginEventTbl} `PluginEvent`
                     INNER JOIN {$pluginTbl} `Plugin` ON `Plugin`.`id` = `PluginEvent`.`pluginid` AND `Plugin`.`disabled` = 0
-                    INNER JOIN {$eventTbl} `Event` ON {$service} `Event`.`id` = `PluginEvent`.`evtid`
+                    INNER JOIN {$eventTbl} `Event` ON {$service} `Event`.`name` = `PluginEvent`.`event`
                     LEFT JOIN {$propsetTbl} `PropertySet` ON `PluginEvent`.`propertyset` = `PropertySet`.`id`
                 ORDER BY `Event`.`name`, `PluginEvent`.`priority` ASC
             ";
@@ -2826,6 +2826,14 @@ class modX extends xPDO {
  * @package modx
  */
 class modSystemEvent {
+    /**
+     * @var const For new creations of objects in model events
+     */
+    const MODE_NEW = 'new';
+    /**
+     * @var const For updating objects in model events
+     */
+    const MODE_UPD = 'upd';
     /**@#+
      * @deprecated 2007-09-18 Will be delegated in 1.0 or sooner.
      * @var string
