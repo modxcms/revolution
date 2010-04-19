@@ -25,7 +25,7 @@ if (empty($scriptProperties['id'])) {
 } else {
     $parts= explode('_', $scriptProperties['id']);
     $context= isset($parts[0]) ? $parts[0] : 'root';
-    $node = !empty($parts[1]) ? intval($parts[1]) : $defaultRootId;
+    $node = !empty($parts[1]) ? intval($parts[1]) : 0;
 }
 if (!empty($scriptProperties['debug'])) echo '<p style="width: 800px; font-family: \'Lucida Console\'; font-size: 11px">';
 
@@ -35,7 +35,7 @@ if (empty($context) || $context == 'root') {
     $c= $modx->newQuery($itemClass, array("`key` != 'mgr'"));
     if (!empty($defaultRootId)) {
         $c->where(array(
-            '(SELECT COUNT(*) FROM '.$modx->getTableName('modResource').' WHERE `context_key` = `modContext`.`key` AND `id` = '.$defaultRootId.') > 0',
+            '(SELECT COUNT(*) FROM '.$modx->getTableName('modResource').' WHERE `context_key` = `modContext`.`key` AND `id` IN ('.$defaultRootId.')) > 0',
         ));
     }
 } else {
@@ -57,9 +57,18 @@ if (empty($context) || $context == 'root') {
         ,'context_key'
     ));
     $c->where(array(
-        'parent' => $node,
         'context_key' => $context,
     ));
+    if (empty($node) && !empty($defaultRootId)) {
+        $c->where(array(
+            'id IN ('.$defaultRootId.')',
+            'parent NOT IN ('.$defaultRootId.')',
+        ));
+    } else {
+        $c->where(array(
+            'parent' => $node,
+        ));
+    }
     $c->sortby($sortBy,'ASC');
 }
 
