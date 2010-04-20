@@ -527,24 +527,19 @@ class modResource extends modAccessibleSimpleObject {
 
     /**
      *
-     * @param <type> $resource The
-     * @param <type> $newName
-     * @param <type> $duplicateChildren
-     * @param <type> $_toplevel
      * @return mixed Returns either an error message, or the newly created modResource object.
      */
-    public function duplicate($newName = '',$duplicateChildren = true,$_toplevel = 0) {
+    public function duplicate(array $options = array()) {
         if (!($this->xpdo instanceof modX)) return false;
-        if (empty($newName)) $newName = $this->xpdo->lexicon('duplicate_of').$this->get('pagetitle');
 
         /* duplicate resource */
         $newResource = $this->xpdo->newObject($this->get('class_key'));
         $newResource->fromArray($this->toArray('', true), '', false, true);
-        $newResource->set('pagetitle',$newName);
+        $newResource->set('pagetitle',!empty($options['newName']) ? $options['newName'] : $this->xpdo->lexicon('duplicate_of').$this->get('pagetitle'));
         $newResource->set('alias', null);
 
         /* make sure children get assigned to new parent */
-        $newResource->set('parent',$_toplevel == 0 ? $this->get('parent') : $_toplevel);
+        $newResource->set('parent',isset($options['parent']) ? $options['parent'] : $this->get('parent'));
         $newResource->set('createdby',$this->xpdo->user->get('id'));
         $newResource->set('createdon',time());
         $newResource->set('editedby',0);
@@ -555,11 +550,11 @@ class modResource extends modAccessibleSimpleObject {
         $newResource->set('publishedon',0);
         $newResource->set('publishedby',0);
         $newResource->set('published',false);
+        
         if (!$newResource->save()) {
             return $this->xpdo->lexicon('resource_err_duplicate');
         }
 
-        /* duplicate resource TVs */
         $tvds = $this->getMany('TemplateVarResources');
         foreach ($tvds as $oldTemplateVarResource) {
             $newTemplateVarResource = $this->xpdo->newObject('modTemplateVarResource');
@@ -569,7 +564,6 @@ class modResource extends modAccessibleSimpleObject {
             $newTemplateVarResource->save();
         }
 
-        /* duplicate resource groups */
         $groups = $this->getMany('ResourceGroupResources');
         foreach ($groups as $oldResourceGroupResource) {
             $newResourceGroupResource = $this->xpdo->newObject('modResourceGroupResource');
@@ -578,14 +572,18 @@ class modResource extends modAccessibleSimpleObject {
             $newResourceGroupResource->save();
         }
 
-        /* duplicate resource, recursively */        
+        /* duplicate resource, recursively */
+        $duplicateChildren = isset($options['duplicateChildren']) ? $options['duplicateChildren'] : true;
         if ($duplicateChildren) {
             if (!$this->checkPolicy('add_children')) return $newResource;
             
             $children = $this->getMany('Children');
             if (is_array($children) && count($children) > 0) {
                 foreach ($children as $child) {
-                    $child->duplicate('',true,$newResource->get('id'));
+                    $child->duplicate(array(
+                        'duplicateChildren' => true,
+                        'parent' => $newResource->get('id'),
+                    ));
                 }
             }
         }

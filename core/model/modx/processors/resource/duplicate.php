@@ -22,8 +22,9 @@ $newName = !empty($scriptProperties['name']) ? $scriptProperties['name'] : '';
 $oldResource = $modx->getObject('modResource',$scriptProperties['id']);
 if (empty($oldResource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $scriptProperties['id'])));
 
-if (!$oldResource->checkPolicy('copy'))
+if (!$oldResource->checkPolicy('copy')) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
+}
 
 /* get parent */
 $parent = $oldResource->getOne('Parent');
@@ -31,7 +32,10 @@ if ($parent && !$parent->checkPolicy('add_children')) {
     return $modx->error->failure($modx->lexicon('permission_denied'));
 }
 
-$newResource = $oldResource->duplicate($newName,$duplicateChildren);
+$newResource = $oldResource->duplicate(array(
+    'newName' => $newName,
+    'duplicateChildren' => $duplicateChildren,
+));
 if (!($newResource instanceof modResource)) {
     return $newResource;
 }
