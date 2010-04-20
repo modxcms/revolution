@@ -524,4 +524,71 @@ class modResource extends modAccessibleSimpleObject {
         $tv = $this->xpdo->getObject('modTemplateVar',$pk);
         return $tv == null ? null : $tv->renderOutput($this->get('id'));
     }
+
+    /**
+     *
+     * @param <type> $resource The
+     * @param <type> $newName
+     * @param <type> $duplicateChildren
+     * @param <type> $_toplevel
+     * @return mixed Returns either an error message, or the newly created modResource object.
+     */
+    public function duplicate($newName = '',$duplicateChildren = true,$_toplevel = 0) {
+        if (!($this->xpdo instanceof modX)) return false;
+        if (empty($newName)) $newName = $this->xpdo->lexicon('duplicate_of').$this->get('pagetitle');
+
+        /* duplicate resource */
+        $newResource = $this->xpdo->newObject($this->get('class_key'));
+        $newResource->fromArray($this->toArray('', true), '', false, true);
+        $newResource->set('pagetitle',$newName);
+        $newResource->set('alias', null);
+
+        /* make sure children get assigned to new parent */
+        $newResource->set('parent',$_toplevel == 0 ? $this->get('parent') : $_toplevel);
+        $newResource->set('createdby',$this->xpdo->user->get('id'));
+        $newResource->set('createdon',time());
+        $newResource->set('editedby',0);
+        $newResource->set('editedon',0);
+        $newResource->set('deleted',false);
+        $newResource->set('deletedon',0);
+        $newResource->set('deletedby',0);
+        $newResource->set('publishedon',0);
+        $newResource->set('publishedby',0);
+        $newResource->set('published',false);
+        if (!$newResource->save()) {
+            return $this->xpdo->lexicon('resource_err_duplicate');
+        }
+
+        /* duplicate resource TVs */
+        $tvds = $this->getMany('TemplateVarResources');
+        foreach ($tvds as $oldTemplateVarResource) {
+            $newTemplateVarResource = $this->xpdo->newObject('modTemplateVarResource');
+            $newTemplateVarResource->set('contentid',$newResource->get('id'));
+            $newTemplateVarResource->set('tmplvarid',$oldTemplateVarResource->get('tmplvarid'));
+            $newTemplateVarResource->set('value',$oldTemplateVarResource->get('value'));
+            $newTemplateVarResource->save();
+        }
+
+        /* duplicate resource groups */
+        $groups = $this->getMany('ResourceGroupResources');
+        foreach ($groups as $oldResourceGroupResource) {
+            $newResourceGroupResource = $this->xpdo->newObject('modResourceGroupResource');
+            $newResourceGroupResource->set('document_group',$oldResourceGroupResource->get('document_group'));
+            $newResourceGroupResource->set('document',$oldResourceGroupResource->get('id'));
+            $newResourceGroupResource->save();
+        }
+
+        /* duplicate resource, recursively */        
+        if ($duplicateChildren) {
+            if (!$this->checkPolicy('add_children')) return $newResource;
+            
+            $children = $this->getMany('Children');
+            if (is_array($children) && count($children) > 0) {
+                foreach ($children as $child) {
+                    $child->duplicate('',true,$newResource->get('id'));
+                }
+            }
+        }
+        return $newResource;
+    }
 }
