@@ -91,7 +91,7 @@ class modInstallRequest {
     }
 
     public function proceed($action) {
-        $this->sendRedirect('?action='.$action);
+        $this->sendRedirect(MODX_SETUP_URL.'?action='.$action);
     }
     public function sendRedirect($url) {
         $header= 'Location: ' . $url;
