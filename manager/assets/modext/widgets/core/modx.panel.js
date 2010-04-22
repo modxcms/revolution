@@ -20,6 +20,7 @@ MODx.FormPanel = function(config) {
         ,bodyStyle: 'padding: 10px'
         ,border: false
         ,header: false
+        ,layout: 'fit'
         ,title: ''
         ,method: 'POST'
         ,cls: 'modx-form'

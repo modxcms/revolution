@@ -40,8 +40,7 @@ MODx.Layout = function(config){
     Ext.applyIf(config,{
         id: 'modx-layout'
         ,renderTo: 'modx-leftbar-content'
-        ,width: '100%'
-        ,anchor: '30%'
+        ,width: 286
         ,autoHeight: true
         ,border: false
         ,unstyled: true
@@ -58,7 +57,7 @@ MODx.Layout = function(config){
             ,border: false
             ,deferredRender: false
             ,activeTab: 0
-            ,stateful: true
+            ,stateful: false
             ,stateId: 'modx-leftbar-tabs'
             ,stateEvents: ['tabchange','resize']
             ,getState:function() {
@@ -74,7 +73,7 @@ MODx.Layout = function(config){
                     Ext.get('modx-leftbar').setWidth(w);
                     Ext.getCmp('modx-leftbar-tabs').setWidth(w);
                     var ct = Ext.get('modx-content');
-                    ct.setWidth((wi-w)-30);
+                    ct.setWidth((wi-w)-35);
                     ct.setStyle('float','left');
                 },scope:this}
             }

@@ -28,11 +28,13 @@ hr {
 }
 
 #modx-content {
-    width: 74%;
+    width: 99%;
     padding: .5%;
-    float: left;
 }
-#modx-leftbar { width: 24%; }
+#modx-leftbar {
+    width: 300px;
+    margin-right: 10px;
+}
 
 #modx-container {
     height: 100%;
@@ -229,6 +231,7 @@ textarea.x-form-field {
 }
 #modx-login-user {
     font-weight: bold;
+    text-decoration: none;
     color: #eee;
 }
 #rightlogin {

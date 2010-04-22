@@ -7,16 +7,17 @@ MODx.panel.ErrorLog = function(config) {
             action: 'clear'
         }
         ,buttonAlign: 'center'
+        ,layout: 'fit'
         ,items: [{
             html: '<h2>'+_('error_log')+'</h2>'
             ,id: 'modx-error-log-header'
             ,cls: 'modx-page-header'
             ,border: false
+            ,anchor: '100%'
         },{
             layout: 'form'
             ,bodyStyle: 'padding: 15px;'
             ,hideLabels: true
-            ,width: '100%'
             ,autoHeight: true
             ,buttonAlign: 'center'
             ,items: [{
@@ -26,7 +27,7 @@ MODx.panel.ErrorLog = function(config) {
                 xtype: 'textarea'
                 ,name: 'log'
                 ,grow: true
-                ,width: '98%'
+                ,anchor: '98%'
             }]
         }]
         ,buttons: [{
