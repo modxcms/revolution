@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Optimized modLexicon::loadCache
 - [#MODX-1824] Fixed bug where duplicate wasnt fully duping resources
 - Moved Resource's duplicate method into the model, via modResource::duplicate
 - [#MODX-1868] tree_root_id now accepts a comma-delimited list of Resource IDs to restrict by. Works across contexts as well.

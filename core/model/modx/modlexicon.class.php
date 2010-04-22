@@ -196,18 +196,17 @@ class modLexicon {
                 'modLexiconEntry.language' => $language,
             ));
             $c->sortby('`modLexiconEntry`.`name`','ASC');
-
-            if ($entries= $this->modx->getCollection('modLexiconEntry',$c)) {
-                $results= array();
+            $entries= $this->modx->getCollection('modLexiconEntry',$c);
+            $results= array();
+            if (!empty($entries)) {
                 foreach ($entries as $entry) {
                     $results[$entry->get('name')]= $entry->get('value');
                 }
             }
-
             $cached = $this->modx->cacheManager->generateLexiconTopic($key,$results);
         }
         if (empty($cached)) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
+            $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
         }
         return $cached;
     }
