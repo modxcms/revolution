@@ -30,8 +30,8 @@
 class modParser {
     public $modx= null;
 
-    function __construct(&$modx) {
-        $this->modx= & $modx;
+    function __construct(xPDO &$modx) {
+        $this->modx =& $modx;
     }
 
     /**

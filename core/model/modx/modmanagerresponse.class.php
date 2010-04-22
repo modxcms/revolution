@@ -151,14 +151,17 @@ class modManagerResponse extends modResponse {
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
         $c->leftJoin('modAccessActionDom','Access');
+        $principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
         $c->where(array(
             'action' => $action,
+            array(
+                array(
+                    'Access.principal_class:=' => 'modUserGroup',
+                    $principalCol.' IN ('.implode(',',$userGroups).')',
+                ),
+                'OR:Access.principal:IS' => null,
+            ),
         ));
-        $c->andCondition(array(
-            '((`Access`.`principal_class` = "modUserGroup"
-          AND `Access`.`principal` IN ('.implode(',',$userGroups).'))
-           OR `Access`.`principal` IS NULL)',
-        ),null,2);
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
         foreach ($domRules as $rule) {

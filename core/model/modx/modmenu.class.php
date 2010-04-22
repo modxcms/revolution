@@ -63,16 +63,13 @@ class modMenu extends modAccessibleObject {
         $this->xpdo->lexicon->load('menu','topmenu');
 
         $c = $this->xpdo->newQuery('modMenu');
-        $c->select('
-            `modMenu`.*,
-            `Action`.`controller` AS `controller`,
-            `Action`.`namespace` AS `namespace`
-        ');
         $c->leftJoin('modAction','Action');
+        $c->select($this->xpdo->getSelectColumns('modMenu', 'modMenu'));
+        $c->select($this->xpdo->getSelectColumns('modAction', 'Action', '', array('controller', 'namespace')));
         $c->where(array(
             'modMenu.parent' => $start,
         ));
-        $c->sortby('`modMenu`.`menuindex`','ASC');
+        $c->sortby($this->xpdo->getSelectColumns('modMenu','modMenu','',array('menuindex')),'ASC');
         $menus = $this->xpdo->getCollection('modMenu',$c);
         if (count($menus) < 1) return array();
 

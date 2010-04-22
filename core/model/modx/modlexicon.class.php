@@ -195,7 +195,7 @@ class modLexicon {
                 'Namespace.name' => $namespace,
                 'modLexiconEntry.language' => $language,
             ));
-            $c->sortby('`modLexiconEntry`.`name`','ASC');
+            $c->sortby($this->modx->getSelectColumns('modLexiconEntry','modLexiconEntry','',array('name')),'ASC');
             $entries= $this->modx->getCollection('modLexiconEntry',$c);
             $results= array();
             if (!empty($entries)) {
