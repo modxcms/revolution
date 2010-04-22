@@ -216,7 +216,11 @@ class modX extends xPDO {
      */
     public $db= null;
 
-    public $pluginCache= array ();
+    public $pluginCache= array();
+    public $sourceCache= array(
+        'modChunk' => array()
+        ,'modSnippet' => array()
+    );
 
     /**#@+
      * @deprecated 2006-09-15 To be removed in 2.1
@@ -414,7 +418,7 @@ class modX extends xPDO {
     public function setDebug($debug= true, $stopOnNotice= false) {
         $oldValue= $this->getDebug();
         if ($debug === true) {
-            error_reporting(E_ALL);
+            error_reporting(-1);
             parent :: setDebug(true);
         } elseif ($debug === false) {
             error_reporting(0);
@@ -1511,7 +1515,16 @@ class modX extends xPDO {
      */
     public function runSnippet($snippetName, array $params= array ()) {
         $output= '';
-        if ($snippet= $this->getObject('modSnippet', array ('name' => $snippetName), true)) {
+        if (array_key_exists($snippetName, $this->sourceCache['modSnippet'])) {
+            $snippet = $this->newObject('modSnippet');
+            $snippet->fromArray($this->sourceCache['modSnippet'][$snippetName], '', true, true);
+        } else {
+            $snippet= $this->getObject('modSnippet', array ('name' => $snippetName), true);
+            if (!empty($snippet)) {
+                $this->sourceCache['modSnippet'][$snippetName] = $snippet->toArray();
+            }
+        }
+        if (!empty($snippet)) {
             $snippet->setCacheable(false);
             $output= $snippet->process($params);
         }
@@ -1528,7 +1541,16 @@ class modX extends xPDO {
      */
     public function getChunk($chunkName, array $properties= array ()) {
         $output= '';
-        if ($chunk= $this->getObject('modChunk', array ('name' => $chunkName), true)) {
+        if (array_key_exists($chunkName, $this->sourceCache['modChunk'])) {
+            $chunk = $this->newObject('modChunk');
+            $chunk->fromArray($this->sourceCache['modChunk'][$chunkName], '', true, true);
+        } else {
+            $chunk= $this->getObject('modChunk', array ('name' => $chunkName), true);
+            if (!empty($chunk) || $chunk === '0') {
+                $this->sourceCache['modChunk'][$chunkName]= $chunk->toArray();
+            }
+        }
+        if (!empty($chunk) || $chunk === '0') {
             $chunk->setCacheable(false);
             $output= $chunk->process($properties);
         }
@@ -1545,8 +1567,8 @@ class modX extends xPDO {
      * @return string The processed chunk with the placeholders replaced.
      */
     public function parseChunk($chunkName, $chunkArr, $prefix='[[+', $suffix=']]') {
-        $chunk= '';
-        if ($chunk= $this->getChunk($chunkName)) {
+        $chunk= $this->getChunk($chunkName);
+        if (!empty($chunk) || $chunk === '0') {
             if(is_array($chunkArr)) {
                 reset($chunkArr);
                 while (list($key, $value)= each($chunkArr)) {

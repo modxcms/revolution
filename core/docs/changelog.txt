@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Optimized modX::getChunk() and modX::runSnippet() by caching instances within a request to modX::$sourceCache
+- Modified modX::setDebug(true) to set error_reporting(-1)
 - Optimized modLexicon::loadCache
 - [#MODX-1824] Fixed bug where duplicate wasnt fully duping resources
 - Moved Resource's duplicate method into the model, via modResource::duplicate
