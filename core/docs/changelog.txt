@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Pushed Resource tree nodes' context menus to the JS layer, massively decreasing the size of the JSON tree sent in the getNodes processor, vast speeding up tree functionality
+- Made publish/unpublish/delete/undelete actions on the tree only change the class of the node, rather than refreshing the node, speeding up workflow
 - Pushed modX::getService to xPDO layer 
 - [#MODX-1873] Ensure setup redirects use full URL in header
 - [#MODX-1887] Adjust default widths for main layout to render panels more consistently

@@ -98,7 +98,6 @@ textarea.x-form-field {
 .unpublished { font-style: italic; }
 .bold { font-weight: bold; }
 .deleted {
-    font-style: italic;
     color: red !important;
 }
 .deleted a span {

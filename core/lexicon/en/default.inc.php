@@ -71,6 +71,7 @@ $_lang['console_running'] = 'Console running...';
 $_lang['content'] = 'Content';
 $_lang['content_elements'] = 'Content Elements';
 $_lang['context_duplicate'] = 'Duplicate Context';
+$_lang['context_refresh'] = 'Refresh Context';
 $_lang['context_remove'] = 'Remove Context';
 $_lang['context_remove_confirm'] = 'Are you sure you want to remove this Context? It will also permanently remove any Resources within the Context. This is irreversible.';
 $_lang['copy_to_clipboard'] = 'Copy to Clipboard';

@@ -213,6 +213,7 @@ Ext.form.HourField = function(id,name,v){
 Ext.override(Ext.tree.TreeNodeUI,{
     hasClass : function(className){
         var el = Ext.fly(this.elNode);
+        if (!el) return '';
         return className && (' '+el.dom.className+' ').indexOf(' '+className+' ') !== -1;
     }
 });
