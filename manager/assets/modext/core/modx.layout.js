@@ -57,7 +57,7 @@ MODx.Layout = function(config){
             ,border: false
             ,deferredRender: false
             ,activeTab: 0
-            ,stateful: false
+            ,stateful: true
             ,stateId: 'modx-leftbar-tabs'
             ,stateEvents: ['tabchange','resize']
             ,getState:function() {
