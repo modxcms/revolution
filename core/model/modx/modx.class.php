@@ -451,44 +451,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Load and return a named service class instance.
-     *
-     * @param string $name The variable name of the instance.
-     * @param string $class The service class name.
-     * @param string $path An optional root path to search for the class.
-     * @param array $params An array of optional params to pass to the service
-     * class constructor.
-     * @return object The service class instance or null if it could not be loaded.
-     */
-    public function getService($name, $class= '', $path= '', $params= array ()) {
-        $service= null;
-        if (!isset ($this->services[$name]) || !is_object($this->services[$name])) {
-            if (empty ($class) && isset ($this->config[$name . '.class'])) {
-                $class= $this->config[$name . '.class'];
-            } elseif (empty ($class)) {
-                $class= $name;
-            }
-            if ($className= $this->loadClass($class, $path, false, true)) {
-                $service = new $className ($this, $params);
-                if ($service) {
-                    $this->services[$name]=& $service;
-                    $this->$name= & $this->services[$name];
-                }
-            }
-        }
-        if (array_key_exists($name, $this->services)) {
-            $service= & $this->services[$name];
-        } else {
-            if ($this->getDebug() === true) {
-                $this->log(modX::LOG_LEVEL_DEBUG, "Problem getting service {$name}, instance of class {$class}, from path {$path}, with params " . print_r($params, true));
-            } else {
-                $this->log(modX::LOG_LEVEL_ERROR, "Problem getting service {$name}, instance of class {$class}, from path {$path}");
-            }
-        }
-        return $service;
-    }
-
-    /**
      * Gets the MODx parser.
      *
      * Returns an instance of modParser responsible for parsing tags in element
