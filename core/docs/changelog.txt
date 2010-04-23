@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Pushed modX::getService to xPDO layer
 - [#MODX-1873] Ensure setup redirects use full URL in header
 - [#MODX-1887] Adjust default widths for main layout to render panels more consistently
 - Optimized modX::getChunk() and modX::runSnippet() by caching instances within a request to modX::$sourceCache
