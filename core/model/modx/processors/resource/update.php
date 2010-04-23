@@ -82,6 +82,15 @@ if ($locked !== true) {
     }
 }
 
+/* handle if parent is a context */
+if (!is_numeric($scriptProperties['parent'])) {
+    $ct = $modx->getCount('modContext',$scriptProperties['parent']);
+    if ($ct > 0) {
+        $scriptProperties['context_key'] = $scriptProperties['parent'];
+    }
+    $scriptProperties['parent'] = 0;
+}
+
 /* process derivative resource classes */
 $resourceClass = !empty($scriptProperties['class_key']) ? $scriptProperties['class_key'] : $resource->get('class_key');
 $resourceDir= strtolower(substr($resourceClass, 3));

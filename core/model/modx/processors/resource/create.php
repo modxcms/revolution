@@ -50,6 +50,15 @@
 if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('resource_create_access_denied'));
 $modx->lexicon->load('resource');
 
+/* handle if parent is a context */
+if (!empty($scriptProperties['parent']) && !is_numeric($scriptProperties['parent'])) {
+    $ctx = $modx->getObject('modContext',array('key' => $scriptProperties['parent']));
+    if ($ctx) {
+        $scriptProperties['context_key'] = $scriptProperties['parent'];
+    }
+    $scriptProperties['parent'] = 0;
+}
+
 /* default settings */
 $scriptProperties['context_key']= empty($scriptProperties['context_key']) ? 'web' : $scriptProperties['context_key'];
 $scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);

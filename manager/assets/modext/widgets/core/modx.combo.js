@@ -551,7 +551,7 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         }
         
         this.fireEvent('end',{
-            v: id
+            v: node.attributes.type != 'modContext' ? id : node.attributes.pk
             ,d: node.text
         });
         e.preventDefault();
