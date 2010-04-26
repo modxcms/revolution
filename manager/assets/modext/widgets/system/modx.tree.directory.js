@@ -24,6 +24,12 @@ MODx.tree.Directory = function(config) {
         }
         ,action: 'getList'
         ,primaryKey: 'dir'
+        ,useDefaultToolbar: true
+        ,tbar: [{
+            text: _('upload_files')
+            ,handler: this.uploadFiles
+            ,scope: this
+        }]
     });
     MODx.tree.Directory.superclass.constructor.call(this,config);
     this.addEvents({
@@ -34,34 +40,77 @@ MODx.tree.Directory = function(config) {
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
     ,_handleDrop: function(e) { return false; }
-    ,_showContextMenu: function(node,e) {
-        node.select();
-        this.cm.activeNode = node;
-        
-        var m = this.cm;
-        var nar = node.id.split('_');
-        
-        m.removeAll();
-        if (node.attributes.menu) {
-            this.addContextMenuItem(node.attributes.menu.items);
+    ,_showContextMenu: function(n,e) {
+        n.select();
+        this.cm.activeNode = n;
+        this.cm.removeAll();
+        if (n.attributes.menu && n.attributes.menu.items) {
+            this.addContextMenuItem(n.attributes.menu.items);
+            this.cm.show(n.getUI().getEl(),'t?');
+        } else {
+            var m = [];
+            switch (n.attributes.type) {
+                case 'dir':
+                    m = this._getDirectoryMenu(n);
+                    break;
+                default:
+                    m = this._getFileMenu(n);
+                    break;
+            }
+
+            this.addContextMenuItem(m);
+            this.cm.show(n.getUI().getEl(),'t?');
         }
-        if (node.attributes.type == 'dir') {
-            m.add('-');
-            m.add({
-                text: _('directory_refresh')
-                ,scope: this
-                ,handler: this.refreshActiveNode
-            });
-            m.add('-');
-            m.add({
-                text: _('upload_files')
-                ,scope: this
-                ,handler: this.uploadFiles
-            })
-        }
-        m.show(node.ui.getEl(),'t?');
-        m.activeNode = node;
+        e.stopEvent();
     }
+
+    ,_getFileMenu: function(n) {
+        var a = n.attributes;
+        var m = [];
+
+        m.push({
+            text: _('file_edit')
+            ,file: a.file
+            ,handler: function(itm,e) {
+                this.loadAction('a='+MODx.action['system/file/edit']+'&file='+itm.file);
+            }
+        },{
+            text: _('rename')
+            ,handler: this.renameFile
+        },'-',{
+            text: _('file_remove')
+            ,handler: this.removeFile
+        });
+        return m;
+    }
+
+    ,_getDirectoryMenu: function(n) {
+        var ui = n.getUI();
+        var m = [];
+        m.push({
+            text: _('file_folder_create_here')
+            ,handler: this.createDirectory
+        },{
+            text: _('file_folder_chmod')
+            ,handler: this.chmodDirectory
+        },{
+            text: _('rename')
+            ,handler: this.renameFile
+        },{
+            text: _('directory_refresh')
+            ,handler: this.refreshActiveNode
+        },'-',{
+            text: _('upload_files')
+            ,handler: this.uploadFiles
+        },'-',{
+            text: _('file_folder_remove')
+            ,handle: function(itm,e) {
+                this.remove('file_folder_confirm_remove');
+            }
+        });
+        return m;
+    }
+
     
     ,getPath:function(node) {
         var path, p, a;
@@ -197,24 +246,33 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
     
     ,uploadSuccess:function() {
-        var node = this.cm.activeNode;
-        (node.isLeaf() ? node.parentNode : node).reload();
-        this.fireEvent('afterUpload',node);
+        if (this.cm.activeNode) {
+            var node = this.cm.activeNode;
+            (node.isLeaf() ? node.parentNode : node).reload();
+            this.fireEvent('afterUpload',node);
+        } else {
+            this.refresh();
+        }
     }    
     ,beforeUpload: function() {
-        var node = this.cm.activeNode;
-        var path = this.getPath(node);
-        if(node.isLeaf()) {
-            path = path.replace(/\/[^\/]+$/, '', path);
-        }
+        var path;
+        if (this.cm.activeNode) {
+            path = this.getPath(this.cm.activeNode);
+            if(this.cm.activeNode.isLeaf()) {
+               path = path.replace(/\/[^\/]+$/, '', path);
+            }
+        } else { path = '/'; }
+
         this.uploader.setBaseParams({
             action: 'upload'
             ,prependPath: this.config.prependPath || null
             ,prependUrl: this.config.prependUrl || null
             ,path: path
         });
-        this.fireEvent('beforeUpload',node);
+        this.fireEvent('beforeUpload',this.cm.activeNode);
     }
+
+
     
 });
 Ext.reg('modx-tree-directory',MODx.tree.Directory);

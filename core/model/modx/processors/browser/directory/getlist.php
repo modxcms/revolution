@@ -53,29 +53,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             'type' => 'dir',
             'leaf' => false,
             'perms' => $octalPerms,
-            'menu' => array(
-                'items' => array(
-                    array(
-                        'text' => $modx->lexicon('file_folder_create_here'),
-                        'handler' => 'function(itm,e) { this.createDirectory(itm,e); }',
-                    ),
-                    '-',
-                    array(
-                        'text' => $modx->lexicon('file_folder_chmod'),
-                        'handler' => 'function(itm,e) { this.chmodDirectory(itm,e); }',
-                    ),
-                    array(
-                        'text' => $modx->lexicon('rename'),
-                        'handler' => 'function(itm,e) { this.renameFile(itm,e); }',
-                    ),
-                    '-',
-                    array(
-                        'text' => $modx->lexicon('file_folder_remove'),
-                        'handler' => 'function(itm,e) { this.remove("file_folder_confirm_remove"); }',
-                    ),
-                ),
-            ),
-	    );
+        );
     }
 
     /* get files in current dir */
@@ -89,32 +67,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             'leaf' => true,
             'perms' => $octalPerms,
             'path' => $relativeRootPath.$fileName,
-            'menu' => array(
-                'items' => array(
-                    array(
-                        'text' => $modx->lexicon('file_edit'),
-                        'handler' => 'function() {
-                            Ext.getCmp("modx-file-tree").loadAction("'
-                                . 'a=' . $actions['system/file/edit']
-                                . '&file=' . rawurlencode($filePathName)
-                             . '");
-                        }',
-                    ),
-                    array(
-                        'text' => $modx->lexicon('rename'),
-                        'handler' => 'function(itm,e) {
-                            this.renameFile(itm,e);
-                        }',
-                    ),
-                    '-',
-                    array(
-                        'text' => $modx->lexicon('file_remove'),
-                        'handler' => 'function(itm,e) {
-                            this.removeFile(itm,e);
-                        }',
-                    ),
-                ),
-            ),
+            'file' => rawurlencode($filePathName),
         );
     }
 }
