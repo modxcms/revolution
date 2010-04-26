@@ -137,6 +137,8 @@ while ($item) {
                 'pk' => $item->id,
                 'cls' => $class,
                 'type' => 'modResource',
+                'classKey' => $item->class_key,
+                'key' => $item->get('key'),
                 'ctx' => $item->context_key,
                 'qtip' => $qtip,
                 'preview_url' => $modx->makeUrl($item->get('id')),

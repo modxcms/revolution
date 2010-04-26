@@ -448,10 +448,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             });
             m.push({
                 text: _('quick_update_resource')
+                ,classKey: a.classKey
                 ,handler: function(itm,e) {
-                    Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,"'.$item->get('class_key').'","'.$item->get('key').'","'.$item->get('id').'");
+                    Ext.getCmp("modx-resource-tree").quickUpdate(itm,e,itm.classKey);
                 }
-            })
+            });
         }
         if (ui.hasClass('pnew')) {
             m.push({
