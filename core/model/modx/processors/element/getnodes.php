@@ -37,29 +37,6 @@ $ar_actionmap = array(
 /* split the array */
 $g = explode('_',$grab);
 
-/* quick create Menu */
-$quickCreateMenu = array();
-$qcm = array('template','tv','chunk','snippet','plugin');
-foreach ($qcm as $type) {
-    if ($modx->hasPermission('new_'.$type)) {
-        $quickCreateMenu[] = array(
-            'text' => $modx->lexicon($type),
-            'scope' => 'this',
-            'handler' => 'function(itm,e) {
-                Ext.getCmp("modx-element-tree").quickCreate(itm,e,"'.$type.'");
-            }',
-        );
-    }
-}
-
-$quickCreateMenu = array(
-    'text' => $modx->lexicon('quick_create'),
-    'handler' => 'new Function("return false;")',
-    'menu' => array(
-        'items' => $quickCreateMenu,
-    ),
-);
-
 /* load correct mode */
 $nodes = array();
 switch ($g[0]) {

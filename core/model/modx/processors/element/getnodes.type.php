@@ -8,8 +8,8 @@ $elementClassKey = $ar_typemap[$g[1]];
 
 /* get elements in this type */
 $c = $modx->newQuery('modCategory');
+$c->select($modx->getSelectColumns('modCategory','modCategory'));
 $c->select('
-    `modCategory`.*,
     COUNT(`'.$elementClassKey.'`.`id`) AS `elementCount`,
     COUNT(`Children`.`id`) AS `childrenCount`
 ');
@@ -22,43 +22,17 @@ $c->sortby('`category`','ASC');
 $c->groupby('`modCategory`.`id`');
 $categories = $modx->getCollection('modCategory',$c);
 
-/* build category menu */
-$categoryMenu = array();
-$categoryMenu[] = '-';
-if ($modx->hasPermission('new_'.$g[1])) {
-    $categoryMenu[] = array(
-        'text' => $modx->lexicon('add_to_category_this',array('type' => $elementType)),
-        'handler' => 'function(itm,e) {
-            this._createElement(itm,e);
-        }',
-    );
+/* set permissions as css classes */
+$class = 'icon-category folder';
+$types = array('template','tv','chunk','snippet','plugin');
+foreach ($types as $type) {
+    if ($modx->hasPermission('new_'.$type)) {
+        $class .= ' pnew_'.$type;
+    }
 }
-$categoryMenu[] = $quickCreateMenu;
-$categoryMenu[] = '-';
-if ($modx->hasPermission('new_category')) {
-    $categoryMenu[] = array(
-        'text' => $modx->lexicon('category_create'),
-        'handler' => 'function(itm,e) {
-            this.createCategory(itm,e);
-        }',
-    );
-}
-if ($modx->hasPermission('edit_category')) {
-    $categoryMenu[] = array(
-        'text' => $modx->lexicon('category_rename'),
-        'handler' => 'function(itm,e) {
-            this.renameCategory(itm,e);
-        }',
-    );
-}
-if ($modx->hasPermission('delete_category')) {
-    $categoryMenu[] = array(
-        'text' => $modx->lexicon('remove_category'),
-        'handler' => 'function(itm,e) {
-            this.removeCategory(itm,e);
-        }',
-    );
-}
+$class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
+$class .= $modx->hasPermission('edit_category') ? ' peditcat' : '';
+$class .= $modx->hasPermission('delete_category') ? ' pdelcat' : '';
 
 /* loop through categories with elements in this type */
 foreach ($categories as $category) {
@@ -66,12 +40,6 @@ foreach ($categories as $category) {
         continue;
     }
 
-    array_unshift($categoryMenu,array(
-        'text' => '<b>'.strip_tags($category->get('category')).'</b>',
-        'params' => '',
-        'handler' => 'function() { return false; }',
-        'header' => true,
-    ));
     $nodes[] = array(
         'text' => strip_tags($category->get('category')) . ' (' . $category->get('id') . ')',
         'id' => 'n_'.$g[1].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
@@ -79,14 +47,12 @@ foreach ($categories as $category) {
         'category' => $category->get('id'),
         'data' => $category->toArray(),
         'leaf' => false,
-        'cls' => 'icon-category',
+        'cls' => $class,
         'page' => '',
+        'classKey' => 'modCategory',
+        'elementType' => $elementType,
         'type' => $g[1],
-        'menu' => array(
-            'items' => $categoryMenu,
-        ),
     );
-    array_shift($categoryMenu);
     unset($elCount,$childCats);
 }
 
@@ -103,59 +69,11 @@ foreach ($elements as $element) {
     /* handle templatename case */
     $name = $elementClassKey == 'modTemplate' ? $element->get('templatename') : $element->get('name');
 
-    $menu = array();
-    $menu[] = array(
-        'text' => '<b>'.strip_tags($name).'</b>',
-        'params' => '',
-        'handler' => 'function() { return false; }',
-        'header' => true,
-    );
-    $menu[] = '-';
-    if ($modx->hasPermission('edit_'.$g[1])) {
-        $menu[] = array(
-            'text' => $modx->lexicon('edit').' '.$elementType,
-            'handler' => 'function() {
-                location.href = "index.php?'
-                    . 'a=' . $actions['element/'.strtolower($elementType).'/update']
-                    . '&id=' . $element->get('id')
-                 . '";
-            }',
-        );
-    }
-    if ($modx->hasPermission('edit_'.$g[1])) {
-        $menu[] = array(
-            'text' => $modx->lexicon('quick_update_'.$g[1]),
-            'handler' => 'function(itm,e) { this.quickUpdate(itm,e,"'.$g[1].'"); }',
-        );
-    }
-    if ($modx->hasPermission('new_'.$g[1])) {
-        $menu[] = array(
-            'text' => $modx->lexicon('duplicate').' '.$elementType,
-            'handler' => 'function(itm,e) {
-                this.duplicateElement(itm,e,'.$element->get('id').',"'.strtolower($elementType).'");
-            }',
-        );
-    }
-    if ($modx->hasPermission('delete_'.$g[1])) {
-        $menu[] = array(
-            'text' => $modx->lexicon('remove').' '.$elementType,
-            'handler' => 'function(itm,e) { this.removeElement(itm,e); }',
-        );
-    }
-    $menu[] = '-';
-    if ($modx->hasPermission('new_'.$g[1])) {
-        $menu[] = array(
-            'text' => $modx->lexicon('add_to_category_this',array('type' => $elementType)),
-            'handler' => 'function(itm,e) { this._createElement(itm,e); }',
-        );
-    }
-
-    if ($modx->hasPermission('new_category')) {
-        $menu[] = array(
-            'text' => $modx->lexicon('new_category'),
-            'handler' => 'function(itm,e) { this.createCategory(itm,e); }',
-        );
-    }
+    $class = 'icon-'.$g[1];
+    $class .= $modx->hasPermission('new_'.$g[1]) ? ' pnew' : '';
+    $class .= $modx->hasPermission('edit_'.$g[1]) ? ' pedit' : '';
+    $class .= $modx->hasPermission('delete_'.$g[1]) ? ' pdelete' : '';
+    $class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
 
     $nodes[] = array(
         'text' => strip_tags($name) . ' (' . $element->get('id') . ')',
@@ -164,14 +82,12 @@ foreach ($elements as $element) {
         'category' => 0,
         'leaf' => true,
         'name' => $name,
-        'cls' => 'icon-'.$g[1],
+        'cls' => $class,
         'page' => '?a='.$ar_actionmap[$g[1]].'&id='.$element->get('id'),
         'type' => $g[1],
+        'elementType' => $elementType,
         'classKey' => $elementClassKey,
         'qtip' => strip_tags($element->get('description')),
-        'menu' => array(
-            'items' => $menu,
-        ),
     );
 }
 return $nodes;

@@ -19,42 +19,22 @@ if (!empty($g[1])) {
     $c->sortby('category','ASC');
 }
 
-$c->select('
-    `modCategory`.*,
-    COUNT(`Children`.`id`) AS `childrenCount`
-');
+$c->select($modx->getSelectColumns('modCategory','modCategory'));
+$c->select('COUNT(`Children`.`id`) AS `childrenCount`');
 $c->leftJoin('modCategory','Children');
 $c->groupby('modCategory.id');
 
-/* prepare menu */
-$menu = array();
-if ($modx->hasPermission('new_category')) {
-    $menu[] = array(
-        'text' => $modx->lexicon('category_create'),
-        'handler' => 'function(itm,e) {
-            this.createCategory(itm,e);
-        }',
-    );
+/* set permissions as css classes */
+$class = 'icon-category folder';
+$types = array('template','tv','chunk','snippet','plugin');
+foreach ($types as $type) {
+    if ($modx->hasPermission('new_'.$type)) {
+        $class .= ' pnew_'.$type;
+    }
 }
-if ($modx->hasPermission('edit_category')) {
-    $menu[] = array(
-        'text' => $modx->lexicon('category_rename'),
-        'handler' => 'function(itm,e) {
-            this.renameCategory(itm,e);
-        }',
-    );
-}
-$menu[] = '-';
-$menu[] = $quickCreateMenu;
-if ($modx->hasPermission('delete_category')) {
-    $menu[] = '-';
-    $menu[] = array(
-        'text' => $modx->lexicon('category_remove'),
-        'handler' => 'function(itm,e) {
-            this.removeCategory(itm,e);
-        }',
-    );
-}
+$class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
+$class .= $modx->hasPermission('edit_category') ? ' peditcat' : '';
+$class .= $modx->hasPermission('delete_category') ? ' pdelcat' : '';
 
 /* get and loop through categories */
 $categories = $modx->getCollection('modCategory',$c);
@@ -66,12 +46,10 @@ foreach ($categories as $category) {
         'data' => $category->toArray(),
         'category' => $category->get('id'),
         'leaf' => false,
-        'cls' => 'icon-category folder',
+        'cls' => $class,
         'page' => '',
+        'classKey' => 'modCategory',
         'type' => 'category',
-        'menu' => array(
-            'items' => $menu,
-        ),
     );
 }
 
