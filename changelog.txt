@@ -1,7 +1,8 @@
 This file shows the changes in this release of xPDO.
 
-xPDO 2.0.0-rc2
+xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#XPDO-49] Fix inconsistent static and non-static calls to fromJSON() and toJSON() methods on xPDO
 - Added xPDO::getService to load service classes
 - Commented out deprecated code in xPDOVehicle dealing with PHP validators 
 - Fixed typo in xPDOVehicle where $r should be $v

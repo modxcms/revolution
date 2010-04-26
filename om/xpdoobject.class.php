@@ -787,10 +787,10 @@ class xPDOObject {
                                         $v = $v->toArray();
                                     }
                                     if (is_string($v)) {
-                                        $v= xPDO :: fromJSON($v, true);
+                                        $v= $this->xpdo->fromJSON($v, true);
                                     }
                                     if (is_array($v)) {
-                                        $this->_fields[$k]= xPDO :: toJSON($v);
+                                        $this->_fields[$k]= $this->xpdo->toJSON($v);
                                         $set= true;
                                     }
                                     break;
@@ -956,7 +956,7 @@ class xPDOObject {
                             break;
                         case 'json' :
                             if (is_string($value) && strlen($value) > 1) {
-                                $value= xPDO :: fromJSON($value, true);
+                                $value= $this->xpdo->fromJSON($value, true);
                             }
                             break;
                         default :
@@ -2121,10 +2121,10 @@ class xPDOObject {
                     if (!is_string($val)) {
                         $v = $val;
                         if (is_array($v)) {
-                            $this->_fields[$key] = xPDO :: toJSON($v);
+                            $this->_fields[$key] = $this->xpdo->toJSON($v);
                             $set = true;
                         } elseif (is_object($v) && $v instanceof xPDOObject) {
-                            $this->_fields[$key] = xPDO :: toJSON($v->toArray());
+                            $this->_fields[$key] = $this->xpdo->toJSON($v->toArray());
                             $set = true;
                         }
                     } else {

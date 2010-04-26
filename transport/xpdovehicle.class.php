@@ -146,7 +146,7 @@ abstract class xPDOVehicle {
                         if ($transport->xpdo->getDebug() === true) {
                             $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Resolving transport files: " . print_r($this, true));
                         }
-                        $fileMeta = xPDO :: fromJSON($body, true);
+                        $fileMeta = $transport->xpdo->fromJSON($body, true);
                         $fileName = $fileMeta['name'];
                         $fileSource = $transport->path . $fileMeta['source'];
                         $fileTarget = eval ($fileMeta['target']);
@@ -220,7 +220,7 @@ abstract class xPDOVehicle {
                         if (isset ($options[xPDOTransport::RESOLVE_PHP]) && !$options[xPDOTransport::RESOLVE_PHP]) {
                             continue;
                         }
-                        $fileMeta = xPDO :: fromJSON($body, true);
+                        $fileMeta = $transport->xpdo->fromJSON($body, true);
                         $fileName = $fileMeta['name'];
                         $fileSource = $transport->path . $fileMeta['source'];
                         if (!$resolved = include ($fileSource)) {
@@ -260,7 +260,7 @@ abstract class xPDOVehicle {
 //                        if (isset ($options[xPDOTransport::VALIDATE_PHP]) && !$options[xPDOTransport::VALIDATE_PHP]) {
 //                            continue;
 //                        }
-                        $fileMeta = xPDO :: fromJSON($body, true);
+                        $fileMeta = $transport->xpdo->fromJSON($body, true);
                         $fileName = $fileMeta['name'];
                         $fileSource = $transport->path . $fileMeta['source'];
                         if (!$validated = include ($fileSource)) {
@@ -432,7 +432,7 @@ abstract class xPDOVehicle {
                     if ($body) {
                         $this->payload['resolve'][$rKey] = array (
                             'type' => $type,
-                            'body' => xPDO :: toJSON($body)
+                            'body' => $transport->xpdo->toJSON($body)
                         );
                     } else {
                         $this->payload['resolve'][$rKey] = null;
@@ -464,7 +464,7 @@ abstract class xPDOVehicle {
                     if ($body) {
                         $this->payload['validate'][$vKey] = array (
                             'type' => $type,
-                            'body' => xPDO :: toJSON($body)
+                            'body' => $transport->xpdo->toJSON($body)
                         );
                     } else {
                         $this->payload['validate'][$vKey] = null;
