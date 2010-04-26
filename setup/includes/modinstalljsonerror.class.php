@@ -37,7 +37,7 @@ class modInstallJSONError extends modInstallError {
         @header("Content-Type: text/json; charset=UTF-8");
         if ($message != '') $this->message= $message;
 
-        return $this->modx->toJSON(array (
+        return json_encode(array (
             'message' => $this->message,
             'fields' => $this->fields,
             'type' => $this->type,

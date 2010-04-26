@@ -38,6 +38,11 @@ if ($php_ver_comp < 0) {
     die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Wrong PHP version! You\'re using PHP version '.MODX_SETUP_PHP_VERSION.', and MODx requires version 5.1.1 or higher.</p></body></html>');
 }
 
+/* make sure json extension is available */
+if (!function_exists('json_encode')) {
+    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>MODx requires the PHP JSON extension! You\'re PHP configuration at version '.MODX_SETUP_PHP_VERSION.' does not appear to have this extension enabled. This should be a standard extension on PHP 5.2+; it is available as a PECL extension in 5.1.</p></body></html>');
+}
+
 $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
 $installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
 $installBaseUrl .= $_SERVER['HTTP_HOST'];
