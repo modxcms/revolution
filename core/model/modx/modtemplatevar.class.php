@@ -631,7 +631,7 @@ class modTemplateVar extends modElement {
                     $policy['modAccessResourceGroup'][$row['target']][] = array(
                         'principal' => $row['principal'],
                         'authority' => $row['authority'],
-                        'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
+                        'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
                     );
                 }
             }

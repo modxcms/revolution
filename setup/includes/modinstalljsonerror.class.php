@@ -37,7 +37,7 @@ class modInstallJSONError extends modInstallError {
         @header("Content-Type: text/json; charset=UTF-8");
         if ($message != '') $this->message= $message;
 
-        return xPDO :: toJSON(array (
+        return $this->modx->toJSON(array (
             'message' => $this->message,
             'fields' => $this->fields,
             'type' => $this->type,

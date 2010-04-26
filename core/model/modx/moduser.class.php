@@ -113,7 +113,7 @@ class modUser extends modPrincipal {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => $row['principal'],
                                     'authority' => $row['authority'],
-                                    'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
+                                    'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
                                 );
                                 $legacyDocGroups[$row['target']]= $row['target'];
                             }
@@ -138,7 +138,7 @@ class modUser extends modPrincipal {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => $row['principal'],
                                     'authority' => $row['authority'],
-                                    'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
+                                    'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
                                 );
                             }
                         }
@@ -163,7 +163,7 @@ class modUser extends modPrincipal {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => $row['principal'],
                                     'authority' => $row['authority'],
-                                    'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
+                                    'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
                                 );
                             }
                         }
@@ -190,7 +190,7 @@ class modUser extends modPrincipal {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => 0,
                                     'authority' => $row['authority'],
-                                    'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
+                                    'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
                                 );
                                 $legacyDocGroups[$row['target']]= $row['target'];
                             }
@@ -209,7 +209,7 @@ class modUser extends modPrincipal {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => 0,
                                     'authority' => $row['authority'],
-                                    'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
+                                    'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
                                 );
                             }
                         }
@@ -230,7 +230,7 @@ class modUser extends modPrincipal {
                                 $this->_attributes[$context][$target][$row['target']][] = array(
                                     'principal' => 0,
                                     'authority' => $row['authority'],
-                                    'policy' => $row['data'] ? xPDO :: fromJSON($row['data'], true) : array(),
+                                    'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
                                 );
                             }
                         }

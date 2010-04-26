@@ -1,11 +1,10 @@
 <?php
+/**
+ * @package setup
+ */
 $output= '';
-
 $mode= isset ($_POST['installmode']) ? intval($_POST['installmode']) : modInstall::MODE_NEW;
-
-/* validate database settings */
-require_once MODX_CORE_PATH . 'xpdo/xpdo.class.php';
-if (isset ($_REQUEST['search']) && $_REQUEST['search']) {
+if (function_exists('json_encode') && isset ($_REQUEST['search']) && $_REQUEST['search']) {
     $id= 0;
     $results= array();
     $searchString= $_REQUEST['search'];
@@ -24,12 +23,12 @@ if (isset ($_REQUEST['search']) && $_REQUEST['search']) {
                 }
             }
         }
-        if ($output= xPDO :: toJSON($results)) {
-            header('Content-Type:text/javascript;');
-            echo '{"success": true, "results":' . $output . '}';
-            exit();
-        }
+        $output= json_encode($results);
     }
 }
-
-$this->error->success($output);
+if (empty ($output) || $output == '[]') {
+    $output= "[]";
+}
+header('Content-Type:text/javascript');
+echo '{"success": true, "results":' . $output . '}';
+exit();
