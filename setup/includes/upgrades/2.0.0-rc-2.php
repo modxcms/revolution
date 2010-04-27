@@ -104,7 +104,7 @@ $this->processResults($class,$description,$sql);
 /* drop name unique index */
 $class = 'modEvent';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['drop_column'],'id',$table);
+$description = sprintf($this->install->lexicon['drop_column'],'name',$table);
 $sql = "ALTER TABLE {$table} DROP INDEX `name`";
 $this->processResults($class,$description,$sql);
 
@@ -112,3 +112,17 @@ $this->processResults($class,$description,$sql);
 $sql = "ALTER TABLE {$table} ADD PRIMARY KEY (`name`)";
 $this->install->xpdo->exec($sql);
 
+/* add remote_key and remote_data to modUser */
+$modUserTbl = $this->install->xpdo->getTableName('modUser');
+
+$description = sprintf($this->install->lexicon['add_column'],'remote_key',$modUserTbl);
+$sql = "ALTER TABLE {$modUserTbl} ADD `remote_key` VARCHAR(255) NULL DEFAULT NULL AFTER `active`";
+$this->processResults($class,$description,$sql);
+
+$description = sprintf($this->install->lexicon['add_column'],'remote_data',$modUserTbl);
+$sql = "ALTER TABLE {$modUserTbl} ADD `remote_data` TEXT NULL DEFAULT NULL AFTER `remote_key`";
+$this->processResults($class,$description,$sql);
+
+$description = sprintf($this->install->lexicon['add_index'],'remote_key',$modUserTbl);
+$sql = "ALTER TABLE {$modUserTbl} ADD INDEX `remote_key` (`remote_key`)";
+$this->processResults($class,$description,$sql);

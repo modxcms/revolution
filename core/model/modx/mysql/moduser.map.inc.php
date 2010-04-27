@@ -13,6 +13,8 @@ $xpdo_meta_map['modUser']= array (
     'cachepwd' => '',
     'class_key' => 'modUser',
     'active' => 1,
+    'remote_key' => NULL,
+    'remote_data' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -58,6 +60,20 @@ $xpdo_meta_map['modUser']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 1,
+    ),
+    'remote_key' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => true,
+      'index' => 'index',
+    ),
+    'remote_data' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'json',
+      'null' => true,
     ),
   ),
   'aggregates' => 
