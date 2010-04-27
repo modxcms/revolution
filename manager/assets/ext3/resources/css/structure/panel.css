@@ -1,6 +1,6 @@
 /*!
- * Ext JS Library 3.0.2
- * Copyright(c) 2006-2009 Ext JS, LLC
+ * Ext JS Library 3.2.1
+ * Copyright(c) 2006-2010 Ext JS, Inc.
  * licensing@extjs.com
  * http://www.extjs.com/license
  */
@@ -398,29 +398,6 @@
 .x-panel-btns {
     padding:5px;
     overflow:hidden;
-}
-
-.x-panel-btns-right .x-panel-fbar {
-	float:right;
-	clear:none;
-}
-
-.x-panel-btns-left .x-panel-fbar {
-	clear:none;
-}
-
-.x-panel-btns-center{
-	text-align:center; /*ie*/
-}
-
-.x-panel-btns-center .x-toolbar-ct {
-	margin:0 auto; /*everyone else*/
-    text-align:left;
-    width:auto;
-}
-
-.ext-ie .x-panel-btns-right .x-toolbar-ct, .ext-gecko2 .x-panel-btns-right .x-toolbar-ct {
-    width:auto;
 }
 
 .x-panel-btns td.x-toolbar-cell{

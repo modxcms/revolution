@@ -1,6 +1,6 @@
 /*!
- * Ext JS Library 3.0.2
- * Copyright(c) 2006-2009 Ext JS, LLC
+ * Ext JS Library 3.2.1
+ * Copyright(c) 2006-2010 Ext JS, Inc.
  * licensing@extjs.com
  * http://www.extjs.com/license
  */
@@ -12,9 +12,14 @@
     border-color:#99bbe8;
 }
 
-.x-grid3-hd-row td, .x-grid3-row td, .x-grid3-summary-row td{
-	font:normal 11px arial, tahoma, helvetica, sans-serif;
+.x-grid3-row td, .x-grid3-summary-row td{
+	font:normal 11px/13px arial, tahoma, helvetica, sans-serif;
 }
+
+.x-grid3-hd-row td {
+	font:normal 11px/15px arial, tahoma, helvetica, sans-serif;
+}
+
 
 .x-grid3-hd-row td {
     border-left-color:#eee;

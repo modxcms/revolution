@@ -1,6 +1,6 @@
 /*!
- * Ext JS Library 3.0.2
- * Copyright(c) 2006-2009 Ext JS, LLC
+ * Ext JS Library 3.2.1
+ * Copyright(c) 2006-2010 Ext JS, Inc.
  * licensing@extjs.com
  * http://www.extjs.com/license
  */
@@ -9,7 +9,7 @@
 	top: 0;
     left:0;
     visibility: hidden;
-	z-index: 20000;
+	z-index: 20002;
     border:0 none;
 }
 

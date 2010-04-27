@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Updated ExtJS to 3.2.1
 - Add remote_key and remote_data to modUser
 - [#MODX-1898] Fix static calls to modX::fromJSON() and modX::toJSON() instance methods (xPDO updated to revision 421)
 - Pushed File tree nodes' context menus to JS layer, added Upload Files button to tree toolbar

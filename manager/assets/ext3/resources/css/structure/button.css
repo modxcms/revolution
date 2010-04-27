@@ -1,6 +1,6 @@
 /*!
- * Ext JS Library 3.0.2
- * Copyright(c) 2006-2009 Ext JS, LLC
+ * Ext JS Library 3.2.1
+ * Copyright(c) 2006-2010 Ext JS, Inc.
  * licensing@extjs.com
  * http://www.extjs.com/license
  */
@@ -26,7 +26,7 @@
     width:1px;
 }
 
-.ext-gecko .x-btn button {
+.ext-gecko .x-btn button, .ext-webkit .x-btn button {
     padding-left:0;
     padding-right:0;
 }
@@ -212,6 +212,11 @@
 	padding:0 5px;
 	cursor:pointer;
 	white-space:nowrap;
+}
+
+/* Fixes an issue with the button height */
+.ext-strict .ext-ie6 .x-btn-mc, .ext-strict .ext-ie7 .x-btn-mc {
+    height: 100%;
 }
 
 .x-btn-bl{

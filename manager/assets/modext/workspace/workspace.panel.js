@@ -10,7 +10,7 @@ MODx.panel.Workspace = function(config) {
             ,id: 'modx-workspace-header'
         },MODx.getPageStructure([{
             title: _('packages')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
             ,items: [{
                 html: '<p>'+_('packages_desc')+'</p>'
@@ -22,7 +22,7 @@ MODx.panel.Workspace = function(config) {
             }]
         },{
             title: _('providers')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,autoHeight: true
             ,items: [{
                 html: '<p>'+_('providers_desc')+'</p>'

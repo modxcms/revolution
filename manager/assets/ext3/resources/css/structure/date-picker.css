@@ -1,6 +1,6 @@
 /*!
- * Ext JS Library 3.0.2
- * Copyright(c) 2006-2009 Ext JS, LLC
+ * Ext JS Library 3.2.1
+ * Copyright(c) 2006-2010 Ext JS, Inc.
  * licensing@extjs.com
  * http://www.extjs.com/license
  */
@@ -84,9 +84,15 @@
 }
 
 table.x-date-inner {
-    width:100%;
+    width: 100%;
     table-layout:fixed;
 }
+
+.ext-webkit table.x-date-inner{
+    /* Fix for webkit browsers */
+    width: 175px;
+}
+
 
 .x-date-inner th {
     width:25px;

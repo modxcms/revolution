@@ -1,6 +1,6 @@
 /*!
- * Ext JS Library 3.0.2
- * Copyright(c) 2006-2009 Ext JS, LLC
+ * Ext JS Library 3.2.1
+ * Copyright(c) 2006-2010 Ext JS, Inc.
  * licensing@extjs.com
  * http://www.extjs.com/license
  */
@@ -61,6 +61,14 @@ ul.x-tab-strip-bottom{
 
 .x-tab-strip-bottom .x-tab-left {
 	background-image: url(../images/default/tabs/tab-btm-inactive-left-bg.gif);
+}
+
+.x-tab-strip-bottom .x-tab-strip-over .x-tab-right {
+	background-image: url(../images/default/tabs/tab-btm-over-right-bg.gif);
+}
+
+.x-tab-strip-bottom .x-tab-strip-over .x-tab-left {
+	background-image: url(../images/default/tabs/tab-btm-over-left-bg.gif);
 }
 
 .x-tab-strip-bottom .x-tab-strip-active .x-tab-right {

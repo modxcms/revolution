@@ -180,6 +180,9 @@ textarea.x-form-field {
 #modx-action-buttons {
     background: transparent !important;
 }
+#modx-action-buttons .x-toolbar-left {
+    width: auto !important;
+}
 
 /* top bar */
 #modx-topbar {

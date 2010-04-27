@@ -1,6 +1,6 @@
 /*!
- * Ext JS Library 3.0.2
- * Copyright(c) 2006-2009 Ext JS, LLC
+ * Ext JS Library 3.2.1
+ * Copyright(c) 2006-2010 Ext JS, Inc.
  * licensing@extjs.com
  * http://www.extjs.com/license
  */
@@ -28,6 +28,7 @@
 
 .x-grid3-hd-row td, .x-grid3-row td, .x-grid3-summary-row td{
     -moz-outline: none;
+    outline: none;
 	-moz-user-focus: normal;
 }
 
@@ -440,10 +441,18 @@ a.x-grid3-hd-btn:hover {
 }
 
 .x-grid3-hd-checker {
+    background-position:2px 1px;
+}
+
+.ext-border-box .x-grid3-hd-checker {
     background-position:2px 3px;
 }
 
 .x-grid3-hd-checker-on .x-grid3-hd-checker {
+    background-position:-23px 1px;
+}
+
+.ext-border-box .x-grid3-hd-checker-on .x-grid3-hd-checker {
     background-position:-23px 3px;
 }
 
@@ -541,9 +550,26 @@ a.x-grid3-hd-btn:hover {
     position:relative;
 }
 
+
+/* Reset position to static when Grid Panel has been framed */
+/* to resolve 'snapping' from top to bottom behavior. */
+/* @forumThread 86656 */
+.ext-ie7 .x-grid-panel .x-panel-mc .x-panel-bbar {
+    position: static;
+}
+
 .ext-ie6 .x-grid3-header {
     position: relative;
 }
+
+/* Fix WebKit bug in Grids */
+.ext-webkit .x-grid-panel .x-panel-bwrap{
+    -webkit-user-select:none;
+}
+.ext-webkit .x-tbar-page-number{
+    -webkit-user-select:ignore;
+}
+/* end*/
 
 /* column lines */
 .x-grid-with-col-lines .x-grid3-row td.x-grid3-cell {

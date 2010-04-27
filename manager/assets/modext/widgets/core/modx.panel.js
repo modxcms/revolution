@@ -29,6 +29,7 @@ MODx.FormPanel = function(config) {
         ,errorReader: MODx.util.JSONReader
         ,checkDirty: true
         ,useLoadingMask: false
+        ,defaults: { autoHeight: true }
     });
     if (config.items) { this.addChangeEvent(config.items); }
     
