@@ -79,7 +79,7 @@ if (isset($scriptProperties['tvs'])) {
                 }
                 $templateVarTemplate->set('tmplvarid',$tv['id']);
                 $templateVarTemplate->set('templateid',$template->get('id'));
-                $templateVarTemplate->set('rank',$tv['rank']);
+                $templateVarTemplate->set('rank',$tv['tv_rank']);
                 $templateVarTemplate->save();
             } else {
                 $templateVarTemplate = $modx->getObject('modTemplateVarTemplate',array(

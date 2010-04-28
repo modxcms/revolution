@@ -103,15 +103,24 @@ MODx.panel.Template = function(config) {
             ,elementId: config.template
             ,elementType: 'modTemplate'
         },{
-           xtype: 'modx-grid-template-tv'
-           ,preventRender: true
-           ,width: '100%'
-           ,template: config.template
-           ,listeners: {
-                'rowclick': {fn:this.markDirty,scope:this}
-                ,'afterEdit': {fn:this.markDirty,scope:this}
-                ,'afterRemoveRow': {fn:this.markDirty,scope:this}
-           }
+            title: _('template_variables')
+            ,itemId: 'form-template'
+            ,bodyStyle: 'padding: 15px;'
+            ,defaults: { autoHeight: true }
+            ,items: [{
+                html: '<p>'+_('template_tv_msg')+'</p>'
+                ,border: false
+            },{
+               xtype: 'modx-grid-template-tv'
+               ,preventRender: true
+               ,width: '100%'
+               ,template: config.template
+               ,listeners: {
+                    'rowclick': {fn:this.markDirty,scope:this}
+                    ,'afterEdit': {fn:this.markDirty,scope:this}
+                    ,'afterRemoveRow': {fn:this.markDirty,scope:this}
+               }
+            }]
         }])]
         ,useLoadingMask: true
         ,listeners: {
@@ -153,6 +162,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
                 },scope:this}
             }
         });
+        return true;
     }
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-template-tv');

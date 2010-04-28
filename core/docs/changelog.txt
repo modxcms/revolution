@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1892] Various fixes to TV-Template relationship grids
 - [#MODX-1895] Added sanity check for windows systems with file names in file browser
 - [#MODX-1908] Corrected logic flaw in modManagerResponse that prevented smarty templatePath from being set for CMPs
 - Optimized loading for System Settings grid

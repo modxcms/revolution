@@ -14,34 +14,33 @@ if (!$modx->hasPermission('save_tv')) return $modx->error->failure($modx->lexico
 $modx->lexicon->load('tv');
 
 $_DATA = $modx->fromJSON($scriptProperties['data']);
-if ($_DATA['rank'] == '') $_DATA['rank'] = 0;
+if (empty($_DATA['rank'])) $_DATA['rank'] = 0;
 
-$tvt = $modx->getObject('modTemplateVarTemplate',array(
+$templateVarTemplate = $modx->getObject('modTemplateVarTemplate',array(
     'templateid' => $_DATA['id'],
     'tmplvarid' => $_DATA['tv'],
 ));
 
 if ($_DATA['access']) {
     /* adding access or updating rank */
-    if ($tvt == null) {
-        $tvt = $modx->newObject('modTemplateVarTemplate');
+    if (empty($templateVarTemplate)) {
+        $templateVarTemplate = $modx->newObject('modTemplateVarTemplate');
     }
-    $tvt->set('templateid',$_DATA['id']);
-    $tvt->set('tmplvarid',$_DATA['tv']);
-    $tvt->set('rank',$_DATA['rank']);
+    $templateVarTemplate->set('templateid',$_DATA['id']);
+    $templateVarTemplate->set('tmplvarid',$_DATA['tv']);
 
-    if ($tvt->save() == false) {
+    if ($templateVarTemplate->save() == false) {
         return $modx->error->failure($modx->lexicon('tvt_err_save'));
     }
 } else {
     /* removing access */
-    if ($tvt == null) {
+    if (empty($templateVarTemplate)) {
         return $modx->error->failure($modx->lexicon('tvt_err_nf'));
     }
 
-    if ($tvt->remove() == false) {
+    if ($templateVarTemplate->remove() == false) {
         return $modx->error->failure($modx->lexicon('tvt_err_remove'));
     }
 }
 
-return $modx->error->success();
+return $modx->error->success('',$templateVarTemplate);

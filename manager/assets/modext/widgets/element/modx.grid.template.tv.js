@@ -11,14 +11,14 @@ MODx.grid.TemplateTV = function(config) {
     var tt = new Ext.ux.grid.CheckColumn({
         header: _('access')
         ,dataIndex: 'access'
-        ,width: 40
+        ,width: 70
         ,sortable: false
     });
-	Ext.applyIf(config,{
+    Ext.applyIf(config,{
         title: _('template_assignedtv_tab')
         ,id: 'modx-grid-template-tv'
         ,url: MODx.config.connectors_url+'element/template/tv.php'
-		,fields: ['id','name','description','rank','access','menu']
+        ,fields: ['id','name','description','tv_rank','access']
         ,baseParams: {
             action: 'getList'
             ,template: config.template
@@ -26,27 +26,31 @@ MODx.grid.TemplateTV = function(config) {
         ,saveParams: {
             template: config.template
         }
-		,width: 800
+        ,width: 800
         ,paging: true
         ,plugins: tt
+        ,remoteSort: true
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
             ,width: 150
             ,editor: { xtype: 'textfield' ,allowBlank: false }
+            ,sortable: true
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 350
             ,editor: { xtype: 'textfield' }
+            ,sortable: false
         },tt,{
             header: _('rank')
-            ,dataIndex: 'rank'
+            ,dataIndex: 'tv_rank'
             ,width: 100
             ,editor: { xtype: 'textfield' ,allowBlank: false }
+            ,sortable: true
         }]
-	});
-	MODx.grid.TemplateTV.superclass.constructor.call(this,config);
+    });
+    MODx.grid.TemplateTV.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid);
 Ext.reg('modx-grid-template-tv',MODx.grid.TemplateTV);

@@ -156,7 +156,7 @@ MODx.panel.TV = function(config) {
         },{ 
             title: _('tv_tmpl_access')
             ,itemId: 'form-template'
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,defaults: { autoHeight: true }
             ,items: [{
                 html: '<p>'+_('tv_tmpl_access_msg')+'</p>'

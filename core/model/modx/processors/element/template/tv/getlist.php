@@ -22,34 +22,39 @@ $modx->lexicon->load('template');
 $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,20);
-$sortAlias = $modx->getOption('sort',$scriptProperties,'modTemplateVar');
+$sortAlias = $modx->getOption('sortAlias',$scriptProperties,'modTemplateVar');
 $sort = $modx->getOption('sort',$scriptProperties,'name');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $template = $modx->getOption('template',$scriptProperties,false);
 
 $c = $modx->newQuery('modTemplateVar');
-
+$count = $modx->getCount('modTemplateVar',$c);
+$c->select($modx->getSelectColumns('modTemplateVar','modTemplateVar'));
 if ($template) {
     $c->leftJoin('modTemplateVarTemplate','modTemplateVarTemplate','
         `modTemplateVarTemplate`.`tmplvarid` = `modTemplateVar`.`id`
     AND `modTemplateVarTemplate`.`templateid` = '.$template.'
     ');
     $c->select('
-        `modTemplateVar`.*,
         IF(ISNULL(`modTemplateVarTemplate`.`tmplvarid`),0,1) AS `access`,
-        `modTemplateVarTemplate`.`rank` AS `rank`
+        `modTemplateVarTemplate`.`rank` AS `tv_rank`
     ');
 }
-$count = $modx->getCount('modTemplateVar',$c);
-
-$c->sortby($sortAlias.'.'.$sort,$dir);
+if ($sort != 'tv_rank') {
+    $c->sortby($sortAlias.'.'.$sort,$dir);
+} else {
+    $c->where(array('modTemplateVarTemplate.rank:!=' => null));
+    $c->sortby($sort,$dir);
+}
 $c->limit($limit,$start);
 $tvs = $modx->getCollection('modTemplateVar',$c);
 
 /* iterate through tvs */
 $list = array();
 foreach ($tvs as $tv) {
-    $tv->set('access',$tv->get('access') ? 1 : 0);
-	$list[] = $tv->toArray();
+    $tvArray = $tv->get(array('id','name','description','tv_rank'));
+    $tvArray['access'] = (boolean)$tv->get('access');
+    
+    $list[] = $tvArray;
 }
 return $this->outputArray($list,$count);

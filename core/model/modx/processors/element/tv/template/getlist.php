@@ -25,33 +25,26 @@ $tv = $modx->getOption('tv',$scriptProperties,false);
 
 /* query for templates */
 $c = $modx->newQuery('modTemplate');
+$c->select($modx->getSelectColumns('modTemplate','modTemplate'));
+$c->select('
+    IF(ISNULL(`TemplateVarTemplates`.`tmplvarid`),0,1) AS `access`
+');
+$c->leftJoin('modTemplateVarTemplate','TemplateVarTemplates',array(
+    '`modTemplate`.`id` = `TemplateVarTemplates`.`templateid`',
+    'TemplateVarTemplates.tmplvarid' => $tv,
+));
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $templates = $modx->getCollection('modTemplate',$c);
+
 $count = $modx->getCount('modTemplate');
 
 /* iterate through templates */
 $list = array();
 foreach ($templates as $template) {
-    if ($tv) {
-        $tvt = $modx->getObject('modTemplateVarTemplate',array(
-            'tmplvarid' => $tv,
-            'templateid' => $template->get('id'),
-        ));
-    } else $tvt = null;
-
-    if ($tvt != null) {
-        $template->set('access',true);
-        $template->set('rank',$tvt->get('rank'));
-    } else {
-        $template->set('access',false);
-        $template->set('rank','');
-    }
     $templateArray = $template->toArray();
+    $templateArray['access'] = (boolean)$template->get('access');
     unset($templateArray['content']);
-
-    $templateArray['menu'] = array();
-
     $list[] = $templateArray;
 }
 

@@ -12,12 +12,12 @@ MODx.grid.TemplateVarTemplate = function(config) {
         header: _('access')
         ,dataIndex: 'access'
         ,width: 40
-        ,sortable: false
+        ,sortable: true
     });
     Ext.applyIf(config,{
         id: 'modx-grid-tv-template'
         ,url: MODx.config.connectors_url+'element/tv/template.php'
-        ,fields: ['id','templatename','description','rank','access','menu']
+        ,fields: ['id','templatename','description','access','menu']
         ,baseParams: {
             action: 'getList'
             ,tv: config.tv
@@ -28,20 +28,17 @@ MODx.grid.TemplateVarTemplate = function(config) {
         ,width: 800
         ,paging: true
         ,plugins: tt
+        ,remoteSort: true
         ,columns: [{
             header: _('name')
             ,dataIndex: 'templatename'
             ,width: 150
+            ,sortable: true
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 350
-        },tt,{
-            header: _('rank')
-            ,dataIndex: 'rank'
-            ,width: 100
-            ,editor: { xtype: 'textfield' ,allowBlank: false }
-        }]
+        },tt]
     });
     MODx.grid.TemplateVarTemplate.superclass.constructor.call(this,config);
 };
