@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1908] Corrected logic flaw in modManagerResponse that prevented smarty templatePath from being set for CMPs
 - Optimized loading for System Settings grid
 - Updated ExtJS to 3.2.1
 - Add remote_key and remote_data to modUser

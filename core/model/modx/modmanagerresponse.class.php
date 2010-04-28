@@ -76,6 +76,9 @@ class modManagerResponse extends modResponse {
                         'action' => $this->action,
                         'filename' => $f,
                     ));
+                    if (!empty($this->action['namespace']) && $this->action['namespace'] != 'core') {
+                        $this->modx->smarty->setTemplatePath($this->action['namespace_path']);
+                    }
 
                     $cbody = include $f;
                 } else {
@@ -86,10 +89,7 @@ class modManagerResponse extends modResponse {
                 $this->registerCssJs();
 
                 /* reset path to core modx path for header/footer */
-                if (!isset($this->action['namespace']) || $this->action['namespace'] == 'core') {
-                    $this->modx->smarty->setTemplatePath($templatePath);
-                }
-
+                $this->modx->smarty->setTemplatePath($templatePath);
 
                 /* load header */
                 $controllersPath = $this->modx->getOption('manager_path').'controllers/'.$theme.'/';
