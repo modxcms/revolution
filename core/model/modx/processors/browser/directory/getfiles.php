@@ -44,7 +44,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
 
         /* get thumbnail */
         if (in_array($fileExtension,$imagesExts)) {
-            $thumb = $modx->getOption('base_url').$url;
+            $thumb = str_replace('//','/',$modx->getOption('base_url').$url);
             $thumbWidth = $modx->getOption('filemanager_thumb_width',null,80);
             $thumbHeight = $modx->getOption('filemanager_thumb_height',null,60);
             $size = @getimagesize($filePathName);
@@ -65,7 +65,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             'image' => $thumb,
             'image_width' => $thumbWidth,
             'image_height' => $thumbHeight,
-            'url' => $modx->getOption('base_url').$url,
+            'url' => str_replace('//','/',$modx->getOption('base_url').$url),
             'relativeUrl' => $url,
             'ext' => $fileExtension,
             'pathname' => $filePathName,
