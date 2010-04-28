@@ -28,7 +28,7 @@ $area = $modx->getOption('area',$scriptProperties,'');
 /* build query */
 $c = $modx->newQuery('modSystemSetting');
 if (!empty($key)) {
-    $c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modSystemSetting.`key`) = `Entry`.`name`');
+    $c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modSystemSetting`.`key`) = `Entry`.`name`');
     $c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modSystemSetting`.`key`,"_desc") = `Description`.`name`');
     $c->where(array(
         'modSystemSetting.key:LIKE' => '%'.$key.'%',
