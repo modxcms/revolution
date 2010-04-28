@@ -137,6 +137,33 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
             this.fireEvent('change'); 
         },this);
     }
+
+    ,_showMenu: function(g,ri,e) {
+        e.stopEvent();
+        e.preventDefault();
+        this.menu.record = this.getStore().getAt(ri).data;
+        if (!this.getSelectionModel().isSelected(ri)) {
+            this.getSelectionModel().selectRow(ri);
+        }
+        this.menu.removeAll();
+
+        var m = [];
+        if (this.menu.record.menu) {
+            m = this.menu.record.menu;
+        } else {
+            m.push({
+                text: _('setting_update')
+                ,handler: { xtype: 'modx-window-setting-update' }
+            },'-',{
+                text: _('setting_remove')
+                ,handler: this.remove.createDelegate(this,['setting_remove_confirm'])
+            });
+        }
+        if (m.length > 0) {
+            this.addContextMenuItem(m);
+            this.menu.show(e.target);
+        }
+    }
   
     ,clearFilter: function() {
     	this.getStore().baseParams = {

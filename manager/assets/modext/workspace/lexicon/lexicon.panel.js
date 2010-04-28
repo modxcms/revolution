@@ -13,7 +13,7 @@ MODx.panel.Lexicon = function(config) {
         id: 'modx-panel-lexicon'
         ,itemId: 'panel-lexicon'
         ,bodyStyle: ''
-        ,defaults: { collapsible: false }
+        ,defaults: { autoHeight: true, collapsible: false }
         ,items: [{
             html: '<h2>'+_('lexicon_management')+'</h2>'
             ,border: false

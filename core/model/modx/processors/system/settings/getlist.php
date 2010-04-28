@@ -28,8 +28,8 @@ $area = $modx->getOption('area',$scriptProperties,'');
 /* build query */
 $c = $modx->newQuery('modSystemSetting');
 if (!empty($key)) {
-    $c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",modSystemSetting.key) = Entry.name');
-    $c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",modSystemSetting.key,"_desc") = Description.name');
+    $c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modSystemSetting.`key`) = `Entry`.`name`');
+    $c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modSystemSetting`.`key`,"_desc") = `Description`.`name`');
     $c->where(array(
         'modSystemSetting.key:LIKE' => '%'.$key.'%',
     ));
@@ -86,17 +86,6 @@ foreach ($settings as $setting) {
     $settingArray['editedon'] = $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
         ? ''
         : strftime('%b %d, %Y %I:%M %p',strtotime($setting->get('editedon')));
-
-    $settingArray['menu'] = array();
-    $settingArray['menu'][] = array(
-        'text' => $modx->lexicon('setting_update'),
-        'handler' => array( 'xtype' => 'modx-window-setting-update' ),
-    );
-    $settingArray['menu'][] = '-';
-    $settingArray['menu'][] = array(
-        'text' => $modx->lexicon('setting_remove'),
-        'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm"])',
-    );
 
     $list[] = $settingArray;
 }

@@ -1,18 +1,18 @@
 Ext.namespace('MODx.grid');
 
 MODx.grid.Grid = function(config) {
-	config = config || {};
-	this.config = config;
-	this._loadStore();
-	this._loadColumnModel();
+    config = config || {};
+    this.config = config;
+    this._loadStore();
+    this._loadColumnModel();
 	
-	Ext.applyIf(config,{
-		store: this.store
-		,cm: this.cm
-		,sm: new Ext.grid.RowSelectionModel({singleSelect:true})
-		,paging: (config.bbar ? true : false)
-		,loadMask: true
-		,autoHeight: true
+    Ext.applyIf(config,{
+        store: this.store
+        ,cm: this.cm
+        ,sm: new Ext.grid.RowSelectionModel({singleSelect:true})
+        ,paging: (config.bbar ? true : false)
+        ,loadMask: true
+        ,autoHeight: true
         ,collapsible: true
         ,stripeRows: true
         ,header: false
@@ -21,25 +21,25 @@ MODx.grid.Grid = function(config) {
             defaultAlign: 'tl-b?'
             ,enableScrolling: false
         }
-		,viewConfig: {
-			forceFit: true
-			,enableRowBody: true
+        ,viewConfig: {
+            forceFit: true
+            ,enableRowBody: true
             ,autoFill: true
-			,showPreview: true
+            ,showPreview: true
             ,scrollOffset: 0
             ,emptyText: config.emptyText || _('ext_emptymsg')
-		}
-	});
-	if (config.paging) {
-		Ext.applyIf(config,{
-			bbar: new Ext.PagingToolbar({
-				pageSize: config.pageSize || 20
-				,store: this.getStore()
-				,displayInfo: true
-				,items: config.pagingItems || []
-			})
-		});
-	}
+        }
+    });
+    if (config.paging) {
+        Ext.applyIf(config,{
+            bbar: new Ext.PagingToolbar({
+                pageSize: config.pageSize || 20
+                ,store: this.getStore()
+                ,displayInfo: true
+                ,items: config.pagingItems || []
+            })
+        });
+    }
     if (config.grouping) {
         Ext.applyIf(config,{
           view: new Ext.grid.GroupingView({ 
@@ -60,61 +60,59 @@ MODx.grid.Grid = function(config) {
             if (!itm.scope) { itm.scope = this; }
         }
     }
-	MODx.grid.Grid.superclass.constructor.call(this,config);
+    MODx.grid.Grid.superclass.constructor.call(this,config);
     this._loadMenu(config);
     this.addEvents({
         beforeRemoveRow: true
         ,afterRemoveRow: true
     });
-	if (!config.preventRender) { this.render(); }
+    if (!config.preventRender) { this.render(); }
 	
-    this.on('rowcontextmenu',this._showMenu,this);
-    
-	if (config.autosave) {
-		this.on('afteredit',this.saveRecord,this);
-	}
+    this.on('rowcontextmenu',this._showMenu,this);    
+    if (config.autosave) {
+        this.on('afteredit',this.saveRecord,this);
+    }
 	
     if (config.paging && config.grouping) {
         this.getBottomToolbar().bind(this.store);
     }
-    
-	this.getStore().load({
-		params: {
+
+    this.getStore().load({
+        params: {
             start: config.pageStart || 0
             ,limit: config.pageSize || 20
         }
-		,scope: this
-		,callback: function() { this.getStore().reload(); } /* fixes comboeditor bug */
-	});
+        ,scope: this
+        ,callback: function() { this.getStore().reload(); } /* fixes comboeditor bug */
+    });
     this.config = config;
 };
 Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
-	
     windows: {}
     
     ,saveRecord: function(e) {
-		e.record.data.menu = null;
+        e.record.data.menu = null;
         var p = this.config.saveParams || {};
         Ext.apply(e.record.data,p);
-		var d = Ext.util.JSON.encode(e.record.data);
+        var d = Ext.util.JSON.encode(e.record.data);
         var url = this.config.saveUrl || (this.config.url || this.config.connector);
-		MODx.Ajax.request({
-			url: url
-			,params: {
-				action: this.config.save_action || 'updateFromGrid'
-				,data: d
-			}
-			,listeners: {
-				'success': {fn:function(r) {
-					if (this.config.save_callback) {
+        MODx.Ajax.request({
+            url: url
+            ,params: {
+                action: this.config.save_action || 'updateFromGrid'
+                ,data: d
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    if (this.config.save_callback) {
                         Ext.callback(this.config.save_callback,this.config.scope || this,[r]);
                     }
                     e.record.commit();
                     if (!this.config.preventSaveRefresh) this.refresh();
-				},scope:this}
-			}
-		});
-	}
+                },scope:this}
+            }
+        });
+    }
     
     ,loadWindow: function(btn,e,win,or) {
         var r = this.menu.record;
@@ -123,7 +121,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 record: win.blankValues ? {} : r
                 ,grid: this
                 ,listeners: {
-                	'success': {fn:win.success || this.refresh,scope:win.scope || this}
+                    'success': {fn:win.success || this.refresh,scope:win.scope || this}
                 }
             });
             if (or) {
@@ -183,26 +181,26 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
     }
     
-	,_loadMenu: function() {
-		this.menu = new Ext.menu.Menu(this.config.menuConfig);
-	}
-    
-	,_showMenu: function(g,ri,e) {
-		e.stopEvent();
-		e.preventDefault();
-		this.menu.record = this.getStore().getAt(ri).data;
+    ,_loadMenu: function() {
+        this.menu = new Ext.menu.Menu(this.config.menuConfig);
+    }
+
+    ,_showMenu: function(g,ri,e) {
+        e.stopEvent();
+        e.preventDefault();
+        this.menu.record = this.getStore().getAt(ri).data;
         if (!this.getSelectionModel().isSelected(ri)) {
             this.getSelectionModel().selectRow(ri);
         }
-		this.menu.removeAll();
+        this.menu.removeAll();
         if (this.menu.record.menu) {
             this.addContextMenuItem(this.menu.record.menu);
             this.menu.show(e.target);
         }
-	}
+    }
     
-	,_loadStore: function() {
-		if (this.config.grouping) {
+    ,_loadStore: function() {
+        if (this.config.grouping) {
             this.store = new Ext.data.GroupingStore({
                 url: this.config.url
                 ,baseParams: this.config.baseParams || { action: this.config.action || 'getList'}
@@ -221,19 +219,19 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             });
         } else {
             this.store = new Ext.data.JsonStore({
-    			url: this.config.url
-    			,baseParams: this.config.baseParams || { action: this.config.action || 'getList' }
-    			,fields: this.config.fields
-    			,root: 'results'
-    			,totalProperty: 'total'
-    			,remoteSort: this.config.remoteSort || false
+                url: this.config.url
+                ,baseParams: this.config.baseParams || { action: this.config.action || 'getList' }
+                ,fields: this.config.fields
+                ,root: 'results'
+                ,totalProperty: 'total'
+                ,remoteSort: this.config.remoteSort || false
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
-    		});
+            });
         }
-	}
+    }
     
-	,_loadColumnModel: function() {
+    ,_loadColumnModel: function() {
         if (this.config.columns) {
             var c = this.config.columns;
             for (var i=0;i<c.length;i++) {
@@ -355,6 +353,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         this.exp.expandAll(); 
         this.tools['plus'].hide();
         this.tools['minus'].show();
+        return true;
     }
     
     ,collapseAll: function() {
@@ -363,6 +362,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         this.exp.collapseAll();
         this.tools['minus'].hide();
         this.tools['plus'].show();
+        return true;
     }
 });
 
@@ -598,6 +598,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         this.exp.expandAll(); 
         this.tools['plus'].hide();
         this.tools['minus'].show();
+        return true;
     }
     
     ,collapseAll: function() {
@@ -606,6 +607,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         this.exp.collapseAll();
         this.tools['minus'].hide();
         this.tools['plus'].show();
+        return true;
     }
     ,rendYesNo: function(d,c) {
         switch(d) {

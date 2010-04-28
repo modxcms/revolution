@@ -50,6 +50,7 @@ MODx.panel.UpdateProfile = function(config) {
             action: 'update'
             ,id: config.user
         }
+        ,layout: 'form'
         ,frame: true
         ,items: [{
             xtype: 'textfield'
@@ -145,6 +146,7 @@ MODx.panel.ChangeProfilePassword = function(config) {
             ,id: config.user
         }
         ,frame: true
+        ,layout: 'form'
         ,items: [{
             xtype: 'checkbox'
             ,fieldLabel: _('reset_password')
