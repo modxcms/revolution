@@ -107,7 +107,7 @@ if ($modx->hasPermission('view_category')) {
         'cls' => $class,
         'page' => '',
         'classKey' => 'root',
-        'type' => 'root-category',
+        'type' => 'category',
         'draggable' => false,
     );
 }

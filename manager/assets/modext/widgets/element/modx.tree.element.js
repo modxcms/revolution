@@ -181,9 +181,15 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
     }
     
     ,afterSort: function(o) {
-        if (o.event.target.attributes.type == 'category') {
-            this.refreshNode('n_category',true);
-            this.refreshNode('n_type_'+o.event.dropNode.attributes.type,true);
+        var tn = o.event.target.attributes;
+        if (tn.type == 'category') {
+            var dn = o.event.dropNode.attributes;
+            if (tn.id != 'n_category' && dn.type == 'category') {
+                o.event.target.expand();
+            } else {
+                this.refreshNode(o.event.target.attributes.id,true);
+                this.refreshNode('n_type_'+o.event.dropNode.attributes.type,true);
+            }
         }
     }
 		
@@ -201,7 +207,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         var r = false;
         /* types must be the same */
         if(targetNode.attributes.type == dropNode.attributes.type) {
-            /* do not allow nesting of categories or anything to be dropped on an element */
+            /* do not allow anything to be dropped on an element */
             if(!(targetNode.parentNode &&
                 ((dropNode.attributes.cls == 'folder'
                     && targetNode.attributes.cls == 'folder'

@@ -13,14 +13,14 @@ $modx->lexicon->load('category');
 $data = urldecode($scriptProperties['data']);
 $data = $modx->fromJSON($data);
 
-sortNodes('modTemplate','template',$data);
-sortNodes('modTemplateVar','tv',$data);
-sortNodes('modChunk','chunk',$data);
-sortNodes('modSnippet','snippet',$data);
-sortNodes('modPlugin','plugin',$data);
+sortNodes($modx,'modTemplate','template',$data);
+sortNodes($modx,'modTemplateVar','tv',$data);
+sortNodes($modx,'modChunk','chunk',$data);
+sortNodes($modx,'modSnippet','snippet',$data);
+sortNodes($modx,'modPlugin','plugin',$data);
 
-/* if dropping an element onto a category, do that here */
 if (!empty($data['n_category']) && is_array($data['n_category'])) {
+    /* if dropping an element onto a category, do that here */
     foreach ($data['n_category'] as $key => $elements) {
         if (!is_array($elements) || empty($elements)) continue;
 
@@ -40,27 +40,36 @@ if (!empty($data['n_category']) && is_array($data['n_category'])) {
                 $element->save();
             }
         }
+    }
 
+    /* if sorting categories, do that here */
+    $cdata = array();
+    getNodesFormatted($cdata,$data['n_category']);
+    foreach ($cdata as $categoryArray) {
+        if ($categoryArray['type'] != 'category') continue;
+        $category = $modx->getObject('modCategory',$categoryArray['id']);
+        if ($category && $categoryArray['parent'] != $category->get('parent')) {
+            $category->set('parent',$categoryArray['parent']);
+            $category->save();
+        }
     }
 }
 
-function sortNodes($xname,$type,$data) {
-	$s = $data['n_type_'.$type];
-	if (is_array($s)) {
-        sortNodesHelper($s,$xname);
+function sortNodes(modX &$modx,$xname,$type,$data) {
+    $s = $data['n_type_'.$type];
+    if (is_array($s)) {
+        sortNodesHelper($modx,$s,$xname);
     }
 }
 
 
-function sortNodesHelper($objs,$xname,$currentCategoryId = 0) {
-    global $modx;
-
+function sortNodesHelper(modX &$modx,$objs,$xname,$currentCategoryId = 0) {
     foreach ($objs as $objar => $kids) {
         $oar = explode('_',$objar);
         $nodeArray = processID($oar);
 
         if ($nodeArray['type'] == 'category') {
-            sortNodesHelper($kids,$xname,$nodeArray['pk']);
+            sortNodesHelper($modx,$kids,$xname,$nodeArray['pk']);
 
         } elseif ($nodeArray['type'] == 'element') {
             $element = $modx->getObject($xname,$nodeArray['pk']);
@@ -79,6 +88,24 @@ function processID($ar) {
         'pk' => $ar[3],
         'elementCatId' => isset($ar[4]) ? $ar[4] : 0,
     );
+}
+
+
+function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0) {
+    $order = 0;
+    foreach ($cur_level as $nodeId => $children) {
+        $ar = explode('_',$nodeId);
+        if (empty($ar[1]) || empty($ar[2])) continue;
+        
+        $ar_nodes[] = array(
+            'id' => $ar[2],
+            'type' => $ar[1],
+            'parent' => $parent,
+            'order' => $order,
+        );
+        $order++;
+        getNodesFormatted($ar_nodes,$children,$ar[2]);
+    }
 }
 
 return $modx->error->success();
