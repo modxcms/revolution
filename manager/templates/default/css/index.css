@@ -50,7 +50,7 @@ hr {
 
 h2 {
     color: #5e5e5e;
-    margin: 0 0 1em;
+    margin: 0 0 13px;
     font: normal 22px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
     padding-bottom: 4px;
     border-bottom: 1px solid #acacac;
@@ -58,7 +58,7 @@ h2 {
 
 .modx-window h2 {
     color: #5e5e5e;
-    margin: 0 0 1em;
+    margin: 0 0 13px;
     font: bold 18px Helvetica, Tahoma, Arial, Helvetica, sans-serif;
     padding: 8px 15px;
     border-bottom: 1px solid #D6DFC3;
@@ -145,7 +145,10 @@ textarea.x-form-field {
 
 /* windows */
 .x-form-check-wrap { height: auto !important; }
-.modx-window .x-form-text, .modx-window .x-form.textarea { font-size: 13px; }
+.modx-window .x-form-text, .modx-window .x-form.textarea { 
+    font-size: 13px;
+    height: 22px !important;
+}
 .ext-gecko .modx-form .x-form-text { padding-top: 4px; }
 
 /* grids */
@@ -154,7 +157,7 @@ textarea.x-form-field {
 
 .x-small-editor .x-form-field {
     padding: 5px 5px 1px !important;
-    font-size: 1em !important;
+    font-size: 12px !important;
     height: 18px !important;
 }
 .x-small-editor .x-form-field-wrap .x-form-trigger {
@@ -162,6 +165,12 @@ textarea.x-form-field {
 }
 .x-form-field-wrap .x-form-trigger {
     height: 26px !important;
+}
+
+/* buttons */
+.ext-gecko .x-btn button, .ext-webkit .x-btn button {
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 /* tree node */
@@ -172,8 +181,8 @@ textarea.x-form-field {
 /* action buttons bar */
 #modAB {
     position: fixed;
-    top: 8em;
-    right: 2em;
+    top: 100px;
+    right: 20px;
     text-align: right;
     z-index: 12;
 }
@@ -196,7 +205,7 @@ textarea.x-form-field {
 }
 
 #modx-site-name {
-    padding: .3em 0 0 1em;
+    padding: 3px 0 0 8px;
 }
 
 .modx-version {
@@ -211,7 +220,7 @@ textarea.x-form-field {
 
 #modx-logo {
     float: right;
-    margin: .4em 1em 0 0;
+    margin: 4px 10px 0 0;
     }
 #modx-logo img {
     width: 94px;
@@ -222,13 +231,13 @@ textarea.x-form-field {
 
 /* 2nd row, navbar */
 #modx-navbar {
-    background-color: #4E4E4E;
+    background-color: #4e4e4e;
     border-top: 1px solid #1E1E1E;
     border-bottom: 1px solid #1E1E1E;
     height: 45px;
     background-repeat:repeat-x;
     position: relative;
-    text-shadow:1px -1px 0 #1f1f1f;
+    text-shadow: 1px -1px 0 #1f1f1f;
     z-index: 9995;
 }
 #modx-login-user {
@@ -297,7 +306,7 @@ textarea.x-form-field {
     margin: .3em .5em 0;
 }
 .modx-form p {
-    padding-bottom: 1em;
+    padding-bottom: 10px;
 }
 
 #modx-mainpanel{
@@ -306,7 +315,7 @@ textarea.x-form-field {
 
 /* news articles */
 .news_article {
-    padding-bottom: 3em;
+    padding-bottom: 30px;
 }
 .news_article a {
     color: #535d6c;
@@ -379,7 +388,7 @@ table.classy tr.odd td {
 }
 
 #modx-tv-tabs .modx-tv-table {
-    border: 0px;
+    border: 0;
 }
 #modx-tv-tabs .modx-tv-th { font-weight: bold; }
 #modx-tv-tabs .modx-tv-th, #modx-tv-tabs .modx-tv-td {
@@ -554,7 +563,7 @@ table.classy tr.odd td {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     background-color: #eee;
-    padding: .4em;
+    padding: 4px;
 }
 .modx-leftbar .x-panel-header-text,
 .modx-leftbar .x-panel-animated .x-panel-header-text {
@@ -592,7 +601,7 @@ table.classy tr.odd td {
 
 #modx-topnav-div {
     background: transparent;
-    margin-left: 1em;
+    margin-left: 10px;
     position: relative;
     width: 78%;
     z-index: 9996;
@@ -621,7 +630,7 @@ ul#modx-topnav li {
     margin: 0;
     padding:5px 13px;
     position: relative;
-    background:transparent url(../images/style/separator/menu_sep.png) no-repeat scroll right 0;
+    background: transparent url(../images/style/separator/menu_sep.png) no-repeat scroll right top;
     z-index: 9998;
 }
 ul#modx-topnav li a{
@@ -822,7 +831,7 @@ input.x-static-text-field {
 .modx-console .error { color: red; }
 .modx-console-text {
     background-color: white;
-    padding: .75em;
+    padding: 8px;
     font: 11px Courier !important;
 }
 
@@ -936,7 +945,7 @@ input.x-static-text-field {
 iframe[classname="x-hidden"] {visibility:hidden;}
 
 .modx-property-description {
-	padding: .7em 1em .3em;
+	padding: 7px 10px 1px;
 }
 
 
