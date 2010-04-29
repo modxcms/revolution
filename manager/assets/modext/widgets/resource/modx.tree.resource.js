@@ -529,7 +529,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         'a='+MODx.action['resource/create']
                         + '&class_key='+itm.classKey
                         + '&parent='+p
-                        + '&context_key='+at.ctx
+                        + (at.ctx ? '&context_key='+at.ctx : '')
                     );
                 }
                 ,scope: this

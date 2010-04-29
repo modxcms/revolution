@@ -11,7 +11,7 @@ $resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDo
 $resourceDir= strtolower(substr($resourceClass, 3));
 
 /* handle template inheritance */
-if (isset($_REQUEST['parent'])) {
+if (!empty($_REQUEST['parent'])) {
     $parent = $modx->getObject('modResource',$_REQUEST['parent']);
     if (!$parent->checkPolicy('add_children')) return $modx->error->failure($modx->lexicon('resource_add_children_access_denied'));
     if ($parent != null) {

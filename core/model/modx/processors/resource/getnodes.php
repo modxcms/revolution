@@ -94,7 +94,7 @@ while ($item) {
                 'text' => $item->get('key'),
                 'id' => $item->get('key') . '_0',
                 'pk' => $item->get('key'),
-                'ctx' => $item->get('ctx'),
+                'ctx' => $item->get('key'),
                 'leaf' => false,
                 'cls' => $class,
                 'qtip' => $item->get('description') != '' ? strip_tags($item->get('description')) : '',
