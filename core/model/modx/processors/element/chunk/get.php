@@ -27,6 +27,7 @@ foreach ($properties as $property) {
         $property['type'],
         $property['options'],
         $property['value'],
+        $property['lexicon'],
         false, /* overridden set to false */
     );
 }

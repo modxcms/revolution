@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added 'lexicon' field to Element properties to enable automatic translating of property descriptions and option names
 - Fixed parent/context_key reference issue when creating resource from context tree node
 - Tweaks to index.css for default mgr theme to correct styling issues in webkit browsers due to ExtJS upgrade
 - Fixed deprecated references to removed images in default mgr template css that was causing 404s

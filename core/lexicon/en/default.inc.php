@@ -203,6 +203,7 @@ $_lang['keywords'] = 'Keywords';
 $_lang['last_modified'] = 'Last Modified';
 $_lang['launch_site'] = 'View Site';
 $_lang['language'] = 'Language';
+$_lang['lexicon'] = 'Lexicon';
 $_lang['list'] = 'List';
 $_lang['load_headers'] = 'Load Headers';
 $_lang['loading'] = 'Loading...';

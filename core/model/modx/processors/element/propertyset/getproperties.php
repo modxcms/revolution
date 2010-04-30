@@ -33,6 +33,7 @@ if (isset($default) && is_array($default)) {
             $property['type'],
             $property['options'],
             $property['value'],
+            $property['lexicon'],
             0,
         );
     }
@@ -55,6 +56,7 @@ foreach ($properties as $property) {
         $property['type'],
         $property['options'],
         $property['value'],
+        $property['lexicon'],
         $overridden,
     );
 }

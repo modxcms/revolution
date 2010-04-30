@@ -55,6 +55,7 @@ if (isset($default)) {
             $property['type'],
             $property['options'],
             $property['value'],
+            $property['lexicon'],
         );
     }
 }
@@ -77,6 +78,7 @@ foreach ($properties as $property) {
         $property['type'],
         $property['options'],
         $property['value'],
+        $property['lexicon'],
         $overridden,
     );
 }
