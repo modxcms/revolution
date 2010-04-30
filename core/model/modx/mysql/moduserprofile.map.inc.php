@@ -33,6 +33,7 @@ $xpdo_meta_map['modUserProfile']= array (
     'photo' => '',
     'comment' => '',
     'website' => '',
+    'extended' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -236,6 +237,14 @@ $xpdo_meta_map['modUserProfile']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+    ),
+    'extended' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'json',
+      'null' => true,
+      'index' => 'fulltext',
+      'indexgrp' => 'extended',
     ),
   ),
   'aggregates' => 

@@ -113,7 +113,8 @@ $sql = "ALTER TABLE {$table} ADD PRIMARY KEY (`name`)";
 $this->install->xpdo->exec($sql);
 
 /* add remote_key and remote_data to modUser */
-$modUserTbl = $this->install->xpdo->getTableName('modUser');
+$class = 'modUser';
+$modUserTbl = $this->install->xpdo->getTableName($class);
 
 $description = sprintf($this->install->lexicon['add_column'],'remote_key',$modUserTbl);
 $sql = "ALTER TABLE {$modUserTbl} ADD `remote_key` VARCHAR(255) NULL DEFAULT NULL AFTER `active`";
@@ -125,4 +126,16 @@ $this->processResults($class,$description,$sql);
 
 $description = sprintf($this->install->lexicon['add_index'],'remote_key',$modUserTbl);
 $sql = "ALTER TABLE {$modUserTbl} ADD INDEX `remote_key` (`remote_key`)";
+$this->processResults($class,$description,$sql);
+
+/* add extended to modUserProfile */
+$class = 'modUserProfile';
+$table = $this->install->xpdo->getTableName($class);
+
+$description = sprintf($this->install->lexicon['add_column'],'extended',$table);
+$sql = "ALTER TABLE {$table} ADD `extended` TEXT NULL DEFAULT NULL AFTER `website`";
+$this->processResults($class,$description,$sql);
+
+$description = sprintf($this->install->lexicon['add_index'],'extended',$table);
+$sql = "ALTER TABLE {$table} ADD FULLTEXT INDEX `extended` (`extended`)";
 $this->processResults($class,$description,$sql);
