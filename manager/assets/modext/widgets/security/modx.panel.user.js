@@ -71,6 +71,9 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         
         var h = Ext.getCmp('modx-grid-user-groups');
         if (h) { d.groups = h.encode(); }
+
+        var t = Ext.getCmp('modx-orm-tree');
+        if (t) { d.remote_data = t.encode(); }
         
         Ext.apply(o.form.baseParams,d);
     }
@@ -397,18 +400,40 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         if (config.remoteFields && config.remoteFields.length) {
             f.push({
                 title: _('remote_data')
-                ,defaults: { msgTarget: 'side' }
+                ,layout: 'form'
+                ,bodyStyle: 'padding: 15px;'
+                ,defaults: { border: false ,autoHeight: true }
                 ,hideMode: 'offsets'
-                ,items: config.remoteFields
+                ,items: [{
+                    html: '<p>'+_('user_remote_data_msg')+'</p>'
+                },{
+                    layout: 'column'
+                    ,items: [{
+                        columnWidth: 0.4
+                        ,title: _('attributes')
+                        ,layout: 'fit'
+                        ,border: false
+                        ,items: {
+                            xtype: 'modx-orm-tree'
+                            ,id: 'modx-orm-tree'
+                            ,data: config.remoteFields
+                            ,formPanel: 'modx-panel-user'
+                        }
+                    },{
+                        xtype: 'modx-orm-form'
+                        ,columnWidth: 0.6
+                        ,title: _('editing_form')
+                        ,id: 'modx-orm-form'
+                        ,treePanel: 'modx-orm-tree'
+                        ,formPanel: 'modx-panel-user'
+                    }]
+                }]
             });
         }
         return f;
     }
 });
 Ext.reg('modx-panel-user',MODx.panel.User);
-
-
-
 
 /**
  * Displays a gender combo

@@ -22,19 +22,22 @@ if (!empty($remoteData)) {
 function parseRemoteData(array $remoteData = array()) {
     $fields = array();
     foreach ($remoteData as $key => $value) {
+        $field = array(
+            'name' => $key,
+            'id' => $key,
+        );
         if (is_array($value)) {
-            $sd = parseRemoteData($value);
-            $fields = array_merge($fields,$sd);
+            $field['text'] = $key;
+            $field['leaf'] = false;
+            $field['children'] = parseRemoteData($value);
         } else {
-            $fields[] = array(
-                'name' => 'remote_'.$key,
-                'fieldLabel' => $key,
-                'xtype' => 'statictextfield',
-                'anchor' => '100%',
-                'value' => $value,
-                'submitValue' => false,
-            );
+            $v = $value;
+            if (strlen($v) > 30) { $v = substr($v,0,30).'...'; }
+            $field['text'] = $key.' - <i>'.$v.'</i>';
+            $field['leaf'] = true;
+            $field['value'] = $value;
         }
+        $fields[] = $field;
     }
     return $fields;
 }
@@ -75,6 +78,7 @@ MODx.onUserFormRender = "'.$onUserFormRender.'";
 </script>');
 
 /* register JS scripts */
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.orm.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.grid.settings.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.settings.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.group.js');
@@ -87,7 +91,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-user-update"
         ,user: "'.$user->get('id').'"
-        '.(!empty($remoteFields) ? ',remoteFields: ['.$modx->toJSON($remoteFields).']' : '').'
+        '.(!empty($remoteFields) ? ',remoteFields: '.$modx->toJSON($remoteFields) : '').'
     });
 });
 // ]]>

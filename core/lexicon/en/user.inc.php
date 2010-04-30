@@ -147,6 +147,7 @@ $_lang['user_prevlogin'] = 'Last login';
 $_lang['user_profile_err_nf'] = 'FATAL ERROR: User profile not found.';
 $_lang['user_profile_err_save'] = 'An error occurred while attempting to save the user attributes.';
 $_lang['user_remove'] = 'Remove User';
+$_lang['user_remote_data_msg'] = 'Edit remote user data here.';
 $_lang['user_role_update'] = 'Update User Role';
 $_lang['user_setting_err_remove'] = 'An error occurred while removing user settings.';
 $_lang['user_setting_err_save'] = 'An error occurred while saving user settings.';

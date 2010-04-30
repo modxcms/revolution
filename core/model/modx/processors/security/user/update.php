@@ -49,6 +49,10 @@ if (isset($scriptProperties['groups'])) {
 }
 
 $user->fromArray($scriptProperties);
+if (!empty($scriptProperties['remote_data'])) {
+    $data = $modx->fromJSON($scriptProperties['remote_data']);
+    $user->set('remote_data',$data);
+}
 
 /* update user */
 if ($user->save() == false) {
