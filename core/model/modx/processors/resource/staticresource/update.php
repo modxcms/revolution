@@ -246,44 +246,9 @@ if (!empty($scriptProperties['tvs'])) {
 }
 /* end save TVs */
 
-/* Save META Keywords */
-if ($modx->hasPermission('edit_doc_metatags')) {
-    /* keywords - remove old keywords first */
-    $okws = $modx->getCollection('modResourceKeyword',array('content_id' => $resource->get('id')));
-    foreach ($okws as $kw) $kw->remove();
-
-    if (is_array($scriptProperties['keywords'])) {
-        foreach ($scriptProperties['keywords'] as $keyword) {
-            $kw = $modx->newObject('modResourceKeyword');
-            $kw->set('content_id',$resource->get('id'));
-            $kw->set('keyword_id',$keyword);
-            $kw->save();
-        }
-    }
-
-    /* meta tags - remove old tags first */
-    $omts = $modx->getCollection('modResourceMetatag',array('content_id' => $resource->get('id')));
-    foreach ($omts as $mt) $mt->remove();
-
-    if (is_array($scriptProperties['metatags'])) {
-        foreach ($scriptProperties['metatags'] as $metatag) {
-            $mt = $modx->newObject('modResourceMetatag');
-            $mt->set('content_id',$resource->get('id'));
-            $mt->set('metatag_id',$metatag);
-            $mt->save();
-        }
-    }
-
-    if ($resource != null) {
-        $resource->set('haskeywords',count($keywords) ? 1 : 0);
-        $resource->set('hasmetatags',count($metatags) ? 1 : 0);
-        $resource->save();
-    }
-}
-
 /* invoke OnDocFormSave event */
 $modx->invokeEvent('OnDocFormSave',array(
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $resource->get('id'),
     'resource' => & $resource
 ));

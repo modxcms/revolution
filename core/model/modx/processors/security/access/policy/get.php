@@ -28,15 +28,24 @@ $policyArray = $policy->get(array(
     'id',
     'name',
     'description',
+    'lexicon',
     'class',
     'parent',
 ));
+if (!empty($policyArray['lexicon'])) {
+    $modx->lexicon->load($policyArray['lexicon']);
+}
 
 $list = array();
 foreach ($permissions as $permission) {
+    $desc = $permission->get('description');
+    if (!empty($policyArray['lexicon'])) {
+        $desc = $modx->lexicon($desc);
+    }
     $list[] = array(
         $permission->get('name'),
         $permission->get('description'),
+        $desc,
         $permission->get('value'),
     );
 }

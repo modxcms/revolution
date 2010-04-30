@@ -19,6 +19,7 @@ $collection['1']->fromArray(array (
   'description' => 'MODx Resource policy with all attributes.',
   'parent' => 0,
   'class' => '',
+  'lexicon' => 'permissions',
 ), '', true, true);
 $permissions = include dirname(__FILE__).'/permissions/transport.policy.resource.php';
 $collection['1']->addMany($permissions);
@@ -33,6 +34,7 @@ $collection['2']->fromArray(array (
   'description' => 'Context administration policy with all permissions.',
   'parent' => 0,
   'class' => '',
+  'lexicon' => 'permissions',
 ), '', true, true);
 $permissions = include dirname(__FILE__).'/permissions/transport.policy.administrator.php';
 $collection['2']->addMany($permissions);

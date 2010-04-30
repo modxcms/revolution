@@ -33,7 +33,6 @@ MODx.page.UpdateResource = function(config) {
                 ,'parent-cmb': config['parent']
             }
             ,publish_document: config.publish_document
-            ,edit_doc_metatags: config.edit_doc_metatags
             ,access_permissions: config.access_permissions
         }]
         ,buttons: this.getButtons(config)

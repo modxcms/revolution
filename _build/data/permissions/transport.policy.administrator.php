@@ -1,608 +1,578 @@
 <?php
+/**
+ * The default Permission scheme for the Administrator Policy.
+ *
+ * @package modx
+ */
 $permissions = array();
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'about',
-    'description' => '',
+    'description' => 'perm.about_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'access_permissions',
-    'description' => '',
-    'value' => true,
-));
-$permissions[] = $xpdo->newObject('modAccessPermission',array(
-    'name' => 'action_ok',
-    'description' => '',
+    'description' => 'perm.access_permissions_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'actions',
-    'description' => '',
+    'description' => 'perm.actions_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'change_password',
-    'description' => '',
+    'description' => 'perm.change_password_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'change_profile',
-    'description' => '',
+    'description' => 'perm.change_profile_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'charsets',
-    'description' => '',
+    'description' => 'perm.charsets_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'content_types',
-    'description' => '',
+    'description' => 'perm.content_types_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'countries',
-    'description' => '',
+    'description' => 'perm.countries_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'create',
-    'description' => '',
+    'description' => 'perm.create_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'credits',
-    'description' => '',
+    'description' => 'perm.credits_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'customize_forms',
-    'description' => '',
+    'description' => 'perm.customize_forms_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'database',
-    'description' => '',
+    'description' => 'perm.database_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'database_truncate',
-    'description' => '',
+    'description' => 'perm.database_truncate_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_category',
-    'description' => '',
+    'description' => 'perm.delete_category_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_chunk',
-    'description' => '',
+    'description' => 'perm.delete_chunk_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_context',
-    'description' => '',
+    'description' => 'perm.delete_context_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_document',
-    'description' => '',
+    'description' => 'perm.delete_document_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_eventlog',
-    'description' => '',
+    'description' => 'perm.delete_eventlog_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_plugin',
-    'description' => '',
+    'description' => 'perm.delete_plugin_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_propertyset',
-    'description' => '',
+    'description' => 'perm.delete_propertyset_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_snippet',
-    'description' => '',
+    'description' => 'perm.delete_snippet_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_template',
-    'description' => '',
+    'description' => 'perm.delete_template_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_tv',
-    'description' => '',
+    'description' => 'perm.delete_tv_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_role',
-    'description' => '',
+    'description' => 'perm.delete_role_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_user',
-    'description' => '',
+    'description' => 'perm.delete_user_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_category',
-    'description' => '',
+    'description' => 'perm.edit_category_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_chunk',
-    'description' => '',
+    'description' => 'perm.edit_chunk_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_context',
-    'description' => '',
-    'value' => true,
-));
-$permissions[] = $xpdo->newObject('modAccessPermission',array(
-    'name' => 'edit_doc_metatags',
-    'description' => '',
+    'description' => 'perm.edit_context_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_document',
-    'description' => '',
+    'description' => 'perm.edit_document_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_locked',
-    'description' => '',
-    'value' => true,
-));
-$permissions[] = $xpdo->newObject('modAccessPermission',array(
-    'name' => 'edit_parser',
-    'description' => '',
+    'description' => 'perm.edit_locked_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_plugin',
-    'description' => '',
+    'description' => 'perm.edit_plugin_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_propertyset',
-    'description' => '',
+    'description' => 'perm.edit_propertyset_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_role',
-    'description' => '',
+    'description' => 'perm.edit_role_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_snippet',
-    'description' => '',
+    'description' => 'perm.edit_snippet_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_template',
-    'description' => '',
+    'description' => 'perm.edit_template_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_tv',
-    'description' => '',
+    'description' => 'perm.edit_tv_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'edit_user',
-    'description' => '',
+    'description' => 'perm.edit_user_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'element_tree',
-    'description' => '',
+    'description' => 'perm.element_tree_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'empty_cache',
-    'description' => '',
-    'value' => true,
-));
-$permissions[] = $xpdo->newObject('modAccessPermission',array(
-    'name' => 'error_dialog',
-    'description' => '',
+    'description' => 'perm.empty_cache_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'error_log_erase',
-    'description' => '',
+    'description' => 'perm.error_log_erase_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'error_log_view',
-    'description' => '',
+    'description' => 'perm.error_log_view_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'export_static',
-    'description' => '',
+    'description' => 'perm.export_static_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'file_manager',
-    'description' => '',
+    'description' => 'perm.file_manager_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'file_tree',
-    'description' => '',
+    'description' => 'perm.file_tree_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'flush_sessions',
-    'description' => '',
+    'description' => 'perm.flush_sessions_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'frames',
-    'description' => '',
+    'description' => 'perm.frames_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'help',
-    'description' => '',
+    'description' => 'perm.help_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'home',
-    'description' => '',
+    'description' => 'perm.home_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'import_static',
-    'description' => '',
+    'description' => 'perm.import_static_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'languages',
-    'description' => '',
+    'description' => 'perm.languages_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'lexicons',
-    'description' => '',
+    'description' => 'perm.lexicons_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'list',
-    'description' => '',
+    'description' => 'perm.list_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'load',
-    'description' => '',
+    'description' => 'perm.load_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'logout',
-    'description' => '',
+    'description' => 'perm.logout_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'logs',
-    'description' => '',
-    'value' => true,
-));
-$permissions[] = $xpdo->newObject('modAccessPermission',array(
-    'name' => 'manage_metatags',
-    'description' => '',
+    'description' => 'perm.logs_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'menus',
-    'description' => '',
+    'description' => 'perm.menus_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'messages',
-    'description' => '',
+    'description' => 'perm.messages_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'namespaces',
-    'description' => '',
+    'description' => 'perm.namespaces_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_category',
-    'description' => '',
+    'description' => 'perm.new_category_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_chunk',
-    'description' => '',
+    'description' => 'perm.new_chunk_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_context',
-    'description' => '',
+    'description' => 'perm.new_context_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_document',
-    'description' => '',
+    'description' => 'perm.new_document_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_document_in_root',
-    'description' => '',
+    'description' => 'perm.new_document_in_root_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_plugin',
-    'description' => '',
+    'description' => 'perm.new_plugin_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_propertyset',
-    'description' => '',
+    'description' => 'perm.new_propertyset_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_role',
-    'description' => '',
+    'description' => 'perm.new_role_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_snippet',
-    'description' => '',
+    'description' => 'perm.new_snippet_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_template',
-    'description' => '',
+    'description' => 'perm.new_template_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_tv',
-    'description' => '',
+    'description' => 'perm.new_tv_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'new_user',
-    'description' => '',
-    'value' => true,
-));
-$permissions[] = $xpdo->newObject('modAccessPermission',array(
-    'name' => 'package_builder',
-    'description' => '',
+    'description' => 'perm.new_user_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'packages',
-    'description' => '',
+    'description' => 'perm.packages_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'property_sets',
-    'description' => '',
+    'description' => 'perm.property_sets_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'providers',
-    'description' => '',
+    'description' => 'perm.providers_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'publish_document',
-    'description' => '',
+    'description' => 'perm.publish_document_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'purge_deleted',
-    'description' => '',
+    'description' => 'perm.purge_deleted_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'remove',
-    'description' => '',
+    'description' => 'perm.remove_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'remove_locks',
-    'description' => '',
+    'description' => 'perm.remove_locks_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'resource_tree',
-    'description' => '',
+    'description' => 'perm.resource_tree_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save',
-    'description' => '',
+    'description' => 'perm.save_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save_category',
-    'description' => '',
+    'description' => 'perm.save_category_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save_chunk',
-    'description' => '',
+    'description' => 'perm.save_chunk_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'save_context',
+    'description' => 'perm.save_context_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save_document',
-    'description' => '',
-    'value' => true,
-));
-$permissions[] = $xpdo->newObject('modAccessPermission',array(
-    'name' => 'save_parser',
-    'description' => '',
-    'value' => true,
-));
-$permissions[] = $xpdo->newObject('modAccessPermission',array(
-    'name' => 'save_password',
-    'description' => '',
+    'description' => 'perm.save_document_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save_plugin',
-    'description' => '',
+    'description' => 'perm.save_plugin_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save_propertyset',
-    'description' => '',
+    'description' => 'perm.save_propertyset_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save_role',
-    'description' => '',
+    'description' => 'perm.save_role_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save_snippet',
-    'description' => '',
+    'description' => 'perm.save_snippet_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save_template',
-    'description' => '',
+    'description' => 'perm.save_template_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save_tv',
-    'description' => '',
+    'description' => 'perm.save_tv_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save_user',
-    'description' => '',
+    'description' => 'perm.save_user_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'search',
-    'description' => '',
+    'description' => 'perm.search_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'settings',
-    'description' => '',
+    'description' => 'perm.settings_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'steal_locks',
-    'description' => '',
+    'description' => 'perm.steal_locks_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'undelete_document',
-    'description' => '',
+    'description' => 'perm.undelete_document_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'unpublish_document',
-    'description' => '',
+    'description' => 'perm.unpublish_document_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'unlock_element_properties',
-    'description' => '',
+    'description' => 'perm.unlock_element_properties_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view',
-    'description' => '',
+    'description' => 'perm.view_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_category',
-    'description' => '',
+    'description' => 'perm.view_category_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_chunk',
-    'description' => '',
+    'description' => 'perm.view_chunk_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_context',
-    'description' => '',
+    'description' => 'perm.view_context_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_document',
-    'description' => '',
+    'description' => 'perm.view_document_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_element',
-    'description' => '',
+    'description' => 'perm.view_element_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_eventlog',
-    'description' => '',
+    'description' => 'perm.view_eventlog_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_offline',
-    'description' => '',
+    'description' => 'perm.view_offline_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_plugin',
-    'description' => '',
+    'description' => 'perm.view_plugin_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_propertyset',
-    'description' => '',
+    'description' => 'perm.view_propertyset_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_role',
-    'description' => '',
+    'description' => 'perm.view_role_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_snippet',
-    'description' => '',
+    'description' => 'perm.view_snippet_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_sysinfo',
-    'description' => '',
+    'description' => 'perm.view_sysinfo_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_template',
-    'description' => '',
+    'description' => 'perm.view_template_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_tv',
-    'description' => '',
+    'description' => 'perm.view_tv_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_user',
-    'description' => '',
+    'description' => 'perm.view_user_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view_unpublished',
-    'description' => '',
+    'description' => 'perm.view_unpublished_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'workspaces',
-    'description' => '',
+    'description' => 'perm.workspaces_desc',
     'value' => true,
 ));
 

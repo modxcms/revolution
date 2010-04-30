@@ -61,6 +61,13 @@ MODx.panel.AccessPolicy = function(config) {
                     ,name: 'description'
                     ,width: 300
                     ,grow: true
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('lexicon')
+                    ,name: 'lexicon'
+                    ,width: 300
+                    ,allowBlank: true
+                    ,value: 'permissions'
                 }]
             },{
                 title: _('permissions')
@@ -101,7 +108,8 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
             ,listeners: {
             	'success':{fn:function(r) {
                     this.getForm().setValues(r.object);
-                    var g = Ext.getCmp('modx-grid-permissions').getStore().loadData(r.object.permissions);
+                    var g = Ext.getCmp('modx-grid-permissions');
+                    if (g) { g.getStore().loadData(r.object.permissions); }
                     
                     Ext.getCmp('modx-policy-header').getEl().update('<h2>'+_('policy')+': '+r.object.name+'</h2>');
                     this.fireEvent('ready');
@@ -132,7 +140,7 @@ MODx.grid.Permissions = function(config) {
         ,baseParams: {
             action: 'getAttributes'
         }
-        ,fields: ['name','description','value','menu']
+        ,fields: ['name','description','description_trans','value','menu']
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
@@ -140,9 +148,9 @@ MODx.grid.Permissions = function(config) {
             ,editor: { xtype: 'textfield', renderer: true }
         },{
             header: _('description')
-            ,dataIndex: 'description'
+            ,dataIndex: 'description_trans'
             ,width: 250
-            ,editor: { xtype: 'textfield', renderer: true }
+            ,editable: false
         }]
         ,data: []
         ,width: '90%'

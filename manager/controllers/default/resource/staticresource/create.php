@@ -74,7 +74,6 @@ $modx->smarty->assign('resource',$resource);
 
 /* check permissions */
 $publish_document = $modx->hasPermission('publish_document');
-$edit_doc_metatags = $modx->hasPermission('edit_doc_metatags');
 $access_permissions = $modx->hasPermission('access_permissions');
 
 /* register JS scripts */
@@ -98,7 +97,6 @@ Ext.onReady(function() {
         ,context_key: "'.(isset($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web').'"
         ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
         ,which_editor: "'.$which_editor.'"
-        ,edit_doc_metatags: "'.$edit_doc_metatags.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
         ,canSave: "'.($modx->hasPermission('save_document') ? 1 : 0).'"

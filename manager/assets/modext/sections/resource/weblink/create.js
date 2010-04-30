@@ -31,7 +31,6 @@ MODx.page.CreateWebLink = function(config) {
                 ,parent: config.parent
             }
             ,publish_document: config.publish_document
-            ,edit_doc_metatags: config.edit_doc_metatags
             ,access_permissions: config.access_permissions            
         }]
     });

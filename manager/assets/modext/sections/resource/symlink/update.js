@@ -30,7 +30,6 @@ MODx.page.UpdateSymLink = function(config) {
                 ,template: config.template
             }
             ,publish_document: config.publish_document
-            ,edit_doc_metatags: config.edit_doc_metatags
             ,access_permissions: config.access_permissions
         }]
     	,loadStay: true

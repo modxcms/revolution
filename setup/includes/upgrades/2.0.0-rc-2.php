@@ -139,3 +139,11 @@ $this->processResults($class,$description,$sql);
 $description = sprintf($this->install->lexicon['add_index'],'extended',$table);
 $sql = "ALTER TABLE {$table} ADD FULLTEXT INDEX `extended` (`extended`)";
 $this->processResults($class,$description,$sql);
+
+/* add lexicon to modAccessPolicy */
+$class = 'modAccessPolicy';
+$table = $this->install->xpdo->getTableName($class);
+
+$description = sprintf($this->install->lexicon['add_column'],'lexicon',$table);
+$sql = "ALTER TABLE {$table} ADD `lexicon` VARCHAR(255) NOT NULL DEFAULT 'permissions' AFTER `data`";
+$this->processResults($class,$description,$sql);

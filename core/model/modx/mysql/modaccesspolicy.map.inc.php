@@ -13,6 +13,7 @@ $xpdo_meta_map['modAccessPolicy']= array (
     'parent' => 0,
     'class' => '',
     'data' => '{}',
+    'lexicon' => '',
   ),
   'fieldMeta' => 
   array (
@@ -53,6 +54,14 @@ $xpdo_meta_map['modAccessPolicy']= array (
       'dbtype' => 'text',
       'phptype' => 'json',
       'default' => '{}',
+    ),
+    'lexicon' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
   ),
   'aggregates' => 

@@ -37,7 +37,9 @@ if (isset($scriptProperties['permissions'])) {
     $permissions = array();
     foreach ($permissionsArray as $permissionArray) {
         $permission = $modx->newObject('modAccessPermission');
-        $permission->fromArray($permissionArray);
+        $permission->set('name',$permissionArray['name']);
+        $permission->set('description',$permissionArray['description']);
+        $permission->set('value',1);
 
         $permissions[] = $permission;
         /* feed into cache array for policy table */

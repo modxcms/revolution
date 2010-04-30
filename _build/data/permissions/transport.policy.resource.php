@@ -7,67 +7,67 @@
 $permissions = array();
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'add_children',
-    'description' => '',
+    'description' => 'perm.add_children_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'create',
-    'description' => '',
+    'description' => 'perm.create_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete',
-    'description' => '',
+    'description' => 'perm.delete_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'list',
-    'description' => '',
+    'description' => 'perm.list_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'load',
-    'description' => '',
+    'description' => 'perm.load_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'move',
-    'description' => '',
+    'description' => 'perm.move_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'publish',
-    'description' => '',
+    'description' => 'perm.publish_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'remove',
-    'description' => '',
+    'description' => 'perm.remove_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'save',
-    'description' => '',
+    'description' => 'perm.save_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'steal_lock',
-    'description' => '',
+    'description' => 'perm.steal_lock_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'undelete',
-    'description' => '',
+    'description' => 'perm.undelete_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'unpublish',
-    'description' => '',
+    'description' => 'perm.unpublish_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'view',
-    'description' => '',
+    'description' => 'perm.view_desc',
     'value' => true,
 ));
 

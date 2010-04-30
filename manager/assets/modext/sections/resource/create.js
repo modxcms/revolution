@@ -33,7 +33,6 @@ MODx.page.CreateResource = function(config) {
                 ,content_type: config.content_type
                 ,richtext: config.richtext
             }
-            ,edit_doc_metatags: config.edit_doc_metatags
             ,access_permissions: config.access_permissions
             ,publish_document: config.publish_document
         }]

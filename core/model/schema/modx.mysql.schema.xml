@@ -70,6 +70,7 @@
         <field key="parent" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="class" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="data" dbtype="text" phptype="json" default="{}" />
+        <field key="lexicon" dbtype="varchar" precision="255" phptype="string" null="false" default="permissions" />
         
         <aggregate alias="Parent" class="modAccessPolicy" local="parent" foreign="id" owner="foreign" cardinality="one" />
         <composite alias="Children" class="modAccessPolicy" local="id" foreign="parent" owner="local" cardinality="many" />
