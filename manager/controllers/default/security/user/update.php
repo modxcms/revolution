@@ -12,6 +12,33 @@ if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('user_er
 $user = $modx->getObject('modUser',$_REQUEST['id']);
 if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 
+/* process remote data, if existent */
+$remoteFields = array();
+$remoteData = $user->get('remote_data');
+if (!empty($remoteData)) {
+    $remoteFields = parseRemoteData($remoteData);
+}
+
+function parseRemoteData(array $remoteData = array()) {
+    $fields = array();
+    foreach ($remoteData as $key => $value) {
+        if (is_array($value)) {
+            $sd = parseRemoteData($value);
+            $fields = array_merge($fields,$sd);
+        } else {
+            $fields[] = array(
+                'name' => 'remote_'.$key,
+                'fieldLabel' => $key,
+                'xtype' => 'statictextfield',
+                'anchor' => '100%',
+                'value' => $value,
+                'submitValue' => false,
+            );
+        }
+    }
+    return $fields;
+}
+
 /* invoke OnUserFormPrerender event */
 $onUserFormPrerender = $modx->invokeEvent('OnUserFormPrerender', array(
     'id' => $user->get('id'),
@@ -60,6 +87,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-user-update"
         ,user: "'.$user->get('id').'"
+        '.(!empty($remoteFields) ? ',remoteFields: ['.$modx->toJSON($remoteFields).']' : '').'
     });
 });
 // ]]>

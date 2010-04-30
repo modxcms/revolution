@@ -27,6 +27,7 @@ $_lang['password_method_screen'] = 'Show the new password on screen.';
 $_lang['password_new'] = 'New Password';
 $_lang['password_notification'] = 'Password Notification';
 $_lang['password_old'] = 'Old Password';
+$_lang['remote_data'] = 'Remote Data';
 $_lang['role'] = 'Role';
 $_lang['role_create'] = 'Create Role';
 $_lang['role_err_ae'] = 'A role already exists with that name.';

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added panel for viewing remote data on a user
 - Added 'lexicon' field to modAccessPolicy to enable translations of descriptions of Permissions
 - Added extended field to modUserProfile to handle a majority of basic extended user profile storage/retrieval needs
 - Added 'lexicon' field to Element properties to enable automatic translating of property descriptions and option names

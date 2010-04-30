@@ -394,6 +394,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 }
             }]
         });
+        if (config.remoteFields && config.remoteFields.length) {
+            f.push({
+                title: _('remote_data')
+                ,defaults: { msgTarget: 'side' }
+                ,hideMode: 'offsets'
+                ,items: config.remoteFields
+            });
+        }
         return f;
     }
 });

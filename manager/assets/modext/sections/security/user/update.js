@@ -33,6 +33,7 @@ MODx.page.UpdateUser = function(config) {
             xtype: 'modx-panel-user'
             ,renderTo: 'modx-panel-user-div'
             ,user: config.user
+            ,remoteFields: config.remoteFields
             ,name: ''
         }]
 	});
