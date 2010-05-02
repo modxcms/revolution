@@ -214,7 +214,7 @@ class xPDO {
      */
     public $_escapeChar= '';
 
-    /**#@+
+    /**
      * The xPDO Constructor.
      *
      * This method is used to create a new xPDO object with a connection to a
@@ -253,10 +253,11 @@ class xPDO {
                 break;
         }
         $this->setPackage('om', XPDO_CORE_PATH, $this->config[xPDO::OPT_TABLE_PREFIX]);
-        if (isset($this->config[xPDO::OPT_BASE_PACKAGES]) && ($basePackages= explode(',', $this->config[xPDO::OPT_BASE_PACKAGES]))) {
+        if (isset($this->config[xPDO::OPT_BASE_PACKAGES]) && !empty($this->config[xPDO::OPT_BASE_PACKAGES])) {
+            $basePackages= explode(',', $this->config[xPDO::OPT_BASE_PACKAGES]);
             foreach ($basePackages as $basePackage) {
-                $exploded= explode(':', $basePackage);
-                if ($exploded && count($exploded) == 2) {
+                $exploded= explode(':', $basePackage, 2);
+                if ($exploded) {
                     $path= $exploded[1];
                     $prefix= null;
                     if (strpos($path, ';')) {
@@ -281,8 +282,13 @@ class xPDO {
             $this->cachePath = $this->config[xPDO::OPT_CACHE_PATH];
         }
     }
-    /**#@-*/
 
+    /**
+     * Create the PDO connection to a database specified in the configuration.
+     *
+     * @param array $driverOptions An optional array of driver options to use when creating the connection.
+     * @return boolean Returns true if the PDO connection was created successfully.
+     */
     public function connect($driverOptions= array ()) {
         if ($this->pdo === null) {
             if (!empty ($driverOptions)) {
@@ -292,7 +298,9 @@ class xPDO {
                 $this->pdo= new PDO($this->config['dsn'], $this->config['username'], $this->config['password'], $this->config['driverOptions']);
                 $errorCode= $this->pdo->errorCode();
             } catch (PDOException $xe) {
-                $this->pdo= null;
+                $this->log(xPDO::LOG_LEVEL_ERROR, $xe->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+            } catch (Exception $e) {
+                $this->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
             }
 
             $connected= (is_object($this->pdo) && (empty($errorCode) || $errorCode == PDO::ERR_NONE));
