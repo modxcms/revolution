@@ -379,10 +379,12 @@ class modX extends xPDO {
             $this->getConfig();
             $this->_initContext($contextKey);
 
-            if (isset($this->config['extension_packages']) && ($extPackages= explode(',', $this->config['extension_packages']))) {
+            $extPackages = $this->getOption('extension_packages');
+            if (!empty($extPackages)) {
+                $extPackages= explode(',', $extPackages);
                 foreach ($extPackages as $extPackage) {
-                    $exploded= explode(':', $extPackage);
-                    if ($exploded && count($exploded) == 2) {
+                    $exploded= explode(':', $extPackage, 2);
+                    if (!empty($exploded)) {
                         $this->addPackage($exploded[0], $exploded[1]);
                     }
                 }
