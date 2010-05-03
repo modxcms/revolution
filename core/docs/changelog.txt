@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Tweaked launching of layout panel to add consistency across browsers
 - [#MODX-1835] Fix error on Windows platforms when an extension_packages path contains a colon (:)
 - Added ORM editing formpanel object for editing v/p editing pairs, used now on modUser remote data form
 - Added panel for viewing remote data on a user

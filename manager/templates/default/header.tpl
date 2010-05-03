@@ -48,12 +48,11 @@
     </div>
     
     <div id="modx-mainpanel">
+        <div id="modAB"></div>
         <div id="modx-leftbar" class="modx-leftbar">
             <div class="tl"></div><div class="tr"></div>
-            <div id="modx-leftbar-content"></div>            
-            <div class="bl"></div><div class="br"></div> 
+            <div id="modx-leftbar-content"></div>
+            <div class="bl"></div><div class="br"></div>
         </div>
-        
-        <div id="modAB"></div>
         <div id="modx-content">
             <div id="modx-panel-holder"></div>

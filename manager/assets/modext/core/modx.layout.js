@@ -38,46 +38,57 @@ MODx.Layout = function(config){
     }
     
     Ext.applyIf(config,{
-        id: 'modx-layout'
-        ,renderTo: 'modx-leftbar-content'
-        ,width: 286
-        ,autoHeight: true
-        ,border: false
-        ,unstyled: true
-        ,monitorResize: true
+        width: '100%'
+        ,layout: 'border'
+        ,id: 'modx-layout'
         ,items: [{
-            xtype: 'modx-tabs'
-            ,id: 'modx-leftbar-tabs'
-            ,anchor: '100%'
-            ,plain: true
-            ,defaults: {
-                autoScroll: true
-                ,fitToFrame: true
-            }
+            region: 'east'
+            ,applyTo: 'modx-leftbar-content'
+            ,width: 286
+            ,autoHeight: true
             ,border: false
-            ,deferredRender: false
-            ,activeTab: 0
-            ,stateful: true
-            ,stateId: 'modx-leftbar-tabs'
-            ,stateEvents: ['tabchange','resize']
-            ,getState:function() {
-                return {
-                    activeTab:this.items.indexOf(this.getActiveTab())
-                    ,width: this.getWidth()
-                };
-            }
-            ,listeners: {
-                'staterestore': {fn:function(c,s) {
-                    var w = s.width;
-                    var wi = Ext.get('modx-body-tag').getWidth();
-                    Ext.get('modx-leftbar').setWidth(w);
-                    Ext.getCmp('modx-leftbar-tabs').setWidth(w);
-                    var ct = Ext.get('modx-content');
-                    ct.setWidth((wi-w)-35);
-                    ct.setStyle('float','left');
-                },scope:this}
-            }
-            ,items: tabs
+            ,unstyled: true
+            ,monitorResize: true
+            ,items: [{
+                xtype: 'modx-tabs'
+                ,id: 'modx-leftbar-tabs'
+                ,anchor: '100%'
+                ,plain: true
+                ,defaults: {
+                    autoScroll: true
+                    ,fitToFrame: true
+                }
+                ,border: false
+                ,deferredRender: false
+                ,activeTab: 0
+                ,stateful: true
+                ,stateId: 'modx-leftbar-tabs'
+                ,stateEvents: ['tabchange','resize']
+                ,getState:function() {
+                    return {
+                        activeTab:this.items.indexOf(this.getActiveTab())
+                        ,width: this.getWidth()
+                    };
+                }
+                ,listeners: {
+                    'staterestore': {fn:function(c,s) {
+                        var w = s.width;
+                        var wi = Ext.get('modx-body-tag').getWidth();
+                        //Ext.get('modx-leftbar').setWidth(w);
+                        //Ext.getCmp('modx-leftbar-tabs').setWidth(w);
+                        var ct = Ext.get('modx-content');
+                        //ct.setWidth((wi-w));
+                        //ct.setStyle('float','left');
+                    },scope:this}
+                }
+                ,items: tabs
+            }]
+        },{
+            region: 'center'
+            ,applyTo: 'modx-content'
+            ,border: false
+            ,layout: 'fit'
+            ,autoWidth: true
         }]
     });
     MODx.Layout.superclass.constructor.call(this,config);
