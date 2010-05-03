@@ -85,7 +85,7 @@ $_lang['install'] = 'Install';
 $_lang['install_packages'] = 'Install Packages';
 $_lang['install_packages_desc'] = 'You can choose to install individual add-on packages.  Once you have installed all the optional packages you want, press Finish to complete the process.';
 $_lang['install_packages_options'] = 'Package Installation Options';
-$_lang['install_success'] = 'Core installation was successful.  Click continue to complete the installation process.';
+$_lang['install_success'] = 'Core installation was successful. Click next to complete the installation process.';
 $_lang['install_summary'] = 'Installation Summary';
 $_lang['install_update'] = 'Install/Update';
 $_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
