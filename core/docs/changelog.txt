@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1783] Fixed unnecessary scrollbar bug by removing unnecessary margin on body/html tags
 - Slight spacing tweaks to main layout to make layout feel more open
 - [#MODX-1806] Improvements to messages section
 - [#MODX-1913] Fixed incorrect wording on setup complete page

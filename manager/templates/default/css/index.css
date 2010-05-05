@@ -3,7 +3,6 @@
  */
 body, html {
     height: 100%;
-    margin-bottom: 1px;
 }
 body {
     margin-bottom: 1px; /* avoid jumping scrollbars */
