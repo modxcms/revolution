@@ -410,7 +410,7 @@ textarea.x-form-field {
 }
 
 #modx-mainpanel{
-    border-top: 1px solid #ffffff;
+    margin: 10px 0 0 5px;
 }
 
 /* news articles */

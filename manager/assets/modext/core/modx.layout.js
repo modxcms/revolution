@@ -49,6 +49,7 @@ MODx.Layout = function(config){
             ,border: false
             ,unstyled: true
             ,monitorResize: true
+            ,style: 'padding-right: 6px;'
             ,items: [{
                 xtype: 'modx-tabs'
                 ,id: 'modx-leftbar-tabs'
