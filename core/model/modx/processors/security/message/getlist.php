@@ -43,21 +43,21 @@ foreach ($messages as $message) {
 	$ma = $message->toArray();
     $ma['sender_name'] = $message->get('sender_username');
     $ma['read'] = $message->get('read') ? true : false;
-    $ma['menu'] = array(
+    $ma['menu'] = array(/*
         array(
             'text' => $modx->lexicon('reply'),
             'handler' => array(
-                'xtype' => 'window-message-reply'
+                'xtype' => 'modx-window-message-reply'
                 ,'id' => $message->get('id'),
             ),
         ),
         array(
             'text' => $modx->lexicon('forward'),
             'handler' => array(
-                'xtype' => 'window-message-forward'
+                'xtype' => 'modx-window-message-forward'
                 ,'id' => $message->get('id'),
             ),
-        ),
+        ),*/
         array(
             'text' => $modx->lexicon('mark_unread'),
             'handler' => 'this.markUnread',
@@ -68,6 +68,6 @@ foreach ($messages as $message) {
             'handler' => 'this.remove.createDelegate(this,["message_remove_confirm"])'
         ),
     );
-	$list[] = $ma;
+    $list[] = $ma;
 }
 return $this->outputArray($list,$count);

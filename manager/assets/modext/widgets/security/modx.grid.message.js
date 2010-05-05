@@ -9,7 +9,7 @@
 MODx.grid.Message = function(config) {
     config = config || {};
     
-    var exp = new Ext.grid.RowExpander({
+    this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
             '<span style="float: right;">'
             ,'<i>'+_('sent_by')+': {sender_name} <br />'+_('sent_on')+': {postdate}</i><br /><br />'
@@ -18,7 +18,7 @@ MODx.grid.Message = function(config) {
             ,'<p>{message}</p>'
         )
     });
-    exp.on('expand',this.read,this);
+    this.exp.on('expand',this.read,this);
     Ext.applyIf(config,{
         title: _('messages')
         ,id: 'modx-grid-message'
@@ -28,17 +28,15 @@ MODx.grid.Message = function(config) {
             ,'read','sender_name','menu']
         ,autosave: true
         ,paging: true
-        ,plugins: exp
-        ,columns: [exp,{
+        ,plugins: this.exp
+        ,columns: [this.exp,{
             header: _('id')
             ,dataIndex: 'id'
             ,width: 60
         },{
             header: _('sender')
-            ,dataIndex: 'sender'
+            ,dataIndex: 'sender_name'
             ,width: 120
-            ,editor: { xtype: 'modx-combo-user' ,renderer: true }
-            ,editable: false
         },{
             header: _('subject')
             ,dataIndex: 'subject'
@@ -65,6 +63,7 @@ MODx.grid.Message = function(config) {
 Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
     read: function(exp,rec,body,ri) {
         var r = rec.data;
+        if (r.read) return false;
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
@@ -73,9 +72,10 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
             }
             ,listeners: {
             	'success': {fn:function(r) {
-            		var r2 = this.getStore().getAt(ri);
-            		r2.set('read',true);
-            		r2.commit();
+                    var r2 = this.getStore().getAt(ri);
+                    r2.set('read',true);
+                    r2.commit();
+                    this.exp.expandRow(ri);
             	},scope:this}
             }
         });
@@ -172,7 +172,10 @@ MODx.window.CreateMessage = function(config) {
             'show': {fn: this.initRecipient, scope: this}
         }
     });
-    MODx.window.CreateMessage.superclass.constructor.call(this,config);    
+    MODx.window.CreateMessage.superclass.constructor.call(this,config);
+    this.on('show',function() {
+        this.fp.getForm().findField('type').fireEvent('select');
+    },this);
 };
 Ext.extend(MODx.window.CreateMessage,MODx.Window,{
     tps: ['user','usergroup','role','all']
@@ -189,7 +192,7 @@ Ext.extend(MODx.window.CreateMessage,MODx.Window,{
             var f = this.fp.getForm().findField('mc-recipient-'+this.tps[x]);
             if (f) { this.hideField(f); }
         }
-        var type = rec.data.type;
+        var type = rec ? rec.data.type : 'user';
         var fd = this.fp.getForm().findField('mc-recipient-'+type);
         if (fd) { this.showField(fd); }
     }
