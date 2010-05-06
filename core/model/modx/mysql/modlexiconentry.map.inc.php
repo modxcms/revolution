@@ -10,7 +10,7 @@ $xpdo_meta_map['modLexiconEntry']= array (
   array (
     'name' => '',
     'value' => '',
-    'topic' => 1,
+    'topic' => 'default',
     'namespace' => 'core',
     'language' => 'en',
     'createdon' => NULL,
@@ -36,12 +36,11 @@ $xpdo_meta_map['modLexiconEntry']= array (
     ),
     'topic' => 
     array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'attributes' => 'unsigned',
-      'phptype' => 'integer',
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
       'null' => false,
-      'default' => 1,
+      'default' => 'default',
       'index' => 'index',
     ),
     'namespace' => 
@@ -85,42 +84,10 @@ $xpdo_meta_map['modLexiconEntry']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'Topic' => 
-    array (
-      'class' => 'modLexiconTopic',
-      'local' => 'topic',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'Language' => 
-    array (
-      'class' => 'modLexiconLanguage',
-      'local' => 'language',
-      'foreign' => 'name',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
     'modNamespace' => 
     array (
       'class' => 'modNamespace',
       'local' => 'namespace',
-      'foreign' => 'name',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'modLexiconTopic' => 
-    array (
-      'class' => 'modLexiconTopic',
-      'local' => 'topic',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'modLexiconLanguage' => 
-    array (
-      'class' => 'modLexiconLanguage',
-      'local' => 'language',
       'foreign' => 'name',
       'cardinality' => 'one',
       'owner' => 'foreign',

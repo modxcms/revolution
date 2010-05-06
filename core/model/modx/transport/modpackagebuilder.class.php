@@ -316,12 +316,15 @@ class modPackageBuilder {
     }
 
     /**
-     * Build in the lexicon into the package.
+     * Build in the lexicon into the package. Deprecated.
      *
+     * @deprecated
      * @access public
      * @return boolean True if successful
      */
     public function buildLexicon($path) {
+        return false;
+        
         $invdirs = array (
             '.',
             '..',
@@ -395,7 +398,7 @@ class modPackageBuilder {
                             'id' => $i,
                             'name' => $key,
                             'value' => $value,
-                            'topic' => $topic->get('id'),
+                            'topic' => $top,
                             'namespace' => $this->{'namespace'}->get('name'),
                             'language' => $culture,
                         ), '', true, true);
