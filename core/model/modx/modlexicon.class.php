@@ -219,6 +219,15 @@ class modLexicon {
      */
     public function getFileTopic($language = 'en',$namespace = 'core',$topic = 'default') {
         $corePath = $this->getNamespacePath($namespace);
+        $corePath = str_replace(array(
+            '{base_path}',
+            '{core_path}',
+            '{assets_path}',
+        ),array(
+            $this->modx->getOption('base_path'),
+            $this->modx->getOption('core_path'),
+            $this->modx->getOption('assets_path'),
+        ),$corePath);
         $topicPath = str_replace('//','/',$corePath.'/lexicon/'.$language.'/'.$topic.'.inc.php');
         $results = array();
         $_lang = array();
