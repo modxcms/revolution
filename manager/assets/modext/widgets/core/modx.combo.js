@@ -237,6 +237,7 @@ MODx.combo.Language = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'system/language.php'
     });
     MODx.combo.Language.superclass.constructor.call(this,config);

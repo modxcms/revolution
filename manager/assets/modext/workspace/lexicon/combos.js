@@ -17,12 +17,13 @@ MODx.combo.LexiconTopic = function(config) {
         ,allowBlank: false
         ,listWidth: 300
         ,url: MODx.config.connectors_url+'workspace/lexicon/topic.php'
-        ,fields: ['id','name','namespace']
+        ,fields: ['name']
         ,displayField: 'name'
-        ,valueField: 'id'
-        ,baseParams: { 
+        ,valueField: 'name'
+        ,baseParams: {
             action: 'getList'
             ,'namespace': 'core'
+            ,'language': 'en'
         }
     });
     MODx.combo.LexiconTopic.superclass.constructor.call(this,config);
@@ -30,6 +31,15 @@ MODx.combo.LexiconTopic = function(config) {
 Ext.extend(MODx.combo.LexiconTopic,MODx.combo.ComboBox,{
     setNamespace: function(ns,t) {
         this.store.baseParams['namespace'] = ns;
+        this.store.load({
+            callback: function() {
+                if (t) { this.setValue(t); }
+            }
+            ,scope: this
+        });
+    }
+    ,setLanguage: function(ns,t) {
+        this.store.baseParams['language'] = ns;
         this.store.load({
             callback: function() {
                 if (t) { this.setValue(t); }

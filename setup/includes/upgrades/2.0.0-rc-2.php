@@ -147,3 +147,52 @@ $table = $this->install->xpdo->getTableName($class);
 $description = sprintf($this->install->lexicon['add_column'],'lexicon',$table);
 $sql = "ALTER TABLE {$table} ADD `lexicon` VARCHAR(255) NOT NULL DEFAULT 'permissions' AFTER `data`";
 $this->processResults($class,$description,$sql);
+
+/* lexicon stuff */
+$manager = $this->install->xpdo->getManager();
+
+/* adjust entry table */
+$class = 'modLexiconEntry';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['change_column'],'topic topic','topic topic',$table);
+$sql = "ALTER TABLE {$table} CHANGE `topic` `topic` VARCHAR(255) NOT NULL DEFAULT 'default'";
+$this->processResults($class,$description,$sql);
+
+/* remove all un-overridden Lexicon Entries */
+$this->install->xpdo->getService('lexicon','modLexicon');
+$c = $this->install->xpdo->newQuery('modLexiconEntry');
+$c->select('
+    `modLexiconEntry`.*,
+    `Topic`.`name` AS `topic_name`
+');
+$c->where(array(
+    'namespace' => 'core',
+));
+$c->innerJoin('modLexiconTopic','Topic','`Topic`.`id` = `modLexiconEntry`.`topic`');
+$c->sortby('`Topic`.`name`');
+$entries = $this->install->xpdo->getCollection('modLexiconEntry',$c);
+$currentTopic = null;
+$fileEntries = array();
+foreach ($entries as $entry) {
+    if ($currentTopic != $entry->get('topic_name')) {
+        $currentTopic = $entry->get('topic_name');
+        /* get new topic entries. wont need any other language than en since non-en languages didnt exist pre lex changes */
+        $fileEntries = $this->install->xpdo->lexicon->getFileTopic('en','core',$currentTopic);
+    }
+    if (!empty($fileEntries[$entry->get('name')]) && $fileEntries[$entry->get('name')] == $entry->get('value')) {
+        /* remove non-overridden entries */
+        $entry->remove();
+    } elseif (empty($fileEntries[$entry->get('name')])) {
+        /* cleanup deprecated entries */
+        $entry->remove();
+    } else {
+        /* reset topic to string for overridden entries */
+        $entry->set('topic',$entry->get('topic_name'));
+        $entry->save();
+    }
+}
+
+/* drop deprecated language/topic tables */
+$manager->removeObjectContainer('modLexiconLanguage');
+$manager->removeObjectContainer('modLexiconTopic');
+

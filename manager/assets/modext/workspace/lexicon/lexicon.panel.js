@@ -34,42 +34,6 @@ MODx.panel.Lexicon = function(config) {
                 ,title: ''
                 ,preventRender: true
             }]
-        },{
-            title: _('lexicon_topics')
-            ,layout: 'form'
-            ,bodyStyle: 'padding: 15px;'
-            ,items: [{
-                html: '<p>'+_('lexicon_topics_desc')+'</p>'
-                ,border: false
-            },{
-                xtype: 'modx-grid-lexicon-topic'
-                ,itemId: 'grid-topic'
-                ,title: ''
-                ,preventRender: true
-                ,listeners: {
-                    'afterRemoveRow':{fn:function() {
-                        Ext.getCmp('modx-lexicon-filter-topic').store.reload();
-                    },scope:this}
-                }
-            }]
-        },{
-            title: _('languages')
-            ,layout: 'form'
-            ,bodyStyle: 'padding: 15px;'
-            ,items: [{
-                html: '<p>'+_('languages_desc')+'</p>'
-                ,border: false
-            },{
-                xtype: 'modx-grid-language'
-                ,itemId: 'grid-language'
-                ,title: ''
-                ,preventRender: true
-                ,listeners: {
-                    'afterRemoveRow':{fn:function() {
-                        Ext.getCmp('modx-lexicon-filter-language').store.reload();
-                    },scope:this}
-                }
-            }]
         }])]
     });
     MODx.panel.Lexicon.superclass.constructor.call(this,config);

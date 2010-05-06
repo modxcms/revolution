@@ -23,62 +23,73 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'name');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
-if (empty($scriptProperties['namespace'])) $scriptProperties['namespace'] = 'core';
-if (empty($scriptProperties['language'])) $scriptProperties['language'] = 'en';
+$language = !empty($scriptProperties['language']) ? $scriptProperties['language'] : 'en';
+$namespace = !empty($scriptProperties['namespace']) ? $scriptProperties['namespace'] : 'core';
+$topic = !empty($scriptProperties['topic']) ? $scriptProperties['topic'] : 'default';
 
-/* if specifying a topic */
-if (empty($scriptProperties['topic'])) {
-    $topic = $modx->getObject('modLexiconTopic',array(
-        'name' => 'default',
-        'namespace' => 'core',
-    ));
-} else {
-    $topic = $modx->getObject('modLexiconTopic',$scriptProperties['topic']);
-    if ($topic == null) return $modx->error->failure($modx->lexicon('topic_err_nf'));
-}
 $where = array(
-    'namespace' => $scriptProperties['namespace'],
-    'topic' => $topic->get('id'),
-    'language' => $scriptProperties['language'],
+    'namespace' => $namespace,
+    'topic' => $topic,
+    'language' => $language,
 );
-/* if filtering by name */
+
+/* first get file-based lexicon */
+$entries = $modx->lexicon->getFileTopic($language,$namespace,$topic);
+
+/* if searching */
 if (!empty($scriptProperties['search'])) {
+    function parseArray($needle,array $haystack = array()) {
+        if (!is_array($haystack)) return false;
+        $results = array();
+        foreach($haystack as $key=>$value) {
+            if (strpos($key, $needle)!==false || strpos($value,$needle) !== false) {
+                $results[$key] = $value;
+            }
+        }
+        return $results;
+    }
+
+    $entries = parseArray($scriptProperties['search'],$entries);
     $where[] = array(
         'name:LIKE' => '%'.$scriptProperties['search'].'%',
         'OR:value:LIKE' => '%'.$scriptProperties['search'].'%',
     );
 }
+$count = count($entries);
+$entries = array_slice($entries,$start,$limit,true);
 
 /* setup query */
 $c = $modx->newQuery('modLexiconEntry');
 $c->where($where);
-$count = $modx->getCount('modLexiconEntry',$c);
-
-$c->sortby($sort,$dir);
-if ($isLimit) $c->limit($scriptProperties['limit'],$scriptProperties['start']);
-$entries = $modx->getCollection('modLexiconEntry',$c);
+$c->sortby('name','ASC');
+$results = $modx->getCollection('modLexiconEntry',$c);
+$dbEntries = array();
+foreach ($results as $r) {
+    $dbEntries[$r->get('name')] = $r->toArray();
+}
 
 /* loop through */
 $list = array();
-foreach ($entries as $entry) {
-    $entryArray = $entry->toArray();
-
-    $entryArray['editedon'] = $entry->get('editedon') == '0000-00-00 00:00:00'
-                           || $entry->get('editedon') == null
-        ? ''
-        : strftime('%b %d, %Y %I:%M %p',strtotime($entry->get('editedon')));
-
-    $entryArray['menu'] = array(
-        array(
-            'text' => $modx->lexicon('entry_update'),
-            'handler' => array( 'xtype' => 'modx-window-lexicon-entry-update' ),
-        ),
-        '-',
-        array(
-            'text' => $modx->lexicon('entry_remove'),
-            'handler' => 'this.remove.createDelegate(this,["entry_remove_confirm"])',
-        ),
+foreach ($entries as $name => $value) {
+    $entryArray = array(
+        'name' => $name,
+        'value' => $value,
+        'namespace' => $namespace,
+        'topic' => $topic,
+        'language' => $language,
+        'createdon' => null,
+        'editedon' => null,
+        'overridden' => 0,
     );
+    /* if override in db, load */
+    if (array_key_exists($name,$dbEntries)) {
+        $entryArray = array_merge($entryArray,$dbEntries[$name]);
+        $entryArray['editedon'] = $entryArray['editedon'] == '0000-00-00 00:00:00'
+                               || $entryArray['editedon'] == null
+            ? ''
+            : strftime('%b %d, %Y %I:%M %p',strtotime($entryArray['editedon']));
+        $entryArray['overridden'] = 1;
+    }
     $list[] = $entryArray;
 }
 

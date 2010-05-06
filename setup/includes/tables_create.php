@@ -31,8 +31,6 @@ $classes= array (
     'modEventLog',
     'modKeyword',
     'modLexiconEntry',
-    'modLexiconLanguage',
-    'modLexiconTopic',
     'modManagerLog',
     'modMenu',
     'modMetatag',

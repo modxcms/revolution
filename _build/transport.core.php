@@ -485,43 +485,6 @@ foreach ($collection as $c) {
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default access context permissions.'); flush();
 unset ($collection, $c, $attributes);
 
-/* Lexicon stuff */
-$entries = array ();
-$topics = array ();
-$languages = array ();
-$namespace = $xpdo->newObject('modNamespace');
-$namespace->set('name','core');
-$namespace->set('path','{core_path}');
-$package->put($namespace,array(
-    xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => true,
-));
-include dirname(__FILE__).'/data/transport.core.lexicon.php';
-foreach ($topics as $t) {
-    $package->put($t,array (
-        xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => true,
-        xPDOTransport::UNIQUE_KEY => array ('name', 'namespace'),
-        xPDOTransport::RELATED_OBJECTS => true,
-        xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-            'Entries' => array (
-                xPDOTransport::PRESERVE_KEYS => false,
-                xPDOTransport::UPDATE_OBJECT => true,
-                xPDOTransport::UNIQUE_KEY => array ('name', 'topic', 'language'),
-            )
-        )
-    ));
-}
-foreach ($languages as $l) {
-    $package->put($l,array (
-        xPDOTransport::PRESERVE_KEYS => true,
-        xPDOTransport::UPDATE_OBJECT => true,
-    ));
-}
-
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged core lexicon entries ('.count($entries).') and topics ('.count($topics).').'); flush();
-unset ($entries, $languages, $topics, $c, $t, $l);
-
 /* zip up package */
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Beginning to zip up transport package...'); flush();
 if ($package->pack()) {

@@ -36,27 +36,10 @@ while (false !== ($culture = $dir->read())) {
         }
 
         $f = $fdir.$topicFile;
-        $entries = array();
         if (file_exists($f)) {
-            $_lang = array();
-            @include $f;
-
-            foreach ($_lang as $key => $value) {
-                $entries[$i]= $xpdo->newObject('modLexiconEntry');
-                $entries[$i]->fromArray(array (
-                  'id' => $i,
-                  'name' => $key,
-                  'value' => $value,
-                  'topic' => $topic->get('id'),
-                  'namespace' => 'core',
-                  'language' => $culture,
-                ), '', true, true);
-                $i++;
-            }
+            $topics[$topic->get('id')] = $topic;
+            $topcount++;
         }
-        $topic->addMany($entries);
-        $topics[$topic->get('id')] = $topic;
-        $topcount++;
     }
 }
 $dir->close();

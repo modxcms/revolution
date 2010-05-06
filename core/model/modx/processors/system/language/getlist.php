@@ -16,34 +16,20 @@ $modx->lexicon->load('lexicon');
 $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
-$sort = $modx->getOption('sort',$scriptProperties,'name');
-$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$namespace = !empty($scriptProperties['namespace']) ? $scriptProperties['namespace'] : 'core';
 
-$c = $modx->newQuery('modLexiconLanguage');
-$count = $modx->getCount('modLexiconLanguage',$c);
+$languages = $modx->lexicon->getLanguageList($namespace);
+$count = count($languages);
+if ($isLimit) {
+    $languages = array_slice($languages,$start,$limit,true);
+}
 
-$c->sortby($sort,$dir);
-if ($isLimit) $c->limit($limit,$start);
-
-$languages = $modx->getCollection('modLexiconLanguage',$c);
-
+/* loop through */
 $list = array();
 foreach ($languages as $language) {
-    $languageArray = $language->toArray();
-
-    $languageArray['menu'] = array();
-    $languageArray['menu'][] = array(
-        'text' => $modx->lexicon('language_duplicate'),
-        'handler' => 'this.duplicateLanguage',
+    $list[] = array(
+        'name' => $language,
     );
-    if ($language->get('name') != 'en') {
-        $languageArray['menu'][] = '-';
-        $languageArray['menu'][] = array(
-            'text' => $modx->lexicon('language_remove'),
-            'handler' => 'this.remove.createDelegate(this,["language_remove_confirm"])',
-        );
-    }
-    $list[] = $languageArray;
 }
 
 return $this->outputArray($list,$count);
