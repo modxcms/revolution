@@ -124,6 +124,9 @@ $_lang['setting_cache_lang_js_desc'] = 'If set to true, this will use server hea
 $_lang['setting_cache_lexicon_topics'] = 'Cache Lexicon Topics';
 $_lang['setting_cache_lexicon_topics_desc'] = 'When enabled, all Lexicon Topics will be cached so as to greatly reduce load times for Internationalization functionality. MODx strongly recommends leaving this set to \'Yes\'.';
 
+$_lang['setting_cache_noncore_lexicon_topics'] = 'Cache Non-Core Lexicon Topics';
+$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'When disabled, non-core Lexicon Topics will be not be cached. This is useful to disable when developing your own Extras.';
+
 $_lang['setting_cache_resource'] = 'Enable Partial Resource Cache';
 $_lang['setting_cache_resource_desc'] = 'Partial resource caching is configurable by resource when this feature is enabled.  Disabling this feature will disable it globally.';
 

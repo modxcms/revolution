@@ -168,6 +168,15 @@ $settings['cache_lexicon_topics']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['cache_noncore_lexicon_topics']= $xpdo->newObject('modSystemSetting');
+$settings['cache_noncore_lexicon_topics']->fromArray(array (
+  'key' => 'cache_noncore_lexicon_topics',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'caching',
+  'editedon' => null,
+), '', true, true);
 $settings['cache_resource']= $xpdo->newObject('modSystemSetting');
 $settings['cache_resource']->fromArray(array (
   'key' => 'cache_resource',

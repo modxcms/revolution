@@ -183,8 +183,10 @@ class modLexicon {
     public function loadCache($namespace = 'core', $topic = 'default', $language = '') {
         if (empty($language)) $language = $this->modx->getOption('cultureKey',null,'en');
         $key = $this->getCacheKey($namespace, $topic, $language);
-
-        if (($cached = $this->modx->cacheManager->get($key)) == null) {
+        $enableCache = ($namespace != 'core' && !$this->modx->getOption('cache_noncore_lexicon_topics',null,true)) ? false : true;
+        
+        $cached = $this->modx->cacheManager->get($key);
+        if (!$enableCache || $cached == null) {
             $results= false;
 
             /* load file-based lexicon */
@@ -205,17 +207,25 @@ class modLexicon {
                     $results[$entry->get('name')]= $entry->get('value');
                 }
             }
-            $cached = $this->modx->cacheManager->generateLexiconTopic($key,$results);
+            if ($enableCache) {
+                $cached = $this->modx->cacheManager->generateLexiconTopic($key,$results);
+            } else {
+                $cached = $results;
+            }
         }
         if (empty($cached)) {
-            $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
+            $this->modx->log(xPDO::LOG_LEVEL_WARN, "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
         }
         return $cached;
     }
 
     /**
      * Get entries from file-based lexicon topic
-     * @return array
+     *
+     * @param string $language The language to filter by.
+     * @param string $namespace The namespace to filter by.
+     * @param string $topic The topic to filter by.
+     * @return array An array of lexicon entries in key - value pairs for the specified filter.
      */
     public function getFileTopic($language = 'en',$namespace = 'core',$topic = 'default') {
         $corePath = $this->getNamespacePath($namespace);
@@ -238,6 +248,12 @@ class modLexicon {
         return $results;
     }
 
+    /**
+     * Get the path of the specified Namespace
+     *
+     * @param string $namespace The key of the Namespace
+     * @return string The path for the Namespace
+     */
     public function getNamespacePath($namespace = 'core') {
         $corePath = $this->modx->getOption('core_path',null,MODX_CORE_PATH);
         if ($namespace != 'core') {
@@ -249,6 +265,13 @@ class modLexicon {
         return $corePath;
     }
 
+    /**
+     * Get a list of available Topics when given a Language and Namespace.
+     *
+     * @param string $language The language to filter by.
+     * @param string $namespace The language to filter by.
+     * @return array An array of Topic names.
+     */
     public function getTopicList($language = 'en',$namespace = 'core') {
         $corePath = $this->getNamespacePath($namespace);
         $lexPath = str_replace('//','/',$corePath.'/lexicon/'.$language.'/');
@@ -269,6 +292,12 @@ class modLexicon {
         return $topics;
     }
 
+    /**
+     * Get a list of available languages for a Namespace.
+     *
+     * @param string $namespace The Namespace to filter by.
+     * @return array An array of available languages
+     */
     public function getLanguageList($namespace = 'core') {
         $corePath = $this->getNamespacePath($namespace);
         $lexPath = str_replace('//','/',$corePath.'/lexicon/');
