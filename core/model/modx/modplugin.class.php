@@ -70,7 +70,7 @@ class modPlugin extends modScript {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('plugin_err_remove').$this->toArray());
         }
 
-        return $success;
+        return $removed;
     }
 
     /**
