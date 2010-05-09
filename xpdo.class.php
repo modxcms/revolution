@@ -126,7 +126,7 @@ class xPDO {
      * @var PDO
      * @access protected
      */
-    protected $pdo= null;
+    public $pdo= null;
     /**
      * A array of xPDO configuration attributes.
      * @var array
