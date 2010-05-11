@@ -91,4 +91,6 @@ if ($package->save() == false) {
     return $modx->error->failure($msg);
 }
 
+$package->getTransport();
+
 return $modx->error->success('',$package);
