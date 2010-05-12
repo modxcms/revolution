@@ -10,9 +10,8 @@
  * @package modx
  * @subpackage processors.workspace.providers
  */
-$modx->lexicon->load('workspace');
-
 if (!$modx->hasPermission('providers')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('workspace');
 
 /* validation */
 if (empty($scriptProperties['name'])) $modx->error->addField('name',$modx->lexicon('provider_err_ns_name'));
@@ -31,8 +30,9 @@ if ($provider == null) return $modx->error->failure($modx->lexicon('provider_err
 $provider->fromArray($scriptProperties);
 
 /* verify provider */
-if (!$provider->verify()) {
-    return $modx->error->failure($modx->lexicon('provider_err_not_verified'));
+$verified = $provider->verify();
+if ($verified !== true) {
+    return $modx->error->failure($verified);
 }
 
 if ($provider->save() == false) {

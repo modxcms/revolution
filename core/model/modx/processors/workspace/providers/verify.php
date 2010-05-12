@@ -26,8 +26,9 @@ $loaded = $provider->getClient();
 if (!$loaded) return $modx->error->failure($modx->lexicon('provider_err_no_client'));
 
 /* verify provider */
-if ($provider->verify()) {
+$verified = $provider->verify();
+if ($verified === true) {
     return $modx->error->success();
 } else {
-    return $modx->error->failure($modx->lexicon('provider_err_not_verified'));
+    return $modx->error->failure($verified);
 }

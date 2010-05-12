@@ -37,6 +37,9 @@ class modTransportProvider extends xPDOSimpleObject {
      */
     public function request($path,$method = 'GET',$params = array()) {
         if ($this->xpdo->rest == null) $this->getClient();
+        $params = array_merge(array(
+            'api_key' => $this->get('api_key'),
+        ),$params);
         return $this->xpdo->rest->request($this->get('service_url'),$path,$method,$params);
     }
 
@@ -59,16 +62,18 @@ class modTransportProvider extends xPDOSimpleObject {
      * Verifies the authenticity of the provider
      *
      * @access public
-     * @return boolean True if verified
+     * @return boolean True if verified, xml if failed
      */
     public function verify() {
         $response = $this->request('verify','GET');
         if ($response->isError()) {
-            return false;
+            $message = $response->getError();
+            if ($this->xpdo->lexicon && $this->xpdo->lexicon->exists('provider_err_'.$message)) {
+                $message = $this->xpdo->lexicon('provider_err_'.$message);
+            }
+            return $message;
         }
         $status = $response->toXml();
-        if (!$status) return false;
-
         return (boolean)$status->verified;
     }
 

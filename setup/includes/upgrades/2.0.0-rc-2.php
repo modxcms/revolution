@@ -196,3 +196,14 @@ foreach ($entries as $entry) {
 $manager->removeObjectContainer('modLexiconLanguage');
 $manager->removeObjectContainer('modLexiconTopic');
 
+
+/* add api_key to modTransportProvider */
+$class = 'transport.modTransportProvider';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['add_column'],'api_key',$table);
+$sql = "ALTER TABLE {$table} ADD `api_key` VARCHAR(255) NOT NULL DEFAULT '' AFTER `service_url`";
+$this->processResults($class,$description,$sql);
+
+$description = sprintf($this->install->lexicon['add_index'],'api_key',$modUserTbl);
+$sql = "ALTER TABLE {$table} ADD INDEX `api_key` (`api_key`)";
+$this->processResults($class,$description,$sql);

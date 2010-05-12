@@ -12,7 +12,7 @@ MODx.grid.Provider = function(config) {
     Ext.applyIf(config,{
         title: _('providers')
         ,url: MODx.config.connectors_url+'workspace/providers.php'
-        ,fields: ['id','name','description','service_url','menu']
+        ,fields: ['id','name','description','service_url','api_key','menu']
         ,paging: true
         ,autosave: true
         ,columns: [{
@@ -23,7 +23,7 @@ MODx.grid.Provider = function(config) {
             header: _('service_url')
             ,dataIndex: 'service_url'
             ,width: 200
-            ,editor: { xtype: 'textfield' ,allowBlank: false ,vtype: 'url' }
+            ,editor: { xtype: 'textfield' ,allowBlank: false }
         },{
             header: _('description')
             ,dataIndex: 'description'
@@ -32,7 +32,7 @@ MODx.grid.Provider = function(config) {
         }]
         ,tbar: [{
             text: _('provider_add')
-            ,handler: { xtype: 'modx-window-provider-create' }
+            ,handler: { xtype: 'modx-window-provider-create' ,blankValues: true }
         }]
     });
     MODx.grid.Provider.superclass.constructor.call(this,config);
@@ -54,7 +54,7 @@ MODx.window.CreateProvider = function(config) {
     Ext.applyIf(config,{
         title: _('provider_add')
         ,id: 'modx-window-provider-create'
-        ,width: 375
+        ,width: 400
         ,url: MODx.config.connectors_url+'workspace/providers.php'
         ,action: 'create'
         ,fields: [{
@@ -62,21 +62,27 @@ MODx.window.CreateProvider = function(config) {
             ,name: 'name'
             ,id: 'modx-cprov-name'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '95%'
             ,allowBlank: false
         },{
             fieldLabel: _('service_url')
             ,name: 'service_url'
             ,id: 'modx-cprov-service-url'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '95%'
             ,allowBlank: false
+        },{
+            fieldLabel: _('api_key')
+            ,name: 'api_key'
+            ,id: 'modx-cprov-api_key'
+            ,xtype: 'textfield'
+            ,anchor: '95%'
         },{
             fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-cprov-description'
             ,xtype: 'textarea'
-            ,width: 200
+            ,anchor: '95%'
             ,grow: true
         }]
     });
@@ -99,7 +105,7 @@ MODx.window.UpdateProvider = function(config) {
     Ext.applyIf(config,{
         title: _('provider_update')
         ,id: 'modx-window-provider-update'
-        ,width: 375
+        ,width: 400
         ,url: MODx.config.connectors_url+'workspace/providers.php'
         ,action: 'update'
         ,fields: [{
@@ -110,21 +116,27 @@ MODx.window.UpdateProvider = function(config) {
             ,name: 'name'
             ,id: 'modx-uprov-name'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '95%'
             ,allowBlank: false
         },{
             fieldLabel: _('service_url')
             ,name: 'service_url'
             ,id: 'modx-uprov-service-url'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '95%'
             ,allowBlank: false
+        },{
+            fieldLabel: _('api_key')
+            ,name: 'api_key'
+            ,id: 'modx-uprov-api_key'
+            ,xtype: 'textfield'
+            ,anchor: '95%'
         },{
             fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-uprov-description'
             ,xtype: 'textarea'
-            ,width: 200
+            ,anchor: '95%'
             ,grow: true
         }]
     });

@@ -26,6 +26,7 @@
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="mediumtext" phptype="string" />
         <field key="service_url" dbtype="tinytext" phptype="string" />
+        <field key="api_key" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="created" dbtype="datetime" phptype="datetime" null="false" />
         <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         <aggregate alias="Packages" class="transport.modTransportPackage" local="id" foreign="provider" cardinality="many" owner="local" />
