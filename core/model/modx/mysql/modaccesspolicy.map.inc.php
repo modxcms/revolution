@@ -13,7 +13,7 @@ $xpdo_meta_map['modAccessPolicy']= array (
     'parent' => 0,
     'class' => '',
     'data' => '{}',
-    'lexicon' => '',
+    'lexicon' => 'permissions',
   ),
   'fieldMeta' => 
   array (
@@ -61,7 +61,7 @@ $xpdo_meta_map['modAccessPolicy']= array (
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
-      'default' => '',
+      'default' => 'permissions',
     ),
   ),
   'aggregates' => 
