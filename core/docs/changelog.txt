@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Update xPDO to revision 424 for fixes related to PDOException reporting
 - Ensure packages are unpacked after downloading
 - Fixed bug with removing a plugin
 - Added System Setting, 'cache_noncore_lexicon_topics', which can be used to disable caching on noncore lexicon topics, which is useful for 3PC development.
