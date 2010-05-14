@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug where core namespace was not in build
 - Update xPDO to revision 424 for fixes related to PDOException reporting
 - Ensure packages are unpacked after downloading
 - Fixed bug with removing a plugin

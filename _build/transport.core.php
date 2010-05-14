@@ -98,6 +98,17 @@ $xpdo->loadClass('modPrincipal');
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Core transport package created.'); flush();
 
+/* core namespace */
+$namespace = $xpdo->newObject('modNamespace');
+$namespace->set('name','core');
+$namespace->set('path','{core_path}');
+$package->put($namespace,array(
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => true,
+));
+unset($namespace);
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Core Namespace packaged.'); flush();
+
 /* modWorkspace */
 $collection = array ();
 $collection['1'] = $xpdo->newObject('modWorkspace');
