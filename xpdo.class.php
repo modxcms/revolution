@@ -239,7 +239,7 @@ class xPDO {
         $this->config['dsn']= $dsn;
         $this->config['username']= $username;
         $this->config['password']= $password;
-        $this->config['driverOptions']= $driverOptions;
+        $this->config['driverOptions']= is_array($driverOptions) ? $driverOptions : array();
         switch ($this->config['dbtype']) {
             case 'sqlite':
                 $this->_escapeChar= "";
@@ -292,15 +292,21 @@ class xPDO {
     public function connect($driverOptions= array ()) {
         if ($this->pdo === null) {
             if (!empty ($driverOptions)) {
-                $this->config['driverOptions']= array_merge($this->config['driverOptions'], $driverOptions);
+                if (is_array($this->getOption('driverOptions'))) {
+                    $this->config['driverOptions']= array_merge($this->getOption('driverOptions'), $driverOptions);
+                } else {
+                    $this->config['driverOptions']= $driverOptions;
+                }
             }
             try {
                 $this->pdo= new PDO($this->config['dsn'], $this->config['username'], $this->config['password'], $this->config['driverOptions']);
                 $errorCode= $this->pdo->errorCode();
             } catch (PDOException $xe) {
                 $this->log(xPDO::LOG_LEVEL_ERROR, $xe->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+                return false;
             } catch (Exception $e) {
                 $this->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+                return false;
             }
 
             $connected= (is_object($this->pdo) && (empty($errorCode) || $errorCode == PDO::ERR_NONE));
@@ -1344,15 +1350,15 @@ class xPDO {
      */
     protected function _log($level, $msg, $target= '', $def= '', $file= '', $line= '') {
         if (empty ($target)) {
-            $target= $this->logTarget;
+            $target =& $this->logTarget;
         }
         $targetOptions = array();
         if (is_array($target)) {
-            if (isset($target['options'])) $targetOptions = $target['options'];
+            if (isset($target['options'])) $targetOptions =& $target['options'];
             $target = isset($target['target']) ? $target['target'] : 'ECHO';
         }
         if (!XPDO_CLI_MODE && empty ($file)) {
-            $file= (isset ($_SERVER['PHP_SELF']) || $this->logTarget == 'ECHO') ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_FILENAME'];
+            $file= (isset ($_SERVER['PHP_SELF']) || $target == 'ECHO') ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_FILENAME'];
         }
         if ($level === xPDO::LOG_LEVEL_FATAL) {
             while (@ob_end_flush()) {}
@@ -1382,8 +1388,9 @@ class xPDO {
                 $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
                 $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
                 $this->cacheManager->writeFile($filepath . $filename, $content, 'a');
-            }
-            else {
+            } elseif ($target=='ARRAY' && isset($targetOptions['var']) && is_array($targetOptions['var'])) {
+                $targetOptions['var'][] = $content;
+            } else {
                 echo $content;
             }
         }

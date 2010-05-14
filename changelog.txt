@@ -2,6 +2,9 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- xPDO::log() and xPDO::$logTarget will now accept an ARRAY target with an option that is a reference to the var
+- xPDO::connect() should return false on Exception
+- Ensure driverOptions is set as an empty array if the value passed is not an array
 - Log PDOException messages in xPDO::connect()
 - [#XPDO-49] Fix inconsistent static and non-static calls to fromJSON() and toJSON() methods on xPDO
 - Added xPDO::getService to load service classes
