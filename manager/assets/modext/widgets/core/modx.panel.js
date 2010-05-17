@@ -17,11 +17,10 @@ MODx.FormPanel = function(config) {
     Ext.applyIf(config,{
         autoHeight: true
         ,collapsible: true
-        ,bodyStyle: 'padding: 10px'
+        ,bodyStyle: ''
+        ,layout: 'anchor'
         ,border: false
         ,header: false
-        ,layout: 'fit'
-        ,title: ''
         ,method: 'POST'
         ,cls: 'modx-form'
         ,ddGroup: 'modx-treedrop-dd'
@@ -29,13 +28,13 @@ MODx.FormPanel = function(config) {
         ,errorReader: MODx.util.JSONReader
         ,checkDirty: true
         ,useLoadingMask: false
-        ,defaults: { autoHeight: true }
+        ,defaults: { collapsible: false ,autoHeight: true, border: false }
     });
     if (config.items) { this.addChangeEvent(config.items); }
-    
-    MODx.FormPanel.superclass.constructor.call(this,config);    
+
+    MODx.FormPanel.superclass.constructor.call(this,config);
     this.config = config;
-    
+
     this.addEvents({
         setup: true
         ,fieldChange: true
@@ -60,7 +59,7 @@ MODx.FormPanel = function(config) {
     this.fireEvent('setup',config);
 };
 Ext.extend(MODx.FormPanel,Ext.FormPanel,{
-	isReady: false
+    isReady: false
 
     ,submit: function(o) {
         var fm = this.getForm();
@@ -103,13 +102,13 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         }
         return true;
     }
-    
+
     ,addChangeEvent: function(items) {
     	if (!items) { return false; }
     	if (typeof(items) == 'object' && items.items) {
-    		items = items.items;
+            items = items.items;
     	}
-    	
+
         for (var f=0;f<items.length;f++) {
             var cmp = items[f];
             if (cmp.items) {
@@ -119,20 +118,20 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 var ctype = 'change';
                 cmp.enableKeyEvents = true;
                 switch (cmp.xtype) {
-                	case 'textfield':
-                	case 'textarea':
-                	   ctype = 'keydown';
-                	   break;
-                	case 'checkbox':
-                	case 'radio':
-                	   ctype = 'check';
-                	   break;
+                    case 'textfield':
+                    case 'textarea':
+                        ctype = 'keydown';
+                        break;
+                    case 'checkbox':
+                    case 'radio':
+                        ctype = 'check';
+                        break;
                 }
                 cmp.listeners[ctype] = {fn:this.fieldChangeEvent,scope:this};
             }
         }
     }
-    
+
     ,fieldChangeEvent: function(fld,nv,ov,f) {
         if (!this.isReady) { return false; }
         var f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
@@ -143,21 +142,21 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             ,form: f
         });
     }
-    
+
     ,markDirty: function() {
         this.fireEvent('fieldChange');
     }
-    
+
     ,isDirty: function() {
         var f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
     	return f.isDirty();
     }
-    
+
     ,clearDirty: function() {
         var f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
     	return f.clearDirty();
     }
-    
+
     ,onReady: function(r) {
     	this.isReady = true;
         if (this.config.allowDrop) { this.loadDropZones(); }
@@ -165,8 +164,8 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             this.mask.hide();
         }
     }
-    
-    ,loadDropZones: function() {        
+
+    ,loadDropZones: function() {
         var flds = this.getForm().items;
         flds.each(function(fld) {
             if (fld.isFormField && (
@@ -183,7 +182,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             }
         });
     }
-    
+
     ,getField: function(f) {
         var fld = false;
         if (typeof f == 'string') {
@@ -192,7 +191,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         }
         return fld;
     }
-    
+
     ,hideField: function(f) {
         f = this.getField(f);
         if (!f) return;
@@ -210,14 +209,14 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         var d = f.getEl().up('.x-form-item');
         if (d) { d.setDisplayed(true); }
     }
-    
+
     ,setLabel: function(fld,text){
         var f = this.getField(fld);
         if (!f) return;
         var r = f.getEl().up('div.x-form-item');
         r.dom.firstChild.firstChild.nodeValue = String.format('{0}', text);
     }
-}); 
+});
 Ext.reg('modx-formpanel',MODx.FormPanel);
 
 MODx.panel.Wizard = function(config) {
@@ -243,7 +242,7 @@ MODx.panel.Wizard = function(config) {
             ,text: config.txtBack || _('back')
             ,handler: this.navHandler.createDelegate(this,[-1])
             ,scope: this
-            ,disabled: true         
+            ,disabled: true
         },{
             id: 'pi-btn-fwd'
             ,itemId: 'btn-fwd'
@@ -259,12 +258,12 @@ MODx.panel.Wizard = function(config) {
 };
 Ext.extend(MODx.panel.Wizard,Ext.Panel,{
     windows: {}
-    
+
     ,_go: function() {
         this.getBottomToolbar().items.item(1).setText(this.config.txtNext);
         this.proceed(this.config.firstPanel);
     }
-    
+
     ,navHandler: function(dir) {
         this.doLayout();
         var a = this.getLayout().activeItem;
@@ -277,7 +276,7 @@ Ext.extend(MODx.panel.Wizard,Ext.Panel,{
             });
         }
     }
-    
+
     ,proceed: function(id) {
         this.doLayout();
         this.getLayout().setActiveItem(id);

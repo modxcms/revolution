@@ -1,4 +1,7 @@
 Ext.namespace('MODx');
+Ext.apply(Ext,{
+    isFirebug: (window.console && window.console.firebug)
+});
 /**
  * @class MODx
  * @extends Ext.Component
@@ -14,7 +17,7 @@ MODx = function(config) {
 Ext.extend(MODx,Ext.Component,{
     config: {}
     ,util:{},window:{},panel:{},tree:{},form:{},grid:{},combo:{},toolbar:{},page:{},msg:{}
-    
+
     ,startup: function() {
         this.initQuickTips();
         this.request = this.getURLParameters();
@@ -32,7 +35,7 @@ Ext.extend(MODx,Ext.Component,{
             ,afterReleaseLocks: true
         });
     }
-    
+
     ,load: function() {
         var a = arguments, l = a.length;
         var os = [];
@@ -44,7 +47,7 @@ Ext.extend(MODx,Ext.Component,{
         }
         return (os.length === 1) ? os[0] : os;
     }
-    
+
     ,initQuickTips: function() {
         Ext.QuickTips.init();
         Ext.apply(Ext.QuickTips.getQuickTip(), {
@@ -52,26 +55,26 @@ Ext.extend(MODx,Ext.Component,{
             ,interceptTitles: true
         });
     }
-    
+
     ,getURLParameters: function() {
         var arg = {};
         var href = document.location.href;
-        
+
         if (href.indexOf('?') !== -1) {
             var params = href.split('?')[1];
-            var param = params.split('&');        
+            var param = params.split('&');
             for (var i=0; i<param.length;i=i+1) {
                 arg[param[i].split('=')[0]] = param[i].split('=')[1];
             }
         }
         return arg;
     }
-    
+
     ,loadAccordionPanels: function() { return []; }
-    
+
     ,clearCache: function() {
         if (!this.fireEvent('beforeClearCache')) { return false; }
-        
+
         var topic = '/clearcache/';
         if (this.console == null || this.console == undefined) {
             this.console = MODx.load({
@@ -91,7 +94,7 @@ Ext.extend(MODx,Ext.Component,{
             this.console.setRegister('mgr',topic);
         }
         this.console.show(Ext.getBody());
-        
+
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'system/index.php'
             ,params: { action: 'clearCache',register: 'mgr' ,topic: topic }
@@ -103,7 +106,7 @@ Ext.extend(MODx,Ext.Component,{
         });
         return true;
     }
-    
+
     ,releaseLock: function(id) {
         if (this.fireEvent('beforeReleaseLocks')) {
             MODx.Ajax.request({
@@ -118,7 +121,7 @@ Ext.extend(MODx,Ext.Component,{
             });
         }
     }
-    
+
     ,sleep: function(ms) {
         var s = new Date().getTime();
         for (var i=0;i < 1e7;i++) {
@@ -127,7 +130,7 @@ Ext.extend(MODx,Ext.Component,{
             }
         }
     }
-    
+
     ,logout: function() {
         if (this.fireEvent('beforeLogout')) {
             MODx.msg.confirm({
@@ -141,24 +144,24 @@ Ext.extend(MODx,Ext.Component,{
                 ,listeners: {
                     'success': {fn:function(r) {
                         if (this.fireEvent('afterLogout',r)) {
-                            location.href = './'; 
+                            location.href = './';
                         }
                     },scope:this}
                 }
             });
         }
     }
-    
+
     ,getPageStructure: function(v,c) {
         c = c || {};
         if (MODx.config.manager_use_tabs) {
-            Ext.applyIf(c,{xtype: 'modx-tabs',itemId: 'tabs' ,style: 'margin-top: .5em;',items: v,forceLayout: true});
+            Ext.applyIf(c,{xtype: 'modx-tabs',itemId: 'tabs' ,style: 'margin-top: .5em;',items: v});
         } else {
             Ext.applyIf(c,{xtype:'portal',itemId: 'tabs' ,items:[{columnWidth:1,items: v,forceLayout: true}]});
         }
         return c;
     }
-    
+
     ,loadHelpPane: function(b) {
         var url = MODx.config.help_url;
         if (!url) { return false; }
@@ -183,7 +186,7 @@ Ext.reg('modx',MODx);
 
 /**
  * An override class for Ext.Ajax, which adds success/failure events.
- * 
+ *
  * @class MODx.Ajax
  * @extends Ext.Component
  * @param {Object} config An object of config properties
@@ -208,7 +211,7 @@ Ext.extend(MODx.Ajax,Ext.Component,{
               }
             }
         }
-        
+
         Ext.apply(config,{
             success: function(r,o) {
                 r = Ext.decode(r.responseText);
@@ -248,7 +251,7 @@ MODx.form.Handler = function(config) {
 };
 Ext.extend(MODx.form.Handler,Ext.Component,{
     fields: []
-        
+
     ,handle: function(o,s,r) {
         r = Ext.decode(r.responseText);
         if (!r.success) {
@@ -257,7 +260,7 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
         }
         return true;
     }
-    
+
     ,highlightField: function(f) {
         if (f.id !== undefined && f.id !== 'forEach' && f.id !== '') {
             Ext.get(f.id).dom.style.border = '1px solid red';
@@ -266,7 +269,7 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
             this.fields.push(f.id);
         }
     }
-    
+
     ,unhighlightFields: function() {
         for (var i=0;i<this.fields.length;i=i+1) {
             Ext.get(this.fields[i]).dom.style.border = '';
@@ -275,7 +278,7 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
         }
         this.fields = [];
     }
-    
+
     ,errorJSON: function(e) {
         if (e === '') { return this.showError(e); }
         if (e.data && e.data !== null) {
@@ -287,20 +290,20 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
         this.showError(e.message);
         return false;
     }
-    
+
     ,errorExt: function(r,frm) {
         this.unhighlightFields();
         if (r.errors !== null && frm) {
             frm.markInvalid(r.errors);
         }
-        if (r.message !== undefined && r.message !== '') { 
+        if (r.message !== undefined && r.message !== '') {
             this.showError(r.message);
         } else {
-            MODx.msg.hide();    
+            MODx.msg.hide();
         }
         return false;
     }
-    
+
     ,showError: function(e) {
         if (e === '') {
             MODx.msg.hide();
@@ -308,7 +311,7 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
             MODx.msg.alert(_('error'),e,Ext.emptyFn);
         }
     }
-    
+
     ,closeError: function() { MODx.msg.hide(); }
 });
 Ext.reg('modx-form-handler',MODx.form.Handler);
@@ -353,25 +356,25 @@ Ext.extend(MODx.Msg,Ext.Component,{
             }
         },this);
     }
-    
+
     ,getWindow: function() {
         return Ext.Msg.getDialog();
     }
-    
+
     ,alert: function(title,text,fn,scope) {
         fn = fn || Ext.emptyFn;
         scope = scope || this;
         Ext.Msg.alert(title,text,fn,scope);
     }
-    
-    ,status: function(opt) {    
+
+    ,status: function(opt) {
         if (!MODx.stMsgCt) {
             MODx.stMsgCt = Ext.DomHelper.insertFirst(document.body, {id:'modx-status-message-ct'}, true);
         }
         MODx.stMsgCt.alignTo(document, 't-t');
         var markup = this.getStatusMarkup(opt);
         var m = Ext.DomHelper.overwrite(MODx.stMsgCt, {html:markup}, true);
-        
+
         m.slideIn('t');
         var fadeOpts = {remove:true,useDisplay:true};
         if (!opt.dontHide) {
@@ -381,7 +384,7 @@ Ext.extend(MODx.Msg,Ext.Component,{
                 m.ghost('t',fadeOpts);
             });
         }
-        
+
     }
     ,getStatusMarkup: function(opt) {
         var mk = '<div class="modx-status-msg">';

@@ -431,6 +431,11 @@ ul.x-tab-strip li.x-tab-strip-active  {
     padding: 1px;
 }
 
+#modAB .x-btn {
+    padding: 1px 3px;
+}
+
+
 .x-btn-over{
     background: #779937 #779937 url(../images/modx-theme/form/button-bg.png) repeat-x scroll 0 0;
     border-color: #9CAF78;

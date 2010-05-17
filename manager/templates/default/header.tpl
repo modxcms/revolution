@@ -31,7 +31,7 @@
 <div id="modx-browser"></div>
 <div id="modx-container">
     <div id="modx-topbar">
-        <div id="modx-logo"><a href="http://modxcms.com"><img src="templates/{$_config.manager_theme}/images/style/modx_logo_header.png" target="_blank" alt="" /></a></div>
+        <div id="modx-logo"><a href="http://modxcms.com" onclick="window.open(this.href); return false;"><img src="templates/{$_config.manager_theme}/images/style/modx_logo_header.png" alt="" /></a></div>
         <div id="modx-site-name">
             {$_config.site_name}
             <span class="modx-version">MODx Revolution {$_config.settings_version} rev{$revision}</span>
@@ -46,13 +46,9 @@
         </div>
         {include file="navbar.tpl"}
     </div>
-    
+
     <div id="modx-mainpanel">
         <div id="modAB"></div>
-        <div id="modx-leftbar" class="modx-leftbar">
-            <div class="tl"></div><div class="tr"></div>
-            <div id="modx-leftbar-content"></div>
-            <div class="bl"></div><div class="br"></div>
-        </div>
+        <div id="modx-leftbar"></div>
         <div id="modx-content">
             <div id="modx-panel-holder"></div>
