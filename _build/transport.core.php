@@ -481,21 +481,6 @@ foreach ($collection as $c) {
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default access policies.'); flush();
 unset ($collection, $c, $attributes);
 
-/* modAccessContext */
-$collection = array ();
-include dirname(__FILE__).'/data/transport.core.access_contexts.php';
-$attributes = array (
-    xPDOTransport::PRESERVE_KEYS => false,
-    xPDOTransport::UNIQUE_KEY => array('target', 'principal_class', 'principal'),
-    xPDOTransport::UPDATE_OBJECT => true,
-);
-foreach ($collection as $c) {
-    $package->put($c, $attributes);
-}
-
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default access context permissions.'); flush();
-unset ($collection, $c, $attributes);
-
 /* zip up package */
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Beginning to zip up transport package...'); flush();
 if ($package->pack()) {

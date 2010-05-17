@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added load-only and load,list and view policies to build, adjusted setup to handle admin/resource policies with different IDs
+- Moved setup's global new/upgrade install scripts to separate files
 - MODExt adjustments; main layout now in central viewport so can handle browser resizing, refactored settings grid editing code, IE/FF/Chrome fixes
 - [#MODX-1970] Add scheme property to Link Tags to allow canonical, https, or any URL generation scheme from modX::makeUrl()
 - Fixed bug where core namespace was not in build
