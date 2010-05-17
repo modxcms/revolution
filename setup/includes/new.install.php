@@ -111,4 +111,39 @@ if ($loadOnly) {
 }
 unset($loadOnly);
 
+/* add base template and home resource */
+$template = $this->xpdo->newObject('modTemplate');
+$template->fromArray(array(
+    'name' => $this->lexicon['base_template'],
+    'content' => '<html>
+<head>
+<title>[[++site_name]] - [[*pagetitle]]</title>
+<base href="[[++site_url]]" />
+</head>
+<body>
+[[*content]]
+</body>
+</html>',
+));
+if ($template->save()) {
+    $resource = $this->xpdo->newObject('modResource');
+    $resource->fromArray(array(
+        'pagetitle' => $this->lexicon['home'],
+        'alias' => '',
+        'contentType' => 'text/html',
+        'type' => 'document',
+        'published' => true,
+        'content' => '',
+        'template' => $template->get('id'),
+        'searchable' => true,
+        'cacheable' => true,
+        'createdby' => 1,
+        'hidemenu' => false,
+        'class_key' => 'modDocument',
+        'context_key' => 'web',
+        'content_type' => 1,
+    ));
+    $resource->save();
+}
+
 return true;
