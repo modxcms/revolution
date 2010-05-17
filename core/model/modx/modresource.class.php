@@ -290,11 +290,12 @@ class modResource extends modAccessibleSimpleObject {
         $alias = html_entity_decode($alias, ENT_QUOTES, $charset);
 
         /* replace any remaining & with a lexicon value if available */
-        if ($this->xpdo->getService('lexicon','modLexicon')) {
+        if ($this->xpdo instanceof modX && $this->xpdo->getService('lexicon','modLexicon')) {
             $alias = str_replace('&', $this->xpdo->lexicon('and') ? ' ' . $this->xpdo->lexicon('and') . ' ' : ' and ', $alias);
         }
 
         /* apply transliteration as configured */
+        if (!($this->xpdo instanceof modX)) { $translit = 'none'; }
         switch ($translit) {
             case '':
             case 'none':
