@@ -111,6 +111,39 @@ if ($loadOnly) {
 }
 unset($loadOnly);
 
+
+/* setup default admin ACLs */
+$adminPolicy = $this->xpdo->getObject('modAccessPolicy',array(
+    'name' => 'Administrator',
+));
+$adminGroup = $this->xpdo->getObject('modUserGroup',array(
+    'name' => 'Administrator',
+));
+if ($adminPolicy && $adminGroup) {
+    $access= $this->xpdo->newObject('modAccessContext');
+    $access->fromArray(array(
+      'target' => 'mgr',
+      'principal_class' => 'modUserGroup',
+      'principal' => $adminGroup->get('id'),
+      'authority' => 0,
+      'policy' => $adminPolicy->get('id'),
+    ));
+    $access->save();
+    unset($access);
+
+    $access= $this->xpdo->newObject('modAccessContext');
+    $access->fromArray(array(
+      'target' => 'web',
+      'principal_class' => 'modUserGroup',
+      'principal' => $adminGroup->get('id'),
+      'authority' => 0,
+      'policy' => $adminPolicy->get('id'),
+    ));
+    $access->save();
+    unset($access);
+}
+unset($adminPolicy,$adminGroup);
+
 /* add base template and home resource */
 $template = $this->xpdo->newObject('modTemplate');
 $template->fromArray(array(
