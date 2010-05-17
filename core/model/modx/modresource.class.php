@@ -279,7 +279,9 @@ class modResource extends modAccessibleSimpleObject {
         $length = $mbext ? mb_strlen($alias, $charset) : strlen($alias);
 
         /* strip html and optionally MODx element tags (stripped by default) */
-        $alias = $this->xpdo->stripTags($alias, '', $stripElementTags ? array() : null);
+        if ($this->xpdo instanceof modX) {
+            $alias = $this->xpdo->stripTags($alias, '', $stripElementTags ? array() : null);
+        }
 
         /* replace &nbsp; with the specified word delimiter */
         $alias = str_replace('&nbsp;', $delimiter, $alias);
