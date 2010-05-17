@@ -23,7 +23,7 @@ foreach ($contexts as $context) {
 
 $options = array(
     'publishing' => 1,
-    'extensions' => array('.cache.php', '.msg.php')
+    'extensions' => array('.cache.php', '.msg.php', '.tpl.php'),
 );
 if ($modx->getOption('cache_db')) $options['objects'] = '*';
 

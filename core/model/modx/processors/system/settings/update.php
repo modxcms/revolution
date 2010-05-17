@@ -87,5 +87,10 @@ if ($setting->save() === false) {
 
 
 $modx->reloadConfig();
+$modx->cacheManager->deleteTree($modx->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/smarty/',array(
+   'deleteTop' => false,
+    'skipDirs' => false,
+    'extensions' => array('.cache.php','.php'),
+));
 
 return $modx->error->success('',$setting);
