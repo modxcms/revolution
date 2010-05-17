@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1972] Added OnTVInputRenderList, OnTVOutputRenderList, and OnTVOutputRenderPropertiesList System Events to allow you to return a path to specify where to look for custom TV files
 - Allow separate caching directories for smarty when using different manager themes
 - [#MODX-1951] Ensure smarty cache is cleared on site cache clearing and settings
 - Ensure admin ACLs are set on new installs

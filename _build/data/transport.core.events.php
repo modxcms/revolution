@@ -245,6 +245,25 @@ $events['OnTVFormDelete']->fromArray(array (
   'groupname' => 'Template Variables',
 ), '', true, true);
 
+/* TV Renders */
+$events['OnTVInputRenderList']= $xpdo->newObject('modEvent');
+$events['OnTVInputRenderList']->fromArray(array (
+  'name' => 'OnTVInputRenderList',
+  'service' => 1,
+  'groupname' => 'Template Variables',
+), '', true, true);
+$events['OnTVOutputRenderList']= $xpdo->newObject('modEvent');
+$events['OnTVOutputRenderList']->fromArray(array (
+  'name' => 'OnTVOutputRenderList',
+  'service' => 1,
+  'groupname' => 'Template Variables',
+), '', true, true);
+$events['OnTVOutputRenderPropertiesList']= $xpdo->newObject('modEvent');
+$events['OnTVOutputRenderPropertiesList']->fromArray(array (
+  'name' => 'OnTVOutputRenderPropertiesList',
+  'service' => 1,
+  'groupname' => 'Template Variables',
+), '', true, true);
 
 /* User Groups */
 $events['OnUserGroupBeforeSave']= $xpdo->newObject('modEvent');

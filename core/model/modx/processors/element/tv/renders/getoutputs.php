@@ -12,20 +12,40 @@ $modx->lexicon->load('tv_widget');
 
 $context = (isset($scriptProperties['context']) && !empty($scriptProperties['context'])) ? $scriptProperties['context'] : 'web';
 
-$renderdir = dirname(__FILE__).'/'.$context.'/output/';
+$renderDirectories = array(
+    dirname(__FILE__).'/'.$context.'/output/',
+);
 
+/* allow for custom directories */
+$pluginResult = $modx->invokeEvent('OnTVOutputRenderList',array(
+    'context' => $context,
+));
+if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($pluginResult); }
+if (!empty($pluginResult)) {
+    $renderDirectories = array_merge($renderDirectories,$pluginResult);
+}
+/* search directories */
 $types = array();
-if ($handle = opendir($renderdir)) {
-    while (false !== ($file = readdir($handle))) {
-        if (!is_file($renderdir.$file)) continue;
-        $type = str_replace('.php','',$file);
-        $types[] = array(
-            'name' => $modx->lexicon($type),
-            'value' => $type,
-        );
-    }
-
-    closedir($handle);
+foreach ($renderDirectories as $renderDirectory) {
+    if (empty($renderDirectory)) continue;
+    try {
+        $dirIterator = new DirectoryIterator($renderDirectory);
+        foreach ($dirIterator as $file) {
+            if (!$file->isReadable() || !$file->isFile()) continue;
+            $type = str_replace('.php','',$file->getFilename());
+            $types[$type] = array(
+                'name' => $modx->lexicon($type),
+                'value' => $type,
+            );
+        }
+    } catch (UnexpectedValueException $e) {}
 }
 
-return $this->outputArray($types);
+/* sort types */
+ksort($types);
+$otypes = array();
+foreach ($types as $type) {
+    $otypes[] = $type;
+}
+
+return $this->outputArray($otypes);
