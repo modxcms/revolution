@@ -12,7 +12,6 @@
  * @package modx
  * @subpackage processors.browser.directory
  */
-if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
 /* setup default properties */
@@ -25,6 +24,17 @@ $files = array();
 $ls = array();
 
 $actions = $modx->request->getAllActionIDs();
+
+/* get permissions available */
+$canChmodDirs = $modx->hasPermission('directory_chmod');
+$canCreateDirs = $modx->hasPermission('directory_create');
+$canListDirs = $modx->hasPermission('directory_list');
+$canRemoveDirs = $modx->hasPermission('directory_remove');
+$canUpdateDirs = $modx->hasPermission('directory_update');
+$canListFiles = $modx->hasPermission('file_list');
+$canRemoveFile = $modx->hasPermission('file_remove');
+$canUpdateFile = $modx->hasPermission('file_update');
+$canUpload = $modx->hasPermission('file_upload');
 
 /* get base paths and sanitize incoming paths */
 $modx->getService('fileHandler','modFileHandler');
@@ -45,11 +55,18 @@ foreach (new DirectoryIterator($fullpath) as $file) {
     $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
     /* handle dirs */
-    if ($file->isDir()) {
+    if ($file->isDir() && $canListDirs) {
+        $cls = 'folder';
+        if ($canChmodDirs) $cls .= ' pchmod';
+        if ($canCreateDirs) $cls .= ' pcreate';
+        if ($canRemoveDirs) $cls .= ' premove';
+        if ($canUpdateDirs) $cls .= ' pupdate';
+        if ($canUpload) $cls .= ' pupload';
+        
         $directories[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
-            'cls' => 'folder',
+            'cls' => $cls,
             'type' => 'dir',
             'leaf' => false,
             'perms' => $octalPerms,
@@ -57,12 +74,16 @@ foreach (new DirectoryIterator($fullpath) as $file) {
     }
 
     /* get files in current dir */
-    if ($file->isFile() && !$hideFiles) {
+    if ($file->isFile() && !$hideFiles && $canListFiles) {
         $ext = pathinfo($filePathName,PATHINFO_EXTENSION);
+
+        $cls = 'icon-file icon-'.$ext;
+        if ($canRemoveFile) $cls .= ' premove';
+        if ($canUpdateFile) $cls .= ' pupdate';
         $files[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
-            'cls' => 'icon-file icon-'.$ext,
+            'cls' => $cls,
             'type' => 'file',
             'leaf' => true,
             'perms' => $octalPerms,

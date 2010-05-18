@@ -8,7 +8,7 @@
  * @package modx
  * @subpackage processors.browser
  */
-if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('directory_update')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
 if (empty($scriptProperties['path'])) return $modx->error->failure($modx->lexicon('file_err_ns'));

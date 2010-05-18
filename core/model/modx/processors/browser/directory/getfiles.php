@@ -11,7 +11,7 @@
  * @package modx
  * @subpackage processors.browser.directory
  */
-if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('file_list')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
 /* get sanitized base path and current path */

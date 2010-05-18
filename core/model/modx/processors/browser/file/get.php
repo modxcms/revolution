@@ -7,7 +7,7 @@
  * @package modx
  * @subpackage processors.browser.file
  */
-if (!$modx->hasPermission('file_manager')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('file_view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
 
 /* format filename */

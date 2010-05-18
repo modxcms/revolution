@@ -66,48 +66,73 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,_getFileMenu: function(n) {
         var a = n.attributes;
+        var ui = n.getUI();
         var m = [];
 
-        m.push({
-            text: _('file_edit')
-            ,file: a.file
-            ,handler: function(itm,e) {
-                this.loadAction('a='+MODx.action['system/file/edit']+'&file='+itm.file);
-            }
-        },{
-            text: _('rename')
-            ,handler: this.renameFile
-        },'-',{
-            text: _('file_remove')
-            ,handler: this.removeFile
-        });
+        if (ui.hasClass('pupdate')) {
+            m.push({
+                text: _('file_edit')
+                ,file: a.file
+                ,handler: function(itm,e) {
+                    this.loadAction('a='+MODx.action['system/file/edit']+'&file='+itm.file);
+                }
+            });
+            m.push({
+                text: _('rename')
+                ,handler: this.renameFile
+            });
+        }
+        if (ui.hasClass('premove')) {
+            if (m.length > 0) { m.push('-'); }
+            m.push({
+                text: _('file_remove')
+                ,handler: this.removeFile
+            });
+        }
         return m;
     }
 
     ,_getDirectoryMenu: function(n) {
         var ui = n.getUI();
         var m = [];
+        if (ui.hasClass('pcreate')) {
+            m.push({
+                text: _('file_folder_create_here')
+                ,handler: this.createDirectory
+            });
+        }
+        if (ui.hasClass('pchmod')) {
+            m.push({
+                text: _('file_folder_chmod')
+                ,handler: this.chmodDirectory
+            });
+        }
+        if (ui.hasClass('pupdate')) {
+            m.push({
+                text: _('rename')
+                ,handler: this.renameFile
+            });
+        }
         m.push({
-            text: _('file_folder_create_here')
-            ,handler: this.createDirectory
-        },{
-            text: _('file_folder_chmod')
-            ,handler: this.chmodDirectory
-        },{
-            text: _('rename')
-            ,handler: this.renameFile
-        },{
             text: _('directory_refresh')
             ,handler: this.refreshActiveNode
-        },'-',{
-            text: _('upload_files')
-            ,handler: this.uploadFiles
-        },'-',{
-            text: _('file_folder_remove')
-            ,handle: function(itm,e) {
-                this.remove('file_folder_confirm_remove');
-            }
         });
+        if (ui.hasClass('pupload')) {
+            m.push('-');
+            m.push({
+                text: _('upload_files')
+                ,handler: this.uploadFiles
+            });
+        }
+        if (ui.hasClass('premove')) {
+            m.push('-');
+            m.push({
+                text: _('file_folder_remove')
+                ,handle: function(itm,e) {
+                    this.remove('file_folder_confirm_remove');
+                }
+            });
+        }
         return m;
     }
 
