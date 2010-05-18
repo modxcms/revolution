@@ -35,6 +35,8 @@ if ($file->getPath() != $newPath) {
     }
 }
 
+$modx->logManagerAction('file_update','',$file->getPath());
+
 return $modx->error->success('',array(
     'file' => rawurlencode($file->getPath()),
 ));

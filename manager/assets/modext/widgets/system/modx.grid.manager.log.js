@@ -13,7 +13,7 @@ MODx.grid.ManagerLog = function(config) {
         ,id: 'modx-grid-manager-log'
         ,url: MODx.config.connectors_url+'system/log.php'
         ,fields: ['id','user','username','occurred','action','classKey','item','name','menu']
-        ,autosave: true
+        ,autosave: false
         ,paging: true
         ,columns: [{
             header: _('occurred')
@@ -22,7 +22,7 @@ MODx.grid.ManagerLog = function(config) {
         },{
             header: _('user')
             ,dataIndex: 'username'
-            ,width: 200
+            ,width: 125
             ,editable: false
         },{
             header: _('action')
@@ -31,7 +31,7 @@ MODx.grid.ManagerLog = function(config) {
         },{
             header: 'Object'
             ,dataIndex: 'name'
-            ,width: 125
+            ,width: 300
         }]
     });
     MODx.grid.ManagerLog.superclass.constructor.call(this,config);

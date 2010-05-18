@@ -39,4 +39,7 @@ if (!$file->remove()) {
     return $modx->error->failure($modx->lexicon('file_err_remove'));
 }
 
+/* log manager action */
+$modx->logManagerAction('file_remove','',$file->getPath());
+
 return $modx->error->success();

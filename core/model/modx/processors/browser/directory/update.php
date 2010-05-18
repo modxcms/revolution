@@ -37,4 +37,6 @@ if (!$oldDirectory->rename($newPath)) {
     return $modx->error->failure($modx->lexicon('file_folder_err_rename'));
 }
 
+$modx->logManagerAction('directory_rename','',$oldDirectory->getPath());
+
 return $modx->error->success();

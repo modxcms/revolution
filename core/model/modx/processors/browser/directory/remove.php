@@ -39,4 +39,6 @@ if ($result == false) {
     return $modx->error->failure($modx->lexicon('file_folder_err_remove'));
 }
 
+$modx->logManagerAction('directory_remove','',$directory->getPath());
+
 return $modx->error->success();

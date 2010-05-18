@@ -68,7 +68,7 @@ foreach ($logs as $log) {
             $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
         }
     } else {
-        $logArray['name'] = '';
+        $logArray['name'] = $log->get('item');
     }
     $logArray['occurred'] = strftime('%a %b %d, %Y %H:%I:%S %p',strtotime($logArray['occurred']));
     $list[] = $logArray;

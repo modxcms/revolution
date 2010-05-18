@@ -38,4 +38,6 @@ if ($result !== true) {
     return $modx->error->failure($modx->lexicon('file_folder_err_create').$result);
 }
 
+$modx->logManagerAction('directory_create','',$directory->getPath());
+
 return $modx->error->success();

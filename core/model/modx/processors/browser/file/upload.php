@@ -42,4 +42,6 @@ $modx->invokeEvent('OnFileManagerUpload',array(
     'directory' => &$directory,
 ));
 
+$modx->logManagerAction('file_upload','',$directory->getPath());
+
 return $modx->error->success();

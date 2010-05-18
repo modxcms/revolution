@@ -28,7 +28,9 @@ if (!is_readable($directory) || !is_writable($directory)) {
 }
 $octalPerms = $scriptProperties['mode'];
 if (!$modx->fileHandler->chmod($directory,$octalPerms)) {
-	return $modx->error->failure($modx->lexicon('file_err_chmod'));
+    return $modx->error->failure($modx->lexicon('file_err_chmod'));
 }
+
+$modx->logManagerAction('directory_chmod','',$directory);
 
 return $modx->error->success();

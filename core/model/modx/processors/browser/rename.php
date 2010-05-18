@@ -34,4 +34,6 @@ if (!$fsResource->rename($newPath)) {
     return $modx->error->failure($modx->lexicon('file_err_rename'));
 }
 
+$modx->logManagerAction('directory_rename','',$fsResource->getPath());
+
 return $modx->error->success();
