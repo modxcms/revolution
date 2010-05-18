@@ -212,9 +212,9 @@ class modPHPMailer extends modMail {
      *
      * {@inheritdoc}
      */
-    public function attach($file) {
+    public function attach($file,$name = '',$encoding = 'base64',$type = 'application/octet-stream') {
         parent :: attach($file);
-        $this->mailer->AddAttachment($file);
+        $this->mailer->AddAttachment($file,$name,$encoding,$type);
     }
 
     /**

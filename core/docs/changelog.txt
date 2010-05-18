@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added extra options to attaching with modPhpMailer; fixed bug in phpmailer that caused E_DEPRECATED errors
 - [#MODX-1912] Added manager logging to file/directory actions
 - [#MODX-1912] Added file/directory specific permissions to allow more fine-grained security on using the file manager
 - [#MODX-1972] Added OnTVInputRenderList, OnTVOutputRenderList, and OnTVOutputRenderPropertiesList System Events to allow you to return a path to specify where to look for custom TV files
