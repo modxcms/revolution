@@ -60,30 +60,46 @@ $adminGroup = $this->xpdo->getObject('modUserGroup',array(
     'name' => 'Administrator',
 ));
 if ($adminPolicy && $adminGroup) {
-    $access= $this->xpdo->newObject('modAccessContext');
-    $access->fromArray(array(
-      'target' => 'mgr',
-      'principal_class' => 'modUserGroup',
-      'principal' => $adminGroup->get('id'),
-      'authority' => 0,
-      'policy' => $adminPolicy->get('id'),
+    $access= $this->xpdo->getObject('modAccessContext',array(
+        'target' => 'mgr',
+        'principal_class' => 'modUserGroup',
+        'principal' => $adminGroup->get('id'),
+        'authority' => 0,
+        'policy' => $adminPolicy->get('id'),
     ));
-    $access->save();
+    if (!$access) {
+        $access = $this->xpdo->newObject('modAccessContext');
+        $access->fromArray(array(
+          'target' => 'mgr',
+          'principal_class' => 'modUserGroup',
+          'principal' => $adminGroup->get('id'),
+          'authority' => 0,
+          'policy' => $adminPolicy->get('id'),
+        ));
+        $access->save();
+    }
     unset($access);
 
-    $access= $this->xpdo->newObject('modAccessContext');
-    $access->fromArray(array(
+    $access = $this->xpdo->getObject('modAccessContext',array(
       'target' => 'web',
       'principal_class' => 'modUserGroup',
       'principal' => $adminGroup->get('id'),
       'authority' => 0,
       'policy' => $adminPolicy->get('id'),
     ));
-    $access->save();
+    if (!$access) {
+        $access= $this->xpdo->newObject('modAccessContext');
+        $access->fromArray(array(
+          'target' => 'web',
+          'principal_class' => 'modUserGroup',
+          'principal' => $adminGroup->get('id'),
+          'authority' => 0,
+          'policy' => $adminPolicy->get('id'),
+        ));
+        $access->save();
+    }
     unset($access);
 }
 unset($adminPolicy,$adminGroup);
-
-
 
 return true;
