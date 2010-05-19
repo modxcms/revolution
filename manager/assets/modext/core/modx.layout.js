@@ -52,6 +52,7 @@ MODx.Layout = function(config){
             ,width: 310
             ,minSize: 310
             ,maxSize: 800
+            ,autoHeight: true
             ,unstyled: true
             /*,collapseMode: 'mini'*/
             ,monitorResize: true

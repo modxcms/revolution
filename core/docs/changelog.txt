@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug caused by JS/CSS optimizations that would break left nav when too many resources were loaded
 - Fixed bug where access contexts for admin user were being duplicated on upgrades
 - Added extra options to attaching with modPhpMailer; fixed bug in phpmailer that caused E_DEPRECATED errors
 - [#MODX-1912] Added manager logging to file/directory actions
