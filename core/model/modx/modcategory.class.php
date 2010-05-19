@@ -58,96 +58,11 @@ class modCategory extends modAccessibleSimpleObject {
 
         /* if a new board */
         if ($saved && $isNew) {
-            $id = $this->get('id');
-            $parent = $this->get('parent');
-
-            /* create self closure */
-            $cl = $this->xpdo->newObject('modCategoryClosure');
-            $cl->set('ancestor',$id);
-            $cl->set('descendant',$id);
-            if ($cl->save() === false) {
-                $this->remove();
-                return false;
-            }
-
-            /* create closures and calculate rank */
-            $tableName = $this->xpdo->getTableName('modCategoryClosure');
-            $c = $this->xpdo->newQuery('modCategoryClosure');
-            $c->where(array(
-                'descendant' => $parent,
-            ));
-            $c->sortby('depth','DESC');
-            $gparents = $this->xpdo->getCollection('modCategoryClosure',$c);
-            $cgps = count($gparents);
-            $i = $cgps - 1;
-            $gps = array();
-            foreach ($gparents as $gparent) {
-                $depth = 0;
-                $ancestor = $gparent->get('ancestor');
-                if ($ancestor != 0) $depth = $i;
-                $obj = $this->xpdo->newObject('modCategoryClosure');
-                $obj->set('ancestor',$ancestor);
-                $obj->set('descendant',$id);
-                $obj->set('depth',$depth);
-                $obj->save();
-                $i--;
-                $gps[] = $ancestor;
-            }
-
-            /* handle 0 ancestor closure */
-            $rootcl = $this->xpdo->getObject('modCategoryClosure',array(
-                'ancestor' => 0,
-                'descendant' => $id,
-            ));
-            if (!$rootcl) {
-                $rootcl = $this->xpdo->newObject('modCategoryClosure');
-                $rootcl->set('ancestor',0);
-                $rootcl->set('descendant',$id);
-                $rootcl->set('depth',0);
-                $rootcl->save();
-            }
+            $this->buildClosure();
         }
         /* if parent changed on existing object, rebuild closure table */
-        if (!$new && $this->_parentChanged) {
-            /* first remove old tree path */
-            $this->xpdo->removeCollection('modCategoryClosure',array(
-                'descendant' => $this->get('id'),
-                'ancestor:!=' => $this->get('id'),
-            ));
-
-            /* now create new tree path from new parent */
-            $newParentId = $this->get('parent');
-            $c = $this->xpdo->newQuery('modCategoryClosure');
-            $c->where(array(
-                'descendant' => $newParentId,
-            ));
-            $c->sortby('depth','DESC');
-            $ancestors= $this->xpdo->getCollection('modCategoryClosure',$c);
-            $grandParents = array();
-            foreach ($ancestors as $ancestor) {
-                $depth = $ancestor->get('depth');
-                $grandParentId = $ancestor->get('ancestor');
-                /* if already has a depth, inc by 1 */
-                if ($depth > 0) $depth++;
-                /* if is the new parent node, set depth to 1 */
-                if ($grandParentId == $newParentId && $newParentId != 0) { $depth = 1; }
-                if ($grandParentId != 0) {
-                    $grandParents[] = $grandParentId;
-                }
-
-                $cl = $this->xpdo->newObject('modCategoryClosure');
-                $cl->set('ancestor',$ancestor->get('ancestor'));
-                $cl->set('descendant',$this->get('id'));
-                $cl->set('depth',$depth);
-                $cl->save();
-            }
-            /* if parent is root, make sure to set the root closure */
-            if ($newParentId == 0) {
-                $cl = $this->xpdo->newObject('modCategoryClosure');
-                $cl->set('ancestor',0);
-                $cl->set('descendant',$this->get('id'));
-                $cl->save();
-            }
+        if (!$isNew && $this->_parentChanged) {
+            $this->rebuildClosure();
         }
 
         if ($saved && $this->xpdo instanceof modX) {
@@ -225,8 +140,6 @@ class modCategory extends modAccessibleSimpleObject {
                 ':context' => $context,
             );
             $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-            $query->prepare();
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR, "modCategory {$this->get('id')}:{$this->get('category')} policy query: " . $query->toSQL());
             if ($query->stmt && $query->stmt->execute()) {
                 while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
                     $policy['modAccessCategory'][$row['target']][] = array(
@@ -240,14 +153,108 @@ class modCategory extends modAccessibleSimpleObject {
         } else {
             $policy = $this->_policies[$context];
         }
-        $this->xpdo->log(modX::LOG_LEVEL_ERROR, "modCategory {$this->get('id')}:{$this->get('category')} policies: " . print_r($policy, true));
         return $policy;
     }
 
     /**
-     * Sets the _parentChanged flag to true in order to force updates to the closure table on save().
+     * Build the closure table for this instance.
+     *
+     * @return boolean True unless building the closure fails and instance is removed.
      */
-    public function setParentChanged() {
-        $this->_parentChanged = true;
+    public function buildClosure() {
+        $id = $this->get('id');
+        $parent = $this->get('parent');
+
+        /* create self closure */
+        $cl = $this->xpdo->newObject('modCategoryClosure');
+        $cl->set('ancestor',$id);
+        $cl->set('descendant',$id);
+        if ($cl->save() === false) {
+            $this->remove();
+            return false;
+        }
+
+        /* create closures and calculate rank */
+        $tableName = $this->xpdo->getTableName('modCategoryClosure');
+        $c = $this->xpdo->newQuery('modCategoryClosure');
+        $c->where(array(
+            'descendant' => $parent,
+        ));
+        $c->sortby('depth','DESC');
+        $gparents = $this->xpdo->getCollection('modCategoryClosure',$c);
+        $cgps = count($gparents);
+        $i = $cgps - 1;
+        $gps = array();
+        foreach ($gparents as $gparent) {
+            $depth = 0;
+            $ancestor = $gparent->get('ancestor');
+            if ($ancestor != 0) $depth = $i;
+            $obj = $this->xpdo->newObject('modCategoryClosure');
+            $obj->set('ancestor',$ancestor);
+            $obj->set('descendant',$id);
+            $obj->set('depth',$depth);
+            $obj->save();
+            $i--;
+            $gps[] = $ancestor;
+        }
+
+        /* handle 0 ancestor closure */
+        $rootcl = $this->xpdo->getObject('modCategoryClosure',array(
+            'ancestor' => 0,
+            'descendant' => $id,
+        ));
+        if (!$rootcl) {
+            $rootcl = $this->xpdo->newObject('modCategoryClosure');
+            $rootcl->set('ancestor',0);
+            $rootcl->set('descendant',$id);
+            $rootcl->set('depth',0);
+            $rootcl->save();
+        }
+        return true;
+    }
+
+    /**
+     * Rebuild closure table records for this instance, i.e. parent changed.
+     */
+    public function rebuildClosure() {
+        /* first remove old tree path */
+        $this->xpdo->removeCollection('modCategoryClosure',array(
+            'descendant' => $this->get('id'),
+            'ancestor:!=' => $this->get('id'),
+        ));
+
+        /* now create new tree path from new parent */
+        $newParentId = $this->get('parent');
+        $c = $this->xpdo->newQuery('modCategoryClosure');
+        $c->where(array(
+            'descendant' => $newParentId,
+        ));
+        $c->sortby('depth','DESC');
+        $ancestors= $this->xpdo->getCollection('modCategoryClosure',$c);
+        $grandParents = array();
+        foreach ($ancestors as $ancestor) {
+            $depth = $ancestor->get('depth');
+            $grandParentId = $ancestor->get('ancestor');
+            /* if already has a depth, inc by 1 */
+            if ($depth > 0) $depth++;
+            /* if is the new parent node, set depth to 1 */
+            if ($grandParentId == $newParentId && $newParentId != 0) { $depth = 1; }
+            if ($grandParentId != 0) {
+                $grandParents[] = $grandParentId;
+            }
+
+            $cl = $this->xpdo->newObject('modCategoryClosure');
+            $cl->set('ancestor',$ancestor->get('ancestor'));
+            $cl->set('descendant',$this->get('id'));
+            $cl->set('depth',$depth);
+            $cl->save();
+        }
+        /* if parent is root, make sure to set the root closure */
+        if ($newParentId == 0) {
+            $cl = $this->xpdo->newObject('modCategoryClosure');
+            $cl->set('ancestor',0);
+            $cl->set('descendant',$this->get('id'));
+            $cl->save();
+        }
     }
 }

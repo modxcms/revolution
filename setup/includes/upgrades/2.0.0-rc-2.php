@@ -212,11 +212,13 @@ $this->processResults($class,$description,$sql);
 
 
 /* (re)build modCategoryClosure data */
-$class = 'modCategory';
+$class = 'modCategoryClosure';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['update_closure_table'], $class);
+$description = sprintf($this->install->lexicon['update_closure_table'], 'modCategory');
+$sql = "TRUNCATE TABLE {$table}";
+$this->processResults($class,$description,$sql);
+
 $categories = $this->install->xpdo->getCollection('modCategory');
 foreach ($categories as $category) {
-    $category->setParentChanged();
-    $category->save();
+    $category->buildClosure();
 }
