@@ -16,6 +16,14 @@ $xpdo_meta_map['modElement']= array (
       'owner' => 'local',
       'cardinality' => 'many',
     ),
+    'CategoryAcls' => 
+    array (
+      'class' => 'modAccessCategory',
+      'local' => 'category',
+      'foreign' => 'target',
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
   ),
   'composites' => 
   array (

@@ -37,3 +37,4 @@ $_lang['rename_table'] = 'Renamed table `%s` to `%s`.';
 $_lang['remove_fulltext_index'] = 'Removed full-text index `%s`.';
 $_lang['systemsetting_xtype_fix'] = 'Successfully fixed xtypes for modSystemSettings.';
 $_lang['transportpackage_manifest_text'] = 'Modified column `manifest` to TEXT from MEDIUMTEXT on `%s`.';
+$_lang['update_closure_table'] = 'Updating closure table data for class `%s`';

@@ -3,9 +3,9 @@
  * @package modx
  * @subpackage mysql
  */
-$xpdo_meta_map['modAccessResource']= array (
+$xpdo_meta_map['modAccessCategory']= array (
   'package' => 'modx',
-  'table' => 'access_resources',
+  'table' => 'access_category',
   'fields' => 
   array (
     'context_key' => '',
@@ -26,7 +26,7 @@ $xpdo_meta_map['modAccessResource']= array (
   array (
     'Target' => 
     array (
-      'class' => 'modResource',
+      'class' => 'modCategory',
       'local' => 'target',
       'foreign' => 'id',
       'owner' => 'foreign',

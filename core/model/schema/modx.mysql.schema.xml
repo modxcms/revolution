@@ -41,13 +41,22 @@
         <aggregate alias="Target" class="modActionDom" local="target" foreign="id" owner="foreign" cardinality="one" />
     </object>
     
+    <object class="modAccessCategory" table="access_category" extends="modAccess">
+        <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
+
+        <aggregate alias="Target" class="modCategory" local="target" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+    </object>
+    
     <object class="modAccessContext" table="access_context" extends="modAccess">
         <aggregate alias="Target" class="modContext" local="target" foreign="key" owner="foreign" cardinality="one" />
     </object>
     
     <object class="modAccessElement" table="access_elements" extends="modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
+
         <aggregate alias="Target" class="modElement" local="target" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
     
     <object class="modAccessTemplateVar" table="access_templatevars" extends="modAccessElement">
@@ -90,12 +99,14 @@
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
         
         <aggregate alias="Target" class="modResource" local="target" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
     
     <object class="modAccessResourceGroup" table="access_resource_groups" extends="modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
         
         <aggregate alias="Target" class="modResourceGroup" local="target" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
     
     <object class="modAction" table="actions" extends="modAccessibleSimpleObject">
@@ -141,7 +152,7 @@
         <aggregate alias="User" class="modUser" local="internalKey" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
-    <object class="modCategory" table="categories" extends="xPDOSimpleObject">
+    <object class="modCategory" table="categories" extends="modAccessibleSimpleObject">
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" index="index" />
         <field key="category" dbtype="varchar" precision="45" phptype="string" null="false" default="" index="unique" />
 
@@ -154,7 +165,11 @@
         <aggregate alias="Templates" class="modTemplate" local="id" foreign="category" cardinality="many" owner="local" />
         <aggregate alias="TemplateVars" class="modTemplateVar" local="id" foreign="category" cardinality="many" owner="local" />
         <aggregate alias="PropertySets" class="modPropertySet" local="id" foreign="category" cardinality="many" owner="local" />
-        
+        <composite alias="Acls" class="modAccessCategory" local="id" foreign="target" owner="local" cardinality="many" />
+
+        <composite alias="Ancestors" class="modCategoryClosure" local="id" foreign="ancestor" cardinality="many" owner="local" />
+        <composite alias="Descendants" class="modCategoryClosure" local="id" foreign="descendant" cardinality="many" owner="local" />
+
         <!-- LEGACY RELATIONSHIPS : PLEASE USE ABOVE -->
         <aggregate alias="modChunk" class="modChunk" key="id" local="id" foreign="category" cardinality="many" owner="local" />
         <aggregate alias="modSnippet" class="modSnippet" local="id" foreign="category" cardinality="many" owner="local" />
@@ -167,7 +182,16 @@
             <rule field="category" name="preventBlank" type="xPDOValidationRule" rule="xPDOMinLengthValidationRule" value="1" message="category_err_ns_name" />
         </validation>
     </object>
-    
+
+    <object class="modCategoryClosure" table="categories_closure" extends="xPDOObject">
+        <field key="ancestor" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
+        <field key="descendant" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
+        <field key="depth" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <aggregate alias="Ancestor" class="modCategory" local="ancestor" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Descendant" class="modCategory" local="descendant" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+
     <object class="modChunk" table="site_htmlsnippets" extends="modElement">
         <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="Chunk" />
@@ -233,6 +257,7 @@
     <object class="modElement" table="site_element" extends="modAccessibleSimpleObject">
         <aggregate alias="PropertySets" class="modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many" />
         <composite alias="Acls" class="modAccessElement" local="id" foreign="target" owner="local" cardinality="many" />
+        <aggregate alias="CategoryAcls" class="modAccessCategory" local="category" foreign="target" owner="local" cardinality="many" />
     </object>
     
     <object class="modElementPropertySet" table="element_property_sets" extends="xPDOObject">

@@ -7,6 +7,8 @@
  */
 /* handle new class creation */
 $classes = array(
+    'modAccessCategory',
+    'modCategoryClosure'
 );
 if (!empty($classes)) {
     $this->createTable($classes);
@@ -204,6 +206,17 @@ $description = sprintf($this->install->lexicon['add_column'],'api_key',$table);
 $sql = "ALTER TABLE {$table} ADD `api_key` VARCHAR(255) NOT NULL DEFAULT '' AFTER `service_url`";
 $this->processResults($class,$description,$sql);
 
-$description = sprintf($this->install->lexicon['add_index'],'api_key',$modUserTbl);
+$description = sprintf($this->install->lexicon['add_index'],'api_key',$table);
 $sql = "ALTER TABLE {$table} ADD INDEX `api_key` (`api_key`)";
 $this->processResults($class,$description,$sql);
+
+
+/* (re)build modCategoryClosure data */
+$class = 'modCategory';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['update_closure_table'], $class);
+$categories = $this->install->xpdo->getCollection('modCategory');
+foreach ($categories as $category) {
+    $category->setParentChanged();
+    $category->save();
+}

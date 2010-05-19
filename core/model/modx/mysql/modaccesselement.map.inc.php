@@ -32,5 +32,13 @@ $xpdo_meta_map['modAccessElement']= array (
       'owner' => 'foreign',
       'cardinality' => 'one',
     ),
+    'Context' => 
+    array (
+      'class' => 'modContext',
+      'local' => 'context_key',
+      'foreign' => 'key',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
   ),
 );

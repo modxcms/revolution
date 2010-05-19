@@ -203,8 +203,6 @@ class modAccessibleObject extends xPDOObject {
     /**
      * Find access policies applicable to this object in a specific context.
      *
-     * TODO: Write this.
-     *
      * @access protected
      * @param string $context A key identifying a specific context to use when
      * searching for the applicable policies. If not provided, the current
@@ -214,5 +212,13 @@ class modAccessibleObject extends xPDOObject {
      */
     public function findPolicy($context = '') {
         return array();
+    }
+
+    public function getPolicies() {
+        return $this->_policies;
+    }
+
+    public function setPolicies(array $policies = array()) {
+        $this->_policies = $policies;
     }
 }

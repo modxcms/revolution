@@ -42,6 +42,30 @@ $xpdo_meta_map['modCategory']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'Acls' => 
+    array (
+      'class' => 'modAccessCategory',
+      'local' => 'id',
+      'foreign' => 'target',
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
+    'Ancestors' => 
+    array (
+      'class' => 'modCategoryClosure',
+      'local' => 'id',
+      'foreign' => 'ancestor',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Descendants' => 
+    array (
+      'class' => 'modCategoryClosure',
+      'local' => 'id',
+      'foreign' => 'descendant',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
   ),
   'aggregates' => 
   array (

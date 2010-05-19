@@ -1482,10 +1482,14 @@ class modX extends xPDO {
         if (array_key_exists($snippetName, $this->sourceCache['modSnippet'])) {
             $snippet = $this->newObject('modSnippet');
             $snippet->fromArray($this->sourceCache['modSnippet'][$snippetName], '', true, true);
+            $snippet->setPolicies($this->sourceCache['modSnippet'][$snippetName]['policies']);
         } else {
             $snippet= $this->getObject('modSnippet', array ('name' => $snippetName), true);
             if (!empty($snippet)) {
-                $this->sourceCache['modSnippet'][$snippetName] = $snippet->toArray();
+                $this->sourceCache['modSnippet'][$snippetName] = array (
+                    'fields' => $snippet->toArray(),
+                    'policies' => $snippet->getPolicies()
+                );
             }
         }
         if (!empty($snippet)) {
@@ -1507,11 +1511,15 @@ class modX extends xPDO {
         $output= '';
         if (array_key_exists($chunkName, $this->sourceCache['modChunk'])) {
             $chunk = $this->newObject('modChunk');
-            $chunk->fromArray($this->sourceCache['modChunk'][$chunkName], '', true, true);
+            $chunk->fromArray($this->sourceCache['modChunk'][$chunkName]['fields'], '', true, true);
+            $chunk->setPolicies($this->sourceCache['modChunk'][$chunkName]['policies']);
         } else {
             $chunk= $this->getObject('modChunk', array ('name' => $chunkName), true);
             if (!empty($chunk) || $chunk === '0') {
-                $this->sourceCache['modChunk'][$chunkName]= $chunk->toArray();
+                $this->sourceCache['modChunk'][$chunkName]= array (
+                    'fields' => $chunk->toArray(),
+                    'policies' => $chunk->getPolicies()
+                );
             }
         }
         if (!empty($chunk) || $chunk === '0') {
