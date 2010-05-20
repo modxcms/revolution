@@ -45,6 +45,7 @@ MODx.grid.Lexicon = function(config) {
             ,id: 'modx-lexicon-filter-namespace'
             ,itemId: 'namespace'
             ,value: 'core'
+            ,width: 120
             ,listeners: {
                 'select': {fn: this.changeNamespace,scope:this}
             }
@@ -56,6 +57,7 @@ MODx.grid.Lexicon = function(config) {
             ,itemId: 'topic'
             ,value: 'default'
             ,pageSize: 20
+            ,width: 120
             ,listeners: {
                 'select': {fn:this.changeTopic,scope:this}
             }
@@ -67,6 +69,7 @@ MODx.grid.Lexicon = function(config) {
             ,id: 'modx-lexicon-filter-language'
             ,itemId: 'language'
             ,value: 'en'
+            ,width: 100
             ,listeners: {
                 'select': {fn:this.changeLanguage,scope:this}
             }
@@ -77,6 +80,7 @@ MODx.grid.Lexicon = function(config) {
             ,name: 'name'
             ,id: 'modx-lexicon-filter-search'
             ,itemId: 'search'
+            ,width: 120
             ,emptyText: _('search')+'...'
             ,listeners: {
                 'change': {fn:this.filter.createDelegate(this,['search'],true),scope:this}

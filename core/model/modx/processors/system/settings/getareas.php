@@ -24,10 +24,9 @@ $namespace = $modx->getOption('namespace',$scriptProperties,'');
 $c = $modx->newQuery('modSystemSetting');
 $c->select('
     `modSystemSetting`.`key`,
-    `modSystemSetting`.`area` AS `area`,
-    IF(`Area`.`value` IS NULL,`modSystemSetting`.`area`,`Area`.`value`) AS `name`
+    `modSystemSetting`.`area` AS `area`
 ');
-$c->leftJoin('modLexiconEntry','Area','CONCAT("area_",`modSystemSetting`.`area`) = `Area`.`name`');
+//$c->leftJoin('modLexiconEntry','Area','CONCAT("area_",`modSystemSetting`.`area`) = `Area`.`name`');
 if (!empty($namespace)) {
     $c->where(array(
         'modSystemSetting.namespace' => $namespace,
@@ -42,8 +41,16 @@ $areas = $modx->getCollection('modSystemSetting',$c);
 $list = array();
 foreach ($areas as $area) {
     $areaArray = $area->toArray();
+    if ($area->get('namespace') != 'core') {
+        $modx->lexicon->load($area->get('namespace').':default');
+    }
+    $name = $area->get('area');
+    $lex = 'area_'.$name;
+    if ($modx->lexicon->exists($lex)) {
+        $name = $modx->lexicon($lex);
+    }
     $list[] = array(
-        'd' => $area->get('name'),
+        'd' => $name,
         'v' => $area->get('area'),
     );
 }

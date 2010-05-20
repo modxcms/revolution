@@ -58,7 +58,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,id: 'modx-filter-clear'
         ,text: _('filter_clear')
         ,listeners: {
-        	'click': {fn: this.clearFilter, scope: this}
+            'click': {fn: this.clearFilter, scope: this}
         }
     });
 
@@ -68,17 +68,26 @@ MODx.grid.SettingsGrid = function(config) {
             ,dataIndex: 'name'
             ,sortable: true
             ,editor: { xtype: 'textfield' }
+            ,width: 150
+        },{
+            header: _('key')
+            ,dataIndex: 'key'
+            ,sortable: true
+            ,editable: false
+            ,width: 125
         },{
             header: _('value')
             ,dataIndex: 'value'
             ,sortable: true
             ,editable: true
             ,renderer: this.renderDynField.createDelegate(this,[this],true)
+            ,width: 260
         },{
             header: _('last_modified')
             ,dataIndex: 'editedon'
             ,sortable: true
             ,editable: false
+            ,width: 125
         },{
             header: _('area')
             ,dataIndex: 'area_text'
@@ -144,14 +153,15 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         return v;
     }
 
-	,clearFilter: function() {
+    ,clearFilter: function() {
     	this.getStore().baseParams = {
-    		action: 'getList'
+            action: 'getList'
     	};
         Ext.getCmp('modx-filter-namespace').reset();
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
             acb.store.baseParams['namespace'] = '';
+            acb.store.load();
             acb.reset();
         }
         Ext.getCmp('modx-filter-key').reset();
@@ -197,6 +207,7 @@ MODx.combo.Area = function(config) {
         ,valueField: 'v'
         ,fields: ['d','v']
         ,url: MODx.config.connectors_url+'system/settings.php'
+        ,pageSize: 20
         ,baseParams: {
             action: 'getAreas'
         }
