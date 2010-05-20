@@ -43,6 +43,13 @@ if (!function_exists('json_encode')) {
     die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>MODx requires the PHP JSON extension! You\'re PHP configuration at version '.MODX_SETUP_PHP_VERSION.' does not appear to have this extension enabled. This should be a standard extension on PHP 5.2+; it is available as a PECL extension in 5.1.</p></body></html>');
 }
 
+/* make sure date.timezone is set for PHP 5.3.0+ users */
+if (version_compare(MODX_SETUP_PHP_VERSION,'5.3.0') >= 0) {
+    $phptz = @ini_get('date.timezone');
+    if (empty($phptz)) {
+        die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini. Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
+    }
+}
 $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
 $installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
 $installBaseUrl .= $_SERVER['HTTP_HOST'];
