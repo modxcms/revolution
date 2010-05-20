@@ -16,6 +16,10 @@ $forced = true;
 $tv = $modx->getObject('modTemplateVar',$scriptProperties['id']);
 if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
 
+if (!$tv->checkPolicy('remove')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 /* get tv relational tables */
 $tv->templates = $tv->getMany('TemplateVarTemplates');
 $tv->resources = $tv->getMany('TemplateVarResources');

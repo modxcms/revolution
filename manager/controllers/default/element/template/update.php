@@ -10,6 +10,7 @@ if(!$modx->hasPermission('edit_template')) return $modx->error->failure($modx->l
 /* load template */
 $template = $modx->getObject('modTemplate',$_REQUEST['id']);
 if ($template == null) return $modx->error->failure($modx->lexicon('template_err_not_found'));
+if (!$template->checkPolicy('view')) return $modx->error->failure($modx->lexicon('access_denied'));
 if ($template->get('locked') && !$modx->hasPermission('edit_locked')) {
     return $modx->error->failure($modx->lexicon('template_err_locked'));
 }

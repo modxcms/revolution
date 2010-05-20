@@ -39,6 +39,7 @@ $class .= $modx->hasPermission('delete_category') ? ' pdelcat' : '';
 /* get and loop through categories */
 $categories = $modx->getCollection('modCategory',$c);
 foreach ($categories as $category) {
+    if (!$category->checkPolicy('list')) continue;
     $nodes[] = array(
         'text' => strip_tags($category->get('category')) . ' (' . $category->get('id') . ')',
         'id' => 'n_category_'.$category->get('id'),

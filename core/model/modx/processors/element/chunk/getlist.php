@@ -32,6 +32,7 @@ $chunks = $modx->getCollection('modChunk',$c);
 /* iterate through chunks */
 $list = array();
 foreach ($chunks as $chunk) {
+    if (!$chunk->checkPolicy('list')) continue;
     $list[] = $chunk->toArray();
 }
 

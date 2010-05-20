@@ -35,6 +35,7 @@ $class .= $modx->hasPermission('delete_category') ? ' pdelcat' : '';
 
 /* loop through categories */
 foreach ($categories as $category) {
+    if (!$category->checkPolicy('list')) continue;
     if ($category->get('elementCount') <= 0) continue;
 
     $nodes[] = array(
@@ -61,12 +62,13 @@ $c->sortby($elementIdentifier == 'template' ? 'templatename' : 'name','ASC');
 
 $elements = $modx->getCollection($elementClassKey,$c);
 foreach ($elements as $element) {
+    if (!$element->checkPolicy('list')) continue;
     $name = $elementIdentifier == 'template' ? $element->get('templatename') : $element->get('name');
 
     $class = 'icon-'.$elementIdentifier;
     $class .= $modx->hasPermission('new_'.$elementIdentifier) ? ' pnew' : '';
-    $class .= $modx->hasPermission('edit_'.$elementIdentifier) ? ' pedit' : '';
-    $class .= $modx->hasPermission('delete_'.$elementIdentifier) ? ' pdelete' : '';
+    $class .= $modx->hasPermission('edit_'.$elementIdentifier) && $element->checkPolicy(array('save','view')) ? ' pedit' : '';
+    $class .= $modx->hasPermission('delete_'.$elementIdentifier) && $element->checkPolicy('remove') ? ' pdelete' : '';
     $class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
     
     $nodes[] = array(

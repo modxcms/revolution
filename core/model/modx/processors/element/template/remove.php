@@ -15,6 +15,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $template = $modx->getObject('modTemplate',$scriptProperties['id']);
 if ($template == null) return $modx->error->failure($modx->lexicon('template_err_nf'));
 
+if (!$template->checkPolicy('remove')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 /* check to make sure it doesn't have any resources using it */
 $resources = $modx->getCollection('modResource',array(
     'deleted' => 0,

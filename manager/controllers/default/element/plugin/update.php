@@ -8,8 +8,11 @@
 if (!$modx->hasPermission('edit_plugin')) return $modx->error->failure($modx->lexicon('access_denied'));
 
 /* load plugin */
+if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
 $plugin = $modx->getObject('modPlugin',$_REQUEST['id']);
-if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_not_found'));
+if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
+if (!$plugin->checkPolicy('view')) return $modx->error->failure($modx->lexicon('access_denied'));
+
 $plugin->category = $plugin->getOne('Category');
 
 

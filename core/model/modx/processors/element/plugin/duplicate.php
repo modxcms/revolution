@@ -16,6 +16,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $old_plugin = $modx->getObject('modPlugin',$scriptProperties['id']);
 if ($old_plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
 
+if (!$old_plugin->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 /* format new name */
 $newname = !empty($scriptProperties['name']) ? $scriptProperties['name'] : $modx->lexicon('duplicate_of').$old_plugin->get('name');
 

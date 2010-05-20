@@ -32,6 +32,7 @@ $count = $modx->getCount('modPlugin');
 /* iterate through plugins */
 $list = array();
 foreach ($plugins as $plugin) {
+    if (!$plugin->checkPolicy('list')) continue;
     $list[] = $plugin->toArray();
 }
 

@@ -17,6 +17,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $old_snippet = $modx->getObject('modSnippet',$scriptProperties['id']);
 if (!$old_snippet) return $modx->error->failure($modx->lexicon('snippet_err_nf'));
 
+if (!$old_snippet->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 /* format new name */
 $newname = !empty($scriptProperties['name']) ? $scriptProperties['name'] : $modx->lexicon('duplicate_of').$old_snippet->get('name');
 

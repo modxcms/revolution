@@ -16,6 +16,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $old_chunk = $modx->getObject('modChunk',$scriptProperties['id']);
 if (empty($old_chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nf'));
 
+if (!$old_chunk->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 /* check name */
 $newname = !empty($scriptProperties['name']) ? $scriptProperties['name'] : $modx->lexicon('duplicate_of').$old_chunk->get('name');
 

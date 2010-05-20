@@ -15,6 +15,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $snippet = $modx->getObject('modSnippet',$scriptProperties['id']);
 if ($snippet == null) return $modx->error->failure($modx->lexicon('snippet_err_nf'));
 
+if (!$snippet->checkPolicy('view')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 $properties = $snippet->get('properties');
 if (!is_array($properties)) $properties = array();
 

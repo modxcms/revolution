@@ -31,6 +31,7 @@ $count = $modx->getCount('modTemplateVar');
 /* iterate through tvs */
 $list = array();
 foreach ($tvs as $tv) {
+    if (!$tv->checkPolicy('list')) continue;
     $list[] = $tv->toArray();
 }
 

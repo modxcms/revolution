@@ -18,6 +18,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $oldTemplate = $modx->getObject('modTemplate',$scriptProperties['id']);
 if (!$oldTemplate) return $modx->error->failure($modx->lexicon('template_err_nf'));
 
+if (!$oldTemplate->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 /* format new name */
 $newTemplateName = !empty($scriptProperties['name']) ? $scriptProperties['name'] : $modx->lexicon('duplicate_of').$old_template->get('templatename');
 

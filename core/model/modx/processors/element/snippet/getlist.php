@@ -31,6 +31,7 @@ $count = $modx->getCount('modSnippet');
 /* iterate through snippets */
 $list = array();
 foreach ($snippets as $snippet) {
+    if (!$snippet->checkPolicy('list')) continue;
     $list[] = $snippet->toArray();
 }
 

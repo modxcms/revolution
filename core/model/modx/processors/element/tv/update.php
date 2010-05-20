@@ -30,6 +30,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $tv = $modx->getObject('modTemplateVar',$scriptProperties['id']);
 if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
 
+if (!$tv->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 /* check locks */
 if ($tv->get('locked') && $modx->hasPermission('edit_locked') == false) {
     return $modx->error->failure($modx->lexicon('tv_err_locked'));

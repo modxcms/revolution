@@ -15,6 +15,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $template = $modx->getObject('modTemplate',$scriptProperties['id']);
 if ($template == null) return $modx->error->failure($modx->lexicon('template_err_nf'));
 
+if (!$template->checkPolicy('view')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 $properties = $template->get('properties');
 if (!is_array($properties)) $properties = array();
 

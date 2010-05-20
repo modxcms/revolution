@@ -42,6 +42,7 @@ if ($showNone) {
 
 /* iterate through categories */
 foreach ($categories as $category) {
+    if (!$category->checkPolicy('list')) continue;
     $categoryArray = $category->toArray();
 
     $childrenCount = $modx->getCount('modCategory',array('parent' => $category->get('id')));

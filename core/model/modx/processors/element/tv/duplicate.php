@@ -15,6 +15,10 @@ $modx->lexicon->load('tv');
 $old_tv = $modx->getObject('modTemplateVar',$scriptProperties['id']);
 if ($old_tv == null) return $modx->error->failure($modx->lexicon('tv_err_nf'));
 
+if (!$old_tv->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 $old_tv->templates = $old_tv->getMany('TemplateVarTemplates');
 $old_tv->resources = $old_tv->getMany('TemplateVarResources');
 $old_tv->resource_groups = $old_tv->getMany('TemplateVarResourceGroups');

@@ -24,6 +24,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $template = $modx->getObject('modTemplate',$scriptProperties['id']);
 if (!$template) return $modx->error->failure($modx->lexicon('template_err_not_found'));
 
+if (!$template->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 /* check locked status */
 if ($template->get('locked') && $modx->hasPermission('edit_locked') == false) {
     return $modx->error->failure($modx->lexicon('template_err_locked'));

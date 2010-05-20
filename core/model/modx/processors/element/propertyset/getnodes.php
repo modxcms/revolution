@@ -29,6 +29,7 @@ switch ($node[0]) {
         $categories = $modx->getCollection('modCategory',$c);
 
         foreach ($categories as $category) {
+            if (!$category->checkPolicy('list')) continue;
             $propertySets = $category->getMany('PropertySets');
             if (count($propertySets) < 1) continue;
 
@@ -180,6 +181,8 @@ switch ($node[0]) {
             $els = $modx->getCollection('modElementPropertySet',$c);
 
             foreach ($els as $el) {
+                $elem = $el->getOne('Element');
+                if (!$elem->checkPolicy('list')) continue;
                 $menu = array();
                 if ($hasRemove) {
                     $menu[] = array(

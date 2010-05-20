@@ -15,4 +15,6 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $category = $modx->getObject('modCategory',$scriptProperties['id']);
 if ($category == null) return $modx->error->failure($modx->lexicon('category_err_nf'));
 
+if (!$category->checkPolicy('view')) return $modx->error->failure($modx->lexicon('access_denied'));
+
 return $modx->error->success('',$category);

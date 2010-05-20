@@ -31,6 +31,7 @@ if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('plugin_er
 if (!empty($scriptProperties['category'])) {
     $category = $modx->getObject('modCategory',array('id' => $scriptProperties['category']));
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
+    if (!$category->checkPolicy('add_children')) return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
 if ($modx->error->hasError()) return $modx->error->failure();

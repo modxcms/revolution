@@ -15,6 +15,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $plugin = $modx->getObject('modPlugin',$scriptProperties['id']);
 if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
 
+if (!$plugin->checkPolicy('remove')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 /* remove plugin */
 if ($plugin->remove() == false) {
     return $modx->error->failure($modx->lexicon('plugin_err_remove'));

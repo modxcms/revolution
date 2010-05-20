@@ -16,6 +16,8 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $category = $modx->getObject('modCategory',$scriptProperties['id']);
 if ($category == null) return $modx->error->failure($modx->lexicon('category_err_nf'));
 
+if (!$category->checkPolicy('remove')) return $modx->error->failure($modx->lexicon('access_denied'));
+
 /* remove category */
 if ($category->remove() == false) {
     return $modx->error->failure($modx->lexicon('category_err_remove'));

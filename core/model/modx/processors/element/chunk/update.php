@@ -25,6 +25,11 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $chunk = $modx->getObject('modChunk',$scriptProperties['id']);
 if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $scriptProperties['id'])));
 
+/* check access */
+if (!$chunk->checkPolicy('save')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 /* if chunk is locked */
 if ($chunk->get('locked') && $modx->hasPermission('edit_locked') == false) {
     return $modx->error->failure($modx->lexicon('chunk_err_locked'));

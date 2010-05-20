@@ -36,6 +36,7 @@ $class .= $modx->hasPermission('delete_category') ? ' pdelcat' : '';
 
 /* loop through categories with elements in this type */
 foreach ($categories as $category) {
+    if (!$category->checkPolicy('list')) continue;
     if ($category->get('elementCount') == 0 && $category->get('childrenCount') <= 0 && $category->get('id') != 0) {
         continue;
     }
@@ -66,13 +67,14 @@ $elements = $modx->getCollection($elementClassKey,$c);
 
 /* loop through elements */
 foreach ($elements as $element) {
+    if (!$element->checkPolicy('list')) continue;
     /* handle templatename case */
     $name = $elementClassKey == 'modTemplate' ? $element->get('templatename') : $element->get('name');
 
     $class = 'icon-'.$g[1];
     $class .= $modx->hasPermission('new_'.$g[1]) ? ' pnew' : '';
-    $class .= $modx->hasPermission('edit_'.$g[1]) ? ' pedit' : '';
-    $class .= $modx->hasPermission('delete_'.$g[1]) ? ' pdelete' : '';
+    $class .= $modx->hasPermission('edit_'.$g[1]) && $element->checkPolicy(array('save','view')) ? ' pedit' : '';
+    $class .= $modx->hasPermission('delete_'.$g[1]) && $element->checkPolicy('remove') ? ' pdelete' : '';
     $class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
 
     $nodes[] = array(

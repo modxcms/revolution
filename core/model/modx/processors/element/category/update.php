@@ -16,6 +16,8 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $category = $modx->getObject('modCategory',$scriptProperties['id']);
 if ($category == null) return $modx->error->failure($modx->lexicon('category_err_nf'));
 
+if (!$category->checkPolicy('save')) return $modx->error->failure($modx->lexicon('access_denied'));
+
 /* set fields */
 $category->fromArray($scriptProperties);
 

@@ -15,6 +15,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $chunk = $modx->getObject('modChunk',$scriptProperties['id']);
 if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $scriptProperties['id'])));
 
+if (!$chunk->checkPolicy('remove')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 /* invoke OnBeforeChunkFormDelete event */
 $modx->invokeEvent('OnBeforeChunkFormDelete',array(
     'id' => $chunk->get('id'),

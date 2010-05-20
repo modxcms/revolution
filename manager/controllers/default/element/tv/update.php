@@ -10,6 +10,8 @@ if (!$modx->hasPermission('edit_tv')) return $modx->error->failure($modx->lexico
 /* get tv */
 $tv = $modx->getObject('modTemplateVar',$_REQUEST['id']);
 if ($tv == null) return $modx->error->failure($modx->lexicon('tv_err_not_found'));
+if (!$tv->checkPolicy('view')) return $modx->error->failure($modx->lexicon('access_denied'));
+
 if ($tv->get('locked') && !$modx->hasPermission('edit_locked')) {
     return $modx->error->failure($modx->lexicon('tv_err_locked'));
 }

@@ -14,6 +14,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $tv = $modx->getObject('modTemplateVar',$scriptProperties['id']);
 if (empty($tv)) return $modx->error->failure($modx->lexicon('tv_err_nfs',array('id' => $scriptProperties['id'])));
 
+if (!$tv->checkPolicy('view')) {
+    return $modx->error->failure($modx->lexicon('access_denied'));
+}
+
 $tv->set('els',$tv->get('elements'));
 $properties = $tv->get('properties');
 if (!is_array($properties)) $properties = array();

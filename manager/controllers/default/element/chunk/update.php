@@ -11,6 +11,7 @@ if (!$modx->hasPermission('edit_chunk')) return $modx->error->failure($modx->lex
 if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('chunk_err_ns'));
 $chunk = $modx->getObject('modChunk',$_REQUEST['id']);
 if (empty($chunk)) return $modx->error->failure($modx->lexicon('chunk_err_nfs',array('id' => $_REQUEST['id'])));
+if (!$chunk->checkPolicy('view')) return $modx->error->failure($modx->lexicon('access_denied'));
 
 if ($chunk->get('locked') && !$modx->hasPermission('edit_locked')) {
     return $modx->error->failure($modx->lexicon('chunk_err_locked'));
