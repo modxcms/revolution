@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Allow base-level Element Category ACL assignments
 - Fixed some issues with Settings grid and lexicons, key not being displayed, etc
 - [#MODX-1940] Resized lexicon grid toolbar to fit better in smaller resolutions;
 - [#MODX-1950] Adjusted permissions to allow proper listing of Elements; checks 'list' policy on Element now rather than view_[element]

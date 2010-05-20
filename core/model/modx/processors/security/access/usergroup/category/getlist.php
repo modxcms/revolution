@@ -33,7 +33,7 @@ $policy = $modx->getOption('policy',$scriptProperties,false);
 
 /* build query */
 $c = $modx->newQuery('modAccessCategory');
-$c->innerJoin('modCategory','Target');
+$c->leftJoin('modCategory','Target');
 $c->where(array(
     'principal_class' => 'modUserGroup',
     'principal' => $usergroup,
@@ -57,6 +57,7 @@ $acls = $modx->getCollection('modAccessCategory', $c);
 $list = array();
 foreach ($acls as $acl) {
     $aclArray = $acl->toArray();
+    if (empty($aclArray['name'])) $aclArray['name'] = '('.$modx->lexicon('none').')';
 
     $aclArray['menu'] = array(
         array(

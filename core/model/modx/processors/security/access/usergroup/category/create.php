@@ -8,15 +8,17 @@ $modx->lexicon->load('access','user','category');
 
 /* validate for empty fields */
 if (!isset($scriptProperties['principal'])) $modx->error->addField('principal',$modx->lexicon('usergroup_err_ns'));
-if (empty($scriptProperties['target'])) $modx->error->addField('target',$modx->lexicon('category_err_ns'));
 if (empty($scriptProperties['policy'])) $modx->error->addField('policy',$modx->lexicon('access_policy_err_ns'));
 if (!isset($scriptProperties['authority'])) $modx->error->addField('authority',$modx->lexicon('authority_err_ns'));
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
 /* validate for invalid data */
-$category = $modx->getObject('modCategory',$scriptProperties['target']);
-if (empty($category)) $modx->error->addField('target',$modx->lexicon('category_err_nf'));
+if (!empty($category)) {
+    $category = $modx->getObject('modCategory',$scriptProperties['target']);
+    if (empty($category)) $modx->error->addField('target',$modx->lexicon('category_err_nf'));
+    if (!$category->checkPolicy('view')) $modx->error->addField('target',$modx->lexicon('access_denied'));
+}
 
 $policy = $modx->getObject('modAccessPolicy',$scriptProperties['policy']);
 if (empty($policy)) $modx->error->addField('policy',$modx->lexicon('access_policy_err_nf'));
