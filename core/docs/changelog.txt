@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added UX for managing Element Category access for User Groups
 - Add modAccessCategory to allow context-specific security policies on modCategory as well as any modElement via the related modCategory; includes policy inheritance to sub-categories
 - Add modCategoryClosure table class to allow for easy recursive queries on modCategory
 - Fixed bug caused by JS/CSS optimizations that would break left nav when too many resources were loaded

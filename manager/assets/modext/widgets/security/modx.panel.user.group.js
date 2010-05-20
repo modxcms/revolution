@@ -129,6 +129,26 @@ MODx.panel.UserGroup = function(config) {
                         ,'createAcl': {fn:this.markDirty,scope:this}
                     }
                 }]
+            },{
+                title: _('user_group_category_access')
+                ,hidden: config.usergroup === 0 ? true : false
+                ,hideMode: 'offsets'
+                ,items: [{
+                    html: '<p>'+_('user_group_category_access_msg')+'</p>'
+                    ,border: false
+                },{
+                    xtype: 'modx-grid-user-group-category'
+                    ,preventRender: true
+                    ,usergroup: config.usergroup
+                    ,autoHeight: true
+                    ,width: '97%'
+                    ,listeners: {
+                        'afterRemoveRow': {fn:this.markDirty,scope:this}
+                        ,'afteredit': {fn:this.markDirty,scope:this}
+                        ,'updateAcl': {fn:this.markDirty,scope:this}
+                        ,'createAcl': {fn:this.markDirty,scope:this}
+                    }
+                }]
             }]
         }]
         ,useLoadingMask: true

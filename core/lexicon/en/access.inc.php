@@ -6,6 +6,13 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['access_category_management_msg'] = 'Manage User Group member access to Elements via Categories and optionally apply access policies.';
+$_lang['access_category_err_ae'] = 'An ACL for that Category already exists!';
+$_lang['access_category_err_nf'] = 'Category ACL not found.';
+$_lang['access_category_err_ns'] = 'Category ACL not specified.';
+$_lang['access_category_err_remove'] = 'An error occurred while trying to remove the Category ACL.';
+$_lang['access_category_remove'] = 'Remove Category Access';
+$_lang['access_category_update'] = 'Update Category Access';
 $_lang['access_confirm_remove'] = 'Are you sure you want to remove this security access control record?';
 $_lang['access_context_management_msg'] = 'Manage User Group member access to Contexts and optionally apply access policies.';
 $_lang['access_context_err_ae'] = 'An ACL for that Context already exists!';
@@ -58,9 +65,12 @@ $_lang['access_type_err_ns'] = 'Target type or id not specified!';
 $_lang['acl_add'] = 'Add Access Control';
 $_lang['authority'] = 'Authority';
 $_lang['authority_err_ns'] = 'Please specify a Minimum Role.';
+$_lang['category'] = 'Category';
+$_lang['category_add'] = 'Add Category';
 $_lang['filter_by_context'] = 'Filter by Context...';
 $_lang['filter_by_policy'] = 'Filter by Policy...';
 $_lang['filter_by_resource_group'] = 'Filter by Resource Group...';
+$_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['resource_group'] = 'Resource Group';
 $_lang['resource_group_add'] = 'Add Resource Group';
 $_lang['resource_group_access_remove'] = 'Remove Resource from Group';
@@ -79,6 +89,10 @@ $_lang['resource_group_resource_err_nf'] = 'The resource is not a part of that r
 $_lang['resource_group_resource_err_remove'] = 'An error occurred while trying to remove the resource from the resource group.';
 $_lang['resource_group_untitled'] = 'Untitled Resource Group';
 $_lang['roles_msg'] = 'A role is, by definition, a position or status one holds within a certain situation. They can be used to group Users into a position or status within a User Group. Roles in MODx also have what is called "Authority". This is a number value that can be any valid integer. Authority levels are "inheritable downward", in the sense that a Role with Authority 1 will inherit any and all Group Policies assigned to itself, and to any Roles with higher Authority level than 1.';
+$_lang['user_group_category_access'] = 'Element Category Access';
+$_lang['user_group_category_access_msg'] = 'Here you can set which Elements this User Group can access by the Categories the Elements are in.';
+$_lang['user_group_category_err_ae'] = 'User Group already has access to that Category.';
+$_lang['user_group_category_remove_confirm'] = 'Are you sure you want to remove this Category from this User Group?';
 $_lang['user_group_context_access'] = 'Context Access';
 $_lang['user_group_context_access_msg'] = 'Here you can set which Contexts this User Group can access.';
 $_lang['user_group_context_err_ae'] = 'User Group already has access to that context.';
