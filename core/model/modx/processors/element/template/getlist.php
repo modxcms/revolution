@@ -11,7 +11,6 @@
  * @package modx
  * @subpackage processors.element.template
  */
-if (!$modx->hasPermission('view_template')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('template');
 
 /* get default properties */

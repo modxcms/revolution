@@ -11,7 +11,6 @@
  * @package modx
  * @subpackage processors.element.category
  */
-if (!$modx->hasPermission('view_category')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('category');
 
 /* setup default properties */

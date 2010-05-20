@@ -11,7 +11,6 @@
  * @package modx
  * @subpackage processors.element.plugin
  */
-if (!$modx->hasPermission('view_plugin')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('plugin');
 
 /* setup default properties */

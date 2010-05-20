@@ -11,7 +11,6 @@
  * @package modx
  * @subpackage processors.element.chunk
  */
-if (!$modx->hasPermission('view_chunk')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('chunk');
 
 /* setup default properties */

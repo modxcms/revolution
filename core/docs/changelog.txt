@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1950] Adjusted permissions to allow proper listing of Elements; checks 'list' policy on Element now rather than view_[element]
 - [#MODX-1975] Added warning messages for PHP 5.2.0 and 5.1.6 versions in setup asking that users upgrade to 5.3.0+; will still allow installs, however, if the user has those versions
 - [#MODX-1967] Added warning to setup for people who are using PHP 5.3.0+ and dont have date.timezone set
 - Added proper permission checks to Elements/Categories across processors/controllers
