@@ -203,6 +203,7 @@ $_lang['toggle_warnings'] = 'Toggle Warnings';
 $_lang['username_err_invchars'] = 'Your username may not contain any invalid characters, such as /, \\, &apos;, &quot;, or {}.';
 $_lang['username_err_ns'] = 'Username is invalid';
 $_lang['version'] = 'version';
+$_lang['warning'] = 'Warning';
 $_lang['welcome'] = 'Welcome to the MODx installation program.';
 $_lang['welcome_message'] = '<p>This program will guide you through the rest of the installation.</p>
 	<p>Please select the `Next` button to continue:</p>

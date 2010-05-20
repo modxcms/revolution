@@ -47,14 +47,19 @@ abstract class modInstallTest {
         $phpVersion = phpversion();
         $php_ver_comp = version_compare($phpVersion,'5.1.1','>=');
         $php_ver_comp_516 = version_compare($phpVersion, '5.1.6','==');
+        $php_ver_comp_520 = strpos($phpVersion,'5.2.0') !== false;
         /* -1 if left is less, 0 if equal, +1 if left is higher */
         if (!$php_ver_comp) {
             $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span> - '.sprintf($this->install->lexicon['test_php_version_fail'],$phpVersion).'</p>';
             $this->results['php_version']['class'] = 'testFailed';
 
+        } else if ($php_ver_comp_520) {
+            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['warning'].'</span><p>'.sprintf($this->install->lexicon['test_php_version_520'],$phpVersion).'</p>';
+            $this->results['php_version']['class'] = 'testWarn';
+
         } else if ($php_ver_comp_516) {
-            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span><p>'.sprintf($this->install->lexicon['test_php_version_516'],$phpVersion).'</p>';
-            $this->results['php_version']['class'] = 'testFailed';
+            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['warning'].'</span><p>'.sprintf($this->install->lexicon['test_php_version_516'],$phpVersion).'</p>';
+            $this->results['php_version']['class'] = 'testWarn';
 
         } else {
             $this->results['php_version']['class'] = 'testPassed';
