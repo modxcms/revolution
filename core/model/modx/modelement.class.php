@@ -234,7 +234,7 @@ class modElement extends modAccessibleSimpleObject {
             $this->_output = $this->xpdo->elementCache[$this->_tag];
             $this->_processed = true;
         } else {
-	        $this->filterInput();
+	    $this->filterInput();
             $this->getContent(is_string($content) ? array('content' => $content) : array());
         }
         return $this->_result;
@@ -311,37 +311,17 @@ class modElement extends modAccessibleSimpleObject {
         $policy = array();
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (empty($this->_policies) || !isset($this->_policies[$context])) {
-            $accessTable = $this->xpdo->getTableName('modAccessElement');
-            $policyTable = $this->xpdo->getTableName('modAccessPolicy');
-            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
-                    "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
-                    "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
-                    "AND `Acl`.`target` = :element " .
-                    "GROUP BY `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`";
-            $bindings = array(
-                ':element' => $this->get('id'),
-                ':context' => $context,
-            );
-            $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-            if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $policy['modAccessElement'][$row['target']][] = array(
-                        'principal' => $row['principal'],
-                        'authority' => $row['authority'],
-                        'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
-                    );
-                }
-            }
             $accessTable = $this->xpdo->getTableName('modAccessCategory');
             $policyTable = $this->xpdo->getTableName('modAccessPolicy');
             $categoryClosureTable = $this->xpdo->getTableName('modCategoryClosure');
-            $sql = "SELECT `CategoryClosure`.`descendant` AS `target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
+            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
                     "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
                     "JOIN {$categoryClosureTable} `CategoryClosure` ON `CategoryClosure`.`descendant` = :category " .
                     "AND `Acl`.`principal_class` = 'modUserGroup' " .
-                    "AND (`CategoryClosure`.`ancestor` = `Acl`.`target` OR `CategoryClosure`.`descendant` = `Acl`.`target`) " .
+                    "AND `CategoryClosure`.`ancestor` = `Acl`.`target` " .
                     "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
-                    "GROUP BY `target`, `principal`, `authority`, `policy`";
+                    "GROUP BY `target`, `principal`, `authority`, `policy` " .
+                    "ORDER BY `CategoryClosure`.`depth` DESC, `authority` ASC";
             $bindings = array(
                 ':category' => $this->get('category'),
                 ':context' => $context,

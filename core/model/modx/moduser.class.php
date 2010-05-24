@@ -168,31 +168,6 @@ class modUser extends modPrincipal {
                             }
                         }
                         break;
-                    case 'modAccessElement' :
-                        $sql = "SELECT acl.target, acl.principal, mr.authority, acl.policy, p.data FROM {$accessTable} acl " .
-                                "LEFT JOIN {$policyTable} p ON p.id = acl.policy " .
-                                "JOIN {$memberTable} mug ON acl.principal_class = 'modUserGroup' " .
-                                "AND (acl.context_key = :context OR acl.context_key IS NULL OR acl.context_key = '') " .
-                                "AND mug.member = :principal " .
-                                "AND mug.user_group = acl.principal " .
-                                "JOIN {$memberRoleTable} mr ON mr.id = mug.role " .
-                                "AND mr.authority <= acl.authority " .
-                                "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
-                        $bindings = array(
-                            ':principal' => $this->get('id'),
-                            ':context' => $context
-                        );
-                        $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-                        if ($query->stmt && $query->stmt->execute()) {
-                            while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                                $this->_attributes[$context][$target][$row['target']][] = array(
-                                    'principal' => $row['principal'],
-                                    'authority' => $row['authority'],
-                                    'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
-                                );
-                            }
-                        }
-                        break;
                     default :
                         break;
                 }
@@ -239,7 +214,7 @@ class modUser extends modPrincipal {
                             }
                         }
                         break;
-                    case 'modAccessElement' :
+                    case 'modAccessCategory' :
                         $sql = "SELECT acl.target, acl.principal, 0 AS authority, acl.policy, p.data FROM {$accessTable} acl " .
                                 "LEFT JOIN {$policyTable} p ON p.id = acl.policy " .
                                 "WHERE acl.principal_class = 'modUserGroup' " .
