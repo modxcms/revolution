@@ -19,7 +19,14 @@ if (!empty($_REQUEST['parent'])) {
     }
 } else { $parent = null; }
 
-$delegateView= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
+/* handle custom resource types */
+$delegateView = dirname(__FILE__) . '/' . $resourceDir . '/';
+$delegateView = $modx->getOption(strtolower($resourceClass).'_delegate_path',null,$delegateView) . basename(__FILE__);
+$delegateView = str_replace(array('{core_path}','{assets_path}','{base_path}'),array(
+    $modx->getOption('core_path',null,MODX_CORE_PATH),
+    $modx->getOption('assets_path',null,MODX_ASSETS_PATH),
+    $modx->getOption('base_path',null,MODX_BASE_PATH),
+),$delegateView);
 if (file_exists($delegateView)) {
     $overridden= include ($delegateView);
     if ($overridden !== false) {
