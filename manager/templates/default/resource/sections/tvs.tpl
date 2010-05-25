@@ -22,13 +22,13 @@
         </th>
         <td class="x-form-element modx-tv-td">
             <input type="hidden" id="tvdef{$tv->id}" value="{$tv->default_text|escape}" />
-            {$tv->get('formElement')}  
+            {$tv->get('formElement')}
             <br class="clear" />
         </td>
         <td class="aleft modx-tv-td" style="width: 200px !important;">
             {if $tv->get('type') NEQ 'richtext'}
             <div class="ux-row-action" onclick="MODx.resetTV({$tv->get('id')});">
-                <div class="ux-row-action-item ux-row-action-text"><span>{$_lang.set_to_default}</span></div>
+                <div class="ux-row-action-item ux-row-action-text" id="modx-reset-tv-{$tv->id}"><span>{$_lang.set_to_default}</span></div>
             </div>
             {/if}
             {if $tv->get('inherited')}<br class="clear" /><em>({$_lang.tv_value_inherited})</em>{/if}            
