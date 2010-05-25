@@ -8,6 +8,7 @@
 if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('access_denied'));
 
 $resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument';
+$resourceClass = str_replace(array('../','..','/','\\'),'',$resourceClass);
 $resourceDir= strtolower(substr($resourceClass, 3));
 
 /* handle template inheritance */

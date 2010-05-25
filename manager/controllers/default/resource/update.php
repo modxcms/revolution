@@ -24,6 +24,7 @@ if (!empty($lockedBy) && $lockedBy !== true) {
 }
 
 $resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : $resource->get('class_key');
+$resourceClass = str_replace(array('../','..','/','\\'),'',$resourceClass);
 $resourceDir= strtolower(substr($resourceClass, 3));
 
 /* handle custom resource types */
