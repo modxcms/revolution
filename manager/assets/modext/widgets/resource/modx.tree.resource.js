@@ -585,9 +585,9 @@ MODx.window.QuickCreateResource = function(config) {
             ,anchor: '80%'
         },{
             xtype: 'textarea'
-            ,name: 'description'
-            ,id: 'modx-'+this.ident+'-description'
-            ,fieldLabel: _('description')
+            ,name: 'introtext'
+            ,id: 'modx-'+this.ident+'-introtext'
+            ,fieldLabel: _('introtext')
             ,anchor: '100%'
             ,rows: 2
         },{
@@ -672,9 +672,9 @@ MODx.window.QuickUpdateResource = function(config) {
             ,anchor: '80%'
         },{
             xtype: 'textarea'
-            ,name: 'description'
-            ,id: 'modx-'+this.ident+'-description'
-            ,fieldLabel: _('description')
+            ,name: 'introtext'
+            ,id: 'modx-'+this.ident+'-introtext'
+            ,fieldLabel: _('introtext')
             ,anchor: '100%'
             ,rows: 2
         },

@@ -199,6 +199,7 @@ $_lang['insert'] = 'Insert';
 $_lang['install'] = 'Install';
 $_lang['installed'] = 'Installed';
 $_lang['integer'] = 'Integer';
+$_lang['introtext'] = 'Introtext';
 $_lang['key'] = 'Key';
 $_lang['keyword'] = 'Keyword';
 $_lang['keywords'] = 'Keywords';
