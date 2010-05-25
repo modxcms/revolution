@@ -1,6 +1,6 @@
-<div style="float: right; z-index: 200000000; position: absolute; right: 19px">
-    <div class="ux-row-action" id="modx-tv-refresh" style="z-index: 200000000;"onclick="MODx.refreshTVs();">
-        <div class="ux-row-action-item ux-row-action-text" style="z-index: 200000000;"><span>{$_lang.reload}</span></div>
+<div class="modx-tv-reload-btn">
+    <div class="ux-row-action" id="modx-tv-refresh" onclick="MODx.refreshTVs();">
+        <div class="ux-row-action-item ux-row-action-text"><span>{$_lang.reload}</span></div>
     </div>
 </div>
 
@@ -16,9 +16,10 @@
     {foreach from=$category->tvs item=tv name='tv'}
     <tr class="{cycle values=',alt'} modx-tv-tr">
         <th width="150" class="aright modx-tv-th">
-            <label class="dashed" style="cursor: pointer;" title="{$tv->description}" for="tv{$tv->id}">{$tv->caption}</label>
+            <label for="tv{$tv->id}">{$tv->caption}</label>
             <br />
             <span class="tvtag">[[*{$tv->name}]]</span>
+            <br /><span class="tv-description">{$tv->description}</span>
         </th>
         <td class="x-form-element modx-tv-td">
             <input type="hidden" id="tvdef{$tv->id}" value="{$tv->default_text|escape}" />

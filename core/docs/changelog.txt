@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added description below TV rows in Resource edit
+- [#MODX-1853] Fixed issue where reload button was above MODx.Browser in TV pane
 - Switched Quick Create/Update Resource description field to more-used introtext field
 - [#MODX-1992] Fixed error in modSnippet preventing multiple executions per request
 - [#MODX-1983] Clarified package uninstall option message
