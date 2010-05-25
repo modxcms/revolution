@@ -501,7 +501,7 @@ class modInstall {
      */
     public function writeConfig(array &$results) {
         $written = false;
-        $configTpl = MODX_CORE_PATH . 'config/config.inc.tpl';
+        $configTpl = MODX_CORE_PATH . 'docs/config.inc.tpl';
         $configFile = MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
 
         $settings = $this->settings->fetch();
