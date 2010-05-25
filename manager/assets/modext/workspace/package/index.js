@@ -11,7 +11,11 @@ MODx.page.Package = function(config) {
             ,signature: MODx.request.signature
         }]
         ,buttons: [{
-            process: 'cancel', text: _('cancel'), params: {a:MODx.action['workspaces']}
+            process: 'cancel'
+            ,text: _('cancel')
+            ,handler: function() {
+                location.href= '?a='+MODx.action['workspaces'];
+            }
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane

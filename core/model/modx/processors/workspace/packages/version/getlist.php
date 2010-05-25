@@ -88,7 +88,7 @@ foreach ($packages as $key => $package) {
     if (!empty($metadata)) {
         foreach ($metadata as $row) {
             if (!empty($row['name']) && $row['name'] == 'description') {
-                $packageArray['readme'] = nl2br($row['text']);
+                $packageArray['readme'] = str_replace('<br /><br />','<br />',str_replace("\n",'',nl2br($row['text'])));
                 break;
             }
         }
@@ -96,7 +96,7 @@ foreach ($packages as $key => $package) {
         $transport = $package->getTransport();
         if ($transport) {
             $packageArray['readme'] = $transport->getAttribute('readme');
-            $packageArray['readme'] = nl2br($packageArray['readme']);
+            $packageArray['readme'] = str_replace('<br /><br />','<br />',str_replace("\n",'',nl2br($packageArray['readme'])));
         }
     }
     unset($packageArray['attributes']);

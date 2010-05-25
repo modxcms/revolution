@@ -14,7 +14,7 @@ MODx.panel.Package = function(config) {
             ,id: 'modx-package-header'
         },MODx.getPageStructure([{
             title: _('package')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,msgTarget: 'side' }
             ,layout: 'form'
             ,id: 'modx-package-form'
@@ -67,7 +67,7 @@ MODx.panel.Package = function(config) {
             }]
         },{
             title: _('uploaded_versions')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px;'
             ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
                 xtype: 'modx-grid-package-versions'

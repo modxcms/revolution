@@ -31,8 +31,10 @@ $packageArray = $package->toArray();
 
 /* get attributes */
 $transport = $package->getTransport();
-$packageArray['readme'] = $transport->getAttribute('readme');
-$packageArray['license'] = $transport->getAttribute('license');
+if ($transport) {
+    $packageArray['readme'] = $transport->getAttribute('readme');
+    $packageArray['license'] = $transport->getAttribute('license');
+}
 
 
 /* format timestamps */
