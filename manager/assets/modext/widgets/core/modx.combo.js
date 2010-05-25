@@ -91,6 +91,7 @@ MODx.combo.User = function(config) {
         ,displayField: 'username'
         ,valueField: 'id'
         ,fields: ['username','id']
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/user.php'
     });
     MODx.combo.User.superclass.constructor.call(this,config);
@@ -107,6 +108,7 @@ MODx.combo.UserGroup = function(config) {
         ,valueField: 'id'
         ,fields: ['name','id']
         ,listWidth: 300
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/group.php'
     });
     MODx.combo.UserGroup.superclass.constructor.call(this,config);
@@ -122,6 +124,7 @@ MODx.combo.UserGroupRole = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['name','id']
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/role.php'
     });
     MODx.combo.UserGroupRole.superclass.constructor.call(this,config);
@@ -137,6 +140,7 @@ MODx.combo.ResourceGroup = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['name','id']
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/resourcegroup.php'
     });
     MODx.combo.ResourceGroup.superclass.constructor.call(this,config);
@@ -152,6 +156,7 @@ MODx.combo.Context = function(config) {
         ,displayField: 'key'
         ,valueField: 'key'
         ,fields: ['key']
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'context/index.php'
     });
     MODx.combo.Context.superclass.constructor.call(this,config);
@@ -169,6 +174,7 @@ MODx.combo.Policy = function(config) {
         ,fields: ['name','id']
         ,allowBlank: false
         ,editable: false
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/access/policy.php'
     });
     MODx.combo.Policy.superclass.constructor.call(this,config);
@@ -295,6 +301,7 @@ MODx.combo.Role = function(config) {
         ,editable: false
         ,allowBlank: false
         ,listWidth: 300
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/role.php'
         ,baseParams: { action: 'getList', addNone: true }
     });
@@ -313,6 +320,7 @@ MODx.combo.ContentType = function(config) {
         ,editable: false
         ,allowBlank: false
         ,listWidth: 300
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'system/contenttype.php'
         ,baseParams: { action: 'getList' }
     });
@@ -336,6 +344,7 @@ MODx.combo.ContentDisposition = function(config) {
         ,mode: 'local'
         ,triggerAction: 'all'
         ,editable: false
+        ,pageSize: 20
         ,selectOnFocus: false
         ,preventRender: true
     });
@@ -394,6 +403,7 @@ MODx.combo.Namespace = function(config) {
         ,editable: false
         ,allowBlank: false
         ,listWidth: 300
+        ,pageSize: 20
         ,url: MODx.config.connectors_url+'workspace/namespace.php'
         ,fields: ['name']
         ,displayField: 'name'

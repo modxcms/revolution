@@ -218,32 +218,6 @@ Ext.extend(MODx.window.UpdateMenu,MODx.Window);
 Ext.reg('modx-window-menu-update',MODx.window.UpdateMenu);
 
 /** 
- * Displays a dropdown of modActions
- * 
- * @class MODx.combo.Action
- * @extends MODx.combo.ComboBox
- * @param {Object} config An object of options.
- * @xtype modx-combo-action
- */
-MODx.combo.Action = function(config) {
-    config = config || {};
-	Ext.applyIf(config,{
-		name: 'action'
-		,hiddenName: 'action'
-        ,url: MODx.config.connectors_url+'system/action.php'
-		,fields: ['id','controller']
-        ,displayField: 'controller'
-        ,valueField: 'id'
-		,listWidth: 300
-        ,editable: false
-	});
-	MODx.combo.Action.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.combo.Action,MODx.combo.ComboBox);
-Ext.reg('modx-combo-action',MODx.combo.Action);
-
-
-/** 
  * Displays a dropdown of modMenus
  * 
  * @class MODx.combo.Menu
