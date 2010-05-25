@@ -1481,7 +1481,7 @@ class modX extends xPDO {
         $output= '';
         if (array_key_exists($snippetName, $this->sourceCache['modSnippet'])) {
             $snippet = $this->newObject('modSnippet');
-            $snippet->fromArray($this->sourceCache['modSnippet'][$snippetName], '', true, true);
+            $snippet->fromArray($this->sourceCache['modSnippet'][$snippetName]['fields'], '', true, true);
             $snippet->setPolicies($this->sourceCache['modSnippet'][$snippetName]['policies']);
         } else {
             $snippet= $this->getObject('modSnippet', array ('name' => $snippetName), true);

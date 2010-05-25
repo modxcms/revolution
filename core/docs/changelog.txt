@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1992] Fix error in modSnippet preventing multiple executions per request
 - [#MODX-1983] Clarified package uninstall option message
 - [#MODX-1982] Fixed broken cancel button on Package View page
 - [#MODX-1989] Fixed incorrect var reference in getfiles processor
