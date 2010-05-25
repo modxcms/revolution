@@ -56,9 +56,12 @@ MODx.Layout = function(config){
             ,unstyled: true
             /*,collapseMode: 'mini'*/
             ,monitorResize: true
+            ,forceLayout: true
             ,items: [{
                  xtype: 'modx-tabs'
                 ,plain: true
+                ,forceLayout: true
+                ,deferredRender: false
                 ,defaults: {
                      autoScroll: true
                     ,fitToFrame: true
