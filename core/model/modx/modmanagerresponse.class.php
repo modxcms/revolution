@@ -112,7 +112,7 @@ class modManagerResponse extends modResponse {
                     $this->body .= include_once $controllersPath.'footer.php';
                 }
 
-
+                
             } else {
                 $this->body = $this->modx->error->failure($modx->lexicon('action_err_nfs',array(
                     'id' => $action,

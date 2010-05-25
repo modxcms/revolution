@@ -28,7 +28,8 @@ MODx.grid.PluginEvent = function(config) {
             plugin: config.plugin
         }
         ,enableColumnResize: true
-        ,enableColumnMove: true        
+        ,enableColumnMove: true
+        ,primaryKey: 'name'
         ,fields: ['name','service','groupname','enabled','priority','propertyset','menu']
         ,paging: false
         ,remoteSort: true

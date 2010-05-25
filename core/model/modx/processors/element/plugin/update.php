@@ -75,25 +75,20 @@ if ($plugin->save() == false) {
 if (isset($scriptProperties['events'])) {
     $_EVENTS = $modx->fromJSON($scriptProperties['events']);
     foreach ($_EVENTS as $id => $event) {
+        $pe = $modx->getObject('modPluginEvent',array(
+            'pluginid' => $plugin->get('id'),
+            'event' => $event['name'],
+        ));
         if ($event['enabled']) {
-            $pe = $modx->getObject('modPluginEvent',array(
-                'pluginid' => $plugin->get('id'),
-                'event' => $event['name'],
-            ));
-            if ($pe == null) {
+            if (!$pe) {
                 $pe = $modx->newObject('modPluginEvent');
+                $pe->set('pluginid',$plugin->get('id'));
+                $pe->set('event',$event['name']);
             }
-            $pe->set('pluginid',$plugin->get('id'));
-            $pe->set('event',$event['name']);
             $pe->set('priority',$event['priority']);
             $pe->set('propertyset',$event['propertyset']);
             $pe->save();
-        } else {
-            $pe = $modx->getObject('modPluginEvent',array(
-                'pluginid' => $plugin->get('id'),
-                'event' => $event['name'],
-            ));
-            if ($pe == null) continue;
+        } elseif ($pe) {
             $pe->remove();
         }
     }

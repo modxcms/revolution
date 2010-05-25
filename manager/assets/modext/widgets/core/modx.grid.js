@@ -342,7 +342,15 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         var p = this.getStore().getModifiedRecords();
         var rs = {};
         for (var i=0;i<p.length;i++) {
-            rs[p[i].data.id] = p[i].data;
+            rs[p[i].data[this.config.primaryKey || 'id']] = p[i].data;
+        }
+        return Ext.encode(rs);
+    }
+    ,encode: function() {
+        var p = this.getStore().getRange();
+        var rs = {};
+        for (var i=0;i<p.length;i++) {
+            rs[p[i].data[this.config.primaryKey || 'id']] = p[i].data;
         }
         return Ext.encode(rs);
     }
