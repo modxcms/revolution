@@ -59,7 +59,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
         }
         $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
         $files[] = array(
-            'id' => $filePathname,
+            'id' => $filePathName,
             'name' => $fileName,
             'cls' => 'icon-'.$fileExtension,
             'image' => $thumb,
