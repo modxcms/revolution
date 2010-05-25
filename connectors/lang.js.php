@@ -17,22 +17,22 @@ if (!empty($_REQUEST['topic'])) {
 
 $entries = $modx->lexicon->fetch();
 echo '
+MODx.lang = {';
+$s = '';
+while (list($k,$v) = each ($entries)) {
+    $s .= "'$k': ".'"'.esc($v).'",';
+}
+$s = trim($s,',');
+echo $s.'
+};
 var _ = function(s,v) {
-    var _lang = {';
-    $s = '';
-    while (list($k,$v) = each ($entries)) {
-        $s .= "'$k': ".'"'.esc($v).'",';
-    }
-    $s = trim($s,',');
-    echo $s.'
-    };
     if (v != null && typeof(v) == "object") {
-        var t = ""+_lang[s];
+        var t = ""+MODx.lang[s];
         for (var k in v) {
             t = t.replace("[[+"+k+"]]",v[k]);
         }
         return t;
-    } else return _lang[s];
+    } else return MODx.lang[s];
 }';
 
 function esc($s) {

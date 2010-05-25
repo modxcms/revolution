@@ -21,12 +21,13 @@ MODx.tree.Resource = function(config) {
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
         }
     });
-MODx.tree.Resource.superclass.constructor.call(this,config);
+    MODx.tree.Resource.superclass.constructor.call(this,config);
     this.on('render',function() {
         var el = Ext.get('modx-resource-tree');
         el.createChild({tag: 'div', id: 'modx-resource-tree_tb'});
         el.createChild({tag: 'div', id: 'modx-resource-tree_filter'});
     });
+    this.addEvents('loadCreateMenus');
 };
 Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     forms: {}
@@ -515,6 +516,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,'symlink': 'modSymLink'
             ,'static_resource': 'modStaticResource'
         };
+        var o = this.fireEvent('loadCreateMenus',types);
+        if (Ext.isObject(o)) {
+            Ext.apply(types,o);
+        }
         var ct = [];
         var qct = [];
         for (var k in types) {

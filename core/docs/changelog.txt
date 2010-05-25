@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added loadCreateMenus JS event to modx-resource-tree modext widget
+- Refactored js lang loading to allow for dynamic modification of strings
 - [#MODX-1993] Moved config.inc.tpl to core/docs to prevent confusion
 - Added description below TV rows in Resource edit
 - [#MODX-1853] Fixed issue where reload button was above MODx.Browser in TV pane
