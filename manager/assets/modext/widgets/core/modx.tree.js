@@ -161,7 +161,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                 this.root.firstChild.select();
                 this.root.firstChild.expand();
             }
-        } else { this.expandPath(treeState); }
+        } else {
+            this.expandPath(treeState);
+        }
     }
 	
     /**

@@ -11,7 +11,6 @@ MODx.tree.Directory = function(config) {
     Ext.applyIf(config,{
         rootVisible: false
         ,root_id: 'root'
-        ,root_name: _('files')
         ,title: _('files')
         ,ddAppendOnly: true
         ,enableDrag: true
@@ -39,6 +38,14 @@ MODx.tree.Directory = function(config) {
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
+    ,_initExpand: function() {
+        var treeState = Ext.state.Manager.get(this.treestate_id);
+        this.expandPath(treeState,'text');
+    }
+    ,_saveState: function(n) {
+        var p = n.getPath('text');
+        Ext.state.Manager.set(this.treestate_id,p);
+    }
     ,_handleDrop: function(e) { return false; }
     ,_showContextMenu: function(n,e) {
         n.select();
@@ -160,7 +167,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         path = path.replace(/^[\/\.]*/, '');
         return path+'/';
     }
-    
     
     ,renameNode: function(field,nv,ov) {
         MODx.Ajax.request({
