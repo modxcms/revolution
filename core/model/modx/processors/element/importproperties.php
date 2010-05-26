@@ -13,7 +13,7 @@ if (!isset($scriptProperties['file'])) return $modx->error->failure($modx->lexic
 $_FILE = $scriptProperties['file'];
 if ($_FILE['error'] != 0) return $modx->error->failure($modx->lexicon('properties_import_err_upload'));
 
-$o = file_get_contents($scriptProperties['tmp_name']);
+$o = file_get_contents($_FILE['tmp_name']);
 
 $properties = $modx->fromJSON($o);
 if (!is_array($properties)) {

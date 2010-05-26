@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug with import properties
 - [#MODX-1971] Allow ./- in Context key names, but not as first character
 - [#MODX-1997] Added ability to duplicate and set inactive/active Form Customization Rules, batch actions to Rule grid
 - Cleaned up profile editing page

@@ -976,7 +976,7 @@ MODx.window.ImportProperties = function(config) {
             html: _('properties_import_msg')
             ,id: 'modx-impp-desc'
             ,border: false
-            ,bodyStyle: 'margin: 1em;'
+            ,bodyStyle: 'margin: 10px;'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('file')
