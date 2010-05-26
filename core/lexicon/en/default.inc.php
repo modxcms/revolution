@@ -35,6 +35,7 @@ $_lang['attributes'] = 'Attributes';
 $_lang['back'] = '&lt;- Back';
 $_lang['backup'] = 'Backup';
 $_lang['bk_manager'] = 'Backup';
+$_lang['bulk_actions'] = 'Bulk Actions';
 $_lang['cache_files_deleted'] = 'The following files were deleted:';
 $_lang['cache_publish_event_error'] = '<p>ERROR: Could not determine next publish event!</p><pre>[[+info]]</pre>';
 $_lang['cache_sitepublishing_file_error'] = '<p>ERROR: Could not write site publishing file to cache.</p>';

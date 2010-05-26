@@ -28,14 +28,16 @@ Ext.reg('modx-panel-users',MODx.panel.Users);
 
 MODx.grid.User = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
-		url: MODx.config.connectors_url+'security/user.php'
-		,fields: ['id','username','fullname','email'
-            ,'gender','blocked','role','active','menu']
+
+    this.sm = new Ext.grid.CheckboxSelectionModel();
+    Ext.applyIf(config,{
+        url: MODx.config.connectors_url+'security/user.php'
+        ,fields: ['id','username','fullname','email','gender','blocked','role','active','menu']
         ,paging: true
-		,autosave: true
+        ,autosave: true
         ,remoteSort: true
-        ,columns: [{
+        ,sm: this.sm
+        ,columns: [this.sm,{
             header: _('id')
             ,dataIndex: 'id'
             ,width: 50
@@ -68,11 +70,26 @@ MODx.grid.User = function(config) {
             ,width: 80
             ,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
         }]
-		,tbar: [{
+        ,tbar: [{
             text: _('user_new')
             ,handler: this.createUser
             ,scope: this
         },'-',{
+            text: _('bulk_actions')
+            ,menu: [{
+                text: _('selected_activate')
+                ,handler: this.activateSelected
+                ,scope: this
+            },{
+                text: _('selected_deactivate')
+                ,handler: this.deactivateSelected
+                ,scope: this
+            },'-',{
+                text: _('selected_remove')
+                ,handler: this.removeSelected
+                ,scope: this
+            }]
+        },'->',{
             xtype: 'textfield'
             ,name: 'query'
             ,itemId: 'fld-search'
@@ -90,8 +107,68 @@ MODx.grid.User = function(config) {
 	MODx.grid.User.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.User,MODx.grid.Grid,{
-	createUser: function() {
+    createUser: function() {
         location.href = 'index.php?a='+MODx.action['security/user/create'];
+    }
+
+    ,activateSelected: function() {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'activateMultiple'
+                ,users: cs
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.getSelectionModel().clearSelections(true);
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        return true;
+    }
+    ,deactivateSelected: function() {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'deactivateMultiple'
+                ,users: cs
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.getSelectionModel().clearSelections(true);
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        return true;
+    }
+    ,removeSelected: function() {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        MODx.msg.confirm({
+            title: _('user_remove_multiple')
+            ,text: _('user_remove_multiple_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'removeMultiple'
+                ,users: cs
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.getSelectionModel().clearSelections(true);
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        return true;
     }
     
     ,remove: function() {
@@ -113,16 +190,16 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         location.href = 'index.php?a='+MODx.action['security/user/update']+'&id='+this.menu.record.id;
     }
     				
-	,rendGender: function(d,c) {
-		switch(d.toString()) {
-			case '0':
-				return '-';
-			case '1':
-				return _('male');
-			case '2':
-				return _('female');
-		}
-	}
+    ,rendGender: function(d,c) {
+        switch(d.toString()) {
+            case '0':
+                return '-';
+            case '1':
+                return _('male');
+            case '2':
+                return _('female');
+        }
+    }
     
     ,search: function(tf,nv,ov) {
         this.getStore().baseParams = {

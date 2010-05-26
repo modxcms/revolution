@@ -2028,3 +2028,8 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-portal-space {
     margin-bottom: 5px;
 }
+
+
+.x-grid3-body .x-grid3-td-checker {
+    background-image: none !important;
+}

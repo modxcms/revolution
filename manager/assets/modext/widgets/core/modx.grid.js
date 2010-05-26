@@ -320,6 +320,18 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 return _('yes');
         }
     }
+
+,getSelectedAsList: function() {
+        var sels = this.getSelectionModel().getSelections();
+        if (sels.length <= 0) return false;
+
+        var cs = '';
+        for (var i=0;i<sels.length;i++) {
+            cs += ','+sels[i].data.id;
+        }
+        cs = Ext.util.Format.substr(cs,1);
+        return cs;
+    }
     
     ,editorYesNo: function(r) {
     	r = r || {};
