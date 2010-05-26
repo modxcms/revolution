@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1995] Fixed issues regarding sending password via email with new users
 - [#MODX-1549] Preserve file tree state
 - [#MODX-1810] Gender now saves correctly in user panel
 - [#MODX-1635] Redirect to Users grid after creating a new user

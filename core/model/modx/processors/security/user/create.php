@@ -62,7 +62,7 @@ if ($user->profile->save() == false) {
 if ($scriptProperties['passwordnotifymethod'] == 'e') {
     $message = $modx->getOption('signupemail_message');
     $placeholders = array(
-        'uid' => $user->profile->get('email'),
+        'uid' => $user->get('username'),
         'pwd' => $newPassword,
         'ufn' => $user->profile->get('fullname'),
         'sname' => $modx->getOption('site_name'),

@@ -770,6 +770,8 @@ class modUser extends modPrincipal {
         if (empty($profile)) return false;
 
         $this->xpdo->getService('mail', 'mail.modPHPMailer');
+        if (!$this->xpdo->mail) return false;
+        
         $this->xpdo->mail->set(modMail::MAIL_BODY, $message);
         $this->xpdo->mail->set(modMail::MAIL_FROM, $this->xpdo->getOption('from',$options,$this->xpdo->getOption('emailsender')));
         $this->xpdo->mail->set(modMail::MAIL_FROM_NAME, $this->xpdo->getOption('fromName',$options,$this->xpdo->getOption('site_name')));
@@ -777,11 +779,11 @@ class modUser extends modPrincipal {
         $this->xpdo->mail->set(modMail::MAIL_SUBJECT, $this->xpdo->getOption('subject',$options,$this->xpdo->getOption('emailsubject')));
         $this->xpdo->mail->address('to',$profile->get('email'),$profile->get('fullname'));
         $this->xpdo->mail->address('reply-to',$this->xpdo->getOption('sender',$options,$this->xpdo->getOption('emailsender')));
-        $this->xpdo->mail->setHTML($this->xpdo->getOption('html',$options,false));
+        $this->xpdo->mail->setHTML($this->xpdo->getOption('html',$options,true));
         if ($this->xpdo->mail->send() == false) {
             return false;
         }
-        $modx->mail->reset();
+        $this->xpdo->mail->reset();
         return true;
     }
 }
