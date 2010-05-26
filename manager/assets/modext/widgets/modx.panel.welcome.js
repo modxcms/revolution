@@ -37,12 +37,12 @@ MODx.panel.Welcome = function(config) {
                 ,items: [{
                     title: _('modx_news')
                     ,contentEl: 'modx-news'
-					,cls: 'x-panel-header x-portal-space'
+                    ,cls: 'x-panel-header x-portal-space'
                     ,hidden: config.newsEnabled ? false : true
                 },{
                     title: _('recent_docs')
                     ,id: 'modx-recent'
-					,cls: 'x-panel-header x-portal-space'
+                    ,cls: 'x-panel-header x-portal-space'
                     ,collapsed: true
                     ,hidden: MODx.hasViewDocument == 1 ? false : true
                     ,items: [{
