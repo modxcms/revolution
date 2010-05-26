@@ -128,9 +128,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             m.push('-');
             m.push({
                 text: _('file_folder_remove')
-                ,handle: function(itm,e) {
-                    this.remove('file_folder_confirm_remove');
-                }
+                ,handler: this.removeDirectory
             });
         }
         return m;
@@ -234,7 +232,23 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         this.windows.chmod.setValues(r);
         this.windows.chmod.show(e.target);
     }
-    
+
+    ,removeDirectory: function(item,e) {
+        var node = this.cm.activeNode;
+        MODx.msg.confirm({
+            text: _('file_folder_remove_confirm')
+            ,url: MODx.config.connectors_url+'browser/directory.php'
+            ,params: {
+                action: 'remove'
+                ,dir: node.id
+                ,prependPath: this.config.prependPath || null
+            }
+            ,listeners: {
+                'success':{fn:this.refreshParentNode,scope:this}
+            }
+        });
+    }
+
     ,removeFile: function(item,e) {
         var node = this.cm.activeNode;
         MODx.msg.confirm({
