@@ -45,6 +45,11 @@ $fullpath = $root.$dir;
 
 $relativeRootPath = $modx->fileHandler->postfixSlash($root);
 
+$editAction = false;
+$act = $modx->getObject('modAction',array('controller' => 'system/file/edit'));
+if ($act) { $editAction = $act->get('id'); }
+
+
 /* iterate through directories */
 foreach (new DirectoryIterator($fullpath) as $file) {
     if (in_array($file,array('.','..','.svn','_notes'))) continue;
@@ -80,15 +85,17 @@ foreach (new DirectoryIterator($fullpath) as $file) {
         $cls = 'icon-file icon-'.$ext;
         if ($canRemoveFile) $cls .= ' premove';
         if ($canUpdateFile) $cls .= ' pupdate';
+        $encFile = rawurlencode($filePathName);
         $files[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
             'cls' => $cls,
             'type' => 'file',
             'leaf' => true,
+            'page' => !empty($editAction) ? '?a='.$editAction.'&file='.$encFile : null,
             'perms' => $octalPerms,
             'path' => $relativeRootPath.$fileName,
-            'file' => rawurlencode($filePathName),
+            'file' => $encFile,
         );
     }
 }
