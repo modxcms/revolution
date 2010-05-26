@@ -216,3 +216,157 @@ MODx.combo.Area = function(config) {
 };
 Ext.extend(MODx.combo.Area,MODx.combo.ComboBox);
 Ext.reg('modx-combo-area',MODx.combo.Area);
+
+
+MODx.window.CreateSetting = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('setting_create')
+        ,width: 500
+        ,url: config.url
+        ,action: 'create'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'fk'
+            ,id: 'modx-cs-fk'
+            ,value: config.fk || 0
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('key')
+            ,name: 'key'
+            ,id: 'modx-cs-key'
+            ,maxLength: 100
+            ,width: 200
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'name'
+            ,id: 'modx-cs-name'
+            ,allowBlank: false
+            ,width: 200
+        },{
+            xtype: 'modx-combo-xtype-spec'
+            ,fieldLabel: _('xtype')
+            ,description: _('xtype_desc')
+            ,id: 'modx-cs-xtype'
+            ,width: 200
+        },{
+            xtype: 'modx-combo-namespace'
+            ,fieldLabel: _('namespace')
+            ,name: 'namespace'
+            ,id: 'modx-cs-namespace'
+            ,value: 'core'
+            ,width: 200
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('area_lexicon_string')
+            ,description: _('area_lexicon_string_msg')
+            ,name: 'area'
+            ,id: 'modx-cs-area'
+            ,width: 200
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('value')
+            ,name: 'value'
+            ,id: 'modx-cs-value'
+            ,width: 200
+        },{
+            xtype: 'textarea'
+            ,fieldLabel: _('description')
+            ,name: 'description'
+            ,id: 'modx-cs-description'
+            ,allowBlank: true
+            ,width: 250
+        }]
+    });
+    MODx.window.CreateSetting.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.CreateSetting,MODx.Window);
+Ext.reg('modx-window-setting-create',MODx.window.CreateSetting);
+
+
+MODx.combo.xType = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        store: new Ext.data.SimpleStore({
+            fields: ['d','v']
+            ,data: [[_('textfield'),'textfield'],[_('textarea'),'textarea'],[_('yesno'),'combo-boolean']]
+        })
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,mode: 'local'
+        ,name: 'xtype'
+        ,hiddenName: 'xtype'
+        ,triggerAction: 'all'
+        ,editable: false
+        ,selectOnFocus: false
+        ,value: 'textfield'
+    });
+    MODx.combo.xType.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.xType,Ext.form.ComboBox);
+Ext.reg('modx-combo-xtype-spec',MODx.combo.xType);
+
+
+MODx.window.UpdateSetting = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('setting_update')
+        ,width: 450
+        ,url: config.grid.config.url
+        ,action: 'update'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'fk'
+            ,id: 'modx-us-fk'
+            ,value: config.fk || 0
+        },{
+            xtype: 'statictextfield'
+            ,fieldLabel: _('key')
+            ,name: 'key'
+            ,id: 'modx-us-key'
+            ,submitValue: true
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'name'
+            ,id: 'modx-us-name'
+            ,allowBlank: false
+        },{
+            xtype: 'modx-combo-xtype-spec'
+            ,name: 'xtype'
+            ,hiddenName: 'xtype'
+            ,id: 'modx-us-xtype'
+            ,fieldLabel: _('xtype')
+            ,description: _('xtype_desc')
+        },{
+            xtype: 'modx-combo-namespace'
+            ,fieldLabel: _('namespace')
+            ,name: 'namespace'
+            ,id: 'modx-us-namespace'
+            ,value: 'core'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('area_lexicon_string')
+            ,description: _('area_lexicon_string_msg')
+            ,name: 'area'
+            ,id: 'modx-us-area'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('value')
+            ,name: 'value'
+            ,id: 'modx-us-value'
+            ,width: 250
+        },{
+            xtype: 'textarea'
+            ,fieldLabel: _('description')
+            ,name: 'description'
+            ,id: 'modx-us-description'
+            ,allowBlank: true
+            ,width: 250
+        }]
+    });
+    MODx.window.UpdateSetting.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.UpdateSetting,MODx.Window);
+Ext.reg('modx-window-setting-update',MODx.window.UpdateSetting);

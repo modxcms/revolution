@@ -7,21 +7,21 @@
  * @xtype modx-window-resource-duplicate
  */
 MODx.window.DuplicateResource = function(config) {
-	config = config || {};
+    config = config || {};
     this.ident = config.ident || 'dupres'+Ext.id();
-	Ext.applyIf(config,{
-		title: _('duplication_options')
+    Ext.applyIf(config,{
+        title: _('duplication_options')
         ,id: this.ident
-		,width: 400
-	});
-	MODx.window.DuplicateResource.superclass.constructor.call(this,config);
+        ,width: 400
+    });
+    MODx.window.DuplicateResource.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
     _loadForm: function() {
         if (this.checkIfLoaded(this.config.record)) {
             this.fp.getForm().baseParams = {
-                    action: 'duplicate'
-                    ,id: this.config.resource
+                action: 'duplicate'
+                ,id: this.config.resource
             };
             return false;
         }

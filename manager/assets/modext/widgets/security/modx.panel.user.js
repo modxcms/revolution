@@ -12,7 +12,12 @@ MODx.panel.User = function(config) {
         ,id: 'modx-panel-user'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,bodyStyle: ''
-        ,items: {
+        ,items: [{
+             html: '<h2>'+_('user_new')+'</h2>'
+            ,border: false
+            ,cls: 'modx-page-header'
+            ,id: 'modx-user-header'
+        },{
             xtype: 'modx-tabs'
             ,deferredRender: false
             ,border: true
@@ -23,7 +28,7 @@ MODx.panel.User = function(config) {
                 ,bodyStyle: 'padding: 15px;'
             }
             ,items: this.getFields(config)
-        }
+        }]
         ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
@@ -58,7 +63,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         var s = g.getStore();
                         if (s) { s.loadData(d); }
                     }
-                    
+                    Ext.get('modx-user-header').update('<h2>'+_('user')+': '+r.object.username+'</h2>');
                     this.fireEvent('ready',r.object);
                 },scope:this}
             }
@@ -206,6 +211,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,name: 'username'
                     ,fieldLabel: _('username')
                     ,xtype: 'textfield'
+                    ,width: 300
                 },{
                     id: 'modx-user-active'
                     ,name: 'active'

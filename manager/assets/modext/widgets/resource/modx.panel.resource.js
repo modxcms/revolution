@@ -4,7 +4,7 @@ MODx.panel.Resource = function(config) {
         title: _('resource_content')
         ,id: 'modx-resource-content'
         ,layout: 'form'
-        ,bodyStyle: 'padding: 1.5em;'
+        ,bodyStyle: 'padding: 15px;'
         ,autoHeight: true
         ,collapsible: false
         ,items: {
