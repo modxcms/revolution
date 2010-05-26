@@ -74,7 +74,6 @@ MODx.orm.Form = function(config) {
             ,name: 'remote_name'
             ,fieldLabel: _('name')
             ,anchor: '95%'
-            ,allowBlank: false
         },{
             xtype: 'textfield'
             ,name: 'remote_value'

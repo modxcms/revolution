@@ -306,6 +306,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 },{
                     id: 'modx-user-gender'
                     ,name: 'gender'
+                    ,hiddenName: 'gender'
                     ,fieldLabel: _('user_gender')
                     ,xtype: 'modx-combo-gender'
                 },{
