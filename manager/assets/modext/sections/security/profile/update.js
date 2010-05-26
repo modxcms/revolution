@@ -9,21 +9,9 @@
 MODx.page.Profile = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
-        tabs: [
-            {contentEl: 'modx-tab-information', title: _('information')}
-            ,{contentEl: 'modx-tab-stats', title: _('statistics')}
-        ]
-        ,components: [{
-            xtype: 'modx-panel-profile-update'
-            ,renderTo: 'modx-info-panel-div'
-            ,user: config.user
-        },{
-            xtype: 'modx-panel-profile-password-change'
-            ,renderTo: 'modx-password-change-panel-div'
-            ,user: config.user
-        },{
-            xtype: 'modx-grid-user-recent-resource'
-            ,renderTo: 'modx-grid-recent-resource-div'
+        components: [{
+            xtype: 'modx-panel-profile'
+            ,renderTo: 'modx-panel-profile-div'
             ,user: config.user
         }]
 	});
@@ -31,6 +19,53 @@ MODx.page.Profile = function(config) {
 };
 Ext.extend(MODx.page.Profile,MODx.Component);
 Ext.reg('modx-page-profile',MODx.page.Profile);
+
+MODx.panel.Profile = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        id: 'modx-panel-profile'
+        ,url: MODx.config.connectors_url+'security/profile.php'
+        ,layout: 'fit'
+        ,bodyStyle: 'background: none;'
+        ,border: false
+        ,items: [{
+            html: '<h2>'+_('profile')+'</h2>'
+            ,id: 'modx-profile-header'
+            ,cls: 'modx-page-header'
+            ,border: false
+            ,autoHeight: true
+            ,anchor: '100%'
+        },MODx.getPageStructure([{
+            xtype: 'modx-panel-profile-update'
+            ,user: config.user
+            ,preventRender: true
+        },{
+            xtype: 'modx-panel-profile-password-change'
+            ,user: config.user
+            ,preventRender: true
+        },{
+            title: _('profile_recent_resources')
+            ,bodyStyle: 'padding: 15px;'
+            ,id: 'modx-profile-recent-docs'
+            ,autoHeight: true
+            ,items: [{
+                html: '<p>'+_('profile_recent_resources_desc')+'</p><br />'
+                ,id: 'modx-profile-recent-docs-msg'
+                ,border: false
+            },{
+                xtype: 'modx-grid-user-recent-resource'
+                ,user: config.user
+                ,preventRender: true
+            }]
+        }],{
+            border: true
+            ,defaults: { bodyStyle: 'padding: 15px; '}
+        })]
+    });
+    MODx.panel.Profile.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.panel.Profile,MODx.Panel);
+Ext.reg('modx-panel-profile',MODx.panel.Profile);
 
 /**
  * The information panel for the profile
@@ -51,7 +86,7 @@ MODx.panel.UpdateProfile = function(config) {
             ,id: config.user
         }
         ,layout: 'form'
-        ,frame: true
+        ,buttonAlign: 'center'
         ,items: [{
             xtype: 'textfield'
             ,fieldLabel: _('user_full_name')
@@ -147,6 +182,7 @@ MODx.panel.ChangeProfilePassword = function(config) {
         }
         ,frame: true
         ,layout: 'form'
+        ,buttonAlign: 'center'
         ,items: [{
             xtype: 'checkbox'
             ,fieldLabel: _('reset_password')

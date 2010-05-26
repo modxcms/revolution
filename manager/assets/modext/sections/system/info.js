@@ -13,23 +13,10 @@ Ext.onReady(function() {
 MODx.page.SystemInfo = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
-
             components: [{
                 xtype: 'modx-panel-system-info'
                 ,renderTo: 'modx-panel-system-info-div'
             }]
-            /*
-        components: []
-        ,tabs: [{
-            contentEl: 'modx-tab-server', title: _('server')
-        },{
-            contentEl: 'modx-tab-resources', title: _('activity_title')
-        },{
-            contentEl: 'modx-tab-database', title: _('database_tables')
-        },{
-            contentEl: 'modx-tab-users', title: _('onlineusers_title')
-        }]
-        */
 	});
 	MODx.page.SystemInfo.superclass.constructor.call(this,config);
 };
