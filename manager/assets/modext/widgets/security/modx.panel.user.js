@@ -84,6 +84,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
     }
     
     ,success: function(o) {
+        var userId = this.config.user;
         if (Ext.getCmp('modx-user-passwordnotifymethod-s').getValue() === true && o.result.message != '') {
             Ext.Msg.hide();
             Ext.Msg.show({
@@ -91,14 +92,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,msg: o.result.message
                 ,buttons: Ext.Msg.OK
                 ,fn: function(btn) {
-                    if (btn == 'ok') {
-                        /*location.href = '?a='+MODx.action['security/user/update']+'&id='+o.result.object.id;*/
+                    if (userId == 0) {
+                        location.href = '?a='+MODx.action['security/user']+'&id='+o.result.object.id;
                     }
                     return false;
                 }
             });
-        } else if (this.config.user == 0) {
-            location.href = '?a='+MODx.action['security/user/update']+'&id='+o.result.object.id;
+        } else if (userId == 0) {
+            location.href = '?a='+MODx.action['security/user']+'&id='+o.result.object.id;
         }
     }
     

@@ -263,7 +263,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             case 'new': /* if user selected 'new', then always redirect */
                 if (o.form.hasListener('actionNew')) {
                     o.form.fireEvent('actionNew',itm.params);
-                } else {
+                } else if (o.actions) {
                     if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
                     if (MODx.request.context_key) { itm.params.context_key = MODx.request.context_key; }
                     var a = Ext.urlEncode(itm.params);
@@ -274,7 +274,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 var url;
                 if (o.form.hasListener('actionContinue')) {
                     o.form.fireEvent('actionContinue',itm.params);
-                } else {
+                } else if (o.actions) {
                     /* if Continue Editing, then don't reload the page - just hide the Progress bar
                        unless the user is on a 'Create' page...if so, then redirect
                        to the proper Edit page */
@@ -295,7 +295,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             case 'close': /* redirect to the cancel action */
                 if (o.form.hasListener('actionClose')) {
                     o.form.fireEvent('actionClose',itm.params);
-                } else {
+                } else if (o.actions) {
                     location.href = '?a='+o.actions.cancel+'&'+a;
                 }
                 break;

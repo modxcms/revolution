@@ -11,14 +11,9 @@ Ext.onReady(function() {
  * @xtype modx-page-user-create
  */
 MODx.page.CreateUser = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-	   formpanel: 'modx-panel-user'
-       ,actions: {
-            'new': MODx.action['security/user/create']
-            ,edit: MODx.action['security/user/update']
-            ,cancel: MODx.action['security/user']
-       }
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-user'
         ,buttons: [{
             process: 'create', text: _('save'), method: 'remote'
             ,checkDirty: true
@@ -33,7 +28,6 @@ MODx.page.CreateUser = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-user'
             ,renderTo: 'modx-panel-user-div'
