@@ -23,15 +23,15 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
 /* query for rules */
 $c = $modx->newQuery('modActionDom');
-$c->select('
-    `modActionDom`.*,
-    `Action`.`controller` AS `controller`,
-    `Access`.`principal` AS `principal`,
-    `Access`.`principal_class` AS `principal_class`
-');
 $c->innerJoin('modAction','Action');
 $c->leftJoin('modAccessActionDom','Access');
 $count = $modx->getCount('modActionDom',$c);
+$c->select(array(
+    'modActionDom.*',
+    'Action.controller',
+    'Access.principal',
+    'Access.principal_class',
+));
 
 $c->sortby($sort,$dir);
 if ($limit) $c->limit($limit,$start);
@@ -53,6 +53,10 @@ foreach ($rules as $rule) {
         $ruleArray['menu'][] = array(
             'text' => $modx->lexicon('edit'),
             'handler' => 'this.updateRule',
+        );
+        $ruleArray['menu'][] = array(
+            'text' => $modx->lexicon('duplicate'),
+            'handler' => 'this.duplicateRule',
         );
         $ruleArray['menu'][] = '-';
     }

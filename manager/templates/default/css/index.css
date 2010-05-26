@@ -273,6 +273,9 @@ textarea.x-form-field {
     background-position: -32px 2px;
 }
 
+.grid-row-inactive {
+    color: #999 !important;
+}
 
 /* action buttons bar */
 #modAB {

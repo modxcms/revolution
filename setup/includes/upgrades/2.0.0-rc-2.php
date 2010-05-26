@@ -222,3 +222,14 @@ $categories = $this->install->xpdo->getCollection('modCategory');
 foreach ($categories as $category) {
     $category->buildClosure();
 }
+
+/* add active field and index to modActionDom */
+$class = 'modActionDom';
+$table = $this->install->xpdo->getTableName($class);
+$description = sprintf($this->install->lexicon['add_column'],'active',$table);
+$sql = "ALTER TABLE {$table} ADD `active` TINYINT(1) NOT NULL DEFAULT '1' AFTER `constraint_class`";
+$this->processResults($class,$description,$sql);
+
+$description = sprintf($this->install->lexicon['add_index'],'active',$table);
+$sql = "ALTER TABLE {$table} ADD INDEX `active` (`active`)";
+$this->processResults($class,$description,$sql);

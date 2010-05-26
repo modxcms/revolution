@@ -11,6 +11,8 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $rule = $modx->getObject('modActionDom',$scriptProperties['id']);
 if ($rule == null) return $modx->error->failure($modx->lexicon('rule_err_nf'));
 
+$scriptProperties['active'] = !empty($scriptProperties['active']) ? 1 : 0;
+
 /* set fields */
 $rule->fromArray($scriptProperties);
 $rule->set('action',$scriptProperties['action_id']);

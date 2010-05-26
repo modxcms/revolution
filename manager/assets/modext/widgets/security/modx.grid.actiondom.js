@@ -1,5 +1,6 @@
 MODx.grid.ActionDom = function(config) {
-    config = config || {};    
+    config = config || {};
+    this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         id: 'modx-grid-actiondom'
         ,url: MODx.config.connectors_url+'security/forms/rule.php'
@@ -7,10 +8,11 @@ MODx.grid.ActionDom = function(config) {
             ,'action','controller'
             ,'principal','principal_class'
             ,'name','description','xtype','container','rule','value'
-            ,'constraint','constraint_class','constraint_field','menu']
+            ,'constraint','constraint_class','constraint_field','active','menu']
         ,paging: true
         ,autosave: false
-        ,columns: [{
+        ,sm: this.sm
+        ,columns: [this.sm,{
             header: _('id')
             ,dataIndex: 'id'
             ,width: 40
@@ -41,10 +43,35 @@ MODx.grid.ActionDom = function(config) {
             ,editor: { xtype: 'modx-combo-usergroup' ,renderer: true }
             ,editable: false
         }]
+        ,viewConfig: {
+            forceFit:true
+            ,enableRowBody:true
+            ,scrollOffset: 0
+            ,autoFill: true
+            ,showPreview: true
+            ,getRowClass : function(rec, ri, p){
+                return rec.data.active ? 'grid-row-active' : 'grid-row-inactive';
+            }
+        }
         ,tbar: [{
             text: _('add')
             ,scope: this
             ,handler: { xtype: 'modx-window-actiondom-create' ,blankValues: true }
+        },'-',{
+            text: _('bulk_actions')
+            ,menu: [{
+                text: _('selected_activate')
+                ,handler: this.activateSelected
+                ,scope: this
+            },{
+                text: _('selected_deactivate')
+                ,handler: this.deactivateSelected
+                ,scope: this
+            },'-',{
+                text: _('selected_remove')
+                ,handler: this.removeSelected
+                ,scope: this
+            }]
         }]
     });
     MODx.grid.ActionDom.superclass.constructor.call(this,config);
@@ -63,6 +90,78 @@ Ext.extend(MODx.grid.ActionDom,MODx.grid.Grid,{
                 },scope:this}
             }
         });
+    }
+    ,duplicateRule: function(btn,e) {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'duplicate'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
+
+    ,activateSelected: function() {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'activateMultiple'
+                ,rules: cs
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.getSelectionModel().clearSelections(true);
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        return true;
+    }
+    ,deactivateSelected: function() {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'deactivateMultiple'
+                ,rules: cs
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.getSelectionModel().clearSelections(true);
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        return true;
+    }
+    ,removeSelected: function() {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+
+        MODx.msg.confirm({
+            title: _('rule_remove_multiple')
+            ,text: _('rule_remove_multiple_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'removeMultiple'
+                ,rules: cs
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.getSelectionModel().clearSelections(true);
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        return true;
     }
 });
 Ext.reg('modx-grid-actiondom',MODx.grid.ActionDom);
@@ -156,6 +255,14 @@ MODx.window.CreateActionDom = function(config) {
             ,id: 'modx-'+this.ident+'-constraint'
             ,xtype: 'textfield'
             ,width: 200
+        },{
+            fieldLabel: _('active')
+            ,description: _('active_desc')
+            ,name: 'active'
+            ,id: 'modx-'+this.ident+'-active'
+            ,xtype: 'checkbox'
+            ,value: 1
+            ,checked: true
         }]
     });
     MODx.window.CreateActionDom.superclass.constructor.call(this,config);
@@ -257,6 +364,13 @@ MODx.window.UpdateActionDom = function(config) {
             ,id: 'modx-'+this.ident+'-constraint'
             ,xtype: 'textfield'
             ,width: 200
+        },{
+            fieldLabel: _('active')
+            ,description: _('active_desc')
+            ,name: 'active'
+            ,id: 'modx-'+this.ident+'-active'
+            ,xtype: 'checkbox'
+            ,value: 1
         }]
     });
     MODx.window.UpdateActionDom.superclass.constructor.call(this,config);

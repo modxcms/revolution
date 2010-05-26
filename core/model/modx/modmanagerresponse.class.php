@@ -154,6 +154,7 @@ class modManagerResponse extends modResponse {
         $principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
         $c->where(array(
             'action' => $action,
+            'active' => true,
             array(
                 array(
                     'Access.principal_class:=' => 'modUserGroup',
