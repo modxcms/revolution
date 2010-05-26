@@ -63,7 +63,7 @@ $xpdo_meta_map['modContext']= array (
         'key' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/^[a-zA-Z\\x7f-\\xff][a-zA-Z0-9\\x7f-\\xff]*$/',
+          'rule' => '/^[a-zA-Z\\x7f-\\xff][a-zA-Z0-9\\x2d-\\x2f\\x7f-\\xff]*$/',
           'message' => 'context_err_ns_key',
         ),
       ),

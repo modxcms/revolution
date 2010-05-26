@@ -228,7 +228,7 @@
         <composite alias="ContextSettings" class="modContextSetting" local="key" foreign="context_key" cardinality="many" owner="local" />
         <composite alias="Acls" class="modAccessContext" local="key" foreign="target" owner="local" cardinality="many" />
         <validation>
-            <rule field="key" name="key" type="preg_match" rule="/^[a-zA-Z\x7f-\xff][a-zA-Z0-9\x7f-\xff]*$/" message="context_err_ns_key" />
+            <rule field="key" name="key" type="preg_match" rule="/^[a-zA-Z\x7f-\xff][a-zA-Z0-9\x2d-\x2f\x7f-\xff]*$/" message="context_err_ns_key" />
         </validation>
     </object>
 
