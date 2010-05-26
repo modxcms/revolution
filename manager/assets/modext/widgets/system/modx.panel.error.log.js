@@ -19,6 +19,7 @@ MODx.panel.ErrorLog = function(config) {
             ,bodyStyle: 'padding: 15px;'
             ,hideLabels: true
             ,autoHeight: true
+            ,border: true
             ,buttonAlign: 'center'
             ,items: [{
                 html: '<p>'+_('error_log_desc')+'</p>'
@@ -27,6 +28,7 @@ MODx.panel.ErrorLog = function(config) {
                 xtype: 'textarea'
                 ,name: 'log'
                 ,grow: true
+                ,growMax: 400
                 ,anchor: '98%'
             }]
         }]

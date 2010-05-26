@@ -39,6 +39,7 @@ $_lang['optimize_table_err'] = 'Error optimizing table';
 $_lang['server'] = 'Server';
 $_lang['servertime'] = 'Server Time';
 $_lang['serveroffset'] = 'Server Offset';
+$_lang['sysinfo_desc'] = 'Here you can view general information about your MODx environment.';
 $_lang['view_sysinfo'] = 'System Info';
 $_lang['table_prefix'] = 'Table prefix';
 $_lang['truncate_table'] = 'Click here to truncate this table';
