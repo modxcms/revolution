@@ -103,7 +103,7 @@ Ext.onReady(function() {
 </script>');
 
 if ($modx->getOption('welcome_screen',null,false)) {
-    $url = 'http://svn.modxcms.com/docs/display/revolution/Welcome+to+Revolution+2.0.0-rc1';
+    $url = $modx->getOption('welcome_screen_url',null,'http://svn.modxcms.com/docs/display/revolution/Welcome+to+Revolution+2.0');
     $modx->regClientStartupHTMLBlock('<script type="text/javascript">
 // <![CDATA[
 Ext.onReady(function() { MODx.loadWelcomePanel("'.$url.'"); });

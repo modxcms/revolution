@@ -1013,6 +1013,15 @@ $settings['welcome_screen']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
+$settings['welcome_screen_url']->fromArray(array (
+  'key' => 'welcome_screen_url',
+  'value' => 'http://svn.modxcms.com/docs/display/revolution/Welcome+to+Revolution+2.0',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['which_editor']= $xpdo->newObject('modSystemSetting');
 $settings['which_editor']->fromArray(array (
   'key' => 'which_editor',
@@ -1022,5 +1031,4 @@ $settings['which_editor']->fromArray(array (
   'area' => 'editor',
   'editedon' => null,
 ), '', true, true);
-
 return $settings;
