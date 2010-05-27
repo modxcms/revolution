@@ -37,26 +37,6 @@ if (file_exists($delegateView)) {
 
 $resource = $modx->newObject($resourceClass);
 
-/* handle switch template */
-if (isset ($_REQUEST['newtemplate'])) {
-	foreach ($_POST as $key => $val) {
-		$resource->set($key,$val);
-	}
-    $resource->set('content',$_POST['ta']);
-    $pub_date = $resource->get('pub_date');
-    if (!empty($pub_date) && $pub_date != '') {
-        list ($d, $m, $Y, $H, $M, $S) = sscanf($pub_date, "%2d-%2d-%4d %2d:%2d:%2d");
-        $pub_date = strtotime("$m/$d/$Y $H:$M:$S");
-        $resource->set('pub_date',$pub_date);
-    }
-    $unpub_date = $resource->get('unpub_date');
-    if (!empty($unpub_date) && $unpub_date != '') {
-        list ($d, $m, $Y, $H, $M, $S) = sscanf($unpub_date, "%2d-%2d-%4d %2d:%2d:%2d");
-        $unpub_date = strtotime("$m/$d/$Y $H:$M:$S");
-        $resource->set('unpub_date',$unpub_date);
-    }
-}
-
 /* invoke OnDocFormPrerender event */
 $onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
     'id' => 0,
@@ -71,15 +51,15 @@ $modx->smarty->assign('onDocFormPrerender',$onDocFormPrerender);
 $parentname = $modx->getOption('site_name');
 $resource->set('parent',0);
 if (isset ($_REQUEST['parent'])) {
-	if ($_REQUEST['parent'] == 0) {
-		$parentname = $modx->getOption('site_name');
-	} else {
-		$parent = $modx->getObject('modResource',$_REQUEST['parent']);
-		if ($parent != null) {
-		  $parentname = $parent->get('pagetitle');
-		  $resource->set('parent',$parent->get('id'));
+    if ($_REQUEST['parent'] == 0) {
+        $parentname = $modx->getOption('site_name');
+    } else {
+        $parent = $modx->getObject('modResource',$_REQUEST['parent']);
+        if ($parent != null) {
+            $parentname = $parent->get('pagetitle');
+            $resource->set('parent',$parent->get('id'));
         }
-	}
+    }
 }
 $modx->smarty->assign('parentname',$parentname);
 
@@ -130,6 +110,17 @@ if ($modx->getOption('use_editor') && !empty($rte)) {
     }
 }
 
+/* set default template */
+$default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $modx->getOption('default_template')));
+$fcDt = $modx->getObject('modActionDom',array(
+    'action' => $this->action['id'],
+    'name' => 'template',
+    'container' => 'modx-panel-resource',
+    'rule' => 'fieldDefault',
+));
+if ($fcDt) {
+    $default_template = $fcDt->get('value');
+}
 
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
@@ -145,7 +136,7 @@ MODx.onDocFormRender = "'.$onDocFormRender.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-resource-create"
-        ,template: "'.(isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $modx->getOption('default_template'))).'"
+        ,template: "'.$default_template.'"
         ,content_type: "1"
         ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument').'"
         ,context_key: "'.(isset($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web').'"
