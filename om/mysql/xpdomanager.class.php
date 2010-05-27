@@ -114,7 +114,8 @@ class xPDOManager_mysql extends xPDOManager {
 
     public function removeObjectContainer($className) {
         $removed= false;
-        if ($instance= $this->xpdo->newObject($className)) {
+        $instance= $this->xpdo->newObject($className);
+        if ($instance) {
             $sql= 'DROP TABLE ' . $this->xpdo->getTableName($className);
             $removed= $this->xpdo->exec($sql);
             if ($removed === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
@@ -129,11 +130,11 @@ class xPDOManager_mysql extends xPDOManager {
 
     public function createObjectContainer($className) {
         $created= false;
-        if ($instance= $this->xpdo->newObject($className)) {
+        $instance= $this->xpdo->newObject($className);
+        if ($instance) {
             $tableName= $this->xpdo->getTableName($className);
-            $existsStmt = $this->xpdo->prepare("SELECT COUNT(*) FROM {$tableName}");
-            $exists = $existsStmt->execute();
-            if ($exists && $existsStmt->fetchAll()) {
+            $existsStmt = $this->xpdo->query("SELECT COUNT(*) FROM {$tableName}");
+            if ($existsStmt && $existsStmt->fetchAll()) {
                 return true;
             }
             $tableMeta= $this->xpdo->getTableMeta($className);
