@@ -48,8 +48,8 @@
     <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" classpathref="project.classpath" />
     <taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask" classpathref="project.classpath" />
 
-    <!-- ================================= 
-          target: complete              
+    <!-- =================================
+          target: complete
          ================================= -->
     <target name="complete" description="--> Complete Build">
         <antcall target="svn-export-build-image"></antcall>
@@ -64,9 +64,9 @@
         <antcall target="prepare-build-image"></antcall>
         <antcall target="copy-core-transport"></antcall>
         <!--<antcall target="generate-phpdocs"></antcall>-->
-        
+
         <buildnumber />
-        
+
         <!--<antcall target="build-sdk"></antcall>-->
         <antcall target="build-traditional"></antcall>
         <antcall target="build-advanced"></antcall>
@@ -128,19 +128,19 @@
     <target name="modext-minify" depends="cleanup-build-modext-image" description="Create minimized MODExt scripts from the working copy">
         <echo>Creating minimized js scripts from your working copy</echo>
 
-        <yuicompress warn="false" munge="yes" preserveallsemicolons="true" outputsuffix="-min" 
+        <yuicompress warn="false" munge="yes" preserveallsemicolons="true" outputsuffix="-min"
             outputfolder="${build.image.modext.dir}/build" >
             <fileset dir="${project.manager.dir}/assets/modext"
-                includes="**/*.js" 
+                includes="**/*.js"
                 excludes="build/**,util/filetree/**,modext-min.js,modext.js"
             />
         </yuicompress>
     </target>
-    
+
     <target name="css-minify" depends="cleanup-build-css-image" description="Create minimized CSS from the working copy">
         <echo>Creating minimized js scripts from your working copy</echo>
 
-        <yuicompress warn="false" munge="no" preserveallsemicolons="true" outputsuffix="-min" 
+        <yuicompress warn="false" munge="no" preserveallsemicolons="true" outputsuffix="-min"
             outputfolder="${build.image.css.dir}">
             <fileset dir="${project.manager.dir}/templates/default/css"
                 includes="ie.css,index.css,login.css,xtheme-modx.css"
@@ -152,19 +152,19 @@
     <target name="modext-minify-wc" depends="cleanup-build-modext-image" description="Create minimized MODExt scripts in the working copy">
         <echo>Creating minimized js scripts in your working copy</echo>
 
-        <yuicompress warn="false" munge="no" preserveallsemicolons="true" outputsuffix="-min" 
+        <yuicompress warn="false" munge="no" preserveallsemicolons="true" outputsuffix="-min"
             outputfolder="${build.image.modext.dir}/build" >
             <fileset dir="${project.manager.dir}/assets/modext"
-                includes="**/*.js" 
+                includes="**/*.js"
                 excludes="build/**,util/filetree/**,modext-min.js,modext.js"
             />
         </yuicompress>
     </target>
-    
+
     <target name="css-minify-wc" depends="cleanup-build-css-image" description="Create minimized CSS from the working copy">
         <echo>Creating minimized js scripts from your working copy</echo>
 
-        <yuicompress warn="false" munge="no" preserveallsemicolons="true" outputsuffix="-min" 
+        <yuicompress warn="false" munge="no" preserveallsemicolons="true" outputsuffix="-min"
             outputfolder="${build.image.css.dir}">
             <fileset dir="${project.manager.dir}/templates/default/css"
                 includes="ie.css,index.css,login.css,xtheme-modx.css"
@@ -175,7 +175,7 @@
     <!-- Concat the minified MODExt JavaScript libraries -->
     <target name="modext-concat-min" description="Create modext-min.js">
         <echo>Creating modext-min.js in ${build.image.modext.dir}</echo>
-        
+
         <concat destfile="${build.image.modext.dir}/modext-min.js">
             <header filtering="no" trimleading="yes">/**
 MODExt Revolution 1.0
@@ -198,32 +198,32 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 */
             </header>
-            
-            <filelist dir="${build.image.modext.dir}/build/core" 
+
+            <filelist dir="${build.image.modext.dir}/build/core"
                       files="modx.localization-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/util" 
+            <filelist dir="${build.image.modext.dir}/build/util"
                       files="utilities-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/core" 
+            <filelist dir="${build.image.modext.dir}/build/core"
                       files="modx.component-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/widgets/core" 
+            <filelist dir="${build.image.modext.dir}/build/widgets/core"
                       files="modx.panel-min.js,modx.tabs-min.js,modx.window-min.js,modx.tree-min.js,modx.combo-min.js,modx.grid-min.js,modx.console-min.js,modx.portal-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/widgets" 
+            <filelist dir="${build.image.modext.dir}/build/widgets"
                       files="modx.treedrop-min.js,windows-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/widgets/resource" 
+            <filelist dir="${build.image.modext.dir}/build/widgets/resource"
                       files="modx.tree.resource-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/widgets/element" 
+            <filelist dir="${build.image.modext.dir}/build/widgets/element"
                       files="modx.tree.element-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/widgets/system" 
+            <filelist dir="${build.image.modext.dir}/build/widgets/system"
                       files="modx.tree.directory-min.js" />
-            <filelist dir="${build.image.modext.dir}/build/core" 
+            <filelist dir="${build.image.modext.dir}/build/core"
                       files="modx.view-min.js" />
         </concat>
     </target>
-    
+
     <!-- Concat the non-minified MODExt JavaScript libraries -->
     <target name="modext-concat" description="Create modext.js">
         <echo>Creating modext.js in ${build.image.modext.dir}</echo>
-        
+
         <concat destfile="${build.image.modext.dir}/modext.js">
             <header filtering="no" trimleading="yes">/**
 MODExt Revolution 1.0
@@ -246,23 +246,23 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 */
             </header>
-            <filelist dir="${project.modext.dir}/core" 
+            <filelist dir="${project.modext.dir}/core"
                       files="modx.localization.js" />
-            <filelist dir="${project.modext.dir}/util" 
+            <filelist dir="${project.modext.dir}/util"
                       files="utilities.js" />
-            <filelist dir="${project.modext.dir}/core" 
+            <filelist dir="${project.modext.dir}/core"
                       files="modx.component.js" />
-            <filelist dir="${project.modext.dir}/widgets/core" 
+            <filelist dir="${project.modext.dir}/widgets/core"
                       files="modx.panel.js,modx.tabs.js,modx.window.js,modx.tree.js,modx.combo.js,modx.grid.js,modx.console.js,modx.portal.js" />
-            <filelist dir="${project.modext.dir}/widgets" 
+            <filelist dir="${project.modext.dir}/widgets"
                       files="modx.treedrop.js,windows.js" />
-            <filelist dir="${project.modext.dir}/widgets/resource" 
+            <filelist dir="${project.modext.dir}/widgets/resource"
                       files="modx.tree.resource.js" />
-            <filelist dir="${project.modext.dir}/widgets/element" 
+            <filelist dir="${project.modext.dir}/widgets/element"
                       files="modx.tree.element.js" />
-            <filelist dir="${project.modext.dir}/widgets/system" 
+            <filelist dir="${project.modext.dir}/widgets/system"
                       files="modx.tree.directory.js" />
-            <filelist dir="${project.modext.dir}/core" 
+            <filelist dir="${project.modext.dir}/core"
                       files="modx.view.js" />
         </concat>
     </target>
@@ -270,7 +270,7 @@ General Public License for more details.
     <!-- Concat the non-minified MODExt JavaScript libraries -->
     <target name="modext-concat-wc" description="Create modext.js">
         <echo>Creating modext.js in ${build.image.modext.dir}</echo>
-                
+
         <concat destfile="${build.image.modext.dir}/modext.js">
             <header filtering="no" trimleading="yes">/**
 MODExt Revolution 1.0
@@ -293,48 +293,48 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 */
             </header>
-            <filelist dir="${project.modext.dir}/core" 
+            <filelist dir="${project.modext.dir}/core"
                       files="modx.localization.js" />
-            <filelist dir="${project.modext.dir}/util" 
+            <filelist dir="${project.modext.dir}/util"
                       files="utilities.js" />
-            <filelist dir="${project.modext.dir}/core" 
+            <filelist dir="${project.modext.dir}/core"
                       files="modx.component.js" />
-            <filelist dir="${project.modext.dir}/widgets/core" 
+            <filelist dir="${project.modext.dir}/widgets/core"
                       files="modx.panel.js,modx.tabs.js,modx.window.js,modx.tree.js,modx.combo.js,modx.grid.js,modx.console.js,modx.portal.js" />
-            <filelist dir="${project.modext.dir}/widgets" 
+            <filelist dir="${project.modext.dir}/widgets"
                       files="modx.treedrop.js,windows.js" />
-            <filelist dir="${project.modext.dir}/widgets/resource" 
+            <filelist dir="${project.modext.dir}/widgets/resource"
                       files="modx.tree.resource.js" />
-            <filelist dir="${project.modext.dir}/widgets/element" 
+            <filelist dir="${project.modext.dir}/widgets/element"
                       files="modx.tree.element.js" />
-            <filelist dir="${project.modext.dir}/widgets/system" 
+            <filelist dir="${project.modext.dir}/widgets/system"
                       files="modx.tree.directory.js" />
-            <filelist dir="${project.modext.dir}/core" 
+            <filelist dir="${project.modext.dir}/core"
                       files="modx.view.js" />
         </concat>
     </target>
-    
-    
+
+
     <!-- Concat the minified CSS -->
     <target name="css-concat-min" description="Create modx-min.css">
         <echo>Creating modx-min.css in ${build.image.css.dir}</echo>
-        
+
         <concat destfile="${build.image.css.dir}/modx-min.css">
             <header filtering="no" trimleading="yes"></header>
-            
-            <filelist dir="${build.image.css.dir}" 
+
+            <filelist dir="${build.image.css.dir}"
                       files="xtheme-modx-min.css,index-min.css" />
         </concat>
     </target>
-    
+
     <!-- Concat the minified CSS -->
     <target name="css-concat-min-wc" description="Create modx-min.css">
         <echo>Creating modx-min.css in ${build.image.css.dir}</echo>
-        
+
         <concat destfile="${build.image.css.dir}/modx-min.css">
             <header filtering="no" trimleading="yes"></header>
-            
-            <filelist dir="${build.image.css.dir}" 
+
+            <filelist dir="${build.image.css.dir}"
                       files="index-min.css,xtheme-modx-min.css" />
         </concat>
     </target>
@@ -360,17 +360,16 @@ General Public License for more details.
         <copy file="${build.image.modext.dir}/modext-min.js" todir="${project.modext.dir}" />
         <copy file="${build.image.modext.dir}/modext.js" todir="${project.modext.dir}" />
     </target>
-    
-    <!-- copy prepared css -->
-    <target name="copy-prepared-css" description="copy the minified and concatenated js files to the image">
-        <copy todir="${build.image.dir}/manager/templates/default/css">
-            <fileset dir="${build.image.css.dir}" />
-        </copy>
-        <copy todir="${project.manager.dir}/templates/default/css">
-            <fileset dir="${build.image.css.dir}" />
-        </copy>
+    <!-- Copy minified css to working copy -->
+    <target name="copy-prepared-css" description="copy the minified css files to the working copy">
+        <delete file="${project.css.dir}ie-min.css" />
+        <delete file="${project.css.dir}login-min.css" />
+        <delete file="${project.css.dir}modx-min.css" />
+        <copy file="${build.image.css.dir}/ie-min.css" todir="${project.css.dir}" />
+        <copy file="${build.image.css.dir}/login-min.css" todir="${project.css.dir}" />
+        <copy file="${build.image.css.dir}/modx-min.css" todir="${project.css.dir}" />
     </target>
-        
+
     <!-- Copy minified css to working copy -->
     <target name="copy-prepared-css-wc" description="copy the minified css files to the working copy">
         <delete file="${project.css.dir}ie-min.css" />
@@ -494,7 +493,7 @@ General Public License for more details.
         <delete file="${build.image.dir}/connectors/config.core.php" />
     </target>
 
-    <!-- Build a new advanced MODx distrib with only the core/ and setup/ dirs 
+    <!-- Build a new advanced MODx distrib with only the core/ and setup/ dirs
         and the core transport package included -->
     <target name="build-advanced" description="create the advanced distribution package">
         <replace file="${build.image.dir}/setup/includes/config.core.php" token="@svn" value="@advanced" />
@@ -510,6 +509,6 @@ General Public License for more details.
 
     <!-- Publish a distrib to a server -->
     <target name="publish-build" description="publish the build to a server for download">
-        
+
     </target>
 </project>

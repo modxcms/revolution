@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-2 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed copy-prepared-css build.xml command to prepare for rc-2 release
 - Adjusted welcome screen URL to go to a non-release specific confluence page
 - [#MODX-2000] Fixed FC rule to apply to template fields by overriding in controller
 - [#MODX-2000] Add ability to specify a template in REQUEST or alter via plugin in resource/create controller
