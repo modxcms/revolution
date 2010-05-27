@@ -200,14 +200,20 @@ if (isset($scriptProperties['unpub_date'])) {
     }
 }
 
-/* set publishedon date */
-if (isset($scriptProperties['published'])) {
-    if (empty($scriptProperties['publishedon'])) {
-        $scriptProperties['publishedon'] = $scriptProperties['published'] ? time() : 0;
-    } else {
-        $scriptProperties['publishedon'] = strtotime($scriptProperties['publishedon']);
+/* set publishedon date if publish change is different */
+if (isset($scriptProperties['published']) && $scriptProperties['published'] != $resource->get('published')) {
+    if (empty($scriptProperties['published'])) { /* if unpublishing */
+        $scriptProperties['publishedon'] = 0;
+        $scriptProperties['publishedby'] = 0;
+    } else { /* if publishing */
+        $scriptProperties['publishedon'] = !empty($scriptProperties['publishedon']) ? strtotime($scriptProperties['publishedon']) : time();
+        $scriptProperties['publishedby'] = $modx->user->get('id');
     }
-    $scriptProperties['publishedby'] = $scriptProperties['published'] ? $modx->user->get('id') : 0;
+} else { /* if no change, unset publishedon/publishedby */
+    if (empty($scriptProperties['published'])) { /* allow changing of publishedon date if resource is published */
+        unset($scriptProperties['publishedon']);
+    }
+    unset($scriptProperties['publishedby']);
 }
 
 /* get parent */
@@ -224,6 +230,7 @@ if ($resource->get('id') == $modx->getOption('site_start')
 /* Keep original publish state, if change is not permitted */
 if (!$modx->hasPermission('publish_document')) {
     $scriptProperties['publishedon'] = $resource->get('publishedon');
+    $scriptProperties['publishedby'] = $resource->get('publishedby');
     $scriptProperties['pub_date'] = $resource->get('pub_date');
     $scriptProperties['unpub_date'] = $resource->get('unpub_date');
 }

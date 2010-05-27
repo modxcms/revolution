@@ -30,6 +30,30 @@ if ($locked !== true) {
     }
 }
 
+
+/* set publishedon date if publish change is different */
+if (isset($_DATA['published']) && $_DATA['published'] != $resource->get('published')) {
+    if (empty($_DATA['published'])) { /* if unpublishing */
+        $_DATA['publishedon'] = 0;
+        $_DATA['publishedby'] = 0;
+    } else { /* if publishing */
+        $_DATA['publishedon'] = !empty($_DATA['publishedon']) ? strtotime($_DATA['publishedon']) : time();
+        $_DATA['publishedby'] = $modx->user->get('id');
+    }
+} else { /* if no change, unset publishedon/publishedby */
+    if (empty($_DATA['published'])) { /* allow changing of publishedon date if resource is published */
+        unset($_DATA['publishedon']);
+    }
+    unset($_DATA['publishedby']);
+}
+/* Keep original publish state, if change is not permitted */
+if (!$modx->hasPermission('publish_document')) {
+    $_DATA['publishedon'] = $resource->get('publishedon');
+    $_DATA['publishedby'] = $resource->get('publishedby');
+    $_DATA['pub_date'] = $resource->get('pub_date');
+    $_DATA['unpub_date'] = $resource->get('unpub_date');
+}
+
 /* save resource */
 $resource->fromArray($_DATA);
 if ($resource->save() === false) {
