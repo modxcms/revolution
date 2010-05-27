@@ -9,29 +9,39 @@ $mode = $install->settings->get('installmode');
 
 /* get an instance of xPDO using the install settings */
 $xpdo = $install->getConnection($mode);
+$errors = array();
 $dbExists = false;
 if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
     $this->error->failure($install->lexicon['xpdo_err_ins']);
 }
+$xpdo->setLogTarget(array(
+    'target' => 'ARRAY'
+    ,'options' => array('var' => & $errors)
+));
 
 /* try to get a connection to the actual database */
 $dbExists = $xpdo->connect();
 if (!$dbExists) {
     if ($mode != modInstall::MODE_NEW) {
-        $this->error->failure($install->lexicon['db_err_connect_upgrade']);
+        $this->error->failure($install->lexicon['db_err_connect_upgrade'], $errors);
     } else {
         /* otherwise try to connect to the server without the database */
-        $xpdo = $install->_connect($install->settings->get('database_type')
-         . ':host=' . $install->settings->get('database_server')
-         ,$install->settings->get('database_user')
-         ,$install->settings->get('database_password')
-         ,$install->settings->get('table_prefix'));
+        $xpdo = $install->_connect(
+                $install->settings->get('database_type') . ':host=' . $install->settings->get('database_server')
+                ,$install->settings->get('database_user')
+                ,$install->settings->get('database_password')
+                ,$install->settings->get('table_prefix')
+        );
 
         if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
-            $this->error->failure($install->lexicon['xpdo_err_ins']);
+            $this->error->failure($install->lexicon['xpdo_err_ins'], $errors);
         }
+        $xpdo->setLogTarget(array(
+            'target' => 'ARRAY'
+            ,'options' => array('var' => & $errors)
+        ));
         if (!$xpdo->connect()) {
-            $this->error->failure($install->lexicon['db_err_connect_server']);
+            $this->error->failure($install->lexicon['db_err_connect_server'], $errors);
         }
     }
 }
@@ -66,7 +76,7 @@ if ($stmt && $stmt instanceof PDOStatement) {
     ksort($collations);
     $data['collations'] = array_values($collations);
 } else {
-    $this->error->failure($install->lexicon['db_err_show_collations']);
+    $this->error->failure($install->lexicon['db_err_show_collations'], $errors);
 }
 unset($stmt);
 
@@ -90,7 +100,7 @@ if ($stmt && $stmt instanceof PDOStatement) {
     ksort($charsets);
     $data['charsets'] = array_values($charsets);
 } else {
-    $this->error->failure($install->lexicon['db_err_show_charsets']);
+    $this->error->failure($install->lexicon['db_err_show_charsets'], $errors);
 }
 unset($stmt);
 

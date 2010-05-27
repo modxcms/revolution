@@ -21,8 +21,8 @@ MODx.DB = function() {
                     r = Ext.decode(r.responseText);
                     var msg = Ext.select('#modx-db-step1-msg');
                     msg.show();
-                    Ext.select('#modx-db-step1-msg span').update('&nbsp;'+r.message);
                     if (r.success) {
+                        Ext.select('#modx-db-step1-msg span').update('&nbsp;'+r.message);
                         Ext.select('#modx-db-step2').fadeIn();                        
                         
                         var ch = Ext.get('database-connection-charset');
@@ -56,6 +56,13 @@ MODx.DB = function() {
                         }
                         msg.addClass('success');
                     } else {
+                        var errorMsg = '&nbsp;<br />'+r.message+'<br />';
+                        if (r.object) {
+                            for (var i=0;i<r.object.length;i++) {
+                                errorMsg = errorMsg + '<br />' + r.object[i] + '<br />';
+                            }
+                        }
+                        Ext.select('#modx-db-step1-msg span').update(errorMsg);
                         msg.addClass('error');
                     }
                }
