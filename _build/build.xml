@@ -368,6 +368,9 @@ General Public License for more details.
         <copy file="${build.image.css.dir}/ie-min.css" todir="${project.css.dir}" />
         <copy file="${build.image.css.dir}/login-min.css" todir="${project.css.dir}" />
         <copy file="${build.image.css.dir}/modx-min.css" todir="${project.css.dir}" />
+        <copy todir="${build.image.dir}/manager/templates/default/css">
+            <fileset dir="${project.css.dir}" />
+        </copy>
     </target>
 
     <!-- Copy minified css to working copy -->
@@ -378,6 +381,9 @@ General Public License for more details.
         <copy file="${build.image.css.dir}/ie-min.css" todir="${project.css.dir}" />
         <copy file="${build.image.css.dir}/login-min.css" todir="${project.css.dir}" />
         <copy file="${build.image.css.dir}/modx-min.css" todir="${project.css.dir}" />
+        <copy todir="${build.image.dir}/manager/templates/default/css">
+            <fileset dir="${project.css.dir}" />
+        </copy>
     </target>
 
     <!-- Run the core data generation script -->
