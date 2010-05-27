@@ -517,6 +517,12 @@ $events['OnUserChangePassword']->fromArray(array (
   'service' => 1,
   'groupname' => 'Users',
 ), '', true, true);
+$events['OnUserBeforeRemove']= $xpdo->newObject('modEvent');
+$events['OnUserBeforeRemove']->fromArray(array (
+  'name' => 'OnUserBeforeRemove',
+  'service' => 1,
+  'groupname' => 'Users',
+), '', true, true);
 $events['OnUserBeforeSave']= $xpdo->newObject('modEvent');
 $events['OnUserBeforeSave']->fromArray(array (
   'name' => 'OnUserBeforeSave',
