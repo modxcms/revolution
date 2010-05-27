@@ -32,6 +32,17 @@ if ($newContext->save() == false) {
     return $modx->error->failure($modx->lexicon('context_err_duplicate'));
 }
 
+/* duplicate settings */
+$settings = $modx->getCollection('modContextSetting',array(
+    'context_key' => $oldContext->get('key'),
+));
+foreach ($settings as $setting) {
+    $newSetting = $modx->newObject('modContextSetting');
+    $newSetting->fromArray($setting->toArray(),'',true,true);
+    $newSetting->set('context_key',$newContext->get('key'));
+    $newSetting->save();
+}
+
 /* now duplicate resources by level */
 duplicateLevel($modx,$oldContext->get('key'),$newContext->get('key'));
 
