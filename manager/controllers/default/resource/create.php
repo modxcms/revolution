@@ -145,7 +145,7 @@ MODx.onDocFormRender = "'.$onDocFormRender.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-resource-create"
-        ,template: "'.($parent != null ? $parent->get('template') : $modx->getOption('default_template')).'"
+        ,template: "'.(isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $modx->getOption('default_template'))).'"
         ,content_type: "1"
         ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument').'"
         ,context_key: "'.(isset($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web').'"
