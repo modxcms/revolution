@@ -1,6 +1,6 @@
 <?php
 /**
- * Specific upgrades for Revolution 2.0.0-rc-1
+ * Specific upgrades for Revolution 2.0.0-rc-2
  *
  * @package setup
  * @subpackage upgrades
