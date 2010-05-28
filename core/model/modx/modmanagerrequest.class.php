@@ -92,7 +92,7 @@ class modManagerRequest extends modRequest {
         $modx = & $this->modx;
 
         if ($this->modx->getOption('manager_language')) {
-            $this->modx->cultureKey= $this->modx->getOption('manager_language');
+            $this->modx->setOption('cultureKey',$this->modx->getOption('manager_language'));
         }
 
         /* load default core cache file of lexicon strings */
