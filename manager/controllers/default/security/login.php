@@ -11,6 +11,9 @@ $modx->smarty->assign('_lang',$modx->lexicon->fetch());
 if (isset($_REQUEST['modahsh'])) {
     $modx->smarty->assign('modahsh',$_REQUEST['modahsh']);
 }
+if (!empty($_SERVER['REQUEST_URI'])) {
+    $modx->smarty->assign('returnUrl',$_SERVER['REQUEST_URI']);
+}
 
 if (!empty($_POST)) {
     $this->loadErrorHandler();
@@ -48,7 +51,7 @@ if (!empty($_POST)) {
 
             if (!empty($response) && is_array($response)) {
                 if (!empty($response['success']) && isset($response['object'])) {
-                    $url = $modx->getOption('manager_url');
+                    $url = !empty($_POST['returnUrl']) ? $_POST['returnUrl'] : $modx->getOption('manager_url');
                     $modx->sendRedirect($url,'','','full');
                 } else {
                     $error_message = '';
@@ -67,11 +70,7 @@ if (!empty($_POST)) {
         }
     } else if (!empty($_POST['forgotlogin'])) {
         $c = $modx->newQuery('modUser');
-        $c->select('
-            `modUser`.*,
-            `Profile`.`email` AS `email`,
-            `Profile`.`fullname` AS `fullname`
-        ');
+        $c->select(array('modUser.*','Profile.email','Profile.fullname'));
         $c->innerJoin('modUserProfile','Profile');
         $c->where(array(
             'Profile.email' => $_POST['email'],

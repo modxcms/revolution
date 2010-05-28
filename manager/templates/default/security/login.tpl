@@ -55,6 +55,7 @@
 <form id="modx-login-form" action="" method="post">
     <input type="hidden" name="login_context" value="mgr" />
     <input type="hidden" name="modahsh" value="{$modahsh}" />
+    <input type="hidden" name="returnUrl" value="{$returnUrl}" />
     	    
     <div class="x-panel x-panel-noborder"><div class="x-panel-bwrap"><div class="x-panel-body x-panel-body-noheader">
     <h2>{$_config.site_name}</h2>
