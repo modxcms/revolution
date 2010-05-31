@@ -368,6 +368,14 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('weblink')+': '+r.object.pagetitle+'</h2>');
                     
                     this.getForm().setValues(r.object);
+
+                    if (MODx.config.use_editor == 1 && !this.rteLoaded) {
+                        if (MODx.loadRTE && !this.rteLoaded) {
+                            MODx.loadRTE();
+                        }
+                        this.rteLoaded = true;
+                    }
+                    
                     this.fireEvent('ready');
                 } else { MODx.form.Handler.errorJSON(r); }
             }

@@ -46,21 +46,21 @@ $modx->smarty->assign('onDocFormRender',$onDocFormRender);
 /*
  *  Initialize RichText Editor
  */
-/* Set which RTE */
-$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $modx->getOption('which_editor');
-$modx->smarty->assign('which_editor',$rte);
-if ($modx->getOption('use_editor')) {
+/* Set which RTE if not core */
+if ($modx->getOption('use_editor') && !empty($rte)) {
     /* invoke OnRichTextEditorRegister event */
     $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
     $modx->smarty->assign('text_editors',$text_editors);
 
-    $replace_richtexteditor = array('ta');
+    $replace_richtexteditor = array();
     $modx->smarty->assign('replace_richtexteditor',$replace_richtexteditor);
 
     /* invoke OnRichTextEditorInit event */
     $onRichTextEditorInit = $modx->invokeEvent('OnRichTextEditorInit',array(
         'editor' => $rte,
         'elements' => $replace_richtexteditor,
+        'id' => 0,
+        'mode' => 'new',
     ));
     if (is_array($onRichTextEditorInit)) {
         $onRichTextEditorInit = implode('',$onRichTextEditorInit);

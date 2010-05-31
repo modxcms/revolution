@@ -64,7 +64,7 @@ $modx->smarty->assign('onDocFormRender',$onDocFormRender);
 /* Set which RTE */
 $rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $modx->getOption('which_editor');
 $modx->smarty->assign('which_editor',$rte);
-if ($modx->getOption('use_editor')) {
+if ($modx->getOption('use_editor') && !empty($rte)) {
     /* invoke OnRichTextEditorRegister event */
     $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
     $modx->smarty->assign('text_editors',$text_editors);
@@ -76,12 +76,16 @@ if ($modx->getOption('use_editor')) {
     $onRichTextEditorInit = $modx->invokeEvent('OnRichTextEditorInit',array(
         'editor' => $rte,
         'elements' => $replace_richtexteditor,
+        'id' => $resource->get('id'),
+        'resource' => &$resource,
+        'mode' => 'upd',
     ));
     if (is_array($onRichTextEditorInit)) {
         $onRichTextEditorInit = implode('',$onRichTextEditorInit);
         $modx->smarty->assign('onRichTextEditorInit',$onRichTextEditorInit);
     }
 }
+
 /* get url for resource for preview window */
 $url = $modx->makeUrl($resource->get('id'));
 

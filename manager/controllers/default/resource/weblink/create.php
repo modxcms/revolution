@@ -63,6 +63,31 @@ if ($fcDt) {
     $default_template = $fcDt->get('value');
 }
 
+/*
+ *  Initialize RichText Editor
+ */
+/* Set which RTE if not core */
+if ($modx->getOption('use_editor') && !empty($rte)) {
+    /* invoke OnRichTextEditorRegister event */
+    $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
+    $modx->smarty->assign('text_editors',$text_editors);
+
+    $replace_richtexteditor = array();
+    $modx->smarty->assign('replace_richtexteditor',$replace_richtexteditor);
+
+    /* invoke OnRichTextEditorInit event */
+    $onRichTextEditorInit = $modx->invokeEvent('OnRichTextEditorInit',array(
+        'editor' => $rte,
+        'elements' => $replace_richtexteditor,
+        'id' => 0,
+        'mode' => 'new',
+    ));
+    if (is_array($onRichTextEditorInit)) {
+        $onRichTextEditorInit = implode('',$onRichTextEditorInit);
+        $modx->smarty->assign('onRichTextEditorInit',$onRichTextEditorInit);
+    }
+}
+
 /* register JS scripts */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
