@@ -17,10 +17,12 @@ getNodesFormatted($nodes,$data);
 
 /* readjust cache */
 foreach ($nodes as $ar_node) {
+    if (!is_array($ar_node) || empty($ar_node['id'])) continue;
     $node = $modx->getObject('modResource',$ar_node['id']);
     if (empty($node)) continue;
 
     if (!$node->checkPolicy('save')) continue;
+    if (empty($ar_node['context'])) continue;
 
     $old_parent_id = $node->get('parent');
 
@@ -35,7 +37,7 @@ foreach ($nodes as $ar_node) {
         $node->set('parent',$ar_node['parent']);
     }
     $old_context_key = $node->get('context_key');
-    if ($old_context_key != $ar_node['context']) {
+    if ($old_context_key != $ar_node['context'] && !empty($ar_node['context'])) {
         $node->set('context_key',$ar_node['context']);
         changeChildContext($node, $ar_node['context']);
     }
