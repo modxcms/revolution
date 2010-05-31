@@ -195,7 +195,6 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     ,hideField: function(f) {
         f = this.getField(f);
         if (!f) return;
-        f.disable();
         f.hide();
         var d = f.getEl().up('.x-form-item');
         if (d) { d.setDisplayed(false); }
