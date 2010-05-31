@@ -501,7 +501,8 @@ table.classy tr.odd td {
 }
 .aleft { text-align: left; }
 .aright { text-align: right; }
-
+.right { float: right; }
+.left { float: left; }
 
 /* browser */
 .modx-pb-view-ct {
