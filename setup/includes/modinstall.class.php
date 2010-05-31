@@ -808,13 +808,14 @@ class modInstall {
         /* attempt to write to test file */
         $written = @fwrite($fp,'<?php echo "test";');
         if (!$written) { /* if fails try to delete it */
+            @fclose($fp);
             @unlink($filePath);
             return false;
         }
 
         /* attempt to delete test file */
+        @fclose($fp);
         $written = @unlink($filePath);
-        fclose($fp);
 
         return $written;
     }
