@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2012] Made Form Customization grid sortable
 - [#MODX-2011] Fixed MODx.grid.Grid::getSelectedAsList to work in Fx,IE
 - Added more sophisticated check for writable directories in setup to ensure compatibility across environments
 - Fixed bug where manager_language setting was ignored

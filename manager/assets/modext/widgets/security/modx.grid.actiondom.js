@@ -12,36 +12,44 @@ MODx.grid.ActionDom = function(config) {
         ,paging: true
         ,autosave: false
         ,sm: this.sm
+        ,remoteSort: true
         ,columns: [this.sm,{
             header: _('id')
             ,dataIndex: 'id'
             ,width: 40
+            ,sortable: true
         },{
             header: _('action')
             ,dataIndex: 'controller'
             ,width: 250
+            ,sortable: true
         },{
             header: _('name')
             ,dataIndex: 'name'
             ,width: 200
+            ,sortable: true
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 200
+            ,sortable: true
         },{
             header: _('rule')
             ,dataIndex: 'rule'
             ,width: 150
+            ,sortable: true
         },{
             header: _('value')
             ,dataIndex: 'value'
             ,width: 300
+            ,sortable: true
         },{
             header: _('usergroup')
             ,dataIndex: 'principal'
             ,width: 200
             ,editor: { xtype: 'modx-combo-usergroup' ,renderer: true }
             ,editable: false
+            ,sortable: true
         }]
         ,viewConfig: {
             forceFit:true
