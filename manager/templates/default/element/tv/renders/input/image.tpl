@@ -1,8 +1,8 @@
-<div id="tv-image-preview-{$tv->id}">
-    {if $tv->value}<img src="{$base_url}{$tv->value}" class="right" width="150" height="150" alt="" />{/if}
-</div>
 <div id="tvbrowser{$tv->id}"></div>
 <div id="tv-image-{$tv->id}"></div>
+<div id="tv-image-preview-{$tv->id}">
+    {if $tv->value}<img src="{$base_url}{$tv->value}" width="150" height="150" alt="" />{/if}
+</div>
 
 <script type="text/javascript">
 // <![CDATA[
