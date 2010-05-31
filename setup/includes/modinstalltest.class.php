@@ -254,7 +254,7 @@ abstract class modInstallTest {
 
         /* cache writable? */
         $this->results['cache_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],'core/cache');
-        if (!is_writable(MODX_CORE_PATH . 'cache')) {
+        if (!$this->is_writable2(MODX_CORE_PATH . 'cache')) {
             $this->results['cache_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
             $this->results['cache_writable']['class'] = 'testFailed';
         } else {
@@ -279,7 +279,7 @@ abstract class modInstallTest {
 
         /* export writable? */
         $this->results['assets_export_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],'core/export');
-        if (!is_writable(MODX_CORE_PATH . 'export')) {
+        if (!$this->is_writable2(MODX_CORE_PATH . 'export')) {
             $this->results['assets_export_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
             $this->results['assets_export_writable']['class'] = 'testFailed';
         } else {
@@ -304,7 +304,7 @@ abstract class modInstallTest {
 
         /* packages writable? */
         $this->results['core_packages_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],'core/packages');
-        if (!is_writable(MODX_CORE_PATH . 'packages')) {
+        if (!$this->is_writable2(MODX_CORE_PATH . 'packages')) {
             $this->results['core_packages_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
             $this->results['core_packages_writable']['class'] = 'testFailed';
         } else {
@@ -369,7 +369,7 @@ abstract class modInstallTest {
             @ fwrite($hnd, '<?php // '.$this->install->lexicon['modx_configuration_file'].' ?>');
             @ fclose($hnd);
         }
-        $isWriteable = is_writable($configFilePath);
+        $isWriteable = $this->is_writable2($configFilePath) && is_writable($configFilePath);
         if (!$isWriteable) {
             $this->results['config_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p><p><strong>'.sprintf($this->install->lexicon['test_config_file_nw'],MODX_CONFIG_KEY).'</strong></p>';
             $this->results['config_writable']['class'] = 'testFailed';
@@ -402,24 +402,12 @@ abstract class modInstallTest {
 
 
     /**
-     * Checks to see if a given path is in a writable container.
+     * Custom is_writable function to test on problematic servers
      *
-     * @access protected
-     * @param string $path The file path to test.
-     * @return boolean Returns true if the path is in a writable container.
+     * @param string $path
+     * @return boolean True if write was successful
      */
-    protected function _inWritableContainer($path) {
-        $writable = false;
-        if (file_exists($path) && is_dir($path))
-            $writable = is_writable($path);
-        while (!file_exists($path)) {
-            $path = dirname($path);
-            if (!$path)
-                break;
-            if (!file_exists($path))
-                break;
-            $writable = is_writable($path);
-        }
-        return $writable;
+    protected function is_writable2($path) {
+        return $this->install->is_writable2($path);
     }
 }
