@@ -121,16 +121,111 @@ MODx.grid.SettingsGrid = function(config) {
         ,autosave: true
         ,pageSize: 30
         ,paging: true
+        ,collapseFirst: false
+        ,tools: [{
+            id: 'plus'
+            ,qtip: _('expand_all')
+            ,handler: this.expandAll
+            ,scope: this
+        },{
+            id: 'minus'
+            ,hidden: true
+            ,qtip: _('collapse_all')
+            ,handler: this.collapseAll
+            ,scope: this
+        }]
     });
 
     this.view = new Ext.grid.GroupingView({
         emptyText: config.emptyText || _('ext_emptymsg')
+        ,forceFit: true
+        ,autoFill: true
+        ,showPreview: true
+        ,enableRowBody: true
+        ,scrollOffset: 0
     });
-
     MODx.grid.SettingsGrid.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
-    renderDynField: function(v,md,rec,ri,ci,s,g) {
+    _addEnterKeyHandler: function() {
+        this.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
+            this.fireEvent('change');
+        },this);
+    }
+
+    ,_showMenu: function(g,ri,e) {
+        e.stopEvent();
+        e.preventDefault();
+        this.menu.record = this.getStore().getAt(ri).data;
+        if (!this.getSelectionModel().isSelected(ri)) {
+            this.getSelectionModel().selectRow(ri);
+        }
+        this.menu.removeAll();
+
+        var m = [];
+        if (this.menu.record.menu) {
+            m = this.menu.record.menu;
+        } else {
+            m.push({
+                text: _('setting_update')
+                ,handler: { xtype: 'modx-window-setting-update' }
+            },'-',{
+                text: _('setting_remove')
+                ,handler: this.remove.createDelegate(this,['setting_remove_confirm'])
+            });
+        }
+        if (m.length > 0) {
+            this.addContextMenuItem(m);
+            this.menu.show(e.target);
+        }
+    }
+    
+    ,clearFilter: function() {
+    	this.getStore().baseParams = {
+            action: 'getList'
+    	};
+        Ext.getCmp('modx-filter-namespace').reset();
+        var acb = Ext.getCmp('modx-filter-area');
+        if (acb) {
+            acb.store.baseParams['namespace'] = '';
+            acb.store.load();
+            acb.reset();
+        }
+        Ext.getCmp('modx-filter-key').reset();
+    	this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+    ,filterByKey: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.key = nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
+
+    ,filterByNamespace: function(cb,rec,ri) {
+        this.getStore().baseParams['namespace'] = rec.data['name'];
+        this.getStore().baseParams['area'] = '';
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+
+        var acb = Ext.getCmp('modx-filter-area');
+        if (acb) {
+            var s = acb.store;
+            s.baseParams['namespace'] = rec.data.name;
+            s.removeAll();
+            s.load();
+            acb.setValue('');
+        }
+    }
+
+    ,filterByArea: function(cb,rec,ri) {
+        this.getStore().baseParams['area'] = rec.data['v'];
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+
+    ,renderDynField: function(v,md,rec,ri,ci,s,g) {
         var r = s.getAt(ri).data;
         var f;
         if (r.xtype == 'combo-boolean') {
@@ -152,48 +247,6 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         }
         return v;
     }
-
-    ,clearFilter: function() {
-    	this.getStore().baseParams = {
-            action: 'getList'
-    	};
-        Ext.getCmp('modx-filter-namespace').reset();
-        var acb = Ext.getCmp('modx-filter-area');
-        if (acb) {
-            acb.store.baseParams['namespace'] = '';
-            acb.store.load();
-            acb.reset();
-        }
-        Ext.getCmp('modx-filter-key').reset();
-    	this.getBottomToolbar().changePage(1);
-    }
-    ,filterByKey: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.key = nv;
-        this.getBottomToolbar().changePage(1);
-        return true;
-    }
-
-    ,filterByNamespace: function(cb,rec,ri) {
-        this.getStore().baseParams['namespace'] = rec.data['name'];
-        this.getStore().baseParams['area'] = '';
-        this.getBottomToolbar().changePage(1);
-
-        var acb = Ext.getCmp('modx-filter-area');
-        if (acb) {
-            var s = acb.store;
-            s.baseParams['namespace'] = rec.data.name;
-            s.removeAll();
-            s.reload();
-            acb.setValue('');
-        }
-    }
-
-    ,filterByArea: function(cb,rec,ri) {
-        this.getStore().baseParams['area'] = rec.data['v'];
-        this.getBottomToolbar().changePage(1);
-    }
-
 });
 Ext.reg('modx-grid-settings',MODx.grid.SettingsGrid);
 
