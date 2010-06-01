@@ -432,6 +432,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
     line-height: 1;
     margin: 0 0 1px 0;
     padding: 1px;
+    cursor: default;
 }
 
 #modAB .x-btn {
