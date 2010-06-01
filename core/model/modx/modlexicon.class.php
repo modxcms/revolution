@@ -191,6 +191,12 @@ class modLexicon {
 
             /* load file-based lexicon */
             $results = $this->getFileTopic($language,$namespace,$topic);
+            if ($results === false) { /* default back to en */
+                $results = $this->getFileTopic('en',$namespace,$topic);
+                if ($results === false) {
+                    $results = array();
+                }
+            }
 
             /* get DB overrides */
             $c= $this->modx->newQuery('modLexiconEntry');
@@ -244,6 +250,8 @@ class modLexicon {
         if (file_exists($topicPath)) {
             include $topicPath;
             $results = $_lang;
+        } else {
+            return false;
         }
         return $results;
     }
