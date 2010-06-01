@@ -28,6 +28,13 @@ MODx.tree.Directory = function(config) {
             text: _('upload_files')
             ,handler: this.uploadFiles
             ,scope: this
+        },{
+            icon: MODx.config.template_url+'images/restyle/icons/folder.png'
+            ,cls: 'x-btn-icon'
+            ,tooltip: {text: _('directory_create')}
+            ,handler: this.createDirectory
+            ,scope: this
+            ,hidden: MODx.perm.directory_create ? false : true
         }]
     });
     MODx.tree.Directory.superclass.constructor.call(this,config);
@@ -206,8 +213,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
     
     ,createDirectory: function(item,e) {
-        var node = this.cm.activeNode;
-        var r = {parent: node.id};
+        var node = this.cm && this.cm.activeNode ? this.cm.activeNode : false;
+        var r = {parent: node ? node.id : '/'};
         if (!this.windows.create) {
             this.windows.create = MODx.load({
                 xtype: 'modx-window-directory-create'
@@ -219,7 +226,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             });
         }
         this.windows.create.setValues(r);
-        this.windows.create.show(e.target);
+        this.windows.create.show(e ? e.target : Ext.getBody());
     }
 	
     ,chmodDirectory: function(item,e) {

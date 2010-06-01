@@ -48,7 +48,13 @@ $o .= $modx->toJSON($c);
 $o .= '; MODx.action = ';
 $o .= $modx->toJSON($actions);
 $o .= '; MODx.perm = {};';
-if ($modx->user) { $o .= 'MODx.user = {id:"'.$modx->user->get('id').'",username:"'.$modx->user->get('username').'"}'; }
+if ($modx->user) {
+    if ($modx->hasPermission('directory_create')) { $o .= 'MODx.perm.directory_create = true;'; }
+    if ($modx->hasPermission('resource_tree')) { $o .= 'MODx.perm.resource_tree = true;'; }
+    if ($modx->hasPermission('element_tree')) { $o .= 'MODx.perm.element_tree = true;'; }
+    if ($modx->hasPermission('file_tree')) { $o .= 'MODx.perm.file_tree = true;'; }
+    $o .= 'MODx.user = {id:"'.$modx->user->get('id').'",username:"'.$modx->user->get('username').'"}';
+}
 
 header('Content-Type: application/x-javascript');
 echo $o;

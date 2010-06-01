@@ -216,9 +216,6 @@ class modManagerResponse extends modResponse {
         if ($loadLayout) {
             $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.layout.js');
             $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(function() {
-    MODx.perm.resource_tree = "'.$this->modx->hasPermission('resource_tree').'";
-    MODx.perm.element_tree = "'.$this->modx->hasPermission('element_tree').'";
-    MODx.perm.file_tree = "'.$this->modx->hasPermission('file_tree').'";
     MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || []});
 });</script>');
         }
