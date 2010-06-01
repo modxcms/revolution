@@ -306,7 +306,10 @@ ul.x-tab-strip li.x-tab-strip-active  {
     background-position: -34px 0 !important;
 }
 
-
+/* fix combo on grid editor bug */
+.x-grid-editor .x-form-field-wrap {
+    background-color: white !important;
+}
 
 .x-small-editor .x-form-field-wrap .x-form-trigger{
     width: 26px;
