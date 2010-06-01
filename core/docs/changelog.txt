@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1781] Fixed z-index issue with top nav and window masks
 - [#MODX-217] Added create element type icons for Element tree
 - [#MODX-217] Added directory create icon to file tree toolbar, changed upload files button to icon
 - [#MODX-2022] Fixed bug regarding php file permissions and writable checks

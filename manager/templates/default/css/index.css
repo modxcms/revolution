@@ -336,7 +336,7 @@ textarea.x-form-field {
     height: 45px;
     position: relative;
     text-shadow:1px -1px 0 #1f1f1f;
-    z-index: 9995;
+    z-index: 19;
 }
 #modx-login-user {
     font-weight: bold;
@@ -592,10 +592,10 @@ table.classy tr.odd td {
 
 #modx-topnav-div {
     background: transparent;
-    margin-left: 1em;
+    margin-left: 8px;
     position: relative;
     width: 78%;
-    z-index: 9996;
+    z-index: 20;
 }
 
 #modx-topnav {
@@ -614,7 +614,7 @@ ul#modx-topnav {
     padding: 0;
     text-shadow: -1px 1px 0 #1F1F1F;
     border-bottom: 1px solid #1E1E1E;
-    z-index: 9997;
+    z-index: 21;
 }
 ul#modx-topnav li {
     float: left;
@@ -622,7 +622,7 @@ ul#modx-topnav li {
     padding:4px 13px 0;
     position: relative;
     background:transparent url("../images/style/separator/menu_sep.png") no-repeat scroll right 0;
-    z-index: 9998;
+    z-index: 22;
 }
 ul#modx-topnav li a{
     padding: 12px 5px 13px;
@@ -642,7 +642,7 @@ ul#modx-topnav li ul.modx-subnav {
     list-style: none;
     font-size: 12px;
     position: absolute; /*--Important - Keeps modx-subnav from affecting main navigation flow--*/
-    z-index: 9999 !important;
+    z-index: 23 !important;
     left: 0;
     top: 46px;
     background: #333;
@@ -710,7 +710,7 @@ ul#modx-topnav li ul.modx-subnav li ul {
     list-style-type: none;
     border: 1px solid #252525;
     padding-left: 0;
-    z-index: 100000;
+    z-index: 24;
 }
 
 ul#modx-topnav li ul.modx-subnav li ul li a {
