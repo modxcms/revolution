@@ -32,18 +32,26 @@ MODx.tree.Directory = function(config) {
             ,scope: this
             ,hidden: MODx.perm.directory_create ? false : true
         },{
-            icon: MODx.config.template_url+'images/restyle/icons/page_white_get.png'
+            icon: MODx.config.template_url+'images/restyle/icons/file_upload.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('upload_files')}
             ,handler: this.uploadFiles
             ,scope: this
             ,hidden: MODx.perm.file_upload ? false : true
+        },'->',{
+            icon: MODx.config.template_url+'images/restyle/icons/file_manager.png'
+            ,cls: 'x-btn-icon'
+            ,tooltip: {text: _('modx_browser')}
+            ,handler: this.loadFileManager
+            ,scope: this
+            ,hidden: MODx.perm.file_manager && !MODx.browserOpen ? false : true
         }]
     });
     MODx.tree.Directory.superclass.constructor.call(this,config);
     this.addEvents({
         'beforeUpload': true
         ,'afterUpload': true
+        ,'fileBrowserSelect': true
     });
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
@@ -176,6 +184,25 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         // full path security checking has to be implemented on server
         path = path.replace(/^[\/\.]*/, '');
         return path+'/';
+    }
+
+    ,browser: null
+    ,loadFileManager: function(btn,e) {
+        if (this.browser === null) {
+            this.browser = MODx.load({
+                xtype: 'modx-browser'
+                ,hideFiles: false
+                ,rootVisible: false
+                ,listeners: {
+                    'select': {fn: function(data) {
+                        this.fireEvent('fileBrowserSelect',data);
+                    },scope:this}
+                }
+            });
+        }
+        if (this.browser) {
+            this.browser.show();
+        }
     }
     
     ,renameNode: function(field,nv,ov) {

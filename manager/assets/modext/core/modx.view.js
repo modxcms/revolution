@@ -121,6 +121,9 @@ Ext.reg('modx-dataview',MODx.DataView);
 Ext.namespace('MODx.browser');
 
 MODx.Browser = function(config) {
+    if (MODx.browserOpen) return false;
+    MODx.browserOpen = true;
+    
     config = config || {};
     Ext.applyIf(config,{
         onSelect: function(data) {}
@@ -156,7 +159,7 @@ MODx.browser.Window = function(config) {
         ,prependPath: config.prependPath || null
         ,hideFiles: config.hideFiles || false
         ,ident: this.ident
-        ,rootVisible: true
+        ,rootVisible: config.rootVisible == null ? true : config.rootVisible
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
         }
@@ -293,7 +296,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
                 'select': {fn:this.sortImages, scope:this}
             }
         },'-',{
-            icon: MODx.config.template_url+'images/icons/sort.png'
+            icon: MODx.config.template_url+'images/restyle/icons/refresh.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('tree_refresh')}
             ,handler: this.load

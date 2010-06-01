@@ -54,6 +54,7 @@ if ($modx->user) {
     if ($modx->hasPermission('element_tree')) { $o .= 'MODx.perm.element_tree = true;'; }
     if ($modx->hasPermission('file_tree')) { $o .= 'MODx.perm.file_tree = true;'; }
     if ($modx->hasPermission('file_upload')) { $o .= 'MODx.perm.file_upload = true;'; }
+    if ($modx->hasPermission('file_manager')) { $o .= 'MODx.perm.file_manager = true;'; }
     if ($modx->hasPermission('new_chunk')) { $o .= 'MODx.perm.new_chunk  = true;'; }
     if ($modx->hasPermission('new_plugin')) { $o .= 'MODx.perm.new_plugin = true;'; }
     if ($modx->hasPermission('new_snippet')) { $o .= 'MODx.perm.new_snippet = true;'; }
