@@ -1,88 +1,133 @@
 <?php
+/*
+ * MODx Revolution
+ *
+ * Copyright 2006-2010 by the MODx Team.
+ * All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA 02111-1307 USA
+ */
 /**
+ * Utility class for assisting in migrating content from older MODx releases.
+ *
  * @package modx
  */
+class modTranslate095 {
+    public $modx= null;
+    public $parser= null;
 
-/** Include the base modParser class */
-include_once (strtr(realpath(dirname(__FILE__)) . '/modparser.class.php', '\\', '/'));
+    function __construct(modX &$modx) {
+        $this->modx = &$modx;
+        $this->preTranslationSearch= array('[*','[~','[+','[!');
+        $this->preTranslationReplace= array('#trans->[*','#trans->[~','#trans->[+','#trans->[!');
+        $this->tagTranslation= array (
+            '[[++' => array ('[(', ')]', '++'),
+            '[[$' => array ('{{', '}}', '$'),
+            '[[*' => array ('#trans->[*', '*]', '*'),
+            '[[~' => array ('#trans->[~', '~]', '~'),
+            '[[+' => array ('#trans->[+', '+]', '+'),
+            '[[!' => array ('#trans->[!', '!]', '!'),
+        );
+    }
 
-/**
- * An extension of the MODx parser to support legacy MODx tags.
- *
- * Use of this class is only necessary if you have a site that contains legacy
- * MODx tags.  It provides facilities for translating the legacy tags, as well
- * as for supporting legacy behavior of the onParseDocument event used in many
- * legacy MODx plugins.
- *
- * @package modx
- */
-class modParser095 extends modParser {
-    public $tagTranslation= array (
-        '[[++' => array ('[(', ')]', '++'),
-        '[[$' => array ('{{', '}}', '$'),
-        '[[*' => array ('[*', '*]', '*'),
-        '[[~' => array ('[~', '~]', '~'),
-        '[[+' => array ('[+', '+]', '+'),
-        '[[!' => array ('[!', '!]', '!'),
-    );
+    public function getParser() {
+        if (!is_object($this->parser) || !($this->parser instanceof modParser095)) {
+            $this->parser = &$this->modx->getService('parser095', 'modParser095');
+        }
+        return $this->parser;
+    }
 
-    /**
-     * Collects MODx legacy tags and translates them to the new tag format.
-     *
-     * @param string &$content The content in which legacy tags are to be
-     * replaced.
-     * @param array $tokens An optional array of tag tokens on which to exclude
-     * translation of the tags.
-     * @return void The content is operated on by reference.
-     */
-    public function translate(& $content, $tokens= array (), $echo= false) {
-        $newSuffix= ']]';
-        $matchCount= 0;
-        foreach ($this->tagTranslation as $newPrefix => $legacyTags) {
-            $tagMap= array ();
-            $oldPrefix= $legacyTags[0];
-            $oldSuffix= $legacyTags[1];
-            $token= $legacyTags[2];
-            if (!empty ($tokens) && is_array($tokens)) {
-                if (in_array($token, $tokens)) {
-                    continue;
-                }
-            }
-            $tags= array ();
-            if ($matches= $this->collectElementTags($content, $tags, $oldPrefix, $oldSuffix)) {
-//                $this->modx->cacheManager->writeFile(MODX_BASE_PATH . 'parser095.translate.log', 'Translating ' . $oldPrefix . $oldSuffix . ' to ' . $newPrefix . ']] ('.$matches.' matches): ' . print_r($tags, 1) . "\n", 'a');
-                foreach ($tags as $tag) {
-                    $tagMap[$tag[0]]= $newPrefix . $tag[1] . $newSuffix;
-                }
-            }
-            if (!empty ($tagMap)) {
-                $matchCount+= count($tagMap);
-                $content= str_replace(array_keys($tagMap), array_values($tagMap), $content);
-                if ($echo) {
-                    echo "[TRANSLATED TAGS] " . print_r($tagMap, 1) . "\n";
+    public function translateSite($save= false, $classes= null, $files= array (), $toFile= false) {
+        $parser = $this->getParser();
+        $parser->tagTranslation = $this->tagTranslation;
+        if ($classes === null) {
+            $classes= array (
+                'modResource' => array ('content', 'pagetitle', 'longtitle', 'description', 'menutitle', 'introtext'),
+                'modTemplate' => array ('content'),
+                'modChunk' => array ('snippet'),
+                'modSnippet' => array ('snippet'),
+                'modPlugin' => array ('plugincode'),
+                'modTemplateVar' => array ('default_text'),
+                'modTemplateVarResource' => array ('value'),
+                'modSystemSetting' => array ('value')
+            );
+        }
+        ob_start();
+
+        echo "Processing classes: " . print_r($classes, true) . "\n\n\n";
+
+        foreach ($classes as $className => $fields) {
+            $resources= $this->modx->getCollection($className);
+            if ($resources) {
+                foreach ($resources as $resource) {
+                    foreach ($fields as $field) {
+                        $content= $resource->get($field);
+                        if ($content) {
+                            echo "[BEGIN TRANSLATING FIELD] {$field}\n";
+                            $content = str_replace($this->preTranslationSearch, $this->preTranslationReplace, $content);
+                            while ($parser->translate($content, array(), true)) {
+                                $resource->set($field, $content);
+                            }
+                            echo "[END TRANSLATING FIELD] {$field}\n\n";
+                        }
+                    }
+                    if ($save) {
+                        $resource->save();
+                    }
                 }
             }
         }
-        return $matchCount;
+
+        if (!empty ($files)) {
+            echo $this->translateFiles($save, $files);
+        }
+
+        $log= ob_get_contents();
+        ob_end_clean();
+        if ($toFile) {
+            $cacheManager= $this->modx->getCacheManager();
+            $cacheManager->writeFile($toFile, $log);
+        } else {
+            echo $log;
+        }
     }
 
-    /**
-     * Adds the legacy tag translation and legacy OnParseDocument event support.
-     */
-    public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $echo= false) {
-        // invoke OnParseDocument event
-        $this->modx->documentOutput = $content;      // store source code so plugins can
-        $this->modx->invokeEvent('OnParseDocument');    // work on it via $modx->documentOutput
-        $content = $this->modx->documentOutput;
-        $ignoretokens= array ();
-//        if (!$processUncacheable) {
-//            $ignoretokens[]= '+';
-//            $ignoretokens[]= '++';
-//        }
-//        if (!$processUncacheable || ($processUncacheable && !$removeUnprocessed)) {
-//            $ignoretokens[]= '!';
-//        }
-        while ($this->translate($content, $ignoretokens, $echo)) {}
-        return parent :: processElementTags($parentTag, $content, $processUncacheable, $removeUnprocessed, $prefix, $suffix, $tokens);
+    public function translateFiles($save= false, $files= array()) {
+        $output= '';
+        if (is_array($files) && !empty ($files)) {
+            $parser= $this->getParser();
+            $parser->tagTranslation=$this->tagTranslation;
+            $cacheManager= $this->modx->getCacheManager();
+
+            $output .= "Processing files: " . print_r($files, true) . "\n\n\n";
+            ob_start();
+            foreach ($files as $file) {
+                if (file_exists($file)) {
+                    echo "[BEGIN TRANSLATING FILE] {$file}\n";
+                    $content= file_get_contents($file);
+                    if ($content !== false) {
+                        $content=str_replace($this->preTranslationSearch,$this->preTranslationReplace,$content);
+                        while ($parser->translate($content, array(), true)) {}
+                        if ($save) $cacheManager->writeFile($file, $content);
+                    }
+                    echo "[END TRANSLATING FILE] {$file}\n";
+                }
+            }
+            $output .= ob_get_contents();
+            ob_end_clean();
+        }
+        return $output;
     }
 }
