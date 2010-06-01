@@ -53,6 +53,13 @@ if ($modx->user) {
     if ($modx->hasPermission('resource_tree')) { $o .= 'MODx.perm.resource_tree = true;'; }
     if ($modx->hasPermission('element_tree')) { $o .= 'MODx.perm.element_tree = true;'; }
     if ($modx->hasPermission('file_tree')) { $o .= 'MODx.perm.file_tree = true;'; }
+    if ($modx->hasPermission('file_upload')) { $o .= 'MODx.perm.file_upload = true;'; }
+    if ($modx->hasPermission('new_chunk')) { $o .= 'MODx.perm.new_chunk  = true;'; }
+    if ($modx->hasPermission('new_plugin')) { $o .= 'MODx.perm.new_plugin = true;'; }
+    if ($modx->hasPermission('new_snippet')) { $o .= 'MODx.perm.new_snippet = true;'; }
+    if ($modx->hasPermission('new_template')) { $o .= 'MODx.perm.new_template = true;'; }
+    if ($modx->hasPermission('new_tv')) { $o .= 'MODx.perm.new_tv = true;'; }
+
     $o .= 'MODx.user = {id:"'.$modx->user->get('id').'",username:"'.$modx->user->get('username').'"}';
 }
 

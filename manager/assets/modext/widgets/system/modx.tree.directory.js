@@ -25,16 +25,19 @@ MODx.tree.Directory = function(config) {
         ,primaryKey: 'dir'
         ,useDefaultToolbar: true
         ,tbar: [{
-            text: _('upload_files')
-            ,handler: this.uploadFiles
-            ,scope: this
-        },{
             icon: MODx.config.template_url+'images/restyle/icons/folder.png'
             ,cls: 'x-btn-icon'
-            ,tooltip: {text: _('directory_create')}
+            ,tooltip: {text: _('file_folder_create')}
             ,handler: this.createDirectory
             ,scope: this
             ,hidden: MODx.perm.directory_create ? false : true
+        },{
+            icon: MODx.config.template_url+'images/restyle/icons/page_white_get.png'
+            ,cls: 'x-btn-icon'
+            ,tooltip: {text: _('upload_files')}
+            ,handler: this.uploadFiles
+            ,scope: this
+            ,hidden: MODx.perm.file_upload ? false : true
         }]
     });
     MODx.tree.Directory.superclass.constructor.call(this,config);

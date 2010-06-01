@@ -14,6 +14,53 @@ MODx.tree.Element = function(config) {
         ,ddGroup: 'modx-treedrop-dd'
         ,title: ''
         ,url: MODx.config.connectors_url+'element/index.php'
+        ,useDefaultToolbar: true
+        ,tbar: [{
+            icon: MODx.config.template_url+'images/restyle/icons/template.png'
+            ,cls: 'x-btn-icon'
+            ,tooltip: {text: _('new')+' '+_('template')}
+            ,handler: function() {
+                this.redirect('index.php?a='+MODx.action['element/template/create']);
+            }
+            ,scope: this
+            ,hidden: MODx.perm.new_template ? false : true
+        },{
+            icon: MODx.config.template_url+'images/restyle/icons/tv.png'
+            ,cls: 'x-btn-icon'
+            ,tooltip: {text: _('new')+' '+_('tv')}
+            ,handler: function() {
+                this.redirect('index.php?a='+MODx.action['element/tv/create']);
+            }
+            ,scope: this
+            ,hidden: MODx.perm.new_tv ? false : true
+        },{
+            icon: MODx.config.template_url+'images/restyle/icons/chunk.png'
+            ,cls: 'x-btn-icon'
+            ,tooltip: {text: _('new')+' '+_('chunk')}
+            ,handler: function() {
+                this.redirect('index.php?a='+MODx.action['element/chunk/create']);
+            }
+            ,scope: this
+            ,hidden: MODx.perm.new_chunk ? false : true
+        },{
+            icon: MODx.config.template_url+'images/restyle/icons/snippet.png'
+            ,cls: 'x-btn-icon'
+            ,tooltip: {text: _('new')+' '+_('snippet')}
+            ,handler: function() {
+                this.redirect('index.php?a='+MODx.action['element/snippet/create']);
+            }
+            ,scope: this
+            ,hidden: MODx.perm.new_snippet ? false : true
+        },{
+            icon: MODx.config.template_url+'images/restyle/icons/plugin.png'
+            ,cls: 'x-btn-icon'
+            ,tooltip: {text: _('new')+' '+_('plugin')}
+            ,handler: function() {
+                this.redirect('index.php?a='+MODx.action['element/plugin/create']);
+            }
+            ,scope: this
+            ,hidden: MODx.perm.new_plugin ? false : true
+        }]
     });
     MODx.tree.Element.superclass.constructor.call(this,config);
     this.on('afterSort',this.afterSort);
@@ -169,7 +216,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
     }
 	
-    ,_createElement: function(itm,e) {
+    ,_createElement: function(itm,e,type) {
         var id = this.cm.activeNode.id.substr(2);
         var oar = id.split('_');
         var type = oar[0] == 'type' ? oar[1] : oar[0];
