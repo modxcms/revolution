@@ -189,7 +189,7 @@ class modX extends xPDO {
     public $sanitizePatterns = array(
         'scripts'   => '@<script[^>]*?>.*?</script>@si',
         'entities'  => '@&#(\d+);@e',
-        'tags'      => '@\[\[(.*?)\]\]@si',
+        'tags'      => '@\[\[(.[^\[\[]*?)\]\]@si',
     );
     /**
      * @var integer An integer representing the session state of modX.
@@ -268,13 +268,21 @@ class modX extends xPDO {
      * target contains values that are arrays.
      * @return array The sanitized array.
      */
-    public static function sanitize(array &$target, array $patterns= array(), $depth= 3) {
+    public static function sanitize(array &$target, array $patterns= array(), $depth= 3, $nesting= 10) {
         while (list($key, $value)= each($target)) {
             if (is_array($value) && $depth > 0) {
                 modX :: sanitize($value, $patterns, $depth--);
             } elseif (is_string($value)) {
-                if (!empty($patterns))
-                    $value= preg_replace($patterns, '', $value);
+                if (!empty($patterns)) {
+                    foreach ($patterns as $pattern) {
+                        $nesting = ((integer) $nesting ? (integer) $nesting : 10);
+                        $iteration = 1;
+                        while ($iteration <= $nesting && preg_match($pattern, $value)) {
+                            $value= preg_replace($pattern, '', $value);
+                            $iteration++;
+                        }
+                    }
+                }
                 if (get_magic_quotes_gpc()) {
                     $target[$key]= stripslashes($value);
                 } else {
@@ -1554,14 +1562,19 @@ class modX extends xPDO {
     /**
      * Strip unwanted HTML and PHP tags and supplied patterns from content.
      */
-    public function stripTags($html, $allowed= '', $patterns= array()) {
+    public function stripTags($html, $allowed= '', $patterns= array(), $depth= 10) {
         $stripped= strip_tags($html, $allowed);
         if (is_array($patterns)) {
             if (empty($patterns)) {
                 $patterns = $this->sanitizePatterns;
             }
             foreach ($patterns as $pattern) {
-                $stripped= preg_replace($pattern, '', $stripped);
+                $depth = ((integer) $depth ? (integer) $depth : 10);
+                $iteration = 1;
+                while ($iteration <= $depth && preg_match($pattern, $stripped)) {
+                    $stripped= preg_replace($pattern, '', $stripped);
+                    $iteration++;
+                }
             }
         }
         return $stripped;
