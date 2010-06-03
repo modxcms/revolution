@@ -84,10 +84,6 @@ class modRequest {
         $this->modx->beforeRequest();
         $this->modx->invokeEvent("OnWebPageInit");
 
-        if (is_array($this->modx->config)) {
-            $this->modx->setPlaceholders($this->modx->config, '+');
-        }
-
         if (!is_object($this->modx->resource)) {
             if (!$this->modx->resource = $this->getResource($this->modx->resourceMethod, $this->modx->resourceIdentifier)) {
                 $this->modx->sendErrorPage();

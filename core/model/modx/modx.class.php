@@ -2405,6 +2405,11 @@ class modX extends xPDO {
         $switched= false;
         if ($this->context->key != $contextKey) {
             $switched= $this->_initContext($contextKey);
+            if ($switched) {
+                if (is_array($this->config)) {
+                    $this->setPlaceholders($this->config, '+');
+                }
+            }
         }
         return $switched;
     }

@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Have modX::switchContext() update placeholders from config on successful switch
+- [#MODX-1774] Remove redundant setting of placeholders from modX::$config in modRequest::handleRequest()
 - [#MODX-2031] Fix modX::stripTags() and modX::sanitize() to properly strip nested element tags
 - [#MODX-2027] Added icon to file tree to show MODx Browser, for a different view on file management
 - [#MODX-1924] Made more precise the cursor pointer change on buttons in mgr
