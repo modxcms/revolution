@@ -46,9 +46,9 @@ if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('tv_err_e
 if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('untitled_tv');
 
 /* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$scriptProperties['name'] = str_replace($invchars,'',$scriptProperties['name']);
+//$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+//    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+//$scriptProperties['name'] = str_replace($invchars,'',$scriptProperties['name']);
 
 if (empty($scriptProperties['caption'])) { $scriptProperties['caption'] = $scriptProperties['name']; }
 
@@ -76,6 +76,18 @@ if (isset($scriptProperties['propdata'])) {
     $properties = $modx->fromJSON($properties);
 }
 if (is_array($properties)) $tv->setProperties($properties);
+
+if (!$tv->validate()) {
+    $validator = $tv->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+    if ($modx->error->hasError()) {
+        return $modx->error->failure();
+    }
+}
 
 if ($tv->save() == false) {
     return $modx->error->failure($modx->lexicon('tv_err_save'));

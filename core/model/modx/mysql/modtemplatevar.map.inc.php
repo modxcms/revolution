@@ -161,4 +161,25 @@ $xpdo_meta_map['modTemplateVar']= array (
       'owner' => 'local',
     ),
   ),
+  'validation' => 
+  array (
+    'rules' => 
+    array (
+      'name' => 
+      array (
+        'invalid' => 
+        array (
+          'type' => 'preg_match',
+          'rule' => '/(?=^[a-zA-Z0-9\\x2d-\\x2f\\x7f-\\xff_-]+$)/',
+          'message' => 'tv_err_invalid_name',
+        ),
+        'reserved' => 
+        array (
+          'type' => 'preg_match',
+          'rule' => '/(?!^(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|haskeywords|hasmetatags|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type)$)/',
+          'message' => 'tv_err_reserved_name',
+        ),
+      ),
+    ),
+  ),
 );

@@ -19,6 +19,7 @@ $_lang['plugin_disabled'] = 'Plugin Disabled';
 $_lang['plugin_duplicate_confirm'] = 'Are you sure you want to duplicate this plugin?';
 $_lang['plugin_err_create'] = 'An error occurred while creating the plugin.';
 $_lang['plugin_err_exists_name'] = 'A plugin already exists with that name.';
+$_lang['plugin_err_invalid_name'] = 'Plugin name is invalid.';
 $_lang['plugin_err_nf'] = 'Plugin not found!';
 $_lang['plugin_err_ns'] = 'Plugin not specified.';
 $_lang['plugin_err_ns_name'] = 'Please specify a name for the plugin.';

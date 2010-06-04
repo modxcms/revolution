@@ -95,4 +95,19 @@ $xpdo_meta_map['modChunk']= array (
       'owner' => 'foreign',
     ),
   ),
+  'validation' => 
+  array (
+    'rules' => 
+    array (
+      'name' => 
+      array (
+        'invalid' => 
+        array (
+          'type' => 'preg_match',
+          'rule' => '/(?=^[a-zA-Z0-9\\x2d-\\x2f\\x7f-\\xff_-]+$)/',
+          'message' => 'chunk_err_invalid_name',
+        ),
+      ),
+    ),
+  ),
 );

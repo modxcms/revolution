@@ -66,6 +66,18 @@ $modx->invokeEvent('OnBeforePluginFormSave',array(
     'plugin' => &$plugin,
 ));
 
+if (!$plugin->validate()) {
+    $validator = $plugin->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+    if ($modx->error->hasError()) {
+        return $modx->error->failure();
+    }
+}
+
 /* save plugin */
 if ($plugin->save() == false) {
     return $modx->error->failure($modx->lexicon('plugin_err_save'));

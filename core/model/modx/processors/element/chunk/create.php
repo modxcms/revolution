@@ -60,6 +60,18 @@ if (isset($scriptProperties['propdata'])) {
 }
 if (is_array($properties)) $chunk->setProperties($properties);
 
+if (!$chunk->validate()) {
+    $validator = $chunk->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+    if ($modx->error->hasError()) {
+        return $modx->error->failure();
+    }
+}
+
 /* save chunk */
 if ($chunk->save() == false) {
     return $modx->error->failure($modx->lexicon('chunk_err_save'));

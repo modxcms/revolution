@@ -63,9 +63,9 @@ if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('tv_err_ex
 
 
 /* get rid of invalid chars */
-$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-$scriptProperties['name'] = str_replace($invchars,'',$scriptProperties['name']);
+//$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
+//    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
+//$scriptProperties['name'] = str_replace($invchars,'',$scriptProperties['name']);
 
 
 /* extract widget properties */
@@ -83,6 +83,18 @@ $tv->set('elements',$scriptProperties['els']);
 $tv->set('display_params',$display_params);
 $tv->set('rank', !empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
 $tv->set('locked', !empty($scriptProperties['locked']));
+
+if (!$tv->validate()) {
+    $validator = $tv->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+    if ($modx->error->hasError()) {
+        return $modx->error->failure();
+    }
+}
 
 if ($tv->save() === false) {
     return $modx->error->failure($modx->lexicon('tv_err_save'));

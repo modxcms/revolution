@@ -204,6 +204,9 @@
         <field key="properties" dbtype="text" phptype="array" null="true" />
         
         <aggregate alias="Category" class="modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
+        <validation>
+            <rule field="name" name="invalid" type="preg_match" rule="/(?=^[a-zA-Z0-9\x2d-\x2f\x7f-\xff_-]+$)/" message="chunk_err_invalid_name" />
+        </validation>
     </object>
     
     <object class="modContentType" table="content_type" extends="xPDOSimpleObject">
@@ -390,6 +393,9 @@
         <field key="disabled" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
         <composite alias="PluginEvents" class="modPluginEvent" local="id" foreign="pluginid" cardinality="many" owner="local" />
+        <validation>
+            <rule field="name" name="invalid" type="preg_match" rule="/(?=^[a-zA-Z0-9\x2d-\x2f\x7f-\xff_-]+$)/" message="plugin_err_invalid_name" />
+        </validation>
     </object>
     
     <object class="modPluginEvent" table="site_plugin_events" extends="xPDOObject">
@@ -530,6 +536,9 @@
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
+        <validation>
+            <rule field="name" name="invalid" type="preg_match" rule="/(?=^[a-zA-Z0-9\x2d-\x2f\x7f-\xff_-]+$)/" message="snippet_err_invalid_name" />
+        </validation>
     </object>
     
     <object class="modStaticResource" extends="modResource" />
@@ -583,13 +592,17 @@
         <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
         <composite alias="TemplateVarResources" class="modTemplateVarResource" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
         <composite alias="TemplateVarResourceGroups" class="modTemplateVarResourceGroup" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
+        <validation>
+            <rule field="name" name="invalid" type="preg_match" rule="/(?=^[a-zA-Z0-9\x2d-\x2f\x7f-\xff_-]+$)/" message="tv_err_invalid_name" />
+            <rule field="name" name="reserved" type="preg_match" rule="/(?!^(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|haskeywords|hasmetatags|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type)$)/" message="tv_err_reserved_name" />
+        </validation>
     </object>
     
     <object class="modTemplateVarResource" table="site_tmplvar_contentvalues" extends="xPDOSimpleObject">
         <field key="tmplvarid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="contentid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="value" dbtype="text" phptype="string" null="false" />
-        
+
         <aggregate alias="TemplateVar" class="modTemplateVar" local="tmplvarid" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Resource" class="modResource" local="contentid" foreign="id" cardinality="one" owner="foreign" />
     </object>

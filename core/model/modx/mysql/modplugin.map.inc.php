@@ -79,4 +79,19 @@ $xpdo_meta_map['modPlugin']= array (
       'owner' => 'local',
     ),
   ),
+  'validation' => 
+  array (
+    'rules' => 
+    array (
+      'name' => 
+      array (
+        'invalid' => 
+        array (
+          'type' => 'preg_match',
+          'rule' => '/(?=^[a-zA-Z0-9\\x2d-\\x2f\\x7f-\\xff_-]+$)/',
+          'message' => 'plugin_err_invalid_name',
+        ),
+      ),
+    ),
+  ),
 );

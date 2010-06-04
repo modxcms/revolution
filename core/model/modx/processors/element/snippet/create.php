@@ -51,6 +51,18 @@ $modx->invokeEvent('OnBeforeSnipFormSave',array(
     'snippet' => &$snippet,
 ));
 
+if (!$snippet->validate()) {
+    $validator = $snippet->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+    if ($modx->error->hasError()) {
+        return $modx->error->failure();
+    }
+}
+
 /* save snippet */
 if ($snippet->save() == false) {
     return $modx->error->failure($modx->lexicon('snippet_err_create'));

@@ -67,6 +67,18 @@ $modx->invokeEvent('OnBeforeChunkFormSave',array(
 $chunk->fromArray($scriptProperties);
 $chunk->set('locked',!empty($scriptProperties['locked']));
 
+if (!$chunk->validate()) {
+    $validator = $chunk->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+    if ($modx->error->hasError()) {
+        return $modx->error->failure();
+    }
+}
+
 /* save the chunk */
 if ($chunk->save() == false) {
     return $modx->error->failure($modx->lexicon('chunk_err_save'));
