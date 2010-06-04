@@ -83,7 +83,7 @@ if (isset($scriptProperties['tvs'])) {
                 }
                 $templateVarTemplate->set('tmplvarid',$tv['id']);
                 $templateVarTemplate->set('templateid',$template->get('id'));
-                $templateVarTemplate->set('rank',$tv['tv_rank']);
+                $templateVarTemplate->set('rank',isset($tv['tv_rank']) ? $tv['tv_rank'] : 0);
                 $templateVarTemplate->save();
             } else {
                 $templateVarTemplate = $modx->getObject('modTemplateVarTemplate',array(
@@ -91,7 +91,7 @@ if (isset($scriptProperties['tvs'])) {
                     'templateid' => $template->get('id'),
                 ));
                 if ($templateVarTemplate && $templateVarTemplate instanceof modTemplateVarTemplate) {
-                    $tvt->remove();
+                    $templateVarTemplate->remove();
                 }
             }
         }
