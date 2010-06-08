@@ -499,6 +499,12 @@ table.classy tr.odd td {
     font-weight: normal;
     color: #666;
 }
+#modx-tv-tabs .ux-row-action-item span {
+    padding: 0;
+    background: none;
+}
+#modx-tv-tabs .modx-tv-inh { font-size: 11px; }
+
 .aleft { text-align: left; }
 .aright { text-align: right; }
 .right { float: right; }
@@ -882,7 +888,7 @@ input.x-static-text-field {
         -moz-box-shadow:0 0 2px rgba(0, 0, 0, 0.2);
         -webkit-box-shadow:0 0 2px rgba(0, 0, 0, 0.2);
         box-shadow:0 0 2px rgba(0, 0, 0, 0.2);
-        background:#EFEFEF url(../images/modx-theme/form/button-bg.png) repeat-x scroll 0 0 !important;
+        background:#EFEFEF url(../images/modx-theme/form/button-bg.png) repeat-x scroll 0 0;
         border:1px solid rgba(0, 0, 0, 0.2);
         padding:0;
         margin:0 0 2px 2px;

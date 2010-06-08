@@ -17,7 +17,6 @@ MODx.panel.ImageTV = function(config) {
             autoHeight: true
             ,border: false
         }
-        ,width: 400
         ,items: [{
             xtype: 'modx-combo-browser'
             ,browserEl: 'tvbrowser'+config.tv
@@ -30,7 +29,6 @@ MODx.panel.ImageTV = function(config) {
                     this.fireEvent('select',data);
                 },scope:this}
             }
-            ,width: 200
         }] 
     });
     MODx.panel.ImageTV.superclass.constructor.call(this,config);
@@ -50,7 +48,6 @@ MODx.panel.FileTV = function(config) {
             autoHeight: true
             ,border: false
         }
-        ,width: 400
         ,items: [{
             xtype: 'modx-combo-browser'
             ,browserEl: 'tvbrowser'+config.tv
@@ -63,7 +60,6 @@ MODx.panel.FileTV = function(config) {
                     this.fireEvent('select',data);                    
                 },scope:this}
             }
-            ,width: 200
         }] 
     });
     MODx.panel.FileTV.superclass.constructor.call(this,config);

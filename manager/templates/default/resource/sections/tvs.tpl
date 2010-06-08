@@ -32,7 +32,7 @@
                 <div class="ux-row-action-item ux-row-action-text" id="modx-reset-tv-{$tv->id}"><span>{$_lang.set_to_default}</span></div>
             </div>
             {/if}
-            {if $tv->get('inherited')}<br class="clear" /><em>({$_lang.tv_value_inherited})</em>{/if}            
+            {if $tv->get('inherited')}<br class="clear" /><em class="modx-tv-inh">({$_lang.tv_value_inherited})</em>{/if}
         </td>
     </tr>
     {foreachelse}
