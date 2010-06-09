@@ -369,7 +369,7 @@ abstract class modInstallTest {
             @ fwrite($hnd, '<?php // '.$this->install->lexicon['modx_configuration_file'].' ?>');
             @ fclose($hnd);
         }
-        $isWriteable = $this->is_writable2($configFilePath) && is_writable($configFilePath);
+        $isWriteable = is_writable($configFilePath);
         if (!$isWriteable) {
             $this->results['config_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p><p><strong>'.sprintf($this->install->lexicon['test_config_file_nw'],MODX_CONFIG_KEY).'</strong></p>';
             $this->results['config_writable']['class'] = 'testFailed';

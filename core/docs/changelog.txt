@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug with is_writable check in setup; was checking core/config rather than just core/config/config.inc.php
 - [#MODX-2042] Fixed extra beginning slash for image/file TVs
 - Add validation to processors for Chunks, Plugins, Snippets, and Template Variables
 - [#MODX-1998] Disallow reserved Template Variable names (i.e. Resource field names)
