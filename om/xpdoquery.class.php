@@ -74,6 +74,8 @@ abstract class xPDOQuery extends xPDOCriteria {
         ' GREATEST(',
         ' INTERVAL(',
         ' LEAST(',
+        'MATCH(',
+        'MATCH ('
     );
     protected $_quotable= array ('string', 'password', 'date', 'datetime', 'timestamp', 'time');
     protected $_class= null;
