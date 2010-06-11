@@ -79,6 +79,28 @@ MODx.panel.SystemInfo = function(config) {
                 html: '<hr />'
             },{
                 xtype: 'statictextfield'
+                ,fieldLabel: _('extjs_version')
+                ,name: 'extjs_version'
+                ,value: '3.2.1'
+            },{
+                xtype: 'statictextfield'
+                ,fieldLabel: _('smarty_version')
+                ,name: 'smarty_version'
+                ,value: '2.6.19'
+            },{
+                xtype: 'statictextfield'
+                ,fieldLabel: _('phpmailer_version')
+                ,name: 'phpmailer_version'
+                ,value: '2.0.4'
+            },{
+                xtype: 'statictextfield'
+                ,fieldLabel: _('magpie_version')
+                ,name: 'magpie_version'
+                ,value: '0.7a'
+            },{
+                html: '<hr />'
+            },{
+                xtype: 'statictextfield'
                 ,fieldLabel: _('database_type')
                 ,name: 'database_type'
             },{
