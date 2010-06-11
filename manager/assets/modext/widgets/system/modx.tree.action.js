@@ -7,7 +7,7 @@
  * @xtype modx-tree-action
  */
 MODx.tree.Action = function(config) {
-	config = config || {};
+    config = config || {};
     Ext.applyIf(config,{
         root_id: 'n_root_0'
         ,root_name: _('actions')
@@ -15,16 +15,16 @@ MODx.tree.Action = function(config) {
         ,expandFirst: true
         ,enableDrag: true
         ,enableDrop: true
-		,ddAppendOnly: true
+        ,ddAppendOnly: true
         ,url: MODx.config.connectors_url + 'system/action.php'
-		,action: 'getNodes'
+        ,action: 'getNodes'
     });
     MODx.tree.Action.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.tree.Action,MODx.tree.Tree,{
-	windows: {}
+    windows: {}
     
-	,createAction: function(n,e) {
+    ,createAction: function(n,e) {
         var node = this.cm.activeNode.attributes;
         var r = node.data;
         if (node.type == 'namespace') {
@@ -34,45 +34,47 @@ Ext.extend(MODx.tree.Action,MODx.tree.Tree,{
         if (!this.windows.create_action) {
             this.windows.create_action = MODx.load({
                 xtype: 'modx-window-action-create'
-                ,scope: this
-                ,success: this.refresh
                 ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) { this.refresh(); },scope:this}
+                }
             });
         }
         this.windows.create_action.setValues(r);
         this.windows.create_action.show(e.target);
         return false;
-	}
+    }
 	
-	,updateAction: function(n,e) {
+    ,updateAction: function(n,e) {
         var r = this.cm.activeNode.attributes.data;
         
         if (!this.windows.update_action) {
             this.windows.update_action = MODx.load({
                 xtype: 'modx-window-action-update'
-                ,scope: this
-                ,success: this.refresh
                 ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) { this.refresh(); },scope:this}
+                }
             });
         }
         this.windows.update_action.setValues(r);
         this.windows.update_action.show(e.target);        
-	}
-	
-	,removeAction: function(n,e) {
-		MODx.msg.confirm({
-			title: _('warning')
-			,text: _('action_confirm_remove')
-			,url: this.config.url
-			,params: {
-				action: 'remove'
-				,id: this.cm.activeNode.attributes.pk
-			}
+    }
+
+    ,removeAction: function(n,e) {
+        MODx.msg.confirm({
+            title: _('warning')
+            ,text: _('action_confirm_remove')
+            ,url: this.config.url
+            ,params: {
+                action: 'remove'
+                ,id: this.cm.activeNode.attributes.pk
+            }
             ,listeners: {
                 'success':{fn:this.refresh,scope:this}
             }
-		});	
-	}
+        });
+    }
 });
 Ext.reg('modx-tree-action',MODx.tree.Action);
 
@@ -86,9 +88,9 @@ Ext.reg('modx-tree-action',MODx.tree.Action);
  */
 MODx.window.CreateAction = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
+    Ext.applyIf(config,{
         title: _('action_create')
-		,width: 430
+        ,width: 430
         ,url: MODx.config.connectors_url+'system/action.php'
         ,action: 'create'
         ,fields: [{
@@ -129,8 +131,8 @@ MODx.window.CreateAction = function(config) {
             ,width: 200
             ,grow: false
         }]
-	});
-	MODx.window.CreateAction.superclass.constructor.call(this,config);
+    });
+    MODx.window.CreateAction.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.CreateAction,MODx.Window);
 Ext.reg('modx-window-action-create',MODx.window.CreateAction);
@@ -146,8 +148,8 @@ Ext.reg('modx-window-action-create',MODx.window.CreateAction);
  */
 MODx.window.UpdateAction = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
-		title: _('action_update')
+    Ext.applyIf(config,{
+        title: _('action_update')
         ,width: 430
         ,url: MODx.config.connectors_url+'system/action.php'
         ,action: 'update'
@@ -195,8 +197,8 @@ MODx.window.UpdateAction = function(config) {
             ,width: 200
             ,grow: false
         }]
-	});
-	MODx.window.UpdateAction.superclass.constructor.call(this,config);
+    });
+    MODx.window.UpdateAction.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.UpdateAction,MODx.Window);
 Ext.reg('modx-window-action-update',MODx.window.UpdateAction);

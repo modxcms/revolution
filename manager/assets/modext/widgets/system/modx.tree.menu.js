@@ -7,16 +7,16 @@
  * @xtype modx-tree-menu
  */
 MODx.tree.Menu = function(config) {
-	config = config || {};
+    config = config || {};
     Ext.applyIf(config,{
         root_id: 'n_'
         ,root_name: _('menu_top')
-		,rootVisible: true
+        ,rootVisible: true
         ,expandFirst: true
         ,enableDrag: true
         ,enableDrop: true
         ,url: MODx.config.connectors_url + 'system/menu.php'
-		,action: 'getNodes'
+        ,action: 'getNodes'
         ,primaryKey: 'text'
         ,useDefaultToolbar: true
         ,tbar: [{
@@ -28,9 +28,9 @@ MODx.tree.Menu = function(config) {
     MODx.tree.Menu.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
-	windows: {}
+    windows: {}
 	
-	,createMenu: function(n,e) {
+    ,createMenu: function(n,e) {
         var r = {};
         if (this.cm && this.cm.activeNode && this.cm.activeNode.attributes && this.cm.activeNode.attributes.data) {
             r['parent'] = this.cm.activeNode.attributes.data.text;
@@ -38,16 +38,17 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         if (!this.windows.create_menu) {
             this.windows.create_menu = MODx.load({
                 xtype: 'modx-window-menu-create'
-                ,scope: this
-                ,success: this.refresh
                 ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) { this.refresh(); },scope:this}
+                }
             });
         }
         this.windows.create_menu.setValues(r);
         this.windows.create_menu.show(e.target);
-	}
+    }
 	
-	,updateMenu: function(n,e) {		
+    ,updateMenu: function(n,e) {
         var r = this.cm.activeNode.attributes.data;
         Ext.apply(r,{
             action_id: r.action
@@ -56,30 +57,31 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         if (!this.windows.update_menu) {
             this.windows.update_menu = MODx.load({
                 xtype: 'modx-window-menu-update'
-                ,scope: this
-                ,success: this.refresh
                 ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) { this.refresh(); },scope:this}
+                }
             });
         } else {
             this.windows.update_menu.setValues(r);
         }
         this.windows.update_menu.show(e.target);
-	}
+    }
 	
-	,removeMenu: function(n,e) {
-		MODx.msg.confirm({
-			title: _('warning')
-			,text: _('menu_confirm_remove')
-			,url: this.config.url
-			,params: {
-				action: 'remove'
-				,text: this.cm.activeNode.attributes.pk
-			}
+    ,removeMenu: function(n,e) {
+        MODx.msg.confirm({
+            title: _('warning')
+            ,text: _('menu_confirm_remove')
+            ,url: this.config.url
+            ,params: {
+                action: 'remove'
+                ,text: this.cm.activeNode.attributes.pk
+            }
             ,listeners: {
                 'success':{fn:this.refresh,scope:this}
             }
-		});	
-	}
+        });
+    }
 });
 Ext.reg('modx-tree-menu',MODx.tree.Menu);
 
@@ -92,11 +94,11 @@ Ext.reg('modx-tree-menu',MODx.tree.Menu);
  * @xtype modx-window-menu-create
  */
 MODx.window.CreateMenu = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		title: _('menu_create')
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('menu_create')
         ,width: 480
-		,height: 400
+        ,height: 400
         ,url: MODx.config.connectors_url+'system/menu.php'
         ,action: 'create'
         ,fields: [{
@@ -142,8 +144,8 @@ MODx.window.CreateMenu = function(config) {
             ,xtype: 'textfield'
             ,width: 200
         }]
-	});
-	MODx.window.CreateMenu.superclass.constructor.call(this,config);
+    });
+    MODx.window.CreateMenu.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.CreateMenu,MODx.Window);
 Ext.reg('modx-window-menu-create',MODx.window.CreateMenu);
@@ -159,10 +161,10 @@ Ext.reg('modx-window-menu-create',MODx.window.CreateMenu);
  */
 MODx.window.UpdateMenu = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
-		title: _('menu_update')
+    Ext.applyIf(config,{
+        title: _('menu_update')
         ,width: 480
-		,height: 400
+        ,height: 400
         ,url: MODx.config.connectors_url+'system/menu.php'
         ,action: 'update'
         ,fields: [{
@@ -211,8 +213,8 @@ MODx.window.UpdateMenu = function(config) {
             ,xtype: 'textfield'
             ,width: 200
         }]
-	});
-	MODx.window.UpdateMenu.superclass.constructor.call(this,config);
+    });
+    MODx.window.UpdateMenu.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.UpdateMenu,MODx.Window);
 Ext.reg('modx-window-menu-update',MODx.window.UpdateMenu);
