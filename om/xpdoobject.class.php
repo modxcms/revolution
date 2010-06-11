@@ -1388,7 +1388,6 @@ class xPDOObject {
      */
     protected function _saveRelatedObject(& $obj, $fkMeta) {
         $saved= false;
-        $wasNew= $obj->_new;
         $local= $fkMeta['local'];
         $foreign= $fkMeta['foreign'];
         $cardinality= $fkMeta['cardinality'];
@@ -1400,19 +1399,15 @@ class xPDOObject {
             $obj->set($foreign, $fk);
             $saved= $obj->save();
         } elseif ($owner === 'foreign') {
-            if (!$fk= $obj->get($foreign)) {
-                if ($obj->_new || !empty($obj->_dirty)) {
-                    $saved= $obj->save();
-                    if ($saved) {
-                        $fk= $obj->get($foreign);
-                    }
-                }
+            if ($obj->isNew() || !empty($obj->_dirty)) {
+                $saved= $obj->save();
             }
+            $fk= $obj->get($foreign);
             if ($fk) {
                 $this->set($local, $fk);
             }
         }
-        if ($this->xpdo->getDebug() === true) $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, ($saved ? 'Successfully saved' : 'Could not save') . " related object\nMain object: " . print_r($this->toArray('', true), true) . "\nRelated Object: " . print_r($obj->toArray('', true), true));
+        if ($this->xpdo->getDebug() === true) $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG , ($saved ? 'Successfully saved' : 'Could not save') . " related object\nMain object: " . print_r($this->toArray('', true), true) . "\nRelated Object: " . print_r($obj->toArray('', true), true));
         return $saved;
     }
 
