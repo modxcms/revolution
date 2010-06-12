@@ -460,6 +460,9 @@ class modOutputFilter {
                         /* See PHP's md5 - http://www.php.net/manual/en/function.md5.php */
                         $output= md5($output);
                         break;
+                    case 'cdata':
+                        $output= "<![CDATA[ {$output} ]]>";
+                        break;
 
                     case 'userinfo':
                         /* Returns the requested user data (input: userid) */
