@@ -21,7 +21,12 @@ if (file_exists($delegateView)) {
 }
 
 $templateId = 0;
-$categories = $modx->getCollection('modCategory');
+
+/* get categories */
+$c = $modx->newQuery('modCategory');
+$c->sortby('category','ASC');
+$categories = $modx->getCollection('modCategory',$c);
+
 $emptycat = $modx->newObject('modCategory');
 $emptycat->set('category','uncategorized');
 $emptycat->id = 0;
