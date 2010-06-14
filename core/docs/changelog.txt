@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added phpThumb to core, added connector for secure access, integrated into MODx.Browser
 - Ensure categories in TV panel are sorted alphanumerically
 - Added stripString, cdata, replace, fuzzydate and ago output filters
 - [#MODX-2045] Added ExtJS, Smarty, PHPMailer, MagpieRSS version into System info

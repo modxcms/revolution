@@ -337,7 +337,7 @@ MODx.browser.View = function(config) {
         url: MODx.config.connectors_url+'browser/directory.php'
         ,id: this.ident
         ,fields: [
-            'name','cls','url','relativeUrl','image','image_width','image_height','pathname','ext','disabled'
+            'name','cls','url','relativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled'
             ,{name:'size', type: 'float'}
             ,{name:'lastmod', type:'date', dateFormat:'timestamp'}
             ,'menu'
@@ -423,7 +423,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
                 ,'<div class="modx-pb-thumb-wrap" id="{name}">'
-                ,'<div class="modx-pb-thumb"><img src="{image}" title="{name}" width="90" height="90" /></div>'
+                ,'<div class="modx-pb-thumb"><img src="{thumb}" title="{name}" width="90" height="90" /></div>'
                 ,'<span>{shortName}</span></div>'
             ,'</tpl>'
         );
@@ -432,7 +432,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.templates.details = new Ext.XTemplate(
             '<div class="details">'
             ,'<tpl for=".">'
-                ,'<div class="modx-pb-detail-thumb"><img src="{image}" alt="" width="80" height="60" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" /></div>'
+                ,'<div class="modx-pb-detail-thumb"><img src="{thumb}" alt="" width="80" height="60" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;" /></div>'
                 ,'<div class="modx-pb-details-info">'
                 ,'<b>'+_('file_name')+':</b>'
                 ,'<span>{name}</span>'

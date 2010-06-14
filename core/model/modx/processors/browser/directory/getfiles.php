@@ -44,27 +44,39 @@ foreach (new DirectoryIterator($fullpath) as $file) {
 
         /* get thumbnail */
         if (in_array($fileExtension,$imagesExts)) {
-            $thumb = str_replace('//','/',$modx->getOption('base_url').$url);
-            $thumbWidth = $modx->getOption('filemanager_thumb_width',null,80);
+            $imageWidth = $modx->getOption('filemanager_image_width',null,400);
+            $imageHeight = $modx->getOption('filemanager_image_height',null,300);
             $thumbHeight = $modx->getOption('filemanager_thumb_height',null,60);
+            $thumbWidth = $modx->getOption('filemanager_thumb_width',null,80);
+
             $size = @getimagesize($filePathName);
             if (is_array($size)) {
-                $thumbWidth = $size[0];
-                $thumbHeight = $size[1];
+                $imageWidth = $size[0] > 800 ? 800 : $size[0];
+                $imageHeight = $size[1] > 600 ? 600 : $size[1];
             }
+            
+            if ($thumbWidth > $imageWidth) $thumbWidth = $imageWidth;
+            if ($thumbHeight > $imageHeight) $thumbHeight = $imageHeight;
+
+            $thumb = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$thumbWidth.'&h='.$thumbHeight.'&zc=1';
+            $image = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$imageWidth.'&h='.$imageHeight.'&zc=1';
+           
         } else {
-            $thumb = $modx->getOption('manager_url').'templates/default/images/restyle/nopreview.jpg';
-            $thumbWidth = $modx->getOption('filemanager_thumb_width',null,80);
-            $thumbHeight = $modx->getOption('filemanager_thumb_height',null,60);
+            $thumb = $image = $modx->getOption('manager_url').'templates/default/images/restyle/nopreview.jpg';
+            $thumbWidth = $imageWidth = $modx->getOption('filemanager_thumb_width',null,80);
+            $thumbHeight = $imageHeight = $modx->getOption('filemanager_thumb_height',null,60);
         }
         $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
         $files[] = array(
             'id' => $filePathName,
             'name' => $fileName,
             'cls' => 'icon-'.$fileExtension,
-            'image' => $thumb,
-            'image_width' => $thumbWidth,
-            'image_height' => $thumbHeight,
+            'image' => $image,
+            'image_width' => $imageWidth,
+            'image_height' => $imageHeight,
+            'thumb' => $thumb,
+            'thumb_width' => $thumb,
+            'thumb_height' => $thumb,
             'url' => str_replace('//','/',$modx->getOption('base_url').$url),
             'relativeUrl' => ltrim($url,'/'),
             'ext' => $fileExtension,
