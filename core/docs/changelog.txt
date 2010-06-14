@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added prefix filtering to modLexicon::fetch
 - Added modTemplateVar::getDisplayParams for easier fetching of display_params for a TV
 - Fixed bug with custom TV render paths
 - Added phpThumb to core, added connector for secure access, integrated into MODx.Browser

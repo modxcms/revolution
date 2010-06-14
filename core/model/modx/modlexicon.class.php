@@ -101,9 +101,21 @@ class modLexicon {
      * Accessor method for the lexicon array.
      *
      * @access public
+     * @param string $prefix If set, will only return the lexicon entries with this prefix.
+     * @param boolean If true, will strip the prefix from the returned indexes
      * @return array The internal lexicon.
      */
-    public function fetch() {
+    public function fetch($prefix = '',$removePrefix = false) {
+        if (!empty($prefix)) {
+            $lex = array();
+            foreach ($lang as $k => $v) {
+                if (strpos($k,$prefix) !== false) {
+                    $key = $removePrefix ? str_replace($prefix,'',$k) : $k;
+                    $lex[$key] = $v;
+                }
+            }
+            return $lex;
+        }
         return $this->_lexicon;
     }
 
