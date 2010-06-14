@@ -259,7 +259,7 @@ class modTemplateVar extends modElement {
         $format= $this->get('display');
         $tvtype= $this->get('type');
 
-        $outputRenderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/output/';
+        $outputRenderPath = $this->getRenderDirectory('OnTVOutputRenderList','output');
         if (!file_exists($outputRenderPath) || !is_dir($outputRenderPath)) {
             $outputRenderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/web/output/';
         }
@@ -360,9 +360,9 @@ class modTemplateVar extends modElement {
         }
 
         /* find the correct renderer for the TV, if not one, render a textbox */
-        $inputRenderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/input/';
+        $inputRenderPath = $this->getRenderDirectory('OnTVInputRenderList','input');
         if (!file_exists($inputRenderPath) || !is_dir($inputRenderPath)) {
-            $outputRenderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/web/input/';
+            $inputRenderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/web/input/';
         }
 
         $inputRenderFile = $inputRenderPath.$this->get('type').'.php';
@@ -373,6 +373,45 @@ class modTemplateVar extends modElement {
         }
 
         return $field_html;
+    }
+
+
+    /**
+     * Finds the correct directory for renders
+     *
+     * @param string $event The plugin event to fire
+     * @param string $subdir The subdir to search
+     * @return string The found render directory
+     */
+    public function getRenderDirectory($event,$subdir) {
+        $renderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$subdir.'/';
+        $renderDirectories = array(
+            $renderPath,
+        );
+        $pluginResult = $this->xpdo->invokeEvent($event,array(
+            'context' => $this->xpdo->context->get('key'),
+        ));
+        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($pluginResult); }
+        if (!empty($pluginResult)) {
+            foreach ($pluginResult as $result) {
+                if (empty($result)) continue;
+                $renderDirectories[] = $result;
+            }
+        }
+
+        /* search directories */
+        $types = array();
+        foreach ($renderDirectories as $renderDirectory) {
+            if (empty($renderDirectory)) continue;
+            try {
+                $dirIterator = new DirectoryIterator($renderDirectory);
+                foreach ($dirIterator as $file) {
+                    if (!$file->isReadable() || !$file->isFile()) continue;
+                    $renderPath = dirname($file->getPathname()).'/';
+                }
+            } catch (UnexpectedValueException $e) {}
+        }
+        return $renderPath;
     }
 
     /**
