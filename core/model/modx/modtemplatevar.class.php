@@ -428,6 +428,27 @@ class modTemplateVar extends modElement {
     }
 
     /**
+     * Returns an array of display params for this TV
+     * 
+     * @return array The processed settings
+     */
+    public function getDisplayParams() {
+        $settings = array();
+        $params = $tv->get('display_params');
+        $ps = explode('&',$params);
+        foreach ($ps as $p) {
+            $param = explode('=',$p);
+            if ($p[0] != '') {
+                $v = $param[1];
+                if ($v == 'true') $v = 1;
+                if ($v == 'false') $v = 0;
+                $settings[$param[0]] = $v;
+            }
+        }
+        return $settings;
+    }
+
+    /**
      * Returns an string if a delimiter is present. Returns array if is a recordset is present.
      *
      * @access public
