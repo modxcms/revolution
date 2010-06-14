@@ -112,6 +112,10 @@ while ($item) {
             $class .= $modx->hasPermission('view_document') ? ' pview' : '';
             $class .= $modx->hasPermission('edit_document') ? ' pedit' : '';
             $class .= $modx->hasPermission('new_document') ? ' pnew' : '';
+            $class .= $modx->hasPermission('delete_document') ? ' pdelete' : '';
+            $class .= $modx->hasPermission('undelete_document') ? ' pundelete' : '';
+            $class .= $modx->hasPermission('publish_document') ? ' ppublish' : '';
+            $class .= $modx->hasPermission('unpublish_document') ? ' punpublish' : '';
 
             $qtip = '';
             if ($item->longtitle != '') {

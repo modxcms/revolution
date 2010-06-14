@@ -476,23 +476,23 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 
         if (ui.hasClass('psave')) {
             m.push('-');
-            if (ui.hasClass('unpublished')) {
+            if (ui.hasClass('ppublish') && ui.hasClass('unpublished')) {
                 m.push({
                     text: _('resource_publish')
                     ,handler: this.publishDocument
                 });
-            } else {
+            } else if (ui.hasClass('punpublish')) {
                 m.push({
                     text: _('resource_unpublish')
                     ,handler: this.unpublishDocument
                 });
             }
-            if (ui.hasClass('deleted')) {
+            if (ui.hasClass('pdelete') && ui.hasClass('deleted')) {
                 m.push({
                     text: _('resource_undelete')
                     ,handler: this.undeleteDocument
                 });
-            } else {
+            } else if (ui.hasClass('pundelete')) {
                 m.push({
                     text: _('resource_delete')
                     ,handler: this.deleteDocument
