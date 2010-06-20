@@ -372,7 +372,7 @@ textarea.x-form-field {
 #modx-login-user {
     font-weight: bold;
     text-decoration: none;
-    color: #eee;
+    color: #ccc;
 }
 #rightlogin {
     -moz-border-radius: 3px;
@@ -380,7 +380,7 @@ textarea.x-form-field {
     border-radius: 3px;
     border: 1px solid #4E4E4E;
     bottom: 10px;
-    color: #AAAAAA;
+    color: #aaa;
     height: 26px;
     line-height: 26px;
     position: absolute;
@@ -407,7 +407,7 @@ textarea.x-form-field {
     border-bottom-right-radius: 3px;
     background-color: #3e3e3e;
     border: 1px solid #4e4e4e;
-    color: #DDDDDD;
+    color: #ccc;
     display: block;
     float: right;
     height: 24px;

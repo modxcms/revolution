@@ -158,10 +158,6 @@ ul.x-tab-strip-bottom{
 
 .x-tab-strip-active span.x-tab-strip-text {
     font-weight: bold;
-    /*
-    color: #1f1f1f;
-    text-shadow:0px 1px 0 #888;
-    */
     color: #eee;
     text-shadow:0 -1px 1px #1f1f1f;
 }
