@@ -44,6 +44,7 @@ Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
             ,callback: function() {
                 if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
                 this.fireEvent('load');
+                MODx.fireEvent('ready');
             }
             ,scope: this
         };

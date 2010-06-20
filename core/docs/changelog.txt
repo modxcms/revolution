@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Cleaned up TV display panel, removed TV reload button, extended fields all the way across
+- [#MODX-1832] moved "Set to Default" to a fade-in icon
+- Prepared code for oncoming feature to move TVs into other tabs
+- Removed credits from about pane, consolidated tabs
 - Fixed permissions checks on resource tree context menu when policies are limited
 - Added prefix filtering to modLexicon::fetch
 - Added modTemplateVar::getDisplayParams for easier fetching of display_params for a TV

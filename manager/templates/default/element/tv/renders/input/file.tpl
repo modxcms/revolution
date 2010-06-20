@@ -10,7 +10,7 @@ MODx.load({
     ,renderTo: 'tvpanel{$tv->id}'
     ,tv: '{$tv->id}'
     ,value: '{$tv->value|escape}'
-    ,width: 300
+    ,width: '97%'
 {literal}
     ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
 });

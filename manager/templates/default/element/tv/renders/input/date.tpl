@@ -12,7 +12,7 @@ MODx.load({
     xtype: 'datefield'
     ,applyTo: 'tv{$tv->id}'
     ,format: parent.MODx.config.manager_date_format
-    ,width: 300
+    ,width: '97%'
 {literal}
     ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
 });

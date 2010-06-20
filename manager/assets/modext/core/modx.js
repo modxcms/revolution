@@ -33,6 +33,7 @@ Ext.extend(MODx,Ext.Component,{
             ,afterClearCache: true
             ,afterLogout: true
             ,afterReleaseLocks: true
+            ,ready: true
         });
     }
 

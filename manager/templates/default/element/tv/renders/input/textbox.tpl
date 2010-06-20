@@ -12,7 +12,7 @@ MODx.load({
 {/literal}
     xtype: 'textfield'
     ,applyTo: 'tv{$tv->id}'
-    ,width: 300
+    ,width: '97%'
     ,enableKeyEvents: true
 {literal}
     ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}

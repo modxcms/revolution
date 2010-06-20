@@ -322,7 +322,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
     width: 29px;
 }
 .x-form-field-wrap {
-    background: transparent url(../images/modx-theme/form/combo-bck.png) repeat-x scroll 0 bottom
+    background: transparent url(../images/modx-theme/form/combo-bck.png) repeat-x scroll 0 bottom;
 }
 
 .x-form-field-wrap .x-form-date-trigger{

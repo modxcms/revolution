@@ -8,9 +8,10 @@ MODx.load({
     xtype: 'checkboxgroup'
     ,id: 'tv{$tv->id}'
     ,vertical: true
-    ,columns: 2
+    ,columns: 1
     ,renderTo: 'tv{$tv->id}-cb'
     ,name: 'tv-{$tv->id}'
+    ,width: '97%'
     
     ,items: [{foreach from=$opts item=item key=k name=cbs}
     {literal}{{/literal}

@@ -1,4 +1,4 @@
-<select id="tv{$tv->id}" name="tv{$tv->id}" class="combobox">
+<select id="tv{$tv->id}" name="tv{$tv->id}">
 {foreach from=$tvitems item=item}
 	<option value="{$item.value}" {if $item.selected} selected="selected"{/if}>{$item.text}</option>
 {/foreach}
@@ -16,7 +16,7 @@ MODx.load({
     ,triggerAction: 'all'
     ,typeAhead: false
     ,editable: false
-    ,width: 300
+    ,width: '97%'
 {literal}
     ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
 });

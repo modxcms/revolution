@@ -22,9 +22,10 @@ MODx.panel.Resource = function(config) {
     it.push({
         title: _('createedit_document')
         ,id: 'modx-resource-settings'
+        ,cls: 'modx-resource-tab'
         ,layout: 'form'
         ,labelWidth: 200
-        ,bodyStyle: 'padding: 15px;'
+        ,bodyStyle: 'padding: 15px 15px 15px 0;'
         ,autoHeight: true
         ,defaults: {
             border: false
@@ -316,11 +317,12 @@ MODx.panel.Resource = function(config) {
     it.push({
         id: 'modx-page-settings'
         ,title: _('page_settings')
+        ,cls: 'modx-resource-tab'
         ,layout: 'form'
         ,forceLayout: true
         ,deferredRender: false
         ,labelWidth: 200
-        ,bodyStyle: 'padding: 15px;'
+        ,bodyStyle: 'padding: 15px 15px 15px 0;'
         ,autoHeight: true
         ,defaults: {
             border: false

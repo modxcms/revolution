@@ -1,4 +1,4 @@
-<textarea id="tv{$tv->id}" name="tv{$tv->id}" cols="40" rows="15">{$tv->get('value')|escape}</textarea>
+<textarea id="tv{$tv->id}" name="tv{$tv->id}" rows="15">{$tv->get('value')|escape}</textarea>
 
 <script type="text/javascript">
 // <![CDATA[
@@ -9,6 +9,7 @@ MODx.load({
     ,applyTo: 'tv{$tv->id}'
     ,value: '{$tv->get('value')|escape:'javascript'}'
     ,height: 140
+    ,width: '97%'
     ,enableKeyEvents: true
 {literal}
     ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}

@@ -5,7 +5,7 @@
 </select>
 <input id="tv{$tv->id}" name="tv{$tv->id}"
 	type="text"
-	style="width: 300px;"
+        style="width: 70%;"
 	value="{$tv->get('processedValue')}"
 	onchange="MODx.fireResourceFormChange();"
 />

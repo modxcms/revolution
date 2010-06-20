@@ -12,11 +12,7 @@ Ext.onReady(function() {
 MODx.page.Help = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
-		tabs: [
-            {contentEl: 'modx-tab-about', title: _('about_title')}
-            ,{contentEl: 'modx-tab-help', title: _('help_title')}
-            ,{contentEl: 'modx-tab-credits', title: _('credits')}
-        ]
+            tabs: [{contentEl: 'modx-tab-about', title: _('about_title')}]
 	});
 	MODx.page.Help.superclass.constructor.call(this,config);
 };
