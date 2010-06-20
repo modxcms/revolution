@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2056] Fixed CSS for topmenu, restyled to add contrast and enhanced
 - Cleaned up TV display panel, removed TV reload button, extended fields all the way across
 - [#MODX-1832] moved "Set to Default" to a fade-in icon
 - Prepared code for oncoming feature to move TVs into other tabs

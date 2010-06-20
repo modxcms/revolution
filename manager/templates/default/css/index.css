@@ -43,11 +43,31 @@ hr {
 }
 
 #modx-leftbar .x-tab-panel-noborder{
-    -moz-border-radius:4px 4px 4px 4px;
+    -moz-border-radius:4px;
     border:1px solid #E4E4E4;
     margin:15px 0 10px 10px;
     padding:8px 6px;
-    background-color: #5E5E5E;
+    /*background-color: #5E5E5E;*/
+    background-color: #666;
+}
+
+.ext-gecko #modx-leftbar .x-tab-panel-noborder {
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(102,102,102) 37%,
+        rgb(119,119,119) 69%,
+        rgb(102,102,102) 0%
+    );
+}
+.ext-safari #modx-leftbar .x-tab-panel-noborder, .ext-webkit #modx-leftbar .x-tab-panel-noborder {
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.37, rgb(102,102,102)),
+        color-stop(0.69, rgb(119,119,119)),
+        color-stop(0, rgb(102,102,102))
+    );
 }
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
@@ -336,8 +356,11 @@ textarea.x-form-field {
 
 
 /* 2nd row, navbar */
+.ext-ie #modx-navbar {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#777777');
+}
 #modx-navbar {
-    background-color: #4E4E4E;
+    background-color: #666;
     border-top: 1px solid #1E1E1E;
     border-bottom: 1px solid #1E1E1E;
     height: 45px;
@@ -345,6 +368,25 @@ textarea.x-form-field {
     text-shadow:1px -1px 0 #1f1f1f;
     z-index: 19;
 }
+.ext-gecko #modx-navbar {
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(102,102,102) 37%,
+        rgb(119,119,119) 69%,
+        rgb(102,102,102) 0%
+    );
+}
+.ext-safari #modx-navbar, .ext-webkit #modx-navbar {
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.37, rgb(102,102,102)),
+        color-stop(0.69, rgb(119,119,119)),
+        color-stop(0, rgb(102,102,102))
+    );
+}
+
 #modx-login-user {
     font-weight: bold;
     text-decoration: none;
@@ -626,74 +668,72 @@ table.classy tr.odd td {
     width: 78%;
     z-index: 20;
 }
-
 #modx-topnav {
     width: 100%;
-}
-
-ul#modx-topnav {
     float: left;
     font-size: 13px;
     font-weight: bold;
     height: 45px;
-    list-style-image: none;
-    list-style-position: outside;
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
-    text-shadow: -1px 1px 0 #1F1F1F;
     border-bottom: 1px solid #1E1E1E;
     z-index: 21;
 }
-ul#modx-topnav li {
+#modx-topnav li {
     float: left;
     margin: 0;
     padding:4px 13px 0;
     position: relative;
-    background:transparent url("../images/style/separator/menu_sep.png") no-repeat scroll right 0;
+    background: transparent url("../images/style/separator/menu_sep.png") no-repeat scroll right 0;
     z-index: 22;
 }
-ul#modx-topnav li a{
+#modx-topnav li a {
     padding: 12px 5px 13px;
     color: #fff;
+    color: #1f1f1f;
+    text-shadow: -1px 1px 0 #1F1F1F;
+    text-shadow: 0 1px 1px #aaa;
     display: block;
     text-decoration: none;
     float: left;
     cursor: pointer;
 }
-ul#modx-topnav li ul.modx-subnav {
-    -moz-border-radius-bottomleft: 5px;
-    -moz-border-radius-bottomright: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+#modx-topnav li:hover a {
+    color: #ccc;
+    text-shadow: 0 -1px 1px #111;
+}
+#modx-topnav ul.modx-subnav {
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
     list-style: none;
     font-size: 12px;
-    position: absolute; /*--Important - Keeps modx-subnav from affecting main navigation flow--*/
+    position: absolute;
     z-index: 23 !important;
     left: 0;
     top: 46px;
-    background: #333;
-    margin: 0; padding: 0;
+    background: #444;
+    margin: 0;
+    padding: 0;
     display: none;
     float: left;
     width: 225px;
     border: 1px solid #111;
 }
-ul#modx-topnav li:hover ul.modx-subnav {
+#modx-topnav li:hover ul.modx-subnav {
     display: block;
 }
 
-ul#modx-topnav li ul.modx-subnav li{
+#modx-topnav ul.modx-subnav li {
     margin: 0;
     padding: 0;
-    border-top: 1px solid #252525; /*--Create bevel effect--*/
-    border-bottom: 1px solid #444; /*--Create bevel effect--*/
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #252525;
     clear: both;
     width: 100%;
 }
-ul#modx-topnav li ul.modx-subnav li a span {
+#modx-topnav ul.modx-subnav li a span {
     color: #AFAFAF;
     display: block;
     float: none;
@@ -702,75 +742,83 @@ ul#modx-topnav li ul.modx-subnav li a span {
     width: 100%;
     opacity: 0.9;
 }
-ul#modx-topnav li.active a {
+#modx-topnav li.active a {
     background: transparent url("../images/style/separator/menu_current.png") no-repeat scroll center bottom;
 }
 
-ul#modx-topnav li.active:hover a {
+#modx-topnav li.active:hover a {
     background-image: none;
 }
 
-html ul#modx-topnav li ul.modx-subnav li a {
+html #modx-topnav ul.modx-subnav li a {
     float: left;
     width: 205px;
     background-color: #333;
     padding: 5px 10px 6px;
 }
-html ul#modx-topnav li ul.modx-subnav li a:hover { /*--Hover effect for modx-subnav links--*/
+html #modx-topnav ul.modx-subnav li a:hover {
     background-color: #222;
     text-shadow: -1px 1px 0 #4F4F4F;
 }
-html ul#modx-topnav li ul.modx-subnav li a:hover{
+html #modx-topnav ul.modx-subnav li a:hover{
     background-color: #5C7F17;
 }
-ul#modx-topnav li ul.modx-subnav li a:hover span {
+#modx-topnav ul.modx-subnav li a:hover span {
     color: #ffffff;
 }
-
-ul#modx-topnav li ul.modx-subnav li ul {
+#modx-topnav ul.modx-subnav ul {
     display: none;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    position: absolute;
-    left:220px;
-    top:30%;
-    list-style-image: none;
-    list-style-position: outside;
-    list-style-type: none;
     border: 1px solid #252525;
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+    position: absolute;
+    left: 225px;
+    top: 2px;
+    list-style: none;
     padding-left: 0;
     z-index: 24;
 }
 
-ul#modx-topnav li ul.modx-subnav li ul li a {
+#modx-topnav ul.modx-subnav ul li a {
     background-color: #3F3F3F;
 }
 
-ul#modx-topnav li ul.modx-subnav li ul li {
-    border-bottom: 1px solid #4f4f4f;
+#modx-topnav li ul.modx-subnav ul li {
+    border-top: 1px solid #555;
+    border-bottom: 1px solid #303030;
 }
 
-ul#modx-topnav li ul.modx-subnav li ul li:first-child, ul#modx-topnav li ul.modx-subnav li ul li:first-child a {
-    -moz-border-radius-topleft: 2px;
-    -moz-border-radius-topright: 2px;
-    -webkit-border-top-left-radius: 2px;
-    -webkit-border-top-right-radius: 2px;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+#modx-topnav ul.modx-subnav ul li:first-child,
+#modx-topnav ul.modx-subnav ul li:first-child a {
+    -moz-border-radius: 0 2px 0 0;
+    -webkit-border-radius: 0 2px 0 0;
+    border-radius: 0 2px 0 0;
 }
-
-ul#modx-topnav li ul.modx-subnav li ul li:last-child, ul#modx-topnav li ul.modx-subnav li ul li:last-child a {
-    -moz-border-radius-bottomleft: 2px;
-    -moz-border-radius-bottomright: 2px;
-    -webkit-border-bottom-left-radius: 2px;
-    -webkit-border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
+#modx-topnav ul.modx-subnav ul li:last-child,
+#modx-topnav ul.modx-subnav ul li:last-child a {
+    -moz-border-radius: 0 0 2px 0;
+    -webkit-border-radius: 0 0 2px 0;
+    border-radius: 0 0 2px 0;
 }
-
-ul#modx-topnav li ul.modx-subnav li:hover ul  {
+#modx-topnav ul.modx-subnav ul ul li:last-child,
+#modx-topnav ul.modx-subnav ul ul li:last-child a {
+    -moz-border-radius: 0 0 2px 2px;
+    -webkit-border-radius: 0 0 2px 2px;
+    border-radius: 0 0 2px 2px;
+}
+#modx-topnav ul.modx-subnav li:hover ul ul,
+#modx-topnav ul.modx-subnav ul li:hover ul ul,
+#modx-topnav ul.modx-subnav ul ul li:hover ul ul {
+    display: none;
+}
+#modx-topnav ul.modx-subnav li:hover ul,
+#modx-topnav ul.modx-subnav ul li:hover ul,
+#modx-topnav ul.modx-subnav ul ul li:hover ul,
+#modx-topnav ul.modx-subnav ul ul ul li:hover ul {
     display: block;
 }
+
 
 /* icons */
 .folder .x-tree-node-icon {background-image:url(../../../assets/ext3/resources/images/default/tree/folder.gif) !important;}
