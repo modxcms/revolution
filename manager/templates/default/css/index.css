@@ -53,8 +53,8 @@ hr {
 
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
-    -moz-border-radius:4px 4px 4px 4px;
-    -webkit-border-radius:4px 4px 4px 4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
     padding-bottom: 5px;
     background-color: #EFEFEF;
 }

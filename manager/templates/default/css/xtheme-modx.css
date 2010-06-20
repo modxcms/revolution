@@ -142,7 +142,8 @@ ul.x-tab-strip-bottom{
 
 .x-tab-strip span.x-tab-strip-text {
     font: normal 11px arial, tahoma, helvetica;
-    color: #ffffff;
+    /*color: #ffffff;*/
+    cursor: pointer;
 }
 
 .x-tab-strip-over span.x-tab-strip-text {
@@ -151,13 +152,18 @@ ul.x-tab-strip-bottom{
 }
 
 .x-tab-strip span.x-tab-strip-text {
-    text-shadow: -1px -1px 0 #6F6F6F;
+    text-shadow: 0 1px 0 #6F6F6F;
+    color: #eee;
 }
 
 .x-tab-strip-active span.x-tab-strip-text {
-    color: #ffffff;
     font-weight: bold;
-    text-shadow: -1px -1px 0 #1F1F1F;
+    /*
+    color: #1f1f1f;
+    text-shadow:0px 1px 0 #888;
+    */
+    color: #eee;
+    text-shadow:0 -1px 1px #1f1f1f;
 }
 
 .x-tab-strip-disabled .x-tabs-text {
@@ -183,6 +189,26 @@ ul.x-tab-strip li.x-tab-strip-over {
 ul.x-tab-strip li.x-tab-strip-active  {
     background-color: #5e5e5e;
     border-color: #5E5E5E;
+}
+
+.ext-gecko #modx-content ul.x-tab-strip li.x-tab-strip-active {
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(102,102,102) 27%,
+        rgb(119,119,119) 50%,
+        rgb(102,102,102) 0%
+    );
+}
+
+.ext-safari #modx-content ul.x-tab-strip li.x-tab-strip-active, .ext-webkit #modx-content ul.x-tab-strip li.x-tab-strip-active {
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.27, rgb(102,102,102)),
+        color-stop(0.50, rgb(119,119,119)),
+        color-stop(0, rgb(102,102,102))
+    );
 }
 
 .x-tab-strip-top .x-tab-right, .x-tab-strip-top .x-tab-left, .x-tab-strip-top .x-tab-strip-inner {
@@ -705,7 +731,9 @@ ul.x-tab-strip li.x-tab-strip-active  {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
-    border: 3px solid #5F5F5F;
+    /*border: 3px solid #5F5F5F;*/
+    border: 2px solid #666;
+
 }
 
 .x-grid-panel .x-panel-mc .x-panel-body {
@@ -771,10 +799,30 @@ ul.x-tab-strip li.x-tab-strip-active  {
     text-transform: uppercase;
     padding: 3px 0;
 }
+.ext-gecko .x-grid3-header {
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(102,102,102) 27%,
+        rgb(119,119,119) 50%,
+        rgb(102,102,102) 0%
+    );
+}
+
+.ext-safari .x-grid3-header, .ext-webkit .x-grid3-header {
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.39, rgb(112,112,112)),
+        color-stop(0.67, rgb(129,129,129)),
+        color-stop(0, rgb(112,112,112))
+    );
+}
 
 .x-grid3-header .x-grid3-cell-inner,.x-grid3-header  .x-grid3-hd-inner {
+    color: #ddd;
     font-weight: bold;
-    text-shadow: 1px -1px 0 #3f3f3f;
+    text-shadow: 0 -1px 0 #3f3f3f;
 }
 
 .x-grid3-header-pop {
