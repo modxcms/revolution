@@ -51,24 +51,6 @@ hr {
     background-color: #666;
 }
 
-.ext-gecko #modx-leftbar .x-tab-panel-noborder {
-    background: -moz-linear-gradient(
-        center bottom,
-        rgb(102,102,102) 37%,
-        rgb(119,119,119) 69%,
-        rgb(102,102,102) 0%
-    );
-}
-.ext-safari #modx-leftbar .x-tab-panel-noborder, .ext-webkit #modx-leftbar .x-tab-panel-noborder {
-    background: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.37, rgb(102,102,102)),
-        color-stop(0.69, rgb(119,119,119)),
-        color-stop(0, rgb(102,102,102))
-    );
-}
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
     -moz-border-radius:4px 4px 4px 4px;
