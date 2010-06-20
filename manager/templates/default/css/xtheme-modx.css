@@ -1727,7 +1727,8 @@ a.x-menu-item {
     background: transparent url(../images/modx-theme/window/border.png) repeat scroll 0 0;
     z-index: 10000 !important;
 }
-.x-window-tl .x-window-header {
+.x-window-tl .x-window-header,
+.x-panel-header {
     -moz-border-radius-topleft: 2px;
     -moz-border-radius-topright: 2px;
     -webkit-border-top-left-radius: 2px;
@@ -1738,17 +1739,15 @@ a.x-menu-item {
     background-image: none;
     border-bottom: 1px solid #FFFFFF;
     color: #5E5E5E;
-    font-family: arial,tahoma,verdana,sans-serif;
-    font-size: 1.2em;
-    font-size-adjust: none;
-    font-stretch: normal;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: bold;
-    line-height: normal;
+    font: bold 1.2em arial,tahoma,verdana,sans-serif;
     margin-top: 9px;
     padding: 8px 15px;
     text-shadow: 0 1px 1px #FFFFFF;
+}
+.x-panel-header {
+    padding: 5px 3px 2px 5px;
+    font-size: 12px;
+    margin-top: 0;
 }
 
 .x-window-tc {
