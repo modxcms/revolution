@@ -353,9 +353,9 @@ textarea.x-form-field {
 .ext-gecko #modx-navbar {
     background: -moz-linear-gradient(
         center bottom,
-        rgb(102,102,102) 37%,
-        rgb(119,119,119) 69%,
-        rgb(102,102,102) 0%
+        #666 37%,
+        #777 69%,
+        #666 0%
     );
 }
 .ext-safari #modx-navbar, .ext-webkit #modx-navbar {
@@ -363,9 +363,9 @@ textarea.x-form-field {
         linear,
         left bottom,
         left top,
-        color-stop(0.37, rgb(102,102,102)),
-        color-stop(0.69, rgb(119,119,119)),
-        color-stop(0, rgb(102,102,102))
+        color-stop(0.37,#555),
+        color-stop(0.69,#666),
+        color-stop(0,#555)
     );
 }
 
@@ -673,17 +673,20 @@ table.classy tr.odd td {
 #modx-topnav li a {
     padding: 12px 5px 13px;
     color: #fff;
+    /*
     color: #1f1f1f;
     text-shadow: -1px 1px 0 #1F1F1F;
     text-shadow: 0 1px 1px #aaa;
+    */
+    color: #ccc;
+    text-shadow: 0 1px -1px #111;
     display: block;
     text-decoration: none;
     float: left;
     cursor: pointer;
 }
 #modx-topnav li:hover a {
-    color: #ccc;
-    text-shadow: 0 -1px 1px #111;
+    color: #f2f2f2;
 }
 #modx-topnav ul.modx-subnav {
     -moz-border-radius: 0 0 5px 5px;
@@ -740,7 +743,7 @@ html #modx-topnav ul.modx-subnav li a {
 }
 html #modx-topnav ul.modx-subnav li a:hover {
     background-color: #222;
-    text-shadow: -1px 1px 0 #4F4F4F;
+    text-shadow: 0;
 }
 html #modx-topnav ul.modx-subnav li a:hover{
     background-color: #5C7F17;
