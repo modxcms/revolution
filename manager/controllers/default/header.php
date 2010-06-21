@@ -92,11 +92,8 @@ $modx->smarty->assign('navb',$output);
 
 /* assign logged in text and link */
 $profile = $modx->getObject('modMenu','profile');
-$logged_in_as = $modx->lexicon('logged_in_as',array(
-    'username' => '<a id="modx-login-user" href="?a='.$profile->get('action').'">'.$modx->getLoginUserName().'</a>',
-));
-$modx->smarty->assign('logged_in_as',$logged_in_as);
-unset($logged_in_as);
+$modx->smarty->assign('username',$modx->getLoginUserName());
+$modx->smarty->assign('profileAction',$profile->get('action'));
 
 /* assign welcome back text */
 $welcome_back = $modx->lexicon('welcome_back',array('name' => $modx->getLoginUserName()));

@@ -50,13 +50,15 @@ MODx.Layout = function(config){
             ,id: 'modx-leftbar-tabs'
             ,split: true
             ,width: 310
-            ,minSize: 310
+            ,minSize: 150
             ,maxSize: 800
             ,autoHeight: true
             ,unstyled: true
-            /*,collapseMode: 'mini'*/
+            ,collapseMode: 'mini'
+            ,useSplitTips: true
             ,monitorResize: true
             ,forceLayout: true
+            ,stateful: false
             ,items: [{
                  xtype: 'modx-tabs'
                 ,plain: true

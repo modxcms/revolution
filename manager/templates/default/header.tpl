@@ -41,7 +41,7 @@
         <div id="rightlogin">
         <span>
             <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
-            {$logged_in_as}
+            <a id="modx-login-user" href="?a={$profileAction}">{$username}</a>
         </span>
         </div>
         {include file="navbar.tpl"}
