@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2085] Fixed issue with namespace path not being translated on get
+- Added ability to activate/deactivate FC rules from context menu
 - fieldVisible, fieldLabel, tvVisible, tvMove Form Customization rules now support multiple fields via comma-sep list
 - Added functionality to Form Customization to add new Tabs and move TVs to other tabs
 - Applied CSS gradient styling to grids, tabs

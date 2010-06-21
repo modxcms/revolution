@@ -193,10 +193,11 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             this.getSelectionModel().selectRow(ri);
         }
         this.menu.removeAll();
+        if (this.getMenu) { this.getMenu(g,ri,e); }
         if (this.menu.record.menu) {
             this.addContextMenuItem(this.menu.record.menu);
-            this.menu.show(e.target);
         }
+        if (this.menu.items.length > 0) { this.menu.show(e.target); }
     }
     
     ,_loadStore: function() {

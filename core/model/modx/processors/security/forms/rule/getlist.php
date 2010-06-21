@@ -44,28 +44,14 @@ $canEdit = $modx->hasPermission('save');
 $canRemove = $modx->hasPermission('remove');
 foreach ($rules as $rule) {
     $ruleArray = $rule->toArray();
+    
+    $ruleArray['perm'] = array();
+    if ($canEdit) $ruleArray['perm'][] = 'pedit';
+    if ($canRemove) $ruleArray['perm'][] = 'premove';
 
     if ($ruleArray['principal'] == null) $ruleArray['principal'] = 0;
     if ($ruleArray['principal_class'] == null) $ruleArray['principal_class'] = '';
 
-    $ruleArray['menu'] = array();
-    if ($canEdit) {
-        $ruleArray['menu'][] = array(
-            'text' => $modx->lexicon('edit'),
-            'handler' => 'this.updateRule',
-        );
-        $ruleArray['menu'][] = array(
-            'text' => $modx->lexicon('duplicate'),
-            'handler' => 'this.duplicateRule',
-        );
-        $ruleArray['menu'][] = '-';
-    }
-    if ($canRemove) {
-        $ruleArray['menu'][] = array(
-            'text' => $modx->lexicon('remove'),
-            'handler' => 'this.confirm.createDelegate(this,["remove","rule_remove_confirm"])',
-        );
-    }
     $data[] = $ruleArray;
 }
 
