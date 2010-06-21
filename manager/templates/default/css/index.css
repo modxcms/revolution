@@ -36,6 +36,8 @@ hr {
 .aright { text-align: right; }
 .right { float: right; }
 .left { float: left; }
+.clear { clear: left; }
+.bold { font-weight: bold; }
 
 /* leftbar */
 #modx-leftbar, #modx-content {
@@ -632,6 +634,44 @@ table.classy tr.odd td {
 .modx-pb-fullview {
     text-align: center;
 }
+
+.package-readme { padding: .7em 1em .3em; }
+.package-installed {
+    opacity: .5;
+    color: gray;
+}
+
+.pbr-provider-box {
+    width: 250px;
+    float: left;
+    margin-top: 10px;
+}
+.pbr-provider-home {
+    padding: 10px;
+}
+.pbr-repository-view {
+    padding: 10px;
+}
+.pbr-tag-view {
+    padding: 10px;
+}
+.pbr-details-right { float: right !important; text-align: right !important; }
+.pbr-thumb-downloaded {
+    opacity: .5;
+}
+
+.pbr-thumb{
+    background: #dddddd;
+    height: 80px;
+    width: 100px;
+    padding: 3px;
+}
+.pbr-thumb img{
+    height: 80px;
+    width: 100px;
+}
+
+
 /* top navbar */
 #modx-home-icon:hover {
     opacity: 1;
@@ -977,44 +1017,6 @@ input.x-static-text-field {
     position: static;
     top: auto;
     vertical-align: top;
-}
-
-/* package management */
-.clear { clear: left; }
-.package-readme { padding: .7em 1em .3em; }
-.package-installed {
-    opacity: .5;
-    color: gray;
-}
-.bold { font-weight: bold; }
-.pbr-provider-box {
-    width: 250px;
-    float: left;
-    margin-top: 10px;
-}
-.pbr-provider-home {
-    padding: 10px;
-}
-.pbr-repository-view {
-    padding: 10px;
-}
-.pbr-tag-view {
-    padding: 10px;
-}
-.pbr-details-right { float: right !important; text-align: right !important; }
-.pbr-thumb-downloaded {
-    opacity: .5;
-}
-
-.pbr-thumb{
-    background: #dddddd;
-    height: 80px;
-    width: 100px;
-    padding: 3px;
-}
-.pbr-thumb img{
-    height: 80px;
-    width: 100px;
 }
 
 /* status messages */

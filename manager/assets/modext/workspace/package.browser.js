@@ -65,6 +65,7 @@ MODx.panel.PackageBrowser = function(config) {
             //,width: '75%'
             ,autoScroll: true
             ,autoHeight: true
+            ,columnWidth: 1
             ,hidden: true
             ,html: ''
             ,border: false
@@ -75,6 +76,7 @@ MODx.panel.PackageBrowser = function(config) {
             ,region: 'center'
             //,width: '55%'
             ,height: 450
+            ,columnWidth: 1
             ,autoScroll: true
             ,border: false
             ,items: [{
@@ -97,6 +99,8 @@ MODx.panel.PackageBrowser = function(config) {
             //,width: '20%'
             ,minWidth: 150
             ,maxWidth: 250
+            ,columnWidth: 1
+            ,border: false
             ,height: 450
             ,hidden: true
             ,hideMode: 'offsets'

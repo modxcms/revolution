@@ -75,6 +75,7 @@ foreach ($tag->package as $package) {
         'downloads' => (string)$package->downloads,
         'releasedon' => $releasedon,
         'screenshot' => (string)$package->screenshot,
+        'thumbnail' => !empty($package->thumbnail) ? (string)$package->thumbnail : (string)$package->screenshot,
         'license' => (string)$package->license,
         'supports' => rtrim($supports,', '),
         'location' => (string)$package->location,
