@@ -1396,9 +1396,12 @@ td.x-date-mp-sep {
     background-image: url(../images/modx-theme/qtip/tip-anchor-sprite.gif);
 }
 .x-menu {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
     border-color: #898989;
-    background-color: #f0f0f0;
     background-image: url(../images/modx-theme/menu/menu.gif);
+    background-color: #f7f7f7;
 }
 
 .x-menu-nosep {
@@ -1406,7 +1409,8 @@ td.x-date-mp-sep {
 }
 
 .x-menu-list-item{
-    font: normal 11px arial,tahoma, sans-serif;
+    font: normal 11px/1 arial,tahoma,verdana,sans-serif;
+    
 }
 
 .x-menu-item-arrow{
@@ -1423,9 +1427,8 @@ a.x-menu-item {
 }
 
 .x-menu-item-active {
-    background-color: #e9e9e9;
-    background-image: url(../images/modx-theme/menu/item-over.gif);
     border-color: #c8c8c8;
+    background: #efefef url(../images/modx-theme/form/button-bg.png) repeat-x scroll 0 0;
 }
 
 .x-menu-item-active a.x-menu-item {
