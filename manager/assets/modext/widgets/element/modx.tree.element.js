@@ -294,7 +294,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             }
 
             this.addContextMenuItem(m);
-            this.cm.show(n.getUI().getEl(),'t?');
+            this.cm.showAt(e.xy);
         }
         e.stopEvent();
     }

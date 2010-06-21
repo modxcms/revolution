@@ -189,7 +189,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.cm.removeAll();
         if (node.attributes.menu && node.attributes.menu.items) {
             this.addContextMenuItem(node.attributes.menu.items);
-            this.cm.show(node.ui.getEl(),'t?');
+            this.cm.showAt(e.xy);
         }
         e.stopEvent();
     }

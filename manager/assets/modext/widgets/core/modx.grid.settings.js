@@ -176,7 +176,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         }
         if (m.length > 0) {
             this.addContextMenuItem(m);
-            this.menu.show(e.target);
+            this.menu.showAt(e.xy);
         }
     }
     
