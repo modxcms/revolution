@@ -44,11 +44,11 @@ $c->where(array(
       LIMIT 1) = `modTransportPackage`.`signature`',
 ));
 $count = $modx->getCount('modTransportPackage',$c);
-$c->select('
-    `modTransportPackage`.*,
-    `Provider`.`name` AS `provider_name`
-');
-$c->sortby('`modTransportPackage`.`signature`', 'ASC');
+$c->select(array(
+    'modTransportPackage.*',
+));
+$c->select('`Provider`.`name` AS `provider_name`');
+$c->sortby('modTransportPackage.signature', 'ASC');
 if ($isLimit) $c->limit($limit,$start);
 $packages = $modx->getCollection('transport.modTransportPackage',$c);
 

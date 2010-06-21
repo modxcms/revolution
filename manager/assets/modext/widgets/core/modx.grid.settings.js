@@ -295,7 +295,6 @@ MODx.window.CreateSetting = function(config) {
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-cs-name'
-            ,allowBlank: false
             ,width: 200
         },{
             xtype: 'modx-combo-xtype-spec'
@@ -384,7 +383,6 @@ MODx.window.UpdateSetting = function(config) {
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-us-name'
-            ,allowBlank: false
         },{
             xtype: 'modx-combo-xtype-spec'
             ,name: 'xtype'
