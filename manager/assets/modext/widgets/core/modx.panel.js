@@ -192,28 +192,42 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         return fld;
     }
 
-    ,hideField: function(f) {
-        f = this.getField(f);
-        if (!f) return;
-        f.hide();
-        var d = f.getEl().up('.x-form-item');
-        if (d) { d.setDisplayed(false); }
+    ,hideField: function(flds) {
+        if (!Ext.isArray(flds)) { flds = flds[flds]; }
+        var f;
+        for (var i=0;i<flds.length;i++) {
+            f = this.getField(flds[i]);
+            if (!f) return;
+            f.hide();
+            var d = f.getEl().up('.x-form-item');
+            if (d) { d.setDisplayed(false); }
+        }
     }
 
-    ,showField: function(f) {
-        f = this.getField(f);
-        if (!f) return;
-        f.enable();
-        f.show();
-        var d = f.getEl().up('.x-form-item');
-        if (d) { d.setDisplayed(true); }
+    ,showField: function(flds) {
+        if (!Ext.isArray(flds)) { flds = flds[flds]; }
+        var f;
+        for (var i=0;i<flds.length;i++) {
+            f = this.getField(flds[i]);
+            if (!f) return;
+            f.enable();
+            f.show();
+            var d = f.getEl().up('.x-form-item');
+            if (d) { d.setDisplayed(true); }
+        }
     }
 
-    ,setLabel: function(fld,text){
-        var f = this.getField(fld);
-        if (!f) return;
-        var r = f.getEl().up('div.x-form-item');
-        r.dom.firstChild.firstChild.nodeValue = String.format('{0}', text);
+    ,setLabel: function(flds,vals){
+        if (!Ext.isArray(flds)) { flds = flds[flds]; }
+        if (!Ext.isArray(vals)) { vals = valss[vals]; }
+        var f;
+        for (var i=0;i<flds.length;i++) {
+            f = this.getField(flds[i]);
+        
+            if (!f) return;
+            var r = f.getEl().up('div.x-form-item');
+            r.dom.firstChild.firstChild.nodeValue = String.format('{0}',vals[i]);
+        }
     }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);

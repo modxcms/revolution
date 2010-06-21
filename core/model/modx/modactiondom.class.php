@@ -29,12 +29,15 @@ class modActionDom extends modAccessibleSimpleObject {
         switch ($this->get('rule')) {
             case 'fieldVisible':
                 if (!$this->get('value')) {
-                    $rule = 'Ext.getCmp("'.$this->get('container').'").hideField("'.$this->get('name').'");';
+                    $fields = explode(',',$this->get('name'));
+                    $rule = 'Ext.getCmp("'.$this->get('container').'").hideField('.$this->xpdo->toJSON($fields).');';
                 }
                 break;
             case 'fieldLabel':
             case 'fieldTitle':
-                $rule = 'Ext.getCmp("'.$this->get('container').'").setLabel("'.$this->get('name').'","'.$this->get('value').'");';
+                $fields = explode(',',$this->get('name'));
+                $values = explode(',',$this->get('value'));
+                $rule = 'Ext.getCmp("'.$this->get('container').'").setLabel('.$this->xpdo->toJSON($fields).','.$this->xpdo->toJSON($values).');';
                 break;
             case 'fieldDefault':
             case 'fieldDefaultValue':
@@ -43,12 +46,21 @@ class modActionDom extends modAccessibleSimpleObject {
             case 'panelTitle':
             case 'tabTitle':
             case 'tabLabel':
+
                 $rule = 'Ext.getCmp("'.$this->get('name').'").setTitle("'.$this->get('value').'")';
                 break;
             case 'tabVisible':
                 if (!$this->get('value')) {
                     $rule = 'Ext.getCmp("'.$this->get('container').'").hideTabStripItem("'.$this->get('name').'");';
                 }
+                break;
+            case 'tabNew':
+                $title = strtolower($this->get('value'));
+                $rule = 'MODx.addTab("'.$this->get('container').'",{title:"'.$title.'",id:"'.$this->get('name').'"});';
+                break;
+            case 'tvMove':
+                $tvs = explode(',',$this->get('value'));
+                $rule = 'MODx.on("ready",function() { MODx.moveTV('.$this->xpdo->toJSON($tvs).',"'.$this->get('name').'"); });';
                 break;
             default: break;
         }

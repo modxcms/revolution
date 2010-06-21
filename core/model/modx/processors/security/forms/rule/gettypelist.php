@@ -14,9 +14,12 @@ $data = array(
     array('name' => $modx->lexicon('field_default'), 'id' => 'fieldDefault'),
     array('name' => $modx->lexicon('tab_visible'), 'id' => 'tabVisible'),
     array('name' => $modx->lexicon('tab_title'), 'id' => 'tabTitle'),
+    array('name' => $modx->lexicon('tab_new'), 'id' => 'tabNew'),
     array('name' => $modx->lexicon('tv_visible'), 'id' => 'tvVisible'),
     array('name' => $modx->lexicon('tv_label'), 'id' => 'tvTitle'),
     array('name' => $modx->lexicon('tv_default'), 'id' => 'tvDefault'),
+    array('name' => $modx->lexicon('tv_move'), 'id' => 'tvMove'),
+    
 );
 
 return $this->outputArray($data);

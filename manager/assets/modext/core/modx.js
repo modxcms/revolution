@@ -182,6 +182,48 @@ Ext.extend(MODx,Ext.Component,{
         MODx.helpWindow.show(b);
         return true;
     }
+
+    ,addTab: function(tbp,opt) {
+        var tabs = Ext.getCmp(tbp);
+        Ext.applyIf(opt,{
+            id: 'modx-'+Ext.id()+'-tab'
+            ,layout: 'form'
+            ,cls: 'modx-resource-tab'
+            ,bodyStyle: 'padding: 15px;'
+            ,autoHeight: true
+            ,defaults: {
+                border: false
+                ,msgTarget: 'side'
+                ,width: 400
+            }
+        });
+        tabs.add(opt);
+        tabs.doLayout();
+    }
+
+    ,moveTV: function(tvs,tab) {
+        if (!Ext.isArray(tvs)) { tvs = [tvs]; }
+        var tvp = Ext.getCmp('modx-panel-resource-tv');
+        if (!tvp) { return; }
+
+        for (var i=0;i<tvs.length;i++) {
+            var tr = Ext.get('tv-tr-'+tvs[i]);
+            
+            if (!tr) { return; }
+            var fp = Ext.getCmp(tab);
+            if (!fp) { return; }
+            fp.add({
+                html: ''
+                ,width: '100%'
+                ,id: 'tv-tr-out-'+tvs[i]
+                ,cls: 'modx-tv-out'
+            });
+            fp.doLayout();
+
+            var o = Ext.get('tv-tr-out-'+tvs[i]);
+            o.replaceWith(tr);
+        }
+    }
 });
 Ext.reg('modx',MODx);
 

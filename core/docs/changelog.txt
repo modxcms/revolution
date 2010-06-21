@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- fieldVisible, fieldLabel, tvVisible, tvMove Form Customization rules now support multiple fields via comma-sep list
+- Added functionality to Form Customization to add new Tabs and move TVs to other tabs
 - Applied CSS gradient styling to grids, tabs
 - [#MODX-2056] Fixed CSS for topmenu, restyled to add contrast and enhanced
 - Cleaned up TV display panel, removed TV reload button, extended fields all the way across

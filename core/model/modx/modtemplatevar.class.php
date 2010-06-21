@@ -313,7 +313,8 @@ class modTemplateVar extends modElement {
                    OR `modActionDom`.`rule` = "tvVisible"
                    OR `modActionDom`.`rule` = "tvTitle")'
                 ),
-                'name' => 'tv'.$this->get('id'),
+                '"tv'.$this->get('id').'" IN (name)',
+                'modActionDom.active' => true,
             ));
             $c->andCondition(array(
                 '((`Access`.`principal_class` = "modUserGroup"
