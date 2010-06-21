@@ -45,17 +45,14 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
                 }
             });
         }
-        if (!this.config.is_folder) {
-            items.push({
+        items.push({
             xtype: 'textfield'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('resource_name_new')
             ,name: 'name'
             ,width: 150
             ,value: ''
-            ,disabled: this.config.is_folder ? true : false
         });
-    }
 
         this.fp = this.createForm({
             url: this.config.url || MODx.config.connectors_url+'resource/index.php'

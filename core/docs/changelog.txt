@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1737] Container resources can now have names specified on duplicate
 - [#MODX-2074] Fixed bug where property descriptions were not i18n-able
 - [#MODX-2062] Date TV type now can store time; updated datetime ExtJS xtype to latest version
 - [#MODX-2046] Added 'collapse' toggle to left trees, shortened username on top right to allow for small resolutions
