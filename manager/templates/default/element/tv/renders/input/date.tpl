@@ -1,18 +1,22 @@
-<input id="tv{$tv->id}" name="tv{$tv->id}"
-	type="text" class="datefield"
-	value="{$tv->get('value')}"
-	onblur="MODx.fireResourceFormChange();"
-/>
+<input id="tv{$tv->id}" type="hidden" class="datefield"
+	value="{$tv->value}" name="tv{$tv->id}"
+	onblur="MODx.fireResourceFormChange();"/>
 
 <script type="text/javascript">
 // <![CDATA[
 {literal}
 MODx.load({
 {/literal}
-    xtype: 'datefield'
+    xtype: 'xdatetime'
     ,applyTo: 'tv{$tv->id}'
     ,format: parent.MODx.config.manager_date_format
     ,width: '97%'
+    ,name: 'tv{$tv->id}'
+    ,dateFormat: MODx.config.manager_date_format
+    ,dateWidth: 120
+    ,timeWidth: 120
+    ,allowBlank: true
+    ,value: '{$tv->value}'
 {literal}
     ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
 });
