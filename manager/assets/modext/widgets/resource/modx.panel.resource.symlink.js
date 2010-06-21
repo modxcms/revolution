@@ -178,7 +178,7 @@ MODx.panel.SymLink = function(config) {
         ,inputValue: 1        
     });
     va.push({
-        xtype: 'datetimefield'
+        xtype: 'xdatetime'
         ,fieldLabel: _('resource_publishedon')
         ,description: _('resource_publishedon_help')
         ,name: 'publishedon'
@@ -190,7 +190,7 @@ MODx.panel.SymLink = function(config) {
     });
     if (MODx.config.publish_document) {
         va.push({
-            xtype: 'datetimefield'
+            xtype: 'xdatetime'
             ,fieldLabel: _('resource_publishdate')
             ,description: _('resource_publishdate_help')
             ,name: 'pub_date'
@@ -203,7 +203,7 @@ MODx.panel.SymLink = function(config) {
     }
     if (MODx.config.publish_document) {
         va.push({
-            xtype: 'datetimefield'
+            xtype: 'xdatetime'
             ,fieldLabel: _('resource_unpublishdate')
             ,description: _('resource_unpublishdate_help')
             ,name: 'unpub_date'
