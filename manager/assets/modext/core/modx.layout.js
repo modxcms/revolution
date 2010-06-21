@@ -98,6 +98,11 @@ MODx.Layout = function(config){
     });
     this.loadKeys();
     this.fireEvent('afterLayout');
+    /*var l = Ext.getCmp('modx-leftbar-tabs');
+    l.getEl().applyStyles({
+        position: 'fixed'
+        ,top: 0
+    });*/
 };
 Ext.extend(MODx.Layout,Ext.Viewport,{
 

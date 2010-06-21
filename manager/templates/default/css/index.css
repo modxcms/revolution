@@ -305,7 +305,10 @@ textarea.x-form-field {
 
 /* top bar */
 #modx-topbar {
-    height: 3em;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 35px;
     background: #373737 url("../images/restyle/header_background.jpg") repeat-x;
 
     color: white;
@@ -348,7 +351,9 @@ textarea.x-form-field {
     border-top: 1px solid #1E1E1E;
     border-bottom: 1px solid #1E1E1E;
     height: 45px;
-    position: relative;
+    position: absolute;
+    top: 36px;
+    width: 100%;
     text-shadow:1px -1px 0 #1f1f1f;
     z-index: 19;
 }
@@ -438,7 +443,8 @@ textarea.x-form-field {
 
 #modx-mainpanel{
     margin:0;
-    position:relative;
+    position:absolute;
+    top: 80px;
 }
 
 /* news articles */
