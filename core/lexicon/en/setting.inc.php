@@ -116,7 +116,7 @@ $_lang['setting_cache_json_expires'] = 'Expiration Time for JSON Cache';
 $_lang['setting_cache_json_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for JSON caching.';
 
 $_lang['setting_cache_handler'] = 'Caching Handler Class';
-$_lang['setting_cache_handler_desc'] = 'The class name of the type handler to use for caching. If set to true, this will use server headers to cache the lexicon strings loaded into JavaScript for the manager interface.';
+$_lang['setting_cache_handler_desc'] = 'The class name of the type handler to use for caching.';
 
 $_lang['setting_cache_lang_js'] = 'Cache Lexicon JS Strings';
 $_lang['setting_cache_lang_js_desc'] = 'If set to true, this will use server headers to cache the lexicon strings loaded into JavaScript for the manager interface.';
