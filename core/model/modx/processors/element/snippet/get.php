@@ -24,9 +24,10 @@ if (!is_array($properties)) $properties = array();
 
 $data = array();
 foreach ($properties as $property) {
+    if (!empty($property['lexicon'])) $modx->lexicon->load($property['lexicon']);
     $data[] = array(
         $property['name'],
-        $property['desc'],
+        $modx->lexicon($property['desc']),
         $property['type'],
         $property['options'],
         $property['value'],

@@ -27,9 +27,10 @@ $data = array();
 /* put in default properties for element */
 if (isset($default) && is_array($default)) {
     foreach ($default as $property) {
+        if (!empty($property['lexicon'])) $modx->lexicon->load($property['lexicon']);
         $data[$property['name']] = array(
             $property['name'],
-            $property['desc'],
+            $modx->lexicon($property['desc']),
             $property['type'],
             $property['options'],
             $property['value'],
