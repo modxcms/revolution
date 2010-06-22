@@ -1,5 +1,5 @@
 MODExt Revolution 1.0
-Copyright (c) 2007-2009, Shaun McCormick
+Copyright (c) 2007-2010, Shaun McCormick
 All rights reserved
 MODx-specific JS extension for ExtJS 2.2
 

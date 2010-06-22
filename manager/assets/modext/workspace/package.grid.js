@@ -123,6 +123,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
                         pd.fireEvent('proceed','modx-pd-selpackage');
                         pd.setPosition(null,0);
+                        pd.doLayout();
                     },this,{single:true});
                     
                     this.windows[x].show(e.target);
