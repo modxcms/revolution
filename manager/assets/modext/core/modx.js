@@ -207,7 +207,7 @@ Ext.extend(MODx,Ext.Component,{
         if (!tvp) { return; }
 
         for (var i=0;i<tvs.length;i++) {
-            var tr = Ext.get('tv-tr-'+tvs[i]);
+            var tr = Ext.get(tvs[i]+'-tr');
             
             if (!tr) { return; }
             var fp = Ext.getCmp(tab);

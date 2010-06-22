@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Tweaked FC tvMove rule to be more consistent with values of other TV FC rules
 - Allow blank names (not keys) in Settings create/update windows; tweaks to query in package management grid
 - [#MODX-1737] Container resources can now have names specified on duplicate
 - [#MODX-2074] Fixed bug where property descriptions were not i18n-able

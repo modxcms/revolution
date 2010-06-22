@@ -6,7 +6,7 @@
     <div id="modx-tv-tab{$category->id}" class="x-tab" title="{$category->category|default:$_lang.uncategorized|ucfirst}">
     
     {foreach from=$category->tvs item=tv name='tv'}
-    <div class="x-form-item x-tab-item {cycle values=",alt"} modx-tv" id="tv-tr-{$tv->id}">
+    <div class="x-form-item x-tab-item {cycle values=",alt"} modx-tv" id="tv{$tv->id}-tr">
         <label for="tv{$tv->id}" class="modx-tv-label">
 
             <span class="modx-tv-caption" id="tv{$tv->id}-caption">{$tv->caption}</span>
