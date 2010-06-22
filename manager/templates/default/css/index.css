@@ -340,9 +340,6 @@ textarea.x-form-field {
 
 
 /* 2nd row, navbar */
-.ext-ie #modx-navbar {
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#777777');
-}
 #modx-navbar {
     background-color: #666;
     border-top: 1px solid #1E1E1E;

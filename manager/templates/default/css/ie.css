@@ -22,3 +22,7 @@ body {
     float: right;
     margin-left: 0;
 }
+
+/*.ext-ie #modx-navbar {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#777777');
+}*/
