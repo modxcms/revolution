@@ -516,6 +516,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,'symlink': 'modSymLink'
             ,'static_resource': 'modStaticResource'
         };
+        if (MODx.config.custom_resource_classes) {
+            var crcs = MODx.config.custom_resource_classes;
+            for (var k in crcs) {
+                types[k] = crcs[k];
+            }
+        }
         var o = this.fireEvent('loadCreateMenus',types);
         if (Ext.isObject(o)) {
             Ext.apply(types,o);

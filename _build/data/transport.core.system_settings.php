@@ -258,6 +258,15 @@ $settings['cultureKey']->fromArray(array (
   'area' => 'language',
   'editedon' => null,
 ), '', true, true);
+$settings['custom_resource_classes']= $xpdo->newObject('modSystemSetting');
+$settings['custom_resource_classes']->fromArray(array (
+  'key' => 'custom_resource_classes',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['default_template']= $xpdo->newObject('modSystemSetting');
 $settings['default_template']->fromArray(array (
   'key' => 'default_template',

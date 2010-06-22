@@ -10,9 +10,17 @@
  * @package modx
  * @subpackage processors.system
  */
+if (!$modx->user->isAuthenticated('mgr')) { return ''; }
 $modx->getVersionData();
 
-if (!$modx->user->isAuthenticated('mgr')) { return ''; }
+$crcs = explode(',',$modx->getOption('custom_resource_classes'));
+$customResourceClasses = array();
+foreach ($crcs as $crc) {
+    $crc = explode(':',$crc);
+    if (empty($crc) || empty($crc[1])) continue;
+    $customResourceClasses[$crc[0]] = $crc[1];
+}
+
 $template_url = $modx->getOption('manager_url').'templates/'.$modx->getOption('manager_theme').'/';
 $c = array(
     'base_url' => $modx->getOption('base_url'),
@@ -25,6 +33,7 @@ $c = array(
     'http_host_remote' => MODX_URL_SCHEME.$_SERVER['HTTP_HOST'],
     'user' => $modx->user->get('id'),
     'version' => $modx->version['full_version'],
+    'custom_resource_classes' => $customResourceClasses,
 );
 
 /* if custom context, load into MODx.config */
