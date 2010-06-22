@@ -4,7 +4,9 @@
  */
 if (!empty($_POST['proceed'])) {
     unset($_POST['proceed']);
-    $_POST['database_charset'] = $_POST['database_connection_charset'];
+    if (isset($_POST['database_connection_charset'])) {
+        $_POST['database_charset'] = $_POST['database_connection_charset'];
+    }
     $install->settings->store($_POST);
     $mode = $install->settings->get('installmode');
 
@@ -119,5 +121,6 @@ if (!empty($_POST['proceed'])) {
 }
 $mode = $install->settings->get('installmode');
 $this->parser->assign('installmode', $mode);
+$this->parser->assign('config',$install->settings->fetch());
 
 return $this->parser->fetch('database.tpl');

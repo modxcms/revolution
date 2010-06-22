@@ -83,7 +83,7 @@
     </div>
     <div class="labelHolder">
         <label for="cmspasswordconfirm">{$_lang.connection_default_admin_password_confirm}</label>
-        <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspassword}" />
+        <input type="password" id="cmspasswordconfirm" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm}" />
         &nbsp;<span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm}</span>
     </div>
 </div>
