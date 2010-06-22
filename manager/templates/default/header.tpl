@@ -23,7 +23,7 @@
 {/foreach}
 
 <!--[if IE]>
-<link rel="stylesheet" type="text/css" href="templates/{$_config.manager_theme}/css/ie.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/ie.css" />
 <![endif]-->
 </head>
 <body id="modx-body-tag">

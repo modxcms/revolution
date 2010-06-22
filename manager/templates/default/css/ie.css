@@ -1,20 +1,24 @@
+body {
+   behavior: url("csshover3.htc");
+}
+
 #modx-frame-ct {
     height: 500px !important;
 }
 
 .modx-accordion .x-accordion-hd {
-	/* cannot make the dang right corner work in IE7 */
-	/* the star in front of properties targets IE7-only */
-	*margin-right: 0;
-	overflow: visible;
+    /* cannot make the dang right corner work in IE7 */
+    /* the star in front of properties targets IE7-only */
+    *margin-right: 0;
+    overflow: visible;
 }
 
 #rightlogin {
-	text-align: right;
+    text-align: right;
 }
 
 #rightlogin a.modx-logout {
-	display: block;
-	float: right;
-	margin-left: 0;
+    display: block;
+    float: right;
+    margin-left: 0;
 }
