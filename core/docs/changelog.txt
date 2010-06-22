@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1612] Added Create Menu context menu on root node for menus tree
 - [#MODX-2020] Ensure error when creating duplicate context ACLs shows
 - Tweaks to Package Management browser JS to allow for more consistent rendering
 - [#MODX-2051] Stripped tags from TV description field on input rendering
