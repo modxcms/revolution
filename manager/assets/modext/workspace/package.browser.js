@@ -36,13 +36,13 @@ MODx.panel.PackageBrowser = function(config) {
             id: 'modx-package-browser-tree-panel'
             ,cls: 'browser-tree'
             ,region: 'west'
-            ,height: 450
+            ,autoHeight: true
+            ,autoScroll: false
             ,columnWidth: .25
             ,items: [{
                 xtype: 'modx-package-browser-tree'
                 ,id: 'modx-package-browser-tree'
             }]
-            ,autoScroll: true
             ,border: false
             ,hideMode: 'offsets'
         },{

@@ -8,20 +8,18 @@ MODx.Wizard = function(config) {
         ,collapsible: true
         ,maximizable: true
         ,autoHeight: true
-        ,width: '90%'
+        ,anchor: '90%'
         ,defaults: { border: false }
         ,modal: Ext.isIE ? false : true
         ,cls: 'modx-window'
         ,bbar: [{
-            id: 'pi-btn-bck'
-            ,itemId: 'btn-back'
+            itemId: 'btn-back'
             ,text: _('back')
             ,handler: function() { this.fireEvent('backward'); }
             ,scope: this
             ,disabled: true         
         },{
-            id: 'pi-btn-fwd'
-            ,itemId: 'btn-next'
+            itemId: 'btn-next'
             ,text: _('next')
             ,handler: function() { this.fireEvent('forward'); }
             ,scope: this
@@ -57,7 +55,9 @@ Ext.extend(MODx.Wizard,Ext.Window,{
     }
     
     ,onShow: function() {
-        this.getBottomToolbar().getComponent('btn-next').setText(_('next'));
+        if (this.config.showFirstPanel) {
+            this.getBottomToolbar().getComponent('btn-next').setText(_('next'));
+        }
         if (this.config.showFirstPanel) {
             if (this.fireEvent('proceed',this.config.firstPanel)) {
                 this.fireEvent('ready');
@@ -82,17 +82,19 @@ Ext.extend(MODx.Wizard,Ext.Window,{
         if (!tb) return false;
         
         this.getLayout().setActiveItem(panel);
-        if (panel === this.config.firstPanel) {
+        
+        if (panel == this.config.firstPanel) {
             tb.getComponent('btn-back').setDisabled(true);
-        } else if (panel === this.config.lastPanel) {
+        } else if (panel == this.config.lastPanel) {
             tb.getComponent('btn-next').setText(_('finish'));
         } else {
             tb.getComponent('btn-back').setDisabled(false);
             tb.getComponent('btn-next').setText(_('next'));
         }
-        Ext.getCmp(panel).fireEvent('fetch');
-        this.syncSize();
-        this.center();
+        if (!Ext.isIE && Ext.getCmp(panel).fireEvent('fetch')) {
+            this.syncSize();
+            this.center();
+        }
         return true;
     }
 });
@@ -102,7 +104,7 @@ MODx.panel.WizardPanel = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         autoHeight: true
-        ,bodyStyle: 'padding: 3em 3em'
+        ,bodyStyle: 'padding: 20px'
     });
     MODx.panel.WizardPanel.superclass.constructor.call(this,config);
     this.config = config;
@@ -110,7 +112,7 @@ MODx.panel.WizardPanel = function(config) {
     this.on('fetch',this.fetch,this);
 };
 Ext.extend(MODx.panel.WizardPanel,Ext.FormPanel,{
-    fetch: function() {}
-    ,submit: function() {}
+    fetch: function() { return true; }
+    ,submit: function() { return true; }
 });
 Ext.reg('panel-wizard-panel',MODx.panel.WizardPanel);

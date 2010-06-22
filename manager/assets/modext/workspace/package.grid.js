@@ -97,8 +97,10 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                         });
                     }
                     this.windows[x].on('ready',function() {
-                        var pd = Ext.getCmp('modx-window-package-downloader');
 
+                        var pd = Ext.getCmp('modx-window-package-downloader');
+                        pd.fireEvent('proceed','modx-pd-selpackage');
+                        
                         Ext.getCmp('modx-package-browser-thumb-view').hide();
                         Ext.getCmp('modx-package-browser-grid-panel').hide();
                         Ext.getCmp('modx-package-browser-view').show();
@@ -120,10 +122,18 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                         if (v) {
                             v.baseParams.provider = p.id;
                         }
-
-                        pd.fireEvent('proceed','modx-pd-selpackage');
-                        pd.setPosition(null,0);
+                        pd.syncSize();
                         pd.doLayout();
+                        if (Ext.isIE) {
+                            pd.setHeight('400px');
+                        } else {
+                            var tb = pd.getBottomToolbar();
+                            if (tb) {
+                                tb.getComponent('btn-next').setText(_('finish'));
+                                tb.getComponent('btn-back').setDisabled(true);
+                            }
+                        }
+
                     },this,{single:true});
                     
                     this.windows[x].show(e.target);

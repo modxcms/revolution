@@ -15,6 +15,7 @@ body {
 
 #rightlogin {
     text-align: right;
+    *width: 200px;
 }
 
 #rightlogin a.modx-logout {

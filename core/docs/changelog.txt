@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed Package Management in IE8
+- Styling improvements
 - Fixed IE issue on navbar, few other tweaks to package management for IE
 - [#MODX-2032] Fixed topic varchar length issue with UTF-8 installs
 - [#MODX-1612] Added Create Menu context menu on root node for menus tree
