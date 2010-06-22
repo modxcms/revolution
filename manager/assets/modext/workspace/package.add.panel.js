@@ -16,7 +16,9 @@ MODx.window.PackageDownloader = function(config) {
         ,maximizable: true
         ,autoHeight: true
         ,autoScroll: true
+        ,shadow: false
         ,anchor: '90%'
+        ,width: '90%'
         ,hideMode: 'offsets'
         ,firstPanel: 'modx-pd-start'
         ,lastPanel: 'modx-pd-selpackage'
@@ -269,6 +271,7 @@ MODx.panel.PDSelPackage = function(config) {
     this.on('show',function() {
         var pd = Ext.getCmp('modx-window-package-downloader');
         pd.setPosition(null,0);
+        pd.doLayout();
     },this);
     
 };

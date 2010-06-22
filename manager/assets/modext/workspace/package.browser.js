@@ -24,6 +24,7 @@ MODx.panel.PackageBrowser = function(config) {
         ,layout: 'column'
         ,minWidth: 500
         ,minHeight: 350
+        ,height: 400
         ,anchor: '97%'
         ,autoHeight: true
         ,modal: false
