@@ -98,6 +98,10 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                     }
                     this.windows[x].on('ready',function() {
                         var pd = Ext.getCmp('modx-window-package-downloader');
+
+                        Ext.getCmp('modx-package-browser-thumb-view').hide();
+                        Ext.getCmp('modx-package-browser-grid-panel').hide();
+                        Ext.getCmp('modx-package-browser-view').show();
                         
                         var t = Ext.getCmp('modx-package-browser-tree');
                         if (t) {

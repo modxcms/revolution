@@ -35,7 +35,8 @@ MODx.panel.PackageBrowser = function(config) {
             id: 'modx-package-browser-tree-panel'
             ,cls: 'browser-tree'
             ,region: 'west'
-            ,width: 250
+            ,height: 450
+            ,columnWidth: .25
             ,items: [{
                 xtype: 'modx-package-browser-tree'
                 ,id: 'modx-package-browser-tree'
@@ -44,66 +45,72 @@ MODx.panel.PackageBrowser = function(config) {
             ,border: false
             ,hideMode: 'offsets'
         },{
-            id: 'modx-package-browser-grid-panel'
-            ,cls: 'browser-view'
+            id: 'modx-package-browser-right'
+            ,columnWidth: .75
             ,region: 'center'
-            ,items: [{
-                id: 'modx-package-browser-tag'
-                ,border: false
-            },{
-                xtype: 'modx-package-browser-grid'
-                ,id: 'modx-package-browser-grid'
-                ,preventRender: true
-            }]
-            ,hidden: true
             ,border: false
-            ,hideMode: 'offsets'
-        },{
-            id: 'modx-package-browser-view'
-            ,cls: 'modx-pb-view-ct'
-            ,region: 'center' 
-            //,width: '75%'
-            ,autoScroll: true
             ,autoHeight: true
-            ,columnWidth: 1
-            ,hidden: true
-            ,html: ''
-            ,border: false
-            ,hideMode: 'offsets'
-        },{
-            id: 'modx-package-browser-thumbs'
-            ,cls: 'modx-pb-view-ct'
-            ,region: 'center'
-            //,width: '55%'
-            ,height: 450
-            ,columnWidth: 1
-            ,autoScroll: true
-            ,border: false
+            ,height: 400
             ,items: [{
-                xtype: 'modx-combo-package-browser-sort'
-                ,id: 'modx-combo-package-browser-sort'
-                ,listeners: {
-                    'select': {fn:this.view.sortBy, scope:this.view}
-                }
-            },this.view]
-            ,bbar: [this.view.pagingBar]
-            ,hidden: true
-            ,hideMode: 'offsets'
-        },{
-            html: ''
-            ,id: 'modx-package-browser-thumbs-detail'
-            ,cls: 'modx-pb-details-ct'
-            ,region: 'center'
-            ,split: true
-            ,autoScroll: true
-            //,width: '20%'
-            ,minWidth: 150
-            ,maxWidth: 250
-            ,columnWidth: 1
-            ,border: false
-            ,height: 450
-            ,hidden: true
-            ,hideMode: 'offsets'
+                id: 'modx-package-browser-grid-panel'
+                ,cls: 'browser-view'
+                ,items: [{
+                    id: 'modx-package-browser-tag'
+                    ,border: false
+                },{
+                    xtype: 'modx-package-browser-grid'
+                    ,id: 'modx-package-browser-grid'
+                    ,preventRender: true
+                }]
+                ,border: false
+                ,hideMode: 'offsets'
+            },{
+                id: 'modx-package-browser-view'
+                ,cls: 'modx-pb-view-ct'
+                ,autoScroll: true
+                ,autoHeight: true
+                ,html: ''
+                ,border: false
+                ,autoHeight: true
+                ,hideMode: 'offsets'
+            },{
+                id: 'modx-package-browser-thumb-view'
+                ,border: false
+                ,autoHeight: true
+                ,layout: 'column'
+                ,items: [{
+                    id: 'modx-package-browser-thumbs'
+                    ,cls: 'modx-pb-view-ct'
+                    ,height: 450
+                    ,columnWidth: .75
+                    ,autoScroll: true
+                    ,border: false
+                    ,autoHeight: true
+                    ,items: [{
+                        xtype: 'modx-combo-package-browser-sort'
+                        ,id: 'modx-combo-package-browser-sort'
+                        ,listeners: {
+                            'select': {fn:this.view.sortBy, scope:this.view}
+                        }
+                    },this.view]
+                    ,bbar: [this.view.pagingBar]
+                    ,hideMode: 'offsets'
+                },{
+                    html: ''
+                    ,id: 'modx-package-browser-thumbs-detail'
+                    ,cls: 'modx-pb-details-ct'
+                    ,region: 'center'
+                    ,split: true
+                    ,autoScroll: true
+                    ,autoHeight: true
+                    ,columnWidth: .25
+                    ,minWidth: 150
+                    ,maxWidth: 250
+                    ,border: false
+                    ,height: 450
+                    ,hideMode: 'offsets'
+                }]
+            }]
         }]
     });
     MODx.panel.PackageBrowser.superclass.constructor.call(this,config);
@@ -190,8 +197,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
         });
         g.getBottomToolbar().changePage(1);
         Ext.getCmp('modx-package-browser-view').hide();
-        Ext.getCmp('modx-package-browser-thumbs').hide();
-        Ext.getCmp('modx-package-browser-thumbs-detail').hide();
+        Ext.getCmp('modx-package-browser-thumb-view').hide();
         Ext.getCmp('modx-package-browser-grid-panel').show();
         return true;
     }
@@ -201,8 +207,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
             case 'repository':
                 this.tpls.repository.overwrite('modx-package-browser-view',n.attributes.data);
                 Ext.getCmp('modx-package-browser-grid-panel').hide();
-                Ext.getCmp('modx-package-browser-thumbs').hide();
-                Ext.getCmp('modx-package-browser-thumbs-detail').hide();
+                Ext.getCmp('modx-package-browser-thumb-view').hide();
                 Ext.getCmp('modx-package-browser-view').show();
                 break;
             case 'tag':
@@ -213,22 +218,19 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
                     p.run();
                     
                     Ext.getCmp('modx-package-browser-grid-panel').hide();
-                    Ext.getCmp('modx-package-browser-thumbs').show();
-                    Ext.getCmp('modx-package-browser-thumbs-detail').show();
+                    Ext.getCmp('modx-package-browser-thumb-view').show();
                 } else {
                     this.loadPackagesFromTag(n.attributes.data);
                     this.tpls.tag.overwrite('modx-package-browser-tag',n.attributes.data);
-                    
-                    Ext.getCmp('modx-package-browser-thumbs').hide();
-                    Ext.getCmp('modx-package-browser-thumbs-detail').hide();
+
+                    Ext.getCmp('modx-package-browser-thumb-view').hide();
                     Ext.getCmp('modx-package-browser-grid-panel').show();
                 }
                 Ext.getCmp('modx-package-browser-view').hide();
                 break;
             default:
                 this.tpls.home.overwrite('modx-package-browser-view',this.providerInfo);
-                Ext.getCmp('modx-package-browser-thumbs').hide();
-                Ext.getCmp('modx-package-browser-thumbs-detail').hide();
+                Ext.getCmp('modx-package-browser-thumb-view').hide();
                 Ext.getCmp('modx-package-browser-grid-panel').hide();
                 Ext.getCmp('modx-package-browser-view').show();
                 break;
@@ -405,6 +407,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
         ,tbar: [{
             xtype: 'modx-combo-package-browser-sort'
             ,id: 'modx-combo-package-browser-sort'
+            ,width: 300
             ,hideMode: 'offsets'
             ,listeners: {
                 'select': {fn:function(cb,rec,idx) {
@@ -425,7 +428,6 @@ MODx.grid.PackageBrowserGrid = function(config) {
     MODx.grid.PackageBrowserGrid.superclass.constructor.call(this,config);
     this.loadTpls();
     this.getStore().on('load',function() {
-    
         Ext.getCmp('modx-window-package-downloader').syncSize();
         Ext.getCmp('modx-window-package-downloader').doLayout();
     },this);
@@ -433,7 +435,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
 Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{    
     loadTpls: function() {
         this.detailsTpl = new Ext.XTemplate(
-            '<div class="pb-details" style="padding: 1em;">'
+            '<div class="pb-details" style="padding: 10px;">'
             ,'<tpl for=".">'
                 ,'<div class="pb-mi-content">'
                 ,'<div class="pbr-details-right">'
