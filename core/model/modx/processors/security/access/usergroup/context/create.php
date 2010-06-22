@@ -28,7 +28,7 @@ $alreadyExists = $modx->getObject('modAccessContext',array(
     'target' => $scriptProperties['target'],
     'policy' => $scriptProperties['policy']
 ));
-if ($alreadyExists) $modx->error->addField('principal',$modx->lexicon('access_context_err_ae'));
+if ($alreadyExists) $modx->error->addField('target',$modx->lexicon('access_context_err_ae'));
 
 if ($modx->error->hasError()) return $modx->error->failure();
 

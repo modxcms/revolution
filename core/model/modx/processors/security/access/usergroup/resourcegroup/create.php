@@ -28,7 +28,7 @@ $alreadyExists = $modx->getObject('modAccessResourceGroup',array(
     'policy' => $scriptProperties['policy'],
     'context_key' => $scriptProperties['context_key'],
 ));
-if ($alreadyExists) $modx->error->addField('principal',$modx->lexicon('access_rgroup_err_ae'));
+if ($alreadyExists) $modx->error->addField('target',$modx->lexicon('access_rgroup_err_ae'));
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
