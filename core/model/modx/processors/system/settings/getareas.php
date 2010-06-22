@@ -14,19 +14,15 @@ if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('setting');
 
 /* setup default properties */
-$isLimit = !empty($scriptProperties['limit']);
-$start = $modx->getOption('start',$scriptProperties,0);
-$limit = $modx->getOption('limit',$scriptProperties,20);
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $namespace = $modx->getOption('namespace',$scriptProperties,'');
 
 /* build query */
 $c = $modx->newQuery('modSystemSetting');
-$c->select('
-    `modSystemSetting`.`key`,
-    `modSystemSetting`.`area` AS `area`
-');
-//$c->leftJoin('modLexiconEntry','Area','CONCAT("area_",`modSystemSetting`.`area`) = `Area`.`name`');
+$c->select(array(
+    '`key`',
+    'area',
+));
 if (!empty($namespace)) {
     $c->where(array(
         'modSystemSetting.namespace' => $namespace,
@@ -34,8 +30,6 @@ if (!empty($namespace)) {
 }
 $c->groupby('`area`');
 $c->sortby('`area`',$dir);
-if ($isLimit) $c->limit($limit,$start);
-
 $areas = $modx->getCollection('modSystemSetting',$c);
 
 $list = array();
@@ -54,4 +48,4 @@ foreach ($areas as $area) {
         'v' => $area->get('area'),
     );
 }
-return $this->outputArray($list,$count);
+return $this->outputArray($list);

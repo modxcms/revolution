@@ -260,7 +260,6 @@ MODx.combo.Area = function(config) {
         ,valueField: 'v'
         ,fields: ['d','v']
         ,url: MODx.config.connectors_url+'system/settings.php'
-        ,pageSize: 20
         ,baseParams: {
             action: 'getAreas'
         }
