@@ -345,6 +345,8 @@ class modTemplateVar extends modElement {
             unset($domRules,$rule,$userGroups,$v,$c);
         }
 
+        $this->set('description',$this->xpdo->stripTags($this->get('description')));
+
         $this->xpdo->smarty->assign('tv',$this);
 
 

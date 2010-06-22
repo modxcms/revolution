@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2051] Stripped tags from TV description field on input rendering
 - Added 'custom_resource_classes' setting, which allows you to specify custom resource types for the resource tree
 - Tweaked FC tvMove rule to be more consistent with values of other TV FC rules
 - Allow blank names (not keys) in Settings create/update windows; tweaks to query in package management grid
