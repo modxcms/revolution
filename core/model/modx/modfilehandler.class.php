@@ -307,11 +307,10 @@ class modFile extends modFileSystemResource {
      * Actually create the file on the file system
      * 
      * @param string $content The content of the file to write
-     * @param string $mode The octal perms to set on the file
+     * @param string $mode The perms to write with the file
      * @return boolean True if successful
      */
-    public function create($content = '',$mode = '') {
-        $mode = $this->parseMode($mode);
+    public function create($content = '',$mode = 'w+') {
         if ($this->exists()) return false;
         $result = false;
 
@@ -345,8 +344,8 @@ class modFile extends modFileSystemResource {
      *
      * @see modDirectory::write
      */
-    public function write($content = null) {
-        return $this->save($content);
+    public function write($content = null,$mode = 'w+') {
+        return $this->save($content,$mode);
     }
 
     /**
@@ -356,11 +355,11 @@ class modFile extends modFileSystemResource {
      * the content to write.
      * @return mixed The result of the fwrite
      */
-    public function save($content = null) {
+    public function save($content = null,$mode = 'w+') {
         if ($content !== null) $this->content = $content;
         $result = false;
 
-        $fp = @fopen($this->path, 'w+');
+        $fp = @fopen($this->path,$mode);
         if ($fp) {
             $result = @fwrite($fp,$this->content);
             @fclose($fp);
@@ -441,14 +440,14 @@ class modDirectory extends modFileSystemResource {
         $mode = $this->parseMode($mode);
         if ($this->exists()) return false;
 
-        return @mkdir($this->path,$mode);
+        return $this->modx->cacheManager->writeTree($this->path);
     }
 
     /**
      * @see modFileSystemResource::parseMode
      */
     protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->modx->getOption('new_folder_permissions',null,0755);
+        if (empty($mode)) $mode = $this->modx->getOption('new_folder_permissions',null,'0755');
         return parent::parseMode($mode);
     }
 
