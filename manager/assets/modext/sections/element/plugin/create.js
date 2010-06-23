@@ -7,10 +7,10 @@
  * @xtype modx-page-plugin-create
  */
 MODx.page.CreatePlugin = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		formpanel: 'modx-panel-plugin'
-	    ,actions: {
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-plugin'
+        ,actions: {
             'new': MODx.action['element/plugin/create']
             ,edit: MODx.action['element/plugin/update']
             ,cancel: MODx.action['welcome']
@@ -37,8 +37,8 @@ MODx.page.CreatePlugin = function(config) {
             ,category: config.category || 0
             ,name: ''
         }]
-	});
-	MODx.page.CreatePlugin.superclass.constructor.call(this,config);
+    });
+    MODx.page.CreatePlugin.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.CreatePlugin,MODx.Component);
 Ext.reg('modx-page-plugin-create',MODx.page.CreatePlugin);

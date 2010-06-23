@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixes to RTE loading in Element panes, other issues regarding timing of plugin firing
 - Fixed bug with area listings in combo in system settings
 - [#MODX-1961] Fixed bug with octal perms when creating directories in the admin
 - [#MODX-1527] Fixed bugs in admin confirm password field on install

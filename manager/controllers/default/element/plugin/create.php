@@ -16,7 +16,7 @@ if (isset($_REQUEST['category'])) {
 /* invoke OnPluginFormRender event */
 $onPluginFormRender = $modx->invokeEvent('OnPluginFormRender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onPluginFormRender)) $onPluginFormRender = implode('',$onPluginFormRender);
 $onPluginFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onPluginFormRender);
@@ -30,7 +30,6 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.grid.element.properties.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.grid.plugin.event.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.plugin.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/plugin/common.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/plugin/create.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
@@ -49,7 +48,7 @@ MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 /* invoke OnPluginFormPrerender event */
 $onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onPluginFormPrerender)) $onPluginFormPrerender = implode('',$onPluginFormPrerender);
 $modx->smarty->assign('onPluginFormPrerender',$onPluginFormPrerender);

@@ -237,6 +237,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
                     
                     var dis = this.getComponent('tabs').getComponent('form-tv').getComponent('fs-rendering').getComponent('fld-display');
                     this.showParameters(dis);
+                    if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
                 },scope:this}
             }
         });

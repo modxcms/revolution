@@ -25,7 +25,7 @@ $modx->smarty->assign('chunk',$chunk);
 $onChunkFormRender = $modx->invokeEvent('OnChunkFormRender',array(
     'id' => $_REQUEST['id'],
     'chunk' => &$chunk,
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if (is_array($onChunkFormRender)) $onChunkFormRender = implode('', $onChunkFormRender);
 $onChunkFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onChunkFormRender);
@@ -71,7 +71,7 @@ MODx.perm.unlock_element_properties = '.($modx->hasPermission('unlock_element_pr
 $onChunkFormPrerender = $modx->invokeEvent('OnChunkFormPrerender',array(
     'id' => $chunk->get('id'),
     'chunk' => &$chunk,
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if (is_array($onChunkFormPrerender)) {
     $onChunkFormPrerender = implode('',$onChunkFormPrerender);

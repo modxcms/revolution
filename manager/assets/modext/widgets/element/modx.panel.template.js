@@ -135,7 +135,7 @@ MODx.panel.Template = function(config) {
 Ext.extend(MODx.panel.Template,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (this.config.template === '' || this.config.template === 0 || this.initialized) {            
+        if (this.config.template === '' || this.config.template === 0 || this.initialized) {
             this.fireEvent('ready');
             return false;
         }
@@ -158,6 +158,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
                         g.defaultProperties = d;
                         g.getStore().loadData(d);
                     }
+                    if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
                     this.initialized = true;
                 },scope:this}
             }

@@ -15,12 +15,11 @@ if (!$plugin->checkPolicy('view')) return $modx->error->failure($modx->lexicon('
 
 $plugin->category = $plugin->getOne('Category');
 
-
 /* invoke OnPluginFormRender event */
 $onPluginFormRender = $modx->invokeEvent('OnPluginFormRender',array(
     'id' => $plugin->get('id'),
     'plugin' => &$plugin,
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if (is_array($onPluginFormRender)) $onPluginFormRender = implode('',$onPluginFormRender);
 $onPluginFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onPluginFormRender);
@@ -61,7 +60,7 @@ MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 $onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array(
     'id' => $plugin->get('id'),
     'plugin' => &$plugin,
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if (is_array($onPluginFormPrerender)) $onPluginFormPrerender = implode('',$onPluginFormPrerender);
 $modx->smarty->assign('onPluginFormPrerender',$onPluginFormPrerender);

@@ -16,7 +16,7 @@ if (isset($_REQUEST['category'])) {
 /* invoke onSnipFormRender event */
 $onSnipFormRender = $modx->invokeEvent('OnSnipFormRender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onSnipFormRender)) $onSnipFormRender = implode('',$onSnipFormRender);
 $onSnipFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onSnipFormRender);
@@ -47,7 +47,7 @@ MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 /* invoke OnSnipFormPrerender event */
 $onSnipFormPrerender = $modx->invokeEvent('OnSnipFormPrerender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onSnipFormPrerender)) $onSnipFormPrerender = implode('',$onSnipFormPrerender);
 $modx->smarty->assign('onSnipFormPrerender',$onSnipFormPrerender);

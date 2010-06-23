@@ -133,12 +133,11 @@ MODx.panel.Plugin = function(config) {
         }
     });
     MODx.panel.Plugin.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-element-tree').expand();",1000);
 };
 Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (this.config.plugin === '' || this.config.plugin === 0 || this.initialized) {            
+        if (this.config.plugin === '' || this.config.plugin === 0 || this.initialized) {
             this.fireEvent('ready');
             return false;
         }
@@ -150,7 +149,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
             }
             ,listeners: {
             	'success': {fn:function(r) {
-            		if (r.object.category == '0') { r.object.category = null; }
+                    if (r.object.category == '0') { r.object.category = null; }
                     r.object.plugincode = "<?php\n"+r.object.plugincode+"\n?>";
                     this.getForm().setValues(r.object);
                     Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+r.object.name+'</h2>');
@@ -161,9 +160,12 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
                     g.defaultProperties = d;
                     g.getStore().loadData(d);
                     this.initialized = true;
+
+                    if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
             	},scope:this}
             }
         });
+        return true;
     }
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-plugin-event');

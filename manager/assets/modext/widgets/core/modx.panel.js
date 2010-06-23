@@ -46,6 +46,7 @@ MODx.FormPanel = function(config) {
         ,actionNew: true
         ,actionContinue: true
         ,actionClose: true
+        ,postReady: true
     });
     this.getForm().addEvents({
         success: true
@@ -163,6 +164,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         if (this.config.useLoadingMask && this.mask) {
             this.mask.hide();
         }
+        this.fireEvent('postReady');
     }
 
     ,loadDropZones: function() {

@@ -22,7 +22,7 @@ $evtOut = $modx->invokeEvent('OnRichTextEditorRegister',array(
     'forfrontend' => true,
     'id' => $tv->get('id'),
     'tv' => &$tv,
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if(is_array($evtOut)) $RTEditors = implode(',',$evtOut);
 $modx->smarty->assign('RTEditors',$RTEditors);
@@ -31,7 +31,7 @@ $modx->smarty->assign('RTEditors',$RTEditors);
 $onTVFormRender = $modx->invokeEvent('OnTVFormRender',array(
     'id' => $tv->get('id'),
     'tv' => &$tv,
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if (is_array($onTVFormRender)) $onTVFormRender = implode('',$onTVFormRender);
 $onTVFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onTVFormRender);
@@ -70,7 +70,7 @@ MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 $onTVFormPrerender = $modx->invokeEvent('OnTVFormPrerender',array(
     'id' => $tv->get('id'),
     'tv' => &$tv,
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if(is_array($onTVFormPrerender)) $onTVFormPrerender = implode('',$onTVFormPrerender);
 $modx->smarty->assign('onTVFormPrerender',$onTVFormPrerender);

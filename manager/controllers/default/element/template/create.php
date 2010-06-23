@@ -16,7 +16,7 @@ if (isset($_REQUEST['category'])) {
 /* invoke OnTempFormRender event */
 $onTempFormRender = $modx->invokeEvent('OnTempFormRender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onTempFormRender)) $onTempFormRender = implode('',$onTempFormRender);
 $onTempFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onTempFormRender);
@@ -48,7 +48,7 @@ MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 /* invoke OnTempFormPrerender event */
 $onTempFormPrerender = $modx->invokeEvent('OnTempFormPrerender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onTempFormPrerender)) $onTempFormPrerender = implode('',$onTempFormPrerender);
 $modx->smarty->assign('onTempFormPrerender',$onTempFormPrerender);

@@ -9,8 +9,8 @@ if (!$modx->hasPermission('new_tv')) return $modx->error->failure($modx->lexicon
 
 /* preset category if specified */
 if (isset($_REQUEST['category'])) {
-	$category = $modx->getObject('modCategory',$_REQUEST['category']);
-	if ($category != null) $modx->smarty->assign('category',$category);
+    $category = $modx->getObject('modCategory',$_REQUEST['category']);
+    if ($category != null) $modx->smarty->assign('category',$category);
 } else { $category = null; }
 
 /* get available RichText Editors */
@@ -18,7 +18,7 @@ $RTEditors = '';
 $evtOut = $modx->invokeEvent('OnRichTextEditorRegister',array(
     'forfrontend' => 1,
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if(is_array($evtOut)) $RTEditors = implode(',',$evtOut);
 $modx->smarty->assign('RTEditors',$RTEditors);
@@ -26,7 +26,7 @@ $modx->smarty->assign('RTEditors',$RTEditors);
 /* invoke OnTVFormRender event */
 $onTVFormRender = $modx->invokeEvent('OnTVFormRender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onTVFormRender)) $onTVFormRender = implode('',$onTVFormRender);
 $onTVFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onTVFormRender);
@@ -59,7 +59,7 @@ MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 /* invoke OnTVFormPrerender event */
 $onTVFormPrerender = $modx->invokeEvent('OnTVFormPrerender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if(is_array($onTVFormPrerender)) $onTVFormPrerender = implode('',$onTVFormPrerender);
 $modx->smarty->assign('onTVFormPrerender',$onTVFormPrerender);

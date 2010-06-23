@@ -138,6 +138,7 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
                     var g = Ext.getCmp('modx-grid-element-properties');
                     g.defaultProperties = d;
                     g.getStore().loadData(d);
+                    if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
                     this.initialized = true;
                 },scope:this}
             }

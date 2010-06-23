@@ -22,7 +22,7 @@ $modx->smarty->assign('which_editor',$which_editor);
 /* invoke OnChunkFormRender event */
 $onChunkFormRender = $modx->invokeEvent('OnChunkFormRender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'chunk' => null,
 ));
 if (is_array($onChunkFormRender)) $onChunkFormRender = implode('', $onChunkFormRender);
@@ -65,7 +65,7 @@ MODx.perm.unlock_element_properties = '.($modx->hasPermission('unlock_element_pr
 /* invoke OnChunkFormPrerender event */
 $onChunkFormPrerender = $modx->invokeEvent('OnChunkFormPrerender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'chunk' => null,
 ));
 if (is_array($onChunkFormPrerender)) {

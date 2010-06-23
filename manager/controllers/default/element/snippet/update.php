@@ -16,20 +16,11 @@ if ($snippet->get('locked') && !$modx->hasPermission('edit_locked')) {
     return $modx->error->failure($modx->lexicon('snippet_err_locked'));
 }
 
-/* invoke OnSnipFormPrerender event */
-$onSnipFormPrerender = $modx->invokeEvent('OnSnipFormPrerender',array(
-    'id' => $snippet->get('id'),
-    'snippet' => &$snippet,
-    'mode' => 'upd',
-));
-if (is_array($onSnipFormPrerender)) $onSnipFormPrerender = implode('',$onSnipFormPrerender);
-$modx->smarty->assign('onSnipFormPrerender',$onSnipFormPrerender);
-
 /* invoke onSnipFormRender event */
 $onSnipFormRender = $modx->invokeEvent('OnSnipFormRender',array(
     'id' => $snippet->get('id'),
     'snippet' => &$snippet,
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if (is_array($onSnipFormRender)) $onSnipFormRender = implode('',$onSnipFormRender);
 $onSnipFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onSnipFormRender);
@@ -57,6 +48,15 @@ MODx.onSnipFormRender = "'.$onSnipFormRender.'";
 MODx.perm.unlock_element_properties = "'.$unlock_element_properties.'";
 // ]]>
 </script>');
+
+/* invoke OnSnipFormPrerender event */
+$onSnipFormPrerender = $modx->invokeEvent('OnSnipFormPrerender',array(
+    'id' => $snippet->get('id'),
+    'snippet' => &$snippet,
+    'mode' => modSystemEvent::MODE_UPD,
+));
+if (is_array($onSnipFormPrerender)) $onSnipFormPrerender = implode('',$onSnipFormPrerender);
+$modx->smarty->assign('onSnipFormPrerender',$onSnipFormPrerender);
 
 /* assign snippet to parser and display template */
 $modx->smarty->assign('snippet',$snippet);
