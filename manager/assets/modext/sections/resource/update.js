@@ -88,7 +88,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 process: 'update'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: true
+                ,checkDirty: cfg.richtext ? false : true
                 ,keys: [{
                     key: 's'
                     ,alt: true

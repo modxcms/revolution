@@ -47,7 +47,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
                 process: 'create'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: true
+                ,checkDirty: cfg.richtext ? false : true
                 ,keys: [{
                     key: 's'
                     ,alt: true
