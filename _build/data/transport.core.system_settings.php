@@ -42,6 +42,15 @@ $settings['auto_check_pkg_updates']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['auto_check_pkg_updates_cache_expire']= $xpdo->newObject('modSystemSetting');
+$settings['auto_check_pkg_updates_cache_expire']->fromArray(array (
+  'key' => 'auto_check_pkg_updates_cache_expire',
+  'value' => 5,
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['automatic_alias']= $xpdo->newObject('modSystemSetting');
 $settings['automatic_alias']->fromArray(array (
   'key' => 'automatic_alias',

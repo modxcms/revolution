@@ -52,7 +52,7 @@ $c->sortby('modTransportPackage.signature', 'ASC');
 if ($isLimit) $c->limit($limit,$start);
 $packages = $modx->getCollection('transport.modTransportPackage',$c);
 
-
+$updatesCacheExpire = $modx->getOption('auto_check_pkg_updates_cache_expire',$scriptProperties,5) * 60;
 
 $modx->getVersionData();
 $productVersion = $modx->version['code_name'].'-'.$modx->version['full_version'];
@@ -141,31 +141,40 @@ foreach ($packages as $key => $package) {
 
 
     /* check for updates */
-    $updates = array();
+
+    $updates = 0;
+
     if ($package->get('provider') > 0 && $modx->getOption('auto_check_pkg_updates',null,false)) {
-        /* cache providers to speed up load time */
-        if (!empty($providerCache[$package->get('provider')])) {
-            $provider =& $providerCache[$package->get('provider')];
-        } else {
-            $provider = $package->getOne('Provider');
-            if ($provider) {
-                $providerCache[$provider->get('id')] = $provider;
-            }
-        }
-        if ($provider) {
-            $loaded = $provider->getClient();
-            if ($loaded) {
-                $response = $provider->request('package/update','GET',array(
-                    'signature' => $package->get('signature'),
-                    'supports' => $productVersion,
-                ));
-                if ($response && !$response->isError()) {
-                    $updates = $response->toXml();
+        $updateCacheKey = 'mgr/providers/updates/'.$package->get('provider').'/'.$package->get('signature');
+
+        $updates = $modx->cacheManager->get($updateCacheKey);
+        if (empty($updates)) {
+            /* cache providers to speed up load time */
+            if (!empty($providerCache[$package->get('provider')])) {
+                $provider =& $providerCache[$package->get('provider')];
+            } else {
+                $provider = $package->getOne('Provider');
+                if ($provider) {
+                    $providerCache[$provider->get('id')] = $provider;
                 }
+            }
+            if ($provider) {
+                $loaded = $provider->getClient();
+                if ($loaded) {
+                    $response = $provider->request('package/update','GET',array(
+                        'signature' => $package->get('signature'),
+                        'supports' => $productVersion,
+                    ));
+                    if ($response && !$response->isError()) {
+                        $updates = $response->toXml();
+                    }
+                }
+                $updates = array('count' => count($updates));
+                $modx->cacheManager->set($updateCacheKey,$updates,$updatesCacheExpire);
             }
         }
     }
-    $packageArray['updateable'] = count($updates) >= 1 ? true : false;
+    $packageArray['updateable'] = $updates['count'] > 1 ? true : false;
 
     $list[] = $packageArray;
 }
