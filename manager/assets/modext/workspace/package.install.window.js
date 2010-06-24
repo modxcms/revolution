@@ -11,11 +11,18 @@ MODx.window.PackageInstaller = function(config) {
     Ext.applyIf(config,{
         title: _('package_installer')
         ,id: 'modx-window-package-installer'
+        ,resizable: true
+        ,forceLayout: true
+        ,autoHeight: true
+        ,autoScroll: false
+        ,stateful: false
+        ,shadow: false
+        ,width: '90%'
+        ,anchor: '90%'
+        ,hideMode: 'offsets'
+        ,modal: Ext.isIE ? false : true
         ,firstPanel: 'modx-pi-license'
         ,lastPanel: 'modx-pi-install'
-        ,autoHeight: true
-        ,forceLayout: true
-        ,stateful: false
         ,items: [{
             xtype: 'modx-panel-pi-license'
         },{
@@ -41,7 +48,7 @@ MODx.panel.PILicense = function(config) {
             ,autoHeight: true
         },{
             html: '<p>'+_('license_agreement_desc')+'</p>'   
-            ,style: 'padding-bottom: 2em'
+            ,style: 'padding-bottom: 20px'
             ,autoHeight: true
         },{
             xtype: 'textarea'
@@ -114,7 +121,7 @@ MODx.panel.PIReadme = function(config) {
             ,autoHeight: true
         },{
             html: '<p>'+_('readme_desc')+'</p>'   
-            ,style: 'padding-bottom: 2em'
+            ,style: 'padding-bottom: 20px'
             ,autoHeight: true
         },{
             xtype: 'textarea'
@@ -165,7 +172,7 @@ MODx.panel.PIInstall = function(config) {
         ,back: 'modx-pi-readme'
         ,hideLabels: true
         ,defaults: { labelSeparator: '', border: false }
-        ,bodyStyle: 'padding: 3em 3em'
+        ,bodyStyle: 'padding: 30px'
         ,items: [{
             html: '<h2>'+_('setup_options')+'</h2>'
             ,id: 'modx-setup-options-header'
