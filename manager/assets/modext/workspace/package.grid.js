@@ -293,6 +293,41 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             }
         });
     }
+
+    ,getMenu: function(g,ri,e) {
+        var m = [];
+        var n = this.getSelectionModel().getSelected();
+        var installed = n.data.installed && n.data.installed != '' && n.data.installed != '0000-00-00 00:00:00';
+        
+        m.push({
+            text: _('package_view')
+            ,handler: this.viewPackage
+        },'-')
+        if (n.data.provider != 0) {
+            m.push({
+                text: _('package_check_for_updates')
+                ,handler: this.update
+            });
+        }
+        m.push({
+            text: installed ? _('package_reinstall') : _('package_install')
+            ,handler: this.install
+        });
+        if (installed) {
+            m.push({
+                text: _('package_uninstall')
+                ,handler: this.uninstall
+            });
+        }
+        m.push('-',{
+            text: _('package_remove')
+            ,handler: this.remove
+        });
+
+        if (m.length > 0) {
+            this.addContextMenuItem(m);
+        }
+    }
 });
 Ext.reg('modx-grid-package',MODx.grid.Package);
 

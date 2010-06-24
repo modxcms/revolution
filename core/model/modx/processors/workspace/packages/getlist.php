@@ -91,34 +91,6 @@ foreach ($packages as $key => $package) {
     $not_installed = $package->get('installed') == null || $package->get('installed') == '0000-00-00 00:00:00';
     $packageArray['iconaction'] = $not_installed ? 'icon-install' : 'icon-uninstall';
     $packageArray['textaction'] = $not_installed ? $modx->lexicon('install') : $modx->lexicon('uninstall');
-    $packageArray['menu'] = array();
-
-    $packageArray['menu'][] = array(
-        'text' => $modx->lexicon('package_view'),
-        'handler' => 'this.viewPackage',
-    );
-    $packageArray['menu'][] = '-';
-    if ($package->get('provider') != 0) {
-        $packageArray['menu'][] = array(
-            'text' => $modx->lexicon('package_check_for_updates'),
-            'handler' => 'this.update',
-        );
-    }
-    $packageArray['menu'][] = array(
-        'text' => ($not_installed) ? $modx->lexicon('package_install') : $modx->lexicon('package_reinstall'),
-        'handler' => ($not_installed) ? 'this.install' : 'this.install',
-    );
-    if ($not_installed == false) {
-        $packageArray['menu'][] = array(
-            'text' => $modx->lexicon('package_uninstall'),
-            'handler' => 'this.uninstall',
-        );
-    }
-    $packageArray['menu'][] = '-';
-    $packageArray['menu'][] = array(
-        'text' => $modx->lexicon('package_remove'),
-        'handler' => 'this.remove',
-    );
 
     /* setup description, using either metadata or readme */
     $metadata = $package->get('metadata');
@@ -141,9 +113,7 @@ foreach ($packages as $key => $package) {
 
 
     /* check for updates */
-
-    $updates = 0;
-
+    $updates = array('count' => 0);
     if ($package->get('provider') > 0 && $modx->getOption('auto_check_pkg_updates',null,false)) {
         $updateCacheKey = 'mgr/providers/updates/'.$package->get('provider').'/'.$package->get('signature');
 
