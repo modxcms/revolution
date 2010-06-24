@@ -45,7 +45,7 @@ $settings['auto_check_pkg_updates']->fromArray(array (
 $settings['auto_check_pkg_updates_cache_expire']= $xpdo->newObject('modSystemSetting');
 $settings['auto_check_pkg_updates_cache_expire']->fromArray(array (
   'key' => 'auto_check_pkg_updates_cache_expire',
-  'value' => 5,
+  'value' => 15,
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'system',
