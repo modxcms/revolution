@@ -130,8 +130,6 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
                     r.object.snippet = "<?php\n"+r.object.snippet+"\n?>";
                     this.getForm().setValues(r.object);
                     Ext.getCmp('modx-snippet-header').getEl().update('<h2>'+_('snippet')+': '+r.object.name+'</h2>');
-                    this.clearDirty();
-                    this.fireEvent('ready',r.object);
                     
                     var d = Ext.decode(r.object.data);
                     var g = Ext.getCmp('modx-grid-element-properties');
@@ -139,6 +137,8 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
                     g.getStore().loadData(d);
 
                     if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
+                    this.fireEvent('ready',r.object);
+                    this.clearDirty();
                     this.initialized = true;
                 },scope:this}
             }

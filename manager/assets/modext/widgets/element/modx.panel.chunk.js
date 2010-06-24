@@ -132,13 +132,14 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
                     if (r.object.snippet == 'NULL') { r.object.snippet = ''; }
                     this.getForm().setValues(r.object);
                     Ext.getCmp('modx-chunk-header').getEl().update('<h2>'+_('chunk')+': '+r.object.name+'</h2>');
-                    this.fireEvent('ready',r.object);
                     
                     var d = Ext.decode(r.object.data);
                     var g = Ext.getCmp('modx-grid-element-properties');
                     g.defaultProperties = d;
                     g.getStore().loadData(d);
                     if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
+                    this.fireEvent('ready',r.object);
+                    this.clearDirty();
                     this.initialized = true;
                 },scope:this}
             }

@@ -150,7 +150,6 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
                     if (r.object.category == '0') { r.object.category = null; }
                     this.getForm().setValues(r.object);
                     Ext.getCmp('modx-template-header').getEl().update('<h2>'+_('template')+': '+r.object.templatename+'</h2>');
-                    this.fireEvent('ready',r.object);
 
                     var d = Ext.decode(r.object.data);
                     var g = Ext.getCmp('modx-grid-element-properties');
@@ -159,6 +158,8 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
                         g.getStore().loadData(d);
                     }
                     if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
+                    this.fireEvent('ready',r.object);
+                    this.clearDirty();
                     this.initialized = true;
                 },scope:this}
             }

@@ -153,15 +153,16 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
                     r.object.plugincode = "<?php\n"+r.object.plugincode+"\n?>";
                     this.getForm().setValues(r.object);
                     Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+r.object.name+'</h2>');
-                    this.fireEvent('ready',r.object);
                     
                     var d = Ext.decode(r.object.data);
                     var g = Ext.getCmp('modx-grid-element-properties');
                     g.defaultProperties = d;
                     g.getStore().loadData(d);
-                    this.initialized = true;
 
                     if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
+                    this.fireEvent('ready',r.object);
+                    this.clearDirty();
+                    this.initialized = true;
             	},scope:this}
             }
         });

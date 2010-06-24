@@ -222,22 +222,22 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
                     if (r.object.category == '0') { r.object.category = null; }
                     this.getForm().setValues(r.object);
                     this.getComponent('header').getEl().update('<h2>'+_('tv')+': '+r.object.name+'</h2>');
-                    
-                    this.clearDirty();
-                    this.fireEvent('ready',r.object);
 
                     var d = Ext.decode(r.object.data);
                     var g = this.getComponent('tabs').getComponent('panel-properties').getComponent('grid-properties');
                     g.defaultProperties = d;
                     g.getStore().loadData(d);
-                    this.initialized = true;
                     
                     var sv = function(vs) { this.getForm().setValues(vs); };
                     sv.defer(1300,this,[r.object]);
                     
                     var dis = this.getComponent('tabs').getComponent('form-tv').getComponent('fs-rendering').getComponent('fld-display');
                     this.showParameters(dis);
+
                     if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
+                    this.fireEvent('ready',r.object);
+                    this.clearDirty();
+                    this.initialized = true;
                 },scope:this}
             }
         });
