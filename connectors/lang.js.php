@@ -6,7 +6,6 @@
  * @subpackage lexicon
  */
 ob_start();
-define('MODX_REQP',false);
 require_once dirname(__FILE__).'/index.php';
 ob_clean();
 

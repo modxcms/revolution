@@ -43,6 +43,14 @@ $modx->initialize($ctx);
 if (defined('MODX_REQP') && MODX_REQP === false) {
 } else if (!$modx->context->checkPolicy('load')) { die(); }
 
+if ($ctx == 'mgr') {
+    $ml = $modx->getOption('manager_language',null,'en');
+    if ($ml != 'en') {
+        $modx->lexicon->load($ml.':core:default');
+        $modx->setOption('cultureKey',$ml);
+    }
+}
+
 /* handle the request */
 $connectorRequestClass = $modx->getOption('modConnectorRequest.class',null,'modConnectorRequest');
 $modx->config['modRequest.class'] = $connectorRequestClass;
