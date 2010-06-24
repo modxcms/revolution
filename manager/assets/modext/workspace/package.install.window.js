@@ -15,6 +15,7 @@ MODx.window.PackageInstaller = function(config) {
         ,lastPanel: 'modx-pi-install'
         ,autoHeight: true
         ,forceLayout: true
+        ,stateful: false
         ,items: [{
             xtype: 'modx-panel-pi-license'
         },{

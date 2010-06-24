@@ -9,6 +9,7 @@ MODx.Wizard = function(config) {
         ,maximizable: true
         ,autoHeight: true
         ,anchor: '90%'
+        ,width: '90%'
         ,defaults: { border: false }
         ,modal: Ext.isIE ? false : true
         ,cls: 'modx-window'
