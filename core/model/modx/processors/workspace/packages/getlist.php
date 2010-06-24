@@ -174,7 +174,7 @@ foreach ($packages as $key => $package) {
             }
         }
     }
-    $packageArray['updateable'] = $updates['count'] > 1 ? true : false;
+    $packageArray['updateable'] = $updates['count'] >= 1 ? true : false;
 
     $list[] = $packageArray;
 }
