@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1834] Adjusted color on Yes/No on packages grid to more reflect intent
 - Readjust JS firing timing for Elements to prevent RTE timing errors in faster browsers
 - [#MODX-2090] Added auto_check_pkg_updates_cache_expire setting, which caches package update checks in Package Management to speed up grid load times
 - Ensure Resource pages using RTEs always have save btn enabled

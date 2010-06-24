@@ -38,6 +38,17 @@ hr {
 .left { float: left; }
 .clear { clear: left; }
 .bold { font-weight: bold; }
+.not-installed { color: red; }
+.red { color: red !important; }
+.green { color: green !important; }
+.error { color: red !important; }
+.unpublished { font-style: italic; }
+.deleted { color: red !important; }
+.deleted a span {
+    color: #CC3333 !important;
+    text-decoration: line-through !important;
+}
+.hidemenu a span { color: gray !important; }
 
 /* leftbar */
 #modx-leftbar, #modx-content {
@@ -240,16 +251,7 @@ textarea.x-form-field {
 .ext-el-mask { z-index: 10; }
 .modx-lockmask { z-index: 11; }
 .x-menu a { text-decoration: none !important; }
-.unpublished { font-style: italic; }
-.bold { font-weight: bold; }
-.deleted {
-    color: red !important;
-}
-.deleted a span {
-    color: #CC3333 !important;
-    text-decoration: line-through !important;
-}
-.hidemenu a span { color: gray !important; }
+
 .tree ul, .tree ul li {
     list-style: none;
 }
@@ -645,6 +647,8 @@ table.classy tr.odd td {
     opacity: .5;
     color: gray;
 }
+#modx-grid-package .green { color: red !important; }
+#modx-grid-package .red { color: green !important; }
 
 .pbr-provider-box {
     width: 250px;
