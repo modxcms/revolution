@@ -37,8 +37,13 @@ class modTransportProvider extends xPDOSimpleObject {
      */
     public function request($path,$method = 'GET',$params = array()) {
         if ($this->xpdo->rest == null) $this->getClient();
+
+        if (!is_array($this->xpdo->version)) { $this->xpdo->getVersionData(); }
+        $productVersion = $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'];
+
         $params = array_merge(array(
             'api_key' => $this->get('api_key'),
+            'revolution_version' => $productVersion,
         ),$params);
         return $this->xpdo->rest->request($this->get('service_url'),$path,$method,$params);
     }

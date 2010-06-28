@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added extra var to pass revo version in transport provider requests; helps with download metrics and version checking
 - Optimized package grid by moving menus to JS
 - Fixed issue where manager_language setting was being ignored in mgr connectors
 - Enhance security on language string loader
