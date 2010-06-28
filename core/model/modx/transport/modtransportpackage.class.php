@@ -225,7 +225,10 @@ class modTransportPackage extends xPDOObject {
         $transferred= false;
         $content= '';
         if (is_dir($targetDir) && is_writable($targetDir)) {
-            $source= $this->get('service_url') . $sourceFile;
+            if (!is_array($this->xpdo->version)) { $this->xpdo->getVersionData(); }
+            $productVersion = $this->xpdo->version['code_name'].'-'.$this->xpdo->version['full_version'];
+
+            $source= $this->get('service_url') . $sourceFile.(strpos($sourceFile,'?') !== false ? '&' : '?').'revolution_version='.$productVersion;
 
             /* see if user has allow_url_fopen on */
             if (ini_get('allow_url_fopen')) {
