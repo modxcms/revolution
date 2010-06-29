@@ -37,7 +37,7 @@ MODx.grid.Package = function(config) {
     if (MODx.config.auto_check_pkg_updates == 1) {
         cols.push({ header: _('updateable') ,dataIndex: 'updateable' ,renderer: this.rendYesNo });
     }
-    cols.push({ header: _('provider') ,dataIndex: 'provider_name' });
+    cols.push({ header: _('provider') ,dataIndex: 'provider_name'});
     cols.push(this.action);
     
     Ext.applyIf(config,{
@@ -150,7 +150,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'update'
+                action: 'update-remote'
                 ,signature: this.menu.record.signature
             }
             ,listeners: {

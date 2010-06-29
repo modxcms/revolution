@@ -12,6 +12,10 @@ MODx.combo.Provider = function(config) {
         name: 'provider'
         ,hiddenName: 'provider'
         ,url: MODx.config.connectors_url+'workspace/providers.php'
+        ,baseParams: {
+            action: 'getList'
+            ,combo: true
+        }
         ,editable: false
     });
     MODx.combo.Provider.superclass.constructor.call(this,config);

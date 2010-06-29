@@ -5,12 +5,23 @@ Ext.onReady(function() {
 MODx.page.Package = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        components: [{
+        formpanel: 'modx-panel-package'
+        ,components: [{
             xtype: 'modx-panel-package'
             ,renderTo: 'modx-panel-package-div'
             ,signature: MODx.request.signature
         }]
         ,buttons: [{
+            process: 'update'
+            ,text: _('save')
+            ,method: 'remote'
+            ,checkDirty: true
+            ,keys: [{
+                key: 's'
+                ,alt: true
+                ,ctrl: true
+            }]
+        },'-',{
             process: 'cancel'
             ,text: _('cancel')
             ,handler: function() {

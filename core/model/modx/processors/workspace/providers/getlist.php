@@ -16,6 +16,7 @@ $modx->lexicon->load('workspace');
 
 /* setup default properties */
 $isLimit = !empty($scriptProperties['limit']);
+$isCombo = !empty($scriptProperties['combo']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'name');
@@ -31,19 +32,24 @@ $providers = $modx->getCollection('transport.modTransportProvider',$c);
 
 /* iterate */
 $list = array();
+if ($isCombo) {
+    $list[] = array('id' => 0,'name' => $modx->lexicon('none'));
+}
 foreach ($providers as $provider) {
     $providerArray = $provider->toArray();
-    $providerArray['menu'] = array(
-        array(
-            'text' => $modx->lexicon('provider_update'),
-            'handler' => array( 'xtype' => 'modx-window-provider-update' ),
-        ),
-        '-',
-        array(
-            'text' => $modx->lexicon('provider_remove'),
-            'handler' => 'this.remove.createDelegate(this,["provider_confirm_remove"])',
-        )
-    );
+    if (!$isCombo) {
+        $providerArray['menu'] = array(
+            array(
+                'text' => $modx->lexicon('provider_update'),
+                'handler' => array( 'xtype' => 'modx-window-provider-update' ),
+            ),
+            '-',
+            array(
+                'text' => $modx->lexicon('provider_remove'),
+                'handler' => 'this.remove.createDelegate(this,["provider_confirm_remove"])',
+            )
+        );
+    }
     $list[] = $providerArray;
 }
 

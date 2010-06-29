@@ -46,9 +46,9 @@ MODx.panel.Package = function(config) {
                 ,name: 'updated'
                 ,width: 300
             },{
-                xtype: 'statictextfield'
+                xtype: 'modx-combo-provider'
                 ,fieldLabel: _('provider')
-                ,name: 'provider_name'
+                ,name: 'provider'
                 ,width: 300
             },{
                 xtype: 'textarea'
