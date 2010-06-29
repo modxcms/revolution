@@ -557,6 +557,15 @@ $settings['manager_date_format']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['manager_time_format']= $xpdo->newObject('modSystemSetting');
+$settings['manager_time_format']->fromArray(array (
+  'key' => 'manager_time_format',
+  'value' => 'g:i a',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['manager_direction']= $xpdo->newObject('modSystemSetting');
 $settings['manager_direction']->fromArray(array (
   'key' => 'manager_direction',

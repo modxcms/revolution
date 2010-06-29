@@ -200,6 +200,7 @@ MODx.panel.Static = function(config) {
         ,id: 'modx-resource-publishedon'
         ,allowBlank: true
         ,dateFormat: MODx.config.manager_date_format
+        ,timeFormat: MODx.config.manager_time_format
         ,dateWidth: 120
         ,timeWidth: 120
     });
@@ -211,6 +212,7 @@ MODx.panel.Static = function(config) {
             ,name: 'pub_date'
             ,id: 'modx-resource-pub-date'
             ,dateFormat: MODx.config.manager_date_format
+            ,timeFormat: MODx.config.manager_time_format
             ,allowBlank: true
             ,dateWidth: 120
             ,timeWidth: 120
@@ -224,6 +226,7 @@ MODx.panel.Static = function(config) {
             ,name: 'unpub_date'
             ,id: 'modx-resource-unpub-date'
             ,dateFormat: MODx.config.manager_date_format
+            ,timeFormat: MODx.config.manager_time_format
             ,allowBlank: true
             ,dateWidth: 120
             ,timeWidth: 120   

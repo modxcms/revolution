@@ -9,10 +9,10 @@ MODx.load({
 {/literal}
     xtype: 'xdatetime'
     ,applyTo: 'tv{$tv->id}'
-    ,format: parent.MODx.config.manager_date_format
     ,width: '97%'
     ,name: 'tv{$tv->id}'
     ,dateFormat: MODx.config.manager_date_format
+    ,timeFormat: MODx.config.manager_time_format
     ,dateWidth: 120
     ,timeWidth: 120
     ,allowBlank: true

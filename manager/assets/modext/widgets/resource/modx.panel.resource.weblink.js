@@ -188,6 +188,7 @@ MODx.panel.WebLink = function(config) {
         ,id: 'modx-resource-publishedon'
         ,allowBlank: true
         ,dateFormat: MODx.config.manager_date_format
+        ,timeFormat: MODx.config.manager_time_format
         ,dateWidth: 120
         ,timeWidth: 120
     });
@@ -200,6 +201,7 @@ MODx.panel.WebLink = function(config) {
             ,id: 'modx-resource-pub-date'
             ,allowBlank: true
             ,dateFormat: MODx.config.manager_date_format
+            ,timeFormat: MODx.config.manager_time_format
             ,dateWidth: 120
             ,timeWidth: 120
         });
@@ -213,6 +215,7 @@ MODx.panel.WebLink = function(config) {
             ,id: 'modx-resource-unpub-date'
             ,allowBlank: true
             ,dateFormat: MODx.config.manager_date_format
+            ,timeFormat: MODx.config.manager_time_format
             ,dateWidth: 120
             ,timeWidth: 120   
         });
