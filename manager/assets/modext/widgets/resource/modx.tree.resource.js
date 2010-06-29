@@ -518,8 +518,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         };
         if (MODx.config.custom_resource_classes) {
             var crcs = MODx.config.custom_resource_classes;
-            for (var k in crcs) {
-                types[k] = crcs[k];
+            if (!Ext.isEmpty(crcs)) {
+                for (var k in crcs) {
+                    types[k] = crcs[k];
+                }
             }
         }
         var o = this.fireEvent('loadCreateMenus',types);

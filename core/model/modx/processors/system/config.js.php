@@ -13,12 +13,16 @@
 if (!$modx->user->isAuthenticated('mgr')) { return ''; }
 $modx->getVersionData();
 
-$crcs = explode(',',$modx->getOption('custom_resource_classes'));
+
 $customResourceClasses = array();
-foreach ($crcs as $crc) {
-    $crc = explode(':',$crc);
-    if (empty($crc) || empty($crc[1])) continue;
-    $customResourceClasses[$crc[0]] = $crc[1];
+$crcs = $modx->getOption('custom_resource_classes',null,'');
+if (!empty($crcs)) {
+    $crcs = explode(',',$crcs);
+    foreach ($crcs as $crc) {
+        $crc = explode(':',$crc);
+        if (empty($crc) || empty($crc[1])) continue;
+        $customResourceClasses[$crc[0]] = $crc[1];
+    }
 }
 
 $template_url = $modx->getOption('manager_url').'templates/'.$modx->getOption('manager_theme').'/';
