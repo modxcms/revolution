@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added which_element_editor setting, which allows for usage of multiple RTEs for Elements vs Resources
 - Fixed bug with custom_resource_classes setting implementation on blank values
 - [#MODX-2094] Enabled Packages to be able to have their Provider changed
 - [#MODX-1809] Added manager_time_format to allow changing of time formats in mgr widgets

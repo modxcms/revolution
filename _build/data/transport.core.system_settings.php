@@ -1058,4 +1058,13 @@ $settings['which_editor']->fromArray(array (
   'area' => 'editor',
   'editedon' => null,
 ), '', true, true);
+$settings['which_element_editor']= $xpdo->newObject('modSystemSetting');
+$settings['which_element_editor']->fromArray(array (
+  'key' => 'which_element_editor',
+  'value' => '',
+  'xtype' => 'modx-combo-rte',
+  'namespace' => 'core',
+  'area' => 'editor',
+  'editedon' => null,
+), '', true, true);
 return $settings;

@@ -446,6 +446,8 @@ $_lang['setting_welcome_screen'] = 'Show Welcome Screen';
 $_lang['setting_welcome_screen_desc'] = 'If set to true, the welcome screen will show on the next successful loading of the welcome page, and then not show after that.';
 
 $_lang['setting_which_editor'] = 'Editor to use';
-$_lang['setting_which_editor_desc'] = 'Here you can select which rich text editor you wish to use. You can download and install additional Rich Text editors from the MODx download page.';
+$_lang['setting_which_editor_desc'] = 'Here you can select which Rich Text Editor you wish to use. You can download and install additional Rich Text Editors from Package Management.';
 
+$_lang['setting_which_element_editor'] = 'Editor to use for Elements';
+$_lang['setting_which_element_editor_desc'] = 'Here you can select which Rich Text Editor you wish to use when editing Elements. You can download and install additional Rich Text Editors from Package Management.';
 
