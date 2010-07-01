@@ -16,17 +16,6 @@ if ($tv->get('locked') && !$modx->hasPermission('edit_locked')) {
     return $modx->error->failure($modx->lexicon('tv_err_locked'));
 }
 
-/* get available RichText Editors */
-$RTEditors = '';
-$evtOut = $modx->invokeEvent('OnRichTextEditorRegister',array(
-    'forfrontend' => true,
-    'id' => $tv->get('id'),
-    'tv' => &$tv,
-    'mode' => modSystemEvent::MODE_UPD,
-));
-if(is_array($evtOut)) $RTEditors = implode(',',$evtOut);
-$modx->smarty->assign('RTEditors',$RTEditors);
-
 /* invoke OnTVFormRender event */
 $onTVFormRender = $modx->invokeEvent('OnTVFormRender',array(
     'id' => $tv->get('id'),

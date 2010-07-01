@@ -123,15 +123,15 @@ MODx.panel.TV = function(config) {
                     ,name: 'els'
                     ,id: 'modx-tv-elements'
                     ,itemId: 'fld-els'
-                    ,width: 250
+                    ,anchor: '90%'
                 },{
                     xtype: 'textarea'
                     ,fieldLabel: _('tv_default')
                     ,name: 'default_text'
                     ,id: 'modx-tv-default-text'
                     ,itemId: 'fld-default_text'
-                    ,width: 300
-                    ,grow: true
+                    ,anchor: '90%'
+                    ,height: 200
                 },{
                     xtype: 'modx-combo-tv-widget'
                     ,fieldLabel: _('tv_output_type')
@@ -250,6 +250,11 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             ,resource_groups: rg.encodeModified()
             ,propdata: Ext.getCmp('modx-grid-element-properties').encode()
         });
+        this.cleanupEditor();
+        return this.fireEvent('save',{
+            values: this.getForm().getValues()
+            ,stay: MODx.config.stay
+        });
     }
     ,success: function(r) {
         Ext.getCmp('modx-grid-tv-template').getStore().commitChanges();
@@ -281,6 +286,16 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             });
         } catch(e) { console.log(e); }
         
+    }
+    ,changeEditor: function() {
+        this.cleanupEditor();
+        this.submit();
+    }
+    ,cleanupEditor: function() {
+        if (MODx.onSaveEditor) {
+            var fld = Ext.getCmp('modx-tv-default-text');
+            MODx.onSaveEditor(fld);
+        }
     }
 });
 Ext.reg('modx-panel-tv',MODx.panel.TV); 

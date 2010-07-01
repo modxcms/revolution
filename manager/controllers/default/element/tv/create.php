@@ -13,16 +13,6 @@ if (isset($_REQUEST['category'])) {
     if ($category != null) $modx->smarty->assign('category',$category);
 } else { $category = null; }
 
-/* get available RichText Editors */
-$RTEditors = '';
-$evtOut = $modx->invokeEvent('OnRichTextEditorRegister',array(
-    'forfrontend' => 1,
-    'id' => 0,
-    'mode' => modSystemEvent::MODE_NEW,
-));
-if(is_array($evtOut)) $RTEditors = implode(',',$evtOut);
-$modx->smarty->assign('RTEditors',$RTEditors);
-
 /* invoke OnTVFormRender event */
 $onTVFormRender = $modx->invokeEvent('OnTVFormRender',array(
     'id' => 0,
