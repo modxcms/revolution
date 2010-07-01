@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added modx-content-above and modx-content-below divs for RTE usage
 - [#MODX-2008] Updated Russian translation
 - Enabled RTEs to be used on TV default value field
 - Added which_element_editor setting, which allows for usage of multiple RTEs for Elements vs Resources

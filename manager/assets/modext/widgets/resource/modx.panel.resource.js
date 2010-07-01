@@ -7,7 +7,10 @@ MODx.panel.Resource = function(config) {
         ,bodyStyle: 'padding: 15px;'
         ,autoHeight: true
         ,collapsible: false
-        ,items: {
+        ,items: [{
+            id: 'modx-content-above'
+            ,border: false
+        },{
             xtype: 'textarea'
             ,name: 'ta'
             ,id: 'ta'
@@ -15,7 +18,10 @@ MODx.panel.Resource = function(config) {
             ,anchor: '97%'
             ,height: 400
             ,grow: false
-        }
+        },{
+            id: 'modx-content-below'
+            ,border: false
+        }]
     };
     delete rte;
     var it = [];
