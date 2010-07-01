@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2008] Updated Russian translation
 - Enabled RTEs to be used on TV default value field
 - Added which_element_editor setting, which allows for usage of multiple RTEs for Elements vs Resources
 - Fixed bug with custom_resource_classes setting implementation on blank values
