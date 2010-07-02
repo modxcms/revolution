@@ -239,7 +239,12 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                     });
                     Ext.callback(this.redirectStay,this,[o,itm,r.result],1000);
                 },this);
-                o.form.submit();
+                o.form.submit({
+                    headers: {
+                        'Powered-By': 'MODx'
+                        ,'modAuth': MODx.siteId
+                    }
+                });
             } else {
                 Ext.Msg.alert(_('error'),_('correct_errors'));
             }

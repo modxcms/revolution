@@ -46,10 +46,13 @@ class modConnectorResponse extends modResponse {
         $error =& $this->modx->error;
 
         /* ensure headers are sent for proper authentication */
-        if (!isset($_SERVER['HTTP_MODAUTH']) || $_SERVER['HTTP_MODAUTH'] != $modx->site_id) {
+        if (isset($_SERVER['HTTP_MODAUTH']) && $_SERVER['HTTP_MODAUTH'] == $modx->site_id) {
+        } else if (isset($_REQUEST['HTTP_MODAUTH']) && $_REQUEST['HTTP_MODAUTH'] == $modx->site_id) {
+        } else {
             $this->body = $modx->error->failure($modx->lexicon('access_denied'));
-            
-        } else if (!isset($options['location']) || !isset($options['action'])) {
+        }
+
+        if (!isset($options['location']) || !isset($options['action'])) {
             /* verify the location and action */
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
             

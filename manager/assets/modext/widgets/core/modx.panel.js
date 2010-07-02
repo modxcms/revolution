@@ -65,14 +65,20 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     ,submit: function(o) {
         var fm = this.getForm();
         if (fm.isValid()) {
-        	if (this.fireEvent('beforeSubmit',{
-        	   form: fm
-        	   ,options: o
-        	   ,config: this.config
-        	})) {
+            o = o || {};
+            o.headers = {
+                'Powered-By': 'MODx'
+                ,'modAuth': MODx.siteId
+            };
+            if (this.fireEvent('beforeSubmit',{
+               form: fm
+               ,options: o
+               ,config: this.config
+            })) {
                 fm.submit({
                     waitMsg: this.config.saveMsg || _('saving')
                     ,scope: this
+                    ,headers: o.headers
                     ,failure: function(f,a) {
                     	if (this.fireEvent('failure',{
                     	   form: f

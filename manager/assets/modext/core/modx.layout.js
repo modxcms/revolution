@@ -17,6 +17,11 @@ MODx.Layout = function(config){
         'Powered-By': 'MODx'
         ,'modAuth': config.auth
     };
+    Ext.Ajax.extraParams = {
+        'Powered-By': 'MODx'
+        ,'HTTP_MODAUTH': config.auth
+    };
+    MODx.siteId = config.auth;
 
     var tabs = [];
     if (MODx.perm.resource_tree) {

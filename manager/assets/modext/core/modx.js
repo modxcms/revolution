@@ -280,7 +280,10 @@ Ext.extend(MODx.Ajax,Ext.Component,{
                 return true;
             }
             ,scope: this
-            ,headers: { 'modx': 'modx' }
+            ,headers: {
+                'Powered-By': 'MODx'
+                ,'modAuth': config.auth
+            }
         });
         Ext.Ajax.request(config);
     }
