@@ -46,20 +46,24 @@ class modConnectorResponse extends modResponse {
         $error =& $this->modx->error;
 
         /* ensure headers are sent for proper authentication */
-        if (isset($_SERVER['HTTP_MODAUTH']) && $_SERVER['HTTP_MODAUTH'] == $modx->site_id) {
-        } else if (isset($_REQUEST['HTTP_MODAUTH']) && $_REQUEST['HTTP_MODAUTH'] == $modx->site_id) {
-        } else {
+        if (!isset($_SERVER['HTTP_MODAUTH']) && !isset($_REQUEST['HTTP_MODAUTH'])) {
             $this->body = $modx->error->failure($modx->lexicon('access_denied'));
-        }
+            
+        } else if (isset($_SERVER['HTTP_MODAUTH']) && $_SERVER['HTTP_MODAUTH'] != $modx->site_id) {
+            $this->body = $modx->error->failure($modx->lexicon('access_denied'));
 
-        if (!isset($options['location']) || !isset($options['action'])) {
-            /* verify the location and action */
+        } else if (isset($_REQUEST['HTTP_MODAUTH']) && $_REQUEST['HTTP_MODAUTH'] != $modx->site_id) {
+            $this->body = $modx->error->failure($modx->lexicon('access_denied'));
+
+        /* verify the location and action */
+        } else if (!isset($options['location']) || !isset($options['action'])) {
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
             
         } else if (empty($options['action'])) {
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
 
-        } else { /* execute a processor and format the response */
+        /* execute a processor and format the response */
+        } else { 
             /* prevent browsing of subdirectories for security */
             $options['action'] = str_replace('../','',$options['action']);
 
