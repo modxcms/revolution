@@ -69,3 +69,17 @@ $permissions = include dirname(__FILE__).'/permissions/transport.policy.loadlist
 $collection['4']->addMany($permissions);
 $collection['4']->set('data',bld_policyFormatData($permissions));
 unset($permissions);
+
+$collection['5']= $xpdo->newObject('modAccessPolicy');
+$collection['5']->fromArray(array (
+  'id' => 5,
+  'name' => 'Element',
+  'description' => 'MODx Element policy with all attributes.',
+  'parent' => 0,
+  'class' => '',
+  'lexicon' => 'permissions',
+), '', true, true);
+$permissions = include dirname(__FILE__).'/permissions/transport.policy.element.php';
+$collection['5']->addMany($permissions);
+$collection['5']->set('data',bld_policyFormatData($permissions));
+unset($permissions);

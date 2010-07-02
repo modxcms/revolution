@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2019] Added default Element policy
 - Fixed issue with Ext.form.BasicForm and prior commit, adjust else/if condition
 - Added headers check to all Ajax requests to connectors to require unique site ID header to harden security
 - Added modx-content-above and modx-content-below divs for RTE usage
