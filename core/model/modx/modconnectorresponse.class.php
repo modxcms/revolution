@@ -45,15 +45,18 @@ class modConnectorResponse extends modResponse {
         /* backwards compat */
         $error =& $this->modx->error;
 
-        /* verify the location and action */
-        if (!isset($options['location']) || !isset($options['action'])) {
+        /* ensure headers are sent for proper authentication */
+        if (!isset($_SERVER['HTTP_MODAUTH']) || $_SERVER['HTTP_MODAUTH'] != $modx->site_id) {
+            $this->body = $modx->error->failure($modx->lexicon('access_denied'));
+            
+        } else if (!isset($options['location']) || !isset($options['action'])) {
+            /* verify the location and action */
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
-        }
+            
+        } else if (empty($options['action'])) {
+            $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
 
-        /* execute a processor and format the response */
-        if (empty($options['action'])) {
-            $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
-        } else {
+        } else { /* execute a processor and format the response */
             /* prevent browsing of subdirectories for security */
             $options['action'] = str_replace('../','',$options['action']);
 

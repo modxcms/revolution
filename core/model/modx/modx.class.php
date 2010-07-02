@@ -352,6 +352,7 @@ class modX extends xPDO {
             );
             $this->setPackage('modx', MODX_CORE_PATH . 'model/', $table_prefix);
             $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
+            if (!empty($site_id)) $this->site_id = $site_id;
         } else {
             $this->sendError($this->getOption('error_type', null, 'unavailable'), $options);
         }

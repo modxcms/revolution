@@ -56,12 +56,6 @@ class modConnectorRequest extends modManagerRequest {
 
         $this->loadErrorHandler();
 
-        /* validate manager session
-        if (!isset ($_SESSION['mgrValidated']) && $action != 'login' && $location != 'security') {
-            $this->modx->error->failure($this->modx->lexicon('access_denied'));
-            exit();
-        } */
-
         /* Cleanup action and store. */
         $this->prepareResponse($options);
     }

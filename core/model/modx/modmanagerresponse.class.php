@@ -216,7 +216,7 @@ class modManagerResponse extends modResponse {
         if ($loadLayout) {
             $this->modx->regClientStartupScript($managerUrl.'assets/modext/core/modx.layout.js');
             $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(function() {
-    MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || []});
+    MODx.load({xtype: "modx-layout",accordionPanels: MODx.accordionPanels || [],auth: "'.$this->modx->site_id.'"});
 });</script>');
         }
     }

@@ -12,6 +12,7 @@ $table_prefix = '{table_prefix}';
 
 $lastInstallTime = {last_install_time};
 
+$site_id = '{site_id}';
 $site_sessionname = '{site_sessionname}';
 $https_port = '{https_port}';
 

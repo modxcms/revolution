@@ -12,10 +12,11 @@ Ext.apply(Ext, {
 
 MODx.Layout = function(config){
     config = config || {};
-    Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
-        expires: new Date(new Date().getTime()+(1000*60*60*24))
-    }));
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext3/resources/images/default/s.gif';
+    Ext.Ajax.defaultHeaders = {
+        'Powered-By': 'MODx'
+        ,'modAuth': config.auth
+    };
 
     var tabs = [];
     if (MODx.perm.resource_tree) {

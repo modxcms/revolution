@@ -506,6 +506,7 @@ class modInstall {
 
         $settings = $this->settings->fetch();
         $settings['last_install_time'] = time();
+        $settings['site_id'] = uniqid('modx',true);
         if (file_exists($configTpl)) {
             if ($tplHandle = @ fopen($configTpl, 'rb')) {
                 $content = @ fread($tplHandle, filesize($configTpl));
