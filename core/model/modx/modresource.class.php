@@ -262,7 +262,7 @@ class modResource extends modAccessibleSimpleObject {
     public function cleanAlias($alias, array $options = array()) {
         /* setup the various options */
         $iconv = function_exists('iconv');
-        $mbext = function_exists('mb_strlen');
+        $mbext = function_exists('mb_strlen') && (boolean)$this->xpdo->getOption('use_multibyte',null,false);
         $charset = strtoupper((string) $this->xpdo->getOption('modx_charset', $options, 'UTF-8'));
         $delimiter = $this->xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
         $delimiters = $this->xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');

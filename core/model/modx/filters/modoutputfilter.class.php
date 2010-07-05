@@ -35,13 +35,20 @@
  * @subpackage filters
  */
 class modOutputFilter {
-    var $modx= null;
+    public $modx= null;
 
     function __construct(modX &$modx) {
         $this->modx= &$modx;
     }
 
+    /**
+     * Filters the output
+     * 
+     * @param mixed $element The element to filter
+     */
     public function filter(&$element) {
+        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte',null,false);
+        $encoding = $this->modx->getOption('modx_charset',null,'UTF-8');
 
         $output= & $element->_output;
         if (isset ($element->_properties['filter_commands'])) {
@@ -174,31 +181,35 @@ class modOutputFilter {
                     case 'lowercase':
                     case 'strtolower':
                         /* See PHP's strtolower - http://www.php.net/manual/en/function.strtolower.php */
-                        $output= strtolower($output);
+                        $output = $usemb ? mb_strtolower($output) : strtolower($output);
                         break;
                     case 'ucase':
                     case 'uppercase':
                     case 'strtoupper':
                         /* See PHP's strtoupper - http://www.php.net/manual/en/function.strtoupper.php */
-                        $output= strtoupper($output);
+                        $output = $usemb ? mb_strtolower($output,$encoding) : strtoupper($output);
                         break;
                     case 'ucwords':
                         /* See PHP's ucwords - http://www.php.net/manual/en/function.ucwords.php */
-                        $output= ucwords($output);
+                        $output = $usemb ? mb_convert_case($output,MB_CASE_TITLE,$encoding) : ucwords($output);
                         break;
                     case 'ucfirst':
                         /* See PHP's ucfirst - http://www.php.net/manual/en/function.ucfirst.php */
-                        $output= ucfirst($output);
+                        if ($usemb) {
+                            $output = mb_strtoupper(mb_substr($output,0,1)) . mb_substr($output, 1);
+                        } else {
+                            $output = ucfirst($output);
+                        }
                         break;
                     case 'htmlent':
                     case 'htmlentities':
                         /* See PHP's htmlentities - http://www.php.net/manual/en/function.htmlentities.php */
-                        $output= htmlentities($output, ENT_QUOTES, $this->modx->getOption('modx_charset'));
+                        $output = htmlentities($output,ENT_QUOTES,$encoding);
                         break;
                     case 'esc':
                     case 'escape':
-                        $output= preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars($output));
-                        $output= str_replace(array ("[", "]", "`"), array ("&#91;", "&#93;", "&#96;"), $output);
+                        $output = preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars($output));
+                        $output = str_replace(array ("[", "]", "`"), array ("&#91;", "&#93;", "&#96;"), $output);
                         break;
                     case 'strip':
                         /* Replaces all linebreaks, tabs and multiple spaces with just one space */
@@ -230,12 +241,18 @@ class modOutputFilter {
                     case 'len':
                     case 'strlen':
                         /* See PHP's strlen - http://www.php.net/manual/en/function.strlen.php */
-                        $output= strlen($output);
+                        $output = $usemb ? mb_strlen($output,$encoding) : strlen($output);
                         break;
                     case 'reverse':
                     case 'strrev':
                         /* See PHP's strrev - http://www.php.net/manual/en/function.strrev.php */
-                        $output= strrev($output);
+                        if ($usemb) {
+                            $ar = array();
+                            preg_match_all('/(\d+)?./us', $output, $ar);
+                            $output = join('',array_reverse($ar[0]));
+                        } else {
+                            $output = strrev($output);
+                        }
                         break;
                     case 'wordwrap':
                         /* See PHP's wordwrap - http://www.php.net/manual/en/function.wordwrap.php */
@@ -258,11 +275,20 @@ class modOutputFilter {
                     case 'limit':
                         /* default: 100 */
                         $limit= intval($m_val) ? intval($m_val) : 100;
-                        $output= substr($output, 0, $limit);
+                        if ($usemb) {
+                            $output= mb_substr($output,0,$limit,$encoding);
+                        } else {
+                            $output= substr($output,0,$limit);
+                        }
                         break;
                     case 'ellipsis':
                         $limit= intval($m_val) ? intval($m_val) : 100;
-                        if (strlen($output) > $limit) {
+
+                        if ($usemb) {
+                            if (mb_strlen($output,$encoding) > $limit) {
+                                $output = mb_substr($output,0,$limit,$encoding);
+                            }
+                        } else if (strlen($output) > $limit) {
                             $output = substr($output,0,$limit).'...';
                         }
                         break;
@@ -271,7 +297,7 @@ class modOutputFilter {
                     case 'tag':
                         /* Displays the raw element tag without :tag */
                         $tag = $element->_tag;
-                        $tag = htmlentities($tag, ENT_QUOTES, $this->modx->getOption('modx_charset'));
+                        $tag = htmlentities($tag,ENT_QUOTES,$encoding);
                         $tag = str_replace(array ("[", "]", "`"), array ("&#91;", "&#93;", "&#96;"), $tag);
                         $tag = str_replace(":tag","",$tag);
                         $output = $tag;

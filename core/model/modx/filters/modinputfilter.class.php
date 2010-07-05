@@ -33,7 +33,7 @@
  * @subpackage filters
  */
 class modInputFilter {
-    var $modx= null;
+    public $modx= null;
 
     function __construct(modX &$modx) {
         $this->modx = &$modx;

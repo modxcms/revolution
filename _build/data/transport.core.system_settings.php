@@ -990,6 +990,15 @@ $settings['use_editor']->fromArray(array (
   'area' => 'editor',
   'editedon' => null,
 ), '', true, true);
+$settings['use_multibyte']= $xpdo->newObject('modSystemSetting');
+$settings['use_multibyte']->fromArray(array (
+  'key' => 'use_multibyte',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'language',
+  'editedon' => null,
+), '', true, true);
 $settings['webpwdreminder_message']= $xpdo->newObject('modSystemSetting');
 $settings['webpwdreminder_message']->fromArray(array (
   'key' => 'webpwdreminder_message',
