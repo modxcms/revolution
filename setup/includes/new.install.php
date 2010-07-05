@@ -179,4 +179,23 @@ if ($template->save()) {
     $resource->save();
 }
 
+/* check for mb extension, set setting accordingly */
+$usemb = function_exists('mb_strlen');
+if ($usemb) {
+    $setting = $this->xpdo->getObject('modSystemSetting',array(
+        'key' => 'use_multibyte',
+    ));
+    if (!$setting) {
+        $setting = $this->xpdo->newObject('modSystemSetting');
+        $setting->fromArray(array(
+            'key' => 'use_multibyte',
+            'namespace' => 'core',
+            'xtype' => 'combo-boolean',
+            'area' => 'language',
+        ));
+    }
+    $setting->set('value',1);
+    $setting->save();
+}
+
 return true;

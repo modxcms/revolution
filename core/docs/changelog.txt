@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2104] Auto-detect correct value and set use_multibyte on new installs
 - [#MODX-2104] Added 'use_multibyte' setting that allows for use of mb_* functions for multibyte characters; fixes bug with MB chars in output filters
 - [#MODX-2019] Added default Element policy
 - Fixed issue with Ext.form.BasicForm and prior commit, adjust else/if condition
