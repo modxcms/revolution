@@ -307,6 +307,18 @@ $_lang['setting_proxy_username_desc'] = 'The username to authenticate against wi
 $_lang['setting_password_min_length'] = 'Minimum Password Length';
 $_lang['setting_password_min_length_desc'] = 'The minimum length for a password for a User.';
 
+$_lang['setting_phpthumb_cache_maxage'] = 'phpThumb Max Cache Age';
+$_lang['setting_phpthumb_cache_maxage_desc'] = 'Delete cached thumbnails that have not been accessed in more than X days.';
+
+$_lang['setting_phpthumb_cache_maxsize'] = 'phpThumb Max Cache Size';
+$_lang['setting_phpthumb_cache_maxsize_desc'] = 'Delete least-recently-accessed thumbnails when cache grows bigger than X megabytes in size.';
+
+$_lang['setting_phpthumb_cache_maxfiles'] = 'phpThumb Max Cache Files';
+$_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Delete least-recently-accessed thumbnails when cache has more than X files.';
+
+$_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb Cache Source Files';
+$_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Whether or not to cache source files as they are loaded. Recommended to off.';
+
 $_lang['setting_publish_default'] = 'Published default';
 $_lang['setting_publish_default_desc'] = 'Select \'Yes\' to make all new resources published by default.';
 $_lang['setting_publish_default_err'] = 'Please state whether or not you want documents to be published by default.';

@@ -683,6 +683,44 @@ $settings['password_min_length']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+
+$settings['phpthumb_cache_maxage']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_cache_maxage']->fromArray(array (
+  'key' => 'phpthumb_cache_maxage',
+  'value' => 30, // 30 days
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_cache_maxsize']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_cache_maxsize']->fromArray(array (
+  'key' => 'phpthumb_cache_maxsize',
+  'value' => 100 * 1024 * 1024, // 100MB
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_cache_maxfiles']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_cache_maxfiles']->fromArray(array (
+  'key' => 'phpthumb_cache_maxfiles',
+  'value' => 10000, // 10k files
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_cache_source_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_cache_source_enabled']->fromArray(array (
+  'key' => 'phpthumb_cache_source_enabled',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+
 $settings['publish_default']= $xpdo->newObject('modSystemSetting');
 $settings['publish_default']->fromArray(array (
   'key' => 'publish_default',

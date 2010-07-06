@@ -22,6 +22,12 @@ if (!is_dir($cachePath)) $modx->cacheManager->writeTree($cachePath);
 $phpThumb->config_cache_directory = $cachePath;
 $phpThumb->setCacheDirectory();
 
+$phpThumb->config_cache_maxage = (float)$modx->getOption('phpthumb_cache_maxage',$scriptProperties,30) * 86400;
+$phpThumb->config_cache_maxsize = (float)$modx->getOption('phpthumb_cache_maxsize',$scriptProperties,100) * 1024 * 1024;
+$phpThumb->config_cache_maxfiles = (int)$modx->getOption('phpthumb_cache_maxfiles',$scriptProperties,10000);
+$phpThumb->cache_source_enabled = (boolean)$modx->getOption('phpthumb_cache_source_enabled',$scriptProperties,false);
+$phpThumb->cache_source_directory = $cachePath.'source/';
+
 /* iterate through properties */
 foreach ($scriptProperties as $property => $value) {
     $phpThumb->setParameter($property,$value);
