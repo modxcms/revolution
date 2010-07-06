@@ -267,7 +267,9 @@ class modTemplateVar extends modElement {
         $outputRenderFile = $outputRenderPath.$this->get('display').'.php';
 
         if (!file_exists($outputRenderFile)) {
-            $o = include $outputRenderPath.'default.php';
+            if (file_exists($outputRenderPath.'default.php')) {
+                $o = include $outputRenderPath.'default.php';
+            }
         } else {
             $o = include $outputRenderFile;
         }
@@ -370,7 +372,9 @@ class modTemplateVar extends modElement {
 
         $inputRenderFile = $inputRenderPath.$this->get('type').'.php';
         if (!file_exists($inputRenderFile)) {
-            $field_html .= include $inputRenderPath.'textbox.php';
+            if (file_exists($inputRenderPath.'textbox.php')) {
+                $field_html .= include $inputRenderPath.'textbox.php';
+            }
         } else {
             $field_html .= include $inputRenderFile;
         }
