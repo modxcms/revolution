@@ -9,7 +9,7 @@
     <div class="x-form-item x-tab-item {cycle values=",alt"} modx-tv" id="tv{$tv->id}-tr">
         <label for="tv{$tv->id}" class="modx-tv-label">
 
-            {if $showCheckbox}<input type="checkbox" name="tv{$tv->id}-checkbox" value="1" />{/if}
+            {if $showCheckbox}<input type="checkbox" name="tv{$tv->id}-checkbox" class="modx-tv-checkbox" value="1" />{/if}
             <span class="modx-tv-caption" id="tv{$tv->id}-caption">{$tv->caption}</span>
             <a class="modx-tv-reset" href="javascript:;" onclick="MODx.resetTV({$tv->id});" title="{$_lang.set_to_default}"></a>
 
