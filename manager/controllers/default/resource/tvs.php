@@ -87,4 +87,8 @@ $modx->smarty->assign('OnResourceTVFormRender',$onResourceTVFormRender);
 
 $modx->smarty->assign('categories',$categories);
 
+if (!empty($_REQUEST['showCheckbox'])) {
+    $modx->smarty->assign('showCheckbox',1);
+}
+
 return $modx->smarty->fetch('resource/sections/tvs.tpl');
