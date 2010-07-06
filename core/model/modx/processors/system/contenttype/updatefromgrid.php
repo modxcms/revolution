@@ -29,6 +29,7 @@ foreach ($_DATA as $ct) {
     if ($contentType == null) continue;
 
     /* save content type */
+    $ct['binary'] = !empty($ct['binary']) ? true : false;
     $contentType->fromArray($ct);
     if ($contentType->save() == false) {
         $modx->error->checkValidation($contentType);

@@ -49,3 +49,13 @@ $collection['5']->fromArray(array (
   'headers' => 'NULL',
   'binary' => 0,
 ), '', true, true);
+$collection['6']= $xpdo->newObject('modContentType');
+$collection['6']->fromArray(array (
+  'id' => 5,
+  'name' => 'RSS',
+  'description' => 'For RSS feeds',
+  'mime_type' => 'application/rss+xml',
+  'file_extensions' => '.rss',
+  'headers' => 'NULL',
+  'binary' => 0,
+), '', true, true);

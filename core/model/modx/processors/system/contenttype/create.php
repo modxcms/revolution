@@ -21,6 +21,7 @@ if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexico
 
 /* create content type */
 $contentType = $modx->newObject('modContentType');
+$scriptProperties['binary'] = !empty($scriptProperties['binary']) ? true : false;
 $contentType->fromArray($scriptProperties);
 
 /* save content type */

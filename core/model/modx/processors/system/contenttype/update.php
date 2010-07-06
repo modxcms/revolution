@@ -28,6 +28,7 @@ if ($contentType == null) {
 }
 
 /* save content type */
+$scriptProperties['binary'] = !empty($scriptProperties['binary']) ? true : false;
 $contentType->fromArray($scriptProperties);
 if ($contentType->save() == false) {
     $modx->error->checkValidation($contentType);
