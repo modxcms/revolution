@@ -29,12 +29,17 @@ class modInstallSettings {
     public function load() {
         if (file_exists($this->fileName)) {
             $this->settings = include $this->fileName;
+            if (empty($this->settings)) {
+                $this->erase();
+                header('Location: ' . MODX_SETUP_URL);
+                exit();
+            }
         }
     }
     public function delete($k) {
         unset($this->settings[$k]);
     }
-    public function store(array $settings = array(),$expire = 900) {
+    public function store(array $settings = array(),$expire = 30) {
         $this->settings = array_merge($this->settings,$settings);
         $written = false;
 
