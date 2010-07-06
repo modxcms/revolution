@@ -9,6 +9,10 @@
 /* filter path */
 $src = $modx->getOption('src',$scriptProperties,'');
 if (empty($src)) return '';
+$src = str_replace(array(
+    $modx->getOption('site_url',null,MODX_SITE_URL),
+    $modx->getOption('base_url',null,MODX_BASE_URL),
+),'',$src);
 $src = $modx->getOption('base_path',null,MODX_BASE_PATH).$src;
 if (empty($src) || !file_exists($src)) return '';
 
@@ -27,6 +31,7 @@ $phpThumb->config_cache_maxsize = (float)$modx->getOption('phpthumb_cache_maxsiz
 $phpThumb->config_cache_maxfiles = (int)$modx->getOption('phpthumb_cache_maxfiles',$scriptProperties,10000);
 $phpThumb->cache_source_enabled = (boolean)$modx->getOption('phpthumb_cache_source_enabled',$scriptProperties,false);
 $phpThumb->cache_source_directory = $cachePath.'source/';
+$phpThumb->allow_local_http_src = true;
 
 /* iterate through properties */
 foreach ($scriptProperties as $property => $value) {
