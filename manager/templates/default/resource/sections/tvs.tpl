@@ -83,4 +83,6 @@ Ext.onReady(function() {
 </script>
 {/literal}
 
+{$OnResourceTVFormRender}
+
 <br class="clear" />

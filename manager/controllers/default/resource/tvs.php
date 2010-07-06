@@ -74,6 +74,17 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
         }
     }
 }
+
+$onResourceTVFormRender = $modx->invokeEvent('OnResourceTVFormRender',array(
+    'categories' => &$categories,
+    'template' => $templateId,
+    'resource' => $resourceId,
+));
+if (is_array($onResourceTVFormRender)) {
+    $onResourceTVFormRender = implode('',$onResourceTVFormRender);
+}
+$modx->smarty->assign('OnResourceTVFormRender',$onResourceTVFormRender);
+
 $modx->smarty->assign('categories',$categories);
 
 return $modx->smarty->fetch('resource/sections/tvs.tpl');
