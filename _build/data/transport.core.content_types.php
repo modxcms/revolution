@@ -51,7 +51,7 @@ $collection['5']->fromArray(array (
 ), '', true, true);
 $collection['6']= $xpdo->newObject('modContentType');
 $collection['6']->fromArray(array (
-  'id' => 5,
+  'id' => 6,
   'name' => 'RSS',
   'description' => 'For RSS feeds',
   'mime_type' => 'application/rss+xml',

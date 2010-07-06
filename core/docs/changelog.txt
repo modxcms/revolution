@@ -4,7 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
-- [#MODX-2100] Fixed content type creation for binary type bug
+- [#MODX-2100] Fixed content type creation for binary type bug, bug in build with regards to content types
 - Added flag to setup to fix proceeding error after install
 - Fixed setup to return setup process to very beginning when settings timeout, avoiding various errors about classes not being found
 - Added modx-tv-checkbox class to resource TV checkboxes for easier DOM manip

@@ -227,8 +227,9 @@ if (!empty($collection)) {
 $collection = array ();
 include dirname(__FILE__).'/data/transport.core.content_types.php';
 $attributes = array (
-    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::PRESERVE_KEYS => false,
     xPDOTransport::UPDATE_OBJECT => false,
+    xPDOTransport::UNIQUE_KEY => 'mime_type',
 );
 foreach ($collection as $c) {
     $package->put($c, $attributes);
