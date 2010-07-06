@@ -6,6 +6,7 @@
  */
 if ($install->settings->get('cleanup')) {
     $install->removeSetupDirectory();
+    $install->settings->erase();
 }
 $managerUrl= $install->getManagerLoginUrl();
 header('Location: ' . $managerUrl);

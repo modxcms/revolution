@@ -4,7 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
-- Fix setup to return setup process to very beginning when settings timeout, avoiding various errors about classes not being found
+- Added flag to setup to fix proceeding error after install
+- Fixed setup to return setup process to very beginning when settings timeout, avoiding various errors about classes not being found
 - Added modx-tv-checkbox class to resource TV checkboxes for easier DOM manip
 - Added showCheckbox setting for resource TVs display to allow for extensibility and TV targeting
 - Added phpThumb specific settings

@@ -40,6 +40,7 @@ class modInstall {
     public $config = array ();
     public $action = '';
     public $lexicon = array ();
+    public $finished = false;
 
     /**
      * The constructor for the modInstall object.
@@ -389,6 +390,10 @@ class modInstall {
                     '.cache.php',
                     '.tpl.php',
                 ),
+            ));
+
+            $this->settings->store(array(
+                'finished' => true,
             ));
         }
 
