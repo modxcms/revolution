@@ -2,7 +2,11 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
+MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
+====================================
+- Adjusted version for pl development
+
+MODx Revolution 2.0.0-rc-3 (LastChangedRevision: 7083, LastChangedDate: 2010-07-07 12:20:55 -0500 (Wed, 07 Jul 2010))
 ====================================
 - Updated German translation
 - Fixed bug with new installs and base template name
