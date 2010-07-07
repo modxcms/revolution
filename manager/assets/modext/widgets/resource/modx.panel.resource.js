@@ -496,6 +496,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) { g.getStore().commitChanges(); }
         var t = Ext.getCmp('modx-resource-tree');
+
+        this.getForm().setValues(o.result.object);
         if (t) {
             var ctx = Ext.getCmp('modx-resource-context-key').getValue();
             var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();

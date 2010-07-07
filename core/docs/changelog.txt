@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2110] Fixed bug where resource fields were not being updated on update, causing publishedon errors
 - Adjusted version for pl development
 
 MODx Revolution 2.0.0-rc-3 (LastChangedRevision: 7083, LastChangedDate: 2010-07-07 12:20:55 -0500 (Wed, 07 Jul 2010))

@@ -409,7 +409,8 @@ if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCach
 
 $resource->removeLock();
 
-$resourceArray = $resource->get(array('id','alias'));
+$resourceArray = $resource->toArray();
+unset($resourceArray['content'],$resourceArray['ta']);
 $resourceArray['preview_url'] = $modx->makeUrl($resource->get('id'));
 
 return $modx->error->success('',$resourceArray);
