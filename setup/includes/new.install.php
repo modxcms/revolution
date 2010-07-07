@@ -147,7 +147,7 @@ unset($adminPolicy,$adminGroup);
 /* add base template and home resource */
 $template = $this->xpdo->newObject('modTemplate');
 $template->fromArray(array(
-    'name' => $this->lexicon['base_template'],
+    'templatename' => $this->lexicon['base_template'],
     'content' => '<html>
 <head>
 <title>[[++site_name]] - [[*pagetitle]]</title>
