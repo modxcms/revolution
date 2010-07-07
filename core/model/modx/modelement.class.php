@@ -513,7 +513,7 @@ class modElement extends modAccessibleSimpleObject {
             if ($merge && !empty($propertiesArray)) {
                 $existing = $this->get('properties');
                 if (is_array($existing) && !empty($existing)) {
-                    $propertyArray = array_merge($existing, $propertiesArray);
+                    $propertiesArray = array_merge($existing, $propertiesArray);
                 }
             }
             $set = $this->set('properties', $propertiesArray);
