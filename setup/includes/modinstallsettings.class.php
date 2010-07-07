@@ -39,7 +39,7 @@ class modInstallSettings {
     public function delete($k) {
         unset($this->settings[$k]);
     }
-    public function store(array $settings = array(),$expire = 30) {
+    public function store(array $settings = array(),$expire = 600) {
         $this->settings = array_merge($this->settings,$settings);
         $written = false;
 
