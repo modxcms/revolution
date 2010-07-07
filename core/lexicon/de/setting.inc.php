@@ -307,6 +307,18 @@ $_lang['setting_proxy_port_desc'] = 'Der Port für Ihren Proxy-Server.';
 $_lang['setting_proxy_username'] = 'Proxy-Benutzername';
 $_lang['setting_proxy_username_desc'] = 'Der Benutzername, der benötigt wird, um sich beim Proxy-Server zu authentifizieren.';
 
+$_lang['setting_phpthumb_cache_maxage'] = 'phpThumb: maximale Cache-Lebensdauer';
+$_lang['setting_phpthumb_cache_maxage_desc'] = 'Lösche gecachte Thumbnails, auf die in den letzten X Tagen nicht zugegriffen wurde.';
+
+$_lang['setting_phpthumb_cache_maxsize'] = 'phpThumb: maximale Cache-Größe';
+$_lang['setting_phpthumb_cache_maxsize_desc'] = 'Lösche die Thumbnails, deren Zugriffe am längsten zurückliegen, wenn der Cache auf mehr als X MB anwächst.';
+
+$_lang['setting_phpthumb_cache_maxfiles'] = 'phpThumb: maximale Anzahl an Cache-Dateien';
+$_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Lösche die Thumbnails, deren Zugriffe am längsten zurückliegen, wenn der Cache mehr als X Dateien umfasst.';
+
+$_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb: Cache für Quelldateien';
+$_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Gibt an, ob Quelldateien gecacht werden sollen, wenn sie geladen werden, oder nicht. Es wird die Einstellung "off" empfohlen.';
+
 $_lang['setting_publish_default'] = 'Ressourcen standardmäßig veröffentlichen';
 $_lang['setting_publish_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig veröffentlicht werden sollen.';
 $_lang['setting_publish_default_err'] = 'Bitte geben Sie an, ob neue Dokumente standardmäßig veröffentlicht werden sollen.';
@@ -434,6 +446,9 @@ $_lang['setting_use_editor'] = 'Rich-Text-Editor aktivieren';
 $_lang['setting_use_editor_desc'] = 'Möchten Sie den Rich-Text-Editor aktivieren? Wenn Sie lieber HTML-Code schreiben, können Sie den Editor mittels dieser Einstellung deaktivieren. Bitte beachten Sie, dass diese Einstellung sich auf alle Dokumente und alle Benutzer auswirkt!';
 $_lang['setting_use_editor_err'] = 'Bitte geben Sie an, ob Sie einen Rich-Text-Editor verwenden möchten oder nicht.';
 
+$_lang['setting_use_multibyte'] = 'Multibyte-Erweiterung nutzen';
+$_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "true", wenn Sie die mbstring-Erweiterung für Multibyte-Zeichen (Zeichen, die in der verwendeten Zeichencodierung durch mehr als ein Byte repräsentiert werden) in Ihrer MODx-Installation nutzen möchten. Setzen Sie diese Einstellung nur auf "true", wenn die mbstring-PHP-Erweiterung installiert ist.';
+
 $_lang['setting_webpwdreminder_message'] = 'E-Mail nach Passwort-Anforderung';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn er eine neues Passwort anfordert. Der MODx-Manager sendet eine E-Mail an den Benutzer, die dessen neues Passwort und Aktivierungs-Informationen enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn eine Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]],\n\num Ihr neues Passwort zu aktivieren, klicken Sie bitte auf den folgenden Link:\n\n[[+surl]]\n\nNach erfolgreicher Aktivierung können Sie folgendes Passwort verwenden, um sich einzuloggen:\n\nPasswort:[[+pwd]]\n\nFalls Sie diese E-Mail nicht angefordert haben sollten, ignorieren Sie sie bitte einfach.\n\nMit freundlichen Grüßen,\nIhr Website-Administrator';
@@ -446,4 +461,7 @@ $_lang['setting_welcome_screen'] = 'Willkommens-Bildschirm anzeigen';
 $_lang['setting_welcome_screen_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, wird der Willkommens-Bildschirm beim nächsten erfolgreichen Laden der Manager-Startseite einmalig angezeigt, danach nicht mehr.';
 
 $_lang['setting_which_editor'] = 'Zu verwendender Editor';
-$_lang['setting_which_editor_desc'] = 'Hier können Sie festlegen, welchen Rich-Text-Editor Sie verwenden möchten. Sie können zusätzliche Rich-Text-Editoren von der MODx-Website (Extras > RichtextEditors) herunterladen und dann installieren.';
+$_lang['setting_which_editor_desc'] = 'Hier können Sie auswählen, welchen Rich-Text-Editor Sie verwenden möchten. Sie können zusätzliche Rich-Text-Editoren über die Package-Verwaltung herunterladen und dann installieren.';
+
+$_lang['setting_which_element_editor'] = 'Für Elemente zu verwendender Editor';
+$_lang['setting_which_element_editor_desc'] = 'Hier können Sie auswählen, welchen Rich-Text-Editor Sie verwenden möchten, wenn Sie Elemente (Templates, Chunks, Snippets etc.) bearbeiten. Sie können zusätzliche Rich-Text-Editoren über die Package-Verwaltung herunterladen und dann installieren';

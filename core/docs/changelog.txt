@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-rc-3 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Updated German translation
 - Fixed bug with new installs and base template name
 - Fixed UI issue with Namespace path being unwantingly translated
 - Upped timeout on setup settings cache to 10 minutes; was far too short
