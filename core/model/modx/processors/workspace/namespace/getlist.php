@@ -40,7 +40,7 @@ $count = $modx->getCount('modNamespace');
 /* loop through */
 $list = array();
 foreach ($namespaces as $namespace) {
-    $namespaceArray = $namespace->toArray();
+    $namespaceArray = $namespace->toArray('',true,true);
     $namespaceArray['menu'] = array(
         array(
             'text' => $modx->lexicon('namespace_remove'),
