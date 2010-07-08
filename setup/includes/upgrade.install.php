@@ -102,4 +102,39 @@ if ($adminPolicy && $adminGroup) {
 }
 unset($adminPolicy,$adminGroup);
 
+$language = $this->settings->get('language','en');
+if ($language != 'en') {
+    /* manager_language */
+    $setting = $this->xpdo->getObject('modSystemSetting',array(
+        'key' => 'manager_language',
+    ));
+    if (!$setting) {
+        $setting = $this->xpdo->newObject('modSystemSetting');
+        $setting->fromArray(array(
+            'key' => 'manager_language',
+            'namespace' => 'core',
+            'xtype' => 'textfield',
+            'area' => 'language',
+        ));
+    }
+    $setting->set('value',$language);
+    $setting->save();
+
+    /* manager_lang_attribute */
+    $setting = $this->xpdo->getObject('modSystemSetting',array(
+        'key' => 'manager_lang_attribute',
+    ));
+    if (!$setting) {
+        $setting = $this->xpdo->newObject('modSystemSetting');
+        $setting->fromArray(array(
+            'key' => 'manager_lang_attribute',
+            'namespace' => 'core',
+            'xtype' => 'textfield',
+            'area' => 'language',
+        ));
+    }
+    $setting->set('value',$language);
+    $setting->save();
+}
+
 return true;

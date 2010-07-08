@@ -198,4 +198,56 @@ if ($usemb) {
     $setting->save();
 }
 
+/* if language != en, set cultureKey, manager_language, manager_lang_attribute to it */
+$language = $this->settings->get('language','en');
+if ($language != 'en') {
+    /* cultureKey */
+    $setting = $this->xpdo->getObject('modSystemSetting',array(
+        'key' => 'cultureKey',
+    ));
+    if (!$setting) {
+        $setting = $this->xpdo->newObject('modSystemSetting');
+        $setting->fromArray(array(
+            'key' => 'cultureKey',
+            'namespace' => 'core',
+            'xtype' => 'textfield',
+            'area' => 'language',
+        ));
+    }
+    $setting->set('value',$language);
+    $setting->save();
+
+    /* manager_language */
+    $setting = $this->xpdo->getObject('modSystemSetting',array(
+        'key' => 'manager_language',
+    ));
+    if (!$setting) {
+        $setting = $this->xpdo->newObject('modSystemSetting');
+        $setting->fromArray(array(
+            'key' => 'manager_language',
+            'namespace' => 'core',
+            'xtype' => 'textfield',
+            'area' => 'language',
+        ));
+    }
+    $setting->set('value',$language);
+    $setting->save();
+
+    /* manager_lang_attribute */
+    $setting = $this->xpdo->getObject('modSystemSetting',array(
+        'key' => 'manager_lang_attribute',
+    ));
+    if (!$setting) {
+        $setting = $this->xpdo->newObject('modSystemSetting');
+        $setting->fromArray(array(
+            'key' => 'manager_lang_attribute',
+            'namespace' => 'core',
+            'xtype' => 'textfield',
+            'area' => 'language',
+        ));
+    }
+    $setting->set('value',$language);
+    $setting->save();
+}
+
 return true;
