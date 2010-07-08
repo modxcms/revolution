@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2113] Fixed CTRL+SHIFT+H shortcut for hiding left nav
 - Fixed bug in ORM tree relating to adding root nodes when subnode was selected
 - Added ability to add/remove attributes and containers to UI ORM trees, specifically in User extended and remote data
 - Added UI for editing extended User Profile data

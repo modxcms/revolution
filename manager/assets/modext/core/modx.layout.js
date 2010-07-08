@@ -156,20 +156,10 @@ Ext.extend(MODx.Layout,Ext.Viewport,{
         this.leftbarVisible = !this.leftbarVisible;
     }
     ,hideLeftbar: function(d) {
-        this.cleanupContent(false);
-        Ext.get('modx-leftbar').slideOut('l',{
-            remove: false
-            ,useDisplay: true
-            ,duration: d || .1
-        });
+        Ext.getCmp('modx-leftbar-tabs').collapse();
     }
     ,showLeftbar: function(d) {
-        this.cleanupContent(true);
-        Ext.get('modx-leftbar').slideIn('l',{
-            remove: false
-            ,useDisplay: true
-            ,duration: d || .1
-        });
+        Ext.getCmp('modx-leftbar-tabs').expand();
     }
 });
 Ext.reg('modx-layout',MODx.Layout);
