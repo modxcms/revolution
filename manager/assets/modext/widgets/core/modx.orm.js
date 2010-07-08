@@ -20,13 +20,163 @@ MODx.orm.Tree = function(config) {
                 },scope:this}
             }
         })
+        ,tbar: [{
+            text: _('orm_attribute_add')
+            ,handler: this.addAttribute
+            ,scope: this
+        },{
+            text: _('orm_container_add')
+            ,handler: this.addContainer
+            ,scope: this
+        }]
+        ,menuConfig: { defaultAlign: 'tl-b?' ,enableScrolling: false }
     });
     MODx.orm.Tree.superclass.constructor.call(this,config);
     this.config = config;
     this.on('click',this.onClick,this);
+    this.on('contextmenu',this._showContextMenu,this);
+    this.cm = new Ext.menu.Menu(config.menuConfig);
 };
 Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
-    encode: function(node) {
+    windows: {}
+    ,getSelectedNode: function() {
+        return this.getSelectionModel().getSelectedNode();
+    }
+    ,addContextMenuItem: function(items) {
+        var a = items, l = a.length;
+        for(var i = 0; i < l; i++) {
+            a[i].scope = this;
+            this.cm.add(a[i]);
+        }
+    }
+    ,_showContextMenu: function(node,e) {
+        node.select();
+        this.cm.activeNode = node;
+        this.cm.removeAll();
+        var m = [];
+        if (node.attributes.leaf) {
+            m.push({
+                text: _('orm_attribute_remove')
+                ,handler: this.removeAttribute
+                ,scope: this
+            });
+        } else {
+            m.push({
+                text: _('orm_attribute_add_below')
+                ,handler: function(itm,e) {
+                    this.addAttribute(itm,e,this.cm.activeNode);
+                }
+                ,scope: this
+            });
+            m.push({
+                text: _('orm_container_add_below')
+                ,handler: function(itm,e) {
+                    this.addContainer(itm,e,this.cm.activeNode);
+                }
+                ,scope: this
+            });
+            m.push('-');
+            m.push({
+                text: _('orm_container_remove')
+                ,handler: this.removeContainer
+                ,scope: this
+            });
+        }
+
+        if (m.length > 0) {
+            this.addContextMenuItem(m);
+            this.cm.showAt(e.xy);
+        }
+        e.stopEvent();
+    }
+
+    ,markFormPanelDirty: function(f) {
+        var fp = Ext.getCmp(f ? f : this.config.formPanel);
+        if (fp) {
+            fp.markDirty();
+        }
+    }
+
+    ,removeAttribute: function(btn,e) {
+        var n = this.getSelectedNode();
+        if (n) {
+            Ext.Msg.confirm(_('orm_attribute_remove'),_('orm_attribute_remove_confirm'),function(e) {
+                if (e == 'yes') {
+                    n.remove();
+                    this.markFormPanelDirty();
+                }
+            },this);
+        }
+    }
+    ,removeContainer: function(btn,e) {
+        var n = this.getSelectedNode();
+        if (n) {
+            Ext.Msg.confirm(_('orm_container_remove'),_('orm_container_remove_confirm'),function(e) {
+                if (e == 'yes') {
+                    n.remove();
+                    this.markFormPanelDirty();
+                }
+            },this);
+        }
+    }
+    ,addContainer: function(btn,e,node) {
+        var r = {};
+        if (node) { r.parent = node.id; }
+
+        if (!this.windows.addContainer) {
+            this.windows.addContainer = MODx.load({
+                xtype: 'modx-orm-window-container-add'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        var n = new Ext.tree.TreeNode({
+                            text: r.name
+                            ,id: r.name
+                            ,name: r.name
+                            ,expanded: true
+                            ,expandable: true
+                            ,leaf: false
+                        });
+
+                        var pn = node ? node : this.getRootNode();
+                        pn.appendChild(n);
+                        this.markFormPanelDirty();
+                    },scope:this}
+                }
+            });
+        }
+        this.windows.addContainer.setValues(r);
+        this.windows.addContainer.show(e.target);
+    }
+    ,addAttribute: function(btn,e,node) {
+        var r = {};
+        if (node) { r.parent = node.id; }
+        
+        if (!this.windows.addAttribute) {
+            this.windows.addAttribute = MODx.load({
+                xtype: 'modx-orm-window-attribute-add'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        var n = new Ext.tree.TreeNode({
+                            text: r.name+' - <i>'+r.value+'</i>'
+                            ,id: r.name
+                            ,name: r.name
+                            ,leaf: true
+                            ,value: r.value
+                        });
+                        
+                        var pn = node ? node : this.getRootNode();
+                        pn.appendChild(n);
+                        this.markFormPanelDirty();
+                    },scope:this}
+                }
+            });
+        }
+        this.windows.addAttribute.setValues(r);
+        this.windows.addAttribute.show(e.target);
+    }
+    ,encode: function(node) {
         if (!node) { node = this.getRootNode(); }
         var _encode = function(node) {
             var resultNode = {};
@@ -111,3 +261,89 @@ Ext.extend(MODx.orm.Form,Ext.Panel,{
     }
 });
 Ext.reg('modx-orm-form',MODx.orm.Form);
+
+
+MODx.window.AddOrmAttribute = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'ormcattr'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('orm_attribute_add')
+        ,id: this.ident
+        ,height: 150
+        ,width: 350
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'parent'
+            ,value: 0
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'name'
+            ,id: 'modx-'+this.ident+'-name'
+            ,anchor: '85%'
+            ,allowBlank: false
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('value')
+            ,name: 'value'
+            ,id: 'modx-'+this.ident+'-value'
+            ,anchor: '85%'
+        }]
+    });
+    MODx.window.AddOrmAttribute.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.AddOrmAttribute,MODx.Window,{
+    submit: function() {
+        var v = this.fp.getForm().getValues();
+
+        if (this.fp.getForm().isValid()) {
+            if (this.fireEvent('success',v)) {
+                this.fp.getForm().reset();
+                this.hide();
+                return true;
+            }
+        }
+        return false;
+    }
+});
+Ext.reg('modx-orm-window-attribute-add',MODx.window.AddOrmAttribute);
+
+
+MODx.window.AddOrmContainer = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'ormccont'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('orm_container_add')
+        ,id: this.ident
+        ,height: 150
+        ,width: 350
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'parent'
+            ,value: 0
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'name'
+            ,id: 'modx-'+this.ident+'-name'
+            ,anchor: '85%'
+            ,allowBlank: false
+        }]
+    });
+    MODx.window.AddOrmContainer.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.AddOrmContainer,MODx.Window,{
+    submit: function() {
+        var v = this.fp.getForm().getValues();
+
+        if (this.fp.getForm().isValid()) {
+            if (this.fireEvent('success',v)) {
+                this.fp.getForm().reset();
+                this.hide();
+                return true;
+            }
+        }
+        return false;
+    }
+});
+Ext.reg('modx-orm-window-container-add',MODx.window.AddOrmContainer);
