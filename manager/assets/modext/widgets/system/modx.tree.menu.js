@@ -165,6 +165,7 @@ MODx.window.CreateMenu = function(config) {
             ,name: 'action_id'
             ,hiddenName: 'action_id'
             ,xtype: 'modx-combo-action'
+            ,id: 'modx-cmen-action'
         },{
             fieldLabel: _('icon')
             ,name: 'icon'
@@ -234,6 +235,7 @@ MODx.window.UpdateMenu = function(config) {
             ,name: 'action_id'
             ,hiddenName: 'action_id'
             ,xtype: 'modx-combo-action'
+            ,id: 'modx-umen-action'
         },{
             fieldLabel: _('icon')
             ,name: 'icon'

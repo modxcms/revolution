@@ -23,6 +23,15 @@ MODx.tree.Action = function(config) {
 };
 Ext.extend(MODx.tree.Action,MODx.tree.Tree,{
     windows: {}
+
+    ,refreshActionCombos: function() {
+        var cb;
+        var ls = ['modx-cact-parent','modx-cmen-action','modx-umen-action'];
+        for (var i=0;i<ls.length;i++) {
+            cb = Ext.getCmp(ls[i]);
+            if (cb) { cb.store.reload(); }
+        }
+    }
     
     ,createAction: function(n,e) {
         var node = this.cm.activeNode.attributes;
@@ -36,7 +45,10 @@ Ext.extend(MODx.tree.Action,MODx.tree.Tree,{
                 xtype: 'modx-window-action-create'
                 ,record: r
                 ,listeners: {
-                    'success': {fn:function(r) { this.refresh(); },scope:this}
+                    'success': {fn:function(r) { 
+                        this.refresh();
+                        this.refreshActionCombos();
+                    },scope:this}
                 }
             });
         }
@@ -53,7 +65,10 @@ Ext.extend(MODx.tree.Action,MODx.tree.Tree,{
                 xtype: 'modx-window-action-update'
                 ,record: r
                 ,listeners: {
-                    'success': {fn:function(r) { this.refresh(); },scope:this}
+                    'success': {fn:function(r) {
+                        this.refresh();
+                        this.refreshActionCombos();
+                    },scope:this}
                 }
             });
         }
@@ -71,7 +86,10 @@ Ext.extend(MODx.tree.Action,MODx.tree.Tree,{
                 ,id: this.cm.activeNode.attributes.pk
             }
             ,listeners: {
-                'success':{fn:this.refresh,scope:this}
+                'success':{fn:function() {
+                    this.refresh();
+                    this.refreshActionCombos();
+                },scope:this}
             }
         });
     }
@@ -112,6 +130,7 @@ MODx.window.CreateAction = function(config) {
             ,xtype: 'modx-combo-action'
             ,editable: false
             ,width: 200
+            ,id: 'modx-cact-parent'
         },{
             fieldLabel: _('load_headers')
             ,name: 'haslayout'
@@ -172,11 +191,8 @@ MODx.window.UpdateAction = function(config) {
             ,width: 200
             ,allowBlank: false
         },{
-            fieldLabel: _('controller_parent')
-            ,name: 'parent'
-            ,hiddenName: 'parent'
-            ,xtype: 'modx-combo-action'
-            ,readOnly: true
+            name: 'parent'
+            ,xtype: 'hidden'
             ,editable: false
             ,width: 200
         },{

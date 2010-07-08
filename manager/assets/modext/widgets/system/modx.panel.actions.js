@@ -36,6 +36,7 @@ MODx.panel.Actions = function(config) {
                     },{
                         xtype: 'modx-tree-action'
                         ,itemId: 'tree-action'
+                        ,id: 'modx-tree-action'
                     }]
                 }]
             },{
@@ -54,6 +55,7 @@ MODx.panel.Actions = function(config) {
                     },{
                         xtype: 'modx-tree-menu'
                         ,itemId: 'tree-menu'
+                        ,id: 'modx-tree-menu'
                     }]
                 }]
             }]
