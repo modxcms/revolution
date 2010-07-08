@@ -22,11 +22,11 @@ MODx.orm.Tree = function(config) {
         })
         ,tbar: [{
             text: _('orm_attribute_add')
-            ,handler: this.addAttribute
+            ,handler: function(btn,e) { this.addAttribute(btn,e); }
             ,scope: this
         },{
             text: _('orm_container_add')
-            ,handler: this.addContainer
+            ,handler: function(btn,e) { this.addContainer(btn,e); }
             ,scope: this
         }]
         ,menuConfig: { defaultAlign: 'tl-b?' ,enableScrolling: false }
@@ -138,7 +138,8 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                             ,leaf: false
                         });
 
-                        var pn = node ? node : this.getRootNode();
+                        var nd = this.getSelectedNode();
+                        var pn = nd && !nd.attributes.value ? nd : this.getRootNode();
                         pn.appendChild(n);
                         this.markFormPanelDirty();
                     },scope:this}
@@ -165,8 +166,9 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                             ,leaf: true
                             ,value: r.value
                         });
-                        
-                        var pn = node ? node : this.getRootNode();
+
+                        var nd = this.getSelectedNode();
+                        var pn = nd && !nd.attributes.value ? nd : this.getRootNode();
                         pn.appendChild(n);
                         this.markFormPanelDirty();
                     },scope:this}
