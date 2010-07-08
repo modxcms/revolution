@@ -374,8 +374,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         }
                     });
                     w.setValues(r.object);
-                    w.show(e.target);
-                    w.setPosition(null,30);
+                    w.show(e.target,function() {
+                        Ext.isSafari ? w.setPosition(null,30) : w.center();
+                    },this);
                 },scope:this}
             }
         });
