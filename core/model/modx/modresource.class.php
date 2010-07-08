@@ -550,9 +550,8 @@ class modResource extends modAccessibleSimpleObject {
         $newResource->set('deleted',false);
         $newResource->set('deletedon',0);
         $newResource->set('deletedby',0);
-        $newResource->set('publishedon',0);
-        $newResource->set('publishedby',0);
-        $newResource->set('published',false);
+        $newResource->set('publishedon',time());
+        $newResource->set('publishedby',$this->xpdo->user->get('id'));
         
         if (!$newResource->save()) {
             return $this->xpdo->lexicon('resource_err_duplicate');
