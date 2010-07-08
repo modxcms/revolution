@@ -17,7 +17,7 @@ $src = $modx->getOption('base_path',null,MODX_BASE_PATH).$src;
 if (empty($src) || !file_exists($src)) return '';
 
 /* load phpThumb */
-require_once MODX_CORE_PATH.'model/phpthumb/phpThumb.class.php';
+require_once MODX_CORE_PATH.'model/phpthumb/phpthumb.class.php';
 $phpThumb = new phpThumb();
 
 /* set cache dir */
