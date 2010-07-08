@@ -12,7 +12,7 @@ MODx.page.LexiconManagement = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         components: [{
-        	xtype: 'modx-panel-lexicon'
+            xtype: 'modx-panel-lexicon'
             ,renderTo: 'modx-panel-lexicon-div'
         }]
         ,buttons: [{
