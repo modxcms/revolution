@@ -17,7 +17,7 @@ MODx.panel.Welcome = function(config) {
         },{
             title: _('configcheck_title')
             ,contentEl: 'modx-config'
-            ,style: 'padding: 5px;'
+            ,style: 'padding: 0 0 10px;'
             ,bodyStyle: 'padding: 10px;'
             ,collapsible: true
             ,titleCollapse: true

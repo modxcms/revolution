@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2077] Config check screen in welcome panel now is same width as other panels
 - [#MODX-1648] Lexicon Management now loads by default the current manager_language
 - [#MODX-1743] Package update now shows status alert when package is already up to date, rather than an error
 - [#MODX-2119] Fixed bug in IE where onunload was firing regardless, preventing moving off page seamlessly
