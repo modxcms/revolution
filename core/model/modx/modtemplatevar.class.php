@@ -253,27 +253,9 @@ class modTemplateVar extends modElement {
             }
         }
 
-        $name= $this->get('name');
-
-        $id= "tv$name";
-        $format= $this->get('display');
-        $tvtype= $this->get('type');
-
-        $outputRenderPath = $this->getRenderDirectory('OnTVOutputRenderList','output');
-        if (!file_exists($outputRenderPath) || !is_dir($outputRenderPath)) {
-            $outputRenderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/web/output/';
-        }
-
-        $outputRenderFile = $outputRenderPath.$this->get('display').'.php';
-
-        if (!file_exists($outputRenderFile)) {
-            if (file_exists($outputRenderPath.'default.php')) {
-                $o = include $outputRenderPath.'default.php';
-            }
-        } else {
-            $o = include $outputRenderFile;
-        }
-        return $o;
+        /* find the render */
+        $outputRenderPaths = $this->getRenderDirectories('OnTVOutputRenderList','output');
+        return $this->getRender($params,$value,$outputRenderPaths,'output',$resourceId);
     }
 
     /**
@@ -282,7 +264,7 @@ class modTemplateVar extends modElement {
      * @access public
      * @param integer $resourceId The id of the resource; 0 defaults to the
      * current resource.
-     * @param string $style Extra style parameters.
+     * @param string $style Extra style parameters. (deprecated)
      * @return mixed The rendered input for the template variable.
      */
     public function renderInput($resourceId= 0, $style= '') {
@@ -291,7 +273,6 @@ class modTemplateVar extends modElement {
                 'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme',null,'default') . '/',
             ));
         }
-        $field_html= '';
         $this->xpdo->smarty->assign('style',$style);
         $value = $this->get('value');
 
@@ -351,7 +332,6 @@ class modTemplateVar extends modElement {
 
         $this->xpdo->smarty->assign('tv',$this);
 
-
         $param= array ();
         if ($paramstring= $this->get('display_params')) {
             $cp= explode("&", $paramstring);
@@ -365,32 +345,53 @@ class modTemplateVar extends modElement {
         }
 
         /* find the correct renderer for the TV, if not one, render a textbox */
-        $inputRenderPath = $this->getRenderDirectory('OnTVInputRenderList','input');
-        if (!file_exists($inputRenderPath) || !is_dir($inputRenderPath)) {
-            $inputRenderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/web/input/';
-        }
-
-        $inputRenderFile = $inputRenderPath.$this->get('type').'.php';
-        if (!file_exists($inputRenderFile)) {
-            if (file_exists($inputRenderPath.'textbox.php')) {
-                $field_html .= include $inputRenderPath.'textbox.php';
-            }
-        } else {
-            $field_html .= include $inputRenderFile;
-        }
-
-        return $field_html;
+        $inputRenderPaths = $this->getRenderDirectories('OnTVInputRenderList','input');
+        return $this->getRender($params,$value,$inputRenderPaths,'input',$resourceId);
     }
 
+    /**
+     * Gets the correct render given paths and type of render
+     * 
+     * @param array $params The parameters to pass to the render
+     * @param mixed $value The value of the TV
+     * @param array $paths An array of paths to search
+     * @param string $type The type of Render (input/output/properties)
+     * @param integer $resourceId The ID of the current Resource
+     * @return string
+     */
+    public function getRender($params,$value,array $paths,$type,$resourceId = 0) {
+        /* backwards compat stuff */
+        $name= $this->get('name');
+        $id= "tv$name";
+        $format= $this->get('display');
+        $tvtype= $this->get('type');
+        /* end backwards compat */
+
+        $output = '';
+        foreach ($paths as $path) {
+            $renderFile = $path.$this->get('type').'.php';            
+            if (file_exists($renderFile)) {
+                $output = include $renderFile;
+                break;
+            }
+        }
+        if (empty($output)) {
+            $p = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$type.'/';
+            if (file_exists($p.'textbox.php')) {
+                $output = include $p.'textbox.php';
+            }
+        }
+        return $output;
+    }
 
     /**
-     * Finds the correct directory for renders
+     * Finds the correct directories for renders
      *
      * @param string $event The plugin event to fire
      * @param string $subdir The subdir to search
-     * @return string The found render directory
+     * @return array The found render directories
      */
-    public function getRenderDirectory($event,$subdir) {
+    public function getRenderDirectories($event,$subdir) {
         $renderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$subdir.'/';
         $renderDirectories = array(
             $renderPath,
@@ -408,17 +409,19 @@ class modTemplateVar extends modElement {
 
         /* search directories */
         $types = array();
+        $renderPaths = array();
         foreach ($renderDirectories as $renderDirectory) {
             if (empty($renderDirectory)) continue;
             try {
                 $dirIterator = new DirectoryIterator($renderDirectory);
                 foreach ($dirIterator as $file) {
                     if (!$file->isReadable() || !$file->isFile()) continue;
-                    $renderPath = dirname($file->getPathname()).'/';
+                    $renderPaths[] = dirname($file->getPathname()).'/';
                 }
             } catch (UnexpectedValueException $e) {}
         }
-        return $renderPath;
+        $renderPaths = array_unique($renderPaths);
+        return $renderPaths;
     }
 
     /**
