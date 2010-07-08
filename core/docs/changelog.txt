@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2116] Fixed bug in depth search in modX::sanitize
 - [#MODX-1150] Changing class_key for a Resource now reloads the page to change editing area
 - [#MODX-2077] Config check screen in welcome panel now is same width as other panels
 - [#MODX-1648] Lexicon Management now loads by default the current manager_language
