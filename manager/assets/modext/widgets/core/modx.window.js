@@ -8,38 +8,37 @@
  * @xtype modx-window
  */
 MODx.Window = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		modal: false
-		,layout: 'auto'
-		,closeAction: 'hide'
-		,shadow: true
-		,resizable: true
+    config = config || {};
+    Ext.applyIf(config,{
+        modal: false
+        ,layout: 'auto'
+        ,closeAction: 'hide'
+        ,shadow: true
+        ,resizable: true
         ,collapsible: true
         ,maximizable: true
-		,autoHeight: true
+        ,autoHeight: true
         ,allowDrop: true
-		,width: 450
+        ,width: 450
         ,cls: 'modx-window'
-		,buttons: [{
-			text: config.cancelBtnText || _('cancel')
-			,scope: this
-			,handler: function() { this.hide(); }
-		},{
-			text: config.saveBtnText || _('save')
-			,scope: this
-			,handler: this.submit
-		}]
-		,record: {}
-       ,keys: [{
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: this.submit
+        }]
+        ,record: {}
+        ,keys: [{
             key: Ext.EventObject.ENTER,
             fn: this.submit
             ,scope: this
         }]
-
-	});
-	MODx.Window.superclass.constructor.call(this,config);
-	this.options = config;
+    });
+    MODx.Window.superclass.constructor.call(this,config);
+    this.options = config;
     this.config = config;
 	
     this.addEvents({
@@ -47,7 +46,7 @@ MODx.Window = function(config) {
         ,failure: true
         ,beforeSubmit: true
     });
-	this._loadForm();
+    this._loadForm();
     this.on('show',function() {
         if (this.config.blankValues) { this.fp.getForm().reset(); }
         if (this.config.allowDrop) { this.loadDropZones(); }
@@ -55,8 +54,8 @@ MODx.Window = function(config) {
     },this);
 };
 Ext.extend(MODx.Window,Ext.Window,{
-	_loadForm: function() {
-		if (this.checkIfLoaded(this.config.record || null)) { return false; }		
+    _loadForm: function() {
+        if (this.checkIfLoaded(this.config.record || null)) { return false; }
 		
         var r = this.config.record;
         /* set values here, since setValue after render seems to be broken */
@@ -78,60 +77,61 @@ Ext.extend(MODx.Window,Ext.Window,{
             ,baseParams: this.config.baseParams || { action: this.config.action || '' }
             ,items: this.config.fields || []
         });
-		this.renderForm();
-	}
+        this.renderForm();
+    }
 	
-	,submit: function() {
+    ,submit: function() {
         var f = this.fp.getForm();
-		if (f.isValid() && this.fireEvent('beforeSubmit',f.getValues())) {
-			f.submit({ 
-				waitMsg: _('saving')
-				,scope: this
-				,failure: function(frm,a) {
-                    this.fireEvent('failure',frm,a);
-					MODx.form.Handler.errorExt(a.result,frm);
-				}
-				,success: function(frm,a) {
-					if (this.config.success) {
-						Ext.callback(this.config.success,this.config.scope || this,[frm,a]);
-					}
+        if (f.isValid() && this.fireEvent('beforeSubmit',f.getValues())) {
+            f.submit({
+                waitMsg: _('saving')
+                ,scope: this
+                ,failure: function(frm,a) {
+                    if (this.fireEvent('failure',{f:frm,a:a})) {
+                        MODx.form.Handler.errorExt(a.result,frm);
+                    }
+                }
+                ,success: function(frm,a) {
+                    if (this.config.success) {
+                        Ext.callback(this.config.success,this.config.scope || this,[frm,a]);
+                    }
                     this.fireEvent('success',{f:frm,a:a});
-					this.hide();
-				}
-			});
-		}
-	}
+                    this.hide();
+                }
+            });
+        }
+    }
 	
-	,createForm: function(config) {
-		config = config || {};
-		Ext.applyIf(config,{
-			labelAlign: 'right'
-			,labelWidth: 100
-			,frame: true
-			,border: false
-			,bodyBorder: false
-			,autoHeight: true
-			,errorReader: MODx.util.JSONReader
-			,url: this.config.url
-			,baseParams: this.config.baseParams || {}
-			,fileUpload: this.config.fileUpload || false
-		});
-		return new Ext.FormPanel(config);
-	}
+    ,createForm: function(config) {
+        config = config || {};
+        Ext.applyIf(config,{
+            labelAlign: 'right'
+            ,labelWidth: 100
+            ,frame: true
+            ,border: false
+            ,bodyBorder: false
+            ,autoHeight: true
+            ,errorReader: MODx.util.JSONReader
+            ,url: this.config.url
+            ,baseParams: this.config.baseParams || {}
+            ,fileUpload: this.config.fileUpload || false
+        });
+        return new Ext.FormPanel(config);
+    }
+
+    ,renderForm: function() {
+        this.add(this.fp);
+    }
 	
-	,renderForm: function() {
-		this.add(this.fp);
-	}
-	
-	,checkIfLoaded: function(r) {
-		r = r || {};
-		if (this.fp && this.fp.getForm()) { /* so as not to duplicate form */
-			this.fp.getForm().reset();
-			this.fp.getForm().setValues(r);
-			return true;
-		}
-		return false;
-	}
+    ,checkIfLoaded: function(r) {
+        r = r || {};
+        if (this.fp && this.fp.getForm()) { /* so as not to duplicate form */
+            this.fp.getForm().reset();
+            this.fp.getForm().setValues(r);
+            return true;
+        }
+        return false;
+    }
     
     ,setValues: function(r) {
         if (r === null) { return false; }

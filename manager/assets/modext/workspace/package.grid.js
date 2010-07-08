@@ -169,6 +169,12 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                         }
                     });
                 },scope:this}
+                ,'failure': {fn: function(r) {
+                    MODx.msg.alert(_('package_update'),_('package_err_uptodate',{
+                        signature: this.menu.record.signature
+                    }));
+                    return false;
+                },scope:this}
             }
         });
     }

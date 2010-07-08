@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-1743] Package update now shows status alert when package is already up to date, rather than an error
 - [#MODX-2119] Fixed bug in IE where onunload was firing regardless, preventing moving off page seamlessly
 - [#MODX-2112] Fixed bug where admin password reset was not working
 - [#MODX-2111] Fixed bug where language settings were not set after running setup in another language
