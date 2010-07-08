@@ -50,9 +50,9 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
         var vs = n.attributes;
         if (vs.value) {
             var f = Ext.getCmp(this.config.formPanel).getForm();
-            f.findField('remote_id').setValue(vs.id);
-            f.findField('remote_name').setValue(vs.name);
-            f.findField('remote_value').setValue(vs.value);
+            f.findField(this.config.prefix+'_id').setValue(vs.id);
+            f.findField(this.config.prefix+'_name').setValue(vs.name);
+            f.findField(this.config.prefix+'_value').setValue(vs.value);
         }
     }
 });
@@ -71,20 +71,20 @@ MODx.orm.Form = function(config) {
         ,buttonAlign: 'center'
         ,items: [{
             xtype: 'textfield'
-            ,name: 'remote_name'
+            ,name: config.prefix+'_name'
             ,fieldLabel: _('name')
             ,anchor: '95%'
         },{
             xtype: 'textfield'
-            ,name: 'remote_value'
+            ,name: config.prefix+'_value'
             ,fieldLabel: _('value')
             ,anchor: '95%'
         },{
             xtype: 'hidden'
-            ,name: 'remote_id'
+            ,name: config.prefix+'_id'
         }]
         ,buttons: [{
-            text: _('save')
+            text: _('set')
             ,handler: this.saveProperty
             ,scope: this
         }]
@@ -100,9 +100,9 @@ Ext.extend(MODx.orm.Form,Ext.Panel,{
         var f = fp.getForm();
         var n = t.getSelectionModel().getSelectedNode();
 
-        var txt = f.findField('remote_name').getValue();
-        var val = f.findField('remote_value').getValue();
-        n.attributes.id = f.findField('remote_id').getValue();
+        var txt = f.findField(this.config.prefix+'_name').getValue();
+        var val = f.findField(this.config.prefix+'_value').getValue();
+        n.attributes.id = f.findField(this.config.prefix+'_id').getValue();
         n.attributes.text = txt;
         n.attributes.value = val;
         n.setText(txt+' - <i>'+Ext.util.Format.ellipsis(val,33)+'</i>');

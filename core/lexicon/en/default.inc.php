@@ -355,6 +355,7 @@ $_lang['selected_deactivate'] = 'Deactivate Selected';
 $_lang['selected_remove'] = 'Remove Selected';
 $_lang['send'] = 'Send';
 $_lang['service_url'] = 'Service URL';
+$_lang['set'] = 'Set';
 $_lang['set_to_default'] = 'Set to Default';
 $_lang['setting'] = 'Setting';
 $_lang['settings'] = 'Settings';

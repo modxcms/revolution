@@ -77,8 +77,11 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         var h = Ext.getCmp('modx-grid-user-groups');
         if (h) { d.groups = h.encode(); }
 
-        var t = Ext.getCmp('modx-orm-tree');
+        var t = Ext.getCmp('modx-remote-tree');
         if (t) { d.remote_data = t.encode(); }
+
+        var et = Ext.getCmp('modx-extended-tree');
+        if (et) { d.extended = et.encode(); }
         
         Ext.apply(o.form.baseParams,d);
     }
@@ -423,16 +426,53 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         ,border: false
                         ,items: {
                             xtype: 'modx-orm-tree'
-                            ,id: 'modx-orm-tree'
+                            ,id: 'modx-remote-tree'
                             ,data: config.remoteFields
                             ,formPanel: 'modx-panel-user'
+                            ,prefix: 'remote'
                         }
                     },{
                         xtype: 'modx-orm-form'
                         ,columnWidth: 0.6
                         ,title: _('editing_form')
-                        ,id: 'modx-orm-form'
-                        ,treePanel: 'modx-orm-tree'
+                        ,id: 'modx-remote-form'
+                        ,prefix: 'remote'
+                        ,treePanel: 'modx-remote-tree'
+                        ,formPanel: 'modx-panel-user'
+                    }]
+                }]
+            });
+        }
+        if (config.extendedFields && config.extendedFields.length) {
+            f.push({
+                title: _('extended_fields')
+                ,layout: 'form'
+                ,bodyStyle: 'padding: 15px;'
+                ,defaults: { border: false ,autoHeight: true }
+                ,hideMode: 'offsets'
+                ,items: [{
+                    html: '<p>'+_('extended_fields_msg')+'</p>'
+                },{
+                    layout: 'column'
+                    ,items: [{
+                        columnWidth: 0.4
+                        ,title: _('attributes')
+                        ,layout: 'fit'
+                        ,border: false
+                        ,items: {
+                            xtype: 'modx-orm-tree'
+                            ,id: 'modx-extended-tree'
+                            ,data: config.extendedFields
+                            ,formPanel: 'modx-panel-user'
+                            ,prefix: 'extended'
+                        }
+                    },{
+                        xtype: 'modx-orm-form'
+                        ,columnWidth: 0.6
+                        ,title: _('editing_form')
+                        ,id: 'modx-extended-form'
+                        ,prefix: 'extended'
+                        ,treePanel: 'modx-extended-tree'
                         ,formPanel: 'modx-panel-user'
                     }]
                 }]

@@ -16,10 +16,10 @@ if ($user == null) return $modx->error->failure($modx->lexicon('user_err_nf'));
 $remoteFields = array();
 $remoteData = $user->get('remote_data');
 if (!empty($remoteData)) {
-    $remoteFields = parseRemoteData($remoteData);
+    $remoteFields = parseCustomData($remoteData);
 }
 
-function parseRemoteData(array $remoteData = array()) {
+function parseCustomData(array $remoteData = array()) {
     $fields = array();
     foreach ($remoteData as $key => $value) {
         $field = array(
@@ -29,7 +29,7 @@ function parseRemoteData(array $remoteData = array()) {
         if (is_array($value)) {
             $field['text'] = $key;
             $field['leaf'] = false;
-            $field['children'] = parseRemoteData($value);
+            $field['children'] = parseCustomData($value);
         } else {
             $v = $value;
             if (strlen($v) > 30) { $v = substr($v,0,30).'...'; }
@@ -40,6 +40,16 @@ function parseRemoteData(array $remoteData = array()) {
         $fields[] = $field;
     }
     return $fields;
+}
+
+/* parse extended data, if existent */
+$user->getOne('Profile');
+if ($user->Profile) {
+    $extendedFields = array();
+    $extendedData = $user->Profile->get('extended');
+    if (!empty($extendedData)) {
+        $extendedFields = parseCustomData($extendedData);
+    }
 }
 
 /* invoke OnUserFormPrerender event */
@@ -92,6 +102,7 @@ Ext.onReady(function() {
         xtype: "modx-page-user-update"
         ,user: "'.$user->get('id').'"
         '.(!empty($remoteFields) ? ',remoteFields: '.$modx->toJSON($remoteFields) : '').'
+        '.(!empty($extendedFields) ? ',extendedFields: '.$modx->toJSON($extendedFields) : '').'
     });
 });
 // ]]>

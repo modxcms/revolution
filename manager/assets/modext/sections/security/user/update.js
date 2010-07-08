@@ -34,6 +34,7 @@ MODx.page.UpdateUser = function(config) {
             ,renderTo: 'modx-panel-user-div'
             ,user: config.user
             ,remoteFields: config.remoteFields
+            ,extendedFields: config.extendedFields
             ,name: ''
         }]
 	});
