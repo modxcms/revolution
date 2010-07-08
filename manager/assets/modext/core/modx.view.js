@@ -121,8 +121,8 @@ Ext.reg('modx-dataview',MODx.DataView);
 Ext.namespace('MODx.browser');
 
 MODx.Browser = function(config) {
-    if (MODx.browserOpen) return false;
-    MODx.browserOpen = true;
+    if (MODx.browserOpen && !config.multiple) return false;
+    if (!config.multiple) MODx.browserOpen = true;
     
     config = config || {};
     Ext.applyIf(config,{
@@ -137,8 +137,8 @@ MODx.Browser = function(config) {
     this.win.reset();
 };
 Ext.extend(MODx.Browser,Ext.Component,{
-    show: function(el) { this.win.show(el); }
-    ,hide: function() { this.win.hide(); }
+    show: function(el) { if (this.win) { this.win.show(el); } }
+    ,hide: function() { if (this.win) { this.win.hide(); } }
 });
 Ext.reg('modx-browser',MODx.Browser);
 
@@ -210,7 +210,8 @@ MODx.browser.Window = function(config) {
             ,handler: this.onSelect
             ,scope: this
         },{
-            text: _('cancel')
+            id: this.ident+'-cancel-btn'
+            ,text: _('cancel')
             ,handler: this.hide
             ,scope: this
         }]
@@ -230,7 +231,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     returnEl: null
     
     ,filter : function(){
-        var filter = Ext.getCmp('filter');
+        var filter = Ext.getCmp(this.ident+'filter');
         this.view.store.filter('name', filter.getValue(),true);
         this.view.select(0);
     }
@@ -245,14 +246,14 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
     
     ,sortImages : function(){
-        var v = Ext.getCmp('sortSelect').getValue();
+        var v = Ext.getCmp(this.ident+'sortSelect').getValue();
         this.view.store.sort(v, v == 'name' ? 'asc' : 'desc');
         this.view.select(0);
     }
     
     ,reset: function(){
         if(this.rendered){
-            Ext.getCmp('filter').reset();
+            Ext.getCmp(this.ident+'filter').reset();
             this.view.getEl().dom.scrollTop = 0;
         }
         this.view.store.clearFilter();
@@ -264,12 +265,12 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             text: _('filter')+':'
         },{
             xtype: 'textfield'
-            ,id: 'filter'
+            ,id: this.ident+'filter'
             ,selectOnFocus: true
             ,width: 100
             ,listeners: {
                 'render': {fn:function(){
-                    Ext.getCmp('filter').getEl().on('keyup', function(){
+                    Ext.getCmp(this.ident+'filter').getEl().on('keyup', function(){
                         this.filter();
                     }, this, {buffer:500});
                 }, scope:this}
@@ -277,7 +278,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
         }, ' ', '-', {
             text: _('sort_by')+':'
         }, {
-            id: 'sortSelect'
+            id: this.ident+'sortSelect'
             ,xtype: 'combo'
             ,typeAhead: true
             ,triggerAction: 'all'
@@ -457,7 +458,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 ,closeAction:'hide'
                 ,plain: true
                 ,items: [{
-                    id: 'modx-view-item-full'
+                    id: this.ident+'modx-view-item-full'
                     ,cls: 'modx-pb-fullview'
                     ,html: ''
                 }]
@@ -474,7 +475,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.fvWin.setSize(w,h);
         this.fvWin.center();
         this.fvWin.setTitle(data.name);
-        Ext.get('modx-view-item-full').update('<img src="'+data.image+'" alt="" class="modx-pb-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
+        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" alt="" class="modx-pb-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
     }
 });
 Ext.reg('modx-browser-view',MODx.browser.View);

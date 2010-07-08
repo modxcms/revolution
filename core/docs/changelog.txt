@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2052] Fixed bug with loading multiple MODx.Browser instances in non-file management circumstances
 - Updated duplicate processors to check validation, return more informative messages, sanity checks
 - Removed duplicate days keys in lexicon
 - Fixed issues when TV render directories are overridden

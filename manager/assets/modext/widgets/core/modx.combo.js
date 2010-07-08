@@ -419,7 +419,6 @@ MODx.combo.Browser = function(config) {
     Ext.applyIf(config,{
        width: 300
        ,triggerAction: 'all'
-       ,browserEl: 'modx-browser'
     });
     MODx.combo.Browser.superclass.constructor.call(this,config);
     this.config = config;
@@ -427,7 +426,7 @@ MODx.combo.Browser = function(config) {
 Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
     browser: null
     
-    ,onTriggerClick : function(){
+    ,onTriggerClick : function(btn){
         if (this.disabled){
             return false;
         }
@@ -435,6 +434,8 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
         if (this.browser === null) {
             this.browser = MODx.load({
                 xtype: 'modx-browser'
+                ,id: Ext.id()
+                ,multiple: true
                 ,prependPath: this.config.prependPath || null
                 ,prependUrl: this.config.prependUrl || null
                 ,hideFiles: this.config.hideFiles || false
@@ -447,7 +448,7 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 }
             });
         }
-        this.browser.show();
+        this.browser.show(btn);
         return true;
     }
     
