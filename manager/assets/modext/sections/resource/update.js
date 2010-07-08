@@ -38,11 +38,14 @@ MODx.page.UpdateResource = function(config) {
         ,buttons: this.getButtons(config)
     });
     MODx.page.UpdateResource.superclass.constructor.call(this,config);
-    Ext.EventManager.on(window, 'beforeunload',function(e) {
-        MODx.releaseLock(this.config.resource);
-        MODx.sleep(400);
-        e.browserEvent.returnValue = '';
-    }, this);
+    if (!Ext.isIE) {
+        Ext.EventManager.on(window, 'beforeunload',function(e) {
+            MODx.releaseLock(this.config.resource);
+            MODx.sleep(400);
+            e.browserEvent.returnValue = '';
+            return false;
+        }, this);
+    }
 };
 Ext.extend(MODx.page.UpdateResource,MODx.Component,{
     preview: function() {
