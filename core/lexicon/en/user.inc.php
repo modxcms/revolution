@@ -142,6 +142,7 @@ $_lang['user_male'] = 'Male';
 $_lang['user_management_msg'] = 'Here you can choose which user you wish to edit.';
 $_lang['user_mobile'] = 'Mobile phone number';
 $_lang['user_new'] = 'New User';
+$_lang['user_password_changed'] = 'Password successfully changed to: [[+password]]';
 $_lang['user_phone'] = 'Phone number';
 $_lang['user_photo'] = 'User Photo';
 $_lang['user_photo_message'] = 'Enter the image url for the this user or use the insert button to selected or upload an image file on the server.';
