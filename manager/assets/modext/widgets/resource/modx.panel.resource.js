@@ -417,6 +417,7 @@ MODx.panel.Resource = function(config) {
 Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     rteLoaded: false
     ,initialized: false
+    ,defaultClassKey: 'modResource'
     ,onLoad: function() {
         this.getForm().setValues(this.config.record);
     }
@@ -464,6 +465,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                         }
                         this.rteLoaded = false;
                     }
+                    this.defaultClassKey = r.object.class_key;
                     this.initialized = true;
                     this.fireEvent('ready',r);
                 },scope:this}
@@ -505,6 +507,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             var n = t.getNodeById(v);
             n.leaf = false;
             t.refreshNode(v,true);
+        }
+        if (o.result.object.class_key != this.defaultClassKey) {
+            location.href = location.href;
         }
         Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
     }

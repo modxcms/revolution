@@ -378,8 +378,10 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
                         }
                         this.rteLoaded = true;
                     }
-                    
-                    this.fireEvent('ready');
+
+                    this.defaultClassKey = r.object.class_key;
+                    this.initialized = true;
+                    this.fireEvent('ready',r);
                 } else { MODx.form.Handler.errorJSON(r); }
             }
         });
@@ -401,6 +403,8 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) { g.getStore().commitChanges(); }
         var t = Ext.getCmp('modx-resource-tree');
+
+        this.getForm().setValues(o.result.object);
         if (t) {
             var ctx = Ext.getCmp('modx-resource-context-key').getValue();
             var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
@@ -408,6 +412,9 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
             var n = t.getNodeById(v);
             n.leaf = false;
             t.refreshNode(v,true);
+        }
+        if (o.result.object.class_key != this.defaultClassKey) {
+            location.href = location.href;
         }
         Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
     }

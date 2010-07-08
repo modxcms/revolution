@@ -342,7 +342,9 @@ MODx.panel.SymLink = function(config) {
     setTimeout("Ext.getCmp('modx-panel-resource').onLoad();",1000);
 };
 Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
-    onLoad: function() {
+    initialized: false
+    ,defaultClassKey: 'modResource'
+    ,onLoad: function() {
         this.getForm().setValues(this.config.record);
     }
     ,setup: function() {
@@ -376,7 +378,9 @@ Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
                         this.rteLoaded = true;
                     }
 
-                    this.fireEvent('ready');
+                    this.defaultClassKey = r.object.class_key;
+                    this.initialized = true;
+                    this.fireEvent('ready',r);
                 } else { MODx.form.Handler.errorJSON(r); }
             }
         });
