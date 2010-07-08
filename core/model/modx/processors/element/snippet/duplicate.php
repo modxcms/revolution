@@ -14,29 +14,34 @@ $modx->lexicon->load('snippet');
 
 /* get old snippet */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('snippet_err_ns'));
-$old_snippet = $modx->getObject('modSnippet',$scriptProperties['id']);
-if (!$old_snippet) return $modx->error->failure($modx->lexicon('snippet_err_nf'));
+$sourceSnippet = $modx->getObject('modSnippet',$scriptProperties['id']);
+if (!$sourceSnippet) return $modx->error->failure($modx->lexicon('snippet_err_nf'));
 
-if (!$old_snippet->checkPolicy('save')) {
+if (!$sourceSnippet->checkPolicy('save')) {
     return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
 /* format new name */
-$newname = !empty($scriptProperties['name']) ? $scriptProperties['name'] : $modx->lexicon('duplicate_of').$old_snippet->get('name');
+$newName = !empty($scriptProperties['name'])
+    ? $scriptProperties['name']
+    : $modx->lexicon('duplicate_of',array(
+        'name' => $sourceSnippet->get('name'),
+    ));
 
 /* check for duplicate name */
 $alreadyExists = $modx->getObject('modSnippet',array(
-    'name' => $newname,
+    'name' => $newName,
 ));
-if ($alreadyExists) return $modx->error->failure($modx->lexicon('snippet_err_exists_name'));
+if ($alreadyExists) return $modx->error->failure($modx->lexicon('snippet_err_exists_name',array('name' => $newName)));
 
 /* duplicate snippet */
 $snippet = $modx->newObject('modSnippet');
-$snippet->fromArray($old_snippet->toArray());
-$snippet->set('name',$newname);
+$snippet->fromArray($sourceSnippet->toArray());
+$snippet->set('name',$newName);
 
 if ($snippet->save() === false) {
-	return $modx->error->failure($modx->lexicon('snippet_err_duplicate'));
+    $modx->error->checkValidation($snippet);
+    return $modx->error->failure($modx->lexicon('snippet_err_duplicate'));
 }
 
 /* log manager action */

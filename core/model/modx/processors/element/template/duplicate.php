@@ -15,23 +15,36 @@ $modx->lexicon->load('template');
 
 /* get old template */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('template_err_ns'));
-$oldTemplate = $modx->getObject('modTemplate',$scriptProperties['id']);
-if (!$oldTemplate) return $modx->error->failure($modx->lexicon('template_err_nf'));
+$sourceTemplate = $modx->getObject('modTemplate',$scriptProperties['id']);
+if (!$sourceTemplate) return $modx->error->failure($modx->lexicon('template_err_nf'));
 
-if (!$oldTemplate->checkPolicy('save')) {
+if (!$sourceTemplate->checkPolicy('save')) {
     return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
 /* format new name */
-$newTemplateName = !empty($scriptProperties['name']) ? $scriptProperties['name'] : $modx->lexicon('duplicate_of').$old_template->get('templatename');
+$newName = !empty($scriptProperties['name']) 
+    ? $scriptProperties['name']
+    : $modx->lexicon('duplicate_of',array(
+        'name' => $sourceTemplate->get('templatename'),
+    ));
+
+
+/* check for duplicate name */
+$alreadyExists = $modx->getObject('modTemplate',array(
+    'templatename' => $newName,
+));
+if ($alreadyExists) return $modx->error->failure($modx->lexicon('template_err_exists_name',array('name' => $newName)));
+
 
 /* duplicate template */
 $template = $modx->newObject('modTemplate');
-$template->fromArray($oldTemplate->toArray());
-$template->set('templatename',$newTemplateName);
+$template->fromArray($sourceTemplate->toArray());
+$template->set('templatename',$newName);
 
 if (!$template->save()) {
-	return $modx->error->failure($modx->lexicon('template_err_duplicate'));
+    $modx->error->checkValidation($template);
+    return $modx->error->failure($modx->lexicon('template_err_duplicate'));
 }
 
 /* log manager action */

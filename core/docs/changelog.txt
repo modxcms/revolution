@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Updated duplicate processors to check validation, return more informative messages, sanity checks
 - Removed duplicate days keys in lexicon
 - Fixed issues when TV render directories are overridden
 - [#MODX-2115] Fixed issue with phpthumb reference and capitalization, and when base_url is /

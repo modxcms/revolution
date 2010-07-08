@@ -13,35 +13,47 @@ $modx->lexicon->load('plugin');
 
 /* get old snippet */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('plugin_err_ns'));
-$old_plugin = $modx->getObject('modPlugin',$scriptProperties['id']);
-if ($old_plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
+$sourcePlugin = $modx->getObject('modPlugin',$scriptProperties['id']);
+if ($sourcePlugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
 
-if (!$old_plugin->checkPolicy('save')) {
+if (!$sourcePlugin->checkPolicy('save')) {
     return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
 /* format new name */
-$newname = !empty($scriptProperties['name']) ? $scriptProperties['name'] : $modx->lexicon('duplicate_of').$old_plugin->get('name');
+$newName = !empty($scriptProperties['name']) ? $scriptProperties['name']
+    : $modx->lexicon('duplicate_of',array(
+        'name' => $sourcePlugin->get('name'),
+    ));
+
+/* check for duplicate name */
+$alreadyExists = $modx->getObject('modPlugin',array(
+    'name' => $newName,
+));
+if ($alreadyExists) return $modx->error->failure($modx->lexicon('plugin_err_exists_name',array('name' => $newName)));
 
 /* duplicate plugin */
 $plugin = $modx->newObject('modPlugin');
-$plugin->fromArray($old_plugin->toArray());
-$plugin->set('name',$newname);
+$plugin->fromArray($sourcePlugin->toArray());
+$plugin->set('name',$newName);
 
 if ($plugin->save() === false) {
-    $modx->log(modX::LOG_LEVEL_ERROR,$modx->lexicon('plugin_err_save').print_r($plugin->toArray(),true));
+    $modx->error->checkValidation($plugin);
     return $modx->error->failure($modx->lexicon('plugin_err_save'));
 }
 
 /* duplicate events */
-$old_plugin->events = $old_plugin->getMany('PluginEvents');
-foreach($old_plugin->events as $old_event) {
-	$new_event = $modx->newObject('modPluginEvent');
-	$new_event->set('pluginid',$plugin->get('id'));
-	$new_event->set('evtid',$old_event->get('evtid'));
-	$new_event->set('priority',$old_event->get('priority'));
-	if ($new_event->save() == false) {
-		return $modx->error->failure($modx->lexicon('plugin_event_err_duplicate'));
+$events = $sourcePlugin->getMany('PluginEvents');
+if (is_array($events) && !empty($events)) {
+    foreach($events as $event) {
+        $newEvent = $modx->newObject('modPluginEvent');
+        $newEvent->set('pluginid',$plugin->get('id'));
+        $newEvent->set('evtid',$event->get('evtid'));
+        $newEvent->set('priority',$event->get('priority'));
+        if ($newEvent->save() == false) {
+            $plugin->remove();
+            return $modx->error->failure($modx->lexicon('plugin_event_err_duplicate'));
+        }
     }
 }
 

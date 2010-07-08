@@ -21,7 +21,11 @@ if (!$old_chunk->checkPolicy('save')) {
 }
 
 /* check name */
-$newname = !empty($scriptProperties['name']) ? $scriptProperties['name'] : $modx->lexicon('duplicate_of').$old_chunk->get('name');
+$newname = !empty($scriptProperties['name'])
+    ? $scriptProperties['name']
+    : $modx->lexicon('duplicate_of',array(
+        'name' => $old_chunk->get('name'),
+    ));
 
 /* duplicate chunk */
 $chunk = $modx->newObject('modChunk');
@@ -30,6 +34,7 @@ $chunk->set('name',$newname);
 
 /* save new chunk */
 if ($chunk->save() === false) {
+    $modx->error->checkValidation($chunk);
     return $modx->error->failure($modx->lexicon('chunk_err_duplicate'));
 }
 
