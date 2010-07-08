@@ -30,11 +30,20 @@ class modInstallSettings {
         if (file_exists($this->fileName)) {
             $this->settings = include $this->fileName;
             if (empty($this->settings)) {
-                $this->erase();
-                header('Location: ' . MODX_SETUP_URL);
-                exit();
+                $this->restart();
             }
         }
+    }
+    public function check() {
+        $this->load();
+        if (empty($this->settings)) {
+            $this->restart();
+        }
+    }
+    public function restart() {
+        $this->erase();
+        header('Location: ' . MODX_SETUP_URL);
+        exit();
     }
     public function delete($k) {
         unset($this->settings[$k]);

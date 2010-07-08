@@ -2,6 +2,7 @@
 /**
  * @package setup
  */
+$install->settings->check();
 if (!empty($_POST['proceed'])) {
     unset($_POST['proceed']);
     $install->settings->store($_POST);

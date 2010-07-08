@@ -2,6 +2,7 @@
 /**
  * @package setup
  */
+$install->settings->check();
 $default_folder_permissions = sprintf("%04o", 0777 & (0777 - umask()));
 $default_file_permissions = sprintf("%04o", 0666 & (0666 - umask()));
 

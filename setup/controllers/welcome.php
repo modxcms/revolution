@@ -2,6 +2,7 @@
 /**
  * @package setup
  */
+$install->settings->check();
 $proceed = false;
 $writable = is_writable(MODX_SETUP_PATH . 'includes/config.core.php');
 $writableError = false;
