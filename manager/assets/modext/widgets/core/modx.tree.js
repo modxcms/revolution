@@ -35,6 +35,7 @@ MODx.tree.Tree = function(config) {
                 tl.dataUrl += '&type='+node.attributes.type;
             }
         },this);
+        tl.on('load',this.onLoad,this);
         root = {
             nodeType: 'async'
             ,text: config.root_name || ''
@@ -74,7 +75,7 @@ MODx.tree.Tree = function(config) {
         ,cls: 'modx-tree'
         ,root: root
         ,preventRender: false
-        ,menuConfig: { defaultAlign: 'tl-b?' ,enableScrolling: false }
+        ,menuConfig: {defaultAlign: 'tl-b?' ,enableScrolling: false}
     });
     if (config.remoteToolbar === true && (config.tbar === undefined || config.tbar === null)) {
         Ext.Ajax.request({
@@ -118,6 +119,21 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,options: {}
     ,disableHref: false
 
+    ,onLoad: function(ldr,node,resp) {
+        var r = Ext.decode(resp.responseText);
+        if (r.message) {
+            var el = this.getTreeEl();
+            el.addClass('modx-tree-load-msg');
+            el.update(r.message);
+            var w = 270;
+            if (this.config.width > 150) {
+                w = this.config.width;
+            }
+            el.setWidth(w);
+            this.doLayout();
+        }
+    }
+
     /**
      * Sets up the tree and initializes it with the specified options.
      */
@@ -139,7 +155,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.on('render',function() {
             this.root.expand();
             var tl = this.getLoader();
-            Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')}) });
+            Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')})});
             tl.fullMask.removeMask=false;
             tl.on({
                 'load' : function(){this.fullMask.hide();}
@@ -214,11 +230,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,refresh: function(func,scope,args) {
         var treeState = Ext.state.Manager.get(this.treestate_id);
         this.root.reload();
-        if (treeState === undefined) { this.root.expand(null,null); } else { this.expandPath(treeState,null); }
+        if (treeState === undefined) {this.root.expand(null,null);} else {this.expandPath(treeState,null);}
         if (func) {
             scope = scope || this;
             args = args || [];
-            this.root.on('load',function() { Ext.callback(func,scope,args); },scope);
+            this.root.on('load',function() {Ext.callback(func,scope,args);},scope);
         }
         return true;
     }
@@ -250,7 +266,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,remove: function(text,substr,split) {
         var node = this.cm.activeNode;
         var id = this._extractId(node.id,substr,split);
-        var p = { action: 'remove' };
+        var p = {action: 'remove'};
         var pk = this.config.primaryKey || 'id';
         p[pk] = id;
         MODx.msg.confirm({
@@ -314,8 +330,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         e.stopEvent();
         e.preventDefault();
         
-        if (this.disableHref) { return true; }
-        if (e.ctrlKey) { return true; }
+        if (this.disableHref) {return true;}
+        if (e.ctrlKey) {return true;}
         if (n.attributes.page && n.attributes.page !== '') {
             location.href = n.attributes.page;
         }
@@ -324,7 +340,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     
     
     ,encode: function(node) {
-        if (!node) { node = this.getRootNode(); }
+        if (!node) {node = this.getRootNode();}
         var _encode = function(node) {
             var resultNode = {};
             var kids = node.childNodes;
@@ -370,7 +386,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             ,listeners: {
                 'success': {fn:function(r) {
                     var el = dropEvent.dropNode.getUI().getTextEl();
-                    if (el) { Ext.get(el).frame(); }
+                    if (el) {Ext.get(el).frame();}
                     this.fireEvent('afterSort',{event:dropEvent,result:r});
                 },scope:this}
                 ,'failure': {fn:function(r) {
@@ -404,7 +420,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 	
     ,loadAction: function(p) {
-        var id = this.cm.activeNode.id.split('_'); id = id[1];
+        var id = this.cm.activeNode.id.split('_');id = id[1];
         var u = 'index.php?id='+id+'&'+p;
         location.href = u;
     }
@@ -425,7 +441,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         var node = this.getNodeById(id);
         if (node) {
             var n = self ? node : node.parentNode;
-            var l = this.getLoader().load(n,function() { n.expand(); },this);
+            var l = this.getLoader().load(n,function() {n.expand();},this);
         }
     }
 
@@ -472,13 +488,13 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             icon: iu+'arrow_down.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('tree_expand')}
-            ,handler: function() { this.getRootNode().expandChildNodes(true); }
+            ,handler: function() {this.getRootNode().expandChildNodes(true);}
             ,scope: this
         },{
             icon: iu+'arrow_up.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('tree_collapse')}
-            ,handler: function() { this.getRootNode().collapseChildNodes(true); }
+            ,handler: function() {this.getRootNode().collapseChildNodes(true);}
             ,scope: this
         },'-',{
             icon: iu+'refresh.png'

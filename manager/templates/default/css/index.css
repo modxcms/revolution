@@ -1098,3 +1098,11 @@ ul.modx-tag-list li.modx-tag-checked {
 .tq-treegrid .x-tree-node-el {line-height: 13px;padding: 1px 3px 1px 5px;}
 .tq-treegrid .tq-treegrid-static .x-tree-ec-icon {display: none;}
 .tq-treegrid .tq-treegrid-static .x-tree-node-el {cursor: default;}
+
+.modx-tree-load-msg {
+    font-size: .9em;
+    line-height: 1;
+    color: #444;
+    white-space: pre-line;
+    padding: 3px;
+}

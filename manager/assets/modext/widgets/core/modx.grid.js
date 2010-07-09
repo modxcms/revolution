@@ -85,10 +85,19 @@ MODx.grid.Grid = function(config) {
         ,scope: this
         ,callback: function() { this.getStore().reload(); } /* fixes comboeditor bug */
     });
+    this.getStore().on('exception',this.onStoreException,this);
     this.config = config;
 };
 Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     windows: {}
+
+    ,onStoreException: function(dp,type,act,opt,resp){
+        var r = Ext.decode(resp.responseText);
+        if (r.message) {
+            this.getView().emptyText = r.message;
+            this.getView().refresh(false);
+        }
+    }
     
     ,saveRecord: function(e) {
         e.record.data.menu = null;
