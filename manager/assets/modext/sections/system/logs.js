@@ -10,14 +10,15 @@ Ext.onReady(function() {
  * @xtype modx-page-manager-log
  */
 MODx.page.ManagerLog = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-        components: [{
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-manager-log'
+        ,components: [{
             xtype: 'modx-panel-manager-log'
             ,renderTo: 'modx-panel-manager-log-div'
         }]
-	});
-	MODx.page.ManagerLog.superclass.constructor.call(this,config);
+    });
+    MODx.page.ManagerLog.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.ManagerLog,MODx.Component);
 Ext.reg('modx-page-manager-log',MODx.page.ManagerLog);
