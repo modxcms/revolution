@@ -14,6 +14,6 @@ if ($modx->exec($sql) === false) {
 }
 
 /* log manager action */
-$modx->logManagerAction('database_optimize','',0);
+$modx->logManagerAction('database_optimize','table',$scriptProperties['t']);
 
 return $modx->error->success();

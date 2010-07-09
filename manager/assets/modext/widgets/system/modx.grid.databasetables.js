@@ -12,7 +12,7 @@ MODx.grid.DatabaseTables = function(config) {
         title: _('database_tables')
         ,id: 'modx-grid-dbtable'
         ,url: MODx.config.connectors_url+'system/databasetables.php'
-		,fields: ['Name','Rows','Data_size','Data_free','Effective_size','Index_length','Total_size']
+        ,fields: ['Name','Rows','Data_size','Data_free','Effective_size','Index_length','Total_size']
         ,paging: false
         ,columns: [{
             header: _('database_table_tablename')
@@ -43,44 +43,61 @@ MODx.grid.DatabaseTables = function(config) {
             ,dataIndex: 'Total_size'
             ,width: 70
         }]
-	});
-	MODx.grid.DatabaseTables.superclass.constructor.call(this,config);
+        ,tbar: [{
+            text: _('database_optimize')
+            ,handler: this.optimizeDatabase
+            ,scope: this
+        }]
+    });
+    MODx.grid.DatabaseTables.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.DatabaseTables,MODx.grid.Grid,{
     /**
      * Truncates the specified SQL table.
      * @param {String} table
      */
-	truncate: function(table) {
-		MODx.Ajax.request({
-			url: this.config.url
-			,params: {
-				action: 'truncate'
-				,t: table
-			}
+    truncate: function(table) {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'truncate'
+                ,t: table
+            }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}
             }
-		});
-		return false;
-	}
+        });
+        return false;
+    }
     /**
      * Optimizes the specified SQL table.
      * @param {String} table
      */
-	,optimize: function(table) {
-		MODx.Ajax.request({
-			url: this.config.url
-			,params: {
-				action: 'optimize'
-				,t: table
-			}
-			,listeners: {
-				'success': {fn:this.refresh,scope:this}
-			}
-		});
-		return false;
-	}
+    ,optimize: function(table) {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'optimize'
+                ,t: table
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+        return false;
+    }
+    ,optimizeDatabase: function(table) {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'optimizeDatabase'
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+        return false;
+    }
 });
 Ext.reg('modx-grid-databasetables',MODx.grid.DatabaseTables);
 
