@@ -36,6 +36,16 @@ MODx.grid.User = function(config) {
         ,paging: true
         ,autosave: true
         ,remoteSort: true
+        ,viewConfig: {
+            forceFit:true
+            ,enableRowBody:true
+            ,scrollOffset: 0
+            ,autoFill: true
+            ,showPreview: true
+            ,getRowClass : function(rec){
+                return rec.data.active ? 'grid-row-active' : 'grid-row-inactive';
+            }
+        }
         ,sm: this.sm
         ,columns: [this.sm,{
             header: _('id')
@@ -103,8 +113,8 @@ MODx.grid.User = function(config) {
                 },scope:this}
             }
         }]
-	});
-	MODx.grid.User.superclass.constructor.call(this,config);
+    });
+    MODx.grid.User.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     createUser: function() {
