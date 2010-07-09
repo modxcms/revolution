@@ -296,12 +296,6 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,listeners: {
                 'select': {fn:this.sortImages, scope:this}
             }
-        },'-',{
-            icon: MODx.config.template_url+'images/restyle/icons/refresh.png'
-            ,cls: 'x-btn-icon'
-            ,tooltip: {text: _('tree_refresh')}
-            ,handler: this.load
-            ,scope: this
         }];
     }
     

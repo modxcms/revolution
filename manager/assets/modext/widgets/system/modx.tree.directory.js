@@ -244,7 +244,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     
     ,createDirectory: function(item,e) {
         var node = this.cm && this.cm.activeNode ? this.cm.activeNode : false;
-        var r = {parent: node ? node.id : '/'};
+        var r = {parent: node && node.attributes.type == 'dir' ? node.id : '/'};
         if (!this.windows.create) {
             this.windows.create = MODx.load({
                 xtype: 'modx-window-directory-create'
