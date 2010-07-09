@@ -15,6 +15,10 @@ $data = $modx->fromJSON($data);
 $nodes = array();
 getNodesFormatted($nodes,$data);
 
+$modx->invokeEvent('OnResourceBeforeSort',array(
+    'nodes' => &$nodes,
+));
+
 /* readjust cache */
 foreach ($nodes as $ar_node) {
     if (!is_array($ar_node) || empty($ar_node['id'])) continue;
@@ -44,6 +48,10 @@ foreach ($nodes as $ar_node) {
     $node->set('menuindex',$ar_node['order']);
     $node->save();
 }
+
+$modx->invokeEvent('OnResourceSort',array(
+    'nodes' => &$nodes,
+));
 
 /* clear cache */
 $cacheManager = $modx->getCacheManager();

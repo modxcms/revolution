@@ -40,8 +40,12 @@ if (!($newResource instanceof modResource)) {
     return $newResource;
 }
 
+$modx->invokeEvent('OnResourceDuplicate',array(
+    'newResource' => &$newResource,
+    'oldResource' => &$oldResource,
+));
 
 /* log manager action */
-$modx->logManagerAction('delete_resource','modResource',$newResource->get('id'));
+$modx->logManagerAction('duplicate_resource','modResource',$newResource->get('id'));
 
 return $modx->error->success('', array ('id' => $newResource->get('id')));

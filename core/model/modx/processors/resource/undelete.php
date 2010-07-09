@@ -72,6 +72,11 @@ if ($resource->save() == false) {
     return $modx->error->failure($modx->lexicon('resource_err_undelete'));
 }
 
+$modx->invokeEvent('OnResourceUndelete',array(
+    'id' => $resource->get('id'),
+    'resource' => &$resource,
+));
+
 /* log manager action */
 $modx->logManagerAction('undelete_resource','modResource',$resource->get('id'));
 

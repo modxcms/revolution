@@ -109,6 +109,13 @@ $modx->invokeEvent('OnDocFormDelete', array (
     'resource' => &$resource,
 ));
 
+
+$modx->invokeEvent('OnResourceDelete',array(
+    'id' => $resource->get('id'),
+    'children' => &$childrenIds,
+    'resource' => &$resource,
+));
+
 /* log manager action */
 $modx->logManagerAction('delete_resource','modDocument',$resource->get('id'));
 

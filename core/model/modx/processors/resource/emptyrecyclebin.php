@@ -20,7 +20,8 @@ foreach ($resources as $resource) {
 }
 
 $modx->invokeEvent('OnBeforeEmptyTrash',array(
-    'ids' => $ids,
+    'ids' => &$ids,
+    'resources' => &$resources,
 ));
 
 reset($resources);
@@ -48,7 +49,8 @@ foreach ($resources as $resource) {
 
 $modx->invokeEvent('OnEmptyTrash',array(
     'num_deleted' => $count,
-    'ids' => $ids,
+    'resources' => &$resources,
+    'ids' => &$ids,
 ));
 
 /* empty cache */

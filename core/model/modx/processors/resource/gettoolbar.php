@@ -66,4 +66,9 @@ if ($modx->hasPermission('purge_deleted')) {
     );
 }
 
+
+$modx->invokeEvent('OnResourceToolbarLoad',array(
+    'items' => &$items,
+));
+
 return $modx->error->success('',$items);

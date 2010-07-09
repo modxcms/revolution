@@ -359,6 +359,42 @@ $events['OnResourceTVFormRender']->fromArray(array (
   'service' => 1,
   'groupname' => 'Resources',
 ), '', true, true);
+$events['OnResourceDelete']= $xpdo->newObject('modEvent');
+$events['OnResourceDelete']->fromArray(array (
+  'name' => 'OnResourceDelete',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
+$events['OnResourceUndelete']= $xpdo->newObject('modEvent');
+$events['OnResourceUndelete']->fromArray(array (
+  'name' => 'OnResourceUndelete',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
+$events['OnResourceBeforeSort']= $xpdo->newObject('modEvent');
+$events['OnResourceBeforeSort']->fromArray(array (
+  'name' => 'OnResourceBeforeSort',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
+$events['OnResourceSort']= $xpdo->newObject('modEvent');
+$events['OnResourceSort']->fromArray(array (
+  'name' => 'OnResourceSort',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
+$events['OnResourceDuplicate']= $xpdo->newObject('modEvent');
+$events['OnResourceDuplicate']->fromArray(array (
+  'name' => 'OnResourceDuplicate',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
+$events['OnResourceToolbarLoad']= $xpdo->newObject('modEvent');
+$events['OnResourceToolbarLoad']->fromArray(array (
+  'name' => 'OnResourceToolbarLoad',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
 
 
 /* Richtext Editor */
