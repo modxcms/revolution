@@ -303,4 +303,39 @@ class modManagerResponse extends modResponse {
         $this->modx->smarty->assign('cssjs',$this->modx->sjscripts);
     }
 
+    /**
+     * Adds a lexicon topic to this page's language topics to load. Will load
+     * the topic as well.
+     * 
+     * @param string $topic The topic to load, in standard namespace:topic format
+     * @return boolean True if successful
+     */
+    public function addLangTopic($topic) {
+        $this->modx->lexicon->load($topic);
+        $topics = $this->getLangTopics();
+        $topics[] = $topic;
+        return $this->setLangTopics($topics);
+    }
+    /**
+     * Adds a lexicon topic to this page's language topics to load
+     *
+     * @return boolean True if successful
+     */
+    public function getLangTopics() {
+        $topics = $this->modx->smarty->get_template_vars('_lang_topics');
+        return explode(',',$topics);
+    }
+    /**
+     * Sets the language topics for this page
+     *
+     * @param array $topics The array of topics to set
+     * @return boolean True if successful
+     */
+    public function setLangTopics(array $topics = array()) {
+        if (!is_array($topics) || empty($topics)) return false;
+        
+        $topics = array_unique($topics);
+        $topics = implode(',',$topics);
+        return $this->modx->smarty->assign('_lang_topics',$topics);
+    }
 }
