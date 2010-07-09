@@ -7,13 +7,13 @@
  * @package modx
  * @subpackage processors.security.message
  */
-$modx->lexicon->load('messages');
 if (!$modx->hasPermission('messages')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('messages');
 
 $message = $modx->getObject('modUserMessage',$scriptProperties['id']);
 if ($message == null) return $modx->error->failure($modx->lexicon('message_err_not_found'));
 
-$message->set('messageread',false);
+$message->set('read',false);
 
 if ($message->save() === false) {
     return $modx->error->failure($modx->lexicon('message_err_save'));

@@ -43,21 +43,7 @@ foreach ($messages as $message) {
 	$ma = $message->toArray();
     $ma['sender_name'] = $message->get('sender_username');
     $ma['read'] = $message->get('read') ? true : false;
-    $ma['menu'] = array(/*
-        array(
-            'text' => $modx->lexicon('reply'),
-            'handler' => array(
-                'xtype' => 'modx-window-message-reply'
-                ,'id' => $message->get('id'),
-            ),
-        ),
-        array(
-            'text' => $modx->lexicon('forward'),
-            'handler' => array(
-                'xtype' => 'modx-window-message-forward'
-                ,'id' => $message->get('id'),
-            ),
-        ),*/
+    $ma['menu'] = array(
         array(
             'text' => $modx->lexicon('mark_unread'),
             'handler' => 'this.markUnread',

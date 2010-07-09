@@ -42,7 +42,7 @@ switch ($scriptProperties['type']) {
 		$message->set('recipient',$user->get('id'));
 		$message->set('private',true);
 		$message->set('postdate',time());
-		$message->set('messageread',false);
+		$message->set('read',false);
 
 		if (!$message->save()) return $modx->error->failure($modx->lexicon('message_err_save'));
 		break;

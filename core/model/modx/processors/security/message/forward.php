@@ -17,7 +17,7 @@ $modx->lexicon->load('messages','user');
 
 /* validation */
 if (empty($scriptProperties['subject'])) {
-	$modx->error->addField('m_fwd_subject',$modx->lexicon('message_err_not_specified_subject'));
+    $modx->error->addField('m_fwd_subject',$modx->lexicon('message_err_not_specified_subject'));
 }
 
 $fs = $modx->error->getFields();
@@ -43,7 +43,7 @@ switch ($scriptProperties['type']) {
 		$message->set('recipient',$user->get('id'));
 		$message->set('private',true);
 		$message->set('postdate',time());
-		$message->set('messageread',false);
+		$message->set('read',false);
 
 		if (!$message->save()) return $modx->error->failure($modx->lexicon('message_err_save'));
 		break;

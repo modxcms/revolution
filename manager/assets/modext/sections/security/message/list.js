@@ -11,12 +11,9 @@ Ext.onReady(function() {
 MODx.page.Messages = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        tabs: [{
-            contentEl: 'modx-tab-list', title: _('messages')
-        }]
-        ,components: [{
-            xtype: 'modx-grid-message'
-            ,renderTo: 'modx-grid-message-div'
+        components: [{
+            xtype: 'modx-panel-messages'
+            ,renderTo: 'modx-panel-messages-div'
         }]
     });
     MODx.page.Messages.superclass.constructor.call(this,config);

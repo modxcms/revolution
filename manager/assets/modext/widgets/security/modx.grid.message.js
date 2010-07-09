@@ -1,3 +1,43 @@
+
+MODx.panel.Messages = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        id: 'modx-panel-message'
+        ,url: MODx.config.connectors_url+'security/message.php'
+        ,layout: 'fit'
+        ,bodyStyle: 'background: none;'
+        ,border: false
+        ,items: [{
+            html: '<h2>'+_('messages')+'</h2>'
+            ,id: 'modx-messages-header'
+            ,cls: 'modx-page-header'
+            ,border: false
+            ,autoHeight: true
+            ,anchor: '100%'
+        },MODx.getPageStructure([{
+            title: _('messages')
+            ,bodyStyle: 'padding: 15px;'
+            ,id: 'modx-messages-tab'
+            ,autoHeight: true
+            ,items: [{
+                html: ''
+                ,id: 'modx-messages-msg'
+                ,border: false
+            },{
+                xtype: 'modx-grid-message'
+                ,user: config.user
+                ,preventRender: true
+            }]
+        }],{
+            border: true
+            ,defaults: { bodyStyle: 'padding: 15px; '}
+        })]
+    });
+    MODx.panel.Messages.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.panel.Messages,MODx.Panel);
+Ext.reg('modx-panel-messages',MODx.panel.Messages);
+
 /**
  * Loads a grid of Messages.
  * 
@@ -13,7 +53,7 @@ MODx.grid.Message = function(config) {
         tpl : new Ext.Template(
             '<span style="float: right;">'
             ,'<i>'+_('sent_by')+': {sender_name} <br />'+_('sent_on')+': {postdate}</i><br /><br />'
-            ,'</span>'    
+            ,'</span>'
             ,'<h3>{subject}</h3>'
             ,'<p>{message}</p>'
         )

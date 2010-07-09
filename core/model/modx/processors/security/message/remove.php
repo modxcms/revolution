@@ -23,7 +23,7 @@ if ($message->get('recipient') != $modx->user->get('id')) {
 
 /* delete message */
 if ($message->remove() === false) {
-	return $modx->error->failure($modx->lexicon('message_err_remove'));
+    return $modx->error->failure($modx->lexicon('message_err_remove'));
 }
 
 return $modx->error->success();
