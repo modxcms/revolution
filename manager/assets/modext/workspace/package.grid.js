@@ -74,6 +74,9 @@ MODx.grid.Package = function(config) {
         }]
     });
     MODx.grid.Package.superclass.constructor.call(this,config);
+    this.on('render',function() {
+        this.getView().mainBody.update('<div class="x-grid-empty">' + _('loading') + '</div>');
+    },this);
 };
 Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     console: null
