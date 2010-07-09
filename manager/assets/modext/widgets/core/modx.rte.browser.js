@@ -2,6 +2,15 @@
 
 MODx.browser.RTE = function(config) {
     config = config || {};
+
+    Ext.Ajax.defaultHeaders = {
+        'Powered-By': 'MODx'
+        ,'modAuth': config.auth
+    };
+    Ext.Ajax.extraParams = {
+        'Powered-By': 'MODx'
+        ,'HTTP_MODAUTH': config.auth
+    };
     
     this.ident = 'modx-browser-'+Ext.id();
     this.view = MODx.load({

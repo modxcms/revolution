@@ -14,6 +14,7 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $rtecallback = $modx->invokeEvent('OnRichTextBrowserInit');
 if (is_array($rtecallback)) $rtecallback = trim(implode(',',$rtecallback),',');
 
+$modx->smarty->assign('site_id',$modx->site_id);
 $modx->smarty->assign('rtecallback',$rtecallback);
 
 $modx->response->registerCssJs(false);

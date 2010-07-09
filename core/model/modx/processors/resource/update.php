@@ -409,8 +409,7 @@ if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCach
 
 $resource->removeLock();
 
-$resourceArray = $resource->toArray();
-unset($resourceArray['content'],$resourceArray['ta']);
-$resourceArray['preview_url'] = $modx->makeUrl($resource->get('id'));
-
-return $modx->error->success('',$resourceArray);
+$returnArray = $resource->get(array_diff(array_keys($template->_fields), array('content','ta')));
+$returnArray['class_key'] = $resource->get('class_key');
+$returnArray['preview_url'] = $modx->makeUrl($resource->get('id'));
+return $modx->error->success('',$returnArray);

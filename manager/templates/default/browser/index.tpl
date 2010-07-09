@@ -37,6 +37,7 @@ Ext.onReady(function() {
     MODx.onBrowserReturn = {/literal}{$rtecallback}{literal};
     MODx.load({
        xtype: 'modx-browser-rte'
+       ,auth: '{/literal}{$site_id}{literal}'
     });
 });
 </script>

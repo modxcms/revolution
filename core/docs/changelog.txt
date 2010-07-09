@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2128] Fixed MODx.Browser in RTE mode
 - Added modManagerRequest::addLangTopic,setLangTopics,getLangTopics assistance methods
 - [#MODX-2125] Various fixes for manager log page
 - [#MODX-2023] Added sanity checks for settings caches in setup, ensure settings caches are removed post-setup
