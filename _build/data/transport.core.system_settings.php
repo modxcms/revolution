@@ -413,11 +413,101 @@ $settings['forgot_login_email']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['friendly_alias_lowercase_only']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_lowercase_only']->fromArray(array (
+  'key' => 'friendly_alias_lowercase_only',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_alias_max_length']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_max_length']->fromArray(array (
+  'key' => 'friendly_alias_max_length',
+  'value' => '0',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_alias_restrict_chars']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_restrict_chars']->fromArray(array (
+  'key' => 'friendly_alias_restrict_chars',
+  'value' => 'pattern',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_alias_restrict_chars_pattern']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_restrict_chars_pattern']->fromArray(array (
+  'key' => 'friendly_alias_restrict_chars_pattern',
+  'value' => '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_alias_strip_element_tags']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_strip_element_tags']->fromArray(array (
+  'key' => 'friendly_alias_strip_element_tags',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_alias_translit']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_translit']->fromArray(array (
+  'key' => 'friendly_alias_translit',
+  'value' => 'none',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_alias_translit_class']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_translit_class']->fromArray(array (
+  'key' => 'friendly_alias_translit_class',
+  'value' => 'translit.modTransliterate',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_alias_trim_chars']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_trim_chars']->fromArray(array (
+  'key' => 'friendly_alias_trim_chars',
+  'value' => '/.-_',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
 $settings['friendly_alias_urls']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_urls']->fromArray(array (
   'key' => 'friendly_alias_urls',
   'value' => '1',
   'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_alias_word_delimiter']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_word_delimiter']->fromArray(array (
+  'key' => 'friendly_alias_word_delimiter',
+  'value' => '-',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_alias_word_delimiters']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_word_delimiters']->fromArray(array (
+  'key' => 'friendly_alias_word_delimiters',
+  'value' => '-_',
+  'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'furls',
   'editedon' => null,

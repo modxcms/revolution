@@ -111,7 +111,7 @@ if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->le
 if ($modx->getOption('friendly_alias_urls')) {
     /* auto assign alias */
     if (empty($scriptProperties['alias']) && $modx->getOption('automatic_alias')) {
-        $scriptProperties['alias'] = strtolower(trim($resource->cleanAlias($scriptProperties['pagetitle'])));
+        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
     } else {
         $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['alias']);
     }

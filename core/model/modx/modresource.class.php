@@ -262,7 +262,7 @@ class modResource extends modAccessibleSimpleObject {
     public function cleanAlias($alias, array $options = array()) {
         /* setup the various options */
         $iconv = function_exists('iconv');
-        $mbext = function_exists('mb_strlen') && (boolean)$this->xpdo->getOption('use_multibyte',null,false);
+        $mbext = function_exists('mb_strlen') && (boolean) $this->xpdo->getOption('use_multibyte', null, false);
         $charset = strtoupper((string) $this->xpdo->getOption('modx_charset', $options, 'UTF-8'));
         $delimiter = $this->xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
         $delimiters = $this->xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');
@@ -274,9 +274,6 @@ class modResource extends modAccessibleSimpleObject {
         $lowercase = (boolean) $this->xpdo->getOption('friendly_alias_lowercase_only', $options, true);
         $translit = $this->xpdo->getOption('friendly_alias_translit', $options, $iconv ? 'iconv' : 'none');
         $translitClass = $this->xpdo->getOption('friendly_alias_translit_class', $options, 'translit.modTransliterate');
-
-        /* get the strlen of the alias (use mb extension if available) */
-        $length = $mbext ? mb_strlen($alias, $charset) : strlen($alias);
 
         /* strip html and optionally MODx element tags (stripped by default) */
         if ($this->xpdo instanceof modX) {
@@ -295,7 +292,6 @@ class modResource extends modAccessibleSimpleObject {
         }
 
         /* apply transliteration as configured */
-        if (!($this->xpdo instanceof modX)) { $translit = 'none'; }
         switch ($translit) {
             case '':
             case 'none':
@@ -303,15 +299,18 @@ class modResource extends modAccessibleSimpleObject {
                 break;
             case 'iconv':
                 /* if iconv is available, use the built-in transliteration it provides */
-                $alias = iconv($charset, 'ASCII//TRANSLIT//IGNORE', $alias);
+                $alias = iconv($mbext ? mb_detect_encoding($alias) : $charset, $charset . '//TRANSLIT//IGNORE', $alias);
                 break;
             default:
                 /* otherwise look for a transliteration service class that will accept named transliteration tables */
-                $translitClassPath = $this->xpdo->getOption('friendly_alias_translit_class_path', $options, $this->xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
-                if ($this->xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
-                    $alias = $this->xpdo->translit->translate($alias, $translit);
-                }
+				if ($this->xpdo instanceof modX) {
+	                $translitClassPath = $this->xpdo->getOption('friendly_alias_translit_class_path', $options, $this->xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
+	                if ($this->xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
+	                    $alias = $this->xpdo->translit->translate($alias, $translit);
+	                }
+				}
         }
+
         /* restrict characters as configured */
         switch ($restrictchars) {
             case 'alphanumeric':
@@ -329,10 +328,14 @@ class modResource extends modAccessibleSimpleObject {
             case 'pattern':
             default:
                 /* restrict alias using regular expression pattern configured (same as legal by default) */
-                $alias = preg_replace($restrictcharspattern, '', $alias);
+                if (!empty($restrictcharspattern)) {
+					$alias = preg_replace($restrictcharspattern, '', $alias);
+				}
         }
+
         /* replace one or more space characters with word delimiter */
-        $alias = preg_replace('/\s+/', $delimiter, $alias);
+        $alias = preg_replace('/\s+/u', $delimiter, $alias);
+
         /* replace one or more instances of word delimiters with word delimiter */
         $delimiterTokens = array();
         for ($d = 0; $d < strlen($delimiters); $d++) {
@@ -340,6 +343,7 @@ class modResource extends modAccessibleSimpleObject {
         }
         $delimiterPattern = '/[' . implode('|', $delimiterTokens) . ']+/';
         $alias = preg_replace($delimiterPattern, $delimiter, $alias);
+
         /* unless lowercase_only preference is explicitly off, change case to lowercase */
         if ($lowercase) {
             if ($mbext) {
@@ -352,11 +356,17 @@ class modResource extends modAccessibleSimpleObject {
         }
         /* trim specified chars from both ends of the alias */
         $alias = trim($alias, $trimchars);
+
+        /* get the strlen of the alias (use mb extension if available) */
+        $length = $mbext ? mb_strlen($alias, $charset) : strlen($alias);
+
         /* if maxlength is specified and exceeded, return substr with additional trim applied */
         if ($maxlength > 0 && $length > $maxlength) {
             $alias = substr($alias, 0, $maxlength);
             $alias = trim($alias, $trimchars);
+			$this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "alias after maxlength applied = {$alias}");
         }
+
         return $alias;
     }
 

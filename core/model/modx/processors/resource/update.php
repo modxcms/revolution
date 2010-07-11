@@ -128,7 +128,7 @@ $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
 if ($modx->getOption('friendly_alias_urls') && isset($scriptProperties['alias'])) {
     /* auto assign alias */
     if (empty($scriptProperties['alias']) && $modx->getOption('automatic_alias')) {
-        $scriptProperties['alias'] = $resource->cleanAlias(strtolower(trim($scriptProperties['pagetitle'])));
+        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
     } else {
         $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['alias']);
     }
