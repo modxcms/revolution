@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2132] Remove friendly_url_prefix reference that was causing PHP warnings
 - [#MODX-2107] Fix errors with friendly alias slug generation with certain multi-byte characters
 - [#MODX-2114] Fix Error Caching Resource log message when site unavailable or other transient Resources are constructed
 - [#MODX-2129] Added missing Resource events
