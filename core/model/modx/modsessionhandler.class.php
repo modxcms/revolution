@@ -98,7 +98,7 @@ class modSessionHandler {
             $session->set('access', time());
         }
         $session->set('data', $data);
-        if ($session->isDirty('data') || (time() - $session->get('access', '%s')) > $cacheLifetime) {
+        if ($session->isDirty('data') || (time() - strtotime($session->get('access'))) > $cacheLifetime) {
             $session->set('access', time());
         }
         $written= $session->save();
