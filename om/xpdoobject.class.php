@@ -360,7 +360,7 @@ class xPDOObject {
                 if ($xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1) == 2 && $xpdo->_cacheEnabled && $cacheFlag) {
                     if (!$fromCache) {
                         $pkCriteria = $xpdo->newQuery($className, $cacheKey, $cacheFlag);
-                        $xpdo->toCache($criteria, $obj, $cacheFlag);
+                        $xpdo->toCache($pkCriteria, $obj, $cacheFlag);
                     } else {
                         $obj->_cacheFlag= true;
                     }
@@ -421,7 +421,7 @@ class xPDOObject {
                             $xpdo->toCache($criteria, $instance, $cacheFlag);
                             if ($xpdo->getOption(xPDO::OPT_CACHE_DB_OBJECTS_BY_PK) && ($cacheKey= $obj->getPrimaryKey()) && !$instance->isLazy()) {
                                 $pkCriteria = $xpdo->newQuery($className, $cacheKey, $cacheFlag);
-                                $xpdo->toCache($criteria, $instance, $cacheFlag);
+                                $xpdo->toCache($pkCriteria, $instance, $cacheFlag);
                             }
                         }
                         if ($xpdo->getDebug() === true) $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Loaded object instance: " . print_r($instance->toArray('', true), true));
