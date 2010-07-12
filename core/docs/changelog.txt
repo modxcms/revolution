@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fix object caching bug in modAccessibleObject::_loadCollectionInstance()
+- Update xPDO 2.0 to revision 429
 - Ensure extended fields can be added to users with none pre-existing
 - [#MODX-2131] Fixed other issues with TV values and rendering
 - Added ctrl+alt+p key shortcut when updating a Resource to preview it

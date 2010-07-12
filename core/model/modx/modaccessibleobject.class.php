@@ -29,7 +29,7 @@ class modAccessibleObject extends xPDOObject {
                     if ($xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1) == 2 && $xpdo->_cacheEnabled && $cacheFlag) {
                         if (!$fromCache) {
                             $pkCriteria = $xpdo->newQuery($className, $cacheKey, $cacheFlag);
-                            $xpdo->toCache($criteria, $obj, $cacheFlag);
+                            $xpdo->toCache($pkCriteria, $obj, $cacheFlag);
                         } else {
                             $obj->_cacheFlag= true;
                         }
