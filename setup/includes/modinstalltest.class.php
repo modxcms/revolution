@@ -123,16 +123,11 @@ abstract class modInstallTest {
         }
 
         $mysql_ver_comp = version_compare($mysqlVersion,'4.1.20','>=');
-        $mysql_ver_comp_5051 = version_compare($mysqlVersion,'5.0.51','==');
-        $mysql_ver_comp_5051a = version_compare($mysqlVersion,'5.0.51a','==');
 
         if (!$mysql_ver_comp) {
-            $this->results['mysql_client_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span> - '.sprintf($this->install->lexicon['test_mysql_version_fail'],$mysqlVersion).'</p>';
-            $this->results['mysql_client_version']['class'] = 'testFailed';
-
-        } else if ($mysql_ver_comp_5051 || $mysql_ver_comp_5051a) {
-            $this->results['mysql_client_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span><p>'.sprintf($this->install->lexicon['test_mysql_version_5051'],$mysqlVersion).'</p>';
-            $this->results['mysql_client_version']['class'] = 'testFailed';
+            $this->results['mysql_client_version']['msg'] = '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['mysql_client_version']['msg'] .= '<div class="notes"><h3>'.sprintf($this->install->lexicon['test_mysql_version_client_old'],$mysqlVersion).'</h3><p>'.$this->install->lexicon['test_mysql_version_client_old_msg'].'</p></div>';
+            $this->results['mysql_client_version']['class'] = 'testWarn';
 
         } else {
             $this->results['mysql_client_version']['class'] = 'testPassed';
