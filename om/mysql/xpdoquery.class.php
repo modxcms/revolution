@@ -255,7 +255,7 @@ class xPDOQuery_mysql extends xPDOQuery {
                             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing condition with key {$key}: " . print_r($val, true));
                             continue;
                         }
-                    } elseif (is_scalar($val) || $val === null) {
+                    } elseif (is_scalar($val) || is_array($val) || $val === null) {
                         $alias= $command == 'SELECT' ? $this->_class : trim($this->xpdo->getTableName($this->_class, false), $this->xpdo->_escapeChar);
                         $operator= '=';
                         $conj = $conjunction;
@@ -274,7 +274,7 @@ class xPDOQuery_mysql extends xPDOQuery {
                             $alias= trim($key_parts[0], " {$this->xpdo->_escapeChar}");
                             $key= $key_parts[1];
                         }
-                        if ($val === null || strtolower($val) == 'null') {
+                        if ($val === null) {
                             $type= PDO::PARAM_NULL;
                             if (!in_array($operator, array('IS', 'IS NOT'))) {
                                 $operator= $operator === '!=' ? 'IS NOT' : 'IS';
@@ -286,6 +286,31 @@ class xPDOQuery_mysql extends xPDOQuery {
                         else {
                             $type= PDO::PARAM_STR;
                         }
+						if (strtoupper($operator) == 'IN' && is_array($val)) {
+							$vals = array();
+							foreach ($val as $v) {
+								switch ($type) {
+									case PDO::PARAM_INT:
+										$vals[] = (integer) $v;
+										break;
+									case PDO::PARAM_STR:
+										$vals[] = $this->xpdo->quote($v);
+										break;
+									default:
+			                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing IN condition with key {$key}: " . print_r($v, true));
+			                            break;
+								}
+							}
+							if (!empty($vals)) {
+								$val = "(" . implode(',', $vals) . ")";
+								$sql = "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$key}{$this->xpdo->_escapeChar} {$operator} {$val}";
+								$result[]= new xPDOQueryCondition(array('sql' => $sql, 'binding' => null, 'conjunction' => $conj));
+								continue;
+							} else {
+	                            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing condition with key {$key}: " . print_r($val, true));
+	                            continue;
+							}
+						}
                         $field= array ();
                         $field['sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$key}{$this->xpdo->_escapeChar} " . $operator . ' ?';
                         $field['binding']= array (
