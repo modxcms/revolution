@@ -19,6 +19,7 @@ MODx.tree.Menu = function(config) {
         ,action: 'getNodes'
         ,primaryKey: 'text'
         ,useDefaultToolbar: true
+        ,ddGroup: 'modx-menu'
         ,tbar: [{
             text: _('menu_create')
             ,handler: this.createMenu

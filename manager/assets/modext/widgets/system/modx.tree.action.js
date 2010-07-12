@@ -16,6 +16,7 @@ MODx.tree.Action = function(config) {
         ,enableDrag: true
         ,enableDrop: true
         ,ddAppendOnly: true
+        ,ddGroup: 'modx-action'
         ,url: MODx.config.connectors_url + 'system/action.php'
         ,action: 'getNodes'
     });
