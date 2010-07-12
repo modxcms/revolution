@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added ctrl+alt+p key shortcut when updating a Resource to preview it
 - Prevent illegal drops of actions to menus, menus to actions, in trees on Actions page
 - Slight fixes, tweaks to plugin events grid
 - [#MODX-2130] Fixed typos and missing references in mb-based output filters

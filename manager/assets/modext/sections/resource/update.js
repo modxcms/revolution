@@ -46,6 +46,13 @@ MODx.page.UpdateResource = function(config) {
             return false;
         }, this);
     }
+    new Ext.KeyMap(Ext.getBody(), {
+        key: 'p'
+        ,alt: true
+        ,ctrl: true
+        ,fn: this.preview
+        ,scope: this
+    });
 };
 Ext.extend(MODx.page.UpdateResource,MODx.Component,{
     preview: function() {
