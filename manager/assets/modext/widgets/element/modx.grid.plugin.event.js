@@ -32,7 +32,7 @@ MODx.grid.PluginEvent = function(config) {
         ,primaryKey: 'name'
         ,fields: ['name','service','groupname','enabled','priority','propertyset','menu']
         ,paging: false
-        ,remoteSort: true
+        ,remoteSort: false
         ,viewConfig: {
             forceFit: false
             ,enableRowBody: true
@@ -55,18 +55,21 @@ MODx.grid.PluginEvent = function(config) {
             ,id: 'modx-'+this.ident+'-col-groupname'
             ,width: 200
             ,editor: { xtype: 'textfield' }
+            ,sortable: true
         },{
             header: _('propertyset')
             ,dataIndex: 'propertyset'
             ,id: 'modx-'+this.ident+'-col-propertyset'
             ,width: 180
             ,editor: { xtype: 'modx-combo-property-set' ,renderer: true }
+            ,sortable: true
         },{
             header: _('priority')
             ,dataIndex: 'priority'
             ,id: 'modx-'+this.ident+'-priority'
             ,width: 100
             ,editor: { xtype: 'textfield' ,allowBlank: false }
+            ,sortable: true
         }]
         /*,tbar: [{
             xtype: 'textfield'
@@ -87,7 +90,7 @@ MODx.grid.PluginEvent = function(config) {
     this.addEvents('updateEvent');
 };
 Ext.extend(MODx.grid.PluginEvent,MODx.grid.Grid,{
-    filterByName: function(tf,newValue,oldValue) {
+    /*filterByName: function(tf,newValue,oldValue) {
         this.getStore().baseParams = {
             action: 'getList'
             ,name: newValue
@@ -103,7 +106,7 @@ Ext.extend(MODx.grid.PluginEvent,MODx.grid.Grid,{
             ,callback: this.refresh
         });
     }
-    ,updateEvent: function(btn,e) {
+    ,*/updateEvent: function(btn,e) {
         this.loadWindow(btn,e,{
             xtype: 'modx-window-plugin-event-update'
             ,record: this.menu.record
@@ -166,7 +169,6 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
                     if (data.length > 0) {
                         s.loadData(data);
                     }
-                    this.center();
                 },scope:this}
             }
         });
@@ -195,8 +197,8 @@ MODx.grid.PluginEventAssoc = function(config) {
         ,saveParams: {
             plugin: config.plugin
         }
-        ,fields: ['id','name','priority','propertyset','menu']
-        ,pluginRecord: [{name:'id'},{name:'name'},{name:'priority'},{name:'propertyset'},{name:'menu'}]
+        ,fields: ['id','name','priority','propertyset']
+        ,pluginRecord: [{name:'id'},{name:'name'},{name:'priority'},{name:'propertyset'}]
         ,paging: true
         ,remoteSort: true
         ,columns: [{
@@ -250,7 +252,6 @@ Ext.extend(MODx.grid.PluginEventAssoc,MODx.grid.LocalGrid,{
                         ,name: r.name
                         ,priority: r.priority
                         ,propertyset: r.propertyset
-                        ,menu: {}
                     });
                     this.getStore().add(rec);                  
                 },scope:this}

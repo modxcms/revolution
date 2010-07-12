@@ -15,6 +15,7 @@ if ($event == null) return $modx->error->failure($modx->lexicon('plugin_event_er
 $plugins = $modx->fromJSON($scriptProperties['plugins']);
 
 $eventName = $event->get('name');
+
 foreach ($plugins as $pluginArray) {
     $pluginEvent = $modx->getObject('modPluginEvent',array(
         'event' => $eventName,
@@ -24,8 +25,10 @@ foreach ($plugins as $pluginArray) {
         $pluginEvent->set('event',$eventName);
         $pluginEvent->set('pluginid',$pluginArray['id']);
     }
-    $pluginEvent->set('priority',!empty($pluginArray['priority']) ? $pluginArray['priority'] : 0);
+    $priority = (!empty($pluginArray['priority']) ? $pluginArray['priority'] : 0);
+    $pluginEvent->set('priority',(int)$priority);
     $pluginEvent->set('propertyset',!empty($pluginArray['propertyset']) ? $pluginArray['propertyset'] : 0);
+
     if (!$pluginEvent->save()) {
         return $modx->error->failure($modx->lexicon('plugin_event_err_save').print_r($pluginEvent->toArray(),true));
     }

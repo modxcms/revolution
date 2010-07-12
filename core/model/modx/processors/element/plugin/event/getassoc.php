@@ -48,7 +48,6 @@ foreach ($plugins as $plugin) {
         $pluginArray['name'],
         $pluginArray['priority'],
         $pluginArray['propertyset'],
-        array(),
     );
 }
 return $modx->error->success('',$list);
