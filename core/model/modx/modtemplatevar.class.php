@@ -274,16 +274,10 @@ class modTemplateVar extends modElement {
             ));
         }
         $this->xpdo->smarty->assign('style',$style);
-        $value = $this->get('value');
+        $value = $this->getValue($resourceId);
 
         /* process any TV commands in value */
         $value= $this->processBindings($value, $resourceId);
-
-        if (!$value || $value == '') {
-            $this->set('processedValue',$this->getValue($resourceId));
-        } else {
-            $this->set('processedValue',$value);
-        }
 
         /* if any FC tvDefault rules, set here */
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
@@ -296,7 +290,7 @@ class modTemplateVar extends modElement {
                    OR `modActionDom`.`rule` = "tvVisible"
                    OR `modActionDom`.`rule` = "tvTitle")'
                 ),
-                '"tv'.$this->get('id').'" IN (name)',
+                '"tv'.$this->get('id').'" IN (`name`)',
                 'modActionDom.active' => true,
             ));
             $c->andCondition(array(
@@ -315,6 +309,7 @@ class modTemplateVar extends modElement {
                     case 'tvDefault':
                         $v = $rule->get('value');
                         if (empty($resourceId)) {
+                            $value = $v;
                             $this->set('value',$v);
                         }
                         $this->set('default_text',$v);
@@ -327,7 +322,10 @@ class modTemplateVar extends modElement {
             }
             unset($domRules,$rule,$userGroups,$v,$c);
         }
+        /* properly set value back if any FC rules, resource values, or bindings have adjusted it */
+        $this->set('value',$value);
 
+        /* strip tags from description */
         $this->set('description',$this->xpdo->stripTags($this->get('description')));
 
         $this->xpdo->smarty->assign('tv',$this);
@@ -365,7 +363,6 @@ class modTemplateVar extends modElement {
         $id= "tv$name";
         $format= $this->get('display');
         $tvtype= $this->get('type');
-        $value = $this->get('value');
         /* end backwards compat */
 
         $output = '';
@@ -381,7 +378,7 @@ class modTemplateVar extends modElement {
             if (file_exists($p.'text.php')) {
                 $output = include $p.'text.php';
             } else {
-                $output = include $this->xpdo->getOption('processors_path').'element/tv/renders/'.($type == 'input' ? 'mgr' : 'web').'/text.php';
+                $output = include $this->xpdo->getOption('processors_path').'element/tv/renders/'.($type == 'input' ? 'mgr' : 'web').'/'.$type.'/text.php';
             }
         }
         return $output;
