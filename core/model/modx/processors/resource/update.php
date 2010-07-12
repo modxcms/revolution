@@ -410,6 +410,11 @@ if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCach
 $resource->removeLock();
 
 $returnArray = $resource->get(array_diff(array_keys($resource->_fields), array('content','ta')));
+foreach ($returnArray as $k => $v) {
+    if (strpos($k,'tv') == 0) {
+        unset($returnArray[$k]);
+    }
+}
 $returnArray['class_key'] = $resource->get('class_key');
 $returnArray['preview_url'] = $modx->makeUrl($resource->get('id'));
 return $modx->error->success('',$returnArray);

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Ensure tv data isnt sent back in resource update processor, to prevent escaping problems with richtext tvs
 - [#MODX-2109] Fixed setup to have upgrade mode not go to editing database/contexts, only advanced upgrade goes there
 - Fix object caching bug in modAccessibleObject::_loadCollectionInstance()
 - Update xPDO 2.0 to revision 429
