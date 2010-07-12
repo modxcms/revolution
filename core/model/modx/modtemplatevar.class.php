@@ -326,7 +326,7 @@ class modTemplateVar extends modElement {
         $this->set('value',$value);
 
         /* strip tags from description */
-        $this->set('description',$this->xpdo->stripTags($this->get('description')));
+        $this->set('description',strip_tags($this->get('description')));
 
         $this->xpdo->smarty->assign('tv',$this);
 

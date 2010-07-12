@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Allow MODx tags in TV descriptions in input renders, but prevent HTML tags
 - Fixed bug where output render type was being ignored
 - Ensure tv data isnt sent back in resource update processor, to prevent escaping problems with richtext tvs
 - [#MODX-2109] Fixed setup to have upgrade mode not go to editing database/contexts, only advanced upgrade goes there
