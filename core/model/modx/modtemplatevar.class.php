@@ -365,11 +365,12 @@ class modTemplateVar extends modElement {
         $id= "tv$name";
         $format= $this->get('display');
         $tvtype= $this->get('type');
+        $value = $this->get('value');
         /* end backwards compat */
 
         $output = '';
         foreach ($paths as $path) {
-            $renderFile = $path.$this->get('type').'.php';            
+            $renderFile = $path.$this->get('type').'.php';
             if (file_exists($renderFile)) {
                 $output = include $renderFile;
                 break;
@@ -377,8 +378,10 @@ class modTemplateVar extends modElement {
         }
         if (empty($output)) {
             $p = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$type.'/';
-            if (file_exists($p.'textbox.php')) {
-                $output = include $p.'textbox.php';
+            if (file_exists($p.'text.php')) {
+                $output = include $p.'text.php';
+            } else {
+                $output = include $this->xpdo->getOption('processors_path').'element/tv/renders/'.($type == 'input' ? 'mgr' : 'web').'/text.php';
             }
         }
         return $output;
@@ -395,6 +398,7 @@ class modTemplateVar extends modElement {
         $renderPath = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$subdir.'/';
         $renderDirectories = array(
             $renderPath,
+            $this->xpdo->getOption('processors_path').'element/tv/renders/'.($subdir == 'input' ? 'mgr' : 'web').'/'.$subdir.'/',
         );
         $pluginResult = $this->xpdo->invokeEvent($event,array(
             'context' => $this->xpdo->context->get('key'),
