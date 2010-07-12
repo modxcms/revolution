@@ -7,7 +7,6 @@ $value= $this->parseInput($value);
 $w= $params['w'] ? $params['w'] : '100%';
 $h= $params['h'] ? $params['h'] : '400px';
 $richtexteditor= $params['edt'] ? $params['edt'] : "";
-//$this->xpdo->regClientStartupScript("manager/media/script/bin/webelm.js");
 $o= '<div class="MODX_RichTextWidget"><textarea id="' . $id . '" name="' . $id . '" style="width:' . $w . '; height:' . $h . ';">';
 $o .= htmlspecialchars($value);
 $o .= '</textarea></div>';

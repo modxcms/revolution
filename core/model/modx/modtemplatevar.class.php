@@ -255,7 +255,7 @@ class modTemplateVar extends modElement {
 
         /* find the render */
         $outputRenderPaths = $this->getRenderDirectories('OnTVOutputRenderList','output');
-        return $this->getRender($params,$value,$outputRenderPaths,'output',$resourceId);
+        return $this->getRender($params,$value,$outputRenderPaths,'output',$resourceId,$this->get('display'));
     }
 
     /**
@@ -344,7 +344,7 @@ class modTemplateVar extends modElement {
 
         /* find the correct renderer for the TV, if not one, render a textbox */
         $inputRenderPaths = $this->getRenderDirectories('OnTVInputRenderList','input');
-        return $this->getRender($params,$value,$inputRenderPaths,'input',$resourceId);
+        return $this->getRender($params,$value,$inputRenderPaths,'input',$resourceId,$this->get('type'));
     }
 
     /**
@@ -353,11 +353,12 @@ class modTemplateVar extends modElement {
      * @param array $params The parameters to pass to the render
      * @param mixed $value The value of the TV
      * @param array $paths An array of paths to search
-     * @param string $type The type of Render (input/output/properties)
+     * @param string $method The type of Render (input/output/properties)
      * @param integer $resourceId The ID of the current Resource
+     * @param string $type The type of render to display
      * @return string
      */
-    public function getRender($params,$value,array $paths,$type,$resourceId = 0) {
+    public function getRender($params,$value,array $paths,$method,$resourceId = 0,$type = 'text') {
         /* backwards compat stuff */
         $name= $this->get('name');
         $id= "tv$name";
@@ -367,18 +368,18 @@ class modTemplateVar extends modElement {
 
         $output = '';
         foreach ($paths as $path) {
-            $renderFile = $path.$this->get('type').'.php';
+            $renderFile = $path.$type.'.php';
             if (file_exists($renderFile)) {
                 $output = include $renderFile;
                 break;
             }
         }
         if (empty($output)) {
-            $p = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$type.'/';
+            $p = $this->xpdo->getOption('processors_path').'element/tv/renders/'.$this->xpdo->context->get('key').'/'.$method.'/';
             if (file_exists($p.'text.php')) {
                 $output = include $p.'text.php';
             } else {
-                $output = include $this->xpdo->getOption('processors_path').'element/tv/renders/'.($type == 'input' ? 'mgr' : 'web').'/'.$type.'/text.php';
+                $output = include $this->xpdo->getOption('processors_path').'element/tv/renders/'.($method == 'input' ? 'mgr' : 'web').'/'.$method.'/text.php';
             }
         }
         return $output;
