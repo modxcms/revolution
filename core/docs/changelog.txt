@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2130] Fixed typos and missing references in mb-based output filters
 - [#MODX-2131] Fixed various issues with TV rendering, values, and in multiple contexts
 - [#MODX-1404] Make MySQL client version check a warning only for older versions
 - [#MODX-1404] Remove MySQL client version check for 5.0.51

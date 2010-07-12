@@ -181,13 +181,13 @@ class modOutputFilter {
                     case 'lowercase':
                     case 'strtolower':
                         /* See PHP's strtolower - http://www.php.net/manual/en/function.strtolower.php */
-                        $output = $usemb ? mb_strtolower($output) : strtolower($output);
+                        $output = $usemb ? mb_strtolower($output,$encoding) : strtolower($output);
                         break;
                     case 'ucase':
                     case 'uppercase':
                     case 'strtoupper':
                         /* See PHP's strtoupper - http://www.php.net/manual/en/function.strtoupper.php */
-                        $output = $usemb ? mb_strtolower($output,$encoding) : strtoupper($output);
+                        $output = $usemb ? mb_strtoupper($output,$encoding) : strtoupper($output);
                         break;
                     case 'ucwords':
                         /* See PHP's ucwords - http://www.php.net/manual/en/function.ucwords.php */
@@ -286,7 +286,7 @@ class modOutputFilter {
 
                         if ($usemb) {
                             if (mb_strlen($output,$encoding) > $limit) {
-                                $output = mb_substr($output,0,$limit,$encoding);
+                                $output = mb_substr($output,0,$limit,$encoding).'...';
                             }
                         } else if (strlen($output) > $limit) {
                             $output = substr($output,0,$limit).'...';
