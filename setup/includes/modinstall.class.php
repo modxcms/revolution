@@ -34,6 +34,7 @@ class modInstall {
     const MODE_NEW = 0;
     const MODE_UPGRADE_REVO = 1;
     const MODE_UPGRADE_EVO = 2;
+    const MODE_UPGRADE_REVO_ADVANCED = 3;
 
     public $xpdo = null;
     public $options = array ();
@@ -147,9 +148,29 @@ class modInstall {
                     break;
 
             case modInstall::MODE_UPGRADE_REVO :
+            case modInstall::MODE_UPGRADE_REVO_ADVANCED :
                 $included = @ include MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
-                if ($included && isset ($dbase))
+                if ($included && isset ($dbase)) {
+                    $config['mgr_path'] = MODX_MANAGER_PATH;
+                    $config['connectors_path'] = MODX_CONNECTORS_PATH;
+                    $config['web_path'] = MODX_BASE_PATH;
+                    $config['context_mgr_path'] = MODX_MANAGER_PATH;
+                    $config['context_connectors_path'] = MODX_CONNECTORS_PATH;
+                    $config['context_web_path'] = MODX_BASE_PATH;
+                    
+                    $config['mgr_url'] = MODX_MANAGER_URL;
+                    $config['connectors_url'] = MODX_CONNECTORS_URL;
+                    $config['web_url'] = MODX_BASE_URL;
+                    $config['context_mgr_url'] = MODX_MANAGER_URL;
+                    $config['context_connectors_url'] = MODX_CONNECTORS_URL;
+                    $config['context_web_url'] = MODX_BASE_URL;
+
+                    $config['core_path'] = MODX_CORE_PATH;
+                    $config['processors_path'] = MODX_PROCESSORS_PATH;
+                    $config['assets_path'] = MODX_ASSETS_PATH;
+                    $config['assets_url'] = MODX_ASSETS_URL;
                     break;
+                }
 
             default :
                 $included = false;
@@ -189,18 +210,20 @@ class modInstall {
      * @return xPDO A copy of the xpdo object.
      */
     public function getConnection($mode = modInstall::MODE_NEW) {
-        if ($mode === modInstall::MODE_UPGRADE_REVO) {
+        if ($mode === modInstall::MODE_UPGRADE_REVO || $mode === modInstall::MODE_UPGRADE_REVO_ADVANCED) {
             $errors = array ();
             $this->xpdo = $this->_modx($errors);
         } else if (!is_object($this->xpdo)) {
             $options = array();
             if ($this->settings->get('new_folder_permissions')) $options['new_folder_permissions'] = $this->settings->get('new_folder_permissions');
             if ($this->settings->get('new_file_permissions')) $options['new_file_permissions'] = $this->settings->get('new_file_permissions');
+            $collation = $this->settings->get('database_collation');
             $this->xpdo = $this->_connect($this->settings->get('database_type')
                  . ':host=' . $this->settings->get('database_server')
                  . ';dbname=' . trim($this->settings->get('dbase'), '`')
                  . ';charset=' . $this->settings->get('database_connection_charset', 'utf8')
-                 . ';collation=' . $this->settings->get('database_collation', 'utf8_general_ci')
+                 //. ';collation=' . $this->settings->get('database_collation', 'utf8_general_ci')
+                 . (!empty($collation) ? ';collation=' : '')
                  ,$this->settings->get('database_user')
                  ,$this->settings->get('database_password')
                  ,$this->settings->get('table_prefix')
@@ -302,6 +325,7 @@ class modInstall {
                 break;
                 /* revo-alpha+ upgrades */
             case modInstall::MODE_UPGRADE_REVO :
+            case modInstall::MODE_UPGRADE_REVO_ADVANCED :
                 $this->loadVersionInstaller();
                 $results = $this->versioner->install();
                 break;
@@ -623,7 +647,6 @@ class modInstall {
                 $url = $modx->getOption('manager_url');
             }
         }
-
         return $url;
     }
 

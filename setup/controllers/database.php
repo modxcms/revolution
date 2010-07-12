@@ -98,7 +98,7 @@ if (!empty($_POST['proceed'])) {
                     $settings['processors_path'] = MODX_CORE_PATH . 'model/modx/processors/';
                     $settings['assets_path'] = $settings['web_path'] . 'assets/';
                     $settings['assets_url'] = $settings['web_url'] . 'assets/';
-                } elseif ($mode == modInstall::MODE_UPGRADE_REVO) {
+                } elseif ($mode == modInstall::MODE_UPGRADE_REVO || $mode == modInstall::MODE_UPGRADE_REVO_ADVANCED) {
                     include MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
 
                     $settings['core_path'] = MODX_CORE_PATH;

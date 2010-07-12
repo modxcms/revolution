@@ -26,9 +26,16 @@ if (!empty($_POST['proceed'])) {
 
     /* then store in cache */
     $install->settings->store($settings);
-    $this->proceed('database');
+
+    if ($install->settings->get('installmode') == modInstall::MODE_UPGRADE_REVO_ADVANCED) {
+        $this->proceed('database');
+    } else {
+        $this->proceed('summary');
+    }
+    
 }
-$this->parser->assign('installmode',$install->getInstallMode());
+$installmode = $install->settings->get('installmode',$install->getInstallMode());
+$this->parser->assign('installmode',$installmode);
 
 $files_exist= 0;
 if (file_exists(MODX_INSTALL_PATH . 'manager/index.php') &&

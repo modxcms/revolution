@@ -19,7 +19,14 @@ foreach ($results as $item) {
         break;
     }
 }
+
+if ($mode == modInstall::MODE_UPGRADE_REVO) {
+    $back = 'options';
+} else {
+    $back = MODX_SETUP_KEY == '@traditional' ? 'database' : 'contexts';
+}
+
 $this->parser->assign('failed', $failed);
 $this->parser->assign('testClass', $failed ? 'error' : 'success');
-$this->parser->assign('back',MODX_SETUP_KEY == '@traditional' ? 'database' : 'contexts');
+$this->parser->assign('back',$back);
 return $this->parser->fetch('summary.tpl');
