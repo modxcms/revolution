@@ -443,41 +443,40 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 }]
             });
         }
-        if (config.extendedFields && config.extendedFields.length) {
-            f.push({
-                title: _('extended_fields')
-                ,layout: 'form'
-                ,bodyStyle: 'padding: 15px;'
-                ,defaults: { border: false ,autoHeight: true }
-                ,hideMode: 'offsets'
+        config.extendedFields = config.extendedFields || [];
+        f.push({
+            title: _('extended_fields')
+            ,layout: 'form'
+            ,bodyStyle: 'padding: 15px;'
+            ,defaults: { border: false ,autoHeight: true }
+            ,hideMode: 'offsets'
+            ,items: [{
+                html: '<p>'+_('extended_fields_msg')+'</p>'
+            },{
+                layout: 'column'
                 ,items: [{
-                    html: '<p>'+_('extended_fields_msg')+'</p>'
-                },{
-                    layout: 'column'
-                    ,items: [{
-                        columnWidth: 0.4
-                        ,title: _('attributes')
-                        ,layout: 'fit'
-                        ,border: false
-                        ,items: {
-                            xtype: 'modx-orm-tree'
-                            ,id: 'modx-extended-tree'
-                            ,data: config.extendedFields
-                            ,formPanel: 'modx-panel-user'
-                            ,prefix: 'extended'
-                        }
-                    },{
-                        xtype: 'modx-orm-form'
-                        ,columnWidth: 0.6
-                        ,title: _('editing_form')
-                        ,id: 'modx-extended-form'
-                        ,prefix: 'extended'
-                        ,treePanel: 'modx-extended-tree'
+                    columnWidth: 0.4
+                    ,title: _('attributes')
+                    ,layout: 'fit'
+                    ,border: false
+                    ,items: {
+                        xtype: 'modx-orm-tree'
+                        ,id: 'modx-extended-tree'
+                        ,data: config.extendedFields
                         ,formPanel: 'modx-panel-user'
-                    }]
+                        ,prefix: 'extended'
+                    }
+                },{
+                    xtype: 'modx-orm-form'
+                    ,columnWidth: 0.6
+                    ,title: _('editing_form')
+                    ,id: 'modx-extended-form'
+                    ,prefix: 'extended'
+                    ,treePanel: 'modx-extended-tree'
+                    ,formPanel: 'modx-panel-user'
                 }]
-            });
-        }
+            }]
+        });
         return f;
     }
 });
