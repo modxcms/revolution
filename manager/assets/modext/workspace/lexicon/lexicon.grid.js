@@ -147,7 +147,7 @@ MODx.grid.Lexicon = function(config) {
                     xtype: 'modx-window-lexicon-export'
                     ,listeners: {
                         'success': {fn:function(o) {
-                            location.href = MODx.config.connectors_url+'workspace/lexicon/index.php?action=export&download='+o.a.result.message;
+                            location.href = MODx.config.connectors_url+'workspace/lexicon/index.php?action=export&HTTP_MODAUTH='+MODx.siteId+'&download='+o.a.result.message;
                         },scope:this}
                         ,'show': {fn:function() {
                             var w = this.windows['modx-window-lexicon-export'];

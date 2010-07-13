@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Hardened security on some file download actions in mgr such as console output, phpinfo, properties export
 - Adjusted setup expiry to 15 minutes
 - [#MODX-2139] Added message to display if setup has to restart due to timeout
 - [#MODX-2140] Fixed welcome page to point to static page rather than atlassian stack

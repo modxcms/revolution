@@ -89,7 +89,7 @@ Ext.extend(MODx.Console,Ext.Window,{
     }
     
     ,download: function() {
-        var c = this.getComponent('body').getEl().dom.innerHTML;
+        var c = this.getComponent('body').getEl().dom.innerHTML || '&nbsp;';
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'system/index.php'
             ,params: {
@@ -98,7 +98,7 @@ Ext.extend(MODx.Console,Ext.Window,{
             }
             ,listeners: {
                 'success':{fn:function(r) {
-                    location.href = MODx.config.connectors_url+'system/index.php?action=downloadOutput&download='+r.message;
+                    location.href = MODx.config.connectors_url+'system/index.php?action=downloadOutput&HTTP_MODAUTH='+MODx.siteId+'&download='+r.message;
                 },scope:this}
             }            
         });

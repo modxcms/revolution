@@ -385,7 +385,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    location.href = MODx.config.connectors_url+'element/index.php?action=exportProperties&download='+r.message;
+                    location.href = MODx.config.connectors_url+'element/index.php?action=exportProperties&download='+r.message+'&HTTP_MODAUTH='+MODx.siteId;
                 },scope:this}
             }
         });
