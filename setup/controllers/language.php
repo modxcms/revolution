@@ -46,4 +46,8 @@ foreach ($langs as $language) {
 }
 $this->parser->assign('languages',$languages);
 
+if (!empty($_REQUEST['restarted'])) {
+    $this->parser->assign('restarted',true);
+}
+
 return $this->parser->fetch('language.tpl');

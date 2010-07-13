@@ -42,7 +42,7 @@ class modInstallSettings {
     }
     public function restart() {
         $this->erase();
-        header('Location: ' . MODX_SETUP_URL);
+        header('Location: ' . MODX_SETUP_URL.'?restarted=1');
         exit();
     }
     public function delete($k) {

@@ -1,5 +1,5 @@
 /* structure */
-
+.clear { clear: both; }
 .title {
 	font-size: 1.4em;
 	color: #707070;

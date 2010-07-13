@@ -181,6 +181,7 @@ $_lang['preinstall_failure'] = 'Problems were detected.  Please review the pre-i
 $_lang['preinstall_success'] = 'Pre-installation tests were successful.  Click Install below to continue.';
 $_lang['refresh'] = 'Refresh';
 $_lang['request_handler_err_nf'] = 'Could not load the request handler at %s Make sure you have uploaded all the necessary files.';
+$_lang['restarted_msg'] = 'MODx had to restart the setup process as a security precaution because setup was idle for over 10 minutes. Please re-attempt running setup at this time.';
 $_lang['retry'] = 'Retry';
 $_lang['security_notice'] = 'Security Notice';
 $_lang['select'] = 'Select';
