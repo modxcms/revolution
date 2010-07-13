@@ -46,7 +46,7 @@ MODx.panel.Context = function(config) {
             }]
         },{
             title: _('context_settings')
-            ,bodyStyle: 'padding: 1.5em;'
+            ,bodyStyle: 'padding: 15px'
             ,autoHeight: true
             ,items: [{
                 html: '<p>'+_('context_settings_desc')+'</p>'
@@ -57,21 +57,29 @@ MODx.panel.Context = function(config) {
                 ,title: ''
                 ,preventRender: true
                 ,context_key: config.context
+                ,listeners: {
+                    'afteredit': {fn:function() { this.markDirty(); },scope:this}
+                }
             }]
         },{
             title: _('access_permissions')
-            ,bodyStyle: 'padding: 1.5em'
+            ,bodyStyle: 'padding: 15px'
             ,autoHeight: true
             ,items:[{
                 xtype: 'modx-grid-access-context'
                 ,title: ''
                 ,preventRender: true
                 ,context_key: config.context
+                ,listeners: {
+                    'afteredit': {fn:function() { this.markDirty(); },scope:this}
+                }
             }]
         }])]
         ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
+            ,'success': {fn:this.success,scope:this}
+            ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
         }
     });
     MODx.panel.Context.superclass.constructor.call(this,config);
