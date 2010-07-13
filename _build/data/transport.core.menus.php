@@ -104,7 +104,7 @@ $children[3]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'resource',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Resource',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Resource',
         ), '', true, true);
 
 /* new document resource */
@@ -228,7 +228,7 @@ $children[0]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'user',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Users',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Users',
         ), '', true, true);
         $children[0]->addOne($action);
 
@@ -252,7 +252,7 @@ $children[1]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'user,access,policy',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Security',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Security',
         ), '', true, true);
         $children[1]->addOne($action);
 
@@ -276,7 +276,7 @@ $children[2]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'resource,user,access',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Resource+Groups',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Resource+Groups',
         ), '', true, true);
         $children[2]->addOne($action);
 
@@ -300,7 +300,7 @@ $children[3]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'formcustomization,user,access,policy',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Form+Customization',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Form+Customization',
         ), '', true, true);
         $children[3]->addOne($action);
 
@@ -432,7 +432,7 @@ $children[2]->fromArray(array(
           'haslayout' => 1,
           'lang_topics' => 'element,category,propertyset',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Properties+and+Property+Sets',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Properties+and+Property+Sets',
         ), '', true, true);
         $children[2]->addOne($action);
 
@@ -600,7 +600,7 @@ $children[0]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'context',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Contexts',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Contexts',
         ), '', true, true);
         $children[0]->addOne($action);
 
@@ -624,7 +624,7 @@ $children[1]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'action,menu,namespace',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Actions+and+Menus',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Actions+and+Menus',
         ), '', true, true);
         $children[1]->addOne($action);
 
@@ -648,7 +648,7 @@ $children[2]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'workspace',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Package+Management',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Package+Management',
         ), '', true, true);
         $children[2]->addOne($action);
 
@@ -672,7 +672,7 @@ $children[3]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'package_builder,lexicon,namespace',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Internationalization',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Internationalization',
         ), '', true, true);
         $children[3]->addOne($action);
 
@@ -696,7 +696,7 @@ $children[4]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'content_type',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Content+Types',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Content+Types',
         ), '', true, true);
         $children[4]->addOne($action);
 
@@ -720,7 +720,7 @@ $children[5]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'workspace,package_builder,lexicon,namespace',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Namespaces',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Namespaces',
         ), '', true, true);
         $children[5]->addOne($action);
 
@@ -744,7 +744,7 @@ $children[6]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'setting',
           'assets' => '',
-          'help_url' => 'http://svn.modxcms.com/docs/display/revolution/Settings',
+          'help_url' => 'http://docs.modxcms.com/display/revolution/Settings',
         ), '', true, true);
         $children[6]->addOne($action);
 
