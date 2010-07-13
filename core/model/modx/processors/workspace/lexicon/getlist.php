@@ -33,6 +33,17 @@ $where = array(
     'language' => $language,
 );
 
+
+/* setup query for db based lexicons */
+$c = $modx->newQuery('modLexiconEntry');
+$c->where($where);
+$c->sortby('name','ASC');
+$results = $modx->getCollection('modLexiconEntry',$c);
+$dbEntries = array();
+foreach ($results as $r) {
+    $dbEntries[$r->get('name')] = $r->toArray();
+}
+
 /* first get file-based lexicon */
 $entries = $modx->lexicon->getFileTopic($language,$namespace,$topic);
 
@@ -56,17 +67,15 @@ if (!empty($scriptProperties['search'])) {
     );
 }
 $count = count($entries);
+
+/* add in unique entries */
+$es = array_diff_assoc($dbEntries,$entries);
+foreach ($es as $n => $entryArray) {
+    $entries[$n] = $entryArray['value'];
+}
+ksort($entries);
 $entries = array_slice($entries,$start,$limit,true);
 
-/* setup query */
-$c = $modx->newQuery('modLexiconEntry');
-$c->where($where);
-$c->sortby('name','ASC');
-$results = $modx->getCollection('modLexiconEntry',$c);
-$dbEntries = array();
-foreach ($results as $r) {
-    $dbEntries[$r->get('name')] = $r->toArray();
-}
 
 /* loop through */
 $list = array();
@@ -85,12 +94,15 @@ foreach ($entries as $name => $value) {
     if (array_key_exists($name,$dbEntries)) {
         $entryArray = array_merge($entryArray,$dbEntries[$name]);
         $entryArray['editedon'] = $entryArray['editedon'] == '0000-00-00 00:00:00'
-                               || $entryArray['editedon'] == null
+                               || $entryArray['editedon'] == '-001-11-30 00:00:00'
+                               || empty($entryArray['editedon'])
             ? ''
             : strftime('%b %d, %Y %I:%M %p',strtotime($entryArray['editedon']));
         $entryArray['overridden'] = 1;
     }
     $list[] = $entryArray;
 }
+
+
 
 return $this->outputArray($list,$count);

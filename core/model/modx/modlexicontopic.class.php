@@ -1,5 +1,6 @@
 <?php
 /**
+ * @deprecated 2.0.0-rc-2
  * @package modx
  */
 class modLexiconTopic extends xPDOSimpleObject {
