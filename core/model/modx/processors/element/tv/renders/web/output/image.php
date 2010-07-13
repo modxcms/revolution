@@ -21,7 +21,7 @@ foreach ($images as $image) {
             'style' => $params['style']
         );
         foreach ($attr as $k => $v) $attributes.= ($v ? ' '.$k.'="'.$v.'"' : '');
-        $attributes .= ' '.$params['attrib'];
+        $attributes .= ' '.$params['attributes'];
 
         /* Output the image with attributes */
         $o .= '<img'.rtrim($attributes).' />';
