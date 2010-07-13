@@ -137,6 +137,9 @@ Ext.extend(MODx.Window,Ext.Window,{
         if (r === null) { return false; }
         this.fp.getForm().setValues(r);
     }
+    ,reset: function() {
+        this.fp.getForm().reset();
+    }
     
     ,hideField: function(f) {
         f.disable();

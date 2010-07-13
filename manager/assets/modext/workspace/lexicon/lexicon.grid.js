@@ -81,7 +81,7 @@ MODx.grid.Lexicon = function(config) {
             ,text: _('entry_create')
             ,handler: this.createEntry
             ,scope: this
-        },{
+        },'-',{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-lexicon-filter-search'
@@ -362,6 +362,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
                 }
             });
         }
+        this.createEntryWindow.reset();
         this.createEntryWindow.setValues(r);
         this.createEntryWindow.show(e.target);
     }
