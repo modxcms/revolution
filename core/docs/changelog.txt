@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2138] Fixed textarea bug in system settings
 - Allow MODx tags in TV descriptions in input renders, but prevent HTML tags
 - Fixed bug where output render type was being ignored
 - Ensure tv data isnt sent back in resource update processor, to prevent escaping problems with richtext tvs

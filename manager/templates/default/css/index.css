@@ -286,7 +286,6 @@ textarea.x-form-field {
 /* grids */
 .x-small-editor .x-form-field {
     font-size: 1em !important;
-    height: 18px !important;
 }
 
 .x-grid3-row-expanded .x-grid3-row-expander {
