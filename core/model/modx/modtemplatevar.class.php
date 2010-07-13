@@ -366,6 +366,8 @@ class modTemplateVar extends modElement {
         $tvtype= $this->get('type');
         /* end backwards compat */
 
+        $modx =& $this->xpdo;
+
         $output = '';
         foreach ($paths as $path) {
             $renderFile = $path.$type.'.php';
