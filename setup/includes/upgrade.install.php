@@ -1,14 +1,16 @@
 <?php
 /* handle change of manager_theme to default (FIXME: temp hack) */
-$managerTheme = $this->xpdo->getObject('modSystemSetting', array(
-    'key' => 'manager_theme',
-    'value:!=' => 'default'
-));
-if ($managerTheme) {
-    $managerTheme->set('value', 'default');
-    $managerTheme->save();
+if ($this->settings->get('installmode') == modInstall::MODE_UPGRADE_EVO) {
+    $managerTheme = $this->xpdo->getObject('modSystemSetting', array(
+        'key' => 'manager_theme',
+        'value:!=' => 'default'
+    ));
+    if ($managerTheme) {
+        $managerTheme->set('value', 'default');
+        $managerTheme->save();
+    }
+    unset($managerTheme);
 }
-unset($managerTheme);
 
 /* handle change of default language to proper IANA code based on initial language selection in setup */
 $managerLanguage = $this->xpdo->getObject('modSystemSetting', array(
@@ -136,5 +138,21 @@ if ($language != 'en') {
     $setting->set('value',$language);
     $setting->save();
 }
+
+/* set welcome screen URL */
+$setting = $this->xpdo->getObject('modSystemSetting',array(
+    'key' => 'welcome_screen_url',
+));
+if (!$setting) {
+    $setting = $this->xpdo->newObject('modSystemSetting');
+    $setting->fromArray(array(
+        'key' => 'welcome_screen_url',
+        'namespace' => 'core',
+        'xtype' => 'textfield',
+        'area' => 'manager',
+    ));
+}
+$setting->set('value','http://assets.modxcms.com/revolution/welcome.20.html');
+$setting->save();
 
 return true;

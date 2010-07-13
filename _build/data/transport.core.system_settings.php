@@ -1180,7 +1180,7 @@ $settings['welcome_screen']->fromArray(array (
 $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
-  'value' => 'http://svn.modxcms.com/docs/display/revolution/Welcome+to+Revolution+2.0',
+  'value' => 'http://assets.modxcms.com/revolution/welcome.html',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',

@@ -7,9 +7,9 @@
  * @xtype page-welcome
  */
 MODx.page.Welcome = function(config) {
-	config = config || {}; 
-	Ext.applyIf(config,{
-		components: [{
+    config = config || {};
+    Ext.applyIf(config,{
+        components: [{
             xtype: 'modx-panel-welcome'
             ,renderTo: 'modx-panel-welcome-div'
             ,displayConfigCheck: config.displayConfigCheck
@@ -17,7 +17,7 @@ MODx.page.Welcome = function(config) {
             ,newsEnabled: config.newsEnabled
             ,securityEnabled: config.securityEnabled
         }]
-	});
+    });
     MODx.page.Welcome.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.Welcome,MODx.Component);
@@ -26,7 +26,7 @@ Ext.reg('modx-page-welcome',MODx.page.Welcome);
 MODx.loadWelcomePanel = function(url) {
     if (!url) return;
     MODx.helpWindow = new Ext.Window({
-        title: _('welcome')
+        title: _('welcome_title')
         ,width: 850
         ,height: 500
         ,modal: true

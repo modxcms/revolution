@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2140] Fixed welcome page to point to static page rather than atlassian stack
 - Update Help URLs to new base url for docs
 - Some UI tweaks to lexicon grid, added reset() JS method to MODx.Window for shorter code
 - Added in create entry to lexicon management
