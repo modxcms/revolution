@@ -155,6 +155,12 @@ class modLexicon {
     public function load() {
         $topics = func_get_args(); /* allow for dynamic number of lexicons to load */
 
+        if ($this->modx->context->get('key') == 'mgr') {
+            $defaultLanguage = $this->modx->getOption('manager_language',$scriptProperties,$this->modx->getOption('cultureKey',null,'en'));
+        } else {
+            $defaultLanguage = $this->modx->getOption('cultureKey',null,'en');
+        }
+
         foreach ($topics as $topicStr) {
             if (!is_string($topicStr) || $topicStr == '') continue;
             if (in_array($topicStr,$this->_loadedTopics)) continue;
@@ -172,7 +178,7 @@ class modLexicon {
             } else { /* if namespace, search specified lexicon */
                 $params = explode(':',$topic);
                 if (count($params) <= 2) {
-                    $language = $this->modx->getOption('cultureKey',null,'en');
+                    $language = $defaultLanguage;
                     $namespace = $params[0];
                     $topic_parsed = $params[1];
                 } else {

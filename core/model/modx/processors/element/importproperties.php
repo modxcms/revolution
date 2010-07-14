@@ -23,6 +23,19 @@ if (!is_array($properties)) {
 $data = array();
 foreach ($properties as $property) {
     $desc = empty($property['desc']) ? '' : $property['desc'];
+
+    if (!empty($desc)) {
+        if (!empty($property['lexicon'])) {
+            if (strpos($property['lexicon'],':') !== false) {
+                $modx->lexicon->load('en:'.$property['lexicon']);
+            } else {
+                $modx->lexicon->load('en:core:'.$property['lexicon']);
+            }
+            $modx->lexicon->load($property['lexicon']);
+        }
+        $desc = $modx->lexicon($property['desc']);
+    }
+
     /* backwards compat */
     if (empty($desc)) { $desc = empty($property['description']) ? '' : $property['description']; }
     $desc = htmlspecialchars(str_replace("'",'"',$desc));

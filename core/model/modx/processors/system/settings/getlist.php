@@ -57,13 +57,14 @@ $c->sortby('`modSystemSetting`.`'.$sort.'`',$dir);
 if ($isLimit) $c->limit($limit,$start);
 
 $settings = $modx->getCollection('modSystemSetting',$c);
-
+        
 $list = array();
 foreach ($settings as $setting) {
     $settingArray = $setting->toArray();
     $k = 'setting_'.$settingArray['key'];
 
-    /* if 3rd party setting, load proper text */
+    /* if 3rd party setting, load proper text, fallback to english */
+    $modx->lexicon->load('en:'.$setting->get('namespace').':default');
     $modx->lexicon->load($setting->get('namespace').':default');
 
     /* get translated area text */

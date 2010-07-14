@@ -49,7 +49,14 @@ $data = array();
 /* put in default properties for element */
 if (isset($default)) {
     foreach ($default as $property) {
-        if (!empty($property['lexicon'])) $modx->lexicon->load($property['lexicon']);
+        if (!empty($property['lexicon'])) {
+            if (strpos($property['lexicon'],':') !== false) {
+                $modx->lexicon->load('en:'.$property['lexicon']);
+            } else {
+                $modx->lexicon->load('en:core:'.$property['lexicon']);
+            }
+            $modx->lexicon->load($property['lexicon']);
+        }
         $data[$property['name']] = array(
             $property['name'],
             $modx->lexicon($property['desc']),
@@ -73,7 +80,14 @@ foreach ($properties as $property) {
         $overridden = 2;
     }
 
-    if (!empty($property['lexicon'])) $modx->lexicon->load($property['lexicon']);
+    if (!empty($property['lexicon'])) {
+        if (strpos($property['lexicon'],':') !== false) {
+            $modx->lexicon->load('en:'.$property['lexicon']);
+        } else {
+            $modx->lexicon->load('en:core:'.$property['lexicon']);
+        }
+        $modx->lexicon->load($property['lexicon']);
+    }
     $data[$property['name']] = array(
         $property['name'],
         $modx->lexicon($property['desc']),

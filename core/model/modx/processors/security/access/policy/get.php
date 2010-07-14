@@ -40,6 +40,11 @@ $list = array();
 foreach ($permissions as $permission) {
     $desc = $permission->get('description');
     if (!empty($policyArray['lexicon'])) {
+        if (strpos($policyArray['lexicon'],':') !== false) {
+            $modx->lexicon->load('en:'.$policyArray['lexicon']);
+        } else {
+            $modx->lexicon->load('en:core:'.$policyArray['lexicon']);
+        }
         $desc = $modx->lexicon($desc);
     }
     $list[] = array(

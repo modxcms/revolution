@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2142] Fixed issue where translations in settings, properties and permissions were not being translated or falling back to english
 - [#MODX-2132] Reverting commit in r7125 due to side issue caused by fix in it
 - Hardened security on some file download actions in mgr such as console output, phpinfo, properties export
 - Adjusted setup expiry to 15 minutes
