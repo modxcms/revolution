@@ -410,6 +410,9 @@ Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
             n.leaf = false;
             t.refreshNode(v,true);
         }
+        if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
+            location.href = location.href;
+        }
         Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
     }
     

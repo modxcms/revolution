@@ -301,7 +301,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 if (o.form.hasListener('actionClose')) {
                     o.form.fireEvent('actionClose',itm.params);
                 } else if (o.actions) {
-                    location.href = '?a='+o.actions.cancel+'&'+a;
+                    location.href = '?a='+o.actions.cancel+'&'+Ext.encode(itm.params);
                 }
                 break;
         }
@@ -309,10 +309,16 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
 
     ,getStayMenu: function() {
         var stay = Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay');
+        var a = 0;
+        switch (stay) {
+            case 'new': a = 0; break;
+            case 'close': a = 2; break;
+            case 'stay': default: a = 1; break;
+        }
         return {
             xtype:'switch'
             ,id: 'modx-stay-menu'
-            ,activeItem: stay == 'new' ? 0 : 1
+            ,activeItem: a
             ,items: [{
                 tooltip: _('stay_new')
                 ,value: 'new'

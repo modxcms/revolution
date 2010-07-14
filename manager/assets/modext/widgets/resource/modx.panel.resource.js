@@ -491,7 +491,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         this.cleanupEditor();
         return this.fireEvent('save',{
             values: this.getForm().getValues()
-            ,stay: MODx.config.stay
+            ,stay: Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay')
         });
     }
     ,success: function(o) {
@@ -508,7 +508,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             n.leaf = false;
             t.refreshNode(v,true);
         }
-        if (o.result.object.class_key != this.defaultClassKey) {
+        if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
             location.href = location.href;
         }
         Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
