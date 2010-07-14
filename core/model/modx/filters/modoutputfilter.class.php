@@ -509,6 +509,13 @@ class modOutputFilter {
                         $output= $output ? false : true;
                         break;
 
+                    case 'urlencode':
+                        $output = urlencode($output);
+                        break;
+                    case 'urldecode':
+                        $output = urldecode($output);
+                        break;
+
                     /* Default, custom modifier (run snippet with modifier name) */
                     default:
                         /*@todo Possibility to only look for snippet names prefixed with 'filter:' */
