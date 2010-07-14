@@ -99,31 +99,30 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                             ,showFirstPanel: false
                         });
                     }
-                    this.windows[x].on('ready',function() {
-
+                    this.windows[x].show(e.target,function() {
                         var pd = Ext.getCmp('modx-window-package-downloader');
                         pd.fireEvent('proceed','modx-pd-selpackage');
-                        
+
                         Ext.getCmp('modx-package-browser-thumb-view').hide();
                         Ext.getCmp('modx-package-browser-grid-panel').hide();
                         Ext.getCmp('modx-package-browser-view').show();
-                        
+
                         var t = Ext.getCmp('modx-package-browser-tree');
                         if (t) {
-                            t.getLoader().baseParams.provider = p.id;
+                            t.getLoader().baseParams.provider = MODx.provider;
                             t.refresh();
                             t.renderProviderInfo();
                             t.getRootNode().setText(p.name);
                         }
                         var g = Ext.getCmp('modx-package-browser-grid');
                         if (g) {
-                            g.getStore().baseParams.provider = p.id;
+                            g.getStore().baseParams.provider = MODx.provider;
                             g.getStore().removeAll();
                         }
-                        
+
                         var v = Ext.getCmp('modx-package-browser-thumbs-view');
                         if (v) {
-                            v.baseParams.provider = p.id;
+                            v.baseParams.provider = MODx.provider;
                         }
                         pd.syncSize();
                         pd.doLayout();
@@ -136,10 +135,13 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                                 tb.getComponent('btn-back').setDisabled(true);
                             }
                         }
-
-                    },this,{single:true});
-                    
-                    this.windows[x].show(e.target);
+                        try {
+                            var xy = pd.el.getAlignToXY(pd.container, 'c-c');
+                            if (xy) {
+                                pd.setPagePosition(xy[0],0);
+                            }
+                        } catch (e) {}
+                    },this);
                 },scope:this}
             }
         });

@@ -2,6 +2,10 @@ MODx.Wizard = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         layout: 'card'
+        ,layoutConfig: {
+            layoutOnCardChange: true
+            ,deferredRender: false
+        }
         ,activeItem: 0
         ,closeAction: 'hide'
         ,resizable: true
@@ -12,6 +16,7 @@ MODx.Wizard = function(config) {
         ,width: '90%'
         ,defaults: { border: false }
         ,modal: Ext.isIE ? false : true
+        ,hideMode: 'offsets'
         ,cls: 'modx-window'
         ,bbar: [{
             itemId: 'btn-back'
