@@ -21,7 +21,9 @@ $dir = !isset($scriptProperties['dir']) || $scriptProperties['dir'] == 'root' ? 
 $dir = $modx->fileHandler->sanitizePath($dir);
 $fullpath = $root.'/'.$dir;
 
-$fileManagerPath = $modx->getOption('filemanager_path',$scriptProperties,$modx->getOption('rb_base_url',null,''));
+$fileManagerUrl = $modx->getOption('filemanager_path',$scriptProperties,$modx->getOption('rb_base_url',null,''));
+$basePath = $modx->getOption('base_path',null,MODX_BASE_PATH);
+if ($basePath != '/') $fileManagerUrl = str_replace($basePath,'',$fileManagerUrl);
 
 $imagesExts = array('jpg','jpeg','png','gif');
 /* iterate */
@@ -39,9 +41,9 @@ foreach (new DirectoryIterator($fullpath) as $file) {
 	$filesize = @filesize($filePathName);
         /* calculate url */
 	if (!empty($scriptProperties['prependUrl'])) {
-            $url = $fileManagerPath.$scriptProperties['prependUrl'].$dir.($dir != '' ? '/' : '').$fileName;
+            $url = $fileManagerUrl.$scriptProperties['prependUrl'].$dir.($dir != '' ? '/' : '').$fileName;
         } else {
-            $url = $fileManagerPath.$dir.($dir != '' ? '/' : '').$fileName;
+            $url = $fileManagerUrl.$dir.($dir != '' ? '/' : '').$fileName;
         }
         $url = str_replace('//','/',$url);
 
