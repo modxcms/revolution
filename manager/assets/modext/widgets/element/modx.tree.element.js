@@ -440,7 +440,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 
         if (ui.hasClass('pnew')) {
             m.push({
-                text: _('new')+' '+_(a.type)
+                text: _('new'+'_'+a.type)
                 ,handler: this._createElement
             });
             m.push({
