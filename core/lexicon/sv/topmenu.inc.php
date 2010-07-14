@@ -1,0 +1,102 @@
+<?php
+/**
+ * Topmenu Swedish lexicon topic
+ *
+ * @language sv
+ * @package modx
+ * @subpackage lexicon
+ */
+$_lang['about'] = 'Om';
+$_lang['about_desc'] = 'Mer information om MODx Revolution.';
+$_lang['access_permissions'] = 'Åtkomstinställningar';
+$_lang['access_permissions_desc'] = 'Hantera användargruppers tillgång till resurser och kontexter.';
+$_lang['api_docs'] = 'API-dokumentation';
+$_lang['api_docs_desc'] = 'phpDocumentor-driven dokumentation av API:n i Revolution.';
+$_lang['components'] = 'Komponenter';
+$_lang['content_types'] = 'Innehållstyper';
+$_lang['content_types_desc'] = 'Lägg till innehållstyper för resurser, tex .html, .js, etc.';
+$_lang['contexts'] = 'Kontexter';
+$_lang['contexts_desc'] = 'Hantera webbplatsens kontexter och deras inställningar.';
+$_lang['edit_menu'] = 'Åtgärder';
+$_lang['edit_menu_desc'] = 'Hantera händelser i och strukturen på toppmenyn.';
+$_lang['eventlog_viewer'] = 'Fellogg';
+$_lang['eventlog_viewer_desc'] = 'Visa MODx fellogg - error.log.';
+$_lang['export_site'] = 'Exportera statisk HTML';
+$_lang['export_site_desc'] = 'Exportera den nuvarande webbplatsen till statiska HTML-sidor.';
+//"Flush" in Flush Permissions means to basically 'reload' the permissions. So think 'reload', or 'reset'.
+$_lang['flush_access'] = 'Återställ rättigheter';
+$_lang['flush_access_confirm'] = 'Är du säker på att du vill återställa dina åtkomsträttigheter? NOTERA: det här påverkar inte andra användarsessioner.';
+$_lang['flush_access_desc'] = 'Återställ alla rättigheter och ladda om cachen.';
+$_lang['flush_sessions'] = 'Återställ alla sessioner';
+$_lang['flush_sessions_confirm'] = 'Är du säker på att du vill återställa alla användarsessioner? Detta kommer att förstöra alla aktuella sessioner, inklusive din egen, vilket kommer att tvinga alla att logga in igen efter att den här operationen är genomförd.';
+$_lang['flush_sessions_desc'] = 'Åteställ alla sessioner och logga ut alla användare.';
+$_lang['flush_sessions_err'] = 'Ett fel inträffade när de aktuella användarsessionerna skulle återställas.';
+$_lang['flush_sessions_not_supported'] = 'Återställning av användarsessioner stöds inte på din konfiguration.';
+$_lang['form_customization'] = 'Formuläranpassning';
+$_lang['form_customization_desc'] = 'Anpassa hanterarens formulär efter säkerhetsbehörigheter.';
+$_lang['forums'] = 'Forum';
+$_lang['forums_desc'] = 'Besök MODx officiella forum.';
+$_lang['import_resources'] = 'Importera resurser';
+$_lang['import_resources_desc'] = 'Importera en uppsättning statiska resurser till webbplatsen.';
+$_lang['import_site'] = 'Importera HTML';
+$_lang['import_site_desc'] = 'Importera en uppsättning HTML-filer till webbplatsen.';
+$_lang['jira'] = 'JIRA';
+$_lang['jira_desc'] = 'Öppna MODx buggverktyg JIRA för att följa och anmäla buggar.';
+$_lang['lexicon_management'] = 'Lexikonhantering';
+$_lang['lexicon_management_desc'] = 'Redigera språksträngarna i MODx hanterare.';
+$_lang['logout_desc'] = 'Logga ut från MODx hanterare.';
+$_lang['manage_workspaces'] = 'Pakethantering';
+$_lang['manage_workspaces_desc'] = 'Ladda ner komponenter från 3:e part, lägg till leverantörer och installera paket.';
+$_lang['messages'] = 'Meddelanden';
+$_lang['messages_desc'] = 'Se dina meddelanden och skicka nya till användare.';
+$_lang['namespaces'] = 'Namnrymder';
+$_lang['namespaces_desc'] = 'Hantera namnrymder, vilka skiljer olika tillagda komponenter åt.';
+$_lang['new_document'] = 'Nytt dokument';
+$_lang['new_document_desc'] = 'Skapa ett nytt dokument.';
+$_lang['new_resource'] = 'Ny resurs';
+$_lang['new_resource_desc'] = 'Skapa en ny resurs.';
+$_lang['new_static_resource'] = 'Ny statisk resurs';
+$_lang['new_static_resource_desc'] = 'Skapa en ny filbaserad statisk resurs.';
+$_lang['new_symlink'] = 'Ny symlänk';
+$_lang['new_symlink_desc'] = 'Skapa en ny symlänk som pekar mot en existerande URL utan omdirigering.';
+$_lang['new_weblink'] = 'Ny webblänk';
+$_lang['new_weblink_desc'] = 'Skapa en ny webblänk som pekar mot en existerande URL med omdirigering.';
+$_lang['policy_management'] = 'Åtkomstpolicyer';
+$_lang['policy_management_desc'] = 'Skapa och redigera övergripande policyer för webbplatsen för att säkra processer.';
+$_lang['preview'] = 'Förhandsgranska';
+$_lang['preview_desc'] = 'Öppnar din webbplats i ett nytt fönster.';
+$_lang['profile'] = 'Profil';
+$_lang['profile_desc'] = 'Uppdatera din personliga profil.';
+$_lang['propertysets'] = 'Egenskapsuppsättningar';
+$_lang['propertysets_desc'] = 'Hantera din webbplats egenskapsuppsättningar och de element som de är knutna till.';
+$_lang['refresh_site'] = 'Rensa cachen';
+$_lang['refresh_site_desc'] = 'Rensa din webbplats cache.';
+$_lang['remove_locks'] = 'Ta bort lås';
+$_lang['remove_locks_desc'] = 'Det här kommer att ta bort alla lås på alla hanterarens sidor som låsts för att någon redigerar dom.';
+$_lang['remove_locks_error'] = 'Ett fel inträffade när låsen skulle tas bort.';
+$_lang['reports'] = 'Rapporter';
+$_lang['resource_groups'] = 'Resursgrupper';
+$_lang['resource_groups_desc'] = 'Hantera de grupper som resurserna tillhör.';
+$_lang['search'] = 'Sök';
+$_lang['search_desc'] = 'Sök efter resurser.';
+$_lang['security'] = 'Säkerhet';
+$_lang['site'] = 'Webbplats';
+$_lang['support'] = 'Support';
+$_lang['support_desc'] = '';
+$_lang['site_schedule'] = 'Schema';
+$_lang['site_schedule_desc'] = 'Se alla resurser som kommer att publiceras eller avpubliceras under den närmaste tiden.';
+$_lang['system'] = 'System';
+$_lang['system_settings'] = 'Systeminställningar';
+$_lang['system_settings_desc'] = 'Ändra eller skapa systeminställningar för hela webbplatsen.';
+$_lang['tools'] = 'Verktyg';
+$_lang['user'] = 'Användare';
+$_lang['user_management'] = 'Hantera användare';
+$_lang['user_management_desc'] = 'Lägg till, uppdatera och tilldela rättigheter till användare.';
+$_lang['user_group_management'] = 'Åtkomstkontroller';
+$_lang['user_group_management_desc'] = 'Hantera användargrupper, roller och åtkomstpolicyer.';
+$_lang['view_logging'] = 'Aktiviteter i hanteraren';
+$_lang['view_logging_desc'] = 'Se de senaste aktiviteterna i hanteraren.';
+$_lang['view_sysinfo'] = 'Systeminformation';
+$_lang['view_sysinfo_desc'] = 'Se serverinformation såsom phpinfo, MySQL db-info med mera.';
+$_lang['wiki'] = 'Wiki';
+$_lang['wiki_desc'] = 'Öppna MODx Confluence wiki, där dokumentationen för MODx Revolution finns lagrad.';

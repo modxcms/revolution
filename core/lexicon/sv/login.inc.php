@@ -1,0 +1,32 @@
+<?php
+/**
+ * Login Swedish lexicon topic
+ *
+ * @language sv
+ * @package modx
+ * @subpackage lexicon
+ */
+$_lang['login_activation_key_err'] = 'Aktiveringsnyckeln stämmer inte! Kontrollera ditt aktiveringsmeddelande och försäkra dig om att du laddade rätt URL.';
+$_lang['login_blocked_admin'] = 'Du har blivit blockerad från hanteraren av en administratör.';
+$_lang['login_blocked_error'] = 'Du är tillfälligt blockerad och kan inte logga in. Försök senare.';
+$_lang['login_blocked_ip'] = 'Du får inte logga in från din nuvarande IP-adress.';
+$_lang['login_blocked_time'] = 'Du får inte logga in just nu. Försök senare.';
+$_lang['login_blocked_too_many_attempts'] = 'Du har blivit blockerad på grund av för många felaktiga inloggningsförsök.';
+$_lang['login_button'] = 'Logga in';
+$_lang['login_cannot_locate_account'] = 'Det kontot kan inte lokaliseras. Kontrollera användarnamnet och skriv om lösenordet för att försöka igen.';
+$_lang['login_copyright'] = '&copy; 2005-2010 av <a href="http://modxcms.com/" target="_blank">MODx CMF Team</a>. <strong>MODx</strong>&trade; är licensierad under GPL.';
+$_lang['login_email_label'] = 'Kontots e-postadress:';
+$_lang['login_err_unknown'] = 'Ett okänt fel inträffade när du försökte logga in.';
+$_lang['login_forget_your_login'] = 'Glömt dina inloggningsuppgifter?';
+$_lang['login_hostname_error'] = 'Ditt värddatornamn pekar inte tillbaka till din IP-adress.';
+$_lang['login_message'] = 'Fyll i dina inloggningsuppgifter för att starta din session. Det är skillnad mellan stora och små bokstäver i ditt användarnamn och lösenord.';
+$_lang['login_modx_support'] = '<p>Med stöd av:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>MODx-communityn</strong></a></p>';
+$_lang['login_password'] = 'Lösenord: ';
+$_lang['login_password_reset_act_sent'] = 'En lösenordsåterställning har skickats via e-post. Titta i din inkorg.';
+$_lang['login_remember'] = 'Kom ihåg mig';
+$_lang['login_send_activation_email'] = 'Skicka aktiveringsmeddelande';
+$_lang['login_title'] = 'Inloggning för hanteraren MODx CMF';
+$_lang['login_user_err_nf_email'] = 'Det finns ingen användare med den e-postadressen. Försök igen.';
+$_lang['login_username'] = 'Användarnamn: ';
+$_lang['login_username_password_incorrect'] = 'Det användarnamn eller lösenord du angav är inte korrekt. Kontrollera användarnamnet, skriv om lösenordet och gör ett nytt försök.';
+$_lang['login_user_inactive'] = 'Ditt användarkonto har inaktiverats. Kontakt din systemadministratör för att aktivera kontot.';
