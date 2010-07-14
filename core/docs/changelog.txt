@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Removed powered-by text in request headers in AJAX calls
 - [#MODX-2143] Fixed issue where if filemanager_path was set differently that URL insertion on TVs or drag/drop was incorrect
 - Added urlencode/urldecode to filters
 - [#MODX-2132] Remove friendly_url_prefix reference that was causing PHP warnings without breaking makeUrl()

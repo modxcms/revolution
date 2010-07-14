@@ -14,12 +14,10 @@ MODx.Layout = function(config){
     config = config || {};
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext3/resources/images/default/s.gif';
     Ext.Ajax.defaultHeaders = {
-        'Powered-By': 'MODx'
-        ,'modAuth': config.auth
+        'modAuth': config.auth
     };
     Ext.Ajax.extraParams = {
-        'Powered-By': 'MODx'
-        ,'HTTP_MODAUTH': config.auth
+        'HTTP_MODAUTH': config.auth
     };
     MODx.siteId = config.auth;
 
