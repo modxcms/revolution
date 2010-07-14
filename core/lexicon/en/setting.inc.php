@@ -349,6 +349,12 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Delete least-recently-accessed
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb Cache Source Files';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Whether or not to cache source files as they are loaded. Recommended to off.';
 
+$_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop';
+$_lang['setting_phpthumb_zoomcrop_desc'] = 'The default zc setting for phpThumb when used in MODx. Defaults to 0 to prevent zoom cropping.';
+
+$_lang['setting_phpthumb_far'] = 'phpThumb Force Aspect Ratio';
+$_lang['setting_phpthumb_far_desc'] = 'The default far setting for phpThumb when used in MODx. Defaults to C to force aspect ratio toward the center.';
+
 $_lang['setting_publish_default'] = 'Published default';
 $_lang['setting_publish_default_desc'] = 'Select \'Yes\' to make all new resources published by default.';
 $_lang['setting_publish_default_err'] = 'Please state whether or not you want documents to be published by default.';

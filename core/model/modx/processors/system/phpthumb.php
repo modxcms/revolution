@@ -30,12 +30,14 @@ if (!is_dir($cachePath)) $modx->cacheManager->writeTree($cachePath);
 $phpThumb->config_cache_directory = $cachePath;
 $phpThumb->setCacheDirectory();
 
-$phpThumb->config_cache_maxage = (float)$modx->getOption('phpthumb_cache_maxage',$scriptProperties,30) * 86400;
-$phpThumb->config_cache_maxsize = (float)$modx->getOption('phpthumb_cache_maxsize',$scriptProperties,100) * 1024 * 1024;
-$phpThumb->config_cache_maxfiles = (int)$modx->getOption('phpthumb_cache_maxfiles',$scriptProperties,10000);
-$phpThumb->cache_source_enabled = (boolean)$modx->getOption('phpthumb_cache_source_enabled',$scriptProperties,false);
-$phpThumb->cache_source_directory = $cachePath.'source/';
-$phpThumb->allow_local_http_src = true;
+$phpThumb->setParameter('config_cache_maxage',(float)$modx->getOption('phpthumb_cache_maxage',$scriptProperties,30) * 86400);
+$phpThumb->setParameter('config_cache_maxsize',(float)$modx->getOption('phpthumb_cache_maxsize',$scriptProperties,100) * 1024 * 1024);
+$phpThumb->setParameter('config_cache_maxfiles',(int)$modx->getOption('phpthumb_cache_maxfiles',$scriptProperties,10000));
+$phpThumb->setParameter('cache_source_enabled',(boolean)$modx->getOption('phpthumb_cache_source_enabled',$scriptProperties,false));
+$phpThumb->setParameter('cache_source_directory',$cachePath.'source/');
+$phpThumb->setParameter('allow_local_http_src',true);
+$phpThumb->setParameter('zc',$modx->getOption('zc',$_REQUEST,$modx->getOption('phpthumb_zoomcrop',$scriptProperties,0)));
+$phpThumb->setParameter('far',$modx->getOption('far',$_REQUEST,$modx->getOption('phpthumb_far',$scriptProperties,'C')));
 
 /* iterate through properties */
 foreach ($scriptProperties as $property => $value) {

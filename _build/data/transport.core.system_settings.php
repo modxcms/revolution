@@ -810,6 +810,24 @@ $settings['phpthumb_cache_source_enabled']->fromArray(array (
   'area' => 'phpthumb',
   'editedon' => null,
 ), '', true, true);
+$settings['phpthumb_zoomcrop']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_zoomcrop']->fromArray(array (
+  'key' => 'phpthumb_zoomcrop',
+  'value' => '0',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_far']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_far']->fromArray(array (
+  'key' => 'phpthumb_far',
+  'value' => 'C',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
 
 $settings['publish_default']= $xpdo->newObject('modSystemSetting');
 $settings['publish_default']->fromArray(array (

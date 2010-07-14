@@ -63,8 +63,8 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             if ($thumbWidth > $imageWidth) $thumbWidth = $imageWidth;
             if ($thumbHeight > $imageHeight) $thumbHeight = $imageHeight;
 
-            $thumb = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$thumbWidth.'&h='.$thumbHeight.'&zc=1';
-            $image = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$imageWidth.'&h='.$imageHeight.'&zc=1';
+            $thumb = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$thumbWidth.'&h='.$thumbHeight;
+            $image = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$imageWidth.'&h='.$imageHeight;
            
         } else {
             $thumb = $image = $modx->getOption('manager_url').'templates/default/images/restyle/nopreview.jpg';
