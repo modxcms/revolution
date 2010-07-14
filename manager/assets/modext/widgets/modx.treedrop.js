@@ -33,7 +33,7 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                     case 'snippet': win = true; break;
                     case 'chunk': win = true; break;
                     case 'tv': win = true; break;
-                    case 'file': v = data.node.attributes.id; break;
+                    case 'file': v = data.node.attributes.url; break;
                     default: return false; break;
                 }
                 if (win) {

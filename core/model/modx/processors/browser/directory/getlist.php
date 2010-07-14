@@ -49,6 +49,7 @@ $editAction = false;
 $act = $modx->getObject('modAction',array('controller' => 'system/file/edit'));
 if ($act) { $editAction = $act->get('id'); }
 
+$fileManagerPath = $modx->getOption('filemanager_path',$scriptProperties,$modx->getOption('rb_base_url'));
 
 /* iterate through directories */
 foreach (new DirectoryIterator($fullpath) as $file) {
@@ -95,6 +96,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             'page' => !empty($editAction) ? '?a='.$editAction.'&file='.$encFile : null,
             'perms' => $octalPerms,
             'path' => $relativeRootPath.$fileName,
+            'url' => str_replace('//','/',$fileManagerPath.$dir.$fileName),
             'file' => $encFile,
         );
     }

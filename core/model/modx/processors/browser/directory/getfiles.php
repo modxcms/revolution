@@ -21,6 +21,8 @@ $dir = !isset($scriptProperties['dir']) || $scriptProperties['dir'] == 'root' ? 
 $dir = $modx->fileHandler->sanitizePath($dir);
 $fullpath = $root.'/'.$dir;
 
+$fileManagerPath = $modx->getOption('filemanager_path',$scriptProperties,$modx->getOption('rb_base_url',null,''));
+
 $imagesExts = array('jpg','jpeg','png','gif');
 /* iterate */
 $files = array();
@@ -37,10 +39,11 @@ foreach (new DirectoryIterator($fullpath) as $file) {
 	$filesize = @filesize($filePathName);
         /* calculate url */
 	if (!empty($scriptProperties['prependUrl'])) {
-            $url = $scriptProperties['prependUrl'].$dir.'/'.$fileName;
+            $url = $fileManagerPath.$scriptProperties['prependUrl'].$dir.($dir != '' ? '/' : '').$fileName;
         } else {
-            $url = $modx->getOption('rb_base_url').$dir.'/'.$fileName;
+            $url = $fileManagerPath.$dir.($dir != '' ? '/' : '').$fileName;
         }
+        $url = str_replace('//','/',$url);
 
         /* get thumbnail */
         if (in_array($fileExtension,$imagesExts)) {
