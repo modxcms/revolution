@@ -168,14 +168,10 @@ class modContext extends modAccessibleObject {
                 if ($args != '' && $config['friendly_urls'] == 1) {
                     /* add ? to $args if missing */
                     $c= substr($args, 0, 1);
-                    if (strpos($config['friendly_url_prefix'], '?') === false) {
-                        if ($c == '&')
-                            $args= '?' . substr($args, 1);
-                        elseif ($c != '?') $args= '?' . $args;
-                    } else {
-                        if ($c == '?')
-                            $args= '&' . substr($args, 1);
-                        elseif ($c != '&') $args= '&' . $args;
+                    if ($c == '&') {
+                        $args= '?' . substr($args, 1);
+                    } elseif ($c != '?') {
+                        $args= '?' . $args;
                     }
                 }
                 elseif ($args != '') {
