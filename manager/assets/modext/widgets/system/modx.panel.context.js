@@ -74,7 +74,9 @@ MODx.panel.Context = function(config) {
                     'afteredit': {fn:function() { this.markDirty(); },scope:this}
                 }
             }]
-        }])]
+        }],{
+            id: 'modx-context-tabs'
+        })]
         ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}

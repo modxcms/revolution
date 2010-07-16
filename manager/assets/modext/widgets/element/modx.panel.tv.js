@@ -194,7 +194,9 @@ MODx.panel.TV = function(config) {
                     ,'afterRemoveRow': {fn:this.markDirty,scope:this}
                 }
             }]
-        }])]
+        }],{
+            id: 'modx-tv-tabs'
+        })]
         ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}

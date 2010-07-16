@@ -101,7 +101,9 @@ MODx.panel.Snippet = function(config) {
             ,elementPanel: 'modx-panel-snippet'
             ,elementId: config.snippet
             ,elementType: 'modSnippet'
-        }])]
+        }],{
+            id: 'modx-snippet-tabs'
+        })]
         ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}

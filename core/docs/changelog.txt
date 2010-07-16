@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added missing tabpanel IDs for various tabpanels across mgr ui
 - Fixed bug that was strtolower'ing any strings in tabNew FC rule
 - Added grid renderer to FC grid
 - Tweaks to general UX, other slight cosmetic fixes

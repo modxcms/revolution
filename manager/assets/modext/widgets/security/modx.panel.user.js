@@ -19,6 +19,7 @@ MODx.panel.User = function(config) {
             ,id: 'modx-user-header'
         },{
             xtype: 'modx-tabs'
+            ,id: 'modx-user-tabs'
             ,deferredRender: false
             ,border: true
             ,defaults: {

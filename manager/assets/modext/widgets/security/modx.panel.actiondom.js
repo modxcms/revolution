@@ -26,7 +26,9 @@ MODx.panel.ActionDom = function(config) {
                 ,preventRender: true
                 ,xtype: 'modx-grid-actiondom'
             }]
-        }])]
+        }],{
+            id: 'modx-form-customization-tabs'
+        })]
     });
     MODx.panel.ActionDom.superclass.constructor.call(this,config);
 };

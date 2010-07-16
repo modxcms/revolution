@@ -19,6 +19,7 @@ MODx.panel.UserGroup = function(config) {
                 ,autoHeight: true
                 ,border: true
             }
+            ,id: 'modx-usergroup-tabs'
             ,forceLayout: true
             ,deferredRender: false
             ,stateful: true

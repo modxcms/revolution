@@ -124,7 +124,9 @@ MODx.panel.Plugin = function(config) {
             ,elementPanel: 'modx-panel-plugin'
             ,elementId: config.plugin
             ,elementType: 'modPlugin'
-        }])]
+        }],{
+            id: 'modx-plugin-tabs'
+        })]
         ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}

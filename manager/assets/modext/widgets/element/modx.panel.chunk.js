@@ -102,7 +102,9 @@ MODx.panel.Chunk = function(config) {
             ,elementPanel: 'modx-panel-chunk'
             ,elementId: config.chunk
             ,elementType: 'modChunk'
-        }])]
+        }],{
+            id: 'modx-chunk-tabs'
+        })]
         ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
