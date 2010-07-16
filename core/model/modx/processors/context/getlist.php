@@ -23,7 +23,7 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
 /* query contexts */
 $c = $modx->newQuery('modContext');
-$c->sortby('`'.$sort.'`',$dir);
+$c->sortby($modx->getSelectColumns('modContext','modContext','',array($sort)),$dir);
 if ($isLimit) $c->limit($limit,$start);
 $contexts = $modx->getCollection('modContext',$c);
 $count = $modx->getCount('modContext');

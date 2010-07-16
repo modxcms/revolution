@@ -26,7 +26,9 @@ if ($context->remove() == false) {
 }
 
 /* remove all resources in context */
-$modx->exec("DELETE FROM {$modx->getTableName('modResource')} WHERE `context_key` = '".$context->get('key')."';");
+$modx->removeCollection('modResource',array(
+    'context_key' => $context->get('key'),
+));
 
 /* log manager action */
 $modx->logManagerAction('context_delete','modContext',$context->get('id'));

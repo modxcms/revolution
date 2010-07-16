@@ -9,20 +9,22 @@ if (!empty($g[1])) {
     $c->where(array(
         'parent' => $g[1],
     ));
-    $c->sortby('category','ASC');
+    $c->sortby($modx->getSelectColumns('modCategory','modCategory','',array('category')),'ASC');
 } else {
     /* if trying to grab all root categories */
     $c = $modx->newQuery('modCategory');
     $c->where(array(
         'parent' => 0,
     ));
-    $c->sortby('category','ASC');
+    $c->sortby($modx->getSelectColumns('modCategory','modCategory','',array('category')),'ASC');
 }
 
 $c->select($modx->getSelectColumns('modCategory','modCategory'));
-$c->select('COUNT(`Children`.`id`) AS `childrenCount`');
+$c->select(array(
+    'COUNT('.$modx->getSelectColumns('modCategory','Children','',array('id')).') AS `childrenCount`',
+));
 $c->leftJoin('modCategory','Children');
-$c->groupby('modCategory.id');
+$c->groupby($modx->getSelectColumns('modCategory','modCategory','',array('id')));
 
 /* set permissions as css classes */
 $class = 'icon-category folder';

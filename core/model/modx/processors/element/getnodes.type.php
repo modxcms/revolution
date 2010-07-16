@@ -10,16 +10,16 @@ $elementClassKey = $ar_typemap[$g[1]];
 $c = $modx->newQuery('modCategory');
 $c->select($modx->getSelectColumns('modCategory','modCategory'));
 $c->select('
-    COUNT(`'.$elementClassKey.'`.`id`) AS `elementCount`,
-    COUNT(`Children`.`id`) AS `childrenCount`
+    COUNT('.$modx->getSelectColumns($elementClassKey,$elementClassKey,'',array('id')).') AS `elementCount`,
+    COUNT('.$modx->getSelectColumns('modCategory','Children','',array('id')).') AS `childrenCount`
 ');
-$c->leftJoin($elementClassKey,$elementClassKey,'`'.$elementClassKey.'`.`category` = `modCategory`.`id`');
+$c->leftJoin($elementClassKey,$elementClassKey,$modx->getSelectColumns($elementClassKey,$elementClassKey,'',array('category')).' = '.$modx->getSelectColumns('modCategory','modCategory','',array('id')));
 $c->leftJoin('modCategory','Children');
 $c->where(array(
     'modCategory.parent' => 0,
 ));
-$c->sortby('`category`','ASC');
-$c->groupby('`modCategory`.`id`');
+$c->sortby($modx->getSelectColumns('modCategory','modCategory','',array('category')),'ASC');
+$c->groupby($modx->getSelectColumns('modCategory','modCategory','',array('id')));
 $categories = $modx->getCollection('modCategory',$c);
 
 /* set permissions as css classes */
