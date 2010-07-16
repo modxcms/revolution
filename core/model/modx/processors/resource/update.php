@@ -229,6 +229,7 @@ if ($resource->get('id') == $modx->getOption('site_start')
 
 /* Keep original publish state, if change is not permitted */
 if (!$modx->hasPermission('publish_document')) {
+    $scriptProperties['published'] = $resource->get('published');
     $scriptProperties['publishedon'] = $resource->get('publishedon');
     $scriptProperties['publishedby'] = $resource->get('publishedby');
     $scriptProperties['pub_date'] = $resource->get('pub_date');
@@ -237,7 +238,7 @@ if (!$modx->hasPermission('publish_document')) {
 
 /* invoke OnBeforeDocFormSave event */
 $modx->invokeEvent('OnBeforeDocFormSave',array(
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $resource->get('id'),
     'resource' => &$resource,
 ));
@@ -385,7 +386,7 @@ if (isset($scriptProperties['resource_groups'])) {
 
 /* invoke OnDocFormSave event */
 $modx->invokeEvent('OnDocFormSave',array(
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $resource->get('id'),
     'resource' => & $resource
 ));
@@ -411,7 +412,7 @@ $resource->removeLock();
 
 $returnArray = $resource->get(array_diff(array_keys($resource->_fields), array('content','ta')));
 foreach ($returnArray as $k => $v) {
-    if (strpos($k,'tv') == 0) {
+    if (strpos($k,'tv') === 0) {
         unset($returnArray[$k]);
     }
 }

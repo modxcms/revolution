@@ -79,45 +79,59 @@ if ($modx->error->hasError()) return $modx->error->failure();
 
 /* publish and unpublish dates */
 $now = time();
-if (empty($scriptProperties['pub_date'])) {
-    $scriptProperties['pub_date'] = 0;
-} else {
-    $scriptProperties['pub_date'] = strtotime($scriptProperties['pub_date']);
-    if ($scriptProperties['pub_date'] < $now) $scriptProperties['published'] = 1;
-    if ($scriptProperties['pub_date'] > $now) $scriptProperties['published'] = 0;
+if (isset($scriptProperties['pub_date'])) {
+    if (empty($scriptProperties['pub_date'])) {
+        $scriptProperties['pub_date'] = 0;
+    } else {
+        $scriptProperties['pub_date'] = strtotime($scriptProperties['pub_date']);
+        if ($scriptProperties['pub_date'] < $now) $scriptProperties['published'] = 1;
+        if ($scriptProperties['pub_date'] > $now) $scriptProperties['published'] = 0;
+    }
+}
+if (isset($scriptProperties['unpub_date'])) {
+    if (empty($scriptProperties['unpub_date'])) {
+        $scriptProperties['unpub_date'] = 0;
+    } else {
+        $scriptProperties['unpub_date'] = strtotime($scriptProperties['unpub_date']);
+        if ($scriptProperties['unpub_date'] < $now) {
+            $scriptProperties['published'] = 0;
+        }
+    }
 }
 
-if (empty($scriptProperties['unpub_date'])) {
-    $scriptProperties['unpub_date'] = 0;
-} else {
-    $scriptProperties['unpub_date'] = strtotime($scriptProperties['unpub_date']);
-    if ($scriptProperties['unpub_date'] < $now) {
-        $scriptProperties['published'] = 0;
+/* set publishedon date if publish change is different */
+if (isset($scriptProperties['published']) && $scriptProperties['published'] != $resource->get('published')) {
+    if (empty($scriptProperties['published'])) { /* if unpublishing */
+        $scriptProperties['publishedon'] = 0;
+        $scriptProperties['publishedby'] = 0;
+    } else { /* if publishing */
+        $scriptProperties['publishedon'] = !empty($scriptProperties['publishedon']) ? strtotime($scriptProperties['publishedon']) : time();
+        $scriptProperties['publishedby'] = $modx->user->get('id');
     }
+} else { /* if no change, unset publishedon/publishedby */
+    if (empty($scriptProperties['published'])) { /* allow changing of publishedon date if resource is published */
+        unset($scriptProperties['publishedon']);
+    }
+    unset($scriptProperties['publishedby']);
 }
 
 /* Deny publishing if not permitted */
 if (!$modx->hasPermission('publish_document')) {
-    $scriptProperties['pub_date'] = 0;
-    $scriptProperties['unpub_date'] = 0;
-    $scriptProperties['published'] = 0;
+    $scriptProperties['published'] = $resource->get('published');
+    $scriptProperties['publishedon'] = $resource->get('publishedon');
+    $scriptProperties['publishedby'] = $resource->get('publishedby');
+    $scriptProperties['pub_date'] = $resource->get('pub_date');
+    $scriptProperties['unpub_date'] = $resource->get('unpub_date');
 }
-
-if (!isset($scriptProperties['publishedon']) || $scriptProperties['publishedon'] == '') {
-    $scriptProperties['publishedon'] = $scriptProperties['published'] ? time() : 0;
-} else {
-    $scriptProperties['publishedon'] = strtotime($scriptProperties['publishedon']);
-}
-$scriptProperties['publishedby'] = $scriptProperties['published'] ? $modx->user->get('id') : 0;
-
 /* get parent */
-$oldparent = $modx->getObject('modResource',$resource->get('parent'));
-
-if ($resource->get('id') == $modx->getOption('site_start') && $scriptProperties['published'] == 0) {
-    return $modx->error->failure($modx->lexicon('document_err_unpublish_sitestart'));
+$oldparent_id = $resource->get('parent');
+if ($resource->get('id') == $modx->getOption('site_start')
+&& (isset($scriptProperties['published']) && empty($scriptProperties['published']))) {
+    return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart'));
 }
-if ($resource->get('id') == $modx->getOption('site_start') && ($scriptProperties['pub_date'] != '0' || $scriptProperties['unpub_date'] != '0')) {
-    return $modx->error->failure($modx->lexicon('document_err_unpublish_sitestart_dates'));
+if ($resource->get('id') == $modx->getOption('site_start')
+&& (!empty($scriptProperties['pub_date']) || !empty($scriptProperties['unpub_date']))) {
+    return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart_dates'));
 }
 
 $count_children = $modx->getCount('modResource',array('parent' => $resource->get('id')));
@@ -130,10 +144,12 @@ if (!$modx->hasPermission('publish_document')) {
     $scriptProperties['unpub_date'] = $resource->get('unpub_date');
 }
 
+
 /* invoke OnBeforeDocFormSave event */
 $modx->invokeEvent('OnBeforeDocFormSave',array(
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
     'id' => $resource->get('id'),
+    'resource' => &$resource,
 ));
 
 /* Now save data */
@@ -148,37 +164,40 @@ if ($resource->save() == false) {
 
 /* Save resource groups */
 if (isset($scriptProperties['resource_groups'])) {
-    $_GROUPS = $modx->fromJSON($scriptProperties['resource_groups']);
-    foreach ($_GROUPS as $id => $group) {
-        if ($group['access']) {
-            $rgr = $modx->getObject('modResourceGroupResource',array(
-                'document_group' => $group['id'],
-                'document' => $resource->get('id'),
-            ));
-            if ($rgr == null) {
-                $rgr = $modx->newObject('modResourceGroupResource');
+    $resourceGroups = $modx->fromJSON($scriptProperties['resource_groups']);
+    if (is_array($resourceGroups)) {
+        foreach ($resourceGroups as $id => $resourceGroupAccess) {
+            if ($resourceGroupAccess['access']) {
+                $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
+                    'document_group' => $resourceGroupAccess['id'],
+                    'document' => $resource->get('id'),
+                ));
+                if (empty($resourceGroupResource)) {
+                    $resourceGroupResource = $modx->newObject('modResourceGroupResource');
+                }
+                $resourceGroupResource->set('document_group',$resourceGroupAccess['id']);
+                $resourceGroupResource->set('document',$resource->get('id'));
+                $resourceGroupResource->save();
+            } else {
+                $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
+                    'document_group' => $resourceGroupAccess['id'],
+                    'document' => $resource->get('id'),
+                ));
+                if ($resourceGroupResource && $resourceGroupResource instanceof modResourceGroupResource) {
+                    $resourceGroupResource->remove();
+                }
             }
-            $rgr->set('document_group',$group['id']);
-            $rgr->set('document',$resource->get('id'));
-            $rgr->save();
-        } else {
-            $rgr = $modx->getObject('modResourceGroupResource',array(
-                'document_group' => $group['id'],
-                'document' => $resource->get('id'),
-            ));
-            if ($rgr == null) continue;
-            $rgr->remove();
         }
     }
 }
-
-/* TVs save */
+/* save TVs */
 if (!empty($scriptProperties['tvs'])) {
+    $tmplvars = array ();
     $c = $modx->newQuery('modTemplateVar');
     $c->setClassAlias('tv');
     $c->innerJoin('modTemplateVarTemplate', 'tvtpl', array(
         'tvtpl.tmplvarid = tv.id',
-        'tvtpl.templateid' => $scriptProperties['template']
+        'tvtpl.templateid' => $resource->get('template'),
     ));
     $c->leftJoin('modTemplateVarResource', 'tvc', array(
         'tvc.tmplvarid = tv.id',
@@ -205,6 +224,7 @@ if (!empty($scriptProperties['tvs'])) {
                 break;
             case 'date':
                 $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
+                break;
             default:
                 /* handles checkboxes & multiple selects elements */
                 if (is_array($value)) {
@@ -256,7 +276,7 @@ $modx->invokeEvent('OnDocFormSave',array(
 /* log manager action */
 $modx->logManagerAction('save_resource','modResource',$resource->get('id'));
 
-if ($scriptProperties['syncsite'] == 1) {
+if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCache'])) {
     /* empty cache */
     $cacheManager= $modx->getCacheManager();
     $cacheManager->clearCache(array (
@@ -272,7 +292,12 @@ if ($scriptProperties['syncsite'] == 1) {
 
 $resource->removeLock();
 
-$resourceArray = $resource->get(array('id','alias'));
-$resourceArray['preview_url'] = $modx->makeUrl($resource->get('id'));
-
-return $modx->error->success('',$resourceArray);
+$returnArray = $resource->get(array_diff(array_keys($resource->_fields), array('content','ta')));
+foreach ($returnArray as $k => $v) {
+    if (strpos($k,'tv') === 0) {
+        unset($returnArray[$k]);
+    }
+}
+$returnArray['class_key'] = $resource->get('class_key');
+$returnArray['preview_url'] = $modx->makeUrl($resource->get('id'));
+return $modx->error->success('',$returnArray);

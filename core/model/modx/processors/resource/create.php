@@ -224,6 +224,8 @@ if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modT
 
 /* deny publishing if not permitted */
 if (!$modx->hasPermission('publish_document')) {
+    $scriptProperties['publishedon'] = 0;
+    $scriptProperties['publishedby'] = 0;
     $scriptProperties['pub_date'] = 0;
     $scriptProperties['unpub_date'] = 0;
     $scriptProperties['published'] = 0;
@@ -263,7 +265,7 @@ $resource->set('menuindex',!empty($menuindex) ? $menuindex : 0);
 
 /* invoke OnBeforeDocFormSave event */
 $modx->invokeEvent('OnBeforeDocFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => 0,
     'resource' => &$resource,
 ));
@@ -319,7 +321,7 @@ if ($resource->get('id') == $modx->getOption('site_start')) {
 
 /* invoke OnDocFormSave event */
 $modx->invokeEvent('OnDocFormSave', array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => $resource->get('id'),
     'resource' => &$resource,
 ));

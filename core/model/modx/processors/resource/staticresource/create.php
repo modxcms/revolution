@@ -19,7 +19,7 @@ $resource->set('menuindex',!empty($menuindex) ? $menuindex : 0);
 
 /* invoke OnBeforeDocFormSave event */
 $modx->invokeEvent('OnBeforeDocFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => 0,
     'resource' => &$resource,
 ));
@@ -72,7 +72,7 @@ if ($resource->get('id') == $modx->getOption('site_start')) {
 
 /* invoke OnDocFormSave event */
 $modx->invokeEvent('OnDocFormSave',array(
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
     'id' => $resource->get('id'),
     'resource' => & $resource
 ));
