@@ -331,6 +331,7 @@ MODx.window.CreateSetting = function(config) {
         }]
     });
     MODx.window.CreateSetting.superclass.constructor.call(this,config);
+    this.on('show',function() { this.reset(); },this);
 };
 Ext.extend(MODx.window.CreateSetting,MODx.Window);
 Ext.reg('modx-window-setting-create',MODx.window.CreateSetting);
