@@ -55,7 +55,7 @@ class modActionDom extends modAccessibleSimpleObject {
                 }
                 break;
             case 'tabNew':
-                $title = strtolower($this->get('value'));
+                $title = $this->get('value');
                 $rule = 'MODx.addTab("'.$this->get('container').'",{title:"'.$title.'",id:"'.$this->get('name').'"});';
                 break;
             case 'tvMove':
