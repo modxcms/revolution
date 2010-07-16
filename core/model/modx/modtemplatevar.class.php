@@ -241,7 +241,7 @@ class modTemplateVar extends modElement {
         /* process any TV commands in value */
         $value= $this->processBindings($value, $resourceId);
 
-        $param= array ();
+        $params= array ();
         if ($paramstring= $this->get('display_params')) {
             $cp= explode("&", $paramstring);
             foreach ($cp as $p => $v) {
@@ -330,7 +330,7 @@ class modTemplateVar extends modElement {
 
         $this->xpdo->smarty->assign('tv',$this);
 
-        $param= array ();
+        $params= array ();
         if ($paramstring= $this->get('display_params')) {
             $cp= explode("&", $paramstring);
             foreach ($cp as $p => $v) {
