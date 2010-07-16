@@ -6,9 +6,6 @@ MODx.panel.ImportResources = function(config) {
             action: 'index'
         }
         ,id: 'modx-panel-import-resources'
-        ,baseParams: {
-            action: 'clear'
-        }
         ,buttonAlign: 'center'
         ,items: [{
             html: '<h2>'+_('import_site_resource')+'</h2>'
@@ -18,9 +15,10 @@ MODx.panel.ImportResources = function(config) {
         },{
             layout: 'form'
             ,bodyStyle: 'padding: 15px;'
-            ,labelWidth: 200
+            ,labelWidth: 250
             ,width: '100%'
             ,autoHeight: true
+            ,border: true
             ,buttonAlign: 'center'
             ,items: [{
                 html: '<p>'+_('import_site_resource_message')+'</p>'
@@ -31,7 +29,7 @@ MODx.panel.ImportResources = function(config) {
                 ,name: 'import_base_path'
                 ,id: 'modx-import-base-path'
                 ,labelSeparator: ''
-                ,width: 300
+                ,anchor: '100%'
                 ,value: ''
             },{
                 xtype: 'textfield'
@@ -39,7 +37,7 @@ MODx.panel.ImportResources = function(config) {
                 ,name: 'import_resource_class'
                 ,id: 'modx-import-resource-class'
                 ,labelSeparator: ''
-                ,width: 300
+                ,anchor: '100%'
                 ,value: ''
             },{
                 xtype: 'textfield'
@@ -47,7 +45,7 @@ MODx.panel.ImportResources = function(config) {
                 ,name: 'import_allowed_extensions'
                 ,id: 'modx-import-allowed-extensions'
                 ,labelSeparator: ''
-                ,width: 300
+                ,anchor: '100%'
                 ,value: ''
             },{
                 xtype: 'textfield'
@@ -55,20 +53,23 @@ MODx.panel.ImportResources = function(config) {
                 ,name: 'import_element'
                 ,id: 'modx-import-element'
                 ,labelSeparator: ''
+                ,anchor: '100%'
                 ,value: 'body'
-            },{
+            },MODx.PanelSpacer,{
                 xtype: 'hidden'
                 ,name: 'import_context'
                 ,id: 'modx-import-context'
+                ,anchor: '100%'
                 ,value: 'web'
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('import_parent_document')
                 ,name: 'import_parent'
                 ,id: 'modx-import-parent'
+                ,anchor: '100%'
                 ,labelSeparator: ''
                 ,value: 0
-            },{
+            },MODx.PanelSpacer,{
                 xtype: 'modx-tree-resource-simple'
                 ,title: _('import_use_doc_tree')
                 ,url: MODx.config.connectors_url+'resource/index.php'

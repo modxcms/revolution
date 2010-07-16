@@ -6,9 +6,6 @@ MODx.panel.ImportHTML = function(config) {
             action: 'html'
         }
         ,id: 'modx-panel-import-html'
-        ,baseParams: {
-            action: 'clear'
-        }
         ,buttonAlign: 'center'
         ,items: [{
             html: '<h2>'+_('import_site_html')+'</h2>'
@@ -18,7 +15,8 @@ MODx.panel.ImportHTML = function(config) {
         },{
             layout: 'form'
             ,bodyStyle: 'padding: 15px;'
-            ,labelWidth: 200
+            ,border: true
+            ,labelWidth: 250
             ,width: '100%'
             ,autoHeight: true
             ,buttonAlign: 'center'
@@ -30,21 +28,24 @@ MODx.panel.ImportHTML = function(config) {
                 ,fieldLabel: _('import_element')
                 ,name: 'import_element'
                 ,id: 'modx-import-element'
-                ,width: 250
+                ,labelSeparator: ''
+                ,anchor: '100%'
                 ,value: 'body'
             },{
                 xtype: 'hidden'
                 ,name: 'import_context'
                 ,id: 'modx-import-context'
                 ,value: 'web'
+                ,anchor: '100%'
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('import_parent_document')
                 ,name: 'import_parent'
                 ,id: 'modx-import-parent'
-                ,width: 250
+                ,labelSeparator: ''
+                ,anchor: '100%'
                 ,value: 0
-            },{
+            },MODx.PanelSpacer,{
                 xtype: 'modx-tree-resource-simple'
                 ,title: _('import_use_doc_tree')
                 ,url: MODx.config.connectors_url+'resource/index.php'

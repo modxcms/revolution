@@ -87,6 +87,9 @@ MODx.panel.UpdateProfile = function(config) {
         }
         ,layout: 'form'
         ,buttonAlign: 'center'
+        ,bodyStyle: 'padding: 15px;'
+        ,defaults: { border: false ,msgTarget: 'side' }
+        ,labelWidth: 150
         ,items: [{
             xtype: 'textfield'
             ,fieldLabel: _('user_full_name')
@@ -183,6 +186,9 @@ MODx.panel.ChangeProfilePassword = function(config) {
         ,frame: true
         ,layout: 'form'
         ,buttonAlign: 'center'
+        ,bodyStyle: 'padding: 15px;'
+        ,defaults: { border: false ,msgTarget: 'side' }
+        ,labelWidth: 150
         ,items: [{
             xtype: 'textfield'
             ,fieldLabel: _('password_old')
