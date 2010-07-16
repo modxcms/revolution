@@ -60,7 +60,7 @@ MODx.panel.PDFirst = function(config) {
             ,autoHeight: true
         },{
             html: '<p>'+_('package_obtain_method')+'</p>'   
-            ,style: 'padding-bottom: 2em'
+            ,style: 'padding-bottom: 20px'
             ,autoHeight: true
         },{
             boxLabel: _('provider_select')
@@ -128,7 +128,7 @@ MODx.panel.PDSelProv = function(config) {
             ,autoHeight: true
         },{
             html: '<p>'+_('provider_select_desc')+'</p>'
-            ,style: 'padding-bottom: 2em;'
+            ,style: 'padding-bottom: 20px;'
             ,autoHeight: true
         },{
             fieldLabel: _('provider')

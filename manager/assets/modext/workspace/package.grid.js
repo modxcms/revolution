@@ -55,7 +55,7 @@ MODx.grid.Package = function(config) {
         ,autosave: true
         ,tbar: [{
             text: _('package_add')
-            ,handler: { xtype: 'modx-window-package-downloader' }
+            ,handler: this.loadPackageDownloader
         },{
             text: _('download_extras')
             ,handler: this.loadMainProvider
@@ -80,6 +80,16 @@ MODx.grid.Package = function(config) {
 };
 Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     console: null
+
+    ,loadPackageDownloader: function(btn,e) {
+        var x = 'modx-window-package-downloader';
+        if (!this.windows[x]) {
+            this.windows[x] = MODx.load({ xtype: x });
+        }
+        this.windows[x].config.firstPanel = 'modx-pd-start';
+        this.windows[x].config.showFirstPanel = true;
+        this.windows[x].show(e.target);
+    }
     
     ,loadMainProvider: function(btn,e) {
         MODx.Ajax.request({
