@@ -38,6 +38,21 @@ MODx.grid.ActionDom = function(config) {
             ,dataIndex: 'rule'
             ,width: 150
             ,sortable: true
+            ,renderer: function(v,c) {
+                var rs = {
+                    'fieldVisible': 'field_visible'
+                    ,'fieldTitle': 'field_label'
+                    ,'fieldDefault': 'field_default'
+                    ,'tabVisible': 'tab_visible'
+                    ,'tabTitle': 'tab_title'
+                    ,'tabNew': 'tab_new'
+                    ,'tvVisible': 'tv_visible'
+                    ,'tvTitle': 'tv_label'
+                    ,'tvDefault': 'tv_default'
+                    ,'tvMove': 'tv_move'
+                };
+                return _(rs[v]) ? _(rs[v]) : v;
+            }
         },{
             header: _('value')
             ,dataIndex: 'value'
