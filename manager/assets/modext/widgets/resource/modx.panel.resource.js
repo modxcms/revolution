@@ -225,7 +225,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'richtext'
         ,id: 'modx-resource-richtext'
         ,inputValue: 1
-        ,checked: true
+        ,checked: MODx.config.richtext_default == '1' ? true : false
         
     },{
         xtype: 'xdatetime'
