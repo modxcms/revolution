@@ -7,14 +7,34 @@
  */
 $warnings = array();
 
-if (is_writable($modx->getOption('core_path').'config/'.MODX_CONFIG_KEY.'.inc.php')) {
+/* bypasses policy check to check for absolute existence */
+function getResourceBypass(modX &$modx,$criteria) {
+    $resource = null;
+    $c = $modx->newQuery('modResource');
+    $c->select(array('id','published'));
+    $c->where($criteria);
+    $c->prepare();
+    $sql = $c->toSql();
+
+    $stmt = $modx->query($sql);
+    if ($stmt && $stmt instanceof PDOStatement) {
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            $resource = $row;
+        }
+        $stmt->closeCursor();
+    }
+    return $resource;
+}
+
+if (is_writable($modx->getOption('core_path',null,MODX_CORE_PATH).'config/'.MODX_CONFIG_KEY.'.inc.php')) {
     /* Warn if world writable */
     if (@ fileperms($modx->getOption('core_path').'config/'.MODX_CONFIG_KEY.'.inc.php') & 0x0002) {
         $warnings[] = array($modx->lexicon('configcheck_configinc'));
     }
 }
 
-if (is_dir($modx->getOption('base_path').'setup/')) {
+if (is_dir($modx->getOption('base_path',null,MODX_BASE_PATH).'setup/')) {
     $warnings[] = array($modx->lexicon('configcheck_installer'));
 }
 
@@ -25,37 +45,34 @@ if (!is_writable($cachePath)) {
     );
 }
 
-if (@ ini_get('register_globals') == true) {
+if (@ini_get('register_globals') == true) {
     $warnings[] = array (
         $modx->lexicon('configcheck_register_globals')
     );
 }
 
-$unapage = $modx->getObject('modResource',$modx->getOption('unauthorized_page'));
-if ($unapage == null || $unapage->get('published') == 0) {
+$unapage = getResourceBypass($modx,$modx->getOption('unauthorized_page',null,1));
+if ($unapage == null || !is_array($unapage)) {
+    $warnings[] = array (
+        $modx->lexicon('configcheck_unauthorizedpage_unavailable')
+    );
+} else if ($unapage['published'] == 0) {
     $warnings[] = array (
         $modx->lexicon('configcheck_unauthorizedpage_unpublished')
     );
 }
 
-$errpage = $modx->getObject('modResource',$modx->getOption('error_page'));
-if ($errpage == null || $errpage->get('published') == 0) {
-    $warnings[] = array (
-        $modx->lexicon('configcheck_errorpage_unpublished')
-    );
-}
-
-if ($unapage == null || $unapage->get('privateweb') == 1) {
-    $warnings[] = array (
-        $modx->lexicon('configcheck_unauthorizedpage_unavailable')
-    );
-}
-
-if ($errpage == null || $errpage->get('privateweb') == 1) {
+$errpage = getResourceBypass($modx,$modx->getOption('error_page',null,1));
+if ($errpage == null || !is_array($errpage)) {
     $warnings[] = array (
         $modx->lexicon('configcheck_errorpage_unavailable')
     );
-}
+} else if ($errpage['published'] == 0) {
+    $warnings[] = array (
+        $modx->lexicon('configcheck_errorpage_unpublished')
+    );
+} 
+
 
 /* clear file info cache */
 clearstatcache();

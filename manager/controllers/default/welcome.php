@@ -18,16 +18,18 @@ $modx->smarty->assign('online_users_msg',$modx->lexicon('onlineusers_message',ar
 /* do some config checks */
 $success = include_once $modx->getOption('processors_path') . 'system/config_check.inc.php';
 if (!$success) {
-	$config_display = true;
-	$modx->smarty->assign('config_check_results',$config_check_results);
+    $config_display = true;
+    $modx->smarty->assign('config_check_results',$config_check_results);
 } else {
-	$config_display = false;
+    $config_display = false;
 }
+
+$serverOffset = $modx->getOption('server_offset_time',null,0);
 
 /* user info : TODO: convert to revo */
 $profile = $modx->user->getOne('Profile');
 if ($profile && $profile->get('lastlogin') != '') {
-    $offset = $modx->getOption('server_offset_time',null,0) * 60 * 60;
+    $offset = $serverOffset * 60 * 60;
     $previous_login = strftime('%b %d, %Y %I:%S %p',$profile->get('lastlogin')+$offset);
 } else {
     $previous_login = $modx->lexicon('not_set');
@@ -35,18 +37,18 @@ if ($profile && $profile->get('lastlogin') != '') {
 $modx->smarty->assign('previous_login',$previous_login);
 
 /* online users
- * :TODO: convert this to revo/modext */
-
-$timetocheck = (time()-(60*20))+$modx->config['server_offset_time'];
+ * @deprecated big time, to be removed in 2.1
+ */
+$timetocheck = (time()-(60*20))+$serverOffset;
 $c = $modx->newQuery('modActiveUser');
 $c->where(array('lasthit:>' => $timetocheck));
-$c->sortby('username','ASC');
+$c->sortby($modx->getSelectColumns('modActiveUser','modActiveUser','',array('username')),'ASC');
 $ausers = $modx->getCollection('modActiveUser',$c);
 include_once $modx->getOption('processors_path'). 'system/actionlist.inc.php';
 foreach ($ausers as $user) {
 	$currentaction = getAction($user->get('action'), $user->get('id'));
 	$user->set('currentaction',$currentaction);
-	$user->set('lastseen',strftime('%X',$user->lasthit+$modx->config['server_offset_time']));
+	$user->set('lastseen',strftime('%X',$user->lasthit+$serverOffset));
 }
 $modx->smarty->assign('ausers',$ausers);
 
