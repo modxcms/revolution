@@ -58,7 +58,7 @@ if (!empty($pluginResult)) {
 /* get controller */
 $o = '';
 foreach ($renderDirectories as $renderDirectory) {
-    if (empty($renderDirectory)) continue;
+    if (empty($renderDirectory) || !is_dir($renderDirectory)) continue;
     
     $renderFile = $renderDirectory.$scriptProperties['type'].'.php';
     if (file_exists($renderFile)) {
