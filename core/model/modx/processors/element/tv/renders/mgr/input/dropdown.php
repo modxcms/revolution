@@ -13,7 +13,7 @@ while (list($item, $itemvalue) = each ($index_list)) {
     $items[] = array(
         'text' => htmlspecialchars($item,ENT_COMPAT,'UTF-8'),
         'value' => htmlspecialchars($itemvalue,ENT_COMPAT,'UTF-8'),
-        'selected' => $itemvalue == $value,
+        'selected' => strcmp($itemvalue,$value) == 0,
     );
 }
 

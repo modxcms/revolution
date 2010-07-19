@@ -553,6 +553,14 @@ table.classy tr.odd td {
     margin-left: 16px;
     display: block;
 }
+.modx-tv-inherited {
+    font-style: italic;
+    color: #666;
+    font-size: 10px;
+    line-height: 1.2;
+    margin-left: 16px;
+    display: block;
+}
 #modx-resource-settings .modx-tv-label, #modx-page-settings .modx-tv-label {
     width: 216px;
 }

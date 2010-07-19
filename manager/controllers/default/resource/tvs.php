@@ -46,13 +46,32 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
 
     $tvs = array();
     if ($template) {
-        if (!$resource->isNew()) {
-            $tvs = $resource->getMany('TemplateVars');
-        } else {
-            $tvs = $template->getMany('TemplateVars');
-        }
+        $c = $modx->newQuery('modTemplateVar');
+        $c->select('
+            DISTINCT `modTemplateVar`.*,
+            `TemplateVarResource`.`value` AS `value`
+        ');
+        $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplate',array(
+            '`TemplateVarTemplate`.`tmplvarid` = `modTemplateVar`.`id`',
+            '`TemplateVarTemplate`.templateid' => $templateId,
+        ));
+        $c->leftJoin('modTemplateVarResource','TemplateVarResource',array(
+            '`TemplateVarResource`.`tmplvarid` = `modTemplateVar`.`id`',
+            '`TemplateVarResource`.contentid' => $resourceId,
+        ));
+        $c->sortby('`TemplateVarTemplate`.`rank`,`modTemplateVar`.`rank`');
+        $tvs = $modx->getCollection('modTemplateVar',$c);
+        
         $modx->smarty->assign('tvcount',count($tvs));
         foreach ($tvs as $tv) {
+            $default = $tv->processBindings($tv->get('default_text'),$resourceId);
+            if (strpos($tv->get('default_text'),'@INHERIT') > -1 && (strcmp($default,$tv->get('value')) == 0 || $tv->get('value') == null)) {
+                $tv->set('inherited',true);
+            }
+            if ($tv->get('value') == null) {
+                $tv->set('value',$tv->get('default_text'));
+            }
+            
             if ($tv->type == 'richtext') {
                 if (is_array($replace_richtexteditor))
                     $replace_richtexteditor = array_merge($replace_richtexteditor, array (
@@ -66,7 +85,6 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
             $inputForm = $tv->renderInput($resource->id);
             if (empty($inputForm)) continue;
 
-            if (strpos($tv->get('value'),'@INHERIT') > -1) $tv->set('inherited',true);
             $tv->set('formElement',$inputForm);
             if (!is_array($categories[$tv->category]->tvs))
                 $categories[$tv->category]->tvs = array();

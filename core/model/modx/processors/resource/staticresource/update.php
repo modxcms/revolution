@@ -264,7 +264,8 @@ if (!empty($scriptProperties['tvs'])) {
         }
 
         /* if different than default and set, set TVR record */
-        if ($value != $tv->get('default_text')) {
+        $default = $tv->processBindings($tv->get('default_text'),$resource->get('id'));
+        if (strcmp($value,$default) != 0) {
 
             /* update the existing record */
             $tvc = $modx->getObject('modTemplateVarResource',array(

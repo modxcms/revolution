@@ -213,7 +213,8 @@ if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modT
         }
 
         /* save value if it was modified */
-        if ($value != $tv->get('default_text')) {
+        $default = $tv->processBindings($tv->get('default_text'),0);
+        if (strcmp($value,$default) != 0) {
             $templateVarResource = $modx->newObject('modTemplateVarResource');
             $templateVarResource->set('tmplvarid',$tv->get('id'));
             $templateVarResource->set('value',$value);

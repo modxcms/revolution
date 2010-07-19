@@ -16,10 +16,10 @@ while (list($item, $itemvalue) = each ($index_list)) {
     list($item,$itemvalue) =  (is_array($itemvalue)) ? $itemvalue : explode("==",$itemvalue);
     if (strlen($itemvalue)==0) $itemvalue = $item;
 
-    if ($itemvalue == $value) {
+    if (strcmp($itemvalue,$value) == 0) {
         $checked = true;
     }
-    if ($itemvalue == $default) {
+    if (strcmp($itemvalue,$default) == 0) {
         $defaultIndex = 'tv'.$this->get('id').'-'.$i;
         $this->set('default_text',$defaultIndex);
     }

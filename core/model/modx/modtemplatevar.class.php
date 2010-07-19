@@ -277,7 +277,7 @@ class modTemplateVar extends modElement {
         $value = $this->getValue($resourceId);
 
         /* process any TV commands in value */
-        $value= $this->processBindings($value,$resourceId,false);
+        $value= $this->processBindings($value,$resourceId);
 
         /* if any FC tvDefault rules, set here */
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
@@ -325,6 +325,7 @@ class modTemplateVar extends modElement {
         /* properly set value back if any FC rules, resource values, or bindings have adjusted it */
         $this->set('value',$value);
         $this->set('processedValue',$value);
+        $this->set('default_text',$this->processBindings($this->get('default_text'),$resourceId));
 
         /* strip tags from description */
         $this->set('description',strip_tags($this->get('description')));

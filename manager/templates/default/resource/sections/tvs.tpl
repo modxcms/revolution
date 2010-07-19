@@ -14,6 +14,7 @@
             <a class="modx-tv-reset" href="javascript:;" onclick="MODx.resetTV({$tv->id});" title="{$_lang.set_to_default}"></a>
 
             {if $tv->description}<span class="modx-tv-description">{$tv->description}</span>{/if}
+            {if $tv->inherited}<br /><span class="modx-tv-inherited">{$_lang.tv_value_inherited}</span>{/if}
         </label>
         <div class="x-form-element modx-tv-form-element" style="padding-left: 221px;">
             <input type="hidden" id="tvdef{$tv->id}" value="{$tv->default_text|escape}" />
