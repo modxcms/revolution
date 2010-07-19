@@ -15,7 +15,7 @@ if (!$modx->hasPermission('packages')) return $modx->error->failure($modx->lexic
 /* get package */
 if (empty($scriptProperties['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
 $package = $modx->getObject('transport.modTransportPackage',$scriptProperties['signature']);
-if ($package == null) return $modx->error->failure($modx->lexicon('package_err_nf'));
+if ($package == null) return $modx->error->failure();
 
 /* get transport and attribute */
 $transport = $package->getTransport();
