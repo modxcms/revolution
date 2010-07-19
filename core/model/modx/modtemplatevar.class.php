@@ -277,7 +277,7 @@ class modTemplateVar extends modElement {
         $value = $this->getValue($resourceId);
 
         /* process any TV commands in value */
-        $value= $this->processBindings($value, $resourceId);
+        $value= $this->processBindings($value,$resourceId,false);
 
         /* if any FC tvDefault rules, set here */
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
@@ -528,7 +528,7 @@ class modTemplateVar extends modElement {
      * @param integer $resourceId The resource in which the TV is assigned.
      * @return string The processed value.
      */
-    public function processBindings($value= '', $resourceId= 0) {
+    public function processBindings($value= '', $resourceId= 0, $processInherit = true) {
         $modx =& $this->xpdo;
         $nvalue= trim($value);
         if (substr($nvalue,0,1)!='@') return $value;
@@ -580,31 +580,35 @@ class modTemplateVar extends modElement {
                     break;
 
                 case 'INHERIT':
-                    $output = $param; /* Default to param value if no content from parents */
-                    $resource = null;
-                    if ($resourceId && (!($this->xpdo->resource instanceof modResource) || $this->xpdo->resource->get('id') != $resourceId)) {
-                        $resource = $this->xpdo->getObject('modResource',$resourceId);
-                    } else if ($this->xpdo->resource instanceof modResource) {
-                        $resource =& $this->xpdo->resource;
-                    }
-                    if (!$resource) break;
-                    $doc = array('id' => $resource->get('id'), 'parent' => $resource->get('parent'));
+                    if ($processInherit) {
+                        $output = $param; /* Default to param value if no content from parents */
+                        $resource = null;
+                        if ($resourceId && (!($this->xpdo->resource instanceof modResource) || $this->xpdo->resource->get('id') != $resourceId)) {
+                            $resource = $this->xpdo->getObject('modResource',$resourceId);
+                        } else if ($this->xpdo->resource instanceof modResource) {
+                            $resource =& $this->xpdo->resource;
+                        }
+                        if (!$resource) break;
+                        $doc = array('id' => $resource->get('id'), 'parent' => $resource->get('parent'));
 
-                    while($doc['parent'] != 0) {
-                        $parent_id = $doc['parent'];
-                        if(!$doc = $this->xpdo->getDocument($parent_id, 'id,parent')) {
-                            /* Get unpublished document */
-                            $doc = $this->xpdo->getDocument($parent_id, 'id,parent',0);
-                        }
-                        if ($doc) {
-                            $tv = $this->xpdo->getTemplateVar($this->get('name'), '*', $doc['id']);
-                            if(isset($tv['value']) && $tv['value'] && substr($tv['value'],0,1) != '@') {
-                                $output = $tv['value'];
-                                break 2;
+                        while($doc['parent'] != 0) {
+                            $parent_id = $doc['parent'];
+                            if(!$doc = $this->xpdo->getDocument($parent_id, 'id,parent')) {
+                                /* Get unpublished document */
+                                $doc = $this->xpdo->getDocument($parent_id, 'id,parent',0);
                             }
-                        } else {
-                            break;
+                            if ($doc) {
+                                $tv = $this->xpdo->getTemplateVar($this->get('name'), '*', $doc['id']);
+                                if(isset($tv['value']) && $tv['value'] && substr($tv['value'],0,1) != '@') {
+                                    $output = $tv['value'];
+                                    break 2;
+                                }
+                            } else {
+                                break;
+                            }
                         }
+                    } else {
+                        $output = $value;
                     }
                     break;
 
