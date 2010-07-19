@@ -88,7 +88,7 @@ $xpdo_meta_map['modPlugin']= array (
         'invalid' => 
         array (
           'type' => 'preg_match',
-          'rule' => '/(?=^[a-zA-Z0-9\\x2d-\\x2f\\x7f-\\xff_-][a-zA-Z0-9\\x2d-\\x2f\\x7f-\\xff_-\s]+[a-zA-Z0-9\\x2d-\\x2f\\x7f-\\xff_-]$)/',
+          'rule' => '/^(?!\s)[a-zA-Z0-9_-\x7f-\xff\s]+(?!\s)$/',
           'message' => 'plugin_err_invalid_name',
         ),
       ),

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2170] Fix error where element names cannot have less than 3 characters
 - [#MODX-2169] Properly handled @INHERIT binding in TV inputs
 - [#MODX-2165] Changed 'Remove Package Version' context menu item behavior to allow to show on non-installed versions to allow rollbacks from downloaded but not installed updates
 - [#MODX-2164] Fixed issue that might cause random, non-affecting error during package updates
