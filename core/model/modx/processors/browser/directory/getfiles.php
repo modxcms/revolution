@@ -26,8 +26,11 @@ $basePath = $modx->getOption('base_path',null,MODX_BASE_PATH);
 if ($basePath != '/') $fileManagerUrl = str_replace($basePath,'',$fileManagerUrl);
 
 $imagesExts = array('jpg','jpeg','png','gif');
+$use_multibyte = $modx->getOption('use_multibyte',null,false);
+$encoding = $modx->getOption('modx_charset',null,'UTF-8');
 /* iterate */
 $files = array();
+if (!is_dir($fullpath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 foreach (new DirectoryIterator($fullpath) as $file) {
     if (in_array($file,array('.','..','.svn','_notes'))) continue;
     if (!$file->isReadable()) continue;
@@ -37,6 +40,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
 
     if (!$file->isDir()) {
         $fileExtension = pathinfo($filePathName,PATHINFO_EXTENSION);
+        $fileExtension = $use_multibyte ? mb_strtolower($fileExtension,$encoding) : strtolower($fileExtension);
 
 	$filesize = @filesize($filePathName);
         /* calculate url */
