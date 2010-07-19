@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added missing deleted checkbox on resource panels
+- [#MODX-2167] Fixed issue where duplicate button was creating incorrect duplicate name
 - [#MODX-2162] Fixed issues with set to default in TV values, reliance on processedValue
 - [#MODX-2168] Fixed new user panel issue with missing JS reference
 - [#MODX-2160] Fixed bug where config check was running checkPolicy on resources that caused inadvertent missing unavail/error page message

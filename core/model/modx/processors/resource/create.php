@@ -73,6 +73,7 @@ $scriptProperties['searchable'] = empty($scriptProperties['searchable']) ? 0 : 1
 $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
 $scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
 $scriptProperties['menuindex'] = empty($scriptProperties['menuindex']) ? 0 : $scriptProperties['menuindex'];
+$scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
 
 /* make sure parent exists and user can add_children to the parent */
 $parent = null;

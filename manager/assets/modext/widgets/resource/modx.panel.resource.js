@@ -296,6 +296,14 @@ MODx.panel.Resource = function(config) {
         ,checked: true
         
     },{
+        xtype: 'checkbox'
+        ,fieldLabel: _('deleted')
+        ,name: 'deleted'
+        ,id: 'modx-resource-deleted'
+        ,inputValue: 1
+        ,checked: false
+
+    },{
         xtype: 'modx-combo-content-type'
         ,fieldLabel: _('resource_content_type')
         ,description: _('resource_content_type_help')

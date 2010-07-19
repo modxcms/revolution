@@ -245,6 +245,14 @@ MODx.panel.SymLink = function(config) {
         ,checked: true 
     });
     va.push({
+        xtype: 'checkbox'
+        ,fieldLabel: _('deleted')
+        ,name: 'deleted'
+        ,id: 'modx-resource-deleted'
+        ,inputValue: 1
+        ,checked: false
+    });
+    va.push({
         xtype: 'hidden'
         ,name: 'class_key'
         ,id: 'modx-resource-class-key'

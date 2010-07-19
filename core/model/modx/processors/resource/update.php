@@ -123,6 +123,7 @@ $scriptProperties['published'] = empty($scriptProperties['published']) ? 0 : 1;
 $scriptProperties['cacheable'] = empty($scriptProperties['cacheable']) ? 0 : 1;
 $scriptProperties['searchable'] = empty($scriptProperties['searchable']) ? 0 : 1;
 $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
+$scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
 
 /* friendly url alias checks */
 if ($modx->getOption('friendly_alias_urls') && isset($scriptProperties['alias'])) {
@@ -242,6 +243,31 @@ $modx->invokeEvent('OnBeforeDocFormSave',array(
     'id' => $resource->get('id'),
     'resource' => &$resource,
 ));
+
+/* set deleted status and fire events */
+if ($scriptProperties['deleted'] != $resource->get('deleted')) {
+    if ($resource->get('deleted')) { /* undelete */
+        if (!$modx->hasPermission('undelete_document')) {
+            $scriptProperties['deleted'] = $resource->get('deleted');
+        } else {
+            $resource->set('deleted',false);
+            $modx->invokeEvent('OnResourceUndelete',array(
+                'id' => $resource->get('id'),
+                'resource' => &$resource,
+            ));
+        }
+    } else { /* delete */
+        if (!$modx->hasPermission('delete_document')) {
+            $scriptProperties['deleted'] = $resource->get('deleted');
+        } else {
+            $resource->set('deleted',true);
+            $modx->invokeEvent('OnResourceDelete',array(
+                'id' => $resource->get('id'),
+                'resource' => &$resource,
+            ));
+        }
+    }
+}
 
 /* Now set and save data */
 unset($scriptProperties['variablesmodified']);
