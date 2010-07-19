@@ -5,7 +5,7 @@
  */
 $this->xpdo->lexicon->load('tv_widget');
 
-$value = explode(",",$this->get('value'));
+$value = explode(",",$value);
 
 $default = explode("||",$this->get('default_text'));
 
@@ -27,7 +27,7 @@ while (list($item, $itemvalue) = each ($index_list)) {
 
     $opts[] = array(
         'value' => htmlspecialchars($itemvalue,ENT_COMPAT,'UTF-8'),
-        'text' => htmlspecialchars($item),
+        'text' => htmlspecialchars($item,ENT_COMPAT,'UTF-8'),
         'checked' => $checked,
     );
     $i++;

@@ -5,7 +5,7 @@
  */
 $this->xpdo->lexicon->load('tv_widget');
 
-$value = explode("||",$this->get('processedValue'));
+$value = explode("||",$value);
 
 $index_list = $this->parseInputOptions($this->processBindings($this->get('elements'),$this->get('name')));
 $opts = array();

@@ -324,6 +324,7 @@ class modTemplateVar extends modElement {
         }
         /* properly set value back if any FC rules, resource values, or bindings have adjusted it */
         $this->set('value',$value);
+        $this->set('processedValue',$value);
 
         /* strip tags from description */
         $this->set('description',strip_tags($this->get('description')));

@@ -7,14 +7,13 @@ $this->xpdo->lexicon->load('tv_widget');
 
 $index_list = $this->parseInputOptions($this->processBindings($this->get('elements'),$this->get('name')));
 $opts = array();
-while (list($item, $itemvalue) = each ($index_list))
-{
+while (list($item, $itemvalue) = each ($index_list)) {
     list($item,$itemvalue) = (is_array($itemvalue)) ? $itemvalue : explode("==",$itemvalue);
     if (strlen($itemvalue)==0) $itemvalue = $item;
     $opts[] = array(
         'value' => htmlspecialchars($itemvalue),
         'text' => htmlspecialchars($item),
-        'selected' => $itemvalue == $this->get('processedValue')
+        'selected' => $itemvalue == $value,
     );
 }
 

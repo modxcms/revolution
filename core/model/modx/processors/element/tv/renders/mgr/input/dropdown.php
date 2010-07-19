@@ -11,9 +11,9 @@ while (list($item, $itemvalue) = each ($index_list)) {
     list($item,$itemvalue) = (is_array($itemvalue)) ? $itemvalue : explode("==",$itemvalue);
     if (strlen($itemvalue)==0) $itemvalue = $item;
     $items[] = array(
-        'text' => htmlspecialchars($item),
-        'value' => $itemvalue,
-        'selected' => $itemvalue == $this->get('processedValue'),
+        'text' => htmlspecialchars($item,ENT_COMPAT,'UTF-8'),
+        'value' => htmlspecialchars($itemvalue,ENT_COMPAT,'UTF-8'),
+        'selected' => $itemvalue == $value,
     );
 }
 

@@ -4,8 +4,6 @@
  * @subpackage processors.element.tv.renders.mgr.input
  */
 $this->xpdo->lexicon->load('tv_widget');
-
-$value = $this->get('value');
 $default = $this->get('default_text');
 
 // handles radio buttons
@@ -28,7 +26,7 @@ while (list($item, $itemvalue) = each ($index_list)) {
 
     $opts[] = array(
         'value' => htmlspecialchars($itemvalue,ENT_COMPAT,'UTF-8'),
-        'text' => htmlspecialchars($item),
+        'text' => htmlspecialchars($item,ENT_COMPAT,'UTF-8'),
         'checked' => $checked,
     );
     $i++;
