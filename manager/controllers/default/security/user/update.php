@@ -56,28 +56,18 @@ if ($user->Profile) {
 $onUserFormPrerender = $modx->invokeEvent('OnUserFormPrerender', array(
     'id' => $user->get('id'),
     'user' => &$user,
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if (is_array($onUserFormPrerender)) {
 	$onUserFormPrerender = implode('',$onUserFormPrerender);
 }
 $modx->smarty->assign('onUserFormPrerender',$onUserFormPrerender);
 
-/* invoke onInterfaceSettingsRender event */
-$onInterfaceSettingsRender = $modx->invokeEvent('OnInterfaceSettingsRender', array(
-    'id' => $user->get('id'),
-    'user' => &$user,
-    'mode' => 'upd',
-));
-if (is_array($onInterfaceSettingsRender)) {
-	$onInterfaceSettingsRender = implode('', $onInterfaceSettingsRender);
-}
-$modx->smarty->assign('onInterfaceSettingsRender',$onInterfaceSettingsRender);
-
 /* invoke OnUserFormRender event */
 $onUserFormRender = $modx->invokeEvent('OnUserFormRender', array(
-    'id' => 0,
-    'mode' => 'new',
+    'id' => $user->get('id'),
+    'user' => &$user,
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if (is_array($onUserFormRender)) $onUserFormRender = implode('',$onUserFormRender);
 $onUserFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onUserFormRender);
