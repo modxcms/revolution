@@ -6,6 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['autotag'] = 'Auto-Tag';
 $_lang['text'] = 'Text';
 $_lang['textarea'] = 'Textarea';
 $_lang['textareamini'] = 'Textarea (Mini)';

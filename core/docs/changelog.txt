@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added autotag TV input widget that grabs tags from a list of the tags so far for all content values for that TV
 - [#MODX-2161] Added sanity check for incorrect or invalid filemanager_path values in file tree
 - Added missing deleted checkbox on resource panels
 - [#MODX-2167] Fixed issue where duplicate button was creating incorrect duplicate name
