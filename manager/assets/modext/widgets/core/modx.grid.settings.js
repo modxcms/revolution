@@ -22,6 +22,10 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'area'
         ,id: 'modx-filter-area'
         ,emptyText: _('area_filter')
+        ,baseParams: {
+            action: 'getAreas'
+            ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+        }
         ,allowBlank: true
         ,listeners: {
             'select': {fn: this.filterByArea, scope:this}
@@ -31,6 +35,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'namespace'
         ,id: 'modx-filter-namespace'
         ,emptyText: _('namespace_filter')
+        ,value: MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
         ,allowBlank: true
         ,listeners: {
             'select': {fn: this.filterByNamespace, scope:this}
@@ -111,6 +116,10 @@ MODx.grid.SettingsGrid = function(config) {
     Ext.applyIf(config,{
          cm: this.cm
         ,fields: ['key','name','value','description','xtype','namespace','area','area_text','editedon','oldkey','menu']
+        ,baseParams: {
+            action: 'getList'
+            ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
+        }
         ,clicksToEdit: 2
         ,grouping: true
         ,groupBy: 'area_text'
@@ -187,7 +196,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         Ext.getCmp('modx-filter-namespace').reset();
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
-            acb.store.baseParams['namespace'] = '';
+            acb.store.baseParams['namespace'] = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
             acb.store.load();
             acb.reset();
         }
@@ -198,6 +207,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     ,filterByKey: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.key = nv;
+        this.getStore().baseParams.namespace = '';
         this.getBottomToolbar().changePage(1);
         this.refresh();
         return true;
