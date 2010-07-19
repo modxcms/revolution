@@ -75,7 +75,7 @@ foreach ($packages as $key => $package) {
     $packageArray['iconaction'] = $not_installed ? 'icon-install' : 'icon-uninstall';
     $packageArray['textaction'] = $not_installed ? $modx->lexicon('install') : $modx->lexicon('uninstall');
 
-    if ($i > 0) {
+    if ($i > 0 || !$package->get('installed')) {
         $packageArray['menu'] = array();
         $packageArray['menu'][] = array(
             'text' => $modx->lexicon('package_version_remove'),

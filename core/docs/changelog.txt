@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2165] Changed 'Remove Package Version' context menu item behavior to allow to show on non-installed versions to allow rollbacks from downloaded but not installed updates
 - [#MODX-2164] Fixed issue that might cause random, non-affecting error during package updates
 - [#MODX-2008] Added in Japanese translation
 - [#MODX-2163] Default settings grid to show only core namespace settings to reduce confusion
