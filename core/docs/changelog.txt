@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed incorrect welcome URL in build
 - [#MODX-2008] Added in Czech translation
 - Configured phpdoc.ini file for SDK build
 - Fixed bug in file tree where URL was absolute rather than relative when being drag/dropped
