@@ -18,16 +18,16 @@
     <property name="modx.core.release" value="rc" />
 
     <!-- Set some common build properties -->
-    <property name="build.dir" value="${basedir}" />
+    <property name="build.dir" value="${project.basedir}/_build" />
     <property name="build.src.url"
               value="http://svn.modxcms.com/svn/tattoo/tattoo/branches/revolution"
     />
-    <property name="build.image.basedir" value="${basedir}/image" />
-    <property name="build.image.dir" value="${basedir}/image/modx-${modx.core.version}-${modx.core.release}" />
+    <property name="build.image.basedir" value="${build.dir}/image" />
+    <property name="build.image.dir" value="${build.image.basedir}/modx-${modx.core.version}-${modx.core.release}" />
     <property name="build.image.modext.dir" value="${build.image.basedir}/modext" />
     <property name="build.image.css.dir" value="${build.image.basedir}/css" />
-    <property name="build.distrib.dir" value="${basedir}/distrib" />
-    <property name="build.apidocs.dir" value="${project.basedir}/docs" />
+    <property name="build.distrib.dir" value="${build.dir}/distrib" />
+    <property name="build.apidocs.dir" value="${build.dir}/docs" />
 
     <!-- Set a path representing all the root path elements for the build source -->
     <path id="project.srcpath">
@@ -41,7 +41,7 @@
 
     <!-- Set the project classpath and define the svn task -->
     <path id="project.classpath">
-        <fileset dir="${basedir}/lib">
+        <fileset dir="${build.dir}/lib">
             <include name="**/*.jar" />
         </fileset>
     </path>
@@ -390,8 +390,8 @@ General Public License for more details.
     <target name="generate-core-data"
             description="generate core data for MODx from a reference database"
     >
-        <exec dir="${basedir}" executable="${php.command}">
-            <arg line="${basedir}/transport.data.php" />
+        <exec dir="${build.dir}" executable="${php.command}">
+            <arg line="${build.dir}/transport.data.php" />
         </exec>
     </target>
 
@@ -399,8 +399,8 @@ General Public License for more details.
     <target name="generate-core-transport" description="generate the core transport package in your working copy">
         <delete file="${project.core.dir}/packages/core.transport.zip" />
         <delete dir="${project.core.dir}/packages/core" />
-        <exec dir="${basedir}" executable="${php.command}">
-            <arg line="${basedir}/transport.core.php" />
+        <exec dir="${build.dir}" executable="${php.command}">
+            <arg line="${build.dir}/transport.core.php" />
         </exec>
     </target>
 
@@ -410,7 +410,7 @@ General Public License for more details.
             description="generate the phpdoc documentation"
     >
         <exec dir="${project.basedir}" executable="${phpdoc.command}">
-            <arg line="-c ${basedir}/phpdoc.ini" />
+            <arg line="-c ${build.dir}/phpdoc" />
         </exec>
     </target>
 
