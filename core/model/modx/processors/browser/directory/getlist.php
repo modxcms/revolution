@@ -103,7 +103,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             'page' => !empty($editAction) ? '?a='.$editAction.'&file='.$encFile : null,
             'perms' => $octalPerms,
             'path' => $relativeRootPath.$fileName,
-            'url' => str_replace('//','/',$fileManagerUrl.$dir.$fileName),
+            'url' => ltrim(str_replace('//','/',$fileManagerUrl.$dir.$fileName),'/'),
             'file' => $encFile,
         );
     }
