@@ -50,7 +50,8 @@ class modInstallTestAdvanced extends modInstallTest {
     protected function _checkAdvPaths() {
         /* web_path */
         $this->results['context_web_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],$this->install->settings->get('context_web_path'));
-        if (!$this->is_writable2($this->install->settings->get('context_web_path'))) {
+        $webDir = dirname($this->install->settings->get('context_web_path'));
+        if (!$this->is_writable2($webDir)) {
             $this->results['context_web_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
             $this->results['context_web_writable']['class'] = 'testFailed';
         } else {
@@ -60,7 +61,8 @@ class modInstallTestAdvanced extends modInstallTest {
 
         /* mgr_path */
         $this->results['context_mgr_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],$this->install->settings->get('context_mgr_path'));
-        if (!$this->is_writable2($this->install->settings->get('context_mgr_path'))) {
+        $mgrDir = dirname($this->install->settings->get('context_mgr_path'));
+        if (!$this->is_writable2($mgrDir)) {
             $this->results['context_mgr_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
             $this->results['context_mgr_writable']['class'] = 'testFailed';
         } else {
@@ -70,7 +72,8 @@ class modInstallTestAdvanced extends modInstallTest {
 
         /* connectors_path */
         $this->results['context_connectors_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],$this->install->settings->get('context_connectors_path'));
-        if (!$this->is_writable2($this->install->settings->get('context_connectors_path'))) {
+        $conDir = dirname($this->install->settings->get('context_connectors_path'));
+        if (!$this->is_writable2($conDir)) {
             $this->results['context_connectors_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
             $this->results['context_connectors_writable']['class'] = 'testFailed';
         } else {
