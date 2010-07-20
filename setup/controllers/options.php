@@ -27,7 +27,8 @@ if (!empty($_POST['proceed'])) {
     /* then store in cache */
     $install->settings->store($settings);
 
-    if ($install->settings->get('installmode') == modInstall::MODE_UPGRADE_REVO_ADVANCED) {
+    $installmode = $install->settings->get('installmode');
+    if (in_array($installmode,array(modInstall::MODE_UPGRADE_REVO_ADVANCED,modInstall::MODE_NEW))) {
         $this->proceed('database');
     } else {
         $this->proceed('summary');
