@@ -19,7 +19,7 @@ MODx.page.CreatePlugin = function(config) {
             process: 'create', text: _('save'), method: 'remote'
             ,checkDirty: true
             ,keys: [{
-                key: 's'
+                key: MODx.config.keymap_save || 's'
                 ,alt: true
                 ,ctrl: true
             }]

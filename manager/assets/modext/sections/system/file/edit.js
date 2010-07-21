@@ -12,7 +12,7 @@ MODx.page.EditFile = function(config) {
             ,text: _('save')
             ,method: 'remote'
             ,keys: [{
-                key: 's'
+                key: MODx.config.keymap_save || 's'
                 ,alt: true
                 ,ctrl: true
             }]

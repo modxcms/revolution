@@ -100,7 +100,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 ,method: 'remote'
                 ,checkDirty: cfg.richtext ? false : true
                 ,keys: [{
-                    key: 's'
+                    key: MODx.config.keymap_save || 's'
                     ,alt: true
                     ,ctrl: true
                 }]

@@ -21,7 +21,7 @@ MODx.page.UpdateAccessPolicy = function(config) {
             ,method: 'remote'
             ,checkDirty: false
             ,keys: [{
-                key: 's'
+                key: MODx.config.keymap_save || 's'
                 ,alt: true
                 ,ctrl: true
             }]

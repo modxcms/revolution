@@ -32,8 +32,8 @@ MODx.Window = function(config) {
         }]
         ,record: {}
         ,keys: [{
-            key: Ext.EventObject.ENTER,
-            fn: this.submit
+            key: Ext.EventObject.ENTER
+            ,fn: this.submit
             ,scope: this
         }]
     });
