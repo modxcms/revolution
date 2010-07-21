@@ -20,4 +20,4 @@ $_lang['ago_weeks'] = '[[+time]] weeks';
 $_lang['ago_year'] = '[[+time]] year';
 $_lang['ago_years'] = '[[+time]] years';
 $_lang['today_at'] = 'today at [[+time]]';
-$_lang['yesterday_at'] = 'yeterday at [[+time]]';
+$_lang['yesterday_at'] = 'yesterday at [[+time]]';
