@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- [#MODX-2174] Fixed bug where manager_language was being ignored in Connectors
 - [#MODX-1715] Added reference to setting keymap_save to allow for overriding of save shortcut key
 - [#MODX-2008] Updated Russian and Japanese translations
 - [#MODX-2008] Added in Thai translation
