@@ -829,7 +829,7 @@ MODx.getQRSettings = function(id,va) {
         ,name: 'richtext'
         ,id: 'modx-'+id+'-richtext'
         ,inputValue: 1
-        ,checked: va['richtext'] != undefined ? va['richtext'] : true                
+        ,checked: va['richtext'] != undefined ? va['richtext'] : (MODx.config.richtext_default == '1' ? true : false)
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_searchable')
