@@ -1,0 +1,40 @@
+<?php
+/**
+ * Thai Upgrades Lexicon Topic for Revolution setup.
+ *
+ * @package setup
+ * @subpackage lexicon
+ */
+$_lang['add_column'] = 'เพิ่มใหม่ `%s` คอลัมน์เป็น `%s`';
+$_lang['add_index'] = 'เพิ่มดัชนีใหม่ใน `%s` สำหรับตาราง `%s`.';
+$_lang['add_moduser_classkey'] = 'เพิ่มฟิลด์ class_key เพื่อรองรับตรา สารอนุพันธ์ของ modUser';
+$_lang['added_cachepwd'] = 'เพิ่มฟิลด์ cachepwd ที่ไม่มีในรุ่น Revolution ก่อนหน้านี้';
+$_lang['added_content_ft_idx'] = 'เพิ่ม `content_ft_idx` ดัชนีข้อความเต็มบนฟิลด์ `pagetitle`, `longtitle`, `description`, `introtext`, `content`';
+$_lang['allow_null_properties'] = 'แก้ไขค่า NULL ไปใน `%s`.`properties`';
+$_lang['alter_activeuser_action'] = 'ดัดแปลงฟิลด์ modActiveUser `action` เพื่อให้ใช้ชื่อแอ็กชันแบบยาวๆได้';
+$_lang['alter_usermessage_messageread'] = 'เปลี่ยนฟิลด์ modUserMessage `messageread` เป็น `read`.';
+$_lang['alter_usermessage_postdate'] = 'เปลี่ยนฟิลด์ modUserMessage `postdate` จาก INT เป็น DATETIME และชื่อว่า `date_sent`';
+$_lang['alter_usermessage_subject'] = 'เปลี่ยนฟิลด์ modUserMessage `subject` จาก VARCHAR(60) เป็น VARCHAR(255).';
+$_lang['change_column'] = 'เปลี่ยนฟิลด์ `%s` เป็น `%s` ในตาราง `%s`.';
+$_lang['change_default_value'] = 'เปลี่ยนค่าปริยายของคอลัมน์ `%s` เป็น %s ในตาราง `%s`';
+$_lang['connector_acls_removed'] = 'ลบ ACLs ของตัวเชื่อมต่อบริบทออก';
+$_lang['connector_acls_not_removed'] = 'ไม่สามารถลบ  ACLs ของตัวเชื่อมต่อบริบท';
+$_lang['connector_ctx_removed'] = '';
+$_lang['connector_ctx_not_removed'] = 'ไม่สามารถลบตัวเชื่อมต่อบริบท';
+$_lang['data_remove_error'] = 'เกิดข้อผิดพลาดในการลบข้อมูลของคลาส `%s`.';
+$_lang['data_remove_success'] = 'ลบข้อมูลออกจากตารางของคลาส `%s` สำเร็จ';
+$_lang['drop_column'] = 'ลดคอลัมน์ `%s` ในตาราง `%s` ลง';
+$_lang['drop_index'] = 'ลดดัชนี `%s` ในตาราง `%s` ลง';
+$_lang['lexiconentry_createdon_null'] = 'เปลี่ยนฟิลด์ modLexiconEntry `createdon` ให้รับค่า null ได้';
+$_lang['lexiconentry_focus_alter'] = 'เปลี่ยนฟิลด์ modLexiconEntry `focus` จาก VARCHAR(100) เป็น INT(10).';
+$_lang['lexiconentry_focus_alter_int'] = 'ปรับปรุงคอลัมน์ข้อมูล modLexiconEntry `focus` จากส string เป็น int จากคีย์ของ modLexiconTopic';
+$_lang['lexiconfocus_add_id'] = 'เพิ่ม modLexiconFocus คอลัมน์ `id` ';
+$_lang['lexiconfocus_add_pk'] = 'เพิ่ม modLexiconFocus PRIMARY KEY ใส่คอลัมน์ `id`';
+$_lang['lexiconfocus_alter_pk'] = 'เปลี่ยน modLexiconFocus `name` จาก PRIMARY KEY เป็น UNIQUE KEY';
+$_lang['lexiconfocus_drop_pk'] = 'ลด modLexiconFocus PRIMARY KEY.';
+$_lang['rename_column'] = 'เปลี่ยนชื่อคอลัมน์ `%s` เป็น `%s` บนตาราง `%s`.';
+$_lang['rename_table'] = 'เปลี่ยนชื่อตาราง `%s` เป็น `%s`.';
+$_lang['remove_fulltext_index'] = 'ลบดัชนีข้อความเต็ม `%s`.';
+$_lang['systemsetting_xtype_fix'] = 'แก้ไข xtypes ใน modSystemSettings สำเร็จ';
+$_lang['transportpackage_manifest_text'] = 'ดัดแปลงคอลัมน์ `manifest` เป็น TEXT จากเดิม MEDIUMTEXT ใน `%s`.';
+$_lang['update_closure_table'] = 'ปรับปรุงข้อมูลการปิดท้ายตารางสำหรับคลาส `%s`.';
