@@ -9,6 +9,8 @@
  */
 $_lang['duplicate'] = 'Duplizieren';
 $_lang['entry'] = 'Eintrag';
+$_lang['entry_create'] = 'Eintrag erstellen';
+$_lang['entry_err_ae'] = 'Eintrag existiert bereits!';
 $_lang['entry_err_nf'] = 'Eintrag nicht gefunden.';
 $_lang['entry_err_ns'] = 'Eintrag nicht angegeben.';
 $_lang['entry_err_save'] = 'Ein Fehler trat auf bei dem Versuch, den Lexikon-Eintrag zu speichern.';

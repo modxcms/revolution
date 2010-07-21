@@ -7,9 +7,11 @@
  * @namespace core
  * @topic tv_input_types
  */
+$_lang['autotag'] = 'Auto-Tag';
 $_lang['text'] = 'Text';
 $_lang['textarea'] = 'Textarea';
 $_lang['textareamini'] = 'Textarea (Mini)';
+$_lang['htmlarea'] = 'HTML-Area';
 $_lang['richtext'] = 'Rich Text';
 $_lang['dropdown'] = 'DropDown-Liste';
 $_lang['listbox'] = 'Listbox (einfache Auswahl)';
@@ -23,3 +25,4 @@ $_lang['email'] = 'E-Mail-Adresse';
 $_lang['number'] = 'Zahl';
 $_lang['date'] = 'Datum';
 $_lang['tag'] = 'Tag';  // Schlagwort, Stichwort
+$_lang['textbox'] = 'Textbox';

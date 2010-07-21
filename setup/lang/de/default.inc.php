@@ -181,6 +181,7 @@ $_lang['preinstall_failure'] = 'Es wurden Probleme festgestellt. Bitte beachten 
 $_lang['preinstall_success'] = 'Die Vorabtests waren erfolgreich. Klicken Sie unten auf "Installieren", um fortzufahren.';
 $_lang['refresh'] = 'Aktualisieren';
 $_lang['request_handler_err_nf'] = 'Konnte den Request-Handler in %s nicht laden. Bitte stellen Sie sicher, dass sie alle benötigten Dateien hochgeladen haben.';
+$_lang['restarted_msg'] = 'MODx hat den Installationsprozess aus Sicherheitsgründen vorsichtshalber neu gestartet, weil mehr als 15 Minuten lang keine Aktion ausgelöst wurde. Bitte versuchen Sie erneut, die Installation durchzuführen.';
 $_lang['retry'] = 'Erneut versuchen';
 $_lang['security_notice'] = 'Sicherheitshinweis';
 $_lang['select'] = 'Auswählen';

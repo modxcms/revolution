@@ -10,16 +10,19 @@
 $_lang['area'] = 'Bereich';
 $_lang['area_authentication'] = 'Authentifizierung und Sicherheit';
 $_lang['area_caching'] = 'Caching';
+$_lang['area_email'] = 'E-Mail-Adressen';
 $_lang['area_editor'] = 'Rich-Text-Editor';
 $_lang['area_file'] = 'Dateisystem';
 $_lang['area_filter'] = 'Nach Bereich filtern...';
 $_lang['area_furls'] = 'Suchmaschinenfreundliche URLs';
 $_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = 'Lexikon und Sprache';
-$_lang['area_mail'] = 'Mail';
+$_lang['area_mail'] = 'E-Mail-Einstellungen';
 $_lang['area_manager'] = 'Backend-Manager';
+$_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
-$_lang['area_session'] = 'Session und Cookie';
+$_lang['area_security'] = 'Sicherheit';
+$_lang['area_session'] = 'Session und Cookies';
 $_lang['area_lexicon_string'] = 'Lexikon-Eintrag für den Bereich';
 $_lang['area_lexicon_string_msg'] = 'Geben Sie hier den Schlüssel für den Lexikon-Eintrag für den Bereich ein. Wenn es keinen Lexikon-Eintrag gibt, wird einfach der Bereichs-Schlüssel angezeigt.<br />Core-Bereiche:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
 $_lang['area_site'] = 'Site';
@@ -204,8 +207,38 @@ $_lang['setting_filemanager_path_desc'] = 'IIS setzt die Einstellung document_ro
 $_lang['setting_filemanager_path_err'] = 'Bitte geben Sie für den Dateimanager den absoluten Pfad zum Document-Root an.';
 $_lang['setting_filemanager_path_err_invalid'] = 'Dieses Dateimanager-Verzeichnis existiert entweder nicht, oder es kann nicht darauf zugegriffen werden. Bitte geben Sie ein gültiges Verzeichnis an oder passen Sie die Rechte dieses Verzeichnisses an.';
 
+$_lang['setting_friendly_alias_lowercase_only'] = 'Suchmaschinenfreundliche Aliasse in Kleinbuchstaben';
+$_lang['setting_friendly_alias_lowercase_only_desc'] = 'Legt fest, ob nur Kleinbuchstaben in einem Ressourcen-Alias erlaubt sein sollen';
+
+$_lang['setting_friendly_alias_max_length'] = 'Maximale Länge suchmaschinenfreundlicher Aliasse';
+$_lang['setting_friendly_alias_max_length_desc'] = 'Ist dieser Wert größer als null, gibt er die maximale Anzahl an Zeichen an, die in einem Ressourcen-Alias erlaubt sind. Ist er null, so ist die Alias-Länge nicht begrenzt.';
+
+$_lang['setting_friendly_alias_restrict_chars'] = 'Suchmaschinenfreundliche Aliasse: Methode zur Einschränkung der erlaubten Zeichen';
+$_lang['setting_friendly_alias_restrict_chars_desc'] = 'Die Methode, die zur Einschränkung der in einem Ressourcen-Alias erlaubten Zeichen verwendet wird. "pattern" erlaubt die in einem separat anzugebenden regulären Ausdruck festgelegten Zeichen, "legal" erlaubt alle in einer URL zulässigen Zeichen, "alpha" erlaubt nur die Buchstaben des Alphabets und "alphanumeric" erlaubt nur Buchstaben und Ziffern.';
+
+$_lang['setting_friendly_alias_restrict_chars_pattern'] = 'Suchmaschinenfreundliche Aliasse: RegEx zur Einschränkung der erlaubten Zeichen';
+$_lang['setting_friendly_alias_restrict_chars_pattern_desc'] = 'Ein gültiger regulärer Ausdruck zur Einschränkung der in einem Ressourcen-Alias erlaubten Zeichen.';
+
+$_lang['setting_friendly_alias_strip_element_tags'] = 'Suchmaschinenfreundliche Aliasse: Element-Tags entfernen';
+$_lang['setting_friendly_alias_strip_element_tags_desc'] = 'Gibt an, ob Element-Tags aus Ressourcen-Aliassen entfernt werden sollen.';
+
+$_lang['setting_friendly_alias_translit'] = 'Transliteration suchmaschinenfreundlicher Aliasse';
+$_lang['setting_friendly_alias_translit_desc'] = 'Die Transliterations-Methode, die auf einen für eine Ressource angegebenen Alias angewendet werden soll. Standardmäßig ist diese Enstellung leer oder enthält den Wert "none"; dann findet keine Transliteration statt. Andere mögliche Werte sind "iconv" (falls verfügbar) oder der Name einer Transliterations-Tabelle, die von einer benutzerdefinierten Transliterations-Service-Klasse zur Verfügung gestellt wird.';
+
+$_lang['setting_friendly_alias_translit_class'] = 'Suchmaschinenfreundliche Aliasse: Transliterations-Service-Klasse';
+$_lang['setting_friendly_alias_translit_class_desc'] = 'Eine optionale Service-Klasse, die benannte Transliterations-Dienste für die Generierung/Filterung suchmaschinenfreundlicher Aliasse zur Verfügung stellt.';
+
+$_lang['setting_friendly_alias_trim_chars'] = 'Suchmaschinenfreundliche Aliasse: abzuschneidende Zeichen';
+$_lang['setting_friendly_alias_trim_chars_desc'] = 'Zeichen, die am Ende eines übergebenen Ressourcen-Alias abgeschnitten werden sollen.';
+
 $_lang['setting_friendly_alias_urls'] = 'Suchmaschinenfreundliche Aliasse benutzen';
 $_lang['setting_friendly_alias_urls_desc'] = 'Wenn Sie suchmaschinenfreundliche URLs verwenden und die Ressource einen Alias hat, hat der Alias immer Vorrang vor der suchmaschinenfreundlichen URL. Wird diese Option auf "Ja" gesetzt, wird auch das Inhaltstyp-Suffix der Ressource auf den Alias angewendet. Wenn z.B. Ihre Ressource mit der ID 1 den Alias "einfuehrung" hat, und Sie haben als Inhaltstyp-Suffix ".html" eingestellt, wird das Setzen dieser Option auf "Ja" dazu führen, dass der Link "einfuehrung.html" generiert wird. Wenn es keinen Alias gibt, generiert MODx den Link "1.html".';
+
+$_lang['setting_friendly_alias_word_delimiter'] = 'Suchmaschinenfreundliche Aliasse: bevorzugtes Wort-Trennzeichen';
+$_lang['setting_friendly_alias_word_delimiter_desc'] = 'Das bevorzugte Wort-Trennzeichen für suchmaschinenfreundliche Aliasse.';
+
+$_lang['setting_friendly_alias_word_delimiters'] = 'Suchmaschinenfreundliche Aliasse: mögliche Wort-Trennzeichen';
+$_lang['setting_friendly_alias_word_delimiters_desc'] = 'Zeichen, die Wort-Trennzeichen repräsentieren, wenn suchmaschinenfreundliche Aliasse verarbeitet werden. Diese Zeichen werden konvertiert und konsolidiert zu dem bevorzugten Wort-Trennzeichen für suchmaschinenfreundliche Aliasse.';
 
 $_lang['setting_friendly_urls'] = 'Suchmaschinenfreundliche URLs benutzen';
 $_lang['setting_friendly_urls_desc'] = 'Dies erlaubt Ihnen, suchmaschinenfreundliche URLs mit MODx zu verwenden. Bitte beachten Sie, dass dies nur für MODx-Installationen gilt, die auf einem Apache-Webserver laufen, und dass Sie eine .htaccess-Datei schreiben müssen, damit dies funktioniert. Mehr Informationen finden Sie in der .htaccess-Datei, die in der MODx-Distribution enthalten ist.';
@@ -278,7 +311,7 @@ $_lang['setting_modRequest.class'] = 'Request-Handler-Klasse';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_charset'] = 'Zeichencodierung';
-$_lang['setting_modx_charset_desc'] = 'Bitte wählen Sie die Zeichencodierung, die Sie im Manager verwenden möchten. Bitte beachten Sie, dass MODx zwar mit einigen dieser Codierungen getestet wurde, aber nicht mit allen. Für die meisten Sprachen ist die Standardeinstellung "UTF-8" vorzuziehen.';
+$_lang['setting_modx_charset_desc'] = 'Bitte wählen Sie die Zeichencodierung, die Sie verwenden möchten. Bitte beachten Sie, dass MODx zwar mit einigen dieser Codierungen getestet wurde, aber nicht mit allen. Für die meisten Sprachen ist die Standardeinstellung "UTF-8" vorzuziehen.';
 
 $_lang['setting_new_file_permissions'] = 'Dateirechte für neue Dateien';
 $_lang['setting_new_file_permissions_desc'] = 'Nach dem Hochladen einer neuen Datei im Dateimanager versucht dieser, die Dateirechte in die zu ändern, die in dieser Einstellung gespeichert sind. Dies könnte in einigen Konfigurationen evtl. nicht funktionieren, z.B. bei Verwendung des IIS-Webservers. In diesem Fall müssen Sie die Rechte selbst ändern.';
@@ -318,6 +351,12 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Lösche die Thumbnails, deren 
 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb: Cache für Quelldateien';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Gibt an, ob Quelldateien gecacht werden sollen, wenn sie geladen werden, oder nicht. Es wird die Einstellung "off" empfohlen.';
+
+$_lang['setting_phpthumb_zoomcrop'] = 'phpThumb: Zoom-Crop';
+$_lang['setting_phpthumb_zoomcrop_desc'] = 'Die Standard-Zoom-Crop-Einstellung für phpThumb, wenn es in MODx verwendet wird. Der Standardwert ist "0", wodurch Zoom-Cropping verhindert wird.';
+
+$_lang['setting_phpthumb_far'] = 'phpThumb: Force Aspect Ratio';
+$_lang['setting_phpthumb_far_desc'] = 'Die Standard-Force-Aspect-Ratio-Einstellung für phpThumb, wenn es in MODx verwendet wird. Der Standardwert ist "C", womit eine zentrierte Ausrichtung erreicht wird.';
 
 $_lang['setting_publish_default'] = 'Ressourcen standardmäßig veröffentlichen';
 $_lang['setting_publish_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig veröffentlicht werden sollen.';
@@ -447,7 +486,7 @@ $_lang['setting_use_editor_desc'] = 'Möchten Sie den Rich-Text-Editor aktiviere
 $_lang['setting_use_editor_err'] = 'Bitte geben Sie an, ob Sie einen Rich-Text-Editor verwenden möchten oder nicht.';
 
 $_lang['setting_use_multibyte'] = 'Multibyte-Erweiterung nutzen';
-$_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "true", wenn Sie die mbstring-Erweiterung für Multibyte-Zeichen (Zeichen, die in der verwendeten Zeichencodierung durch mehr als ein Byte repräsentiert werden) in Ihrer MODx-Installation nutzen möchten. Setzen Sie diese Einstellung nur auf "true", wenn die mbstring-PHP-Erweiterung installiert ist.';
+$_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie die mbstring-Erweiterung für Multibyte-Zeichen (Zeichen, die in der verwendeten Zeichencodierung durch mehr als ein Byte repräsentiert werden) in Ihrer MODx-Installation nutzen möchten. Setzen Sie diese Einstellung nur auf "Ja", wenn die mbstring-PHP-Erweiterung installiert ist.';
 
 $_lang['setting_webpwdreminder_message'] = 'E-Mail nach Passwort-Anforderung';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn er eine neues Passwort anfordert. Der MODx-Manager sendet eine E-Mail an den Benutzer, die dessen neues Passwort und Aktivierungs-Informationen enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn eine Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
