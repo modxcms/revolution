@@ -1,4 +1,5 @@
 <?php
+$_lang['autotag'] = 'Auto-Tag';
 $_lang['text'] = 'Текст';
 $_lang['textarea'] = 'Textarea (текстовая область)';
 $_lang['textareamini'] = 'Textarea (текстовая строка)';

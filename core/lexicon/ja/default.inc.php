@@ -5,8 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
- * @author sama55 http://blog.modxclub.net/
+ * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -40,12 +39,12 @@ $_lang['attributes'] = '属性';
 $_lang['back'] = '&lt;- 前';
 $_lang['backup'] = 'バックアップ';
 $_lang['bk_manager'] = 'バックアップマネージャー';
-$_lang['bulk_actions'] = '多量のアクション';
+$_lang['bulk_actions'] = '一括操作';
 $_lang['cache_files_deleted'] = '以下のファイルが削除されました';
 $_lang['cache_publish_event_error'] = '<p>エラー: 公開イベントを決定できませんでした</p><pre>[[+info]]</pre>';
 $_lang['cache_sitepublishing_file_error'] = '<p>エラー: キャッシュに書き込みができませんでした。</p>';
 $_lang['cache_unpublish_event_error'] = '<p>エラー: 公開終了イベントを決定できませんでした</p><pre>[[+info]]</pre>';
-$_lang['cached'] = 'キャッシュされた';
+$_lang['cached'] = 'キャッシュする';
 $_lang['cancel'] = 'キャンセル';
 $_lang['categories'] = 'カテゴリー';
 $_lang['category'] = 'カテゴリー';
@@ -60,7 +59,7 @@ $_lang['cleaningup'] = 'クリーンアップ処理中';
 $_lang['clear_cache'] = 'キャッシュをクリア';
 $_lang['clear_cache_on_save'] = '保存時にキャッシュをクリア';
 $_lang['clear_cache_on_save_msg'] = 'チェックすると、保存時にキャッシュをクリアします。';
-$_lang['clear_filter'] = 'フィルターのクリア';
+$_lang['clear_filter'] = '絞り込みを解除';
 $_lang['click_to_change'] = 'クリックして変更';
 $_lang['close'] = '閉じる';
 $_lang['code'] = 'コード';
@@ -176,11 +175,11 @@ $_lang['ext_today_tip'] = '{0} (スペース)';
 $_lang['failure'] = '失敗';
 $_lang['female'] = '女性';
 $_lang['files'] = 'ファイル';
-$_lang['filter'] = 'フィルター';
-$_lang['filter_clear'] = 'フィルターのクリア';
-$_lang['filter_by_key'] = 'キーでフィルター';
-$_lang['filter_by_name'] = '名前でフィルター';
-$_lang['filter_by_username'] = 'ユーザー名でフィルター';
+$_lang['filter'] = '絞り込み';
+$_lang['filter_clear'] = '絞り込みを解除';
+$_lang['filter_by_key'] = 'キーで絞り込み';
+$_lang['filter_by_name'] = '名前で絞り込み';
+$_lang['filter_by_username'] = 'ユーザー名で絞り込み';
 $_lang['finish'] = '終了';
 $_lang['folder'] = 'フォルダ';
 $_lang['general'] = '一般';
@@ -445,7 +444,7 @@ $_lang['which_editor_title'] = '使用エディター:';
 $_lang['working'] = '処理中';
 $_lang['workspaces'] = 'ワークスペース';
 $_lang['xtype'] = 'フィールドタイプ';
-$_lang['xtype_desc'] = '設定のフィールドタイプ。これは、テキストフィールド、テキストエリア、真偽値がありえます。';
+$_lang['xtype_desc'] = '設定のフィールドタイプ。テキストフィールド・テキストエリア・真偽値の中から選びます。';
 $_lang['yes'] = 'はい';
 $_lang['yesno'] = 'はい/いいえ';
 

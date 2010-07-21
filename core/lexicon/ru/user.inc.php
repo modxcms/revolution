@@ -14,6 +14,8 @@ $_lang['change_password'] = 'Изменить пароль';
 $_lang['change_password_confirm'] = 'Подтвердить пароль';
 $_lang['change_password_new'] = 'Новый пароль';
 $_lang['city'] = 'Город';
+$_lang['extended_fields'] = 'Дополнительные поля';
+$_lang['extended_fields_msg'] = 'Здесь вы можете редактировать дополнительные поля данных о пользователе.';
 $_lang['login_options'] = 'Login Options';
 $_lang['minimum_role'] = 'Minimum Role';
 $_lang['password'] = 'Пароль';
@@ -142,6 +144,8 @@ $_lang['user_male'] = 'Мужской';
 $_lang['user_management_msg'] = 'Здесь вы можете выбрать пользователей, данные которых вы хотели бы изменить.';
 $_lang['user_mobile'] = 'Номер мобильного телефона';
 $_lang['user_new'] = 'Новый пользователь';
+$_lang['user_password_changed'] = 'Пароль успешно изменен на: [[+password]]';
+
 $_lang['user_phone'] = 'Номер телефона';
 $_lang['user_photo'] = 'Фотография пользователя';
 $_lang['user_photo_message'] = 'Введите URL адрес изображения или воспользуйтесь кнопкой для выбора или загрузки изображения на сервер.';

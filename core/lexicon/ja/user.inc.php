@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
+ * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -45,7 +45,7 @@ $_lang['role_err_nfs'] = '[[+name]]という名前のロールが見つかりま
 $_lang['role_err_ns'] = 'ロールが指定されていません';
 $_lang['role_err_ns_name'] = 'ロール名が空欄です。';
 $_lang['role_err_remove'] = 'ロールの削除中にエラーが発生しました。';
-$_lang['role_err_remove_admin'] = '削除しようとしているのは管理権限です。削除できません。';
+$_lang['role_err_remove_admin'] = '管理権限は削除できません。';
 $_lang['role_remove'] = 'ロールを削除';
 $_lang['role_remove_confirm'] = 'このロールを削除しますか？';
 $_lang['roles'] = 'ロール(役割)';
@@ -83,8 +83,8 @@ $_lang['user_err_not_specified_dob'] = '誕生日の日付を mm/dd/yyyy 形式�
 $_lang['user_err_not_specified_email'] = '正しいメールアドレスを入力してください。';
 $_lang['user_err_not_specified_fileman_path'] = '指定したディレクトリは:<br />1) 存在しない<br />2) 読み込み権限がない.<br />3) ディレクトリではない';
 $_lang['user_err_not_specified_manageraccess'] = '管理画面へのアクセス権限が空欄です。';
-$_lang['user_err_not_specified_managerstartup'] = '管理画面の初期状態で表示するドキュメントIDを、存在しているドキュメントから選んでください。';
-$_lang['user_err_not_specified_managertheme'] = '選択した管理画面のテーマファイルが存在しませんでした。';
+$_lang['user_err_not_specified_managerstartup'] = 'ログイン直後にリダイレクトさせたいドキュメントのIDを選んでください。';
+$_lang['user_err_not_specified_managertheme'] = '選択した管理画面のテーマファイルは存在しません。';
 $_lang['user_err_not_specified_mobnumber'] = '携帯電話の入力欄が空欄です。 (もしアメリカの場合、地域コードを入力してください)';
 $_lang['user_err_not_specified_notification_method'] = '新しいパスワードの通知方法を決定してください。';
 $_lang['user_err_not_specified_password'] = 'パスワードが空欄です。';
@@ -144,7 +144,7 @@ $_lang['user_grid_paginate'] = '{0} - {1} のうち {2}人のユーザーを表�
 $_lang['user_is_blocked'] = 'このユーザー名はアクセス拒否されています';
 $_lang['user_logincount'] = 'ログイン回数';
 $_lang['user_male'] = '男性';
-$_lang['user_management_msg'] = '管理画面にログインできるユーザーの情報を編集します。';
+$_lang['user_management_msg'] = 'サイト(管理画面も含む)を利用できるユーザーの情報を編集します。';
 $_lang['user_mobile'] = '携帯電話番号';
 $_lang['user_new'] = '新規ユーザー';
 $_lang['user_password_changed'] = 'Password successfully changed to: [[+password]]';

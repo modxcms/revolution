@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
+ * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -31,7 +31,7 @@ $_lang['snippet_execonsave'] = '保存後にスニペットを実行';
 $_lang['snippet_lock'] = '編集のためスニペットをロックする';
 $_lang['snippet_lock_msg'] = 'スニペットを編集するためにはロックの解除が必要です。';
 $_lang['snippet_management_msg'] = '<h3 style="font-weight:bold;">スニペットの管理</h3><p>編集したいスニペットを選択してください。</p>';
-$_lang['snippet_msg'] = 'スニペットを追加・編集することができます。スニペットは「生の」PHPコードです。スニペットの出力をテンプレートの特定の場所に表示したい場合は、テンプレート内にスニペット名を記述する必要があります - 基本的に、スニペットのアウトプットはスニペット自身と同じ名前で保存された変数を必要とします。';
+$_lang['snippet_msg'] = 'スニペットを追加・編集することができます。先頭と末尾の「&lt;?php」「?&gt;」は必須です。省略した場合は自動的に追加されます。';
 $_lang['snippet_name'] = 'スニペット名';
 $_lang['snippet_new'] = '新規スニペット';
 $_lang['snippet_properties'] = '既定のプロパティ';

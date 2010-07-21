@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
+ * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -47,7 +47,7 @@ $_lang['server'] = 'サーバー';
 $_lang['servertime'] = 'サーバー時刻';
 $_lang['serveroffset'] = 'サーバーオフセット';
 $_lang['smarty_version'] = '<a href="http://smarty.net/" target="_blank">Smarty</a> のバージョン';
-$_lang['sysinfo_desc'] = 'このサイトのMODx環境に関する基本情報を閲覧できます。';
+$_lang['sysinfo_desc'] = 'システムに関する基本情報を閲覧できます。';
 $_lang['view_sysinfo'] = 'システム情報';
 $_lang['table_prefix'] = 'テーブル接頭辞';
 $_lang['truncate_table'] = 'このテーブルの内容を全削除するにはここをクリック';

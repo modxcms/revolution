@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
+ * @author Nick http://smallworld.west-tokyo.com
  */
 $_lang['clear'] = 'クリア';
 $_lang['error_log'] = 'エラーログ';

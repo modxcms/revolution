@@ -5,14 +5,14 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
+ * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
 $_lang['action'] = '操作内容';
 $_lang['date_end'] = '終了日';
 $_lang['date_start'] = '開始日';
-$_lang['filter_clear'] = 'フィルターのクリア';
+$_lang['filter_clear'] = '絞り込みをクリア';
 $_lang['manager_log'] = '管理ログ';
 $_lang['mgrlog_clear'] = '管理ログを空にする';
 $_lang['mgrlog_clear_confirm'] = '本当に管理ログを空にしますか？元には戻せません。';

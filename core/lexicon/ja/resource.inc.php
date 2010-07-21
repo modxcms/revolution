@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
+ * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -100,7 +100,7 @@ $_lang['resource_menutitle'] = 'メニュータイトル';
 $_lang['resource_menutitle_help'] = 'ナビゲーションのメニュー名に用いる想定の、短めのタイトルを指定します。[[*menutitle]]として呼び出します。';
 $_lang['resource_new'] = '新しいリソース';
 $_lang['resource_notcached'] = 'このリソースはまだキャッシュされていません。';
-$_lang['resource_pagetitle'] = 'ページタイトル';
+$_lang['resource_pagetitle'] = 'タイトル';
 $_lang['resource_pagetitle_help'] = 'リソース名を指定します。バックスラッシュは使えません。[[*pagetitle]]として呼び出します。サイトツリーの表示が煩雑にならないよう、短めの名前をつけるとよいでしょう。長めのタイトルが必要な場合は「長いタイトル」をお使いください。';
 $_lang['resource_parent'] = '親リソース';
 $_lang['resource_parent_help'] = '親リソースのIDを設定します。';

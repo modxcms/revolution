@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
+ * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -66,14 +66,14 @@ $_lang['access_to_contexts'] = 'コンテキストへアクセス';
 $_lang['access_to_resource_groups'] = 'リソースグループへアクセス';
 $_lang['access_type_err_ns'] = 'ターゲットタイプもしくはIDタイプが特定されていません';
 $_lang['acl_add'] = 'Add Access Control';
-$_lang['authority'] = '権限';
+$_lang['authority'] = '特権レベル';
 $_lang['authority_err_ns'] = 'Please specify a Minimum Role.';
 $_lang['category'] = 'カテゴリー';
 $_lang['category_add'] = 'Add Category';
-$_lang['filter_by_context'] = 'Filter by Context...';
-$_lang['filter_by_policy'] = 'Filter by Policy...';
-$_lang['filter_by_resource_group'] = 'Filter by Resource Group...';
-$_lang['filter_by_category'] = 'Filter by Category...';
+$_lang['filter_by_context'] = 'コンテキストで絞り込む';
+$_lang['filter_by_policy'] = 'ポリシーで絞り込む';
+$_lang['filter_by_resource_group'] = 'リソースグループで絞り込む';
+$_lang['filter_by_category'] = 'カテゴリーで絞り込む';
 $_lang['resource_group'] = 'リソースグループ';
 $_lang['resource_group_add'] = 'リソースグループの追加';
 $_lang['resource_group_access_remove'] = 'Remove Resource from Group';

@@ -152,6 +152,28 @@ $_lang['setting_filemanager_path'] = 'Путь для файлового мен�
 $_lang['setting_filemanager_path_desc'] = 'Сервер IIS зачастую не заполняет свойство document_root, которое используется файловым менеджером для определения мест, которые Вам доступны. Если у Вас возникли проблемы с использованием файлового менеджера, что этот путь указывает в корневой каталог установки MODx.';
 $_lang['setting_filemanager_path_err'] = 'Пожалуйста, установите абсолютный путь к корневому каталогу установки MODx для файлового менеджера.';
 $_lang['setting_filemanager_path_err_invalid'] = 'Указанный каталог для менеджера файлов не существует или недоступен. Пожалуйста, укажите существующий каталог или настройте права доступа к указанному каталогу.';
+
+$_lang['setting_friendly_alias_lowercase_only'] = 'Только строчные символы в псевдонимах';
+$_lang['setting_friendly_alias_lowercase_only_desc'] = 'Determines whether to allow only lowercase characters in a Resource alias.';
+$_lang['setting_friendly_alias_max_length'] = 'Максимальная длина псевдонима';
+$_lang['setting_friendly_alias_max_length_desc'] = 'If greater than zero, the maximum number of characters to allow in a Resource alias. Zero equals unlimited.';
+$_lang['setting_friendly_alias_restrict_chars'] = 'Метод фильтрации символов в псевдонимах';
+$_lang['setting_friendly_alias_restrict_chars_desc'] = 'The method used to restrict characters used in a Resource alias. "pattern" allows a RegEx pattern to be provided, "legal" allows any legal URL characters, "alpha" allows only letters of the alphabet, and "alphanumeric" allows only letters and numbers.';
+$_lang['setting_friendly_alias_restrict_chars_pattern'] = 'Шаблон для фильтрации символов в псевдонимах';
+$_lang['setting_friendly_alias_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in a Resource alias.';
+$_lang['setting_friendly_alias_strip_element_tags'] = 'FURL Alias Strip Element Tags';
+$_lang['setting_friendly_alias_strip_element_tags_desc'] = 'Determines if Element tags should be stripped from a Resource alias.';
+$_lang['setting_friendly_alias_translit'] = 'Транслитерация псевдонимов';
+$_lang['setting_friendly_alias_translit_desc'] = 'The method of transliteration to use on an alias specified for a Resource. Empty or "none" is the default which skips transliteration. Other possible values are "iconv" (if available) or a named transliteration table provided by a custom transliteration service class.';
+$_lang['setting_friendly_alias_translit_class'] = 'FURL Alias Transliteration Service Class';
+$_lang['setting_friendly_alias_translit_class_desc'] = 'An optional service class to provide named transliteration services for FURL Alias generation/filtering.';
+$_lang['setting_friendly_alias_trim_chars'] = 'FURL Alias Trim Characters';
+$_lang['setting_friendly_alias_trim_chars_desc'] = 'Characters to trim from the ends of a provided Resource alias.';
+$_lang['setting_friendly_alias_word_delimiter'] = 'Разделитель слов  в псевдонимах';
+$_lang['setting_friendly_alias_word_delimiter_desc'] = 'The preferred word delimiter for friendly URL alias slugs.';
+$_lang['setting_friendly_alias_word_delimiters'] = 'FURL Alias Word Delimiters';
+$_lang['setting_friendly_alias_word_delimiters_desc'] = 'Characters which represent word delimiters when processing friendly URL alias slugs. These characters will be converted and consolidated to the preferred FURL alias word delimiter.';
+
 $_lang['setting_friendly_alias_urls'] = 'Использовать псевдонимы в урлах:';
 $_lang['setting_friendly_alias_urls_desc'] = 'Если Вы используете дружественные URL, а у ресурса есть псевдоним (alias), то всегда будет использован псевдоним. Если вы включите эту настройку, то суффикс который установлен в «Типы содержимого» также будет добавлен к псевдониму. Например, если идентификатор ресурса 1, синоним «introduction» и вы установили  в «Типы содержимого» суффикс «.html», то включив эту настройку Вы получите адрес «introduction.html». Если псевдоним не установлен, то MODx создаст ссылку «1.html».';
 $_lang['setting_friendly_urls'] = 'Использовать дружественные URL:';
@@ -221,6 +243,25 @@ $_lang['setting_proxy_port'] = 'Proxy Port';
 $_lang['setting_proxy_port_desc'] = 'The port for your proxy server.';
 $_lang['setting_proxy_username'] = 'Proxy Username';
 $_lang['setting_proxy_username_desc'] = 'The username to authenticate against with your proxy server.';
+
+$_lang['setting_phpthumb_cache_maxage'] = 'phpThumb Max Cache Age';
+$_lang['setting_phpthumb_cache_maxage_desc'] = 'Delete cached thumbnails that have not been accessed in more than X days.';
+
+$_lang['setting_phpthumb_cache_maxsize'] = 'phpThumb Max Cache Size';
+$_lang['setting_phpthumb_cache_maxsize_desc'] = 'Delete least-recently-accessed thumbnails when cache grows bigger than X megabytes in size.';
+
+$_lang['setting_phpthumb_cache_maxfiles'] = 'phpThumb Max Cache Files';
+$_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Delete least-recently-accessed thumbnails when cache has more than X files.';
+
+$_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb Cache Source Files';
+$_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Whether or not to cache source files as they are loaded. Recommended to off.';
+
+$_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop';
+$_lang['setting_phpthumb_zoomcrop_desc'] = 'The default zc setting for phpThumb when used in MODx. Defaults to 0 to prevent zoom cropping.';
+
+$_lang['setting_phpthumb_far'] = 'phpThumb Force Aspect Ratio';
+$_lang['setting_phpthumb_far_desc'] = 'The default far setting for phpThumb when used in MODx. Defaults to C to force aspect ratio toward the center.';
+
 $_lang['setting_publish_default'] = ' Публиковать по умолчанию:';
 $_lang['setting_publish_default_desc'] = 'Выберите  «Да» если хотите, чтобы все новые ресурсы сразу становились опубликованными.';
 $_lang['setting_publish_default_err'] = 'Пожалуйста, укажите хотите ли вы чтобы новые ресурсы по умолчанию публиковались.';
@@ -311,6 +352,8 @@ $_lang['setting_use_browser_err'] = 'Пожалуйста, укажите, хо�
 $_lang['setting_use_editor'] = 'Использовать текстовый редактор';
 $_lang['setting_use_editor_desc'] = 'Хотите ли вы использовать Rich Text Editor (RTE)? Если вам удобнее использовать HTML, можете выключить RTE с помощью этой опции. Имейте в виду, что эта опция применяется ко всем документам и пользователям!';
 $_lang['setting_use_editor_err'] = 'Пожалуйста, укажите, хотите вы или нет использовать RTE редактор.';
+$_lang['setting_use_multibyte'] = 'Использовать библиотеку mbstring';
+$_lang['setting_use_multibyte_desc'] = 'Включите, если вы хотите использовать библиотеку mbstring для работы с многобайтовыми кодировками. Включайте только, если библиотека mbstring установлена на вашем сервере.';
 $_lang['setting_webpwdreminder_message'] = 'Напоминание пароля:';
 $_lang['setting_webpwdreminder_message_desc'] = ' Здесь вы можете создать сообщение, которое будет отсылаться пользователям, когда они запрашивают напоминание пароля. Письмо должно содержать логин и пароль.  <br /><strong>ПРИМЕЧАНИЕ:</strong> Следующие подстановщики отобразят соответствующие данные при отправлении письма: : <br />
 <br />[[+sname]] - название сайта, <br />[[+saddr]] - e-mail адрес сайта, 
@@ -336,3 +379,5 @@ $_lang['setting_welcome_screen'] = 'Показывать Экран привет
 $_lang['setting_welcome_screen_desc'] = 'If set to true, the welcome screen will show on the next successful loading of the welcome page, and then not show after that.';
 $_lang['setting_which_editor'] = 'Редактор:';
 $_lang['setting_which_editor_desc'] = 'Здесь вы можете выбрать, какой редактор использовать. Вы можете скачать и установить дополнительные редакторы с страницы загрузок MODx';
+$_lang['setting_which_element_editor'] = 'Редактор для элементов';
+$_lang['setting_which_element_editor_desc'] = 'Здесь вы можете выбрать какой редактор использовать при редактировании элементов.';

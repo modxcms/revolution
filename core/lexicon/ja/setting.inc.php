@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
+ * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -14,7 +14,7 @@ $_lang['area_authentication'] = '認証とセキュリティ';
 $_lang['area_caching'] = 'キャッシュ';
 $_lang['area_editor'] = 'リッチテキストエディタ';
 $_lang['area_file'] = 'ファイルシステム';
-$_lang['area_filter'] = 'エリアでフィルター';
+$_lang['area_filter'] = 'エリアで絞り込み';
 $_lang['area_furls'] = 'フレンドリーURL';
 $_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = '辞書と言語';
@@ -28,7 +28,7 @@ $_lang['area_site'] = 'サイト';
 $_lang['area_system'] = 'システムとサーバー';
 $_lang['areas'] = 'Areas';
 $_lang['namespace'] = '名前空間';
-$_lang['namespace_filter'] = '名前空間でフィルター';
+$_lang['namespace_filter'] = '名前空間で絞り込み';
 $_lang['search_by_key'] = 'キーで検索';
 $_lang['setting_create'] = '新しい設定の作成';
 $_lang['setting_err'] = 'このフィールドの存在を確認してください：';

@@ -3,6 +3,7 @@ $_lang['database_charset'] = 'Кодировка базы данных';
 $_lang['database_name'] = 'Имя базы данных';
 $_lang['database_server'] = 'Сервер базы данных';
 $_lang['database_tables'] = 'Таблицы базы данных';
+$_lang['database_optimize'] = 'Оптимизировать базу данных';
 $_lang['database_overhead'] = '<b style=\'color:#990033\'>Примечание:</strong> Перерасход — это неиспользуемое пространство, зарезервированное MySQL. Для освобождения этого пространства, нажмите на число перерасхода таблицы.';
 $_lang['database_table_clickhere'] = 'Нажмите здесь';
 $_lang['database_table_clickbackup'] = 'для создания и скачивания резервной копии выбранных таблиц';

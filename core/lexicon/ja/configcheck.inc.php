@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
+ * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -22,7 +22,7 @@ $_lang['configcheck_errorpage_unpublished_msg'] = '設定したエラーペー�
 $_lang['configcheck_images'] = 'イメージディレクトリに書き込みができません';
 $_lang['configcheck_images_msg'] = 'イメージディレクトリが書き込み可能でないか、またはイメージディレクトリが存在していません。エディターの画像管理機能が動作しません';
 $_lang['configcheck_installer'] = 'インストーラーが残されています';
-$_lang['configcheck_installer_msg'] = '/setup/ ディレクトリにMODxのインストーラーが残されています。悪意ある攻撃を受ける可能性がありますので、早急にこのディレクトリを削除してください';
+$_lang['configcheck_installer_msg'] = '/setup/ ディレクトリにMODxのインストーラーが残されています。悪意ある攻撃を受ける可能性がありますので、早急にこのディレクトリを削除してください。';
 $_lang['configcheck_lang_difference'] = '言語ファイルのエントリー数が異なります';
 $_lang['configcheck_lang_difference_msg'] = '現在選択されている言語ファイルのエントリー数がデフォルト言語ファイル(英語)のエントリー数と異なるため、一部が英語で表示されます。日本語で表示したい場合は、最新の言語ファイルを入手しアップデートする必要があります。';
 $_lang['configcheck_notok'] = '<span style="font-weight:bold;color:red;">動作環境に問題があります。</span>';

@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
+ * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -18,7 +18,7 @@ $_lang['file_download_unzip'] = 'ファイルの解凍';
 $_lang['file_edit'] = '編集';
 $_lang['file_err_chmod'] = 'chmod実行中に予期せぬエラーが起こりました。';
 $_lang['file_err_chmod_ns'] = 'chmod設定を行ってください。';
-$_lang['file_err_filter'] = 'フィルター条件ではファイルが見つりませんでした。';
+$_lang['file_err_filter'] = '絞り込み条件ではファイルが見つりませんでした。';
 $_lang['file_err_invalid'] = 'このファイルは通常のファイルではないため削除できませんでした。';
 $_lang['file_err_nf'] = 'ファイルが存在しません';
 $_lang['file_err_ns'] = '正しいファイルを選択してください。';

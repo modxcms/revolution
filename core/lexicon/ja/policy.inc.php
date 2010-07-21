@@ -5,7 +5,7 @@
  * @language ja
  * @package modx
  * @subpackage lexicon
- * @author Nick_smallworld http://twitter.com/Nick_smallworld
+ * @author Nick http://smallworld.west-tokyo.com
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
@@ -19,7 +19,7 @@ $_lang['permission_new'] = 'New Permission';
 $_lang['permission_remove'] = 'Remove Permission';
 $_lang['permission_remove_confirm'] = 'Are you sure you want to remove this permission?';
 $_lang['permission_update'] = 'Update Permission';
-$_lang['permissions'] = 'パーミッション';
+$_lang['permissions'] = '権限';
 $_lang['permissions_desc'] = 'Here you can define specific permissions that this policy will contain. All user groups with this policy will inherit these permissions.';
 $_lang['policies'] = 'アクセスポリシー';
 $_lang['policy'] = 'アクセスポリシー';
