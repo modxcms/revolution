@@ -25,11 +25,13 @@ class modConnectorRequest extends modManagerRequest {
     public $location;
 
     public function initialize() {
-        $ctx = $this->modx->context->get('key');
-        if (!empty($ctx) && $ctx == 'mgr') {
-            $ml = $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en'));
-            if (!empty($ml)) {
-                $this->modx->setOption('cultureKey',$ml);
+        if ($this->modx && is_object($this->modx->context) && $this->modx->context instanceof modContext) {
+            $ctx = $this->modx->context->get('key');
+            if (!empty($ctx) && $ctx == 'mgr') {
+                $ml = $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en'));
+                if (!empty($ml)) {
+                    $this->modx->setOption('cultureKey',$ml);
+                }
             }
         }
 
