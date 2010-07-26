@@ -1,7 +1,8 @@
 This file shows the changes in this release of xPDO.
 
-xPDO 2.0.0-rc2 ($LastChangedRevision$, $LastChangedDate$)
+xPDO 2.0.0-rc2
 ====================================
+- Migrate to git
 - [#XPDO-46] Implement support for IN operator using array as binding
 - [#XPDO-51] Fix incorrect criteria variable when caching individual rows from collections by primary key
 - [#XPDO-53] Fix bug preventing save of related objects when a key owner is foreign and not new
