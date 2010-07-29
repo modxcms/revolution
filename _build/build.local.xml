@@ -37,13 +37,12 @@
         <pathelement location="${project.basedir}/ht.access" />
     </path>
 
-    <!-- Set the project classpath and define the svn task -->
+    <!-- Set the project classpath and define the yuicompress task -->
     <path id="project.classpath">
         <fileset dir="${basedir}/lib">
             <include name="**/*.jar" />
         </fileset>
     </path>
-    <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" classpathref="project.classpath" />
     <taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask" classpathref="project.classpath" />
 
     <!-- ================================= 

@@ -19,8 +19,9 @@
 
     <!-- Set some common build properties -->
     <property name="build.dir" value="${project.basedir}/_build" />
-    <property name="build.src.url"
-              value="http://svn.modxcms.com/svn/tattoo/tattoo/branches/revolution"
+    <property name="build.src.tree" value="HEAD" />
+    <property name="build.src.remote"
+              value="git://github.com/modxcms/revolution.git"
     />
     <property name="build.image.basedir" value="${build.dir}/image" />
     <property name="build.image.dir" value="${build.image.basedir}/modx-${modx.core.version}-${modx.core.release}" />
@@ -39,20 +40,19 @@
         <pathelement location="${project.basedir}/ht.access" />
     </path>
 
-    <!-- Set the project classpath and define the svn task -->
+    <!-- Set the project classpath and define the yuicompress task -->
     <path id="project.classpath">
         <fileset dir="${build.dir}/lib">
             <include name="**/*.jar" />
         </fileset>
     </path>
-    <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" classpathref="project.classpath" />
     <taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask" classpathref="project.classpath" />
 
     <!-- =================================
           target: complete
          ================================= -->
     <target name="complete" description="--> Complete Build">
-        <antcall target="svn-export-build-image"></antcall>
+        <antcall target="git-export-build-image"></antcall>
         <antcall target="modext-minify"></antcall>
         <antcall target="modext-concat-min"></antcall>
         <antcall target="modext-concat"></antcall>
@@ -98,30 +98,25 @@
     </target>
 
     <!-- Export the svn build image from the repository -->
-    <target name="svn-export-build-image"
+    <target name="git-export-build-image"
             depends="cleanup-build-image"
-            description="export a revision of the MODx core from SVN"
+            description="export a revision of MODx from a Git remote repository"
     >
-        <svn>
-            <export srcUrl="${build.src.url}"
-                    destPath="${build.image.dir}"
-                    revision="HEAD"
-                    force="true"
-            />
-        </svn>
+        <exec dir="${project.basedir}" executable="${git.command}">
+            <arg line="archive -o ${build.image.basedir}/${build.distrib.name}.zip --remote=${build.src.remote} --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}" />
+        </exec>
+        <unzip src="${build.image.basedir}/${build.distrib.name}.zip" dest="${build.image.basedir}" />
     </target>
 
-    <!-- Export the svn build image from a local working copy -->
-    <target name="svn-export-build-image-wc"
+    <!-- Export the Git build image from a local repository -->
+    <target name="git-export-build-image-wc"
             depends="cleanup-build-image"
-            description="export a revision of the MODx core from an SVN working copy"
+            description="export a revision of MODx from a local Git repository"
     >
-        <svn>
-            <export srcPath="${project.basedir}"
-                    destPath="${build.image.dir}"
-                    force="true"
-            />
-        </svn>
+        <exec dir="${project.basedir}" executable="${git.command}">
+            <arg line="archive -o ${build.image.basedir}/${build.distrib.name}.zip --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}" />
+        </exec>
+        <unzip src="${build.image.basedir}/${build.distrib.name}.zip" dest="${build.image.basedir}" />
     </target>
 
     <!-- Minify the MODExt JavaScript libraries (using YUIAnt task) -->
