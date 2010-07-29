@@ -1,0 +1,16 @@
+# ignore all .htaccess
+.htaccess
+
+# ignore all config.core.php
+config.core.php
+
+# ignore all compressed js and css
+*-min.css
+*-min.js
+
+# ignore concatenated js
+modext.js
+
+# ignore common root paths for docs and assets
+/docs/
+/assets/
