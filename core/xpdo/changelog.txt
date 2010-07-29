@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- Remove xpdo.connect.inc.php (no longer used)
 - Migrate to git
 - [#XPDO-46] Implement support for IN operator using array as binding
 - [#XPDO-51] Fix incorrect criteria variable when caching individual rows from collections by primary key
