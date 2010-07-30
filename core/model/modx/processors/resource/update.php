@@ -436,7 +436,7 @@ if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCach
 
 $resource->removeLock();
 
-$returnArray = $resource->get(array_diff(array_keys($resource->_fields), array('content','ta')));
+$returnArray = $resource->get(array_diff(array_keys($resource->_fields), array('content','ta','introtext','description','link_attributes')));
 foreach ($returnArray as $k => $v) {
     if (strpos($k,'tv') === 0) {
         unset($returnArray[$k]);
