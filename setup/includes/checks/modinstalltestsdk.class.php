@@ -50,7 +50,7 @@ class modInstallTestSdk extends modInstallTest {
     protected function _checkAdvPaths() {
         /* web_path */
         $this->results['context_web_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],$this->install->settings->get('context_web_path'));
-        $webDir = dirname($this->install->settings->get('context_web_path'));
+        $webDir = $this->install->settings->get('context_web_path');
         if (!$this->is_writable2($webDir)) {
             $this->results['context_web_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
             $this->results['context_web_writable']['class'] = 'testFailed';
