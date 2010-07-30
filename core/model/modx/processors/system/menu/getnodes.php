@@ -30,6 +30,7 @@ $c->leftJoin('modAction','Action');
 $c->select(array(
     'modMenu.*',
     'Action.controller',
+    'Action.namespace',
 ));
 $c->select('COUNT(`Children`.`text`) AS `childrenCount`');
 $c->where(array(
@@ -51,6 +52,10 @@ foreach ($menus as $menu) {
         } else {
             $controller .= '.php';
         }
+    }
+    $namespace = $menu->get('namespace');
+    if(!in_array($namespace, array('core', '', null))) {
+        $modx->lexicon->load($namespace . ':default');
     }
     $text = $modx->lexicon($menu->get('text'));
 
