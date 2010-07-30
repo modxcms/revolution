@@ -114,6 +114,7 @@ class modLexicon {
     public function fetch($prefix = '',$removePrefix = false) {
         if (!empty($prefix)) {
             $lex = array();
+            $lang = $this->_lexicon;
             foreach ($lang as $k => $v) {
                 if (strpos($k,$prefix) !== false) {
                     $key = $removePrefix ? str_replace($prefix,'',$k) : $k;
