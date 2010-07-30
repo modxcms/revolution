@@ -5,18 +5,6 @@
  * @package modx
  * @subpackage manager
  */
-function getStrBtwn($str,$start,$end) {
-        $r = explode($start,$str);
-        if (!empty($r[1])) {
-            $r = explode($end, $r[1]);
-            return $r[0];
-        }
-        return false;
-}
-$clog = file_get_contents($modx->getOption('core_path').'docs/changelog.txt');
-$rev = getStrBtwn($clog,'$LastChangedRevision: ',' $');
-$modx->smarty->assign('revision',$rev);
-
 /* get top navbar */
 $menus = $modx->cacheManager->get('mgr/menus');
 if ($menus == null) {
