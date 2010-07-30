@@ -188,7 +188,11 @@ class modLexicon {
                     $topic_parsed = $params[2];
                 }
 
+                $englishEntries = $language != 'en' ? $this->loadCache($namespace,$topic_parsed,'en') : false;
                 $entries = $this->loadCache($namespace,$topic_parsed,$language);
+                if (is_array($englishEntries) && !empty($englishEntries)) {
+                    $entries = array_merge($englishEntries,$entries);
+                }
                 if (is_array($entries)) {
                     $this->_loadedTopics[] = $topicStr;
                     $this->_lexicon = is_array($this->_lexicon) ? array_merge($this->_lexicon, $entries) : $entries;
@@ -247,7 +251,7 @@ class modLexicon {
             }
         }
         if (empty($cached)) {
-            $this->modx->log(xPDO::LOG_LEVEL_WARN, "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
+            $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
         }
         return $cached;
     }
