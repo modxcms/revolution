@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- [#MODX-2220] Fixed bug where save_user was needed to change profile
 - [#MODX-2213] Always include english lexicon when loading a lexicon to act as a backup translation
 - [#MODX-2210] Added strip for xss in manager a variable
 - [#MODX-2205] Fixed issue with saving resources with resource fields having html and unescaped content
