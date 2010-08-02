@@ -7,15 +7,15 @@
  * @xtype modx-page-profile
  */
 MODx.page.Profile = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
+    config = config || {};
+    Ext.applyIf(config,{
         components: [{
             xtype: 'modx-panel-profile'
             ,renderTo: 'modx-panel-profile-div'
             ,user: config.user
         }]
-	});
-	MODx.page.Profile.superclass.constructor.call(this,config);
+    });
+    MODx.page.Profile.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.Profile,MODx.Component);
 Ext.reg('modx-page-profile',MODx.page.Profile);
@@ -151,7 +151,7 @@ MODx.panel.UpdateProfile = function(config) {
 Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
     setup: function() {
         MODx.Ajax.request({
-            url: MODx.config.connectors_url+'security/user.php'
+            url: MODx.config.connectors_url+'security/profile.php'
             ,params: {
                 action: 'get'
                 ,id: this.config.user
