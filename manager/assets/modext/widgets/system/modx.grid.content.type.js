@@ -74,7 +74,7 @@ MODx.grid.ContentType = function(config) {
 
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'system/contenttype.php'
-        ,fields: ['id','name','mime_type','file_extensions','headers','binary','description','menu']
+        ,fields: ['id','name','mime_type','file_extensions','headers','binary','description']
         ,paging: true
         ,remoteSort: true
         ,plugins: binaryColumn
@@ -112,7 +112,16 @@ MODx.grid.ContentType = function(config) {
     });
     MODx.grid.ContentType.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.grid.ContentType,MODx.grid.Grid);
+Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
+    getMenu: function() {
+        var m = [];
+        m.push({
+            text: _('content_type_remove')
+            ,handler: this.confirm.createDelegate(this,["remove",_('content_type_remove_confirm')])
+        })
+        this.menu.record.menu = m;
+    }
+});
 Ext.reg('modx-grid-content-type',MODx.grid.ContentType);
 
 
@@ -126,6 +135,7 @@ Ext.reg('modx-grid-content-type',MODx.grid.ContentType);
  */
 MODx.window.CreateContentType = function(config) {
     config = config || {};
+    this.ident = config.ident || 'cct'+Ext.id();
     Ext.applyIf(config,{
         title: _('content_type_new')
         ,width: 350
@@ -134,14 +144,14 @@ MODx.window.CreateContentType = function(config) {
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'name'
-            ,id: 'modx-cct-name'
+            ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
             ,width: 200
             ,allowBlank: false
         },{
             fieldLabel: _('mime_type')
             ,name: 'mime_type'
-            ,id: 'modx-cct-mime-type'
+            ,id: 'modx-'+this.ident+'-mime-type'
             ,xtype: 'textfield'
             ,description: _('mime_type_desc')
             ,width: 200
@@ -149,7 +159,7 @@ MODx.window.CreateContentType = function(config) {
         },{
             fieldLabel: _('file_extensions')
             ,name: 'file_extensions'
-            ,id: 'modx-cct-file-extensions'
+            ,id: 'modx-'+this.ident+'-file-extensions'
             ,xtype: 'textfield'
             ,description: _('file_extensions_desc')
             ,width: 200
@@ -158,14 +168,14 @@ MODx.window.CreateContentType = function(config) {
             xtype: 'combo-boolean'
             ,fieldLabel: _('binary')
             ,name: 'binary'
-            ,id: 'modx-cct-binary'
+            ,id: 'modx-'+this.ident+'-binary'
             ,description: _('binary_desc')
             ,width: 60
             ,value: 0
         },{
             fieldLabel: _('description')
             ,name: 'description'
-            ,id: 'modx-cct-description'
+            ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
             ,width: 200
             ,grow: true
