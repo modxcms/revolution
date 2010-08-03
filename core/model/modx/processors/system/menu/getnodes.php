@@ -37,7 +37,7 @@ $c->where(array(
     'modMenu.parent' => $id,
 ));
 $c->sortby($sort,$dir);
-$c->groupby('modMenu.text');
+$c->groupby($modx->getSelectColumns('modMenu','modMenu','',array('text')));
 if ($isLimit) $c->limit($limit,$start);
 $menus = $modx->getCollection('modMenu',$c);
 

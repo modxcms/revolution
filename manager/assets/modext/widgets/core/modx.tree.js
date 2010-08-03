@@ -203,10 +203,15 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         node.select();
         this.cm.activeNode = node;        
         this.cm.removeAll();
-        if (node.attributes.menu && node.attributes.menu.items) {
-            this.addContextMenuItem(node.attributes.menu.items);
-            this.cm.showAt(e.xy);
+        var m;
+        if (this.getMenu) {
+            m = this.getMenu(node,e);
+        } else if (node.attributes.menu && node.attributes.menu.items) {
+            m = node.attributes.menu.items;
         }
+        this.addContextMenuItem(m);
+        this.cm.showAt(e.xy);
+        e.preventDefault();
         e.stopEvent();
     }
     

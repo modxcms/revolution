@@ -16,24 +16,23 @@ $data = $modx->fromJSON($data);
 $nodes = array();
 getNodesFormatted($nodes,$data);
 
-
 /* readjust cache */
 foreach ($nodes as $node) {
-	$menu = $modx->getObject('modMenu',$node['text']);
-	if (empty($menu)) continue;
+    $menu = $modx->getObject('modMenu',$node['text']);
+    if (empty($menu)) continue;
 
-	if ($menu->get('parent') != $node['parent']) {
-		/* get new parent, if invalid, skip, unless is root */
-		if (!empty($node['parent'])) {
-			$parentMenu = $modx->getObject('modMenu',$node['parent']);
-			if (empty($parentMenu)) continue;
-		}
+    if ($menu->get('parent') != $node['parent']) {
+        /* get new parent, if invalid, skip, unless is root */
+        if (!empty($node['parent'])) {
+            $parentMenu = $modx->getObject('modMenu',$node['parent']);
+            if (empty($parentMenu)) continue;
+        }
 
-		/* save new parent */
-		$menu->set('parent',$node['parent']);
-	}
-	$menu->set('menuindex',$node['order']);
-	$menu->save();
+        /* save new parent */
+        $menu->set('parent',$node['parent']);
+    }
+    $menu->set('menuindex',$node['order']);
+    $menu->save();
 }
 return $modx->error->success();
 

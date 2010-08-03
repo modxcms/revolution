@@ -22,22 +22,6 @@ $c->sortby('modAction.controller','ASC');
 $actions = $modx->getCollection('modAction',$c);
 
 foreach ($actions as $action) {
-    $menu = array();
-    $menu[] = array(
-        'text' => $modx->lexicon('action_update'),
-        'handler' => 'function(itm,e) { this.updateAction(itm,e); }',
-    );
-    $menu[] = '-';
-    $menu[] = array(
-        'text' => $modx->lexicon('action_create_here'),
-        'handler' => 'function(itm,e) { this.createAction(itm,e); }',
-    );
-    $menu[] = '-';
-    $menu[] = array(
-        'text' => $modx->lexicon('action_remove'),
-        'handler' => 'function(itm,e) { this.removeAction(itm,e); }',
-    );
-
     $list[] = array(
         'text' => $action->get('controller').' ('.$action->get('id').')',
         'id' => 'n_action_'.$action->get('id'),
@@ -46,7 +30,6 @@ foreach ($actions as $action) {
         'cls' => 'icon-action',
         'type' => 'action',
         'data' => $action->toArray(),
-        'menu' => array('items' => $menu),
     );
 }
 return $list;

@@ -23,7 +23,7 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
 /* get actions */
 $c = $modx->newQuery('modAction');
-$c->sortby('namespace','ASC');
+$c->sortby($modx->getSelectColumns('modAction','modAction','',array('namespace')),'ASC');
 $c->sortby($sort,$dir);
 if ($isLimit) {
     $c->limit($limit,$start);
@@ -34,13 +34,13 @@ $count = $modx->getCount('modAction');
 $list = array();
 $list[] = array('id' => 0, 'controller' => $modx->lexicon('action_none'));
 foreach ($actions as $action) {
-	$actionArray = $action->toArray();
+    $actionArray = $action->toArray();
 
     $controller = $actionArray['controller'];
     $controllerLength = strlen($controller);
 
     $actionArray['controller'] = $actionArray['namespace'].' - '.$actionArray['controller'];
 
-	$list[] = $actionArray;
+    $list[] = $actionArray;
 }
 return $this->outputArray($list,$count);

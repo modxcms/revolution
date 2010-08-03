@@ -21,15 +21,15 @@ $modx->lexicon->load('action','menu');
 /* verify action */
 if (!isset($scriptProperties['action_id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
 if (!empty($scriptProperties['action_id'])) {
-	$action = $modx->getObject('modAction',$scriptProperties['action_id']);
-	if ($action == null) return $modx->error->failure($modx->lexicon('action_err_nf'));
+    $action = $modx->getObject('modAction',$scriptProperties['action_id']);
+    if ($action == null) return $modx->error->failure($modx->lexicon('action_err_nf'));
 }
 
 /* verify parent */
 if (!isset($scriptProperties['parent'])) return $modx->error->failure($modx->lexicon('menu_parent_err_ns'));
 if (!empty($scriptProperties['parent'])) {
-	$parent = $modx->getObject('modMenu',$scriptProperties['parent']);
-	if ($parent == null) return $modx->error->failure($modx->lexicon('menu_parent_err_nf'));
+    $parent = $modx->getObject('modMenu',$scriptProperties['parent']);
+    if ($parent == null) return $modx->error->failure($modx->lexicon('menu_parent_err_nf'));
 }
 
 /* make sure doesnt exist already */

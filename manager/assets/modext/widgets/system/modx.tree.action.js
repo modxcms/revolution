@@ -25,6 +25,35 @@ MODx.tree.Action = function(config) {
 Ext.extend(MODx.tree.Action,MODx.tree.Tree,{
     windows: {}
 
+    ,getMenu: function(n,e) {
+        var a = n.attributes;
+        var ui = n.getUI();
+        var m = [];
+        switch (a.type) {
+            case 'namespace':
+                m.push({
+                    text: _('action_create_here')
+                    ,handler: this.createAction
+                });
+                break;
+            case 'action':
+                m.push({
+                    text: _('action_update')
+                    ,handler: this.updateAction
+                });
+                m.push({
+                    text: _('action_create_here')
+                    ,handler: this.createAction
+                });
+                m.push({
+                    text: _('action_remove')
+                    ,handler: this.removeAction
+                });
+                break;
+        }
+        return m;
+    }
+
     ,refreshActionCombos: function() {
         var cb;
         var ls = ['modx-cact-parent','modx-cmen-action','modx-umen-action'];
@@ -39,6 +68,8 @@ Ext.extend(MODx.tree.Action,MODx.tree.Tree,{
         var r = node.data;
         if (node.type == 'namespace') {
             r = { 'namespace': r.name };
+        } else {
+            r = { 'parent': r.id ,'namespace': r.namespace };
         }
         
         if (!this.windows.create_action) {

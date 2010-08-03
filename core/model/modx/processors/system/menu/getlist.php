@@ -32,7 +32,7 @@ $count = $modx->getCount('modMenu');
 $list = array();
 
 foreach ($menus as $menu) {
-	$menuArray = $menu->toArray();
+    $menuArray = $menu->toArray();
     $menuArray['text_lex'] = $modx->lexicon($menuArray['text']);
     $list[] = $menuArray;
 }
