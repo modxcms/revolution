@@ -24,23 +24,15 @@ if (!is_array($properties)) $properties = array();
 
 $data = array();
 foreach ($properties as $property) {
-    if (!empty($property['lexicon'])) {
-        if (strpos($property['lexicon'],':') !== false) {
-            $modx->lexicon->load('en:'.$property['lexicon']);
-        } else {
-            $modx->lexicon->load('en:core:'.$property['lexicon']);
-        }
-        $modx->lexicon->load($property['lexicon']);
-    }
-
     $data[] = array(
         $property['name'],
-        $modx->lexicon($property['desc']),
+        $property['desc'],
         $property['type'],
         $property['options'],
         $property['value'],
         $property['lexicon'],
         false, /* overridden set to false */
+        $property['desc_trans'],
     );
 }
 

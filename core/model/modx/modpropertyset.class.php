@@ -31,6 +31,33 @@ class modPropertySet extends xPDOSimpleObject {
         }
         return $elements;
     }
+    
+    /**
+     * Overrides xPDOObject::get to handle when retrieving the properties field
+     * for an Element.
+     *
+     * {@inheritdoc}
+     */
+    public function get($k, $format= null, $formatTemplate= null) {
+        $value = parent :: get($k, $format, $formatTemplate);
+
+        /* automatically translate lexicon descriptions */
+        if ($k == 'properties' && !empty($value) && is_array($value)
+               && is_object($this->xpdo) && $this->xpdo instanceof modX && $this->xpdo->lexicon) {
+            foreach ($value as &$property) {
+                if (!empty($property['lexicon'])) {
+                    if (strpos($property['lexicon'],':') !== false) {
+                        $this->xpdo->lexicon->load('en:'.$property['lexicon']);
+                    } else {
+                        $this->xpdo->lexicon->load('en:core:'.$property['lexicon']);
+                    }
+                    $this->xpdo->lexicon->load($property['lexicon']);
+                }
+                $property['desc_trans'] = $this->xpdo->lexicon($property['desc']);
+            }
+        }
+        return $value;
+    }
 
     /**
      * Get the properties for this element instance for processing.
@@ -98,7 +125,7 @@ class modPropertySet extends xPDOSimpleObject {
                     );
                 }
                 /* handle translations of properties (temp fix until modLocalizableObject in 2.1 and beyond) */
-                if (!empty($propertyArray['lexicon'])) {
+                /*if (!empty($propertyArray['lexicon'])) {
                     $this->xpdo->lexicon->load($propertyArray['lexicon']);
                     $propertyArray['desc'] = $this->xpdo->lexicon($propertyArray['desc']);
 
@@ -109,7 +136,7 @@ class modPropertySet extends xPDOSimpleObject {
                             }
                         }
                     }
-                }
+                }*/
                 $propertiesArray[$key] = $propertyArray;
             }
             if ($merge && !empty($propertiesArray)) {

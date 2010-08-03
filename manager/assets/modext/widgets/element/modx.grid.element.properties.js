@@ -30,14 +30,14 @@ MODx.grid.ElementProperties = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
-            '<p class="modx-property-description"><i>{desc}</i></p>'
+            '<p class="modx-property-description"><i>{desc_trans}</i></p>'
         )
     });
     Ext.applyIf(config,{
         title: _('properties')
         ,id: 'modx-grid-element-properties'
         ,maxHeight: 300
-        ,fields: ['name','desc','xtype','options','value','lexicon','overridden']
+        ,fields: ['name','desc','xtype','options','value','lexicon','overridden','desc_trans']
         ,autoExpandColumn: 'value'
         ,sortBy: 'name'
         ,width: '100%'
