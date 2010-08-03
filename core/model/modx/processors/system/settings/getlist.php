@@ -27,9 +27,16 @@ $area = $modx->getOption('area',$scriptProperties,'');
 
 /* build query */
 $c = $modx->newQuery('modSystemSetting');
+$c->select(array(
+    $modx->getSelectColumns('modSystemSetting','modSystemSetting'),
+));
+$c->select(array(
+    '`Entry`.`value` `name_trans`',
+    '`Description`.`value` `description_trans`',
+));
+$c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modSystemSetting`.`key`) = `Entry`.`name`');
+$c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modSystemSetting`.`key`,"_desc") = `Description`.`name`');
 if (!empty($key)) {
-    $c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modSystemSetting`.`key`) = `Entry`.`name`');
-    $c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modSystemSetting`.`key`,"_desc") = `Description`.`name`');
     $c->where(array(
         'modSystemSetting.key:LIKE' => '%'.$key.'%',
     ));
@@ -51,9 +58,8 @@ if (!empty($area)) {
     $c->where(array('area' => $area));
 }
 $count = $modx->getCount('modSystemSetting',$c);
-
-$c->sortby('`modSystemSetting`.`area`','ASC');
-$c->sortby('`modSystemSetting`.`'.$sort.'`',$dir);
+$c->sortby($modx->getSelectColumns('modSystemSetting','modSystemSetting','',array('area')),'ASC');
+$c->sortby($modx->getSelectColumns('modSystemSetting','modSystemSetting','',array($sort)),$dir);
 if ($isLimit) $c->limit($limit,$start);
 
 $settings = $modx->getCollection('modSystemSetting',$c);
@@ -75,13 +81,26 @@ foreach ($settings as $setting) {
     }
 
     /* get translated name and description text */
-    $settingArray['description'] = $modx->lexicon->exists($k.'_desc')
-        ? $modx->lexicon($k.'_desc')
-        : '';
-    $settingArray['name'] = $modx->lexicon->exists($k)
-        ? $modx->lexicon($k)
-        : $settingArray['key'];
-
+    if (empty($settingArray['description_trans'])) {
+        if ($modx->lexicon->exists($k.'_desc')) {
+            $settingArray['description_trans'] = $modx->lexicon($k.'_desc');
+            $settingArray['description'] = $k.'_desc';
+        } else {
+            $settingArray['description_trans'] = $settingArray['description'];
+        }
+    } else {
+        $settingArray['description'] = $settingArray['description_trans'];
+    }
+    if (empty($settingArray['name_trans'])) {
+        if ($modx->lexicon->exists($k)) {
+            $settingArray['name_trans'] = $modx->lexicon($k);
+            $settingArray['name'] = $k;
+        } else {
+            $settingArray['name_trans'] = $settingArray['key'];
+        }
+    } else {
+        $settingArray['name'] = $settingArray['name_trans'];
+    }
 
     $settingArray['oldkey'] = $settingArray['key'];
     

@@ -32,6 +32,15 @@ if (isset($scriptProperties['key']) && $scriptProperties['key'] != '') {
 }
 
 $c = $modx->newQuery('modContextSetting');
+$c->select(array(
+    $modx->getSelectColumns('modContextSetting','modContextSetting'),
+));
+$c->select(array(
+    '`Entry`.`value` `name_trans`',
+    '`Description`.`value` `description_trans`',
+));
+$c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modContextSetting`.`key`) = `Entry`.`name`');
+$c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modContextSetting`.`key`,"_desc") = `Description`.`name`');
 $c->where($wa);
 $c->sortby('`'.$scriptProperties['sort'].'`',$scriptProperties['dir']);
 $c->limit($scriptProperties['limit'],$scriptProperties['start']);
@@ -41,31 +50,53 @@ $cc = $modx->newQuery('modContextSetting');
 $cc->where($wa);
 $count = $modx->getCount('modContextSetting',$cc);
 
-$ss = array();
+$list = array();
 foreach ($settings as $setting) {
-    $sa = $setting->toArray();
+    $settingArray = $setting->toArray();
 
-    $k = 'setting_'.$sa['key'];
+    $k = 'setting_'.$settingArray['key'];
 
     /* if 3rd party setting, load proper text */
     $modx->lexicon->load($setting->get('namespace').':default');
 
     if ($modx->lexicon->exists('area_'.$setting->get('area'))) {
-        $sa['area_text'] = $modx->lexicon('area_'.$setting->get('area'));
-    } else $sa['area_text'] = $sa['area'];
+        $settingArray['area_text'] = $modx->lexicon('area_'.$setting->get('area'));
+    } else $settingArray['area_text'] = $settingArray['area'];
 
-    $sa['description'] = $modx->lexicon->exists($k.'_desc')
-        ? $modx->lexicon($k.'_desc')
-        : '';
-    $sa['name'] = $modx->lexicon->exists($k)
-        ? $modx->lexicon($k)
-        : $sa['key'];
-    $sa['menu'] = array(
+
+    /* get translated name and description text */
+    if (empty($settingArray['description_trans'])) {
+        if ($modx->lexicon->exists($k.'_desc')) {
+            $settingArray['description_trans'] = $modx->lexicon($k.'_desc');
+            $settingArray['description'] = $k.'_desc';
+        } else {
+            $settingArray['description_trans'] = $settingArray['description'];
+        }
+    } else {
+        $settingArray['description'] = $settingArray['description_trans'];
+    }
+    if (empty($settingArray['name_trans'])) {
+        if ($modx->lexicon->exists($k)) {
+            $settingArray['name_trans'] = $modx->lexicon($k);
+            $settingArray['name'] = $k;
+        } else {
+            $settingArray['name_trans'] = $settingArray['key'];
+        }
+    } else {
+        $settingArray['name'] = $settingArray['name_trans'];
+    }
+
+    $settingArray['editedon'] = $setting->get('editedon') == '-001-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
+        ? ''
+        : strftime('%b %d, %Y %I:%M %p',strtotime($setting->get('editedon')));
+
+
+    $settingArray['menu'] = array(
         array(
             'text' => $modx->lexicon('setting_update'),
             'handler' => array(
                 'xtype' => 'modx-window-context-setting-update',
-                'record' => $sa,
+                'record' => $settingArray,
             ),
         ),
         '-',
@@ -74,6 +105,6 @@ foreach ($settings as $setting) {
             'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm"])',
         ),
     );
-    $ss[] = $sa;
+    $list[] = $settingArray;
 }
-return $this->outputArray($ss,$count);
+return $this->outputArray($list,$count);
