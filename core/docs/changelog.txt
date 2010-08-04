@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- [#MODX-2233] Fixed issue where qtip was not showing on Elements in a Category
 - [#MODX-2203] Fixed issue where root of file tree was not accessible after navigating away
 - [#MODX-2192], [#MODX-2232] Fixed issues with settings and their translations, names in the Settings grids
 - Adjustments and optimizations to menus/actions processors and js
