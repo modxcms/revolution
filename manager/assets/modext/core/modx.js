@@ -227,6 +227,19 @@ Ext.extend(MODx,Ext.Component,{
             o.replaceWith(tr);
         }
     }
+    ,hideTV: function(tvs) {
+        if (!Ext.isArray(tvs)) { tvs = [tvs]; }
+        MODx.on("ready",function() { this.hideTVs(tvs); },this);
+    }
+    ,hideTVs: function(tvs) {
+        if (!Ext.isArray(tvs)) { tvs = [tvs]; }
+        var el;
+        for (var i=0;i<tvs.length;i++) {
+            el = Ext.get(tvs[i]+'-tr');
+            el.setVisibilityMode(Ext.Element.DISPLAY);
+            el.hide();
+        }
+    }
 });
 Ext.reg('modx',MODx);
 
