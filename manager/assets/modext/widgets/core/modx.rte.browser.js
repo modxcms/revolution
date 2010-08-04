@@ -26,6 +26,8 @@ MODx.browser.RTE = function(config) {
         ,hideFiles: config.hideFiles || true
         ,ident: this.ident
         ,rootVisible: true
+        ,rootId: '/'
+        ,rootName: _('files')
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
         }

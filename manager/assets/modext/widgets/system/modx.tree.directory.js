@@ -9,8 +9,9 @@
 MODx.tree.Directory = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        rootVisible: false
-        ,root_id: 'root'
+        rootVisible: true
+        ,rootName: _('files')
+        ,rootId: '/'
         ,title: _('files')
         ,ddAppendOnly: true
         ,enableDrag: true
@@ -82,9 +83,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                     m = this._getFileMenu(n);
                     break;
             }
-
-            this.addContextMenuItem(m);
-            this.cm.showAt(e.xy);
+            if (m.length > 0) {
+                this.addContextMenuItem(m);
+                this.cm.showAt(e.xy);
+            }
         }
         e.stopEvent();
     }

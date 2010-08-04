@@ -38,9 +38,9 @@ MODx.tree.Tree = function(config) {
         tl.on('load',this.onLoad,this);
         root = {
             nodeType: 'async'
-            ,text: config.root_name || ''
+            ,text: config.root_name || config.rootName || ''
             ,draggable: false
-            ,id: config.root_id || 'root'
+            ,id: config.root_id || config.rootId || 'root'
         };
     } else {        
         tl = new Ext.tree.TreeLoader({

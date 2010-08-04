@@ -159,7 +159,9 @@ MODx.browser.Window = function(config) {
         ,prependPath: config.prependPath || null
         ,hideFiles: config.hideFiles || false
         ,ident: this.ident
-        ,rootVisible: config.rootVisible == null ? true : config.rootVisible
+        ,rootId: '/'
+        ,rootName: _('files')
+        ,rootVisible: true
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
         }
