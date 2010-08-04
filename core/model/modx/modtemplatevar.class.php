@@ -417,7 +417,7 @@ class modTemplateVar extends modElement {
         $types = array();
         $renderPaths = array();
         foreach ($renderDirectories as $renderDirectory) {
-            if (empty($renderDirectory)) continue;
+            if (empty($renderDirectory) || !is_dir($renderDirectory)) continue;
             try {
                 $dirIterator = new DirectoryIterator($renderDirectory);
                 foreach ($dirIterator as $file) {
