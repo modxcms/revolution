@@ -105,6 +105,7 @@ $modx->regClientStartupHTMLBlock('
 // <![CDATA[
 MODx.config.publish_document = "'.$publish_document.'";
 MODx.onDocFormRender = "'.$onDocFormRender.'";
+MODx.ctx = "'.$resource->get('context_key').'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-weblink-update"

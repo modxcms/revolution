@@ -16,6 +16,11 @@ if (is_array($rtecallback)) $rtecallback = trim(implode(',',$rtecallback),',');
 
 $modx->smarty->assign('site_id',$modx->site_id);
 $modx->smarty->assign('rtecallback',$rtecallback);
+$_REQUEST['ctx'] = 'my';
+$modx->regClientStartupHTMLBlock('<script type="text/javascript">
+MODx.siteId = "'.$modx->site_id.'";
+MODx.ctx = "'.(!empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web').'";
+</script>');
 
 $modx->response->registerCssJs(false);
 return $modx->smarty->fetch('browser/index.tpl');

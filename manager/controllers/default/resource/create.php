@@ -121,6 +121,7 @@ $fcDt = $modx->getObject('modActionDom',array(
 if ($fcDt) {
     $default_template = $fcDt->get('value');
 }
+$ctx = !empty($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web';
 
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
@@ -133,13 +134,14 @@ $modx->regClientStartupHTMLBlock('
 // <![CDATA[
 MODx.config.publish_document = "'.$publish_document.'";
 MODx.onDocFormRender = "'.$onDocFormRender.'";
+MODx.ctx = "'.$ctx.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-resource-create"
         ,template: "'.$default_template.'"
         ,content_type: "1"
         ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument').'"
-        ,context_key: "'.(isset($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web').'"
+        ,context_key: "'.$ctx.'"
         ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
         ,richtext: "'.$richtext.'"
         ,access_permissions: "'.$access_permissions.'"

@@ -52,6 +52,7 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sec
 $modx->regClientStartupHTMLBlock('<script type="text/javascript">
 // <![CDATA[
 MODx.onContextFormRender = "'.$onContextFormRender.'";
+MODx.ctx = "'.$context->get('key').'";
 // ]]>
 </script>');
 

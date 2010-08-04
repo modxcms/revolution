@@ -88,6 +88,7 @@ $fcDt = $modx->getObject('modActionDom',array(
 if ($fcDt) {
     $default_template = $fcDt->get('value');
 }
+$ctx = !empty($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web';
 
 /* register JS scripts */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
@@ -101,13 +102,14 @@ $modx->regClientStartupHTMLBlock('
 // <![CDATA[
 MODx.config.publish_document = "'.$publish_document.'";
 MODx.onDocFormRender = "'.$onDocFormRender.'";
+MODx.ctx = "'.$ctx.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-static-create"
         ,template: "'.$default_template.'"
         ,content_type: "1"
         ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modStaticResource').'"
-        ,context_key: "'.(isset($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web').'"
+        ,context_key: "'.$ctx.'"
         ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
         ,which_editor: "'.$which_editor.'"
         ,access_permissions: "'.$access_permissions.'"

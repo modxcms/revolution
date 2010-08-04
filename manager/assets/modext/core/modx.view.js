@@ -92,6 +92,7 @@ Ext.extend(MODx.DataView,Ext.DataView,{
                 action: 'getList'
                 ,prependPath: config.prependPath || null
                 ,prependUrl: config.prependUrl || null
+                ,ctx: config.ctx || MODx.ctx
             }
             ,root: config.root || 'results'
             ,fields: config.fields
@@ -244,7 +245,10 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     
     ,load: function(dir) {
         dir = dir || '';
-        this.view.run({dir: dir});
+        this.view.run({
+            dir: dir
+            ,ctx: MODx.ctx
+        });
     }
     
     ,sortImages : function(){

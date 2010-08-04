@@ -21,10 +21,13 @@ $dir = !isset($scriptProperties['dir']) || $scriptProperties['dir'] == 'root' ? 
 $dir = $modx->fileHandler->sanitizePath($dir);
 $fullpath = $root.'/'.$dir;
 
+/* strip base_path from main path to allow for relative paths in filemanager_path setting */
 $fileManagerUrl = $modx->getOption('filemanager_path',$scriptProperties,$modx->getOption('rb_base_url',null,''));
 $basePath = $modx->getOption('base_path',null,MODX_BASE_PATH);
 if ($basePath != '/') $fileManagerUrl = str_replace($basePath,'',$fileManagerUrl);
+$baseUrl = $modx->getOption('base_url',null,MODX_BASE_URL);
 
+/* setup settings */
 $imagesExts = array('jpg','jpeg','png','gif');
 $use_multibyte = $modx->getOption('use_multibyte',null,false);
 $encoding = $modx->getOption('modx_charset',null,'UTF-8');
@@ -63,12 +66,16 @@ foreach (new DirectoryIterator($fullpath) as $file) {
                 $imageWidth = $size[0] > 800 ? 800 : $size[0];
                 $imageHeight = $size[1] > 600 ? 600 : $size[1];
             }
-            
+
+            /* ensure max h/w */
             if ($thumbWidth > $imageWidth) $thumbWidth = $imageWidth;
             if ($thumbHeight > $imageHeight) $thumbHeight = $imageHeight;
 
-            $thumb = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$thumbWidth.'&h='.$thumbHeight;
-            $image = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$imageWidth.'&h='.$imageHeight;
+            /* if using paths inside webroot, trim leading slash */
+            $imageUrl = strpos($imageUrl,$baseUrl) !== false ? $imageUrl = ltrim($url,'/') : $url;
+            /* generate thumb/image URLs */
+            $thumb = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$imageUrl.'&w='.$thumbWidth.'&h='.$thumbHeight.'&HTTP_MODAUTH='.$modx->site_id;
+            $image = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$imageUrl.'&w='.$imageWidth.'&h='.$imageHeight.'&HTTP_MODAUTH='.$modx->site_id;
            
         } else {
             $thumb = $image = $modx->getOption('manager_url').'templates/default/images/restyle/nopreview.jpg';

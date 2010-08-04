@@ -21,6 +21,7 @@ MODx.tree.Directory = function(config) {
         ,baseParams: {
             prependPath: config.prependPath || null
             ,hideFiles: config.hideFiles || false
+            ,ctx: MODx.ctx || 'web'
         }
         ,action: 'getList'
         ,primaryKey: 'dir'
@@ -195,6 +196,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 xtype: 'modx-browser'
                 ,hideFiles: false
                 ,rootVisible: false
+                ,ctx: MODx.ctx
                 ,listeners: {
                     'select': {fn: function(data) {
                         this.fireEvent('fileBrowserSelect',data);
