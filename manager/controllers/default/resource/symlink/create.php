@@ -52,14 +52,30 @@ $access_permissions = $modx->hasPermission('access_permissions');
 
 /* set default template */
 $default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $modx->getOption('default_template')));
-$fcDt = $modx->getObject('modActionDom',array(
+$userGroups = $modx->user->getUserGroups();
+$c = $modx->newQuery('modActionDom');
+$c->leftJoin('modAccessActionDom','Access');
+$principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
+$c->where(array(
     'action' => $this->action['id'],
     'name' => 'template',
     'container' => 'modx-panel-resource',
     'rule' => 'fieldDefault',
+    'active' => true,
+    array(
+        array(
+            'Access.principal_class:=' => 'modUserGroup',
+            $principalCol.' IN ('.implode(',',$userGroups).')',
+        ),
+        'OR:Access.principal:IS' => null,
+    ),
 ));
+$fcDt = $modx->getObject('modActionDom',$c);
 if ($fcDt) {
-    $default_template = $fcDt->get('value');
+    $p = $parent ? $parent->get('id') : 0;
+    if ($fcDt->get('constraint_field') == 'parent' && $p == $fcDt->get('constraint')) {
+        $default_template = $fcDt->get('value');
+    }
 }
 
 /*
