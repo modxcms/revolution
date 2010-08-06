@@ -1,0 +1,51 @@
+This file shows the changes in this release of xPDO.
+
+xPDO 2.0.0-rc2
+====================================
+- Remove xpdo.connect.inc.php (no longer used)
+- Migrate to git
+- [#XPDO-46] Implement support for IN operator using array as binding
+- [#XPDO-51] Fix incorrect criteria variable when caching individual rows from collections by primary key
+- [#XPDO-53] Fix bug preventing save of related objects when a key owner is foreign and not new
+- [#XPDO-54] Fix xPDOQuery to properly recognize MySQL Fulltext search expression as a conditional clause
+- [#XPDO-52] Fix fatal error when xPDOManager::createObjectContainer() cannot prepare a PDOStatement
+- xPDO::log() and xPDO::$logTarget will now accept an ARRAY target with an option that is a reference to the var
+- xPDO::connect() should return false on Exception
+- Ensure driverOptions is set as an empty array if the value passed is not an array
+- Log PDOException messages in xPDO::connect()
+- [#XPDO-49] Fix inconsistent static and non-static calls to fromJSON() and toJSON() methods on xPDO
+- Added xPDO::getService to load service classes
+- Commented out deprecated code in xPDOVehicle dealing with PHP validators 
+- Fixed typo in xPDOVehicle where $r should be $v
+- [#XPDO-40] Fixed getCount to work when passing a criteria with a class alias set.
+- xPDOTransport: Fix several E_STRICT errors caused by static calls to methods not defined as static.
+- xPDOTransportVehicle: Implemented missing _compilePayload(), and fixed errors in _installTransport() and uninstall().
+- xPDOValidator: Fix several E_STRICT errors caused by inconsistent method signatures in xPDOValidationRule::isValid() derivatives.
+- Fixed bug in xPDOTransportVehicle::put() referring to xPDOFileVehicle.
+- xPDOManager_mysql::createSourceContainer() and removeSourceContainer() will use provided connection properties or default to current xPDO instance configuration.
+- Removed dependency on mysql extension for xPDOManager_mysql::createSourceContainer() and removeSourceContainer() implementations.
+- Refactored xPDOManager to be an abstract class rather than calling static methods in derivatives.
+- Added support for xPDOObjectVehicle::uninstall() to operate on related_objects.
+- Fixed bug in xPDOObjectVehicle::uninstall() not getting UPDATE_OBJECT value properly.
+- Added xPDOTransport::UNINSTALL_OBJECT attribute and support in xPDOObjectVehicle::uninstall() [default value is true].
+- Refactored xPDOCacheManager to determine new folder/file permissions via umask().
+- Modified xPDOQuery_mysql::select() to trim the comma-delimited fields specified after explode()'ing the string.
+- Modified xPDOVehicle::resolve() to return true if xPDOTransport::RESOLVE_FILES is set to false with file resolver types.
+- Modified xPDOFileVehicle::install() to check xPDOTransport::INSTALL_FILES is not set to false before checking for the existence of the defined fileSource.
+- Fixed xPDOVehicle::resolve() and xPDOFileVehicle::install() to prevent them from attempting to preserve files that do not exist.
+- Added xPDOTransport::INSTALL_FILES and xPDOTransport::UNINSTALL_FILES to make xPDOFileVehicle behavior consistent with RESOLVE_FILES and RESOLVE_FILES_REMOVE.
+- Updated xPDOVehicle::resolve() to properly detect if resolved when restoring preserved file archives.
+- Updated xPDO and xPDOCriteria constructors to use proper PHP5 __construct().
+- Added xPDOTransportVehicle class to allow transport packages to be embedded in other transport packages.
+- Updated copyright dates.
+- [#XPDO-42] Fixed error with xPDOQuery::parseConditions() ignoring NULL bound values.
+- Fixed xPDOCriteria::toSQL() to properly handle NULL values.
+- Updated/fixed xPDOZip implementation and enabled it as the preferred zip provider for xPDOTransport.
+- Made xPDOVehicle an abstract class. 
+- [#XPDO-4] Allow nesting conditions arbitrarily deep using simple nested array format.
+
+xPDO 2.0.0-rc1 (LastChangedRevision: 389, LastChangedDate: 2009-12-31 11:18:40 -0700 (Thu, 31 Dec 2009))
+====================================
+- [#XPDO-27] Allow getCount() to work with Collection Graphs.
+- [#XPDO-38] Modified xPDOQuery to determine conjunctions for condition groups based on conjunction specified for first condition in the group.
+- Added changelog.txt
