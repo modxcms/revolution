@@ -8,25 +8,38 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
 
     protected function setUp() {
         $properties= array ();
-        include (strtr(realpath(dirname(__FILE__)) . '/properties.inc.php', '\\', '/'));
         include_once (strtr(realpath(dirname(dirname(__FILE__))) . '/xpdo/xpdo.class.php', '\\', '/'));
+        include (strtr(realpath(dirname(__FILE__)) . '/properties.inc.php', '\\', '/'));
         $this->properties= $properties;
     }
 
-    protected function getXPDOObject($dsnProperty = 'xpdo_string_dsn_test') {
-        $xpdo= new xPDO($this->properties[$dsnProperty], $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
+    protected function getXPDOObject($options = array()) {
+        $driver= $this->properties['xpdo_driver'];
+        $dsn= $driver . '_' . (array_key_exists('dsnProperty', $options) ? $options['dsnProperty'] : 'string_dsn_test');
+        $xpdo= new xPDO(
+                $this->properties[$dsn],
+                $this->properties["{$driver}_string_username"],
+                $this->properties["{$driver}_string_password"],
+                $this->properties["{$driver}_array_options"],
+                $this->properties["{$driver}_array_driverOptions"]
+        );
         if (is_object($xpdo)) {
-            $xpdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
-            if ($dsnProperty == 'xpdo_string_dsn_test') $xpdo->setPackage('sample', strtr(realpath(dirname(dirname(__FILE__))) . '/model/', '\\', '/'));
-//            $xpdo->setDebug(true); // set to true for debugging during tests only
-            $xpdo->setLogLevel(xPDO::LOG_LEVEL_WARN);
-            $xpdo->setLogTarget('ECHO'); // set to 'HTML' for running through browser
+            if ($dsn == $driver . '_string_dsn_test') {
+                $xpdo->setPackage('sample', strtr(realpath(dirname(__FILE__)) . '/model/', '\\', '/'));
+            }
+            if (array_key_exists('debug', $this->properties)) {
+                $xpdo->setDebug($this->properties['debug']); // set to true for debugging during tests only
+            }
+            $logLevel = array_key_exists('logLevel', $this->properties) ? $this->properties['logLevel'] : xPDO::LOG_LEVEL_WARN;
+            $logTarget = array_key_exists('logTarget', $this->properties) ? $this->properties['logTarget'] : 'ECHO';
+            $xpdo->setLogLevel($logLevel);
+            $xpdo->setLogTarget($logTarget); // set to 'HTML' for running through browser
         }
         return $xpdo;
     }
 
     public function testConnectionError() {
-        $string_dsn= 'mysql:host= nosuchhost;dbname=nosuchdb';
+        $string_dsn= $this->properties['xpdo_driver'] . ':host= nosuchhost;dbname=nosuchdb';
         $mypdo= new xPDO($string_dsn, "nonesuchuser", "nonesuchpass");
         $result= $mypdo->connect();
         // Should be an error set since we gave bogus info
@@ -36,7 +49,8 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
     public function testInitialize() {
         $xpdo= $this->getXPDOObject();
         if ($xpdo && $xpdo->connect()) {
-            if ($response = $xpdo->getManager()->removeSourceContainer(xPDO::parseDSN($this->properties['xpdo_string_dsn_test']))) {
+            $response = $xpdo->getManager()->removeSourceContainer(xPDO::parseDSN($this->properties[$this->properties['xpdo_driver'] . '_string_dsn_test']));
+            if ($response) {
                 $xpdo= null;
             }
         } else {
@@ -46,8 +60,9 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testCreateDatabase() {
-//        $xpdo= $this->getXPDOObject('xpdo_string_dsn_nodb');
-//        $created= $xpdo->getManager()->createSourceContainer(xPDO::parseDSN($this->properties['xpdo_string_dsn_test']), $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
+        $driver= $this->properties['xpdo_driver'];
+//        $xpdo= $this->getXPDOObject($driver . '_string_dsn_nodb');
+//        $created= $xpdo->getManager()->createSourceContainer(xPDO::parseDSN($this->properties[$driver . '_string_dsn_test']), $this->properties[$driver . '_string_username'], $this->properties[$driver . '_string_password']);
         $xpdo= $this->getXPDOObject();
         $created= $xpdo->getManager()->createSourceContainer();
         $this->assertTrue($created == true, "Could not create database");
@@ -273,7 +288,12 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
         // Should be an error set since we gave bogus info
         $xpdo= $this->getXPDOObject();
         $xpdo->getManager();
-        $result= $xpdo->manager->createSourceContainer($this->properties['xpdo_string_dsn_test'], $this->properties['xpdo_string_username'], $this->properties['xpdo_string_password']);
+        $driver= $this->properties['xpdo_driver'];
+        $result= $xpdo->manager->createSourceContainer(
+                $this->properties[$driver . '_string_dsn_test'],
+                $this->properties[$driver . '_string_username'],
+                $this->properties[$driver . '_string_password']
+        );
         $this->assertTrue($result == false, "Error testing overwriting source container with createSourceContainer() method");
     }
 

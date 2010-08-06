@@ -5,7 +5,7 @@ class PDOTest extends PHPUnit2_Framework_TestCase {
     protected $pdo;
 
     protected function setUp() {
-        $this->pdo = new PDO('mysql:host=localhost;dbname=test', 'root', '3rg0t71');
+        $this->pdo = new PDO('mysql:host=localhost;dbname=test', 'dbuser', 'dbpass');
     }
 
     public function testDBConnection() {
