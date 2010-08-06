@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<project name="xPDOCore" basedir=".">
+    <!-- Override properties in the build.properties file -->
+    <property file="build.properties" />
+
+    <!-- Set some common project properties -->
+    <property name="project.name" value="xpdo" />
+    <property name="project.basedir" value=".." />
+    <property name="project.core.dir" value="${project.basedir}/xpdo" />
+    <property name="project.tutorials.dir" value="${project.basedir}/tutorials" />
+    <property name="project.test.dir" value="${project.basedir}/test" />
+    <property name="project.model.dir" value="${project.basedir}/model" />
+    <property name="project.build.dir" value="${project.basedir}/build" />
+
+    <!-- Set the project version -->
+    <property name="xpdo.core.version" value="2.0.0" />
+    <property name="xpdo.core.release" value="rc2" />
+
+    <!-- Set some common build properties -->
+    <property name="build.dir" value="${basedir}" />
+    <property name="build.src.tree" value="HEAD" />
+    <property name="build.src.remote"
+              value="git://github.com/modxcms/xpdo-core.git"
+    />
+    <property name="build.image.basedir" value="${basedir}/image" />
+    <property name="build.image.name" value="${project.name}-${xpdo.core.version}-${xpdo.core.release}" />
+    <property name="build.image.dir" value="${basedir}/image/${build.image.name}" />
+    <property name="build.distrib.dir" value="${basedir}/distrib" />
+    <property name="build.distrib.name" value="${project.name}-${xpdo.core.version}-${xpdo.core.release}" />
+    <property name="build.apidocs.dir" value="${build.image.dir}/docs" />
+
+    <!-- Set a path representing all the root path elements for the build source -->
+    <path id="project.srcpath">
+        <pathelement location="${project.core.dir}" />
+        <pathelement location="${project.tutorials.dir}" />
+        <pathelement location="${project.test.dir}" />
+        <pathelement location="${project.model.dir}" />
+    </path>
+    
+    <!-- ================================= 
+          target: complete              
+         ================================= -->
+    <target name="complete" description="--> Complete Build">
+        <antcall target="git-export-build-image"></antcall>
+        <!-- <antcall target="generate-phpdocs"></antcall> -->
+        <antcall target="prepare-build-image"></antcall>
+        
+        <buildnumber />
+        
+        <antcall target="build-sdk"></antcall>
+        <antcall target="build-minimal"></antcall>
+    </target>
+
+    <target name="complete-wc" description="--> Complete Build from Working Copy">
+        <antcall target="git-export-build-image-wc"></antcall>
+        <antcall target="generate-phpdocs"></antcall>
+        <antcall target="prepare-build-image"></antcall>
+        
+        <buildnumber />
+        
+        <antcall target="build-sdk"></antcall>
+        <antcall target="build-minimal"></antcall>
+    </target>
+
+    <!-- Various cleanup targets -->
+    <target name="cleanup-build-image" description="empty the build image directory">
+        <delete dir="${build.image.dir}" />
+    </target>
+    <target name="cleanup-build-distrib" description="empty the build distrib directory">
+        <delete dir="${build.distrib.dir}" />
+    </target>
+    <target name="cleanup-build-apidocs" description="empty the build apidocs directory">
+        <delete dir="${build.apidocs.dir}" />
+    </target>
+
+    <!-- Export the svn build image from the repository -->
+    <target name="git-export-build-image"
+            depends="cleanup-build-image"
+            description="export a revision of the xPDO core from a Git remote repository"
+    >
+        <exec dir="${project.basedir}" executable="${git.command}">
+            <arg line="archive -o ${build.image.basedir}/${build.distrib.name}.zip --remote=${build.src.remote} --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}" />
+        </exec>
+        <unzip src="${build.image.basedir}/${build.distrib.name}.zip" dest="${build.image.basedir}" />
+    </target>
+
+    <!-- Export the Git build image from a local repository -->
+    <target name="git-export-build-image-wc"
+            depends="cleanup-build-image"
+            description="export a revision of the xPDO core from a local Git repository"
+    >
+        <exec dir="${project.basedir}" executable="${git.command}">
+            <arg line="archive -o ${build.image.basedir}/${build.distrib.name}.zip --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}" />
+        </exec>
+        <unzip src="${build.image.basedir}/${build.distrib.name}.zip" dest="${build.image.basedir}" />
+    </target>
+
+    <!-- Run the phpdoc generation script -->
+    <target name="generate-phpdocs"
+            depends="cleanup-build-apidocs"
+            description="generate the phpdoc documentation"
+    >
+        <exec dir="${build.image.dir}" executable="${phpdoc.command}">
+            <arg line="-c ${basedir}/phpdoc.ini" />
+        </exec>
+    </target>
+
+    <!-- Prepare the build image for making a distrib -->
+    <target name="prepare-build-image" description="prepare the build image for packaging">
+        <mkdir dir="${build.distrib.dir}" />
+    </target>
+
+    <!-- Build a xPDO SDK distrib with all files -->
+    <target name="build-sdk" description="create the sdk distribution package">
+        <zip destfile="${build.distrib.dir}/${build.distrib.name}-sdk.zip">
+            <fileset dir="${build.image.basedir}">
+                <include name="${build.image.name}/**" />
+            </fileset>
+        </zip>
+    </target>
+
+    <!-- Build a minimal xPDO distrib with just the core library files -->
+    <target name="build-minimal" description="create the minimal distribution package">
+        <zip destfile="${build.distrib.dir}/${build.distrib.name}.zip">
+            <fileset dir="${build.image.basedir}">
+                <include name="${build.image.name}/xpdo/**" />
+            </fileset>
+        </zip>
+    </target>
+
+    <!-- Publish a distrib to a server -->
+    <target name="publish-build" description="publish the build to a server for download">
+        
+    </target>
+</project>
