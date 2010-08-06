@@ -19,4 +19,5 @@ if (!$context->prepare()) {
 
 /* assign context to smarty and display */
 $modx->smarty->assign('context', $context);
+$modx->smarty->assign('_ctx',$context->get('key'));
 return $modx->smarty->fetch('context/view.tpl');

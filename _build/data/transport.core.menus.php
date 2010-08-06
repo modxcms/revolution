@@ -29,7 +29,7 @@ $children[0]->fromArray(array (
   'description' => 'preview_desc',
   'icon' => 'images/icons/show.gif',
   'menuindex' => 0,
-  'handler' => 'window.open("../");',
+  'handler' => 'MODx.preview(); return false;',
 ), '', true, true);
 
 

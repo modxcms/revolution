@@ -240,6 +240,9 @@ Ext.extend(MODx,Ext.Component,{
             el.hide();
         }
     }
+    ,preview: function() {
+        window.open(MODx.config.site_url);
+    }
 });
 Ext.reg('modx',MODx);
 

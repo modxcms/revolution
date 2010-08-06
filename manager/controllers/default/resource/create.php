@@ -40,7 +40,7 @@ $resource = $modx->newObject($resourceClass);
 /* invoke OnDocFormPrerender event */
 $onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onDocFormPrerender)) {
     $onDocFormPrerender = implode('',$onDocFormPrerender);
@@ -67,7 +67,7 @@ $modx->smarty->assign('parentname',$parentname);
 /* invoke OnDocFormRender event */
 $onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onDocFormRender)) $onDocFormRender = implode('',$onDocFormRender);
 $onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocFormRender);
@@ -140,6 +140,7 @@ if ($fcDt) {
 
 /* set context */
 $ctx = !empty($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web';
+$modx->smarty->assign('_ctx',$ctx);
 
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');

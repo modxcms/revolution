@@ -105,6 +105,7 @@ if ($fcDt) {
     }
 }
 $ctx = !empty($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web';
+$modx->smarty->assign('_ctx',$ctx);
 
 /* register JS scripts */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');

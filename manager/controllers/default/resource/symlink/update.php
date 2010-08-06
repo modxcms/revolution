@@ -95,6 +95,7 @@ if ($modx->getOption('use_editor') && !empty($rte)) {
 }
 
 /* register JS scripts */
+$modx->smarty->assign('_ctx',$resource->get('context_key'));
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.security.js');

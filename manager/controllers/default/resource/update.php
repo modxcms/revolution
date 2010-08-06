@@ -117,6 +117,7 @@ if ($modx->getOption('use_editor') && !empty($rte)) {
     }
 }
 
+$modx->smarty->assign('_ctx',$resource->get('context_key'));
 $managerUrl = $modx->getOption('manager_url');
 $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');

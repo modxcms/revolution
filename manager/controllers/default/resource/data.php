@@ -54,12 +54,14 @@ if ($buffer = $modx->cacheManager->get($resource->getCacheKey())) {
 $modx->smarty->assign('resource',$resource);
 
 /* register JS scripts */
+$modx->smarty->assign('_ctx',$resource->get('context_key'));
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.data.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/resource/data.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[
 Ext.onReady(function() {
+    MODx.ctx = "'.$resource->get('context_key').'";
     MODx.load({
         xtype: "modx-page-resource-data"
         ,id: "'.$resource->get('id').'"

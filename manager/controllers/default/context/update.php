@@ -44,6 +44,7 @@ $modx->smarty->assign('OnContextFormRender',$onContextFormRender);
 $modx->smarty->assign('context', $context);
 
 /* register JS scripts */
+$modx->smarty->assign('_ctx',$context->get('key'));
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.access.context.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/core/modx.grid.settings.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.context.settings.js');
