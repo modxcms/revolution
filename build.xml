@@ -14,20 +14,19 @@
 
     <!-- Set the project version -->
     <property name="xpdo.core.version" value="2.0.0" />
-    <property name="xpdo.core.release" value="rc1" />
+    <property name="xpdo.core.release" value="rc2" />
 
     <!-- Set some common build properties -->
     <property name="build.dir" value="${basedir}" />
-    <property name="build.src.path" value="branches/2.0" />
-    <property name="build.src.url"
-              value="http://svn.xpdo.org/svn/xpdo/${build.src.path}"
+    <property name="build.src.tree" value="HEAD" />
+    <property name="build.src.remote"
+              value="git://github.com/modxcms/xpdo-core.git"
     />
-    <property name="build.src.revision" value="HEAD" />
     <property name="build.image.basedir" value="${basedir}/image" />
     <property name="build.image.name" value="${project.name}-${xpdo.core.version}-${xpdo.core.release}" />
     <property name="build.image.dir" value="${basedir}/image/${build.image.name}" />
     <property name="build.distrib.dir" value="${basedir}/distrib" />
-    <property name="build.distrib.name" value="${project.name}-${xpdo.core.version}-${xpdo.core.release}-${build.number}" />
+    <property name="build.distrib.name" value="${project.name}-${xpdo.core.version}-${xpdo.core.release}" />
     <property name="build.apidocs.dir" value="${build.image.dir}/docs" />
 
     <!-- Set a path representing all the root path elements for the build source -->
@@ -38,19 +37,11 @@
         <pathelement location="${project.model.dir}" />
     </path>
     
-    <!-- Set the project classpath and define the svn task -->
-    <path id="project.classpath">
-        <fileset dir="${basedir}/lib">
-            <include name="**/*.jar" />
-        </fileset>
-    </path>
-    <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" classpathref="project.classpath" />
-    
     <!-- ================================= 
           target: complete              
          ================================= -->
     <target name="complete" description="--> Complete Build">
-        <antcall target="svn-export-build-image"></antcall>
+        <antcall target="git-export-build-image"></antcall>
         <!-- <antcall target="generate-phpdocs"></antcall> -->
         <antcall target="prepare-build-image"></antcall>
         
@@ -61,7 +52,7 @@
     </target>
 
     <target name="complete-wc" description="--> Complete Build from Working Copy">
-        <antcall target="svn-export-build-image-wc"></antcall>
+        <antcall target="git-export-build-image-wc"></antcall>
         <antcall target="generate-phpdocs"></antcall>
         <antcall target="prepare-build-image"></antcall>
         
@@ -83,30 +74,25 @@
     </target>
 
     <!-- Export the svn build image from the repository -->
-    <target name="svn-export-build-image"
+    <target name="git-export-build-image"
             depends="cleanup-build-image"
-            description="export a revision of the xPDO core from SVN"
+            description="export a revision of the xPDO core from a Git remote repository"
     >
-        <svn>
-            <export srcUrl="${build.src.url}"
-                    destPath="${build.image.dir}"
-                    revision="${build.revision}"
-                    force="true"
-            />
-        </svn>
+        <exec dir="${project.basedir}" executable="${git.command}">
+            <arg line="archive -o ${build.image.basedir}/${build.distrib.name}.zip --remote=${build.src.remote} --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}" />
+        </exec>
+        <unzip src="${build.image.basedir}/${build.distrib.name}.zip" dest="${build.image.basedir}" />
     </target>
 
-    <!-- Export the svn build image from a local working copy -->
-    <target name="svn-export-build-image-wc"
+    <!-- Export the Git build image from a local repository -->
+    <target name="git-export-build-image-wc"
             depends="cleanup-build-image"
-            description="export a revision of the xPDO core from an SVN working copy"
+            description="export a revision of the xPDO core from a local Git repository"
     >
-        <svn>
-            <export srcPath="${project.basedir}"
-                    destPath="${build.image.dir}"
-                    force="true"
-            />
-        </svn>
+        <exec dir="${project.basedir}" executable="${git.command}">
+            <arg line="archive -o ${build.image.basedir}/${build.distrib.name}.zip --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}" />
+        </exec>
+        <unzip src="${build.image.basedir}/${build.distrib.name}.zip" dest="${build.image.basedir}" />
     </target>
 
     <!-- Run the phpdoc generation script -->
