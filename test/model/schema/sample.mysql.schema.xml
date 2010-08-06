@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="sample" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">
+    <object class="Person" table="person" extends="xPDOSimpleObject">
+        <field key="first_name" dbtype="varchar" precision="100" phptype="string" null="false" />
+        <field key="last_name" dbtype="varchar" precision="100" phptype="string" null="false" />
+        <field key="middle_name" dbtype="varchar" precision="100" phptype="string" null="false" />
+        <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="dob" dbtype="date" phptype="date" null="true" />
+        <field key="gender" dbtype="enum" precision="'','M','F'" phptype="string" null="false" default="" />
+        <field key="blood_type" dbtype="enum" precision="'','A+','A-','B+','B-','AB+','AB-','O+','O-'" phptype="string" null="false" default="" />
+        <field key="username" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+        <field key="password" dbtype="varchar" precision="255" phptype="password" null="false" />
+        <field key="security_level" dbtype="tinyint" precision="4" phptype="integer" null="false" />
+        <composite alias="PersonPhone" class="PersonPhone" local="id" foreign="person" cardinality="many" owner="local" />
+        <validation class="validation.xPDOValidator">
+            <rule field="dob" name="date_format" type="preg_match" rule="/\d{4}-\d{2}-\d{2}/" />
+            <rule field="password" name="password_length" type="xPDOValidationRule" rule="xPDOMinLengthValidationRule" value="6" />
+        </validation>
+    </object>
+    <object class="PersonPhone" table="person_phone" extends="xPDOObject">
+        <field key="person" dbtype="int" precision="11" phptype="integer" null="false" index="pk" />
+        <field key="phone" dbtype="int" precision="11" phptype="integer" null="false" index="pk" />
+        <field key="is_primary" dbtype="binary" precision="1" phptype="string" null="false" default="0" />
+        <aggregate alias="Person" class="Person" local="person" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="Phone" class="Phone" local="phone" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+    <object class="Phone" table="phone" extends="xPDOSimpleObject">
+        <field key="type" dbtype="enum" precision="'','home','work','mobile'" phptype="string" null="false" default="" />
+        <field key="number" dbtype="varchar" precision="20" phptype="string" null="false" />
+        <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <composite alias="PersonPhone" class="PersonPhone" local="id" foreign="phone" cardinality="many" owner="local" />
+    </object>
+</model>
