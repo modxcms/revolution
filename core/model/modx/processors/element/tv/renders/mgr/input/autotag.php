@@ -15,6 +15,7 @@ $c = $this->xpdo->newQuery('modTemplateVarResource');
 $c->where(array(
     'tmplvarid' => $this->get('id'),
 ));
+$c->sortby('value','ASC');
 $tags = $this->xpdo->getCollection('modTemplateVarResource',$c);
 $options = array();
 foreach ($tags as $tag) {
@@ -22,6 +23,7 @@ foreach ($tags as $tag) {
     $options = array_merge($options,$vs);
 }
 $options = array_unique($options);
+ksort($options);
 $opts = array();
 $defaults = array();
 $i = 0;
