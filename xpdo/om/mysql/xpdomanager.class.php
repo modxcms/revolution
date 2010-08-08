@@ -82,7 +82,7 @@ class xPDOManager_mysql extends xPDOManager {
             } catch (PDOException $pe) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not connect to database server: " . $pe->getMessage());
             } catch (Exception $e) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create source container: " . $pe->getMessage());
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create source container: " . $e->getMessage());
             }
         }
         return $created;
@@ -106,7 +106,7 @@ class xPDOManager_mysql extends xPDOManager {
             } catch (PDOException $pe) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not connect to database server: " . $pe->getMessage());
             } catch (Exception $e) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container: " . $pe->getMessage());
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container: " . $e->getMessage());
             }
         }
         return $removed;

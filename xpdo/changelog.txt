@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- Fix exception logging in xPDOManager_mysql
 - Fix xPDO::parseDSN() for sqlite DSN format
 - Remove xpdo.connect.inc.php (no longer used)
 - Migrate to git
