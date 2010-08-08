@@ -1495,8 +1495,8 @@ class xPDO {
     public static function parseDSN($string) {
         $result= array ();
         $pos= strpos($string, ':');
-        $parameters= explode(';', substr($string, ($pos +1)));
         $result['dbtype']= strtolower(substr($string, 0, $pos));
+        $parameters= explode(';', substr($string, ($pos +1)));
         for ($a= 0, $b= count($parameters); $a < $b; $a++) {
             $tmp= explode('=', $parameters[$a]);
             if (count($tmp) == 2) {
