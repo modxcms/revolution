@@ -7,6 +7,7 @@ xPDO 2.0.0-rc2
 - [#XPDO-46] Implement support for IN operator using array as binding
 - [#XPDO-51] Fix incorrect criteria variable when caching individual rows from collections by primary key
 - [#XPDO-53] Fix bug preventing save of related objects when a key owner is foreign and not new
+- Refactor xPDO::getManager() and xPDOManager::getGenerator() to work with other db engines besides mysql
 - Replace direct references to xPDO::$_escapeChar with new xPDO::escape()
 - Move xPDOGenerator::getPHPType() to xPDOManager
 - Fix non-static call to xPDO::parseDSN() in xPDO::__construct()

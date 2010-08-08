@@ -1199,13 +1199,14 @@ class xPDO {
      * frequently.
      *
      * @uses xPDOManager
-     * @return object|null A manager instance for the XPDO connection, or null
+     * @return object|null A manager instance for the xPDO connection, or null
      * if a manager class can not be instantiated.
      */
     public function getManager() {
         if ($this->manager === null || !$this->manager instanceof xPDOManager) {
-            if ($managerClass= $this->loadClass($this->config['dbtype'] . '.xPDOManager', '', false, true)) {
-                $managerClass.= '_' . $this->config['dbtype'];
+            $loaded= include_once(XPDO_CORE_PATH . 'om/' . $this->config['dbtype'] . '/xpdomanager.class.php');
+            if ($loaded) {
+                $managerClass = 'xPDOManager_' . $this->config['dbtype'];
                 $this->manager= new $managerClass ($this);
             }
             if (!$this->manager) {

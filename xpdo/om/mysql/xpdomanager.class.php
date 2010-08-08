@@ -49,15 +49,15 @@ class xPDOManager_mysql extends xPDOManager {
      */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
-        $this->dbtypes['integer']= array('INT','INTEGER','TINYINT','BOOLEAN','SMALLINT','MEDIUMINT','BIGINT');
-        $this->dbtypes['boolean']= array('BOOLEAN','BOOL');
-        $this->dbtypes['float']= array('DECIMAL','DEC','NUMERIC','FLOAT','DOUBLE','DOUBLE PRECISION','REAL');
-        $this->dbtypes['string']= array('CHAR','VARCHAR','BINARY','VARBINARY','TINYTEXT','TEXT','MEDIUMTEXT','LONGTEXT','ENUM','SET','TIME','YEAR');
-        $this->dbtypes['timestamp']= array('TIMESTAMP');
-        $this->dbtypes['datetime']= array('DATETIME');
-        $this->dbtypes['date']= array('DATE');
-        $this->dbtypes['binary']= array('TINYBLOB','BLOB','MEDIUMBLOB','LONGBLOB');
-        $this->dbtypes['bit']= array('BIT');
+        $this->dbtypes['integer']= array('/INT/i');
+        $this->dbtypes['boolean']= array('/^BOOL/i');
+        $this->dbtypes['float']= array('/^DEC/i','/^NUMERIC$/i','/^FLOAT$/i','/^DOUBLE/i','/^REAL/i');
+        $this->dbtypes['string']= array('/CHAR/i','/TEXT/i','/^ENUM$/i','/^SET$/i','/^TIME$/i','/^YEAR$/i');
+        $this->dbtypes['timestamp']= array('/^TIMESTAMP$/i');
+        $this->dbtypes['datetime']= array('/^DATETIME$/i');
+        $this->dbtypes['date']= array('/^DATE$/i');
+        $this->dbtypes['binary']= array('/BINARY/i','/BLOB/i');
+        $this->dbtypes['bit']= array('/^BIT$/i');
     }
 
     public function createSourceContainer($dsnArray = null, $username= null, $password= null, $containerOptions= array ()) {
@@ -140,7 +140,7 @@ class xPDOManager_mysql extends xPDOManager {
             $tableMeta= $this->xpdo->getTableMeta($className);
             $tableType= isset($tableMeta['engine']) ? $tableMeta['engine'] : 'MyISAM';
             $numerics= array_merge($this->dbtypes['integer'], $this->dbtypes['boolean'], $this->dbtypes['float']);
-            $datetimeStrings= array_merge($this->dbtypes['timestamp'], $this->dbtypes['datetime']);
+            $datetimeStrings= array('timestamp', 'datetime');
             $dateStrings= $this->dbtypes['date'];
             $pk= $this->xpdo->getPK($className);
             $pktype= $this->xpdo->getPKType($className);
@@ -165,7 +165,7 @@ class xPDOManager_mysql extends xPDOManager {
                 $default= '';
                 if (isset ($meta['default']) && !preg_match($lobsPattern, $dbtype)) {
                     $defaultVal= $meta['default'];
-                    if (($defaultVal === null || strtoupper($defaultVal) === 'NULL') || (in_array($dbtype, $datetimeStrings) && $defaultVal === 'CURRENT_TIMESTAMP')) {
+                    if (($defaultVal === null || strtoupper($defaultVal) === 'NULL') || (in_array($this->getPhpType($dbtype), $datetimeStrings) && $defaultVal === 'CURRENT_TIMESTAMP')) {
                         $default= ' DEFAULT ' . $defaultVal;
                     } else {
                         $default= ' DEFAULT \'' . $defaultVal . '\'';

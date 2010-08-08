@@ -221,26 +221,13 @@ class xPDOObject {
      * An array of DB constants/functions that represent timestamp values.
      * @var array
      */
-    public $_currentTimestamps= array (
-        'CURRENT_TIMESTAMP',
-        'CURRENT_TIMESTAMP()',
-        'NOW()',
-        'LOCALTIME',
-        'LOCALTIME()',
-        'LOCALTIMESTAMP',
-        'LOCALTIMESTAMP()',
-        'SYSDATE()'
-    );
+    public $_currentTimestamps= array ();
 
     /**
      * An array of DB constants/functions that represent date values.
      * @var array
      */
-    public $_currentDates= array (
-        'CURDATE()',
-        'CURRENT_DATE',
-        'CURRENT_DATE()'
-    );
+    public $_currentDates= array ();
 
     /**
      * Responsible for loading a result set from the database.
