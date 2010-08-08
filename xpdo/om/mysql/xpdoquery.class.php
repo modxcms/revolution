@@ -230,7 +230,7 @@ class xPDOQuery_mysql extends xPDOQuery {
                     }
                     $isString= in_array($fieldMeta[$k]['phptype'], $this->_quotable);
                     $field= array();
-                    $field['sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$k}{$this->xpdo->_escapeChar} = ?";
+                    $field['sql']= $this->xpdo->escape($alias) . '.' . $this->xpdo->escape($k) . " = ?";
                     $field['binding']= array (
                         'value' => $conditions[$iteration],
                         'type' => $isString ? PDO::PARAM_STR : PDO::PARAM_INT,
@@ -312,7 +312,7 @@ class xPDOQuery_mysql extends xPDOQuery {
 							}
 						}
                         $field= array ();
-                        $field['sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$key}{$this->xpdo->_escapeChar} " . $operator . ' ?';
+                        $field['sql']= $this->xpdo->escape($alias) . '.' . $this->xpdo->escape($key) . ' ' . $operator . ' ?';
                         $field['binding']= array (
                             'value' => $val,
                             'type' => $type,
@@ -337,7 +337,7 @@ class xPDOQuery_mysql extends xPDOQuery {
             } else {
                 $param_type= PDO::PARAM_STR;
             }
-            $field['sql']= "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$pk}{$this->xpdo->_escapeChar} = ?";
+            $field['sql']= $this->xpdo->escape($alias) . '.' . $this->xpdo->escape($pk) . ' = ?';
             $field['binding']= array ('value' => $conditions, 'type' => $param_type, 'length' => 0);
             $field['conjunction']= $conjunction;
             $result = new xPDOQueryCondition($field);

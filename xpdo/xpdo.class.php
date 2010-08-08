@@ -1449,6 +1449,21 @@ class xPDO {
     }
 
     /**
+     * Escapes the provided string using the platform-specific escape character.
+     *
+     * Different database engines escape string literals in SQL using different characters. For example, this is used to
+     * escape column names that might match a reserved string for that SQL interpreter. To write database agnostic
+     * queries with xPDO, it is highly recommend to escape any database or column names in any native SQL strings used.
+     *
+     * @param string $string A string to escape using the platform-specific escape character.
+     * @return string The string escaped with the platform-specific escape character.
+     */
+    public function escape($string) {
+        $string = trim($string, $this->_escapeChar);
+        return $this->_escapeChar . $string . $this->_escapeChar;
+    }
+
+	/**
      * Adds the table prefix, and optionally database name, to a given table.
      *
      * @param string $baseTableName The table name as specified in the object
@@ -1460,9 +1475,9 @@ class xPDO {
         $fqn= '';
         if (!empty ($baseTableName)) {
             if ($includeDb) {
-                $fqn .= $this->_escapeChar . $this->config['dbname'] . $this->_escapeChar . '.';
+                $fqn .= $this->escape($this->config['dbname']) . '.';
             }
-            $fqn .= $this->_escapeChar . $baseTableName . $this->_escapeChar;
+            $fqn .= $this->escape($baseTableName);
         }
         return $fqn;
     }

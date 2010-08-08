@@ -536,10 +536,10 @@ class xPDOObject {
      */
     public static function getSelectColumns(xPDO & $xpdo, $className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false) {
         $columnarray= array ();
-        if ($aColumns= $xpdo->getFields($className)) {
+        $aColumns= $xpdo->getFields($className);
+        if ($aColumns) {
             if (!empty ($tableAlias)) {
-                $tableAlias= trim($tableAlias, $xpdo->_escapeChar);
-                $tableAlias= $xpdo->_escapeChar . $tableAlias . $xpdo->_escapeChar;
+                $tableAlias= $xpdo->escape($tableAlias);
                 $tableAlias.= '.';
             }
             foreach (array_keys($aColumns) as $k) {
@@ -547,15 +547,15 @@ class xPDOObject {
                     continue;
                 }
                 elseif (empty ($columns)) {
-                    $columnarray[$k]= "{$tableAlias}" . $xpdo->_escapeChar . "{$k}" . $xpdo->_escapeChar;
+                    $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
                 }
                 elseif ($exclude || in_array($k, $columns)) {
-                    $columnarray[$k]= "{$tableAlias}" . $xpdo->_escapeChar . "{$k}" . $xpdo->_escapeChar;
+                    $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
                 } else {
                     continue;
                 }
                 if (!empty ($columnPrefix)) {
-                    $columnarray[$k]= $columnarray[$k] . " AS " . $xpdo->_escapeChar . "{$columnPrefix}{$k}" . $xpdo->_escapeChar;
+                    $columnarray[$k]= $columnarray[$k] . " AS " . $xpdo->escape("{$columnPrefix}{$k}");
                 }
             }
         }
@@ -1228,13 +1228,13 @@ class xPDOObject {
                     $fieldType= PDO::PARAM_INT;
                 }
                 if ($this->_new) {
-                    $cols[$_k]= $this->xpdo->_escapeChar . "{$_k}" . $this->xpdo->_escapeChar;
+                    $cols[$_k]= $this->xpdo->escape($_k);
                     $bindings[":{$_k}"]['value']= $fieldValue;
                     $bindings[":{$_k}"]['type']= $fieldType;
                 } else {
                     $bindings[":{$_k}"]['value']= $fieldValue;
                     $bindings[":{$_k}"]['type']= $fieldType;
-                    $updateSql[]= $this->xpdo->_escapeChar . "{$_k}" . $this->xpdo->_escapeChar . " = :{$_k}";
+                    $updateSql[]= $this->xpdo->escape($_k) . " = :{$_k}";
                 }
             }
             if ($this->_new) {
@@ -1252,7 +1252,7 @@ class xPDOObject {
                             if ($iteration) {
                                 $where .= " AND ";
                             }
-                            $where .= $this->xpdo->_escapeChar . "{$k}" . $this->xpdo->_escapeChar . " = :{$k}";
+                            $where .= $this->xpdo->escape($_k) . " = :{$k}";
                             $bindings[":{$k}"]['value']= $this->_fields[$k];
                             $bindings[":{$k}"]['type']= $vt;
                             $iteration++;
@@ -1265,7 +1265,7 @@ class xPDOObject {
                         }
                         $bindings[":{$pkn}"]['value']= $pk;
                         $bindings[":{$pkn}"]['type']= $pkt;
-                        $where= $this->xpdo->_escapeChar . $pkn . $this->xpdo->_escapeChar . ' = :' . $pkn;
+                        $where= $this->xpdo->escape($pkn) . ' = :' . $pkn;
                     }
                     if (!empty ($updateSql)) {
                         $sql= "UPDATE {$this->_table} SET " . implode(',', $updateSql) . " WHERE {$where} LIMIT 1";
@@ -1903,7 +1903,7 @@ class xPDOObject {
     protected function _initFields() {
         reset($this->_fieldMeta);
         while (list ($k, $v)= each($this->_fieldMeta)) {
-            $this->fieldNames[$k]= $this->xpdo->_escapeChar . "{$this->_table}" . $this->xpdo->_escapeChar . "." . $this->xpdo->_escapeChar . "{$k}" . $this->xpdo->_escapeChar;
+            $this->fieldNames[$k]= $this->xpdo->escape($this->_table) . '.' . $this->xpdo->escape($k);
         }
     }
 
