@@ -58,21 +58,6 @@ class xPDOObject_mysql extends xPDOObject {
         'CURRENT_DATE',
         'CURRENT_DATE()'
     );
-
-    /**
-     * Initializes the field names with the qualified table name.
-     *
-     * Once this is called, you can lookup the qualified name by the field name
-     * itself.
-     *
-     * @access protected
-     */
-    protected function _initFields() {
-        reset($this->_fieldMeta);
-        while (list ($k, $v)= each($this->_fieldMeta)) {
-            $this->fieldNames[$k]= "`{$this->_table}`.`{$k}`";
-        }
-    }
 }
 
 /**
