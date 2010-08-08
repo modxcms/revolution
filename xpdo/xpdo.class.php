@@ -235,7 +235,7 @@ class xPDO {
         if (is_string($options)) $options= array(xPDO::OPT_TABLE_PREFIX => $options);
         if (!is_array($options)) $options= array(xPDO::OPT_TABLE_PREFIX => '');
         if (!isset($options[xPDO::OPT_TABLE_PREFIX])) $options[xPDO::OPT_TABLE_PREFIX]= '';
-        $this->config= array_merge($options, $this->parseDSN($dsn));
+        $this->config= array_merge($options, xPDO::parseDSN($dsn));
         $this->config['dsn']= $dsn;
         $this->config['username']= $username;
         $this->config['password']= $password;

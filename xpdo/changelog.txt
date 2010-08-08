@@ -7,6 +7,7 @@ xPDO 2.0.0-rc2
 - [#XPDO-46] Implement support for IN operator using array as binding
 - [#XPDO-51] Fix incorrect criteria variable when caching individual rows from collections by primary key
 - [#XPDO-53] Fix bug preventing save of related objects when a key owner is foreign and not new
+- Fix non-static call to xPDO::parseDSN() in xPDO::__construct()
 - Make sure db-specific connect_file exists before trying to include it
 - Remove unnecessary overridden _initFields() in xPDOObject derivatives
 - [#XPDO-54] Fix xPDOQuery to properly recognize MySQL Fulltext search expression as a conditional clause
