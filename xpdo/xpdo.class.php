@@ -318,7 +318,7 @@ class xPDO {
                 if (!empty($this->config['connect_file']) && file_exists($this->config['connect_file'])) {
                     $connectFile = $this->config['connect_file'];
                 }
-                include ($connectFile);
+                if (file_exists($connectFile)) include ($connectFile);
             }
             if (!$connected) {
                 $this->pdo= null;
