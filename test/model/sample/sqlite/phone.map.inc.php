@@ -6,7 +6,7 @@ $xpdo_meta_map['Phone']= array (
   array (
     'type' => '',
     'number' => NULL,
-    'date_modified' => 'CURRENT_TIMESTAMP',
+    'date_modified' => 'datetime(\'now\')',
   ),
   'fieldMeta' => 
   array (
@@ -30,8 +30,7 @@ $xpdo_meta_map['Phone']= array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
       'null' => false,
-      'default' => 'CURRENT_TIMESTAMP',
-      'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
+      'default' => 'datetime(\'now\')',
     ),
   ),
   'indexes' => 

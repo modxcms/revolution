@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model package="sample" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">
+<model package="sample" baseClass="xPDOObject" platform="sqlite">
     <object class="Person" table="person" extends="xPDOSimpleObject">
         <field key="first_name" dbtype="varchar" precision="100" phptype="string" null="false" />
         <field key="last_name" dbtype="varchar" precision="100" phptype="string" null="false" />
         <field key="middle_name" dbtype="varchar" precision="100" phptype="string" null="false" />
-        <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="datetime('now')" />
         <field key="dob" dbtype="date" phptype="date" null="true" />
         <field key="gender" dbtype="enum" precision="'','M','F'" phptype="string" null="false" default="" />
         <field key="blood_type" dbtype="enum" precision="'','A+','A-','B+','B-','AB+','AB-','O+','O-'" phptype="string" null="false" default="" />
@@ -42,7 +42,7 @@
     <object class="Phone" table="phone" extends="xPDOSimpleObject">
         <field key="type" dbtype="enum" precision="'','home','work','mobile'" phptype="string" null="false" default="" />
         <field key="number" dbtype="varchar" precision="20" phptype="string" null="false" />
-        <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="datetime('now')" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="id" collation="A" null="false" />
@@ -51,25 +51,25 @@
         <composite alias="PersonPhone" class="PersonPhone" local="id" foreign="phone" cardinality="many" owner="local" />
     </object>
     <object class="xPDOSample" table="xpdosample" extends="xPDOSimpleObject">
-        <field key="parent" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
-        <field key="unique_varchar" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
-        <field key="varchar" dbtype="varchar" precision="100" phptype="string" null="false" />
+        <field key="parent" dbtype="int" phptype="integer" null="false" default="0" />
+        <field key="unique_varchar" dbtype="varchar" phptype="string" null="false" index="unique" />
+        <field key="varchar" dbtype="varchar" phptype="string" null="false" />
         <field key="text" dbtype="text" phptype="string" null="true" />
-        <field key="timestamp" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
-        <field key="unix_timestamp" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+        <field key="timestamp" dbtype="timestamp" phptype="timestamp" null="false" default="datetime('now')" />
+        <field key="unix_timestamp" dbtype="int" phptype="integer" null="false" default="0" />
         <field key="date_time" dbtype="datetime" phptype="datetime" null="true" />
         <field key="date" dbtype="date" phptype="date" null="true" />
         <field key="enum" dbtype="enum" precision="'','T','F'" phptype="string" null="false" />
-        <field key="password" dbtype="varchar" precision="255" phptype="string" null="false" />
-        <field key="integer" dbtype="int" precision="11" phptype="integer" null="false" />
-        <field key="float" dbtype="decimal" precision="10,5" phptype="float" null="false" default="1.01230" />
-        <field key="boolean" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+        <field key="password" dbtype="varchar" phptype="password" null="false" />
+        <field key="integer" dbtype="int" phptype="integer" null="false" />
+        <field key="float" dbtype="decimal(10,5)" phptype="float" null="false" default="1.01230" />
+        <field key="boolean" dbtype="tinyint" phptype="integer" null="false" default="0" />
 
-        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
-            <column key="id" collation="A" null="false" />
+        <index name="PRIMARY" primary="true" unique="true">
+            <column key="id" />
         </index>
-        <index alias="unique_varchar" name="unique_varchar" primary="false" unique="true">
-            <column key="unique_varchar" collation="A" null="false" />
+        <index name="unique_varchar" primary="false" unique="true">
+            <column key="unique_varchar" />
         </index>
     </object>
 </model>

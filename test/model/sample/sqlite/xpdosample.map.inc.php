@@ -8,22 +8,21 @@ $xpdo_meta_map['xPDOSample']= array (
     'unique_varchar' => NULL,
     'varchar' => NULL,
     'text' => NULL,
-    'timestamp' => 'CURRENT_TIMESTAMP',
+    'timestamp' => 'datetime(\'now\')',
     'unix_timestamp' => 0,
     'date_time' => NULL,
     'date' => NULL,
     'enum' => NULL,
     'password' => NULL,
     'integer' => NULL,
-    'float' => 1.0123,
-    'boolean' => NULL,
+    'float' => '1.01230',
+    'boolean' => 0,
   ),
   'fieldMeta' => 
   array (
     'parent' => 
     array (
       'dbtype' => 'int',
-      'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
@@ -31,7 +30,6 @@ $xpdo_meta_map['xPDOSample']= array (
     'unique_varchar' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
       'phptype' => 'string',
       'null' => false,
       'index' => 'unique',
@@ -39,7 +37,6 @@ $xpdo_meta_map['xPDOSample']= array (
     'varchar' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '100',
       'phptype' => 'string',
       'null' => false,
     ),
@@ -54,13 +51,11 @@ $xpdo_meta_map['xPDOSample']= array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
       'null' => false,
-      'default' => 'CURRENT_TIMESTAMP',
-      'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
+      'default' => 'datetime(\'now\')',
     ),
     'unix_timestamp' => 
     array (
       'dbtype' => 'int',
-      'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
@@ -87,60 +82,51 @@ $xpdo_meta_map['xPDOSample']= array (
     'password' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
+      'phptype' => 'password',
       'null' => false,
     ),
     'integer' => 
     array (
       'dbtype' => 'int',
-      'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
     ),
     'float' => 
     array (
-      'dbtype' => 'decimal',
-      'precision' => '10,5',
+      'dbtype' => 'decimal(10,5)',
       'phptype' => 'float',
       'null' => false,
-      'default' => 1.0123,
+      'default' => '1.01230',
     ),
     'boolean' => 
     array (
       'dbtype' => 'tinyint',
-      'precision' => '1',
       'phptype' => 'integer',
       'null' => false,
+      'default' => 0,
     ),
   ),
   'indexes' => 
   array (
     'PRIMARY' => 
     array (
-      'alias' => 'PRIMARY',
       'primary' => true,
       'unique' => true,
       'columns' => 
       array (
         'id' => 
         array (
-          'collation' => 'A',
-          'null' => false,
         ),
       ),
     ),
     'unique_varchar' => 
     array (
-      'alias' => 'unique_varchar',
       'primary' => false,
       'unique' => true,
       'columns' => 
       array (
         'unique_varchar' => 
         array (
-          'collation' => 'A',
-          'null' => false,
         ),
       ),
     ),

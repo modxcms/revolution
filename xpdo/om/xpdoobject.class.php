@@ -269,7 +269,26 @@ class xPDOObject {
             }
             $rows= & $criteria->stmt;
         } else {
-            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql}" . print_r($xpdo->errorInfo(), true));
+            $errorInfo = $xpdo->errorInfo();
+            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
+            if ($errorInfo[1] == '1146' || $errorInfo[1] == '1') {
+                if ($xpdo->getManager() && $xpdo->manager->createObjectContainer($className)) {
+					if (!$criteria->prepare()) {
+						$xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
+					} else {
+	                    $tstart= $xpdo->getMicroTime();
+	                    if (!$criteria->stmt->execute()) {
+	                        $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($criteria->stmt->errorInfo(), true));
+	                    }
+	                    $tend= $xpdo->getMicroTime();
+	                    $totaltime= $tend - $tstart;
+	                    $xpdo->queryTime= $xpdo->queryTime + $totaltime;
+	                    $xpdo->executedQueries= $xpdo->executedQueries + 1;
+					}
+                } else {
+                    $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $xpdo->errorCode() . " attempting to create object container for class {$className}:\n" . print_r($xpdo->errorInfo(), true));
+                }
+            }
         }
         return $rows;
     }

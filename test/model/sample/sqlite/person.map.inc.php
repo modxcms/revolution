@@ -7,7 +7,7 @@ $xpdo_meta_map['Person']= array (
     'first_name' => NULL,
     'last_name' => NULL,
     'middle_name' => NULL,
-    'date_modified' => 'CURRENT_TIMESTAMP',
+    'date_modified' => 'datetime(\'now\')',
     'dob' => NULL,
     'gender' => '',
     'blood_type' => '',
@@ -43,8 +43,7 @@ $xpdo_meta_map['Person']= array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
       'null' => false,
-      'default' => 'CURRENT_TIMESTAMP',
-      'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
+      'default' => 'datetime(\'now\')',
     ),
     'dob' => 
     array (

@@ -241,15 +241,13 @@ class xPDO {
         $this->config['password']= $password;
         $this->config['driverOptions']= is_array($driverOptions) ? $driverOptions : array();
         switch ($this->config['dbtype']) {
-            case 'sqlite':
-                $this->_escapeChar= "";
+            case 'mysql':
+                $this->_escapeChar= "`";
                 break;
-            case 'sqlite2':
-                $this->_escapeChar= "";
-                $this->config['dbtype']= 'sqlite';
+            case 'sqlite':
+                $this->_escapeChar= '"';
                 break;
             default:
-                $this->_escapeChar= "`";
                 break;
         }
         $this->setPackage('om', XPDO_CORE_PATH, $this->config[xPDO::OPT_TABLE_PREFIX]);

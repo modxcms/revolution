@@ -1,7 +1,7 @@
 <?php
 /*
  * OpenExpedio (xPDO)
- * Copyright (C) 2006, 2007, 2008, 2009 by Jason Coward <xpdo@opengeek.com>
+ * Copyright (C) 2006, 2007, 2008, 2009, 2010 by Jason Coward <xpdo@opengeek.com>
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -17,26 +17,36 @@
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
-
 $mtime= microtime();
 $mtime= explode(" ", $mtime);
 $mtime= $mtime[1] + $mtime[0];
 $tstart= $mtime;
-include_once (dirname(dirname(dirname(dirname(__FILE__))))) . '/xpdo/xpdo.class.php');
 
-$xpdo= new xPDO('mysql:host=localhost;dbname=xpdotest', 'dbusername', 'dbpassword', '');
-$xpdo->setPackage('sample', dirname(dirname(__FILE__)) . '/model/');
-$xpdo->setDebug(true);
+$properties = array();
+include(dirname(dirname(dirname(__FILE__))) . '/test/properties.inc.php');
+include(dirname(dirname(dirname(__FILE__))) . '/xpdo/xpdo.class.php');
 
-$manager= $xpdo->getManager();
-$generator= $manager->getGenerator();
+$dbtypes = array('mysql', 'sqlite');
 
-//Use this to create a schema from an existing database
-//$xml= $generator->writeSchema(XPDO_CORE_PATH . '../model/schema/sample.mysql.schema.xml', 'sample', 'xPDOObject', '');
+foreach ($dbtypes as $dbtype) {
+    $xpdo= new xPDO($properties["{$dbtype}_string_dsn_test"], $properties["{$dbtype}_string_username"], $properties["{$dbtype}_string_password"], $properties["{$dbtype}_array_driverOptions"]);
+    $xpdo->setPackage('sample', dirname(dirname(dirname(__FILE__))) . '/model/');
+    $xpdo->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
+    $xpdo->setLogLevel(xPDO::LOG_LEVEL_INFO);
+//    $xpdo->setDebug(true);
 
-//Use this to generate classes and maps from a schema
-// NOTE: by default, only maps are overwritten; delete class files if you want to regenerate classes
-$generator->parseSchema(dirname(__FILE__) . '/sample.mysql.schema.xml', dirname(dirname(__FILE__)) . '/model/');
+    $xpdo->getManager();
+    $xpdo->manager->getGenerator();
+
+    //Use this to create a schema from an existing database
+    #$xml= $xpdo->manager->generator->writeSchema(XPDO_CORE_PATH . '../model/schema/sample.' . $dbtype . '.schema.xml', 'sample', 'xPDOObject', '');
+
+    //Use this to generate classes and maps from a schema
+    // NOTE: by default, only maps are overwritten; delete class files if you want to regenerate classes
+    $xpdo->manager->generator->parseSchema(XPDO_CORE_PATH . '../model/schema/sample.' . $dbtype . '.schema.xml', XPDO_CORE_PATH . '../model/');
+
+    unset($xpdo);
+}
 
 $mtime= microtime();
 $mtime= explode(" ", $mtime);

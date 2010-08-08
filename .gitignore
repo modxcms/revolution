@@ -1,0 +1,3 @@
+test/model/schema/sqlite.test.sqlite.schema.xml
+test/model/schema/test.mysql.schema.xml
+test/model/schema/test.sqlite.schema.xml
