@@ -157,26 +157,9 @@ class xPDOGenerator {
     }
 
     /**
-     * Gets the PHP field type based upon the specified database type.
-     *
-     * @access public
-     * @param string $dbtype The database field type to convert.
-     * @return string The associated PHP type
-     */
-    public function getPhpType($dbtype) {
-        $dbtype= strtoupper($dbtype);
-        $phptype = '';
-        foreach ($this->manager->dbtypes as $key => $type) {
-            if (in_array($dbtype, $type)) {
-                $phptype= $key;
-                break;
-            }
-        }
-        return $phptype;
-    }
-
-    /**
      * Format the passed default value as an XML attribute.
+     *
+     * Override this in different PDO driver implementations if necessary.
      *
      * @access public
      * @param string $value The value to encapsulate in the default tag.

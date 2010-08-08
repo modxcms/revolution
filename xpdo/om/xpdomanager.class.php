@@ -69,6 +69,28 @@ abstract class xPDOManager {
     }
 
     /**
+     * Gets the PHP field type based upon the specified database type.
+     *
+     * @access public
+     * @param string $dbtype The database field type to convert.
+     * @return string The associated PHP type
+     */
+    public function getPhpType($dbtype) {
+        $phptype = 'string';
+        if ($dbtype !== null) {
+            foreach ($this->dbtypes as $type => $patterns) {
+                foreach ($patterns as $pattern) {
+                    if (preg_match($pattern, $dbtype)) {
+                        $phptype = $type;
+                        break 2;
+                    }
+                }
+            }
+        }
+        return $phptype;
+    }
+
+    /**
      * Creates the physical data container represented by a data source.
      *
      * @param array $dsnArray An array of xPDO configuration properties.
