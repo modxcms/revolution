@@ -1,2 +1,5 @@
+# ignore properties file
+properties.inc.php
+
 # ignore tmp test files
 test-*
