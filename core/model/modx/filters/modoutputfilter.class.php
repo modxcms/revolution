@@ -492,9 +492,11 @@ class modOutputFilter {
 
                     case 'userinfo':
                         /* Returns the requested user data (input: userid) */
-                        $key = (!empty($m_val)) ? $m_val : 'username';
-                    	$user = $this->modx->getUserInfo($output);
-                        $output = $user ? $user[$key] : null;
+                        if (!empty($output)) {
+                            $key = (!empty($m_val)) ? $m_val : 'username';
+                            $user = $this->modx->getUserInfo($output);
+                            $output = $user ? $user[$key] : null;
+                        }
                         break;
 
                     case 'isloggedin':
