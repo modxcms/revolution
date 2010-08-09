@@ -1,4 +1,4 @@
-build/build.number
-build/build.properties
-build/distrib
-build/image
+/build.number
+/build.properties
+/distrib/
+/image/
