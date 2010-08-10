@@ -251,7 +251,7 @@ $_lang['setting_mail_use_smtp'] = 'Use SMTP';
 $_lang['setting_mail_use_smtp_desc'] = 'If true, MODx will attempt to use SMTP in mail functions.';
 
 $_lang['setting_mail_smtp_auth'] = 'SMTP Authentication';
-$_lang['setting_mail_smtp_auth_desc'] = 'Sets SMTP authentication. Utilizes the mail_smtp_user and mail_smtp_password settings.';
+$_lang['setting_mail_smtp_auth_desc'] = 'Sets SMTP authentication. Utilizes the mail_smtp_user and mail_smtp_pass settings.';
 
 $_lang['setting_mail_smtp_helo'] = 'SMTP Helo Message';
 $_lang['setting_mail_smtp_helo_desc'] = 'Sets the SMTP HELO of the message (Defaults to the hostname).';

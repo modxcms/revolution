@@ -786,7 +786,7 @@ $settings['phpthumb_cache_maxage']->fromArray(array (
 $settings['phpthumb_cache_maxsize']= $xpdo->newObject('modSystemSetting');
 $settings['phpthumb_cache_maxsize']->fromArray(array (
   'key' => 'phpthumb_cache_maxsize',
-  'value' => 100 * 1024 * 1024, // 100MB
+  'value' => 100, // 100MB
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
