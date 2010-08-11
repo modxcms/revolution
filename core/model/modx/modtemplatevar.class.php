@@ -533,6 +533,7 @@ class modTemplateVar extends modElement {
     public function getBindingDataFromValue($value) {
         $nvalue = trim($value);
         $cmd = false;
+        $param = '';
         if (substr($nvalue,0,1) == '@') {
             list($cmd,$param) = $this->parseBinding($nvalue);
             $cmd = trim($cmd);
