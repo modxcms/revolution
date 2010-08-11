@@ -276,8 +276,11 @@ class modTemplateVar extends modElement {
         $this->xpdo->smarty->assign('style',$style);
         $value = $this->getValue($resourceId);
 
-        /* process any TV commands in value */
-        $value= $this->processBindings($value,$resourceId);
+        /* process only @INHERIT bindings in value, since we're inputting */
+        $bdata = $this->getBindingDataFromValue($value);
+        if ($bdata['cmd'] == 'INHERIT') {
+            $value = $this->processInheritBinding($bdata['param'], $resourceId);
+        }
 
         /* if any FC tvDefault rules, set here */
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
@@ -522,6 +525,22 @@ class modTemplateVar extends modElement {
     }
 
     /**
+     * Parses the binding data from a value
+     * 
+     * @param mixed $value The value to parse
+     * @return array An array of cmd and param for the binding
+     */
+    public function getBindingDataFromValue($value) {
+        $nvalue = trim($value);
+        $cmd = false;
+        if (substr($nvalue,0,1) == '@') {
+            list($cmd,$param) = $this->parseBinding($nvalue);
+            $cmd = trim($cmd);
+        }
+        return array('cmd' => $cmd,'param' => $param);
+    }
+
+    /**
      * Process bindings assigned to a template variable.
      *
      * @access public
@@ -530,115 +549,89 @@ class modTemplateVar extends modElement {
      * @return string The processed value.
      */
     public function processBindings($value= '', $resourceId= 0, $processInherit = true) {
+        $bdata = $this->getBindingDataFromValue($value);
+        if (empty($bdata['cmd'])) return $value;
+
         $modx =& $this->xpdo;
-        $nvalue= trim($value);
-        if (substr($nvalue,0,1)!='@') return $value;
-        else {
-            list($cmd,$param) = $this->parseBinding($nvalue);
-            $cmd = trim($cmd);
-            switch ($cmd) {
-                case 'FILE':
-                    $output = $this->processFileBinding($param);
-                    break;
+        $cmd = $bdata['cmd'];
+        $param = !empty($bdata['param']) ? $bdata['param'] : null;
+        switch ($cmd) {
+            case 'FILE':
+                $output = $this->processFileBinding($param);
+                break;
 
-                case 'CHUNK':       /* retrieve a chunk and process it's content */
-                    $output = $this->xpdo->getChunk($param);
-                    break;
+            case 'CHUNK': /* retrieve a chunk and process it's content */
+                $output = $this->xpdo->getChunk($param);
+                break;
 
-                case 'RESOURCE':
-                case 'DOCUMENT':    /* retrieve a document and process it's content */
-                    $rs = $this->xpdo->getDocument($param);
-                    if (is_array($rs)) $output = $rs['content'];
-                    else $output = 'Unable to locate resource '.$param;
-                    break;
+            case 'RESOURCE':
+            case 'DOCUMENT': /* retrieve a document and process it's content */
+                $rs = $this->xpdo->getDocument($param);
+                if (is_array($rs)) $output = $rs['content'];
+                else $output = 'Unable to locate resource '.$param;
+                break;
 
-                case 'SELECT': /* selects a record from the cms database */
-                    $dbtags = array();
-                    $dbtags['DBASE'] = $this->xpdo->db->config['dbase'];
-                    $dbtags['PREFIX'] = $this->xpdo->db->config['table_prefix'];
-                    foreach($dbtags as $key => $pValue) {
-                        $param = str_replace('[[+'.$key.']]', $pValue, $param);
-                    }
-                    $stmt = $this->xpdo->query('SELECT '.$param);
-                    if ($stmt && $stmt instanceof PDOStatement) {
-                        $data = '';
-                        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-                            $col = '';
-                            if (isset($row[1])) {
-                                $col = $row[0].'=='.$row[1];
-                            } else {
-                                $col = $row[0];
-                            }
-                            $data .= (!empty($data) ? '||' : '').$col;
+            case 'SELECT': /* selects a record from the cms database */
+                $dbtags = array();
+                $dbtags['DBASE'] = $this->xpdo->db->config['dbase'];
+                $dbtags['PREFIX'] = $this->xpdo->db->config['table_prefix'];
+                foreach($dbtags as $key => $pValue) {
+                    $param = str_replace('[[+'.$key.']]', $pValue, $param);
+                }
+                $stmt = $this->xpdo->query('SELECT '.$param);
+                if ($stmt && $stmt instanceof PDOStatement) {
+                    $data = '';
+                    while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+                        $col = '';
+                        if (isset($row[1])) {
+                            $col = $row[0].'=='.$row[1];
+                        } else {
+                            $col = $row[0];
                         }
-                        $stmt->closeCursor();
+                        $data .= (!empty($data) ? '||' : '').$col;
                     }
-                    $output = $data;
-                    break;
+                    $stmt->closeCursor();
+                }
+                $output = $data;
+                break;
 
-                case 'EVAL':        /* evaluates text as php codes return the results */
-                    $output = eval($param);
-                    break;
+            case 'EVAL':        /* evaluates text as php codes return the results */
+                $output = eval($param);
+                break;
 
-                case 'INHERIT':
-                    if ($processInherit) {
-                        $output = $param; /* Default to param value if no content from parents */
-                        $resource = null;
-                        if ($resourceId && (!($this->xpdo->resource instanceof modResource) || $this->xpdo->resource->get('id') != $resourceId)) {
-                            $resource = $this->xpdo->getObject('modResource',$resourceId);
-                        } else if ($this->xpdo->resource instanceof modResource) {
-                            $resource =& $this->xpdo->resource;
-                        }
-                        if (!$resource) break;
-                        $doc = array('id' => $resource->get('id'), 'parent' => $resource->get('parent'));
-
-                        while($doc['parent'] != 0) {
-                            $parent_id = $doc['parent'];
-                            if(!$doc = $this->xpdo->getDocument($parent_id, 'id,parent')) {
-                                /* Get unpublished document */
-                                $doc = $this->xpdo->getDocument($parent_id, 'id,parent',0);
-                            }
-                            if ($doc) {
-                                $tv = $this->xpdo->getTemplateVar($this->get('name'), '*', $doc['id']);
-                                if(isset($tv['value']) && $tv['value'] && substr($tv['value'],0,1) != '@') {
-                                    $output = $tv['value'];
-                                    break 2;
-                                }
-                            } else {
-                                break;
-                            }
-                        }
-                    } else {
-                        $output = $value;
-                    }
-                    break;
-
-                case 'DIRECTORY':
-                    $path = $this->xpdo->getOption('base_path').$param;
-                    if (substr($path,-1,1) != '/') { $path .= '/'; }
-                    if (!is_dir($path)) { break; }
-
-                    $files = array();
-                    $invalid = array('.','..','.svn','.DS_Store');
-                    foreach (new DirectoryIterator($path) as $file) {
-                        if (!$file->isReadable()) continue;
-                        $basename = $file->getFilename();
-                        if(!in_array($basename,$invalid)) {
-                            $files[] = "{$basename}=={$param}{$basename}";
-                        }
-                    }
-                    asort($files);
-                    $output = implode('||',$files);
-                    break;
-
-                default:
+            case 'INHERIT':
+                if ($processInherit) {
+                    $output = $this->processInheritBinding($param,$resourceId);
+                } else {
                     $output = $value;
-                    break;
+                }
+                break;
 
-            }
-            /* support for nested bindings */
-            return is_string($output) && ($output!=$value) ? $this->processBindings($output) : $output;
+            case 'DIRECTORY':
+                $path = $this->xpdo->getOption('base_path').$param;
+                if (substr($path,-1,1) != '/') { $path .= '/'; }
+                if (!is_dir($path)) { break; }
+
+                $files = array();
+                $invalid = array('.','..','.svn','.DS_Store');
+                foreach (new DirectoryIterator($path) as $file) {
+                    if (!$file->isReadable()) continue;
+                    $basename = $file->getFilename();
+                    if(!in_array($basename,$invalid)) {
+                        $files[] = "{$basename}=={$param}{$basename}";
+                    }
+                }
+                asort($files);
+                $output = implode('||',$files);
+                break;
+
+            default:
+                $output = $value;
+                break;
+
         }
+        /* support for nested bindings */
+        return is_string($output) && ($output != $value) ? $this->processBindings($output) : $output;
     }
 
     /**
@@ -660,6 +653,39 @@ class modTemplateVar extends modElement {
             ); /* Make command uppercase */
             return $binding_array;
         }
+    }
+
+    /**
+     * Parse inherit binding
+     *
+     * @param string $default The value to default if there is no inherited value
+     * @param int $resourceId The current Resource, if any
+     * @return string The inherited value
+     */
+    public function processInheritBinding($default = '',$resourceId = null) {
+        $output = $default; /* Default to param value if no content from parents */
+        $resource = null;
+        if (!empty($resourceId) && (!($this->xpdo->resource instanceof modResource) || $this->xpdo->resource->get('id') != $resourceId)) {
+            $resource = $this->xpdo->getObject('modResource',$resourceId);
+        } else if ($this->xpdo->resource instanceof modResource) {
+            $resource =& $this->xpdo->resource;
+        }
+        if (!$resource) return $output;
+        
+        $currentResource = $resource;
+        while ($currentResource->get('parent') != 0) {
+            $currentResource = $this->xpdo->getObject('modResource',array('id' => $currentResource->get('parent')));
+            if (!empty($currentResource)) {
+                $tv = $this->xpdo->getTemplateVar($this->get('name'), '*', $currentResource->get('id'));
+                if (isset($tv['value']) && $tv['value'] && substr($tv['value'],0,1) != '@') {
+                    $output = $tv['value'];
+                    return $output;
+                }
+            } else {
+                return $output;
+            }
+        }
+        return $output;
     }
 
     /**
