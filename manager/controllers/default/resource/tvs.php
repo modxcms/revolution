@@ -69,7 +69,11 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
                 $tv->set('inherited',true);
             }
             if ($tv->get('value') == null) {
-                $tv->set('value',$tv->get('default_text'));
+                $v = $tv->get('default_text');
+                if ($tv->get('type') == 'checkbox' && $tv->get('value') == '') {
+                    $v = '';
+                }
+                $tv->set('value',$v);
             }
             
             if ($tv->type == 'richtext') {

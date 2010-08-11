@@ -304,7 +304,6 @@ if ($resource->get('parent') != $oldparent_id) {
 }
 
 
-
 /* save TVs */
 if (!empty($scriptProperties['tvs'])) {
     $tmplvars = array ();
@@ -327,7 +326,11 @@ if (!empty($scriptProperties['tvs'])) {
     $tvs = $modx->getCollection('modTemplateVar',$c);
     foreach ($tvs as $tv) {
         /* set value of TV */
-        $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : $tv->get('default_text');
+        if ($tv->get('type') != 'checkbox') {
+            $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : $tv->get('default_text');
+        } else {
+            $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : '';
+        }
 
         /* validation for different types */
         switch ($tv->get('type')) {
