@@ -65,8 +65,8 @@ class modContext extends modAccessibleObject {
      * @param string $v A default value to grab if not found
      * @return mixed
      */
-    public function getOption($k,$v) {
-        return $this->xpdo->getOption($k,$this->config,$v);
+    public function getOption($k,$v = null) {
+        return $this->xpdo->getOption($k,$this->config,$v = null);
     }
 
     /**
