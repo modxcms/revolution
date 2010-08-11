@@ -201,8 +201,9 @@ $_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODx will hide t
 
 $_lang['setting_filemanager_path'] = 'File Manager Path';
 $_lang['setting_filemanager_path_desc'] = 'IIS often does not populate the document_root setting properly, which is used by the file manager to determine what you can look at. If you\'re having problems using the file manager, make sure this path points to the root of your MODx installation.';
-$_lang['setting_filemanager_path_err'] = 'Please state the absoulte document root path for the filemanager.';
-$_lang['setting_filemanager_path_err_invalid'] = 'This filemanager directory either does not exist or cannot be accessed. Please state a valid directory or adjust the permissions of this directory.';
+
+$_lang['setting_filemanager_url'] = 'File Manager Url';
+$_lang['setting_filemanager_url_desc'] = 'Optional. Set this if you want to set an explicit URL to access the files in the MODx file manager from (useful if you have changed filemanager_path to a path outside the MODx webroot). Make sure this is the web-accessible URL of the filemanager_path setting value. If leave this empty, MODx will try to automatically calculate it.';
 
 $_lang['setting_friendly_alias_lowercase_only'] = 'FURL Lowercase Aliases';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Determines whether to allow only lowercase characters in a Resource alias.';

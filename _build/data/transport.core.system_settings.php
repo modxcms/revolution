@@ -393,6 +393,15 @@ $settings['filemanager_path']->fromArray(array (
   'area' => 'file',
   'editedon' => null,
 ), '', true, true);
+$settings['filemanager_url']= $xpdo->newObject('modSystemSetting');
+$settings['filemanager_url']->fromArray(array (
+  'key' => 'filemanager_url',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+), '', true, true);
 $settings['forgot_login_email']= $xpdo->newObject('modSystemSetting');
 $settings['forgot_login_email']->fromArray(array (
   'key' => 'forgot_login_email',

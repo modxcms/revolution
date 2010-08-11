@@ -16,8 +16,11 @@ $reps = array();
 if ($base_url != '/') $reps[] = $base_url;
 if ($site_url != '/') $reps[] = $site_url;
 $src = str_replace($reps,'',$src);
-if (strpos($src,'/') !== 0) {
+$fileManagerPath = $modx->getOption('filemanager_path',null,'');
+if (empty($fileManagerPath) && strpos($src,'/') !== 0) {
     $src = $modx->getOption('base_path',null,MODX_BASE_PATH).$src;
+} else if (!empty($fileManagerPath)) {
+    $src = $fileManagerPath.$src;
 }
 if (empty($src) || !file_exists($src)) return '';
 

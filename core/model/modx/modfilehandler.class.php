@@ -79,6 +79,20 @@ class modFileHandler {
     }
 
     /**
+     * Get base URL of file manager
+     */
+    public function getBaseUrl() {
+        $fileManagerUrl = $this->modx->getOption('filemanager_url',$scriptProperties,'');
+        /* if none specified, automatically calculate */
+        if (empty($fileManagerUrl)) {
+            $path = $this->modx->getOption('filemanager_path',$scriptProperties,$this->modx->getOption('rb_base_url',null,''));
+            $basePath = $this->modx->getOption('base_path',null,MODX_BASE_PATH);
+            if ($basePath != '/') $fileManagerUrl = str_replace($basePath,'',$path);
+        }
+        return $fileManagerUrl;
+    }
+
+    /**
      * Sanitize the specified path
      *
      * @param string $path The path to clean
