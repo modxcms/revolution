@@ -55,6 +55,7 @@ class modFileHandler {
     public function getBasePath($prependBasePath = false) {
         $root = $this->modx->getOption('filemanager_path',null,'');
         if (empty($root)) {
+            /* TODO: deprecated - remove this in 2.1 */
             $root = $this->modx->getOption('rb_base_dir',null,'');
         }
         /* expand placeholders */
@@ -69,7 +70,7 @@ class modFileHandler {
         ),$root);
 
         /* check for absolute/relative */
-        if (substr($root,0,1) != '/') {
+        if (substr($root,0,1) != '/' && substr($root,1,3) != ':/') {
             $root = $this->modx->getOption('base_path',null,MODX_BASE_PATH).$root;
         }
 

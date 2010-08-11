@@ -49,11 +49,14 @@ $editAction = false;
 $act = $modx->getObject('modAction',array('controller' => 'system/file/edit'));
 if ($act) { $editAction = $act->get('id'); }
 
+/* get relative url; TODO: rb_base_url should be removed in 2.1 */
 $fileManagerUrl = $modx->getOption('filemanager_path',$scriptProperties,$modx->getOption('rb_base_url',null,''));
 $basePath = $modx->getOption('base_path',null,MODX_BASE_PATH);
 if ($basePath != '/') $fileManagerUrl = str_replace($basePath,'',$fileManagerUrl);
 
 if (!is_dir($fullpath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+
+/* get mb support settings */
 $use_multibyte = $modx->getOption('use_multibyte',null,false);
 $encoding = $modx->getOption('modx_charset',null,'UTF-8');
 
