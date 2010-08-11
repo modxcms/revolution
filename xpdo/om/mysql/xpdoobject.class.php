@@ -58,6 +58,11 @@ class xPDOObject_mysql extends xPDOObject {
         'CURRENT_DATE',
         'CURRENT_DATE()'
     );
+    public $_currentTimes= array (
+        'CURTIME()',
+        'CURRENT_TIME',
+        'CURRENT_TIME()'
+    );
 }
 
 /**
@@ -66,4 +71,25 @@ class xPDOObject_mysql extends xPDOObject {
  * @package xpdo
  * @subpackage om.mysql
  */
-class xPDOSimpleObject_mysql extends xPDOSimpleObject {}
+class xPDOSimpleObject_mysql extends xPDOSimpleObject {
+    public $_currentTimestamps= array (
+        'CURRENT_TIMESTAMP',
+        'CURRENT_TIMESTAMP()',
+        'NOW()',
+        'LOCALTIME',
+        'LOCALTIME()',
+        'LOCALTIMESTAMP',
+        'LOCALTIMESTAMP()',
+        'SYSDATE()'
+    );
+    public $_currentDates= array (
+        'CURDATE()',
+        'CURRENT_DATE',
+        'CURRENT_DATE()'
+    );
+    public $_currentTimes= array (
+        'CURTIME()',
+        'CURRENT_TIME',
+        'CURRENT_TIME()'
+    );
+}

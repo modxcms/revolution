@@ -94,7 +94,7 @@ class xPDOManager_mysql extends xPDOManager {
         if ($username === null) $username = $this->xpdo->getOption('username', null, '');
         if ($password === null) $password = $this->xpdo->getOption('password', null, '');
         if (is_array($dsnArray) && is_string($username) && is_string($password)) {
-            $sql= 'DROP DATABASE `' . $dsnArray['dbname'] . '`';
+            $sql= 'DROP DATABASE ' . $this->xpdo->escape($dsnArray['dbname']);
             try {
                 $pdo = new PDO("mysql:host={$dsnArray['host']}", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
                 $result = $pdo->exec($sql);
@@ -173,9 +173,9 @@ class xPDOManager_mysql extends xPDOManager {
                 }
                 $attributes= (isset ($meta['attributes'])) ? ' ' . $meta['attributes'] : '';
                 if (strpos(strtolower($attributes), 'unsigned') !== false) {
-                    $sql .= '`' . $key . '` ' . $dbtype . $precision . $attributes . $null . $default . $extra . ',';
+                    $sql .=  $this->xpdo->escape($key) . ' ' . $dbtype . $precision . $attributes . $null . $default . $extra . ',';
                 } else {
-                    $sql .= '`' . $key . '` ' . $dbtype . $precision . $null . $default . $attributes . $extra . ',';
+                    $sql .= $this->xpdo->escape($key) . ' ' . $dbtype . $precision . $null . $default . $attributes . $extra . ',';
                 }
                 if (isset ($meta['index']) && $meta['index'] !== 'pk') {
                     if ($meta['index'] === 'fulltext') {
@@ -211,12 +211,12 @@ class xPDOManager_mysql extends xPDOManager {
             if (is_array($pk)) {
                 $pkarray= array ();
                 foreach ($pk as $k) {
-                    $pkarray[]= '`' . $k . '`';
+                    $pkarray[]= $this->xpdo->escape($k);
                 }
                 $pk= implode(',', $pkarray);
             }
             elseif ($pk) {
-                $pk= '`' . $pk . '`';
+                $pk= $this->xpdo->escape($pk);
             }
             if ($pk)
                 $sql .= ', PRIMARY KEY (' . $pk . ')';
@@ -225,13 +225,13 @@ class xPDOManager_mysql extends xPDOManager {
                     if (is_array($index)) {
                         $indexset= array ();
                         foreach ($index as $indexmember) {
-                            $indexset[]= "`{$indexmember}`";
+                            $indexset[]= $this->xpdo->escape($indexmember);
                         }
                         $indexset= implode(',', $indexset);
                     } else {
-                        $indexset= "`{$indexkey}`";
+                        $indexset= $this->xpdo->escape($indexkey);
                     }
-                    $sql .= ", INDEX `{$indexkey}` ({$indexset})";
+                    $sql .= ", INDEX " . $this->xpdo->escape($indexkey) . " ({$indexset})";
                 }
             }
             if (!empty ($uniqueIndexes)) {
@@ -239,13 +239,13 @@ class xPDOManager_mysql extends xPDOManager {
                     if (is_array($index)) {
                         $indexset= array ();
                         foreach ($index as $indexmember) {
-                            $indexset[]= "`{$indexmember}`";
+                            $indexset[]= $this->xpdo->escape($indexmember);
                         }
                         $indexset= implode(',', $indexset);
                     } else {
-                        $indexset= $indexkey;
+                        $indexset= $this->xpdo->escape($indexkey);
                     }
-                    $sql .= ", UNIQUE INDEX `{$indexkey}` ({$indexset})";
+                    $sql .= ", UNIQUE INDEX " . $this->xpdo->escape($indexkey) . " ({$indexset})";
                 }
             }
             if (!empty ($fulltextIndexes)) {
@@ -253,13 +253,13 @@ class xPDOManager_mysql extends xPDOManager {
                     if (is_array($index)) {
                         $indexset= array ();
                         foreach ($index as $indexmember) {
-                            $indexset[]= "`{$indexmember}`";
+                            $indexset[]= $this->xpdo->escape($indexmember);
                         }
                         $indexset= implode(',', $indexset);
                     } else {
-                        $indexset= $indexkey;
+                        $indexset= $this->xpdo->escape($indexkey);
                     }
-                    $sql .= ", FULLTEXT INDEX `{$indexkey}` ({$indexset})";
+                    $sql .= ", FULLTEXT INDEX " . $this->xpdo->escape($indexkey) . " ({$indexset})";
                 }
             }
             $sql .= ") TYPE={$tableType}";
@@ -268,7 +268,7 @@ class xPDOManager_mysql extends xPDOManager {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->errorInfo(), true));
             } else {
                 $created= true;
-                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table' . $tableName . "\nSQL: {$sql}\n");
+                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table ' . $tableName . "\nSQL: {$sql}\n");
             }
         }
         return $created;

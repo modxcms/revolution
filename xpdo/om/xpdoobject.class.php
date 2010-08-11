@@ -221,13 +221,19 @@ class xPDOObject {
      * An array of DB constants/functions that represent timestamp values.
      * @var array
      */
-    public $_currentTimestamps= array ();
+    public $_currentTimestamps= array();
 
     /**
      * An array of DB constants/functions that represent date values.
      * @var array
      */
-    public $_currentDates= array ();
+    public $_currentDates= array();
+
+    /**
+     * An array of DB constants/functions that represent time values.
+     * @var array
+     */
+    public $_currentTimes= array();
 
     /**
      * Responsible for loading a result set from the database.
@@ -273,18 +279,18 @@ class xPDOObject {
             $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
             if ($errorInfo[1] == '1146' || $errorInfo[1] == '1') {
                 if ($xpdo->getManager() && $xpdo->manager->createObjectContainer($className)) {
-					if (!$criteria->prepare()) {
-						$xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
-					} else {
-	                    $tstart= $xpdo->getMicroTime();
-	                    if (!$criteria->stmt->execute()) {
-	                        $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($criteria->stmt->errorInfo(), true));
-	                    }
-	                    $tend= $xpdo->getMicroTime();
-	                    $totaltime= $tend - $tstart;
-	                    $xpdo->queryTime= $xpdo->queryTime + $totaltime;
-	                    $xpdo->executedQueries= $xpdo->executedQueries + 1;
-					}
+                    if (!$criteria->prepare()) {
+                        $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
+                    } else {
+                        $tstart= $xpdo->getMicroTime();
+                        if (!$criteria->stmt->execute()) {
+                            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($criteria->stmt->errorInfo(), true));
+                        }
+                        $tend= $xpdo->getMicroTime();
+                        $totaltime= $tend - $tstart;
+                        $xpdo->queryTime= $xpdo->queryTime + $totaltime;
+                        $xpdo->executedQueries= $xpdo->executedQueries + 1;
+                    }
                 } else {
                     $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $xpdo->errorCode() . " attempting to create object container for class {$className}:\n" . print_r($xpdo->errorInfo(), true));
                 }
@@ -509,17 +515,19 @@ class xPDOObject {
         $objCollection = array();
         if ($query= $xpdo->newQuery($className, $criteria, $cacheFlag)) {
             $query->bindGraph($graph);
+            $rows = array();
             $fromCache = false;
             $collectionCaching = (integer) $xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1);
             if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag) {
                 $rows= $xpdo->fromCache($criteria);
                 $fromCache = !empty($rows);
             }
-            if (!$fromCache && ($stmt= $query->prepare())) {
-                if ($stmt->execute()) {
+            if (!$fromCache) {
+                $stmt= $query->prepare();
+                if ($stmt && $stmt->execute()) {
                     $objCollection= $query->hydrateGraph($stmt, $cacheFlag);
                 }
-            } else {
+            } elseif (!empty($rows)) {
                 $objCollection= $query->hydrateGraph($rows, $cacheFlag);
             }
         }
@@ -1466,7 +1474,7 @@ class xPDOObject {
             $delete= $this->xpdo->newQuery($this->_class);
             $delete->command('DELETE');
             $delete->where($pk);
-            $delete->limit(1);
+            // $delete->limit(1);
             $stmt= $delete->prepare();
             if (is_object($stmt)) {
                 if (!$result= $stmt->execute()) {

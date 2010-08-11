@@ -50,14 +50,25 @@ class xPDOManager_sqlite extends xPDOManager {
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->dbtypes['integer']= array('/INT/i');
-        $this->dbtypes['string']= array('/CHAR/i','/CLOB/i','/TEXT/i');
+        $this->dbtypes['string']= array('/CHAR/i','/CLOB/i','/TEXT/i', '/ENUM/i');
         $this->dbtypes['float']= array('/REAL/i','/FLOA/i','/DOUB/i');
-        $this->dbtypes['none']= array('/BLOB/i');
+        $this->dbtypes['datetime']= array('/TIMESTAMP/i','/DATE/i');
+        $this->dbtypes['binary']= array('/BLOB/i');
     }
 
     public function createSourceContainer($dsnArray = null, $username= null, $password= null, $containerOptions= array ()) {
+        $created = false;
         $this->xpdo->log(xPDO::LOG_LEVEL_WARN, 'SQLite does not support source container creation');
-        return true;
+        if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
+        if (is_array($dsnArray)) {
+            try {
+                $dbfile = $dsnArray['dbname'];
+                $created = !file_exists($dbfile);
+            } catch (Exception $e) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error creating source container: " . $pe->getMessage());
+            }
+        }
+        return $created;
     }
 
     public function removeSourceContainer($dsnArray = null, $username= null, $password= null) {
@@ -111,7 +122,10 @@ class xPDOManager_sqlite extends xPDOManager {
             $fieldMeta = $this->xpdo->getFieldMeta($className);
             while (list($key, $meta)= each($fieldMeta)) {
                 $dbtype= strtoupper($meta['dbtype']);
-                $precision= isset ($meta['precision']) ? '(' . $meta['precision'] . ')' : '';
+                $precision= isset ($meta['precision']) && !preg_match('/ENUM/i', $dbtype) ? '(' . $meta['precision'] . ')' : '';
+                if (preg_match('/ENUM/i', $dbtype)) {
+                    $dbtype= 'CHAR';
+                }
                 $notNull= !isset ($meta['null'])
                     ? false
                     : ($meta['null'] === 'false' || empty($meta['null']));
@@ -123,8 +137,7 @@ class xPDOManager_sqlite extends xPDOManager {
                 $default= '';
                 if (array_key_exists('default', $meta)) {
                     $defaultVal= $meta['default'];
-                    //TODO: match patterns for db functions and literal tokens
-                    if (($defaultVal === null || strtoupper($defaultVal) === 'NULL')) {
+                    if ($defaultVal === null || strtoupper($defaultVal) === 'NULL' || in_array($this->getPHPType($dbtype), array('integer', 'float')) || (in_array($meta['phptype'], array('datetime', 'date', 'timestamp', 'time')) && in_array($defaultVal, array_merge($instance->_currentTimestamps, $instance->_currentDates, $instance->_currentTimes)))) {
                         $default= ' DEFAULT ' . $defaultVal;
                     } else {
                         $default= ' DEFAULT \'' . $defaultVal . '\'';
@@ -154,13 +167,13 @@ class xPDOManager_sqlite extends xPDOManager {
                     if (is_array($index)) {
                         $indexset= array ();
                         foreach ($index as $indexmember) {
-                            $indexset[]= "`{$indexmember}`";
+                            $indexset[]= $this->xpdo->escape($indexmember);
                         }
                         $indexset= implode(',', $indexset);
                     } else {
-                        $indexset= "`{$indexkey}`";
+                        $indexset= $this->xpdo->escape($indexkey);
                     }
-                    $sql .= ", INDEX `{$indexkey}` ({$indexset})";
+                    $sql .= ", INDEX " . $this->xpdo->escape($indexkey) . " ({$indexset})";
                 }
             }
             if (!empty ($uniqueIndexes)) {
@@ -168,13 +181,13 @@ class xPDOManager_sqlite extends xPDOManager {
                     if (is_array($index)) {
                         $indexset= array ();
                         foreach ($index as $indexmember) {
-                            $indexset[]= "`{$indexmember}`";
+                            $indexset[]= $this->xpdo->escape($indexmember);
                         }
                         $indexset= implode(',', $indexset);
                     } else {
-                        $indexset= $indexkey;
+                        $indexset= $this->xpdo->escape($indexkey);
                     }
-                    $sql .= ", UNIQUE INDEX `{$indexkey}` ({$indexset})";
+                    $sql .= ", UNIQUE INDEX {$indexkey} ({$indexset})";
                 }
             }
             if (!empty ($fulltextIndexes)) {
@@ -182,13 +195,13 @@ class xPDOManager_sqlite extends xPDOManager {
                     if (is_array($index)) {
                         $indexset= array ();
                         foreach ($index as $indexmember) {
-                            $indexset[]= "`{$indexmember}`";
+                            $indexset[]= $this->xpdo->escape($indexmember);
                         }
                         $indexset= implode(',', $indexset);
                     } else {
-                        $indexset= $indexkey;
+                        $indexset= $this->xpdo->escape($indexkey);
                     }
-                    $sql .= ", FULLTEXT INDEX `{$indexkey}` ({$indexset})";
+                    $sql .= ", FULLTEXT INDEX {$indexkey} ({$indexset})";
                 }
             }
             $sql .= ")";
@@ -197,7 +210,7 @@ class xPDOManager_sqlite extends xPDOManager {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->errorInfo(), true));
             } else {
                 $created= true;
-                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table' . $tableName . "\nSQL: {$sql}\n");
+                $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table ' . $tableName . "\nSQL: {$sql}\n");
             }
         }
         return $created;
