@@ -23,14 +23,14 @@ $mtime= $mtime[1] + $mtime[0];
 $tstart= $mtime;
 
 $properties = array();
-include(dirname(dirname(dirname(__FILE__))) . '/test/properties.inc.php');
-include(dirname(dirname(dirname(__FILE__))) . '/xpdo/xpdo.class.php');
+include(dirname(dirname(dirname(dirname(__FILE__)))) . '/xpdo/xpdo.class.php');
+include(dirname(dirname(dirname(dirname(__FILE__)))) . '/test/properties.inc.php');
 
 $dbtypes = array('mysql', 'sqlite');
 
 foreach ($dbtypes as $dbtype) {
     $xpdo= new xPDO($properties["{$dbtype}_string_dsn_test"], $properties["{$dbtype}_string_username"], $properties["{$dbtype}_string_password"], $properties["{$dbtype}_array_driverOptions"]);
-    $xpdo->setPackage('sample', dirname(dirname(dirname(__FILE__))) . '/model/');
+    $xpdo->setPackage('sample', $properties['xpdo_test_path'] . 'model/');
     $xpdo->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
     $xpdo->setLogLevel(xPDO::LOG_LEVEL_INFO);
 //    $xpdo->setDebug(true);
@@ -43,7 +43,7 @@ foreach ($dbtypes as $dbtype) {
 
     //Use this to generate classes and maps from a schema
     // NOTE: by default, only maps are overwritten; delete class files if you want to regenerate classes
-    $xpdo->manager->generator->parseSchema(XPDO_CORE_PATH . '../model/schema/sample.' . $dbtype . '.schema.xml', XPDO_CORE_PATH . '../model/');
+    $xpdo->manager->generator->parseSchema($properties['xpdo_test_path'] . 'model/schema/sample.' . $dbtype . '.schema.xml', $properties['xpdo_test_path'] . 'model/');
 
     unset($xpdo);
 }

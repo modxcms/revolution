@@ -6,7 +6,7 @@ $xpdo_meta_map['PersonPhone']= array (
   array (
     'person' => NULL,
     'phone' => NULL,
-    'is_primary' => '0',
+    'is_primary' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -28,11 +28,11 @@ $xpdo_meta_map['PersonPhone']= array (
     ),
     'is_primary' => 
     array (
-      'dbtype' => 'binary',
+      'dbtype' => 'int',
       'precision' => '1',
-      'phptype' => 'binary',
+      'phptype' => 'boolean',
       'null' => false,
-      'default' => '0',
+      'default' => 0,
     ),
   ),
   'indexes' => 

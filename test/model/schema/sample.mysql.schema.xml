@@ -29,7 +29,7 @@
     <object class="PersonPhone" table="person_phone" extends="xPDOObject">
         <field key="person" dbtype="int" precision="11" phptype="integer" null="false" index="pk" />
         <field key="phone" dbtype="int" precision="11" phptype="integer" null="false" index="pk" />
-        <field key="is_primary" dbtype="binary" precision="1" phptype="binary" null="false" default="0" />
+        <field key="is_primary" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="person" collation="A" null="false" />
@@ -63,7 +63,7 @@
         <field key="password" dbtype="varchar" precision="255" phptype="string" null="false" />
         <field key="integer" dbtype="int" precision="11" phptype="integer" null="false" />
         <field key="float" dbtype="decimal" precision="10,5" phptype="float" null="false" default="1.01230" />
-        <field key="boolean" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+        <field key="boolean" dbtype="tinyint" precision="1" phptype="boolean" null="false" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="id" collation="A" null="false" />

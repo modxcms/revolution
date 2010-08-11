@@ -110,7 +110,7 @@ $xpdo_meta_map['xPDOSample']= array (
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
-      'phptype' => 'integer',
+      'phptype' => 'boolean',
       'null' => false,
     ),
   ),

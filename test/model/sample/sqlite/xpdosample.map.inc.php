@@ -8,7 +8,7 @@ $xpdo_meta_map['xPDOSample']= array (
     'unique_varchar' => NULL,
     'varchar' => NULL,
     'text' => NULL,
-    'timestamp' => 'datetime(\'now\')',
+    'timestamp' => 'CURRENT_TIMESTAMP',
     'unix_timestamp' => 0,
     'date_time' => NULL,
     'date' => NULL,
@@ -51,7 +51,7 @@ $xpdo_meta_map['xPDOSample']= array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
       'null' => false,
-      'default' => 'datetime(\'now\')',
+      'default' => 'CURRENT_TIMESTAMP',
     ),
     'unix_timestamp' => 
     array (
@@ -93,7 +93,8 @@ $xpdo_meta_map['xPDOSample']= array (
     ),
     'float' => 
     array (
-      'dbtype' => 'decimal(10,5)',
+      'dbtype' => 'decimal',
+      'precision' => '(10,5)',
       'phptype' => 'float',
       'null' => false,
       'default' => '1.01230',
@@ -101,7 +102,8 @@ $xpdo_meta_map['xPDOSample']= array (
     'boolean' => 
     array (
       'dbtype' => 'tinyint',
-      'phptype' => 'integer',
+      'precision' => '1',
+      'phptype' => 'boolean',
       'null' => false,
       'default' => 0,
     ),
