@@ -55,7 +55,7 @@ class modFileHandler {
     public function getBasePath($prependBasePath = false) {
         $root = $this->modx->getOption('filemanager_path',null,'');
         if (empty($root)) {
-            $root = $this->modx->getOption('rb_base_dir');
+            $root = $this->modx->getOption('rb_base_dir',null,'');
         }
         /* expand placeholders */
         $root = str_replace(array(
@@ -63,9 +63,9 @@ class modFileHandler {
             '{core_path}',
             '{assets_path}',
         ),array(
-            $this->modx->getOption('base_path'),
-            $this->modx->getOption('core_path'),
-            $this->modx->getOption('assets_path'),
+            $this->modx->getOption('base_path',null,MODX_BASE_PATH),
+            $this->modx->getOption('core_path',null,MODX_CORE_PATH),
+            $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH),
         ),$root);
 
         /* check for absolute/relative */
@@ -73,7 +73,7 @@ class modFileHandler {
             $root = $this->modx->getOption('base_path',null,MODX_BASE_PATH).$root;
         }
 
-        $root = ($prependBasePath ? $this->modx->getOption('base_path') : '').$root;
+        $root = ($prependBasePath ? $this->modx->getOption('base_path',null,MODX_BASE_PATH) : '').$root;
         return $this->postfixSlash($root);
     }
 
@@ -299,7 +299,7 @@ class modFile extends modFileSystemResource {
      * @see modFileSystemResource.parseMode
      */
     protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->modx->getOption('new_file_permissions',null,0644);
+        if (empty($mode)) $mode = $this->modx->getOption('new_file_permissions',null,'0644');
         return parent::parseMode($mode);
     }
 
