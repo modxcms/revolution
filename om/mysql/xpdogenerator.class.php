@@ -41,12 +41,35 @@ include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../xpdogenerator
  * @subpackage om.mysql
  */
 class xPDOGenerator_mysql extends xPDOGenerator {
-    public function __construct(& $manager) {
-        parent :: __construct($manager);
+    public function compile($path = '') {
+        return false;
+    }
+
+    public function getIndex($index) {
+        switch ($index) {
+            case 'PRI':
+                $index= 'pk';
+                break;
+
+            case 'UNI':
+                $index= 'unique';
+                break;
+
+            case 'MUL':
+                $index= 'index';
+                break;
+
+            default:
+                break;
+        }
+        if (!empty ($index)) {
+            $index= ' index="' . $index . '"';
+        }
+        return $index;
     }
 
     /**
-     * Write an XPDO XML Schema from your database.
+     * Write an xPDO XML Schema from your database.
      *
      * @param string $schemaFile The name (including path) of the schemaFile you
      * want to write.
@@ -70,8 +93,9 @@ class xPDOGenerator_mysql extends xPDOGenerator {
             $baseClass= 'xPDOObject';
         if (empty ($tablePrefix))
             $tablePrefix= $this->manager->xpdo->config[xPDO::OPT_TABLE_PREFIX];
-        $xmlContent= "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        $xmlContent .= "<model package=\"{$package}\" baseClass=\"{$baseClass}\" platform=\"mysql\" defaultEngine=\"MyISAM\">\n";
+        $xmlContent = array();
+        $xmlContent[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+        $xmlContent[] = "<model package=\"{$package}\" baseClass=\"{$baseClass}\" platform=\"mysql\" defaultEngine=\"MyISAM\">";
         //read list of tables
         $dbname= $this->manager->xpdo->config['dbname'];
         $tableLike= ($tablePrefix && $restrictPrefix) ? " LIKE '{$tablePrefix}%'" : '';
@@ -80,68 +104,112 @@ class xPDOGenerator_mysql extends xPDOGenerator {
         $tables= $tablesStmt->fetchAll(PDO::FETCH_NUM);
         if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($tables, true));
         foreach ($tables as $table) {
-            $xmlObject= '';
-            $xmlFields= '';
+            $xmlObject= array();
+            $xmlFields= array();
+            $xmlIndices= array();
             if (!$tableName= $this->getTableName($table[0], $tablePrefix, $restrictPrefix)) {
                 continue;
             }
             $class= $this->getClassName($tableName);
             $extends= $baseClass;
-            $fieldsStmt= $this->manager->xpdo->prepare("SHOW COLUMNS FROM `{$table[0]}`");
-            $fieldsStmt->execute();
-            $fields= $fieldsStmt->fetchAll(PDO::FETCH_ASSOC);
-            if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($fields, true));
-            foreach ($fields as $field) {
-                $Field= '';
-                $Type= '';
-                $Null= '';
-                $Key= '';
-                $Default= '';
-                $Extra= '';
-                extract($field, EXTR_OVERWRITE);
-                $Type= xPDO :: escSplit(' ', $Type, "'", 2);
-                $precisionPos= strpos($Type[0], '(');
-                $dbType= $precisionPos? substr($Type[0], 0, $precisionPos): $Type[0];
-                $dbType= strtolower($dbType);
-                $Precision= $precisionPos? substr($Type[0], $precisionPos + 1, strrpos($Type[0], ')') - ($precisionPos + 1)): '';
-                if (!empty ($Precision)) {
-                    $Precision= ' precision="' . trim($Precision) . '"';
-                }
-                $attributes= '';
-                if (isset ($Type[1]) && !empty ($Type[1])) {
-                    $attributes= ' attributes="' . trim($Type[1]) . '"';
-                }
-                $PhpType= $this->getPhpType($dbType);
-                $Null= ' null="' . (($Null === 'NO') ? 'false' : 'true') . '"';
-                $Key= $this->getIndex($Key);
-                $Default= $this->getDefault($Default);
-                if (!empty ($Extra)) {
-                    if ($Extra === 'auto_increment') {
-                        if ($baseClass === 'xPDOObject' && $Field === 'id') {
-                            $extends= 'xPDOSimpleObject';
-                            continue;
-                        } else {
-                            $Extra= ' generated="native"';
+            $fieldsStmt= $this->manager->xpdo->query('SHOW COLUMNS FROM ' . $this->manager->xpdo->escape($table[0]));
+            if ($fieldsStmt) {
+                $fields= $fieldsStmt->fetchAll(PDO::FETCH_ASSOC);
+                if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($fields, true));
+                if (!empty($fields)) {
+                    foreach ($fields as $field) {
+                        $Field= '';
+                        $Type= '';
+                        $Null= '';
+                        $Key= '';
+                        $Default= '';
+                        $Extra= '';
+                        extract($field, EXTR_OVERWRITE);
+                        $Type= xPDO :: escSplit(' ', $Type, "'", 2);
+                        $precisionPos= strpos($Type[0], '(');
+                        $dbType= $precisionPos? substr($Type[0], 0, $precisionPos): $Type[0];
+                        $dbType= strtolower($dbType);
+                        $Precision= $precisionPos? substr($Type[0], $precisionPos + 1, strrpos($Type[0], ')') - ($precisionPos + 1)): '';
+                        if (!empty ($Precision)) {
+                            $Precision= ' precision="' . trim($Precision) . '"';
                         }
-                    } else {
-                        $Extra= ' extra="' . strtolower($Extra) . '"';
+                        $attributes= '';
+                        if (isset ($Type[1]) && !empty ($Type[1])) {
+                            $attributes= ' attributes="' . trim($Type[1]) . '"';
+                        }
+                        $PhpType= $this->manager->getPhpType($dbType);
+                        $Null= ' null="' . (($Null === 'NO') ? 'false' : 'true') . '"';
+                        $Key= $this->getIndex($Key);
+                        $Default= $this->getDefault($Default);
+                        if (!empty ($Extra)) {
+                            if ($Extra === 'auto_increment') {
+                                if ($baseClass === 'xPDOObject' && $Field === 'id') {
+                                    $extends= 'xPDOSimpleObject';
+                                    continue;
+                                } else {
+                                    $Extra= ' generated="native"';
+                                }
+                            } else {
+                                $Extra= ' extra="' . strtolower($Extra) . '"';
+                            }
+                            $Extra= ' ' . $Extra;
+                        }
+                        $xmlFields[] = "\t\t<field key=\"{$Field}\" dbtype=\"{$dbType}\"{$Precision}{$attributes} phptype=\"{$PhpType}\"{$Null}{$Default}{$Key}{$Extra} />";
                     }
-                    $Extra= ' ' . $Extra;
+                } else {
+                    $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'No columns were found in table ' .  $table[0]);
                 }
-                $xmlFields .= "\t\t<field key=\"{$Field}\" dbtype=\"{$dbType}\"{$Precision}{$attributes} phptype=\"{$PhpType}\"{$Null}{$Default}{$Key}{$Extra} />\n";
-                //                echo $xmlContent . "\n";
+            } else {
+                $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error retrieving columns for table ' .  $table[0]);
             }
-            $xmlObject .= "\t<object class=\"{$class}\" table=\"{$tableName}\" extends=\"{$extends}\">\n";
-            $xmlObject .= $xmlFields;
-            $xmlObject .= "\t</object>\n";
-            $xmlContent .= $xmlObject;
+            $indexesStmt= $this->manager->xpdo->query('SHOW INDEXES FROM ' . $this->manager->xpdo->escape($table[0]));
+            if ($indexesStmt) {
+                $indexes= $indexesStmt->fetchAll(PDO::FETCH_ASSOC);
+                if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Indices for table {$table[0]}: " . print_r($indexes, true));
+                if (!empty($indexes)) {
+                    $indices = array();
+                    foreach ($indexes as $index) {
+                        if (!array_key_exists($index['Key_name'], $indices)) $indices[$index['Key_name']] = array();
+                        $indices[$index['Key_name']][$index['Seq_in_index']] = $index;
+                    }
+                    foreach ($indices as $index) {
+                        $xmlIndexCols = array();
+                        if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Details of index: " . print_r($index, true));
+                        foreach ($index as $columnSeq => $column) {
+                            if ($columnSeq == 1) {
+                                $primary = $column['Key_name'] == 'PRIMARY' ? 'true' : 'false';
+                                $unique = empty($column['Non_unique']) ? 'true' : 'false';
+                                $packed = empty($column['Packed']) ? 'false' : 'true';
+                                $type = $column['Index_type'];
+                            }
+                            $null = $column['Null'] == 'YES' ? 'true' : 'false';
+                            $xmlIndexCols[]= "\t\t\t<column key=\"{$column['Column_name']}\" collation=\"{$column['Collation']}\" null=\"{$null}\" />";
+                        }
+                        $xmlIndices[]= "\t\t<index alias=\"{$column['Key_name']}\" name=\"{$column['Key_name']}\" primary=\"{$primary}\" unique=\"{$unique}\">";
+                        $xmlIndices[]= implode("\n", $xmlIndexCols);
+                        $xmlIndices[]= "\t\t</index>";
+                    }
+                } else {
+                    $this->manager->xpdo->log(xPDO::LOG_LEVEL_WARN, 'No indexes were found in table ' .  $table[0]);
+                }
+            } else {
+                $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error getting indexes for table ' .  $table[0]);
+            }
+            $xmlObject[] = "\t<object class=\"{$class}\" table=\"{$tableName}\" extends=\"{$extends}\">";
+            $xmlObject[] = implode("\n", $xmlFields);
+            if (!empty($xmlIndices)) {
+                $xmlObject[] = '';
+                $xmlObject[] = implode("\n", $xmlIndices);
+            }
+            $xmlObject[] = "\t</object>";
+            $xmlContent[] = implode("\n", $xmlObject);
         }
-        $xmlContent .= "</model>\n";
+        $xmlContent[] = "</model>";
         if ($this->manager->xpdo->getDebug() === true) {
-           $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, $xmlContent);
+           $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, implode("\n", $xmlContent));
         }
         $file= fopen($schemaFile, 'wb');
-        $written= fwrite($file, $xmlContent);
+        $written= fwrite($file, implode("\n", $xmlContent));
         fclose($file);
         return true;
     }
