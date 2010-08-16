@@ -186,7 +186,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
             for (var i = 0;i < kids.length;i=i+1) {
                 var n = kids[i];
                 var c = _encode(n);
-                if (n.attributes.value) {
+                if (n.attributes.value != null && n.attributes.value != undefined) {
                     resultNode[n.id] = n.attributes.value;
                 } else {
                     resultNode[n.id] = c;
@@ -200,7 +200,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
     
     ,onClick: function(n) {
         var vs = n.attributes;
-        if (vs.value) {
+        if (vs.value != null && vs.value != undefined) {
             var f = Ext.getCmp(this.config.formPanel).getForm();
             f.findField(this.config.prefix+'_id').setValue(vs.id);
             f.findField(this.config.prefix+'_name').setValue(vs.name);

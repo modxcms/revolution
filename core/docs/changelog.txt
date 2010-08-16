@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- [#MODX-2259] Fixed issue with empty value fields in extended/remote fields via ORM widget
+- [#MODX-2249] Fixed issue with misleading comment in modTemplateVar::getValue
 - [#MODX-2270] Added option to sort by pulishedon in the resource tree
 - [#MODX-2278] Removed non-used files and added space to empty files
 - [#MODX-2250] Fixed bug where Checkbox TVs with default value dont allow all checkboxes unchecked
