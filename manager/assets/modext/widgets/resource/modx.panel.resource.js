@@ -544,6 +544,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                         });
                     }
                     t.originalValue = t.getValue();
+                    tvpanel.fireEvent('load');
                 } else {
                     t.reset();
                 }
