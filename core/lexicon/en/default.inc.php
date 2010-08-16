@@ -297,6 +297,7 @@ $_lang['publish_date'] = 'Publish Date';
 $_lang['publish_document'] = 'Publish document';
 $_lang['publish_events'] = 'Publish Events';
 $_lang['published'] = 'Published';
+$_lang['publishedon'] = 'Published On';
 $_lang['quick_create'] = 'Quick Create';
 $_lang['quick_create_chunk'] = 'Quick Create Chunk';
 $_lang['quick_create_plugin'] = 'Quick Create Plugin';

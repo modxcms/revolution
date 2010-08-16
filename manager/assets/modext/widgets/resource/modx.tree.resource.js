@@ -264,6 +264,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     ,[_('publish_date'),'pub_date']
                     ,[_('createdon'),'createdon']
                     ,[_('editedon'),'editedon']
+                    ,[_('publishedon'),'publishedon']
                 ]
             })
             ,displayField: 'name'
