@@ -36,7 +36,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 
     ,_initExpand: function() {
         var treeState = Ext.state.Manager.get(this.treestate_id);
-        if (treeState === undefined) {
+        if ((Ext.isString(treeState) || Ext.isEmpty(treeState)) && this.root) {
             if (this.root) {this.root.expand();}
             var wn = this.getNodeById('web_0');
             if (wn && this.config.expandFirst) {
@@ -44,7 +44,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 wn.expand();
             }
         } else {
-            this.expandPath(treeState);
+            for (var i=0;i<treeState.length;i++) {
+                this.expandPath(treeState[i]);
+            }
         }
     }
 

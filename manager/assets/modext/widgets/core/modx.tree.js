@@ -151,6 +151,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	    
         this.treestate_id = this.config.id || Ext.id();
         this.on('load',this._initExpand,this,{single: true});
+        this.on('expandnode',this._saveState,this);
+        this.on('collapsenode',this._saveState,this);
         
         this.on('render',function() {
             this.root.expand();
@@ -171,14 +173,16 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      */
     ,_initExpand: function() {
         var treeState = Ext.state.Manager.get(this.treestate_id);
-        if (treeState === undefined && this.root) {
+        if (Ext.isEmpty(treeState) && this.root) {
             this.root.expand();
             if (this.root.firstChild && this.config.expandFirst) {
                 this.root.firstChild.select();
                 this.root.firstChild.expand();
             }
         } else {
-            this.expandPath(treeState);
+            for (var i=0;i<treeState.length;i++) {
+                this.expandPath(treeState[i]);
+            }
         }
     }
 	
@@ -319,11 +323,46 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 	
     /**
-     * Save the state of the tree's open children for a certain node.
-     * @param {Ext.tree.TreeNode} n The most recent clicked-on node.
+     * Save the state of the tree's open children.
+     * @param {Ext.tree.TreeNode} n The most recent expanded or collapsed node.
      */
     ,_saveState: function(n) {
-        Ext.state.Manager.set(this.treestate_id,n.getPath());
+        var s = Ext.state.Manager.get(this.treestate_id);
+        var p = n.getPath();
+        var i;
+        if (!Ext.isObject(s) && !Ext.isArray(s)) {
+            s = [s]; /* backwards compat */
+        }
+        if (Ext.isEmpty(p) || p == undefined) return; /* ignore invalid paths */
+        if (n.expanded) { /* if expanding, add to state */
+            if (Ext.isString(p) && s.indexOf(p) === -1) {
+                var f = false;
+                var sr;
+                for (i=0;i<s.length;i++) {
+                    if (s[i] == undefined) { delete s[i]; continue; }
+                    sr = s[i].search(p);
+                    if (sr !== -1) { /* dont add if already in */
+                        if (s[sr].length > s[i].length) {
+                            f = true;
+                        }
+                    }
+                }
+                if (!f) { /* if not in, add */
+                    s.push(p);
+                }
+            }
+        } else { /* if collapsing, remove from state */
+            s = s.remove(p);
+            /* remove all children of node */
+            for (i=0;i<s.length;i++) {
+                if (s[i] == undefined) { delete s[i]; continue; }
+                if (s[i].search(p) !== -1) {
+                    delete s[i];
+                }
+            }
+        }
+        Ext.state.Manager.set(this.treestate_id,s);
+        /*Ext.state.Manager.set(this.treestate_id,[]);*/
     }
     
     /**
