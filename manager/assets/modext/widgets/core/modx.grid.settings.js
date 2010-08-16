@@ -26,6 +26,7 @@ MODx.grid.SettingsGrid = function(config) {
             action: 'getAreas'
             ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
         }
+        ,width: 250
         ,allowBlank: true
         ,listeners: {
             'select': {fn: this.filterByArea, scope:this}
@@ -37,6 +38,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,emptyText: _('namespace_filter')
         ,value: MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
         ,allowBlank: true
+        ,width: 150
         ,listeners: {
             'select': {fn: this.filterByNamespace, scope:this}
         }
