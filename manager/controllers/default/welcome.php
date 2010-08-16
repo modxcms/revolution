@@ -79,6 +79,10 @@ if (!empty($url) && !empty($securityEnabled)) {
     $modx->smarty->assign('securefeed',$rss->items);
 }
 
+/* do manager dashboard code here, remove portal extjs widgets and do so
+ * via straight HTML, with maybe only the panel in modext.
+ */
+
 $hasViewDocument = $modx->hasPermission('view_document');
 $hasViewUser = $modx->hasPermission('view_user');
 
