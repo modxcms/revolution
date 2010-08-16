@@ -14,17 +14,18 @@
     <property name="project.css.dir" value="${project.manager.dir}/templates/default/css" />
 
     <!-- Set the project version -->
-    <property name="modx.core.version" value="2.0.0" />
-    <property name="modx.core.release" value="rc" />
+    <property name="modx.core.version" value="2.0.1" />
+    <property name="modx.core.release" value="dev" />
 
     <!-- Set some common build properties -->
-    <property name="build.dir" value="${project.basedir}/_build" />
-    <property name="build.src.tree" value="HEAD" />
+    <property name="build.dir" value="${basedir}" />
+    <property name="build.src.tree" value="dev" />
     <property name="build.src.remote"
               value="git://github.com/modxcms/revolution.git"
     />
+    <property name="build.distrib.name" value="${project.name}-${modx.core.version}-${modx.core.release}" />
     <property name="build.image.basedir" value="${build.dir}/image" />
-    <property name="build.image.dir" value="${build.image.basedir}/modx-${modx.core.version}-${modx.core.release}" />
+    <property name="build.image.dir" value="${build.image.basedir}/${build.distrib.name}" />
     <property name="build.image.modext.dir" value="${build.image.basedir}/modext" />
     <property name="build.image.css.dir" value="${build.image.basedir}/css" />
     <property name="build.distrib.dir" value="${build.dir}/distrib" />
@@ -73,11 +74,24 @@
     </target>
 
     <target name="complete-wc" description="--> Complete Working Copy Build">
-        <antcall target="modext-minify-wc"></antcall>
+        <antcall target="git-export-build-image-wc"></antcall>
+        <antcall target="modext-minify"></antcall>
         <antcall target="modext-concat-min"></antcall>
-        <antcall target="modext-concat-wc"></antcall>
-        <antcall target="copy-prepared-js-wc"></antcall>
+        <antcall target="modext-concat"></antcall>
+        <antcall target="copy-prepared-js"></antcall>
+        <antcall target="css-minify"></antcall>
+        <antcall target="css-concat-min"></antcall>
+        <antcall target="copy-prepared-css"></antcall>
         <antcall target="generate-core-transport"></antcall>
+        <antcall target="prepare-build-image"></antcall>
+        <antcall target="copy-core-transport"></antcall>
+        <!--<antcall target="generate-phpdocs"></antcall>-->
+
+        <buildnumber />
+
+        <!--<antcall target="build-sdk"></antcall>-->
+        <antcall target="build-traditional"></antcall>
+        <antcall target="build-advanced"></antcall>
     </target>
 
     <!-- Various cleanup targets -->
