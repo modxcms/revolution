@@ -161,10 +161,9 @@ class modTemplateVar extends modElement {
      * Get the value of a template variable for a resource.
      *
      * @access public
-     * @param integer $resourceId The id of the resource; 0 defaults to the
-     * current resource.
+     * @param integer $resourceId The id of the resource; 0 defaults to the default_text field for the tv.
      * @return mixed The raw value of the template variable in context of the
-     * specified (or current) resource.
+     * specified resource or the default_text for the tv.
      */
     public function getValue($resourceId= 0) {
         $value= null;
