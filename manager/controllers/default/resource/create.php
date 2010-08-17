@@ -142,6 +142,8 @@ if ($fcDt) {
 $ctx = !empty($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web';
 $modx->smarty->assign('_ctx',$ctx);
 
+
+
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.security.js');
@@ -157,12 +159,17 @@ MODx.ctx = "'.$ctx.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-resource-create"
-        ,template: "'.$default_template.'"
-        ,content_type: "1"
-        ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument').'"
-        ,context_key: "'.$ctx.'"
-        ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
-        ,richtext: "'.$richtext.'"
+        ,record: {
+            template: "'.$default_template.'"
+            ,content_type: "1"
+            ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument').'"
+            ,context_key: "'.$ctx.'"
+            ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
+            ,richtext: "'.$richtext.'"
+            ,published: "'.$modx->getOption('publish_default',null,0).'"
+            ,searchable: "'.$modx->getOption('search_default',null,1).'"
+            ,cacheable: "'.$modx->getOption('cache_default',null,1).'"
+        }
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
         ,canSave: "'.($modx->hasPermission('save_document') ? 1 : 0).'"

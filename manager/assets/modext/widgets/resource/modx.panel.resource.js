@@ -1,5 +1,6 @@
 MODx.panel.Resource = function(config) {
-    config = config || {};
+    config = config || {record:{}};
+    config.record = config.record || {};
     var ct = {
         title: _('resource_content')
         ,id: 'modx-resource-content'
@@ -18,6 +19,7 @@ MODx.panel.Resource = function(config) {
             ,anchor: '97%'
             ,height: 400
             ,grow: false
+            ,value: (config.record.content || config.record.ta) || ''
         },{
             id: 'modx-content-below'
             ,border: false
@@ -44,7 +46,7 @@ MODx.panel.Resource = function(config) {
             ,name: 'id'
             ,id: 'modx-resource-id'
             ,anchor: '97%'
-            ,value: config.resource
+            ,value: config.resource || config.record.id
             ,submitValue: true
         },{
             layout:'column'
@@ -69,7 +71,7 @@ MODx.panel.Resource = function(config) {
                     ,listeners: {
                         'select': {fn: this.templateWarning,scope: this}
                     }
-                    ,value: config.record.template
+                    ,value: config.record.template || MODx.config.default_template
                 }]
             },{
                 columnWidth: .30
@@ -84,8 +86,7 @@ MODx.panel.Resource = function(config) {
                     ,name: 'published'
                     ,id: 'modx-resource-published'
                     ,inputValue: 1
-                    ,checked: MODx.config.publish_default == '1' ? true : false
-                    
+                    ,checked: config.record.published || MODx.config.publish_default
                 }]
             }]
         },{
@@ -98,6 +99,7 @@ MODx.panel.Resource = function(config) {
             ,anchor: '75%'
             ,allowBlank: false
             ,enableKeyEvents: true
+            ,value: config.record.pagetitle || ''
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+f.getValue()+'</h2>');
@@ -112,6 +114,7 @@ MODx.panel.Resource = function(config) {
             ,id: 'modx-resource-longtitle'
             ,maxLength: 255
             ,anchor: '75%'
+            ,value: config.record.longtitle || ''
             
         },{
             xtype: 'textfield'
@@ -121,6 +124,7 @@ MODx.panel.Resource = function(config) {
             ,id: 'modx-resource-description'
             ,maxLength: 255
             ,anchor: '75%'
+            ,value: config.record.description || ''
             
         },{
             xtype: 'textfield'
@@ -130,6 +134,7 @@ MODx.panel.Resource = function(config) {
             ,id: 'modx-resource-alias'
             ,maxLength: 100
             ,anchor: '75%'
+            ,value: config.record.alias || ''
             
         },{
             xtype: 'textfield'
@@ -139,6 +144,7 @@ MODx.panel.Resource = function(config) {
             ,id: 'modx-resource-link-attributes'
             ,maxLength: 255
             ,anchor: '75%'
+            ,value: config.record.link_attributes || ''
             
         },{
             xtype: 'textarea'
@@ -148,6 +154,7 @@ MODx.panel.Resource = function(config) {
             ,id: 'modx-resource-introtext'
             ,grow: true
             ,anchor: '90%'
+            ,value: config.record.introtext || ''
             
         },{
             xtype: 'modx-field-parent-change'
@@ -170,6 +177,7 @@ MODx.panel.Resource = function(config) {
             ,id: 'modx-resource-menutitle'
             ,maxLength: 255
             ,anchor: '70%'
+            ,value: config.record.menutitle || ''
             
         },{
             xtype: 'numberfield'
@@ -178,6 +186,7 @@ MODx.panel.Resource = function(config) {
             ,name: 'menuindex'
             ,id: 'modx-resource-menuindex'
             ,width: 60
+            ,value: config.record.menuindex || 0
             
         },{
             xtype: 'checkbox'
@@ -187,11 +196,12 @@ MODx.panel.Resource = function(config) {
             ,id: 'modx-resource-hidemenu'
             ,inputValue: 1
             ,checked: false
+            ,value: config.record.hidemenu || 0
             
         },{
             xtype: 'hidden'
             ,name: 'type'
-            ,value: 'document'                        
+            ,value: 'document'
         },{
             xtype: 'hidden'
             ,name: 'context_key'
@@ -201,6 +211,7 @@ MODx.panel.Resource = function(config) {
             xtype: 'hidden'
             ,name: 'content'
             ,id: 'hiddenContent'
+            ,value: (config.record.content || config.record.ta) || ''
         },{
             html: MODx.onDocFormRender, border: false
         }]
@@ -217,6 +228,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'isfolder'
         ,id: 'modx-resource-isfolder'
         ,inputValue: 1
+        ,checked: config.record.isfolder || 0
         
     },{
         xtype: 'checkbox'
@@ -225,7 +237,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'richtext'
         ,id: 'modx-resource-richtext'
         ,inputValue: 1
-        ,checked: MODx.config.richtext_default == '1' ? true : false
+        ,checked: config.record.richtext || MODx.config.richtext_default
         
     },{
         xtype: 'xdatetime'
@@ -238,6 +250,7 @@ MODx.panel.Resource = function(config) {
         ,timeFormat: MODx.config.manager_time_format
         ,dateWidth: 120
         ,timeWidth: 120
+        ,value: config.record.publishedon
     });
     if (MODx.config.publish_document) {
         va.push({
@@ -251,6 +264,7 @@ MODx.panel.Resource = function(config) {
             ,timeFormat: MODx.config.manager_time_format
             ,dateWidth: 120
             ,timeWidth: 120
+            ,value: config.record.pub_date
             
         });
     }
@@ -265,7 +279,8 @@ MODx.panel.Resource = function(config) {
             ,dateFormat: MODx.config.manager_date_format
             ,timeFormat: MODx.config.manager_time_format
             ,dateWidth: 120
-            ,timeWidth: 120            
+            ,timeWidth: 120
+            ,value: config.record.unpub_date
         });
     }
     va.push({
@@ -275,7 +290,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'searchable'
         ,id: 'modx-resource-searchable'
         ,inputValue: 1
-        ,checked: MODx.config.search_default == '1' ? true : false
+        ,checked: config.record.searchable || MODx.config.search_default
         
     },{
         xtype: 'checkbox'
@@ -284,7 +299,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'cacheable'
         ,id: 'modx-resource-cacheable'
         ,inputValue: 1
-        ,checked: MODx.config.cache_default == '1' ? true : false
+        ,checked: config.record.cacheable || MODx.config.cache_default
         
     },{
         xtype: 'checkbox'
@@ -294,6 +309,7 @@ MODx.panel.Resource = function(config) {
         ,id: 'modx-resource-syncsite'
         ,inputValue: 1
         ,checked: true
+        ,value: config.record.syncsite || 1
         
     },{
         xtype: 'checkbox'
@@ -302,6 +318,7 @@ MODx.panel.Resource = function(config) {
         ,id: 'modx-resource-deleted'
         ,inputValue: 1
         ,checked: false
+        ,value: config.record.deleted || 0
 
     },{
         xtype: 'modx-combo-content-type'
@@ -310,8 +327,8 @@ MODx.panel.Resource = function(config) {
         ,name: 'content_type'
         ,hiddenName: 'content_type'
         ,id: 'modx-resource-content-type'
-        ,value: 1
         ,anchor: '70%'
+        ,value: config.record.content_type || 1
         
     },{
         xtype: 'modx-combo-content-disposition'
@@ -321,6 +338,7 @@ MODx.panel.Resource = function(config) {
         ,hiddenName: 'content_dispo'
         ,id: 'modx-resource-content-dispo'
         ,anchor: '70%'
+        ,value: config.record.content_dispo || 0
         
     },{
         xtype: 'textfield'
@@ -328,7 +346,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'class_key'
         ,id: 'modx-resource-class-key'
         ,allowBlank: false
-        ,value: 'modDocument'
+        ,value: config.record.class_key || 'modDocument'
         ,anchor: '70%'
     });
     it.push({
@@ -352,8 +370,8 @@ MODx.panel.Resource = function(config) {
         xtype: 'modx-panel-resource-tv'
         ,collapsed: false
         ,resource: config.resource
-        ,class_key: config.record.class_key
-        ,template: config.record.template
+        ,class_key: config.record.class_key || 'modDocument'
+        ,template: config.record.template || MODx.config.default_template
         ,anchor: '100%'
     });
     if (config.access_permissions) {
@@ -430,55 +448,25 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         this.getForm().setValues(this.config.record);
     }
     ,setup: function() {
-        if (this.config.resource === '' || this.config.resource === 0 || this.initialized) {
-            if (MODx.config.use_editor && MODx.loadRTE) {
-                var f = this.getForm().findField('richtext');
-                if (f && f.getValue() == 1 && !this.rteLoaded) {
-                    MODx.loadRTE('ta');
-                    this.rteLoaded = true;
-                } else if (f && f.getValue() == 0 && this.rteLoaded) {
-                    if (MODx.unloadRTE) {
-                        MODx.unloadRTE('ta');
-                    }
-                    this.rteLoaded = false;
-                }
-            }
-            this.fireEvent('ready');
-            return false;
+        if (!Ext.isEmpty(this.config.record.pagetitle)) {
+            Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+this.config.record.pagetitle+'</h2>');
         }
-        MODx.Ajax.request({
-            url: MODx.config.connectors_url+'resource/index.php'
-            ,params: {
-                action: 'get'
-                ,id: this.config.resource
-                ,class_key: this.config.record.class_key
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    if (r.object.pub_date == '0') { r.object.pub_date = ''; }
-                    if (r.object.unpub_date == '0') { r.object.unpub_date = ''; }
-                    r.object.ta = r.object.content;
-                    this.getForm().setValues(r.object);
 
-                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+r.object.pagetitle+'</h2>');
-
-                    if (r.object.richtext == 1 && MODx.config.use_editor == 1 && !this.rteLoaded) {
-                        if (MODx.loadRTE && !this.rteLoaded) {
-                            MODx.loadRTE('ta');
-                        }
-                        this.rteLoaded = true;
-                    } else if (r.object.richtext == 0 && this.rteLoaded) {
-                        if (MODx.unloadRTE) {
-                            MODx.unloadRTE('ta');
-                        }
-                        this.rteLoaded = false;
-                    }
-                    this.defaultClassKey = r.object.class_key;
-                    this.initialized = true;
-                    this.fireEvent('ready',r);
-                },scope:this}
+        if (MODx.config.use_editor && MODx.loadRTE) {
+            var f = this.getForm().findField('richtext');
+            if (f && f.getValue() == 1 && !this.rteLoaded) {
+                MODx.loadRTE('ta');
+                this.rteLoaded = true;
+            } else if (f && f.getValue() == 0 && this.rteLoaded) {
+                if (MODx.unloadRTE) {
+                    MODx.unloadRTE('ta');
+                }
+                this.rteLoaded = false;
             }
-        });
+        }
+        this.defaultClassKey = this.config.record.class_key || 'modDocument';
+        this.fireEvent('ready');
+        this.initialized = true;
     }
     
     ,beforeSubmit: function(o) {        

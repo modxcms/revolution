@@ -24,12 +24,7 @@ MODx.page.CreateWebLink = function(config) {
             xtype: 'modx-panel-weblink'
             ,renderTo: 'modx-panel-weblink-div'
             ,resource: 0
-            ,record: {
-                class_key: config.class_key
-                ,context_key: config.context_key
-                ,template: config.template
-                ,parent: config.parent
-            }
+            ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions            
         }]

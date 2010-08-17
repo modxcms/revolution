@@ -33,12 +33,12 @@ MODx.panel.Chunk = function(config) {
                 xtype: 'hidden'
                 ,name: 'id'
                 ,id: 'modx-chunk-id'
-                ,value: config.chunk
+                ,value: config.record.id || MODx.request.id
             },{
                 xtype: 'hidden'
                 ,name: 'props'
                 ,id: 'modx-chunk-props'
-                ,value: null
+                ,value: config.record.props || null
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('name')
@@ -48,6 +48,7 @@ MODx.panel.Chunk = function(config) {
                 ,maxLength: 255
                 ,enableKeyEvents: true
                 ,allowBlank: false
+                ,value: config.record.name
                 ,listeners: {
                     'keyup': {scope:this,fn:function(f,e) {
                         Ext.getCmp('modx-chunk-header').getEl().update('<h2>'+_('chunk')+': '+f.getValue()+'</h2>');
@@ -60,13 +61,14 @@ MODx.panel.Chunk = function(config) {
                 ,id: 'modx-chunk-description'
                 ,width: 300
                 ,maxLength: 255
+                ,value: config.record.description
             },{
                 xtype: 'modx-combo-category'
                 ,fieldLabel: _('category')
                 ,name: 'category'
                 ,id: 'modx-chunk-category'
                 ,width: 250
-                ,value: config.category || null
+                ,value: config.record.category || 0
             },{
                 xtype: 'checkbox'
                 ,fieldLabel: _('chunk_lock')
@@ -74,6 +76,7 @@ MODx.panel.Chunk = function(config) {
                 ,name: 'locked'
                 ,id: 'modx-chunk-locked'
                 ,inputValue: true
+                ,checked: config.record.locked || 0
             },{
                 xtype: 'checkbox'
                 ,fieldLabel: _('clear_cache_on_save')
@@ -81,7 +84,7 @@ MODx.panel.Chunk = function(config) {
                 ,name: 'clearCache'
                 ,id: 'modx-chunk-clear-cache'
                 ,inputValue: 1
-                ,checked: true
+                ,checked: config.record.clearCache || 0
             },{
                 html: MODx.onChunkFormRender
                 ,border: false
@@ -95,7 +98,7 @@ MODx.panel.Chunk = function(config) {
                 ,id: 'modx-chunk-snippet'
                 ,width: '95%'
                 ,height: 400
-                ,value: ''
+                ,value: config.record.snippet || ''
             }]
         },{
             xtype: 'modx-panel-element-properties'
@@ -118,34 +121,22 @@ MODx.panel.Chunk = function(config) {
 Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (this.config.chunk === '' || this.config.chunk === 0 || this.initialized) {
-            this.fireEvent('ready');
-            return false;
+        if (!Ext.isEmpty(this.config.record.name)) {
+            Ext.getCmp('modx-chunk-header').getEl().update('<h2>'+_('chunk')+': '+this.config.record.name+'</h2>');
         }
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'get'
-                ,id: this.config.chunk
+        if (!Ext.isEmpty(this.config.record.properties)) {
+            var d = this.config.record.properties;
+            var g = Ext.getCmp('modx-grid-element-properties');
+            if (g) {
+                g.defaultProperties = d;
+                g.getStore().loadData(d);
             }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    if (r.object.category == '0') { r.object.category = null; }
-                    if (r.object.snippet == 'NULL') { r.object.snippet = ''; }
-                    this.getForm().setValues(r.object);
-                    Ext.getCmp('modx-chunk-header').getEl().update('<h2>'+_('chunk')+': '+r.object.name+'</h2>');
-                    
-                    var d = Ext.decode(r.object.data);
-                    var g = Ext.getCmp('modx-grid-element-properties');
-                    g.defaultProperties = d;
-                    g.getStore().loadData(d);
-                    if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
-                    this.fireEvent('ready',r.object);
-                    this.clearDirty();
-                    this.initialized = true;
-                },scope:this}
-            }
-        });
+        }
+        this.fireEvent('ready',this.config.record);
+        if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
+        this.clearDirty();
+        this.initialized = true;
+        return true;
     }
     ,beforeSubmit: function(o) {
         this.cleanupEditor();

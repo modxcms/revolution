@@ -112,13 +112,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-symlink-update"
         ,resource: "'.$resource->get('id').'"
-        ,template: "'.$resource->get('template').'"
-        ,content_type: "'.$resource->get('content_type').'"
-        ,class_key: "'.$resource->get('class_key').'"
-        ,context_key: "'.$resource->get('context_key').'"
-        ,parent: "'.$resource->get('parent').'"
-        ,deleted: "'.$resource->get('deleted').'"
-        ,published: "'.$resource->get('published').'"
+        ,record: '.$modx->toJSON($resource->toArray()).'
         ,which_editor: "'.$which_editor.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"

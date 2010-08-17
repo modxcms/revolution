@@ -54,7 +54,9 @@ $modx->regClientStartupHTMLBlock('
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-chunk-create"
-        ,category: "'.(isset($category) && $category instanceof modCategory ? $category->get('id') : '').'"
+        ,record: {
+            category: "'.(is_object($category) && $category instanceof modCategory ? $category->get('id') : '').'"
+        }
     });
 });
 MODx.onChunkFormRender = "'.$onChunkFormRender.'";

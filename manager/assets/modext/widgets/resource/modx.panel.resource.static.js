@@ -5,7 +5,8 @@
  * @xtype modx-panel-static
  */
 MODx.panel.Static = function(config) {
-    config = config || {};
+    config = config || {record:{}};
+    config.record = config.record || {};
     
     var it = [];
     it.push({
@@ -43,7 +44,7 @@ MODx.panel.Static = function(config) {
                     ,listeners: {
                         'select': {fn: this.templateWarning,scope: this}
                     }
-                    ,value: config.record.template
+                    ,value: config.record.template || MODx.config.default_template
                 }]
             },{
                 columnWidth: .45
@@ -58,7 +59,7 @@ MODx.panel.Static = function(config) {
                     ,name: 'published'
                     ,id: 'modx-resource-published'
                     ,inputValue: 1
-                    ,checked: MODx.config.publish_default == '1' ? true : false
+                    ,checked: config.record.published || MODx.config.publish_default
                     
                 }]
             }]
@@ -70,6 +71,7 @@ MODx.panel.Static = function(config) {
             ,id: 'modx-resource-pagetitle'
             ,maxLength: 255
             ,allowBlank: false
+            ,value: config.record.pagetitle
             
         },{
             xtype: 'textfield'
@@ -78,6 +80,7 @@ MODx.panel.Static = function(config) {
             ,name: 'longtitle'
             ,id: 'modx-resource-longtitle'
             ,maxLength: 255
+            ,value: config.record.longtitle || ''
             
         },{
             xtype: 'textfield'
@@ -86,6 +89,7 @@ MODx.panel.Static = function(config) {
             ,name: 'description'
             ,id: 'modx-resource-description'
             ,maxLength: 255
+            ,value: config.record.description || ''
             
         },{
             xtype: 'textfield'
@@ -94,6 +98,7 @@ MODx.panel.Static = function(config) {
             ,name: 'alias'
             ,id: 'modx-resource-alias'
             ,maxLength: 100
+            ,value: config.record.alias || ''
             
         },{
             xtype: 'textfield'
@@ -101,6 +106,7 @@ MODx.panel.Static = function(config) {
             ,description: _('resource_link_attributes_help')
             ,name: 'link_attributes'
             ,maxLength: 255
+            ,value: config.record.link_attributes || ''
             
         },{
             xtype: 'modx-combo-browser'
@@ -112,7 +118,7 @@ MODx.panel.Static = function(config) {
             ,name: 'content'
             ,id: 'modx-resource-content'
             ,maxLength: 255
-            ,value: ''
+            ,value: (config.record.content || config.record.ta) || ''
             ,listeners: {
                 'select':{fn:function(data) {
                     var str = data.url;
@@ -130,6 +136,7 @@ MODx.panel.Static = function(config) {
             ,name: 'introtext'
             ,id: 'modx-resource-introtext'
             ,grow: true
+            ,value: config.record.introtext || ''
             
         },{
             xtype: 'modx-field-parent-change'
@@ -160,6 +167,7 @@ MODx.panel.Static = function(config) {
             ,name: 'menuindex'
             ,id: 'modx-resource-menuindex'
             ,width: 60
+            ,value: config.record.menuindex || 0
             
         },{
             xtype: 'checkbox'
@@ -167,17 +175,17 @@ MODx.panel.Static = function(config) {
             ,description: _('resource_hide_from_menus_help')
             ,name: 'hidemenu'
             ,inputValue: 1
-            ,checked: false
+            ,checked: config.record.hidemenu || 0
             
         },{
             xtype: 'hidden'
             ,name: 'type'
-            ,value: 'document'                        
+            ,value: 'document'
         },{
             xtype: 'hidden'
             ,name: 'context_key'
             ,id: 'modx-resource-context-key'
-            ,value: 'web'
+            ,value: config.record.context_key || 'web'
         },{
             html: MODx.onDocFormRender, border: false
         }]
@@ -190,7 +198,8 @@ MODx.panel.Static = function(config) {
         ,description: _('resource_folder_help')
         ,name: 'isfolder'
         ,id: 'modx-resource-isfolder'
-        ,inputValue: 1        
+        ,inputValue: 1
+        ,checked: config.record.isfolder || 0
     });
     va.push({
         xtype: 'xdatetime'
@@ -203,6 +212,7 @@ MODx.panel.Static = function(config) {
         ,timeFormat: MODx.config.manager_time_format
         ,dateWidth: 120
         ,timeWidth: 120
+        ,value: config.record.publishedon
     });
     if (MODx.config.publish_document) {
         va.push({
@@ -216,6 +226,7 @@ MODx.panel.Static = function(config) {
             ,allowBlank: true
             ,dateWidth: 120
             ,timeWidth: 120
+            ,value: config.record.pub_date
         });
     }
     if (MODx.config.publish_document) {
@@ -229,7 +240,8 @@ MODx.panel.Static = function(config) {
             ,timeFormat: MODx.config.manager_time_format
             ,allowBlank: true
             ,dateWidth: 120
-            ,timeWidth: 120   
+            ,timeWidth: 120
+            ,value: config.record.unpub_date
         });
     }
     va.push({
@@ -239,7 +251,7 @@ MODx.panel.Static = function(config) {
         ,name: 'searchable'
         ,id: 'modx-resource-searchable'
         ,inputValue: 1
-        ,checked: MODx.config.search_default == '1' ? true : false        
+        ,checked: config.record.searchable || MODx.config.search_default
     });
     va.push({
         xtype: 'checkbox'
@@ -248,7 +260,7 @@ MODx.panel.Static = function(config) {
         ,name: 'cacheable'
         ,id: 'modx-resource-cacheable'
         ,inputValue: 1
-        ,checked: true        
+        ,checked: config.record.cacheable || MODx.config.cache_default
     });
     va.push({
         xtype: 'checkbox'
@@ -257,7 +269,7 @@ MODx.panel.Static = function(config) {
         ,name: 'syncsite'
         ,id: 'modx-weblink-syncsite'
         ,inputValue: 1
-        ,checked: true 
+        ,checked: config.record.syncsite || true
     });
     va.push({
         xtype: 'checkbox'
@@ -265,14 +277,7 @@ MODx.panel.Static = function(config) {
         ,name: 'deleted'
         ,id: 'modx-resource-deleted'
         ,inputValue: 1
-        ,checked: false
-    });
-    va.push({
-        xtype: 'hidden'
-        ,name: 'class_key'
-        ,id: 'modx-resource-class-key'
-        ,value: 'modStaticResource'
-        
+        ,checked: config.record.deleted || false
     });
     va.push({
         xtype: 'modx-combo-content-type'
@@ -281,7 +286,7 @@ MODx.panel.Static = function(config) {
         ,name: 'content_type'
         ,id: 'modx-resource-content-type'
         ,width: 300
-        ,value: 1
+        ,value: config.record.content_type || 1
     });
     va.push({
         xtype: 'modx-combo-content-disposition'
@@ -290,6 +295,7 @@ MODx.panel.Static = function(config) {
         ,name: 'content_dispo'
         ,id: 'modx-resource-content-dispo'
         ,width: 300
+        ,value: config.record.content_dispo || 1
     });
     va.push({
         xtype: 'textfield'
@@ -297,7 +303,7 @@ MODx.panel.Static = function(config) {
         ,name: 'class_key'
         ,id: 'modx-resource-class-key'
         ,allowBlank: false
-        ,value: 'modStaticResource'    
+        ,value: config.record.class_key || 'modStaticResource'
         ,width: 250
     });
     it.push({
@@ -316,9 +322,8 @@ MODx.panel.Static = function(config) {
     it.push({
         xtype: 'modx-panel-resource-tv'
         ,resource: config.resource
-        ,class_key: config.record.class_key
-        ,template: config.record.template
-        
+        ,class_key: config.record.class_key || 'modStaticResource'
+        ,template: config.record.template || MODx.config.default_template
     });
     if (config.access_permissions) {
         it.push({
@@ -366,47 +371,23 @@ MODx.panel.Static = function(config) {
 };
 Ext.extend(MODx.panel.Static,MODx.FormPanel,{
     initialized: false
-    ,defaultClassKey: 'modResource'
+    ,defaultClassKey: 'modStaticResource'
     ,onLoad: function() {
         this.getForm().setValues(this.config.record);
     }
     ,setup: function() {
-        if (this.config.resource === '' || this.config.resource === 0) {
-            this.fireEvent('ready');
-            return false;
+        if (!Ext.isEmpty(this.config.record.pagetitle)) {
+            Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('static_resource')+': '+this.config.record.pagetitle+'</h2>');
         }
-        Ext.Ajax.request({
-            url: MODx.config.connectors_url+'resource/index.php'
-            ,params: {
-                action: 'get'
-                ,id: this.config.resource
-                ,class_key: this.config.record.class_key
+        this.defaultClassKey = this.config.record.class_key || 'modStaticResource';
+        if (MODx.config.use_editor == 1 && !this.rteLoaded) {
+            if (MODx.loadRTE && !this.rteLoaded) {
+                MODx.loadRTE();
             }
-            ,scope: this
-            ,success: function(r) {
-                r = Ext.decode(r.responseText);
-                if (r.success) {
-                    if (r.object.pub_date == '0') { r.object.pub_date = ''; }
-                    if (r.object.unpub_date == '0') { r.object.unpub_date = ''; }
-                    r.object['parent-cmb'] = r.object.parent;
-                                   
-                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('static_resource')+': '+r.object.pagetitle+'</h2>');
-                    
-                    this.getForm().setValues(r.object);
-
-                    if (MODx.config.use_editor == 1 && !this.rteLoaded) {
-                        if (MODx.loadRTE && !this.rteLoaded) {
-                            MODx.loadRTE();
-                        }
-                        this.rteLoaded = true;
-                    }
-
-                    this.defaultClassKey = r.object.class_key;
-                    this.initialized = true;
-                    this.fireEvent('ready',r);
-                } else { MODx.form.Handler.errorJSON(r); }
-            }
-        });
+            this.rteLoaded = true;
+        }
+        this.fireEvent('ready',this.config.record);
+        this.initialized = true;
     }
     ,beforeSubmit: function(o) {        
         var g = Ext.getCmp('modx-grid-resource-security');

@@ -42,7 +42,7 @@ MODx.panel.WebLink = function(config) {
                     ,listeners: {
                         'select': {fn: this.templateWarning,scope: this}
                     }
-                    ,value: config.record.template
+                    ,value: config.record.template || MODx.config.default_template
                 }]
             },{
                 columnWidth: .45
@@ -57,7 +57,7 @@ MODx.panel.WebLink = function(config) {
                     ,name: 'published'
                     ,id: 'modx-resource-published'
                     ,inputValue: 1
-                    ,checked: MODx.config.publish_default == '1' ? true : false
+                    ,checked: config.record.published || MODx.config.publish_default
                     
                 }]
             }]
@@ -69,6 +69,7 @@ MODx.panel.WebLink = function(config) {
             ,id: 'modx-resource-pagetitle'
             ,maxLength: 255
             ,allowBlank: false
+            ,value: config.record.pagetitle
             
         },{
             xtype: 'textfield'
@@ -77,6 +78,7 @@ MODx.panel.WebLink = function(config) {
             ,name: 'longtitle'
             ,id: 'modx-resource-longtitle'
             ,maxLength: 255
+            ,value: config.record.longtitle || ''
             
         },{
             xtype: 'textfield'
@@ -85,6 +87,7 @@ MODx.panel.WebLink = function(config) {
             ,name: 'description'
             ,id: 'modx-resource-description'
             ,maxLength: 255
+            ,value: config.record.description || ''
             
         },{
             xtype: 'textfield'
@@ -93,6 +96,7 @@ MODx.panel.WebLink = function(config) {
             ,name: 'alias'
             ,id: 'modx-resource-alias'
             ,maxLength: 100
+            ,value: config.record.alias || ''
             
         },{
             xtype: 'textfield'
@@ -100,6 +104,7 @@ MODx.panel.WebLink = function(config) {
             ,description: _('resource_link_attributes_help')
             ,name: 'link_attributes'
             ,maxLength: 255
+            ,value: config.record.link_attributes || ''
             
         },{
             xtype: 'textfield'
@@ -109,8 +114,8 @@ MODx.panel.WebLink = function(config) {
             ,id: 'modx-resource-content'
             ,width: 300
             ,maxLength: 255
-            ,value: 'http://'
-            ,allowBlank: false            
+            ,allowBlank: false
+            ,value: (config.record.content || config.record.ta) || 'http://'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('resource_summary')
@@ -118,6 +123,7 @@ MODx.panel.WebLink = function(config) {
             ,name: 'introtext'
             ,id: 'modx-resource-introtext'
             ,grow: true
+            ,value: config.record.introtext || ''
             
         },{
             xtype: 'modx-field-parent-change'
@@ -140,6 +146,7 @@ MODx.panel.WebLink = function(config) {
             ,name: 'menutitle'
             ,id: 'modx-resource-menutitle'
             ,maxLength: 255
+            ,value: config.record.menutitle || ''
             
         },{
             xtype: 'numberfield'
@@ -148,6 +155,7 @@ MODx.panel.WebLink = function(config) {
             ,name: 'menuindex'
             ,id: 'modx-resource-menuindex'
             ,width: 60
+            ,value: config.record.menuindex || 0
             
         },{
             xtype: 'checkbox'
@@ -155,7 +163,7 @@ MODx.panel.WebLink = function(config) {
             ,description: _('resource_hide_from_menus_help')
             ,name: 'hidemenu'
             ,inputValue: 1
-            ,checked: false
+            ,checked: config.record.hidemenu || false
             
         },{
             xtype: 'hidden'
@@ -165,7 +173,7 @@ MODx.panel.WebLink = function(config) {
             xtype: 'hidden'
             ,name: 'context_key'
             ,id: 'modx-resource-context-key'
-            ,value: 'web'
+            ,value: config.record.context_key || 'web'
         },{
             html: MODx.onDocFormRender, border: false
         }]
@@ -178,7 +186,8 @@ MODx.panel.WebLink = function(config) {
         ,description: _('resource_folder_help')
         ,name: 'isfolder'
         ,id: 'modx-resource-isfolder'
-        ,inputValue: 1        
+        ,inputValue: 1
+        ,value: config.record.isfolder || 0
     });
     va.push({
         xtype: 'xdatetime'
@@ -191,6 +200,7 @@ MODx.panel.WebLink = function(config) {
         ,timeFormat: MODx.config.manager_time_format
         ,dateWidth: 120
         ,timeWidth: 120
+        ,value: config.record.publishedon
     });
     if (MODx.config.publish_document) {
         va.push({
@@ -204,6 +214,7 @@ MODx.panel.WebLink = function(config) {
             ,timeFormat: MODx.config.manager_time_format
             ,dateWidth: 120
             ,timeWidth: 120
+            ,value: config.record.pub_date
         });
     }
     if (MODx.config.publish_document) {
@@ -217,7 +228,8 @@ MODx.panel.WebLink = function(config) {
             ,dateFormat: MODx.config.manager_date_format
             ,timeFormat: MODx.config.manager_time_format
             ,dateWidth: 120
-            ,timeWidth: 120   
+            ,timeWidth: 120
+            ,value: config.record.unpub_date
         });
     }
     va.push({
@@ -227,7 +239,7 @@ MODx.panel.WebLink = function(config) {
         ,name: 'searchable'
         ,id: 'modx-resource-searchable'
         ,inputValue: 1
-        ,checked: MODx.config.search_default == '1' ? true : false        
+        ,checked: config.record.searchable || MODx.config.search_default
     });
     va.push({
         xtype: 'checkbox'
@@ -236,7 +248,7 @@ MODx.panel.WebLink = function(config) {
         ,name: 'cacheable'
         ,id: 'modx-resource-cacheable'
         ,inputValue: 1
-        ,checked: true        
+        ,checked: config.record.cacheable || MODx.config.cache_default
     });
     va.push({
         xtype: 'checkbox'
@@ -245,7 +257,7 @@ MODx.panel.WebLink = function(config) {
         ,name: 'syncsite'
         ,id: 'modx-resource-syncsite'
         ,inputValue: 1
-        ,checked: true 
+        ,checked: config.record.syncsite || true
     });
     va.push({
         xtype: 'checkbox'
@@ -253,14 +265,7 @@ MODx.panel.WebLink = function(config) {
         ,name: 'deleted'
         ,id: 'modx-resource-deleted'
         ,inputValue: 1
-        ,checked: false
-    });
-    va.push({
-        xtype: 'hidden'
-        ,name: 'class_key'
-        ,id: 'modx-resource-class-key'
-        ,value: 'modStaticResource'
-        
+        ,checked: config.record.deleted || false
     });
     va.push({
         xtype: 'modx-combo-content-type'
@@ -269,7 +274,7 @@ MODx.panel.WebLink = function(config) {
         ,name: 'content_type'
         ,id: 'modx-resource-content-type'
         ,width: 300
-        ,value: 1
+        ,value: config.record.content_type || 1
     });
     va.push({
         xtype: 'modx-combo-content-disposition'
@@ -278,6 +283,7 @@ MODx.panel.WebLink = function(config) {
         ,name: 'content_dispo'
         ,id: 'modx-resource-content-dispo'
         ,width: 300
+        ,value: config.record.content_dispo || 1
     });
     va.push({
         xtype: 'textfield'
@@ -285,7 +291,7 @@ MODx.panel.WebLink = function(config) {
         ,name: 'class_key'
         ,id: 'modx-resource-class-key'
         ,allowBlank: false
-        ,value: 'modStaticResource'    
+        ,value: config.record.class_key || 'modStaticResource'
         ,width: 250
     });
     it.push({
@@ -304,8 +310,8 @@ MODx.panel.WebLink = function(config) {
     it.push({
         xtype: 'modx-panel-resource-tv'
         ,resource: config.resource
-        ,class_key: config.record.class_key
-        ,template: config.record.template
+        ,class_key: config.record.class_key || 'modWebLink'
+        ,template: config.record.template || MODx.config.default_template
         
     });
     if (config.access_permissions) {
@@ -353,46 +359,24 @@ MODx.panel.WebLink = function(config) {
     setTimeout("Ext.getCmp('modx-panel-resource').onLoad();",1000);
 };
 Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
-    onLoad: function() {
+    initialized: false
+    ,defaultClassKey: 'modWebLink'
+    ,onLoad: function() {
         this.getForm().setValues(this.config.record);
     }
     ,setup: function() {
-        if (this.config.resource === '' || this.config.resource === 0) {
-            this.fireEvent('ready');
-            return false;
+        if (!Ext.isEmpty(this.config.record.pagetitle)) {
+            Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('weblink')+': '+this.config.record.pagetitle+'</h2>');
         }
-        Ext.Ajax.request({
-            url: MODx.config.connectors_url+'resource/index.php'
-            ,params: {
-                action: 'get'
-                ,id: this.config.resource
-                ,class_key: this.config.record.class_key
+        this.defaultClassKey = this.config.record.class_key || 'modWebLink';
+        if (MODx.config.use_editor == 1 && !this.rteLoaded) {
+            if (MODx.loadRTE && !this.rteLoaded) {
+                MODx.loadRTE();
             }
-            ,scope: this
-            ,success: function(r) {
-                r = Ext.decode(r.responseText);
-                if (r.success) {
-                    if (r.object.pub_date == '0') { r.object.pub_date = ''; }
-                    if (r.object.unpub_date == '0') { r.object.unpub_date = ''; }
-                    r.object['parent-cmb'] = r.object['parent'];
-                    
-                    Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('weblink')+': '+r.object.pagetitle+'</h2>');
-                    
-                    this.getForm().setValues(r.object);
-
-                    if (MODx.config.use_editor == 1 && !this.rteLoaded) {
-                        if (MODx.loadRTE && !this.rteLoaded) {
-                            MODx.loadRTE();
-                        }
-                        this.rteLoaded = true;
-                    }
-
-                    this.defaultClassKey = r.object.class_key;
-                    this.initialized = true;
-                    this.fireEvent('ready',r);
-                } else { MODx.form.Handler.errorJSON(r); }
-            }
-        });
+            this.rteLoaded = true;
+        }
+        this.fireEvent('ready',this.config.record);
+        this.initialized = true;
     }
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-resource-security');

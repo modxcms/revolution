@@ -38,7 +38,9 @@ $modx->regClientStartupHTMLBlock('
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-tv-create"
-        ,category: "'.($category != null ? $category->get('id') : ''). '"
+        ,record: {
+            category: "'.($category != null ? $category->get('id') : ''). '"
+        }
     });
 });
 var onTVFormRender = "'.$onTVFormRender.'";

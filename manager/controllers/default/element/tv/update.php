@@ -26,6 +26,26 @@ if (is_array($onTVFormRender)) $onTVFormRender = implode('',$onTVFormRender);
 $onTVFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onTVFormRender);
 $modx->smarty->assign('onTVFormRender',$onTVFormRender);
 
+/* get properties */
+$properties = $tv->get('properties');
+if (!is_array($properties)) $properties = array();
+
+$data = array();
+foreach ($properties as $property) {
+    $data[] = array(
+        $property['name'],
+        $property['desc'],
+        $property['type'],
+        $property['options'],
+        $property['value'],
+        $property['lexicon'],
+        false, /* overridden set to false */
+        $property['desc_trans'],
+    );
+}
+$tvArray = $tv->toArray();
+$tvArray['properties'] = $data;
+
 /* check unlock default element properties permission */
 $unlock_element_properties = $modx->hasPermission('unlock_element_properties') ? 1 : 0;
 
@@ -46,8 +66,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-tv-update"
         ,id: "'.$tv->get('id').'"
-        ,category: "'.$tv->get('category'). '"
-        ,type: "'.$tv->get('type').'"
+        ,record: '.$modx->toJSON($tvArray).'
     });
 });
 var onTVFormRender = "'.$onTVFormRender.'";

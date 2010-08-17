@@ -24,11 +24,7 @@ MODx.page.UpdateWebLink = function(config) {
             xtype: 'modx-panel-weblink'
             ,renderTo: 'modx-panel-weblink-div'
             ,resource: config.resource
-            ,record: {
-                class_key: config.class_key
-                ,context_key: config.context_key
-                ,template: config.template
-            }
+            ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
         }]

@@ -27,6 +27,26 @@ if (is_array($onTempFormRender)) $onTempFormRender = implode('',$onTempFormRende
 $onTempFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onTempFormRender);
 $modx->smarty->assign('onTempFormRender',$onTempFormRender);
 
+/* get properties */
+$properties = $template->get('properties');
+if (!is_array($properties)) $properties = array();
+
+$data = array();
+foreach ($properties as $property) {
+    $data[] = array(
+        $property['name'],
+        $property['desc'],
+        $property['type'],
+        $property['options'],
+        $property['value'],
+        $property['lexicon'],
+        false, /* overridden set to false */
+        $property['desc_trans'],
+    );
+}
+$templateArray = $template->toArray();
+$templateArray['properties'] = $data;
+
 /* check unlock default element properties permission */
 $unlock_element_properties = $modx->hasPermission('unlock_element_properties') ? 1 : 0;
 
@@ -46,7 +66,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-template-update"
         ,id: "'.$template->get('id').'"
-        ,category: "'.$template->get('category'). '"
+        ,record: '.$modx->toJSON($templateArray).'
     });
 });
 MODx.onTempFormRender = "'.$onTempFormRender.'";

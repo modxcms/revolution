@@ -135,14 +135,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-resource-update"
         ,resource: "'.$resource->get('id').'"
-        ,template: "'.$resource->get('template').'"
-        ,content_type: "'.$resource->get('content_type').'"
-        ,class_key: "'.$resource->get('class_key').'"
-        ,context_key: "'.$resource->get('context_key').'"
-        ,parent: "'.$resource->get('parent').'"
-        ,deleted: "'.$resource->get('deleted').'"
-        ,published: "'.$resource->get('published').'"
-        ,richtext: "'.$resource->get('richtext').'"
+        ,record: '.$modx->toJSON($resource->toArray()).'
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
         ,preview_url: "'.$url.'"

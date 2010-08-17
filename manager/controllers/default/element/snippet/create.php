@@ -36,7 +36,9 @@ $modx->regClientStartupHTMLBlock('
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-snippet-create"
-        ,category: "'.($category != null ? $category->get('id') : '') .'"
+        ,record: {
+            category: "'.($category != null ? $category->get('id') : '') .'"
+        }
     });
 });
 MODx.onSnipFormRender = "'.$onSnipFormRender.'";

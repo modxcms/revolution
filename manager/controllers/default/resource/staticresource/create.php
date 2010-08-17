@@ -10,7 +10,7 @@ $resource = $modx->newObject('modStaticResource');
 /* invoke OnDocFormPrerender event */
 $onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onDocFormPrerender)) {
     $onDocFormPrerender = implode('',$onDocFormPrerender);
@@ -36,7 +36,7 @@ $modx->smarty->assign('parentname',$parentname);
 /* invoke OnDocFormRender event */
 $onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onDocFormRender)) $onDocFormRender = implode('',$onDocFormRender);
 $onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocFormRender);
@@ -60,7 +60,7 @@ if ($modx->getOption('use_editor') && !empty($rte)) {
         'editor' => $rte,
         'elements' => $replace_richtexteditor,
         'id' => 0,
-        'mode' => 'new',
+        'mode' => modSystemEvent::MODE_NEW,
     ));
     if (is_array($onRichTextEditorInit)) {
         $onRichTextEditorInit = implode('',$onRichTextEditorInit);
@@ -78,7 +78,7 @@ $access_permissions = $modx->hasPermission('access_permissions');
 
 
 /* set default template */
-$default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $modx->getOption('default_template')));
+$default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $modx->getOption('default_template',null,1)));
 $userGroups = $modx->user->getUserGroups();
 $c = $modx->newQuery('modActionDom');
 $c->leftJoin('modAccessActionDom','Access');
@@ -123,11 +123,17 @@ MODx.ctx = "'.$ctx.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-static-create"
-        ,template: "'.$default_template.'"
-        ,content_type: "1"
-        ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modStaticResource').'"
-        ,context_key: "'.$ctx.'"
-        ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
+        ,record: {
+            template: "'.$default_template.'"
+            ,content_type: "1"
+            ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modStaticResource').'"
+            ,context_key: "'.$ctx.'"
+            ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
+            ,richtext: 0
+            ,published: "'.$modx->getOption('publish_default',null,0).'"
+            ,searchable: "'.$modx->getOption('search_default',null,1).'"
+            ,cacheable: "'.$modx->getOption('cache_default',null,1).'"
+        }
         ,which_editor: "'.$which_editor.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"

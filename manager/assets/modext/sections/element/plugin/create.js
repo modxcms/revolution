@@ -34,8 +34,7 @@ MODx.page.CreatePlugin = function(config) {
             xtype: 'modx-panel-plugin'
             ,renderTo: 'modx-panel-plugin-div'
             ,plugin: 0
-            ,category: config.category || 0
-            ,name: ''
+            ,record: config.record || {}
         }]
     });
     MODx.page.CreatePlugin.superclass.constructor.call(this,config);

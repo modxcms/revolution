@@ -34,12 +34,12 @@ MODx.panel.Plugin = function(config) {
                 xtype: 'hidden'
                 ,name: 'id'
                 ,id: 'modx-plugin-id'
-                ,value: config.plugin
+                ,value: config.record.id || 0
             },{
                 xtype: 'hidden'
                 ,name: 'props'
                 ,id: 'modx-plugin-props'
-                ,value: null
+                ,value: config.record.props || null
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('plugin_name')
@@ -49,6 +49,7 @@ MODx.panel.Plugin = function(config) {
                 ,maxLength: 255
                 ,enableKeyEvents: true
                 ,allowBlank: false
+                ,value: config.record.name
                 ,listeners: {
                     'keyup': {scope:this,fn:function(f,e) {
                         Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+f.getValue()+'</h2>');
@@ -61,24 +62,29 @@ MODx.panel.Plugin = function(config) {
                 ,id: 'modx-plugin-description'
                 ,width: 300
                 ,maxLength: 255
+                ,value: config.record.description
             },{
                 xtype: 'modx-combo-category'
                 ,fieldLabel: _('category')
                 ,name: 'category'
                 ,id: 'modx-plugin-category'
                 ,width: 250
-                ,value: config.category || null
+                ,value: config.record.category || 0
             },{
                 xtype: 'checkbox'
                 ,fieldLabel: _('plugin_disabled')
                 ,name: 'disabled'
                 ,id: 'modx-plugin-disabled'
+                ,inputValue: 1
+                ,checked: config.record.disabled || 0
             },{
                 xtype: 'checkbox'
                 ,fieldLabel: _('plugin_lock')
                 ,description: _('plugin_lock_msg')
                 ,name: 'locked'
                 ,id: 'modx-plugin-locked'
+                ,inputValue: 1
+                ,checked: config.record.locked || 0
             },{
                 xtype: 'checkbox'
                 ,fieldLabel: _('clear_cache_on_save')
@@ -86,7 +92,7 @@ MODx.panel.Plugin = function(config) {
                 ,name: 'clearCache'
                 ,id: 'modx-plugin-clear-cache'
                 ,inputValue: 1
-                ,checked: true
+                ,checked: config.record.clearCache || true
             },{
                 html: MODx.onPluginFormRender
                 ,border: false
@@ -99,7 +105,7 @@ MODx.panel.Plugin = function(config) {
                 ,id: 'modx-plugin-plugincode'
                 ,width: '95%'
                 ,height: 400
-                ,value: "<?php\n\n?>"
+                ,value: config.record.plugincode || "<?php\n"
                 
             }]
         },{
@@ -139,36 +145,21 @@ MODx.panel.Plugin = function(config) {
 Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (this.config.plugin === '' || this.config.plugin === 0 || this.initialized) {
-            this.fireEvent('ready');
-            return false;
+        if (!Ext.isEmpty(this.config.record.templatename)) {
+            Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+this.config.record.name+'</h2>');
         }
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'get'
-                ,id: this.config.plugin
+        if (!Ext.isEmpty(this.config.record.properties)) {
+            var d = this.config.record.properties;
+            var g = Ext.getCmp('modx-grid-element-properties');
+            if (g) {
+                g.defaultProperties = d;
+                g.getStore().loadData(d);
             }
-            ,listeners: {
-            	'success': {fn:function(r) {
-                    if (r.object.category == '0') { r.object.category = null; }
-                    r.object.plugincode = "<?php\n"+r.object.plugincode+"\n?>";
-                    this.getForm().setValues(r.object);
-                    Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+r.object.name+'</h2>');
-                    
-                    var d = Ext.decode(r.object.data);
-                    var g = Ext.getCmp('modx-grid-element-properties');
-                    g.defaultProperties = d;
-                    g.getStore().loadData(d);
-
-                    if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
-                    this.fireEvent('ready',r.object);
-                    this.clearDirty();
-                    this.initialized = true;
-            	},scope:this}
-            }
-        });
-        return true;
+        }
+        this.fireEvent('ready',this.config.record);
+        if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
+        this.clearDirty();
+        this.initialized = true;
     }
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-plugin-event');

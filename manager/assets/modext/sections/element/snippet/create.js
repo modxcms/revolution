@@ -7,10 +7,10 @@
  * @xtype modx-page-snippet-create
  */
 MODx.page.CreateSnippet = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		formpanel: 'modx-panel-snippet'
-		,actions: {
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-snippet'
+        ,actions: {
             'new': MODx.action['element/snippet/create']
             ,edit: MODx.action['element/snippet/update']
             ,cancel: MODx.action['welcome']
@@ -34,11 +34,10 @@ MODx.page.CreateSnippet = function(config) {
             xtype: 'modx-panel-snippet'
             ,renderTo: 'modx-panel-snippet-div'
             ,snippet: 0
-            ,category: config.category || 0
-            ,name: ''
+            ,record: config.record || {}
         }]
-	});
-	MODx.page.CreateSnippet.superclass.constructor.call(this,config);
+    });
+    MODx.page.CreateSnippet.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.CreateSnippet,MODx.Component);
 Ext.reg('modx-page-snippet-create',MODx.page.CreateSnippet);

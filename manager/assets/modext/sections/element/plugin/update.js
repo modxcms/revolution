@@ -7,10 +7,10 @@
  * @xtype modx-page-plugin-update
  */
 MODx.page.UpdatePlugin = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		formpanel: 'modx-panel-plugin'
-		,actions: {
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-plugin'
+        ,actions: {
             'new': MODx.action['element/plugin/create']
             ,edit: MODx.action['element/plugin/update']
             ,cancel: MODx.action['welcome']
@@ -33,16 +33,15 @@ MODx.page.UpdatePlugin = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-		,loadStay: true
+        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-plugin'
             ,renderTo: 'modx-panel-plugin-div'
-            ,plugin: config.id
-            ,category: config.category
-            ,name: ''
+            ,plugin: config.record.id || MODx.request.id
+            ,record: config.record || {}
         }]
-	});
-	MODx.page.UpdatePlugin.superclass.constructor.call(this,config);
+    });
+    MODx.page.UpdatePlugin.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.UpdatePlugin,MODx.Component);
 Ext.reg('modx-page-plugin-update',MODx.page.UpdatePlugin);

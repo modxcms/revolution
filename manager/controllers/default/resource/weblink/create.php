@@ -122,11 +122,17 @@ MODx.ctx = "'.$ctx.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-weblink-create"
-        ,template: "'.$default_template.'"
-        ,content_type: "1"
-        ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modWebLink').'"
-        ,context_key: "'.$ctx.'"
-        ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
+        ,record: {
+            template: "'.$default_template.'"
+            ,content_type: "1"
+            ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modWebLink').'"
+            ,context_key: "'.$ctx.'"
+            ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
+            ,richtext: 0
+            ,published: "'.$modx->getOption('publish_default',null,0).'"
+            ,searchable: "'.$modx->getOption('search_default',null,1).'"
+            ,cacheable: "'.$modx->getOption('cache_default',null,1).'"
+        }
         ,which_editor: "'.$which_editor.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
