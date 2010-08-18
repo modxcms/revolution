@@ -163,6 +163,9 @@ $_lang['setting_custom_resource_classes_desc'] = 'A comma-separated list of cust
 $_lang['setting_default_template'] = 'Default Template';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
 
+$_lang['setting_default_per_page'] = 'Default Per Page';
+$_lang['setting_default_per_page_desc'] = 'The default number of results to show in grids throughout the manager.';
+
 $_lang['setting_editor_css_path'] = 'Path to CSS file';
 $_lang['setting_editor_css_path_desc'] = 'Enter the path to your CSS file that you wish to use within a richtext editor. The best way to enter the path is to enter the path from the root of your server, for example: /assets/site/style.css. If you do not wish to load a style sheet into a richtext editor, leave this field blank.';
 

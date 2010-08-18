@@ -276,6 +276,15 @@ $settings['custom_resource_classes']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['default_per_page']= $xpdo->newObject('modSystemSetting');
+$settings['default_per_page']->fromArray(array (
+  'key' => 'default_per_page',
+  'value' => '20',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['default_template']= $xpdo->newObject('modSystemSetting');
 $settings['default_template']->fromArray(array (
   'key' => 'default_template',

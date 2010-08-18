@@ -130,7 +130,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,plugins: this.exp
         ,primaryKey: 'key'
         ,autosave: true
-        ,pageSize: 30
+        ,pageSize: MODx.config.default_per_page > 30 ? MODx.config.default_per_page : 30
         ,paging: true
         ,collapseFirst: false
         ,tools: [{

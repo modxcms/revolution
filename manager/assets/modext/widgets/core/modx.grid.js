@@ -33,10 +33,23 @@ MODx.grid.Grid = function(config) {
     if (config.paging) {
         Ext.applyIf(config,{
             bbar: new Ext.PagingToolbar({
-                pageSize: config.pageSize || 20
+                pageSize: config.pageSize || (MODx.config.default_per_page || 20)
                 ,store: this.getStore()
                 ,displayInfo: true
-                ,items: config.pagingItems || []
+                ,items: config.pagingItems || ['-',_('per_page')+':',{
+                    xtype: 'textfield'
+                    ,value: config.pageSize || (MODx.config.default_per_page || 20)
+                    ,width: 40
+                    ,listeners: {
+                        'change': {fn:function(tf,nv,ov) {
+                            this.getBottomToolbar().pageSize = nv;
+                            this.store.load({params:{
+                                start:0
+                                ,limit: nv
+                            }});
+                        },scope:this}
+                    }
+                }]
             })
         });
     }

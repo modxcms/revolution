@@ -279,6 +279,7 @@ $_lang['parameter'] = 'Parameter';
 $_lang['parameters'] = 'Parameters';
 $_lang['password'] = 'Password';
 $_lang['path'] = 'Path';
+$_lang['per_page'] = 'Per Page';
 $_lang['permissions'] = 'Permissions';
 $_lang['permission_denied'] = 'Permission denied!';
 $_lang['permission_denied_msg'] = 'You do not have the proper access policy permissions to view this page. If you feel this is in error, please contact your systems administrator.';
