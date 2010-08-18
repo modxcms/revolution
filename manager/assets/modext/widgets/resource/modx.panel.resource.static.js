@@ -59,7 +59,7 @@ MODx.panel.Static = function(config) {
                     ,name: 'published'
                     ,id: 'modx-resource-published'
                     ,inputValue: 1
-                    ,checked: config.record.published || MODx.config.publish_default
+                    ,checked: config.record.published
                     
                 }]
             }]
@@ -251,7 +251,7 @@ MODx.panel.Static = function(config) {
         ,name: 'searchable'
         ,id: 'modx-resource-searchable'
         ,inputValue: 1
-        ,checked: config.record.searchable || MODx.config.search_default
+        ,checked: config.record.searchable
     });
     va.push({
         xtype: 'checkbox'
@@ -260,7 +260,7 @@ MODx.panel.Static = function(config) {
         ,name: 'cacheable'
         ,id: 'modx-resource-cacheable'
         ,inputValue: 1
-        ,checked: config.record.cacheable || MODx.config.cache_default
+        ,checked: config.record.cacheable
     });
     va.push({
         xtype: 'checkbox'
