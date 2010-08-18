@@ -16,12 +16,12 @@ $items = array();
 $items[] = array(
     'icon' => $p.'arrow_down.png',
     'tooltip' => $modx->lexicon('expand_tree'),
-    'handler' => 'new Function("this.getRootNode().expandChildNodes();");',
+    'handler' => 'this.expandAll',
 );
 $items[] = array(
     'icon' => $p.'arrow_up.png',
     'tooltip' => $modx->lexicon('collapse_tree'),
-    'handler' => 'new Function("this.getRootNode().collapseChildNodes();");',
+    'handler' => 'this.collapseAll',
 );
 $items[] = '-';
 if ($modx->hasPermission('new_document')) {
