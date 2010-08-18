@@ -95,13 +95,14 @@ foreach (new DirectoryIterator($fullpath) as $file) {
         if ($canRemoveFile) $cls .= ' premove';
         if ($canUpdateFile) $cls .= ' pupdate';
         $encFile = rawurlencode($filePathName);
+        $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile : null;
         $files[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
             'cls' => $cls,
             'type' => 'file',
             'leaf' => true,
-            'page' => !empty($editAction) ? '?a='.$editAction.'&file='.$encFile : null,
+            'page' => $modx->fileHandler->isBinary($filePathName) ? $page : null,
             'perms' => $octalPerms,
             'path' => $relativeRootPath.$fileName,
             'url' => trim(str_replace('//','/',$fileManagerUrl.$dir.$fileName),'/'),

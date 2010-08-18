@@ -98,13 +98,15 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var m = [];
 
         if (ui.hasClass('pupdate')) {
-            m.push({
-                text: _('file_edit')
-                ,file: a.file
-                ,handler: function(itm,e) {
-                    this.loadAction('a='+MODx.action['system/file/edit']+'&file='+itm.file);
-                }
-            });
+            if (a.page) {
+                m.push({
+                    text: _('file_edit')
+                    ,file: a.file
+                    ,handler: function(itm,e) {
+                        this.loadAction('a='+MODx.action['system/file/edit']+'&file='+itm.file);
+                    }
+                });
+            }
             m.push({
                 text: _('rename')
                 ,handler: this.renameFile

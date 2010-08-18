@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- [#MODX-2291] Prevent editing of binary files to prevent zeroing out of file when saving
 - [#MODX-2185] Resource tree expand all toolbar button now expands all levels deep
 - [#MODX-2260] Added ability to rename ORM container nodes on extended fields
 - [#MODX-2285] Added ability to dynamically set number of results for any grid in manager, as well as a default number via default_per_page system setting
