@@ -271,6 +271,7 @@ $_lang['orm_attribute_remove'] = 'Remove Attribute';
 $_lang['orm_attribute_remove_confirm'] = 'Are you sure you want to remove this attribute? This is irreversible.';
 $_lang['orm_container_add'] = 'Add Container';
 $_lang['orm_container_add_below'] = 'Add Container Below Here';
+$_lang['orm_container_rename'] = 'Rename Container';
 $_lang['orm_container_remove'] = 'Remove Container';
 $_lang['orm_container_remove_confirm'] = 'Are you sure you want to remove this container, and all attributes below it? This is irreversible.';
 $_lang['pagetitle'] = 'Resource\'s title';
