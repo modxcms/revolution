@@ -239,7 +239,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,refresh: function(func,scope,args) {
         var treeState = Ext.state.Manager.get(this.treestate_id);
         this.root.reload();
-        if (treeState === undefined) {this.root.expand(null,null);} else {this.expandPath(treeState,null);}
+        if (treeState === undefined) {this.root.expand(null,null);} else {
+            for (var i=0;i<treeState.length;i++) {
+                this.expandPath(treeState[i]);
+            }
+        }
         if (func) {
             scope = scope || this;
             args = args || [];
