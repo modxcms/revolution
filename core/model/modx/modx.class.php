@@ -510,7 +510,7 @@ class modX extends xPDO {
     public function getChildIds($id= null, $depth= 10) {
         $children= array ();
         if ($id !== null && intval($depth) >= 1) {
-            $id= intval($id);
+            $id= is_int($id) ? $id : intval($id);
             if (isset ($this->resourceMap["{$id}"])) {
                 if ($children= $this->resourceMap["{$id}"]) {
                     foreach ($children as $child) {
