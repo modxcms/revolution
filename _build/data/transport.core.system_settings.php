@@ -1250,3 +1250,12 @@ $settings['which_element_editor']->fromArray(array (
   'editedon' => null,
 ), '', true, true);
 return $settings;
+$settings['xhtml_urls']= $xpdo->newObject('modSystemSetting');
+$settings['xhtml_urls']->fromArray(array (
+  'key' => 'xhtml_urls',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);
