@@ -846,6 +846,15 @@ $settings['phpthumb_far']->fromArray(array (
   'area' => 'phpthumb',
   'editedon' => null,
 ), '', true, true);
+$settings['phpthumb_imagemagick_path']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_imagemagick_path']->fromArray(array (
+  'key' => 'phpthumb_imagemagick_path',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
 
 $settings['publish_default']= $xpdo->newObject('modSystemSetting');
 $settings['publish_default']->fromArray(array (

@@ -42,6 +42,10 @@ $phpThumb->setParameter('cache_source_directory',$cachePath.'source/');
 $phpThumb->setParameter('allow_local_http_src',true);
 $phpThumb->setParameter('zc',$modx->getOption('zc',$_REQUEST,$modx->getOption('phpthumb_zoomcrop',$scriptProperties,0)));
 $phpThumb->setParameter('far',$modx->getOption('far',$_REQUEST,$modx->getOption('phpthumb_far',$scriptProperties,'C')));
+$imp = $modx->getOption('phpthumb_imagemagick_path',$scriptProperties,'');
+if (!empty($imp)) {
+    $phpThumb->setParameter('config_imagemagick_path',$imp);
+}
 
 /* iterate through properties */
 foreach ($scriptProperties as $property => $value) {
