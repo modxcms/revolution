@@ -89,7 +89,7 @@ class modFileHandler {
             $basePath = $this->modx->getOption('base_path',null,MODX_BASE_PATH);
             if ($basePath != '/') $fileManagerUrl = str_replace($basePath,'',$path);
         }
-        return $fileManagerUrl;
+        return $this->postfixSlash($fileManagerUrl);
     }
 
     /**
@@ -132,7 +132,7 @@ class modFileHandler {
             $blk = @fread($fh,512);
             @fclose($fh);
             @clearstatcache();
-            return (substr_count($blk, "^ -~", "^\r\n")/512 > 0.3) || (substr_count($blk, "\x00") > 0) ? false : true;
+            return (substr_count($blk, "^ -~"/*. "^\r\n"*/)/512 > 0.3) || (substr_count($blk, "\x00") > 0) ? false : true;
         }
         return false;
     }

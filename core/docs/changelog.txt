@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- Lots of improvements to handling and caching of thumbnails in manager
 - Fixed bug where reset filter on settings grid was not resetting to core namespace
 - [#MODX-2178] Added missing settings and lexicon values for those settings to build/lexicons
 - [#MODX-2179] Lexicons in Setup now use placeholders rather than sprintf for better i18n support

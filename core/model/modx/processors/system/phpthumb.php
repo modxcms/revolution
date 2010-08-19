@@ -5,80 +5,62 @@
  * @package modx
  * @subpackage processors.system
  */
+$ctx = !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
+$context = $modx->getObject('modContext',$ctx);
+$context->prepare();
 
 /* filter path */
 $src = $modx->getOption('src',$scriptProperties,'');
 if (empty($src)) return '';
 
-$site_url = $modx->getOption('site_url',null,MODX_SITE_URL);
-$base_url = $modx->getOption('base_url',null,MODX_BASE_URL);
+$site_url = $context->getOption('site_url',null,MODX_SITE_URL);
+$base_url = $context->getOption('base_url',null,MODX_BASE_URL);
+$base_path = $context->getOption('base_path',null,MODX_BASE_PATH);
 $reps = array();
+
 if ($base_url != '/') $reps[] = $base_url;
 if ($site_url != '/') $reps[] = $site_url;
 $src = str_replace($reps,'',$src);
-$fileManagerPath = $modx->getOption('filemanager_path',null,'');
-if (empty($fileManagerPath) && strpos($src,'/') !== 0) {
-    $src = $modx->getOption('base_path',null,MODX_BASE_PATH).$src;
+$fileManagerPath = $context->getOption('filemanager_path',null,'');
+if (empty($fileManagerPath)) {
+    $src = $base_path.$src;
 } else if (!empty($fileManagerPath)) {
-    $src = $fileManagerPath.$src;
+    if (strpos($src,$fileManagerPath) != 0) {
+        $src = $fileManagerPath.$src;
+    }
 }
-if (empty($src) || !file_exists($src)) return '';
+if (empty($src) || !file_exists($src)) {
+    if (file_exists('/'.$src)) {
+        $src = '/'.$src;
+    } elseif (file_exists($base_path.$src)) {
+        $src = $base_path.$src;
+    } else {
+        return '';
+    }
+}
 
 /* load phpThumb */
-require_once MODX_CORE_PATH.'model/phpthumb/phpthumb.class.php';
-$phpThumb = new phpThumb();
-
-/* set cache dir */
-$cachePath = $modx->getOption('core_path',null,MODX_CORE_PATH).'cache/phpthumb/';
-if (!is_dir($cachePath)) $modx->cacheManager->writeTree($cachePath);
-$phpThumb->config_cache_directory = $cachePath;
-$phpThumb->setCacheDirectory();
-
-$phpThumb->setParameter('config_cache_maxage',(float)$modx->getOption('phpthumb_cache_maxage',$scriptProperties,30) * 86400);
-$phpThumb->setParameter('config_cache_maxsize',(float)$modx->getOption('phpthumb_cache_maxsize',$scriptProperties,100) * 1024 * 1024);
-$phpThumb->setParameter('config_cache_maxfiles',(int)$modx->getOption('phpthumb_cache_maxfiles',$scriptProperties,10000));
-$phpThumb->setParameter('cache_source_enabled',(boolean)$modx->getOption('phpthumb_cache_source_enabled',$scriptProperties,false));
-$phpThumb->setParameter('cache_source_directory',$cachePath.'source/');
-$phpThumb->setParameter('allow_local_http_src',true);
-$phpThumb->setParameter('zc',$modx->getOption('zc',$_REQUEST,$modx->getOption('phpthumb_zoomcrop',$scriptProperties,0)));
-$phpThumb->setParameter('far',$modx->getOption('far',$_REQUEST,$modx->getOption('phpthumb_far',$scriptProperties,'C')));
-$imp = $modx->getOption('phpthumb_imagemagick_path',$scriptProperties,'');
-if (!empty($imp)) {
-    $phpThumb->setParameter('config_imagemagick_path',$imp);
+if (!$modx->loadClass('modPhpThumb',$modx->getOption('core_path').'model/phpthumb/',true,true)) {
+    $modx->log(modX::LOG_LEVEL_ERROR,'Could not load modPhpThumb class.');
+    return '';
 }
-
-/* iterate through properties */
-foreach ($scriptProperties as $property => $value) {
-    $phpThumb->setParameter($property,$value);
-}
+$phpThumb = new modPhpThumb($modx,$scriptProperties);
+/* do initial setup */
+$phpThumb->initialize();
 
 /* set source and generate thumbnail */
-$phpThumb->setSourceFilename($src);
-if (!$phpThumb->GenerateThumbnail()) return '';
+$phpThumb->set($src);
 
-$outputFilename = $modx->getOption('output_filename',$scriptProperties,false);
-$captureRawData = $modx->getOption('capture_raw_data',$scriptProperties,false);
-if ($outputFilename) {
-    $outputFilename = ltrim($outputFilename,'/');
-    $outputFilename = ltrim($outputFilename,'\\');
-    if (empty($outputFilename)) return '';
-    
-    $outputFilename = str_replace(array(
-        '{base_path}',
-        '{assets_path}',
-        '{core_path}',
-    ),array(
-        $modx->getOption('base_path',null,MODX_BASE_PATH),
-        $modx->getOption('assets_path',null,MODX_ASSETS_PATH),
-        $modx->getOption('core_path',null,MODX_CORE_PATH),
-    ),$outputFilename);
-
-    if ($phpThumb->RenderToFile($outputFilename)) {
-        return $modx->error->success('',array('filename' => $outputFilename));
-    }
+/* check to see if there's a cached file of this already */
+if ($phpThumb->checkForCachedFile()) {
+    $phpThumb->loadCache();
     return '';
-} else {
-    $phpThumb->OutputThumbnail();
 }
 
+/* generate thumbnail */
+$phpThumb->generate();
+
+/* cache the thumbnail and output */
+$phpThumb->cache();
+$phpThumb->output();
 return '';
