@@ -192,13 +192,15 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
     
     ,clearFilter: function() {
+        var ns = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
     	this.getStore().baseParams = {
             action: 'getList'
+            ,'namespace': ns
     	};
         Ext.getCmp('modx-filter-namespace').reset();
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
-            acb.store.baseParams['namespace'] = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
+            acb.store.baseParams['namespace'] = ns;
             acb.store.load();
             acb.reset();
         }
