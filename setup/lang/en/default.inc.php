@@ -169,6 +169,7 @@ $_lang['options_upgrade_advanced'] = 'Advanced Upgrade Install<br /><small>(edit
 $_lang['options_upgrade_advanced_note'] = 'For advanced database admins or moving to servers with a different database connection character set. <strong>You will need to know your full database name, user, password and connection/collation details.</strong>';
 $_lang['options_upgrade_existing'] = 'Upgrade Existing Install';
 $_lang['options_upgrade_existing_note'] = 'Upgrade your current files and database.';
+$_lang['package_execute_err_retrieve'] = 'The install failed because MODx could not unpack the %1$spackages/core.transport.zip package. Make sure that the %1$spackages/core.transport.zip file exists and is writable, and that you have made the %1$spackages/ directory writable.';
 $_lang['package_err_install'] = 'Could not install package %s.';
 $_lang['package_err_nf'] = 'Could not retrieve package %s installation.';
 $_lang['package_installed'] = 'Successfully installed package %s.';

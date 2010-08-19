@@ -345,6 +345,13 @@ class modInstall {
             $packageDirectory = MODX_CORE_PATH . 'packages/';
             $packageState = $this->settings->get('unpacked') == 1 ? xPDOTransport::STATE_UNPACKED : xPDOTransport::STATE_PACKED;
             $package = xPDOTransport :: retrieve($this->xpdo, $packageDirectory . 'core.transport.zip', $packageDirectory, $packageState);
+            if (!is_object($package) || !($package instanceof xPDOTransport)) {
+                $results[] = array (
+                    'class' => 'failed',
+                    'msg' => '<p class="notok">'.sprintf($this->lexicon['package_execute_err_retrieve'],$this->settings->get('core_path')).'</p>'
+                );
+                return $results;
+            }
 
             if (!defined('MODX_BASE_PATH'))
                 define('MODX_BASE_PATH', $this->settings->get('context_web_path'));

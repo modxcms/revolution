@@ -15,7 +15,7 @@
 {/if}
 <ul class="checklist">
 {foreach from=$results item=result}
-<li class="{$result.class} finalsuccess" style="display: none;">{$result.msg}</li>
+<li class="{$result.class} finalsuccess" {if NOT $failed}style="display: none;"{/if}>{$result.msg}</li>
 {/foreach}
 </ul>
 
