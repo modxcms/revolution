@@ -112,35 +112,6 @@ class modInstall {
     }
 
     /**
-     * Load the language strings.
-     *
-     * @access public
-     * @param string $topic The topic to load.
-     * @return array The loaded lexicon.
-     */
-    /*
-    public function loadLang($topic = 'default') {
-        $_lang= array ();
-        if (!include (MODX_SETUP_PATH . 'lang/en/'.$topic.'.inc.php')) {
-            die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Could not load the default language directory. Make sure you have uploaded all the necessary files.</p></body></html>');
-        }
-
-        $language= 'en';
-        if (isset ($_COOKIE['modx_setup_language'])) {
-            $language= $_COOKIE['modx_setup_language'];
-        }
-        $language= isset ($_REQUEST['language']) ? $_REQUEST['language'] : $language;
-        if ($language && $language != 'en') {
-            include MODX_SETUP_PATH . 'lang/'.$language.'/'.$topic.'.inc.php';
-        }
-        if (!is_array($this->lexicon)) $this->lexicon = array();
-
-        $this->lexicon = array_merge($this->lexicon,$_lang);
-
-        return $this->lexicon;
-    }*/
-
-    /**
      * Get the existing or create a new configuration.
      *
      * @param integer $mode The install mode.
