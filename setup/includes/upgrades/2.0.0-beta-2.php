@@ -19,18 +19,18 @@ $class = 'modLexiconEntry';
 $table = $this->install->xpdo->getTableName($class);
 
 $sql = "ALTER TABLE {$table} ADD INDEX `name` ( `name` )";
-$description = sprintf($this->install->lexicon['add_index'],'name',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'name','table' => $table));
 $this->processResults($class, $description, $sql);
 
 $sql = "ALTER TABLE {$table} ADD INDEX `namespace` ( `namespace` )";
-$description = sprintf($this->install->lexicon['add_index'],'namespace',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'namespace','table' => $table));
 $this->processResults($class, $description, $sql);
 
 $sql = "ALTER TABLE {$table} ADD INDEX `topic` ( `topic` )";
-$description = sprintf($this->install->lexicon['add_index'],'topic',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'topic','table' => $table));
 $this->processResults($class, $description, $sql);
 
 $sql = "ALTER TABLE {$table} ADD INDEX `language` ( `language` )";
-$description = sprintf($this->install->lexicon['add_index'],'language',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'language','table' => $table));
 $this->processResults($class, $description, $sql);
 unset($class,$description,$sql,$table);

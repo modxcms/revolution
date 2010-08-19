@@ -44,12 +44,12 @@ unset($roletopic);
 $class = 'modPropertySet';
 $table = $this->install->xpdo->getTableName($class);
 $sql = "ALTER TABLE {$table} ADD `category` INT( 10 ) UNSIGNED NOT NULL AFTER `name`;";
-$description = sprintf($this->install->lexicon['add_column'],'category',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'category','table' => $table));
 $this->processResults($class, $description, $sql);
 
 /* add index to category field for property sets */
 $sql = "ALTER TABLE {$table} ADD INDEX `category` ( `category` )";
-$description = sprintf($this->install->lexicon['add_index'],'category',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'category','table' => $table));
 $this->processResults($class, $description, $sql);
 unset($class,$description,$sql,$table);
 
@@ -58,7 +58,7 @@ unset($class,$description,$sql,$table);
 $class = 'modMenu';
 $table = $this->install->xpdo->getTableName($class);
 $sql = "ALTER TABLE {$table} ADD COLUMN `description` VARCHAR(255) NOT NULL AFTER `text`";
-$description = sprintf($this->install->lexicon['add_column'],'description',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'description','table' => $table));
 $this->processResults($class, $description, $sql);
 unset($class,$description,$sql,$table);
 
@@ -66,7 +66,7 @@ unset($class,$description,$sql,$table);
 $class = 'modAction';
 $table = $this->install->xpdo->getTableName($class);
 $sql = "ALTER TABLE {$table} CHANGE `context_key` `namespace` VARCHAR( 100 ) NOT NULL DEFAULT 'core'";
-$description = sprintf($this->install->lexicon['change_column'],'context_key','namespace',$table);
+$description = $this->install->lexicon('change_column',array('old' => 'context_key','new' => 'namespace','table' => $table));
 $this->processResults($class,$description,$sql);
 unset($class,$description,$sql,$table);
 
@@ -83,7 +83,7 @@ $elements = array (
 foreach ($elements as $class) {
     $table = $this->install->xpdo->getTableName($class);
     $sql = "ALTER TABLE {$table} CHANGE `properties` `properties` TEXT NULL";
-    $description = sprintf($this->install->lexicon['allow_null_properties'],$class);
+    $description = $this->install->lexicon('allow_null_properties',array('class' => $class));
     $this->processResults($class, $description, $sql);
 }
 unset($elements,$class,$description,$sql,$table);
@@ -93,12 +93,12 @@ if ($connectorContext = $this->install->xpdo->getObject('modContext', 'connector
     if ($connectorContext->remove()) {
         $this->results[] = array(
             'class' => 'success',
-            'msg' => '<p class="ok">'.sprintf($this->install->lexicon['data_remove_success'],'modContext').'<br /><small>'.$this->install->lexicon['connector_ctx_removed'].'</small></p>',
+            'msg' => '<p class="ok">'.$this->install->lexicon('data_remove_success',array('class' => 'modContext')).'<br /><small>'.$this->install->lexicon('connector_ctx_removed').'</small></p>',
         );
     } else {
         $this->results[] = array(
             'class' => 'warning',
-            'msg' => '<p class="notok">'.sprintf($this->install->lexicon['data_remove_error'],'modContext').'<br /><small>'.$this->install->lexicon['connector_ctx_not_removed'].'</small></p>',
+            'msg' => '<p class="notok">'.$this->install->lexicon('data_remove_error',array('class' => 'modContext')).'<br /><small>'.$this->install->lexicon('connector_ctx_not_removed').'</small></p>',
         );
     }
 }
@@ -110,12 +110,12 @@ if ($connectorContextACLs = $this->install->xpdo->getCollection('modAccessContex
         if ($acl->remove()) {
             $this->results[] = array(
                 'class' => 'success',
-                'msg' => '<p class="ok">'.sprintf($this->install->lexicon['data_remove_success'],'modAccessContext').'<br /><small>'.$this->install->lexicon['connector_acls_removed'].'</small></p>'
+                'msg' => '<p class="ok">'.$this->install->lexicon('data_remove_success',array('class' => 'modAccessContext')).'<br /><small>'.$this->install->lexicon('connector_acls_removed').'</small></p>'
             );
         } else {
             $this->results[] = array(
                 'class' => 'warning',
-                'msg' => '<p class="notok">'.sprintf($this->install->lexicon['data_remove_error'],'modAccessContext').'<br /><small>'.$this->install->lexicon['connector_acls_not_removed'].'</small></p>'
+                'msg' => '<p class="notok">'.$this->install->lexicon('data_remove_error',array('class' => 'modAccessContext')).'<br /><small>'.$this->install->lexicon('connector_acls_not_removed').'</small></p>'
             );
         }
     }
@@ -128,12 +128,12 @@ if ($connectorContextACLs = $this->install->xpdo->getCollection('modAccessResour
         if ($acl->remove()) {
             $this->results[] = array(
                 'class' => 'success',
-                'msg' => '<p class="ok">'.sprintf($this->install->lexicon['data_remove_success'],'modAccessResourceGroup').'<br /><small>'.$this->install->lexicon['connector_acls_removed'].'</small></p>'
+                'msg' => '<p class="ok">'.$this->install->lexicon('data_remove_success',array('class' => 'modAccessResourceGroup')).'<br /><small>'.$this->install->lexicon('connector_acls_removed').'</small></p>'
             );
         } else {
             $this->results[] = array(
                 'class' => 'warning',
-                'msg' => '<p class="notok">'.sprintf($this->install->lexicon['data_remove_error'],'modAccessResourceGroup').'<br /><small>'.$this->install->lexicon['connector_acls_not_removed'].'</small></p>'
+                'msg' => '<p class="notok">'.$this->install->lexicon('data_remove_error',array('class' => 'modAccessResourceGroup')).'<br /><small>'.$this->install->lexicon('connector_acls_not_removed').'</small></p>'
             );
         }
     }
@@ -153,7 +153,7 @@ foreach ($cbtypes as $xt) {
 }
 $this->results[] = array(
     'class' => 'success',
-    'msg' => '<p class="ok">'.$this->install->lexicon['systemsetting_xtype_fix'].'</small></p>'
+    'msg' => '<p class="ok">'.$this->install->lexicon('systemsetting_xtype_fix').'</small></p>'
 );
 unset($cbtypes,$xt,$cbs,$cb);
 
@@ -161,19 +161,19 @@ unset($cbtypes,$xt,$cbs,$cb);
 $class = 'modPluginEvent';
 $table = $this->install->xpdo->getTableName($class);
 $sql = "ALTER TABLE {$table} ADD `propertyset` INT( 10 ) UNSIGNED NOT NULL DEFAULT '0' AFTER `priority`;";
-$description = sprintf($this->install->lexicon['add_column'],'propertyset',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'propertyset','table' => $table));
 $this->processResults($class, $description, $sql);
 
 /* modify modTransportPackage.manifest from mediumtext to text */
 $class = 'transport.modTransportPackage';
 $table = $this->install->xpdo->getTableName($class);
 $sql = "ALTER TABLE {$table} CHANGE `manifest` TEXT NULL;";
-$description = sprintf($this->install->lexicon['transportpackage_manifest_text'],$table);
+$description = $this->install->lexicon('transportpackage_manifest_text',array('class' => $table));
 $this->processResults($class, $description, $sql);
 
 /* add parent key to modCategory table */
 $class = 'modCategory';
 $table = $this->install->xpdo->getTableName($class);
 $sql = "ALTER TABLE {$table} ADD `parent` INT( 10 ) UNSIGNED NOT NULL DEFAULT '0' AFTER `id`;";
-$description = sprintf($this->install->lexicon['add_column'],'parent',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'parent','table' => $table));
 $this->processResults($class, $description, $sql);

@@ -40,7 +40,7 @@ class modInstall {
     public $options = array ();
     public $config = array ();
     public $action = '';
-    public $lexicon = array ();
+    public $lexicon = null;
     public $finished = false;
 
     /**
@@ -68,7 +68,7 @@ class modInstall {
         if ($included) {
             $this->request = new $class($this);
         } else {
-            $this->_fatalError(sprintf($this->lexicon['request_handler_err_nf'],$path));
+            $this->_fatalError($this->lexicon('request_handler_err_nf',array('path' => $path)));
         }
         return $included;
     }
@@ -86,9 +86,29 @@ class modInstall {
         if ($included) {
             $this->settings = new $class($this);
         } else {
-            $this->_fatalError(sprintf($this->lexicon['settings_handler_err_nf'],$path));
+            $this->_fatalError($this->lexicon('settings_handler_err_nf',array('path' => $path)));
         }
         return $included;
+    }
+
+    /**
+     * Loads the lexicon class for the install process.
+     *
+     * @param string $class The class name of the lexicon class to use.
+     * @return boolean True if successful.
+     */
+    public function loadLexicon($class = 'modInstallLexicon') {
+        $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
+        $included = @include $path;
+        $this->lexicon = new modInstallLexicon($this);
+        return $included;
+    }
+
+    /**
+     * Shortcut method for modInstallLexicon::get. {@see modInstallLexicon::get}
+     */
+    public function lexicon($key,array $placeholders = array()) {
+        return $this->lexicon->get($key,$placeholders);
     }
 
     /**
@@ -98,6 +118,7 @@ class modInstall {
      * @param string $topic The topic to load.
      * @return array The loaded lexicon.
      */
+    /*
     public function loadLang($topic = 'default') {
         $_lang= array ();
         if (!include (MODX_SETUP_PATH . 'lang/en/'.$topic.'.inc.php')) {
@@ -117,7 +138,7 @@ class modInstall {
         $this->lexicon = array_merge($this->lexicon,$_lang);
 
         return $this->lexicon;
-    }
+    }*/
 
     /**
      * Get the existing or create a new configuration.
@@ -254,18 +275,18 @@ class modInstall {
         $path = dirname(__FILE__).'/'.strtolower($class).'.class.php';
         $included = @include $path;
         if ($included) {
-            $this->loadLang('test');
+            $this->lexicon->load('test');
 
             $class = $class.ucfirst(str_replace('@','',MODX_SETUP_KEY));
             $versionPath = dirname(__FILE__).'/checks/'.strtolower($class).'.class.php';
             $included = @include $versionPath;
             if (!$included) {
-                $this->_fatalError(sprintf($this->lexicon['test_version_class_nf'],$versionPath));
+                $this->_fatalError($this->lexicon('test_version_class_nf',array('path' => $versionPath)));
             }
             $this->test = new $class($this);
             return $this->test;
         } else {
-            $this->_fatalError(sprintf($this->lexicon['test_class_nf'],$path));
+            $this->_fatalError($this->lexicon('test_class_nf',array('path' => $path)));
         }
     }
 
@@ -295,7 +316,7 @@ class modInstall {
             $this->versioner = new $class($this);
             return $this->versioner;
         } else {
-            $this->_fatalError(sprintf($this->lexicon['versioner_err_nf'],$path));
+            $this->_fatalError($this->lexicon('versioner_err_nf',array('path' => $path)));
         }
     }
 
@@ -348,7 +369,7 @@ class modInstall {
             if (!is_object($package) || !($package instanceof xPDOTransport)) {
                 $results[] = array (
                     'class' => 'failed',
-                    'msg' => '<p class="notok">'.sprintf($this->lexicon['package_execute_err_retrieve'],$this->settings->get('core_path')).'</p>'
+                    'msg' => '<p class="notok">'.$this->lexicon('package_execute_err_retrieve',array('path' => $this->settings->get('core_path'))).'</p>'
                 );
                 return $results;
             }
@@ -382,19 +403,19 @@ class modInstall {
                     if (!$workspace->save()) {
                         $results[] = array (
                             'class' => 'error',
-                            'msg' => '<p class="notok">'.$this->lexicon['workspace_err_path'].'</p>'
+                            'msg' => '<p class="notok">'.$this->lexicon('workspace_err_path').'</p>'
                         );
                     } else {
                         $results[] = array (
                             'class' => 'success',
-                            'msg' => '<p class="ok">'.$this->lexicon['workspace_path_updated'].'</p>'
+                            'msg' => '<p class="ok">'.$this->lexicon('workspace_path_updated').'</p>'
                         );
                     }
                 }
             } else {
                 $results[] = array (
                     'class' => 'error',
-                    'msg' => '<p class="notok">'.$this->lexicon['workspace_err_nf'].'</p>'
+                    'msg' => '<p class="notok">'.$this->lexicon('workspace_err_nf').'</p>'
                 );
             }
             unset($workspace);
@@ -461,7 +482,7 @@ class modInstall {
         $errors = array();
         $modx = $this->_modx($errors);
         if (empty($modx) || !($modx instanceof modX)) {
-            $errors['modx_class'] = $this->lexicon['modx_err_instantiate'];
+            $errors['modx_class'] = $this->lexicon('modx_err_instantiate');
             return $errors;
         }
 
@@ -477,7 +498,7 @@ class modInstall {
             $cacheManager->writeTree($assetsPath,$directoryOptions);
         }
         if (!is_dir($assetsPath) || !$this->is_writable2($assetsPath)) {
-            $errors['assets_not_created'] = str_replace('[[+path]]',$assetsPath,$this->lexicon['setup_err_assets']);
+            $errors['assets_not_created'] = str_replace('[[+path]]',$assetsPath,$this->lexicon('setup_err_assets'));
         }
         unset($assetsPath);
 
@@ -487,7 +508,7 @@ class modInstall {
             $cacheManager->writeTree($assetsCompPath,$directoryOptions);
         }
         if (!is_dir($assetsCompPath) || !$this->is_writable2($assetsCompPath)) {
-            $errors['assets_comp_not_created'] = str_replace('[[+path]]',$assetsCompPath,$this->lexicon['setup_err_assets_comp']);
+            $errors['assets_comp_not_created'] = str_replace('[[+path]]',$assetsCompPath,$this->lexicon('setup_err_assets_comp'));
         }
         unset($assetsCompPath);
 
@@ -497,7 +518,7 @@ class modInstall {
             $cacheManager->writeTree($coreCompPath,$directoryOptions);
         }
         if (!is_dir($coreCompPath) || !$this->is_writable2($coreCompPath)) {
-            $errors['core_comp_not_created'] = str_replace('[[+path]]',$coreCompPath,$this->lexicon['setup_err_core_comp']);
+            $errors['core_comp_not_created'] = str_replace('[[+path]]',$coreCompPath,$this->lexicon('setup_err_core_comp'));
         }
         unset($coreCompPath);
 
@@ -518,13 +539,13 @@ class modInstall {
             if ($cacheManager) {
                 $setupPath = $modx->getOption('base_path').'setup/';
                 if (!$cacheManager->deleteTree($setupPath,true,false,false)) {
-                    $modx->log(modX::LOG_LEVEL_ERROR,$this->lexicon['setup_err_remove']);
+                    $modx->log(modX::LOG_LEVEL_ERROR,$this->lexicon('setup_err_remove'));
                 }
             } else {
-                $modx->log(modX::LOG_LEVEL_ERROR,$this->lexicon['cache_manager_err']);
+                $modx->log(modX::LOG_LEVEL_ERROR,$this->lexicon('cache_manager_err'));
             }
         } else {
-            $modx->log(modX::LOG_LEVEL_ERROR,$this->lexicon['modx_object_err']);
+            $modx->log(modX::LOG_LEVEL_ERROR,$this->lexicon('modx_object_err'));
         }
         return $errors;
     }
@@ -569,23 +590,23 @@ class modInstall {
         if ($written) {
             $results[] = array (
                 'class' => 'success',
-                'msg' => '<p class="ok">'.$this->lexicon['config_file_written'].'</p>'
+                'msg' => '<p class="ok">'.$this->lexicon('config_file_written').'</p>'
             );
         } else {
             $results[] = array (
                 'class' => 'failed',
-                'msg' => '<p class="notok">'.$this->lexicon['config_file_err_w'].'</p>'
+                'msg' => '<p class="notok">'.$this->lexicon('config_file_err_w').'</p>'
             );
         }
         if ($chmodSuccess) {
             $results[] = array (
                 'class' => 'success',
-                'msg' => '<p class="ok">'.$this->lexicon['config_file_perms_set'].'</p>'
+                'msg' => '<p class="ok">'.$this->lexicon('config_file_perms_set').'</p>'
             );
         } else {
             $results[] = array (
                 'class' => 'warning',
-                'msg' => '<p>'.$this->lexicon['config_file_perms_notset'].'</p>'
+                'msg' => '<p>'.$this->lexicon('config_file_perms_notset').'</p>'
             );
         }
         return $results;
@@ -605,33 +626,33 @@ class modInstall {
         if (@ require_once (MODX_CORE_PATH . 'model/modx/modx.class.php')) {
             $modx = new modX(MODX_CORE_PATH . 'config/');
             if (!is_object($modx) || !($modx instanceof modX)) {
-                $errors[] = '<p>'.$this->lexicon['modx_err_instantiate'].'</p>';
+                $errors[] = '<p>'.$this->lexicon('modx_err_instantiate').'</p>';
             } else {
                 /* try to initialize the mgr context */
                 $modx->initialize('mgr');
                 if (!$modx->_initialized) {
-                    $errors[] = '<p>'.$this->lexicon['modx_err_instantiate_mgr'].'</p>';
+                    $errors[] = '<p>'.$this->lexicon('modx_err_instantiate_mgr').'</p>';
                 } else {
                     $loaded = $modx->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
                     if (!$loaded)
-                        $errors[] = '<p>'.$this->lexicon['transport_class_err_load'].'</p>';
+                        $errors[] = '<p>'.$this->lexicon('transport_class_err_load').'</p>';
 
                     $packageDirectory = MODX_CORE_PATH . 'packages/';
                     $packageState = (isset ($attributes[xPDOTransport::PACKAGE_STATE]) ? $attributes[xPDOTransport::PACKAGE_STATE] : xPDOTransport::STATE_PACKED);
                     $package = xPDOTransport :: retrieve($modx, $packageDirectory . $pkg . '.transport.zip', $packageDirectory, $packageState);
                     if ($package) {
                         if (!$package->install($attributes)) {
-                            $errors[] = '<p>'.sprintf($this->lexicon['package_err_install'],$pkg).'</p>';
+                            $errors[] = '<p>'.$this->lexicon('package_err_install',array('package' => $pkg)).'</p>';
                         } else {
-                            $modx->log(xPDO::LOG_LEVEL_INFO,sprintf($this->lexicon['package_installed'],$pkg));
+                            $modx->log(xPDO::LOG_LEVEL_INFO,$this->lexicon('package_installed',array('package' => $pkg)));
                         }
                     } else {
-                        $errors[] = '<p>'.sprintf($this->lexicon['package_err_nf'],$pkg).'</p>';
+                        $errors[] = '<p>'.$this->lexicon('package_err_nf',array('package' => $pkg)).'</p>';
                     }
                 }
             }
         } else {
-            $errors[] = '<p>'.$this->lexicon['modx_class_err_nf'].'</p>';
+            $errors[] = '<p>'.$this->lexicon('modx_class_err_nf').'</p>';
         }
 
         return $errors;
@@ -714,7 +735,7 @@ class modInstall {
             $xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
             return $xpdo;
         } else {
-            return sprintf($this->lexicon['xpdo_err_nf'],MODX_CORE_PATH.'xpdo/xpdo.class.php');
+            return $this->lexicon('xpdo_err_nf',array('path' => MODX_CORE_PATH.'xpdo/xpdo.class.php'));
         }
     }
 
@@ -733,7 +754,7 @@ class modInstall {
                 xPDO::OPT_SETUP => true,
             ));
             if (!is_object($modx) || !($modx instanceof modX)) {
-                $errors[] = '<p>'.$this->lexicon['modx_err_instantiate'].'</p>';
+                $errors[] = '<p>'.$this->lexicon('modx_err_instantiate').'</p>';
             } else {
                 $modx->setLogTarget(array(
                     'target' => 'FILE',
@@ -745,11 +766,11 @@ class modInstall {
                 /* try to initialize the mgr context */
                 $modx->initialize('mgr');
                 if (!$modx->isInitialized()) {
-                    $errors[] = '<p>'.$this->lexicon['modx_err_instantiate_mgr'].'</p>';
+                    $errors[] = '<p>'.$this->lexicon('modx_err_instantiate_mgr').'</p>';
                 }
             }
         } else {
-            $errors[] = '<p>'.$this->lexicon['modx_class_err_nf'].'</p>';
+            $errors[] = '<p>'.$this->lexicon('modx_class_err_nf').'</p>';
         }
 
         return $modx;
@@ -774,23 +795,23 @@ class modInstall {
      * @access public
      */
     public function doPreloadChecks() {
-        $this->loadLang('preload');
+        $this->lexicon->load('preload');
         $errors= array();
 
         if (!extension_loaded('mysql') && !function_exists('mysql_connect')) {
-            $errors[] = $this->lexicon['preload_err_mysql'];
+            $errors[] = $this->lexicon('preload_err_mysql');
         }
         if (!extension_loaded('pdo')) {
-            $errors[] = $this->lexicon['preload_err_pdo'];
+            $errors[] = $this->lexicon('preload_err_pdo');
         }
         if (!extension_loaded('pdo_mysql')) {
-            $errors[] = $this->lexicon['preload_err_pdo_mysql'];
+            $errors[] = $this->lexicon('preload_err_pdo_mysql');
         }
         if (!file_exists(MODX_CORE_PATH) || !is_dir(MODX_CORE_PATH)) {
-            $errors[] = $this->lexicon['preload_err_core_path'];
+            $errors[] = $this->lexicon('preload_err_core_path');
         }
         if (!file_exists(MODX_CORE_PATH . 'cache/') || !is_dir(MODX_CORE_PATH . 'cache/') || !$this->is_writable2(MODX_CORE_PATH . 'cache/')) {
-            $errors[] = sprintf($this->lexicon['preload_err_cache'],MODX_CORE_PATH);
+            $errors[] = $this->lexicon('preload_err_cache',array('path' => MODX_CORE_PATH));
         }
 
         if (!empty($errors)) {
@@ -805,7 +826,7 @@ class modInstall {
      * @param string/array A string or array of errors
      */
     private function _fatalError($errors) {
-        $output = '<html><head><title></title></head><body><h1>'.$this->lexicon['fatal_error'].'</h1><ul>';
+        $output = '<html><head><title></title></head><body><h1>'.$this->lexicon('fatal_error').'</h1><ul>';
         if (is_array($errors)) {
             foreach ($errors as $error) {
                 $output .= '<li>'.$error.'</li>';

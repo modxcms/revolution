@@ -20,7 +20,7 @@ $pluginEventTbl = $this->install->xpdo->getTableName('modPluginEvent');
 $eventTbl = $this->install->xpdo->getTableName('modEvent');
 
 /* add event field to modPluginEvent */
-$description = sprintf($this->install->lexicon['add_column'],'event',$pluginEventTbl);
+$description = $this->install->lexicon('add_column',array('column' => 'event','table' => $pluginEventTbl));
 $sql = "ALTER TABLE {$pluginEventTbl} ADD `event` VARCHAR(255) NOT NULL DEFAULT '' AFTER `evtid`";
 $this->processResults($class,$description,$sql);
 
@@ -63,7 +63,7 @@ if (!$debug) $this->install->xpdo->exec($sql);
 /* change modResource.context_key to have default of 'web' */
 $class = 'modResource';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['change_column'],'context_key web','context_key web',$table);
+$description = $this->install->lexicon('change_column',array('old' => 'context_key','new' => 'context_key DEFAULT "web"','table' => $table));
 $sql = "ALTER TABLE {$table} CHANGE  `context_key` `context_key` VARCHAR(100) NOT NULL DEFAULT 'web'";
 $this->processResults($class,$description,$sql);
 
@@ -99,14 +99,14 @@ foreach ($deprecatedEvents as $eventName) {
 /* drop modEvent ID field */
 $class = 'modEvent';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['drop_column'],'id',$table);
+$description = $this->install->lexicon('drop_column',array('column' => 'id','table' => $table));
 $sql = "ALTER TABLE {$table} DROP `id`";
 $this->processResults($class,$description,$sql);
 
 /* drop name unique index */
 $class = 'modEvent';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['drop_column'],'name',$table);
+$description = $this->install->lexicon('drop_column',array('column' => 'name','table' => $table));
 $sql = "ALTER TABLE {$table} DROP INDEX `name`";
 $this->processResults($class,$description,$sql);
 
@@ -118,15 +118,15 @@ $this->install->xpdo->exec($sql);
 $class = 'modUser';
 $modUserTbl = $this->install->xpdo->getTableName($class);
 
-$description = sprintf($this->install->lexicon['add_column'],'remote_key',$modUserTbl);
+$description = $this->install->lexicon('add_column',array('column' => 'remote_key','table' => $modUserTbl));
 $sql = "ALTER TABLE {$modUserTbl} ADD `remote_key` VARCHAR(255) NULL DEFAULT NULL AFTER `active`";
 $this->processResults($class,$description,$sql);
 
-$description = sprintf($this->install->lexicon['add_column'],'remote_data',$modUserTbl);
+$description = $this->install->lexicon('add_column',array('column' => 'remote_data','table' => $modUserTbl));
 $sql = "ALTER TABLE {$modUserTbl} ADD `remote_data` TEXT NULL DEFAULT NULL AFTER `remote_key`";
 $this->processResults($class,$description,$sql);
 
-$description = sprintf($this->install->lexicon['add_index'],'remote_key',$modUserTbl);
+$description = $this->install->lexicon('add_index',array('index' => 'remote_key','table' => $modUserTbl));
 $sql = "ALTER TABLE {$modUserTbl} ADD INDEX `remote_key` (`remote_key`)";
 $this->processResults($class,$description,$sql);
 
@@ -134,11 +134,11 @@ $this->processResults($class,$description,$sql);
 $class = 'modUserProfile';
 $table = $this->install->xpdo->getTableName($class);
 
-$description = sprintf($this->install->lexicon['add_column'],'extended',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'extended','table' => $table));
 $sql = "ALTER TABLE {$table} ADD `extended` TEXT NULL DEFAULT NULL AFTER `website`";
 $this->processResults($class,$description,$sql);
 
-$description = sprintf($this->install->lexicon['add_index'],'extended',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'extended','table' => $table));
 $sql = "ALTER TABLE {$table} ADD FULLTEXT INDEX `extended` (`extended`)";
 $this->processResults($class,$description,$sql);
 
@@ -146,7 +146,7 @@ $this->processResults($class,$description,$sql);
 $class = 'modAccessPolicy';
 $table = $this->install->xpdo->getTableName($class);
 
-$description = sprintf($this->install->lexicon['add_column'],'lexicon',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'lexicon','table' => $table));
 $sql = "ALTER TABLE {$table} ADD `lexicon` VARCHAR(255) NOT NULL DEFAULT 'permissions' AFTER `data`";
 $this->processResults($class,$description,$sql);
 
@@ -156,7 +156,7 @@ $manager = $this->install->xpdo->getManager();
 /* adjust entry table */
 $class = 'modLexiconEntry';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['change_column'],'topic topic','topic topic',$table);
+$description = $this->install->lexicon('change_column',array('old' => 'topic VARCHAR(100)','topic VARCHAR(255)','table' => $table));
 $sql = "ALTER TABLE {$table} CHANGE `topic` `topic` VARCHAR(255) NOT NULL DEFAULT 'default'";
 $this->processResults($class,$description,$sql);
 
@@ -202,11 +202,11 @@ $manager->removeObjectContainer('modLexiconTopic');
 /* add api_key to modTransportProvider */
 $class = 'transport.modTransportProvider';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'api_key',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'api_key','table' => $table));
 $sql = "ALTER TABLE {$table} ADD `api_key` VARCHAR(255) NOT NULL DEFAULT '' AFTER `service_url`";
 $this->processResults($class,$description,$sql);
 
-$description = sprintf($this->install->lexicon['add_index'],'api_key',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'api_key','table' => $table));
 $sql = "ALTER TABLE {$table} ADD INDEX `api_key` (`api_key`)";
 $this->processResults($class,$description,$sql);
 
@@ -214,7 +214,7 @@ $this->processResults($class,$description,$sql);
 /* (re)build modCategoryClosure data */
 $class = 'modCategoryClosure';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['update_closure_table'], 'modCategory');
+$description = $this->install->lexicon('update_closure_table',array('class' => 'modCategory'));
 $sql = "TRUNCATE TABLE {$table}";
 $this->processResults($class,$description,$sql);
 
@@ -226,10 +226,10 @@ foreach ($categories as $category) {
 /* add active field and index to modActionDom */
 $class = 'modActionDom';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'active',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'active','table' => $table));
 $sql = "ALTER TABLE {$table} ADD `active` TINYINT(1) NOT NULL DEFAULT '1' AFTER `constraint_class`";
 $this->processResults($class,$description,$sql);
 
-$description = sprintf($this->install->lexicon['add_index'],'active',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'active','table' => $table));
 $sql = "ALTER TABLE {$table} ADD INDEX `active` (`active`)";
 $this->processResults($class,$description,$sql);

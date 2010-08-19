@@ -16,7 +16,7 @@ unset($classes);
 /* add versions and release fields to transport.modTransportPackage */
 $class = 'transport.modTransportPackage';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'version_major, version_minor, version_patch, release, release_index',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'version_major, version_minor, version_patch, release, release_index','table' => $table));
 $sql = "ALTER TABLE {$table} ADD `version_major` TINYINT(4) NOT NULL DEFAULT '0'";
 $this->processResults($class,$description,$sql);
 $sql = "ALTER TABLE {$table} ADD `version_minor` TINYINT(4) NOT NULL DEFAULT '0'";
@@ -68,13 +68,13 @@ foreach ($packages as $package) {
 /* add permissions field to modMenu */
 $class = 'modMenu';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'permissions',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'permissions','table' => $table));
 $sql = "ALTER TABLE {$table} ADD `permissions` TEXT NOT NULL DEFAULT ''";
 $this->processResults($class,$description,$sql);
 
 /* add website field to modUserProfile */
 $class = 'modUserProfile';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'website',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'website','table' => $table));
 $sql = "ALTER TABLE {$table} ADD `website` VARCHAR(255) NOT NULL DEFAULT ''";
 $this->processResults($class,$description,$sql);

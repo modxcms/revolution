@@ -67,10 +67,10 @@ unset($c,$policy);
 $class = 'modAction';
 $table = $this->install->xpdo->getTableName($class);
 $sql = "ALTER TABLE {$table} ADD INDEX `namespace` ( `namespace` )";
-$description = sprintf($this->install->lexicon['add_index'],'namespace',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'namespace','table' => $table));
 $this->processResults($class, $description, $sql);
 $sql = "ALTER TABLE {$table} ADD INDEX `controller` ( `controller` )";
-$description = sprintf($this->install->lexicon['add_index'],'controller',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'controller','table' => $table));
 $this->processResults($class, $description, $sql);
 unset($class,$table,$sql,$description);
 
@@ -78,13 +78,13 @@ unset($class,$table,$sql,$description);
 $class = 'modMenu';
 $table = $this->install->xpdo->getTableName($class);
 $sql = "ALTER TABLE {$table} ADD INDEX `parent` ( `parent` )";
-$description = sprintf($this->install->lexicon['add_index'],'parent',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'parent','table' => $table));
 $this->processResults($class, $description, $sql);
 $sql = "ALTER TABLE {$table} ADD INDEX `action` ( `action` )";
-$description = sprintf($this->install->lexicon['add_index'],'action',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'action','table' => $table));
 $this->processResults($class, $description, $sql);
 $sql = "ALTER TABLE {$table} ADD INDEX `text` ( `text` )";
-$description = sprintf($this->install->lexicon['add_index'],'text',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'text','table' => $table));
 $this->processResults($class, $description, $sql);
 unset($class,$table,$sql,$description);
 
@@ -92,7 +92,7 @@ unset($class,$table,$sql,$description);
 $class = 'modMenu';
 $table = $this->install->xpdo->getTableName($class);
 $sql = "ALTER TABLE {$table} CHANGE `parent` `parent` VARCHAR( 100 ) NOT NULL DEFAULT ''";
-$description = sprintf($this->install->lexicon['change_column'],'parent','parent varchar',$table);
+$description = $this->install->lexicon('change_column',array('old' => 'parent','new' => 'parent varchar','table' => $table));
 $this->processResults($class,$description,$sql);
 
 $description = '';
@@ -107,7 +107,7 @@ if (!$pkChanged) {
     $this->processResults($class,$description,$sql);
 }
 $sql = "DROP INDEX `text` ON {$table}";
-$description = sprintf($this->install->lexicon['drop_index'],'text',$table);
+$description = $this->install->lexicon('drop_index',array('index' => 'text','table' => $table));
 $this->processResults($class, $description, $sql);
 unset($class,$description,$sql,$table);
 
@@ -126,6 +126,6 @@ unset($c,$menus,$menu);
 /* add active field to modUser */
 $class = 'modUser';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'active',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'active','table' => $table));
 $sql = "ALTER TABLE {$table} ADD COLUMN `active` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER `class_key`";
 $this->processResults($class,$description,$sql);

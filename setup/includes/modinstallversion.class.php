@@ -55,13 +55,13 @@ class modInstallVersion {
             if (!$dbcreated = $this->install->xpdo->manager->createObjectContainer($class)) {
                 $this->results[] = array (
                     'class' => 'failed',
-                    'msg' => '<p class="notok">' . sprintf($this->install->lexicon['table_err_create'],$class) . '</p>'
+                    'msg' => '<p class="notok">' . $this->install->lexicon('table_err_create',array('class' => $class)) . '</p>'
                 );
                 return false;
             } else {
                 $this->results[] = array (
                     'class' => 'success',
-                    'msg' => '<p class="ok">' . sprintf($this->install->lexicon['table_created'],$class) . '</p>'
+                    'msg' => '<p class="ok">' . $this->install->lexicon('table_created',array('class' => $class)) . '</p>'
                 );
                 return true;
             }
@@ -104,13 +104,13 @@ class modInstallVersion {
             ;
             $this->results[] = array (
                 'class' => 'warning',
-                'msg' => '<p class="notok">'.sprintf($this->install->lexicon['err_update_table'],$class).'<br /><small>' . nl2br(print_r($this->install->xpdo->errorInfo(), true)) . '</small></p>'
+                'msg' => '<p class="notok">'.$this->install->lexicon('err_update_table',array('class' => $class)).'<br /><small>' . nl2br(print_r($this->install->xpdo->errorInfo(), true)) . '</small></p>'
             );
             return false;
         } else {
             $this->results[] = array (
                 'class' => 'success',
-                'msg' => '<p class="ok">'.sprintf($this->install->lexicon['table_updated'],$class).'<br /><small>' . $description . '</small></p>'
+                'msg' => '<p class="ok">'.$this->install->lexicon('table_updated',array('class' => $class)).'<br /><small>' . $description . '</small></p>'
             );
             return true;
         }

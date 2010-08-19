@@ -16,7 +16,7 @@ unset($classes);
 /* add unique index to modLexiconEntry */
 $class = 'modLexiconEntry';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_index'],'uniqentry',$table);
+$description = $this->install->lexicon('add_index',array('index' => 'uniqentry','table' => $table));
 $sql = "ALTER TABLE  {$table} ADD UNIQUE `uniqentry` (`name`,`topic`,`namespace`,`language`)";
 $this->processResults($class, $description, $sql);
 unset($class,$table,$sql,$description);
@@ -25,12 +25,12 @@ unset($class,$table,$sql,$description);
 /* add city field to modUserProfile */
 $class = 'modUserProfile';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'city',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'city','table' => $table));
 $sql = "ALTER TABLE {$table} ADD COLUMN `city` VARCHAR(255) NOT NULL DEFAULT '' AFTER `country`";
 $this->processResults($class,$description,$sql);
 
 /* adjust country field to modUserProfile */
-$description = sprintf($this->install->lexicon['add_column'],'country',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'country','table' => $table));
 $sql = "ALTER TABLE {$table} CHANGE `country` `country` VARCHAR( 255 ) NOT NULL DEFAULT ''";
 $this->processResults($class,$description,$sql);
 
@@ -38,14 +38,14 @@ $this->processResults($class,$description,$sql);
 /* add address field to modUserProfile */
 $class = 'modUserProfile';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'address',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'address','table' => $table));
 $sql = "ALTER TABLE {$table} ADD COLUMN `address` TEXT NOT NULL DEFAULT '' AFTER `gender`";
 $this->processResults($class,$description,$sql);
 
 /* change session.id field to precision 40 */
 $class = 'modSession';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['change_column'],'id varchar(32)','id varchar(40)',$table);
+$description = $this->install->lexicon('change_column',array('old' => 'id varchar(32)','new' => 'id varchar(40)','table' => $table));
 $sql = "ALTER TABLE {$table} CHANGE `id` `id` VARCHAR(40) NOT NULL";
 $this->processResults($class,$description,$sql);
 
@@ -53,7 +53,7 @@ $this->processResults($class,$description,$sql);
 /* add help_url field to modAction */
 $class = 'modAction';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'help_url',$table);
+$description = $this->install->lexicon('add_column',array('column' => 'help_url','table' => $table));
 $sql = "ALTER TABLE {$table} ADD COLUMN `help_url` TEXT NOT NULL DEFAULT ''";
 $this->processResults($class,$description,$sql);
 
@@ -73,8 +73,8 @@ $provider->save();
 /* add package, metadata fields to modTransportPackage */
 $class = 'transport.modTransportPackage';
 $table = $this->install->xpdo->getTableName($class);
-$description = sprintf($this->install->lexicon['add_column'],'package_name',$table);
-$sql = "ALTER TABLE {$table} ADD `package_name` VARCHAR( 255 ) NOT NULL DEFAULT ''";
+$description = $this->install->lexicon('add_column',array('column' => 'package_name','table' => $table));
+$sql = "ALTER TABLE {$table} ADD `package_name` VARCHAR(255) NOT NULL DEFAULT ''";
 $this->processResults($class,$description,$sql);
 $sql = "ALTER TABLE {$table} ADD  `metadata` TEXT NULL";
 $this->processResults($class,$description,$sql);

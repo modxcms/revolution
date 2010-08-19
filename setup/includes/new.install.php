@@ -22,7 +22,7 @@ $saved = $user->save();
 if ($saved) {
     $userProfile = $this->xpdo->newObject('modUserProfile');
     $userProfile->set('internalKey', $user->get('id'));
-    $userProfile->set('fullname', $this->lexicon['default_admin_user']);
+    $userProfile->set('fullname', $this->lexicon('default_admin_user'));
     $userProfile->set('email', $this->settings->get('cmsadminemail'));
     $userProfile->set('role', 1);
     $saved = $userProfile->save();
@@ -44,12 +44,12 @@ if ($saved) {
 if (!$saved) {
     $results[] = array (
         'class' => 'error',
-        'msg' => '<p class="notok">'.$this->lexicon['dau_err_save'].'<br />' . print_r($this->xpdo->errorInfo(), true) . '</p>'
+        'msg' => '<p class="notok">'.$this->lexicon('dau_err_save').'<br />' . print_r($this->xpdo->errorInfo(), true) . '</p>'
     );
 } else {
     $results[] = array (
         'class' => 'success',
-        'msg' => '<p class="ok">'.$this->lexicon['dau_saved'].'</p>'
+        'msg' => '<p class="ok">'.$this->lexicon('dau_saved').'</p>'
     );
 }
 
@@ -147,7 +147,7 @@ unset($adminPolicy,$adminGroup);
 /* add base template and home resource */
 $template = $this->xpdo->newObject('modTemplate');
 $template->fromArray(array(
-    'templatename' => $this->lexicon['base_template'],
+    'templatename' => $this->lexicon('base_template'),
     'content' => '<html>
 <head>
 <title>[[++site_name]] - [[*pagetitle]]</title>
@@ -161,7 +161,7 @@ $template->fromArray(array(
 if ($template->save()) {
     $resource = $this->xpdo->newObject('modResource');
     $resource->fromArray(array(
-        'pagetitle' => $this->lexicon['home'],
+        'pagetitle' => $this->lexicon('home'),
         'alias' => '',
         'contentType' => 'text/html',
         'type' => 'document',

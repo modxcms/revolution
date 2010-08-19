@@ -43,27 +43,27 @@ abstract class modInstallTest {
      * Checks PHP version
      */
     protected function _checkPHPVersion() {
-        $this->results['php_version']['msg'] = '<p>'.$this->install->lexicon['test_php_version_start'].' ';
+        $this->results['php_version']['msg'] = '<p>'.$this->install->lexicon('test_php_version_start').' ';
         $phpVersion = phpversion();
         $php_ver_comp = version_compare($phpVersion,'5.1.1','>=');
         $php_ver_comp_516 = version_compare($phpVersion, '5.1.6','==');
         $php_ver_comp_520 = strpos($phpVersion,'5.2.0') !== false;
         /* -1 if left is less, 0 if equal, +1 if left is higher */
         if (!$php_ver_comp) {
-            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span> - '.sprintf($this->install->lexicon['test_php_version_fail'],$phpVersion).'</p>';
+            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span> - '.$this->install->lexicon('test_php_version_fail',array('version' => $phpVersion)).'</p>';
             $this->results['php_version']['class'] = 'testFailed';
 
         } else if ($php_ver_comp_520) {
-            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['warning'].'</span><p>'.sprintf($this->install->lexicon['test_php_version_520'],$phpVersion).'</p>';
+            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon('warning').'</span><p>'.$this->install->lexicon('test_php_version_520',array('version' => $phpVersion)).'</p>';
             $this->results['php_version']['class'] = 'testWarn';
 
         } else if ($php_ver_comp_516) {
-            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['warning'].'</span><p>'.sprintf($this->install->lexicon['test_php_version_516'],$phpVersion).'</p>';
+            $this->results['php_version']['msg'] .= '<span class="notok">'.$this->install->lexicon('warning').'</span><p>'.$this->install->lexicon('test_php_version_516',array('version' => $phpVersion)).'</p>';
             $this->results['php_version']['class'] = 'testWarn';
 
         } else {
             $this->results['php_version']['class'] = 'testPassed';
-            $this->results['php_version']['msg'] .= '<span class="ok">'.sprintf($this->install->lexicon['test_php_version_success'],$phpVersion).'</span></p>';
+            $this->results['php_version']['msg'] .= '<span class="ok">'.$this->install->lexicon('test_php_version_success',array('version' => $phpVersion)).'</span></p>';
         }
     }
 
@@ -80,13 +80,13 @@ abstract class modInstallTest {
      * Checks MySQL server version
      */
     protected function _checkMySQLServerVersion() {
-        $this->results['mysql_server_version']['msg'] = '<p>'.$this->install->lexicon['test_mysql_version_server_start'].' ';
+        $this->results['mysql_server_version']['msg'] = '<p>'.$this->install->lexicon('test_mysql_version_server_start').' ';
         $handler = @mysql_connect($this->install->settings->get('database_server'),$this->install->settings->get('database_user'),$this->install->settings->get('database_password'));
         $mysqlVersion = @mysql_get_server_info($handler);
         $mysqlVersion = $this->_sanitizeMySqlVersion($mysqlVersion);
         if (empty($mysqlVersion)) {
-            $this->results['mysql_server_version']['msg'] = '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
-            $this->results['mysql_server_version']['msg'] .= '<div class="notes"><h3>'.$this->install->lexicon['test_mysql_version_server_nf'].'</h3><p>'.$this->install->lexicon['test_mysql_version_server_nf_msg'].'</p></div>';
+            $this->results['mysql_server_version']['msg'] = '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
+            $this->results['mysql_server_version']['msg'] .= '<div class="notes"><h3>'.$this->install->lexicon('test_mysql_version_server_nf').'</h3><p>'.$this->install->lexicon('test_mysql_version_server_nf_msg').'</p></div>';
             $this->results['mysql_server_version']['class'] = 'testWarn';
             return true;
         }
@@ -96,28 +96,28 @@ abstract class modInstallTest {
         $mysql_ver_comp_5051a = version_compare($mysqlVersion,'5.0.51a','==');
 
         if (!$mysql_ver_comp) {
-            $this->results['mysql_server_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span> - '.sprintf($this->install->lexicon['test_mysql_version_fail'],$mysqlVersion).'</p>';
+            $this->results['mysql_server_version']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span> - '.$this->install->lexicon('test_mysql_version_fail',array('version' => $mysqlVersion)).'</p>';
             $this->results['mysql_server_version']['class'] = 'testFailed';
 
         } else if ($mysql_ver_comp_5051 || $mysql_ver_comp_5051a) {
-            $this->results['mysql_server_version']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span><p>'.sprintf($this->install->lexicon['test_mysql_version_5051'],$mysqlVersion).'</p>';
+            $this->results['mysql_server_version']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span><p>'.$this->install->lexicon('test_mysql_version_5051',array('version' => $mysqlVersion)).'</p>';
             $this->results['mysql_server_version']['class'] = 'testFailed';
 
         } else {
             $this->results['mysql_server_version']['class'] = 'testPassed';
-            $this->results['mysql_server_version']['msg'] .= '<span class="ok">'.sprintf($this->install->lexicon['test_mysql_version_success'],$mysqlVersion).'</span></p>';
+            $this->results['mysql_server_version']['msg'] .= '<span class="ok">'.$this->install->lexicon('test_mysql_version_success',array('version' => $mysqlVersion)).'</span></p>';
         }
     }
     /**
      * Checks MySQL client version
      */
     protected function _checkMySQLClientVersion() {
-        $this->results['mysql_client_version']['msg'] = '<p>'.$this->install->lexicon['test_mysql_version_client_start'].' ';
+        $this->results['mysql_client_version']['msg'] = '<p>'.$this->install->lexicon('test_mysql_version_client_start').' ';
         $mysqlVersion = @mysql_get_client_info();
         $mysqlVersion = $this->_sanitizeMySqlVersion($mysqlVersion);
         if (empty($mysqlVersion)) {
-            $this->results['mysql_client_version']['msg'] = '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
-            $this->results['mysql_client_version']['msg'] .= '<div class="notes"><h3>'.$this->install->lexicon['test_mysql_version_client_nf'].'</h3><p>'.$this->install->lexicon['test_mysql_version_client_nf_msg'].'</p></div>';
+            $this->results['mysql_client_version']['msg'] = '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
+            $this->results['mysql_client_version']['msg'] .= '<div class="notes"><h3>'.$this->install->lexicon('test_mysql_version_client_nf').'</h3><p>'.$this->install->lexicon('test_mysql_version_client_nf_msg').'</p></div>';
             $this->results['mysql_client_version']['class'] = 'testWarn';
             return true;
         }
@@ -125,13 +125,13 @@ abstract class modInstallTest {
         $mysql_ver_comp = version_compare($mysqlVersion,'4.1.20','>=');
 
         if (!$mysql_ver_comp) {
-            $this->results['mysql_client_version']['msg'] = '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
-            $this->results['mysql_client_version']['msg'] .= '<div class="notes"><h3>'.sprintf($this->install->lexicon['test_mysql_version_client_old'],$mysqlVersion).'</h3><p>'.$this->install->lexicon['test_mysql_version_client_old_msg'].'</p></div>';
+            $this->results['mysql_client_version']['msg'] = '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
+            $this->results['mysql_client_version']['msg'] .= '<div class="notes"><h3>'.$this->install->lexicon('test_mysql_version_client_old',array('version' => $mysqlVersion)).'</h3><p>'.$this->install->lexicon('test_mysql_version_client_old_msg').'</p></div>';
             $this->results['mysql_client_version']['class'] = 'testWarn';
 
         } else {
             $this->results['mysql_client_version']['class'] = 'testPassed';
-            $this->results['mysql_client_version']['msg'] .= '<span class="ok">'.sprintf($this->install->lexicon['test_mysql_version_success'],$mysqlVersion).'</span></p>';
+            $this->results['mysql_client_version']['msg'] .= '<span class="ok">'.$this->install->lexicon('test_mysql_version_success',array('version' => $mysqlVersion)).'</span></p>';
         }
     }
 
@@ -150,13 +150,13 @@ abstract class modInstallTest {
             $success = true;
         }
 
-        $this->results['memory_limit']['msg'] = '<p>'.$this->install->lexicon['test_memory_limit'].' ';
+        $this->results['memory_limit']['msg'] = '<p>'.$this->install->lexicon('test_memory_limit').' ';
         if ($success) {
-            $this->results['memory_limit']['msg'] .= '<span class="ok">'.sprintf($this->install->lexicon['test_memory_limit_success'],$ml).'</span></p>';
+            $this->results['memory_limit']['msg'] .= '<span class="ok">'.$this->install->lexicon('test_memory_limit_success',array('memory' => $ml)).'</span></p>';
             $this->results['memory_limit']['class'] = 'testPassed';
         } else {
-            $s = '<span class="notok">'.$this->install->lexicon['failed'].'</span>';
-            $s .= '<div class="notes"><p>'.sprintf($this->install->lexicon['test_memory_limit_fail'],$ml).'</p></div>';
+            $s = '<span class="notok">'.$this->install->lexicon('failed').'</span>';
+            $s .= '<div class="notes"><p>'.$this->install->lexicon('test_memory_limit_fail',array('memory' => $ml)).'</p></div>';
             $s .= '</p>';
             $this->results['memory_limit']['msg'] .= $s;
             $this->results['memory_limit']['class'] = 'testFailed';
@@ -191,28 +191,28 @@ abstract class modInstallTest {
      * @access public
      */
     protected function _checkDependencies() {
-        $this->results['dependencies']['msg'] = '<p>'.$this->install->lexicon['test_dependencies'].' ';
+        $this->results['dependencies']['msg'] = '<p>'.$this->install->lexicon('test_dependencies').' ';
 
         /* check for zlib */
         if (!extension_loaded('zlib')) {
-            $s = '<span class="notok">'.$this->install->lexicon['failed'].'</span>';
-            $s .= '<div class="notes"><p>'.$this->install->lexicon['test_dependencies_fail_zlib'].'</p></div>';
+            $s = '<span class="notok">'.$this->install->lexicon('failed').'</span>';
+            $s .= '<div class="notes"><p>'.$this->install->lexicon('test_dependencies_fail_zlib').'</p></div>';
             $s .= '</p>';
             $this->results['dependencies']['msg'] = $s;
             $this->results['dependencies']['class'] = 'testFailed';
         } else {
-            $this->results['dependencies']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['dependencies']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
             $this->results['dependencies']['class'] = 'testPassed';
         }
 
         /* check for SimpleXML */
-        $this->results['simplexml']['msg'] = '<p>'.$this->install->lexicon['test_simplexml'].' ';
+        $this->results['simplexml']['msg'] = '<p>'.$this->install->lexicon('test_simplexml').' ';
         if (!function_exists('simplexml_load_string')) {
-            $this->results['simplexml']['msg'] = '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
-            $this->results['simplexml']['msg'] .= '<div class="notes"><h3>'.$this->install->lexicon['test_simplexml_nf'].'</h3><p>'.$this->install->lexicon['test_simplexml_nf_msg'].'</p></div>';
+            $this->results['simplexml']['msg'] = '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
+            $this->results['simplexml']['msg'] .= '<div class="notes"><h3>'.$this->install->lexicon('test_simplexml_nf').'</h3><p>'.$this->install->lexicon('test_simplexml_nf_msg').'</p></div>';
             $this->results['simplexml']['class'] = 'testWarn';
         } else {
-            $this->results['simplexml']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['simplexml']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
             $this->results['simplexml']['class'] = 'testPassed';
         }
     }
@@ -222,12 +222,12 @@ abstract class modInstallTest {
      * Check sessions
      */
     protected function _checkSessions() {
-        $this->results['sessions']['msg'] = '<p>'.$this->install->lexicon['test_sessions_start'].' ';
+        $this->results['sessions']['msg'] = '<p>'.$this->install->lexicon('test_sessions_start').' ';
         if ($_SESSION['session_test'] != 1) {
-            $this->results['sessions']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
+            $this->results['sessions']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span></p>';
             $this->results['sessions']['class'] = 'testFailed';
         } else {
-            $this->results['sessions']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['sessions']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
             $this->results['sessions']['class'] = 'testPassed';
         }
 
@@ -238,22 +238,22 @@ abstract class modInstallTest {
      */
     protected function _checkCache() {
         /* cache exists? */
-        $this->results['cache_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],'core/cache');
+        $this->results['cache_exists']['msg'] = '<p>'.$this->install->lexicon('test_directory_exists',array('dir' => MODX_CORE_PATH . 'cache'));
         if (!file_exists(MODX_CORE_PATH . 'cache')) {
-            $this->results['cache_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
+            $this->results['cache_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span></p>';
             $this->results['cache_exists']['class'] = 'testFailed';
         } else {
-            $this->results['cache_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['cache_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
             $this->results['cache_exists']['class'] = 'testPassed';
         }
 
         /* cache writable? */
-        $this->results['cache_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],'core/cache');
+        $this->results['cache_writable']['msg'] = '<p>'.$this->install->lexicon('test_directory_writable',array('dir' => MODX_CORE_PATH . 'cache'));
         if (!$this->is_writable2(MODX_CORE_PATH . 'cache')) {
-            $this->results['cache_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
+            $this->results['cache_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span></p>';
             $this->results['cache_writable']['class'] = 'testFailed';
         } else {
-            $this->results['cache_writable']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['cache_writable']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
             $this->results['cache_writable']['class'] = 'testPassed';
         }
     }
@@ -263,22 +263,22 @@ abstract class modInstallTest {
      */
     protected function _checkExport() {
         /* export exists? */
-        $this->results['assets_export_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],'core/export');
+        $this->results['assets_export_exists']['msg'] = '<p>'.$this->install->lexicon('test_directory_exists',array('dir' => MODX_CORE_PATH . 'export'));
         if (!file_exists(MODX_CORE_PATH . 'export')) {
-            $this->results['assets_export_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
+            $this->results['assets_export_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span></p>';
             $this->results['assets_export_exists']['class'] = 'testFailed';
         } else {
-            $this->results['assets_export_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['assets_export_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
             $this->results['assets_export_exists']['class'] = 'testPassed';
         }
 
         /* export writable? */
-        $this->results['assets_export_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],'core/export');
+        $this->results['assets_export_writable']['msg'] = '<p>'.$this->install->lexicon('test_directory_writable',array('dir' => MODX_CORE_PATH . 'export'));
         if (!$this->is_writable2(MODX_CORE_PATH . 'export')) {
-            $this->results['assets_export_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
+            $this->results['assets_export_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span></p>';
             $this->results['assets_export_writable']['class'] = 'testFailed';
         } else {
-            $this->results['assets_export_writable']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['assets_export_writable']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
             $this->results['assets_export_writable']['class'] = 'testPassed';
         }
     }
@@ -288,22 +288,22 @@ abstract class modInstallTest {
      */
     protected function _checkPackages() {
         /* core/packages exists? */
-        $this->results['core_packages_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],'core/packages');
+        $this->results['core_packages_exists']['msg'] = '<p>'.$this->install->lexicon('test_directory_exists',array('dir' => MODX_CORE_PATH . 'packages'));
         if (!file_exists(MODX_CORE_PATH . 'packages')) {
-            $this->results['core_packages_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
+            $this->results['core_packages_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span></p>';
             $this->results['core_packages_exists']['class'] = 'testFailed';
         } else {
-            $this->results['core_packages_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['core_packages_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
             $this->results['core_packages_exists']['class'] = 'testPassed';
         }
 
         /* packages writable? */
-        $this->results['core_packages_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_writable'],'core/packages');
+        $this->results['core_packages_writable']['msg'] = '<p>'.$this->install->lexicon('test_directory_writable',array('dir' => MODX_CORE_PATH . 'packages'));
         if (!$this->is_writable2(MODX_CORE_PATH . 'packages')) {
-            $this->results['core_packages_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
+            $this->results['core_packages_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span></p>';
             $this->results['core_packages_writable']['class'] = 'testFailed';
         } else {
-            $this->results['core_packages_writable']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['core_packages_writable']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
             $this->results['core_packages_writable']['class'] = 'testPassed';
         }
     }
@@ -315,32 +315,32 @@ abstract class modInstallTest {
         $coreConfigsExist = false;
         if ($this->install->settings->get('inplace')) {
             /* web_path */
-            $this->results['context_web_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('web_path'));
+            $this->results['context_web_exists']['msg'] = '<p>'.$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('web_path')));
             if (!file_exists($this->install->settings->get('web_path'))) {
-                $this->results['context_web_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
+                $this->results['context_web_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span></p>';
                 $this->results['context_web_exists']['class'] = 'testFailed';
             } else {
-                $this->results['context_web_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+                $this->results['context_web_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
                 $this->results['context_web_exists']['class'] = 'testPassed';
             }
 
             /* mgr_path */
-            $this->results['context_mgr_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('mgr_path'));
+            $this->results['context_mgr_exists']['msg'] = '<p>'.$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('mgr_path')));
             if (!file_exists($this->install->settings->get('mgr_path'))) {
-                $this->results['context_mgr_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
+                $this->results['context_mgr_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span></p>';
                 $this->results['context_mgr_exists']['class'] = 'testFailed';
             } else {
-                $this->results['context_mgr_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+                $this->results['context_mgr_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
                 $this->results['context_mgr_exists']['class'] = 'testPassed';
             }
 
             /* connectors_path */
-            $this->results['context_connectors_exists']['msg'] = '<p>'.sprintf($this->install->lexicon['test_directory_exists'],$this->install->settings->get('connectors_path'));
+            $this->results['context_connectors_exists']['msg'] = '<p>'.$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('connectors_path')));
             if (!file_exists($this->install->settings->get('connectors_path'))) {
-                $this->results['context_connectors_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p>';
+                $this->results['context_connectors_exists']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span></p>';
                 $this->results['context_connectors_exists']['class'] = 'testFailed';
             } else {
-                $this->results['context_connectors_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+                $this->results['context_connectors_exists']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
                 $this->results['context_connectors_exists']['class'] = 'testPassed';
             }
             if (file_exists($this->install->settings->get('web_path') . 'config.core.php') &&
@@ -357,19 +357,19 @@ abstract class modInstallTest {
     protected function _checkConfig() {
         $configFileDisplay= 'config/' . MODX_CONFIG_KEY . '.inc.php';
         $configFilePath= MODX_CORE_PATH . $configFileDisplay;
-        $this->results['config_writable']['msg'] = '<p>'.sprintf($this->install->lexicon['test_config_file'],'core/' . $configFileDisplay);
+        $this->results['config_writable']['msg'] = '<p>'.$this->install->lexicon('test_config_file',array('file' => $configFilePath));
         if (!file_exists($configFilePath)) {
             /* make an attempt to create the file */
             @ $hnd = fopen($configFilePath, 'w');
-            @ fwrite($hnd, '<?php // '.$this->install->lexicon['modx_configuration_file'].' ?>');
+            @ fwrite($hnd, '<?php // '.$this->install->lexicon('modx_configuration_file').' ?>');
             @ fclose($hnd);
         }
         $isWriteable = is_writable($configFilePath);
         if (!$isWriteable) {
-            $this->results['config_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon['failed'].'</span></p><p><strong>'.sprintf($this->install->lexicon['test_config_file_nw'],MODX_CONFIG_KEY).'</strong></p>';
+            $this->results['config_writable']['msg'] .= '<span class="notok">'.$this->install->lexicon('failed').'</span></p><p><strong>'.$this->install->lexicon('test_config_file_nw',array('key' => MODX_CONFIG_KEY)).'</strong></p>';
             $this->results['config_writable']['class'] = 'testFailed';
         } else {
-            $this->results['config_writable']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['config_writable']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
             $this->results['config_writable']['class'] = 'testPassed';
         }
     }
@@ -379,18 +379,18 @@ abstract class modInstallTest {
      */
     protected function _checkDatabase() {
         /* connect to the database */
-        $this->results['dbase_connection']['msg'] = '<p>'.$this->install->lexicon['test_db_check'];
+        $this->results['dbase_connection']['msg'] = '<p>'.$this->install->lexicon('test_db_check');
         $xpdo = $this->install->getConnection();
         if (!$xpdo || !$xpdo->connect()) {
             if ($this->mode > modInstall::MODE_NEW) {
-                $this->results['dbase_connection']['msg'] .= '<span class="notok">'.$this->install->lexicon['test_db_failed'].'</span><p />'.$this->install->lexicon['test_db_check_conn'].'</p>';
+                $this->results['dbase_connection']['msg'] .= '<span class="notok">'.$this->install->lexicon('test_db_failed').'</span><p />'.$this->install->lexicon('test_db_check_conn').'</p>';
                 $this->results['dbase_connection']['class'] = 'testFailed';
             } else {
-                $this->results['dbase_connection']['msg'] .= '<span class="notok">'.$this->install->lexicon['test_db_failed'].'</span><p />'.$this->install->lexicon['test_db_setup_create'].'</p>';
+                $this->results['dbase_connection']['msg'] .= '<span class="notok">'.$this->install->lexicon('test_db_failed').'</span><p />'.$this->install->lexicon('test_db_setup_create').'</p>';
                 $this->results['dbase_connection']['class'] = 'testWarn';
             }
         } else {
-            $this->results['dbase_connection']['msg'] .= '<span class="ok">'.$this->install->lexicon['ok'].'</span></p>';
+            $this->results['dbase_connection']['msg'] .= '<span class="ok">'.$this->install->lexicon('ok').'</span></p>';
             $this->results['dbase_connection']['class'] = 'testPassed';
         }
     }
