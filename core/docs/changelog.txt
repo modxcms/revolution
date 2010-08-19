@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- Fixed bug in setup during upgrade-advanced where DB information was not being checked correctly
 - Lots of improvements to handling and caching of thumbnails in manager
 - Fixed bug where reset filter on settings grid was not resetting to core namespace
 - [#MODX-2178] Added missing settings and lexicon values for those settings to build/lexicons

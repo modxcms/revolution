@@ -202,7 +202,7 @@ class modInstall {
      * @return xPDO A copy of the xpdo object.
      */
     public function getConnection($mode = modInstall::MODE_NEW) {
-        if ($mode === modInstall::MODE_UPGRADE_REVO || $mode === modInstall::MODE_UPGRADE_REVO_ADVANCED) {
+        if ($mode === modInstall::MODE_UPGRADE_REVO) {
             $errors = array ();
             $this->xpdo = $this->_modx($errors);
         } else if (!is_object($this->xpdo)) {
@@ -225,6 +225,15 @@ class modInstall {
             if (!($this->xpdo instanceof xPDO)) { return $this->xpdo; }
 
             $this->xpdo->setOption('cache_path',MODX_CORE_PATH . 'cache/');
+
+            if ($mode === modInstall::MODE_UPGRADE_REVO_ADVANCED) {
+                if ($this->xpdo->connect()) {
+                    $errors = array ();
+                    $this->xpdo = $this->_modx($errors);
+                } else {
+                    return $this->lexicon('db_err_connect_upgrade');
+                }
+            }
         }
         if (is_object($this->xpdo) && $this->xpdo instanceof xPDO) {
             $this->xpdo->setLogTarget(array(
