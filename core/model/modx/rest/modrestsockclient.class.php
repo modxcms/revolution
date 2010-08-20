@@ -15,7 +15,7 @@ class modRestSockClient extends modRestClient {
      *
      * {@inheritdoc}
      */
-    public function request($host,$path,$method = 'GET',$params = array()) {
+    public function request($host,$path,$method = 'GET',array $params = array(),array $options = array()) {
         $method = strtoupper($method);
         $purl = parse_url($host);
         $host = $purl['host'];
@@ -32,7 +32,7 @@ class modRestSockClient extends modRestClient {
 
         $out = $method." ".$purl['path']."/$path HTTP/1.1\r\n"
                 ."Host: $host\r\n"
-                ."User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3\r\n"
+                ."User-Agent: ".$this->config[modRestCurlClient::OPT_USERAGENT]."\r\n"
                 ."Content-type: text/xml; charset=UTF-8\r\n"
                 ."Accept: */*\r\n"
                 ."Accept-Language: en-us,en;q=0.5\r\n"
