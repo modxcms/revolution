@@ -35,7 +35,7 @@ MODx.grid.Package = function(config) {
     cols.push({ header: _('release') ,dataIndex: 'release' });
     cols.push({ header: _('installed') ,dataIndex: 'installed' ,renderer: this._rins });
     if (MODx.config.auto_check_pkg_updates == 1) {
-        cols.push({ header: _('updateable') ,dataIndex: 'updateable' ,renderer: this.rendYesNo });
+        cols.push({ header: _('updateable') ,dataIndex: 'updateable' ,renderer: this.rendUpdateAvail });
     }
     cols.push({ header: _('provider') ,dataIndex: 'provider_name'});
     cols.push(this.action);
@@ -348,6 +348,26 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         if (m.length > 0) {
             this.addContextMenuItem(m);
         }
+    }
+
+    ,rendUpdateAvail: function(d,c,r) {
+        switch(d) {
+            case '':
+                return '-';
+            case false:
+                c.css = 'red';
+                return _('no');
+            case true:
+                c.css = 'green';
+                return '<a href="javascript:void(0);" onclick="Ext.getCmp(\'modx-grid-package\').updateFromBtn(this,\''+r.data.signature+'\',\''+r.data.provider+'\');">'+_('yes')+'</a>';
+        }
+    }
+
+    ,updateFromBtn: function(a,sig) {
+        this.menu.record = {
+            signature: sig
+        };
+        this.update(a,{});
     }
 });
 Ext.reg('modx-grid-package',MODx.grid.Package);

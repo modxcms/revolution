@@ -654,7 +654,7 @@ table.classy tr.odd td {
     opacity: .5;
     color: gray;
 }
-#modx-grid-package .green { color: red !important; }
+#modx-grid-package .green, #modx-grid-package .green a { color: red !important; }
 #modx-grid-package .red { color: green !important; }
 
 .pbr-provider-box {
