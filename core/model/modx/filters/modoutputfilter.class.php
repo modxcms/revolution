@@ -275,22 +275,30 @@ class modOutputFilter {
                     case 'limit':
                         /* default: 100 */
                         $limit= intval($m_val) ? intval($m_val) : 100;
+                        /* ensure that filter correctly counts special chars */
+                        $str = html_entity_decode($output,null,$encoding);
                         if ($usemb) {
-                            $output= mb_substr($output,0,$limit,$encoding);
+                            $output= mb_substr($str,0,$limit,$encoding);
                         } else {
-                            $output= substr($output,0,$limit);
+                            $output= substr($str,0,$limit);
                         }
+                        /* convert special chars back */
+                        $output = htmlspecialchars($output);
                         break;
                     case 'ellipsis':
                         $limit= intval($m_val) ? intval($m_val) : 100;
-
+                    
+                        /* ensure that filter correctly counts special chars */
+                        $str = html_entity_decode($output,null,$encoding);
                         if ($usemb) {
-                            if (mb_strlen($output,$encoding) > $limit) {
-                                $output = mb_substr($output,0,$limit,$encoding).'...';
+                            if (mb_strlen($str,$encoding) > $limit) {
+                                $output = mb_substr($str,0,$limit,$encoding).'...';
                             }
-                        } else if (strlen($output) > $limit) {
-                            $output = substr($output,0,$limit).'...';
+                        } else if (strlen($str) > $limit) {
+                            $output = substr($str,0,$limit).'...';
                         }
+                        /* convert special chars back */
+                        $output = htmlspecialchars($output,null,$encoding);
                         break;
                     /* #####  Special functions */
 
