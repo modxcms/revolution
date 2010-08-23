@@ -58,6 +58,8 @@ if (!is_dir($fullpath)) return $modx->error->failure($modx->lexicon('file_folder
 $use_multibyte = $modx->getOption('use_multibyte',null,false);
 $encoding = $modx->getOption('modx_charset',null,'UTF-8');
 
+$imagesExts = array('jpg','jpeg','png','gif','ico');
+
 /* iterate through directories */
 foreach (new DirectoryIterator($fullpath) as $file) {
     if (in_array($file,array('.','..','.svn','_notes'))) continue;
@@ -96,16 +98,18 @@ foreach (new DirectoryIterator($fullpath) as $file) {
         if ($canUpdateFile) $cls .= ' pupdate';
         $encFile = rawurlencode($filePathName);
         $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile : null;
+        $url = trim(str_replace('//','/',$fileManagerUrl.$dir.$fileName),'/');
         $files[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
             'cls' => $cls,
             'type' => 'file',
             'leaf' => true,
+            'qtip' => in_array($ext,$imagesExts) ? '<img src="../'.$url.'" alt="'.$fileName.'" />' : '',
             'page' => $modx->fileHandler->isBinary($filePathName) ? $page : null,
             'perms' => $octalPerms,
             'path' => $relativeRootPath.$fileName,
-            'url' => trim(str_replace('//','/',$fileManagerUrl.$dir.$fileName),'/'),
+            'url' => $url,
             'file' => $encFile,
         );
     }

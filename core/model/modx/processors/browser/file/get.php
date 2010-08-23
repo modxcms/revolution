@@ -20,6 +20,8 @@ if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf')
 if (!$file->isReadable()) {
     return $modx->error->failure($modx->lexicon('file_err_perms'));
 }
+$imagesExts = array('jpg','jpeg','png','gif','ico');
+$fileExtension = pathinfo($filename,PATHINFO_EXTENSION);
 
 $fa = array(
     'name' => $file->getPath(),
@@ -27,6 +29,7 @@ $fa = array(
     'last_accessed' => $file->getLastAccessed(),
     'last_modified' => $file->getLastModified(),
     'content' => $file->getContents(),
+    'image' => in_array($fileExtension,$imagesExts) ? true : false,
 );
 
 return $modx->error->success('',$fa);

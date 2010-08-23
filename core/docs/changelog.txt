@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- [#MODX-2290] Added image preview when hovering over images in file tree
 - Added extra sanity checks in Package Management in case transport zips are not extracted
 - Make package grid update available Yes clickable to update
 - Cleaned up and better abstracted modRestClient and modRestCurlClient code
