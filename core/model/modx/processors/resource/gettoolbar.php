@@ -27,7 +27,7 @@ $items[] = '-';
 if ($modx->hasPermission('new_document')) {
     $items[] = array(
         'icon' => $p.'folder_page_add.png',
-        'tooltip' => $modx->lexicon('resource_create'),
+        'tooltip' => $modx->lexicon('document_new'),
         'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'\");");',
     );
     $items[] = array(
@@ -42,7 +42,7 @@ if ($modx->hasPermission('new_document')) {
     );
     $items[] = array(
         'icon' => $p.'new-static-resource.png',
-        'tooltip' => $modx->lexicon('add_static_resource'),
+        'tooltip' => $modx->lexicon('static_resource_new'),
         'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'&class_key=modStaticResource\");");',
     );
     $items[] = '-';
