@@ -40,9 +40,11 @@ if ($modx->error->hasError()) {
 
 /* value parsing */
 if ($scriptProperties['xtype'] == 'combo-boolean' && !is_numeric($scriptProperties['value'])) {
-	if ($scriptProperties['value'] == 'yes' || $scriptProperties['value'] == 'Yes' || $scriptProperties['value'] == $modx->lexicon('yes')) {
-		$scriptProperties['value'] = 1;
-	} else $scriptProperties['value'] = 0;
+    if ($scriptProperties['value'] == 'yes' || $scriptProperties['value'] == 'Yes' || $scriptProperties['value'] == $modx->lexicon('yes')) {
+        $scriptProperties['value'] = 1;
+    } else {
+        $scriptProperties['value'] = 0;
+    }
 }
 
 $setting= $modx->newObject('modSystemSetting');
@@ -84,7 +86,7 @@ if ($description == null) {
     $description = $modx->newObject('modLexiconEntry');
     $description->set('namespace',$namespace->get('name'));
     $description->set('name','setting_'.$scriptProperties['key'].'_desc');
-	$description->set('value',$scriptProperties['description']);
+    $description->set('value',$scriptProperties['description']);
     $description->set('topic',$topic->get('id'));
     $description->set('language',$modx->cultureKey);
     $description->save();

@@ -42,8 +42,8 @@ $c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modUserSetting`.`key`
 $c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modUserSetting`.`key`,"_desc") = `Description`.`name`');
 $c->where($where);
 $count = $modx->getCount('modUserSetting',$c);
-
-$c->sortby('`'.$sort.'`',$dir);
+$c->sortby($modx->getSelectColumns('modUserSetting','modUserSetting','',array('area')),'ASC');
+$c->sortby($modx->getSelectColumns('modUserSetting','modUserSetting','',array($sort)),$dir);
 if ($isLimit) $c->limit($limit,$start);
 $settings = $modx->getCollection('modUserSetting',$c);
 
@@ -54,6 +54,7 @@ foreach ($settings as $setting) {
     $k = 'setting_'.$settingArray['key'];
 
     /* if 3rd party setting, load proper text */
+    $modx->lexicon->load('en:'.$setting->get('namespace').':default');
     $modx->lexicon->load($setting->get('namespace').':default');
 
     /* set area text if has a lexicon string for it */
@@ -84,8 +85,7 @@ foreach ($settings as $setting) {
     } else {
         $settingArray['name'] = $settingArray['name_trans'];
     }
-    
-    
+    $settingArray['oldkey'] = $settingArray['key'];    
     $settingArray['editedon'] = $setting->get('editedon') == '-001-11-30 00:00:00' || $settingArray['editedon'] == '0000-00-00 00:00:00' || $settingArray['editedon'] == null
         ? ''
         : strftime('%b %d, %Y %I:%M %p',strtotime($setting->get('editedon')));
