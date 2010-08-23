@@ -22,7 +22,7 @@ $transport = $package->getTransport();
 if ($transport) {
     $attr = $transport->getAttribute($scriptProperties['attr']);
 } else {
-    return $modx->error->failure($modx->lexicon('package_err_nf'));
+    return $modx->error->failure();
 }
 
 /* if setup options, include setup file */
