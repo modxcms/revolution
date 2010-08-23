@@ -22,7 +22,6 @@ $_lang['add_chunk'] = 'チャンクの追加';
 $_lang['add_folder'] = 'フォルダの作成';
 $_lang['add_plugin'] = 'プラグインの追加';
 $_lang['add_snippet'] = 'スニペットの追加';
-$_lang['add_static_resource'] = '静的リソースの追加';
 $_lang['add_tag'] = 'タグ追加';
 $_lang['add_template'] = 'テンプレートの追加';
 $_lang['add_to_category_this'] = '新規に[[+type]]を作成';

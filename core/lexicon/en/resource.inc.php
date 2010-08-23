@@ -41,7 +41,6 @@ $_lang['resource_contentdispo'] = 'Content Disposition';
 $_lang['resource_contentdispo_help'] = 'Use the content disposition field to specify how this resource will be handled by the web browser. For file downloads select the Attachment option.';
 $_lang['resource_content_type'] = 'Content Type';
 $_lang['resource_content_type_help'] = 'The content type for this resource. If you\'re not sure which content type the resource should have, just leave it as text/html.';
-$_lang['resource_create'] = 'Create Resource';
 $_lang['resource_create_access_denied'] = 'You do not have permission to create a Resource.';
 $_lang['resource_create_here'] = 'Create a Resource Here';
 $_lang['resource_createdby'] = 'Created By';

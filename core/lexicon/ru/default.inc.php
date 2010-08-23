@@ -19,7 +19,6 @@ $_lang['add_chunk'] = 'Добавить чанк';
 $_lang['add_folder'] = 'Новая папка';
 $_lang['add_plugin'] = 'Добавить плагин';
 $_lang['add_snippet'] = 'Добавить сниппет';
-$_lang['add_static_resource'] = 'Новый статический ресурс';
 $_lang['add_tag'] = 'Добавить тег';
 $_lang['add_template'] = 'Добавить шаблон';
 $_lang['add_to_category_this'] = 'Создать новый [[+type]] здесь';

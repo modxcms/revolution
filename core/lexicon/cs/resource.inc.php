@@ -44,7 +44,6 @@ $_lang['resource_contentdispo'] = 'Zpracování obsahu';
 $_lang['resource_contentdispo_help'] = 'Toto políčko určuje jak bude tento dokument předán prohlížeči. Pokud má být obsah nabídnut ke stažení zvolte možnost Příloha.';
 $_lang['resource_content_type'] = 'Typ obsahu';
 $_lang['resource_content_type_help'] = 'Typ obsahu tohoto dokumentu. Pokud si nejste jisti, jaký Typ obsahu vybrat, ponechte HTML.';
-$_lang['resource_create'] = 'Vytvořit dokument';
 $_lang['resource_create_access_denied'] = 'Nemáte oprávnění vytvořit dokument.';
 $_lang['resource_create_here'] = 'Vytvořit dokument na tomto místě';
 $_lang['resource_createdby'] = 'Vytvořil';

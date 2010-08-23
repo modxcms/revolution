@@ -42,7 +42,6 @@ $_lang['resource_contentdispo'] = 'Content-Disposition';
 $_lang['resource_contentdispo_help'] = 'Verwenden Sie das Content-Disposition-Feld, um festzulegen, wie die Ressource vom Browser verarbeitet wird. Für Datei-Downloads verwenden Sie die Option "Attachment".';
 $_lang['resource_content_type'] = 'Content-Type';
 $_lang['resource_content_type_help'] = 'Der Inhaltstyp dieser Ressource. Wenn Sie nicht sicher sind, welchen Inhaltstyp die Ressource haben sollte, belassen Sie einfach bei text/html.';
-$_lang['resource_create'] = 'Ressource erstellen';
 $_lang['resource_create_access_denied'] = 'Sie haben keine Berechtigung, eine Ressource zu erstellen.';
 $_lang['resource_create_here'] = 'Ressource hier erstellen';
 $_lang['resource_createdby'] = 'Erstellt von';

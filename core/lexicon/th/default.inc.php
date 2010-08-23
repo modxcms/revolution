@@ -22,7 +22,6 @@ $_lang['add_chunk'] = 'เพิ่มชังค์';
 $_lang['add_folder'] = 'สร้างโฟลเดอร์ใหม่';
 $_lang['add_plugin'] = 'เพิ่มปลั๊กอิน';
 $_lang['add_snippet'] = 'เพิ่มสนิปเปต';
-$_lang['add_static_resource'] = 'เพิ่มสแตติกรีซอร์ส';
 $_lang['add_tag'] = 'เพิ่มแท็ก';
 $_lang['add_template'] = 'เพิ่มแม่แบบ';
 $_lang['add_to_category_this'] = 'สร้าง[[+type]]ใหม่ ที่นี่';

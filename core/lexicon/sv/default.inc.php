@@ -19,7 +19,6 @@ $_lang['add_chunk'] = 'Lägg till chunk';
 $_lang['add_folder'] = 'Lägg till mapp';
 $_lang['add_plugin'] = 'Lägg till plugin';
 $_lang['add_snippet'] = 'Lägg till snippet';
-$_lang['add_static_resource'] = 'Lägg till statisk resurs';
 $_lang['add_tag'] = 'Lägg till tagg';
 $_lang['add_template'] = 'Lägg till mall';
 $_lang['add_to_category_this'] = 'Skapa ny [[+type]] här';

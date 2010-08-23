@@ -19,7 +19,6 @@ $_lang['add_chunk'] = 'Ajouter un chunk';
 $_lang['add_folder'] = 'Nouveau dossier';
 $_lang['add_plugin'] = 'Ajouter un plugin';
 $_lang['add_snippet'] = 'Ajouter un snippet';
-$_lang['add_static_resource'] = 'Ajouter une resource externe';
 $_lang['add_tag'] = 'Ajouter un tag';
 $_lang['add_template'] = 'Ajouter un modèle';
 $_lang['add_to_category_this'] = 'Créer un nouveau [[+type]] ici';

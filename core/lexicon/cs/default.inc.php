@@ -22,7 +22,6 @@ $_lang['add_chunk'] = 'Vytvořit chunk';
 $_lang['add_folder'] = 'Vytvořit složku';
 $_lang['add_plugin'] = 'Vytvořit plugin';
 $_lang['add_snippet'] = 'Vytvořit snippet';
-$_lang['add_static_resource'] = 'Vytvořit statický dokument';
 $_lang['add_tag'] = 'Přidat tag';
 $_lang['add_template'] = 'Vytvořit šablonu';
 $_lang['add_to_category_this'] = 'Přidat sem nový [[+type]]';

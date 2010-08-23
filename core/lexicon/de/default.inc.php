@@ -20,7 +20,6 @@ $_lang['add_chunk'] = 'Chunk hinzufügen';
 $_lang['add_folder'] = 'Neuer Ordner';
 $_lang['add_plugin'] = 'Plugin hinzufügen';
 $_lang['add_snippet'] = 'Snippet hinzufügen';
-$_lang['add_static_resource'] = 'Statische Ressource hinzufügen';
 $_lang['add_tag'] = 'Tag hinzufügen';
 $_lang['add_template'] = 'Template hinzufügen';
 $_lang['add_to_category_this'] = '[[+type]] hier neu erstellen';

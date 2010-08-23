@@ -41,7 +41,6 @@ $_lang['resource_contentdispo'] = 'Disposition du contenu';
 $_lang['resource_contentdispo_help'] = 'Utilisez le champ de disposition de contenu pour spécifier comment cette ressource sera gérée par le navigateur Web. Pour les téléchargements de fichiers, sélectionnez l\'option pièce jointe.';
 $_lang['resource_content_type'] = 'Type de contenu';
 $_lang['resource_content_type_help'] = 'Le type de contenu pour cette ressource. Si vous n\'êtes pas sûr du type de contenu que la ressource devrait avoir, il suffit de laisser text/html.';
-$_lang['resource_create'] = 'Créer une ressource';
 $_lang['resource_create_access_denied'] = 'Vous n\'avez pas la permission de créer une ressource.';
 $_lang['resource_create_here'] = 'Créer une ressource ici';
 $_lang['resource_createdby'] = 'Créer par';
