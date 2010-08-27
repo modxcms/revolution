@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- [#MODX-2241] Added archive_with setting so users with improper ZipArchive compiles can switch back to PCLZip
+- Updated xPDO to include sqlite drivers
 - [#MODX-2308] Added UUID to all modx installs for usage in extras, custom providers, stats tracking, etc
 - [#MODX-2303] Fixed issue where resource editing pages were not respecting context settings
 - [#MODX-2302] Fixed issue with loading of input option values in TV related to optimizations in 2.0.1

@@ -2,11 +2,22 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- [#XPDO-66] Add xPDOTransport::ARCHIVE_WITH to allow explicit use of PclZip even if ZipArchive exists
+- Add xPDO::literal() method for SQL literal strings
+- Introduce pdo_sqlite driver support
+- Fix exception logging in xPDOManager_mysql
+- Fix xPDO::parseDSN() for sqlite DSN format
 - Remove xpdo.connect.inc.php (no longer used)
 - Migrate to git
 - [#XPDO-46] Implement support for IN operator using array as binding
 - [#XPDO-51] Fix incorrect criteria variable when caching individual rows from collections by primary key
 - [#XPDO-53] Fix bug preventing save of related objects when a key owner is foreign and not new
+- Refactor xPDO::getManager() and xPDOManager::getGenerator() to work with other db engines besides mysql
+- Replace direct references to xPDO::$_escapeChar with new xPDO::escape()
+- Move xPDOGenerator::getPHPType() to xPDOManager
+- Fix non-static call to xPDO::parseDSN() in xPDO::__construct()
+- Make sure db-specific connect_file exists before trying to include it
+- Remove unnecessary overridden _initFields() in xPDOObject derivatives
 - [#XPDO-54] Fix xPDOQuery to properly recognize MySQL Fulltext search expression as a conditional clause
 - [#XPDO-52] Fix fatal error when xPDOManager::createObjectContainer() cannot prepare a PDOStatement
 - xPDO::log() and xPDO::$logTarget will now accept an ARRAY target with an option that is a reference to the var

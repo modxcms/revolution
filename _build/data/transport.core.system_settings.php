@@ -24,6 +24,15 @@ $settings['allow_multiple_emails']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['archive_with']= $xpdo->newObject('modSystemSetting');
+$settings['archive_with']->fromArray(array (
+  'key' => 'archive_with',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['auto_menuindex']= $xpdo->newObject('modSystemSetting');
 $settings['auto_menuindex']->fromArray(array (
   'key' => 'auto_menuindex',

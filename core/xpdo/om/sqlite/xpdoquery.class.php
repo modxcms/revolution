@@ -19,22 +19,22 @@
  */
 
 /**
- * The MySQL implementation of xPDOQuery.
+ * The SQLite implementation of xPDOQuery.
  *
  * @package xpdo
- * @subpackage om.mysql
+ * @subpackage om.sqlite
  */
 
 /** Include the base {@see xPDOQuery} class */
 include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../xpdoquery.class.php');
 
 /**
- * An implementation of xPDOQuery for the MySQL database engine.
+ * An implementation of xPDOQuery for the SQLite database engine.
  *
  * @package xpdo
- * @subpackage om.mysql
+ * @subpackage om.sqlite
  */
-class xPDOQuery_mysql extends xPDOQuery {
+class xPDOQuery_sqlite extends xPDOQuery {
     public function __construct(& $xpdo, $class, $criteria= null) {
         parent :: __construct($xpdo, $class, $criteria);
         $this->query['priority']= '';
@@ -54,9 +54,10 @@ class xPDOQuery_mysql extends xPDOQuery {
             }
             $ignorealias= isset ($this->query['columns'][0]);
             foreach ($this->query['columns'] as $alias => $column) {
-                $column= trim($column);
+                $column= $this->xpdo->escape(trim($column));
                 if (!$ignorealias && $alias !== $column) {
-                    $columns[]= "{$column} AS " . $this->xpdo->escape($alias);
+                    $alias = $this->xpdo->escape($alias);
+                    $columns[]= "{$column} AS {$alias}";
                 } else {
                     $columns[]= "{$column}";
                 }
@@ -68,15 +69,15 @@ class xPDOQuery_mysql extends xPDOQuery {
         $tables= array ();
         foreach ($this->query['from']['tables'] as $table) {
             if ($command != 'SELECT') {
-                $tables[]= $table['table'];
+                $tables[]= $this->xpdo->escape($table['table']);
             } else {
-                $tables[]= $table['table'] . ' AS ' . $this->xpdo->escape($table['alias']);
+                $tables[]= $this->xpdo->escape($table['table']) . ' AS ' . $this->xpdo->escape($table['alias']);
             }
         }
         $sql.= $this->query['from']['tables'] ? implode(', ', $tables) . ' ' : '';
         if (!empty ($this->query['from']['joins'])) {
             foreach ($this->query['from']['joins'] as $join) {
-                $sql.= $join['type'] . ' ' . $join['table'] . ' ' . $this->xpdo->escape($join['alias']) . ' ';
+                $sql.= $join['type'] . ' ' . $this->xpdo->escape($join['table']) . ' AS ' . $this->xpdo->escape($join['alias']) . ' ';
                 if (!empty ($join['conditions'])) {
                     $sql.= 'ON ';
                     $sql.= $this->buildConditionalClause($join['conditions']);

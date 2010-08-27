@@ -21,12 +21,12 @@
 /**
  * Metadata map for the xPDOSimpleObject class.
  *
- * Provides an integer primary key column which uses MySQL's native
- * auto_increment primary key generation facilities.
+ * Provides an integer primary key column which uses SQLite's native
+ * integer primary key generation facilities.
  *
  * @see xPDOSimpleObject
  * @package xpdo
- * @subpackage om.mysql
+ * @subpackage om.sqlite
  */
 $xpdo_meta_map = array (
     'xPDOSimpleObject' => array (
@@ -41,7 +41,6 @@ $xpdo_meta_map = array (
                 'null' => false,
                 'index' => 'pk',
                 'generated' => 'native',
-                'attributes' => 'unsigned',
             )
         ),
         'indexes' => array (

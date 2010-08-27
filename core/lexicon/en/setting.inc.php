@@ -71,6 +71,9 @@ $_lang['setting_allow_duplicate_alias_desc'] = 'If set to \'yes\', this will all
 $_lang['setting_allow_tags_in_post'] = 'Allow HTML Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST actions within the manager will strip out any tags. MODx Recommends to leave this set at true.';
 
+$_lang['setting_archive_with'] = 'Force PCLZip Archives';
+$_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
+
 $_lang['setting_auto_menuindex'] = 'Menu indexing default';
 $_lang['setting_auto_menuindex_desc'] = 'Select \'Yes\' to turn on automatic menu index incrementing by default.';
 

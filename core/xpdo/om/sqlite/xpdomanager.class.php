@@ -19,10 +19,10 @@
  */
 
 /**
- * The MySQL implementation of the xPDOManager class.
+ * The SQLite implementation of the xPDOManager class.
  *
  * @package xpdo
- * @subpackage om.mysql
+ * @subpackage om.sqlite
  */
 
 /**
@@ -31,58 +31,41 @@
 require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/xpdomanager.class.php');
 
 /**
- * Provides MySQL data source management for an xPDO instance.
+ * Provides SQLite data source management for an xPDO instance.
  *
  * These are utility functions that only need to be loaded under special
  * circumstances, such as creating tables, adding indexes, altering table
  * structures, etc.  xPDOManager class implementations are specific to a
- * database driver and this instance is implemented for MySQL.
+ * database driver and this instance is implemented for SQLite.
  *
  * @package xpdo
- * @subpackage om.mysql
+ * @subpackage om.sqlite
  */
-class xPDOManager_mysql extends xPDOManager {
+class xPDOManager_sqlite extends xPDOManager {
     /**
-     * Get a xPDOManager instance.
+     * Get a SQLite xPDOManager instance.
      *
      * @param object $xpdo A reference to a specific modDataSource instance.
      */
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->dbtypes['integer']= array('/INT/i');
-        $this->dbtypes['boolean']= array('/^BOOL/i');
-        $this->dbtypes['float']= array('/^DEC/i','/^NUMERIC$/i','/^FLOAT$/i','/^DOUBLE/i','/^REAL/i');
-        $this->dbtypes['string']= array('/CHAR/i','/TEXT/i','/^ENUM$/i','/^SET$/i','/^TIME$/i','/^YEAR$/i');
-        $this->dbtypes['timestamp']= array('/^TIMESTAMP$/i');
-        $this->dbtypes['datetime']= array('/^DATETIME$/i');
-        $this->dbtypes['date']= array('/^DATE$/i');
-        $this->dbtypes['binary']= array('/BINARY/i','/BLOB/i');
-        $this->dbtypes['bit']= array('/^BIT$/i');
+        $this->dbtypes['string']= array('/CHAR/i','/CLOB/i','/TEXT/i', '/ENUM/i');
+        $this->dbtypes['float']= array('/REAL/i','/FLOA/i','/DOUB/i');
+        $this->dbtypes['datetime']= array('/TIMESTAMP/i','/DATE/i');
+        $this->dbtypes['binary']= array('/BLOB/i');
     }
 
     public function createSourceContainer($dsnArray = null, $username= null, $password= null, $containerOptions= array ()) {
-        $created= false;
+        $created = false;
+        $this->xpdo->log(xPDO::LOG_LEVEL_WARN, 'SQLite does not support source container creation');
         if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
-        if ($username === null) $username = $this->xpdo->getOption('username', null, '');
-        if ($password === null) $password = $this->xpdo->getOption('password', null, '');
-        if (is_array($dsnArray) && is_string($username) && is_string($password)) {
-            $sql= 'CREATE DATABASE `' . $dsnArray['dbname'] . '`';
-            if (isset ($containerOptions['collation']) && isset ($containerOptions['charset'])) {
-                $sql.= ' CHARACTER SET ' . $containerOptions['charset'];
-                $sql.= ' COLLATE ' . $containerOptions['collation'];
-            }
+        if (is_array($dsnArray)) {
             try {
-                $pdo = new PDO("mysql:host={$dsnArray['host']}", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-                $result = $pdo->exec($sql);
-                if ($result !== false) {
-                    $created = true;
-                } else {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create source container:\n{$sql}\nresult = " . var_export($result, true));
-                }
-            } catch (PDOException $pe) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not connect to database server: " . $pe->getMessage());
+                $dbfile = $dsnArray['dbname'];
+                $created = !file_exists($dbfile);
             } catch (Exception $e) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create source container: " . $e->getMessage());
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error creating source container: " . $pe->getMessage());
             }
         }
         return $created;
@@ -91,22 +74,17 @@ class xPDOManager_mysql extends xPDOManager {
     public function removeSourceContainer($dsnArray = null, $username= null, $password= null) {
         $removed= false;
         if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
-        if ($username === null) $username = $this->xpdo->getOption('username', null, '');
-        if ($password === null) $password = $this->xpdo->getOption('password', null, '');
-        if (is_array($dsnArray) && is_string($username) && is_string($password)) {
-            $sql= 'DROP DATABASE ' . $this->xpdo->escape($dsnArray['dbname']);
+        if (is_array($dsnArray)) {
             try {
-                $pdo = new PDO("mysql:host={$dsnArray['host']}", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-                $result = $pdo->exec($sql);
-                if ($result !== false) {
-                    $removed = true;
-                } else {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container:\n{$sql}\nresult = " . var_export($result, true));
+                $dbfile = $dsnArray['dbname'];
+                if (file_exists($dbfile)) {
+                    $removed = unlink($dbfile);
+                    if (!$removed) {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container");
+                    }
                 }
-            } catch (PDOException $pe) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not connect to database server: " . $pe->getMessage());
             } catch (Exception $e) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container: " . $e->getMessage());
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container: " . $pe->getMessage());
             }
         }
         return $removed;
@@ -138,34 +116,28 @@ class xPDOManager_mysql extends xPDOManager {
                 return true;
             }
             $tableMeta= $this->xpdo->getTableMeta($className);
-            $tableType= isset($tableMeta['engine']) ? $tableMeta['engine'] : 'MyISAM';
-            $numerics= array_merge($this->dbtypes['integer'], $this->dbtypes['boolean'], $this->dbtypes['float']);
-            $datetimeStrings= array('timestamp', 'datetime');
-            $dateStrings= $this->dbtypes['date'];
             $pk= $this->xpdo->getPK($className);
             $pktype= $this->xpdo->getPKType($className);
-            $fulltextIndexes= array ();
-            $uniqueIndexes= array ();
-            $indexes= array ();
-            $lobs= array ('TEXT', 'BLOB');
-            $lobsPattern= '/(' . implode('|', $lobs) . ')/';
             $sql= 'CREATE TABLE ' . $tableName . ' (';
             $fieldMeta = $this->xpdo->getFieldMeta($className);
             while (list($key, $meta)= each($fieldMeta)) {
                 $dbtype= strtoupper($meta['dbtype']);
-                $precision= isset ($meta['precision']) ? '(' . $meta['precision'] . ')' : '';
+                $precision= isset ($meta['precision']) && !preg_match('/ENUM/i', $dbtype) ? '(' . $meta['precision'] . ')' : '';
+                if (preg_match('/ENUM/i', $dbtype)) {
+                    $dbtype= 'CHAR';
+                }
                 $notNull= !isset ($meta['null'])
                     ? false
                     : ($meta['null'] === 'false' || empty($meta['null']));
                 $null= $notNull ? ' NOT NULL' : ' NULL';
-                $extra= (isset ($meta['index']) && $meta['index'] == 'pk' && !is_array($pk) && $pktype == 'integer' && isset ($meta['generated']) && $meta['generated'] == 'native') ? ' AUTO_INCREMENT' : '';
+                $extra= (isset ($meta['index']) && $meta['index'] == 'pk' && !is_array($pk) && $pktype == 'integer' && isset ($meta['generated']) && $meta['generated'] == 'native') ? ' PRIMARY KEY AUTOINCREMENT' : '';
                 if (empty ($extra) && isset ($meta['extra'])) {
                     $extra= ' ' . $meta['extra'];
                 }
                 $default= '';
-                if (isset ($meta['default']) && !preg_match($lobsPattern, $dbtype)) {
+                if (array_key_exists('default', $meta)) {
                     $defaultVal= $meta['default'];
-                    if (($defaultVal === null || strtoupper($defaultVal) === 'NULL') || (in_array($this->getPhpType($dbtype), $datetimeStrings) && $defaultVal === 'CURRENT_TIMESTAMP')) {
+                    if ($defaultVal === null || strtoupper($defaultVal) === 'NULL' || in_array($this->getPHPType($dbtype), array('integer', 'float')) || (in_array($meta['phptype'], array('datetime', 'date', 'timestamp', 'time')) && in_array($defaultVal, array_merge($instance->_currentTimestamps, $instance->_currentDates, $instance->_currentTimes)))) {
                         $default= ' DEFAULT ' . $defaultVal;
                     } else {
                         $default= ' DEFAULT \'' . $defaultVal . '\'';
@@ -173,38 +145,9 @@ class xPDOManager_mysql extends xPDOManager {
                 }
                 $attributes= (isset ($meta['attributes'])) ? ' ' . $meta['attributes'] : '';
                 if (strpos(strtolower($attributes), 'unsigned') !== false) {
-                    $sql .=  $this->xpdo->escape($key) . ' ' . $dbtype . $precision . $attributes . $null . $default . $extra . ',';
+                    $sql .= $this->xpdo->escape($key) . ' ' . $dbtype . $precision . $attributes . $null . $default . $extra . ',';
                 } else {
                     $sql .= $this->xpdo->escape($key) . ' ' . $dbtype . $precision . $null . $default . $attributes . $extra . ',';
-                }
-                if (isset ($meta['index']) && $meta['index'] !== 'pk') {
-                    if ($meta['index'] === 'fulltext') {
-                        if (isset ($meta['indexgrp'])) {
-                            $fulltextIndexes[$meta['indexgrp']][]= $key;
-                        } else {
-                            $fulltextIndexes[$key]= $key;
-                        }
-                    }
-                    elseif ($meta['index'] === 'unique') {
-                        if (isset ($meta['indexgrp'])) {
-                            $uniqueIndexes[$meta['indexgrp']][]= $key;
-                        } else {
-                            $uniqueIndexes[$key]= $key;
-                        }
-                    }
-                    elseif ($meta['index'] === 'fk') {
-                        if (isset ($meta['indexgrp'])) {
-                            $indexes[$meta['indexgrp']][]= $key;
-                        } else {
-                            $indexes[$key]= $key;
-                        }
-                    } else {
-                        if (isset ($meta['indexgrp'])) {
-                            $indexes[$meta['indexgrp']][]= $key;
-                        } else {
-                            $indexes[$key]= $key;
-                        }
-                    }
                 }
             }
             $sql= substr($sql, 0, strlen($sql) - 1);
@@ -214,12 +157,11 @@ class xPDOManager_mysql extends xPDOManager {
                     $pkarray[]= $this->xpdo->escape($k);
                 }
                 $pk= implode(',', $pkarray);
+                $sql .= ', PRIMARY KEY (' . $pk . ')';
             }
             elseif ($pk) {
                 $pk= $this->xpdo->escape($pk);
             }
-            if ($pk)
-                $sql .= ', PRIMARY KEY (' . $pk . ')';
             if (!empty ($indexes)) {
                 foreach ($indexes as $indexkey => $index) {
                     if (is_array($index)) {
@@ -245,7 +187,7 @@ class xPDOManager_mysql extends xPDOManager {
                     } else {
                         $indexset= $this->xpdo->escape($indexkey);
                     }
-                    $sql .= ", UNIQUE INDEX " . $this->xpdo->escape($indexkey) . " ({$indexset})";
+                    $sql .= ", UNIQUE INDEX {$indexkey} ({$indexset})";
                 }
             }
             if (!empty ($fulltextIndexes)) {
@@ -259,10 +201,10 @@ class xPDOManager_mysql extends xPDOManager {
                     } else {
                         $indexset= $this->xpdo->escape($indexkey);
                     }
-                    $sql .= ", FULLTEXT INDEX " . $this->xpdo->escape($indexkey) . " ({$indexset})";
+                    $sql .= ", FULLTEXT INDEX {$indexkey} ({$indexset})";
                 }
             }
-            $sql .= ") TYPE={$tableType}";
+            $sql .= ")";
             $created= $this->xpdo->exec($sql);
             if ($created === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->errorInfo(), true));
