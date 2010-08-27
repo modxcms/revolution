@@ -65,6 +65,7 @@
     <!-- Various cleanup targets -->
     <target name="cleanup-build-image" description="empty the build image directory">
         <delete dir="${build.image.dir}" />
+        <mkdir dir="${build.image.dir}" />
     </target>
     <target name="cleanup-build-distrib" description="empty the build distrib directory">
         <delete dir="${build.distrib.dir}" />
