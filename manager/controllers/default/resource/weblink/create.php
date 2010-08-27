@@ -10,7 +10,7 @@ $resource = $modx->newObject('modWebLink');
 /* invoke OnDocFormPrerender event */
 $onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onDocFormPrerender)) {
     $onDocFormPrerender = implode('',$onDocFormPrerender);
@@ -18,11 +18,11 @@ if (is_array($onDocFormPrerender)) {
 $modx->smarty->assign('onDocFormPrerender',$onDocFormPrerender);
 
 /* handle default parent */
-$parentname = $modx->getOption('site_name');
+$parentname = $context->getOption('site_name');
 $resource->set('parent',0);
 if (isset ($_REQUEST['parent'])) {
     if ($_REQUEST['parent'] == 0) {
-        $parentname = $modx->getOption('site_name');
+        $parentname = $context->getOption('site_name');
     } else {
         $parent = $modx->getObject('modResource',$_REQUEST['parent']);
         if ($parent != null) {
@@ -36,7 +36,7 @@ $modx->smarty->assign('parentname',$parentname);
 /* invoke OnDocFormRender event */
 $onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(
     'id' => 0,
-    'mode' => 'new',
+    'mode' => modSystemEvent::MODE_NEW,
 ));
 if (is_array($onDocFormRender)) $onDocFormRender = implode('',$onDocFormRender);
 $onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocFormRender);
@@ -52,7 +52,7 @@ $access_permissions = $modx->hasPermission('access_permissions');
 
 
 /* set default template */
-$default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $modx->getOption('default_template')));
+$default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $context->getOption('default_template')));
 $userGroups = $modx->user->getUserGroups();
 $c = $modx->newQuery('modActionDom');
 $c->leftJoin('modAccessActionDom','Access');
@@ -83,7 +83,7 @@ if ($fcDt) {
  *  Initialize RichText Editor
  */
 /* Set which RTE if not core */
-if ($modx->getOption('use_editor') && !empty($rte)) {
+if ($context->getOption('use_editor') && !empty($rte)) {
     /* invoke OnRichTextEditorRegister event */
     $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
     $modx->smarty->assign('text_editors',$text_editors);
@@ -96,7 +96,7 @@ if ($modx->getOption('use_editor') && !empty($rte)) {
         'editor' => $rte,
         'elements' => $replace_richtexteditor,
         'id' => 0,
-        'mode' => 'new',
+        'mode' => modSystemEvent::MODE_NEW,
     ));
     if (is_array($onRichTextEditorInit)) {
         $onRichTextEditorInit = implode('',$onRichTextEditorInit);
@@ -107,12 +107,12 @@ $ctx = !empty($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web';
 $modx->smarty->assign('_ctx',$ctx);
 
 /* register JS scripts */
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.security.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.tv.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.weblink.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/resource/weblink/create.js');
+$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/util/datetime.js');
+$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
+$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.security.js');
+$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.tv.js');
+$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.weblink.js');
+$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/sections/resource/weblink/create.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[
@@ -129,9 +129,9 @@ Ext.onReady(function() {
             ,context_key: "'.$ctx.'"
             ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
             ,richtext: 0
-            ,published: "'.$modx->getOption('publish_default',null,0).'"
-            ,searchable: "'.$modx->getOption('search_default',null,1).'"
-            ,cacheable: "'.$modx->getOption('cache_default',null,1).'"
+            ,published: "'.$context->getOption('publish_default',null,0).'"
+            ,searchable: "'.$context->getOption('search_default',null,1).'"
+            ,cacheable: "'.$context->getOption('cache_default',null,1).'"
         }
         ,which_editor: "'.$which_editor.'"
         ,access_permissions: "'.$access_permissions.'"

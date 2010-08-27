@@ -15,19 +15,26 @@ if (!$resource->checkPolicy('save')) {
     return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
+/* get context */
+$modx->smarty->assign('_ctx',$resource->get('context_key'));
+$context = $modx->getObject('modContext',$resource->get('context_key'));
+if (!$context) { return $modx->error->failure($modx->lexicon('context_err_nf')); }
+$context->prepare();
+
+/* check for locked status */
 $lockedBy = $resource->addLock($modx->user->get('id'));
 if (!empty($lockedBy) && $lockedBy !== true) {
-    if ($user = $modx->getObject('modUser', $lockedBy)) {
+    $user = $modx->getObject('modUser', $lockedBy);
+    if ($user) {
         $lockedBy = $user->get('username');
     }
     return $modx->error->failure($modx->lexicon('resource_locked_by', array('user' => $lockedBy, 'id' => $resource->get('id'))));
 }
 
+/* handle custom resource types */
 $resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : $resource->get('class_key');
 $resourceClass = str_replace(array('../','..','/','\\'),'',$resourceClass);
 $resourceDir= strtolower(substr($resourceClass, 3));
-
-/* handle custom resource types */
 $delegateView = dirname(__FILE__) . '/' . $resourceDir . '/';
 $delegateView = $modx->getOption(strtolower($resourceClass).'_delegate_path',null,$delegateView) . basename(__FILE__);
 $delegateView = str_replace(array('{core_path}','{assets_path}','{base_path}'),array(
@@ -42,14 +49,14 @@ if (file_exists($delegateView)) {
     }
 }
 
+/* set template overrides */
 if (isset($_REQUEST['template'])) $resource->set('template',$_REQUEST['template']);
-
 
 /* invoke OnDocFormPrerender event */
 $onDocFormPrerender = $modx->invokeEvent('OnDocFormPrerender',array(
     'id' => $resource->get('id'),
     'resource' => &$resource,
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if (is_array($onDocFormPrerender)) {
     $onDocFormPrerender = implode('',$onDocFormPrerender);
@@ -57,7 +64,7 @@ if (is_array($onDocFormPrerender)) {
 $modx->smarty->assign('onDocFormPrerender',$onDocFormPrerender);
 
 /* handle default parent */
-$parentname = $modx->getOption('site_name');
+$parentname = $context->getOption('site_name');
 if ($resource->get('parent') != 0) {
     $parent = $modx->getObject('modResource',$resource->get('parent'));
     if ($parent != null) {
@@ -71,7 +78,7 @@ $modx->smarty->assign('parentname',$parentname);
 $onDocFormRender = $modx->invokeEvent('OnDocFormRender',array(
     'id' => $resource->get('id'),
     'resource' => &$resource,
-    'mode' => 'upd',
+    'mode' => modSystemEvent::MODE_UPD,
 ));
 if (is_array($onDocFormRender)) $onDocFormRender = implode('',$onDocFormRender);
 $onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocFormRender);
@@ -88,14 +95,14 @@ $publish_document = $modx->hasPermission('publish_document');
 $access_permissions = $modx->hasPermission('access_permissions');
 
 /* register JS scripts */
-$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $modx->getOption('which_editor');
+$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $context->getOption('which_editor');
 $modx->smarty->assign('which_editor',$rte);
 
 /*
  *  Initialize RichText Editor
  */
 /* Set which RTE */
-if ($modx->getOption('use_editor') && !empty($rte)) {
+if ($context->getOption('use_editor') && !empty($rte)) {
     /* invoke OnRichTextEditorRegister event */
     $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
     $modx->smarty->assign('text_editors',$text_editors);
@@ -109,7 +116,7 @@ if ($modx->getOption('use_editor') && !empty($rte)) {
         'elements' => $replace_richtexteditor,
         'id' => $resource->get('id'),
         'resource' => &$resource,
-        'mode' => 'upd',
+        'mode' => modSystemEvent::MODE_UPD,
     ));
     if (is_array($onRichTextEditorInit)) {
         $onRichTextEditorInit = implode('',$onRichTextEditorInit);
@@ -117,8 +124,7 @@ if ($modx->getOption('use_editor') && !empty($rte)) {
     }
 }
 
-$modx->smarty->assign('_ctx',$resource->get('context_key'));
-$managerUrl = $modx->getOption('manager_url');
+$managerUrl = $context->getOption('manager_url');
 $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');

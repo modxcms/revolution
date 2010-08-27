@@ -99,7 +99,7 @@ MODx.panel.Resource = function(config) {
             ,anchor: '75%'
             ,allowBlank: false
             ,enableKeyEvents: true
-            ,value: config.record.pagetitle || ''
+            ,value: config.record.pagetitle || null
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+f.getValue()+'</h2>');
