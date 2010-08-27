@@ -103,7 +103,6 @@ class modInstallVersion {
      */
     public function processResults($class,$description,$sql) {
         if (!$this->install->xpdo->exec($sql)) {
-            ;
             $this->results[] = array (
                 'class' => 'warning',
                 'msg' => '<p class="notok">'.$this->install->lexicon('err_update_table',array('class' => $class)).'<br /><small>' . nl2br(print_r($this->install->xpdo->errorInfo(), true)) . '</small></p>'

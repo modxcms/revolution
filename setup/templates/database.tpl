@@ -15,6 +15,13 @@
 <p class="error">{$error_message}</p>
 
 <div class="labelHolder">
+    <label for="database-type">{$_lang.connection_database_type}</label>
+    <select id="database-type" value="{$config.database_type}" name="database_type">
+        <option value="mysql"{if $config.database_type EQ "mysql"} selected="selected"{/if}>mysql</option>
+    </select>
+    &nbsp;<span class="version-msg" id="database-type-error"></span>
+</div>
+<div class="labelHolder">
     <label for="database-server">{$_lang.connection_database_host}</label>
     <input id="database-server" value="{$config.database_server}" name="database_server" />
     &nbsp;<span class="field_error" id="database-server-error"></span>
@@ -41,7 +48,14 @@
 </div>
 <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testconn">{$_lang.db_test_conn_msg}</a></p>
 
-<p id="modx-db-step1-msg" class="modx-hidden2">{$_lang.db_connecting}<span></span></p>
+<div id="modx-db-step1-msg" class="modx-hidden2">
+    <span>{$_lang.db_connecting}</span> <span class="connect-msg"></span>
+</div>
+<p id="modx-db-info">
+    <br />- {$_lang.mysql_version_server_start}<span id="modx-db-server-version"></span>
+    <br />- {$_lang.mysql_version_client_start}<span id="modx-db-client-version"></span>
+    <hr />
+</p>
 <div id="modx-db-step2" class="modx-hidden2">
 
 <div class="labelHolder">

@@ -33,6 +33,7 @@ $_lang['connection_database_info'] = 'Now please enter the login data for your d
 $_lang['connection_database_login'] = 'Database login name:';
 $_lang['connection_database_name'] = 'Database name:';
 $_lang['connection_database_pass'] = 'Database password:';
+$_lang['connection_database_type'] = 'Database type:';
 $_lang['connection_default_admin_email'] = 'Administrator email:';
 $_lang['connection_default_admin_login'] = 'Administrator username:';
 $_lang['connection_default_admin_note'] = 'Now you&#39;ll need to enter some details for the main administrator account. You can fill in your own name here, and a password you&#39;re not likely to forget. You&#39;ll need these to log into Admin once setup is complete.';

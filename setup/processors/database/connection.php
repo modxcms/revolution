@@ -58,6 +58,24 @@ if (!$dbExists) {
     }
 }
 
+$data = array();
+
+/* verify database versions */
+$server = $install->driver->verifyServerVersion();
+$client = $install->driver->verifyClientVersion();
+$data['server_version'] = $server['version'];
+$data['server_version_msg'] = $server['message'];
+$data['server_version_result'] = $server['result'];
+$data['client_version'] = $client['version'];
+$data['client_version_msg'] = $client['message'];
+$data['client_version_result'] = $client['result'];
+if ($server['result'] == 'failure') {
+    $this->error->failure($server['message'],$data);
+}
+if ($client['result'] == 'failure') {
+    $this->error->failure($client['message'],$data);
+}
+
 $dbCollation = 'utf8_general_ci';
 if ($dbExists) {
     /* get actual collation of the database */
@@ -70,9 +88,8 @@ if ($dbExists) {
     unset($stmt);
 }
 
-$data = array();
-$data['collation'] = $install->settings->get('database_collation', $dbCollation);
 
+$data['collation'] = $install->settings->get('database_collation', $dbCollation);
 /* get list of collations */
 $stmt = $xpdo->query($install->driver->getCollations());
 if ($stmt && $stmt instanceof PDOStatement) {

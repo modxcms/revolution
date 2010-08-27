@@ -65,6 +65,7 @@ class modInstallRequest {
         $agreedChecked= $agreed ? ' checked="checked"' : '';
 
         $this->install->lexicon->load('default');
+        $this->install->lexicon->load('drivers');
         $this->parser->assign('_lang',$this->install->lexicon->fetch());
 
         $this->action= isset ($_REQUEST['action']) ? $_REQUEST['action'] : 'language';

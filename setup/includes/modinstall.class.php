@@ -411,9 +411,7 @@ class modInstall {
 
             /* empty sessions table to prevent old permissions from loading */
             $tableName = $this->xpdo->getTableName('modSession');
-            $this->xpdo->exec('
-                TRUNCATE '.$tableName.'
-            ');
+            $this->xpdo->exec($this->driver->truncate($tableName));
 
             /* clear cache */
             $this->xpdo->cacheManager->deleteTree(MODX_CORE_PATH.'cache/',array(
