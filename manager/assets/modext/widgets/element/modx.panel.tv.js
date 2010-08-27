@@ -130,7 +130,7 @@ MODx.panel.TV = function(config) {
                     ,id: 'modx-tv-elements'
                     ,itemId: 'fld-els'
                     ,anchor: '90%'
-                    ,value: config.record.els || ''
+                    ,value: config.record.elements || ''
                 },{
                     xtype: 'textarea'
                     ,fieldLabel: _('tv_default')

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- [#MODX-2302] Fixed issue with loading of input option values in TV related to optimizations in 2.0.1
 - [#MODX-2297] Fixed output filters limit/ellipsis when dealing with special character cases
 - [#MODX-2290] Added image preview when hovering over images in file tree
 - Added extra sanity checks in Package Management in case transport zips are not extracted
