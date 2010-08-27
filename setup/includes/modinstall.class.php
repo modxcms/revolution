@@ -177,7 +177,7 @@ class modInstall {
                 break;
         }
         $config = array_merge($config,array(
-            'database_type' => 'mysql',
+            'database_type' => !empty($database_type) ? $database_type : 'mysql',
             'database_server' => $database_server,
             'dbase' => trim($dbase,'`'),
             'database_user' => $database_user,
@@ -775,6 +775,12 @@ class modInstall {
         return $modx;
     }
 
+    /**
+     * Finds the core directory, if possible. If core cannot be found, loads the
+     * findcore controller.
+     *
+     * @return Returns true if core directory is found.
+     */
     public function findCore() {
         $exists = false;
         if (file_exists(MODX_CORE_PATH) && is_dir(MODX_CORE_PATH)) {
@@ -786,6 +792,7 @@ class modInstall {
             include(MODX_SETUP_PATH . 'templates/findcore.php');
             die();
         }
+        return $exists;
     }
 
     /**
@@ -797,14 +804,8 @@ class modInstall {
         $this->lexicon->load('preload');
         $errors= array();
 
-        if (!extension_loaded('mysql') && !function_exists('mysql_connect')) {
-            $errors[] = $this->lexicon('preload_err_mysql');
-        }
         if (!extension_loaded('pdo')) {
             $errors[] = $this->lexicon('preload_err_pdo');
-        }
-        if (!extension_loaded('pdo_mysql')) {
-            $errors[] = $this->lexicon('preload_err_pdo_mysql');
         }
         if (!file_exists(MODX_CORE_PATH) || !is_dir(MODX_CORE_PATH)) {
             $errors[] = $this->lexicon('preload_err_core_path');
@@ -874,5 +875,26 @@ class modInstall {
         $written = @unlink($filePath);
 
         return $written;
+    }
+
+    /**
+     * Loads the correct database driver for this environment.
+     *
+     * @return boolean True if successful.
+     */
+    public function loadDriver() {
+        $this->loadSettings();
+        $path = dirname(__FILE__).'/drivers/';
+        
+        /* db specific driver */
+        $class = 'modInstallDriver_'.strtolower($this->settings->get('database_type','mysql'));
+        $driverPath = $path.strtolower($class.'.class.php');
+        $included = @include_once $driverPath;
+        if ($included) {
+            $this->driver = new $class($this);
+        } else {
+            $this->_fatalError($this->lexicon('driver_class_err_nf',array('path' => $driverPath)));
+        }
+        return $included;
     }
 }

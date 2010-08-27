@@ -53,6 +53,7 @@ class modInstallRequest {
     public function handle() {
         $install =& $this->install;
         $install->loadSettings();
+        $install->loadDriver();
         $this->parser->assign('config',$install->settings->fetch());
 
         $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';

@@ -7,6 +7,14 @@ unset($settings['action']);
 $install->settings->store($settings);
 $mode = $install->settings->get('installmode');
 
+/* ensure driver and PDO for driver is installed */
+if (!$install->driver->verifyExtension()) {
+    $this->error->failure($install->lexicon($install->settings->get('database_type').'_err_ext'));
+}
+if (!$install->driver->verifyPDOExtension()) {
+    $this->error->failure($install->lexicon($install->settings->get('database_type').'_err_pdo'));
+}
+
 /* get an instance of xPDO using the install settings */
 $xpdo = $install->getConnection($mode);
 $errors = array();
@@ -53,7 +61,7 @@ if (!$dbExists) {
 $dbCollation = 'utf8_general_ci';
 if ($dbExists) {
     /* get actual collation of the database */
-    $stmt = $xpdo->query("SHOW SESSION VARIABLES LIKE 'collation_database'");
+    $stmt = $xpdo->query($install->driver->getCollation());
     if ($stmt && $stmt instanceof PDOStatement) {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $dbCollation = $row['Value'];
@@ -66,7 +74,7 @@ $data = array();
 $data['collation'] = $install->settings->get('database_collation', $dbCollation);
 
 /* get list of collations */
-$stmt = $xpdo->query('SHOW COLLATION');
+$stmt = $xpdo->query($install->driver->getCollations());
 if ($stmt && $stmt instanceof PDOStatement) {
     $collations = array();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -90,7 +98,7 @@ $data['charset'] = $install->settings->get('database_charset', $dbCharset);
 $data['connection_charset'] = $install->settings->get('database_connection_charset', $data['charset']);
 
 /* get charsets */
-$stmt = $xpdo->query('SHOW CHARSET');
+$stmt = $xpdo->query($install->driver->getCharsets());
 if ($stmt && $stmt instanceof PDOStatement) {
     $charsets = array();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

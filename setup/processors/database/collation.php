@@ -64,7 +64,9 @@ if (!$xpdo->connect()) {
 
 /* test table prefix */
 $count = null;
-$stmt = $xpdo->query('SELECT COUNT(*) AS ct FROM `'.trim($install->settings->get('dbase'), '`').'`.`'.$install->settings->get('table_prefix').'site_content`');
+$database = $install->settings->get('dbase');
+$prefix = $install->settings->get('table_prefix');
+$stmt = $xpdo->query($install->driver->testTablePrefix($database,$prefix));
 if ($stmt) {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($row) {
@@ -74,7 +76,7 @@ if ($stmt) {
 }
 if ($mode == modInstall::MODE_NEW && $count !== null) {
     $this->error->failure($install->lexicon('test_table_prefix_inuse'), $errors);
-} elseif ($mode == modInstall::MODE_UPGRADE_REVO && $count === null) {
+} elseif (($mode == modInstall::MODE_UPGRADE_REVO || $mode == modInstall::MODE_UPGRADE_REVO_ADVANCED) && $count === null) {
     $this->error->failure($install->lexicon('test_table_prefix_nf'), $errors);
 }
 

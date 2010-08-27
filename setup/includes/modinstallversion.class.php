@@ -82,6 +82,8 @@ class modInstallVersion {
             $this->install->xpdo->getManager();
             $this->install->lexicon->load('upgrades');
             $scripts = $this->_getUpgradeScripts();
+            $driver =& $this->install->driver;
+            $xpdo =& $this->install->xpdo;
 
             foreach ($scripts as $script) {
                 if (file_exists($script)) {
@@ -125,7 +127,7 @@ class modInstallVersion {
      */
     private function _getUpgradeScripts() {
         $scripts = array();
-        $path = dirname(__FILE__).'/upgrades/';
+        $path = dirname(__FILE__).'/upgrades/'.$this->install->settings->get('database_type','mysql').'/';
         $sc = '';
         $dir = dir($path);
         while (false !== ($script = $dir->read())) {

@@ -29,8 +29,8 @@ if (!empty($classes)) {
 
 /* add table structure changes here for upgrades to previous Revolution installations */
 $class = 'modResource';
-$table = $this->install->xpdo->getTableName($class);
-$sql = "ALTER TABLE {$table} DROP INDEX `content_ft_idx`";
+$table = $xpdo->getTableName($class);
+$sql = $driver->dropIndex($table,'content_ft_idx');
 $description = $this->install->lexicon('remove_fulltext_index',array('index' => 'content_ft_idx'));
 $removedOldFullTextIndex = $this->processResults($class,$description,$sql);
 
@@ -52,7 +52,7 @@ $sql = "ALTER TABLE {$table} ADD COLUMN `parent` INT(11) unsigned NOT NULL DEFAU
 $this->processResults($class,$description,$sql);
 
 $description = $this->install->lexicon('add_index',array('index' => 'parent','table' => $table));
-$sql = "ALTER TABLE {$table} ADD INDEX `parent` (`parent`)";
+$sql = $driver->addIndex($table,'parent');
 $this->processResults($class,$description,$sql);
 
 $class = 'modUserGroupMember';
