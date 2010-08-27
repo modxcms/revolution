@@ -80,7 +80,7 @@ class modInstallDriver_mysql extends modInstallDriver {
      * {@inheritDoc}
      */
     public function truncate($table) {
-        return 'TRUNCATE '.$this->xpdo->escape($tableName);
+        return 'TRUNCATE '.$this->xpdo->escape($table);
     }
 
     /**
