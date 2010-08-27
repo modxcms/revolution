@@ -54,6 +54,7 @@ class xPDOTransport {
     const INSTALL_FILES = 'install_files';
     const UNINSTALL_FILES = 'uninstall_files';
     const UNINSTALL_OBJECT = 'uninstall_object';
+    const ARCHIVE_WITH = 'archive_with';
     /**
      * Indicates how pre-existing objects are treated on install/uninstall.
      * @var integer
@@ -76,7 +77,13 @@ class xPDOTransport {
     const ACTION_UPGRADE = 1;
     const ACTION_UNINSTALL = 2;
     /**#@-*/
-
+    /**
+     * Indicates which archiving tool to use for pack()'ing and unpack()'ing the transport.
+     * @var integer
+     */
+    const ARCHIVE_WITH_DEFAULT = 0;
+    const ARCHIVE_WITH_PCLZIP = 1;
+    const ARCHIVE_WITH_ZIPARCHIVE = 2;
     /**
      * An {@link xPDO} reference controlling this transport instance.
      * @var xPDO
@@ -297,7 +304,7 @@ class xPDOTransport {
         $packed = false;
         $packResults = false;
         $errors = array();
-        if (class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
+        if ($xpdo->getOption(xPDOTransport::ARCHIVE_WITH, null, 0) != xPDOTransport::ARCHIVE_WITH_PCLZIP && class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
             if ($xpdo->getDebug() === true) {
                 $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Using xPDOZip / native ZipArchive", null, __METHOD__, __FILE__, __LINE__);
             }
@@ -531,7 +538,7 @@ class xPDOTransport {
      */
     protected static function _unpack(& $xpdo, $from, $to) {
         $resources = false;
-        if (class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
+        if ($xpdo->getOption(xPDOTransport::ARCHIVE_WITH, null, 0) != xPDOTransport::ARCHIVE_WITH_PCLZIP && class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
             $archive = new xPDOZip($xpdo, $from);
             if ($archive) {
                 $resources = $archive->unpack($to);
