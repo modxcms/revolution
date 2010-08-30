@@ -66,8 +66,6 @@
         <antcall target="copy-core-transport"></antcall>
         <!--<antcall target="generate-phpdocs"></antcall>-->
 
-        <buildnumber />
-
         <!--<antcall target="build-sdk"></antcall>-->
         <antcall target="build-traditional"></antcall>
         <antcall target="build-advanced"></antcall>
@@ -86,8 +84,6 @@
         <antcall target="prepare-build-image"></antcall>
         <antcall target="copy-core-transport"></antcall>
         <!--<antcall target="generate-phpdocs"></antcall>-->
-
-        <buildnumber />
 
         <!--<antcall target="build-sdk"></antcall>-->
         <antcall target="build-traditional"></antcall>
@@ -460,7 +456,7 @@ General Public License for more details.
                 <filter token="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
             </filterset>
         </copy>
-        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-${build.number}-sdk.zip">
+        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-sdk.zip">
             <fileset dir="${build.image.dir}" />
         </zip>
         <replace file="${build.image.dir}/setup/includes/config.core.php" token="@sdk" value="@svn" />
@@ -497,7 +493,7 @@ General Public License for more details.
                 <filter token="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
             </filterset>
         </copy>
-        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-${build.number}.zip">
+        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}.zip">
             <fileset dir="${build.image.dir}">
                 <exclude name="_build/**" />
             </fileset>
@@ -512,7 +508,7 @@ General Public License for more details.
         and the core transport package included -->
     <target name="build-advanced" description="create the advanced distribution package">
         <replace file="${build.image.dir}/setup/includes/config.core.php" token="@svn" value="@advanced" />
-        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-${build.number}-advanced.zip">
+        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-advanced.zip">
             <fileset dir="${build.image.dir}">
                 <include name="core/**" />
                 <exclude name="core/packages/core/**" />
