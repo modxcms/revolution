@@ -19,6 +19,12 @@ if (!$plugin->checkPolicy('remove')) {
     return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
+/* invoke OnBeforePluginFormDelete event */
+$modx->invokeEvent('OnBeforePluginFormDelete',array(
+    'id' => $plugin->get('id'),
+    'plugin' => &$plugin,
+));
+
 /* remove plugin */
 if ($plugin->remove() == false) {
     return $modx->error->failure($modx->lexicon('plugin_err_remove'));
