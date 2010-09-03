@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- Simplify path for require_once in platform class templates
 - Trim property keys and values in xPDO::parseDSN()
 - Split xPDO::$_escapeChar into $_escapeCharOpen and $_escapeCharClose
 - [#XPDO-66] Add xPDOTransport::ARCHIVE_WITH to allow explicit use of PclZip even if ZipArchive exists

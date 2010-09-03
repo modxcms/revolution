@@ -611,7 +611,6 @@ abstract class xPDOGenerator {
         $template= <<<EOD
 <?php
 class [+class+] extends [+extends+] {}
-?>
 EOD;
         return $template;
     }
@@ -626,9 +625,8 @@ EOD;
         if ($this->platformTemplate) return $this->platformTemplate;
         $template= <<<EOD
 <?php
-require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\\\', '/') . '/[+class-lowercase+].class.php');
+require_once (dirname(dirname(__FILE__)) . '/[+class-lowercase+].class.php');
 class [+class+]_$platform extends [+class+] {}
-?>
 EOD;
         return $template;
     }
