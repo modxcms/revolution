@@ -1517,10 +1517,10 @@ class xPDO {
         for ($a= 0, $b= count($parameters); $a < $b; $a++) {
             $tmp= explode('=', $parameters[$a]);
             if (count($tmp) == 2) {
-                $result[$tmp[0]]= $tmp[1];
+                $result[strtolower(trim($tmp[0]))]= trim($tmp[1]);
             } else {
-                $result['dbname']= $parameters[$a];
-        }
+                $result['dbname']= trim($parameters[$a]);
+        	}
         }
         return $result;
     }
