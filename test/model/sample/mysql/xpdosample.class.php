@@ -5,7 +5,7 @@
  */
 
 /** Include the parent {@see xPDOSample} class */
-include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../xpdosample.class.php');
+require_once (dirname(dirname(__FILE__)) . '/xpdosample.class.php');
 
 /**
  * Represents a Sample xPDO class with various row types for testing purposes.

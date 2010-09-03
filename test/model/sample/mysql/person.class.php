@@ -11,7 +11,7 @@
 /**
  * Include the required database-independent parent classes.
  */
-include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../person.class.php');
+require_once (dirname(dirname(__FILE__)) . '/person.class.php');
 
 /**
  * Represents a Person.
