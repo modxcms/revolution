@@ -260,10 +260,10 @@ if (!$resource->get('class_key')) {
 
 /* increase menu index if this is a new resource */
 $auto_menuindex = $modx->getOption('auto_menuindex',null,true);
-if (!empty($auto_menuindex)) {
-    $menuindex = $modx->getCount('modResource',array('parent' => $resource->get('parent')));
+if (!empty($auto_menuindex) && empty($scriptProperties['menuindex'])) {
+    $scriptProperties['menuindex'] = $modx->getCount('modResource',array('parent' => $resource->get('parent')));
 }
-$resource->set('menuindex',!empty($menuindex) ? $menuindex : 0);
+$resource->set('menuindex',!empty($scriptProperties['menuindex']) ? $scriptProperties['menuindex'] : 0);
 
 /* invoke OnBeforeDocFormSave event */
 $modx->invokeEvent('OnBeforeDocFormSave',array(
