@@ -22,9 +22,9 @@ MODx.panel.WebLink = function(config) {
         },{
             layout:'column'
             ,border: false
-            ,width: '100%'
+            ,anchor: '97%'
             ,items:[{
-                columnWidth: .55
+                columnWidth: .70
                 ,layout: 'form'
                 ,border: false
                 ,items: [{
@@ -33,7 +33,7 @@ MODx.panel.WebLink = function(config) {
                     ,description: _('resource_template_help')
                     ,name: 'template'
                     ,id: 'modx-resource-template'
-                    ,width: 300
+                    ,anchor: '95%'
                     ,editable: false
                     ,baseParams: {
                         action: 'getList'
@@ -45,7 +45,7 @@ MODx.panel.WebLink = function(config) {
                     ,value: config.record.template || MODx.config.default_template
                 }]
             },{
-                columnWidth: .45
+                columnWidth: .30
                 ,layout: 'form'
                 ,hideLabels: true
                 ,labelWidth: 0
@@ -69,6 +69,7 @@ MODx.panel.WebLink = function(config) {
             ,id: 'modx-resource-pagetitle'
             ,maxLength: 255
             ,allowBlank: false
+            ,anchor: '90%'
             ,value: config.record.pagetitle
             
         },{
@@ -78,6 +79,7 @@ MODx.panel.WebLink = function(config) {
             ,name: 'longtitle'
             ,id: 'modx-resource-longtitle'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: config.record.longtitle || ''
             
         },{
@@ -87,6 +89,7 @@ MODx.panel.WebLink = function(config) {
             ,name: 'description'
             ,id: 'modx-resource-description'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: config.record.description || ''
             
         },{
@@ -96,6 +99,7 @@ MODx.panel.WebLink = function(config) {
             ,name: 'alias'
             ,id: 'modx-resource-alias'
             ,maxLength: 100
+            ,anchor: '90%'
             ,value: config.record.alias || ''
             
         },{
@@ -104,6 +108,7 @@ MODx.panel.WebLink = function(config) {
             ,description: _('resource_link_attributes_help')
             ,name: 'link_attributes'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: config.record.link_attributes || ''
             
         },{
@@ -112,9 +117,9 @@ MODx.panel.WebLink = function(config) {
             ,description: _('weblink_help')
             ,name: 'content'
             ,id: 'modx-resource-content'
-            ,width: 300
             ,maxLength: 255
             ,allowBlank: false
+            ,anchor: '90%'
             ,value: (config.record.content || config.record.ta) || 'http://'
         },{
             xtype: 'textarea'
@@ -123,6 +128,7 @@ MODx.panel.WebLink = function(config) {
             ,name: 'introtext'
             ,id: 'modx-resource-introtext'
             ,grow: true
+            ,anchor: '90%'
             ,value: config.record.introtext || ''
             
         },{
@@ -133,12 +139,14 @@ MODx.panel.WebLink = function(config) {
             ,editable: false
             ,id: 'modx-resource-parent'
             ,value: config.record.parent || 0
+            ,anchor: '90%'
             ,formpanel: 'modx-panel-resource'
         },{
             xtype: 'hidden'
             ,name: 'parent'
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
+            ,anchor: '90%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_menutitle')
@@ -146,6 +154,7 @@ MODx.panel.WebLink = function(config) {
             ,name: 'menutitle'
             ,id: 'modx-resource-menutitle'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: config.record.menutitle || ''
             
         },{
@@ -356,15 +365,12 @@ MODx.panel.WebLink = function(config) {
         }
     });
     MODx.panel.WebLink.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-panel-resource').onLoad();",1000);
 };
 Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
     initialized: false
     ,defaultClassKey: 'modWebLink'
-    ,onLoad: function() {
-        this.getForm().setValues(this.config.record);
-    }
     ,setup: function() {
+        this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.pagetitle)) {
             Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('weblink')+': '+this.config.record.pagetitle+'</h2>');
         }

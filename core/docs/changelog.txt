@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- Fixes to resource panels to adjust widths, loading of values properly
 - [#MODX-2318] Fixes to TVs in Resource pages to make order sorting work correctly
 - Abstracted setup database methods to driver-specific structures to accomodate for various future db drivers
 - [#MODX-2241] Added archive_with setting so users with improper ZipArchive compiles can switch back to PCLZip

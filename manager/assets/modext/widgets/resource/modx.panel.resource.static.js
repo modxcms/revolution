@@ -11,22 +11,29 @@ MODx.panel.Static = function(config) {
     var it = [];
     it.push({
         title: _('createedit_static')
+        ,id: 'modx-resource-settings'
+        ,cls: 'modx-resource-tab'
         ,layout: 'form'
         ,labelWidth: 200
-        ,bodyStyle: 'padding: 15px;'
+        ,bodyStyle: 'padding: 15px 15px 15px 0;'
         ,autoHeight: true
-        ,defaults: { border: false ,msgTarget: 'side' ,width: 400 }
+        ,defaults: {
+            border: false
+            ,msgTarget: 'side'
+            ,width: 400
+        }
         ,items: [{
             xtype: 'hidden'
             ,name: 'id'
-            ,value: config.resource
+            ,value: config.resource || config.record.id
             ,id: 'modx-resource-id'
+            ,anchor: '97%'
         },{
             layout:'column'
             ,border: false
-            ,width: '100%'
+            ,anchor: '97%'
             ,items:[{
-                columnWidth: .55
+                columnWidth: .70
                 ,layout: 'form'
                 ,border: false
                 ,items: [{
@@ -35,7 +42,7 @@ MODx.panel.Static = function(config) {
                     ,description: _('resource_template_help')
                     ,name: 'template'
                     ,id: 'modx-resource-template'
-                    ,width: 300
+                    ,anchor: '97%'
                     ,editable: false
                     ,baseParams: {
                         action: 'getList'
@@ -47,7 +54,7 @@ MODx.panel.Static = function(config) {
                     ,value: config.record.template || MODx.config.default_template
                 }]
             },{
-                columnWidth: .45
+                columnWidth: .30
                 ,layout: 'form'
                 ,hideLabels: true
                 ,labelWidth: 0
@@ -70,6 +77,7 @@ MODx.panel.Static = function(config) {
             ,name: 'pagetitle'
             ,id: 'modx-resource-pagetitle'
             ,maxLength: 255
+            ,anchor: '90%'
             ,allowBlank: false
             ,value: config.record.pagetitle
             
@@ -80,6 +88,7 @@ MODx.panel.Static = function(config) {
             ,name: 'longtitle'
             ,id: 'modx-resource-longtitle'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: config.record.longtitle || ''
             
         },{
@@ -89,6 +98,7 @@ MODx.panel.Static = function(config) {
             ,name: 'description'
             ,id: 'modx-resource-description'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: config.record.description || ''
             
         },{
@@ -98,6 +108,7 @@ MODx.panel.Static = function(config) {
             ,name: 'alias'
             ,id: 'modx-resource-alias'
             ,maxLength: 100
+            ,anchor: '90%'
             ,value: config.record.alias || ''
             
         },{
@@ -106,6 +117,7 @@ MODx.panel.Static = function(config) {
             ,description: _('resource_link_attributes_help')
             ,name: 'link_attributes'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: config.record.link_attributes || ''
             
         },{
@@ -118,6 +130,7 @@ MODx.panel.Static = function(config) {
             ,name: 'content'
             ,id: 'modx-resource-content'
             ,maxLength: 255
+            ,anchor: '95%'
             ,value: (config.record.content || config.record.ta) || ''
             ,listeners: {
                 'select':{fn:function(data) {
@@ -135,6 +148,7 @@ MODx.panel.Static = function(config) {
             ,description: _('resource_summary_help')
             ,name: 'introtext'
             ,id: 'modx-resource-introtext'
+            ,anchor: '90%'
             ,grow: true
             ,value: config.record.introtext || ''
             
@@ -147,11 +161,13 @@ MODx.panel.Static = function(config) {
             ,id: 'modx-resource-parent'
             ,value: config.record.parent || 0
             ,formpanel: 'modx-panel-resource'
+            ,anchor: '95%'
         },{
             xtype: 'hidden'
             ,name: 'parent'
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
+            ,anchor: '90%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_menutitle')
@@ -159,6 +175,7 @@ MODx.panel.Static = function(config) {
             ,name: 'menutitle'
             ,id: 'modx-resource-menutitle'
             ,maxLength: 255
+            ,anchor: '90%'
             
         },{
             xtype: 'numberfield'
@@ -175,6 +192,7 @@ MODx.panel.Static = function(config) {
             ,description: _('resource_hide_from_menus_help')
             ,name: 'hidemenu'
             ,inputValue: 1
+            ,anchor: '75%'
             ,checked: config.record.hidemenu || 0
             
         },{
@@ -367,15 +385,13 @@ MODx.panel.Static = function(config) {
         }
     });
     MODx.panel.Static.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-panel-resource').onLoad();",1000);
 };
 Ext.extend(MODx.panel.Static,MODx.FormPanel,{
     initialized: false
     ,defaultClassKey: 'modStaticResource'
-    ,onLoad: function() {
-        this.getForm().setValues(this.config.record);
-    }
+    ,rteLoaded: false
     ,setup: function() {
+        this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.pagetitle)) {
             Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('static_resource')+': '+this.config.record.pagetitle+'</h2>');
         }

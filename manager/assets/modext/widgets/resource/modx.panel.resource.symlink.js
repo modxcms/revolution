@@ -22,9 +22,9 @@ MODx.panel.SymLink = function(config) {
         },{
             layout:'column'
             ,border: false
-            ,width: '100%'
+            ,anchor: '97%'
             ,items:[{
-                columnWidth: .55
+                columnWidth: .70
                 ,layout: 'form'
                 ,border: false
                 ,items: [{
@@ -33,7 +33,7 @@ MODx.panel.SymLink = function(config) {
                     ,description: _('resource_template_help')
                     ,name: 'template'
                     ,id: 'modx-resource-template'
-                    ,width: 300
+                    ,anchor: '98%'
                     ,editable: false
                     ,baseParams: {
                         action: 'getList'
@@ -45,7 +45,7 @@ MODx.panel.SymLink = function(config) {
                     ,value: config.record.template || MODx.config.default_template
                 }]
             },{
-                columnWidth: .45
+                columnWidth: .30
                 ,layout: 'form'
                 ,hideLabels: true
                 ,labelWidth: 0
@@ -68,6 +68,7 @@ MODx.panel.SymLink = function(config) {
             ,name: 'pagetitle'
             ,id: 'modx-resource-pagetitle'
             ,maxLength: 255
+            ,anchor: '90%'
             ,allowBlank: false
             ,value: config.record.pagetitle
             
@@ -78,6 +79,7 @@ MODx.panel.SymLink = function(config) {
             ,name: 'longtitle'
             ,id: 'modx-resource-longtitle'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: config.record.longtitle || ''
             
         },{
@@ -87,6 +89,7 @@ MODx.panel.SymLink = function(config) {
             ,name: 'description'
             ,id: 'modx-resource-description'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: config.record.description || ''
             
         },{
@@ -96,6 +99,7 @@ MODx.panel.SymLink = function(config) {
             ,name: 'alias'
             ,id: 'modx-resource-alias'
             ,maxLength: 100
+            ,anchor: '90%'
             ,value: config.record.alias || ''
             
         },{
@@ -104,6 +108,7 @@ MODx.panel.SymLink = function(config) {
             ,description: _('resource_link_attributes_help')
             ,name: 'link_attributes'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: config.record.link_attributes || ''
             
         },{
@@ -113,6 +118,7 @@ MODx.panel.SymLink = function(config) {
             ,name: 'content'
             ,id: 'modx-resource-content'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: (config.record.content || config.record.ta) || ''
         },{
             xtype: 'textarea'
@@ -120,6 +126,7 @@ MODx.panel.SymLink = function(config) {
             ,description: _('resource_summary_help')
             ,name: 'introtext'
             ,id: 'modx-resource-introtext'
+            ,anchor: '90%'
             ,grow: true
             ,value: config.record.introtext || ''
             
@@ -129,12 +136,14 @@ MODx.panel.SymLink = function(config) {
             ,description: _('resource_parent_help')
             ,name: 'parent-cmb'
             ,editable: false
+            ,anchor: '95%'
             ,id: 'modx-resource-parent'
             ,value: config.record.parent || 0
             ,formpanel: 'modx-panel-resource'
         },{
             xtype: 'hidden'
             ,name: 'parent'
+            ,anchor: '90%'
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
         },{
@@ -144,6 +153,7 @@ MODx.panel.SymLink = function(config) {
             ,name: 'menutitle'
             ,id: 'modx-resource-menutitle'
             ,maxLength: 255
+            ,anchor: '90%'
             ,value: config.record.menutitle || ''
             
         },{
@@ -354,15 +364,12 @@ MODx.panel.SymLink = function(config) {
         }
     });
     MODx.panel.SymLink.superclass.constructor.call(this,config);
-    setTimeout("Ext.getCmp('modx-panel-resource').onLoad();",1000);
 };
 Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
     initialized: false
     ,defaultClassKey: 'modSymLink'
-    ,onLoad: function() {
-        this.getForm().setValues(this.config.record);
-    }
     ,setup: function() {
+        this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.pagetitle)) {
             Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('symlink')+': '+this.config.record.pagetitle+'</h2>');
         }

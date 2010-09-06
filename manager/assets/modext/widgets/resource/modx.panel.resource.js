@@ -99,7 +99,6 @@ MODx.panel.Resource = function(config) {
             ,anchor: '75%'
             ,allowBlank: false
             ,enableKeyEvents: true
-            ,value: config.record.pagetitle || null
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
                     Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+f.getValue()+'</h2>');
@@ -436,18 +435,14 @@ MODx.panel.Resource = function(config) {
     MODx.panel.Resource.superclass.constructor.call(this,config);
     var ta = Ext.get('ta');
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
-    /* to deal with combobox bug */
-    setTimeout("Ext.getCmp('modx-panel-resource').onLoad();",1000);
     this.on('ready',this.onReady,this);
 };
 Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     rteLoaded: false
     ,initialized: false
     ,defaultClassKey: 'modResource'
-    ,onLoad: function() {
-        this.getForm().setValues(this.config.record);
-    }
     ,setup: function() {
+        this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.pagetitle)) {
             Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+this.config.record.pagetitle+'</h2>');
         }

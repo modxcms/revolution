@@ -7,10 +7,6 @@
  */
 if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('access_denied'));
 
-$resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument';
-$resourceClass = str_replace(array('../','..','/','\\'),'',$resourceClass);
-$resourceDir= strtolower(substr($resourceClass, 3));
-
 /* handle template inheritance */
 if (!empty($_REQUEST['parent'])) {
     $parent = $modx->getObject('modResource',$_REQUEST['parent']);
@@ -28,12 +24,15 @@ if (!$context) { return $modx->error->failure($modx->lexicon('context_err_nf'));
 $context->prepare();
 
 /* handle custom resource types */
+$resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument';
+$resourceClass = str_replace(array('../','..','/','\\'),'',$resourceClass);
+$resourceDir= strtolower(substr($resourceClass, 3));
 $delegateView = dirname(__FILE__) . '/' . $resourceDir . '/';
-$delegateView = $context->getOption(strtolower($resourceClass).'_delegate_path',null,$delegateView) . basename(__FILE__);
+$delegateView = $modx->getOption(strtolower($resourceClass).'_delegate_path',null,$delegateView) . basename(__FILE__);
 $delegateView = str_replace(array('{core_path}','{assets_path}','{base_path}'),array(
-    $context->getOption('core_path',null,MODX_CORE_PATH),
-    $context->getOption('assets_path',null,MODX_ASSETS_PATH),
-    $context->getOption('base_path',null,MODX_BASE_PATH),
+    $modx->getOption('core_path',null,MODX_CORE_PATH),
+    $modx->getOption('assets_path',null,MODX_ASSETS_PATH),
+    $modx->getOption('base_path',null,MODX_BASE_PATH),
 ),$delegateView);
 if (file_exists($delegateView)) {
     $overridden= include ($delegateView);
