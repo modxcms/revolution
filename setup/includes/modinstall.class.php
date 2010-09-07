@@ -158,7 +158,7 @@ class modInstall {
                     $config['context_web_url'] = MODX_BASE_URL;
 
                     $config['core_path'] = MODX_CORE_PATH;
-                    $config['processors_path'] = MODX_PROCESSORS_PATH;
+                    $config['processors_path'] = MODX_CORE_PATH.'model/modx/processors/';
                     $config['assets_path'] = MODX_ASSETS_PATH;
                     $config['assets_url'] = MODX_ASSETS_URL;
                     break;
@@ -781,7 +781,7 @@ class modInstall {
      */
     public function findCore() {
         $exists = false;
-        if (file_exists(MODX_CORE_PATH) && is_dir(MODX_CORE_PATH)) {
+        if (defined(MODX_CORE_PATH) && file_exists(MODX_CORE_PATH) && is_dir(MODX_CORE_PATH)) {
             if (file_exists(MODX_CORE_PATH . 'xpdo/xpdo.class.php') && file_exists(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
                 $exists = true;
             }
