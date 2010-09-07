@@ -34,12 +34,6 @@ if (!empty($scriptProperties['category'])) {
     if (!$category->checkPolicy('add_children')) return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
-/* invoke OnBeforeTVFormSave event */
-$modx->invokeEvent('OnBeforeTVFormSave',array(
-    'mode' => modSystemEvent::MODE_NEW,
-    'id' => 0,
-));
-
 $name_exists = $modx->getObject('modTemplateVar',array('name' => $scriptProperties['name']));
 if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name'));
 
@@ -77,6 +71,27 @@ if (isset($scriptProperties['propdata'])) {
 }
 if (is_array($properties)) $tv->setProperties($properties);
 
+/* invoke OnBeforeTVFormSave event */
+$OnBeforeTVFormSave = $modx->invokeEvent('OnBeforeTVFormSave',array(
+    'mode' => modSystemEvent::MODE_NEW,
+    'id' => 0,
+    'tv' => &$tv,
+));
+if (is_array($OnBeforeTVFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforeTVFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforeTVFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
+
+/* validate TV */
 if (!$tv->validate()) {
     $validator = $tv->getValidator();
     if ($validator->hasMessages()) {
