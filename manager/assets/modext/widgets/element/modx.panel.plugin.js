@@ -145,7 +145,7 @@ MODx.panel.Plugin = function(config) {
 Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (!Ext.isEmpty(this.config.record.templatename)) {
+        if (!Ext.isEmpty(this.config.record.name)) {
             Ext.getCmp('modx-plugin-header').getEl().update('<h2>'+_('plugin')+': '+this.config.record.name+'</h2>');
         }
         if (!Ext.isEmpty(this.config.record.properties)) {
