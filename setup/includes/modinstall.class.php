@@ -781,7 +781,7 @@ class modInstall {
      */
     public function findCore() {
         $exists = false;
-        if (defined(MODX_CORE_PATH) && file_exists(MODX_CORE_PATH) && is_dir(MODX_CORE_PATH)) {
+        if (defined('MODX_CORE_PATH') && file_exists(MODX_CORE_PATH) && is_dir(MODX_CORE_PATH)) {
             if (file_exists(MODX_CORE_PATH . 'xpdo/xpdo.class.php') && file_exists(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
                 $exists = true;
             }
