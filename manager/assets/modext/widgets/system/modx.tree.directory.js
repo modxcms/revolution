@@ -55,6 +55,10 @@ MODx.tree.Directory = function(config) {
         ,'afterUpload': true
         ,'fileBrowserSelect': true
     });
+    this.on('click',function(n,e) {
+        n.select();
+        this.cm.activeNode = n;
+    },this);
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
@@ -347,7 +351,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         if (this.cm.activeNode) {
             path = this.getPath(this.cm.activeNode);
             if(this.cm.activeNode.isLeaf()) {
-               path = path.replace(/\/[^\/]+$/, '', path);
+                path = this.getPath(this.cm.activeNode.parentNode);
             }
         } else { path = '/'; }
 
