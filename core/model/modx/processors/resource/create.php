@@ -265,12 +265,25 @@ if (!empty($auto_menuindex) && empty($scriptProperties['menuindex'])) {
 }
 $resource->set('menuindex',!empty($scriptProperties['menuindex']) ? $scriptProperties['menuindex'] : 0);
 
-/* invoke OnBeforeDocFormSave event */
-$modx->invokeEvent('OnBeforeDocFormSave',array(
+/* invoke OnBeforeDocFormSave event, and allow non-empty responses to prevent save */
+$OnBeforeDocFormSave = $modx->invokeEvent('OnBeforeDocFormSave',array(
     'mode' => modSystemEvent::MODE_NEW,
     'id' => 0,
     'resource' => &$resource,
 ));
+if (is_array($OnBeforeDocFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforeDocFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforeDocFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
 
 /* save data */
 if ($resource->save() == false) {

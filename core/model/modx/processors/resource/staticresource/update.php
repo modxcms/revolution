@@ -145,14 +145,6 @@ if (!$modx->hasPermission('publish_document')) {
     $scriptProperties['unpub_date'] = $resource->get('unpub_date');
 }
 
-
-/* invoke OnBeforeDocFormSave event */
-$modx->invokeEvent('OnBeforeDocFormSave',array(
-    'mode' => modSystemEvent::MODE_UPD,
-    'id' => $resource->get('id'),
-    'resource' => &$resource,
-));
-
 /* set deleted status and fire events */
 if ($scriptProperties['deleted'] != $resource->get('deleted')) {
     if ($resource->get('deleted')) { /* undelete */
@@ -184,6 +176,27 @@ $resource->fromArray($scriptProperties);
 $resource->set('editedby', $modx->user->get('id'));
 $resource->set('editedon', time(), 'integer');
 
+/* invoke OnBeforeDocFormSave event, and allow non-empty responses to prevent save */
+$OnBeforeDocFormSave = $modx->invokeEvent('OnBeforeDocFormSave',array(
+    'mode' => modSystemEvent::MODE_UPD,
+    'id' => $resource->get('id'),
+    'resource' => &$resource,
+));
+if (is_array($OnBeforeDocFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforeDocFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforeDocFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
+
+/* save resource */
 if ($resource->save() == false) {
     return $modx->error->failure($modx->lexicon('document_err_save'));
 }
