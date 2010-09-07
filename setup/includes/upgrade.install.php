@@ -152,7 +152,7 @@ if (!$setting) {
         'area' => 'manager',
     ));
 }
-$setting->set('value','http://assets.modxcms.com/revolution/welcome.20.html');
+$setting->set('value','http://misc.modx.com/revolution/welcome.20.html');
 $setting->save();
 
 return true;

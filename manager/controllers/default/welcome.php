@@ -109,7 +109,7 @@ Ext.onReady(function() {
 </script>');
 
 if ($modx->getOption('welcome_screen',null,false)) {
-    $url = $modx->getOption('welcome_screen_url',null,'http://assets.modxcms.com/revolution/welcome.20.html');
+    $url = $modx->getOption('welcome_screen_url',null,'http://misc.modx.com/revolution/welcome.20.html');
     $modx->regClientStartupHTMLBlock('<script type="text/javascript">
 // <![CDATA[
 Ext.onReady(function() { MODx.loadWelcomePanel("'.$url.'"); });
