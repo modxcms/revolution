@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- Fix several references to xPDO::$_escapeChar in xPDOQuery
 - Simplify path for require_once in platform class templates
 - Trim property keys and values in xPDO::parseDSN()
 - Split xPDO::$_escapeChar into $_escapeCharOpen and $_escapeCharClose
