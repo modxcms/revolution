@@ -71,6 +71,9 @@ $_lang['setting_allow_duplicate_alias_desc'] = 'Om satt till "Ja" kommer aliasdu
 $_lang['setting_allow_tags_in_post'] = 'Tillåt HTML-taggar i POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Om denna sätts till "Nej" kommer alla POST-händelser i hanteraren att rensas från taggar. MODx rekommenderar att denna lämnas att till "Ja".';
 
+$_lang['setting_archive_with'] = 'Tvinga användning av PCLZip-arkiv';
+$_lang['setting_archive_with_desc'] = 'Om denna sätts till "Ja" kommer PCLZip att användas för zip-filer istället för ZipArchive. Aktivera den här om du får extractTo-fel eller har problem med uppackning i pakethanteraren.';
+
 $_lang['setting_auto_menuindex'] = 'Standardvärde för menyindexering';
 $_lang['setting_auto_menuindex_desc'] = 'Välj "Ja" för att aktivera automatisk ökning av menyindex som standard.';
 
@@ -164,6 +167,9 @@ $_lang['setting_custom_resource_classes_desc'] = 'En kommaseparerad lista med an
 $_lang['setting_default_template'] = 'Standardmall';
 $_lang['setting_default_template_desc'] = 'Välj den standarmall du vill använda för nya resurser. Du kan fortfarande välja en annan mall när du redigerar resursen. Denna inställning är bara förvalet.';
 
+$_lang['setting_default_per_page'] = 'Antal per sida';
+$_lang['setting_default_per_page_desc'] = 'Det antal resultat som visas i rutnät som standard.';
+
 $_lang['setting_editor_css_path'] = 'Sökväg till CSS-fil';
 $_lang['setting_editor_css_path_desc'] = 'Skriv in sökvägen till den CSS-fil du vill använda i en richtext-editor. Det bästa sättet att ange sökvägen är att göra det från serverns rot, tex /assets/site/style.css. Lämna fältet tomt om du inte vill ladda en stilmall i en richtext-editor.';
 
@@ -181,6 +187,9 @@ $_lang['setting_emailsubject_err'] = 'Ange ett ärende för e-posten som skickas
 $_lang['setting_error_page'] = 'Felsida';
 $_lang['setting_error_page_desc'] = 'Skriv in ID till den sida du vill skicka användare till om de försöker komma åt ett dokument som inte finns.<br /><strong>OBS: Se till att detta ID tillhör ett existerande dokument, och att det har blivit publicerat!</strong>';
 $_lang['setting_error_page_err'] = 'Ange ett dokument-ID för felsidan.';
+
+$_lang['setting_extension_packages'] = 'Tilläggspaket';
+$_lang['setting_extension_packages_desc'] = 'En kommaseparerad lista med paket som ska laddas när MODx instantieras. I formatet paketnamn:sökvägtillmodell';
 
 $_lang['setting_failed_login_attempts'] = 'Misslyckade inloggningsförsök';
 $_lang['setting_failed_login_attempts_desc'] = 'Antalet misslyckade inloggningsförsök en användare kan göra innan den blir "blockerad".';
@@ -202,8 +211,12 @@ $_lang['setting_feed_modx_security_enabled_desc'] = 'Om denna sätts till "Nej" 
 
 $_lang['setting_filemanager_path'] = 'Sökväg till filhanteraren';
 $_lang['setting_filemanager_path_desc'] = 'IIS fyller oftast inte i inställningarna för document_root ordentligt, vilket används av filhanteraren för att bestämma vad du får se. Om du har problem med filhanteraren, se till så att denna katalog pekar till roten på din installation av MODx.';
-$_lang['setting_filemanager_path_err'] = 'Ange den absoluta sökvägen till dokumentroten för filhanteraren.';
-$_lang['setting_filemanager_path_err_invalid'] = 'Denna katalog för filhanteraren finns inte eller kan inte kommas åt. Ange en giltig katalog eller justera katalogens åtkomsträttigheter.';
+
+$_lang['setting_filemanager_url'] = 'Filhanterarens URL';
+$_lang['setting_filemanager_url_desc'] = 'Valfri. Använd den här inställningen om du vill ange en uttrycklig URL för att komma åt filerna i MODx filhanterare (användbart om du har ändrat manager_path till en sökväg utanför MODx webbrot). Kontrollera att detta är den webbåtkomliga URL:en av det angivna värdet för filemanager_path. Om fältet lämnas tomt kommer MODx att försöka beräkna URL:en automatiskt.';
+
+$_lang['setting_forgot_login_email'] = 'E-post vid bortglömda inloggningsuppgifter';
+$_lang['setting_forgot_login_email_desc'] = 'Mallen för det e-postmeddelande som skickas när en användare har glömt sitt användarnamn och/eller sitt lösenord till MODx.';
 
 $_lang['setting_friendly_alias_lowercase_only'] = 'Gemena FURL-alias';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Anger om enbart gemena tecken tillåts i resursalias.';
@@ -252,7 +265,7 @@ $_lang['setting_mail_use_smtp'] = 'Använd SMTP';
 $_lang['setting_mail_use_smtp_desc'] = 'Om denna sätts till "Ja" kommer MODx att försöka använda SMTP i mail-funktioner.';
 
 $_lang['setting_mail_smtp_auth'] = 'SMTP-autentisering';
-$_lang['setting_mail_smtp_auth_desc'] = 'Anger SMTP-autentisering. Använder inställningarna för mail_smtp_user och mail_smtp_password.';
+$_lang['setting_mail_smtp_auth_desc'] = 'Anger SMTP-autentisering. Använder inställningarna för mail_smtp_user och mail_smtp_pass.';
 
 $_lang['setting_mail_smtp_helo'] = 'SMTP Helo-meddelande';
 $_lang['setting_mail_smtp_helo_desc'] = 'Anger meddelandet för SMTP HELO (värdnamnet används som standard).';
@@ -349,6 +362,9 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Ta bort de tumnaglar som inte 
 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'Cacha källfiler för phpThumb';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Anger om källfiler ska cachas när de laddas eller inte. Rekommenderas vara inaktiverad.';
+
+$_lang['setting_phpthumb_imagemagick_path'] = 'Sökväg till ImageMagick för phpThumb';
+$_lang['setting_phpthumb_imagemagick_path_desc'] = 'Valfri. Ange en alternativ sökväg till ImageMagick för att generera tumnaglar med phpThumb, om det inte är PHPs standard.';
 
 $_lang['setting_phpthumb_zoomcrop'] = 'Zoom-beskärning för phpThumb';
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'Standardinställningen för zoom-beskärning (zc) i phpThumb när det används i MODx. Är satt till 0 som standard för att förhindra zoom-beskärning.';
@@ -497,8 +513,14 @@ $_lang['setting_websignupemail_message_default'] = 'Hej [+uid+] \n\nHär kommer 
 $_lang['setting_welcome_screen'] = 'Vissa välkomstmeddelande';
 $_lang['setting_welcome_screen_desc'] = 'Om denna sätts till "Ja" kommer ett välkomstmeddelande att visas vid nästa laddning av välkomstsidan och sedan inte visas mer efter det.';
 
+$_lang['setting_welcome_screen_url'] = 'URL för välkomstmeddelande';
+$_lang['setting_welcome_screen_url_desc'] = 'URL:en för det välkomstmeddelande som visas när MODx Revolution laddas för första gången.';
+
 $_lang['setting_which_editor'] = 'Editor att använda';
 $_lang['setting_which_editor_desc'] = 'Här kan du välja vilken richtext-editor du vill använda. Du kan ladda ner och installera fler richtext-editorer i MODx pakethanterare.';
 
 $_lang['setting_which_element_editor'] = 'Editor att använda för element';
 $_lang['setting_which_element_editor_desc'] = 'Här kan du välja vilken richtext-editor du vill använda när du redigerar element. Du kan ladda ner och installera fler richtext-editorer i pakethanteraren.';
+
+$_lang['setting_xhtml_urls'] = 'XHTML-URL:er';
+$_lang['setting_xhtml_urls_desc'] = 'Om denna sätts till Ja kommer alla URL:er som genereras av MODx att vara XHTML-kompatibla inklusive kodning av et-tecken.';
