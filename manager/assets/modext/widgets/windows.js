@@ -140,7 +140,7 @@ MODx.window.CreateResourceGroup = function(config) {
         ,id: this.ident
         ,height: 150
         ,width: 350
-        ,url: MODx.config.connectors_url+'security/documentgroup.php'
+        ,url: MODx.config.connectors_url+'security/resourcegroup.php'
         ,action: 'create'
         ,fields: [{
             fieldLabel: _('name')
