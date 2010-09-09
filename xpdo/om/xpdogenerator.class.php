@@ -33,6 +33,7 @@
  * structure.  It can also reverse-engineer XML schemas from an existing
  * database.
  *
+ * @abstract
  * @package xpdo
  * @subpackage om
  */

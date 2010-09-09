@@ -28,7 +28,7 @@
 /**
  * Include the parent {@link xPDOGenerator} class.
  */
-include_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/xpdogenerator.class.php');
+include_once (dirname(dirname(__FILE__)) . '/xpdogenerator.class.php');
 
 /**
  * An extension for generating {@link xPDOObject} class and map files for SQLite.

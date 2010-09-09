@@ -26,7 +26,7 @@
  */
 
 /** Include the base {@see xPDOQuery} class */
-include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../xpdoquery.class.php');
+include_once (dirname(dirname(__FILE__)) . '/xpdoquery.class.php');
 
 /**
  * An implementation of xPDOQuery for the MySQL database engine.
