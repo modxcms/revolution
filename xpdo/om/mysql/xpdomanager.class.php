@@ -42,24 +42,6 @@ require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/xpdoman
  * @subpackage om.mysql
  */
 class xPDOManager_mysql extends xPDOManager {
-    /**
-     * Get a xPDOManager instance.
-     *
-     * @param object $xpdo A reference to a specific modDataSource instance.
-     */
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-        $this->dbtypes['integer']= array('/INT/i');
-        $this->dbtypes['boolean']= array('/^BOOL/i');
-        $this->dbtypes['float']= array('/^DEC/i','/^NUMERIC$/i','/^FLOAT$/i','/^DOUBLE/i','/^REAL/i');
-        $this->dbtypes['string']= array('/CHAR/i','/TEXT/i','/^ENUM$/i','/^SET$/i','/^TIME$/i','/^YEAR$/i');
-        $this->dbtypes['timestamp']= array('/^TIMESTAMP$/i');
-        $this->dbtypes['datetime']= array('/^DATETIME$/i');
-        $this->dbtypes['date']= array('/^DATE$/i');
-        $this->dbtypes['binary']= array('/BINARY/i','/BLOB/i');
-        $this->dbtypes['bit']= array('/^BIT$/i');
-    }
-
     public function createSourceContainer($dsnArray = null, $username= null, $password= null, $containerOptions= array ()) {
         $created= false;
         if ($dsnArray === null) $dsnArray = xPDO::parseDSN($this->xpdo->getOption('dsn'));
@@ -139,9 +121,9 @@ class xPDOManager_mysql extends xPDOManager {
             }
             $tableMeta= $this->xpdo->getTableMeta($className);
             $tableType= isset($tableMeta['engine']) ? $tableMeta['engine'] : 'MyISAM';
-            $numerics= array_merge($this->dbtypes['integer'], $this->dbtypes['boolean'], $this->dbtypes['float']);
+            $numerics= array_merge($this->xpdo->driver->dbtypes['integer'], $this->xpdo->driver->dbtypes['boolean'], $this->xpdo->driver->dbtypes['float']);
             $datetimeStrings= array('timestamp', 'datetime');
-            $dateStrings= $this->dbtypes['date'];
+            $dateStrings= $this->xpdo->driver->dbtypes['date'];
             $pk= $this->xpdo->getPK($className);
             $pktype= $this->xpdo->getPKType($className);
             $fulltextIndexes= array ();
@@ -165,7 +147,7 @@ class xPDOManager_mysql extends xPDOManager {
                 $default= '';
                 if (isset ($meta['default']) && !preg_match($lobsPattern, $dbtype)) {
                     $defaultVal= $meta['default'];
-                    if (($defaultVal === null || strtoupper($defaultVal) === 'NULL') || (in_array($this->getPhpType($dbtype), $datetimeStrings) && $defaultVal === 'CURRENT_TIMESTAMP')) {
+                    if (($defaultVal === null || strtoupper($defaultVal) === 'NULL') || (in_array($this->xpdo->driver->getPhpType($dbtype), $datetimeStrings) && $defaultVal === 'CURRENT_TIMESTAMP')) {
                         $default= ' DEFAULT ' . $defaultVal;
                     } else {
                         $default= ' DEFAULT \'' . $defaultVal . '\'';

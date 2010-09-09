@@ -134,6 +134,12 @@ class xPDO {
      */
     public $config= null;
     /**
+     * An xPDODriver instance for the connection.
+     * @var xPDODriver
+     * @access public
+     */
+    public $driver= null;
+    /**
      * A map of data source meta data for all loaded classes.
      * @var array
      * @access public
@@ -277,6 +283,7 @@ class xPDO {
                 }
             }
         }
+        $this->getDriver();
         $this->loadClass('xPDOObject');
         $this->loadClass('xPDOSimpleObject');
         if (isset($this->config[xPDO::OPT_BASE_CLASSES])) {
@@ -288,7 +295,7 @@ class xPDO {
             $this->cachePath = $this->config[xPDO::OPT_CACHE_PATH];
         }
     }
-
+    
     /**
      * Create the PDO connection to a database specified in the configuration.
      *
@@ -1220,6 +1227,29 @@ class xPDO {
             }
         }
         return $this->manager;
+    }
+
+    /**
+     * Gets the driver class for this xPDO connection.
+     *
+     * The driver class provides baseline data and operations for a specific database driver.
+     *
+     * @uses xPDODriver
+     * @return object|null A driver instance for the xPDO connection, or null
+     * if a driver class can not be instantiated.
+     */
+    public function getDriver() {
+        if ($this->driver === null || !$this->driver instanceof xPDODriver) {
+            $loaded= include_once(XPDO_CORE_PATH . 'om/' . $this->config['dbtype'] . '/xpdodriver.class.php');
+            if ($loaded) {
+                $driverClass = 'xPDODriver_' . $this->config['dbtype'];
+                $this->driver= new $driverClass ($this);
+            }
+            if (!$this->driver) {
+                $this->log(xPDO::LOG_LEVEL_ERROR, "Could not load xPDODriver class for the {$this->config['dbtype']} PDO driver.");
+            }
+        }
+        return $this->driver;
     }
 
     /**

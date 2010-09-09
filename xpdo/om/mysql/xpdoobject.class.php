@@ -31,7 +31,7 @@
 
 if (!class_exists('xPDOObject')) {
     /** Include the parent {@link xPDOObject} class. */
-    include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../xpdoobject.class.php');
+    include_once (dirname(dirname(__FILE__)) . '/xpdoobject.class.php');
 }
 
 /**
@@ -42,28 +42,7 @@ if (!class_exists('xPDOObject')) {
  * @package xpdo
  * @subpackage om.mysql
  */
-class xPDOObject_mysql extends xPDOObject {
-    public $_currentTimestamps= array (
-        'CURRENT_TIMESTAMP',
-        'CURRENT_TIMESTAMP()',
-        'NOW()',
-        'LOCALTIME',
-        'LOCALTIME()',
-        'LOCALTIMESTAMP',
-        'LOCALTIMESTAMP()',
-        'SYSDATE()'
-    );
-    public $_currentDates= array (
-        'CURDATE()',
-        'CURRENT_DATE',
-        'CURRENT_DATE()'
-    );
-    public $_currentTimes= array (
-        'CURTIME()',
-        'CURRENT_TIME',
-        'CURRENT_TIME()'
-    );
-}
+class xPDOObject_mysql extends xPDOObject {}
 
 /**
  * Extend this abstract class to define a class having an integer primary key.
@@ -71,25 +50,4 @@ class xPDOObject_mysql extends xPDOObject {
  * @package xpdo
  * @subpackage om.mysql
  */
-class xPDOSimpleObject_mysql extends xPDOSimpleObject {
-    public $_currentTimestamps= array (
-        'CURRENT_TIMESTAMP',
-        'CURRENT_TIMESTAMP()',
-        'NOW()',
-        'LOCALTIME',
-        'LOCALTIME()',
-        'LOCALTIMESTAMP',
-        'LOCALTIMESTAMP()',
-        'SYSDATE()'
-    );
-    public $_currentDates= array (
-        'CURDATE()',
-        'CURRENT_DATE',
-        'CURRENT_DATE()'
-    );
-    public $_currentTimes= array (
-        'CURTIME()',
-        'CURRENT_TIME',
-        'CURRENT_TIME()'
-    );
-}
+class xPDOSimpleObject_mysql extends xPDOSimpleObject {}
