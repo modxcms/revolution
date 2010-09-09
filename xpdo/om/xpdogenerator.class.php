@@ -492,7 +492,7 @@ abstract class xPDOGenerator {
             }
             $fileContent= str_replace(array_keys($replaceVars), array_values($replaceVars), $this->classTemplate);
             if (is_dir($path)) {
-                $fileName= $path . '/' . strtolower($className) . '.class.php';
+                $fileName= $path . strtolower($className) . '.class.php';
                 if (!file_exists($fileName)) {
                     if ($file= @ fopen($fileName, 'wb')) {
                         if (!fwrite($file, $fileContent)) {
