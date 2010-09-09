@@ -19,6 +19,6 @@ $_lang['content_type_err_remove'] = 'Произошла ошибка при по
 $_lang['content_type_err_save'] = 'Произошла ошибка при попытке сохранить тип содержимого.';
 $_lang['content_type_new'] = 'Новый тип содержимого';
 $_lang['content_type_remove'] = 'Удалить тип содержимого';
-$_lang['content_type_remove_confirm'] = 'Вы уверенны, что хотите удалить этот тип содержимого?';
+$_lang['content_type_remove_confirm'] = 'Вы уверены, что хотите удалить этот тип содержимого?';
 $_lang['content_types'] = 'Типы содержимого';
 $_lang['file_extensions'] = 'Расширение файла';

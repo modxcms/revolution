@@ -6,15 +6,15 @@
 * @subpackage lexicon
 */
 $_lang['test_config_file'] = 'Проверка существования файла <span class="mono">[[+file]]</span> и возможности записи в него: ';
-$_lang['test_config_file_nw'] = 'Для новой установки на Linux/Unix системах, создайте пустой файл с именем <span class="mono">[[+key]].inc.php</span> в папке <span class="mono">config/</span> с разрешениями, позволяющими веб-серверу его изменять.';
+$_lang['test_config_file_nw'] = 'Для новой установки на Linux/Unix системах, создайте пустой файл с именем <span class="mono">[[+key]].inc.php</span> в каталоге <span class="mono">config/</span> с правами доступа, позволяющими веб-серверу его изменять.';
 $_lang['test_db_check'] = 'Соединение с базой данных:';
 $_lang['test_db_check_conn'] = 'Проверьте параметры соединения и повторите попытку.';
 $_lang['test_db_failed'] = 'Соединение с базой данных не установлено!';
 $_lang['test_db_setup_create'] = 'Программа установки попытается создать базу данных.';
-$_lang['test_dependencies'] = 'Проверка PHP модуля zlib: ';
-$_lang['test_dependencies_fail_zlib'] = 'Конфигурация PHP не имеет подключённого расширения zlib. Это расширение является необходимым для запуска MODx. Включите это расширение для продолжения установки.';
-$_lang['test_directory_exists'] = 'Проверка существования папки <span class="mono">[[+dir]]</span> : ';
-$_lang['test_directory_writable'] = 'Проверка возможности записи в папку <span class="mono">[[+dir]]</span>: ';
+$_lang['test_dependencies'] = 'Проверка PHP расширения zlib: ';
+$_lang['test_dependencies_fail_zlib'] = 'Конфигурация PHP не имеет подключённого расширения zlib. Это расширение является необходимым для запуска MODx. Подключите это расширение для продолжения установки.';
+$_lang['test_directory_exists'] = 'Проверка существования каталога <span class="mono">[[+dir]]</span> : ';
+$_lang['test_directory_writable'] = 'Проверка возможности записи в каталог <span class="mono">[[+dir]]</span>: ';
 $_lang['test_memory_limit'] = 'Проверка ограничения выделяемой памяти (должно быть не менее 24 MБ): ';
 $_lang['test_memory_limit_fail'] = 'Параметр memory_limit меньше 24 МБ. MODx не смог самостоятельно его повысить. Для продолжения, установите в файле php.ini этот параметр равным или больше 24 MБ. Если это не решило проблему (пустой белый экран во время установки), повышайте memory_limit до 32 МБ, 64 МБ или выше.';
 $_lang['test_memory_limit_success'] = 'OK! memory_limit равен [[+memory]]';
@@ -43,5 +43,5 @@ $_lang['test_table_prefix_inuse'] = 'Такой префикс таблиц уж
 $_lang['test_table_prefix_inuse_desc'] = 'Установка не может быть произведена в выбранной базе данных, поскольку она уже содержит таблицы с указанным префиксом. Выберите другой table_prefix и попробуйте ещё раз.';
 $_lang['test_table_prefix_nf'] = 'В выбранной базе данных нет такого префикса таблиц!';
 $_lang['test_table_prefix_nf_desc'] = 'Продолжение установки невозможно, так как нет таблиц с указанным префиксом. Измените table_prefix и попробуйте ещё раз.';
-$_lang['test_zip_memory_limit'] = 'Проверка ограничения выделяемой памяти (для расширений zip должно быть не менее 24 MБ): ';
+$_lang['test_zip_memory_limit'] = 'Проверка ограничения выделяемой памяти (должно быть не менее 24 MБ): ';
 $_lang['test_zip_memory_limit_fail'] = 'Параметр memory_limit меньше 24 МБ. MODx не смог самостоятельно его повысить. Для корректной работы расширений zip, установите в файле php.ini этот параметр равным или больше 24 MБ.';
