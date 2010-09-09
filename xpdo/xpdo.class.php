@@ -208,11 +208,17 @@ class xPDO {
      */
     public $_cacheEnabled= false;
     /**
-     * Indicates the escape character used for a particular database engine.
+     * Indicates the opening escape character used for a particular database engine.
      * @var string
      * @access public
      */
-    public $_escapeChar= '';
+    public $_escapeCharOpen= '';
+    /**
+     * Indicates the closing escape character used for a particular database engine.
+     * @var string
+     * @access public
+     */
+    public $_escapeCharClose= '';
 
     /**
      * The xPDO Constructor.
@@ -242,10 +248,12 @@ class xPDO {
         $this->config['driverOptions']= is_array($driverOptions) ? $driverOptions : array();
         switch ($this->config['dbtype']) {
             case 'mysql':
-                $this->_escapeChar= "`";
+                $this->_escapeCharOpen= "`";
+                $this->_escapeCharClose= "`";
                 break;
             case 'sqlite':
-                $this->_escapeChar= '"';
+                $this->_escapeCharOpen= '"';
+                $this->_escapeCharClose= '"';
                 break;
             default:
                 break;
@@ -1454,12 +1462,12 @@ class xPDO {
      * escape column names that might match a reserved string for that SQL interpreter. To write database agnostic
      * queries with xPDO, it is highly recommend to escape any database or column names in any native SQL strings used.
      *
-     * @param string $string A string to escape using the platform-specific escape character.
-     * @return string The string escaped with the platform-specific escape character.
+     * @param string $string A string to escape using the platform-specific escape characters.
+     * @return string The string escaped with the platform-specific escape characters.
      */
     public function escape($string) {
-        $string = trim($string, $this->_escapeChar);
-        return $this->_escapeChar . $string . $this->_escapeChar;
+        $string = trim($string, $this->_escapeCharOpen . $this->_escapeCharClose);
+        return $this->_escapeCharOpen . $string . $this->_escapeCharClose;
     }
 
 	/**
@@ -1469,7 +1477,7 @@ class xPDO {
 	 * @return string The string with any escape or quote characters trimmed.
 	 */
 	public function literal($string) {
-		$string = trim($string, $this->_escapeChar . $this->_quoteChar);
+		$string = trim($string, $this->_escapeCharOpen . $this->_escapeCharClose . $this->_quoteChar);
 		return $string;
 	}
 
