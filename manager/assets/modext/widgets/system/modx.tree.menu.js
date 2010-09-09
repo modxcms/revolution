@@ -63,9 +63,8 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
                     'success': {fn:function(r) { this.refresh(); },scope:this}
                 }
             });
-        } else {
-            this.windows.update_menu.setValues(r);
         }
+        this.windows.update_menu.setValues(r);
         this.windows.update_menu.show(e.target);
     }
 	

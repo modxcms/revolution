@@ -52,10 +52,19 @@ if (!empty($scriptProperties['new_text']) && $scriptProperties['new_text'] != $m
     $alreadyExists = $modx->getObject('modMenu',$scriptProperties['new_text']);
     if ($alreadyExists) { return $modx->error->failure($modx->lexicon('menu_err_ae')); }
 
+
+    $children = $modx->getCollection('modMenu',array(
+        'parent' => $menu->get('text'),
+    ));
+
     $newMenu = $modx->newObject('modMenu');
     $newMenu->fromArray($menu->toArray());
     $newMenu->set('text',$scriptProperties['new_text']);
     if ($newMenu->save()) {
+        foreach ($children as $child) {
+            $child->set('parent',$newMenu->get('text'));
+            $child->save();
+        }
         $menu->remove();
     }
 }
