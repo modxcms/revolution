@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- Fixed issue where > 20 records were not showing in ACL lists in User Group edit panel
 - [#MODX-2206] Prevent issue where renaming a menu's lexicon key orphans child menus
 - Fixed rendering bugs in file edit panel, as well as optimized its loading and streamlined RTE integration on the panel
 - [#MODX-2202] Removed deprecated modAction objects to prevent confusion

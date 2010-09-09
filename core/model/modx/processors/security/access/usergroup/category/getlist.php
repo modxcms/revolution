@@ -40,7 +40,7 @@ $c->where(array(
 ));
 if (!empty($category)) $c->where(array('target' => $category));
 if (!empty($policy)) $c->where(array('policy' => $policy));
-$count = $modx->getCount('modAccessCategory');
+$count = $modx->getCount('modAccessCategory',$c);
 $c->leftJoin('modUserGroupRole','Role','`Role`.`authority` = `modAccessCategory`.`authority`');
 $c->leftJoin('modAccessPolicy','Policy');
 $c->select('
@@ -72,4 +72,4 @@ foreach ($acls as $acl) {
     );
     $list[] = $aclArray;
 }
-return $this->outputArray($list);
+return $this->outputArray($list,$count);
