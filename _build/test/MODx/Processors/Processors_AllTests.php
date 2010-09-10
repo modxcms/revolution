@@ -22,6 +22,7 @@
  * @package modx-test
  */
 require_once 'Browser/Directory.php';
+require_once 'Browser/File.php';
 /**
  * Suite handling all Processors tests.
  *
@@ -29,8 +30,9 @@ require_once 'Browser/Directory.php';
  */
 class Processors_AllTests extends PHPUnit_Framework_TestSuite {
     public static function suite() {
-        $suite = new Processors_AllTests('MODxClassTest');
+        $suite = new Processors_AllTests('ProcessorsTest');
         $suite->addTestSuite('BrowserDirectoryProcessors');
+        $suite->addTestSuite('BrowserFileProcessors');
         return $suite;
     }
 }
