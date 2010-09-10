@@ -22,7 +22,7 @@
  * @package modx-test
  */
 /**
- * Tests related to basic MODx class methods
+ * Tests related to browser/directory/ processors
  *
  * @package modx-test
  * @subpackage modx
@@ -31,7 +31,7 @@ class BrowserDirectoryProcessors extends MODxTestCase {
     const PROCESSOR_LOCATION = 'browser/directory';
 
     /**
-     * Tests the browser/directory/create processor
+     * Tests the browser/directory/create processor, which creates a directory
      * @dataProvider providerCreate
      */
     public function testCreate($dir = '') {
@@ -57,8 +57,6 @@ class BrowserDirectoryProcessors extends MODxTestCase {
     }
     /**
      * Data provider for create processor test.
-     * 
-     * Note: Make sure this data is synced with the providerCreate method.
      */
     public function providerCreate() {
         return array(
@@ -68,7 +66,45 @@ class BrowserDirectoryProcessors extends MODxTestCase {
     }
 
     /**
-     * @dataProvider providerCreate
+     * Tests  the browser/directory/update processor, which renames a directory
+     * 
+     * @depends testCreate
+     * @dataProvider providerUpdate
+     */
+    public function testUpdate($oldDirectory = '',$newDirectory = '') {
+        if (empty($oldDirectory) || empty($newDirectory)) return false;
+        $modx = MODxTestHarness::_getConnection();
+
+        $modx->setOption('filemanager_path','');
+        $modx->setOption('filemanager_url','');
+        $modx->setOption('rb_base_dir','');
+        $modx->setOption('rb_base_url','');
+
+        try {
+            $_POST['dir'] = $oldDirectory;
+            $_POST['name'] = MODX_BASE_PATH.$newDirectory;
+            $result = $modx->executeProcessor(array(
+                'location' => BrowserDirectoryProcessors::PROCESSOR_LOCATION,
+                'action' => 'update',
+            ));
+        } catch (Exception $e) {
+            $modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $s = $this->checkForSuccess($modx,$result);
+        $this->assertTrue($s,'Could not rename directory '.$oldDirectory.' to '.$newDirectory.' in browser/directory/update test.');
+    }
+    /**
+     * Data provider for update processor test
+     */
+    public function providerUpdate() {
+        return array(
+            array('assets3/','assets4/'),
+        );
+    }
+
+    /**
+     * Tests the browser/directory/remove processor, which removes a directory
+     * @dataProvider providerRemove
      * @param string $dir
      */
     public function testRemove($dir = '') {
@@ -94,13 +130,11 @@ class BrowserDirectoryProcessors extends MODxTestCase {
     }
     /**
      * Data provider for remove processor test.
-     *
-     * Note: Make sure this data is synced with the providerCreate method.
      */
     public function providerRemove() {
         return array(
             array('assets2'),
-            array('assets3/'),
+            array('assets4/'),
         );
     }
 
@@ -122,17 +156,21 @@ class BrowserDirectoryProcessors extends MODxTestCase {
         $modx->setOption('rb_base_url','');
         
         $_POST['id'] = $dir;
-        $result = $modx->executeProcessor(array(
-            'location' => BrowserDirectoryProcessors::PROCESSOR_LOCATION,
-            'action' => 'getList',
-        ));
+        try {
+            $result = $modx->executeProcessor(array(
+                'location' => BrowserDirectoryProcessors::PROCESSOR_LOCATION,
+                'action' => 'getList',
+            ));
+        } catch (Exception $e) {
+            $modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
         if (!is_array($result)) $result = $modx->fromJSON($result);
 
         /* ensure correct test result */
         $success = $shouldWork ?
             empty($result['success']) || $result['success'] == true
             : isset($result['success']) && $result['success'] == false;
-        $this->assertTrue($success);
+        $this->assertTrue($success,'Could get list of files and dirs for '.$dir.' in browser/directory/getList test.');
     }
     /**
      * Test data provider for getList processor
