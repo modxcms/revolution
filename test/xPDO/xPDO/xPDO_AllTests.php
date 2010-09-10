@@ -4,6 +4,7 @@
  * @subpackage xpdo
  */
 require_once 'xPDO.php';
+require_once 'xPDOObject.php';
 /**
  * Suite handling all xPDO-class centric tests.
  *
@@ -12,6 +13,9 @@ require_once 'xPDO.php';
  */
 class xPDO_AllTests extends PHPUnit_Framework_TestSuite {
     public static function suite() {
-        return new xPDO_AllTests('xPDOTest');
+        $suite = new xPDO_AllTests('xPDOClassTest');
+        $suite->addTestSuite('xPDOTest');
+        $suite->addTestSuite('xPDOObjectTest');
+        return $suite;
     }
 }
