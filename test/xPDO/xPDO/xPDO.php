@@ -198,4 +198,15 @@ class xPDOTest extends xPDOTestCase {
         $cachePath = $xpdo->getCachePath();
         $this->assertEquals($cachePath,XPDO_CORE_PATH.'cache/','xpdo->getCachePath() did not return the correct cache path.');
     }
+    
+    /**
+     * Verify xPDO::newQuery returns a xPDOQuery object
+     */
+    public function testNewQuery() {
+        $this->xpdo = xPDOTestHarness::_getConnection();
+        $criteria = $this->xpdo->newQuery('Person');
+        $success = is_object($criteria) && $criteria instanceof xPDOQuery;
+        $this->assertTrue($success);
+    }
+
 }
