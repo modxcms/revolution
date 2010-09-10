@@ -61,7 +61,9 @@ class MODxTestHarness extends PHPUnit_Framework_TestSuite {
      * @return xPDO An xPDO object instance.
      */
     public static function _getConnection($options = array()) {
-        if (is_object(MODxTestHarness::$modx)) return MODxTestHarness::$modx;
+        if (is_object(MODxTestHarness::$modx)) {
+            return MODxTestHarness::$modx;
+        }
 
         print 'Attempting to create MODx singleton object.'."\n";
         

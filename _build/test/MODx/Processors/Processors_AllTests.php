@@ -23,6 +23,7 @@
  */
 require_once 'Browser/Directory.php';
 require_once 'Browser/File.php';
+require_once 'Context/Context.php';
 /**
  * Suite handling all Processors tests.
  *
@@ -31,8 +32,9 @@ require_once 'Browser/File.php';
 class Processors_AllTests extends PHPUnit_Framework_TestSuite {
     public static function suite() {
         $suite = new Processors_AllTests('ProcessorsTest');
-        $suite->addTestSuite('BrowserDirectoryProcessors');
-        $suite->addTestSuite('BrowserFileProcessors');
+        //$suite->addTestSuite('BrowserDirectoryProcessors');
+        //$suite->addTestSuite('BrowserFileProcessors');
+        $suite->addTestSuite('ContextProcessors');
         return $suite;
     }
 }

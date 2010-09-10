@@ -31,17 +31,21 @@ class MODxTestCase extends PHPUnit_Framework_TestCase {
 
     protected $modx = null;
 
+    /**
+     * Ensure all tests have a reference to the MODx object
+     */
     public function setUp() {
-        
+        $this->modx =& MODxTestHarness::_getConnection();
     }
 
-    public function tearDown() {
-        $this->modx = null;
-    }
-    
-    public function checkForSuccess(&$modx,$result) {
+    /**
+     * Check a MODx return result for a success flag
+     *
+     * @param array $result The result response
+     */
+    public function checkForSuccess(&$result) {
         if ($result === true) return true;
-        if (!is_array($result)) $result = $modx->fromJSON($result);
+        if (!is_array($result)) $result = $this->modx->fromJSON($result);
         $success = !empty($result['success']) && $result['success'] = true;
         return $success;
     }

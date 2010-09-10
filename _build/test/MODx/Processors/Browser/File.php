@@ -37,26 +37,23 @@ class BrowserFileProcessors extends MODxTestCase {
      */
     public function testGet($file = '') {
         if (empty($file)) return false;
-        $modx = MODxTestHarness::_getConnection();
 
-        $modx->setOption('filemanager_path','');
-        $modx->setOption('filemanager_url','');
-        $modx->setOption('rb_base_dir','');
-        $modx->setOption('rb_base_url','');
+        $this->modx->setOption('filemanager_path','');
+        $this->modx->setOption('filemanager_url','');
+        $this->modx->setOption('rb_base_dir','');
+        $this->modx->setOption('rb_base_url','');
         
         try {
             $_POST['file'] = MODX_BASE_PATH.$file;
-            $result = $modx->executeProcessor(array(
+            $result = $this->modx->executeProcessor(array(
                 'location' => BrowserFileProcessors::PROCESSOR_LOCATION,
                 'action' => 'get',
             ));
         } catch (Exception $e) {
-            $modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
-        if (is_string($result)) { $result = $modx->fromJSON($result); }
-
-        $s = $this->checkForSuccess($modx,$result);
-        $this->assertTrue($s,'Could not get file '.$file.' in browser/file/get test.');
+        $s = $this->checkForSuccess($result);
+        $this->assertTrue($s,'Could not get file '.$file.' in browser/file/get test: '.$result['message']);
     }
     /**
      * Data provider for get processor test.
