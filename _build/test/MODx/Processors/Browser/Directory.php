@@ -28,6 +28,81 @@
  * @subpackage modx
  */
 class BrowserDirectoryProcessors extends MODxTestCase {
+    const PROCESSOR_LOCATION = 'browser/directory';
+
+    /**
+     * Tests the browser/directory/create processor
+     * @dataProvider providerCreate
+     */
+    public function testCreate($dir = '') {
+        if (empty($dir)) return false;
+        $modx = MODxTestHarness::_getConnection();
+        
+        $modx->setOption('filemanager_path','');
+        $modx->setOption('filemanager_url','');
+        $modx->setOption('rb_base_dir','');
+        $modx->setOption('rb_base_url','');
+
+        try {
+            $_POST['name'] = $dir;
+            $result = $modx->executeProcessor(array(
+                'location' => BrowserDirectoryProcessors::PROCESSOR_LOCATION,
+                'action' => 'create',
+            ));
+        } catch (Exception $e) {
+            $modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $s = $this->checkForSuccess($modx,$result);
+        $this->assertTrue($s,'Could not create directory '.$dir.' in browser/directory/create test.');
+    }
+    /**
+     * Data provider for create processor test.
+     * 
+     * Note: Make sure this data is synced with the providerCreate method.
+     */
+    public function providerCreate() {
+        return array(
+            array('assets2'),
+            array('assets3/'),
+        );
+    }
+
+    /**
+     * @dataProvider providerCreate
+     * @param string $dir
+     */
+    public function testRemove($dir = '') {
+        if (empty($dir)) return false;
+        $modx = MODxTestHarness::_getConnection();
+
+        $modx->setOption('filemanager_path','');
+        $modx->setOption('filemanager_url','');
+        $modx->setOption('rb_base_dir','');
+        $modx->setOption('rb_base_url','');
+
+        try {
+            $_POST['dir'] = $dir;
+            $result = $modx->executeProcessor(array(
+                'location' => BrowserDirectoryProcessors::PROCESSOR_LOCATION,
+                'action' => 'remove',
+            ));
+        } catch (Exception $e) {
+            $modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $s = $this->checkForSuccess($modx,$result);
+        $this->assertTrue($s);
+    }
+    /**
+     * Data provider for remove processor test.
+     *
+     * Note: Make sure this data is synced with the providerCreate method.
+     */
+    public function providerRemove() {
+        return array(
+            array('assets2'),
+            array('assets3/'),
+        );
+    }
 
     /**
      * Tests the browser/directory/getList processor
@@ -48,7 +123,7 @@ class BrowserDirectoryProcessors extends MODxTestCase {
         
         $_POST['id'] = $dir;
         $result = $modx->executeProcessor(array(
-            'location' => 'browser/directory',
+            'location' => BrowserDirectoryProcessors::PROCESSOR_LOCATION,
             'action' => 'getList',
         ));
         if (!is_array($result)) $result = $modx->fromJSON($result);

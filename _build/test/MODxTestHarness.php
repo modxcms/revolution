@@ -77,6 +77,9 @@ class MODxTestHarness extends PHPUnit_Framework_TestSuite {
 
         $debug = !empty($options['debug']);
         $modx->setDebug($debug);
+        $modx->user = $modx->newObject('modUser');
+        $modx->user->set('id',$modx->getOption('modx.test.user.id',1));
+        $modx->user->set('username',$modx->getOption('modx.test.user.username','test'));
         
         MODxTestHarness::$modx = $modx;
         return $modx;

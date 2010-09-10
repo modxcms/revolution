@@ -37,5 +37,12 @@ class MODxTestCase extends PHPUnit_Framework_TestCase {
 
     public function tearDown() {
         $this->modx = null;
-    }    
+    }
+    
+    public function checkForSuccess(&$modx,$result) {
+        if ($result === true) return true;
+        if (!is_array($result)) $result = $modx->fromJSON($result);
+        $success = !empty($result['success']) && $result['success'] = true;
+        return $success;
+    }
 }
