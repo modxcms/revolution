@@ -18,7 +18,7 @@ class xPDOTest extends xPDOTestCase {
             $dsn = xPDO::parseDSN($dsn);
             $success = $xpdo->getManager()->removeSourceContainer($dsn);
         }
-        $this->assertTrue($success, "Test container exists and could not be removed for initialization.");
+        $this->assertTrue($success, "Test container exists and could not be removed for initialization via xPDOManager->removeSourceContainer()");
     }
 
     /**
@@ -40,7 +40,7 @@ class xPDOTest extends xPDOTestCase {
         $this->xpdo = xPDOTestHarness::_getConnection();
         print __METHOD__ ." - Testing for xPDO Connection. \n";
         $connect = $this->xpdo->connect();
-        $this->assertTrue($connect);
+        $this->assertTrue($connect,'xPDO could not connect via xpdo->connect().');
     }
 
     /**
@@ -98,4 +98,104 @@ class xPDOTest extends xPDOTestCase {
         $this->assertTrue($result == false, "Error testing overwriting source container with createSourceContainer() method");
     }
 
+    /**
+     * Tests xPDO::escape
+     */
+    public function testEscape() {
+        $xpdo = xPDOTestHarness::_getConnection();
+
+        $correct = 'test';
+        $correct = trim($correct, $xpdo->_escapeCharOpen . $xpdo->_escapeCharClose);
+        $correct = $xpdo->_escapeCharOpen . $correct . $xpdo->_escapeCharClose;
+
+        $eco = $xpdo->_escapeCharOpen;
+        $ecc = $xpdo->_escapeCharClose;
+        $this->assertEquals($correct,$xpdo->escape('test'),'xpdo->escape() did not correctly escape.');
+        $this->assertEquals($correct,$xpdo->escape($eco.'test'),'xpdo->escape() did not strip the beginning escape character before escaping.');
+        $this->assertEquals($correct,$xpdo->escape($eco.'test'.$ecc),'xpdo->escape() did not strip the beginning and end escape character before escaping.');
+        $this->assertEquals($correct,$xpdo->escape('test'.$ecc),'xpdo->escape() did not strip the end escape character before escaping.');
+    }
+
+    /**
+     * Test xPDO::escSplit
+     */
+    public function testEscSplit() {
+        $xpdo = xPDOTestHarness::_getConnection();
+        
+        $str = '1,2,3';
+        $result = xPDO::escSplit(',',$str,$xpdo->_escapeCharOpen);
+        $this->assertTrue(is_array($result),'xPDO::escSplit did not return an array.');
+        $this->assertEquals(3,count($result),'xPDO::escSplit did not return the correct number of indices.');
+    }
+
+    /**
+     * Test xPDO::fromJSON
+     */
+    public function testFromJson() {
+        $xpdo = xPDOTestHarness::_getConnection();
+
+        $json = '{"key":"value","nested":{"foo":"123","another":"test"}}';
+        $result = $xpdo->fromJSON($json);
+        $this->assertTrue(is_array($result),'xpdo->fromJSON() did not return an array.');
+    }
+
+    /**
+     * Test xPDO::toJSON
+     */
+    public function testToJson() {
+        $xpdo = xPDOTestHarness::_getConnection();
+
+        $array = array(
+            'key' => 'value',
+            'nested' => array(
+                'foo' => '123',
+                'another' => 'test',
+            ),
+        );
+        $result = $xpdo->toJSON($array);
+        $this->assertTrue(is_string($result),'xpdo->fromJSON() did not return an array.');
+    }
+
+    /**
+     * Test xPDO::getManager
+     */
+    public function testGetManager() {
+        $xpdo = xPDOTestHarness::_getConnection();
+
+        $manager = $xpdo->getManager();
+        $success = is_object($manager) && $manager instanceof xPDOManager;
+        $this->assertTrue($success,'xpdo->getManager did not return an xPDOManager instance.');
+    }
+
+    /**
+     * Test xPDO::getDriver
+     */
+    public function testGetDriver() {
+        $xpdo = xPDOTestHarness::_getConnection();
+
+        $driver = $xpdo->getDriver();
+        $success = is_object($driver) && $driver instanceof xPDODriver;
+        $this->assertTrue($success,'xpdo->getDriver did not return an xPDODriver instance.');
+    }
+
+    /**
+     * Test xPDO::getCacheManager
+     */
+    public function testGetCacheManager() {
+        $xpdo = xPDOTestHarness::_getConnection();
+
+        $cacheManager = $xpdo->getCacheManager();
+        $success = is_object($cacheManager) && $cacheManager instanceof xPDOCacheManager;
+        $this->assertTrue($success,'xpdo->getCacheManager did not return an xPDOCacheManager instance.');
+    }
+
+    /**
+     * Test xPDO::getCachePath
+     */
+    public function testGetCachePath() {
+        $xpdo = xPDOTestHarness::_getConnection();
+
+        $cachePath = $xpdo->getCachePath();
+        $this->assertEquals($cachePath,XPDO_CORE_PATH.'cache/','xpdo->getCachePath() did not return the correct cache path.');
+    }
 }
