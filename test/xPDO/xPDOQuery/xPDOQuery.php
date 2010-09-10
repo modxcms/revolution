@@ -96,15 +96,15 @@ class xPDOQueryTest extends xPDOTestCase {
 
     /**
      * Test = xPDOQuery condition
+     * @dataProvider providerEquals
      */
-    public function testEquals() {
+    public function testEquals($a) {
         $xpdo = xPDOTestHarness::_getConnection();
 
-        /* test > */
         try {
             $criteria = $xpdo->newQuery('Person');
             $criteria->where(array(
-                'security_level:=' => 3,
+                'security_level:=' => $a,
             ));
             $result = $xpdo->getCollection('Person',$criteria);
         } catch (Exception $e) {
@@ -112,18 +112,26 @@ class xPDOQueryTest extends xPDOTestCase {
         }
         $this->assertTrue(!empty($result),'xPDOQuery: = Clause does not find the correct result.');
     }
+    /**
+     * Test condition provider for testEquals
+     */
+    public function providerEquals() {
+        return array(
+            array(1,3),
+        );
+    }
 
     /**
      * Test != xPDOQuery condition
+     * @dataProvider providerNotEquals
      */
-    public function testNotEquals() {
+    public function testNotEquals($a) {
         $xpdo = xPDOTestHarness::_getConnection();
 
-        /* test > */
         try {
             $criteria = $xpdo->newQuery('Person');
             $criteria->where(array(
-                'security_level:!=' => 1,
+                'security_level:!=' => $a,
             ));
             $result = $xpdo->getCollection('Person',$criteria);
         } catch (Exception $e) {
@@ -131,18 +139,27 @@ class xPDOQueryTest extends xPDOTestCase {
         }
         $this->assertTrue(!empty($result),'xPDOQuery: != Clause does not find the correct result.');
     }
+    /**
+     * Test condition provider for testEquals
+     */
+    public function providerNotEquals() {
+        return array(
+            array(1,3,999,-1,'aaa'),
+        );
+    }
 
     /**
      * Test > xPDOQuery condition
+     * @dataProvider providerGreaterThan
      */
-    public function testGreaterThan() {
+    public function testGreaterThan($a) {
         $xpdo = xPDOTestHarness::_getConnection();
 
         /* test > */
         try {
             $criteria = $xpdo->newQuery('Person');
             $criteria->where(array(
-                'security_level:>' => 2,
+                'security_level:>' => $a,
             ));
             $result = $xpdo->getCollection('Person',$criteria);
         } catch (Exception $e) {
@@ -150,16 +167,25 @@ class xPDOQueryTest extends xPDOTestCase {
         }
         $this->assertTrue(!empty($result),'xPDOQuery: > Clause does not find the correct result.');
     }
+    /**
+     * Test condition provider for testGreaterThan
+     */
+    public function providerGreaterThan() {
+        return array(
+            array(2,0,-1),
+        );
+    }
 
     /**
      * Test >= xPDOQuery condition
+     * @dataProvider providerGreaterThanEquals
      */
-    public function testGreaterThanEquals() {
+    public function testGreaterThanEquals($a) {
         $xpdo = xPDOTestHarness::_getConnection();
         try {
             $criteria = $xpdo->newQuery('Person');
             $criteria->where(array(
-                'security_level:>=' => 3,
+                'security_level:>=' => $a,
             ));
             $result = $xpdo->getCollection('Person',$criteria);
         } catch (Exception $e) {
@@ -167,16 +193,25 @@ class xPDOQueryTest extends xPDOTestCase {
         }
         $this->assertTrue(!empty($result),'xPDOQuery: >= Clause does not find the correct result.');
     }
+    /**
+     * Test condition provider for testGreaterThanEquals
+     */
+    public function providerGreaterThanEquals() {
+        return array(
+            array(3,0,-1),
+        );
+    }
 
     /**
      * Test < xPDOQuery condition
+     * @dataProvider providerLessThan
      */
-    public function testLessThan() {
+    public function testLessThan($a) {
         $xpdo = xPDOTestHarness::_getConnection();
         try {
             $criteria = $xpdo->newQuery('Person');
             $criteria->where(array(
-                'security_level:<' => 4,
+                'security_level:<' => $a,
             ));
             $result = $xpdo->getCollection('Person',$criteria);
         } catch (Exception $e) {
@@ -184,9 +219,18 @@ class xPDOQueryTest extends xPDOTestCase {
         }
         $this->assertTrue(!empty($result),'xPDOQuery: < Clause does not find the correct result.');
     }
+    /**
+     * Test condition provider for testLessThan
+     */
+    public function providerLessThan() {
+        return array(
+            array(4,999),
+        );
+    }
 
     /**
      * Test <= xPDOQuery condition
+     * @dataProvider providerLessThanEquals
      */
     public function testLessThanEquals() {
         $xpdo = xPDOTestHarness::_getConnection();
@@ -201,9 +245,18 @@ class xPDOQueryTest extends xPDOTestCase {
         }
         $this->assertTrue(!empty($result),'xPDOQuery: <= Clause does not find the correct result.');
     }
+    /**
+     * Test condition provider for testLessThan
+     */
+    public function providerLessThanEquals() {
+        return array(
+            array(4,999),
+        );
+    }
 
     /**
      * Test <> xPDOQuery condition
+     * @dataProvider providerNotGTLT
      */
     public function testNotGTLT() {
         $xpdo = xPDOTestHarness::_getConnection();
@@ -217,6 +270,14 @@ class xPDOQueryTest extends xPDOTestCase {
             $xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
         $this->assertTrue(!empty($result),'xPDOQuery: <> Clause does not find the correct result.');
+    }
+    /**
+     * Test condition provider for testLessThan
+     */
+    public function providerNotGTLT() {
+        return array(
+            array(4,999,'abc'),
+        );
     }
     
     /**
@@ -308,17 +369,18 @@ class xPDOQueryTest extends xPDOTestCase {
 
     /**
      * Test nested array conditions
+     * @dataProvider providerNestedConditions
      */
-    public function testNestedConditions() {
+    public function testNestedConditions($level,$lastName,$gender) {
         $xpdo = xPDOTestHarness::_getConnection();
 
         try {
             $criteria = $xpdo->newQuery('Person');
             $criteria->where(array(
-                'security_level:>' => 4,
+                'security_level:>' => $level,
                 array(
-                    'OR:last_name:LIKE' => '%Do%',
-                    'gender:=' => 'M',
+                    'OR:last_name:LIKE' => $lastName,
+                    'gender:=' => $gender,
                 ),
             ));
             $result = $xpdo->getCollection('Person',$criteria);
@@ -327,16 +389,31 @@ class xPDOQueryTest extends xPDOTestCase {
         }
         $this->assertTrue(!empty($result),'xPDOQuery: Nested condition clause does not find the correct result.');
     }
+    /**
+     * Data provider for testNestedConditions
+     */
+    public function providerNestedConditions() {
+        return array(
+            array(4,'%Do%','M'),
+            array(3,'%Do%','M'),
+            array(4,'%oe%','M'),
+        );
+    }
 
     /**
      * Test sortby
+     * @dataProvider providerSortBy
+     * @param string $sortBy The column to sort by
+     * @param string $sortDir The direction to sort
+     * @param string $resultColumn The column to check the expected value of the first result.
+     * @param mixed $resultValue The expected value of the first result.
      */
-    public function testSortBy() {
+    public function testSortBy($sortBy,$sortDir,$resultColumn,$resultValue) {
         $xpdo = xPDOTestHarness::_getConnection();
 
         try {
             $criteria = $xpdo->newQuery('Person');
-            $criteria->sortby('first_name','ASC');
+            $criteria->sortby($sortBy,$sortDir);
             $people = $xpdo->getCollection('Person',$criteria);
         } catch (Exception $e) {
             $xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
@@ -347,23 +424,48 @@ class xPDOQueryTest extends xPDOTestCase {
             break;
         }
 
-        $success = $result->get('first_name') == 'Jane';
+        $success = $result->get($resultColumn) == $resultValue;
         $this->assertTrue($success,'xPDOQuery: Sortby clause returned incorrect result.');
+    }
+    /**
+     * Data provider for testSortBy
+     */
+    public function providerSortBy() {
+        return array(
+            array('first_name','ASC','first_name','Jane'),
+            array('last_name','DESC','first_name','Jane'),
+            array('first_name','DESC','last_name','Doe'),
+        );
     }
 
     /**
      * Test limit
+     * @dataProvider providerLimit
+     * @param int $limit A number to limit by
+     * @param boolean $shouldEqual If the result count should equal the limit
      */
-    public function testLimit() {
+    public function testLimit($limit,$shouldEqual) {
         $xpdo = xPDOTestHarness::_getConnection();
 
         try {
             $criteria = $xpdo->newQuery('Person');
-            $criteria->limit(1);
+            $criteria->limit($limit);
             $result = $xpdo->getCollection('Person',$criteria);
         } catch (Exception $e) {
             $xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
-        $this->assertTrue(count($result) == 1,'xPDOQuery: Limit clause returned more than desired 1 result.');
+        $success = count($result) == $limit;
+        if (!$shouldEqual) $success = !$success;
+        $this->assertTrue($success,'xPDOQuery: Limit clause returned more than desired '.$limit.' result.');
+    }
+    /**
+     * Data provider for testLimit
+     */
+    public function providerLimit() {
+        return array(
+            array(1,true),
+            array(2,true),
+            array(5,false),
+        );
     }
 }
