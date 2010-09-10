@@ -64,8 +64,6 @@ class MODxTestHarness extends PHPUnit_Framework_TestSuite {
         if (is_object(MODxTestHarness::$modx)) {
             return MODxTestHarness::$modx;
         }
-
-        print 'Attempting to create MODx singleton object.'."\n";
         
         /* include config.core.php */
         $properties = array();

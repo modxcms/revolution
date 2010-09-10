@@ -35,6 +35,7 @@ class ContextProcessors extends MODxTestCase {
      */
     public static function setUpBeforeClass() {
         $modx = MODxTestHarness::_getConnection();
+        unset($_POST);
         $ctx = $modx->newObject('modContext');
         $ctx->set('key','unittest13');
         $ctx->set('description','The unit test numbered 13. What else would it be?');
@@ -148,6 +149,7 @@ class ContextProcessors extends MODxTestCase {
     /**
      * Attempts to update a context
      * @dataProvider providerContextUpdate
+     * @depends testContextCreate
      *
      * @TODO pass in some settings in JSON format to test that.
      */
@@ -180,6 +182,7 @@ class ContextProcessors extends MODxTestCase {
     /**
      * Attempts to get a context
      * @dataProvider providerContextGet
+     * @depends testContextCreate
      *
      * @TODO pass in some settings in JSON format to test that.
      */
@@ -272,6 +275,7 @@ class ContextProcessors extends MODxTestCase {
     /**
      * Tests the context/remove processor, which removes a context
      * @dataProvider providerContextRemove
+     * @depends testContextCreate
      * @depends testContextDuplicate
      */
     public function testContextRemove($ctx = '') {

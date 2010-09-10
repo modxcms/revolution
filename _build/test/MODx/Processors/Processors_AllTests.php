@@ -24,6 +24,7 @@
 require_once 'Browser/Directory.php';
 require_once 'Browser/File.php';
 require_once 'Context/Context.php';
+require_once 'Context/ContextSetting.php';
 /**
  * Suite handling all Processors tests.
  *
@@ -32,9 +33,11 @@ require_once 'Context/Context.php';
 class Processors_AllTests extends PHPUnit_Framework_TestSuite {
     public static function suite() {
         $suite = new Processors_AllTests('ProcessorsTest');
+        // these tests seem to cause some strange issues..commenting out for now
         //$suite->addTestSuite('BrowserDirectoryProcessors');
-        //$suite->addTestSuite('BrowserFileProcessors');
+        $suite->addTestSuite('BrowserFileProcessors');
         $suite->addTestSuite('ContextProcessors');
+        $suite->addTestSuite('ContextSettingProcessors');
         return $suite;
     }
 }

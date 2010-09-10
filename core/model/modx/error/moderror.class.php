@@ -297,4 +297,12 @@ class modError {
             $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "modError::toArray() -- " . print_r($array, true));
         return $array;
     }
+
+    /**
+     * Resets the error messages.
+     */
+    public function reset() {
+        $this->errors = array();
+        $this->message = '';
+    }
 }

@@ -39,6 +39,13 @@ class MODxTestCase extends PHPUnit_Framework_TestCase {
     }
 
     /**
+     * Remove reference at end of test case
+     */
+    public function tearDown() {
+        $this->modx = null;
+    }
+
+    /**
      * Check a MODx return result for a success flag
      *
      * @param array $result The result response

@@ -3,6 +3,7 @@
  * Duplicates a context.
  *
  * @param string $key The key of the context
+ * @param string $newkey The new key of the duplicated context
  *
  * @package modx
  * @subpackage processors.context
