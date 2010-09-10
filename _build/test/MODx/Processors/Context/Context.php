@@ -48,6 +48,8 @@ class ContextProcessors extends MODxTestCase {
         $modx = MODxTestHarness::_getConnection();
         $ctx = $modx->getObject('modContext','unittest');
         if ($ctx) $ctx->remove();
+        $ctx = $modx->getObject('modContext','unittestdupe');
+        if ($ctx) $ctx->remove();
         $ctx = $modx->getObject('modContext','unittest13');
         if ($ctx) $ctx->remove();
     }
