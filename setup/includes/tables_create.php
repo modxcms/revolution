@@ -21,6 +21,7 @@ $classes= array (
     'modActionDom',
     'modActiveUser',
     'modCategory',
+    'modCategoryClosure',
     'modChunk',
     'modContentType',
     'modContext',
