@@ -20,7 +20,7 @@ MODx.tree.ResourceGroup = function(config) {
         ,tbar: [{
             text: _('resource_group_create')
             ,scope: this
-            ,handler: this.create
+            ,handler: this.createResourceGroup
         }]
     });
     MODx.tree.ResourceGroup.superclass.constructor.call(this,config);
@@ -184,3 +184,27 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
     }
 });
 Ext.reg('modx-tree-resource-group',MODx.tree.ResourceGroup);
+
+
+MODx.window.CreateResourceGroup = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'crgrp'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('resource_group_create')
+        ,id: this.ident
+        ,height: 150
+        ,width: 350
+        ,url: MODx.config.connectors_url+'security/resourcegroup.php'
+        ,action: 'create'
+        ,fields: [{
+            fieldLabel: _('name')
+            ,name: 'name'
+            ,id: 'modx-'+this.ident+'-name'
+            ,xtype: 'textfield'
+            ,width: 150
+        }]
+    });
+    MODx.window.CreateResourceGroup.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.CreateResourceGroup,MODx.Window);
+Ext.reg('modx-window-resourcegroup-create',MODx.window.CreateResourceGroup);
