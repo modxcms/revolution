@@ -93,6 +93,7 @@
     <!-- Various cleanup targets -->
     <target name="cleanup-build-image" description="empty the build image directory">
         <delete dir="${build.image.dir}" />
+        <mkdir dir="${build.image.dir}" />
     </target>
     <target name="cleanup-build-modext-image" description="empty the MODExt build image directory">
         <delete dir="${build.image.modext.dir}" />
@@ -102,6 +103,7 @@
     </target>
     <target name="cleanup-build-distrib" description="empty the build distrib directory">
         <delete dir="${build.distrib.dir}" />
+        <mkdir dir="${build.distrib.dir}" />
     </target>
     <target name="cleanup-build-apidocs" description="empty the build apidocs directory">
         <delete dir="${build.apidocs.dir}" />
