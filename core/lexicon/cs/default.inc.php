@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-20
+ * @updated 2010-09-13
  */
 $_lang['access'] = 'Přístup';
 $_lang['access_denied'] = 'Přístup zamezen.';
@@ -116,6 +116,7 @@ $_lang['edit_context'] = 'Upravit kontext';
 $_lang['editedon'] = 'Datum úpravy';
 $_lang['editing_form'] = 'Formulář';
 $_lang['element_duplicate'] = 'Kopie elementu';
+$_lang['element_duplicate_values'] = 'Kopírovat hodnoty?';
 $_lang['element_name_new'] = 'Název nového elementu';
 $_lang['elements'] = 'Elementy';
 $_lang['email'] = 'E-mail';
@@ -273,6 +274,7 @@ $_lang['orm_attribute_remove'] = 'Odstranit atribut';
 $_lang['orm_attribute_remove_confirm'] = 'Opravdu chcete odstranit tento atribut? Odstranění je nevratné.';
 $_lang['orm_container_add'] = 'Přidat kontejner';
 $_lang['orm_container_add_below'] = 'Přidat kontejner pod tento';
+$_lang['orm_container_rename'] = 'Přejmenovat kontejner';
 $_lang['orm_container_remove'] = 'Odstranit kontejner';
 $_lang['orm_container_remove_confirm'] = 'Opravdu chcete odstranit tento kontejner a všechny jeho atributy? Odstranění je nevratné.';
 $_lang['pagetitle'] = 'Název dokumentu';
@@ -281,6 +283,7 @@ $_lang['parameter'] = 'Parametr';
 $_lang['parameters'] = 'Parametry';
 $_lang['password'] = 'Heslo';
 $_lang['path'] = 'Cesta';
+$_lang['per_page'] = 'Záznamů na stránku';
 $_lang['permissions'] = 'Přístup';
 $_lang['permission_denied'] = 'Přístup zamezen!';
 $_lang['permission_denied_msg'] = 'Nemáte oprávnění pro zobrazení této stránky. Pokud si myslíte, že je to nedorozumnění kontaktujte administrátora.';
@@ -299,6 +302,7 @@ $_lang['publish_date'] = 'Datum publikování';
 $_lang['publish_document'] = 'Publikovat dokument';
 $_lang['publish_events'] = 'Publikovat událost';
 $_lang['published'] = 'Publikováno';
+$_lang['publishedon'] = 'Publikováno';
 $_lang['quick_create'] = 'Vytvořit v okně';
 $_lang['quick_create_chunk'] = 'Rychlé vytvoření chunku';
 $_lang['quick_create_plugin'] = 'Rychlé vytvoření pluginu';

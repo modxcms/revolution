@@ -7,8 +7,9 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2010-09-11
  */
+$_lang['autotag'] = 'Auto-Tag';
 $_lang['text'] = 'Text';
 $_lang['textarea'] = 'Textové pole';
 $_lang['textareamini'] = 'Textové pole (malé)';

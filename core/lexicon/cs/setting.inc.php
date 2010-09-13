@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2010-09-11
  */
 $_lang['area'] = 'Oblast';
 $_lang['area_authentication'] = 'Autentizaci a zabezpečení';
@@ -73,6 +73,9 @@ $_lang['setting_allow_duplicate_alias_desc'] = 'Pokud je nastaveno na "Ano", bud
 
 $_lang['setting_allow_tags_in_post'] = 'Povolit HTML tagy v POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Je-li nastaveno "Ne", z obsahu POST proměnných v rámci správce obsahu budou odstraněny všechny HTML tagy. Doporučujeme nechat tuto hodnotu na "Ano".';
+
+$_lang['setting_archive_with'] = 'Používat PCLZip archivaci';
+$_lang['setting_archive_with_desc'] = 'Pokud Ano, PCLZip bude používán namísto ZipArchive pro soubory zip. Tuto volbu povolte pokud se Vám zobrazují chyby extractTo nebo máte problémy s rozbalováním ve Správě balíčků.';
 
 $_lang['setting_auto_menuindex'] = 'Automatický menu index';
 $_lang['setting_auto_menuindex_desc'] = 'Zvolte "Ano" pro zapnutí automatického indexování položek v menu. (Slouží např. pro řazení položek ve stromu dokumentů.)';
@@ -166,6 +169,9 @@ $_lang['setting_custom_resource_classes_desc'] = 'Čárkou oddělený seznam vla
 $_lang['setting_default_template'] = 'Výchozí šablona';
 $_lang['setting_default_template_desc'] = 'Vyberte výchozí šablonu, která bude použita pro nové dokumenty. Stále budete mít možnost při úpravě dokumentu vybrat ostatní šablony, toto nastavení je pouze před-výběrem jedné z šablon.';
 
+$_lang['setting_default_per_page'] = 'Počet výsledků na stránce';
+$_lang['setting_default_per_page_desc'] = 'Výchozí počet zobrazených výsledků na stránce v rámci celého správce obsahu.';
+
 $_lang['setting_editor_css_path'] = 'Cesta k CSS souboru';
 $_lang['setting_editor_css_path_desc'] = 'Zadejte cestu k CSS souboru, který chcete použít v rámci WYSIWYG editoru. Nejlepší je zadat cestu od kořene portálu, například: /assets/site/style.css. Pokud nechcete používat ve WYSIWYG editoru CSS styly ponechte toto políčko prázdné.';
 
@@ -183,6 +189,9 @@ $_lang['setting_emailsubject_err'] = 'Zadejte text předmětu e-mailu.';
 $_lang['setting_error_page'] = 'Chybová stránka';
 $_lang['setting_error_page_desc'] = 'Zadejte ID dokumentu, na který chcete přesměrovat uživatele, kteří se pokusili přistoupit na stránku, která neexistuje. <strong>Poznámka: ujistěte se, že ID patří existujícímu dokumentu a že je publikován!</strong>';
 $_lang['setting_error_page_err'] = 'Zadejte ID dokumentu, který bude sloužit jako chybová stránka.';
+
+$_lang['setting_extension_packages'] = 'Rozšíření balíčky';
+$_lang['setting_extension_packages_desc'] = 'Čárkou oddělený seznam balíčků, které se mají nahrát při vytvoření nové instance MODx. Zadávejte ve formátu: nazev_balicku:cesta_k_modelu';
 
 $_lang['setting_failed_login_attempts'] = 'Počet neúspěšných pokusů o přihlášení';
 $_lang['setting_failed_login_attempts_desc'] = 'Počet neúspěšných pokusů o přihlášení předtím než bude uživatel zablokován.';
@@ -204,8 +213,12 @@ $_lang['setting_feed_modx_security_enabled_desc'] = 'Je-li nastaveno na "Ne", MO
 
 $_lang['setting_filemanager_path'] = 'Cesta pro správce souborů';
 $_lang['setting_filemanager_path_desc'] = 'IIS často nemá správně nastavenou proměnnou "document_root", která je používána správcem souborů, s čím může pracovat. Máte-li problémy s používáním správce souborů, ujistěte se, že tato cesta je nastavena do kořene MODx instalace.';
-$_lang['setting_filemanager_path_err'] = 'Uveďte absolutní cestu ke kořenu MODx pro správce souborů.';
-$_lang['setting_filemanager_path_err_invalid'] = 'Adresář správce souborů buď neexistuje nebo je nedostupný. Zadejte platný adresář nebo nastavte atributy pro tento adresář.';
+
+$_lang['setting_filemanager_url'] = 'URL pro správce souborů';
+$_lang['setting_filemanager_url_desc'] = 'Volitelné. Tuto volbu použijte pokud chcete nastavit explicitní URL pro přístup k souborům v rámci správce souborů (užitečné v případě, že jste změnili filemanager_path na cestu mimo MODx webroot). Ujistěte se, že je tato URL přístupná z webu. Pokud tuto volbu ponecháte prázdnou, MODx se pokusí automaticky tuto URL doplnit.';
+
+$_lang['setting_forgot_login_email'] = 'E-mail zapomenutého přihlášení';
+$_lang['setting_forgot_login_email_desc'] = 'Šablona e-mailu, který je odeslán pokud uživatel zapomněl své přihlašovací údaje.';
 
 $_lang['setting_friendly_alias_lowercase_only'] = 'FURL aliasy malými písmeny';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Určuje zda se mají používat pouze malá písmena v aliasech zdrojů.';
@@ -343,14 +356,17 @@ $_lang['setting_password_min_length_desc'] = 'Minimální délka hesla uživatel
 $_lang['setting_phpthumb_cache_maxage'] = 'phpThumb maximální stáří cache';
 $_lang['setting_phpthumb_cache_maxage_desc'] = 'Smaže náhledy uložené v cache, které nebyly načteny více než X dní.';
 
-$_lang['setting_phpthumb_cache_maxfiles'] = 'phpThumb maximální počet souborů v cache';
-$_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Smaže nejméně často načítané náhledy pokud má cache více než X souborů.';
-
 $_lang['setting_phpthumb_cache_maxsize'] = 'phpThumb maximální velikost cache';
 $_lang['setting_phpthumb_cache_maxsize_desc'] = 'Smaže nejméně často načítané náhledy, když velikost cache stoupne nad X MB.';
 
+$_lang['setting_phpthumb_cache_maxfiles'] = 'phpThumb maximální počet souborů v cache';
+$_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Smaže nejméně často načítané náhledy pokud má cache více než X souborů.';
+
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb ukládat zdrojové soubory do cache';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Určuje zda se mají zdrojové soubory načítat do cache nebo ne. Doporujeme nastavit "Ne".';
+
+$_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb ImageMagick cesta';
+$_lang['setting_phpthumb_imagemagick_path_desc'] = 'Volitelné. Nastavení cesty k ImageMagick pro alternativní generování náhledů pomocí phpThumb, pokud není ve výchozím nastavení PHP.';
 
 $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop (ořez při zvětšení)';
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'Výchozí nastavení Zoom-Crop pro phpThumb pokud je použit v MODx. Výchozí hodnota je 0, tím se zabrání oříznutí při zvětšení.';
@@ -499,10 +515,14 @@ $_lang['setting_websignupemail_message_default'] = 'Dobrý den [[+uid]] \n\nZde 
 $_lang['setting_welcome_screen'] = 'Zobrazit uvítací obrazovku';
 $_lang['setting_welcome_screen_desc'] = 'Je-li nastaveno na "Ano", uvítací obrazovka se zobrazí při dalším načtení úvodní stránky a pak se již nezobrazí.';
 
+$_lang['setting_welcome_screen_url'] = 'URL uvítací obrazovky';
+$_lang['setting_welcome_screen_url_desc'] = 'URL uvítací obrazovky, která se zobrazí po prvním přihlášení do správce obsahu.';
+
 $_lang['setting_which_editor'] = 'Používaný editor';
 $_lang['setting_which_editor_desc'] = 'Zde můžete nastavit, který editor chcete používat. Další editory je možno stáhnout a nainstalovat ze stránky MODx download.';
 
 $_lang['setting_which_element_editor'] = 'Editor použitý pro elementy';
 $_lang['setting_which_element_editor_desc'] = 'Zde můžete nastavit, který WYSIWYG editor chcete používat pro editování elementů. Další WYSIWYG editory je možno stáhnout a nainstalovat pomocí správce balíčků.';
 
-
+$_lang['setting_xhtml_urls'] = 'XHTML URLs';
+$_lang['setting_xhtml_urls_desc'] = 'Pokud je nastaveno na Ano, všechny odkazy, které generuje MODx budou v souladu s xHTML včetně zakódování ampersandů.';
