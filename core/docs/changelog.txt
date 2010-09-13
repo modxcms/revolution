@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-rc1
 ====================================
+- Prevent issue where a User Group can select itself as a parent
+- Allow typeahead on user field when adding a User to a User Group
 - Optimized Resource Group tree in mgr UI
 - Fixed issue where > 20 records were not showing in ACL lists in User Group edit panel
 - [#MODX-2206] Prevent issue where renaming a menu's lexicon key orphans child menus

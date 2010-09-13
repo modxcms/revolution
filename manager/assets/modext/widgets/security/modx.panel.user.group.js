@@ -68,6 +68,7 @@ MODx.panel.UserGroup = function(config) {
                     ,baseParams: {
                         action: 'getList'
                         ,addNone: true
+                        ,exclude: config.usergroup
                     }
                 }]
             },{

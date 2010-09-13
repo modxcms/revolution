@@ -21,6 +21,7 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'name');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$exclude = explode(',',$modx->getOption('exclude',$scriptProperties,''));
 
 /* build query */
 $c = $modx->newQuery('modUserGroup');
@@ -47,6 +48,7 @@ if (!empty($scriptProperties['combo'])) {
     );
 }
 foreach ($groups as $group) {
-	$list[] = $group->toArray();
+    if (in_array($group->get('id'),$exclude)) continue;
+    $list[] = $group->toArray();
 }
 return $this->outputArray($list,$count);
