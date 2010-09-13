@@ -7,10 +7,9 @@
 MODx.panel.PackageDownload = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        border: false
-        ,id: 'modx-panel-package-download'
+        id: 'modx-panel-package-download'
         ,layout: 'column'
-        ,border: true
+        ,border: false
         ,autoHeight: true
         ,anchor: '97%'
         ,autoScroll: true

@@ -72,7 +72,6 @@ MODx.panel.PackageBrowser = function(config) {
                 ,autoHeight: true
                 ,html: ''
                 ,border: false
-                ,autoHeight: true
                 ,hideMode: 'offsets'
             },{
                 id: 'modx-package-browser-thumb-view'
@@ -272,6 +271,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
         });
         g.getBottomToolbar().changePage(1);
         Ext.getCmp('modx-pbr-search-fld').setValue('');
+        return true;
     }
     
     ,setProvider: function(p) {
@@ -378,6 +378,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
         ,url: MODx.config.connectors_url+'workspace/packages-rest.php'
         ,baseParams: {
             action: 'getList'
+            //,provider: MODx.provider
         }
         ,paging: true
         ,pageSize: 10

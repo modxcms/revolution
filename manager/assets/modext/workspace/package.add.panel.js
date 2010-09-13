@@ -14,11 +14,10 @@ MODx.window.PackageDownloader = function(config) {
         ,resizable: true
         ,collapsible: true
         ,maximizable: true
-        ,autoHeight: true
+        ,autoHeight: Ext.isIE ? false : true
         ,autoScroll: true
         ,shadow: false
         ,anchor: '90%'
-        ,width: '90%'
         ,hideMode: 'offsets'
         ,firstPanel: 'modx-pd-start'
         ,lastPanel: 'modx-pd-selpackage'
@@ -279,8 +278,10 @@ Ext.extend(MODx.panel.PDSelPackage,MODx.panel.WizardPanel,{
     }
     ,fetch: function() {
         var pd = Ext.getCmp('modx-window-package-downloader');
-        pd.setPosition(null,0);
-        pd.doLayout();
+        if (!Ext.isIE) {
+            pd.setPosition(null,0);
+            pd.doLayout();
+        }
         return false;
     }
 });
