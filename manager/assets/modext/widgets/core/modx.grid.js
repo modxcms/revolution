@@ -272,13 +272,13 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 }
                 if (typeof(c[i].editor) == 'object' && c[i].editor.xtype) {
                     var r = c[i].editor.renderer;
-                    //c[i].editor = Ext.ComponentMgr.create(c[i].editor);
+                    c[i].editor = Ext.ComponentMgr.create(c[i].editor);
                     if (r === true) {
-                        //c[i].renderer = MODx.combo.Renderer(c[i].editor);
+                        c[i].renderer = MODx.combo.Renderer(c[i].editor);
                     } else if (c[i].editor.initialConfig.xtype === 'datefield') {
                         c[i].renderer = Ext.util.Format.dateRenderer(c[i].editor.initialConfig.format || 'Y-m-d');
                     } else if (r === 'boolean') {
-                        //c[i].renderer = this.rendYesNo;
+                        c[i].renderer = this.rendYesNo;
                     } else if (r === 'local' && typeof(c[i].renderer) == 'string') {
                         c[i].renderer = eval(c[i].renderer);
                     }
