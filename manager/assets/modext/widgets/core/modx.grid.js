@@ -17,6 +17,7 @@ MODx.grid.Grid = function(config) {
         ,stripeRows: true
         ,header: false
         ,cls: 'modx-grid'
+        ,preventSaveRefresh: true
         ,menuConfig: {
             defaultAlign: 'tl-b?'
             ,enableScrolling: false
