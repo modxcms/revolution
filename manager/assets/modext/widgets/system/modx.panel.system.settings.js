@@ -36,6 +36,7 @@ MODx.panel.SystemSettings = function(config) {
     MODx.load({
         xtype: 'modx-grid-system-settings'
         ,renderTo: 'modx-system-settings-grid-ct'
+        ,preventSaveRefresh: true
     });
 };
 Ext.extend(MODx.panel.SystemSettings,MODx.FormPanel);
