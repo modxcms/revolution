@@ -6,6 +6,7 @@
     <br />
 </div>
 
+{if $smarty.const.MODX_SETUP_KEY NEQ '@traditional'}
 <p>{$_lang.config_key_change}</p>
 
 <div id="cck-div">
@@ -20,7 +21,7 @@
         {/if}
     </div>
 </div>
-
+{/if}
 <div class="setup_navbar">
     <input type="submit" name="proceed" value="{$_lang.next}" />
 </div>
