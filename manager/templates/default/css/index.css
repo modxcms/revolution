@@ -3,6 +3,7 @@
  */
 body, html {
     height: 100%;
+    background-color: #fafafa;
 }
 
 .x-viewport, .x-viewport body {
@@ -11,7 +12,6 @@ body, html {
 
 body {
     margin-bottom: 1px; /* avoid jumping scrollbars */
-    background-color: #fafafa;
     color: #111;
     font: 13px/17px Arial, Helvetica, sans-serif;
 }
@@ -99,6 +99,20 @@ hr {
     border-top:1px solid #FAFAFA;
 }
 
+#modx-leftbar .x-tree-root-ct {
+    -moz-border-radius:0 0 3px 3px;
+    -webkit-border-radius:0 0 3px 3px;
+    border-radius:0 0 3px 3px;
+    background-color:#F0F0F0;
+    padding:3px;
+}
+
+/* Collapse tree panel */
+#modx-leftbar .x-layout-split-west .x-layout-mini {
+    left:-5px;
+    top:108px;
+}
+
 #modx-content {
     padding: 0;
 }
@@ -108,9 +122,34 @@ hr {
     width: 100%;
     padding: 0;
     z-index: 9993;
+    background: url(../images/restyle/contentArea_bg.png) repeat-x 100% 0 !important;
 }
 
 /* leftbar tabs */
+#modx-leftbar .x-tab-panel-header-plain .x-tab-strip-top  {
+    border:0 none;
+}
+#modx-leftbar .x-tree .x-panel-body {
+    background-color:transparent;
+    border-color:#FAFAFA;
+    border-right:0 none;
+    border-style:solid none none;
+    border-width:1px 0 0;
+}
+#modx-leftbar .x-tab-panel-body {
+    background-color: transparent;
+}
+#modx-leftbar .x-panel-noborder .x-panel-tbar-noborder .x-toolbar {
+    background-color:#EAEAEA;
+    border-bottom-color:#E4E4E4;
+    border-top:1px solid #E4E4E4;
+    padding:4px 0;
+}
+#modx-leftbar .x-tab-strip-top .x-tab-strip-active .x-tab-right span.x-tab-strip-text {
+	color:#5E5E5E;
+	text-shadow:0 1px 0 #FAFAFA;
+}
+
 #modx-leftbar-content {
     float: left;
     margin: 7px 0 7px 7px;
@@ -285,7 +324,7 @@ textarea.x-form-field {
 
 /* grids */
 .x-small-editor .x-form-field {
-    font-size: 1em !important;
+    font-size: 1em !important;    
 }
 
 .x-grid3-row-expanded .x-grid3-row-expander {
@@ -298,16 +337,21 @@ textarea.x-form-field {
 
 /* action buttons bar */
 #modAB {
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    text-align: right;
-    z-index: 12;
-    display: block;
-    float: right;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+    background-color:#eaeaea;
+    background-color:rgba(224, 224, 224, 0.75);
+    padding:5px;
+    position:fixed;
+    right:20px;
+    top:100px;
+    z-index:12;
+    zoom: 1;
 }
 #modx-action-buttons {
     background: transparent !important;
+    border: 0 none;
 }
 #modx-action-buttons .x-toolbar-left {
     width: auto !important;
@@ -387,49 +431,48 @@ textarea.x-form-field {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
-    border: 1px solid #4E4E4E;
-    bottom: 10px;
-    color: #aaa;
-    height: 26px;
-    line-height: 26px;
-    position: absolute;
-    right: 10px;
-    z-index: 1;
-    width: auto;
-    max-width: 350px;
+    border:1px solid #4E4E4E;
+    bottom:10px;
+    color:#AAAAAA;
+    height:26px;
+    line-height:26px;
+    max-width:350px;
+    position:absolute;
+    right:12px;
+    z-index:1;
 }
 #rightlogin span {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
-    background-color: #363636;
-    border: 1px solid #1F1F1F;
-    float: left;
-    height: 26px;
-    padding: 0 0 0 8px;
+    background-color:#363636;
+    border:1px solid #1F1F1F;
+    float:left;
+    height:26px;
+    padding:0 0 0 12px;
 }
 #rightlogin a.modx-logout {
-    -moz-border-radius-topright: 3px;
-    -moz-border-radius-bottomright: 3px;
-    -webkit-border-top-right-radius: 3px;
-    -webkit-border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    background-color: #3e3e3e;
-    border: 1px solid #4e4e4e;
-    color: #ccc;
-    display: block;
-    float: right;
-    height: 24px;
-    margin: 0 0 1px 8px;
-    padding: 0 8px;
-    text-decoration: none;
-    text-shadow: 1px -1px 0 #5e5e5e;
+    -moz-border-radius-topright: 2px;
+    -moz-border-radius-bottomright: 2px;
+    -webkit-border-top-right-radius: 2px;
+    -webkit-border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background-color:#3E3E3E;
+    border:1px solid #4E4E4E;
+    color:#DDDDDD;
+    display:block;
+    float:right;
+    height:24px;
+    margin:0 0 1px 7px;
+    padding:0 12px;
+    text-decoration:none;
+    text-shadow:1px -1px 0 #5E5E5E;
 }
 #rightlogin a.modx-logout:hover {
-    background-color: #6e9b38;
-    border-color: #88BF47;
-    color: #fff;
+    background-color:#6e9b3b;
+    border:1px solid #88bf47;
+    text-shadow: none;
 }
 
 /* panel stylings */
@@ -654,8 +697,10 @@ table.classy tr.odd td {
     opacity: .5;
     color: gray;
 }
-#modx-grid-package .green, #modx-grid-package .green a { color: red !important; }
-#modx-grid-package .red { color: green !important; }
+#modx-grid-package .green { text-align: center; }
+#modx-grid-package .green a{ color: red !important; }
+#modx-grid-package .red { color: green !important; text-align: center; }
+
 
 .pbr-provider-box {
     width: 250px;
@@ -984,6 +1029,10 @@ input.x-static-text-field {
 .ext-ie .ux-row-action-item{width:16px}
 .ext-ie .ux-row-action-text{width:auto}
 .ux-row-action-item span{vertical-align:middle;display:inline !important;background:transparent url(../images/style/go-next.png) no-repeat scroll 1px 4px;line-height:24px;margin:0 5px;padding:5px 5px 5px 22px;}
+.icon-uninstall span{ background:url("../images/style/delete.png") no-repeat scroll 1px 4px transparent; }
+.package-details span{ background:url("../images/style/info.png") no-repeat scroll 1px 4px transparent; }
+.package-download span{ background:url("../images/style/download.png") no-repeat scroll 1px 4px transparent; }
+.package-installed span{ background:url("../images/style/accept.png") no-repeat scroll 1px 4px transparent; }
 .ext-ie .ux-row-action-item span{width:auto}
 .x-grid-group-hd div{position:relative;height:16px}
 .ux-grow-action-item{min-width:16px;background-repeat:no-repeat;background-position:0 50% ! important;margin:0;padding:0 ! important;cursor:pointer;float:left}
@@ -994,24 +1043,24 @@ input.x-static-text-field {
 .ux-row-action-item:active{margin:1px -1px 1px 1px;background-image:none !important;background-color:#d7d7d7 !important;}
 .ux-row-action-item:active span {text-shadow:none;}
 .ux-row-action-item{
-        -moz-border-radius:3px;
-        -webkit-border-radius:3px;
-        border-radius:3px;
-        -moz-box-shadow:0 0 2px rgba(0, 0, 0, 0.2);
-        -webkit-box-shadow:0 0 2px rgba(0, 0, 0, 0.2);
-        box-shadow:0 0 2px rgba(0, 0, 0, 0.2);
-        background:#EFEFEF url(../images/modx-theme/form/button-bg.png) repeat-x scroll 0 0;
-        border:1px solid rgba(0, 0, 0, 0.2);
-        padding:0;
-        margin:0 0 2px 2px;
-        font-weight:bold;
-        color:#444;
-        text-shadow:0 1px 1px #FFFFFF;
-        position:relative;
-        cursor:pointer;
-        overflow:hidden;
-        float:left;
-        min-width:16px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-box-shadow:0 0 1px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow:0 0 1px rgba(0, 0, 0, 0.15);
+	box-shadow:0 0 1px rgba(0, 0, 0, 0.15);
+	background:url("../images/modx-theme/form/button-bg.png") repeat-x scroll 0 bottom #EDEDED;
+	border:1px solid rgba(0, 0, 0, 0.2);
+	border-collapse:separate;
+	padding:0;
+	margin:0px 0 2px 2px;
+	color:#444;
+	font-weight:bold;
+	text-shadow:0 1px 0 #FAFAFA;
+	position:relative;
+	cursor:pointer;
+	overflow:hidden;
+	float:left;
 }
 /* checkbox tree */
 .x-tree-checkbox{ background:url(../../../assets/ext3/resources/images/default/form/checkbox.gif) no-repeat 0 0; height:13px; width:13px; margin:0 1px; vertical-align:middle}.x-tree-checkbox-over .x-tree-checkbox{ background-position:-13px 0}.x-tree-checkbox-down .x-tree-checkbox{ background-position:-26px 0}.x-tree-node-disabled .x-tree-checkbox{ background-position:-39px 0}.x-tree-node-checked{ background-position:0 -13px}.x-tree-checkbox-over .x-tree-node-checked{ background-position:-13px -13px}.x-tree-checkbox-down .x-tree-node-checked{ background-position:-26px -13px}.x-tree-node-disabled .x-tree-node-checked{ background-position:-39px -13px}.x-tree-node-grayed{ background-position:0 -26px}.x-tree-checkbox-over .x-tree-node-grayed{ background-position:-13px -26px}.x-tree-checkbox-down .x-tree-node-grayed{ background-position:-26px -26px}.x-tree-node-disabled .x-tree-node-grayed{ background-position:-39px -26px}.x-tree-branch-unchecked .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-node-grayed{ background-position:0 0}.x-tree-branch-unchecked .x-tree-checkbox-over .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-checkbox-over .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-checkbox-over .x-tree-node-grayed{ background-position:-13px 0}.x-tree-branch-unchecked .x-tree-checkbox-down .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-checkbox-down .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-checkbox-down .x-tree-node-grayed{ background-position:-26px 0}.x-tree-branch-unchecked .x-tree-node-disabled .x-tree-checkbox,.x-tree-branch-unchecked .x-tree-node-disabled .x-tree-node-checked,.x-tree-branch-unchecked .x-tree-node-disabled .x-tree-node-grayed{ background-position:-39px 0}.x-tree-branch-checked .x-tree-checkbox,.x-tree-branch-checked .x-tree-node-checked,.x-tree-branch-checked .x-tree-node-grayed{ background-position:0 -13px}.x-tree-branch-checked .x-tree-checkbox-over .x-tree-checkbox,.x-tree-branch-checked .x-tree-checkbox-over .x-tree-node-checked,.x-tree-branch-checked .x-tree-checkbox-over .x-tree-node-grayed{ background-position:-13px -13px}.x-tree-branch-checked .x-tree-checkbox-down .x-tree-checkbox,.x-tree-branch-checked .x-tree-checkbox-down .x-tree-node-checked,.x-tree-branch-checked .x-tree-checkbox-down .x-tree-node-grayed{ background-position:-26px -13px}.x-tree-branch-checked .x-tree-node-disabled .x-tree-checkbox,.x-tree-branch-checked .x-tree-node-disabled .x-tree-node-checked,.x-tree-branch-checked .x-tree-node-disabled .x-tree-node-grayed{ background-position:-39px -13px}
@@ -1023,17 +1072,6 @@ input.x-static-text-field {
 .icon-ob{background-image:url(../../../assets/modext/util/filetree/img/icons/ob_16.png)!important}.icon-graph{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/chart_curve.png)!important}.icon-chart{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/chart_bar.png)!important}.icon-prefs{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_form.png)!important}.icon-ok{background-image:url(../../../assets/modext/util/filetree/img/icons/ok16.png)!important}.icon-view-tile{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_view_tile.png)!important}.icon-check,.icon-check-off{background-image:url(../ext/resources/images/default/menu/unchecked.gif)!important}.icon-check-on{background-image:url(../ext/resources/images/default/menu/checked.gif)!important}.icon-stat-data{background-image:url(../../../assets/modext/util/filetree/img/icons/kate_16.png)!important}.icon-rename{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/textfield_rename.png)!important}.icon-add-col{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/page_white_add.png)!important}.icon-del-col{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/page_white_delete.png)!important}.icon-save-table{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/table_save.png)!important}.icon-add-tab{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/tab_add.png)!important}.icon-del-tab{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/tab_delete.png)!important}.icon-go-tab{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/tab_go.png)!important}.icon-add-table{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/table_add.png)!important}.icon-del-table{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/table_delete.png)!important}.icon-admin{background-image:url(../../../assets/modext/util/filetree/img/icons/adv_settings_16.png)!important}.icon-grid{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/grid.png)!important}.icon-key{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/key.png)!important}.icon-key2{background-image:url(../../../assets/modext/util/filetree/img/icons/key_16.png)!important}.icon-expand-all{background-image:url(../../../assets/modext/util/filetree/img/icons/expand-all.gif)!important}.icon-collapse-all{background-image:url(../../../assets/modext/util/filetree/img/icons/collapse-all.gif)!important}.icon-tree-orgboard{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/chart_organisation.png)!important}.icon-tree-area{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/post_title.png)!important}.icon-tree-post{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/page_white.png)!important}.icon-plus{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/add.png)!important}.icon-minus{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/delete.png)!important}.icon-house{background-image:url(../../../assets/modext/util/filetree/img/icons/house_16.png)!important}.icon-user{background-image:url(../../../assets/modext/util/filetree/img/icons/user2_16.png)!important}.icon-trash-empty{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/bin_empty.png)!important}.icon-trash-closed{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/bin_closed.png)!important}.icon-disk{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/disk.png)!important}.icon-disk-bullet{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/bullet_disk.png)!important}.icon-undo{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/arrow_undo.png)!important}.icon-loading{background-image:url(../ext/resources/images/default/grid/grid-loading.gif)!important}.icon-db-refresh{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/database_refresh.png)!important}.icon-magnifier{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/magnifier.png)!important}.icon-wrench{background-image:url(../../../assets/modext/util/filetree/img/icons/wrench_16.png)!important}.icon-wrench-orange{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/wrench_orange.png)!important}.icon-star{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/star.png)!important}.icon-lock-go{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/lock_go.png)!important}.icon-group-add{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/group_add.png)!important}.icon-group-del{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/group_delete.png)!important}.icon-stat-portal{background-image:url(../../../assets/modext/util/filetree/img/icons/stat_portal_16.png)!important}.icon-stat-list{background-image:url(../../../assets/modext/util/filetree/img/icons/stat_list_16.png)!important}.icon-cancel{background-image:url(../../../assets/modext/util/filetree/img/icons/cancel16.png)!important}.icon-cross{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/cross.png)!important}.icon-defaults{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/arrow_rotate_clockwise.png)!important}.icon-load{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/database_go.png)!important}.icon-working{background-image:url(../ext/resources/images/default/grid/wait.gif)!important}.icon-upload{background-image:url(../../../assets/modext/util/filetree/img/icons/up.png)!important}.icon-folder-add{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/folder_add.png)!important}.icon-open{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_go.png)!important}.icon-open-self{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application.png)!important}.icon-open-popup{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_double.png)!important}.icon-open-blank{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_cascade.png)!important}.icon-open-download{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/application_put.png)!important}.icon-refresh{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/arrow_refresh.png)!important}.icon-pencil{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/pencil.png)!important}.icon-stop{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/control_stop.png)!important}.icon-email{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/email.png)!important}.icon-email-compose{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/email_edit.png)!important}.icon-coins{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/coins.png)!important}.icon-clock{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/clock.png)!important}.icon-zoom{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/zoom.png)!important}.icon-print{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/printer.png)!important}.icon-folder-component{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/folder_brick.png)!important}.icon-extension{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/brick.png)!important}.icon-function{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/flag_yellow.png)!important}.icon-bulb{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/lightbulb.png)!important}.icon-bulb-off{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/lightbulb_off.png)!important}.icon-copy{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/page_white_copy.png)!important}.icon-db-gear,.icon-reconfigure{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/database_gear.png)!important}
 .file-pdf,.file-ai{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/pdf_document.png)!important}.file-txt{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/txt.png)!important}.file-bmp,.file-cgm,.file-dcm,.file-dds,.file-exr,.file-gif,.file-hdr,.file-ico,.file-jng,.file-jp2,.file-jpeg,.file-jpg,.file-pbm,.file-pbmraw,.file-pcd,.file-pcx,.file-pgm,.file-pgmraw,.file-pic,.file-png,.file-pnm,.file-psd,.file-raw,.file-rgb,.file-rgba,.file-tga,.file-tif,.file-tiff,.file-xbm,.file-xcf,.file-xpm{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/image.png)!important}.file-conf,.file-vim{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/source.png)!important}.file-html,.file-htm,.file-sgml,.file-xhtml,.file-xml{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/html.png)!important}.file-sh{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/shellscript.png)!important}.file-3g2,.file-3gp,.file-asf,.file-asx,.file-avi,.file-flc,.file-fli,.file-flv,.file-mkv,.file-mng,.file-mp4,.file-mpeg,.file-mpg,.file-ogm,.file-rv,.file-wmp,.file-wmv{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/video.png)!important}.file-ttf,.file-otf{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/font_truetype.png)!important}.file-exe,.file-dll{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/exec_wine.png)!important}.file-doc,.file-odt,.file-rtf{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/wordprocessing.png)!important}.file-xls,.file-ods,.file-xlc,.file-xll,.file-xlm,.file-xlw,.file-wpd,.file-abw{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/spreadsheet_document.png)!important}.file-js{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/source_j.png)!important}.file-css{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/source_c.png)!important}.file-php{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/source_php.png)!important}.file-7z,.file-a,.file-ace,.file-arj,.file-bz,.file-bz2,.file-cpio,.file-gz,.file-rar,.file-tgz,.file-tnf,.file-z,.file-zip,.file-zoo{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/zip.png)!important}.file-ppt,.file-odp,.file-ppz,.file-ppt{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/pps.png)!important}.file-msg{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/message.png)!important}.file-dwg,.file-sxd,.file-dhw,.file-svg,.file-ps,.file-eps,.file-wmf,.file-fig,.file-msod,.file-qpic{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/vectorgfx.png)!important}.file-ics{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/vcalendar.png)!important}.file-chm,.file-info,.file-hlp,.file-help{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/info.png)!important}.file-aac,.file-ac3,.file-aifc,.file-aiff,.file-ape,.file-au,.file-flac,.file-m3u,.file-m4a,.file-mac,.file-mid,.file-midi,.file-mp2,.file-mp3,.file-ogg,.file-psid,.file-ra,.file-ram,.file-sf,.file-sid,.file-spx,.file-wav,.file-wma,.file-wv,.file-wvc{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/sound.png)!important}.file-asc,.file-cer,.file-cert,.file-crt,.file-der,.file-gpg,.file-gpg,.file-p10,.file-p12,.file-p7c,.file-p7m,.file-p7s,.file-pem,.file-sig{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/file_locked.png)!important}.file-bin,.file-cue,.file-img,.file-iso,.file-mdf,.file-nrg{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/cdimage.png)!important}.file-jar,.file-java,.file-class{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/java_src.png)!important}.file-sql{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/source_s.png)!important}.file-moov,.file-mov,.file-qt{background-image:url(../../../assets/modext/util/filetree/img/icons/mime/quicktime.png)!important}
 .ux-up-item{line-height:17px;height:17px;cursor:default;margin-bottom:1px;position:relative;background-color:#f0f0f0;background-image:url(../../../assets/modext/util/filetree/img/white_bg.png);background-repeat:no-repeat}.ux-up-icon-file{width:16px;height:16px;vertical-align:-3px;margin-right:4px;float:left}.ux-up-indicator{background-color:#FF0;height:17px;width:40px;position:absolute;opacity:0.4}.ux-up-icon-state{width:16px;float:right;margin-right:2px;cursor:pointer;z-index:-1}.ux-up-icon-queued{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/page_white_get.png)}.ux-up-icon-uploading{background-image:url(../../../../ext2/resources/images/default/grid/wait.gif)}.ux-up-icon-done{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/accept.png)}.ux-up-icon-failed{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/error.png)}.ux-up-icon-stopped{background-image:url(../../../assets/modext/util/filetree/img/silk/icons/stop.png)}.ux-up-text{float:left}.ux-ftm-nodename{color:#000;font-weight:700;cursor:default!important}.ux-icon-combo-icon{background-repeat:no-repeat;background-position:0 50%;width:18px;height:14px}.ux-icon-combo-input{padding-left:25px}.x-form-field-wrap .ux-icon-combo-icon{top:3px;left:5px}.ux-icon-combo-item{background-repeat:no-repeat!important;background-position:3px 50%!important;padding-left:24px!important}
-
-
-/* fix safari triggerfield */
-.ext-safari input,.ext-safari textarea{ outline:none; }
-.ext-strict .ext-safari .x-small-editor .x-form-text { height: 18px !important; }
-.ext-safari .x-form-field-wrap .x-form-trigger{
-    height: 24px;
-    position: static;
-    top: auto;
-    vertical-align: top;
-}
 
 /* status messages */
 .modx-status-msg {
