@@ -174,7 +174,7 @@ class xPDOObjectVehicle extends xPDOVehicle {
                         }
                     }
                 } else {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Skipping vehicle object (data object exists and cannot be upgraded): ' . print_r($object->toArray(), true);
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Skipping vehicle object (data object exists and cannot be upgraded): ' . print_r($object->toArray(), true));
                     if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Skipping vehicle object (data object exists and cannot be upgraded): ' . print_r($vOptions, true));
                 }
                 if (($saved || $exists) && !$this->_installRelated($transport, $object, $element, $options)) {
