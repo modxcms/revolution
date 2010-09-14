@@ -243,13 +243,13 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         var r = s.getAt(ri).data;
         v = Ext.util.Format.htmlEncode(v);
         var f;
-        if (r.xtype == 'combo-boolean') {
+        if (r.xtype == 'combo-boolean' || r.xtype == 'modx-combo-boolean') {
             f = MODx.grid.Grid.prototype.rendYesNo;
-            return f(v == 1 ? true : false,md);
+            return f(v,md,rec,ri,ci,s,g);
         } else if (r.xtype === 'datefield') {
             f = Ext.util.Format.dateRenderer('Y-m-d');
-            return f(v);
-        } else if (r.xtype.substr(0,5) == 'combo' || r.xtype.substr(0,9) == 'modx-combo') {
+            return f(v,md,rec,ri,ci,s,g);
+        } else if (r.xtype.substr(0,5) == 'combo' || r.xtype.substr(0,10) == 'modx-combo') {
             var cm = g.getColumnModel();
             var ed = cm.getCellEditor(ci,ri);
             if (!ed) {
@@ -258,7 +258,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
                 cm.setEditor(ci,ed);
             }
             f = MODx.combo.Renderer(ed.field);
-            return f(v);
+            return f(v,md,rec,ri,ci,s,g);
         }
         return v;
     }

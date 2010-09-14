@@ -130,10 +130,13 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                         Ext.callback(this.config.save_callback,this.config.scope || this,[r]);
                     }
                     e.record.commit();
-                    if (!this.config.preventSaveRefresh) this.refresh();
+                    if (!this.config.preventSaveRefresh) {
+                        this.refresh();
+                    }
                 },scope:this}
             }
         });
+        return true;
     }
     
     ,loadWindow: function(btn,e,win,or) {
@@ -269,13 +272,13 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 }
                 if (typeof(c[i].editor) == 'object' && c[i].editor.xtype) {
                     var r = c[i].editor.renderer;
-                    c[i].editor = Ext.ComponentMgr.create(c[i].editor);
+                    //c[i].editor = Ext.ComponentMgr.create(c[i].editor);
                     if (r === true) {
-                        c[i].renderer = MODx.combo.Renderer(c[i].editor);
+                        //c[i].renderer = MODx.combo.Renderer(c[i].editor);
                     } else if (c[i].editor.initialConfig.xtype === 'datefield') {
                         c[i].renderer = Ext.util.Format.dateRenderer(c[i].editor.initialConfig.format || 'Y-m-d');
                     } else if (r === 'boolean') {
-                        c[i].renderer = this.rendYesNo;
+                        //c[i].renderer = this.rendYesNo;
                     } else if (r === 'local' && typeof(c[i].renderer) == 'string') {
                         c[i].renderer = eval(c[i].renderer);
                     }
@@ -333,16 +336,21 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         this.getStore().reload();
     }
     
-    ,rendYesNo: function(d,c) {
-        switch(d) {
-            case '':
-                return '-';
-            case false:
-                c.css = 'red';
-                return _('no');
+    ,rendYesNo: function(v,md) {
+        if (v === 1 || v == '1') { v = true; }
+        if (v === 0 || v == '0') { v = false; }
+        switch (v) {
             case true:
-                c.css = 'green';
+            case 'true':
+            case 1:
+                md.css = 'green';
                 return _('yes');
+            case false:
+            case 'false':
+            case '':
+            case 0:
+                md.css = 'red';
+                return _('no');
         }
     }
 

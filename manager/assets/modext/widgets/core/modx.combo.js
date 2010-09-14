@@ -76,6 +76,8 @@ MODx.combo.Boolean = function(config) {
         ,editable: false
         ,selectOnFocus: false
         ,preventRender: true
+        ,forceSelection: true
+        ,enableKeyEvents: true
     });
     MODx.combo.Boolean.superclass.constructor.call(this,config);
 };
