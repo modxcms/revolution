@@ -519,7 +519,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         $fieldMeta= $this->xpdo->getFieldMeta($this->_class);
         $command= strtoupper($this->query['command']);
         $alias= $command == 'SELECT' ? $this->_class : $this->xpdo->getTableName($this->_class, false);
-        $alias= trim($alias, $this->xpdo->_escapeChar);
+        $alias= trim($alias, $this->xpdo->_escapeCharOpen . $this->xpdo->_escapeCharClose);
         if (is_array($conditions)) {
             if (isset ($conditions[0]) && !$this->isConditionalClause($conditions[0]) && is_array($pk) && count($conditions) == count($pk)) {
                 $iteration= 0;
@@ -556,7 +556,7 @@ abstract class xPDOQuery extends xPDOCriteria {
                             continue;
                         }
                     } elseif (is_scalar($val) || is_array($val) || $val === null) {
-                        $alias= $command == 'SELECT' ? $this->_class : trim($this->xpdo->getTableName($this->_class, false), $this->xpdo->_escapeChar);
+                        $alias= $command == 'SELECT' ? $this->_class : trim($this->xpdo->getTableName($this->_class, false), $this->xpdo->_escapeCharOpen . $this->xpdo->_escapeCharClose);
                         $operator= '=';
                         $conj = $conjunction;
                         $key_operator= explode(':', $key);
@@ -571,7 +571,7 @@ abstract class xPDOQuery extends xPDOCriteria {
                         }
                         if (strpos($key, '.') !== false) {
                             $key_parts= explode('.', $key);
-                            $alias= trim($key_parts[0], " {$this->xpdo->_escapeChar}");
+                            $alias= trim($key_parts[0], " {$this->xpdo->_escapeCharOpen}{$this->xpdo->_escapeCharClose}");
                             $key= $key_parts[1];
                         }
                         if ($val === null) {
@@ -603,7 +603,7 @@ abstract class xPDOQuery extends xPDOCriteria {
                             }
                             if (!empty($vals)) {
                                 $val = "(" . implode(',', $vals) . ")";
-                                $sql = "{$this->xpdo->_escapeChar}{$alias}{$this->xpdo->_escapeChar}.{$this->xpdo->_escapeChar}{$key}{$this->xpdo->_escapeChar} {$operator} {$val}";
+                                $sql = "{$this->xpdo->escape($alias)}.{$this->xpdo->escape($key)} {$operator} {$val}";
                                 $result[]= new xPDOQueryCondition(array('sql' => $sql, 'binding' => null, 'conjunction' => $conj));
                                 continue;
                             } else {

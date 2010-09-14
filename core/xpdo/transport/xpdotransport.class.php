@@ -536,7 +536,7 @@ class xPDOTransport {
      * @param string $to A file system location to extract the contents of the archive to.
      * @return array|boolean An array of unpacked resources or false on failure.
      */
-    protected static function _unpack(& $xpdo, $from, $to) {
+    public static function _unpack(& $xpdo, $from, $to) {
         $resources = false;
         if ($xpdo->getOption(xPDOTransport::ARCHIVE_WITH, null, 0) != xPDOTransport::ARCHIVE_WITH_PCLZIP && class_exists('ZipArchive', true) && $xpdo->loadClass('compression.xPDOZip', XPDO_CORE_PATH, true, true)) {
             $archive = new xPDOZip($xpdo, $from);

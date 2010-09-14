@@ -119,27 +119,27 @@ class xPDOObjectVehicle extends xPDOVehicle {
                     }
                 }
             }
-            if ($this->validate($transport, $object, $vOptions)) {
-                $preserveKeys = !empty ($vOptions[xPDOTransport::PRESERVE_KEYS]);
-                $upgrade = !empty ($vOptions[xPDOTransport::UPDATE_OBJECT]);
-                if (!empty ($vOptions[xPDOTransport::UNIQUE_KEY])) {
-                    $uniqueKey = $object->get($vOptions[xPDOTransport::UNIQUE_KEY]);
-                    if (is_array($uniqueKey)) {
-                        $criteria = array_combine($vOptions[xPDOTransport::UNIQUE_KEY], $uniqueKey);
-                    } else {
-                        $criteria = array (
-                            $vOptions[xPDOTransport::UNIQUE_KEY] => $uniqueKey
-                        );
-                    }
-                }
-                elseif (isset ($vOptions['key_expr']) && isset ($vOptions['key_format'])) {
-                    //TODO: implement ability to generate new keys
+            $preserveKeys = !empty ($vOptions[xPDOTransport::PRESERVE_KEYS]);
+            $upgrade = !empty ($vOptions[xPDOTransport::UPDATE_OBJECT]);
+            if (!empty ($vOptions[xPDOTransport::UNIQUE_KEY])) {
+                $uniqueKey = $object->get($vOptions[xPDOTransport::UNIQUE_KEY]);
+                if (is_array($uniqueKey)) {
+                    $criteria = array_combine($vOptions[xPDOTransport::UNIQUE_KEY], $uniqueKey);
                 } else {
-                    $criteria = $vOptions[xPDOTransport::NATIVE_KEY];
+                    $criteria = array (
+                        $vOptions[xPDOTransport::UNIQUE_KEY] => $uniqueKey
+                    );
                 }
-                if (!empty ($vOptions[xPDOTransport::PREEXISTING_MODE])) {
-                    $preExistingMode = intval($vOptions[xPDOTransport::PREEXISTING_MODE]);
-                }
+            }
+            elseif (isset ($vOptions['key_expr']) && isset ($vOptions['key_format'])) {
+                //TODO: implement ability to generate new keys
+            } else {
+                $criteria = $vOptions[xPDOTransport::NATIVE_KEY];
+            }
+            if (!empty ($vOptions[xPDOTransport::PREEXISTING_MODE])) {
+                $preExistingMode = intval($vOptions[xPDOTransport::PREEXISTING_MODE]);
+            }
+            if ($this->validate($transport, $object, $vOptions)) {
                 if ($obj = $transport->xpdo->getObject($vClass, $criteria)) {
                     $exists = true;
                     if ($preExistingMode !== xPDOTransport::REMOVE_PREEXISTING) {
@@ -154,12 +154,13 @@ class xPDOObjectVehicle extends xPDOVehicle {
                     }
                 }
                 elseif ($transport->xpdo->getDebug() === true) {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Object for class {$vClass} not found using criteria " . print_r($criteria, true));
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Object for class {$vClass} not found; criteria: " . print_r($criteria, true));
                 }
                 if (!$exists || ($exists && $upgrade)) {
                     $saved = $object->save();
                     if (!$saved) {
-                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error saving vehicle object: ' . print_r($vOptions, true));
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error saving vehicle object of class {$vClass}; criteria: " . print_r($criteria, true));
+                        if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Error saving vehicle object: " . print_r($vOptions, true));
                     } else {
                         if ($parentObject !== null && $fkMeta !== null) {
                             if ($fkMeta['owner'] == 'foreign') {
@@ -173,16 +174,20 @@ class xPDOObjectVehicle extends xPDOVehicle {
                         }
                     }
                 } else {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Skipping vehicle object (data object exists and cannot be upgraded): ' . print_r($vOptions, true));
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_INFO, "Skipping vehicle object of class {$vClass} (data object exists and cannot be upgraded); criteria: " . print_r($criteria, true));
+                    if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Skipping vehicle object (data object exists and cannot be upgraded): ' . print_r($vOptions, true));
                 }
                 if (($saved || $exists) && !$this->_installRelated($transport, $object, $element, $options)) {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not install related objects for vehicle: ' . print_r($vOptions, true));
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install related objects for vehicle object of class {$vClass}; criteria: " . print_r($criteria, true));
+                    if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not install related objects for vehicle: ' . print_r($vOptions, true));
                 }
                 if ($parentObject === null && !$this->resolve($transport, $object, $vOptions)) {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not resolve vehicle for object of class {$vClass}; criteria: " . print_r($criteria, true));
+                    if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not resolve vehicle: ' . print_r($vOptions, true));
                 }
             } else {
-                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle object: ' . print_r($vOptions, true));
+                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not validate vehicle object of class {$vClass}; criteria: " . print_r($criteria, true));
+                if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not validate vehicle object: ' . print_r($vOptions, true));
             }
         } else {
             $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not load vehicle!');
@@ -232,27 +237,27 @@ class xPDOObjectVehicle extends xPDOVehicle {
         if (is_object($object) && $object instanceof xPDOObject) {
             $vOptions = array_merge($options, $element);
             $vClass = $vOptions['class'];
+            $upgrade = !empty($vOptions[xPDOTransport::UPDATE_OBJECT]);
+            $preserveKeys = !empty ($vOptions[xPDOTransport::PRESERVE_KEYS]);
+            if (!empty ($vOptions[xPDOTransport::UNIQUE_KEY])) {
+                $uniqueKey = $object->get($vOptions[xPDOTransport::UNIQUE_KEY]);
+                if (is_array($uniqueKey)) {
+                    $criteria = array_combine($vOptions[xPDOTransport::UNIQUE_KEY], $uniqueKey);
+                } else {
+                    $criteria = array (
+                        $vOptions[xPDOTransport::UNIQUE_KEY] => $uniqueKey
+                    );
+                }
+            } else {
+                $criteria = $vOptions[xPDOTransport::NATIVE_KEY];
+            }
+            if (!empty ($vOptions[xPDOTransport::PREEXISTING_MODE])) {
+                $preExistingMode = intval($vOptions[xPDOTransport::PREEXISTING_MODE]);
+            }
             if ($this->validate($transport, $object, $vOptions)) {
                 $uninstalled = true;
                 if (isset($vOptions[xPDOTransport::UNINSTALL_OBJECT])) {
                     $uninstallObject = !empty($vOptions[xPDOTransport::UNINSTALL_OBJECT]);
-                }
-                $upgrade = !empty($vOptions[xPDOTransport::UPDATE_OBJECT]);
-                $preserveKeys = !empty ($vOptions[xPDOTransport::PRESERVE_KEYS]);
-                if (!empty ($vOptions[xPDOTransport::UNIQUE_KEY])) {
-                    $uniqueKey = $object->get($vOptions[xPDOTransport::UNIQUE_KEY]);
-                    if (is_array($uniqueKey)) {
-                        $criteria = array_combine($vOptions[xPDOTransport::UNIQUE_KEY], $uniqueKey);
-                    } else {
-                        $criteria = array (
-                            $vOptions[xPDOTransport::UNIQUE_KEY] => $uniqueKey
-                        );
-                    }
-                } else {
-                    $criteria = $vOptions[xPDOTransport::NATIVE_KEY];
-                }
-                if (!empty ($vOptions[xPDOTransport::PREEXISTING_MODE])) {
-                    $preExistingMode = intval($vOptions[xPDOTransport::PREEXISTING_MODE]);
                 }
                 $exists = false;
                 if ($obj = $transport->xpdo->getObject($vClass, $criteria)) {
@@ -264,7 +269,8 @@ class xPDOObjectVehicle extends xPDOVehicle {
                         $removed = $object->remove();
                         if (!$removed) {
                             $uninstalled = false;
-                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error removing vehicle object: ' . print_r($vOptions, true));
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing vehicle object of class {$vClass}; criteria: " . print_r($criteria, true));
+                            if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Error removing vehicle object: ' . print_r($vOptions, true));
                         }
                     }
                     if ($upgrade && $preExistingMode === xPDOTransport::RESTORE_PREEXISTING) {
@@ -273,7 +279,7 @@ class xPDOObjectVehicle extends xPDOVehicle {
                             $object->fromArray($preserved, '', true, true);
                             $restored = $object->save();
                             if (!$restored) {
-                                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error restoring preserved object: ' . print_r($transport->_preserved[$vOptions['guid']], true));
+                                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error restoring preserved object of class {$vClass}: " . print_r($transport->_preserved[$vOptions['guid']], true));
                             }
                         }
                     }
@@ -281,16 +287,20 @@ class xPDOObjectVehicle extends xPDOVehicle {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, 'Skipping ' . $vClass . ' object (data object does not exist and cannot be removed): ' . print_r($criteria, true));
                 }
                 if (!$this->_uninstallRelated($transport, $object, $element, $options)) {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not uninstall related objects for vehicle: ' . print_r($vOptions, true));
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not uninstall related objects for vehicle object of class {$vClass}; criteria: " . print_r($criteria, true));
+                    if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not uninstall related objects for vehicle: ' . print_r($vOptions, true));
                 }
                 if ($parentObject === null && !$this->resolve($transport, $object, $vOptions)) {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not resolve vehicle for object of class {$vClass}; criteria: " . print_r($criteria, true));
+                    if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not resolve vehicle: ' . print_r($vOptions, true));
                 }
             } else {
-                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle object: ' . print_r($vOptions, true));
+                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not validate vehicle object of class {$vClass}; criteria: " . print_r($criteria, true));
+                if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not validate vehicle object: ' . print_r($vOptions, true));
             }
         } else {
-            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Problem instantiating object from vehicle: ' . print_r(array_merge($options, $element), true));
+            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Problem instantiating object from vehicle');
+            if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Problem instantiating object from vehicle: ' . print_r(array_merge($options, $element), true));
         }
         return $uninstalled;
     }

@@ -42,17 +42,7 @@ if (!class_exists('xPDOObject')) {
  * @package xpdo
  * @subpackage om.sqlite
  */
-class xPDOObject_sqlite extends xPDOObject {
-    public $_currentTimestamps= array(
-        "CURRENT_TIMESTAMP"
-    );
-    public $_currentDates= array(
-        "CURRENT_DATE"
-    );
-    public $_currentTimes= array(
-        "CURRENT_TIME"
-    );
-}
+class xPDOObject_sqlite extends xPDOObject {}
 
 /**
  * Extend this abstract class to define a class having an integer primary key.
@@ -60,14 +50,4 @@ class xPDOObject_sqlite extends xPDOObject {
  * @package xpdo
  * @subpackage om.sqlite
  */
-class xPDOSimpleObject_sqlite extends xPDOSimpleObject {
-    public $_currentTimestamps= array(
-        "CURRENT_TIMESTAMP"
-    );
-    public $_currentDates= array(
-        "CURRENT_DATE"
-    );
-    public $_currentTimes= array(
-        "CURRENT_TIME"
-    );
-}
+class xPDOSimpleObject_sqlite extends xPDOSimpleObject {}

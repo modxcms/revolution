@@ -52,10 +52,6 @@ abstract class xPDOManager {
      * @var xPDOTransport The data transport class for migrating data.
      */
     public $transport= null;
-    /**
-     * @var array Describes the physical database types.
-     */
-    public $dbtypes= array ();
 
     /**
      * Get a xPDOManager instance.
@@ -66,28 +62,6 @@ abstract class xPDOManager {
         if ($xpdo !== null && $xpdo instanceof xPDO) {
             $this->xpdo= & $xpdo;
         }
-    }
-
-    /**
-     * Gets the PHP field type based upon the specified database type.
-     *
-     * @access public
-     * @param string $dbtype The database field type to convert.
-     * @return string The associated PHP type
-     */
-    public function getPhpType($dbtype) {
-        $phptype = 'string';
-        if ($dbtype !== null) {
-            foreach ($this->dbtypes as $type => $patterns) {
-                foreach ($patterns as $pattern) {
-                    if (preg_match($pattern, $dbtype)) {
-                        $phptype = $type;
-                        break 2;
-                    }
-                }
-            }
-        }
-        return $phptype;
     }
 
     /**

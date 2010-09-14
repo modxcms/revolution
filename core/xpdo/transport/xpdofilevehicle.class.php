@@ -103,10 +103,12 @@ class xPDOFileVehicle extends xPDOVehicle {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not install files from {$fileSource} to {$fileTarget}");
                 }
                 if (!$this->resolve($transport, $object, $vOptions)) {
-                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle: ' . print_r($vOptions, true));
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle for object: ' . print_r($object, true));
+                    if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not resolve vehicle: ' . print_r($vOptions, true));
                 }
             } else {
-                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle: ' . print_r($vOptions, true));
+                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle for object: ' . print_r($object, true));
+                if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not validate vehicle: ' . print_r($vOptions, true));
             }
         }
         return $installed;
@@ -164,7 +166,8 @@ class xPDOFileVehicle extends xPDOVehicle {
                     }
                 }
             } else {
-                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle: ' . print_r($vOptions, true));
+                $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle for object: ' . print_r($object, true));
+                if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not validate vehicle: ' . print_r($vOptions, true));
             }
         }
         return $uninstalled;

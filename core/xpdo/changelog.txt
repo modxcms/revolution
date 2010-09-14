@@ -2,6 +2,15 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- Fix accessibility of xPDOTransport::_unpack()
+- Divert excess log output from xPDOVehicle classes to LOG_LEVEL_DEBUG
+- Remove extra slash in path when generating class files
+- Simplify includes of parent classes
+- Add xPDODriver to better abstract driver-specific attributes and behavior
+- Fix several references to xPDO::$_escapeChar in xPDOQuery
+- Simplify path for require_once in platform class templates
+- Trim property keys and values in xPDO::parseDSN()
+- Split xPDO::$_escapeChar into $_escapeCharOpen and $_escapeCharClose
 - [#XPDO-66] Add xPDOTransport::ARCHIVE_WITH to allow explicit use of PclZip even if ZipArchive exists
 - Add xPDO::literal() method for SQL literal strings
 - Introduce pdo_sqlite driver support

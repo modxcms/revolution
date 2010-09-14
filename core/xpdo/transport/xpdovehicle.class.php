@@ -224,12 +224,12 @@ abstract class xPDOVehicle {
                         $fileName = $fileMeta['name'];
                         $fileSource = $transport->path . $fileMeta['source'];
                         if (!$resolved = include ($fileSource)) {
-                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error executing PHP script {$fileSource}");
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOVehicle resolver failed: type php ({$fileSource})");
                         }
                         break;
 
                     default :
-                        $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, "No modVehicle resolver found for type {$type}.");
+                        $transport->xpdo->log(xPDO::LOG_LEVEL_WARN, "xPDOVehicle does not support resolvers of type {$type}.");
                         break;
                 }
             }
@@ -264,7 +264,7 @@ abstract class xPDOVehicle {
                         $fileName = $fileMeta['name'];
                         $fileSource = $transport->path . $fileMeta['source'];
                         if (!$validated = include ($fileSource)) {
-                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error executing xPDOVehicle validator: type php ({$fileSource})");
+                            $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOVehicle validator failed: type php ({$fileSource})");
                         }
                         break;
 

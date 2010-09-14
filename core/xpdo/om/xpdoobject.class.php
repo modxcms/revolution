@@ -218,24 +218,6 @@ class xPDOObject {
     public $_options= array();
 
     /**
-     * An array of DB constants/functions that represent timestamp values.
-     * @var array
-     */
-    public $_currentTimestamps= array();
-
-    /**
-     * An array of DB constants/functions that represent date values.
-     * @var array
-     */
-    public $_currentDates= array();
-
-    /**
-     * An array of DB constants/functions that represent time values.
-     * @var array
-     */
-    public $_currentTimes= array();
-
-    /**
      * Responsible for loading a result set from the database.
      *
      * @static
@@ -733,7 +715,7 @@ class xPDOObject {
                                         $this->_fields[$k]= $ts;
                                         $set= true;
                                     } else {
-                                        if ($vType == 'utc' || in_array($v, $this->_currentTimestamps) || $v === '0000-00-00 00:00:00') {
+                                        if ($vType == 'utc' || in_array($v, $this->xpdo->driver->_currentTimestamps) || $v === '0000-00-00 00:00:00') {
                                             $this->_fields[$k]= (string) $v;
                                             $set= true;
                                         } else {
@@ -762,7 +744,7 @@ class xPDOObject {
                                         $this->_fields[$k]= $ts;
                                         $set= true;
                                     } else {
-                                        if ($vType == 'utc' || in_array($v, $this->_currentDates) || $v === '0000-00-00') {
+                                        if ($vType == 'utc' || in_array($v, $this->xpdo->driver->_currentDates) || $v === '0000-00-00') {
                                             $this->_fields[$k]= $v;
                                             $set= true;
                                         } else {
@@ -916,7 +898,7 @@ class xPDOObject {
                         case 'datetime' :
                             if ($dbType == 'int' || $dbType == 'integer' || $dbType == 'INT' || $dbType == 'INTEGER') {
                                 $ts= intval($value);
-                            } elseif (in_array($value, $this->_currentTimestamps)) {
+                            } elseif (in_array($value, $this->xpdo->driver->_currentTimestamps)) {
                                 $ts= time();
                             } else {
                                 $ts= strtotime($value);
@@ -941,7 +923,7 @@ class xPDOObject {
                         case 'date' :
                             if ($dbType == 'int' || $dbType == 'integer' || $dbType == 'INT' || $dbType == 'INTEGER') {
                                 $ts= intval($value);
-                            } elseif (in_array($value, $this->_currentDates)) {
+                            } elseif (in_array($value, $this->xpdo->driver->_currentDates)) {
                                 $ts= time();
                             } else {
                                 $ts= strtotime($value);
@@ -1227,11 +1209,11 @@ class xPDOObject {
                     $fieldType= PDO::PARAM_NULL;
                     $fieldValue= null;
                 }
-                elseif (in_array($this->_fieldMeta[$_k]['phptype'], array ('timestamp', 'datetime')) && in_array($fieldValue, $this->_currentTimestamps, true)) {
+                elseif (in_array($this->_fieldMeta[$_k]['phptype'], array ('timestamp', 'datetime')) && in_array($fieldValue, $this->xpdo->driver->_currentTimestamps, true)) {
                     $this->_fields[$_k]= strftime('%Y-%m-%d %H:%M:%S');
                     continue;
                 }
-                elseif (in_array($this->_fieldMeta[$_k]['phptype'], array ('date')) && in_array($fieldValue, $this->_currentDates, true)) {
+                elseif (in_array($this->_fieldMeta[$_k]['phptype'], array ('date')) && in_array($fieldValue, $this->xpdo->driver->_currentDates, true)) {
                     $this->_fields[$_k]= strftime('%Y-%m-%d');
                     continue;
                 }
