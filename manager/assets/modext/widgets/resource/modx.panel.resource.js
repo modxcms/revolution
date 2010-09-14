@@ -71,7 +71,6 @@ MODx.panel.Resource = function(config) {
                     ,listeners: {
                         'select': {fn: this.templateWarning,scope: this}
                     }
-                    ,value: config.record.template || MODx.config.default_template
                 }]
             },{
                 columnWidth: .30
@@ -490,7 +489,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (g) { g.getStore().commitChanges(); }
         var t = Ext.getCmp('modx-resource-tree');
 
-        this.getForm().setValues(o.result.object);
         if (t) {
             var ctx = Ext.getCmp('modx-resource-context-key').getValue();
             var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
@@ -501,8 +499,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
         if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
             location.href = location.href;
+        } else {
+            this.getForm().setValues(o.result.object);
+            Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
         }
-        Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
     }
     
     ,templateWarning: function() {

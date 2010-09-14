@@ -51,7 +51,6 @@ MODx.panel.Static = function(config) {
                     ,listeners: {
                         'select': {fn: this.templateWarning,scope: this}
                     }
-                    ,value: config.record.template || MODx.config.default_template
                 }]
             },{
                 columnWidth: .30

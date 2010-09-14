@@ -62,7 +62,7 @@ if (!empty($scriptProperties['parent']) && !is_numeric($scriptProperties['parent
 /* default settings */
 $scriptProperties['context_key']= empty($scriptProperties['context_key']) ? 'web' : $scriptProperties['context_key'];
 $scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);
-$scriptProperties['template'] = empty($scriptProperties['template']) ? 0 : intval($scriptProperties['template']);
+$scriptProperties['template'] = !isset($scriptProperties['template']) ? $modx->getOption('default_template',null,0) : intval($scriptProperties['template']);
 $scriptProperties['hidemenu'] = empty($scriptProperties['hidemenu']) ? 0 : 1;
 $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
 $scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? 0 : 1;
