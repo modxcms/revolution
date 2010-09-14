@@ -19,38 +19,28 @@
  */
 
 /**
- * Contains a derivative of the xPDOObject class for MySQL.
- *
- * This file contains the base persistent object classes for MySQL, which your
- * user-defined classes will extend when implementing an xPDO object model
- * targeted at the MySQL platform.
+ * The mysql implementation of the xPDODriver class.
  *
  * @package xpdo
  * @subpackage om.mysql
  */
-
-if (!class_exists('xPDOObject')) {
-    /** Include the parent {@link xPDOObject} class. */
-    include_once (dirname(dirname(__FILE__)) . '/xpdoobject.class.php');
-}
 
 /**
- * Implements extensions to the base xPDOObject class for MySQL.
- *
- * {@inheritdoc}
- *
- * @package xpdo
- * @subpackage om.mysql
+ * Include the parent {@link xPDODriver} class.
  */
-class xPDOObject_mysql extends xPDOObject {}
+require_once (dirname(dirname(__FILE__)) . '/xpdodriver.class.php');
 
 /**
- * Extend this abstract class to define a class having an integer primary key.
+ * Provides mysql driver abstraction for an xPDO instance.
+ *
+ * This is baseline metadata and methods used throughout the framework.  xPDODriver 
+ * class implementations are specific to a PDO driver and this instance is 
+ * implemented for mysql.
  *
  * @package xpdo
  * @subpackage om.mysql
  */
-class xPDOSimpleObject_mysql extends xPDOSimpleObject {
+class xPDODriver_mysql extends xPDODriver {
     public $_currentTimestamps= array (
         'CURRENT_TIMESTAMP',
         'CURRENT_TIMESTAMP()',
@@ -71,4 +61,22 @@ class xPDOSimpleObject_mysql extends xPDOSimpleObject {
         'CURRENT_TIME',
         'CURRENT_TIME()'
     );
+
+    /**
+     * Get a mysql xPDODriver instance.
+     *
+     * @param object $xpdo A reference to a specific xPDO instance.
+     */
+    function __construct(& $xpdo) {
+        parent :: __construct($xpdo);
+        $this->dbtypes['integer']= array('/INT/i');
+        $this->dbtypes['boolean']= array('/^BOOL/i');
+        $this->dbtypes['float']= array('/^DEC/i','/^NUMERIC$/i','/^FLOAT$/i','/^DOUBLE/i','/^REAL/i');
+        $this->dbtypes['string']= array('/CHAR/i','/TEXT/i','/^ENUM$/i','/^SET$/i','/^TIME$/i','/^YEAR$/i');
+        $this->dbtypes['timestamp']= array('/^TIMESTAMP$/i');
+        $this->dbtypes['datetime']= array('/^DATETIME$/i');
+        $this->dbtypes['date']= array('/^DATE$/i');
+        $this->dbtypes['binary']= array('/BINARY/i','/BLOB/i');
+        $this->dbtypes['bit']= array('/^BIT$/i');
+    }
 }

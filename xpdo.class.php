@@ -134,6 +134,12 @@ class xPDO {
      */
     public $config= null;
     /**
+     * An xPDODriver instance for the connection.
+     * @var xPDODriver
+     * @access public
+     */
+    public $driver= null;
+    /**
      * A map of data source meta data for all loaded classes.
      * @var array
      * @access public
@@ -208,11 +214,17 @@ class xPDO {
      */
     public $_cacheEnabled= false;
     /**
-     * Indicates the escape character used for a particular database engine.
+     * Indicates the opening escape character used for a particular database engine.
      * @var string
      * @access public
      */
-    public $_escapeChar= '';
+    public $_escapeCharOpen= '';
+    /**
+     * Indicates the closing escape character used for a particular database engine.
+     * @var string
+     * @access public
+     */
+    public $_escapeCharClose= '';
 
     /**
      * The xPDO Constructor.
@@ -242,10 +254,12 @@ class xPDO {
         $this->config['driverOptions']= is_array($driverOptions) ? $driverOptions : array();
         switch ($this->config['dbtype']) {
             case 'mysql':
-                $this->_escapeChar= "`";
+                $this->_escapeCharOpen= "`";
+                $this->_escapeCharClose= "`";
                 break;
             case 'sqlite':
-                $this->_escapeChar= '"';
+                $this->_escapeCharOpen= '"';
+                $this->_escapeCharClose= '"';
                 break;
             default:
                 break;
@@ -269,6 +283,7 @@ class xPDO {
                 }
             }
         }
+        $this->getDriver();
         $this->loadClass('xPDOObject');
         $this->loadClass('xPDOSimpleObject');
         if (isset($this->config[xPDO::OPT_BASE_CLASSES])) {
@@ -280,7 +295,7 @@ class xPDO {
             $this->cachePath = $this->config[xPDO::OPT_CACHE_PATH];
         }
     }
-
+    
     /**
      * Create the PDO connection to a database specified in the configuration.
      *
@@ -1215,6 +1230,29 @@ class xPDO {
     }
 
     /**
+     * Gets the driver class for this xPDO connection.
+     *
+     * The driver class provides baseline data and operations for a specific database driver.
+     *
+     * @uses xPDODriver
+     * @return object|null A driver instance for the xPDO connection, or null
+     * if a driver class can not be instantiated.
+     */
+    public function getDriver() {
+        if ($this->driver === null || !$this->driver instanceof xPDODriver) {
+            $loaded= include_once(XPDO_CORE_PATH . 'om/' . $this->config['dbtype'] . '/xpdodriver.class.php');
+            if ($loaded) {
+                $driverClass = 'xPDODriver_' . $this->config['dbtype'];
+                $this->driver= new $driverClass ($this);
+            }
+            if (!$this->driver) {
+                $this->log(xPDO::LOG_LEVEL_ERROR, "Could not load xPDODriver class for the {$this->config['dbtype']} PDO driver.");
+            }
+        }
+        return $this->driver;
+    }
+
+    /**
      * Gets the absolute path to the cache directory.
      *
      * @return string The full cache directory path.
@@ -1454,12 +1492,12 @@ class xPDO {
      * escape column names that might match a reserved string for that SQL interpreter. To write database agnostic
      * queries with xPDO, it is highly recommend to escape any database or column names in any native SQL strings used.
      *
-     * @param string $string A string to escape using the platform-specific escape character.
-     * @return string The string escaped with the platform-specific escape character.
+     * @param string $string A string to escape using the platform-specific escape characters.
+     * @return string The string escaped with the platform-specific escape characters.
      */
     public function escape($string) {
-        $string = trim($string, $this->_escapeChar);
-        return $this->_escapeChar . $string . $this->_escapeChar;
+        $string = trim($string, $this->_escapeCharOpen . $this->_escapeCharClose);
+        return $this->_escapeCharOpen . $string . $this->_escapeCharClose;
     }
 
 	/**
@@ -1469,7 +1507,7 @@ class xPDO {
 	 * @return string The string with any escape or quote characters trimmed.
 	 */
 	public function literal($string) {
-		$string = trim($string, $this->_escapeChar . $this->_quoteChar);
+		$string = trim($string, $this->_escapeCharOpen . $this->_escapeCharClose . $this->_quoteChar);
 		return $string;
 	}
 
@@ -1509,10 +1547,10 @@ class xPDO {
         for ($a= 0, $b= count($parameters); $a < $b; $a++) {
             $tmp= explode('=', $parameters[$a]);
             if (count($tmp) == 2) {
-                $result[$tmp[0]]= $tmp[1];
+                $result[strtolower(trim($tmp[0]))]= trim($tmp[1]);
             } else {
-                $result['dbname']= $parameters[$a];
-        }
+                $result['dbname']= trim($parameters[$a]);
+        	}
         }
         return $result;
     }

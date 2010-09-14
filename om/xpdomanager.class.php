@@ -52,10 +52,6 @@ abstract class xPDOManager {
      * @var xPDOTransport The data transport class for migrating data.
      */
     public $transport= null;
-    /**
-     * @var array Describes the physical database types.
-     */
-    public $dbtypes= array ();
 
     /**
      * Get a xPDOManager instance.
