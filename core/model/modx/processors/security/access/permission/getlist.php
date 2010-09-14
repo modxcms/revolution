@@ -34,13 +34,14 @@ $permissions = $modx->getCollection('modAccessPermission',$c);
 /* iterate */
 $list = array();
 foreach ($permissions as $permission) {
-    $permissionArray = $permission->get(array('name','description','lexicon'));
+    $permissionArray = $permission->get(array('name','description'));
 
-    if (!empty($permissionArray['lexicon'])) {
-        if (strpos($permissionArray['lexicon'],':') !== false) {
-            $modx->lexicon->load('en:'.$permissionArray['lexicon']);
+    $lexicon = $permission->get('lexicon');
+    if (!empty($lexicon)) {
+        if (strpos($lexicon,':') !== false) {
+            $modx->lexicon->load('en:'.$lexicon);
         } else {
-            $modx->lexicon->load('en:core:'.$permissionArray['lexicon']);
+            $modx->lexicon->load('en:core:'.$lexicon);
         }
         $desc = $modx->lexicon($desc);
     }
