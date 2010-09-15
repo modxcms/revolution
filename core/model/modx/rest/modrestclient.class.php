@@ -68,7 +68,7 @@ class modRestClient {
      * @return boolean True if a connection can be made.
      */
     public function getConnection() {
-        if (function_exists('curl_init') && false) {
+        if (function_exists('curl_init')) {
             $className = $this->modx->loadClass('rest.modRestCurlClient','',false,true);
         } else if (function_exists('fsockopen')) {
             $className = $this->modx->loadClass('rest.modRestSockClient','',false,true);
