@@ -335,7 +335,13 @@ ul.x-tab-strip li.x-tab-strip-active  {
 
 /* fix combo on grid editor bug */
 .x-grid-editor .x-form-field-wrap {
-    background-color: white !important;
+    background: #F6F2F7 url(../images/modx-theme/form/combo-bck.png) repeat-x scroll 0px 100%;
+}
+.x-grid-editor .x-form-field-wrap input {
+    background-color: transparent !important;
+}
+.x-grid-editor .x-form-field-wrap img {
+    background: white url(../images/modx-theme/form/trigger.png);
 }
 
 .x-form-field-wrap .x-form-trigger{
@@ -463,8 +469,9 @@ ul.x-tab-strip li.x-tab-strip-active  {
     color: gray;
 }
 
-.x-small-editor .x-form-field {
+.x-small-editor .x-form-field, .x-small-editor .x-form-trigger {
     font: normal 11px arial, tahoma, helvetica, sans-serif;
+    margin-top: 7px;
 }
 
 .ext-safari .x-small-editor .x-form-field {
@@ -1914,6 +1921,26 @@ a.x-menu-item {
 .x-window-bc .x-panel-btns {
     background-color:#F5F5F5;
 }
+.x-window-dlg .x-msg-box-wait {
+    background-image:url(../images/modx-theme/grid/loading.gif);
+}
+
+.x-window-dlg .ext-mb-info {
+    background-image:url(../images/modx-theme/window/icon-info.gif);
+}
+
+.x-window-dlg .ext-mb-warning {
+    background-image:url(../images/modx-theme/window/icon-warning.gif);
+}
+
+.x-window-dlg .ext-mb-question {
+    background-image:url(../images/modx-theme/window/icon-question.gif);
+}
+
+.x-window-dlg .ext-mb-error {
+    background-image:url(../images/modx-theme/window/icon-error.gif);
+}
+
 
 .x-panel-ml{
     border-left:1px solid #E3E3E3;
