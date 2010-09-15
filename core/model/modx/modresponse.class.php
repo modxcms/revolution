@@ -191,7 +191,7 @@ class modResponse {
      * @param integer $count_attempts The number of times to attempt redirection.
      * @param string $type The type of redirection to attempt.
      */
-    public function sendRedirect($url, $count_attempts= 0, $type= '') {
+    public function sendRedirect($url, $count_attempts= 0, $type= '', $responseCode= '') {
         if (empty ($url)) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, "Attempted to redirect to an empty URL.");
             return false;
@@ -227,6 +227,9 @@ class modResponse {
                 $url= $this->modx->getOption('site_url',null,'/') . $url;
             }
             $header= 'Location: ' . $url;
+        }
+        if ($responseCode && (strpos($responseCode, '30') !== false)) {
+            header($responseCode);
         }
         header($header);
         exit();

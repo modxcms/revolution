@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.1-pl
 ====================================
+- [#MODX-2317] Add responseCode parameter to modX::sendRedirect() method
 - Fixed issue with @DIRECTORY binding not postfixing base path with / before value
 - Many styling enhancements, fixes for [#MODX-2264], [#MODX-2193], [#MODX-1885], [#MODX-1847]
 - Fixed issue with lexicon translations for permissions dropdown in mgr

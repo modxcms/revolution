@@ -762,11 +762,11 @@ class modX extends xPDO {
      * @param integer $count_attempts The number of times to attempt redirection.
      * @param string $type The type of redirection to attempt.
      */
-    public function sendRedirect($url, $count_attempts= 0, $type= '') {
+    public function sendRedirect($url, $count_attempts= 0, $type= '', $responseCode = '') {
         if (!$this->getResponse()) {
             $this->log(modX::LOG_LEVEL_FATAL, "Could not load response class.");
         }
-        $this->response->sendRedirect($url, $count_attempts, $type);
+        $this->response->sendRedirect($url, $count_attempts, $type, $responseCode);
     }
 
     /**
