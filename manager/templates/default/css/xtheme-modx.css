@@ -2076,6 +2076,18 @@ a.x-menu-item {
     border-bottom-color: #d0d0d0;
 }
 
+.x-panel-ghost {
+    background-color: #dbdbdb;
+}
+
+.x-panel-ghost ul {
+    border-color: #d0d0d0;
+}
+
+.x-panel-dd-spacer {
+    border-color: #d0d0d0;
+}
+
 .x-panel-collapsed .x-window-tl {
     border-bottom-color: #84a0c4;
 }
