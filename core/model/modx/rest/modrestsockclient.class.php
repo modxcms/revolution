@@ -32,7 +32,7 @@ class modRestSockClient extends modRestClient {
 
         $out = $method." ".$purl['path']."/$path HTTP/1.1\r\n"
                 ."Host: $host\r\n"
-                ."User-Agent: ".$this->config[modRestCurlClient::OPT_USERAGENT]."\r\n"
+                ."User-Agent: ".$this->config[modRestClient::OPT_USERAGENT]."\r\n"
                 ."Content-type: text/xml; charset=UTF-8\r\n"
                 ."Accept: */*\r\n"
                 ."Accept-Language: en-us,en;q=0.5\r\n"
