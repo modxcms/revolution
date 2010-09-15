@@ -352,6 +352,14 @@ textarea.x-form-field {
 #modx-action-buttons .x-toolbar-left {
     width: auto !important;
 }
+/* collapse for resource panel */
+#modx-resource-tabs .x-tool-toggle {
+    margin-top: 14px;
+    position: absolute;
+    top: 47px;
+    right: 0;
+    z-index: 9999;
+}
 
 /* top bar */
 #modx-topbar {
