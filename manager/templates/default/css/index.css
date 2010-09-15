@@ -327,10 +327,6 @@ textarea.x-form-field {
     font-size: 1em !important;    
 }
 
-.x-grid3-row-expanded .x-grid3-row-expander {
-    background-position: -32px 2px;
-}
-
 .grid-row-inactive {
     color: #999 !important;
 }
