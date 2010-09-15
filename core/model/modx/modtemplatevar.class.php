@@ -453,7 +453,7 @@ class modTemplateVar extends modElement {
      */
     public function getDisplayParams() {
         $settings = array();
-        $params = $tv->get('display_params');
+        $params = $this->get('display_params');
         $ps = explode('&',$params);
         foreach ($ps as $p) {
             $param = explode('=',$p);
@@ -547,9 +547,10 @@ class modTemplateVar extends modElement {
      * @access public
      * @param string $value The value specified from the binding.
      * @param integer $resourceId The resource in which the TV is assigned.
+     * @param boolean $preProcess Whether or not to process certain bindings.
      * @return string The processed value.
      */
-    public function processBindings($value= '', $resourceId= 0, $processInherit = true) {
+    public function processBindings($value= '', $resourceId= 0, $preProcess = true) {
         $bdata = $this->getBindingDataFromValue($value);
         if (empty($bdata['cmd'])) return $value;
 
@@ -558,50 +559,60 @@ class modTemplateVar extends modElement {
         $param = !empty($bdata['param']) ? $bdata['param'] : null;
         switch ($cmd) {
             case 'FILE':
-                $output = $this->processFileBinding($param);
+                if ($preProcess) {
+                    $output = $this->processFileBinding($param);
+                }
                 break;
 
             case 'CHUNK': /* retrieve a chunk and process it's content */
-                $output = $this->xpdo->getChunk($param);
+                if ($preProcess) {
+                    $output = $this->xpdo->getChunk($param);
+                }
                 break;
 
             case 'RESOURCE':
             case 'DOCUMENT': /* retrieve a document and process it's content */
-                $rs = $this->xpdo->getDocument($param);
-                if (is_array($rs)) $output = $rs['content'];
-                else $output = 'Unable to locate resource '.$param;
+                if ($preProcess) {
+                    $rs = $this->xpdo->getDocument($param);
+                    if (is_array($rs)) $output = $rs['content'];
+                    else $output = 'Unable to locate resource '.$param;
+                }
                 break;
 
             case 'SELECT': /* selects a record from the cms database */
-                $dbtags = array();
-                $dbtags['DBASE'] = $this->xpdo->db->config['dbase'];
-                $dbtags['PREFIX'] = $this->xpdo->db->config['table_prefix'];
-                foreach($dbtags as $key => $pValue) {
-                    $param = str_replace('[[+'.$key.']]', $pValue, $param);
-                }
-                $stmt = $this->xpdo->query('SELECT '.$param);
-                if ($stmt && $stmt instanceof PDOStatement) {
-                    $data = '';
-                    while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-                        $col = '';
-                        if (isset($row[1])) {
-                            $col = $row[0].'=='.$row[1];
-                        } else {
-                            $col = $row[0];
-                        }
-                        $data .= (!empty($data) ? '||' : '').$col;
+                if ($preProcess) {
+                    $dbtags = array();
+                    $dbtags['DBASE'] = $this->xpdo->db->config['dbase'];
+                    $dbtags['PREFIX'] = $this->xpdo->db->config['table_prefix'];
+                    foreach($dbtags as $key => $pValue) {
+                        $param = str_replace('[[+'.$key.']]', $pValue, $param);
                     }
-                    $stmt->closeCursor();
+                    $stmt = $this->xpdo->query('SELECT '.$param);
+                    if ($stmt && $stmt instanceof PDOStatement) {
+                        $data = '';
+                        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+                            $col = '';
+                            if (isset($row[1])) {
+                                $col = $row[0].'=='.$row[1];
+                            } else {
+                                $col = $row[0];
+                            }
+                            $data .= (!empty($data) ? '||' : '').$col;
+                        }
+                        $stmt->closeCursor();
+                    }
+                    $output = $data;
                 }
-                $output = $data;
                 break;
 
             case 'EVAL':        /* evaluates text as php codes return the results */
-                $output = eval($param);
+                if ($preProcess) {
+                    $output = eval($param);
+                }
                 break;
 
             case 'INHERIT':
-                if ($processInherit) {
+                if ($preProcess) {
                     $output = $this->processInheritBinding($param,$resourceId);
                 } else {
                     $output = $value;
@@ -705,6 +716,10 @@ class modTemplateVar extends modElement {
             fclose($handle);
         } else {
             $buffer= " Could not retrieve document '$file'.";
+        }
+        $displayParams = $this->getDisplayParams();
+        if (!empty($displayParams['delimiter'])) {
+            $buffer = str_replace("\n",'||',$buffer);
         }
         return $buffer;
     }
