@@ -114,6 +114,7 @@ class modLexicon {
     public function fetch($prefix = '',$removePrefix = false) {
         if (!empty($prefix)) {
             $lex = array();
+            $lang = $this->_lexicon;
             foreach ($lang as $k => $v) {
                 if (strpos($k,$prefix) !== false) {
                     $key = $removePrefix ? str_replace($prefix,'',$k) : $k;
@@ -187,7 +188,11 @@ class modLexicon {
                     $topic_parsed = $params[2];
                 }
 
+                $englishEntries = $language != 'en' ? $this->loadCache($namespace,$topic_parsed,'en') : false;
                 $entries = $this->loadCache($namespace,$topic_parsed,$language);
+                if (is_array($englishEntries) && !empty($englishEntries)) {
+                    $entries = array_merge($englishEntries,$entries);
+                }
                 if (is_array($entries)) {
                     $this->_loadedTopics[] = $topicStr;
                     $this->_lexicon = is_array($this->_lexicon) ? array_merge($this->_lexicon, $entries) : $entries;
@@ -246,7 +251,7 @@ class modLexicon {
             }
         }
         if (empty($cached)) {
-            $this->modx->log(xPDO::LOG_LEVEL_WARN, "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
+            $this->modx->log(xPDO::LOG_LEVEL_DEBUG, "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
         }
         return $cached;
     }
@@ -359,7 +364,7 @@ class modLexicon {
     public function process($key,array $params = array()) {
         /* make sure key exists */
         if (!is_string($key) || !isset($this->_lexicon[$key])) {
-            $this->modx->log(xPDO::LOG_LEVEL_WARN,'Language string not found: "'.$key.'"');
+            $this->modx->log(xPDO::LOG_LEVEL_DEBUG,'Language string not found: "'.$key.'"');
             return $key;
         }
         /* if params are passed, allow for parsing of [[+key]] values to strings */

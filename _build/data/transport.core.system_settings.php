@@ -24,6 +24,15 @@ $settings['allow_multiple_emails']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['archive_with']= $xpdo->newObject('modSystemSetting');
+$settings['archive_with']->fromArray(array (
+  'key' => 'archive_with',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['auto_menuindex']= $xpdo->newObject('modSystemSetting');
 $settings['auto_menuindex']->fromArray(array (
   'key' => 'auto_menuindex',
@@ -276,6 +285,15 @@ $settings['custom_resource_classes']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['default_per_page']= $xpdo->newObject('modSystemSetting');
+$settings['default_per_page']->fromArray(array (
+  'key' => 'default_per_page',
+  'value' => '20',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['default_template']= $xpdo->newObject('modSystemSetting');
 $settings['default_template']->fromArray(array (
   'key' => 'default_template',
@@ -387,6 +405,15 @@ $settings['feed_modx_security_enabled']->fromArray(array (
 $settings['filemanager_path']= $xpdo->newObject('modSystemSetting');
 $settings['filemanager_path']->fromArray(array (
   'key' => 'filemanager_path',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+), '', true, true);
+$settings['filemanager_url']= $xpdo->newObject('modSystemSetting');
+$settings['filemanager_url']->fromArray(array (
+  'key' => 'filemanager_url',
   'value' => '',
   'xtype' => 'textfield',
   'namespace' => 'core',
@@ -786,7 +813,7 @@ $settings['phpthumb_cache_maxage']->fromArray(array (
 $settings['phpthumb_cache_maxsize']= $xpdo->newObject('modSystemSetting');
 $settings['phpthumb_cache_maxsize']->fromArray(array (
   'key' => 'phpthumb_cache_maxsize',
-  'value' => 100 * 1024 * 1024, // 100MB
+  'value' => 100, // 100MB
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
@@ -823,6 +850,15 @@ $settings['phpthumb_far']= $xpdo->newObject('modSystemSetting');
 $settings['phpthumb_far']->fromArray(array (
   'key' => 'phpthumb_far',
   'value' => 'C',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_imagemagick_path']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_imagemagick_path']->fromArray(array (
+  'key' => 'phpthumb_imagemagick_path',
+  'value' => '',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
@@ -1198,7 +1234,7 @@ $settings['welcome_screen']->fromArray(array (
 $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
-  'value' => 'http://assets.modxcms.com/revolution/welcome.20.html',
+  'value' => 'http://misc.modx.com/revolution/welcome.20.html',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1223,3 +1259,12 @@ $settings['which_element_editor']->fromArray(array (
   'editedon' => null,
 ), '', true, true);
 return $settings;
+$settings['xhtml_urls']= $xpdo->newObject('modSystemSetting');
+$settings['xhtml_urls']->fromArray(array (
+  'key' => 'xhtml_urls',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);

@@ -47,19 +47,22 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
     $tvs = array();
     if ($template) {
         $c = $modx->newQuery('modTemplateVar');
-        $c->select('
-            DISTINCT `modTemplateVar`.*,
-            `TemplateVarResource`.`value` AS `value`
-        ');
+        $c->query['distinct'] = 'DISTINCT';
+        $c->select(array(
+            'modTemplateVar.*',
+            'TemplateVarResource.value',
+            'TemplateVarTemplate.rank',
+        ));
+        $c->leftJoin('modCategory','Category');
         $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplate',array(
             '`TemplateVarTemplate`.`tmplvarid` = `modTemplateVar`.`id`',
-            '`TemplateVarTemplate`.templateid' => $templateId,
+            '`TemplateVarTemplate`.`templateid`' => $templateId,
         ));
         $c->leftJoin('modTemplateVarResource','TemplateVarResource',array(
             '`TemplateVarResource`.`tmplvarid` = `modTemplateVar`.`id`',
-            '`TemplateVarResource`.contentid' => $resourceId,
+            '`TemplateVarResource`.`contentid`' => $resourceId,
         ));
-        $c->sortby('`TemplateVarTemplate`.`rank`,`modTemplateVar`.`rank`');
+        $c->sortby('`Category`.`category`,`TemplateVarTemplate`.`rank`,`modTemplateVar`.`rank`','ASC');
         $tvs = $modx->getCollection('modTemplateVar',$c);
         
         $modx->smarty->assign('tvcount',count($tvs));
@@ -69,7 +72,11 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
                 $tv->set('inherited',true);
             }
             if ($tv->get('value') == null) {
-                $tv->set('value',$tv->get('default_text'));
+                $v = $tv->get('default_text');
+                if ($tv->get('type') == 'checkbox' && $tv->get('value') == '') {
+                    $v = '';
+                }
+                $tv->set('value',$v);
             }
             
             if ($tv->type == 'richtext') {
@@ -86,9 +93,10 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
             if (empty($inputForm)) continue;
 
             $tv->set('formElement',$inputForm);
-            if (!is_array($categories[$tv->category]->tvs))
+            if (!is_array($categories[$tv->category]->tvs)) {
                 $categories[$tv->category]->tvs = array();
-            $categories[$tv->category]->tvs[$tv->id] = $tv;
+            }
+            $categories[$tv->category]->tvs[] = $tv;
         }
     }
 }

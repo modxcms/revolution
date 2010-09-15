@@ -33,12 +33,6 @@ MODx.grid.PluginEvent = function(config) {
         ,fields: ['name','service','groupname','enabled','priority','propertyset','menu']
         ,paging: false
         ,remoteSort: false
-        ,viewConfig: {
-            forceFit: false
-            ,enableRowBody: true
-            ,autoFill: false
-            ,showPreview: true
-        }
         ,singleText: _('event')
         ,pluralText: _('events')
         ,plugins: ec

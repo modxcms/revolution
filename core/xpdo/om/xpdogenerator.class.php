@@ -33,10 +33,11 @@
  * structure.  It can also reverse-engineer XML schemas from an existing
  * database.
  *
+ * @abstract
  * @package xpdo
  * @subpackage om
  */
-class xPDOGenerator {
+abstract class xPDOGenerator {
     /**
      * @var xPDOManager $manager A reference to the xPDOManager using this
      * generator.
@@ -103,6 +104,10 @@ class xPDOGenerator {
      * @var string $fieldKey A placeholder for the current field key.
      */
     public $fieldKey= '';
+    /**
+     * @var string $indexName A placeholder for the current index name.
+     */
+    public $indexName= '';
 
     /**
      * Constructor
@@ -157,26 +162,9 @@ class xPDOGenerator {
     }
 
     /**
-     * Gets the PHP field type based upon the specified database type.
-     *
-     * @access public
-     * @param string $dbtype The database field type to convert.
-     * @return string The associated PHP type
-     */
-    public function getPhpType($dbtype) {
-        $dbtype= strtoupper($dbtype);
-        $phptype = '';
-        foreach ($this->manager->dbtypes as $key => $type) {
-            if (in_array($dbtype, $type)) {
-                $phptype= $key;
-                break;
-            }
-        }
-        return $phptype;
-    }
-
-    /**
      * Format the passed default value as an XML attribute.
+     *
+     * Override this in different PDO driver implementations if necessary.
      *
      * @access public
      * @param string $value The value to encapsulate in the default tag.
@@ -193,32 +181,12 @@ class xPDOGenerator {
     /**
      * Format the passed database index value as an XML attribute.
      *
+     * @abstract Implement this for specific PDO driver implementations.
      * @access public
      * @param string $index The DB representation string of the index
      * @return string The formatted XML attribute string
      */
-    public function getIndex($index) {
-        switch ($index) {
-            case 'PRI':
-                $index= 'pk';
-                break;
-
-            case 'UNI':
-                $index= 'unique';
-                break;
-
-            case 'MUL':
-                $index= 'index';
-                break;
-
-            default:
-                break;
-        }
-        if (!empty ($index)) {
-            $index= ' index="' . $index . '"';
-        }
-        return $index;
-    }
+    abstract public function getIndex($index);
 
     /**
      * Parses an XPDO XML schema and generates classes and map files from it.
@@ -278,7 +246,7 @@ class xPDOGenerator {
     /**
      * Handles formatting of the open XML element.
      *
-     * @access private
+     * @access protected
      * @param xmlParser &$parser
      * @param string &$element
      * @param array &$attributes
@@ -315,6 +283,7 @@ class xPDOGenerator {
                 }
                 break;
             case 'field' :
+                $dbtype = 'varchar';
                 while (list ($attrName, $attrValue)= each($attributes)) {
                     switch ($attrName) {
                         case 'key' :
@@ -324,19 +293,69 @@ class xPDOGenerator {
                             break;
                         case 'default' :
                             $attrValue = ($attrValue === 'NULL' ? null : $attrValue);
-                            $attrValue = in_array(strtoupper($attributes['dbtype']), $this->manager->dbtypes['integer']) ? intval($attrValue) : $attrValue;
-                            $attrValue = in_array(strtoupper($attributes['dbtype']), $this->manager->dbtypes['boolean']) ? intval($attrValue) : $attrValue;
-                            $attrValue = in_array(strtoupper($attributes['dbtype']), $this->manager->dbtypes['bit']) ? intval($attrValue) : $attrValue;
-                            $attrValue = in_array(strtoupper($attributes['dbtype']), $this->manager->dbtypes['float']) ? floatval($attrValue) : $attrValue;
+                            switch ($this->manager->getPhpType($dbtype)) {
+                                case 'integer':
+                                case 'boolean':
+                                case 'bit':
+                                    $attrValue = (integer) $attrValue;
+                                    break;
+                                case 'float':
+                                case 'numeric':
+                                    $attrValue = (float) $attrValue;
+                                    break;
+                                default:
+                                    break;
+                            }
                             $this->map[$this->className]['fields'][$this->fieldKey]= $attrValue;
                             $this->map[$this->className]['fieldMeta'][$this->fieldKey]['default']= $attrValue;
                             break;
                         case 'null' :
                             $attrValue = ($attrValue && $attrValue !== 'false' ? true : false);
                         default :
+                            if ($attrName == 'dbtype') $dbtype = $attrValue;
                             $this->map[$this->className]['fieldMeta'][$this->fieldKey][$attrName]= $attrValue;
                             break;
                     }
+                }
+                break;
+            case 'index' :
+                $node= array ();
+                while (list ($attrName, $attrValue)= each($attributes)) {
+                    switch ($attrName) {
+                        case 'name':
+                            $this->indexName= $attrValue;
+                            break;
+                        case 'primary':
+                        case 'unique':
+                        case 'fulltext':
+                            $attrValue = (empty($attrValue) || $attrValue === 'false' ? false : true);
+                        default:
+                            $node[$attrName] = $attrValue;
+                            break;
+                    }
+                }
+                if ($node) {
+                    $node['columns']= array();
+                    $this->map[$this->className]['indexes'][$this->indexName]= $node;
+                }
+                break;
+            case 'column' :
+                $key = '';
+                $node = array ();
+                while (list($attrName, $attrValue)= each($attributes)) {
+                    switch ($attrName) {
+                        case 'key':
+                            $key= $attrValue;
+                            break;
+                        case 'null':
+                            $attrValue = (empty($attrValue) || $attrValue === 'false' ? false : true);
+                        default:
+                            $node[$attrName]= $attrValue;
+                            break;
+                    }
+                }
+                if ($key) {
+                    $this->map[$this->className]['indexes'][$this->indexName]['columns'][$key]= $node;
                 }
                 break;
             case 'aggregate' :
@@ -410,14 +429,14 @@ class xPDOGenerator {
     /**
      * Handles the closing of XML tags.
      *
-     * @access private
+     * @access protected
      */
     protected function _handleCloseElement(& $parser, & $element) {}
 
     /**
      * Handles the XML CDATA tags
      *
-     * @access private
+     * @access protected
      */
     protected function _handleCData(& $parser, & $data) {}
 
@@ -473,7 +492,7 @@ class xPDOGenerator {
             }
             $fileContent= str_replace(array_keys($replaceVars), array_values($replaceVars), $this->classTemplate);
             if (is_dir($path)) {
-                $fileName= $path . '/' . strtolower($className) . '.class.php';
+                $fileName= $path . strtolower($className) . '.class.php';
                 if (!file_exists($fileName)) {
                     if ($file= @ fopen($fileName, 'wb')) {
                         if (!fwrite($file, $fileContent)) {
@@ -575,17 +594,12 @@ class xPDOGenerator {
     /**
      * Compile the packages into a single file for quicker loading.
      *
-     * @todo Implement this to compile packages into a single file for quicker
-     * loading
-     *
+     * @abstract
      * @access public
      * @param string $path The absolute path to compile into.
      * @return boolean True if the compiling went successfully.
      */
-    public function compile($path= '') {
-        $compiled= false;
-        return $compiled;
-    }
+    abstract public function compile($path= '');
 
     /**
      * Return the class template for the class files.
@@ -597,12 +611,7 @@ class xPDOGenerator {
         if ($this->classTemplate) return $this->classTemplate;
         $template= <<<EOD
 <?php
-class [+class+] extends [+extends+] {
-    public function __construct(& \$xpdo) {
-        parent :: __construct(\$xpdo);
-    }
-}
-?>
+class [+class+] extends [+extends+] {}
 EOD;
         return $template;
     }
@@ -617,13 +626,8 @@ EOD;
         if ($this->platformTemplate) return $this->platformTemplate;
         $template= <<<EOD
 <?php
-require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\\\', '/') . '/[+class-lowercase+].class.php');
-class [+class+]_$platform extends [+class+] {
-    public function __construct(& \$xpdo) {
-        parent :: __construct(\$xpdo);
-    }
-}
-?>
+require_once (dirname(dirname(__FILE__)) . '/[+class-lowercase+].class.php');
+class [+class+]_$platform extends [+class+] {}
 EOD;
         return $template;
     }

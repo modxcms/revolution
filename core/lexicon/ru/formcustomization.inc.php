@@ -12,7 +12,7 @@ $_lang['activate'] = 'Включить';
 $_lang['constraint'] = 'Ограничивающее значение';
 $_lang['constraint_class'] = 'Ограничивающий класс';
 $_lang['constraint_class_desc'] = 'Необязательно. Если задано значение, то вместе с ограничивающим полем и настройками ограничения, сведёт это правило к применённым ограничениям.';
-$_lang['constraint_desc'] = 'Необязательно. Значение ограничевающего поля, при наличие которого правило будет работать.';
+$_lang['constraint_desc'] = 'Необязательно. Значение ограничивающего поля, при наличие которого правило будет работать.';
 $_lang['constraint_field'] = 'Ограничивающее поле';
 $_lang['constraint_field_desc'] = 'Необязательно. Поле при наличии которого правило будет работать.';
 $_lang['containing_panel'] = 'Родительская панель';
@@ -23,10 +23,8 @@ $_lang['field_desc'] = 'Это область к которой применяе
 $_lang['field_default'] = 'Значение поля по умолчанию';
 $_lang['field_label'] = 'Название поля';
 $_lang['field_visible'] = 'Видимость поля';
-$_lang['form_customization_msg'] = 'Это список правил, которые применяются в настоящий момент. Подробная информация о правилах и настройке форм может быть найдена в <a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization" target="_blank">вики</a>. Пожалуйста помните, что "неправильное" правило может нарушить работу бэкэнда вашего сайта.
-<a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization+Pages" target="_blank">Настройка форм - страницы</a>
-<a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization+Rules" target="_blank">Настройка форм - правила</a>.Неактивные правила подсвеченны серым.';
-$_lang['form_rules'] = 'Form Rules';
+$_lang['form_customization_msg'] = 'Это список правил, которые применяются в настоящий момент. Подробная информация о правилах и настройке форм может быть найдена в <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">вики</a>. Пожалуйста помните, что «неправильное» правило может нарушить работу бэкэнда вашего сайта. <a href="http://rtfm.modx.com/display/revolution20/Form+Customization+Pages" target="_blank">Настройка форм - страницы</a>, <a href="http://rtfm.modx.com/display/revolution20/Form+Customization+Rules" target="_blank">Настройка форм - правила</a>. Неактивные правила подсвечены серым.';
+$_lang['form_rules'] = 'Правила настройки форм';
 $_lang['rule'] = 'Правило';
 $_lang['rule_create'] = 'Создать правило';
 $_lang['rule_desc'] = 'Тип правила которое будет применяться к области.';
@@ -39,8 +37,8 @@ $_lang['rule_err_remove'] = 'Произошла ошибка при попытк
 $_lang['rule_err_save'] = 'Произошла ошибка при попытке сохранить правило.';
 $_lang['rule_remove'] = 'Удалить правило';
 $_lang['rule_remove_confirm'] = 'Вы уверены, что хотите удалить это правило?';
-$_lang['rule_remove_multiple'] = 'Remove Multiple Rules';
-$_lang['rule_remove_multiple_confirm'] = 'Are you sure you want to remove these Rules? This is irreversible.';
+$_lang['rule_remove_multiple'] = 'Удалить несколько правил';
+$_lang['rule_remove_multiple_confirm'] = 'Вы уверены, что хотите удалить эти правила? Это необратимо.';
 $_lang['rule_update'] = 'Обновить правило';
 $_lang['rule_value_desc'] = 'Значение, присваиваемое правилу.';
 $_lang['rules'] = 'Правила';

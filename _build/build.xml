@@ -14,17 +14,18 @@
     <property name="project.css.dir" value="${project.manager.dir}/templates/default/css" />
 
     <!-- Set the project version -->
-    <property name="modx.core.version" value="2.0.0" />
-    <property name="modx.core.release" value="rc" />
+    <property name="modx.core.version" value="2.0.1" />
+    <property name="modx.core.release" value="dev" />
 
     <!-- Set some common build properties -->
-    <property name="build.dir" value="${project.basedir}/_build" />
-    <property name="build.src.tree" value="HEAD" />
+    <property name="build.dir" value="${basedir}" />
+    <property name="build.src.tree" value="dev" />
     <property name="build.src.remote"
               value="git://github.com/modxcms/revolution.git"
     />
+    <property name="build.distrib.name" value="${project.name}-${modx.core.version}-${modx.core.release}" />
     <property name="build.image.basedir" value="${build.dir}/image" />
-    <property name="build.image.dir" value="${build.image.basedir}/modx-${modx.core.version}-${modx.core.release}" />
+    <property name="build.image.dir" value="${build.image.basedir}/${build.distrib.name}" />
     <property name="build.image.modext.dir" value="${build.image.basedir}/modext" />
     <property name="build.image.css.dir" value="${build.image.basedir}/css" />
     <property name="build.distrib.dir" value="${build.dir}/distrib" />
@@ -65,24 +66,34 @@
         <antcall target="copy-core-transport"></antcall>
         <!--<antcall target="generate-phpdocs"></antcall>-->
 
-        <buildnumber />
-
         <!--<antcall target="build-sdk"></antcall>-->
         <antcall target="build-traditional"></antcall>
         <antcall target="build-advanced"></antcall>
     </target>
 
     <target name="complete-wc" description="--> Complete Working Copy Build">
-        <antcall target="modext-minify-wc"></antcall>
+        <antcall target="git-export-build-image-wc"></antcall>
+        <antcall target="modext-minify"></antcall>
         <antcall target="modext-concat-min"></antcall>
-        <antcall target="modext-concat-wc"></antcall>
-        <antcall target="copy-prepared-js-wc"></antcall>
+        <antcall target="modext-concat"></antcall>
+        <antcall target="copy-prepared-js"></antcall>
+        <antcall target="css-minify"></antcall>
+        <antcall target="css-concat-min"></antcall>
+        <antcall target="copy-prepared-css"></antcall>
         <antcall target="generate-core-transport"></antcall>
+        <antcall target="prepare-build-image"></antcall>
+        <antcall target="copy-core-transport"></antcall>
+        <!--<antcall target="generate-phpdocs"></antcall>-->
+
+        <!--<antcall target="build-sdk"></antcall>-->
+        <antcall target="build-traditional"></antcall>
+        <antcall target="build-advanced"></antcall>
     </target>
 
     <!-- Various cleanup targets -->
     <target name="cleanup-build-image" description="empty the build image directory">
         <delete dir="${build.image.dir}" />
+        <mkdir dir="${build.image.dir}" />
     </target>
     <target name="cleanup-build-modext-image" description="empty the MODExt build image directory">
         <delete dir="${build.image.modext.dir}" />
@@ -92,6 +103,7 @@
     </target>
     <target name="cleanup-build-distrib" description="empty the build distrib directory">
         <delete dir="${build.distrib.dir}" />
+        <mkdir dir="${build.distrib.dir}" />
     </target>
     <target name="cleanup-build-apidocs" description="empty the build apidocs directory">
         <delete dir="${build.apidocs.dir}" />
@@ -446,7 +458,7 @@ General Public License for more details.
                 <filter token="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
             </filterset>
         </copy>
-        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-${build.number}-sdk.zip">
+        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-sdk.zip">
             <fileset dir="${build.image.dir}" />
         </zip>
         <replace file="${build.image.dir}/setup/includes/config.core.php" token="@sdk" value="@svn" />
@@ -483,7 +495,7 @@ General Public License for more details.
                 <filter token="core-path" value="dirname(dirname(__FILE__)) . '/core/'" />
             </filterset>
         </copy>
-        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-${build.number}.zip">
+        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}.zip">
             <fileset dir="${build.image.dir}">
                 <exclude name="_build/**" />
             </fileset>
@@ -498,7 +510,7 @@ General Public License for more details.
         and the core transport package included -->
     <target name="build-advanced" description="create the advanced distribution package">
         <replace file="${build.image.dir}/setup/includes/config.core.php" token="@svn" value="@advanced" />
-        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-${build.number}-advanced.zip">
+        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-advanced.zip">
             <fileset dir="${build.image.dir}">
                 <include name="core/**" />
                 <exclude name="core/packages/core/**" />

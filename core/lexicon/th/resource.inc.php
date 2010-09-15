@@ -44,7 +44,6 @@ $_lang['resource_contentdispo'] = 'การกำหนดเนื้อหา
 $_lang['resource_contentdispo_help'] = 'ใช้ฟิลด์การกำหนดเนื้อหาเพื่อระบุว่ารีซอร์สนี้จะถูกควบควบโดยเว็บเบราว์เซอร์อย่างไร สำหรับการดาวน์โหลดไฟล์ให้เลือกตัวเลือกการแนบไฟล์';
 $_lang['resource_content_type'] = 'ประเภทเนื้อหา';
 $_lang['resource_content_type_help'] = 'ประเภทเนื้อหาสำหรับรีซอร์สนี้ ถ้าคุณไม่แน่ใจว่ารีซอร์สนี้ควรจะเป็นเนื้อหาประเภทไหน ให้คุณปล่อยไว้เป็น text/html';
-$_lang['resource_create'] = 'สร้างรีซอร์ส';
 $_lang['resource_create_access_denied'] = 'คุณไม่มีสิทธิ์ในการสร้างรีซอร์ส.';
 $_lang['resource_create_here'] = 'สร้างรีซอร์สที่นี่';
 $_lang['resource_createdby'] = 'สร้างโดย';

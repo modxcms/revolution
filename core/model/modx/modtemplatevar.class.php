@@ -15,6 +15,7 @@ class modTemplateVar extends modElement {
         'FILE',
         'CHUNK',
         'DOCUMENT',
+        'RESOURCE',
         'SELECT',
         'EVAL',
         'INHERIT',
@@ -161,10 +162,9 @@ class modTemplateVar extends modElement {
      * Get the value of a template variable for a resource.
      *
      * @access public
-     * @param integer $resourceId The id of the resource; 0 defaults to the
-     * current resource.
+     * @param integer $resourceId The id of the resource; 0 defaults to the default_text field for the tv.
      * @return mixed The raw value of the template variable in context of the
-     * specified (or current) resource.
+     * specified resource or the default_text for the tv.
      */
     public function getValue($resourceId= 0) {
         $value= null;
@@ -276,8 +276,11 @@ class modTemplateVar extends modElement {
         $this->xpdo->smarty->assign('style',$style);
         $value = $this->getValue($resourceId);
 
-        /* process any TV commands in value */
-        $value= $this->processBindings($value,$resourceId);
+        /* process only @INHERIT bindings in value, since we're inputting */
+        $bdata = $this->getBindingDataFromValue($value);
+        if ($bdata['cmd'] == 'INHERIT') {
+            $value = $this->processInheritBinding($bdata['param'], $resourceId);
+        }
 
         /* if any FC tvDefault rules, set here */
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
@@ -417,7 +420,7 @@ class modTemplateVar extends modElement {
         $types = array();
         $renderPaths = array();
         foreach ($renderDirectories as $renderDirectory) {
-            if (empty($renderDirectory)) continue;
+            if (empty($renderDirectory) || !is_dir($renderDirectory)) continue;
             try {
                 $dirIterator = new DirectoryIterator($renderDirectory);
                 foreach ($dirIterator as $file) {
@@ -450,7 +453,7 @@ class modTemplateVar extends modElement {
      */
     public function getDisplayParams() {
         $settings = array();
-        $params = $tv->get('display_params');
+        $params = $this->get('display_params');
         $ps = explode('&',$params);
         foreach ($ps as $p) {
             $param = explode('=',$p);
@@ -522,37 +525,62 @@ class modTemplateVar extends modElement {
     }
 
     /**
+     * Parses the binding data from a value
+     * 
+     * @param mixed $value The value to parse
+     * @return array An array of cmd and param for the binding
+     */
+    public function getBindingDataFromValue($value) {
+        $nvalue = trim($value);
+        $cmd = false;
+        $param = '';
+        if (substr($nvalue,0,1) == '@') {
+            list($cmd,$param) = $this->parseBinding($nvalue);
+            $cmd = trim($cmd);
+        }
+        return array('cmd' => $cmd,'param' => $param);
+    }
+
+    /**
      * Process bindings assigned to a template variable.
      *
      * @access public
      * @param string $value The value specified from the binding.
      * @param integer $resourceId The resource in which the TV is assigned.
+     * @param boolean $preProcess Whether or not to process certain bindings.
      * @return string The processed value.
      */
-    public function processBindings($value= '', $resourceId= 0, $processInherit = true) {
+    public function processBindings($value= '', $resourceId= 0, $preProcess = true) {
+        $bdata = $this->getBindingDataFromValue($value);
+        if (empty($bdata['cmd'])) return $value;
+
         $modx =& $this->xpdo;
-        $nvalue= trim($value);
-        if (substr($nvalue,0,1)!='@') return $value;
-        else {
-            list($cmd,$param) = $this->parseBinding($nvalue);
-            $cmd = trim($cmd);
-            switch ($cmd) {
-                case 'FILE':
+        $cmd = $bdata['cmd'];
+        $param = !empty($bdata['param']) ? $bdata['param'] : null;
+        switch ($cmd) {
+            case 'FILE':
+                if ($preProcess) {
                     $output = $this->processFileBinding($param);
-                    break;
+                }
+                break;
 
-                case 'CHUNK':       /* retrieve a chunk and process it's content */
+            case 'CHUNK': /* retrieve a chunk and process it's content */
+                if ($preProcess) {
                     $output = $this->xpdo->getChunk($param);
-                    break;
+                }
+                break;
 
-                case 'RESOURCE':
-                case 'DOCUMENT':    /* retrieve a document and process it's content */
+            case 'RESOURCE':
+            case 'DOCUMENT': /* retrieve a document and process it's content */
+                if ($preProcess) {
                     $rs = $this->xpdo->getDocument($param);
                     if (is_array($rs)) $output = $rs['content'];
                     else $output = 'Unable to locate resource '.$param;
-                    break;
+                }
+                break;
 
-                case 'SELECT': /* selects a record from the cms database */
+            case 'SELECT': /* selects a record from the cms database */
+                if ($preProcess) {
                     $dbtags = array();
                     $dbtags['DBASE'] = $this->xpdo->db->config['dbase'];
                     $dbtags['PREFIX'] = $this->xpdo->db->config['table_prefix'];
@@ -574,71 +602,48 @@ class modTemplateVar extends modElement {
                         $stmt->closeCursor();
                     }
                     $output = $data;
-                    break;
+                }
+                break;
 
-                case 'EVAL':        /* evaluates text as php codes return the results */
+            case 'EVAL':        /* evaluates text as php codes return the results */
+                if ($preProcess) {
                     $output = eval($param);
-                    break;
+                }
+                break;
 
-                case 'INHERIT':
-                    if ($processInherit) {
-                        $output = $param; /* Default to param value if no content from parents */
-                        $resource = null;
-                        if ($resourceId && (!($this->xpdo->resource instanceof modResource) || $this->xpdo->resource->get('id') != $resourceId)) {
-                            $resource = $this->xpdo->getObject('modResource',$resourceId);
-                        } else if ($this->xpdo->resource instanceof modResource) {
-                            $resource =& $this->xpdo->resource;
-                        }
-                        if (!$resource) break;
-                        $doc = array('id' => $resource->get('id'), 'parent' => $resource->get('parent'));
-
-                        while($doc['parent'] != 0) {
-                            $parent_id = $doc['parent'];
-                            if(!$doc = $this->xpdo->getDocument($parent_id, 'id,parent')) {
-                                /* Get unpublished document */
-                                $doc = $this->xpdo->getDocument($parent_id, 'id,parent',0);
-                            }
-                            if ($doc) {
-                                $tv = $this->xpdo->getTemplateVar($this->get('name'), '*', $doc['id']);
-                                if(isset($tv['value']) && $tv['value'] && substr($tv['value'],0,1) != '@') {
-                                    $output = $tv['value'];
-                                    break 2;
-                                }
-                            } else {
-                                break;
-                            }
-                        }
-                    } else {
-                        $output = $value;
-                    }
-                    break;
-
-                case 'DIRECTORY':
-                    $path = $this->xpdo->getOption('base_path').$param;
-                    if (substr($path,-1,1) != '/') { $path .= '/'; }
-                    if (!is_dir($path)) { break; }
-
-                    $files = array();
-                    $invalid = array('.','..','.svn','.DS_Store');
-                    foreach (new DirectoryIterator($path) as $file) {
-                        if (!$file->isReadable()) continue;
-                        $basename = $file->getFilename();
-                        if(!in_array($basename,$invalid)) {
-                            $files[] = "{$basename}=={$param}{$basename}";
-                        }
-                    }
-                    asort($files);
-                    $output = implode('||',$files);
-                    break;
-
-                default:
+            case 'INHERIT':
+                if ($preProcess) {
+                    $output = $this->processInheritBinding($param,$resourceId);
+                } else {
                     $output = $value;
-                    break;
+                }
+                break;
 
-            }
-            /* support for nested bindings */
-            return is_string($output) && ($output!=$value) ? $this->processBindings($output) : $output;
+            case 'DIRECTORY':
+                $path = $this->xpdo->getOption('base_path').$param;
+                if (substr($path,-1,1) != '/') { $path .= '/'; }
+                if (!is_dir($path)) { break; }
+
+                $files = array();
+                $invalid = array('.','..','.svn','.DS_Store');
+                foreach (new DirectoryIterator($path) as $file) {
+                    if (!$file->isReadable()) continue;
+                    $basename = $file->getFilename();
+                    if(!in_array($basename,$invalid)) {
+                        $files[] = "{$basename}=={$param}/{$basename}";
+                    }
+                }
+                asort($files);
+                $output = implode('||',$files);
+                break;
+
+            default:
+                $output = $value;
+                break;
+
         }
+        /* support for nested bindings */
+        return is_string($output) && ($output != $value) ? $this->processBindings($output) : $output;
     }
 
     /**
@@ -663,6 +668,39 @@ class modTemplateVar extends modElement {
     }
 
     /**
+     * Parse inherit binding
+     *
+     * @param string $default The value to default if there is no inherited value
+     * @param int $resourceId The current Resource, if any
+     * @return string The inherited value
+     */
+    public function processInheritBinding($default = '',$resourceId = null) {
+        $output = $default; /* Default to param value if no content from parents */
+        $resource = null;
+        if (!empty($resourceId) && (!($this->xpdo->resource instanceof modResource) || $this->xpdo->resource->get('id') != $resourceId)) {
+            $resource = $this->xpdo->getObject('modResource',$resourceId);
+        } else if ($this->xpdo->resource instanceof modResource) {
+            $resource =& $this->xpdo->resource;
+        }
+        if (!$resource) return $output;
+        
+        $currentResource = $resource;
+        while ($currentResource->get('parent') != 0) {
+            $currentResource = $this->xpdo->getObject('modResource',array('id' => $currentResource->get('parent')));
+            if (!empty($currentResource)) {
+                $tv = $this->xpdo->getTemplateVar($this->get('name'), '*', $currentResource->get('id'));
+                if (isset($tv['value']) && $tv['value'] && substr($tv['value'],0,1) != '@') {
+                    $output = $tv['value'];
+                    return $output;
+                }
+            } else {
+                return $output;
+            }
+        }
+        return $output;
+    }
+
+    /**
      * Special parsing for file bindings.
      *
      * @access public
@@ -678,6 +716,10 @@ class modTemplateVar extends modElement {
             fclose($handle);
         } else {
             $buffer= " Could not retrieve document '$file'.";
+        }
+        $displayParams = $this->getDisplayParams();
+        if (!empty($displayParams['delimiter'])) {
+            $buffer = str_replace("\n",'||',$buffer);
         }
         return $buffer;
     }

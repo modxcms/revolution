@@ -17,6 +17,7 @@ MODx.grid.Grid = function(config) {
         ,stripeRows: true
         ,header: false
         ,cls: 'modx-grid'
+        ,preventSaveRefresh: true
         ,menuConfig: {
             defaultAlign: 'tl-b?'
             ,enableScrolling: false
@@ -33,10 +34,23 @@ MODx.grid.Grid = function(config) {
     if (config.paging) {
         Ext.applyIf(config,{
             bbar: new Ext.PagingToolbar({
-                pageSize: config.pageSize || 20
+                pageSize: config.pageSize || (MODx.config.default_per_page || 20)
                 ,store: this.getStore()
                 ,displayInfo: true
-                ,items: config.pagingItems || []
+                ,items: config.pagingItems || ['-',_('per_page')+':',{
+                    xtype: 'textfield'
+                    ,value: config.pageSize || (MODx.config.default_per_page || 20)
+                    ,width: 40
+                    ,listeners: {
+                        'change': {fn:function(tf,nv,ov) {
+                            this.getBottomToolbar().pageSize = nv;
+                            this.store.load({params:{
+                                start:0
+                                ,limit: nv
+                            }});
+                        },scope:this}
+                    }
+                }]
             })
         });
     }
@@ -117,10 +131,13 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                         Ext.callback(this.config.save_callback,this.config.scope || this,[r]);
                     }
                     e.record.commit();
-                    if (!this.config.preventSaveRefresh) this.refresh();
+                    if (!this.config.preventSaveRefresh) {
+                        this.refresh();
+                    }
                 },scope:this}
             }
         });
+        return true;
     }
     
     ,loadWindow: function(btn,e,win,or) {
@@ -320,16 +337,21 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         this.getStore().reload();
     }
     
-    ,rendYesNo: function(d,c) {
-        switch(d) {
-            case '':
-                return '-';
-            case false:
-                c.css = 'red';
-                return _('no');
+    ,rendYesNo: function(v,md) {
+        if (v === 1 || v == '1') { v = true; }
+        if (v === 0 || v == '0') { v = false; }
+        switch (v) {
             case true:
-                c.css = 'green';
+            case 'true':
+            case 1:
+                md.css = 'green';
                 return _('yes');
+            case false:
+            case 'false':
+            case '':
+            case 0:
+                md.css = 'red';
+                return _('no');
         }
     }
 

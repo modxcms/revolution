@@ -47,20 +47,12 @@ if (!empty($scriptProperties['category'])) {
 
 if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('untitled_tv');
 
-/* invoke OnBeforeTVFormSave event */
-$modx->invokeEvent('OnBeforeTVFormSave',array(
-    'mode' => modSystemEvent::MODE_UPD,
-    'id' => $tv->get('id'),
-    'tv' => &$tv,
-));
-
 /* check to make sure name doesn't already exist */
 $nameExists = $modx->getObject('modTemplateVar',array(
     'id:!=' => $tv->get('id'),
     'name' => $scriptProperties['name'],
 ));
-if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name'));
-
+if ($nameExists) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name'));
 
 /* get rid of invalid chars */
 //$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
@@ -84,6 +76,27 @@ $tv->set('display_params',$display_params);
 $tv->set('rank', !empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
 $tv->set('locked', !empty($scriptProperties['locked']));
 
+/* invoke OnBeforeTVFormSave event */
+$OnBeforeTVFormSave = $modx->invokeEvent('OnBeforeTVFormSave',array(
+    'mode' => modSystemEvent::MODE_UPD,
+    'id' => $tv->get('id'),
+    'tv' => &$tv,
+));
+if (is_array($OnBeforeTVFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforeTVFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforeTVFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
+
+/* validate TV */
 if (!$tv->validate()) {
     $validator = $tv->getValidator();
     if ($validator->hasMessages()) {

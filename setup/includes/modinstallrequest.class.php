@@ -53,6 +53,7 @@ class modInstallRequest {
     public function handle() {
         $install =& $this->install;
         $install->loadSettings();
+        $install->loadDriver();
         $this->parser->assign('config',$install->settings->fetch());
 
         $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
@@ -63,9 +64,12 @@ class modInstallRequest {
         $agreed= isset ($_REQUEST['agreed']) ? true : false;
         $agreedChecked= $agreed ? ' checked="checked"' : '';
 
+        $this->install->lexicon->load('default');
+        $this->install->lexicon->load('drivers');
+        $this->parser->assign('_lang',$this->install->lexicon->fetch());
+
         $this->action= isset ($_REQUEST['action']) ? $_REQUEST['action'] : 'language';
         $this->parser->assign('action',$this->action);
-        $this->parser->assign('_lang',$this->install->lexicon);
 
         $output = $this->parser->fetch('header.tpl');
         $output .= include MODX_SETUP_PATH . 'controllers/' . $this->action . '.php';

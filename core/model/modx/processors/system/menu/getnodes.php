@@ -30,13 +30,14 @@ $c->leftJoin('modAction','Action');
 $c->select(array(
     'modMenu.*',
     'Action.controller',
+    'Action.namespace',
 ));
 $c->select('COUNT(`Children`.`text`) AS `childrenCount`');
 $c->where(array(
     'modMenu.parent' => $id,
 ));
 $c->sortby($sort,$dir);
-$c->groupby('modMenu.text');
+$c->groupby($modx->getSelectColumns('modMenu','modMenu','',array('text')));
 if ($isLimit) $c->limit($limit,$start);
 $menus = $modx->getCollection('modMenu',$c);
 
@@ -51,6 +52,10 @@ foreach ($menus as $menu) {
         } else {
             $controller .= '.php';
         }
+    }
+    $namespace = $menu->get('namespace');
+    if(!in_array($namespace, array('core', '', null))) {
+        $modx->lexicon->load($namespace . ':default');
     }
     $text = $modx->lexicon($menu->get('text'));
 

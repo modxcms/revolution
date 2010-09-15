@@ -97,7 +97,8 @@ Ext.extend(MODx.Wizard,Ext.Window,{
             tb.getComponent('btn-back').setDisabled(false);
             tb.getComponent('btn-next').setText(_('next'));
         }
-        if (Ext.getCmp(panel).fireEvent('fetch')) {
+        var s = Ext.getCmp(panel).fireEvent('fetch');
+        if (s) {
             if (!Ext.isIE) {
                 this.syncSize();
                 this.center();

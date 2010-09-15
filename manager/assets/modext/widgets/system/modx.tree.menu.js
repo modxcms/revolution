@@ -63,9 +63,8 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
                     'success': {fn:function(r) { this.refresh(); },scope:this}
                 }
             });
-        } else {
-            this.windows.update_menu.setValues(r);
         }
+        this.windows.update_menu.setValues(r);
         this.windows.update_menu.show(e.target);
     }
 	
@@ -84,48 +83,33 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         });
     }
 
-    ,_showContextMenu: function(n,e) {
-        n.select();
-        this.cm.activeNode = n;
-        this.cm.removeAll();
-        if (n.attributes.menu && n.attributes.menu.items) {
-            this.addContextMenuItem(n.attributes.menu.items);
-            this.cm.show(n.getUI().getEl(),'t?');
-        } else {
-            var m = [];
-            switch (n.attributes.type) {
-                case 'menu':
-                    m = [];
-                    m.push({
-                        text: _('menu_update')
-                        ,handler: this.updateMenu
-                    });
-                    m.push('-');
-                    m.push({
-                        text: _('action_place_here')
-                        ,handler: this.createMenu
-                    });
-                    m.push('-');
-                    m.push({
-                        text: _('menu_remove')
-                        ,handler: this.removeMenu
-                    });
-                    break;
-                default:
-                    m = [];
-                    m.push({
-                        text: _('menu_create')
-                        ,handler: this.createMenu
-                    });
-                    break;
-            }
-
-            if (m.length > 0) {
-                this.addContextMenuItem(m);
-            }
-            this.cm.showAt(e.xy);
+    ,getMenu: function(n,e) {
+        var m = [];
+        switch (n.attributes.type) {
+            case 'menu':
+                m.push({
+                    text: _('menu_update')
+                    ,handler: this.updateMenu
+                });
+                m.push('-');
+                m.push({
+                    text: _('action_place_here')
+                    ,handler: this.createMenu
+                });
+                m.push('-');
+                m.push({
+                    text: _('menu_remove')
+                    ,handler: this.removeMenu
+                });
+                break;
+            default:
+                m.push({
+                    text: _('menu_create')
+                    ,handler: this.createMenu
+                });
+                break;
         }
-        e.stopEvent();
+        return m;
     }
 });
 Ext.reg('modx-tree-menu',MODx.tree.Menu);

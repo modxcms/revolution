@@ -7,7 +7,8 @@
  * @xtype modx-panel-template
  */
 MODx.panel.Template = function(config) {
-    config = config || {};
+    config = config || {record:{}};
+    config.record = config.record || {};
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'element/template.php'
         ,baseParams: {}
@@ -39,7 +40,7 @@ MODx.panel.Template = function(config) {
                 xtype: 'hidden'
                 ,name: 'props'
                 ,id: 'modx-template-props'
-                ,value: null
+                ,value: config.record.props || null
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('template_name')
@@ -49,6 +50,7 @@ MODx.panel.Template = function(config) {
                 ,maxLength: 100
                 ,enableKeyEvents: true
                 ,allowBlank: false
+                ,value: config.record.templatename
                 ,listeners: {
                     'keyup': {scope:this,fn:function(f,e) {
                         Ext.getCmp('template-header').getEl().update('<h2>'+_('template')+': '+f.getValue()+'</h2>');
@@ -61,19 +63,22 @@ MODx.panel.Template = function(config) {
                 ,id: 'modx-template-description'
                 ,width: 300
                 ,maxLength: 255
+                ,value: config.record.description || ''
             },{
                 xtype: 'modx-combo-category'
                 ,fieldLabel: _('category')
                 ,name: 'category'
                 ,id: 'modx-template-category'
                 ,width: 250
-                ,value: config.category || null
+                ,value: config.record.category || 0
             },{
                 xtype: 'checkbox'
                 ,fieldLabel: _('template_lock')
                 ,description: _('template_lock_msg')
                 ,name: 'locked'
                 ,id: 'modx-template-locked'
+                ,inputValue: 1
+                ,checked: config.record.locked || false
             },{
                 xtype: 'checkbox'
                 ,fieldLabel: _('clear_cache_on_save')
@@ -81,7 +86,7 @@ MODx.panel.Template = function(config) {
                 ,name: 'clearCache'
                 ,id: 'modx-template-clear-cache'
                 ,inputValue: 1
-                ,checked: true
+                ,checked: config.record.clearCache || true
             },{
                 html: MODx.onTempFormRender
                 ,border: false
@@ -94,6 +99,7 @@ MODx.panel.Template = function(config) {
                 ,id: 'modx-template-content'
                 ,width: '95%'
                 ,height: 400
+                ,value: config.record.content || ''
             }]
         },{
             xtype: 'modx-panel-element-properties'
@@ -137,35 +143,21 @@ MODx.panel.Template = function(config) {
 Ext.extend(MODx.panel.Template,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (this.config.template === '' || this.config.template === 0 || this.initialized) {
-            this.fireEvent('ready');
-            return false;
+        if (!Ext.isEmpty(this.config.record.templatename)) {
+            Ext.getCmp('modx-template-header').getEl().update('<h2>'+_('template')+': '+this.config.record.templatename+'</h2>');
         }
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'get'
-                ,id: this.config.template
+        if (!Ext.isEmpty(this.config.record.properties)) {
+            var d = this.config.record.properties;
+            var g = Ext.getCmp('modx-grid-element-properties');
+            if (g) {
+                g.defaultProperties = d;
+                g.getStore().loadData(d);
             }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    if (r.object.category == '0') { r.object.category = null; }
-                    this.getForm().setValues(r.object);
-                    Ext.getCmp('modx-template-header').getEl().update('<h2>'+_('template')+': '+r.object.templatename+'</h2>');
-
-                    var d = Ext.decode(r.object.data);
-                    var g = Ext.getCmp('modx-grid-element-properties');
-                    if (g) {
-                        g.defaultProperties = d;
-                        g.getStore().loadData(d);
-                    }
-                    if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
-                    this.fireEvent('ready',r.object);
-                    this.clearDirty();
-                    this.initialized = true;
-                },scope:this}
-            }
-        });
+        }
+        this.fireEvent('ready',this.config.record);
+        if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
+        this.clearDirty();
+        this.initialized = true;
         return true;
     }
     ,beforeSubmit: function(o) {

@@ -37,11 +37,11 @@ MODx.page.UpdateTV = function(config) {
         ,components: [{
             xtype: 'modx-panel-tv'
             ,renderTo: 'modx-panel-tv-div'
-            ,tv: config.id
-            ,name: ''
+            ,tv: config.record.id || MODx.request.id
+            ,record: config.record || {}
         }]
-	});
-	MODx.page.UpdateTV.superclass.constructor.call(this,config);
+    });
+    MODx.page.UpdateTV.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.UpdateTV,MODx.Component);
 Ext.reg('modx-page-tv-update',MODx.page.UpdateTV);

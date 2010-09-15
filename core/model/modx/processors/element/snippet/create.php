@@ -45,11 +45,24 @@ if (isset($scriptProperties['propdata'])) {
 if (is_array($properties)) $snippet->setProperties($properties);
 
 /* invoke OnBeforeSnipFormSave event */
-$modx->invokeEvent('OnBeforeSnipFormSave',array(
+$OnBeforeSnipFormSave = $modx->invokeEvent('OnBeforeSnipFormSave',array(
     'mode' => modSystemEvent::MODE_NEW,
     'id' => 0,
     'snippet' => &$snippet,
 ));
+if (is_array($OnBeforeSnipFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforeSnipFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforeSnipFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
 
 if (!$snippet->validate()) {
     $validator = $snippet->getValidator();

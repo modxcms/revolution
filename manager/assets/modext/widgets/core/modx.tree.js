@@ -38,9 +38,9 @@ MODx.tree.Tree = function(config) {
         tl.on('load',this.onLoad,this);
         root = {
             nodeType: 'async'
-            ,text: config.root_name || ''
+            ,text: config.root_name || config.rootName || ''
             ,draggable: false
-            ,id: config.root_id || 'root'
+            ,id: config.root_id || config.rootId || 'root'
         };
     } else {        
         tl = new Ext.tree.TreeLoader({
@@ -151,6 +151,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 	    
         this.treestate_id = this.config.id || Ext.id();
         this.on('load',this._initExpand,this,{single: true});
+        this.on('expandnode',this._saveState,this);
+        this.on('collapsenode',this._saveState,this);
         
         this.on('render',function() {
             this.root.expand();
@@ -171,14 +173,16 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      */
     ,_initExpand: function() {
         var treeState = Ext.state.Manager.get(this.treestate_id);
-        if (treeState === undefined && this.root) {
+        if (Ext.isEmpty(treeState) && this.root) {
             this.root.expand();
             if (this.root.firstChild && this.config.expandFirst) {
                 this.root.firstChild.select();
                 this.root.firstChild.expand();
             }
         } else {
-            this.expandPath(treeState);
+            for (var i=0;i<treeState.length;i++) {
+                this.expandPath(treeState[i]);
+            }
         }
     }
 	
@@ -203,10 +207,15 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         node.select();
         this.cm.activeNode = node;        
         this.cm.removeAll();
-        if (node.attributes.menu && node.attributes.menu.items) {
-            this.addContextMenuItem(node.attributes.menu.items);
-            this.cm.showAt(e.xy);
+        var m;
+        if (this.getMenu) {
+            m = this.getMenu(node,e);
+        } else if (node.attributes.menu && node.attributes.menu.items) {
+            m = node.attributes.menu.items;
         }
+        this.addContextMenuItem(m);
+        this.cm.showAt(e.xy);
+        e.preventDefault();
         e.stopEvent();
     }
     
@@ -230,7 +239,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,refresh: function(func,scope,args) {
         var treeState = Ext.state.Manager.get(this.treestate_id);
         this.root.reload();
-        if (treeState === undefined) {this.root.expand(null,null);} else {this.expandPath(treeState,null);}
+        if (treeState === undefined) {this.root.expand(null,null);} else {
+            for (var i=0;i<treeState.length;i++) {
+                this.expandPath(treeState[i]);
+            }
+        }
         if (func) {
             scope = scope || this;
             args = args || [];
@@ -299,7 +312,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,expandNodes: function() {
         if (this.root) {
             this.root.expand();
-            this.root.expandChildNodes();
+            this.root.expandChildNodes(true);
         }
     }
 	
@@ -308,17 +321,52 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      */
     ,collapseNodes: function() {
         if (this.root) {
-            this.root.collapseChildNodes();
+            this.root.collapseChildNodes(true);
             this.root.collapse();
         }
     }
 	
     /**
-     * Save the state of the tree's open children for a certain node.
-     * @param {Ext.tree.TreeNode} n The most recent clicked-on node.
+     * Save the state of the tree's open children.
+     * @param {Ext.tree.TreeNode} n The most recent expanded or collapsed node.
      */
     ,_saveState: function(n) {
-        Ext.state.Manager.set(this.treestate_id,n.getPath());
+        var s = Ext.state.Manager.get(this.treestate_id);
+        var p = n.getPath();
+        var i;
+        if (!Ext.isObject(s) && !Ext.isArray(s)) {
+            s = [s]; /* backwards compat */
+        }
+        if (Ext.isEmpty(p) || p == undefined) return; /* ignore invalid paths */
+        if (n.expanded) { /* if expanding, add to state */
+            if (Ext.isString(p) && s.indexOf(p) === -1) {
+                var f = false;
+                var sr;
+                for (i=0;i<s.length;i++) {
+                    if (s[i] == undefined) { delete s[i]; continue; }
+                    sr = s[i].search(p);
+                    if (sr !== -1) { /* dont add if already in */
+                        if (s[sr].length > s[i].length) {
+                            f = true;
+                        }
+                    }
+                }
+                if (!f) { /* if not in, add */
+                    s.push(p);
+                }
+            }
+        } else { /* if collapsing, remove from state */
+            s = s.remove(p);
+            /* remove all children of node */
+            for (i=0;i<s.length;i++) {
+                if (s[i] == undefined) { delete s[i]; continue; }
+                if (s[i].search(p) !== -1) {
+                    delete s[i];
+                }
+            }
+        }
+        Ext.state.Manager.set(this.treestate_id,s);
+        /*Ext.state.Manager.set(this.treestate_id,[]);*/
     }
     
     /**
@@ -488,13 +536,13 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             icon: iu+'arrow_down.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('tree_expand')}
-            ,handler: function() {this.getRootNode().expandChildNodes(true);}
+            ,handler: this.expandNodes
             ,scope: this
         },{
             icon: iu+'arrow_up.png'
             ,cls: 'x-btn-icon'
             ,tooltip: {text: _('tree_collapse')}
-            ,handler: function() {this.getRootNode().collapseChildNodes(true);}
+            ,handler: this.collapseNodes
             ,scope: this
         },'-',{
             icon: iu+'refresh.png'

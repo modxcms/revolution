@@ -165,7 +165,7 @@ MODx.grid.Permissions = function(config) {
         }]
     });
     MODx.grid.Permissions.superclass.constructor.call(this,config);
-    this.propRecord = new Ext.data.Record.create([{name: 'name'},{name: 'description'},{name:'value'}]);
+    this.propRecord = new Ext.data.Record.create(['name','description','value']);
 };
 Ext.extend(MODx.grid.Permissions,MODx.grid.LocalGrid,{
     createAttribute: function(btn,e) {        
@@ -226,12 +226,12 @@ MODx.window.NewPermission = function(config) {
         ,action: 'addProperty'
         ,saveBtnText: _('add')
         ,fields: [{
-            xtype: 'textfield'
+            xtype: 'modx-combo-permission'
             ,fieldLabel: _('name')
             ,name: 'name'
+            ,hiddenName: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,width: 250
-            ,allowBlank: false
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
@@ -254,9 +254,40 @@ Ext.extend(MODx.window.NewPermission,MODx.Window,{
             MODx.msg.alert(_('error'),_('permission_err_ae'));
             return false;
         }
+
+        var cb = Ext.getCmp('modx-'+this.ident+'-name');
+        s = cb.getStore();
+        var rec = s.getAt(s.find('name',r.name));
+        if (rec) {
+            r.description = rec.data.description;
+            r.description_trans = rec.data.description;
+        }
+        r.value = 1;
+
         this.fireEvent('success',r);
         this.hide();
         return false;
     }
 });
 Ext.reg('modx-window-permission-create',MODx.window.NewPermission);
+
+
+MODx.combo.Permission = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'permission'
+        ,hiddenName: 'permission'
+        ,displayField: 'name'
+        ,valueField: 'name'
+        ,fields: ['name','description']
+        ,editable: true
+        ,typeAhead: false
+        ,forceSelection: false
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
+            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
+        ,url: MODx.config.connectors_url+'security/access/permission.php'
+    });
+    MODx.combo.Permission.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.Permission,MODx.combo.ComboBox);
+Ext.reg('modx-combo-permission',MODx.combo.Permission);

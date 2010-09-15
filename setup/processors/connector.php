@@ -24,6 +24,7 @@ require_once MODX_CORE_PATH . 'xpdo/xpdo.class.php';
 require_once MODX_SETUP_PATH . 'includes/modinstall.class.php';
 
 $install = new modInstall();
-$install->loadLang();
+$install->loadLexicon();
+$install->lexicon->load('default');
 $install->loadRequestHandler('modInstallConnector');
 $install->request->handle();

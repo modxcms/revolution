@@ -1,7 +1,8 @@
 Ext.onReady(function() {
     Ext.select('#modx-testconn').on('click',MODx.DB.testConnection);
     Ext.select('#modx-testcoll').on('click',MODx.DB.testCollation);
-    
+
+    Ext.select('#modx-db-info').hide();
     var es = Ext.select('.modx-hidden2');
     es.setVisibilityMode(Ext.Element.DISPLAY);
     es.hide();
@@ -22,8 +23,26 @@ MODx.DB = function() {
                     var msg = Ext.select('#modx-db-step1-msg');
                     msg.show();
                     if (r.success) {
-                        Ext.select('#modx-db-step1-msg span').update('&nbsp;'+r.message);
-                        Ext.select('#modx-db-step2').fadeIn();                        
+                        if (r.object.client_version) {
+                            Ext.select('#modx-db-info').show();
+                            var cv = Ext.select('#modx-db-client-version');
+                            if (r.object.client_version_result != 'success') {
+                                cv.addClass('warning');
+                            } else {
+                                cv.addClass('success');
+                            }
+                            cv.update('&nbsp;'+r.object.client_version_msg);
+
+                            var sv = Ext.select('#modx-db-server-version');
+                            if (r.object.server_version_result != 'success') {
+                                sv.addClass('warning');
+                            } else {
+                                sv.addClass('success');
+                            }
+                            sv.update('&nbsp;'+r.object.server_version_msg);
+                        }
+                        Ext.select('#modx-db-step1-msg span.connect-msg').update('&nbsp;'+r.message);
+                        Ext.select('#modx-db-step2').fadeIn();                   
                         
                         var ch = Ext.get('database-connection-charset');
                         if (ch) {
@@ -62,7 +81,7 @@ MODx.DB = function() {
                                 errorMsg = errorMsg + '<br />' + r.object[i] + '<br />';
                             }
                         }
-                        Ext.select('#modx-db-step1-msg span').update(errorMsg);
+                        Ext.select('#modx-db-step1-msg span.connect-msg').update(errorMsg);
                         msg.addClass('error');
                     }
                }

@@ -39,7 +39,7 @@ MODx.page.UpdateTemplate = function(config) {
             xtype: 'modx-panel-template'
             ,renderTo: 'modx-panel-template-div'
             ,template: config.id
-            ,name: ''
+            ,record: config.record || {}
             ,baseParams: { action: 'update' ,id: config.id }
         }]
 	});

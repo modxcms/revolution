@@ -31,7 +31,7 @@
 
 if (!class_exists('xPDOObject')) {
     /** Include the parent {@link xPDOObject} class. */
-    include_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/../xpdoobject.class.php');
+    include_once (dirname(dirname(__FILE__)) . '/xpdoobject.class.php');
 }
 
 /**
@@ -42,38 +42,7 @@ if (!class_exists('xPDOObject')) {
  * @package xpdo
  * @subpackage om.mysql
  */
-class xPDOObject_mysql extends xPDOObject {
-    public $_currentTimestamps= array (
-        'CURRENT_TIMESTAMP',
-        'CURRENT_TIMESTAMP()',
-        'NOW()',
-        'LOCALTIME',
-        'LOCALTIME()',
-        'LOCALTIMESTAMP',
-        'LOCALTIMESTAMP()',
-        'SYSDATE()'
-    );
-    public $_currentDates= array (
-        'CURDATE()',
-        'CURRENT_DATE',
-        'CURRENT_DATE()'
-    );
-
-    /**
-     * Initializes the field names with the qualified table name.
-     *
-     * Once this is called, you can lookup the qualified name by the field name
-     * itself.
-     *
-     * @access protected
-     */
-    protected function _initFields() {
-        reset($this->_fieldMeta);
-        while (list ($k, $v)= each($this->_fieldMeta)) {
-            $this->fieldNames[$k]= "`{$this->_table}`.`{$k}`";
-        }
-    }
-}
+class xPDOObject_mysql extends xPDOObject {}
 
 /**
  * Extend this abstract class to define a class having an integer primary key.

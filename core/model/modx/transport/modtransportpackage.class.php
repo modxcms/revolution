@@ -93,11 +93,13 @@ class modTransportPackage extends xPDOObject {
     public function getTransport($state = -1) {
         if (!is_object($this->package) || !($this->package instanceof xPDOTransport)) {
             if ($this->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true)) {
-                if ($workspace = $this->getOne('Workspace')) {
+                $workspace = $this->getOne('Workspace');
+                if ($workspace) {
                     $packageDir = $workspace->get('path') . 'packages/';
-                    if ($sourceFile = $this->get('source')) {
+                    $sourceFile = $this->get('source');
+                    if ($sourceFile) {
                         $transferred= file_exists($packageDir . $sourceFile);
-                        if (!$transferred) {
+                        if (!$transferred) { /* if no transport zip, attempt to get it */
                             if (!$transferred= $this->transferPackage($sourceFile, $packageDir)) {
                                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_transfer',array(
                                     'sourceFile' => $sourceFile,
@@ -108,19 +110,19 @@ class modTransportPackage extends xPDOObject {
                             }
                         }
                         if ($transferred) {
-                            if ($state < 0) $state = $this->get('state');
-                            if ($this->package = xPDOTransport :: retrieve($this->xpdo, $packageDir . $sourceFile, $packageDir, $state)) {
+                            if ($state < 0) {
+                                /* if directory is missing but zip exists, and DB state value is incorrect, fix here */
+                                $targetDir = basename($sourceFile, '.transport.zip');
+                                $state = is_dir($packageDir.$targetDir) ? $this->get('state') : xPDOTransport::STATE_PACKED;
+                            }
+                            /* retrieve the package */
+                            $this->package = xPDOTransport :: retrieve($this->xpdo, $packageDir . $sourceFile, $packageDir, $state);
+                            if ($this->package) {
+                                /* set to unpacked state */
                                 if ($state == xPDOTransport::STATE_PACKED) {
                                     $this->set('state', xPDOTransport::STATE_UNPACKED);
                                 }
                                 $this->set('source', $sourceFile);
-                                /*
-//                                $this->set('manifest', array(
-//                                    xPDOTransport::MANIFEST_VERSION => $this->package->manifestVersion,
-//                                    xPDOTransport::MANIFEST_ATTRIBUTES => $this->package->attributes,
-//                                    xPDOTransport::MANIFEST_VEHICLES => $this->package->vehicles
-//                                ));
- */
                                 $this->set('attributes', $this->package->attributes);
                                 $this->save();
                             }

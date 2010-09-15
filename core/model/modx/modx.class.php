@@ -510,7 +510,7 @@ class modX extends xPDO {
     public function getChildIds($id= null, $depth= 10) {
         $children= array ();
         if ($id !== null && intval($depth) >= 1) {
-            $id= intval($id);
+            $id= is_int($id) ? $id : intval($id);
             if (isset ($this->resourceMap["{$id}"])) {
                 if ($children= $this->resourceMap["{$id}"]) {
                     foreach ($children as $child) {
@@ -762,11 +762,11 @@ class modX extends xPDO {
      * @param integer $count_attempts The number of times to attempt redirection.
      * @param string $type The type of redirection to attempt.
      */
-    public function sendRedirect($url, $count_attempts= 0, $type= '') {
+    public function sendRedirect($url, $count_attempts= 0, $type= '', $responseCode = '') {
         if (!$this->getResponse()) {
             $this->log(modX::LOG_LEVEL_FATAL, "Could not load response class.");
         }
-        $this->response->sendRedirect($url, $count_attempts, $type);
+        $this->response->sendRedirect($url, $count_attempts, $type, $responseCode);
     }
 
     /**

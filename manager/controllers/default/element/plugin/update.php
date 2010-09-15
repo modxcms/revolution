@@ -13,8 +13,6 @@ $plugin = $modx->getObject('modPlugin',$_REQUEST['id']);
 if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
 if (!$plugin->checkPolicy('view')) return $modx->error->failure($modx->lexicon('access_denied'));
 
-$plugin->category = $plugin->getOne('Category');
-
 /* invoke OnPluginFormRender event */
 $onPluginFormRender = $modx->invokeEvent('OnPluginFormRender',array(
     'id' => $plugin->get('id'),
@@ -24,6 +22,29 @@ $onPluginFormRender = $modx->invokeEvent('OnPluginFormRender',array(
 if (is_array($onPluginFormRender)) $onPluginFormRender = implode('',$onPluginFormRender);
 $onPluginFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onPluginFormRender);
 $modx->smarty->assign('onPluginFormRender',$onPluginFormRender);
+
+/* get properties */
+$properties = $plugin->get('properties');
+if (!is_array($properties)) $properties = array();
+
+$data = array();
+foreach ($properties as $property) {
+    $data[] = array(
+        $property['name'],
+        $property['desc'],
+        $property['type'],
+        $property['options'],
+        $property['value'],
+        $property['lexicon'],
+        false, /* overridden set to false */
+        $property['desc_trans'],
+    );
+}
+$pluginArray = $plugin->toArray();
+$pluginArray['properties'] = $data;
+if (strpos($pluginArray['plugincode'],'<?php') === false) {
+    $pluginArray['plugincode'] = "<?php\n".$pluginArray['plugincode'];
+}
 
 /* check unlock default element properties permission */
 $modx->smarty->assign('unlock_element_properties',$modx->hasPermission('unlock_element_properties') ? 1 : 0);
@@ -48,7 +69,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-plugin-update"
         ,id: "'.$plugin->get('id').'"
-        ,category: "'.$plugin->get('category').'"
+        ,record: '.$modx->toJSON($pluginArray).'
     });
 });
 MODx.onPluginFormRender = "'.$onPluginFormRender.'";

@@ -26,6 +26,8 @@ MODx.browser.RTE = function(config) {
         ,hideFiles: config.hideFiles || true
         ,ident: this.ident
         ,rootVisible: true
+        ,rootId: '/'
+        ,rootName: _('files')
         ,listeners: {
             'afterUpload': {fn:function() { this.view.run(); },scope:this}
         }
@@ -102,7 +104,10 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     
     ,load: function(dir) {
         dir = dir || '';
-        this.view.run({dir: dir});
+        this.view.run({
+            dir: dir
+            ,ctx: MODx.ctx
+        });
     }
     
     ,sortImages : function(){

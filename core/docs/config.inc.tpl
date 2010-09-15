@@ -15,6 +15,7 @@ $lastInstallTime = {last_install_time};
 $site_id = '{site_id}';
 $site_sessionname = '{site_sessionname}';
 $https_port = '{https_port}';
+$uuid = '{uuid}';
 
 if (!defined('MODX_CORE_PATH')) {
     $modx_core_path= '{core_path}';

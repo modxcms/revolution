@@ -38,7 +38,7 @@ MODx.panel.Snippet = function(config) {
                 xtype: 'hidden'
                 ,name: 'props'
                 ,id: 'modx-snippet-props'
-                ,value: null
+                ,value: config.record.props || null
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('snippet_name')
@@ -48,6 +48,7 @@ MODx.panel.Snippet = function(config) {
                 ,maxLength: 255
                 ,enableKeyEvents: true
                 ,allowBlank: false
+                ,value: config.record.name
                 ,listeners: {
                     'keyup': {scope:this,fn:function(f,e) {
                         Ext.getCmp('modx-snippet-header').getEl().update('<h2>'+_('snippet')+': '+f.getValue()+'</h2>');
@@ -60,19 +61,22 @@ MODx.panel.Snippet = function(config) {
                 ,id: 'modx-snippet-description'
                 ,width: 300
                 ,maxLength: 255
+                ,value: config.record.description || ''
             },{
                 xtype: 'modx-combo-category'
                 ,fieldLabel: _('category')
                 ,name: 'category'
                 ,id: 'modx-snippet-category'
                 ,width: 250
-                ,value: config.category || null
+                ,value: config.record.category || 0
             },{
                 xtype: 'checkbox'
                 ,fieldLabel: _('snippet_lock')
                 ,description: _('snippet_lock_msg')
                 ,name: 'locked'
                 ,id: 'modx-snippet-locked'
+                ,inputValue: 1
+                ,checked: config.record.locked || 0
             },{
                 xtype: 'checkbox'
                 ,fieldLabel: _('clear_cache_on_save')
@@ -80,7 +84,7 @@ MODx.panel.Snippet = function(config) {
                 ,name: 'clearCache'
                 ,id: 'modx-snippet-clear-cache'
                 ,inputValue: 1
-                ,checked: true
+                ,checked: config.record.clearCache || 1
             },{
                 html: MODx.onSnipFormRender
                 ,border: false
@@ -93,7 +97,7 @@ MODx.panel.Snippet = function(config) {
                 ,id: 'modx-snippet-snippet'
                 ,width: '95%'
                 ,height: 400
-                ,value: "<?php"
+                ,value: config.record.snippet || "<?php\n"
                 
             }]
         },{
@@ -116,35 +120,22 @@ MODx.panel.Snippet = function(config) {
 Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (this.config.snippet === '' || this.config.snippet === 0 || this.initialized) {
-            this.fireEvent('ready');
-            return;
+        if (!Ext.isEmpty(this.config.record.name)) {
+            Ext.getCmp('modx-snippet-header').getEl().update('<h2>'+_('snippet')+': '+this.config.record.name+'</h2>');
         }
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'get'
-                ,id: this.config.snippet
+        if (!Ext.isEmpty(this.config.record.properties)) {
+            var d = this.config.record.properties;
+            var g = Ext.getCmp('modx-grid-element-properties');
+            if (g) {
+                g.defaultProperties = d;
+                g.getStore().loadData(d);
             }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    if (r.object.category == '0') { r.object.category = null; }
-                    r.object.snippet = "<?php\n"+r.object.snippet+"\n?>";
-                    this.getForm().setValues(r.object);
-                    Ext.getCmp('modx-snippet-header').getEl().update('<h2>'+_('snippet')+': '+r.object.name+'</h2>');
-                    
-                    var d = Ext.decode(r.object.data);
-                    var g = Ext.getCmp('modx-grid-element-properties');
-                    g.defaultProperties = d;
-                    g.getStore().loadData(d);
-
-                    if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
-                    this.fireEvent('ready',r.object);
-                    this.clearDirty();
-                    this.initialized = true;
-                },scope:this}
-            }
-        });
+        }
+        this.fireEvent('ready',this.config.record);
+        if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
+        this.clearDirty();
+        this.initialized = true;
+        return true;
     }
     ,beforeSubmit: function(o) {
         this.cleanupEditor();

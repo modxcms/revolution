@@ -10,10 +10,21 @@
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('access');
 
-$scriptProperties['id'] = !isset($scriptProperties['id']) ? 0 : str_replace('n_dg_','',$scriptProperties['id']);
+/* setup default properties */
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,10);
+$sort = $modx->getOption('sort',$scriptProperties,'name');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
+/* get parent */
+$scriptProperties['id'] = !isset($scriptProperties['id']) ? 0 : str_replace('n_dg_','',$scriptProperties['id']);
 $resourceGroup = $modx->getObject('modResourceGroup',$scriptProperties['id']);
-$groups = $modx->getCollection('modResourceGroup');
+
+$c = $modx->newQuery('modResourceGroup');
+$c->sortby($sort,$dir);
+if ($isLimit) $c->limit($limit,$start);
+$groups = $modx->getCollection('modResourceGroup',$c);
 
 $list = array();
 if ($resourceGroup == null) {

@@ -40,7 +40,7 @@ $c->where(array(
 ));
 if (!empty($resourceGroup)) $c->where(array('target' => $resourceGroup));
 if (!empty($policy)) $c->where(array('policy' => $policy));
-$count = $modx->getCount('modAccessResourceGroup');
+$count = $modx->getCount('modAccessResourceGroup',$c);
 $c->leftJoin('modUserGroupRole','Role','`Role`.`authority` = `modAccessResourceGroup`.`authority`');
 $c->leftJoin('modAccessPolicy','Policy');
 $c->select('
@@ -71,4 +71,4 @@ foreach ($acls as $acl) {
     );
     $list[] = $aclArray;
 }
-return $this->outputArray($list);
+return $this->outputArray($list,$count);

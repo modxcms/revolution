@@ -39,7 +39,7 @@ $c->where(array(
 ));
 if (!empty($context)) $c->where(array('target' => $context));
 if (!empty($policy)) $c->where(array('policy' => $policy));
-$count = $modx->getCount('modAccessContext');
+$count = $modx->getCount('modAccessContext',$c);
 
 $c->leftJoin('modUserGroupRole','Role','Role.authority = modAccessContext.authority');
 $c->leftJoin('modAccessPolicy','Policy');
@@ -70,4 +70,4 @@ foreach ($acls as $acl) {
     );
     $list[] = $aclArray;
 }
-return $this->outputArray($list);
+return $this->outputArray($list,$count);

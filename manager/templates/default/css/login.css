@@ -5,6 +5,7 @@ html {
     font-family: Arial, Tahoma, Helvetica, sans-serif;
     color: #111;
     height: auto;
+    background-color: #f7f7f7;
 }
 body {
     font-size: 75%; /* 12px 62.5% for 10px*/
@@ -31,27 +32,37 @@ img.loginCaptcha {
     padding-left: 20px;
 }
 
-#modx-login-form-panel { border: 1px solid #ddd; }
+#modx-login-form-panel {
+    border: 1px solid #ddd;
+}
 .x-panel-tl, .x-panel-tl .x-panel-header { 
-	background: #efefef;
-	padding: 3px 5px;
+    padding: 3px 5px;
+    border: 0;
+    font-size: 14px;
 } 
 
-.x-panel-ml { 
-	padding: 10px 20px 22px;
-	border-top: 1px solid #e4e4e4;
+.x-panel-ml, .x-panel-mr, .x-panel-mc {
+    border: 0;
+    background-color: #fcfcfc;
+}
+.x-panel-ml {
+    padding: 10px 20px 22px;
+    border-top: 1px solid #e4e4e4;
+}
+.x-btn {
+    padding: 0 5px;
 }
 
 .modx-forgot-login {
-	float: left;
-	padding-top: 4px;
+    float: left;
+    padding-top: 4px;
 }
 a {
-	text-decoration: none;
-	color: #526924;
+    text-decoration: none;
+    color: #526924;
 }
 a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 #modx-login-email { width: 200px; }
@@ -66,3 +77,4 @@ a:hover {
 	color: #777;
 }
 label { cursor: pointer; }
+

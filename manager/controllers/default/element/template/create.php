@@ -37,7 +37,9 @@ $modx->regClientStartupHTMLBlock('
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-template-create"
-        ,category: "'.($category != null ? $category->get('id') : ''). '"
+        ,record: {
+            category: "'.($category != null ? $category->get('id') : '').'"
+        }
     });
 });
 MODx.onTempFormRender = "'.$onTempFormRender.'";

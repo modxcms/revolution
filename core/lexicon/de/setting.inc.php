@@ -10,7 +10,6 @@
 $_lang['area'] = 'Bereich';
 $_lang['area_authentication'] = 'Authentifizierung und Sicherheit';
 $_lang['area_caching'] = 'Caching';
-$_lang['area_email'] = 'E-Mail-Adressen';
 $_lang['area_editor'] = 'Rich-Text-Editor';
 $_lang['area_file'] = 'Dateisystem';
 $_lang['area_filter'] = 'Nach Bereich filtern...';
@@ -19,9 +18,7 @@ $_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = 'Lexikon und Sprache';
 $_lang['area_mail'] = 'E-Mail-Einstellungen';
 $_lang['area_manager'] = 'Backend-Manager';
-$_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
-$_lang['area_security'] = 'Sicherheit';
 $_lang['area_session'] = 'Session und Cookies';
 $_lang['area_lexicon_string'] = 'Lexikon-Eintrag für den Bereich';
 $_lang['area_lexicon_string_msg'] = 'Geben Sie hier den Schlüssel für den Lexikon-Eintrag für den Bereich ein. Wenn es keinen Lexikon-Eintrag gibt, wird einfach der Bereichs-Schlüssel angezeigt.<br />Core-Bereiche:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
@@ -74,7 +71,8 @@ $_lang['setting_allow_duplicate_alias_desc'] = 'Wenn diese Einstellung auf "ja" 
 
 $_lang['setting_allow_tags_in_post'] = 'HTML-Tags in POST-Requests erlauben';
 $_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "ja" gesetzt ist, können POST-Requests HTML-Formular-Tags enthalten.';
-
+$_lang['setting_archive_with'] = 'Erzwinge PCLZip Archive';
+$_lang['setting_archive_with_desc'] = 'Wählen Sie "ja", um PCLZip anstatt ZipArchive als zip-Erweiterung zu nutzen. Wählen Sie diese Einstellung, falls Sie extractTo Fehler erhalten oder Probleme beim Entpacken in der Package-Verwaltung haben.';
 $_lang['setting_auto_menuindex'] = 'Automatische Menü-Indizierung';
 $_lang['setting_auto_menuindex_desc'] = 'Wählen Sie "ja", um die automatische Menü-Indizierung einzuschalten. Ist diese aktiv, erhält das als erstes erstellte Dokument in einem Container/Ordner als Menü-Index den Wert 0, und dieser Wert wird dann für jedes nachfolgende Dokument, das Sie erstellen, erhöht.';
 
@@ -166,6 +164,9 @@ $_lang['setting_custom_resource_classes_desc'] = 'Eine kommaseparierte Liste von
 $_lang['setting_default_template'] = 'Standard-Template';
 $_lang['setting_default_template_desc'] = 'Wählen Sie das Standard-Template, das Sie für neue Ressourcen verwenden möchten. Sie können weiterhin ein anderes Template im Ressourcen-Editor auswählen; diese Einstellung sorgt nur dafür, dass eines Ihrer Templates für Sie vorausgewählt wird.';
 
+$_lang['setting_default_per_page'] = 'Standard pro Seite';
+$_lang['setting_default_per_page_desc'] = 'Standardanzahl von Einträgen in den Einstellungs-Tabellen im gesamten Manager.';
+
 $_lang['setting_editor_css_path'] = 'Pfad zur CSS-Datei';
 $_lang['setting_editor_css_path_desc'] = 'Geben Sie den Pfad zu Ihrer CSS-Datei ein, die Sie im Editor benutzen möchten. Der beste Weg, den Pfad anzugeben, ist, den Pfad vom Server-Root aus einzugeben, z.B.: /assets/site/style.css. Wenn Sie kein Stylesheet in den Editor laden möchten, lassen Sie dieses Feld leer.';
 
@@ -183,6 +184,9 @@ $_lang['setting_emailsubject_err'] = 'Bitte geben Sie die Betreffzeile für die 
 $_lang['setting_error_page'] = 'Fehlerseite';
 $_lang['setting_error_page_desc'] = 'Geben Sie die ID des Dokuments ein, das Benutzern angezeigt werden soll, wenn sie ein Dokument aufrufen, das nicht existiert. <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einem existierenden Dokument gehört und dass dieses veröffentlicht wurde!</strong>';
 $_lang['setting_error_page_err'] = 'Bitte geben Sie eine Ressourcen-ID für die Fehlerseite an.';
+
+$_lang['setting_extension_packages'] = 'Erweiterungs-Packages';
+$_lang['setting_extension_packages_desc'] = 'Kommaseparierte Liste von Erweiterungen, die bei der MODx-Initialisierung geladen werden sollen. Im Format packagename:pathtomodel';
 
 $_lang['setting_failed_login_attempts'] = 'Fehlgeschlagene Login-Versuche';
 $_lang['setting_failed_login_attempts_desc'] = 'Geben Sie an, wie viele fehlgeschlagene Login-Versuche erlaubt sein sollen, bevor der Benutzer geblockt wird.';
@@ -204,8 +208,12 @@ $_lang['setting_feed_modx_security_enabled_desc'] = 'Wenn diese Einstellung auf 
 
 $_lang['setting_filemanager_path'] = 'Dateimanager-Pfad';
 $_lang['setting_filemanager_path_desc'] = 'IIS setzt die Einstellung document_root, die vom Dateimanager verwendet wird, um festzulegen, was angezeigt wird, häufig nicht korrekt. Wenn Sie Probleme mit der Benutzung des Dateimanagers haben, stellen Sie sicher, dass dieser Pfad auf den Root Ihrer MODx-Installation zeigt.';
-$_lang['setting_filemanager_path_err'] = 'Bitte geben Sie für den Dateimanager den absoluten Pfad zum Document-Root an.';
-$_lang['setting_filemanager_path_err_invalid'] = 'Dieses Dateimanager-Verzeichnis existiert entweder nicht, oder es kann nicht darauf zugegriffen werden. Bitte geben Sie ein gültiges Verzeichnis an oder passen Sie die Rechte dieses Verzeichnisses an.';
+
+$_lang['setting_filemanager_url'] = 'Dateimanager-URL';
+$_lang['setting_filemanager_url_desc'] = 'Optional. Falls Sie eine bestimmte URL setzen möchten, um Dateien im Dateimanager aufzurufen (sinnvoll, wenn Sie den Dateimanager-Pfad außerhalb des Webroots gesetzt haben). Stellen Sie sicher, dass diese URL die Web-Variante der Dateimanager-Pfad-Einstellung ist. Falls die Einstellung leer gelassen wird, versucht MODx, sie selbst zu erkennen.';
+
+$_lang['setting_forgot_login_email'] = 'Login-vergessen-Mail';
+$_lang['setting_forgot_login_email_desc'] = 'Das Template für die Mail, die User erhalten, die ihren MODx Nutzernamen und/oder Passwort vergessen haben.';
 
 $_lang['setting_friendly_alias_lowercase_only'] = 'Suchmaschinenfreundliche Aliasse in Kleinbuchstaben';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Legt fest, ob nur Kleinbuchstaben in einem Ressourcen-Alias erlaubt sein sollen';
@@ -351,6 +359,9 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Lösche die Thumbnails, deren 
 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb: Cache für Quelldateien';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Gibt an, ob Quelldateien gecacht werden sollen, wenn sie geladen werden, oder nicht. Es wird die Einstellung "off" empfohlen.';
+
+$_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb: ImageMagick Pfad';
+$_lang['setting_phpthumb_imagemagick_path_desc'] = 'Optional. Alternativer Pfad zu ImageMagick, um Thumbnails mit phpThumb zu genrieren, falls nicht bereits in den PHP-Einstellungen gesetzt.';
 
 $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb: Zoom-Crop';
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'Die Standard-Zoom-Crop-Einstellung für phpThumb, wenn es in MODx verwendet wird. Der Standardwert ist "0", wodurch Zoom-Cropping verhindert wird.';
@@ -499,8 +510,14 @@ $_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]],\n\nanbei erh
 $_lang['setting_welcome_screen'] = 'Willkommens-Bildschirm anzeigen';
 $_lang['setting_welcome_screen_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, wird der Willkommens-Bildschirm beim nächsten erfolgreichen Laden der Manager-Startseite einmalig angezeigt, danach nicht mehr.';
 
+$_lang['setting_welcome_screen_url'] = 'URL für den Willkommens-Bildschirm';
+$_lang['setting_welcome_screen_url_desc'] = 'Die URL für den Willkommens-Bildschirm, der beim ersten Laden der Manager-Startseite von MODx Revolution angezeigt wird.';
+
 $_lang['setting_which_editor'] = 'Zu verwendender Editor';
 $_lang['setting_which_editor_desc'] = 'Hier können Sie auswählen, welchen Rich-Text-Editor Sie verwenden möchten. Sie können zusätzliche Rich-Text-Editoren über die Package-Verwaltung herunterladen und dann installieren.';
+
+$_lang['setting_xhtml_urls'] = 'XHTML URLs';
+$_lang['setting_xhtml_urls_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden alle URLs, die von MODx generiert werden XHTML-valide erzeugt, einschließlich des Ampersand-Zeichens.';
 
 $_lang['setting_which_element_editor'] = 'Für Elemente zu verwendender Editor';
 $_lang['setting_which_element_editor_desc'] = 'Hier können Sie auswählen, welchen Rich-Text-Editor Sie verwenden möchten, wenn Sie Elemente (Templates, Chunks, Snippets etc.) bearbeiten. Sie können zusätzliche Rich-Text-Editoren über die Package-Verwaltung herunterladen und dann installieren';

@@ -55,7 +55,8 @@ class modFileHandler {
     public function getBasePath($prependBasePath = false) {
         $root = $this->modx->getOption('filemanager_path',null,'');
         if (empty($root)) {
-            $root = $this->modx->getOption('rb_base_dir');
+            /* TODO: deprecated - remove this in 2.1 */
+            $root = $this->modx->getOption('rb_base_dir',null,'');
         }
         /* expand placeholders */
         $root = str_replace(array(
@@ -63,18 +64,32 @@ class modFileHandler {
             '{core_path}',
             '{assets_path}',
         ),array(
-            $this->modx->getOption('base_path'),
-            $this->modx->getOption('core_path'),
-            $this->modx->getOption('assets_path'),
+            $this->modx->getOption('base_path',null,MODX_BASE_PATH),
+            $this->modx->getOption('core_path',null,MODX_CORE_PATH),
+            $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH),
         ),$root);
 
         /* check for absolute/relative */
-        if (substr($root,0,1) != '/') {
+        if (substr($root,0,1) != '/' && substr($root,1,3) != ':/') {
             $root = $this->modx->getOption('base_path',null,MODX_BASE_PATH).$root;
         }
 
-        $root = ($prependBasePath ? $this->modx->getOption('base_path') : '').$root;
+        $root = ($prependBasePath ? $this->modx->getOption('base_path',null,MODX_BASE_PATH) : '').$root;
         return $this->postfixSlash($root);
+    }
+
+    /**
+     * Get base URL of file manager
+     */
+    public function getBaseUrl() {
+        $fileManagerUrl = $this->modx->getOption('filemanager_url',$scriptProperties,'');
+        /* if none specified, automatically calculate */
+        if (empty($fileManagerUrl)) {
+            $path = $this->modx->getOption('filemanager_path',$scriptProperties,$this->modx->getOption('rb_base_url',null,''));
+            $basePath = $this->modx->getOption('base_path',null,MODX_BASE_PATH);
+            if ($basePath != '/') $fileManagerUrl = str_replace($basePath,'',$path);
+        }
+        return $this->postfixSlash($fileManagerUrl);
     }
 
     /**
@@ -102,6 +117,24 @@ class modFileHandler {
     public function getDirectoryFromFile($fileName) {
         $dir = dirname($fileName);
         return $this->postfixSlash($dir);
+    }
+
+    /**
+     * Tells if a file is a binary file or not.
+     *
+     * @param string $file
+     * @return boolean True if a binary file.
+     */
+    public function isBinary($file) {
+        if (file_exists($file)) {
+            if (!is_file($file)) return false;
+            $fh  = @fopen($file,'r');
+            $blk = @fread($fh,512);
+            @fclose($fh);
+            @clearstatcache();
+            return (substr_count($blk, "^ -~"/*. "^\r\n"*/)/512 > 0.3) || (substr_count($blk, "\x00") > 0) ? false : true;
+        }
+        return false;
     }
 }
 
@@ -299,7 +332,7 @@ class modFile extends modFileSystemResource {
      * @see modFileSystemResource.parseMode
      */
     protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->modx->getOption('new_file_permissions',null,0644);
+        if (empty($mode)) $mode = $this->modx->getOption('new_file_permissions',null,'0644');
         return parent::parseMode($mode);
     }
 

@@ -58,6 +58,7 @@ $provider = $modx->getObject('transport.modTransportProvider',array(
 if ($provider) {
     $modx->regClientStartupHTMLBlock('<script type="text/javascript">
 MODx.provider = "'.$provider->get('id').'";
+MODx.providerName = "'.$provider->get('name').'";
 </script>');
 }
 

@@ -7,7 +7,11 @@
  * @xtype modx-page-resource-update
  */
 MODx.page.UpdateResource = function(config) {
-    config = config || {};
+    config = config || {record:{}};
+    config.record = config.record || {};
+    Ext.apply(config.record,{
+        'parent-cmb': config.record['parent']
+    });
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
         ,which_editor: 'none'
@@ -24,14 +28,7 @@ MODx.page.UpdateResource = function(config) {
             xtype: 'modx-panel-resource'
             ,renderTo: 'modx-panel-resource-div'
             ,resource: config.resource
-            ,record: {
-                class_key: config.class_key
-                ,context_key: config.context_key
-                ,template: config.template
-                ,richtext: config.richtext
-                ,'parent': config['parent']
-                ,'parent-cmb': config['parent']
-            }
+            ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
         }]

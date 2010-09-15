@@ -71,6 +71,9 @@ $_lang['setting_allow_duplicate_alias_desc'] = 'If set to \'yes\', this will all
 $_lang['setting_allow_tags_in_post'] = 'Allow HTML Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST actions within the manager will strip out any tags. MODx Recommends to leave this set at true.';
 
+$_lang['setting_archive_with'] = 'Force PCLZip Archives';
+$_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
+
 $_lang['setting_auto_menuindex'] = 'Menu indexing default';
 $_lang['setting_auto_menuindex_desc'] = 'Select \'Yes\' to turn on automatic menu index incrementing by default.';
 
@@ -163,6 +166,9 @@ $_lang['setting_custom_resource_classes_desc'] = 'A comma-separated list of cust
 $_lang['setting_default_template'] = 'Default Template';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
 
+$_lang['setting_default_per_page'] = 'Default Per Page';
+$_lang['setting_default_per_page_desc'] = 'The default number of results to show in grids throughout the manager.';
+
 $_lang['setting_editor_css_path'] = 'Path to CSS file';
 $_lang['setting_editor_css_path_desc'] = 'Enter the path to your CSS file that you wish to use within a richtext editor. The best way to enter the path is to enter the path from the root of your server, for example: /assets/site/style.css. If you do not wish to load a style sheet into a richtext editor, leave this field blank.';
 
@@ -180,6 +186,9 @@ $_lang['setting_emailsubject_err'] = 'Please state the subject line for the sign
 $_lang['setting_error_page'] = 'Error Page';
 $_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to send users to if they request a document which doesn\'t actually exist. <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
 $_lang['setting_error_page_err'] = 'Please specify a document ID that is the error page.';
+
+$_lang['setting_extension_packages'] = 'Extension Packages';
+$_lang['setting_extension_packages_desc'] = 'A comma separated list of packages to load on MODx instantiation. In the format packagename:pathtomodel';
 
 $_lang['setting_failed_login_attempts'] = 'Failed Login Attempts';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
@@ -201,8 +210,12 @@ $_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODx will hide t
 
 $_lang['setting_filemanager_path'] = 'File Manager Path';
 $_lang['setting_filemanager_path_desc'] = 'IIS often does not populate the document_root setting properly, which is used by the file manager to determine what you can look at. If you\'re having problems using the file manager, make sure this path points to the root of your MODx installation.';
-$_lang['setting_filemanager_path_err'] = 'Please state the absoulte document root path for the filemanager.';
-$_lang['setting_filemanager_path_err_invalid'] = 'This filemanager directory either does not exist or cannot be accessed. Please state a valid directory or adjust the permissions of this directory.';
+
+$_lang['setting_filemanager_url'] = 'File Manager Url';
+$_lang['setting_filemanager_url_desc'] = 'Optional. Set this if you want to set an explicit URL to access the files in the MODx file manager from (useful if you have changed filemanager_path to a path outside the MODx webroot). Make sure this is the web-accessible URL of the filemanager_path setting value. If leave this empty, MODx will try to automatically calculate it.';
+
+$_lang['setting_forgot_login_email'] = 'Forgot Login Email';
+$_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODx username and/or password.';
 
 $_lang['setting_friendly_alias_lowercase_only'] = 'FURL Lowercase Aliases';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Determines whether to allow only lowercase characters in a Resource alias.';
@@ -251,7 +264,7 @@ $_lang['setting_mail_use_smtp'] = 'Use SMTP';
 $_lang['setting_mail_use_smtp_desc'] = 'If true, MODx will attempt to use SMTP in mail functions.';
 
 $_lang['setting_mail_smtp_auth'] = 'SMTP Authentication';
-$_lang['setting_mail_smtp_auth_desc'] = 'Sets SMTP authentication. Utilizes the mail_smtp_user and mail_smtp_password settings.';
+$_lang['setting_mail_smtp_auth_desc'] = 'Sets SMTP authentication. Utilizes the mail_smtp_user and mail_smtp_pass settings.';
 
 $_lang['setting_mail_smtp_helo'] = 'SMTP Helo Message';
 $_lang['setting_mail_smtp_helo_desc'] = 'Sets the SMTP HELO of the message (Defaults to the hostname).';
@@ -348,6 +361,9 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Delete least-recently-accessed
 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb Cache Source Files';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Whether or not to cache source files as they are loaded. Recommended to off.';
+
+$_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb ImageMagick Path';
+$_lang['setting_phpthumb_imagemagick_path_desc'] = 'Optional. Set an alternative ImageMagick path here for generating thumbnails with phpThumb, if it is not in the PHP default.';
 
 $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop';
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'The default zc setting for phpThumb when used in MODx. Defaults to 0 to prevent zoom cropping.';
@@ -496,9 +512,15 @@ $_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \n\nHere are 
 $_lang['setting_welcome_screen'] = 'Show Welcome Screen';
 $_lang['setting_welcome_screen_desc'] = 'If set to true, the welcome screen will show on the next successful loading of the welcome page, and then not show after that.';
 
+$_lang['setting_welcome_screen_url'] = 'Welcome Screen URL';
+$_lang['setting_welcome_screen_url_desc'] = 'The URL for the welcome screen that loads on first load of MODx Revolution.';
+
 $_lang['setting_which_editor'] = 'Editor to use';
 $_lang['setting_which_editor_desc'] = 'Here you can select which Rich Text Editor you wish to use. You can download and install additional Rich Text Editors from Package Management.';
 
 $_lang['setting_which_element_editor'] = 'Editor to use for Elements';
 $_lang['setting_which_element_editor_desc'] = 'Here you can select which Rich Text Editor you wish to use when editing Elements. You can download and install additional Rich Text Editors from Package Management.';
+
+$_lang['setting_xhtml_urls'] = 'XHTML URLs';
+$_lang['setting_xhtml_urls_desc'] = 'If set to true, all URLs generated by MODx will be XHTML-compliant, including encoding of the ampersand character.';
 

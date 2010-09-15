@@ -7,7 +7,11 @@
  * @xtype modx-page-static-update
  */
 MODx.page.UpdateStatic = function(config) {
-    config = config || {};
+    config = config || {record:{}};
+    config.record = config.record || {};
+    Ext.apply(config.record,{
+        'parent-cmb': config.record['parent']
+    });
         
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'resource/index.php'
@@ -24,11 +28,7 @@ MODx.page.UpdateStatic = function(config) {
             xtype: 'modx-panel-static'
             ,renderTo: 'modx-panel-static-div'
             ,resource: config.resource
-            ,record: {
-                class_key: config.class_key
-                ,context_key: config.context_key
-                ,template: config.template
-            }
+            ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
         }]

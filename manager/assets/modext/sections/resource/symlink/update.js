@@ -24,11 +24,7 @@ MODx.page.UpdateSymLink = function(config) {
             xtype: 'modx-panel-symlink'
             ,renderTo: 'modx-panel-symlink-div'
             ,resource: config.resource
-            ,record: {
-                class_key: config.class_key
-                ,context_key: config.context_key
-                ,template: config.template
-            }
+            ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
         }]

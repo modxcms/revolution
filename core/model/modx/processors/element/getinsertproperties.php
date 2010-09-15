@@ -24,15 +24,7 @@ $o = '';
 $props = array();
 foreach ($properties as $k => $property) {
     $xtype = 'textfield';
-    if (is_array($property) && !empty($property['lexicon'])) {
-        if (strpos($property['lexicon'],':') !== false) {
-            $modx->lexicon->load('en:'.$property['lexicon']);
-        } else {
-            $modx->lexicon->load('en:core:'.$property['lexicon']);
-        }
-        $modx->lexicon->load($property['lexicon']);
-    }
-    $desc = $modx->lexicon($property['desc']);
+    $desc = $property['desc_trans'];
 
     if (is_array($property)) {
         $v = $property['value'];

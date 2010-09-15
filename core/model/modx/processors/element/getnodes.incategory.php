@@ -83,6 +83,7 @@ foreach ($elements as $element) {
         'type' => $elementIdentifier,
         'elementType' => $elementType,
         'classKey' => $elementClassKey,
+        'qtip' => strip_tags($element->get('description')),
     );
 }
 

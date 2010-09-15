@@ -77,6 +77,14 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
             });
             m.push('-');
             m.push({
+                text: _('orm_container_rename')
+                ,handler: function(itm,e) {
+                    this.renameContainer(itm,e,this.cm.activeNode);
+                }
+                ,scope: this
+            });
+            m.push('-');
+            m.push({
                 text: _('orm_container_remove')
                 ,handler: this.removeContainer
                 ,scope: this
@@ -149,6 +157,29 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
         this.windows.addContainer.setValues(r);
         this.windows.addContainer.show(e.target);
     }
+    ,renameContainer: function(btn,e,node) {
+        var r = {};
+        if (node) { r.parent = node.id; }
+
+        if (!this.windows.renameContainer) {
+            this.windows.renameContainer = MODx.load({
+                xtype: 'modx-orm-window-container-rename'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        var nd = this.getSelectedNode();
+                        console.log(r);
+                        nd.setId(r.name);
+                        nd.setText(r.name);
+                        console.log(nd);
+                        this.markFormPanelDirty();
+                    },scope:this}
+                }
+            });
+        }
+        this.windows.renameContainer.setValues(r);
+        this.windows.renameContainer.show(e.target);
+    }
     ,addAttribute: function(btn,e,node) {
         var r = {};
         if (node) { r.parent = node.id; }
@@ -186,7 +217,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
             for (var i = 0;i < kids.length;i=i+1) {
                 var n = kids[i];
                 var c = _encode(n);
-                if (n.attributes.value) {
+                if (n.attributes.value != null && n.attributes.value != undefined) {
                     resultNode[n.id] = n.attributes.value;
                 } else {
                     resultNode[n.id] = c;
@@ -200,7 +231,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
     
     ,onClick: function(n) {
         var vs = n.attributes;
-        if (vs.value) {
+        if (vs.value != null && vs.value != undefined) {
             var f = Ext.getCmp(this.config.formPanel).getForm();
             f.findField(this.config.prefix+'_id').setValue(vs.id);
             f.findField(this.config.prefix+'_name').setValue(vs.name);
@@ -349,3 +380,42 @@ Ext.extend(MODx.window.AddOrmContainer,MODx.Window,{
     }
 });
 Ext.reg('modx-orm-window-container-add',MODx.window.AddOrmContainer);
+
+MODx.window.RenameOrmContainer = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'ormrcont'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('orm_container_rename')
+        ,id: this.ident
+        ,height: 150
+        ,width: 350
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'parent'
+            ,value: 0
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'name'
+            ,id: 'modx-'+this.ident+'-name'
+            ,anchor: '85%'
+            ,allowBlank: false
+        }]
+    });
+    MODx.window.RenameOrmContainer.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.RenameOrmContainer,MODx.Window,{
+    submit: function() {
+        var v = this.fp.getForm().getValues();
+
+        if (this.fp.getForm().isValid()) {
+            if (this.fireEvent('success',v)) {
+                this.fp.getForm().reset();
+                this.hide();
+                return true;
+            }
+        }
+        return false;
+    }
+});
+Ext.reg('modx-orm-window-container-rename',MODx.window.RenameOrmContainer);

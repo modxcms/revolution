@@ -218,31 +218,6 @@ class xPDOObject {
     public $_options= array();
 
     /**
-     * An array of DB constants/functions that represent timestamp values.
-     * @var array
-     */
-    public $_currentTimestamps= array (
-        'CURRENT_TIMESTAMP',
-        'CURRENT_TIMESTAMP()',
-        'NOW()',
-        'LOCALTIME',
-        'LOCALTIME()',
-        'LOCALTIMESTAMP',
-        'LOCALTIMESTAMP()',
-        'SYSDATE()'
-    );
-
-    /**
-     * An array of DB constants/functions that represent date values.
-     * @var array
-     */
-    public $_currentDates= array (
-        'CURDATE()',
-        'CURRENT_DATE',
-        'CURRENT_DATE()'
-    );
-
-    /**
      * Responsible for loading a result set from the database.
      *
      * @static
@@ -282,7 +257,26 @@ class xPDOObject {
             }
             $rows= & $criteria->stmt;
         } else {
-            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql}" . print_r($xpdo->errorInfo(), true));
+            $errorInfo = $xpdo->errorInfo();
+            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
+            if ($errorInfo[1] == '1146' || $errorInfo[1] == '1') {
+                if ($xpdo->getManager() && $xpdo->manager->createObjectContainer($className)) {
+                    if (!$criteria->prepare()) {
+                        $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
+                    } else {
+                        $tstart= $xpdo->getMicroTime();
+                        if (!$criteria->stmt->execute()) {
+                            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($criteria->stmt->errorInfo(), true));
+                        }
+                        $tend= $xpdo->getMicroTime();
+                        $totaltime= $tend - $tstart;
+                        $xpdo->queryTime= $xpdo->queryTime + $totaltime;
+                        $xpdo->executedQueries= $xpdo->executedQueries + 1;
+                    }
+                } else {
+                    $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $xpdo->errorCode() . " attempting to create object container for class {$className}:\n" . print_r($xpdo->errorInfo(), true));
+                }
+            }
         }
         return $rows;
     }
@@ -503,17 +497,19 @@ class xPDOObject {
         $objCollection = array();
         if ($query= $xpdo->newQuery($className, $criteria, $cacheFlag)) {
             $query->bindGraph($graph);
+            $rows = array();
             $fromCache = false;
             $collectionCaching = (integer) $xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1);
             if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag) {
                 $rows= $xpdo->fromCache($criteria);
                 $fromCache = !empty($rows);
             }
-            if (!$fromCache && ($stmt= $query->prepare())) {
-                if ($stmt->execute()) {
+            if (!$fromCache) {
+                $stmt= $query->prepare();
+                if ($stmt && $stmt->execute()) {
                     $objCollection= $query->hydrateGraph($stmt, $cacheFlag);
                 }
-            } else {
+            } elseif (!empty($rows)) {
                 $objCollection= $query->hydrateGraph($rows, $cacheFlag);
             }
         }
@@ -536,10 +532,10 @@ class xPDOObject {
      */
     public static function getSelectColumns(xPDO & $xpdo, $className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false) {
         $columnarray= array ();
-        if ($aColumns= $xpdo->getFields($className)) {
+        $aColumns= $xpdo->getFields($className);
+        if ($aColumns) {
             if (!empty ($tableAlias)) {
-                $tableAlias= trim($tableAlias, $xpdo->_escapeChar);
-                $tableAlias= $xpdo->_escapeChar . $tableAlias . $xpdo->_escapeChar;
+                $tableAlias= $xpdo->escape($tableAlias);
                 $tableAlias.= '.';
             }
             foreach (array_keys($aColumns) as $k) {
@@ -547,15 +543,15 @@ class xPDOObject {
                     continue;
                 }
                 elseif (empty ($columns)) {
-                    $columnarray[$k]= "{$tableAlias}" . $xpdo->_escapeChar . "{$k}" . $xpdo->_escapeChar;
+                    $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
                 }
                 elseif ($exclude || in_array($k, $columns)) {
-                    $columnarray[$k]= "{$tableAlias}" . $xpdo->_escapeChar . "{$k}" . $xpdo->_escapeChar;
+                    $columnarray[$k]= "{$tableAlias}" . $xpdo->escape($k);
                 } else {
                     continue;
                 }
                 if (!empty ($columnPrefix)) {
-                    $columnarray[$k]= $columnarray[$k] . " AS " . $xpdo->_escapeChar . "{$columnPrefix}{$k}" . $xpdo->_escapeChar;
+                    $columnarray[$k]= $columnarray[$k] . " AS " . $xpdo->escape("{$columnPrefix}{$k}");
                 }
             }
         }
@@ -719,7 +715,7 @@ class xPDOObject {
                                         $this->_fields[$k]= $ts;
                                         $set= true;
                                     } else {
-                                        if ($vType == 'utc' || in_array($v, $this->_currentTimestamps) || $v === '0000-00-00 00:00:00') {
+                                        if ($vType == 'utc' || in_array($v, $this->xpdo->driver->_currentTimestamps) || $v === '0000-00-00 00:00:00') {
                                             $this->_fields[$k]= (string) $v;
                                             $set= true;
                                         } else {
@@ -748,7 +744,7 @@ class xPDOObject {
                                         $this->_fields[$k]= $ts;
                                         $set= true;
                                     } else {
-                                        if ($vType == 'utc' || in_array($v, $this->_currentDates) || $v === '0000-00-00') {
+                                        if ($vType == 'utc' || in_array($v, $this->xpdo->driver->_currentDates) || $v === '0000-00-00') {
                                             $this->_fields[$k]= $v;
                                             $set= true;
                                         } else {
@@ -902,7 +898,7 @@ class xPDOObject {
                         case 'datetime' :
                             if ($dbType == 'int' || $dbType == 'integer' || $dbType == 'INT' || $dbType == 'INTEGER') {
                                 $ts= intval($value);
-                            } elseif (in_array($value, $this->_currentTimestamps)) {
+                            } elseif (in_array($value, $this->xpdo->driver->_currentTimestamps)) {
                                 $ts= time();
                             } else {
                                 $ts= strtotime($value);
@@ -927,7 +923,7 @@ class xPDOObject {
                         case 'date' :
                             if ($dbType == 'int' || $dbType == 'integer' || $dbType == 'INT' || $dbType == 'INTEGER') {
                                 $ts= intval($value);
-                            } elseif (in_array($value, $this->_currentDates)) {
+                            } elseif (in_array($value, $this->xpdo->driver->_currentDates)) {
                                 $ts= time();
                             } else {
                                 $ts= strtotime($value);
@@ -1213,11 +1209,11 @@ class xPDOObject {
                     $fieldType= PDO::PARAM_NULL;
                     $fieldValue= null;
                 }
-                elseif (in_array($this->_fieldMeta[$_k]['phptype'], array ('timestamp', 'datetime')) && in_array($fieldValue, $this->_currentTimestamps, true)) {
+                elseif (in_array($this->_fieldMeta[$_k]['phptype'], array ('timestamp', 'datetime')) && in_array($fieldValue, $this->xpdo->driver->_currentTimestamps, true)) {
                     $this->_fields[$_k]= strftime('%Y-%m-%d %H:%M:%S');
                     continue;
                 }
-                elseif (in_array($this->_fieldMeta[$_k]['phptype'], array ('date')) && in_array($fieldValue, $this->_currentDates, true)) {
+                elseif (in_array($this->_fieldMeta[$_k]['phptype'], array ('date')) && in_array($fieldValue, $this->xpdo->driver->_currentDates, true)) {
                     $this->_fields[$_k]= strftime('%Y-%m-%d');
                     continue;
                 }
@@ -1228,13 +1224,13 @@ class xPDOObject {
                     $fieldType= PDO::PARAM_INT;
                 }
                 if ($this->_new) {
-                    $cols[$_k]= $this->xpdo->_escapeChar . "{$_k}" . $this->xpdo->_escapeChar;
+                    $cols[$_k]= $this->xpdo->escape($_k);
                     $bindings[":{$_k}"]['value']= $fieldValue;
                     $bindings[":{$_k}"]['type']= $fieldType;
                 } else {
                     $bindings[":{$_k}"]['value']= $fieldValue;
                     $bindings[":{$_k}"]['type']= $fieldType;
-                    $updateSql[]= $this->xpdo->_escapeChar . "{$_k}" . $this->xpdo->_escapeChar . " = :{$_k}";
+                    $updateSql[]= $this->xpdo->escape($_k) . " = :{$_k}";
                 }
             }
             if ($this->_new) {
@@ -1252,7 +1248,7 @@ class xPDOObject {
                             if ($iteration) {
                                 $where .= " AND ";
                             }
-                            $where .= $this->xpdo->_escapeChar . "{$k}" . $this->xpdo->_escapeChar . " = :{$k}";
+                            $where .= $this->xpdo->escape($_k) . " = :{$k}";
                             $bindings[":{$k}"]['value']= $this->_fields[$k];
                             $bindings[":{$k}"]['type']= $vt;
                             $iteration++;
@@ -1265,7 +1261,7 @@ class xPDOObject {
                         }
                         $bindings[":{$pkn}"]['value']= $pk;
                         $bindings[":{$pkn}"]['type']= $pkt;
-                        $where= $this->xpdo->_escapeChar . $pkn . $this->xpdo->_escapeChar . ' = :' . $pkn;
+                        $where= $this->xpdo->escape($pkn) . ' = :' . $pkn;
                     }
                     if (!empty ($updateSql)) {
                         $sql= "UPDATE {$this->_table} SET " . implode(',', $updateSql) . " WHERE {$where} LIMIT 1";
@@ -1460,7 +1456,7 @@ class xPDOObject {
             $delete= $this->xpdo->newQuery($this->_class);
             $delete->command('DELETE');
             $delete->where($pk);
-            $delete->limit(1);
+            // $delete->limit(1);
             $stmt= $delete->prepare();
             if (is_object($stmt)) {
                 if (!$result= $stmt->execute()) {
@@ -1903,7 +1899,7 @@ class xPDOObject {
     protected function _initFields() {
         reset($this->_fieldMeta);
         while (list ($k, $v)= each($this->_fieldMeta)) {
-            $this->fieldNames[$k]= $this->xpdo->_escapeChar . "{$this->_table}" . $this->xpdo->_escapeChar . "." . $this->xpdo->_escapeChar . "{$k}" . $this->xpdo->_escapeChar;
+            $this->fieldNames[$k]= $this->xpdo->escape($this->_table) . '.' . $this->xpdo->escape($k);
         }
     }
 

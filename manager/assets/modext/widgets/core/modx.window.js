@@ -105,9 +105,9 @@ Ext.extend(MODx.Window,Ext.Window,{
     ,createForm: function(config) {
         config = config || {};
         Ext.applyIf(config,{
-            labelAlign: 'right'
-            ,labelWidth: 100
-            ,frame: true
+            labelAlign: this.config.labelAlign || 'right'
+            ,labelWidth: this.config.labelWidth || 100
+            ,frame: this.config.formFrame || true
             ,border: false
             ,bodyBorder: false
             ,autoHeight: true

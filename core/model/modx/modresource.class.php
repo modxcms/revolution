@@ -603,4 +603,38 @@ class modResource extends modAccessibleSimpleObject {
         }
         return $newResource;
     }
+
+    /**
+     * Joins a Resource to a Resource Group
+     *
+     * @access public
+     * @param mixed $resourceGroupPk Either the ID, name or object of the Resource Group
+     * @return boolean True if successful.
+     */
+    public function joinGroup($resourceGroupPk) {
+        if (!is_object($resourceGroupPk) && !($resourceGroupPk instanceof modResourceGroup)) {
+            $c = array(
+                is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
+            );
+            $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
+            if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::joinGroup - No resource group: '.$resourceGroupPk);
+                return false;
+            }
+        } else {
+            $resourceGroup =& $resourceGroupPk;
+        }
+        $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource',array(
+            'document' => $this->get('id'),
+            'document_group' => $resourceGroup->get('id'),
+        ));
+        if ($resourceGroupResource) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::joinGroup - Resource '.$this->get('id').' already in resource group: '.$resourceGroupPk);
+            return false;
+        }
+        $resourceGroupResource = $this->xpdo->newObject('modResourceGroupResource');
+        $resourceGroupResource->set('document',$this->get('id'));
+        $resourceGroupResource->set('document_group',$resourceGroup->get('id'));
+        return $resourceGroupResource->save();
+    }
 }

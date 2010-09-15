@@ -32,10 +32,10 @@ $c->where(array(
     'editedon:!=' => null,
 ));
 $total = $modx->getCount('modResource',$cc);
-$c->select('
-    `modResource`.*,
-    `EditedBy`.`username` AS `username`
-');
+$c->select(array(
+    $modx->getSelectColumns('modResource','modResource'),
+    $modx->getSelectColumns('modUser','EditedBy','',array('username')),
+));
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $resources = $modx->getCollection('modResource',$c);
@@ -45,10 +45,10 @@ $list = array();
 foreach ($resources as $resource) {
     if (!$resource->checkPolicy('list')) continue;
 
-	$resourceArray = $resource->get(array(
+    $resourceArray = $resource->get(array(
         'id','pagetitle','editedon','username',
     ));
-	$resourceArray['editedon'] = strftime($dateFormat,strtotime($resource->get('editedon')));
-	$list[] = $resourceArray;
+    $resourceArray['editedon'] = strftime($dateFormat,strtotime($resource->get('editedon')));
+    $list[] = $resourceArray;
 }
 return $this->outputArray($list,$total);

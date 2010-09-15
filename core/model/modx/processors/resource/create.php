@@ -62,7 +62,7 @@ if (!empty($scriptProperties['parent']) && !is_numeric($scriptProperties['parent
 /* default settings */
 $scriptProperties['context_key']= empty($scriptProperties['context_key']) ? 'web' : $scriptProperties['context_key'];
 $scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);
-$scriptProperties['template'] = empty($scriptProperties['template']) ? 0 : intval($scriptProperties['template']);
+$scriptProperties['template'] = !isset($scriptProperties['template']) ? $modx->getOption('default_template',null,0) : intval($scriptProperties['template']);
 $scriptProperties['hidemenu'] = empty($scriptProperties['hidemenu']) ? 0 : 1;
 $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
 $scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? 0 : 1;
@@ -260,17 +260,30 @@ if (!$resource->get('class_key')) {
 
 /* increase menu index if this is a new resource */
 $auto_menuindex = $modx->getOption('auto_menuindex',null,true);
-if (!empty($auto_menuindex)) {
-    $menuindex = $modx->getCount('modResource',array('parent' => $resource->get('parent')));
+if (!empty($auto_menuindex) && empty($scriptProperties['menuindex'])) {
+    $scriptProperties['menuindex'] = $modx->getCount('modResource',array('parent' => $resource->get('parent')));
 }
-$resource->set('menuindex',!empty($menuindex) ? $menuindex : 0);
+$resource->set('menuindex',!empty($scriptProperties['menuindex']) ? $scriptProperties['menuindex'] : 0);
 
-/* invoke OnBeforeDocFormSave event */
-$modx->invokeEvent('OnBeforeDocFormSave',array(
+/* invoke OnBeforeDocFormSave event, and allow non-empty responses to prevent save */
+$OnBeforeDocFormSave = $modx->invokeEvent('OnBeforeDocFormSave',array(
     'mode' => modSystemEvent::MODE_NEW,
     'id' => 0,
     'resource' => &$resource,
 ));
+if (is_array($OnBeforeDocFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforeDocFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforeDocFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
 
 /* save data */
 if ($resource->save() == false) {

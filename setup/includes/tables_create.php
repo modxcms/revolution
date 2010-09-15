@@ -9,6 +9,7 @@ $results= array ();
 $classes= array (
     'modAccessAction',
     'modAccessActionDom',
+    'modAccessCategory',
     'modAccessContext',
     'modAccessElement',
     'modAccessMenu',
@@ -21,6 +22,7 @@ $classes= array (
     'modActionDom',
     'modActiveUser',
     'modCategory',
+    'modCategoryClosure',
     'modChunk',
     'modContentType',
     'modContext',
@@ -76,13 +78,13 @@ if (!$connected) {
     $containerOptions['collation']= $install->settings->get('database_collation', 'utf8_general_ci');
     $created= $this->xpdo->manager->createSourceContainer($dsnArray, $this->xpdo->config['username'], $this->xpdo->config['password'], $containerOptions);
     if (!$created) {
-        $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">'.$this->lexicon['db_err_create'].'</p>');
+        $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">'.$this->lexicon('db_err_create').'</p>');
     }
     else {
         $connected= $this->xpdo->connect();
     }
     if ($connected) {
-        $results[]= array ('class' => 'success', 'msg' => '<p class="ok">'.$this->lexicon['db_created'].'</p>');
+        $results[]= array ('class' => 'success', 'msg' => '<p class="ok">'.$this->lexicon('db_created').'</p>');
     }
 }
 if ($connected) {
@@ -97,9 +99,9 @@ if ($connected) {
     $this->xpdo->loadClass('modUser');
     foreach ($classes as $class) {
         if (!$dbcreated= $this->xpdo->manager->createObjectContainer($class)) {
-            $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">' . sprintf($this->lexicon['table_err_create'],$class) . '</p>');
+            $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">' . $this->lexicon('table_err_create',array('class' => $class)) . '</p>');
         } else {
-            $results[]= array ('class' => 'success', 'msg' => '<p class="ok">' . sprintf($this->lexicon['table_created'],$class) . '</p>');
+            $results[]= array ('class' => 'success', 'msg' => '<p class="ok">' . $this->lexicon('table_created',array('class' => $class)) . '</p>');
         }
     }
     ob_end_clean();

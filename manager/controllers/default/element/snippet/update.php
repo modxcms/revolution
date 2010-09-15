@@ -26,6 +26,28 @@ if (is_array($onSnipFormRender)) $onSnipFormRender = implode('',$onSnipFormRende
 $onSnipFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onSnipFormRender);
 $modx->smarty->assign('onSnipFormRender',$onSnipFormRender);
 
+/* get properties */
+$properties = $snippet->get('properties');
+if (!is_array($properties)) $properties = array();
+
+$data = array();
+foreach ($properties as $property) {
+    $data[] = array(
+        $property['name'],
+        $property['desc'],
+        $property['type'],
+        $property['options'],
+        $property['value'],
+        $property['lexicon'],
+        false, /* overridden set to false */
+        $property['desc_trans'],
+    );
+}
+$snippetArray = $snippet->toArray();
+$snippetArray['properties'] = $data;
+if (strpos($snippetArray['snippet'],'<?php') === false) {
+    $snippetArray['snippet'] = "<?php\n".$snippetArray['snippet'];
+}
 /* check unlock default element properties permission */
 $unlock_element_properties = $modx->hasPermission('unlock_element_properties') ? 1 : 0;
 
@@ -40,8 +62,8 @@ $modx->regClientStartupHTMLBlock('
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-snippet-update"
-        ,id: "'.$snippet->get('id').'"
-        ,category: "'.$snippet->get('category').'"
+        ,snippet: "'.$snippet->get('id').'"
+        ,record: '.$modx->toJSON($snippetArray).'
     });
 });
 MODx.onSnipFormRender = "'.$onSnipFormRender.'";

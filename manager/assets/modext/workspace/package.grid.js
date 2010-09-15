@@ -35,7 +35,7 @@ MODx.grid.Package = function(config) {
     cols.push({ header: _('release') ,dataIndex: 'release' });
     cols.push({ header: _('installed') ,dataIndex: 'installed' ,renderer: this._rins });
     if (MODx.config.auto_check_pkg_updates == 1) {
-        cols.push({ header: _('updateable') ,dataIndex: 'updateable' ,renderer: this.rendYesNo });
+        cols.push({ header: _('updateable') ,dataIndex: 'updateable' ,renderer: this.rendUpdateAvail });
     }
     cols.push({ header: _('provider') ,dataIndex: 'provider_name'});
     cols.push(this.action);
@@ -92,69 +92,56 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
     
     ,loadMainProvider: function(btn,e) {
-        MODx.Ajax.request({
-            url: MODx.config.connectors_url+'workspace/providers.php'
-            ,params: {
-                action: 'get'
-                ,name: 'modxcms.com'
+        var x = 'modx-window-package-downloader';
+        if (!this.windows[x]) {
+            this.windows[x] = MODx.load({
+                xtype: x
+                ,showFirstPanel: false
+            });
+        }
+        this.windows[x].show(e.target,function() {
+            var pd = Ext.getCmp('modx-window-package-downloader');
+            pd.fireEvent('proceed','modx-pd-selpackage');
+
+            Ext.getCmp('modx-package-browser-thumb-view').hide();
+            Ext.getCmp('modx-package-browser-grid-panel').hide();
+            Ext.getCmp('modx-package-browser-view').show();
+
+            var t = Ext.getCmp('modx-package-browser-tree');
+            if (t) {
+                t.getLoader().baseParams.provider = MODx.provider;
+                t.refresh();
+                t.renderProviderInfo();
+                t.getRootNode().setText(MODx.providerName);
             }
-            ,listeners: {
-                'success':{fn:function(r) {
-                    var p = r.object;
-                    MODx.provider = p.id;
-                    var x = 'modx-window-package-downloader';
-                    if (!this.windows[x]) {
-                        this.windows[x] = MODx.load({ 
-                            xtype: x
-                            ,showFirstPanel: false
-                        });
-                    }
-                    this.windows[x].show(e.target,function() {
-                        var pd = Ext.getCmp('modx-window-package-downloader');
-                        pd.fireEvent('proceed','modx-pd-selpackage');
-
-                        Ext.getCmp('modx-package-browser-thumb-view').hide();
-                        Ext.getCmp('modx-package-browser-grid-panel').hide();
-                        Ext.getCmp('modx-package-browser-view').show();
-
-                        var t = Ext.getCmp('modx-package-browser-tree');
-                        if (t) {
-                            t.getLoader().baseParams.provider = MODx.provider;
-                            t.refresh();
-                            t.renderProviderInfo();
-                            t.getRootNode().setText(p.name);
-                        }
-                        var g = Ext.getCmp('modx-package-browser-grid');
-                        if (g) {
-                            g.getStore().baseParams.provider = MODx.provider;
-                            g.getStore().removeAll();
-                        }
-
-                        var v = Ext.getCmp('modx-package-browser-thumbs-view');
-                        if (v) {
-                            v.baseParams.provider = MODx.provider;
-                        }
-                        pd.syncSize();
-                        pd.doLayout();
-                        if (Ext.isIE) {
-                            pd.setHeight('400px');
-                        } else {
-                            var tb = pd.getBottomToolbar();
-                            if (tb) {
-                                tb.getComponent('btn-next').setText(_('finish'));
-                                tb.getComponent('btn-back').setDisabled(true);
-                            }
-                        }
-                        try {
-                            var xy = pd.el.getAlignToXY(pd.container, 'c-c');
-                            if (xy) {
-                                pd.setPagePosition(xy[0],0);
-                            }
-                        } catch (e) {}
-                    },this);
-                },scope:this}
+            var g = Ext.getCmp('modx-package-browser-grid');
+            if (g) {
+                g.getStore().baseParams.provider = MODx.provider;
+                g.getStore().removeAll();
             }
-        });
+
+            var v = Ext.getCmp('modx-package-browser-thumbs-view');
+            if (v) {
+                v.baseParams.provider = MODx.provider;
+            }
+            pd.syncSize();
+            pd.doLayout();
+            if (Ext.isIE) {
+                pd.setHeight('400px');
+            } else {
+                var tb = pd.getBottomToolbar();
+                if (tb) {
+                    tb.getComponent('btn-next').setText(_('finish'));
+                    tb.getComponent('btn-back').setDisabled(true);
+                }
+            }
+            try {
+                var xy = pd.el.getAlignToXY(pd.container, 'c-c');
+                if (xy) {
+                    pd.setPagePosition(xy[0],0);
+                }
+            } catch (e) {}
+        },this);
     }
     
     ,viewPackage: function(btn,e) {
@@ -348,6 +335,26 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         if (m.length > 0) {
             this.addContextMenuItem(m);
         }
+    }
+
+    ,rendUpdateAvail: function(d,c,r) {
+        switch(d) {
+            case '':
+                return '-';
+            case false:
+                c.css = 'red';
+                return _('no');
+            case true:
+                c.css = 'green';
+                return '<a href="javascript:void(0);" onclick="Ext.getCmp(\'modx-grid-package\').updateFromBtn(this,\''+r.data.signature+'\',\''+r.data.provider+'\');">'+_('yes')+'</a>';
+        }
+    }
+
+    ,updateFromBtn: function(a,sig) {
+        this.menu.record = {
+            signature: sig
+        };
+        this.update(a,{});
     }
 });
 Ext.reg('modx-grid-package',MODx.grid.Package);

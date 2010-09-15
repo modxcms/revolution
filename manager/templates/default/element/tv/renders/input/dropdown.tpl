@@ -8,18 +8,20 @@
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-MODx.load({
-{/literal}
-    xtype: 'combo'
-    ,transform: 'tv{$tv->id}'
-    ,id: 'tv{$tv->id}'
-    ,triggerAction: 'all'
-    ,typeAhead: false
-    ,editable: false
-    ,width: '97%'
-{literal}
-    ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
-});
-{/literal}
+if (!Ext.isIE) {
+    MODx.load({
+    {/literal}
+        xtype: 'combo'
+        ,transform: 'tv{$tv->id}'
+        ,id: 'tv{$tv->id}'
+        ,triggerAction: 'all'
+        ,typeAhead: false
+        ,editable: false
+        ,width: '97%'
+    {literal}
+        ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
+    });
+    {/literal}
+}
 // ]]>
 </script>

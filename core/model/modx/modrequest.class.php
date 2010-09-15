@@ -142,7 +142,7 @@ class modRequest {
             $resourceId = $identifier;
         }
 
-        if (!intval($resourceId)) {
+        if (!is_numeric($resourceId)) {
             $this->modx->sendErrorPage();
         }
         $fromCache = false;

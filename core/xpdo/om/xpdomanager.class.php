@@ -52,10 +52,6 @@ abstract class xPDOManager {
      * @var xPDOTransport The data transport class for migrating data.
      */
     public $transport= null;
-    /**
-     * @var array Describes the physical database types.
-     */
-    public $dbtypes= array ();
 
     /**
      * Get a xPDOManager instance.
@@ -90,9 +86,9 @@ abstract class xPDOManager {
     abstract public function removeSourceContainer($dsnArray = null, $username= null, $password= null);
 
     /**
-     * Creates the container for a persistent data object.  In this
-     * implementation, a source container is a synonym for a MySQL database
-     * table.
+     * Creates the container for a persistent data object.
+     *
+     * A source container is a synonym for a database table.
      *
      * @param string $className The class of object to create a source container for.
      * @return boolean Returns true on successful creation, false on failure.
@@ -114,11 +110,9 @@ abstract class xPDOManager {
      */
     public function getGenerator() {
         if ($this->generator === null || !$this->generator instanceof xPDOGenerator) {
-            if (!isset($this->xpdo->config['xPDOGenerator.'.$this->xpdo->config['dbtype'].'.class']) || !$generatorClass= $this->xpdo->loadClass($this->xpdo->config['xPDOGenerator.'.$this->xpdo->config['dbtype'].'.class'], '', false, true)) {
-                $generatorClass= $this->xpdo->loadClass($this->xpdo->config['dbtype'] . '.xPDOGenerator', '', false, true);
-            }
-            if ($generatorClass) {
-                $generatorClass .= '_' . $this->xpdo->config['dbtype'];
+            $loaded= include_once(XPDO_CORE_PATH . 'om/' . $this->xpdo->config['dbtype'] . '/xpdogenerator.class.php');
+            if ($loaded) {
+                $generatorClass = 'xPDOGenerator_' . $this->xpdo->config['dbtype'];
                 $this->generator= new $generatorClass ($this);
             }
             if ($this->generator === null || !$this->generator instanceof xPDOGenerator) {

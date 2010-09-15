@@ -37,8 +37,8 @@ MODx.page.UpdateChunk = function(config) {
         ,components: [{
             xtype: 'modx-panel-chunk'
             ,renderTo: 'modx-panel-chunk-div'
-            ,chunk: config.id
-            ,name: config.name
+            ,chunk: config.record.id || MODx.request.id
+            ,record: config.record || {}
             ,baseParams: { action: 'update' ,id: config.id }
         }]
 	});

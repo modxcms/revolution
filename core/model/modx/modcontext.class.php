@@ -59,6 +59,17 @@ class modContext extends modAccessibleObject {
     }
 
     /**
+     * Returns a context-sensitive setting
+     * 
+     * @param string $k The key to check
+     * @param string $v A default value to grab if not found
+     * @return mixed
+     */
+    public function getOption($k,$v = null) {
+        return $this->xpdo->getOption($k,$this->config,$v = null);
+    }
+
+    /**
      * Returns the file name representing this context in the cache.
      *
      * @access public

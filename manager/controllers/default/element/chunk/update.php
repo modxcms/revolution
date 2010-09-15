@@ -31,6 +31,26 @@ if (is_array($onChunkFormRender)) $onChunkFormRender = implode('', $onChunkFormR
 $onChunkFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onChunkFormRender);
 $modx->smarty->assign('onChunkFormRender',$onChunkFormRender);
 
+/* get properties */
+$properties = $chunk->get('properties');
+if (!is_array($properties)) $properties = array();
+
+$data = array();
+foreach ($properties as $property) {
+    $data[] = array(
+        $property['name'],
+        $property['desc'],
+        $property['type'],
+        $property['options'],
+        $property['value'],
+        $property['lexicon'],
+        false, /* overridden set to false */
+        $property['desc_trans'],
+    );
+}
+$chunkArray = $chunk->toArray();
+$chunkArray['properties'] = $data;
+
 /* invoke OnRichTextEditorInit event */
 if ($modx->getOption('use_editor')) {
     $onRTEInit = $modx->invokeEvent('OnRichTextEditorInit',array(
@@ -57,9 +77,8 @@ $modx->regClientStartupHTMLBlock('<script type="text/javascript">
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-chunk-update"
-        ,id: "'.$chunk->get('id').'"
-        ,name: "'.$chunk->get('name').'"
-        ,category: "'.$chunk->get('category').'"
+        ,chunk: "'.$chunk->get('id').'"
+        ,record: '.$modx->toJSON($chunkArray).'
     });
 });
 MODx.onChunkFormRender = "'.$onChunkFormRender.'";

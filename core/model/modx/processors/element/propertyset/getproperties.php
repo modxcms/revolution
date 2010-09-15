@@ -27,22 +27,15 @@ $data = array();
 /* put in default properties for element */
 if (isset($default) && is_array($default)) {
     foreach ($default as $property) {
-        if (!empty($property['lexicon'])) {
-            if (strpos($property['lexicon'],':') !== false) {
-                $modx->lexicon->load('en:'.$property['lexicon']);
-            } else {
-                $modx->lexicon->load('en:core:'.$property['lexicon']);
-            }
-            $modx->lexicon->load($property['lexicon']);
-        }
         $data[$property['name']] = array(
             $property['name'],
-            $modx->lexicon($property['desc']),
+            $property['desc'],
             $property['type'],
             $property['options'],
             $property['value'],
             $property['lexicon'],
             0,
+            $property['desc_trans'],
         );
     }
 }
@@ -57,15 +50,6 @@ foreach ($properties as $property) {
     if (!isset($data[$property['name']]) && isset($scriptProperties['element'])) {
         $overridden = 2;
     }
-    if (!empty($property['lexicon'])) {
-        if (strpos($property['lexicon'],':') !== false) {
-            $modx->lexicon->load('en:'.$property['lexicon']);
-        } else {
-            $modx->lexicon->load('en:core:'.$property['lexicon']);
-        }
-        $modx->lexicon->load($property['lexicon']);
-    }
-
     $data[$property['name']] = array(
         $property['name'],
         $modx->lexicon($property['desc']),
@@ -74,6 +58,7 @@ foreach ($properties as $property) {
         $property['value'],
         $property['lexicon'],
         $overridden,
+        $property['desc_trans'],
     );
 }
 

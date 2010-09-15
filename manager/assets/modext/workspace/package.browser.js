@@ -72,7 +72,6 @@ MODx.panel.PackageBrowser = function(config) {
                 ,autoHeight: true
                 ,html: ''
                 ,border: false
-                ,autoHeight: true
                 ,hideMode: 'offsets'
             },{
                 id: 'modx-package-browser-thumb-view'
@@ -272,6 +271,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
         });
         g.getBottomToolbar().changePage(1);
         Ext.getCmp('modx-pbr-search-fld').setValue('');
+        return true;
     }
     
     ,setProvider: function(p) {
@@ -313,14 +313,14 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
                 ,'<div class="pbr-provider-box"><h3>'+_('most_popular')+'</h3>'
                 ,'<tpl for="topdownloaded">'
                     ,'<p>{#}. '
-                    ,'<tpl if="this.isEmpty(url) == false"><a href="{url}{id}" target="_blank">{name}</a></tpl>'
+                    ,'<tpl if="this.isEmpty(url) == false">{name}</tpl>'
                     ,'<tpl if="this.isEmpty(url) == true">{name}</tpl>'
                     ,' - {downloads}</p>'
                 ,'</tpl></div>'
                 ,'<div class="pbr-provider-box"><h3>'+_('newest_additions')+'</h3>'
                 ,'<tpl for="newest">'
                     ,'<p>{#}. '
-                    ,'<tpl if="this.isEmpty(url) == false"><a href="{url}{id}" target="_blank">{name}</a></tpl>'
+                    ,'<tpl if="this.isEmpty(url) == false">{name}</tpl>'
                     ,'<tpl if="this.isEmpty(url) == true">{name}</tpl>'
                     ,' - {releasedon}</p>'
                 ,'</tpl></div>'
@@ -378,6 +378,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
         ,url: MODx.config.connectors_url+'workspace/packages-rest.php'
         ,baseParams: {
             action: 'getList'
+            //,provider: MODx.provider
         }
         ,paging: true
         ,pageSize: 10

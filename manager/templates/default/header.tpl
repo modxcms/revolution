@@ -15,8 +15,8 @@
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/{if $_config.compress_js}build/core/modx-min{else}core/modx{/if}.js" type="text/javascript"></script>
-<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a}" type="text/javascript"></script>
-<script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&ctx={$_ctx}{/if}" type="text/javascript"></script>
 
 {foreach from=$cssjs item=scr}
 {$scr}
@@ -34,7 +34,7 @@
         <div id="modx-logo"><a href="http://modxcms.com" onclick="window.open(this.href); return false;"><img src="templates/{$_config.manager_theme}/images/style/modx_logo_header.png" alt="" /></a></div>
         <div id="modx-site-name">
             {$_config.site_name}
-            <span class="modx-version">MODx Revolution {$_config.settings_version} rev{$revision}</span>
+            <span class="modx-version">MODx Revolution {$_config.settings_version}</span>
         </div>
     </div>
     <div id="modx-navbar">

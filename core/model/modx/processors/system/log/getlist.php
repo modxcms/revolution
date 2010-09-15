@@ -47,10 +47,10 @@ $c->innerJoin('modUser','User');
 if (!empty($wa)) $c->where($wa);
 $count = $modx->getCount('modManagerLog',$c);
 
-$c->select('
-    `modManagerLog`.*,
-    `User`.`username` AS `username`
-');
+$c->select(array(
+    $modx->getSelectColumns('modManagerLog','modManagerLog'),
+    $modx->getSelectColumns('modUser','User','',array('username')),
+));
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $logs = $modx->getCollection('modManagerLog',$c);

@@ -18,7 +18,7 @@ $xpdo= new xPDO(
         PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
     )
 );
-$xpdo->setPackage('modx', XPDO_CORE_PATH . '../model/');
+$xpdo->setPackage('modx', dirname(XPDO_CORE_PATH) . '/model/');
 $xpdo->setDebug(true);
 
 $manager= $xpdo->getManager();
@@ -46,7 +46,7 @@ $generator->platformTemplate= <<<EOD
  * [+phpdoc-package+]
  * [+phpdoc-subpackage+]
  */
-require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\\\', '/') . '/[+class-lowercase+].class.php');
+require_once (dirname(dirname(__FILE__)) . '/[+class-lowercase+].class.php');
 class [+class+]_[+platform+] extends [+class+] {
 }
 ?>
@@ -59,11 +59,11 @@ $generator->mapHeader= <<<EOD
  */
 EOD;
 $package= 'modx';
-$generator->parseSchema(XPDO_CORE_PATH . '../model/schema/modx.mysql.schema.xml', XPDO_CORE_PATH . '../model/');
+$generator->parseSchema(dirname(XPDO_CORE_PATH) . '/model/schema/modx.mysql.schema.xml', dirname(XPDO_CORE_PATH) . '/model/');
 $package= 'modx.transport';
-$generator->parseSchema(XPDO_CORE_PATH . '../model/schema/modx.transport.mysql.schema.xml', XPDO_CORE_PATH . '../model/');
+$generator->parseSchema(dirname(XPDO_CORE_PATH) . '/model/schema/modx.transport.mysql.schema.xml', dirname(XPDO_CORE_PATH) . '/model/');
 $package= 'modx.registry.db';
-$generator->parseSchema(XPDO_CORE_PATH . '../model/schema/modx.registry.db.mysql.schema.xml', XPDO_CORE_PATH . '../model/');
+$generator->parseSchema(dirname(XPDO_CORE_PATH) . '/model/schema/modx.registry.db.mysql.schema.xml', dirname(XPDO_CORE_PATH) . '/model/');
 
 $mtime= microtime();
 $mtime= explode(" ", $mtime);

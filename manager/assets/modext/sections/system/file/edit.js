@@ -6,6 +6,7 @@ MODx.page.EditFile = function(config) {
             xtype: 'modx-panel-file-edit'
             ,renderTo: 'modx-panel-file-edit-div'
             ,file: config.file
+            ,record: config.record || {}
         }]
         ,buttons: [{
             process: 'update'
@@ -29,6 +30,7 @@ Ext.reg('modx-page-file-edit',MODx.page.EditFile);
 
 MODx.panel.EditFile = function(config) {
     config = config || {};
+    config.record = config.record || {};
     Ext.applyIf(config,{
         id: 'modx-panel-file-edit'
         ,url: MODx.config.connectors_url+'browser/file.php'
@@ -56,23 +58,27 @@ MODx.panel.EditFile = function(config) {
                 ,name: 'name'
                 ,id: 'modx-file-name'
                 ,width: 300
+                ,value: config.record.name || ''
             },{
                 xtype: 'statictextfield'
                 ,fieldLabel: _('file_size')
                 ,name: 'size'
                 ,id: 'modx-file-size'
+                ,value: config.record.size || 0
             },{
                 xtype: 'statictextfield'
                 ,fieldLabel: _('file_last_accessed')
                 ,name: 'last_accessed'
                 ,id: 'modx-file-last-accessed'
                 ,width: 200
+                ,value: config.record.last_accessed || ''
             },{
                 xtype: 'statictextfield'
                 ,fieldLabel: _('file_last_modified')
                 ,name: 'last_modified'
                 ,id: 'modx-file-last-modified'
                 ,width: 200
+                ,value: config.record.last_modified || ''
             },{
                 xtype: 'textarea'
                 ,hideLabel: true
@@ -82,6 +88,7 @@ MODx.panel.EditFile = function(config) {
                 ,grow: false
                 ,height: 400
                 ,style: 'font-size: 11px;'
+                ,value: config.record.content || ''
             }]
         }])]
         ,listeners: {
@@ -96,24 +103,7 @@ MODx.panel.EditFile = function(config) {
 Ext.extend(MODx.panel.EditFile,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (this.initialized) {
-            this.fireEvent('ready');
-            return false;
-        }
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'get'
-                ,file: this.config.file
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.getForm().setValues(r.object);
-                    this.fireEvent('ready',r);
-                    this.initialized = true;
-                },scope:this}
-            }
-        });
+        this.fireEvent('ready',this.config.record);
         return true;
     }
     ,success: function(r) {

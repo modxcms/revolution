@@ -16,6 +16,9 @@ class modRestClient {
     const OPT_PORT = 'port';
     const OPT_RESPONSE_CLASS = 'restResponse.class';
     const OPT_TIMEOUT = 'timeout';
+    const OPT_USERAGENT = 'userAgent';
+    const OPT_USERPWD = 'userpwd';
+    const OPT_AUTHTYPE = 'authtype';
 
     /**
      * @var modX $modx A reference to the modX instance.
@@ -53,6 +56,7 @@ class modRestClient {
             modRestClient::OPT_PORT => 80,
             modRestClient::OPT_TIMEOUT => 30,
             modRestClient::OPT_PATH => '/',
+            modRestClient::OPT_USERAGENT => "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.0.3705; .NET CLR 1.1.4322; Media Center PC 4.0)"
         ),$config);
     }
 
@@ -87,7 +91,7 @@ class modRestClient {
      * @param array $params An array of parameters to send with the request.
      * @return modRestResponse The response object.
      */
-    public function request($host,$path,$method = 'GET',$params = array()) {
+    public function request($host,$path,$method = 'GET',array $params = array()) {
         if (!is_object($this->conn)) {
             $loaded = $this->getConnection();
             if (!$loaded) return false;
@@ -165,7 +169,11 @@ class modRestResponse {
     public function toXml() {
         if ($this->xml instanceof SimpleXMLElement) return $this->xml;
 
-        $this->xml = simplexml_load_string($this->response);
+        try {
+            $this->xml = simplexml_load_string($this->response);
+        } catch (Exception $e) {
+            $this->client->modx->log(xPDO::LOG_LEVEL_ERROR,'Could not parse XML response from provider: '.$this->response);
+        }
         if (!$this->xml) {
             $this->client->modx->log(xPDO::LOG_LEVEL_ERROR,'Could not connect to provider at: '.$this->client->host);
             $this->xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><error><message>'.$this->client->modx->lexicon('provider_err_blank_response').'</message></error>');

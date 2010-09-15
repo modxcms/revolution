@@ -40,9 +40,6 @@ if (!empty($_POST)) {
                     $validated = false;
                 }
             }
-        } else {
-            $modx->smarty->assign('error_message',$modx->lexicon('login_cannot_locate_account'));
-            $validated = false;
         }
 
         if ($validated) {

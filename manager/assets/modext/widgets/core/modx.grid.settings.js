@@ -2,7 +2,7 @@ MODx.grid.SettingsGrid = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
-            '<p class="desc">{description}</p>'
+            '<p class="desc">{description_trans}</p>'
         )
     });
 
@@ -26,6 +26,7 @@ MODx.grid.SettingsGrid = function(config) {
             action: 'getAreas'
             ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
         }
+        ,width: 250
         ,allowBlank: true
         ,listeners: {
             'select': {fn: this.filterByArea, scope:this}
@@ -37,6 +38,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,emptyText: _('namespace_filter')
         ,value: MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
         ,allowBlank: true
+        ,width: 150
         ,listeners: {
             'select': {fn: this.filterByNamespace, scope:this}
         }
@@ -53,7 +55,7 @@ MODx.grid.SettingsGrid = function(config) {
                     ,fn: function() {
                         this.fireEvent('change',this.getValue());
                         this.blur();
-                        return true; }
+                        return true;}
                     ,scope: cmp
                 });
             },scope:this}
@@ -70,9 +72,9 @@ MODx.grid.SettingsGrid = function(config) {
     this.cm = new Ext.grid.ColumnModel({
         columns: [this.exp,{
             header: _('name')
-            ,dataIndex: 'name'
+            ,dataIndex: 'name_trans'
             ,sortable: true
-            ,editor: { xtype: 'textfield' }
+            ,editable: false
             ,width: 150
         },{
             header: _('key')
@@ -106,7 +108,7 @@ MODx.grid.SettingsGrid = function(config) {
             var field = this.getDataIndex(colIndex);
             if (field == 'value') {
                 var rec = config.store.getAt(rowIndex);
-                var o = MODx.load({ xtype: rec ? (rec.get('xtype') || 'textfield') : 'textfield'});
+                var o = MODx.load({xtype: rec ? (rec.get('xtype') || 'textfield') : 'textfield'});
                 return new Ext.grid.GridEditor(o);
             }
             return Ext.grid.ColumnModel.prototype.getCellEditor.call(this, colIndex, rowIndex);
@@ -115,7 +117,7 @@ MODx.grid.SettingsGrid = function(config) {
 
     Ext.applyIf(config,{
          cm: this.cm
-        ,fields: ['key','name','value','description','xtype','namespace','area','area_text','editedon','oldkey','menu']
+        ,fields: ['key','name','value','description','xtype','namespace','area','area_text','editedon','oldkey','menu','name_trans','description_trans']
         ,baseParams: {
             action: 'getList'
             ,'namespace': MODx.request['namespace'] ? MODx.request['namespace'] : 'core'
@@ -128,7 +130,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,plugins: this.exp
         ,primaryKey: 'key'
         ,autosave: true
-        ,pageSize: 30
+        ,pageSize: MODx.config.default_per_page > 30 ? MODx.config.default_per_page : 30
         ,paging: true
         ,collapseFirst: false
         ,tools: [{
@@ -177,7 +179,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         } else {
             m.push({
                 text: _('setting_update')
-                ,handler: { xtype: 'modx-window-setting-update' }
+                ,handler: {xtype: 'modx-window-setting-update'}
             },'-',{
                 text: _('setting_remove')
                 ,handler: this.remove.createDelegate(this,['setting_remove_confirm'])
@@ -190,13 +192,15 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
     
     ,clearFilter: function() {
+        var ns = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
     	this.getStore().baseParams = {
             action: 'getList'
+            ,'namespace': ns
     	};
         Ext.getCmp('modx-filter-namespace').reset();
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
-            acb.store.baseParams['namespace'] = MODx.request['namespace'] ? MODx.request['namespace'] : 'core';
+            acb.store.baseParams['namespace'] = ns;
             acb.store.load();
             acb.reset();
         }
@@ -237,23 +241,24 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
 
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {
         var r = s.getAt(ri).data;
+        v = Ext.util.Format.htmlEncode(v);
         var f;
-        if (r.xtype == 'combo-boolean') {
+        if (r.xtype == 'combo-boolean' || r.xtype == 'modx-combo-boolean') {
             f = MODx.grid.Grid.prototype.rendYesNo;
-            return f(v == 1 ? true : false,md);
+            return f(v,md,rec,ri,ci,s,g);
         } else if (r.xtype === 'datefield') {
             f = Ext.util.Format.dateRenderer('Y-m-d');
-            return f(v);
-        } else if (r.xtype.substr(0,5) == 'combo' || r.xtype.substr(0,9) == 'modx-combo') {
+            return f(v,md,rec,ri,ci,s,g);
+        } else if (r.xtype.substr(0,5) == 'combo' || r.xtype.substr(0,10) == 'modx-combo') {
             var cm = g.getColumnModel();
             var ed = cm.getCellEditor(ci,ri);
             if (!ed) {
-                var o = Ext.ComponentMgr.create({ xtype: r.xtype || 'textfield'});
+                var o = Ext.ComponentMgr.create({xtype: r.xtype || 'textfield'});
                 ed = new Ext.grid.GridEditor(o);
                 cm.setEditor(ci,ed);
             }
             f = MODx.combo.Renderer(ed.field);
-            return f(v);
+            return f(v,md,rec,ri,ci,s,g);
         }
         return v;
     }
@@ -341,7 +346,7 @@ MODx.window.CreateSetting = function(config) {
         }]
     });
     MODx.window.CreateSetting.superclass.constructor.call(this,config);
-    this.on('show',function() { this.reset(); },this);
+    this.on('show',function() {this.reset();},this);
 };
 Ext.extend(MODx.window.CreateSetting,MODx.Window);
 Ext.reg('modx-window-setting-create',MODx.window.CreateSetting);

@@ -23,4 +23,5 @@ foreach ($results as $item) {
 }
 $this->parser->assign('failed', $failed);
 $this->parser->assign('itemClass', $failed ? 'error' : '');
+$this->parser->assign('results',$results);
 return $this->parser->fetch('install.tpl');

@@ -57,11 +57,24 @@ $snippet->fromArray($scriptProperties);
 $snippet->set('locked',!empty($scriptProperties['locked']));
 
 /* invoke OnBeforeSnipFormSave event */
-$modx->invokeEvent('OnBeforeSnipFormSave',array(
+$OnBeforeSnipFormSave = $modx->invokeEvent('OnBeforeSnipFormSave',array(
     'mode' => modSystemEvent::MODE_UPD,
     'id' => $snippet->get('id'),
     'snippet' => &$snippet,
 ));
+if (is_array($OnBeforeSnipFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforeSnipFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforeSnipFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
 
 if (!$snippet->validate()) {
     $validator = $snippet->getValidator();

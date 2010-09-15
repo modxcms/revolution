@@ -3,3 +3,4 @@ build.number
 build.properties
 image/
 distrib/
+test/properties.inc.php

@@ -2,7 +2,103 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODx Revolution 2.0.0-pl ($LastChangedRevision$, $LastChangedDate$)
+MODx Revolution 2.0.1-pl (September 16, 2010)
+====================================
+- [#MODX-2317] Add responseCode parameter to modX::sendRedirect() method
+- Fixed issue with @DIRECTORY binding not postfixing base path with / before value
+- Many styling enhancements, fixes for [#MODX-2264], [#MODX-2193], [#MODX-1885], [#MODX-1847]
+- Fixed issue with lexicon translations for permissions dropdown in mgr
+- Enhanced system settings grid to autosave without refresh, which allows for tabbing between settings via keyboard to set values
+- [#MODX-2325] Updated placeholders in setup lexicons for french/german languages
+- Added an editable dropdown for Permissions tab when editing an Access Policy for easier addition of Permissions
+- Fixed issue where default template was overriding empty template resources
+- [#MODX-2325] Updated Czech translation
+- [#MODX-2329] Login page now auto-focuses on username textfield
+- Add missing modCategoryClosure to create_tables script in setup
+- [#MODX-2280] Fixed bugs with IE and package management
+- Prevent issue where a User Group can select itself as a parent
+- Allow typeahead on user field when adding a User to a User Group
+- Optimized Resource Group tree in mgr UI
+- Fixed issue where > 20 records were not showing in ACL lists in User Group edit panel
+- [#MODX-2206] Prevent issue where renaming a menu's lexicon key orphans child menus
+- Fixed rendering bugs in file edit panel, as well as optimized its loading and streamlined RTE integration on the panel
+- [#MODX-2202] Removed deprecated modAction objects to prevent confusion
+- [#MODX-2325] Updated Swedish translation
+- Prevent bug that causes modal to overlap welcome screen
+- Allow non-empty responses to OnBeforeTVFormSave to prevent save
+- [#MODX-2201] Ensure MODX_PROCESSORS_PATH is upgraded correctly on upgrades where the core is moved
+- [#MODX-2323] Allow non-empty responses to OnBeforeDocFormSave to prevent save
+- [#MODX-2309] Ensure upload files button always uses the active node as the path, or if it is a file, its parent directory
+- [#MODX-2295] Ensure menuindex can be overridden in resource creation if auto_menuindex is set to true
+- Fixes to resource panels to adjust widths, loading of values properly
+- [#MODX-2318] Fixes to TVs in Resource pages to make order sorting work correctly
+- Abstracted setup database methods to driver-specific structures to accomodate for various future db drivers
+- [#MODX-2241] Added archive_with setting so users with improper ZipArchive compiles can switch back to PCLZip
+- Updated xPDO to include sqlite drivers
+- [#MODX-2308] Added UUID to all modx installs for usage in extras, custom providers, stats tracking, etc
+- [#MODX-2303] Fixed issue where resource editing pages were not respecting context settings
+- [#MODX-2302] Fixed issue with loading of input option values in TV related to optimizations in 2.0.1
+- [#MODX-2297] Fixed output filters limit/ellipsis when dealing with special character cases
+- [#MODX-2290] Added image preview when hovering over images in file tree
+- Added extra sanity checks in Package Management in case transport zips are not extracted
+- Make package grid update available Yes clickable to update
+- Cleaned up and better abstracted modRestClient and modRestCurlClient code
+- Fixed bug in setup during upgrade-advanced where DB information was not being checked correctly
+- Lots of improvements to handling and caching of thumbnails in manager
+- Fixed bug where reset filter on settings grid was not resetting to core namespace
+- [#MODX-2178] Added missing settings and lexicon values for those settings to build/lexicons
+- [#MODX-2179] Lexicons in Setup now use placeholders rather than sprintf for better i18n support
+- Added phpthumb_imagemagick_path for users that need to change the imagemagick path for different environments
+- [#MODX-2288] Dont duplicate TV Resource values when duplicating a TV unless explicitly told to
+- [#MODX-2217] Persist sort order of Resource tree
+- [#MODX-2291] Prevent editing of binary files to prevent zeroing out of file when saving
+- [#MODX-2185] Resource tree expand all toolbar button now expands all levels deep
+- [#MODX-2260] Added ability to rename ORM container nodes on extended fields
+- [#MODX-2285] Added ability to dynamically set number of results for any grid in manager, as well as a default number via default_per_page system setting
+- [#MODX-2284] Fixed bug in modX::getChildIds
+- Adjusted the way resources/elements load data in mgr edit/create pages to vastly speed up load times
+- [#MODX-2282] Fixed deprecated help menu URLs
+- Trees now properly handle state, allowing multiple state paths to be set
+- [#MODX-2163] Give area combobox in System Settings a bit more breathing room
+- [#MODX-2259] Fixed issue with empty value fields in extended/remote fields via ORM widget
+- [#MODX-2249] Fixed issue with misleading comment in modTemplateVar::getValue
+- [#MODX-2270] Added option to sort by pulishedon in the resource tree
+- [#MODX-2278] Removed non-used files and added space to empty files
+- [#MODX-2250] Fixed bug where Checkbox TVs with default value dont allow all checkboxes unchecked
+- [#MODX-2274] Introduced filemanager_url setting to handle URLs when filemanager_path is outside the webroot
+- [#MODX-2251] Fixed issue where @bindings in TVs were running during input, preventing setting values
+- Fixed bug with modContext::getOption and default values
+- [#MODX-2184] Fixed issues with MODx.rte.Browser and context-specifics
+- Fixed issue with filemanager_path in Windows
+- Fixed a possible issue in base file perms in modFileHandler
+- Fixed some random typos in system settings data and lexicon translations
+- Fixed bug where userinfo filter was outputting wrong content when user was empty
+- [#MODX-2263] Fixed IE issue with dropdowns as TVs
+- [#MODX-2183] Autotag values are now alphabetically sorted
+- [#MODX-2240] Site - Preview now dynamically previews current editing context
+- Fixed invalid login issue that prevented OnUserNotFound from firing on mgr login screen
+- [#MODX-2238] Fixed bugs regarding parent constraint and default template
+- [#MODX-2234] Fixed issue when drag/dropping a Resource into the parent field
+- [#MODX-2226] Fixed bugs with date output filter not behaving as expected
+- [#MODX-2184] Fixed issue where context was not respected in MODx.Browser instances, fixed bugs when specifying paths outside MODX_BASE_PATH
+- [#MODX-2236] Added sanity check to modTemplateVar::getRenderDirectories with custom dirs
+- Added modResource::joinGroup
+- Added helper JS function MODx.hideTV to modext
+- [#MODX-2233] Fixed issue where qtip was not showing on Elements in a Category
+- [#MODX-2203] Fixed issue where root of file tree was not accessible after navigating away
+- [#MODX-2192], [#MODX-2232] Fixed issues with settings and their translations, names in the Settings grids
+- Adjustments and optimizations to menus/actions processors and js
+- [#MODX-2231] Fixed issue where saving translated properties would overwrite key with translation
+- [#MODX-2220] Fixed bug where save_user was needed to change profile
+- [#MODX-2213] Always include english lexicon when loading a lexicon to act as a backup translation
+- [#MODX-2210] Added strip for xss in manager a variable
+- [#MODX-2205] Fixed issue with saving resources with resource fields having html and unescaped content
+- [#MODX-2198] Fixed directory checks on context web path for advanced distribution
+- [#MODX-2194] Fixed issue with modLexicon::fetch not working if a prefix is set
+- Removed SVN commit log from top header now that we're in Git
+- Adjusted version to 2.0.1-rc1
+
+MODx Revolution 2.0.0-pl  (LastChangedRevision: 7216, LastChangedDate: 2010-07-21 09:10:12 -0500 (Thu, 21 Jul 2010))
 ====================================
 - [#MODX-2159] Fixed bug where richtext_default was being ignored in Quick Create
 - [#MODX-2174] Fixed bug where manager_language was being ignored in Connectors, check for ctx init

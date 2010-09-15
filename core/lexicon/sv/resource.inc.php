@@ -41,7 +41,6 @@ $_lang['resource_contentdispo'] = 'Innehållsdisposition';
 $_lang['resource_contentdispo_help'] = 'Använd innehållsdispositionsfältet för att specificera hur den här resursen ska hanteras av webbläsaren. För filnedladdningar väljer du inställningen \'Bifogad fil\'.';
 $_lang['resource_content_type'] = 'Innehållstyp';
 $_lang['resource_content_type_help'] = 'Innehållstypen för denna resurs. Om du inte är säker på vilken innehållstyp resursen ska ha, så låt den stå som text/html.';
-$_lang['resource_create'] = 'Skapa resurs';
 $_lang['resource_create_access_denied'] = 'Du har inte behörighet att skapa en resurs.';
 $_lang['resource_create_here'] = 'Skapa en resurs här';
 $_lang['resource_createdby'] = 'Skapad av';

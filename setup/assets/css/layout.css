@@ -115,6 +115,9 @@ table.options td {
 .success {
     color: green;
 }
+.warning {
+    color: #c77c3b;
+}
 .finalsuccess { border: 0 !important; }
 .right { float: right; }
 

@@ -79,6 +79,10 @@ if (!empty($url) && !empty($securityEnabled)) {
     $modx->smarty->assign('securefeed',$rss->items);
 }
 
+/* do manager dashboard code here, remove portal extjs widgets and do so
+ * via straight HTML, with maybe only the panel in modext.
+ */
+
 $hasViewDocument = $modx->hasPermission('view_document');
 $hasViewUser = $modx->hasPermission('view_user');
 
@@ -105,7 +109,7 @@ Ext.onReady(function() {
 </script>');
 
 if ($modx->getOption('welcome_screen',null,false)) {
-    $url = $modx->getOption('welcome_screen_url',null,'http://assets.modxcms.com/revolution/welcome.20.html');
+    $url = $modx->getOption('welcome_screen_url',null,'http://misc.modx.com/revolution/welcome.20.html');
     $modx->regClientStartupHTMLBlock('<script type="text/javascript">
 // <![CDATA[
 Ext.onReady(function() { MODx.loadWelcomePanel("'.$url.'"); });

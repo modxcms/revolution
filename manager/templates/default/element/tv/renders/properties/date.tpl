@@ -30,7 +30,7 @@ MODx.load({
         ,id: 'prop_default{/literal}{$tv}{literal}'
         ,store: new Ext.data.SimpleStore({
             fields: ['v','d']
-            ,data: [['yes',_('yes')],['no',_('no')]]
+            ,data: [[1,_('yes')],[0,_('no')]]
         })
         ,displayField: 'd'
         ,valueField: 'v'

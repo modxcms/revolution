@@ -7,15 +7,15 @@
  * @xtype modx-page-template-create
  */
 MODx.page.CreateTemplate = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		formpanel: 'modx-panel-template'
-		,actions: {
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-template'
+        ,actions: {
             'new': MODx.action['element/template/create']
             ,edit: MODx.action['element/template/update']
             ,cancel: MODx.action['welcome']
         }
-		,buttons: [{
+        ,buttons: [{
             process: 'create'
             ,text: _('save')
             ,method: 'remote'
@@ -33,17 +33,16 @@ MODx.page.CreateTemplate = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-		,loadStay: true
+        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-template'
             ,renderTo: 'modx-panel-template-div'
             ,template: 0
-            ,category: config.category || 0
-            ,name: ''
+            ,record: config.record || {}
             ,baseParams: { action: 'create', category: MODx.request.category }
         }]
-	});
-	MODx.page.CreateTemplate.superclass.constructor.call(this,config);
+    });
+    MODx.page.CreateTemplate.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.CreateTemplate,MODx.Component);
 Ext.reg('modx-page-template-create',MODx.page.CreateTemplate);

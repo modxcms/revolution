@@ -60,6 +60,12 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                         if (el.dom.id == 'modx-symlink-content' || el.dom.id == 'modx-weblink-content') {
                             Ext.getCmp(el.dom.id).setValue('');
                             MODx.insertAtCursor(ddTargetEl,data.node.attributes.pk,cfg.onInsert);
+                        } else if (el.dom.id == 'modx-resource-parent') {
+                            v = data.node.attributes.pk;
+                            Ext.getCmp('modx-resource-parent').setValue(v);
+                            Ext.getCmp('modx-resource-parent-hidden').setValue(v);
+                            var p = Ext.getCmp('modx-panel-resource');
+                            if (p) { p.markDirty(); }
                         } else {
                             MODx.insertAtCursor(ddTargetEl,v,cfg.onInsert);
                         }

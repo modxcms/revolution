@@ -148,6 +148,18 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         } else {
             var u = MODx.config.connectors_url+'element/'+type+'.php';
             this.windows.duplicateElement.fp.getForm().url = u;
+            var dv = this.windows.duplicateElement.fp.getForm().findField('duplicateValues');
+            if (dv) {
+                if (type != 'tv') {
+                    dv.hide();
+                    var d = dv.getEl().up('.x-form-item');
+                    if (d) { d.setDisplayed(false); }
+                } else {
+                    dv.show();
+                    var d = dv.getEl().up('.x-form-item');
+                    if (d) { d.setDisplayed(true); }
+                }
+            }
         }
         this.windows.duplicateElement.setValues(r);
         this.windows.duplicateElement.show(e.target);
@@ -476,21 +488,36 @@ Ext.reg('modx-tree-element',MODx.tree.Element);
  */
 MODx.window.DuplicateElement = function(config) {
     config = config || {};
+    this.ident = config.ident || 'dupeel-'+Ext.id();
+    var flds = [{
+        xtype: 'hidden'
+        ,name: 'id'
+        ,id: 'modx-'+this.ident+'-id'
+    },{
+        xtype: 'textfield'
+        ,fieldLabel: _('element_name_new')
+        ,name: 'name'
+        ,id: 'modx-'+this.ident+'-name'
+        ,anchor: '90%'
+    }];
+    if (config.record.type == 'tv') {
+        flds.push({
+            xtype: 'checkbox'
+            ,fieldLabel: _('element_duplicate_values')
+            ,labelSeparator: ''
+            ,name: 'duplicateValues'
+            ,id: 'modx-'+this.ident+'-duplicate-values'
+            ,anchor: '95%'
+            ,inputValue: 1
+            ,checked: false
+        });
+    }
     Ext.applyIf(config,{
         title: _('element_duplicate')
         ,url: MODx.config.connectors_url+'element/'+config.record.type+'.php'
         ,action: 'duplicate'
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'id'
-            ,id: 'modx-dupel-id'
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('element_name_new')
-            ,name: 'name'
-            ,id: 'modx-dupel-name'
-            ,anchor: '90%'
-        }]
+        ,fields: flds
+        ,labelWidth: 150
     });
     MODx.window.DuplicateElement.superclass.constructor.call(this,config);
 };

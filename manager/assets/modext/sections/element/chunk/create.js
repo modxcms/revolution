@@ -35,9 +35,8 @@ MODx.page.CreateChunk = function(config) {
         ,components: [{
             xtype: 'modx-panel-chunk'
             ,renderTo: 'modx-panel-chunk-div'
-            ,chunk: 0
-            ,category: config.category || 0
-            ,name: ''
+            ,chunk: config.record.id || MODx.request.id
+            ,record: config.record || {}
             ,baseParams: { action: 'create', category: MODx.request.category }
         }]
 	});

@@ -44,7 +44,6 @@ $_lang['resource_contentdispo'] = 'コンテンツの渡し方';
 $_lang['resource_contentdispo_help'] = 'このの項目を使用して、このリソースがブラウザでどのように扱われるかを指定します。「Attachment」を選択するとファイルのダウンロードとみなします。';
 $_lang['resource_content_type'] = 'コンテンツタイプ';
 $_lang['resource_content_type_help'] = 'このリソースのコンテンツタイプを設定します。どのコンテンツタイプを選択すればよいかが分からない場合は、「text/html」のままにして下さい。';
-$_lang['resource_create'] = 'リソースの作成';
 $_lang['resource_create_access_denied'] = '現在のアカウントにはリソースを作成する権限がありません。';
 $_lang['resource_create_here'] = 'ここにリソースを作成する';
 $_lang['resource_createdby'] = '作成者';

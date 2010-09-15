@@ -16,11 +16,11 @@ if (!empty($_POST['proceed'])) {
     $install->getConnection();
 
     if (!is_object($install->xpdo) || !($install->xpdo instanceof xPDO)) {
-        $errors['message'] = $install->lexicon['xpdo_err_ins'];
+        $errors['message'] = $install->lexicon('xpdo_err_ins');
     } else if (!$install->xpdo->connect()) {
         /* allow this to pass for new installs only; will attempt to create during installation */
         if ($mode != modInstall::MODE_NEW) {
-            $errors['message'] = $install->lexicon['db_err_connect_upgrade'];
+            $errors['message'] = $install->lexicon('db_err_connect_upgrade');
         }
     }
 
@@ -30,7 +30,7 @@ if (!empty($_POST['proceed'])) {
         $invchars = array('/','\'','"','{','}');
 
         if (empty ($_POST['cmsadmin'])) {
-            $errors['cmsadmin'] = $install->lexicon['username_err_ns'];
+            $errors['cmsadmin'] = $install->lexicon('username_err_ns');
         } else {
 
             $found = false;
@@ -40,17 +40,17 @@ if (!empty($_POST['proceed'])) {
                 }
             }
             if ($found) {
-                $errors['cmsadmin'] = $install->lexicon['username_err_invchars'];
+                $errors['cmsadmin'] = $install->lexicon('username_err_invchars');
             }
         }
         if (empty ($_POST['cmsadminemail'])) {
-            $errors['cmsadminemail'] = $install->lexicon['email_err_ns'];
+            $errors['cmsadminemail'] = $install->lexicon('email_err_ns');
         }
         if (empty ($_POST['cmspassword'])) {
-            $errors['cmspassword'] = $install->lexicon['password_err_ns'];
+            $errors['cmspassword'] = $install->lexicon('password_err_ns');
         } else {
             if (strlen($_POST['cmspassword']) < 6) {
-                $errors['cmspassword'] = $install->lexicon['password_err_short'];
+                $errors['cmspassword'] = $install->lexicon('password_err_short');
             }
 
             $found = false;
@@ -60,14 +60,14 @@ if (!empty($_POST['proceed'])) {
                 }
             }
             if ($found) {
-                $errors['cmspassword'] = $install->lexicon['password_err_invchars'];
+                $errors['cmspassword'] = $install->lexicon('password_err_invchars');
             }
         }
         if (empty ($_POST['cmspasswordconfirm'])) {
-            $errors['cmspasswordconfirm'] = $install->lexicon['password_err_ns'];
+            $errors['cmspasswordconfirm'] = $install->lexicon('password_err_ns');
         }
         if ($_POST['cmspasswordconfirm'] != $_POST['cmspassword']) {
-            $errors['cmspasswordconfirm'] = $install->lexicon['password_err_nomatch'];
+            $errors['cmspasswordconfirm'] = $install->lexicon('password_err_nomatch');
         }
     }
 
@@ -77,7 +77,7 @@ if (!empty($_POST['proceed'])) {
     if (!empty($errors)) {
         $this->parser->assign('config',$install->settings->fetch());
         $this->parser->assign('showHidden',true);
-        $this->parser->assign('errors_message',$install->lexicon['err_occ']);
+        $this->parser->assign('errors_message',$install->lexicon('err_occ'));
         foreach ($errors as $k => $v) {
             $this->parser->assign('error_'.$k,$v);
         }

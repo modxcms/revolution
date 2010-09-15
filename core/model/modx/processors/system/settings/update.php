@@ -37,54 +37,19 @@ if ($scriptProperties['xtype'] == 'combo-boolean' && !is_numeric($scriptProperti
 
 $setting->fromArray($scriptProperties,'',true);
 
-/* set lexicon name/description */
-$topic = $modx->getObject('modLexiconTopic',array(
-    'name' => 'default',
-    'namespace' => $setting->get('namespace'),
-));
-if ($topic == null) {
-    $topic = $modx->newObject('modLexiconTopic');
-    $topic->set('name','default');
-    $topic->set('namespace',$setting->get('namespace'));
-    $topic->save();
-}
-
-$entry = $modx->getObject('modLexiconEntry',array(
-    'namespace' => $namespace->get('name'),
-    'name' => 'setting_'.$scriptProperties['key'],
-));
-if ($entry == null) {
-    $entry = $modx->newObject('modLexiconEntry');
-    $entry->set('namespace',$namespace->get('name'));
-    $entry->set('name','setting_'.$scriptProperties['key']);
-    $entry->set('topic',$topic->get('id'));
-    $entry->set('language',$modx->cultureKey);
-}
-$entry->set('value',$scriptProperties['name']);
-$entry->save();
-$entry->clearCache();
-
-$description = $modx->getObject('modLexiconEntry',array(
-    'namespace' => $namespace->get('name'),
-    'name' => 'setting_'.$scriptProperties['key'].'_desc',
-));
-if ($description == null) {
-    $description = $modx->newObject('modLexiconEntry');
-    $description->set('namespace',$namespace->get('name'));
-    $description->set('name','setting_'.$scriptProperties['key'].'_desc');
-    $description->set('language',$modx->cultureKey);
-    $description->set('topic',$topic->get('id'));
-}
-$description->set('value',$scriptProperties['description']);
-$description->save();
-$description->clearCache();
-
 /* save setting */
 if ($setting->save() === false) {
     $modx->error->checkValidation($setting);
     return $modx->error->failure($modx->lexicon('setting_err_save'));
 }
 
+/* update lexicon name/description */
+$setting->updateTranslation('setting_'.$scriptProperties['key'],$scriptProperties['name'],array(
+    'namespace' => $namespace->get('name'),
+));
+$setting->updateTranslation('setting_'.$scriptProperties['key'].'_desc',$scriptProperties['description'],array(
+    'namespace' => $namespace->get('name'),
+));
 
 $modx->reloadConfig();
 $modx->cacheManager->deleteTree($modx->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/smarty/',array(

@@ -46,14 +46,16 @@ if (is_array($templates) && !empty($templates)) {
         $newTemplate->save();
     }
 }
-$resources = $sourceTv->getMany('TemplateVarResources');
-if (is_array($resources) && !empty($resources)) {
-    foreach ($resources as $resource) {
-        $newResource = $modx->newObject('modTemplateVarResource');
-        $newResource->set('tmplvarid',$tv->get('id'));
-        $newResource->set('contentid',$resource->get('contentid'));
-        $newResource->set('value',$resource->get('value'));
-        $newResource->save();
+if (!empty($scriptProperties['duplicateValues'])) {
+    $resources = $sourceTv->getMany('TemplateVarResources');
+    if (is_array($resources) && !empty($resources)) {
+        foreach ($resources as $resource) {
+            $newResource = $modx->newObject('modTemplateVarResource');
+            $newResource->set('tmplvarid',$tv->get('id'));
+            $newResource->set('contentid',$resource->get('contentid'));
+            $newResource->set('value',$resource->get('value'));
+            $newResource->save();
+        }
     }
 }
 $resourceGroups = $sourceTv->getMany('TemplateVarResourceGroups');

@@ -7,10 +7,10 @@
  * @xtype modx-page-tv-create
  */
 MODx.page.CreateTV = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		formpanel: 'modx-panel-tv'
-		,actions: {
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-tv'
+        ,actions: {
             'new': MODx.action['element/tv/create']
             ,edit: MODx.action['element/tv/update']
             ,cancel: MODx.action['welcome']
@@ -35,12 +35,10 @@ MODx.page.CreateTV = function(config) {
         ,components: [{
             xtype: 'modx-panel-tv'
             ,renderTo: 'modx-panel-tv-div'
-            ,tv: 0
-            ,category: config.category || 0
-            ,name: ''
+            ,record: config.record || {}
         }]
-	});
-	MODx.page.CreateTV.superclass.constructor.call(this,config);
+    });
+    MODx.page.CreateTV.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.CreateTV,MODx.Component);
 Ext.reg('modx-page-tv-create',MODx.page.CreateTV);

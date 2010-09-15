@@ -237,13 +237,6 @@ if (!$modx->hasPermission('publish_document')) {
     $scriptProperties['unpub_date'] = $resource->get('unpub_date');
 }
 
-/* invoke OnBeforeDocFormSave event */
-$modx->invokeEvent('OnBeforeDocFormSave',array(
-    'mode' => modSystemEvent::MODE_UPD,
-    'id' => $resource->get('id'),
-    'resource' => &$resource,
-));
-
 /* set deleted status and fire events */
 if ($scriptProperties['deleted'] != $resource->get('deleted')) {
     if ($resource->get('deleted')) { /* undelete */
@@ -276,6 +269,27 @@ $resource->fromArray($scriptProperties);
 $resource->set('editedby', $modx->user->get('id'));
 $resource->set('editedon', time(), 'integer');
 
+/* invoke OnBeforeDocFormSave event, and allow non-empty responses to prevent save */
+$OnBeforeDocFormSave = $modx->invokeEvent('OnBeforeDocFormSave',array(
+    'mode' => modSystemEvent::MODE_UPD,
+    'id' => $resource->get('id'),
+    'resource' => &$resource,
+));
+if (is_array($OnBeforeDocFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforeDocFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforeDocFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
+
+/* save resource */
 if ($resource->save() == false) {
     return $modx->error->failure($modx->lexicon('resource_err_save'));
 }
@@ -304,7 +318,6 @@ if ($resource->get('parent') != $oldparent_id) {
 }
 
 
-
 /* save TVs */
 if (!empty($scriptProperties['tvs'])) {
     $tmplvars = array ();
@@ -327,7 +340,11 @@ if (!empty($scriptProperties['tvs'])) {
     $tvs = $modx->getCollection('modTemplateVar',$c);
     foreach ($tvs as $tv) {
         /* set value of TV */
-        $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : $tv->get('default_text');
+        if ($tv->get('type') != 'checkbox') {
+            $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : $tv->get('default_text');
+        } else {
+            $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : '';
+        }
 
         /* validation for different types */
         switch ($tv->get('type')) {
@@ -436,7 +453,7 @@ if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCach
 
 $resource->removeLock();
 
-$returnArray = $resource->get(array_diff(array_keys($resource->_fields), array('content','ta')));
+$returnArray = $resource->get(array_diff(array_keys($resource->_fields), array('content','ta','introtext','description','link_attributes')));
 foreach ($returnArray as $k => $v) {
     if (strpos($k,'tv') === 0) {
         unset($returnArray[$k]);

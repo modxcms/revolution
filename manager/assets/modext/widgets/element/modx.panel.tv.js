@@ -36,12 +36,12 @@ MODx.panel.TV = function(config) {
                 xtype: 'hidden'
                 ,name: 'id'
                 ,id: 'modx-tv-id'
-                ,value: config.tv
+                ,value: config.record.id || MODx.request.id
             },{
                 xtype: 'hidden'
                 ,name: 'props'
                 ,id: 'modx-tv-props'
-                ,value: null
+                ,value: config.record.props || null
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('tv_name')
@@ -51,6 +51,7 @@ MODx.panel.TV = function(config) {
                 ,maxLength: 100
                 ,enableKeyEvents: true
                 ,allowBlank: false
+                ,value: config.record.name
                 ,listeners: {
                     'keyup': {scope:this,fn:function(f,e) {
                         Ext.getCmp('modx-tv-header').getEl().update('<h2>'+_('tv')+': '+f.getValue()+'</h2>');
@@ -62,6 +63,7 @@ MODx.panel.TV = function(config) {
                 ,name: 'caption'
                 ,id: 'modx-tv-caption'
                 ,width: 300
+                ,value: config.record.caption
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('description')
@@ -69,19 +71,22 @@ MODx.panel.TV = function(config) {
                 ,id: 'modx-tv-description'
                 ,width: 300
                 ,maxLength: 255
+                ,value: config.record.description || ''
             },{
                 xtype: 'modx-combo-category'
                 ,fieldLabel: _('category')
                 ,name: 'category'
                 ,id: 'modx-tv-category'
                 ,width: 250
-                ,value: config.category || null
+                ,value: config.record.category || 0
             },{
                 xtype: 'checkbox'
                 ,fieldLabel: _('tv_lock')
                 ,description: _('tv_lock_msg')
                 ,name: 'locked'
                 ,id: 'modx-tv-locked'
+                ,inputValue: 1
+                ,checked: config.record.locked || false
             },{
                 xtype: 'numberfield'
                 ,fieldLabel: _('tv_rank')
@@ -91,7 +96,7 @@ MODx.panel.TV = function(config) {
                 ,maxLength: 4
                 ,allowNegative: false
                 ,allowBlank: false
-                ,value: 0
+                ,value: config.record.rank || 0
             },{
                 xtype: 'checkbox'
                 ,fieldLabel: _('clear_cache_on_save')
@@ -99,7 +104,7 @@ MODx.panel.TV = function(config) {
                 ,name: 'clearCache'
                 ,id: 'modx-tv-clear-cache'
                 ,inputValue: 1
-                ,checked: true
+                ,checked: config.record.clearCache || true
             },{
                 html: onTVFormRender
                 ,border: false
@@ -117,6 +122,7 @@ MODx.panel.TV = function(config) {
                     ,name: 'type'
                     ,id: 'modx-tv-type'
                     ,itemid: 'fld-type'
+                    ,value: config.record.type || 'text'
                 },{
                     xtype: 'textfield'
                     ,fieldLabel: _('tv_elements')
@@ -124,6 +130,7 @@ MODx.panel.TV = function(config) {
                     ,id: 'modx-tv-elements'
                     ,itemId: 'fld-els'
                     ,anchor: '90%'
+                    ,value: config.record.elements || ''
                 },{
                     xtype: 'textarea'
                     ,fieldLabel: _('tv_default')
@@ -132,6 +139,7 @@ MODx.panel.TV = function(config) {
                     ,itemId: 'fld-default_text'
                     ,anchor: '90%'
                     ,height: 200
+                    ,value: config.record.default_text || ''
                 },{
                     xtype: 'modx-combo-tv-widget'
                     ,fieldLabel: _('tv_output_type')
@@ -139,6 +147,7 @@ MODx.panel.TV = function(config) {
                     ,hiddenName: 'display'
                     ,id: 'modx-tv-display'
                     ,itemId: 'fld-display'
+                    ,value: config.record.display || 'default'
                     ,listeners: {
                         'select': {fn:this.showParameters,scope:this}
                     }
@@ -209,41 +218,28 @@ MODx.panel.TV = function(config) {
 Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (this.config.tv === '' || this.config.tv === 0 || this.initialized) {
-            this.fireEvent('ready');
-            return false;
+        if (!Ext.isEmpty(this.config.record.name)) {
+            Ext.getCmp('modx-tv-header').getEl().update('<h2>'+_('tv')+': '+this.config.record.name+'</h2>');
         }
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'get'
-                ,id: this.config.tv
+        if (!Ext.isEmpty(this.config.record.properties)) {
+            var d = this.config.record.properties;
+            var g = Ext.getCmp('modx-grid-element-properties');
+            if (g) {
+                g.defaultProperties = d;
+                g.getStore().loadData(d);
             }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    if (r.object.category == '0') { r.object.category = null; }
-                    this.getForm().setValues(r.object);
-                    this.getComponent('header').getEl().update('<h2>'+_('tv')+': '+r.object.name+'</h2>');
+        }
 
-                    var d = Ext.decode(r.object.data);
-                    var g = this.getComponent('tabs').getComponent('panel-properties').getComponent('grid-properties');
-                    g.defaultProperties = d;
-                    g.getStore().loadData(d);
-                    
-                    var sv = function(vs) { this.getForm().setValues(vs); };
-                    sv.defer(1300,this,[r.object]);
-                    
-                    var dis = this.getComponent('tabs').getComponent('form-tv').getComponent('fs-rendering').getComponent('fld-display');
-                    this.showParameters(dis);
+        var dis = this.getComponent('tabs').getComponent('form-tv').getComponent('fs-rendering').getComponent('fld-display');
+        this.showParameters(dis);
 
-                    if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
-                    this.fireEvent('ready',r.object);
-                    this.clearDirty();
-                    this.initialized = true;
-                },scope:this}
-            }
-        });
+        this.fireEvent('ready',this.config.record);
+        if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
+        this.clearDirty();
+        this.initialized = true;
+        return true;
     }
+    
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-tv-template');
         var rg = Ext.getCmp('modx-grid-tv-security');

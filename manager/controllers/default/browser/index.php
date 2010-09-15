@@ -14,8 +14,14 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $rtecallback = $modx->invokeEvent('OnRichTextBrowserInit');
 if (is_array($rtecallback)) $rtecallback = trim(implode(',',$rtecallback),',');
 
+$ctx = !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web';
 $modx->smarty->assign('site_id',$modx->site_id);
 $modx->smarty->assign('rtecallback',$rtecallback);
+$modx->smarty->assign('_ctx',$ctx);
+$modx->regClientStartupHTMLBlock('<script type="text/javascript">
+MODx.siteId = "'.$modx->site_id.'";
+MODx.ctx = "'.$ctx.'";
+</script>');
 
 $modx->response->registerCssJs(false);
 return $modx->smarty->fetch('browser/index.tpl');

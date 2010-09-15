@@ -9,8 +9,9 @@
 MODx.tree.Directory = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        rootVisible: false
-        ,root_id: 'root'
+        rootVisible: true
+        ,rootName: _('files')
+        ,rootId: '/'
         ,title: _('files')
         ,ddAppendOnly: true
         ,enableDrag: true
@@ -20,6 +21,7 @@ MODx.tree.Directory = function(config) {
         ,baseParams: {
             prependPath: config.prependPath || null
             ,hideFiles: config.hideFiles || false
+            ,ctx: MODx.ctx || 'web'
         }
         ,action: 'getList'
         ,primaryKey: 'dir'
@@ -53,6 +55,10 @@ MODx.tree.Directory = function(config) {
         ,'afterUpload': true
         ,'fileBrowserSelect': true
     });
+    this.on('click',function(n,e) {
+        n.select();
+        this.cm.activeNode = n;
+    },this);
 };
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
@@ -82,9 +88,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                     m = this._getFileMenu(n);
                     break;
             }
-
-            this.addContextMenuItem(m);
-            this.cm.showAt(e.xy);
+            if (m.length > 0) {
+                this.addContextMenuItem(m);
+                this.cm.showAt(e.xy);
+            }
         }
         e.stopEvent();
     }
@@ -95,13 +102,15 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         var m = [];
 
         if (ui.hasClass('pupdate')) {
-            m.push({
-                text: _('file_edit')
-                ,file: a.file
-                ,handler: function(itm,e) {
-                    this.loadAction('a='+MODx.action['system/file/edit']+'&file='+itm.file);
-                }
-            });
+            if (a.page) {
+                m.push({
+                    text: _('file_edit')
+                    ,file: a.file
+                    ,handler: function(itm,e) {
+                        this.loadAction('a='+MODx.action['system/file/edit']+'&file='+itm.file);
+                    }
+                });
+            }
             m.push({
                 text: _('rename')
                 ,handler: this.renameFile
@@ -193,6 +202,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 xtype: 'modx-browser'
                 ,hideFiles: false
                 ,rootVisible: false
+                ,ctx: MODx.ctx
                 ,listeners: {
                     'select': {fn: function(data) {
                         this.fireEvent('fileBrowserSelect',data);
@@ -341,7 +351,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         if (this.cm.activeNode) {
             path = this.getPath(this.cm.activeNode);
             if(this.cm.activeNode.isLeaf()) {
-               path = path.replace(/\/[^\/]+$/, '', path);
+                path = this.getPath(this.cm.activeNode.parentNode);
             }
         } else { path = '/'; }
 

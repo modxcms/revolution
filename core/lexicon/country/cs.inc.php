@@ -1,12 +1,14 @@
 <?php
 /**
-* Country List Language File
-* Version: 1.0
-* Date: 31/10/2006
-*
-* Array keys refer to the ID number that is saved in the database
-*
-*/
+ * Czech country List Language File
+ * 
+ * @language cs
+ *
+ * @author modxcms.cz
+ * @updated 2010-06-03
+ *
+ * Array keys refer to the ID number that is saved in the database
+ */
 
 $_country_lang["1"] = 'Afghánistán';
 $_country_lang["2"] = 'Albánie';
