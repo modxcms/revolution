@@ -352,25 +352,6 @@ ul.x-tab-strip li.x-tab-strip-active  {
 .x-form-field-wrap {
     background: transparent url(../images/modx-theme/form/combo-bck.png) repeat-x scroll 0 bottom;
 }
-/*
-.x-window .x-form-field-wrap .x-form-trigger{
-    background-position: -36px -12px;
-    height: 26px;
-    width: 26px;
-}
-
-.x-form .x-form-field-wrap .x-form-trigger{
-    width: 26px;
-    height: 24px;
-    background-position: -36px -10px;
-}
-.x-small-editor .x-form-field-wrap .x-form-trigger{
-    width: 26px;
-    height: 24px;
-    background-position: -36px -10px;
-}
-*/
-
 .x-small-editor .x-form-field-wrap .x-form-trigger{
     width: 26px;
     height: 22px;
@@ -378,7 +359,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
 
 .x-form-field-wrap .x-form-trigger{
     background-position: -26px 0;
-    height: 26px;
+    height: 24px;
     width: 29px;
 }
 
@@ -386,8 +367,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
 /* fix safari triggerfield */
 .ext-safari input,.ext-safari textarea{ outline:none; }
 .ext-strict .ext-safari .x-small-editor .x-form-text { height: 18px !important; }
-.ext-safari .x-form-field-wrap .x-form-trigger{
-    height: 24px;
+.ext-safari .x-form-field-wrap .x-form-trigger {
     position: static;
     top: auto;
     vertical-align: top;
@@ -469,7 +449,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
     color: gray;
 }
 
-.x-small-editor .x-form-field, .x-small-editor .x-form-trigger {
+.x-grid3 .x-small-editor .x-form-field, .x-grid3 .x-small-editor .x-form-trigger {
     font: normal 11px arial, tahoma, helvetica, sans-serif;
     margin-top: 7px;
 }
