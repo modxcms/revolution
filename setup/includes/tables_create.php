@@ -9,6 +9,7 @@ $results= array ();
 $classes= array (
     'modAccessAction',
     'modAccessActionDom',
+    'modAccessCategory',
     'modAccessContext',
     'modAccessElement',
     'modAccessMenu',

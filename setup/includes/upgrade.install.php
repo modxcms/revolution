@@ -1,4 +1,7 @@
 <?php
+/**
+ * Upgrade-specific scripts
+ */
 /* handle change of manager_theme to default (FIXME: temp hack) */
 if ($this->settings->get('installmode') == modInstall::MODE_UPGRADE_EVO) {
     $managerTheme = $this->xpdo->getObject('modSystemSetting', array(

@@ -7,7 +7,8 @@
  */
 /* handle new class creation */
 $classes = array(
-    'modCategoryClosure'
+    'modAccessCategory',
+    'modCategoryClosure',
 );
 if (!empty($classes)) {
     $this->createTable($classes);
