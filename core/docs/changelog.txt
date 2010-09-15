@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODx Revolution 2.0.1-rc1
+MODx Revolution 2.0.1-pl
 ====================================
 - Fixed issue with @DIRECTORY binding not postfixing base path with / before value
 - Many styling enhancements, fixes for [#MODX-2264], [#MODX-2193], [#MODX-1885], [#MODX-1847]
