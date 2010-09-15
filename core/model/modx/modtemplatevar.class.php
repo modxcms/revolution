@@ -15,6 +15,7 @@ class modTemplateVar extends modElement {
         'FILE',
         'CHUNK',
         'DOCUMENT',
+        'RESOURCE',
         'SELECT',
         'EVAL',
         'INHERIT',
