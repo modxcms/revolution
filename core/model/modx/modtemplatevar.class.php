@@ -618,7 +618,7 @@ class modTemplateVar extends modElement {
                     if (!$file->isReadable()) continue;
                     $basename = $file->getFilename();
                     if(!in_array($basename,$invalid)) {
-                        $files[] = "{$basename}=={$param}{$basename}";
+                        $files[] = "{$basename}=={$param}/{$basename}";
                     }
                 }
                 asort($files);

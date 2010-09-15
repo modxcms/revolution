@@ -8,7 +8,7 @@
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-if (!Ext.isIE) {
+if (!Ext.isIE && false) {
     MODx.load({
     {/literal}
         xtype: 'combo'
