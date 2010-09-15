@@ -1064,14 +1064,12 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 
 .x-grid3-body .x-grid3-td-checker {
     background-image: none;
-    padding-top:7px;
-    background-color:#E5E5E5;
-    border-bottom:1px solid #DADADA;
-    border-right:1px solid #DADADA !important;
+    padding: 10px 0 0;
 }
 
 .x-grid3-row-checker, .x-grid3-hd-checker {
     background-image:url(../images/modx-theme/grid/row-check-sprite.gif);
+    cursor: pointer;
 }
 
 .x-grid3-body .x-grid3-td-numberer {
