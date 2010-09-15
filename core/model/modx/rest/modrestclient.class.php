@@ -68,7 +68,7 @@ class modRestClient {
      * @return boolean True if a connection can be made.
      */
     public function getConnection() {
-        if (function_exists('curl_init')) {
+        if (function_exists('curl_init') && false) {
             $className = $this->modx->loadClass('rest.modRestCurlClient','',false,true);
         } else if (function_exists('fsockopen')) {
             $className = $this->modx->loadClass('rest.modRestSockClient','',false,true);
@@ -169,7 +169,11 @@ class modRestResponse {
     public function toXml() {
         if ($this->xml instanceof SimpleXMLElement) return $this->xml;
 
-        $this->xml = simplexml_load_string($this->response);
+        try {
+            $this->xml = simplexml_load_string($this->response);
+        } catch (Exception $e) {
+            $this->client->modx->log(xPDO::LOG_LEVEL_ERROR,'Could not parse XML response from provider: '.$this->response);
+        }
         if (!$this->xml) {
             $this->client->modx->log(xPDO::LOG_LEVEL_ERROR,'Could not connect to provider at: '.$this->client->host);
             $this->xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><error><message>'.$this->client->modx->lexicon('provider_err_blank_response').'</message></error>');

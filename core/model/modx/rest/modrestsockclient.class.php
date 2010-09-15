@@ -60,6 +60,11 @@ class modRestSockClient extends modRestClient {
 
         list($header,$response) = explode('<?xml',$response);
         $response = '<?xml'.$response;
+        
+        /* strip junk at end of string */
+        $response = strrev($response);
+        $response = strrev(substr($response,strpos($response,'>')));
+        
         /* commented out for debugging */
         //echo '<textarea cols="180" rows="50">'.$response.'</textarea>'; die();
         //echo '<pre>'.htmlentities($xml->asXml()).'</pre>'; die();
