@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- Fix accessibility of xPDOTransport::_unpack()
 - Divert excess log output from xPDOVehicle classes to LOG_LEVEL_DEBUG
 - Remove extra slash in path when generating class files
 - Simplify includes of parent classes
