@@ -60,11 +60,24 @@ $plugin->set('locked',!empty($scriptProperties['locked']));
 $plugin->set('disabled',!empty($scriptProperties['disabled']));
 
 /* invoke OnBeforeTempFormSave event */
-$modx->invokeEvent('OnBeforePluginFormSave',array(
+$OnBeforePluginFormSave = $modx->invokeEvent('OnBeforePluginFormSave',array(
     'mode' => modSystemEvent::MODE_UPD,
     'id' => $plugin->get('id'),
     'plugin' => &$plugin,
 ));
+if (is_array($OnBeforePluginFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforePluginFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforePluginFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
 
 if (!$plugin->validate()) {
     $validator = $plugin->getValidator();

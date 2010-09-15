@@ -57,11 +57,24 @@ if ($modx->error->hasError()) {
 }
 
 /* invoke OnBeforeChunkFormSave event */
-$modx->invokeEvent('OnBeforeChunkFormSave',array(
+$OnBeforeChunkFormSave = $modx->invokeEvent('OnBeforeChunkFormSave',array(
     'mode' => modSystemEvent::MODE_UPD,
     'id' => $chunk->get('id'),
     'chunk' => &$chunk,
 ));
+if (is_array($OnBeforeChunkFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforeChunkFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforeChunkFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
 
 /* propogate values */
 $chunk->fromArray($scriptProperties);

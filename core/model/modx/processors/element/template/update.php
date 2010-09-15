@@ -56,11 +56,24 @@ $template->fromArray($scriptProperties);
 $template->set('locked',!empty($scriptProperties['locked']));
 
 /* invoke OnBeforeTempFormSave event */
-$modx->invokeEvent('OnBeforeTempFormSave',array(
+$OnBeforeTempFormSave = $modx->invokeEvent('OnBeforeTempFormSave',array(
     'mode' => modSystemEvent::MODE_UPD,
     'id' => $template->get('id'),
     'template' => &$template,
 ));
+if (is_array($OnBeforeTempFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforeTempFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforeTempFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
 
 /* save template */
 if ($template->save() === false) {

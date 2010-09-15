@@ -45,12 +45,25 @@ $chunk->fromArray($scriptProperties);
 $chunk->set('locked',!empty($scriptProperties['locked']));
 
 /* invoke OnBeforeChunkFormSave event */
-$modx->invokeEvent('OnBeforeChunkFormSave',array(
+$OnBeforeChunkFormSave = $modx->invokeEvent('OnBeforeChunkFormSave',array(
     'mode'  => modSystemEvent::MODE_NEW,
     'id' => 0,
     'data' => $chunk->toArray(),
     'chunk' => &$chunk,
 ));
+if (is_array($OnBeforeChunkFormSave)) {
+    $canSave = false;
+    foreach ($OnBeforeChunkFormSave as $msg) {
+        if (!empty($msg)) {
+            $canSave .= $msg."\n";
+        }
+    }
+} else {
+    $canSave = $OnBeforeChunkFormSave;
+}
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
 
 /* set properties */
 $properties = null;

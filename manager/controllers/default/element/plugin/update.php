@@ -13,8 +13,6 @@ $plugin = $modx->getObject('modPlugin',$_REQUEST['id']);
 if ($plugin == null) return $modx->error->failure($modx->lexicon('plugin_err_nf'));
 if (!$plugin->checkPolicy('view')) return $modx->error->failure($modx->lexicon('access_denied'));
 
-$plugin->category = $plugin->getOne('Category');
-
 /* invoke OnPluginFormRender event */
 $onPluginFormRender = $modx->invokeEvent('OnPluginFormRender',array(
     'id' => $plugin->get('id'),
