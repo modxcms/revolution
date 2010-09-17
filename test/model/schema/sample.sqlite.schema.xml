@@ -63,7 +63,7 @@
         <field key="enum" dbtype="enum" precision="'','T','F'" phptype="string" null="false" />
         <field key="password" dbtype="varchar" phptype="password" null="false" />
         <field key="integer" dbtype="int" phptype="integer" null="false" />
-        <field key="float" dbtype="decimal" precision="(10,5)" phptype="float" null="false" default="1.01230" />
+        <field key="float" dbtype="decimal" precision="10,5" phptype="float" null="false" default="1.01230" />
         <field key="boolean" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" />
 
         <index name="PRIMARY" primary="true" unique="true">
