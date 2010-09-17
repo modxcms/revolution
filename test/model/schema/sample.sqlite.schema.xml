@@ -85,6 +85,7 @@
     </object>
     <object class="Item" table="items" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="fk" />
+        <field key="color" dbtype="varchar" precision="255" phptype="string" null="false" default="green" index="fk" />
         <field key="description" dbtype="text" phptype="string" null="true" />
         <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" />
     </object>
