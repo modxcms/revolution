@@ -402,4 +402,30 @@ class xPDOTest extends xPDOTestCase {
             array('PersonPhone',array('person' => 'integer','phone' => 'integer')),
         );
     }
+
+    /**
+     * Test xPDO->getAggregates
+     *
+     * @dataProvider providerGetAggregates
+     * @param string $class
+     */
+    public function testGetAggregates($class,$correctAggs) {
+        $aggs = $this->xpdo->getAggregates($class);
+        $this->assertEquals($aggs,$correctAggs);
+    }
+    public function providerGetAggregates() {
+        return array(
+            array('Person',array()),
+            array('Phone',array()),
+            array('PersonPhone',array (
+                'Person' => array(
+                    'class' => 'Person',
+                    'local' => 'person',
+                    'foreign' => 'id',
+                    'cardinality' => 'one',
+                    'owner' => 'foreign',
+                ),
+            )),
+        );
+    }
 }
