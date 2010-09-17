@@ -206,4 +206,27 @@ class xPDOTest extends xPDOTestCase {
         $success = is_object($criteria) && $criteria instanceof xPDOQuery;
         $this->assertTrue($success);
     }
+
+    /**
+     * Tests xPDO::getAncestry and make sure it returns an array of the correct
+     * data.
+     * 
+     * @dataProvider providerGetAncestry
+     */
+    public function testGetAncestry($class,array $correct = array(),$includeSelf = true) {
+        $anc = $this->xpdo->getAncestry($class,$includeSelf);
+        $diff = array_diff($correct,$anc);
+        $diff2 = array_diff($anc,$correct);
+        $success = is_array($anc) && empty($diff) && empty($diff2);
+        $this->assertTrue($success);
+    }
+    /**
+     * Data provider for testGetAncestry
+     */
+    public function providerGetAncestry() {
+        return array(
+            array('Person',array('Person','xPDOSimpleObject','xPDOObject')),
+            array('Person',array('xPDOSimpleObject','xPDOObject'),false),
+        );
+    }
 }
