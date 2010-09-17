@@ -42,7 +42,10 @@ class xPDOObjectTest extends xPDOTestCase {
             foreach ($bloodTypes as $bloodType) {
                 $bt = $this->xpdo->newObject('BloodType');
                 $bt->set('type',$bloodType);
-                $bt->save();
+                $bt->set('description','');
+                if (!$bt->save()) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not add blood type: '.$bloodType);
+                }
             }
 
             $bloodTypeABPlus = $this->xpdo->getObject('BloodType','AB+');
@@ -106,7 +109,6 @@ class xPDOObjectTest extends xPDOTestCase {
                 'is_primary' => true,
             ),'',true,true);
             $personPhone->save();
-
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
@@ -378,7 +380,7 @@ class xPDOObjectTest extends xPDOTestCase {
      * @param string $username The username of the Person to use for the test data.
      * @param string $alias The relation alias to grab.
      */
-    public function testGetOne($username,$alias) {
+    public function testGetOne($username,$alias,$class) {
         $person = $this->xpdo->getObject('Person',array(
             'username' => $username,
         ));
@@ -392,16 +394,19 @@ class xPDOObjectTest extends xPDOTestCase {
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
-        $this->assertTrue(!empty($one),'xPDOQuery: getMany failed from Person `'.$username.'` to '.$alias.'.');
+        $this->assertTrue(!empty($one) && $one instanceof $class,'xPDOQuery: getMany failed from Person `'.$username.'` to '.$alias.'.');
     }
     /**
      * Data provider for testGetOne
      */
     public function providerGetOne() {
         return array(
-            array('jane.heartstead@yahoo.com','BloodType'),
+            array('jane.heartstead@yahoo.com','BloodType','BloodType'),
         );
     }
+
+
+
 
     /**
      * Test removing an object
