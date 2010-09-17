@@ -441,7 +441,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,initialized: false
     ,defaultClassKey: 'modResource'
     ,setup: function() {
-        this.getForm().setValues(this.config.record);
+        if (!this.initialized) { this.getForm().setValues(this.config.record); }
         if (!Ext.isEmpty(this.config.record.pagetitle)) {
             Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+this.config.record.pagetitle+'</h2>');
         }

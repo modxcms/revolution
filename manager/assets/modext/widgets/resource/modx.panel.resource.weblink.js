@@ -369,7 +369,7 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
     initialized: false
     ,defaultClassKey: 'modWebLink'
     ,setup: function() {
-        this.getForm().setValues(this.config.record);
+        if (!this.initialized) { this.getForm().setValues(this.config.record); }
         if (!Ext.isEmpty(this.config.record.pagetitle)) {
             Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('weblink')+': '+this.config.record.pagetitle+'</h2>');
         }

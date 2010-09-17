@@ -120,6 +120,7 @@ MODx.panel.Snippet = function(config) {
 Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
+        if (!this.initialized) { this.getForm().setValues(this.config.record); }
         if (!Ext.isEmpty(this.config.record.name)) {
             Ext.getCmp('modx-snippet-header').getEl().update('<h2>'+_('snippet')+': '+this.config.record.name+'</h2>');
         }

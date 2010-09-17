@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODx Revolution 2.0.1-pl (September 17, 2010)
+====================================
+- [#MODX-2340] Fixed issue with initial resource values reverting after a save
+
 MODx Revolution 2.0.1-pl (September 16, 2010)
 ====================================
 - [#MODX-2317] Add responseCode parameter to modX::sendRedirect() method
