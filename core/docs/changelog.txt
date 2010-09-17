@@ -5,6 +5,7 @@ development release, and is only shown to give an idea of what's currently in th
 MODx Revolution 2.0.1-pl (September 17, 2010)
 ====================================
 - [#MODX-2340] Fixed issue with initial resource values reverting after a save
+- [#XPDO-72] Fix invalid call to $this->manager->getPhpType() 
 
 MODx Revolution 2.0.1-pl (September 16, 2010)
 ====================================
