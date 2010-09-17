@@ -62,10 +62,10 @@ $xpdo_meta_map['Person']= array (
     ),
     'blood_type' => 
     array (
-      'dbtype' => 'enum',
-      'precision' => '\'\',\'A+\',\'A-\',\'B+\',\'B-\',\'AB+\',\'AB-\',\'O+\',\'O-\'',
+      'dbtype' => 'varchar',
+      'precision' => '100',
       'phptype' => 'string',
-      'null' => false,
+      'null' => true,
       'default' => '',
     ),
     'username' => 
@@ -131,6 +131,17 @@ $xpdo_meta_map['Person']= array (
       'foreign' => 'person',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'BloodType' => 
+    array (
+      'class' => 'BloodType',
+      'local' => 'blood_type',
+      'foreign' => 'type',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
   'validation' => 

@@ -36,6 +36,17 @@ class xPDOQueryTest extends xPDOTestCase {
             $this->xpdo->removeCollection('Phone',array());
             $this->xpdo->removeCollection('Person',array());
             $this->xpdo->removeCollection('PersonPhone',array());
+            $this->xpdo->removeCollection('BloodType',array());
+
+            $bloodTypes = array('A+','A-','B+','B-','AB+','AB-','O+','O-');
+            foreach ($bloodTypes as $bloodType) {
+                $bt = $this->xpdo->newObject('BloodType');
+                $bt->set('type',$bloodType);
+                $bt->save();
+            }
+
+            $bloodTypeABPlus = $this->xpdo->getObject('BloodType','AB+');
+            if (empty($bloodTypeABPlus)) $this->xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not load blood type.');
 
             /* add some people */
             $person= $this->xpdo->newObject('Person');
@@ -47,6 +58,7 @@ class xPDOQueryTest extends xPDOTestCase {
             $person->set('password', 'ohb0ybuddy');
             $person->set('username', 'john.doe@gmail.com');
             $person->set('security_level', 3);
+            $person->set('blood_type',$bloodTypeABPlus->get('id'));
             $person->save();
 
             $person= $this->xpdo->newObject('Person');
@@ -58,7 +70,24 @@ class xPDOQueryTest extends xPDOTestCase {
             $person->set('password', 'n0w4yimdoingthat');
             $person->set('username', 'jane.heartstead@yahoo.com');
             $person->set('security_level',1);
+            $person->set('blood_type',$bloodTypeABPlus->get('id'));
             $person->save();
+
+            $phone = $this->xpdo->newObject('Phone');
+            $phone->fromArray(array(
+                'type' => 'work',
+                'number' => '555-123-4567',
+            ));
+            $phone->save();
+
+            $personPhone = $this->xpdo->newObject('PersonPhone');
+            $personPhone->fromArray(array(
+                'person' => $person->get('id'),
+                'phone' => $phone->get('id'),
+                'is_primary' => true,
+            ),'',true,true);
+            $personPhone->save();
+
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
@@ -463,6 +492,37 @@ class xPDOQueryTest extends xPDOTestCase {
             array(1,true),
             array(2,true),
             array(5,false),
+        );
+    }
+
+    /**
+     * Test getMany
+     * @dataProvider providerGetMany
+     * @param string $person The username of the Person to use for the test data.
+     * @param string $alias The relation alias to grab.
+     */
+    public function testGetMany($person,$alias) {
+        $person = $this->xpdo->getObject('Person',array(
+            'username' => $person,
+        ));
+        if (!$person) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not get Person for testGetMany.');
+            return;
+        }
+        try {
+            $personPhones = $person->getMany($alias);
+            
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertTrue(!empty($personPhones),'xPDOQuery: getMany failed from Person to PersonPhone.');
+    }
+    /**
+     * Data provider for testGetMany
+     */
+    public function providerGetMany() {
+        return array(
+            array('jane.heartstead@yahoo.com','PersonPhone'),
         );
     }
 }

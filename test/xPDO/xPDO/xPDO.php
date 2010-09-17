@@ -86,6 +86,7 @@ class xPDOTest extends xPDOTestCase {
             $result[] = $this->xpdo->manager->createObjectContainer('Person');
             $result[] = $this->xpdo->manager->createObjectContainer('Phone');
             $result[] = $this->xpdo->manager->createObjectContainer('PersonPhone');
+            $result[] = $this->xpdo->manager->createObjectContainer('BloodType');
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
@@ -366,7 +367,7 @@ class xPDOTest extends xPDOTestCase {
      */
     public function testGetPK($class,$correctPk) {
         $pk = $this->xpdo->getPK($class);
-        $this->assertEquals($pk,$correctPk);
+        $this->assertEquals($correctPk,$pk);
     }
     /**
      * Data provider for testGetPK
@@ -389,7 +390,7 @@ class xPDOTest extends xPDOTestCase {
      */
     public function testGetPKType($class,$correctType = 'integer') {
         $type = $this->xpdo->getPKType($class);
-        $this->assertEquals($type,$correctType);
+        $this->assertEquals($correctType,$type);
     }
     /**
      * Data provider for testGetPKType
@@ -412,7 +413,7 @@ class xPDOTest extends xPDOTestCase {
      */
     public function testGetAggregates($class,$correctAggs) {
         $aggs = $this->xpdo->getAggregates($class);
-        $this->assertEquals($aggs,$correctAggs);
+        $this->assertEquals($correctAggs,$aggs);
     }
     /**
      * Data provider for testGetAggregates
@@ -420,7 +421,15 @@ class xPDOTest extends xPDOTestCase {
      */
     public function providerGetAggregates() {
         return array(
-            array('Person',array()),
+            array('Person',array(
+                'BloodType' => array(
+                    'class' => 'BloodType',
+                    'local' => 'blood_type',
+                    'foreign' => 'type',
+                    'cardinality' => 'one',
+                    'owner' => 'foreign',
+                ),
+            )),
             array('Phone',array()),
             array('PersonPhone',array (
                 'Person' => array(
@@ -443,7 +452,7 @@ class xPDOTest extends xPDOTestCase {
      */
     public function testGetComposites($class,$correctComps) {
         $comps = $this->xpdo->getComposites($class);
-        $this->assertEquals($comps,$correctComps);
+        $this->assertEquals($correctComps,$comps);
     }
     /**
      * Data provider for testGetComposites

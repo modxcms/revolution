@@ -7,7 +7,7 @@
         <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         <field key="dob" dbtype="date" phptype="date" null="true" />
         <field key="gender" dbtype="enum" precision="'','M','F'" phptype="string" null="false" default="" />
-        <field key="blood_type" dbtype="enum" precision="'','A+','A-','B+','B-','AB+','AB-','O+','O-'" phptype="string" null="false" default="" />
+        <field key="blood_type" dbtype="varchar" precision="100" phptype="string" null="true" default="" />
         <field key="username" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="password" dbtype="varchar" precision="255" phptype="password" null="false" />
         <field key="security_level" dbtype="tinyint" precision="4" phptype="integer" null="false" />
@@ -20,6 +20,7 @@
         </index>
 
         <composite alias="PersonPhone" class="PersonPhone" local="id" foreign="person" cardinality="many" owner="local" />
+        <aggregate alias="BloodType" class="BloodType" local="blood_type" foreign="type" cardinality="one" owner="foreign" />
 
         <validation class="validation.xPDOValidator">
             <rule field="dob" name="date_format" type="preg_match" rule="/\d{4}-\d{2}-\d{2}/" />
@@ -71,5 +72,15 @@
         <index alias="unique_varchar" name="unique_varchar" primary="false" unique="true">
             <column key="unique_varchar" collation="A" null="false" />
         </index>
+    </object>
+    <object class="BloodType" table="blood_types" extends="xPDOObject">
+        <field key="type" dbtype="varchar" precision="100" phptype="string" null="false" index="pk" />
+        <field key="description" dbtype="text" phptype="string" null="true" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+            <column key="type" collation="A" null="false" />
+        </index>
+        
+        <aggregate alias="Person" class="Person" local="type" foreign="blood_type" cardinality="many" owner="foreign" />
     </object>
 </model>
