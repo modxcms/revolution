@@ -20,6 +20,7 @@
  * @package xpdo-test
  */
 require_once 'xPDOQuery.php';
+require_once 'xPDOQuery_Limit.php';
 /**
  * Suite handling all xPDOQuery-class centric tests.
  *
@@ -29,6 +30,9 @@ require_once 'xPDOQuery.php';
 class xPDOQuery_AllTests extends PHPUnit_Framework_TestSuite
 {
     public static function suite() {
-        return new xPDOQuery_AllTests('xPDOQueryTest');
+        $suite = new xPDOQuery_AllTests('xPDOQueryClassTest');
+        $suite->addTestSuite('xPDOQueryTest');
+        $suite->addTestSuite('xPDOQueryLimitTest');
+        return $suite;
     }
 }
