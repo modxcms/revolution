@@ -87,6 +87,7 @@ class xPDOTest extends xPDOTestCase {
             $result[] = $this->xpdo->manager->createObjectContainer('Phone');
             $result[] = $this->xpdo->manager->createObjectContainer('PersonPhone');
             $result[] = $this->xpdo->manager->createObjectContainer('BloodType');
+            $result[] = $this->xpdo->manager->createObjectContainer('Item');
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }

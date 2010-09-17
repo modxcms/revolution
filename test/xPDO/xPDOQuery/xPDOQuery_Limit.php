@@ -33,13 +33,12 @@ class xPDOQueryLimitTest extends xPDOTestCase {
         parent::setUp();
         try {
             /* ensure we have clear data */
-            $this->xpdo->removeCollection('BloodType',array());
+            $this->xpdo->removeCollection('Item',array());
 
-            $bloodTypes = array('A+','A-','B+','B-','AB+','AB-','O+','O-');
-            foreach ($bloodTypes as $bloodType) {
-                $bt = $this->xpdo->newObject('BloodType');
-                $bt->set('type',$bloodType);
-                $bt->save();
+            for ($i=1;$i<40;$i++) {
+                $item = $this->xpdo->newObject('Item');
+                $item->set('name','item-'.$i);
+                $item->save();
             }
 
         } catch (Exception $e) {
@@ -56,9 +55,9 @@ class xPDOQueryLimitTest extends xPDOTestCase {
      */
     public function testLimit($limit,$start = 0,$shouldEqual = true) {
         try {
-            $criteria = $this->xpdo->newQuery('BloodType');
+            $criteria = $this->xpdo->newQuery('Item');
             $criteria->limit($limit,$start);
-            $result = $this->xpdo->getCollection('BloodType',$criteria);
+            $result = $this->xpdo->getCollection('Item',$criteria);
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
