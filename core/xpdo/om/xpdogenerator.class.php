@@ -293,7 +293,7 @@ abstract class xPDOGenerator {
                             break;
                         case 'default' :
                             $attrValue = ($attrValue === 'NULL' ? null : $attrValue);
-                            switch ($this->manager->getPhpType($dbtype)) {
+                            switch ($this->manager->xpdo->driver->getPhpType($dbtype)) {
                                 case 'integer':
                                 case 'boolean':
                                 case 'bit':
