@@ -342,11 +342,10 @@ class xPDOTest extends xPDOTestCase {
      *
      * @dataProvider providerGetFieldMeta
      * @param string $class The class to test.
-     * @param array/null $correctMeta The correct field meta that should be returned.
      */
-    public function testGetFieldMeta($class,$correctMeta = null) {
+    public function testGetFieldMeta($class) {
         $tableMeta = $this->xpdo->getFieldMeta($class);
-        $this->assertEquals($correctMeta,$tableMeta);
+        $this->assertTrue(is_array($tableMeta));
     }
     /**
      * Data provider for testGetFieldMeta
@@ -354,7 +353,30 @@ class xPDOTest extends xPDOTestCase {
      */
     public function providerGetFieldMeta() {
         return array(
-            array('Person',null),
+            array('Person'),
+        );
+    }
+
+    /**
+     * Test xPDO->getPK
+     * 
+     * @dataProvider providerGetPK
+     * @param string $class The class name to check.
+     * @param string $correctPk The PK that should result.
+     */
+    public function testGetPK($class,$correctPk) {
+        $pk = $this->xpdo->getPK($class);
+        $this->assertEquals($pk,$correctPk);
+    }
+    /**
+     * Data provider for testGetPK
+     * @see testGetPK
+     */
+    public function providerGetPK() {
+        return array(
+            array('Person','id'),
+            array('Phone','id'),
+            array('PersonPhone',array('person' => 'person','phone' => 'phone')),
         );
     }
 }
