@@ -151,19 +151,20 @@ Ext.extend(MODx.panel.PDSelProv,MODx.panel.WizardPanel,{
         if (this.getForm().isValid()) {
             var vs = this.getForm().getValues();
             MODx.provider = vs.provider;
-            Ext.getCmp('modx-window-package-downloader').fireEvent('proceed','modx-pd-selpackage');
+            MODx.providerName = this.getForm().findField('provider').getRawValue();
             var t = Ext.getCmp('modx-package-browser-tree');
             if (t) {
                 t.getLoader().baseParams.provider = vs.provider;
                 t.refresh();
                 t.renderProviderInfo();
-                t.getRootNode().setText(Ext.getCmp('modx-pdselprov-provider').getRawValue());
             }
             var g = Ext.getCmp('modx-package-browser-grid');
             if (g) {
                 g.getStore().baseParams.provider = vs.provider;
                 g.getStore().removeAll();
             }
+
+            Ext.getCmp('modx-window-package-downloader').fireEvent('proceed','modx-pd-selpackage');
             Ext.getCmp('modx-package-browser-view').show();
         }
     }
