@@ -258,4 +258,22 @@ class xPDOTest extends xPDOTestCase {
         $columns = $this->xpdo->getSelectColumns('Person','','',$selectColumns,true);
         $this->assertEquals($columns,$correct);
     }
+
+    /**
+     * Test xPDO->getPackage.
+     * 
+     * @dataProvider providerGetPackage
+     */
+    public function testGetPackage($class,$correctPackage) {
+        $package = $this->xpdo->getPackage($class);
+        $this->assertEquals($correctPackage,$package);
+    }
+    /**
+     * Data provider for testGetPackage
+     */
+    public function providerGetPackage() {
+        return array(
+            array('Person','sample'),
+        );
+    }
 }
