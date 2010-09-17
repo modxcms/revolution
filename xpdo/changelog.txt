@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- Add xPDO::getIndexMeta() method
 - Fix invalid call to xPDOManager::getPhpType() in xPDOGenerator::writeSchema()
 - [#XPDO-72] Fix invalid call to xPDOManager::getPhpType() in xPDOGenerator::parseSchema()
 - Fix accessibility of xPDOTransport::_unpack()
