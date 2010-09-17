@@ -263,6 +263,8 @@ class xPDOTest extends xPDOTestCase {
      * Test xPDO->getPackage.
      * 
      * @dataProvider providerGetPackage
+     * @param string $class The class to test.
+     * @param string $correctMeta The correct table package name that should be returned.
      */
     public function testGetPackage($class,$correctPackage) {
         $package = $this->xpdo->getPackage($class);
@@ -270,10 +272,32 @@ class xPDOTest extends xPDOTestCase {
     }
     /**
      * Data provider for testGetPackage
+     * @see testGetPackage
      */
     public function providerGetPackage() {
         return array(
             array('Person','sample'),
+        );
+    }
+
+    /**
+     * Test xPDO->getTableMeta
+     * 
+     * @dataProvider providerGetTableMeta
+     * @param string $class The class to test.
+     * @param array/null $correctMeta The correct table meta that should be returned.
+     */
+    public function testGetTableMeta($class,$correctMeta = null) {
+        $tableMeta = $this->xpdo->getTableMeta($class);
+        $this->assertEquals($correctMeta,$tableMeta);
+    }
+    /**
+     * Data provider for testGetTableMeta
+     * @see testGetTableMeta
+     */
+    public function providerGetTableMeta() {
+        return array(
+            array('Person',null),
         );
     }
 }
