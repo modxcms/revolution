@@ -379,4 +379,27 @@ class xPDOTest extends xPDOTestCase {
             array('PersonPhone',array('person' => 'person','phone' => 'phone')),
         );
     }
+
+    /**
+     * Tests xPDO->getPKType
+     * 
+     * @dataProvider providerGetPKType
+     * @param string $class
+     * @param string $correctType
+     */
+    public function testGetPKType($class,$correctType = 'integer') {
+        $type = $this->xpdo->getPKType($class);
+        $this->assertEquals($type,$correctType);
+    }
+    /**
+     * Data provider for testGetPKType
+     * @see testGetPKType
+     */
+    public function providerGetPKType() {
+        return array(
+            array('Person','integer'),
+            array('Phone','integer'),
+            array('PersonPhone',array('person' => 'integer','phone' => 'integer')),
+        );
+    }
 }
