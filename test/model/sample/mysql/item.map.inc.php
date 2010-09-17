@@ -5,6 +5,7 @@ $xpdo_meta_map['Item']= array (
   'fields' => 
   array (
     'name' => '',
+    'color' => 'green',
     'description' => NULL,
     'date_modified' => 'CURRENT_TIMESTAMP',
   ),
@@ -17,6 +18,15 @@ $xpdo_meta_map['Item']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+      'index' => 'fk',
+    ),
+    'color' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'green',
       'index' => 'fk',
     ),
     'description' => 

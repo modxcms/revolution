@@ -34,12 +34,18 @@ class xPDOQueryLimitTest extends xPDOTestCase {
         try {
             /* ensure we have clear data */
             $this->xpdo->removeCollection('Item',array());
+            $colors = array('red','green','yellow','blue');
 
+            $r = 0;
             for ($i=1;$i<40;$i++) {
                 $item = $this->xpdo->newObject('Item');
                 $item->set('name','item-'.$i);
+                $r++;
+                if ($r > 3) $r = 0;
+                $item->set('color',$colors[$r]);
                 $item->save();
             }
+            die();
 
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
