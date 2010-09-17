@@ -58,7 +58,7 @@ class xPDOQueryTest extends xPDOTestCase {
             $person->set('password', 'ohb0ybuddy');
             $person->set('username', 'john.doe@gmail.com');
             $person->set('security_level', 3);
-            $person->set('blood_type',$bloodTypeABPlus->get('id'));
+            $person->set('blood_type',$bloodTypeABPlus->get('type'));
             $person->save();
 
             $person= $this->xpdo->newObject('Person');
@@ -70,7 +70,7 @@ class xPDOQueryTest extends xPDOTestCase {
             $person->set('password', 'n0w4yimdoingthat');
             $person->set('username', 'jane.heartstead@yahoo.com');
             $person->set('security_level',1);
-            $person->set('blood_type',$bloodTypeABPlus->get('id'));
+            $person->set('blood_type',$bloodTypeABPlus->get('type'));
             $person->save();
 
             $phone = $this->xpdo->newObject('Phone');
@@ -106,6 +106,8 @@ class xPDOQueryTest extends xPDOTestCase {
                 'username' => 'jane.heartstead@yahoo.com'
             ));
             $person->remove();
+
+            $this->xpdo->removeCollection('BloodType',array());
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
@@ -523,6 +525,38 @@ class xPDOQueryTest extends xPDOTestCase {
     public function providerGetMany() {
         return array(
             array('jane.heartstead@yahoo.com','PersonPhone'),
+        );
+    }
+
+
+    /**
+     * Test getOne
+     * @dataProvider providerGetOne
+     * @param string $username The username of the Person to use for the test data.
+     * @param string $alias The relation alias to grab.
+     */
+    public function testGetOne($username,$alias) {
+        $person = $this->xpdo->getObject('Person',array(
+            'username' => $username,
+        ));
+        if (!$person) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not get Person for testGetOne.');
+            return;
+        }
+        try {
+            $one = $person->getOne($alias);
+
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertTrue(!empty($one),'xPDOQuery: getMany failed from Person `'.$username.'` to '.$alias.'.');
+    }
+    /**
+     * Data provider for testGetOne
+     */
+    public function providerGetOne() {
+        return array(
+            array('jane.heartstead@yahoo.com','BloodType'),
         );
     }
 }
