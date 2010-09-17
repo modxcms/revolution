@@ -42,7 +42,7 @@ class modMenu extends modAccessibleObject {
     public function rebuildCache($start = '') {
         $menus = $this->getSubMenus($start);
 
-        if ($this->xpdo->cacheManager->set('mgr/menus',$menus) == false) {
+        if ($this->xpdo->cacheManager->set('mgr/menus/'.$this->xpdo->getOption('cultureKey',null,'en'),$menus) == false) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'The menu cache could not be written.');
         }
 
