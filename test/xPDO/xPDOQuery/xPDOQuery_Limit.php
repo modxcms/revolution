@@ -39,6 +39,7 @@ class xPDOQueryLimitTest extends xPDOTestCase {
             $r = 0;
             for ($i=1;$i<40;$i++) {
                 $item = $this->xpdo->newObject('Item');
+                $idx = str_pad($i,2,'0',STR_PAD_LEFT);
                 $item->set('name','item-'.$i);
                 $r++;
                 if ($r > 3) $r = 0;
@@ -52,10 +53,18 @@ class xPDOQueryLimitTest extends xPDOTestCase {
     }
 
     /**
+     * Clean up data when through.
+     */
+    public function tearDown() {
+        $this->xpdo->removeCollection('Item',array());
+        parent::tearDown();
+    }
+    
+    /**
      * Test limit
      * @dataProvider providerLimit
      * @param int $limit A number to limit by
-     * @param int $limit The index to start on
+     * @param int $start The index to start on
      * @param boolean $shouldEqual If the result count should equal the limit
      */
     public function testLimit($limit,$start = 0,$shouldEqual = true) {
@@ -83,4 +92,65 @@ class xPDOQueryLimitTest extends xPDOTestCase {
             array(5,2,true), /* limit 5, start at 2 */
         );
     }
+
+    /**
+     * Test limit with groupby clause
+     * @dataProvider providerLimitWithGroupBy
+     * @param int $limit A number to limit by
+     * @param int $start The index to start on
+     * @param boolean $shouldEqual If the result count should equal the limit
+     */
+    public function testLimitWithGroupBy($limit,$start = 0,$shouldEqual = true) {
+        try {
+            $criteria = $this->xpdo->newQuery('Item');
+            $criteria->groupby('color');
+            $criteria->limit($limit,$start);
+            $result = $this->xpdo->getCollection('Item',$criteria);
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $success = count($result) == $limit;
+        if (!$shouldEqual) $success = !$success;
+        $this->assertTrue($success,'xPDOQuery: Limit clause grouped by color returned more than desired '.$limit.' result.');
+    }
+    /**
+     * Data provider for testLimit
+     * @see testLimitWithGroupBy
+     */
+    public function providerLimitWithGroupBy() {
+        return array(
+            array(3,0,true), /* limit 3, start at 0 */
+        );
+    }
+
+    /**
+     * Test limit with sortby clause
+     * @dataProvider providerLimitWithSortBy
+     * @param int $limit A number to limit by
+     * @param int $start The index to start on
+     * @param boolean $shouldEqual If the result count should equal the limit
+     */
+    public function testLimitWithSortBy($limit,$start = 0,$shouldEqual = true) {
+        try {
+            $criteria = $this->xpdo->newQuery('Item');
+            $criteria->sortby('color','ASC');
+            $criteria->limit($limit,$start);
+            $result = $this->xpdo->getCollection('Item',$criteria);
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $success = count($result) == $limit;
+        if (!$shouldEqual) $success = !$success;
+        $this->assertTrue($success,'xPDOQuery: Limit clause with sortby returned more than desired '.$limit.' result.');
+    }
+    /**
+     * Data provider for testLimit
+     * @see testLimitWithSortBy
+     */
+    public function providerLimitWithSortBy() {
+        return array(
+            array(3,0,true), /* limit 3, start at 0 */
+        );
+    }
+
 }
