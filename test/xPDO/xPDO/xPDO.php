@@ -300,4 +300,40 @@ class xPDOTest extends xPDOTestCase {
             array('Person',null),
         );
     }
+
+    /**
+     * Test xPDO->getFields
+     * 
+     * @dataProvider providerGetFields
+     * @param string $class The name of the class to test.
+     * @param array $correctFields An array of fields that should result.
+     */
+    public function testGetFields($class,array $correctFields = array()) {
+        $fields = $this->xpdo->getFields($class);
+        $diff = array_diff($fields,$correctFields);
+        $diff2 = array_diff($correctFields,$fields);
+        $success = is_array($fields) && empty($diff) && empty($diff2);
+        $this->assertTrue($success);
+    }
+    /**
+     * Data provider for testGetFields
+     * @see testGetFields
+     */
+    public function providerGetFields() {
+        return array(
+            array('Person',array (
+              'id' => null,
+              'first_name' => null,
+              'last_name' => null,
+              'middle_name' => null,
+              'date_modified' => 'CURRENT_TIMESTAMP',
+              'dob' => null,
+              'gender' => '',
+              'blood_type' => '',
+              'username' => null,
+              'password' => null,
+              'security_level' => null,
+            )),
+        );
+    }
 }
