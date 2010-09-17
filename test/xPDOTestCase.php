@@ -31,7 +31,7 @@ class xPDOTestCase extends PHPUnit_Framework_TestCase {
     protected $xpdo = null;
 
     public function setUp() {
-        
+        $this->xpdo =& xPDOTestHarness::_getConnection();
     }
 
     public function tearDown() {
