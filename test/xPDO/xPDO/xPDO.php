@@ -408,11 +408,16 @@ class xPDOTest extends xPDOTestCase {
      *
      * @dataProvider providerGetAggregates
      * @param string $class
+     * @param array $correctAggs
      */
     public function testGetAggregates($class,$correctAggs) {
         $aggs = $this->xpdo->getAggregates($class);
         $this->assertEquals($aggs,$correctAggs);
     }
+    /**
+     * Data provider for testGetAggregates
+     * @see testGetAggregates
+     */
     public function providerGetAggregates() {
         return array(
             array('Person',array()),
@@ -425,6 +430,54 @@ class xPDOTest extends xPDOTestCase {
                     'cardinality' => 'one',
                     'owner' => 'foreign',
                 ),
+            )),
+        );
+    }
+
+    /**
+     * Test xPDO->getComposites
+     *
+     * @dataProvider providerGetComposites
+     * @param string $class
+     * @param array $correctComps
+     */
+    public function testGetComposites($class,$correctComps) {
+        $comps = $this->xpdo->getComposites($class);
+        $this->assertEquals($comps,$correctComps);
+    }
+    /**
+     * Data provider for testGetComposites
+     * @see testGetComposites
+     */
+    public function providerGetComposites() {
+        return array(
+            array('Person',array(
+              'PersonPhone' => array(
+                'class' => 'PersonPhone',
+                'local' => 'id',
+                'foreign' => 'person',
+                'cardinality' => 'many',
+                'owner' => 'local',
+              ),
+            )),
+            array('Phone',array(
+              'PersonPhone' => array(
+                'class' => 'PersonPhone',
+                'local' => 'id',
+                'foreign' => 'phone',
+                'cardinality' => 'many',
+                'owner' => 'local',
+              ),
+            )),
+            array('PersonPhone',array (
+              'Phone' =>
+              array (
+                'class' => 'Phone',
+                'local' => 'phone',
+                'foreign' => 'id',
+                'cardinality' => 'one',
+                'owner' => 'foreign',
+              ),
             )),
         );
     }
