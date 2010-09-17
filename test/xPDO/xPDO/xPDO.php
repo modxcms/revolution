@@ -229,4 +229,33 @@ class xPDOTest extends xPDOTestCase {
             array('Person',array('xPDOSimpleObject','xPDOObject'),false),
         );
     }
+
+    /**
+     * Test xPDO->getSelectColumns.
+     *
+     * $className, $tableAlias= '', $columnPrefix= '', $columns= array (), $exclude= false
+     */
+    public function testGetSelectColumns() {
+        $correct = '`id`, `first_name`, `last_name`, `middle_name`, `date_modified`, `dob`, `gender`, `blood_type`, `username`, `password`, `security_level`';
+        $columns = $this->xpdo->getSelectColumns('Person');
+        $this->assertEquals($columns,$correct);
+
+        $correct = '`Person`.`id`, `Person`.`first_name`, `Person`.`last_name`, `Person`.`middle_name`, `Person`.`date_modified`, `Person`.`dob`, `Person`.`gender`, `Person`.`blood_type`, `Person`.`username`, `Person`.`password`, `Person`.`security_level`';
+        $columns = $this->xpdo->getSelectColumns('Person','Person');
+        $this->assertEquals($columns,$correct);
+
+        $correct = '`Person`.`id` AS `test_id`, `Person`.`first_name` AS `test_first_name`, `Person`.`last_name` AS `test_last_name`, `Person`.`middle_name` AS `test_middle_name`, `Person`.`date_modified` AS `test_date_modified`, `Person`.`dob` AS `test_dob`, `Person`.`gender` AS `test_gender`, `Person`.`blood_type` AS `test_blood_type`, `Person`.`username` AS `test_username`, `Person`.`password` AS `test_password`, `Person`.`security_level` AS `test_security_level`';
+        $columns = $this->xpdo->getSelectColumns('Person','Person','test_');
+        $this->assertEquals($columns,$correct);
+
+        $selectColumns = array('id','last_name','dob');
+        $correct = '`id`, `last_name`, `dob`';
+        $columns = $this->xpdo->getSelectColumns('Person','','',$selectColumns);
+        $this->assertEquals($columns,$correct);
+        
+        $selectColumns = array('first_name','middle_name','dob','gender','security_level','blood_type');
+        $correct = '`id`, `last_name`, `date_modified`, `username`, `password`';
+        $columns = $this->xpdo->getSelectColumns('Person','','',$selectColumns,true);
+        $this->assertEquals($columns,$correct);
+    }
 }
