@@ -390,7 +390,7 @@ Ext.extend(MODx.panel.Static,MODx.FormPanel,{
     ,defaultClassKey: 'modStaticResource'
     ,rteLoaded: false
     ,setup: function() {
-        this.getForm().setValues(this.config.record);
+        if (!this.initialized) { this.getForm().setValues(this.config.record); }
         if (!Ext.isEmpty(this.config.record.pagetitle)) {
             Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('static_resource')+': '+this.config.record.pagetitle+'</h2>');
         }
