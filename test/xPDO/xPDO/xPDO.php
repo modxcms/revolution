@@ -324,16 +324,16 @@ class xPDOTest extends xPDOTestCase {
         return array(
             array('Person',array (
               'id' => null,
-              'first_name' => null,
-              'last_name' => null,
-              'middle_name' => null,
+              'first_name' => '',
+              'last_name' => '',
+              'middle_name' => '',
               'date_modified' => 'CURRENT_TIMESTAMP',
-              'dob' => null,
+              'dob' => '',
               'gender' => '',
-              'blood_type' => '',
-              'username' => null,
-              'password' => null,
-              'security_level' => null,
+              'blood_type' => null,
+              'username' => '',
+              'password' => '',
+              'security_level' => 1,
             )),
         );
     }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model package="sample" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">
     <object class="Person" table="person" extends="xPDOSimpleObject">
-        <field key="first_name" dbtype="varchar" precision="100" phptype="string" null="false" />
-        <field key="last_name" dbtype="varchar" precision="100" phptype="string" null="false" />
-        <field key="middle_name" dbtype="varchar" precision="100" phptype="string" null="false" />
+        <field key="first_name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="last_name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="middle_name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         <field key="dob" dbtype="date" phptype="date" null="true" />
         <field key="gender" dbtype="enum" precision="'','M','F'" phptype="string" null="false" default="" />
-        <field key="blood_type" dbtype="varchar" precision="100" phptype="string" null="true" default="" />
+        <field key="blood_type" dbtype="varchar" precision="100" phptype="string" null="true" />
         <field key="username" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
-        <field key="password" dbtype="varchar" precision="255" phptype="password" null="false" />
-        <field key="security_level" dbtype="tinyint" precision="4" phptype="integer" null="false" />
+        <field key="password" dbtype="varchar" precision="255" phptype="password" null="false" default="" />
+        <field key="security_level" dbtype="tinyint" precision="4" phptype="integer" null="false" default="1" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="id" collation="A" null="false" />

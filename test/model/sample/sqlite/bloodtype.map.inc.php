@@ -41,4 +41,15 @@ $xpdo_meta_map['BloodType']= array (
       ),
     ),
   ),
+  'aggregates' => 
+  array (
+    'Person' => 
+    array (
+      'class' => 'Person',
+      'local' => 'type',
+      'foreign' => 'blood_type',
+      'cardinality' => 'many',
+      'owner' => 'foreign',
+    ),
+  ),
 );
