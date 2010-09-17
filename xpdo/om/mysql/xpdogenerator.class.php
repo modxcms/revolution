@@ -137,7 +137,7 @@ class xPDOGenerator_mysql extends xPDOGenerator {
                         if (isset ($Type[1]) && !empty ($Type[1])) {
                             $attributes= ' attributes="' . trim($Type[1]) . '"';
                         }
-                        $PhpType= $this->manager->getPhpType($dbType);
+                        $PhpType= $this->manager->xpdo->driver->getPhpType($dbType);
                         $Null= ' null="' . (($Null === 'NO') ? 'false' : 'true') . '"';
                         $Key= $this->getIndex($Key);
                         $Default= $this->getDefault($Default);
