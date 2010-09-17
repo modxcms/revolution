@@ -1,6 +1,6 @@
-/** 
+/**
  * Generates the Package Downloader wizard.
- *  
+ *
  * @class MODx.window.PackageDownloader
  * @extends Ext.Window
  * @param {Object} config An object of options.
@@ -58,7 +58,7 @@ MODx.panel.PDFirst = function(config) {
             html: '<h2>'+_('package_retriever')+'</h2>'
             ,autoHeight: true
         },{
-            html: '<p>'+_('package_obtain_method')+'</p>'   
+            html: '<p>'+_('package_obtain_method')+'</p>'
             ,style: 'padding-bottom: 20px'
             ,autoHeight: true
         },{
@@ -88,21 +88,21 @@ Ext.extend(MODx.panel.PDFirst,MODx.panel.WizardPanel,{
     submit: function(o) {
         var va = this.getForm().getValues();
         if (!va.method) {
-            
+
         } else if (va.method === 'local') {
            this.searchLocal();
         } else {
             Ext.getCmp('modx-window-package-downloader').fireEvent('proceed','modx-pd-'+va.method);
         }
     }
-    
+
     ,searchLocal: function() {
         MODx.msg.confirm({
            title: _('package_search_local_title')
            ,text: _('package_search_local_confirm')
            ,url: MODx.config.connectors_url+'workspace/packages.php'
            ,params: {
-                action: 'scanLocal' 
+                action: 'scanLocal'
            }
            ,listeners: {
                 'success':{fn:function(r) {
@@ -151,19 +151,20 @@ Ext.extend(MODx.panel.PDSelProv,MODx.panel.WizardPanel,{
         if (this.getForm().isValid()) {
             var vs = this.getForm().getValues();
             MODx.provider = vs.provider;
-            Ext.getCmp('modx-window-package-downloader').fireEvent('proceed','modx-pd-selpackage');
+            MODx.providerName = this.getForm().findField('provider').getRawValue();
             var t = Ext.getCmp('modx-package-browser-tree');
             if (t) {
                 t.getLoader().baseParams.provider = vs.provider;
                 t.refresh();
                 t.renderProviderInfo();
-                t.getRootNode().setText(Ext.getCmp('modx-pdselprov-provider').getRawValue());
             }
             var g = Ext.getCmp('modx-package-browser-grid');
             if (g) {
                 g.getStore().baseParams.provider = vs.provider;
                 g.getStore().removeAll();
             }
+
+            Ext.getCmp('modx-window-package-downloader').fireEvent('proceed','modx-pd-selpackage');
             Ext.getCmp('modx-package-browser-view').show();
         }
     }
@@ -267,11 +268,11 @@ MODx.panel.PDSelPackage = function(config) {
         }]
     });
     MODx.panel.PDSelPackage.superclass.constructor.call(this,config);
-    
+
 };
 Ext.extend(MODx.panel.PDSelPackage,MODx.panel.WizardPanel,{
     provider: null
-    
+
     ,submit: function(o) {
         Ext.getCmp('modx-window-package-downloader').hide();
         return true;
