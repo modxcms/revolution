@@ -337,15 +337,28 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             });
             this.uploader.on('show',this.beforeUpload,this);
             this.uploader.on('uploadsuccess',this.uploadSuccess,this);
+            this.uploader.on('uploaderror',this.uploadError,this);
+            this.uploader.on('uploadfailed',this.uploadFailed,this);
         }
         this.uploader.show(btn);
     }
+    ,uploadError: function(dlg,file,data,rec) {}
+    ,uploadFailed: function(dlg,file,rec) {}
     
     ,uploadSuccess:function() {
         if (this.cm.activeNode) {
             var node = this.cm.activeNode;
-            (node.isLeaf() ? node.parentNode : node).reload();
-            this.fireEvent('afterUpload',node);
+            if (node.isLeaf) {
+                var pn = (node.isLeaf() ? node.parentNode : node);
+                if (pn) {
+                    pn.reload();
+                } else {
+                    this.refresh();
+                }
+                this.fireEvent('afterUpload',node);
+            } else {
+                this.refresh();
+            }
         } else {
             this.refresh();
         }

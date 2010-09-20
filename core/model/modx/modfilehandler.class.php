@@ -52,7 +52,7 @@ class modFileHandler {
      * to the return value. Defaults to true.
      * @return string The base path
      */
-    public function getBasePath($prependBasePath = false,$context = 'mgr') {
+    public function getBasePath($prependBasePath = false,$context = 'web') {
         $context = $this->modx->getObject('modContext',$context);
         $context->prepare();
         $root = $context->getOption('filemanager_path',null,'');
@@ -83,7 +83,7 @@ class modFileHandler {
     /**
      * Get base URL of file manager
      */
-    public function getBaseUrl($context = 'mgr') {
+    public function getBaseUrl($context = 'web') {
         $context = $this->modx->getObject('modContext',$context);
         $context->prepare();
         $fileManagerUrl = $context->getOption('filemanager_url',$scriptProperties,'');

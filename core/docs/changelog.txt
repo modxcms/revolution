@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.3-pl (September 17, 2010)
 ====================================
+- [#MODX-2343] File upload now respects upload_* extension restrictions
 - [#MODX-2344] Respect context-specific filemanager_path in upload/remove actions on directory tree in mgr
 
 MODx Revolution 2.0.2-pl (September 17, 2010)
