@@ -15,8 +15,6 @@ if ($template->get('locked') && !$modx->hasPermission('edit_locked')) {
     return $modx->error->failure($modx->lexicon('template_err_locked'));
 }
 
-$template->category = $template->getOne('Category');
-
 /* invoke OnTempFormRender event */
 $onTempFormRender = $modx->invokeEvent('OnTempFormRender',array(
     'id' => $template->get('id'),
