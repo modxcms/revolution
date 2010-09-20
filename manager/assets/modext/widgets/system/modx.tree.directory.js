@@ -224,6 +224,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,old_name: ov
                 ,prependPath: this.config.prependPath || null
                 ,file: this.treeEditor.editNode.id
+                ,ctx: MODx.ctx || ''
             }
             ,listeners: {
                'success': {fn:this.refresh,scope:this}
@@ -295,6 +296,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 action: 'remove'
                 ,dir: node.id
                 ,prependPath: this.config.prependPath || null
+                ,ctx: MODx.ctx || ''
             }
             ,listeners: {
                 'success':{fn:this.refreshParentNode,scope:this}
@@ -311,6 +313,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 action: 'remove'
                 ,file: node.id
                 ,prependPath: this.config.prependPath || null
+                ,ctx: MODx.ctx || ''
             }
             ,listeners: {
                 'success':{fn:this.refreshParentNode,scope:this}
@@ -326,6 +329,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                     action: 'upload'
                     ,prependPath: this.config.prependPath || null
                     ,prependUrl: this.config.prependUrl || null
+                    ,ctx: MODx.ctx || ''
                 }
                 ,reset_on_hide: true
                 ,width: 550
@@ -360,6 +364,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,prependPath: this.config.prependPath || null
             ,prependUrl: this.config.prependUrl || null
             ,path: path
+            ,ctx: MODx.ctx || ''
         });
         this.fireEvent('beforeUpload',this.cm.activeNode);
     }
@@ -386,6 +391,10 @@ MODx.window.CreateDirectory = function(config) {
         ,url: MODx.config.connectors_url+'browser/directory.php'
         ,action: 'create'
         ,fields: [{
+            xtype: 'hidden'
+            ,name: 'ctx'
+            ,value: MODx.ctx || ''
+        },{
             xtype: 'hidden'
             ,name: 'prependPath'
             ,value: config.prependPath || null
@@ -425,6 +434,10 @@ MODx.window.ChmodDirectory = function(config) {
         ,action: 'chmod'
         ,fields: [{
             xtype: 'hidden'
+            ,name: 'ctx'
+            ,value: MODx.ctx || ''
+        },{
+            xtype: 'hidden'
             ,name: 'prependPath'
             ,value: config.prependPath || null
         },{
@@ -454,6 +467,10 @@ MODx.window.RenameFile = function(config) {
         ,url: MODx.config.connectors_url+'browser/index.php'
         ,action: 'rename'
         ,fields: [{
+            xtype: 'hidden'
+            ,name: 'ctx'
+            ,value: MODx.ctx || ''
+        },{
             xtype: 'hidden'
             ,name: 'prependPath'
             ,value: config.prependPath || null
