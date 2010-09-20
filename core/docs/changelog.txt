@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODx Revolution 2.0.3-pl (September 17, 2010)
+MODx Revolution 2.0.3-pl
 ====================================
 - [#MODX-2343] File upload now respects upload_* extension restrictions
 - [#MODX-2344] Respect context-specific filemanager_path in upload/remove actions on directory tree in mgr
