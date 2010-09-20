@@ -48,8 +48,8 @@ if (!empty($_POST)) {
 
             if (!empty($response) && is_array($response)) {
                 if (!empty($response['success']) && isset($response['object'])) {
-                    $url = !empty($_POST['returnUrl']) ? $_POST['returnUrl'] : $modx->getOption('manager_url');
-                    $modx->sendRedirect($url,'','','full');
+                    $url = !empty($_POST['returnUrl']) ? $_POST['returnUrl'] : $modx->getOption('manager_url',null,MODX_MANAGER_PATH);
+                    $modx->sendRedirect(rtrim($url,'/'),'','','full');
                 } else {
                     $error_message = '';
                     if (isset($response['errors']) && !empty($response['errors'])) {
