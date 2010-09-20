@@ -1258,7 +1258,6 @@ $settings['which_element_editor']->fromArray(array (
   'area' => 'editor',
   'editedon' => null,
 ), '', true, true);
-return $settings;
 $settings['xhtml_urls']= $xpdo->newObject('modSystemSetting');
 $settings['xhtml_urls']->fromArray(array (
   'key' => 'xhtml_urls',
@@ -1268,3 +1267,4 @@ $settings['xhtml_urls']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+return $settings;
