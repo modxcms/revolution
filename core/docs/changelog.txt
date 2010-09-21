@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.3-pl
 ====================================
+- Added code to prevent caching of JS after upgrades by postfixing version to JS URLs
 - [#MODX-2342] Fixed issue where xhtml_urls setting wasnt included in build
 - [#MODX-2345] Fixed issue with templates and categories in mgr not persisting
 - [#MODX-2341] Fixed issue with redirect statement on login page in certain environments

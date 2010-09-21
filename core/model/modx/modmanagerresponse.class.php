@@ -272,9 +272,21 @@ class modManagerResponse extends modResponse {
     }
 
     /**
+     * Grabs a stripped version of modx to prevent caching of JS after upgrades
+     *
+     * @access private
+     * @return string The parsed version string
+     */
+    private function _prepareVersionPostfix() {
+        $version = $this->modx->getVersionData();
+        return str_replace(array('.','-'),'',$version['full_version']);
+    }
+
+    /**
      * Registers CSS/JS to manager interface
      */
     public function registerCssJs() {
+        $versionPostFix = $this->_prepareVersionPostfix();
         /* if true, use compressed JS */
         if ($this->modx->getOption('compress_js',null,false)) {
             foreach ($this->modx->sjscripts as &$scr) {
@@ -295,6 +307,20 @@ class modManagerResponse extends modResponse {
                 ),'',$newUrl);
 
                 if (file_exists($this->modx->getOption('manager_path').'assets/modext/'.$path)) {
+                    $scr = $newUrl;
+                }
+                /* append version string */
+                $pos = strpos($scr,'.js');
+                if ($pos) {
+                    $newUrl = substr($scr,0,$pos+3).'?v='.$versionPostFix.substr($scr,$pos+3,strlen($scr));
+                    $scr = $newUrl;
+                }
+            }
+        } else {
+            foreach ($this->modx->sjscripts as &$scr) {
+                $pos = strpos($scr,'.js');
+                if ($pos) {
+                    $newUrl = substr($scr,0,$pos+3).'?v='.$versionPostFix.substr($scr,$pos+3,strlen($scr));
                     $scr = $newUrl;
                 }
             }
