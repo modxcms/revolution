@@ -28,4 +28,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$this->checkFormCustomizationRules($policy);
 return $modx->smarty->fetch('security/access/policy/update.tpl');

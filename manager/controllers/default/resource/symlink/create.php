@@ -144,4 +144,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$this->checkFormCustomizationRules($parent != null ? $parent : null);
 return $modx->smarty->fetch('resource/symlink/create.tpl');

@@ -130,4 +130,5 @@ Ext.onReady(function() { MODx.loadWelcomePanel("'.$url.'"); });
     }
     $modx->reloadConfig();
 }
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('welcome.tpl');

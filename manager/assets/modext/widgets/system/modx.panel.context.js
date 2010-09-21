@@ -104,6 +104,7 @@ Ext.extend(MODx.panel.Context,MODx.FormPanel,{
                     var el = Ext.getCmp('modx-context-name');
                     if (el) { el.getEl().update('<h2>'+_('context')+': '+r.object.key+'</h2>'); }
                     this.fireEvent('ready');
+                    MODx.fireEvent('ready');
             	},scope:this}
             }
         });

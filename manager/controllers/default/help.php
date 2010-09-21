@@ -12,4 +12,5 @@ if (!$modx->hasPermission('help')) {
 /* load JS scripts for page */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/system/help.js');
 
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('help.tpl');

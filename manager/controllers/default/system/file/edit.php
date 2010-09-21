@@ -50,4 +50,6 @@ $modx->smarty->assign('OnFileEditFormPrerender',$onFileEditFormPrerender);
 
 
 $modx->smarty->assign('fa',$fa);
+
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('system/file/edit.tpl');

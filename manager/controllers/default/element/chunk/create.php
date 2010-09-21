@@ -75,5 +75,6 @@ if (is_array($onChunkFormPrerender)) {
 }
 $modx->smarty->assign('onChunkFormPrerender',$onChunkFormPrerender);
 
-/* display template */
+/* display */
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('element/chunk/create.tpl');

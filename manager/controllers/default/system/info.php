@@ -12,4 +12,5 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.active.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/system/info.js');
 
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('system/info.tpl');

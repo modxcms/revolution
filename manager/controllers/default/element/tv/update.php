@@ -83,4 +83,5 @@ $onTVFormPrerender = $modx->invokeEvent('OnTVFormPrerender',array(
 if(is_array($onTVFormPrerender)) $onTVFormPrerender = implode('',$onTVFormPrerender);
 $modx->smarty->assign('onTVFormPrerender',$onTVFormPrerender);
 
+$this->checkFormCustomizationRules($tv);
 return $modx->smarty->fetch('element/tv/update.tpl');

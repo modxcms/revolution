@@ -109,4 +109,5 @@ Ext.onReady(function() {
 </script>');
 
 
+$this->checkFormCustomizationRules($resource);
 return $modx->smarty->fetch('resource/weblink/update.tpl');

@@ -98,4 +98,5 @@ if (is_array($onChunkFormPrerender)) {
 $modx->smarty->assign('onChunkFormPrerender',$onChunkFormPrerender);
 
 /* display template */
+$this->checkFormCustomizationRules($chunk);
 return $modx->smarty->fetch('element/chunk/update.tpl');

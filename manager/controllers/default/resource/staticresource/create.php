@@ -76,7 +76,6 @@ $modx->smarty->assign('resource',$resource);
 $publish_document = $modx->hasPermission('publish_document');
 $access_permissions = $modx->hasPermission('access_permissions');
 
-
 /* set default template */
 $default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $context->getOption('default_template',null,1)));
 $userGroups = $modx->user->getUserGroups();
@@ -146,4 +145,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$this->checkFormCustomizationRules($parent != null ? $parent : null);
 return $modx->smarty->fetch('resource/staticresource/create.tpl');

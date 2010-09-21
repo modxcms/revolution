@@ -238,6 +238,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
         this.clearDirty();
         this.initialized = true;
+        MODx.fireEvent('ready');
         return true;
     }
     

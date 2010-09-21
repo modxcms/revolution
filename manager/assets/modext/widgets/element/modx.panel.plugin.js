@@ -160,6 +160,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         this.fireEvent('ready',this.config.record);
         if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
         this.clearDirty();
+        MODx.fireEvent('ready');
         this.initialized = true;
     }
     ,beforeSubmit: function(o) {

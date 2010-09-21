@@ -85,4 +85,6 @@ $onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array(
 ));
 if (is_array($onPluginFormPrerender)) $onPluginFormPrerender = implode('',$onPluginFormPrerender);
 $modx->smarty->assign('onPluginFormPrerender',$onPluginFormPrerender);
+
+$this->checkFormCustomizationRules($plugin);
 return $modx->smarty->fetch('element/plugin/update.tpl');

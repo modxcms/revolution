@@ -85,7 +85,6 @@ class modManagerResponse extends modResponse {
                     $cbody = 'Could not find action file at: '.$f;
                 }
 
-                $this->registerActionDomRules($action);
                 $this->registerCssJs();
 
                 /* reset path to core modx path for header/footer */
@@ -139,21 +138,17 @@ class modManagerResponse extends modResponse {
     }
 
     /**
-     * Register ActionDom rules that hide/show fields
+     * Checks Form Customization rules for an object.
      *
-     * @access public
-     * @param integer $action The ID of the modAction object
+     * @param xPDOObject $obj If passed, will validate against for rules with constraints.
      */
-    public function registerActionDomRules($action) {
-        if (empty($action)) return false;
-
-        /* now do action dom rules */
+    public function checkFormCustomizationRules($obj = null) {
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
         $c->leftJoin('modAccessActionDom','Access');
         $principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
         $c->where(array(
-            'action' => $action,
+            'action' => $this->action['id'],
             'active' => true,
             array(
                 array(
@@ -166,6 +161,15 @@ class modManagerResponse extends modResponse {
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
         foreach ($domRules as $rule) {
+            $constraintClass = $rule->get('constraint_class');
+            if (!empty($constraintClass)) {
+                if (empty($obj) || !($obj instanceof $constraintClass)) continue;
+                $constraintField = $rule->get('constraint_field');
+                $constraint = $rule->get('constraint');
+                if ($obj->get($constraintField) != $constraint) {
+                    continue;
+                }
+            }
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;
         }

@@ -22,4 +22,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$this->checkFormCustomizationRules($modx->user);
 return $modx->smarty->fetch('security/profile/index.tpl');

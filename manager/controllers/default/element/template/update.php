@@ -82,4 +82,5 @@ if (is_array($onTempFormPrerender)) $onTempFormPrerender = implode('',$onTempFor
 $modx->smarty->assign('onTempFormPrerender',$onTempFormPrerender);
 
 
+$this->checkFormCustomizationRules($template);
 return $modx->smarty->fetch('element/template/update.tpl');

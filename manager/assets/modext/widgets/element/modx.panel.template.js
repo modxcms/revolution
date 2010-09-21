@@ -158,6 +158,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
         this.clearDirty();
         this.initialized = true;
+        MODx.fireEvent('ready');
         return true;
     }
     ,beforeSubmit: function(o) {
