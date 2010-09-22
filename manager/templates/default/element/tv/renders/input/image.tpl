@@ -19,7 +19,7 @@ MODx.load({
         'select': {fn:function(data) {
             MODx.fireResourceFormChange();
             var d = Ext.get('tv-image-preview-{/literal}{$tv->id}{literal}');
-            d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.url+'" alt="" />');
+            d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.relativeUrl+'" alt="" />');
         }, scope:this}
     }
 });
