@@ -1,9 +1,9 @@
 MODx.Console = function(config) {
-	config = config || {};
-	Ext.Updater.defaults.showLoadIndicator = false;
-	Ext.applyIf(config,{
+    config = config || {};
+    Ext.Updater.defaults.showLoadIndicator = false;
+    Ext.applyIf(config,{
         title: _('console')
-	    ,modal: Ext.isIE ? false : true
+        ,modal: Ext.isIE ? false : true
         ,shadow: true
         ,resizable: false
         ,collapsible: false
@@ -36,9 +36,9 @@ MODx.Console = function(config) {
             ,scope: this
             ,handler: this.hideConsole
         }]
-	});
-	MODx.Console.superclass.constructor.call(this,config);
-	this.config = config;
+    });
+    MODx.Console.superclass.constructor.call(this,config);
+    this.config = config;
     this.addEvents({
         'shutdown': true
         ,'complete': true
@@ -110,7 +110,11 @@ Ext.extend(MODx.Console,Ext.Window,{
     }
     
     ,hideConsole: function() {
-        this.provider.disconnect();
+        if (this.provider && this.provider.disconnect) {
+            try {
+                this.provider.disconnect();
+            } catch (e) {}
+        }
         this.fireEvent('shutdown');
         this.hide();
     }
