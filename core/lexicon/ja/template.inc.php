@@ -30,11 +30,11 @@ $_lang['template_err_ns'] = 'テンプレートが指定されていません。
 $_lang['template_err_ns_name'] = 'テンプレートの名前を指定してください。';
 $_lang['template_err_remove'] = 'テンプレートの削除中にエラーが発生しました。';
 $_lang['template_err_save'] = 'テンプレートの保存中にエラーが発生しました。';
-$_lang['template_lock'] = '編集作業のためこのテンプレートにロックをかける';
+$_lang['template_lock'] = 'テンプレート編集をロック';
 $_lang['template_lock_msg'] = 'このテンプレートを編集するためにはロックを解除する必要があります。';
 $_lang['template_locked_message'] = 'このテンプレートはロックされています';
 $_lang['template_management_msg'] = '<h3 style="font-weight:bold;">テンプレートデザインの管理</h3><p>テンプレートはいくつでも作成でき、ドキュメントごとに自由に割り当てることができます。</p>';
-$_lang['template_msg'] = 'テンプレートを作成/編集できます。作成・変更されたテンプレートは、キャッシュがクリアされるまで見れないかもしれません。しかし、プレビュー機能を使用してテンプレートの動作を確認することができます。';
+$_lang['template_msg'] = 'テンプレートを作成/編集します。';
 $_lang['template_name'] = 'テンプレート名';
 $_lang['template_new'] = '新しいテンプレート';
 $_lang['template_no_tv'] = 'テンプレート変数は指定されていません。';
