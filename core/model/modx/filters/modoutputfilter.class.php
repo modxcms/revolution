@@ -292,10 +292,10 @@ class modOutputFilter {
                         $str = html_entity_decode($output,null,$encoding);
                         if ($usemb) {
                             if (mb_strlen($str,$encoding) > $limit) {
-                                $output = mb_substr($str,0,$limit,$encoding).'...';
+                                $output = mb_substr($str,0,$limit,$encoding).'&#8230;';
                             }
                         } else if (strlen($str) > $limit) {
-                            $output = substr($str,0,$limit).'...';
+                            $output = substr($str,0,$limit).'&#8230;';
                         }
                         /* convert special chars back */
                         $output = htmlspecialchars($output,null,$encoding);
