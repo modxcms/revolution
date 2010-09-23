@@ -276,20 +276,18 @@ class modOutputFilter {
                         /* default: 100 */
                         $limit= intval($m_val) ? intval($m_val) : 100;
                         /* ensure that filter correctly counts special chars */
-                        $str = html_entity_decode($output,null,$encoding);
+                        $str = html_entity_decode($output,ENT_COMPAT,$encoding);
                         if ($usemb) {
                             $output= mb_substr($str,0,$limit,$encoding);
                         } else {
                             $output= substr($str,0,$limit);
                         }
-                        /* convert special chars back */
-                        $output = htmlspecialchars($output);
                         break;
                     case 'ellipsis':
                         $limit= intval($m_val) ? intval($m_val) : 100;
                     
                         /* ensure that filter correctly counts special chars */
-                        $str = html_entity_decode($output,null,$encoding);
+                        $str = html_entity_decode($output,ENT_COMPAT,$encoding);
                         if ($usemb) {
                             if (mb_strlen($str,$encoding) > $limit) {
                                 $output = mb_substr($str,0,$limit,$encoding).'&#8230;';
@@ -297,8 +295,6 @@ class modOutputFilter {
                         } else if (strlen($str) > $limit) {
                             $output = substr($str,0,$limit).'&#8230;';
                         }
-                        /* convert special chars back */
-                        $output = htmlspecialchars($output,null,$encoding);
                         break;
                     /* #####  Special functions */
 
