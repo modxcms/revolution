@@ -368,17 +368,23 @@ MODx.panel.WebLink = function(config) {
 Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
     initialized: false
     ,defaultClassKey: 'modWebLink'
+    ,rteLoaded: false
     ,setup: function() {
-        if (!this.initialized) { this.getForm().setValues(this.config.record); }
-        if (!Ext.isEmpty(this.config.record.pagetitle)) {
-            Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('weblink')+': '+this.config.record.pagetitle+'</h2>');
-        }
-        this.defaultClassKey = this.config.record.class_key || 'modWebLink';
-        if (MODx.config.use_editor == 1 && !this.rteLoaded) {
-            if (MODx.loadRTE && !this.rteLoaded) {
-                MODx.loadRTE();
+        if (!this.initialized) {
+            this.getForm().setValues(this.config.record);
+            if (!Ext.isEmpty(this.config.record.pagetitle)) {
+                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('weblink')+': '+this.config.record.pagetitle+'</h2>');
             }
-            this.rteLoaded = true;
+            this.defaultClassKey = this.config.record.class_key || 'modWebLink';
+        }
+        if (MODx.config.use_editor == 1 && !this.rteLoaded) {
+            if (!this.rteLoaded) {
+                if (MODx.loadRTE) { MODx.loadRTE(); }
+                this.rteLoaded = true;
+            } else if (this.rteLoaded) {
+                if (MODx.unloadRTE) { MODx.unloadRTE(); }
+                this.rteLoaded = false;
+            }
         }
         this.fireEvent('ready',this.config.record);
         this.initialized = true;
@@ -415,13 +421,17 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
         }
         Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
     }
-    
+
+
     ,templateWarning: function() {
         var t = Ext.getCmp('modx-resource-template');
         if (!t) { return false; }
-        if(t.getValue() != t.originalValue) {
+        if(t.getValue() !== t.originalValue) {
             Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
                 if (e == 'yes') {
+                    if (MODx.unloadTVRTE) {
+                        MODx.unloadTVRTE();
+                    }
                     var tvpanel = Ext.getCmp('modx-panel-resource-tv');
                     if(tvpanel && tvpanel.body) {
                         this.tvum = tvpanel.body.getUpdater();
@@ -429,12 +439,16 @@ Ext.extend(MODx.panel.WebLink,MODx.FormPanel,{
                             url: 'index.php?a='+MODx.action['resource/tvs']
                             ,params: {
                                 class_key: this.config.record.class_key
-                                ,resource: this.config.resource
+                                ,resource: (this.config.resource ? this.config.resource : 0)
                                 ,template: t.getValue()
                             }
                             ,discardUrl: true
                             ,scripts: true
                             ,nocache: true
+                            ,callback: function(el) {
+                                tvpanel.fireEvent('load');
+                            }
+                            ,scope: this
                         });
                     }
                     t.originalValue = t.getValue();
