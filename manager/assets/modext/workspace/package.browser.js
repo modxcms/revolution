@@ -76,6 +76,7 @@ MODx.panel.PackageBrowser = function(config) {
             },{
                 id: 'modx-package-browser-thumb-view'
                 ,border: false
+                ,hidden: true
                 ,autoHeight: true
                 ,layout: 'column'
                 ,items: [{
@@ -270,6 +271,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
             }
         });
         g.getBottomToolbar().changePage(1);
+        Ext.getCmp('modx-combo-package-browser-sort').setWidth(300);
         Ext.getCmp('modx-pbr-search-fld').setValue('');
         return true;
     }
@@ -412,18 +414,8 @@ MODx.grid.PackageBrowserGrid = function(config) {
             ,width: 300
             ,hideMode: 'offsets'
             ,listeners: {
-                'select': {fn:function(cb,rec,idx) {
-                    var v = cb.getValue();
-                    var s = this.getStore();
-                    s.removeAll();
-                    s.setBaseParam('sorter',v);
-                    s.load({
-                        params: {
-                            sorter: v
-                        }
-                    });
-                    this.getBottomToolbar().changePage(1);
-                },scope:this}
+                'select': {fn:this.changeSort,scope:this}
+                ,'change': {fn:this.changeSort2,scope:this}
             }
         }]
     });
@@ -467,6 +459,31 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
             ,'</tpl></div>'
         );
         this.detailsTpl.compile();
+    }
+
+    ,changeSort: function(cb,rec,idx) {
+        var v = cb.getValue();
+        var s = this.getStore();
+        s.removeAll();
+        s.setBaseParam('sorter',v);
+        s.load({
+            params: {
+                sorter: v
+            }
+        });
+        this.getBottomToolbar().changePage(1);
+    }
+    ,changeSort2: function(cb,nv,ov) {
+        var v = cb.getValue();
+        var s = this.getStore();
+        s.removeAll();
+        s.setBaseParam('sorter',v);
+        s.load({
+            params: {
+                sorter: v
+            }
+        });
+        this.getBottomToolbar().changePage(1);
     }
     
     ,btnclick: function(g,rec,a,ri,ci) {
@@ -522,8 +539,7 @@ Ext.reg('modx-package-browser-grid',MODx.grid.PackageBrowserGrid);
 MODx.combo.PackageBrowserSort = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        xtype: 'combo'
-        ,store: new Ext.data.ArrayStore({
+        store: new Ext.data.ArrayStore({
             fields: ['d','v']
             ,data : [['','']
                 ,[_('alphabetically'),'alpha']
@@ -540,7 +556,7 @@ MODx.combo.PackageBrowserSort = function(config) {
         ,editable: false
         ,triggerAction: 'all'
         ,typeAhead: false
-        ,selectOnFocus: true
+        ,selectOnFocus: false
     });
     MODx.combo.PackageBrowserSort.superclass.constructor.call(this,config);
 };

@@ -34,7 +34,7 @@ MODx.panel.PackageDownload = function(config) {
             ,items: [{
                 id: 'modx-panel-package-info'
                 ,xtype: 'panel'
-                ,style: 'padding: ".5em"'
+                ,style: 'padding: 6px'
                 ,height: 270
                 ,autoScroll: true
                 ,html: ''

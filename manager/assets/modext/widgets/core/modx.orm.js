@@ -168,10 +168,8 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                 ,listeners: {
                     'success': {fn:function(r) {
                         var nd = this.getSelectedNode();
-                        console.log(r);
                         nd.setId(r.name);
                         nd.setText(r.name);
-                        console.log(nd);
                         this.markFormPanelDirty();
                     },scope:this}
                 }

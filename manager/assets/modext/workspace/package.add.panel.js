@@ -155,8 +155,6 @@ Ext.extend(MODx.panel.PDSelProv,MODx.panel.WizardPanel,{
             var t = Ext.getCmp('modx-package-browser-tree');
             if (t) {
                 t.getLoader().baseParams.provider = vs.provider;
-                t.refresh();
-                t.renderProviderInfo();
             }
             var g = Ext.getCmp('modx-package-browser-grid');
             if (g) {
@@ -165,6 +163,10 @@ Ext.extend(MODx.panel.PDSelProv,MODx.panel.WizardPanel,{
             }
 
             Ext.getCmp('modx-window-package-downloader').fireEvent('proceed','modx-pd-selpackage');
+            if (t) {
+                t.renderProviderInfo();
+                t.refresh();
+            }
             Ext.getCmp('modx-package-browser-view').show();
         }
     }
