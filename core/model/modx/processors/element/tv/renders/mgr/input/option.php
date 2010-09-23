@@ -25,7 +25,7 @@ while (list($item, $itemvalue) = each ($index_list)) {
     }
 
     $opts[] = array(
-        'value' => htmlspecialchars($itemvalue,ENT_COMPAT,'UTF-8'),
+        'value' => $itemvalue,
         'text' => htmlspecialchars($item,ENT_COMPAT,'UTF-8'),
         'checked' => $checked,
     );
