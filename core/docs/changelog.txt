@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.3-pl
 ====================================
+- Fixed bug where ?v=203pl is being added to content with .js in it, due to earlier commit to prevent js caching
 - Fixed issues with ellipsis/limit filters and special chars
 - [#MODX-2353] Fixed bugs with checkbox/radio TVs and complex values with HTML/quotes in them
 - Fixed some bugs with deleting a file in MODx.Browser in the actual view pane

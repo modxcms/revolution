@@ -323,7 +323,8 @@ class modManagerResponse extends modResponse {
         } else {
             foreach ($this->modx->sjscripts as &$scr) {
                 $pos = strpos($scr,'.js');
-                if ($pos) {
+                $pos2 = strpos($scr,'src="');
+                if ($pos && $pos2) {
                     $newUrl = substr($scr,0,$pos+3).'?v='.$versionPostFix.substr($scr,$pos+3,strlen($scr));
                     $scr = $newUrl;
                 }
