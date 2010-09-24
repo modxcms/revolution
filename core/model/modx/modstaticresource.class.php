@@ -134,7 +134,7 @@ class modStaticResource extends modResource {
                 }
                 $header= 'Content-Type: ' . $type;
                 if (!$this->ContentType->get('binary')) {
-                    $charset= $this->xpdo->context->getOption('modx_charset',null,'UTF-8');
+                    $charset= $this->xpdo->context->getOption('modx_charset','UTF-8');
                     $header .= '; charset=' . $charset;
                 }
                 header($header);

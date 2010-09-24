@@ -13,15 +13,15 @@ $context->prepare();
 $src = $modx->getOption('src',$scriptProperties,'');
 if (empty($src)) return '';
 
-$site_url = $context->getOption('site_url',null,MODX_SITE_URL);
-$base_url = $context->getOption('base_url',null,MODX_BASE_URL);
-$base_path = $context->getOption('base_path',null,MODX_BASE_PATH);
+$site_url = $context->getOption('site_url',MODX_SITE_URL);
+$base_url = $context->getOption('base_url',MODX_BASE_URL);
+$base_path = $context->getOption('base_path',MODX_BASE_PATH);
 $reps = array();
 
 if ($base_url != '/') $reps[] = $base_url;
 if ($site_url != '/') $reps[] = $site_url;
 $src = str_replace($reps,'',$src);
-$fileManagerPath = $context->getOption('filemanager_path',null,'');
+$fileManagerPath = $context->getOption('filemanager_path','');
 if (empty($fileManagerPath)) {
     $src = $base_path.$src;
 } else if (!empty($fileManagerPath)) {

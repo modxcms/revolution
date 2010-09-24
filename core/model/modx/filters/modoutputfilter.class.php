@@ -47,8 +47,8 @@ class modOutputFilter {
      * @param mixed $element The element to filter
      */
     public function filter(&$element) {
-        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->context->getOption('use_multibyte',null,false);
-        $encoding = $this->modx->context->getOption('modx_charset',null,'UTF-8');
+        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->context->getOption('use_multibyte',false);
+        $encoding = $this->modx->context->getOption('modx_charset','UTF-8');
 
         $output= & $element->_output;
         if (isset ($element->_properties['filter_commands'])) {

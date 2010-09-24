@@ -27,7 +27,7 @@ $modx->context->prepare();
 $allowedFileTypes = explode(',',$modx->context->getOption('upload_files'));
 $allowedFileTypes = array_merge(explode(',',$modx->context->getOption('upload_images')),explode(',',$modx->context->getOption('upload_media')),explode(',',$modx->context->getOption('upload_flash')),$allowedFileTypes);
 $allowedFileTypes = array_unique($allowedFileTypes);
-$maxFileSize = $modx->context->getOption('upload_maxsize',null,1048576);
+$maxFileSize = $modx->context->getOption('upload_maxsize',1048576);
 
 /* loop through each file and upload */
 foreach ($_FILES as $file) {

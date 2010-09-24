@@ -55,10 +55,10 @@ class modFileHandler {
     public function getBasePath($prependBasePath = false,$context = 'web') {
         $context = $this->modx->getObject('modContext',$context);
         $context->prepare();
-        $root = $context->getOption('filemanager_path',null,'');
+        $root = $context->getOption('filemanager_path','');
         if (empty($root)) {
             /* TODO: deprecated - remove this in 2.1 */
-            $root = $context->getOption('rb_base_dir',null,'');
+            $root = $context->getOption('rb_base_dir','');
         }
         /* expand placeholders */
         $root = str_replace(array(
@@ -86,10 +86,10 @@ class modFileHandler {
     public function getBaseUrl($context = 'web') {
         $context = $this->modx->getObject('modContext',$context);
         $context->prepare();
-        $fileManagerUrl = $context->getOption('filemanager_url',$scriptProperties,'');
+        $fileManagerUrl = $context->getOption('filemanager_url','');
         /* if none specified, automatically calculate */
         if (empty($fileManagerUrl)) {
-            $path = $context->getOption('filemanager_path',$scriptProperties,$context->getOption('rb_base_url',null,''));
+            $path = $context->getOption('filemanager_path',$context->getOption('rb_base_url',''));
             $basePath = $this->modx->getOption('base_path',null,MODX_BASE_PATH);
             if ($basePath != '/') $fileManagerUrl = str_replace($basePath,'',$path);
         }
@@ -336,7 +336,7 @@ class modFile extends modFileSystemResource {
      * @see modFileSystemResource.parseMode
      */
     protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->modx->context->getOption('new_file_permissions',null,'0644');
+        if (empty($mode)) $mode = $this->modx->context->getOption('new_file_permissions','0644');
         return parent::parseMode($mode);
     }
 
@@ -484,7 +484,7 @@ class modDirectory extends modFileSystemResource {
      * @see modFileSystemResource::parseMode
      */
     protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->modx->context->getOption('new_folder_permissions',null,'0755');
+        if (empty($mode)) $mode = $this->modx->context->getOption('new_folder_permissions','0755');
         return parent::parseMode($mode);
     }
 
