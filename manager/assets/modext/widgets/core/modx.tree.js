@@ -343,9 +343,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                 var f = false;
                 var sr;
                 for (i=0;i<s.length;i++) {
-                    if (s[i] == undefined) { delete s[i]; continue; }
+                    if (s[i] == undefined || s[i] == 'undefined') { s.splice(i,1); continue; }
                     sr = s[i].search(p);
-                    if (sr !== -1) { /* dont add if already in */
+                    if (sr !== -1 && s[sr]) { /* dont add if already in */
                         if (s[sr].length > s[i].length) {
                             f = true;
                         }
@@ -359,14 +359,17 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             s = s.remove(p);
             /* remove all children of node */
             for (i=0;i<s.length;i++) {
-                if (s[i] == undefined) { delete s[i]; continue; }
+                if (s[i] == undefined || s[i] == 'undefined') { s.splice(i,1); continue; }
                 if (s[i].search(p) !== -1) {
                     delete s[i];
                 }
             }
         }
+        /* clear out undefineds */
+        for (i=0;i<s.length;i++) {
+            if (s[i] == undefined || s[i] == 'undefined') { s.splice(i,1); continue; }
+        }
         Ext.state.Manager.set(this.treestate_id,s);
-        /*Ext.state.Manager.set(this.treestate_id,[]);*/
     }
     
     /**
