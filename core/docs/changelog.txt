@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.3-pl
 ====================================
+- [#MODX-2361] Ensure that a user in the Administrator group *always* has access to a Context when it is restricted in another user group
 - [#MODX-2357] Fixed bug that occurs when hiding a tab with FC rule that is the default active tab
 - [#MODX-2358] Fixed rare bug occurring with treestate in Chrome due to undefined variables in path
 - Fixed various issues with package management and the add new package button
