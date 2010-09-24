@@ -818,6 +818,7 @@ class modX extends xPDO {
      * page.
      */
     public function sendErrorPage($options = null) {
+        if (!is_array($options)) $options = array();
         $options= array_merge(
             array(
                 'response_code' => $this->getOption('error_page_header', $options,$this->context->getOption('error_page_header','HTTP/1.1 404 Not Found'))
