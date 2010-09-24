@@ -52,7 +52,7 @@ class modActionDom extends modAccessibleSimpleObject {
                 break;
             case 'tabVisible':
                 if (!$this->get('value')) {
-                    $rule = 'Ext.getCmp("'.$this->get('container').'").hideTabStripItem("'.$this->get('name').'");';
+                    $rule = 'MODx.hideTab("'.$this->get('container').'","'.$this->get('name').'");';
                 }
                 break;
             case 'tabNew':
