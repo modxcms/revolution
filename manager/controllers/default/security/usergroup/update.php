@@ -8,9 +8,7 @@
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('access_denied'));
 
 /* get usergroup */
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('usergroup_err_ns'));
 $usergroup = $modx->getObject('modUserGroup',$_REQUEST['id']);
-if ($usergroup == null) return $modx->error->failure($modx->lexicon('usergroup_err_nf'));
 
 /* register JS scripts */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.group.context.js');
