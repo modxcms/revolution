@@ -14,7 +14,7 @@ $username = $scriptProperties['username'];
 $givenPassword = $scriptProperties['password'];
 
 $rememberme= isset ($scriptProperties['rememberme']) ? ($scriptProperties['rememberme'] == 'on' || $scriptProperties['rememberme'] == true) : false;
-$lifetime= (integer) $modx->getOption('lifetime', $scriptProperties, $modx->getOption('session_cookie_lifetime', null, 0));
+$lifetime= (integer) $modx->getOption('lifetime', $scriptProperties, $modx->context->getOption('session_cookie_lifetime', null, 0));
 $loginContext= isset ($scriptProperties['login_context']) ? $scriptProperties['login_context'] : $modx->context->get('key');
 
 $onBeforeLoginParams = array(

@@ -66,7 +66,7 @@ class modContext extends modAccessibleObject {
      * @return mixed
      */
     public function getOption($k,$v = null) {
-        return $this->xpdo->getOption($k,$this->config,$v = null);
+        return $this->xpdo->getOption($k,$this->config,$v);
     }
 
     /**
@@ -202,7 +202,7 @@ class modContext extends modAccessibleObject {
                 $host= '';
                 if ($scheme !== -1 && $scheme !== '') {
                     if ($scheme === 1 || $scheme === 0) {
-                        $https_port= $this->xpdo->getOption('https_port',$config,443);
+                        $https_port= $this->getOption('https_port',$config,443);
                         $isSecure= ($_SERVER['SERVER_PORT'] == $https_port || (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'])=='on')) ? 1 : 0;
                         if ($scheme != $isSecure) {
                             $scheme = $isSecure ? 'http' : 'https';

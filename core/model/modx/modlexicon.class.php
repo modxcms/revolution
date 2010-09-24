@@ -138,7 +138,7 @@ class modLexicon {
     public function getCacheKey($namespace = 'core',$topic = 'default',$language = '') {
         if (empty($namespace)) $namespace = 'core';
         if (empty($topic)) $topic = 'default';
-        if (empty($language)) $language = $this->modx->getOption('cultureKey',null,'en');
+        if (empty($language)) $language = $this->modx->context->getOption('cultureKey',null,'en');
         return 'lexicon/'.$language.'/'.$namespace.'/'.$topic;
     }
 
@@ -157,9 +157,9 @@ class modLexicon {
         $topics = func_get_args(); /* allow for dynamic number of lexicons to load */
 
         if ($this->modx->context->get('key') == 'mgr') {
-            $defaultLanguage = $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en'));
+            $defaultLanguage = $this->modx->context->getOption('manager_language',null,$this->modx->context->getOption('cultureKey',null,'en'));
         } else {
-            $defaultLanguage = $this->modx->getOption('cultureKey',null,'en');
+            $defaultLanguage = $this->modx->context->getOption('cultureKey',null,'en');
         }
 
         foreach ($topics as $topicStr) {
@@ -212,10 +212,10 @@ class modLexicon {
      * @return array The loaded lexicon array.
      */
     public function loadCache($namespace = 'core', $topic = 'default', $language = '') {
-        if (empty($language)) $language = $this->modx->getOption('cultureKey',null,'en');
+        if (empty($language)) $language = $this->modx->context->getOption('cultureKey',null,'en');
         $key = $this->getCacheKey($namespace, $topic, $language);
-        $enableCache = ($namespace != 'core' && !$this->modx->getOption('cache_noncore_lexicon_topics',null,true)) ? false : true;
-        
+        $enableCache = ($namespace != 'core' && !$this->modx->context->getOption('cache_noncore_lexicon_topics',null,true)) ? false : true;
+
         $cached = $this->modx->cacheManager->get($key);
         if (!$enableCache || $cached == null) {
             $results= false;

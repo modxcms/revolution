@@ -68,7 +68,7 @@ class modResource extends modAccessibleSimpleObject {
                 }
             } else {
                 $this->_content= $this->getContent();
-                $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
+                $maxIterations= intval($this->xpdo->context->getOption('parser_max_iterations',null,10));
                 $this->xpdo->parser->processElementTags('', $this->_content, false, false, '[[', ']]', array(), $maxIterations);
                 $this->_processed= true;
             }
@@ -262,18 +262,18 @@ class modResource extends modAccessibleSimpleObject {
     public function cleanAlias($alias, array $options = array()) {
         /* setup the various options */
         $iconv = function_exists('iconv');
-        $mbext = function_exists('mb_strlen') && (boolean) $this->xpdo->getOption('use_multibyte', null, false);
-        $charset = strtoupper((string) $this->xpdo->getOption('modx_charset', $options, 'UTF-8'));
-        $delimiter = $this->xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
-        $delimiters = $this->xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');
-        $maxlength = (integer) $this->xpdo->getOption('friendly_alias_max_length', $options, 0);
-        $stripElementTags = (boolean) $this->xpdo->getOption('friendly_alias_strip_element_tags', $options, true);
-        $trimchars = $this->xpdo->getOption('friendly_alias_trim_chars', $options, '/.' . $delimiters);
-        $restrictchars = $this->xpdo->getOption('friendly_alias_restrict_chars', $options, 'pattern');
-        $restrictcharspattern = $this->xpdo->getOption('friendly_alias_restrict_chars_pattern', $options, '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/');
-        $lowercase = (boolean) $this->xpdo->getOption('friendly_alias_lowercase_only', $options, true);
-        $translit = $this->xpdo->getOption('friendly_alias_translit', $options, $iconv ? 'iconv' : 'none');
-        $translitClass = $this->xpdo->getOption('friendly_alias_translit_class', $options, 'translit.modTransliterate');
+        $mbext = function_exists('mb_strlen') && (boolean) $this->xpdo->context->getOption('use_multibyte', null, false);
+        $charset = strtoupper((string) $this->xpdo->context->getOption('modx_charset', $options, 'UTF-8'));
+        $delimiter = $this->xpdo->context->getOption('friendly_alias_word_delimiter', $options, '-');
+        $delimiters = $this->xpdo->context->getOption('friendly_alias_word_delimiters', $options, '-_');
+        $maxlength = (integer) $this->xpdo->context->getOption('friendly_alias_max_length', $options, 0);
+        $stripElementTags = (boolean) $this->xpdo->context->getOption('friendly_alias_strip_element_tags', $options, true);
+        $trimchars = $this->xpdo->context->getOption('friendly_alias_trim_chars', $options, '/.' . $delimiters);
+        $restrictchars = $this->xpdo->context->getOption('friendly_alias_restrict_chars', $options, 'pattern');
+        $restrictcharspattern = $this->xpdo->context->getOption('friendly_alias_restrict_chars_pattern', $options, '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/');
+        $lowercase = (boolean) $this->xpdo->context->getOption('friendly_alias_lowercase_only', $options, true);
+        $translit = $this->xpdo->context->getOption('friendly_alias_translit', $options, $iconv ? 'iconv' : 'none');
+        $translitClass = $this->xpdo->context->getOption('friendly_alias_translit_class', $options, 'translit.modTransliterate');
 
         /* strip html and optionally MODx element tags (stripped by default) */
         if ($this->xpdo instanceof modX) {
@@ -303,12 +303,13 @@ class modResource extends modAccessibleSimpleObject {
                 break;
             default:
                 /* otherwise look for a transliteration service class that will accept named transliteration tables */
-				if ($this->xpdo instanceof modX) {
-	                $translitClassPath = $this->xpdo->getOption('friendly_alias_translit_class_path', $options, $this->xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
-	                if ($this->xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
-	                    $alias = $this->xpdo->translit->translate($alias, $translit);
-	                }
-				}
+                if ($this->xpdo instanceof modX) {
+                    $translitClassPath = $this->xpdo->context->getOption('friendly_alias_translit_class_path', $options, $this->xpdo->context->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
+                    if ($this->xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
+                        $alias = $this->xpdo->translit->translate($alias, $translit);
+                    }
+                }
+                break;
         }
 
         /* restrict characters as configured */
@@ -413,7 +414,7 @@ class modResource extends modAccessibleSimpleObject {
             $lockedBy = $this->getLock();
             if (empty($lockedBy) || ($lockedBy == $user)) {
                 $this->xpdo->registry->locks->subscribe('/resource/');
-                $this->xpdo->registry->locks->send('/resource/', array(md5($this->get('id')) => $user), array('ttl' => $this->xpdo->getOption('lock_ttl', $options, 360)));
+                $this->xpdo->registry->locks->send('/resource/', array(md5($this->get('id')) => $user), array('ttl' => $this->xpdo->context->getOption('lock_ttl', $options, 360)));
                 $locked = true;
             } elseif ($lockedBy != $user) {
                 $locked = $lockedBy;

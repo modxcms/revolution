@@ -336,7 +336,7 @@ class modFile extends modFileSystemResource {
      * @see modFileSystemResource.parseMode
      */
     protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->modx->getOption('new_file_permissions',null,'0644');
+        if (empty($mode)) $mode = $this->modx->context->getOption('new_file_permissions',null,'0644');
         return parent::parseMode($mode);
     }
 
@@ -484,7 +484,7 @@ class modDirectory extends modFileSystemResource {
      * @see modFileSystemResource::parseMode
      */
     protected function parseMode($mode = '') {
-        if (empty($mode)) $mode = $this->modx->getOption('new_folder_permissions',null,'0755');
+        if (empty($mode)) $mode = $this->modx->context->getOption('new_folder_permissions',null,'0755');
         return parent::parseMode($mode);
     }
 
