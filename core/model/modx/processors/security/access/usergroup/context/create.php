@@ -79,4 +79,8 @@ if ($acl->save() == false) {
     return $modx->error->failure($modx->lexicon('access_context_err_save'));
 }
 
+if ($modx->getUser()) {
+    $modx->user->getAttributes(array(), '', true);
+}
+
 return $modx->error->success('',$acl);
