@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.3-pl
 ====================================
+- [#MODX-2369] Fixed issue with modLinkTag and output filters where the filter commands were included in the URL
 - [#MODX-2350] Ensure that new Contexts always have Admin and Resource policy for Admin user group assigned to them
 - [#MODX-2352] Ensure that Context Settings appropriately override System Settings in core-level parsing where a Context is existent (example: site_unavailable_page)
 - [#MODX-2356] Ensure that OnResourceDelete and OnResourceUndelete events in update processors fire at correct times, after save()

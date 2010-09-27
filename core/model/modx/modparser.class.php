@@ -944,7 +944,7 @@ class modLinkTag extends modTag {
                             if (is_numeric($scheme)) $scheme = (integer) $scheme;
                         }
                         foreach ($this->_properties as $propertyKey => $propertyValue) {
-                            if (in_array($propertyKey, array('context', 'scheme'))) continue;
+                            if (in_array($propertyKey, array('context', 'scheme','filter_commands','filter_modifiers'))) continue;
                             $qs[]= "{$propertyKey}={$propertyValue}";
                         }
                         if ($qs= implode('&', $qs)) {
