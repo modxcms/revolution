@@ -98,23 +98,26 @@ if ($plugin->save() == false) {
 
 /* change system events */
 if (isset($scriptProperties['events'])) {
-    $_EVENTS = $modx->fromJSON($scriptProperties['events']);
-    foreach ($_EVENTS as $id => $event) {
-        $pe = $modx->getObject('modPluginEvent',array(
+    $pluginEvents = $modx->fromJSON($scriptProperties['events']);
+    foreach ($pluginEvents as $id => $event) {
+        $pluginEvent = $modx->getObject('modPluginEvent',array(
             'pluginid' => $plugin->get('id'),
             'event' => $event['name'],
         ));
         if ($event['enabled']) {
-            if (!$pe) {
-                $pe = $modx->newObject('modPluginEvent');
-                $pe->set('pluginid',$plugin->get('id'));
-                $pe->set('event',$event['name']);
+            if ($pluginEvent) { /* for some reason existing plugin events need to be removed before the propertyset field can be edited. doing so here. */
+                $pluginEvent->remove();
             }
-            $pe->set('priority',$event['priority']);
-            $pe->set('propertyset',$event['propertyset']);
-            $pe->save();
-        } elseif ($pe) {
-            $pe->remove();
+            $pluginEvent = $modx->newObject('modPluginEvent');
+            $pluginEvent->set('pluginid',$plugin->get('id'));
+            $pluginEvent->set('event',$event['name']);
+            $pluginEvent->set('priority',(int)$event['priority']);
+            $pluginEvent->set('propertyset',(int)$event['propertyset']);
+            if (!$pluginEvent->save()) {
+                $modx->log(modX::LOG_LEVEL_ERROR,'Could not save plugin event: '.print_r($pluginEvent->toArray(),true));
+            }
+        } elseif ($pluginEvent) {
+            $pluginEvent->remove();
         }
     }
 }

@@ -1230,7 +1230,7 @@ class modX extends xPDO {
         if ($this->eventMap === null)
             $this->_initEventMap($this->context->get('key'));
         if (!isset ($this->eventMap[$eventName])) {
-            $this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
+            //$this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
             return false;
         }
         $results= array ();
