@@ -5,6 +5,7 @@
  * @package modx
  * @subpackage processors.system
  */
+if (!isset($modx)) die();
 $ctx = !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $context = $modx->getObject('modContext',$ctx);
 $context->prepare();
