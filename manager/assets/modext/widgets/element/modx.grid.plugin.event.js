@@ -55,7 +55,16 @@ MODx.grid.PluginEvent = function(config) {
             ,dataIndex: 'propertyset'
             ,id: 'modx-'+this.ident+'-col-propertyset'
             ,width: 180
-            ,editor: { xtype: 'modx-combo-property-set' ,renderer: true }
+            ,editor: { 
+                xtype: 'modx-combo-property-set'
+                ,renderer: true
+                ,baseParams: {
+                    action: 'getList'
+                    ,showAssociated: true
+                    ,elementId: config.plugin
+                    ,elementType: 'modPlugin'
+                }
+            }
             ,sortable: true
         },{
             header: _('priority')
@@ -101,17 +110,22 @@ Ext.extend(MODx.grid.PluginEvent,MODx.grid.Grid,{
         });
     }
     ,*/updateEvent: function(btn,e) {
-        this.loadWindow(btn,e,{
-            xtype: 'modx-window-plugin-event-update'
-            ,record: this.menu.record
-            ,plugin: this.config.plugin
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.refresh();
-                    this.fireEvent('updateEvent',r);
-                },scope:this}
-            }
-        });
+        var r = this.menu.record;
+        if (!this.windows.peu) {
+            this.windows.peu = MODx.load({
+                xtype: 'modx-window-plugin-event-update'
+                ,record: r
+                ,plugin: this.config.plugin
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        this.refresh();
+                        this.fireEvent('updateEvent',r);
+                    },scope:this}
+                }
+            });
+        }
+        this.windows.peu.setValues(r);
+        this.windows.peu.show(e.target);
     }
 });
 Ext.reg('modx-grid-plugin-event',MODx.grid.PluginEvent);
