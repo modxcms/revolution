@@ -28,6 +28,11 @@ MODx.panel.ImageTV = function(config) {
                 'select': {fn:function(data) {
                     this.fireEvent('select',data);
                 },scope:this}
+                ,'change': {fn:function(cb,nv) {
+                    this.fireEvent('select',{
+                        relativeUrl: nv
+                    });
+                },scope:this}
             }
         }] 
     });

@@ -4,7 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.3-pl
 ====================================
-- [#MODX-364] Fix regClient* methods in cacheable Snippets on cacheable Resources
+- [#MODX-2373] Fixed imageTV issue where thumbnail was not cleared on data clearing
+- [#MODX-364] Fixed regClient* methods in cacheable Snippets on cacheable Resources
 - [#MODX-2370] Fixed issue with saving property sets on plugin events
 - [#MODX-2369] Fixed issue with modLinkTag and output filters where the filter commands were included in the URL
 - [#MODX-2350] Ensure that new Contexts always have Admin and Resource policy for Admin user group assigned to them
