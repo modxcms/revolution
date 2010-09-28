@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.3-pl
 ====================================
+- [#MODX-2374] Fixed issue where children nodes were not being moved with parent into new context
 - [#MODX-2373] Fixed imageTV issue where thumbnail was not cleared on data clearing
 - [#MODX-364] Fixed regClient* methods in cacheable Snippets on cacheable Resources
 - [#MODX-2370] Fixed issue with saving property sets on plugin events

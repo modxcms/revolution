@@ -20,6 +20,7 @@ $modx->invokeEvent('OnResourceBeforeSort',array(
 ));
 
 /* readjust cache */
+$dontChangeParents = array();
 foreach ($nodes as $ar_node) {
     if (!is_array($ar_node) || empty($ar_node['id'])) continue;
     $node = $modx->getObject('modResource',$ar_node['id']);
@@ -27,6 +28,7 @@ foreach ($nodes as $ar_node) {
 
     if (!$node->checkPolicy('save')) continue;
     if (empty($ar_node['context'])) continue;
+    if (in_array($ar_node['parent'],$dontChangeParents)) continue;
 
     $old_parent_id = $node->get('parent');
 
@@ -42,8 +44,9 @@ foreach ($nodes as $ar_node) {
     }
     $old_context_key = $node->get('context_key');
     if ($old_context_key != $ar_node['context'] && !empty($ar_node['context'])) {
+        changeChildContext($node, $ar_node['context']); /* recursively move children to new context */
         $node->set('context_key',$ar_node['context']);
-        changeChildContext($node, $ar_node['context']);
+        $dontChangeParents[] = $node->get('id'); /* prevent children from reverting back */
     }
     $node->set('menuindex',$ar_node['order']);
     $node->save();
@@ -77,10 +80,10 @@ function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0) {
     }
 }
 
-function changeChildContext(&$node, $context) {
+function changeChildContext($node, $context) {
     foreach ($node->getMany('Children') as $child) {
-        $child->set('context_key', $context);
         changeChildContext($child, $context);
+        $child->set('context_key', $context);
         $child->save();
     }
 }
