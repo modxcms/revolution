@@ -12,6 +12,14 @@ $resourceDir= strtolower(substr($resourceClass, 3));
 
 $resourceId = isset($_REQUEST['resource']) ? intval($_REQUEST['resource']) : 0;
 
+$onResourceTVFormPrerender = $modx->invokeEvent('OnResourceTVFormPrerender',array(
+    'resource' => $resourceId,
+));
+if (is_array($onResourceTVFormPrerender)) {
+    $onResourceTVFormPrerender = implode('',$onResourceTVFormPrerender);
+}
+$modx->smarty->assign('OnResourceTVFormPrerender',$onResourceTVFormPrerender);
+
 $delegateView= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
 if (file_exists($delegateView)) {
     $overridden= include_once ($delegateView);
