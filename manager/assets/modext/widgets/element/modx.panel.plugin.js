@@ -92,7 +92,7 @@ MODx.panel.Plugin = function(config) {
                 ,name: 'clearCache'
                 ,id: 'modx-plugin-clear-cache'
                 ,inputValue: 1
-                ,checked: config.record.clearCache || true
+                ,checked: Ext.isDefined(config.record.clearCache) || true
             },{
                 html: MODx.onPluginFormRender
                 ,border: false

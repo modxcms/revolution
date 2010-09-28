@@ -84,7 +84,7 @@ MODx.panel.Chunk = function(config) {
                 ,name: 'clearCache'
                 ,id: 'modx-chunk-clear-cache'
                 ,inputValue: 1
-                ,checked: config.record.clearCache || 0
+                ,checked: Ext.isDefined(config.record.clearCache) || true
             },{
                 html: MODx.onChunkFormRender
                 ,border: false

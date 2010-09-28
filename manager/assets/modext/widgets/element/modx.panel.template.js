@@ -86,7 +86,7 @@ MODx.panel.Template = function(config) {
                 ,name: 'clearCache'
                 ,id: 'modx-template-clear-cache'
                 ,inputValue: 1
-                ,checked: config.record.clearCache || true
+                ,checked: Ext.isDefined(config.record.clearCache) || true
             },{
                 html: MODx.onTempFormRender
                 ,border: false
