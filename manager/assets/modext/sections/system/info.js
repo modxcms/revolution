@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'modx-page-system-info' });
-});
-
 /**
  * Loads the system info page
  * 
@@ -11,14 +7,15 @@ Ext.onReady(function() {
  * @xtype modx-page-system-info
  */
 MODx.page.SystemInfo = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-            components: [{
-                xtype: 'modx-panel-system-info'
-                ,renderTo: 'modx-panel-system-info-div'
-            }]
-	});
-	MODx.page.SystemInfo.superclass.constructor.call(this,config);
+    config = config || {};
+    Ext.applyIf(config,{
+        components: [{
+            xtype: 'modx-panel-system-info'
+            ,renderTo: 'modx-panel-system-info-div'
+            ,data: config.data
+        }]
+    });
+    MODx.page.SystemInfo.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.SystemInfo,MODx.Component);
 Ext.reg('modx-page-system-info',MODx.page.SystemInfo);
@@ -30,6 +27,97 @@ var viewPHPInfo = function() {
 
 MODx.panel.SystemInfo = function(config) {
     config = config || {};
+
+    var info = [{
+        html: '<p>'+_('sysinfo_desc')+'</p>'
+        ,id: 'modx-sysinfo-msg'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('modx_version')
+        ,name: 'modx_version'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('version_codename')
+        ,name: 'code_name'
+    },{
+        html: '<a href="javascript:;" onclick="viewPHPInfo();return false;">'+_('view')+'</a>'
+        ,fieldLabel: 'phpinfo()'
+        ,name: 'phpinfo'
+        ,value: ''
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('servertime')
+        ,name: 'servertime'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('localtime')
+        ,name: 'localtime'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('serveroffset')
+        ,name: 'serveroffset'
+    },{
+        html: '<hr />'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('extjs_version')
+        ,name: 'extjs_version'
+        ,value: '3.2.1'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('smarty_version')
+        ,name: 'smarty_version'
+        ,value: '2.6.19'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('phpmailer_version')
+        ,name: 'phpmailer_version'
+        ,value: '2.0.4'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('magpie_version')
+        ,name: 'magpie_version'
+        ,value: '0.7a'
+    },{
+        html: '<hr />'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('database_type')
+        ,name: 'database_type'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('database_version')
+        ,name: 'database_version'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('database_charset')
+        ,name: 'database_charset'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('database_name')
+        ,name: 'database_name'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('database_server')
+        ,name: 'database_server'
+    },{
+        xtype: 'statictextfield'
+        ,fieldLabel: _('table_prefix')
+        ,name: 'table_prefix'
+    }];
+    if (config.data) {
+        for (var c in config.data) {
+            info.push({html: '<hr />'});
+            for (var d in config.data[c]) {
+                info.push({
+                    xtype: 'statictextfield'
+                    ,fieldLabel: d
+                    ,name: d
+                    ,value: config.data[c][d]
+                });
+            }
+        }
+    }
     Ext.applyIf(config,{
         id: 'modx-panel-system-info'
         ,url: MODx.config.connectors_url+'system/index.php'
@@ -45,85 +133,9 @@ MODx.panel.SystemInfo = function(config) {
             ,bodyStyle: 'padding: 15px;'
             ,layout: 'form'
             ,id: 'modx-plugin-form'
-            ,labelWidth: 150
+            ,labelWidth: 230
             ,defaults: { border: false ,msgTarget: 'side', anchor: '97%'}
-            ,items: [{
-                html: '<p>'+_('sysinfo_desc')+'</p>'
-                ,id: 'modx-sysinfo-msg'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('modx_version')
-                ,name: 'modx_version'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('version_codename')
-                ,name: 'code_name'
-            },{
-                html: '<a href="javascript:;" onclick="viewPHPInfo();return false;">'+_('view')+'</a>'
-                ,fieldLabel: 'phpinfo()'
-                ,name: 'phpinfo'
-                ,value: ''
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('servertime')
-                ,name: 'servertime'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('localtime')
-                ,name: 'localtime'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('serveroffset')
-                ,name: 'serveroffset'
-            },{
-                html: '<hr />'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('extjs_version')
-                ,name: 'extjs_version'
-                ,value: '3.2.1'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('smarty_version')
-                ,name: 'smarty_version'
-                ,value: '2.6.19'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('phpmailer_version')
-                ,name: 'phpmailer_version'
-                ,value: '2.0.4'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('magpie_version')
-                ,name: 'magpie_version'
-                ,value: '0.7a'
-            },{
-                html: '<hr />'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('database_type')
-                ,name: 'database_type'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('database_version')
-                ,name: 'database_version'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('database_charset')
-                ,name: 'database_charset'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('database_name')
-                ,name: 'database_name'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('database_server')
-                ,name: 'database_server'
-            },{
-                xtype: 'statictextfield'
-                ,fieldLabel: _('table_prefix')
-                ,name: 'table_prefix'
-            }]
+            ,items: info
         },{
             title: _('db_header')
             ,bodyStyle: 'padding: 15px;'
