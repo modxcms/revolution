@@ -21,7 +21,13 @@ $setting = $modx->getObject('modContextSetting',array(
     'key' => $scriptProperties['key'],
     'context_key' => $scriptProperties['context_key'],
 ));
+/* due to a bug in xPDO, need to remove first */
+if ($setting) { $setting->remove(); }
+$setting = $modx->newObject('modContextSetting');
+$setting->set('key',$scriptProperties['key']);
+$setting->set('context_key',$scriptProperties['context_key']);
 $setting->set('value',$scriptProperties['value']);
+
 
 if ($setting->save() == false) {
     return $modx->error->failure($modx->lexicon('setting_err_save'));

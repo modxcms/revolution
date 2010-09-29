@@ -243,7 +243,12 @@
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
         <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" attributes="ON UPDATE CURRENT_TIMESTAMP" />
-        
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+            <column key="context_key" collation="A" null="false" />
+            <column key="key" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Context" class="modContext" key="context_key" local="context_key" foreign="key" cardinality="one" owner="foreign" />
         <aggregate alias="SystemSetting" class="modSystemSetting" key="key" local="key" foreign="key" cardinality="one" owner="foreign" />
     </object>
