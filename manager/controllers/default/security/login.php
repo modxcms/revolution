@@ -9,7 +9,8 @@ $modx->lexicon->load('login');
 $modx->smarty->assign('_lang',$modx->lexicon->fetch());
 
 if (isset($_REQUEST['modahsh'])) {
-    $modx->smarty->assign('modahsh',$_REQUEST['modahsh']);
+    $hash = $modx->sanitizeString($_REQUEST['modahsh']);
+    $modx->smarty->assign('modahsh',$hash);
 }
 if (!empty($_SERVER['REQUEST_URI'])) {
     $modx->smarty->assign('returnUrl',$_SERVER['REQUEST_URI']);
