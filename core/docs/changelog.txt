@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.3-pl (September 30, 2010)
 ====================================
+- Fixed error in modResource::cleanAlias when context var is not available
 - [#MODX-2376] Fixed issues with updating settings on the context page
 - Fixed security issue with login screen and resource TV controller that allowed html injection
 - Fixed issue where clear cache checkbox isn't checked on Element pages
