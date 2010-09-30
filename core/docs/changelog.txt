@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODx Revolution 2.0.3-pl
+MODx Revolution 2.0.3-pl (September 30, 2010)
 ====================================
 - [#MODX-2376] Fixed issues with updating settings on the context page
 - Fixed security issue with login screen and resource TV controller that allowed html injection
