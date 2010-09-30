@@ -139,11 +139,13 @@ $c->where(array(
 $fcDt = $modx->getObject('modActionDom',$c);
 if ($fcDt) {
     $p = $parent ? $parent->get('id') : 0;
-    if ($fcDt->get('constraint_field') == 'parent' && $p == $fcDt->get('constraint')) {
+    $constraintField = $fcDt->get('constraint_field');
+    if ($constraintField == 'parent' && $p == $fcDt->get('constraint')) {
+        $default_template = $fcDt->get('value');
+    } else if (empty($constraintField)) {
         $default_template = $fcDt->get('value');
     }
 }
-
 
 $modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
@@ -180,4 +182,5 @@ Ext.onReady(function() {
 </script>');
 
 
+$this->checkFormCustomizationRules($parent != null ? $parent : null);
 return $modx->smarty->fetch('resource/create.tpl');

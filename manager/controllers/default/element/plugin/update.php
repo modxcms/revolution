@@ -60,7 +60,6 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.grid.element.properties.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.grid.plugin.event.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.plugin.js');
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/plugin/common.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/plugin/update.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
@@ -85,4 +84,6 @@ $onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array(
 ));
 if (is_array($onPluginFormPrerender)) $onPluginFormPrerender = implode('',$onPluginFormPrerender);
 $modx->smarty->assign('onPluginFormPrerender',$onPluginFormPrerender);
+
+$this->checkFormCustomizationRules($plugin);
 return $modx->smarty->fetch('element/plugin/update.tpl');

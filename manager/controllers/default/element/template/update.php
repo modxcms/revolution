@@ -15,8 +15,6 @@ if ($template->get('locked') && !$modx->hasPermission('edit_locked')) {
     return $modx->error->failure($modx->lexicon('template_err_locked'));
 }
 
-$template->category = $template->getOne('Category');
-
 /* invoke OnTempFormRender event */
 $onTempFormRender = $modx->invokeEvent('OnTempFormRender',array(
     'id' => $template->get('id'),
@@ -84,4 +82,5 @@ if (is_array($onTempFormPrerender)) $onTempFormPrerender = implode('',$onTempFor
 $modx->smarty->assign('onTempFormPrerender',$onTempFormPrerender);
 
 
+$this->checkFormCustomizationRules($template);
 return $modx->smarty->fetch('element/template/update.tpl');

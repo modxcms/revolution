@@ -11,7 +11,7 @@
  */
 $_lang['categories'] = 'カテゴリー';
 $_lang['category_confirm_delete'] = 'カテゴリーを削除しますか？このカテゴリーに属している全てのエレメントは「カテゴリーなし」に分類されます。';
-$_lang['category_create'] = 'カテゴリーの作成';
+$_lang['category_create'] = 'カテゴリーを作成';
 $_lang['category_err_create'] = 'カテゴリーの作成中にエラーが発生しました。';
 $_lang['category_err_not_found'] = 'カテゴリーが見つかりませんでした。';
 $_lang['category_err_nf'] = 'カテゴリーが見つかりませんでした。.';

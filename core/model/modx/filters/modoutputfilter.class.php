@@ -47,8 +47,8 @@ class modOutputFilter {
      * @param mixed $element The element to filter
      */
     public function filter(&$element) {
-        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte',null,false);
-        $encoding = $this->modx->getOption('modx_charset',null,'UTF-8');
+        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->context->getOption('use_multibyte',false);
+        $encoding = $this->modx->context->getOption('modx_charset','UTF-8');
 
         $output= & $element->_output;
         if (isset ($element->_properties['filter_commands'])) {
@@ -276,29 +276,25 @@ class modOutputFilter {
                         /* default: 100 */
                         $limit= intval($m_val) ? intval($m_val) : 100;
                         /* ensure that filter correctly counts special chars */
-                        $str = html_entity_decode($output,null,$encoding);
+                        $str = html_entity_decode($output,ENT_COMPAT,$encoding);
                         if ($usemb) {
                             $output= mb_substr($str,0,$limit,$encoding);
                         } else {
                             $output= substr($str,0,$limit);
                         }
-                        /* convert special chars back */
-                        $output = htmlspecialchars($output);
                         break;
                     case 'ellipsis':
                         $limit= intval($m_val) ? intval($m_val) : 100;
                     
                         /* ensure that filter correctly counts special chars */
-                        $str = html_entity_decode($output,null,$encoding);
+                        $str = html_entity_decode($output,ENT_COMPAT,$encoding);
                         if ($usemb) {
                             if (mb_strlen($str,$encoding) > $limit) {
-                                $output = mb_substr($str,0,$limit,$encoding).'...';
+                                $output = mb_substr($str,0,$limit,$encoding).'&#8230;';
                             }
                         } else if (strlen($str) > $limit) {
-                            $output = substr($str,0,$limit).'...';
+                            $output = substr($str,0,$limit).'&#8230;';
                         }
-                        /* convert special chars back */
-                        $output = htmlspecialchars($output,null,$encoding);
                         break;
                     /* #####  Special functions */
 

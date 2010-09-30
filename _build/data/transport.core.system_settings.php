@@ -1103,7 +1103,7 @@ $settings['unauthorized_page']->fromArray(array (
 $settings['upload_files']= $xpdo->newObject('modSystemSetting');
 $settings['upload_files']->fromArray(array (
   'key' => 'upload_files',
-  'value' => 'txt,php,html,htm,xml,js,css,cache,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,xls,txt',
+  'value' => 'txt,html,htm,xml,js,css,cache,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,xls,txt',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',
@@ -1258,7 +1258,6 @@ $settings['which_element_editor']->fromArray(array (
   'area' => 'editor',
   'editedon' => null,
 ), '', true, true);
-return $settings;
 $settings['xhtml_urls']= $xpdo->newObject('modSystemSetting');
 $settings['xhtml_urls']->fromArray(array (
   'key' => 'xhtml_urls',
@@ -1268,3 +1267,4 @@ $settings['xhtml_urls']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+return $settings;

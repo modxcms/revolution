@@ -56,4 +56,5 @@ if (is_array($onTempFormPrerender)) $onTempFormPrerender = implode('',$onTempFor
 $modx->smarty->assign('onTempFormPrerender',$onTempFormPrerender);
 
 /* display template */
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('element/template/create.tpl');

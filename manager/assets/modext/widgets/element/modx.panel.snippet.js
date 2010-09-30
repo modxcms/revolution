@@ -84,7 +84,7 @@ MODx.panel.Snippet = function(config) {
                 ,name: 'clearCache'
                 ,id: 'modx-snippet-clear-cache'
                 ,inputValue: 1
-                ,checked: config.record.clearCache || 1
+                ,checked: Ext.isDefined(config.record.clearCache) || true
             },{
                 html: MODx.onSnipFormRender
                 ,border: false

@@ -26,7 +26,7 @@ $_lang['login_message'] = 'MODxへようこそ。ユーザー名とパスワー�
 $_lang['login_modx_support'] = '<p>Supported By:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>The MODx Community</strong></a></p>';
 $_lang['login_password'] = 'パスワード：';
 $_lang['login_password_reset_act_sent'] = 'パスワードを再発行し登録されているメールアドレスへ送信しました。メールを確認してください。';
-$_lang['login_remember'] = 'Remember me';
+$_lang['login_remember'] = 'ログイン情報を記憶';
 $_lang['login_send_activation_email'] = '有効化メールを送信する';
 $_lang['login_title'] = 'MODx CMF Manager Login';
 $_lang['login_user_err_nf_email'] = '登録されていないメールアドレスです。正しいメールアドレスを入力してください。';

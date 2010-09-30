@@ -2,6 +2,41 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODx Revolution 2.0.3-pl
+====================================
+- [#MODX-2376] Fixed issues with updating settings on the context page
+- Fixed security issue with login screen and resource TV controller that allowed html injection
+- Fixed issue where clear cache checkbox isn't checked on Element pages
+- [#MODX-2370] Fixed various bugs with plugin event association on plugin page
+- [#MODX-1823] Improved the System Info panel by extracting data from phpinfo()
+- [#MODX-2362] Added missing OnResourceTVFormPrerender event
+- [#MODX-2374] Fixed issue where children nodes were not being moved with parent into new context
+- [#MODX-2373] Fixed imageTV issue where thumbnail was not cleared on data clearing
+- [#MODX-364] Fixed regClient* methods in cacheable Snippets on cacheable Resources
+- [#MODX-2370] Fixed issue with saving property sets on plugin events
+- [#MODX-2369] Fixed issue with modLinkTag and output filters where the filter commands were included in the URL
+- [#MODX-2350] Ensure that new Contexts always have Admin and Resource policy for Admin user group assigned to them
+- [#MODX-2352] Ensure that Context Settings appropriately override System Settings in core-level parsing where a Context is existent (example: site_unavailable_page)
+- [#MODX-2356] Ensure that OnResourceDelete and OnResourceUndelete events in update processors fire at correct times, after save()
+- [#MODX-2361] Ensure that a user in the Administrator group *always* has access to a Context when it is restricted in another user group
+- [#MODX-2357] Fixed bug that occurs when hiding a tab with FC rule that is the default active tab
+- [#MODX-2358] Fixed rare bug occurring with treestate in Chrome due to undefined variables in path
+- Fixed various issues with package management and the add new package button
+- Fixed bug where ?v=203pl is being added to content with .js in it, due to earlier commit to prevent js caching
+- Fixed issues with ellipsis/limit filters and special chars
+- [#MODX-2353] Fixed bugs with checkbox/radio TVs and complex values with HTML/quotes in them
+- Fixed some bugs with deleting a file in MODx.Browser in the actual view pane
+- [#MODX-2354] Fixed issue with imageTV and incorrect preview url reference
+- Fixed ellipsis output filter to use &#8230; instead of ...
+- [#MODX-2327] Fixed bugs with Form Customization not being respected
+- [#MODX-2349] Fixed bug with Form Customization and fieldDefault rule with template field
+- Added code to prevent caching of JS after upgrades by postfixing version to JS URLs
+- [#MODX-2342] Fixed issue where xhtml_urls setting wasnt included in build
+- [#MODX-2345] Fixed issue with templates and categories in mgr not persisting
+- [#MODX-2341] Fixed issue with redirect statement on login page in certain environments
+- [#MODX-2343] File upload now respects upload_* extension restrictions
+- [#MODX-2344] Respect context-specific filemanager_path in upload/remove actions on directory tree in mgr
+
 MODx Revolution 2.0.2-pl (September 17, 2010)
 ====================================
 - Fixed issue where Add New Package would not work when selecting a provider manually

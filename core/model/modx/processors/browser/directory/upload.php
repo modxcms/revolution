@@ -23,10 +23,33 @@ if (!($directory->isReadable()) || !$directory->isWritable()) {
     return $modx->error->failure($modx->lexicon('file_folder_err_perms_upload'));
 }
 
+$modx->context->prepare();
+$allowedFileTypes = explode(',',$modx->context->getOption('upload_files'));
+$allowedFileTypes = array_merge(explode(',',$modx->context->getOption('upload_images')),explode(',',$modx->context->getOption('upload_media')),explode(',',$modx->context->getOption('upload_flash')),$allowedFileTypes);
+$allowedFileTypes = array_unique($allowedFileTypes);
+$maxFileSize = $modx->context->getOption('upload_maxsize',1048576);
+
 /* loop through each file and upload */
 foreach ($_FILES as $file) {
     if ($file['error'] != 0) continue;
     if (empty($file['name'])) continue;
+    
+    $ext = @pathinfo($file['name'],PATHINFO_EXTENSION);
+
+    if (empty($ext) || !in_array($ext,$allowedFileTypes)) {
+        return $modx->error->failure($modx->lexicon('file_err_ext_not_allowed',array(
+            'ext' => $ext,
+        )));
+    }
+    $size = @filesize($file['tmp_name']);
+
+    if ($size > $maxFileSize) {
+        return $modx->error->failure($modx->lexicon('file_err_too_large',array(
+            'size' => $size,
+            'allowed' => $maxFileSize,
+        )));
+    }
+
 
     $newPath = $modx->fileHandler->sanitizePath($file['name']);
     $newPath = $directory->getPath().$newPath;

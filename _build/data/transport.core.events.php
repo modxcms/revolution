@@ -353,6 +353,12 @@ $events['OnEmptyTrash']->fromArray(array (
   'service' => 1,
   'groupname' => 'Resources',
 ), '', true, true);
+$events['OnResourceTVFormPrerender']= $xpdo->newObject('modEvent');
+$events['OnResourceTVFormPrerender']->fromArray(array (
+  'name' => 'OnResourceTVFormPrerender',
+  'service' => 1,
+  'groupname' => 'Resources',
+), '', true, true);
 $events['OnResourceTVFormRender']= $xpdo->newObject('modEvent');
 $events['OnResourceTVFormRender']->fromArray(array (
   'name' => 'OnResourceTVFormRender',

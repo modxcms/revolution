@@ -68,7 +68,7 @@ class modResource extends modAccessibleSimpleObject {
                 }
             } else {
                 $this->_content= $this->getContent();
-                $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
+                $maxIterations= intval($this->xpdo->context->getOption('parser_max_iterations',10));
                 $this->xpdo->parser->processElementTags('', $this->_content, false, false, '[[', ']]', array(), $maxIterations);
                 $this->_processed= true;
             }
@@ -262,7 +262,7 @@ class modResource extends modAccessibleSimpleObject {
     public function cleanAlias($alias, array $options = array()) {
         /* setup the various options */
         $iconv = function_exists('iconv');
-        $mbext = function_exists('mb_strlen') && (boolean) $this->xpdo->getOption('use_multibyte', null, false);
+        $mbext = function_exists('mb_strlen') && (boolean) $this->xpdo->context->getOption('use_multibyte', false);
         $charset = strtoupper((string) $this->xpdo->getOption('modx_charset', $options, 'UTF-8'));
         $delimiter = $this->xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
         $delimiters = $this->xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');
@@ -303,12 +303,13 @@ class modResource extends modAccessibleSimpleObject {
                 break;
             default:
                 /* otherwise look for a transliteration service class that will accept named transliteration tables */
-				if ($this->xpdo instanceof modX) {
-	                $translitClassPath = $this->xpdo->getOption('friendly_alias_translit_class_path', $options, $this->xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
-	                if ($this->xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
-	                    $alias = $this->xpdo->translit->translate($alias, $translit);
-	                }
-				}
+                if ($this->xpdo instanceof modX) {
+                    $translitClassPath = $this->xpdo->getOption('friendly_alias_translit_class_path', $options, $this->xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
+                    if ($this->xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
+                        $alias = $this->xpdo->translit->translate($alias, $translit);
+                    }
+                }
+                break;
         }
 
         /* restrict characters as configured */

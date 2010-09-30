@@ -152,20 +152,14 @@ if ($scriptProperties['deleted'] != $resource->get('deleted')) {
             $scriptProperties['deleted'] = $resource->get('deleted');
         } else {
             $resource->set('deleted',false);
-            $modx->invokeEvent('OnResourceUndelete',array(
-                'id' => $resource->get('id'),
-                'resource' => &$resource,
-            ));
+            $resourceUndeleted = true;
         }
     } else { /* delete */
         if (!$modx->hasPermission('delete_document')) {
             $scriptProperties['deleted'] = $resource->get('deleted');
         } else {
             $resource->set('deleted',true);
-            $modx->invokeEvent('OnResourceDelete',array(
-                'id' => $resource->get('id'),
-                'resource' => &$resource,
-            ));
+            $resourceDeleted = true;
         }
     }
 }
@@ -305,6 +299,21 @@ if (!empty($scriptProperties['tvs'])) {
     }
 }
 /* end save TVs */
+
+/* fire delete/undelete events */
+if (isset($resourceUndeleted) && !empty($resourceUndeleted)) {
+    $modx->invokeEvent('OnResourceUndelete',array(
+        'id' => $resource->get('id'),
+        'resource' => &$resource,
+    ));
+}
+if (isset($resourceDeleted) && !empty($resourceDeleted)) {
+    $modx->invokeEvent('OnResourceDelete',array(
+        'id' => $resource->get('id'),
+        'resource' => &$resource,
+    ));
+}
+
 
 /* invoke OnDocFormSave event */
 $modx->invokeEvent('OnDocFormSave',array(

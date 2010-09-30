@@ -14,4 +14,5 @@ $modx->regClientStartupHTMLBlock('<script type="text/javascript">
 MODx.hasEraseErrorLog = "'.($modx->hasPermission('error_log_erase') ? 1 : 0).'"
 </script>');
 
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('system/event/list.tpl');

@@ -9,7 +9,8 @@ $modx->lexicon->load('login');
 $modx->smarty->assign('_lang',$modx->lexicon->fetch());
 
 if (isset($_REQUEST['modahsh'])) {
-    $modx->smarty->assign('modahsh',$_REQUEST['modahsh']);
+    $hash = $modx->sanitizeString($_REQUEST['modahsh']);
+    $modx->smarty->assign('modahsh',$hash);
 }
 if (!empty($_SERVER['REQUEST_URI'])) {
     $modx->smarty->assign('returnUrl',$_SERVER['REQUEST_URI']);
@@ -48,8 +49,8 @@ if (!empty($_POST)) {
 
             if (!empty($response) && is_array($response)) {
                 if (!empty($response['success']) && isset($response['object'])) {
-                    $url = !empty($_POST['returnUrl']) ? $_POST['returnUrl'] : $modx->getOption('manager_url');
-                    $modx->sendRedirect($url,'','','full');
+                    $url = !empty($_POST['returnUrl']) ? $_POST['returnUrl'] : $modx->getOption('manager_url',null,MODX_MANAGER_PATH);
+                    $modx->sendRedirect(rtrim($url,'/'),'','','full');
                 } else {
                     $error_message = '';
                     if (isset($response['errors']) && !empty($response['errors'])) {

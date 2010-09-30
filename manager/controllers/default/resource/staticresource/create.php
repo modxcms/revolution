@@ -76,7 +76,6 @@ $modx->smarty->assign('resource',$resource);
 $publish_document = $modx->hasPermission('publish_document');
 $access_permissions = $modx->hasPermission('access_permissions');
 
-
 /* set default template */
 $default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $context->getOption('default_template',null,1)));
 $userGroups = $modx->user->getUserGroups();
@@ -100,7 +99,10 @@ $c->where(array(
 $fcDt = $modx->getObject('modActionDom',$c);
 if ($fcDt) {
     $p = $parent ? $parent->get('id') : 0;
-    if ($fcDt->get('constraint_field') == 'parent' && $p == $fcDt->get('constraint')) {
+    $constraintField = $fcDt->get('constraint_field');
+    if ($constraintField == 'parent' && $p == $fcDt->get('constraint')) {
+        $default_template = $fcDt->get('value');
+    } else if (empty($constraintField)) {
         $default_template = $fcDt->get('value');
     }
 }
@@ -143,4 +145,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$this->checkFormCustomizationRules($parent != null ? $parent : null);
 return $modx->smarty->fetch('resource/staticresource/create.tpl');

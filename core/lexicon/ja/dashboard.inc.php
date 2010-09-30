@@ -10,8 +10,8 @@
  * @author yamamoto http://kyms.jp
  */
 $_lang['active_users_none'] = 'アクティブなユーザーはいません。';
-$_lang['add_user'] = 'ユーザーの追加';
-$_lang['create_resource'] = 'リソースの新規作成';
+$_lang['add_user'] = 'ユーザーを追加';
+$_lang['create_resource'] = 'リソースを新規作成';
 $_lang['dashboard'] = 'ダッシュボード';
 $_lang['documentation'] = '文章';
 $_lang['file_bug'] = 'バグのfile';

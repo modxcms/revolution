@@ -21,5 +21,5 @@ $_lang['ago_week'] = '[[+time]] 週間';
 $_lang['ago_weeks'] = '[[+time]] 週間';
 $_lang['ago_year'] = '[[+time]] 年';
 $_lang['ago_years'] = '[[+time]] 年';
-$_lang['today_at'] = '[[+time]] の今日';
-$_lang['yesterday_at'] = '[[+time]] の昨日';
+$_lang['today_at'] = '今日([[+time]])';
+$_lang['yesterday_at'] = 'きのう([[+time]])';

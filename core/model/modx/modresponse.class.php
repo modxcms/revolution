@@ -114,11 +114,11 @@ class modResponse {
         }
 
         /* send out content-type, content-disposition, and custom headers from the content type */
-        if ($this->modx->getOption('set_header')) {
+        if ($this->modx->context->getOption('set_header')) {
             $type= $contentType->get('mime_type') ? $contentType->get('mime_type') : 'text/html';
             $header= 'Content-Type: ' . $type;
             if (!$contentType->get('binary')) {
-                $charset= $this->modx->getOption('modx_charset',null,'UTF-8');
+                $charset= $this->modx->context->getOption('modx_charset','UTF-8');
                 $header .= '; charset=' . $charset;
             }
             header($header);
@@ -224,7 +224,7 @@ class modResponse {
         }
         else {
             if (strpos($url, '://') === false && !(substr($url, 0, 1) === '/' || substr($url, 0, 2) === './' || substr($url, 0, 3) === '../')) {
-                $url= $this->modx->getOption('site_url',null,'/') . $url;
+                $url= $this->modx->context->getOption('site_url','/') . $url;
             }
             $header= 'Location: ' . $url;
         }

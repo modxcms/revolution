@@ -39,4 +39,5 @@ $modx->smarty->assign('unpublished',$modx->lexicon('refresh_unpublished',array('
 
 $modx->smarty->assign('results', $results);
 
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('system/refresh_site.tpl');

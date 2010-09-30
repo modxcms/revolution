@@ -71,6 +71,28 @@ $xpdo_meta_map['modContextSetting']= array (
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
     ),
   ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'columns' => 
+      array (
+        'context_key' => 
+        array (
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'key' => 
+        array (
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'Context' => 

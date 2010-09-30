@@ -773,12 +773,12 @@ class modUser extends modPrincipal {
         if (!$this->xpdo->mail) return false;
         
         $this->xpdo->mail->set(modMail::MAIL_BODY, $message);
-        $this->xpdo->mail->set(modMail::MAIL_FROM, $this->xpdo->getOption('from',$options,$this->xpdo->getOption('emailsender')));
-        $this->xpdo->mail->set(modMail::MAIL_FROM_NAME, $this->xpdo->getOption('fromName',$options,$this->xpdo->getOption('site_name')));
-        $this->xpdo->mail->set(modMail::MAIL_SENDER, $this->xpdo->getOption('sender',$options,$this->xpdo->getOption('emailsender')));
-        $this->xpdo->mail->set(modMail::MAIL_SUBJECT, $this->xpdo->getOption('subject',$options,$this->xpdo->getOption('emailsubject')));
+        $this->xpdo->mail->set(modMail::MAIL_FROM, $this->xpdo->getOption('from',$options,$this->xpdo->context->getOption('emailsender')));
+        $this->xpdo->mail->set(modMail::MAIL_FROM_NAME, $this->xpdo->getOption('fromName',$options,$this->xpdo->context->getOption('site_name')));
+        $this->xpdo->mail->set(modMail::MAIL_SENDER, $this->xpdo->getOption('sender',$options,$this->xpdo->context->getOption('emailsender')));
+        $this->xpdo->mail->set(modMail::MAIL_SUBJECT, $this->xpdo->getOption('subject',$options,$this->xpdo->context->getOption('emailsubject')));
         $this->xpdo->mail->address('to',$profile->get('email'),$profile->get('fullname'));
-        $this->xpdo->mail->address('reply-to',$this->xpdo->getOption('sender',$options,$this->xpdo->getOption('emailsender')));
+        $this->xpdo->mail->address('reply-to',$this->xpdo->getOption('sender',$options,$this->xpdo->context->getOption('emailsender')));
         $this->xpdo->mail->setHTML($this->xpdo->getOption('html',$options,true));
         if ($this->xpdo->mail->send() == false) {
             return false;

@@ -27,7 +27,7 @@ $file = $modx->fileHandler->make($root.$file);
 
 /* verify file exists and is writable */
 if (!$file->exists()) {
-    return $modx->error->failure($modx->lexicon('file_err_nf').': '.$file);
+    return $modx->error->failure($modx->lexicon('file_err_nf').': '.$file->getPath());
 } else if (!$file->isReadable() || !$file->isWritable()) {
     return $modx->error->failure($modx->lexicon('file_err_perms_remove'));
 } else if (!($file instanceof modFile)) {
@@ -42,4 +42,6 @@ if (!$file->remove()) {
 /* log manager action */
 $modx->logManagerAction('file_remove','',$file->getPath());
 
-return $modx->error->success();
+return $modx->error->success('',array(
+    'path' => $file->getPath(),
+));

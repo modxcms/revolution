@@ -85,7 +85,6 @@ class modManagerResponse extends modResponse {
                     $cbody = 'Could not find action file at: '.$f;
                 }
 
-                $this->registerActionDomRules($action);
                 $this->registerCssJs();
 
                 /* reset path to core modx path for header/footer */
@@ -139,21 +138,17 @@ class modManagerResponse extends modResponse {
     }
 
     /**
-     * Register ActionDom rules that hide/show fields
+     * Checks Form Customization rules for an object.
      *
-     * @access public
-     * @param integer $action The ID of the modAction object
+     * @param xPDOObject $obj If passed, will validate against for rules with constraints.
      */
-    public function registerActionDomRules($action) {
-        if (empty($action)) return false;
-
-        /* now do action dom rules */
+    public function checkFormCustomizationRules($obj = null) {
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
         $c->leftJoin('modAccessActionDom','Access');
         $principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
         $c->where(array(
-            'action' => $action,
+            'action' => $this->action['id'],
             'active' => true,
             array(
                 array(
@@ -166,6 +161,15 @@ class modManagerResponse extends modResponse {
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
         foreach ($domRules as $rule) {
+            $constraintClass = $rule->get('constraint_class');
+            if (!empty($constraintClass)) {
+                if (empty($obj) || !($obj instanceof $constraintClass)) continue;
+                $constraintField = $rule->get('constraint_field');
+                $constraint = $rule->get('constraint');
+                if ($obj->get($constraintField) != $constraint) {
+                    continue;
+                }
+            }
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;
         }
@@ -272,9 +276,21 @@ class modManagerResponse extends modResponse {
     }
 
     /**
+     * Grabs a stripped version of modx to prevent caching of JS after upgrades
+     *
+     * @access private
+     * @return string The parsed version string
+     */
+    private function _prepareVersionPostfix() {
+        $version = $this->modx->getVersionData();
+        return str_replace(array('.','-'),'',$version['full_version']);
+    }
+
+    /**
      * Registers CSS/JS to manager interface
      */
     public function registerCssJs() {
+        $versionPostFix = $this->_prepareVersionPostfix();
         /* if true, use compressed JS */
         if ($this->modx->getOption('compress_js',null,false)) {
             foreach ($this->modx->sjscripts as &$scr) {
@@ -295,6 +311,22 @@ class modManagerResponse extends modResponse {
                 ),'',$newUrl);
 
                 if (file_exists($this->modx->getOption('manager_path').'assets/modext/'.$path)) {
+                    $scr = $newUrl;
+                }
+                /* append version string */
+                $pos = strpos($scr,'.js');
+                $pos2 = strpos($scr,'src="');
+                if ($pos && $pos2) {
+                    $newUrl = substr($scr,0,$pos+3).'?v='.$versionPostFix.substr($scr,$pos+3,strlen($scr));
+                    $scr = $newUrl;
+                }
+            }
+        } else {
+            foreach ($this->modx->sjscripts as &$scr) {
+                $pos = strpos($scr,'.js');
+                $pos2 = strpos($scr,'src="');
+                if ($pos && $pos2) {
+                    $newUrl = substr($scr,0,$pos+3).'?v='.$versionPostFix.substr($scr,$pos+3,strlen($scr));
                     $scr = $newUrl;
                 }
             }

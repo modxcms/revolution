@@ -294,6 +294,19 @@ class modX extends xPDO {
     }
 
     /**
+     * Sanitizes a string
+     * 
+     * @param string $str The string to sanitize
+     * @param array $chars An array of chars to remove
+     * @param string $allowedTags A list of tags to allow.
+     * @return string The sanitized string.
+     */
+    public function sanitizeString($str,$chars = array('/',"'",'"','(',')',';','>','<'),$allowedTags = '') {
+        $str = str_replace($chars,'',strip_tags($str,$allowedTags));
+        return preg_replace("/[^A-Za-z0-9_\-\.\/]/",'',$str);
+    }
+
+    /**
      * Turn an associative array into a valid query string.
      *
      * @static
@@ -388,7 +401,7 @@ class modX extends xPDO {
             $this->getConfig();
             $this->_initContext($contextKey);
 
-            $extPackages = $this->getOption('extension_packages');
+            $extPackages = $this->context->getOption('extension_packages');
             if (!empty($extPackages)) {
                 $extPackages= explode(',', $extPackages);
                 foreach ($extPackages as $extPackage) {
@@ -720,7 +733,7 @@ class modX extends xPDO {
                 }
             }
 
-            if (!empty($url) && $this->getOption('xhtml_urls', array(), '0')) {
+            if (!empty($url) && $this->context->getOption('xhtml_urls','0')) {
                 $url= preg_replace("/&(?!amp;)/","&amp;", $url);
             }
         } else {
@@ -799,9 +812,9 @@ class modX extends xPDO {
             $options= array_merge(
                 array(
                     'error_type' => '404'
-                    ,'error_header' => $this->getOption('error_page_header', null, 'HTTP/1.1 404 Not Found')
-                    ,'error_pagetitle' => $this->getOption('error_page_pagetitle', null, 'Error 404: Page not found')
-                    ,'error_message' => $this->getOption('error_page_message', null, '<h1>Page not found</h1><p>The page you requested was not found.</p>')
+                    ,'error_header' => $this->context->getOption('error_page_header', 'HTTP/1.1 404 Not Found')
+                    ,'error_pagetitle' => $this->context->getOption('error_page_pagetitle', 'Error 404: Page not found')
+                    ,'error_message' => $this->context->getOption('error_page_message', '<h1>Page not found</h1><p>The page you requested was not found.</p>')
                 ),
                 $options
             );
@@ -821,16 +834,16 @@ class modX extends xPDO {
         if (!is_array($options)) $options = array();
         $options= array_merge(
             array(
-                'response_code' => $this->getOption('error_page_header', $options, 'HTTP/1.1 404 Not Found')
+                'response_code' => $this->getOption('error_page_header', $options,$this->context->getOption('error_page_header','HTTP/1.1 404 Not Found'))
                 ,'error_type' => '404'
-                ,'error_header' => $this->getOption('error_page_header', null, 'HTTP/1.1 404 Not Found')
-                ,'error_pagetitle' => $this->getOption('error_page_pagetitle', null, 'Error 404: Page not found')
-                ,'error_message' => $this->getOption('error_page_message', null, '<h1>Page not found</h1><p>The page you requested was not found.</p>')
+                ,'error_header' => $this->context->getOption('error_page_header', 'HTTP/1.1 404 Not Found')
+                ,'error_pagetitle' => $this->context->getOption('error_page_pagetitle', 'Error 404: Page not found')
+                ,'error_message' => $this->context->getOption('error_page_message', '<h1>Page not found</h1><p>The page you requested was not found.</p>')
             ),
             $options
         );
         $this->invokeEvent('OnPageNotFound', $options);
-        $this->sendForward($this->getOption('error_page', $options, '404'), $options);
+        $this->sendForward($this->getOption('error_page', $options, $this->context->getOption('error_page','404')), $options);
     }
 
     /**
@@ -847,9 +860,9 @@ class modX extends xPDO {
             array(
                 'response_code' => $this->getOption('unauthorized_page_header' ,$options ,'HTTP/1.1 401 Unauthorized')
                 ,'error_type' => '401'
-                ,'error_header' => $this->getOption('unauthorized_page_header', null, 'HTTP/1.1 401 Unauthorized')
-                ,'error_pagetitle' => $this->getOption('unauthorized_page_pagetitle', null, 'Error 401: Unauthorized')
-                ,'error_message' => $this->getOption('unauthorized_page_message', null, '<h1>Unauthorized</h1><p>You are not authorized to view the requested content.</p>')
+                ,'error_header' => $this->context->getOption('unauthorized_page_header', 'HTTP/1.1 401 Unauthorized')
+                ,'error_pagetitle' => $this->context->getOption('unauthorized_page_pagetitle', 'Error 401: Unauthorized')
+                ,'error_message' => $this->context->getOption('unauthorized_page_message', '<h1>Unauthorized</h1><p>You are not authorized to view the requested content.</p>')
             ),
             $options
         );
@@ -1230,7 +1243,7 @@ class modX extends xPDO {
         if ($this->eventMap === null)
             $this->_initEventMap($this->context->get('key'));
         if (!isset ($this->eventMap[$eventName])) {
-            $this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
+            //$this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
             return false;
         }
         $results= array ();
@@ -2634,7 +2647,7 @@ class modX extends xPDO {
      * @access protected
      */
     protected function _initCulture() {
-        $cultureKey = $this->getOption('cultureKey',null,'en');
+        $cultureKey = $this->context->getOption('cultureKey','en');
         if (!empty($_SESSION['cultureKey'])) $cultureKey = $_SESSION['cultureKey'];
         if (!empty($_REQUEST['cultureKey'])) $cultureKey = $_REQUEST['cultureKey'];
         $this->cultureKey = $cultureKey;
@@ -2681,7 +2694,7 @@ class modX extends xPDO {
         $contextKey= $this->context->get('key');
         if ($this->getSessionState() == modX::SESSION_STATE_UNINITIALIZED) {
             $sh= false;
-            if ($sessionHandlerClass = $this->getOption('session_handler_class')) {
+            if ($sessionHandlerClass = $this->context->getOption('session_handler_class')) {
                 if ($shClass= $this->loadClass($sessionHandlerClass, '', false, true)) {
                     if ($sh= new $shClass($this)) {
                         session_set_save_handler(
@@ -2696,20 +2709,20 @@ class modX extends xPDO {
                 }
             }
             if (!$sh) {
-                if ($sessionSavePath = $this->getOption('session_save_path') && is_writable($sessionSavePath)) {
+                if ($sessionSavePath = $this->context->getOption('session_save_path') && is_writable($sessionSavePath)) {
                     session_save_path($sessionSavePath);
                 }
             }
-            $cookieDomain= $this->getOption('session_cookie_domain', null, '');
-            $cookiePath= $this->getOption('session_cookie_path', null, MODX_BASE_URL);
-            if (empty($cookiePath)) $cookiePath = $this->getOption('base_url', null, MODX_BASE_URL);
-            $cookieSecure= (boolean) $this->getOption('session_cookie_secure', null, false);
-            $cookieLifetime= (integer) $this->getOption('session_cookie_lifetime', null, 0);
-            $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime', null, $cookieLifetime);
+            $cookieDomain= $this->context->getOption('session_cookie_domain', '');
+            $cookiePath= $this->context->getOption('session_cookie_path', MODX_BASE_URL);
+            if (empty($cookiePath)) $cookiePath = $this->context->getOption('base_url', MODX_BASE_URL);
+            $cookieSecure= (boolean) $this->context->getOption('session_cookie_secure', false);
+            $cookieLifetime= (integer) $this->context->getOption('session_cookie_lifetime', 0);
+            $gcMaxlifetime = (integer) $this->context->getOption('session_gc_maxlifetime', $cookieLifetime);
             if ($gcMaxlifetime > 0) {
                 ini_set('session.gc_maxlifetime', $gcMaxlifetime);
             }
-            $site_sessionname= $this->getOption('session_name', null, '');
+            $site_sessionname= $this->context->getOption('session_name', '');
             if (!empty($site_sessionname)) session_name($site_sessionname);
             session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure);
             session_start();
@@ -2824,7 +2837,7 @@ class modX extends xPDO {
      * @access protected
      */
     public function _postProcess() {
-        if ($this->getOption('cache_resource', array(), true)) {
+        if ($this->context->getOption('cache_resource', true)) {
             if (is_object($this->resource) && $this->resource instanceof modResource && $this->resource->get('id') && $this->resource->get('cacheable')) {
                 $this->invokeEvent('OnBeforeSaveWebPageCache');
                 $this->cacheManager->generateResource($this->resource);

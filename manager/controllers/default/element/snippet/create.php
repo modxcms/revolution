@@ -54,4 +54,5 @@ $onSnipFormPrerender = $modx->invokeEvent('OnSnipFormPrerender',array(
 if (is_array($onSnipFormPrerender)) $onSnipFormPrerender = implode('',$onSnipFormPrerender);
 $modx->smarty->assign('onSnipFormPrerender',$onSnipFormPrerender);
 
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('element/snippet/create.tpl');

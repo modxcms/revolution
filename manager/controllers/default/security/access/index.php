@@ -12,4 +12,5 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.access.resourcegroup.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/security/access/list.js');
 
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('security/access/index.tpl');

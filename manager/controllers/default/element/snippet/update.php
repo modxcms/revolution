@@ -83,4 +83,5 @@ $modx->smarty->assign('onSnipFormPrerender',$onSnipFormPrerender);
 /* assign snippet to parser and display template */
 $modx->smarty->assign('snippet',$snippet);
 
+$this->checkFormCustomizationRules($snippet);
 return $modx->smarty->fetch('element/snippet/update.tpl');

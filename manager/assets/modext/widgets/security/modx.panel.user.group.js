@@ -180,6 +180,7 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
                     Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+r.object.name+'</h2>');
                                         
                     this.fireEvent('ready',r.object);
+                    MODx.fireEvent('ready');
                 },scope:this}
             }
         });

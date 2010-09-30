@@ -203,6 +203,14 @@ Ext.extend(MODx,Ext.Component,{
         tabs.add(opt);
         tabs.doLayout();
     }
+    ,hideTab: function(ct,tab) {
+        var tp = Ext.getCmp(ct);
+        tp.hideTabStripItem(tab);
+        if (tp.activeTab.id == tab) { /* ensure not hiding activeTab */
+            var nt = tp.items.items[0].id == tab ? 1 : 0;
+            tp.setActiveTab(nt);
+        }
+    }
 
     ,moveTV: function(tvs,tab) {
         if (!Ext.isArray(tvs)) { tvs = [tvs]; }

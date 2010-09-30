@@ -18,7 +18,7 @@ $context = $modx->getObject('modContext',$ctx);
 $context->prepare();
 
 $customResourceClasses = array();
-$crcs = $context->getOption('custom_resource_classes',null,'');
+$crcs = $context->getOption('custom_resource_classes','');
 if (!empty($crcs)) {
     $crcs = explode(',',$crcs);
     foreach ($crcs as $crc) {
@@ -35,8 +35,8 @@ $c = array(
     'icons_url' => $template_url.'images/ext/modext/',
     'manager_url' => $context->getOption('manager_url'),
     'template_url' => $template_url,
-    'http_host' => $context->getOption('http_host',null,MODX_HTTP_HOST),
-    'site_url' => $context->getOption('site_url',null,MODX_SITE_URL),
+    'http_host' => $context->getOption('http_host',MODX_HTTP_HOST),
+    'site_url' => $context->getOption('site_url',MODX_SITE_URL),
     'http_host_remote' => MODX_URL_SCHEME.$_SERVER['HTTP_HOST'],
     'user' => $modx->user->get('id'),
     'version' => $modx->version['full_version'],

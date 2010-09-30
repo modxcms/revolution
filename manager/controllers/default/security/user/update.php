@@ -98,4 +98,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$this->checkFormCustomizationRules($user);
 return $modx->smarty->fetch('security/user/update.tpl');

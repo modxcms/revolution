@@ -14,4 +14,5 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/element/propertyset/index.js');
 
 /* display template */
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('element/propertyset/index.tpl');

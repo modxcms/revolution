@@ -104,7 +104,7 @@ MODx.panel.TV = function(config) {
                 ,name: 'clearCache'
                 ,id: 'modx-tv-clear-cache'
                 ,inputValue: 1
-                ,checked: config.record.clearCache || true
+                ,checked: Ext.isDefined(config.record.clearCache) || true
             },{
                 html: onTVFormRender
                 ,border: false
@@ -238,6 +238,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
         this.clearDirty();
         this.initialized = true;
+        MODx.fireEvent('ready');
         return true;
     }
     

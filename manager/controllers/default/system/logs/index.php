@@ -11,4 +11,5 @@ if (!$modx->hasPermission('logs')) return $modx->error->failure($modx->lexicon('
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.manager.log.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/system/logs.js');
 
+$this->checkFormCustomizationRules();
 return $modx->smarty->fetch('system/logs/index.tpl');

@@ -56,13 +56,13 @@ class modRequest {
         $this->modx->invokeEvent('OnHandleRequest');
         if (!$this->modx->checkSiteStatus()) {
             header('HTTP/1.1 503 Service Unavailable');
-            if (!$this->modx->getOption('site_unavailable_page',null,1)) {
+            if (!$this->modx->context->getOption('site_unavailable_page',1)) {
                 $this->modx->resource = $this->modx->newObject('modDocument');
                 $this->modx->resource->template = 0;
-                $this->modx->resource->content = $this->modx->getOption('site_unavailable_message');
+                $this->modx->resource->content = $this->modx->context->getOption('site_unavailable_message');
             } else {
                 $this->modx->resourceMethod = "id";
-                $this->modx->resourceIdentifier = $this->modx->getOption('site_unavailable_page');
+                $this->modx->resourceIdentifier = $this->modx->context->getOption('site_unavailable_page',1);
             }
         } else {
             $this->checkPublishStatus();
@@ -117,9 +117,9 @@ class modRequest {
      */
     public function getResourceMethod() {
         $method = '';
-        if (isset ($_REQUEST[$this->modx->getOption('request_param_alias', null, 'q')]))
+        if (isset ($_REQUEST[$this->modx->context->getOption('request_param_alias', 'q')]))
             $method = "alias";
-        elseif (isset ($_REQUEST[$this->modx->getOption('request_param_id', null, 'id')])) {
+        elseif (isset ($_REQUEST[$this->modx->context->getOption('request_param_id', 'id')])) {
             $method = "id";
         }
         return $method;
@@ -165,9 +165,9 @@ class modRequest {
                     $resource->addMany($rGroups);
                 }
                 if (isset($cachedResource['elementCache'])) $this->modx->elementCache = $cachedResource['elementCache'];
-                if (isset($resource->_jscripts)) $this->modx->jscripts = array_merge($this->modx->jscripts, $resource->_jscripts);
-                if (isset($resource->_sjscripts)) $this->modx->sjscripts = array_merge($this->modx->sjscripts, $resource->_sjscripts);
-                if (isset($resource->_loadedjscripts)) $this->modx->loadedjscripts = array_merge($this->modx->loadedjscripts, $resource->_loadedjscripts);
+                if ($resource->get('_jscripts')) $this->modx->jscripts = $this->modx->jscripts + $resource->get('_jscripts');
+                if ($resource->get('_sjscripts')) $this->modx->sjscripts = $this->modx->sjscripts + $resource->get('_sjscripts');
+                if ($resource->get('_loadedjscripts')) $this->modx->loadedjscripts = array_merge($this->modx->loadedjscripts, $resource->get('_loadedjscripts'));
                 $fromCache = true;
             }
         }
@@ -227,15 +227,15 @@ class modRequest {
         $identifier = '';
         switch ($method) {
             case 'alias' :
-                $rAlias = $this->modx->getOption('request_param_alias',null,'q');
+                $rAlias = $this->modx->context->getOption('request_param_alias','q');
                 $identifier = isset ($_REQUEST[$rAlias]) ? $_REQUEST[$rAlias] : $identifier;
                 break;
             case 'id' :
-                $rId = $this->modx->getOption('request_param_id',null,'id');
+                $rId = $this->modx->context->getOption('request_param_id','id');
                 $identifier = isset ($_REQUEST[$rId]) ? $_REQUEST[$rId] : $identifier;
                 break;
             default :
-                $identifier = $this->modx->getOption('site_start',null,1);
+                $identifier = $this->modx->context->getOption('site_start',1);
         }
         return $identifier;
     }
@@ -248,11 +248,11 @@ class modRequest {
      */
     public function _cleanResourceIdentifier($identifier) {
         if (empty ($identifier)) {
-            $identifier = $this->modx->getOption('site_start',null,1);
+            $identifier = $this->modx->context->getOption('site_start',1);
             $this->modx->resourceMethod = 'id';
         }
-        elseif ($this->modx->getOption('friendly_urls',null,false)) {
-            $containerSuffix = trim($this->modx->getOption('container_suffix',null,''));
+        elseif ($this->modx->context->getOption('friendly_urls',false)) {
+            $containerSuffix = trim($this->modx->context->getOption('container_suffix',''));
             if (!isset ($this->modx->aliasMap[$identifier])) {
                 if (!empty ($containerSuffix)) {
                     $suffixPos = strpos($identifier, $containerSuffix);
@@ -271,8 +271,8 @@ class modRequest {
                     $this->modx->resourceMethod = 'alias';
                 }
             }
-            elseif ($this->modx->getOption('site_start',null,1) == $this->modx->aliasMap[$identifier]) {
-                $this->modx->sendRedirect($this->modx->getOption('site_url'));
+            elseif ($this->modx->context->getOption('site_start',1) == $this->modx->aliasMap[$identifier]) {
+                $this->modx->sendRedirect($this->modx->context->getOption('site_url',MODX_SITE_URL));
             } else {
                 $this->modx->resourceMethod = 'alias';
             }
@@ -288,14 +288,14 @@ class modRequest {
     public function sanitizeRequest() {
         $modxtags = array_values($this->modx->sanitizePatterns);
         modX :: sanitize($_GET, $modxtags, 0);
-        if ($this->modx->getOption('allow_tags_in_post',null,true)) {
+        if ($this->modx->context->getOption('allow_tags_in_post',true)) {
             modX :: sanitize($_POST);
         } else {
             modX :: sanitize($_POST, $modxtags);
         }
         modX :: sanitize($_COOKIE, $modxtags);
         modX :: sanitize($_REQUEST, $modxtags);
-        $rAlias = $this->modx->getOption('request_param_alias',null,'q');
+        $rAlias = $this->modx->context->getOption('request_param_alias','q');
         if (isset ($_GET[$rAlias])) {
             $_GET[$rAlias] = preg_replace("/[^A-Za-z0-9_\-\.\/]/", "", $_GET[$rAlias]);
         }
@@ -391,7 +391,7 @@ class modRequest {
         $cacheRefreshTime= 0;
         if (file_exists($this->modx->getOption(xPDO::OPT_CACHE_PATH) . "sitePublishing.idx.php"))
             include ($this->modx->getOption(xPDO::OPT_CACHE_PATH) . "sitePublishing.idx.php");
-        $timeNow= time() + $this->modx->getOption('server_offset_time',null,0);
+        $timeNow= time() + $this->modx->context->getOption('server_offset_time',0);
         if ($cacheRefreshTime != 0 && $cacheRefreshTime <= strtotime($timeNow)) {
             /* FIXME: want to find a better way to handle this publishing check without mass updates to the database! */
             $tblResource= $this->modx->getTableName('modResource');
@@ -491,7 +491,7 @@ class modRequest {
             $methodIdentifier = '';
             if ($type == 'GET') {
                 $method = $this->getResourceMethod();
-                $methodIdentifier = $this->modx->getOption('request_param_' . $method, null, $method);
+                $methodIdentifier = $this->modx->context->getOption('request_param_' . $method, $method);
             }
             if (is_array($keys)) {
                 foreach ($keys as $key) {

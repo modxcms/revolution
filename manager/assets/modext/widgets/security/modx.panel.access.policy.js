@@ -113,6 +113,7 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
                     
                     Ext.getCmp('modx-policy-header').getEl().update('<h2>'+_('policy')+': '+r.object.name+'</h2>');
                     this.fireEvent('ready');
+                    MODx.fireEvent('ready');
             	},scope:this}
             }
         });

@@ -372,9 +372,10 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 action: 'remove'
                 ,file: d+'/'+node.id
                 ,prependPath: this.config.prependPath
+                ,ctx: MODx.ctx || 'web'
             }
             ,listeners: {
-                'success': {fn:this.run,scope:this}
+                'success': {fn:function(r) { this.run({ ctx: MODx.ctx }); },scope:this}
             }
         });
     }
@@ -385,6 +386,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         Ext.applyIf(p,{
             action: 'getFiles'
             ,dir: this.dir
+            ,ctx: MODx.ctx
         });
         this.store.load({
             params: p

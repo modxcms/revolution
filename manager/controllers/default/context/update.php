@@ -57,4 +57,5 @@ MODx.ctx = "'.$context->get('key').'";
 // ]]>
 </script>');
 
+$this->checkFormCustomizationRules($context);
 return $modx->smarty->fetch('context/update.tpl');

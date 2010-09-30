@@ -276,13 +276,13 @@ class modCacheManager extends xPDOCacheManager {
                     $results['elementCache']= $this->modx->elementCache;
                 }
                 if (!empty($obj->_sjscripts)) {
-                    $results['resource']['sjscripts']= $obj->_sjscripts;
+                    $results['resource']['_sjscripts']= $obj->_sjscripts;
                 }
                 if (!empty($obj->_jscripts)) {
-                    $results['resource']['jscripts']= $obj->_jscripts;
+                    $results['resource']['_jscripts']= $obj->_jscripts;
                 }
                 if (!empty($obj->_loadedjscripts)) {
-                    $results['resource']['loadedjscripts']= $obj->_loadedjscripts;
+                    $results['resource']['_loadedjscripts']= $obj->_loadedjscripts;
                 }
             }
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_resource_key', $options, 'default');

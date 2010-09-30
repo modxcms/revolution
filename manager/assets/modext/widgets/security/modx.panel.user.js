@@ -66,6 +66,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     }
                     Ext.get('modx-user-header').update('<h2>'+_('user')+': '+r.object.username+'</h2>');
                     this.fireEvent('ready',r.object);
+                    MODx.fireEvent('ready');
                 },scope:this}
             }
         });

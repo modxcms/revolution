@@ -441,9 +441,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,initialized: false
     ,defaultClassKey: 'modResource'
     ,setup: function() {
-        if (!this.initialized) { this.getForm().setValues(this.config.record); }
-        if (!Ext.isEmpty(this.config.record.pagetitle)) {
-            Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+this.config.record.pagetitle+'</h2>');
+        if (!this.initialized) { 
+            this.getForm().setValues(this.config.record);
+            if (!Ext.isEmpty(this.config.record.pagetitle)) {
+                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+this.config.record.pagetitle+'</h2>');
+            }
+            this.defaultClassKey = this.config.record.class_key || 'modDocument';
         }
 
         if (MODx.config.use_editor && MODx.loadRTE) {
@@ -458,7 +461,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 this.rteLoaded = false;
             }
         }
-        this.defaultClassKey = this.config.record.class_key || 'modDocument';
         this.fireEvent('ready');
         this.initialized = true;
     }
@@ -508,9 +510,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,templateWarning: function() {
         var t = Ext.getCmp('modx-resource-template');
         if (!t) { return false; }
-        if(t.getValue() != t.originalValue) {
+        if(t.getValue() !== t.originalValue) {
             Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
                 if (e == 'yes') {
+                    if (MODx.unloadTVRTE) {
+                        MODx.unloadTVRTE();
+                    }
                     var tvpanel = Ext.getCmp('modx-panel-resource-tv');
                     if(tvpanel && tvpanel.body) {
                         this.tvum = tvpanel.body.getUpdater();
@@ -524,10 +529,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                             ,discardUrl: true
                             ,scripts: true
                             ,nocache: true
+                            ,callback: function(el) {
+                                tvpanel.fireEvent('load');
+                            }
+                            ,scope: this
                         });
                     }
                     t.originalValue = t.getValue();
-                    tvpanel.fireEvent('load');
                 } else {
                     t.reset();
                 }

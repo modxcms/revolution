@@ -1,3 +1,5 @@
+{$OnResourceTVFormPrerender}
+
 <input type="hidden" name="tvs" value="1" />
 <div id="modx-tv-tabs">
 {foreach from=$categories item=category}
