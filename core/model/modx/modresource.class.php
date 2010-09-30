@@ -68,7 +68,7 @@ class modResource extends modAccessibleSimpleObject {
                 }
             } else {
                 $this->_content= $this->getContent();
-                $maxIterations= intval($this->xpdo->context->getOption('parser_max_iterations',10));
+                $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',10));
                 $this->xpdo->parser->processElementTags('', $this->_content, false, false, '[[', ']]', array(), $maxIterations);
                 $this->_processed= true;
             }
@@ -262,7 +262,7 @@ class modResource extends modAccessibleSimpleObject {
     public function cleanAlias($alias, array $options = array()) {
         /* setup the various options */
         $iconv = function_exists('iconv');
-        $mbext = function_exists('mb_strlen') && (boolean) $this->xpdo->context->getOption('use_multibyte', false);
+        $mbext = function_exists('mb_strlen') && (boolean) $this->xpdo->getOption('use_multibyte', false);
         $charset = strtoupper((string) $this->xpdo->getOption('modx_charset', $options, 'UTF-8'));
         $delimiter = $this->xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
         $delimiters = $this->xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');
