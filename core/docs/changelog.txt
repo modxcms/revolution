@@ -2,6 +2,11 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODx Revolution 2.0.4-pl
+====================================
+- Added sanitization to REQUEST_URI for login controller
+- Updated version to 2.0.4-pl
+
 MODx Revolution 2.0.3-pl (September 30, 2010)
 ====================================
 - Fixed error in modResource::cleanAlias when context var is not available
