@@ -13,7 +13,9 @@ if (isset($_REQUEST['modahsh'])) {
     $modx->smarty->assign('modahsh',$hash);
 }
 if (!empty($_SERVER['REQUEST_URI'])) {
-    $modx->smarty->assign('returnUrl',$_SERVER['REQUEST_URI']);
+    $chars = array("'",'"','(',')',';','>','<','!');
+    $returnUrl = str_replace($chars,'',$_SERVER['REQUEST_URI']);
+    $modx->smarty->assign('returnUrl',$returnUrl);
 }
 
 if (!empty($_POST)) {
