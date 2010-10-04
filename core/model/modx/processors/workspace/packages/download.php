@@ -21,7 +21,7 @@ $package->set('signature',$signature);
 $package->set('state',1);
 $package->set('workspace',1);
 $package->set('created',date('Y-m-d h:i:s'));
-$package->set('provider',$scriptProperties['provider']);
+$package->set('provider',!empty($scriptProperties['provider']) ? $scriptProperties['provider'] : 1);
 
 /* get provider and metadata */
 $provider = $modx->getObject('transport.modTransportProvider',$scriptProperties['provider']);

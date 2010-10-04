@@ -21,7 +21,7 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
         },MODx.PanelSpacer,{
             xtype: 'hidden'
             ,name: 'provider'
-            ,value: rec.provider
+            ,value: Ext.isDefined(rec.provider) ? rec.provider : MODx.provider
         }];
         
         for (var i=0;i<ps.length;i=i+1) { 
