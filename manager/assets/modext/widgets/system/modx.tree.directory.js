@@ -415,13 +415,13 @@ MODx.window.CreateDirectory = function(config) {
             fieldLabel: _('name')
             ,name: 'name'
             ,xtype: 'textfield'
-            ,width: 150
+            ,anchor: '90%'
             ,allowBlank: false
         },{
             fieldLabel: _('file_folder_parent')
             ,name: 'parent'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '95%'
         }]
     });
     MODx.window.CreateDirectory.superclass.constructor.call(this,config);
@@ -457,12 +457,11 @@ MODx.window.ChmodDirectory = function(config) {
             fieldLabel: _('mode')
             ,name: 'mode'
             ,xtype: 'textfield'
-            ,width: 150
+            ,anchor: '90%'
             ,allowBlank: false
         },{
             name: 'dir'
             ,xtype: 'hidden'
-            ,width: 200
         }]
     });
     MODx.window.ChmodDirectory.superclass.constructor.call(this,config);
@@ -492,22 +491,21 @@ MODx.window.RenameFile = function(config) {
             ,name: 'path'
             ,xtype: 'statictextfield'
             ,submitValue: true
-            ,width: 400
+            ,anchor: '95%'
         },{
             fieldLabel: _('old_name')
             ,name: 'oldname'
             ,xtype: 'statictextfield'
-            ,width: 300
+            ,anchor: '90%'
         },{
             fieldLabel: _('new_name')
             ,name: 'newname'
             ,xtype: 'textfield'
-            ,width: 300
+            ,anchor: '90%'
             ,allowBlank: false
         },{
             name: 'dir'
             ,xtype: 'hidden'
-            ,width: 200
         }]
     });
     MODx.window.RenameFile.superclass.constructor.call(this,config);

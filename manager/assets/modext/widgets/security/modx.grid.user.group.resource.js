@@ -137,11 +137,13 @@ MODx.window.CreateUGRG = function(config) {
             ,name: 'target'
             ,hiddenName: 'target'
             ,editable: false
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-authority'
             ,fieldLabel: _('minimum_role')
             ,name: 'authority'
             ,value: 0
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-policy'
             ,fieldLabel: _('policy')
@@ -151,6 +153,7 @@ MODx.window.CreateUGRG = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
+            ,anchor: '90%'
         },{
             xtype: 'hidden'
             ,name: 'principal'
@@ -165,6 +168,7 @@ MODx.window.CreateUGRG = function(config) {
             ,name: 'context_key'
             ,hiddenName: 'context_key'
             ,editable: false
+            ,anchor: '90%'
         }]
     });
     MODx.window.CreateUGRG.superclass.constructor.call(this,config);
@@ -190,11 +194,13 @@ MODx.window.UpdateUGRG = function(config) {
             ,name: 'target'
             ,hiddenName: 'target'
             ,editable: false
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-authority'
             ,fieldLabel: _('minimum_role')
             ,name: 'authority'
             ,value: 0
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-policy'
             ,fieldLabel: _('policy')
@@ -204,6 +210,7 @@ MODx.window.UpdateUGRG = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
+            ,anchor: '90%'
         },{
             xtype: 'hidden'
             ,name: 'principal'
@@ -218,6 +225,7 @@ MODx.window.UpdateUGRG = function(config) {
             ,name: 'context_key'
             ,hiddenName: 'context_key'
             ,editable: false
+            ,anchor: '90%'
         }]
     });
     MODx.window.UpdateUGRG.superclass.constructor.call(this,config);

@@ -80,7 +80,6 @@ MODx.panel.AccessPolicy = function(config) {
                     ,policy: MODx.request.id
                     ,autoHeight: true
                     ,preventRender: true
-                    ,frame: true
                 }]
             }]
         }]
@@ -232,13 +231,13 @@ MODx.window.NewPermission = function(config) {
             ,name: 'name'
             ,hiddenName: 'name'
             ,id: 'modx-'+this.ident+'-name'
-            ,width: 250
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
-            ,width: 250
+            ,anchor: '90%'
             ,grow: true
         }]
     });

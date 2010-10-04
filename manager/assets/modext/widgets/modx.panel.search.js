@@ -21,7 +21,7 @@ MODx.panel.Search = function(config) {
                 columnWidth: .97
                 ,items: [{
                     title: _('search_criteria')
-					,cls: 'x-panel-header'
+                    ,cls: 'x-panel-header'
                     ,layout: 'form'
                     ,border: false
                     ,defaults: {

@@ -916,6 +916,7 @@ MODx.window.AddPropertySet = function(config) {
             ,fieldLabel: _('propertyset')
             ,name: 'propertyset'
             ,id: 'modx-aps-propertyset'
+            ,anchor: '95%'
             ,baseParams: {
                 action: 'getList'
                 ,showNotAssociated: true
@@ -948,12 +949,13 @@ MODx.window.AddPropertySet = function(config) {
                 ,fieldLabel: _('name')
                 ,name: 'name'
                 ,id: 'modx-aps-name'
+                ,anchor: '95%'
             },{
                 xtype: 'textarea'
                 ,fieldLabel: _('description')
                 ,name: 'description'
                 ,id: 'modx-aps-description'
-                ,width: '80%'
+                ,anchor: '95%'
                 ,grow: true
             }]
         }]
@@ -982,7 +984,7 @@ MODx.window.ImportProperties = function(config) {
             ,fieldLabel: _('file')
             ,name: 'file'
             ,id: 'modx-impp-file'
-            ,width: 250
+            ,anchor: '95%'
             ,inputType: 'file'
         }]
     });

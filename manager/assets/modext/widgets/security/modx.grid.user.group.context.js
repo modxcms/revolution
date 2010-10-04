@@ -134,11 +134,13 @@ MODx.window.CreateUGAccessContext = function(config) {
             ,hiddenName: 'target'
             ,editable: false
             ,allowBlank: false
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-authority'
             ,fieldLabel: _('minimum_role')
             ,name: 'authority'
             ,value: 0
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-policy'
             ,fieldLabel: _('policy')
@@ -149,6 +151,7 @@ MODx.window.CreateUGAccessContext = function(config) {
                 ,combo: '1'
             }
             ,allowBlank: false
+            ,anchor: '90%'
         },{
             xtype: 'hidden'
             ,name: 'principal'
@@ -178,11 +181,13 @@ MODx.window.UpdateUGAccessContext = function(config) {
             ,name: 'target'
             ,hiddenName: 'target'
             ,editable: false
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-authority'
             ,fieldLabel: _('minimum_role')
             ,name: 'authority'
             ,value: 0
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-policy'
             ,fieldLabel: _('policy')
@@ -192,6 +197,7 @@ MODx.window.UpdateUGAccessContext = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
+            ,anchor: '90%'
         },{
             xtype: 'hidden'
             ,name: 'principal'

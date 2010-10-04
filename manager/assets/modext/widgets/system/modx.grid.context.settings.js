@@ -67,9 +67,9 @@ MODx.window.UpdateContextSetting = function(config) {
             ,name: 'key'
             ,id: 'modx-ucs-key'
             ,allowBlank: false
-            ,width: 300
             ,value: r.key
-			,submitValue: r.key
+            ,submitValue: r.key
+            ,anchor: '90%'
         },{
             xtype: r.xtype || 'textfield'
             ,fieldLabel: _('value')
@@ -77,6 +77,7 @@ MODx.window.UpdateContextSetting = function(config) {
             ,id: 'modx-ucs-value'
             ,allowBlank: false
             ,value: r.value
+            ,anchor: '90%'
         }]
     });
     MODx.window.UpdateContextSetting.superclass.constructor.call(this,config);

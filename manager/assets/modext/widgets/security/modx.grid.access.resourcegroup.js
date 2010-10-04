@@ -43,8 +43,8 @@ Ext.extend(MODx.grid.AccessResourceGroup,MODx.grid.Grid,{
                 xtype: 'modx-window-access-resource-group-create'
                 ,record: r
                 ,listeners: {
-                	'success': {fn: function(frm,a) {
-                        this.getStore().baseParams = { 
+                    'success': {fn: function(frm,a) {
+                        this.getStore().baseParams = {
                             action: 'getList'
                             ,type: this.config.type
                             ,target: this.combos.rg.getValue()
@@ -69,7 +69,7 @@ Ext.extend(MODx.grid.AccessResourceGroup,MODx.grid.Grid,{
                 ,acl: r.id
                 ,record: r
                 ,listeners: {
-                	'success': {fn:this.refresh,scope:this}
+                    'success': {fn:this.refresh,scope:this}
                 }
             });
         } else {
@@ -178,6 +178,7 @@ MODx.window.CreateAccessResourceGroup = function(config) {
             ,name: 'target'
             ,hiddenName: 'target'
             ,id: 'modx-'+this.ident+'-target'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-usergroup'
             ,fieldLabel: _('user_group')
@@ -188,6 +189,7 @@ MODx.window.CreateAccessResourceGroup = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
+            ,anchor: '90%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('authority')
@@ -204,12 +206,14 @@ MODx.window.CreateAccessResourceGroup = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-context'
             ,fieldLabel: _('context')
             ,name: 'context_key'
             ,hiddenName: 'context_key'
             ,id: 'modx-'+this.ident+'-context-key'
+            ,anchor: '90%'
         },{
             xtype: 'hidden'
             ,name: 'principal_class'

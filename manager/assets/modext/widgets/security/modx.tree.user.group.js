@@ -142,7 +142,7 @@ MODx.window.CreateUserGroup = function(config) {
             ,id: 'modx-cug-name'
             ,xtype: 'textfield'
             ,allowBlank: false
-            ,width: 250
+            ,anchor: '90%'
         }]
     });
     MODx.window.CreateUserGroup.superclass.constructor.call(this,config);
@@ -165,7 +165,7 @@ MODx.window.CreateUserGroup = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
-            ,width: 150
+            ,anchor: '90%'
         },{
             name: 'parent'
             ,id: 'modx-'+this.ident+'-parent'
@@ -195,6 +195,7 @@ MODx.window.AddUserToUserGroup = function(config) {
             ,editable: true
             ,typeAhead: true
             ,id: 'modx-'+this.ident+'-user'
+            ,anchor: '90%'
         },{
             fieldLabel: _('role')
             ,name: 'role'
@@ -202,6 +203,7 @@ MODx.window.AddUserToUserGroup = function(config) {
             ,xtype: 'modx-combo-role'
             ,id: 'modx-'+this.ident+'-role'
             ,allowBlank: false
+            ,anchor: '90%'
         },{
             name: 'usergroup'
             ,xtype: 'hidden'

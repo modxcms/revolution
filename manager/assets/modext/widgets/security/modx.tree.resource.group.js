@@ -201,7 +201,7 @@ MODx.window.CreateResourceGroup = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
-            ,width: 150
+            ,anchor: '90%'
         }]
     });
     MODx.window.CreateResourceGroup.superclass.constructor.call(this,config);
