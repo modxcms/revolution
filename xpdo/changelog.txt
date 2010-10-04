@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- [#XPDO-74] Fix bug in xPDOObject::save() when updating rows with compound primary keys
 - [#XPDO-72] Fix invalid call to xPDOManager::getPhpType() in xPDOGenerator::parseSchema()
 - Fix accessibility of xPDOTransport::_unpack()
 - Divert excess log output from xPDOVehicle classes to LOG_LEVEL_DEBUG
