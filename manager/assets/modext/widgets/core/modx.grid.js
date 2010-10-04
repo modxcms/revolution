@@ -34,12 +34,12 @@ MODx.grid.Grid = function(config) {
     if (config.paging) {
         Ext.applyIf(config,{
             bbar: new Ext.PagingToolbar({
-                pageSize: config.pageSize || (MODx.config.default_per_page || 20)
+                pageSize: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
                 ,store: this.getStore()
                 ,displayInfo: true
                 ,items: config.pagingItems || ['-',_('per_page')+':',{
                     xtype: 'textfield'
-                    ,value: config.pageSize || (MODx.config.default_per_page || 20)
+                    ,value: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
                     ,width: 40
                     ,listeners: {
                         'change': {fn:function(tf,nv,ov) {
@@ -94,7 +94,7 @@ MODx.grid.Grid = function(config) {
     this.getStore().load({
         params: {
             start: config.pageStart || 0
-            ,limit: config.pageSize || 20
+            ,limit: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
         }
         ,scope: this
         ,callback: function() { this.getStore().reload(); } /* fixes comboeditor bug */

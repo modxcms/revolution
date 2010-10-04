@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- Fixed issue with paging toolbar pageSize being interpreted as string rather than int
 - Fixed issue where parent id constraint was ignored for default template on new Resources
 - Added sanitization to REQUEST_URI for login controller
 - Updated version to 2.0.4-pl
