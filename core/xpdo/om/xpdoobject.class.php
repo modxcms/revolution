@@ -1248,7 +1248,7 @@ class xPDOObject {
                             if ($iteration) {
                                 $where .= " AND ";
                             }
-                            $where .= $this->xpdo->escape($_k) . " = :{$k}";
+                            $where .= $this->xpdo->escape($k) . " = :{$k}";
                             $bindings[":{$k}"]['value']= $this->_fields[$k];
                             $bindings[":{$k}"]['type']= $vt;
                             $iteration++;

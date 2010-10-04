@@ -1008,6 +1008,29 @@ class xPDO {
     }
 
     /**
+     * Get indices defined for a table class.
+     *
+     * @param string $className The name of the class to lookup indices for.
+     * @return array An array of indices and their details for the specified class.
+     */
+    public function getIndexMeta($className) {
+        $indices= array();
+        if ($className= $this->loadClass($className)) {
+            if ($ancestry= $this->getAncestry($className)) {
+                for ($i= count($ancestry) -1; $i >= 0; $i--) {
+                    if (isset($this->map[$ancestry[$i]]['indexes'])) {
+                        $indices= array_merge($indices, $this->map[$ancestry[$i]]['indexes']);
+                    }
+                }
+                if ($this->getDebug() === true) {
+                    $this->log(xPDO::LOG_LEVEL_DEBUG, "Returning indices: " . print_r($indices, true));
+                }
+            }
+        }
+        return $indices;
+    }
+
+    /**
      * Gets the primary key field(s) for a class.
      *
      * @param string $className The name of the class to lookup the primary key
