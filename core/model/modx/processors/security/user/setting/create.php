@@ -51,6 +51,18 @@ $setting->fromArray($scriptProperties,'',true);
  * for user settings
  */
 $settingNameKey = 'setting_'.$scriptProperties['key'];
+/* set lexicon name/description */
+$topic = $modx->getObject('modLexiconTopic',array(
+    'name' => 'default',
+    'namespace' => $setting->get('namespace'),
+));
+if ($topic == null) {
+    $topic = $modx->newObject('modLexiconTopic');
+    $topic->set('name','default');
+    $topic->set('namespace',$setting->get('namespace'));
+    $topic->save();
+}
+
 if (!$modx->lexicon->exists($settingNameKey)) {
     $entry = $modx->getObject('modLexiconEntry',array(
         'namespace' => $namespace->get('name'),
