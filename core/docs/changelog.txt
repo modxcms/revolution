@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- [#MODX-2379] Fixed issue where permission checks were swapped in Resource context menu with regards to delete/undelete
 - [#MODX-2384] Fixed issue where treepanel still showed if all trees were hidden via permissions
 - [#MODX-2389] Fixed issue where setup options, license and readme displays were not cleared after installation of package
 - Fixed issue where loading mask shows up and never disappears on extended Resource types
