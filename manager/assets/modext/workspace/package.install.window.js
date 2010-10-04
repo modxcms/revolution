@@ -32,8 +32,21 @@ MODx.window.PackageInstaller = function(config) {
         }]
     });
     MODx.window.PackageInstaller.superclass.constructor.call(this,config);
+    this.on('show',this.resetForms,this);
+    this.on('finish',this.resetForms,this);
 };
-Ext.extend(MODx.window.PackageInstaller,MODx.Wizard);
+Ext.extend(MODx.window.PackageInstaller,MODx.Wizard,{
+    resetForms: function() {
+        var b = Ext.getCmp('modx-pi-license-box');
+        if (b) { b.setValue(''); }
+
+        b = Ext.getCmp('modx-pi-readme-box');
+        if (b) { b.setValue(''); }
+
+        var el = Ext.getCmp('modx-setup-options').getEl();
+        if (el) { el.update(''); }
+    }
+});
 Ext.reg('modx-window-package-installer',MODx.window.PackageInstaller);
 
 MODx.panel.PILicense = function(config) {
