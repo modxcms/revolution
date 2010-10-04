@@ -22,12 +22,14 @@ MODx.Layout = function(config){
     MODx.siteId = config.auth;
 
     var tabs = [];
+    var showTree = false;
     if (MODx.perm.resource_tree) {
        tabs.push({
             xtype: 'modx-tree-resource'
             ,title: _('resources')
             ,id: 'modx-resource-tree'
         });
+        showTree = true;
     }
     if (MODx.perm.element_tree) {
         tabs.push({
@@ -35,6 +37,7 @@ MODx.Layout = function(config){
             ,title: _('elements')
             ,id: 'modx-element-tree'
         });
+        showTree = true;
     }
     if (MODx.perm.file_tree) {
         tabs.push({
@@ -43,6 +46,7 @@ MODx.Layout = function(config){
             ,id: 'modx-file-tree'
             ,hideFiles: false
         });
+        showTree = true;
     }
 
     Ext.applyIf(config,{
@@ -103,6 +107,11 @@ MODx.Layout = function(config){
         ,'loadTabs': true
     });
     this.loadKeys();
+    if (!showTree) {
+        Ext.getCmp('modx-leftbar-tabs').collapse(false);
+        Ext.get('modx-leftbar').hide();
+        Ext.get('modx-leftbar-tabs-xcollapsed').setStyle('display','none');
+    }
     this.fireEvent('afterLayout');
 };
 Ext.extend(MODx.Layout,Ext.Viewport,{
