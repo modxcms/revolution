@@ -76,10 +76,7 @@ MODx.grid.Grid = function(config) {
     }
     MODx.grid.Grid.superclass.constructor.call(this,config);
     this._loadMenu(config);
-    this.addEvents({
-        beforeRemoveRow: true
-        ,afterRemoveRow: true
-    });
+    this.addEvents('beforeRemoveRow','afterRemoveRow','afterAutoSave');
     if (!config.preventRender) { this.render(); }
 	
     this.on('rowcontextmenu',this._showMenu,this);    
@@ -134,6 +131,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                     if (!this.config.preventSaveRefresh) {
                         this.refresh();
                     }
+                    this.fireEvent('afterAutoSave',r);
                 },scope:this}
             }
         });

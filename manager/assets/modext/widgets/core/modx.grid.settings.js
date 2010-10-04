@@ -179,7 +179,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         } else {
             m.push({
                 text: _('setting_update')
-                ,handler: {xtype: 'modx-window-setting-update'}
+                ,handler: {xtype: 'modx-window-setting-update', record: {fk: Ext.isDefined(this.config.fk) ? this.config.fk : 0}}
             },'-',{
                 text: _('setting_remove')
                 ,handler: this.remove.createDelegate(this,['setting_remove_confirm'])

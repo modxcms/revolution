@@ -386,8 +386,11 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,preventRender: true
                     ,user: config.user
                     ,width: '97%'
+                    ,listeners: {
+                        'afterAutoSave':{fn:this.markDirty,scope:this}
+                    }
                 }]
-            })
+            });
         }
         f.push({
             title: _('access_permissions')

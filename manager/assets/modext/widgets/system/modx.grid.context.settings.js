@@ -19,6 +19,7 @@ MODx.grid.ContextSettings = function(config) {
         ,saveParams: {
             context_key: config.context_key
         }
+        ,fk: config.context_key
         ,autosave: false
         ,tbar: [{
             text: _('create_new')

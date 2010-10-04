@@ -19,6 +19,7 @@ MODx.grid.UserSettings = function(config) {
         ,saveParams: {
             user: config.user
         }
+        ,fk: config.user
         ,tbar: [{
             text: _('create_new')
             ,scope: this

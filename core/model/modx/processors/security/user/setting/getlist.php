@@ -90,13 +90,6 @@ foreach ($settings as $setting) {
         ? ''
         : strftime('%b %d, %Y %I:%M %p',strtotime($setting->get('editedon')));
 
-
-    $menu = array();
-    $menu[] = array(
-        'text' => $modx->lexicon('setting_remove'),
-        'handler' => 'this.remove.createDelegate(this,["setting_remove_confirm"])',
-    );
-    $settingArray['menu'] = $menu;
     $list[] = $settingArray;
 }
 return $this->outputArray($list,$count);
