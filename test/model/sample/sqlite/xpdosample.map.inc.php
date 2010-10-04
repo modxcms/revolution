@@ -94,7 +94,7 @@ $xpdo_meta_map['xPDOSample']= array (
     'float' => 
     array (
       'dbtype' => 'decimal',
-      'precision' => '(10,5)',
+      'precision' => '10,5',
       'phptype' => 'float',
       'null' => false,
       'default' => '1.01230',

@@ -103,7 +103,7 @@ class xPDOGenerator_sqlite extends xPDOGenerator {
                 $pk = 0;
                 extract($field, EXTR_OVERWRITE);
                 $Field= $name;
-                $PhpType= $this->manager->getPhpType($type);
+                $PhpType= $this->manager->xpdo->driver->getPhpType($type);
                 $Null= ' null="' . ($notnull ? 'false' : 'true') . '"';
                 $Default= $this->getDefault($dflt_value);
                 $Extra= '';

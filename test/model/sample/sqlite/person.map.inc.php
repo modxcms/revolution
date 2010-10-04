@@ -4,16 +4,16 @@ $xpdo_meta_map['Person']= array (
   'table' => 'person',
   'fields' => 
   array (
-    'first_name' => NULL,
-    'last_name' => NULL,
-    'middle_name' => NULL,
+    'first_name' => '',
+    'last_name' => '',
+    'middle_name' => '',
     'date_modified' => 'CURRENT_TIMESTAMP',
     'dob' => NULL,
     'gender' => '',
-    'blood_type' => '',
+    'blood_type' => NULL,
     'username' => NULL,
-    'password' => NULL,
-    'security_level' => NULL,
+    'password' => '',
+    'security_level' => 1,
   ),
   'fieldMeta' => 
   array (
@@ -23,6 +23,7 @@ $xpdo_meta_map['Person']= array (
       'precision' => '100',
       'phptype' => 'string',
       'null' => false,
+      'default' => '',
     ),
     'last_name' => 
     array (
@@ -30,6 +31,7 @@ $xpdo_meta_map['Person']= array (
       'precision' => '100',
       'phptype' => 'string',
       'null' => false,
+      'default' => '',
     ),
     'middle_name' => 
     array (
@@ -37,6 +39,7 @@ $xpdo_meta_map['Person']= array (
       'precision' => '100',
       'phptype' => 'string',
       'null' => false,
+      'default' => '',
     ),
     'date_modified' => 
     array (
@@ -61,11 +64,10 @@ $xpdo_meta_map['Person']= array (
     ),
     'blood_type' => 
     array (
-      'dbtype' => 'enum',
-      'precision' => '\'\',\'A+\',\'A-\',\'B+\',\'B-\',\'AB+\',\'AB-\',\'O+\',\'O-\'',
+      'dbtype' => 'varchar',
+      'precision' => '100',
       'phptype' => 'string',
-      'null' => false,
-      'default' => '',
+      'null' => true,
     ),
     'username' => 
     array (
@@ -81,6 +83,7 @@ $xpdo_meta_map['Person']= array (
       'precision' => '255',
       'phptype' => 'password',
       'null' => false,
+      'default' => '',
     ),
     'security_level' => 
     array (
@@ -88,6 +91,7 @@ $xpdo_meta_map['Person']= array (
       'precision' => '4',
       'phptype' => 'integer',
       'null' => false,
+      'default' => 1,
     ),
   ),
   'indexes' => 
@@ -130,6 +134,17 @@ $xpdo_meta_map['Person']= array (
       'foreign' => 'person',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'BloodType' => 
+    array (
+      'class' => 'BloodType',
+      'local' => 'blood_type',
+      'foreign' => 'type',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
   'validation' => 

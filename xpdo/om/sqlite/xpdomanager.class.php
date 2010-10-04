@@ -106,6 +106,7 @@ class xPDOManager_sqlite extends xPDOManager {
             $pktype= $this->xpdo->getPKType($className);
             $sql= 'CREATE TABLE ' . $tableName . ' (';
             $fieldMeta = $this->xpdo->getFieldMeta($className);
+            $nativeGen = false;
             while (list($key, $meta)= each($fieldMeta)) {
                 $dbtype= strtoupper($meta['dbtype']);
                 $precision= isset ($meta['precision']) && !preg_match('/ENUM/i', $dbtype) ? '(' . $meta['precision'] . ')' : '';
@@ -116,14 +117,19 @@ class xPDOManager_sqlite extends xPDOManager {
                     ? false
                     : ($meta['null'] === 'false' || empty($meta['null']));
                 $null= $notNull ? ' NOT NULL' : ' NULL';
-                $extra= (isset ($meta['index']) && $meta['index'] == 'pk' && !is_array($pk) && $pktype == 'integer' && isset ($meta['generated']) && $meta['generated'] == 'native') ? ' PRIMARY KEY AUTOINCREMENT' : '';
+                $extra = '';
+                if (isset ($meta['index']) && $meta['index'] == 'pk' && !is_array($pk) && $pktype == 'integer' && isset ($meta['generated']) && $meta['generated'] == 'native') {
+                    $extra= ' PRIMARY KEY AUTOINCREMENT';
+                    $nativeGen = true;
+                    $null= '';
+                }
                 if (empty ($extra) && isset ($meta['extra'])) {
                     $extra= ' ' . $meta['extra'];
                 }
                 $default= '';
                 if (array_key_exists('default', $meta)) {
                     $defaultVal= $meta['default'];
-                    if ($defaultVal === null || strtoupper($defaultVal) === 'NULL' || in_array($this->xpdo->driver->getPHPType($dbtype), array('integer', 'float')) || (in_array($meta['phptype'], array('datetime', 'date', 'timestamp', 'time')) && in_array($defaultVal, array_merge($this->xpdo->driver->_currentTimestamps, $this->xpdo->driver->_currentDates, $this->xpdo->driver->_currentTimes)))) {
+                    if ($defaultVal === null || strtoupper($defaultVal) === 'NULL' || in_array($this->xpdo->driver->getPhpType($dbtype), array('integer', 'float')) || (in_array($meta['phptype'], array('datetime', 'date', 'timestamp', 'time')) && in_array($defaultVal, array_merge($this->xpdo->driver->_currentTimestamps, $this->xpdo->driver->_currentDates, $this->xpdo->driver->_currentTimes)))) {
                         $default= ' DEFAULT ' . $defaultVal;
                     } else {
                         $default= ' DEFAULT \'' . $defaultVal . '\'';
@@ -137,58 +143,40 @@ class xPDOManager_sqlite extends xPDOManager {
                 }
             }
             $sql= substr($sql, 0, strlen($sql) - 1);
-            if (is_array($pk)) {
-                $pkarray= array ();
-                foreach ($pk as $k) {
-                    $pkarray[]= $this->xpdo->escape($k);
-                }
-                $pk= implode(',', $pkarray);
-                $sql .= ', PRIMARY KEY (' . $pk . ')';
-            }
-            elseif ($pk) {
-                $pk= $this->xpdo->escape($pk);
-            }
+            $indexes = $this->xpdo->getIndexMeta($className);
+            $createIndices = array();
+            $tableConstraints = array();
             if (!empty ($indexes)) {
-                foreach ($indexes as $indexkey => $index) {
+                foreach ($indexes as $indexkey => $indexdef) {
+                    $indexType = ($indexdef['primary'] ? 'PRIMARY KEY' : ($indexdef['unique'] ? 'UNIQUE' : 'INDEX'));
+                    $index = $indexdef['columns'];
                     if (is_array($index)) {
                         $indexset= array ();
-                        foreach ($index as $indexmember) {
-                            $indexset[]= $this->xpdo->escape($indexmember);
+                        foreach ($index as $indexmember => $indexmemberdetails) {
+                            $indexMemberDetails = $this->xpdo->escape($indexmember);
+                            $indexset[]= $indexMemberDetails;
                         }
                         $indexset= implode(',', $indexset);
-                    } else {
-                        $indexset= $this->xpdo->escape($indexkey);
-                    }
-                    $sql .= ", INDEX " . $this->xpdo->escape($indexkey) . " ({$indexset})";
+                        if (!empty($indexset)) {
+                            switch ($indexType) {
+                                case 'UNIQUE':
+                                    $createIndices[$indexkey] = "CREATE UNIQUE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
+                                    break;
+                                case 'INDEX':
+                                    $createIndices[$indexkey] = "CREATE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
+                                    break;
+                                case 'PRIMARY KEY':
+                                    if ($nativeGen) break;
+                                default:
+                                    $tableConstraints[]= "{$indexType} ({$indexset})";
+                                    break;
+                            }
+                        }
+                    } 
                 }
             }
-            if (!empty ($uniqueIndexes)) {
-                foreach ($uniqueIndexes as $indexkey => $index) {
-                    if (is_array($index)) {
-                        $indexset= array ();
-                        foreach ($index as $indexmember) {
-                            $indexset[]= $this->xpdo->escape($indexmember);
-                        }
-                        $indexset= implode(',', $indexset);
-                    } else {
-                        $indexset= $this->xpdo->escape($indexkey);
-                    }
-                    $sql .= ", UNIQUE INDEX {$indexkey} ({$indexset})";
-                }
-            }
-            if (!empty ($fulltextIndexes)) {
-                foreach ($fulltextIndexes as $indexkey => $index) {
-                    if (is_array($index)) {
-                        $indexset= array ();
-                        foreach ($index as $indexmember) {
-                            $indexset[]= $this->xpdo->escape($indexmember);
-                        }
-                        $indexset= implode(',', $indexset);
-                    } else {
-                        $indexset= $this->xpdo->escape($indexkey);
-                    }
-                    $sql .= ", FULLTEXT INDEX {$indexkey} ({$indexset})";
-                }
+            if (!empty($tableConstraints)) {
+                $sql .= ', ' . implode(', ', $tableConstraints);
             }
             $sql .= ")";
             $created= $this->xpdo->exec($sql);
@@ -197,6 +185,16 @@ class xPDOManager_sqlite extends xPDOManager {
             } else {
                 $created= true;
                 $this->xpdo->log(xPDO::LOG_LEVEL_INFO, 'Created table ' . $tableName . "\nSQL: {$sql}\n");
+            }
+            if ($created === true && !empty($createIndices)) {
+                foreach ($createIndices as $createIndexKey => $createIndex) {
+                    $indexCreated = $this->xpdo->exec($createIndex);
+                    if ($indexCreated === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create index {$createIndexKey}: {$createIndex} " . print_r($this->xpdo->errorInfo(), true));
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_INFO, "Created index {$createIndexKey} on {$tableName}: {$createIndex}");
+                    }
+                }
             }
         }
         return $created;
