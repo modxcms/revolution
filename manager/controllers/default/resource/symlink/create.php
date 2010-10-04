@@ -74,7 +74,7 @@ $fcDt = $modx->getObject('modActionDom',$c);
 if ($fcDt) {
     $p = $parent ? $parent->get('id') : 0;
     $constraintField = $fcDt->get('constraint_field');
-    if ($constraintField == 'parent' && $p == $fcDt->get('constraint')) {
+    if ($constraintField == 'id' && $p == $fcDt->get('constraint')) {
         $default_template = $fcDt->get('value');
     } else if (empty($constraintField)) {
         $default_template = $fcDt->get('value');
