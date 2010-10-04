@@ -19,7 +19,7 @@ MODx.panel.AccessPolicies = function(config) {
             ,cls: 'modx-page-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 1.5em'
+            ,bodyStyle: 'padding: 15px'
             ,items: [{
                 html: '<p>'+_('policy_management_msg')+'</p>'
                 ,border: false
@@ -68,11 +68,11 @@ MODx.grid.AccessPolicy = function(config) {
             ,width: 375
             ,editor: { xtype: 'textfield' }
         }]
-		,tbar: [{
-        	text: _('add')
-        	,scope: this
-        	,handler: { xtype: 'modx-window-access-policy-create' ,blankValues: true }
-		}]
+        ,tbar: [{
+            text: _('add')
+            ,scope: this
+            ,handler: { xtype: 'modx-window-access-policy-create' ,blankValues: true }
+        }]
     });
     MODx.grid.AccessPolicy.superclass.constructor.call(this,config);
 };
@@ -103,13 +103,13 @@ MODx.window.CreateAccessPolicy = function(config) {
             ,name: 'name'
             ,id: 'modx-cap-name'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-cap-description'
             ,xtype: 'textarea'
-            ,width: 230
+            ,anchor: '90%'
             ,height: 50
         },{
             name: 'class'

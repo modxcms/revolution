@@ -9,11 +9,11 @@
  */
 MODx.grid.Role = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
-		title: _('roles')
+    Ext.applyIf(config,{
+        title: _('roles')
         ,id: 'modx-grid-role'
         ,url: MODx.config.connectors_url+'security/role.php'
-		,fields: ['id','name','description','authority','menu']
+        ,fields: ['id','name','description','authority','menu']
         ,paging: true
         ,autosave: true
         ,columns: [{
@@ -39,13 +39,13 @@ MODx.grid.Role = function(config) {
             ,editor: { xtype: 'textfield' }
             ,sortable: true
         }]
-		,tbar: [{
-			text: _('create_new')
-			,handler: this.createRole
+        ,tbar: [{
+            text: _('create_new')
+            ,handler: this.createRole
             ,scope: this
-		}]
-	});
-	MODx.grid.Role.superclass.constructor.call(this,config);
+        }]
+    });
+    MODx.grid.Role.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
     createRole: function(btn,e) {
@@ -75,17 +75,19 @@ MODx.window.CreateRole = function(config) {
             ,fieldLabel: _('name')
             ,xtype: 'textfield'
             ,allowBlank: false
+            ,anchor: '90%'
         },{
             name: 'authority'
             ,fieldLabel: _('authority')
             ,xtype: 'textfield'
             ,allowBlank: false
             ,value: 0
+            ,width: 50
         },{
             name: 'description'
             ,fieldLabel: _('description')
             ,xtype: 'textarea'
-            ,width: 250
+            ,anchor: '90%'
             ,grow: true
         }]
     });

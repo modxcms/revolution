@@ -7,12 +7,12 @@
  * @xtype modx-grid-contexts
  */
 MODx.grid.Context = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		title: _('contexts')
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('contexts')
         ,url: MODx.config.connectors_url+'context/index.php'
-		,fields: ['key','description','menu']
-		,paging: true
+        ,fields: ['key','description','menu']
+        ,paging: true
         ,autosave: true
         ,remoteSort: true
         ,primaryKey: 'key'
@@ -28,12 +28,12 @@ MODx.grid.Context = function(config) {
             ,sortable: false
             ,editor: { xtype: 'textfield' }
         }]
-		,tbar: [{
-			text: _('create_new')
-			,handler: { xtype: 'modx-window-context-create' ,blankValues: true }
-		}]
-	});
-	MODx.grid.Context.superclass.constructor.call(this,config);
+        ,tbar: [{
+                text: _('create_new')
+                ,handler: { xtype: 'modx-window-context-create' ,blankValues: true }
+        }]
+    });
+    MODx.grid.Context.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     update: function(itm,e) {
@@ -60,13 +60,13 @@ MODx.window.CreateContext = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('context_key')
             ,name: 'key'
-            ,width: 250
+            ,anchor: '90%'
             ,maxLength: 100
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
-            ,width: 300
+            ,anchor: '90%'
             ,grow: true
         }]
     });
@@ -96,7 +96,7 @@ MODx.panel.Contexts = function(config) {
             ,cls: 'modx-page-header'
         },{
             layout: 'form'
-            ,bodyStyle: 'padding: 1.5em'
+            ,bodyStyle: 'padding: 15px'
             ,items: [{
                 html: '<p>'+_('context_management_message')+'</p>'
                 ,border: false

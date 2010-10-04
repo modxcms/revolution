@@ -25,7 +25,7 @@ MODx.grid.AccessContext = function(config) {
             ,{ header: _('authority') ,dataIndex: 'authority' ,width: 50 }
             ,{ header: _('policy') ,dataIndex: 'policy_name' ,width: 175 }
         ]
-		,tbar: [{
+        ,tbar: [{
             text: _('acl_add')
             ,scope: this
             ,handler: this.createAcl
@@ -34,31 +34,31 @@ MODx.grid.AccessContext = function(config) {
     MODx.grid.AccessContext.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
-	combos: {}
-	,windows: {}
-	
-	,createAcl: function(itm,e) {
+    combos: {}
+    ,windows: {}
+
+    ,createAcl: function(itm,e) {
         var r = {
             target: this.config.context_key
             ,principal_class: 'modUserGroup'
         };
-		if (!this.windows.create_acl) {
-			this.windows.create_acl = MODx.load({
+        if (!this.windows.create_acl) {
+            this.windows.create_acl = MODx.load({
                 xtype: 'modx-window-access-context-create'
-	            ,record: r
-	            ,listeners: {
-	            	'success': {fn:function(o) {
-    	                this.refresh();
-	            	},scope:this}
-	            }
-	        });
-		}
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(o) {
+                    this.refresh();
+                    },scope:this}
+                }
+            });
+        }
         this.windows.create_acl.fp.getForm().reset();
-		this.windows.create_acl.setValues(r);
+        this.windows.create_acl.setValues(r);
         this.windows.create_acl.show(e.target);
-	}
+    }
     
-	,editAcl: function(itm,e) {
+    ,editAcl: function(itm,e) {
         var r = this.menu.record;
         Ext.applyIf(r,{
             context: r.target
@@ -66,16 +66,16 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
         });
         
         if (!this.windows.update_acl) {
-			this.windows.update_acl = MODx.load({
-	            xtype: 'modx-window-access-context-update'
-	            ,acl: r.id
-	            ,record: r
-	            ,listeners: {
-	            	'success': {fn:this.refresh,scope:this}
-	            }
-	        });
-		}
-		this.windows.update_acl.setValues(r);
+            this.windows.update_acl = MODx.load({
+                xtype: 'modx-window-access-context-update'
+                ,acl: r.id
+                ,record: r
+                ,listeners: {
+                    'success': {fn:this.refresh,scope:this}
+                }
+            });
+        }
+        this.windows.update_acl.setValues(r);
         this.windows.update_acl.show(e.target);
     }
 	
@@ -126,6 +126,7 @@ MODx.window.UpdateAccessContext = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
+            ,anchor: '90%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('authority')
@@ -144,6 +145,7 @@ MODx.window.UpdateAccessContext = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
+            ,anchor: '90%'
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
@@ -193,6 +195,7 @@ MODx.window.CreateAccessContext = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
+            ,anchor: '90%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('authority')
@@ -209,6 +212,7 @@ MODx.window.CreateAccessContext = function(config) {
                 action: 'getList'
                 ,combo: '1'
             }
+            ,anchor: '90%'
         }]
     });
     MODx.window.CreateAccessContext.superclass.constructor.call(this,config);

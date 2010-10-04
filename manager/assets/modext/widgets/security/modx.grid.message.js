@@ -174,21 +174,25 @@ MODx.window.CreateMessage = function(config) {
             ,listeners: {
                 'select': {fn:this.showRecipient,scope:this}
             }
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-user'
             ,id: 'mc-recipient-user'
             ,fieldLabel: _('user')
             ,allowBlank: true
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-usergroup'
             ,id: 'mc-recipient-usergroup'
             ,fieldLabel: _('usergroup')
             ,allowBlank: true
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-role'
             ,id: 'mc-recipient-role'
             ,fieldLabel: _('role')
             ,allowBlank: true
+            ,anchor: '90%'
         },{
             xtype: 'hidden'
             ,id: 'mc-recipient-all'
@@ -200,12 +204,12 @@ MODx.window.CreateMessage = function(config) {
             ,fieldLabel: _('subject')
             ,name: 'subject'
             ,maxLength: 255
-            ,width: 300
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('message')
             ,name: 'message'
-            ,width: 300
+            ,anchor: '90%'
             ,grow: true
         }]
         ,listeners: {

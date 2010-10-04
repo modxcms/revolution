@@ -265,7 +265,7 @@ MODx.window.CreateActionDom = function(config) {
             ,hiddenName: 'action_id'
             ,xtype: 'modx-combo-action'
             ,id: 'modx-'+this.ident+'-action'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('usergroup')
             ,description: _('usergroup_desc')
@@ -274,7 +274,7 @@ MODx.window.CreateActionDom = function(config) {
             ,xtype: 'modx-combo-usergroup'
             ,baseParams: { action: 'getList' ,addNone: true }
             ,id: 'modx-'+this.ident+'-usergroup'
-            ,width: 200
+            ,anchor: '90%'
             
         },{
             fieldLabel: _('description')
@@ -282,7 +282,7 @@ MODx.window.CreateActionDom = function(config) {
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
-            ,width: 200
+            ,anchor: '90%'
             ,height: 50
             
         },{ html: '<hr />' },{
@@ -291,7 +291,7 @@ MODx.window.CreateActionDom = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
             
         },{
             fieldLabel: _('containing_panel')
@@ -299,7 +299,7 @@ MODx.window.CreateActionDom = function(config) {
             ,name: 'container'
             ,id: 'modx-'+this.ident+'-container'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
             
         },{
             fieldLabel: _('rule')
@@ -307,7 +307,7 @@ MODx.window.CreateActionDom = function(config) {
             ,name: 'rule'
             ,id: 'modx-'+this.ident+'-rule'
             ,xtype: 'modx-combo-rule-type'
-            ,width: 200
+            ,anchor: '90%'
             
         },{
             fieldLabel: _('value')
@@ -315,7 +315,7 @@ MODx.window.CreateActionDom = function(config) {
             ,name: 'value'
             ,id: 'modx-'+this.ident+'-value'
             ,xtype: 'textarea'
-            ,width: 200
+            ,anchor: '90%'
             ,height: 50
             
         },{ html: '<hr />' },{
@@ -324,21 +324,21 @@ MODx.window.CreateActionDom = function(config) {
             ,name: 'constraint_class'
             ,id: 'modx-'+this.ident+'-constraint-class'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('constraint_field')
             ,description: _('constraint_field_desc')
             ,name: 'constraint_field'
             ,id: 'modx-'+this.ident+'-constraint-field'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('constraint')
             ,description: _('constraint_desc')
             ,name: 'constraint'
             ,id: 'modx-'+this.ident+'-constraint'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('active')
             ,description: _('active_desc')
@@ -374,7 +374,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,hiddenName: 'action_id'
             ,xtype: 'modx-combo-action'
             ,id: 'modx-'+this.ident+'-action'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('usergroup')
             ,description: _('usergroup_desc')
@@ -383,7 +383,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,xtype: 'modx-combo-usergroup'
             ,baseParams: { action: 'getList' ,addNone: true }
             ,id: 'modx-'+this.ident+'-usergroup'
-            ,width: 200
+            ,anchor: '90%'
             
         },{
             fieldLabel: _('description')
@@ -391,7 +391,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,name: 'description'
             ,id: 'modx-'+this.ident+'-description'
             ,xtype: 'textarea'
-            ,width: 200
+            ,anchor: '90%'
             ,height: 50
             
         },{ html: '<hr />' },{
@@ -400,7 +400,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
             
         },{
             fieldLabel: _('containing_panel')
@@ -408,7 +408,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,name: 'container'
             ,id: 'modx-'+this.ident+'-container'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
             
         },{
             fieldLabel: _('rule')
@@ -416,7 +416,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,name: 'rule'
             ,id: 'modx-'+this.ident+'-rule'
             ,xtype: 'modx-combo-rule-type'
-            ,width: 200
+            ,anchor: '90%'
             
         },{
             fieldLabel: _('value')
@@ -424,7 +424,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,name: 'value'
             ,id: 'modx-'+this.ident+'-value'
             ,xtype: 'textarea'
-            ,width: 200
+            ,anchor: '90%'
             ,height: 50
             
         },{ html: '<hr />' },{
@@ -433,21 +433,21 @@ MODx.window.UpdateActionDom = function(config) {
             ,name: 'constraint_class'
             ,id: 'modx-'+this.ident+'-constraint-class'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('constraint_field')
             ,description: _('constraint_field_desc')
             ,name: 'constraint_field'
             ,id: 'modx-'+this.ident+'-constraint-field'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('constraint')
             ,description: _('constraint_desc')
             ,name: 'constraint'
             ,id: 'modx-'+this.ident+'-constraint'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('active')
             ,description: _('active_desc')

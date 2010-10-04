@@ -9,16 +9,16 @@
  * @xtype modx-grid-roleuser
  */
 MODx.grid.RoleUser = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		title: _('role_users')
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('role_users')
         ,url: MODx.config.connectors_url+'security/role.php'
-		,fields: ['id','username','fullname','email']
-		,baseParams: {
-			action: 'getUsers'
-			,role: config.role
-		}
-		,autosave: true
+        ,fields: ['id','username','fullname','email']
+        ,baseParams: {
+                action: 'getUsers'
+                ,role: config.role
+        }
+        ,autosave: true
         ,paging: true
         ,columns: [
             { header: _('id') ,dataIndex: 'id' ,width: 40 }
@@ -26,65 +26,65 @@ MODx.grid.RoleUser = function(config) {
             ,{ header: _('name') ,dataIndex: 'fullname' ,width: 175 }
             ,{ header: _('email') ,dataIndex: 'email' ,width: 200 }
         ]
-		,tbar: this.getToolbar()
-	});
-	MODx.grid.RoleUser.superclass.constructor.call(this,config);
+        ,tbar: this.getToolbar()
+    });
+    MODx.grid.RoleUser.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.RoleUser,MODx.grid.Grid,{
-	combos: {}
+    combos: {}
     /**
      * Runs a confirm dialog, and if proceeding, removes the modUser.   
      */
-	,removeUser: function() {
-		MODx.msg.confirm({
-			title: _('role_user_remove')
-			,text: _('role_user_confirm_remove')
-			,url: this.config.url
-			,params: {
-				action: 'removeUser'
-				,user: this.menu.record.id
-				,role: this.config.role
-			}
-			,listeners: {
-				'success': {fn:this.refresh,scope:this}
-			}
-		});
-	}
+    ,removeUser: function() {
+        MODx.msg.confirm({
+            title: _('role_user_remove')
+            ,text: _('role_user_confirm_remove')
+            ,url: this.config.url
+            ,params: {
+                action: 'removeUser'
+                ,user: this.menu.record.id
+                ,role: this.config.role
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
     /**
      * Adds a user to the role based upon the combobox value.
      */
-	,addUser: function(btn,e) {
-		var user = Ext.getCmp('rugrid-combo-user').getValue();
-		MODx.Ajax.request({
-			url: this.config.url
-			,params: {
-				action: 'addUser'
-				,role: this.config.role
-				,user: user
-			}
-			,listeners: {
-				'success': {fn:function(r) {
-                    this.getStore().baseParams = { 
+    ,addUser: function(btn,e) {
+        var user = Ext.getCmp('rugrid-combo-user').getValue();
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'addUser'
+                ,role: this.config.role
+                ,user: user
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.getStore().baseParams = {
                         action: 'getUsers'
                         ,role: this.config.role
                     };
                     Ext.getCmp('rugrid-combo-usergroup').setValue('');
-                    this.refresh();					
-				},scope:this}
-			}
-		});
-	}
+                    this.refresh();
+                },scope:this}
+            }
+        });
+    }
     /**
      * Loads the context menu for the user-role pairing.
      */
-	,_loadMenu: function() {
-		this.menu = new Ext.menu.Menu({ defaultAlign: 'tl-b?' });
-		this.menu.add({
-			text: _('role_user_remove')
-			,handler: this.removeUser
-			,scope: this
-		});
-	}
+    ,_loadMenu: function() {
+        this.menu = new Ext.menu.Menu({ defaultAlign: 'tl-b?' });
+        this.menu.add({
+            text: _('role_user_remove')
+            ,handler: this.removeUser
+            ,scope: this
+        });
+    }
     /**
      * Returns the custom toolbar for the grid.
      */

@@ -138,41 +138,42 @@ MODx.window.CreateMenu = function(config) {
             ,name: 'text'
             ,xtype: 'textfield'
             ,allowBlank: false
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('description')
             ,name: 'description'
             ,xtype: 'textfield'
             ,allowBlank: true
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('action')
             ,name: 'action_id'
             ,hiddenName: 'action_id'
             ,xtype: 'modx-combo-action'
             ,id: 'modx-cmen-action'
+            ,anchor: '90%'
         },{
             fieldLabel: _('icon')
             ,name: 'icon'
             ,xtype: 'textfield'
             ,allowBlank: true
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('parameters')
             ,name: 'params'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('handler')
             ,name: 'handler'
             ,xtype: 'textarea'
-            ,width: 320
+            ,anchor: '90%'
             ,grow: false
         },{
             fieldLabel: _('permissions')
             ,name: 'permissions'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         }]
     });
     MODx.window.CreateMenu.superclass.constructor.call(this,config);

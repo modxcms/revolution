@@ -390,15 +390,17 @@ MODx.window.ExportLexicon = function(config) {
         ,fields: [{
             html: _('lexicon_export_desc')
             ,border: false
-            ,bodyStyle: 'margin: 1em;'
+            ,bodyStyle: 'margin: 10px;'
             ,id: 'modx-'+this.ident+'-desc'
             ,itemId: 'desc'
+            ,anchor: '95%'
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
             ,id: 'modx-'+this.ident+'-namespace'
             ,itemId: 'namespace'
+            ,anchor: '95%'
             ,listeners: {
                 'select': {fn: function(cb,r,i) {
                     cle = this.fp.getComponent('topic');
@@ -415,12 +417,14 @@ MODx.window.ExportLexicon = function(config) {
             ,name: 'topic'
             ,id: 'modx-'+this.ident+'-topic'
             ,itemId: 'topic'
+            ,anchor: '95%'
         },{
             xtype: 'modx-combo-language'
             ,fieldLabel: _('language')
             ,name: 'language'
             ,id: 'modx-'+this.ident+'-language'
             ,itemId: 'language'
+            ,anchor: '95%'
         }]
     });
     MODx.window.ExportLexicon.superclass.constructor.call(this,config);
@@ -445,13 +449,14 @@ MODx.window.LexiconEntryCreate = function(config) {
             ,id: 'modx-'+this.ident+'-name'
             ,itemId: 'name'
             ,name: 'name'
-            ,width: 300
+            ,anchor: '95%'
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
             ,id: 'modx-'+this.ident+'-namespace'
             ,itemId: 'namespace'
+            ,anchor: '95%'
             ,listeners: {
                 'select': {fn: function(cb,r,i) {
                     cle = this.fp.getComponent('topic');
@@ -468,19 +473,21 @@ MODx.window.LexiconEntryCreate = function(config) {
             ,name: 'topic'
             ,id: 'modx-'+this.ident+'-topic'
             ,itemId: 'topic'
+            ,anchor: '95%'
         },{
             xtype: 'modx-combo-language'
             ,fieldLabel: _('language')
             ,name: 'language'
             ,id: 'modx-'+this.ident+'-language'
             ,itemId: 'language'
+            ,anchor: '95%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('value')
             ,id: 'modx-'+this.ident+'-value'
             ,itemId: 'value'
             ,name: 'value'
-            ,width: 300
+            ,anchor: '95%'
         }]
     });
     MODx.window.LexiconEntryCreate.superclass.constructor.call(this,config);

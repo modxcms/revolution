@@ -303,46 +303,46 @@ MODx.window.CreateSetting = function(config) {
             ,name: 'key'
             ,id: 'modx-cs-key'
             ,maxLength: 100
-            ,width: 200
+            ,anchor: '90%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-cs-name'
-            ,width: 200
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-xtype-spec'
             ,fieldLabel: _('xtype')
             ,description: _('xtype_desc')
             ,id: 'modx-cs-xtype'
-            ,width: 200
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
             ,id: 'modx-cs-namespace'
             ,value: 'core'
-            ,width: 200
+            ,anchor: '90%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('area_lexicon_string')
             ,description: _('area_lexicon_string_msg')
             ,name: 'area'
             ,id: 'modx-cs-area'
-            ,width: 200
+            ,anchor: '90%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('value')
             ,name: 'value'
             ,id: 'modx-cs-value'
-            ,width: 200
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-cs-description'
             ,allowBlank: true
-            ,width: 250
+            ,anchor: '90%'
         }]
     });
     MODx.window.CreateSetting.superclass.constructor.call(this,config);

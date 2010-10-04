@@ -112,6 +112,7 @@ MODx.window.AddGroupToUser = function(config) {
             ,xtype: 'modx-combo-usergroup'
             ,editable: false
             ,allowBlank: false
+            ,anchor: '90%'
         },{
             fieldLabel: _('role')
             ,name: 'role'
@@ -119,6 +120,7 @@ MODx.window.AddGroupToUser = function(config) {
             ,id: 'modx-agu-role'
             ,xtype: 'modx-combo-role'
             ,allowBlank: false
+            ,anchor: '90%'
         },{
             name: 'member'
             ,xtype: 'hidden'
@@ -165,6 +167,7 @@ MODx.window.UpdateUserGroupsRole = function(config) {
             ,id: 'modx-uugrs-role'
             ,name: 'role'
             ,fieldLabel: _('role')
+            ,anchor: '90%'
         }]
     });
     MODx.window.UpdateUserGroupsRole.superclass.constructor.call(this,config);

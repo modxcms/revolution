@@ -147,12 +147,12 @@ MODx.window.CreateAction = function(config) {
             fieldLabel: _('controller')
             ,name: 'controller'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('namespace')
             ,name: 'namespace'
             ,xtype: 'modx-combo-namespace'
-            ,width: 200
+            ,anchor: '90%'
             ,allowBlank: false
             ,value: 'core'
         },{
@@ -161,7 +161,7 @@ MODx.window.CreateAction = function(config) {
             ,hiddenName: 'parent'
             ,xtype: 'modx-combo-action'
             ,editable: false
-            ,width: 200
+            ,anchor: '90%'
             ,id: 'modx-cact-parent'
         },{
             fieldLabel: _('load_headers')
@@ -174,12 +174,12 @@ MODx.window.CreateAction = function(config) {
             ,description: _('lang_topics_desc')
             ,name: 'lang_topics'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('assets')
             ,name: 'assets'
             ,xtype: 'textarea'
-            ,width: 200
+            ,anchor: '90%'
             ,grow: false
         }]
     });
@@ -214,19 +214,18 @@ MODx.window.UpdateAction = function(config) {
             fieldLabel: _('controller')
             ,name: 'controller'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('namespace')
             ,name: 'namespace'
             ,hiddenName: 'namespace'
             ,xtype: 'modx-combo-namespace'
-            ,width: 200
+            ,anchor: '90%'
             ,allowBlank: false
         },{
             name: 'parent'
             ,xtype: 'hidden'
             ,editable: false
-            ,width: 200
         },{
             fieldLabel: _('load_headers')
             ,name: 'haslayout'
@@ -237,12 +236,12 @@ MODx.window.UpdateAction = function(config) {
             ,description: _('lang_topics_desc')
             ,name: 'lang_topics'
             ,xtype: 'textfield'
-            ,width: 200
+            ,anchor: '90%'
         },{
             fieldLabel: _('assets')
             ,name: 'assets'
             ,xtype: 'textarea'
-            ,width: 200
+            ,anchor: '90%'
             ,grow: false
         }]
     });

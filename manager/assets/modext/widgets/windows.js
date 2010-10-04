@@ -50,7 +50,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('resource_name_new')
             ,name: 'name'
-            ,width: 150
+            ,anchor: '90%'
             ,value: ''
         });
 
@@ -86,14 +86,14 @@ MODx.window.CreateCategory = function(config) {
             ,name: 'category'
             ,id: 'modx-'+this.ident+'-category'
             ,xtype: 'textfield'
-            ,anchor: '85%'
+            ,anchor: '90%'
         },{
             fieldLabel: 'Parent'
             ,name: 'parent'
             ,hiddenName: 'parent'
             ,id: 'modx-'+this.ident+'-parent'
             ,xtype: 'modx-combo-category'
-            ,anchor: '85%'
+            ,anchor: '90%'
         }]
     });
     MODx.window.CreateCategory.superclass.constructor.call(this,config);
@@ -117,7 +117,7 @@ MODx.window.CreateNamespace = function(config) {
             ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
-            ,anchor: '70%'
+            ,anchor: '90%'
             ,maxLength: 100
         },{
             xtype: 'textfield'
@@ -148,13 +148,13 @@ MODx.window.QuickCreateChunk = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
-            ,anchor: '80%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
             ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '70%'
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -200,13 +200,13 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
-            ,anchor: '80%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
             ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '70%'
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -256,13 +256,13 @@ MODx.window.QuickCreateTemplate = function(config) {
             ,name: 'templatename'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
-            ,anchor: '80%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
             ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '70%'
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -308,13 +308,13 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,name: 'templatename'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
-            ,anchor: '80%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
             ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '70%'
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -365,13 +365,13 @@ MODx.window.QuickCreateSnippet = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
-            ,anchor: '80%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
             ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '70%'
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -417,13 +417,13 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
-            ,anchor: '80%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
             ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '70%'
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -475,13 +475,13 @@ MODx.window.QuickCreatePlugin = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
-            ,anchor: '80%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
             ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '70%'
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -534,13 +534,13 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
-            ,anchor: '80%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
             ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '70%'
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -598,13 +598,13 @@ MODx.window.QuickCreateTV = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
-            ,anchor: '80%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
             ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '70%'
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -662,13 +662,13 @@ MODx.window.QuickUpdateTV = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
-            ,anchor: '80%'
+            ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
             ,id: 'modx-'+this.ident+'-category'
-            ,anchor: '70%'
+            ,anchor: '90%'
         },{
             xtype: 'textarea'
             ,name: 'description'
@@ -702,7 +702,8 @@ MODx.window.QuickUpdateTV = function(config) {
             ,name: 'default_text'
             ,id: 'modx-'+this.ident+'-default-text'
             ,anchor: '97%'
-            ,grow: true ,growMax: 380
+            ,grow: true
+            ,growMax: 380
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -732,14 +733,14 @@ MODx.window.DuplicateContext = function(config) {
             ,id: 'modx-'+this.ident+'-key'
             ,fieldLabel: _('old_key')
             ,name: 'key'
-            ,width: 200
+            ,anchor: '90%'
             ,submitValue: true
         },{
             xtype: 'textfield'
             ,id: 'modx-'+this.ident+'-newkey'
             ,fieldLabel: _('new_key')
             ,name: 'newkey'
-            ,width: 200
+            ,anchor: '90%'
             ,value: ''
         }]
     });

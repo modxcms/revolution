@@ -348,6 +348,7 @@ MODx.window.AddUserToUserGroup = function(config) {
             ,xtype: 'modx-combo-user'
             ,editable: false
             ,allowBlank: false
+            ,anchor: '90%'
         },{
             fieldLabel: _('role')
             ,name: 'role'
@@ -355,6 +356,7 @@ MODx.window.AddUserToUserGroup = function(config) {
             ,id: 'modx-auug-role'
             ,xtype: 'modx-combo-role'
             ,allowBlank: false
+            ,anchor: '90%'
         },{
             name: 'usergroup'
             ,xtype: 'hidden'
