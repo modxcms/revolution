@@ -493,12 +493,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                     ,handler: this.unpublishDocument
                 });
             }
-            if (ui.hasClass('pdelete') && ui.hasClass('deleted')) {
+            if (ui.hasClass('pundelete') && ui.hasClass('deleted')) {
                 m.push({
                     text: _('resource_undelete')
                     ,handler: this.undeleteDocument
                 });
-            } else if (ui.hasClass('pundelete')) {
+            } else if (ui.hasClass('pdelete') && !ui.hasClass('deleted')) {
                 m.push({
                     text: _('resource_delete')
                     ,handler: this.deleteDocument
