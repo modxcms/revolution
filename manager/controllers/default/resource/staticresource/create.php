@@ -147,7 +147,7 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
-$this->checkFormCustomizationRules($parent != null ? $parent : null);
+$this->checkFormCustomizationRules($parent != null ? $parent : null,true);
 /* fire the FC rules on the actual resource as well; this allows moving of TVs
  * and other FC manips after the default template FC rule */
 $resource = $modx->newObject('modResource');

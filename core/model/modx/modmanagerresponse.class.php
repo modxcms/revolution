@@ -142,7 +142,7 @@ class modManagerResponse extends modResponse {
      *
      * @param xPDOObject $obj If passed, will validate against for rules with constraints.
      */
-    public function checkFormCustomizationRules($obj = null) {
+    public function checkFormCustomizationRules($obj = null,$forParent = false) {
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
         $c->leftJoin('modAccessActionDom','Access');
@@ -150,6 +150,7 @@ class modManagerResponse extends modResponse {
         $c->where(array(
             'action' => $this->action['id'],
             'active' => true,
+            'for_parent' => $forParent,
             array(
                 array(
                     'Access.principal_class:=' => 'modUserGroup',

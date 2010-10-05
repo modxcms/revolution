@@ -19,6 +19,7 @@ $xpdo_meta_map['modActionDom']= array (
     'constraint_field' => '',
     'constraint_class' => '',
     'active' => 1,
+    'for_parent' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -108,6 +109,16 @@ $xpdo_meta_map['modActionDom']= array (
       'phptype' => 'boolean',
       'null' => false,
       'default' => 1,
+      'index' => 'index',
+    ),
+    'for_parent' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
       'index' => 'index',
     ),
   ),

@@ -7,6 +7,7 @@ if (!$modx->hasPermission('customize_forms')) return $modx->error->failure($modx
 $modx->lexicon->load('formcustomization');
 
 $scriptProperties['active'] = !empty($scriptProperties['active']) ? 1 : 0;
+$scriptProperties['for_parent'] = !empty($scriptProperties['for_parent']) ? 1 : 0;
 
 $rule = $modx->newObject('modActionDom');
 $rule->fromArray($scriptProperties);

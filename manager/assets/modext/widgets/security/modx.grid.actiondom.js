@@ -8,7 +8,7 @@ MODx.grid.ActionDom = function(config) {
             ,'action','controller'
             ,'principal','principal_class'
             ,'name','description','xtype','container','rule','value'
-            ,'constraint','constraint_class','constraint_field','active','perm']
+            ,'constraint','constraint_class','constraint_field','active','for_parent','perm']
         ,paging: true
         ,autosave: false
         ,sm: this.sm
@@ -347,6 +347,14 @@ MODx.window.CreateActionDom = function(config) {
             ,xtype: 'checkbox'
             ,value: 1
             ,checked: true
+        },{
+            fieldLabel: _('for_parent')
+            ,description: _('for_parent_desc')
+            ,name: 'for_parent'
+            ,id: 'modx-'+this.ident+'-for-parent'
+            ,xtype: 'checkbox'
+            ,value: 1
+            ,checked: false
         }]
     });
     MODx.window.CreateActionDom.superclass.constructor.call(this,config);
@@ -455,6 +463,14 @@ MODx.window.UpdateActionDom = function(config) {
             ,id: 'modx-'+this.ident+'-active'
             ,xtype: 'checkbox'
             ,value: 1
+        },{
+            fieldLabel: _('for_parent')
+            ,description: _('for_parent_desc')
+            ,name: 'for_parent'
+            ,id: 'modx-'+this.ident+'-for-parent'
+            ,xtype: 'checkbox'
+            ,value: 1
+            ,checked: config.record && !Ext.isEmpty(config.record.for_parent) ? true : false
         }]
     });
     MODx.window.UpdateActionDom.superclass.constructor.call(this,config);

@@ -12,6 +12,7 @@ $rule = $modx->getObject('modActionDom',$scriptProperties['id']);
 if ($rule == null) return $modx->error->failure($modx->lexicon('rule_err_nf'));
 
 $scriptProperties['active'] = !empty($scriptProperties['active']) ? 1 : 0;
+$scriptProperties['for_parent'] = !empty($scriptProperties['for_parent']) ? 1 : 0;
 
 /* set fields */
 $rule->fromArray($scriptProperties);
