@@ -106,31 +106,47 @@ Ext.extend(MODx.grid.ActionDom,MODx.grid.Grid,{
         var p = r.data.perm;
 
         var m = [];
-        if (p.indexOf('pedit') != -1) {
+        if (this.getSelectionModel().getCount() > 1) {
             m.push({
-                text: _('edit')
-                ,handler: this.updateRule
-            },{
-                text: _('duplicate')
-                ,handler: this.duplicateRule
-            },'-');
-            if (r.data.active) {
+                text: _('selected_activate')
+                ,handler: this.activateSelected
+            });
+            m.push({
+                text: _('selected_deactivate')
+                ,handler: this.deactivateSelected
+            });
+            m.push('-');
+            m.push({
+                text: _('selected_remove')
+                ,handler: this.removeSelected
+            });
+        } else {
+            if (p.indexOf('pedit') != -1) {
                 m.push({
-                    text: _('deactivate')
-                    ,handler: this.deactivateRule
-                });
-            } else {
-                m.push({
-                    text: _('activate')
-                    ,handler: this.activateRule
+                    text: _('edit')
+                    ,handler: this.updateRule
+                },{
+                    text: _('duplicate')
+                    ,handler: this.duplicateRule
+                },'-');
+                if (r.data.active) {
+                    m.push({
+                        text: _('deactivate')
+                        ,handler: this.deactivateRule
+                    });
+                } else {
+                    m.push({
+                        text: _('activate')
+                        ,handler: this.activateRule
+                    });
+                }
+            }
+            if (p.indexOf('premove') != -1) {
+                m.push('-',{
+                    text: _('remove')
+                    ,handler: this.confirm.createDelegate(this,['remove','rule_remove_confirm'])
                 });
             }
-        }
-        if (p.indexOf('premove') != -1) {
-            m.push('-',{
-                text: _('remove')
-                ,handler: this.confirm.createDelegate(this,['remove','rule_remove_confirm'])
-            });
         }
         
         if (m.length > 0) {
