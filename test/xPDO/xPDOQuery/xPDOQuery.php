@@ -32,11 +32,13 @@ class xPDOQueryTest extends xPDOTestCase {
     public function setUp() {
         parent::setUp();
         try {
-            /* ensure we have clear data */
-            $this->xpdo->removeCollection('Phone',array());
-            $this->xpdo->removeCollection('Person',array());
-            $this->xpdo->removeCollection('PersonPhone',array());
-            $this->xpdo->removeCollection('BloodType',array());
+            /* ensure we have clear data and identity sequences */
+            $this->xpdo->getManager();
+
+            $this->xpdo->manager->createObjectContainer('Phone');
+            $this->xpdo->manager->createObjectContainer('Person');
+			$this->xpdo->manager->createObjectContainer('PersonPhone');
+			$this->xpdo->manager->createObjectContainer('BloodType');
 
             $bloodTypes = array('A+','A-','B+','B-','AB+','AB-','O+','O-');
             foreach ($bloodTypes as $bloodType) {
@@ -98,16 +100,10 @@ class xPDOQueryTest extends xPDOTestCase {
      */
     public function tearDown() {
         try {
-            $person = $this->xpdo->getObject('Person',array(
-                'username' => 'john.doe@gmail.com'
-            ));
-            $person->remove();
-            $person = $this->xpdo->getObject('Person',array(
-                'username' => 'jane.heartstead@yahoo.com'
-            ));
-            $person->remove();
-
-            $this->xpdo->removeCollection('BloodType',array());
+            $this->xpdo->manager->removeObjectContainer('Phone');
+            $this->xpdo->manager->removeObjectContainer('Person');
+			$this->xpdo->manager->removeObjectContainer('PersonPhone');
+			$this->xpdo->manager->removeObjectContainer('BloodType');
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
@@ -118,6 +114,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * Test xPDOQuery->where() statements
      */
     public function testWhere() {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $where = array(
             'first_name' => 'Johnathon',
             'last_name' => 'Doe',
@@ -148,6 +145,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * @dataProvider providerEquals
      */
     public function testEquals($a) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Person');
             $criteria->where(array(
@@ -173,6 +171,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * @dataProvider providerNotEquals
      */
     public function testNotEquals($a) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Person');
             $criteria->where(array(
@@ -198,6 +197,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * @dataProvider providerGreaterThan
      */
     public function testGreaterThan($a) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         /* test > */
         try {
             $criteria = $this->xpdo->newQuery('Person');
@@ -224,6 +224,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * @dataProvider providerGreaterThanEquals
      */
     public function testGreaterThanEquals($a) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Person');
             $criteria->where(array(
@@ -249,6 +250,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * @dataProvider providerLessThan
      */
     public function testLessThan($a) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Person');
             $criteria->where(array(
@@ -274,6 +276,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * @dataProvider providerLessThanEquals
      */
     public function testLessThanEquals() {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Person');
             $criteria->where(array(
@@ -299,6 +302,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * @dataProvider providerNotGTLT
      */
     public function testNotGTLT() {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Person');
             $criteria->where(array(
@@ -323,6 +327,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * Test LIKE xPDOQuery conditions
      */
     public function testLike() {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         /* test LIKE %.. */
         try {
             $criteria = $this->xpdo->newQuery('Person');
@@ -364,6 +369,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * Test IN xPDOQuery condition
      */
     public function testIn() {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         /* test IN with strings */
         try {
             $criteria = $this->xpdo->newQuery('Person');
@@ -406,6 +412,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * @dataProvider providerNestedConditions
      */
     public function testNestedConditions($level,$lastName,$gender) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Person');
             $criteria->where(array(
@@ -441,6 +448,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * @param mixed $resultValue The expected value of the first result.
      */
     public function testSortBy($sortBy,$sortDir,$resultColumn,$resultValue) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Person');
             $criteria->sortby($sortBy,$sortDir);
@@ -475,6 +483,7 @@ class xPDOQueryTest extends xPDOTestCase {
      * @param boolean $shouldEqual If the result count should equal the limit
      */
     public function testLimit($limit,$shouldEqual) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Person');
             $criteria->limit($limit);

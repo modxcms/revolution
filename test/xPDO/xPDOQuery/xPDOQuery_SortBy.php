@@ -32,8 +32,10 @@ class xPDOQuerySortByTest extends xPDOTestCase {
     public function setUp() {
         parent::setUp();
         try {
-            /* ensure we have clear data */
-            $this->xpdo->removeCollection('Item',array());
+            /* ensure we have clear data and identity sequences */
+            $this->xpdo->getManager();
+            $this->xpdo->manager->createObjectContainer('Item');
+
             $colors = array('red','green','yellow','blue');
 
             $r = 0;
@@ -56,7 +58,8 @@ class xPDOQuerySortByTest extends xPDOTestCase {
      * Clean up data when through.
      */
     public function tearDown() {
-        $this->xpdo->removeCollection('Item',array());
+    	$this->xpdo->getManager();
+        $this->xpdo->manager->removeObjectContainer('Item');
         parent::tearDown();
     }
 
@@ -65,6 +68,7 @@ class xPDOQuerySortByTest extends xPDOTestCase {
      * @dataProvider providerSortBy
      */
     public function testSortBy($sort,$dir,$nameOfFirst) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $success = false;
         try {
             $criteria = $this->xpdo->newQuery('Item');
@@ -98,6 +102,7 @@ class xPDOQuerySortByTest extends xPDOTestCase {
      * @dataProvider providerSortByWithGroupBy
      */
     public function testSortByWithGroupBy($sort,$dir,$nameOfFirst) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $success = false;
         try {
             $criteria = $this->xpdo->newQuery('Item');
@@ -132,6 +137,7 @@ class xPDOQuerySortByTest extends xPDOTestCase {
      * @dataProvider providerSortByWithLimit
      */
     public function testSortByWithLimit($sort,$dir,$limit,$start,$nameOfFirst) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $success = false;
         try {
             $criteria = $this->xpdo->newQuery('Item');
