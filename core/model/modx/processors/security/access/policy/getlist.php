@@ -35,8 +35,8 @@ $policies = $modx->getCollection('modAccessPolicy', $c);
 $data = array();
 if (isset($scriptProperties['combo'])) {
     $data[] = array(
-        'id' => ''
-        ,'name' => ' (no policy) '
+        'id' => '',
+        'name' => $modx->lexicon('no_policy_option'),
     );
 }
 

@@ -17,9 +17,8 @@
  * @package modx
  * @subpackage processors.security.access
  */
-$modx->lexicon->load('access');
-
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('access');
 
 if (empty($scriptProperties['type'])) {
     return $modx->error->failure($modx->lexicon('access_type_err_ns'));
@@ -71,7 +70,7 @@ foreach ($collection as $key => $object) {
         'principal_name' => $principal->get('name'),
         'authority' => $object->get('authority'),
         'policy' => $object->get('policy'),
-        'policy_name' => $object->Policy->get('name'),
+        'policy_name' => !empty($object->Policy) ? $object->Policy->get('name') : $modx->lexicon('no_policy_option'),
     );
     if (isset($object->_fieldMeta['context_key'])) {
         $objdata['context_key']= $object->get('context_key');
