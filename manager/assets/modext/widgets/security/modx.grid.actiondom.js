@@ -340,14 +340,6 @@ MODx.window.CreateActionDom = function(config) {
             ,xtype: 'textfield'
             ,anchor: '90%'
         },{
-            fieldLabel: _('active')
-            ,description: _('active_desc')
-            ,name: 'active'
-            ,id: 'modx-'+this.ident+'-active'
-            ,xtype: 'checkbox'
-            ,value: 1
-            ,checked: true
-        },{
             fieldLabel: _('for_parent')
             ,description: _('for_parent_desc')
             ,name: 'for_parent'
@@ -355,6 +347,14 @@ MODx.window.CreateActionDom = function(config) {
             ,xtype: 'checkbox'
             ,value: 1
             ,checked: false
+        },{ html: '<hr />' },{
+            fieldLabel: _('active')
+            ,description: _('active_desc')
+            ,name: 'active'
+            ,id: 'modx-'+this.ident+'-active'
+            ,xtype: 'checkbox'
+            ,value: 1
+            ,checked: true
         }]
     });
     MODx.window.CreateActionDom.superclass.constructor.call(this,config);
@@ -457,13 +457,6 @@ MODx.window.UpdateActionDom = function(config) {
             ,xtype: 'textfield'
             ,anchor: '90%'
         },{
-            fieldLabel: _('active')
-            ,description: _('active_desc')
-            ,name: 'active'
-            ,id: 'modx-'+this.ident+'-active'
-            ,xtype: 'checkbox'
-            ,value: 1
-        },{
             fieldLabel: _('for_parent')
             ,description: _('for_parent_desc')
             ,name: 'for_parent'
@@ -471,6 +464,13 @@ MODx.window.UpdateActionDom = function(config) {
             ,xtype: 'checkbox'
             ,value: 1
             ,checked: config.record && !Ext.isEmpty(config.record.for_parent) ? true : false
+        },{ html: '<hr />' },{
+            fieldLabel: _('active')
+            ,description: _('active_desc')
+            ,name: 'active'
+            ,id: 'modx-'+this.ident+'-active'
+            ,xtype: 'checkbox'
+            ,value: 1
         }]
     });
     MODx.window.UpdateActionDom.superclass.constructor.call(this,config);
