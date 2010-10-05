@@ -221,14 +221,13 @@ class xPDOObject {
      * Responsible for loading a result set from the database.
      *
      * @static
-     * @access protected
      * @param xPDO &$xpdo A valid xPDO instance.
      * @param string $className Name of the class.
      * @param mixed $criteria A valid primary key, criteria array, or xPDOCriteria instance.
      * @return PDOStatement A reference to a PDOStatement representing the
      * result set.
      */
-    protected static function & _loadRows(& $xpdo, $className, $criteria) {
+    public static function & _loadRows(& $xpdo, $className, $criteria) {
         $rows= null;
         if ($criteria->prepare()) {
             if ($xpdo->getDebug() === true) $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Attempting to execute query using PDO statement object: " . print_r($criteria->sql, true) . print_r($criteria->bindings, true));
@@ -285,18 +284,20 @@ class xPDOObject {
      * Loads an instance from an associative array.
      *
      * @static
-     * @access protected
      * @param xPDO &$xpdo A valid xPDO instance.
      * @param string $className Name of the class.
-     * @param mixed $criteria A valid primary key, criteria array, or xPDOCriteria instance.
+     * @param mixed $criteria A valid xPDOQuery instance or relation alias.
      * @param array $row The associative array containing the instance data.
      * @return xPDOObject A new xPDOObject derivative representing a data row.
      */
-    protected static function _loadInstance(& $xpdo, $className, $criteria, $row) {
+    public static function _loadInstance(& $xpdo, $className, $criteria, $row) {
         $rowPrefix= '';
         if (is_object($criteria) && $criteria instanceof xPDOQuery) {
             $alias = $criteria->getAlias();
             $actualClass = $criteria->getClass();
+        } elseif (is_string($criteria) && !empty($criteria)) {
+            $alias = $criteria;
+            $actualClass = $className;
         } else {
             $alias = $className;
             $actualClass= $className;
@@ -334,7 +335,6 @@ class xPDOObject {
      * Responsible for loading an instance into a collection.
      *
      * @static
-     * @access protected
      * @param xPDO &$xpdo A valid xPDO instance.
      * @param array &$objCollection The collection to load the instance into.
      * @param string $className Name of the class.
@@ -342,7 +342,7 @@ class xPDOObject {
      * @param boolean|integer $cacheFlag Indicates if the objects should be cached and
      * optionally, by specifying an integer value, for how many seconds.
      */
-    protected static function _loadCollectionInstance(xPDO & $xpdo, array & $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag=true) {
+    public static function _loadCollectionInstance(xPDO & $xpdo, array & $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag=true) {
         $loaded = false;
         if ($obj= xPDOObject :: _loadInstance($xpdo, $className, $criteria, $row)) {
             if (($cacheKey= $obj->getPrimaryKey()) && !$obj->isLazy()) {
