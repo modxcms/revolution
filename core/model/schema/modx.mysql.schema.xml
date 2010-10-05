@@ -208,6 +208,14 @@
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff_-\s]+(?!\s)$/" message="chunk_err_invalid_name" />
         </validation>
     </object>
+
+    <object class="modClassMap" table="class_map" extends="xPDOSimpleObject">
+        <field key="class" dbtype="varchar" precision="120" phptype="string" null="false" default="" index="unique" />
+        <field key="parent_class" dbtype="varchar" precision="120" phptype="string" null="false" default="" index="index" />
+        <field key="name_field" dbtype="varchar" precision="255" phptype="string" null="false" default="name" index="index" />
+        <field key="path" dbtype="tinytext" phptype="string" default="" />
+        <field key="lexicon" dbtype="varchar" precision="255" phptype="string" null="false" default="core:resource" />
+    </object>
     
     <object class="modContentType" table="content_type" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />

@@ -36,6 +36,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'class_map',
+    'description' => 'perm.class_map_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'content_types',
     'description' => 'perm.content_types_desc',
     'value' => true,
