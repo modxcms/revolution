@@ -411,13 +411,6 @@ $attributes= array (
 );
 foreach ($settings as $setting) {
     switch ($setting->get('key')) {
-        case 'filemanager_path' :
-        case 'rb_base_dir' :
-        case 'rb_base_url' :
-        case 'site_id' :
-            $attributes[xPDOTransport::UPDATE_OBJECT]= true;
-            $setting->set('value', '');
-            break;
         case 'session_cookie_path' :
             $attributes[xPDOTransport::UPDATE_OBJECT]= true;
             $setting->set('value', '/');

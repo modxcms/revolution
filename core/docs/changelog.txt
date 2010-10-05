@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- [#MODX-2380] Fixed issue with upgrades and rb_base_dir, rb_base_url and filemanager_path
 - [#MODX-2246] Added topmenu_show_descriptions system setting to be able to toggle the top menus description text
 - [#MODX-2375] Improved class key field in Resource panel to a dropdown, added modClassMap for easier querying of resource/element types
 - [#MODX-2391] Fixed issues with FC rules not being respected on resource/create with default values for new Resource
