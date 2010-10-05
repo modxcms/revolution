@@ -1073,6 +1073,15 @@ $settings['strip_image_paths']->fromArray(array (
   'area' => 'file',
   'editedon' => null,
 ), '', true, true);
+$settings['topmenu_show_descriptions']= $xpdo->newObject('modSystemSetting');
+$settings['topmenu_show_descriptions']->fromArray(array (
+  'key' => 'topmenu_show_descriptions',
+  'value' => 1,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['tree_root_id']= $xpdo->newObject('modSystemSetting');
 $settings['tree_root_id']->fromArray(array (
   'key' => 'tree_root_id',
