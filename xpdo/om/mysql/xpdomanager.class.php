@@ -76,7 +76,7 @@ class xPDOManager_mysql extends xPDOManager {
         if ($username === null) $username = $this->xpdo->getOption('username', null, '');
         if ($password === null) $password = $this->xpdo->getOption('password', null, '');
         if (is_array($dsnArray) && is_string($username) && is_string($password)) {
-            $sql= 'DROP DATABASE ' . $this->xpdo->escape($dsnArray['dbname']);
+            $sql= 'DROP DATABASE IF EXISTS ' . $this->xpdo->escape($dsnArray['dbname']);
             try {
                 $pdo = new PDO("mysql:host={$dsnArray['host']}", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
                 $result = $pdo->exec($sql);

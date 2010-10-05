@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- Add IF EXISTS to DROP DATABASE statement in xPDOManager_mysql::removeSourceContainer()
 - Add xPDO::getIndexMeta() method
 - Fix invalid call to xPDOManager::getPhpType() in xPDOGenerator::writeSchema()
 - [#XPDO-74] Fix bug in xPDOObject::save() when updating rows with compound primary keys
