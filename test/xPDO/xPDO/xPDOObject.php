@@ -32,11 +32,13 @@ class xPDOObjectTest extends xPDOTestCase {
     public function setUp() {
         parent::setUp();
         try {
-            /* ensure we have clear data */
-            $this->xpdo->removeCollection('Phone',array());
-            $this->xpdo->removeCollection('Person',array());
-            $this->xpdo->removeCollection('PersonPhone',array());
-            $this->xpdo->removeCollection('BloodType',array());
+            /* ensure we have clear data and identity sequences */
+            $this->xpdo->getManager();
+
+            $this->xpdo->manager->createObjectContainer('Phone');
+            $this->xpdo->manager->createObjectContainer('Person');
+			$this->xpdo->manager->createObjectContainer('PersonPhone');
+			$this->xpdo->manager->createObjectContainer('BloodType');
 
             $bloodTypes = array('A+','A-','B+','B-','AB+','AB-','O+','O-');
             foreach ($bloodTypes as $bloodType) {
@@ -53,7 +55,6 @@ class xPDOObjectTest extends xPDOTestCase {
 
             /* add some people */
             $person= $this->xpdo->newObject('Person');
-            $person->set('id',1);
             $person->set('first_name', 'Johnathon');
             $person->set('last_name', 'Doe');
             $person->set('middle_name', 'Harry');
@@ -66,7 +67,6 @@ class xPDOObjectTest extends xPDOTestCase {
             $person->save();
 
             $phone = $this->xpdo->newObject('Phone');
-            $phone->set('id',1);
             $phone->fromArray(array(
                 'type' => 'work',
                 'number' => '555-111-1111',
@@ -82,7 +82,6 @@ class xPDOObjectTest extends xPDOTestCase {
             $personPhone->save();
 
             $person= $this->xpdo->newObject('Person');
-            $person->set('id',2);
             $person->set('first_name', 'Jane');
             $person->set('last_name', 'Heartstead');
             $person->set('middle_name', 'Cecilia');
@@ -95,7 +94,6 @@ class xPDOObjectTest extends xPDOTestCase {
             $person->save();
 
             $phone = $this->xpdo->newObject('Phone');
-            $phone->set('id',2);
             $phone->fromArray(array(
                 'type' => 'work',
                 'number' => '555-222-2222',
@@ -119,16 +117,10 @@ class xPDOObjectTest extends xPDOTestCase {
      */
     public function tearDown() {
         try {
-            $person = $this->xpdo->getObject('Person',array(
-                'username' => 'john.doe@gmail.com'
-            ));
-            if ($person) $person->remove();
-            $person = $this->xpdo->getObject('Person',array(
-                'username' => 'jane.heartstead@yahoo.com'
-            ));
-            if ($person) $person->remove();
-
-            $this->xpdo->removeCollection('BloodType',array());
+            $this->xpdo->manager->removeObjectContainer('Phone');
+            $this->xpdo->manager->removeObjectContainer('Person');
+			$this->xpdo->manager->removeObjectContainer('PersonPhone');
+			$this->xpdo->manager->removeObjectContainer('BloodType');
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
@@ -139,6 +131,7 @@ class xPDOObjectTest extends xPDOTestCase {
      * Test saving an object.
      */
     public function testSaveObject() {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $result= false;
         try {
             $person= $this->xpdo->newObject('Person');
@@ -163,6 +156,7 @@ class xPDOObjectTest extends xPDOTestCase {
      * Tests a cascading save
      */
     public function testCascadeSave() {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $result= false;
         try {
             $person= $this->xpdo->newObject('Person');
@@ -210,6 +204,7 @@ class xPDOObjectTest extends xPDOTestCase {
      * @depends testSaveObject
      */
     public function testGetObjectByPK() {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $result= false;        
         try {
             $person= $this->xpdo->getObject('Person',1);
@@ -225,6 +220,7 @@ class xPDOObjectTest extends xPDOTestCase {
      * Test using getObject by PK on multiple objects, including multiple PKs
      */
     public function testGetObjectsByPK() {        
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $person= $this->xpdo->getObject('Person', 2);
             $phone= $this->xpdo->getObject('Phone', 2);
@@ -244,6 +240,7 @@ class xPDOObjectTest extends xPDOTestCase {
      * Test getObjectGraph by PK
      */
     public function testGetObjectGraphsByPK() {        
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         //array method
         try {
             $person= $this->xpdo->getObjectGraph('Person', array ('PersonPhone' => array ('Phone' => array ())), 2);
@@ -271,6 +268,7 @@ class xPDOObjectTest extends xPDOTestCase {
      * Test getObjectGraph by PK with JSON graph
      */
     public function testGetObjectGraphsJSONByPK() {        
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         //JSON method
         try {
             $person= $this->xpdo->getObjectGraph('Person', '{"PersonPhone":{"Phone":{}}}', 2);
@@ -298,6 +296,7 @@ class xPDOObjectTest extends xPDOTestCase {
      * Test xPDO::getCollection
      */
     public function testGetCollection() {        
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $people= $this->xpdo->getCollection('Person');
         } catch (Exception $e) {
@@ -312,6 +311,7 @@ class xPDOObjectTest extends xPDOTestCase {
      * Test xPDO::getCollectionGraph
      */
     public function testGetCollectionGraph() {        
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $people= $this->xpdo->getCollectionGraph('Person', array ('PersonPhone' => array ('Phone' => array ())));
         } catch (Exception $e) {
@@ -329,6 +329,7 @@ class xPDOObjectTest extends xPDOTestCase {
      * Test xPDO::getCollectionGraph with JSON graph
      */
     public function testGetCollectionGraphJSON() {        
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $people= $this->xpdo->getCollectionGraph('Person', '{"PersonPhone":{"Phone":{}}}');
         } catch (Exception $e) {
@@ -349,19 +350,17 @@ class xPDOObjectTest extends xPDOTestCase {
      * @param string $alias The relation alias to grab.
      */
     public function testGetMany($person,$alias) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $person = $this->xpdo->getObject('Person',array(
             'username' => $person,
         ));
-        if (!$person) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not get Person for testGetMany.');
-            return;
-        }
-        try {
-            $personPhones = $person->getMany($alias);
-
-        } catch (Exception $e) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
-        }
+        if ($person) {
+	        try {
+	            $personPhones = $person->getMany($alias);
+	        } catch (Exception $e) {
+	            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+	        }
+		}
         $this->assertTrue(!empty($personPhones),'xPDOQuery: getMany failed from Person to PersonPhone.');
     }
     /**
@@ -381,18 +380,17 @@ class xPDOObjectTest extends xPDOTestCase {
      * @param string $alias The relation alias to grab.
      */
     public function testGetOne($username,$alias,$class) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $person = $this->xpdo->getObject('Person',array(
             'username' => $username,
         ));
-        if (!$person) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not get Person for testGetOne.');
-            return;
-        }
-        try {
-            $one = $person->getOne($alias);
-
-        } catch (Exception $e) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        if ($person) {
+	        try {
+	            $one = $person->getOne($alias);
+	
+	        } catch (Exception $e) {
+	            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+	        }
         }
         $this->assertTrue(!empty($one) && $one instanceof $class,'xPDOQuery: getMany failed from Person `'.$username.'` to '.$alias.'.');
     }
@@ -412,10 +410,10 @@ class xPDOObjectTest extends xPDOTestCase {
      * Test removing an object
      */
     public function testRemoveObject() {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $result= false;
 
         $person = $this->xpdo->newObject('Person');
-        $person->set('id',123);
         $person->set('first_name', 'Kurt');
         $person->set('last_name', 'Dirt');
         $person->set('middle_name', 'Remover');
@@ -426,7 +424,7 @@ class xPDOObjectTest extends xPDOTestCase {
         $person->set('security_level',1);
         $person->save();
         try {
-            if ($person= $this->xpdo->getObject('Person', 123)) {
+            if ($person= $this->xpdo->getObject('Person', $person->get('id'))) {
                 $result= $person->remove();
             }
         } catch (Exception $e) {
@@ -439,15 +437,15 @@ class xPDOObjectTest extends xPDOTestCase {
      * Test removing a dependent object
      */
     public function testRemoveDependentObject() {        
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $result= false;
         $phone = $this->xpdo->newObject('Phone');
-        $phone->set('id',123);
         $phone->set('type', 'work');
         $phone->set('number', '555-789-4563');
         $phone->set('is_primary',false);
         $phone->save();
         try {
-            if ($phone= $this->xpdo->getObject('Phone', 123)) {
+            if ($phone= $this->xpdo->getObject('Phone', $phone->get('id'))) {
                 $result= $phone->remove();
             }
         } catch (Exception $e) {
@@ -460,6 +458,7 @@ class xPDOObjectTest extends xPDOTestCase {
      * Test removing circular composites
      */
     public function testRemoveCircularComposites() {        
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $result= false;
         try {
             if ($personPhone= $this->xpdo->getObject('PersonPhone', array (2, 2))) {

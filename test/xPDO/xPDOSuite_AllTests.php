@@ -20,6 +20,8 @@
  * @package xpdo-test
  */
 require_once 'PHPUnit/Framework.php';
+require_once dirname(__FILE__).'/xPDOSetUp.php';
+require_once dirname(__FILE__).'/xPDOTearDown.php';
 require_once dirname(__FILE__).'/xPDO/xPDO_AllTests.php';
 require_once dirname(__FILE__).'/xPDOQuery/xPDOQuery_AllTests.php';
 /**
@@ -31,9 +33,10 @@ require_once dirname(__FILE__).'/xPDOQuery/xPDOQuery_AllTests.php';
 class xPDOSuite_AllTests {
     public static function suite() {
         $suite = new PHPUnit_Framework_TestSuite('xPDOSuite');
+        $suite->addTestSuite('xPDOSetUpTest');
         $suite->addTest(xPDO_AllTests::suite());
         $suite->addTest(xPDOQuery_AllTests::suite());
-
+		$suite->addTestSuite('xPDOTearDownTest');
         return $suite;
     }
 }

@@ -32,8 +32,10 @@ class xPDOQueryLimitTest extends xPDOTestCase {
     public function setUp() {
         parent::setUp();
         try {
-            /* ensure we have clear data */
-            $this->xpdo->removeCollection('Item',array());
+            /* ensure we have clear data and identity sequences */
+            $this->xpdo->getManager();
+            $this->xpdo->manager->createObjectContainer('Item');
+            
             $colors = array('red','green','yellow','blue');
 
             $r = 0;
@@ -56,7 +58,8 @@ class xPDOQueryLimitTest extends xPDOTestCase {
      * Clean up data when through.
      */
     public function tearDown() {
-        $this->xpdo->removeCollection('Item',array());
+    	$this->xpdo->getManager();
+        $this->xpdo->manager->removeObjectContainer('Item');
         parent::tearDown();
     }
     
@@ -68,6 +71,7 @@ class xPDOQueryLimitTest extends xPDOTestCase {
      * @param boolean $shouldEqual If the result count should equal the limit
      */
     public function testLimit($limit,$start = 0,$shouldEqual = true) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Item');
             $criteria->limit($limit,$start);
@@ -77,6 +81,9 @@ class xPDOQueryLimitTest extends xPDOTestCase {
         }
         $success = count($result) == $limit;
         if (!$shouldEqual) $success = !$success;
+        if (!$success) {
+        	$this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Expected {$limit}, got " . count($result) . "; with query: " . $criteria->toSql());
+    	}
         $this->assertTrue($success,'xPDOQuery: Limit clause returned more than desired '.$limit.' result.');
     }
     /**
@@ -101,6 +108,7 @@ class xPDOQueryLimitTest extends xPDOTestCase {
      * @param boolean $shouldEqual If the result count should equal the limit
      */
     public function testLimitWithGroupBy($limit,$start = 0,$shouldEqual = true) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Item');
             $criteria->groupby('color');
@@ -131,6 +139,7 @@ class xPDOQueryLimitTest extends xPDOTestCase {
      * @param boolean $shouldEqual If the result count should equal the limit
      */
     public function testLimitWithSortBy($limit,$start = 0,$shouldEqual = true) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $criteria = $this->xpdo->newQuery('Item');
             $criteria->sortby('color','ASC');

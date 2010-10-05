@@ -27,14 +27,12 @@ require_once 'PHPUnit/Framework.php';
  * @package xpdo-test
  */
 class xPDOTestCase extends PHPUnit_Framework_TestCase {
+    public $xpdo = null;
 
-    protected $xpdo = null;
-
-    public function setUp() {
-        $this->xpdo =& xPDOTestHarness::_getConnection();
+    protected function setUp() {
+    	$this->xpdo =& xPDOTestHarness::getInstance();
     }
-
-    public function tearDown() {
-        $this->xpdo = null;
-    }    
+    protected function tearDown() {
+    	$this->xpdo = null;
+    }
 }

@@ -41,6 +41,20 @@ class xPDOTestHarness extends PHPUnit_Framework_TestSuite {
      * @var array Static reference to configuration array.
      */
     public static $properties = array();
+    /**
+	 * @var mixed Indicates the debug state of the test harness.
+	 */
+    public static $debug = false;
+
+    protected function setUp() {
+        $properties = array();
+        include_once (dirname(dirname(__FILE__)) . '/xpdo/xpdo.class.php');
+        include (dirname(__FILE__) . '/properties.inc.php');
+        xPDOTestHarness::$properties = $properties;
+        if (array_key_exists('debug', xPDOTestHarness::$properties)) {
+        	xPDOTestHarness::$debug = xPDOTestHarness::$properties['debug'];
+    	}
+    }
 
     /**
      * Load all Test Suites for xPDO Test Harness.
@@ -53,70 +67,35 @@ class xPDOTestHarness extends PHPUnit_Framework_TestSuite {
     }
 
     /**
-     * Grab a persistent instance of the xPDO class to share connection data
+     * Grab a persistent instance of the xPDO class to share sample model data
      * across multiple tests and test suites.
      * 
-     * @param array $options An array of configuration parameters.
+     * @param boolean $new Indicate if a new singleton should be created
      * @return xPDO An xPDO object instance.
      */
-    public static function _getConnection($options = array()) {
-        if (is_object(xPDOTestHarness::$xpdo)) return xPDOTestHarness::$xpdo;
+    public static function getInstance($new = false) {
+        if ($new || !is_object(xPDOTestHarness::$xpdo)) {
+	        $driver= xPDOTestHarness::$properties['xpdo_driver'];
+	        $xpdo= new xPDO(
+	                xPDOTestHarness::$properties["{$driver}_string_dsn_test"],
+	                xPDOTestHarness::$properties["{$driver}_string_username"],
+	                xPDOTestHarness::$properties["{$driver}_string_password"],
+	                xPDOTestHarness::$properties["{$driver}_array_options"],
+	                xPDOTestHarness::$properties["{$driver}_array_driverOptions"]
+	        );
+	        if (is_object($xpdo)) {
+		        $logLevel = array_key_exists('logLevel', xPDOTestHarness::$properties) ? xPDOTestHarness::$properties['logLevel'] : xPDO::LOG_LEVEL_WARN;
+		        $logTarget = array_key_exists('logTarget', xPDOTestHarness::$properties) ? xPDOTestHarness::$properties['logTarget'] : (XPDO_CLI_MODE ? 'ECHO' : 'HTML');
+		        $xpdo->setLogLevel($logLevel);
+		        $xpdo->setLogTarget($logTarget);
+		        if (!empty(xPDOTestHarness::$debug)) {
+		            $xpdo->setDebug(xPDOTestHarness::$properties['debug']);
+		        }
+	            $xpdo->setPackage('sample', xPDOTestHarness::$properties['xpdo_test_path'] . '/model/');
 
-        print 'Attempting to create xPDO singleton object.'."\n";
-        
-        $properties= array ();
-        include_once (strtr(realpath(dirname(dirname(__FILE__))) . '/xpdo/xpdo.class.php', '\\', '/'));
-        include (strtr(realpath(dirname(__FILE__)) . '/properties.inc.php', '\\', '/'));
-        xPDOTestHarness::$properties= $properties;
-        $driver= xPDOTestHarness::$properties['xpdo_driver'];
-        $dsn= $driver . '_' . (array_key_exists('dsnProperty', $options) ? $options['dsnProperty'] : 'string_dsn_test');
-        $xpdo= new xPDO(
-                xPDOTestHarness::$properties[$dsn],
-                xPDOTestHarness::$properties["{$driver}_string_username"],
-                xPDOTestHarness::$properties["{$driver}_string_password"],
-                xPDOTestHarness::$properties["{$driver}_array_options"],
-                xPDOTestHarness::$properties["{$driver}_array_driverOptions"]
-        );
-        if (!is_object($xpdo)) {
-            die('Could not connect to test database. Please create it and try again.');
+		        xPDOTestHarness::$xpdo = $xpdo;
+	        }
         }
-
-        if ($dsn == $driver . '_string_dsn_test') {
-            $xpdo->setPackage('sample', strtr(realpath(dirname(__FILE__)) . '/model/', '\\', '/'));
-        }
-        if (array_key_exists('debug', xPDOTestHarness::$properties)) {
-            $xpdo->setDebug(xPDOTestHarness::$properties['debug']); // set to true for debugging during tests only
-        }
-        $logLevel = array_key_exists('logLevel', xPDOTestHarness::$properties) ? xPDOTestHarness::$properties['logLevel'] : xPDO::LOG_LEVEL_WARN;
-        $logTarget = array_key_exists('logTarget', xPDOTestHarness::$properties) ? xPDOTestHarness::$properties['logTarget'] : 'ECHO';
-        $xpdo->setLogLevel($logLevel);
-        $xpdo->setLogTarget($logTarget); // set to 'HTML' for running through browser
-        if ($xpdo && $xpdo->connect()) {
-            $driver = xPDOTestHarness::$properties['xpdo_driver'];
-            $dsn = xPDOTestHarness::$properties[$driver . '_string_dsn_test'];
-            echo 'Attempting to drop test database...';
-            $response = $xpdo->getManager()->removeSourceContainer(xPDO::parseDSN($dsn));
-            if ($response) {
-                echo 'Test database dropped.'."\n";
-            } else {
-                echo 'Could not drop existing test database.'."\n";
-            }
-        } else {
-            die('Could not connect to database.');
-        }
-        echo 'Attempting to create test database...';
-        $created= $xpdo->getManager()->createSourceContainer();
-        if (!$created) {
-            die('Could not create test database.');
-        } else {
-            echo 'Test database created.'."\n";
-        }
-
-        $xpdo->setPackage('sample', strtr(realpath(dirname(__FILE__)) . '/model/', '\\', '/'));
-        $debug = !empty(xPDOTestHarness::$properties['debug']);
-        $xpdo->setDebug($debug);
-
-        xPDOTestHarness::$xpdo = $xpdo;
-        return $xpdo;
+	    return xPDOTestHarness::$xpdo;
     }
 }
