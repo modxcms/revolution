@@ -33,7 +33,7 @@ class xPDOTearDownTest extends PHPUnit_Framework_TestCase {
      */
     public function testDoNotOverwriteSourceContainer() {
     	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
-    	$xpdo =& xPDOTestHarness::getInstance(true);
+    	$xpdo = xPDOTestHarness::getInstance(true);
         $result = false;
         try {
             $xpdo->getManager();
@@ -54,7 +54,7 @@ class xPDOTearDownTest extends PHPUnit_Framework_TestCase {
      */
     public function testRemoveSourceContainer() {
     	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
-    	$xpdo =& xPDOTestHarness::getInstance(true);
+    	$xpdo = xPDOTestHarness::getInstance(true);
         $success = false;
         if ($xpdo) {
             $driver = xPDOTestHarness::$properties['xpdo_driver'];
