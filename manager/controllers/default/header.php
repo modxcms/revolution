@@ -14,6 +14,7 @@ if ($menus == null) {
 }
 $output = '';
 $order = 0;
+$showDescriptions = (boolean)$modx->getOption('topmenu_show_descriptions',null,true);
 foreach ($menus as $menu) {
     $childrenCt = 0;
 
@@ -35,7 +36,7 @@ foreach ($menus as $menu) {
 
     if (!empty($menu['children'])) {
         $menuTpl .= '<ul class="modx-subnav">'."\n";
-        _modProcessMenus($modx,$menuTpl,$menu['children'],$childrenCt);
+        _modProcessMenus($modx,$menuTpl,$menu['children'],$childrenCt,$showDescriptions);
         $menuTpl .= '</ul>'."\n";
     }
     $menuTpl .= '</li>'."\n";
@@ -46,7 +47,7 @@ foreach ($menus as $menu) {
     }
     $order++;
 }
-function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt) {
+function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt,$showDescriptions = true) {
     foreach ($menus as $menu) {
         if (!empty($menu['permissions'])) {
             $permissions = array();
@@ -59,15 +60,15 @@ function _modProcessMenus(modX &$modx,&$output,$menus,&$childrenCt) {
         $description = !empty($menu['description']) ? '<span class="description">'.$menu['description'].'</span>'."\n" : '';
 
         if (!empty($menu['handler'])) {
-            $smTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].$description.'</a>'."\n";
+            $smTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$menu['text'].($showDescriptions ? $description : '').'</a>'."\n";
         } else {
             $url = '?a='.$menu['action'].$menu['params'];
-            $smTpl .= '<a href="'.$url.'">'.$menu['text'].$description.'</a>'."\n";
+            $smTpl .= '<a href="'.$url.'">'.$menu['text'].($showDescriptions ? $description : '').'</a>'."\n";
         }
 
         if (!empty($menu['children'])) {
             $smTpl .= '<ul class="modx-subsubnav">'."\n";
-            _modProcessMenus($modx,$smTpl,$menu['children'],$childrenCt);
+            _modProcessMenus($modx,$smTpl,$menu['children'],$childrenCt,$showDescriptions);
             $smTpl .= '</ul>'."\n";
         }
         $smTpl .= '</li>';
