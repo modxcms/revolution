@@ -137,6 +137,7 @@
         <field key="constraint_field" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" index="index" />
+        <field key="for_parent" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         
         <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Access" class="modAccessActionDom" local="id" foreign="target" cardinality="many" owner="local" />
