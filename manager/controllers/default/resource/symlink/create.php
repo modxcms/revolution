@@ -108,6 +108,18 @@ if ($context->getOption('use_editor') && !empty($rte)) {
 $ctx = !empty($_REQUEST['context_key']) ? $_REQUEST['context_key'] : 'web';
 $modx->smarty->assign('_ctx',$ctx);
 
+$defaults = array(
+    'template' => $default_template,
+    'content_type' => 1,
+    'class_key' => isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modSymLink',
+    'context_key' => $ctx,
+    'parent' => isset($_REQUEST['parent']) ? $_REQUEST['parent'] : 0,
+    'richtext' => 0,
+    'published' => $context->getOption('publish_default',null,0),
+    'searchable' => $context->getOption('search_default',null,1),
+    'cacheable' => $context->getOption('cache_default',null,1),
+);
+
 /* register JS scripts */
 $modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
@@ -124,17 +136,7 @@ MODx.ctx = "'.$ctx.'";
 Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-symlink-create"
-        ,record: {
-            template: "'.$default_template.'"
-            ,content_type: "1"
-            ,class_key: "'.(isset($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modSymLink').'"
-            ,context_key: "'.$ctx.'"
-            ,parent: "'.(isset($_REQUEST['parent']) ? $_REQUEST['parent'] : '0').'"
-            ,richtext: 0
-            ,published: "'.$context->getOption('publish_default',null,0).'"
-            ,searchable: "'.$context->getOption('search_default',null,1).'"
-            ,cacheable: "'.$context->getOption('cache_default',null,1).'"
-        }
+        ,record: '.$modx->toJSON($defaults).'
         ,which_editor: "'.$which_editor.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
@@ -145,4 +147,9 @@ Ext.onReady(function() {
 </script>');
 
 $this->checkFormCustomizationRules($parent != null ? $parent : null);
+/* fire the FC rules on the actual resource as well; this allows moving of TVs
+ * and other FC manips after the default template FC rule */
+$resource = $modx->newObject('modResource');
+$resource->fromArray($defaults);
+$this->checkFormCustomizationRules($resource);
 return $modx->smarty->fetch('resource/symlink/create.tpl');

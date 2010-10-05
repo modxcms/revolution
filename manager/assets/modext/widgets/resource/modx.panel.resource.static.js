@@ -324,18 +324,18 @@ MODx.panel.Static = function(config) {
         ,width: 250
     });
     it.push({
-            id: 'modx-resource-page-settings'
-            ,title: _('page_settings')
-            ,layout: 'form'
-            ,labelWidth: 200
-            ,bodyStyle: 'padding: 15px;'
-            ,autoHeight: true
-            ,defaults: {
-                border: false
-                ,msgTarget: 'side'
-            }
-            ,items: va
-        });
+        id: 'modx-page-settings'
+        ,title: _('page_settings')
+        ,layout: 'form'
+        ,labelWidth: 200
+        ,bodyStyle: 'padding: 15px;'
+        ,autoHeight: true
+        ,defaults: {
+            border: false
+            ,msgTarget: 'side'
+        }
+        ,items: va
+    });
     it.push({
         xtype: 'modx-panel-resource-tv'
         ,resource: config.resource

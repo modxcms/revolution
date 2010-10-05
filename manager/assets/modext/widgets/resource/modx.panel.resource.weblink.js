@@ -9,6 +9,7 @@ MODx.panel.WebLink = function(config) {
     var it = [];
     it.push({
         title: _('createedit_weblink')
+        ,id: 'modx-resource-settings'
         ,layout: 'form'
         ,labelWidth: 200
         ,bodyStyle: 'padding: 15px;'
@@ -303,7 +304,7 @@ MODx.panel.WebLink = function(config) {
         ,width: 250
     });
     it.push({
-        id: 'modx-resource-page-settings'
+        id: 'modx-page-settings'
         ,title: _('page_settings')
         ,layout: 'form'
         ,labelWidth: 200

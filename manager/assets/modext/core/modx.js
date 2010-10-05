@@ -202,6 +202,7 @@ Ext.extend(MODx,Ext.Component,{
         });
         tabs.add(opt);
         tabs.doLayout();
+        tabs.setActiveTab(0);
     }
     ,hideTab: function(ct,tab) {
         var tp = Ext.getCmp(ct);

@@ -9,6 +9,7 @@ MODx.panel.SymLink = function(config) {
     var it = [];
     it.push({
         title: _('createedit_symlink')
+        ,id: 'modx-resource-settings'
         ,layout: 'form'
         ,labelWidth: 200
         ,bodyStyle: 'padding: 15px;'
@@ -302,7 +303,7 @@ MODx.panel.SymLink = function(config) {
         ,width: 250
     });
     it.push({
-        id: 'modx-resource-page-settings'
+        id: 'modx-page-settings'
         ,title: _('page_settings')
         ,layout: 'form'
         ,labelWidth: 200
