@@ -13,6 +13,7 @@ $_lang['perm.add_children_desc'] = 'To add any Resources as children of the spec
 $_lang['perm.change_password_desc'] = 'User can change their user password.';
 $_lang['perm.change_profile_desc'] = 'User can change their profile.';
 $_lang['perm.charsets_desc'] = 'To view a list of charsets.';
+$_lang['perm.class_map_desc'] = 'To view a list of classes in the Class Map.';
 $_lang['perm.content_types_desc'] = 'The Content Types page.';
 $_lang['perm.countries_desc'] = 'To view a list of countries.';
 $_lang['perm.create_desc'] = 'Basic "create" access on new objects.';

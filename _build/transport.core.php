@@ -238,6 +238,21 @@ unset ($collection, $c, $attributes);
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged all default modContentTypes.'); flush();
 
+/* modClassMap */
+$collection = array ();
+include dirname(__FILE__).'/data/transport.core.classmap.php';
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => false,
+    xPDOTransport::UNIQUE_KEY => 'name',
+);
+foreach ($collection as $c) {
+    $package->put($c, $attributes);
+}
+unset ($collection, $c, $attributes);
+
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged all default modClassMap objects.'); flush();
+
 /* modContext = web */
 $c = $xpdo->newObject('modContext');
 $c->fromArray(array (

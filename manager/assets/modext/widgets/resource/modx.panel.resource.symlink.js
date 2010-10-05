@@ -281,7 +281,7 @@ MODx.panel.SymLink = function(config) {
         ,description: _('resource_content_type_help')
         ,name: 'content_type'
         ,id: 'modx-resource-content-type'
-        ,width: 300
+        ,anchor: '70%'
         ,value: config.record.content_type || 1
     });
     va.push({
@@ -290,17 +290,19 @@ MODx.panel.SymLink = function(config) {
         ,description: _('resource_contentdispo_help')
         ,name: 'content_dispo'
         ,id: 'modx-resource-content-dispo'
-        ,width: 300
+        ,anchor: '70%'
         ,value: config.record.content_dispo
     });
     va.push({
-        xtype: 'textfield'
+        xtype: 'modx-combo-class-map'
         ,fieldLabel: _('class_key')
         ,name: 'class_key'
+        ,hiddenName: 'class_key'
         ,id: 'modx-resource-class-key'
+        ,baseParams: { action: 'getList', parentClass: 'modResource' }
         ,allowBlank: false
         ,value: config.record.class_key || 'modSymLink'
-        ,width: 250
+        ,anchor: '70%'
     });
     it.push({
         id: 'modx-page-settings'

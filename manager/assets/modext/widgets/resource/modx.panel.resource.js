@@ -339,10 +339,12 @@ MODx.panel.Resource = function(config) {
         ,value: config.record.content_dispo || 0
         
     },{
-        xtype: 'textfield'
+        xtype: 'modx-combo-class-map'
         ,fieldLabel: _('class_key')
         ,name: 'class_key'
+        ,hiddenName: 'class_key'
         ,id: 'modx-resource-class-key'
+        ,baseParams: { action: 'getList', parentClass: 'modResource' }
         ,allowBlank: false
         ,value: config.record.class_key || 'modDocument'
         ,anchor: '70%'

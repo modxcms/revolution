@@ -5,7 +5,7 @@
  * @package modx
  * @subpackage processors.element
  */
-if (!$modx->hasPermission('view_element')) return $modx->error->failure($modx->lexicon('permission_denied'));
+if (!$modx->hasPermission('class_map')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset','element');
 
 /* get default properties */

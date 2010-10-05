@@ -355,24 +355,21 @@ MODx.combo.ContentDisposition = function(config) {
 Ext.extend(MODx.combo.ContentDisposition,Ext.form.ComboBox);
 Ext.reg('modx-combo-content-disposition',MODx.combo.ContentDisposition);
 
-MODx.combo.ClassKey = function(config) {
+MODx.combo.ClassMap = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        name: 'classKey'
-        ,hiddenName: 'classKey'
-        ,url: MODx.config.connectors_url+'workspace/builder/index.php'
-        ,baseParams: { 
-            action: 'getClassKeys'
-        }
-        ,displayField: 'key'
-        ,valueField: 'key'
-        ,fields: ['key']
+        name: 'class'
+        ,hiddenName: 'class'
+        ,url: MODx.config.connectors_url+'system/classmap.php'
+        ,displayField: 'class'
+        ,valueField: 'class'
+        ,fields: ['class']
         ,editable: false
     });
-    MODx.combo.ClassKey.superclass.constructor.call(this,config);
+    MODx.combo.ClassMap.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.combo.ClassKey,MODx.combo.ComboBox);
-Ext.reg('modx-combo-class-key',MODx.combo.ClassKey);
+Ext.extend(MODx.combo.ClassMap,MODx.combo.ComboBox);
+Ext.reg('modx-combo-class-map',MODx.combo.ClassMap);
 
 MODx.combo.Object = function(config) {
     config = config || {};
