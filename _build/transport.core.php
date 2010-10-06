@@ -244,7 +244,7 @@ include dirname(__FILE__).'/data/transport.core.classmap.php';
 $attributes = array (
     xPDOTransport::PRESERVE_KEYS => false,
     xPDOTransport::UPDATE_OBJECT => false,
-    xPDOTransport::UNIQUE_KEY => 'name',
+    xPDOTransport::UNIQUE_KEY => 'class',
 );
 foreach ($collection as $c) {
     $package->put($c, $attributes);
