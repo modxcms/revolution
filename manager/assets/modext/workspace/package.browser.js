@@ -282,8 +282,9 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
             m = this.setupMask();
         }
         m.show();
+        MODx.provider = p;
         this.provider = p;
-        this.loadDataFromProvider();
+        this.renderProviderInfo();
     }
     
     ,loadTpls: function() {
@@ -315,15 +316,15 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
                 ,'<div class="pbr-provider-box"><h3>'+_('most_popular')+'</h3>'
                 ,'<tpl for="topdownloaded">'
                     ,'<p>{#}. '
-                    ,'<tpl if="this.isEmpty(url) == false">{name}</tpl>'
-                    ,'<tpl if="this.isEmpty(url) == true">{name}</tpl>'
+                    ,'<tpl if="this.isEmpty(url) == false"><a href="#" onclick="MODx.searchPackage(\'{name}\');">{name}</a></tpl>'
+                    ,'<tpl if="this.isEmpty(url) == true"><a href="#" onclick="MODx.searchPackage(\'{name}\');">{name}</a></tpl>'
                     ,' - {downloads}</p>'
                 ,'</tpl></div>'
                 ,'<div class="pbr-provider-box"><h3>'+_('newest_additions')+'</h3>'
                 ,'<tpl for="newest">'
                     ,'<p>{#}. '
-                    ,'<tpl if="this.isEmpty(url) == false">{name}</tpl>'
-                    ,'<tpl if="this.isEmpty(url) == true">{name}</tpl>'
+                    ,'<tpl if="this.isEmpty(url) == false"><a href="#" onclick="MODx.searchPackage(\'{package_name}\');">{name}</a></tpl>'
+                    ,'<tpl if="this.isEmpty(url) == true"><a href="#" onclick="MODx.searchPackage(\'{package_name}\');">{name}</a></tpl>'
                     ,' - {releasedon}</p>'
                 ,'</tpl></div>'
                 ,'<br class="clear" /></div>'
@@ -739,3 +740,12 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
     }
 });
 Ext.reg('modx-view-package-browser-thumbs',MODx.PackageBrowserThumbsView);
+
+MODx.searchPackage = function(name) {
+    var f = Ext.getCmp('modx-pbr-search-fld');
+    var t = Ext.getCmp('modx-package-browser-tree');
+    if (f && t) {
+        f.setValue(name);
+        t.search(f,name);
+    }
+};

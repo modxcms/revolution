@@ -50,6 +50,7 @@ foreach ($info->newest as $package) {
         'url' => (string)$info->url,
         'id' => (string)$package->id,
         'name' => (string)$package->name,
+        'package_name' => (string)$package->package_name,
         'releasedon' => strftime('%b %d, %Y',strtotime((string)$package->releasedon)),
     );
 }

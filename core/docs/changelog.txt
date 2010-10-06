@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- [#MODX-2402] In Package Browser, Most Popular/Recently Added package names are now links to auto-search in grid
 - [#MODX-2397] Added filtering and search to FC rule grid
 - [#MODX-2401] Adjusted JS version postfix code to not adjust .php (or non-js) files used as script src targets
 - Improved context menus on FC rule grid to allow for batch actions on selected items
