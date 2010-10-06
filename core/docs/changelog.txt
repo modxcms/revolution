@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- [#MODX-2397] Added filtering and search to FC rule grid
 - [#MODX-2401] Adjusted JS version postfix code to not adjust .php (or non-js) files used as script src targets
 - Improved context menus on FC rule grid to allow for batch actions on selected items
 - Added `for_parent` field to FC rules, to allow for more fine-grained control of rule applications

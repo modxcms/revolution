@@ -95,6 +95,53 @@ MODx.grid.ActionDom = function(config) {
                 ,handler: this.removeSelected
                 ,scope: this
             }]
+        },'->',{
+            xtype: 'modx-combo-rule-type'
+            ,name: 'filter_rule_type'
+            ,id: 'modx-adom-filter-rule-type'
+            ,emptyText: _('filter_by_rule_type')
+            ,value: ''
+            ,allowBlank: true
+            ,width: 150
+            ,listeners: {
+                'select': {fn: this.filterByRuleType, scope:this}
+            }
+        },{
+            xtype: 'modx-combo-action'
+            ,name: 'filter_action'
+            ,id: 'modx-adom-filter-action'
+            ,emptyText: _('filter_by_action')
+            ,value: ''
+            ,allowBlank: true
+            ,width: 150
+            ,listeners: {
+                'select': {fn: this.filterByAction, scope:this}
+            }
+        },{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-adom-search'
+            ,emptyText: _('filter_by_search')
+            ,listeners: {
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this}
+            }
         }]
     });
     MODx.grid.ActionDom.superclass.constructor.call(this,config);
@@ -153,6 +200,38 @@ Ext.extend(MODx.grid.ActionDom,MODx.grid.Grid,{
             this.addContextMenuItem(m);
         }
     }
+
+    ,search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getStore().baseParams.controller = '';
+        Ext.getCmp('modx-adom-filter-action').setValue('');
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
+
+    ,filterByAction: function(cb,rec,ri) {
+        this.getStore().baseParams['controller'] = cb.getValue();
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+    ,filterByRuleType: function(cb,rec,ri) {
+        this.getStore().baseParams['rule'] = cb.getValue();
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+    ,clearFilter: function() {        
+    	this.getStore().baseParams = {
+            action: 'getList'
+    	};
+        Ext.getCmp('modx-adom-filter-action').reset();
+        Ext.getCmp('modx-adom-filter-rule-type').reset();
+        Ext.getCmp('modx-adom-search').reset();
+    	this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+
     ,updateRule: function(btn,e) {
         var r = this.menu.record;
         r.action_id = r.action;

@@ -23,6 +23,9 @@ $_lang['field_desc'] = 'This is the field to affect. This may also be a tab, or 
 $_lang['field_default'] = 'Field Default Value';
 $_lang['field_label'] = 'Field Label';
 $_lang['field_visible'] = 'Field Visible';
+$_lang['filter_by_action'] = 'Filter by Action...';
+$_lang['filter_by_rule_type'] = 'Filter by Rule...';
+$_lang['filter_by_search'] = 'Search...';
 $_lang['for_parent'] = 'For Parent';
 $_lang['for_parent_desc'] = 'Check this when you want this rule to apply to the parent. Only use with Resources or objects with a `parent` field. Useful for the "create" page of Resources.';
 $_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODx Revolution installation. Inactive Rules are faded gray.';

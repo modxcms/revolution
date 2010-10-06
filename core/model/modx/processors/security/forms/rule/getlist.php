@@ -20,11 +20,32 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'action');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$search = $modx->getOption('search',$scriptProperties,'');
+$controller = $modx->getOption('controller',$scriptProperties,'');
+$rule = $modx->getOption('rule',$scriptProperties,'');
 
 /* query for rules */
 $c = $modx->newQuery('modActionDom');
 $c->innerJoin('modAction','Action');
 $c->leftJoin('modAccessActionDom','Access');
+
+if (!empty($search)) {
+    $c->where(array(
+        'modActionDom.description:LIKE' => '%'.$search.'%',
+        'OR:modActionDom.value:LIKE' => '%'.$search.'%',
+    ),null,2);
+}
+if (!empty($controller)) {
+    $c->where(array(
+        'action' => $controller,
+    ));
+}
+if (!empty($rule)) {
+    $c->where(array(
+        'rule' => $rule,
+    ));
+}
+
 $count = $modx->getCount('modActionDom',$c);
 $c->select(array(
     'modActionDom.*',
