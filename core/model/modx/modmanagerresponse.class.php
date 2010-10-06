@@ -288,6 +288,26 @@ class modManagerResponse extends modResponse {
     }
 
     /**
+     * Appends a version postfix to a script tag
+     *
+     * @access private
+     * @param string $str The script tag to append the version to
+     * @param string $version The version to append
+     * @return string The adjusted script tag
+     */
+    private function _postfixVersionToScript($str,$version) {
+        $pos = strpos($str,'.js');
+        $pos2 = strpos($str,'src="'); /* only apply to externals */
+        if ($pos && $pos2) {
+            $s = substr($str,0,strpos($str,'"></script>'));
+            if (!empty($s) && substr($s,strlen($s)-3,strlen($s)) == '.js') {
+                $str = $s.'?v='.$version.'"></script>';
+            }
+        }
+        return $str;
+    }
+
+    /**
      * Registers CSS/JS to manager interface
      */
     public function registerCssJs() {
@@ -315,21 +335,11 @@ class modManagerResponse extends modResponse {
                     $scr = $newUrl;
                 }
                 /* append version string */
-                $pos = strpos($scr,'.js');
-                $pos2 = strpos($scr,'src="');
-                if ($pos && $pos2) {
-                    $newUrl = substr($scr,0,$pos+3).'?v='.$versionPostFix.substr($scr,$pos+3,strlen($scr));
-                    $scr = $newUrl;
-                }
+                $scr = $this->_postfixVersionToScript($scr,$versionPostFix);
             }
         } else {
             foreach ($this->modx->sjscripts as &$scr) {
-                $pos = strpos($scr,'.js');
-                $pos2 = strpos($scr,'src="');
-                if ($pos && $pos2) {
-                    $newUrl = substr($scr,0,$pos+3).'?v='.$versionPostFix.substr($scr,$pos+3,strlen($scr));
-                    $scr = $newUrl;
-                }
+                $scr = $this->_postfixVersionToScript($scr,$versionPostFix);
             }
         }
         /* assign css/js to header */
