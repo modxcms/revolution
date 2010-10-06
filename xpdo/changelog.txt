@@ -2,6 +2,8 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- Fix bug with xPDOManager_sqlite::removeSourceContainer()
+- [#XPDO-62] Make getObjectGraph() respect class_key
 - Add IF EXISTS to DROP DATABASE statement in xPDOManager_mysql::removeSourceContainer()
 - Add xPDO::getIndexMeta() method
 - Fix invalid call to xPDOManager::getPhpType() in xPDOGenerator::writeSchema()

@@ -51,7 +51,7 @@ class xPDOManager_sqlite extends xPDOManager {
                 $dbfile = $dsnArray['dbname'];
                 $created = !file_exists($dbfile);
             } catch (Exception $e) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error creating source container: " . $pe->getMessage());
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error creating source container: " . $e->getMessage());
             }
         }
         return $created;
@@ -68,9 +68,11 @@ class xPDOManager_sqlite extends xPDOManager {
                     if (!$removed) {
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container");
                     }
+                } else {
+                    $removed= true;
                 }
             } catch (Exception $e) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container: " . $pe->getMessage());
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not remove source container: " . $e->getMessage());
             }
         }
         return $removed;
