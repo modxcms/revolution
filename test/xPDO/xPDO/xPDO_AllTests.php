@@ -21,6 +21,7 @@
  */
 require_once 'xPDO.php';
 require_once 'xPDOObject.php';
+require_once 'xPDOObjectSingleTableInheritance.php';
 /**
  * Suite handling all xPDO-class centric tests.
  *
@@ -32,6 +33,7 @@ class xPDO_AllTests extends PHPUnit_Framework_TestSuite {
         $suite = new xPDO_AllTests('xPDOClassTest');
         $suite->addTestSuite('xPDOTest');
         $suite->addTestSuite('xPDOObjectTest');
+        $suite->addTestSuite('xPDOObjectSingleTableInheritanceTest');
         return $suite;
     }
 }
