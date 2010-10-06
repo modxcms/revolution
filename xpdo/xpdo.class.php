@@ -562,7 +562,7 @@ class xPDO {
      * @access protected
      * @param string $className The name of the class to find a loader for.
      * @param string $method Indicates the specific loader method to use,
-     * loadCollection or loadObject.
+     * loadCollection or loadObject (or other public static methods).
      * @return callable A callable loader function.
      */
     public function getObjectLoader($className, $method) {

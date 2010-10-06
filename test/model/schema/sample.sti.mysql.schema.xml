@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="sample.sti" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">
+    <object class="baseClass" table="sti_objects" extends="xPDOSimpleObject">
+        <field key="field1" dbtype="tinyint" precision="2" phptype="integer" null="false" default="" />
+        <field key="field2" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="fkey" dbtype="int" precision="11" phptype="integer" null="true" index="fk" />
+        <field key="class_key" dbtype="varchar" precision="255" phptype="string" null="false" default="baseClass" />
+
+        <index alias="fkey" name="fkey" primary="false" unique="false">
+            <column key="fkey" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="relOne" class="relClassOne" local="fkey" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="relMany" class="relClassMany" local="id" foreign="fkey" cardinality="many" owner="local" />
+    </object>
+    <object class="derivedClass" extends="baseClass">
+        <field key="class_key" dbtype="varchar" precision="255" phptype="string" null="false" default="derivedClass" />
+    </object>
+    <object class="derivedClass2" extends="derivedClass">
+        <field key="class_key" dbtype="varchar" precision="255" phptype="string" null="false" default="derivedClass2" />
+    </object>
+    <object class="relClassOne" table="sti_related_one" extends="xPDOSimpleObject">
+        <field key="field1" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="field2" dbtype="varchar" precision="100" phptype="string" null="false" />
+
+        <aggregate alias="relParent" class="baseClass" local="id" foreign="fkey" cardinality="one" owner="local" />
+    </object>
+    <object class="relClassMany" table="sti_related_many" extends="xPDOSimpleObject">
+        <field key="field1" dbtype="varchar" precision="200" phptype="string" null="false" />
+        <field key="field2" dbtype="tinyint" precision="1" phptype="boolean" null="false" />
+        <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
+        <field key="fkey" dbtype="int" precision="11" phptype="integer" null="true" index="fk" />
+
+        <index alias="fkey" name="fkey" primary="false" unique="false">
+            <column key="fkey" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="relParent" class="baseClass" local="fkey" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+</model>

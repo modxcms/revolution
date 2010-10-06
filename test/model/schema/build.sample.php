@@ -45,6 +45,8 @@ foreach ($dbtypes as $dbtype) {
     // NOTE: by default, only maps are overwritten; delete class files if you want to regenerate classes
     $xpdo->manager->generator->parseSchema($properties['xpdo_test_path'] . 'model/schema/sample.' . $dbtype . '.schema.xml', $properties['xpdo_test_path'] . 'model/');
 
+    $xpdo->manager->generator->parseSchema($properties['xpdo_test_path'] . 'model/schema/sample.sti.' . $dbtype . '.schema.xml', $properties['xpdo_test_path'] . 'model/');
+
     unset($xpdo);
 }
 

@@ -423,16 +423,13 @@ abstract class xPDOQuery extends xPDOCriteria {
 
     public function hydrateGraphParent(& $instances, $row) {
         $hydrated = false;
-        if ($instance= $this->xpdo->newObject($this->_class)) {
-            $instance->_lazy= array_keys($instance->_fields);
-            $instance->fromArray($row, $this->_alias . '_', true, true);
+        $loader = $this->xpdo->getObjectLoader($this->getClass(), '_loadInstance');
+        $instance = call_user_func_array($loader, array(& $this->xpdo, $this->getClass(), $this->getAlias(), $row));
+        if (is_object($instance)) {
             $pk= $instance->getPrimaryKey();
             if (is_array($pk)) $pk= implode('-', $pk);
             if (isset ($instances[$pk])) {
                 $instance= & $instances[$pk];
-            } else {
-                $instance->_dirty= array ();
-                $instance->_new= false;
             }
             foreach ($this->graph as $relationAlias => $subRelations) {
                 $this->hydrateGraphNode($row, $instance, $relationAlias, $subRelations);
@@ -455,16 +452,12 @@ abstract class xPDOQuery extends xPDOCriteria {
         $relObj= null;
         if ($relationMeta= $instance->getFKDefinition($alias)) {
             if ($row[$alias.'_'.$relationMeta['foreign']] != null) {
-                if ($relObj= $this->xpdo->newObject($relationMeta['class'])) {
-                    $relObj->_lazy= array_keys($relObj->_fields);
-                    $prefix= $alias . '_';
-                    $relObj->fromArray($row, $prefix, true, true);
-                    $relObj->_new= false;
-                    $relObj->_dirty= array ();
+                $loader = $this->xpdo->getObjectLoader($relationMeta['class'], '_loadInstance');
+                $relobj = call_user_func_array($loader, array(& $this->xpdo, $relationMeta['class'], $alias, $row));
+                if ($relObj) {
                     if (strtolower($relationMeta['cardinality']) == 'many') {
                         $instance->addMany($relObj, $alias);
-                    }
-                    else {
+                    } else {
                         $instance->addOne($relObj, $alias);
                     }
                 }
