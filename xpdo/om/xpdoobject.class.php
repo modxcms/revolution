@@ -413,7 +413,7 @@ class xPDOObject {
                     if (is_object($instance)) {
                         if (!$fromCache && $cacheFlag && $xpdo->_cacheEnabled) {
                             $xpdo->toCache($criteria, $instance, $cacheFlag);
-                            if ($xpdo->getOption(xPDO::OPT_CACHE_DB_OBJECTS_BY_PK) && ($cacheKey= $obj->getPrimaryKey()) && !$instance->isLazy()) {
+                            if ($xpdo->getOption(xPDO::OPT_CACHE_DB_OBJECTS_BY_PK) && ($cacheKey= $instance->getPrimaryKey()) && !$instance->isLazy()) {
                                 $pkCriteria = $xpdo->newQuery($className, $cacheKey, $cacheFlag);
                                 $xpdo->toCache($pkCriteria, $instance, $cacheFlag);
                             }
