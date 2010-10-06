@@ -386,10 +386,7 @@ class xPDOObject {
     public static function load(xPDO & $xpdo, $className, $criteria, $cacheFlag= true) {
         $instance= null;
         $fromCache= false;
-        $sql= '';
         if ($className= $xpdo->loadClass($className)) {
-            $actualClass= $className;
-            $bindings= array ();
             if (!is_object($criteria)) {
                 $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
             }
@@ -1084,7 +1081,7 @@ class xPDOObject {
                 $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "Foreign key definition for class {$obj->class}, alias {$obj->_alias} not found, or cardinality is not 'one'.");
             }
         } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "Attempt to add an object to a field ({$k}) that is not defined as a foreign key");
+            $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "Attempt to add a non-object to a relation with alias ({$alias})");
         }
         if (!$added) {
             $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "Could not add related object! " . (is_object($obj) ? print_r($obj->toArray(), true) : ''));
