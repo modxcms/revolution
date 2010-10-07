@@ -24,6 +24,7 @@ $classes= array (
     'modCategory',
     'modCategoryClosure',
     'modChunk',
+    'modClassMap',
     'modContentType',
     'modContext',
     'modContextResource',
