@@ -47,12 +47,16 @@ class modActionDom extends modAccessibleSimpleObject {
             case 'panelTitle':
             case 'tabTitle':
             case 'tabLabel':
-
                 $rule = 'Ext.getCmp("'.$this->get('name').'").setTitle("'.$this->get('value').'")';
                 break;
             case 'tabVisible':
                 if (!$this->get('value')) {
-                    $rule = 'MODx.hideTab("'.$this->get('container').'","'.$this->get('name').'");';
+                    $tabs = explode(',',$this->get('name'));
+                    $rule = '';
+                    foreach ($tabs as $tab) {
+                        $tab = trim($tab);
+                        $rule .= 'MODx.hideTab("'.$this->get('container').'","'.$tab.'");';
+                    }
                 }
                 break;
             case 'tabNew':

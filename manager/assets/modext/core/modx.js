@@ -204,13 +204,23 @@ Ext.extend(MODx,Ext.Component,{
         tabs.doLayout();
         tabs.setActiveTab(0);
     }
+    ,hiddenTabs: []
     ,hideTab: function(ct,tab) {
         var tp = Ext.getCmp(ct);
         tp.hideTabStripItem(tab);
-        if (tp.activeTab.id == tab) { /* ensure not hiding activeTab */
-            var nt = tp.items.items[0].id == tab ? 1 : 0;
-            tp.setActiveTab(nt);
-        }
+        MODx.hiddenTabs.push(tab);
+        var idx = this._getNextActiveTab(tp,tab);
+        tp.setActiveTab(idx);
+    }
+    ,_getNextActiveTab: function(tp,tab) {
+        if (MODx.hiddenTabs.indexOf(tab) != -1) {
+            var id;
+            for (var i=0;i<tp.items.items.length;i++) {
+                 id = tp.items.items[i].id;
+                if (MODx.hiddenTabs.indexOf(id) == -1) { break; }
+            }
+        } else { id = tab; }
+        return id;
     }
 
     ,moveTV: function(tvs,tab) {
