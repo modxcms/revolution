@@ -261,7 +261,10 @@ if (!$resource->get('class_key')) {
 /* increase menu index if this is a new resource */
 $auto_menuindex = $modx->getOption('auto_menuindex',null,true);
 if (!empty($auto_menuindex) && empty($scriptProperties['menuindex'])) {
-    $scriptProperties['menuindex'] = $modx->getCount('modResource',array('parent' => $resource->get('parent')));
+    $scriptProperties['menuindex'] = $modx->getCount('modResource',array(
+        'parent' => $resource->get('parent'),
+        'context_key' => $scriptProperties['context_key'],
+    ));
 }
 $resource->set('menuindex',!empty($scriptProperties['menuindex']) ? $scriptProperties['menuindex'] : 0);
 

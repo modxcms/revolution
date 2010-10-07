@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- [#MODX-2404] Fixed issue with auto_menuindex and multiple contexts
 - [#MODX-2354] Fixed issue with image TV loading incorrect URL in thumbnail preview on initial load
 - [#MODX-2357] Properly addressed issue where FC hideTab rule was causing hidden tabs to show if they were active at load
 - Refactor modAccessibleObject to centralize load policy check in _loadInstance()
