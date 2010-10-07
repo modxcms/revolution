@@ -12,36 +12,50 @@ class modAccessibleObject extends xPDOObject {
     protected $_policies = array();
 
     /**
+     * Custom instance from row loader that respects policy checking
+     *
+     * {@inheritdoc}
+     */
+    public static function _loadInstance(& $xpdo, $className, $criteria, $row) {
+        $instance = xPDOObject :: _loadInstance($xpdo, $className, $criteria, $row);
+        if ($instance instanceof modAccessibleObject && !$instance->checkPolicy('load')) {
+            $instance = null;
+            if ($xpdo instanceof modX) {
+                $userid = $xpdo->getLoginUserID();
+                if (!$userid) $userid = '0';
+                $xpdo->log(xPDO::LOG_LEVEL_INFO, "Principal {$userid} does not have permission to load object of class {$instance->_class} with primary key: " . print_r($instance->getPrimaryKey(), true));
+            }
+        }
+        return $instance;
+    }
+
+    /**
      * Custom instance loader for collections that respects policy checking.
      *
      * {@inheritdoc}
      */
-    protected static function _loadCollectionInstance(xPDO & $xpdo, array & $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag=true) {
+    public static function _loadCollectionInstance(xPDO & $xpdo, array & $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag=true) {
         $loaded = false;
-        if ($obj= xPDOObject :: _loadInstance($xpdo, $className, $criteria, $row)) {
+        if ($obj= modAccessibleObject :: _loadInstance($xpdo, $className, $criteria, $row)) {
             if (($cacheKey= $obj->getPrimaryKey()) && !$obj->isLazy()) {
                 if (is_array($cacheKey)) {
                     $pkval= implode('-', $cacheKey);
                 } else {
                     $pkval= $cacheKey;
                 }
-                if ($obj->checkPolicy('load')) {
-                    if ($xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1) == 2 && $xpdo->_cacheEnabled && $cacheFlag) {
-                        if (!$fromCache) {
-                            $pkCriteria = $xpdo->newQuery($className, $cacheKey, $cacheFlag);
-                            $xpdo->toCache($pkCriteria, $obj, $cacheFlag);
-                        } else {
-                            $obj->_cacheFlag= true;
-                        }
+                if ($xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1) == 2 && $xpdo->_cacheEnabled && $cacheFlag) {
+                    if (!$fromCache) {
+                        $pkCriteria = $xpdo->newQuery($className, $cacheKey, $cacheFlag);
+                        $xpdo->toCache($pkCriteria, $obj, $cacheFlag);
+                    } else {
+                        $obj->_cacheFlag= true;
                     }
-                    $objCollection[$pkval]= $obj;
-                    $loaded = true;
                 }
+                $objCollection[$pkval]= $obj;
+                $loaded = true;
             } else {
-                if ($obj->checkPolicy('load')) {
-                    $objCollection[]= $obj;
-                    $loaded = true;
-                }
+                $objCollection[]= $obj;
+                $loaded = true;
             }
         }
         return $loaded;
@@ -53,17 +67,47 @@ class modAccessibleObject extends xPDOObject {
      * {@inheritdoc}
      */
     public static function load(xPDO & $xpdo, $className, $criteria, $cacheFlag= true) {
-        $object = null;
-        $object = xPDOObject :: load($xpdo, $className, $criteria, $cacheFlag);
-        if ($object && !$object->checkPolicy('load')) {
-            $userid = $xpdo->getLoginUserID();
-            if (!$userid) {
-                $userid = '0';
+        $instance= null;
+        $fromCache= false;
+        if ($className= $xpdo->loadClass($className)) {
+            if (!is_object($criteria)) {
+                $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
             }
-            $xpdo->log(xPDO::LOG_LEVEL_INFO, "Principal {$userid} does not have access to requested object of class {$object->_class} with primary key " . print_r($object->getPrimaryKey(false), true));
-            $object = null;
+            if (is_object($criteria)) {
+                $row= null;
+                if ($xpdo->_cacheEnabled && $criteria->cacheFlag && $cacheFlag) {
+                    $row= $xpdo->fromCache($criteria, $className);
+                }
+                if ($row === null || !is_array($row)) {
+                    if ($rows= xPDOObject :: _loadRows($xpdo, $className, $criteria)) {
+                        $row= $rows->fetch(PDO::FETCH_ASSOC);
+                        $rows->closeCursor();
+                    }
+                } else {
+                    $fromCache= true;
+                }
+                if (!is_array($row)) {
+                    if ($xpdo->getDebug() === true) $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Fetched empty result set from statement: " . print_r($criteria->sql, true) . " with bindings: " . print_r($criteria->bindings, true));
+                } else {
+                    $instance= modAccessibleObject :: _loadInstance($xpdo, $className, $criteria, $row);
+                    if (is_object($instance)) {
+                        if (!$fromCache && $cacheFlag && $xpdo->_cacheEnabled) {
+                            $xpdo->toCache($criteria, $instance, $cacheFlag);
+                            if ($xpdo->getOption(xPDO::OPT_CACHE_DB_OBJECTS_BY_PK) && ($cacheKey= $instance->getPrimaryKey()) && !$instance->isLazy()) {
+                                $pkCriteria = $xpdo->newQuery($className, $cacheKey, $cacheFlag);
+                                $xpdo->toCache($pkCriteria, $instance, $cacheFlag);
+                            }
+                        }
+                        if ($xpdo->getDebug() === true) $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Loaded object instance: " . print_r($instance->toArray('', true), true));
+                    }
+                }
+            } else {
+                $xpdo->log(xPDO::LOG_LEVEL_ERROR, 'No valid statement could be found in or generated from the given criteria.');
+            }
+        } else {
+            $xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Invalid class specified: ' . $className);
         }
-        return $object;
+        return $instance;
     }
 
     /**
@@ -73,6 +117,7 @@ class modAccessibleObject extends xPDOObject {
      */
     public static function loadCollection(xPDO & $xpdo, $className, $criteria= null, $cacheFlag= true) {
         $objCollection= array ();
+        $fromCache = false;
         if (!$className= $xpdo->loadClass($className)) return $objCollection;
         $rows= false;
         $fromCache= false;
@@ -80,33 +125,27 @@ class modAccessibleObject extends xPDOObject {
         if (!is_object($criteria)) {
             $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
         }
-        if (is_object($criteria)) {
-            if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag) {
-                $rows= $xpdo->fromCache($criteria, $className);
-                $fromCache = (is_array($rows) && !empty($rows));
+        if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag) {
+            $rows= $xpdo->fromCache($criteria);
+            $fromCache = (is_array($rows) && !empty($rows));
+        }
+        if (!$fromCache && is_object($criteria)) {
+            $rows= xPDOObject :: _loadRows($xpdo, $className, $criteria);
+        }
+        if (is_array ($rows)) {
+            foreach ($rows as $row) {
+                modAccessibleObject :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag);
             }
-            if (!$fromCache) {
-                $rows= xPDOObject :: _loadRows($xpdo, $className, $criteria);
-            }
+        } elseif (is_object($rows)) {
             $cacheRows = array();
-            if (is_array ($rows)) {
-                foreach ($rows as $row) {
-                    if (modAccessibleObject :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag)) {
-                        if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag && !$fromCache) $cacheRows[] = $row;
-                    }
-                }
-            } elseif (is_object($rows)) {
-                while ($row = $rows->fetch(PDO::FETCH_ASSOC)) {
-                    if (modAccessibleObject :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag)) {
-                        if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag && !$fromCache) $cacheRows[] = $row;
-                    }
-                }
+            while ($row = $rows->fetch(PDO::FETCH_ASSOC)) {
+                modAccessibleObject :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag);
+                if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag && !$fromCache) $cacheRows[] = $row;
             }
-            if (!$fromCache && $xpdo->_cacheEnabled && $collectionCaching > 0 && $cacheFlag && !empty($cacheRows)) {
-                $xpdo->toCache($criteria, $cacheRows, $cacheFlag);
-            }
-        } else {
-            $xpdo->log(xPDO::LOG_LEVEL_ERROR, 'modAccessibleObject::loadCollection() - No valid statement could be found in or generated from the given criteria.');
+            if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag && !$fromCache) $rows =& $cacheRows;
+        }
+        if (!$fromCache && $xpdo->_cacheEnabled && $collectionCaching > 0 && $cacheFlag && !empty($rows)) {
+            $xpdo->toCache($criteria, $rows, $cacheFlag);
         }
         return $objCollection;
     }

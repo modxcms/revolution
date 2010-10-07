@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- Refactor modAccessibleObject to centralize load policy check in _loadInstance()
+- Update xPDO for several critical bug fixes
 - [#MODX-2402] In Package Browser, Most Popular/Recently Added package names are now links to auto-search in grid
 - [#MODX-2397] Added filtering and search to FC rule grid
 - [#MODX-2401] Adjusted JS version postfix code to not adjust .php (or non-js) files used as script src targets
