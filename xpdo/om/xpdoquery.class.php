@@ -453,7 +453,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         if ($relationMeta= $instance->getFKDefinition($alias)) {
             if ($row[$alias.'_'.$relationMeta['foreign']] != null) {
                 $loader = $this->xpdo->getObjectLoader($relationMeta['class'], '_loadInstance');
-                $relobj = call_user_func_array($loader, array(& $this->xpdo, $relationMeta['class'], $alias, $row));
+                $relObj = call_user_func_array($loader, array(& $this->xpdo, $relationMeta['class'], $alias, $row));
                 if ($relObj) {
                     if (strtolower($relationMeta['cardinality']) == 'many') {
                         $instance->addMany($relObj, $alias);
