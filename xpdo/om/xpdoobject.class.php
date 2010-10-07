@@ -302,27 +302,41 @@ class xPDOObject {
             $alias = $className;
             $actualClass= $className;
         }
-        if (isset ($row[$className . '_class_key'])) {
-            $actualClass= $row[$className . '_class_key'];
+        if (isset($row["{$className}_class_key"])) {
+            $actualClass= $row["{$className}_class_key"];
             $rowPrefix= $className . '_';
         }
-        elseif (isset ($row[$alias . '_class_key'])) {
-            $actualClass= $row[$alias . '_class_key'];
+        elseif (isset ($row["{$alias}_class_key"])) {
+            $actualClass= $row["{$alias}_class_key"];
             $rowPrefix= $alias . '_';
         }
         elseif (isset ($row['class_key'])) {
             $actualClass= $row['class_key'];
         }
-        elseif (strpos(strtolower(key($row)), strtolower($alias . '_')) === 0) {
-            $rowPrefix= $alias . '_';
-        }
-        elseif (strpos(strtolower(key($row)), strtolower($className . '_')) === 0) {
-            $rowPrefix= $className . '_';
-        }
         $instance= $xpdo->newObject($actualClass);
-        if (!$instance instanceof $className) {
-            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Instantiated a derived class {$actualClass} that is not a subclass of the requested class {$className}");
-        } elseif ($instance instanceof xPDOObject) {
+        if (is_object($instance) && $instance instanceof xPDOObject) {
+            if (strpos(strtolower(key($row)), strtolower($alias . '_')) === 0) {
+                $rowPrefix= $alias . '_';
+            }
+            elseif (strpos(strtolower(key($row)), strtolower($className . '_')) === 0) {
+                $rowPrefix= $className . '_';
+            }
+            else {
+                $pk = $xpdo->getPK($actualClass);
+                if (is_array($pk)) $pk = reset($pk);
+                if (isset($row["{$alias}_{$pk}"])) {
+                    $rowPrefix= $alias . '_';
+                }
+                elseif ($actualClass !== $className && $actualClass !== $alias && isset($row["{$actualClass}_{$pk}"])) {
+                    $rowPrefix= $actualClass . '_';
+                }
+                elseif ($className !== $alias && isset($row["{$className}_{$pk}"])) {
+                    $rowPrefix= $className . '_';
+                }
+            }
+            if (!$instance instanceof $className) {
+                $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Instantiated a derived class {$actualClass} that is not a subclass of the requested class {$className}");
+            }
             $instance->_lazy= array_keys($instance->_fields);
             $instance->fromArray($row, $rowPrefix, true, true);
             $instance->_dirty= array ();
