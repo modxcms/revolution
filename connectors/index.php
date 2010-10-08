@@ -40,6 +40,7 @@ $modx->setLogTarget('FILE');
 /* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $modx->initialize($ctx);
+if ($ctx != 'mgr') $modx->getUser($ctx,true);
 if (defined('MODX_REQP') && MODX_REQP === false) {
 } else if (!$modx->context->checkPolicy('load')) { die(); }
 

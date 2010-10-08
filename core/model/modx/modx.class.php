@@ -874,9 +874,11 @@ class modX extends xPDO {
      * Get the current authenticated User and assigns it to the modX instance.
      *
      * @param string $contextKey An optional context to get the user from.
+     * @param boolean $forceLoadSettings If set to true, will load settings
+     * regardless of whether the user has an authenticated context or not.
      * @return modUser The user object authenticated for the request.
      */
-    public function getUser($contextKey= '') {
+    public function getUser($contextKey= '',$forceLoadSettings = false) {
         if ($contextKey == '') {
             if ($this->context !== null) {
                 $contextKey= $this->context->get('key');
@@ -889,7 +891,7 @@ class modX extends xPDO {
             }
         }
         if ($this->user !== null && is_object($this->user)) {
-            if ($this->user->hasSessionContext($contextKey)) {
+            if ($this->user->hasSessionContext($contextKey) || $forceLoadSettings) {
                 if (isset ($_SESSION["modx.{$contextKey}.user.config"])) {
                     $this->_userConfig= $_SESSION["modx.{$contextKey}.user.config"];
                 } else {
@@ -925,6 +927,7 @@ class modX extends xPDO {
                 )
             );
         }
+        ksort($this->config);
         $this->toPlaceholders($this->user->get(array('id','username')),'modx.user');
         return $this->user;
     }
