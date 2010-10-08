@@ -1,6 +1,6 @@
 <?php
 /**
- * TV Input Types Swedish lexicon topic
+ * TV Input Types Swedish lexicon topic (åäö)
  *
  * @language sv
  * @package modx

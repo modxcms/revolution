@@ -71,6 +71,7 @@ $_lang['filter_by_context'] = 'Filtrera efter kontext...';
 $_lang['filter_by_policy'] = 'Filtrera efter policy...';
 $_lang['filter_by_resource_group'] = 'Filtrera efter resursgrupp...';
 $_lang['filter_by_category'] = 'Filtrera efter kategori...';
+$_lang['no_policy_option'] = ' (ingen policy) ';
 $_lang['resource_group'] = 'Resursgrupp';
 $_lang['resource_group_add'] = 'Lägg till resursgrupp';
 $_lang['resource_group_access_remove'] = 'Ta bort resurs från grupp';

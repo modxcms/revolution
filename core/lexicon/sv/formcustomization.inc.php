@@ -23,6 +23,11 @@ $_lang['field_desc'] = 'Detta är fältet som ska påverkas. Det kan även vara 
 $_lang['field_default'] = 'Fältets standardvärde';
 $_lang['field_label'] = 'Fältetikett';
 $_lang['field_visible'] = 'Fältets synlighet';
+$_lang['filter_by_action'] = 'Filtrera efter händelse...';
+$_lang['filter_by_rule_type'] = 'Filtrera efter regel...';
+$_lang['filter_by_search'] = 'Sök...';
+$_lang['for_parent'] = 'För förälder';
+$_lang['for_parent_desc'] = 'Markera här om du vill att denna regel ska gälla för föräldern. Använd bara med resurser eller objekt som har ett "föräldrafält". Användbart för resursers "skapasida".';
 $_lang['form_customization_msg'] = 'Här är en lista på de regler som används för närvarande. Du kan hitta mer information om regler och formuläranpassningar <a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization" target="_blank">här</a>. Notera att felaktiga regler kan ställa till med problem för din MODx-installation. Inaktiverade regler visas som blekt grå.';
 $_lang['form_rules'] = 'Formulärregler';
 $_lang['rule'] = 'Regel';

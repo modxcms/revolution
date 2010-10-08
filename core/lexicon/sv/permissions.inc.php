@@ -13,6 +13,7 @@ $_lang['perm.add_children_desc'] = 'Att lägga till alla resurser som barn till 
 $_lang['perm.change_password_desc'] = 'Användaren kan ändra sitt lösenord.';
 $_lang['perm.change_profile_desc'] = 'Användaren kan ändra sin profil.';
 $_lang['perm.charsets_desc'] = 'Att se en lista med teckenuppsättningar.';
+$_lang['perm.class_map_desc'] = 'Att se en lista med klasser i klasskartan.';
 $_lang['perm.content_types_desc'] = 'Innehållstypssidan.';
 $_lang['perm.countries_desc'] = 'Att se en lista med länder.';
 $_lang['perm.create_desc'] = 'Grundläggande "skapa"-behörighet för nya objekt.';

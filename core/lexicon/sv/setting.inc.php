@@ -463,6 +463,9 @@ $_lang['setting_site_unavailable_page_err'] = 'Ange ett dokument-ID för sidan s
 $_lang['setting_strip_image_paths'] = 'Skriv om sökvägar till resurser?';
 $_lang['setting_strip_image_paths_desc'] = 'Om denna inställning sätts till "Nej", så kommer MODx att skriva sökvägarna till resurser i filhanteraren (bilder, filer, flash etc.) som absoluta URLer. Relativa URLer är användbara om du ska flytta din MODX-installation, tex från en testserver till en produktionsserver. Om du inte har någon aning om vad det här betyder, så är det bäst att lämna inställningen satt till "Ja".';
 
+$_lang['setting_topmenu_show_descriptions'] = 'Visa beskrivningar i toppmenyn';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Om denna sätts till "Nej" kommer MODx att dölja beskrivningarna för menyposter i hanterarens toppmeny.';
+
 $_lang['setting_tree_root_id'] = 'Trädets rot-ID';
 $_lang['setting_tree_root_id_desc'] = 'Sätt denna till ett giltigt resurs-ID för att starta resursträdet till vänster under den noden som rot. Användaren kommer bara att kunna se resurser som är barn till den angivna resursen.';
 
