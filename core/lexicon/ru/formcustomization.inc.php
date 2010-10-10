@@ -23,6 +23,11 @@ $_lang['field_desc'] = 'Это область к которой применяе
 $_lang['field_default'] = 'Значение поля по умолчанию';
 $_lang['field_label'] = 'Название поля';
 $_lang['field_visible'] = 'Видимость поля';
+$_lang['filter_by_action'] = 'Фильтровать по действию...';
+$_lang['filter_by_rule_type'] = 'Фильтровать по правилу...';
+$_lang['filter_by_search'] = 'Поиск...';
+$_lang['for_parent'] = 'Для родителя';
+$_lang['for_parent_desc'] = 'Check this when you want this rule to apply to the parent. Only use with Resources or objects with a `parent` field. Useful for the "create" page of Resources.';
 $_lang['form_customization_msg'] = 'Это список правил, которые применяются в настоящий момент. Подробная информация о правилах и настройке форм может быть найдена в <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">вики</a>. Пожалуйста помните, что «неправильное» правило может нарушить работу бэкэнда вашего сайта. <a href="http://rtfm.modx.com/display/revolution20/Form+Customization+Pages" target="_blank">Настройка форм - страницы</a>, <a href="http://rtfm.modx.com/display/revolution20/Form+Customization+Rules" target="_blank">Настройка форм - правила</a>. Неактивные правила подсвечены серым.';
 $_lang['form_rules'] = 'Правила настройки форм';
 $_lang['rule'] = 'Правило';
