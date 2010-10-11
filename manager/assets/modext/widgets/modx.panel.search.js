@@ -161,18 +161,21 @@ MODx.grid.Search = function(config) {
         },{
             header: _('description')
             ,dataIndex: 'description'
+            ,sortable: true
         },{
             header: _('published')
             ,dataIndex: 'published'
             ,width: 30
             ,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
             ,editable: false
+            ,sortable: true
         },{
             header: _('deleted')
             ,dataIndex: 'deleted'
             ,width: 30
             ,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
             ,editable: false
+            ,sortable: true
         }]
     });
     MODx.grid.Search.superclass.constructor.call(this,config);
