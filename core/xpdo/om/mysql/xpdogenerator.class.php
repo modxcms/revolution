@@ -84,9 +84,10 @@ class xPDOGenerator_mysql extends xPDOGenerator {
      * the tables with the same prefix, but still use the generic class names.
      * @param boolean $restrictPrefix Only reverse-engineer tables that have the
      * specified tablePrefix; if tablePrefix is empty, this is ignored.
+     * @param $tableList comma-separated list of full table names to process;
      * @return boolean True on success, false on failure.
      */
-    public function writeSchema($schemaFile, $package= '', $baseClass= '', $tablePrefix= '', $restrictPrefix= false) {
+    public function writeSchema($schemaFile, $package= '', $baseClass= '', $tablePrefix= '', $restrictPrefix= false, $tableList = '') {
         if (empty ($package))
             $package= $this->manager->xpdo->package;
         if (empty ($baseClass))
@@ -96,12 +97,21 @@ class xPDOGenerator_mysql extends xPDOGenerator {
         $xmlContent = array();
         $xmlContent[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
         $xmlContent[] = "<model package=\"{$package}\" baseClass=\"{$baseClass}\" platform=\"mysql\" defaultEngine=\"MyISAM\">";
-        //read list of tables
+
         $dbname= $this->manager->xpdo->config['dbname'];
-        $tableLike= ($tablePrefix && $restrictPrefix) ? " LIKE '{$tablePrefix}%'" : '';
-        $tablesStmt= $this->manager->xpdo->prepare("SHOW TABLES FROM {$dbname}{$tableLike}");
-        $tablesStmt->execute();
-        $tables= $tablesStmt->fetchAll(PDO::FETCH_NUM);
+        if (!empty($tableList)) {
+            $tbls = explode(',',$tableList);
+            $tables = array();
+            foreach ($tbls as $tbl) {
+                $tables[] = array($tbl);
+            }
+        } else {
+            /* read list of tables */
+            $tableLike= ($tablePrefix && $restrictPrefix) ? " LIKE '{$tablePrefix}%'" : '';
+            $tablesStmt= $this->manager->xpdo->prepare("SHOW TABLES FROM {$dbname}{$tableLike}");
+            $tablesStmt->execute();
+            $tables= $tablesStmt->fetchAll(PDO::FETCH_NUM);
+        }
         if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($tables, true));
         foreach ($tables as $table) {
             $xmlObject= array();
@@ -137,7 +147,7 @@ class xPDOGenerator_mysql extends xPDOGenerator {
                         if (isset ($Type[1]) && !empty ($Type[1])) {
                             $attributes= ' attributes="' . trim($Type[1]) . '"';
                         }
-                        $PhpType= $this->manager->getPhpType($dbType);
+                        $PhpType= $this->manager->xpdo->driver->getPhpType($dbType);
                         $Null= ' null="' . (($Null === 'NO') ? 'false' : 'true') . '"';
                         $Key= $this->getIndex($Key);
                         $Default= $this->getDefault($Default);
