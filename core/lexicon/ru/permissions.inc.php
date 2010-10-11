@@ -13,6 +13,7 @@ $_lang['perm.add_children_desc'] = 'Добавлять любые ресурсы
 $_lang['perm.change_password_desc'] = 'Пользователь может менять свой пароль.';
 $_lang['perm.change_profile_desc'] = 'Пользователь может редактировать свой профиль.';
 $_lang['perm.charsets_desc'] = 'Смотреть список кодировок.';
+$_lang['perm.class_map_desc'] = 'Смотреть список классов в карте классов(Class Map).';
 $_lang['perm.content_types_desc'] = 'Страница «Типы содержимого».';
 $_lang['perm.countries_desc'] = 'Смотреть список стран.';
 $_lang['perm.create_desc'] = 'Возможность «создавать» новые объекты.';
