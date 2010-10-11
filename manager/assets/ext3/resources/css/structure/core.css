@@ -1,5 +1,5 @@
 /*!
- * Ext JS Library 3.2.1
+ * Ext JS Library 3.3.0
  * Copyright(c) 2006-2010 Ext JS, Inc.
  * licensing@extjs.com
  * http://www.extjs.com/license
@@ -66,6 +66,16 @@
 
 .x-hide-display {
     display:none !important;
+}
+
+.x-hide-nosize,
+.x-hide-nosize *    /* Emulate display:none for children */
+ {
+   height:0px!important;
+   width:0px!important;
+   visibility:hidden!important;
+   border:none!important;
+   zoom:1;
 }
 
 .x-hide-visibility {
@@ -224,7 +234,7 @@
 .x-shadow .xsmc {
     float: left;
     height: 100%;
-    background: transparent;
+    background-color: transparent;
 }
 
 .x-shadow .xst, .x-shadow .xsb {

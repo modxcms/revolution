@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- Updated ExtJS to 3.3.0
 - [#MODX-2378] Fixed issue where action toolbar was on left in IE7
 - [#MODX-2408] Fixed issue where sorting was not available for description field on search page
 - Fixed issue where modx->resource was not available to TV input option values or default values in mgr

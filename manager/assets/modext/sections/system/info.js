@@ -62,7 +62,7 @@ MODx.panel.SystemInfo = function(config) {
         xtype: 'statictextfield'
         ,fieldLabel: _('extjs_version')
         ,name: 'extjs_version'
-        ,value: '3.2.1'
+        ,value: '3.3.0'
     },{
         xtype: 'statictextfield'
         ,fieldLabel: _('smarty_version')

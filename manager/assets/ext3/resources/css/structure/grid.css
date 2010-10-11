@@ -1,5 +1,5 @@
 /*!
- * Ext JS Library 3.2.1
+ * Ext JS Library 3.3.0
  * Copyright(c) 2006-2010 Ext JS, Inc.
  * licensing@extjs.com
  * http://www.extjs.com/license
@@ -69,6 +69,16 @@
 	text-overflow: ellipsis;
     padding:3px 3px 3px 5px;
     white-space: nowrap;
+}
+
+/* ActionColumn, reduce padding to accommodate 16x16 icons in normal row height */
+.x-action-col-cell .x-grid3-cell-inner {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.x-action-col-icon {
+    cursor: pointer;
 }
 
 .x-grid3-hd-inner {
@@ -348,7 +358,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-grid3-col-dd {
     border:0 none;
     padding:0;
-    background:transparent;
+    background-color:transparent;
 }
 
 .x-dd-drag-ghost .x-grid3-dd-wrap {

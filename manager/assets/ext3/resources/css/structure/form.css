@@ -1,5 +1,5 @@
 /*!
- * Ext JS Library 3.2.1
+ * Ext JS Library 3.3.0
  * Copyright(c) 2006-2010 Ext JS, Inc.
  * licensing@extjs.com
  * http://www.extjs.com/license
@@ -36,6 +36,10 @@ textarea.x-form-field {
     line-height:18px;
 }
 
+.ext-ie6 .x-form-field-wrap .x-form-file-btn, .ext-ie7 .x-form-field-wrap .x-form-file-btn {
+    top: -1px; /* because of all these margin hacks, these buttons are off by one pixel in IE6,7 */
+}
+
 .ext-ie6 textarea.x-form-field, .ext-ie7 textarea.x-form-field {
     margin:-1px 0; /* ie bogus margin bug */
 }
@@ -48,9 +52,11 @@ textarea.x-form-field {
     margin-bottom:-2px; /* another bogus margin bug, safari/mac only */
 }
 
+/*
 .ext-strict .ext-ie8 .x-form-text, .ext-strict .ext-ie8 textarea.x-form-field {
     margin-bottom: 1px;
 }
+*/
 
 .ext-gecko .x-form-text , .ext-ie8 .x-form-text {
     padding-top:2px; /* FF won't center the text vertically */
@@ -320,6 +326,10 @@ textarea {
     height:19px;
 }
 
+.ext-webkit .x-small-editor .x-form-field-wrap .x-form-trigger{
+    height:21px;
+}
+
 .ext-webkit .x-small-editor .x-form-text{padding-top:3px;font-size:100%;}
 
 .x-form-clear {
@@ -530,6 +540,10 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
     -moz-outline: none;
     outline: none;
     overflow: auto;
+}
+
+.ext-mac.ext-gecko .x-window-body .x-form-item {
+    overflow:hidden;
 }
 
 .ext-gecko .x-form-item {
