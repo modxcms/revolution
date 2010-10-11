@@ -24,6 +24,15 @@ body {
     margin-left: 0;
 }
 
+.ext-ie7 #modAB {
+    width: 500px;
+}
+#modx-stay-menu {
+    zoom: 1;
+}
+#modx-stay-menu .x-rbtn { width: 200px; border: 1px solid red; float: none;}
+#modx-stay-menu .x-rbtn td { width: 50px; }
+
 /*.ext-ie #modx-navbar {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#777777');
 }*/

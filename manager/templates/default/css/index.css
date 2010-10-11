@@ -348,9 +348,11 @@ textarea.x-form-field {
 #modx-action-buttons {
     background: transparent !important;
     border: 0 none;
+    zoom: 1;
 }
 #modx-action-buttons .x-toolbar-left {
     width: auto !important;
+    zoom: 1;
 }
 /* collapse for resource panel */
 #modx-resource-tabs .x-tool-toggle {
