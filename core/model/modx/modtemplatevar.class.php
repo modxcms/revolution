@@ -555,6 +555,15 @@ class modTemplateVar extends modElement {
         if (empty($bdata['cmd'])) return $value;
 
         $modx =& $this->xpdo;
+        if (empty($modx->resource)) {
+            if (!empty($resourceId)) {
+                $modx->resource = $modx->getObject('modResource',$resourceId);
+            }
+            if (empty($modx->resource) || empty($resourceId)) {
+                $modx->resource = $modx->newObject('modResource');
+                $modx->resource->set('id',0);
+            }
+        }
         $cmd = $bdata['cmd'];
         $param = !empty($bdata['param']) ? $bdata['param'] : null;
         switch ($cmd) {

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- Fixed issue where modx->resource was not available to TV input option values or default values in mgr
 - [#MODX-2410] Fixed issue with urlencoded context key on context edit page
 - [#MODX-2407] Fixed issue where user settings were not respected in connectors in mgr
 - [#MODX-2279] Fix bad AJAX response if database does not exist or can't be created during setup
