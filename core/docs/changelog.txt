@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- Fixed trivial issues with widths in richtext tvs
 - [#MODX-2415] Added fix to prevent adding of orm tree attributes with the same key on the same level
 - Added resourcelist TV input type for easier listing of resources in a tv input
 - Updated ExtJS to 3.3.0
