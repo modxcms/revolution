@@ -300,7 +300,7 @@ $children[3]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'formcustomization,user,access,policy',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Form+Customization',
+          'help_url' => 'http://rtfm.modx.com/display/revolution20/Customizing+The+Manager',
         ), '', true, true);
         $children[3]->addOne($action);
 
