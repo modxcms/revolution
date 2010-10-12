@@ -245,7 +245,6 @@ class modTemplateVar extends modElement {
         if ($paramstring= $this->get('display_params')) {
             $cp= explode("&", $paramstring);
             foreach ($cp as $p => $v) {
-                $v= trim($v);
                 $ar= explode("=", $v);
                 if (is_array($ar) && count($ar) == 2) {
                     $params[$ar[0]]= $this->decodeParamValue($ar[1]);
