@@ -11,39 +11,54 @@ if (!isset($modx->lexicon) || !is_object($modx->lexicon)) {
 $modx->lexicon->load('login');
 
 $loginContext= isset ($scriptProperties['login_context']) ? $scriptProperties['login_context'] : $modx->context->get('key');
+$addContexts= isset ($scriptProperties['add_contexts']) ? explode(',', $scriptProperties['add_contexts']) : array();
 
-if (!$modx->user->isAuthenticated($loginContext)) return $modx->error->failure($modx->lexicon('not_logged_in'));
+if ($modx->user->isAuthenticated($loginContext)) {
+    if ($loginContext == 'mgr') {
+        /* invoke OnBeforeManagerLogout event */
+        $modx->invokeEvent('OnBeforeManagerLogout',array(
+            'userid' => $modx->user->get('id'),
+            'username' => $modx->user->get('username'),
+            'user' => &$modx->user,
+            'loginContext' => &$loginContext,
+            'addContexts' => &$addContexts
+        ));
+    } else {
+        $modx->invokeEvent('OnBeforeWebLogout',array(
+            'userid' => $modx->user->get('id'),
+            'username' => $modx->user->get('username'),
+            'user' => &$modx->user,
+            'loginContext' => &$loginContext,
+            'addContexts' => &$addContexts
+        ));
+    }
 
-if ($loginContext == 'mgr') {
-    /* invoke OnBeforeManagerLogout event */
-    $modx->invokeEvent('OnBeforeManagerLogout',array(
-        'userid' => $modx->user->get('id'),
-        'username' => $modx->user->get('username'),
-        'user' => &$modx->user,
-    ));
+    $modx->user->removeSessionContext($loginContext);
+    if (!empty($addContexts)) {
+        foreach ($addContexts as $addCtx) {
+            $modx->user->removeSessionContext($addCtx);
+        }
+    }
+    
+    if ($loginContext == 'mgr') {
+        /* invoke OnManagerLogout event */
+        $modx->invokeEvent('OnManagerLogout',array(
+            'userid' => $modx->user->get('id'),
+            'username' => $modx->user->get('username'),
+            'user' => &$modx->user,
+            'loginContext' => &$loginContext,
+            'addContexts' => &$addContexts
+        ));
+    } else {
+        $modx->invokeEvent('OnWebLogout',array(
+            'userid' => $modx->user->get('id'),
+            'username' => $modx->user->get('username'),
+            'user' => &$modx->user,
+            'loginContext' => &$loginContext,
+            'addContexts' => &$addContexts
+        ));
+    }
 } else {
-    $modx->invokeEvent('OnBeforeWebLogout',array(
-        'userid' => $modx->user->get('id'),
-        'username' => $modx->user->get('username'),
-        'user' => &$modx->user,
-    ));
+    return $modx->error->failure($modx->lexicon('not_logged_in'));
 }
-
-$modx->user->removeSessionContext($loginContext);
-
-if ($loginContext == 'mgr') {
-    /* invoke OnManagerLogout event */
-    $modx->invokeEvent('OnManagerLogout',array(
-        'userid' => $modx->user->get('id'),
-        'username' => $modx->user->get('username'),
-        'user' => &$modx->user,
-    ));
-} else {
-    $modx->invokeEvent('OnWebLogout',array(
-        'userid' => $modx->user->get('id'),
-        'username' => $modx->user->get('username'),
-        'user' => &$modx->user,
-    ));
-}
-
 return $modx->error->success();

@@ -16,6 +16,10 @@ $givenPassword = $scriptProperties['password'];
 $rememberme= isset ($scriptProperties['rememberme']) ? ($scriptProperties['rememberme'] == 'on' || $scriptProperties['rememberme'] == true) : false;
 $lifetime= (integer) $modx->getOption('lifetime', $scriptProperties, $modx->context->getOption('session_cookie_lifetime', 0));
 $loginContext= isset ($scriptProperties['login_context']) ? $scriptProperties['login_context'] : $modx->context->get('key');
+$addContexts= isset ($scriptProperties['add_contexts']) ? explode(',', $scriptProperties['add_contexts']) : array();
+
+/* Events are fired based on the primary loginContext */
+$mgrEvents = ($loginContext == 'mgr');
 
 $onBeforeLoginParams = array(
     'username' => $username,
@@ -23,12 +27,13 @@ $onBeforeLoginParams = array(
     'attributes' => array(
         'rememberme' => & $rememberme,
         'lifetime' => & $lifetime,
-        'loginContext' => & $loginContext
+        'loginContext' => & $loginContext,
+        'addContexts' => & $addContexts,
     )
 );
 
 $rt = false;  /* $rt will be an array if the event fires */
-if ($loginContext == 'mgr') {
+if ($mgrEvents) {
     $rt = $modx->invokeEvent("OnBeforeManagerLogin", $onBeforeLoginParams);
 } else {
     $rt = $modx->invokeEvent("OnBeforeWebLogin", $onBeforeLoginParams);
@@ -54,6 +59,7 @@ if (!$user) {
             'rememberme' => $rememberme,
             'lifetime' => $lifetime,
             'loginContext' => $loginContext,
+            'addContexts' => $addContexts,
         )
     ));
     if (!empty($ru)) {
@@ -118,9 +124,11 @@ $loginAttributes = array(
     "user"       => & $user,
     "password"   => $givenPassword,
     "rememberme" => $rememberme,
-    "lifetime" => $lifetime
+    "lifetime" => $lifetime,
+    "loginContext" => & $loginContext,
+    "addContexts" => & $addContexts,
 );
-if ($loginContext == 'mgr') {
+if ($mgrEvents) {
     $rt = $modx->invokeEvent("OnManagerAuthentication", $loginAttributes);
 } else {
     $rt = $modx->invokeEvent("OnWebAuthentication", $loginAttributes);
@@ -134,11 +142,20 @@ if (!$rt || (is_array($rt) && !in_array(true, $rt))) {
 }
 
 $user->addSessionContext($loginContext);
-
 if ($rememberme) {
     $_SESSION['modx.' . $loginContext . '.session.cookie.lifetime']= $lifetime;
 } else {
     $_SESSION['modx.' . $loginContext . '.session.cookie.lifetime']= 0;
+}
+if (!empty($addContexts)) {
+    foreach ($addContexts as $loginCtx) {
+        $user->addSessionContext($loginCtx);
+        if ($rememberme) {
+            $_SESSION['modx.' . $loginCtx . '.session.cookie.lifetime']= $lifetime;
+        } else {
+            $_SESSION['modx.' . $loginCtx . '.session.cookie.lifetime']= 0;
+        }
+    }
 }
 
 $postLoginAttributes = array(
@@ -146,14 +163,16 @@ $postLoginAttributes = array(
     'attributes' => array(
         'rememberme' => $rememberme,
         'lifetime' => $lifetime,
-        'loginContext' => $loginContext
+        'loginContext' => $loginContext,
+        'addContexts' => $addContexts,
     )
 );
-if ($loginContext == 'mgr') {
+if ($mgrEvents) {
     $rt = $modx->invokeEvent("OnManagerLogin", $postLoginAttributes);
 } else {
     $modx->invokeEvent("OnWebLogin", $postLoginAttributes);
 }
+
 $returnUrl = isset($scriptProperties['returnUrl']) ? $scriptProperties['returnUrl'] : '';
 $response = array('url' => $returnUrl);
 switch ($loginContext) {
