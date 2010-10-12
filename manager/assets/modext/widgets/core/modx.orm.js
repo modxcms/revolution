@@ -135,6 +135,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
             this.windows.addContainer = MODx.load({
                 xtype: 'modx-orm-window-container-add'
                 ,record: r
+                ,tree: this
                 ,listeners: {
                     'success': {fn:function(r) {
                         var n = new Ext.tree.TreeNode({
@@ -186,6 +187,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
             this.windows.addAttribute = MODx.load({
                 xtype: 'modx-orm-window-attribute-add'
                 ,record: r
+                ,tree: this
                 ,listeners: {
                     'success': {fn:function(r) {
                         var n = new Ext.tree.TreeNode({
@@ -235,6 +237,21 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
             f.findField(this.config.prefix+'_name').setValue(vs.name);
             f.findField(this.config.prefix+'_value').setValue(vs.value);
         }
+    }
+
+    ,childExistsOnSelected: function(id) {
+        var n = this.getSelectedNode();
+        var c;
+        if (Ext.isEmpty(n)) {
+            c = this.getNodeById(id);
+            if (!Ext.isEmpty(c.parentNode.text)) { c = null; } /* ignore children */
+        } else {
+            c = n.findChild('id',id);
+        }
+        if (!Ext.isEmpty(c)) {
+            return true;
+        }
+        return false;
     }
 });
 Ext.reg('modx-orm-tree',MODx.orm.Tree);
@@ -327,6 +344,13 @@ Ext.extend(MODx.window.AddOrmAttribute,MODx.Window,{
     submit: function() {
         var v = this.fp.getForm().getValues();
 
+        if (this.config.tree.childExistsOnSelected(v.name)) {
+            this.fp.getForm().markInvalid({
+                name: _('orm_attribute_ae')
+            });
+            return false;
+        }
+
         if (this.fp.getForm().isValid()) {
             if (this.fireEvent('success',v)) {
                 this.fp.getForm().reset();
@@ -367,6 +391,13 @@ Ext.extend(MODx.window.AddOrmContainer,MODx.Window,{
     submit: function() {
         var v = this.fp.getForm().getValues();
 
+        if (this.config.tree.childExistsOnSelected(v.name)) {
+            this.fp.getForm().markInvalid({
+                name: _('orm_attribute_ae')
+            });
+            return false;
+        }
+        
         if (this.fp.getForm().isValid()) {
             if (this.fireEvent('success',v)) {
                 this.fp.getForm().reset();

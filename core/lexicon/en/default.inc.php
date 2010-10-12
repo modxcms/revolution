@@ -267,6 +267,7 @@ $_lang['open'] = 'Open';
 $_lang['options'] = 'Options';
 $_lang['orm_attribute_add'] = 'Add Attribute';
 $_lang['orm_attribute_add_below'] = 'Add Attribute Below Here';
+$_lang['orm_attribute_ae'] = 'An attribute already exists with that key at this level!';
 $_lang['orm_attribute_remove'] = 'Remove Attribute';
 $_lang['orm_attribute_remove_confirm'] = 'Are you sure you want to remove this attribute? This is irreversible.';
 $_lang['orm_container_add'] = 'Add Container';
