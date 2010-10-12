@@ -1,12 +1,12 @@
 <?php
 /**
- * Czech language files for Revolution 2.0.1 setup
+ * Czech language files for Revolution 2.0.4 setup
  *
  * @language cs
  * @package setup
  *
  * @author modxcms.cz
- * @updated 2010-09-13
+ * @updated 2010-10-12
  */
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Doplňky';
@@ -40,7 +40,7 @@ $_lang['connection_database_pass'] = 'Heslo pro databázi:';
 $_lang['connection_database_type'] = 'Typ databáze:';
 $_lang['connection_default_admin_email'] = 'E-mail administrátora:';
 $_lang['connection_default_admin_login'] = 'Uživatelské jméno administrátora:';
-$_lang['connection_default_admin_note'] = 'Nyní je třeba, aby jste zadali údaje pro hlavní administrátorský účet. Vyplněte uživatelské jméno a heslo, které si zapamatujte. Tyto údaje budete potřebovat po skončení instalace pro přístup do správce obsahu.';
+$_lang['connection_default_admin_note'] = 'Nyní je třeba, aby jste zadali údaje pro výchozí administrátorský účet. Vyplněte uživatelské jméno a heslo, které si zapamatujte. Tyto údaje budete potřebovat po skončení instalace pro přístup do správce obsahu.';
 $_lang['connection_default_admin_password'] = 'Heslo administrátora:';
 $_lang['connection_default_admin_password_confirm'] = 'Ověření hesla:';
 $_lang['connection_default_admin_user'] = 'Výchozí uživatel správce obsahu';
@@ -166,8 +166,8 @@ $_lang['options_important_upgrade'] = 'Důležitá poznámka pro aktualizaci';
 $_lang['options_important_upgrade_note'] = 'Ujistěte se, že jsou uživatelé správce obsahu <strong>odhlášeni před aktualizací</strong>, předejdete tím problémům (např: znemožnění přístupu k dokumentům). Pokud máte problémy po aktualizaci, odhlašte všechny session, vyprázdněte cache prohlížeče a následně se znovu přihlašte.';
 $_lang['options_new_file_permissions'] = 'Atributy nového souboru';
 $_lang['options_new_file_permissions_note'] = 'Zde určete jaké atributy budou mít nové soubory vytvořené skrze MODx, např. 0664 nebo 0666.';
-$_lang['options_new_folder_permissions'] = 'Atributy nové složky';
-$_lang['options_new_folder_permissions_note'] = 'Zde určete jaké atributy budou mít nové složky vytvořené skrze MODx, např. 0775 nebo 0777.';
+$_lang['options_new_folder_permissions'] = 'Atributy nového adresáře';
+$_lang['options_new_folder_permissions_note'] = 'Zde určete jaké atributy budou mít nové adresáře vytvořené skrze MODx, např. 0775 nebo 0777.';
 $_lang['options_new_installation'] = 'Nová instalace';
 $_lang['options_title'] = 'Možnosti instalace';
 $_lang['options_upgrade_advanced'] = 'Pokročilá aktualizace<br /><small>(úprava databázové konfigurace)</small>';

@@ -1,7 +1,7 @@
 <?php
 /**
  * Czech country List Language File
- * 
+ *
  * @language cs
  *
  * @author modxcms.cz
@@ -9,7 +9,6 @@
  *
  * Array keys refer to the ID number that is saved in the database
  */
-
 $_country_lang["1"] = 'Afghánistán';
 $_country_lang["2"] = 'Albánie';
 $_country_lang["3"] = 'Alžírsko';
@@ -251,4 +250,3 @@ $_country_lang["236"] = 'Srbsko a Černá Hora';
 $_country_lang["237"] = 'Konžská demokratická republika';
 $_country_lang["238"] = 'Zambie';
 $_country_lang["239"] = 'Zimbabwe';
-?>

@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-17
+ * @updated 2010-10-12
  */
 $_lang['access_category_management_msg'] = 'Správa přístupu členů uživatelské skupiny k elementům v kategoriích a možnost nastavení přístupových práv.';
 $_lang['access_category_err_ae'] = 'Přístupy k této kategorii již existují!';
@@ -74,6 +74,7 @@ $_lang['filter_by_context'] = 'Filtrovat podle kontextu...';
 $_lang['filter_by_policy'] = 'Filtrovat podle přístupových práv...';
 $_lang['filter_by_resource_group'] = 'Filtrovat podle skupiny dokumentů...';
 $_lang['filter_by_category'] = 'Filtrovat podle kategorie...';
+$_lang['no_policy_option'] = ' (bez přístupových práv) ';
 $_lang['resource_group'] = 'Skupina dokumentů';
 $_lang['resource_group_add'] = 'Přidat skupinu dokumentů';
 $_lang['resource_group_access_remove'] = 'Odstranit skupinu dokumentů ze skupiny';

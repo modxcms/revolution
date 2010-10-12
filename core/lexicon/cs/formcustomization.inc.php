@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2010-10-12
  */
 $_lang['action'] = 'Akce';
 $_lang['action_desc'] = 'Akce, na kterou se toto pravidlo bude vztahovat.';
@@ -26,6 +26,11 @@ $_lang['field_desc'] = 'Toto je políčko, které má být ovlivněno. Může to
 $_lang['field_default'] = 'Výchozí hodnota políčka';
 $_lang['field_label'] = 'Název políčka';
 $_lang['field_visible'] = 'Viditelnost políčka';
+$_lang['filter_by_action'] = 'Filtrovat dle akce...';
+$_lang['filter_by_rule_type'] = 'Filtrovat dle pravidla...';
+$_lang['filter_by_search'] = 'Hledat...';
+$_lang['for_parent'] = 'Pro rodiče';
+$_lang['for_parent_desc'] = 'Toto políčko zaškrtněte pokud si přejete, aby bylo pravidlo aplikováno také na rodiče. Používejte pouze s dokumenty nebo objekty s políčkem `Rodič`. Vhodné pro stránku "Nový dokument."';
 $_lang['form_customization_msg'] = 'Na tomto místě najdete seznam aktuálně aplikovaných pravidel. Více informací o přizpůsobování formulářů najdete <a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization" target="_blank">zde</a>. Berte na vědomí, že nesprávná pravidla mohou způsobit problémy v běhu MODx. Neaktivní pravidla jsou zobrazena šedě.';
 $_lang['form_rules'] = 'Pravidla formulářů';
 $_lang['rule'] = 'Pravidlo';

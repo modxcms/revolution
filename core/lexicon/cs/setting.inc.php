@@ -1,5 +1,5 @@
 <?php
-/**
+/** 
  * Setting Czech lexicon topic
  *
  * @language cs
@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-09-11
+ * @updated 2010-10-12
  */
 $_lang['area'] = 'Oblast';
 $_lang['area_authentication'] = 'Autentizaci a zabezpečení';
@@ -464,6 +464,9 @@ $_lang['setting_site_unavailable_page_err'] = 'Zadejte ID dokumentu, která bude
 
 $_lang['setting_strip_image_paths'] = 'Přepisovat cesty pro správce souborů?';
 $_lang['setting_strip_image_paths_desc'] = 'Pokud je nastaveno na "Ne", MODx bude zapisovat cesty k souborům (obrázky, soubory, flash, atd.) jako absolutní URL. Relativní URL jsou užitečné pokud byste chtěli přesunout celou instalaci MODx, např. z vývojového serveru na produkční. Pokud netušíte co s tímto nastavením, ponechte jej nastavené na "Ano".';
+
+$_lang['setting_topmenu_show_descriptions'] = 'Zobrazovat popisky v horním menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na \'Ne\', MODx skryje popisky u položek horního menu v rámci správce obsahu.';
 
 $_lang['setting_tree_root_id'] = 'ID kořenu stromu';
 $_lang['setting_tree_root_id_desc'] = 'Nastavte ID zdroje, pod kterým začne levý strom dokumentů. Uživatel bude mít možnost vidět pouze potomky tohoto zdroje.';

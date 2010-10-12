@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2010-10-12
  */
 $_lang['file_confirm_remove'] = 'Opravdu chcete odstranit tento soubor? Může to zapříčinit nefunkčnost celého portálu.';
 $_lang['file_deleted'] = 'Odstraněno!';
@@ -18,6 +18,7 @@ $_lang['file_download_unzip'] = 'Rozbalit soubor';
 $_lang['file_edit'] = 'Upravit soubor';
 $_lang['file_err_chmod'] = 'Nastala chyba při změně atributů.';
 $_lang['file_err_chmod_ns'] = 'Specifikujte atributy.';
+$_lang['file_err_ext_not_allowed'] = 'Přípona souboru `[[+ext]]` není povolena.';
 $_lang['file_err_filter'] = 'Zadanému filtru nevyhovují žádné soubory.';
 $_lang['file_err_invalid'] = 'Tento soubor není bežný soubor a nemůže být odstraněn.';
 $_lang['file_err_nf'] = 'Soubor neexistuje!';
@@ -28,6 +29,7 @@ $_lang['file_err_perms_remove'] = 'Webový server nemá potřebná oprávnění 
 $_lang['file_err_rename'] = 'Systému MODx se nepodařilo přejmenovat soubor. Ujistěte se, že na to máte oprávnění.';
 $_lang['file_err_remove'] = 'Systému MODx se nepodařilo odstranit soubor. Ujistěte se, že na to máte oprávnění.';
 $_lang['file_err_save'] = 'Nepodařilo se uložit soubor, ujistěte se, že je možné do cílové složky zapisovat!';
+$_lang['file_err_too_large'] = 'Nahrávaný soubor je příliš velký ([[+size]] bajtů). Na server je možno nahrát soubory o maximální velikosti [[+allowed]] bajtů.';
 $_lang['file_err_unzip'] = 'Rozbalení se nepodařilo!';
 $_lang['file_err_unzip_invalid_path'] = 'Chybná cesta pro rozbalené soubory.';
 $_lang['file_err_unzip_missing_lib'] = ' Chybí knihovna (php_zip.dll / zip.so)';
@@ -109,4 +111,3 @@ $_lang['upf_upload_err'] = 'Chyba při nahrávání.';
 $_lang['upf_uploading'] = 'Nahrávám...';
 $_lang['upf_uploading_desc'] = 'Nahrávám: {0} z {1} souboru v pořádku.';
 $_lang['upload_files'] = 'Nahrát soubory';
-
