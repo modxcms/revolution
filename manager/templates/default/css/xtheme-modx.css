@@ -1986,6 +1986,10 @@ a.x-menu-item {
     font-size: 12px;
     margin-top: 0;
 }
+.x-portal-space {
+    border-bottom: 1px solid #afafaf;
+    padding: 0;
+}
 
 .x-window-tc {
 /*  background-image: url(../images/modx-theme/window/top-bottom.png); */
