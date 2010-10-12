@@ -8,6 +8,7 @@
     <div id="modx-tv-tab{$category->id}" class="x-tab" title="{$category->category|default:$_lang.uncategorized|ucfirst}">
     
     {foreach from=$category->tvs item=tv name='tv'}
+{if $tv->type NEQ "hidden"}
     <div class="x-form-item x-tab-item {cycle values=",alt"} modx-tv" id="tv{$tv->id}-tr">
         <label for="tv{$tv->id}" class="modx-tv-label">
 
@@ -26,6 +27,10 @@
         <br class="clear" />
     </div>
     <script type="text/javascript">{literal}Ext.onReady(function() { new Ext.ToolTip({{/literal}target: 'tv{$tv->id}-caption',html: '[[*{$tv->name}]]'{literal}});});{/literal}</script>
+{else}
+    <input type="hidden" id="tvdef{$tv->id}" value="{$tv->default_text|escape}" />
+    {$tv->get('formElement')}
+{/if}
     {/foreach}
 
     </div>

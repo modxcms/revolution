@@ -306,7 +306,7 @@ class modTemplateVar extends modElement {
                 switch ($rule->get('rule')) {
                     case 'tvVisible':
                         if ($rule->get('value') == 0) {
-                            return '';
+                            $this->set('type','hidden');
                         }
                         break;
                     case 'tvDefault':
