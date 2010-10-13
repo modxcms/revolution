@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- Fixed issue where cancel button did not work on Resources after save
 - Fixed issue with URL TV Output Render and empty input values
 - Fixed issues with checkboxes/radios in TVs and widths when hidden
 - Fixed various issues with thumbnails in MODx.Browser and return paths in separate contexts

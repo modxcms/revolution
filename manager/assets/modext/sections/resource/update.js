@@ -85,7 +85,8 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             },this);
         } else {
             MODx.releaseLock(MODx.request.id);
-        };
+            location.href = '?a='+MODx.action['welcome'];
+        }
     }
     
     ,getButtons: function(cfg) {
