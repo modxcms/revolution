@@ -255,7 +255,7 @@ Ext.extend(MODx,Ext.Component,{
         var el;
         for (var i=0;i<tvs.length;i++) {
             el = Ext.get(tvs[i]+'-tr');
-            el.setVisibilityMode(Ext.Element.OFFSETS);
+            el.setVisibilityMode(Ext.Element.DISPLAY);
             el.hide();
         }
     }
