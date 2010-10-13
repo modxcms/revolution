@@ -19,17 +19,29 @@ $base_url = $context->getOption('base_url',MODX_BASE_URL);
 $base_path = $context->getOption('base_path',MODX_BASE_PATH);
 $reps = array();
 
+/* determine absolute path to image from URL passed that is context-specific
+ * this code is too complex; this whole process could be refactored a bit,
+ * but would need to take in the following factors:
+ * - filemanager_path
+ * - filemanager_url
+ * - Those settings can be different per context
+ * - Would also need to accept both absolute and root-relative setting values for above 2 settings
+ */
 if ($base_url != '/') $reps[] = $base_url;
 if ($site_url != '/') $reps[] = $site_url;
 $src = str_replace($reps,'',$src);
 $fileManagerPath = $context->getOption('filemanager_path','');
+$fileManagerUrl = $context->getOption('filemanager_url','');
 if (empty($fileManagerPath)) {
     $src = $base_path.$src;
 } else if (!empty($fileManagerPath)) {
-    if (strpos($src,$fileManagerPath) != 0) {
+    if (substr($fileManagerUrl,0,1) == '/') {
+        $fp = trim($fileManagerUrl,'/');
+        $src = str_replace($fp,'',$src);
         $src = $fileManagerPath.$src;
     }
 }
+$src = str_replace(array('///','//'),'/',$src);
 if (empty($src) || !file_exists($src)) {
     if (file_exists('/'.$src)) {
         $src = '/'.$src;

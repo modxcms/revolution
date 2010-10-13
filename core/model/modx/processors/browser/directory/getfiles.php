@@ -27,6 +27,7 @@ $baseUrl = $modx->getOption('base_url',null,MODX_BASE_URL);
 $fileManagerUrl = $modx->fileHandler->getBaseUrl();
 
 /* setup settings */
+$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
 $imagesExts = array('jpg','jpeg','png','gif');
 $use_multibyte = $modx->getOption('use_multibyte',null,false);
 $encoding = $modx->getOption('modx_charset',null,'UTF-8');
@@ -73,8 +74,8 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             /* ensure not generating anti-relative urls */
             $imageUrl = ltrim($url,'/');
             /* generate thumb/image URLs */
-            $thumb = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$imageUrl.'&w='.$thumbWidth.'&h='.$thumbHeight.'&HTTP_MODAUTH='.$modx->site_id;
-            $image = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$imageUrl.'&w='.$imageWidth.'&h='.$imageHeight.'&HTTP_MODAUTH='.$modx->site_id;
+            $thumb = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$imageUrl.'&w='.$thumbWidth.'&h='.$thumbHeight.'&HTTP_MODAUTH='.$modx->site_id.'&ctx='.$ctx;
+            $image = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$imageUrl.'&w='.$imageWidth.'&h='.$imageHeight.'&HTTP_MODAUTH='.$modx->site_id.'&ctx='.$ctx;
            
         } else {
             $thumb = $image = $modx->getOption('manager_url',null,MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
