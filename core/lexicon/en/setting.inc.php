@@ -183,6 +183,9 @@ $_lang['setting_emailsubject'] = 'Registration E-mail Subject';
 $_lang['setting_emailsubject_desc'] = 'The subject line for the default signup email when a User is registered.';
 $_lang['setting_emailsubject_err'] = 'Please state the subject line for the signup email.';
 
+$_lang['setting_enable_dragdrop'] = 'Enable Drag/Drop in Resource/Element Trees';
+$_lang['setting_enable_dragdrop_desc'] = 'If off, will prevent dragging and dropping in Resource and Element trees.';
+
 $_lang['setting_error_page'] = 'Error Page';
 $_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to send users to if they request a document which doesn\'t actually exist. <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
 $_lang['setting_error_page_err'] = 'Please specify a document ID that is the error page.';

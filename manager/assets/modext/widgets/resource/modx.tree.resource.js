@@ -13,7 +13,7 @@ MODx.tree.Resource = function(config) {
         ,title: ''
         ,rootVisible: false
         ,expandFirst: true
-        ,enableDD: true
+        ,enableDD: !Ext.isEmpty(MODx.config.enable_dragdrop) ? true : false
         ,ddGroup: 'modx-treedrop-dd'
         ,remoteToolbar: true
         ,tbarCfg: {

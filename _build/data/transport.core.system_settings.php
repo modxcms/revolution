@@ -339,6 +339,15 @@ $settings['emailsubject']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['enable_dragdrop']= $xpdo->newObject('modSystemSetting');
+$settings['enable_dragdrop']->fromArray(array (
+  'key' => 'enable_dragdrop',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['error_page']= $xpdo->newObject('modSystemSetting');
 $settings['error_page']->fromArray(array (
   'key' => 'error_page',

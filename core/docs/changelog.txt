@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- Added toggle setting for drag/drop in Resource and Element trees
 - [#MODX-2346] Allow login/logout processors to handle multiple contexts
 - [#MODX-2405] Fixed issue with border on portal panels in mgr home screen
 - Fixed issue with TV output render that stripped whitespace in delimiter

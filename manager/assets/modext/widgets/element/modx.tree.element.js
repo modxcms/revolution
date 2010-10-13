@@ -10,7 +10,7 @@ MODx.tree.Element = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         rootVisible: false
-        ,enableDD: true
+        ,enableDD: !Ext.isEmpty(MODx.config.enable_dragdrop) ? true : false
         ,ddGroup: 'modx-treedrop-dd'
         ,title: ''
         ,url: MODx.config.connectors_url+'element/index.php'
