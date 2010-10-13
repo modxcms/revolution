@@ -3,6 +3,7 @@
  * @package modx
  * @subpackage processors.element.tv.renders.mgr.output
  */
+if (empty($value)) return $value;
 
 $value= $this->parseInput($value, "||", "array");
 for ($i = 0; $i < count($value); $i++) {
