@@ -1825,7 +1825,7 @@ class modX extends xPDO {
             'sc.published' => $published,
             'sc.deleted' => '0'
         ));
-        if (!empty($sort)) $criteria->sortby($docsort, $docsortdir);
+        if (!empty($docsort)) $criteria->sortby($docsort, $docsortdir);
         if ($objCollection = $this->getCollection('modResource', $criteria)) {
             foreach ($objCollection as $obj) {
                 $objArray= array();
