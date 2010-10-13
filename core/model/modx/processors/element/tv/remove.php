@@ -90,4 +90,9 @@ $modx->invokeEvent('OnTVFormDelete',array(
 /* log manager action */
 $modx->logManagerAction('tv_delete','modTemplateVar',$tv->get('id'));
 
+/* clear cache */
+if ($modx->getCacheManager()) {
+    $modx->cacheManager->clearCache();
+}
+
 return $modx->error->success();
