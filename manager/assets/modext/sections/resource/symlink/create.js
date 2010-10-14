@@ -14,8 +14,8 @@ MODx.page.CreateSymLink = function(config) {
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,actions: {
-            'new': MODx.action['resource/symlink/create']
-            ,edit: MODx.action['resource/symlink/update']
+            'new': MODx.action['resource/create']
+            ,edit: MODx.action['resource/update']
             ,cancel: MODx.action['welcome']
         }
         ,buttons: this.getButtons(config)

@@ -14,8 +14,8 @@ MODx.page.CreateStatic = function(config) {
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,actions: {
-            'new': MODx.action['resource/staticresource/create']
-            ,edit: MODx.action['resource/staticresource/update']
+            'new': MODx.action['resource/create']
+            ,edit: MODx.action['resource/update']
             ,cancel: MODx.action['welcome']
         }
         ,buttons: this.getButtons(config)
