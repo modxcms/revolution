@@ -856,7 +856,7 @@ $children[2]->fromArray(array (
   'description' => 'jira_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 2,
-  'handler' => 'window.open("http://bugs.modx.com/browse/MODX");',
+  'handler' => 'window.open("http://bugs.modx.com/projects/revo/issues");',
 ), '', true, true);
 
 /* api docs */

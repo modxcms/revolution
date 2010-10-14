@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.4-pl
 ====================================
+- [#2492] Fixed reference in menu to bugs.modx.com
 - [#2486] Removed hardcoded language reference in lexicon load in access permissions getList processor
 - [#126] Ensured clearing of cache when deleting a Template Variable
 - Fixed issue where cancel button did not work on Resources after save
