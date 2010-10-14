@@ -39,9 +39,9 @@ foreach ($permissions as $permission) {
     $lexicon = $permission->get('lexicon');
     if (!empty($lexicon)) {
         if (strpos($lexicon,':') !== false) {
-            $modx->lexicon->load('en:'.$lexicon);
+            $modx->lexicon->load($lexicon);
         } else {
-            $modx->lexicon->load('en:core:'.$lexicon);
+            $modx->lexicon->load('core:'.$lexicon);
         }
         $desc = $modx->lexicon($desc);
     }
