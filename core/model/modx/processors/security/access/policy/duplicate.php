@@ -19,7 +19,9 @@ if ($oldPolicy == null) return $modx->error->failure($modx->lexicon('policy_err_
 /* duplicate policy */
 $newPolicy = $modx->newObject('modAccessPolicy');
 $newPolicy->fromArray($oldPolicy->toArray('',true), '', false, true);
-$newPolicy->set('name',$modx->lexicon('duplicate_of').$newPolicy->get('name'));
+$newPolicy->set('name',$modx->lexicon('duplicate_of',array(
+    'name' => $newPolicy->get('name'),
+)));
 
 /* save new policy */
 if ($newPolicy->save() === false) {
