@@ -371,6 +371,15 @@ class modTemplateVar extends modElement {
         /* end backwards compat */
 
         $modx =& $this->xpdo;
+        if (empty($modx->resource)) {
+            if (!empty($resourceId)) {
+                $modx->resource = $modx->getObject('modResource',$resourceId);
+            }
+            if (empty($modx->resource) || empty($resourceId)) {
+                $modx->resource = $modx->newObject('modResource');
+                $modx->resource->set('id',0);
+            }
+        }
 
         $output = '';
         foreach ($paths as $path) {

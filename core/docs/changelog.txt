@@ -5,6 +5,7 @@ development release, and is only shown to give an idea of what's currently in th
 MODx Revolution 2.0.4-pl2 (October 15, 2010)
 ====================================
 - [#2502] Fix fatal error with Resources protected by Resource Groups
+- Fixed issue with resourcelist TV
 
 MODx Revolution 2.0.4-pl (October 14, 2010)
 ====================================
