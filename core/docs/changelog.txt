@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODx Revolution 2.0.5-pl
+====================================
+- Fixed issue with resourcelist TV
+
 MODx Revolution 2.0.4-pl
 ====================================
 - Fixed issue where redirect was not working after creating new derivative resource
