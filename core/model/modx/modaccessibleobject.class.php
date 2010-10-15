@@ -19,12 +19,12 @@ class modAccessibleObject extends xPDOObject {
     public static function _loadInstance(& $xpdo, $className, $criteria, $row) {
         $instance = xPDOObject :: _loadInstance($xpdo, $className, $criteria, $row);
         if ($instance instanceof modAccessibleObject && !$instance->checkPolicy('load')) {
-            $instance = null;
             if ($xpdo instanceof modX) {
                 $userid = $xpdo->getLoginUserID();
                 if (!$userid) $userid = '0';
                 $xpdo->log(xPDO::LOG_LEVEL_INFO, "Principal {$userid} does not have permission to load object of class {$instance->_class} with primary key: " . print_r($instance->getPrimaryKey(), true));
             }
+            $instance = null;
         }
         return $instance;
     }
