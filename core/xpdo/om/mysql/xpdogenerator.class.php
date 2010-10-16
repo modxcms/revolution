@@ -84,9 +84,11 @@ class xPDOGenerator_mysql extends xPDOGenerator {
      * the tables with the same prefix, but still use the generic class names.
      * @param boolean $restrictPrefix Only reverse-engineer tables that have the
      * specified tablePrefix; if tablePrefix is empty, this is ignored.
+     * @param mixed $tableList comma-separated list of full table names to process
+     * or an array of one-element arrays of tableName=>className
      * @return boolean True on success, false on failure.
      */
-    public function writeSchema($schemaFile, $package= '', $baseClass= '', $tablePrefix= '', $restrictPrefix= false) {
+    public function writeSchema($schemaFile, $package= '', $baseClass= '', $tablePrefix= '', $restrictPrefix= false, $tableList = '') {
         if (empty ($package))
             $package= $this->manager->xpdo->package;
         if (empty ($baseClass))
@@ -96,21 +98,48 @@ class xPDOGenerator_mysql extends xPDOGenerator {
         $xmlContent = array();
         $xmlContent[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
         $xmlContent[] = "<model package=\"{$package}\" baseClass=\"{$baseClass}\" platform=\"mysql\" defaultEngine=\"MyISAM\">";
-        //read list of tables
+
         $dbname= $this->manager->xpdo->config['dbname'];
-        $tableLike= ($tablePrefix && $restrictPrefix) ? " LIKE '{$tablePrefix}%'" : '';
-        $tablesStmt= $this->manager->xpdo->prepare("SHOW TABLES FROM {$dbname}{$tableLike}");
-        $tablesStmt->execute();
-        $tables= $tablesStmt->fetchAll(PDO::FETCH_NUM);
+        if (!empty($tableList)) {
+            /* use table list sent by user */
+            if (is_array($tableList) ) {
+                /* user sent array of table names and class names */
+                $tables = $tableList;
+            } else {
+                /* user sent comma-delimited string of table names */
+                $tbls = explode(',',$tableList);
+                $tables = array();
+                foreach ($tbls as $tbl) {
+                    $tables[] = array($tbl);
+                }
+            }
+        } else {
+            /* read list of tables */
+            $tableLike= ($tablePrefix && $restrictPrefix) ? " LIKE '{$tablePrefix}%'" : '';
+            $tablesStmt= $this->manager->xpdo->prepare("SHOW TABLES FROM {$dbname}{$tableLike}");
+            $tablesStmt->execute();
+            $tables= $tablesStmt->fetchAll(PDO::FETCH_NUM);
+        }
         if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($tables, true));
         foreach ($tables as $table) {
             $xmlObject= array();
             $xmlFields= array();
             $xmlIndices= array();
-            if (!$tableName= $this->getTableName($table[0], $tablePrefix, $restrictPrefix)) {
-                continue;
+
+            if (is_array($tableList)) {
+                $t = array_values($table);
+                $class = $t[0];
+                $table = array_keys($table);
+            } else {
+                $tableName = $this->getTableName($table[0], $tablePrefix, $restrictPrefix);
+                $class = $this->getClassName($tableName);
             }
-            $class= $this->getClassName($tableName);
+            if (!$tableName= $this->getTableName($table[0], $tablePrefix, $restrictPrefix)) {
+                    continue;
+            }
+            if (empty($tableList)) {
+                $class= $this->getClassName($tableName);
+            }
             $extends= $baseClass;
             $fieldsStmt= $this->manager->xpdo->query('SHOW COLUMNS FROM ' . $this->manager->xpdo->escape($table[0]));
             if ($fieldsStmt) {
