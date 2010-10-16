@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- [#2404] Allow xPDOTransport::install to be aborted when an xPDOVehicle fails to install
 - [#XPDO-64] Fix xPDO::logTarget not to lose options after first call to xPDO::_log()
 - Fix xPDOObject::_loadInstance() to work with xPDOQuery::hydrateGraphNode() properly
 - Fix bug in xPDOObject::load() when caching by primary key
