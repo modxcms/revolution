@@ -579,7 +579,7 @@ abstract class xPDOQuery extends xPDOCriteria {
                         else {
                             $type= PDO::PARAM_STR;
                         }
-                        if (strtoupper($operator) == 'IN' && is_array($val)) {
+                        if (in_array(strtoupper($operator), array('IN', 'NOT IN')) && is_array($val)) {
                             $vals = array();
                             foreach ($val as $v) {
                                 switch ($type) {
@@ -590,7 +590,7 @@ abstract class xPDOQuery extends xPDOCriteria {
                                         $vals[] = $this->xpdo->quote($v);
                                         break;
                                     default:
-                                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing IN condition with key {$key}: " . print_r($v, true));
+                                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing {$operator} condition with key {$key}: " . print_r($v, true));
                                         break;
                                 }
                             }
@@ -600,7 +600,7 @@ abstract class xPDOQuery extends xPDOCriteria {
                                 $result[]= new xPDOQueryCondition(array('sql' => $sql, 'binding' => null, 'conjunction' => $conj));
                                 continue;
                             } else {
-                                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing condition with key {$key}: " . print_r($val, true));
+                                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error parsing {$operator} condition with key {$key}: " . print_r($val, true));
                                 continue;
                             }
                         }
