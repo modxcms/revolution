@@ -348,8 +348,9 @@ class xPDOObjectTest extends xPDOTestCase {
      * @dataProvider providerGetMany
      * @param string $person The username of the Person to use for the test data.
      * @param string $alias The relation alias to grab.
+     * @param string $sortby A column to sort the related collection by.
      */
-    public function testGetMany($person,$alias) {
+    public function testGetMany($person,$alias,$sortby) {
     	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $person = $this->xpdo->getObject('Person',array(
             'username' => $person,
@@ -361,14 +362,27 @@ class xPDOObjectTest extends xPDOTestCase {
 	            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
 	        }
 		}
-        $this->assertTrue(!empty($personPhones),'xPDOQuery: getMany failed from Person to PersonPhone.');
+        $this->assertTrue(!empty($personPhones) && count($personPhones) === 1,'xPDOQuery: getMany failed from Person to PersonPhone.');
+
+        $person = $this->xpdo->getObject('Person',array(
+            'username' => $person,
+        ));
+        if ($person) {
+	        try {
+                $fkMeta = $person->getFKDefinition($alias);
+	            $personPhones = $person->getMany($alias, $this->xpdo->newQuery($fkMeta['class'])->sortby($this->xpdo->escape($sortby)));
+	        } catch (Exception $e) {
+	            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+	        }
+		}
+        $this->assertTrue(!empty($personPhones) && count($personPhones) === 1,'xPDOQuery: getMany failed from Person to PersonPhone.');
     }
     /**
      * Data provider for testGetMany
      */
     public function providerGetMany() {
         return array(
-            array('jane.heartstead@yahoo.com','PersonPhone'),
+            array('jane.heartstead@yahoo.com','PersonPhone','is_primary'),
         );
     }
 
