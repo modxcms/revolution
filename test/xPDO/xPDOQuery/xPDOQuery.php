@@ -380,7 +380,7 @@ class xPDOQueryTest extends xPDOTestCase {
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
-        $this->assertTrue(!empty($result),'xPDOQuery: IN with strings Clause does not find the correct result.');
+        $this->assertTrue(!empty($result) && count($result) === 1,'xPDOQuery: IN with strings Clause does not find the correct result.');
 
         /* test IN with ints */
         try {
@@ -392,7 +392,7 @@ class xPDOQueryTest extends xPDOTestCase {
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
-        $this->assertTrue(!empty($result),'xPDOQuery: IN with INTs Clause does not find the correct result.');
+        $this->assertTrue(!empty($result) && count($result) === 2,'xPDOQuery: IN with INTs Clause does not find the correct result.');
 
         /* test IN with () condition */
         try {
@@ -404,7 +404,49 @@ class xPDOQueryTest extends xPDOTestCase {
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
-        $this->assertTrue(!empty($result),'xPDOQuery: IN with () condition does not find the correct result.');
+        $this->assertTrue(!empty($result) && count($result) === 2,'xPDOQuery: IN with () condition does not find the correct result.');
+    }
+
+    /**
+     * Test NOT IN xPDOQuery condition
+     */
+    public function testNotIn() {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        /* test NOT IN with strings */
+        try {
+            $criteria = $this->xpdo->newQuery('Person');
+            $criteria->where(array(
+                'first_name:NOT IN' => array('Johnathon','Mary'),
+            ));
+            $result = $this->xpdo->getCollection('Person',$criteria);
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertTrue(!empty($result) && count($result) === 1,'xPDOQuery: NOT IN with strings Clause does not find the correct result.');
+
+        /* test IN with ints */
+        try {
+            $criteria = $this->xpdo->newQuery('Person');
+            $criteria->where(array(
+                'security_level:NOT IN' => array(2,3),
+            ));
+            $result = $this->xpdo->getCollection('Person',$criteria);
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertTrue(!empty($result) && count($result) === 1,'xPDOQuery: NOT IN with INTs Clause does not find the correct result.');
+
+        /* test IN with () condition */
+        try {
+            $criteria = $this->xpdo->newQuery('Person');
+            $criteria->where(array(
+                'security_level NOT IN (2,3)',
+            ));
+            $result = $this->xpdo->getCollection('Person',$criteria);
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertTrue(!empty($result) && count($result) === 1,'xPDOQuery: NOT IN with () condition does not find the correct result.');
     }
 
     /**
