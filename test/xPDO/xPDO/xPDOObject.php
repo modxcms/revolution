@@ -492,4 +492,42 @@ class xPDOObjectTest extends xPDOTestCase {
         }
         $this->assertTrue($result == true, "Error removing objects with circular composite relationships.");
     }
+
+    /**
+     * Test removing a collection of objects
+     */
+    public function testRemoveCollection() {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $result= false;
+
+        $person = $this->xpdo->newObject('Person');
+        $person->set('first_name', 'Ready');
+        $person->set('last_name', 'Willing');
+        $person->set('middle_name', 'Able');
+        $person->set('dob', '1980-12-25');
+        $person->set('gender', 'M');
+        $person->set('password', 'blahblahblah');
+        $person->set('username', 'ready@willingandable.com');
+        $person->set('security_level',1);
+        $person->save();
+
+        $person = $this->xpdo->newObject('Person');
+        $person->set('first_name', 'Kurt');
+        $person->set('last_name', 'Dirt');
+        $person->set('middle_name', 'Remover');
+        $person->set('dob', '1978-10-23');
+        $person->set('gender', 'F');
+        $person->set('password', 'fdsfdsfdsfds');
+        $person->set('username', 'dirt@remover.com');
+        $person->set('security_level',2);
+        $person->save();
+
+        unset($person);
+        try {
+            $result = $this->xpdo->removeCollection('Person', array('last_name:IN' => array('Willing', 'Dirt')));
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertTrue($result === 2, "Error removing a collection of objects.");
+    }
 }

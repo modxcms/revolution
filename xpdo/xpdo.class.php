@@ -672,7 +672,8 @@ class xPDO {
      *
      * @param string $className The name of the class to remove a collection of.
      * @param mixed $criteria Valid xPDO criteria for selecting a collection.
-     * @return boolean True if the collection is successfully removed.
+     * @return boolean|integer False if the remove encounters an error, otherwise an integer value
+     * representing the number of rows that were removed.
      */
     public function removeCollection($className, $criteria) {
         $removed= false;
