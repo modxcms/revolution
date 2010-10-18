@@ -154,7 +154,37 @@ class xPDOObjectSingleTableInheritanceTest extends xPDOTestCase {
     }
 
     /**
-     * Test getting the proper derived instance from getCollection.
+     * Test getting only the requested derived instance from getObject.
+     * @dataProvider providerGetSpecificDerivedObject
+     * @param string $expectedClass A valid xPDO table class name derived from a base table class.
+     */
+    public function testGetSpecificDerivedObject($expectedClass, $criteria) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $result = false;
+        $realClass = '(none)';
+        try {
+            $object = $this->xpdo->getObject("sti.{$expectedClass}", $criteria);
+            if ($object) {
+                $result = ($object instanceof $expectedClass && $object->get('class_key') == $expectedClass);
+                if ($result !== true) $realClass = $object->_class;
+            }
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertTrue($result === true, "Error getting a derived class instance for {$expectedClass}; got {$realClass}.");
+    }
+    /**
+     * Data provider for testGetSpecificDerivedObject.
+     */
+    public function providerGetSpecificDerivedObject() {
+        return array(
+            array('derivedClass', array('field1' => 2)),
+            array('derivedClass2', array('field1' => 3))
+        );
+    }
+
+    /**
+     * Test getting the proper derived instances from getCollection.
      */
     public function testGetDerivedCollection() {
     	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
@@ -181,6 +211,33 @@ class xPDOObjectSingleTableInheritanceTest extends xPDOTestCase {
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
+    }
+
+    /**
+     * Test getting only the requested derived instances from getCollection.
+     * @dataProvider providerGetSpecificDerivedCollection
+     * @param string $expectedClass A valid xPDO table class name derived from a base table class.
+     */
+    public function testGetSpecificDerivedCollection($expectedClass) {
+    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        try {
+            $collection = $this->xpdo->getCollection("sti.{$expectedClass}");
+            foreach ($collection as $object) {
+                $result = ($object instanceof $expectedClass && $object->get('class_key') == $expectedClass);
+                $this->assertTrue($result, "Error only getting derived objects of the specified derived class in collection.");
+            }
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+    }
+    /**
+     * Data provider for testGetSpecificDerivedCollection.
+     */
+    public function providerGetSpecificDerivedCollection() {
+        return array(
+            array('derivedClass'),
+            array('derivedClass2')
+        );
     }
 
     /**

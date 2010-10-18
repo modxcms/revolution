@@ -405,6 +405,7 @@ class xPDOObject {
                 $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
             }
             if (is_object($criteria)) {
+                $criteria = $xpdo->addDerivativeCriteria($className, $criteria);
                 $row= null;
                 if ($xpdo->_cacheEnabled && $criteria->cacheFlag && $cacheFlag) {
                     $row= $xpdo->fromCache($criteria, $className);
@@ -463,6 +464,9 @@ class xPDOObject {
         if (!is_object($criteria)) {
             $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
         }
+        if (is_object($criteria)) {
+            $criteria = $xpdo->addDerivativeCriteria($className, $criteria);
+        }
         if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag) {
             $rows= $xpdo->fromCache($criteria);
             $fromCache = (is_array($rows) && !empty($rows));
@@ -507,6 +511,7 @@ class xPDOObject {
     public static function loadCollectionGraph(xPDO & $xpdo, $className, $graph, $criteria, $cacheFlag) {
         $objCollection = array();
         if ($query= $xpdo->newQuery($className, $criteria, $cacheFlag)) {
+            $query = $xpdo->addDerivativeCriteria($className, $query);
             $query->bindGraph($graph);
             $rows = array();
             $fromCache = false;

@@ -778,7 +778,10 @@ class xPDO {
     }
 
     /**
-     * Gets criteria pre-defined in an {@link xPDOObject} class metadata definition.
+     * Convert any valid criteria into an xPDOQuery instance.
+     *
+     * @todo Get criteria pre-defined in an {@link xPDOObject} class metadata
+     * definition by name.
      *
      * @todo Define callback functions as an alternative to retreiving criteria
      * sql and/or bindings from the metadata.
@@ -792,10 +795,35 @@ class xPDO {
      * @return xPDOCriteria A criteria object or null if not found.
      */
     public function getCriteria($className, $type= null, $cacheFlag= true) {
-        $criteria= null;
-        if ($criteria= $this->newQuery($className, $type, $cacheFlag)) {
-            if (!$criteria->construct()) {
-                $this->log(xPDO::LOG_LEVEL_ERROR, "Could not get criteria object for class {$className}");
+        return $this->newQuery($className, $type, $cacheFlag);
+    }
+
+    /**
+     * Add criteria when requesting a derivative class row automatically.
+     * 
+     * This applies class_key filtering for single-table inheritance queries and may
+     * provide a convenient location for similar features in the future.
+     *
+     * @param string $className A valid xPDOObject derivative table class.
+     * @param xPDOCriteria $criteria A valid xPDOCriteria instance.
+     */
+    public function addDerivativeCriteria($className, $criteria) {
+        if ($criteria instanceof xPDOQuery && !isset($this->map[$className]['table'])) {
+            if (isset($this->map[$className]['fields']['class_key']) && !empty($this->map[$className]['fields']['class_key'])) {
+                $criteria->where(array('class_key' => $this->map[$className]['fields']['class_key']));
+                if ($this->getDebug() === true) {
+                    $this->log(xPDO::LOG_LEVEL_DEBUG, "#1: Automatically adding class_key criteria for derivative query of class {$className}");
+                }
+            } else {
+                foreach ($this->getAncestry($className, false) as $ancestor) {
+                    if (isset($this->map[$ancestor]['table']) && isset($this->map[$ancestor]['fields']['class_key'])) {
+                        $criteria->where(array('class_key' => $className));
+                        if ($this->getDebug() === true) {
+                            $this->log(xPDO::LOG_LEVEL_DEBUG, "#2: Automatically adding class_key criteria for derivative query of class {$className} from base table class {$ancestor}");
+                        }
+                        break;
+                    }
+                }
             }
         }
         return $criteria;
