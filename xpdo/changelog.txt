@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- Make xPDOQuery::prepare() always call construct()
 - [#2401] Clarify xPDO::removeCollection() return value
 - [#2419] Add defined join criteria when custom criteria is provided to xPDOObject::getMany()
 - [#2416] Add :NOT IN operator support for array value bindings
