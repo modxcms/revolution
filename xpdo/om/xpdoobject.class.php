@@ -512,7 +512,7 @@ class xPDOObject {
             $fromCache = false;
             $collectionCaching = (integer) $xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1);
             if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag) {
-                $rows= $xpdo->fromCache($criteria);
+                $rows= $xpdo->fromCache($query);
                 $fromCache = !empty($rows);
             }
             if (!$fromCache) {
