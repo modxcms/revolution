@@ -609,8 +609,14 @@ class modX extends xPDO {
      * calls prepend the parent keys.
      * @param string $separator A separator to place in between the prefixes and keys. Default is a
      * dot or period: '.'.
+     * @param boolean $restore Set to true if you want overwritten placeholder values returned.
+     * @return array A multi-dimensional array containing up to two elements: 'keys' which always
+     * contains an array of placeholder keys that were set, and optionally, if the restore parameter
+     * is true, 'restore' containing an array of placeholder values that were overwritten by the method.
      */
-    public function toPlaceholders($subject, $prefix= '', $separator= '.') {
+    public function toPlaceholders($subject, $prefix= '', $separator= '.', $restore= false) {
+        $keys = array();
+        $restored = array();
         if (is_object($subject)) {
             if ($subject instanceof xPDOObject) {
                 $subject= $subject->toArray();
@@ -620,9 +626,18 @@ class modX extends xPDO {
         }
         if (is_array($subject)) {
             foreach ($subject as $key => $value) {
-                $this->toPlaceholder($key, $value, $prefix, $separator);
+                $rv = $this->toPlaceholder($key, $value, $prefix, $separator, $restore);
+                if (isset($rv['keys'])) {
+                    foreach ($rv['keys'] as $rvKey) $keys[] = $rvKey;
+                }
+                if ($restore === true && isset($rv['restore'])) {
+                    $restored = array_merge($restored, $rv['restore']);
+                }
             }
         }
+        $return = array('keys' => $keys);
+        if ($restore === true) $return['restore'] = $restored;
+        return $return;
     }
 
     /**
@@ -634,16 +649,27 @@ class modX extends xPDO {
      * parent keys as well.
      * @param string $separator A separator placed in between the prefix and the key. Default is a
      * dot or period: '.'.
+     * @param boolean $restore Set to true if you want overwritten placeholder values returned.
+     * @return array A multi-dimensional array containing up to two elements: 'keys' which always
+     * contains an array of placeholder keys that were set, and optionally, if the restore parameter
+     * is true, 'restore' containing an array of placeholder values that were overwritten by the method.
      */
-    public function toPlaceholder($key, $value, $prefix= '', $separator= '.') {
+    public function toPlaceholder($key, $value, $prefix= '', $separator= '.', $restore= false) {
+        $return = array('keys' => array());
+        if ($restore === true) $return['restore'] = array();
         if (!empty($prefix) && !empty($separator)) {
             $prefix .= $separator;
         }
         if (is_array($value) || is_object($value)) {
-            $this->toPlaceholders($value, "{$prefix}{$key}");
+            $return = $this->toPlaceholders($value, "{$prefix}{$key}", $separator, $restore);
         } elseif (is_scalar($value)) {
+            $return['keys'][] = "{$prefix}{$key}";
+            if ($restore === true && array_key_exists("{$prefix}{$key}", $this->placeholders)) {
+                $return['restore']["{$prefix}{$key}"] = $this->getPlaceholder("{$prefix}{$key}");
+            }
             $this->setPlaceholder("{$prefix}{$key}", $value);
         }
+        return $return;
     }
 
     /**

@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2552] Fix scope issues when passing nested arrays in Chunk properties
+
 MODx Revolution 2.0.4-pl2 (October 15, 2010)
 ====================================
 - [#2502] Fix fatal error with Resources protected by Resource Groups

@@ -614,7 +614,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Turns associative arrays into placeholders in the scope of this element.
      *
-     * @access public
+     * @deprecated To be removed in 2.1. See xPDO::toPlaceholders() for similar functionality.
      * @param array $placeholders An associative array of placeholders to set.
      * @return array An array of placeholders overwritten from the containing
      * scope you can use to restore values from, or an empty array if no

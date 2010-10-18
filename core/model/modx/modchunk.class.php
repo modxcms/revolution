@@ -86,15 +86,15 @@ class modChunk extends modElement {
             $this->_output= $this->_content;
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* turn the processed properties into placeholders */
-                $restore = $this->toPlaceholders($this->_properties);
+                $scope = $this->xpdo->toPlaceholders($this->_properties, '', '.', true);
 
                 /* collect element tags in the output and process them */
                 $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
                 $this->xpdo->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
 
                 /* remove the placeholders set from the properties of this element and restore global values */
-                $this->xpdo->unsetPlaceholders(array_keys($this->_properties));
-                if ($restore) $this->xpdo->toPlaceholders($restore);
+                if (isset($scope['keys'])) $this->xpdo->unsetPlaceholders($scope['keys']);
+                if (isset($scope['restore'])) $this->xpdo->toPlaceholders($scope['restore']);
             }
             $this->filterOutput();
             $this->cache();
