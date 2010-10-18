@@ -124,7 +124,7 @@ class xPDO {
     /**
      * A PDO instance used by xPDO for database access.
      * @var PDO
-     * @access protected
+     * @access public
      */
     public $pdo= null;
     /**
@@ -870,7 +870,7 @@ class xPDO {
             } elseif (empty ($class)) {
                 $class= $name;
             }
-            $className = $className= $this->loadClass($class, $path, false, true);
+            $className= $this->loadClass($class, $path, false, true);
             if (!empty($className)) {
                 $service = new $className ($this, $params);
                 if ($service) {

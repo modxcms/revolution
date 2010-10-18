@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- [#2414] Fix phpdoc inaccuracy and redundant assignment
 - Fix caching error in xPDOObject::loadCollectionGraph()
 - Make xPDOQuery::prepare() always call construct()
 - [#2401] Clarify xPDO::removeCollection() return value
