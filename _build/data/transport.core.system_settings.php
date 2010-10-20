@@ -512,6 +512,15 @@ $settings['friendly_alias_translit_class']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['friendly_alias_translit_class_path']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_translit_class_path']->fromArray(array (
+  'key' => 'friendly_alias_translit_class_path',
+  'value' => '{core_path}components/',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
 $settings['friendly_alias_trim_chars']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_trim_chars']->fromArray(array (
   'key' => 'friendly_alias_trim_chars',

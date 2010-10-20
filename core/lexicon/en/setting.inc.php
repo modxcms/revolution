@@ -241,6 +241,9 @@ $_lang['setting_friendly_alias_translit_desc'] = 'The method of transliteration 
 $_lang['setting_friendly_alias_translit_class'] = 'FURL Alias Transliteration Service Class';
 $_lang['setting_friendly_alias_translit_class_desc'] = 'An optional service class to provide named transliteration services for FURL Alias generation/filtering.';
 
+$_lang['setting_friendly_alias_translit_class_path'] = 'FURL Alias Transliteration Service Class Path';
+$_lang['setting_friendly_alias_translit_class_path_desc'] = 'The model package location where the FURL Alias Transliteration Service Class will be loaded from.';
+
 $_lang['setting_friendly_alias_trim_chars'] = 'FURL Alias Trim Characters';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Characters to trim from the ends of a provided Resource alias.';
 
