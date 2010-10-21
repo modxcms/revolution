@@ -34,23 +34,6 @@ $xpdo_meta_map['Phone']= array (
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
     ),
   ),
-  'indexes' => 
-  array (
-    'PRIMARY' => 
-    array (
-      'alias' => 'PRIMARY',
-      'primary' => true,
-      'unique' => true,
-      'columns' => 
-      array (
-        'id' => 
-        array (
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
-  ),
   'composites' => 
   array (
     'PersonPhone' => 

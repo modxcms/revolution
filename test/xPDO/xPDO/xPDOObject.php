@@ -348,8 +348,9 @@ class xPDOObjectTest extends xPDOTestCase {
      * @dataProvider providerGetMany
      * @param string $person The username of the Person to use for the test data.
      * @param string $alias The relation alias to grab.
+     * @param string $sortby A column to sort the related collection by.
      */
-    public function testGetMany($person,$alias) {
+    public function testGetMany($person,$alias,$sortby) {
     	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         $person = $this->xpdo->getObject('Person',array(
             'username' => $person,
@@ -361,14 +362,27 @@ class xPDOObjectTest extends xPDOTestCase {
 	            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
 	        }
 		}
-        $this->assertTrue(!empty($personPhones),'xPDOQuery: getMany failed from Person to PersonPhone.');
+        $this->assertTrue(!empty($personPhones) && count($personPhones) === 1,'xPDOQuery: getMany failed from Person to PersonPhone.');
+
+        $person = $this->xpdo->getObject('Person',array(
+            'username' => $person,
+        ));
+        if ($person) {
+	        try {
+                $fkMeta = $person->getFKDefinition($alias);
+	            $personPhones = $person->getMany($alias, $this->xpdo->newQuery($fkMeta['class'])->sortby($this->xpdo->escape($sortby)));
+	        } catch (Exception $e) {
+	            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+	        }
+		}
+        $this->assertTrue(!empty($personPhones) && count($personPhones) === 1,'xPDOQuery: getMany failed from Person to PersonPhone.');
     }
     /**
      * Data provider for testGetMany
      */
     public function providerGetMany() {
         return array(
-            array('jane.heartstead@yahoo.com','PersonPhone'),
+            array('jane.heartstead@yahoo.com','PersonPhone','is_primary'),
         );
     }
 
@@ -477,5 +491,43 @@ class xPDOObjectTest extends xPDOTestCase {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
         $this->assertTrue($result == true, "Error removing objects with circular composite relationships.");
+    }
+
+    /**
+     * Test removing a collection of objects
+     */
+    public function testRemoveCollection() {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $result= false;
+
+        $person = $this->xpdo->newObject('Person');
+        $person->set('first_name', 'Ready');
+        $person->set('last_name', 'Willing');
+        $person->set('middle_name', 'Able');
+        $person->set('dob', '1980-12-25');
+        $person->set('gender', 'M');
+        $person->set('password', 'blahblahblah');
+        $person->set('username', 'ready@willingandable.com');
+        $person->set('security_level',1);
+        $person->save();
+
+        $person = $this->xpdo->newObject('Person');
+        $person->set('first_name', 'Kurt');
+        $person->set('last_name', 'Dirt');
+        $person->set('middle_name', 'Remover');
+        $person->set('dob', '1978-10-23');
+        $person->set('gender', 'F');
+        $person->set('password', 'fdsfdsfdsfds');
+        $person->set('username', 'dirt@remover.com');
+        $person->set('security_level',2);
+        $person->save();
+
+        unset($person);
+        try {
+            $result = $this->xpdo->removeCollection('Person', array('last_name:IN' => array('Willing', 'Dirt')));
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertTrue($result === 2, "Error removing a collection of objects.");
     }
 }

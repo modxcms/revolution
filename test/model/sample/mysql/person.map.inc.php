@@ -97,25 +97,12 @@ $xpdo_meta_map['Person']= array (
   ),
   'indexes' => 
   array (
-    'PRIMARY' => 
-    array (
-      'alias' => 'PRIMARY',
-      'primary' => true,
-      'unique' => true,
-      'columns' => 
-      array (
-        'id' => 
-        array (
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
     'username' => 
     array (
       'alias' => 'username',
       'primary' => false,
       'unique' => true,
+      'type' => 'BTREE',
       'columns' => 
       array (
         'username' => 

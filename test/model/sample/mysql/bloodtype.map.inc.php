@@ -31,6 +31,7 @@ $xpdo_meta_map['BloodType']= array (
       'alias' => 'PRIMARY',
       'primary' => true,
       'unique' => true,
+      'type' => 'BTREE',
       'columns' => 
       array (
         'type' => 
