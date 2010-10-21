@@ -201,6 +201,7 @@
         <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" index="index" />
         <field key="for_parent" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
         
         <index alias="action" name="action" primary="false" unique="false" type="BTREE">
             <column key="action" length="" collation="A" null="false" />
@@ -213,6 +214,9 @@
         </index>
         <index alias="for_parent" name="for_parent" primary="false" unique="false" type="BTREE">
             <column key="for_parent" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />

@@ -20,6 +20,7 @@ $xpdo_meta_map['modActionDom']= array (
     'constraint_class' => '',
     'active' => 1,
     'for_parent' => 0,
+    'rank' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -121,6 +122,15 @@ $xpdo_meta_map['modActionDom']= array (
       'default' => 0,
       'index' => 'index',
     ),
+    'rank' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -181,6 +191,22 @@ $xpdo_meta_map['modActionDom']= array (
       'columns' => 
       array (
         'for_parent' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'rank' => 
+    array (
+      'alias' => 'rank',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'rank' => 
         array (
           'length' => '',
           'collation' => 'A',

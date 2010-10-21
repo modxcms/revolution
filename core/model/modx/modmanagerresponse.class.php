@@ -159,6 +159,7 @@ class modManagerResponse extends modResponse {
                 'OR:Access.principal:IS' => null,
             ),
         ));
+        $c->sortby('rank','ASC');
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
         foreach ($domRules as $rule) {

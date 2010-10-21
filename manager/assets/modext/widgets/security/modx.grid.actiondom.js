@@ -8,9 +8,9 @@ MODx.grid.ActionDom = function(config) {
             ,'action','controller'
             ,'principal','principal_class'
             ,'name','description','xtype','container','rule','value'
-            ,'constraint','constraint_class','constraint_field','active','for_parent','perm']
+            ,'constraint','constraint_class','constraint_field','active','for_parent','rank','perm']
         ,paging: true
-        ,autosave: false
+        ,autosave: true
         ,sm: this.sm
         ,remoteSort: true
         ,columns: [this.sm,{
@@ -21,49 +21,46 @@ MODx.grid.ActionDom = function(config) {
         },{
             header: _('action')
             ,dataIndex: 'controller'
-            ,width: 250
+            ,width: 200
             ,sortable: true
+            ,editor: { xtype: 'modx-combo-action' }
         },{
             header: _('name')
             ,dataIndex: 'name'
             ,width: 200
             ,sortable: true
+            ,editor: { xtype: 'textfield' }
         },{
             header: _('description')
             ,dataIndex: 'description'
-            ,width: 200
+            ,width: 250
             ,sortable: true
+            ,editor: { xtype: 'textfield' }
         },{
             header: _('rule')
             ,dataIndex: 'rule'
             ,width: 150
             ,sortable: true
-            ,renderer: function(v,c) {
-                var rs = {
-                    'fieldVisible': 'field_visible'
-                    ,'fieldTitle': 'field_label'
-                    ,'fieldDefault': 'field_default'
-                    ,'tabVisible': 'tab_visible'
-                    ,'tabTitle': 'tab_title'
-                    ,'tabNew': 'tab_new'
-                    ,'tvVisible': 'tv_visible'
-                    ,'tvTitle': 'tv_label'
-                    ,'tvDefault': 'tv_default'
-                    ,'tvMove': 'tv_move'
-                };
-                return _(rs[v]) ? _(rs[v]) : v;
-            }
+            ,editor: { xtype: 'modx-combo-rule-type' ,renderer: true }
         },{
             header: _('value')
             ,dataIndex: 'value'
             ,width: 300
             ,sortable: true
+            ,editor: { xtype: 'textfield' }
         },{
             header: _('usergroup')
             ,dataIndex: 'principal'
-            ,width: 200
-            ,editor: { xtype: 'modx-combo-usergroup' ,renderer: true }
-            ,editable: false
+            ,width: 150
+            ,editor: { xtype: 'modx-combo-usergroup' ,renderer: true, baseParams: { action: 'getList', addNone: true }}
+            ,editable: true
+            ,sortable: true
+        },{
+            header: _('rank')
+            ,dataIndex: 'rank'
+            ,width: 70
+            ,editor: { xtype: 'textfield' }
+            ,editable: true
             ,sortable: true
         }]
         ,viewConfig: {
@@ -443,6 +440,13 @@ MODx.window.CreateActionDom = function(config) {
             ,value: 1
             ,checked: false
         },{ html: '<hr />' },{
+            fieldLabel: _('rank')
+            ,description: _('rank_desc')
+            ,name: 'rank'
+            ,id: 'modx-'+this.ident+'-rank'
+            ,xtype: 'textfield'
+            ,value: 0
+        },{
             fieldLabel: _('active')
             ,description: _('active_desc')
             ,name: 'active'
@@ -560,6 +564,13 @@ MODx.window.UpdateActionDom = function(config) {
             ,value: 1
             ,checked: config.record && !Ext.isEmpty(config.record.for_parent) ? true : false
         },{ html: '<hr />' },{
+            fieldLabel: _('rank')
+            ,description: _('rank_desc')
+            ,name: 'rank'
+            ,id: 'modx-'+this.ident+'-rank'
+            ,xtype: 'textfield'
+            ,value: 0
+        },{
             fieldLabel: _('active')
             ,description: _('active_desc')
             ,name: 'active'
