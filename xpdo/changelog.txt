@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.0.0-rc2
 ====================================
+- Use new index metadata in maps to generate indexes for mysql
 - Fix mkdir issue in xPDOGenerator::parseSchema()
 - Improve schema representation of mysql indexes in xPDOGenerator_mysql::writeSchema()
 - [#2579] Fix xPDOFileVehicle not calling resolve on uninstall()
