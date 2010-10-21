@@ -32,11 +32,11 @@ $resources = $this->xpdo->getCollection('modResource',$c);
 /* iterate */
 $opts = array();
 foreach ($resources as $resource) {
-    $checked = $resource->get('id') == (int)$itemvalue;
+    $selected = $resource->get('id') == $this->get('value');
     $opts[] = array(
         'value' => $resource->get('id'),
         'text' => $resource->get('pagetitle').' ('.$resource->get('id').')',
-        'checked' => $checked,
+        'selected' => $selected,
     );
 }
 $this->xpdo->smarty->assign('tvitems',$opts);
