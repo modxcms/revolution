@@ -177,15 +177,16 @@ class xPDOGenerator_mysql extends xPDOGenerator {
                         if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Details of index: " . print_r($index, true));
                         foreach ($index as $columnSeq => $column) {
                             if ($columnSeq == 1) {
-                                $primary = $column['Key_name'] == 'PRIMARY' ? 'true' : 'false';
+                                $keyName = $column['Key_name'];
+                                $primary = $keyName == 'PRIMARY' ? 'true' : 'false';
                                 $unique = empty($column['Non_unique']) ? 'true' : 'false';
                                 $packed = empty($column['Packed']) ? 'false' : 'true';
                                 $type = $column['Index_type'];
                             }
                             $null = $column['Null'] == 'YES' ? 'true' : 'false';
-                            $xmlIndexCols[]= "\t\t\t<column key=\"{$column['Column_name']}\" collation=\"{$column['Collation']}\" null=\"{$null}\" />";
+                            $xmlIndexCols[]= "\t\t\t<column key=\"{$column['Column_name']}\" length=\"{$column['Sub_part']}\" collation=\"{$column['Collation']}\" null=\"{$null}\" />";
                         }
-                        $xmlIndices[]= "\t\t<index alias=\"{$column['Key_name']}\" name=\"{$column['Key_name']}\" primary=\"{$primary}\" unique=\"{$unique}\">";
+                        $xmlIndices[]= "\t\t<index alias=\"{$keyName}\" name=\"{$keyName}\" primary=\"{$primary}\" unique=\"{$unique}\" type=\"{$type}\" >";
                         $xmlIndices[]= implode("\n", $xmlIndexCols);
                         $xmlIndices[]= "\t\t</index>";
                     }

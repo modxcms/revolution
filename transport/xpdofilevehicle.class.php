@@ -165,6 +165,10 @@ class xPDOFileVehicle extends xPDOVehicle {
                         $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error unpacking preserved files from archive {$preservedArchive}");
                     }
                 }
+                if (!$this->resolve($transport, $object, $vOptions)) {
+                    $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not resolve vehicle for object: ' . print_r($object, true));
+                    if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not resolve vehicle: ' . print_r($vOptions, true));
+                }
             } else {
                 $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not validate vehicle for object: ' . print_r($object, true));
                 if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, 'Could not validate vehicle: ' . print_r($vOptions, true));
