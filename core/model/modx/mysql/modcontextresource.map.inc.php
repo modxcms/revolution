@@ -31,6 +31,28 @@ $xpdo_meta_map['modContextResource']= array (
       'index' => 'pk',
     ),
   ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'columns' => 
+      array (
+        'context_key' => 
+        array (
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'resource' => 
+        array (
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'Context' => 

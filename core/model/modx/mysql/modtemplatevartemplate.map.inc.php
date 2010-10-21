@@ -41,6 +41,31 @@ $xpdo_meta_map['modTemplateVarTemplate']= array (
       'default' => 0,
     ),
   ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'tmplvarid' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'templateid' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'TemplateVar' => 

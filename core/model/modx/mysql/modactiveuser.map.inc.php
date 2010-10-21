@@ -66,6 +66,25 @@ $xpdo_meta_map['modActiveUser']= array (
       'default' => '',
     ),
   ),
+  'indexes' => 
+  array (
+    'internalKey' => 
+    array (
+      'alias' => 'internalKey',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'internalKey' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'User' => 

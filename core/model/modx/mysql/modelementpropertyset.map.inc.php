@@ -44,6 +44,33 @@ $xpdo_meta_map['modElementPropertySet']= array (
       'index' => 'pk',
     ),
   ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'columns' => 
+      array (
+        'element' => 
+        array (
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'element_class' => 
+        array (
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'property_set' => 
+        array (
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'Element' => 

@@ -42,6 +42,25 @@ $xpdo_meta_map['modResourceGroup']= array (
       'default' => 0,
     ),
   ),
+  'indexes' => 
+  array (
+    'name' => 
+    array (
+      'alias' => 'name',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'composites' => 
   array (
     'ResourceGroupResources' => 

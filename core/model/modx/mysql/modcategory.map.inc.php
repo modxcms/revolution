@@ -32,6 +32,41 @@ $xpdo_meta_map['modCategory']= array (
       'index' => 'unique',
     ),
   ),
+  'indexes' => 
+  array (
+    'parent' => 
+    array (
+      'alias' => 'parent',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'parent' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'category' => 
+    array (
+      'alias' => 'category',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'category' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'composites' => 
   array (
     'Children' => 

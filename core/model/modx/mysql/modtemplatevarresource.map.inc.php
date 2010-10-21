@@ -39,6 +39,41 @@ $xpdo_meta_map['modTemplateVarResource']= array (
       'null' => false,
     ),
   ),
+  'indexes' => 
+  array (
+    'tmplvarid' => 
+    array (
+      'alias' => 'tmplvarid',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'tmplvarid' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'contentid' => 
+    array (
+      'alias' => 'contentid',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'contentid' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'TemplateVar' => 

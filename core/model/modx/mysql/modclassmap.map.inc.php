@@ -58,4 +58,55 @@ $xpdo_meta_map['modClassMap']= array (
       'default' => 'core:resource',
     ),
   ),
+  'indexes' => 
+  array (
+    'class' => 
+    array (
+      'alias' => 'class',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'class' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'parent_class' => 
+    array (
+      'alias' => 'parent_class',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'parent_class' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'name_field' => 
+    array (
+      'alias' => 'name_field',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name_field' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
 );

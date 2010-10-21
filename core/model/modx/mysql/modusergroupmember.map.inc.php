@@ -43,6 +43,25 @@ $xpdo_meta_map['modUserGroupMember']= array (
       'index' => 'index',
     ),
   ),
+  'indexes' => 
+  array (
+    'role' => 
+    array (
+      'alias' => 'role',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'role' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'UserGroupRole' => 

@@ -1,7 +1,18 @@
 This file shows the changes in this release of xPDO.
 
-xPDO 2.0.0-rc2
+xPDO 2.0.0-rc2 (October 20, 2010)
 ====================================
+- Use new index metadata in maps to generate indexes for mysql
+- Fix mkdir issue in xPDOGenerator::parseSchema()
+- Improve schema representation of mysql indexes in xPDOGenerator_mysql::writeSchema()
+- [#2579] Fix xPDOFileVehicle not calling resolve on uninstall()
+- [#2414] Fix phpdoc inaccuracy and redundant assignment
+- Fix caching error in xPDOObject::loadCollectionGraph()
+- Make xPDOQuery::prepare() always call construct()
+- [#2401] Clarify xPDO::removeCollection() return value
+- [#2419] Add defined join criteria when custom criteria is provided to xPDOObject::getMany()
+- [#2416] Add :NOT IN operator support for array value bindings
+- [#2404] Allow xPDOTransport::install to be aborted when an xPDOVehicle fails to install
 - [#XPDO-64] Fix xPDO::logTarget not to lose options after first call to xPDO::_log()
 - Fix xPDOObject::_loadInstance() to work with xPDOQuery::hydrateGraphNode() properly
 - Fix bug in xPDOObject::load() when caching by primary key

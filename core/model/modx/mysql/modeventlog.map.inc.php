@@ -74,6 +74,25 @@ $xpdo_meta_map['modEventLog']= array (
       'phptype' => 'string',
     ),
   ),
+  'indexes' => 
+  array (
+    'user' => 
+    array (
+      'alias' => 'user',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'user' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'composites' => 
   array (
     'Event' => 

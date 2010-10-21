@@ -2,6 +2,9 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Update core schemas and regenerate maps for new xPDO index elements
+- [#69] Allow Transport Vehicles to abort installation when validation fails
+- Update xPDO version to 2.0.0-rc2 (official release)
 - [#2552] Fix scope issues when passing nested arrays in Chunk properties
 
 MODx Revolution 2.0.4-pl2 (October 15, 2010)

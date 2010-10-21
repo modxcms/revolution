@@ -68,6 +68,41 @@ $xpdo_meta_map['modPlugin']= array (
       'index' => 'fk',
     ),
   ),
+  'indexes' => 
+  array (
+    'locked' => 
+    array (
+      'alias' => 'locked',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'locked' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'disabled' => 
+    array (
+      'alias' => 'disabled',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'disabled' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'composites' => 
   array (
     'PluginEvents' => 

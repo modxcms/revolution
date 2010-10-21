@@ -65,6 +65,25 @@ $xpdo_meta_map['modSystemSetting']= array (
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
     ),
   ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'key' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'ContextSetting' => 

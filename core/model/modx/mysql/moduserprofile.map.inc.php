@@ -247,6 +247,25 @@ $xpdo_meta_map['modUserProfile']= array (
       'indexgrp' => 'extended',
     ),
   ),
+  'indexes' => 
+  array (
+    'internalKey' => 
+    array (
+      'alias' => 'internalKey',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'internalKey' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'User' => 

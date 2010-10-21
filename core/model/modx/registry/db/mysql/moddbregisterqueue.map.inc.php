@@ -27,6 +27,25 @@ $xpdo_meta_map['modDbRegisterQueue']= array (
       'phptype' => 'array',
     ),
   ),
+  'indexes' => 
+  array (
+    'name' => 
+    array (
+      'alias' => 'name',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'composites' => 
   array (
     'Topics' => 

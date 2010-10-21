@@ -22,6 +22,25 @@ $xpdo_meta_map['modKeyword']= array (
       'index' => 'unique',
     ),
   ),
+  'indexes' => 
+  array (
+    'keyword' => 
+    array (
+      'alias' => 'keyword',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'keyword' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'composites' => 
   array (
     'ResourceKeywords' => 

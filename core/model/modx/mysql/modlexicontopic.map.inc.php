@@ -34,6 +34,31 @@ $xpdo_meta_map['modLexiconTopic']= array (
       'indexgrp' => 'foci',
     ),
   ),
+  'indexes' => 
+  array (
+    'foci' => 
+    array (
+      'alias' => 'foci',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'namespace' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'composites' => 
   array (
     'Entries' => 

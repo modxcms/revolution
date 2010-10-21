@@ -55,6 +55,41 @@ $xpdo_meta_map['modSnippet']= array (
       'index' => 'fk',
     ),
   ),
+  'indexes' => 
+  array (
+    'locked' => 
+    array (
+      'alias' => 'locked',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'locked' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'moduleguid' => 
+    array (
+      'alias' => 'moduleguid',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'moduleguid' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'validation' => 
   array (
     'rules' => 
