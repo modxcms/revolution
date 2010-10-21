@@ -12,10 +12,7 @@
         <field key="password" dbtype="varchar" precision="255" phptype="password" null="false" default="" />
         <field key="security_level" dbtype="tinyint" precision="4" phptype="integer" null="false" default="1" />
 
-        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
-            <column key="id" collation="A" null="false" />
-        </index>
-        <index alias="username" name="username" primary="false" unique="true">
+        <index alias="username" name="username" primary="false" unique="true" type="BTREE">
             <column key="username" collation="A" null="false" />
         </index>
 
@@ -32,7 +29,7 @@
         <field key="phone" dbtype="int" precision="11" phptype="integer" null="false" index="pk" />
         <field key="is_primary" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" />
 
-        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="person" collation="A" null="false" />
             <column key="phone" collation="A" null="false" />
         </index>
@@ -44,10 +41,6 @@
         <field key="type" dbtype="enum" precision="'','home','work','mobile'" phptype="string" null="false" default="" />
         <field key="number" dbtype="varchar" precision="20" phptype="string" null="false" />
         <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
-
-        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
-            <column key="id" collation="A" null="false" />
-        </index>
 
         <composite alias="PersonPhone" class="PersonPhone" local="id" foreign="phone" cardinality="many" owner="local" />
     </object>
@@ -66,10 +59,7 @@
         <field key="float" dbtype="decimal" precision="10,5" phptype="float" null="false" default="1.01230" />
         <field key="boolean" dbtype="tinyint" precision="1" phptype="boolean" null="false" />
 
-        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
-            <column key="id" collation="A" null="false" />
-        </index>
-        <index alias="unique_varchar" name="unique_varchar" primary="false" unique="true">
+        <index alias="unique_varchar" name="unique_varchar" primary="false" unique="true" type="BTREE">
             <column key="unique_varchar" collation="A" null="false" />
         </index>
     </object>
@@ -77,7 +67,7 @@
         <field key="type" dbtype="varchar" precision="100" phptype="string" null="false" index="pk" />
         <field key="description" dbtype="text" phptype="string" null="true" />
 
-        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="type" collation="A" null="false" />
         </index>
         

@@ -116,25 +116,12 @@ $xpdo_meta_map['xPDOSample']= array (
   ),
   'indexes' => 
   array (
-    'PRIMARY' => 
-    array (
-      'alias' => 'PRIMARY',
-      'primary' => true,
-      'unique' => true,
-      'columns' => 
-      array (
-        'id' => 
-        array (
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
     'unique_varchar' => 
     array (
       'alias' => 'unique_varchar',
       'primary' => false,
       'unique' => true,
+      'type' => 'BTREE',
       'columns' => 
       array (
         'unique_varchar' => 

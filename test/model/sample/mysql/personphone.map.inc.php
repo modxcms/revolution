@@ -42,6 +42,7 @@ $xpdo_meta_map['PersonPhone']= array (
       'alias' => 'PRIMARY',
       'primary' => true,
       'unique' => true,
+      'type' => 'BTREE',
       'columns' => 
       array (
         'person' => 
