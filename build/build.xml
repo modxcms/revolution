@@ -18,7 +18,7 @@
 
     <!-- Set some common build properties -->
     <property name="build.dir" value="${basedir}" />
-    <property name="build.src.tree" value="HEAD" />
+    <property name="build.src.tree" value="master" />
     <property name="build.src.remote"
               value="git://github.com/modxcms/xpdo-core.git"
     />
