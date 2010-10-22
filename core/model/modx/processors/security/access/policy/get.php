@@ -41,9 +41,9 @@ foreach ($permissions as $permission) {
     $desc = $permission->get('description');
     if (!empty($policyArray['lexicon'])) {
         if (strpos($policyArray['lexicon'],':') !== false) {
-            $modx->lexicon->load('en:'.$policyArray['lexicon']);
+            $modx->lexicon->load($policyArray['lexicon']);
         } else {
-            $modx->lexicon->load('en:core:'.$policyArray['lexicon']);
+            $modx->lexicon->load('core:'.$policyArray['lexicon']);
         }
         $desc = $modx->lexicon($desc);
     }
