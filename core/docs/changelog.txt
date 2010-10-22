@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2596] Fixed issue where User Groups could not be removed
 - [#2542] Fixed hardcoded language lexicon load reference in policy/get processor
 - [#2573] Fixed issue with backslash in TV output render property values
 - [#2594] Fixed issue where special characters were being stripped from phone numbers in user profile

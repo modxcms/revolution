@@ -38,46 +38,18 @@ if ($showAnonymous && empty($scriptProperties['id'])) {
     );
 }
 foreach ($groups as $group) {
-    $menu = array();
-    $menu[] = array(
-        'text' => $modx->lexicon('user_group_user_add'),
-        'handler' => 'function(itm,e) {
-            this.addUser(itm,e);
-        }'
-    );
-    $menu[] = '-';
-    $menu[] = array(
-        'text' => $modx->lexicon('user_group_create'),
-        'handler' => 'function(itm,e) {
-            this.create(itm,e);
-        }',
-    );
-    $menu[] = array(
-        'text' => $modx->lexicon('user_group_update'),
-        'handler' => 'function(itm,e) {
-            this.update(itm,e);
-        }',
-    );
+    $cls = 'icon-group padduser';
     if ($group->get('id') != 1) {
-        $menu[] = '-';
-        $menu[] = array(
-            'text' => $modx->lexicon('user_group_remove'),
-            'handler' => 'function(itm,e) {
-                this.remove(itm,e);
-            }',
-        );
+        $cls .= ' premove';
     }
 
-	$list[] = array(
-		'text' => $group->get('name'),
-		'id' => 'n_ug_'.$group->get('id'),
-		'leaf' => 0,
-		'type' => 'usergroup',
-		'cls' => 'icon-group',
-        'menu' => array(
-            'items' => $menu,
-        ),
-	);
+    $list[] = array(
+        'text' => $group->get('name'),
+        'id' => 'n_ug_'.$group->get('id'),
+        'leaf' => false,
+        'type' => 'usergroup',
+        'cls' => $cls,
+    );
 }
 if ($usergroup) {
     $c = $modx->newQuery('modUser');
@@ -85,25 +57,16 @@ if ($usergroup) {
     $c->where(array(
         'UserGroupMembers.user_group' => $usergroup->get('id'),
     ));
-	$users = $modx->getCollection('modUser',$c);
-	foreach ($users as $user) {
-        $menu = array();
-        $menu[] = array(
-            'text' => $modx->lexicon('user_group_user_remove'),
-            'handler' => 'function(itm,e) {
-                this.removeUser(itm,e);
-            }',
+    $users = $modx->getCollection('modUser',$c);
+    foreach ($users as $user) {
+        $list[] = array(
+            'text' => $user->get('username'),
+            'id' => 'n_user_'.$user->get('id').'_'.$usergroup->get('id'),
+            'leaf' => true,
+            'type' => 'user',
+            'cls' => 'icon-user',
         );
-
-		$list[] = array(
-			'text' => $user->get('username'),
-			'id' => 'n_user_'.$user->get('id').'_'.$usergroup->get('id'),
-			'leaf' => 1,
-			'type' => 'user',
-			'cls' => 'icon-user',
-            'menu' => array('items' => $menu),
-		);
-	}
+    }
 }
 
 return $this->toJSON($list);

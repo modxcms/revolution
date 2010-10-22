@@ -22,7 +22,7 @@ MODx.tree.UserGroup = function(config) {
         ,tbar: [{
             text: _('user_group_new')
             ,scope: this
-            ,handler: this.create.createDelegate(this,[true],true)
+            ,handler: this.createUserGroup.createDelegate(this,[true],true)
         }]
     });
     MODx.tree.UserGroup.superclass.constructor.call(this,config);
@@ -32,8 +32,8 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 	
     ,addUser: function(item,e) {
         var n = this.cm.activeNode;
-        var ug = n.id.substr(2).split('_'); ug = ug[1];
-        if (ug === undefined) { ug = 0; }
+        var ug = n.id.substr(2).split('_');ug = ug[1];
+        if (ug === undefined) {ug = 0;}
         var r = {usergroup: ug};
 
         if (!this.windows.adduser) {
@@ -49,14 +49,14 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
         this.windows.adduser.show(e.target);
     }
 	
-    ,create: function(item,e,tbar) {
+    ,createUserGroup: function(item,e,tbar) {
         tbar = tbar || false;
         var p;
         if (tbar === false) {
             var n = this.cm.activeNode;
-            p = n.id.substr(2).split('_'); p = p[1];
-            if (p === undefined) { p = 0; }
-        } else { p = 0; }
+            p = n.id.substr(2).split('_');p = p[1];
+            if (p === undefined) {p = 0;}
+        } else {p = 0;}
 
         var r = {'parent': p};
 
@@ -74,18 +74,59 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
         this.windows.createUsergroup.show(e.target);
     }
     
-    ,update: function(item,e) {
+    ,updateUserGroup: function(item,e) {
         var n = this.cm.activeNode;
-        var id = n.id.substr(2).split('_'); id = id[1];
+        var id = n.id.substr(2).split('_');id = id[1];
         
         location.href = 'index.php'
             + '?a=' + MODx.action['security/usergroup/update']
             + '&id=' + id;
     }
-	
-    ,remove: function(item,e) {
+
+    ,getMenu: function() {
+        var m = [];
         var n = this.cm.activeNode;
-        var id = n.id.substr(2).split('_'); id = id[1];
+        var ui = n.getUI();
+
+        switch (n.attributes.type) {
+            case 'usergroup':
+                if (ui.hasClass('padduser')) {
+                    m.push({
+                        text: _('user_group_user_add')
+                        ,handler: this.addUser
+                    });
+                    m.push('-');
+                }
+                m.push({
+                    text: _('user_group_create')
+                    ,handler: this.createUserGroup
+                });
+                m.push({
+                    text: _('user_group_update')
+                    ,handler: this.updateUserGroup
+                });
+                if (ui.hasClass('premove')) {
+                    m.push('-');
+                    m.push({
+                        text: _('user_group_remove')
+                        ,handler: this.removeUserGroup
+                    });
+                }
+                break;
+            case 'user':
+                m.push({
+                    text: _('user_group_user_remove')
+                    ,handler: this.removeUser
+                })
+                break;
+        }
+
+        return m;
+    }
+	
+    ,removeUserGroup: function(item,e) {
+        var n = this.cm.activeNode;
+        var id = n.id.substr(2).split('_');id = id[1];
 
         MODx.msg.confirm({
             title: _('warning')
@@ -103,8 +144,8 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 
     ,removeUser: function(item,e) {
         var n = this.cm.activeNode;
-        var user_id = n.id.substr(2).split('_'); user_id = user_id[1];
-        var group_id = n.parentNode.id.substr(2).split('_'); group_id = group_id[1];
+        var user_id = n.id.substr(2).split('_');user_id = user_id[1];
+        var group_id = n.parentNode.id.substr(2).split('_');group_id = group_id[1];
 
         MODx.msg.confirm({
             title: _('warning')
