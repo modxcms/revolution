@@ -13,9 +13,10 @@ $modx->lexicon->load('file');
 
 if (empty($scriptProperties['path'])) return $modx->error->failure($modx->lexicon('file_err_ns'));
 if (empty($scriptProperties['newname'])) return $modx->error->failure($modx->lexicon('name_err_ns'));
+$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
 
 $modx->getService('fileHandler','modFileHandler');
-$root = $modx->fileHandler->getBasePath();
+$root = $modx->fileHandler->getBasePath(false,$ctx);
 
 /* generate modFileSystemResource from path */
 $fsResource = $modx->fileHandler->make($root.$scriptProperties['path']);

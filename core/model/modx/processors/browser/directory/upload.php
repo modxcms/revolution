@@ -11,10 +11,11 @@ if (!$modx->hasPermission('file_upload')) return $modx->error->failure($modx->le
 $modx->lexicon->load('file');
 
 if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
 
 /* get base paths and sanitize incoming paths */
 $modx->getService('fileHandler','modFileHandler');
-$root = $modx->fileHandler->getBasePath();
+$root = $modx->fileHandler->getBasePath(false,$ctx);
 $directory = $modx->fileHandler->make($root.$scriptProperties['dir']);
 
 /* verify target path is a directory and writable */

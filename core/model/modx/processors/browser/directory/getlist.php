@@ -18,6 +18,7 @@ $modx->lexicon->load('file');
 $hideFiles = !empty($scriptProperties['hideFiles']) && $scriptProperties['hideFiles'] != 'false' ? true : false;
 $stringLiterals = !empty($scriptProperties['stringLiterals']) ? true : false;
 $dir = !isset($scriptProperties['id']) || $scriptProperties['id'] == 'root' ? '' : str_replace('n_','',$scriptProperties['id']);
+$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
 
 $directories = array();
 $files = array();
@@ -40,28 +41,25 @@ $canUpload = $modx->hasPermission('file_upload');
 $modx->getService('fileHandler','modFileHandler');
 $dir = $modx->fileHandler->sanitizePath($dir);
 $dir = $modx->fileHandler->postfixSlash($dir);
-$root = $modx->fileHandler->getBasePath();
-$fullpath = $root.$dir;
-
-$relativeRootPath = $modx->fileHandler->postfixSlash($root);
+$root = $modx->fileHandler->getBasePath(false,$ctx);
+$fullPath = str_replace('//','/',$root.$dir);
+if (!is_dir($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
 $editAction = false;
 $act = $modx->getObject('modAction',array('controller' => 'system/file/edit'));
 if ($act) { $editAction = $act->get('id'); }
 
-
-/* get relative url; TODO: rb_base_url should be removed in 2.1 */
-$fileManagerUrl = $modx->fileHandler->getBaseUrl();
-if (!is_dir($fullpath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+/* get relative url */
+$baseUrl = $modx->fileHandler->getBaseUrl($ctx,true);
 
 /* get mb support settings */
-$use_multibyte = $modx->getOption('use_multibyte',null,false);
+$useMultibyte = $modx->getOption('use_multibyte',null,false);
 $encoding = $modx->getOption('modx_charset',null,'UTF-8');
 
 $imagesExts = array('jpg','jpeg','png','gif','ico');
 
 /* iterate through directories */
-foreach (new DirectoryIterator($fullpath) as $file) {
+foreach (new DirectoryIterator($fullPath) as $file) {
     if (in_array($file,array('.','..','.svn','_notes'))) continue;
     if (!$file->isReadable()) continue;
 
@@ -91,25 +89,25 @@ foreach (new DirectoryIterator($fullpath) as $file) {
     /* get files in current dir */
     if ($file->isFile() && !$hideFiles && $canListFiles) {
         $ext = pathinfo($filePathName,PATHINFO_EXTENSION);
-        $ext = $use_multibyte ? mb_strtolower($ext,$encoding) : strtolower($ext);
+        $ext = $useMultibyte ? mb_strtolower($ext,$encoding) : strtolower($ext);
 
         $cls = 'icon-file icon-'.$ext;
         if ($canRemoveFile) $cls .= ' premove';
         if ($canUpdateFile) $cls .= ' pupdate';
-        $encFile = rawurlencode($filePathName);
-        $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile : null;
-        $url = trim(str_replace('//','/',$fileManagerUrl.$dir.$fileName),'/');
+        $encFile = rawurlencode($dir.$fileName);
+        $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile.'&ctx='.$ctx : null;
+        $url = $baseUrl.trim(str_replace('//','/',$dir.$fileName),'/');
         $files[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
             'cls' => $cls,
             'type' => 'file',
             'leaf' => true,
-            'qtip' => in_array($ext,$imagesExts) ? '<img src="../'.$url.'" alt="'.$fileName.'" />' : '',
+            'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$url.'" alt="'.$fileName.'" />' : '',
             'page' => $modx->fileHandler->isBinary($filePathName) ? $page : null,
             'perms' => $octalPerms,
-            'path' => $relativeRootPath.$fileName,
-            'url' => $url,
+            'path' => $dir.$fileName,
+            'url' => $dir.$fileName,
             'file' => $encFile,
         );
     }

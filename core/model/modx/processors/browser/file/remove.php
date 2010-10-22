@@ -13,6 +13,7 @@ if (!$modx->hasPermission('file_remove')) return $modx->error->failure($modx->le
 $modx->lexicon->load('file');
 
 if (empty($scriptProperties['file'])) return $modx->error->failure($modx->lexicon('file_err_ns'));
+$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
 
 /* get base paths and sanitize incoming paths */
 $modx->getService('fileHandler','modFileHandler');
@@ -22,7 +23,7 @@ $file = str_replace('root/','',$scriptProperties['file']);
 $file = str_replace('undefined/','',$file);
 
 /* create modFile object */
-$root = $modx->fileHandler->getBasePath();
+$root = $modx->fileHandler->getBasePath(false,$ctx);
 $file = $modx->fileHandler->make($root.$file);
 
 /* verify file exists and is writable */

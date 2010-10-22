@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2525] Fixed filemanager_path issues by added filemanager_path_relative setting, and then calculating from that
 - [#2589] Fixed issue with port 80 feeds in magpie RSS feed parser
 - [#2544] Fixed issue with updatefromgrid processor with User Settings
 - [#2560] Fixed issue with resourcelist TV not persisting set value

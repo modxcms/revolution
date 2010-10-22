@@ -14,17 +14,18 @@ $modx->lexicon->load('file');
 
 if (empty($scriptProperties['mode'])) return $modx->error->failure($modx->lexicon('file_err_chmod_ns'));
 if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
 
 /* get base paths and sanitize incoming paths */
 $modx->getService('fileHandler','modFileHandler');
-$root = $modx->fileHandler->getBasePath();
+$root = $modx->fileHandler->getBasePath(false,$ctx);
 $directory = $modx->fileHandler->sanitizePath($scriptProperties['dir']);
 $directory = $modx->fileHandler->postfixSlash($directory);
 $directory = $root.$directory;
 
 if (!is_dir($directory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
 if (!is_readable($directory) || !is_writable($directory)) {
-	return $modx->error->failure($modx->lexicon('file_folder_err_perms'));
+    return $modx->error->failure($modx->lexicon('file_folder_err_perms'));
 }
 $octalPerms = $scriptProperties['mode'];
 if (!$modx->fileHandler->chmod($directory,$octalPerms)) {

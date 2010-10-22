@@ -420,11 +420,29 @@ $settings['filemanager_path']->fromArray(array (
   'area' => 'file',
   'editedon' => null,
 ), '', true, true);
+$settings['filemanager_path_relative']= $xpdo->newObject('modSystemSetting');
+$settings['filemanager_path_relative']->fromArray(array (
+  'key' => 'filemanager_path_relative',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+), '', true, true);
 $settings['filemanager_url']= $xpdo->newObject('modSystemSetting');
 $settings['filemanager_url']->fromArray(array (
   'key' => 'filemanager_url',
   'value' => '',
   'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+), '', true, true);
+$settings['filemanager_url_relative']= $xpdo->newObject('modSystemSetting');
+$settings['filemanager_url_relative']->fromArray(array (
+  'key' => 'filemanager_url_relative',
+  'value' => true,
+  'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'file',
   'editedon' => null,

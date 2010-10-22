@@ -13,18 +13,19 @@
  */
 if (!$modx->hasPermission('file_list')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
+$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
 
 /* get sanitized base path and current path */
 $modx->getService('fileHandler','modFileHandler');
 $root = $modx->fileHandler->getBasePath();
 $dir = !isset($scriptProperties['dir']) || $scriptProperties['dir'] == 'root' ? '' : $scriptProperties['dir'];
 $dir = $modx->fileHandler->sanitizePath($dir);
+$dir = $modx->fileHandler->postfixSlash($dir);
 $fullpath = $root.'/'.$dir;
 
-/* strip base_path from main path to allow for relative paths in filemanager_path setting */
-$basePath = $modx->getOption('base_path',null,MODX_BASE_PATH);
-$baseUrl = $modx->getOption('base_url',null,MODX_BASE_URL);
-$fileManagerUrl = $modx->fileHandler->getBaseUrl();
+/* get base path/url */
+$basePath = $modx->fileHandler->getBasePath(false,$ctx);
+$baseUrl = $modx->fileHandler->getBaseUrl($ctx,true);
 
 /* setup settings */
 $ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
@@ -46,13 +47,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
         $fileExtension = $use_multibyte ? mb_strtolower($fileExtension,$encoding) : strtolower($fileExtension);
 
 	$filesize = @filesize($filePathName);
-        /* calculate url */
-	if (!empty($scriptProperties['prependUrl'])) {
-            $url = $fileManagerUrl.$scriptProperties['prependUrl'].$dir.($dir != '' ? '/' : '').$fileName;
-        } else {
-            $url = $fileManagerUrl.$dir.($dir != '' ? '/' : '').$fileName;
-        }
-        $url = str_replace('//','/',$url);
+        $url = $dir.$fileName;
 
         /* get thumbnail */
         if (in_array($fileExtension,$imagesExts)) {
@@ -71,11 +66,9 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             if ($thumbWidth > $imageWidth) $thumbWidth = $imageWidth;
             if ($thumbHeight > $imageHeight) $thumbHeight = $imageHeight;
 
-            /* ensure not generating anti-relative urls */
-            $imageUrl = ltrim($url,'/');
             /* generate thumb/image URLs */
-            $thumb = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$imageUrl.'&w='.$thumbWidth.'&h='.$thumbHeight.'&HTTP_MODAUTH='.$modx->site_id.'&ctx='.$ctx;
-            $image = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$imageUrl.'&w='.$imageWidth.'&h='.$imageHeight.'&HTTP_MODAUTH='.$modx->site_id.'&ctx='.$ctx;
+            $thumb = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$thumbWidth.'&h='.$thumbHeight.'&HTTP_MODAUTH='.$modx->site_id.'&ctx='.$ctx;
+            $image = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$imageWidth.'&h='.$imageHeight.'&HTTP_MODAUTH='.$modx->site_id.'&ctx='.$ctx;
            
         } else {
             $thumb = $image = $modx->getOption('manager_url',null,MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
@@ -93,8 +86,8 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             'thumb' => $thumb,
             'thumb_width' => $thumb,
             'thumb_height' => $thumb,
-            'url' => str_replace('//','/',$modx->getOption('base_url').$url),
-            'relativeUrl' => ltrim($url,'/'),
+            'url' => $url,
+            'relativeUrl' => str_replace('//','/',$baseUrl.$url),
             'ext' => $fileExtension,
             'pathname' => str_replace('//','/',$filePathName),
             'lastmod' => $file->getMTime(),

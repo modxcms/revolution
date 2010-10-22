@@ -53,12 +53,13 @@ class modFileHandler {
      * @return string The base path
      */
     public function getBasePath($prependBasePath = false,$context = 'web') {
-        $context = $this->modx->getObject('modContext',$context);
-        $context->prepare();
-        $root = $context->getOption('filemanager_path','');
+        $oldContext = $this->modx->context->get('key');
+        if ($oldContext != $context) $this->modx->switchContext($context);
+
+        $root = $this->modx->getOption('filemanager_path',null,'');
         if (empty($root)) {
             /* TODO: deprecated - remove this in 2.1 */
-            $root = $context->getOption('rb_base_dir','');
+            $root = $this->modx->getOption('rb_base_dir',null,'');
         }
         /* expand placeholders */
         $root = str_replace(array(
@@ -72,28 +73,32 @@ class modFileHandler {
         ),$root);
 
         /* check for absolute/relative */
-        if (substr($root,0,1) != '/' && substr($root,1,3) != ':/') {
+        $relative = $this->modx->getOption('filemanager_path_relative',null,true);
+        if ($relative || $prependBasePath) {
             $root = $this->modx->getOption('base_path',null,MODX_BASE_PATH).$root;
         }
 
-        $root = ($prependBasePath ? $this->modx->getOption('base_path',null,MODX_BASE_PATH) : '').$root;
+        if ($oldContext != $context) $this->modx->switchContext($oldContext);
         return $this->postfixSlash($root);
     }
 
     /**
      * Get base URL of file manager
      */
-    public function getBaseUrl($context = 'web') {
-        $context = $this->modx->getObject('modContext',$context);
-        $context->prepare();
-        $fileManagerUrl = $context->getOption('filemanager_url','');
-        /* if none specified, automatically calculate */
-        if (empty($fileManagerUrl)) {
-            $path = $context->getOption('filemanager_path',$context->getOption('rb_base_url',''));
-            $basePath = $this->modx->getOption('base_path',null,MODX_BASE_PATH);
-            if ($basePath != '/') $fileManagerUrl = str_replace($basePath,'',$path);
+    public function getBaseUrl($context = 'web',$getRelative = false) {
+        $oldContext = $this->modx->context->get('key');
+        if ($oldContext != $context) $this->modx->switchContext($context);
+
+        $baseUrl = $this->modx->getOption('filemanager_url',null,$this->modx->getOption('rb_base_url',null,''));
+        
+        /* check for absolute/relative */
+        $sourceRelative = $this->modx->getOption('filemanager_url_relative',null,true);
+        if (!$getRelative && $sourceRelative) {
+            $baseUrl = $this->modx->getOption('base_url',null,MODX_BASE_PATH).$baseUrl;
         }
-        return $this->postfixSlash($fileManagerUrl);
+        
+        if ($oldContext != $context) $this->modx->switchContext($oldContext);
+        return $this->postfixSlash($baseUrl);
     }
 
     /**
@@ -115,7 +120,7 @@ class modFileHandler {
         if (substr($path,$len-1,$len) != '/') {
             $path .= '/';
         }
-        return $path;
+        return str_replace('//','/',$path);
     }
 
     public function getDirectoryFromFile($fileName) {
