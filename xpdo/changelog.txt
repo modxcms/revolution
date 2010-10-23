@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Add missing attributes in xPDOSimpleObject map index element
 - Do not generate primary key index for xPDOSimpleObject derivatives
 - Introduce xPDO::SCHEMA_VERSION and set it to 1.1 to distinguish new format for indexes.
 
