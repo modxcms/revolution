@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Introduce xPDO::SCHEMA_VERSION and set it to 1.1 to distinguish new format for indexes.
+
 xPDO 2.0.0-rc2 (October 20, 2010)
 ====================================
 - Use new index metadata in maps to generate indexes for mysql

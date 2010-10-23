@@ -119,6 +119,7 @@ class xPDOManager_mysql extends xPDOManager {
             if ($existsStmt && $existsStmt->fetchAll()) {
                 return true;
             }
+            $modelVersion= $this->xpdo->getModelVersion($className);
             $tableMeta= $this->xpdo->getTableMeta($className);
             $tableType= isset($tableMeta['engine']) ? $tableMeta['engine'] : 'MyISAM';
             $numerics= array_merge($this->xpdo->driver->dbtypes['integer'], $this->xpdo->driver->dbtypes['boolean'], $this->xpdo->driver->dbtypes['float']);
@@ -126,6 +127,10 @@ class xPDOManager_mysql extends xPDOManager {
             $dateStrings= $this->xpdo->driver->dbtypes['date'];
             $pk= $this->xpdo->getPK($className);
             $pktype= $this->xpdo->getPKType($className);
+            $legacyIndexes= version_compare($modelVersion, '1.1', '<');
+            $fulltextIndexes= array ();
+            $uniqueIndexes= array ();
+            $stdIndexes= array ();
             $lobs= array ('TEXT', 'BLOB');
             $lobsPattern= '/(' . implode('|', $lobs) . ')/';
             $sql= 'CREATE TABLE ' . $tableName . ' (';
@@ -161,42 +166,127 @@ class xPDOManager_mysql extends xPDOManager {
                 } else {
                     $sql .= $this->xpdo->escape($key) . ' ' . $dbtype . $precision . $null . $default . $attributes . $extra . ',';
                 }
-            }
-            $indexes = $this->xpdo->getIndexMeta($className);
-            $createIndices = array();
-            $tableConstraints = array();
-            if (!empty ($indexes)) {
-                foreach ($indexes as $indexkey => $indexdef) {
-                    if (isset($indexdef['type']) && $indexdef['type'] == 'FULLTEXT') {
-                        $indexType = "FULLTEXT";
-                    } else {
-                        $indexType = ($indexdef['primary'] ? 'PRIMARY KEY' : ($indexdef['unique'] ? 'UNIQUE KEY' : 'INDEX'));
+                /* Legacy index support for pre-2.0.0-rc3 models */
+                if ($legacyIndexes && isset ($meta['index']) && $meta['index'] !== 'pk') {
+                    if ($meta['index'] === 'fulltext') {
+                        if (isset ($meta['indexgrp'])) {
+                            $fulltextIndexes[$meta['indexgrp']][]= $key;
+                        } else {
+                            $fulltextIndexes[$key]= $key;
+                        }
                     }
-                    $index = $indexdef['columns'];
-                    if (is_array($index)) {
-                        $indexset= array ();
-                        foreach ($index as $indexmember => $indexmemberdetails) {
-                            $indexMemberDetails = $this->xpdo->escape($indexmember);
-                            if (isset($indexmemberdetails['length']) && !empty($indexmemberdetails['length'])) {
-                                $indexMemberDetails .= " ({$indexmemberdetails['length']})";
-                            }
-                            $indexset[]= $indexMemberDetails;
+                    elseif ($meta['index'] === 'unique') {
+                        if (isset ($meta['indexgrp'])) {
+                            $uniqueIndexes[$meta['indexgrp']][]= $key;
+                        } else {
+                            $uniqueIndexes[$key]= $key;
                         }
-                        $indexset= implode(',', $indexset);
-                        if (!empty($indexset)) {
-                            switch ($indexType) {
-//                                case 'INDEX':
-//                                    $createIndices[$indexkey] = "CREATE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
-//                                    break;
-                                case 'PRIMARY KEY':
-//                                    if ($nativeGen) break;
-                                    $tableConstraints[]= "{$indexType} ({$indexset})";
-                                    break;
-                                default:
-                                    $tableConstraints[]= "{$indexType} {$this->xpdo->escape($indexkey)} ({$indexset})";
-                                    break;
+                    }
+                    elseif ($meta['index'] === 'fk') {
+                        if (isset ($meta['indexgrp'])) {
+                            $stdIndexes[$meta['indexgrp']][]= $key;
+                        } else {
+                            $stdIndexes[$key]= $key;
+                        }
+                    } else {
+                        if (isset ($meta['indexgrp'])) {
+                            $stdIndexes[$meta['indexgrp']][]= $key;
+                        } else {
+                            $stdIndexes[$key]= $key;
+                        }
+                    }
+                }
+            }
+            if (!$legacyIndexes) {
+                $indexes = $this->xpdo->getIndexMeta($className);
+                $createIndices = array();
+                $tableConstraints = array();
+                if (!empty ($indexes)) {
+                    foreach ($indexes as $indexkey => $indexdef) {
+                        if (isset($indexdef['type']) && $indexdef['type'] == 'FULLTEXT') {
+                            $indexType = "FULLTEXT";
+                        } else {
+                            $indexType = ($indexdef['primary'] ? 'PRIMARY KEY' : ($indexdef['unique'] ? 'UNIQUE KEY' : 'INDEX'));
+                        }
+                        $index = $indexdef['columns'];
+                        if (is_array($index)) {
+                            $indexset= array ();
+                            foreach ($index as $indexmember => $indexmemberdetails) {
+                                $indexMemberDetails = $this->xpdo->escape($indexmember);
+                                if (isset($indexmemberdetails['length']) && !empty($indexmemberdetails['length'])) {
+                                    $indexMemberDetails .= " ({$indexmemberdetails['length']})";
+                                }
+                                $indexset[]= $indexMemberDetails;
+                            }
+                            $indexset= implode(',', $indexset);
+                            if (!empty($indexset)) {
+                                switch ($indexType) {
+                                    case 'PRIMARY KEY':
+                                        $tableConstraints[]= "{$indexType} ({$indexset})";
+                                        break;
+                                    default:
+                                        $tableConstraints[]= "{$indexType} {$this->xpdo->escape($indexkey)} ({$indexset})";
+                                        break;
+                                }
                             }
                         }
+                    }
+                }
+            } else {
+                /* Legacy index support for schema model versions 1.0 */
+                if (is_array($pk)) {
+                    $pkarray= array ();
+                    foreach ($pk as $k) {
+                        $pkarray[]= $this->xpdo->escape($k);
+                    }
+                    $pk= implode(',', $pkarray);
+                }
+                elseif ($pk) {
+                    $pk= $this->xpdo->escape($pk);
+                }
+                if ($pk) {
+                    $tableConstraints[]= "PRIMARY KEY ({$pk})";
+                }
+                if (!empty ($stdIndexes)) {
+                    foreach ($stdIndexes as $indexkey => $index) {
+                        if (is_array($index)) {
+                            $indexset= array ();
+                            foreach ($index as $indexmember) {
+                                $indexset[]= $this->xpdo->escape($indexmember);
+                            }
+                            $indexset= implode(',', $indexset);
+                        } else {
+                            $indexset= $this->xpdo->escape($indexkey);
+                        }
+                        $tableConstraints[]= "INDEX {$this->xpdo->escape($indexkey)} ({$indexset})";
+                    }
+                }
+                if (!empty ($uniqueIndexes)) {
+                    foreach ($uniqueIndexes as $indexkey => $index) {
+                        if (is_array($index)) {
+                            $indexset= array ();
+                            foreach ($index as $indexmember) {
+                                $indexset[]= $this->xpdo->escape($indexmember);
+                            }
+                            $indexset= implode(',', $indexset);
+                        } else {
+                            $indexset= $this->xpdo->escape($indexkey);
+                        }
+                        $tableConstraints[]= "UNIQUE INDEX {$this->xpdo->escape($indexkey)} ({$indexset})";
+                    }
+                }
+                if (!empty ($fulltextIndexes)) {
+                    foreach ($fulltextIndexes as $indexkey => $index) {
+                        if (is_array($index)) {
+                            $indexset= array ();
+                            foreach ($index as $indexmember) {
+                                $indexset[]= $this->xpdo->escape($indexmember);
+                            }
+                            $indexset= implode(',', $indexset);
+                        } else {
+                            $indexset= $this->xpdo->escape($indexkey);
+                        }
+                        $tableConstraints[]= "FULLTEXT INDEX {$this->xpdo->escape($indexkey)} ({$indexset})";
                     }
                 }
             }

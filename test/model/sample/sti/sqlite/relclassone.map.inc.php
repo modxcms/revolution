@@ -1,6 +1,7 @@
 <?php
 $xpdo_meta_map['relClassOne']= array (
   'package' => 'sample.sti',
+  'version' => '1.1',
   'table' => 'sti_related_one',
   'fields' => 
   array (

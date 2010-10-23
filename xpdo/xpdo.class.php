@@ -121,6 +121,8 @@ class xPDO {
     const LOG_LEVEL_INFO = 3;
     const LOG_LEVEL_DEBUG = 4;
 
+    const SCHEMA_VERSION = '1.1';
+
     /**
      * A PDO instance used by xPDO for database access.
      * @var PDO
@@ -1253,6 +1255,21 @@ class xPDO {
             $this->log(xPDO::LOG_LEVEL_ERROR, 'No foreign key definition for parentClass: ' . $parentClass . ' using relation alias: ' . $alias);
         }
         return $def;
+    }
+
+    /**
+     * Gets the version string of the schema the specified class was generated from.
+     *
+     * @param string $className The name of the class to get the model version from.
+     * @return string The version string for the schema model the class was generated from.
+     */
+    public function getModelVersion($className) {
+        $version = '1.0';
+        $className= $this->loadClass($className);
+        if ($className && isset($this->map[$className]['version'])) {
+            $version= $this->map[$className]['version'];
+        }
+        return $version;
     }
 
     /**

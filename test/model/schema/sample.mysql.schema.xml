@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model package="sample" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">
+<model package="sample" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
     <object class="Person" table="person" extends="xPDOSimpleObject">
         <field key="first_name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="last_name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />

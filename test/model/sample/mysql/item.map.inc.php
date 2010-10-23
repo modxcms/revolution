@@ -1,6 +1,7 @@
 <?php
 $xpdo_meta_map['Item']= array (
   'package' => 'sample',
+  'version' => '1.1',
   'table' => 'items',
   'fields' => 
   array (
