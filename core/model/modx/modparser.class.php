@@ -476,16 +476,16 @@ abstract class modTag {
     public $_output= '';
     public $_result= true;
     public $_propertyString= '';
-    public $_properties= array ();
+    public $_properties= array();
     public $_processed= false;
     public $_tag= '';
     public $_token= '';
-    public $_fields= array (
+    public $_fields= array(
         'name' => '',
         'properties' => ''
     );
     public $_cacheable= true;
-    public $_filters= array ();
+    public $_filters= array('input' => null, 'output' => null);
 
     function __construct(modX &$modx) {
         $this->modx =& $modx;
@@ -618,6 +618,44 @@ abstract class modTag {
     }
 
     /**
+     * Get an input filter instance configured for this Element.
+     *
+     * @return modInputFilter|null An input filter instance (or null if one cannot be loaded).
+     */
+    public function & getInputFilter() {
+        if (!isset ($this->_filters['input']) || !($this->_filters['input'] instanceof modInputFilter)) {
+            if (!$inputFilterClass= $this->get('input_filter')) {
+                $inputFilterClass = $this->modx->getOption('input_filter',null,'filters.modInputFilter');
+            }
+            if ($filterClass= $this->modx->loadClass($inputFilterClass, '', false, true)) {
+                if ($filter= new $filterClass($this->modx)) {
+                    $this->_filters['input']= $filter;
+                }
+            }
+        }
+        return $this->_filters['input'];
+    }
+
+    /**
+     * Get an output filter instance configured for this Element.
+     *
+     * @return modOutputFilter|null An output filter instance (or null if one cannot be loaded).
+     */
+    public function & getOutputFilter() {
+        if (!isset ($this->_filters['output']) || !($this->_filters['output'] instanceof modOutputFilter)) {
+            if (!$outputFilterClass= $this->get('output_filter')) {
+                $outputFilterClass = $this->modx->getOption('output_filter',null,'filters.modOutputFilter');
+            }
+            if ($filterClass= $this->modx->loadClass($outputFilterClass, '', false, true)) {
+                if ($filter= new $filterClass($this->modx)) {
+                    $this->_filters['output']= $filter;
+                }
+            }
+        }
+        return $this->_filters['output'];
+    }
+
+    /**
      * Apply an input filter to a tag.
      *
      * This is called by default in {@link modTag::process()} after the tag
@@ -626,42 +664,25 @@ abstract class modTag {
      * @see modElement::filterInput()
      */
     public function filterInput() {
-        $filter= null;
-        if (!isset ($this->_filters['input'])) {
-            if (!$inputFilterClass= $this->get('input_filter')) {
-                $inputFilterClass= $this->modx->getOption('input_filter',null,'filters.modInputFilter');
-            }
-            if ($filterClass= $this->modx->loadClass($inputFilterClass, '', false, true)) {
-                if ($filter= new $filterClass($this->modx)) {
-                    $this->_filters['input']= $filter;
-                }
-            }
-        }
-        if (isset ($this->_filters['input']) && $this->_filters['input'] instanceof modInputFilter) {
-            $this->_filters['input']->filter($this);
+        $filter = $this->getInputFilter();
+        if ($filter !== null && $filter instanceof modInputFilter) {
+            $filter->filter($this);
         }
     }
+
     /**
      * Apply an output filter to a tag.
      *
      * Call this method in your {modTag::process()} implementation when it is
      * appropriate, typically once all processing has been completed, but before
      * any caching takes place.
+     * 
+     * @see modElement::filterOutput()
      */
     public function filterOutput() {
-        $filter= null;
-        if (!isset ($this->_filters['output'])) {
-            if (!$outputFilterClass= $this->get('output_filter')) {
-                $outputFilterClass= $this->modx->getOption('output_filter',null,'filters.modOutputFilter');
-            }
-            if ($filterClass= $this->modx->loadClass($outputFilterClass, '', false, true)) {
-                if ($filter= new $filterClass($this->modx)) {
-                    $this->_filters['output']= $filter;
-                }
-            }
-        }
-        if (isset ($this->_filters['output']) && $this->_filters['output'] instanceof modOutputFilter) {
-            $this->_filters['output']->filter($this);
+        $filter = $this->getOutputFilter();
+        if ($filter !== null && $filter instanceof modOutputFilter) {
+            $filter->filter($this);
         }
     }
 
@@ -944,7 +965,7 @@ class modLinkTag extends modTag {
                             if (is_numeric($scheme)) $scheme = (integer) $scheme;
                         }
                         foreach ($this->_properties as $propertyKey => $propertyValue) {
-                            if (in_array($propertyKey, array('context', 'scheme','filter_commands','filter_modifiers'))) continue;
+                            if (in_array($propertyKey, array('context', 'scheme'))) continue;
                             $qs[]= "{$propertyKey}={$propertyValue}";
                         }
                         if ($qs= implode('&', $qs)) {

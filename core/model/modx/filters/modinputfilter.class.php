@@ -34,6 +34,8 @@
  */
 class modInputFilter {
     public $modx= null;
+    private $_commands= null;
+    private $_modifiers= null;
 
     function __construct(modX &$modx) {
         $this->modx = &$modx;
@@ -54,10 +56,37 @@ class modInputFilter {
             $name= substr($output, 0, $splitPos);
             $modifiers= substr($output, $splitPos);
             if (preg_match_all('~:([^:=]+)(?:=`(.*?)`(?=:[^:=]+|$))?~s', $modifiers, $matches)) {
-                $element->_properties['filter_commands'] = $matches[1]; /* modifier commands */
-                $element->_properties['filter_modifiers'] = $matches[2]; /* modifier values */
+                $this->_commands = $matches[1]; /* modifier commands */
+                $this->_modifiers = $matches[2]; /* modifier values */
             }
         }
         $element->set('name', $name);
+    }
+
+    /**
+     * Indicates if the element has any input filter commands.
+     *
+     * @return boolean True if the input filter has commands to execute.
+     */
+    public function hasCommands() {
+        return !empty($this->_commands);
+    }
+
+    /**
+     * Returns a list of filter input commands to be applied through output filtering.
+     *
+     * @return array||null An array of filter commands or null if no commands exist.
+     */
+    public function & getCommands() {
+        return $this->_commands;
+    }
+
+    /**
+     * Returns a list of filter input modifiers corresponding to the input commands.
+     *
+     * @return array||null An array of filter modifiers for corresponding commands.
+     */
+    public function & getModifiers() {
+        return $this->_modifiers;
     }
 }
