@@ -14,7 +14,7 @@
 
     <!-- Set the project version -->
     <property name="xpdo.core.version" value="2.0.0" />
-    <property name="xpdo.core.release" value="rc2" />
+    <property name="xpdo.core.release" value="rc3" />
 
     <!-- Set some common build properties -->
     <property name="build.dir" value="${basedir}" />

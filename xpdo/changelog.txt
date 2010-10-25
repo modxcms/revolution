@@ -1,10 +1,12 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.0.0-rc3 (October 25, 2010)
+====================================
 - Add xPDO::getIterator() allowing more efficient traversing of result sets
 - Add script to upgrade older xPDO mysql models to SCHEMA_VERSION 1.1 
 - Add missing attributes in xPDOSimpleObject map index element
 - Do not generate primary key index for xPDOSimpleObject derivatives
-- Introduce xPDO::SCHEMA_VERSION and set it to 1.1 to distinguish new format for indexes.
+- Introduce xPDO::SCHEMA_VERSION and set it to 1.1 to distinguish new format for indexes
 
 xPDO 2.0.0-rc2 (October 20, 2010)
 ====================================
