@@ -26,7 +26,7 @@ MODx.panel.Welcome = function(config) {
             xtype: 'portal'
             ,id: 'modx-welcome-portal'
             ,items: [{
-                columnWidth: .47
+                columnWidth: .48
                 ,id: 'modx-welcome-col-left'
                 ,defaults: {
                     height: 300
@@ -61,7 +61,7 @@ MODx.panel.Welcome = function(config) {
                     ,hidden: MODx.hasViewUser == 1 ? false : true
                 }]
             },{
-                columnWidth: .47
+                columnWidth: .48
                 ,id: 'modx-welcome-col-right'
                 ,defaults: {
                     height: 300

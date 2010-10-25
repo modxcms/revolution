@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2500] Improved CSS on welcome page for Fx users
 - [#2532] Improved Resource tree icons to better shown when a Resource has children as opposed to when it is marked as a container
 - [#2602] Improved language on Users access permissions grid to clarify action
 - [#2614] Expand comment field on modUserProfile to handle more than 255 characters
