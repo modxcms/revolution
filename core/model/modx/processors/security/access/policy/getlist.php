@@ -42,26 +42,12 @@ if (isset($scriptProperties['combo'])) {
 
 foreach ($policies as $key => $policy) {
     $policyArray = $policy->toArray();
-
-    $menu = array();
-    $menu[] = array(
-        'text' => $modx->lexicon('edit'),
-        'handler' => 'this.editPolicy',
-    );
-    $menu[] = array(
-        'text' => $modx->lexicon('duplicate'),
-        'handler' => 'this.confirm.createDelegate(this,["duplicate","policy_duplicate_confirm"])',
-    );
-    /* dont allow user to remove resource/admin policies */
+    $cls = 'pedit';
     if ($policy->get('name') != 'Resource' && $policy->get('name') != 'Administrator') {
-        $menu[] = '-';
-        $menu[] = array(
-            'text' => $modx->lexicon('remove'),
-            'handler' => 'this.confirm.createDelegate(this,["remove","policy_remove_confirm"])',
-        );
+        $cls .= ' premove';
     }
-
-    $policyArray['menu'] = $menu;
+    $policyArray['cls'] = $cls;
+    
     $data[] = $policyArray;
 }
 

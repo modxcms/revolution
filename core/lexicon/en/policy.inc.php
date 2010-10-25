@@ -34,4 +34,6 @@ $_lang['policy_property_remove'] = 'Delete Access Policy Property';
 $_lang['policy_property_specify_name'] = 'Please specify a policy property name:';
 $_lang['policy_remove'] = 'Remove Policy';
 $_lang['policy_remove_confirm'] = 'Are you sure you want to remove this access policy?';
-$_lang['policy_update'] = 'Update Access Policy';
+$_lang['policy_remove_multiple'] = 'Remove Policies';
+$_lang['policy_remove_multiple_confirm'] = 'Are you sure you want to remove these access policies? This is irreversible.';
+$_lang['policy_update'] = 'Update Policy';
