@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2613] Ensure User Groups in mgr are sorted alphanumerically
 - [#2599] Fixed issue where Add Element to Property Set window form values were not cleared on second loading
 - [#2596] Fixed issue where User Groups could not be removed
 - [#2542] Fixed hardcoded language lexicon load reference in policy/get processor

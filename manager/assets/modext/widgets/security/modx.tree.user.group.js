@@ -97,14 +97,18 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
                     });
                     m.push('-');
                 }
-                m.push({
-                    text: _('user_group_create')
-                    ,handler: this.createUserGroup
-                });
-                m.push({
-                    text: _('user_group_update')
-                    ,handler: this.updateUserGroup
-                });
+                if (ui.hasClass('pcreate')) {
+                    m.push({
+                        text: _('user_group_create')
+                        ,handler: this.createUserGroup
+                    });
+                }
+                if (ui.hasClass('pupdate')) {
+                    m.push({
+                        text: _('user_group_update')
+                        ,handler: this.updateUserGroup
+                    });
+                }
                 if (ui.hasClass('premove')) {
                     m.push('-');
                     m.push({

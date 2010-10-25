@@ -10,35 +10,39 @@
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
+/* get default properties */
 $scriptProperties['id'] = !isset($scriptProperties['id']) ? 0 : str_replace('n_ug_','',$scriptProperties['id']);
-
+$sort = $modx->getOption('sort',$scriptProperties,'name');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $showAnonymous = $modx->getOption('showAnonymous',$scriptProperties,true);
 
-$usergroup = $modx->getObject('modUserGroup',$scriptProperties['id']);
-$groups = $modx->getCollection('modUserGroup',array('parent' => $scriptProperties['id']));
+/* get current User Group */
+if (!empty($scriptProperties['id'])) {
+    $usergroup = $modx->getObject('modUserGroup',$scriptProperties['id']);
+} else { $usergroup = null; }
+
+/* build query */
+$c = $modx->newQuery('modUserGroup');
+$c->where(array(
+    'parent' => $scriptProperties['id'],
+));
+$c->sortby($sort,$dir);
+$groups = $modx->getCollection('modUserGroup',$c);
 
 $list = array();
 if ($showAnonymous && empty($scriptProperties['id'])) {
-    $menu = array();
-    $menu[] = array(
-        'text' => $modx->lexicon('user_group_update'),
-        'handler' => 'function(itm,e) {
-            this.update(itm,e);
-        }',
-    );
+    $cls = 'icon-group';
+    $cls .= ' pupdate';
     $list[] = array(
         'text' => '('.$modx->lexicon('anonymous').')',
         'id' => 'n_ug_0',
         'leaf' => true,
         'type' => 'usergroup',
-        'cls' => 'icon-group',
-        'menu' => array(
-            'items' => $menu,
-        ),
+        'cls' => $cls,
     );
 }
 foreach ($groups as $group) {
-    $cls = 'icon-group padduser';
+    $cls = 'icon-group padduser pcreate pupdate';
     if ($group->get('id') != 1) {
         $cls .= ' premove';
     }
