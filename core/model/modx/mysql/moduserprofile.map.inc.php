@@ -224,8 +224,7 @@ $xpdo_meta_map['modUserProfile']= array (
     ),
     'comment' => 
     array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
+      'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

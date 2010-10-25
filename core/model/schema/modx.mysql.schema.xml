@@ -1083,7 +1083,7 @@
         <field key="zip" dbtype="varchar" precision="25" phptype="string" null="false" default="" />
         <field key="fax" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="photo" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="comment" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="comment" dbtype="text" phptype="string" null="false" default="" />
         <field key="website" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="extended" dbtype="text" phptype="json" null="true" index="fulltext" indexgrp="extended" />
         
