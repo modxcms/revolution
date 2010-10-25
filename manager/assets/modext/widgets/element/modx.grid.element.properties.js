@@ -198,7 +198,11 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                 ,elementType: this.config.elementType
             });
         }
-        if (this.mask) { this.mask.show(); }
+        if (!this.mask) {
+            this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+        }
+        this.mask.show();
+        
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'element/propertyset.php'
             ,params: p
@@ -207,7 +211,12 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                     this.getStore().commitChanges();
                     this.changePropertySet(cb);
                     this.onDirty();
-                    if (this.mask) { this.mask.hide(); }
+                    this.mask.hide();
+                    MODx.msg.status({
+                        title: _('success')
+                        ,message: _('save_successful')
+                        ,dontHide: r.message != '' ? true : false
+                    });
                 },scope:this}
             }
         });
