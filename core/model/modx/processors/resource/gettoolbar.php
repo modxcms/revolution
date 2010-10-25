@@ -31,17 +31,17 @@ if ($modx->hasPermission('new_document')) {
         'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'\");");',
     );
     $items[] = array(
-        'icon' => $p.'link_add.png',
+        'icon' => $p.'page_white_link.png',
         'tooltip' => $modx->lexicon('add_weblink'),
         'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'&class_key=modWebLink\");");',
     );
     $items[] = array(
-        'icon' => $p.'new-symlink.png',
+        'icon' => $p.'page_white_copy.png',
         'tooltip' => $modx->lexicon('add_symlink'),
         'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'&class_key=modSymLink\");");',
     );
     $items[] = array(
-        'icon' => $p.'new-static-resource.png',
+        'icon' => $p.'page_white_gear.png',
         'tooltip' => $modx->lexicon('static_resource_new'),
         'handler' => 'new Function("this.redirect(\"index.php?a='.$actions['resource/create'].'&class_key=modStaticResource\");");',
     );

@@ -913,8 +913,14 @@ html #modx-topnav ul.modx-subnav li a:hover{
 
 
 /* icons */
-.folder .x-tree-node-icon {background-image:url(../../../assets/ext3/resources/images/default/tree/folder.gif) !important;}
-.weblink .x-tree-node-icon {background-image:url(../images/restyle/icons/weblink.gif) !important;}
+.icon-resource .x-tree-node-icon {background-image:url(../images/restyle/icons/page_white.png) !important;}
+
+.icon-folder .x-tree-node-icon {background-image:url(../images/restyle/icons/folder_page_white.png) !important;}
+.haschildren .x-tree-node-icon {background-image:url(../images/restyle/icons/folder.png) !important;}
+
+.icon-folder .x-tree-node-icon {background-image:url(../images/restyle/icons/folder.png) !important;}
+.haschildren .x-tree-node-icon {background-image:url(../images/restyle/icons/folder_page_white.png) !important;}
+
 
 .icon-chunk .x-tree-node-icon { background-image:url(../images/restyle/icons/chunk.png) !important; }
 .icon-plugin .x-tree-node-icon { background-image:url(../images/restyle/icons/plugin.png) !important; }
@@ -924,9 +930,9 @@ html #modx-topnav ul.modx-subnav li a:hover{
 
 .icon-context .x-tree-node-icon { background-image:url(../images/restyle/icons/context.png) !important; }
 
-.icon-symlink .x-tree-node-icon { background-image:url(../images/restyle/icons/symlink.png) !important; }
-.icon-weblink .x-tree-node-icon { background-image:url(../images/restyle/icons/weblink.png) !important; }
-.icon-staticresource .x-tree-node-icon { background-image:url(../images/restyle/icons/static-resource.png) !important; }
+.icon-symlink .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_copy.png) !important; }
+.icon-weblink .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_link.png) !important; }
+.icon-staticresource .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_gear.png) !important; }
 
 .icon-menu .x-tree-node-icon { background-image:url(../images/restyle/icons/resources.png) !important; }
 .icon-action .x-tree-node-icon { background-image:url(../images/restyle/icons/application_osx_terminal.png) !important; }
