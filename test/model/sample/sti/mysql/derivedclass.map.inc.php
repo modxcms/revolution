@@ -1,6 +1,7 @@
 <?php
 $xpdo_meta_map['derivedClass']= array (
   'package' => 'sample.sti',
+  'version' => '1.1',
   'fields' => 
   array (
     'class_key' => 'derivedClass',

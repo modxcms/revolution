@@ -272,6 +272,9 @@ abstract class xPDOGenerator {
                             if (isset ($this->model['package'])) {
                                 $this->map[$this->className]['package']= $this->model['package'];
                             }
+                            if (isset ($this->model['version'])) {
+                                $this->map[$this->className]['version']= $this->model['version'];
+                            }
                             break;
                         case 'table' :
                             $this->map[$this->className]['table']= $attrValue;

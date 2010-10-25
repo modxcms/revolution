@@ -1,6 +1,7 @@
 <?php
 $xpdo_meta_map['baseClass']= array (
   'package' => 'sample.sti',
+  'version' => '1.1',
   'table' => 'sti_objects',
   'fields' => 
   array (
