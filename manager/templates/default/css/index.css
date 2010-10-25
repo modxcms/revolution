@@ -918,10 +918,6 @@ html #modx-topnav ul.modx-subnav li a:hover{
 .icon-folder .x-tree-node-icon {background-image:url(../images/restyle/icons/folder_page_white.png) !important;}
 .haschildren .x-tree-node-icon {background-image:url(../images/restyle/icons/folder.png) !important;}
 
-.icon-folder .x-tree-node-icon {background-image:url(../images/restyle/icons/folder.png) !important;}
-.haschildren .x-tree-node-icon {background-image:url(../images/restyle/icons/folder_page_white.png) !important;}
-
-
 .icon-chunk .x-tree-node-icon { background-image:url(../images/restyle/icons/chunk.png) !important; }
 .icon-plugin .x-tree-node-icon { background-image:url(../images/restyle/icons/plugin.png) !important; }
 .icon-snippet .x-tree-node-icon { background-image:url(../images/restyle/icons/snippet.png) !important; }
