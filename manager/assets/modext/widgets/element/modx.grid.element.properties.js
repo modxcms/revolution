@@ -377,15 +377,17 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
     }
     
     ,exportProperties: function (btn,e) {
+        var id = Ext.getCmp('modx-combo-property-set').getValue();
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'element/index.php'
             ,params: {
                 action: 'exportProperties'
                 ,data: this.encode()
+                ,id: id
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    location.href = MODx.config.connectors_url+'element/index.php?action=exportProperties&download='+r.message+'&HTTP_MODAUTH='+MODx.siteId;
+                    location.href = MODx.config.connectors_url+'element/index.php?action=exportProperties&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
                 },scope:this}
             }
         });

@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2507] Export properties now prefixes filename with property set name
 - [#2624] Improved Users grid to allow batch editing from right-click context menu
 - [#2609] Remove filter commands and modifiers from scriptProperties passed to modElement/modTag instances
 - [#2500] Improved CSS on welcome page for Fx users
