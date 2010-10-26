@@ -198,10 +198,12 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                 ,elementType: this.config.elementType
             });
         }
-        if (!this.mask) {
-            this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
-        }
-        this.mask.show();
+        try {
+            if (!this.mask) {
+                this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+            }
+            if (this.mask) { this.mask.show(); }
+        } catch (e) { }
         
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'element/propertyset.php'
@@ -211,7 +213,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                     this.getStore().commitChanges();
                     this.changePropertySet(cb);
                     this.onDirty();
-                    this.mask.hide();
+                    if (this.mask) { this.mask.hide(); }
                     MODx.msg.status({
                         title: _('success')
                         ,message: _('save_successful')
