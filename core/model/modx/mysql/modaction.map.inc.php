@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modAction']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'actions',
   'fields' => 
   array (

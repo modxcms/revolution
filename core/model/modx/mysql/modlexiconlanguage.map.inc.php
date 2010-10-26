@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modLexiconLanguage']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'lexicon_languages',
   'fields' => 
   array (

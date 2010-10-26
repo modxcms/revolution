@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modTransportProvider']= array (
   'package' => 'modx.transport',
+  'version' => '1.1',
   'table' => 'transport_providers',
   'fields' => 
   array (

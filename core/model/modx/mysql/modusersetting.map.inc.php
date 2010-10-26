@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modUserSetting']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'user_settings',
   'fields' => 
   array (

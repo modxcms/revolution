@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modUserGroup']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'membergroup_names',
   'fields' => 
   array (

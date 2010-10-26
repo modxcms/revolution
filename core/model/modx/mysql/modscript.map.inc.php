@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modScript']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'site_script',
   'fields' => 
   array (

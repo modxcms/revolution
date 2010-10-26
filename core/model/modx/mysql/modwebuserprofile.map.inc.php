@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modWebUserProfile']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'web_user_attributes',
   'fields' => 
   array (

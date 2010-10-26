@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modResourceMetatag']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'site_content_metatags',
   'fields' => 
   array (

@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modDbRegisterTopic']= array (
   'package' => 'modx.registry.db',
+  'version' => '1.1',
   'table' => 'register_topics',
   'fields' => 
   array (

@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modEventLog']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'event_log',
   'fields' => 
   array (

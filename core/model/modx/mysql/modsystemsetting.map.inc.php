@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modSystemSetting']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'system_settings',
   'fields' => 
   array (

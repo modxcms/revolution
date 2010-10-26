@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modResourceKeyword']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'keyword_xref',
   'fields' => 
   array (

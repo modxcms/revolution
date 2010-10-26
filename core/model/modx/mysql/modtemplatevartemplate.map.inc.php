@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modTemplateVarTemplate']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'site_tmplvar_templates',
   'fields' => 
   array (

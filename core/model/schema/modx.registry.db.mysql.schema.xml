@@ -21,7 +21,7 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODx db registry package -->
-<model package="modx.registry.db" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="registry.db">
+<model package="modx.registry.db" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="registry.db" version="1.1">
     <object class="modDbRegisterQueue" table="register_queues" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="options" dbtype="mediumtext" phptype="array" />

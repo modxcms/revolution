@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modAccessPolicy']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'access_policies',
   'fields' => 
   array (

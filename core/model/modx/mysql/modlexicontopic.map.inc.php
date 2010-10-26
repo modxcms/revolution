@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modLexiconTopic']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'lexicon_topics',
   'fields' => 
   array (

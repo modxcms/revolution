@@ -21,7 +21,7 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODx transport package -->
-<model package="modx.transport" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="transport">
+<model package="modx.transport" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="transport" version="1.1">
     <object class="modTransportProvider" table="transport_providers" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="mediumtext" phptype="string" />

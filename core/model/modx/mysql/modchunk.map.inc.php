@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modChunk']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'site_htmlsnippets',
   'fields' => 
   array (

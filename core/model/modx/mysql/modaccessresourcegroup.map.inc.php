@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modAccessResourceGroup']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'access_resource_groups',
   'fields' => 
   array (

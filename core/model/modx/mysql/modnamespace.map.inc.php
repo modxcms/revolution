@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modNamespace']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'namespaces',
   'fields' => 
   array (

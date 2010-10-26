@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modElementPropertySet']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'element_property_sets',
   'fields' => 
   array (

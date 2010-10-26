@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modContextSetting']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'context_setting',
   'fields' => 
   array (

@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modSession']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'session',
   'fields' => 
   array (

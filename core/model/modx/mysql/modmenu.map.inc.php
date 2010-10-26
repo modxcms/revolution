@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modMenu']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'menus',
   'fields' => 
   array (

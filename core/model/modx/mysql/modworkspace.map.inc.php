@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modWorkspace']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'workspaces',
   'fields' => 
   array (
