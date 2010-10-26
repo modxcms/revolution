@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2645] Set Resources unpublished when duplicating
 - Update to xPDO v2.0.0-rc3
 - [#2501] Fixed menu not being loaded on immediately-added policies without page refresh, added bulk actions to policy grid
 - [#2505] Save Property Set now shows feedback and success message
