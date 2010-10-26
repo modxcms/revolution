@@ -253,6 +253,148 @@ unset ($collection, $c, $attributes);
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged all default modClassMap objects.'); flush();
 
+/* modEvent collection */
+$events = include dirname(__FILE__).'/data/transport.core.events.php';
+if (is_array($events) && !empty($events)) {
+    $attributes = array (
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UNIQUE_KEY => array ('name'),
+    );
+    foreach ($events as $evt) {
+        $package->put($evt, $attributes);
+    }
+    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' default events.'); flush();
+} else {
+    $xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not find default events!'); flush();
+}
+unset ($events, $evt, $attributes);
+
+/* modSystemSetting collection */
+$settings = require_once dirname(__FILE__).'/data/transport.core.system_settings.php';
+if (!is_array($settings) || empty($settings)) { $xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not package in settings!'); flush(); }
+$attributes= array (
+    xPDOTransport::PRESERVE_KEYS => true
+);
+foreach ($settings as $setting) {
+    switch ($setting->get('key')) {
+        case 'session_cookie_path' :
+            $attributes[xPDOTransport::UPDATE_OBJECT]= true;
+            $setting->set('value', '/');
+            break;
+        default :
+            $attributes[xPDOTransport::UPDATE_OBJECT]= false;
+            break;
+    }
+    $package->put($setting, $attributes);
+}
+
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($settings).' default system settings.'); flush();
+unset ($settings, $setting, $attributes);
+
+/* modContextSetting collection */
+$collection = array ();
+include dirname(__FILE__).'/data/transport.core.context_settings.php';
+$attributes= array(
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => false,
+);
+foreach ($collection as $c) {
+    $package->put($c, $attributes);
+}
+
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default context settings.'); flush();
+unset ($collection, $c, $attributes);
+
+/* modUserGroup */
+$collection = array ();
+include dirname(__FILE__).'/data/transport.core.usergroups.php';
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => false,
+);
+foreach ($collection as $c) {
+    $package->put($c, $attributes);
+}
+
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default user groups.'); flush();
+unset ($collection, $c, $attributes);
+
+/* modUserGroupRole */
+$collection = array ();
+include dirname(__FILE__).'/data/transport.core.usergrouproles.php';
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => false,
+);
+foreach ($collection as $c) {
+    $package->put($c, $attributes);
+}
+
+$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default roles Member and SuperUser.'); flush();
+unset ($collection, $c, $attributes);
+
+/* modAccessPolicyTemplateGroups */
+$templateGroups = include dirname(__FILE__).'/data/transport.core.accesspolicytemplates.php';
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UNIQUE_KEY => array('name'),
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::RELATED_OBJECTS => true,
+    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+        'Templates' => array(
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UNIQUE_KEY => array('template_group','name'),
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::RELATED_OBJECTS => true,
+            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+                'Permissions' => array (
+                    xPDOTransport::PRESERVE_KEYS => false,
+                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UNIQUE_KEY => array ('template','name'),
+                ),
+            )
+        )
+    )
+);
+if (is_array($templateGroups)) {
+    foreach ($templateGroups as $templateGroup) {
+        $package->put($templateGroup, $attributes);
+    }
+    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($templateGroups).' default Access Policy Template Groups.'); flush();
+} else {
+    $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not package in Access Policy Templates and Template Groups.');
+}
+unset ($templateGroups, $templateGroup, $attributes);
+
+/* modAccessPolicy */
+$policies = include dirname(__FILE__).'/data/transport.core.accesspolicies.php';
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UNIQUE_KEY => array('name'),
+    xPDOTransport::UPDATE_OBJECT => true,
+);
+if (is_array($policies)) {
+    $ct = count($policies);
+    $idx = 0;
+    foreach ($policies as $policy) {
+        $idx++;
+        if ($idx == $ct) {
+            $attributes['resolve'][] = array (
+                'type' => 'php',
+                'source' => dirname(__FILE__) . '/resolvers/resolve.policies.php',
+            );
+        }
+        $package->put($policy, $attributes);
+    }
+    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($policies).' default Access Policies.'); flush();
+} else {
+    $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not package in Access Policies.');
+}
+unset ($policies,$policy,$attributes);
+
+
+
 /* modContext = web */
 $c = $xpdo->newObject('modContext');
 $c->fromArray(array (
@@ -386,124 +528,6 @@ unset ($fileset, $attributes);
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in connectors.'); flush();
 
-/* modEvent collection */
-$events = include dirname(__FILE__).'/data/transport.core.events.php';
-if (is_array($events) && !empty($events)) {
-    $attributes = array (
-        xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => true,
-        xPDOTransport::UNIQUE_KEY => array ('name'),
-    );
-    foreach ($events as $evt) {
-        $package->put($evt, $attributes);
-    }
-    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' default events.'); flush();
-} else {
-    $xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not find default events!'); flush();
-}
-unset ($events, $evt, $attributes);
-
-/* modSystemSetting collection */
-$settings = require_once dirname(__FILE__).'/data/transport.core.system_settings.php';
-if (!is_array($settings) || empty($settings)) { $xpdo->log(xPDO::LOG_LEVEL_FATAL,'Could not package in settings!'); flush(); }
-$attributes= array (
-    xPDOTransport::PRESERVE_KEYS => true
-);
-foreach ($settings as $setting) {
-    switch ($setting->get('key')) {
-        case 'session_cookie_path' :
-            $attributes[xPDOTransport::UPDATE_OBJECT]= true;
-            $setting->set('value', '/');
-            break;
-        default :
-            $attributes[xPDOTransport::UPDATE_OBJECT]= false;
-            break;
-    }
-    $package->put($setting, $attributes);
-}
-
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($settings).' default system settings.'); flush();
-unset ($settings, $setting, $attributes);
-
-/* modContextSetting collection */
-$collection = array ();
-include dirname(__FILE__).'/data/transport.core.context_settings.php';
-$attributes= array(
-    xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => false,
-);
-foreach ($collection as $c) {
-    $package->put($c, $attributes);
-}
-
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default context settings.'); flush();
-unset ($collection, $c, $attributes);
-
-/* modUserGroup */
-$collection = array ();
-include dirname(__FILE__).'/data/transport.core.usergroups.php';
-$attributes = array (
-    xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => false,
-);
-foreach ($collection as $c) {
-    $package->put($c, $attributes);
-}
-
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default user groups.'); flush();
-unset ($collection, $c, $attributes);
-
-/* modUserGroupRole */
-$collection = array ();
-include dirname(__FILE__).'/data/transport.core.usergrouproles.php';
-$attributes = array (
-    xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => false,
-);
-foreach ($collection as $c) {
-    $package->put($c, $attributes);
-}
-
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default roles Member and SuperUser.'); flush();
-unset ($collection, $c, $attributes);
-
-/* modAccessPolicy */
-$templateGroups = include dirname(__FILE__).'/data/transport.core.accesspolicies.php';
-$attributes = array (
-    xPDOTransport::PRESERVE_KEYS => false,
-    xPDOTransport::UNIQUE_KEY => array('name'),
-    xPDOTransport::UPDATE_OBJECT => true,
-    xPDOTransport::RELATED_OBJECTS => true,
-    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-        'Templates' => array(
-            xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UNIQUE_KEY => array('template_group','name'),
-            xPDOTransport::UPDATE_OBJECT => true,
-            xPDOTransport::RELATED_OBJECTS => true,
-            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-                'Permissions' => array (
-                    xPDOTransport::PRESERVE_KEYS => false,
-                    xPDOTransport::UPDATE_OBJECT => true,
-                    xPDOTransport::UNIQUE_KEY => array ('template','name'),
-                ),
-                'Policies' => array (
-                    xPDOTransport::PRESERVE_KEYS => false,
-                    xPDOTransport::UPDATE_OBJECT => true,
-                    xPDOTransport::UNIQUE_KEY => array ('name'),
-                ),
-            )
-        )
-    )
-);
-if (is_array($templateGroups)) {
-    foreach ($templateGroups as $templateGroup) {
-        $package->put($templateGroup, $attributes);
-    }
-    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($templateGroups).' default Access Policy Template Groups.'); flush();
-} else {
-    $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not package in Access Policies and Templates.');
-}
-unset ($templateGroups, $templateGroup, $attributes);
 
 /* zip up package */
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Beginning to zip up transport package...'); flush();

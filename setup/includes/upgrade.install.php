@@ -280,9 +280,9 @@ if (!$setting) {
                     $permissions = $modx->getCollection('modAccessPermission',array(
                         'policy' => $policy->get('id'),
                     ));
-                    /* add permissions to tpl */
+                    // add permissions to tpl
                     foreach ($permissions as $permission) {
-                        /* prevent duplicate permissions */
+                        // prevent duplicate permissions
                         $permExists = $modx->getObject('modAccessPermission',array(
                             'name' => $permission->get('name'),
                             'template' => $policyTpl->get('id'),
@@ -294,6 +294,7 @@ if (!$setting) {
                             $permission->save();
                         }
                     }
+ 
                 }
             }
         }
