@@ -23,11 +23,6 @@ if ($policy == null) return $modx->error->failure($modx->lexicon('policy_err_nf'
 /* save fields */
 $policy->fromArray($scriptProperties);
 
-/* wipe all the current permissions for that policy */
-$permissions = $modx->removeCollection('modAccessPermission',array(
-    'policy' => $policy->get('id'),
-));
-
 /* now store the permissions into the modAccessPermission table */
 /* and cache the data into the policy table */
 if (isset($scriptProperties['permissions'])) {
@@ -36,17 +31,8 @@ if (isset($scriptProperties['permissions'])) {
 
     $permissions = array();
     foreach ($permissionsArray as $permissionArray) {
-        $permission = $modx->newObject('modAccessPermission');
-        $permission->set('name',$permissionArray['name']);
-        $permission->set('description',$permissionArray['description']);
-        $permission->set('value',1);
-
-        $permissions[] = $permission;
-        /* feed into cache array for policy table */
-        $permData[$permissionArray['name']] = true;
+        $permData[$permissionArray['name']] = $permissionArray['enabled'] ? true : false;
     }
-
-    $policy->addMany($permissions);
     $policy->set('data',$permData);
 }
 

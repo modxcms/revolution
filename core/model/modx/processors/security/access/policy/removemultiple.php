@@ -15,11 +15,17 @@ if (empty($scriptProperties['policies'])) {
 }
 
 $policyIds = explode(',',$scriptProperties['policies']);
+$core = array('Resource','Object','Administrator','Element','Load Only','Load, List and View');
+
 
 foreach ($policyIds as $policyId) {
     /* get policy */
     $policy = $modx->getObject('modAccessPolicy',$policyId);
     if ($policy == null) return $modx->error->failure($modx->lexicon('policy_err_nf'));
+
+    if (!in_array($policy->get('name'),$core)) {
+        continue;
+    }
 
     /* remove policy */
     if ($policy->remove() == false) {

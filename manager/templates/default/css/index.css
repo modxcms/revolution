@@ -1159,3 +1159,7 @@ ul.modx-tag-list li.modx-tag-checked {
     white-space: pre-line;
     padding: 3px;
 }
+
+.modx-policy-permissions-grid td {
+    cursor: pointer;
+}

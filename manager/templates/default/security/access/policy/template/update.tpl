@@ -1,0 +1,1 @@
+<div id="modx-panel-access-policy-template-div"></div>

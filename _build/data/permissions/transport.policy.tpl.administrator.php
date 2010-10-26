@@ -1,6 +1,6 @@
 <?php
 /**
- * The default Permission scheme for the Administrator Policy.
+ * The default Permission scheme for the Administrator Policy Template.
  *
  * @package modx
  */

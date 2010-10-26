@@ -40,14 +40,17 @@ if (isset($scriptProperties['combo'])) {
     );
 }
 
+$core = array('Resource','Object','Administrator','Load Only','Load, List and View');
+
 foreach ($policies as $key => $policy) {
     $policyArray = $policy->toArray();
     $cls = 'pedit';
-    if ($policy->get('name') != 'Resource' && $policy->get('name') != 'Administrator') {
+    if (!in_array($policy->get('name'),$core)) {
         $cls .= ' premove';
     }
     $policyArray['cls'] = $cls;
-    
+
+    unset($policyArray['data']);
     $data[] = $policyArray;
 }
 

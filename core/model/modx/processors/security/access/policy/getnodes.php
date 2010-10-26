@@ -6,11 +6,10 @@
  * @package modx
  * @subpackage processors.security.access.policy
  */
+if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('policy');
 
-if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
-
-if (!isset($scriptProperties['id'])) return $modx->error->failure('Id not specified in request!');
+if (!isset($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('invalid_data'));
 
 $policyAttr = explode('_', $scriptProperties['id']);
 $policyId = count($policyAttr) == 2 ? $policyAttr[1] : '';

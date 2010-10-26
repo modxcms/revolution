@@ -18,10 +18,10 @@ $modx->lexicon->load('policy');
 if (empty($scriptProperties['name'])) $modx->error->addError('name',$modx->lexicon('policy_err_name_ns'));
 
 /* make sure policy with name does not already exist */
-$ae = $modx->getObject('modAccessPolicy',array(
+$alreadyExists = $modx->getObject('modAccessPolicy',array(
     'name' => $scriptProperties['name'],
 ));
-if ($ae != null) $modx->error->addError('name',$modx->lexicon('policy_err_ae'));
+if ($alreadyExists) $modx->error->addError('name',$modx->lexicon('policy_err_ae',array('name' => $scriptProperties['name'])));
 
 /* if errors, return */
 if ($modx->error->hasError()) {
@@ -32,9 +32,20 @@ if ($modx->error->hasError()) {
 $policy = $modx->newObject('modAccessPolicy');
 $policy->fromArray($scriptProperties);
 
+/* get policy template and set permissions */
+$template = $modx->getObject('modAccessPolicyTemplate',$scriptProperties['template']);
+if (!$template) return $modx->error->failure($modx->lexicon('policy_template_err_nf'));
+
+$permissions = $template->getMany('Permissions');
+$permList = array();
+foreach ($permissions as $permission) {
+    $permList[$permission->get('name')] = true;
+}
+$policy->set('data',$permList);
+
 /* save policy */
 if ($policy->save() == false) {
-    return $modx->error->failure('Error saving policy!');
+    return $modx->error->failure($modx->lexicon('policy_err_save'));
 }
 
 /* log manager action */

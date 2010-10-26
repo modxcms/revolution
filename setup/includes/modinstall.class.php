@@ -400,6 +400,8 @@ class modInstall {
             }
             unset($workspace);
 
+            $modx =& $this->xpdo;
+
             /* if new install */
             if ($mode == modInstall::MODE_NEW) {
                 include MODX_SETUP_PATH.'includes/new.install.php';

@@ -48,17 +48,12 @@ MODx.grid.AccessPolicy = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-access-policy'
         ,url: MODx.config.connectors_url+'security/access/policy.php'
-        ,fields: ['id','name','description','class','data','parent','cls']
+        ,fields: ['id','name','description','class','data','parent','template','cls']
         ,paging: true
         ,autosave: true
         ,remoteSort: true
         ,sm: this.sm
         ,columns: [this.sm,{
-            header: _('id')
-            ,dataIndex: 'id'
-            ,width: 40
-            ,sortable: true
-        },{
             header: _('policy_name')
             ,dataIndex: 'name'
             ,width: 200
@@ -69,6 +64,11 @@ MODx.grid.AccessPolicy = function(config) {
             ,dataIndex: 'description'
             ,width: 375
             ,editor: { xtype: 'textfield' }
+        },{
+            header: _('policy_template')
+            ,dataIndex: 'template'
+            ,width: 375
+            ,editor: { xtype: 'modx-combo-access-policy-template' ,renderer: true }
         }]
         ,tbar: [{
             text: _('policy_create')
@@ -133,7 +133,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
                 if (m.length > 0) m.push('-');
                 m.push({
                     text: _('policy_remove')
-                    ,handler: this.confirm.createDelegate(this,["remove","policy_duplicate_confirm"])
+                    ,handler: this.confirm.createDelegate(this,["remove","policy_remove_confirm"])
                 });                
             }
         }
@@ -188,6 +188,13 @@ MODx.window.CreateAccessPolicy = function(config) {
             ,xtype: 'textfield'
             ,anchor: '90%'
         },{
+            fieldLabel: _('policy_template')
+            ,name: 'template'
+            ,hiddenName: 'template'
+            ,id: 'modx-cap-template'
+            ,xtype: 'modx-combo-access-policy-template'
+            ,anchor: '90%'
+        },{
             fieldLabel: _('description')
             ,name: 'description'
             ,id: 'modx-cap-description'
@@ -208,3 +215,24 @@ MODx.window.CreateAccessPolicy = function(config) {
 };
 Ext.extend(MODx.window.CreateAccessPolicy,MODx.Window);
 Ext.reg('modx-window-access-policy-create',MODx.window.CreateAccessPolicy);
+
+
+MODx.combo.AccessPolicyTemplate = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'template'
+        ,hiddenName: 'template'
+        ,fields: ['id','name','description']
+        ,forceSelection: true
+        ,typeAhead: false
+        ,editable: false
+        ,allowBlank: false
+        ,listWidth: 300
+        ,url: MODx.config.connectors_url+'security/access/policy/template.php'
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
+            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
+    });
+    MODx.combo.AccessPolicyTemplate.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.AccessPolicyTemplate,MODx.combo.ComboBox);
+Ext.reg('modx-combo-access-policy-template',MODx.combo.AccessPolicyTemplate);

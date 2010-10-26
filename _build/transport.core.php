@@ -468,27 +468,42 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default role
 unset ($collection, $c, $attributes);
 
 /* modAccessPolicy */
-$collection = array ();
-include dirname(__FILE__).'/data/transport.core.accesspolicies.php';
+$templateGroups = include dirname(__FILE__).'/data/transport.core.accesspolicies.php';
 $attributes = array (
     xPDOTransport::PRESERVE_KEYS => false,
     xPDOTransport::UNIQUE_KEY => array('name'),
     xPDOTransport::UPDATE_OBJECT => true,
     xPDOTransport::RELATED_OBJECTS => true,
     xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-        'Permissions' => array (
+        'Templates' => array(
             xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UNIQUE_KEY => array('template_group','name'),
             xPDOTransport::UPDATE_OBJECT => true,
-            xPDOTransport::UNIQUE_KEY => array ('policy','name'),
+            xPDOTransport::RELATED_OBJECTS => true,
+            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+                'Permissions' => array (
+                    xPDOTransport::PRESERVE_KEYS => false,
+                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UNIQUE_KEY => array ('template','name'),
+                ),
+                'Policies' => array (
+                    xPDOTransport::PRESERVE_KEYS => false,
+                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UNIQUE_KEY => array ('name'),
+                ),
+            )
         )
     )
 );
-foreach ($collection as $c) {
-    $package->put($c, $attributes);
+if (is_array($templateGroups)) {
+    foreach ($templateGroups as $templateGroup) {
+        $package->put($templateGroup, $attributes);
+    }
+    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($templateGroups).' default Access Policy Template Groups.'); flush();
+} else {
+    $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not package in Access Policies and Templates.');
 }
-
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default access policies.'); flush();
-unset ($collection, $c, $attributes);
+unset ($templateGroups, $templateGroup, $attributes);
 
 /* zip up package */
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Beginning to zip up transport package...'); flush();
