@@ -41,6 +41,10 @@ MODx.grid.UserGroupContext = function(config) {
             ,id: 'modx-ugc-policy-filter'
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
+            ,baseParams: {
+                action: 'getList'
+                ,group: 'Administrator'
+            }
             ,listeners: {
                 'select': {fn:this.filterPolicy,scope:this}
             }
