@@ -539,7 +539,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     }
                     t.originalValue = t.getValue();
                 } else {
-                    t.reset();
+                    t.setValue(this.config.record.template);
                 }
             },this);
         }

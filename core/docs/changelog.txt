@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2641] Fixed issue where template was reset incorrectly when canceled on template change
 - Fixed issue where Permissions were being duplicated on setup due to relational db issue
 - [#2646] Prevent removal/editing of default Administrator policy ACLs to prevent users from accidentally removing access to web context
 - Added modAccessPolicyTemplate and modAccessPolicyTemplateGroup for easier managing and editing of Access Policies, including a UI for managing Access Policy Templates

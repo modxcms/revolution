@@ -451,7 +451,7 @@ Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
                     }
                     t.originalValue = t.getValue();
                 } else {
-                    t.reset();
+                    t.setValue(this.config.record.template);
                 }
             },this);
         }
