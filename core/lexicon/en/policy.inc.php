@@ -6,6 +6,8 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['active_of'] = '[[+active]] of [[+total]]';
+$_lang['active_permissions'] = 'Active Permissions';
 $_lang['no_policy_option'] = ' (no policy) ';
 $_lang['permission'] = 'Permission';
 $_lang['permission_add'] = 'Add Permission';

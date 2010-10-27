@@ -27,6 +27,19 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $c = $modx->newQuery('modAccessPolicyTemplate');
 $count = $modx->getCount('modAccessPolicyTemplate',$c);
 
+
+$subc = $modx->newQuery('modAccessPermission');
+$subc->select('COUNT(`modAccessPermission`.`id`)');
+$subc->where(array(
+    '`modAccessPermission`.`template` = `modAccessPolicyTemplate`.`id`',
+));
+$subc->prepare();
+$c->select(array(
+    'modAccessPolicyTemplate.*',
+));
+$c->select('('.$subc->toSql().') AS '.$modx->escape('total_permissions'));
+
+
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $templates = $modx->getCollection('modAccessPolicyTemplate', $c);

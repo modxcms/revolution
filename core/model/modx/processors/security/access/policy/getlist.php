@@ -27,8 +27,8 @@ $group = $modx->getOption('group',$scriptProperties,'');
 
 /* build query */
 $c = $modx->newQuery('modAccessPolicy');
+$c->innerJoin('modAccessPolicyTemplate','Template');
 if (!empty($group)) {
-    $c->innerJoin('modAccessPolicyTemplate','Template');
     $c->innerJoin('modAccessPolicyTemplateGroup','TemplateGroup','TemplateGroup.id = Template.template_group');
     $c->where(array(
         'TemplateGroup.name' => $group,
@@ -36,14 +36,27 @@ if (!empty($group)) {
 }
 $count = $modx->getCount('modAccessPolicy',$c);
 
+$subc = $modx->newQuery('modAccessPermission');
+$subc->select('COUNT(`modAccessPermission`.`id`)');
+$subc->where(array(
+    '`modAccessPermission`.`template` = `Template`.`id`',
+));
+$subc->prepare();
+$c->select(array(
+    'modAccessPolicy.*',
+));
+$c->select('('.$subc->toSql().') AS '.$modx->escape('total_permissions'));
+
+
 $c->sortby($sortAlias.'.'.$sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
+$c->prepare();
 $policies = $modx->getCollection('modAccessPolicy', $c);
 
 /* iterate */
-$data = array();
+$list = array();
 if (isset($scriptProperties['combo'])) {
-    $data[] = array(
+    $list[] = array(
         'id' => '',
         'name' => $modx->lexicon('no_policy_option'),
     );
@@ -58,9 +71,17 @@ foreach ($policies as $key => $policy) {
         $cls .= ' premove';
     }
     $policyArray['cls'] = $cls;
+    if (!empty($policyArray['total_permissions'])) {
+        $data = $policy->get('data');
+        $policyArray['active_permissions'] = count($data);
+        $policyArray['active_of'] = $modx->lexicon('active_of',array(
+            'active' => $policyArray['active_permissions'],
+            'total' => $policyArray['total_permissions'],
+        ));
+    }
 
     unset($policyArray['data']);
-    $data[] = $policyArray;
+    $list[] = $policyArray;
 }
 
-return $this->outputArray($data,$count);
+return $this->outputArray($list,$count);

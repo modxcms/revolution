@@ -15,6 +15,7 @@ $_lang['perm.change_profile_desc'] = 'User can change their profile.';
 $_lang['perm.charsets_desc'] = 'To view a list of charsets.';
 $_lang['perm.class_map_desc'] = 'To view a list of classes in the Class Map.';
 $_lang['perm.content_types_desc'] = 'The Content Types page.';
+$_lang['perm.copy_desc'] = 'The ability to copy an object.';
 $_lang['perm.countries_desc'] = 'To view a list of countries.';
 $_lang['perm.create_desc'] = 'Basic "create" access on new objects.';
 $_lang['perm.credits_desc'] = 'View the Credits page.';

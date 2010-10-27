@@ -23,7 +23,7 @@ $policies['1']->fromArray(array (
   'description' => 'MODx Resource Policy with all attributes.',
   'parent' => 0,
   'class' => '',
-  'data' => '{"add_children":true,"create":true,"delete":true,"list":true,"load":true,"move":true,"publish":true,"remove":true,"save":true,"steal_lock":true,"undelete":true,"unpublish":true,"view":true}',
+  'data' => '{"add_children":true,"create":true,"copy":true,"delete":true,"list":true,"load":true,"move":true,"publish":true,"remove":true,"save":true,"steal_lock":true,"undelete":true,"unpublish":true,"view":true}',
   'lexicon' => 'permissions',
 ), '', true, true);
 
@@ -67,7 +67,7 @@ $policies['6']->fromArray(array (
   'description' => 'MODx Element policy with all attributes.',
   'parent' => 0,
   'class' => '',
-  'data' => '{"create":true,"delete":true,"list":true,"load":true,"remove":true,"save":true,"view":true}',
+  'data' => '{"create":true,"delete":true,"list":true,"load":true,"remove":true,"save":true,"view":true,"copy":true}',
   'lexicon' => 'permissions',
 ), '', true, true);
 

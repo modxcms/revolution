@@ -48,7 +48,7 @@ MODx.grid.AccessPolicy = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-access-policy'
         ,url: MODx.config.connectors_url+'security/access/policy.php'
-        ,fields: ['id','name','description','class','data','parent','template','cls']
+        ,fields: ['id','name','description','class','data','parent','template','active_permissions','total_permissions','active_of','cls']
         ,paging: true
         ,autosave: true
         ,remoteSort: true
@@ -69,6 +69,11 @@ MODx.grid.AccessPolicy = function(config) {
             ,dataIndex: 'template'
             ,width: 375
             ,editor: { xtype: 'modx-combo-access-policy-template' ,renderer: true }
+        },{
+            header: _('active_permissions')
+            ,dataIndex: 'active_of'
+            ,width: 100
+            ,editable: false
         }]
         ,tbar: [{
             text: _('policy_create')
