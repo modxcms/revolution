@@ -356,6 +356,7 @@ MODx.window.CreateActionDom = function(config) {
             ,name: 'action_id'
             ,hiddenName: 'action_id'
             ,xtype: 'modx-combo-action'
+            ,baseParams: { action: 'getList' ,showNone: 0 }
             ,id: 'modx-'+this.ident+'-action'
             ,anchor: '90%'
         },{
@@ -480,6 +481,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,name: 'action_id'
             ,hiddenName: 'action_id'
             ,xtype: 'modx-combo-action'
+            ,baseParams: { action: 'getList' ,showNone: false }
             ,id: 'modx-'+this.ident+'-action'
             ,anchor: '90%'
         },{

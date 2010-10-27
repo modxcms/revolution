@@ -20,7 +20,7 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'controller');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
-
+$showNone = $modx->getOption('showNone',$scriptProperties,true);
 /* get actions */
 $c = $modx->newQuery('modAction');
 $c->sortby($modx->getSelectColumns('modAction','modAction','',array('namespace')),'ASC');
@@ -32,7 +32,9 @@ $actions = $modx->getCollection('modAction',$c);
 $count = $modx->getCount('modAction');
 
 $list = array();
-$list[] = array('id' => 0, 'controller' => $modx->lexicon('action_none'));
+if (!empty($showNone)) {
+    $list[] = array('id' => 0, 'controller' => $modx->lexicon('action_none').$showNone);
+}
 foreach ($actions as $action) {
     $actionArray = $action->toArray();
 
