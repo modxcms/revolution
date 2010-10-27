@@ -405,6 +405,9 @@ $_lang['setting_request_param_id_desc'] = 'The name of the GET parameter to iden
 $_lang['setting_resolve_hostnames'] = 'Resolve hostnames';
 $_lang['setting_resolve_hostnames_desc'] = 'Do you want MODx to try to resolve your visitors\' hostnames when they visit your site? Resolving hostnames may create some extra server load, although your visitors won\'t notice this in any way.';
 
+$_lang['setting_resource_tree_node_name'] = 'Resource Tree Node Field';
+$_lang['setting_resource_tree_node_name_desc'] = 'Specify the Resource field to use when rendering the nodes in the Resource Tree. Defaults to pagetitle, although any Resource field can be used, such as menutitle, alias, longtitle, etc.';
+
 $_lang['setting_richtext_default'] = 'Richtext Default';
 $_lang['setting_richtext_default_desc'] = 'Select \'Yes\' to make all new Resources use the Richtext Editor by default.';
 

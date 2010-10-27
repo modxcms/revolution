@@ -52,6 +52,7 @@ if (empty($context) || $context == 'root') {
         ,'deleted'
         ,'isfolder'
         ,'menuindex'
+        ,'menutitle'
         ,'hidemenu'
         ,'class_key'
         ,'context_key'
@@ -85,6 +86,7 @@ $hasEditPerm = $modx->hasPermission('edit_document');
 
 $collection = $modx->getCollection($itemClass, $c);
 
+$nodeField = $modx->getOption('resource_tree_node_name',$scriptProperties,'pagetitle');
 $items = array();
 $item = reset($collection);
 while ($item) {
@@ -145,7 +147,7 @@ while ($item) {
             }
 
             $itemArray = array(
-                'text' => strip_tags($item->pagetitle).' ('.$item->id.')',
+                'text' => strip_tags($item->$nodeField).' ('.$item->id.')',
                 'id' => $item->context_key . '_'.$item->id,
                 'pk' => $item->id,
                 'cls' => $class,

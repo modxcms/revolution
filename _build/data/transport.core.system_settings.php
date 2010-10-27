@@ -964,6 +964,15 @@ $settings['resolve_hostnames']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['resource_tree_node_name']= $xpdo->newObject('modSystemSetting');
+$settings['resource_tree_node_name']->fromArray(array (
+  'key' => 'resource_tree_node_name',
+  'value' => 'pagetitle',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['richtext_default']= $xpdo->newObject('modSystemSetting');
 $settings['richtext_default']->fromArray(array (
   'key' => 'richtext_default',
