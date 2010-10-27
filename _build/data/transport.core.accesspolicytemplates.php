@@ -3,6 +3,8 @@
  * @package modx
  * @subpackage build
  */
+$templateGroups = array();
+
 /* administrator group templates */
 $templateGroups['1']= $xpdo->newObject('modAccessPolicyTemplateGroup');
 $templateGroups['1']->fromArray(array(
