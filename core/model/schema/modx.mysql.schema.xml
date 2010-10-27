@@ -126,8 +126,6 @@
         <aggregate alias="Parent" class="modAccessPolicy" local="parent" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Template" class="modAccessPolicyTemplate" local="template" foreign="id" owner="foreign" cardinality="one" />
         <composite alias="Children" class="modAccessPolicy" local="id" foreign="parent" owner="local" cardinality="many" />
-        <!-- get rid of this -->
-        <composite alias="Permissions" class="modAccessPermission" local="id" foreign="policy" owner="local" cardinality="many" />
     </object>
 
     <object class="modAccessPolicyTemplate" table="access_policy_templates" extends="xPDOSimpleObject">
