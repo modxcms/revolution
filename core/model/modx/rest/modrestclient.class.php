@@ -208,7 +208,7 @@ class modRestResponse {
     public function fromJSON() {
         if (!empty($this->json)) return $this->json;
 
-        $this->json = $this->client->modx->toJSON($this->response);
+        $this->json = $this->client->modx->fromJSON($this->response);
         return $this->json;
     }
 
