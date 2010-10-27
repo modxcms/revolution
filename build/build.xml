@@ -1,31 +1,28 @@
 <?xml version="1.0"?>
-<project name="xPDOCore" description="" default="complete-wc" basedir=".">
+<project name="xPDOCore" description="" default="complete" basedir=".">
     <!-- Override properties in the build.properties file -->
     <property file="build.properties" />
 
     <!-- Set some common project properties -->
     <property name="project.name" value="xpdo" />
-    <property name="project.basedir" value=".." />
-    <property name="project.core.dir" value="${project.basedir}/xpdo" />
-    <property name="project.tutorials.dir" value="${project.basedir}/tutorials" />
-    <property name="project.test.dir" value="${project.basedir}/test" />
-    <property name="project.model.dir" value="${project.basedir}/model" />
-    <property name="project.build.dir" value="${project.basedir}/build" />
+    <property name="project.root.dir" value=".." />
+    <property name="project.core.dir" value="${project.root.dir}/xpdo" />
+    <property name="project.test.dir" value="${project.root.dir}/test" />
+    <property name="project.build.dir" value="${project.root.dir}/build" />
 
     <!-- Set the project version -->
     <property name="xpdo.core.version" value="2.0.0" />
     <property name="xpdo.core.release" value="pl" />
 
     <!-- Set some common build properties -->
-    <property name="build.dir" value="." />
     <property name="build.src.tree" value="master" />
     <property name="build.src.remote"
               value="git://github.com/modxcms/xpdo.git"
     />
-    <property name="build.image.basedir" value="./image" />
+    <property name="build.image.basedir" value="image" />
     <property name="build.image.name" value="${project.name}-${xpdo.core.version}-${xpdo.core.release}" />
     <property name="build.image.dir" value="${build.image.basedir}/${build.image.name}" />
-    <property name="build.distrib.dir" value="./distrib" />
+    <property name="build.distrib.dir" value="distrib" />
     <property name="build.distrib.name" value="${project.name}-${xpdo.core.version}-${xpdo.core.release}" />
     <property name="build.apidocs.dir" value="${build.image.dir}/docs" />
 
@@ -60,21 +57,14 @@
         <delete dir="${build.apidocs.dir}" />
     </target>
 
-    <!-- Export the svn build image from the repository -->
+    <!-- Export the Git build image from the local repository -->
     <target name="git-export-build-image"
-            depends="cleanup-build-image"
-            description="export a revision of the xPDO core from a Git remote repository"
-    >
-        <exec dir="${project.basedir}" command="${git.command} archive -o .build/image/${build.image.name}.zip --remote=${build.src.remote} --format=zip --prefix=${build.image.name}/ ${build.src.tree}" escape="false" />
-        <unzip file="${build.image.basedir}/${build.distrib.name}.zip" todir="${build.image.basedir}" />
-    </target>
-
-    <!-- Export the Git build image from a local repository -->
-    <target name="git-export-build-image-wc"
             depends="cleanup-build-image"
             description="export a revision of the xPDO core from a local Git repository"
     >
-        <exec dir="${project.basedir}" command="${git.command} archive -o ./build/image/${build.image.name}.zip --format=zip --prefix=${build.image.name}/ ${build.src.tree}" escape="false" />
+        <resolvepath propertyName="absolute.root.dir" file="${project.root.dir}" />
+        <resolvepath propertyName="absolute.image.basedir" file="${build.image.basedir}" />
+        <exec dir="${absolute.root.dir}" command="${git.command} archive -o ${absolute.image.basedir}/${build.image.name}.zip --format=zip --prefix=${build.image.name}/ ${build.src.tree}" escape="false" />
         <unzip file="${build.image.basedir}/${build.distrib.name}.zip" todir="${build.image.basedir}" />
     </target>
 
