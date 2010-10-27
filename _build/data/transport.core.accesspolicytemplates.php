@@ -3,15 +3,8 @@
  * @package modx
  * @subpackage build
  */
-$templateGroups = array();
+$templates = array();
 
-/* administrator group templates */
-$templateGroups['1']= $xpdo->newObject('modAccessPolicyTemplateGroup');
-$templateGroups['1']->fromArray(array(
-    'id' => 1,
-    'name' => 'Administrator',
-    'description' => 'All administrator policy templates.',
-));
 /* administrator template/policy */
 $templates['1']= $xpdo->newObject('modAccessPolicyTemplate');
 $templates['1']->fromArray(array(
@@ -24,19 +17,6 @@ $permissions = include dirname(__FILE__).'/permissions/transport.policy.tpl.admi
 if (is_array($permissions)) {
     $templates['1']->addMany($permissions);
 } else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Administrator Policy Template.'); }
-
-$templateGroups['1']->addMany($templates);
-
-
-
-/* Object group templates */
-$templateGroups['2']= $xpdo->newObject('modAccessPolicyTemplateGroup');
-$templateGroups['2']->fromArray(array(
-    'id' => 2,
-    'name' => 'Object',
-    'description' => 'All Object-based policy templates.',
-));
-$templates = array();
 
 /* resource template/policy */
 $templates['2']= $xpdo->newObject('modAccessPolicyTemplate');
@@ -77,7 +57,4 @@ if (is_array($permissions)) {
     $templates['4']->addMany($permissions);
 } else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Element Template Permissions.'); }
 
-$templateGroups['2']->addMany($templates);
-unset($templates);
-
-return $templateGroups;
+return $templates;

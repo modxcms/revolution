@@ -335,27 +335,11 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default role
 unset ($collection, $c, $attributes);
 
 /* modAccessPolicyTemplateGroups */
-$templateGroups = include dirname(__FILE__).'/data/transport.core.accesspolicytemplates.php';
+$templateGroups = include dirname(__FILE__).'/data/transport.core.accesspolicytemplategroups.php';
 $attributes = array (
     xPDOTransport::PRESERVE_KEYS => false,
     xPDOTransport::UNIQUE_KEY => array('name'),
     xPDOTransport::UPDATE_OBJECT => true,
-    xPDOTransport::RELATED_OBJECTS => true,
-    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-        'Templates' => array(
-            xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UNIQUE_KEY => array('template_group','name'),
-            xPDOTransport::UPDATE_OBJECT => true,
-            xPDOTransport::RELATED_OBJECTS => true,
-            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-                'Permissions' => array (
-                    xPDOTransport::PRESERVE_KEYS => false,
-                    xPDOTransport::UPDATE_OBJECT => true,
-                    xPDOTransport::UNIQUE_KEY => array ('template','name'),
-                ),
-            )
-        )
-    )
 );
 if (is_array($templateGroups)) {
     foreach ($templateGroups as $templateGroup) {
@@ -363,9 +347,44 @@ if (is_array($templateGroups)) {
     }
     $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($templateGroups).' default Access Policy Template Groups.'); flush();
 } else {
-    $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not package in Access Policy Templates and Template Groups.');
+    $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not package in Access Policy Template Groups.');
 }
 unset ($templateGroups, $templateGroup, $attributes);
+
+
+/* modAccessPolicyTemplate */
+$templates = include dirname(__FILE__).'/data/transport.core.accesspolicytemplates.php';
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UNIQUE_KEY => array('name'),
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::RELATED_OBJECTS => true,
+    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+        'Permissions' => array (
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => array ('template','name'),
+        ),
+    )
+);
+if (is_array($templates)) {
+    $ct = count($templates);
+    $idx = 0;
+    foreach ($templates as $template) {
+        $idx++;
+        if ($idx == $ct) {
+            $attributes['resolve'][] = array (
+                'type' => 'php',
+                'source' => dirname(__FILE__) . '/resolvers/resolve.policytemplates.php',
+            );
+        }
+        $package->put($template, $attributes);
+    }
+    $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($templates).' default Access Policy Templates.'); flush();
+} else {
+    $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not package in Access Policy Templates.');
+}
+unset ($templates,$template,$idx,$ct,$attributes);
 
 /* modAccessPolicy */
 $policies = include dirname(__FILE__).'/data/transport.core.accesspolicies.php';
@@ -391,7 +410,7 @@ if (is_array($policies)) {
 } else {
     $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not package in Access Policies.');
 }
-unset ($policies,$policy,$attributes);
+unset ($policies,$policy,$idx,$ct,$attributes);
 
 
 
