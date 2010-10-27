@@ -1,6 +1,6 @@
 <?php
 /**
- * The default Permission scheme for the Administrator Policy.
+ * The default Permission scheme for the Administrator Policy Template.
  *
  * @package modx
  */
@@ -38,6 +38,11 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'class_map',
     'description' => 'perm.class_map_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'components',
+    'description' => 'perm.components_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(

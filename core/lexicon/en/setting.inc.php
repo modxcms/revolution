@@ -65,6 +65,9 @@ $_lang['setting_login_homepage'] = 'Login Home Page';
 $_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want to send user to after he/she has logged in. <strong>NOTE: make sure the ID you enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
 
 // system settings
+$_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
+$_lang['setting_access_policies_version_desc'] = 'The version of the Access Policy system. DO NOT CHANGE.';
+
 $_lang['setting_allow_duplicate_alias'] = 'Allow duplicate aliases';
 $_lang['setting_allow_duplicate_alias_desc'] = 'If set to \'yes\', this will allow duplicate aliases to be saved. <strong>NOTE: This option should be used with \'Friendly alias path\' option set to \'Yes\' in order to avoid problems when referencing a resource.</strong>';
 

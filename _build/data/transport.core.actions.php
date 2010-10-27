@@ -461,5 +461,16 @@ $collection['82']->fromArray(array (
   'assets' => '',
   'help_url' => 'http://rtfm.modx.com/display/revolution20/Package+Management',
 ), '', true, true);
+$collection['83']= $xpdo->newObject('modAction');
+$collection['83']->fromArray(array (
+  'id' => 83,
+  'namespace' => 'core',
+  'parent' => 65,
+  'controller' => 'security/access/policy/template/update',
+  'haslayout' => 1,
+  'lang_topics' => 'user,policy',
+  'assets' => '',
+  'help_url' => 'http://rtfm.modx.com/display/revolution20/PolicyTemplates',
+), '', true, true);
 
 return $collection;

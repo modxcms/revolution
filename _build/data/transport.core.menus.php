@@ -192,6 +192,7 @@ $menus[1]->fromArray(array (
   'description' => '',
   'icon' => 'images/icons/plugin.gif',
   'menuindex' => 1,
+  'permissions' => 'components',
 ), '', true, true);
 
 

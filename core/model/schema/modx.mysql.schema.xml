@@ -105,39 +105,61 @@
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="mediumtext" phptype="string" />
         <field key="parent" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="template" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="class" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="data" dbtype="text" phptype="json" default="{}" />
         <field key="lexicon" dbtype="varchar" precision="255" phptype="string" null="false" default="permissions" />
-        
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
         <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
-            <column key="name" length="" collation="A" null="false" />
+            <column key="parent" length="" collation="A" null="false" />
         </index>
         <index alias="class" name="class" primary="false" unique="false" type="BTREE">
             <column key="class" length="" collation="A" null="false" />
         </index>
+        <index alias="template" name="template" primary="false" unique="false" type="BTREE">
+            <column key="template" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="Parent" class="modAccessPolicy" local="parent" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="Template" class="modAccessPolicyTemplate" local="template" foreign="id" owner="foreign" cardinality="one" />
         <composite alias="Children" class="modAccessPolicy" local="id" foreign="parent" owner="local" cardinality="many" />
-        <composite alias="Permissions" class="modAccessPermission" local="id" foreign="policy" owner="local" cardinality="many" />
+    </object>
+
+    <object class="modAccessPolicyTemplate" table="access_policy_templates" extends="xPDOSimpleObject">
+        <field key="template_group" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="description" dbtype="mediumtext" phptype="string" />
+        <field key="lexicon" dbtype="varchar" precision="255" phptype="string" null="false" default="permissions" />
+
+        <aggregate alias="TemplateGroup" class="modAccessPolicyTemplateGroup" local="template_group" foreign="id" owner="foreign" cardinality="one" />
+        <composite alias="Permissions" class="modAccessPermission" local="id" foreign="template" owner="local" cardinality="many" />
+        <composite alias="Policies" class="modAccessPolicy" local="id" foreign="template" owner="local" cardinality="many" />
     </object>
     
+    <object class="modAccessPolicyTemplateGroup" table="access_policy_template_groups" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="description" dbtype="mediumtext" phptype="string" />
+
+        <composite alias="Templates" class="modAccessPolicyTemplate" local="id" foreign="template_group" owner="local" cardinality="many" />
+    </object>
+
     <object class="modAccessPermission" table="access_permissions" extends="xPDOSimpleObject">
-        <field key="policy" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="template" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
         <field key="value" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
         
-        <index alias="policy" name="policy" primary="false" unique="false" type="BTREE">
-            <column key="policy" length="" collation="A" null="false" />
+        <index alias="template" name="template" primary="false" unique="false" type="BTREE">
+            <column key="template" length="" collation="A" null="false" />
         </index>
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Policy" class="modAccessPolicy" local="policy" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Template" class="modAccessPolicyTemplate" local="template" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
     <object class="modAccessResource" table="access_resources" extends="modAccess">

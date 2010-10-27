@@ -21,34 +21,67 @@ $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'name');
+$sortAlias = $modx->getOption('sortAlias',$scriptProperties,'modAccessPolicy');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$group = $modx->getOption('group',$scriptProperties,'');
 
 /* build query */
 $c = $modx->newQuery('modAccessPolicy');
+$c->innerJoin('modAccessPolicyTemplate','Template');
+if (!empty($group)) {
+    $c->innerJoin('modAccessPolicyTemplateGroup','TemplateGroup','TemplateGroup.id = Template.template_group');
+    $c->where(array(
+        'TemplateGroup.name' => $group,
+    ));
+}
 $count = $modx->getCount('modAccessPolicy',$c);
 
-$c->sortby($sort,$dir);
+$subc = $modx->newQuery('modAccessPermission');
+$subc->select('COUNT(`modAccessPermission`.`id`)');
+$subc->where(array(
+    '`modAccessPermission`.`template` = `Template`.`id`',
+));
+$subc->prepare();
+$c->select(array(
+    'modAccessPolicy.*',
+));
+$c->select('('.$subc->toSql().') AS '.$modx->escape('total_permissions'));
+
+
+$c->sortby($sortAlias.'.'.$sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
+$c->prepare();
 $policies = $modx->getCollection('modAccessPolicy', $c);
 
 /* iterate */
-$data = array();
+$list = array();
 if (isset($scriptProperties['combo'])) {
-    $data[] = array(
+    $list[] = array(
         'id' => '',
         'name' => $modx->lexicon('no_policy_option'),
     );
 }
 
+$core = array('Resource','Object','Administrator','Load Only','Load, List and View');
+
 foreach ($policies as $key => $policy) {
     $policyArray = $policy->toArray();
     $cls = 'pedit';
-    if ($policy->get('name') != 'Resource' && $policy->get('name') != 'Administrator') {
+    if (!in_array($policy->get('name'),$core)) {
         $cls .= ' premove';
     }
     $policyArray['cls'] = $cls;
-    
-    $data[] = $policyArray;
+    if (!empty($policyArray['total_permissions'])) {
+        $data = $policy->get('data');
+        $policyArray['active_permissions'] = count($data);
+        $policyArray['active_of'] = $modx->lexicon('active_of',array(
+            'active' => $policyArray['active_permissions'],
+            'total' => $policyArray['total_permissions'],
+        ));
+    }
+
+    unset($policyArray['data']);
+    $list[] = $policyArray;
 }
 
-return $this->outputArray($data,$count);
+return $this->outputArray($list,$count);

@@ -56,18 +56,11 @@ $acls = $modx->getCollection('modAccessContext', $c);
 $list = array();
 foreach ($acls as $acl) {
     $aclArray = $acl->toArray();
-
-    $aclArray['menu'] = array(
-        array(
-            'text' => $modx->lexicon('access_context_update'),
-            'handler' => 'this.updateAcl',
-        ),
-        '-',
-        array(
-            'text' => $modx->lexicon('access_context_remove'),
-            'handler' => 'this.confirm.createDelegate(this,["remove"])',
-        ),
-    );
+    $cls = '';
+    if (($aclArray['target'] == 'web' || $aclArray['target'] == 'mgr') && $aclArray['policy_name'] == 'Administrator') {} else {
+        $cls .= 'pedit premove';
+    }
+    $aclArray['cls'] = $cls;
     $list[] = $aclArray;
 }
 return $this->outputArray($list,$count);

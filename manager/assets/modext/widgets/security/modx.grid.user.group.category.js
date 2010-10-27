@@ -46,6 +46,10 @@ MODx.grid.UserGroupCategory = function(config) {
             ,id: 'modx-ugcat-policy-filter'
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
+            ,baseParams: {
+                action: 'getList'
+                ,group: 'Object'
+            }
             ,listeners: {
                 'select': {fn:this.filterPolicy,scope:this}
             }
@@ -151,6 +155,7 @@ MODx.window.CreateUGCat = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Object'
                 ,combo: '1'
             }
             ,anchor: '90%'
@@ -208,6 +213,7 @@ MODx.window.UpdateUGCat = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Object'
                 ,combo: '1'
             }
             ,anchor: '90%'

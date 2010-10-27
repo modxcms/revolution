@@ -37,6 +37,7 @@ MODx.page.UpdateAccessPolicy = function(config) {
             xtype: 'modx-panel-access-policy'
             ,renderTo: 'modx-panel-access-policy-div'
             ,policy: config.policy
+            ,record: config.record || {}
         }]
     });
     MODx.page.UpdateAccessPolicy.superclass.constructor.call(this,config);

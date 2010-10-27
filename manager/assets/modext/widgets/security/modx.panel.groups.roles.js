@@ -9,6 +9,7 @@ MODx.panel.GroupsRoles = function(config) {
     Ext.applyIf(config,{
         id: 'modx-panel-groups-roles'
         ,defaults: { collapsible: false ,autoHeight: true }
+        ,forceLayout: true
         ,items: [{ 
              html: '<h2>'+_('user_group_management')+'</h2>'
             ,border: false
@@ -46,7 +47,16 @@ MODx.panel.GroupsRoles = function(config) {
                 ,border: false
             },{
                 xtype: 'modx-grid-access-policy'
-                ,preventRender: true
+            }]
+        },{
+            title: _('policy_templates')
+            ,bodyStyle: 'padding: 15px'
+            ,autoHeight: true
+            ,items: [{
+                html: '<p>'+_('policy_templates.intro_msg')+'</p>'
+                ,border: false
+            },{
+                xtype: 'modx-grid-access-policy-templates'
             }]
         }],{
             stateful: true

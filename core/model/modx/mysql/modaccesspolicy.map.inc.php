@@ -12,6 +12,7 @@ $xpdo_meta_map['modAccessPolicy']= array (
     'name' => NULL,
     'description' => NULL,
     'parent' => 0,
+    'template' => 0,
     'class' => '',
     'data' => '{}',
     'lexicon' => 'permissions',
@@ -32,6 +33,16 @@ $xpdo_meta_map['modAccessPolicy']= array (
       'phptype' => 'string',
     ),
     'parent' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'template' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -91,7 +102,7 @@ $xpdo_meta_map['modAccessPolicy']= array (
       'type' => 'BTREE',
       'columns' => 
       array (
-        'name' => 
+        'parent' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -115,6 +126,22 @@ $xpdo_meta_map['modAccessPolicy']= array (
         ),
       ),
     ),
+    'template' => 
+    array (
+      'alias' => 'template',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'template' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
   ),
   'aggregates' => 
   array (
@@ -122,6 +149,14 @@ $xpdo_meta_map['modAccessPolicy']= array (
     array (
       'class' => 'modAccessPolicy',
       'local' => 'parent',
+      'foreign' => 'id',
+      'owner' => 'foreign',
+      'cardinality' => 'one',
+    ),
+    'Template' => 
+    array (
+      'class' => 'modAccessPolicyTemplate',
+      'local' => 'template',
       'foreign' => 'id',
       'owner' => 'foreign',
       'cardinality' => 'one',

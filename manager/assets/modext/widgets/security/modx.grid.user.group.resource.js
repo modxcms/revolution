@@ -45,6 +45,10 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             xtype: 'modx-combo-policy'
             ,id: 'modx-ugrg-policy-filter'
             ,emptyText: _('filter_by_policy')
+            ,baseParams: {
+                action: 'getList'
+                ,group: 'Object'
+            }
             ,allowBlank: true
             ,listeners: {
                 'select': {fn:this.filterPolicy,scope:this}
@@ -151,6 +155,7 @@ MODx.window.CreateUGRG = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Object'
                 ,combo: '1'
             }
             ,anchor: '90%'
@@ -208,6 +213,7 @@ MODx.window.UpdateUGRG = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Object'
                 ,combo: '1'
             }
             ,anchor: '90%'

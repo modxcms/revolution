@@ -1,6 +1,6 @@
 <?php
 /**
- * The default Permission scheme for the Resource Policy.
+ * The default Permission scheme for the Resource Policy Template.
  *
  * @package modx
  */
@@ -8,6 +8,11 @@ $permissions = array();
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'add_children',
     'description' => 'perm.add_children_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'copy',
+    'description' => 'perm.copy_desc',
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
