@@ -25,7 +25,7 @@ class modRestCurlClient extends modRestClient {
         $ch = curl_init();
 
         /* setup request */
-        $this->setUrl($ch,$host,$path,$method,$params);
+        $this->setUrl($ch,$host,$path,$method,$params,$options);
         $this->setAuth($ch,$options);
         $this->setProxy($ch,$options);
         $this->setOptions($ch,$options);

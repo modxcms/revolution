@@ -41,6 +41,12 @@ class modRestClient {
      * @access public
      */
     public $response = null;
+    /**
+     * The expected response type
+     * @access public
+     * @var string
+     */
+    public $responseType = 'xml';
 
     /**
      * The constructor for the modRestClient class. Assigns a modX instance
@@ -100,9 +106,18 @@ class modRestClient {
         $response = $this->conn->request($this->host,$path,$method,$params);
 
         $responseClass = $this->modx->getOption(modRestClient::OPT_RESPONSE_CLASS,$this->config,'modRestResponse');
-        $this->response = new $responseClass($this,$response);
+        $this->response = new $responseClass($this,$response,$this->responseType);
 
         return $this->response;
+    }
+
+    /**
+     * Sets the response type
+     *
+     * @param string $type The type to set, either json or xml
+     */
+    public function setResponseType($type) {
+        $this->responseType = $type;
     }
 
     /**
@@ -147,14 +162,16 @@ class modRestClient {
  * @subpackage rest
  */
 class modRestResponse {
+    public $responseType = 'xml';
     /**
      * The constructor for the modRestResponse class.
      *
      * @param modRestClient &$client A reference to the modRestClient instance.
      * @param string $response The response from the REST server.
+     * @param string $responseType The type of response, either xml or json
      * @return modRestResponse
      */
-    function __construct(modRestClient &$client, $response) {
+    function __construct(modRestClient &$client, $response, $responseType = 'xml') {
         $this->client =& $client;
         $this->response = $response;
         $this->toXml();
@@ -183,14 +200,33 @@ class modRestResponse {
     }
 
     /**
+     * Translates current response from JSON to an array
+     *
+     * @access public
+     * @return array
+     */
+    public function fromJSON() {
+        if (!empty($this->json)) return $this->json;
+
+        $this->json = $this->client->modx->toJSON($this->response);
+        return $this->json;
+    }
+
+    /**
      * Checks to see whether or not the response is an error response
      *
      * @access public
      * @return boolean True if the response is an error
      */
     public function isError() {
-        $this->toXml();
-        return $this->xml->getName() == 'error';
+        if ($this->responseType == 'xml') {
+            $this->toXml();
+            $isError = $this->xml->getName() == 'error';
+        } else {
+            $this->fromJSON();
+            $isError = !empty($this->json['error']) ? true : false;
+        }
+        return $isError;
     }
 
     /**
@@ -200,8 +236,17 @@ class modRestResponse {
      * @return string The error message
      */
     public function getError() {
-        if (empty($this->xml) || !($this->xml instanceof SimpleXMLElement)) return '';
-
-        return (string)$this->xml->message;
+        $message = '';
+        if ($this->responseType == 'xml') {
+            if (empty($this->xml) || !($this->xml instanceof SimpleXMLElement)) {
+                $message = '';
+            } else {
+                $message = (string)$this->xml->message;
+            }
+        } else {
+            $this->fromJSON();
+            $message = !empty($this->json['error']) && !empty($this->json['message']) ? $this->json['message'] : '';
+        }
+        return $message;
     }
 }
