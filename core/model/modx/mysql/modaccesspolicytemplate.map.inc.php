@@ -51,7 +51,7 @@ $xpdo_meta_map['modAccessPolicyTemplate']= array (
   ),
   'aggregates' => 
   array (
-    'Group' => 
+    'TemplateGroup' => 
     array (
       'class' => 'modAccessPolicyTemplateGroup',
       'local' => 'template_group',

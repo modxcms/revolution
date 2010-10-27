@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Added modAccessPolicyTemplate and modAccessPolicyTemplateGroup for easier managing and editing of Access Policies, including a UI for managing Access Policy Templates
 - [#2483] Auto-generate alias when duplicating a Resource
 - [#2645] Set Resources unpublished when duplicating
 - Update to xPDO v2.0.0-rc3

@@ -136,7 +136,7 @@
         <field key="description" dbtype="mediumtext" phptype="string" />
         <field key="lexicon" dbtype="varchar" precision="255" phptype="string" null="false" default="permissions" />
 
-        <aggregate alias="Group" class="modAccessPolicyTemplateGroup" local="template_group" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="TemplateGroup" class="modAccessPolicyTemplateGroup" local="template_group" foreign="id" owner="foreign" cardinality="one" />
         <composite alias="Permissions" class="modAccessPermission" local="id" foreign="template" owner="local" cardinality="many" />
         <composite alias="Policies" class="modAccessPolicy" local="id" foreign="template" owner="local" cardinality="many" />
     </object>

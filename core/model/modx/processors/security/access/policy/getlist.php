@@ -21,13 +21,22 @@ $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'name');
+$sortAlias = $modx->getOption('sortAlias',$scriptProperties,'modAccessPolicy');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$group = $modx->getOption('group',$scriptProperties,'');
 
 /* build query */
 $c = $modx->newQuery('modAccessPolicy');
+if (!empty($group)) {
+    $c->innerJoin('modAccessPolicyTemplate','Template');
+    $c->innerJoin('modAccessPolicyTemplateGroup','TemplateGroup','TemplateGroup.id = Template.template_group');
+    $c->where(array(
+        'TemplateGroup.name' => $group,
+    ));
+}
 $count = $modx->getCount('modAccessPolicy',$c);
 
-$c->sortby($sort,$dir);
+$c->sortby($sortAlias.'.'.$sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $policies = $modx->getCollection('modAccessPolicy', $c);
 

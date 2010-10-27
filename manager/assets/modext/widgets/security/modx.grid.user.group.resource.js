@@ -151,6 +151,7 @@ MODx.window.CreateUGRG = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Object'
                 ,combo: '1'
             }
             ,anchor: '90%'
@@ -208,6 +209,7 @@ MODx.window.UpdateUGRG = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Object'
                 ,combo: '1'
             }
             ,anchor: '90%'

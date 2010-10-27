@@ -6,6 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['no_policy_option'] = ' (no policy) ';
 $_lang['permission'] = 'Permission';
 $_lang['permission_add'] = 'Add Permission';
 $_lang['permission_add_template'] = 'Add Permission to Template';

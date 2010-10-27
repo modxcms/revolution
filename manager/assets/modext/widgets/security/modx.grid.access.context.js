@@ -143,6 +143,7 @@ MODx.window.UpdateAccessContext = function(config) {
             ,value: r.policy || ''
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Administrator'
                 ,combo: '1'
             }
             ,anchor: '90%'
@@ -210,6 +211,7 @@ MODx.window.CreateAccessContext = function(config) {
             ,id: 'modx-'+this.ident+'-policy'
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Administrator'
                 ,combo: '1'
             }
             ,anchor: '90%'
