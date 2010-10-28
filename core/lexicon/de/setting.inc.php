@@ -66,6 +66,9 @@ $_lang['setting_login_homepage'] = 'Startseite für eingeloggte Benutzer';
 $_lang['setting_login_homepage_desc'] = 'Geben Sie die ID des Dokuments ein, zu dem Sie den Butzer weiterleiten möchten, nachdem er sich eingeloggt hat. <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einem existierenden Dokument gehört, dass dieses veröffentlicht wurde und dass der Benutzer Zugriff darauf hat!</strong>';
 
 // system settings
+$_lang['setting_access_policies_version'] = 'Zugriffs-Richtlinien-Schema-Version';
+$_lang['setting_access_policies_version_desc'] = 'Die Version des Zugriffs-Richtlinien-Systems. BITTE NICHT ÄNDERN!';
+
 $_lang['setting_allow_duplicate_alias'] = 'Alias-Duplikate zulassen';
 $_lang['setting_allow_duplicate_alias_desc'] = 'Wenn diese Einstellung auf "ja" gesetzt wird, können doppelte Aliasse gespeichert werden. <strong>ACHTUNG: Bei Verwendung dieser Einstellung sollte auch die Option "Suchmaschinenfreundliche Aliasse benutzen" auf "ja" gesetzt werden, um Probleme bei der Referenzierung von Ressourcen zu vermeiden.</strong>';
 
@@ -147,13 +150,13 @@ $_lang['setting_cache_system_settings'] = 'Systemeinstellungen-Cache aktivieren'
 $_lang['setting_cache_system_settings_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden die Systemeinstellungen gecacht, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
 
 $_lang['setting_compress_css'] = 'Komprimiertes CSS verwenden';
-$_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODx eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren.';
+$_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODx eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
 
 $_lang['setting_compress_js'] = 'Komprimierte JavaScript-Bibliotheken verwenden';
-$_lang['setting_compress_js_desc'] = 'Wenn dies aktiviert ist, benutzt MODx eine komprimierte Version seiner JavaScript-Bibliotheken. Dies reduziert Last und Ausführungszeit. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren.';
+$_lang['setting_compress_js_desc'] = 'Wenn dies aktiviert ist, benutzt MODx eine komprimierte Version seiner JavaScript-Bibliotheken. Dies reduziert Last und Ausführungszeit. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
 
 $_lang['setting_concat_js'] = 'Verknüpfte Javascript-Bibliotheken verwenden';
-$_lang['setting_concat_js_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODx eine verknüpfte Version seiner meistverwendeten JavaScript-Bibliotheken in der Manager-Oberfläche; diese werden dann als eine einzige Datei ausgeliefert. Dadurch werden die Lade- und Ausführungszeiten im Manager drastisch reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren.';
+$_lang['setting_concat_js_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODx eine verknüpfte Version seiner meistverwendeten JavaScript-Bibliotheken in der Manager-Oberfläche; diese werden dann als eine einzige Datei ausgeliefert. Dadurch werden die Lade- und Ausführungszeiten im Manager drastisch reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
 
 $_lang['setting_container_suffix'] = 'Container-Suffix';
 $_lang['setting_container_suffix_desc'] = 'Das Suffix, das Ressourcen, die als Container definiert wurden, hinzugefügt wird, wenn suchmaschinenfreundliche URLs verwendet werden.';
@@ -183,6 +186,9 @@ $_lang['setting_emailsender_err'] = 'Bitte geben Sie die Administrations-E-Mail-
 $_lang['setting_emailsubject'] = 'E-Mail-Betreff';
 $_lang['setting_emailsubject_desc'] = 'Die Betreffzeile für die E-Mail, die standardmäßig nach Erstellung eines Accounts versendet wird.';
 $_lang['setting_emailsubject_err'] = 'Bitte geben Sie die Betreffzeile für die E-Mail für neu erstellte Accounts an.';
+
+$_lang['setting_enable_dragdrop'] = 'Drag & Drop in Ressourcen-/Element-Bäumen aktivieren';
+$_lang['setting_enable_dragdrop_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, ist Drag & Drop in Ressourcen- und Element-Bäumen nicht möglich.';
 
 $_lang['setting_error_page'] = 'Fehlerseite';
 $_lang['setting_error_page_desc'] = 'Geben Sie die ID des Dokuments ein, das Benutzern angezeigt werden soll, wenn sie ein Dokument aufrufen, das nicht existiert. <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einem existierenden Dokument gehört und dass dieses veröffentlicht wurde!</strong>';
@@ -238,6 +244,9 @@ $_lang['setting_friendly_alias_translit_desc'] = 'Die Transliterations-Methode, 
 
 $_lang['setting_friendly_alias_translit_class'] = 'Suchmaschinenfreundliche Aliasse: Transliterations-Service-Klasse';
 $_lang['setting_friendly_alias_translit_class_desc'] = 'Eine optionale Service-Klasse, die benannte Transliterations-Dienste für die Generierung/Filterung suchmaschinenfreundlicher Aliasse zur Verfügung stellt.';
+
+$_lang['setting_friendly_alias_translit_class_path'] = 'Suchmaschinenfreundliche Aliasse: Pfad zur Transliterations-Service-Klasse';
+$_lang['setting_friendly_alias_translit_class_path_desc'] = 'Der Pfad zum Model-Package, aus dem die Transliterations-Service-Klasse für suchmaschinenfreundliche Aliasse geladen wird.';
 
 $_lang['setting_friendly_alias_trim_chars'] = 'Suchmaschinenfreundliche Aliasse: abzuschneidende Zeichen';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Zeichen, die am Ende eines übergebenen Ressourcen-Alias abgeschnitten werden sollen.';
@@ -300,9 +309,6 @@ $_lang['setting_manager_direction_desc'] = 'Geben Sie an, ob der Text im MODx-Ma
 $_lang['setting_manager_date_format'] = 'Manager-Datumsformat';
 $_lang['setting_manager_date_format_desc'] = 'Das Format für Datumsangaben im Manager. Diese Einstellung ist im gleichen Format vorzunehmen, wie es die PHP-Funktion <a href="http://de.php.net/manual/en/function.date.php" target="_blank">date()</a> erwartet.';
 
-$_lang['setting_manager_time_format'] = 'Manager-Zeitformat';
-$_lang['setting_manager_time_format_desc'] = 'Das Format für Uhrzeitangaben im Manager. Diese Einstellung ist im gleichen Format vorzunehmen, wie es die PHP-Funktion <a href="http://de.php.net/manual/en/function.date.php" target="_blank">date()</a> erwartet.';
-
 $_lang['setting_manager_lang_attribute'] = 'HTML- und XML-Sprach-Attribute im Manager';
 $_lang['setting_manager_lang_attribute_desc'] = 'Geben Sie den Code für die Sprache ein, der am besten zu der von Ihnen gewählten Sprache für den MODx-Manager passt. Dies stellt sicher, dass Ihr Browser den Inhalt im am besten für Sie geeigneten Format ausgeben kann.';
 
@@ -314,6 +320,9 @@ $_lang['setting_manager_login_start_desc'] = 'Geben Sie die ID des Dokuments ein
 
 $_lang['setting_manager_theme'] = 'Manager-Theme';
 $_lang['setting_manager_theme_desc'] = 'Wählen Sie das Theme für den MODx-Manager.';
+
+$_lang['setting_manager_time_format'] = 'Manager-Zeitformat';
+$_lang['setting_manager_time_format_desc'] = 'Das Format für Uhrzeitangaben im Manager. Diese Einstellung ist im gleichen Format vorzunehmen, wie es die PHP-Funktion <a href="http://de.php.net/manual/en/function.date.php" target="_blank">date()</a> erwartet.';
 
 $_lang['setting_manager_use_tabs'] = 'Reiter im Layout des MODx-Managers verwenden';
 $_lang['setting_manager_use_tabs_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, so werden Reiter für die Darstellung der Inhalte verwendet. Anderenfalls wird eine Portal-Darstellung verwendet.';
@@ -397,6 +406,9 @@ $_lang['setting_request_param_id_desc'] = 'Der Name des GET-Parameters für Ress
 $_lang['setting_resolve_hostnames'] = 'Hostnamen auflösen';
 $_lang['setting_resolve_hostnames_desc'] = 'Möchten Sie, dass MODx versucht, die Hostnamen Ihrer Besucher aufzulösen, wenn diese Ihre Website besuchen? Das Auflösen von Hostnamen kann zusätzliche Server-Last erzeugen; Ihre Besucher werden dies im Normalfall jedoch nicht bemerken.';
 
+$_lang['setting_resource_tree_node_name'] = 'Feld zur Benennung der Knoten im Ressourcen-Baum';
+$_lang['setting_resource_tree_node_name_desc'] = 'Geben Sie das Ressourcen-Feld an, das zur Darstellung der Knoten im Ressourcen-Baum verwendet werden soll. Standardmäßig wird das Feld pagetitle verwendet, es kann aber jedes Ressourcen-Feld verwendet werden, z.B. menutitle, alias, longtitle etc.';
+
 $_lang['setting_richtext_default'] = 'Rich-Text-Editor standardmäßig verwenden';
 $_lang['setting_richtext_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig den Rich-Text-Editor verwenden sollen.';
 
@@ -462,6 +474,9 @@ $_lang['setting_site_unavailable_page_err'] = 'Bitte geben Sie die Ressourcen-ID
 
 $_lang['setting_strip_image_paths'] = 'Relative Dateibrowser-Pfade?';
 $_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird MODx Dateibrowser-Ressourcen-Quellen (Bilder, Dateien, Flash-Animationen etc.) als absolute URLs speichern. Relative URLs dagegen sind hilfreich, wenn Sie Ihre MODx-Installation verschieben möchten, z. B. von einer Testsite zu einer produktiven Website. Falls Ihnen nicht klar ist, was das bedeutet, belassen Sie es am besten bei der Einstellung "Ja".';
+
+$_lang['setting_topmenu_show_descriptions'] = 'Beschreibungen im Hauptmenü anzeigen';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, werden die Beschreibungen in den Menüpunkten des MODx-Manager-Hauptmenüs nicht angezeigt.';
 
 $_lang['setting_tree_root_id'] = 'Ressourcen-Baum-Basis-ID';
 $_lang['setting_tree_root_id_desc'] = 'Geben Sie hier eine gültige ID einer Ressource ein, um den Ressourcen-Baum links bei dieser Ressource als Basis beginnen zu lassen. Benutzer können dann nur Ressourcen sehen, die Kinder der angegebenen Ressource sind.';

@@ -14,7 +14,10 @@ $_lang['perm.add_children_desc'] = 'Der angegebenen Ressource Kind-Ressourcen hi
 $_lang['perm.change_password_desc'] = 'Benutzer kann sein Benutzer-Passwort ändern.';
 $_lang['perm.change_profile_desc'] = 'Benutzer kann sein Profil ändern.';
 $_lang['perm.charsets_desc'] = 'Eine Liste von Zeichencodierungen anzeigen.';  // charsets = Zeichensätze?
+$_lang['perm.class_map_desc'] = 'Eine Liste von Klassen in der Klassen-Map anzeigen.';
+$_lang['perm.components_desc'] = 'Das Komponenten-Menü anzeigen.';
 $_lang['perm.content_types_desc'] = 'Die Inhaltstypen-Seite anzeigen und benutzen.';
+$_lang['perm.copy_desc'] = 'Ein Objekt kopieren.';
 $_lang['perm.countries_desc'] = 'Eine Liste von Ländern anzeigen.';
 $_lang['perm.create_desc'] = 'Elementarer "Erstellen"-Zugriff auf neue Objekte.';
 $_lang['perm.credits_desc'] = 'Die Seite mit den Danksagungen anzeigen.';
