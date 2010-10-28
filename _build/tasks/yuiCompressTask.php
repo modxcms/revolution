@@ -26,12 +26,53 @@ class yuiCompressTask extends Task {
      */
     protected $stopOnError = false;
 
+    /**
+     * Indicates if YUICompressor should be used with --nomunge flag.
+     *
+     * @var bool
+     */
     protected $nomunge = false;
+
+    /**
+     * Indicates if YUICompressor should be used with --preserve-semicolons flag.
+     *
+     * @var bool
+     */
     protected $preservesemicolons = false;
+
+    /**
+     * Indicates if YUICompressor should be used with --disable-optimizations flag.
+     *
+     * @var bool
+     */
     protected $disableoptimizations = false;
+
+    /**
+     * An optional charset to force on the compressed file output.
+     *
+     * @var string
+     */
     protected $charset = '';
+
+    /**
+     * An optional file type, js or css; empty by default means determine by file extension.
+     *
+     * @var string
+     */
     protected $type = '';
+
+    /**
+     * The line-break setting; -1 means not set.
+     *
+     * @var int
+     */
     protected $linebreak = -1;
+
+    /**
+     * A suffix for the compressed files.
+     *
+     * @var string
+     */
     protected $outputsuffix = '-min';
 
     /**
@@ -41,28 +82,58 @@ class yuiCompressTask extends Task {
      */
     protected $dest;
 
-    public function setNomunge($string) {
-        $this->nomunge = $string;
+    /**
+     * Indicate if YUICompressor should use nomunge mode on js files.
+     *
+     * @param boolean $bool True if the nomunge option should be set; false by default.
+     */
+    public function setNomunge($bool) {
+        $this->nomunge = $bool;
     }
 
-    public function setPreservesemicolons($string) {
-        $this->preservesemicolons = $string;
+    /**
+     * Indicate if YUICompressor should preserve semicolons in js files.
+     *
+     * @param boolean $bool True if semicolons should be preserved; false by default.
+     */
+    public function setPreservesemicolons($bool) {
+        $this->preservesemicolons = $bool;
     }
 
-    public function setDisableoptimizations($string) {
-        $this->disableoptimizations = $string;
+    /**
+     * Indicate if YUICompressor should disable micro-optimizations for js files.
+     *
+     * @param boolean $bool True to disable optimizations; false by default.
+     */
+    public function setDisableoptimizations($bool) {
+        $this->disableoptimizations = $bool;
     }
 
+    /**
+     * An optional charset to force when outputting the compressed file.
+     *
+     * @param string $string A valid charset identifier.
+     */
     public function setCharset($string) {
         $this->charset = strtolower($string);
     }
 
+    /**
+     * The type of file to process; leave blank to determine by file extension.
+     *
+     * @param string $string The type argument: empty, 'js', or 'css'.
+     */
     public function setType($string) {
         if (in_array(strtolower($string), array('', 'js', 'css'))) {
             $this->type = strtolower($string);
         }
     }
 
+    /**
+     * An optional line-break argument for YUICompressor.
+     *
+     * @param string $string The column to set the line-break at.
+     */
     public function setLinebreak($string) {
         if (!empty($string) || $string === '0') {
             $this->type = (integer) $string;
@@ -71,6 +142,11 @@ class yuiCompressTask extends Task {
         }
     }
 
+    /**
+     * An output suffix added to the end of the file name, before the file extension.
+     *
+     * @param string $string An output suffix to be inserted before the file extension.
+     */
     public function setOutputsuffix($string) {
         $this->outputsuffix = $string;
     }
@@ -154,8 +230,7 @@ class yuiCompressTask extends Task {
                     $output = array();
                     $return = null;
 
-                    $this->log("Compressing src {$src} to {$outfile} using args {$args}");
-                    $this->log("Command executed: {$command}");
+                    $this->log("Compressing src {$src} to {$outfile} using args {$args}", Project::MSG_VERBOSE);
 
                     exec($command, $output, $return);
 
