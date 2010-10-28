@@ -4,30 +4,30 @@
     <property file="build.properties" />
 
     <!-- Set some common project properties -->
-    <property name="project.name.fs" value="modx" override="true" />
+    <property name="project.name.fs" value="modx" />
     <property name="project.root.dir" value=".." />
-    <property name="project.core.dir" value="${project.root.dir}/core" override="true" />
-    <property name="project.assets.dir" value="${project.root.dir}/assets" override="true" />
-    <property name="project.connectors.dir" value="${project.root.dir}/connectors" override="true" />
-    <property name="project.manager.dir" value="${project.root.dir}/manager" override="true" />
-    <property name="project.modext.dir" value="${project.manager.dir}/assets/modext" override="true" />
-    <property name="project.css.dir" value="${project.manager.dir}/templates/default/css" override="true" />
+    <property name="project.core.dir" value="${project.root.dir}/core" />
+    <property name="project.assets.dir" value="${project.root.dir}/assets" />
+    <property name="project.connectors.dir" value="${project.root.dir}/connectors" />
+    <property name="project.manager.dir" value="${project.root.dir}/manager" />
+    <property name="project.modext.dir" value="${project.manager.dir}/assets/modext" />
+    <property name="project.css.dir" value="${project.manager.dir}/templates/default/css" />
 
     <!-- Set the project version -->
-    <property name="modx.core.version" value="2.0.5" override="true" />
-    <property name="modx.core.release" value="dev" override="true" />
+    <property name="modx.core.version" value="2.0.5" />
+    <property name="modx.core.release" value="dev" />
 
     <!-- Set some common build properties -->
-    <property name="build.dir" value="${project.basedir}" override="true" />
-    <property name="build.src.tree" value="develop" override="true" />
-    <property name="build.distrib.name" value="${project.name.fs}-${modx.core.version}-${modx.core.release}" override="true" />
-    <property name="build.image.basedir" value="${build.dir}/image" override="true" />
-    <property name="build.image.dir" value="${build.image.basedir}/${build.distrib.name}" override="true" />
-    <property name="build.image.modext.dir" value="${build.image.basedir}/modext" override="true" />
-    <property name="build.image.css.dir" value="${build.image.basedir}/css" override="true" />
-    <property name="build.distrib.dir" value="${build.dir}/distrib" override="true" />
-    <property name="build.templates.dir" value="${build.dir}/templates" override="true" />
-    <property name="build.apidocs.dir" value="${build.image.basedir}/docs" override="true" />
+    <property name="build.dir" value="${project.basedir}" />
+    <property name="build.src.tree" value="develop" />
+    <property name="build.distrib.name" value="${project.name.fs}-${modx.core.version}-${modx.core.release}" />
+    <property name="build.image.basedir" value="${build.dir}/image" />
+    <property name="build.image.dir" value="${build.image.basedir}/${build.distrib.name}" />
+    <property name="build.image.modext.dir" value="${build.image.basedir}/modext" />
+    <property name="build.image.css.dir" value="${build.image.basedir}/css" />
+    <property name="build.distrib.dir" value="${build.dir}/distrib" />
+    <property name="build.templates.dir" value="${build.dir}/templates" />
+    <property name="build.apidocs.dir" value="${build.image.basedir}/docs" />
 
     <taskdef name="yuicompress" classname="tasks.yuiCompressTask" />
 
@@ -390,8 +390,8 @@
                 </replacetokens>
             </filterchain>
         </copy>
-        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-sdk.zip"
-             prefix="${project.name}-${modx.core.version}-${modx.core.release}/">
+        <zip destfile="${build.distrib.dir}/${build.distrib.name}-sdk.zip"
+             prefix="${build.distrib.name}/">
             <fileset dir="${build.image.dir}" />
         </zip>
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
@@ -446,8 +446,8 @@
                 </replacetokens>
             </filterchain>
         </copy>
-        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}.zip"
-             prefix="${project.name}-${modx.core.version}-${modx.core.release}/">
+        <zip destfile="${build.distrib.dir}/${build.distrib.name}.zip"
+             prefix="${build.distrib.name}/">
             <fileset dir="${build.image.dir}">
                 <exclude name="_build/**" />
             </fileset>
@@ -474,8 +474,8 @@
                 </replacetokens>
             </filterchain>
         </reflexive>
-        <zip destfile="${build.distrib.dir}/${project.name}-${modx.core.version}-${modx.core.release}-advanced.zip"
-             prefix="${project.name}-${modx.core.version}-${modx.core.release}/">
+        <zip destfile="${build.distrib.dir}/${build.distrib.name}-advanced.zip"
+             prefix="${build.distrib.name}/">
             <fileset dir="${build.image.dir}">
                 <include name="core/**" />
                 <exclude name="core/packages/core/**" />
