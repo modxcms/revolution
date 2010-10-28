@@ -1,0 +1,20 @@
+/**
+MODExt Revolution 1.0
+Copyright (c) 2007-2010, Shaun McCormick
+All rights reserved
+MODx-specific JS extension for ExtJS 3.0
+
+-------------
+
+The MODExt JS extension is distributed under the terms of the GNU GPLv3 license.
+It extends ExtJS, distributed under the Open Source GPL 3.0 license.
+
+http://www.gnu.org/licenses/gpl.html
+
+-------------
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+*/
