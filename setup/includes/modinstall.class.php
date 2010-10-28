@@ -149,7 +149,7 @@ class modInstall {
                     $config['context_mgr_path'] = MODX_MANAGER_PATH;
                     $config['context_connectors_path'] = MODX_CONNECTORS_PATH;
                     $config['context_web_path'] = MODX_BASE_PATH;
-                    
+
                     $config['mgr_url'] = MODX_MANAGER_URL;
                     $config['connectors_url'] = MODX_CONNECTORS_URL;
                     $config['web_url'] = MODX_BASE_URL;
@@ -257,7 +257,7 @@ class modInstall {
         if ($included) {
             $this->lexicon->load('test');
 
-            $class = $class.ucfirst(str_replace('@','',MODX_SETUP_KEY));
+            $class = $class.ucfirst(trim(MODX_SETUP_KEY, '@'));
             $versionPath = dirname(__FILE__).'/checks/'.strtolower($class).'.class.php';
             $included = @include $versionPath;
             if (!$included) {
@@ -885,7 +885,7 @@ class modInstall {
     public function loadDriver() {
         $this->loadSettings();
         $path = dirname(__FILE__).'/drivers/';
-        
+
         /* db specific driver */
         $class = 'modInstallDriver_'.strtolower($this->settings->get('database_type','mysql'));
         $driverPath = $path.strtolower($class.'.class.php');
