@@ -159,7 +159,7 @@ class modLexicon {
         if ($this->modx->context->get('key') == 'mgr') {
             $defaultLanguage = $this->modx->context->getOption('manager_language',$this->modx->context->getOption('cultureKey','en'));
         } else {
-            $defaultLanguage = $this->modx->context->getOption('cultureKey','en');
+            $defaultLanguage = $this->modx->getOption('cultureKey',null,'en');
         }
 
         foreach ($topics as $topicStr) {
