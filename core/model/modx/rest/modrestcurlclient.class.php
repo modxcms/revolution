@@ -177,7 +177,7 @@ class ArrayToXML {
 
             // if there is another array found recrusively call this function
             if ( is_array( $value ) ) {
-                $node = ArrayToXML::is_assoc( $value ) || $numeric ? $xml->addChild( $key ) : $xml;
+                $node = ArrayToXML::isAssoc( $value ) || $numeric ? $xml->addChild( $key ) : $xml;
 
                 // recrusive call.
                 if ( $numeric ) $key = 'anon';

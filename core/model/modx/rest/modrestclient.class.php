@@ -97,13 +97,13 @@ class modRestClient {
      * @param array $params An array of parameters to send with the request.
      * @return modRestResponse The response object.
      */
-    public function request($host,$path,$method = 'GET',array $params = array()) {
+    public function request($host,$path,$method = 'GET',array $params = array(),array $options = array()) {
         if (!is_object($this->conn)) {
             $loaded = $this->getConnection();
             if (!$loaded) return false;
         }
         $this->host = $host;
-        $response = $this->conn->request($this->host,$path,$method,$params);
+        $response = $this->conn->request($this->host,$path,$method,$params,$options);
 
         $responseClass = $this->modx->getOption(modRestClient::OPT_RESPONSE_CLASS,$this->config,'modRestResponse');
         $this->response = new $responseClass($this,$response,$this->responseType);
