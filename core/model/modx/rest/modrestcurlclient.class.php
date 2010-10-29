@@ -53,12 +53,21 @@ class modRestCurlClient extends modRestClient {
                 break;
             case 'POST':
                 curl_setopt($ch,CURLOPT_POST,1);
-                if (!empty($options['contentType']) && $options['contentType'] != 'xml') {
-                    curl_setopt($ch,CURLOPT_POSTFIELDS,$params);
-                } else {
-                    curl_setopt($ch,CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
-                    $xml = ArrayToXML::toXML($params,!empty($options['rootNode']) ? $options['rootNode'] : 'request');
-                    curl_setopt($ch,CURLOPT_POSTFIELDS,$xml);
+                $contentType = $this->modx->getOption('contentType',$options,'xml');
+                switch ($contentType) {
+                    case 'json':
+                        $json = $this->modx->toJSON($params);
+                        curl_setopt($ch,CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                        curl_setopt($ch,CURLOPT_POSTFIELDS,$json);
+                        break;
+                    case 'xml':
+                        curl_setopt($ch,CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
+                        $xml = ArrayToXML::toXML($params,!empty($options['rootNode']) ? $options['rootNode'] : 'request');
+                        curl_setopt($ch,CURLOPT_POSTFIELDS,$xml);
+                        break;
+                    default:
+                        curl_setopt($ch,CURLOPT_POSTFIELDS,$params);
+                        break;
                 }
                 break;
         }
