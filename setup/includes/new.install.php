@@ -68,7 +68,7 @@ if ($this->settings->get('new_file_permissions')) {
 }
 
 /* compress and concat JS on new installs */
-if (defined('MODX_SETUP_KEY') && MODX_SETUP_KEY != '@svn') {
+if (defined('MODX_SETUP_KEY') && MODX_SETUP_KEY != '@svn@') {
     $concatJavascript = $this->xpdo->getObject('modSystemSetting', array(
         'key' => 'concat_js',
     ));
