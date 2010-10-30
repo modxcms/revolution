@@ -3,6 +3,13 @@
     <!-- Override properties in the build.properties file -->
     <property file="build.properties" />
 
+    <!-- Set build timestamp properties, available as:
+         DSTAMP "%Y%m%d"
+         TSTAMP "%H%M"
+         TODAY  "%B %d %Y"
+    -->
+    <tstamp />
+
     <!-- Set some common project properties -->
     <property name="project.name.fs" value="modx" />
     <property name="project.root.dir" value=".." />
@@ -28,6 +35,15 @@
     <property name="build.distrib.dir" value="${build.dir}/distrib" />
     <property name="build.templates.dir" value="${build.dir}/templates" />
     <property name="build.apidocs.dir" value="${build.image.basedir}/docs" />
+    <property name="build.timestamp" value="true" />
+
+    <!-- Set the paths to the main locations of source code in the build image -->
+    <property name="image.core.dir" value="${build.image.dir}/core" />
+    <property name="image.assets.dir" value="${build.image.dir}/assets" />
+    <property name="image.connectors.dir" value="${build.image.dir}/connectors" />
+    <property name="image.manager.dir" value="${build.image.dir}/manager" />
+    <property name="image.modext.dir" value="${image.manager.dir}/assets/modext" />
+    <property name="image.css.dir" value="${image.manager.dir}/templates/default/css" />
 
     <taskdef name="yuicompress" classname="tasks.yuiCompressTask" />
 
@@ -63,8 +79,8 @@
         </delete>
     </target>
 
-    <!-- Export the Git build image from a local repository -->
-    <target name="git-export-build-image" description="export a revision of MODx from a local Git repository">
+    <!-- Export a build image from a local Git repository tree; requires a local Git clone of the repository -->
+    <target name="git-export-build-image" description="export a repository tree of MODx from the local Git repository" if="build.distrib">
         <mkdir dir="${build.image.dir}" />
         <resolvepath propertyName="absolute.root.dir" file="${project.root.dir}" />
         <resolvepath propertyName="absolute.image.basedir" file="${build.image.basedir}" />
@@ -74,61 +90,49 @@
         <unzip file="${build.image.dir}.zip" todir="${build.image.basedir}" />
     </target>
 
-    <!-- Minify the MODExt JavaScript libraries (using YUIAnt task) -->
-    <target name="modext-minify" description="Create minimized MODExt scripts from the working copy">
-        <echo>Creating minimized js scripts from your working copy</echo>
-
+    <!-- Minify the MODExt JavaScript libraries (using YUICompressor task) -->
+    <target name="modext-minify" description="Create minified MODExt scripts">
+        <if>
+            <not><isset property="build.distrib" /></not>
+            <then>
+                <echo>Creating minimized js scripts from the working copy</echo>
+                <property name="modext.dir" value="${project.modext.dir}" />
+            </then>
+            <else>
+                <echo>Creating minimized js scripts from the build image</echo>
+                <property name="modext.dir" value="${image.modext.dir}" />
+            </else>
+        </if>
         <yuicompress nomunge="false"
                      preservesemicolons="true"
                      outputsuffix="-min"
                      dest="${build.image.modext.dir}/build"
                      lib="${project.basedir}/lib/yuicompressor-2.3.5.jar">
-            <fileset dir="${project.manager.dir}/assets/modext"
+            <fileset dir="${modext.dir}"
                 includes="**/*.js"
                 excludes="build/**,util/filetree/**,modext-min.js,modext.js"
             />
         </yuicompress>
     </target>
 
-    <target name="css-minify" description="Create minimized CSS from the working copy">
-        <echo>Creating minimized js scripts from your working copy</echo>
-
+    <target name="css-minify" description="Create minified CSS">
+        <if>
+            <not><isset property="build.distrib" /></not>
+            <then>
+                <echo>Creating minified CSS from the working copy</echo>
+                <property name="css.dir" value="${project.css.dir}" />
+            </then>
+            <else>
+                <echo>Creating minified CSS from the build image</echo>
+                <property name="css.dir" value="${image.css.dir}" />
+            </else>
+        </if>
         <yuicompress nomunge="true"
                      preservesemicolons="true"
                      outputsuffix="-min"
                      dest="${build.image.css.dir}"
                      lib="${project.basedir}/lib/yuicompressor-2.3.5.jar">
-            <fileset dir="${project.manager.dir}/templates/default/css"
-                includes="ie.css,index.css,login.css,xtheme-modx.css"
-            />
-        </yuicompress>
-    </target>
-
-    <!-- Minify the MODExt JavaScript libraries (using YUIAnt task) -->
-    <target name="modext-minify-wc" description="Create minimized MODExt scripts in the working copy">
-        <echo>Creating minimized js scripts in your working copy</echo>
-
-        <yuicompress nomunge="true"
-                     preservesemicolons="true"
-                     outputsuffix="-min"
-                     dest="${build.image.modext.dir}/build"
-                     lib="${project.basedir}/lib/yuicompressor-2.3.5.jar">
-            <fileset dir="${project.manager.dir}/assets/modext"
-                includes="**/*.js"
-                excludes="build/**,util/filetree/**,modext-min.js,modext.js"
-            />
-        </yuicompress>
-    </target>
-
-    <target name="css-minify-wc" description="Create minimized CSS from the working copy">
-        <echo>Creating minimized js scripts from your working copy</echo>
-
-        <yuicompress nomunge="true"
-                     preservesemicolons="true"
-                     outputsuffix="-min"
-                     dest="${build.image.css.dir}"
-                     lib="${project.basedir}/lib/yuicompressor-2.3.5.jar">
-            <fileset dir="${project.manager.dir}/templates/default/css"
+            <fileset dir="${css.dir}"
                 includes="ie.css,index.css,login.css,xtheme-modx.css"
             />
         </yuicompress>
@@ -190,35 +194,6 @@
         </append>
     </target>
 
-    <!-- Concat the non-minified MODExt JavaScript libraries -->
-    <target name="modext-concat-wc" description="Create modext.js">
-        <echo>Creating modext.js in ${build.image.modext.dir}</echo>
-
-        <append destFile="${build.image.modext.dir}/modext.js">
-            <filelist dir="${project.basedir}/templates"
-                      files="header.modext.txt" />
-            <filelist dir="${project.modext.dir}/core"
-                      files="modx.localization.js" />
-            <filelist dir="${project.modext.dir}/util"
-                      files="utilities.js" />
-            <filelist dir="${project.modext.dir}/core"
-                      files="modx.component.js" />
-            <filelist dir="${project.modext.dir}/widgets/core"
-                      files="modx.panel.js,modx.tabs.js,modx.window.js,modx.tree.js,modx.combo.js,modx.grid.js,modx.console.js,modx.portal.js" />
-            <filelist dir="${project.modext.dir}/widgets"
-                      files="modx.treedrop.js,windows.js" />
-            <filelist dir="${project.modext.dir}/widgets/resource"
-                      files="modx.tree.resource.js" />
-            <filelist dir="${project.modext.dir}/widgets/element"
-                      files="modx.tree.element.js" />
-            <filelist dir="${project.modext.dir}/widgets/system"
-                      files="modx.tree.directory.js" />
-            <filelist dir="${project.modext.dir}/core"
-                      files="modx.view.js" />
-        </append>
-    </target>
-
-
     <!-- Concat the minified CSS -->
     <target name="css-concat-min" description="Create modx-min.css">
         <echo>Creating modx-min.css in ${build.image.css.dir}</echo>
@@ -229,47 +204,35 @@
         </append>
     </target>
 
-    <!-- Concat the minified CSS -->
-    <target name="css-concat-min-wc" description="Create modx-min.css">
-        <echo>Creating modx-min.css in ${build.image.css.dir}</echo>
-
-        <append destFile="${build.image.css.dir}/modx-min.css">
-            <filelist dir="${build.image.css.dir}"
-                      files="index-min.css,xtheme-modx-min.css" />
-        </append>
-    </target>
-
-    <!-- Copy the minified and concatenated MODExt files to the working copy -->
-    <target name="copy-prepared-js" description="copy the minified and concatenated js files to the image">
-        <copy todir="${build.image.dir}/manager/assets/modext">
-            <fileset dir="${build.image.modext.dir}" />
-        </copy>
-        <copy todir="${project.manager.dir}/assets/modext">
+    <!-- Copy the minified and concatenated MODExt files to the build image, or working copy if wc=true -->
+    <target name="copy-prepared-js" description="copy the minified and concatenated js files to the build image">
+        <if>
+            <not><isset property="build.distrib" /></not>
+            <then>
+                <property name="modext.dir" value="${project.modext.dir}" />
+            </then>
+            <else>
+                <property name="modext.dir" value="${image.modext.dir}" />
+            </else>
+        </if>
+        <copy todir="${modext.dir}" overwrite="true">
             <fileset dir="${build.image.modext.dir}" />
         </copy>
     </target>
 
-    <!-- Copy the minified and concatenated MODExt files to the working copy -->
-    <target name="copy-prepared-js-wc" description="copy the minified and concatenated js files to the working copy">
-        <delete file="${project.modext.dir}/modext-min.js" />
-        <delete file="${project.modext.dir}/modext.js" />
-        <delete dir="${project.modext.dir}/build" />
-        <copy todir="${project.modext.dir}">
-            <fileset dir="${build.image.modext.dir}" />
-        </copy>
-        <copy file="${build.image.modext.dir}/modext-min.js" todir="${project.modext.dir}" />
-        <copy file="${build.image.modext.dir}/modext.js" todir="${project.modext.dir}" />
-    </target>
-    <!-- Copy minified css to working copy -->
-    <target name="copy-prepared-css" description="copy the minified css files to the working copy">
-        <delete file="${project.css.dir}ie-min.css" />
-        <delete file="${project.css.dir}login-min.css" />
-        <delete file="${project.css.dir}modx-min.css" />
-        <copy file="${build.image.css.dir}/ie-min.css" todir="${project.css.dir}" />
-        <copy file="${build.image.css.dir}/login-min.css" todir="${project.css.dir}" />
-        <copy file="${build.image.css.dir}/modx-min.css" todir="${project.css.dir}" />
-        <copy todir="${build.image.dir}/manager/templates/default/css">
-            <fileset dir="${project.css.dir}" />
+    <!-- Copy minified css to the build image or working copy if wc=true -->
+    <target name="copy-prepared-css" description="copy the minified css files to the build image">
+        <if>
+            <not><isset property="build.distrib" /></not>
+            <then>
+                <property name="css.dir" value="${project.css.dir}" />
+            </then>
+            <else>
+                <property name="css.dir" value="${image.css.dir}" />
+            </else>
+        </if>
+        <copy todir="${css.dir}" overwrite="true">
+            <fileset dir="${build.image.css.dir}" />
         </copy>
     </target>
 
@@ -281,8 +244,8 @@
         <copy file="${build.image.css.dir}/ie-min.css" todir="${project.css.dir}" />
         <copy file="${build.image.css.dir}/login-min.css" todir="${project.css.dir}" />
         <copy file="${build.image.css.dir}/modx-min.css" todir="${project.css.dir}" />
-        <copy todir="${build.image.dir}/manager/templates/default/css">
-            <fileset dir="${project.css.dir}" />
+        <copy todir="${project.css.dir}/manager/templates/default/css">
+            <fileset dir="${build.image.css.dir}" />
         </copy>
     </target>
 
@@ -291,15 +254,33 @@
         <exec dir="${project.basedir}" command="${php.command} transport.data.php" />
     </target>
 
-    <!-- Run the core package generation script in your local working copy -->
-    <target name="generate-core-transport" description="generate the core transport package in your working copy">
-        <delete file="${project.core.dir}/packages/core.transport.zip" />
-        <delete dir="${project.core.dir}/packages/core" />
+    <!-- Run the core package generation script -->
+    <target name="generate-core-transport" description="generate the core transport package">
+        <if>
+            <not><isset property="build.distrib" /></not>
+            <then>
+                <property name="core.dir" value="${project.core.dir}" />
+            </then>
+            <else>
+                <property name="core.dir" value="${image.core.dir}" />
+            </else>
+        </if>
+        <delete file="${core.dir}/packages/core.transport.zip" />
+        <delete dir="${core.dir}/packages/core" />
         <exec dir="${project.basedir}" command="${php.command} transport.core.php" />
     </target>
 
     <!-- Run the phpdoc generation script -->
     <target name="generate-phpdocs" description="generate the phpdoc documentation">
+        <if>
+            <not><isset property="build.distrib" /></not>
+            <then>
+                <property name="core.dir" value="${project.core.dir}" />
+            </then>
+            <else>
+                <property name="core.dir" value="${image.core.dir}" />
+            </else>
+        </if>
         <phpdoc title="${project.name} ${modx.core.version} API Documentation"
                 target="${build.apidocs.dir}"
                 sourcecode="false"
@@ -308,13 +289,13 @@
                 defaultcategoryname="${project.name}"
                 defaultpackagename="${project.name.fs}"
                 packageoutput="modx,xpdo">
-            <fileset dir="${build.image.dir}/core/xpdo">
+            <fileset dir="${core.dir}/xpdo">
                 <include name="**/*.php" />
                 <exclude name="**/*.map.inc.php" />
                 <exclude name="compression/pclzip.lib.php" />
                 <exclude name="json/**" />
             </fileset>
-            <fileset dir="${build.image.dir}/core/model/modx">
+            <fileset dir="${core.dir}/model/modx">
                 <include name="**.php" />
                 <exclude name="**/*.map.inc.php" />
                 <exclude name="**/*_mysql.class.php" />
@@ -329,7 +310,7 @@
     </target>
 
     <!-- Copy the core transport package from a working copy to an exported image and extract it -->
-    <target name="copy-core-transport" description="copy the core transport to the image">
+    <target name="copy-core-transport" description="copy the core transport to the image" if="build.distrib">
         <delete file="${build.image.dir}/core/packages/core.transport.zip" />
         <delete dir="${build.image.dir}/core/packages/core" includeemptydirs="true" />
         <copy file="${project.core.dir}/packages/core.transport.zip" todir="${build.image.dir}/core/packages" />
@@ -337,7 +318,7 @@
     </target>
 
     <!-- Make sure the distrib directory exists and is clean -->
-    <target name="prepare-build-distrib" description="empty the build distrib directory">
+    <target name="prepare-build-distrib" description="empty the build distrib directory" if="build.distrib">
         <mkdir dir="${build.distrib.dir}" />
         <delete includeemptydirs="true">
             <fileset dir="${build.distrib.dir}">
@@ -347,7 +328,16 @@
     </target>
 
     <!-- Build a MODx SDK distrib with all files in place and extracted -->
-    <target name="build-sdk" description="create the traditional distribution package">
+    <target name="build-sdk" description="create the traditional distribution package" if="build.distrib">
+        <if>
+            <istrue value="${build.timestamp}" />
+            <then>
+                <property name="distrib.name" value="${build.distrib.name}-${DSTAMP}-sdk" />
+            </then>
+            <else>
+                <property name="distrib.name" value="${build.distrib.name}-sdk" />
+            </else>
+        </if>
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>
@@ -379,7 +369,7 @@
                 </replacetokens>
             </filterchain>
         </copy>
-        <zip destfile="${build.distrib.dir}/${build.distrib.name}-sdk.zip" prefix="${build.distrib.name}/">
+        <zip destfile="${build.distrib.dir}/${distrib.name}.zip" prefix="${build.distrib.name}/">
             <fileset dir="${build.image.dir}" />
         </zip>
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
@@ -396,7 +386,16 @@
     </target>
 
     <!-- Build a traditional MODx distrib with all files in place and extracted -->
-    <target name="build-traditional" description="create the traditional distribution package">
+    <target name="build-traditional" description="create the traditional distribution package" if="build.distrib">
+        <if>
+            <istrue value="${build.timestamp}" />
+            <then>
+                <property name="distrib.name" value="${build.distrib.name}-${DSTAMP}" />
+            </then>
+            <else>
+                <property name="distrib.name" value="${build.distrib.name}" />
+            </else>
+        </if>
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>
@@ -425,7 +424,7 @@
                 </replacetokens>
             </filterchain>
         </copy>
-        <zip destfile="${build.distrib.dir}/${build.distrib.name}.zip" prefix="${build.distrib.name}/">
+        <zip destfile="${build.distrib.dir}/${distrib.name}.zip" prefix="${build.distrib.name}/">
             <fileset dir="${build.image.dir}">
                 <exclude name="_build/**" />
                 <include name="**/.gitignore" />
@@ -466,7 +465,16 @@
 
     <!-- Build a new advanced MODx distrib with only the core/ and setup/ dirs
         and the core transport package included -->
-    <target name="build-advanced" description="create the advanced distribution package">
+    <target name="build-advanced" description="create the advanced distribution package" if="build.distrib">
+        <if>
+            <istrue value="${build.timestamp}" />
+            <then>
+                <property name="distrib.name" value="${build.distrib.name}-${DSTAMP}-advanced" />
+            </then>
+            <else>
+                <property name="distrib.name" value="${build.distrib.name}-advanced" />
+            </else>
+        </if>
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>
@@ -474,7 +482,7 @@
                 </replacetokens>
             </filterchain>
         </reflexive>
-        <zip destfile="${build.distrib.dir}/${build.distrib.name}-advanced.zip" prefix="${build.distrib.name}/">
+        <zip destfile="${build.distrib.dir}/${distrib.name}.zip" prefix="${build.distrib.name}/">
             <fileset dir="${build.image.dir}">
                 <include name="setup/**" />
                 <include name="core/.gitignore" />
@@ -502,7 +510,7 @@
     </target>
 
     <!-- Publish a distrib to a server -->
-    <target name="publish-build" description="publish the build to a server for download">
-
+    <target name="publish-build" description="publish the build to a server for download" if="build.distrib">
+        <echo>Not yet implemented!</echo>
     </target>
 </project>
