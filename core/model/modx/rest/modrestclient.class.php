@@ -174,7 +174,11 @@ class modRestResponse {
     function __construct(modRestClient &$client, $response, $responseType = 'xml') {
         $this->client =& $client;
         $this->response = $response;
-        $this->toXml();
+        if ($responseType == 'xml') {
+            $this->toXml();
+        } else if ($responseType == 'json') {
+            $this->fromJSON();
+        }
     }
 
     /**
