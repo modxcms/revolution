@@ -192,6 +192,7 @@ class modResponse {
      * @param string $type The type of redirection to attempt.
      */
     public function sendRedirect($url, $count_attempts= 0, $type= '', $responseCode= '') {
+        $url= str_replace('&amp;','&',$url);
         if (empty ($url)) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, "Attempted to redirect to an empty URL.");
             return false;

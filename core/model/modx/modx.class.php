@@ -759,7 +759,7 @@ class modX extends xPDO {
                 }
             }
 
-            if (!empty($url) && $this->context->getOption('xhtml_urls','0')) {
+            if (!empty($url) && $this->getOption('xhtml_urls',null,false)) {
                 $url= preg_replace("/&(?!amp;)/","&amp;", $url);
             }
         } else {
