@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix bug in phpthumb allowing remote src parameters regardless of settings
 - [#2555] Expose additional phpthumb options in System Settings
 - [#2503] "Preview" inaccurately described viewing current page/site. Changed to "View".
 - Fixed help message strings to correct URLs
