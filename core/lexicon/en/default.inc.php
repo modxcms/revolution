@@ -2,7 +2,7 @@
 /**
  * Default English lexicon topic
  *
- * @language english
+ * @language en
  * @package modx
  * @subpackage lexicon
  */

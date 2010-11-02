@@ -264,7 +264,7 @@ $_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine fri
 $_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
 
 $_lang['setting_mail_charset'] = 'Mail Charset';
-$_lang['setting_mail_charset_desc'] = 'The (default) charset for e-mails, e.g. \'iso-8859-1\' or \'UTF-8\'';
+$_lang['setting_mail_charset_desc'] = 'The default charset for e-mails, e.g. \'iso-8859-1\' or \'utf-8\'';
 
 $_lang['setting_mail_encoding'] = 'Mail Encoding';
 $_lang['setting_mail_encoding_desc'] = 'Sets the Encoding of the message. Options for this are "8bit", "7bit", "binary", "base64", and "quoted-printable".';
@@ -340,6 +340,9 @@ $_lang['setting_new_folder_permissions_desc'] = 'When creating a new folder in t
 
 $_lang['setting_password_generated_length'] = 'Password Auto-Generated Length';
 $_lang['setting_password_generated_length_desc'] = 'The length of the auto-generated password for a User.';
+
+$_lang['setting_password_min_length'] = 'Minimum Password Length';
+$_lang['setting_password_min_length_desc'] = 'The minimum length for a password for a User.';
 
 $_lang['setting_proxy_auth_type'] = 'Proxy Authentication Type';
 $_lang['setting_proxy_auth_type_desc'] = 'Supports either BASIC or NTLM.';

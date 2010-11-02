@@ -24,8 +24,15 @@ $_lang['field_desc'] = 'Dies ist das Feld, auf das sich die Regel auswirkt. Dies
 $_lang['field_default'] = 'Feld-Standardwert';
 $_lang['field_label'] = 'Feldbeschriftung';
 $_lang['field_visible'] = 'Feld sichtbar';
-$_lang['form_customization_msg'] = 'Hier ist eine Liste der momentan angewendeten Regeln. Weitere Informationen über Regeln und Formular-Anpassung finden Sie <a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization" target="_blank">hier</a>. Bitte beachten Sie, dass ungeeignete Regeln Probleme mit Ihrer MODx-Installation verursachen können. Inaktive Regeln werden ausgegraut dargestellt.';
+$_lang['filter_by_action'] = 'Nach Aktion filtern...';
+$_lang['filter_by_rule_type'] = 'Nach Regel filtern...';
+$_lang['filter_by_search'] = 'Suchen...';
+$_lang['for_parent'] = 'Für Eltern-Element';
+$_lang['for_parent_desc'] = 'Aktivieren Sie diese Option, wenn Sie möchten, dass diese Regel auf das Eltern-Element angewendet wird. Verwenden Sie dies nur mit Ressourcen oder Objekten mit einem mit einem `parent`-Feld. Nützlich für die "Erstellen"-Seite von Ressourcen.';
+$_lang['form_customization_msg'] = 'Hier ist eine Liste der momentan angewendeten Regeln. Weitere Informationen über Regeln und Formular-Anpassung finden Sie <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">hier</a>. Bitte beachten Sie, dass ungeeignete Regeln Probleme mit Ihrer MODx-Installation verursachen können. Inaktive Regeln werden ausgegraut dargestellt.';
 $_lang['form_rules'] = 'Formular-Regeln';
+$_lang['rank'] = 'Rang';
+$_lang['rank_desc'] = 'Mit dieser Einstellung wird die Reihenfolge festgelegt, in der die Regeln ausgeführt werden. Eine kleinere Zahl bedeutet, dass die Regel früher ausgeführt wird.';
 $_lang['rule'] = 'Regel';
 $_lang['rule_create'] = 'Regel erstellen';
 $_lang['rule_desc'] = 'Die Art der Regel, die auf dieses Feld angewendet wird.';
