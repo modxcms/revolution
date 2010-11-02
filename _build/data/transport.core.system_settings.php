@@ -837,6 +837,15 @@ $settings['password_min_length']->fromArray(array (
   'editedon' => null,
 ), '', true, true);
 
+$settings['phpthumb_allow_src_above_docroot']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_allow_src_above_docroot']->fromArray(array (
+  'key' => 'phpthumb_allow_src_above_docroot',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
 $settings['phpthumb_cache_maxage']= $xpdo->newObject('modSystemSetting');
 $settings['phpthumb_cache_maxage']->fromArray(array (
   'key' => 'phpthumb_cache_maxage',
@@ -873,10 +882,28 @@ $settings['phpthumb_cache_source_enabled']->fromArray(array (
   'area' => 'phpthumb',
   'editedon' => null,
 ), '', true, true);
-$settings['phpthumb_zoomcrop']= $xpdo->newObject('modSystemSetting');
-$settings['phpthumb_zoomcrop']->fromArray(array (
-  'key' => 'phpthumb_zoomcrop',
-  'value' => '0',
+$settings['phpthumb_error_bgcolor']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_error_bgcolor']->fromArray(array (
+  'key' => 'phpthumb_error_bgcolor',
+  'value' => 'CCCCFF',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_error_textcolor']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_error_textcolor']->fromArray(array (
+  'key' => 'phpthumb_error_textcolor',
+  'value' => 'FF0000',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_error_fontsize']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_error_fontsize']->fromArray(array (
+  'key' => 'phpthumb_error_fontsize',
+  'value' => 1,
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
@@ -895,6 +922,105 @@ $settings['phpthumb_imagemagick_path']= $xpdo->newObject('modSystemSetting');
 $settings['phpthumb_imagemagick_path']->fromArray(array (
   'key' => 'phpthumb_imagemagick_path',
   'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nohotlink_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nohotlink_enabled']->fromArray(array (
+  'key' => 'phpthumb_nohotlink_enabled',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nohotlink_erase_image']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nohotlink_erase_image']->fromArray(array (
+  'key' => 'phpthumb_nohotlink_erase_image',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nohotlink_valid_domains']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nohotlink_valid_domains']->fromArray(array (
+  'key' => 'phpthumb_nohotlink_valid_domains',
+  'value' => '{http_host}',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nohotlink_text_message']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nohotlink_text_message']->fromArray(array (
+  'key' => 'phpthumb_nohotlink_text_message',
+  'value' => 'Off-server thumbnailing is not allowed',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_enabled']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_enabled',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_erase_image']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_erase_image']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_erase_image',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_require_refer']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_require_refer']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_require_refer',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_text_message']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_text_message']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_text_message',
+  'value' => 'Off-server linking is not allowed',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_valid_domains']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_valid_domains']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_valid_domains',
+  'value' => '{http_host}',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_watermark_src']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_watermark_src']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_watermark_src',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_zoomcrop']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_zoomcrop']->fromArray(array (
+  'key' => 'phpthumb_zoomcrop',
+  'value' => '0',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'phpthumb',

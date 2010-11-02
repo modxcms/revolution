@@ -1,7 +1,9 @@
 
-This file shows the changes in recent releases of MODx. The most current release is usually the 
+This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix bug in phpthumb allowing remote src parameters regardless of settings
+- [#2555] Expose additional phpthumb options in System Settings
 - [#2503] "Preview" inaccurately described viewing current page/site. Changed to "View".
 - Fixed help message strings to correct URLs
 - Fixed missing options array call in modRestClient, isArray call in modRestCurlClient
@@ -143,7 +145,7 @@ MODx Revolution 2.0.2-pl (September 17, 2010)
 - Fixed issue where Add New Package would not work when selecting a provider manually
 - [#MODX-2339] Fixed issue with caching menus in mgr and multiple languages
 - [#MODX-2340] Fixed issue with initial resource values reverting after a save
-- [#XPDO-72] Fix invalid call to $this->manager->getPhpType() 
+- [#XPDO-72] Fix invalid call to $this->manager->getPhpType()
 
 MODx Revolution 2.0.1-pl (September 16, 2010)
 ====================================
@@ -577,7 +579,7 @@ core lexicon entries, caches faster, and allows for much easier 3PC development.
 - [#MODX-1848] Allowed parent selector to select contexts as the parent in Resource page
 - Pushed Resource tree nodes' context menus to the JS layer, massively decreasing the size of the JSON tree sent in the getNodes processor, vast speeding up tree functionality
 - Made publish/unpublish/delete/undelete actions on the tree only change the class of the node, rather than refreshing the node, speeding up workflow
-- Pushed modX::getService to xPDO layer 
+- Pushed modX::getService to xPDO layer
 - [#MODX-1873] Ensure setup redirects use full URL in header
 - [#MODX-1887] Adjust default widths for main layout to render panels more consistently
 - Optimized modX::getChunk() and modX::runSnippet() by caching instances within a request to modX::$sourceCache
@@ -621,7 +623,7 @@ core lexicon entries, caches faster, and allows for much easier 3PC development.
 MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-22 16:41:04 -0500 (Mon, 22 Mar 2010))
 ====================================
 - Prepared for rc1 release
-- Fixed CSS compression copying in build.xml 
+- Fixed CSS compression copying in build.xml
 - Fixed regClient*() functions to work again on cacheable scripts
 - Move element source and include cache files outside of context cache directories since they should be cleared only when elements are updated
 - Remove eval() from modScript and re-enable remote debugging of modScript instances by caching function as include in addition to source cache
@@ -643,8 +645,8 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - [#MODX-1762] Increased file uploader window size for translations
 - Dont render unnecessary tabs in Resource TV panel if no TVs assigned to Template for that Resource
 - Sort Template Variables on the Template editing page by name
-- Ensure Element Properties that have HTML in them show markup instead of rendering the html in editing mode in mgr ui 
-- [#MODX-1669] Redid File Uploader in Directory tree to be more cross-browser compatible 
+- Ensure Element Properties that have HTML in them show markup instead of rendering the html in editing mode in mgr ui
+- [#MODX-1669] Redid File Uploader in Directory tree to be more cross-browser compatible
 - Cleaned up and enhanced login CSS
 - Standardizing and adding class constants to modRest* classes
 - Updated copyright data in lexicon entries
@@ -662,7 +664,7 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - Some css tweaks to login page
 - Updated to xPDO 2.0.0 r419 to fix xPDOVehicle bug
 - Fixed bug with Download Output button in MODx.Console
-- Ensure forgot login activation email is HTML 
+- Ensure forgot login activation email is HTML
 - Added Forgot Login link and form to manager, sends an activation email to specified email if user forgot login/password
 - Fixed SQL sorting algorithm for package versions, added helper methods for comparing package versions
 - Added $resource to properties passed to OnDocFormDelete in resource/delete processor
@@ -672,7 +674,7 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - Added compression/concat references to login and browser tpls
 - Fixed build.local.xml and build.xml scripts
 - Added compress_css system setting for compressed CSS for releases, moved over modx-theme.css to templates css/ dir. Don't use compress_css without first running _build/build.local.xml Ant task.
-- Cleaned up leftover PHP4 function definitions, unescaped SQL code, added proper accessor methods for private vars, other old code 
+- Cleaned up leftover PHP4 function definitions, unescaped SQL code, added proper accessor methods for private vars, other old code
 - Fixed bug with modLexiconLanguage::clearCache
 - [#MODX-1738] Fixed issue with FC TV rules not working as expected on Resource Update
 - Fixed bug where plugin event properties were getting merged if more than one plugin was associated with the event
@@ -691,7 +693,7 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - [#MODX-1593] Fixed bug where User could not be added with no role in User Groups tree
 - [#MODX-1735] Properly URL encode link tags while still preserving = and &amp; in query string
 - [#MODX-1736] Fixed bug with assigning TVs to Resource Groups
-- [#MODX-1740] Added workaround for SQL code to properly hide TVs with FC rules 
+- [#MODX-1740] Added workaround for SQL code to properly hide TVs with FC rules
 - [#MODX-1738] Fixed bug with radiogroups and set TV default FC rule
 - Fixed some header issues, _FILES content type handling
 - [#MODX-1733] Fixed bug that was stripping tags from connector processing
@@ -713,7 +715,7 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - Added MODx.FormPanel::markDirty
 - Added in CSS tweaks to accommodate Opera 10.5
 - Fixed bug with users grid if access permissions tab is removed
-- Fixed deprecated method definitions in modConnector classes 
+- Fixed deprecated method definitions in modConnector classes
 - Fixed text in language settings to more accurately reflect function
 - Added area filter to Settings grid
 - [#MODX-1721] Disabled unnecessary paging on System Events table
@@ -736,7 +738,7 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - Fixed css/js properties in TV tab to let RTEs auto-determine the height of their TD fields
 - Fixed missing permissions reference on resource controllers
 - Added OnHandleRequest to modManagerRequest::handleRequest
-- Properly hides UI elements for Resource buttons/pages if user doesnt have permissions 
+- Properly hides UI elements for Resource buttons/pages if user doesnt have permissions
 - Refactored modResource::cleanAlias() to allow various options, including built-in and custom transliteration capabilities
 - [#MODX-717] Foreign characters (UTF8 data) needlessly removed from alias
 - Hide top menu items if there are no submenus and if the topmenu is not clickable
@@ -755,7 +757,7 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - [#MODX-1662] Fixed mismatch in menus widget field label
 - [#MODX-1687] Fixed bugs in template package browser due to changes in modx.view.js
 - Made resource panel be a fileUpload-able panel for plugins
-- [#MODX-1357] Added richtext_default system setting 
+- [#MODX-1357] Added richtext_default system setting
 - [#MODX-1685] Added MODxEditor, a core Ext-based RTE to be the default RTE for Revolution
 - [#MODX-1674] Stabilized MODx.Browser to work with core RTE
 - - Added missing registry.db.modDbRegister* classes to setup
@@ -788,11 +790,11 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - [#MODX-1667] Removed unnecessary opacity CSS rule in menus
 - Fixed bug where page wasnt reloading on login in certain situations
 - Make rightlogin div longer to support longer translations
-- [#MODX-1653] Fixed issues with related objects, removal of aggregates, and other packaging bugs. Introduced xPDOTransport::UNINSTALL_OBJECT, which defaults to true. When off, it will prevent an object from being uninstalled. 
+- [#MODX-1653] Fixed issues with related objects, removal of aggregates, and other packaging bugs. Introduced xPDOTransport::UNINSTALL_OBJECT, which defaults to true. When off, it will prevent an object from being uninstalled.
 - Updated xPDO to r413
 - [#MODX-761] Fixed language issue in setup, now sets it correctly and loads proper lexicon for login screen
 - Ensure console window appears above other windows
-- [#MODX-1663] Added MODx.msg.status, which shows a fading status message on a successful save. This also solves the issue of user feedback. 
+- [#MODX-1663] Added MODx.msg.status, which shows a fading status message on a successful save. This also solves the issue of user feedback.
 - Removed unnecessary field from recently-edited-resource grid on welcome screen
 - [#MODX-1660], [#MODX-1037] Revamped login screen to HTML/CSS, basic form processing to allow browsers to save password in their password management systems
 - Revamped UI in new setup options, cleared up text, simplified presented options
@@ -837,7 +839,7 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - [#MODX-1606] Added sanity checks and ID standardization to DOM nodes for Package Browser
 - Fixed possible bug with ta-toggle div in resource panel
 - [#MODX-1628] Fixed FC tvDefault rule by doing setting php-side
-- [#MODX-1636] Added ability to assign Role to User when adding them to a User Group from the User Groups tree 
+- [#MODX-1636] Added ability to assign Role to User when adding them to a User Group from the User Groups tree
 - [#MODX-1634] Fixed bug with resource/resourcegroup/getlist processor that prevented showing of resource groups in new resource panels
 - [#MODX-1639] Fixed bug where resource panel JS didnt check for existence of possibly hidden access permissions grid
 - Fixed modUser::removeSessionContext() to call modUser::endSession() if no contexts are left
@@ -855,7 +857,7 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - Fixed modX::__construct() declaration to indicate it properly as a public method; added phpdoc comments.
 - Fixed modX::sanitize() declaration to indicate it properly as a static method.
 - Updated to xPDO 2.0 revision 405
-- [#MODX-1614] Fixed issue with cached pages going to unauthorized_page instead of error_page when user does not have load permission 
+- [#MODX-1614] Fixed issue with cached pages going to unauthorized_page instead of error_page when user does not have load permission
 - [#MODX-411] Set system setting: emailsender to the admin email address during install
 - [#MODX-1556] Show class and id for deleted resources or elements in Manager Action Log
 - [#MODX-1552] Create New element Here shows for root elements but not those in categories
@@ -890,7 +892,7 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - [#MODX-1590] Fixed missing processors for ACL grids
 - [#MODX-1526] Added permissions resource_tree, element_tree, file_tree that restrict rendering/viewing of the left-side trees. Must be applied to access policies.
 - [#MODX-625] Adjusted text in config.inc.php writable warning message
-- [#MODX-1586] Fixed toolbar rendering bug in user settings due to hidden div, now using hideMode: offsets 
+- [#MODX-1586] Fixed toolbar rendering bug in user settings due to hidden div, now using hideMode: offsets
 - Added search for user box in usergroup users grid
 - Changed User Group users grid to a non-local grid, now supports pagination and proper validation
 - Enhanced UI for editing User Group Context/ResourceGroup ACLs
@@ -910,7 +912,7 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - [#MODX-923] Added file path to config.inc.php configcheck message on welcome page
 - [#MODX-1579] Added code to prevent invalid characters from being used in admin username/password in setup
 - [#MODX-1575] Fixed bug with Resource Group getList processor
-- Updated to xPDO 2.0 revision 389 
+- Updated to xPDO 2.0 revision 389
 - Added validation to modContext.key field; must be a valid PHP identifier without underscore characters
 - Modified modError::checkValidation() to call modError::addField() for each validation message
 - [#MODX-1562] Cleaned up Site Schedule grid to properly load baseParams during refresh and adjust pagination
@@ -923,7 +925,7 @@ MODx Revolution 2.0.0-rc-1 (LastChangedRevision: 6614, LastChangedDate: 2010-03-
 - Fixed bug with default provider on package management UI
 - [#MODX-1540] Fixed last login display in Welcome page
 - [#MODX-1567] Enabled sorting in Reports -> System Info -> Recently Edited Documents
-- [#MODX-1522] Restricted user editing to just the save_user permission 
+- [#MODX-1522] Restricted user editing to just the save_user permission
 - Added a "reload" button to the error log
 - Fixed Active Resources on Reports - System Info
 - Fixed database version query in Reports - System Info
@@ -965,7 +967,7 @@ MODx Revolution 2.0.0-beta-5 (LastChangedRevision: 6224, LastChangedDate: 2009-1
 - Fixed invalid method reference in modInstallTest derivative classes
 - Fixed styling and JS in TV pane
 - Fixed error with charset reference in setup/
-- Clear Search in Package Browser when clicking on a Tag 
+- Clear Search in Package Browser when clicking on a Tag
 - Added Search bar to Package Browser, now can search entire repository
 - Fixed height of Package Browser to not go too far down screen
 - Fixed modRestSockClient to properly strip HTTP headers and return only XML
@@ -1021,7 +1023,7 @@ MODx Revolution 2.0.0-beta-5 (LastChangedRevision: 6224, LastChangedDate: 2009-1
 - Added (Inherited Value) flag to TVs that are inheriting their value
 - Added category titles to TV editing panel
 - [#MODX-1354], [#MODX-1475] Fixed @INHERIT and other bindings in TV inputs
-- Fixed bugs with dirty status not firing for certain TV input types 
+- Fixed bugs with dirty status not firing for certain TV input types
 - Fixed CSS for login page
 - Fixed issue where default connection charset was not persisting in setup for upgrades
 - CSS tweak to get windows working properly
@@ -1046,7 +1048,7 @@ MODx Revolution 2.0.0-beta-5 (LastChangedRevision: 6224, LastChangedDate: 2009-1
 - [#MODX-1443] Tree sorting now works for modMenus
 - Removed deprecated system settings from build
 - [#MODX-1448] Fixed issue with container checkbox not persisting
-- [#MODX-1426] Fixed issue with MySQL checks on non-standard 
+- [#MODX-1426] Fixed issue with MySQL checks on non-standard
 - [#MODX-1437] Fixed duplicate policy
 - Fixed some issues with Form Customization
 - Added 'address' field to modUserProfile
@@ -1065,10 +1067,10 @@ MODx Revolution 2.0.0-beta-5 (LastChangedRevision: 6224, LastChangedDate: 2009-1
 - [#MODX-1390] Fixed docs for $modx->sendUnauthorizedPage();
 - [#MODX-895] Fixed possible rendering issue with error log scroll bar
 - Optimized setup pre-install checks, now checks both mysql client and server versions
-- [#MODX-1404] Fixed mysql version checks to only show a warning if the client/server is incorrectly setup to where PHP cannot determine the versions. 
+- [#MODX-1404] Fixed mysql version checks to only show a warning if the client/server is incorrectly setup to where PHP cannot determine the versions.
 - Package Management now restricts downloading/updating Extras to their supported MODx versions (ie, you can't download packages that support only beta-3 if you have beta-4 or beta-2)
 - [#MODX-1310] Fixed expand/collapse toolbar items in trees
-- [#MODX-1361] Make sure cache (including Smarty files) is cleared after install 
+- [#MODX-1361] Make sure cache (including Smarty files) is cleared after install
 - [#MODX-1372],[#MODX-1376] Marked deprecated functions as so in phpdoc comments
 - [#MODX-1378] Fixed bug with adding a None role to a user group in the User -> Access Permissions tab
 - [#MODX-1375] Fixed documentation for modX.getRequest
@@ -1077,14 +1079,14 @@ MODx Revolution 2.0.0-beta-5 (LastChangedRevision: 6224, LastChangedDate: 2009-1
 - [#MODX-1373] getLoginUserName and getLoginUserId now return boolean false if no user is logged in
 - [#MODX-1369] Fixed validation errors and possible loophole in error processing for user processor flow
 - Fixed column alignment with radio/checkbox TV inputs
-- [#MODX-1350] Fixed issue where reset to default wasnt working with radio TV inputs 
+- [#MODX-1350] Fixed issue where reset to default wasnt working with radio TV inputs
 - [#MODX-1360] Fixed issue where publishedon was being reset in quick update
 - Sanity fixes to misc processors
 - Added access modifiers to methods in modElement
 - Moved name character sanity checks for Elements to element class.
 - Cleaned up element processors, added missing permission checks, filled out plugin event calls
 - [#MODX-1355] Fixed erroneous label for quick create resource on Contexts
-- [#MODX-1352] Remove stay-buttons from user update screen 
+- [#MODX-1352] Remove stay-buttons from user update screen
 - [#MODX-1349] onDirty now fires on triggerfield-based TVs
 - Cleanups to getList processors, bugfixes for grids
 - [#MODX-1317] Fixed erroneous label for quick create resource; should be Document
@@ -1118,7 +1120,7 @@ MODx Revolution 2.0.0-beta-4 (LastChangedRevision: 5880, LastChangedDate: 2009-1
 - [#MODX-896] Fixed issue with server_offset setting description
 - [#MODX-928] Fixed issue where parent resource wasnt refreshing properly
 - [#MODX-777] Made consistent the checkDirty behaviour of save buttons across manager
-- [#MODX-938] Added check to build to check if core+core.transport.zip were removed before build starts. 
+- [#MODX-938] Added check to build to check if core+core.transport.zip were removed before build starts.
 - [#MODX-629] Added missing automatic_alias setting to build
 - [#MODX-790] Fixed issue where couldnt browse back to root directory with MODx.Browser
 - [#MODX-902] Fixed empty warning message for removing category
@@ -1141,7 +1143,7 @@ MODx Revolution 2.0.0-beta-4 (LastChangedRevision: 5880, LastChangedDate: 2009-1
 - Removed some legacy todo statements
 - Moved Element category reset on modCategory object remove to modCategory class
 - Cleaned up modResourceGroup, modTemplate helper methods
-- Added modUser::joinGroup(group,(optional)role) and modUser::leaveGroup(group) for easier development 
+- Added modUser::joinGroup(group,(optional)role) and modUser::leaveGroup(group) for easier development
 - Optimized getrecentlyeditedresources processor
 - Make sure config.js.php outputs proper headers
 - Commented out Content-Length headers on lang.js.php, for some reason was slowing down servers
@@ -1157,7 +1159,7 @@ MODx Revolution 2.0.0-beta-4 (LastChangedRevision: 5880, LastChangedDate: 2009-1
 - Added "Set to Default" button on TVs that will reset the TV's value to it's default value. TV Resource values can now be set to blank as a valid value.
 - [#MODX-924] Fixed errors in various system setting descriptions
 - [#MODX-935] Tooltips in Resource tree now do not show if no description or longtitle is set
-- [#MODX-1120] Now shows TV names in tag form below the caption in the TV editing panel in Resource editing 
+- [#MODX-1120] Now shows TV names in tag form below the caption in the TV editing panel in Resource editing
 - Fixes to plugin event calls in controllers
 - Fixes to filetree to enable in Ext3
 - [#MODX-1112] Fixed issue where checkboxes in grids werent firing dirty statuses
@@ -1191,7 +1193,7 @@ MODx Revolution 2.0.0-beta-4 (LastChangedRevision: 5880, LastChangedDate: 2009-1
 - Added more metadata to Lexicon Topic exports
 - [#MODX-1191] Fixed issue where Namespace combo was conflicting with other DOM IDs in Lexicon Management
 - Changed Accordion to Tabs in left menu
-- In all Resource panels, Moved Page Settings back to right side, moved Template to top, moved Published to top right 
+- In all Resource panels, Moved Page Settings back to right side, moved Template to top, moved Published to top right
 - [#MODX-1173] Added modResource->hasChildren() function. Returns # of children for the Resource.
 - [#MODX-689] Fixed error when using @SELECT binding with Template Variable Input Option values.
 - Fixed issues with modMenu creation/editing
@@ -1226,7 +1228,7 @@ MODx Revolution 2.0.0-beta-3 (LastChangedRevision: 5593, LastChangedDate: 2009-0
 - [#MODX-964] Fixed issue with toolbar buttons in package download tree by removing unneeded buttons, fixing refresh button
 - [#MODX-966] Changed Package Management grid to be easier to read, removed unnecessary information
 - [#MODX-962] Fixed issues with User panel screen
-- Replace deprecated split() call in magpierss class with explode(). 
+- Replace deprecated split() call in magpierss class with explode().
 
 MODx Revolution 2.0.0-beta-2 (LastChangedRevision: 5416, LastChangedDate: 2009-07-16 13:15:41 -0600 (Thu, 16 Jul 2009))
 ====================================
@@ -1252,7 +1254,7 @@ MODx Revolution 2.0.0-beta-2 (LastChangedRevision: 5416, LastChangedDate: 2009-0
 - Upgraded ExtJS from 2.2 to 3.0
 - [#MODX-925] Fixed issue where name couldnt be changed on duplicate resource window with resources with children
 - [#MODX-911] Fixed dragability issue when assigning resources to resource groups
-- [#MODX-901] System Settings grid search now searches descriptions 
+- [#MODX-901] System Settings grid search now searches descriptions
 - Added 'afterLayout', 'loadKeyMap', and 'loadAccordion' events to MODx.Layout
 - Fixed bugs with File TV input renders
 - [#MODX-887] Properly standardized POST/REQUEST access methods for element processors
@@ -1280,7 +1282,7 @@ MODx Revolution 2.0.0-beta-2 (LastChangedRevision: 5416, LastChangedDate: 2009-0
 - Fixed some DOM issues with Package Management
 - [#MODX-833] Temporary fix for modManagerLog message showing up in console
 - [#MODX-853] Changed source caption of view resource data
-- [#MODX-809] Adjusted formatting of View Resource data fields 
+- [#MODX-809] Adjusted formatting of View Resource data fields
 - Fixed bugs with Resource data page not loading fully, glitching tree
 - [#MODX-772] Fixed bug where plugin events were not showing enabled if filtered by name
 - Fixed user system event calls to pass proper arguments
@@ -1333,10 +1335,10 @@ MODx Revolution 2.0.0-beta-2 (LastChangedRevision: 5416, LastChangedDate: 2009-0
 - Fixed bugs with category setting in Element processors
 - Added Clear Cache checkbox option to all Element type forms
 - Fixed bug with Category dropdown
-- Fixed tv input properties forms from double-rendering 
+- Fixed tv input properties forms from double-rendering
 - [#MODX-804] TV fields now fire resource change event
-- Fixed bug in Safari with TV fields being uneditable if panel is dragged 
-- [#MODX-745] Added 'cancel' button to go back to policy page when updating a policy 
+- Fixed bug in Safari with TV fields being uneditable if panel is dragged
+- [#MODX-745] Added 'cancel' button to go back to policy page when updating a policy
 - [#MODX-573] Removed no-longer-applicable 'role' column from users grid, fixed capitalization issues in processors
 - [#MODX-762] Added in missing lexicon entries to hardcoded strings
 - Added modx.localization.js for i18n translations
@@ -1352,7 +1354,7 @@ MODx Revolution 2.0.0-beta-2 (LastChangedRevision: 5416, LastChangedDate: 2009-0
 - Added sanity check to toJSON function in modConnectorResponse
 - Properly refactor element tree to point to correct processor
 - Added delegate processors for different modes in element tree
-- Updated Context policy attributes for missing attributes 
+- Updated Context policy attributes for missing attributes
 - Fixed invalid category reference on chunk update processor
 - Added log error messages if save()/remove() fails on modElement derivatives
 - [#MODX-771] Fixed invalid lexicon string reference in element tree
@@ -1420,11 +1422,11 @@ MODx Revolution 2.0.0-beta-1 (LastChangedRevision: 5070 , LastChangedDate: 2009-
 - Added '@RESOURCE' binding alias so as to deprecate @DOCUMENT binding
 - Fixed default language setting for modLexicon
 - Fixed a couple issues with the page settings checkboxes for resources
-- Removed deprecated _tx_.gif 
+- Removed deprecated _tx_.gif
 - Removed home icon and replaced with tab
 - Adjusted CSS to align main content page vertically
 - Trees now have fun new icons representing their types (this includes the resource, element and file trees)
-- Cleaned up the default.inc.php lexicon topic to remove any no-longer-used entries 
+- Cleaned up the default.inc.php lexicon topic to remove any no-longer-used entries
 - Fixing typo in subtract output modifier
 - Fixed improper reference in TV property renders for mgr context
 - Updated xPDO to revision 329.
@@ -1441,7 +1443,7 @@ MODx Revolution 2.0.0-beta-1 (LastChangedRevision: 5070 , LastChangedDate: 2009-
 - Fixed problem with modStaticResource non-binary content types rendering the path to the static file rather than the actual content of the file.
 - Calling modX->log(MODX_LOG_LEVEL_FATAL) or modX->messageQuit() now logs the error to file and then renders {MODX_CORE_PATH}errors/fatal.include.php.
 - Updated to r325 in xPDO: xPDO method changes to getOption() and _log().
-- Update 'setup-options' ability in transport packages to allow for script-based setup options that will properly handle upgrades to setup options default values 
+- Update 'setup-options' ability in transport packages to allow for script-based setup options that will properly handle upgrades to setup options default values
 - Updated to r323 in xPDO: Revise xPDOTransport::writeManifest to make 'setup-options' be able to be an executable script to allow for dynamic form ability
 - Updated snoopy class to version 1.2.4 (used by magpierss).
 - [#MODX-535] Removed automatic setting of isfolder based on presence or absence of children.
@@ -1459,16 +1461,16 @@ MODx Revolution 2.0.0-beta-1 (LastChangedRevision: 5070 , LastChangedDate: 2009-
 - modCacheManager->generateScript(): Fixed PHP notice in log message on error.
 - modInstall: Modify _modx() function to call setDebug with E_ALL & ~E_NOTICE instead of E_ALL & ~E_STRICT.
 - Optimized queries in element tree to eliminate subqueries or queries in loop, reducing to O(n) instead of O(n^2n)
-- Made clear cache results a bit smaller 
+- Made clear cache results a bit smaller
 - Refresh trees after clear cache
 - [#MODX-609] Clear cache menu item now loads results in an alert dialog. No longer loads a separate page.
 - Fixed to template getlist processor
 - [#MODX-671] Fixed bug with resource group access permissions being checked when not assigned
-- [#MODX-699] Fixed to allow usage of login processor without lexicons 
+- [#MODX-699] Fixed to allow usage of login processor without lexicons
 - Added Import/Export to element properties grids, which allows for file-based transporting of properties.
 - Fixed issues with comboboxes dropping down a blue screen
-- [#XPDO-28] Fixed problem with multiple file resolvers on vehicles with similar basenames cause directory contents to merge unexpectedly. 
-- fixed PHP notice for missing elementType variable 
+- [#XPDO-28] Fixed problem with multiple file resolvers on vehicles with similar basenames cause directory contents to merge unexpectedly.
+- fixed PHP notice for missing elementType variable
 - fixed subcategory elements missing from display (was counting elements in parent category rather then subcategory to determine if the subcategory should be displayed)
 - Fixed issue with default properties in TVs being locked
 - Fixed no onTVFormPrerender
@@ -1554,7 +1556,7 @@ MODx Revolution 2.0.0-beta-1 (LastChangedRevision: 5070 , LastChangedDate: 2009-
 - modCacheManager: converted generateActionMap() to support configurable cache implementations
 - Updated modAction->rebuildCache() and modManagerRequest->loadActionMap()
 - Additional tweaks to manager/controllers/system/refresh_site.php
-- Updated xPDO externals to revision 308 
+- Updated xPDO externals to revision 308
 - Removed unnecessary comments from the reg* functions
 - Moved all manager pages JS/CSS to inside HEAD tag using the reg* functions; this improves speed and validation of the manager
 - Fixed the way 3PCs handle their controller files. NOTE!!! This means that you no longer need a "core/controllers" file in your 3PC; just set the namespace path correctly, then set the controller in your modAction.
@@ -1645,7 +1647,7 @@ MODx Revolution 2.0.0-alpha-6 (LastChangedRevision: 4485 , LastChangedDate: 2008
 - Fixed import trees
 - Hide the resource ID field if a new resource
 - [#MODX-514] Fixed issue with pub_date/unpub_date not being reset properly
-- [#MODX-484] Added missing ht.access sample to web context files in included in transport package. 
+- [#MODX-484] Added missing ht.access sample to web context files in included in transport package.
 - Modified modWorkspace vehicle attributes to XPDO_TRANSPORT_UPDATE_OBJECT => false
 - Updated xPDO to revision 284 for new xPDO package-aware vehicle features when loading classes.
 - Slight styling improvement to grid to make alt-rows more apparent
@@ -1659,35 +1661,35 @@ MODx Revolution 2.0.0-alpha-6 (LastChangedRevision: 4485 , LastChangedDate: 2008
 - Updated xPDO to revision 281 to get fix to xPDOObject::save() when updating fields with NULL values.
 - Styling updates; make form fields bigger, tabs bigger, menus bigger...basically pretty up the UI
 - Fix to typo in createTable in modInstallVersion
-- Implemented version-specific upgrades to setup/ 
-- Updated xPDO to revision 275 (xPDOObject datetime/timestamp handling improvements, xPDOTransport pre-existing object restoration features, and more). 
+- Implemented version-specific upgrades to setup/
+- Updated xPDO to revision 275 (xPDOObject datetime/timestamp handling improvements, xPDOTransport pre-existing object restoration features, and more).
 - Changed System Events action to Error Log Viewer, which now allows you to view (and clear) the error log from the manager
 - [#MODX-509] Fixed issue with refreshing of incorrect node in dragdrops on trees
 - Fixes to CSS in setup, moved error box to fixed bottom right, i18n'ed more stuff, cleaned up HTML and simplified outputs
 - Fixed issue where the path for processors could not be overridden by changing the parameters for handleRequest in modConnectorRequest to an array of options
 - [#MODX-501] Fixed issue where trees didn't refresh when package was installed. All trees now refresh.
 - Fixed bug with duplicating resources
-- [#MODX-505] Fixed issue with creating weblink redirecting improperly 
+- [#MODX-505] Fixed issue with creating weblink redirecting improperly
 - Fixed issue with emptying recycle bin and root-level resources
 - [#MODX-508] Weblinks are now not hidden by default
-- Fix missing published checkboxes in resource derivative classes 
-- Applied patch to fix issue with label click of checkboxes not changing value 
+- Fix missing published checkboxes in resource derivative classes
+- Applied patch to fix issue with label click of checkboxes not changing value
 - [#MODX-507] Fixed bug where Published checkbox wasnt showing in resource panel
 - Fixed bug in filetree that would scroll up topmenu
 - [#MODX-507] Adding in textbox for parent ID for now, will come up with better solution later
 - [#MODX-506] Fixed bug where cache wasn't cleared on drag/drop in tree
 - Fixed bug in modPackageBuilder that was preventing deletion of existing package directories and files.
-- Added constants MODX_INSTALL_MODE_NEW, MODX_INSTALL_MODE_UPGRADE_EVO, MODX_INSTALL_MODE_UPGRADE_REVO 
+- Added constants MODX_INSTALL_MODE_NEW, MODX_INSTALL_MODE_UPGRADE_EVO, MODX_INSTALL_MODE_UPGRADE_REVO
 - Extracted install->test() to a separate class, then i18n'ed the test strings
 - LOTS of phpdoc additions to all processors, including parameter lists for each processor
 - Removed any last trace of modules from Revolution
 - Added phpdoc information to processors
 - Properly clear cache on install/uninstall/remove of packages
-- Removed "require_once MODX_PROCESSORS_PATH.'index.php';" from all processors 
+- Removed "require_once MODX_PROCESSORS_PATH.'index.php';" from all processors
 - Only show 'Update Package' if the package comes from a provider
 - Fixes to get browser working with TinyMCE
 - Fixed issue with forced removing of packages not properly removing the resolvers
-- Standardized modRequest/modResponse methods across all derivatives (i.e. modRequest::handleRequest() always calls modRequest::prepareResponse(), which calls modResponse::outputContent()). 
+- Standardized modRequest/modResponse methods across all derivatives (i.e. modRequest::handleRequest() always calls modRequest::prepareResponse(), which calls modResponse::outputContent()).
 - [#MODX-478] Fixed typo in lexicon import/export that prevented window hiding
 - Fixed issues with Symlinks
 - Fix to TV output/input renders when loading in a context other than web/mgr
@@ -1700,7 +1702,7 @@ MODx Revolution 2.0.0-alpha-6 (LastChangedRevision: 4485 , LastChangedDate: 2008
 - [#MODX-293] Properly format editedon for lexicon entries
 - [#MODX-481] Fixed rendering issues in element property grid columns
 - [#MODX-479] Fixed issue where first snippet property edited didn't show value
-- [#MODX-480] Fixed issue with lexicon entry update/create not loading proper topic 
+- [#MODX-480] Fixed issue with lexicon entry update/create not loading proper topic
 - [#MODX-474] Removing package builder menu item from build script
 - [#MODX-456] Fixed issues with element property grids
 - Fixed MODx.grid.LocalGrid store bugs when dealing with grouped data
@@ -1718,7 +1720,7 @@ MODx Revolution 2.0.0-alpha-6 (LastChangedRevision: 4485 , LastChangedDate: 2008
 - Added properties as local placeholders when processing modTemplateVar instances to match behavior of modChunk/modTemplate.
 - Updates to snippet property editor.
 - Added properties to modTemplateVar to make them consistent with all other elements.
-- Modify modX::getChunk() and runSnippet() to process those elements as non-cacheable instances. 
+- Modify modX::getChunk() and runSnippet() to process those elements as non-cacheable instances.
 - Added modResource::getContent() and setContent() functions for extensible control of accessing raw source content.
 - Modify modElement::setProperties() and modTag::setProperties() to handle various property data formats.
 - Updated modParser::parsePropertyString() to handle local property xtypes from UI and convert legacy types.
@@ -1774,7 +1776,7 @@ MODx Revolution 2.0.0-alpha-4 (LastChangedRevision: 4213 ,LastChangedDate: 2008-
 - Modified Ant build to automatically compress and concatenate js files (SVN users cannot use compress_js option without performing the complete-wc task in build.xml).
 - Updating xPDO to revision 234.
 - Added support for logging to registers through any modError instance when loaded by modRequest::loadErrorHandler().
-- Removed modRegisterHandler and added logging helper functions to modRegistry. 
+- Removed modRegisterHandler and added logging helper functions to modRegistry.
 - Updating xPDO to revision 233.
 - Updated modAccessibleObject::loadCollection() based on xPDO::loadCollection() changes.
 - Updating xPDO to revision 231.
@@ -1876,14 +1878,14 @@ MODx Revolution 2.0.0-alpha-2 (LastChangedRevision: 3841, LastChangedDate: 2008-
 - Fixed and cleaned up the actions/menus JS and combos
 - Removed unnecessary tertiary expression (check is already handled by the function)
 - [#MODX-131] Fixed Apache crash and enabled Tools -> Action
-- Added fix to _() JS function to allow for parameter passing: 
+- Added fix to _() JS function to allow for parameter passing:
     String: 'Testing: [[+hello]]';
     JS call: _('testkey',{'hello': 'Success!'});
     Result: 'Testing: Success!';
 - [#MODX-148] Added support for [[+placeholder]] tags in lexicon strings. i.e., with a lexicon string with key 'test' and value: 'Test me: [[+hello]]'
     Programmatically:
     $modx->lexicon('test',array('hello' => 'Success!');
-    
+
     Tag:
     [[%test?hello=`Success!`]]
 - Fixed to typo on system info JS
@@ -1962,7 +1964,7 @@ MODx 0.9.7-alpha-1 (LastChangedRevision: 3664, LastChangedDate: 2008-04-28 12:43
 - Add-on installation has been removed from setup in preparation for adding it to the manager itself.
 - Removed modManager095 and all related legacy support for ManagerAPI extender, moving this functionality to modManagerRequest.
 - Added/updated delegate controllers, templates, and processors for modWebLink and modStaticResource.
-- Added new static resource option to document tree context menus. 
+- Added new static resource option to document tree context menus.
 - Fixed bug with chunk update processor deleting the chunk content.
 - [Trac#19] Bugs with password on user creation/update; was saving plain password (not encoded).
 - Introduction of new setup using transport packages (new installs only for now).

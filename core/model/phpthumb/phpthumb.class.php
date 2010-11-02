@@ -2046,7 +2046,7 @@ exit;
 		if ($allow && $this->config_nohotlink_enabled && preg_match('/^(f|ht)tps?\:\/\//i', $this->src)) {
 			$parsed_url = phpthumb_functions::ParseURLbetter($this->src);
 			//if (!phpthumb_functions::CaseInsensitiveInArray(@$parsed_url['host'], $this->config_nohotlink_valid_domains)) {
-			if ($this->OffsiteDomainIsAllowed(@$parsed_url['host'], $this->config_nohotlink_valid_domains)) {
+			if (!$this->OffsiteDomainIsAllowed(@$parsed_url['host'], $this->config_nohotlink_valid_domains)) {
 				// This domain is not allowed
 				$allow = false;
 				$erase   = $this->config_nohotlink_erase_image;
