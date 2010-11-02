@@ -91,7 +91,7 @@
     </target>
 
     <!-- Minify the MODExt JavaScript libraries (using YUICompressor task) -->
-    <target name="modext-minify" description="Create minified MODExt scripts">
+    <target name="modext-minify" description="Create minified MODExt scripts" unless="build.nominify">
         <if>
             <not><isset property="build.distrib" /></not>
             <then>
@@ -115,7 +115,7 @@
         </yuicompress>
     </target>
 
-    <target name="css-minify" description="Create minified CSS">
+    <target name="css-minify" description="Create minified CSS" unless="build.nominify">
         <if>
             <not><isset property="build.distrib" /></not>
             <then>
@@ -139,7 +139,7 @@
     </target>
 
     <!-- Concat the minified MODExt JavaScript libraries -->
-    <target name="modext-concat-min" description="Create modext-min.js">
+    <target name="modext-concat-min" description="Create modext-min.js" unless="build.nominify">
         <echo>Creating modext-min.js in ${build.image.modext.dir}</echo>
 
         <append destFile="${build.image.modext.dir}/modext-min.js">
@@ -167,7 +167,7 @@
     </target>
 
     <!-- Concat the non-minified MODExt JavaScript libraries -->
-    <target name="modext-concat" description="Create modext.js">
+    <target name="modext-concat" description="Create modext.js" unless="build.nominify">
         <echo>Creating modext.js in ${build.image.modext.dir}</echo>
 
         <append destFile="${build.image.modext.dir}/modext.js">
@@ -195,7 +195,7 @@
     </target>
 
     <!-- Concat the minified CSS -->
-    <target name="css-concat-min" description="Create modx-min.css">
+    <target name="css-concat-min" description="Create modx-min.css" unless="build.nominify">
         <echo>Creating modx-min.css in ${build.image.css.dir}</echo>
 
         <append destFile="${build.image.css.dir}/modx-min.css">
@@ -205,7 +205,7 @@
     </target>
 
     <!-- Copy the minified and concatenated MODExt files to the build image, or working copy if wc=true -->
-    <target name="copy-prepared-js" description="copy the minified and concatenated js files to the build image">
+    <target name="copy-prepared-js" description="copy the minified and concatenated js files to the build image" unless="build.nominify">
         <if>
             <not><isset property="build.distrib" /></not>
             <then>
@@ -221,7 +221,7 @@
     </target>
 
     <!-- Copy minified css to the build image or working copy if wc=true -->
-    <target name="copy-prepared-css" description="copy the minified css files to the build image">
+    <target name="copy-prepared-css" description="copy the minified css files to the build image" unless="build.nominify">
         <if>
             <not><isset property="build.distrib" /></not>
             <then>
@@ -232,19 +232,6 @@
             </else>
         </if>
         <copy todir="${css.dir}" overwrite="true">
-            <fileset dir="${build.image.css.dir}" />
-        </copy>
-    </target>
-
-    <!-- Copy minified css to working copy -->
-    <target name="copy-prepared-css-wc" description="copy the minified css files to the working copy">
-        <delete file="${project.css.dir}ie-min.css" />
-        <delete file="${project.css.dir}login-min.css" />
-        <delete file="${project.css.dir}modx-min.css" />
-        <copy file="${build.image.css.dir}/ie-min.css" todir="${project.css.dir}" />
-        <copy file="${build.image.css.dir}/login-min.css" todir="${project.css.dir}" />
-        <copy file="${build.image.css.dir}/modx-min.css" todir="${project.css.dir}" />
-        <copy todir="${project.css.dir}/manager/templates/default/css">
             <fileset dir="${build.image.css.dir}" />
         </copy>
     </target>
@@ -271,7 +258,7 @@
     </target>
 
     <!-- Run the phpdoc generation script -->
-    <target name="generate-phpdocs" description="generate the phpdoc documentation">
+    <target name="generate-phpdocs" description="generate the phpdoc documentation" unless="build.nodocs">
         <if>
             <not><isset property="build.distrib" /></not>
             <then>
@@ -328,7 +315,7 @@
     </target>
 
     <!-- Build a MODx SDK distrib with all files in place and extracted -->
-    <target name="build-sdk" description="create the traditional distribution package" if="build.distrib">
+    <target name="build-sdk" description="create the traditional distribution package" if="build.distrib" unless="build.nodocs">
         <if>
             <istrue value="${build.timestamp}" />
             <then>
