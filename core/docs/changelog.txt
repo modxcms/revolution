@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fixed help message strings to correct URLs
 - Fixed missing options array call in modRestClient, isArray call in modRestCurlClient
 - [#2545] Added setting resource_tree_node_name to allow users to specify the field used for the node text on the Resource Tree
 - [#2639] Prevent user from specifying a FC rule with Action of none
