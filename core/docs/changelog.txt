@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2563] Fixed chmod action on directories from File Tree
 - [#2693] Properly sort country indicies to properly display in dropdowns
 - [#2562] Added confirm dialog and success response for emptying recycle bin
 - [#2634] Ensured context key is changed when changing parent of a Resource via Edit Resource page if context is different for new parent
