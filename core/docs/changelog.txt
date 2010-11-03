@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2668] Fixed issue with FC rules and labels on checkbox/radio fields
 - [#2582] Fixed bug with orm tree preventing attributes on the root node
 - Fix bug in phpthumb allowing remote src parameters regardless of settings
 - [#2555] Expose additional phpthumb options in System Settings
