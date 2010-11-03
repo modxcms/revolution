@@ -9,8 +9,8 @@ $templateGroups = array();
 $templateGroups['1']= $xpdo->newObject('modAccessPolicyTemplateGroup');
 $templateGroups['1']->fromArray(array(
     'id' => 1,
-    'name' => 'Administrator',
-    'description' => 'All administrator policy templates.',
+    'name' => 'Admin',
+    'description' => 'All admin policy templates.',
 ));
 
 /* Object group templates */

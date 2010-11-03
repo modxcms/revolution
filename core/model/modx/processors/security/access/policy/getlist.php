@@ -23,7 +23,7 @@ $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'name');
 $sortAlias = $modx->getOption('sortAlias',$scriptProperties,'modAccessPolicy');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
-$group = $modx->getOption('group',$scriptProperties,'');
+$group = $modx->getOption('group',$scriptProperties,false);
 
 /* build query */
 $c = $modx->newQuery('modAccessPolicy');

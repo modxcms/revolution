@@ -22,9 +22,6 @@ foreach ($templateIds as $templateId) {
     $template = $modx->getObject('modAccessPolicyTemplate',$templateId);
     if ($template == null) return $modx->error->failure($modx->lexicon('policy_err_nf'));
 
-    if (!in_array($template->get('name'),$core)) {
-
-    }
     /* remove policy */
     if ($template->remove() == false) {
         return $modx->error->failure($modx->lexicon('policy_template_err_remove'));

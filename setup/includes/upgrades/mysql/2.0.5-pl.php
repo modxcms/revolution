@@ -53,3 +53,10 @@ $modx->exec($sql);
 /* add template index to modAccessPolicy */
 $sql = "ALTER TABLE {$table} ADD INDEX `template` (`template`)";
 $modx->exec($sql);
+
+/* Rename Administrator modAccessPolicyTemplateGroup to Admin */
+$aptg = $modx->getObject('modAccessPolicyTemplateGroup',array('name' => 'Administrator'));
+if ($aptg) {
+    $aptg->set('name','Admin');
+    $aptg->save();
+}

@@ -34,6 +34,6 @@ if (!$directory->chmod($octalPerms)) {
     return $modx->error->failure($modx->lexicon('file_err_chmod'));
 }
 
-$modx->logManagerAction('directory_chmod','',$directory);
+$modx->logManagerAction('directory_chmod','',$directoryPath);
 
 return $modx->error->success();
