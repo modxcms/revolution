@@ -258,7 +258,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         if (e.target.attributes.type == 'category' && e.point == 'append') {return true;}
 
         if (!this.isCorrectType(e.dropNode,target)) {return false;}
-
+        
         return e.target.getDepth() > 0;
     }
     
