@@ -234,14 +234,20 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
 	
     ,emptyRecycleBin: function() {
-        MODx.Ajax.request({
-            url: MODx.config.connectors_url+'resource/index.php'
+        MODx.msg.confirm({
+            title: _('empty_recycle_bin')
+            ,text: _('empty_recycle_bin_confirm')
+            ,url: MODx.config.connectors_url+'resource/index.php'
             ,params: {
                 action: 'emptyRecycleBin'
             }
             ,listeners: {
                 'success':{fn:function() {
                     Ext.select('div.deleted',this.getRootNode()).remove();
+                    MODx.msg.status({
+                        title: _('success')
+                        ,message: _('empty_recycle_bin_emptied')
+                    })
                 },scope:this}
             }
         });

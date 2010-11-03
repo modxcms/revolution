@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2562] Added confirm dialog and success response for emptying recycle bin
 - [#2634] Ensured context key is changed when changing parent of a Resource via Edit Resource page if context is different for new parent
 - [#2631] Fixed issue when drag/dropping categories onto other categories in Element tree
 - [#2659] Fixed issue where action buttons were overlapping tabs on edit pages
