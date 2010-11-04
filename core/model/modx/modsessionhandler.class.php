@@ -90,8 +90,8 @@ class modSessionHandler {
      */
     public function write($id, $data) {
         $written= false;
-        $gcMaxlifetime = $this->modx->context->getOption('session_gc_maxlifetime', @ini_get('session.gc_max_lifetime'));
-        $cacheLifetime = $this->modx->context->getOption('cache_db_session_lifetime', intval($gcMaxlifetime / 4));
+        $gcMaxlifetime = $this->modx->getOption('session_gc_maxlifetime',null,@ini_get('session.gc_max_lifetime'));
+        $cacheLifetime = $this->modx->getOption('cache_db_session_lifetime',null,intval($gcMaxlifetime / 4));
         if (!$session= $this->modx->getObject('modSession', array ('id' => $id), $cacheLifetime)) {
             $session= $this->modx->newObject('modSession');
             $session->set('id', $id);
@@ -131,7 +131,7 @@ class modSessionHandler {
      * @return boolean True if session records were removed.
      */
     public function gc($max) {
-        $max = (integer) $this->modx->context->getOption('session_gc_maxlifetime', $max);
+        $max = (integer) $this->modx->getOption('session_gc_maxlifetime',null,$max);
         $maxtime= time() - $max;
         $result = $this->modx->removeCollection('modSession', array("`access` < {$maxtime}"));
         return $result;
@@ -149,7 +149,7 @@ class modSessionHandler {
      * ID.
      */
     protected function _getSession($id, $autoCreate= false) {
-        $session= $this->modx->getObject('modSession', array('id' => $id), $this->modx->context->getOption('cache_db_session', false));
+        $session= $this->modx->getObject('modSession', array('id' => $id), $this->modx->getOption('cache_db_session', null,false));
         if ($autoCreate && !is_object($session)) {
             $session= $this->modx->newObject('modSession');
             $session->set('id', $id);
