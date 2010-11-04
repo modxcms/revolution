@@ -42,9 +42,10 @@ Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
             }
             ,scripts: true
             ,callback: function() {
+                MODx.fireEvent('ready');
+                MODx.sleep(4); /* delay load event to allow FC rules to move before loading RTE */
                 if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
                 this.fireEvent('load');
-                MODx.fireEvent('ready');
             }
             ,scope: this
         };

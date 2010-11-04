@@ -454,7 +454,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');
             if (f && f.getValue() == 1 && !this.rteLoaded) {
-                MODx.loadRTE('ta');
+                MODx.on('ready',function() { MODx.loadRTE('ta'); });
                 this.rteLoaded = true;
             } else if (f && f.getValue() == 0 && this.rteLoaded) {
                 if (MODx.unloadRTE) {
