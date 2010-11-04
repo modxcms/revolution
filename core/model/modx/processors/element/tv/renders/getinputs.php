@@ -44,7 +44,7 @@ foreach ($renderDirectories as $renderDirectory) {
 }
 
 /* sort types */
-ksort($types);
+asort($types);
 $otypes = array();
 foreach ($types as $type) {
     $otypes[] = $type;
