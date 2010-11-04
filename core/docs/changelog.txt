@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2496] Fixed bug that prevented icon from resetting when dragging Resources into a new parent
 - [#713] Prevent children resources from being prefixed with "Duplicate of" when duplicating a resource unless explicitly told to do so
 - [#2581] Fixed bug with resourcelist TV input type to handle resources from multiple contexts
 - [#2518] Added delay to allow FC rules to load before RTEs load to allow RTE TVs to be moved

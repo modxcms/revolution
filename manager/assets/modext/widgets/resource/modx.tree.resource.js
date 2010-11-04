@@ -28,6 +28,7 @@ MODx.tree.Resource = function(config) {
         el.createChild({tag: 'div', id: 'modx-resource-tree_filter'});
     });
     this.addEvents('loadCreateMenus');
+    this.on('afterSort',this._handleAfterDrop,this);
 };
 Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     forms: {}
@@ -315,6 +316,14 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,hideFilter: function(itm,e) {
         this.filterBar.destroy();
         this._filterVisible = false;
+    }
+    ,_handleAfterDrop: function(o,r) {
+        var targetNode = o.event.target;
+        if (o.event.point == 'append' && targetNode) {
+            var ui = targetNode.getUI();
+            ui.addClass('haschildren');
+            ui.removeClass('icon-resource');
+        }
     }
 	
     ,_handleDrop:  function(e){
