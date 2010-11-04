@@ -60,3 +60,13 @@ if ($aptg) {
     $aptg->set('name','Admin');
     $aptg->save();
 }
+
+/* Rename Access Policy Templates to postfix Template for clarity [#2695] */
+$names = array('Administrator','Resource','Element','Object');
+foreach ($names as $name) {
+    $pt = $modx->getObject('modAccessPolicyTemplate',array('name' => $name));
+    if ($pt) {
+        $pt->set('name',$pt->get('name').'Template');
+        $pt->save();
+    }
+}

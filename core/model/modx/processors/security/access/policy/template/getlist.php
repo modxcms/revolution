@@ -44,7 +44,7 @@ $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $templates = $modx->getCollection('modAccessPolicyTemplate', $c);
 
-$core = array('Resource','Object','Administrator','Element','Load Only','Load, List and View');
+$core = array('ResourceTemplate','ObjectTemplate','AdministratorTemplate','ElementTemplate');
 
 foreach ($templates as $key => $template) {
     $templateArray = $template->toArray();

@@ -177,9 +177,9 @@ if (!$setting) {
     $adminPolicy = $modx->getObject('modAccessPolicy',array('name' => 'Administrator'));
     $adminPolicyData = $adminPolicy ? $adminPolicy->get('data') : array();
 
-    $adminPolicyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'Administrator'));
+    $adminPolicyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'AdministratorTemplate'));
     if (!$adminPolicyTpl) {
-        $modx->log(XPDO::LOG_LEVEL_ERROR,'Could not find Administrator Access Policy Template');
+        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Administrator Access Policy Template');
     }
     $adminPolicyTplGroup = $adminPolicyTpl ? $adminPolicyTpl->get('template_group') : 1;
 
@@ -196,29 +196,29 @@ if (!$setting) {
             $id = $adminPolicyTpl ? $adminPolicyTpl->get('id') : 3; /* default to object */
             switch ($policy->get('name')) {
                 case 'Resource':
-                    $policyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'Resource'));
+                    $policyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'ResourceTemplate'));
                     if ($policyTpl) {
                         $id = $policyTpl->get('id');
                     } else {
-                        $modx->log(XPDO::LOG_LEVEL_ERROR,'Could not find Resource Access Policy Template');
+                        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Resource Access Policy Template');
                     }
                     break;
                 case 'Element':
-                    $policyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'Element'));
+                    $policyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'ElementTemplate'));
                     if ($policyTpl) {
                         $id = $policyTpl->get('id');
                     } else {
-                        $modx->log(XPDO::LOG_LEVEL_ERROR,'Could not find Element Access Policy Template');
+                        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Element Access Policy Template');
                     }
                     break;
                 case 'Object':
                 case 'Load, List and View':
                 case 'Load Only':
-                    $policyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'Object'));
+                    $policyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'ObjectTemplate'));
                     if ($policyTpl) {
                         $id = $policyTpl->get('id');
                     } else {
-                        $modx->log(XPDO::LOG_LEVEL_ERROR,'Could not find Object Access Policy Template');
+                        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Object Access Policy Template');
                     }
                     break;
                 case 'Administrator':
@@ -263,7 +263,7 @@ if (!$setting) {
                 } else {
                     $policyTpl = $modx->newObject('modAccessPolicyTemplate');
                     $policyTpl->fromArray(array(
-                        'name' => $policy->get('name'),
+                        'name' => $policy->get('name').'Template',
                         'template_group' => $adminPolicyTplGroup,
                         'description' => $policy->get('description'),
                     ));

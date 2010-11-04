@@ -9,7 +9,7 @@ $templates = array();
 $templates['1']= $xpdo->newObject('modAccessPolicyTemplate');
 $templates['1']->fromArray(array(
     'id' => 1,
-    'name' => 'Administrator',
+    'name' => 'AdministratorTemplate',
     'description' => 'Context administration policy template with all permissions.',
     'lexicon' => 'permissions',
 ));
@@ -22,7 +22,7 @@ if (is_array($permissions)) {
 $templates['2']= $xpdo->newObject('modAccessPolicyTemplate');
 $templates['2']->fromArray(array(
     'id' => 2,
-    'name' => 'Resource',
+    'name' => 'ResourceTemplate',
     'description' => 'Resource Policy Template with all attributes.',
     'lexicon' => 'permissions',
 ));
@@ -35,7 +35,7 @@ if (is_array($permissions)) {
 $templates['3']= $xpdo->newObject('modAccessPolicyTemplate');
 $templates['3']->fromArray(array(
     'id' => 3,
-    'name' => 'Object',
+    'name' => 'ObjectTemplate',
     'description' => 'Object Policy Template with all attributes.',
     'lexicon' => 'permissions',
 ));
@@ -48,7 +48,7 @@ if (is_array($permissions)) {
 $templates['4']= $xpdo->newObject('modAccessPolicyTemplate');
 $templates['4']->fromArray(array(
     'id' => 4,
-    'name' => 'Element',
+    'name' => 'ElementTemplate',
     'description' => 'Element Policy Template with all attributes.',
     'lexicon' => 'permissions',
 ));
