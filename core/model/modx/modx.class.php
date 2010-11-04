@@ -402,12 +402,12 @@ class modX extends xPDO {
             $this->_initContext($contextKey);
 
             $extPackages = $this->getOption('extension_packages');
+            $extPackages = $this->fromJSON($extPackages);
             if (!empty($extPackages)) {
-                $extPackages= explode(',', $extPackages);
-                foreach ($extPackages as $extPackage) {
-                    $exploded= explode(':', $extPackage, 2);
-                    if (!empty($exploded)) {
-                        $this->addPackage($exploded[0], $exploded[1]);
+                foreach ($extPackages as $packageName => $package) {
+                    if (!empty($package) && !empty($package['path'])) {
+                        $tblPrefix = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
+                        $this->addPackage($packageName,$package['path'],$tblPrefix);
                     }
                 }
             }

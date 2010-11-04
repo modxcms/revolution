@@ -194,7 +194,7 @@ $_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to se
 $_lang['setting_error_page_err'] = 'Please specify a document ID that is the error page.';
 
 $_lang['setting_extension_packages'] = 'Extension Packages';
-$_lang['setting_extension_packages_desc'] = 'A comma separated list of packages to load on MODx instantiation. In the format packagename:pathtomodel';
+$_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODx instantiation. In the format [{"packagename":{path":"path/to/package"},{"anotherpkg":{"path":"path/to/otherpackage"}}]';
 
 $_lang['setting_failed_login_attempts'] = 'Failed Login Attempts';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';

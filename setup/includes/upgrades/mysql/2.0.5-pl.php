@@ -70,3 +70,31 @@ foreach ($names as $name) {
         $pt->save();
     }
 }
+
+/* upgrade extension_packages setting to JSON */
+$setting = $modx->getObject('modSystemSetting',array('key' => 'extension_packages'));
+if (!$setting) {
+    $setting = $modx->newObject('modSystemSetting');
+    $setting->set('key','extension_packages');
+    $setting->set('value','{}');
+    $setting->set('xtype','textfield');
+    $setting->set('area','system');
+    $setting->set('namespace','core');
+    $setting->save();
+} else {
+    $v = $setting->get('value');
+    if (strpos($v,'}') === false) {
+        $ep = array();
+        $pkgs = explode(',',$v);
+        foreach ($pkgs as $pkg) {
+            $dt = explode(':',$pkg,2);
+            if (!empty($dt) && !empty($dt[1])) {
+                $ep[$dt[0]] = array(
+                    'path' => $dt[1],
+                );
+            }
+        }
+        $setting->set('value',$modx->toJSON($ep));
+        $setting->save();
+    }
+}

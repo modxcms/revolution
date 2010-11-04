@@ -225,9 +225,12 @@ class modCacheManager extends xPDOCacheManager {
                         if (isset ($this->modx->config["{$match[1]}"])) {
                             $matchValue= $this->modx->config["{$match[1]}"];
                         } else {
-                            $matchValue= '';
+                            /* this causes problems with JSON in settings, disabling for now */
+                            //$matchValue= '';
                         }
-                        $v= str_replace($match[0], $matchValue, $v);
+                        if (!empty($matchValue)) {
+                            $v= str_replace($match[0], $matchValue, $v);
+                        }
                     }
                 }
                 $config[$k]= $v;
