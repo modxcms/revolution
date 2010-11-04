@@ -173,14 +173,9 @@ Ext.extend(MODx,Ext.Component,{
             title: _('help')
             ,width: 850
             ,height: 500
-            ,modal: true
+            ,modal: Ext.isIE ? false : true
             ,layout: 'fit'
-            ,html: '<iframe onload="parent.MODx.helpWindow.getEl().unmask();" src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
-            ,listeners: {
-                show: function(o) {
-                    o.getEl().mask(_('help_loading'));
-                }
-            }
+            ,html: '<iframe src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
         });
         MODx.helpWindow.show(b);
         return true;
