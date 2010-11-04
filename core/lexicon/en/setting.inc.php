@@ -217,8 +217,14 @@ $_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODx will hide t
 $_lang['setting_filemanager_path'] = 'File Manager Path';
 $_lang['setting_filemanager_path_desc'] = 'IIS often does not populate the document_root setting properly, which is used by the file manager to determine what you can look at. If you\'re having problems using the file manager, make sure this path points to the root of your MODx installation.';
 
+$_lang['setting_filemanager_path_relative'] = 'Is File Manager Path Relative?';
+$_lang['setting_filemanager_path_relative_desc'] = 'If your filemanager_path setting is relative to the MODx base_path, then please set this setting to Yes. If your filemanager_path is outside the docroot, set this to No.';
+
 $_lang['setting_filemanager_url'] = 'File Manager Url';
 $_lang['setting_filemanager_url_desc'] = 'Optional. Set this if you want to set an explicit URL to access the files in the MODx file manager from (useful if you have changed filemanager_path to a path outside the MODx webroot). Make sure this is the web-accessible URL of the filemanager_path setting value. If leave this empty, MODx will try to automatically calculate it.';
+
+$_lang['setting_filemanager_url_relative'] = 'Is File Manager URL Relative?';
+$_lang['setting_filemanager_url_relative_desc'] = 'If your filemanager_url setting is relative to the MODx base_url, then please set this setting to Yes. If your filemanager_url is outside the main webroot, set this to No.';
 
 $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
 $_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODx username and/or password.';
