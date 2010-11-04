@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2700] Fixed bug with Access Policy Template editor that reset values on save
 - [#2690] Renamed Administrator Access Policy Template Group to Admin
 - [#2563] Fixed chmod action on directories from File Tree
 - [#2693] Properly sort country indicies to properly display in dropdowns
