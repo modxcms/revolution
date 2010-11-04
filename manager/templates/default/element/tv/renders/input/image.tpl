@@ -22,7 +22,7 @@ MODx.load({
             if (Ext.isEmpty(data.relativeUrl)) {
                 d.update('');
             } else {
-                d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.relativeUrl+'" alt="" />');
+                d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.relativeUrl+'&ctx={/literal}{$ctx}{literal}" alt="" />');
             }
         }, scope:this}
     }

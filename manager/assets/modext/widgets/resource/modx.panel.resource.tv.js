@@ -39,6 +39,7 @@ Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
                ,'class_key': config.class_key
                ,'template': template
                ,'resource': config.resource
+               ,ctx: MODx.ctx
             }
             ,scripts: true
             ,callback: function() {

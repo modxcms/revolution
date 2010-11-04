@@ -52,10 +52,7 @@ class modFileHandler {
      * to the return value. Defaults to true.
      * @return string The base path
      */
-    public function getBasePath($prependBasePath = false,$context = 'web') {
-        $oldContext = $this->modx->context->get('key');
-        if ($oldContext != $context) $this->modx->switchContext($context);
-
+    public function getBasePath($prependBasePath = false) {
         $root = $this->modx->getOption('filemanager_path',null,'');
         if (empty($root)) {
             /* TODO: deprecated - remove this in 2.1 */
@@ -78,17 +75,13 @@ class modFileHandler {
             $root = $this->modx->getOption('base_path',null,MODX_BASE_PATH).$root;
         }
 
-        if ($oldContext != $context) $this->modx->switchContext($oldContext);
         return $this->postfixSlash($root);
     }
 
     /**
      * Get base URL of file manager
      */
-    public function getBaseUrl($context = 'web',$getRelative = false) {
-        $oldContext = $this->modx->context->get('key');
-        if ($oldContext != $context) $this->modx->switchContext($context);
-
+    public function getBaseUrl($getRelative = false) {
         $baseUrl = $this->modx->getOption('filemanager_url',null,$this->modx->getOption('rb_base_url',null,''));
         
         /* check for absolute/relative */
@@ -96,8 +89,6 @@ class modFileHandler {
         if (!$getRelative && $sourceRelative) {
             $baseUrl = $this->modx->getOption('base_url',null,MODX_BASE_PATH).$baseUrl;
         }
-        
-        if ($oldContext != $context) $this->modx->switchContext($oldContext);
         return $this->postfixSlash($baseUrl);
     }
 

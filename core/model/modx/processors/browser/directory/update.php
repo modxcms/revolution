@@ -14,11 +14,10 @@ $modx->lexicon->load('file');
 
 if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
-$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
 
 /* get base paths and sanitize incoming paths */
 $modx->getService('fileHandler','modFileHandler');
-$root = $modx->fileHandler->getBasePath(false,$ctx);
+$root = $modx->fileHandler->getBasePath(false);
 
 /* instantiate modDirectory object */
 $oldDirectory = $modx->fileHandler->make($root.$scriptProperties['dir']);

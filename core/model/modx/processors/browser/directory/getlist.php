@@ -41,16 +41,16 @@ $canUpload = $modx->hasPermission('file_upload');
 $modx->getService('fileHandler','modFileHandler');
 $dir = $modx->fileHandler->sanitizePath($dir);
 $dir = $modx->fileHandler->postfixSlash($dir);
-$root = $modx->fileHandler->getBasePath(false,$ctx);
+$root = $modx->fileHandler->getBasePath(false);
 $fullPath = str_replace('//','/',$root.$dir);
-if (!is_dir($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+if (!is_dir($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').$fullPath);
 
 $editAction = false;
 $act = $modx->getObject('modAction',array('controller' => 'system/file/edit'));
 if ($act) { $editAction = $act->get('id'); }
 
 /* get relative url */
-$baseUrl = $modx->fileHandler->getBaseUrl($ctx,true);
+$baseUrl = $modx->fileHandler->getBaseUrl(true);
 
 /* get mb support settings */
 $useMultibyte = $modx->getOption('use_multibyte',null,false);

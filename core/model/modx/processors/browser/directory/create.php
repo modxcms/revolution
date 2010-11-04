@@ -12,14 +12,13 @@
  */
 if (!$modx->hasPermission('directory_create')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
-$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
 
 if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 if (empty($scriptProperties['parent'])) $scriptProperties['parent'] = '';
 
 /* get base paths and sanitize incoming paths */
 $modx->getService('fileHandler','modFileHandler');
-$root = $modx->fileHandler->getBasePath(false,$ctx);
+$root = $modx->fileHandler->getBasePath(false);
 
 /* create modDirectory instance for containing directory and validate */
 $parentDirectory = $modx->fileHandler->make($root.$scriptProperties['parent']);

@@ -333,6 +333,7 @@ class modTemplateVar extends modElement {
         $this->set('description',strip_tags($this->get('description')));
 
         $this->xpdo->smarty->assign('tv',$this);
+        $this->xpdo->smarty->assign('ctx',isset($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web');
 
         $params= array ();
         if ($paramstring= $this->get('display_params')) {

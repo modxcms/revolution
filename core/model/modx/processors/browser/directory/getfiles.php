@@ -24,17 +24,16 @@ $dir = $modx->fileHandler->postfixSlash($dir);
 $fullpath = $root.'/'.$dir;
 
 /* get base path/url */
-$basePath = $modx->fileHandler->getBasePath(false,$ctx);
-$baseUrl = $modx->fileHandler->getBaseUrl($ctx,true);
+$basePath = $modx->fileHandler->getBasePath(false);
+$baseUrl = $modx->fileHandler->getBaseUrl(true);
 
 /* setup settings */
-$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
 $imagesExts = array('jpg','jpeg','png','gif');
 $use_multibyte = $modx->getOption('use_multibyte',null,false);
 $encoding = $modx->getOption('modx_charset',null,'UTF-8');
 /* iterate */
 $files = array();
-if (!is_dir($fullpath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+if (!is_dir($fullpath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').$fullpath);
 foreach (new DirectoryIterator($fullpath) as $file) {
     if (in_array($file,array('.','..','.svn','_notes'))) continue;
     if (!$file->isReadable()) continue;
