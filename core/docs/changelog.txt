@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2512] Have remove setup/ dir checked by default if not using Git version of MODx
 - [#2699] Fixed loading issues with help panel on slow connections
 - [#2701] Fixed issue where description did not show until refresh when adding a new Permission to an Access Policy Template
 - [#2695] Postfixed Template to names of Access Policy Templates for clarity
