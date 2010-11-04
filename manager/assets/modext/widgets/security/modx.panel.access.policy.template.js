@@ -89,7 +89,9 @@ MODx.panel.AccessPolicyTemplate = function(config) {
     MODx.panel.AccessPolicyTemplate.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.AccessPolicyTemplate,MODx.FormPanel,{
-    setup: function() {
+    initialized: false
+    ,setup: function() {
+        if (this.initialized) return;
         if (this.config.template === '' || this.config.template === 0) {
             this.fireEvent('ready');
             return false;
@@ -103,6 +105,7 @@ Ext.extend(MODx.panel.AccessPolicyTemplate,MODx.FormPanel,{
 
         this.fireEvent('ready');
         MODx.fireEvent('ready');
+        this.initialized = true;
     }
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-template-permissions');
