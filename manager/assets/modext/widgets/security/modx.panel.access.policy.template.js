@@ -162,6 +162,7 @@ Ext.extend(MODx.grid.TemplatePermissions,MODx.grid.LocalGrid,{
             ,listeners: {
                 'success': {fn:function(r) {
                     var s = this.getStore();
+                    r.description_trans = r.description;
                     var rec = new this.propRecord(r);
                     s.add(rec);
                     
