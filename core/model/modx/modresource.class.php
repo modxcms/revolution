@@ -547,9 +547,10 @@ class modResource extends modAccessibleSimpleObject {
         if (!($this->xpdo instanceof modX)) return false;
 
         /* duplicate resource */
-        $newName = isset($options['newName']) && !empty($options['newName']) ? $options['newName'] : $this->xpdo->lexicon('duplicate_of', array(
+        $prefixDuplicate = !empty($options['prefixDuplicate']) ? true : false;
+        $newName = isset($options['newName']) ? $options['newName'] : ($prefixDuplicate ? $this->xpdo->lexicon('duplicate_of', array(
             'name' => $this->get('pagetitle'),
-        ));
+        )) : $this->get('pagetitle'));
         $newResource = $this->xpdo->newObject($this->get('class_key'));
         $newResource->fromArray($this->toArray('', true), '', false, true);
         $newResource->set('pagetitle', $newName);
@@ -601,6 +602,7 @@ class modResource extends modAccessibleSimpleObject {
                     $child->duplicate(array(
                         'duplicateChildren' => true,
                         'parent' => $newResource->get('id'),
+                        'prefixDuplicate' => $prefixDuplicate,
                     ));
                 }
             }
