@@ -365,7 +365,7 @@ class modResource extends modAccessibleSimpleObject {
         if ($maxlength > 0 && $length > $maxlength) {
             $alias = substr($alias, 0, $maxlength);
             $alias = trim($alias, $trimchars);
-			$this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "alias after maxlength applied = {$alias}");
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "alias after maxlength applied = {$alias}");
         }
 
         return $alias;
@@ -588,7 +588,6 @@ class modResource extends modAccessibleSimpleObject {
             }
             $aliasPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
             if (!empty($aliasPath) && strpos($aliasPath,'/') === false) $aliasPath .= '/';
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'aliasPath: '.$aliasPath);
         }
         $fullAlias= $aliasPath . $fullAlias . $extension;
         return $fullAlias;
@@ -613,13 +612,10 @@ class modResource extends modAccessibleSimpleObject {
         $resourceContext->prepare();
 
         if (isset($resourceContext->aliasMap[$aliasPath])) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'DuplicateID in ctx: '.$resourceContext->aliasMap[$aliasPath].' against Resource ID '.$this->get('id'));
             $duplicateId= $resourceContext->aliasMap[$aliasPath];
             if ($duplicateId != $this->get('id')) {
                 $isDuplicate = true;
             }
-        } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'No alias Path found.');
         }
         return $isDuplicate ? $duplicateId : false;
     }
@@ -661,9 +657,7 @@ class modResource extends modAccessibleSimpleObject {
             /* auto assign alias */
             $aliasPath = $newResource->getAliasPath($newName);
             $duplicateId = $newResource->isDuplicateAlias($aliasPath);
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$duplicateId.' - '.$aliasPath);
             if (!$this->xpdo->getOption('allow_duplicate_alias',null,false) && !empty($duplicateId)) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Duplicate alias: '.$duplicateId.' - '.$aliasPath);
                 $alias = '';
             }
         }

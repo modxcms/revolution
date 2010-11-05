@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2691] Fixed issue with duplicate aliases when duplicating a Resource 
 - [#2506] Flag properties as dirty when importing from a file on properties grid
 - [#2592] Prevent cache files from being allowed in upload_files setting
 - Improved areas dropdown filter to include number of settings that have that area
