@@ -109,49 +109,14 @@ if (!$resource) return $modx->error->failure($modx->lexicon('resource_err_create
 if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->lexicon('resource_err_class',array('class' => $resourceClass)));
 
 /* friendly url alias checks */
-if ($modx->getOption('friendly_alias_urls')) {
+if ($modx->getOption('friendly_alias_urls',null,false)) {
     /* auto assign alias */
-    if (empty($scriptProperties['alias']) && $modx->getOption('automatic_alias')) {
-        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
-    } else {
-        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['alias']);
-    }
-    $resourceContext= $modx->getObject('modContext', $scriptProperties['context_key']);
-    $resourceContext->prepare();
-
-    $fullAlias= $scriptProperties['alias'];
-    $isHtml= true;
-    $extension= '';
-    $containerSuffix= $modx->getOption('container_suffix',null,'');
-    if (isset ($scriptProperties['content_type']) && $contentType= $modx->getObject('modContentType', $scriptProperties['content_type'])) {
-        $extension= $contentType->getExtension();
-        $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
-    }
-    if ($scriptProperties['isfolder'] && $isHtml && !empty ($containerSuffix)) {
-        $extension= $containerSuffix;
-    }
-    $aliasPath= '';
-    if ($modx->getOption('use_alias_path')) {
-        $pathParentId= intval($scriptProperties['parent']);
-        $parentResources= array ();
-        $currResource= $modx->getObject('modResource', $pathParentId);
-        while ($currResource) {
-            $parentAlias= $currResource->get('alias');
-            if (empty ($parentAlias))
-                $parentAlias= "{$pathParentId}";
-            $parentResources[]= "{$parentAlias}";
-            $pathParentId= $currResource->get('parent');
-            $currResource= $currResource->getOne('Parent');
-        }
-        $aliasPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
-    }
-    $fullAlias= $aliasPath . $fullAlias . $extension;
-
-    if (isset ($resourceContext->aliasMap[$fullAlias])) {
-        $duplicateId= $resourceContext->aliasMap[$fullAlias];
+    $aliasPath = $resource->getAliasPath($scriptProperties['alias'],$scriptProperties);
+    $duplicateId = $resource->isDuplicateAlias($aliasPath);
+    if (!$modx->getOption('allow_duplicate_alias',null,false) && $duplicateId) {
         $err = $modx->lexicon('duplicate_alias_found',array(
             'id' => $duplicateId,
-            'alias' => $fullAlias,
+            'alias' => $aliasPath,
         ));
         $modx->error->addField('alias', $err);
     }

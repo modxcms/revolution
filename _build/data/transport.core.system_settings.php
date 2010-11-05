@@ -15,6 +15,15 @@ $settings['allow_tags_in_post']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['allow_duplicate_alias']= $xpdo->newObject('modSystemSetting');
+$settings['allow_duplicate_alias']->fromArray(array (
+  'key' => 'allow_duplicate_alias',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
 $settings['allow_multiple_emails']= $xpdo->newObject('modSystemSetting');
 $settings['allow_multiple_emails']->fromArray(array (
   'key' => 'allow_multiple_emails',

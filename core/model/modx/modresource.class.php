@@ -330,8 +330,8 @@ class modResource extends modAccessibleSimpleObject {
             default:
                 /* restrict alias using regular expression pattern configured (same as legal by default) */
                 if (!empty($restrictcharspattern)) {
-					$alias = preg_replace($restrictcharspattern, '', $alias);
-				}
+                    $alias = preg_replace($restrictcharspattern, '', $alias);
+                }
         }
 
         /* replace one or more space characters with word delimiter */
@@ -540,6 +540,91 @@ class modResource extends modAccessibleSimpleObject {
     }
 
     /**
+     * Get the Resource's full alias path.
+     *
+     * @param string $alias Optional. The alias to check. If not set, will
+     * then build it from the pagetitle if automatic_alias is set to true.
+     * @param array $fields Optional. An array of field values to use instead of
+     * using the current modResource fields.
+     * @return string
+     */
+    public function getAliasPath($alias = '',array $fields = array()) {
+        if (empty($fields)) $fields = $this->toArray();
+
+        /* auto assign alias if using automatic_alias */
+        if (empty($alias) && $this->xpdo->getOption('automatic_alias',null,false)) {
+            $alias = $this->cleanAlias($fields['pagetitle']);
+        } else {
+            $alias = $this->cleanAlias($alias);
+        }
+
+        $fullAlias= $alias;
+        $isHtml= true;
+        $extension= '';
+        $containerSuffix= $this->xpdo->getOption('container_suffix',null,'');
+        /* process content type */
+        if (!empty($fields['content_type']) && $contentType= $this->xpdo->getObject('modContentType', $fields['content_type'])) {
+            $extension= $contentType->getExtension();
+            $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
+        }
+        /* set extension to container suffix if Resource is a folder, HTML content type, and the container suffix is set */
+        if (!empty($fields['isfolder']) && $isHtml && !empty ($containerSuffix)) {
+            $extension= $containerSuffix;
+        }
+        $aliasPath= '';
+        /* if using full alias paths, calculate here */
+        if ($this->xpdo->getOption('use_alias_path',null,false)) {
+            $pathParentId= $fields['parent'];
+            $parentResources= array ();
+            $currResource= $this->xpdo->getObject('modResource', $pathParentId);
+            while ($currResource) {
+                $parentAlias= $currResource->get('alias');
+                if (empty ($parentAlias)) {
+                    $parentAlias= "{$pathParentId}";
+                }
+                $parentResources[]= "{$parentAlias}";
+                $pathParentId= $currResource->get('parent');
+                $currResource= $currResource->getOne('Parent');
+            }
+            $aliasPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
+            if (!empty($aliasPath) && strpos($aliasPath,'/') === false) $aliasPath .= '/';
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'aliasPath: '.$aliasPath);
+        }
+        $fullAlias= $aliasPath . $fullAlias . $extension;
+        return $fullAlias;
+    }
+
+    /**
+     * Tests to see if an alias is a duplicate.
+     *
+     * @param string $aliasPath The current full alias path. If none is passed,
+     * will build it from the Resource's currently set alias.
+     * @return mixed The ID of the Resource using the alias, if a duplicate, otherwise false.
+     */
+    public function isDuplicateAlias($aliasPath = '') {
+        if (empty($aliasPath)) $aliasPath = $this->getAliasPath($this->get('alias'));
+        $isDuplicate = false;
+
+        $resourceContext= $this->getOne('Context');
+        if (!$resourceContext) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not find context for Resource '.print_r($this->toArray(),true));
+            return $isDuplicate;
+        }
+        $resourceContext->prepare();
+
+        if (isset($resourceContext->aliasMap[$aliasPath])) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'DuplicateID in ctx: '.$resourceContext->aliasMap[$aliasPath].' against Resource ID '.$this->get('id'));
+            $duplicateId= $resourceContext->aliasMap[$aliasPath];
+            if ($duplicateId != $this->get('id')) {
+                $isDuplicate = true;
+            }
+        } else {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'No alias Path found.');
+        }
+        return $isDuplicate ? $duplicateId : false;
+    }
+
+    /**
      *
      * @return mixed Returns either an error message, or the newly created modResource object.
      */
@@ -553,8 +638,8 @@ class modResource extends modAccessibleSimpleObject {
         )) : $this->get('pagetitle'));
         $newResource = $this->xpdo->newObject($this->get('class_key'));
         $newResource->fromArray($this->toArray('', true), '', false, true);
+        $newResource->set('id',0);
         $newResource->set('pagetitle', $newName);
-        $newResource->set('alias', $newName);
 
         /* make sure children get assigned to new parent */
         $newResource->set('parent',isset($options['parent']) ? $options['parent'] : $this->get('parent'));
@@ -569,6 +654,21 @@ class modResource extends modAccessibleSimpleObject {
         $newResource->set('published',false);
         $newResource->set('publishedon',0);
         $newResource->set('publishedby',0);
+
+        /* get new alias */
+        $alias = $newResource->cleanAlias($newName);
+        if ($this->xpdo->getOption('friendly_alias_urls',null,false)) {
+            /* auto assign alias */
+            $aliasPath = $newResource->getAliasPath($newName);
+            $duplicateId = $newResource->isDuplicateAlias($aliasPath);
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$duplicateId.' - '.$aliasPath);
+            if (!$this->xpdo->getOption('allow_duplicate_alias',null,false) && !empty($duplicateId)) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Duplicate alias: '.$duplicateId.' - '.$aliasPath);
+                $alias = '';
+            }
+        }
+        $newResource->set('alias',$alias);
+
         
         if (!$newResource->save()) {
             return $this->xpdo->lexicon('resource_err_duplicate');
