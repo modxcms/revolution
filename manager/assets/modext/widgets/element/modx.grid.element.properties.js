@@ -413,6 +413,12 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                     var s = this.getStore();
                     var data = o.a.result.object;
                     s.loadData(data);
+                    /* mark fields dirty */
+                    var recs = s.getRange(0,s.getTotalCount());
+                    for (var i=0;i<recs.length;i++) {
+                        recs[i].markDirty();
+                    }
+                    this.getView().refresh();
                 },scope:this}
             }
         });
