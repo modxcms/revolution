@@ -19,6 +19,7 @@ MODx.grid.Grid = function(config) {
         ,cls: 'modx-grid'
         ,preventRender: true
         ,preventSaveRefresh: true
+        ,showPerPage: true
         ,menuConfig: {
             defaultAlign: 'tl-b?'
             ,enableScrolling: false
@@ -33,25 +34,32 @@ MODx.grid.Grid = function(config) {
         }
     });
     if (config.paging) {
+        var pgItms = config.showPerPage ? ['-',_('per_page')+':',{
+            xtype: 'textfield'
+            ,value: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
+            ,width: 40
+            ,listeners: {
+                'change': {fn:function(tf,nv,ov) {
+                    nv = parseInt(nv);
+                    this.getBottomToolbar().pageSize = nv;
+                    this.store.load({params:{
+                        start:0
+                        ,limit: nv
+                    }});
+                },scope:this}
+            }
+        }] : [];
+        if (config.pagingItems) {
+            for (var i=0;i<config.pagingItems.length;i++) {
+                pgItms.push(config.pagingItems[i]);
+            }
+        }
         Ext.applyIf(config,{
             bbar: new Ext.PagingToolbar({
                 pageSize: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
                 ,store: this.getStore()
                 ,displayInfo: true
-                ,items: config.pagingItems || ['-',_('per_page')+':',{
-                    xtype: 'textfield'
-                    ,value: config.pageSize || (parseInt(MODx.config.default_per_page) || 20)
-                    ,width: 40
-                    ,listeners: {
-                        'change': {fn:function(tf,nv,ov) {
-                            this.getBottomToolbar().pageSize = nv;
-                            this.store.load({params:{
-                                start:0
-                                ,limit: nv
-                            }});
-                        },scope:this}
-                    }
-                }]
+                ,items: pgItms
             })
         });
     }
