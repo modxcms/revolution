@@ -149,6 +149,9 @@ $_lang['setting_cache_scripts_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt,
 $_lang['setting_cache_system_settings'] = 'Systemeinstellungen-Cache aktivieren';
 $_lang['setting_cache_system_settings_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden die Systemeinstellungen gecacht, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
 
+$_lang['setting_clear_cache_refresh_trees'] = 'Aktualisiere Bäume, wenn Site-Cache geleert wird';
+$_lang['setting_clear_cache_refresh_trees_desc'] = 'Wenn diese Einstellung aktiviert ist, werden die Ressourcen-, Element- und Dateibäume aktualisiert, wenn der Site-Cache geleert wird.';
+
 $_lang['setting_compress_css'] = 'Komprimiertes CSS verwenden';
 $_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODx eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
 
