@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Improved areas dropdown filter to include number of settings that have that area
 - [#2694] Fixed positioning and scrollbar issue in Fx with success status message on save
 - Added setting clear_cache_refresh_trees that allows you to toggle whether the trees refresh on site cache clear; defaults to false
 - [#2709] Fixed bug where Object-Template policies were unavailable to certain grids
