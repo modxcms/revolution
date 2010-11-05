@@ -21,4 +21,20 @@ $templateGroups['2']->fromArray(array(
     'description' => 'All Object-based policy templates.',
 ));
 
+/* Resource group templates */
+$templateGroups['3']= $xpdo->newObject('modAccessPolicyTemplateGroup');
+$templateGroups['3']->fromArray(array(
+    'id' => 3,
+    'name' => 'Resource',
+    'description' => 'All Resource-based policy templates.',
+));
+
+/* Element group templates */
+$templateGroups['4']= $xpdo->newObject('modAccessPolicyTemplateGroup');
+$templateGroups['4']->fromArray(array(
+    'id' => 4,
+    'name' => 'Element',
+    'description' => 'All Element-based policy templates.',
+));
+
 return $templateGroups;

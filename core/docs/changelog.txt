@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2709] Fixed bug where Object-Template policies were unavailable to certain grids
 - [#2597] Fixed bug where Context Setting xtype and area are reset on grid save
 - Upgraded extension_packages setting to JSON for more options with packages and easier editing in Extras scripts
 - Fixed bugs relating to using filemanager_path in a separate context, as well as other bugs with context-specific settings in mgr

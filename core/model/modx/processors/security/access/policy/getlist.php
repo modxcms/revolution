@@ -29,9 +29,10 @@ $group = $modx->getOption('group',$scriptProperties,false);
 $c = $modx->newQuery('modAccessPolicy');
 $c->innerJoin('modAccessPolicyTemplate','Template');
 if (!empty($group)) {
+    $group = explode(',',$group);
     $c->innerJoin('modAccessPolicyTemplateGroup','TemplateGroup','TemplateGroup.id = Template.template_group');
     $c->where(array(
-        'TemplateGroup.name' => $group,
+        'TemplateGroup.name:IN' => $group,
     ));
 }
 $count = $modx->getCount('modAccessPolicy',$c);

@@ -180,7 +180,7 @@ MODx.window.CreateUGAccessContext = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
-                ,group: 'Admin'
+                ,group: 'Admin,Object'
                 ,combo: '1'
             }
             ,allowBlank: false
@@ -228,7 +228,7 @@ MODx.window.UpdateUGAccessContext = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
-                ,group: 'Admin'
+                ,group: 'Admin,Object'
                 ,combo: '1'
             }
             ,anchor: '90%'

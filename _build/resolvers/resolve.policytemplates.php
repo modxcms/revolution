@@ -9,10 +9,10 @@ $success= false;
 
 /* map of Template -> TemplateGroup */
 $map = array(
-    'ResourceTemplate' => 'Object',
+    'ResourceTemplate' => 'Resource',
     'AdministratorTemplate' => 'Admin',
-    'ObjectTemplate' => 'Admin',
-    'ElementTemplate' => 'Object',
+    'ObjectTemplate' => 'Object',
+    'ElementTemplate' => 'Element',
 );
 
 $templates = $transport->xpdo->getCollection('modAccessPolicyTemplate');
