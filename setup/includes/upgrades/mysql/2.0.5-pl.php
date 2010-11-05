@@ -98,3 +98,12 @@ if (!$setting) {
         $setting->save();
     }
 }
+
+/* [#2592] prevent *cache.php from being in system setting upload_files */
+$setting = $modx->getObject('modSystemSetting',array('key' => 'upload_files'));
+if ($setting) {
+    $v = $setting->get('value');
+    $v = str_replace('cache,','',$v);
+    $setting->set('value',$v);
+    $setting->save();
+}
