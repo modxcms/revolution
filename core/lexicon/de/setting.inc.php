@@ -195,7 +195,7 @@ $_lang['setting_error_page_desc'] = 'Geben Sie die ID des Dokuments ein, das Ben
 $_lang['setting_error_page_err'] = 'Bitte geben Sie eine Ressourcen-ID für die Fehlerseite an.';
 
 $_lang['setting_extension_packages'] = 'Erweiterungs-Packages';
-$_lang['setting_extension_packages_desc'] = 'Kommaseparierte Liste von Packages, die bei der MODx-Initialisierung geladen werden sollen, im Format packagename:pfadzummodel';
+$_lang['setting_extension_packages_desc'] = 'Ein JSON-Array von Packages, die bei der MODx-Initialisierung geladen werden sollen. Im Format [{"packagename":{pfad":"pfad/zum/package"},{"weiterespackage":{"pfad":"pfad/zum/anderenpackage"}}]';
 
 $_lang['setting_failed_login_attempts'] = 'Fehlgeschlagene Login-Versuche';
 $_lang['setting_failed_login_attempts_desc'] = 'Geben Sie an, wie viele fehlgeschlagene Login-Versuche erlaubt sein sollen, bevor der Benutzer geblockt wird.';
@@ -218,8 +218,14 @@ $_lang['setting_feed_modx_security_enabled_desc'] = 'Wenn diese Einstellung auf 
 $_lang['setting_filemanager_path'] = 'Dateimanager-Pfad';
 $_lang['setting_filemanager_path_desc'] = 'IIS setzt die Einstellung document_root, die vom Dateimanager verwendet wird, um festzulegen, was angezeigt wird, häufig nicht korrekt. Wenn Sie Probleme mit der Benutzung des Dateimanagers haben, stellen Sie sicher, dass dieser Pfad auf den Root Ihrer MODx-Installation zeigt.';
 
+$_lang['setting_filemanager_path_relative'] = 'Ist der Dateimanager-Pfad relativ?';
+$_lang['setting_filemanager_path_relative_desc'] = 'Wenn Ihre "filemanager_path"-Einstellung relativ zum MODx-"base_path" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihr "filemanager_path" außerhalb des Document-Roots liegt, setzen Sie sie auf "Nein".';
+
 $_lang['setting_filemanager_url'] = 'Dateimanager-URL';
 $_lang['setting_filemanager_url_desc'] = 'Optional. Verwenden Sie diese Option, wenn Sie eine bestimmte URL angeben möchten, von der aus Sie auf die Dateien im MODx-Dateimanager zuzugreifen (hilfreich, wenn Sie den Dateimanager-Pfad auf einen Pfad außerhalb des MODx-Webroots gesetzt haben). Stellen Sie sicher, dass dies die über das Web erreichbare URL der Dateimanager-Pfad-Einstellung ist. Falls diese Einstellung leer gelassen wird, versucht MODx, sie selbst zu erkennen.';
+
+$_lang['setting_filemanager_url_relative'] = 'Ist die Dateimanager-URL relativ?';
+$_lang['setting_filemanager_url_relative_desc'] = 'Wenn Ihre "filemanager_url"-Einstellung relativ zur MODx-"base_url" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihre "filemanager_url" außerhalb des Webroots liegt, setzen Sie sie auf "Nein".';
 
 $_lang['setting_forgot_login_email'] = 'Login-vergessen-Mail';
 $_lang['setting_forgot_login_email_desc'] = 'Das Template für die Mail, die User erhalten, die ihren MODx-Benutzernamen und/oder ihr Passwort vergessen haben.';
@@ -360,6 +366,12 @@ $_lang['setting_proxy_port_desc'] = 'Der Port für Ihren Proxy-Server.';
 $_lang['setting_proxy_username'] = 'Proxy-Benutzername';
 $_lang['setting_proxy_username_desc'] = 'Der Benutzername, der benötigt wird, um sich beim Proxy-Server zu authentifizieren.';
 
+$_lang['setting_password_min_length'] = 'Minimale Passwort-Länge';
+$_lang['setting_password_min_length_desc'] = 'Die minimale Länge für ein Benutzer-Passwort.';
+
+$_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb: Erlaube src über dem Document Root';
+$_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Gibt an, ob der src-Pfad außerhalb des Document-Root liegen darf. Dies ist nützlich für Multi-Kontext-Einsatz mit mehreren Virtual Hosts.';
+
 $_lang['setting_phpthumb_cache_maxage'] = 'phpThumb: maximale Cache-Lebensdauer';
 $_lang['setting_phpthumb_cache_maxage_desc'] = 'Lösche gecachte Thumbnails, auf die in den letzten X Tagen nicht zugegriffen wurde.';
 
@@ -372,14 +384,53 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Lösche die Thumbnails, deren 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb: Cache für Quelldateien';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Gibt an, ob Quelldateien gecacht werden sollen, wenn sie geladen werden, oder nicht. Es wird die Einstellung "off" empfohlen.';
 
+$_lang['setting_phpthumb_error_bgcolor'] = 'phpThumb: Fehler-Hintergrundfarbe';
+$_lang['setting_phpthumb_error_bgcolor_desc'] = 'Ein Hexadezimalwert, ohne das #, der die Hintergrundfarbe für phpThumb-Fehlermeldungen angibt.';
+
+$_lang['setting_phpthumb_error_fontsize'] = 'phpThumb: Fehler-Schriftgröße';
+$_lang['setting_phpthumb_error_fontsize_desc'] = 'Ein em-Wert, der die Schriftgröße angibt, die für Text in phpThumb-Fehlermeldungen verwendet wird.';
+
+$_lang['setting_phpthumb_error_textcolor'] = 'phpThumb: Fehler-Schriftfarbe';
+$_lang['setting_phpthumb_error_textcolor_desc'] = 'Ein Hexadezimalwert, ohne das #, der die Schriftfarbe für Text in phpThumb-Fehlermeldungen angibt.';
+
+$_lang['setting_phpthumb_far'] = 'phpThumb: Seitenverhältnis erzwingen';
+$_lang['setting_phpthumb_far_desc'] = 'Die Standard-Force-Aspect-Ratio-Einstellung für phpThumb, wenn es in MODx verwendet wird. Der Standardwert ist "C", womit eine zentrierte Ausrichtung erreicht wird.';
+
 $_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb: ImageMagick-Pfad';
 $_lang['setting_phpthumb_imagemagick_path_desc'] = 'Optional. Geben Sie hier einen alternativen Pfad zu ImageMagick an, um Thumbnails mit phpThumb zu generieren, falls nicht bereits in den PHP-Standardeinstellungen geschehen ist.';
 
+$_lang['setting_phpthumb_nohotlink_enabled'] = 'phpThumb: Hotlinking deaktiviert';
+$_lang['setting_phpthumb_nohotlink_enabled_desc'] = 'Andere Server im src-Parameter sind erlaubt, wenn Sie Hotlinking in phpThumb nicht deaktivieren.';
+
+$_lang['setting_phpthumb_nohotlink_erase_image'] = 'phpThumb: Hotlinking: Bild löschen';
+$_lang['setting_phpthumb_nohotlink_erase_image_desc'] = 'Gibt an, ob ein Bild, das von einem anderen Server generiert wurde, gelöscht werden soll, wenn dies nicht erlaubt wurde.';
+
+$_lang['setting_phpthumb_nohotlink_text_message'] = 'phpThumb: Hotlinking-nicht-erlaubt-Meldung';
+$_lang['setting_phpthumb_nohotlink_text_message_desc'] = 'Eine Meldung, die anstatt des Thumbnails angezeigt wird, wenn ein Hotlinking-Versuch zurückgewiesen wird.';
+
+$_lang['setting_phpthumb_nohotlink_valid_domains'] = 'phpThumb: Für Hotlinking zugelassene Domains';
+$_lang['setting_phpthumb_nohotlink_valid_domains_desc'] = 'Eine kommaseparierte Liste von Hostnamen, die in src-URLs erlaubt sind.';
+
+$_lang['setting_phpthumb_nooffsitelink_enabled'] = 'phpThumb: Offsite-Linking deaktiviert';
+$_lang['setting_phpthumb_nooffsitelink_enabled_desc'] = 'Deaktiviert die Möglichkeit für andere, phpThumb zu nutzen, um Bilder in ihren eigenen Sites darzustellen.';
+
+$_lang['setting_phpthumb_nooffsitelink_erase_image'] = 'phpThumb: Offsite-Linking: Bild löschen';
+$_lang['setting_phpthumb_nooffsitelink_erase_image_desc'] = 'Gibt an, ob ein Bild, das von einem anderen Server verlinkt wurde, gelöscht werden soll, wenn dies nicht erlaubt wurde.';
+
+$_lang['setting_phpthumb_nooffsitelink_require_refer'] = 'phpThumb: Offsite-Linking erfordert Referrer';
+$_lang['setting_phpthumb_nooffsitelink_require_refer_desc'] = 'Wenn diese Einstellung aktiviert ist, werden alle Offsite-Linking-Versuche ohne gültigen Referrer-Header zurückgewiesen.';
+
+$_lang['setting_phpthumb_nooffsitelink_text_message'] = 'phpThumb: Offsite-Linking-nicht-erlaubt-Meldung';
+$_lang['setting_phpthumb_nooffsitelink_text_message_desc'] = 'Eine Meldung, die anstatt des Thumbnails angezeigt wird, wenn ein Offsite-Linking-Versuch zurückgewiesen wird.';
+
+$_lang['setting_phpthumb_nooffsitelink_valid_domains'] = 'phpThumb: Für Offsite-Linking zugelassene Domains';
+$_lang['setting_phpthumb_nooffsitelink_valid_domains_desc'] = 'Eine kommaseparierte Liste von Hostnamen, die als Referrer für Offsite-Linking erlaubt sind.';
+
+$_lang['setting_phpthumb_nooffsitelink_watermark_src'] = 'phpThumb: Offsite-Linking-Wasserzeichen-Quelle';
+$_lang['setting_phpthumb_nooffsitelink_watermark_src_desc'] = 'Optional. Ein gültiger Dateisystem-Pfad zu einer Datei, die als Quelle für Wasserzeichen verwendet werden soll, wenn Ihre Bilder offsite (auf einem anderen Server) durch phpThumb gerendert werden.';
+
 $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb: Zoom-Crop';
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'Die Standard-Zoom-Crop-Einstellung für phpThumb, wenn es in MODx verwendet wird. Der Standardwert ist "0", wodurch Zoom-Cropping verhindert wird.';
-
-$_lang['setting_phpthumb_far'] = 'phpThumb: Force Aspect Ratio';
-$_lang['setting_phpthumb_far_desc'] = 'Die Standard-Force-Aspect-Ratio-Einstellung für phpThumb, wenn es in MODx verwendet wird. Der Standardwert ist "C", womit eine zentrierte Ausrichtung erreicht wird.';
 
 $_lang['setting_publish_default'] = 'Ressourcen standardmäßig veröffentlichen';
 $_lang['setting_publish_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig veröffentlicht werden sollen.';
