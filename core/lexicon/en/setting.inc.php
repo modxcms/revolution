@@ -148,6 +148,9 @@ $_lang['setting_cache_scripts_desc'] = 'When enabled, MODx will cache all Script
 $_lang['setting_cache_system_settings'] = 'Enable System Setting Cache';
 $_lang['setting_cache_system_settings_desc'] = 'When enabled, system settings will be cached to reduce load times. MODx recommends leaving this on.';
 
+$_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear';
+$_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
+
 $_lang['setting_compress_css'] = 'Use Compressed CSS';
 $_lang['setting_compress_css_desc'] = 'When this is enabled, MODx will use a compressed version of its css stylesheets in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 

@@ -231,6 +231,15 @@ $settings['cache_system_settings']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['clear_cache_refresh_trees']= $xpdo->newObject('modSystemSetting');
+$settings['clear_cache_refresh_trees']->fromArray(array (
+  'key' => 'clear_cache_refresh_trees',
+  'value' => 0,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'caching',
+  'editedon' => null,
+), '', true, true);
 $settings['compress_css']= $xpdo->newObject('modSystemSetting');
 $settings['compress_css']->fromArray(array (
   'key' => 'compress_css',

@@ -89,7 +89,9 @@ Ext.extend(MODx,Ext.Component,{
                ,listeners: {
                     'shutdown': {fn:function() {
                         if (this.fireEvent('afterClearCache')) {
-                            Ext.getCmp('modx-layout').refreshTrees();
+                            if (MODx.config.clear_cache_refresh_trees == 1) {
+                                Ext.getCmp('modx-layout').refreshTrees();
+                            }
                         }
                     },scope:this}
                }
