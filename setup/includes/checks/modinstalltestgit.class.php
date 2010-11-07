@@ -1,11 +1,11 @@
 <?php
 /**
- * Handles all SVN build-specific checks
+ * Handles all Git build-specific checks
  *
  * @package setup
  * @subpackage tests
  */
-class modInstallTestSvn extends modInstallTest {
+class modInstallTestGit extends modInstallTest {
     public function run($mode = modInstall::MODE_NEW) {
         $this->results = parent::run($mode);
 

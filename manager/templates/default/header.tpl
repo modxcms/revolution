@@ -34,7 +34,7 @@
         <div id="modx-logo"><a href="http://modxcms.com" onclick="window.open(this.href); return false;"><img src="templates/{$_config.manager_theme}/images/style/modx_logo_header.png" alt="" /></a></div>
         <div id="modx-site-name">
             {$_config.site_name}
-            <span class="modx-version">MODx Revolution {$_config.settings_version}</span>
+            <span class="modx-version">MODx Revolution {$_config.settings_version} ({$_config.settings_distro})</span>
         </div>
     </div>
     <div id="modx-navbar">

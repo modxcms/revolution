@@ -11,7 +11,18 @@ $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
 $settings_version = $this->xpdo->newObject('modSystemSetting');
 $settings_version->set('key','settings_version');
 $settings_version->set('value', $currentVersion['full_version']);
+$settings_version->set('xtype','textfield');
+$settings_version->set('namespace','core');
+$settings_version->set('area','system');
 $settings_version->save();
+
+$settings_distro = $this->xpdo->newObject('modSystemSetting');
+$settings_distro->set('key','settings_distro');
+$settings_distro->set('value', trim($currentVersion['distro'], '@'));
+$settings_distro->set('xtype','textfield');
+$settings_distro->set('namespace','core');
+$settings_distro->set('area','system');
+$settings_distro->save();
 
 /* add default admin user */
 $user = $this->xpdo->newObject('modUser');
@@ -68,7 +79,7 @@ if ($this->settings->get('new_file_permissions')) {
 }
 
 /* compress and concat JS on new installs */
-if (defined('MODX_SETUP_KEY') && MODX_SETUP_KEY != '@svn@') {
+if (defined('MODX_SETUP_KEY') && MODX_SETUP_KEY != '@git@') {
     $concatJavascript = $this->xpdo->getObject('modSystemSetting', array(
         'key' => 'concat_js',
     ));

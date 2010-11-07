@@ -328,7 +328,14 @@
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>
-                    <token key="svn" value="@sdk@" />
+                    <token key="git" value="@sdk@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="git" value="@sdk@" />
                 </replacetokens>
             </filterchain>
         </reflexive>
@@ -362,7 +369,14 @@
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>
-                    <token key="sdk" value="@svn@" />
+                    <token key="sdk" value="@git@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="sdk" value="@git@" />
                 </replacetokens>
             </filterchain>
         </reflexive>
@@ -386,7 +400,14 @@
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>
-                    <token key="svn" value="@traditional@" />
+                    <token key="git" value="@traditional@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="git" value="@traditional@" />
                 </replacetokens>
             </filterchain>
         </reflexive>
@@ -441,7 +462,14 @@
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>
-                    <token key="traditional" value="@svn@" />
+                    <token key="traditional" value="@git@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="traditional" value="@git@" />
                 </replacetokens>
             </filterchain>
         </reflexive>
@@ -465,7 +493,14 @@
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>
-                    <token key="svn" value="@advanced@" />
+                    <token key="git" value="@advanced@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="git" value="@advanced@" />
                 </replacetokens>
             </filterchain>
         </reflexive>
@@ -490,7 +525,14 @@
         <reflexive file="${build.image.dir}/setup/includes/config.core.php">
             <filterchain>
                 <replacetokens>
-                    <token key="advanced" value="@svn@" />
+                    <token key="advanced" value="@git@" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive file="${build.image.dir}/core/docs/version.inc.php">
+            <filterchain>
+                <replacetokens>
+                    <token key="advanced" value="@git@" />
                 </replacetokens>
             </filterchain>
         </reflexive>

@@ -80,7 +80,7 @@ class modTemplateVar extends modElement {
                 'cacheFlag' => $cacheFlag,
             ));
         }
-        
+
         $removed = parent :: remove($ancestors);
 
         if ($removed && $this->xpdo instanceof modX) {
@@ -354,7 +354,7 @@ class modTemplateVar extends modElement {
 
     /**
      * Gets the correct render given paths and type of render
-     * 
+     *
      * @param array $params The parameters to pass to the render
      * @param mixed $value The value of the TV
      * @param array $paths An array of paths to search
@@ -457,7 +457,7 @@ class modTemplateVar extends modElement {
 
     /**
      * Returns an array of display params for this TV
-     * 
+     *
      * @return array The processed settings
      */
     public function getDisplayParams() {
@@ -535,7 +535,7 @@ class modTemplateVar extends modElement {
 
     /**
      * Parses the binding data from a value
-     * 
+     *
      * @param mixed $value The value to parse
      * @return array An array of cmd and param for the binding
      */
@@ -643,7 +643,7 @@ class modTemplateVar extends modElement {
                 if (!is_dir($path)) { break; }
 
                 $files = array();
-                $invalid = array('.','..','.svn','.DS_Store');
+                $invalid = array('.','..','.svn','.git','.DS_Store');
                 foreach (new DirectoryIterator($path) as $file) {
                     if (!$file->isReadable()) continue;
                     $basename = $file->getFilename();
@@ -701,7 +701,7 @@ class modTemplateVar extends modElement {
             $resource =& $this->xpdo->resource;
         }
         if (!$resource) return $output;
-        
+
         $currentResource = $resource;
         while ($currentResource->get('parent') != 0) {
             $currentResource = $this->xpdo->getObject('modResource',array('id' => $currentResource->get('parent')));

@@ -60,7 +60,7 @@ $imagesExts = array('jpg','jpeg','png','gif','ico');
 
 /* iterate through directories */
 foreach (new DirectoryIterator($fullPath) as $file) {
-    if (in_array($file,array('.','..','.svn','_notes'))) continue;
+    if (in_array($file,array('.','..','.svn','.git','_notes'))) continue;
     if (!$file->isReadable()) continue;
 
     $fileName = $file->getFilename();
@@ -75,7 +75,7 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         if ($canRemoveDirs) $cls .= ' premove';
         if ($canUpdateDirs) $cls .= ' pupdate';
         if ($canUpload) $cls .= ' pupload';
-        
+
         $directories[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,

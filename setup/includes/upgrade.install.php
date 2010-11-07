@@ -26,6 +26,9 @@ if ($managerLanguage) {
 }
 unset($managerLanguage);
 
+/* get version information */
+$currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
+
 /* update settings_version */
 $settings_version = $this->xpdo->getObject('modSystemSetting', array(
     'key' => 'settings_version',
@@ -37,9 +40,22 @@ if ($settings_version == null) {
     $settings_version->set('namespace','core');
     $settings_version->set('area','system');
 }
-$currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
 $settings_version->set('value', $currentVersion['full_version']);
 $settings_version->save();
+
+/* update settings_distro */
+$settings_distro = $this->xpdo->getObject('modSystemSetting', array(
+    'key' => 'settings_distro',
+));
+if ($settings_distro == null) {
+    $settings_distro = $this->xpdo->newObject('modSystemSetting');
+    $settings_distro->set('key','settings_distro');
+    $settings_distro->set('xtype','textfield');
+    $settings_distro->set('namespace','core');
+    $settings_distro->set('area','system');
+}
+$settings_distro->set('value', trim($currentVersion['distro'], '@'));
+$settings_distro->save();
 
 /* make sure admin user (1) has proper group and role */
 $adminUser = $this->xpdo->getObject('modUser', 1);
@@ -294,7 +310,7 @@ if (!$setting) {
                             $permission->save();
                         }
                     }
- 
+
                 }
             }
         }

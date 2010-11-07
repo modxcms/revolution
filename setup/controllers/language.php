@@ -24,7 +24,7 @@ $langs = array();
 $path = dirname(dirname(__FILE__)).'/lang/';
 foreach (new DirectoryIterator($path) as $file) {
     $basename = $file->getFilename();
-	if (!in_array($basename, array('.', '..','.htaccess','.svn')) && $file->isDir()) {
+	if (!in_array($basename, array('.', '..','.htaccess','.svn','.git')) && $file->isDir()) {
 		if (file_exists($file->getPathname().'/default.inc.php')) {
 			$langs[] = $basename;
 		}

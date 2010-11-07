@@ -499,6 +499,9 @@ $_lang['setting_session_name_desc'] = 'Use this setting to customize the session
 $_lang['setting_settings_version'] = 'Settings Version';
 $_lang['setting_settings_version_desc'] = 'The current installed version of MODx.';
 
+$_lang['setting_settings_distro'] = 'Settings Distribution';
+$_lang['setting_settings_distro_desc'] = 'The current installed distribution of MODx.';
+
 $_lang['setting_set_header'] = 'Set HTTP Headers';
 $_lang['setting_set_header_desc'] = 'When enabled, MODx will attempt to set the HTTP headers for Resources.';
 

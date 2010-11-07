@@ -35,7 +35,7 @@ $encoding = $modx->getOption('modx_charset',null,'UTF-8');
 $files = array();
 if (!is_dir($fullpath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').$fullpath);
 foreach (new DirectoryIterator($fullpath) as $file) {
-    if (in_array($file,array('.','..','.svn','_notes'))) continue;
+    if (in_array($file,array('.','..','.svn','.git','_notes'))) continue;
     if (!$file->isReadable()) continue;
 
     $fileName = $file->getFilename();
@@ -68,7 +68,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             /* generate thumb/image URLs */
             $thumb = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$thumbWidth.'&h='.$thumbHeight.'&HTTP_MODAUTH='.$modx->site_id.'&ctx='.$ctx;
             $image = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$imageWidth.'&h='.$imageHeight.'&HTTP_MODAUTH='.$modx->site_id.'&ctx='.$ctx;
-           
+
         } else {
             $thumb = $image = $modx->getOption('manager_url',null,MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
             $thumbWidth = $imageWidth = $modx->getOption('filemanager_thumb_width',null,80);

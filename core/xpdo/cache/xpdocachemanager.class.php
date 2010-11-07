@@ -320,7 +320,7 @@ class xPDOCacheManager {
                     }
                 }
                 if ($handle= @ opendir($source)) {
-                    $excludeItems = $this->getOption('copy_exclude_items', $options, array('.', '..','.svn','.svn/','.svn\\'));
+                    $excludeItems = $this->getOption('copy_exclude_items', $options, array('.', '..','.svn','.svn/','.svn\\','.git'));
                     $excludePatterns = $this->getOption('copy_exclude_patterns', $options);
                     $copiedFiles = array();
                     $error = false;
@@ -390,7 +390,7 @@ class xPDOCacheManager {
             if ($handle= opendir($dirname)) {
                 $limit= 4;
                 $extensions= $this->getOption('extensions', $options, array('.cache.php'));
-                $excludeItems = $this->getOption('delete_exclude_items', $options, array('.', '..','.svn','.svn/','.svn\\'));
+                $excludeItems = $this->getOption('delete_exclude_items', $options, array('.', '..','.svn','.svn/','.svn\\','.git'));
                 $excludePatterns = $this->getOption('delete_exclude_patterns', $options);
                 while ($hasMore && $limit--) {
                     if (!$handle) {
