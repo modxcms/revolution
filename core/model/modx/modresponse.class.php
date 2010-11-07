@@ -188,10 +188,19 @@ class modResponse {
      * REDIRECT_HEADER is the default.
      *
      * @param string $url The URL to redirect the client browser to.
-     * @param integer $count_attempts The number of times to attempt redirection.
-     * @param string $type The type of redirection to attempt.
+     * @param array|boolean $options An array of options for the redirect OR
+     * indicates if redirect attempts should be counted and limited to 3 (latter is deprecated
+     * usage; use count_attempts in options array).
+     * @param string $type The type of redirection to attempt (deprecated, use type in
+     * options array).
+     * @param string $responseCode The type of HTTP response code HEADER to send for the
+     * redirect (deprecated, use responseCode in options array)
      */
-    public function sendRedirect($url, $count_attempts= 0, $type= '', $responseCode= '') {
+    public function sendRedirect($url, $options= false, $type= '', $responseCode= '') {
+        if (!is_array($options)) {
+            $options = array('count_attempts' => (boolean) $options);
+        }
+        $options = array_merge(array('count_attempts' => false, 'type' => $type, 'responseCode' => $responseCode), $options);
         $url= str_replace('&amp;','&',$url);
         if (empty ($url)) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, "Attempted to redirect to an empty URL.");
@@ -200,8 +209,10 @@ class modResponse {
         if (!$this->modx->getRequest()) {
             $this->modx->log(modX::LOG_LEVEL_FATAL, "Could not load request class.");
         }
-        $this->modx->request->preserveRequest('referrer.redirected');
-        if ($count_attempts == 1) {
+        if (isset($options['preserve_request']) && !empty($options['preserve_request'])) {
+            $this->modx->request->preserveRequest('referrer.redirected');
+        }
+        if ($options['count_attempts']) {
             /* append the redirect count string to the url */
             $currentNumberOfRedirects= isset ($_REQUEST['err']) ? $_REQUEST['err'] : 0;
             if ($currentNumberOfRedirects > 3) {
@@ -215,22 +226,23 @@ class modResponse {
                 }
             }
         }
-        if ($type == 'REDIRECT_REFRESH') {
-            $header= 'Refresh: 0;URL=' . $url;
+        switch ($options['type']) {
+            case 'REDIRECT_REFRESH':
+                $header= 'Refresh: 0;URL=' . $url;
+                break;
+            case 'REDIRECT_META':
+                $header= '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=' . $url . '" />';
+                echo $header;
+                exit();
+            default:
+                if (strpos($url, '://') === false && !(substr($url, 0, 1) === '/' || substr($url, 0, 2) === './' || substr($url, 0, 3) === '../')) {
+                    $url= $this->modx->getOption('site_url',null,'/') . $url;
+                }
+                $header= 'Location: ' . $url;
+                break;
         }
-        elseif ($type == 'REDIRECT_META') {
-            $header= '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=' . $url . '" />';
-            echo $header;
-            exit();
-        }
-        else {
-            if (strpos($url, '://') === false && !(substr($url, 0, 1) === '/' || substr($url, 0, 2) === './' || substr($url, 0, 3) === '../')) {
-                $url= $this->modx->getOption('site_url',null,'/') . $url;
-            }
-            $header= 'Location: ' . $url;
-        }
-        if ($responseCode && (strpos($responseCode, '30') !== false)) {
-            header($responseCode);
+        if (!empty($options['responseCode']) && (strpos($options['responseCode'], '30') !== false)) {
+            header($options['responseCode']);
         }
         header($header);
         exit();

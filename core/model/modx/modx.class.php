@@ -788,9 +788,9 @@ class modX extends xPDO {
     }
 
     /**
-     * Sends a redirect to the specified URL using the specified method.
+     * Sends a redirect to the specified URL using the specified options.
      *
-     * Valid $type values include:
+     * Valid 'type' option values include:
      *    REDIRECT_REFRESH  Uses the header refresh method
      *    REDIRECT_META  Sends a a META HTTP-EQUIV="Refresh" tag to the output
      *    REDIRECT_HEADER  Uses the header location method
@@ -798,14 +798,19 @@ class modX extends xPDO {
      * REDIRECT_HEADER is the default.
      *
      * @param string $url The URL to redirect the client browser to.
-     * @param integer $count_attempts The number of times to attempt redirection.
-     * @param string $type The type of redirection to attempt.
+     * @param array|boolean $options An array of options for the redirect OR
+     * indicates if redirect attempts should be counted and limited to 3 (latter is deprecated
+     * usage; use count_attempts in options array).
+     * @param string $type The type of redirection to attempt (deprecated, use type in
+     * options array).
+     * @param string $responseCode The type of HTTP response code HEADER to send for the
+     * redirect (deprecated, use responseCode in options array)
      */
-    public function sendRedirect($url, $count_attempts= 0, $type= '', $responseCode = '') {
+    public function sendRedirect($url, $options= false, $type= '', $responseCode = '') {
         if (!$this->getResponse()) {
             $this->log(modX::LOG_LEVEL_FATAL, "Could not load response class.");
         }
-        $this->response->sendRedirect($url, $count_attempts, $type, $responseCode);
+        $this->response->sendRedirect($url, $options, $type, $responseCode);
     }
 
     /**
