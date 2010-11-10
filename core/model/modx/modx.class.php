@@ -404,10 +404,14 @@ class modX extends xPDO {
             $extPackages = $this->getOption('extension_packages');
             $extPackages = $this->fromJSON($extPackages);
             if (!empty($extPackages)) {
-                foreach ($extPackages as $packageName => $package) {
-                    if (!empty($package) && !empty($package['path'])) {
-                        $tblPrefix = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
-                        $this->addPackage($packageName,$package['path'],$tblPrefix);
+                foreach ($extPackages as $extPackage) {
+                    if (!is_array($extPackage)) continue;
+                    
+                    foreach ($extPackage as $packageName => $package) {
+                        if (!empty($package) && !empty($package['path'])) {
+                            $tblPrefix = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
+                            $this->addPackage($packageName,$package['path'],$tblPrefix);
+                        }
                     }
                 }
             }
