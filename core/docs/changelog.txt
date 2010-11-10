@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2758] Add $modx->runProcessor($action,$scriptProperties,$options) to better handle processor execution; deprecated $modx->executeProcessor
 - [#84] Make distribution name available in manager
 - [#2666] Prevent sendRedirect() from preserving request parameters unless specified
 - [#2721] Fixed issue with per page items in MODx.grid.Grid that was incorrectly handling int value

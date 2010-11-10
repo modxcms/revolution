@@ -1334,32 +1334,61 @@ class modX extends xPDO {
      * - location - A prefix to load processor files from, will prepend to the
      * action parameter.
      *
+     * @deprecated 2.0.5 Will be removed in 2.1.
      * @param array $options An array of options.
      * @return mixed $result The result of the processor.
      */
     public function executeProcessor($options) {
+        $scriptProperties = $options;
+        unset($scriptProperties['action'],$scriptProperties['location'],$scriptProperties['processors_path']);
+        return $this->runProcessor('',$scriptProperties,$options);
+    }
+
+    /**
+     * Loads and runs a specific processor.
+     * 
+     * @param string $action The processor to run, eg: context/update
+     * @param array $scriptProperties Optional. An array of parameters to pass to the processor.
+     * @param array $options Optional. An array of options for running the processor, such as:
+     *
+     * - processors_path - If specified, will override the default MODx processors path.
+     * - location - A prefix to load processor files from, will prepend to the action parameter
+     * (Note: location will be deprecated in future Revolution versions.)
+     *
+     * @return mixed The result of the processor.
+     */
+    public function runProcessor($action = '',$scriptProperties = array(),$options = array()) {
         $result = null;
-        if (is_array($options) && !empty($options) && isset($options['action']) && $this->getRequest()) {
-            $processor = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
-            if (isset($options['location']) && !empty($options['location'])) $processor .= $options['location'] . '/';
-            $processor .= str_replace('../', '', $options['action']) . '.php';
-            if (file_exists($processor)) {
-                if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
-                if (!isset($this->error)) $this->request->loadErrorHandler();
-
-                /* create scriptProperties array from HTTP GPC vars */
-                if (!isset($_POST)) $_POST = array();
-                if (!isset($_GET)) $_GET = array();
-                $scriptProperties = array_merge($_GET,$_POST);
-                if (isset($_FILES) && !empty($_FILES)) {
-                    $scriptProperties = array_merge($scriptProperties,$_FILES);
-                }
-
-                $modx =& $this;
-                $result = include $processor;
+        /* backwards compat for $options['action'] */
+        if (empty($action)) {
+            if (!empty($options['action'])) {
+                $action = $options['action'];
             } else {
-                $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processor} does not exist; " . print_r($options, true));
+                return $result;
             }
+        }
+
+        /* calculate processor file path from options and action */
+        $processor = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
+        if (isset($options['location']) && !empty($options['location'])) $processor .= $options['location'] . '/';
+        $processor .= str_replace('../', '', $action . '.php');
+
+        if (file_exists($processor)) {
+            if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
+            if (!isset($this->error)) $this->request->loadErrorHandler();
+
+            /* create scriptProperties array from HTTP GPC vars */
+            if (!isset($_POST)) $_POST = array();
+            if (!isset($_GET)) $_GET = array();
+            $scriptProperties = array_merge($scriptProperties,$_GET,$_POST);
+            if (isset($_FILES) && !empty($_FILES)) {
+                $scriptProperties = array_merge($scriptProperties,$_FILES);
+            }
+
+            $modx =& $this;
+            $result = include $processor;
+        } else {
+            $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processor} does not exist; " . print_r($options, true));
         }
         return $result;
     }
