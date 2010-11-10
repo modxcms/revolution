@@ -330,7 +330,7 @@ class modX extends xPDO {
      */
     public function __construct($configPath= '', array $options = array()) {
         global $database_type, $database_server, $dbase, $database_user,
-               $database_password, $database_connection_charset, $table_prefix;
+               $database_password, $database_connection_charset, $table_prefix, $site_id;
         modX :: protect();
         if (empty ($configPath)) {
             $configPath= MODX_CORE_PATH . 'config/';
@@ -1347,7 +1347,7 @@ class modX extends xPDO {
 
     /**
      * Loads and runs a specific processor.
-     * 
+     *
      * @param string $action The processor to run, eg: context/update
      * @param array $scriptProperties Optional. An array of parameters to pass to the processor.
      * @param array $options Optional. An array of options for running the processor, such as:
