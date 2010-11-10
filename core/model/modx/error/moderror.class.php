@@ -441,6 +441,28 @@ class modProcessorResponse {
     public function hasFieldErrors() {
         return !empty($this->errors) ? true : false;
     }
+
+    /**
+     * Gets all errors and adds them all into an array.
+     *
+     * @param string $fieldErrorSeparator The separator to use between fieldkey and message for field-specific errors.
+     * @return array An array of all errors.
+     */
+    public function getAllErrors($fieldErrorSeparator = ': ') {
+        $errormsgs = array();
+        if ($response->hasMessage()) {
+            $errormsgs[] = $response->getMessage();
+        }
+        if ($response->hasFieldErrors()) {
+            $errors = $response->getFieldErrors();
+            if (!empty($errors)) {
+                foreach ($errors as $error) {
+                    $errormsgs[] = $error->field.$fieldErrorSeparator.$error->message;
+                }
+            }
+        }
+        return $errormsgs;
+    }
 }
 /**
  * An abstraction class of field-specific errors for a processor response
