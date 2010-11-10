@@ -13,10 +13,21 @@
  */
 if (!$modx->hasPermission('file_list')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('file');
-$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
+
+/* get working context */
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 
 /* get sanitized base path and current path */
-$modx->getService('fileHandler','modFileHandler');
 $root = $modx->fileHandler->getBasePath();
 $dir = !isset($scriptProperties['dir']) || $scriptProperties['dir'] == 'root' ? '' : $scriptProperties['dir'];
 $dir = $modx->fileHandler->sanitizePath($dir);
@@ -29,8 +40,8 @@ $baseUrl = $modx->fileHandler->getBaseUrl(true);
 
 /* setup settings */
 $imagesExts = array('jpg','jpeg','png','gif');
-$use_multibyte = $modx->getOption('use_multibyte',null,false);
-$encoding = $modx->getOption('modx_charset',null,'UTF-8');
+$use_multibyte = $modx->fileHandler->context->getOption('use_multibyte', false);
+$encoding = $modx->fileHandler->context->getOption('modx_charset', 'UTF-8');
 /* iterate */
 $files = array();
 if (!is_dir($fullpath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').$fullpath);
@@ -45,15 +56,15 @@ foreach (new DirectoryIterator($fullpath) as $file) {
         $fileExtension = pathinfo($filePathName,PATHINFO_EXTENSION);
         $fileExtension = $use_multibyte ? mb_strtolower($fileExtension,$encoding) : strtolower($fileExtension);
 
-	$filesize = @filesize($filePathName);
+        $filesize = @filesize($filePathName);
         $url = $dir.$fileName;
 
         /* get thumbnail */
         if (in_array($fileExtension,$imagesExts)) {
-            $imageWidth = $modx->getOption('filemanager_image_width',null,400);
-            $imageHeight = $modx->getOption('filemanager_image_height',null,300);
-            $thumbHeight = $modx->getOption('filemanager_thumb_height',null,60);
-            $thumbWidth = $modx->getOption('filemanager_thumb_width',null,80);
+            $imageWidth = $modx->fileHandler->context->getOption('filemanager_image_width', 400);
+            $imageHeight = $modx->fileHandler->context->getOption('filemanager_image_height', 300);
+            $thumbHeight = $modx->fileHandler->context->getOption('filemanager_thumb_height', 60);
+            $thumbWidth = $modx->fileHandler->context->getOption('filemanager_thumb_width', 80);
 
             $size = @getimagesize($filePathName);
             if (is_array($size)) {
@@ -66,13 +77,13 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             if ($thumbHeight > $imageHeight) $thumbHeight = $imageHeight;
 
             /* generate thumb/image URLs */
-            $thumb = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$thumbWidth.'&h='.$thumbHeight.'&HTTP_MODAUTH='.$modx->site_id.'&ctx='.$ctx;
-            $image = $modx->getOption('connectors_url',null,MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$imageWidth.'&h='.$imageHeight.'&HTTP_MODAUTH='.$modx->site_id.'&ctx='.$ctx;
+            $thumb = $modx->fileHandler->context->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$thumbWidth.'&h='.$thumbHeight.'&HTTP_MODAUTH='.$modx->site_id.'&wctx='.$workingContext->get('key');
+            $image = $modx->fileHandler->context->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$imageWidth.'&h='.$imageHeight.'&HTTP_MODAUTH='.$modx->site_id.'&wctx='.$workingContext->get('key');
 
         } else {
-            $thumb = $image = $modx->getOption('manager_url',null,MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
-            $thumbWidth = $imageWidth = $modx->getOption('filemanager_thumb_width',null,80);
-            $thumbHeight = $imageHeight = $modx->getOption('filemanager_thumb_height',null,60);
+            $thumb = $image = $modx->fileHandler->context->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
+            $thumbWidth = $imageWidth = $modx->fileHandler->context->getOption('filemanager_thumb_width', 80);
+            $thumbHeight = $imageHeight = $modx->fileHandler->context->getOption('filemanager_thumb_height', 60);
         }
         $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
         $files[] = array(

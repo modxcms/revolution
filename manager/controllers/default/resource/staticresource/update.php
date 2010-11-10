@@ -19,7 +19,7 @@ if (is_array($onDocFormPrerender)) {
 $modx->smarty->assign('onDocFormPrerender',$onDocFormPrerender);
 
 /* handle default parent */
-$parentname = $context->getOption('site_name');
+$parentname = $context->getOption('site_name', '', $modx->_userConfig);
 if ($resource->get('parent') != 0) {
     $parent = $modx->getObject('modResource',$resource->get('parent'));
     if ($parent != null) {
@@ -45,9 +45,9 @@ $modx->smarty->assign('onDocFormRender',$onDocFormRender);
  *  Initialize RichText Editor
  */
 /* Set which RTE */
-$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $context->getOption('which_editor');
+$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $context->getOption('which_editor', '', $modx->_userConfig);
 $modx->smarty->assign('which_editor',$rte);
-if ($context->getOption('use_editor') && !empty($rte)) {
+if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)) {
     /* invoke OnRichTextEditorRegister event */
     $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
     $modx->smarty->assign('text_editors',$text_editors);
@@ -82,12 +82,13 @@ $access_permissions = $modx->hasPermission('access_permissions');
 
 /* register JS scripts */
 $modx->smarty->assign('_ctx',$resource->get('context_key'));
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/util/datetime.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.security.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.tv.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.static.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/sections/resource/static/update.js');
+$managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
+$modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.static.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/sections/resource/static/update.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[

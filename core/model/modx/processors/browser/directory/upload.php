@@ -12,8 +12,18 @@ $modx->lexicon->load('file');
 
 if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
-/* get base paths and sanitize incoming paths */
-$modx->getService('fileHandler','modFileHandler');
+/* get working context */
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 $root = $modx->fileHandler->getBasePath(false);
 $directory = $modx->fileHandler->make($root.$scriptProperties['dir']);
 
@@ -33,7 +43,7 @@ $maxFileSize = $modx->getOption('upload_maxsize',1048576);
 foreach ($_FILES as $file) {
     if ($file['error'] != 0) continue;
     if (empty($file['name'])) continue;
-    
+
     $ext = @pathinfo($file['name'],PATHINFO_EXTENSION);
 
     if (empty($ext) || !in_array($ext,$allowedFileTypes)) {

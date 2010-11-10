@@ -14,7 +14,18 @@ $modx->lexicon->load('file');
 if (empty($scriptProperties['path'])) return $modx->error->failure($modx->lexicon('file_err_ns'));
 if (empty($scriptProperties['newname'])) return $modx->error->failure($modx->lexicon('name_err_ns'));
 
-$modx->getService('fileHandler','modFileHandler');
+/* get working context */
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 $root = $modx->fileHandler->getBasePath(false);
 
 /* generate modFileSystemResource from path */

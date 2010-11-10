@@ -295,7 +295,7 @@ class modX extends xPDO {
 
     /**
      * Sanitizes a string
-     * 
+     *
      * @param string $str The string to sanitize
      * @param array $chars An array of chars to remove
      * @param string $allowedTags A list of tags to allow.

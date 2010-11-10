@@ -78,7 +78,7 @@ foreach ($collection as $key => $object) {
         $objdata['context_key']= $object->get('context_key');
     }
     $cls = '';
-    if (($object->get('target') == 'web' || $object->get('target') == 'mgr') && $principal->get('name') == 'Administrator' && $policyName == 'Administrator') {} else {
+    if (($object->get('target') == 'mgr') && $principal->get('name') == 'Administrator' && $policyName == 'Administrator') {} else {
         $cls .= 'pedit premove';
     }
 

@@ -16,7 +16,7 @@
 <script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
 <script src="{$_config.manager_url}assets/modext/{if $_config.compress_js}build/core/modx-min{else}core/modx{/if}.js" type="text/javascript"></script>
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=category,file,resource&action={$smarty.get.a|strip_tags}" type="text/javascript"></script>
-<script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&ctx={$_ctx}{/if}" type="text/javascript"></script>
+<script src="{$_config.connectors_url}layout/modx.config.js.php?action={$smarty.get.a|strip_tags}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
 
 {foreach from=$cssjs item=scr}
 {$scr}

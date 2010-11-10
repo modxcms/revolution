@@ -18,11 +18,11 @@ if (is_array($onDocFormPrerender)) {
 $modx->smarty->assign('onDocFormPrerender',$onDocFormPrerender);
 
 /* handle default parent */
-$parentname = $context->getOption('site_name');
+$parentname = $context->getOption('site_name', '', $modx->_userConfig);
 $resource->set('parent',0);
 if (isset ($_REQUEST['parent'])) {
     if ($_REQUEST['parent'] == 0) {
-        $parentname = $context->getOption('site_name');
+        $parentname = $context->getOption('site_name', '', $modx->_userConfig);
     } else {
         $parent = $modx->getObject('modResource',$_REQUEST['parent']);
         if ($parent != null) {
@@ -47,7 +47,7 @@ $modx->smarty->assign('onDocFormRender',$onDocFormRender);
  *  Initialize RichText Editor
  */
 /* Set which RTE if not core */
-if ($context->getOption('use_editor') && !empty($rte)) {
+if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)) {
     /* invoke OnRichTextEditorRegister event */
     $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
     $modx->smarty->assign('text_editors',$text_editors);
@@ -77,7 +77,7 @@ $publish_document = $modx->hasPermission('publish_document');
 $access_permissions = $modx->hasPermission('access_permissions');
 
 /* set default template */
-$default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $context->getOption('default_template',null,1)));
+$default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $context->getOption('default_template', 0, $modx->_userConfig)));
 $userGroups = $modx->user->getUserGroups();
 $c = $modx->newQuery('modActionDom');
 $c->leftJoin('modAccessActionDom','Access');
@@ -116,18 +116,19 @@ $defaults = array(
     'context_key' => $ctx,
     'parent' => isset($_REQUEST['parent']) ? $_REQUEST['parent'] : 0,
     'richtext' => 0,
-    'published' => $context->getOption('publish_default',null,0),
-    'searchable' => $context->getOption('search_default',null,1),
-    'cacheable' => $context->getOption('cache_default',null,1),
+    'published' => $context->getOption('publish_default', 0, $modx->_userConfig),
+    'searchable' => $context->getOption('search_default', 1, $modx->_userConfig),
+    'cacheable' => $context->getOption('cache_default', 1, $modx->_userConfig),
 );
 
 /* register JS scripts */
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/util/datetime.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.security.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.tv.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.static.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/sections/resource/static/create.js');
+$managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
+$modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.static.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/sections/resource/static/create.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[
