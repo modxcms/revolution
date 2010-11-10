@@ -115,10 +115,12 @@ class modLexicon {
         if (!empty($prefix)) {
             $lex = array();
             $lang = $this->_lexicon;
-            foreach ($lang as $k => $v) {
-                if (strpos($k,$prefix) !== false) {
-                    $key = $removePrefix ? str_replace($prefix,'',$k) : $k;
-                    $lex[$key] = $v;
+            if (is_array($lang)) {
+                foreach ($lang as $k => $v) {
+                    if (strpos($k,$prefix) !== false) {
+                        $key = $removePrefix ? str_replace($prefix,'',$k) : $k;
+                        $lex[$key] = $v;
+                    }
                 }
             }
             return $lex;
