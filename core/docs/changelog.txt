@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix various bugs with context settings and wctx param
 - Fix bug where modX::getDocumentChildrenTVars ignores docsort parameter
 - [#2743] Connectors using wrong permissions with processors
 - [#2758] Add modProcessorResponse class to better handle processor responses and error messages

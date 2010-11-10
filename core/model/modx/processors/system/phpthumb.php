@@ -9,7 +9,7 @@ if (!isset($modx)) die();
 
 /* get modFileHandler service */
 $wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : $modx->context->get('key');
-$modx->getService('fileHandler','modFileHandler', array('context' => $wctx));
+$modx->getService('fileHandler','modFileHandler','',array('context' => $wctx));
 
 /* filter path */
 $src = $modx->getOption('src',$scriptProperties,'');

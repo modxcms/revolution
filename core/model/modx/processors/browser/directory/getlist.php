@@ -108,7 +108,7 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         $encFile = rawurlencode($dir.$fileName);
         $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile.'&wctx='.$workingContext->get('key') : null;
         $url = $baseUrl.trim(str_replace('//','/',$dir.$fileName),'/');
-        $url = ($modx->getOption('filemanager_url_relative',true) ? '../' : '').$url;
+        $url = ($modx->getOption('filemanager_url_relative',null,true) ? '../' : '').$url;
         $files[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
