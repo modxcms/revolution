@@ -1341,7 +1341,8 @@ class modX extends xPDO {
     public function executeProcessor($options) {
         $scriptProperties = $options;
         unset($scriptProperties['action'],$scriptProperties['location'],$scriptProperties['processors_path']);
-        return $this->runProcessor('',$scriptProperties,$options);
+        $response = $this->runProcessor('',$scriptProperties,$options);
+        return $response->getResponse();
     }
 
     /**
@@ -1386,7 +1387,8 @@ class modX extends xPDO {
             }
 
             $modx =& $this;
-            $result = include $processor;
+            $response = include $processor;
+            $result = new modProcessorResponse($this,$response);
         } else {
             $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processor} does not exist; " . print_r($options, true));
         }
