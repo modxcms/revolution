@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2733] Fix bug where Template Var associations were not copied when duplicating a Template
 - [#2742] Fix deprecated evtid reference in plugin duplicate processor
 - Fix various bugs with context settings and wctx param
 - Fix bug where modX::getDocumentChildrenTVars ignores docsort parameter
