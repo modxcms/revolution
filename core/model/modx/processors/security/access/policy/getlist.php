@@ -45,6 +45,7 @@ $subc->where(array(
 $subc->prepare();
 $c->select(array(
     'modAccessPolicy.*',
+    'Template.name AS template_name',
 ));
 $c->select('('.$subc->toSql().') AS '.$modx->escape('total_permissions'));
 
