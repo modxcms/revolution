@@ -103,11 +103,11 @@ Ext.extend(MODx.panel.PILicense,MODx.panel.WizardPanel,{
             ,params: {
                 action: 'getAttribute'
                 ,signature: sig
-                ,attr: 'license'
+                ,attributes: 'license'
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    var a = r.object.attr;
+                    var a = r.object['license'];
                     var b = Ext.getCmp('modx-pi-license-box');
                     if (a !== null && a !== 'null' && a !== '') {
                         b.setValue(a);
@@ -141,7 +141,23 @@ MODx.panel.PIReadme = function(config) {
             ,name: 'readme'
             ,id: 'modx-pi-readme-box'
             ,width: '90%'
-            ,height: 250
+            ,height: 200
+            ,value: ''
+        },{
+            html: '<h2>'+_('changelog')+'</h2>'
+            ,autoHeight: true
+            ,id: 'modx-pi-changelog-header'
+        },{
+            html: '<p>'+_('changelog_desc')+'</p>'
+            ,style: 'padding-bottom: 20px'
+            ,autoHeight: true
+            ,id: 'modx-pi-changelog-desc'
+        },{
+            xtype: 'textarea'
+            ,name: 'changelog'
+            ,id: 'modx-pi-changelog-box'
+            ,width: '90%'
+            ,height: 200
             ,value: ''
         }]
     });
@@ -159,16 +175,39 @@ Ext.extend(MODx.panel.PIReadme,MODx.panel.WizardPanel,{
             ,params: {
                 action: 'getAttribute'
                 ,signature: sig
-                ,attr: 'readme'
+                ,attributes: 'readme,changelog'
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    var a = r.object.attr;
+                    var a = r.object['readme'];
+                    var proceed = true;
+
                     var b = Ext.getCmp('modx-pi-readme-box');
                     if (a !== null && a !== 'null' && a !== '') {
                         b.setValue(a);
+                        proceed = false;
                     } else {
                         b.setValue('');
+                    }
+
+                    a = r.object['changelog'];
+                    b = Ext.getCmp('modx-pi-changelog-box');
+                    if (a !== null && a !== 'null' && a !== '') {
+                        Ext.getCmp('modx-pi-changelog-box').show();
+                        Ext.getCmp('modx-pi-changelog-header').show();
+                        Ext.getCmp('modx-pi-changelog-desc').show();
+                        Ext.getCmp('modx-window-package-installer').center();
+                        b.setValue(a);
+                        proceed = false;
+                    } else {
+                        b.setValue('');
+                        Ext.getCmp('modx-pi-changelog-box').hide();
+                        Ext.getCmp('modx-pi-changelog-header').hide();
+                        Ext.getCmp('modx-pi-changelog-desc').hide();
+                        Ext.getCmp('modx-window-package-installer').center();
+                    }
+                    
+                    if (proceed) {
                         Ext.getCmp('modx-window-package-installer').fireEvent('proceed','modx-pi-install');
                     }
                 },scope:this}
@@ -191,7 +230,7 @@ MODx.panel.PIInstall = function(config) {
             ,id: 'modx-setup-options-header'
         },{
             html: '<p>'+_('setup_options_desc')+'</p>'   
-            ,style: 'padding-bottom: 2em'
+            ,style: 'padding-bottom: 20px'
             ,id: 'modx-setup-options-desc'
         },{
             html: ''
@@ -213,11 +252,11 @@ Ext.extend(MODx.panel.PIInstall,MODx.panel.WizardPanel,{
             ,params: {
                 action: 'getAttribute'
                 ,signature: sig
-                ,attr: 'setup-options'
+                ,attributes: 'setup-options'
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    var a = r.object.attr;
+                    var a = r.object['setup-options'];
                     var el = Ext.getCmp('modx-setup-options').getEl();
                     if (a !== null && a !== 'null' && a !== '') {
                         el.update(a);

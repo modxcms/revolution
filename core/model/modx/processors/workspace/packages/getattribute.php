@@ -19,25 +19,29 @@ if ($package == null) return $modx->error->failure();
 
 /* get transport and attribute */
 $transport = $package->getTransport();
-if ($transport) {
-    $attr = $transport->getAttribute($scriptProperties['attr']);
-} else {
+if (!$transport) {
     return $modx->error->failure();
 }
 
-/* if setup options, include setup file */
-if ($scriptProperties['attr'] == 'setup-options') {
-    ob_start();
-    $options = $package->toArray();
-    $options[xPDOTransport::PACKAGE_ACTION] = empty($package->installed)
-        ? xPDOTransport::ACTION_INSTALL
-        : xPDOTransport::ACTION_UPGRADE;
-    $f = $modx->getOption('core_path').'packages/'.$attr;
-    if (file_exists($f) && $attr != '') {
-        $attr = include $f;
-    } else { $attr = false; }
-    ob_end_clean();
-}
-if ($attr == false) $attr = '';
+$attributes = array();
+$attrs = explode(',',$scriptProperties['attributes']);
 
-return $modx->error->success('',array('attr' => $attr));
+foreach ($attrs as $attr) {
+    $attributes[$attr] = $transport->getAttribute($attr);
+
+    /* if setup options, include setup file */
+    if ($attr == 'setup-options') {
+        ob_start();
+        $options = $package->toArray();
+        $options[xPDOTransport::PACKAGE_ACTION] = empty($package->installed)
+            ? xPDOTransport::ACTION_INSTALL
+            : xPDOTransport::ACTION_UPGRADE;
+        $f = $modx->getOption('core_path').'packages/'.$attr;
+        if (file_exists($f) && $attr != '') {
+            $attributes['setup-options'] = include $f;
+        }
+        ob_end_clean();
+    }
+}
+
+return $modx->error->success('',$attributes);

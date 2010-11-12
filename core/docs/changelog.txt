@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2782] Added ability to view changelog when installing a package via the "changelog" package attribute (similar to readme)
 - [#2770] Ensure email TV input type validates email
 - [#2776] Fix issue where context settings grid was not filterable
 - [#2790] Ensure "number" TV types restrict input to numbers only
