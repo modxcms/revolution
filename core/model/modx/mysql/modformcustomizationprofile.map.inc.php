@@ -3,19 +3,17 @@
  * @package modx
  * @subpackage mysql
  */
-$xpdo_meta_map['modAccessPolicy']= array (
+$xpdo_meta_map['modFormCustomizationProfile']= array (
   'package' => 'modx',
   'version' => '1.1',
-  'table' => 'access_policies',
+  'table' => 'fc_profiles',
   'fields' => 
   array (
-    'name' => NULL,
-    'description' => NULL,
-    'parent' => 0,
-    'template' => 0,
-    'class' => '',
-    'data' => '{}',
-    'lexicon' => 'permissions',
+    'name' => '',
+    'description' => '',
+    'usergroup' => 0,
+    'active' => 0,
+    'rank' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -25,55 +23,42 @@ $xpdo_meta_map['modAccessPolicy']= array (
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
-      'index' => 'unique',
-    ),
-    'description' => 
-    array (
-      'dbtype' => 'mediumtext',
-      'phptype' => 'string',
-    ),
-    'parent' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'attributes' => 'unsigned',
-      'phptype' => 'integer',
-      'null' => false,
-      'default' => 0,
-      'index' => 'index',
-    ),
-    'template' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'attributes' => 'unsigned',
-      'phptype' => 'integer',
-      'null' => false,
-      'default' => 0,
-      'index' => 'index',
-    ),
-    'class' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => false,
       'default' => '',
       'index' => 'index',
     ),
-    'data' => 
+    'description' => 
     array (
       'dbtype' => 'text',
-      'phptype' => 'json',
-      'default' => '{}',
-    ),
-    'lexicon' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
       'phptype' => 'string',
       'null' => false,
-      'default' => 'permissions',
+      'default' => '',
+    ),
+    'usergroup' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'active' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'rank' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
     ),
   ),
   'indexes' => 
@@ -82,7 +67,7 @@ $xpdo_meta_map['modAccessPolicy']= array (
     array (
       'alias' => 'name',
       'primary' => false,
-      'unique' => true,
+      'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
@@ -94,15 +79,15 @@ $xpdo_meta_map['modAccessPolicy']= array (
         ),
       ),
     ),
-    'parent' => 
+    'usergroup' => 
     array (
-      'alias' => 'parent',
+      'alias' => 'usergroup',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
-        'parent' => 
+        'usergroup' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -110,15 +95,15 @@ $xpdo_meta_map['modAccessPolicy']= array (
         ),
       ),
     ),
-    'class' => 
+    'rank' => 
     array (
-      'alias' => 'class',
+      'alias' => 'rank',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
-        'class' => 
+        'rank' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -126,15 +111,15 @@ $xpdo_meta_map['modAccessPolicy']= array (
         ),
       ),
     ),
-    'template' => 
+    'active' => 
     array (
-      'alias' => 'template',
+      'alias' => 'active',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
-        'template' => 
+        'active' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -145,32 +130,24 @@ $xpdo_meta_map['modAccessPolicy']= array (
   ),
   'aggregates' => 
   array (
-    'Parent' => 
+    'UserGroup' => 
     array (
-      'class' => 'modAccessPolicy',
-      'local' => 'parent',
+      'class' => 'modUserGroup',
+      'local' => 'usergroup',
       'foreign' => 'id',
-      'owner' => 'foreign',
       'cardinality' => 'one',
-    ),
-    'Template' => 
-    array (
-      'class' => 'modAccessPolicyTemplate',
-      'local' => 'template',
-      'foreign' => 'id',
       'owner' => 'foreign',
-      'cardinality' => 'one',
     ),
   ),
   'composites' => 
   array (
-    'Children' => 
+    'Sets' => 
     array (
-      'class' => 'modAccessPolicy',
+      'class' => 'modFormCustomizationSet',
       'local' => 'id',
-      'foreign' => 'parent',
-      'owner' => 'local',
+      'foreign' => 'profile',
       'cardinality' => 'many',
+      'owner' => 'local',
     ),
   ),
 );

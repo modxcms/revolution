@@ -542,6 +542,10 @@ $attributes['resolve'][] = array (
     'source' => dirname(__FILE__) . '/resolvers/resolve.core.php',
     'target' => "return MODX_CONNECTORS_PATH . 'config.core.php';",
 );
+$attributes['resolve'][] = array (
+    'type' => 'php',
+    'source' => dirname(__FILE__) . '/resolvers/resolve.actionfields.php',
+);
 $package->put($fileset, $attributes);
 unset ($fileset, $attributes);
 

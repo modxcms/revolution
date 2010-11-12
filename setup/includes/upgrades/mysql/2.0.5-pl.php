@@ -9,6 +9,9 @@
 $classes = array(
     'modAccessPolicyTemplate',
     'modAccessPolicyTemplateGroup',
+    'modFormCustomizationProfile',
+    'modFormCustomizationSet',
+    'modActionField',
 );
 if (!empty($classes)) {
     $this->createTable($classes);
@@ -106,4 +109,43 @@ if ($setting) {
     $v = str_replace('cache,','',$v);
     $setting->set('value',$v);
     $setting->save();
+}
+
+
+/* add set field/index to modActionDom */
+$class = 'modActionDom';
+$table = $modx->getTableName($class);
+$sql = "ALTER TABLE {$table} ADD `set` INT(11) NULL DEFAULT '0' AFTER `id`";
+$modx->exec($sql);
+$sql = "ALTER TABLE {$table} ADD INDEX `set` (`set`)";
+$modx->exec($sql);
+
+/* upgrade FC rules */
+$ct = $modx->getCount('modFormCustomizationProfile');
+if (empty($ct)) {
+    $profile = $modx->newObject('modFormCustomizationProfile');
+    $profile->set('name','Default');
+    $profile->set('description','Default profile based on import from Revolution upgrade.');
+    $profile->set('active',true);
+    $profile->set('usergroup',0);
+    $profile->save();
+
+    $c = $modx->newQuery('modActionDom');
+    $c->sortby('action','ASC');
+    $rules = $modx->getCollection('modActionDom',$c);
+    $currentAction = 0;
+    $currentSet = 0;
+    foreach ($rules as $rule) {
+        if ($currentAction != $rule->get('action')) {
+            $currentAction = $rule->get('action');
+            $set = $modx->newObject('modFormCustomizationSet');
+            $set->set('profile',$profile->get('id'));
+            $set->set('action',$rule->get('action'));
+            $set->set('active',true);
+            $set->save();
+            $currentSet = $set->get('id');
+        }
+        $rule->set('set',$currentSet);
+        $rule->save();
+    }
 }

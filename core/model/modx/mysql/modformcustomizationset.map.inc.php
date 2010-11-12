@@ -3,40 +3,41 @@
  * @package modx
  * @subpackage mysql
  */
-$xpdo_meta_map['modAccessPolicy']= array (
+$xpdo_meta_map['modFormCustomizationSet']= array (
   'package' => 'modx',
   'version' => '1.1',
-  'table' => 'access_policies',
+  'table' => 'fc_sets',
   'fields' => 
   array (
-    'name' => NULL,
-    'description' => NULL,
-    'parent' => 0,
+    'profile' => 0,
+    'action' => 0,
+    'active' => 0,
     'template' => 0,
-    'class' => '',
-    'data' => '{}',
-    'lexicon' => 'permissions',
   ),
   'fieldMeta' => 
   array (
-    'name' => 
+    'profile' => 
     array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
+      'dbtype' => 'integer',
+      'precision' => '11',
+      'phptype' => 'integer',
       'null' => false,
-      'index' => 'unique',
+      'default' => 0,
+      'index' => 'index',
     ),
-    'description' => 
+    'action' => 
     array (
-      'dbtype' => 'mediumtext',
-      'phptype' => 'string',
+      'dbtype' => 'integer',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
     ),
-    'parent' => 
+    'active' => 
     array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'attributes' => 'unsigned',
+      'dbtype' => 'tinyint',
+      'precision' => '1',
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
@@ -44,49 +45,25 @@ $xpdo_meta_map['modAccessPolicy']= array (
     ),
     'template' => 
     array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'attributes' => 'unsigned',
+      'dbtype' => 'integer',
+      'precision' => '11',
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
       'index' => 'index',
     ),
-    'class' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => false,
-      'default' => '',
-      'index' => 'index',
-    ),
-    'data' => 
-    array (
-      'dbtype' => 'text',
-      'phptype' => 'json',
-      'default' => '{}',
-    ),
-    'lexicon' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => false,
-      'default' => 'permissions',
-    ),
   ),
   'indexes' => 
   array (
-    'name' => 
+    'profile' => 
     array (
-      'alias' => 'name',
+      'alias' => 'profile',
       'primary' => false,
-      'unique' => true,
+      'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
-        'name' => 
+        'profile' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -94,15 +71,15 @@ $xpdo_meta_map['modAccessPolicy']= array (
         ),
       ),
     ),
-    'parent' => 
+    'action' => 
     array (
-      'alias' => 'parent',
+      'alias' => 'action',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
-        'parent' => 
+        'action' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -110,15 +87,15 @@ $xpdo_meta_map['modAccessPolicy']= array (
         ),
       ),
     ),
-    'class' => 
+    'active' => 
     array (
-      'alias' => 'class',
+      'alias' => 'active',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
       'columns' => 
       array (
-        'class' => 
+        'active' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -145,32 +122,32 @@ $xpdo_meta_map['modAccessPolicy']= array (
   ),
   'aggregates' => 
   array (
-    'Parent' => 
+    'Action' => 
     array (
-      'class' => 'modAccessPolicy',
-      'local' => 'parent',
+      'class' => 'modAction',
+      'local' => 'action',
       'foreign' => 'id',
-      'owner' => 'foreign',
       'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
-    'Template' => 
+    'Profile' => 
     array (
-      'class' => 'modAccessPolicyTemplate',
-      'local' => 'template',
+      'class' => 'modFormCustomizationProfile',
+      'local' => 'profile',
       'foreign' => 'id',
-      'owner' => 'foreign',
       'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
   'composites' => 
   array (
-    'Children' => 
+    'Rules' => 
     array (
-      'class' => 'modAccessPolicy',
+      'class' => 'modActionDom',
       'local' => 'id',
-      'foreign' => 'parent',
-      'owner' => 'local',
+      'foreign' => 'set',
       'cardinality' => 'many',
+      'owner' => 'local',
     ),
   ),
 );

@@ -208,41 +208,7 @@
         <aggregate alias="Children" class="modAction" local="id" foreign="parent" owner="local" cardinality="many" />
         <composite alias="Menus" class="modMenu" local="id" foreign="action" owner="local" cardinality="many" />
         <composite alias="Acls" class="modAccessAction" local="id" foreign="target" owner="local" cardinality="many" />
-    </object>
-    
-    <object class="modActionDom" table="actiondom" extends="modAccessibleSimpleObject">
-        <field key="action" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
-        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
-        <field key="description" dbtype="text" phptype="string" />
-        <field key="xtype" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="container" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="rule" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="value" dbtype="text" phptype="string" null="false" default="" />
-        <field key="constraint" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="constraint_field" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" index="index" />
-        <field key="for_parent" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
-        <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
-        
-        <index alias="action" name="action" primary="false" unique="false" type="BTREE">
-            <column key="action" length="" collation="A" null="false" />
-        </index>
-        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
-            <column key="name" length="" collation="A" null="false" />
-        </index>
-        <index alias="active" name="active" primary="false" unique="false" type="BTREE">
-            <column key="active" length="" collation="A" null="false" />
-        </index>
-        <index alias="for_parent" name="for_parent" primary="false" unique="false" type="BTREE">
-            <column key="for_parent" length="" collation="A" null="false" />
-        </index>
-        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
-            <column key="rank" length="" collation="A" null="false" />
-        </index>
-
-        <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
-        <composite alias="Access" class="modAccessActionDom" local="id" foreign="target" cardinality="many" owner="local" />
+        <composite alias="Fields" class="modActionField" local="id" foreign="action" owner="local" cardinality="many" />
     </object>
     
     <object class="modActiveUser" table="active_users" extends="xPDOObject">
@@ -472,7 +438,118 @@
 
         <composite alias="Event" class="modEvent" key="id" local="eventid" foreign="name" cardinality="one" owner="foreign" />
     </object>
+
+
+    <object class="modActionDom" table="actiondom" extends="modAccessibleSimpleObject">
+        <field key="set" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="description" dbtype="text" phptype="string" />
+        <field key="xtype" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="container" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="rule" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="value" dbtype="text" phptype="string" null="false" default="" />
+        <field key="constraint" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="constraint_field" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" index="index" />
+        <field key="for_parent" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+
+        <index alias="set" name="set" primary="false" unique="false" type="BTREE">
+            <column key="set" length="" collation="A" null="false" />
+        </index>
+        <index alias="action" name="action" primary="false" unique="false" type="BTREE">
+            <column key="action" length="" collation="A" null="false" />
+        </index>
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="active" name="active" primary="false" unique="false" type="BTREE">
+            <column key="active" length="" collation="A" null="false" />
+        </index>
+        <index alias="for_parent" name="for_parent" primary="false" unique="false" type="BTREE">
+            <column key="for_parent" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Set" class="modFormCustomizationSet" local="set" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="Access" class="modAccessActionDom" local="id" foreign="target" cardinality="many" owner="local" />
+    </object>
     
+    <object class="modFormCustomizationProfile" table="fc_profiles" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="usergroup" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
+        <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="usergroup" name="usergroup" primary="false" unique="false" type="BTREE">
+            <column key="usergroup" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
+        </index>
+        <index alias="active" name="active" primary="false" unique="false" type="BTREE">
+            <column key="active" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="UserGroup" class="modUserGroup" local="usergroup" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="Sets" class="modFormCustomizationSet" local="id" foreign="profile" cardinality="many" owner="local" />
+    </object>
+
+    <object class="modFormCustomizationSet" table="fc_sets" extends="xPDOSimpleObject">
+        <field key="profile" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
+        <field key="template" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+
+        <index alias="profile" name="profile" primary="false" unique="false" type="BTREE">
+            <column key="profile" length="" collation="A" null="false" />
+        </index>
+        <index alias="action" name="action" primary="false" unique="false" type="BTREE">
+            <column key="action" length="" collation="A" null="false" />
+        </index>
+        <index alias="active" name="active" primary="false" unique="false" type="BTREE">
+            <column key="active" length="" collation="A" null="false" />
+        </index>
+        <index alias="template" name="template" primary="false" unique="false" type="BTREE">
+            <column key="template" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Profile" class="modFormCustomizationProfile" local="profile" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="Rules" class="modActionDom" local="id" foreign="set" cardinality="many" owner="local" />
+    </object>
+
+    <object class="modActionField" table="actions_fields" extends="xPDOSimpleObject">
+        <field key="action" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" /> <!-- name/id of field -->
+        <field key="type" dbtype="varchar" precision="100" phptype="string" null="false" default="field" index="index" /> <!-- either field/tab -->
+        <field key="tab" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" /> <!-- for fields, what tab they are on -->
+        <field key="form" dbtype="varchar" precision="255" phptype="string" null="false" default="" /> <!-- the form ID (for dom sel purposes) -->
+        <field key="other" dbtype="varchar" precision="255" phptype="string" null="false" default="" /> <!-- used on tabs to delineate TV tabs -->
+        <field key="rank" dbtype="integer" precision="11" phptype="integer" null="false" default="0" />
+
+        <index alias="action" name="action" primary="false" unique="false" type="BTREE">
+            <column key="action" length="" collation="A" null="false" />
+        </index>
+        <index alias="type" name="type" primary="false" unique="false" type="BTREE">
+            <column key="type" length="" collation="A" null="false" />
+        </index>
+        <index alias="tab" name="tab" primary="false" unique="false" type="BTREE">
+            <column key="tab" length="" collation="A" null="false" />
+        </index>
+        
+        <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+
     <object class="modJSONRPCResource" extends="modXMLRPCResource" />
     
     <object class="modKeyword" table="site_keywords" extends="xPDOSimpleObject">
