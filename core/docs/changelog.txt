@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2776] Fix issue where context settings grid was not filterable
 - [#2790] Ensure "number" TV types restrict input to numbers only
 - [#2730] Fix rendering issue with policy template/group grids
 - [#2794] Allow TV URL output render to handle values that are straight Resource IDs
