@@ -64,6 +64,13 @@ MODx.panel.Package = function(config) {
                 ,name: 'license'
                 ,width: '80%'
                 ,height: 200
+            },{
+                xtype: 'textarea'
+                ,readOnly: true
+                ,fieldLabel: _('changelog')
+                ,name: 'changelog'
+                ,width: '80%'
+                ,height: 200
             }]
         },{
             title: _('uploaded_versions')
