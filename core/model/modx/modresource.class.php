@@ -681,7 +681,7 @@ class modResource extends modAccessibleSimpleObject {
         foreach ($groups as $oldResourceGroupResource) {
             $newResourceGroupResource = $this->xpdo->newObject('modResourceGroupResource');
             $newResourceGroupResource->set('document_group',$oldResourceGroupResource->get('document_group'));
-            $newResourceGroupResource->set('document',$oldResourceGroupResource->get('id'));
+            $newResourceGroupResource->set('document',$newResource->get('id'));
             $newResourceGroupResource->save();
         }
 
