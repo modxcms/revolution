@@ -356,25 +356,13 @@ class xPDOObjectTest extends xPDOTestCase {
             'username' => $person,
         ));
         if ($person) {
-	        try {
-	            $personPhones = $person->getMany($alias);
-	        } catch (Exception $e) {
-	            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
-	        }
-		}
-        $this->assertTrue(!empty($personPhones) && count($personPhones) === 1,'xPDOQuery: getMany failed from Person to PersonPhone.');
-
-        $person = $this->xpdo->getObject('Person',array(
-            'username' => $person,
-        ));
-        if ($person) {
-	        try {
+            try {
                 $fkMeta = $person->getFKDefinition($alias);
-	            $personPhones = $person->getMany($alias, $this->xpdo->newQuery($fkMeta['class'])->sortby($this->xpdo->escape($sortby)));
-	        } catch (Exception $e) {
-	            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
-	        }
-		}
+                $personPhones = $person->getMany($alias, $this->xpdo->newQuery($fkMeta['class'])->sortby($this->xpdo->escape($sortby)));
+            } catch (Exception $e) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+            }
+        }
         $this->assertTrue(!empty($personPhones) && count($personPhones) === 1,'xPDOQuery: getMany failed from Person to PersonPhone.');
     }
     /**

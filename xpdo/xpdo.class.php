@@ -263,6 +263,10 @@ class xPDO {
                 $this->_escapeCharOpen= '"';
                 $this->_escapeCharClose= '"';
                 break;
+            case 'sqlsrv':
+            	$this->_escapeCharOpen= '[';
+            	$this->_escapeCharClose= ']';
+            	break;
             default:
                 break;
         }
@@ -1642,6 +1646,9 @@ class xPDO {
             } else {
                 $result['dbname']= trim($parameters[$a]);
         	}
+        }
+        if (!isset($result['dbname'])) {
+        	if (isset($result['database'])) $result['dbname'] = $result['database'];
         }
         return $result;
     }
