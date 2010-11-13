@@ -96,22 +96,24 @@ class xPDOQuerySortByTest extends xPDOTestCase {
             array('color,name','ASC','item-03'),
         );
     }
-    
+
     /**
      * Test sortby with groupby statement
      * @dataProvider providerSortByWithGroupBy
      */
     public function testSortByWithGroupBy($sort,$dir,$nameOfFirst) {
     	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
-        $success = false;
         try {
             $criteria = $this->xpdo->newQuery('Item');
-            $criteria->groupby('color');
+            $criteria->groupby("{$sort},id,color");
             $criteria->sortby($this->xpdo->escape($sort),$dir);
+            $criteria->sortby($this->xpdo->escape('id'),'ASC');
+            $criteria->sortby($this->xpdo->escape('color'),'ASC');
             $result = $this->xpdo->getCollection('Item',$criteria);
             if (is_array($result) && !empty($result)) {
-                foreach ($result as $r) { $result = $r; break; }
-                $name = $result->get('name');
+                $match = null;
+                foreach ($result as $r) { $match = $r; break; }
+                $name = $match->get('name');
                 $this->assertEquals($nameOfFirst,$name,'xPDOQuery: SortBy did not return expected result, returned `'.$name.'` instead.');
             } else {
                 throw new Exception('xPDOQuery: SortBy test with groupby call did not return an array');
@@ -127,7 +129,7 @@ class xPDOQuerySortByTest extends xPDOTestCase {
     public function providerSortByWithGroupBy() {
         return array(
             array('name','ASC','item-01'),
-            array('name','DESC','item-04'),
+            array('name','DESC','item-39'),
         );
     }
 

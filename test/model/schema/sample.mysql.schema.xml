@@ -70,7 +70,7 @@
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="type" collation="A" null="false" />
         </index>
-        
+
         <aggregate alias="Person" class="Person" local="type" foreign="blood_type" cardinality="many" owner="foreign" />
     </object>
     <object class="Item" table="items" extends="xPDOSimpleObject">
@@ -79,4 +79,11 @@
         <field key="description" dbtype="text" phptype="string" null="true" />
         <field key="date_modified" dbtype="timestamp" phptype="timestamp" null="false" default="CURRENT_TIMESTAMP" attributes="ON UPDATE CURRENT_TIMESTAMP" />
     </object>
+
+    <index name="name" primary="false" unique="true">
+        <column key="name" length="" collation="A" null="false" />
+    </index>
+    <index name="color" primary="false" unique="false">
+        <column key="color" length="" collation="A" null="false" />
+    </index>
 </model>
