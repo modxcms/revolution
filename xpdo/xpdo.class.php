@@ -703,6 +703,8 @@ class xPDO {
                         call_user_func($callback, array('className' => $className, 'criteria' => $query));
                     }
                 }
+            } else {
+                $this->log(xPDO::LOG_LEVEL_ERROR, "xPDO->removeCollection - Error preparing statement to delete {$className} instances using query: {$query->toSQL()}");
             }
         }
         return $removed;
@@ -1969,7 +1971,19 @@ class xPDO {
         if (!$this->connect()) {
             return false;
         }
-        return $this->pdo->quote($string, $parameter_type);
+        $quoted = $this->pdo->quote($string, $parameter_type);
+        switch ($parameter_type) {
+            case PDO::PARAM_STR:
+                $quoted = trim($quoted);
+                break;
+            case PDO::PARAM_INT:
+                $quoted = trim($quoted);
+                $quoted = (integer) trim($quoted, "'");
+                break;
+            default:
+                break;
+        }
+        return $quoted;
     }
 
     /**

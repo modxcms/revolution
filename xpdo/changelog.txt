@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Add workaround to trim PDO::quote() results for sqlsrv
 - Add virtual support for LIMIT..OFFSET to sqlsrv driver
 - Set dbname property from database property in xPDO::parseDSN()
 - Introduce pdo_sqlsrv driver support
