@@ -1,8 +1,9 @@
 <?php
 /**
  * Smarty plugin
+ *
  * @package Smarty
- * @subpackage plugins
+ * @subpackage PluginsFilter
  */
 
 /**
@@ -22,27 +23,28 @@
  * @author   Monte Ohrt <monte at ohrt dot com>
  * @author Contributions from Lars Noschinski <lars@usenet.noschinski.de>
  * @version  1.3
- * @param string
- * @param Smarty
+ * @param string $source input string
+ * @param object &$smarty Smarty object
+ * @return string filtered output
  */
-function smarty_outputfilter_trimwhitespace($source, &$smarty)
+function smarty_outputfilter_trimwhitespace($source, $smarty)
 {
     // Pull out the script blocks
-    preg_match_all("!<script[^>]+>.*?</script>!is", $source, $match);
+    preg_match_all("!<script[^>]*?>.*?</script>!is", $source, $match);
     $_script_blocks = $match[0];
-    $source = preg_replace("!<script[^>]+>.*?</script>!is",
+    $source = preg_replace("!<script[^>]*?>.*?</script>!is",
                            '@@@SMARTY:TRIM:SCRIPT@@@', $source);
 
     // Pull out the pre blocks
-    preg_match_all("!<pre>.*?</pre>!is", $source, $match);
+    preg_match_all("!<pre[^>]*?>.*?</pre>!is", $source, $match);
     $_pre_blocks = $match[0];
-    $source = preg_replace("!<pre>.*?</pre>!is",
+    $source = preg_replace("!<pre[^>]*?>.*?</pre>!is",
                            '@@@SMARTY:TRIM:PRE@@@', $source);
-
+    
     // Pull out the textarea blocks
-    preg_match_all("!<textarea[^>]+>.*?</textarea>!is", $source, $match);
+    preg_match_all("!<textarea[^>]*?>.*?</textarea>!is", $source, $match);
     $_textarea_blocks = $match[0];
-    $source = preg_replace("!<textarea[^>]+>.*?</textarea>!is",
+    $source = preg_replace("!<textarea[^>]*?>.*?</textarea>!is",
                            '@@@SMARTY:TRIM:TEXTAREA@@@', $source);
 
     // remove all leading spaces, tabs and carriage returns NOT

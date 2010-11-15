@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Upgraded Smarty to 3.0.4
 - [#2782] Added changelog to Package View page
 - [#2782] Added ability to view changelog when installing a package via the "changelog" package attribute (similar to readme)
 - [#2770] Ensure email TV input type validates email

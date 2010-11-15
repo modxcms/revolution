@@ -2,9 +2,8 @@
 /**
  * Smarty plugin
  * @package Smarty
- * @subpackage plugins
+ * @subpackage PluginsFunction
  */
-
 
 /**
  * Smarty {counter} function plugin
@@ -17,9 +16,10 @@
  *       (Smarty online manual)
  * @param array parameters
  * @param Smarty
+ * @param object $template template object
  * @return string|null
  */
-function smarty_function_counter($params, &$smarty)
+function smarty_function_counter($params, $template)
 {
     static $counters = array();
 
@@ -43,7 +43,7 @@ function smarty_function_counter($params, &$smarty)
     }
 
     if (isset($counter['assign'])) {
-        $smarty->assign($counter['assign'], $counter['count']);
+        $template->assign($counter['assign'], $counter['count']);
     }
     
     if (isset($params['print'])) {
@@ -74,7 +74,5 @@ function smarty_function_counter($params, &$smarty)
     return $retval;
     
 }
-
-/* vim: set expandtab: */
 
 ?>
