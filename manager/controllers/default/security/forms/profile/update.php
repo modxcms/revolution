@@ -14,7 +14,23 @@ if (empty($profile)) return $modx->error->failure($modx->lexicon('profile_err_nf
 
 $profileArray = $profile->toArray();
 
+$c = $modx->newQuery('modUserGroup');
+$c->innerJoin('modFormCustomizationProfileUserGroup','FormCustomizationProfiles');
+$c->where(array(
+    'FormCustomizationProfiles.profile' => $profile->get('id'),
+));
+$usergroups = $modx->getCollection('modUserGroup',$c);
+
+$profileArray['usergroups'] = array();
+foreach ($usergroups as $usergroup) {
+    $profileArray['usergroups'][] = array(
+        $usergroup->get('id'),
+        $usergroup->get('name'),
+    );
+}
+
 /* register JS scripts */
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/fc/modx.fc.common.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/fc/modx.panel.fcprofile.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/fc/modx.grid.fcset.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/fc/profile/update.js');

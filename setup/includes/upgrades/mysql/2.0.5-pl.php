@@ -10,6 +10,7 @@ $classes = array(
     'modAccessPolicyTemplate',
     'modAccessPolicyTemplateGroup',
     'modFormCustomizationProfile',
+    'modFormCustomizationProfileUserGroup',
     'modFormCustomizationSet',
     'modActionField',
 );
@@ -123,29 +124,91 @@ $modx->exec($sql);
 /* upgrade FC rules */
 $ct = $modx->getCount('modFormCustomizationProfile');
 if (empty($ct)) {
-    $profile = $modx->newObject('modFormCustomizationProfile');
-    $profile->set('name','Default');
-    $profile->set('description','Default profile based on import from Revolution upgrade.');
-    $profile->set('active',true);
-    $profile->set('usergroup',0);
-    $profile->save();
-
     $c = $modx->newQuery('modActionDom');
+    $c->where(array(
+        'active' => true,
+    ));
+    $c->sortby('usergroup','ASC');
     $c->sortby('action','ASC');
+    $c->sortby('constraint_field','ASC');
     $rules = $modx->getCollection('modActionDom',$c);
+
+    $currentUserGroup = 0;
+    $currentProfile = 0;
     $currentAction = 0;
     $currentSet = 0;
+    $currentConstraintField = '';
+    $usergroup = false;
     foreach ($rules as $rule) {
+        $newSet = false;
+
+        /* if a new usergroup, assign a new profile */
+        if ($currentUserGroup != $rule->get('usergroup')) {
+            if ($rule->get('usergroup') != 0) {
+                $usergroup = $modx->getObject('modUserGroup',$rule->get('usergroup'));
+                if (!$usergroup) continue;
+                $currentUserGroup = $usergroup->get('id');
+            } else { /* if no usergroup */
+                $usergroup = false;
+                $currentUserGroup = 0;
+            }
+
+            $profile = $modx->newObject('modFormCustomizationProfile');
+            if ($usergroup) {
+                $profile->set('name','Default: '.$usergroup->get('name'));
+                $profile->set('description','Default profile based on import from Revolution upgrade for '.$usergroup->get('name').' User Group.');
+            } else {
+                $profile->set('name','Default');
+                $profile->set('description','Default profile based on import from Revolution upgrade.');
+            }
+            $profile->set('active',true);
+            $profile->save();
+            $currentProfile = $profile->get('id');
+
+            /* create user group record */
+            if ($usergroup) {
+                $fcpug = $modx->newObject('modFormCustomizationProfileUserGroup');
+                $fcpug->set('usergroup',$usergroup->get('id'));
+                $fcpug->set('profile',$profile->get('id'));
+                $fcpug->save();
+            }
+        }
+
+        /* if moving to a new action, create a new set */
         if ($currentAction != $rule->get('action')) {
             $currentAction = $rule->get('action');
+            $newSet = true;
+        }
+        /* if constraint is different, create a new set */
+        if ($currentConstraintField != $rule->get('constraint_field')) {
+            $currentConstraintField = $rule->get('constraint_field');
+            $newSet = true;
+        }
+
+        /* if generating a new set */
+        if ($newSet) {
             $set = $modx->newObject('modFormCustomizationSet');
-            $set->set('profile',$profile->get('id'));
+            $set->set('profile',$currentProfile);
             $set->set('action',$rule->get('action'));
             $set->set('active',true);
+            $set->set('constraint',$rule->get('constraint'));
+            $set->set('constraint_field',$rule->get('constraint_field'));
+            $set->set('constraint_class','modResource');
             $set->save();
             $currentSet = $set->get('id');
         }
         $rule->set('set',$currentSet);
+
+        /* flip tvMove name/value */
+        if ($rule->get('rule') == 'tvMove') {
+            $name = $rule->get('name');
+            $rule->set('name',$rule->get('value'));
+            $rule->set('value',$name);
+        }
         $rule->save();
     }
+
+    /* remove all inactive rules */
+    $rules = $modx->getCollection('modActionDom',array('active' => false));
+    foreach ($rules as $rule) { $rule->remove(); }
 }

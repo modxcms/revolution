@@ -35,7 +35,7 @@ MODx.grid.FCProfile = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-fc-profile'
         ,url: MODx.config.connectors_url+'security/forms/profile.php'
-        ,fields: ['id','name','description','usergroup','active','rank','sets','perm']
+        ,fields: ['id','name','description','usergroups','active','rank','sets','perm']
         ,paging: true
         ,autosave: true
         ,sm: this.sm
@@ -58,12 +58,9 @@ MODx.grid.FCProfile = function(config) {
             ,sortable: true
             ,editor: { xtype: 'textfield' }
         },{
-            header: _('usergroup')
-            ,dataIndex: 'usergroup'
+            header: _('usergroups')
+            ,dataIndex: 'usergroups'
             ,width: 150
-            ,editor: { xtype: 'modx-combo-usergroup' ,renderer: true, baseParams: { action: 'getList', addNone: true }}
-            ,editable: true
-            ,sortable: true
         },{
             header: _('rank')
             ,dataIndex: 'rank'
@@ -201,6 +198,10 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         Ext.getCmp('modx-fcp-search').reset();
     	this.getBottomToolbar().changePage(1);
         this.refresh();
+    }
+
+    ,createProfile: function(btn,e) {
+        /* TODO: window for creating a profile here */
     }
 
     ,updateProfile: function(btn,e) {

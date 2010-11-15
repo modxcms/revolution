@@ -11,7 +11,6 @@ $xpdo_meta_map['modFormCustomizationProfile']= array (
   array (
     'name' => '',
     'description' => '',
-    'usergroup' => 0,
     'active' => 0,
     'rank' => 0,
   ),
@@ -32,15 +31,6 @@ $xpdo_meta_map['modFormCustomizationProfile']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
-    ),
-    'usergroup' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '11',
-      'phptype' => 'integer',
-      'null' => false,
-      'default' => 0,
-      'index' => 'index',
     ),
     'active' => 
     array (
@@ -72,22 +62,6 @@ $xpdo_meta_map['modFormCustomizationProfile']= array (
       'columns' => 
       array (
         'name' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
-    'usergroup' => 
-    array (
-      'alias' => 'usergroup',
-      'primary' => false,
-      'unique' => false,
-      'type' => 'BTREE',
-      'columns' => 
-      array (
-        'usergroup' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -128,22 +102,19 @@ $xpdo_meta_map['modFormCustomizationProfile']= array (
       ),
     ),
   ),
-  'aggregates' => 
-  array (
-    'UserGroup' => 
-    array (
-      'class' => 'modUserGroup',
-      'local' => 'usergroup',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-  ),
   'composites' => 
   array (
     'Sets' => 
     array (
       'class' => 'modFormCustomizationSet',
+      'local' => 'id',
+      'foreign' => 'profile',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'UserGroups' => 
+    array (
+      'class' => 'modFormCustomizationProfileUserGroup',
       'local' => 'id',
       'foreign' => 'profile',
       'cardinality' => 'many',

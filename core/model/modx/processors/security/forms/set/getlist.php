@@ -9,7 +9,7 @@
  * @param string $dir (optional) The direction of the sort. Default action.
  *
  * @package modx
- * @subpackage processors.security.forms.profile
+ * @subpackage processors.security.forms.set
  */
 if (!$modx->hasPermission('customize_forms')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('formcustomization');
@@ -25,6 +25,7 @@ $profile = $modx->getOption('profile',$scriptProperties,0);
 /* query for rules */
 $c = $modx->newQuery('modFormCustomizationSet');
 $c->innerJoin('modAction','Action');
+$c->leftJoin('modTemplate','Template');
 if (!empty($profile)) {
     $c->where(array(
         'profile' => $profile,
@@ -34,6 +35,7 @@ $count = $modx->getCount('modFormCustomizationSet',$c);
 $c->select(array(
     'modFormCustomizationSet.*',
     'Action.controller',
+    'Template.templatename',
 ));
 
 $c->sortby($sort,$dir);
@@ -47,7 +49,11 @@ $canEdit = $modx->hasPermission('save');
 $canRemove = $modx->hasPermission('remove');
 foreach ($sets as $set) {
     $setArray = $set->toArray();
-    
+
+    $constraint = $set->get('constraint');
+    if (!empty($constraint)) {
+        $setArray['constraint_data'] = $set->get('constraint_class').'.'.$set->get('constraint_field').' = '.$constraint;
+    }
     $setArray['perm'] = array();
     if ($canEdit) $setArray['perm'][] = 'pedit';
     if ($canRemove) $setArray['perm'][] = 'premove';

@@ -145,21 +145,29 @@ class modManagerResponse extends modResponse {
     public function checkFormCustomizationRules($obj = null,$forParent = false) {
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
-        $c->leftJoin('modAccessActionDom','Access');
-        $principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
+        $c->innerJoin('modFormCustomizationSet','Set');
+        $c->innerJoin('modFormCustomizationProfile','Profile','Set.profile = Profile.id');
+        $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.usergroup');
+        //$c->leftJoin('modAccessActionDom','Access');
+        //$principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
         $c->where(array(
-            'action' => $this->action['id'],
-            'active' => true,
-            'for_parent' => $forParent,
+            'modActionDom.action' => $this->action['id'],
+            'modActionDom.for_parent' => $forParent,
+            'modActionDom.active' => true,
+            'Set.active' => true,
+            'Profile.active' => true,
             array(
-                array(
-                    'Access.principal_class:=' => 'modUserGroup',
-                    $principalCol.' IN ('.implode(',',$userGroups).')',
-                ),
-                'OR:Access.principal:IS' => null,
+                'ProfileUserGroup.usergroup:IN' => $userGroups,
+                'OR:ProfileUserGroup.usergroup:IS' => null,
             ),
         ));
-        $c->sortby('rank','ASC');
+        $c->select(array(
+            'modActionDom.*',
+            'Set.constraint_class',
+            'Set.constraint_field',
+            'Set.constraint',
+        ));
+        $c->sortby('modActionDom.rank','ASC');
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
         foreach ($domRules as $rule) {

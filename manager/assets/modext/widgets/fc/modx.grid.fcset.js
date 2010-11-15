@@ -4,11 +4,12 @@ MODx.grid.FCSet = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-fc-set'
         ,url: MODx.config.connectors_url+'security/forms/set.php'
-        ,fields: ['id','profile','action','controller','active','rules','perm']
+        ,fields: ['id','profile','action','controller','description','active','template','templatename','constraint_data','constraint','constraint_field','constraint_class','rules','perm']
         ,paging: true
         ,autosave: true
         ,sm: this.sm
         ,remoteSort: true
+        ,autoExpandColumn: 'controller'
         ,columns: [this.sm,{
             header: _('id')
             ,dataIndex: 'id'
@@ -17,9 +18,25 @@ MODx.grid.FCSet = function(config) {
         },{
             header: _('action')
             ,dataIndex: 'controller'
-            ,width: 150
+            ,width: 200
             ,editable: true
             ,sortable: true
+        },{
+            header: _('description')
+            ,dataIndex: 'description'
+            ,width: 200
+            ,editable: true
+            ,sortable: true
+        },{
+            header: _('template')
+            ,dataIndex: 'templatename'
+            ,width: 150
+        },{
+            header: _('constraint')
+            ,dataIndex: 'constraint_data'
+            ,width: 200
+            ,editable: false
+            ,sortable: false
         }]
         ,viewConfig: {
             forceFit:true
@@ -78,7 +95,6 @@ MODx.grid.FCSet = function(config) {
         }]
     });
     MODx.grid.FCSet.superclass.constructor.call(this,config);
-    this.on('render',function() { this.getStore().reload(); },this);
 };
 Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
     getMenu: function() {
@@ -134,8 +150,25 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         }
     }
 
-    ,createSet: function() {
-        location.href = '?a='+MODx.action['security/forms/set/create'];
+    ,createSet: function(btn,e) {
+        var r = {
+            profile: MODx.request.id
+            ,active: true
+        };
+        if (!this.windows.cset) {
+            this.windows.cset = MODx.load({
+                xtype: 'modx-window-fc-set-create'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        this.refresh();
+                    },scope:this}
+                }
+            });
+        }
+        this.windows.cset.reset();
+        this.windows.cset.setValues(r);
+        this.windows.cset.show(e.target);
     }
 
     ,updateSet: function(btn,e) {
@@ -241,3 +274,80 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
     }
 });
 Ext.reg('modx-grid-fc-set',MODx.grid.FCSet);
+
+
+MODx.window.CreateFCSet = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('set_create')
+        ,url: MODx.config.connectors_url+'security/forms/set.php'
+        ,action: 'create'
+        ,height: 150
+        ,width: 375
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'profile'
+            ,value: MODx.request.id
+        },{
+            fieldLabel: _('action')
+            ,name: 'action_id'
+            ,hiddenName: 'action_id'
+            ,id: 'modx-fcsc-action'
+            ,xtype: 'modx-combo-fc-action'
+            ,editable: false
+            ,allowBlank: false
+            ,anchor: '90%'
+
+        },{
+            xtype: 'textarea'
+            ,name: 'description'
+            ,fieldLabel: _('description')
+            ,id: 'modx-fcsc-description'
+            ,anchor: '90%'
+
+        },{
+            xtype: 'modx-combo-template'
+            ,name: 'template'
+            ,hiddenName: 'template'
+            ,fieldLabel: _('template')
+            ,id: 'modx-fcsc-template'
+            ,anchor: '90%'
+            ,baseParams: { action: 'getList', combo: true }
+            
+        },{ html: '<hr />' },{
+            xtype: 'hidden'
+            ,fieldLabel: _('constraint_class')
+            ,name: 'constraint_class'
+            ,anchor: '90%'
+            ,allowBlank: true
+            ,value: 'modResource'
+
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('constraint_field')
+            ,name: 'constraint_field'
+            ,anchor: '90%'
+            ,allowBlank: true
+
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('constraint')
+            ,name: 'constraint'
+            ,anchor: '90%'
+            ,allowBlank: true
+            
+        },{
+            xtype: 'checkbox'
+            ,fieldLabel: _('active')
+            ,name: 'active'
+            ,inputValue: 1
+            ,value: 1
+            ,checked: true
+            ,anchor: '90%'
+            ,allowBlank: true
+        }]
+    });
+    MODx.window.CreateFCSet.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.CreateFCSet,MODx.Window);
+Ext.reg('modx-window-fc-set-create',MODx.window.CreateFCSet);

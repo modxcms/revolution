@@ -98,5 +98,13 @@ $xpdo_meta_map['modUserGroup']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'FormCustomizationProfiles' => 
+    array (
+      'class' => 'modFormCustomizationProfileUserGroup',
+      'local' => 'id',
+      'foreign' => 'usergroup',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
   ),
 );

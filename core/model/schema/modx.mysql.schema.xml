@@ -479,19 +479,27 @@
         <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Access" class="modAccessActionDom" local="id" foreign="target" cardinality="many" owner="local" />
     </object>
-    
+
+    <object class="modFormCustomizationProfileUserGroup" table="fc_profiles_usergroups" extends="xPDOObject">
+        <field key="usergroup" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
+        <field key="profile" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="usergroup" length="" collation="A" null="false" />
+            <column key="profile" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="UserGroup" class="modUserGroup" local="usergroup" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Profile" class="modFormCustomizationProfile" local="profile" foreign="id" cardinality="one" owner="foreign" />
+    </object>
     <object class="modFormCustomizationProfile" table="fc_profiles" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
-        <field key="usergroup" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
         <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
-        </index>
-        <index alias="usergroup" name="usergroup" primary="false" unique="false" type="BTREE">
-            <column key="usergroup" length="" collation="A" null="false" />
         </index>
         <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
             <column key="rank" length="" collation="A" null="false" />
@@ -500,15 +508,19 @@
             <column key="active" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="UserGroup" class="modUserGroup" local="usergroup" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Sets" class="modFormCustomizationSet" local="id" foreign="profile" cardinality="many" owner="local" />
+        <composite alias="UserGroups" class="modFormCustomizationProfileUserGroup" local="id" foreign="profile" cardinality="many" owner="local" />
     </object>
 
     <object class="modFormCustomizationSet" table="fc_sets" extends="xPDOSimpleObject">
         <field key="profile" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
         <field key="action" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
         <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
         <field key="template" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="constraint" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="constraint_field" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
 
         <index alias="profile" name="profile" primary="false" unique="false" type="BTREE">
             <column key="profile" length="" collation="A" null="false" />
@@ -524,6 +536,7 @@
         </index>
 
         <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Template" class="modTemplate" local="template" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Profile" class="modFormCustomizationProfile" local="profile" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Rules" class="modActionDom" local="id" foreign="set" cardinality="many" owner="local" />
     </object>
@@ -1113,6 +1126,7 @@
         <aggregate alias="Parent" class="modUserGroup" local="parent" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Children" class="modUserGroup" local="id" foreign="parent" cardinality="many" owner="local" />
         <composite alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="user_group" cardinality="many" owner="local" />
+        <composite alias="FormCustomizationProfiles" class="modFormCustomizationProfileUserGroup" local="id" foreign="usergroup" cardinality="many" owner="local" />
     </object>
     
     <object class="modUserGroupMember" table="member_groups" extends="xPDOSimpleObject">

@@ -18,7 +18,7 @@ MODx.panel.FCSet = function(config) {
             ,cls: 'modx-page-header'
             ,id: 'modx-fcs-header'
         },MODx.getPageStructure([{
-            title: _('set')
+            title: _('set_and_fields')
             ,bodyStyle: 'padding: 15px;'
             ,defaults: {border: false ,msgTarget: 'side'}
             ,layout: 'form'
@@ -34,7 +34,7 @@ MODx.panel.FCSet = function(config) {
                 ,id: 'modx-fcs-id'
                 ,value: config.record.id || MODx.request.id
             },{
-                xtype: 'modx-combo-action'
+                xtype: 'modx-combo-fc-action'
                 ,fieldLabel: _('action')
                 ,name: 'action_id'
                 ,hiddenName: 'action_id'
@@ -53,73 +53,55 @@ MODx.panel.FCSet = function(config) {
                 ,name: 'template'
                 ,hiddenName: 'template'
                 ,value: config.record.template
+                ,hidden: config.record.template == 0 ? true : false
                 ,anchor: '90%'
                 ,allowBlank: true
                 ,baseParams: {
                     action: 'getList'
-                    ,combo: '1'
+                    ,combo: true
                 }
             },{
-                html: '<hr /><p>Adjust fields here.</p>'
+                xtype: 'hidden'
+                ,fieldLabel: _('constraint_class')
+                ,name: 'constraint_class'
+                ,value: 'modResource'
+                ,anchor: '90%'
+                ,allowBlank: true
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('constraint_field')
+                ,name: 'constraint_field'
+                ,value: config.record.constraint_field
+                ,anchor: '90%'
+                ,allowBlank: true
+            },{
+                xtype: 'textfield'
+                ,fieldLabel: _('constraint')
+                ,name: 'constraint'
+                ,value: config.record.constraint
+                ,anchor: '90%'
+                ,allowBlank: true
+            },{
+                xtype: 'checkbox'
+                ,fieldLabel: _('active')
+                ,name: 'active'
+                ,inputValue: true
+                ,value: config.record.active ? true : false
+                ,anchor: '90%'
+                ,allowBlank: true
+            },{
+                html: '<hr /><p>'+_('set_fields_msg')+'</p>'
                 ,border: false
             },{
                 xtype: 'modx-grid-fc-set-fields'
                 ,data: config.record.fields || []
                 ,preventRender: true
-            }/*{
-                layout:'column'
-                ,border: false
-                ,anchor: '97%'
-                ,items:[{
-                    columnWidth: .50
-                    ,layout: 'form'
-                    ,border: false
-                    ,items: [{
-                        xtype: 'treepanel'
-                        ,useArrows: true
-                        ,rootVisible: false
-                        ,autoScroll: true
-                        ,animate: true
-                        ,enableDD: true
-                        ,containerScroll: true
-                        ,border: false
-                        ,root: {
-                            expanded: true
-                            ,children: config.record.tree
-                        }
-                    }]
-                },{
-                    columnWidth: .50
-                    ,layout: 'form'
-                    ,border: false
-                    ,items: [{
-                        layout: 'form'
-                        ,cls: 'modx-form'
-                        ,border: false
-                        ,defaults: {collapsible: false ,autoHeight: true, border: false}
-                        ,items: [{
-                            xtype: 'checkbox'
-                            ,fieldLabel: 'Visible'
-                            ,name: 'visible'
-                        },{
-                            xtype: 'textfield'
-                            ,fieldLabel: 'Label'
-                            ,name: 'label'
-                            ,anchor: '95%'
-                        },{
-                            xtype: 'textarea'
-                            ,fieldLabel: 'Default Value'
-                            ,name: 'default_value'
-                            ,anchor: '95%'
-                        }]
-                    }]
-                }]
-            }*/]
+            }]
         },{
-            title: 'Tabs'
+            title: _('tabs')
             ,bodyStyle: { padding: '15px' }
             ,items: [{
-                html: '<p>Adjust tabs here.</p>'
+                html: '<p>'+_('set_tabs_msg')+'</p>'
                 ,border: false
             },{
                 xtype: 'modx-grid-fc-set-tabs'
@@ -127,10 +109,10 @@ MODx.panel.FCSet = function(config) {
                 ,preventRender: true
             }]
         },{
-            title: 'TVs'
+            title: _('tvs')
             ,bodyStyle: { padding: '15px' }
             ,items: [{
-                html: '<p>Adjust TVs here.</p>'
+                html: '<p>'+_('set_tvs_msg')+'</p>'
                 ,border: false
             },{
                 xtype: 'modx-grid-fc-set-tvs'
@@ -156,15 +138,7 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
         if (!Ext.isEmpty(this.config.record.controller)) {
             Ext.getCmp('modx-fcs-header').getEl().update('<h2>'+_('set')+': '+this.config.record.controller+'</h2>');
         }
-        /*
-        if (!Ext.isEmpty(this.config.record.properties)) {
-            var d = this.config.record.properties;
-            var g = Ext.getCmp('modx-grid-element-properties');
-            if (g) {
-                g.defaultProperties = d;
-                g.getStore().loadData(d);
-            }
-        }*/
+        
         this.fireEvent('ready',this.config.record);
         this.clearDirty();
         this.initialized = true;
@@ -173,15 +147,20 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
     }
     ,beforeSubmit: function(o) {
         Ext.apply(o.form.baseParams,{
-            //propdata: Ext.getCmp('modx-grid-element-properties').encode()
+            fields: Ext.getCmp('modx-grid-fc-set-fields').encode()
+            ,tabs: Ext.getCmp('modx-grid-fc-set-tabs').encode()
+            ,tvs: Ext.getCmp('modx-grid-fc-set-tvs').encode()
         });
         return this.fireEvent('save',{
             values: this.getForm().getValues()
         });
     }
     ,success: function(r) {
-        //if (MODx.request.id) Ext.getCmp('modx-grid-').save();
         this.getForm().setValues(r.result.object);
+
+        Ext.getCmp('modx-grid-fc-set-fields').getStore().commitChanges();
+        Ext.getCmp('modx-grid-fc-set-tabs').getStore().commitChanges();
+        Ext.getCmp('modx-grid-fc-set-tvs').getStore().commitChanges();
     }
 });
 Ext.reg('modx-panel-fc-set',MODx.panel.FCSet);
@@ -196,11 +175,20 @@ MODx.grid.FCSetFields = function(config) {
         ,sortable: false
     });
     Ext.applyIf(config,{
-        fields: ['id','action','name','tab','other','rank','visible','label','default_value']
+        id: 'modx-grid-fc-set-fields'
+        ,fields: ['id','action','name','tab','tab_rank','other','rank','visible','label','default_value']
         ,autoHeight: true
         ,grouping: true
         ,groupBy: 'tab'
         ,plugins: [this.vcb]
+        ,stateful: false
+        ,remoteSort: false
+        ,singleText: 'Field'
+        ,pluralText: 'Fields'
+        ,sortBy: 'rank'
+        ,sortDir: 'ASC'
+        ,hideGroupedColumn: true
+        ,groupTextTpl: '{group} ({[values.rs.length]} {[values.rs.length > 1 ? "Fields" : "Field"]})'
         ,columns: [{
             header: 'Name'
             ,dataIndex: 'name'
@@ -245,16 +233,19 @@ MODx.grid.FCSetTabs = function(config) {
         ,sortable: false
     });
     Ext.applyIf(config,{
-        fields: ['id','action','name','form','other','rank','visible','label','default_value']
+        id: 'modx-grid-fc-set-tabs'
+        ,fields: ['id','action','name','form','other','rank','visible','label']
         ,autoHeight: true
         ,plugins: [this.vcb]
+        ,stateful: false
         ,columns: [{
-            header: 'Name'
+            header: 'Tab Name'
             ,dataIndex: 'name'
             ,width: 200
         },this.vcb,{
             header: 'Tab Title'
             ,dataIndex: 'label'
+            ,editor: { xtype: 'textfield' }
         }]
         ,viewConfig: {
             forceFit:true
@@ -266,12 +257,19 @@ MODx.grid.FCSetTabs = function(config) {
                 return rec.data.visible ? 'grid-row-active' : 'grid-row-inactive';
             }
         }
+        ,tbar: [{
+            text: 'Create New Tab'
+            ,handler: this.createTab
+            ,scope: this
+        }]
     });
     MODx.grid.FCSetTabs.superclass.constructor.call(this,config);
     this.propRecord = Ext.data.Record.create(config.fields);
 };
 Ext.extend(MODx.grid.FCSetTabs,MODx.grid.LocalGrid,{
-
+    createTab: function() {
+        
+    }
 });
 Ext.reg('modx-grid-fc-set-tabs',MODx.grid.FCSetTabs);
 
@@ -286,20 +284,24 @@ MODx.grid.FCSetTVs = function(config) {
         ,sortable: false
     });
     Ext.applyIf(config,{
-        fields: ['id','name','tab','rank','visible','label','default_value']
+        id: 'modx-grid-fc-set-tvs'
+        ,fields: ['id','name','tab','rank','visible','label','default_value','category','default_text']
         ,autoHeight: true
         ,grouping: true
-        ,groupBy: 'tab'
+        ,groupBy: 'category'
+        ,sortBy: 'rank'
+        ,sortDir: 'ASC'
+        ,stateful: false
+        ,groupTextTpl: '{group} ({[values.rs.length]} {[values.rs.length > 1 ? "TVs" : "TV"]})'
         ,plugins: [this.vcb]
+        ,hideGroupedColumn: true
         ,columns: [{
-            header: 'Name'
+            header: _('category')
+            ,dataIndex: 'category'
+        },{
+            header: 'TV Name'
             ,dataIndex: 'name'
             ,width: 200
-        },{
-            header: 'Tab'
-            ,dataIndex: 'tab'
-            ,width: 100
-            ,editor: { xtype: 'textfield' }
         },this.vcb,{
             header: 'Label'
             ,dataIndex: 'label'
@@ -307,6 +309,21 @@ MODx.grid.FCSetTVs = function(config) {
         },{
             header: 'Default Value'
             ,dataIndex: 'default_value'
+            ,editor: { xtype: 'textfield' }
+            ,renderer: function(v) { return Ext.util.Format.htmlEncode(v); }
+        },{
+            header: 'Original Value'
+            ,dataIndex: 'default_text'
+            ,editable: false
+        },{
+            header: 'Tab'
+            ,dataIndex: 'tab'
+            ,width: 100
+            ,editor: { xtype: 'textfield' }
+        },{
+            header: 'Tab Rank'
+            ,dataIndex: 'rank'
+            ,width: 60
             ,editor: { xtype: 'textfield' }
         }]
         ,viewConfig: {

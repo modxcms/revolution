@@ -35,6 +35,13 @@ $count = $modx->getCount('modFormCustomizationProfile',$c);
 $c->select(array(
     'modFormCustomizationProfile.*',
 ));
+$c->select('
+    (SELECT GROUP_CONCAT(`UserGroup`.`name`) FROM '.$modx->getTableName('modUserGroup').' AS `UserGroup`
+        INNER JOIN '.$modx->getTableName('modFormCustomizationProfileUserGroup').' AS `fcpug`
+        ON `fcpug`.`usergroup` = `UserGroup`.`id`
+     WHERE `fcpug`.`profile` = `modFormCustomizationProfile`.`id`
+    ) AS `usergroups`
+');
 
 $c->sortby($sort,$dir);
 if ($limit) $c->limit($limit,$start);

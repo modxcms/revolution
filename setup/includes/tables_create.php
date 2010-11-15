@@ -36,6 +36,7 @@ $classes= array (
     'modEvent',
     'modEventLog',
     'modFormCustomizationProfile',
+    'modFormCustomizationProfileUserGroup',
     'modFormCustomizationSet',
     'modKeyword',
     'modLexiconEntry',

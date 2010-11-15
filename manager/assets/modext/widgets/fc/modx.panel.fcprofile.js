@@ -65,6 +65,17 @@ MODx.panel.FCProfile = function(config) {
                 }
                 ,preventRender: true
             }]
+        },{
+            title: _('usergroups')
+            ,bodyStyle: { padding: '15px' }
+            ,items: [{
+                html: '<p>'+_('profile_usergroups_msg')+'</p>'
+                ,border: false
+            },{
+                xtype: 'modx-grid-fc-profile-usergroups'
+                ,data: config.record.usergroups || []
+                ,preventRender: true
+            }]
         }],{
             id: 'modx-fc-profile-tabs'
         })]
@@ -84,15 +95,6 @@ Ext.extend(MODx.panel.FCProfile,MODx.FormPanel,{
         if (!Ext.isEmpty(this.config.record.name)) {
             Ext.getCmp('modx-fcp-header').getEl().update('<h2>'+_('profile')+': '+this.config.record.name+'</h2>');
         }
-        /*
-        if (!Ext.isEmpty(this.config.record.properties)) {
-            var d = this.config.record.properties;
-            var g = Ext.getCmp('modx-grid-element-properties');
-            if (g) {
-                g.defaultProperties = d;
-                g.getStore().loadData(d);
-            }
-        }*/
         this.fireEvent('ready',this.config.record);
         this.clearDirty();
         this.initialized = true;
@@ -101,18 +103,97 @@ Ext.extend(MODx.panel.FCProfile,MODx.FormPanel,{
     }
     ,beforeSubmit: function(o) {
         Ext.apply(o.form.baseParams,{
-            //propdata: Ext.getCmp('modx-grid-element-properties').encode()
+            usergroups: Ext.getCmp('modx-grid-fc-profile-usergroups').encode()
         });
         return this.fireEvent('save',{
             values: this.getForm().getValues()
         });
     }
     ,success: function(r) {
-        //if (MODx.request.id) Ext.getCmp('modx-grid-').save();
+        Ext.getCmp('modx-grid-fc-profile-usergroups').getStore().commitChanges();
         this.getForm().setValues(r.result.object);
     }
 });
 Ext.reg('modx-panel-fc-profile',MODx.panel.FCProfile);
 
+MODx.grid.FCProfileUserGroups = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        id: 'modx-grid-fc-profile-usergroups'
+        ,fields: ['id','name']
+        ,autoHeight: true
+        ,stateful: false
+        ,columns: [{
+            header: _('id')
+            ,dataIndex: 'id'
+            ,width: 60
+        },{
+            header: _('name')
+            ,dataIndex: 'name'
+        }]
+        ,tbar: [{
+            text: 'Add User Group'
+            ,handler: this.addUserGroup
+            ,scope: this
+        }]
+    });
+    MODx.grid.FCProfileUserGroups.superclass.constructor.call(this,config);
+    this.fcugRecord = Ext.data.Record.create(config.fields);
+};
+Ext.extend(MODx.grid.FCProfileUserGroups,MODx.grid.LocalGrid,{
+    addUserGroup: function(btn,e) {
+        this.loadWindow(btn,e,{
+            xtype: 'modx-window-fc-profile-add-usergroup'
+            ,listeners: {
+                'success': {fn:function(r) {
+                    var s = this.getStore();
+                    var rec = new this.fcugRecord(r);
+                    s.add(rec);
+                },scope:this}
+            }
+        });
+    }
+});
+Ext.reg('modx-grid-fc-profile-usergroups',MODx.grid.FCProfileUserGroups);
 
 
+
+MODx.window.AddGroupToProfile = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('usergroup_add')
+        ,height: 150
+        ,width: 375
+        ,fields: [{
+            fieldLabel: _('user_group')
+            ,name: 'usergroup'
+            ,hiddenName: 'usergroup'
+            ,id: 'modx-fcaug-usergroup'
+            ,xtype: 'modx-combo-usergroup'
+            ,editable: false
+            ,allowBlank: false
+            ,anchor: '90%'
+        }]
+    });
+    MODx.window.AddGroupToProfile.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.AddGroupToProfile,MODx.Window,{
+    submit: function() {
+        var rec = {};
+        rec.id = Ext.getCmp('modx-fcaug-usergroup').getValue();
+        rec.name = Ext.getCmp('modx-fcaug-usergroup').getRawValue();
+        
+        var g = Ext.getCmp('modx-grid-fc-profile-usergroups');
+        var s = g.getStore();
+        var v = s.query('id',rec.id).items;
+        if (v.length > 0) {
+            MODx.msg.alert(_('error'),_('profile_usergroup_err_ae'));
+            return false;
+        }
+
+        this.fireEvent('success',rec);
+        this.hide();
+        return false;
+    }
+});
+Ext.reg('modx-window-fc-profile-add-usergroup',MODx.window.AddGroupToProfile);

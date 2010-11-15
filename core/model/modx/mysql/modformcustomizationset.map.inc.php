@@ -11,8 +11,12 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
   array (
     'profile' => 0,
     'action' => 0,
+    'description' => '',
     'active' => 0,
     'template' => 0,
+    'constraint' => '',
+    'constraint_field' => '',
+    'constraint_class' => '',
   ),
   'fieldMeta' => 
   array (
@@ -34,6 +38,13 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
       'default' => 0,
       'index' => 'index',
     ),
+    'description' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
     'active' => 
     array (
       'dbtype' => 'tinyint',
@@ -51,6 +62,30 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
       'null' => false,
       'default' => 0,
       'index' => 'index',
+    ),
+    'constraint' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'constraint_field' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'constraint_class' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
   ),
   'indexes' => 
@@ -126,6 +161,14 @@ $xpdo_meta_map['modFormCustomizationSet']= array (
     array (
       'class' => 'modAction',
       'local' => 'action',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Template' => 
+    array (
+      'class' => 'modTemplate',
+      'local' => 'template',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

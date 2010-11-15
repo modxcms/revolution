@@ -34,25 +34,28 @@ foreach ($xml->action as $action) {
     $tabIdx = 0;
 
     foreach ($action->tab as $tab) {
-        $tabObj = $modx->getObject('modActionField',array(
-            'action' => $actionObj->get('id'),
-            'name' => (string)$tab['name'],
-            'type' => 'tab',
-        ));
-        if (!$tabObj) {
-            $tabObj = $modx->newObject('modActionField');
-            $tabObj->fromArray(array(
+        $tabName = (string)$tab['name'];
+        if ($tabName != 'modx-resource-content') {
+            $tabObj = $modx->getObject('modActionField',array(
                 'action' => $actionObj->get('id'),
-                'name' => (string)$tab['name'],
+                'name' => $tabName,
                 'type' => 'tab',
-                'tab' => '',
-                'form' => (string)$action['form'],
-                'other' => !empty($tab['other']) ? (string)$tab['other'] : '',
-                'rank' => $tabIdx,
             ));
+            if (!$tabObj) {
+                $tabObj = $modx->newObject('modActionField');
+                $tabObj->fromArray(array(
+                    'action' => $actionObj->get('id'),
+                    'name' => $tabName,
+                    'type' => 'tab',
+                    'tab' => '',
+                    'form' => (string)$action['form'],
+                    'other' => !empty($tab['other']) ? (string)$tab['other'] : '',
+                    'rank' => $tabIdx,
+                ));
+            }
+            $tabObj->save();
+            $actionFields[] = $tabObj;
         }
-        $tabObj->save();
-        $actionFields[] = $tabObj;
 
         $fieldIdx = 0;
         foreach ($tab->field as $field) {

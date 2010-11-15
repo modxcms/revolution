@@ -9,7 +9,7 @@
 MODx.page.UpdateFCProfile = function(config) {
 	config = config || {};
 	Ext.applyIf(config,{
-	   formpanel: 'modx-panel-chunk'
+	   formpanel: 'modx-panel-fc-profile'
 	   ,actions: {
             'new': MODx.action['security/forms/profile/create']
             ,edit: MODx.action['security/forms/profile/update']
@@ -19,7 +19,7 @@ MODx.page.UpdateFCProfile = function(config) {
             process: 'update'
             ,text: _('save')
             ,method: 'remote'
-            ,checkDirty: true
+            ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,alt: true
@@ -28,7 +28,7 @@ MODx.page.UpdateFCProfile = function(config) {
         },'-',{
             process: 'cancel'
             ,text: _('cancel')
-            ,params: {a:MODx.action['welcome']}
+            ,params: {a:MODx.action['security/forms']}
         },'-',{
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
