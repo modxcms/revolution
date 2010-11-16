@@ -2,7 +2,8 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-- Fixed issue with modInstallSmarty constructor due to Smarty upgrade
+- Add new Form Customization UI, including Form Customization Profiles and Sets; much easier editing of FC rules
+- Fix issue with modInstallSmarty constructor due to Smarty upgrade
 - [#2799] Remove ext3 debug files to save space
 - [#2801] Fix bug with checkbox tvs without specified value options
 - Upgrade Smarty to 3.0.4

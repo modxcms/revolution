@@ -2,7 +2,7 @@
 /**
  * Handles resolving of modActionField objects
  */
-$success= false;
+$success= true;
 
 $xmlFile = MODX_CORE_PATH.'model/schema/modx.action.fields.schema.xml';
 if (!file_exists($xmlFile)) return false;
@@ -51,7 +51,7 @@ foreach ($xml->action as $action) {
                     'other' => !empty($tab['other']) ? (string)$tab['other'] : '',
                     'rank' => $tabIdx,
                 ));
-                $tabObj->save();
+                $success = $tabObj->save();
             }
         }
 
@@ -73,7 +73,7 @@ foreach ($xml->action as $action) {
                     'other' => !empty($tab['other']) ? (string)$tab['other'] : '',
                     'rank' => $fieldIdx,
                 ));
-                $fieldObj->save();
+                $success = $fieldObj->save();
             }
             $fieldIdx++;
         }
