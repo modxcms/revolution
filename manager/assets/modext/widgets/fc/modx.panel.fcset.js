@@ -48,11 +48,12 @@ MODx.panel.FCSet = function(config) {
                     }}
                 }
             },{
-                xtype: 'modx-combo-template'
+                xtype: 'statictextfield'
                 ,fieldLabel: _('template')
-                ,name: 'template'
-                ,hiddenName: 'template'
-                ,value: config.record.template
+                ,description: _('set_template_desc')
+                ,name: 'templatename'
+                ,hiddenName: 'templatename'
+                ,value: config.record.templatename
                 ,hidden: config.record.template == 0 ? true : false
                 ,anchor: '90%'
                 ,allowBlank: true
@@ -60,6 +61,15 @@ MODx.panel.FCSet = function(config) {
                     action: 'getList'
                     ,combo: true
                 }
+            },{
+                xtype: 'textarea'
+                ,fieldLabel: _('description')
+                ,name: 'description'
+                ,id: 'modx-fcs-description'
+                ,anchor: '90%'
+                ,maxLength: 255
+                ,grow: false
+                ,value: config.record.description
             },{
                 xtype: 'hidden'
                 ,fieldLabel: _('constraint_class')
@@ -70,6 +80,7 @@ MODx.panel.FCSet = function(config) {
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('constraint_field')
+                ,description: _('set_constraint_field_desc')
                 ,name: 'constraint_field'
                 ,value: config.record.constraint_field
                 ,anchor: '90%'
@@ -77,6 +88,7 @@ MODx.panel.FCSet = function(config) {
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('constraint')
+                ,description: _('set_constraint_desc')
                 ,name: 'constraint'
                 ,value: config.record.constraint
                 ,anchor: '90%'
@@ -169,7 +181,7 @@ Ext.reg('modx-panel-fc-set',MODx.panel.FCSet);
 MODx.grid.FCSetFields = function(config) {
     config = config || {};
     this.vcb = new Ext.ux.grid.CheckColumn({
-        header: 'Visible'
+        header: _('visible')
         ,dataIndex: 'visible'
         ,width: 40
         ,sortable: false
@@ -183,26 +195,24 @@ MODx.grid.FCSetFields = function(config) {
         ,plugins: [this.vcb]
         ,stateful: false
         ,remoteSort: false
-        ,singleText: 'Field'
-        ,pluralText: 'Fields'
         ,sortBy: 'rank'
         ,sortDir: 'ASC'
         ,hideGroupedColumn: true
-        ,groupTextTpl: '{group} ({[values.rs.length]} {[values.rs.length > 1 ? "Fields" : "Field"]})'
+        ,groupTextTpl: '{group} ({[values.rs.length]} {[values.rs.length > 1 ? "'+_('fields')+'" : "'+_('field')+'"]})'
         ,columns: [{
-            header: 'Name'
+            header: _('name')
             ,dataIndex: 'name'
             ,width: 200
         },{
-            header: 'Tab'
+            header: _('tab')
             ,dataIndex: 'tab'
             ,width: 100
         },this.vcb,{
-            header: 'Label'
+            header: _('label')
             ,dataIndex: 'label'
             ,editor: { xtype: 'textfield' }
         },{
-            header: 'Default Value'
+            header: _('default_value')
             ,dataIndex: 'default_value'
             ,editor: { xtype: 'textfield' }
         }]
@@ -227,7 +237,7 @@ Ext.reg('modx-grid-fc-set-fields',MODx.grid.FCSetFields);
 MODx.grid.FCSetTabs = function(config) {
     config = config || {};
     this.vcb = new Ext.ux.grid.CheckColumn({
-        header: 'Visible'
+        header: _('visible')
         ,dataIndex: 'visible'
         ,width: 40
         ,sortable: false
@@ -239,11 +249,11 @@ MODx.grid.FCSetTabs = function(config) {
         ,plugins: [this.vcb]
         ,stateful: false
         ,columns: [{
-            header: 'Tab Name'
+            header: _('tab_name')
             ,dataIndex: 'name'
             ,width: 200
         },this.vcb,{
-            header: 'Tab Title'
+            header: _('tab_title')
             ,dataIndex: 'label'
             ,editor: { xtype: 'textfield' }
         }]
@@ -258,7 +268,7 @@ MODx.grid.FCSetTabs = function(config) {
             }
         }
         ,tbar: [{
-            text: 'Create New Tab'
+            text: _('tab_create')
             ,handler: this.createTab
             ,scope: this
         }]
@@ -268,7 +278,7 @@ MODx.grid.FCSetTabs = function(config) {
 };
 Ext.extend(MODx.grid.FCSetTabs,MODx.grid.LocalGrid,{
     createTab: function() {
-        
+        /* TODO: Code for adding a new tab */
     }
 });
 Ext.reg('modx-grid-fc-set-tabs',MODx.grid.FCSetTabs);
@@ -278,7 +288,7 @@ Ext.reg('modx-grid-fc-set-tabs',MODx.grid.FCSetTabs);
 MODx.grid.FCSetTVs = function(config) {
     config = config || {};
     this.vcb = new Ext.ux.grid.CheckColumn({
-        header: 'Visible'
+        header: _('visible')
         ,dataIndex: 'visible'
         ,width: 40
         ,sortable: false
@@ -292,36 +302,36 @@ MODx.grid.FCSetTVs = function(config) {
         ,sortBy: 'rank'
         ,sortDir: 'ASC'
         ,stateful: false
-        ,groupTextTpl: '{group} ({[values.rs.length]} {[values.rs.length > 1 ? "TVs" : "TV"]})'
+        ,groupTextTpl: '{group} ({[values.rs.length]} {[values.rs.length > 1 ? "'+_('tvs')+'" : "'+_('tv')+'"]})'
         ,plugins: [this.vcb]
         ,hideGroupedColumn: true
         ,columns: [{
             header: _('category')
             ,dataIndex: 'category'
         },{
-            header: 'TV Name'
+            header: _('tv_name')
             ,dataIndex: 'name'
             ,width: 200
         },this.vcb,{
-            header: 'Label'
+            header: _('label')
             ,dataIndex: 'label'
             ,editor: { xtype: 'textfield' }
         },{
-            header: 'Default Value'
+            header: _('default_value')
             ,dataIndex: 'default_value'
             ,editor: { xtype: 'textfield' }
             ,renderer: function(v) { return Ext.util.Format.htmlEncode(v); }
         },{
-            header: 'Original Value'
+            header: _('original_value')
             ,dataIndex: 'default_text'
             ,editable: false
         },{
-            header: 'Tab'
+            header: _('tab')
             ,dataIndex: 'tab'
             ,width: 100
             ,editor: { xtype: 'textfield' }
         },{
-            header: 'Tab Rank'
+            header: _('tab_rank')
             ,dataIndex: 'rank'
             ,width: 60
             ,editor: { xtype: 'textfield' }

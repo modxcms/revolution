@@ -21,6 +21,7 @@ $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'action');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $profile = $modx->getOption('profile',$scriptProperties,0);
+$search = $modx->getOption('search',$scriptProperties,'');
 
 /* query for rules */
 $c = $modx->newQuery('modFormCustomizationSet');
@@ -30,6 +31,13 @@ if (!empty($profile)) {
     $c->where(array(
         'profile' => $profile,
     ));
+}
+if (!empty($search)) {
+    $c->where(array(
+        'modFormCustomizationSet.description:LIKE' => '%'.$search.'%',
+        'OR:Template.templatename:LIKE' => '%'.$search.'%',
+        'OR:modFormCustomizationSet.constraint_field:LIKE' => '%'.$search.'%',
+    ),null,2);
 }
 $count = $modx->getCount('modFormCustomizationSet',$c);
 $c->select(array(

@@ -52,11 +52,20 @@ MODx.panel.FCProfile = function(config) {
                 xtype: 'textarea'
                 ,fieldLabel: _('description')
                 ,name: 'description'
-                ,id: 'modx-chunk-description'
+                ,id: 'modx-fcp-description'
                 ,anchor: '90%'
                 ,maxLength: 255
                 ,grow: false
                 ,value: config.record.description
+            },{
+                xtype: 'checkbox'
+                ,fieldLabel: _('active')
+                ,name: 'active'
+                ,id: 'modx-fcp-active'
+                ,inputValue: true
+                ,value: config.record.active ? true : false
+                ,anchor: '90%'
+                ,allowBlank: true
             },{ html: '<hr />' },{
                 xtype: 'modx-grid-fc-set'
                 ,baseParams: {
@@ -124,15 +133,11 @@ MODx.grid.FCProfileUserGroups = function(config) {
         ,autoHeight: true
         ,stateful: false
         ,columns: [{
-            header: _('id')
-            ,dataIndex: 'id'
-            ,width: 60
-        },{
             header: _('name')
             ,dataIndex: 'name'
         }]
         ,tbar: [{
-            text: 'Add User Group'
+            text: _('usergroup_create')
             ,handler: this.addUserGroup
             ,scope: this
         }]
@@ -153,6 +158,23 @@ Ext.extend(MODx.grid.FCProfileUserGroups,MODx.grid.LocalGrid,{
             }
         });
     }
+
+    ,getMenu: function(g,ri) {
+        return [{
+            text: _('usergroup_remove')
+            ,handler: this.removeUserGroup
+            ,scope: this
+        }];
+    }
+
+    ,removeUserGroup: function(btn,e) {
+        var rec = this.getSelectionModel().getSelected();
+        Ext.Msg.confirm(_('usergroup_remove'),_('usergroup_remove_confirm'),function(e) {
+            if (e == 'yes') {
+                this.getStore().remove(rec);
+            }
+        },this);
+    }
 });
 Ext.reg('modx-grid-fc-profile-usergroups',MODx.grid.FCProfileUserGroups);
 
@@ -161,7 +183,7 @@ Ext.reg('modx-grid-fc-profile-usergroups',MODx.grid.FCProfileUserGroups);
 MODx.window.AddGroupToProfile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('usergroup_add')
+        title: _('usergroup_create')
         ,height: 150
         ,width: 375
         ,fields: [{

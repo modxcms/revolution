@@ -33,7 +33,6 @@ MODx.page.UpdateFCProfile = function(config) {
             text: _('help_ex')
             ,handler: MODx.loadHelpPane
         }]
-        ,loadStay: true
         ,components: [{
             xtype: 'modx-panel-fc-profile'
             ,renderTo: 'modx-panel-fc-profile-div'

@@ -481,40 +481,18 @@ $collection['84']->fromArray(array (
   'haslayout' => 1,
   'lang_topics' => 'formcustomization,user,access,policy',
   'assets' => '',
-  'help_url' => 'http://rtfm.modx.com/display/revolution20/Customizing+The+Manager',
+  'help_url' => 'http://rtfm.modx.com/display/revolution20/Form+Customization+Profiles',
 ), '', true, true);
 $collection['85']= $xpdo->newObject('modAction');
 $collection['85']->fromArray(array (
   'id' => 85,
   'namespace' => 'core',
   'parent' => 46,
-  'controller' => 'security/forms/profile/create',
-  'haslayout' => 1,
-  'lang_topics' => 'formcustomization,user,access,policy',
-  'assets' => '',
-  'help_url' => 'http://rtfm.modx.com/display/revolution20/Customizing+The+Manager',
-), '', true, true);
-$collection['86']= $xpdo->newObject('modAction');
-$collection['86']->fromArray(array (
-  'id' => 86,
-  'namespace' => 'core',
-  'parent' => 46,
   'controller' => 'security/forms/set/update',
   'haslayout' => 1,
   'lang_topics' => 'formcustomization,user,access,policy',
   'assets' => '',
-  'help_url' => 'http://rtfm.modx.com/display/revolution20/Customizing+The+Manager',
-), '', true, true);
-$collection['87']= $xpdo->newObject('modAction');
-$collection['87']->fromArray(array (
-  'id' => 87,
-  'namespace' => 'core',
-  'parent' => 46,
-  'controller' => 'security/forms/set/create',
-  'haslayout' => 1,
-  'lang_topics' => 'formcustomization,user,access,policy',
-  'assets' => '',
-  'help_url' => 'http://rtfm.modx.com/display/revolution20/Customizing+The+Manager',
+  'help_url' => 'http://rtfm.modx.com/display/revolution20/Form+Customization+Sets',
 ), '', true, true);
 
 return $collection;

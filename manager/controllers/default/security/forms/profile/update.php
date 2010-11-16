@@ -19,6 +19,7 @@ $c->innerJoin('modFormCustomizationProfileUserGroup','FormCustomizationProfiles'
 $c->where(array(
     'FormCustomizationProfiles.profile' => $profile->get('id'),
 ));
+$c->sortby('name','ASC');
 $usergroups = $modx->getCollection('modUserGroup',$c);
 
 $profileArray['usergroups'] = array();

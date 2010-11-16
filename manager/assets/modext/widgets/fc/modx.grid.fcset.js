@@ -150,6 +150,24 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         }
     }
 
+
+    ,search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
+    ,clearFilter: function() {
+    	this.getStore().baseParams = {
+            action: 'getList'
+            ,profile: MODx.request.id
+    	};
+        Ext.getCmp('modx-fcs-search').reset();
+    	this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+    
     ,createSet: function(btn,e) {
         var r = {
             profile: MODx.request.id
@@ -209,7 +227,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             url: this.config.url
             ,params: {
                 action: 'activateMultiple'
-                ,rules: cs
+                ,sets: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -240,7 +258,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             url: this.config.url
             ,params: {
                 action: 'deactivateMultiple'
-                ,rules: cs
+                ,sets: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -261,7 +279,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             ,url: this.config.url
             ,params: {
                 action: 'removeMultiple'
-                ,rules: cs
+                ,sets: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -310,6 +328,7 @@ MODx.window.CreateFCSet = function(config) {
             ,name: 'template'
             ,hiddenName: 'template'
             ,fieldLabel: _('template')
+            ,description: _('set_template_desc')
             ,id: 'modx-fcsc-template'
             ,anchor: '90%'
             ,baseParams: { action: 'getList', combo: true }
@@ -325,6 +344,7 @@ MODx.window.CreateFCSet = function(config) {
         },{
             xtype: 'textfield'
             ,fieldLabel: _('constraint_field')
+            ,description: _('set_constraint_field_desc')
             ,name: 'constraint_field'
             ,anchor: '90%'
             ,allowBlank: true
@@ -332,6 +352,7 @@ MODx.window.CreateFCSet = function(config) {
         },{
             xtype: 'textfield'
             ,fieldLabel: _('constraint')
+            ,description: _('set_constraint_desc')
             ,name: 'constraint'
             ,anchor: '90%'
             ,allowBlank: true

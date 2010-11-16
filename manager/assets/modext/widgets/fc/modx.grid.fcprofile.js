@@ -61,13 +61,6 @@ MODx.grid.FCProfile = function(config) {
             header: _('usergroups')
             ,dataIndex: 'usergroups'
             ,width: 150
-        },{
-            header: _('rank')
-            ,dataIndex: 'rank'
-            ,width: 70
-            ,editor: { xtype: 'textfield' }
-            ,editable: true
-            ,sortable: true
         }]
         ,viewConfig: {
             forceFit:true
@@ -82,7 +75,7 @@ MODx.grid.FCProfile = function(config) {
         ,tbar: [{
             text: _('profile_create')
             ,scope: this
-            ,handler: { xtype: 'modx-window-actiondom-create' ,blankValues: true }
+            ,handler: this.createProfile
         },'-',{
             text: _('bulk_actions')
             ,menu: [{
@@ -172,7 +165,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 m.push('-',{
                     text: _('remove')
-                    ,handler: this.confirm.createDelegate(this,['remove','rule_remove_confirm'])
+                    ,handler: this.confirm.createDelegate(this,['remove','profile_remove_confirm'])
                 });
             }
         }
@@ -185,8 +178,6 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
-        this.getStore().baseParams.controller = '';
-        Ext.getCmp('modx-fcp-filter-action').setValue('');
         this.getBottomToolbar().changePage(1);
         this.refresh();
         return true;
@@ -201,7 +192,18 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
     }
 
     ,createProfile: function(btn,e) {
-        /* TODO: window for creating a profile here */
+        if (!this.windows.cpro) {
+            this.windows.cpro = MODx.load({
+                xtype: 'modx-window-fc-profile-create'
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        this.refresh();
+                    },scope:this}
+                }
+            });
+        }
+        this.windows.cpro.reset();
+        this.windows.cpro.show(e.target);
     }
 
     ,updateProfile: function(btn,e) {
@@ -242,7 +244,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
             url: this.config.url
             ,params: {
                 action: 'activateMultiple'
-                ,rules: cs
+                ,profiles: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -273,7 +275,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
             url: this.config.url
             ,params: {
                 action: 'deactivateMultiple'
-                ,rules: cs
+                ,profiles: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -294,7 +296,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
             ,url: this.config.url
             ,params: {
                 action: 'removeMultiple'
-                ,rules: cs
+                ,profiles: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -307,3 +309,43 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
     }
 });
 Ext.reg('modx-grid-fc-profile',MODx.grid.FCProfile);
+
+
+MODx.window.CreateFCProfile = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('profile_create')
+        ,url: MODx.config.connectors_url+'security/forms/profile.php'
+        ,action: 'create'
+        ,height: 150
+        ,width: 375
+        ,fields: [{
+            xtype: 'textfield'
+            ,name: 'name'
+            ,fieldLabel: _('name')
+            ,id: 'modx-fccp-name'
+            ,allowBlank: false
+            ,anchor: '90%'
+
+        },{
+            xtype: 'textarea'
+            ,name: 'description'
+            ,fieldLabel: _('description')
+            ,id: 'modx-fccp-description'
+            ,anchor: '90%'
+
+        },{
+            xtype: 'checkbox'
+            ,fieldLabel: _('active')
+            ,name: 'active'
+            ,id: 'modx-fccp-active'
+            ,inputValue: 1
+            ,value: 1
+            ,checked: true
+            ,anchor: '90%'
+        }]
+    });
+    MODx.window.CreateFCProfile.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.CreateFCProfile,MODx.Window);
+Ext.reg('modx-window-fc-profile-create',MODx.window.CreateFCProfile);

@@ -10,9 +10,11 @@ if (!$modx->hasPermission('customize_forms')) return $modx->error->failure($modx
 /* get profile */
 if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('set_err_ns'));
 $c = $modx->newQuery('modFormCustomizationSet');
+$c->leftJoin('modTemplate','Template');
 $c->select(array(
     'modFormCustomizationSet.*',
     'Action.controller',
+    'Template.templatename',
 ));
 $c->innerJoin('modAction','Action');
 $c->where(array(
