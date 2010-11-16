@@ -20,6 +20,7 @@ MODx.grid.Grid = function(config) {
         ,preventRender: true
         ,preventSaveRefresh: true
         ,showPerPage: true
+        ,stateful: false
         ,menuConfig: {
             defaultAlign: 'tl-b?'
             ,enableScrolling: false
@@ -439,9 +440,10 @@ MODx.grid.LocalGrid = function(config) {
           view: new Ext.grid.GroupingView({ 
             forceFit: true 
             ,scrollOffset: 0
-            ,groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
+            ,hideGroupedColumn: config.hideGroupedColumn ? true : false
+            ,groupTextTpl: config.groupTextTpl || ('{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
                 +(config.pluralText || _('records')) + '" : "'
-                +(config.singleText || _('record'))+'"]})' 
+                +(config.singleText || _('record'))+'"]})' )
           })
         });
     }
@@ -493,7 +495,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
             this.store = new Ext.data.GroupingStore({
                 data: config.data || []
                 ,reader: new Ext.data.ArrayReader({},config.fields || [])
-                ,sortInfo:{
+                ,sortInfo: config.sortInfo || {
                     field: config.sortBy || 'name'
                     ,direction: config.sortDir || 'ASC'
                 }

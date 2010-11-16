@@ -204,6 +204,8 @@ Ext.extend(MODx,Ext.Component,{
     ,hiddenTabs: []
     ,hideTab: function(ct,tab) {
         var tp = Ext.getCmp(ct);
+        if (!tp) return false;
+        
         tp.hideTabStripItem(tab);
         MODx.hiddenTabs.push(tab);
         var idx = this._getNextActiveTab(tp,tab);
