@@ -88,31 +88,19 @@ foreach ($fields as $field) {
 /* calculate tabs rules */
 $tabs = $modx->fromJSON($scriptProperties['tabs']);
 foreach ($tabs as $tab) {
-    if (empty($tab['visible'])) {
+    $tabField = $modx->getObject('modActionField',array(
+        'action' => $action->get('id'),
+        'name' => $tab['name'],
+        'type' => 'tab',
+    ));
+    /* if creating a new tab */
+    if (empty($tabField) && !empty($tab['visible'])) {
         $rule = $modx->newObject('modActionDom');
         $rule->set('set',$set->get('id'));
         $rule->set('action',$set->get('action'));
         $rule->set('name',$tab['name']);
-        $rule->set('container','modx-panel-resource');
-        $rule->set('rule','tabVisible');
-        $rule->set('value',0);
-        $rule->set('constraint_class',$set->get('constraint_class'));
-        $rule->set('constraint_field',$set->get('constraint_field'));
-        $rule->set('constraint',$set->get('constraint'));
-        $rule->set('active',true);
-        if ($action && $action->get('controller') == 'resource/create') {
-            $rule->set('for_parent',true);
-        }
-        $rule->set('rank',0);
-        $newRules[] = $rule;
-    }
-    if (!empty($tab['label'])) {
-        $rule = $modx->newObject('modActionDom');
-        $rule->set('set',$set->get('id'));
-        $rule->set('action',$set->get('action'));
-        $rule->set('name',$tab['name']);
-        $rule->set('container','modx-panel-resource');
-        $rule->set('rule','tabTitle');
+        $rule->set('container','modx-resource-tabs');
+        $rule->set('rule','tabNew');
         $rule->set('value',$tab['label']);
         $rule->set('constraint_class',$set->get('constraint_class'));
         $rule->set('constraint_field',$set->get('constraint_field'));
@@ -123,6 +111,44 @@ foreach ($tabs as $tab) {
         }
         $rule->set('rank',0);
         $newRules[] = $rule;
+    } else {
+    /* otherwise editing an existing one */
+        if (empty($tab['visible'])) {
+            $rule = $modx->newObject('modActionDom');
+            $rule->set('set',$set->get('id'));
+            $rule->set('action',$set->get('action'));
+            $rule->set('name',$tab['name']);
+            $rule->set('container','modx-panel-resource');
+            $rule->set('rule','tabVisible');
+            $rule->set('value',0);
+            $rule->set('constraint_class',$set->get('constraint_class'));
+            $rule->set('constraint_field',$set->get('constraint_field'));
+            $rule->set('constraint',$set->get('constraint'));
+            $rule->set('active',true);
+            if ($action && $action->get('controller') == 'resource/create') {
+                $rule->set('for_parent',true);
+            }
+            $rule->set('rank',1);
+            $newRules[] = $rule;
+        }
+        if (!empty($tab['label'])) {
+            $rule = $modx->newObject('modActionDom');
+            $rule->set('set',$set->get('id'));
+            $rule->set('action',$set->get('action'));
+            $rule->set('name',$tab['name']);
+            $rule->set('container','modx-panel-resource');
+            $rule->set('rule','tabTitle');
+            $rule->set('value',$tab['label']);
+            $rule->set('constraint_class',$set->get('constraint_class'));
+            $rule->set('constraint_field',$set->get('constraint_field'));
+            $rule->set('constraint',$set->get('constraint'));
+            $rule->set('active',true);
+            if ($action && $action->get('controller') == 'resource/create') {
+                $rule->set('for_parent',true);
+            }
+            $rule->set('rank',0);
+            $newRules[] = $rule;
+        }
     }
 }
 

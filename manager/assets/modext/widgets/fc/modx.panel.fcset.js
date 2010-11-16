@@ -244,12 +244,12 @@ MODx.grid.FCSetTabs = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-fc-set-tabs'
-        ,fields: ['id','action','name','form','other','rank','visible','label']
+        ,fields: ['id','action','name','form','other','rank','visible','label','type']
         ,autoHeight: true
         ,plugins: [this.vcb]
         ,stateful: false
         ,columns: [{
-            header: _('tab_name')
+            header: _('tab_id')
             ,dataIndex: 'name'
             ,width: 200
         },this.vcb,{
@@ -277,13 +277,103 @@ MODx.grid.FCSetTabs = function(config) {
     this.propRecord = Ext.data.Record.create(config.fields);
 };
 Ext.extend(MODx.grid.FCSetTabs,MODx.grid.LocalGrid,{
-    createTab: function() {
-        /* TODO: Code for adding a new tab */
+    createTab: function(btn,e) {
+        if (!this.windows.ctab) {
+            this.windows.ctab = MODx.load({
+                xtype: 'modx-window-fc-set-add-tab'
+                ,listeners: {
+                    'success': {fn:function(r) {
+                        var s = this.getStore();
+                        var rec = new this.propRecord(r);
+                        s.add(rec);
+                    },scope:this}
+                }
+            });
+        }
+        this.windows.ctab.reset();
+        this.windows.ctab.show(e.target);
+    }
+    ,getMenu: function(g,ri) {
+        var rec = this.getStore().getAt(ri);
+        if (rec.data.type == 'new') {
+            return [{
+                text: _('tab_remove')
+                ,handler: this.removeTab
+                ,scope: this
+            }];
+        }
+        return [];
+    }
+
+    ,removeTab: function(btn,e) {
+        var rec = this.getSelectionModel().getSelected();
+        Ext.Msg.confirm(_('tab_remove'),_('tab_remove_confirm'),function(e) {
+            if (e == 'yes') {
+                this.getStore().remove(rec);
+            }
+        },this);
     }
 });
 Ext.reg('modx-grid-fc-set-tabs',MODx.grid.FCSetTabs);
 
 
+MODx.window.AddTabToSet = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('tab_create')
+        ,height: 150
+        ,width: 375
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'container'
+            ,value: 'modx-resource-tabs'
+        },{
+            xtype: 'hidden'
+            ,name: 'visible'
+            ,value: true
+        },{
+            xtype: 'hidden'
+            ,name: 'type'
+            ,value: 'new'
+        },{
+            xtype: 'textfield'
+            ,name: 'name'
+            ,fieldLabel: _('tab_id')
+            ,id: 'modx-fcatab-id'
+            ,allowBlank: false
+            ,anchor: '90%'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('tab_title')
+            ,name: 'value'
+            ,id: 'modx-fcatab-name'
+            ,allowBlank: false
+            ,anchor: '90%'
+        }]
+    });
+    MODx.window.AddTabToSet.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.AddTabToSet,MODx.Window,{
+    submit: function() {
+        var rec = this.fp.getForm().getValues();
+
+        var g = Ext.getCmp('modx-grid-fc-set-tabs');
+        var s = g.getStore();
+        var v = s.query('name',rec.name).items;
+        if (v.length > 0) {
+            MODx.msg.alert(_('error'),_('set_tab_err_ae'));
+            return false;
+        }
+        rec.label = rec.value;
+        rec.visible = true;
+        rec.type = 'new';
+
+        this.fireEvent('success',rec);
+        this.hide();
+        return false;
+    }
+});
+Ext.reg('modx-window-fc-set-add-tab',MODx.window.AddTabToSet);
 
 MODx.grid.FCSetTVs = function(config) {
     config = config || {};

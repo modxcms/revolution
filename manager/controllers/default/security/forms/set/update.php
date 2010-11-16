@@ -208,6 +208,25 @@ foreach ($tabs as $tab) {
         $visible,
         $label,
         '',
+        'core',
+    );
+}
+$newTabs = $modx->getCollection('modActionDom',array(
+    'set' => $set->get('id'),
+    'action' => $set->get('action'),
+    'rule' => 'tabNew',
+));
+foreach ($newTabs as $tab) {
+    $data[] = array(
+        $tab->get('id'),
+        $tab->get('action'),
+        $tab->get('name'),
+        $tab->get('form'),
+        $tab->get('other'),
+        $tab->get('rank'),
+        true,
+        $tab->get('value'),
+        'new',
     );
 }
 $setArray['tabs'] = $data;
