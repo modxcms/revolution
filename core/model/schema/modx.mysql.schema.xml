@@ -445,14 +445,14 @@
         <field key="action" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" />
-        <field key="xtype" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="xtype" dbtype="varchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
         <field key="container" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="rule" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="value" dbtype="text" phptype="string" null="false" default="" />
-        <field key="constraint" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="constraint_field" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" index="index" />
+        <field key="constraint" dbtype="varchar" precision="255" phptype="string" null="false" default="" /><!-- deprecated -->
+        <field key="constraint_field" dbtype="varchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
+        <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
+        <field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" index="index" /><!-- deprecated -->
         <field key="for_parent" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
 

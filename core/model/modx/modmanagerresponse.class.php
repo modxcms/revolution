@@ -153,7 +153,6 @@ class modManagerResponse extends modResponse {
         $c->where(array(
             'modActionDom.action' => $this->action['id'],
             'modActionDom.for_parent' => $forParent,
-            'modActionDom.active' => true,
             'Set.active' => true,
             'Profile.active' => true,
             array(

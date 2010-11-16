@@ -10,7 +10,7 @@ if (!file_exists($xmlFile)) return false;
 $xml = @file_get_contents($xmlFile);
 if (empty($xml)) return false;
 
-$xml = simplexml_load_string($xml);
+$xml = @simplexml_load_string($xml);
 
 if (empty($modx)) $modx =& $transport->xpdo;
 
@@ -24,7 +24,6 @@ foreach ($actionFields as $actionField) {
     $actionField->remove();
 }
 
-$actionFields = array();
 foreach ($xml->action as $action) {
     $actionObj = $modx->getObject('modAction',array(
         'controller' => (string)$action['controller'],
@@ -52,25 +51,30 @@ foreach ($xml->action as $action) {
                     'other' => !empty($tab['other']) ? (string)$tab['other'] : '',
                     'rank' => $tabIdx,
                 ));
+                $tabObj->save();
             }
-            $tabObj->save();
-            $actionFields[] = $tabObj;
         }
 
         $fieldIdx = 0;
         foreach ($tab->field as $field) {
-            $actionField = $modx->newObject('modActionField');
-            $actionField->fromArray(array(
+            $fieldObj = $modx->getObject('modActionField',array(
                 'action' => $actionObj->get('id'),
                 'name' => (string)$field['name'],
                 'type' => 'field',
-                'tab' => (string)$tab['name'],
-                'form' => (string)$action['form'],
-                'other' => !empty($tab['other']) ? (string)$tab['other'] : '',
-                'rank' => $fieldIdx,
             ));
-            $actionField->save();
-            $actionFields[] = $actionField;
+            if (!$fieldObj) {
+                $fieldObj = $modx->newObject('modActionField');
+                $fieldObj->fromArray(array(
+                    'action' => $actionObj->get('id'),
+                    'name' => (string)$field['name'],
+                    'type' => 'field',
+                    'tab' => (string)$tab['name'],
+                    'form' => (string)$action['form'],
+                    'other' => !empty($tab['other']) ? (string)$tab['other'] : '',
+                    'rank' => $fieldIdx,
+                ));
+                $fieldObj->save();
+            }
             $fieldIdx++;
         }
 
