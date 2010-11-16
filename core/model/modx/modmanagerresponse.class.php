@@ -155,16 +155,16 @@ class modManagerResponse extends modResponse {
             'modActionDom.for_parent' => $forParent,
             'Set.active' => true,
             'Profile.active' => true,
-            array(
-                'ProfileUserGroup.usergroup:IN' => $userGroups,
-                'OR:ProfileUserGroup.usergroup:IS' => null,
-            ),
         ));
+        $c->where(array(
+            'ProfileUserGroup.usergroup:IN' => $userGroups,
+            'OR:ProfileUserGroup.usergroup:IS' => null,
+        ),xPDOQuery::SQL_AND,null,2);
         if (is_object($obj) && $obj instanceof modResource) {
             $c->where(array(
                 'Set.template:=' => $obj->get('template'),
-                'OR:Set.template:IS' => null,
-            ),null,null,2);
+                'OR:Set.template:=' => 0,
+            ),xPDOQuery::SQL_AND,null,2);
         }
         $c->select(array(
             'modActionDom.*',
