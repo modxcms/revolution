@@ -161,6 +161,12 @@ class modManagerResponse extends modResponse {
                 'OR:ProfileUserGroup.usergroup:IS' => null,
             ),
         ));
+        if (is_object($obj) && $obj instanceof modResource) {
+            $c->where(array(
+                'Set.template:=' => $obj->get('template'),
+                'OR:Set.template:IS' => null,
+            ),null,null,2);
+        }
         $c->select(array(
             'modActionDom.*',
             'Set.constraint_class',

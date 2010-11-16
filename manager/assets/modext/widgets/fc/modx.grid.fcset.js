@@ -67,7 +67,11 @@ MODx.grid.FCSet = function(config) {
                 ,handler: this.removeSelected
                 ,scope: this
             }]
-        },{
+        },'-',{
+            text: _('import_from_xml')
+            ,handler: this.importSet
+            ,scope: this
+        },'->',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-fcs-search'
@@ -121,10 +125,16 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
                 m.push({
                     text: _('edit')
                     ,handler: this.updateSet
-                },{
+                });
+                m.push({
                     text: _('duplicate')
                     ,handler: this.duplicateSet
-                },'-');
+                });
+                m.push({
+                    text: _('export')
+                    ,handler: this.exportSet
+                });
+                m.push('-');
                 if (r.data.active) {
                     m.push({
                         text: _('deactivate')
@@ -166,6 +176,42 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         Ext.getCmp('modx-fcs-search').reset();
     	this.getBottomToolbar().changePage(1);
         this.refresh();
+    }
+
+    ,exportSet: function(btn,e) {
+        var id = this.menu.record.id;
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'export'
+                ,id: id
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    location.href = this.config.url+'?action=export&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
+                },scope:this}
+            }
+        });
+    }
+
+    ,importSet: function(btn,e) {
+        var r = {
+            profile: MODx.request.id
+        };
+        if (!this.windows.impset) {
+            this.windows.impset = MODx.load({
+                xtype: 'modx-window-fc-set-import'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function(o) {
+                        this.refresh();
+                    },scope:this}
+                }
+            });
+        }
+        this.windows.impset.reset();
+        this.windows.impset.setValues(r);
+        this.windows.impset.show(e.target);
     }
     
     ,createSet: function(btn,e) {
@@ -372,3 +418,36 @@ MODx.window.CreateFCSet = function(config) {
 };
 Ext.extend(MODx.window.CreateFCSet,MODx.Window);
 Ext.reg('modx-window-fc-set-create',MODx.window.CreateFCSet);
+
+
+MODx.window.ImportFCSet = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('import_from_xml')
+        ,id: 'modx-window-fc-set-import'
+        ,url: MODx.config.connectors_url+'security/forms/set.php'
+        ,action: 'import'
+        ,fileUpload: true
+        ,saveBtnText: _('import')
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'profile'
+            ,value: MODx.request.id
+        },{
+            html: _('set_import_msg')
+            ,id: 'modx-impset-desc'
+            ,border: false
+            ,bodyStyle: 'margin: 10px;'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('file')
+            ,name: 'file'
+            ,id: 'modx-impset-file'
+            ,anchor: '95%'
+            ,inputType: 'file'
+        }]
+    });
+    MODx.window.ImportFCSet.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.window.ImportFCSet,MODx.Window);
+Ext.reg('modx-window-fc-set-import',MODx.window.ImportFCSet);

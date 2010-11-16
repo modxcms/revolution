@@ -1,39 +1,67 @@
 <?php
 /**
- * Saves a Form Customization Set.
- *
- * @param integer $start (optional) The record to start at. Defaults to 0.
- * @param integer $limit (optional) The number of records to limit to. Defaults
- * to 10.
- * @param string $sort (optional) The column to sort by.
- * @param string $dir (optional) The direction of the sort. Default action.
+ * Import a Form Customization Set from an XML file
  *
  * @package modx
  * @subpackage processors.security.forms.set
  */
-if (!$modx->hasPermission('customize_forms')) return $modx->error->failure($modx->lexicon('permission_denied'));
-$modx->lexicon->load('formcustomization');
+if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('propertyset','element');
 
-if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('set_err_ns'));
-$set = $modx->getObject('modFormCustomizationSet',$scriptProperties['id']);
-if ($set == null) return $modx->error->failure($modx->lexicon('set_err_nf'));
+/* get profile */
+if (empty($scriptProperties['profile'])) return $modx->error->failure($modx->lexicon('profile_err_ns'));
+$profile = $modx->getObject('modFormCustomizationProfile',$scriptProperties['profile']);
+if ($profile == null) return $modx->error->failure($modx->lexicon('profile_err_nf'));
 
-$scriptProperties['active'] = !empty($scriptProperties['active']) ? true : false;
-$set->fromArray($scriptProperties);
-$set->set('action',$scriptProperties['action_id']);
-$set->save();
+/* verify file exists */
+if (!isset($scriptProperties['file'])) return $modx->error->failure($modx->lexicon('set_import_err_upload'));
+$_FILE = $scriptProperties['file'];
+if ($_FILE['error'] != 0) return $modx->error->failure($modx->lexicon('set_import_err_upload'));
+$o = file_get_contents($_FILE['tmp_name']);
+if (empty($o)) return $modx->error->failure($modx->lexicon('set_import_err_upload'));
 
-$action = $set->getOne('Action');
-$newRules = array();
+/* verify and load xml */
+$xml = @simplexml_load_string($o);
+if (empty($xml)) return $modx->error->failure($modx->lexicon('set_import_err_xml'));
 
-/* calculate field rules */
-$fields = $modx->fromJSON($scriptProperties['fields']);
-foreach ($fields as $field) {
-    if (empty($field['visible'])) {
+/* create set object */
+$set = $modx->newObject('modFormCustomizationSet');
+$set->set('profile',$profile->get('id'));
+$set->set('description',(string)$xml->description);
+$set->set('constraint_field',(string)$xml->constraint_field);
+$set->set('constraint',(string)$xml->constraint);
+$set->set('constraint_class','modResource');
+$set->set('active',(int)$xml->active);
+
+/* set action */
+$action = $modx->getObject('modAction',array(
+    'controller' => (string)$xml->action,
+    'namespace' => 'core',
+));
+if (empty($action)) return $modx->error->failure($modx->lexicon('set_import_action_err_nf'));
+$set->set('action',$action->get('id'));
+
+/* set template */
+$templatePk = (string)$xml->template;
+if (!empty($templatePk)) {
+    $template = $modx->getObject('modTemplate',array(
+        'templatename' => $templatePk,
+    ));
+    if (empty($template)) return $modx->error->failure($modx->lexicon('set_import_template_err_nf'));
+    $set->set('template',$template->get('id'));
+} else {
+    $set->set('template',0);
+}
+
+$rules = array();
+
+/* set fields FC rules */
+foreach ($xml->fields->field as $field) {
+    $visible = (int)$field->visible;
+    if (empty($visible)) {
         $rule = $modx->newObject('modActionDom');
-        $rule->set('set',$set->get('id'));
-        $rule->set('action',$set->get('action'));
-        $rule->set('name',$field['name']);
+        $rule->set('action',$action->get('id'));
+        $rule->set('name',(string)$field->name);
         $rule->set('container','modx-panel-resource');
         $rule->set('rule','fieldVisible');
         $rule->set('value',0);
@@ -45,16 +73,16 @@ foreach ($fields as $field) {
             $rule->set('for_parent',true);
         }
         $rule->set('rank',4);
-        $newRules[] = $rule;
+        $rules[] = $rule;
     }
-    if (!empty($field['label'])) {
+    $label = (string)$field->label;
+    if (!empty($label)) {
         $rule = $modx->newObject('modActionDom');
-        $rule->set('set',$set->get('id'));
         $rule->set('action',$set->get('action'));
-        $rule->set('name',$field['name']);
+        $rule->set('name',(string)$field->name);
         $rule->set('container','modx-panel-resource');
         $rule->set('rule','fieldTitle');
-        $rule->set('value',$field['label']);
+        $rule->set('value',$label);
         $rule->set('constraint_class',$set->get('constraint_class'));
         $rule->set('constraint_field',$set->get('constraint_field'));
         $rule->set('constraint',$set->get('constraint'));
@@ -63,16 +91,16 @@ foreach ($fields as $field) {
             $rule->set('for_parent',true);
         }
         $rule->set('rank',4);
-        $newRules[] = $rule;
+        $rules[] = $rule;
     }
-    if (isset($field['default_value']) && $field['default_value'] != '') {
+    $defaultValue = (string)$field->default_value;
+    if (!empty($defaultValue)) {
         $rule = $modx->newObject('modActionDom');
-        $rule->set('set',$set->get('id'));
         $rule->set('action',$set->get('action'));
-        $rule->set('name',$field['name']);
+        $rule->set('name',(string)$field->name);
         $rule->set('container','modx-panel-resource');
         $rule->set('rule','fieldDefault');
-        $rule->set('value',$field['default_value']);
+        $rule->set('value',$defaultValue);
         $rule->set('constraint_class',$set->get('constraint_class'));
         $rule->set('constraint_field',$set->get('constraint_field'));
         $rule->set('constraint',$set->get('constraint'));
@@ -81,27 +109,27 @@ foreach ($fields as $field) {
             $rule->set('for_parent',true);
         }
         $rule->set('rank',4);
-        $newRules[] = $rule;
+        $rules[] = $rule;
     }
 }
 
+
 /* calculate tabs rules */
-$tabs = $modx->fromJSON($scriptProperties['tabs']);
-foreach ($tabs as $tab) {
+foreach ($xml->tabs->tab as $tab) {
     $tabField = $modx->getObject('modActionField',array(
         'action' => $action->get('id'),
-        'name' => $tab['name'],
+        'name' => (string)$tab->name,
         'type' => 'tab',
     ));
     /* if creating a new tab */
-    if (empty($tabField) && !empty($tab['visible'])) {
+    $visible = (int)$tab->visible;
+    if (empty($tabField) && !empty($visible)) {
         $rule = $modx->newObject('modActionDom');
-        $rule->set('set',$set->get('id'));
         $rule->set('action',$set->get('action'));
-        $rule->set('name',$tab['name']);
+        $rule->set('name',(string)$tab->name);
         $rule->set('container','modx-resource-tabs');
         $rule->set('rule','tabNew');
-        $rule->set('value',$tab['label']);
+        $rule->set('value',(string)$tab->label);
         $rule->set('constraint_class',$set->get('constraint_class'));
         $rule->set('constraint_field',$set->get('constraint_field'));
         $rule->set('constraint',$set->get('constraint'));
@@ -110,15 +138,14 @@ foreach ($tabs as $tab) {
             $rule->set('for_parent',true);
         }
         $rule->set('rank',0);
-        $newRules[] = $rule;
+        $rules[] = $rule;
     } else {
     /* otherwise editing an existing one */
-        if (empty($tab['visible'])) {
+        if (empty($visible)) {
             $rule = $modx->newObject('modActionDom');
-            $rule->set('set',$set->get('id'));
             $rule->set('action',$set->get('action'));
-            $rule->set('name',$tab['name']);
-            $rule->set('container','modx-resource-tabs');
+            $rule->set('name',(string)$tab->name);
+            $rule->set('container','modx-panel-resource');
             $rule->set('rule','tabVisible');
             $rule->set('value',0);
             $rule->set('constraint_class',$set->get('constraint_class'));
@@ -129,16 +156,16 @@ foreach ($tabs as $tab) {
                 $rule->set('for_parent',true);
             }
             $rule->set('rank',1);
-            $newRules[] = $rule;
+            $rules[] = $rule;
         }
-        if (!empty($tab['label'])) {
+        $label = (string)$tab['label'];
+        if (!empty($label)) {
             $rule = $modx->newObject('modActionDom');
-            $rule->set('set',$set->get('id'));
             $rule->set('action',$set->get('action'));
-            $rule->set('name',$tab['name']);
-            $rule->set('container','modx-resource-tabs');
+            $rule->set('name',(string)$tab->name);
+            $rule->set('container','modx-panel-resource');
             $rule->set('rule','tabTitle');
-            $rule->set('value',$tab['label']);
+            $rule->set('value',$label);
             $rule->set('constraint_class',$set->get('constraint_class'));
             $rule->set('constraint_field',$set->get('constraint_field'));
             $rule->set('constraint',$set->get('constraint'));
@@ -147,20 +174,24 @@ foreach ($tabs as $tab) {
                 $rule->set('for_parent',true);
             }
             $rule->set('rank',0);
-            $newRules[] = $rule;
+            $rules[] = $rule;
         }
     }
 }
 
 /* calculate TV rules */
-$tvs = $modx->fromJSON($scriptProperties['tvs']);
-foreach ($tvs as $tvData) {
-    $tv = $modx->getObject('modTemplateVar',$tvData['id']);
-    if (empty($tv)) continue;
+foreach ($xml->tvs->tv as $tvData) {
+    $tv = $modx->getObject('modTemplateVar',array(
+        'name' => (string)$tvData->name,
+    ));
+    if (empty($tv)) {
+        $modx->log(modX::LOG_LEVEL_ERROR,'FC Import Error: Could not find TV with name: "'.$tvData->name.'".');
+        continue;
+    }
 
-    if (empty($tvData['visible'])) {
+    $visible = (int)$tvData->visible;
+    if (empty($visible)) {
         $rule = $modx->newObject('modActionDom');
-        $rule->set('set',$set->get('id'));
         $rule->set('action',$set->get('action'));
         $rule->set('name','tv'.$tv->get('id'));
         $rule->set('container','modx-panel-resource');
@@ -174,16 +205,16 @@ foreach ($tvs as $tvData) {
             $rule->set('for_parent',true);
         }
         $rule->set('rank',10);
-        $newRules[] = $rule;
+        $rules[] = $rule;
     }
-    if (!empty($tvData['label'])) {
+    $label = (string)$tvData->label;
+    if (!empty($label)) {
         $rule = $modx->newObject('modActionDom');
-        $rule->set('set',$set->get('id'));
         $rule->set('action',$set->get('action'));
         $rule->set('name','tv'.$tv->get('id'));
         $rule->set('container','modx-panel-resource');
         $rule->set('rule','tvTitle');
-        $rule->set('value',$tvData['label']);
+        $rule->set('value',$label);
         $rule->set('constraint_class',$set->get('constraint_class'));
         $rule->set('constraint_field',$set->get('constraint_field'));
         $rule->set('constraint',$set->get('constraint'));
@@ -192,16 +223,17 @@ foreach ($tvs as $tvData) {
             $rule->set('for_parent',true);
         }
         $rule->set('rank',10);
-        $newRules[] = $rule;
+        $rules[] = $rule;
     }
-    if ($tv->get('default_text') != $tvData['default_value']) {
+    $defaultValue = (string)$tvData->default_value;
+    $defaultText = $tv->get('default_text');
+    if (strcmp($defaultText,$defaultValue) !== 0) {
         $rule = $modx->newObject('modActionDom');
-        $rule->set('set',$set->get('id'));
         $rule->set('action',$set->get('action'));
         $rule->set('name','tv'.$tv->get('id'));
         $rule->set('container','modx-panel-resource');
         $rule->set('rule','tvDefault');
-        $rule->set('value',$tvData['default_value']);
+        $rule->set('value',$defaultValue);
         $rule->set('constraint_class',$set->get('constraint_class'));
         $rule->set('constraint_field',$set->get('constraint_field'));
         $rule->set('constraint',$set->get('constraint'));
@@ -210,16 +242,16 @@ foreach ($tvs as $tvData) {
             $rule->set('for_parent',true);
         }
         $rule->set('rank',10);
-        $newRules[] = $rule;
+        $rules[] = $rule;
     }
-    if (!empty($tvData['tab']) && $tvData['tab'] != 'modx-panel-resource-tv') {
+    $tab = (string)$tvData->tab;
+    if (!empty($tab) && $tab != 'modx-panel-resource-tv') {
         $rule = $modx->newObject('modActionDom');
-        $rule->set('set',$set->get('id'));
         $rule->set('action',$set->get('action'));
         $rule->set('name','tv'.$tv->get('id'));
         $rule->set('container','modx-panel-resource');
         $rule->set('rule','tvMove');
-        $rule->set('value',$tvData['tab']);
+        $rule->set('value',$tab);
         $rule->set('constraint_class',$set->get('constraint_class'));
         $rule->set('constraint_field',$set->get('constraint_field'));
         $rule->set('constraint',$set->get('constraint'));
@@ -228,24 +260,15 @@ foreach ($tvs as $tvData) {
             $rule->set('for_parent',true);
         }
         /* add 10 to rank to make sure happens after tab create */
-        $rank = 10+((int)$tvData['rank']);
+        $rank = 10+((int)$tvData->tab_rank);
         $rule->set('rank',$rank);
-        $newRules[] = $rule;
+        $rules[] = $rule;
     }
 }
+$set->addMany($rules);
 
-/* clear old rules for set */
-$oldRules = $modx->getCollection('modActionDom',array(
-    'set' => $set->get('id'),
-    'action' => $set->get('action'),
-));
-foreach ($oldRules as $or) {
-    $or->remove();
-}
-
-/* save new rules to set */
-foreach ($newRules as $newRule) {
-    $newRule->save();
+if (!$set->save()) {
+    return $modx->error->failure($modx->lexicon('set_import_err_save'));
 }
 
 return $modx->error->success();
