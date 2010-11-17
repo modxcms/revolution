@@ -1271,6 +1271,15 @@ $settings['topmenu_show_descriptions']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['tree_default_sort']= $xpdo->newObject('modSystemSetting');
+$settings['tree_default_sort']->fromArray(array (
+  'key' => 'tree_default_sort',
+  'value' => 'menuindex',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['tree_root_id']= $xpdo->newObject('modSystemSetting');
 $settings['tree_root_id']->fromArray(array (
   'key' => 'tree_root_id',

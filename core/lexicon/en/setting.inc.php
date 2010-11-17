@@ -534,6 +534,9 @@ $_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODx will 
 $_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Top Menu';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODx will hide the descriptions from top menu items in the manager.';
 
+$_lang['setting_tree_default_sort'] = 'Resource Tree Default Sort Field';
+$_lang['setting_tree_default_sort_desc'] = 'The default sort field for the Resource tree when loading the manager.';
+
 $_lang['setting_tree_root_id'] = 'Tree Root ID';
 $_lang['setting_tree_root_id_desc'] = 'Set this to a valid ID of a Resource to start the left Resource tree at below that node as the root. The user will only be able to see Resources that are children of the specified Resource.';
 

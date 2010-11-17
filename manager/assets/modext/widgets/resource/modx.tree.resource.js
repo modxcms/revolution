@@ -16,12 +16,17 @@ MODx.tree.Resource = function(config) {
         ,enableDD: !Ext.isEmpty(MODx.config.enable_dragdrop) ? true : false
         ,ddGroup: 'modx-treedrop-dd'
         ,remoteToolbar: true
+        ,sortBy: MODx.config.tree_default_sort || 'menuindex'
         ,tbarCfg: {
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
         }
+        ,baseParams: {
+            action: 'getNodes'
+            ,sortBy: MODx.config.tree_default_sort || 'menuindex'
+        }
     });
     MODx.tree.Resource.superclass.constructor.call(this,config);
-    this.getLoader().baseParams.sortBy = Ext.state.Manager.get(this.treestate_id+'-sort') || 'menuindex';
+    this.getLoader().baseParams.sortBy = Ext.state.Manager.get(this.treestate_id+'-sort') || (MODx.config.tree_default_sort || 'menuindex');
     this.on('render',function() {
         var el = Ext.get('modx-resource-tree');
         el.createChild({tag: 'div', id: 'modx-resource-tree_tb'});
@@ -284,7 +289,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,triggerAction: 'all'
             ,selectOnFocus: false
             ,width: 100
-            ,value: this.config.sortBy || (Ext.state.Manager.get(this.treestate_id+'-sort') || 'menuindex')
+            ,value: this.config.sortBy || (Ext.state.Manager.get(this.treestate_id+'-sort') || MODx.config.tree_default_sort)
             ,listeners: {
                 'select': {fn:this.filterSort,scope:this}
             }
