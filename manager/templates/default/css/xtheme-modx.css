@@ -1990,6 +1990,12 @@ a.x-menu-item {
     border-bottom: 1px solid #afafaf;
     padding: 0;
 }
+.x-column {
+    float:left;
+    margin:0px 8px 0px 0px;
+    /*overflow:hidden;*/
+    padding:0px;
+}
 
 .x-window-tc {
 /*  background-image: url(../images/modx-theme/window/top-bottom.png); */
