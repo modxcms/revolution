@@ -78,6 +78,7 @@ class xPDOManager_sqlsrv extends xPDOManager {
             $sql= 'DROP DATABASE ' . $this->xpdo->escape($dsnArray['dbname']);
             try {
                 $pdo = new PDO("sqlsrv:server={$dsnArray['server']}", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                $pdo->exec("ALTER DATABASE {$this->xpdo->escape($dsnArray['dbname'])} SET single_user WITH ROLLBACK IMMEDIATE");
                 $result = $pdo->exec($sql);
                 if ($result !== false) {
                     $removed = true;
