@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2565] Improve Quick Create/Update Resource to move settings into tab rather than fieldset
 - [#2807] Add tree_default_sort System Setting for configuring the default sort setting for the Resource tree
 - [#2803] Fix css issue with portal blocks on manager dashboard in Fx
 - Add new Form Customization UI, including Form Customization Profiles and Sets; much easier editing of FC rules

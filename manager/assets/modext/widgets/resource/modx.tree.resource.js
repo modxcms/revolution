@@ -611,55 +611,67 @@ MODx.window.QuickCreateResource = function(config) {
         ,url: MODx.config.connectors_url+'resource/index.php'
         ,action: 'create'
         ,fields: [{
-            xtype: 'textfield'
-            ,name: 'pagetitle'
-            ,id: 'modx-'+this.ident+'-pagetitle'
-            ,fieldLabel: _('pagetitle')
-            ,anchor: '80%'
-        },{
-            xtype: 'textfield'
-            ,name: 'alias'
-            ,id: 'modx-'+this.ident+'-alias'
-            ,fieldLabel: _('alias')
-            ,anchor: '80%'
-        },{
-            xtype: 'textarea'
-            ,name: 'introtext'
-            ,id: 'modx-'+this.ident+'-introtext'
-            ,fieldLabel: _('introtext')
-            ,anchor: '100%'
-            ,rows: 2
-        },{
-            xtype: 'textfield'
-            ,name: 'menutitle'
-            ,id: 'modx-'+this.ident+'-menutitle'
-            ,fieldLabel: _('resource_menutitle')
-            ,anchor: '80%'
-        },{
-            xtype: 'modx-combo-template'
-            ,name: 'template'
-            ,id: 'modx-'+this.ident+'-template'
-            ,fieldLabel: _('template')
-            ,editable: false
-            ,anchor: '80%'
-            ,baseParams: {
-                action: 'getList'
-                ,combo: '1'
-            }
-            ,value: MODx.config.default_template
-        },
-        MODx.getQRContentField(this.ident,config.record.class_key)
-        ,{
-            id: 'modx-'+this.ident+'-settings'
-            ,title: _('settings')
-            ,collapsible: true
-            ,collapsed: true
-            ,animCollapse: true
-            ,xtype: 'fieldset'
-            ,autoHeight: true
-            ,forceLayout: true
-            ,defaults: {autoHeight: true ,border: false}
-            ,items: MODx.getQRSettings(this.ident,config.record)
+            xtype: 'modx-tabs'
+            ,bodyStyle: { background: 'transparent' }
+            ,items: [{
+                title: _('resource')
+                ,layout: 'form'
+                ,cls: 'modx-panel'
+                ,bodyStyle: { background: 'transparent', padding: '10px' }
+                ,autoHeight: true
+                ,labelWidth: 130
+                ,items: [{
+                    xtype: 'textfield'
+                    ,name: 'pagetitle'
+                    ,id: 'modx-'+this.ident+'-pagetitle'
+                    ,fieldLabel: _('pagetitle')
+                    ,anchor: '80%'
+                },{
+                    xtype: 'textfield'
+                    ,name: 'alias'
+                    ,id: 'modx-'+this.ident+'-alias'
+                    ,fieldLabel: _('alias')
+                    ,anchor: '80%'
+                },{
+                    xtype: 'textarea'
+                    ,name: 'introtext'
+                    ,id: 'modx-'+this.ident+'-introtext'
+                    ,fieldLabel: _('introtext')
+                    ,anchor: '100%'
+                    ,rows: 2
+                },{
+                    xtype: 'textfield'
+                    ,name: 'menutitle'
+                    ,id: 'modx-'+this.ident+'-menutitle'
+                    ,fieldLabel: _('resource_menutitle')
+                    ,anchor: '80%'
+                },{
+                    xtype: 'modx-combo-template'
+                    ,name: 'template'
+                    ,id: 'modx-'+this.ident+'-template'
+                    ,fieldLabel: _('template')
+                    ,editable: false
+                    ,anchor: '80%'
+                    ,baseParams: {
+                        action: 'getList'
+                        ,combo: '1'
+                    }
+                    ,value: MODx.config.default_template
+                },
+                MODx.getQRContentField(this.ident,config.record.class_key)]
+            },{
+                id: 'modx-'+this.ident+'-settings'
+                ,title: _('settings')
+                ,layout: 'form'
+                ,cls: 'modx-panel'
+                ,autoHeight: true
+                ,forceLayout: true
+                ,labelWidth: 130
+                ,defaults: {autoHeight: true ,border: false}
+                ,style: 'background: transparent;'
+                ,bodyStyle: { background: 'transparent', padding: '10px' }
+                ,items: MODx.getQRSettings(this.ident,config.record)
+            }]
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
@@ -688,47 +700,58 @@ MODx.window.QuickUpdateResource = function(config) {
         ,action: 'update'
         ,autoHeight: true
         ,fields: [{
-            xtype: 'hidden'
-            ,name: 'id'
-            ,id: 'modx-'+this.ident+'-id'
-        },{
-            xtype: 'textfield'
-            ,name: 'pagetitle'
-            ,id: 'modx-'+this.ident+'-pagetitle'
-            ,fieldLabel: _('pagetitle')
-            ,anchor: '80%'
-        },{
-            xtype: 'textfield'
-            ,name: 'alias'
-            ,id: 'modx-'+this.ident+'-alias'
-            ,fieldLabel: _('alias')
-            ,anchor: '80%'
-        },{
-            xtype: 'textfield'
-            ,name: 'menutitle'
-            ,id: 'modx-'+this.ident+'-menutitle'
-            ,fieldLabel: _('resource_menutitle')
-            ,anchor: '80%'
-        },{
-            xtype: 'textarea'
-            ,name: 'introtext'
-            ,id: 'modx-'+this.ident+'-introtext'
-            ,fieldLabel: _('introtext')
-            ,anchor: '100%'
-            ,rows: 2
-        },
-        MODx.getQRContentField(this.ident,config.record.class_key)
-        ,{
-            id: 'modx-'+this.ident+'-settings'
-            ,title: _('settings')
-            ,collapsible: true
-            ,collapsed: true
-            ,animCollapse: true
-            ,xtype: 'fieldset'
-            ,autoHeight: true
-            ,forceLayout: true
-            ,defaults: {autoHeight: true ,border: false}
-            ,items: MODx.getQRSettings(this.ident,config.record)
+            xtype: 'modx-tabs'
+            ,bodyStyle: { background: 'transparent' }
+            ,items: [{
+                title: _('resource')
+                ,layout: 'form'
+                ,cls: 'modx-panel'
+                ,bodyStyle: { background: 'transparent', padding: '10px' }
+                ,autoHeight: true
+                ,labelWidth: 130
+                ,items: [{
+                    xtype: 'hidden'
+                    ,name: 'id'
+                    ,id: 'modx-'+this.ident+'-id'
+                },{
+                    xtype: 'textfield'
+                    ,name: 'pagetitle'
+                    ,id: 'modx-'+this.ident+'-pagetitle'
+                    ,fieldLabel: _('pagetitle')
+                    ,anchor: '80%'
+                },{
+                    xtype: 'textfield'
+                    ,name: 'alias'
+                    ,id: 'modx-'+this.ident+'-alias'
+                    ,fieldLabel: _('alias')
+                    ,anchor: '80%'
+                },{
+                    xtype: 'textfield'
+                    ,name: 'menutitle'
+                    ,id: 'modx-'+this.ident+'-menutitle'
+                    ,fieldLabel: _('resource_menutitle')
+                    ,anchor: '80%'
+                },{
+                    xtype: 'textarea'
+                    ,name: 'introtext'
+                    ,id: 'modx-'+this.ident+'-introtext'
+                    ,fieldLabel: _('introtext')
+                    ,anchor: '100%'
+                    ,rows: 2
+                },
+                MODx.getQRContentField(this.ident,config.record.class_key)]
+            },{
+                id: 'modx-'+this.ident+'-settings'
+                ,title: _('settings'),layout: 'form'
+                ,cls: 'modx-panel'
+                ,autoHeight: true
+                ,forceLayout: true
+                ,labelWidth: 130
+                ,defaults: {autoHeight: true ,border: false}
+                ,style: 'background: transparent;'
+                ,bodyStyle: { background: 'transparent', padding: '10px' }
+                ,items: MODx.getQRSettings(this.ident,config.record)
+            }]
         }]
        ,keys: [{
             key: Ext.EventObject.ENTER
