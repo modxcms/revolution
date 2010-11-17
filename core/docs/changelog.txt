@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2814] Added longtitle, description, template to Quick Update/Create
 - [#2789] Add check to make sure safe_mode is off in setup
 - [#2565] Improve Quick Create/Update Resource to move settings into tab rather than fieldset
 - [#2807] Add tree_default_sort System Setting for configuring the default sort setting for the Resource tree

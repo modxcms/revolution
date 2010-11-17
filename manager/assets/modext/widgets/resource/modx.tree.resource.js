@@ -607,56 +607,72 @@ MODx.window.QuickCreateResource = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_resource')
         ,id: this.ident
-        ,width: 600
+        ,width: 620
         ,url: MODx.config.connectors_url+'resource/index.php'
         ,action: 'create'
+        ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
             ,bodyStyle: { background: 'transparent' }
+            ,autoHeight: true
             ,items: [{
                 title: _('resource')
                 ,layout: 'form'
                 ,cls: 'modx-panel'
                 ,bodyStyle: { background: 'transparent', padding: '10px' }
                 ,autoHeight: true
-                ,labelWidth: 130
+                ,labelWidth: 100
                 ,items: [{
+                    xtype: 'modx-combo-template'
+                    ,name: 'template'
+                    ,id: 'modx-'+this.ident+'-template'
+                    ,fieldLabel: _('template')
+                    ,editable: false
+                    ,anchor: '100%'
+                    ,baseParams: {
+                        action: 'getList'
+                        ,combo: '1'
+                    }
+                    ,value: MODx.config.default_template
+                },{
                     xtype: 'textfield'
                     ,name: 'pagetitle'
                     ,id: 'modx-'+this.ident+'-pagetitle'
                     ,fieldLabel: _('pagetitle')
-                    ,anchor: '80%'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textfield'
+                    ,name: 'longtitle'
+                    ,id: 'modx-'+this.ident+'-longtitle'
+                    ,fieldLabel: _('long_title')
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textarea'
+                    ,name: 'description'
+                    ,id: 'modx-'+this.ident+'-description'
+                    ,fieldLabel: _('description')
+                    ,anchor: '100%'
+                    ,grow: false
+                    ,height: 50
                 },{
                     xtype: 'textfield'
                     ,name: 'alias'
                     ,id: 'modx-'+this.ident+'-alias'
                     ,fieldLabel: _('alias')
-                    ,anchor: '80%'
+                    ,anchor: '100%'
                 },{
                     xtype: 'textarea'
                     ,name: 'introtext'
                     ,id: 'modx-'+this.ident+'-introtext'
                     ,fieldLabel: _('introtext')
                     ,anchor: '100%'
-                    ,rows: 2
+                    ,height: 50
                 },{
                     xtype: 'textfield'
                     ,name: 'menutitle'
                     ,id: 'modx-'+this.ident+'-menutitle'
                     ,fieldLabel: _('resource_menutitle')
-                    ,anchor: '80%'
-                },{
-                    xtype: 'modx-combo-template'
-                    ,name: 'template'
-                    ,id: 'modx-'+this.ident+'-template'
-                    ,fieldLabel: _('template')
-                    ,editable: false
-                    ,anchor: '80%'
-                    ,baseParams: {
-                        action: 'getList'
-                        ,combo: '1'
-                    }
-                    ,value: MODx.config.default_template
+                    ,anchor: '100%'
                 },
                 MODx.getQRContentField(this.ident,config.record.class_key)]
             },{
@@ -666,7 +682,7 @@ MODx.window.QuickCreateResource = function(config) {
                 ,cls: 'modx-panel'
                 ,autoHeight: true
                 ,forceLayout: true
-                ,labelWidth: 130
+                ,labelWidth: 100
                 ,defaults: {autoHeight: true ,border: false}
                 ,style: 'background: transparent;'
                 ,bodyStyle: { background: 'transparent', padding: '10px' }
@@ -681,10 +697,6 @@ MODx.window.QuickCreateResource = function(config) {
         }]
     });
     MODx.window.QuickCreateResource.superclass.constructor.call(this,config);
-    this.on('show',function() {
-        Ext.getCmp('modx-'+this.ident+'-settings').collapse(false);
-        this.syncSize();
-    },this);
 };
 Ext.extend(MODx.window.QuickCreateResource,MODx.Window);
 Ext.reg('modx-window-quick-create-modResource',MODx.window.QuickCreateResource);
@@ -695,49 +707,76 @@ MODx.window.QuickUpdateResource = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_resource')
         ,id: this.ident
-        ,width: 600
+        ,width: 620
         ,url: MODx.config.connectors_url+'resource/index.php'
         ,action: 'update'
         ,autoHeight: true
+        ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
             ,bodyStyle: { background: 'transparent' }
+            ,autoHeight: true
             ,items: [{
                 title: _('resource')
                 ,layout: 'form'
                 ,cls: 'modx-panel'
                 ,bodyStyle: { background: 'transparent', padding: '10px' }
                 ,autoHeight: true
-                ,labelWidth: 130
+                ,labelWidth: 100
                 ,items: [{
                     xtype: 'hidden'
                     ,name: 'id'
                     ,id: 'modx-'+this.ident+'-id'
                 },{
+                    xtype: 'modx-combo-template'
+                    ,name: 'template'
+                    ,id: 'modx-'+this.ident+'-template'
+                    ,fieldLabel: _('template')
+                    ,editable: false
+                    ,anchor: '100%'
+                    ,baseParams: {
+                        action: 'getList'
+                        ,combo: '1'
+                    }
+                },{
                     xtype: 'textfield'
                     ,name: 'pagetitle'
                     ,id: 'modx-'+this.ident+'-pagetitle'
                     ,fieldLabel: _('pagetitle')
-                    ,anchor: '80%'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textfield'
+                    ,name: 'longtitle'
+                    ,id: 'modx-'+this.ident+'-longtitle'
+                    ,fieldLabel: _('long_title')
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textarea'
+                    ,name: 'description'
+                    ,id: 'modx-'+this.ident+'-description'
+                    ,fieldLabel: _('description')
+                    ,anchor: '100%'
+                    ,grow: false
+                    ,height: 50
                 },{
                     xtype: 'textfield'
                     ,name: 'alias'
                     ,id: 'modx-'+this.ident+'-alias'
                     ,fieldLabel: _('alias')
-                    ,anchor: '80%'
+                    ,anchor: '100%'
                 },{
                     xtype: 'textfield'
                     ,name: 'menutitle'
                     ,id: 'modx-'+this.ident+'-menutitle'
                     ,fieldLabel: _('resource_menutitle')
-                    ,anchor: '80%'
+                    ,anchor: '100%'
                 },{
                     xtype: 'textarea'
                     ,name: 'introtext'
                     ,id: 'modx-'+this.ident+'-introtext'
                     ,fieldLabel: _('introtext')
                     ,anchor: '100%'
-                    ,rows: 2
+                    ,height: 50
                 },
                 MODx.getQRContentField(this.ident,config.record.class_key)]
             },{
@@ -746,7 +785,7 @@ MODx.window.QuickUpdateResource = function(config) {
                 ,cls: 'modx-panel'
                 ,autoHeight: true
                 ,forceLayout: true
-                ,labelWidth: 130
+                ,labelWidth: 100
                 ,defaults: {autoHeight: true ,border: false}
                 ,style: 'background: transparent;'
                 ,bodyStyle: { background: 'transparent', padding: '10px' }
