@@ -614,6 +614,7 @@ MODx.window.QuickCreateResource = function(config) {
         ,fields: [{
             xtype: 'modx-tabs'
             ,bodyStyle: { background: 'transparent' }
+            ,deferredRender: false
             ,autoHeight: true
             ,items: [{
                 title: _('resource')
@@ -716,6 +717,7 @@ MODx.window.QuickUpdateResource = function(config) {
             xtype: 'modx-tabs'
             ,bodyStyle: { background: 'transparent' }
             ,autoHeight: true
+            ,deferredRender: false
             ,items: [{
                 title: _('resource')
                 ,layout: 'form'
