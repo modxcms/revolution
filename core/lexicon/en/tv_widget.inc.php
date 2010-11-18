@@ -13,6 +13,7 @@ $_lang['class'] = 'Class';
 $_lang['date'] = 'Date';
 $_lang['date_format'] = 'Date Format';
 $_lang['date_use_current'] = 'If no value, use current date';
+$_lang['default'] = 'Default';
 $_lang['delim'] = 'Delimiter';
 $_lang['delimiter'] = 'Delimiter';
 $_lang['dropdown'] = 'DropDown List Menu';
