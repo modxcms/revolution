@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2825] Append idx to each item DOM id when using HTML tag tv output widget
 - [#2823] Add missing lexicon entry for TV output type
 - [#2817] Reorder System top menu for easier navigation
 - [#2820] Add DOM id to Profile page tabs
