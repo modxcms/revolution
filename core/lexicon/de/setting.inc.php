@@ -134,8 +134,8 @@ $_lang['setting_cache_lang_js_desc'] = 'Wenn diese Option auf "ja" gesetzt ist, 
 $_lang['setting_cache_lexicon_topics'] = 'Lexikon-Themen cachen';
 $_lang['setting_cache_lexicon_topics_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden alle Lexikon-Themen gecacht, wodurch die Ladezeiten für die Internationalisierungs-Funktionalität drastisch reduziert werden. Es wird dringend empfohlen, diese Einstellung auf "Ja" zu belassen.';
 
-$_lang['setting_cache_noncore_lexicon_topics'] = 'Nicht zum Core-Namespace gehörende Lexikon-Themen cachen';
-$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Wenn diese Einstellung deaktiviert ist, werden nicht zum Core-Namespace gehörende Lexikon-Themen nicht gecacht. Es ist nützlich, dies zu deaktivieren, wenn Sie Ihre eigenen Extras entwickeln.';
+$_lang['setting_cache_noncore_lexicon_topics'] = 'Nicht zum Core-Namensraum gehörende Lexikon-Themen cachen';
+$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Wenn diese Einstellung deaktiviert ist, werden nicht zum Core-Namensraum gehörende Lexikon-Themen nicht gecacht. Es ist nützlich, dies zu deaktivieren, wenn Sie Ihre eigenen Extras entwickeln.';
 
 $_lang['setting_cache_resource'] = 'Partiellen Ressourcen-Cache aktivieren';
 $_lang['setting_cache_resource_desc'] = 'Partielles Ressourcen-Caching kann für jede Ressource einzeln konfiguriert werden, wenn dieses Feature aktiviert ist. Das Deaktivieren dieses Features deaktiviert es global.';
