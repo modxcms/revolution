@@ -52,8 +52,8 @@ $modx->lexicon->load('resource');
 
 /* handle if parent is a context */
 if (!empty($scriptProperties['parent']) && !is_numeric($scriptProperties['parent'])) {
-    $ctx = $modx->getObject('modContext',array('key' => $scriptProperties['parent']));
-    if ($ctx) {
+    $ctxCnt = $modx->getCount('modContext',array('key' => $scriptProperties['parent']));
+    if ($ctxCnt > 0) {
         $scriptProperties['context_key'] = $scriptProperties['parent'];
     }
     $scriptProperties['parent'] = 0;
@@ -61,8 +61,20 @@ if (!empty($scriptProperties['parent']) && !is_numeric($scriptProperties['parent
 
 /* default settings */
 $scriptProperties['context_key']= empty($scriptProperties['context_key']) ? 'web' : $scriptProperties['context_key'];
+
+/* get working context */
+$wctx = $scriptProperties['context_key'];
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
 $scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);
-$scriptProperties['template'] = !isset($scriptProperties['template']) ? $modx->getOption('default_template',null,0) : intval($scriptProperties['template']);
+$scriptProperties['template'] = !isset($scriptProperties['template']) ? (integer) $workingContext->getOption('default_template', 0) : (integer) $scriptProperties['template'];
 $scriptProperties['hidemenu'] = empty($scriptProperties['hidemenu']) ? 0 : 1;
 $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
 $scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? 0 : 1;
@@ -109,11 +121,11 @@ if (!$resource) return $modx->error->failure($modx->lexicon('resource_err_create
 if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->lexicon('resource_err_class',array('class' => $resourceClass)));
 
 /* friendly url alias checks */
-if ($modx->getOption('friendly_alias_urls',null,false)) {
+if ($workingContext->getOption('friendly_alias_urls', false)) {
     /* auto assign alias */
-    $aliasPath = $resource->getAliasPath($scriptProperties['alias'],$scriptProperties);
+    $aliasPath = $resource->getAliasPath($scriptProperties['alias'], $scriptProperties);
     $duplicateId = $resource->isDuplicateAlias($aliasPath);
-    if (!$modx->getOption('allow_duplicate_alias',null,false) && $duplicateId) {
+    if (!$workingContext->getOption('allow_duplicate_alias', false) && $duplicateId) {
         $err = $modx->lexicon('duplicate_alias_found',array(
             'id' => $duplicateId,
             'alias' => $aliasPath,
@@ -224,7 +236,7 @@ if (!$resource->get('class_key')) {
 }
 
 /* increase menu index if this is a new resource */
-$auto_menuindex = $modx->getOption('auto_menuindex',null,true);
+$auto_menuindex = $workingContext->getOption('auto_menuindex', true);
 if (!empty($auto_menuindex) && empty($scriptProperties['menuindex'])) {
     $scriptProperties['menuindex'] = $modx->getCount('modResource',array(
         'parent' => $resource->get('parent'),
@@ -297,7 +309,7 @@ if (isset($scriptProperties['resource_groups'])) {
 }
 
 /* quick check to make sure it's not site_start, if so, publish */
-if ($resource->get('id') == $modx->getOption('site_start')) {
+if ($resource->get('id') == $workingContext->getOption('site_start')) {
     $resource->set('published',true);
     $resource->save();
 }

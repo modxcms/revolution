@@ -13,12 +13,18 @@
 if (!$modx->user->isAuthenticated('mgr')) { return ''; }
 $modx->getVersionData();
 
-$ctx = !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
-$context = $modx->getObject('modContext',$ctx);
-$context->prepare();
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
 
 $customResourceClasses = array();
-$crcs = $context->getOption('custom_resource_classes','');
+$crcs = $workingContext->getOption('custom_resource_classes', '', $modx->_userConfig);
 if (!empty($crcs)) {
     $crcs = explode(',',$crcs);
     foreach ($crcs as $crc) {
@@ -28,16 +34,16 @@ if (!empty($crcs)) {
     }
 }
 
-$template_url = $context->getOption('manager_url').'templates/'.$context->getOption('manager_theme').'/';
+$template_url = $workingContext->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig) . 'templates/' . $workingContext->getOption('manager_theme', 'default', $modx->_userConfig) . '/';
 $c = array(
-    'base_url' => $context->getOption('base_url'),
-    'connectors_url' => $context->getOption('connectors_url'),
-    'icons_url' => $template_url.'images/ext/modext/',
-    'manager_url' => $context->getOption('manager_url'),
+    'base_url' => $workingContext->getOption('base_url', MODX_BASE_URL, $modx->_userConfig),
+    'connectors_url' => $workingContext->getOption('connectors_url', MODX_CONNECTORS_URL, $modx->_userConfig),
+    'icons_url' => $template_url . 'images/ext/modext/',
+    'manager_url' => $workingContext->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig),
     'template_url' => $template_url,
-    'http_host' => $context->getOption('http_host',MODX_HTTP_HOST),
-    'site_url' => $context->getOption('site_url',MODX_SITE_URL),
-    'http_host_remote' => MODX_URL_SCHEME.$_SERVER['HTTP_HOST'],
+    'http_host' => $workingContext->getOption('http_host', MODX_HTTP_HOST, $modx->_userConfig),
+    'site_url' => $workingContext->getOption('site_url', MODX_SITE_URL, $modx->_userConfig),
+    'http_host_remote' => MODX_URL_SCHEME . $workingContext->getOption('http_host', MODX_HTTP_HOST, $modx->_userConfig),
     'user' => $modx->user->get('id'),
     'version' => $modx->version['full_version'],
     'custom_resource_classes' => $customResourceClasses,

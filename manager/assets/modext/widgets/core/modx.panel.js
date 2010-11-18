@@ -225,7 +225,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         }
     }
 
-    ,setLabel: function(flds,vals){
+    ,setLabel: function(flds,vals,bp){
         if (!Ext.isArray(flds)) { flds = flds[flds]; }
         if (!Ext.isArray(vals)) { vals = valss[vals]; }
         var f,v;
@@ -234,7 +234,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         
             if (!f) return;
             v = String.format('{0}',vals[i]);
-            if (f.xtype == 'checkbox' || f.xtype == 'radio') {
+            if ((f.xtype == 'checkbox' || f.xtype == 'radio') && flds[i] == 'published') {
                 f.setBoxLabel(v);
             } else {
                 f.label.update(v);

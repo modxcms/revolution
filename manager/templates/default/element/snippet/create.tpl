@@ -1,2 +1,2 @@
-{extends file='element/snippet/mutate.tpl'}
-{modblock name='ab'}{/modblock}
+<div id="modx-panel-snippet-div"></div>
+{$onSnipFormPrerender}

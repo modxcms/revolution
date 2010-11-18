@@ -47,6 +47,21 @@ if (!$template->save()) {
     return $modx->error->failure($modx->lexicon('template_err_duplicate'));
 }
 
+/* duplicate template var associations */
+$c = $modx->newQuery('modTemplateVarTemplate');
+$c->where(array(
+    'templateid' => $sourceTemplate->get('id'),
+));
+$c->sortby('rank','ASC');
+$sourceTVTs = $modx->getCollection('modTemplateVarTemplate',$c);
+foreach ($sourceTVTs as $sourceTVT) {
+    $tvt = $modx->newObject('modTemplateVarTemplate');
+    $tvt->set('tmplvarid',$sourceTVT->get('tmplvarid'));
+    $tvt->set('rank',$sourceTVT->get('rank'));
+    $tvt->set('templateid',$template->get('id'));
+    $tvt->save();
+}
+
 /* log manager action */
 $modx->logManagerAction('template_duplicate','modTemplate',$template->get('id'));
 

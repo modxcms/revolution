@@ -26,6 +26,9 @@ if ($managerLanguage) {
 }
 unset($managerLanguage);
 
+/* get version information */
+$currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
+
 /* update settings_version */
 $settings_version = $this->xpdo->getObject('modSystemSetting', array(
     'key' => 'settings_version',
@@ -37,9 +40,22 @@ if ($settings_version == null) {
     $settings_version->set('namespace','core');
     $settings_version->set('area','system');
 }
-$currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
 $settings_version->set('value', $currentVersion['full_version']);
 $settings_version->save();
+
+/* update settings_distro */
+$settings_distro = $this->xpdo->getObject('modSystemSetting', array(
+    'key' => 'settings_distro',
+));
+if ($settings_distro == null) {
+    $settings_distro = $this->xpdo->newObject('modSystemSetting');
+    $settings_distro->set('key','settings_distro');
+    $settings_distro->set('xtype','textfield');
+    $settings_distro->set('namespace','core');
+    $settings_distro->set('area','system');
+}
+$settings_distro->set('value', trim($currentVersion['distro'], '@'));
+$settings_distro->save();
 
 /* make sure admin user (1) has proper group and role */
 $adminUser = $this->xpdo->getObject('modUser', 1);
@@ -294,7 +310,7 @@ if (!$setting) {
                             $permission->save();
                         }
                     }
- 
+
                 }
             }
         }
@@ -323,6 +339,108 @@ if (!$setting) {
     $setting->set('area','system');
     $setting->set('value','1.0');
     $setting->save();
+}
+
+/* upgrade FC rules */
+$ct = $modx->getCount('modFormCustomizationProfile');
+if (empty($ct)) {
+    $c = $modx->newQuery('modActionDom');
+    $c->leftJoin('modAccessActionDom','Access');
+    $c->where(array(
+        'modActionDom.active' => true,
+    ));
+    $c->sortby('Access.principal','ASC');
+    $c->sortby('modActionDom.action','ASC');
+    $c->sortby('modActionDom.constraint_field','ASC');
+    $rules = $modx->getCollection('modActionDom',$c);
+
+    $currentProfile = 0;
+    $currentAction = 0;
+    $currentSet = 0;
+    $currentConstraintField = '';
+    $usergroup = false;
+    foreach ($rules as $rule) {
+        $newSet = false;
+
+        /* if a new usergroup, assign a new profile */
+        if (!isset($currentUserGroup) || $currentUserGroup != $rule->get('usergroup')) {
+            if ($rule->get('usergroup') != 0) {
+                $usergroup = $modx->getObject('modUserGroup',$rule->get('usergroup'));
+                if (!$usergroup) continue;
+                $currentUserGroup = $usergroup->get('id');
+            } else { /* if no usergroup */
+                $usergroup = false;
+                $currentUserGroup = 0;
+            }
+
+            $profile = $modx->newObject('modFormCustomizationProfile');
+            if ($usergroup) {
+                $profile->set('name','Default: '.$usergroup->get('name'));
+                $profile->set('description','Default profile based on import from Revolution upgrade for '.$usergroup->get('name').' User Group.');
+            } else {
+                $profile->set('name','Default');
+                $profile->set('description','Default profile based on import from Revolution upgrade.');
+            }
+            $profile->set('active',true);
+            if (!$profile->save()) {
+                $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not create modFormCustomizationProfile object: '.print_r($profile->toArray(),true));
+            }
+            $currentProfile = $profile->get('id');
+
+            /* create user group record */
+            if ($usergroup) {
+                $fcpug = $modx->newObject('modFormCustomizationProfileUserGroup');
+                $fcpug->set('usergroup',$usergroup->get('id'));
+                $fcpug->set('profile',$profile->get('id'));
+                if (!$fcpug->save()) {
+                    $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not associate Profile to User Group: '.print_r($fcpug->toArray(),true));
+                }
+            }
+        } else {
+            $modx->log(xPDO::LOG_LEVEL_DEBUG,'Skipping Profile creation, already has one for this rule.');
+        }
+
+        /* if moving to a new action, create a new set */
+        if ($currentAction != $rule->get('action')) {
+            $currentAction = $rule->get('action');
+            $newSet = true;
+        }
+        /* if constraint is different, create a new set */
+        if ($currentConstraintField != $rule->get('constraint_field')) {
+            $currentConstraintField = $rule->get('constraint_field');
+            $newSet = true;
+        }
+
+        /* if generating a new set */
+        if ($newSet) {
+            $set = $modx->newObject('modFormCustomizationSet');
+            $set->set('profile',$currentProfile);
+            $set->set('action',$rule->get('action'));
+            $set->set('active',true);
+            $set->set('constraint',$rule->get('constraint'));
+            $set->set('constraint_field',$rule->get('constraint_field'));
+            $set->set('constraint_class','modResource');
+            if (!$set->save()) {
+                $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not save new Set: '.print_r($set->toArray(),true));
+            }
+            $currentSet = $set->get('id');
+        }
+        $rule->set('set',$currentSet);
+
+        /* flip tvMove name/value */
+        if ($rule->get('rule') == 'tvMove') {
+            $name = $rule->get('name');
+            $rule->set('name',$rule->get('value'));
+            $rule->set('value',$name);
+        }
+        if (!$rule->save()) {
+            $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not save new modActionDom rule: '.print_r($rule->toArray(),true));
+        }
+    }
+
+    /* remove all inactive rules */
+    $rules = $modx->getCollection('modActionDom',array('active' => false));
+    foreach ($rules as $rule) { $rule->remove(); }
 }
 
 return true;

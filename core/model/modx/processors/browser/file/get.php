@@ -13,7 +13,18 @@ $modx->lexicon->load('file');
 /* format filename */
 $filename = rawurldecode($scriptProperties['file']);
 
-$modx->getService('fileHandler','modFileHandler');
+/* get working context */
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 $file = $modx->fileHandler->make($filename);
 
 if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf'));

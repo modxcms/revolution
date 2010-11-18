@@ -9,6 +9,10 @@
 $classes = array(
     'modAccessPolicyTemplate',
     'modAccessPolicyTemplateGroup',
+    'modFormCustomizationProfile',
+    'modFormCustomizationProfileUserGroup',
+    'modFormCustomizationSet',
+    'modActionField',
 );
 if (!empty($classes)) {
     $this->createTable($classes);
@@ -107,3 +111,12 @@ if ($setting) {
     $setting->set('value',$v);
     $setting->save();
 }
+
+
+/* add set field/index to modActionDom */
+$class = 'modActionDom';
+$table = $modx->getTableName($class);
+$sql = "ALTER TABLE {$table} ADD `set` INT(11) NULL DEFAULT '0' AFTER `id`";
+$modx->exec($sql);
+$sql = "ALTER TABLE {$table} ADD INDEX `set` (`set`)";
+$modx->exec($sql);

@@ -59,7 +59,7 @@ class modLexicon {
     protected $_paths = array();
     /**
      * An array of loaded topic strings
-     * 
+     *
      * @var array $_loadedTopics
      */
     protected $_loadedTopics = array();
@@ -115,10 +115,12 @@ class modLexicon {
         if (!empty($prefix)) {
             $lex = array();
             $lang = $this->_lexicon;
-            foreach ($lang as $k => $v) {
-                if (strpos($k,$prefix) !== false) {
-                    $key = $removePrefix ? str_replace($prefix,'',$k) : $k;
-                    $lex[$key] = $v;
+            if (is_array($lang)) {
+                foreach ($lang as $k => $v) {
+                    if (strpos($k,$prefix) !== false) {
+                        $key = $removePrefix ? str_replace($prefix,'',$k) : $k;
+                        $lex[$key] = $v;
+                    }
                 }
             }
             return $lex;
@@ -318,7 +320,7 @@ class modLexicon {
         $topics = array();
         if (!is_dir($lexPath)) return $topics;
         foreach (new DirectoryIterator($lexPath) as $topic) {
-            if (in_array($topic,array('.','..','.svn','_notes'))) continue;
+            if (in_array($topic,array('.','..','.svn','.git','_notes'))) continue;
             if (!$topic->isReadable()) continue;
 
             if ($topic->isFile()) {
@@ -342,7 +344,7 @@ class modLexicon {
         $lexPath = str_replace('//','/',$corePath.'/lexicon/');
         $languages = array();
         foreach (new DirectoryIterator($lexPath) as $language) {
-            if (in_array($language,array('.','..','.svn','_notes','country'))) continue;
+            if (in_array($language,array('.','..','.svn','.git','_notes','country'))) continue;
             if (!$language->isReadable()) continue;
 
             if ($language->isDir()) {

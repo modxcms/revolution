@@ -25,6 +25,7 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 
 /* build query */
 $c = $modx->newQuery('modAccessPolicyTemplate');
+$c->innerJoin('modAccessPolicyTemplateGroup','TemplateGroup');
 $count = $modx->getCount('modAccessPolicyTemplate',$c);
 
 
@@ -36,6 +37,7 @@ $subc->where(array(
 $subc->prepare();
 $c->select(array(
     'modAccessPolicyTemplate.*',
+    'TemplateGroup.name AS template_group_name',
 ));
 $c->select('('.$subc->toSql().') AS '.$modx->escape('total_permissions'));
 

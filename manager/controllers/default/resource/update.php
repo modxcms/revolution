@@ -64,7 +64,7 @@ if (is_array($onDocFormPrerender)) {
 $modx->smarty->assign('onDocFormPrerender',$onDocFormPrerender);
 
 /* handle default parent */
-$parentname = $context->getOption('site_name');
+$parentname = $context->getOption('site_name', '', $modx->_userConfig);
 if ($resource->get('parent') != 0) {
     $parent = $modx->getObject('modResource',$resource->get('parent'));
     if ($parent != null) {
@@ -95,14 +95,14 @@ $publish_document = $modx->hasPermission('publish_document');
 $access_permissions = $modx->hasPermission('access_permissions');
 
 /* register JS scripts */
-$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $context->getOption('which_editor');
+$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $context->getOption('which_editor', '', $modx->_userConfig);
 $modx->smarty->assign('which_editor',$rte);
 
 /*
  *  Initialize RichText Editor
  */
 /* Set which RTE */
-if ($context->getOption('use_editor') && !empty($rte)) {
+if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)) {
     /* invoke OnRichTextEditorRegister event */
     $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
     $modx->smarty->assign('text_editors',$text_editors);
@@ -124,7 +124,7 @@ if ($context->getOption('use_editor') && !empty($rte)) {
     }
 }
 
-$managerUrl = $context->getOption('manager_url');
+$managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
 $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');

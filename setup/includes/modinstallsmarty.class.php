@@ -37,7 +37,7 @@ class modInstallSmarty extends Smarty {
     public $_derived;
 
     function __construct(array $params= array ()) {
-        parent :: Smarty();
+        parent :: __construct();
 
         /* Set up configuration variables for Smarty. */
         $this->template_dir = MODX_SETUP_PATH . 'templates/';

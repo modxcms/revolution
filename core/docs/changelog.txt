@@ -2,8 +2,36 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2814] Added longtitle, description, template to Quick Update/Create
+- [#2789] Add check to make sure safe_mode is off in setup
+- [#2565] Improve Quick Create/Update Resource to move settings into tab rather than fieldset
+- [#2807] Add tree_default_sort System Setting for configuring the default sort setting for the Resource tree
+- [#2803] Fix css issue with portal blocks on manager dashboard in Fx
+- Add new Form Customization UI, including Form Customization Profiles and Sets; much easier editing of FC rules
+- Fix issue with modInstallSmarty constructor due to Smarty upgrade
+- [#2799] Remove ext3 debug files to save space
+- [#2801] Fix bug with checkbox tvs without specified value options
+- Upgrade Smarty to 3.0.4
+- [#2782] Add changelog to Package View page
+- [#2782] Add ability to view changelog when installing a package via the "changelog" package attribute (similar to readme)
+- [#2770] Ensure email TV input type validates email
+- [#2776] Fix issue where context settings grid was not filterable
+- [#2790] Ensure "number" TV types restrict input to numbers only
+- [#2730] Fix rendering issue with policy template/group grids
+- [#2794] Allow TV URL output render to handle values that are straight Resource IDs
+- [#2741] Fix bug where Resource Group associations were not copied when duplicating a Resource
+- [#2746] Fix bug where email was sent in registration email rather than username
+- [#2733] Fix bug where Template Var associations were not copied when duplicating a Template
+- [#2742] Fix deprecated evtid reference in plugin duplicate processor
+- Fix various bugs with context settings and wctx param
+- Fix bug where modX::getDocumentChildrenTVars ignores docsort parameter
+- [#2743] Connectors using wrong permissions with processors
+- [#2758] Add modProcessorResponse class to better handle processor responses and error messages
+- [#2758] Add $modx->runProcessor($action,$scriptProperties,$options) to better handle processor execution; deprecated $modx->executeProcessor
+- [#84] Make distribution name available in manager
+- [#2666] Prevent sendRedirect() from preserving request parameters unless specified
 - [#2721] Fixed issue with per page items in MODx.grid.Grid that was incorrectly handling int value
-- [#2691] Fixed issue with duplicate aliases when duplicating a Resource 
+- [#2691] Fixed issue with duplicate aliases when duplicating a Resource
 - [#2506] Flag properties as dirty when importing from a file on properties grid
 - [#2592] Prevent cache files from being allowed in upload_files setting
 - Improved areas dropdown filter to include number of settings that have that area

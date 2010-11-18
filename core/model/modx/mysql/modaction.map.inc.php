@@ -172,5 +172,13 @@ $xpdo_meta_map['modAction']= array (
       'owner' => 'local',
       'cardinality' => 'many',
     ),
+    'Fields' => 
+    array (
+      'class' => 'modActionField',
+      'local' => 'id',
+      'foreign' => 'action',
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
   ),
 );

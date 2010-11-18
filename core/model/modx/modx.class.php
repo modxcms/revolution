@@ -295,7 +295,7 @@ class modX extends xPDO {
 
     /**
      * Sanitizes a string
-     * 
+     *
      * @param string $str The string to sanitize
      * @param array $chars An array of chars to remove
      * @param string $allowedTags A list of tags to allow.
@@ -330,7 +330,7 @@ class modX extends xPDO {
      */
     public function __construct($configPath= '', array $options = array()) {
         global $database_type, $database_server, $dbase, $database_user,
-               $database_password, $database_connection_charset, $table_prefix;
+               $database_password, $database_connection_charset, $table_prefix, $site_id;
         modX :: protect();
         if (empty ($configPath)) {
             $configPath= MODX_CORE_PATH . 'config/';
@@ -404,10 +404,14 @@ class modX extends xPDO {
             $extPackages = $this->getOption('extension_packages');
             $extPackages = $this->fromJSON($extPackages);
             if (!empty($extPackages)) {
-                foreach ($extPackages as $packageName => $package) {
-                    if (!empty($package) && !empty($package['path'])) {
-                        $tblPrefix = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
-                        $this->addPackage($packageName,$package['path'],$tblPrefix);
+                foreach ($extPackages as $extPackage) {
+                    if (!is_array($extPackage)) continue;
+                    
+                    foreach ($extPackage as $packageName => $package) {
+                        if (!empty($package) && !empty($package['path'])) {
+                            $tblPrefix = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
+                            $this->addPackage($packageName,$package['path'],$tblPrefix);
+                        }
                     }
                 }
             }
@@ -788,9 +792,9 @@ class modX extends xPDO {
     }
 
     /**
-     * Sends a redirect to the specified URL using the specified method.
+     * Sends a redirect to the specified URL using the specified options.
      *
-     * Valid $type values include:
+     * Valid 'type' option values include:
      *    REDIRECT_REFRESH  Uses the header refresh method
      *    REDIRECT_META  Sends a a META HTTP-EQUIV="Refresh" tag to the output
      *    REDIRECT_HEADER  Uses the header location method
@@ -798,14 +802,19 @@ class modX extends xPDO {
      * REDIRECT_HEADER is the default.
      *
      * @param string $url The URL to redirect the client browser to.
-     * @param integer $count_attempts The number of times to attempt redirection.
-     * @param string $type The type of redirection to attempt.
+     * @param array|boolean $options An array of options for the redirect OR
+     * indicates if redirect attempts should be counted and limited to 3 (latter is deprecated
+     * usage; use count_attempts in options array).
+     * @param string $type The type of redirection to attempt (deprecated, use type in
+     * options array).
+     * @param string $responseCode The type of HTTP response code HEADER to send for the
+     * redirect (deprecated, use responseCode in options array)
      */
-    public function sendRedirect($url, $count_attempts= 0, $type= '', $responseCode = '') {
+    public function sendRedirect($url, $options= false, $type= '', $responseCode = '') {
         if (!$this->getResponse()) {
             $this->log(modX::LOG_LEVEL_FATAL, "Could not load response class.");
         }
-        $this->response->sendRedirect($url, $count_attempts, $type, $responseCode);
+        $this->response->sendRedirect($url, $options, $type, $responseCode);
     }
 
     /**
@@ -1329,32 +1338,63 @@ class modX extends xPDO {
      * - location - A prefix to load processor files from, will prepend to the
      * action parameter.
      *
+     * @deprecated 2.0.5 Will be removed in 2.1.
      * @param array $options An array of options.
      * @return mixed $result The result of the processor.
      */
     public function executeProcessor($options) {
+        $scriptProperties = $options;
+        unset($scriptProperties['action'],$scriptProperties['location'],$scriptProperties['processors_path']);
+        $response = $this->runProcessor('',$scriptProperties,$options);
+        return $response->getResponse();
+    }
+
+    /**
+     * Loads and runs a specific processor.
+     *
+     * @param string $action The processor to run, eg: context/update
+     * @param array $scriptProperties Optional. An array of parameters to pass to the processor.
+     * @param array $options Optional. An array of options for running the processor, such as:
+     *
+     * - processors_path - If specified, will override the default MODx processors path.
+     * - location - A prefix to load processor files from, will prepend to the action parameter
+     * (Note: location will be deprecated in future Revolution versions.)
+     *
+     * @return mixed The result of the processor.
+     */
+    public function runProcessor($action = '',$scriptProperties = array(),$options = array()) {
         $result = null;
-        if (is_array($options) && !empty($options) && isset($options['action']) && $this->getRequest()) {
-            $processor = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
-            if (isset($options['location']) && !empty($options['location'])) $processor .= $options['location'] . '/';
-            $processor .= str_replace('../', '', $options['action']) . '.php';
-            if (file_exists($processor)) {
-                if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
-                if (!isset($this->error)) $this->request->loadErrorHandler();
-
-                /* create scriptProperties array from HTTP GPC vars */
-                if (!isset($_POST)) $_POST = array();
-                if (!isset($_GET)) $_GET = array();
-                $scriptProperties = array_merge($_GET,$_POST);
-                if (isset($_FILES) && !empty($_FILES)) {
-                    $scriptProperties = array_merge($scriptProperties,$_FILES);
-                }
-
-                $modx =& $this;
-                $result = include $processor;
+        /* backwards compat for $options['action'] */
+        if (empty($action)) {
+            if (!empty($options['action'])) {
+                $action = $options['action'];
             } else {
-                $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processor} does not exist; " . print_r($options, true));
+                return $result;
             }
+        }
+
+        /* calculate processor file path from options and action */
+        $processor = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
+        if (isset($options['location']) && !empty($options['location'])) $processor .= $options['location'] . '/';
+        $processor .= str_replace('../', '', $action . '.php');
+
+        if (file_exists($processor)) {
+            if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
+            if (!isset($this->error)) $this->request->loadErrorHandler();
+
+            /* create scriptProperties array from HTTP GPC vars */
+            if (!isset($_POST)) $_POST = array();
+            if (!isset($_GET)) $_GET = array();
+            $scriptProperties = array_merge($scriptProperties,$_GET,$_POST);
+            if (isset($_FILES) && !empty($_FILES)) {
+                $scriptProperties = array_merge($scriptProperties,$_FILES);
+            }
+
+            $modx =& $this;
+            $response = include $processor;
+            $result = new modProcessorResponse($this,$response);
+        } else {
+            $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processor} does not exist; " . print_r($options, true));
         }
         return $result;
     }
@@ -1789,7 +1829,7 @@ class modX extends xPDO {
             'sc.published' => $published,
             'sc.deleted' => '0'
         ));
-        if (!empty($sort)) $criteria->sortby($docsort, $docsortdir);
+        if (!empty($docsort)) $criteria->sortby($docsort, $docsortdir);
         if ($objCollection = $this->getCollection('modResource', $criteria)) {
             foreach ($objCollection as $obj) {
                 $objArray= array();

@@ -32,7 +32,6 @@ while (list($item, $itemvalue) = each ($index_list)) {
     );
     $i++;
 }
-
 $this->xpdo->smarty->assign('cbdefaults',implode(',',$defaults));
 $this->xpdo->smarty->assign('opts',$opts);
 return $this->xpdo->smarty->fetch('element/tv/renders/input/checkbox.tpl');

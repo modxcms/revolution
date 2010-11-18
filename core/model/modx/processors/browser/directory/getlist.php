@@ -18,7 +18,19 @@ $modx->lexicon->load('file');
 $hideFiles = !empty($scriptProperties['hideFiles']) && $scriptProperties['hideFiles'] != 'false' ? true : false;
 $stringLiterals = !empty($scriptProperties['stringLiterals']) ? true : false;
 $dir = !isset($scriptProperties['id']) || $scriptProperties['id'] == 'root' ? '' : str_replace('n_','',$scriptProperties['id']);
-$ctx = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'mgr';
+
+/* get working context */
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 
 $directories = array();
 $files = array();
@@ -38,7 +50,6 @@ $canUpdateFile = $modx->hasPermission('file_update');
 $canUpload = $modx->hasPermission('file_upload');
 
 /* get base paths and sanitize incoming paths */
-$modx->getService('fileHandler','modFileHandler');
 $dir = $modx->fileHandler->sanitizePath($dir);
 $dir = $modx->fileHandler->postfixSlash($dir);
 $root = $modx->fileHandler->getBasePath(false);
@@ -60,7 +71,7 @@ $imagesExts = array('jpg','jpeg','png','gif','ico');
 
 /* iterate through directories */
 foreach (new DirectoryIterator($fullPath) as $file) {
-    if (in_array($file,array('.','..','.svn','_notes'))) continue;
+    if (in_array($file,array('.','..','.svn','.git','_notes'))) continue;
     if (!$file->isReadable()) continue;
 
     $fileName = $file->getFilename();
@@ -75,7 +86,7 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         if ($canRemoveDirs) $cls .= ' premove';
         if ($canUpdateDirs) $cls .= ' pupdate';
         if ($canUpload) $cls .= ' pupload';
-        
+
         $directories[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
@@ -95,9 +106,9 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         if ($canRemoveFile) $cls .= ' premove';
         if ($canUpdateFile) $cls .= ' pupdate';
         $encFile = rawurlencode($dir.$fileName);
-        $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile.'&ctx='.$ctx : null;
+        $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile.'&wctx='.$workingContext->get('key') : null;
         $url = $baseUrl.trim(str_replace('//','/',$dir.$fileName),'/');
-        $url = ($modx->getOption('filemanager_url_relative',true) ? '../' : '').$url;
+        $url = ($modx->getOption('filemanager_url_relative',null,true) ? '../' : '').$url;
         $files[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,

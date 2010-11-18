@@ -48,7 +48,7 @@ if (is_array($events) && !empty($events)) {
     foreach($events as $event) {
         $newEvent = $modx->newObject('modPluginEvent');
         $newEvent->set('pluginid',$plugin->get('id'));
-        $newEvent->set('evtid',$event->get('evtid'));
+        $newEvent->set('event',$event->get('event'));
         $newEvent->set('priority',$event->get('priority'));
         if ($newEvent->save() == false) {
             $plugin->remove();

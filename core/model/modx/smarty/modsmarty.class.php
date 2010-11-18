@@ -46,7 +46,7 @@ class modSmarty extends Smarty {
      * @var Smarty
      * @access protected
      */
-	public $smarty;
+    public $smarty;
     /**
      * Any custom blocks loaded
      * @var array
@@ -60,11 +60,11 @@ class modSmarty extends Smarty {
      */
     public $_derived;
 
-	function __construct(modX &$modx, $params= array ()) {
-		parent :: Smarty();
+    function __construct(modX &$modx, $params= array ()) {
+        parent :: __construct();
         $this->modx= & $modx;
 
-		/* set up configuration variables for Smarty. */
+        /* set up configuration variables for Smarty. */
         $this->template_dir = $modx->getOption('manager_path') . 'templates/';
         $this->compile_dir  = $modx->getOption(xPDO::OPT_CACHE_PATH) . 'mgr/smarty/';
         $this->config_dir   = $modx->getOption('core_path') . 'model/smarty/configs';

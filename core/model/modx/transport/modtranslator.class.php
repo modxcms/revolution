@@ -82,7 +82,7 @@ class modTranslator extends modTranslate095 {
             $handle = opendir($path);
             if ($handle) {
                 while (($file = readdir($handle)) !== false) {
-                    if (is_dir($path . $file . '/') && $file !== '.svn' && !in_array($file, array('.', '..'))) {
+                    if (is_dir($path . $file . '/') && $file !== '.svn' && $file !== '.git' && !in_array($file, array('.', '..'))) {
                         array_push($this->paths, $path . $file . '/');
                         $this->getAllSubdirs($path . $file . '/');
                     }
@@ -142,7 +142,7 @@ class modTranslator extends modTranslate095 {
                 if ($directory) {
                     while (false !== ($filename= readdir($directory))) {
                         $extension= substr($filename, strrpos($filename, '.') + 1);
-                        if ($filename != '.' && $filename != '..' && $filename != '.svn' && in_array($extension,$this->patterns)) {
+                        if ($filename != '.' && $filename != '..' && $filename != '.svn' && $filename != '.git' && in_array($extension,$this->patterns)) {
                             $file= $path . $filename;
                             if (!is_dir($file)) {
                                 $this->files[]= $file;

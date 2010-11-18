@@ -1,24 +1,22 @@
 <?php
 /**
  * Generate a thumbnail
- * 
+ *
  * @package modx
  * @subpackage processors.system
  */
 if (!isset($modx)) die();
-$ctx = !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
-$oldContext = $modx->context->get('key');
-$modx->switchContext($ctx);
 
 /* get modFileHandler service */
-$modx->getService('fileHandler','modFileHandler');
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : $modx->context->get('key');
+$modx->getService('fileHandler','modFileHandler','',array('context' => $wctx));
 
 /* filter path */
 $src = $modx->getOption('src',$scriptProperties,'');
 if (empty($src)) return '';
 
 /* determine absolute path to image from URL passed that is context-specific */
-$basePath = $modx->fileHandler->getBasePath(false,$ctx);
+$basePath = $modx->fileHandler->getBasePath(false);
 $src = $basePath.$src;
 /* strip out double slashes */
 $src = str_replace(array('///','//'),'/',$src);
@@ -57,5 +55,4 @@ $phpThumb->generate();
 $phpThumb->cache();
 $phpThumb->output();
 
-$modx->switchContext($oldContext);
 return '';

@@ -1,2 +1,5 @@
-{extends file='resource/symlink/mutate.tpl'}
-{modblock name='ab'}{/modblock}
+<div id="modx-panel-symlink-div"></div>
+
+{include file='resource/_javascript.tpl'}
+
+{$onDocFormPrerender}

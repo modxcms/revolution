@@ -9,6 +9,7 @@ $xpdo_meta_map['modActionDom']= array (
   'table' => 'actiondom',
   'fields' => 
   array (
+    'set' => 0,
     'action' => 0,
     'name' => '',
     'description' => NULL,
@@ -25,6 +26,15 @@ $xpdo_meta_map['modActionDom']= array (
   ),
   'fieldMeta' => 
   array (
+    'set' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
     'action' => 
     array (
       'dbtype' => 'int',
@@ -135,6 +145,22 @@ $xpdo_meta_map['modActionDom']= array (
   ),
   'indexes' => 
   array (
+    'set' => 
+    array (
+      'alias' => 'set',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'set' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
     'action' => 
     array (
       'alias' => 'action',
@@ -218,6 +244,14 @@ $xpdo_meta_map['modActionDom']= array (
   ),
   'aggregates' => 
   array (
+    'Set' => 
+    array (
+      'class' => 'modFormCustomizationSet',
+      'local' => 'set',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
     'Action' => 
     array (
       'class' => 'modAction',

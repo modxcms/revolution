@@ -15,8 +15,20 @@ $modx->lexicon->load('file');
 if (empty($scriptProperties['mode'])) return $modx->error->failure($modx->lexicon('file_err_chmod_ns'));
 if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
+/* get working context */
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
+
 /* get base paths and sanitize incoming paths */
-$modx->getService('fileHandler','modFileHandler');
 $root = $modx->fileHandler->getBasePath(false);
 $directoryPath = $modx->fileHandler->sanitizePath($scriptProperties['dir']);
 $directoryPath = $modx->fileHandler->postfixSlash($directoryPath);

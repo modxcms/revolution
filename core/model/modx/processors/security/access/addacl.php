@@ -52,6 +52,8 @@ if ($acl === null) {
     $acl->fromArray($scriptProperties);
     if ($acl->save() == false) {
         return $modx->error->failure($modx->lexicon('access_err_save'));
+    } elseif ($modx->getUser()) {
+        $modx->user->getAttributes(array(), '', true);
     }
 } else {
     return $modx->error->failure($modx->lexicon('access_err_ae'));

@@ -33,8 +33,22 @@ abstract class modInstallTest {
         $this->_checkContexts();
         $this->_checkConfig();
         $this->_checkDatabase();
+        $this->_checkSafeMode();
 
         return $this->results;
+    }
+
+    /**
+     * Ensures safe_mode is off
+     */
+    protected function _checkSafeMode() {
+        $this->title('safe_mode',$this->install->lexicon('test_safe_mode_start').' ');
+        $safeMode = @ini_get('safe_mode') ? true : false;
+        if ($safeMode) {
+            $this->fail('safe_mode','',$this->install->lexicon('test_safe_mode_fail'));
+        } else {
+            $this->pass('safe_mode');
+        }
     }
 
     /**

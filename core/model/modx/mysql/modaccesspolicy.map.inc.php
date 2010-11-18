@@ -172,13 +172,5 @@ $xpdo_meta_map['modAccessPolicy']= array (
       'owner' => 'local',
       'cardinality' => 'many',
     ),
-    'Permissions' => 
-    array (
-      'class' => 'modAccessPermission',
-      'local' => 'id',
-      'foreign' => 'policy',
-      'owner' => 'local',
-      'cardinality' => 'many',
-    ),
   ),
 );
