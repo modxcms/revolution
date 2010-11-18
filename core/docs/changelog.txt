@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2817] Reordered System top menu for easier navigation
 - [#2820] Add DOM id to Profile page tabs
 - [#2814] Add longtitle, description, template to Quick Update/Create
 - [#2789] Add check to make sure safe_mode is off in setup
