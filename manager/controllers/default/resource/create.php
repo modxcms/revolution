@@ -182,10 +182,15 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
-$this->checkFormCustomizationRules($parent != null ? $parent : null,true);
+if ($parent == null) {
+    $parent = $modx->newObject('modResource');
+    $parent->set('id',0);
+    $parent->set('parent',0);
+}
+$this->checkFormCustomizationRules($parent,true);
 /* fire the FC rules on the actual resource as well; this allows moving of TVs
  * and other FC manips after the default template FC rule */
-$resource = $modx->newObject('modResource');
-$resource->fromArray($defaults);
-$this->checkFormCustomizationRules($resource);
+//$resource = $modx->newObject('modResource');
+//$resource->fromArray($defaults);
+//$this->checkFormCustomizationRules($resource);
 return $modx->smarty->fetch('resource/create.tpl');

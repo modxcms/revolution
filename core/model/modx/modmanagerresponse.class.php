@@ -142,7 +142,7 @@ class modManagerResponse extends modResponse {
      *
      * @param xPDOObject $obj If passed, will validate against for rules with constraints.
      */
-    public function checkFormCustomizationRules($obj = null,$forParent = false) {
+    public function checkFormCustomizationRules(&$obj = null,$forParent = false) {
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
         $c->innerJoin('modFormCustomizationSet','Set');
@@ -160,22 +160,30 @@ class modManagerResponse extends modResponse {
             'ProfileUserGroup.usergroup:IN' => $userGroups,
             'OR:ProfileUserGroup.usergroup:IS' => null,
         ),xPDOQuery::SQL_AND,null,2);
-        if (is_object($obj) && $obj instanceof modResource) {
-            $c->where(array(
-                'Set.template:=' => $obj->get('template'),
-                'OR:Set.template:=' => 0,
-            ),xPDOQuery::SQL_AND,null,2);
-        }
         $c->select(array(
             'modActionDom.*',
             'Set.constraint_class',
             'Set.constraint_field',
             'Set.constraint',
+            'Set.template',
         ));
+        /* sort by template to get template default value first
+         * TODO: eventually add rank to Sets to allow more fine-grained control
+         */
+        $c->sortby('Set.template','ASC');
         $c->sortby('modActionDom.rank','ASC');
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
         foreach ($domRules as $rule) {
+            /* filter by template here, so that prior rules can affect template which will change rules */
+            if ($obj) {
+                $tpl = $rule->get('template');
+                if (!empty($tpl)) {
+                    if ($obj->get('template') != $tpl) continue;
+                }
+            }
+
+            /* filter by constraints */
             $constraintClass = $rule->get('constraint_class');
             if (!empty($constraintClass)) {
                 if (empty($obj) || !($obj instanceof $constraintClass)) continue;
@@ -184,6 +192,10 @@ class modManagerResponse extends modResponse {
                 if ($obj->get($constraintField) != $constraint) {
                     continue;
                 }
+            }
+            /* if setting a default value, do so here */
+            if ($rule->get('rule') == 'fieldDefault') {
+                $obj->set($rule->get('name'),$rule->get('value'));
             }
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;
