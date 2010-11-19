@@ -48,18 +48,22 @@ MODx.panel.FCSet = function(config) {
                     }}
                 }
             },{
-                xtype: 'statictextfield'
+                xtype: 'modx-combo-template'
                 ,fieldLabel: _('template')
                 ,description: _('set_template_desc')
-                ,name: 'templatename'
-                ,hiddenName: 'templatename'
-                ,value: config.record.templatename
-                ,hidden: config.record.template == 0 ? true : false
+                ,name: 'template'
+                ,hiddenName: 'template'
+                ,value: config.record.template || 0
                 ,anchor: '90%'
                 ,allowBlank: true
+                ,lazyInit: false
+                ,lazyRender: false
                 ,baseParams: {
                     action: 'getList'
                     ,combo: true
+                }
+                ,listeners: {
+                    'select': {fn:this.changeTemplate,scope:this}
                 }
             },{
                 xtype: 'textarea'
@@ -173,6 +177,22 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
         Ext.getCmp('modx-grid-fc-set-fields').getStore().commitChanges();
         Ext.getCmp('modx-grid-fc-set-tabs').getStore().commitChanges();
         Ext.getCmp('modx-grid-fc-set-tvs').getStore().commitChanges();
+    }
+
+    ,changeTemplate: function(cb) {
+        if (cb.getValue() != this.config.record.template) {
+            Ext.Msg.confirm(_('set_change_template'),_('set_change_template_confirm'),function(e) {
+                if (e == 'yes') {
+                    this.on('success',function() {
+                        location.href = location.href;
+                    },this);
+                    this.submit();
+                } else {
+                    cb.setValue(this.config.record.template);
+                }
+            },this);
+        }
+        return false;
     }
 });
 Ext.reg('modx-panel-fc-set',MODx.panel.FCSet);

@@ -343,11 +343,16 @@ if (!$setting) {
 
 /* upgrade FC rules */
 $ct = $modx->getCount('modFormCustomizationProfile');
-if (empty($ct)) {
+if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
     $c = $modx->newQuery('modActionDom');
+    $c->innerJoin('modAction','Action');
     $c->leftJoin('modAccessActionDom','Access');
     $c->where(array(
         'modActionDom.active' => true,
+    ));
+    $c->select(array(
+        'modActionDom.*',
+        'Action.controller',
     ));
     $c->sortby('Access.principal','ASC');
     $c->sortby('modActionDom.action','ASC');
@@ -358,6 +363,7 @@ if (empty($ct)) {
     $currentAction = 0;
     $currentSet = 0;
     $currentConstraintField = '';
+    $currentConstraintValue = '';
     $usergroup = false;
     foreach ($rules as $rule) {
         $newSet = false;
@@ -410,6 +416,10 @@ if (empty($ct)) {
             $currentConstraintField = $rule->get('constraint_field');
             $newSet = true;
         }
+        if ($currentConstraintValue != $rule->get('constraint')) {
+            $currentConstraintValue = $rule->get('constraint');
+            $newSet = true;
+        }
 
         /* if generating a new set */
         if ($newSet) {
@@ -417,15 +427,33 @@ if (empty($ct)) {
             $set->set('profile',$currentProfile);
             $set->set('action',$rule->get('action'));
             $set->set('active',true);
-            $set->set('constraint',$rule->get('constraint'));
-            $set->set('constraint_field',$rule->get('constraint_field'));
-            $set->set('constraint_class','modResource');
+
+            /* set Set template if constraint is template */
+            if ($rule->get('constraint_field') == 'template') {
+                $set->set('template',$rule->get('constraint'));
+            } else {
+                /* otherwise a non-template field, set as constraint */
+                $set->set('constraint',$rule->get('constraint'));
+                $set->set('constraint_field',$rule->get('constraint_field'));
+                $set->set('constraint_class','modResource');
+            }
             if (!$set->save()) {
                 $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not save new Set: '.print_r($set->toArray(),true));
             }
             $currentSet = $set->get('id');
         }
         $rule->set('set',$currentSet);
+
+        /* if constraint is a template, erase since it is now in set */
+        if ($rule->get('constraint_field') == 'template') {
+            $rule->set('constraint','');
+            $rule->set('constraint_field','');
+            $rule->set('constraint_class','');
+        }
+        /* if action is resource/create, set rule to for_parent */
+        if ($rule->get('controller') == 'resource/create') {
+            $rule->set('for_parent',true);
+        }
 
         /* flip tvMove name/value */
         if ($rule->get('rule') == 'tvMove') {
@@ -435,6 +463,27 @@ if (empty($ct)) {
         }
         if (!$rule->save()) {
             $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not save new modActionDom rule: '.print_r($rule->toArray(),true));
+        }
+
+        /* explode csv fields into new rules */
+        $field = $rule->get('name');
+        $fields = explode(',',$field);
+        if (count($fields) > 1) {
+            $idx = 0;
+            foreach ($fields as $fld) {
+                if ($idx != 0) {
+                    /* create new rule from other fields */
+                    $newRule = $modx->newObject('modActionDom');
+                    $newRule->fromArray($rule->toArray());
+                    $newRule->set('name',$fld);
+                    $newRule->save();
+                } else {
+                    /* save orig rule to first field */
+                    $rule->set('name',$fld);
+                    $rule->save();
+                }
+                $idx++;
+            }
         }
     }
 
