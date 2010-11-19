@@ -24,6 +24,15 @@ $set->set('action',$scriptProperties['action_id']);
 $set->save();
 
 $action = $set->getOne('Action');
+
+/* clear old rules for set */
+$oldRules = $modx->getCollection('modActionDom',array(
+    'set' => $set->get('id'),
+));
+foreach ($oldRules as $or) {
+    $or->remove();
+}
+
 $newRules = array();
 
 /* calculate field rules */
@@ -232,15 +241,6 @@ foreach ($tvs as $tvData) {
         $rule->set('rank',$rank);
         $newRules[] = $rule;
     }
-}
-
-/* clear old rules for set */
-$oldRules = $modx->getCollection('modActionDom',array(
-    'set' => $set->get('id'),
-    'action' => $set->get('action'),
-));
-foreach ($oldRules as $or) {
-    $or->remove();
 }
 
 /* save new rules to set */

@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2819] Fix issue with FC rules and execution order due to setting default templates, constraints
 - [#2830] Permit ability to change FC Set Template when editing a FC Set
 - [#2827] Fix issues related to FC upgrade with Rules with comma-separated names, differing constraints, and template setting
 - Fix issue related to #2625 with deferred tabpanel rendering that caused unpublishing when using Quick Update/Create
