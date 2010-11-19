@@ -500,6 +500,9 @@ $_lang['setting_session_name_desc'] = 'Verwenden Sie diese Einstellung, um den S
 $_lang['setting_settings_version'] = 'MODx-Version';
 $_lang['setting_settings_version_desc'] = 'Die aktuell verwendete Version von MODx Revolution.';
 
+$_lang['setting_settings_distro'] = 'MODx-Distribution';
+$_lang['setting_settings_distro_desc'] = 'Die momentan installierte MODx-Distribution.';
+
 $_lang['setting_set_header'] = 'HTTP-Header setzen';
 $_lang['setting_set_header_desc'] = 'Wenn diese Einstellung aktiviert ist, versucht MODx, die HTTP-Header für Ressourcen zu setzen.';
 
@@ -531,6 +534,9 @@ $_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein
 
 $_lang['setting_topmenu_show_descriptions'] = 'Beschreibungen im Hauptmenü anzeigen';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, werden die Beschreibungen in den Menüpunkten des MODx-Manager-Hauptmenüs nicht angezeigt.';
+
+$_lang['setting_tree_default_sort'] = 'Feld, nach dem der Ressourcen-Baum standardmäßig sortiert wird';
+$_lang['setting_tree_default_sort_desc'] = 'Das Feld, nach dem der Ressourcen-Baum standardmäßig beim Öffnen des Managers sortiert wird.';
 
 $_lang['setting_tree_root_id'] = 'Ressourcen-Baum-Basis-ID';
 $_lang['setting_tree_root_id_desc'] = 'Geben Sie hier eine gültige ID einer Ressource ein, um den Ressourcen-Baum links bei dieser Ressource als Basis beginnen zu lassen. Benutzer können dann nur Ressourcen sehen, die Kinder der angegebenen Ressource sind.';
