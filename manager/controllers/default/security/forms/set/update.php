@@ -76,6 +76,8 @@ foreach ($setData['tvs'] as $tv) {
     );
 }
 
+if (empty($setArray['template'])) $setArray['template'] = 0;
+
 /* register JS scripts */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/fc/modx.fc.common.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/fc/modx.panel.fcset.js');
