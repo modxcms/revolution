@@ -179,7 +179,7 @@ class modManagerResponse extends modResponse {
             if ($obj) {
                 $tpl = $rule->get('template');
                 if (!empty($tpl)) {
-                    if ($obj->get('template') != $tpl) continue;
+                    if ((int)$obj->get('template') != (int)$tpl) continue;
                 }
             }
 
@@ -189,12 +189,34 @@ class modManagerResponse extends modResponse {
                 if (empty($obj) || !($obj instanceof $constraintClass)) continue;
                 $constraintField = $rule->get('constraint_field');
                 $constraint = $rule->get('constraint');
-                if ($obj->get($constraintField) != $constraint) {
-                    continue;
+
+                /* if checking a parent, get all parents up the tree */
+                if (($rule->get('for_parent') && $constraintField == 'id') || $constraintField == 'parent') {
+                    
+                    $rCtx = $obj->get('context_key');
+                    $oCtx = $this->modx->context->get('key');
+                    if (!empty($rCtx) && $rCtx != 'mgr') {
+                        $this->modx->switchContext($rCtx);
+                    }
+                    $parents = $this->modx->getParentIds($obj->get('id'));
+                    /* if on resource/create, set obj id to parent as well */
+                    if ($rule->get('for_parent')) {
+                        $parents[] = $obj->get('id');
+                    }
+                    if (!empty($rCtx)) {
+                        $this->modx->switchContext($oCtx);
+                    }
+                    if (!in_array($constraint,$parents)) {
+                        continue;
+                    }
+                } else { /* otherwise just check constraint */
+                    if ($obj->get($constraintField) != $constraint) {
+                        continue;
+                    }
                 }
             }
             /* if setting a default value, do so here */
-            if ($rule->get('rule') == 'fieldDefault') {
+            if ($obj && $rule->get('rule') == 'fieldDefault') {
                 $obj->set($rule->get('name'),$rule->get('value'));
             }
             $r = $rule->apply();

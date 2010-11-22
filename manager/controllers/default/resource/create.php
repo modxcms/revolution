@@ -137,15 +137,31 @@ $c->where(array(
 ));
 $fcDt = $modx->getObject('modActionDom',$c);
 if ($fcDt) {
-    $p = $parent ? $parent->get('id') : 0;
+    $parentIds = array();
+    if ($parent) { /* ensure get all parents */
+        $p = $parent ? $parent->get('id') : 0;
+        $rCtx = $parent->get('context_key');
+        $oCtx = $modx->context->get('key');
+        if (!empty($rCtx) && $rCtx != 'mgr') {
+            $modx->switchContext($rCtx);
+        }
+        $parentIds = $modx->getParentIds($p);
+        $parentIds[] = $p;
+        $parentIds = array_unique($parentIds);
+        if (!empty($rCtx)) {
+            $modx->switchContext($oCtx);
+        }
+    } else {
+        $parentIds = array(0);
+    }
+
     $constraintField = $fcDt->get('constraint_field');
-    if ($constraintField == 'id' && $p == $fcDt->get('constraint')) {
+    if ($constraintField == 'id' && in_array($fcDt->get('constraint'),$parentIds)) {
         $default_template = $fcDt->get('value');
     } else if (empty($constraintField)) {
         $default_template = $fcDt->get('value');
     }
 }
-
 $defaults = array(
     'template' => $default_template,
     'content_type' => 1,
@@ -187,6 +203,7 @@ if ($parent == null) {
     $parent->set('id',0);
     $parent->set('parent',0);
 }
+$parent->set('template',$default_template);
 $this->checkFormCustomizationRules($parent,true);
 /* fire the FC rules on the actual resource as well; this allows moving of TVs
  * and other FC manips after the default template FC rule */
