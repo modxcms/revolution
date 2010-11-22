@@ -84,10 +84,7 @@ class modResponse {
                 $this->modx->invokeEvent('OnWebPagePrerender');
             }
 
-            $mtime= microtime();
-            $mtime= explode(" ", $mtime);
-            $mtime= $mtime[1] + $mtime[0];
-            $totalTime= ($mtime - $this->modx->startTime);
+            $totalTime= ($this->modx->getMicroTime() - $this->modx->startTime);
             $queries= 0;
             $queryTime= 0;
             if ($this->modx->db !== null && $this->modx->db instanceof DBAPI) {
@@ -171,6 +168,7 @@ class modResponse {
             if ($contentType->get('binary')) {
                 $this->modx->resource->_output = $this->modx->resource->process();
             }
+            @session_write_close();
             echo $this->modx->resource->_output;
             while (@ ob_end_flush()) {}
             exit();
@@ -241,6 +239,7 @@ class modResponse {
                 $header= 'Location: ' . $url;
                 break;
         }
+        @session_write_close();
         if (!empty($options['responseCode']) && (strpos($options['responseCode'], '30') !== false)) {
             header($options['responseCode']);
         }

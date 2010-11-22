@@ -297,7 +297,7 @@ class xPDO {
             $this->cachePath = $this->config[xPDO::OPT_CACHE_PATH];
         }
     }
-    
+
     /**
      * Create the PDO connection to a database specified in the configuration.
      *
@@ -824,7 +824,7 @@ class xPDO {
 
     /**
      * Add criteria when requesting a derivative class row automatically.
-     * 
+     *
      * This applies class_key filtering for single-table inheritance queries and may
      * provide a convenient location for similar features in the future.
      *
@@ -1490,6 +1490,7 @@ class xPDO {
         }
         if ($level === xPDO::LOG_LEVEL_FATAL) {
             while (@ob_end_flush()) {}
+            @session_write_close();
             exit ('[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''));
         }
         if ($this->_debug === true || $level <= $this->logLevel) {

@@ -65,4 +65,5 @@ if ($modx->getOption('cache_lang_js',null,false)) {
     header('Content-Type: application/x-javascript');
     echo $output;
 }
+@session_write_close();
 exit();

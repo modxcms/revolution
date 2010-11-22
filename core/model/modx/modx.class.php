@@ -406,7 +406,7 @@ class modX extends xPDO {
             if (!empty($extPackages)) {
                 foreach ($extPackages as $extPackage) {
                     if (!is_array($extPackage)) continue;
-                    
+
                     foreach ($extPackage as $packageName => $package) {
                         if (!empty($package) && !empty($package['path'])) {
                             $tblPrefix = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
@@ -788,6 +788,7 @@ class modX extends xPDO {
         $errorPageTitle = $this->getOption('error_pagetitle', $options, 'Error 503: Site temporarily unavailable');
         $errorMessage = $this->getOption('error_message', $options, '<h1>' . $this->getOption('site_name', $options, 'Error 503') . '</h1><p>Site temporarily unavailable.</p>');
         echo "<html><head><title>{$errorPageTitle}</title></head><body>{$errorMessage}</body></html>";
+        @session_write_close();
         exit();
     }
 

@@ -111,7 +111,7 @@ class modManagerResponse extends modResponse {
                     $this->body .= include_once $controllersPath.'footer.php';
                 }
 
-                
+
             } else {
                 $this->body = $this->modx->error->failure($modx->lexicon('action_err_nfs',array(
                     'id' => $action,
@@ -134,6 +134,7 @@ class modManagerResponse extends modResponse {
         } else {
             echo $this->body;
         }
+        @session_write_close();
         exit();
     }
 
@@ -397,7 +398,7 @@ class modManagerResponse extends modResponse {
     /**
      * Adds a lexicon topic to this page's language topics to load. Will load
      * the topic as well.
-     * 
+     *
      * @param string $topic The topic to load, in standard namespace:topic format
      * @return boolean True if successful
      */
@@ -424,7 +425,7 @@ class modManagerResponse extends modResponse {
      */
     public function setLangTopics(array $topics = array()) {
         if (!is_array($topics) || empty($topics)) return false;
-        
+
         $topics = array_unique($topics);
         $topics = implode(',',$topics);
         return $this->modx->smarty->assign('_lang_topics',$topics);

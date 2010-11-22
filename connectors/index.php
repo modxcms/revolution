@@ -41,7 +41,10 @@ $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 
 $modx->initialize($ctx);
 
 if (defined('MODX_REQP') && MODX_REQP === false) {
-} else if (!$modx->context->checkPolicy('load')) { die(); }
+} else if (!$modx->context->checkPolicy('load')) {
+    @session_write_close();
+    die();
+}
 
 if ($ctx == 'mgr') {
     $ml = $modx->getOption('manager_language',null,'en');

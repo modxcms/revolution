@@ -59,7 +59,7 @@ if (!empty($pluginResult)) {
 $o = '';
 foreach ($renderDirectories as $renderDirectory) {
     if (empty($renderDirectory) || !is_dir($renderDirectory)) continue;
-    
+
     $renderFile = $renderDirectory.$scriptProperties['type'].'.php';
     if (file_exists($renderFile)) {
         $o = include $renderFile;
@@ -68,4 +68,5 @@ foreach ($renderDirectories as $renderDirectory) {
 }
 
 echo $o;
+@session_write_close();
 die();

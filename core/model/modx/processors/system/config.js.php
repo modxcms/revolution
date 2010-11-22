@@ -85,7 +85,7 @@ if ($modx->user) {
 
     $o .= 'MODx.user = {id:"'.$modx->user->get('id').'",username:"'.$modx->user->get('username').'"}';
 }
-
+@session_write_close();
 header('Content-Type: application/x-javascript');
 echo $o;
 die();

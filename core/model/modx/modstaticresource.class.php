@@ -156,6 +156,7 @@ class modStaticResource extends modResource {
                         header($headerString);
                     }
                 }
+                @session_write_close();
                 while (@ob_end_clean()) {}
                 readfile($file);
                 die();
