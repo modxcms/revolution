@@ -14,6 +14,7 @@ if ($oldSet == null) return $modx->error->failure($modx->lexicon('set_err_nf'));
 
 $newSet = $modx->newObject('modFormCustomizationSet');
 $newSet->fromArray($oldSet->toArray());
+$newSet->set('constraint_class','modResource');
 $newSet->set('active',false);
 
 if ($newSet->save() === false) {

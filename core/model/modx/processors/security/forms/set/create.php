@@ -11,6 +11,7 @@ $modx->lexicon->load('formcustomization');
 /* create new set object */
 $set = $modx->newObject('modFormCustomizationSet');
 $set->fromArray($scriptProperties);
+$set->set('constraint_class','modResource');
 $set->set('action',$scriptProperties['action_id']);
 
 /* save set */

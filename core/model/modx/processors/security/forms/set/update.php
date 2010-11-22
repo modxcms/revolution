@@ -20,6 +20,7 @@ if ($set == null) return $modx->error->failure($modx->lexicon('set_err_nf'));
 
 $scriptProperties['active'] = !empty($scriptProperties['active']) ? true : false;
 $set->fromArray($scriptProperties);
+$set->set('constraint_class','modResource');
 $set->set('action',$scriptProperties['action_id']);
 $set->save();
 

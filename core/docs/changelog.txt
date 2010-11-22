@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2834] Fix issue where constraint class was not set on new FC rules
 - [#2819] Fix issue with FC rules and execution order due to setting default templates, constraints
 - [#2830] Permit ability to change FC Set Template when editing a FC Set
 - [#2827] Fix issues related to FC upgrade with Rules with comma-separated names, differing constraints, and template setting
