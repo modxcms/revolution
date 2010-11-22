@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2839] Fix bug with failed login count not being updated
 - Add ability to view permissions inherited when viewing an ACL row in a grid
 - [#2834] Fix issue where constraint class was not set on new FC rules
 - [#2819] Fix issue with FC rules and execution order due to setting default templates, constraints
