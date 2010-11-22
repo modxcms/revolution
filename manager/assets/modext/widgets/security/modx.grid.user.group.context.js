@@ -1,6 +1,11 @@
 
 MODx.grid.UserGroupContext = function(config) {
     config = config || {};
+    this.exp = new Ext.grid.RowExpander({
+        tpl : new Ext.Template(
+            '<p class="desc">{permissions}</p>'
+        )
+    });
     Ext.applyIf(config,{
         id: 'modx-grid-user-group-contexts'
         ,url: MODx.config.connectors_url+'security/access/usergroup/context.php'
@@ -8,10 +13,11 @@ MODx.grid.UserGroupContext = function(config) {
             action: 'getList'
             ,usergroup: config.usergroup
         }
-        ,fields: ['id','target','principal','authority','authority_name','policy','policy_name','cls']
+        ,fields: ['id','target','principal','authority','authority_name','policy','policy_name','permissions','cls']
         ,paging: true
         ,hideMode: 'offsets'
-        ,columns: [{
+        ,plugins: [this.exp]
+        ,columns: [this.exp,{
             header: _('context')
             ,dataIndex: 'target'
             ,width: 120

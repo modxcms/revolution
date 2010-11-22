@@ -47,7 +47,8 @@ $c->select('
     `modAccessResourceGroup`.*,
     `Target`.`name` AS `name`,
     CONCAT(`Role`.`name`," - ",`modAccessResourceGroup`.`authority`) AS `authority_name`,
-    `Policy`.`name` AS `policy_name`
+    `Policy`.`name` AS `policy_name`,
+    `Policy`.`data` AS `policy_data`
 ');
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
@@ -57,6 +58,19 @@ $acls = $modx->getCollection('modAccessResourceGroup', $c);
 $list = array();
 foreach ($acls as $acl) {
     $aclArray = $acl->toArray();
+
+    /* get permissions list */
+    $data = $aclArray['policy_data'];
+    unset($aclArray['policy_data']);
+    $data = $modx->fromJSON($data);
+    if (!empty($data)) {
+        $permissions = array();
+        foreach ($data as $perm => $v) {
+            $permissions[] = $perm;
+        }
+        $aclArray['permissions'] = implode(', ',$permissions);
+    }
+    
 
     $aclArray['menu'] = array(
         array(

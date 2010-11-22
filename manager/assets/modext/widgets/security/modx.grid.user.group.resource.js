@@ -1,6 +1,11 @@
 
 MODx.grid.UserGroupResourceGroup = function(config) {
     config = config || {};
+    this.exp = new Ext.grid.RowExpander({
+        tpl : new Ext.Template(
+            '<p class="desc">{permissions}</p>'
+        )
+    });
     Ext.applyIf(config,{
         id: 'modx-grid-user-group-resource-groups'
         ,url: MODx.config.connectors_url+'security/access/usergroup/resourcegroup.php'
@@ -10,8 +15,9 @@ MODx.grid.UserGroupResourceGroup = function(config) {
         }
         ,paging: true
         ,hideMode: 'offsets'
-        ,fields: ['id','target','name','principal','authority','authority_name','policy','policy_name','context_key','menu']
-        ,columns: [{
+        ,fields: ['id','target','name','principal','authority','authority_name','policy','policy_name','context_key','permissions','menu']
+        ,plugins: [this.exp]
+        ,columns: [this.exp,{
             header: _('resource_group')
             ,dataIndex: 'name'
             ,width: 120
