@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2779] Added Content Editor policy to default list of policies
 - [#2819] Fix bug in FC rules where parent constraint was not traversing up tree to inherit parents
 - [#2744] Fix bug with empty template and TV values
 - [#2841] Fix bug with File Edit page and modFileHandler reference

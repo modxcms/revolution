@@ -73,4 +73,15 @@ $policies['6']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
+$policies['7']= $xpdo->newObject('modAccessPolicy');
+$policies['7']->fromArray(array (
+  'id' => 7,
+  'name' => 'Content Editor',
+  'description' => 'Context administration policy with limited, content-editing related Permissions.',
+  'parent' => 0,
+  'class' => '',
+  'data' => '{"change_profile":true,"class_map":true,"countries":true,"edit_document":true,"frames":true,"help":true,"home":true,"load":true,"logout":true,"resource_tree":true,"save_document":true,"view":true,"view_document":true,"new_document":true}',
+  'lexicon' => 'permissions',
+), '', true, true);
+
 return $policies;

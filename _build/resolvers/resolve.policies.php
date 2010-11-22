@@ -1,6 +1,6 @@
 <?php
 /**
- * Resolve Policies to their PolicyTemplates
+ * Resolve Default Policies to their PolicyTemplates
  */
 $success= false;
 
@@ -8,6 +8,7 @@ $success= false;
 $map = array(
     'Resource' => 'ResourceTemplate',
     'Administrator' => 'AdministratorTemplate',
+    'Content Editor' => 'AdministratorTemplate',
     'Load Only' => 'ObjectTemplate',
     'Load, List and View' => 'ObjectTemplate',
     'Object' => 'ObjectTemplate',
