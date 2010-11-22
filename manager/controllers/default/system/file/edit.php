@@ -11,7 +11,7 @@ $wctx = !empty($_GET['wctx']) ? $_GET['wctx'] : $modx->context->get('key');
 
 /* format filename */
 $filename = preg_replace('#([\\\\]+|/{2,})#', '/',$_GET['file']);
-$modx->getService('fileHandler', 'modFileHandler', array('context' => $wctx));
+$modx->getService('fileHandler', 'modFileHandler', '',array('context' => $wctx));
 $basePath = $modx->fileHandler->getBasePath(false);
 $file = $modx->fileHandler->make($basePath.$filename);
 
