@@ -5,7 +5,7 @@
 {foreach from=$categories item=category}
 {if count($category->tvs) > 0}
 
-    <div id="modx-tv-tab{$category->id}" class="x-tab" title="{$category->category|default:$_lang.uncategorized|ucfirst}">
+    <div id="modx-tv-tab{$category->id}" class="x-tab{if $category->hidden}-hidden{/if}" title="{$category->category|default:$_lang.uncategorized|ucfirst}">
     
     {foreach from=$category->tvs item=tv name='tv'}
 {if $tv->type NEQ "hidden"}
@@ -86,7 +86,11 @@ Ext.onReady(function() {
         }
         ,deferredRender: false
     });
-    {/literal}{/if}{literal}
+    {/literal}{/if}
+
+    MODx.tvCounts = {$tvCounts};
+    MODx.tvMap = {$tvMap};
+    {literal}
 });    
 // ]]>
 </script>
