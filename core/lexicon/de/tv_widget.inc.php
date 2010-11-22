@@ -14,6 +14,7 @@ $_lang['class'] = 'CSS-Klasse';
 $_lang['date'] = 'Datum';
 $_lang['date_format'] = 'Datumsformat';
 $_lang['date_use_current'] = 'Wenn ohne Wert, aktuelles Datum verwenden';
+$_lang['default'] = 'Standard';
 $_lang['delim'] = 'Liste mit Trennzeichen';
 $_lang['delimiter'] = 'Trennzeichen';
 $_lang['dropdown'] = 'DropDown-Liste';

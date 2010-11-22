@@ -134,8 +134,8 @@ $_lang['setting_cache_lang_js_desc'] = 'Wenn diese Option auf "ja" gesetzt ist, 
 $_lang['setting_cache_lexicon_topics'] = 'Lexikon-Themen cachen';
 $_lang['setting_cache_lexicon_topics_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden alle Lexikon-Themen gecacht, wodurch die Ladezeiten für die Internationalisierungs-Funktionalität drastisch reduziert werden. Es wird dringend empfohlen, diese Einstellung auf "Ja" zu belassen.';
 
-$_lang['setting_cache_noncore_lexicon_topics'] = 'Nicht zum Core-Namespace gehörende Lexikon-Themen cachen';
-$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Wenn diese Einstellung deaktiviert ist, werden nicht zum Core-Namespace gehörende Lexikon-Themen nicht gecacht. Es ist nützlich, dies zu deaktivieren, wenn Sie Ihre eigenen Extras entwickeln.';
+$_lang['setting_cache_noncore_lexicon_topics'] = 'Nicht zum Core-Namensraum gehörende Lexikon-Themen cachen';
+$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Wenn diese Einstellung deaktiviert ist, werden nicht zum Core-Namensraum gehörende Lexikon-Themen nicht gecacht. Es ist nützlich, dies zu deaktivieren, wenn Sie Ihre eigenen Extras entwickeln.';
 
 $_lang['setting_cache_resource'] = 'Partiellen Ressourcen-Cache aktivieren';
 $_lang['setting_cache_resource_desc'] = 'Partielles Ressourcen-Caching kann für jede Ressource einzeln konfiguriert werden, wenn dieses Feature aktiviert ist. Das Deaktivieren dieses Features deaktiviert es global.';
@@ -148,6 +148,9 @@ $_lang['setting_cache_scripts_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt,
 
 $_lang['setting_cache_system_settings'] = 'Systemeinstellungen-Cache aktivieren';
 $_lang['setting_cache_system_settings_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden die Systemeinstellungen gecacht, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
+
+$_lang['setting_clear_cache_refresh_trees'] = 'Aktualisiere Bäume, wenn Site-Cache geleert wird';
+$_lang['setting_clear_cache_refresh_trees_desc'] = 'Wenn diese Einstellung aktiviert ist, werden die Ressourcen-, Element- und Dateibäume aktualisiert, wenn der Site-Cache geleert wird.';
 
 $_lang['setting_compress_css'] = 'Komprimiertes CSS verwenden';
 $_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODx eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
@@ -497,6 +500,9 @@ $_lang['setting_session_name_desc'] = 'Verwenden Sie diese Einstellung, um den S
 $_lang['setting_settings_version'] = 'MODx-Version';
 $_lang['setting_settings_version_desc'] = 'Die aktuell verwendete Version von MODx Revolution.';
 
+$_lang['setting_settings_distro'] = 'MODx-Distribution';
+$_lang['setting_settings_distro_desc'] = 'Die momentan installierte MODx-Distribution.';
+
 $_lang['setting_set_header'] = 'HTTP-Header setzen';
 $_lang['setting_set_header_desc'] = 'Wenn diese Einstellung aktiviert ist, versucht MODx, die HTTP-Header für Ressourcen zu setzen.';
 
@@ -528,6 +534,9 @@ $_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein
 
 $_lang['setting_topmenu_show_descriptions'] = 'Beschreibungen im Hauptmenü anzeigen';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, werden die Beschreibungen in den Menüpunkten des MODx-Manager-Hauptmenüs nicht angezeigt.';
+
+$_lang['setting_tree_default_sort'] = 'Feld, nach dem der Ressourcen-Baum standardmäßig sortiert wird';
+$_lang['setting_tree_default_sort_desc'] = 'Das Feld, nach dem der Ressourcen-Baum standardmäßig beim Öffnen des Managers sortiert wird.';
 
 $_lang['setting_tree_root_id'] = 'Ressourcen-Baum-Basis-ID';
 $_lang['setting_tree_root_id_desc'] = 'Geben Sie hier eine gültige ID einer Ressource ein, um den Ressourcen-Baum links bei dieser Ressource als Basis beginnen zu lassen. Benutzer können dann nur Ressourcen sehen, die Kinder der angegebenen Ressource sind.';
