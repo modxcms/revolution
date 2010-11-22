@@ -321,7 +321,7 @@ MODx.panel.SymLink = function(config) {
         xtype: 'modx-panel-resource-tv'
         ,resource: config.resource
         ,class_key: config.record.class_key || 'modSymLink'
-        ,template: config.record.template || MODx.config.default_template
+        ,template: config.record.template
         
     });
     if (config.access_permissions) {

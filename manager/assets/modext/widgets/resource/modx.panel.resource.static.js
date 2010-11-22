@@ -342,7 +342,7 @@ MODx.panel.Static = function(config) {
         xtype: 'modx-panel-resource-tv'
         ,resource: config.resource
         ,class_key: config.record.class_key || 'modStaticResource'
-        ,template: config.record.template || MODx.config.default_template
+        ,template: config.record.template
     });
     if (config.access_permissions) {
         it.push({

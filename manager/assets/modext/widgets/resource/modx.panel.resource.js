@@ -371,7 +371,7 @@ MODx.panel.Resource = function(config) {
         ,collapsed: false
         ,resource: config.resource
         ,class_key: config.record.class_key || 'modDocument'
-        ,template: config.record.template || MODx.config.default_template
+        ,template: config.record.template
         ,anchor: '100%'
     });
     if (config.access_permissions) {
