@@ -43,6 +43,7 @@ MODx.panel.Resource = function(config) {
         ,items: [{
             xtype: (config.resource ? 'statictextfield' : 'hidden')
             ,fieldLabel: _('id')
+            ,description: '<b>[[*id]]</b><br />'
             ,name: 'id'
             ,id: 'modx-resource-id'
             ,anchor: '97%'
@@ -59,7 +60,7 @@ MODx.panel.Resource = function(config) {
                 ,items: [{
                     xtype: 'modx-combo-template'
                     ,fieldLabel: _('resource_template')
-                    ,description: _('resource_template_help')
+                    ,description: '<b>[[*template]]</b><br />'+_('resource_template_help')
                     ,name: 'template'
                     ,id: 'modx-resource-template'
                     ,anchor: '97%'
@@ -81,7 +82,7 @@ MODx.panel.Resource = function(config) {
                 ,items: [{
                     xtype: 'checkbox'
                     ,boxLabel: _('resource_published')
-                    ,description: _('resource_published_help')
+                    ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
                     ,name: 'published'
                     ,id: 'modx-resource-published'
                     ,inputValue: 1
@@ -91,7 +92,7 @@ MODx.panel.Resource = function(config) {
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_pagetitle')
-            ,description: _('resource_pagetitle_help')
+            ,description: '<b>[[*pagetitle]]</b><br />'+_('resource_pagetitle_help')
             ,name: 'pagetitle'
             ,id: 'modx-resource-pagetitle'
             ,maxLength: 255
@@ -107,7 +108,7 @@ MODx.panel.Resource = function(config) {
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_longtitle')
-            ,description: _('resource_longtitle_help')
+            ,description: '<b>[[*longtitle]]</b><br />'+_('resource_longtitle_help')
             ,name: 'longtitle'
             ,id: 'modx-resource-longtitle'
             ,maxLength: 255
@@ -117,7 +118,7 @@ MODx.panel.Resource = function(config) {
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_description')
-            ,description: _('resource_description_help')
+            ,description: '<b>[[*description]]</b><br />'+_('resource_description_help')
             ,name: 'description'
             ,id: 'modx-resource-description'
             ,maxLength: 255
@@ -127,7 +128,7 @@ MODx.panel.Resource = function(config) {
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_alias')
-            ,description: _('resource_alias_help')
+            ,description: '<b>[[*alias]]</b><br />'+_('resource_alias_help')
             ,name: 'alias'
             ,id: 'modx-resource-alias'
             ,maxLength: 100
@@ -137,7 +138,7 @@ MODx.panel.Resource = function(config) {
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_link_attributes')
-            ,description: _('resource_link_attributes_help')
+            ,description: '<b>[[*link_attributes]]</b><br />'+_('resource_link_attributes_help')
             ,name: 'link_attributes'
             ,id: 'modx-resource-link-attributes'
             ,maxLength: 255
@@ -147,7 +148,7 @@ MODx.panel.Resource = function(config) {
         },{
             xtype: 'textarea'
             ,fieldLabel: _('resource_summary')
-            ,description: _('resource_summary_help')
+            ,description: '<b>[[*introtext]]</b><br />'+_('resource_summary_help')
             ,name: 'introtext'
             ,id: 'modx-resource-introtext'
             ,grow: true
@@ -157,7 +158,7 @@ MODx.panel.Resource = function(config) {
         },{
             xtype: 'modx-field-parent-change'
             ,fieldLabel: _('resource_parent')
-            ,description: _('resource_parent_help')
+            ,description: '<b>[[*parent]]</b><br />'+_('resource_parent_help')
             ,name: 'parent-cmb'
             ,id: 'modx-resource-parent'
             ,value: config.record.parent || 0
@@ -170,7 +171,7 @@ MODx.panel.Resource = function(config) {
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_menutitle')
-            ,description: _('resource_menutitle_help')
+            ,description: '<b>[[*menutitle]]</b><br />'+_('resource_menutitle_help')
             ,name: 'menutitle'
             ,id: 'modx-resource-menutitle'
             ,maxLength: 255
@@ -180,7 +181,7 @@ MODx.panel.Resource = function(config) {
         },{
             xtype: 'numberfield'
             ,fieldLabel: _('resource_menuindex')
-            ,description: _('resource_menuindex_help')
+            ,description: '<b>[[*menuindex]]</b><br />'+_('resource_menuindex_help')
             ,name: 'menuindex'
             ,id: 'modx-resource-menuindex'
             ,width: 60
@@ -189,7 +190,7 @@ MODx.panel.Resource = function(config) {
         },{
             xtype: 'checkbox'
             ,fieldLabel: _('resource_hide_from_menus')
-            ,description: _('resource_hide_from_menus_help')
+            ,description: '<b>[[*hidemenu]]</b><br />'+_('resource_hide_from_menus_help')
             ,name: 'hidemenu'
             ,id: 'modx-resource-hidemenu'
             ,inputValue: 1
@@ -222,7 +223,7 @@ MODx.panel.Resource = function(config) {
     va.push({
         xtype: 'checkbox'
         ,fieldLabel: _('resource_folder')
-        ,description: _('resource_folder_help')
+        ,description: '<b>[[*isfolder]]</b><br />'+_('resource_folder_help')
         ,name: 'isfolder'
         ,id: 'modx-resource-isfolder'
         ,inputValue: 1
@@ -231,7 +232,7 @@ MODx.panel.Resource = function(config) {
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_richtext')
-        ,description: _('resource_richtext_help')
+        ,description: '<b>[[*richtext]]</b><br />'+_('resource_richtext_help')
         ,name: 'richtext'
         ,id: 'modx-resource-richtext'
         ,inputValue: 1
@@ -240,7 +241,7 @@ MODx.panel.Resource = function(config) {
     },{
         xtype: 'xdatetime'
         ,fieldLabel: _('resource_publishedon')
-        ,description: _('resource_publishedon_help')
+        ,description: '<b>[[*publishedon]]</b><br />'+_('resource_publishedon_help')
         ,name: 'publishedon'
         ,id: 'modx-resource-publishedon'
         ,allowBlank: true
@@ -254,7 +255,7 @@ MODx.panel.Resource = function(config) {
         va.push({
             xtype: 'xdatetime'
             ,fieldLabel: _('resource_publishdate')
-            ,description: _('resource_publishdate_help')
+            ,description: '<b>[[*pub_date]]</b><br />'+_('resource_publishdate_help')
             ,name: 'pub_date'
             ,id: 'modx-resource-pub-date'
             ,allowBlank: true
@@ -270,7 +271,7 @@ MODx.panel.Resource = function(config) {
         va.push({
             xtype: 'xdatetime'
             ,fieldLabel: _('resource_unpublishdate')
-            ,description: _('resource_unpublishdate_help')
+            ,description: '<b>[[*unpub_date]]</b><br />'+_('resource_unpublishdate_help')
             ,name: 'unpub_date'
             ,id: 'modx-resource-unpub-date'
             ,allowBlank: true
@@ -284,7 +285,7 @@ MODx.panel.Resource = function(config) {
     va.push({
         xtype: 'checkbox'
         ,fieldLabel: _('resource_searchable')
-        ,description: _('resource_searchable_help')
+        ,description: '<b>[[*searchable]]</b><br />'+_('resource_searchable_help')
         ,name: 'searchable'
         ,id: 'modx-resource-searchable'
         ,inputValue: 1
@@ -293,7 +294,7 @@ MODx.panel.Resource = function(config) {
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_cacheable')
-        ,description: _('resource_cacheable_help')
+        ,description: '<b>[[*cacheable]]</b><br />'+_('resource_cacheable_help')
         ,name: 'cacheable'
         ,id: 'modx-resource-cacheable'
         ,inputValue: 1
@@ -312,6 +313,7 @@ MODx.panel.Resource = function(config) {
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('deleted')
+        ,description: '<b>[[*deleted]]</b>'
         ,name: 'deleted'
         ,id: 'modx-resource-deleted'
         ,inputValue: 1
@@ -321,7 +323,7 @@ MODx.panel.Resource = function(config) {
     },{
         xtype: 'modx-combo-content-type'
         ,fieldLabel: _('resource_content_type')
-        ,description: _('resource_content_type_help')
+        ,description: '<b>[[*content_type]]</b><br />'+_('resource_content_type_help')
         ,name: 'content_type'
         ,hiddenName: 'content_type'
         ,id: 'modx-resource-content-type'
@@ -331,7 +333,7 @@ MODx.panel.Resource = function(config) {
     },{
         xtype: 'modx-combo-content-disposition'
         ,fieldLabel: _('resource_contentdispo')
-        ,description: _('resource_contentdispo_help')
+        ,description: '<b>[[*content_dispo]]</b><br />'+_('resource_contentdispo_help')
         ,name: 'content_dispo'
         ,hiddenName: 'content_dispo'
         ,id: 'modx-resource-content-dispo'
@@ -341,6 +343,7 @@ MODx.panel.Resource = function(config) {
     },{
         xtype: 'modx-combo-class-map'
         ,fieldLabel: _('class_key')
+        ,description: '<b>[[*class_key]]</b><br />'
         ,name: 'class_key'
         ,hiddenName: 'class_key'
         ,id: 'modx-resource-class-key'

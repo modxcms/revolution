@@ -2,6 +2,4 @@
 
 {include file='resource/_javascript.tpl'}
 
-{modblock name='ab'}{/modblock}
-
 {$onDocFormPrerender}
