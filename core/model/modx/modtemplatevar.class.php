@@ -288,17 +288,17 @@ class modTemplateVar extends modElement {
             $c->leftJoin('modAccessActionDom','Access');
             $c->where(array(
                 array(
-                    '(`modActionDom`.`rule` = "tvDefault"
-                   OR `modActionDom`.`rule` = "tvVisible"
-                   OR `modActionDom`.`rule` = "tvTitle")'
+                    '(modActionDom.rule = "tvDefault"
+                   OR modActionDom.rule = "tvVisible"
+                   OR modActionDom.rule = "tvTitle")'
                 ),
-                '"tv'.$this->get('id').'" IN (`name`)',
+                '"tv'.$this->get('id').'" IN (name)',
                 'modActionDom.active' => true,
             ));
             $c->andCondition(array(
-                '((`Access`.`principal_class` = "modUserGroup"
-              AND `Access`.`principal` IN ('.implode(',',$userGroups).'))
-               OR `Access`.`principal` IS NULL)',
+                '((Access.principal_class = "modUserGroup"
+              AND Access.principal IN ('.implode(',',$userGroups).'))
+               OR Access.principal IS NULL)',
             ),null,2);
             $domRules = $this->xpdo->getCollection('modActionDom',$c);
             foreach ($domRules as $rule) {
@@ -754,13 +754,13 @@ class modTemplateVar extends modElement {
             $accessTable = $this->xpdo->getTableName('modAccessResourceGroup');
             $policyTable = $this->xpdo->getTableName('modAccessPolicy');
             $resourceGroupTable = $this->xpdo->getTableName('modTemplateVarResourceGroup');
-            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
-                    "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
-                    "JOIN {$resourceGroupTable} `ResourceGroup` ON `Acl`.`principal_class` = 'modUserGroup' " .
-                    "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
-                    "AND `ResourceGroup`.`tmplvarid` = :element " .
-                    "AND `ResourceGroup`.`documentgroup` = acl.target " .
-                    "GROUP BY `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`";
+            $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                    "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                    "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
+                    "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                    "AND ResourceGroup.tmplvarid = :element " .
+                    "AND ResourceGroup.documentgroup = acl.target " .
+                    "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
             $bindings = array(
                 ':element' => $this->get('id'),
                 ':context' => $context
@@ -777,14 +777,14 @@ class modTemplateVar extends modElement {
             }
             $accessTable = $this->xpdo->getTableName('modAccessCategory');
             $categoryClosureTable = $this->xpdo->getTableName('modCategoryClosure');
-            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
-                    "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
-                    "JOIN {$categoryClosureTable} `CategoryClosure` ON `CategoryClosure`.`descendant` = :category " .
-                    "AND `Acl`.`principal_class` = 'modUserGroup' " .
-                    "AND `CategoryClosure`.`ancestor` = `Acl`.`target` " .
-                    "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
-                    "GROUP BY `target`, `principal`, `authority`, `policy` " .
-                    "ORDER BY `CategoryClosure`.`depth` DESC, `authority` ASC";
+            $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                    "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                    "JOIN {$categoryClosureTable} CategoryClosure ON CategoryClosure.descendant = :category " .
+                    "AND Acl.principal_class = 'modUserGroup' " .
+                    "AND CategoryClosure.ancestor = Acl.target " .
+                    "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                    "GROUP BY target, principal, authority, policy " .
+                    "ORDER BY CategoryClosure.depth DESC, authority ASC";
             $bindings = array(
                 ':category' => $this->get('category'),
                 ':context' => $context,

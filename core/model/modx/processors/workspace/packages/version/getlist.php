@@ -23,8 +23,8 @@ $signatureArray = explode('-',$signature);
 /* get packages */
 $c = $modx->newQuery('transport.modTransportPackage');
 $c->select('
-    `modTransportPackage`.*,
-    `Provider`.`name` AS `provider_name`
+    modTransportPackage.*,
+    Provider.name AS provider_name
 ');
 $c->leftJoin('transport.modTransportProvider','Provider');
 $c->where(array(
@@ -32,11 +32,11 @@ $c->where(array(
     'package_name' => $signatureArray[0],
 ));
 $count = $modx->getCount('modTransportPackage',$c);
-$c->sortby('`modTransportPackage`.`version_major`', 'DESC');
-$c->sortby('`modTransportPackage`.`version_minor`', 'DESC');
-$c->sortby('`modTransportPackage`.`version_patch`', 'DESC');
-$c->sortby('IF(`modTransportPackage`.`release` = "" OR `modTransportPackage`.`release` = "ga" OR `modTransportPackage`.`release` = "pl","z",`release`) DESC','');
-$c->sortby('`modTransportPackage`.`release_index`', 'DESC');
+$c->sortby('modTransportPackage.version_major', 'DESC');
+$c->sortby('modTransportPackage.version_minor', 'DESC');
+$c->sortby('modTransportPackage.version_patch', 'DESC');
+$c->sortby('IF(modTransportPackage.release = "" OR modTransportPackage.release = "ga" OR modTransportPackage.release = "pl","z",release) DESC','');
+$c->sortby('modTransportPackage.release_index', 'DESC');
 if ($isLimit) $c->limit($limit,$start);
 $packages = $modx->getCollection('transport.modTransportPackage',$c);
 

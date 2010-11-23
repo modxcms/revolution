@@ -10,7 +10,7 @@ $stmt = $modx->query('SHOW TABLES');
 if ($stmt && $stmt instanceof PDOStatement) {
     while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
         if (!empty($row[0])) {
-            $sql = 'OPTIMIZE TABLE `'.$modx->getOption('dbname').'`.`'.$row[0].'`';
+            $sql = 'OPTIMIZE TABLE '.$modx->escape($modx->getOption('dbname')).'.'.$modx->escape($row[0]);
             $modx->query($sql);
         }
     }

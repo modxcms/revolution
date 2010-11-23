@@ -353,14 +353,13 @@ class modX extends xPDO {
                 $options
             );
             parent :: __construct(
-                $database_type . ':host=' . $database_server . ';dbname=' . trim($dbase,'`') . ';charset=' . $database_connection_charset,
+                $database_type . ':server=' . $database_server . ';database=' . trim($dbase,'[]'),
                 $database_user,
                 $database_password,
                 $options,
                 array (
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
                     PDO::ATTR_PERSISTENT => false,
-                    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
                 )
             );
             $this->setPackage('modx', MODX_CORE_PATH . 'model/', $table_prefix);
@@ -749,7 +748,7 @@ class modX extends xPDO {
             if (empty($url) && ($context !== $this->context->get('key'))) {
                 $ctx= null;
                 if ($context == '') {
-                    if ($results = $this->query("SELECT `context_key` FROM " . $this->getTableName('modResource') . " WHERE `id` = {$id}")) {
+                    if ($results = $this->query("SELECT context_key FROM " . $this->getTableName('modResource') . " WHERE id = {$id}")) {
                         $contexts= $results->fetchAll(PDO::FETCH_COLUMN);
                         if ($contextKey = reset($contexts)) {
                             $ctx = $this->getContext($contextKey);
@@ -1725,7 +1724,7 @@ class modX extends xPDO {
         elseif (is_array($dg)) {
             $dgn= array ();
             $tbl= $this->getTableName('modResourceGroup');
-            $criteria= new xPDOCriteria($this, "SELECT * FROM {$tbl} WHERE `id` IN (" . implode(",", $dg) . ")");
+            $criteria= new xPDOCriteria($this, "SELECT * FROM {$tbl} WHERE id IN (" . implode(",", $dg) . ")");
             $collResourceGroups= $this->getCollection('modResourceGroup', $criteria);
             foreach ($collResourceGroups as $rg) {
                 $dgn[count($dgn)]= $rg->get('name');
@@ -1747,7 +1746,7 @@ class modX extends xPDO {
      * be removed in 2.1.
      */
     public function getFullTableName($tbl){
-        return '`' . $this->db->config['dbase']. '`.`' .$this->db->config['table_prefix'].$tbl . '`';
+        return $this->escape($this->db->config['dbase']) . '.' . $this->escape($this->db->config['table_prefix'].$tbl);
     }
 
     /**
@@ -1977,7 +1976,7 @@ class modX extends xPDO {
                 $query->sortby('tvtpl.rank');
                 $query->sortby('tv.rank');
             }
-            $query->select('DISTINCT ' . $fields . ', IF(ISNULL(`tvc`.`value`),`tv`.`default_text`,`tvc`.`value`) AS `value`');
+            $query->select('DISTINCT ' . $fields . ', IF(ISNULL(tvc.value),tv.default_text,tvc.value) AS value');
 
             $collection = $this->getCollection('modTemplateVar', $query);
             foreach ($collection as $pk => $tv) {
@@ -2038,7 +2037,7 @@ class modX extends xPDO {
             }
             $query->sortby('tvtpl.rank');
             $query->sortby('tv.rank');
-            $query->select('DISTINCT `tv`.*, IF(ISNULL(`tvc`.`value`),`tv`.`default_text`,`tvc`.`value`) AS `value`');
+            $query->select('DISTINCT tv.*, IF(ISNULL(tvc.value),tv.default_text,tvc.value) AS value');
 
             $collection = $this->getCollection('modTemplateVar', $query);
             foreach ($collection as $pk => $tv) {
@@ -2571,11 +2570,11 @@ class modX extends xPDO {
             switch ($contextKey) {
                 case 'mgr':
                     /* dont load Web Access Service Events */
-                    $service= "`Event`.`service` IN (1,2,4,5,6) AND";
+                    $service= "Event.service IN (1,2,4,5,6) AND";
                     break;
                 default:
                     /* dont load Manager Access Events */
-                    $service= "`Event`.`service` IN (1,3,4,5,6) AND";
+                    $service= "Event.service IN (1,3,4,5,6) AND";
             }
             $pluginEventTbl= $this->getTableName('modPluginEvent');
             $eventTbl= $this->getTableName('modEvent');
@@ -2583,14 +2582,14 @@ class modX extends xPDO {
             $propsetTbl= $this->getTableName('modPropertySet');
             $sql= "
                 SELECT
-                    `Event`.`name` AS `event`,
-                    `PluginEvent`.`pluginid`,
-                    `PropertySet`.`name` AS `propertyset`
-                FROM {$pluginEventTbl} `PluginEvent`
-                    INNER JOIN {$pluginTbl} `Plugin` ON `Plugin`.`id` = `PluginEvent`.`pluginid` AND `Plugin`.`disabled` = 0
-                    INNER JOIN {$eventTbl} `Event` ON {$service} `Event`.`name` = `PluginEvent`.`event`
-                    LEFT JOIN {$propsetTbl} `PropertySet` ON `PluginEvent`.`propertyset` = `PropertySet`.`id`
-                ORDER BY `Event`.`name`, `PluginEvent`.`priority` ASC
+                    Event.name AS event,
+                    PluginEvent.pluginid,
+                    PropertySet.name AS propertyset
+                FROM {$pluginEventTbl} PluginEvent
+                    INNER JOIN {$pluginTbl} Plugin ON Plugin.id = PluginEvent.pluginid AND Plugin.disabled = 0
+                    INNER JOIN {$eventTbl} Event ON {$service} Event.name = PluginEvent.event
+                    LEFT JOIN {$propsetTbl} PropertySet ON PluginEvent.propertyset = PropertySet.id
+                ORDER BY Event.name, PluginEvent.priority ASC
             ";
             $stmt= $this->prepare($sql);
             if ($stmt && $stmt->execute()) {

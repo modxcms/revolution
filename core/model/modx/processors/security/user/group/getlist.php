@@ -26,12 +26,12 @@ $c->where(array(
 ));
 $count = $modx->getCount('modUserGroupMember',$c);
 $c->select('
-    `modUserGroupMember`.*,
-    `UserGroupRole`.`name` AS `rolename`,
-    `UserGroup`.`name` AS `name`
+    modUserGroupMember.*,
+    UserGroupRole.name AS rolename,
+    UserGroup.name AS name
 ');
 
-$c->sortby('`UserGroup`.`'.$sort.'`','ASC');
+$c->sortby('UserGroup.'.$sort,'ASC');
 if ($isLimit) $c->limit($limit,$start);
 $members = $modx->getCollection('modUserGroupMember',$c);
 

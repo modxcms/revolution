@@ -148,15 +148,15 @@ class modManagerResponse extends modResponse {
         
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
-        $c->innerJoin('modFormCustomizationSet','Set');
-        $c->innerJoin('modFormCustomizationProfile','Profile','Set.profile = Profile.id');
+        $c->innerJoin('modFormCustomizationSet','FCSet');
+        $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.usergroup');
         //$c->leftJoin('modAccessActionDom','Access');
         //$principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
         $c->where(array(
             'modActionDom.action' => $this->action['id'],
             'modActionDom.for_parent' => $forParent,
-            'Set.active' => true,
+            'FCSet.active' => true,
             'Profile.active' => true,
         ));
         $c->where(array(
@@ -165,74 +165,30 @@ class modManagerResponse extends modResponse {
         ),xPDOQuery::SQL_AND,null,2);
         $c->select(array(
             'modActionDom.*',
-            'Set.constraint_class',
-            'Set.constraint_field',
-            'Set.constraint',
-            'Set.template',
+            'FCSet.constraint_class',
+            'FCSet.constraint_field',
+            'FCSet.constraint',
+            'FCSet.template',
         ));
-        /* sort by template to get template default value first
-         * TODO: eventually add rank to Sets to allow more fine-grained control
-         */
-        $c->sortby('Set.template','ASC');
         $c->sortby('modActionDom.rank','ASC');
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
-
-        /* grab parents of current obj */
-        if ($obj) {
-            $rCtx = $obj->get('context_key');
-            $oCtx = $this->modx->context->get('key');
-            if (!empty($rCtx) && $rCtx != 'mgr') {
-                $this->modx->switchContext($rCtx);
-            }
-            $parents = $this->modx->getParentIds($obj->get('id'));
-            /* if on resource/create, set obj id to parent as well */
-            if ($forParent) {
-                $parents[] = $obj->get('id');
-            }
-            if (!empty($rCtx)) {
-                $this->modx->switchContext($oCtx);
-            }
-        }
-
         foreach ($domRules as $rule) {
-            /* filter by template here, so that prior rules can affect template which will change rules */
-            if ($obj) {
-                $tpl = $rule->get('template');
-                if (!empty($tpl)) {
-                    if ((int)$obj->get('template') != (int)$tpl) continue;
-                }
-            }
-
-            /* filter by constraints */
             $constraintClass = $rule->get('constraint_class');
             if (!empty($constraintClass)) {
                 if (empty($obj) || !($obj instanceof $constraintClass)) continue;
                 $constraintField = $rule->get('constraint_field');
                 $constraint = $rule->get('constraint');
-
-                /* if checking a parent, get all parents up the tree */
-                if (($forParent && $constraintField == 'id') || $constraintField == 'parent') {
-                    if (!in_array($constraint,$parents)) {
-                        continue;
-                    }
-                } else { /* otherwise just check constraint */
-                    if ($obj->get($constraintField) != $constraint) {
-                        continue;
-                    }
+                if ($obj->get($constraintField) != $constraint) {
+                    continue;
                 }
-            }
-            /* if setting a default value, do so here */
-            if ($obj && $rule->get('rule') == 'fieldDefault') {
-                $overridden[$rule->get('name')] = $rule->get('value');
-                $obj->set($rule->get('name'),$rule->get('value'));
             }
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;
         }
         $ruleOutput = '';
         if (!empty($rules)) {
-            $ruleOutput .= '<script type="text/javascript">MODx.on("ready",function() {';
+            $ruleOutput .= '<script type="text/javascript">Ext.onReady(function() {';
             $ruleOutput .= implode("\n",$rules);
             $ruleOutput .= '});</script>';
             $this->modx->regClientStartupHTMLBlock($ruleOutput);

@@ -180,14 +180,14 @@ class modResource extends modAccessibleSimpleObject {
                 IF(ISNULL(tvc.value),0,'.$this->id.') AS resourceId
             ');
             $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
-                '`tvtpl`.`tmplvarid` = `modTemplateVar`.`id`',
-                '`tvtpl`.templateid' => $this->template,
+                'tvtpl.tmplvarid = modTemplateVar.id',
+                'tvtpl.templateid' => $this->template,
             ));
             $c->leftJoin('modTemplateVarResource','tvc',array(
-                '`tvc`.`tmplvarid` = `modTemplateVar`.`id`',
-                '`tvc`.contentid' => $this->id,
+                'tvc.tmplvarid = modTemplateVar.id',
+                'tvc.contentid' => $this->id,
             ));
-            $c->sortby('`tvtpl`.`rank`,`modTemplateVar`.`rank`');
+            $c->sortby('tvtpl.rank,modTemplateVar.rank');
 
             $collection = $this->xpdo->getCollection('modTemplateVar', $c);
         } else {
@@ -480,13 +480,13 @@ class modResource extends modAccessibleSimpleObject {
             $accessTable = $this->xpdo->getTableName('modAccessResourceGroup');
             $policyTable = $this->xpdo->getTableName('modAccessPolicy');
             $resourceGroupTable = $this->xpdo->getTableName('modResourceGroupResource');
-            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
-                    "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
-                    "JOIN {$resourceGroupTable} `ResourceGroup` ON `Acl`.`principal_class` = 'modUserGroup' " .
-                    "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
-                    "AND `ResourceGroup`.`document` = :resource " .
-                    "AND `ResourceGroup`.`document_group` = `Acl`.`target` " .
-                    "GROUP BY `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`";
+            $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                    "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                    "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
+                    "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                    "AND ResourceGroup.document = :resource " .
+                    "AND ResourceGroup.document_group = Acl.target " .
+                    "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
             $bindings = array(
                 ':resource' => $this->get('id'),
                 ':context' => $context

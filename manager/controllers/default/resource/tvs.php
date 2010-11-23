@@ -66,14 +66,14 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
         ));
         $c->leftJoin('modCategory','Category');
         $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplate',array(
-            '`TemplateVarTemplate`.`tmplvarid` = `modTemplateVar`.`id`',
-            '`TemplateVarTemplate`.`templateid`' => $templateId,
+            'TemplateVarTemplate.tmplvarid = modTemplateVar.id',
+            'TemplateVarTemplate.templateid' => $templateId,
         ));
         $c->leftJoin('modTemplateVarResource','TemplateVarResource',array(
-            '`TemplateVarResource`.`tmplvarid` = `modTemplateVar`.`id`',
-            '`TemplateVarResource`.`contentid`' => $resourceId,
+            'TemplateVarResource.tmplvarid = modTemplateVar.id',
+            'TemplateVarResource.contentid' => $resourceId,
         ));
-        $c->sortby('`Category`.`category`,`TemplateVarTemplate`.`rank`,`modTemplateVar`.`rank`','ASC');
+        $c->sortby('Category.category,TemplateVarTemplate.rank,modTemplateVar.rank','ASC');
         $tvs = $modx->getCollection('modTemplateVar',$c);
         
         $modx->smarty->assign('tvcount',count($tvs));

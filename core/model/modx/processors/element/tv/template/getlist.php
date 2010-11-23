@@ -23,14 +23,24 @@ $sort = $modx->getOption('sort',$scriptProperties,'templatename');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $tv = $modx->getOption('tv',$scriptProperties,false);
 
+switch ($modx->getOption('dbtype')) {
+    case 'sqlite':
+    case 'mysql':
+        $if = 'IF';
+        break;
+    case 'sqlsrv':
+        $if = 'IIF';
+        break;
+}
+
 /* query for templates */
 $c = $modx->newQuery('modTemplate');
 $c->select($modx->getSelectColumns('modTemplate','modTemplate'));
-$c->select('
-    IF(ISNULL(`TemplateVarTemplates`.`tmplvarid`),0,1) AS `access`
-');
+$c->select("
+    {$if}(ISNULL(TemplateVarTemplates.tmplvarid),0,1) AS access
+");
 $c->leftJoin('modTemplateVarTemplate','TemplateVarTemplates',array(
-    '`modTemplate`.`id` = `TemplateVarTemplates`.`templateid`',
+    'modTemplate.id = TemplateVarTemplates.templateid',
     'TemplateVarTemplates.tmplvarid' => $tv,
 ));
 $c->sortby($sort,$dir);

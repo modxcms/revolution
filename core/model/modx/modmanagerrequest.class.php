@@ -104,7 +104,7 @@ class modManagerRequest extends modRequest {
             @session_write_close();
             exit();
         } else {
-            /* log user action */
+            /* log user action
             if (getenv('HTTP_CLIENT_IP')) {
                 $ip= getenv('HTTP_CLIENT_IP');
             } else {
@@ -129,7 +129,7 @@ class modManagerRequest extends modRequest {
                 if (!$rs= $this->modx->exec($sql)) {
                     $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error logging active user information! SQL: ' . $sql . "\n" . print_r($this->modx->errorInfo(), 1));
                 }
-            }
+            }*/
         }
 
         if ($this->modx->actionMap === null || !is_array($this->modx->actionMap)) {

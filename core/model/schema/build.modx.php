@@ -1,4 +1,4 @@
-<?php
+    <?php
 $mtime= microtime();
 $mtime= explode(" ", $mtime);
 $mtime= $mtime[1] + $mtime[0];
@@ -59,11 +59,11 @@ $generator->mapHeader= <<<EOD
  */
 EOD;
 $package= 'modx';
-$generator->parseSchema(dirname(XPDO_CORE_PATH) . '/model/schema/modx.mysql.schema.xml', dirname(XPDO_CORE_PATH) . '/model/');
+$generator->parseSchema(dirname(XPDO_CORE_PATH) . '/model/schema/modx.sqlsrv.schema.xml', dirname(XPDO_CORE_PATH) . '/model/');
 $package= 'modx.transport';
-$generator->parseSchema(dirname(XPDO_CORE_PATH) . '/model/schema/modx.transport.mysql.schema.xml', dirname(XPDO_CORE_PATH) . '/model/');
+$generator->parseSchema(dirname(XPDO_CORE_PATH) . '/model/schema/modx.transport.sqlsrv.schema.xml', dirname(XPDO_CORE_PATH) . '/model/');
 $package= 'modx.registry.db';
-$generator->parseSchema(dirname(XPDO_CORE_PATH) . '/model/schema/modx.registry.db.mysql.schema.xml', dirname(XPDO_CORE_PATH) . '/model/');
+$generator->parseSchema(dirname(XPDO_CORE_PATH) . '/model/schema/modx.registry.db.sqlsrv.schema.xml', dirname(XPDO_CORE_PATH) . '/model/');
 
 $mtime= microtime();
 $mtime= explode(" ", $mtime);

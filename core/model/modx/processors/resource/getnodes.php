@@ -32,10 +32,10 @@ if (!empty($scriptProperties['debug'])) echo '<p style="width: 800px; font-famil
 /* grab resources */
 if (empty($context) || $context == 'root') {
     $itemClass= 'modContext';
-    $c= $modx->newQuery($itemClass, array("`key` != 'mgr'"));
+    $c= $modx->newQuery($itemClass, array('key:!=' => 'mgr'));
     if (!empty($defaultRootId)) {
         $c->where(array(
-            '(SELECT COUNT(*) FROM '.$modx->getTableName('modResource').' WHERE `context_key` = `modContext`.`key` AND `id` IN ('.$defaultRootId.')) > 0',
+            "(SELECT COUNT(*) FROM {$modx->getTableName('modResource')} WHERE context_key = modContext.{$modx->escape('key')} AND id IN ({$defaultRootId})) > 0",
         ));
     }
 } else {
@@ -59,11 +59,11 @@ if (empty($context) || $context == 'root') {
     ));
     $cc = $modx->newQuery('modResource');
     $cc->setClassAlias('Child');
-    $cc->select('COUNT(`Child`.`id`)');
-    $cc->where(array('`modResource`.`id` = `Child`.`parent`'));
+    $cc->select('COUNT(Child.id)');
+    $cc->where(array('modResource.id = Child.parent'));
     $cc->prepare();
     $childrenSql = $cc->toSql();
-    $c->select('('.$childrenSql.') AS `childrenCount`');
+    $c->select('('.$childrenSql.') AS childrenCount');
     $c->where(array(
         'context_key' => $context,
     ));

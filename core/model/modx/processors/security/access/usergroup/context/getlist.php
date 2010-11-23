@@ -44,10 +44,10 @@ $count = $modx->getCount('modAccessContext',$c);
 $c->leftJoin('modUserGroupRole','Role','Role.authority = modAccessContext.authority');
 $c->leftJoin('modAccessPolicy','Policy');
 $c->select('
-    `modAccessContext`.*,
-    CONCAT(`Role`.`name`," - ",`modAccessContext`.`authority`) AS `authority_name`,
-    `Policy`.`name` AS `policy_name`,
-    `Policy`.`data` AS `policy_data`
+    modAccessContext.*,
+    CONCAT(Role.name," - ",modAccessContext.authority) AS authority_name,
+    Policy.name AS policy_name,
+    Policy.data AS policy_data
 ');
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);

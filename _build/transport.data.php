@@ -79,7 +79,7 @@ $content= "<?php\n";
 $query= $modx->newQuery('modSystemSetting');
 $query->select($modx->getSelectColumns('modSystemSetting', '', '', array('editedon'), true));
 $query->where(array('namespace' => 'core'));
-$query->sortby('`key`');
+$query->sortby($modx->escape('key'));
 $collection= $modx->getCollection('modSystemSetting', $query);
 foreach ($collection as $key => $c) {
     $content.= $cacheManager->generateObject($c, "collection['{$key}']", false, false, 'xpdo');
@@ -93,8 +93,8 @@ $content= "<?php\n";
 $query= $modx->newQuery('modContextSetting');
 $query->select($modx->getSelectColumns('modContextSetting', '', '', array('editedon'), true));
 $query->where(array('namespace' => 'core'));
-$query->sortby('`context_key`');
-$query->sortby('`key`');
+$query->sortby($modx->escape('context_key'));
+$query->sortby($modx->escape('key'));
 $collection= $modx->getCollection('modContextSetting', $query);
 foreach ($collection as $key => $c) {
     $content.= $cacheManager->generateObject($c, "collection['{$key}']", false, false, 'xpdo');

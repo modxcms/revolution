@@ -37,16 +37,26 @@ if (empty($resourceId)) {
     }
 }
 
+switch ($modx->getOption('dbtype')) {
+    case 'sqlite':
+    case 'mysql':
+        $if = 'IF';
+        break;
+    case 'sqlsrv':
+        $if = 'IIF';
+        break;
+}
+
 /* build query */
 $c = $modx->newQuery('modResourceGroup');
 $c->leftJoin('modResourceGroupResource','ResourceGroupResource','
-    `ResourceGroupResource`.`document_group` = `modResourceGroup`.`id`
-AND `ResourceGroupResource`.`document` = '.$resource->get('id'));
+    ResourceGroupResource.document_group = modResourceGroup.id
+AND ResourceGroupResource.document = '.$resource->get('id'));
 $count = $modx->getCount('modResourceGroup',$c);
-$c->select('
-    `modResourceGroup`.*,
-    IF(ISNULL(`ResourceGroupResource`.`document`),0,1) AS access
-');
+$c->select("
+    modResourceGroup.*,
+    {$if}(ISNULL(ResourceGroupResource.document),0,1) AS access
+");
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $resourceGroups = $modx->getCollection('modResourceGroup',$c);
