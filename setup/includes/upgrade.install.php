@@ -325,11 +325,11 @@ if (!$setting) {
     /* drop policy index from modAccessPermission */
     $class = 'modAccessPermission';
     $table = $modx->getTableName($class);
-    $sql = "ALTER TABLE {$table} DROP INDEX `policy`";
+    $sql = "ALTER TABLE {$table} DROP INDEX policy";
     $modx->exec($sql);
 
     /* drop policy field from modAccessPermission */
-    $sql = "ALTER TABLE {$table} DROP COLUMN `policy`";
+    $sql = "ALTER TABLE {$table} DROP COLUMN policy";
     $modx->exec($sql);
 
     /* add setting so that this runs only once to prevent errors or goof-ups */

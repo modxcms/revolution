@@ -166,6 +166,7 @@ class modInstall {
 
             default :
                 $included = false;
+                $database_type = isset ($_POST['databasetype']) ? $_POST['databasetype'] : 'mysql';
                 $database_server = isset ($_POST['databasehost']) ? $_POST['databasehost'] : 'localhost';
                 $database_user = isset ($_POST['databaseloginname']) ? $_POST['databaseloginname'] : '';
                 $database_password = isset ($_POST['databaseloginpassword']) ? $_POST['databaseloginpassword'] : '';
@@ -177,7 +178,7 @@ class modInstall {
                 break;
         }
         $config = array_merge($config,array(
-            'database_type' => !empty($database_type) ? $database_type : 'mysql',
+            'database_type' => $database_type,
             'database_server' => $database_server,
             'dbase' => trim($dbase,'`'),
             'database_user' => $database_user,
@@ -210,12 +211,15 @@ class modInstall {
             if ($this->settings->get('new_folder_permissions')) $options['new_folder_permissions'] = $this->settings->get('new_folder_permissions');
             if ($this->settings->get('new_file_permissions')) $options['new_file_permissions'] = $this->settings->get('new_file_permissions');
             $collation = $this->settings->get('database_collation');
-            $this->xpdo = $this->_connect($this->settings->get('database_type')
-                 . ':host=' . $this->settings->get('database_server')
-                 . ';dbname=' . trim($this->settings->get('dbase'), '`')
-                 . ';charset=' . $this->settings->get('database_connection_charset', 'utf8')
-                 //. ';collation=' . $this->settings->get('database_collation', 'utf8_general_ci')
-                 . (!empty($collation) ? ';collation=' : '')
+            switch ($this->settings->get('database_type')) {
+                case 'mysql':
+                    $dsn = $this->settings->get('database_type') . ':host=' . $this->settings->get('database_server') . ';dbname=' . trim($this->settings->get('dbase'), '`');
+                    break;
+                case 'sqlsrv':
+                    $dsn = $this->settings->get('database_type') . ':server=' . $this->settings->get('database_server') . ';database=' . trim($this->settings->get('dbase'), '`');
+                    break;
+            }
+            $this->xpdo = $this->_connect($dsn
                  ,$this->settings->get('database_user')
                  ,$this->settings->get('database_password')
                  ,$this->settings->get('table_prefix')
@@ -719,11 +723,7 @@ class modInstall {
                     xPDO::OPT_LOADER_CLASSES => array('modAccessibleObject'),
                     xPDO::OPT_SETUP => true,
                 ), $options),
-                array (
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
-                    PDO::ATTR_PERSISTENT => false,
-                    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
-                )
+                array()
             );
             $xpdo->setLogTarget(array(
                 'target' => 'FILE',
@@ -734,7 +734,7 @@ class modInstall {
             $xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
             return $xpdo;
         } else {
-            return $this->lexicon('xpdo_err_nf',array('path' => MODX_CORE_PATH.'xpdo/xpdo.class.php'));
+            return $this->lexicon('xpdo_err_nf', array('path' => MODX_CORE_PATH.'xpdo/xpdo.class.php'));
         }
     }
 
@@ -887,7 +887,7 @@ class modInstall {
         $path = dirname(__FILE__).'/drivers/';
 
         /* db specific driver */
-        $class = 'modInstallDriver_'.strtolower($this->settings->get('database_type','mysql'));
+        $class = 'modInstallDriver_'.strtolower($this->settings->get('database_type','sqlsrv'));
         $driverPath = $path.strtolower($class.'.class.php');
         $included = @include_once $driverPath;
         if ($included) {
