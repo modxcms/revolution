@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2848] Fix issue with file edit and base paths
 - [#2802] Ensure Category tab is hidden when all TVs are hidden in that Category
 - [#2779] Added Content Editor policy to default list of policies
 - [#2819] Fix bug in FC rules where parent constraint was not traversing up tree to inherit parents

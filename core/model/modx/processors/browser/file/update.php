@@ -29,10 +29,11 @@ if (!empty($wctx)) {
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 
 /* create modFile object */
-$file = $modx->fileHandler->make($filename);
+$root = $modx->fileHandler->getBasePath(false);
+$file = $modx->fileHandler->make($root.$filename);
 
 /* verify file exists */
-if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf'));
+if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf').': '.$scriptProperties['file']);
 
 /* write file */
 $file->setContent($scriptProperties['content']);
