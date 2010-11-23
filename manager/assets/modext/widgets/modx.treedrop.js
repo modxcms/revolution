@@ -92,7 +92,13 @@ MODx.loadInsertElement = function(r) {
     w.show();
 };
 
-MODx.insertAtCursor = function(myField, myValue) {
+MODx.insertAtCursor = function(myField, myValue,h) {
+    if (!Ext.isEmpty(h)) {
+        var z = h(myValue);
+        if (z != undefined) {
+            myValue = z;
+        }
+    }
     if (document.selection) { 
         myField.focus(); 
         sel = document.selection.createRange(); 

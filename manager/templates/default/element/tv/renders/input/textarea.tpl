@@ -3,7 +3,7 @@
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-MODx.load({
+var fld = MODx.load({
 {/literal}
     xtype: 'textarea'
     ,applyTo: 'tv{$tv->id}'
@@ -14,6 +14,7 @@ MODx.load({
 {literal}
     ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
 });
+MODx.makeDroppable(fld);
 {/literal}
 // ]]>
 </script>

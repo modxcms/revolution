@@ -7,7 +7,7 @@
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-MODx.load({
+var fld{/literal}{$tv->id}{literal} = MODx.load({
 {/literal}
     xtype: 'modx-panel-tv-image'
     ,renderTo: 'tv-image-{$tv->id}'
@@ -26,6 +26,14 @@ MODx.load({
             }
         }, scope:this}
     }
+});
+MODx.makeDroppable(Ext.get('tv{/literal}{$tv->id}{literal}'),function(v) {
+    var cb = Ext.getCmp('tv{/literal}{$tv->id}{literal}');
+    if (cb) {
+        cb.setValue(v);
+    }
+    fld{/literal}{$tv->id}{literal}.fireEvent('select',{relativeUrl:v});
+    return '';
 });
 {/literal}
 // ]]>

@@ -261,6 +261,24 @@ Ext.extend(MODx,Ext.Component,{
     ,preview: function() {
         window.open(MODx.config.site_url);
     }
+    ,makeDroppable: function(fld,h) {
+        if (!fld) return false;
+        h = h || Ext.emptyFn;
+        if (fld.getEl) {
+            var el = fld.getEl();
+        } else if (fld) {
+            el = fld;
+        }
+        if (el) {
+            new MODx.load({
+                xtype: 'modx-treedrop'
+                ,target: fld
+                ,targetEl: el.dom
+                ,onInsert: h
+            });
+        }
+        return true;
+    }
 });
 Ext.reg('modx',MODx);
 
