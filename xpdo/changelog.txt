@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Add xPDOWinCache implementation of xPDOCache provider
 - Add workaround to drop a database for sqlsrv
 - Add workaround to trim PDO::quote() results for sqlsrv
 - Add virtual support for LIMIT..OFFSET to sqlsrv driver
