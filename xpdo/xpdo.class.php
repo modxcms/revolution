@@ -2142,6 +2142,7 @@ class xPDO {
     public function parseBindings($sql, $bindings) {
         if (!empty($sql) && !empty($bindings)) {
             reset($bindings);
+            $bound = array();
             while (list ($k, $param)= each($bindings)) {
                 if (!is_array($param)) {
                     $v= $param;
@@ -2167,24 +2168,20 @@ class xPDO {
                     }
                 }
                 if (!is_int($k) || substr($k, 0, 1) === ':') {
-                    if (!isset ($tempf)) {
-                        $tempf= $tempr= array ();
-                    }
                     $pattern= '/' . $k . '\b/';
-                    array_push($tempf, $pattern);
                     if ($type > 0) {
                         $v= $this->quote($v, $type);
                     } else {
                         $v= 'NULL';
                     }
-                    array_push($tempr, $v);
+                    $bound[$pattern] = $v;
                 } else {
                     $parse= create_function('$d,$v,$t', 'return $t > 0 ? $d->quote($v, $t) : \'NULL\';');
                     $sql= preg_replace("/(\?)/e", '$parse($this,$bindings[$k][\'value\'],$type);', $sql, 1);
                 }
             }
-            if (isset ($tempf)) {
-                $sql= preg_replace($tempf, $tempr, $sql);
+            if (!empty($bound)) {
+                $sql= preg_replace(array_keys($bound), array_values($bound), $sql);
             }
         }
         return $sql;
