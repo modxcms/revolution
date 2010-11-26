@@ -2139,6 +2139,13 @@ class xPDO {
         return $split;
     }
 
+    /**
+     * Parses parameter bindings in SQL prepared statements.
+     *
+     * @param string $sql A SQL prepared statement to parse bindings in.
+     * @param array $bindings An array of parameter bindings to use for the replacements.
+     * @return string The SQL with the binding placeholders replaced.
+     */
     public function parseBindings($sql, $bindings) {
         if (!empty($sql) && !empty($bindings)) {
             reset($bindings);
