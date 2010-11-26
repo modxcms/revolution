@@ -147,7 +147,7 @@ class modStaticResource extends modResource {
                 }
                 $header= 'Cache-Control: public';
                 header($header);
-                $header= 'Content-Disposition: ' . $this->get('content_dispo') ? 'inline' : 'attachment' . '; filename=' . $name;
+                $header= 'Content-Disposition: ' . ($this->get('content_dispo') ? 'inline' : 'attachment' . '; filename=' . $name);
                 header($header);
                 $header= 'Vary: User-Agent';
                 header($header);
