@@ -91,6 +91,9 @@ if (!class_exists('PDO')) {
  * @package xpdo
  */
 class xPDO {
+    /**#@+
+     * Constants
+     */
     const OPT_BASE_CLASSES = 'base_classes';
     const OPT_BASE_PACKAGES = 'base_packages';
     const OPT_CACHE_COMPRESS = 'cache_compress';
@@ -108,6 +111,10 @@ class xPDO {
     const OPT_HYDRATE_FIELDS = 'hydrate_fields';
     const OPT_HYDRATE_ADHOC_FIELDS = 'hydrate_adhoc_fields';
     const OPT_HYDRATE_RELATED_OBJECTS = 'hydrate_related_objects';
+    /**
+     * @deprecated
+     * @see call()
+     */
     const OPT_LOADER_CLASSES = 'loader_classes';
     const OPT_ON_SET_STRIPSLASHES = 'on_set_stripslashes';
     const OPT_SETUP = 'setup';
@@ -600,7 +607,7 @@ class xPDO {
     /**
      * Finds the class responsible for loading instances of the specified class.
      *
-     * @access protected
+     * @deprecated Use call() instead.
      * @param string $className The name of the class to find a loader for.
      * @param string $method Indicates the specific loader method to use,
      * loadCollection or loadObject (or other public static methods).
@@ -647,8 +654,7 @@ class xPDO {
     public function getObject($className, $criteria= null, $cacheFlag= false) {
         $instance= null;
         if ($criteria !== null) {
-            $loader = $this->getObjectLoader($className, 'load');
-            $instance = call_user_func_array($loader, array(& $this, $className, $criteria, $cacheFlag));
+            $instance = $this->call($className, 'load', array(& $this, $className, $criteria, $cacheFlag));
         }
         return $instance;
     }
@@ -667,10 +673,7 @@ class xPDO {
      * @return array|null An array of class instances retrieved.
     */
     public function getCollection($className, $criteria= null, $cacheFlag= false) {
-        $objCollection= array ();
-        $loader = $this->getObjectLoader($className, 'loadCollection');
-        $objCollection= call_user_func_array($loader, array(& $this, $className, $criteria, $cacheFlag));
-        return $objCollection;
+        return $this->call($className, 'loadCollection', array(& $this, $className, $criteria, $cacheFlag));
     }
 
     public function getIterator($className, $criteria= null, $cacheFlag= false) {
@@ -818,10 +821,7 @@ class xPDO {
      * matches are found.
      */
     public function getCollectionGraph($className, $graph, $criteria= null, $cacheFlag= true) {
-        $objCollection= array ();
-        $loader = $this->getObjectLoader($className, 'loadCollectionGraph');
-        $objCollection= call_user_func_array($loader, array(& $this, $className, $graph, $criteria, $cacheFlag));
-        return $objCollection;
+        return $this->call($className, 'loadCollectionGraph', array(& $this, $className, $graph, $criteria, $cacheFlag));
     }
 
     /**
@@ -2361,7 +2361,6 @@ class xPDOIterator implements Iterator {
     private $criteria = null;
     private $criteriaType = 'xPDOQuery';
     private $cacheFlag = false;
-    private $loader = null;
 
     /**
      * Construct a new xPDOIterator instance (do not call directly).
@@ -2396,23 +2395,16 @@ class xPDOIterator implements Iterator {
                 $this->alias = $this->criteria->getAlias();
             }
         }
-        if ($this->class) {
-            $this->loader = $this->xpdo->getObjectLoader($this->class, '_loadInstance');
-        } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "xPDOIterator could not identify a class for the supplied criteria.");
-        }
     }
 
     public function rewind() {
         $this->index = 0;
-        if (is_callable($this->loader)) {
-            if (!empty($this->stmt)) {
-                $this->stmt->closeCursor();
-            }
-            $this->stmt = $this->criteria->prepare();
-            if ($this->stmt && $this->stmt->execute()) {
-                $this->fetch();
-            }
+        if (!empty($this->stmt)) {
+            $this->stmt->closeCursor();
+        }
+        $this->stmt = $this->criteria->prepare();
+        if ($this->stmt && $this->stmt->execute()) {
+            $this->fetch();
         }
     }
 
@@ -2445,7 +2437,7 @@ class xPDOIterator implements Iterator {
     protected function fetch() {
         $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
         if (is_array($row) && !empty($row)) {
-            $this->current = call_user_func_array($this->loader, array(& $this->xpdo, $this->class, $this->alias, $row));
+            $this->current = $this->xpdo->call($this->class, '_loadInstance', array(& $this->xpdo, $this->class, $this->alias, $row));
         } else {
             $this->current = null;
         }
