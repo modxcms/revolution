@@ -423,8 +423,7 @@ abstract class xPDOQuery extends xPDOCriteria {
 
     public function hydrateGraphParent(& $instances, $row) {
         $hydrated = false;
-        $loader = $this->xpdo->getObjectLoader($this->getClass(), '_loadInstance');
-        $instance = call_user_func_array($loader, array(& $this->xpdo, $this->getClass(), $this->getAlias(), $row));
+        $instance = $this->xpdo->call($this->getClass(), '_loadInstance', array(& $this->xpdo, $this->getClass(), $this->getAlias(), $row));
         if (is_object($instance)) {
             $pk= $instance->getPrimaryKey();
             if (is_array($pk)) $pk= implode('-', $pk);
@@ -452,8 +451,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         $relObj= null;
         if ($relationMeta= $instance->getFKDefinition($alias)) {
             if ($row[$alias.'_'.$relationMeta['foreign']] != null) {
-                $loader = $this->xpdo->getObjectLoader($relationMeta['class'], '_loadInstance');
-                $relObj = call_user_func_array($loader, array(& $this->xpdo, $relationMeta['class'], $alias, $row));
+                $relObj = $this->xpdo->call($relationMeta['class'], '_loadInstance', array(& $this->xpdo, $relationMeta['class'], $alias, $row));
                 if ($relObj) {
                     if (strtolower($relationMeta['cardinality']) == 'many') {
                         $instance->addMany($relObj, $alias);
