@@ -676,6 +676,17 @@ class xPDO {
         return $this->call($className, 'loadCollection', array(& $this, $className, $criteria, $cacheFlag));
     }
 
+    /**
+     * Retreives an iterable representation of a collection of xPDOObjects.
+     *
+     * @param string $className Name of the class to search for instances of.
+     * @param mixed $criteria An xPDOCriteria object or representation.
+     * @param bool $cacheFlag If an integer value is provided, this specifies
+     * the time to live in the result set cache; if cacheFlag === false, caching
+     * is ignored for the collection and if cacheFlag === true, the objects will
+     * live in cache until flushed by another process.
+     * @return xPDOIterator An iterable representation of a collection.
+     */
     public function getIterator($className, $criteria= null, $cacheFlag= false) {
         return new xPDOIterator($this, array('class' => $className, 'criteria' => $criteria, 'cacheFlag' => $cacheFlag));
     }
