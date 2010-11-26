@@ -551,11 +551,21 @@ class xPDO {
         $className = $this->loadClass($class) . '_' . $this->getOption('dbtype');
         $callback = array($className, $method);
         if (is_callable($callback)) {
-            $return = call_user_func_array($callback, $args);
+            try {
+                $return = call_user_func_array($callback, $args);
+            } catch (Exception $e) {
+                $this->log(xPDO::LOG_LEVEL_ERROR, "An exception occurred calling {$className}::{$method}() - " . $e->getMessage());
+            }
         } else {
             $callback = array($className, $method);
             if (is_callable($callback)) {
-                $return = call_user_func_array($callback, $args);
+                try {
+                    $return = call_user_func_array($callback, $args);
+                } catch (Exception $e) {
+                    $this->log(xPDO::LOG_LEVEL_ERROR, "An exception occurred calling {$className}::{$method}() - " . $e->getMessage());
+                }
+            } else {
+                $this->log(xPDO::LOG_LEVEL_ERROR, "{$class}::{$method}() is not a valid static method.");
             }
         }
         return $return;
