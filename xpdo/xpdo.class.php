@@ -2194,6 +2194,12 @@ class xPDO {
         return $sql;
     }
 
+    /**
+     * Get the appropriate PDO::PARAM_ type constant from a PHP value.
+     *
+     * @param mixed $value Any PHP scalar or null value
+     * @return int|null
+     */
     public function getPDOType($value) {
         $type= null;
         if (is_null($value)) $type= PDO::PARAM_NULL;
