@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Add xPDOAPCCache implementation of xPDOCacheProvider
 - Refactor usages of xPDO::getObjectLoader() to use xPDO::call()
 - Add xPDO::call() allowing db-specific static method overrides
 - Add xPDOWinCache implementation of xPDOCache provider
