@@ -301,7 +301,7 @@ class xPDO {
             $this->cachePath = $this->config[xPDO::OPT_CACHE_PATH];
         }
     }
-    
+
     /**
      * Create the PDO connection to a database specified in the configuration.
      *
@@ -534,6 +534,31 @@ class xPDO {
      */
     public function setOption($key, $value) {
         $this->config[$key]= $value;
+    }
+
+    /**
+     * Call a static method from a valid package class with arguments.
+     *
+     * Will always search for database-specific class files first.
+     *
+     * @param string $class The name of a class to to get the static method from.
+     * @param string $method The name of the method you want to call.
+     * @param array $args An array of arguments for the method.
+     * @return mixed|null The callback method's return value or null if no valid method is found.
+     */
+    public function call($class, $method, array $args = array()) {
+        $return = null;
+        $className = $this->loadClass($class) . '_' . $this->getOption('dbtype');
+        $callback = array($className, $method);
+        if (is_callable($callback)) {
+            $return = call_user_func_array($callback, $args);
+        } else {
+            $callback = array($className, $method);
+            if (is_callable($callback)) {
+                $return = call_user_func_array($callback, $args);
+            }
+        }
+        return $return;
     }
 
     /**
@@ -830,7 +855,7 @@ class xPDO {
 
     /**
      * Add criteria when requesting a derivative class row automatically.
-     * 
+     *
      * This applies class_key filtering for single-table inheritance queries and may
      * provide a convenient location for similar features in the future.
      *
