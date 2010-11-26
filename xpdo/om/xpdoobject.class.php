@@ -685,7 +685,7 @@ class xPDOObject {
      */
     public function set($k, $v= null, $vType= '') {
         $set= false;
-        $callback= null;
+        $callback= '';
         $callable= !empty($vType) && is_callable($vType, false, $callback) ? true : false;
         $oldValue= null;
         if (is_string($k) && !empty($k)) {
