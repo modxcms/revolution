@@ -1,6 +1,9 @@
 # ignore all .htaccess
 .htaccess
 
+# ignore all IIS files
+web.config
+
 # ignore all config.core.php
 config.core.php
 
@@ -17,3 +20,6 @@ modext.js
 
 # ignore various IDE project files and folders
 .idea/
+
+# ignore PHP files beginning with test
+test*.php
