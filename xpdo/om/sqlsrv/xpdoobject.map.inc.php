@@ -1,6 +1,6 @@
 <?php
-/**
- * Copyright 2010 by MODx, LLC.
+/*
+ * Copyright 2006-2010 by  Jason Coward <xpdo@opengeek.com>
  *
  * This file is part of xPDO.
  *
@@ -16,23 +16,13 @@
  * You should have received a copy of the GNU General Public License along with
  * xPDO; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
- *
- * @package xpdo-test
  */
-require_once 'PHPUnit/Framework.php';
 
 /**
- * Extends the basic PHPUnit TestCase class to provide xPDO specific methods
+ * Metadata map for the base xPDOObject class.
  *
- * @package xpdo-test
+ * @see xPDOObject
+ * @package xpdo
+ * @subpackage om.sqlsrv
  */
-class xPDOTestCase extends PHPUnit_Framework_TestCase {
-    public $xpdo = null;
-
-    protected function setUp() {
-    	   $this->xpdo = xPDOTestHarness::getInstance();
-    }
-    protected function tearDown() {
-    	   $this->xpdo = null;
-    }
-}
+$xpdo_meta_map['xPDOObject']['table']= null;

@@ -32,16 +32,16 @@ class xPDOTearDownTest extends PHPUnit_Framework_TestCase {
      * Should be an error set since we gave bogus info.
      */
     public function testDoNotOverwriteSourceContainer() {
-    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
-    	$xpdo = xPDOTestHarness::getInstance(true);
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $xpdo = xPDOTestHarness::getInstance(true);
         $result = false;
         try {
             $xpdo->getManager();
-            $driver= xPDOTestHarness::$properties['xpdo_driver'];
-            $result= $xpdo->manager->createSourceContainer(
-                    xPDOTestHarness::$properties[$driver . '_string_dsn_test'],
-                    xPDOTestHarness::$properties[$driver . '_string_username'],
-                    xPDOTestHarness::$properties[$driver . '_string_password']
+            $driver = xPDOTestHarness::$properties['xpdo_driver'];
+            $result = $xpdo->manager->createSourceContainer(
+                xPDOTestHarness::$properties[$driver . '_string_dsn_test'],
+                xPDOTestHarness::$properties[$driver . '_string_username'],
+                xPDOTestHarness::$properties[$driver . '_string_password']
             );
         } catch (Exception $e) {
             $xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
@@ -53,8 +53,8 @@ class xPDOTearDownTest extends PHPUnit_Framework_TestCase {
      * Verify drop database works.
      */
     public function testRemoveSourceContainer() {
-    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
-    	$xpdo = xPDOTestHarness::getInstance(true);
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $xpdo = xPDOTestHarness::getInstance(true);
         $success = false;
         if ($xpdo) {
             $driver = xPDOTestHarness::$properties['xpdo_driver'];

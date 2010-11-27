@@ -47,10 +47,6 @@ class xPDOSetUpTest extends PHPUnit_Framework_TestCase {
             $response = $xpdo->getManager()->removeSourceContainer(xPDO::parseDSN(xPDOTestHarness::$properties[xPDOTestHarness::$properties['xpdo_driver'] . '_string_dsn_test']));
             if ($response) {
                 $xpdo= null;
-            } else {
-                echo 'error removing test database, response: ';
-                var_dump($response);
-                die();
             }
         } else {
             $xpdo = null;
@@ -62,8 +58,8 @@ class xPDOSetUpTest extends PHPUnit_Framework_TestCase {
      * Verify test create database works.
      */
     public function testCreateSourceContainer() {
-    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
-    	$xpdo = xPDOTestHarness::getInstance(true);
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $xpdo = xPDOTestHarness::getInstance(true);
         $created= $xpdo->getManager()->createSourceContainer();
 
         $this->assertTrue($created == true, "Could not create database.");
