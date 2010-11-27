@@ -1,9 +1,22 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.0.0-pl (November 27, 2010)
+====================================
+- [#2788] Escape database name in xPDOGenerator_mysql::writeSchema()
+- Add xPDOAPCCache implementation of xPDOCacheProvider
+- Refactor usages of xPDO::getObjectLoader() to use xPDO::call()
+- Add xPDO::call() allowing db-specific static method overrides
+- Add xPDOWinCache implementation of xPDOCache provider
+- Add workaround to drop a database for sqlsrv
+- Add workaround to trim PDO::quote() results for sqlsrv
+- Add virtual support for LIMIT..OFFSET to sqlsrv driver
+- Set dbname property from database property in xPDO::parseDSN()
+- Introduce pdo_sqlsrv driver support
+
 xPDO 2.0.0-rc3 (October 25, 2010)
 ====================================
 - Add xPDO::getIterator() allowing more efficient traversing of result sets
-- Add script to upgrade older xPDO mysql models to SCHEMA_VERSION 1.1 
+- Add script to upgrade older xPDO mysql models to SCHEMA_VERSION 1.1
 - Add missing attributes in xPDOSimpleObject map index element
 - Do not generate primary key index for xPDOSimpleObject derivatives
 - Introduce xPDO::SCHEMA_VERSION and set it to 1.1 to distinguish new format for indexes
@@ -37,9 +50,9 @@ xPDO 2.0.0-rc2 (October 20, 2010)
 - Simplify includes of parent classes
 - Add xPDODriver to better abstract driver-specific attributes and behavior
 - Fix several references to xPDO::$_escapeChar in xPDOQuery
+- Split xPDO::$_escapeChar into $_escapeCharOpen and $_escapeCharClose
 - Simplify path for require_once in platform class templates
 - Trim property keys and values in xPDO::parseDSN()
-- Split xPDO::$_escapeChar into $_escapeCharOpen and $_escapeCharClose
 - [#XPDO-66] Add xPDOTransport::ARCHIVE_WITH to allow explicit use of PclZip even if ZipArchive exists
 - Add xPDO::literal() method for SQL literal strings
 - Introduce pdo_sqlite driver support
@@ -64,7 +77,7 @@ xPDO 2.0.0-rc2 (October 20, 2010)
 - Log PDOException messages in xPDO::connect()
 - [#XPDO-49] Fix inconsistent static and non-static calls to fromJSON() and toJSON() methods on xPDO
 - Added xPDO::getService to load service classes
-- Commented out deprecated code in xPDOVehicle dealing with PHP validators 
+- Commented out deprecated code in xPDOVehicle dealing with PHP validators
 - Fixed typo in xPDOVehicle where $r should be $v
 - [#XPDO-40] Fixed getCount to work when passing a criteria with a class alias set.
 - xPDOTransport: Fix several E_STRICT errors caused by static calls to methods not defined as static.
@@ -90,7 +103,7 @@ xPDO 2.0.0-rc2 (October 20, 2010)
 - [#XPDO-42] Fixed error with xPDOQuery::parseConditions() ignoring NULL bound values.
 - Fixed xPDOCriteria::toSQL() to properly handle NULL values.
 - Updated/fixed xPDOZip implementation and enabled it as the preferred zip provider for xPDOTransport.
-- Made xPDOVehicle an abstract class. 
+- Made xPDOVehicle an abstract class.
 - [#XPDO-4] Allow nesting conditions arbitrarily deep using simple nested array format.
 
 xPDO 2.0.0-rc1 (LastChangedRevision: 389, LastChangedDate: 2009-12-31 11:18:40 -0700 (Thu, 31 Dec 2009))
