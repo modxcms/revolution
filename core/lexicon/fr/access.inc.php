@@ -71,6 +71,7 @@ $_lang['filter_by_context'] = 'Filtrer par contexte...';
 $_lang['filter_by_policy'] = 'Filtrer par règle...';
 $_lang['filter_by_resource_group'] = 'Filtrer par groupe de ressources...';
 $_lang['filter_by_category'] = 'Filtrer par catégorie…';
+$_lang['no_policy_option'] = ' (pas de règle) ';
 $_lang['resource_group'] = 'Groupe de ressources';
 $_lang['resource_group_add'] = 'Ajouter un groupe de ressources';
 $_lang['resource_group_access_remove'] = 'Supprimer des ressources du groupe';
