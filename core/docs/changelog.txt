@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Update xPDO to 2.0.0-pl release
 - [#2661] Fix Template getList processor to respect authority
 - [#313] Fix header error with binary modStaticResource downloads
 - [#206] Fix session bug with opcode caching systems like APC, WinCache, eAccelerator
