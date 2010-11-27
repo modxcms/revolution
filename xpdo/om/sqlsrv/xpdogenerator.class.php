@@ -80,9 +80,9 @@ class xPDOGenerator_sqlsrv extends xPDOGenerator {
         //read list of tables
         $tableLike= ($tablePrefix && $restrictPrefix);
         if ($tableLike) {
-        	$tablesStmt= $this->manager->xpdo->query("SELECT * FROM sys.Tables WHERE name LIKE '{$tablePrefix}%' ORDER BY name");
+            $tablesStmt= $this->manager->xpdo->query("SELECT * FROM sys.Tables WHERE name LIKE '{$tablePrefix}%' ORDER BY name");
         } else {
-        	$tablesStmt= $this->manager->xpdo->query("SELECT * FROM sys.Tables ORDER BY name");
+            $tablesStmt= $this->manager->xpdo->query("SELECT * FROM sys.Tables ORDER BY name");
         }
         $tables= $tablesStmt->fetchAll(PDO::FETCH_NUM);
         if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($tables, true));
