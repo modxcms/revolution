@@ -190,10 +190,8 @@ ul.x-tab-strip li.x-tab-strip-active  {
 
 .ext-gecko #modx-content ul.x-tab-strip li.x-tab-strip-active {
     background: -moz-linear-gradient(
-        center bottom,
-        rgb(102,102,102) 27%,
-        rgb(119,119,119) 50%,
-        rgb(102,102,102) 0%
+        #666666 30%,
+		#555555 69%
     );
 }
 

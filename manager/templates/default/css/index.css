@@ -411,10 +411,9 @@ textarea.x-form-field {
 }
 .ext-gecko #modx-navbar {
     background: -moz-linear-gradient(
-        center bottom,
-        #666 37%,
-        #777 69%,
-        #666 0%
+        #777 20%,
+		#666 50%,
+		#555 100%
     );
 }
 .ext-safari #modx-navbar, .ext-webkit #modx-navbar {
