@@ -57,5 +57,5 @@ $userArray['blockeduntil'] = !empty($userArray['blockeduntil']) ? strftime('%Y-%
 $userArray['blockedafter'] = !empty($userArray['blockedafter']) ? strftime('%Y-%m-%d %H:%M:%S',$userArray['blockedafter']) : '';
 $userArray['lastlogin'] = !empty($userArray['lastlogin']) ? strftime('%m/%d/%Y',$userArray['lastlogin']) : '';
 
-
+unset($userArray['password'],$userArray['cachepwd']);
 return $modx->error->success('',$userArray);

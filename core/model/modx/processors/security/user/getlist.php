@@ -53,6 +53,7 @@ foreach ($users as $user) {
     $userArray = $user->toArray();
     $userArray['blocked'] = $user->get('blocked') ? true : false;
     $userArray['cls'] = 'pupdate premove';
+    unset($userArray['password'],$userArray['cachepwd']);
     $list[] = $userArray;
 }
 return $this->outputArray($list,$count);
