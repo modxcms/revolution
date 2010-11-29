@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2828] Fix issue with incorrect content field name for FC rules
 - [#2863] Fix order of execution issues with FC rules and default values
 - [#2874] Enhance User blockedafter/blockeduntil fields to accept time as well as date values
 - [#2529] Fix automatic publish/unpublish
