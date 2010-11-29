@@ -124,6 +124,12 @@ if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)
     }
 }
 
+
+$record = $resource->toArray();
+$overridden = $this->checkFormCustomizationRules($resource);
+$record = array_merge($record,$overridden);
+
+/* register JS */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
 $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
@@ -141,7 +147,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-resource-update"
         ,resource: "'.$resource->get('id').'"
-        ,record: '.$modx->toJSON($resource->toArray()).'
+        ,record: '.$modx->toJSON($record).'
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
         ,preview_url: "'.$url.'"
@@ -153,5 +159,4 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
-$this->checkFormCustomizationRules($resource);
 return $modx->smarty->fetch('resource/update.tpl');

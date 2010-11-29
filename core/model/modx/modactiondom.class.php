@@ -61,7 +61,7 @@ class modActionDom extends modAccessibleSimpleObject {
                 break;
             case 'tvMove':
                 $tvs = explode(',',$this->get('name'));
-                $rule = 'MODx.on("ready",function() { MODx.moveTV('.$this->xpdo->toJSON($tvs).',"'.$this->get('value').'"); });';
+                $rule = 'MODx.moveTV('.$this->xpdo->toJSON($tvs).',"'.$this->get('value').'");';
                 break;
             default: break;
         }

@@ -144,6 +144,8 @@ class modManagerResponse extends modResponse {
      * @param xPDOObject $obj If passed, will validate against for rules with constraints.
      */
     public function checkFormCustomizationRules(&$obj = null,$forParent = false) {
+        $overridden = array();
+        
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
         $c->innerJoin('modFormCustomizationSet','Set');
@@ -175,6 +177,24 @@ class modManagerResponse extends modResponse {
         $c->sortby('modActionDom.rank','ASC');
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
+
+        /* grab parents of current obj */
+        if ($obj) {
+            $rCtx = $obj->get('context_key');
+            $oCtx = $this->modx->context->get('key');
+            if (!empty($rCtx) && $rCtx != 'mgr') {
+                $this->modx->switchContext($rCtx);
+            }
+            $parents = $this->modx->getParentIds($obj->get('id'));
+            /* if on resource/create, set obj id to parent as well */
+            if ($forParent) {
+                $parents[] = $obj->get('id');
+            }
+            if (!empty($rCtx)) {
+                $this->modx->switchContext($oCtx);
+            }
+        }
+
         foreach ($domRules as $rule) {
             /* filter by template here, so that prior rules can affect template which will change rules */
             if ($obj) {
@@ -192,21 +212,7 @@ class modManagerResponse extends modResponse {
                 $constraint = $rule->get('constraint');
 
                 /* if checking a parent, get all parents up the tree */
-                if (($rule->get('for_parent') && $constraintField == 'id') || $constraintField == 'parent') {
-                    
-                    $rCtx = $obj->get('context_key');
-                    $oCtx = $this->modx->context->get('key');
-                    if (!empty($rCtx) && $rCtx != 'mgr') {
-                        $this->modx->switchContext($rCtx);
-                    }
-                    $parents = $this->modx->getParentIds($obj->get('id'));
-                    /* if on resource/create, set obj id to parent as well */
-                    if ($rule->get('for_parent')) {
-                        $parents[] = $obj->get('id');
-                    }
-                    if (!empty($rCtx)) {
-                        $this->modx->switchContext($oCtx);
-                    }
+                if (($forParent && $constraintField == 'id') || $constraintField == 'parent') {
                     if (!in_array($constraint,$parents)) {
                         continue;
                     }
@@ -218,6 +224,7 @@ class modManagerResponse extends modResponse {
             }
             /* if setting a default value, do so here */
             if ($obj && $rule->get('rule') == 'fieldDefault') {
+                $overridden[$rule->get('name')] = $rule->get('value');
                 $obj->set($rule->get('name'),$rule->get('value'));
             }
             $r = $rule->apply();
@@ -225,11 +232,12 @@ class modManagerResponse extends modResponse {
         }
         $ruleOutput = '';
         if (!empty($rules)) {
-            $ruleOutput .= '<script type="text/javascript">Ext.onReady(function() {';
+            $ruleOutput .= '<script type="text/javascript">MODx.on("ready",function() {';
             $ruleOutput .= implode("\n",$rules);
             $ruleOutput .= '});</script>';
             $this->modx->regClientStartupHTMLBlock($ruleOutput);
         }
+        return $overridden;
     }
 
     /**

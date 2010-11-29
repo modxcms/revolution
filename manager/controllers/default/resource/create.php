@@ -162,6 +162,7 @@ if ($fcDt) {
         $default_template = $fcDt->get('value');
     }
 }
+
 $defaults = array(
     'template' => $default_template,
     'content_type' => 1,
@@ -174,12 +175,25 @@ $defaults = array(
     'cacheable' => $context->getOption('cache_default', 1, $modx->_userConfig),
 );
 
-$modx->regClientStartupScript($context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig).'assets/modext/util/datetime.js');
-$modx->regClientStartupScript($context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig).'assets/modext/widgets/element/modx.panel.tv.renders.js');
-$modx->regClientStartupScript($context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig).'assets/modext/widgets/resource/modx.grid.resource.security.js');
-$modx->regClientStartupScript($context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig).'assets/modext/widgets/resource/modx.panel.resource.tv.js');
-$modx->regClientStartupScript($context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig).'assets/modext/widgets/resource/modx.panel.resource.js');
-$modx->regClientStartupScript($context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig).'assets/modext/sections/resource/create.js');
+/* handle FC rules */
+$parent->fromArray($defaults);
+if ($parent == null) {
+    $parent = $modx->newObject('modResource');
+    $parent->set('id',0);
+    $parent->set('parent',0);
+}
+$parent->set('template',$default_template);
+$overridden = $this->checkFormCustomizationRules($parent,true);
+$defaults = array_merge($defaults,$overridden);
+
+/* register JS */
+$managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
+$modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/sections/resource/create.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[
@@ -198,16 +212,4 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
-if ($parent == null) {
-    $parent = $modx->newObject('modResource');
-    $parent->set('id',0);
-    $parent->set('parent',0);
-}
-$parent->set('template',$default_template);
-$this->checkFormCustomizationRules($parent,true);
-/* fire the FC rules on the actual resource as well; this allows moving of TVs
- * and other FC manips after the default template FC rule */
-//$resource = $modx->newObject('modResource');
-//$resource->fromArray($defaults);
-//$this->checkFormCustomizationRules($resource);
 return $modx->smarty->fetch('resource/create.tpl');
