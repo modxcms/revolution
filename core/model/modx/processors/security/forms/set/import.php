@@ -72,7 +72,7 @@ foreach ($xml->fields->field as $field) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        $rule->set('rank',4);
+        $rule->set('rank',5);
         $rules[] = $rule;
     }
     $label = (string)$field->label;
@@ -108,7 +108,7 @@ foreach ($xml->fields->field as $field) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        $rule->set('rank',4);
+        $rule->set('rank',0);
         $rules[] = $rule;
     }
 }
@@ -137,7 +137,7 @@ foreach ($xml->tabs->tab as $tab) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        $rule->set('rank',0);
+        $rule->set('rank',1);
         $rules[] = $rule;
     } else {
     /* otherwise editing an existing one */
@@ -155,7 +155,7 @@ foreach ($xml->tabs->tab as $tab) {
             if ($action && $action->get('controller') == 'resource/create') {
                 $rule->set('for_parent',true);
             }
-            $rule->set('rank',1);
+            $rule->set('rank',2);
             $rules[] = $rule;
         }
         $label = (string)$tab['label'];
@@ -173,7 +173,7 @@ foreach ($xml->tabs->tab as $tab) {
             if ($action && $action->get('controller') == 'resource/create') {
                 $rule->set('for_parent',true);
             }
-            $rule->set('rank',0);
+            $rule->set('rank',3);
             $rules[] = $rule;
         }
     }
@@ -204,7 +204,7 @@ foreach ($xml->tvs->tv as $tvData) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        $rule->set('rank',10);
+        $rule->set('rank',12);
         $rules[] = $rule;
     }
     $label = (string)$tvData->label;
@@ -222,7 +222,7 @@ foreach ($xml->tvs->tv as $tvData) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        $rule->set('rank',10);
+        $rule->set('rank',11);
         $rules[] = $rule;
     }
     $defaultValue = (string)$tvData->default_value;
@@ -259,8 +259,8 @@ foreach ($xml->tvs->tv as $tvData) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        /* add 10 to rank to make sure happens after tab create */
-        $rank = 10+((int)$tvData->tab_rank);
+        /* add 20 to rank to make sure happens after tab create */
+        $rank = 20+((int)$tvData->tab_rank);
         $rule->set('rank',$rank);
         $rules[] = $rule;
     }

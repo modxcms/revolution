@@ -54,7 +54,7 @@ foreach ($fields as $field) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        $rule->set('rank',4);
+        $rule->set('rank',5);
         $newRules[] = $rule;
     }
     if (!empty($field['label'])) {
@@ -90,7 +90,7 @@ foreach ($fields as $field) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        $rule->set('rank',4);
+        $rule->set('rank',0);
         $newRules[] = $rule;
     }
 }
@@ -119,7 +119,7 @@ foreach ($tabs as $tab) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        $rule->set('rank',0);
+        $rule->set('rank',1);
         $newRules[] = $rule;
     } else {
     /* otherwise editing an existing one */
@@ -138,7 +138,7 @@ foreach ($tabs as $tab) {
             if ($action && $action->get('controller') == 'resource/create') {
                 $rule->set('for_parent',true);
             }
-            $rule->set('rank',1);
+            $rule->set('rank',2);
             $newRules[] = $rule;
         }
         if (!empty($tab['label'])) {
@@ -156,7 +156,7 @@ foreach ($tabs as $tab) {
             if ($action && $action->get('controller') == 'resource/create') {
                 $rule->set('for_parent',true);
             }
-            $rule->set('rank',0);
+            $rule->set('rank',3);
             $newRules[] = $rule;
         }
     }
@@ -183,7 +183,7 @@ foreach ($tvs as $tvData) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        $rule->set('rank',10);
+        $rule->set('rank',12);
         $newRules[] = $rule;
     }
     if (!empty($tvData['label'])) {
@@ -201,7 +201,7 @@ foreach ($tvs as $tvData) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        $rule->set('rank',10);
+        $rule->set('rank',11);
         $newRules[] = $rule;
     }
     if ($tv->get('default_text') != $tvData['default_value']) {
@@ -237,8 +237,8 @@ foreach ($tvs as $tvData) {
         if ($action && $action->get('controller') == 'resource/create') {
             $rule->set('for_parent',true);
         }
-        /* add 10 to rank to make sure happens after tab create */
-        $rank = 10+((int)$tvData['rank']);
+        /* add 20 to rank to make sure happens after tab create */
+        $rank = 20+((int)$tvData['rank']);
         $rule->set('rank',$rank);
         $newRules[] = $rule;
     }
