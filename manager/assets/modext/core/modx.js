@@ -261,7 +261,7 @@ Ext.extend(MODx,Ext.Component,{
     ,preview: function() {
         window.open(MODx.config.site_url);
     }
-    ,makeDroppable: function(fld,h) {
+    ,makeDroppable: function(fld,h,p) {
         if (!fld) return false;
         h = h || Ext.emptyFn;
         if (fld.getEl) {
@@ -275,6 +275,7 @@ Ext.extend(MODx,Ext.Component,{
                 ,target: fld
                 ,targetEl: el.dom
                 ,onInsert: h
+                ,panel: p || 'modx-panel-resource'
             });
         }
         return true;
