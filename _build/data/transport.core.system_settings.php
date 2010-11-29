@@ -602,6 +602,15 @@ $settings['friendly_urls']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['hidemenu_default']= $xpdo->newObject('modSystemSetting');
+$settings['hidemenu_default']->fromArray(array (
+  'key' => 'hidemenu_default',
+  'value' => 0,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);
 $settings['mail_charset']= $xpdo->newObject('modSystemSetting');
 $settings['mail_charset']->fromArray(array (
   'key' => 'mail_charset',

@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2882] Add hidemenu_default setting for setting default hide from menus on Resources
+- Fix issue with derivative Resource types and FC rules
 - [#2858] Extra sanity checks to ensure md5 pw is never sent across get/getlist processors for Users, even if user has access level
 - [#6] Fix issue with RTL text in nodes in Resource tree
 - [#2873] Fix relativity of image urls in drag/drop and TVs when using various filemanager_path/url settings

@@ -124,7 +124,7 @@ if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)
     }
 }
 
-
+/* register FC rules */
 $record = $resource->toArray();
 $overridden = $this->checkFormCustomizationRules($resource);
 $record = array_merge($record,$overridden);

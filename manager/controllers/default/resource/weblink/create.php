@@ -132,10 +132,23 @@ $defaults = array(
     'context_key' => $ctx,
     'parent' => isset($_REQUEST['parent']) ? $_REQUEST['parent'] : 0,
     'richtext' => 0,
+    'hidemenu' => $context->getOption('hidemenu_default', 0, $modx->_userConfig),
     'published' => $context->getOption('publish_default', 0, $modx->_userConfig),
     'searchable' => $context->getOption('search_default', 1, $modx->_userConfig),
     'cacheable' => $context->getOption('cache_default', 1, $modx->_userConfig),
 );
+
+/* handle FC rules */
+if ($parent == null) {
+    $parent = $modx->newObject('modResource');
+    $parent->set('id',0);
+    $parent->set('parent',0);
+    $parent->set('class_key','modWebLink');
+}
+$parent->fromArray($defaults);
+$parent->set('template',$default_template);
+$overridden = $this->checkFormCustomizationRules($parent,true);
+$defaults = array_merge($defaults,$overridden);
 
 /* register JS scripts */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
@@ -164,17 +177,4 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
-if ($parent == null) {
-    $parent = $modx->newObject('modResource');
-    $parent->set('class_key','modWebLink');
-    $parent->set('id',0);
-    $parent->set('parent',0);
-}
-$parent->set('template',$default_template);
-$this->checkFormCustomizationRules($parent,true);
-/* fire the FC rules on the actual resource as well; this allows moving of TVs
- * and other FC manips after the default template FC rule */
-//$resource = $modx->newObject('modResource');
-//$resource->fromArray($defaults);
-//$this->checkFormCustomizationRules($resource);
 return $modx->smarty->fetch('resource/weblink/create.tpl');

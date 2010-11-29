@@ -77,6 +77,11 @@ if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)
 $publish_document = $modx->hasPermission('publish_document');
 $access_permissions = $modx->hasPermission('access_permissions');
 
+/* register FC rules */
+$record = $resource->toArray();
+$overridden = $this->checkFormCustomizationRules($resource);
+$record = array_merge($record,$overridden);
+
 /* register JS scripts */
 $modx->smarty->assign('_ctx',$resource->get('context_key'));
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
@@ -96,7 +101,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-weblink-update"
         ,resource: "'.$resource->get('id').'"
-        ,record: '.$modx->toJSON($resource->toArray()).'
+        ,record: '.$modx->toJSON($record).'
         ,which_editor: "'.$which_editor.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
@@ -109,6 +114,4 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
-
-$this->checkFormCustomizationRules($resource);
 return $modx->smarty->fetch('resource/weblink/update.tpl');

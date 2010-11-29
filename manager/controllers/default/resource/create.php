@@ -170,18 +170,19 @@ $defaults = array(
     'context_key' => $ctx,
     'parent' => isset($_REQUEST['parent']) ? $_REQUEST['parent'] : 0,
     'richtext' => $richtext,
+    'hidemenu' => $context->getOption('hidemenu_default', 0, $modx->_userConfig),
     'published' => $context->getOption('publish_default', 0, $modx->_userConfig),
     'searchable' => $context->getOption('search_default', 1, $modx->_userConfig),
     'cacheable' => $context->getOption('cache_default', 1, $modx->_userConfig),
 );
 
 /* handle FC rules */
-$parent->fromArray($defaults);
 if ($parent == null) {
     $parent = $modx->newObject('modResource');
     $parent->set('id',0);
     $parent->set('parent',0);
 }
+$parent->fromArray($defaults);
 $parent->set('template',$default_template);
 $overridden = $this->checkFormCustomizationRules($parent,true);
 $defaults = array_merge($defaults,$overridden);

@@ -934,7 +934,7 @@ MODx.getQRSettings = function(id,va) {
         ,name: 'hidemenu'
         ,id: 'modx-'+id+'-hidemenu'
         ,inputValue: 1
-        ,checked: va['hidemenu'] != undefined ? va['hidemenu'] : false                
+        ,checked: va['hidemenu'] != undefined ? va['hidemenu'] : (MODx.config.hidemenu_default == '1' ? true : false)
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_cacheable')
@@ -942,7 +942,7 @@ MODx.getQRSettings = function(id,va) {
         ,name: 'cacheable'
         ,id: 'modx-'+id+'-cacheable'
         ,inputValue: 1
-        ,checked: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? true : false)                
+        ,checked: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? true : false)
     },{
         xtype: 'checkbox'
         ,name: 'clearCache'

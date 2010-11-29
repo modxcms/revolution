@@ -77,6 +77,11 @@ if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)
     }
 }
 
+/* register FC rules */
+$record = $resource->toArray();
+$overridden = $this->checkFormCustomizationRules($resource);
+$record = array_merge($record,$overridden);
+
 /* register JS scripts */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
 $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
@@ -95,7 +100,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-symlink-update"
         ,resource: "'.$resource->get('id').'"
-        ,record: '.$modx->toJSON($resource->toArray()).'
+        ,record: '.$modx->toJSON($record).'
         ,which_editor: "'.$which_editor.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
