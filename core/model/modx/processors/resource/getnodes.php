@@ -147,7 +147,7 @@ while ($item) {
             }
 
             $itemArray = array(
-                'text' => strip_tags($item->$nodeField).' ('.$item->id.')',
+                'text' => strip_tags($item->$nodeField).' <span dir="ltr">('.$item->id.')</span>',
                 'id' => $item->context_key . '_'.$item->id,
                 'pk' => $item->id,
                 'cls' => $class,

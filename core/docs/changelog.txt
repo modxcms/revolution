@@ -2,7 +2,8 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-- [#2873] Fixed relativity of image urls in drag/drop and TVs when using various filemanager_path/url settings
+- [#6] Fix issue with RTL text in nodes in Resource tree
+- [#2873] Fix relativity of image urls in drag/drop and TVs when using various filemanager_path/url settings
 - [#2878] Ensure resource panel is marked dirty when drag/dropping into TV
 - [#2828] Fix issue with incorrect content field name for FC rules
 - [#2863] Fix order of execution issues with FC rules and default values
