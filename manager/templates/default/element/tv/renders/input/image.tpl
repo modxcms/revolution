@@ -22,7 +22,7 @@ var fld{/literal}{$tv->id}{literal} = MODx.load({
             if (Ext.isEmpty(data.relativeUrl)) {
                 d.update('');
             } else {
-                d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.relativeUrl+'&wctx={/literal}{$ctx}{literal}" alt="" />');
+                d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.url+'&wctx={/literal}{$ctx}{literal}" alt="" />');
             }
         }, scope:this}
     }

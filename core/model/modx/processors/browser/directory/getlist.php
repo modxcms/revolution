@@ -62,6 +62,7 @@ if ($act) { $editAction = $act->get('id'); }
 
 /* get relative url */
 $baseUrl = $modx->fileHandler->getBaseUrl(true);
+$isRelativeBaseUrl = $modx->getOption('filemanager_path_relative',null,true);
 
 /* get mb support settings */
 $useMultibyte = $modx->getOption('use_multibyte',null,false);
@@ -107,19 +108,31 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         if ($canUpdateFile) $cls .= ' pupdate';
         $encFile = rawurlencode($dir.$fileName);
         $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile.'&wctx='.$workingContext->get('key') : null;
-        $url = $baseUrl.trim(str_replace('//','/',$dir.$fileName),'/');
-        $url = ($modx->getOption('filemanager_url_relative',null,true) ? '../' : '').$url;
+
+        /* get relative url from manager/ */
+        $fromManagerUrl = $baseUrl.trim(str_replace('//','/',$dir.$fileName),'/');
+        $fromManagerUrl = ($modx->getOption('filemanager_url_relative',null,true) ? '../' : '').$fromManagerUrl;
+
+        /* get relative url for drag/drop */
+        $url = $dir.$fileName;
+        if ($baseUrl != '/') {
+            $url = str_replace('//','/',$baseUrl.$dir.$fileName);
+        }
+        if ($isRelativeBaseUrl) {
+            $url = ltrim($url,'/');
+        }
+
         $files[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
             'cls' => $cls,
             'type' => 'file',
             'leaf' => true,
-            'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$url.'" alt="'.$fileName.'" />' : '',
+            'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
             'page' => $modx->fileHandler->isBinary($filePathName) ? $page : null,
             'perms' => $octalPerms,
             'path' => $dir.$fileName,
-            'url' => $dir.$fileName,
+            'url' => $url,
             'file' => $encFile,
         );
     }
