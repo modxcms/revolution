@@ -392,7 +392,7 @@ class modRequest {
         if (file_exists($this->modx->getOption(xPDO::OPT_CACHE_PATH) . "sitePublishing.idx.php"))
             include ($this->modx->getOption(xPDO::OPT_CACHE_PATH) . "sitePublishing.idx.php");
         $timeNow= time() + $this->modx->getOption('server_offset_time',null,0);
-        if ($cacheRefreshTime != 0 && $cacheRefreshTime <= strtotime($timeNow)) {
+        if ($cacheRefreshTime != 0 && $cacheRefreshTime <= $timeNow) {
             /* FIXME: want to find a better way to handle this publishing check without mass updates to the database! */
             $tblResource= $this->modx->getTableName('modResource');
             if (!$result= $this->modx->exec("UPDATE {$tblResource} SET published=1,publishedon={$timeNow} WHERE pub_date < {$timeNow} AND pub_date > 0")) {
