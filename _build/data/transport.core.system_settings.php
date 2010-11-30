@@ -515,7 +515,7 @@ $settings['friendly_alias_restrict_chars']->fromArray(array (
 $settings['friendly_alias_restrict_chars_pattern']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_restrict_chars_pattern']->fromArray(array (
   'key' => 'friendly_alias_restrict_chars_pattern',
-  'value' => '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/',
+  'value' => '/[\0\x0B\t\n\r\f\a&=+%#<>"~:`@\?\[\]\{\}\|\^\'\\\\]/',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'furls',
