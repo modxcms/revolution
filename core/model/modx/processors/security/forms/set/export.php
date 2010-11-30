@@ -8,6 +8,10 @@
 if (!$modx->hasPermission('customize_forms')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('formcustomization');
 
+if (!extension_loaded('XMLWriter') || !class_exists('XMLWriter')) {
+    return $modx->error->failure($modx->lexicon('xmlwriter_err_nf'));
+}
+
 if (empty($scriptProperties['download'])) {
     if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('set_err_ns'));
     $c = $modx->newQuery('modFormCustomizationSet');
@@ -30,7 +34,7 @@ if (empty($scriptProperties['download'])) {
     $setArray = $set->toArray();
     $setArray = array_merge($setArray,$set->getData());
 
-    $xml = new XmlWriter();
+    $xml = new XMLWriter();
     $xml->openMemory();
     $xml->startDocument('1.0','UTF-8');
     $xml->setIndent(true);

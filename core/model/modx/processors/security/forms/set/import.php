@@ -5,8 +5,12 @@
  * @package modx
  * @subpackage processors.security.forms.set
  */
-if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
-$modx->lexicon->load('propertyset','element');
+if (!$modx->hasPermission('customize_forms')) return $modx->error->failure($modx->lexicon('permission_denied'));
+$modx->lexicon->load('formcustomization');
+
+if (!function_exists('simplexml_load_string')) {
+    return $modx->error->failure($modx->lexicon('simplexml_err_nf'));
+}
 
 /* get profile */
 if (empty($scriptProperties['profile'])) return $modx->error->failure($modx->lexicon('profile_err_ns'));

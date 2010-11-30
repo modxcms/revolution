@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2886] Ensure SimpleXML and XMLWriter extensions are installed when using FC Set import/export
 - [#2882] Add hidemenu_default setting for setting default hide from menus on Resources
 - Fix issue with derivative Resource types and FC rules
 - [#2858] Extra sanity checks to ensure md5 pw is never sent across get/getlist processors for Users, even if user has access level
