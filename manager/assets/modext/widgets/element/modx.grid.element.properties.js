@@ -412,6 +412,11 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                 'success': {fn:function(o) {
                     var s = this.getStore();
                     var data = o.a.result.object;
+                    /* handle <> in values, desc */
+                    for (var i in data) {
+                        if (data[i][4]) { data[i][4] = data[i][4].replace(/&gt;/g,'>').replace(/&lt;/g,'<'); }
+                        if (data[i][1]) { data[i][1] = data[i][1].replace(/&gt;/g,'>').replace(/&lt;/g,'<'); }
+                    }
                     s.loadData(data);
                     /* mark fields dirty */
                     var recs = s.getRange(0,s.getTotalCount());

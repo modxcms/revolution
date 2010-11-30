@@ -9,14 +9,17 @@ if (!$modx->hasPermission('view_propertyset')) return $modx->error->failure($mod
 $modx->lexicon->load('propertyset','element');
 
 /* verify file exists */
-if (!isset($scriptProperties['file'])) return $modx->error->failure($modx->lexicon('properties_import_err_upload'));
+if (empty($scriptProperties['file'])) return $modx->error->failure($modx->lexicon('properties_import_err_upload'));
 $_FILE = $scriptProperties['file'];
-if ($_FILE['error'] != 0) return $modx->error->failure($modx->lexicon('properties_import_err_upload'));
+if (empty($_FILE) || !empty($_FILE['error'])) return $modx->error->failure($modx->lexicon('properties_import_err_upload'));
 
-$o = file_get_contents($_FILE['tmp_name']);
+$o = @file_get_contents($_FILE['tmp_name']);
+if (empty($o)) {
+    return $modx->error->failure($modx->lexicon('properties_import_err_upload'));
+}
 
 $properties = $modx->fromJSON($o);
-if (!is_array($properties)) {
+if (empty($properties) || !is_array($properties)) {
     return $modx->error->failure($modx->lexicon('properties_import_err_invalid'));
 }
 
@@ -28,12 +31,13 @@ foreach ($properties as $property) {
     if (empty($desc)) { $desc = empty($property['description']) ? '' : $property['description']; }
     
     $desc = htmlspecialchars(str_replace("'",'"',$desc));
+    $value = str_replace(array('<','>'),array("&lt;","&gt;"),$property['value']);
     $data[] = array(
         $property['name'],
         $desc,
         $property['xtype'],
         $property['options'],
-        $property['value'],
+        $value,
         false, /* overridden set to false */
     );
 }
