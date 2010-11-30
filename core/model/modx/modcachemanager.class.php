@@ -275,6 +275,11 @@ class modCacheManager extends xPDOCacheManager {
                     }
                     $results['resourceGroups']= $groups;
                 }
+                $context = $obj->_contextKey ? $obj->_contextKey : 'web';
+                $policies = $obj->findPolicy($context);
+                if (!empty($policies)) {
+                    $results['policyCache']= $policies;
+                }
                 if (!empty($this->modx->elementCache)) {
                     $results['elementCache']= $this->modx->elementCache;
                 }
