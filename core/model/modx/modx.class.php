@@ -2344,7 +2344,7 @@ class modX extends xPDO {
         if (intval($id) == 0) {
             $id = intval($this->resource->id);
         }
-        $query = new xPDOCriteria("SELECT keywords.keyword FROM " . $this->getTableName('modKeyword') . " AS keywords "
+        $query = new xPDOCriteria($this, "SELECT keywords.keyword FROM " . $this->getTableName('modKeyword') . " AS keywords "
             . "INNER JOIN " . $this->getTableName('modResourceKeyword') . " AS xref "
             . "ON keywords.id=xref.keyword_id WHERE xref.content_id = :id", array(':id' => $id));
         $keywords = array();
@@ -2367,7 +2367,7 @@ class modX extends xPDO {
         if (intval($id) == 0) {
             $id = intval($this->resource->id);
         }
-        $query = new xPDOCriteria("SELECT smt.* ".
+        $query = new xPDOCriteria($this, "SELECT smt.* ".
                "FROM ".$this->getTableName('modMetatag')." smt ".
                "INNER JOIN ".$this->getTableName('modResourceMetatag')." cmt ON cmt.metatag_id=smt.id ".
                "WHERE cmt.content_id = :id", array(':id' => $id));
