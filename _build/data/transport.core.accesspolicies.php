@@ -69,7 +69,7 @@ $policies['6']->fromArray(array (
   'description' => 'MODx Element policy with all attributes.',
   'parent' => 0,
   'class' => '',
-  'data' => '{"create":true,"delete":true,"list":true,"load":true,"remove":true,"save":true,"view":true,"copy":true}',
+  'data' => '{"add_children":true,"create":true,"delete":true,"list":true,"load":true,"remove":true,"save":true,"view":true,"copy":true}',
   'lexicon' => 'permissions',
 ), '', true, true);
 

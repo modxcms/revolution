@@ -6,6 +6,11 @@
  */
 $permissions = array();
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'add_children',
+    'description' => 'perm.add_children_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'create',
     'description' => 'perm.create_desc',
     'value' => true,

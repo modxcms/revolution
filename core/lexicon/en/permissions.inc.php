@@ -9,7 +9,7 @@
 $_lang['perm.about_desc'] = 'The About page.';
 $_lang['perm.access_permissions_desc'] = 'Any Access Permission-related pages and actions.';
 $_lang['perm.actions_desc'] = 'The Actions page.';
-$_lang['perm.add_children_desc'] = 'To add any Resources as children of the specified Resource.';
+$_lang['perm.add_children_desc'] = 'To add any Resources as children of the specified Resource or Elements to a Category.';
 $_lang['perm.change_password_desc'] = 'User can change their user password.';
 $_lang['perm.change_profile_desc'] = 'User can change their profile.';
 $_lang['perm.charsets_desc'] = 'To view a list of charsets.';
