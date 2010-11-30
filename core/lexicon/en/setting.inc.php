@@ -232,6 +232,9 @@ $_lang['setting_filemanager_url_relative_desc'] = 'If your filemanager_url setti
 $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
 $_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODx username and/or password.';
 
+$_lang['setting_forward_merge_excludes'] = 'sendForward Exclude Fields on Merge';
+$_lang['setting_forward_merge_excludes_desc'] = 'A SymLink merges non-empty field values over the values in the target Resource; using this comma-delimited list of excludes prevents specified fields from being overridden by the SymLink.';
+
 $_lang['setting_friendly_alias_lowercase_only'] = 'FURL Lowercase Aliases';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Determines whether to allow only lowercase characters in a Resource alias.';
 

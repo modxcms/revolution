@@ -485,6 +485,15 @@ $settings['forgot_login_email']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['forward_merge_excludes']= $xpdo->newObject('modSystemSetting');
+$settings['forward_merge_excludes']->fromArray(array (
+  'key' => 'forward_merge_excludes',
+  'value' => 'type,published,class_key,context_key',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'core',
+  'editedon' => null,
+), '', true, true);
 $settings['friendly_alias_lowercase_only']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_lowercase_only']->fromArray(array (
   'key' => 'friendly_alias_lowercase_only',

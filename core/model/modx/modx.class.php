@@ -836,9 +836,39 @@ class modX extends xPDO {
         }
         $this->elementCache = array();
         if ($idInt > 0) {
+            $merge = array_key_exists('merge', $options) && !empty($options['merge']);
+            $currentResource = array();
+            if ($merge) {
+                $excludes = array_merge(
+                    explode(',', $this->getOption('forward_merge_excludes', $options, 'type,published,class_key,context_key')),
+                    array(
+                        'content'
+                        ,'pub_date'
+                        ,'unpub_date'
+                        ,'richtext'
+                        ,'_content'
+                        ,'_processed'
+                    )
+                );
+                reset($this->resource->_fields);
+                while (list($fkey, $fval) = each($this->resource->_fields)) {
+                    if (!in_array($fkey, $excludes)) {
+                        if (is_scalar($fval) && $fval !== '') {
+                            $currentResource[$fkey] = $fval;
+                        } elseif (is_array($fval) && count($fval) === 5 && $fval[1] !== '') {
+                            $currentResource[$fkey] = $fval;
+                        }
+                    }
+                }
+            }
             $this->resource= $this->request->getResource('id', $idInt);
             if ($this->resource) {
-                $this->resourceIdentifier= $idInt;
+                if ($merge && !empty($currentResource)) {
+                    $this->resource->_fields = array_merge($this->resource->_fields, $currentResource);
+                    $this->elementCache = array();
+                    unset($currentResource);
+                }
+                $this->resourceIdentifier= $this->resource->get('id');
                 $this->resourceMethod= 'id';
                 if (isset($options['response_code']) && !empty($options['response_code'])) {
                     header($options['response_code']);
