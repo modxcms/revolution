@@ -834,6 +834,7 @@ class modX extends xPDO {
         } elseif (!is_array($options)) {
             $options = array();
         }
+        $this->elementCache = array();
         if ($idInt > 0) {
             $this->resource= $this->request->getResource('id', $idInt);
             if ($this->resource) {

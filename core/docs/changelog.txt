@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2888] Fix problem with elementCache in modX::sendForward()
 - [#2610] Allow Elements to be created under a Category when a Category Policy is in effect
 - [#2869] Standardize initial parent combo value text on Resource edit page
 - [#2736] Colon character ":" added to default FURL Alias Character Restriction Pattern
