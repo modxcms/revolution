@@ -131,6 +131,10 @@ if ($workingContext->getOption('friendly_alias_urls', false)) {
             'alias' => $aliasPath,
         ));
         $modx->error->addField('alias', $err);
+    } else {
+        if(empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias',null,false)) {
+            $scriptProperties['alias'] = $scriptProperties['pagetitle'];
+        }
     }
 }
 if ($modx->error->hasError()) return $modx->error->failure();
