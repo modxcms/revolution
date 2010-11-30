@@ -374,7 +374,9 @@ Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
     ,rteLoaded: false
     ,setup: function() {
         if (!this.initialized) {
-            this.getForm().setValues(this.config.record);if (!Ext.isEmpty(this.config.record.pagetitle)) {
+            this.getForm().setValues(this.config.record);
+            this.getForm().findField('parent-cmb').setValue(this.config.record.pagetitle+' ('+this.config.record.id+')');
+            if (!Ext.isEmpty(this.config.record.pagetitle)) {
                 Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('symlink')+': '+this.config.record.pagetitle+'</h2>');
             }
             this.defaultClassKey = this.config.record.class_key || 'modSymLink';

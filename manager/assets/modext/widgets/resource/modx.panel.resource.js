@@ -448,6 +448,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,setup: function() {
         if (!this.initialized) { 
             this.getForm().setValues(this.config.record);
+            this.getForm().findField('parent-cmb').setValue(this.config.record.pagetitle+' ('+this.config.record.id+')');
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
                 Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+this.config.record.pagetitle+'</h2>');
             }
