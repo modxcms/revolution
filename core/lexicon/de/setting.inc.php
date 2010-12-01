@@ -273,6 +273,9 @@ $_lang['setting_friendly_urls'] = 'Suchmaschinenfreundliche URLs benutzen';
 $_lang['setting_friendly_urls_desc'] = 'Dies erlaubt Ihnen, suchmaschinenfreundliche URLs mit MODx zu verwenden. Bitte beachten Sie, dass dies nur für MODx-Installationen gilt, die auf einem Apache-Webserver laufen, und dass Sie eine .htaccess-Datei schreiben müssen, damit dies funktioniert. Mehr Informationen finden Sie in der .htaccess-Datei, die in der MODx-Distribution enthalten ist.';
 $_lang['setting_friendly_urls_err'] = 'Bitte geben Sie an, ob Sie suchmaschinenfreundliche URLs verwenden möchten oder nicht.';
 
+$_lang['setting_hidemenu_default'] = 'Standardeinstellung für Option "nicht in Menüs anzeigen"';
+$_lang['setting_hidemenu_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig nicht in Menüs angezeigt werden sollen.';
+
 $_lang['setting_mail_charset'] = 'E-Mail-Zeichensatz';
 $_lang['setting_mail_charset_desc'] = 'Legt den Standard-Zeichensatz (charset) für E-Mails fest, z.B. "iso-8859-1" oder "utf-8"';
 
