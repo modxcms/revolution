@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODx Revolution 2.0.4-pl2 (November 8, 2010)
+====================================
 - [#22] Allow SymLinks metadata to override target Resource metadata
 - Cache Resource ACL Policies with the Resource
 - [#2888] Fix problem with elementCache in modX::sendForward()
