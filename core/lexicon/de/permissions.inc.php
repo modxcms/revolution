@@ -10,7 +10,7 @@
 $_lang['perm.about_desc'] = 'Die Seite "Über MODx" anzeigen.';
 $_lang['perm.access_permissions_desc'] = 'Mit Zugriffsrechten zusammenhängende Seiten und Aktionen anzeigen und bearbeiten/benutzen.';
 $_lang['perm.actions_desc'] = 'Die Aktionen-Seite anzeigen und benutzen.';
-$_lang['perm.add_children_desc'] = 'Der angegebenen Ressource Kind-Ressourcen hinzufügen.';
+$_lang['perm.add_children_desc'] = 'Der angegebenen Ressource Kind-Ressourcen hinzufügen oder Elemente einer Kategorie hinzufügen.';
 $_lang['perm.change_password_desc'] = 'Benutzer kann sein Benutzer-Passwort ändern.';
 $_lang['perm.change_profile_desc'] = 'Benutzer kann sein Profil ändern.';
 $_lang['perm.charsets_desc'] = 'Eine Liste von Zeichencodierungen anzeigen.';  // charsets = Zeichensätze?
