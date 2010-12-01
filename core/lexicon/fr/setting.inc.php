@@ -232,6 +232,9 @@ $_lang['setting_filemanager_url_relative_desc'] = 'Si votre paramètre filemanag
 $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
 $_lang['setting_forgot_login_email_desc'] = 'Le modèle de l\'email qui est envoyé quand un utilisateur a oublié ses identifiants et/ou mot de passe de MODx.';
 
+$_lang['setting_forward_merge_excludes'] = 'Faire suivre exclue les champs "fusionnés"';
+$_lang['setting_forward_merge_excludes_desc'] = 'Un lien symbolique qui fusionne les valeurs des champs non vides vers les valeurs de la ressource cible; utiliser une liste "d\'exclusions", séparées par des virgules, évite que les champs indiqués soient écrasés par le lien symbolique.';
+
 $_lang['setting_friendly_alias_lowercase_only'] = 'Alias en minuscules';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Défini si l\'alias des ressources doit être seulement en minuscules ou non.';
 
