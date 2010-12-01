@@ -375,9 +375,6 @@ $_lang['setting_proxy_port_desc'] = 'Der Port für Ihren Proxy-Server.';
 $_lang['setting_proxy_username'] = 'Proxy-Benutzername';
 $_lang['setting_proxy_username_desc'] = 'Der Benutzername, der benötigt wird, um sich beim Proxy-Server zu authentifizieren.';
 
-$_lang['setting_password_min_length'] = 'Minimale Passwort-Länge';
-$_lang['setting_password_min_length_desc'] = 'Die minimale Länge für ein Benutzer-Passwort.';
-
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb: Erlaube src über dem Document Root';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Gibt an, ob der src-Pfad außerhalb des Document-Root liegen darf. Dies ist nützlich für Multi-Kontext-Einsatz mit mehreren Virtual Hosts.';
 
