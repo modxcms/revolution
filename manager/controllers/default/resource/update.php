@@ -129,6 +129,8 @@ $record = $resource->toArray();
 $overridden = $this->checkFormCustomizationRules($resource);
 $record = array_merge($record,$overridden);
 
+$record['parent_pagetitle'] = $parent ? $parent->get('pagetitle') : '';
+
 /* register JS */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
 $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');

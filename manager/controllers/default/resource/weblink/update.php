@@ -82,6 +82,8 @@ $record = $resource->toArray();
 $overridden = $this->checkFormCustomizationRules($resource);
 $record = array_merge($record,$overridden);
 
+$record['parent_pagetitle'] = $parent ? $parent->get('pagetitle') : '';
+
 /* register JS scripts */
 $modx->smarty->assign('_ctx',$resource->get('context_key'));
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);

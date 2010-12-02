@@ -150,6 +150,8 @@ $parent->set('template',$default_template);
 $overridden = $this->checkFormCustomizationRules($parent,true);
 $defaults = array_merge($defaults,$overridden);
 
+$defaults['parent_pagetitle'] = $parent->get('pagetitle');
+
 /* register JS scripts */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
 $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
