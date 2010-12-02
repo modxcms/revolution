@@ -551,29 +551,33 @@ class xPDO {
      * @param string $class The name of a class to to get the static method from.
      * @param string $method The name of the method you want to call.
      * @param array $args An array of arguments for the method.
+     * @param boolean $transient Indicates if the class has dbtype derivatives. Set to true if you
+     * want to use on classes not derived from xPDOObject.
      * @return mixed|null The callback method's return value or null if no valid method is found.
      */
-    public function call($class, $method, array $args = array()) {
+    public function call($class, $method, array $args = array(), $transient = false) {
         $return = null;
-        $className = $this->loadClass($class) . '_' . $this->getOption('dbtype');
-        $callback = array($className, $method);
-        if (is_callable($callback)) {
+        $callback = '';
+        if ($transient) {
+            $className = $this->loadClass($class, '', false, true);
+            if ($className) {
+                $callback = array($className, $method);
+            }
+        } else {
+            $className = $this->loadClass($class);
+            if ($className) {
+                $className .= '_' . $this->getOption('dbtype');
+                $callback = array($className, $method);
+            }
+        }
+        if (!empty($callback) && is_callable($callback)) {
             try {
                 $return = call_user_func_array($callback, $args);
             } catch (Exception $e) {
                 $this->log(xPDO::LOG_LEVEL_ERROR, "An exception occurred calling {$className}::{$method}() - " . $e->getMessage());
             }
         } else {
-            $callback = array($className, $method);
-            if (is_callable($callback)) {
-                try {
-                    $return = call_user_func_array($callback, $args);
-                } catch (Exception $e) {
-                    $this->log(xPDO::LOG_LEVEL_ERROR, "An exception occurred calling {$className}::{$method}() - " . $e->getMessage());
-                }
-            } else {
-                $this->log(xPDO::LOG_LEVEL_ERROR, "{$class}::{$method}() is not a valid static method.");
-            }
+            $this->log(xPDO::LOG_LEVEL_ERROR, "{$class}::{$method}() is not a valid static method.");
         }
         return $return;
     }
@@ -2139,6 +2143,13 @@ class xPDO {
         return $split;
     }
 
+    /**
+     * Parses parameter bindings in SQL prepared statements.
+     *
+     * @param string $sql A SQL prepared statement to parse bindings in.
+     * @param array $bindings An array of parameter bindings to use for the replacements.
+     * @return string The SQL with the binding placeholders replaced.
+     */
     public function parseBindings($sql, $bindings) {
         if (!empty($sql) && !empty($bindings)) {
             reset($bindings);
@@ -2187,6 +2198,12 @@ class xPDO {
         return $sql;
     }
 
+    /**
+     * Get the appropriate PDO::PARAM_ type constant from a PHP value.
+     *
+     * @param mixed $value Any PHP scalar or null value
+     * @return int|null
+     */
     public function getPDOType($value) {
         $type= null;
         if (is_null($value)) $type= PDO::PARAM_NULL;
