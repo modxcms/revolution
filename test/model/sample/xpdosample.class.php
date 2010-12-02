@@ -11,4 +11,8 @@
  * @see xpdosample.map.inc.php
  * @package sample
  */
-class xPDOSample extends xPDOSimpleObject {}
+class xPDOSample extends xPDOSimpleObject {
+    public static function callTest() {
+        return 'xPDOSample';
+    }
+}

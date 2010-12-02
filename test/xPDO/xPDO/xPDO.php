@@ -458,10 +458,27 @@ class xPDOTest extends xPDOTestCase {
     }
 
     /**
+     * Test xPDO->call()
+     */
+    public function testCall() {
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        $results = array();
+        try {
+            $results[] = ($this->xpdo->call('Item', 'callTest') === 'Item_' . $this->xpdo->getOption('dbtype'));
+            $results[] = ($this->xpdo->call('xPDOSample', 'callTest') === 'xPDOSample');
+            $results[] = ($this->xpdo->call('TransientDerivative', 'callTest', array(), true) === 'TransientDerivative');
+            $results[] = ($this->xpdo->call('Transient', 'callTest', array(), true) === 'Transient');
+        } catch (Exception $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
+        $this->assertTrue(!array_search(false, $results, true), 'Error using call()');
+    }
+
+    /**
      * Test table destruction.
      */
     public function testRemoveObjectContainer() {
-    	if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
+        if (!empty(xPDOTestHarness::$debug)) print "\n" . __METHOD__ . " = ";
         try {
             $this->xpdo->getManager();
             $result[] = $this->xpdo->manager->removeObjectContainer('Person');
