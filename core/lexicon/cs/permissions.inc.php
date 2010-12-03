@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-10-12
+ * @updated 2010-12-02
  */
 $_lang['perm.about_desc'] = 'O MODx Revolution.';
 $_lang['perm.access_permissions_desc'] = 'Přístup k stránkám s oprávněním.';
@@ -17,7 +17,9 @@ $_lang['perm.change_password_desc'] = 'Uživatel si může změnit své heslo.';
 $_lang['perm.change_profile_desc'] = 'Uživatel si může změnit své uživatelské údaje.';
 $_lang['perm.charsets_desc'] = 'Možnost zobrazit seznam znakových sad.';
 $_lang['perm.class_map_desc'] = 'Možnost zobrazit seznam tříd v Mapě tříd.';
+$_lang['perm.components_desc'] = 'Možnost zobrazit komponenty v menu.';
 $_lang['perm.content_types_desc'] = 'Správa typu obsahu.';
+$_lang['perm.copy_desc'] = 'Schopnost kopírovat objekty.';
 $_lang['perm.countries_desc'] = 'Možnost zobrazit seznam zemí.';
 $_lang['perm.create_desc'] = 'Možnost vytvořit nové objekty.';
 $_lang['perm.credits_desc'] = 'Možnost zobrazit stránku s poděkováním.';
