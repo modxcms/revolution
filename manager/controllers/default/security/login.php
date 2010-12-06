@@ -19,6 +19,9 @@ if (!empty($_SERVER['REQUEST_URI'])) {
 }
 
 if (!empty($_POST)) {
+    foreach ($_POST as $k => $v) {
+        $_POST[$k] = $modx->sanitizeString($v);
+    }
     $this->loadErrorHandler();
     $scriptProperties = $_REQUEST;
 
@@ -127,7 +130,7 @@ $eventInfo= is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventIn
 $modx->smarty->assign('onManagerLoginFormPrerender', $eventInfo);
 
 if (isset($_REQUEST['installGoingOn'])) {
-    $installGoingOn = $_REQUEST['installGoingOn'];
+    $installGoingOn = $modx->sanitizeString($_REQUEST['installGoingOn']);
 }
 if (isset ($installGoingOn)) {
     switch ($installGoingOn) {
