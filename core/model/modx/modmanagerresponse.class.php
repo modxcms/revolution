@@ -150,7 +150,8 @@ class modManagerResponse extends modResponse {
         $c = $this->modx->newQuery('modActionDom');
         $c->innerJoin('modFormCustomizationSet','Set');
         $c->innerJoin('modFormCustomizationProfile','Profile','Set.profile = Profile.id');
-        $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.usergroup');
+        $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
+        $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
         //$c->leftJoin('modAccessActionDom','Access');
         //$principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
         $c->where(array(
@@ -161,7 +162,10 @@ class modManagerResponse extends modResponse {
         ));
         $c->where(array(
             'ProfileUserGroup.usergroup:IN' => $userGroups,
-            'OR:ProfileUserGroup.usergroup:IS' => null,
+            array(
+                'OR:ProfileUserGroup.usergroup:IS' => null,
+                'AND:UGProfile.active:=' => true,
+            ),
         ),xPDOQuery::SQL_AND,null,2);
         $c->select(array(
             'modActionDom.*',

@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.5-pl (December 8th, 2010)
 ====================================
+- [#2915] Ensure UserGroups restriction is enforced in FC Profiles
+- Fix bug when editing FC profiles from a grid, issue where UserGroup wasn't respected
 - Ensure radio TV values still can select if default value is 0
 - [#2869] Fix issue with parent display text in Resource panel
 - [#2892] Fix problem creating folders on filesystem from file manager and browser 
