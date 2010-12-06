@@ -118,7 +118,7 @@ class modFileHandler {
         if (substr($path, $len - 1, $len) != '/') {
             $path .= '/';
         }
-        return str_replace('//', '/', $path);
+        return $path;
     }
 
     public function getDirectoryFromFile($fileName) {

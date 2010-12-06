@@ -116,7 +116,7 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         /* get relative url for drag/drop */
         $url = $dir.$fileName;
         if ($baseUrl != '/') {
-            $url = str_replace('//','/',$baseUrl.$dir.$fileName);
+            $url = $baseUrl.str_replace('//','/',$dir.$fileName);
         }
         if ($isRelativeBaseUrl) {
             $url = ltrim($url,'/');
