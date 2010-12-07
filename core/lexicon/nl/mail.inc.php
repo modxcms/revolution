@@ -5,9 +5,11 @@
  * @language nl
  * @package modx
  * @subpackage lexicon
- * @author Kristof Polleunis, kristofp72@gmail.com
+ * 
+ * @author Bert Oost, <bertoost85@gmail.com>
  */
-$_lang['mail_err_address_ns'] = 'U moet een geldig e-mailadres opgeven.';
-$_lang['mail_err_derive_getmailer'] = 'Poging om abstracte functie _getMailer () in modMail klasse op te roepen. U moet de uitvoering van deze functie in een afgeleide van modMail doen.';
-$_lang['mail_err_attr_nv'] = '[[+attr]] is geen geldig PHPMailer attribuut en wordt genegeerd.';
-$_lang['mail_err_unset_spec'] = 'modPHPMailer biedt geen ondersteuning voor het uitschakelen van bepaalde adressen. Gebruik reset () om alle ontvangers te verwijderen en voeg weer degene toe naar wie je wilt mailen.';
+$_lang['mail_err_address_ns'] = 'Je moet een geldig e-mailadres opgeven om naar te versturen.';
+$_lang['mail_err_derive_getmailer'] = 'Poging om abstracte functie _getMailer() in modMail aan te roepen. Je moet deze functie implementeren in een afgeleide van modMail.';
+$_lang['mail_err_attr_nv'] = '[[+attr]] is geen geldig PHPMailer attribuut en wordt genegeerd bij uitvoering.';
+
+$_lang['mail_err_unset_spec'] = 'modPHPMailer bied geen ondersteuning voor het uitschakelen van een specifiek adres. Gebruik reset() om alle ontvangers te legen en voeg degene toe waar naar toe je wilt versturen.';
