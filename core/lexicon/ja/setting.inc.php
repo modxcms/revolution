@@ -494,7 +494,7 @@ $_lang['setting_use_browser'] = 'ファイルブラウザを使用';
 $_lang['setting_use_browser_desc'] = '「はい」を選択するとファイルブラウザを使用できます。これによりユーザーはサーバ上の画像やFlashなどのメディアファイルをブラウズしたり、ファイルをサーバにアップロードすることがきるようになります。';
 $_lang['setting_use_browser_err'] = 'ファイルブラウザを使用するかしないか選択してください。';
 
-$_lang['setting_use_editor'] = 'エディタの使用';
+$_lang['setting_use_editor'] = 'リッチテキストモード';
 $_lang['setting_use_editor_desc'] = 'リッチテキストエディタを使用しますか? HTMLを直接書いた方が良いのでしたら「いいえ」を選択してエディタを使わない設定にすることもできます。この設定は全てのドキュメントおよび全てのユーザーに適用されますので注意してください';
 $_lang['setting_use_editor_err'] = 'リッチテキストエディタの使用を選択してください。';
 
