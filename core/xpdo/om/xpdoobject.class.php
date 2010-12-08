@@ -1280,7 +1280,7 @@ class xPDOObject {
                         $where= $this->xpdo->escape($pkn) . ' = :' . $pkn;
                     }
                     if (!empty ($updateSql)) {
-                        $sql= "UPDATE {$this->_table} SET " . implode(',', $updateSql) . " WHERE {$where} LIMIT 1";
+                        $sql= "UPDATE {$this->_table} SET " . implode(',', $updateSql) . " WHERE {$where}";
                     }
                 }
             }

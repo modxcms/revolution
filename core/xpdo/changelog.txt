@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Remove LIMIT from UPDATE in xPDOObject->save()
 - Fix handling of bigint with timestamp phptype (sqlsrv)
 - Set host property from server property in xPDO::parseDSN()
 - Remove check for errorCode on xPDO->connect()
