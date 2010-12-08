@@ -187,20 +187,23 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
         $limit= !empty($this->query['limit']) ? intval($this->query['limit']) : 0;
         $offset= !empty($this->query['offset']) ? intval($this->query['offset']) : 0;
         if ($command == 'SELECT') {
-        	$sql.= !empty($this->query['distinct']) ? $this->query['distinct'] . ' ' : '';
-        	if (!empty($limit) && empty($offset)) {
-        		$this->query['top'] = $limit;
-        	}
-        	$sql.= $this->query['top'] > 0 ? 'TOP ' . $this->query['top'] . ' ' : '';
+            $sql.= !empty($this->query['distinct']) ? $this->query['distinct'] . ' ' : '';
+            if (!empty($limit) && empty($offset)) {
+                $this->query['top'] = $limit;
+            }
+            $sql.= $this->query['top'] > 0 ? 'TOP ' . $this->query['top'] . ' ' : '';
             $columns= array ();
             if (empty ($this->query['columns'])) {
                 $this->select('*');
             }
-            $ignorealias= isset ($this->query['columns'][0]);
             foreach ($this->query['columns'] as $alias => $column) {
-                $column= $this->xpdo->escape(trim($column));
-                if (!$ignorealias && $alias !== $column) {
-                    $alias = $this->xpdo->escape($alias);
+                $ignorealias = is_int($alias);
+                $escape = strpos($column, ' AS ') == false;
+                if ($escape) {
+                    $column= $this->xpdo->escape(trim($column));
+                }
+                if (!$ignorealias) {
+                    $alias = $escape ? $this->xpdo->escape($alias) : $alias;
                     $columns[]= "{$column} AS {$alias}";
                 } else {
                     $columns[]= "{$column}";
@@ -264,24 +267,24 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
             }
         }
         if ($command == 'SELECT' && !empty($limit) && !empty($offset)) {
-        	if (empty($orderBySql)) {
-        		$pk = $this->xpdo->getPK($this->getClass());
-        		if ($pk) {
-        			if (!is_array($pk)) $pk = array($pk);
-        			$orderBy = array();
-        			foreach ($pk as $k) {
-		        		$orderBy[] = $this->xpdo->escape('xpdoLimit1') . '.' . $this->xpdo->escape($this->getAlias() . '_' . $k);
-	        		}
-	        		$orderBySql = "ORDER BY " . implode(', ', $orderBy);
-				}
-    		}
-    		if (!empty($orderBySql)) {
-	        	$sql = "SELECT [xpdoLimit2].* FROM (SELECT [xpdoLimit1].*, ROW_NUMBER() OVER({$orderBySql}) AS [xpdoRowNr] FROM ({$sql}) [xpdoLimit1]) [xpdoLimit2] WHERE [xpdoLimit2].[xpdoRowNr] BETWEEN " . ($offset + 1) . " AND " . ($offset + $limit);
-        	} else {
-        		$this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "limit() in sqlsrv requires either an explicit sortby or a defined primary key; limit ignored");
-        	}
+            if (empty($orderBySql)) {
+                $pk = $this->xpdo->getPK($this->getClass());
+                if ($pk) {
+                    if (!is_array($pk)) $pk = array($pk);
+                    $orderBy = array();
+                    foreach ($pk as $k) {
+                        $orderBy[] = $this->xpdo->escape('xpdoLimit1') . '.' . $this->xpdo->escape($this->getAlias() . '_' . $k);
+                    }
+                    $orderBySql = "ORDER BY " . implode(', ', $orderBy);
+                }
+            }
+            if (!empty($orderBySql)) {
+                $sql = "SELECT [xpdoLimit2].* FROM (SELECT [xpdoLimit1].*, ROW_NUMBER() OVER({$orderBySql}) AS [xpdoRowNr] FROM ({$sql}) [xpdoLimit1]) [xpdoLimit2] WHERE [xpdoLimit2].[xpdoRowNr] BETWEEN " . ($offset + 1) . " AND " . ($offset + $limit);
+            } else {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "limit() in sqlsrv requires either an explicit sortby or a defined primary key; limit ignored");
+            }
         } else {
-        	$sql.= $orderBySql;
+            $sql.= $orderBySql;
         }
         $this->sql= $sql;
         return (!empty ($this->sql));
