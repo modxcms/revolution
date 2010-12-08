@@ -353,6 +353,7 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
     $c->select(array(
         'modActionDom.*',
         'Action.controller',
+        'Access.target',
     ));
     $c->sortby('Access.principal','ASC');
     $c->sortby('modActionDom.action','ASC');
@@ -369,9 +370,9 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
         $newSet = false;
 
         /* if a new usergroup, assign a new profile */
-        if (!isset($currentUserGroup) || $currentUserGroup != $rule->get('usergroup')) {
-            if ($rule->get('usergroup') != 0) {
-                $usergroup = $modx->getObject('modUserGroup',$rule->get('usergroup'));
+        if (!isset($currentUserGroup) || $currentUserGroup != $rule->get('target')) {
+            if ($rule->get('target') != 0) {
+                $usergroup = $modx->getObject('modUserGroup',$rule->get('target'));
                 if (!$usergroup) continue;
                 $currentUserGroup = $usergroup->get('id');
             } else { /* if no usergroup */
