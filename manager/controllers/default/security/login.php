@@ -19,8 +19,9 @@ if (!empty($_SERVER['REQUEST_URI'])) {
 }
 
 if (!empty($_POST)) {
+    $san = array("'",'"','(',')',';','>','<');
     foreach ($_POST as $k => $v) {
-        $_POST[$k] = $modx->sanitizeString($v);
+        $_POST[$k] = $modx->sanitizeString($v,$san);
     }
     $this->loadErrorHandler();
     $scriptProperties = $_REQUEST;
@@ -54,7 +55,7 @@ if (!empty($_POST)) {
 
             if (!empty($response) && is_array($response)) {
                 if (!empty($response['success']) && isset($response['object'])) {
-                    $url = !empty($_POST['returnUrl']) ? $_POST['returnUrl'] : $modx->getOption('manager_url',null,MODX_MANAGER_PATH);
+                    $url = !empty($_POST['returnUrl']) ? $_POST['returnUrl'] : $modx->getOption('manager_url',null,MODX_MANAGER_URL);
                     $modx->sendRedirect(rtrim($url,'/'),'','','full');
                 } else {
                     $error_message = '';

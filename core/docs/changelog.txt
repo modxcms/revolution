@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.5-pl (December 8th, 2010)
 ====================================
+- [#2932] Fix redirect issue after setup and on manager login page caused by [#2918]
 - [#2931] Fix issue where FC rules weren't applying if no UserGroup was set in a Profile
 - Ensure non-Resource FC rules are removed on upgrade
 - [#2918] Address XSS vuln in manager login that allows JS injection
