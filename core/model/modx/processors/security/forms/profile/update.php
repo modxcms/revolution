@@ -1,6 +1,6 @@
 <?php
 /**
- * Activate a FC Profile
+ * Update a FC Profile
  *
  * @package modx
  * @subpackage processors.security.forms.profile

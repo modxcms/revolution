@@ -86,6 +86,8 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             $thumbHeight = $imageHeight = $modx->fileHandler->context->getOption('filemanager_thumb_height', 60);
         }
         $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
+
+        $relativeUrl = $baseUrl.ltrim($url,'/');
         $files[] = array(
             'id' => $filePathName,
             'name' => $fileName,
@@ -97,7 +99,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             'thumb_width' => $thumb,
             'thumb_height' => $thumb,
             'url' => $url,
-            'relativeUrl' => str_replace('//','/',$baseUrl.$url),
+            'relativeUrl' => $relativeUrl,
             'ext' => $fileExtension,
             'pathname' => str_replace('//','/',$filePathName),
             'lastmod' => $file->getMTime(),

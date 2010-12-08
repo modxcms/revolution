@@ -346,13 +346,14 @@ $ct = $modx->getCount('modFormCustomizationProfile');
 if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
     $c = $modx->newQuery('modActionDom');
     $c->innerJoin('modAction','Action');
-    $c->leftJoin('modAccessActionDom','Access');
+    $c->leftJoin('modAccessActionDom','Access','Access.target = modActionDom.id');
     $c->where(array(
         'modActionDom.active' => true,
     ));
     $c->select(array(
         'modActionDom.*',
         'Action.controller',
+        'Access.principal',
     ));
     $c->sortby('Access.principal','ASC');
     $c->sortby('modActionDom.action','ASC');
@@ -369,11 +370,15 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
         $newSet = false;
 
         /* if a new usergroup, assign a new profile */
-        if (!isset($currentUserGroup) || $currentUserGroup != $rule->get('usergroup')) {
-            if ($rule->get('usergroup') != 0) {
-                $usergroup = $modx->getObject('modUserGroup',$rule->get('usergroup'));
-                if (!$usergroup) continue;
-                $currentUserGroup = $usergroup->get('id');
+        $principal = $rule->get('principal');
+        if (!isset($currentUserGroup) || $currentUserGroup != $principal) {
+            if (!empty($principal)) {
+                $usergroup = $modx->getObject('modUserGroup',$principal);
+                if (!$usergroup) {
+                    $currentUserGroup = 0;
+                } else {
+                    $currentUserGroup = $usergroup->get('id');
+                }
             } else { /* if no usergroup */
                 $usergroup = false;
                 $currentUserGroup = 0;
@@ -402,6 +407,7 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
                     $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not associate Profile to User Group: '.print_r($fcpug->toArray(),true));
                 }
             }
+            $newSet = true;
         } else {
             $modx->log(xPDO::LOG_LEVEL_DEBUG,'Skipping Profile creation, already has one for this rule.');
         }
@@ -490,6 +496,18 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
     /* remove all inactive rules */
     $rules = $modx->getCollection('modActionDom',array('active' => false));
     foreach ($rules as $rule) { $rule->remove(); }
+
+    /* remove all non-resource rules */
+    $c = $modx->newQuery('modActionDom');
+    $c->innerJoin('modAction','Action');
+    $c->where(array(
+        'Action.controller:!=' => 'resource/create',
+        'AND:Action.controller:!=' => 'resource/update',
+    ));
+    $invalidRules = $modx->getCollection('modActionDom',$c);
+    foreach ($invalidRules as $invalidRule) {
+        $invalidRule->remove();
+    }
 }
 
 return true;

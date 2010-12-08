@@ -31,6 +31,10 @@ $usergroup = $modx->getOption('usergroup',$scriptProperties,0);
 $context = $modx->getOption('context',$scriptProperties,false);
 $policy = $modx->getOption('policy',$scriptProperties,false);
 
+if (!empty($usergroup)) {
+    $usergroupObj = $modx->getObject('modUserGroup',$usergroup);
+}
+
 /* build query */
 $c = $modx->newQuery('modAccessContext');
 $c->where(array(
@@ -71,7 +75,10 @@ foreach ($acls as $acl) {
     }
 
     $cls = '';
-    if (($aclArray['target'] == 'web' || $aclArray['target'] == 'mgr') && $aclArray['policy_name'] == 'Administrator') {} else {
+    if (    ($aclArray['target'] == 'web' || $aclArray['target'] == 'mgr')
+            && $aclArray['policy_name'] == 'Administrator'
+            && ($usergroupObj && $usergroupObj->get('name') == 'Administrator')
+       ) {} else {
         $cls .= 'pedit premove';
     }
     $aclArray['cls'] = $cls;

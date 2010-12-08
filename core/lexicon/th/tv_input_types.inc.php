@@ -9,6 +9,7 @@
   * @author Mr.Kittipong Intaboot COE#18,KKU
  * @updated 2010-07-21
  */
+$_lang['autotag'] = 'แท็กอัตโนมัติ';
 $_lang['text'] = 'ข้อความ';
 $_lang['textarea'] = 'Textarea';
 $_lang['textareamini'] = 'Textarea (ขนาดย่อม)';

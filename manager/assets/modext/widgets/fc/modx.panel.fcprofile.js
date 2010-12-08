@@ -207,8 +207,8 @@ Ext.extend(MODx.window.AddGroupToProfile,MODx.Window,{
         
         var g = Ext.getCmp('modx-grid-fc-profile-usergroups');
         var s = g.getStore();
-        var v = s.query('id',rec.id).items;
-        if (v.length > 0) {
+        var v = s.findExact('id',rec.id);
+        if (v != '-1') {
             MODx.msg.alert(_('error'),_('profile_usergroup_err_ae'));
             return false;
         }
