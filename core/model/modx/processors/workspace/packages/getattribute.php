@@ -25,7 +25,6 @@ if (!$transport) {
 
 $attributes = array();
 $attrs = explode(',',$scriptProperties['attributes']);
-
 foreach ($attrs as $attr) {
     $attributes[$attr] = $transport->getAttribute($attr);
 
@@ -36,7 +35,7 @@ foreach ($attrs as $attr) {
         $options[xPDOTransport::PACKAGE_ACTION] = empty($package->installed)
             ? xPDOTransport::ACTION_INSTALL
             : xPDOTransport::ACTION_UPGRADE;
-        $f = $modx->getOption('core_path').'packages/'.$attr;
+        $f = $modx->getOption('core_path').'packages/'.$package->signature.'/'.$attr.'.php';
         if (file_exists($f) && $attr != '') {
             $attributes['setup-options'] = include $f;
         }
