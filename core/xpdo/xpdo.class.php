@@ -1697,10 +1697,13 @@ class xPDO {
                 $result[strtolower(trim($tmp[0]))]= trim($tmp[1]);
             } else {
                 $result['dbname']= trim($parameters[$a]);
-        	}
+            }
         }
-        if (!isset($result['dbname'])) {
-        	if (isset($result['database'])) $result['dbname'] = $result['database'];
+        if (!isset($result['dbname']) && isset($result['database'])) {
+            $result['dbname'] = $result['database'];
+        }
+        if (!isset($result['host']) && isset($result['server'])) {
+            $result['host'] = $result['server'];
         }
         return $result;
     }
