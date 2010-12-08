@@ -335,7 +335,7 @@ class xPDO {
                 return false;
             }
 
-            $connected= (is_object($this->pdo) && (empty($errorCode) || $errorCode == PDO::ERR_NONE));
+            $connected= (is_object($this->pdo));
             if ($connected) {
                 if ($this->config['dbtype'] === null) {
                     $this->config['dbtype']= $this->getAttribute(PDO::ATTR_DRIVER_NAME);
