@@ -370,9 +370,10 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
         $newSet = false;
 
         /* if a new usergroup, assign a new profile */
-        if (!isset($currentUserGroup) || $currentUserGroup != $rule->get('target')) {
-            if ($rule->get('target') != 0) {
-                $usergroup = $modx->getObject('modUserGroup',$rule->get('target'));
+        $target = $rule->get('target');
+        if (!isset($currentUserGroup) || $currentUserGroup != $target) {
+            if (!empty($target)) {
+                $usergroup = $modx->getObject('modUserGroup',$target);
                 if (!$usergroup) continue;
                 $currentUserGroup = $usergroup->get('id');
             } else { /* if no usergroup */
