@@ -161,11 +161,14 @@ class modManagerResponse extends modResponse {
             'Profile.active' => true,
         ));
         $c->where(array(
-            'ProfileUserGroup.usergroup:IN' => $userGroups,
             array(
-                'OR:ProfileUserGroup.usergroup:IS' => null,
-                'AND:UGProfile.active:=' => true,
+                'ProfileUserGroup.usergroup:IN' => $userGroups,
+                array(
+                    'OR:ProfileUserGroup.usergroup:IS' => null,
+                    'AND:UGProfile.active:=' => true,
+                ),
             ),
+            'OR:ProfileUserGroup.usergroup:=' => null,
         ),xPDOQuery::SQL_AND,null,2);
         $c->select(array(
             'modActionDom.*',
