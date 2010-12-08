@@ -490,6 +490,18 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
     /* remove all inactive rules */
     $rules = $modx->getCollection('modActionDom',array('active' => false));
     foreach ($rules as $rule) { $rule->remove(); }
+
+    /* remove all non-resource rules */
+    $c = $modx->newQuery('modActionDom');
+    $c->innerJoin('modAction','Action');
+    $c->where(array(
+        'Action.controller:!=' => 'resource/create',
+        'AND:Action.controller:!=' => 'resource/update',
+    ));
+    $invalidRules = $modx->getCollection('modActionDom',$c);
+    foreach ($invalidRules as $invalidRule) {
+        $invalidRule->remove();
+    }
 }
 
 return true;
