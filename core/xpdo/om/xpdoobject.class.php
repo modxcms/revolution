@@ -719,7 +719,7 @@ class xPDOObject {
                                 case 'timestamp' :
                                 case 'datetime' :
                                     $ts= false;
-                                    if (strtolower($dbtype) == 'int' || strtolower($dbtype) == 'integer') {
+                                    if (preg_match('/int/i', $dbtype)) {
                                         if (strtolower($vType) == 'integer' || is_int($v) || $v == '0') {
                                             $ts= (integer) $v;
                                         } else {
@@ -748,7 +748,7 @@ class xPDOObject {
                                     }
                                     break;
                                 case 'date' :
-                                    if (strtolower($dbtype) == 'int' || strtolower($dbtype) == 'integer') {
+                                    if (preg_match('/int/i', $dbType)) {
                                         if (strtolower($vType) == 'integer' || is_int($v) || $v == '0') {
                                             $ts= (integer) $v;
                                         } else {
@@ -912,7 +912,7 @@ class xPDOObject {
                             break;
                         case 'timestamp' :
                         case 'datetime' :
-                            if ($dbType == 'int' || $dbType == 'integer' || $dbType == 'INT' || $dbType == 'INTEGER') {
+                            if (preg_match('/int/i', $dbType)) {
                                 $ts= intval($value);
                             } elseif (in_array($value, $this->xpdo->driver->_currentTimestamps)) {
                                 $ts= time();
@@ -1233,7 +1233,7 @@ class xPDOObject {
                     $this->_fields[$_k]= strftime('%Y-%m-%d');
                     continue;
                 }
-                elseif ($this->_fieldMeta[$_k]['phptype'] == 'timestamp' && substr(strtolower($this->_fieldMeta[$_k]['dbtype']), 0, 3) == 'int') {
+                elseif ($this->_fieldMeta[$_k]['phptype'] == 'timestamp' && preg_match('/int/i', $this->_fieldMeta[$_k]['dbtype'])) {
                     $fieldType= PDO::PARAM_INT;
                 }
                 elseif (!in_array($this->_fieldMeta[$_k]['phptype'], array ('string','password','datetime','timestamp','date','time','array','json'))) {
