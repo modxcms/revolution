@@ -254,19 +254,22 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
     ,addElement: function(btn,e) {
         var id = this.cm.activeNode.id.split('_'); id = id[1];
         var t = this.cm.activeNode.text;
+        var r = {
+            propertysetName: this.cm.activeNode.text
+            ,propertyset: id
+        };
         
         if (!this.winPSEA) {
             this.winPSEA = MODx.load({
                 xtype: 'modx-window-propertyset-element-add'
-                ,record: {
-                    propertysetName: this.cm.activeNode.text
-                    ,propertyset: id
-                }
+                ,record: r
                 ,listeners: {
                     'success':{fn:function() { this.refreshNode(this.cm.activeNode.id,true); },scope:this}
                 }
             });
         }
+        this.winPSEA.fp.getForm().reset();
+        this.winPSEA.fp.getForm().setValues(r);
         this.winPSEA.show(e.target);
     }
     ,removeElement: function(btn,e) {

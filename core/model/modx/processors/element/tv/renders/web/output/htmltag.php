@@ -12,9 +12,12 @@ for ($i = 0; $i < count($value); $i++) {
     $tagvalue = is_array($value[$i]) ? implode(' ', $value[$i]) : $value[$i];
     if (!$tagvalue) continue;
 
+    $domId = $tagid ? $tagid : $id;
+    $domId .= count($value) > 1 ? $i : '';
+    
     $attributes = '';
     $attr = array(
-        'id' => ($tagid ? $tagid : $id), /* 'tv' already added to id */
+        'id' => $domId, /* 'tv' already added to id */
         'class' => $params['class'],
         'style' => $params['style'],
     );

@@ -21,6 +21,8 @@ $setting = $modx->getObject('modContextSetting',array(
     'key' => $_DATA['key'],
     'context_key' => $_DATA['context_key'],
 ));
+if (!$setting) return $modx->error->failure($modx->lexicon('setting_err_nf'));
+
 $setting->set('value',$_DATA['value']);
 if ($setting->save() == false) {
     return $modx->error->failure($modx->lexicon('setting_err_save'));

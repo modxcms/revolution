@@ -461,5 +461,38 @@ $collection['82']->fromArray(array (
   'assets' => '',
   'help_url' => 'http://rtfm.modx.com/display/revolution20/Package+Management',
 ), '', true, true);
+$collection['83']= $xpdo->newObject('modAction');
+$collection['83']->fromArray(array (
+  'id' => 83,
+  'namespace' => 'core',
+  'parent' => 65,
+  'controller' => 'security/access/policy/template/update',
+  'haslayout' => 1,
+  'lang_topics' => 'user,policy',
+  'assets' => '',
+  'help_url' => 'http://rtfm.modx.com/display/revolution20/PolicyTemplates',
+), '', true, true);
+$collection['84']= $xpdo->newObject('modAction');
+$collection['84']->fromArray(array (
+  'id' => 84,
+  'namespace' => 'core',
+  'parent' => 46,
+  'controller' => 'security/forms/profile/update',
+  'haslayout' => 1,
+  'lang_topics' => 'formcustomization,user,access,policy',
+  'assets' => '',
+  'help_url' => 'http://rtfm.modx.com/display/revolution20/Form+Customization+Profiles',
+), '', true, true);
+$collection['85']= $xpdo->newObject('modAction');
+$collection['85']->fromArray(array (
+  'id' => 85,
+  'namespace' => 'core',
+  'parent' => 46,
+  'controller' => 'security/forms/set/update',
+  'haslayout' => 1,
+  'lang_topics' => 'formcustomization,user,access,policy',
+  'assets' => '',
+  'help_url' => 'http://rtfm.modx.com/display/revolution20/Form+Customization+Sets',
+), '', true, true);
 
 return $collection;

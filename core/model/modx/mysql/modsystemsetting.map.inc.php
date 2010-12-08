@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modSystemSetting']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'system_settings',
   'fields' => 
   array (
@@ -63,6 +64,25 @@ $xpdo_meta_map['modSystemSetting']= array (
       'phptype' => 'timestamp',
       'null' => false,
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'key' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

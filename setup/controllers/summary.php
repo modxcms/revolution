@@ -23,7 +23,7 @@ foreach ($results as $item) {
 if ($mode == modInstall::MODE_UPGRADE_REVO) {
     $back = 'options';
 } else {
-    $back = MODX_SETUP_KEY == '@traditional' ? 'database' : 'contexts';
+    $back = MODX_SETUP_KEY == '@traditional@' ? 'database' : 'contexts';
 }
 
 $this->parser->assign('failed', $failed);

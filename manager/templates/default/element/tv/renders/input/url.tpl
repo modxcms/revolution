@@ -9,3 +9,6 @@
 	value="{$tv->get('processedValue')}"
 	onchange="MODx.fireResourceFormChange();"
 />
+<script type="text/javascript">
+MODx.makeDroppable(Ext.get('tv{$tv->id}'));
+</script>

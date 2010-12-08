@@ -341,7 +341,7 @@ textarea.x-form-field {
     padding:5px;
     position:fixed;
     right:20px;
-    top:100px;
+    top:90px;
     z-index:12;
     zoom: 1;
 }
@@ -411,10 +411,9 @@ textarea.x-form-field {
 }
 .ext-gecko #modx-navbar {
     background: -moz-linear-gradient(
-        center bottom,
-        #666 37%,
-        #777 69%,
-        #666 0%
+        #777 20%,
+        #666 50%,
+        #555 100%
     );
 }
 .ext-safari #modx-navbar, .ext-webkit #modx-navbar {
@@ -913,8 +912,10 @@ html #modx-topnav ul.modx-subnav li a:hover{
 
 
 /* icons */
-.folder .x-tree-node-icon {background-image:url(../../../assets/ext3/resources/images/default/tree/folder.gif) !important;}
-.weblink .x-tree-node-icon {background-image:url(../images/restyle/icons/weblink.gif) !important;}
+.icon-resource .x-tree-node-icon {background-image:url(../images/restyle/icons/page_white.png) !important;}
+
+.icon-folder .x-tree-node-icon {background-image:url(../images/restyle/icons/folder_page_white.png) !important;}
+.haschildren .x-tree-node-icon {background-image:url(../images/restyle/icons/folder.png) !important;}
 
 .icon-chunk .x-tree-node-icon { background-image:url(../images/restyle/icons/chunk.png) !important; }
 .icon-plugin .x-tree-node-icon { background-image:url(../images/restyle/icons/plugin.png) !important; }
@@ -924,9 +925,9 @@ html #modx-topnav ul.modx-subnav li a:hover{
 
 .icon-context .x-tree-node-icon { background-image:url(../images/restyle/icons/context.png) !important; }
 
-.icon-symlink .x-tree-node-icon { background-image:url(../images/restyle/icons/symlink.png) !important; }
-.icon-weblink .x-tree-node-icon { background-image:url(../images/restyle/icons/weblink.png) !important; }
-.icon-staticresource .x-tree-node-icon { background-image:url(../images/restyle/icons/static-resource.png) !important; }
+.icon-symlink .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_copy.png) !important; }
+.icon-weblink .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_link.png) !important; }
+.icon-staticresource .x-tree-node-icon { background-image:url(../images/restyle/icons/page_white_gear.png) !important; }
 
 .icon-menu .x-tree-node-icon { background-image:url(../images/restyle/icons/resources.png) !important; }
 .icon-action .x-tree-node-icon { background-image:url(../images/restyle/icons/application_osx_terminal.png) !important; }
@@ -1081,7 +1082,7 @@ input.x-static-text-field {
 
 /* status messages */
 .modx-status-msg {
-    position: absolute;
+    position: fixed;
     left: 70%;
     top: 10px;
     width: 25%;
@@ -1089,6 +1090,7 @@ input.x-static-text-field {
     background: #f4f4f4;
     padding: 5px;
     opacity: .8;
+    margin: 0;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
@@ -1156,4 +1158,8 @@ ul.modx-tag-list li.modx-tag-checked {
     color: #444;
     white-space: pre-line;
     padding: 3px;
+}
+
+.modx-policy-permissions-grid td {
+    cursor: pointer;
 }

@@ -21,14 +21,30 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of MODx -->
-<model package="modx" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="">
+<model package="modx" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="" version="1.1">
     <object class="modAccess" extends="xPDOSimpleObject">
         <field key="target" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
         <field key="principal_class" dbtype="varchar" precision="100" phptype="string" null="false" default="modPrincipal" index="index" />
         <field key="principal" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="fk" />
         <field key="authority" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="9999" index="index" />
         <field key="policy" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="fk" />
-        
+
+        <index alias="target" name="target" primary="false" unique="false" type="BTREE">
+            <column key="target" length="" collation="A" null="false" />
+        </index>
+        <index alias="principal_class" name="principal_class" primary="false" unique="false" type="BTREE">
+            <column key="principal_class" length="" collation="A" null="false" />
+        </index>
+        <index alias="principal" name="principal" primary="false" unique="false" type="BTREE">
+            <column key="principal" length="" collation="A" null="false" />
+        </index>
+        <index alias="authority" name="authority" primary="false" unique="false" type="BTREE">
+            <column key="authority" length="" collation="A" null="false" />
+        </index>
+        <index alias="policy" name="policy" primary="false" unique="false" type="BTREE">
+            <column key="policy" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Policy" class="modAccessPolicy" local="policy" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Principal" class="modPrincipal" local="principal" foreign="id" owner="foreign" cardinality="one" />
     </object>
@@ -44,16 +60,24 @@
     <object class="modAccessCategory" table="access_category" extends="modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
 
+        <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+        
         <aggregate alias="Target" class="modCategory" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
-    
+
     <object class="modAccessContext" table="access_context" extends="modAccess">
         <aggregate alias="Target" class="modContext" local="target" foreign="key" owner="foreign" cardinality="one" />
     </object>
-    
+
     <object class="modAccessElement" table="access_elements" extends="modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
+
+        <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="Target" class="modElement" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
@@ -67,6 +91,10 @@
     
     <object class="modAccessibleSimpleObject" extends="modAccessibleObject">
         <field key="id" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="pk" generated="native" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="id" length="" collation="A" null="false" />
+        </index>
     </object>
     
     <object class="modAccessMenu" table="access_menus" extends="modAccess">
@@ -77,27 +105,70 @@
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="mediumtext" phptype="string" />
         <field key="parent" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="template" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="class" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="data" dbtype="text" phptype="json" default="{}" />
         <field key="lexicon" dbtype="varchar" precision="255" phptype="string" null="false" default="permissions" />
-        
+
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
+            <column key="parent" length="" collation="A" null="false" />
+        </index>
+        <index alias="class" name="class" primary="false" unique="false" type="BTREE">
+            <column key="class" length="" collation="A" null="false" />
+        </index>
+        <index alias="template" name="template" primary="false" unique="false" type="BTREE">
+            <column key="template" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Parent" class="modAccessPolicy" local="parent" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="Template" class="modAccessPolicyTemplate" local="template" foreign="id" owner="foreign" cardinality="one" />
         <composite alias="Children" class="modAccessPolicy" local="id" foreign="parent" owner="local" cardinality="many" />
-        <composite alias="Permissions" class="modAccessPermission" local="id" foreign="policy" owner="local" cardinality="many" />
+    </object>
+
+    <object class="modAccessPolicyTemplate" table="access_policy_templates" extends="xPDOSimpleObject">
+        <field key="template_group" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="description" dbtype="mediumtext" phptype="string" />
+        <field key="lexicon" dbtype="varchar" precision="255" phptype="string" null="false" default="permissions" />
+
+        <aggregate alias="TemplateGroup" class="modAccessPolicyTemplateGroup" local="template_group" foreign="id" owner="foreign" cardinality="one" />
+        <composite alias="Permissions" class="modAccessPermission" local="id" foreign="template" owner="local" cardinality="many" />
+        <composite alias="Policies" class="modAccessPolicy" local="id" foreign="template" owner="local" cardinality="many" />
     </object>
     
+    <object class="modAccessPolicyTemplateGroup" table="access_policy_template_groups" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="description" dbtype="mediumtext" phptype="string" />
+
+        <composite alias="Templates" class="modAccessPolicyTemplate" local="id" foreign="template_group" owner="local" cardinality="many" />
+    </object>
+
     <object class="modAccessPermission" table="access_permissions" extends="xPDOSimpleObject">
-        <field key="policy" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="template" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
         <field key="value" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
         
-        <aggregate alias="Policy" class="modAccessPolicy" local="policy" foreign="id" cardinality="one" owner="foreign" /> 
+        <index alias="template" name="template" primary="false" unique="false" type="BTREE">
+            <column key="template" length="" collation="A" null="false" />
+        </index>
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Template" class="modAccessPolicyTemplate" local="template" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
     <object class="modAccessResource" table="access_resources" extends="modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
         
+        <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Target" class="modResource" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
@@ -105,6 +176,10 @@
     <object class="modAccessResourceGroup" table="access_resource_groups" extends="modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
         
+        <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Target" class="modResourceGroup" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
@@ -117,30 +192,23 @@
         <field key="lang_topics" dbtype="text" phptype="string" null="false" />
         <field key="assets" dbtype="text" phptype="string" null="false" default="" />
         <field key="help_url" dbtype="text" phptype="string" null="false" default="" />
-        
+
+        <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
+            <column key="namespace" length="" collation="A" null="false" />
+        </index>
+        <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
+            <column key="parent" length="" collation="A" null="false" />
+        </index>
+        <index alias="controller" name="controller" primary="false" unique="false" type="BTREE">
+            <column key="controller" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" owner="foreign" cardinality="one" />
         <aggregate alias="Parent" class="modAction" local="parent" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Children" class="modAction" local="id" foreign="parent" owner="local" cardinality="many" />
         <composite alias="Menus" class="modMenu" local="id" foreign="action" owner="local" cardinality="many" />
         <composite alias="Acls" class="modAccessAction" local="id" foreign="target" owner="local" cardinality="many" />
-    </object>
-    
-    <object class="modActionDom" table="actiondom" extends="modAccessibleSimpleObject">
-        <field key="action" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
-        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
-        <field key="description" dbtype="text" phptype="string" />
-        <field key="xtype" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="container" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="rule" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="value" dbtype="text" phptype="string" null="false" default="" />
-        <field key="constraint" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="constraint_field" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" index="index" />
-        <field key="for_parent" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
-        
-        <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
-        <composite alias="Access" class="modAccessActionDom" local="id" foreign="target" cardinality="many" owner="local" />
+        <composite alias="Fields" class="modActionField" local="id" foreign="action" owner="local" cardinality="many" />
     </object>
     
     <object class="modActiveUser" table="active_users" extends="xPDOObject">
@@ -150,7 +218,11 @@
         <field key="id" dbtype="int" precision="10" phptype="integer" null="true" />
         <field key="action" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="ip" dbtype="varchar" precision="20" phptype="string" null="false" default="" />
-        
+
+        <index alias="internalKey" name="internalKey" primary="true" unique="true" type="BTREE">
+            <column key="internalKey" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="User" class="modUser" local="internalKey" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
@@ -158,6 +230,13 @@
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" index="index" />
         <field key="category" dbtype="varchar" precision="45" phptype="string" null="false" default="" index="unique" />
 
+        <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
+            <column key="parent" length="" collation="A" null="false" />
+        </index>
+        <index alias="category" name="category" primary="false" unique="true" type="BTREE">
+            <column key="category" length="" collation="A" null="false" />
+        </index>
+        
         <composite alias="Children" class="modCategory" local="id" foreign="parent" cardinality="many" owner="local" />
         <aggregate alias="Parent" class="modCategory" local="parent" foreign="id" cardinality="one" owner="foreign" />
         
@@ -190,6 +269,11 @@
         <field key="descendant" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
         <field key="depth" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
 
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="ancestor" length="" collation="A" null="false" />
+            <column key="descendant" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Ancestor" class="modCategory" local="ancestor" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Descendant" class="modCategory" local="descendant" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -204,6 +288,16 @@
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
         
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="category" name="category" primary="false" unique="false" type="BTREE">
+            <column key="category" length="" collation="A" null="false" />
+        </index>
+        <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
+            <column key="locked" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Category" class="modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
         <validation>
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff_-\s]+(?!\s)$/" message="chunk_err_invalid_name" />
@@ -216,6 +310,16 @@
         <field key="name_field" dbtype="varchar" precision="255" phptype="string" null="false" default="name" index="index" />
         <field key="path" dbtype="tinytext" phptype="string" default="" />
         <field key="lexicon" dbtype="varchar" precision="255" phptype="string" null="false" default="core:resource" />
+
+        <index alias="class" name="class" primary="false" unique="true" type="BTREE">
+            <column key="class" length="" collation="A" null="false" />
+        </index>
+        <index alias="parent_class" name="parent_class" primary="false" unique="false" type="BTREE">
+            <column key="parent_class" length="" collation="A" null="false" />
+        </index>
+        <index alias="name_field" name="name_field" primary="false" unique="false" type="BTREE">
+            <column key="name_field" length="" collation="A" null="false" />
+        </index>
     </object>
     
     <object class="modContentType" table="content_type" extends="xPDOSimpleObject">
@@ -226,6 +330,10 @@
         <field key="headers" dbtype="mediumtext" phptype="array" />
         <field key="binary" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
         
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Resources" class="modResource" local="id" foreign="content_type" owner="local" cardinality="many" />
         <validation>
             <rule field="name" name="name" type="xPDOValidationRule" rule="xPDOMinLengthValidationRule" value="1" message="content_type_err_ns_name" />            
@@ -236,6 +344,10 @@
         <field key="key" dbtype="varchar" precision="100" phptype="string" null="false" index="pk" />
         <field key="description" dbtype="tinytext" phptype="string" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="key" length="" collation="A" null="false" />
+        </index>
+
         <composite alias="ContextResources" class="modContextResource" local="key" foreign="context_key" cardinality="many" owner="local" />
         <composite alias="ContextSettings" class="modContextSetting" local="key" foreign="context_key" cardinality="many" owner="local" />
         <composite alias="Acls" class="modAccessContext" local="key" foreign="target" owner="local" cardinality="many" />
@@ -266,6 +378,11 @@
         <field key="context_key" dbtype="varchar" precision="255" phptype="string" null="false" index="pk" />
         <field key="resource" dbtype="int" precision="11" attributes="unsigned" phptype="string" null="false" index="pk" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+            <column key="context_key" collation="A" null="false" />
+            <column key="resource" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
         <aggregate alias="Resource" class="modResource" local="resource" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -283,6 +400,12 @@
         <field key="element_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="pk" />
         <field key="property_set" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+            <column key="element" collation="A" null="false" />
+            <column key="element_class" collation="A" null="false" />
+            <column key="property_set" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Element" class="modElement" local="element" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="PropertySet" class="modPropertySet" local="property_set" foreign="id" owner="foreign" cardinality="one" />
     </object>
@@ -292,6 +415,10 @@
         <field key="service" dbtype="tinyint" precision="4" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="groupname" dbtype="varchar" precision="20" phptype="string" null="false" default="" />
         
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="PluginEvents" class="modPluginEvent" local="name" foreign="event" cardinality="many" owner="local" />
     </object>
 
@@ -305,14 +432,146 @@
         <field key="source" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
         <field key="description" dbtype="text" phptype="string" />
         
+        <index alias="user" name="user" primary="false" unique="false" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+        </index>
+
         <composite alias="Event" class="modEvent" key="id" local="eventid" foreign="name" cardinality="one" owner="foreign" />
     </object>
-    
+
+
+    <object class="modActionDom" table="actiondom" extends="modAccessibleSimpleObject">
+        <field key="set" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="description" dbtype="text" phptype="string" />
+        <field key="xtype" dbtype="varchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
+        <field key="container" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="rule" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="value" dbtype="text" phptype="string" null="false" default="" />
+        <field key="constraint" dbtype="varchar" precision="255" phptype="string" null="false" default="" /><!-- deprecated -->
+        <field key="constraint_field" dbtype="varchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
+        <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
+        <field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" index="index" /><!-- deprecated -->
+        <field key="for_parent" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
+        <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+
+        <index alias="set" name="set" primary="false" unique="false" type="BTREE">
+            <column key="set" length="" collation="A" null="false" />
+        </index>
+        <index alias="action" name="action" primary="false" unique="false" type="BTREE">
+            <column key="action" length="" collation="A" null="false" />
+        </index>
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="active" name="active" primary="false" unique="false" type="BTREE">
+            <column key="active" length="" collation="A" null="false" />
+        </index>
+        <index alias="for_parent" name="for_parent" primary="false" unique="false" type="BTREE">
+            <column key="for_parent" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Set" class="modFormCustomizationSet" local="set" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="Access" class="modAccessActionDom" local="id" foreign="target" cardinality="many" owner="local" />
+    </object>
+
+    <object class="modFormCustomizationProfileUserGroup" table="fc_profiles_usergroups" extends="xPDOObject">
+        <field key="usergroup" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
+        <field key="profile" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="usergroup" length="" collation="A" null="false" />
+            <column key="profile" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="UserGroup" class="modUserGroup" local="usergroup" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Profile" class="modFormCustomizationProfile" local="profile" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+    <object class="modFormCustomizationProfile" table="fc_profiles" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
+        <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
+        </index>
+        <index alias="active" name="active" primary="false" unique="false" type="BTREE">
+            <column key="active" length="" collation="A" null="false" />
+        </index>
+
+        <composite alias="Sets" class="modFormCustomizationSet" local="id" foreign="profile" cardinality="many" owner="local" />
+        <composite alias="UserGroups" class="modFormCustomizationProfileUserGroup" local="id" foreign="profile" cardinality="many" owner="local" />
+    </object>
+
+    <object class="modFormCustomizationSet" table="fc_sets" extends="xPDOSimpleObject">
+        <field key="profile" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="action" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
+        <field key="template" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="constraint" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="constraint_field" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+
+        <index alias="profile" name="profile" primary="false" unique="false" type="BTREE">
+            <column key="profile" length="" collation="A" null="false" />
+        </index>
+        <index alias="action" name="action" primary="false" unique="false" type="BTREE">
+            <column key="action" length="" collation="A" null="false" />
+        </index>
+        <index alias="active" name="active" primary="false" unique="false" type="BTREE">
+            <column key="active" length="" collation="A" null="false" />
+        </index>
+        <index alias="template" name="template" primary="false" unique="false" type="BTREE">
+            <column key="template" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Template" class="modTemplate" local="template" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Profile" class="modFormCustomizationProfile" local="profile" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="Rules" class="modActionDom" local="id" foreign="set" cardinality="many" owner="local" />
+    </object>
+
+    <object class="modActionField" table="actions_fields" extends="xPDOSimpleObject">
+        <field key="action" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" /> <!-- name/id of field -->
+        <field key="type" dbtype="varchar" precision="100" phptype="string" null="false" default="field" index="index" /> <!-- either field/tab -->
+        <field key="tab" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" /> <!-- for fields, what tab they are on -->
+        <field key="form" dbtype="varchar" precision="255" phptype="string" null="false" default="" /> <!-- the form ID (for dom sel purposes) -->
+        <field key="other" dbtype="varchar" precision="255" phptype="string" null="false" default="" /> <!-- used on tabs to delineate TV tabs -->
+        <field key="rank" dbtype="integer" precision="11" phptype="integer" null="false" default="0" />
+
+        <index alias="action" name="action" primary="false" unique="false" type="BTREE">
+            <column key="action" length="" collation="A" null="false" />
+        </index>
+        <index alias="type" name="type" primary="false" unique="false" type="BTREE">
+            <column key="type" length="" collation="A" null="false" />
+        </index>
+        <index alias="tab" name="tab" primary="false" unique="false" type="BTREE">
+            <column key="tab" length="" collation="A" null="false" />
+        </index>
+        
+        <aggregate alias="Action" class="modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+
     <object class="modJSONRPCResource" extends="modXMLRPCResource" />
     
     <object class="modKeyword" table="site_keywords" extends="xPDOSimpleObject">
         <field key="keyword" dbtype="varchar" precision="40" phptype="string" null="false" default="" index="unique" />
         
+        <index alias="keyword" name="keyword" primary="false" unique="true" type="BTREE">
+            <column key="keyword" length="" collation="A" null="false" />
+        </index>
+
         <composite alias="ResourceKeywords" class="modResourceKeyword" key="id" local="id" foreign="keyword_id" cardinality="many" owner="local" />
     </object>
     
@@ -325,6 +584,19 @@
         <field key="createdon" dbtype="datetime" phptype="datetime" />
         <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="topic" name="topic" primary="false" unique="false" type="BTREE">
+            <column key="topic" length="" collation="A" null="false" />
+        </index>
+        <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
+            <column key="namespace" length="" collation="A" null="false" />
+        </index>
+        <index alias="language" name="language" primary="false" unique="false" type="BTREE">
+            <column key="language" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
         
         <!-- LEGACY RELATIONSHIPS : PLEASE USE ABOVE -->
@@ -334,6 +606,10 @@
     <object class="modLexiconLanguage" table="lexicon_languages" extends="xPDOObject">
         <field key="name" dbtype="varchar" precision="20" phptype="string" null="false" default="" index="pk" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+
         <composite alias="Entries" class="modLexiconEntry" local="name" foreign="language" cardinality="many" owner="local" />
     </object>
     
@@ -341,6 +617,11 @@
         <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="unique" indexgrp="foci" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" index="unique" indexgrp="foci" />
         
+        <index alias="foci" name="foci" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+            <column key="namespace" length="" collation="A" null="false" />
+        </index>
+
         <composite alias="Entries" class="modLexiconEntry" local="id" foreign="topic" cardinality="many" owner="local" />
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="key" cardinality="one" owner="foreign" />
         
@@ -357,7 +638,7 @@
         <field key="action" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="classKey" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="item" dbtype="varchar" precision="255" phptype="string" null="false" default="0" />
-        
+
         <aggregate alias="User" class="modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
     </object>
     
@@ -372,6 +653,16 @@
         <field key="handler" dbtype="text" phptype="string" null="false" default="" />
         <field key="permissions" dbtype="text" phptype="string" null="false" default="" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="text" length="" collation="A" null="false" />
+        </index>
+        <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
+            <column key="parent" length="" collation="A" null="false" />
+        </index>
+        <index alias="action" name="action" primary="false" unique="false" type="BTREE">
+            <column key="action" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Action" class="modAction" local="action" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Parent" class="modMenu" local="parent" foreign="text" owner="foreign" cardinality="one" />
         <aggregate alias="Children" class="modMenu" local="text" foreign="parent" owner="local" cardinality="many" />
@@ -391,6 +682,10 @@
         <field key="name" dbtype="varchar" precision="40" phptype="string" null="false" default="" index="pk" />
         <field key="path" dbtype="text" phptype="string" default="" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+
         <composite alias="LexiconTopics" class="modLexiconTopic" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="LexiconEntries" class="modLexiconEntry" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="SystemSettings" class="modSystemSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
@@ -406,6 +701,14 @@
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="disabled" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
+
+        <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
+            <column key="locked" length="" collation="A" null="false" />
+        </index>
+        <index alias="disabled" name="disabled" primary="false" unique="false" type="BTREE">
+            <column key="disabled" length="" collation="A" null="false" />
+        </index>
+
         <composite alias="PluginEvents" class="modPluginEvent" local="id" foreign="pluginid" cardinality="many" owner="local" />
         <validation>
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9_-\x7f-\xff\s]+(?!\s)$/" message="plugin_err_invalid_name" />
@@ -418,6 +721,14 @@
         <field key="priority" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="propertyset" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="pluginid" length="" collation="A" null="false" />
+            <column key="event" length="" collation="A" null="false" />
+        </index>
+        <index alias="priority" name="priority" primary="false" unique="false" type="BTREE">
+            <column key="priority" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Plugin" class="modPlugin" local="pluginid" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Event" class="modEvent" local="event" foreign="name" cardinality="one" owner="foreign" />
         <aggregate alias="PropertySet" class="modPropertySet" local="propertyset" foreign="id" cardinality="one" owner="foreign" />
@@ -433,6 +744,13 @@
         <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
     
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="category" name="category" primary="false" unique="false" type="BTREE">
+            <column key="category" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Category" class="modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Elements" class="modElementPropertySet" local="id" foreign="property_set" cardinality="many" owner="local" />        
     </object>
@@ -478,6 +796,53 @@
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="web" index="index" />
         <field key="content_type" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="1" />
         
+        <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
+            <column key="alias" length="" collation="A" null="true" />
+        </index>
+        <index alias="published" name="published" primary="false" unique="false" type="BTREE">
+            <column key="published" length="" collation="A" null="false" />
+        </index>
+        <index alias="pub_date" name="pub_date" primary="false" unique="false" type="BTREE">
+            <column key="pub_date" length="" collation="A" null="false" />
+        </index>
+        <index alias="unpub_date" name="unpub_date" primary="false" unique="false" type="BTREE">
+            <column key="unpub_date" length="" collation="A" null="false" />
+        </index>
+        <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
+            <column key="parent" length="" collation="A" null="false" />
+        </index>
+        <index alias="isfolder" name="isfolder" primary="false" unique="false" type="BTREE">
+            <column key="isfolder" length="" collation="A" null="false" />
+        </index>
+        <index alias="template" name="template" primary="false" unique="false" type="BTREE">
+            <column key="template" length="" collation="A" null="false" />
+        </index>
+        <index alias="menuindex" name="menuindex" primary="false" unique="false" type="BTREE">
+            <column key="menuindex" length="" collation="A" null="false" />
+        </index>
+        <index alias="searchable" name="searchable" primary="false" unique="false" type="BTREE">
+            <column key="searchable" length="" collation="A" null="false" />
+        </index>
+        <index alias="cacheable" name="cacheable" primary="false" unique="false" type="BTREE">
+            <column key="cacheable" length="" collation="A" null="false" />
+        </index>
+        <index alias="hidemenu" name="hidemenu" primary="false" unique="false" type="BTREE">
+            <column key="hidemenu" length="" collation="A" null="false" />
+        </index>
+        <index alias="class_key" name="class_key" primary="false" unique="false" type="BTREE">
+            <column key="class_key" length="" collation="A" null="false" />
+        </index>
+        <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
+            <column key="context_key" length="" collation="A" null="false" />
+        </index>
+        <index alias="content_ft_idx" name="content_ft_idx" primary="false" unique="false" type="FULLTEXT">
+            <column key="pagetitle" length="" collation="A" null="false" />
+            <column key="longtitle" length="" collation="A" null="false" />
+            <column key="description" length="" collation="A" null="false" />
+            <column key="introtext" length="" collation="A" null="true" />
+            <column key="content" length="" collation="A" null="true" />
+        </index>
+
         <aggregate alias="Parent" class="modResource" local="parent" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Children" class="modResource" local="id" foreign="parent" cardinality="many" owner="local" />
         <aggregate alias="CreatedBy" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
@@ -500,7 +865,11 @@
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="unique" />
         <field key="private_memgroup" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
         <field key="private_webgroup" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
-        
+
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+
         <composite alias="ResourceGroupResources" class="modResourceGroupResource" local="id" foreign="document_group" cardinality="many" owner="local" />
         <composite alias="Acls" class="modAccessResourceGroup" local="id" foreign="target" owner="local" cardinality="many" />
     </object>
@@ -509,6 +878,13 @@
         <field key="document_group" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="document" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         
+        <index alias="document_group" name="document_group" primary="false" unique="false" type="BTREE">
+            <column key="document_group" length="" collation="A" null="false" />
+        </index>
+        <index alias="document" name="document" primary="false" unique="false" type="BTREE">
+            <column key="document" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="ResourceGroup" class="modResourceGroup" key="id" local="document_group" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Resource" class="modResource" key="id" local="document" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -517,6 +893,11 @@
         <field key="content_id" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
         <field key="keyword_id" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="content_id" length="" collation="A" null="false" />
+            <column key="keyword_id" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Resource" class="modResource" key="id" local="content_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Keyword" class="modKeyword" key="id" local="keyword_id" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -525,6 +906,11 @@
         <field key="content_id" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
         <field key="metatag_id" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="content_id" length="" collation="A" null="false" />
+            <column key="metatag_id" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Resource" class="modResource" key="id" local="content_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Metatag" class="modMetatag" key="id" local="metatag_id" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -535,6 +921,13 @@
         <field key="editor_type" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
         <field key="category" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="fk" />
     
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="category" name="category" primary="false" unique="false" type="BTREE">
+            <column key="category" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Category" class="modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
@@ -542,6 +935,10 @@
         <field key="id" dbtype="varchar" precision="40" phptype="string" null="false" index="pk" default="" />
         <field key="access" dbtype="int" precision="20" phptype="timestamp" null="true" attributes="unsigned" />
         <field key="data" dbtype="text" phptype="string" />
+
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="id" length="" collation="A" null="false" />
+        </index>
     </object>
     
     <object class="modSnippet" table="site_snippets" extends="modScript">
@@ -550,6 +947,14 @@
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
+
+        <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
+            <column key="locked" length="" collation="A" null="false" />
+        </index>
+        <index alias="moduleguid" name="moduleguid" primary="false" unique="false" type="BTREE">
+            <column key="moduleguid" length="" collation="A" null="false" />
+        </index>
+
         <validation>
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff_-\s]+(?!\s)$/" message="snippet_err_invalid_name" />
         </validation>
@@ -567,6 +972,10 @@
         <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="key" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="ContextSetting" class="modContextSetting" local="key" foreign="key" cardinality="one" owner="local" />
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
@@ -582,6 +991,16 @@
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
         
+        <index alias="templatename" name="templatename" primary="false" unique="true" type="BTREE">
+            <column key="templatename" length="" collation="A" null="false" />
+        </index>
+        <index alias="category" name="category" primary="false" unique="false" type="BTREE">
+            <column key="category" length="" collation="A" null="false" />
+        </index>
+        <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
+            <column key="locked" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Category" class="modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Resources" class="modResource" local="id" foreign="template" cardinality="many" owner="local" />
         <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
@@ -602,6 +1021,19 @@
         <field key="default_text" dbtype="text" phptype="string" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
         
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="category" name="category" primary="false" unique="false" type="BTREE">
+            <column key="category" length="" collation="A" null="false" />
+        </index>
+        <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
+            <column key="locked" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Category" class="modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
         <composite alias="TemplateVarResources" class="modTemplateVarResource" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
@@ -616,6 +1048,13 @@
         <field key="tmplvarid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="contentid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="value" dbtype="text" phptype="string" null="false" />
+
+        <index alias="tmplvarid" name="tmplvarid" primary="false" unique="false" type="BTREE">
+            <column key="tmplvarid" length="" collation="A" null="false" />
+        </index>
+        <index alias="contentid" name="contentid" primary="false" unique="false" type="BTREE">
+            <column key="contentid" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="TemplateVar" class="modTemplateVar" local="tmplvarid" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Resource" class="modResource" local="contentid" foreign="id" cardinality="one" owner="foreign" />
@@ -634,6 +1073,11 @@
         <field key="templateid" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="tmplvarid" length="" collation="A" null="false" />
+            <column key="templateid" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="TemplateVar" class="modTemplateVar" key="id" local="tmplvarid" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Template" class="modTemplate" key="id" local="templateid" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -647,6 +1091,16 @@
         <field key="remote_key" dbtype="varchar" precision="255" phptype="string" null="true" index="index" />
         <field key="remote_data" dbtype="text" phptype="json" null="true" />
         
+        <index alias="username" name="username" primary="false" unique="true" type="BTREE">
+            <column key="username" length="" collation="A" null="false" />
+        </index>
+        <index alias="class_key" name="class_key" primary="false" unique="false" type="BTREE">
+            <column key="class_key" length="" collation="A" null="false" />
+        </index>
+        <index alias="remote_key" name="remote_key" primary="false" unique="false" type="BTREE">
+            <column key="remote_key" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="CreatedResources" class="modResource" local="id" foreign="createdby" cardinality="many" owner="local" />
         <aggregate alias="EditedResources" class="modResource" local="id" foreign="editedby" cardinality="many" owner="local" />
         <aggregate alias="DeletedResources" class="modResource" local="id" foreign="deletedby" cardinality="many" owner="local" />
@@ -662,9 +1116,17 @@
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="unique" />
         <field key="parent" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
+            <column key="parent" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Parent" class="modUserGroup" local="parent" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Children" class="modUserGroup" local="id" foreign="parent" cardinality="many" owner="local" />
         <composite alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="user_group" cardinality="many" owner="local" />
+        <composite alias="FormCustomizationProfiles" class="modFormCustomizationProfileUserGroup" local="id" foreign="usergroup" cardinality="many" owner="local" />
     </object>
     
     <object class="modUserGroupMember" table="member_groups" extends="xPDOSimpleObject">
@@ -672,6 +1134,10 @@
         <field key="member" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="role" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="1" index="index" />
         
+        <index alias="role" name="role" primary="false" unique="false" type="BTREE">
+            <column key="role" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="UserGroupRole" class="modUserGroupRole" local="role" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="UserGroup" class="modUserGroup" local="user_group" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="User" class="modUser" local="member" foreign="id" cardinality="one" owner="foreign" />
@@ -682,6 +1148,13 @@
         <field key="description" dbtype="mediumtext" phptype="string" />
         <field key="authority" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="9999" index="index" />
         
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="authority" name="authority" primary="false" unique="false" type="BTREE">
+            <column key="authority" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="UserGroupMembers" class="modUserGroupMember" local="id" foreign="role" cardinality="many" owner="local" />
     </object>
     
@@ -694,7 +1167,7 @@
         <field key="private" dbtype="tinyint" precision="4" phptype="integer" null="false" default="0" />
         <field key="date_sent" dbtype="datetime" phptype="datetime" null="false" default="0000-00-00 00:00:00" />
         <field key="read" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
-        
+
         <aggregate alias="Sender" class="modUser" local="sender" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Recipient" class="modUser" local="recipient" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -723,10 +1196,14 @@
         <field key="zip" dbtype="varchar" precision="25" phptype="string" null="false" default="" />
         <field key="fax" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="photo" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="comment" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="comment" dbtype="text" phptype="string" null="false" default="" />
         <field key="website" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="extended" dbtype="text" phptype="json" null="true" index="fulltext" indexgrp="extended" />
         
+        <index alias="internalKey" name="internalKey" primary="false" unique="true" type="BTREE">
+            <column key="internalKey" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="User" class="modUser" local="internalKey" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="UserRole" class="modUserRole" local="role" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -740,6 +1217,11 @@
         <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+            <column key="key" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="User" class="modUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
@@ -753,7 +1235,17 @@
         <field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="attributes" dbtype="mediumtext" phptype="array" />
         
-        <composite alias="Packages" class="transport.modTransportPackage" local="id" foreign="workspace" cardinality="many" owner="local" /> 
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="path" name="path" primary="false" unique="true" type="BTREE">
+            <column key="path" length="" collation="A" null="false" />
+        </index>
+        <index alias="active" name="sctive" primary="false" unique="false" type="BTREE">
+            <column key="active" length="" collation="A" null="false" />
+        </index>
+
+        <composite alias="Packages" class="transport.modTransportPackage" local="id" foreign="workspace" cardinality="many" owner="local" />
     </object>
     
     <object class="modXMLRPCResource" extends="modResource" />

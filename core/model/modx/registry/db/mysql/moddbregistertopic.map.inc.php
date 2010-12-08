@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modDbRegisterTopic']= array (
   'package' => 'modx.registry.db',
+  'version' => '1.1',
   'table' => 'register_topics',
   'fields' => 
   array (
@@ -71,6 +72,41 @@ $xpdo_meta_map['modDbRegisterTopic']= array (
       'foreign' => 'topic',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'queue' => 
+    array (
+      'alias' => 'queue',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'queue' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'name' => 
+    array (
+      'alias' => 'name',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
 );

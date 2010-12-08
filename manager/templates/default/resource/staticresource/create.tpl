@@ -1,3 +1,5 @@
-{extends file='resource/staticresource/mutate.tpl'}
+<div id="modx-panel-static-div"></div>
 
-{modblock name='ab'}{/modblock}
+{include file='resource/_javascript.tpl'}
+
+{$onDocFormPrerender}

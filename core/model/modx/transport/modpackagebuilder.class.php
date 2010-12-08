@@ -324,11 +324,13 @@ class modPackageBuilder {
      */
     public function buildLexicon($path) {
         return false;
-        
+
         $invdirs = array (
             '.',
             '..',
-            '.svn'
+            '.svn',
+            '.git',
+            '_notes'
         );
         $i = 0;
         $ti = 0;

@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modUser']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'users',
   'fields' => 
   array (
@@ -74,6 +75,57 @@ $xpdo_meta_map['modUser']= array (
       'dbtype' => 'text',
       'phptype' => 'json',
       'null' => true,
+    ),
+  ),
+  'indexes' => 
+  array (
+    'username' => 
+    array (
+      'alias' => 'username',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'username' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'class_key' => 
+    array (
+      'alias' => 'class_key',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'class_key' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'remote_key' => 
+    array (
+      'alias' => 'remote_key',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'remote_key' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

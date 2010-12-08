@@ -47,13 +47,14 @@ class modOutputFilter {
      * @param mixed $element The element to filter
      */
     public function filter(&$element) {
-        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->context->getOption('use_multibyte',false);
-        $encoding = $this->modx->context->getOption('modx_charset','UTF-8');
+        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte',null,false);
+        $encoding = $this->modx->getOption('modx_charset',null,'UTF-8');
 
         $output= & $element->_output;
-        if (isset ($element->_properties['filter_commands'])) {
-            $modifier_cmd = & $element->_properties['filter_commands'];
-            $modifier_value = & $element->_properties['filter_modifiers'];
+        $inputFilter = $element->getInputFilter();
+        if ($inputFilter !== null && $inputFilter->hasCommands()) {
+            $modifier_cmd = $inputFilter->getCommands();
+            $modifier_value = $inputFilter->getModifiers();
             $count = count($modifier_cmd);
             $condition = array();
 

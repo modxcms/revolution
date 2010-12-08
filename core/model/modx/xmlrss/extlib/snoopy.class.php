@@ -152,6 +152,7 @@ class Snoopy
 					else
 					{
 						$path = $URI_PARTS["path"].($URI_PARTS["query"] ? "?".$URI_PARTS["query"] : "");
+                                                if ($this->port == 80) { $this->port = ''; /* dont postfix port 80; -modx */ }
 						// no proxy, send only the path
 						$this->_httprequest($path, $fp, $URI, $this->_httpmethod);
 					}

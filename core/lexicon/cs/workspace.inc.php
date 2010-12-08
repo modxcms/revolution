@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2010-12-02
  */
 $_lang['alphabetically'] = 'Abecedně';
 $_lang['already_downloaded'] = 'Tento balíček je již stažen.';
@@ -16,6 +16,8 @@ $_lang['author'] = 'Autor';
 $_lang['autoincludes_packaging'] = 'Automaticky zahrnuté balíčky: [[+autoincludes]]';
 $_lang['back_txt'] = 'Zpět';
 $_lang['by'] = 'od';
+$_lang['changelog'] = 'Změny';
+$_lang['changelog_desc'] = 'Přečtěte si prosím změny v této verzi.';
 $_lang['core_err_invalid'] = 'Pro spuštění sestavení musíte mít platnou instalaci jádra a aktivní workspace.';
 $_lang['description'] = 'Popis';
 $_lang['details'] = 'Detaily';

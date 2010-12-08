@@ -19,6 +19,19 @@ $hideFiles = !empty($scriptProperties['hideFiles']) && $scriptProperties['hideFi
 $stringLiterals = !empty($scriptProperties['stringLiterals']) ? true : false;
 $dir = !isset($scriptProperties['id']) || $scriptProperties['id'] == 'root' ? '' : str_replace('n_','',$scriptProperties['id']);
 
+/* get working context */
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
+
 $directories = array();
 $files = array();
 $ls = array();
@@ -37,32 +50,29 @@ $canUpdateFile = $modx->hasPermission('file_update');
 $canUpload = $modx->hasPermission('file_upload');
 
 /* get base paths and sanitize incoming paths */
-$modx->getService('fileHandler','modFileHandler');
 $dir = $modx->fileHandler->sanitizePath($dir);
 $dir = $modx->fileHandler->postfixSlash($dir);
-$root = $modx->fileHandler->getBasePath();
-$fullpath = $root.$dir;
-
-$relativeRootPath = $modx->fileHandler->postfixSlash($root);
+$root = $modx->fileHandler->getBasePath(false);
+$fullPath = str_replace('//','/',$root.$dir);
+if (!is_dir($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').$fullPath);
 
 $editAction = false;
 $act = $modx->getObject('modAction',array('controller' => 'system/file/edit'));
 if ($act) { $editAction = $act->get('id'); }
 
-
-/* get relative url; TODO: rb_base_url should be removed in 2.1 */
-$fileManagerUrl = $modx->fileHandler->getBaseUrl();
-if (!is_dir($fullpath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
+/* get relative url */
+$baseUrl = $modx->fileHandler->getBaseUrl(true);
+$isRelativeBaseUrl = $modx->getOption('filemanager_path_relative',null,true);
 
 /* get mb support settings */
-$use_multibyte = $modx->getOption('use_multibyte',null,false);
+$useMultibyte = $modx->getOption('use_multibyte',null,false);
 $encoding = $modx->getOption('modx_charset',null,'UTF-8');
 
 $imagesExts = array('jpg','jpeg','png','gif','ico');
 
 /* iterate through directories */
-foreach (new DirectoryIterator($fullpath) as $file) {
-    if (in_array($file,array('.','..','.svn','_notes'))) continue;
+foreach (new DirectoryIterator($fullPath) as $file) {
+    if (in_array($file,array('.','..','.svn','.git','_notes'))) continue;
     if (!$file->isReadable()) continue;
 
     $fileName = $file->getFilename();
@@ -77,7 +87,7 @@ foreach (new DirectoryIterator($fullpath) as $file) {
         if ($canRemoveDirs) $cls .= ' premove';
         if ($canUpdateDirs) $cls .= ' pupdate';
         if ($canUpload) $cls .= ' pupload';
-        
+
         $directories[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
@@ -91,24 +101,37 @@ foreach (new DirectoryIterator($fullpath) as $file) {
     /* get files in current dir */
     if ($file->isFile() && !$hideFiles && $canListFiles) {
         $ext = pathinfo($filePathName,PATHINFO_EXTENSION);
-        $ext = $use_multibyte ? mb_strtolower($ext,$encoding) : strtolower($ext);
+        $ext = $useMultibyte ? mb_strtolower($ext,$encoding) : strtolower($ext);
 
         $cls = 'icon-file icon-'.$ext;
         if ($canRemoveFile) $cls .= ' premove';
         if ($canUpdateFile) $cls .= ' pupdate';
-        $encFile = rawurlencode($filePathName);
-        $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile : null;
-        $url = trim(str_replace('//','/',$fileManagerUrl.$dir.$fileName),'/');
+        $encFile = rawurlencode($dir.$fileName);
+        $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile.'&wctx='.$workingContext->get('key') : null;
+
+        /* get relative url from manager/ */
+        $fromManagerUrl = $baseUrl.trim(str_replace('//','/',$dir.$fileName),'/');
+        $fromManagerUrl = ($modx->getOption('filemanager_url_relative',null,true) ? '../' : '').$fromManagerUrl;
+
+        /* get relative url for drag/drop */
+        $url = $dir.$fileName;
+        if ($baseUrl != '/') {
+            $url = $baseUrl.str_replace('//','/',$dir.$fileName);
+        }
+        if ($isRelativeBaseUrl) {
+            $url = ltrim($url,'/');
+        }
+
         $files[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
             'cls' => $cls,
             'type' => 'file',
             'leaf' => true,
-            'qtip' => in_array($ext,$imagesExts) ? '<img src="../'.$url.'" alt="'.$fileName.'" />' : '',
+            'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
             'page' => $modx->fileHandler->isBinary($filePathName) ? $page : null,
             'perms' => $octalPerms,
-            'path' => $relativeRootPath.$fileName,
+            'path' => $dir.$fileName,
             'url' => $url,
             'file' => $encFile,
         );

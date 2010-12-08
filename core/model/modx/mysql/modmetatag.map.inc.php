@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modMetatag']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'site_metatags',
   'fields' => 
   array (

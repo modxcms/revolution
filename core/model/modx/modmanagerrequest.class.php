@@ -101,6 +101,7 @@ class modManagerRequest extends modRequest {
         if (!isset($this->modx->user) || !$this->modx->user->isAuthenticated('mgr')) {
             $theme = $this->modx->getOption('manager_theme',null,'default');
             include_once $this->modx->getOption('manager_path') . 'controllers/'.$theme.'/security/login.php';
+            @session_write_close();
             exit();
         } else {
             /* log user action */

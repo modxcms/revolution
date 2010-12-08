@@ -7,7 +7,7 @@
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-MODx.load({
+var fld{/literal}{$tv->id}{literal} = MODx.load({
 {/literal}
     xtype: 'modx-panel-tv-image'
     ,renderTo: 'tv-image-{$tv->id}'
@@ -22,10 +22,18 @@ MODx.load({
             if (Ext.isEmpty(data.relativeUrl)) {
                 d.update('');
             } else {
-                d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.relativeUrl+'" alt="" />');
+                d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.url+'&wctx={/literal}{$ctx}{literal}" alt="" />');
             }
         }, scope:this}
     }
+});
+MODx.makeDroppable(Ext.get('tv{/literal}{$tv->id}{literal}'),function(v) {
+    var cb = Ext.getCmp('tv{/literal}{$tv->id}{literal}');
+    if (cb) {
+        cb.setValue(v);
+    }
+    fld{/literal}{$tv->id}{literal}.fireEvent('select',{relativeUrl:v});
+    return '';
 });
 {/literal}
 // ]]>

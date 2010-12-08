@@ -15,22 +15,36 @@ $modx->lexicon->load('file');
 if (empty($scriptProperties['mode'])) return $modx->error->failure($modx->lexicon('file_err_chmod_ns'));
 if (empty($scriptProperties['dir'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
-/* get base paths and sanitize incoming paths */
-$modx->getService('fileHandler','modFileHandler');
-$root = $modx->fileHandler->getBasePath();
-$directory = $modx->fileHandler->sanitizePath($scriptProperties['dir']);
-$directory = $modx->fileHandler->postfixSlash($directory);
-$directory = $root.$directory;
+/* get working context */
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
 
-if (!is_dir($directory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
-if (!is_readable($directory) || !is_writable($directory)) {
-	return $modx->error->failure($modx->lexicon('file_folder_err_perms'));
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
+
+/* get base paths and sanitize incoming paths */
+$root = $modx->fileHandler->getBasePath(false);
+$directoryPath = $modx->fileHandler->sanitizePath($scriptProperties['dir']);
+$directoryPath = $modx->fileHandler->postfixSlash($directoryPath);
+$directoryPath = $root.$directoryPath;
+if (!is_dir($directoryPath)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
+
+$directory = $modx->fileHandler->make($directoryPath);
+if (!($directory instanceof modDirectory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
+if (!$directory->isReadable() || !$directory->isWritable()) {
+    return $modx->error->failure($modx->lexicon('file_folder_err_perms'));
 }
 $octalPerms = $scriptProperties['mode'];
-if (!$modx->fileHandler->chmod($directory,$octalPerms)) {
+if (!$directory->chmod($octalPerms)) {
     return $modx->error->failure($modx->lexicon('file_err_chmod'));
 }
 
-$modx->logManagerAction('directory_chmod','',$directory);
+$modx->logManagerAction('directory_chmod','',$directoryPath);
 
 return $modx->error->success();

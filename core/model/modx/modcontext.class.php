@@ -59,14 +59,21 @@ class modContext extends modAccessibleObject {
     }
 
     /**
-     * Returns a context-sensitive setting
-     * 
-     * @param string $k The key to check
-     * @param string $v A default value to grab if not found
-     * @return mixed
+     * Returns a context-specific setting value.
+     *
+     * @param string $key The option key to check.
+     * @param string $default A default value to use if not found.
+     * @param array $options An array of additional options to merge over top of
+     * the context settings.
+     * @return mixed The option value or the provided default.
      */
-    public function getOption($k,$v = null) {
-        return $this->xpdo->getOption($k,$this->config,$v);
+    public function getOption($key, $default = null, $options = null) {
+        if (is_array($options)) {
+            $options = array_merge($this->config, $options);
+        } else {
+            $options =& $this->config;
+        }
+        return $this->xpdo->getOption($key, $options, $default);
     }
 
     /**
@@ -233,7 +240,7 @@ class modContext extends modAccessibleObject {
 
     /**
      * Overrides xPDOObject::remove to fire modX-specific events
-     * 
+     *
      * {@inheritDoc}
      */
     public function remove(array $ancestors = array()) {
@@ -272,7 +279,7 @@ class modContext extends modAccessibleObject {
         }
 
         $saved = parent :: save($cacheFlag);
-        
+
         if ($saved && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnContextSave',array(
                 'context' => &$this,

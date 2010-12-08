@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modSnippet']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'site_snippets',
   'fields' => 
   array (
@@ -53,6 +54,41 @@ $xpdo_meta_map['modSnippet']= array (
       'null' => false,
       'default' => '',
       'index' => 'fk',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'locked' => 
+    array (
+      'alias' => 'locked',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'locked' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'moduleguid' => 
+    array (
+      'alias' => 'moduleguid',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'moduleguid' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'validation' => 

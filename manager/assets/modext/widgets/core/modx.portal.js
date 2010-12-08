@@ -7,15 +7,15 @@ MODx.portal.Column = Ext.extend(Ext.Container,{
     layout: 'anchor'
     ,defaultType: 'portlet'
     ,cls:'x-portal-column'
-    ,style:'padding:1em;'
+    ,style:'padding:10px;'
     ,columnWidth: 1
     ,defaults: {
         collapsible: true
         ,autoHeight: true
         ,titleCollapse: true
         ,draggable: true
-        ,style: 'padding: .5em 0;'
-        ,bodyStyle: 'padding: 1.5em;'
+        ,style: 'padding: 5px 0;'
+        ,bodyStyle: 'padding: 15px;'
     }
 });
 Ext.reg('portalcolumn', MODx.portal.Column);

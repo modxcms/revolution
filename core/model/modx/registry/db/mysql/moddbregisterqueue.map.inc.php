@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modDbRegisterQueue']= array (
   'package' => 'modx.registry.db',
+  'version' => '1.1',
   'table' => 'register_queues',
   'fields' => 
   array (
@@ -25,6 +26,25 @@ $xpdo_meta_map['modDbRegisterQueue']= array (
     array (
       'dbtype' => 'mediumtext',
       'phptype' => 'array',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'name' => 
+    array (
+      'alias' => 'name',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'composites' => 

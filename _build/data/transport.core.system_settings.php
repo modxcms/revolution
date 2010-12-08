@@ -15,6 +15,15 @@ $settings['allow_tags_in_post']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['allow_duplicate_alias']= $xpdo->newObject('modSystemSetting');
+$settings['allow_duplicate_alias']->fromArray(array (
+  'key' => 'allow_duplicate_alias',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
 $settings['allow_multiple_emails']= $xpdo->newObject('modSystemSetting');
 $settings['allow_multiple_emails']->fromArray(array (
   'key' => 'allow_multiple_emails',
@@ -231,6 +240,15 @@ $settings['cache_system_settings']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
+$settings['clear_cache_refresh_trees']= $xpdo->newObject('modSystemSetting');
+$settings['clear_cache_refresh_trees']->fromArray(array (
+  'key' => 'clear_cache_refresh_trees',
+  'value' => 0,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'caching',
+  'editedon' => null,
+), '', true, true);
 $settings['compress_css']= $xpdo->newObject('modSystemSetting');
 $settings['compress_css']->fromArray(array (
   'key' => 'compress_css',
@@ -420,11 +438,29 @@ $settings['filemanager_path']->fromArray(array (
   'area' => 'file',
   'editedon' => null,
 ), '', true, true);
+$settings['filemanager_path_relative']= $xpdo->newObject('modSystemSetting');
+$settings['filemanager_path_relative']->fromArray(array (
+  'key' => 'filemanager_path_relative',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+), '', true, true);
 $settings['filemanager_url']= $xpdo->newObject('modSystemSetting');
 $settings['filemanager_url']->fromArray(array (
   'key' => 'filemanager_url',
   'value' => '',
   'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+), '', true, true);
+$settings['filemanager_url_relative']= $xpdo->newObject('modSystemSetting');
+$settings['filemanager_url_relative']->fromArray(array (
+  'key' => 'filemanager_url_relative',
+  'value' => true,
+  'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'file',
   'editedon' => null,
@@ -447,6 +483,15 @@ $settings['forgot_login_email']->fromArray(array (
   'xtype' => 'textarea',
   'namespace' => 'core',
   'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
+$settings['forward_merge_excludes']= $xpdo->newObject('modSystemSetting');
+$settings['forward_merge_excludes']->fromArray(array (
+  'key' => 'forward_merge_excludes',
+  'value' => 'type,published,class_key,context_key',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'core',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_lowercase_only']= $xpdo->newObject('modSystemSetting');
@@ -479,7 +524,7 @@ $settings['friendly_alias_restrict_chars']->fromArray(array (
 $settings['friendly_alias_restrict_chars_pattern']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_restrict_chars_pattern']->fromArray(array (
   'key' => 'friendly_alias_restrict_chars_pattern',
-  'value' => '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/',
+  'value' => '/[\0\x0B\t\n\r\f\a&=+%#<>"~:`@\?\[\]\{\}\|\^\'\\\\]/',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'furls',
@@ -507,6 +552,15 @@ $settings['friendly_alias_translit_class']= $xpdo->newObject('modSystemSetting')
 $settings['friendly_alias_translit_class']->fromArray(array (
   'key' => 'friendly_alias_translit_class',
   'value' => 'translit.modTransliterate',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['friendly_alias_translit_class_path']= $xpdo->newObject('modSystemSetting');
+$settings['friendly_alias_translit_class_path']->fromArray(array (
+  'key' => 'friendly_alias_translit_class_path',
+  'value' => '{core_path}components/',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'furls',
@@ -555,6 +609,15 @@ $settings['friendly_urls']->fromArray(array (
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['hidemenu_default']= $xpdo->newObject('modSystemSetting');
+$settings['hidemenu_default']->fromArray(array (
+  'key' => 'hidemenu_default',
+  'value' => 0,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'site',
   'editedon' => null,
 ), '', true, true);
 $settings['mail_charset']= $xpdo->newObject('modSystemSetting');
@@ -810,6 +873,15 @@ $settings['password_min_length']->fromArray(array (
   'editedon' => null,
 ), '', true, true);
 
+$settings['phpthumb_allow_src_above_docroot']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_allow_src_above_docroot']->fromArray(array (
+  'key' => 'phpthumb_allow_src_above_docroot',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
 $settings['phpthumb_cache_maxage']= $xpdo->newObject('modSystemSetting');
 $settings['phpthumb_cache_maxage']->fromArray(array (
   'key' => 'phpthumb_cache_maxage',
@@ -846,10 +918,28 @@ $settings['phpthumb_cache_source_enabled']->fromArray(array (
   'area' => 'phpthumb',
   'editedon' => null,
 ), '', true, true);
-$settings['phpthumb_zoomcrop']= $xpdo->newObject('modSystemSetting');
-$settings['phpthumb_zoomcrop']->fromArray(array (
-  'key' => 'phpthumb_zoomcrop',
-  'value' => '0',
+$settings['phpthumb_error_bgcolor']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_error_bgcolor']->fromArray(array (
+  'key' => 'phpthumb_error_bgcolor',
+  'value' => 'CCCCFF',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_error_textcolor']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_error_textcolor']->fromArray(array (
+  'key' => 'phpthumb_error_textcolor',
+  'value' => 'FF0000',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_error_fontsize']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_error_fontsize']->fromArray(array (
+  'key' => 'phpthumb_error_fontsize',
+  'value' => 1,
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
@@ -868,6 +958,105 @@ $settings['phpthumb_imagemagick_path']= $xpdo->newObject('modSystemSetting');
 $settings['phpthumb_imagemagick_path']->fromArray(array (
   'key' => 'phpthumb_imagemagick_path',
   'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nohotlink_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nohotlink_enabled']->fromArray(array (
+  'key' => 'phpthumb_nohotlink_enabled',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nohotlink_erase_image']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nohotlink_erase_image']->fromArray(array (
+  'key' => 'phpthumb_nohotlink_erase_image',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nohotlink_valid_domains']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nohotlink_valid_domains']->fromArray(array (
+  'key' => 'phpthumb_nohotlink_valid_domains',
+  'value' => '{http_host}',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nohotlink_text_message']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nohotlink_text_message']->fromArray(array (
+  'key' => 'phpthumb_nohotlink_text_message',
+  'value' => 'Off-server thumbnailing is not allowed',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_enabled']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_enabled',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_erase_image']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_erase_image']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_erase_image',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_require_refer']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_require_refer']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_require_refer',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_text_message']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_text_message']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_text_message',
+  'value' => 'Off-server linking is not allowed',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_valid_domains']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_valid_domains']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_valid_domains',
+  'value' => '{http_host}',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_nooffsitelink_watermark_src']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_nooffsitelink_watermark_src']->fromArray(array (
+  'key' => 'phpthumb_nooffsitelink_watermark_src',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
+$settings['phpthumb_zoomcrop']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_zoomcrop']->fromArray(array (
+  'key' => 'phpthumb_zoomcrop',
+  'value' => '0',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
@@ -935,6 +1124,15 @@ $settings['resolve_hostnames']->fromArray(array (
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
+  'editedon' => null,
+), '', true, true);
+$settings['resource_tree_node_name']= $xpdo->newObject('modSystemSetting');
+$settings['resource_tree_node_name']->fromArray(array (
+  'key' => 'resource_tree_node_name',
+  'value' => 'pagetitle',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
 $settings['richtext_default']= $xpdo->newObject('modSystemSetting');
@@ -1091,6 +1289,15 @@ $settings['topmenu_show_descriptions']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['tree_default_sort']= $xpdo->newObject('modSystemSetting');
+$settings['tree_default_sort']->fromArray(array (
+  'key' => 'tree_default_sort',
+  'value' => 'menuindex',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['tree_root_id']= $xpdo->newObject('modSystemSetting');
 $settings['tree_root_id']->fromArray(array (
   'key' => 'tree_root_id',
@@ -1121,7 +1328,7 @@ $settings['unauthorized_page']->fromArray(array (
 $settings['upload_files']= $xpdo->newObject('modSystemSetting');
 $settings['upload_files']->fromArray(array (
   'key' => 'upload_files',
-  'value' => 'txt,html,htm,xml,js,css,cache,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,xls,txt',
+  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,htaccess,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,xls,txt',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',

@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-09-11
+ * @updated 2010-12-02
  */
 $_lang['test_config_file'] = 'Kontroluji <span class="mono">[[+file]]</span> zda existuje a lze do něj zapisovat: ';
 $_lang['test_config_file_nw'] = 'V instalacích Linux/Unix vytvořte prázdný soubor s názvem <span class="mono">[[+key]].inc.php</span> v umístění <span class="mono">./core/config/</span> s atributy nastavenými pro zápis PHP.';
@@ -38,6 +38,8 @@ $_lang['test_php_version_516'] = 'MODx bude mít problémy s Vaší verzí ([[+v
 $_lang['test_php_version_520'] = 'MODx bude mít problémy s Vaší verzí ([[+version]]), z důvodů mnoha chyb spojených s PDO ovladači v této verzi. Aktualizujte PHP alespoň na verzi 5.3.0 nebo vyšší, které již mají odstraněné tyto chyby. MODx doporučuje aktualizaci na verzi 5.3.2+. I v případě, že nebudete používat MODx důrazně doporučujeme aktualizaci PHP z důvodů zabezpečení a stability vašich vlastních stránek.';
 $_lang['test_php_version_start'] = 'Kontroluji verzi PHP:';
 $_lang['test_php_version_success'] = 'OK! Běží na: [[+version]]';
+$_lang['test_safe_mode_start'] = 'Kontrola zda je vypnutý safe_mode:';
+$_lang['test_safe_mode_fail'] = 'MODx zjistil, že je safe_mode aktivní. Před pokračováním v instalaci je nutné vypnout safe_mode v konfiguraci PHP.';
 $_lang['test_sessions_start'] = 'Kontroluji správnost nastavení session:';
 $_lang['test_simplexml'] = 'Kontroluji SimpleXML:';
 $_lang['test_simplexml_nf'] = 'Nepodařilo se nalézt SimpleXML!';

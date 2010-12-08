@@ -34,6 +34,7 @@ $transport = $package->getTransport();
 if ($transport) {
     $packageArray['readme'] = $transport->getAttribute('readme');
     $packageArray['license'] = $transport->getAttribute('license');
+    $packageArray['changelog'] = $transport->getAttribute('changelog');
 }
 
 

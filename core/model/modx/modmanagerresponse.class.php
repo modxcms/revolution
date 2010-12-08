@@ -111,7 +111,7 @@ class modManagerResponse extends modResponse {
                     $this->body .= include_once $controllersPath.'footer.php';
                 }
 
-                
+
             } else {
                 $this->body = $this->modx->error->failure($modx->lexicon('action_err_nfs',array(
                     'id' => $action,
@@ -134,6 +134,7 @@ class modManagerResponse extends modResponse {
         } else {
             echo $this->body;
         }
+        @session_write_close();
         exit();
     }
 
@@ -142,45 +143,108 @@ class modManagerResponse extends modResponse {
      *
      * @param xPDOObject $obj If passed, will validate against for rules with constraints.
      */
-    public function checkFormCustomizationRules($obj = null,$forParent = false) {
+    public function checkFormCustomizationRules(&$obj = null,$forParent = false) {
+        $overridden = array();
+        
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
-        $c->leftJoin('modAccessActionDom','Access');
-        $principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
+        $c->innerJoin('modFormCustomizationSet','Set');
+        $c->innerJoin('modFormCustomizationProfile','Profile','Set.profile = Profile.id');
+        $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
+        $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
+        //$c->leftJoin('modAccessActionDom','Access');
+        //$principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
         $c->where(array(
-            'action' => $this->action['id'],
-            'active' => true,
-            'for_parent' => $forParent,
-            array(
-                array(
-                    'Access.principal_class:=' => 'modUserGroup',
-                    $principalCol.' IN ('.implode(',',$userGroups).')',
-                ),
-                'OR:Access.principal:IS' => null,
-            ),
+            'modActionDom.action' => $this->action['id'],
+            'modActionDom.for_parent' => $forParent,
+            'Set.active' => true,
+            'Profile.active' => true,
         ));
+        $c->where(array(
+            array(
+                'ProfileUserGroup.usergroup:IN' => $userGroups,
+                array(
+                    'OR:ProfileUserGroup.usergroup:IS' => null,
+                    'AND:UGProfile.active:=' => true,
+                ),
+            ),
+            'OR:ProfileUserGroup.usergroup:=' => null,
+        ),xPDOQuery::SQL_AND,null,2);
+        $c->select(array(
+            'modActionDom.*',
+            'Set.constraint_class',
+            'Set.constraint_field',
+            'Set.constraint',
+            'Set.template',
+        ));
+        /* sort by template to get template default value first
+         * TODO: eventually add rank to Sets to allow more fine-grained control
+         */
+        $c->sortby('Set.template','ASC');
+        $c->sortby('modActionDom.rank','ASC');
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
+
+        /* grab parents of current obj */
+        if ($obj) {
+            $rCtx = $obj->get('context_key');
+            $oCtx = $this->modx->context->get('key');
+            if (!empty($rCtx) && $rCtx != 'mgr') {
+                $this->modx->switchContext($rCtx);
+            }
+            $parents = $this->modx->getParentIds($obj->get('id'));
+            /* if on resource/create, set obj id to parent as well */
+            if ($forParent) {
+                $parents[] = $obj->get('id');
+            }
+            if (!empty($rCtx)) {
+                $this->modx->switchContext($oCtx);
+            }
+        }
+
         foreach ($domRules as $rule) {
+            /* filter by template here, so that prior rules can affect template which will change rules */
+            if ($obj) {
+                $tpl = $rule->get('template');
+                if (!empty($tpl)) {
+                    if ((int)$obj->get('template') != (int)$tpl) continue;
+                }
+            }
+
+            /* filter by constraints */
             $constraintClass = $rule->get('constraint_class');
             if (!empty($constraintClass)) {
                 if (empty($obj) || !($obj instanceof $constraintClass)) continue;
                 $constraintField = $rule->get('constraint_field');
                 $constraint = $rule->get('constraint');
-                if ($obj->get($constraintField) != $constraint) {
-                    continue;
+
+                /* if checking a parent, get all parents up the tree */
+                if (($forParent && $constraintField == 'id') || $constraintField == 'parent') {
+                    if (!in_array($constraint,$parents)) {
+                        continue;
+                    }
+                } else { /* otherwise just check constraint */
+                    if ($obj->get($constraintField) != $constraint) {
+                        continue;
+                    }
                 }
+            }
+            /* if setting a default value, do so here */
+            if ($obj && $rule->get('rule') == 'fieldDefault') {
+                $overridden[$rule->get('name')] = $rule->get('value');
+                $obj->set($rule->get('name'),$rule->get('value'));
             }
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;
         }
         $ruleOutput = '';
         if (!empty($rules)) {
-            $ruleOutput .= '<script type="text/javascript">Ext.onReady(function() {';
+            $ruleOutput .= '<script type="text/javascript">MODx.on("ready",function() {';
             $ruleOutput .= implode("\n",$rules);
             $ruleOutput .= '});</script>';
             $this->modx->regClientStartupHTMLBlock($ruleOutput);
         }
+        return $overridden;
     }
 
     /**
@@ -349,7 +413,7 @@ class modManagerResponse extends modResponse {
     /**
      * Adds a lexicon topic to this page's language topics to load. Will load
      * the topic as well.
-     * 
+     *
      * @param string $topic The topic to load, in standard namespace:topic format
      * @return boolean True if successful
      */
@@ -376,7 +440,7 @@ class modManagerResponse extends modResponse {
      */
     public function setLangTopics(array $topics = array()) {
         if (!is_array($topics) || empty($topics)) return false;
-        
+
         $topics = array_unique($topics);
         $topics = implode(',',$topics);
         return $this->modx->smarty->assign('_lang_topics',$topics);

@@ -53,6 +53,41 @@ if (!empty($data['n_category']) && is_array($data['n_category'])) {
             $category->save();
         }
     }
+/* must be dropping category onto category in elements subtrees */
+} else if (!empty($data)) {
+    $cdata = array();
+    foreach ($data as $typeKey => $type) {
+        if (!empty($type)) {
+            getCategoryNodeDrop($cdata,$type);
+        }
+    }
+    foreach ($cdata as $item) {
+        if (empty($item['class']) || empty($item['pk'])) continue;
+
+        if ($item['class'] == 'modCategory') {
+            $obj = $modx->getObject($item['class'],$item['pk']);
+            if ($obj) {
+                $obj->set('parent',$item['category']);
+                $obj->save();
+            }
+        }
+    }
+}
+
+function getCategoryNodeDrop(&$cdata,$type = array(),$currentParent = 0) {
+    foreach ($type as $itemKey => $item) {
+        $nar = explode('_',$itemKey);
+        $pk = !empty($nar[3]) ? $nar[3] : 0;
+        $cdata[] = array(
+            'type' => $nar[1],
+            'class' => 'mod'.ucfirst($nar[2]),
+            'pk' => $pk,
+            'category' => $currentParent,
+        );
+        if (!empty($item)) {
+            getCategoryNodeDrop($cdata,$item,$pk);
+        }
+    }
 }
 
 function sortNodes(modX &$modx,$xname,$type,$data) {

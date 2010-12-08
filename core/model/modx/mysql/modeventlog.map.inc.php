@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modEventLog']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'event_log',
   'fields' => 
   array (
@@ -72,6 +73,25 @@ $xpdo_meta_map['modEventLog']= array (
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'user' => 
+    array (
+      'alias' => 'user',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'user' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'composites' => 

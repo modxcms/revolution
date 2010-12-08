@@ -41,6 +41,7 @@ $emptycat = $modx->newObject('modCategory');
 $emptycat->set('category','uncategorized');
 $emptycat->id = 0;
 $categories[] = $emptycat;
+$tvMap = array();
 if (isset ($_REQUEST['template'])) {
     $templateId = intval($_REQUEST['template']);
 }
@@ -105,16 +106,35 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
             $tv->set('formElement',$inputForm);
             if (!is_array($categories[$tv->category]->tvs)) {
                 $categories[$tv->category]->tvs = array();
+                $categories[$tv->category]->tvCount = 0;
             }
+
+            /* add to tv/category map */
+            $tvMap[$tv->id] = $tv->category;
+
+            /* add TV to category array */
             $categories[$tv->category]->tvs[] = $tv;
+            if ($tv->get('type') != 'hidden') {
+                $categories[$tv->category]->tvCount++;
+            }
         }
     }
+}
+
+$tvCounts = array();
+foreach ($categories as $n => $category) {
+    $ct = count($category->tvs);
+    if (!empty($ct)) {
+        $tvCounts[$n] = $ct;
+    }
+    $category->hidden = empty($category->tvCount) ? true : false;
 }
 
 $onResourceTVFormRender = $modx->invokeEvent('OnResourceTVFormRender',array(
     'categories' => &$categories,
     'template' => $templateId,
     'resource' => $resourceId,
+    'tvCounts' => &$tvCounts,
 ));
 if (is_array($onResourceTVFormRender)) {
     $onResourceTVFormRender = implode('',$onResourceTVFormRender);
@@ -122,6 +142,8 @@ if (is_array($onResourceTVFormRender)) {
 $modx->smarty->assign('OnResourceTVFormRender',$onResourceTVFormRender);
 
 $modx->smarty->assign('categories',$categories);
+$modx->smarty->assign('tvCounts',$modx->toJSON($tvCounts));
+$modx->smarty->assign('tvMap',$modx->toJSON($tvMap));
 
 if (!empty($_REQUEST['showCheckbox'])) {
     $modx->smarty->assign('showCheckbox',1);

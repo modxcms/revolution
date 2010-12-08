@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modCategory']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'categories',
   'fields' => 
   array (
@@ -30,6 +31,41 @@ $xpdo_meta_map['modCategory']= array (
       'null' => false,
       'default' => '',
       'index' => 'unique',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'parent' => 
+    array (
+      'alias' => 'parent',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'parent' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'category' => 
+    array (
+      'alias' => 'category',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'category' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'composites' => 

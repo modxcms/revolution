@@ -1,10 +1,10 @@
 <?php
 /**
  * Smarty plugin
+ *
  * @package Smarty
- * @subpackage plugins
+ * @subpackage PluginsFunction
  */
-
 
 /**
  * Smarty {fetch} plugin
@@ -15,24 +15,21 @@
  * @link http://smarty.php.net/manual/en/language.function.fetch.php {fetch}
  *       (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
- * @param array
- * @param Smarty
+ * @param array $params parameters
+ * @param object $template template object
  * @return string|null if the assign parameter is passed, Smarty assigns the
  *                     result to a template variable
  */
-function smarty_function_fetch($params, &$smarty)
+function smarty_function_fetch($params, $template)
 {
     if (empty($params['file'])) {
-        $smarty->_trigger_fatal_error("[plugin] parameter 'file' cannot be empty");
+        trigger_error("[plugin] fetch parameter 'file' cannot be empty",E_USER_NOTICE);
         return;
     }
 
     $content = '';
-    if ($smarty->security && !preg_match('!^(http|ftp)://!i', $params['file'])) {
-        $_params = array('resource_type' => 'file', 'resource_name' => $params['file']);
-        require_once(SMARTY_CORE_DIR . 'core.is_secure.php');
-        if(!smarty_core_is_secure($_params, $smarty)) {
-            $smarty->_trigger_fatal_error('[plugin] (secure mode) fetch \'' . $params['file'] . '\' is not allowed');
+    if (isset($template->security_policy) && !preg_match('!^(http|ftp)://!i', $params['file'])) {
+        if(!$template->security_policy->isTrustedResourceDir($params['file'])) {
             return;
         }
         
@@ -43,7 +40,7 @@ function smarty_function_fetch($params, &$smarty)
             }
             fclose($fp);
         } else {
-            $smarty->_trigger_fatal_error('[plugin] fetch cannot read file \'' . $params['file'] . '\'');
+            trigger_error('[plugin] fetch cannot read file \'' . $params['file'] . '\'',E_USER_NOTICE);
             return;
         }
     } else {
@@ -96,7 +93,7 @@ function smarty_function_fetch($params, &$smarty)
                         case "header":
                             if(!empty($param_value)) {
                                 if(!preg_match('![\w\d-]+: .+!',$param_value)) {
-                                    $smarty->_trigger_fatal_error("[plugin] invalid header format '".$param_value."'");
+                                    trigger_error("[plugin] invalid header format '".$param_value."'",E_USER_NOTICE);
                                     return;
                                 } else {
                                     $extra_headers[] = $param_value;
@@ -112,7 +109,7 @@ function smarty_function_fetch($params, &$smarty)
                             if(!preg_match('!\D!', $param_value)) {
                                 $proxy_port = (int) $param_value;
                             } else {
-                                $smarty->_trigger_fatal_error("[plugin] invalid value for attribute '".$param_key."'");
+                                trigger_error("[plugin] invalid value for attribute '".$param_key."'",E_USER_NOTICE);
                                 return;
                             }
                             break;
@@ -130,12 +127,12 @@ function smarty_function_fetch($params, &$smarty)
                             if(!preg_match('!\D!', $param_value)) {
                                 $timeout = (int) $param_value;
                             } else {
-                                $smarty->_trigger_fatal_error("[plugin] invalid value for attribute '".$param_key."'");
+                                trigger_error("[plugin] invalid value for attribute '".$param_key."'",E_USER_NOTICE);
                                 return;
                             }
                             break;
                         default:
-                            $smarty->_trigger_fatal_error("[plugin] unrecognized attribute '".$param_key."'");
+                            trigger_error("[plugin] unrecognized attribute '".$param_key."'",E_USER_NOTICE);
                             return;
                     }
                 }
@@ -147,7 +144,7 @@ function smarty_function_fetch($params, &$smarty)
                 }
 
                 if(!$fp) {
-                    $smarty->_trigger_fatal_error("[plugin] unable to fetch: $errstr ($errno)");
+                    trigger_error("[plugin] unable to fetch: $errstr ($errno)",E_USER_NOTICE);
                     return;
                 } else {
                     if($_is_proxy) {
@@ -181,16 +178,16 @@ function smarty_function_fetch($params, &$smarty)
                         $content .= fgets($fp,4096);
                     }
                     fclose($fp);
-                    $csplit = split("\r\n\r\n",$content,2);
+                    $csplit = preg_split("!\r\n\r\n!",$content,2);
 
                     $content = $csplit[1];
 
                     if(!empty($params['assign_headers'])) {
-                        $smarty->assign($params['assign_headers'],split("\r\n",$csplit[0]));
+                        $template->assign($params['assign_headers'],preg_split("!\r\n!",$csplit[0]));
                     }
                 }
             } else {
-                $smarty->_trigger_fatal_error("[plugin] unable to parse URL, check syntax");
+                trigger_error("[plugin fetch] unable to parse URL, check syntax",E_USER_NOTICE);
                 return;
             }
         } else {
@@ -201,7 +198,7 @@ function smarty_function_fetch($params, &$smarty)
                 }
                 fclose($fp);
             } else {
-                $smarty->_trigger_fatal_error('[plugin] fetch cannot read file \'' . $params['file'] .'\'');
+                trigger_error('[plugin] fetch cannot read file \'' . $params['file'] .'\'',E_USER_NOTICE);
                 return;
             }
         }
@@ -210,12 +207,10 @@ function smarty_function_fetch($params, &$smarty)
 
 
     if (!empty($params['assign'])) {
-        $smarty->assign($params['assign'],$content);
+        $template->assign($params['assign'],$content);
     } else {
         return $content;
     }
 }
-
-/* vim: set expandtab: */
 
 ?>

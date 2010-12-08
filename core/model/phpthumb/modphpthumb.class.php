@@ -30,9 +30,23 @@ class modPhpThumb extends phpThumb {
         $this->setParameter('config_cache_directory',$cachePath);
         $this->setCacheDirectory();
 
+        $this->setParameter('config_allow_src_above_docroot',(boolean)$this->modx->getOption('phpthumb_allow_src_above_docroot',$this->config,false));
         $this->setParameter('config_cache_maxage',(float)$this->modx->getOption('phpthumb_cache_maxage',$this->config,30) * 86400);
         $this->setParameter('config_cache_maxsize',(float)$this->modx->getOption('phpthumb_cache_maxsize',$this->config,100) * 1024 * 1024);
         $this->setParameter('config_cache_maxfiles',(int)$this->modx->getOption('phpthumb_cache_maxfiles',$this->config,10000));
+        $this->setParameter('config_error_bgcolor',(string)$this->modx->getOption('phpthumb_error_bgcolor',$this->config,'CCCCFF'));
+        $this->setParameter('config_error_textcolor',(string)$this->modx->getOption('phpthumb_error_textcolor',$this->config,'FF0000'));
+        $this->setParameter('config_error_fontsize',(int)$this->modx->getOption('phpthumb_error_fontsize',$this->config,1));
+        $this->setParameter('config_nohotlink_enabled',(boolean)$this->modx->getOption('phpthumb_nohotlink_enabled',$this->config,true));
+        $this->setParameter('config_nohotlink_valid_domains',explode(',', $this->modx->getOption('phpthumb_nohotlink_valid_domains',$this->config,$this->modx->getOption('http_host'))));
+        $this->setParameter('config_nohotlink_erase_image',(boolean)$this->modx->getOption('phpthumb_nohotlink_erase_image',$this->config,true));
+        $this->setParameter('config_nohotlink_text_message',(string)$this->modx->getOption('phpthumb_nohotlink_text_message',$this->config,'Off-server thumbnailing is not allowed'));
+        $this->setParameter('config_nooffsitelink_enabled',(boolean)$this->modx->getOption('phpthumb_nooffsitelink_enabled',$this->config,false));
+        $this->setParameter('config_nooffsitelink_valid_domains',explode(',', $this->modx->getOption('phpthumb_nooffsitelink_valid_domains',$this->config,$this->modx->getOption('http_host'))));
+        $this->setParameter('config_nooffsitelink_require_refer',(boolean)$this->modx->getOption('phpthumb_nooffsitelink_require_refer',$this->config,false));
+        $this->setParameter('config_nooffsitelink_erase_image',(boolean)$this->modx->getOption('phpthumb_nooffsitelink_erase_image',$this->config,true));
+        $this->setParameter('config_nooffsitelink_watermark_src',(string)$this->modx->getOption('phpthumb_nooffsitelink_watermark_src',$this->config,''));
+        $this->setParameter('config_nooffsitelink_text_message',(string)$this->modx->getOption('phpthumb_nooffsitelink_text_message',$this->config,'Off-server linking is not allowed'));
         $this->setParameter('cache_source_enabled',(boolean)$this->modx->getOption('phpthumb_cache_source_enabled',$this->config,false));
         $this->setParameter('cache_source_directory',$cachePath.'source/');
         $this->setParameter('allow_local_http_src',true);

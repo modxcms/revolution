@@ -9,11 +9,14 @@
 $_lang['perm.about_desc'] = 'La page À Propos.';
 $_lang['perm.access_permissions_desc'] = 'Pages et actions relatives aux Permissions.';
 $_lang['perm.actions_desc'] = 'La page d\'Actions.';
-$_lang['perm.add_children_desc'] = 'Ajouter des Ressources enfants dans les ressources spécifiées.';
+$_lang['perm.add_children_desc'] = 'Ajouter des ressources enfants dans les ressources spécifiées ou des éléments à une catégorie.';
 $_lang['perm.change_password_desc'] = 'Peut modifier son mot de passe.';
 $_lang['perm.change_profile_desc'] = 'Peut modifier son profil.';
 $_lang['perm.charsets_desc'] = 'Voir la liste des jeux de caractères.';
+$_lang['perm.class_map_desc'] = 'Voir une liste de classes dans le plan de classe.';
+$_lang['perm.components_desc'] = 'Voir le menu Composants.';
 $_lang['perm.content_types_desc'] = 'La page des types de contenu.';
+$_lang['perm.copy_desc'] = 'la possibilité de copier un objet.';
 $_lang['perm.countries_desc'] = 'Voir la liste des pays.';
 $_lang['perm.create_desc'] = 'Autorisations minimales pour "créer" des accès à de nouveaux objets.';
 $_lang['perm.credits_desc'] = 'Voir la page des crédits.';

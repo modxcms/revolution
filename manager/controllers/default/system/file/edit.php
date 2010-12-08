@@ -7,11 +7,13 @@
  */
 if (!$modx->hasPermission('file_view')) return $modx->error->failure($modx->lexicon('access_denied'));
 if (empty($_GET['file'])) return $modx->error->failure($modx->lexicon('file_err_nf'));
+$wctx = !empty($_GET['wctx']) ? $_GET['wctx'] : $modx->context->get('key');
 
 /* format filename */
 $filename = preg_replace('#([\\\\]+|/{2,})#', '/',$_GET['file']);
-$modx->getService('fileHandler','modFileHandler');
-$file = $modx->fileHandler->make($filename);
+$modx->getService('fileHandler', 'modFileHandler', '',array('context' => $wctx));
+$basePath = $modx->fileHandler->getBasePath(false);
+$file = $modx->fileHandler->make($basePath.$filename);
 
 if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf'));
 if (!$file->isReadable()) {

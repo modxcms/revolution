@@ -91,6 +91,9 @@ if (!class_exists('PDO')) {
  * @package xpdo
  */
 class xPDO {
+    /**#@+
+     * Constants
+     */
     const OPT_BASE_CLASSES = 'base_classes';
     const OPT_BASE_PACKAGES = 'base_packages';
     const OPT_CACHE_COMPRESS = 'cache_compress';
@@ -108,6 +111,10 @@ class xPDO {
     const OPT_HYDRATE_FIELDS = 'hydrate_fields';
     const OPT_HYDRATE_ADHOC_FIELDS = 'hydrate_adhoc_fields';
     const OPT_HYDRATE_RELATED_OBJECTS = 'hydrate_related_objects';
+    /**
+     * @deprecated
+     * @see call()
+     */
     const OPT_LOADER_CLASSES = 'loader_classes';
     const OPT_ON_SET_STRIPSLASHES = 'on_set_stripslashes';
     const OPT_SETUP = 'setup';
@@ -121,10 +128,12 @@ class xPDO {
     const LOG_LEVEL_INFO = 3;
     const LOG_LEVEL_DEBUG = 4;
 
+    const SCHEMA_VERSION = '1.1';
+
     /**
      * A PDO instance used by xPDO for database access.
      * @var PDO
-     * @access protected
+     * @access public
      */
     public $pdo= null;
     /**
@@ -261,6 +270,10 @@ class xPDO {
                 $this->_escapeCharOpen= '"';
                 $this->_escapeCharClose= '"';
                 break;
+            case 'sqlsrv':
+            	$this->_escapeCharOpen= '[';
+            	$this->_escapeCharClose= ']';
+            	break;
             default:
                 break;
         }
@@ -295,7 +308,7 @@ class xPDO {
             $this->cachePath = $this->config[xPDO::OPT_CACHE_PATH];
         }
     }
-    
+
     /**
      * Create the PDO connection to a database specified in the configuration.
      *
@@ -531,6 +544,41 @@ class xPDO {
     }
 
     /**
+     * Call a static method from a valid package class with arguments.
+     *
+     * Will always search for database-specific class files first.
+     *
+     * @param string $class The name of a class to to get the static method from.
+     * @param string $method The name of the method you want to call.
+     * @param array $args An array of arguments for the method.
+     * @return mixed|null The callback method's return value or null if no valid method is found.
+     */
+    public function call($class, $method, array $args = array()) {
+        $return = null;
+        $className = $this->loadClass($class) . '_' . $this->getOption('dbtype');
+        $callback = array($className, $method);
+        if (is_callable($callback)) {
+            try {
+                $return = call_user_func_array($callback, $args);
+            } catch (Exception $e) {
+                $this->log(xPDO::LOG_LEVEL_ERROR, "An exception occurred calling {$className}::{$method}() - " . $e->getMessage());
+            }
+        } else {
+            $callback = array($className, $method);
+            if (is_callable($callback)) {
+                try {
+                    $return = call_user_func_array($callback, $args);
+                } catch (Exception $e) {
+                    $this->log(xPDO::LOG_LEVEL_ERROR, "An exception occurred calling {$className}::{$method}() - " . $e->getMessage());
+                }
+            } else {
+                $this->log(xPDO::LOG_LEVEL_ERROR, "{$class}::{$method}() is not a valid static method.");
+            }
+        }
+        return $return;
+    }
+
+    /**
      * Creates a new instance of a specified class.
      *
      * All new objects created with this method are transient until {@link
@@ -559,7 +607,7 @@ class xPDO {
     /**
      * Finds the class responsible for loading instances of the specified class.
      *
-     * @access protected
+     * @deprecated Use call() instead.
      * @param string $className The name of the class to find a loader for.
      * @param string $method Indicates the specific loader method to use,
      * loadCollection or loadObject (or other public static methods).
@@ -606,8 +654,7 @@ class xPDO {
     public function getObject($className, $criteria= null, $cacheFlag= false) {
         $instance= null;
         if ($criteria !== null) {
-            $loader = $this->getObjectLoader($className, 'load');
-            $instance = call_user_func_array($loader, array(& $this, $className, $criteria, $cacheFlag));
+            $instance = $this->call($className, 'load', array(& $this, $className, $criteria, $cacheFlag));
         }
         return $instance;
     }
@@ -626,10 +673,22 @@ class xPDO {
      * @return array|null An array of class instances retrieved.
     */
     public function getCollection($className, $criteria= null, $cacheFlag= false) {
-        $objCollection= array ();
-        $loader = $this->getObjectLoader($className, 'loadCollection');
-        $objCollection= call_user_func_array($loader, array(& $this, $className, $criteria, $cacheFlag));
-        return $objCollection;
+        return $this->call($className, 'loadCollection', array(& $this, $className, $criteria, $cacheFlag));
+    }
+
+    /**
+     * Retreives an iterable representation of a collection of xPDOObjects.
+     *
+     * @param string $className Name of the class to search for instances of.
+     * @param mixed $criteria An xPDOCriteria object or representation.
+     * @param bool $cacheFlag If an integer value is provided, this specifies
+     * the time to live in the result set cache; if cacheFlag === false, caching
+     * is ignored for the collection and if cacheFlag === true, the objects will
+     * live in cache until flushed by another process.
+     * @return xPDOIterator An iterable representation of a collection.
+     */
+    public function getIterator($className, $criteria= null, $cacheFlag= false) {
+        return new xPDOIterator($this, array('class' => $className, 'criteria' => $criteria, 'cacheFlag' => $cacheFlag));
     }
 
     /**
@@ -672,7 +731,8 @@ class xPDO {
      *
      * @param string $className The name of the class to remove a collection of.
      * @param mixed $criteria Valid xPDO criteria for selecting a collection.
-     * @return boolean True if the collection is successfully removed.
+     * @return boolean|integer False if the remove encounters an error, otherwise an integer value
+     * representing the number of rows that were removed.
      */
     public function removeCollection($className, $criteria) {
         $removed= false;
@@ -692,6 +752,8 @@ class xPDO {
                         call_user_func($callback, array('className' => $className, 'criteria' => $query));
                     }
                 }
+            } else {
+                $this->log(xPDO::LOG_LEVEL_ERROR, "xPDO->removeCollection - Error preparing statement to delete {$className} instances using query: {$query->toSQL()}");
             }
         }
         return $removed;
@@ -770,14 +832,14 @@ class xPDO {
      * matches are found.
      */
     public function getCollectionGraph($className, $graph, $criteria= null, $cacheFlag= true) {
-        $objCollection= array ();
-        $loader = $this->getObjectLoader($className, 'loadCollectionGraph');
-        $objCollection= call_user_func_array($loader, array(& $this, $className, $graph, $criteria, $cacheFlag));
-        return $objCollection;
+        return $this->call($className, 'loadCollectionGraph', array(& $this, $className, $graph, $criteria, $cacheFlag));
     }
 
     /**
-     * Gets criteria pre-defined in an {@link xPDOObject} class metadata definition.
+     * Convert any valid criteria into an xPDOQuery instance.
+     *
+     * @todo Get criteria pre-defined in an {@link xPDOObject} class metadata
+     * definition by name.
      *
      * @todo Define callback functions as an alternative to retreiving criteria
      * sql and/or bindings from the metadata.
@@ -791,10 +853,53 @@ class xPDO {
      * @return xPDOCriteria A criteria object or null if not found.
      */
     public function getCriteria($className, $type= null, $cacheFlag= true) {
-        $criteria= null;
-        if ($criteria= $this->newQuery($className, $type, $cacheFlag)) {
-            if (!$criteria->construct()) {
-                $this->log(xPDO::LOG_LEVEL_ERROR, "Could not get criteria object for class {$className}");
+        return $this->newQuery($className, $type, $cacheFlag);
+    }
+
+    /**
+     * Validate and return the type of a specified criteria variable.
+     *
+     * @param mixed $criteria An xPDOCriteria instance or any valid criteria variable.
+     * @return string|null The type of valid criteria passed, or null if the criteria is not valid.
+     */
+    public function getCriteriaType($criteria) {
+        $type = gettype($criteria);
+        if ($type === 'object') {
+            $type = get_class($criteria);
+            if (!$criteria instanceof xPDOCriteria) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "Invalid criteria object of class {$type} encountered.", '', __METHOD__, __FILE__, __LINE__);
+                $type = null;
+            }
+        }
+        return $type;
+    }
+
+    /**
+     * Add criteria when requesting a derivative class row automatically.
+     *
+     * This applies class_key filtering for single-table inheritance queries and may
+     * provide a convenient location for similar features in the future.
+     *
+     * @param string $className A valid xPDOObject derivative table class.
+     * @param xPDOCriteria $criteria A valid xPDOCriteria instance.
+     */
+    public function addDerivativeCriteria($className, $criteria) {
+        if ($criteria instanceof xPDOQuery && !isset($this->map[$className]['table'])) {
+            if (isset($this->map[$className]['fields']['class_key']) && !empty($this->map[$className]['fields']['class_key'])) {
+                $criteria->where(array('class_key' => $this->map[$className]['fields']['class_key']));
+                if ($this->getDebug() === true) {
+                    $this->log(xPDO::LOG_LEVEL_DEBUG, "#1: Automatically adding class_key criteria for derivative query of class {$className}");
+                }
+            } else {
+                foreach ($this->getAncestry($className, false) as $ancestor) {
+                    if (isset($this->map[$ancestor]['table']) && isset($this->map[$ancestor]['fields']['class_key'])) {
+                        $criteria->where(array('class_key' => $className));
+                        if ($this->getDebug() === true) {
+                            $this->log(xPDO::LOG_LEVEL_DEBUG, "#2: Automatically adding class_key criteria for derivative query of class {$className} from base table class {$ancestor}");
+                        }
+                        break;
+                    }
+                }
             }
         }
         return $criteria;
@@ -841,7 +946,7 @@ class xPDO {
             } elseif (empty ($class)) {
                 $class= $name;
             }
-            $className = $className= $this->loadClass($class, $path, false, true);
+            $className= $this->loadClass($class, $path, false, true);
             if (!empty($className)) {
                 $service = new $className ($this, $params);
                 if ($service) {
@@ -1227,6 +1332,21 @@ class xPDO {
     }
 
     /**
+     * Gets the version string of the schema the specified class was generated from.
+     *
+     * @param string $className The name of the class to get the model version from.
+     * @return string The version string for the schema model the class was generated from.
+     */
+    public function getModelVersion($className) {
+        $version = '1.0';
+        $className= $this->loadClass($className);
+        if ($className && isset($this->map[$className]['version'])) {
+            $version= $this->map[$className]['version'];
+        }
+        return $version;
+    }
+
+    /**
      * Gets the manager class for this xPDO connection.
      *
      * The manager class can perform operations such as creating or altering
@@ -1575,6 +1695,9 @@ class xPDO {
                 $result['dbname']= trim($parameters[$a]);
         	}
         }
+        if (!isset($result['dbname'])) {
+        	if (isset($result['database'])) $result['dbname'] = $result['database'];
+        }
         return $result;
     }
 
@@ -1894,7 +2017,19 @@ class xPDO {
         if (!$this->connect()) {
             return false;
         }
-        return $this->pdo->quote($string, $parameter_type);
+        $quoted = $this->pdo->quote($string, $parameter_type);
+        switch ($parameter_type) {
+            case PDO::PARAM_STR:
+                $quoted = trim($quoted);
+                break;
+            case PDO::PARAM_INT:
+                $quoted = trim($quoted);
+                $quoted = (integer) trim($quoted, "'");
+                break;
+            default:
+                break;
+        }
+        return $quoted;
     }
 
     /**
@@ -2004,9 +2139,17 @@ class xPDO {
         return $split;
     }
 
+    /**
+     * Parses parameter bindings in SQL prepared statements.
+     *
+     * @param string $sql A SQL prepared statement to parse bindings in.
+     * @param array $bindings An array of parameter bindings to use for the replacements.
+     * @return string The SQL with the binding placeholders replaced.
+     */
     public function parseBindings($sql, $bindings) {
         if (!empty($sql) && !empty($bindings)) {
             reset($bindings);
+            $bound = array();
             while (list ($k, $param)= each($bindings)) {
                 if (!is_array($param)) {
                     $v= $param;
@@ -2032,29 +2175,31 @@ class xPDO {
                     }
                 }
                 if (!is_int($k) || substr($k, 0, 1) === ':') {
-                    if (!isset ($tempf)) {
-                        $tempf= $tempr= array ();
-                    }
                     $pattern= '/' . $k . '\b/';
-                    array_push($tempf, $pattern);
                     if ($type > 0) {
                         $v= $this->quote($v, $type);
                     } else {
                         $v= 'NULL';
                     }
-                    array_push($tempr, $v);
+                    $bound[$pattern] = $v;
                 } else {
                     $parse= create_function('$d,$v,$t', 'return $t > 0 ? $d->quote($v, $t) : \'NULL\';');
                     $sql= preg_replace("/(\?)/e", '$parse($this,$bindings[$k][\'value\'],$type);', $sql, 1);
                 }
             }
-            if (isset ($tempf)) {
-                $sql= preg_replace($tempf, $tempr, $sql);
+            if (!empty($bound)) {
+                $sql= preg_replace(array_keys($bound), array_values($bound), $sql);
             }
         }
         return $sql;
     }
 
+    /**
+     * Get the appropriate PDO::PARAM_ type constant from a PHP value.
+     *
+     * @param mixed $value Any PHP scalar or null value
+     * @return int|null
+     */
     public function getPDOType($value) {
         $type= null;
         if (is_null($value)) $type= PDO::PARAM_NULL;
@@ -2217,5 +2362,105 @@ class xPDOCriteria {
             $sql = $this->xpdo->parseBindings($sql, $this->bindings);
         }
         return $sql;
+    }
+}
+
+/**
+ * An iteratable representation of an xPDOObject result set.
+ *
+ * Use an xPDOIterator to loop over large result sets and work with one instance
+ * at a time. This greatly reduces memory usage over loading the entire collection
+ * of objects into memory at one time. It is also slightly faster.
+ */
+class xPDOIterator implements Iterator {
+    private $xpdo = null;
+    private $index = 0;
+    private $current = null;
+    private $stmt = null;
+    private $class = null;
+    private $alias = null;
+    private $criteria = null;
+    private $criteriaType = 'xPDOQuery';
+    private $cacheFlag = false;
+
+    /**
+     * Construct a new xPDOIterator instance (do not call directly).
+     *
+     * @see xPDO::getIterator()
+     * @param xPDO &$xpdo A reference to a valid xPDO instance.
+     * @param array $options An array of options for the iterator.
+     * @return xPDOIterator An xPDOIterator instance.
+     */
+    function __construct(& $xpdo, array $options= array()) {
+        $this->xpdo =& $xpdo;
+        if (isset($options['class'])) {
+            $this->class = $this->xpdo->loadClass($options['class']);
+        }
+        if (isset($options['alias'])) {
+            $this->alias = $options['alias'];
+        } else {
+            $this->alias = $this->class;
+        }
+        if (isset($options['cacheFlag'])) {
+            $this->cacheFlag = $options['cacheFlag'];
+        }
+        if (isset($options['criteria']) && is_object($options['criteria'])) {
+            $this->criteria = $options['criteria'];
+        } elseif (!empty($this->class)) {
+            $this->criteria = $this->xpdo->getCriteria($this->class, null, $this->cacheFlag);
+        }
+        if (!empty($this->criteria)) {
+            $this->criteriaType = $this->xpdo->getCriteriaType($this->criteria);
+            if ($this->criteriaType === 'xPDOQuery') {
+                $this->class = $this->criteria->getClass();
+                $this->alias = $this->criteria->getAlias();
+            }
+        }
+    }
+
+    public function rewind() {
+        $this->index = 0;
+        if (!empty($this->stmt)) {
+            $this->stmt->closeCursor();
+        }
+        $this->stmt = $this->criteria->prepare();
+        if ($this->stmt && $this->stmt->execute()) {
+            $this->fetch();
+        }
+    }
+
+    public function current() {
+        return $this->current;
+    }
+
+    public function key() {
+        return $this->index;
+    }
+
+    public function next() {
+        if ($this->fetch()) {
+            $this->index++;
+        } else {
+            $this->index = null;
+        }
+        return $this->current();
+    }
+
+    public function valid() {
+        return ($this->current !== null);
+    }
+
+    /**
+     * Fetch the next row from the result set and set it as current.
+     *
+     * Uses the loader defined for the specified class, so it does respect security.
+     */
+    protected function fetch() {
+        $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
+        if (is_array($row) && !empty($row)) {
+            $this->current = $this->xpdo->call($this->class, '_loadInstance', array(& $this->xpdo, $this->class, $this->alias, $row));
+        } else {
+            $this->current = null;
+        }
     }
 }

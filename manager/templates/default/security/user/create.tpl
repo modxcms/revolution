@@ -1,2 +1,2 @@
-{extends file='security/user/mutate.tpl'}
-{modblock name='ab'}{/modblock}
+{$onUserFormPrerender}
+<div id="modx-panel-user-div"></div>

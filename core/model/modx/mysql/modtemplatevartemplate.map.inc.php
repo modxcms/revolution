@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modTemplateVarTemplate']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'site_tmplvar_templates',
   'fields' => 
   array (
@@ -39,6 +40,31 @@ $xpdo_meta_map['modTemplateVarTemplate']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+    ),
+  ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'tmplvarid' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'templateid' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modLexiconTopic']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'lexicon_topics',
   'fields' => 
   array (
@@ -32,6 +33,31 @@ $xpdo_meta_map['modLexiconTopic']= array (
       'default' => 'core',
       'index' => 'unique',
       'indexgrp' => 'foci',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'foci' => 
+    array (
+      'alias' => 'foci',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'namespace' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'composites' => 

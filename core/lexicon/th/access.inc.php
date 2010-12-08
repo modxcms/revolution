@@ -74,6 +74,7 @@ $_lang['filter_by_context'] = 'กรองด้วยบริบท...';
 $_lang['filter_by_policy'] = 'กรองด้วยนโยบาย...';
 $_lang['filter_by_resource_group'] = 'กรองด้วยกลุ่มรีซอร์ส...';
 $_lang['filter_by_category'] = 'กรองด้วยหมวดหมู่...';
+$_lang['no_policy_option'] = ' (ไม่มีนโยบาย) ';
 $_lang['resource_group'] = 'กลุ่มรีซอร์ส';
 $_lang['resource_group_add'] = 'เพิ่มกลุ่มรีซอร์ส';
 $_lang['resource_group_access_remove'] = 'ลบรีซอร์สออกจากกลุ่ม';

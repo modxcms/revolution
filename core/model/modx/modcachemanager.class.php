@@ -225,9 +225,12 @@ class modCacheManager extends xPDOCacheManager {
                         if (isset ($this->modx->config["{$match[1]}"])) {
                             $matchValue= $this->modx->config["{$match[1]}"];
                         } else {
-                            $matchValue= '';
+                            /* this causes problems with JSON in settings, disabling for now */
+                            //$matchValue= '';
                         }
-                        $v= str_replace($match[0], $matchValue, $v);
+                        if (!empty($matchValue)) {
+                            $v= str_replace($match[0], $matchValue, $v);
+                        }
                     }
                 }
                 $config[$k]= $v;
@@ -271,6 +274,11 @@ class modCacheManager extends xPDOCacheManager {
                         $groups[(string) $docGroupPk] = $docGroup->toArray('', true);
                     }
                     $results['resourceGroups']= $groups;
+                }
+                $context = $obj->_contextKey ? $obj->_contextKey : 'web';
+                $policies = $obj->findPolicy($context);
+                if (!empty($policies)) {
+                    $results['policyCache']= $policies;
                 }
                 if (!empty($this->modx->elementCache)) {
                     $results['elementCache']= $this->modx->elementCache;

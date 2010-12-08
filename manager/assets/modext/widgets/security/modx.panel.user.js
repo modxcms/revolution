@@ -354,18 +354,26 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     id: 'modx-user-blockeduntil'
                     ,name: 'blockeduntil'
                     ,fieldLabel: _('user_blockeduntil')
-                    ,xtype: 'datefield'
-                    ,width: 150
+                    ,xtype: 'xdatetime'
+                    ,width: 300
+                    ,timeWidth: 150
+                    ,dateWidth: 150
                     ,allowBlank: true
-                    ,format: MODx.config.manager_date_format
+                    ,dateFormat: MODx.config.manager_date_format
+                    ,timeFormat: MODx.config.manager_time_format
+                    ,hiddenFormat: 'Y-m-d H:i:s'
                 },{
                     id: 'modx-user-blockedafter'
                     ,name: 'blockedafter'
                     ,fieldLabel: _('user_blockedafter')
-                    ,xtype: 'datefield'
-                    ,width: 150
+                    ,xtype: 'xdatetime'
+                    ,width: 300
+                    ,timeWidth: 150
+                    ,dateWidth: 150
                     ,allowBlank: true
-                    ,format: MODx.config.manager_date_format
+                    ,dateFormat: MODx.config.manager_date_format
+                    ,timeFormat: MODx.config.manager_time_format
+                    ,hiddenFormat: 'Y-m-d H:i:s'
                 }]
             }]
         }];

@@ -5,17 +5,18 @@
  */
 $xpdo_meta_map['modAccessPermission']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'access_permissions',
   'fields' => 
   array (
-    'policy' => 0,
+    'template' => 0,
     'name' => '',
     'description' => '',
     'value' => 1,
   ),
   'fieldMeta' => 
   array (
-    'policy' => 
+    'template' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -51,12 +52,47 @@ $xpdo_meta_map['modAccessPermission']= array (
       'default' => 1,
     ),
   ),
+  'indexes' => 
+  array (
+    'template' => 
+    array (
+      'alias' => 'template',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'template' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'name' => 
+    array (
+      'alias' => 'name',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
-    'Policy' => 
+    'Template' => 
     array (
-      'class' => 'modAccessPolicy',
-      'local' => 'policy',
+      'class' => 'modAccessPolicyTemplate',
+      'local' => 'template',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

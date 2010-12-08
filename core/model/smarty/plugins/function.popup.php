@@ -1,10 +1,10 @@
 <?php
 /**
  * Smarty plugin
+ *
  * @package Smarty
- * @subpackage plugins
+ * @subpackage PluginsFunction
  */
-
 
 /**
  * Smarty {popup} function plugin
@@ -15,11 +15,11 @@
  * @link http://smarty.php.net/manual/en/language.function.popup.php {popup}
  *          (Smarty online manual)
  * @author   Monte Ohrt <monte at ohrt dot com>
- * @param array
- * @param Smarty
+ * @param array $params parameters
+ * @param object $template template object
  * @return string
  */
-function smarty_function_popup($params, &$smarty)
+function smarty_function_popup($params, $template)
 {
     $append = '';
     foreach ($params as $_key=>$_value) {
@@ -90,22 +90,23 @@ function smarty_function_popup($params, &$smarty)
             case 'mouseoff':
             case 'followmouse':
             case 'closeclick':
+            case 'wrap':
                 if ($_value) $append .= ',' . strtoupper($_key);
                 break;
 
             default:
-                $smarty->trigger_error("[popup] unknown parameter $_key", E_USER_WARNING);
+                trigger_error("[popup] unknown parameter $_key", E_USER_WARNING);
         }
     }
 
     if (empty($text) && !isset($inarray) && empty($function)) {
-        $smarty->trigger_error("overlib: attribute 'text' or 'inarray' or 'function' required");
+        trigger_error("overlib: attribute 'text' or 'inarray' or 'function' required",E_USER_WARNING);
         return false;
     }
 
     if (empty($trigger)) { $trigger = "onmouseover"; }
 
-    $retval = $trigger . '="return overlib(\''.preg_replace(array("!'!","![\r\n]!"),array("\'",'\r'),$text).'\'';
+    $retval = $trigger . '="return overlib(\''.preg_replace(array("!'!",'!"!',"![\r\n]!"),array("\'","\'",'\r'),$text).'\'';
     $retval .= $append . ');"';
     if ($trigger == 'onmouseover')
        $retval .= ' onmouseout="nd();"';
@@ -113,7 +114,5 @@ function smarty_function_popup($params, &$smarty)
 
     return $retval;
 }
-
-/* vim: set expandtab: */
 
 ?>

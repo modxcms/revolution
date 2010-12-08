@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modWebGroupMember']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'web_groups',
   'fields' => 
   array (

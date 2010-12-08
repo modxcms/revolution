@@ -23,12 +23,17 @@ if (empty($scriptProperties['download'])) {
     $file = $scriptProperties['download'];
     $f = $modx->getOption('core_path').'export/properties/'.$file;
 
+    if (empty($scriptProperties['id'])) return '';
+    $propertySet = $modx->getObject('modPropertySet',$scriptProperties['id']);
+    $name = $propertySet->get('name');
+    $name = strtolower(str_replace(' ','-',$name));
+
     if (!is_file($f)) return $o;
 
     $o = file_get_contents($f);
 
-    header("Content-Type: application/force-download");
-    header("Content-Disposition: attachment; filename=\"properties.js\"");
+    header('Content-Type: application/force-download');
+    header('Content-Disposition: attachment; filename="'.$name.'.properties.js"');
 
     return $o;
 }

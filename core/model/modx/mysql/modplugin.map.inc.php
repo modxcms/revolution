@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modPlugin']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'site_plugins',
   'fields' => 
   array (
@@ -66,6 +67,41 @@ $xpdo_meta_map['modPlugin']= array (
       'null' => false,
       'default' => '',
       'index' => 'fk',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'locked' => 
+    array (
+      'alias' => 'locked',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'locked' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'disabled' => 
+    array (
+      'alias' => 'disabled',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'disabled' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'composites' => 

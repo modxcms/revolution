@@ -198,7 +198,13 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                 ,elementType: this.config.elementType
             });
         }
-        if (this.mask) { this.mask.show(); }
+        try {
+            if (!this.mask) {
+                this.mask = new Ext.LoadMask(this.getEl(),{msg:_('loading')});
+            }
+            if (this.mask) { this.mask.show(); }
+        } catch (e) { }
+        
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'element/propertyset.php'
             ,params: p
@@ -208,6 +214,11 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                     this.changePropertySet(cb);
                     this.onDirty();
                     if (this.mask) { this.mask.hide(); }
+                    MODx.msg.status({
+                        title: _('success')
+                        ,message: _('save_successful')
+                        ,dontHide: r.message != '' ? true : false
+                    });
                 },scope:this}
             }
         });
@@ -377,15 +388,17 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
     }
     
     ,exportProperties: function (btn,e) {
+        var id = Ext.getCmp('modx-combo-property-set').getValue();
         MODx.Ajax.request({
             url: MODx.config.connectors_url+'element/index.php'
             ,params: {
                 action: 'exportProperties'
                 ,data: this.encode()
+                ,id: id
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    location.href = MODx.config.connectors_url+'element/index.php?action=exportProperties&download='+r.message+'&HTTP_MODAUTH='+MODx.siteId;
+                    location.href = MODx.config.connectors_url+'element/index.php?action=exportProperties&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
                 },scope:this}
             }
         });
@@ -399,7 +412,18 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
                 'success': {fn:function(o) {
                     var s = this.getStore();
                     var data = o.a.result.object;
+                    /* handle <> in values, desc */
+                    for (var i in data) {
+                        if (data[i][4]) { data[i][4] = data[i][4].replace(/&gt;/g,'>').replace(/&lt;/g,'<'); }
+                        if (data[i][1]) { data[i][1] = data[i][1].replace(/&gt;/g,'>').replace(/&lt;/g,'<'); }
+                    }
                     s.loadData(data);
+                    /* mark fields dirty */
+                    var recs = s.getRange(0,s.getTotalCount());
+                    for (var i=0;i<recs.length;i++) {
+                        recs[i].markDirty();
+                    }
+                    this.getView().refresh();
                 },scope:this}
             }
         });

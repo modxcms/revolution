@@ -15,12 +15,25 @@ $modx->lexicon->load('file');
 /* get base paths and sanitize incoming paths */
 $filename = rawurldecode($scriptProperties['file']);
 
+/* get working context */
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
+
 /* create modFile object */
-$modx->getService('fileHandler','modFileHandler');
-$file = $modx->fileHandler->make($filename);
+$root = $modx->fileHandler->getBasePath(false);
+$file = $modx->fileHandler->make($root.$filename);
 
 /* verify file exists */
-if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf'));
+if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf').': '.$scriptProperties['file']);
 
 /* write file */
 $file->setContent($scriptProperties['content']);

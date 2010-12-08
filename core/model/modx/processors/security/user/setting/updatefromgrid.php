@@ -24,10 +24,7 @@ $setting = $modx->getObject('modUserSetting',array(
     'user' => $_DATA['user'],
 ));
 if (empty($setting)) return $modx->error->failure($modx->lexicon('setting_err_nf'));
-$setting->remove();
 
-/* do this this way b/c of error with xpdo and compound PK values */
-$setting = $modx->newObject('modUserSetting');
 $setting->set('key',$_DATA['key']);
 $setting->fromArray($_DATA);
 

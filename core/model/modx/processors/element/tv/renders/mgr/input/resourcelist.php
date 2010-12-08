@@ -10,12 +10,22 @@ $bindingsResult = $this->processBindings($this->get('elements'),$modx->resource-
 $parents = $this->parseInputOptions($bindingsResult);
 if (empty($parents)) { $parents = array($modx->getOption('site_start',null,1)); }
 
+$parentList = array();
+foreach ($parents as $parent) {
+    $parent = $modx->getObject('modResource',$parent);
+    if ($parent) $parentList[] = $parent;
+}
+
 /* get all children */
 $ids = array();
 $oldContext = $modx->context->get('key');
-$modx->switchContext($modx->resource->get('context_key'));
-foreach ($parents as $parent) {
-    $ids = array_merge($ids,$modx->getChildIds($parent));
+$currentContext = '';
+foreach ($parentList as $parent) {
+    if ($parent->get('context_key') != $currentContext) {
+        $modx->switchContext($parent->get('context_key'));
+        $currentContext = $parent->get('context_key');
+    }
+    $ids = array_merge($ids,$modx->getChildIds($parent->get('id')));
 }
 $ids = array_unique($ids);
 $modx->switchContext($oldContext);
@@ -32,11 +42,11 @@ $resources = $this->xpdo->getCollection('modResource',$c);
 /* iterate */
 $opts = array();
 foreach ($resources as $resource) {
-    $checked = $resource->get('id') == (int)$itemvalue;
+    $selected = $resource->get('id') == $this->get('value');
     $opts[] = array(
         'value' => $resource->get('id'),
         'text' => $resource->get('pagetitle').' ('.$resource->get('id').')',
-        'checked' => $checked,
+        'selected' => $selected,
     );
 }
 $this->xpdo->smarty->assign('tvitems',$opts);

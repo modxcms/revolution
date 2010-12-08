@@ -18,7 +18,7 @@ $onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocForm
 $modx->smarty->assign('onDocFormPrerender',$onDocFormPrerender);
 
 /* handle default parent */
-$parentname = $context->getOption('site_name');
+$parentname = $context->getOption('site_name', '', $modx->_userConfig);
 if ($resource->get('parent') != 0) {
     $parent = $modx->getObject('modResource',$resource->get('parent'));
     if ($parent != null) {
@@ -53,9 +53,9 @@ $access_permissions = $modx->hasPermission('access_permissions');
  *  Initialize RichText Editor
  */
 /* Set which RTE */
-$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $context->getOption('which_editor');
+$rte = isset($_REQUEST['which_editor']) ? $_REQUEST['which_editor'] : $context->getOption('which_editor', '', $modx->_userConfig);
 $modx->smarty->assign('which_editor',$rte);
-if ($context->getOption('use_editor') && !empty($rte)) {
+if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)) {
     /* invoke OnRichTextEditorRegister event */
     $text_editors = $modx->invokeEvent('OnRichTextEditorRegister');
     $modx->smarty->assign('text_editors',$text_editors);
@@ -77,13 +77,21 @@ if ($context->getOption('use_editor') && !empty($rte)) {
     }
 }
 
+/* register FC rules */
+$record = $resource->toArray();
+$overridden = $this->checkFormCustomizationRules($resource);
+$record = array_merge($record,$overridden);
+
+$record['parent_pagetitle'] = $parent ? $parent->get('pagetitle') : '';
+
 /* register JS scripts */
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/util/datetime.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.security.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.tv.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.symlink.js');
-$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/sections/resource/symlink/update.js');
+$managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
+$modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.symlink.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/sections/resource/symlink/update.js');
 $modx->regClientStartupHTMLBlock('
 <script type="text/javascript">
 // <![CDATA[
@@ -94,7 +102,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-symlink-update"
         ,resource: "'.$resource->get('id').'"
-        ,record: '.$modx->toJSON($resource->toArray()).'
+        ,record: '.$modx->toJSON($record).'
         ,which_editor: "'.$which_editor.'"
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"

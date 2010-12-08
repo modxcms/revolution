@@ -55,6 +55,7 @@ class xPDOTransport {
     const UNINSTALL_FILES = 'uninstall_files';
     const UNINSTALL_OBJECT = 'uninstall_object';
     const ARCHIVE_WITH = 'archive_with';
+    const ABORT_INSTALL_ON_VEHICLE_FAIL = 'abort_install_on_vehicle_fail';
     /**
      * Indicates how pre-existing objects are treated on install/uninstall.
      * @var integer
@@ -191,15 +192,21 @@ class xPDOTransport {
             foreach ($this->vehicles as $vIndex => $vehicleMeta) {
                 $vOptions = array_merge($options, $vehicleMeta);
                 if ($vehicle = $this->get($vehicleMeta['filename'], $vOptions)) {
-                   $saved[$vehicle->payload['guid']] = $vehicle->install($this, $vOptions);
+                    $vehicleInstalled = $vehicle->install($this, $vOptions);
+                    if (!$vehicleInstalled && isset($vehicle->payload[xPDOTransport::ABORT_INSTALL_ON_VEHICLE_FAIL]) && !empty($vehicle->payload[xPDOTransport::ABORT_INSTALL_ON_VEHICLE_FAIL])) {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Vehicle {$vehicle->payload['guid']} in transport {$this->signature} failed to install and indicated the process should be aborted.");
+                        return false;
+                    } else {
+                        $saved[$vehicle->payload['guid']] = $vehicleInstalled;
+                    }
                 }
+            }
+            $this->writePreserved();
+            if (!empty($saved)) {
+                $installed = true;
             }
         } else {
             $this->xpdo->log(xPDO::LOG_LEVEL_WARN, 'No vehicles are defined in the transport package (' . $this->signature . ') manifest for installation');
-        }
-        $this->writePreserved();
-        if (!empty($saved)) {
-            $installed = true;
         }
         return $installed;
     }

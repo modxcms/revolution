@@ -22,7 +22,7 @@ MODx.grid.UserGroups = function(config) {
             }
         ]
         ,tbar: [{
-            text: _('user_add_group')
+            text: _('user_group_user_add')
             ,handler: this.addGroup
         }]
     });
@@ -85,7 +85,7 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
             ,handler: this.updateRole
             ,scope: this
         },'-',{
-            text: _('user_group_remove')
+            text: _('user_group_user_remove')
             ,handler: this.remove.createDelegate(this,[{text: _('user_group_remove_confirm')}])
             ,scope: this
         });
@@ -99,7 +99,7 @@ Ext.reg('modx-grid-user-groups',MODx.grid.UserGroups);
 MODx.window.AddGroupToUser = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('user_add_group')
+        title: _('user_group_user_add')
         ,height: 150
         ,width: 375
         ,url: MODx.config.connectors_url+'security/user/group.php'

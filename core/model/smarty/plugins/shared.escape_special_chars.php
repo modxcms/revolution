@@ -1,10 +1,10 @@
 <?php
 /**
  * Smarty shared plugin
+ *
  * @package Smarty
- * @subpackage plugins
+ * @subpackage PluginsShared
  */
-
 
 /**
  * escape_special_chars common function
@@ -25,7 +25,5 @@ function smarty_function_escape_special_chars($string)
     }
     return $string;
 }
-
-/* vim: set expandtab: */
 
 ?>

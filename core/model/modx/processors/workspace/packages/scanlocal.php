@@ -21,7 +21,7 @@ $packages = array();
 $fullpath = $modx->getOption('core_path').'packages/';
 $odir = dir($fullpath);
 while(false !== ($name = $odir->read())) {
-	if(in_array($name,array('.','..','.svn','_notes'))) continue;
+	if(in_array($name,array('.','..','.svn','.git','_notes'))) continue;
 
 	$fullname = $fullpath.'/'.$name;
 	/* dont add in unreadable files or directories */

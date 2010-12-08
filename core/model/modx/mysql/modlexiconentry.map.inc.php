@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modLexiconEntry']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'lexicon_entries',
   'fields' => 
   array (
@@ -72,6 +73,73 @@ $xpdo_meta_map['modLexiconEntry']= array (
       'phptype' => 'timestamp',
       'null' => false,
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'name' => 
+    array (
+      'alias' => 'name',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'topic' => 
+    array (
+      'alias' => 'topic',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'topic' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'namespace' => 
+    array (
+      'alias' => 'namespace',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'namespace' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'language' => 
+    array (
+      'alias' => 'language',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'language' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

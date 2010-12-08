@@ -16,22 +16,49 @@
 if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('setting');
 
-if (!isset($scriptProperties['start'])) $scriptProperties['start'] = 0;
-if (!isset($scriptProperties['limit'])) $scriptProperties['limit'] = 10;
-if (!isset($scriptProperties['sort'])) $scriptProperties['sort'] = 'key';
-if (!isset($scriptProperties['dir'])) $scriptProperties['dir'] = 'ASC';
+/* setup default properties */
+$isLimit = !empty($scriptProperties['limit']);
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,20);
+$sort = $modx->getOption('sort',$scriptProperties,'key');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$key = $modx->getOption('key',$scriptProperties,'');
+$namespace = $modx->getOption('namespace',$scriptProperties,'');
+$area = $modx->getOption('area',$scriptProperties,'');
 
-$wa = array(
-    'context_key' => $scriptProperties['context_key'],
-);
 if (!$context = $modx->getObject('modContext', $scriptProperties['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 if (!$context->checkPolicy('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-if (isset($scriptProperties['key']) && $scriptProperties['key'] != '') {
-    $wa['key:LIKE'] = '%'.$scriptProperties['key'].'%';
-}
-
+/* build query */
 $c = $modx->newQuery('modContextSetting');
+$c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modContextSetting`.`key`) = `Entry`.`name`');
+$c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modContextSetting`.`key`,"_desc") = `Description`.`name`');
+$c->where(array(
+    'context_key' => $scriptProperties['context_key'],
+));
+
+if (!empty($key)) {
+    $c->where(array(
+        'modContextSetting.key:LIKE' => '%'.$key.'%',
+    ),null,xPDOQuery::SQL_AND,2);
+    $c->orCondition(array(
+        'Entry.value:LIKE' => '%'.$key.'%',
+    ),null,2);
+    $c->orCondition(array(
+        'modContextSetting.value:LIKE' => '%'.$key.'%',
+    ),null,2);
+    $c->orCondition(array(
+        'Description.value:LIKE' => '%'.$key.'%',
+    ),null,2);
+}
+if (!empty($namespace)) {
+    $c->where(array('namespace' => $namespace));
+}
+if (!empty($area)) {
+    $c->where(array('area' => $area));
+}
+$count = $modx->getCount('modContextSetting',$c);
+
 $c->select(array(
     $modx->getSelectColumns('modContextSetting','modContextSetting'),
 ));
@@ -39,16 +66,9 @@ $c->select(array(
     '`Entry`.`value` `name_trans`',
     '`Description`.`value` `description_trans`',
 ));
-$c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modContextSetting`.`key`) = `Entry`.`name`');
-$c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modContextSetting`.`key`,"_desc") = `Description`.`name`');
-$c->where($wa);
-$c->sortby('`'.$scriptProperties['sort'].'`',$scriptProperties['dir']);
-$c->limit($scriptProperties['limit'],$scriptProperties['start']);
+$c->sortby($modx->getSelectColumns('modContextSetting','modContextSetting','',array($sort)),$dir);
+if ($isLimit) $c->limit($limit,$start);
 $settings = $modx->getCollection('modContextSetting',$c);
-
-$cc = $modx->newQuery('modContextSetting');
-$cc->where($wa);
-$count = $modx->getCount('modContextSetting',$cc);
 
 $list = array();
 foreach ($settings as $setting) {

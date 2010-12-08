@@ -18,6 +18,7 @@ if (!empty($scriptProperties['download'])) {
 
     $bn = basename($f);
 
+    @session_write_close();
     header("Content-Type: application/force-download");
     header("Content-Disposition: attachment; filename=\"{$bn}-".date('Y-m-d Hi').".txt\"");
 

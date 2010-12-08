@@ -89,7 +89,9 @@ Ext.extend(MODx,Ext.Component,{
                ,listeners: {
                     'shutdown': {fn:function() {
                         if (this.fireEvent('afterClearCache')) {
-                            Ext.getCmp('modx-layout').refreshTrees();
+                            if (MODx.config.clear_cache_refresh_trees == 1) {
+                                Ext.getCmp('modx-layout').refreshTrees();
+                            }
                         }
                     },scope:this}
                }
@@ -173,14 +175,9 @@ Ext.extend(MODx,Ext.Component,{
             title: _('help')
             ,width: 850
             ,height: 500
-            ,modal: true
+            ,modal: Ext.isIE ? false : true
             ,layout: 'fit'
-            ,html: '<iframe onload="parent.MODx.helpWindow.getEl().unmask();" src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
-            ,listeners: {
-                show: function(o) {
-                    o.getEl().mask(_('help_loading'));
-                }
-            }
+            ,html: '<iframe src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
         });
         MODx.helpWindow.show(b);
         return true;
@@ -207,6 +204,8 @@ Ext.extend(MODx,Ext.Component,{
     ,hiddenTabs: []
     ,hideTab: function(ct,tab) {
         var tp = Ext.getCmp(ct);
+        if (!tp) return false;
+        
         tp.hideTabStripItem(tab);
         MODx.hiddenTabs.push(tab);
         var idx = this._getNextActiveTab(tp,tab);
@@ -261,6 +260,25 @@ Ext.extend(MODx,Ext.Component,{
     }
     ,preview: function() {
         window.open(MODx.config.site_url);
+    }
+    ,makeDroppable: function(fld,h,p) {
+        if (!fld) return false;
+        h = h || Ext.emptyFn;
+        if (fld.getEl) {
+            var el = fld.getEl();
+        } else if (fld) {
+            el = fld;
+        }
+        if (el) {
+            new MODx.load({
+                xtype: 'modx-treedrop'
+                ,target: fld
+                ,targetEl: el.dom
+                ,onInsert: h
+                ,panel: p || 'modx-panel-resource'
+            });
+        }
+        return true;
     }
 });
 Ext.reg('modx',MODx);
@@ -459,7 +477,6 @@ Ext.extend(MODx.Msg,Ext.Component,{
         var markup = this.getStatusMarkup(opt);
         var m = Ext.DomHelper.overwrite(MODx.stMsgCt, {html:markup}, true);
 
-        m.slideIn('t');
         var fadeOpts = {remove:true,useDisplay:true};
         if (!opt.dontHide) {
             m.pause(opt.delay || 1.5).ghost("t",fadeOpts);
@@ -468,7 +485,6 @@ Ext.extend(MODx.Msg,Ext.Component,{
                 m.ghost('t',fadeOpts);
             });
         }
-
     }
     ,getStatusMarkup: function(opt) {
         var mk = '<div class="modx-status-msg">';

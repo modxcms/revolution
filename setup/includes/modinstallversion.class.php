@@ -84,6 +84,7 @@ class modInstallVersion {
             $scripts = $this->_getUpgradeScripts();
             $driver =& $this->install->driver;
             $xpdo =& $this->install->xpdo;
+            $modx =& $this->install->xpdo;
 
             foreach ($scripts as $script) {
                 if (file_exists($script)) {

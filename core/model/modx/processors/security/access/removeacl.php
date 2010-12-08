@@ -21,6 +21,8 @@ if ($acl === null) return $modx->error->failure($modx->lexicon('access_err_nf'))
 
 if ($acl->remove() == false) {
     return $modx->error->failure($modx->lexicon('access_err_remove'));
+} elseif ($modx->getUser()) {
+    $modx->user->getAttributes(array(), '', true);
 }
 
 return $modx->error->success();

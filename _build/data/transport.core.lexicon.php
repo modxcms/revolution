@@ -1,5 +1,5 @@
 <?php
-$invdirs = array('.','..','.svn','country');
+$invdirs = array('.','..','.svn','.git','country');
 
 $d = MODX_CORE_PATH.'lexicon/';
 

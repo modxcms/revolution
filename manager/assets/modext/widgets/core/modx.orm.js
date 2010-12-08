@@ -244,7 +244,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
         var c;
         if (Ext.isEmpty(n)) {
             c = this.getNodeById(id);
-            if (!Ext.isEmpty(c.parentNode.text)) { c = null; } /* ignore children */
+            if (c && !Ext.isEmpty(c.parentNode.text)) { c = null; } /* ignore children */
         } else {
             c = n.findChild('id',id);
         }

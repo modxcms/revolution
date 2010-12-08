@@ -1,2 +1,2 @@
-{extends file='element/tv/mutate.tpl'}
-{modblock name='ab'}{/modblock}
+<div id="modx-panel-tv-div"></div>
+{$onTVFormPrerender}

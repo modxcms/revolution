@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modWebGroupDocumentGroup']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'webgroup_access',
   'fields' => 
   array (

@@ -10,11 +10,14 @@
 $_lang['perm.about_desc'] = 'Die Seite "Über MODx" anzeigen.';
 $_lang['perm.access_permissions_desc'] = 'Mit Zugriffsrechten zusammenhängende Seiten und Aktionen anzeigen und bearbeiten/benutzen.';
 $_lang['perm.actions_desc'] = 'Die Aktionen-Seite anzeigen und benutzen.';
-$_lang['perm.add_children_desc'] = 'Der angegebenen Ressource Kind-Ressourcen hinzufügen.';
+$_lang['perm.add_children_desc'] = 'Der angegebenen Ressource Kind-Ressourcen hinzufügen oder Elemente einer Kategorie hinzufügen.';
 $_lang['perm.change_password_desc'] = 'Benutzer kann sein Benutzer-Passwort ändern.';
 $_lang['perm.change_profile_desc'] = 'Benutzer kann sein Profil ändern.';
 $_lang['perm.charsets_desc'] = 'Eine Liste von Zeichencodierungen anzeigen.';  // charsets = Zeichensätze?
+$_lang['perm.class_map_desc'] = 'Eine Liste von Klassen in der Klassen-Map anzeigen.';
+$_lang['perm.components_desc'] = 'Das Komponenten-Menü anzeigen.';
 $_lang['perm.content_types_desc'] = 'Die Inhaltstypen-Seite anzeigen und benutzen.';
+$_lang['perm.copy_desc'] = 'Ein Objekt kopieren.';
 $_lang['perm.countries_desc'] = 'Eine Liste von Ländern anzeigen.';
 $_lang['perm.create_desc'] = 'Elementarer "Erstellen"-Zugriff auf neue Objekte.';
 $_lang['perm.credits_desc'] = 'Die Seite mit den Danksagungen anzeigen.';
@@ -77,7 +80,7 @@ $_lang['perm.logs_desc'] = 'Protokolle wie das Fehlerprotokoll und das Protokoll
 $_lang['perm.menus_desc'] = 'Menüpunkte des Hauptmenüs bearbeiten oder speichern.';
 $_lang['perm.messages_desc'] = 'Persönliche Nachrichten senden oder anzeigen.';
 $_lang['perm.move_desc'] = 'Elementarer "Verschieben"-Zugriff auf Objekte.';
-$_lang['perm.namespaces_desc'] = 'Namespaces bearbeiten oder anzeigen.';
+$_lang['perm.namespaces_desc'] = 'Namensräume bearbeiten oder anzeigen.';
 $_lang['perm.new_category_desc'] = 'Neue Kategorien anlegen.';
 $_lang['perm.new_chunk_desc'] = 'Neue Chunks anlegen.';
 $_lang['perm.new_context_desc'] = 'Neue Kontexte anlegen.';

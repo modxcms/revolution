@@ -225,16 +225,20 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         }
     }
 
-    ,setLabel: function(flds,vals){
+    ,setLabel: function(flds,vals,bp){
         if (!Ext.isArray(flds)) { flds = flds[flds]; }
         if (!Ext.isArray(vals)) { vals = valss[vals]; }
-        var f;
+        var f,v;
         for (var i=0;i<flds.length;i++) {
             f = this.getField(flds[i]);
         
             if (!f) return;
-            var r = f.getEl().up('div.x-form-item');
-            r.dom.firstChild.firstChild.nodeValue = String.format('{0}',vals[i]);
+            v = String.format('{0}',vals[i]);
+            if ((f.xtype == 'checkbox' || f.xtype == 'radio') && flds[i] == 'published') {
+                f.setBoxLabel(v);
+            } else {
+                f.label.update(v);
+            }
         }
     }
 });

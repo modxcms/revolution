@@ -52,10 +52,18 @@ if (empty($context) || $context == 'root') {
         ,'deleted'
         ,'isfolder'
         ,'menuindex'
+        ,'menutitle'
         ,'hidemenu'
         ,'class_key'
         ,'context_key'
     ));
+    $cc = $modx->newQuery('modResource');
+    $cc->setClassAlias('Child');
+    $cc->select('COUNT(`Child`.`id`)');
+    $cc->where(array('`modResource`.`id` = `Child`.`parent`'));
+    $cc->prepare();
+    $childrenSql = $cc->toSql();
+    $c->select('('.$childrenSql.') AS `childrenCount`');
     $c->where(array(
         'context_key' => $context,
     ));
@@ -78,6 +86,7 @@ $hasEditPerm = $modx->hasPermission('edit_document');
 
 $collection = $modx->getCollection($itemClass, $c);
 
+$nodeField = $modx->getOption('resource_tree_node_name',$scriptProperties,'pagetitle');
 $items = array();
 $item = reset($collection);
 while ($item) {
@@ -101,9 +110,11 @@ while ($item) {
                 'type' => 'modContext',
                 'page' => empty($scriptProperties['nohref']) ? '?a='.$actions['context/update'].'&key='.$item->get('key') : '',
             );
-        } else {            
+        } else {
+            $hasChildren = (int)$item->get('childrenCount') > 0 ? true : false;
+
             $class = 'icon-'.strtolower(str_replace('mod','',$item->get('class_key')));
-            $class .= $item->isfolder ? ' icon-folder' : ' x-tree-node-leaf';
+            $class .= $item->isfolder ? ' icon-folder' : ' x-tree-node-leaf icon-resource';
             $class .= ($item->get('published') ? '' : ' unpublished')
                 .($item->get('deleted') ? ' deleted' : '')
                 .($item->get('hidemenu') == 1 ? ' hidemenu' : '');
@@ -116,6 +127,7 @@ while ($item) {
             $class .= $modx->hasPermission('undelete_document') ? ' pundelete' : '';
             $class .= $modx->hasPermission('publish_document') ? ' ppublish' : '';
             $class .= $modx->hasPermission('unpublish_document') ? ' punpublish' : '';
+            $class .= $hasChildren ? ' haschildren' : '';
 
             $qtip = '';
             if ($item->longtitle != '') {
@@ -134,23 +146,21 @@ while ($item) {
                 }
             }
 
-            $hasChildren = $item->hasChildren() ? false : true;
             $itemArray = array(
-                'text' => strip_tags($item->pagetitle).' ('.$item->id.')',
+                'text' => strip_tags($item->$nodeField).' <span dir="ltr">('.$item->id.')</span>',
                 'id' => $item->context_key . '_'.$item->id,
                 'pk' => $item->id,
                 'cls' => $class,
                 'type' => 'modResource',
                 'classKey' => $item->class_key,
-                'key' => $item->get('key'),
                 'ctx' => $item->context_key,
                 'qtip' => $qtip,
                 'preview_url' => $modx->makeUrl($item->get('id')),
                 'page' => empty($scriptProperties['nohref']) ? '?a='.($hasEditPerm ? $actions['resource/update'] : $actions['resource/data']).'&id='.$item->id : '',
                 'allowDrop' => true,
             );
-            if ($hasChildren) {
-                $itemArray['hasChildren'] = true;
+            if (!$hasChildren) {
+                $itemArray['hasChildren'] = false;
                 $itemArray['children'] = array();
                 $itemArray['expanded'] = true;
             }

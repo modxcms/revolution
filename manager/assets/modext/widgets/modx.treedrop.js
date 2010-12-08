@@ -47,6 +47,7 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                         ,iframe: cfg.iframe
                         ,iframeEl: cfg.iframeEl
                         ,onInsert: cfg.onInsert
+                        ,panel: cfg.panel
                     });
                 } else {
                     if (cfg.iframe) {
@@ -68,6 +69,11 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
                             if (p) { p.markDirty(); }
                         } else {
                             MODx.insertAtCursor(ddTargetEl,v,cfg.onInsert);
+                        }
+
+                        if (cfg.panel) {
+                            var p = Ext.getCmp(cfg.panel);
+                            if (p) { p.markDirty(); }
                         }
                     }
                 }
@@ -92,7 +98,13 @@ MODx.loadInsertElement = function(r) {
     w.show();
 };
 
-MODx.insertAtCursor = function(myField, myValue) {
+MODx.insertAtCursor = function(myField, myValue,h) {
+    if (!Ext.isEmpty(h)) {
+        var z = h(myValue);
+        if (z != undefined) {
+            myValue = z;
+        }
+    }
     if (document.selection) { 
         myField.focus(); 
         sel = document.selection.createRange(); 

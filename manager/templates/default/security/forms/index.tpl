@@ -1,1 +1,1 @@
-<div id="modx-panel-actiondom-div"></div>
+<div id="modx-panel-fc-profiles-div"></div>

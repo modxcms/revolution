@@ -120,6 +120,16 @@ Ext.reg('staticboolean',MODx.StaticBoolean);
  *    Ext-specific overrides/extensions                                     *
  ****************************************************************************/
 
+/* add helper method to set checkbox boxLabel */
+Ext.override(Ext.form.Checkbox, {
+    setBoxLabel: function(boxLabel){
+        this.boxLabel = boxLabel;
+        if(this.rendered){
+            this.wrap.child('.x-form-cb-label').update(boxLabel);
+        }
+    }
+});
+
 Array.prototype.in_array = function(p_val) {
     for(var i=0,l=this.length;i<l;i=i+1) {
         if(this[i] === p_val) {

@@ -192,6 +192,7 @@ $menus[1]->fromArray(array (
   'description' => '',
   'icon' => 'images/icons/plugin.gif',
   'menuindex' => 1,
+  'permissions' => 'components',
 ), '', true, true);
 
 
@@ -580,63 +581,15 @@ $menus[5]->fromArray(array (
 ), '', true, true);
 $children = array();
 
-/* contexts */
+/* package management */
 $children[0]= $xpdo->newObject('modMenu');
 $children[0]->fromArray(array (
-  'text' => 'contexts',
-  'parent' => 'system',
-  'action' => 6,
-  'description' => 'contexts_desc',
-  'icon' => 'images/icons/sysinfo.gif',
-  'menuindex' => 0,
-  'permissions' => 'view_context',
-), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 6,
-          'namespace' => 'core',
-          'parent' => '',
-          'controller' => 'context',
-          'haslayout' => 1,
-          'lang_topics' => 'context',
-          'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Contexts',
-        ), '', true, true);
-        $children[0]->addOne($action);
-
-/* menus and actions */
-$children[1]= $xpdo->newObject('modMenu');
-$children[1]->fromArray(array (
-  'text' => 'edit_menu',
-  'parent' => 'system',
-  'action' => 2,
-  'description' => 'edit_menu_desc',
-  'icon' => 'images/icons/sysinfo.gif',
-  'menuindex' => 1,
-  'permissions' => 'menus,actions',
-), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 2,
-          'namespace' => 'core',
-          'parent' => 3,
-          'controller' => 'system/action',
-          'haslayout' => 1,
-          'lang_topics' => 'action,menu,namespace',
-          'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Actions+and+Menus',
-        ), '', true, true);
-        $children[1]->addOne($action);
-
-/* package management */
-$children[2]= $xpdo->newObject('modMenu');
-$children[2]->fromArray(array (
   'text' => 'manage_workspaces',
   'parent' => 'system',
   'action' => 68,
   'description' => 'manage_workspaces_desc',
   'icon' => 'images/icons/sysinfo.gif',
-  'menuindex' => 2,
+  'menuindex' => 0,
   'permissions' => 'packages',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
@@ -650,17 +603,41 @@ $children[2]->fromArray(array (
           'assets' => '',
           'help_url' => 'http://rtfm.modx.com/display/revolution20/Package+Management',
         ), '', true, true);
-        $children[2]->addOne($action);
+        $children[0]->addOne($action);
+        
+/* system settings */
+$children[1]= $xpdo->newObject('modMenu');
+$children[1]->fromArray(array (
+  'text' => 'system_settings',
+  'parent' => 'system',
+  'action' => 61,
+  'description' => 'system_settings_desc',
+  'icon' => 'images/icons/sysinfo.gif',
+  'menuindex' => 1,
+  'permissions' => 'settings',
+), '', true, true);
+        $action= $xpdo->newObject('modAction');
+        $action->fromArray(array (
+          'id' => 30,
+          'namespace' => 'core',
+          'parent' => 3,
+          'controller' => 'system/settings',
+          'haslayout' => 1,
+          'lang_topics' => 'setting',
+          'assets' => '',
+          'help_url' => 'http://rtfm.modx.com/display/revolution20/Settings',
+        ), '', true, true);
+        $children[1]->addOne($action);
 
 /* lexicon management */
-$children[3]= $xpdo->newObject('modMenu');
-$children[3]->fromArray(array (
+$children[2]= $xpdo->newObject('modMenu');
+$children[2]->fromArray(array (
   'text' => 'lexicon_management',
   'parent' => 'system',
   'action' => 73,
   'description' => 'lexicon_management_desc',
   'icon' => 'images/icons/logging.gif',
-  'menuindex' => 3,
+  'menuindex' => 2,
   'permissions' => 'lexicons',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
@@ -674,17 +651,17 @@ $children[3]->fromArray(array (
           'assets' => '',
           'help_url' => 'http://rtfm.modx.com/display/revolution20/Internationalization',
         ), '', true, true);
-        $children[3]->addOne($action);
+        $children[2]->addOne($action);
 
 /* content types */
-$children[4]= $xpdo->newObject('modMenu');
-$children[4]->fromArray(array (
+$children[3]= $xpdo->newObject('modMenu');
+$children[3]->fromArray(array (
   'text' => 'content_types',
   'parent' => 'system',
   'action' => 69,
   'description' => 'content_types_desc',
   'icon' => 'images/icons/logging.gif',
-  'menuindex' => 4,
+  'menuindex' => 3,
   'permissions' => 'content_types',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
@@ -698,17 +675,65 @@ $children[4]->fromArray(array (
           'assets' => '',
           'help_url' => 'http://rtfm.modx.com/display/revolution20/Content+Types',
         ), '', true, true);
+        $children[3]->addOne($action);
+        
+/* contexts */
+$children[4]= $xpdo->newObject('modMenu');
+$children[4]->fromArray(array (
+  'text' => 'contexts',
+  'parent' => 'system',
+  'action' => 6,
+  'description' => 'contexts_desc',
+  'icon' => 'images/icons/sysinfo.gif',
+  'menuindex' => 4,
+  'permissions' => 'view_context',
+), '', true, true);
+        $action= $xpdo->newObject('modAction');
+        $action->fromArray(array (
+          'id' => 6,
+          'namespace' => 'core',
+          'parent' => '',
+          'controller' => 'context',
+          'haslayout' => 1,
+          'lang_topics' => 'context',
+          'assets' => '',
+          'help_url' => 'http://rtfm.modx.com/display/revolution20/Contexts',
+        ), '', true, true);
         $children[4]->addOne($action);
 
-/* namespaces */
+/* menus and actions */
 $children[5]= $xpdo->newObject('modMenu');
 $children[5]->fromArray(array (
+  'text' => 'edit_menu',
+  'parent' => 'system',
+  'action' => 2,
+  'description' => 'edit_menu_desc',
+  'icon' => 'images/icons/sysinfo.gif',
+  'menuindex' => 5,
+  'permissions' => 'menus,actions',
+), '', true, true);
+        $action= $xpdo->newObject('modAction');
+        $action->fromArray(array (
+          'id' => 2,
+          'namespace' => 'core',
+          'parent' => 3,
+          'controller' => 'system/action',
+          'haslayout' => 1,
+          'lang_topics' => 'action,menu,namespace',
+          'assets' => '',
+          'help_url' => 'http://rtfm.modx.com/display/revolution20/Actions+and+Menus',
+        ), '', true, true);
+        $children[5]->addOne($action);
+
+/* namespaces */
+$children[6]= $xpdo->newObject('modMenu');
+$children[6]->fromArray(array (
   'text' => 'namespaces',
   'parent' => 'system',
   'action' => 74,
   'description' => 'namespaces_desc',
   'icon' => '',
-  'menuindex' => 5,
+  'menuindex' => 6,
   'permissions' => 'namespaces',
 ), '', true, true);
         $action= $xpdo->newObject('modAction');
@@ -721,30 +746,6 @@ $children[5]->fromArray(array (
           'lang_topics' => 'workspace,package_builder,lexicon,namespace',
           'assets' => '',
           'help_url' => 'http://rtfm.modx.com/display/revolution20/Namespaces',
-        ), '', true, true);
-        $children[5]->addOne($action);
-
-/* system settings */
-$children[6]= $xpdo->newObject('modMenu');
-$children[6]->fromArray(array (
-  'text' => 'system_settings',
-  'parent' => 'system',
-  'action' => 61,
-  'description' => 'system_settings_desc',
-  'icon' => 'images/icons/sysinfo.gif',
-  'menuindex' => 6,
-  'permissions' => 'settings',
-), '', true, true);
-        $action= $xpdo->newObject('modAction');
-        $action->fromArray(array (
-          'id' => 30,
-          'namespace' => 'core',
-          'parent' => 3,
-          'controller' => 'system/settings',
-          'haslayout' => 1,
-          'lang_topics' => 'setting',
-          'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Settings',
         ), '', true, true);
         $children[6]->addOne($action);
 

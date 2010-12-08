@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modAccess']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'fields' => 
   array (
     'target' => '',
@@ -62,6 +63,89 @@ $xpdo_meta_map['modAccess']= array (
       'null' => false,
       'default' => 0,
       'index' => 'fk',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'target' => 
+    array (
+      'alias' => 'target',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'target' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'principal_class' => 
+    array (
+      'alias' => 'principal_class',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'principal_class' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'principal' => 
+    array (
+      'alias' => 'principal',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'principal' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'authority' => 
+    array (
+      'alias' => 'authority',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'authority' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'policy' => 
+    array (
+      'alias' => 'policy',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'policy' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

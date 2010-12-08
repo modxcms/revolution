@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modAction']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'actions',
   'fields' => 
   array (
@@ -75,6 +76,57 @@ $xpdo_meta_map['modAction']= array (
       'default' => '',
     ),
   ),
+  'indexes' => 
+  array (
+    'namespace' => 
+    array (
+      'alias' => 'namespace',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'namespace' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'parent' => 
+    array (
+      'alias' => 'parent',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'parent' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'controller' => 
+    array (
+      'alias' => 'controller',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'controller' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'Namespace' => 
@@ -117,6 +169,14 @@ $xpdo_meta_map['modAction']= array (
       'class' => 'modAccessAction',
       'local' => 'id',
       'foreign' => 'target',
+      'owner' => 'local',
+      'cardinality' => 'many',
+    ),
+    'Fields' => 
+    array (
+      'class' => 'modActionField',
+      'local' => 'id',
+      'foreign' => 'action',
       'owner' => 'local',
       'cardinality' => 'many',
     ),

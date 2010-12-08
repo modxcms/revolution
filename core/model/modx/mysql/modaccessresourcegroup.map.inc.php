@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modAccessResourceGroup']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'access_resource_groups',
   'fields' => 
   array (
@@ -20,6 +21,25 @@ $xpdo_meta_map['modAccessResourceGroup']= array (
       'null' => false,
       'default' => '',
       'index' => 'fk',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'context_key' => 
+    array (
+      'alias' => 'context_key',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'context_key' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

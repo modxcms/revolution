@@ -18,7 +18,7 @@ $modx->lexicon->load('formcustomization');
 $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
-$sort = $modx->getOption('sort',$scriptProperties,'action');
+$sort = $modx->getOption('sort',$scriptProperties,'action,rank');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $search = $modx->getOption('search',$scriptProperties,'');
 $controller = $modx->getOption('controller',$scriptProperties,'');

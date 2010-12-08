@@ -1,6 +1,11 @@
 
 MODx.grid.UserGroupCategory = function(config) {
     config = config || {};
+    this.exp = new Ext.grid.RowExpander({
+        tpl : new Ext.Template(
+            '<p class="desc">{permissions}</p>'
+        )
+    });
     Ext.applyIf(config,{
         id: 'modx-grid-user-group-categories'
         ,url: MODx.config.connectors_url+'security/access/usergroup/category.php'
@@ -10,8 +15,9 @@ MODx.grid.UserGroupCategory = function(config) {
         }
         ,paging: true
         ,hideMode: 'offsets'
-        ,fields: ['id','target','name','principal','authority','authority_name','policy','policy_name','context_key','menu']
-        ,columns: [{
+        ,fields: ['id','target','name','principal','authority','authority_name','policy','policy_name','context_key','permissions','menu']
+        ,plugins: [this.exp]
+        ,columns: [this.exp,{
             header: _('category')
             ,dataIndex: 'name'
             ,width: 120
@@ -46,6 +52,10 @@ MODx.grid.UserGroupCategory = function(config) {
             ,id: 'modx-ugcat-policy-filter'
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
+            ,baseParams: {
+                action: 'getList'
+                ,group: 'Object'
+            }
             ,listeners: {
                 'select': {fn:this.filterPolicy,scope:this}
             }
@@ -151,6 +161,7 @@ MODx.window.CreateUGCat = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Element,Object'
                 ,combo: '1'
             }
             ,anchor: '90%'
@@ -208,6 +219,7 @@ MODx.window.UpdateUGCat = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Element,Object'
                 ,combo: '1'
             }
             ,anchor: '90%'

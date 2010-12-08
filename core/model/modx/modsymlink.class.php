@@ -41,6 +41,6 @@ class modSymLink extends modResource {
         } else {
             $this->_output= $this->_content;
         }
-        $this->xpdo->sendForward($this->_output);
+        $this->xpdo->sendForward($this->_output, array('merge' => true));
     }
 }

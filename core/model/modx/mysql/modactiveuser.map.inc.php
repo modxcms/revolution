@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modActiveUser']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'active_users',
   'fields' => 
   array (
@@ -64,6 +65,25 @@ $xpdo_meta_map['modActiveUser']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'internalKey' => 
+    array (
+      'alias' => 'internalKey',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'internalKey' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

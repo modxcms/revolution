@@ -57,12 +57,14 @@ $_lang['setting_login_allowed_ip'] = 'Разрешённые IP адреса';
 $_lang['setting_login_allowed_ip_desc'] = 'Введите IP адреса, с которых пользователь может входить в систему управления сайтом. <strong>ВАЖНО: несколько IP-адресов разделяйте запятыми (,).</strong>';
 $_lang['setting_login_homepage'] = 'Главная страница авторизованного пользователя';
 $_lang['setting_login_homepage_desc'] = 'Введите идентификатор ресурса, на который будут перенаправлен пользователь после авторизации.<strong>ВАЖНО: удостоверьтесь, что идентификатор принадлежит существующему и опубликованному ресурсу, и что у пользователя есть права для его просмотра!</strong>';
+$_lang['setting_access_policies_version'] = 'Версия системы управления политиками доступа';
+$_lang['setting_access_policies_version_desc'] = 'Версия системы управления политиками доступа. НЕ МЕНЯЙТЕ!!!.';
 $_lang['setting_allow_duplicate_alias'] = 'Разрешить повторяющиеся псевдонимы';
 $_lang['setting_allow_duplicate_alias_desc'] = 'Если выставить «Да», данная опция разрешит сохранение повторяющихся псевдонимов. <strong>ВАЖНО: Эта опция должна использоваться совместно со включенной опцией «Дружественные URL»  во избежание проблем со ссылками.</strong>';
 $_lang['setting_allow_tags_in_post'] = 'Разрешить передачу HTML тегов переменной POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST actions within the manager will strip out any tags. MODx Recommends to leave this set at true.';
-$_lang['setting_archive_with'] = 'Force PCLZip Archives';
-$_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
+$_lang['setting_archive_with'] = 'Использовать PCLZip';
+$_lang['setting_archive_with_desc'] = 'Если выбрано «Да», будет использоваться PCLZip вместо ZipArchive как расширение для работы с zip архивами. Выберите «Да», если вы получаете extractTo ошибки или возникают проблемы с распаковкой пакетов.';
 $_lang['setting_auto_menuindex'] = 'Нумерация меню по умолчанию';
 $_lang['setting_auto_menuindex_desc'] = 'Выберите «Да» для автоматической нумерации меню по умолчанию.';
 $_lang['setting_auto_check_pkg_updates'] = 'Автоматически проверять наличие обновлений для установленных пакетов';
@@ -88,14 +90,14 @@ $_lang['setting_cache_default_desc'] = 'Выберите  «Да» , для то
 $_lang['setting_cache_default_err'] = 'Кэшировать ресурсы по умолчанию?';
 $_lang['setting_cache_disabled'] = 'Отключить глобальное кэширование';
 $_lang['setting_cache_disabled_desc'] = 'Выберите «Да» для отключения всего механизма кэширования MODx';
-$_lang['setting_cache_disabled_err'] = 'Пожалуйста, укажите  так или иначе включен или нет кэш';
+$_lang['setting_cache_disabled_err'] = 'Пожалуйста, укажите включено или нет кэширование';
 $_lang['setting_cache_json'] = 'Кэшировать JSON';
 $_lang['setting_cache_json_desc'] = 'Кэшировать данные передаваемые в формате JSON в административной части сайта.';
 $_lang['setting_cache_expires'] = 'Время жизни кэша';
 $_lang['setting_cache_expires_desc'] = 'Это значение (в секундах) устанавливает время жизни кэша.';
 $_lang['setting_cache_json_expires'] = 'Время жизни кэша данных получаемых в формате JSON';
 $_lang['setting_cache_json_expires_desc'] = 'Это значение (в секундах) устанавливает время жизни кэша для данных в формате JSON.';
-$_lang['setting_cache_handler'] = 'Caching Handler Class';
+$_lang['setting_cache_handler'] = 'Класс обработчик системы кэширования';
 $_lang['setting_cache_handler_desc'] = 'The class name of the type handler to use for caching. If set to true, this will use server headers to cache the lexicon strings loaded into JavaScript for the manager interface.';
 $_lang['setting_cache_lang_js'] = 'Кэшировать  javascript файлы с записями словаря';
 $_lang['setting_cache_lang_js_desc'] = 'Если включено, то будут добавлены кэширующие заголовки к javascript файлам с записями словарей.';
@@ -111,12 +113,14 @@ $_lang['setting_cache_scripts'] = 'Включить кэширование ск�
 $_lang['setting_cache_scripts_desc'] = 'Когда включено, MODx будет кэшировать все скрипты (сниппеты и плагины) в файлы для увеличения скорости загрузки. MODx рекомендует оставить «Да».';
 $_lang['setting_cache_system_settings'] = 'Включить кэширование настроек системы';
 $_lang['setting_cache_system_settings_desc'] = 'При включении этой опции системные настройки будут кэшироваться для уменьшения времени загрузки.MODx рекомендует оставить эту настройку включенной.';
+$_lang['setting_clear_cache_refresh_trees'] = 'Обновлять меню при очистке кэша';
+$_lang['setting_clear_cache_refresh_trees_desc'] = 'Если включено, то после обновления кэша сайта будут обновлятся древовидные меню.';
 $_lang['setting_compress_css'] = 'Использовать сжатый CSS';
-$_lang['setting_compress_css_desc'] = 'При включении этой опции, MODx будет использовать сжатые версии файлов собственных css стилей в панели управления. Это существенно уменьшит время загрузки и выполнения в панели управления. Отключайте только если изменяете элементы ядра.';
+$_lang['setting_compress_css_desc'] = 'При включении этой опции, MODx будет использовать сжатые версии файлов собственных css стилей в панели управления. Это существенно уменьшит время загрузки и выполнения в панели управления. Отключайте только если изменяете элементы ядра ';
 $_lang['setting_compress_js'] = 'Использовать сжатые  javascript-библиотеки ';
-$_lang['setting_compress_js_desc'] = 'Включение этой опции позволяет MODx использовать сжатые версии JavaScript библиотек. Это сильно снижает нагрузку и время выполнения. Отключайте только если изменяете элементы ядра.';
+$_lang['setting_compress_js_desc'] = 'Включение этой опции позволяет MODx использовать сжатые версии JavaScript библиотек. Это сильно снижает нагрузку и время выполнения. Отключайте только если изменяете элементы ядра или обновляетесь из Git репозитория.';
 $_lang['setting_concat_js'] = 'Использовать объединённые javascript-библиотеки';
-$_lang['setting_concat_js_desc'] = 'When this is enabled, MODx will use a concatenated version of its common JavaScript libraries in the manager interface. Это существенно уменьшит время загрузки и выполнения в панели управления. Отключайте только если изменяете элементы ядра.';
+$_lang['setting_concat_js_desc'] = 'Когда включено, MODx будет использовать объединённые javascript-библиотеки. Это существенно уменьшит время загрузки и выполнения в панели управления. Отключайте только если изменяете элементы ядра.';
 $_lang['setting_container_suffix'] = 'Суффикс контейнера';
 $_lang['setting_container_suffix_desc'] = 'Суффикс который будет добавляться к псевдониму ресурса, если ресурс контейнер.';
 $_lang['setting_cultureKey'] = 'Язык';
@@ -137,6 +141,8 @@ $_lang['setting_emailsender_err'] = 'Укажите адрес электрон�
 $_lang['setting_emailsubject'] = 'Тема письма при регистрации';
 $_lang['setting_emailsubject_desc'] = 'Укажите текст, который будет отображен в письме подтверждения регистрации, в поле «Тема».';
 $_lang['setting_emailsubject_err'] = 'Пожалуйста, установите поле «Тема» письма о подтверждении регистрации.';
+$_lang['setting_enable_dragdrop'] = 'Включить перетаскивание в древовидных меню ';
+$_lang['setting_enable_dragdrop_desc'] = 'Если выключено, будет препятствовать перетаскиванию в деревьях ресурсов и элементов.';
 $_lang['setting_error_page'] = 'Страница ошибки 404 «Документ не найден»:';
 $_lang['setting_error_page_desc'] = 'Введите идентификатор ресурса, который вы хотите использовать как страницу ошибки 404 «Документ не найден».  <strong>ПРИМЕЧАНИЕ: убедитесь, что этот идентификатор принадлежит существующему ресурсу, и что этот ресурс опубликован!</strong>';
 $_lang['setting_error_page_err'] = 'Пожалуйста введите идентификатор ресурса, который будет являться страницей ошибки 404 «Документ не найден».';
@@ -144,8 +150,8 @@ $_lang['setting_extension_packages'] = 'Пакеты расширений';
 $_lang['setting_extension_packages_desc'] = 'Разделённый запятыми список пакетов расширений загружаемых при создании экземпляра MODx. В формате packagename:pathtomodel';
 $_lang['setting_failed_login_attempts'] = 'Неудачные попытки входа';
 $_lang['setting_failed_login_attempts_desc'] = 'Количество неудачных попыток входа, прежде чем пользователь будет заблокирован.';
-$_lang['setting_fe_editor_lang'] = 'Язык редактора во Front-end';
-$_lang['setting_fe_editor_lang_desc'] = 'Выберите язык, который будет использоваться в редакторых используемых во  front-end.';
+$_lang['setting_fe_editor_lang'] = 'Язык текстового редактора во фронтенде сайта';
+$_lang['setting_fe_editor_lang_desc'] = 'Выберите язык, который будет использоваться в текстовых редакторах используемых во фронтенде сайта.';
 $_lang['setting_feed_modx_news'] = 'URL RSS-канала новостей MODx';
 $_lang['setting_feed_modx_news_desc'] = 'Устанавливает URL RSS-канала для панели «Новости MODx».';
 $_lang['setting_feed_modx_news_enabled'] = 'Включён показ RSS-канала «Новости MODx» ';
@@ -154,13 +160,21 @@ $_lang['setting_feed_modx_security'] = 'URL канала уведомлений 
 $_lang['setting_feed_modx_security_desc'] = 'Устанавливает URL RSS-канала для панели «Уведомления безопасности MODx».';
 $_lang['setting_feed_modx_security_enabled'] = 'Включён показ RSS-канала «Уведомления безопасности MODx»';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Если выбрано «Нет», MODx не будет показывать ленту «Уведомления безопасности MODx».';
-$_lang['setting_filemanager_path'] = 'Путь для диспетчера файлов:';
+
+$_lang['setting_filemanager_path'] = 'Путь для диспетчера файлов';
 $_lang['setting_filemanager_path_desc'] = 'Сервер IIS зачастую не определяет свойство document_root, которое используется диспетчером файлов для определения мест, которые вам доступны. Если у вас возникли проблемы с использованием диспетчера файлов, убедитесь что этот путь указывает в корневую папку установки MODx.';
+$_lang['setting_filemanager_path_relative'] = 'Путь для диспетчера файлов относительный?';
+$_lang['setting_filemanager_path_relative_desc'] = 'Если путь для диспетчера файлов(filemanager_path) является относительным к MODx base_path, то установите для этого параметра значение Да. Если filemanager_path за пределами docroot, установите значение Нет.';
 $_lang['setting_filemanager_url'] = 'URL диспетчера файлов';
 $_lang['setting_filemanager_url_desc'] = 'Optional. Set this if you want to set an explicit URL to access the files in the MODx file manager from (useful if you have changed filemanager_path to a path outside the MODx webroot). Make sure this is the web-accessible URL of the filemanager_path setting value. If leave this empty, MODx will try to automatically calculate it.';
+$_lang['setting_filemanager_url_relative'] = 'URL диспетчера файлов относительный?';
+$_lang['setting_filemanager_url_relative_desc'] = 'If your filemanager_url setting is relative to the MODx base_url, then please set this setting to Yes. If your filemanager_url is outside the main webroot, set this to No.';
 
 $_lang['setting_forgot_login_email'] = 'Письмо восстановления пароля';
 $_lang['setting_forgot_login_email_desc'] = 'Шаблон для письма посылаемого когда пользователь забыл свой пароль или имя учётной записи.';
+
+$_lang['setting_forward_merge_excludes'] = 'sendForward Exclude Fields on Merge';
+$_lang['setting_forward_merge_excludes_desc'] = 'A SymLink merges non-empty field values over the values in the target Resource; using this comma-delimited list of excludes prevents specified fields from being overridden by the SymLink.';
 
 $_lang['setting_friendly_alias_lowercase_only'] = 'Только строчные символы в псевдонимах';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Определяет, следует ли разрешить только строчные буквы в псевдонимах ресурсов.';
@@ -173,9 +187,11 @@ $_lang['setting_friendly_alias_restrict_chars_pattern_desc'] = 'Регулярн
 $_lang['setting_friendly_alias_strip_element_tags'] = 'Вырезать теги элементов из псевдонима';
 $_lang['setting_friendly_alias_strip_element_tags_desc'] = 'Определяет, следует ли вырезать теги элементов из псевдонимов ресурсов.';
 $_lang['setting_friendly_alias_translit'] = 'Транслитерация псевдонимов';
-$_lang['setting_friendly_alias_translit_desc'] = 'Метод транслитераци используемый для псевдонимов ресурсов. Пусто или "none" - не использовать транслитерацию. Другие возможные значения: "iconv" (если доступно PHP расширение iconv) или название таблицы транслитерации, которая используется пользовательским классом транслитерации.';
+$_lang['setting_friendly_alias_translit_desc'] = 'Метод транслитераци используемый для псевдонимов ресурсов. Пусто или "none" - не использовать транслитерацию. Другие возможные значения: "iconv" (если доступно PHP расширение iconv) или название таблицы транслитерации, которая используется пользовательским классом транслитерации. Для включения транслитерации с русского языка надо установить расширение ядра translit, и в настойке "Транслитерация псевдонимов" написать russian.';
 $_lang['setting_friendly_alias_translit_class'] = 'Класс управляющий транслитерацией псевдонимов';
-$_lang['setting_friendly_alias_translit_class_desc'] = 'Путь к классу производящему транслитерацию при генерации и фильтрации псевдонима ресурса.';
+$_lang['setting_friendly_alias_translit_class_desc'] = 'Класс производящий транслитерацию при генерации и фильтрации псевдонима ресурса.';
+$_lang['setting_friendly_alias_translit_class_path'] = 'Путь к классу осуществляющему транслитерацию псевдонимов';
+$_lang['setting_friendly_alias_translit_class_path_desc'] = 'Местоположение модели пакета отвечающего за транслитерацию псевдонимов.';
 $_lang['setting_friendly_alias_trim_chars'] = 'Символы вырезаемые из псевдонима';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Символы которые надо вырезать из окончания псевдонима.';
 $_lang['setting_friendly_alias_word_delimiter'] = 'Разделитель слов  в псевдонимах';
@@ -188,12 +204,16 @@ $_lang['setting_friendly_alias_urls_desc'] = 'Если вы использует
 $_lang['setting_friendly_urls'] = 'Использовать дружественные URL:';
 $_lang['setting_friendly_urls_desc'] = 'Эта настройка позволяет использовать в MODx дружественные URL. Обратите внимание, что это работает только на серверах Apache, и вам надо модифицировать файл .htaccess, чтобы этот механизм заработал. Для дополнительной информации смотрите пример файла .htaccess, поставляемого с MODx.';
 $_lang['setting_friendly_urls_err'] = 'Пожалуйста, укажите хотите ли вы использовать дружественные URL.';
+
+$_lang['setting_hidemenu_default'] = 'Не показывать в меню по умолчанию';
+$_lang['setting_hidemenu_default_desc'] = 'Выберите «Да», для того чтобы параметр «Не показывать в меню» был выбран по умолчанию, при создании новых ресурсов .';
+
 $_lang['setting_mail_charset'] = 'Кодировка';
-$_lang['setting_mail_charset_desc'] = 'The (default) charset for e-mails, e.g. \'iso-8859-1\' or \'UTF-8\'';
+$_lang['setting_mail_charset_desc'] = 'Кодировка (по умолчанию) для электронных писем';
 $_lang['setting_mail_encoding'] = 'Формат кодирования';
-$_lang['setting_mail_encoding_desc'] = 'Sets the Encoding of the message. Options for this are "8bit", "7bit", "binary", "base64", and "quoted-printable".';
+$_lang['setting_mail_encoding_desc'] = 'Установите формат кодирования для электронных писем. Это может быть "8bit", "7bit", "binary", "base64", и "quoted-printable".';
 $_lang['setting_mail_use_smtp'] = 'Использовать SMTP';
-$_lang['setting_mail_use_smtp_desc'] = 'If true, MODx will attempt to use SMTP in mail functions.';
+$_lang['setting_mail_use_smtp_desc'] = 'Выберите «Да», для того чтобы MODx  использовал SMTP.';
 $_lang['setting_mail_smtp_auth'] = 'SMTP аутентификация';
 $_lang['setting_mail_smtp_auth_desc'] = 'Sets SMTP authentication. Utilizes the mail_smtp_user and mail_smtp_password settings.';
 $_lang['setting_mail_smtp_helo'] = 'SMTP Helo Message';
@@ -205,7 +225,7 @@ $_lang['setting_mail_smtp_keepalive_desc'] = 'Prevents the SMTP connection from 
 $_lang['setting_mail_smtp_pass'] = 'SMTP пароль';
 $_lang['setting_mail_smtp_pass_desc'] = 'The password to authenticate to SMTP against.';
 $_lang['setting_mail_smtp_port'] = 'SMTP номер порта';
-$_lang['setting_mail_smtp_port_desc'] = 'Sets the default SMTP server port.';
+$_lang['setting_mail_smtp_port_desc'] = 'Укажите порт SMTP сервера.';
 $_lang['setting_mail_smtp_prefix'] = 'SMTP префикс для соединений';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Sets connection prefix. Options are "", "ssl" or "tls"';
 $_lang['setting_mail_smtp_single_to'] = 'SMTP посылать по одному';
@@ -214,6 +234,7 @@ $_lang['setting_mail_smtp_timeout'] = 'SMTP время ожидания';
 $_lang['setting_mail_smtp_timeout_desc'] = 'Sets the SMTP server timeout in seconds. This function will not work in win32 servers.';
 $_lang['setting_mail_smtp_user'] = 'SMTP пользователь';
 $_lang['setting_mail_smtp_user_desc'] = 'The user to authenticate to SMTP against.';
+
 $_lang['setting_manager_direction'] = 'Направление текста в административной части';
 $_lang['setting_manager_direction_desc'] = 'Выберите направление в котором будет генерироваться текст в административной части (слева-направо или справа-налево).';
 $_lang['setting_manager_date_format'] = 'Формат даты в панели управления';
@@ -242,39 +263,75 @@ $_lang['setting_password_generated_length'] = 'Длина сгенерирова
 $_lang['setting_password_generated_length_desc'] = 'Длина сгенерированного пароля для пользователя.';
 $_lang['setting_password_min_length'] = 'Минимальная длина пароля';
 $_lang['setting_password_min_length_desc'] = 'Минимальная длина пароля для пользователя.';
+
 $_lang['setting_proxy_auth_type'] = 'Proxy тип авторизации';
 $_lang['setting_proxy_auth_type_desc'] = 'Supports either BASIC or NTLM.';
 $_lang['setting_proxy_host'] = 'Proxy Host';
 $_lang['setting_proxy_host_desc'] = 'If your server is using a proxy, set the hostname here to enable MODx features that might need to use the proxy, such as Package Management.';
 $_lang['setting_proxy_password'] = 'Proxy пароль';
-$_lang['setting_proxy_password_desc'] = 'The password required to authenticate to your proxy server.';
+$_lang['setting_proxy_password_desc'] = 'Пароль для авторизации на проокси сервере.';
 $_lang['setting_proxy_port'] = 'Proxy порт';
-$_lang['setting_proxy_port_desc'] = 'The port for your proxy server.';
-$_lang['setting_proxy_username'] = 'Proxy пользователь';
-$_lang['setting_proxy_username_desc'] = 'The username to authenticate against with your proxy server.';
+$_lang['setting_proxy_port_desc'] = 'Порт прокси сервера.';
+$_lang['setting_proxy_username'] = 'Пользователь прокси сервера';
+$_lang['setting_proxy_username_desc'] = 'Имя пользователя для авторизации на проокси сервере.';
 
+$_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Allow src Above Document Root';
+$_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indicates if the src path is allowed outside the document root. This is useful for multi-context deployments with multiple virtual hosts.';
 $_lang['setting_phpthumb_cache_maxage'] = 'phpThumb максимальное время жизни кэша';
 $_lang['setting_phpthumb_cache_maxage_desc'] = 'Delete cached thumbnails that have not been accessed in more than X days.';
-
 $_lang['setting_phpthumb_cache_maxsize'] = 'phpThumb максимальный размер кэша';
 $_lang['setting_phpthumb_cache_maxsize_desc'] = 'Delete least-recently-accessed thumbnails when cache grows bigger than X megabytes in size.';
-
 $_lang['setting_phpthumb_cache_maxfiles'] = 'phpThumb максимальное количество кэшированных файлов';
 $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Delete least-recently-accessed thumbnails when cache has more than X files.';
-
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb кешировать файлы источники';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Whether or not to cache source files as they are loaded. Recommended to off.';
+$_lang['setting_phpthumb_error_bgcolor'] = 'phpThumb Error Background Color';
+$_lang['setting_phpthumb_error_bgcolor_desc'] = 'A hex value, without the #, indicating a background color for phpThumb error output.';
+$_lang['setting_phpthumb_error_fontsize'] = 'phpThumb Error Font Size';
+$_lang['setting_phpthumb_error_fontsize_desc'] = 'An em value indicating a font size to use for text appearing in phpThumb error output.';
+
+$_lang['setting_phpthumb_error_textcolor'] = 'phpThumb цвет текста ошибки';
+$_lang['setting_phpthumb_error_textcolor_desc'] = 'A hex value, without the #, indicating a font color for text appearing in phpThumb error output.';
+
+$_lang['setting_phpthumb_nohotlink_enabled'] = 'phpThumb Hotlinking Disabled';
+$_lang['setting_phpthumb_nohotlink_enabled_desc'] = 'Remote servers are allowed in the src parameter unless you disable hotlinking in phpThumb.';
+
+$_lang['setting_phpthumb_nohotlink_erase_image'] = 'phpThumb Hotlinking Erase Image';
+$_lang['setting_phpthumb_nohotlink_erase_image_desc'] = 'Indicates if an image generated from a remote server should be erased when not allowed.';
+
+$_lang['setting_phpthumb_nohotlink_text_message'] = 'phpThumb Hotlinking Not Allowed Message';
+$_lang['setting_phpthumb_nohotlink_text_message_desc'] = 'A message that is rendered instead of the thumbnail when a hotlinking attempt is rejected.';
+
+$_lang['setting_phpthumb_nohotlink_valid_domains'] = 'phpThumb Hotlinking Valid Domains';
+$_lang['setting_phpthumb_nohotlink_valid_domains_desc'] = 'A comma-delimited list of hostnames that are valid in src URLs.';
+
+$_lang['setting_phpthumb_nooffsitelink_enabled'] = 'phpThumb Offsite Linking Disabled';
+$_lang['setting_phpthumb_nooffsitelink_enabled_desc'] = 'Disables the ability for others to use phpThumb to render images on their own sites.';
+
+$_lang['setting_phpthumb_nooffsitelink_erase_image'] = 'phpThumb Offsite Linking Erase Image';
+$_lang['setting_phpthumb_nooffsitelink_erase_image_desc'] = 'Indicates if an image linked from a remote server should be erased when not allowed.';
+
+$_lang['setting_phpthumb_nooffsitelink_require_refer'] = 'phpThumb Offsite Linking Require Referrer';
+$_lang['setting_phpthumb_nooffsitelink_require_refer_desc'] = 'If enabled, any offsite linking attempts will be rejected without a valid referrer header.';
+
+$_lang['setting_phpthumb_nooffsitelink_text_message'] = 'phpThumb Offsite Linking Not Allowed Message';
+$_lang['setting_phpthumb_nooffsitelink_text_message_desc'] = 'A message that is rendered instead of the thumbnail when an offsite linking attempt is rejected.';
+
+$_lang['setting_phpthumb_nooffsitelink_valid_domains'] = 'phpThumb Offsite Linking Valid Domains';
+$_lang['setting_phpthumb_nooffsitelink_valid_domains_desc'] = 'A comma-delimited list of hostnames that are valid referrers for offsite linking.';
+
+$_lang['setting_phpthumb_nooffsitelink_watermark_src'] = 'phpThumb Offsite Linking Watermark Source';
+$_lang['setting_phpthumb_nooffsitelink_watermark_src_desc'] = 'Optional. A valid file system path to a file to use as a watermark source when your images are rendered offsite by phpThumb.';
 
 $_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb путь к ImageMagick';
 $_lang['setting_phpthumb_imagemagick_path_desc'] = 'Optional. Set an alternative ImageMagick path here for generating thumbnails with phpThumb, if it is not in the PHP default.';
-
 $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop';
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'The default zc setting for phpThumb when used in MODx. Defaults to 0 to prevent zoom cropping.';
 
 $_lang['setting_phpthumb_far'] = 'phpThumb Force Aspect Ratio';
 $_lang['setting_phpthumb_far_desc'] = 'The default far setting for phpThumb when used in MODx. Defaults to C to force aspect ratio toward the center.';
 
-$_lang['setting_publish_default'] = ' Публиковать по умолчанию:';
+$_lang['setting_publish_default'] = ' Публиковать по умолчанию';
 $_lang['setting_publish_default_desc'] = 'Выберите  «Да» если хотите, чтобы все новые ресурсы сразу становились опубликованными.';
 $_lang['setting_publish_default_err'] = 'Пожалуйста, укажите хотите ли вы чтобы новые ресурсы по умолчанию публиковались.';
 $_lang['setting_rb_base_dir'] = 'Путь к ресурсам';
@@ -284,16 +341,18 @@ $_lang['setting_rb_base_dir_err_invalid'] = 'Корневой каталог д�
 $_lang['setting_rb_base_url'] = 'URL ресурсов';
 $_lang['setting_rb_base_url_desc'] = 'Введите относительный путь (URL) к каталогу ресурсов. Обычно, эта настройка устанавливается автоматически. Однако, если вы используете IIS, MODx может быть не способен этого сделать, что приведёт к ошибке в работе диспетчера файлов. В этом случае, вы можете ввести URL так, как он бы отображался в Internet Explorer.';
 $_lang['setting_rb_base_url_err'] = 'Пожалуйста, укажите базовый URL диспетчера файлов.';
-$_lang['setting_request_controller'] = 'Request Controller Filename';
-$_lang['setting_request_controller_desc'] = 'The filename of the main request controller from which MODx is loaded. Most users can leave this as index.php.';
+$_lang['setting_request_controller'] = 'Файл контроллер запроса';
+$_lang['setting_request_controller_desc'] = 'Имя файла основного контроллера запроса, из которого MODx загружается. Большинсво пользователей может оставить это как index.php.';
 $_lang['setting_request_param_alias'] = 'Request Alias Parameter';
-$_lang['setting_request_param_alias_desc'] = 'The name of the GET parameter to identify Resource aliases when redirecting with FURLs.';
+$_lang['setting_request_param_alias_desc'] = 'Имя GET параметра передающего псевдоним ресурса, при использовании дружественных URL.';
 $_lang['setting_request_param_id'] = 'Request ID Parameter';
-$_lang['setting_request_param_id_desc'] = 'The name of the GET parameter to identify Resource IDs when not using FURLs.';
+$_lang['setting_request_param_id_desc'] = 'Имя GET параметра передающего идентификатор ресурса, когда дружественные урлы отключены.';
 $_lang['setting_resolve_hostnames'] = 'Определять имена хостов';
 $_lang['setting_resolve_hostnames_desc'] = 'Хотите ли вы, чтобы MODx пытался определить имена хостов ваших пользователей при каждом посещении? Определение имён хостов может вызвать некоторую дополнительную нагрузку на сервер, хотя ваши пользователи, в любом случае, этого не заметят.';
-$_lang['setting_richtext_default'] = 'Использовать Richtext редактор';
-$_lang['setting_richtext_default_desc'] = 'Выберите «Да», чтобы все новые ресурсы использовать Richtext редактор по умолчанию.';
+$_lang['setting_resource_tree_node_name'] = 'Название узла в дереве ресурсов';
+$_lang['setting_resource_tree_node_name_desc'] = 'Укажите поле ресурса которое будет использоваться в качестве названия узла в дереве ресурсов. По умолчанию поле «Заголовок», любое поле ресурса может быть использовано, menutitle, alias, longtitle, и т.д.';
+$_lang['setting_richtext_default'] = 'Использовать визуальный редактор';
+$_lang['setting_richtext_default_desc'] = 'Выберите «Да», чтобы все новые ресурсы использовали визуальный текстовый редактор по умолчанию.';
 $_lang['setting_search_default'] = '«Доступен для поиска» по умолчанию:';
 $_lang['setting_search_default_desc'] = 'Выберите  «Да» для того, чтобы сделать все новые ресурсы доступными для поиска по умолчанию.';
 $_lang['setting_search_default_err'] = 'Пожалуйста, укажите, хотите ли вы чтобы ресурсы были доступны для поиска по умолчанию.';
@@ -318,6 +377,8 @@ $_lang['setting_session_name'] = 'Имя сессии';
 $_lang['setting_session_name_desc'] = 'Используйте эту настройку для установки имени, используемого для сессий MODx.';
 $_lang['setting_settings_version'] = 'Версия настроек';
 $_lang['setting_settings_version_desc'] = 'Установленная версия MODx.';
+$_lang['setting_settings_distro'] = 'Дистрибутив';
+$_lang['setting_settings_distro_desc'] = 'Версия установленного дистрибутива MODx.';
 $_lang['setting_set_header'] = 'Посылать HTTP заголовки';
 $_lang['setting_set_header_desc'] = 'Когда включено, MODx будет пытаться установить HTTP заголовки для ресурсов.';
 $_lang['setting_signupemail_message'] = 'Письмо регистрации';
@@ -355,8 +416,10 @@ $_lang['setting_strip_image_paths'] = 'Переписывать пути для 
 $_lang['setting_strip_image_paths_desc'] = 'Если установлено значение «Нет», MODx будет использовать абсолютные ссылки для изображений, файлов, анимация и тому подобного. Относительные ссылки удобнее, если вы в будущем собираетесь переместить свой сайт, например, с тестового сервера на конечный. Если вы не понимаете о чем идёт речь, оставьте значение «Да».';
 $_lang['setting_topmenu_show_descriptions'] = 'Показывать описание в верхнем меню';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Если установлено значение «Нет», MODx будет скрывать дополнительное описание для пунктов верхнего меню.';
+$_lang['setting_tree_default_sort'] = 'Поле сортировки дерева ресурсов';
+$_lang['setting_tree_default_sort_desc'] = 'Поле по которому сортируется дерево ресурсов при загрузке.';
 $_lang['setting_tree_root_id'] = 'Идентификатор корня дерева ресурсов';
-$_lang['setting_tree_root_id_desc'] = 'Set this to a valid ID of a Resource to start the left Resource tree at below that node as the root. The user will only be able to see Resources that are children of the specified Resource.';
+$_lang['setting_tree_root_id_desc'] = 'Укажите идентификатор ресурса, который будет корнем дерева ресурсов. Пользователь будет  иметь возможность видеть только дочернии ресурсы этого ресурса.';
 $_lang['setting_udperms_allowroot'] = 'Разрешить доступ к корневой папке:';
 $_lang['setting_udperms_allowroot_desc'] = 'Вы действительно хотите разрешить пользователям создавать ресурсы в корневой папке сайта? ';
 $_lang['setting_unauthorized_page'] = 'Страница ошибки 403 «Доступ запрещен»:';

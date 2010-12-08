@@ -24,7 +24,7 @@ if ($package == null) return $modx->error->failure($modx->lexicon('package_err_n
 $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tzip_start'));
 
 /* remove transport package */
-if ($package->remove($scriptProperties['force']) == false) {
+if ($package->removePackage($scriptProperties['force']) == false) {
     $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('package_err_remove'));
     return $modx->error->failure($modx->lexicon('package_err_remove',array('signature' => $package->getPrimaryKey())));
 }

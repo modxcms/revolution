@@ -14,5 +14,5 @@ $_lang['credits_php'] = 'MODx använder <a href="http://www.php.net" target="_bl
 $_lang['credits_sencha'] = 'MODx använder <a href="http://www.sencha.com/" target="_blank">Sencha (ExtJS)</a> i standardhanterarens gränssnitt.';
 $_lang['credits_smarty'] = 'MODx använder <a href="http://www.smarty.net/" target="_blank">Smarty</a> i standardhanterarens gränssnitt.';
 $_lang['credits_xpdo'] = 'MODx använder databas-ORM:en <a href="http://www.xpdo.org/" target="_blank">xPDO</a>.';
-$_lang['help_msg'] = '<p>Besök <a href="http://modxcms.com/forums/" target="_blank">MODx Forum</a> om du behöver hjälp med MODx. Det finns också en växande mängd <a href="http://docs.modxcms.com/display/revolution" target="blank">dokumentation för MODx Revolution</a>.</p><p>Du kan rapportera och följa buggar i <a href="http://bugs.modxcms.com/" target="_blank">MODx felhanteringssystem JIRA</a>.</p>';
+$_lang['help_msg'] = '<p>Besök <a href="http://modxcms.com/forums/" target="_blank">MODx Forum</a> om du behöver hjälp med MODx. Det finns också en växande mängd <a href="http://rtfm.modx.com/display/revolution20/Home" target="blank">dokumentation för MODx Revolution</a>.</p><p>Du kan rapportera och följa buggar i <a href="http://bugs.modx.com/projects/revo" target="_blank">MODx felhanteringssystem JIRA</a>.</p>';
 $_lang['help_title'] = 'Hjälp';

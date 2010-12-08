@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modManagerUser']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'manager_users',
   'fields' => 
   array (

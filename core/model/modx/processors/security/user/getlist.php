@@ -36,12 +36,12 @@ if (!empty($scriptProperties['query'])) {
     $c->orCondition(array('Profile.email:LIKE' => '%'.$scriptProperties['query'].'%'));
 }
 $count = $modx->getCount('modUser',$c);
-$c->select('
-    `modUser`.*,
-    `Profile`.`fullname` AS `fullname`,
-    `Profile`.`email` AS `email`,
-    `Profile`.`blocked` AS `blocked`
-');
+$c->select(array(
+    'modUser.*',
+    'Profile.fullname',
+    'Profile.email',
+    'Profile.blocked',
+));
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 
@@ -50,19 +50,10 @@ $users = $modx->getCollection('modUser',$c);
 /* iterate through users */
 $list = array();
 foreach ($users as $user) {
-	$userArray = $user->toArray();
+    $userArray = $user->toArray();
     $userArray['blocked'] = $user->get('blocked') ? true : false;
-    $userArray['menu'] = array(
-        array(
-            'text' => $modx->lexicon('user_update'),
-            'handler' => 'this.update',
-        ),
-        '-',
-        array(
-            'text' => $modx->lexicon('user_remove'),
-            'handler' => 'this.remove',
-        ),
-    );
-	$list[] = $userArray;
+    $userArray['cls'] = 'pupdate premove';
+    unset($userArray['password'],$userArray['cachepwd']);
+    $list[] = $userArray;
 }
 return $this->outputArray($list,$count);
