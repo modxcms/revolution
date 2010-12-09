@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-09-13
+ * @updated 2010-12-02
  */
 $_lang['access'] = 'Přístup';
 $_lang['access_denied'] = 'Přístup zamezen.';
@@ -121,7 +121,9 @@ $_lang['element_name_new'] = 'Název nového elementu';
 $_lang['elements'] = 'Elementy';
 $_lang['email'] = 'E-mail';
 $_lang['empty_recycle_bin'] = 'Smazat odstraněné dokumenty';
+$_lang['empty_recycle_bin_confirm'] = 'Opravdu chcete permanentně smazat všechny odstraněné dokumenty? Tato akce je nevratná.';
 $_lang['empty_recycle_bin_empty'] = 'Neexistují žádné dokumenty ke smazání.';
+$_lang['empty_recycle_bin_emptied'] = 'Všechny odstraněné dokumenty byly permanentně smazány.';
 $_lang['enabled'] = 'Povoleno';
 $_lang['err_self_parent'] = 'Nelze pracovat s tím co je vlastní rodič!';
 $_lang['error'] = 'Chyba';
@@ -270,6 +272,7 @@ $_lang['open'] = 'Otevřeno';
 $_lang['options'] = 'Možnosti';
 $_lang['orm_attribute_add'] = 'Přidat atribut';
 $_lang['orm_attribute_add_below'] = 'Přidat atribut pod tento';
+$_lang['orm_attribute_ae'] = 'Atribut s tímto klíčem na této úrovni již existuje!';
 $_lang['orm_attribute_remove'] = 'Odstranit atribut';
 $_lang['orm_attribute_remove_confirm'] = 'Opravdu chcete odstranit tento atribut? Odstranění je nevratné.';
 $_lang['orm_container_add'] = 'Přidat kontejner';

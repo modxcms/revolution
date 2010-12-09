@@ -675,7 +675,7 @@ class modInstall {
             if (is_object($modx) && $modx instanceof modX) {
                 /* try to initialize the mgr context */
                 $modx->initialize('mgr');
-                $url = $modx->getOption('manager_url');
+                $url = MODX_URL_SCHEME.$modx->getOption('http_host').$modx->getOption('manager_url');
             }
         }
         return $url;

@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2010-12-02
  */
 $_lang['attributes'] = 'Atributy';
 $_lang['capitalize'] = 'Kapitálkami';
@@ -16,12 +16,15 @@ $_lang['class'] = 'Třída';
 $_lang['date'] = 'Datum';
 $_lang['date_format'] = 'Formát data';
 $_lang['date_use_current'] = 'Pokud není definováno použij aktuální datum';
+$_lang['default'] = 'Výchozí';
 $_lang['delim'] = 'Odděl.';
 $_lang['delimiter'] = 'Oddělovač';
 $_lang['dropdown'] = 'Rozbalovací seznam';
 $_lang['email'] = 'E-mail';
 $_lang['file'] = 'Soubor';
 $_lang['height'] = 'Výška';
+$_lang['hidden'] = 'Skryté';
+$_lang['htmlarea'] = 'HTML Area';
 $_lang['htmltag'] = 'HTML tag';
 $_lang['image'] = 'Obrázek';
 $_lang['image_align'] = 'Zarovnat';
@@ -38,6 +41,7 @@ $_lang['number'] = 'Číslo';
 $_lang['option'] = 'Přepínače';
 $_lang['rawtext'] = 'Surový text (zastaralé)';
 $_lang['rawtextarea'] = 'Surové textové pole (zastaralé)';
+$_lang['resourcelist'] = 'Seznam dokumentů';
 $_lang['richtext'] = 'WYSIWYG';
 $_lang['sentence_case'] = 'Věta';
 $_lang['string'] = 'Řetězec';
@@ -49,6 +53,7 @@ $_lang['target'] = 'Cíl';
 $_lang['text'] = 'Text';
 $_lang['textarea'] = 'Textové pole';
 $_lang['textareamini'] = 'Textové pole (malé)';
+$_lang['textbox'] = 'Textbox';
 $_lang['title'] = 'Název';
 $_lang['upper_case'] = 'Velká písmena';
 $_lang['url'] = 'URL';

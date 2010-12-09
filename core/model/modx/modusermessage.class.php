@@ -5,7 +5,7 @@
  * @package modx
  */
 class modUserMessage extends xPDOSimpleObject {
-    public function getOne($alias, $criteria= null) {
+    public function getOne($alias, $criteria= null, $cacheFlag= true) {
         if (($alias === 'Recipient' || $alias === 'Sender') && $criteria === null) {
             if ($fkMeta= $this->getFKDefinition($alias)) {
                 if ($userid= $this->get($fkMeta['local'])) {
@@ -21,11 +21,11 @@ class modUserMessage extends xPDOSimpleObject {
                     $bindings= array(
                         ':user_id' => array ('value' => $userid, 'type' => PDO::PARAM_INT)
                     );
-                    $criteria= new xPDOCriteria($this->xpdo, $sql, $bindings, true);
+                    $criteria= new xPDOCriteria($this->xpdo, $sql, $bindings, $cacheFlag);
                 }
             }
         }
-        return parent :: getOne($alias, $criteria);
+        return parent :: getOne($alias, $criteria, $cacheFlag);
     }
 
 }

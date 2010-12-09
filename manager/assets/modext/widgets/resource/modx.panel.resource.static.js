@@ -396,7 +396,12 @@ Ext.extend(MODx.panel.Static,MODx.FormPanel,{
     ,setup: function() {
         if (!this.initialized) {
             this.getForm().setValues(this.config.record);
-            this.getForm().findField('parent-cmb').setValue(this.config.record.pagetitle+' ('+this.config.record.id+')');
+
+            if (Ext.isEmpty(this.config.record.parent_pagetitle)) {
+                this.getForm().findField('parent-cmb').setValue('');
+            } else {
+                this.getForm().findField('parent-cmb').setValue(this.config.record.parent_pagetitle+' ('+this.config.record.parent+')');
+            }
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
                 Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('static_resource')+': '+this.config.record.pagetitle+'</h2>');
             }

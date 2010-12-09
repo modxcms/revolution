@@ -51,7 +51,7 @@ class modTransportPackage extends xPDOObject {
      *
      * {@inheritdoc}
      */
-    public function set($k, $v, $vType = '') {
+    public function set($k, $v= null, $vType= '') {
         $set = parent :: set($k, $v, $vType);
         if ($k == 'signature') {
             $this->parseSignature();
@@ -137,12 +137,15 @@ class modTransportPackage extends xPDOObject {
     }
 
     /**
-     * Overrides xPDOObject::remove. Removes and uninstalls the package.
+     * Removes and uninstalls the package.
      *
-     * {@inheritdoc}
+     * @param boolean $force Indicates if removal should be forced even if currently installed.
+     * @param boolean $uninstall Indicates if the package should be uninstalled before removal.
+     * @return boolean True if the package was successfully removed.
      */
-    public function remove($force = false,array $ancestors = array(),$uninstall = true) {
+    public function removePackage($force = false, $uninstall = true) {
         $removed = false;
+        $uninstalled = false;
         if ($this->get('installed') == null || $this->get('installed') == '0000-00-00 00:00:00') {
             $uninstalled = true;
         } else if ($uninstall) {
@@ -150,12 +153,11 @@ class modTransportPackage extends xPDOObject {
         }
 
         if ($uninstalled || $force) {
-            $removed= parent::remove($ancestors);
+            $removed= $this->remove();
         }
 
         return $removed;
     }
-
 
     /**
      * Installs the package.

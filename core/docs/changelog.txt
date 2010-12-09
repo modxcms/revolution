@@ -2,6 +2,21 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODx Revolution 2.0.5-pl (December 8th, 2010)
+====================================
+- Change remove() to removePackage() in modTransportPackage
+- Fix issue with package setup-options attribute not loading forms
+- [#2932] Fix redirect issue after setup and on manager login page caused by [#2918]
+- [#2931] Fix issue where FC rules weren't applying if no UserGroup was set in a Profile
+- Ensure non-Resource FC rules are removed on upgrade
+- [#2918] Address XSS vuln in manager login that allows JS injection
+- Fix issue where // is stripped from filemanager_url http address
+- [#2902] Fix issue where Administrator policy ACLs in non-Administrator groups couldnt be edited
+- [#2915] Ensure UserGroups restriction is enforced in FC Profiles
+- Fix bug when editing FC profiles from a grid, issue where UserGroup wasn't respected
+- Ensure radio TV values still can select if default value is 0
+- [#2869] Fix issue with parent display text in Resource panel
+- [#2892] Fix problem creating folders on filesystem from file manager and browser 
 - [#22] Allow SymLinks metadata to override target Resource metadata
 - Cache Resource ACL Policies with the Resource
 - [#2888] Fix problem with elementCache in modX::sendForward()

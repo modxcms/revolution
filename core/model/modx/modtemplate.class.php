@@ -101,9 +101,9 @@ class modTemplate extends modElement {
      * modTemplateVar}, respecting framework security unless specific criteria
      * are provided.
      */
-    public function getMany($class, $criteria= null, $cacheFlag= false) {
+    public function & getMany($alias, $criteria= null, $cacheFlag= true) {
         $collection= array ();
-        if (($class === 'TemplateVars' || $class === 'modTemplateVar') && ($criteria === null || strtolower($criteria) === 'all')) {
+        if (($alias === 'TemplateVars' || $alias === 'modTemplateVar') && ($criteria === null || strtolower($criteria) === 'all')) {
             $c = $this->xpdo->newQuery('modTemplateVar');
             $c->select('
                 DISTINCT modTemplateVar.*,
@@ -114,9 +114,9 @@ class modTemplate extends modElement {
             ));
             $c->sortby('tvtpl.rank,modTemplateVar.rank');
 
-            $collection = $this->xpdo->getCollection('modTemplateVar', $c);
+            $collection = $this->xpdo->getCollection('modTemplateVar', $c, $cacheFlag);
         } else {
-            $collection= parent :: getMany($class, $criteria);
+            $collection= parent :: getMany($alias, $criteria, $cacheFlag);
         }
         return $collection;
     }

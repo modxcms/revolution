@@ -232,6 +232,9 @@ $_lang['setting_filemanager_url_relative_desc'] = 'Si votre paramètre filemanag
 $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
 $_lang['setting_forgot_login_email_desc'] = 'Le modèle de l\'email qui est envoyé quand un utilisateur a oublié ses identifiants et/ou mot de passe de MODx.';
 
+$_lang['setting_forward_merge_excludes'] = 'Faire suivre exclue les champs "fusionnés"';
+$_lang['setting_forward_merge_excludes_desc'] = 'Un lien symbolique qui fusionne les valeurs des champs non vides vers les valeurs de la ressource cible; utiliser une liste "d\'exclusions", séparées par des virgules, évite que les champs indiqués soient écrasés par le lien symbolique.';
+
 $_lang['setting_friendly_alias_lowercase_only'] = 'Alias en minuscules';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Défini si l\'alias des ressources doit être seulement en minuscules ou non.';
 
@@ -271,6 +274,9 @@ $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Les séparateurs de mot
 $_lang['setting_friendly_urls'] = 'Utiliser les URLs simples';
 $_lang['setting_friendly_urls_desc'] = 'Ceci vous autorise à utiliser les URLs simple (pour les moteurs de recherche). Veuillez noter que cette option ne fonctionne que pour les installations MODx tournant avec Apache et que vous aurez besoin d\'écrire un fichier .htaccess pour que cela fonctionne. Regardez le fichier .htaccess inclu dans la distribution pour plus d\'informations.';
 $_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
+
+$_lang['setting_hidemenu_default'] = 'Ne pas afficher dans les menus par défaut';
+$_lang['setting_hidemenu_default_desc'] = 'Choisissez \'oui\' pour que toutes les nouvelles ressources soient cachées des menus par défaut.';
 
 $_lang['setting_mail_charset'] = 'Charset Mail';
 $_lang['setting_mail_charset_desc'] = 'Le charset (par défaut défaut) pour les emails, par ex. \'iso-8859-1\' ou \'UTF-8\'';
