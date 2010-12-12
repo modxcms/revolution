@@ -315,7 +315,7 @@ textarea.x-form-field {
 
 /* form fields */
 .modx-form .x-form-text, .modx-form .x-form-textarea { font-size: 13px; }
-.modx-form .x-form-text { padding:1px;height: 22px; vertical-align: middle; }
+.modx-form .x-form-text { height: 22px; vertical-align: middle; }
 .modx-form .x-form-item label { font-size: 13px; }
 
 /* windows */
@@ -324,7 +324,7 @@ textarea.x-form-field {
 
 /* grids */
 .x-small-editor .x-form-field {
-    font-size: 1 !important;    
+    font-size: 1em !important;    
 }
 
 .grid-row-inactive {
