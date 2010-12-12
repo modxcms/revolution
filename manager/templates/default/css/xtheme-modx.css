@@ -190,8 +190,10 @@ ul.x-tab-strip li.x-tab-strip-active  {
 
 .ext-gecko #modx-content ul.x-tab-strip li.x-tab-strip-active {
     background: -moz-linear-gradient(
-        #666666 30%,
-		#555555 69%
+        center bottom,
+        rgb(94,94,94) 27%,
+        rgb(119,119,119) 100%,
+        rgb(102,102,102) 0%
     );
 }
 
@@ -342,18 +344,22 @@ ul.x-tab-strip li.x-tab-strip-active  {
     background: white url(../images/modx-theme/form/trigger.png);
 }
 
+.x-form-field-wrap .x-form-trigger{
+    background-position: -30px -12px;
+    height: 20px;
+    width: 36px;
+}
 .x-form-field-wrap {
     background: transparent url(../images/modx-theme/form/combo-bck.png) repeat-x scroll 0 bottom;
 }
 .x-small-editor .x-form-field-wrap .x-form-trigger{
     width: 26px;
     height: 22px;
-    padding:0;
 }
 
 .x-form-field-wrap .x-form-trigger{
     background-position: -26px 0;
-    height: 24px !important;
+    height: 24px;
     width: 29px;
 }
 
@@ -413,8 +419,7 @@ ul.x-tab-strip li.x-tab-strip-active  {
 .ext-strict .x-small-editor .x-form-text {
     -moz-border-radius: 3px;
     border-radius: 3px;
-    padding:1px;
-    height: 22px !important;
+    height: 18px !important;
 }
 .ext-gecko .x-form-text, .ext-ie8 .x-form-text {
     padding-top: 4px;
@@ -1882,7 +1887,6 @@ a.x-menu-item {
 .x-panel-tl, .x-panel-ml, .x-panel-bl {
     background-color:#F5F5F5;
     padding-left:8px;
-    margin-right:10px;
 }
 
 .x-panel-ml, .x-panel-mr {
