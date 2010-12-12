@@ -1,6 +1,6 @@
 <?php
 /**
- * Japanese language files for Revolution 2.0.1 setup
+ * Japanese language files for Revolution 2.0.4 setup
  *
  * @package setup
  * @author KUROI Enogu http://twitter.com/enogu
