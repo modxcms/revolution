@@ -74,6 +74,7 @@ $_lang['filter_by_context'] = 'コンテキストで絞り込む';
 $_lang['filter_by_policy'] = 'ポリシーで絞り込む';
 $_lang['filter_by_resource_group'] = 'リソースグループで絞り込む';
 $_lang['filter_by_category'] = 'カテゴリーで絞り込む';
+$_lang['no_policy_option'] = ' (no policy) ';
 $_lang['resource_group'] = 'リソースグループ';
 $_lang['resource_group_add'] = 'リソースグループを追加';
 $_lang['resource_group_access_remove'] = 'Remove Resource from Group';

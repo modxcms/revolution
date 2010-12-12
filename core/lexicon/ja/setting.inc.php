@@ -68,6 +68,9 @@ $_lang['setting_login_homepage'] = 'ログインのホームページ';
 $_lang['setting_login_homepage_desc'] = 'ログイン後に遷移させたいドキュメントのIDを入力します。<strong>ノート: 公開されていて、このユーザ－がアクセスできるドキュメントのIDを入力してください。</strong>';
 
 // system settings
+$_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
+$_lang['setting_access_policies_version_desc'] = 'The version of the Access Policy system. DO NOT CHANGE.';
+
 $_lang['setting_allow_duplicate_alias'] = '同じエイリアスを許可';
 $_lang['setting_allow_duplicate_alias_desc'] = '「はい」を選択すると、同じエイリアスでの保存を許可します。<strong>ノート: このオプションはリソース参照時の問題を避けるため、「フレンドリーエイリアスパス」設定を「はい」で設定し、それと一緒に使用されるべきです。</strong>';
 
@@ -148,6 +151,9 @@ $_lang['setting_cache_scripts_desc'] = 'When enabled, MODx will cache all Script
 $_lang['setting_cache_system_settings'] = 'システム設定キャッシュを有効';
 $_lang['setting_cache_system_settings_desc'] = 'When enabled, system settings will be cached to reduce load times. MODx recommends leaving this on.';
 
+$_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear';
+$_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
+
 $_lang['setting_compress_css'] = '圧縮したCSSを使用';
 $_lang['setting_compress_css_desc'] = 'When this is enabled, MODx will use a compressed version of its css stylesheets in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
@@ -186,6 +192,9 @@ $_lang['setting_emailsubject'] = 'メールのタイトル';
 $_lang['setting_emailsubject_desc'] = 'サインアップメールのタイトルを指定してください。';
 $_lang['setting_emailsubject_err'] = 'サインアップメールのタイトルを指定してください。';
 
+$_lang['setting_enable_dragdrop'] = 'Enable Drag/Drop in Resource/Element Trees';
+$_lang['setting_enable_dragdrop_desc'] = 'If off, will prevent dragging and dropping in Resource and Element trees.';
+
 $_lang['setting_error_page'] = 'エラーページ';
 $_lang['setting_error_page_desc'] = 'ドキュメントが存在しない場合のエラーページ(404 ページ)として表示する、ドキュメントのIDを入力してください。<strong注意: 既に存在するドキュメントで、かつ公開されている必要があります。</strong>';
 $_lang['setting_error_page_err'] = 'エラーページに使用するドキュメントIDを指定してください。';
@@ -214,11 +223,20 @@ $_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODx will hide t
 $_lang['setting_filemanager_path'] = 'ファイル管理領域のパス';
 $_lang['setting_filemanager_path_desc'] = 'IIS often does not populate the document_root setting properly, which is used by the file manager to determine what you can look at. If you\'re having problems using the file manager, make sure this path points to the root of your MODx installation.';
 
+$_lang['setting_filemanager_path_relative'] = 'Is File Manager Path Relative?';
+$_lang['setting_filemanager_path_relative_desc'] = 'If your filemanager_path setting is relative to the MODx base_path, then please set this setting to Yes. If your filemanager_path is outside the docroot, set this to No.';
+
 $_lang['setting_filemanager_url'] = 'File Manager Url';
 $_lang['setting_filemanager_url_desc'] = 'Optional. Set this if you want to set an explicit URL to access the files in the MODx file manager from (useful if you have changed filemanager_path to a path outside the MODx webroot). Make sure this is the web-accessible URL of the filemanager_path setting value. If leave this empty, MODx will try to automatically calculate it.';
 
+$_lang['setting_filemanager_url_relative'] = 'Is File Manager URL Relative?';
+$_lang['setting_filemanager_url_relative_desc'] = 'If your filemanager_url setting is relative to the MODx base_url, then please set this setting to Yes. If your filemanager_url is outside the main webroot, set this to No.';
+
 $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
 $_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODx username and/or password.';
+
+$_lang['setting_forward_merge_excludes'] = 'sendForward Exclude Fields on Merge';
+$_lang['setting_forward_merge_excludes_desc'] = 'A SymLink merges non-empty field values over the values in the target Resource; using this comma-delimited list of excludes prevents specified fields from being overridden by the SymLink.';
 
 $_lang['setting_friendly_alias_lowercase_only'] = 'エイリアスを小文字で揃える';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'リソースのエイリアスに小文字のみを許可するかを決定します。';
@@ -241,6 +259,9 @@ $_lang['setting_friendly_alias_translit_desc'] = '機種依存文字やヨーロ
 $_lang['setting_friendly_alias_translit_class'] = 'FURL Alias Transliteration Service Class';
 $_lang['setting_friendly_alias_translit_class_desc'] = 'An optional service class to provide named transliteration services for FURL Alias generation/filtering.';
 
+$_lang['setting_friendly_alias_translit_class_path'] = 'FURL Alias Transliteration Service Class Path';
+$_lang['setting_friendly_alias_translit_class_path_desc'] = 'The model package location where the FURL Alias Transliteration Service Class will be loaded from.';
+
 $_lang['setting_friendly_alias_trim_chars'] = 'エイリアスからトリムする文字';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'エイリアス文字列の末尾に付けたくない文字を指定します。たとえば「-」で終わるURLを美しくないと思う場合、もしエイリアス自動生成などの結果末尾に「-」が付いた時は、ここで指定しておけば自動的に削除できます。Characters to trim from the ends of a provided Resource alias.';
 
@@ -256,6 +277,9 @@ $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Characters which repres
 $_lang['setting_friendly_urls'] = 'フレンドリーURLの利用';
 $_lang['setting_friendly_urls_desc'] = '静的URI機能（フレンドリーURL）の設定を行います。この機能はMODxがApache上で動作している時のみ有効です。この機能を動作させるために .htaccessファイルに簡単な編集を加える必要があります。詳細は同梱 .htaccessファイルの末尾あたりをご覧ください。';
 $_lang['setting_friendly_urls_err'] = 'フレンドリーURLを使用するかしないか選んでください。';
+
+$_lang['setting_hidemenu_default'] = 'Hide From Menus Default';
+$_lang['setting_hidemenu_default_desc'] = 'Select \'Yes\' to make all new resources hidden from menus by default.';
 
 $_lang['setting_mail_charset'] = 'メールの文字セット';
 $_lang['setting_mail_charset_desc'] = 'メールでの（デフォルトの）文字セットを指定します。例えば「UTF-8」など。';
@@ -335,6 +359,9 @@ $_lang['setting_new_folder_permissions_desc'] = '管理画面を通じて新し�
 $_lang['setting_password_generated_length'] = '自動生成するパスワードの長さ';
 $_lang['setting_password_generated_length_desc'] = 'The length of the auto-generated password for a User.';
 
+$_lang['setting_password_min_length'] = 'パスワードの最小の長さ';
+$_lang['setting_password_min_length_desc'] = 'The minimum length for a password for a User.';
+
 $_lang['setting_proxy_auth_type'] = 'プロキシの認証タイプ';
 $_lang['setting_proxy_auth_type_desc'] = 'Supports either BASIC or NTLM.';
 
@@ -350,8 +377,8 @@ $_lang['setting_proxy_port_desc'] = 'The port for your proxy server.';
 $_lang['setting_proxy_username'] = 'プロキシのユーザー名';
 $_lang['setting_proxy_username_desc'] = 'The username to authenticate against with your proxy server.';
 
-$_lang['setting_password_min_length'] = 'パスワードの最小の長さ';
-$_lang['setting_password_min_length_desc'] = 'The minimum length for a password for a User.';
+$_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Allow src Above Document Root';
+$_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indicates if the src path is allowed outside the document root. This is useful for multi-context deployments with multiple virtual hosts.';
 
 $_lang['setting_phpthumb_cache_maxage'] = 'phpThumb Max Cache Age';
 $_lang['setting_phpthumb_cache_maxage_desc'] = 'Delete cached thumbnails that have not been accessed in more than X days.';
@@ -365,14 +392,53 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Delete least-recently-accessed
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb Cache Source Files';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Whether or not to cache source files as they are loaded. Recommended to off.';
 
-$_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb ImageMagick Path';
-$_lang['setting_phpthumb_imagemagick_path_desc'] = 'Optional. Set an alternative ImageMagick path here for generating thumbnails with phpThumb, if it is not in the PHP default.';
+$_lang['setting_phpthumb_error_bgcolor'] = 'phpThumb Error Background Color';
+$_lang['setting_phpthumb_error_bgcolor_desc'] = 'A hex value, without the #, indicating a background color for phpThumb error output.';
 
-$_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop';
-$_lang['setting_phpthumb_zoomcrop_desc'] = 'The default zc setting for phpThumb when used in MODx. Defaults to 0 to prevent zoom cropping.';
+$_lang['setting_phpthumb_error_fontsize'] = 'phpThumb Error Font Size';
+$_lang['setting_phpthumb_error_fontsize_desc'] = 'An em value indicating a font size to use for text appearing in phpThumb error output.';
+
+$_lang['setting_phpthumb_error_textcolor'] = 'phpThumb Error Font Color';
+$_lang['setting_phpthumb_error_textcolor_desc'] = 'A hex value, without the #, indicating a font color for text appearing in phpThumb error output.';
 
 $_lang['setting_phpthumb_far'] = 'phpThumb Force Aspect Ratio';
 $_lang['setting_phpthumb_far_desc'] = 'The default far setting for phpThumb when used in MODx. Defaults to C to force aspect ratio toward the center.';
+
+$_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb ImageMagick Path';
+$_lang['setting_phpthumb_imagemagick_path_desc'] = 'Optional. Set an alternative ImageMagick path here for generating thumbnails with phpThumb, if it is not in the PHP default.';
+
+$_lang['setting_phpthumb_nohotlink_enabled'] = 'phpThumb Hotlinking Disabled';
+$_lang['setting_phpthumb_nohotlink_enabled_desc'] = 'Remote servers are allowed in the src parameter unless you disable hotlinking in phpThumb.';
+
+$_lang['setting_phpthumb_nohotlink_erase_image'] = 'phpThumb Hotlinking Erase Image';
+$_lang['setting_phpthumb_nohotlink_erase_image_desc'] = 'Indicates if an image generated from a remote server should be erased when not allowed.';
+
+$_lang['setting_phpthumb_nohotlink_text_message'] = 'phpThumb Hotlinking Not Allowed Message';
+$_lang['setting_phpthumb_nohotlink_text_message_desc'] = 'A message that is rendered instead of the thumbnail when a hotlinking attempt is rejected.';
+
+$_lang['setting_phpthumb_nohotlink_valid_domains'] = 'phpThumb Hotlinking Valid Domains';
+$_lang['setting_phpthumb_nohotlink_valid_domains_desc'] = 'A comma-delimited list of hostnames that are valid in src URLs.';
+
+$_lang['setting_phpthumb_nooffsitelink_enabled'] = 'phpThumb Offsite Linking Disabled';
+$_lang['setting_phpthumb_nooffsitelink_enabled_desc'] = 'Disables the ability for others to use phpThumb to render images on their own sites.';
+
+$_lang['setting_phpthumb_nooffsitelink_erase_image'] = 'phpThumb Offsite Linking Erase Image';
+$_lang['setting_phpthumb_nooffsitelink_erase_image_desc'] = 'Indicates if an image linked from a remote server should be erased when not allowed.';
+
+$_lang['setting_phpthumb_nooffsitelink_require_refer'] = 'phpThumb Offsite Linking Require Referrer';
+$_lang['setting_phpthumb_nooffsitelink_require_refer_desc'] = 'If enabled, any offsite linking attempts will be rejected without a valid referrer header.';
+
+$_lang['setting_phpthumb_nooffsitelink_text_message'] = 'phpThumb Offsite Linking Not Allowed Message';
+$_lang['setting_phpthumb_nooffsitelink_text_message_desc'] = 'A message that is rendered instead of the thumbnail when an offsite linking attempt is rejected.';
+
+$_lang['setting_phpthumb_nooffsitelink_valid_domains'] = 'phpThumb Offsite Linking Valid Domains';
+$_lang['setting_phpthumb_nooffsitelink_valid_domains_desc'] = 'A comma-delimited list of hostnames that are valid referrers for offsite linking.';
+
+$_lang['setting_phpthumb_nooffsitelink_watermark_src'] = 'phpThumb Offsite Linking Watermark Source';
+$_lang['setting_phpthumb_nooffsitelink_watermark_src_desc'] = 'Optional. A valid file system path to a file to use as a watermark source when your images are rendered offsite by phpThumb.';
+
+$_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop';
+$_lang['setting_phpthumb_zoomcrop_desc'] = 'The default zc setting for phpThumb when used in MODx. Defaults to 0 to prevent zoom cropping.';
 
 $_lang['setting_publish_default'] = '公開デフォルト';
 $_lang['setting_publish_default_desc'] = '新しく作成するドキュメントをデフォルトで公開に設定する場合は「はい」を選択してください。';
@@ -398,6 +464,9 @@ $_lang['setting_request_param_id_desc'] = 'The name of the GET parameter to iden
 
 $_lang['setting_resolve_hostnames'] = 'Resolve hostnames';
 $_lang['setting_resolve_hostnames_desc'] = 'Do you want MODx to try to resolve your visitors\' hostnames when they visit your site? Resolving hostnames may create some extra server load, although your visitors won\'t notice this in any way.';
+
+$_lang['setting_resource_tree_node_name'] = 'Resource Tree Node Field';
+$_lang['setting_resource_tree_node_name_desc'] = 'Specify the Resource field to use when rendering the nodes in the Resource Tree. Defaults to pagetitle, although any Resource field can be used, such as menutitle, alias, longtitle, etc.';
 
 $_lang['setting_richtext_default'] = 'デフォルトのエディタ';
 $_lang['setting_richtext_default_desc'] = '「はい」を選択すると、デフォルトで新しいリソースを作成する際にリッチテキストエディタを使用します。';
@@ -436,6 +505,9 @@ $_lang['setting_session_name_desc'] = 'Use this setting to customize the session
 $_lang['setting_settings_version'] = 'コアのバージョン';
 $_lang['setting_settings_version_desc'] = '稼働しているMODxのバージョンです。';
 
+$_lang['setting_settings_distro'] = 'Settings Distribution';
+$_lang['setting_settings_distro_desc'] = 'The current installed distribution of MODx.';
+
 $_lang['setting_set_header'] = 'HTTPヘッダーを設定';
 $_lang['setting_set_header_desc'] = '有効にすると、リソースでHTTPヘッダーをセットするように試みます。';
 
@@ -465,16 +537,25 @@ $_lang['setting_site_unavailable_page_err'] = 'メンテナンスモード時の
 $_lang['setting_strip_image_paths'] = 'src属性に相対パスを渡す';
 $_lang['setting_strip_image_paths_desc'] = 'この設定を「はい」にした場合、ファイルブラウザで選択したファイル（画像・Flash・その他メディアファイルなど）のsrc指定を相対パスで書き出します。CMSでコンテンツを管理する場合は一般的には絶対パスが無難ですが、MODxでサイトを管理する場合はbaseタグを併用することで相対パスで効率よく運用することができます。';
 
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Top Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODx will hide the descriptions from top menu items in the manager.';
+
+$_lang['setting_tree_default_sort'] = 'Resource Tree Default Sort Field';
+$_lang['setting_tree_default_sort_desc'] = 'The default sort field for the Resource tree when loading the manager.';
+
 $_lang['setting_tree_root_id'] = 'Tree Root ID';
 $_lang['setting_tree_root_id_desc'] = 'Set this to a valid ID of a Resource to start the left Resource tree at below that node as the root. The user will only be able to see Resources that are children of the specified Resource.';
 
 $_lang['setting_udperms_allowroot'] = 'ルートの使用許可';
 $_lang['setting_udperms_allowroot_desc'] = 'サイトのルートディレクトリにユーザーがドキュメント/フォルダを作成できるようにしますか? ';
+
 $_lang['setting_unauthorized_page'] = '権限外告知のページ';
 $_lang['setting_unauthorized_page_desc'] = 'ユーザーがアクセスを許可されていないドキュメントを要求したとき表示するドキュメントのIDを入力してください。 <strong>注意: 実在するドキュメントのIDを指定してください。また公開中でしかもPublicなアクセスが可能であるものに限ります</strong>';
 $_lang['setting_unauthorized_page_err'] = '権限外告知に利用するドキュメントIDを指定してください。';
+
 $_lang['setting_upload_files'] = 'アップロード可能なファイルタイプ';
 $_lang['setting_upload_files_desc'] = 'ファイルブラウザを使用して「assets/files/」にアップロードできるメディアファイルの拡張子をカンマで区切って入力してください。';
+
 $_lang['setting_upload_flash'] = 'アップロード可能なFlash';
 $_lang['setting_upload_flash_desc'] = 'ファイルブラウザを使用して「assets/flash/」にアップロードできるFlashファイルの拡張子をカンマで区切って入力してください。';
 
@@ -517,8 +598,10 @@ $_lang['setting_welcome_screen_url_desc'] = 'The URL for the welcome screen that
 
 $_lang['setting_which_editor'] = '使用するエディタ';
 $_lang['setting_which_editor_desc'] = '使用したいリッチテキストエディタを選択します。パッケージマネージャから他のリッチテキストエディタをダウンロード・インストールできます。';
+
 $_lang['setting_which_element_editor'] = 'エレメントで使用するエディタ';
 $_lang['setting_which_element_editor_desc'] = 'エレメントの編集で使用したいリッチテキストエディタを選択します。リッチテキストエディタはパッケージマネージャでダウンロード・インストールできます。';
 
 $_lang['setting_xhtml_urls'] = 'XHTML URLs';
 $_lang['setting_xhtml_urls_desc'] = 'If set to true, all URLs generated by MODx will be XHTML-compliant, including encoding of the ampersand character.';
+
