@@ -11,6 +11,7 @@ div.labelHolder {
     clear: both;
 }
 
+input {font-family: Verdana,Arial, Helvetica, sans-serif !important;}
 div.labelHolder input {
     width: 200px;
 }
@@ -84,7 +85,7 @@ table.options td {
 #modx_error .close {
 	float: right;
     color: black;
-	font-size: 10px;
+	font-size: 12px;
 	vertical-align: middle;
 	height: 100%;
 }

@@ -13,7 +13,7 @@ body, html {
 body {
     margin-bottom: 1px; /* avoid jumping scrollbars */
     color: #111;
-    font: 13px/17px Arial, Helvetica, sans-serif;
+    font: 13px/17px Verdana, Arial, Helvetica, sans-serif;
 }
 
 img, a img {
@@ -314,9 +314,9 @@ textarea.x-form-field {
 .x-tab-strip span.x-tab-strip-text { font-size: 12px; }
 
 /* form fields */
-.modx-form .x-form-text, .modx-form .x-form-textarea { font-size: 14px; }
-.modx-form .x-form-text { height: 22px; vertical-align: middle; }
-.modx-form .x-form-item label { font-size: 14px; }
+.modx-form .x-form-text, .modx-form .x-form-textarea { font-size: 13px; }
+.modx-form .x-form-text { padding:1px;height: 22px; vertical-align: middle; }
+.modx-form .x-form-item label { font-size: 13px; }
 
 /* windows */
 .x-form-check-wrap { height: auto !important; }
@@ -324,7 +324,7 @@ textarea.x-form-field {
 
 /* grids */
 .x-small-editor .x-form-field {
-    font-size: 1em !important;    
+    font-size: 1 !important;    
 }
 
 .grid-row-inactive {
@@ -338,10 +338,10 @@ textarea.x-form-field {
     border-radius:3px;
     background-color:#eaeaea;
     background-color:rgba(224, 224, 224, 0.75);
-    padding:5px;
+    padding:3px;
     position:fixed;
-    right:20px;
-    top:100px;
+    right:30px;
+    top:90px;
     z-index:12;
     zoom: 1;
 }
@@ -382,7 +382,7 @@ textarea.x-form-field {
     display: block;
     clear: left;
     color: #888;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 8px;
     font-style: italic;
     margin: 0;
@@ -401,20 +401,19 @@ textarea.x-form-field {
 
 /* 2nd row, navbar */
 #modx-navbar {
-    background-color: #666;
+    background-color: #444;
     border-top: 1px solid #1E1E1E;
     border-bottom: 1px solid #1E1E1E;
     height: 45px;
     position: relative;
-    text-shadow:1px -1px 0 #1f1f1f;
+    text-shadow:1px 1px 0 #1f1f1f;
     z-index: 19;
 }
 .ext-gecko #modx-navbar {
     background: -moz-linear-gradient(
-        center bottom,
-        #666 37%,
-        #777 69%,
-        #666 0%
+        top,
+        #444 50%,
+        #555 100%
     );
 }
 .ext-safari #modx-navbar, .ext-webkit #modx-navbar {
@@ -422,8 +421,8 @@ textarea.x-form-field {
         linear,
         left bottom,
         left top,
-        color-stop(0.37,#555),
-        color-stop(0.69,#666),
+        color-stop(0.37,#444),
+        color-stop(0.69,#444),
         color-stop(0,#555)
     );
 }
@@ -539,19 +538,19 @@ table.classy th {
 table.classy td {
     /*border-right: 1px solid #C1DAD7;*/
     color: #000000;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 table.classy tbody th {
     vertical-align: top;
     background-color: #FFFFFF;
-    font-size: 11px;
+    font-size: 12px;
 }
 table.classy thead th {
     background-color: #5F5F5F;
     color: #FFFFFF;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     padding-top: 10px;
     padding-bottom: 8px;
@@ -597,7 +596,7 @@ table.classy tr.odd td {
 }
 .modx-tv-description {
     color: #666;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.2;
     margin-left: 16px;
     display: block;
@@ -605,7 +604,7 @@ table.classy tr.odd td {
 .modx-tv-inherited {
     font-style: italic;
     color: #666;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.2;
     margin-left: 16px;
     display: block;
@@ -623,7 +622,7 @@ table.classy tr.odd td {
 /* browser */
 .modx-pb-view-ct {
     background: white;
-    font: 11px Arial, Helvetica, sans-serif;
+    font: 12px Arial, Helvetica, sans-serif;
 }
 .modx-pb-thumb{
     border: 1px solid #dddddd;
@@ -662,7 +661,7 @@ table.classy tr.odd td {
     color: #1A4D8F;
 }
 .modx-pb-view-ct .loading-indicator {
-    font-size: 11px;
+    font-size: 12px;
     background-repeat: no-repeat;
     background-position: left;
     padding-left: 20px;
@@ -677,7 +676,7 @@ table.classy tr.odd td {
 
 .modx-pb-details-info {
     border-top: 1px solid #cccccc;
-    font: 11px Arial, Helvetica, sans-serif;
+    font: 12px Arial, Helvetica, sans-serif;
     padding: 5px;
     margin-top: 5px;
     text-align: left;
@@ -785,8 +784,8 @@ table.classy tr.odd td {
     text-shadow: -1px 1px 0 #1F1F1F;
     text-shadow: 0 1px 1px #aaa;
     */
-    color: #ccc;
-    text-shadow: 0 1px -1px #111;
+    color: #eee;
+    text-shadow: 1px 1px 0 #111;
     display: block;
     text-decoration: none;
     float: left;
@@ -991,7 +990,7 @@ input.x-static-text-field {
 .modx-console-text {
     background-color: white;
     padding: 8px;
-    font: 11px Courier !important;
+    font: 12px 'Courier New', Courier, monospace !important;
 }
 
 /* portlets */
@@ -1133,7 +1132,7 @@ ul.modx-tag-list li.modx-tag-checked {
 }
 .modx-tv-reload-btn div { z-index: 10; }
 .modx-tv-th label { cursor: pointer; }
-.modx-tv-th .tv-description { font-weight: normal; color: #444; font-size: 11px; }
+.modx-tv-th .tv-description { font-weight: normal; color: #444; font-size: 12px; }
 
 /* datetime tv */
 .x-datetime-wrap {

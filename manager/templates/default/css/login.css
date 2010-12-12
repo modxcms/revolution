@@ -1,7 +1,7 @@
 html {
     font-size: 100.01%; /* avoids obscure font-size bug */
     line-height: 1.5; /* http://meyerweb.com/eric/thoughts/2006/02/08/unitless-line-heights/ */
-    font-family: "Lucida Grande", Helvetica, Arial, sans-serif !important; /* IE ignores this and renders Arial better */
+    font-family: Verdana, Helvetica, Arial, sans-serif !important; /* IE ignores this and renders Arial better */
     font-family: Arial, Tahoma, Helvetica, sans-serif;
     color: #111;
     height: auto;
@@ -78,3 +78,7 @@ a:hover {
 }
 label { cursor: pointer; }
 
+#modx-panel-login-div div.x-panel-tl,
+#modx-panel-login-div div.x-panel-ml{
+margin-right:0;
+}

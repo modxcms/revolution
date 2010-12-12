@@ -1,18 +1,15 @@
 /* @override http://bruce.bravado.dom:8080/modxsite/assets/modx.css */
     /* GLOBAL */
 body {
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica,
-        sans-serif;
+    font-family: Verdana, Arial, Helvetica,sans-serif;
 }
 
 strong,em,b,i {
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", Verdana,
-        Arial, Helvetica, sans-serif;
+    font-family: Verdana,Arial, Helvetica, sans-serif;
 }
 
 h1,h2,h3,h4,h5,h6,address {
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", Verdana,
-        Arial, Helvetica, sans-serif;
+    font-family: Verdana,Arial, Helvetica, sans-serif;
     margin-top: 0;
 }
 
@@ -67,7 +64,7 @@ hr {
     max-width: 250px;
     float: left;
     padding: 0;
-    font: bold 11px/ 23px "Lucida Grande", Lucida, Verdana, sans-serif;
+    font: bold 12px/ 23px Verdana, sans-serif;
 }
 
 .buttonlinks span,#footer .buttonlinks span,#whatwhyhow .buttonlinks span {
@@ -138,7 +135,7 @@ hr {
 #quickstart a,#metanav a {
     text-decoration: none;
     color: #fff;
-    font: bold 12px/ 30px "Lucida Grande", Lucida, Verdana, sans-serif;
+    font: bold 12px/ 30px Verdana, sans-serif;
     text-transform: uppercase;
     display: block;
 }
@@ -400,7 +397,7 @@ hr {
     height: 26px;
     text-align: left;
     width: auto;
-    font: bold 11px/ 25px "Lucida Grande", Lucida, Verdana, sans-serif;
+    font: bold 12px/ 25px Verdana, sans-serif;
 }
 
 #nlsubmit :hover {
