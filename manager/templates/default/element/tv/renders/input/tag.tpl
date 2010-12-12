@@ -9,7 +9,7 @@
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-MODx.load({
+var fld{/literal}{$tv->id}{literal} = MODx.load({
 {/literal}
     xtype: 'textfield'
     ,applyTo: 'tv{$tv->id}'
@@ -17,6 +17,16 @@ MODx.load({
     ,enableKeyEvents: true
 {literal}
     ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
+});
+MODx.makeDroppable(fld{/literal}{$tv->id}{literal},function(v) {
+    var tf = fld{/literal}{$tv->id}{literal};
+    if (tf) {
+        var ov = tf.getValue();
+        if (ov != '') {
+            v = ','+v;
+        }
+    }
+    return v;
 });
 {/literal}
 // ]]>

@@ -59,7 +59,7 @@ class modLexicon {
     protected $_paths = array();
     /**
      * An array of loaded topic strings
-     * 
+     *
      * @var array $_loadedTopics
      */
     protected $_loadedTopics = array();
@@ -115,10 +115,12 @@ class modLexicon {
         if (!empty($prefix)) {
             $lex = array();
             $lang = $this->_lexicon;
-            foreach ($lang as $k => $v) {
-                if (strpos($k,$prefix) !== false) {
-                    $key = $removePrefix ? str_replace($prefix,'',$k) : $k;
-                    $lex[$key] = $v;
+            if (is_array($lang)) {
+                foreach ($lang as $k => $v) {
+                    if (strpos($k,$prefix) !== false) {
+                        $key = $removePrefix ? str_replace($prefix,'',$k) : $k;
+                        $lex[$key] = $v;
+                    }
                 }
             }
             return $lex;
@@ -138,7 +140,7 @@ class modLexicon {
     public function getCacheKey($namespace = 'core',$topic = 'default',$language = '') {
         if (empty($namespace)) $namespace = 'core';
         if (empty($topic)) $topic = 'default';
-        if (empty($language)) $language = $this->modx->context->getOption('cultureKey','en');
+        if (empty($language)) $language = $this->modx->getOption('cultureKey',null,'en');
         return 'lexicon/'.$language.'/'.$namespace.'/'.$topic;
     }
 
@@ -157,9 +159,9 @@ class modLexicon {
         $topics = func_get_args(); /* allow for dynamic number of lexicons to load */
 
         if ($this->modx->context->get('key') == 'mgr') {
-            $defaultLanguage = $this->modx->context->getOption('manager_language',$this->modx->context->getOption('cultureKey','en'));
+            $defaultLanguage = $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en'));
         } else {
-            $defaultLanguage = $this->modx->context->getOption('cultureKey','en');
+            $defaultLanguage = $this->modx->getOption('cultureKey',null,'en');
         }
 
         foreach ($topics as $topicStr) {
@@ -212,9 +214,9 @@ class modLexicon {
      * @return array The loaded lexicon array.
      */
     public function loadCache($namespace = 'core', $topic = 'default', $language = '') {
-        if (empty($language)) $language = $this->modx->context->getOption('cultureKey','en');
+        if (empty($language)) $language = $this->modx->getOption('cultureKey',null,'en');
         $key = $this->getCacheKey($namespace, $topic, $language);
-        $enableCache = ($namespace != 'core' && !$this->modx->context->getOption('cache_noncore_lexicon_topics',true)) ? false : true;
+        $enableCache = ($namespace != 'core' && !$this->modx->getOption('cache_noncore_lexicon_topics',null,true)) ? false : true;
 
         $cached = $this->modx->cacheManager->get($key);
         if (!$enableCache || $cached == null) {
@@ -318,7 +320,7 @@ class modLexicon {
         $topics = array();
         if (!is_dir($lexPath)) return $topics;
         foreach (new DirectoryIterator($lexPath) as $topic) {
-            if (in_array($topic,array('.','..','.svn','_notes'))) continue;
+            if (in_array($topic,array('.','..','.svn','.git','_notes'))) continue;
             if (!$topic->isReadable()) continue;
 
             if ($topic->isFile()) {
@@ -342,7 +344,7 @@ class modLexicon {
         $lexPath = str_replace('//','/',$corePath.'/lexicon/');
         $languages = array();
         foreach (new DirectoryIterator($lexPath) as $language) {
-            if (in_array($language,array('.','..','.svn','_notes','country'))) continue;
+            if (in_array($language,array('.','..','.svn','.git','_notes','country'))) continue;
             if (!$language->isReadable()) continue;
 
             if ($language->isDir()) {

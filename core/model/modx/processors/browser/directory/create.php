@@ -16,9 +16,19 @@ $modx->lexicon->load('file');
 if (empty($scriptProperties['name'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 if (empty($scriptProperties['parent'])) $scriptProperties['parent'] = '';
 
-/* get base paths and sanitize incoming paths */
-$modx->getService('fileHandler','modFileHandler');
-$root = $modx->fileHandler->getBasePath();
+/* get working context */
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
+$root = $modx->fileHandler->getBasePath(false);
 
 /* create modDirectory instance for containing directory and validate */
 $parentDirectory = $modx->fileHandler->make($root.$scriptProperties['parent']);

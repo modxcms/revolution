@@ -67,7 +67,7 @@ MODx.panel.SystemInfo = function(config) {
         xtype: 'statictextfield'
         ,fieldLabel: _('smarty_version')
         ,name: 'smarty_version'
-        ,value: '2.6.19'
+        ,value: '3.0.4'
     },{
         xtype: 'statictextfield'
         ,fieldLabel: _('phpmailer_version')

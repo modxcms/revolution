@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modResourceGroup']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'documentgroup_names',
   'fields' => 
   array (
@@ -40,6 +41,25 @@ $xpdo_meta_map['modResourceGroup']= array (
       'phptype' => 'boolean',
       'null' => false,
       'default' => 0,
+    ),
+  ),
+  'indexes' => 
+  array (
+    'name' => 
+    array (
+      'alias' => 'name',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'composites' => 

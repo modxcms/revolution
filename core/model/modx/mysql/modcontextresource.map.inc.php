@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modContextResource']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'context_resource',
   'fields' => 
   array (
@@ -29,6 +30,28 @@ $xpdo_meta_map['modContextResource']= array (
       'phptype' => 'string',
       'null' => false,
       'index' => 'pk',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'columns' => 
+      array (
+        'context_key' => 
+        array (
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'resource' => 
+        array (
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

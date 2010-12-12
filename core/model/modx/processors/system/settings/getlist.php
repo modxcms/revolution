@@ -39,16 +39,16 @@ $c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modSystemSettin
 if (!empty($key)) {
     $c->where(array(
         'modSystemSetting.key:LIKE' => '%'.$key.'%',
-    ));
+    ),null,xPDOQuery::SQL_AND,2);
     $c->orCondition(array(
         'Entry.value:LIKE' => '%'.$key.'%',
-    ));
+    ),null,2);
     $c->orCondition(array(
         'modSystemSetting.value:LIKE' => '%'.$key.'%',
-    ));
+    ),null,2);
     $c->orCondition(array(
         'Description.value:LIKE' => '%'.$key.'%',
-    ));
+    ),null,2);
 }
 
 if (!empty($namespace)) {

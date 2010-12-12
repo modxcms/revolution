@@ -16,7 +16,7 @@ if (!isset($scriptProperties['key'])) {
 $contextKey = urldecode($scriptProperties['key']);
 $context = $modx->getObject('modContext',$contextKey);
 if ($context == null) {
-    return $modx->error->failure(sprintf($modx->lexicon('context_err_nfs'),$scriptProperties['key']));
+    return $modx->error->failure($modx->lexicon('context_err_nfs',array('key' => $scriptProperties['key'])));
 }
 if(!$context->checkPolicy('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 

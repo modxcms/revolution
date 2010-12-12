@@ -33,6 +33,7 @@ $_lang['connection_database_info'] = 'Veuillez entrer les informations d\'identi
 $_lang['connection_database_login'] = 'Identifiant de base de données:';
 $_lang['connection_database_name'] = 'Nom de la base de données:';
 $_lang['connection_database_pass'] = 'Mot de passe de la base de données:';
+$_lang['connection_database_type'] = 'Type de base de données:';
 $_lang['connection_default_admin_email'] = 'Email de l\'administrateur:';
 $_lang['connection_default_admin_login'] = 'Nom d\'utilisateur de l\'administrateur:';
 $_lang['connection_default_admin_note'] = 'Veuillez entrer quelques informations concernant le compte administrateur principal. Vous pouvez entrer votre propre nom, et un mot de passe que vous n\'oublierez pas. Vous en aurez besoin pour vous connecter comme administrateur une fois l\'installation terminée.';

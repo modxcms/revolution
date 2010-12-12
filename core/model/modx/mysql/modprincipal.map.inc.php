@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modPrincipal']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'composites' => 
   array (
     'Acls' => 

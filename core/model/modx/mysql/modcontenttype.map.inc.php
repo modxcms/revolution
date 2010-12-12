@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modContentType']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'content_type',
   'fields' => 
   array (
@@ -54,6 +55,25 @@ $xpdo_meta_map['modContentType']= array (
       'phptype' => 'boolean',
       'null' => false,
       'default' => 0,
+    ),
+  ),
+  'indexes' => 
+  array (
+    'name' => 
+    array (
+      'alias' => 'name',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

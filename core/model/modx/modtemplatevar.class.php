@@ -80,7 +80,7 @@ class modTemplateVar extends modElement {
                 'cacheFlag' => $cacheFlag,
             ));
         }
-        
+
         $removed = parent :: remove($ancestors);
 
         if ($removed && $this->xpdo instanceof modX) {
@@ -110,15 +110,15 @@ class modTemplateVar extends modElement {
 
             if (is_string($this->_output) && !empty ($this->_output)) {
                 /* turn the processed properties into placeholders */
-                $restore = $this->toPlaceholders($this->_properties);
+                $scope = $this->xpdo->toPlaceholders($this->_properties, '', '.', true);
 
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
                 $this->xpdo->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
 
                 /* remove the placeholders set from the properties of this element and restore global values */
-                $this->xpdo->unsetPlaceholders(array_keys($this->_properties));
-                if ($restore) $this->xpdo->toPlaceholders($restore);
+                if (isset($scope['keys'])) $this->xpdo->unsetPlaceholders($scope['keys']);
+                if (isset($scope['restore'])) $this->xpdo->toPlaceholders($scope['restore']);
             }
 
             /* apply output filtering */
@@ -333,6 +333,7 @@ class modTemplateVar extends modElement {
         $this->set('description',strip_tags($this->get('description')));
 
         $this->xpdo->smarty->assign('tv',$this);
+        $this->xpdo->smarty->assign('ctx',isset($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web');
 
         $params= array ();
         if ($paramstring= $this->get('display_params')) {
@@ -353,7 +354,7 @@ class modTemplateVar extends modElement {
 
     /**
      * Gets the correct render given paths and type of render
-     * 
+     *
      * @param array $params The parameters to pass to the render
      * @param mixed $value The value of the TV
      * @param array $paths An array of paths to search
@@ -456,7 +457,7 @@ class modTemplateVar extends modElement {
 
     /**
      * Returns an array of display params for this TV
-     * 
+     *
      * @return array The processed settings
      */
     public function getDisplayParams() {
@@ -534,7 +535,7 @@ class modTemplateVar extends modElement {
 
     /**
      * Parses the binding data from a value
-     * 
+     *
      * @param mixed $value The value to parse
      * @return array An array of cmd and param for the binding
      */
@@ -642,7 +643,7 @@ class modTemplateVar extends modElement {
                 if (!is_dir($path)) { break; }
 
                 $files = array();
-                $invalid = array('.','..','.svn','.DS_Store');
+                $invalid = array('.','..','.svn','.git','.DS_Store');
                 foreach (new DirectoryIterator($path) as $file) {
                     if (!$file->isReadable()) continue;
                     $basename = $file->getFilename();
@@ -700,7 +701,7 @@ class modTemplateVar extends modElement {
             $resource =& $this->xpdo->resource;
         }
         if (!$resource) return $output;
-        
+
         $currentResource = $resource;
         while ($currentResource->get('parent') != 0) {
             $currentResource = $this->xpdo->getObject('modResource',array('id' => $currentResource->get('parent')));

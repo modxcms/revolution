@@ -554,13 +554,20 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         var t = Ext.getCmp('modx-resource-tree');
         if (!t) { return false; }
         t.disableHref = true;
-        
+
         var id = node.id.split('_'); id = id[1];
         if (id == MODx.request.id) {
             MODx.msg.alert('',_('resource_err_own_parent'));            
             return false;
         }
-        
+
+        var ctxf = Ext.getCmp('modx-resource-context-key');
+        if (ctxf) {
+            var ctxv = ctxf.getValue();
+            if (node.attributes && node.attributes.ctx != ctxv) {
+                ctxf.setValue(node.attributes.ctx);
+            }
+        }        
         this.fireEvent('end',{
             v: node.attributes.type != 'modContext' ? id : node.attributes.pk
             ,d: node.text

@@ -33,10 +33,8 @@ if (isset($scriptProperties['settings']) && !empty($scriptProperties['settings']
             'context_key' => $context->get('key'),
             'key' => $st['key'],
         ));
-        if ($setting) { $setting->remove(); }
-        $setting = $modx->newObject('modContextSetting');
-        $setting->set('context_key',$context->get('key'));
-        $setting->set('key',$st['key']);
+        if (!$setting) continue;
+        
         $setting->set('value',$st['value']);
 
         /* if name changed, change lexicon string */

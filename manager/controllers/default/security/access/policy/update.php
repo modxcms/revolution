@@ -11,6 +11,19 @@ if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('access_
 $policy = $modx->getObject('modAccessPolicy',$_REQUEST['id']);
 if (empty($policy)) return $modx->error->failure($modx->lexicon('access_policy_err_nf'));
 
+/* setup policy array */
+$policyArray = $policy->get(array(
+    'id',
+    'name',
+    'description',
+    'lexicon',
+    'class',
+    'template',
+    'parent',
+));
+$policyArray['permissions'] = $policy->getPermissions();
+
+
 $modx->smarty->assign('policy',$policy);
 
 /* register JS scripts */
@@ -23,6 +36,7 @@ Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-access-policy"
         ,policy: "'.$policy->get('id').'"
+        ,record: '.$modx->toJSON($policyArray).'
     });
 });
 // ]]>

@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modResourceKeyword']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'keyword_xref',
   'fields' => 
   array (
@@ -30,6 +31,31 @@ $xpdo_meta_map['modResourceKeyword']= array (
       'null' => false,
       'default' => 0,
       'index' => 'pk',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'content_id' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'keyword_id' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modCategoryClosure']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'categories_closure',
   'fields' => 
   array (
@@ -42,6 +43,31 @@ $xpdo_meta_map['modCategoryClosure']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
+    ),
+  ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'ancestor' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'descendant' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

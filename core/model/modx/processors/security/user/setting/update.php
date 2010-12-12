@@ -2,7 +2,7 @@
 /**
  * Updates a user setting
  * 
- * @param integer $user The user to create the setting for
+ * @param integer $fk The user ID to create the setting for
  * @param string $key The setting key
  * @param string $value The setting value
  *
@@ -22,10 +22,7 @@ $setting = $modx->getObject('modUserSetting',array(
     'user' => $scriptProperties['fk'],
 ));
 if (empty($setting)) return $modx->error->failure($modx->lexicon('setting_err_nf'));
-$setting->remove();
 
-/* do this this way b/c of error with xpdo and compound PK values */
-$setting = $modx->newObject('modUserSetting');
 $setting->set('key',$scriptProperties['key']);
 $setting->set('user',$scriptProperties['fk']);
 $setting->fromArray($scriptProperties);

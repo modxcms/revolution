@@ -16,7 +16,7 @@ MODx.grid.AccessContext = function(config) {
             ,type: config.type || 'modAccessContext'
             ,target: config.context_key
         }
-        ,fields: ['id','target','target_name','principal_class','principal','principal_name','authority','policy','policy_name','menu']
+        ,fields: ['id','target','target_name','principal_class','principal','principal_name','authority','policy','policy_name','cls']
 		,type: 'modAccessContext'
 		,paging: true
         ,columns: [
@@ -36,6 +36,34 @@ MODx.grid.AccessContext = function(config) {
 Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
     combos: {}
     ,windows: {}
+
+    ,getMenu: function() {
+        var r = this.getSelectionModel().getSelected();
+        var p = r.data.cls;
+
+        var m = [];
+        if (this.getSelectionModel().getCount() > 1) {
+
+        } else {
+            if (p.indexOf('pedit') != -1) {
+                m.push({
+                    text: _('edit')
+                    ,handler: this.editAcl
+                });
+            }
+            if (p.indexOf('premove') != -1) {
+                if (m.length > 0) { m.push('-'); }
+                m.push({
+                    text: _('remove')
+                    ,handler: this.removeAcl
+                });
+            }
+        }
+
+        if (m.length > 0) {
+            this.addContextMenuItem(m);
+        }
+    }
 
     ,createAcl: function(itm,e) {
         var r = {

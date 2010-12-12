@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modResourceMetatag']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'site_content_metatags',
   'fields' => 
   array (
@@ -30,6 +31,31 @@ $xpdo_meta_map['modResourceMetatag']= array (
       'null' => false,
       'default' => 0,
       'index' => 'pk',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'content_id' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'metatag_id' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

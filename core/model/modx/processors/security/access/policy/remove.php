@@ -21,6 +21,6 @@ if ($policy->remove() == false) {
 }
 
 /* log manager action */
-$modx->logManagerAction('save_access_policy','modAccessPolicy',$policy->get('id'));
+$modx->logManagerAction('remove_access_policy','modAccessPolicy',$policy->get('id'));
 
 return $modx->error->success();

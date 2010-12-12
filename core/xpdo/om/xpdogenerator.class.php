@@ -272,6 +272,9 @@ abstract class xPDOGenerator {
                             if (isset ($this->model['package'])) {
                                 $this->map[$this->className]['package']= $this->model['package'];
                             }
+                            if (isset ($this->model['version'])) {
+                                $this->map[$this->className]['version']= $this->model['version'];
+                            }
                             break;
                         case 'table' :
                             $this->map[$this->className]['table']= $attrValue;
@@ -454,13 +457,23 @@ abstract class xPDOGenerator {
         $platform= $this->model['platform'];
         if (!is_dir($path)) {
             $newClassGeneration= true;
-            mkdir($path, 0777);
+            if ($this->manager->xpdo->getCacheManager()) {
+                if (!$this->manager->xpdo->cacheManager->writeTree($path)) {
+                    $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create model directory at {$path}");
+                    return false;
+                }
+            }
         }
         $ppath= $path;
         $ppath .= $platform;
         if (!is_dir($ppath)) {
             $newPlatformGeneration= true;
-            mkdir($ppath, 0777);
+            if ($this->manager->xpdo->getCacheManager()) {
+                if (!$this->manager->xpdo->cacheManager->writeTree($ppath)) {
+                    $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not create platform subdirectory {$ppath}");
+                    return false;
+                }
+            }
         }
         $model= $this->model;
         if (isset($this->model['phpdoc-package'])) {

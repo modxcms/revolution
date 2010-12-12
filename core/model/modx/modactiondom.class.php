@@ -40,10 +40,6 @@ class modActionDom extends modAccessibleSimpleObject {
                 $values = explode(',',$this->get('value'));
                 $rule = 'Ext.getCmp("'.$this->get('container').'").setLabel('.$this->xpdo->toJSON($fields).','.$this->xpdo->toJSON($values).');';
                 break;
-            case 'fieldDefault':
-            case 'fieldDefaultValue':
-                $rule = 'Ext.getCmp("'.$this->get('container').'").getForm().findField("'.$this->get('name').'").setValue("'.$this->get('value').'");';
-                break;
             case 'panelTitle':
             case 'tabTitle':
             case 'tabLabel':
@@ -64,8 +60,8 @@ class modActionDom extends modAccessibleSimpleObject {
                 $rule = 'MODx.addTab("'.$this->get('container').'",{title:"'.$title.'",id:"'.$this->get('name').'"});';
                 break;
             case 'tvMove':
-                $tvs = explode(',',$this->get('value'));
-                $rule = 'MODx.on("ready",function() { MODx.moveTV('.$this->xpdo->toJSON($tvs).',"'.$this->get('name').'"); });';
+                $tvs = explode(',',$this->get('name'));
+                $rule = 'MODx.moveTV('.$this->xpdo->toJSON($tvs).',"'.$this->get('value').'");';
                 break;
             default: break;
         }

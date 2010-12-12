@@ -405,6 +405,7 @@ class xPDOObject {
                 $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
             }
             if (is_object($criteria)) {
+                $criteria = $xpdo->addDerivativeCriteria($className, $criteria);
                 $row= null;
                 if ($xpdo->_cacheEnabled && $criteria->cacheFlag && $cacheFlag) {
                     $row= $xpdo->fromCache($criteria, $className);
@@ -463,6 +464,9 @@ class xPDOObject {
         if (!is_object($criteria)) {
             $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
         }
+        if (is_object($criteria)) {
+            $criteria = $xpdo->addDerivativeCriteria($className, $criteria);
+        }
         if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag) {
             $rows= $xpdo->fromCache($criteria);
             $fromCache = (is_array($rows) && !empty($rows));
@@ -507,12 +511,13 @@ class xPDOObject {
     public static function loadCollectionGraph(xPDO & $xpdo, $className, $graph, $criteria, $cacheFlag) {
         $objCollection = array();
         if ($query= $xpdo->newQuery($className, $criteria, $cacheFlag)) {
+            $query = $xpdo->addDerivativeCriteria($className, $query);
             $query->bindGraph($graph);
             $rows = array();
             $fromCache = false;
             $collectionCaching = (integer) $xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1);
             if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag) {
-                $rows= $xpdo->fromCache($criteria);
+                $rows= $xpdo->fromCache($query);
                 $fromCache = !empty($rows);
             }
             if (!$fromCache) {
@@ -680,7 +685,7 @@ class xPDOObject {
      */
     public function set($k, $v= null, $vType= '') {
         $set= false;
-        $callback= null;
+        $callback= '';
         $callable= !empty($vType) && is_callable($vType, false, $callback) ? true : false;
         $oldValue= null;
         if (is_string($k) && !empty($k)) {
@@ -1885,8 +1890,12 @@ class xPDOObject {
         } else {
             $fkMeta= $this->getFKDefinition($alias);
             if ($fkMeta) {
+                $relationCriteria = array($fkMeta['foreign'] => $this->get($fkMeta['local']));
                 if ($criteria === null) {
-                    $criteria= array ($fkMeta['foreign'] => $this->get($fkMeta['local']));
+                    $criteria= $relationCriteria;
+                } else {
+                    $criteria= $this->xpdo->newQuery($fkMeta['class'], $criteria);
+                    $criteria->andCondition($relationCriteria);
                 }
                 if ($collection= $this->xpdo->getCollection($fkMeta['class'], $criteria, $cacheFlag)) {
                     $this->_relatedObjects[$alias]= array_merge($this->_relatedObjects[$alias], $collection);

@@ -18,18 +18,29 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $namespace = $modx->getOption('namespace',$scriptProperties,'');
 
 /* build query */
+$subc = $modx->newQuery('modSystemSetting');
+$subc->setClassAlias('AreaSS');
+$subc->select(array(
+    'COUNT('.$modx->escape('AreaSS').'.'.$modx->escape('key').')',
+));
+$subc->where(array(
+    $modx->getSelectColumns('modSystemSetting','AreaSS','',array('area')).' = '.$modx->getSelectColumns('modSystemSetting','modSystemSetting','',array('area'))
+));
+$subc->prepare();
+$sql = $subc->toSql();
 $c = $modx->newQuery('modSystemSetting');
 $c->select(array(
-    '`key`',
+    $modx->escape('key'),
     'area',
 ));
+$c->select('('.$sql.') AS '.$modx->escape('ct'));
 if (!empty($namespace)) {
     $c->where(array(
         'modSystemSetting.namespace' => $namespace,
     ));
 }
-$c->groupby('`area`');
-$c->sortby('`area`',$dir);
+$c->groupby($modx->escape('area'));
+$c->sortby($modx->escape('area'),$dir);
 $areas = $modx->getCollection('modSystemSetting',$c);
 
 $list = array();
@@ -44,7 +55,7 @@ foreach ($areas as $area) {
         $name = $modx->lexicon($lex);
     }
     $list[] = array(
-        'd' => $name,
+        'd' => $name.' ('.$area->get('ct').')',
         'v' => $area->get('area'),
     );
 }

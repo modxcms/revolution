@@ -190,10 +190,8 @@ ul.x-tab-strip li.x-tab-strip-active  {
 
 .ext-gecko #modx-content ul.x-tab-strip li.x-tab-strip-active {
     background: -moz-linear-gradient(
-        center bottom,
-        rgb(94,94,94) 27%,
-        rgb(119,119,119) 100%,
-        rgb(102,102,102) 0%
+        #666666 30%,
+		#555555 69%
     );
 }
 
@@ -829,11 +827,15 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-grid3-row-expanded .x-grid3-row-body {
-	background-color:#f7f9f2;
-	border:1px solid #DDC3DF;
-	color:#868686;
-	margin:10px 15px 20px 0;
-	padding:10px;
+    background-color:#f7f9f2;
+    border:1px solid #DDC3DF;
+    color:#868686;
+    margin:10px 15px 20px 0;
+    padding:10px;
+    word-wrap: break-word;
+}
+.x-grid3-row-expanded .x-grid3-row-body .desc {
+    word-wrap: break-word;
 }
 
 .x-grid3-row-alt{
@@ -1987,6 +1989,12 @@ a.x-menu-item {
 .x-portal-space {
     border-bottom: 1px solid #afafaf;
     padding: 0;
+}
+.x-column {
+    float:left;
+    margin:0px 8px 0px 0px;
+    /*overflow:hidden;*/
+    padding:0px;
 }
 
 .x-window-tc {

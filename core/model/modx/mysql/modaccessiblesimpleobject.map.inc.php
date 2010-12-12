@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modAccessibleSimpleObject']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'fields' => 
   array (
     'id' => NULL,
@@ -20,6 +21,25 @@ $xpdo_meta_map['modAccessibleSimpleObject']= array (
       'null' => false,
       'index' => 'pk',
       'generated' => 'native',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'id' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
 );

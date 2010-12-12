@@ -11,6 +11,8 @@
  */
 $_lang['duplicate'] = 'ทำสำเนา';
 $_lang['entry'] = 'เอนทรี';
+$_lang['entry_create'] = 'สร้างเอนทรี';
+$_lang['entry_err_ae'] = 'มีเอนทรีนี้อยู่แล้ว!';
 $_lang['entry_err_nf'] = 'ไม่พบเอนทรี';
 $_lang['entry_err_ns'] = 'ไม่มีการระบุเอนทรี';
 $_lang['entry_err_save'] = 'เกิดข้อผิดพลาดขณะที่พยายามบันทึกเอนทรีของ Lexicon';

@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modUserSetting']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'user_settings',
   'fields' => 
   array (
@@ -71,6 +72,31 @@ $xpdo_meta_map['modUserSetting']= array (
       'phptype' => 'timestamp',
       'null' => false,
       'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'user' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'key' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

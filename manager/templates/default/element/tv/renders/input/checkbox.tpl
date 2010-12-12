@@ -20,8 +20,8 @@ MODx.load({
         ,id: 'tv{$tv->id}-{$k}'
         ,boxLabel: '{$item.text|escape:"javascript"}'
         ,checked: {if $item.checked}true{else}false{/if}
-        ,inputValue: '{$item.value|escape:"javascript"}'
-        ,value: '{$item.value|escape:"javascript"}'
+        ,inputValue: {if $item.value !== 0 AND $item.value !== null}'{$item.value|escape:"javascript"}'{else}0{/if}
+        ,value: {if $item.value !== 0 AND $item.value !== null}'{$item.value|escape:"javascript"}'{else}0{/if}
     {literal}}{/literal}{if NOT $smarty.foreach.cbs.last},{/if}
     {/foreach}]
 {literal}}{/literal});

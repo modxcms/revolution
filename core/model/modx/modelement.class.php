@@ -93,7 +93,7 @@ class modElement extends modAccessibleSimpleObject {
      * @var array Optional filters that can be used during processing.
      * @access private
      */
-    public $_filters= array ();
+    public $_filters= array('input' => null, 'output' => null);
 
     /**
      * @var array A list of invalid characters in the name of an Element.
@@ -249,7 +249,7 @@ class modElement extends modAccessibleSimpleObject {
             $this->_output = $this->xpdo->elementCache[$this->_tag];
             $this->_processed = true;
         } else {
-	    $this->filterInput();
+	        $this->filterInput();
             $this->getContent(is_string($content) ? array('content' => $content) : array());
         }
         return $this->_result;
@@ -267,15 +267,11 @@ class modElement extends modAccessibleSimpleObject {
     }
 
     /**
-     * Apply an input filter to an element.
+     * Get an input filter instance configured for this Element.
      *
-     * This is called by default in {@link modElement::process()} after the
-     * element properties have been parsed.
-     *
-     * @access protected
+     * @return modInputFilter|null An input filter instance (or null if one cannot be loaded).
      */
-    public function filterInput() {
-        $filter= null;
+    public function & getInputFilter() {
         if (!isset ($this->_filters['input']) || !($this->_filters['input'] instanceof modInputFilter)) {
             if (!$inputFilterClass= $this->get('input_filter')) {
                 $inputFilterClass = $this->xpdo->getOption('input_filter',null,'filters.modInputFilter');
@@ -286,8 +282,40 @@ class modElement extends modAccessibleSimpleObject {
                 }
             }
         }
-        if (isset ($this->_filters['input']) && $this->_filters['input'] instanceof modInputFilter) {
-            $this->_filters['input']->filter($this);
+        return $this->_filters['input'];
+    }
+
+    /**
+     * Get an output filter instance configured for this Element.
+     *
+     * @return modOutputFilter|null An output filter instance (or null if one cannot be loaded).
+     */
+    public function & getOutputFilter() {
+        if (!isset ($this->_filters['output']) || !($this->_filters['output'] instanceof modOutputFilter)) {
+            if (!$outputFilterClass= $this->get('output_filter')) {
+                $outputFilterClass = $this->xpdo->getOption('output_filter',null,'filters.modOutputFilter');
+            }
+            if ($filterClass= $this->xpdo->loadClass($outputFilterClass, '', false, true)) {
+                if ($filter= new $filterClass($this->xpdo)) {
+                    $this->_filters['output']= $filter;
+                }
+            }
+        }
+        return $this->_filters['output'];
+    }
+
+    /**
+     * Apply an input filter to an element.
+     *
+     * This is called by default in {@link modElement::process()} after the
+     * element properties have been parsed.
+     *
+     * @access protected
+     */
+    public function filterInput() {
+        $filter = $this->getInputFilter();
+        if ($filter !== null && $filter instanceof modInputFilter) {
+            $filter->filter($this);
         }
     }
 
@@ -301,19 +329,9 @@ class modElement extends modAccessibleSimpleObject {
      * @access protected
      */
     public function filterOutput() {
-        $filter= null;
-        if (!isset ($this->_filters['output']) || !($this->_filters['output'] instanceof modOutputFilter)) {
-            if (!$outputFilterClass= $this->get('output_filter')) {
-                $outputFilterClass = $this->xpdo->getOption('output_filter',null,'filters.modOutputFilter');
-            }
-            if ($filterClass= $this->xpdo->loadClass($outputFilterClass, '', false, true)) {
-                if ($filter= new $filterClass($this->xpdo)) {
-                    $this->_filters['output']= $filter;
-                }
-            }
-        }
-        if (isset ($this->_filters['output']) && $this->_filters['output'] instanceof modOutputFilter) {
-            $this->_filters['output']->filter($this);
+        $filter = $this->getOutputFilter();
+        if ($filter !== null && $filter instanceof modOutputFilter) {
+            $filter->filter($this);
         }
     }
 
@@ -614,7 +632,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Turns associative arrays into placeholders in the scope of this element.
      *
-     * @access public
+     * @deprecated To be removed in 2.1. See xPDO::toPlaceholders() for similar functionality.
      * @param array $placeholders An associative array of placeholders to set.
      * @return array An array of placeholders overwritten from the containing
      * scope you can use to restore values from, or an empty array if no

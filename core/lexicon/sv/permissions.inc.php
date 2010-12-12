@@ -9,12 +9,14 @@
 $_lang['perm.about_desc'] = 'Om-sidan.';
 $_lang['perm.access_permissions_desc'] = 'Alla sidor och händelser som har med åtkomstkontroll att göra.';
 $_lang['perm.actions_desc'] = 'Händelsesidan.';
-$_lang['perm.add_children_desc'] = 'Att lägga till alla resurser som barn till den specificerade resursen.';
+$_lang['perm.add_children_desc'] = 'Att lägga till alla resurser som barn till den specificerade resursen eller element till en kategori.';
 $_lang['perm.change_password_desc'] = 'Användaren kan ändra sitt lösenord.';
 $_lang['perm.change_profile_desc'] = 'Användaren kan ändra sin profil.';
 $_lang['perm.charsets_desc'] = 'Att se en lista med teckenuppsättningar.';
 $_lang['perm.class_map_desc'] = 'Att se en lista med klasser i klasskartan.';
+$_lang['perm.components_desc'] = 'Att se komponentmenyn.';
 $_lang['perm.content_types_desc'] = 'Innehållstypssidan.';
+$_lang['perm.copy_desc'] = 'Möjligheten att kopiera ett objekt.';
 $_lang['perm.countries_desc'] = 'Att se en lista med länder.';
 $_lang['perm.create_desc'] = 'Grundläggande "skapa"-behörighet för nya objekt.';
 $_lang['perm.credits_desc'] = 'Se erkännandesidan.';

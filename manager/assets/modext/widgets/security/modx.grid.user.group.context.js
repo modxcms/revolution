@@ -1,6 +1,11 @@
 
 MODx.grid.UserGroupContext = function(config) {
     config = config || {};
+    this.exp = new Ext.grid.RowExpander({
+        tpl : new Ext.Template(
+            '<p class="desc">{permissions}</p>'
+        )
+    });
     Ext.applyIf(config,{
         id: 'modx-grid-user-group-contexts'
         ,url: MODx.config.connectors_url+'security/access/usergroup/context.php'
@@ -8,10 +13,11 @@ MODx.grid.UserGroupContext = function(config) {
             action: 'getList'
             ,usergroup: config.usergroup
         }
-        ,fields: ['id','target','principal','authority','authority_name','policy','policy_name','menu']
+        ,fields: ['id','target','principal','authority','authority_name','policy','policy_name','permissions','cls']
         ,paging: true
         ,hideMode: 'offsets'
-        ,columns: [{
+        ,plugins: [this.exp]
+        ,columns: [this.exp,{
             header: _('context')
             ,dataIndex: 'target'
             ,width: 120
@@ -41,6 +47,10 @@ MODx.grid.UserGroupContext = function(config) {
             ,id: 'modx-ugc-policy-filter'
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
+            ,baseParams: {
+                action: 'getList'
+                ,group: 'Admin'
+            }
             ,listeners: {
                 'select': {fn:this.filterPolicy,scope:this}
             }
@@ -57,6 +67,34 @@ MODx.grid.UserGroupContext = function(config) {
 Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
     combos: {}
     ,windows: {}
+
+    ,getMenu: function() {
+        var r = this.getSelectionModel().getSelected();
+        var p = r.data.cls;
+
+        var m = [];
+        if (this.getSelectionModel().getCount() > 1) {
+
+        } else {
+            if (p.indexOf('pedit') != -1) {
+                m.push({
+                    text: _('access_context_update')
+                    ,handler: this.updateAcl
+                });
+            }
+            if (p.indexOf('premove') != -1) {
+                if (m.length > 0) { m.push('-'); }
+                m.push({
+                    text: _('access_context_remove')
+                    ,handler: this.confirm.createDelegate(this,["remove"])
+                });
+            }
+        }
+
+        if (m.length > 0) {
+            this.addContextMenuItem(m);
+        }
+    }
     
     ,filterContext: function(cb,rec,ri) {
         this.getStore().baseParams['context'] = rec.data['key'];
@@ -148,6 +186,7 @@ MODx.window.CreateUGAccessContext = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Admin,Object'
                 ,combo: '1'
             }
             ,allowBlank: false
@@ -195,6 +234,7 @@ MODx.window.UpdateUGAccessContext = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'getList'
+                ,group: 'Admin,Object'
                 ,combo: '1'
             }
             ,anchor: '90%'

@@ -17,6 +17,7 @@ $modx->lexicon->load('resource');
 /* setup default properties */
 $duplicateChildren = !empty($scriptProperties['duplicate_children']);
 $newName = !empty($scriptProperties['name']) ? $scriptProperties['name'] : '';
+$prefixDuplicate = !empty($scriptProperties['prefixDuplicate']) ? true : false;
 
 /* get resource */
 $oldResource = $modx->getObject('modResource',$scriptProperties['id']);
@@ -35,6 +36,7 @@ if ($parent && !$parent->checkPolicy('add_children')) {
 $newResource = $oldResource->duplicate(array(
     'newName' => $newName,
     'duplicateChildren' => $duplicateChildren,
+    'prefixDuplicate' => $prefixDuplicate,
 ));
 if (!($newResource instanceof modResource)) {
     return $newResource;

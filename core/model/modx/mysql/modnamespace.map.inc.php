@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modNamespace']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'namespaces',
   'fields' => 
   array (
@@ -27,6 +28,25 @@ $xpdo_meta_map['modNamespace']= array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'default' => '',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'name' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'composites' => 

@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modAccessAction']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'access_actions',
   'aggregates' => 
   array (

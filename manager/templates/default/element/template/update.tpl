@@ -1,2 +1,2 @@
-{extends file='element/template/mutate.tpl'}
-{modblock name='ab'}{/modblock}
+<div id="modx-panel-template-div"></div>
+{$onTempFormPrerender}

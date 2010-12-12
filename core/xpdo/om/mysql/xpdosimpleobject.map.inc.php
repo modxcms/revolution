@@ -28,13 +28,13 @@
  * @package xpdo
  * @subpackage om.mysql
  */
-$xpdo_meta_map = array (
-    'xPDOSimpleObject' => array (
+$xpdo_meta_map = array(
+    'xPDOSimpleObject' => array(
         'table' => null,
-        'fields' => array (
+        'fields' => array(
             'id' => null,
         ),
-        'fieldMeta' => array (
+        'fieldMeta' => array(
             'id' => array(
                 'dbtype' => 'INTEGER',
                 'phptype' => 'integer',
@@ -44,13 +44,22 @@ $xpdo_meta_map = array (
                 'attributes' => 'unsigned',
             )
         ),
-        'indexes' => array (
-            'PRIMARY' => array (
-                'columns' => array(
-                    'id' => array()
-                ),
+        'indexes' => array(
+            'PRIMARY' =>
+            array(
+                'alias' => 'PRIMARY',
                 'primary' => true,
-                'unique' => true
+                'unique' => true,
+                'type' => 'BTREE',
+                'columns' =>
+                array(
+                    'id' =>
+                    array(
+                        'length' => '',
+                        'collation' => 'A',
+                        'null' => false,
+                    ),
+                ),
             )
         )
     )

@@ -93,11 +93,12 @@ class xPDOGenerator_mysql extends xPDOGenerator {
             $baseClass= 'xPDOObject';
         if (empty ($tablePrefix))
             $tablePrefix= $this->manager->xpdo->config[xPDO::OPT_TABLE_PREFIX];
+        $schemaVersion = xPDO::SCHEMA_VERSION;
         $xmlContent = array();
         $xmlContent[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-        $xmlContent[] = "<model package=\"{$package}\" baseClass=\"{$baseClass}\" platform=\"mysql\" defaultEngine=\"MyISAM\">";
+        $xmlContent[] = "<model package=\"{$package}\" baseClass=\"{$baseClass}\" platform=\"mysql\" defaultEngine=\"MyISAM\" version=\"{$schemaVersion}\">";
         //read list of tables
-        $dbname= $this->manager->xpdo->config['dbname'];
+        $dbname= $this->manager->xpdo->escape($this->manager->xpdo->config['dbname']);
         $tableLike= ($tablePrefix && $restrictPrefix) ? " LIKE '{$tablePrefix}%'" : '';
         $tablesStmt= $this->manager->xpdo->prepare("SHOW TABLES FROM {$dbname}{$tableLike}");
         $tablesStmt->execute();
@@ -162,7 +163,8 @@ class xPDOGenerator_mysql extends xPDOGenerator {
             } else {
                 $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error retrieving columns for table ' .  $table[0]);
             }
-            $indexesStmt= $this->manager->xpdo->query('SHOW INDEXES FROM ' . $this->manager->xpdo->escape($table[0]));
+            $whereClause= ($extends === 'xPDOSimpleObject' ? " WHERE `Key_name` != 'PRIMARY'" : '');
+            $indexesStmt= $this->manager->xpdo->query('SHOW INDEXES FROM ' . $this->manager->xpdo->escape($table[0]) . $whereClause);
             if ($indexesStmt) {
                 $indexes= $indexesStmt->fetchAll(PDO::FETCH_ASSOC);
                 if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Indices for table {$table[0]}: " . print_r($indexes, true));
@@ -177,15 +179,16 @@ class xPDOGenerator_mysql extends xPDOGenerator {
                         if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Details of index: " . print_r($index, true));
                         foreach ($index as $columnSeq => $column) {
                             if ($columnSeq == 1) {
-                                $primary = $column['Key_name'] == 'PRIMARY' ? 'true' : 'false';
+                                $keyName = $column['Key_name'];
+                                $primary = $keyName == 'PRIMARY' ? 'true' : 'false';
                                 $unique = empty($column['Non_unique']) ? 'true' : 'false';
                                 $packed = empty($column['Packed']) ? 'false' : 'true';
                                 $type = $column['Index_type'];
                             }
                             $null = $column['Null'] == 'YES' ? 'true' : 'false';
-                            $xmlIndexCols[]= "\t\t\t<column key=\"{$column['Column_name']}\" collation=\"{$column['Collation']}\" null=\"{$null}\" />";
+                            $xmlIndexCols[]= "\t\t\t<column key=\"{$column['Column_name']}\" length=\"{$column['Sub_part']}\" collation=\"{$column['Collation']}\" null=\"{$null}\" />";
                         }
-                        $xmlIndices[]= "\t\t<index alias=\"{$column['Key_name']}\" name=\"{$column['Key_name']}\" primary=\"{$primary}\" unique=\"{$unique}\">";
+                        $xmlIndices[]= "\t\t<index alias=\"{$keyName}\" name=\"{$keyName}\" primary=\"{$primary}\" unique=\"{$unique}\" type=\"{$type}\" >";
                         $xmlIndices[]= implode("\n", $xmlIndexCols);
                         $xmlIndices[]= "\t\t</index>";
                     }

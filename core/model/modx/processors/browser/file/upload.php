@@ -12,9 +12,19 @@ $modx->lexicon->load('file');
 
 if (empty($scriptProperties['path'])) return $modx->error->failure($modx->lexicon('file_folder_err_ns'));
 
-/* get base paths and sanitize incoming paths */
-$modx->getService('fileHandler','modFileHandler');
-$root = $modx->fileHandler->getBasePath();
+/* get working context */
+$wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
+$root = $modx->fileHandler->getBasePath(false);
 $directory = $modx->fileHandler->make($root.$scriptProperties['path']);
 
 /* verify target path is a directory and writable */
@@ -24,17 +34,17 @@ if (!($directory->isReadable()) || !$directory->isWritable()) {
 }
 
 $modx->context->prepare();
-$allowedFileTypes = explode(',',$modx->context->getOption('upload_files'));
-$allowedFileTypes = array_merge(explode(',',$modx->context->getOption('upload_images')),explode(',',$modx->context->getOption('upload_media')),explode(',',$modx->context->getOption('upload_flash')),$allowedFileTypes);
+$allowedFileTypes = explode(',',$modx->getOption('upload_files'));
+$allowedFileTypes = array_merge(explode(',',$modx->getOption('upload_images')),explode(',',$modx->getOption('upload_media')),explode(',',$modx->getOption('upload_flash')),$allowedFileTypes);
 $allowedFileTypes = array_unique($allowedFileTypes);
-$maxFileSize = $modx->context->getOption('upload_maxsize',1048576);
+$maxFileSize = $modx->getOption('upload_maxsize',1048576);
 
 /* loop through each file and upload */
 foreach ($_FILES as $file) {
     if ($file['error'] != 0) continue;
     if (empty($file['name'])) continue;
     $ext = @pathinfo($file['name'],PATHINFO_EXTENSION);
-    
+
     if (empty($ext) || !in_array($ext,$allowedFileTypes)) {
         return $modx->error->failure($modx->lexicon('file_err_ext_not_allowed',array(
             'ext' => $ext,

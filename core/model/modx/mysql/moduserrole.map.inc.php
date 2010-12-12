@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modUserRole']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'user_roles',
   'fields' => 
   array (

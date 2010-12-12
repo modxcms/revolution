@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modUserProfile']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'user_attributes',
   'fields' => 
   array (
@@ -224,8 +225,7 @@ $xpdo_meta_map['modUserProfile']= array (
     ),
     'comment' => 
     array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
+      'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -245,6 +245,25 @@ $xpdo_meta_map['modUserProfile']= array (
       'null' => true,
       'index' => 'fulltext',
       'indexgrp' => 'extended',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'internalKey' => 
+    array (
+      'alias' => 'internalKey',
+      'primary' => false,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'internalKey' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

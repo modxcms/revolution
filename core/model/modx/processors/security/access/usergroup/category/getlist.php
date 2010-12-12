@@ -47,7 +47,8 @@ $c->select('
     `modAccessCategory`.*,
     `Target`.`category` AS `name`,
     CONCAT(`Role`.`name`," - ",`modAccessCategory`.`authority`) AS `authority_name`,
-    `Policy`.`name` AS `policy_name`
+    `Policy`.`name` AS `policy_name`,
+    `Policy`.`data` AS `policy_data`
 ');
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
@@ -59,6 +60,18 @@ foreach ($acls as $acl) {
     $aclArray = $acl->toArray();
     if (empty($aclArray['name'])) $aclArray['name'] = '('.$modx->lexicon('none').')';
 
+    /* get permissions list */
+    $data = $aclArray['policy_data'];
+    unset($aclArray['policy_data']);
+    $data = $modx->fromJSON($data);
+    if (!empty($data)) {
+        $permissions = array();
+        foreach ($data as $perm => $v) {
+            $permissions[] = $perm;
+        }
+        $aclArray['permissions'] = implode(', ',$permissions);
+    }
+    
     $aclArray['menu'] = array(
         array(
             'text' => $modx->lexicon('access_category_update'),

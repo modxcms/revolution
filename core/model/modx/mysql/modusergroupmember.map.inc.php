@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modUserGroupMember']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'member_groups',
   'fields' => 
   array (
@@ -41,6 +42,25 @@ $xpdo_meta_map['modUserGroupMember']= array (
       'null' => false,
       'default' => 1,
       'index' => 'index',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'role' => 
+    array (
+      'alias' => 'role',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'role' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

@@ -19,9 +19,9 @@ $c->select(array(
     'modAccessPermission.id',
     'modAccessPermission.name',
     'modAccessPermission.description',
-    'Policy.lexicon',
+    'Template.lexicon',
 ));
-$c->leftJoin('modAccessPolicy','Policy');
+$c->leftJoin('modAccessPolicyTemplate','Template');
 $c->query['DISTINCT'] = 'DISTINCT';
 $count = $modx->getCount('modAccessPermission',$c);
 $c->groupby('modAccessPermission.name');

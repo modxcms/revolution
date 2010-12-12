@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modAccessTemplateVar']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'access_templatevars',
   'aggregates' => 
   array (

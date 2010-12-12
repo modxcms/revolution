@@ -295,7 +295,7 @@ class modX extends xPDO {
 
     /**
      * Sanitizes a string
-     * 
+     *
      * @param string $str The string to sanitize
      * @param array $chars An array of chars to remove
      * @param string $allowedTags A list of tags to allow.
@@ -330,7 +330,7 @@ class modX extends xPDO {
      */
     public function __construct($configPath= '', array $options = array()) {
         global $database_type, $database_server, $dbase, $database_user,
-               $database_password, $database_connection_charset, $table_prefix;
+               $database_password, $database_connection_charset, $table_prefix, $site_id;
         modX :: protect();
         if (empty ($configPath)) {
             $configPath= MODX_CORE_PATH . 'config/';
@@ -401,13 +401,17 @@ class modX extends xPDO {
             $this->getConfig();
             $this->_initContext($contextKey);
 
-            $extPackages = $this->context->getOption('extension_packages');
+            $extPackages = $this->getOption('extension_packages');
+            $extPackages = $this->fromJSON($extPackages);
             if (!empty($extPackages)) {
-                $extPackages= explode(',', $extPackages);
                 foreach ($extPackages as $extPackage) {
-                    $exploded= explode(':', $extPackage, 2);
-                    if (!empty($exploded)) {
-                        $this->addPackage($exploded[0], $exploded[1]);
+                    if (!is_array($extPackage)) continue;
+
+                    foreach ($extPackage as $packageName => $package) {
+                        if (!empty($package) && !empty($package['path'])) {
+                            $tblPrefix = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
+                            $this->addPackage($packageName,$package['path'],$tblPrefix);
+                        }
                     }
                 }
             }
@@ -463,7 +467,7 @@ class modX extends xPDO {
     public function getCacheManager($class= 'cache.xPDOCacheManager', $options = array('path' => XPDO_CORE_PATH, 'ignorePkg' => true)) {
         if ($this->cacheManager === null) {
             if ($this->loadClass($class, $options['path'], $options['ignorePkg'], true)) {
-                $cacheManagerClass= $this->getOption('modCacheManager.class', array(), 'modCacheManager');
+                $cacheManagerClass= $this->getOption('modCacheManager.class', null, 'modCacheManager');
                 if ($className= $this->loadClass($cacheManagerClass, '', false, true)) {
                     if ($this->cacheManager= new $className ($this)) {
                         $this->_cacheEnabled= true;
@@ -609,8 +613,14 @@ class modX extends xPDO {
      * calls prepend the parent keys.
      * @param string $separator A separator to place in between the prefixes and keys. Default is a
      * dot or period: '.'.
+     * @param boolean $restore Set to true if you want overwritten placeholder values returned.
+     * @return array A multi-dimensional array containing up to two elements: 'keys' which always
+     * contains an array of placeholder keys that were set, and optionally, if the restore parameter
+     * is true, 'restore' containing an array of placeholder values that were overwritten by the method.
      */
-    public function toPlaceholders($subject, $prefix= '', $separator= '.') {
+    public function toPlaceholders($subject, $prefix= '', $separator= '.', $restore= false) {
+        $keys = array();
+        $restored = array();
         if (is_object($subject)) {
             if ($subject instanceof xPDOObject) {
                 $subject= $subject->toArray();
@@ -620,9 +630,18 @@ class modX extends xPDO {
         }
         if (is_array($subject)) {
             foreach ($subject as $key => $value) {
-                $this->toPlaceholder($key, $value, $prefix, $separator);
+                $rv = $this->toPlaceholder($key, $value, $prefix, $separator, $restore);
+                if (isset($rv['keys'])) {
+                    foreach ($rv['keys'] as $rvKey) $keys[] = $rvKey;
+                }
+                if ($restore === true && isset($rv['restore'])) {
+                    $restored = array_merge($restored, $rv['restore']);
+                }
             }
         }
+        $return = array('keys' => $keys);
+        if ($restore === true) $return['restore'] = $restored;
+        return $return;
     }
 
     /**
@@ -634,16 +653,27 @@ class modX extends xPDO {
      * parent keys as well.
      * @param string $separator A separator placed in between the prefix and the key. Default is a
      * dot or period: '.'.
+     * @param boolean $restore Set to true if you want overwritten placeholder values returned.
+     * @return array A multi-dimensional array containing up to two elements: 'keys' which always
+     * contains an array of placeholder keys that were set, and optionally, if the restore parameter
+     * is true, 'restore' containing an array of placeholder values that were overwritten by the method.
      */
-    public function toPlaceholder($key, $value, $prefix= '', $separator= '.') {
+    public function toPlaceholder($key, $value, $prefix= '', $separator= '.', $restore= false) {
+        $return = array('keys' => array());
+        if ($restore === true) $return['restore'] = array();
         if (!empty($prefix) && !empty($separator)) {
             $prefix .= $separator;
         }
         if (is_array($value) || is_object($value)) {
-            $this->toPlaceholders($value, "{$prefix}{$key}");
+            $return = $this->toPlaceholders($value, "{$prefix}{$key}", $separator, $restore);
         } elseif (is_scalar($value)) {
+            $return['keys'][] = "{$prefix}{$key}";
+            if ($restore === true && array_key_exists("{$prefix}{$key}", $this->placeholders)) {
+                $return['restore']["{$prefix}{$key}"] = $this->getPlaceholder("{$prefix}{$key}");
+            }
             $this->setPlaceholder("{$prefix}{$key}", $value);
         }
+        return $return;
     }
 
     /**
@@ -733,7 +763,7 @@ class modX extends xPDO {
                 }
             }
 
-            if (!empty($url) && $this->context->getOption('xhtml_urls','0')) {
+            if (!empty($url) && $this->getOption('xhtml_urls',null,false)) {
                 $url= preg_replace("/&(?!amp;)/","&amp;", $url);
             }
         } else {
@@ -758,13 +788,14 @@ class modX extends xPDO {
         $errorPageTitle = $this->getOption('error_pagetitle', $options, 'Error 503: Site temporarily unavailable');
         $errorMessage = $this->getOption('error_message', $options, '<h1>' . $this->getOption('site_name', $options, 'Error 503') . '</h1><p>Site temporarily unavailable.</p>');
         echo "<html><head><title>{$errorPageTitle}</title></head><body>{$errorMessage}</body></html>";
+        @session_write_close();
         exit();
     }
 
     /**
-     * Sends a redirect to the specified URL using the specified method.
+     * Sends a redirect to the specified URL using the specified options.
      *
-     * Valid $type values include:
+     * Valid 'type' option values include:
      *    REDIRECT_REFRESH  Uses the header refresh method
      *    REDIRECT_META  Sends a a META HTTP-EQUIV="Refresh" tag to the output
      *    REDIRECT_HEADER  Uses the header location method
@@ -772,14 +803,19 @@ class modX extends xPDO {
      * REDIRECT_HEADER is the default.
      *
      * @param string $url The URL to redirect the client browser to.
-     * @param integer $count_attempts The number of times to attempt redirection.
-     * @param string $type The type of redirection to attempt.
+     * @param array|boolean $options An array of options for the redirect OR
+     * indicates if redirect attempts should be counted and limited to 3 (latter is deprecated
+     * usage; use count_attempts in options array).
+     * @param string $type The type of redirection to attempt (deprecated, use type in
+     * options array).
+     * @param string $responseCode The type of HTTP response code HEADER to send for the
+     * redirect (deprecated, use responseCode in options array)
      */
-    public function sendRedirect($url, $count_attempts= 0, $type= '', $responseCode = '') {
+    public function sendRedirect($url, $options= false, $type= '', $responseCode = '') {
         if (!$this->getResponse()) {
             $this->log(modX::LOG_LEVEL_FATAL, "Could not load response class.");
         }
-        $this->response->sendRedirect($url, $count_attempts, $type, $responseCode);
+        $this->response->sendRedirect($url, $options, $type, $responseCode);
     }
 
     /**
@@ -798,10 +834,41 @@ class modX extends xPDO {
         } elseif (!is_array($options)) {
             $options = array();
         }
+        $this->elementCache = array();
         if ($idInt > 0) {
+            $merge = array_key_exists('merge', $options) && !empty($options['merge']);
+            $currentResource = array();
+            if ($merge) {
+                $excludes = array_merge(
+                    explode(',', $this->getOption('forward_merge_excludes', $options, 'type,published,class_key,context_key')),
+                    array(
+                        'content'
+                        ,'pub_date'
+                        ,'unpub_date'
+                        ,'richtext'
+                        ,'_content'
+                        ,'_processed'
+                    )
+                );
+                reset($this->resource->_fields);
+                while (list($fkey, $fval) = each($this->resource->_fields)) {
+                    if (!in_array($fkey, $excludes)) {
+                        if (is_scalar($fval) && $fval !== '') {
+                            $currentResource[$fkey] = $fval;
+                        } elseif (is_array($fval) && count($fval) === 5 && $fval[1] !== '') {
+                            $currentResource[$fkey] = $fval;
+                        }
+                    }
+                }
+            }
             $this->resource= $this->request->getResource('id', $idInt);
             if ($this->resource) {
-                $this->resourceIdentifier= $idInt;
+                if ($merge && !empty($currentResource)) {
+                    $this->resource->_fields = array_merge($this->resource->_fields, $currentResource);
+                    $this->elementCache = array();
+                    unset($currentResource);
+                }
+                $this->resourceIdentifier= $this->resource->get('id');
                 $this->resourceMethod= 'id';
                 if (isset($options['response_code']) && !empty($options['response_code'])) {
                     header($options['response_code']);
@@ -812,9 +879,9 @@ class modX extends xPDO {
             $options= array_merge(
                 array(
                     'error_type' => '404'
-                    ,'error_header' => $this->context->getOption('error_page_header', 'HTTP/1.1 404 Not Found')
-                    ,'error_pagetitle' => $this->context->getOption('error_page_pagetitle', 'Error 404: Page not found')
-                    ,'error_message' => $this->context->getOption('error_page_message', '<h1>Page not found</h1><p>The page you requested was not found.</p>')
+                    ,'error_header' => $this->getOption('error_page_header', $options,'HTTP/1.1 404 Not Found')
+                    ,'error_pagetitle' => $this->getOption('error_page_pagetitle', $options,'Error 404: Page not found')
+                    ,'error_message' => $this->getOption('error_page_message', $options,'<h1>Page not found</h1><p>The page you requested was not found.</p>')
                 ),
                 $options
             );
@@ -834,16 +901,16 @@ class modX extends xPDO {
         if (!is_array($options)) $options = array();
         $options= array_merge(
             array(
-                'response_code' => $this->getOption('error_page_header', $options,$this->context->getOption('error_page_header','HTTP/1.1 404 Not Found'))
+                'response_code' => $this->getOption('error_page_header', $options,$this->getOption('error_page_header','HTTP/1.1 404 Not Found'))
                 ,'error_type' => '404'
-                ,'error_header' => $this->context->getOption('error_page_header', 'HTTP/1.1 404 Not Found')
-                ,'error_pagetitle' => $this->context->getOption('error_page_pagetitle', 'Error 404: Page not found')
-                ,'error_message' => $this->context->getOption('error_page_message', '<h1>Page not found</h1><p>The page you requested was not found.</p>')
+                ,'error_header' => $this->getOption('error_page_header', $options,'HTTP/1.1 404 Not Found')
+                ,'error_pagetitle' => $this->getOption('error_page_pagetitle', $options,'Error 404: Page not found')
+                ,'error_message' => $this->getOption('error_page_message', $options,'<h1>Page not found</h1><p>The page you requested was not found.</p>')
             ),
             $options
         );
         $this->invokeEvent('OnPageNotFound', $options);
-        $this->sendForward($this->getOption('error_page', $options, $this->context->getOption('error_page','404')), $options);
+        $this->sendForward($this->getOption('error_page', $options, $this->getOption('error_page','404')), $options);
     }
 
     /**
@@ -860,9 +927,9 @@ class modX extends xPDO {
             array(
                 'response_code' => $this->getOption('unauthorized_page_header' ,$options ,'HTTP/1.1 401 Unauthorized')
                 ,'error_type' => '401'
-                ,'error_header' => $this->context->getOption('unauthorized_page_header', 'HTTP/1.1 401 Unauthorized')
-                ,'error_pagetitle' => $this->context->getOption('unauthorized_page_pagetitle', 'Error 401: Unauthorized')
-                ,'error_message' => $this->context->getOption('unauthorized_page_message', '<h1>Unauthorized</h1><p>You are not authorized to view the requested content.</p>')
+                ,'error_header' => $this->getOption('unauthorized_page_header', $options,'HTTP/1.1 401 Unauthorized')
+                ,'error_pagetitle' => $this->getOption('unauthorized_page_pagetitle',$options, 'Error 401: Unauthorized')
+                ,'error_message' => $this->getOption('unauthorized_page_message', $options,'<h1>Unauthorized</h1><p>You are not authorized to view the requested content.</p>')
             ),
             $options
         );
@@ -1303,32 +1370,63 @@ class modX extends xPDO {
      * - location - A prefix to load processor files from, will prepend to the
      * action parameter.
      *
+     * @deprecated 2.0.5 Will be removed in 2.1.
      * @param array $options An array of options.
      * @return mixed $result The result of the processor.
      */
     public function executeProcessor($options) {
+        $scriptProperties = $options;
+        unset($scriptProperties['action'],$scriptProperties['location'],$scriptProperties['processors_path']);
+        $response = $this->runProcessor('',$scriptProperties,$options);
+        return $response->getResponse();
+    }
+
+    /**
+     * Loads and runs a specific processor.
+     *
+     * @param string $action The processor to run, eg: context/update
+     * @param array $scriptProperties Optional. An array of parameters to pass to the processor.
+     * @param array $options Optional. An array of options for running the processor, such as:
+     *
+     * - processors_path - If specified, will override the default MODx processors path.
+     * - location - A prefix to load processor files from, will prepend to the action parameter
+     * (Note: location will be deprecated in future Revolution versions.)
+     *
+     * @return mixed The result of the processor.
+     */
+    public function runProcessor($action = '',$scriptProperties = array(),$options = array()) {
         $result = null;
-        if (is_array($options) && !empty($options) && isset($options['action']) && $this->getRequest()) {
-            $processor = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
-            if (isset($options['location']) && !empty($options['location'])) $processor .= $options['location'] . '/';
-            $processor .= str_replace('../', '', $options['action']) . '.php';
-            if (file_exists($processor)) {
-                if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
-                if (!isset($this->error)) $this->request->loadErrorHandler();
-
-                /* create scriptProperties array from HTTP GPC vars */
-                if (!isset($_POST)) $_POST = array();
-                if (!isset($_GET)) $_GET = array();
-                $scriptProperties = array_merge($_GET,$_POST);
-                if (isset($_FILES) && !empty($_FILES)) {
-                    $scriptProperties = array_merge($scriptProperties,$_FILES);
-                }
-
-                $modx =& $this;
-                $result = include $processor;
+        /* backwards compat for $options['action'] */
+        if (empty($action)) {
+            if (!empty($options['action'])) {
+                $action = $options['action'];
             } else {
-                $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processor} does not exist; " . print_r($options, true));
+                return $result;
             }
+        }
+
+        /* calculate processor file path from options and action */
+        $processor = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
+        if (isset($options['location']) && !empty($options['location'])) $processor .= $options['location'] . '/';
+        $processor .= str_replace('../', '', $action . '.php');
+
+        if (file_exists($processor)) {
+            if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
+            if (!isset($this->error)) $this->request->loadErrorHandler();
+
+            /* create scriptProperties array from HTTP GPC vars */
+            if (!isset($_POST)) $_POST = array();
+            if (!isset($_GET)) $_GET = array();
+            $scriptProperties = array_merge($scriptProperties,$_GET,$_POST);
+            if (isset($_FILES) && !empty($_FILES)) {
+                $scriptProperties = array_merge($scriptProperties,$_FILES);
+            }
+
+            $modx =& $this;
+            $response = include $processor;
+            $result = new modProcessorResponse($this,$response);
+        } else {
+            $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processor} does not exist; " . print_r($options, true));
         }
         return $result;
     }
@@ -1763,7 +1861,7 @@ class modX extends xPDO {
             'sc.published' => $published,
             'sc.deleted' => '0'
         ));
-        if (!empty($sort)) $criteria->sortby($docsort, $docsortdir);
+        if (!empty($docsort)) $criteria->sortby($docsort, $docsortdir);
         if ($objCollection = $this->getCollection('modResource', $criteria)) {
             foreach ($objCollection as $obj) {
                 $objArray= array();
@@ -2246,7 +2344,7 @@ class modX extends xPDO {
         if (intval($id) == 0) {
             $id = intval($this->resource->id);
         }
-        $query = new xPDOCriteria("SELECT keywords.keyword FROM " . $this->getTableName('modKeyword') . " AS keywords "
+        $query = new xPDOCriteria($this, "SELECT keywords.keyword FROM " . $this->getTableName('modKeyword') . " AS keywords "
             . "INNER JOIN " . $this->getTableName('modResourceKeyword') . " AS xref "
             . "ON keywords.id=xref.keyword_id WHERE xref.content_id = :id", array(':id' => $id));
         $keywords = array();
@@ -2269,7 +2367,7 @@ class modX extends xPDO {
         if (intval($id) == 0) {
             $id = intval($this->resource->id);
         }
-        $query = new xPDOCriteria("SELECT smt.* ".
+        $query = new xPDOCriteria($this, "SELECT smt.* ".
                "FROM ".$this->getTableName('modMetatag')." smt ".
                "INNER JOIN ".$this->getTableName('modResourceMetatag')." cmt ON cmt.metatag_id=smt.id ".
                "WHERE cmt.content_id = :id", array(':id' => $id));
@@ -2650,7 +2748,7 @@ class modX extends xPDO {
      * @access protected
      */
     protected function _initCulture() {
-        $cultureKey = $this->context->getOption('cultureKey','en');
+        $cultureKey = $this->getOption('cultureKey',null,'en');
         if (!empty($_SESSION['cultureKey'])) $cultureKey = $_SESSION['cultureKey'];
         if (!empty($_REQUEST['cultureKey'])) $cultureKey = $_REQUEST['cultureKey'];
         $this->cultureKey = $cultureKey;
@@ -2697,7 +2795,7 @@ class modX extends xPDO {
         $contextKey= $this->context->get('key');
         if ($this->getSessionState() == modX::SESSION_STATE_UNINITIALIZED) {
             $sh= false;
-            if ($sessionHandlerClass = $this->context->getOption('session_handler_class')) {
+            if ($sessionHandlerClass = $this->getOption('session_handler_class')) {
                 if ($shClass= $this->loadClass($sessionHandlerClass, '', false, true)) {
                     if ($sh= new $shClass($this)) {
                         session_set_save_handler(
@@ -2712,20 +2810,20 @@ class modX extends xPDO {
                 }
             }
             if (!$sh) {
-                if ($sessionSavePath = $this->context->getOption('session_save_path') && is_writable($sessionSavePath)) {
+                if ($sessionSavePath = $this->getOption('session_save_path') && is_writable($sessionSavePath)) {
                     session_save_path($sessionSavePath);
                 }
             }
-            $cookieDomain= $this->context->getOption('session_cookie_domain', '');
-            $cookiePath= $this->context->getOption('session_cookie_path', MODX_BASE_URL);
-            if (empty($cookiePath)) $cookiePath = $this->context->getOption('base_url', MODX_BASE_URL);
-            $cookieSecure= (boolean) $this->context->getOption('session_cookie_secure', false);
-            $cookieLifetime= (integer) $this->context->getOption('session_cookie_lifetime', 0);
-            $gcMaxlifetime = (integer) $this->context->getOption('session_gc_maxlifetime', $cookieLifetime);
+            $cookieDomain= $this->getOption('session_cookie_domain',null,'');
+            $cookiePath= $this->getOption('session_cookie_path',null,MODX_BASE_URL);
+            if (empty($cookiePath)) $cookiePath = $this->getOption('base_url',null,MODX_BASE_URL);
+            $cookieSecure= (boolean) $this->getOption('session_cookie_secure',null,false);
+            $cookieLifetime= (integer) $this->getOption('session_cookie_lifetime',null,0);
+            $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime',null,$cookieLifetime);
             if ($gcMaxlifetime > 0) {
                 ini_set('session.gc_maxlifetime', $gcMaxlifetime);
             }
-            $site_sessionname= $this->context->getOption('session_name', '');
+            $site_sessionname= $this->getOption('session_name', '');
             if (!empty($site_sessionname)) session_name($site_sessionname);
             session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure);
             session_start();
@@ -2840,7 +2938,7 @@ class modX extends xPDO {
      * @access protected
      */
     public function _postProcess() {
-        if ($this->context->getOption('cache_resource', true)) {
+        if ($this->getOption('cache_resource', true)) {
             if (is_object($this->resource) && $this->resource instanceof modResource && $this->resource->get('id') && $this->resource->get('cacheable')) {
                 $this->invokeEvent('OnBeforeSaveWebPageCache');
                 $this->cacheManager->generateResource($this->resource);

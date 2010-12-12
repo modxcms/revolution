@@ -66,6 +66,9 @@ $_lang['setting_login_homepage'] = 'Startseite für eingeloggte Benutzer';
 $_lang['setting_login_homepage_desc'] = 'Geben Sie die ID des Dokuments ein, zu dem Sie den Butzer weiterleiten möchten, nachdem er sich eingeloggt hat. <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einem existierenden Dokument gehört, dass dieses veröffentlicht wurde und dass der Benutzer Zugriff darauf hat!</strong>';
 
 // system settings
+$_lang['setting_access_policies_version'] = 'Zugriffs-Richtlinien-Schema-Version';
+$_lang['setting_access_policies_version_desc'] = 'Die Version des Zugriffs-Richtlinien-Systems. BITTE NICHT ÄNDERN!';
+
 $_lang['setting_allow_duplicate_alias'] = 'Alias-Duplikate zulassen';
 $_lang['setting_allow_duplicate_alias_desc'] = 'Wenn diese Einstellung auf "ja" gesetzt wird, können doppelte Aliasse gespeichert werden. <strong>ACHTUNG: Bei Verwendung dieser Einstellung sollte auch die Option "Suchmaschinenfreundliche Aliasse benutzen" auf "ja" gesetzt werden, um Probleme bei der Referenzierung von Ressourcen zu vermeiden.</strong>';
 
@@ -131,8 +134,8 @@ $_lang['setting_cache_lang_js_desc'] = 'Wenn diese Option auf "ja" gesetzt ist, 
 $_lang['setting_cache_lexicon_topics'] = 'Lexikon-Themen cachen';
 $_lang['setting_cache_lexicon_topics_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden alle Lexikon-Themen gecacht, wodurch die Ladezeiten für die Internationalisierungs-Funktionalität drastisch reduziert werden. Es wird dringend empfohlen, diese Einstellung auf "Ja" zu belassen.';
 
-$_lang['setting_cache_noncore_lexicon_topics'] = 'Nicht zum Core-Namespace gehörende Lexikon-Themen cachen';
-$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Wenn diese Einstellung deaktiviert ist, werden nicht zum Core-Namespace gehörende Lexikon-Themen nicht gecacht. Es ist nützlich, dies zu deaktivieren, wenn Sie Ihre eigenen Extras entwickeln.';
+$_lang['setting_cache_noncore_lexicon_topics'] = 'Nicht zum Core-Namensraum gehörende Lexikon-Themen cachen';
+$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Wenn diese Einstellung deaktiviert ist, werden nicht zum Core-Namensraum gehörende Lexikon-Themen nicht gecacht. Es ist nützlich, dies zu deaktivieren, wenn Sie Ihre eigenen Extras entwickeln.';
 
 $_lang['setting_cache_resource'] = 'Partiellen Ressourcen-Cache aktivieren';
 $_lang['setting_cache_resource_desc'] = 'Partielles Ressourcen-Caching kann für jede Ressource einzeln konfiguriert werden, wenn dieses Feature aktiviert ist. Das Deaktivieren dieses Features deaktiviert es global.';
@@ -146,14 +149,17 @@ $_lang['setting_cache_scripts_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt,
 $_lang['setting_cache_system_settings'] = 'Systemeinstellungen-Cache aktivieren';
 $_lang['setting_cache_system_settings_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden die Systemeinstellungen gecacht, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
 
+$_lang['setting_clear_cache_refresh_trees'] = 'Aktualisiere Bäume, wenn Site-Cache geleert wird';
+$_lang['setting_clear_cache_refresh_trees_desc'] = 'Wenn diese Einstellung aktiviert ist, werden die Ressourcen-, Element- und Dateibäume aktualisiert, wenn der Site-Cache geleert wird.';
+
 $_lang['setting_compress_css'] = 'Komprimiertes CSS verwenden';
-$_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODx eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren.';
+$_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODx eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
 
 $_lang['setting_compress_js'] = 'Komprimierte JavaScript-Bibliotheken verwenden';
-$_lang['setting_compress_js_desc'] = 'Wenn dies aktiviert ist, benutzt MODx eine komprimierte Version seiner JavaScript-Bibliotheken. Dies reduziert Last und Ausführungszeit. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren.';
+$_lang['setting_compress_js_desc'] = 'Wenn dies aktiviert ist, benutzt MODx eine komprimierte Version seiner JavaScript-Bibliotheken. Dies reduziert Last und Ausführungszeit. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
 
 $_lang['setting_concat_js'] = 'Verknüpfte Javascript-Bibliotheken verwenden';
-$_lang['setting_concat_js_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODx eine verknüpfte Version seiner meistverwendeten JavaScript-Bibliotheken in der Manager-Oberfläche; diese werden dann als eine einzige Datei ausgeliefert. Dadurch werden die Lade- und Ausführungszeiten im Manager drastisch reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren.';
+$_lang['setting_concat_js_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODx eine verknüpfte Version seiner meistverwendeten JavaScript-Bibliotheken in der Manager-Oberfläche; diese werden dann als eine einzige Datei ausgeliefert. Dadurch werden die Lade- und Ausführungszeiten im Manager drastisch reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
 
 $_lang['setting_container_suffix'] = 'Container-Suffix';
 $_lang['setting_container_suffix_desc'] = 'Das Suffix, das Ressourcen, die als Container definiert wurden, hinzugefügt wird, wenn suchmaschinenfreundliche URLs verwendet werden.';
@@ -184,12 +190,15 @@ $_lang['setting_emailsubject'] = 'E-Mail-Betreff';
 $_lang['setting_emailsubject_desc'] = 'Die Betreffzeile für die E-Mail, die standardmäßig nach Erstellung eines Accounts versendet wird.';
 $_lang['setting_emailsubject_err'] = 'Bitte geben Sie die Betreffzeile für die E-Mail für neu erstellte Accounts an.';
 
+$_lang['setting_enable_dragdrop'] = 'Drag & Drop in Ressourcen-/Element-Bäumen aktivieren';
+$_lang['setting_enable_dragdrop_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, ist Drag & Drop in Ressourcen- und Element-Bäumen nicht möglich.';
+
 $_lang['setting_error_page'] = 'Fehlerseite';
 $_lang['setting_error_page_desc'] = 'Geben Sie die ID des Dokuments ein, das Benutzern angezeigt werden soll, wenn sie ein Dokument aufrufen, das nicht existiert. <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einem existierenden Dokument gehört und dass dieses veröffentlicht wurde!</strong>';
 $_lang['setting_error_page_err'] = 'Bitte geben Sie eine Ressourcen-ID für die Fehlerseite an.';
 
 $_lang['setting_extension_packages'] = 'Erweiterungs-Packages';
-$_lang['setting_extension_packages_desc'] = 'Kommaseparierte Liste von Packages, die bei der MODx-Initialisierung geladen werden sollen, im Format packagename:pfadzummodel';
+$_lang['setting_extension_packages_desc'] = 'Ein JSON-Array von Packages, die bei der MODx-Initialisierung geladen werden sollen. Im Format [{"packagename":{pfad":"pfad/zum/package"},{"weiterespackage":{"pfad":"pfad/zum/anderenpackage"}}]';
 
 $_lang['setting_failed_login_attempts'] = 'Fehlgeschlagene Login-Versuche';
 $_lang['setting_failed_login_attempts_desc'] = 'Geben Sie an, wie viele fehlgeschlagene Login-Versuche erlaubt sein sollen, bevor der Benutzer geblockt wird.';
@@ -212,11 +221,20 @@ $_lang['setting_feed_modx_security_enabled_desc'] = 'Wenn diese Einstellung auf 
 $_lang['setting_filemanager_path'] = 'Dateimanager-Pfad';
 $_lang['setting_filemanager_path_desc'] = 'IIS setzt die Einstellung document_root, die vom Dateimanager verwendet wird, um festzulegen, was angezeigt wird, häufig nicht korrekt. Wenn Sie Probleme mit der Benutzung des Dateimanagers haben, stellen Sie sicher, dass dieser Pfad auf den Root Ihrer MODx-Installation zeigt.';
 
+$_lang['setting_filemanager_path_relative'] = 'Ist der Dateimanager-Pfad relativ?';
+$_lang['setting_filemanager_path_relative_desc'] = 'Wenn Ihre "filemanager_path"-Einstellung relativ zum MODx-"base_path" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihr "filemanager_path" außerhalb des Document-Roots liegt, setzen Sie sie auf "Nein".';
+
 $_lang['setting_filemanager_url'] = 'Dateimanager-URL';
 $_lang['setting_filemanager_url_desc'] = 'Optional. Verwenden Sie diese Option, wenn Sie eine bestimmte URL angeben möchten, von der aus Sie auf die Dateien im MODx-Dateimanager zuzugreifen (hilfreich, wenn Sie den Dateimanager-Pfad auf einen Pfad außerhalb des MODx-Webroots gesetzt haben). Stellen Sie sicher, dass dies die über das Web erreichbare URL der Dateimanager-Pfad-Einstellung ist. Falls diese Einstellung leer gelassen wird, versucht MODx, sie selbst zu erkennen.';
 
+$_lang['setting_filemanager_url_relative'] = 'Ist die Dateimanager-URL relativ?';
+$_lang['setting_filemanager_url_relative_desc'] = 'Wenn Ihre "filemanager_url"-Einstellung relativ zur MODx-"base_url" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihre "filemanager_url" außerhalb des Webroots liegt, setzen Sie sie auf "Nein".';
+
 $_lang['setting_forgot_login_email'] = 'Login-vergessen-Mail';
 $_lang['setting_forgot_login_email_desc'] = 'Das Template für die Mail, die User erhalten, die ihren MODx-Benutzernamen und/oder ihr Passwort vergessen haben.';
+
+$_lang['setting_forward_merge_excludes'] = 'Felder, deren Werte bei Verwendung von Symlinks nicht überschrieben werden sollen';
+$_lang['setting_forward_merge_excludes_desc'] = 'Bei Verwendung eines Symlinks werden die Werte in den Feldern der Ziel-Ressource überschrieben von den Werten des Symlinks, die nicht leer sind; verwenden Sie diese kommaseparierte Liste von Ausnahmen, um die angegebenen Felder davor zu bewahren, von den Werten des Symlinks überschrieben zu werden.';
 
 $_lang['setting_friendly_alias_lowercase_only'] = 'Suchmaschinenfreundliche Aliasse in Kleinbuchstaben';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Legt fest, ob nur Kleinbuchstaben in einem Ressourcen-Alias erlaubt sein sollen';
@@ -239,6 +257,9 @@ $_lang['setting_friendly_alias_translit_desc'] = 'Die Transliterations-Methode, 
 $_lang['setting_friendly_alias_translit_class'] = 'Suchmaschinenfreundliche Aliasse: Transliterations-Service-Klasse';
 $_lang['setting_friendly_alias_translit_class_desc'] = 'Eine optionale Service-Klasse, die benannte Transliterations-Dienste für die Generierung/Filterung suchmaschinenfreundlicher Aliasse zur Verfügung stellt.';
 
+$_lang['setting_friendly_alias_translit_class_path'] = 'Suchmaschinenfreundliche Aliasse: Pfad zur Transliterations-Service-Klasse';
+$_lang['setting_friendly_alias_translit_class_path_desc'] = 'Der Pfad zum Model-Package, aus dem die Transliterations-Service-Klasse für suchmaschinenfreundliche Aliasse geladen wird.';
+
 $_lang['setting_friendly_alias_trim_chars'] = 'Suchmaschinenfreundliche Aliasse: abzuschneidende Zeichen';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Zeichen, die am Ende eines übergebenen Ressourcen-Alias abgeschnitten werden sollen.';
 
@@ -254,6 +275,9 @@ $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Zeichen, die Wort-Trenn
 $_lang['setting_friendly_urls'] = 'Suchmaschinenfreundliche URLs benutzen';
 $_lang['setting_friendly_urls_desc'] = 'Dies erlaubt Ihnen, suchmaschinenfreundliche URLs mit MODx zu verwenden. Bitte beachten Sie, dass dies nur für MODx-Installationen gilt, die auf einem Apache-Webserver laufen, und dass Sie eine .htaccess-Datei schreiben müssen, damit dies funktioniert. Mehr Informationen finden Sie in der .htaccess-Datei, die in der MODx-Distribution enthalten ist.';
 $_lang['setting_friendly_urls_err'] = 'Bitte geben Sie an, ob Sie suchmaschinenfreundliche URLs verwenden möchten oder nicht.';
+
+$_lang['setting_hidemenu_default'] = 'Standardeinstellung für Option "nicht in Menüs anzeigen"';
+$_lang['setting_hidemenu_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig nicht in Menüs angezeigt werden sollen.';
 
 $_lang['setting_mail_charset'] = 'E-Mail-Zeichensatz';
 $_lang['setting_mail_charset_desc'] = 'Legt den Standard-Zeichensatz (charset) für E-Mails fest, z.B. "iso-8859-1" oder "utf-8"';
@@ -300,9 +324,6 @@ $_lang['setting_manager_direction_desc'] = 'Geben Sie an, ob der Text im MODx-Ma
 $_lang['setting_manager_date_format'] = 'Manager-Datumsformat';
 $_lang['setting_manager_date_format_desc'] = 'Das Format für Datumsangaben im Manager. Diese Einstellung ist im gleichen Format vorzunehmen, wie es die PHP-Funktion <a href="http://de.php.net/manual/en/function.date.php" target="_blank">date()</a> erwartet.';
 
-$_lang['setting_manager_time_format'] = 'Manager-Zeitformat';
-$_lang['setting_manager_time_format_desc'] = 'Das Format für Uhrzeitangaben im Manager. Diese Einstellung ist im gleichen Format vorzunehmen, wie es die PHP-Funktion <a href="http://de.php.net/manual/en/function.date.php" target="_blank">date()</a> erwartet.';
-
 $_lang['setting_manager_lang_attribute'] = 'HTML- und XML-Sprach-Attribute im Manager';
 $_lang['setting_manager_lang_attribute_desc'] = 'Geben Sie den Code für die Sprache ein, der am besten zu der von Ihnen gewählten Sprache für den MODx-Manager passt. Dies stellt sicher, dass Ihr Browser den Inhalt im am besten für Sie geeigneten Format ausgeben kann.';
 
@@ -314,6 +335,9 @@ $_lang['setting_manager_login_start_desc'] = 'Geben Sie die ID des Dokuments ein
 
 $_lang['setting_manager_theme'] = 'Manager-Theme';
 $_lang['setting_manager_theme_desc'] = 'Wählen Sie das Theme für den MODx-Manager.';
+
+$_lang['setting_manager_time_format'] = 'Manager-Zeitformat';
+$_lang['setting_manager_time_format_desc'] = 'Das Format für Uhrzeitangaben im Manager. Diese Einstellung ist im gleichen Format vorzunehmen, wie es die PHP-Funktion <a href="http://de.php.net/manual/en/function.date.php" target="_blank">date()</a> erwartet.';
 
 $_lang['setting_manager_use_tabs'] = 'Reiter im Layout des MODx-Managers verwenden';
 $_lang['setting_manager_use_tabs_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, so werden Reiter für die Darstellung der Inhalte verwendet. Anderenfalls wird eine Portal-Darstellung verwendet.';
@@ -351,6 +375,9 @@ $_lang['setting_proxy_port_desc'] = 'Der Port für Ihren Proxy-Server.';
 $_lang['setting_proxy_username'] = 'Proxy-Benutzername';
 $_lang['setting_proxy_username_desc'] = 'Der Benutzername, der benötigt wird, um sich beim Proxy-Server zu authentifizieren.';
 
+$_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb: Erlaube src über dem Document Root';
+$_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Gibt an, ob der src-Pfad außerhalb des Document-Root liegen darf. Dies ist nützlich für Multi-Kontext-Einsatz mit mehreren Virtual Hosts.';
+
 $_lang['setting_phpthumb_cache_maxage'] = 'phpThumb: maximale Cache-Lebensdauer';
 $_lang['setting_phpthumb_cache_maxage_desc'] = 'Lösche gecachte Thumbnails, auf die in den letzten X Tagen nicht zugegriffen wurde.';
 
@@ -363,14 +390,53 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Lösche die Thumbnails, deren 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb: Cache für Quelldateien';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Gibt an, ob Quelldateien gecacht werden sollen, wenn sie geladen werden, oder nicht. Es wird die Einstellung "off" empfohlen.';
 
+$_lang['setting_phpthumb_error_bgcolor'] = 'phpThumb: Fehler-Hintergrundfarbe';
+$_lang['setting_phpthumb_error_bgcolor_desc'] = 'Ein Hexadezimalwert, ohne das #, der die Hintergrundfarbe für phpThumb-Fehlermeldungen angibt.';
+
+$_lang['setting_phpthumb_error_fontsize'] = 'phpThumb: Fehler-Schriftgröße';
+$_lang['setting_phpthumb_error_fontsize_desc'] = 'Ein em-Wert, der die Schriftgröße angibt, die für Text in phpThumb-Fehlermeldungen verwendet wird.';
+
+$_lang['setting_phpthumb_error_textcolor'] = 'phpThumb: Fehler-Schriftfarbe';
+$_lang['setting_phpthumb_error_textcolor_desc'] = 'Ein Hexadezimalwert, ohne das #, der die Schriftfarbe für Text in phpThumb-Fehlermeldungen angibt.';
+
+$_lang['setting_phpthumb_far'] = 'phpThumb: Seitenverhältnis erzwingen';
+$_lang['setting_phpthumb_far_desc'] = 'Die Standard-Force-Aspect-Ratio-Einstellung für phpThumb, wenn es in MODx verwendet wird. Der Standardwert ist "C", womit eine zentrierte Ausrichtung erreicht wird.';
+
 $_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb: ImageMagick-Pfad';
 $_lang['setting_phpthumb_imagemagick_path_desc'] = 'Optional. Geben Sie hier einen alternativen Pfad zu ImageMagick an, um Thumbnails mit phpThumb zu generieren, falls nicht bereits in den PHP-Standardeinstellungen geschehen ist.';
 
+$_lang['setting_phpthumb_nohotlink_enabled'] = 'phpThumb: Hotlinking deaktiviert';
+$_lang['setting_phpthumb_nohotlink_enabled_desc'] = 'Andere Server im src-Parameter sind erlaubt, wenn Sie Hotlinking in phpThumb nicht deaktivieren.';
+
+$_lang['setting_phpthumb_nohotlink_erase_image'] = 'phpThumb: Hotlinking: Bild löschen';
+$_lang['setting_phpthumb_nohotlink_erase_image_desc'] = 'Gibt an, ob ein Bild, das von einem anderen Server generiert wurde, gelöscht werden soll, wenn dies nicht erlaubt wurde.';
+
+$_lang['setting_phpthumb_nohotlink_text_message'] = 'phpThumb: Hotlinking-nicht-erlaubt-Meldung';
+$_lang['setting_phpthumb_nohotlink_text_message_desc'] = 'Eine Meldung, die anstatt des Thumbnails angezeigt wird, wenn ein Hotlinking-Versuch zurückgewiesen wird.';
+
+$_lang['setting_phpthumb_nohotlink_valid_domains'] = 'phpThumb: Für Hotlinking zugelassene Domains';
+$_lang['setting_phpthumb_nohotlink_valid_domains_desc'] = 'Eine kommaseparierte Liste von Hostnamen, die in src-URLs erlaubt sind.';
+
+$_lang['setting_phpthumb_nooffsitelink_enabled'] = 'phpThumb: Offsite-Linking deaktiviert';
+$_lang['setting_phpthumb_nooffsitelink_enabled_desc'] = 'Deaktiviert die Möglichkeit für andere, phpThumb zu nutzen, um Bilder in ihren eigenen Sites darzustellen.';
+
+$_lang['setting_phpthumb_nooffsitelink_erase_image'] = 'phpThumb: Offsite-Linking: Bild löschen';
+$_lang['setting_phpthumb_nooffsitelink_erase_image_desc'] = 'Gibt an, ob ein Bild, das von einem anderen Server verlinkt wurde, gelöscht werden soll, wenn dies nicht erlaubt wurde.';
+
+$_lang['setting_phpthumb_nooffsitelink_require_refer'] = 'phpThumb: Offsite-Linking erfordert Referrer';
+$_lang['setting_phpthumb_nooffsitelink_require_refer_desc'] = 'Wenn diese Einstellung aktiviert ist, werden alle Offsite-Linking-Versuche ohne gültigen Referrer-Header zurückgewiesen.';
+
+$_lang['setting_phpthumb_nooffsitelink_text_message'] = 'phpThumb: Offsite-Linking-nicht-erlaubt-Meldung';
+$_lang['setting_phpthumb_nooffsitelink_text_message_desc'] = 'Eine Meldung, die anstatt des Thumbnails angezeigt wird, wenn ein Offsite-Linking-Versuch zurückgewiesen wird.';
+
+$_lang['setting_phpthumb_nooffsitelink_valid_domains'] = 'phpThumb: Für Offsite-Linking zugelassene Domains';
+$_lang['setting_phpthumb_nooffsitelink_valid_domains_desc'] = 'Eine kommaseparierte Liste von Hostnamen, die als Referrer für Offsite-Linking erlaubt sind.';
+
+$_lang['setting_phpthumb_nooffsitelink_watermark_src'] = 'phpThumb: Offsite-Linking-Wasserzeichen-Quelle';
+$_lang['setting_phpthumb_nooffsitelink_watermark_src_desc'] = 'Optional. Ein gültiger Dateisystem-Pfad zu einer Datei, die als Quelle für Wasserzeichen verwendet werden soll, wenn Ihre Bilder offsite (auf einem anderen Server) durch phpThumb gerendert werden.';
+
 $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb: Zoom-Crop';
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'Die Standard-Zoom-Crop-Einstellung für phpThumb, wenn es in MODx verwendet wird. Der Standardwert ist "0", wodurch Zoom-Cropping verhindert wird.';
-
-$_lang['setting_phpthumb_far'] = 'phpThumb: Force Aspect Ratio';
-$_lang['setting_phpthumb_far_desc'] = 'Die Standard-Force-Aspect-Ratio-Einstellung für phpThumb, wenn es in MODx verwendet wird. Der Standardwert ist "C", womit eine zentrierte Ausrichtung erreicht wird.';
 
 $_lang['setting_publish_default'] = 'Ressourcen standardmäßig veröffentlichen';
 $_lang['setting_publish_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig veröffentlicht werden sollen.';
@@ -396,6 +462,9 @@ $_lang['setting_request_param_id_desc'] = 'Der Name des GET-Parameters für Ress
 
 $_lang['setting_resolve_hostnames'] = 'Hostnamen auflösen';
 $_lang['setting_resolve_hostnames_desc'] = 'Möchten Sie, dass MODx versucht, die Hostnamen Ihrer Besucher aufzulösen, wenn diese Ihre Website besuchen? Das Auflösen von Hostnamen kann zusätzliche Server-Last erzeugen; Ihre Besucher werden dies im Normalfall jedoch nicht bemerken.';
+
+$_lang['setting_resource_tree_node_name'] = 'Feld zur Benennung der Knoten im Ressourcen-Baum';
+$_lang['setting_resource_tree_node_name_desc'] = 'Geben Sie das Ressourcen-Feld an, das zur Darstellung der Knoten im Ressourcen-Baum verwendet werden soll. Standardmäßig wird das Feld pagetitle verwendet, es kann aber jedes Ressourcen-Feld verwendet werden, z.B. menutitle, alias, longtitle etc.';
 
 $_lang['setting_richtext_default'] = 'Rich-Text-Editor standardmäßig verwenden';
 $_lang['setting_richtext_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig den Rich-Text-Editor verwenden sollen.';
@@ -434,6 +503,9 @@ $_lang['setting_session_name_desc'] = 'Verwenden Sie diese Einstellung, um den S
 $_lang['setting_settings_version'] = 'MODx-Version';
 $_lang['setting_settings_version_desc'] = 'Die aktuell verwendete Version von MODx Revolution.';
 
+$_lang['setting_settings_distro'] = 'MODx-Distribution';
+$_lang['setting_settings_distro_desc'] = 'Die momentan installierte MODx-Distribution.';
+
 $_lang['setting_set_header'] = 'HTTP-Header setzen';
 $_lang['setting_set_header_desc'] = 'Wenn diese Einstellung aktiviert ist, versucht MODx, die HTTP-Header für Ressourcen zu setzen.';
 
@@ -462,6 +534,12 @@ $_lang['setting_site_unavailable_page_err'] = 'Bitte geben Sie die Ressourcen-ID
 
 $_lang['setting_strip_image_paths'] = 'Relative Dateibrowser-Pfade?';
 $_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird MODx Dateibrowser-Ressourcen-Quellen (Bilder, Dateien, Flash-Animationen etc.) als absolute URLs speichern. Relative URLs dagegen sind hilfreich, wenn Sie Ihre MODx-Installation verschieben möchten, z. B. von einer Testsite zu einer produktiven Website. Falls Ihnen nicht klar ist, was das bedeutet, belassen Sie es am besten bei der Einstellung "Ja".';
+
+$_lang['setting_topmenu_show_descriptions'] = 'Beschreibungen im Hauptmenü anzeigen';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, werden die Beschreibungen in den Menüpunkten des MODx-Manager-Hauptmenüs nicht angezeigt.';
+
+$_lang['setting_tree_default_sort'] = 'Feld, nach dem der Ressourcen-Baum standardmäßig sortiert wird';
+$_lang['setting_tree_default_sort_desc'] = 'Das Feld, nach dem der Ressourcen-Baum standardmäßig beim Öffnen des Managers sortiert wird.';
 
 $_lang['setting_tree_root_id'] = 'Ressourcen-Baum-Basis-ID';
 $_lang['setting_tree_root_id_desc'] = 'Geben Sie hier eine gültige ID einer Ressource ein, um den Ressourcen-Baum links bei dieser Ressource als Basis beginnen zu lassen. Benutzer können dann nur Ressourcen sehen, die Kinder der angegebenen Ressource sind.';

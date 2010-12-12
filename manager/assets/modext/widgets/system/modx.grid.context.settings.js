@@ -78,6 +78,21 @@ MODx.window.UpdateContextSetting = function(config) {
             ,allowBlank: false
             ,value: r.value
             ,anchor: '90%'
+        },{
+            xtype: 'hidden'
+            ,name: 'xtype'
+            ,id: 'modx-ucs-xtype'
+            ,value: r.xtype
+        },{
+            xtype: 'hidden'
+            ,name: 'area'
+            ,id: 'modx-ucs-area'
+            ,value: r.area
+        },{
+            xtype: 'hidden'
+            ,name: 'namespace'
+            ,id: 'modx-ucs-namespace'
+            ,value: r.namespace
         }]
     });
     MODx.window.UpdateContextSetting.superclass.constructor.call(this,config);

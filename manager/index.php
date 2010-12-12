@@ -75,4 +75,5 @@ if (isset($modx) && is_object($modx) && $modx instanceof modX) {
     }
     $modx->request->handleRequest();
 }
+@session_write_close();
 exit();

@@ -19,7 +19,7 @@
     <label><input type="submit" id="modx-next" name="proceed" value="{$_lang.login}" /></label>
     <br /><br />
     <span class="cleanup">
-        <label><input type="checkbox" value="1" id="cleanup" name="cleanup" /> {$_lang.delete_setup_dir}</label>
+        <label><input type="checkbox" value="1" id="cleanup" name="cleanup"{if $cleanup} checked="checked"{/if} /> {$_lang.delete_setup_dir}</label>
     </span>
 </div>
 </form>

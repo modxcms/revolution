@@ -27,6 +27,10 @@ $accessId = $scriptProperties['id'];
 
 if ($acl = $modx->getObject($accessClass, $accessId)) {
     $acl->fromArray($scriptProperties);
-    $acl->save();
+    if (!$acl->save()) {
+        return $modx->error->failure($modx->lexicon('access_err_save'));
+    } elseif ($modx->getUser()) {
+        $modx->user->getAttributes(array(), '', true);
+    }
 }
 return $modx->error->success();

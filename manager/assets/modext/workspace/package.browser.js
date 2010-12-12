@@ -381,12 +381,12 @@ MODx.grid.PackageBrowserGrid = function(config) {
         ,url: MODx.config.connectors_url+'workspace/packages-rest.php'
         ,baseParams: {
             action: 'getList'
-            //,provider: MODx.provider
         }
         ,paging: true
         ,pageSize: 10
         ,plugins: [this.action,this.exp]
         ,hideMode: 'offsets'
+        ,showPerPage: false
         ,columns: [this.exp,{
             header: _('name')
             ,dataIndex: 'name'

@@ -5,6 +5,7 @@
  */
 $xpdo_meta_map['modSession']= array (
   'package' => 'modx',
+  'version' => '1.1',
   'table' => 'session',
   'fields' => 
   array (
@@ -35,6 +36,25 @@ $xpdo_meta_map['modSession']= array (
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
+    ),
+  ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'id' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
 );

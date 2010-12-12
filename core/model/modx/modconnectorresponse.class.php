@@ -48,7 +48,7 @@ class modConnectorResponse extends modResponse {
         /* ensure headers are sent for proper authentication */
         if (!isset($_SERVER['HTTP_MODAUTH']) && !isset($_REQUEST['HTTP_MODAUTH'])) {
             $this->body = $modx->error->failure($modx->lexicon('access_denied'));
-            
+
         } else if (isset($_SERVER['HTTP_MODAUTH']) && $_SERVER['HTTP_MODAUTH'] != $modx->site_id) {
             $this->body = $modx->error->failure($modx->lexicon('access_denied'));
 
@@ -58,12 +58,12 @@ class modConnectorResponse extends modResponse {
         /* verify the location and action */
         } else if (!isset($options['location']) || !isset($options['action'])) {
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
-            
+
         } else if (empty($options['action'])) {
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
 
         /* execute a processor and format the response */
-        } else { 
+        } else {
             /* prevent browsing of subdirectories for security */
             $options['action'] = str_replace('../','',$options['action']);
 
@@ -96,6 +96,7 @@ class modConnectorResponse extends modResponse {
             foreach ($this->header as $header) header($header);
         }
         if (is_array($this->body)) {
+            @session_write_close();
             die($this->modx->toJSON(array(
                 'success' => isset($this->body['success']) ? $this->body['success'] : 0,
                 'message' => isset($this->body['message']) ? $this->body['message'] : $this->modx->lexicon('error'),
@@ -108,6 +109,7 @@ class modConnectorResponse extends modResponse {
                 'object' => isset($this->body['object']) ? $this->body['object'] : array(),
             )));
         } else {
+            @session_write_close();
             die($this->body);
         }
     }
