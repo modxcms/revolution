@@ -19,7 +19,7 @@ $c->where(array(
     'modCategory.parent' => 0,
 ));
 $c->sortby($modx->getSelectColumns('modCategory','modCategory','',array('category')),'ASC');
-$c->groupby($modx->getSelectColumns('modCategory','modCategory','',array('id')));
+$c->groupby($modx->getSelectColumns('modCategory','modCategory'));
 $categories = $modx->getCollection('modCategory',$c);
 
 /* set permissions as css classes */

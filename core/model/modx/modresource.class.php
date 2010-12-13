@@ -45,6 +45,64 @@ class modResource extends modAccessibleSimpleObject {
     public $_sjscripts = array();
     public $_loadedjscripts = array();
 
+    /**
+     * Get a sortable, limitable collection (and total count) of Resource Groups for a given Resource.
+     * 
+     * @static
+     * @param modResource &$resource A reference to the modResource to get the groups from.
+     * @param array $sort An array of sort columns in column => direction format.
+     * @param int $limit A limit of records to retrieve in the collection.
+     * @param int $offset A record offset for a limited collection.
+     * @return array An array containing the collection and total.
+     */
+    public static function listGroups(modResource &$resource, array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
+        $result = array('collection' => array(), 'total' => 0);
+        $c = $resource->xpdo->newQuery('modResourceGroup');
+        $c->leftJoin('modResourceGroupResource', 'ResourceGroupResource', array(
+            "ResourceGroupResource.document_group = modResourceGroup.id",
+            'ResourceGroupResource.document' => $resource->get('id')
+        ));
+        $result['total'] = $resource->xpdo->getCount('modResourceGroup',$c);
+        $c->select($resource->xpdo->getSelectColumns('modResourceGroup', 'modResourceGroup'));
+        $c->select(array("IF(ISNULL(ResourceGroupResource.document),0,1) AS access"));
+        foreach ($sort as $sortKey => $sortDir) {
+            $c->sortby($resource->xpdo->escape('modResourceGroup') . '.' . $resource->xpdo->escape($sortKey), $sortDir);
+        }
+        if ($limit > 0) $c->limit($limit, $offset);
+        $c->prepare();
+        $resource->xpdo->log(xPDO::LOG_LEVEL_ERROR, $c->toSQL(), '', __METHOD__, __FILE__);
+        $result['collection'] = $resource->xpdo->getCollection('modResourceGroup', $c);
+        return $result;
+    }
+
+    /**
+     * Retrieve a collection of Template Variables for a Resource.
+     *
+     * @static
+     * @param modResource &$resource A reference to the modResource to retrieve TemplateVars for.
+     * @return A collection of modTemplateVar instances for the modResource.
+     */
+    public static function getTemplateVarCollection(modResource &$resource) {
+        $c = $resource->xpdo->newQuery('modTemplateVar');
+        $c->query['distinct'] = 'DISTINCT';
+        $c->select($resource->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+        $c->select(array(
+            'IF(ISNULL(tvc.value),modTemplateVar.default_text,tvc.value) AS value',
+            'IF(ISNULL(tvc.value),0,'.$resource->get('id').' AS resourceId'
+        ));
+        $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
+            'tvtpl.tmplvarid = modTemplateVar.id',
+            'tvtpl.templateid' => $resource->get('template'),
+        ));
+        $c->leftJoin('modTemplateVarResource','tvc',array(
+            'tvc.tmplvarid = modTemplateVar.id',
+            'tvc.contentid' => $resource->get('id'),
+        ));
+        $c->sortby('tvtpl.rank,modTemplateVar.rank');
+
+        return $resource->xpdo->getCollection('modTemplateVar', $c);
+    }
+
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->_contextKey= isset ($this->xpdo->context) ? $this->xpdo->context->get('key') : 'web';
@@ -173,27 +231,20 @@ class modResource extends modAccessibleSimpleObject {
     public function & getMany($alias, $criteria= null, $cacheFlag= false) {
         $collection= array ();
         if ($alias === 'TemplateVars' || $alias === 'modTemplateVar' && ($criteria === null || strtolower($criteria) === 'all')) {
-            $c = $this->xpdo->newQuery('modTemplateVar');
-            $c->select('
-                DISTINCT modTemplateVar.*,
-                IF(ISNULL(tvc.value),modTemplateVar.default_text,tvc.value) AS value,
-                IF(ISNULL(tvc.value),0,'.$this->id.') AS resourceId
-            ');
-            $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
-                'tvtpl.tmplvarid = modTemplateVar.id',
-                'tvtpl.templateid' => $this->template,
-            ));
-            $c->leftJoin('modTemplateVarResource','tvc',array(
-                'tvc.tmplvarid = modTemplateVar.id',
-                'tvc.contentid' => $this->id,
-            ));
-            $c->sortby('tvtpl.rank,modTemplateVar.rank');
-
-            $collection = $this->xpdo->getCollection('modTemplateVar', $c);
+            $collection= $this->getTemplateVars();
         } else {
             $collection= parent :: getMany($alias, $criteria, $cacheFlag);
         }
         return $collection;
+    }
+
+    /**
+     * Get a collection of the Template Variable values for the Resource.
+     *
+     * @return array A collection of TemplateVar values for this Resource.
+     */
+    public function getTemplateVars() {
+        return $this->xpdo->call('modResource', 'getTemplateVarCollection', array(&$this));
     }
 
     /**
@@ -621,7 +672,9 @@ class modResource extends modAccessibleSimpleObject {
     }
 
     /**
+     * Duplicate the Resource.
      *
+     * @param array $options An array of options.
      * @return mixed Returns either an error message, or the newly created modResource object.
      */
     public function duplicate(array $options = array()) {
@@ -736,5 +789,17 @@ class modResource extends modAccessibleSimpleObject {
         $resourceGroupResource->set('document',$this->get('id'));
         $resourceGroupResource->set('document_group',$resourceGroup->get('id'));
         return $resourceGroupResource->save();
+    }
+
+    /**
+     * Gets a sortable, limitable collection (and total count) of Resource Groups for the Resource.
+     *
+     * @param array $sort An array of sort columns in column => direction format.
+     * @param int $limit A limit of records to retrieve in the collection.
+     * @param int $offset A record offset for a limited collection.
+     * @return array An array containing the collection and total.
+     */
+    public function getGroupsList(array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
+        return $this->xpdo->call('modResource', 'listGroups', array(&$this, $sort, $limit, $offset));
     }
 }

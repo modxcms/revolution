@@ -59,11 +59,10 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
     if ($template) {
         $c = $modx->newQuery('modTemplateVar');
         $c->query['distinct'] = 'DISTINCT';
-        $c->select(array(
-            'modTemplateVar.*',
-            'TemplateVarResource.value',
-            'TemplateVarTemplate.rank',
-        ));
+        $c->select($modx->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+        $c->select($modx->getSelectColumns('modTemplateVarResource', 'TemplateVarResource', '', array('value')));
+        $c->select($modx->getSelectColumns('modTemplateVarTemplate', 'TemplateVarTemplate', '', array('rank')));
+        $c->select($modx->getSelectColumns('modCategory', 'Category', '', array('category')));
         $c->leftJoin('modCategory','Category');
         $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplate',array(
             'TemplateVarTemplate.tmplvarid = modTemplateVar.id',

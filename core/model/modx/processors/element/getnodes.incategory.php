@@ -17,7 +17,7 @@ $c->leftJoin($elementClassKey,$elementClassKey,$elementClassKey.'.category = mod
 $c->where(array(
     'parent' => $categoryId,
 ));
-$c->groupby($modx->getSelectColumns('modCategory','modCategory','',array('id')));
+$c->groupby($modx->getSelectColumns('modCategory','modCategory'));
 $c->sortby($modx->getSelectColumns('modCategory','modCategory','',array('category')),'ASC');
 $categories = $modx->getCollection('modCategory',$c);
 

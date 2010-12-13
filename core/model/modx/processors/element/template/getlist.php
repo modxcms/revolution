@@ -25,7 +25,7 @@ $combo = $modx->getOption('combo',$scriptProperties,false);
 $c = $modx->newQuery('modTemplate');
 $c->leftJoin('modCategory','Category');
 $c->select($modx->getSelectColumns('modTemplate', 'modTemplate', 'modTemplate_'));
-$c->select(array('catname' => 'Category.category'));
+$c->select(array('Category.category AS catname'));
 
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);

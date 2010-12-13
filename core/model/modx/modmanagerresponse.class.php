@@ -170,13 +170,13 @@ class modManagerResponse extends modResponse {
             ),
             'OR:ProfileUserGroup.usergroup:=' => null,
         ),xPDOQuery::SQL_AND,null,2);
-        $c->select(array(
-            'modActionDom.*',
-            'FCSet.constraint_class',
-            'FCSet.constraint_field',
-            'FCSet.constraint',
-            'FCSet.template',
-        ));
+        $c->select($this->modx->getSelectColumns('modActionDom', 'modActionDom'));
+        $c->select($this->modx->getSelectColumns('modFormCustomizationSet', 'FCSet', '', array(
+            'constraint_class',
+            'constraint_field',
+            'constraint',
+            'template'
+        )));
         $c->sortby('modActionDom.rank','ASC');
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();

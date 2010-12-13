@@ -28,7 +28,7 @@ if (empty($resourceId)) {
     $resource = $modx->newObject('modResource');
     $resource->set('id',0);
 } else {
-    $resource = $modx->getObject('modResource',$resourceId);
+    $resource = $modx->getObject('modResource', $resourceId);
     if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_nfs',array('id' => $resourceId)));
 
     /* check access */
@@ -37,37 +37,14 @@ if (empty($resourceId)) {
     }
 }
 
-switch ($modx->getOption('dbtype')) {
-    case 'sqlite':
-    case 'mysql':
-        $if = 'IF';
-        break;
-    case 'sqlsrv':
-        $if = 'IIF';
-        break;
-}
+$resourceGroupList = $resource->getGroupsList(array($sort => $dir), $isLimit ? $limit : 0, $start);
+$resourceGroups = $resourceGroupList['collection'];
 
-/* build query */
-$c = $modx->newQuery('modResourceGroup');
-$c->leftJoin('modResourceGroupResource','ResourceGroupResource','
-    ResourceGroupResource.document_group = modResourceGroup.id
-AND ResourceGroupResource.document = '.$resource->get('id'));
-$count = $modx->getCount('modResourceGroup',$c);
-$c->select("
-    modResourceGroup.*,
-    {$if}(ISNULL(ResourceGroupResource.document),0,1) AS access
-");
-$c->sortby($sort,$dir);
-if ($isLimit) $c->limit($limit,$start);
-$resourceGroups = $modx->getCollection('modResourceGroup',$c);
-
-
-/* iterate */
 $list = array();
 foreach ($resourceGroups as $resourceGroup) {
     $resourceGroupArray = $resourceGroup->toArray();
-    $resourceGroupArray['access'] = (boolean)$resourceGroupArray['access'];
+    $resourceGroupArray['access'] = (boolean) $resourceGroupArray['access'];
     $list[] = $resourceGroupArray;
 }
 
-return $this->outputArray($list,$count);
+return $this->outputArray($list, $resourceGroupList['total']);
