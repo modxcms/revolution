@@ -439,6 +439,7 @@
                 <include name=".gitignore" />
                 <include name="ht.access" />
                 <include name="*/ht.access" />
+                <include name="config.core.php" />
                 <include name="index.php" />
                 <include name="connectors/**" />
                 <include name="manager/**" />
