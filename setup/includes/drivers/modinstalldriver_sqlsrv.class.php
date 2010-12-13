@@ -72,7 +72,7 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
      * {@inheritDoc}
      */
     public function testTablePrefix($database,$prefix) {
-        return 'SELECT COUNT('.$this->xpdo->escape('id').') AS '.$this->xpdo->escape('ct').' FROM '.$this->xpdo->escape($database).'.'.$this->xpdo->escape($prefix.'site_content');
+        return 'SELECT COUNT('.$this->xpdo->escape('id').') AS '.$this->xpdo->escape('ct').' FROM '.$this->xpdo->escape($prefix.'site_content');
     }
 
     /**

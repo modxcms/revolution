@@ -314,6 +314,7 @@ abstract class modInstallTest {
      * @param string $title The title of the check
      */
     protected function title($key,$title) {
+        if (!isset($this->results[$key])) $this->results[$key] = array();
         $this->results[$key]['msg'] = '<p>'.$title;
     }
 
@@ -325,6 +326,8 @@ abstract class modInstallTest {
      */
     protected function pass($key,$message = '') {
         if (empty($message)) $message = $this->install->lexicon('ok');
+        if (!isset($this->results[$key])) $this->results[$key] = array();
+        if (!isset($this->results[$key]['msg'])) $this->results[$key]['msg'] = '';
         $this->results[$key]['msg'] .= '<span class="ok">'.$message.'</span></p>';
         $this->results[$key]['class'] = 'testPassed';
     }
@@ -345,6 +348,8 @@ abstract class modInstallTest {
             if (!empty($messageTitle)) $msg .= '<h3>'.$messageTitle.'</h3>';
             $msg .= '<p>'.$message.'</p></div>';
         }
+        if (!isset($this->results[$key])) $this->results[$key] = array();
+        if (!isset($this->results[$key]['msg'])) $this->results[$key]['msg'] = '';
         $this->results[$key]['msg'] .= $msg;
         $this->results[$key]['class'] = 'testWarn';
     }
@@ -362,6 +367,8 @@ abstract class modInstallTest {
         if (!empty($message)) {
             $msg .= '<p><strong>'.$message.'</strong></p>';
         }
+        if (!isset($this->results[$key])) $this->results[$key] = array();
+        if (!isset($this->results[$key]['msg'])) $this->results[$key]['msg'] = '';
         $this->results[$key]['msg'] .= $msg;
         $this->results[$key]['class'] = 'testFailed';
         return true;

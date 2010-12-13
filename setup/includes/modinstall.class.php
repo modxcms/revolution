@@ -180,7 +180,7 @@ class modInstall {
         $config = array_merge($config,array(
             'database_type' => $database_type,
             'database_server' => $database_server,
-            'dbase' => trim($dbase,'`'),
+            'dbase' => trim($dbase, '`[]'),
             'database_user' => $database_user,
             'database_password' => $database_password,
             'database_connection_charset' => $database_connection_charset,
@@ -216,7 +216,7 @@ class modInstall {
                     $dsn = $this->settings->get('database_type') . ':host=' . $this->settings->get('database_server') . ';dbname=' . trim($this->settings->get('dbase'), '`');
                     break;
                 case 'sqlsrv':
-                    $dsn = $this->settings->get('database_type') . ':server=' . $this->settings->get('database_server') . ';database=' . trim($this->settings->get('dbase'), '`');
+                    $dsn = $this->settings->get('database_type') . ':server=' . $this->settings->get('database_server') . ';database=' . trim($this->settings->get('dbase'), '[]');
                     break;
             }
             $this->xpdo = $this->_connect($dsn
@@ -696,6 +696,7 @@ class modInstall {
         if (isset ($_POST['installmode'])) {
             $mode = intval($_POST['installmode']);
         } else {
+            global $dbase;
             if (file_exists(MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php')) {
                 /* Include the file so we can test its validity */
                 $included = @ include (MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php');
@@ -723,7 +724,7 @@ class modInstall {
                     xPDO::OPT_LOADER_CLASSES => array('modAccessibleObject'),
                     xPDO::OPT_SETUP => true,
                 ), $options),
-                array()
+                array(PDO::SQLSRV_ATTR_DIRECT_QUERY => false)
             );
             $xpdo->setLogTarget(array(
                 'target' => 'FILE',
