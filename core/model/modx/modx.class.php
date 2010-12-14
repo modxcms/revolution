@@ -329,8 +329,7 @@ class modX extends xPDO {
      * @return modX A new modX instance.
      */
     public function __construct($configPath= '', array $options = array()) {
-        global $database_type, $database_server, $dbase, $database_user,
-               $database_password, $database_connection_charset, $table_prefix, $site_id;
+        global $database_dsn, $database_user, $database_password, $table_prefix, $site_id;
         modX :: protect();
         if (empty ($configPath)) {
             $configPath= MODX_CORE_PATH . 'config/';
@@ -353,7 +352,7 @@ class modX extends xPDO {
                 $options
             );
             parent :: __construct(
-                $database_type . ':server=' . $database_server . ';database=' . trim($dbase,'[]'),
+                $database_dsn,
                 $database_user,
                 $database_password,
                 $options,

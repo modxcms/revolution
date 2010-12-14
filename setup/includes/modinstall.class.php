@@ -119,7 +119,8 @@ class modInstall {
      * @return array A copy of the config attributes array.
      */
     public function getConfig($mode = 0, $config = array ()) {
-        global $database_type, $database_server, $dbase, $database_user, $database_password, $database_connection_charset, $table_prefix;
+        global $database_dsn, $database_type, $database_server, $dbase, $database_user,
+                $database_password, $database_connection_charset, $table_prefix;
         if (!is_array($config)) {
             $config = array ();
         }
@@ -194,6 +195,16 @@ class modInstall {
             'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
         ));
         $this->config = array_merge($this->config, $config);
+        switch ($this->config['database_type']) {
+            case 'sqlsrv':
+                $database_dsn = $this->config['database_dsn'] = "{$this->config['database_type']}:server={$this->config['database_server']};database={$this->config['dbase']}";
+                break;
+            case 'mysql':
+                $database_dsn = $this->config['database_dsn'] = "{$this->config['database_type']}:host={$this->config['database_server']};dbname={$this->config['dbase']}";
+                break;
+            default:
+                break;
+        }
         return $this->config;
     }
 
@@ -210,20 +221,12 @@ class modInstall {
             $options = array();
             if ($this->settings->get('new_folder_permissions')) $options['new_folder_permissions'] = $this->settings->get('new_folder_permissions');
             if ($this->settings->get('new_file_permissions')) $options['new_file_permissions'] = $this->settings->get('new_file_permissions');
-            $collation = $this->settings->get('database_collation');
-            switch ($this->settings->get('database_type')) {
-                case 'mysql':
-                    $dsn = $this->settings->get('database_type') . ':host=' . $this->settings->get('database_server') . ';dbname=' . trim($this->settings->get('dbase'), '`');
-                    break;
-                case 'sqlsrv':
-                    $dsn = $this->settings->get('database_type') . ':server=' . $this->settings->get('database_server') . ';database=' . trim($this->settings->get('dbase'), '[]');
-                    break;
-            }
-            $this->xpdo = $this->_connect($dsn
-                 ,$this->settings->get('database_user')
-                 ,$this->settings->get('database_password')
-                 ,$this->settings->get('table_prefix')
-                 ,$options
+            $this->xpdo = $this->_connect(
+                $this->settings->get('database_dsn')
+                ,$this->settings->get('database_user')
+                ,$this->settings->get('database_password')
+                ,$this->settings->get('table_prefix')
+                ,$options
              );
 
             if (!($this->xpdo instanceof xPDO)) { return $this->xpdo; }
@@ -319,6 +322,9 @@ class modInstall {
         @ ini_set('max_execution_time', 240);
         @ ini_set('memory_limit','128M');
 
+        /* write config file */
+        $this->writeConfig($results);
+
         /* get connection */
         $this->getConnection($mode);
 
@@ -339,9 +345,6 @@ class modInstall {
                 $results = include MODX_SETUP_PATH . 'includes/tables_create.php';
                 break;
         }
-
-        /* write config file */
-        $this->writeConfig($results);
 
         if ($this->xpdo) {
             /* add required core data */
@@ -724,7 +727,7 @@ class modInstall {
                     xPDO::OPT_LOADER_CLASSES => array('modAccessibleObject'),
                     xPDO::OPT_SETUP => true,
                 ), $options),
-                array(PDO::SQLSRV_ATTR_DIRECT_QUERY => false)
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT)
             );
             $xpdo->setLogTarget(array(
                 'target' => 'FILE',
@@ -750,7 +753,7 @@ class modInstall {
 
         /* to validate installation, instantiate the modX class and run a few tests */
         if (include_once (MODX_CORE_PATH . 'model/modx/modx.class.php')) {
-            $modx = new modX(MODX_CORE_PATH . 'config/',array(
+            $modx = new modX(MODX_CORE_PATH . 'config/', array(
                 xPDO::OPT_SETUP => true,
             ));
             if (!is_object($modx) || !($modx instanceof modX)) {
@@ -888,7 +891,7 @@ class modInstall {
         $path = dirname(__FILE__).'/drivers/';
 
         /* db specific driver */
-        $class = 'modInstallDriver_'.strtolower($this->settings->get('database_type','sqlsrv'));
+        $class = 'modInstallDriver_'.strtolower($this->settings->get('database_type','mysql'));
         $driverPath = $path.strtolower($class.'.class.php');
         $included = @include_once $driverPath;
         if ($included) {

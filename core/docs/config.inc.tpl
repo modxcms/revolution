@@ -8,7 +8,8 @@ $database_user = '{database_user}';
 $database_password = '{database_password}';
 $database_connection_charset = '{database_connection_charset}';
 $dbase = '{dbase}';
-$table_prefix = '{table_prefix}';      
+$table_prefix = '{table_prefix}';
+$database_dsn = '{database_dsn}';
 
 $lastInstallTime = {last_install_time};
 
