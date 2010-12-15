@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.6-pl
 ====================================
+- [#3059] Ensure createdby is set on resource creation
 - [#3041] Fix missing lexicon entry in resource processors
 - [#3043] Fix invalid 200 response header on sendError()
 
