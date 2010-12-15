@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODx Revolution 2.0.6-pl
+====================================
+- [#3043] Fix invalid 200 response header on sendError()
+
 MODx Revolution 2.0.5-pl (December 8th, 2010)
 ====================================
 - Change remove() to removePackage() in modTransportPackage

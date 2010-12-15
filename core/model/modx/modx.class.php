@@ -901,16 +901,16 @@ class modX extends xPDO {
         if (!is_array($options)) $options = array();
         $options= array_merge(
             array(
-                'response_code' => $this->getOption('error_page_header', $options,$this->getOption('error_page_header','HTTP/1.1 404 Not Found'))
+                'response_code' => $this->getOption('error_page_header', $options, 'HTTP/1.1 404 Not Found')
                 ,'error_type' => '404'
-                ,'error_header' => $this->getOption('error_page_header', $options,'HTTP/1.1 404 Not Found')
-                ,'error_pagetitle' => $this->getOption('error_page_pagetitle', $options,'Error 404: Page not found')
-                ,'error_message' => $this->getOption('error_page_message', $options,'<h1>Page not found</h1><p>The page you requested was not found.</p>')
+                ,'error_header' => $this->getOption('error_page_header', $options, 'HTTP/1.1 404 Not Found')
+                ,'error_pagetitle' => $this->getOption('error_page_pagetitle', $options, 'Error 404: Page not found')
+                ,'error_message' => $this->getOption('error_page_message', $options, '<h1>Page not found</h1><p>The page you requested was not found.</p>')
             ),
             $options
         );
         $this->invokeEvent('OnPageNotFound', $options);
-        $this->sendForward($this->getOption('error_page', $options, $this->getOption('error_page','404')), $options);
+        $this->sendForward($this->getOption('error_page', $options, '404'), $options);
     }
 
     /**
