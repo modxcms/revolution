@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.6-pl
 ====================================
+- [#3079] Ensure GPC vars are not sent into $scriptProperties array in $modx->runProcessor
 - [#2983] Add sanity check to prevent plugins from firing if disabled (redundancy)
 - [#3057] Fix issue where parent change causes fail to save in UI
 - [#3076] Fix bug where manager returnUrl was not working due to [#2918] fix

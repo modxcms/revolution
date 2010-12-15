@@ -1414,14 +1414,6 @@ class modX extends xPDO {
             if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
             if (!isset($this->error)) $this->request->loadErrorHandler();
 
-            /* create scriptProperties array from HTTP GPC vars */
-            if (!isset($_POST)) $_POST = array();
-            if (!isset($_GET)) $_GET = array();
-            $scriptProperties = array_merge($scriptProperties,$_GET,$_POST);
-            if (isset($_FILES) && !empty($_FILES)) {
-                $scriptProperties = array_merge($scriptProperties,$_FILES);
-            }
-
             $modx =& $this;
             $response = include $processor;
             $result = new modProcessorResponse($this,$response);
