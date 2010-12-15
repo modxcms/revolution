@@ -42,7 +42,7 @@ $nameExists = $modx->getObject('modSnippet',array(
     'id:!=' => $snippet->get('id'),
     'name' => $scriptProperties['name'],
 ));
-if ($nameExists) $modx->error->addField('name',$modx->lexicon('snippet_err_exists_name'));
+if ($nameExists) $modx->error->addField('name',$modx->lexicon('snippet_err_exists_name',array('name' => $scriptProperties['name'])));
 
 /* category */
 if (!empty($scriptProperties['category'])) {

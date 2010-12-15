@@ -52,7 +52,7 @@ $nameExists = $modx->getObject('modTemplateVar',array(
     'id:!=' => $tv->get('id'),
     'name' => $scriptProperties['name'],
 ));
-if ($nameExists) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name'));
+if ($nameExists) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name',array('name' => $scriptProperties['name'])));
 
 /* extract widget properties */
 $display_params = '';
