@@ -56,7 +56,7 @@ if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_
 
 /* check permissions */
 if (!$modx->hasPermission('save_document') || !$resource->checkPolicy('save')) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
+    return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
 /* add locks */
@@ -64,7 +64,7 @@ $locked = $resource->addLock();
 if ($locked !== true) {
     if (isset($scriptProperties['steal_lock']) && !empty($scriptProperties['steal_lock'])) {
         if (!$modx->hasPermission('steal_locks') || !$resource->checkPolicy('steal_lock')) {
-            return $modx->error->failure($modx->lexicon('permission_denied'));
+            return $modx->error->failure($modx->lexicon('access_denied'));
         }
         if ($locked > 0 && $locked != $modx->user->get('id')) {
             $resource->removeLock($locked);
