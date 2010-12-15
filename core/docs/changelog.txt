@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.6-pl
 ====================================
+- [#3023] Fix issue where topmenu did not respect manager_language
 - [#3080] Fix missing placeholder in error message when attempting to create a duplicate Element
 - Add new header image to match new site
 - [#3078] Fix issue with htmltag TV widget properties when using = in its value
