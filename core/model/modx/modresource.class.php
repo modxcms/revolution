@@ -598,13 +598,15 @@ class modResource extends modAccessibleSimpleObject {
      *
      * @param string $aliasPath The current full alias path. If none is passed,
      * will build it from the Resource's currently set alias.
+     * @param string $contextKey The context to search for a duplicate alias in.
      * @return mixed The ID of the Resource using the alias, if a duplicate, otherwise false.
      */
-    public function isDuplicateAlias($aliasPath = '') {
+    public function isDuplicateAlias($aliasPath = '', $contextKey = '') {
         if (empty($aliasPath)) $aliasPath = $this->getAliasPath($this->get('alias'));
+        if (empty($contextKey)) $contextKey = $this->get('context_key');
         $isDuplicate = false;
 
-        $resourceContext= $this->getOne('Context');
+        $resourceContext= $this->xpdo->getObject('modContext', array('key' => $contextKey));
         if (!$resourceContext) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not find context for Resource '.print_r($this->toArray(),true));
             return $isDuplicate;

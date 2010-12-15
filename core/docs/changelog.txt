@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.6-pl
 ====================================
+- [#3034] Fix error creating Resources in Contexts other than web
 - Fix issue with incorrect active permission total in Access Policy grid
 - [#3023] Fix issue where topmenu did not respect manager_language
 - [#3080] Fix missing placeholder in error message when attempting to create a duplicate Element

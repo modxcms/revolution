@@ -125,7 +125,7 @@ if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->le
 if ($workingContext->getOption('friendly_alias_urls', false)) {
     /* auto assign alias */
     $aliasPath = $resource->getAliasPath($scriptProperties['alias'], $scriptProperties);
-    $duplicateId = $resource->isDuplicateAlias($aliasPath);
+    $duplicateId = $resource->isDuplicateAlias($aliasPath, $scriptProperties['context_key']);
     if (!$workingContext->getOption('allow_duplicate_alias', false) && $duplicateId) {
         $err = $modx->lexicon('duplicate_alias_found',array(
             'id' => $duplicateId,
