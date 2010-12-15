@@ -1334,7 +1334,7 @@ class modX extends xPDO {
                 } else {
                     $plugin= $this->getObject('modPlugin', array ('id' => intval($pluginId), 'disabled' => '0'), true);
                 }
-                if ($plugin) {
+                if ($plugin && !$plugin->get('disabled')) {
                     $this->event->activated= true;
                     $this->event->activePlugin= $plugin->get('name');
                     $this->event->propertySet= (($pspos = strpos($pluginPropset, ':')) > 1) ? substr($pluginPropset, $pspos + 1) : '';
