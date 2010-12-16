@@ -13,3 +13,13 @@ if (!empty($classes)) {
 }
 unset($classes);
 
+/* adjust session data field to hold more than 64kb (#3103) */
+$class = 'modSession';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('change_column',array(
+    'old' => 'data TEXT',
+    'new' => 'data MEDIUMTEXT',
+    'table' => $table,
+));
+$sql = "ALTER TABLE {$table} CHANGE `data` `data` MEDIUMTEXT NOT NULL";
+$this->processResults($class,$description,$sql);
