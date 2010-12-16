@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.6-pl
 ====================================
+- [#3096] Fix issue with exporting default properties not in a set from an element
 - [#3099] Fix FC rules to respect class_key constraints
 - [#3097] Fix extension_packages to support modx path placeholders, as well as new serviceClass and serviceName parameters
 - [#3085] Ensure Files tree only refreshes active node when creating/updating a file/dir
