@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.6-pl
 ====================================
+- [#3097] Fixed extension_packages to support modx path placeholders, as well as new serviceClass and serviceName parameters
 - [#3085] Ensure Files tree only refreshes active node when creating/updating a file/dir
 - Improve the Permission dropdown and add window in AP Template page
 - [#3083] Fix Form Customization issue when Resource has a blank Template
