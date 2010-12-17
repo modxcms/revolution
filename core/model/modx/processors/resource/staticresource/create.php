@@ -56,26 +56,33 @@ if ($parent && $parent->checkPolicy('save')) {
 
 /* save resource groups */
 if (isset($scriptProperties['resource_groups'])) {
-    $_GROUPS = $modx->fromJSON($scriptProperties['resource_groups']);
-    foreach ($_GROUPS as $id => $group) {
-        if ($group['access']) {
-            $rgr = $modx->getObject('modResourceGroupResource',array(
-                'document_group' => $group['id'],
-                'document' => $resource->get('id'),
-            ));
-            if ($rgr == null) {
-                $rgr = $modx->newObject('modResourceGroupResource');
+    $resourceGroups = $modx->fromJSON($scriptProperties['resource_groups']);
+    if (is_array($resourceGroups)) {
+        foreach ($resourceGroups as $id => $resourceGroupAccess) {
+            /* prevent adding records for non-existing groups */
+            $resourceGroup = $modx->getObject('modResourceGroup',$resourceGroupAccess['id']);
+            if (empty($resourceGroup)) continue;
+
+            if ($resourceGroupAccess['access']) {
+                $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
+                    'document_group' => $resourceGroupAccess['id'],
+                    'document' => $resource->get('id'),
+                ));
+                if (empty($resourceGroupResource)) {
+                    $resourceGroupResource = $modx->newObject('modResourceGroupResource');
+                }
+                $resourceGroupResource->set('document_group',$resourceGroupAccess['id']);
+                $resourceGroupResource->set('document',$resource->get('id'));
+                $resourceGroupResource->save();
+            } else {
+                $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
+                    'document_group' => $resourceGroupAccess['id'],
+                    'document' => $resource->get('id'),
+                ));
+                if ($resourceGroupResource && $resourceGroupResource instanceof modResourceGroupResource) {
+                    $resourceGroupResource->remove();
+                }
             }
-            $rgr->set('document_group',$group['id']);
-            $rgr->set('document',$resource->get('id'));
-            $rgr->save();
-        } else {
-            $rgr = $modx->getObject('modResourceGroupResource',array(
-                'document_group' => $group['id'],
-                'document' => $resource->get('id'),
-            ));
-            if ($rgr == null) continue;
-            $rgr->remove();
         }
     }
 }

@@ -359,6 +359,11 @@ if (isset($scriptProperties['resource_groups'])) {
     $resourceGroups = $modx->fromJSON($scriptProperties['resource_groups']);
     if (is_array($resourceGroups)) {
         foreach ($resourceGroups as $id => $resourceGroupAccess) {
+            /* prevent adding records for non-existing groups */
+            $resourceGroup = $modx->getObject('modResourceGroup',$resourceGroupAccess['id']);
+            if (empty($resourceGroup)) continue;
+            
+            /* if assigning to group */
             if ($resourceGroupAccess['access']) {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
@@ -370,6 +375,8 @@ if (isset($scriptProperties['resource_groups'])) {
                 $resourceGroupResource->set('document_group',$resourceGroupAccess['id']);
                 $resourceGroupResource->set('document',$resource->get('id'));
                 $resourceGroupResource->save();
+                
+            /* if removing access to group */
             } else {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
@@ -379,9 +386,11 @@ if (isset($scriptProperties['resource_groups'])) {
                     $resourceGroupResource->remove();
                 }
             }
-        }
-    }
+        } /* end foreach */
+    } /* end if is_array */
 }
+/* end save resource groups */
+
 /* fire delete/undelete events */
 if (isset($resourceUndeleted) && !empty($resourceUndeleted)) {
     $modx->invokeEvent('OnResourceUndelete',array(
