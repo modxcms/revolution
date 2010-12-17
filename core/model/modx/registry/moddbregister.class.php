@@ -28,10 +28,6 @@ class modDbRegister extends modRegister {
      */
     protected $_queue = null;
 
-    protected $_readQuery = '';
-    protected $_readQueryNow = '';
-    protected $_readQueryLimit = '';
-
     /**
      * Construct a new modDbRegister instance.
      *
@@ -42,21 +38,6 @@ class modDbRegister extends modRegister {
     function __construct(modX &$modx, $key, array $options = array()) {
         parent :: __construct($modx, $key, $options);
         $this->_queue = $this->_initQueue($key, $options);
-        $msgTable = $this->modx->getTableName('registry.db.modDbRegisterMessage');
-        $topicTable = $this->modx->getTableName('registry.db.modDbRegisterTopic');
-        switch ($modx->getOption('dbtype')) {
-            case 'sqlite':
-            case 'mysql':
-                $this->_readQueryNow = 'NOW()';
-                $this->_readQueryLimit = 'LIMIT';
-                $this->_readQuery = "SELECT msg.* FROM {$msgTable} msg JOIN {$topicTable} topic ON msg.valid <= @NOW@ AND (topic.name = :topic OR (topic.name = :topicbase AND msg.id = :topicmsg)) AND topic.id = msg.topic @ORDERBY@ @LIMIT@";
-                break;
-            case 'sqlsrv':
-                $this->_readQueryNow = 'getdate()';
-                $this->_readQueryLimit = 'TOP';
-                $this->_readQuery = "SELECT @LIMIT@ msg.* FROM {$msgTable} msg JOIN {$topicTable} topic ON msg.valid <= @NOW@ AND (topic.name = :topic OR (topic.name = :topicbase AND msg.id = :topicmsg)) AND topic.id = msg.topic @ORDERBY@";
-                break;
-        }
     }
 
     protected function _initQueue($key, $options) {
@@ -124,31 +105,24 @@ class modDbRegister extends modRegister {
             $iteration++;
             foreach ($this->subscriptions as $subIdx => $topic) {
                 $topicMessages = array();
-                $orderby = "ORDER BY msg.created ASC";
                 $balance = $msgLimit - $msgCount;
-                $limit = ($balance > 0) ? "{$this->_readQueryLimit} {$balance}" : '';
-                $sql = str_replace(array('@LIMIT@', '@ORDERBY@', '@NOW@'), array($limit, $orderby, $this->_readQueryNow), $this->_readQuery);
-                $stmt = $this->modx->prepare($sql);
-                if ($stmt) {
-                    $stmt->bindValue(':topic', $topic);
-                    $stmt->bindValue(':topicbase', dirname($topic) . '/');
-                    $stmt->bindValue(':topicmsg', basename($topic));
-                    if ($stmt->execute()) {
-                        foreach ($stmt->fetchAll(PDO::FETCH_OBJ) as $msg) {
-                            $newMsg = $this->_readMessage($msg, $removeRead);
-                            if ($newMsg !== null) {
-                                $topicMessages[] = $newMsg;
-                                $msgCount++;
-                            } else {
-                                $this->modx->log(modX::LOG_LEVEL_INFO, 'Message was null or expired: ' . print_r($msg, 1));
-                            }
-                            if ($this->__kill) break;
-                        }
+                $args = array(
+                    &$this,
+                    $topic,
+                    dirname($topic) . '/',
+                    basename($topic),
+                    $balance,
+                    array('fetchMode' => PDO::FETCH_OBJ)
+                );
+                foreach ($this->modx->call('registry.db.modDbRegisterMessage', 'getValidMessages', $args) as $msg) {
+                    $newMsg = $this->_readMessage($msg, $removeRead);
+                    if ($newMsg !== null) {
+                        $topicMessages[] = $newMsg;
+                        $msgCount++;
                     } else {
-                        $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error executing statement from sql: ' . $sql);
+                        $this->modx->log(modX::LOG_LEVEL_INFO, 'Message was null or expired: ' . print_r($msg, 1));
                     }
-                } else {
-                    $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error preparing statement from sql: ' . $sql);
+                    if ($this->__kill) break;
                 }
             }
             if (!empty($topicMessages)) {
