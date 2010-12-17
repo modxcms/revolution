@@ -398,22 +398,7 @@ class modX extends xPDO {
             $this->getCacheManager();
             $this->getConfig();
             $this->_initContext($contextKey);
-
-            $extPackages = $this->getOption('extension_packages');
-            $extPackages = $this->fromJSON($extPackages);
-            if (!empty($extPackages)) {
-                foreach ($extPackages as $extPackage) {
-                    if (!is_array($extPackage)) continue;
-
-                    foreach ($extPackage as $packageName => $package) {
-                        if (!empty($package) && !empty($package['path'])) {
-                            $tblPrefix = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
-                            $this->addPackage($packageName,$package['path'],$tblPrefix);
-                        }
-                    }
-                }
-            }
-
+            $this->_loadExtensionPackages();
             $this->_initSession();
             $this->_initErrorHandler();
             $this->_initCulture();
@@ -429,6 +414,42 @@ class modX extends xPDO {
             }
 
             $this->_initialized= true;
+        }
+    }
+
+    /**
+     * Loads any specified extension packages
+     */
+    protected function _loadExtensionPackages() {
+        $extPackages = $this->getOption('extension_packages');
+        if (empty($extPackages)) return;
+        $extPackages = $this->fromJSON($extPackages);
+        if (!empty($extPackages)) {
+            foreach ($extPackages as $extPackage) {
+                if (!is_array($extPackage)) continue;
+
+                foreach ($extPackage as $packageName => $package) {
+                    if (!empty($package) && !empty($package['path'])) {
+                        $package['tablePrefix'] = !empty($package['tablePrefix']) ? $package['tablePrefix'] : null;
+                        $package['path'] = str_replace(array(
+                            '[[++core_path]]',
+                            '[[++base_path]]',
+                            '[[++assets_path]]',
+                            '[[++manager_path]]',
+                        ),array(
+                            $this->config['core_path'],
+                            $this->config['base_path'],
+                            $this->config['assets_path'],
+                            $this->config['manager_path'],
+                        ),$package['path']);
+                        $this->addPackage($packageName,$package['path'],$package['tablePrefix']);
+                        if (!empty($package['serviceName']) && !empty($package['serviceClass'])) {
+                            $packagePath = str_replace('//','/',$package['path'].$packageName.'/');
+                            $this->getService($package['serviceName'],$package['serviceClass'],$packagePath);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -899,16 +920,16 @@ class modX extends xPDO {
         if (!is_array($options)) $options = array();
         $options= array_merge(
             array(
-                'response_code' => $this->getOption('error_page_header', $options,$this->getOption('error_page_header','HTTP/1.1 404 Not Found'))
+                'response_code' => $this->getOption('error_page_header', $options, 'HTTP/1.1 404 Not Found')
                 ,'error_type' => '404'
-                ,'error_header' => $this->getOption('error_page_header', $options,'HTTP/1.1 404 Not Found')
-                ,'error_pagetitle' => $this->getOption('error_page_pagetitle', $options,'Error 404: Page not found')
-                ,'error_message' => $this->getOption('error_page_message', $options,'<h1>Page not found</h1><p>The page you requested was not found.</p>')
+                ,'error_header' => $this->getOption('error_page_header', $options, 'HTTP/1.1 404 Not Found')
+                ,'error_pagetitle' => $this->getOption('error_page_pagetitle', $options, 'Error 404: Page not found')
+                ,'error_message' => $this->getOption('error_page_message', $options, '<h1>Page not found</h1><p>The page you requested was not found.</p>')
             ),
             $options
         );
         $this->invokeEvent('OnPageNotFound', $options);
-        $this->sendForward($this->getOption('error_page', $options, $this->getOption('error_page','404')), $options);
+        $this->sendForward($this->getOption('error_page', $options, '404'), $options);
     }
 
     /**
@@ -1332,7 +1353,7 @@ class modX extends xPDO {
                 } else {
                     $plugin= $this->getObject('modPlugin', array ('id' => intval($pluginId), 'disabled' => '0'), true);
                 }
-                if ($plugin) {
+                if ($plugin && !$plugin->get('disabled')) {
                     $this->event->activated= true;
                     $this->event->activePlugin= $plugin->get('name');
                     $this->event->propertySet= (($pspos = strpos($pluginPropset, ':')) > 1) ? substr($pluginPropset, $pspos + 1) : '';
@@ -1411,14 +1432,6 @@ class modX extends xPDO {
         if (file_exists($processor)) {
             if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
             if (!isset($this->error)) $this->request->loadErrorHandler();
-
-            /* create scriptProperties array from HTTP GPC vars */
-            if (!isset($_POST)) $_POST = array();
-            if (!isset($_GET)) $_GET = array();
-            $scriptProperties = array_merge($scriptProperties,$_GET,$_POST);
-            if (isset($_FILES) && !empty($_FILES)) {
-                $scriptProperties = array_merge($scriptProperties,$_FILES);
-            }
 
             $modx =& $this;
             $response = include $processor;

@@ -52,13 +52,7 @@ $nameExists = $modx->getObject('modTemplateVar',array(
     'id:!=' => $tv->get('id'),
     'name' => $scriptProperties['name'],
 ));
-if ($nameExists) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name'));
-
-/* get rid of invalid chars */
-//$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-//    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-//$scriptProperties['name'] = str_replace($invchars,'',$scriptProperties['name']);
-
+if ($nameExists) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name',array('name' => $scriptProperties['name'])));
 
 /* extract widget properties */
 $display_params = '';
@@ -66,6 +60,7 @@ foreach ($scriptProperties as $key => $value) {
     $res = strstr($key,'prop_');
     if ($res !== false) {
         $key = str_replace('prop_','',$key);
+        $value = str_replace('=','%3D',$value);
         $display_params .= '&'.$key.'='.$value;
     }
 }

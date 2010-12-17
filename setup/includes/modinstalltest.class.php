@@ -106,6 +106,7 @@ abstract class modInstallTest {
      * @return integer The string converted into a proper integer bytes
      */
     protected function _returnBytes($val) {
+        if (is_integer($val)) return $val;
         $val = trim($val);
         $num = intval(substr($val,0,strlen($val)-1));
         $last = strtolower(substr($val,-1));

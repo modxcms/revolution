@@ -75,7 +75,11 @@ foreach ($policies as $key => $policy) {
     $policyArray['cls'] = $cls;
     if (!empty($policyArray['total_permissions'])) {
         $data = $policy->get('data');
-        $policyArray['active_permissions'] = count($data);
+        $ct = 0;
+        foreach ($data as $k => $v) {
+            if (!empty($v)) $ct++;
+        }
+        $policyArray['active_permissions'] = $ct;
         $policyArray['active_of'] = $modx->lexicon('active_of',array(
             'active' => $policyArray['active_permissions'],
             'total' => $policyArray['total_permissions'],

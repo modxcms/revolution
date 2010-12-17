@@ -47,7 +47,7 @@
  * @package modx
  * @subpackage processors.resource
  */
-if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('resource_create_access_denied'));
+if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('access_denied'));
 $modx->lexicon->load('resource');
 
 /* handle if parent is a context */
@@ -67,7 +67,7 @@ $wctx = $scriptProperties['context_key'];
 if (!empty($wctx)) {
     $workingContext = $modx->getContext($wctx);
     if (!$workingContext) {
-        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+        return $modx->error->failure($modx->error->failure($modx->lexicon('access_denied')));
     }
 } else {
     $workingContext =& $modx->context;
@@ -84,6 +84,7 @@ $scriptProperties['cacheable'] = empty($scriptProperties['cacheable']) ? 0 : 1;
 $scriptProperties['searchable'] = empty($scriptProperties['searchable']) ? 0 : 1;
 $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
 $scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
+$scriptProperties['createdby'] = $modx->user->get('username');
 $scriptProperties['menuindex'] = empty($scriptProperties['menuindex']) ? 0 : $scriptProperties['menuindex'];
 $scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
 
@@ -124,7 +125,7 @@ if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->le
 if ($workingContext->getOption('friendly_alias_urls', false)) {
     /* auto assign alias */
     $aliasPath = $resource->getAliasPath($scriptProperties['alias'], $scriptProperties);
-    $duplicateId = $resource->isDuplicateAlias($aliasPath);
+    $duplicateId = $resource->isDuplicateAlias($aliasPath, $scriptProperties['context_key']);
     if (!$workingContext->getOption('allow_duplicate_alias', false) && $duplicateId) {
         $err = $modx->lexicon('duplicate_alias_found',array(
             'id' => $duplicateId,
@@ -288,6 +289,11 @@ if (isset($scriptProperties['resource_groups'])) {
     $resourceGroups = $modx->fromJSON($scriptProperties['resource_groups']);
     if (is_array($resourceGroups)) {
         foreach ($resourceGroups as $id => $resourceGroupAccess) {
+            /* prevent adding records for non-existing groups */
+            $resourceGroup = $modx->getObject('modResourceGroup',$resourceGroupAccess['id']);
+            if (empty($resourceGroup)) continue;
+
+            /* if assigning to group */
             if (!empty($resourceGroupAccess['access'])) {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
@@ -299,6 +305,8 @@ if (isset($scriptProperties['resource_groups'])) {
                 $resourceGroupResource->set('document_group',$resourceGroupAccess['id']);
                 $resourceGroupResource->set('document',$resource->get('id'));
                 $resourceGroupResource->save();
+
+            /* if removing access to group */
             } else {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
@@ -308,9 +316,10 @@ if (isset($scriptProperties['resource_groups'])) {
                     $resourceGroupResource->remove();
                 }
             }
-        }
-    }
+        } /* end foreach */
+    } /* end if is_array */
 }
+/* end save resource groups */
 
 /* quick check to make sure it's not site_start, if so, publish */
 if ($resource->get('id') == $workingContext->getOption('site_start')) {

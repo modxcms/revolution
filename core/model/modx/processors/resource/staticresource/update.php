@@ -163,6 +163,10 @@ if (isset($scriptProperties['resource_groups'])) {
     $resourceGroups = $modx->fromJSON($scriptProperties['resource_groups']);
     if (is_array($resourceGroups)) {
         foreach ($resourceGroups as $id => $resourceGroupAccess) {
+            /* prevent adding records for non-existing groups */
+            $resourceGroup = $modx->getObject('modResourceGroup',$resourceGroupAccess['id']);
+            if (empty($resourceGroup)) continue;
+            
             if ($resourceGroupAccess['access']) {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],

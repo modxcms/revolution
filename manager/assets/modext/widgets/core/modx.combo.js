@@ -567,10 +567,10 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
             if (node.attributes && node.attributes.ctx != ctxv) {
                 ctxf.setValue(node.attributes.ctx);
             }
-        }        
+        }
         this.fireEvent('end',{
             v: node.attributes.type != 'modContext' ? id : node.attributes.pk
-            ,d: node.text
+            ,d: Ext.util.Format.stripTags(node.text)
         });
         e.preventDefault();
         e.stopEvent();

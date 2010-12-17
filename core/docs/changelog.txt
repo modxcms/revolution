@@ -2,6 +2,35 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODx Revolution 2.0.6-pl
+====================================
+- [#3105] Improve memory_limit check in setup to accept integer values from PHP instances
+- [#3106] Add sanity check to resource create/update processors to disallow invalid Resource Group ID references
+- [#3038] Fix problems with filemanager_path settings and absolute URLs in image TV values
+- [#3039] Add symlink_merge_fields setting to disable modSymLink merge behavior
+- [#3103] Alter modSession data field to store more than 64Kb
+- [#3091] Add missing specific dom ID to profile change password panel
+- [#3096] Fix issue with exporting default properties not in a set from an element
+- [#3099] Fix FC rules to respect class_key constraints
+- [#3097] Fix extension_packages to support modx path placeholders, as well as new serviceClass and serviceName parameters
+- [#3085] Ensure Files tree only refreshes active node when creating/updating a file/dir
+- Improve the Permission dropdown and add window in AP Template page
+- [#3083] Fix Form Customization issue when Resource has a blank Template
+- [#3082] Fix Form Customization issue where cacheable and ID fields not able to be hidden/altered
+- [#3034] Fix error creating Resources in Contexts other than web
+- Fix issue with incorrect active permission total in Access Policy grid
+- [#3023] Fix issue where topmenu did not respect manager_language
+- [#3080] Fix missing placeholder in error message when attempting to create a duplicate Element
+- Add new header image to match new site
+- [#3078] Fix issue with htmltag TV widget properties when using = in its value
+- [#3079] Ensure GPC vars are not sent into $scriptProperties array in $modx->runProcessor
+- [#2983] Add sanity check to prevent plugins from firing if disabled (redundancy)
+- [#3057] Fix issue where parent change causes fail to save in UI
+- [#3076] Fix bug where manager returnUrl was not working due to [#2918] fix
+- [#3059] Ensure createdby is set on resource creation
+- [#3041] Fix missing lexicon entry in resource processors
+- [#3043] Fix invalid 200 response header on sendError()
+
 MODx Revolution 2.0.5-pl (December 8th, 2010)
 ====================================
 - Change remove() to removePackage() in modTransportPackage

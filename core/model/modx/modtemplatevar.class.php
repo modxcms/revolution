@@ -370,7 +370,7 @@ class modTemplateVar extends modElement {
         $format= $this->get('display');
         $tvtype= $this->get('type');
         /* end backwards compat */
-
+        
         $modx =& $this->xpdo;
         if (empty($modx->resource)) {
             if (!empty($resourceId)) {
@@ -450,7 +450,7 @@ class modTemplateVar extends modElement {
      * @return string The decoded string.
      */
     public function decodeParamValue($s) {
-        $s= str_replace("%3D", '=', $s);
+        $s= str_replace(array("%3D",'&#61;'), '=', $s);
         $s= str_replace("%26", '&', $s);
         return $s;
     }

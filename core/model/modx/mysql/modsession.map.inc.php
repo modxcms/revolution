@@ -34,7 +34,7 @@ $xpdo_meta_map['modSession']= array (
     ),
     'data' => 
     array (
-      'dbtype' => 'text',
+      'dbtype' => 'mediumtext',
       'phptype' => 'string',
     ),
   ),

@@ -24,6 +24,7 @@
 <actions>
     <action controller="resource/update" form="modx-panel-resource">
         <tab name="modx-resource-settings">
+            <field name="id" />
             <field name="template" />
             <field name="published" />
             <field name="pagetitle" />
@@ -44,7 +45,7 @@
             <field name="pub_date" />
             <field name="unpub_date" />
             <field name="searchable" />
-            <field name="cachable" />
+            <field name="cacheable" />
             <field name="syncsite" />
             <field name="deleted" />
             <field name="content_type" />
@@ -79,7 +80,7 @@
             <field name="pub_date" />
             <field name="unpub_date" />
             <field name="searchable" />
-            <field name="cachable" />
+            <field name="cacheable" />
             <field name="syncsite" />
             <field name="deleted" />
             <field name="content_type" />
