@@ -37,6 +37,7 @@ $fullpath = $root.'/'.$dir;
 /* get base path/url */
 $basePath = $modx->fileHandler->getBasePath(false);
 $baseUrl = $modx->fileHandler->getBaseUrl(true);
+$isRelativeBaseUrl = $modx->getOption('filemanager_path_relative',null,true);
 
 /* setup settings */
 $imagesExts = array('jpg','jpeg','png','gif');
@@ -87,7 +88,12 @@ foreach (new DirectoryIterator($fullpath) as $file) {
         }
         $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
-        $relativeUrl = $baseUrl.ltrim($url,'/');
+        if ($isRelativeBaseUrl) {
+            $url = ltrim($url,'/');
+            $baseUrl = ltrim($baseUrl,'/');
+        }
+        $relativeUrl = $baseUrl.$url;
+
         $files[] = array(
             'id' => $filePathName,
             'name' => $fileName,
