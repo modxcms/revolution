@@ -351,9 +351,9 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
         'modActionDom.active' => true,
     ));
     $c->select(array(
-        'modActionDom.*',
-        'Action.controller',
-        'Access.principal',
+        $modx->getSelectColumns('modActionDom'),
+        $modx->getSelectColumns('modAction', 'Action', '', array('controller')),
+        $modx->getSelectColumns('modAccessActionDom', 'Access', '', array('principal')),
     ));
     $c->sortby('Access.principal','ASC');
     $c->sortby('modActionDom.action','ASC');
