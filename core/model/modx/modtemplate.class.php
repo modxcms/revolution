@@ -105,9 +105,9 @@ class modTemplate extends modElement {
         $collection= array ();
         if (($alias === 'TemplateVars' || $alias === 'modTemplateVar') && ($criteria === null || strtolower($criteria) === 'all')) {
             $c = $this->xpdo->newQuery('modTemplateVar');
-            $c->select('
-                DISTINCT modTemplateVar.*,
-                modTemplateVar.default_text AS value');
+            $c->query['distinct'] = 'DISTINCT';
+            $c->select($this->xpdo->getSelectColumns('modTemplateVar'));
+            $c->select(array('value' => $this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar', '', array('default_text'))));
             $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
                 'tvtpl.tmplvarid = modTemplateVar.id',
                 'tvtpl.templateid' => $this->get('id'),

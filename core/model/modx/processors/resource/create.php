@@ -164,7 +164,9 @@ if (isset($scriptProperties['unpub_date'])) {
 if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modTemplate', $scriptProperties['template']))) {
     $tmplvars = array();
     $c = $modx->newQuery('modTemplateVar');
-    $c->select('DISTINCT modTemplateVar.*, modTemplateVar.default_text AS value');
+    $c->query['distinct'] = 'DISTINCT';
+    $c->select($this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+    $c->select(array('modTemplateVar.default_text AS value'));
     $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplates');
     $c->where(array(
         'TemplateVarTemplates.templateid' => $scriptProperties['template'],
