@@ -11,7 +11,11 @@ $isRelativeBaseUrl = $this->xpdo->getOption('filemanager_path_relative',null,tru
 if ($isRelativeBaseUrl) {
     $basePath = $this->xpdo->fileHandler->getBasePath(false);
     $baseUrl = $this->xpdo->fileHandler->getBaseUrl(true);
-    $value = ltrim(str_replace($baseUrl,'',$this->get('value')),'/');
+    $value = $this->get('value');
+    if ($baseUrl != '/') {
+        $value = str_replace($baseUrl,'',$value);
+    }
+    $value = ltrim($value,'/');
     $this->set('value',$value);
     $this->xpdo->smarty->assign('tv',$this);
 }
