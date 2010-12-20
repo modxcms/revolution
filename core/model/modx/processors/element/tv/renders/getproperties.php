@@ -33,7 +33,7 @@ if (!empty($scriptProperties['tv'])) {
         foreach ($ps as $p) {
             $param = explode('=',$p);
             if (!empty($p[0])) {
-                $settings[$param[0]] = $param[1];
+                $settings[$param[0]] = str_replace('%3D','=',$param[1]);
             }
         }
     }

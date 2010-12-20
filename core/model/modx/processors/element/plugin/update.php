@@ -43,7 +43,7 @@ $nameExists = $modx->getObject('modPlugin',array(
     'id:!=' => $plugin->get('id'),
     'name' => $scriptProperties['name'],
 ));
-if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('plugin_err_exists_name'));
+if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('plugin_err_exists_name',array('name' => $scriptProperties['name'])));
 
 
 /* category */

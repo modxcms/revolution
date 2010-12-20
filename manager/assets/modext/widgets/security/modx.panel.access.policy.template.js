@@ -227,6 +227,7 @@ MODx.window.NewTemplatePermission = function(config) {
             ,anchor: '90%'
             ,grow: true
         }]
+        ,keys: []
     });
     MODx.window.NewTemplatePermission.superclass.constructor.call(this,config);
 };
@@ -270,6 +271,8 @@ MODx.combo.Permission = function(config) {
         ,editable: true
         ,typeAhead: false
         ,forceSelection: false
+        ,enableKeyEvents: true
+        ,autoSelect: false
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
             ,'<p style="margin: 0; font-size: 11px; color: gray;">{description}</p></div></tpl>')
         ,url: MODx.config.connectors_url+'security/access/permission.php'

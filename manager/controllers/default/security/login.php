@@ -19,9 +19,14 @@ if (!empty($_SERVER['REQUEST_URI'])) {
 }
 
 if (!empty($_POST)) {
-    $san = array("'",'"','(',')',';','>','<');
+    $san = array("'",'"','(',')',';','>','<','../');
     foreach ($_POST as $k => $v) {
-        $_POST[$k] = $modx->sanitizeString($v,$san);
+        if (!in_array($k,array('returnUrl'))) {
+            $_POST[$k] = str_replace($san,'',$v);
+        } else {
+            $chars = array("'",'"','(',')',';','>','<','!','../');
+            $_POST[$k] = str_replace($chars,'',$v);
+        }
     }
     $this->loadErrorHandler();
     $scriptProperties = $_REQUEST;

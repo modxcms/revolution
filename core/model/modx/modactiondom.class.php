@@ -15,16 +15,6 @@ class modActionDom extends modAccessibleSimpleObject {
     public function apply($objId = '') {
         if (empty($objId)) $objId = $_REQUEST['id'];
         $rule = '';
-        /* first check to see if there is any constraints on this rule */
-        $constraint = $this->get('constraint');
-        $constraintField = $this->get('constraint_field');
-        $constraintClass = $this->get('constraint_class');
-        if (!empty($constraintClass) && !empty($constraint) && !empty($constraintField)) {
-            $obj = $this->xpdo->getObject($constraintClass,$objId);
-            if ($obj instanceof $constraintClass && $obj->get($constraintField) != $constraint) {
-                return $rule;
-            }
-        }
 
         /* now switch by types of rules */
         switch ($this->get('rule')) {
