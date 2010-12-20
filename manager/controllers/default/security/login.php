@@ -19,10 +19,10 @@ if (!empty($_SERVER['REQUEST_URI'])) {
 }
 
 if (!empty($_POST)) {
-    $san = array("'",'"','(',')',';','>','<');
+    $san = array("'",'"','(',')',';','>','<','../');
     foreach ($_POST as $k => $v) {
         if (!in_array($k,array('returnUrl'))) {
-            $_POST[$k] = $modx->sanitizeString($v,$san);
+            $_POST[$k] = str_replace($san,'',$v);
         } else {
             $chars = array("'",'"','(',')',';','>','<','!','../');
             $_POST[$k] = str_replace($chars,'',$v);
