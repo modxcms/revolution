@@ -75,13 +75,13 @@ if (!empty($wctx)) {
 
 $scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);
 $scriptProperties['template'] = !isset($scriptProperties['template']) ? (integer) $workingContext->getOption('default_template', 0) : (integer) $scriptProperties['template'];
-$scriptProperties['hidemenu'] = empty($scriptProperties['hidemenu']) ? 0 : 1;
+$scriptProperties['hidemenu'] = !isset($scriptProperties['hidemenu']) ? (integer) $workingContext->getOption('hidemenu_default', 0) : (empty($scriptProperties['hidemenu']) ? 0 : 1);
 $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
-$scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? 0 : 1;
+$scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? (integer) $workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
 $scriptProperties['donthit'] = empty($scriptProperties['donthit']) ? 0 : 1;
-$scriptProperties['published'] = empty($scriptProperties['published']) ? 0 : 1;
-$scriptProperties['cacheable'] = empty($scriptProperties['cacheable']) ? 0 : 1;
-$scriptProperties['searchable'] = empty($scriptProperties['searchable']) ? 0 : 1;
+$scriptProperties['published'] = !isset($scriptProperties['published']) ? (integer) $workingContext->getOption('publish_default', 0) : (empty($scriptProperties['published']) ? 0 : 1);
+$scriptProperties['cacheable'] = !isset($scriptProperties['cacheable']) ? (integer) $workingContext->getOption('cache_default', 1) : (empty($scriptProperties['cacheable']) ? 0 : 1);
+$scriptProperties['searchable'] = !isset($scriptProperties['searchable']) ? (integer) $workingContext->getOption('search_default', 1) : (empty($scriptProperties['searchable']) ? 0 : 1);
 $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
 $scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
 $scriptProperties['createdby'] = $modx->user->get('username');
