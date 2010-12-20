@@ -176,6 +176,19 @@ if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modT
         $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : $tv->get('default_text');
 
         switch ($tv->get('type')) {
+            /* ensure tag types trim whitespace from tags */
+            case 'tag':
+            case 'autotag':
+                $tags = explode(',',$value);
+                $newTags = array();
+                foreach ($tags as $tag) {
+                    $newTags[] = trim($tag);
+                }
+                $value = implode(',',$newTags);
+                break;
+            case 'date':
+                $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
+                break;
             case 'url':
                 if ($scriptProperties['tv' . $row['name'] . '_prefix'] != '--') {
                     $value = str_replace(array('ftp://','http://'),'', $value);

@@ -225,6 +225,16 @@ if (!empty($scriptProperties['tvs'])) {
             case 'date':
                 $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
                 break;
+            /* ensure tag types trim whitespace from tags */
+            case 'tag':
+            case 'autotag':
+                $tags = explode(',',$value);
+                $newTags = array();
+                foreach ($tags as $tag) {
+                    $newTags[] = trim($tag);
+                }
+                $value = implode(',',$newTags);
+                break;
             default:
                 /* handles checkboxes & multiple selects elements */
                 if (is_array($value)) {
