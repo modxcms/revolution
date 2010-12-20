@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODx Revolution 2.0.6-pl
 ====================================
+- [#3144] Fix issue with reset password and @ being stripped
 - [#3142] Ensure whitespace is stripped from tags in tag/autotag TV types
 - [#3118] Ensure defaults are set in resource/create processor if values are not sent
 - [#3105] Improve memory_limit check in setup to accept integer values from PHP instances
