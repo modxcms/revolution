@@ -25,7 +25,7 @@ if (empty($scriptProperties['templatename'])) $scriptProperties['templatename'] 
 $nameExists = $modx->getObject('modTemplate',array(
     'templatename' => $scriptProperties['templatename'],
 ));
-if ($nameExists) $modx->error->addField('templatename',$modx->lexicon('template_err_exists_name'));
+if ($nameExists) $modx->error->addField('templatename',$modx->lexicon('template_err_exists_name',array('name' => $scriptProperties['templatename'])));
 
 /* category */
 if (!empty($scriptProperties['category'])) {

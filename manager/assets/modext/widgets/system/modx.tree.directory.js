@@ -227,7 +227,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,ctx: MODx.ctx || ''
             }
             ,listeners: {
-               'success': {fn:this.refresh,scope:this}
+               'success': {fn:this.refreshActiveNode,scope:this}
             }
         });
     }
@@ -245,7 +245,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,record: r
                 ,prependPath: this.config.prependPath || null
                 ,listeners: {
-                    'success':{fn:this.refresh,scope:this}
+                    'success':{fn:this.refreshActiveNode,scope:this}
                 }
             });
         }
@@ -262,7 +262,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,record: r
                 ,prependPath: this.config.prependPath || null
                 ,listeners: {
-                    'success':{fn:this.refresh,scope:this}
+                    'success':{fn:this.refreshActiveNode,scope:this}
                 }
             });
         }
@@ -279,7 +279,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,record: r
                 ,prependPath: this.config.prependPath || null
                 ,listeners: {
-                    'success':{fn:this.refresh,scope:this}
+                    'success':{fn:this.refreshActiveNode,scope:this}
                 }
             });
         }
@@ -353,11 +353,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 if (pn) {
                     pn.reload();
                 } else {
-                    this.refresh();
+                    this.refreshActiveNode();
                 }
                 this.fireEvent('afterUpload',node);
             } else {
-                this.refresh();
+                this.refreshActiveNode();
             }
         } else {
             this.refresh();

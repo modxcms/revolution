@@ -41,7 +41,7 @@ $nameExists = $modx->getObject('modChunk',array(
     'name' => $scriptProperties['name'],
 ));
 if (!empty($nameExists)) {
-    $modx->error->addField('name',$modx->lexicon('chunk_err_exists_name'));
+    $modx->error->addField('name',$modx->lexicon('chunk_err_exists_name',array('name' => $scriptProperties['name'])));
 }
 
 

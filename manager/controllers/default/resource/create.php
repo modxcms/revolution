@@ -178,7 +178,7 @@ $defaults = array(
 
 /* handle FC rules */
 if ($parent == null) {
-    $parent = $modx->newObject('modResource');
+    $parent = $modx->newObject($resourceClass);
     $parent->set('id',0);
     $parent->set('parent',0);
 }

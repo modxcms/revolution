@@ -163,6 +163,10 @@ if (isset($scriptProperties['resource_groups'])) {
     $resourceGroups = $modx->fromJSON($scriptProperties['resource_groups']);
     if (is_array($resourceGroups)) {
         foreach ($resourceGroups as $id => $resourceGroupAccess) {
+            /* prevent adding records for non-existing groups */
+            $resourceGroup = $modx->getObject('modResourceGroup',$resourceGroupAccess['id']);
+            if (empty($resourceGroup)) continue;
+            
             if ($resourceGroupAccess['access']) {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
@@ -220,6 +224,16 @@ if (!empty($scriptProperties['tvs'])) {
                 break;
             case 'date':
                 $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
+                break;
+            /* ensure tag types trim whitespace from tags */
+            case 'tag':
+            case 'autotag':
+                $tags = explode(',',$value);
+                $newTags = array();
+                foreach ($tags as $tag) {
+                    $newTags[] = trim($tag);
+                }
+                $value = implode(',',$newTags);
                 break;
             default:
                 /* handles checkboxes & multiple selects elements */

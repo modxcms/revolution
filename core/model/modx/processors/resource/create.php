@@ -47,7 +47,7 @@
  * @package modx
  * @subpackage processors.resource
  */
-if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('resource_create_access_denied'));
+if (!$modx->hasPermission('new_document')) return $modx->error->failure($modx->lexicon('access_denied'));
 $modx->lexicon->load('resource');
 
 /* handle if parent is a context */
@@ -67,7 +67,7 @@ $wctx = $scriptProperties['context_key'];
 if (!empty($wctx)) {
     $workingContext = $modx->getContext($wctx);
     if (!$workingContext) {
-        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+        return $modx->error->failure($modx->error->failure($modx->lexicon('access_denied')));
     }
 } else {
     $workingContext =& $modx->context;
@@ -75,15 +75,16 @@ if (!empty($wctx)) {
 
 $scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);
 $scriptProperties['template'] = !isset($scriptProperties['template']) ? (integer) $workingContext->getOption('default_template', 0) : (integer) $scriptProperties['template'];
-$scriptProperties['hidemenu'] = empty($scriptProperties['hidemenu']) ? 0 : 1;
+$scriptProperties['hidemenu'] = !isset($scriptProperties['hidemenu']) ? (integer) $workingContext->getOption('hidemenu_default', 0) : (empty($scriptProperties['hidemenu']) ? 0 : 1);
 $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
-$scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? 0 : 1;
+$scriptProperties['richtext'] = empty($scriptProperties['richtext']) ? (integer) $workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
 $scriptProperties['donthit'] = empty($scriptProperties['donthit']) ? 0 : 1;
-$scriptProperties['published'] = empty($scriptProperties['published']) ? 0 : 1;
-$scriptProperties['cacheable'] = empty($scriptProperties['cacheable']) ? 0 : 1;
-$scriptProperties['searchable'] = empty($scriptProperties['searchable']) ? 0 : 1;
+$scriptProperties['published'] = !isset($scriptProperties['published']) ? (integer) $workingContext->getOption('publish_default', 0) : (empty($scriptProperties['published']) ? 0 : 1);
+$scriptProperties['cacheable'] = !isset($scriptProperties['cacheable']) ? (integer) $workingContext->getOption('cache_default', 1) : (empty($scriptProperties['cacheable']) ? 0 : 1);
+$scriptProperties['searchable'] = !isset($scriptProperties['searchable']) ? (integer) $workingContext->getOption('search_default', 1) : (empty($scriptProperties['searchable']) ? 0 : 1);
 $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
 $scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
+$scriptProperties['createdby'] = $modx->user->get('username');
 $scriptProperties['menuindex'] = empty($scriptProperties['menuindex']) ? 0 : $scriptProperties['menuindex'];
 $scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
 
@@ -124,7 +125,7 @@ if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->le
 if ($workingContext->getOption('friendly_alias_urls', false)) {
     /* auto assign alias */
     $aliasPath = $resource->getAliasPath($scriptProperties['alias'], $scriptProperties);
-    $duplicateId = $resource->isDuplicateAlias($aliasPath);
+    $duplicateId = $resource->isDuplicateAlias($aliasPath, $scriptProperties['context_key']);
     if (!$workingContext->getOption('allow_duplicate_alias', false) && $duplicateId) {
         $err = $modx->lexicon('duplicate_alias_found',array(
             'id' => $duplicateId,
@@ -175,6 +176,19 @@ if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modT
         $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : $tv->get('default_text');
 
         switch ($tv->get('type')) {
+            /* ensure tag types trim whitespace from tags */
+            case 'tag':
+            case 'autotag':
+                $tags = explode(',',$value);
+                $newTags = array();
+                foreach ($tags as $tag) {
+                    $newTags[] = trim($tag);
+                }
+                $value = implode(',',$newTags);
+                break;
+            case 'date':
+                $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
+                break;
             case 'url':
                 if ($scriptProperties['tv' . $row['name'] . '_prefix'] != '--') {
                     $value = str_replace(array('ftp://','http://'),'', $value);
@@ -288,6 +302,11 @@ if (isset($scriptProperties['resource_groups'])) {
     $resourceGroups = $modx->fromJSON($scriptProperties['resource_groups']);
     if (is_array($resourceGroups)) {
         foreach ($resourceGroups as $id => $resourceGroupAccess) {
+            /* prevent adding records for non-existing groups */
+            $resourceGroup = $modx->getObject('modResourceGroup',$resourceGroupAccess['id']);
+            if (empty($resourceGroup)) continue;
+
+            /* if assigning to group */
             if (!empty($resourceGroupAccess['access'])) {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
@@ -299,6 +318,8 @@ if (isset($scriptProperties['resource_groups'])) {
                 $resourceGroupResource->set('document_group',$resourceGroupAccess['id']);
                 $resourceGroupResource->set('document',$resource->get('id'));
                 $resourceGroupResource->save();
+
+            /* if removing access to group */
             } else {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
@@ -308,9 +329,10 @@ if (isset($scriptProperties['resource_groups'])) {
                     $resourceGroupResource->remove();
                 }
             }
-        }
-    }
+        } /* end foreach */
+    } /* end if is_array */
 }
+/* end save resource groups */
 
 /* quick check to make sure it's not site_start, if so, publish */
 if ($resource->get('id') == $workingContext->getOption('site_start')) {

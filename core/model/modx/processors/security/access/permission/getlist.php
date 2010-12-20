@@ -12,6 +12,7 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$query = $modx->getOption('query',$scriptProperties,'');
 
 /* build query */
 $c = $modx->newQuery('modAccessPermission');
@@ -23,6 +24,11 @@ $c->select(array(
 ));
 $c->leftJoin('modAccessPolicyTemplate','Template');
 $c->query['DISTINCT'] = 'DISTINCT';
+if (!empty($query)) {
+    $c->where(array(
+        'modAccessPermission.name:LIKE' => '%'.$query.'%',
+    ));
+}
 $count = $modx->getCount('modAccessPermission',$c);
 $c->groupby('modAccessPermission.name');
 $c->sortby('modAccessPermission.name','ASC');
