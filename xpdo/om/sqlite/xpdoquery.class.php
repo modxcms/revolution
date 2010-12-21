@@ -54,9 +54,11 @@ class xPDOQuery_sqlite extends xPDOQuery {
             }
             foreach ($this->query['columns'] as $alias => $column) {
                 $ignorealias = is_int($alias);
-                $escape = strpos($column, ' AS ') == false;
+                $escape = !preg_match('/\bAS\b/i', $column) && !preg_match('/\./', $column) && !preg_match('/\(/', $column);
                 if ($escape) {
                     $column= $this->xpdo->escape(trim($column));
+                } else {
+                    $column= trim($column);
                 }
                 if (!$ignorealias) {
                     $alias = $escape ? $this->xpdo->escape($alias) : $alias;
