@@ -60,7 +60,7 @@ if (!is_object($modx) || !($modx instanceof modX)) {
     exit();
 }
 
-$modx->setDebug(E_ALL & ~E_NOTICE);
+$modx->setDebug(E_ALL | E_STRICT);
 $modx->setLogLevel(modX::LOG_LEVEL_ERROR);
 $modx->setLogTarget('FILE');
 
