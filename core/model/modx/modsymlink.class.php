@@ -32,7 +32,7 @@ class modSymLink extends modResource {
         if (is_numeric($this->_content)) {
             $this->_output= intval($this->_content);
         } else {
-            $parser= $this->xpdo->getParser();
+            $this->xpdo->getParser();
             $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
             $this->xpdo->parser->processElementTags($this->_tag, $this->_content, true, true, '[[', ']]', array(), $maxIterations);
         }
@@ -41,6 +41,7 @@ class modSymLink extends modResource {
         } else {
             $this->_output= $this->_content;
         }
-        $this->xpdo->sendForward($this->_output, array('merge' => true));
+        $forwardOptions = array('merge' => $this->xpdo->getOption('symlink_merge_fields', null, true));
+        $this->xpdo->sendForward($this->_output, $forwardOptions);
     }
 }

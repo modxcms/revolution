@@ -90,11 +90,16 @@ MODx.grid.Lexicon = function(config) {
             ,emptyText: _('search')+'...'
             ,listeners: {
                 'change': {fn:this.filter.createDelegate(this,['search'],true),scope:this}
-                ,'render': {fn:function(tf) {
-                    tf.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
-                        tf.fireEvent('change');
-                    },this);
-                }}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
+                },scope:this}
             }
         },{
             xtype: 'button'

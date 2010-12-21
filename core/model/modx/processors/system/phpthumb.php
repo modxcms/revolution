@@ -17,16 +17,20 @@ if (empty($src)) return '';
 
 /* determine absolute path to image from URL passed that is context-specific */
 $basePath = $modx->fileHandler->getBasePath(false);
-$src = $basePath.$src;
-/* strip out double slashes */
-$src = str_replace(array('///','//'),'/',$src);
 
-/* check for file existence */
-if (empty($src) || !file_exists($src)) {
-    if (file_exists('/'.$src)) {
-        $src = '/'.$src;
-    } else {
-        return '';
+/* dont strip stuff for absolute URLs */
+if (strpos($src,'http') === false) {
+    $src = $basePath.$src;
+    /* strip out double slashes */
+    $src = str_replace(array('///','//'),'/',$src);
+
+    /* check for file existence if local url */
+    if (empty($src) || !file_exists($src)) {
+        if (file_exists('/'.$src)) {
+            $src = '/'.$src;
+        } else {
+            return '';
+        }
     }
 }
 

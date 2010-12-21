@@ -35,7 +35,7 @@ if (!empty($scriptProperties['category'])) {
 }
 
 $name_exists = $modx->getObject('modTemplateVar',array('name' => $scriptProperties['name']));
-if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name'));
+if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name',array('name' => $scriptProperties['name'])));
 
 if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('untitled_tv');
 

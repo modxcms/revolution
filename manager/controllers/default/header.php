@@ -6,7 +6,7 @@
  * @subpackage manager
  */
 /* get top navbar */
-$menus = $modx->cacheManager->get('mgr/menus/'.$modx->getOption('cultureKey',null,'en'));
+$menus = $modx->cacheManager->get('mgr/menus/'.$modx->getOption('manager_language',null,$modx->getOption('cultureKey',null,'en')));
 if ($menus == null) {
     $menu = $modx->newObject('modMenu');
     $menus = $menu->rebuildCache();

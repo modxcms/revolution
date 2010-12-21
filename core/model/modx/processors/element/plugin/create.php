@@ -25,7 +25,7 @@ if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon
 
 /* check to see if name already exists */
 $nameExists = $modx->getObject('modPlugin',array('name' => $scriptProperties['name']));
-if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('plugin_err_exists_name'));
+if ($nameExists != null) $modx->error->addField('name',$modx->lexicon('plugin_err_exists_name',array('name' => $scriptProperties['name'])));
 
 /* category */
 if (!empty($scriptProperties['category'])) {

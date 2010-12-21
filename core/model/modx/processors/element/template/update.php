@@ -41,7 +41,7 @@ $alreadyExists = $modx->getObject('modTemplate',array(
     'id:!=' => $template->get('id'),
     'templatename' => $scriptProperties['templatename'],
 ));
-if ($alreadyExists) $modx->error->addField('name',$modx->lexicon('template_err_exists_name'));
+if ($alreadyExists) $modx->error->addField('name',$modx->lexicon('template_err_exists_name',array('name' => $scriptProperties['templatename'])));
 
 /* category */
 if (!empty($scriptProperties['category'])) {

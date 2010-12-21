@@ -56,7 +56,7 @@ if (empty($resource)) return $modx->error->failure($modx->lexicon('resource_err_
 
 /* check permissions */
 if (!$modx->hasPermission('save_document') || !$resource->checkPolicy('save')) {
-    return $modx->error->failure($modx->lexicon('permission_denied'));
+    return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
 /* add locks */
@@ -64,7 +64,7 @@ $locked = $resource->addLock();
 if ($locked !== true) {
     if (isset($scriptProperties['steal_lock']) && !empty($scriptProperties['steal_lock'])) {
         if (!$modx->hasPermission('steal_locks') || !$resource->checkPolicy('steal_lock')) {
-            return $modx->error->failure($modx->lexicon('permission_denied'));
+            return $modx->error->failure($modx->lexicon('access_denied'));
         }
         if ($locked > 0 && $locked != $modx->user->get('id')) {
             $resource->removeLock($locked);
@@ -313,6 +313,16 @@ if (!empty($scriptProperties['tvs'])) {
             case 'date':
                 $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
                 break;
+            /* ensure tag types trim whitespace from tags */
+            case 'tag':
+            case 'autotag':
+                $tags = explode(',',$value);
+                $newTags = array();
+                foreach ($tags as $tag) {
+                    $newTags[] = trim($tag);
+                }
+                $value = implode(',',$newTags);
+                break;
             default:
                 /* handles checkboxes & multiple selects elements */
                 if (is_array($value)) {
@@ -359,6 +369,11 @@ if (isset($scriptProperties['resource_groups'])) {
     $resourceGroups = $modx->fromJSON($scriptProperties['resource_groups']);
     if (is_array($resourceGroups)) {
         foreach ($resourceGroups as $id => $resourceGroupAccess) {
+            /* prevent adding records for non-existing groups */
+            $resourceGroup = $modx->getObject('modResourceGroup',$resourceGroupAccess['id']);
+            if (empty($resourceGroup)) continue;
+            
+            /* if assigning to group */
             if ($resourceGroupAccess['access']) {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
@@ -370,6 +385,8 @@ if (isset($scriptProperties['resource_groups'])) {
                 $resourceGroupResource->set('document_group',$resourceGroupAccess['id']);
                 $resourceGroupResource->set('document',$resource->get('id'));
                 $resourceGroupResource->save();
+                
+            /* if removing access to group */
             } else {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
@@ -379,9 +396,11 @@ if (isset($scriptProperties['resource_groups'])) {
                     $resourceGroupResource->remove();
                 }
             }
-        }
-    }
+        } /* end foreach */
+    } /* end if is_array */
 }
+/* end save resource groups */
+
 /* fire delete/undelete events */
 if (isset($resourceUndeleted) && !empty($resourceUndeleted)) {
     $modx->invokeEvent('OnResourceUndelete',array(

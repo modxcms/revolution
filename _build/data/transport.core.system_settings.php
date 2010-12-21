@@ -1280,6 +1280,15 @@ $settings['strip_image_paths']->fromArray(array (
   'area' => 'file',
   'editedon' => null,
 ), '', true, true);
+$settings['symlink_merge_fields']= $xpdo->newObject('modSystemSetting');
+$settings['symlink_merge_fields']->fromArray(array (
+  'key' => 'symlink_merge_fields',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);
 $settings['topmenu_show_descriptions']= $xpdo->newObject('modSystemSetting');
 $settings['topmenu_show_descriptions']->fromArray(array (
   'key' => 'topmenu_show_descriptions',

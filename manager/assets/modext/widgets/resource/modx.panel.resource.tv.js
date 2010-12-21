@@ -29,7 +29,10 @@ Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
      */
     autoload: function(config) {
         var t = Ext.getCmp(config.templateField);
-        if (!t && !config.template) { return false; }
+        if (!t && !config.template) {
+            setTimeout("MODx.fireEvent('ready');",300);
+            return false;
+        }
         var template = config.template ? config.template : t.getValue();
         var a = {
             url: MODx.config.manager_url+'index.php?a='+MODx.action['resource/tvs']
