@@ -1,6 +1,6 @@
 This file shows the changes in this release of xPDO.
 
-- Allow columns with explicit AS to not be escaped
+- Allow columns with explicit AS, ., or ( to not be escaped
 - Override xPDOQuery->parseConditions() for sqlsrv
 - Use SET IDENTITY INSERT in xPDOObjectVehicle->install() (sqlsrv)
 - Remove LIMIT from UPDATE in xPDOObject->save()
