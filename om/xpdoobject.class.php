@@ -748,7 +748,7 @@ class xPDOObject {
                                     }
                                     break;
                                 case 'date' :
-                                    if (preg_match('/int/i', $dbType)) {
+                                    if (preg_match('/int/i', $dbtype)) {
                                         if (strtolower($vType) == 'integer' || is_int($v) || $v == '0') {
                                             $ts= (integer) $v;
                                         } else {
