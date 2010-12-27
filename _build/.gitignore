@@ -1,6 +1,7 @@
 build.config.php
 build.number
 build.properties
+build.properties.php
 image/
 distrib/
 test/properties.inc.php
