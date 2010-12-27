@@ -30,7 +30,7 @@ class DBAPI {
                 $dbtype= 'mysql';
             }
             $this->xpdo= new xPDO(
-                $dbtype . ':host=' . $host . ';dbname=' . str_replace('`', '', $dbase),
+                $dbtype . ':server=' . $host . ';database=' . trim($dbase, $this->xpdo->_escapeCharOpen . $this->xpdo->_escapeCharClose),
                 $uid,
                 $pwd,
                 $pre

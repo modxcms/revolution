@@ -30,9 +30,9 @@ $count = $modx->getCount('modAccessPolicyTemplate',$c);
 
 
 $subc = $modx->newQuery('modAccessPermission');
-$subc->select('COUNT(`modAccessPermission`.`id`)');
+$subc->select('COUNT(modAccessPermission.id)');
 $subc->where(array(
-    '`modAccessPermission`.`template` = `modAccessPolicyTemplate`.`id`',
+    'modAccessPermission.template = modAccessPolicyTemplate.id',
 ));
 $subc->prepare();
 $c->select(array(

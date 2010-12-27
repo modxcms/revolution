@@ -105,33 +105,24 @@ class modDbRegister extends modRegister {
             $iteration++;
             foreach ($this->subscriptions as $subIdx => $topic) {
                 $topicMessages = array();
-                $msgTable = $this->modx->getTableName('registry.db.modDbRegisterMessage');
-                $topicTable = $this->modx->getTableName('registry.db.modDbRegisterTopic');
-                $orderby = "ORDER BY `msg`.`created` ASC";
                 $balance = $msgLimit - $msgCount;
-                $limit = ($balance > 0) ? "LIMIT {$balance}" : '';
-                $sql = "SELECT `msg`.* FROM {$msgTable} `msg` JOIN {$topicTable} `topic` ON `msg`.`valid` <= NOW() AND (`topic`.`name` = :topic OR (`topic`.`name` = :topicbase AND `msg`.`id` = :topicmsg)) AND `topic`.`id` = `msg`.`topic` {$orderby} {$limit}";
-                $stmt = $this->modx->prepare($sql);
-                if ($stmt) {
-                    $stmt->bindValue(':topic', $topic);
-                    $stmt->bindValue(':topicbase', dirname($topic) . '/');
-                    $stmt->bindValue(':topicmsg', basename($topic));
-                    if ($stmt->execute()) {
-                        foreach ($stmt->fetchAll(PDO::FETCH_OBJ) as $msg) {
-                            $newMsg = $this->_readMessage($msg, $removeRead);
-                            if ($newMsg !== null) {
-                                $topicMessages[] = $newMsg;
-                                $msgCount++;
-                            } else {
-                                $this->modx->log(modX::LOG_LEVEL_INFO, 'Message was null or expired: ' . print_r($msg, 1));
-                            }
-                            if ($this->__kill) break;
-                        }
+                $args = array(
+                    &$this,
+                    $topic,
+                    dirname($topic) . '/',
+                    basename($topic),
+                    $balance,
+                    array('fetchMode' => PDO::FETCH_OBJ)
+                );
+                foreach ($this->modx->call('registry.db.modDbRegisterMessage', 'getValidMessages', $args) as $msg) {
+                    $newMsg = $this->_readMessage($msg, $removeRead);
+                    if ($newMsg !== null) {
+                        $topicMessages[] = $newMsg;
+                        $msgCount++;
                     } else {
-                        $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error executing statement from sql: ' . $sql);
+                        $this->modx->log(modX::LOG_LEVEL_INFO, 'Message was null or expired: ' . print_r($msg, 1));
                     }
-                } else {
-                    $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error preparing statement from sql: ' . $sql);
+                    if ($this->__kill) break;
                 }
             }
             if (!empty($topicMessages)) {

@@ -17,7 +17,7 @@ class modUserMessage extends xPDOSimpleObject {
                         $class= 'modManagerUser';
                     }
                     $userTable= $this->xpdo->getTableName($class);
-                    $sql= "SELECT * FROM {$userTable} WHERE `id` = :user_id";
+                    $sql= "SELECT * FROM {$userTable} WHERE id = :user_id";
                     $bindings= array(
                         ':user_id' => array ('value' => $userid, 'type' => PDO::PARAM_INT)
                     );

@@ -31,8 +31,8 @@ if (!$context->checkPolicy('view')) return $modx->error->failure($modx->lexicon(
 
 /* build query */
 $c = $modx->newQuery('modContextSetting');
-$c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modContextSetting`.`key`) = `Entry`.`name`');
-$c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modContextSetting`.`key`,"_desc") = `Description`.`name`');
+$c->leftJoin('modLexiconEntry','Entry',"CONCAT('setting_',modContextSetting.{$modx->escape('key')}) = Entry.name");
+$c->leftJoin('modLexiconEntry','Description',"CONCAT('setting_',modContextSetting.{$modx->escape('key')},'_desc') = Description.name");
 $c->where(array(
     'context_key' => $scriptProperties['context_key'],
 ));
@@ -63,8 +63,8 @@ $c->select(array(
     $modx->getSelectColumns('modContextSetting','modContextSetting'),
 ));
 $c->select(array(
-    '`Entry`.`value` `name_trans`',
-    '`Description`.`value` `description_trans`',
+    'Entry.value AS name_trans',
+    'Description.value AS description_trans',
 ));
 $c->sortby($modx->getSelectColumns('modContextSetting','modContextSetting','',array($sort)),$dir);
 if ($isLimit) $c->limit($limit,$start);

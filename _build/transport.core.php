@@ -13,12 +13,12 @@ unset($mtime);
 /* get rid of time limit */
 set_time_limit(0);
 
-error_reporting(E_ALL); ini_set('display_errors',true);
+error_reporting(E_ALL | E_STRICT); ini_set('display_errors',true);
 
 /* override with your own defines here (see build.config.sample.php) */
 $f = dirname(__FILE__) . '/build.config.php';
 if (file_exists($f)) {
-    @require_once $f;
+    require_once $f;
 } else {
     die('build.config.php was not found. Please make sure you have created one using the template of build.config.sample.php.');
 }
@@ -48,6 +48,16 @@ if (!defined('XPDO_DB_PASS'))
 if (!defined('XPDO_TABLE_PREFIX'))
     define('XPDO_TABLE_PREFIX', 'modx_');
 
+/* get properties */
+$properties = array();
+$f = dirname(__FILE__) . '/build.properties.php';
+if (file_exists($f)) {
+    include $f;
+} else {
+    die('build.properties.php was not found. Please make sure you have created one using the template of build.properties.sample.php.');
+}
+unset($f);
+
 /* instantiate xpdo instance */
 $xpdo = new xPDO(XPDO_DSN, XPDO_DB_USER, XPDO_DB_PASS,
     array (
@@ -55,9 +65,7 @@ $xpdo = new xPDO(XPDO_DSN, XPDO_DB_USER, XPDO_DB_PASS,
         xPDO::OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
     ),
     array (
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
-        PDO::ATTR_PERSISTENT => false,
-        PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
     )
 );
 $cacheManager= $xpdo->getCacheManager();

@@ -31,11 +31,11 @@ $c->select(array(
     $modx->getSelectColumns('modSystemSetting','modSystemSetting'),
 ));
 $c->select(array(
-    '`Entry`.`value` `name_trans`',
-    '`Description`.`value` `description_trans`',
+    'Entry.value AS name_trans',
+    'Description.value AS description_trans',
 ));
-$c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modSystemSetting`.`key`) = `Entry`.`name`');
-$c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modSystemSetting`.`key`,"_desc") = `Description`.`name`');
+$c->leftJoin('modLexiconEntry','Entry',"CONCAT('setting_',modSystemSetting.{$modx->escape('key')}) = Entry.name");
+$c->leftJoin('modLexiconEntry','Description',"CONCAT('setting_',modSystemSetting.{$modx->escape('key')},'_desc') = Description.name");
 if (!empty($key)) {
     $c->where(array(
         'modSystemSetting.key:LIKE' => '%'.$key.'%',

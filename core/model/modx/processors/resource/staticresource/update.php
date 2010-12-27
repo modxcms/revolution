@@ -203,9 +203,18 @@ if (!empty($scriptProperties['tvs'])) {
         'tvc.tmplvarid = tv.id',
         'tvc.contentid' => $resource->get('id'),
     ));
+    switch ($modx->getOption('dbtype')) {
+        case 'sqlite':
+        case 'mysql':
+            $if = 'IF';
+            break;
+        case 'sqlsrv':
+            $if = 'IIF';
+            break;
+    }
     $c->select(array(
         'DISTINCT tv.*',
-        "IF(tvc.value != '',tvc.value,tv.default_text) AS value"
+        "{$if}(tvc.value != '',tvc.value,tv.default_text) AS value"
     ));
     $c->sortby('tv.rank');
 

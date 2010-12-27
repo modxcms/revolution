@@ -85,7 +85,7 @@ class modCacheManager extends xPDOCacheManager {
                 ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
                 ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
             );
-            $criteria= new xPDOCriteria($this->modx, "SELECT {$resourceCols} FROM {$tblResource} `r` LEFT JOIN {$tblContextResource} `cr` ON `cr`.`context_key` = :context_key1 AND `r`.`id` = `cr`.`resource` WHERE `r`.`id` != `r`.`parent` AND (`r`.`context_key` = :context_key2 OR `cr`.`context_key` IS NOT NULL) AND `r`.`deleted` = 0 GROUP BY `r`.`id` ORDER BY `r`.`parent` ASC, `r`.`menuindex` ASC", $bindings, false);
+            $criteria= new xPDOCriteria($this->modx, "SELECT {$resourceCols} FROM {$tblResource} AS {$this->modx->escape('r')} LEFT JOIN {$tblContextResource} AS {$this->modx->escape('cr')} ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY r.id ORDER BY r.parent ASC, r.menuindex ASC", $bindings, false);
             if (!$collContentTypes= $this->modx->getCollection('modContentType')) {
                 $htmlContentType= $this->modx->newObject('modContentType');
                 $htmlContentType->set('name', 'HTML');
@@ -122,7 +122,7 @@ class modCacheManager extends xPDOCacheManager {
                                 $pathParentId= $parentId;
                                 $parentResources= array ();
                                 $currResource= $r;
-                                $parentSql= "SELECT {$resourceCols} FROM {$tblResource} `r` WHERE `r`.`id` = :parent AND `r`.`id` != `r`.`parent` LIMIT 1";
+                                $parentSql= "SELECT {$resourceCols} FROM {$tblResource} r WHERE r.id = :parent AND r.id != r.parent";
                                 $hasParent= (boolean) $pathParentId;
                                 if ($hasParent) {
                                     if ($parentStmt= $this->modx->prepare($parentSql)) {
@@ -334,7 +334,8 @@ class modCacheManager extends xPDOCacheManager {
     public function generateActionMap($cacheKey, array $options = array()) {
         $results= array();
         $c = $this->modx->newQuery('modAction');
-        $c->select('`modAction`.*, `Namespace`.`name` AS `namespace_name`, `Namespace`.`path` AS `namespace_path`');
+        $c->select($this->modx->getSelectColumns('modAction'));
+        $c->select($this->modx->getSelectColumns('modNamespace', 'Namespace', 'namespace_', array('name', 'path')));
         $c->innerJoin('modNamespace','Namespace');
         $c->sortby('namespace','ASC');
         $c->sortby('controller','ASC');
@@ -493,7 +494,7 @@ class modCacheManager extends xPDOCacheManager {
             $timesArr= array ();
             $minpub= 0;
             $minunpub= 0;
-            $sql= "SELECT MIN(`pub_date`) FROM " . $this->modx->getTableName('modResource') . " WHERE `pub_date` > ?";
+            $sql= "SELECT MIN(pub_date) FROM " . $this->modx->getTableName('modResource') . " WHERE pub_date > ?";
             $stmt= $this->modx->prepare($sql);
             if ($stmt) {
                 $stmt->bindValue(1, time());
@@ -512,7 +513,7 @@ class modCacheManager extends xPDOCacheManager {
             }
             if ($minpub) $timesArr[]= $minpub;
 
-            $sql= "SELECT MIN(`unpub_date`) FROM " . $this->modx->getTableName('modResource') . " WHERE `unpub_date` > ?";
+            $sql= "SELECT MIN(unpub_date) FROM " . $this->modx->getTableName('modResource') . " WHERE unpub_date > ?";
             $stmt= $this->modx->prepare($sql);
             if ($stmt) {
                 $stmt->bindValue(1, time());

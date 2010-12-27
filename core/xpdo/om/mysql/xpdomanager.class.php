@@ -294,6 +294,9 @@ class xPDOManager_mysql extends xPDOManager {
                 $sql .= ' ' . implode(', ', $tableConstraints);
             }
             $sql .= ")";
+            if (!empty($tableType)) {
+                $sql .= " ENGINE={$tableType}";
+            }
             $created= $this->xpdo->exec($sql);
             if ($created === false && $this->xpdo->errorCode() !== '' && $this->xpdo->errorCode() !== PDO::ERR_NONE) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not create table ' . $tableName . "\nSQL: {$sql}\nERROR: " . print_r($this->xpdo->errorInfo(), true));

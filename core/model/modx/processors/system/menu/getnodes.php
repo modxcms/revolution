@@ -32,7 +32,7 @@ $c->select(array(
     'Action.controller',
     'Action.namespace',
 ));
-$c->select('COUNT(`Children`.`text`) AS `childrenCount`');
+$c->select('COUNT(Children.text) AS childrenCount');
 $c->where(array(
     'modMenu.parent' => $id,
 ));

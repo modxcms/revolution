@@ -24,6 +24,16 @@ $limit = $modx->getOption('limit',$scriptProperties,10);
 $workspace = $modx->getOption('workspace',$scriptProperties,1);
 $dateFormat = $modx->getOption('dateFormat',$scriptProperties,'%b %d, %Y %I:%M %p');
 
+switch ($modx->getOption('dbtype')) {
+    case 'sqlite':
+    case 'mysql':
+        $if = 'IF';
+        break;
+    case 'sqlsrv':
+        $if = 'IIF';
+        break;
+}
+
 /* get packages */
 $c = $modx->newQuery('transport.modTransportPackage');
 $c->leftJoin('transport.modTransportProvider','Provider');
@@ -31,23 +41,23 @@ $c->where(array(
     'workspace' => $workspace,
 ));
 $c->where(array(
-    '(SELECT
-        `signature`
-      FROM '.$modx->getTableName('modTransportPackage').' AS `latestPackage`
-      WHERE `latestPackage`.`package_name` = `modTransportPackage`.`package_name`
+    "(SELECT
+        signature
+      FROM {$modx->getTableName('modTransportPackage')} AS latestPackage
+      WHERE latestPackage.package_name = modTransportPackage.package_name
       ORDER BY
-         `latestPackage`.`version_major` DESC,
-         `latestPackage`.`version_minor` DESC,
-         `latestPackage`.`version_patch` DESC,
-         IF(`release` = "" OR `release` = "ga" OR `release` = "pl","z",`release`) DESC,
-         `latestPackage`.`release_index` DESC
-      LIMIT 1) = `modTransportPackage`.`signature`',
+         latestPackage.version_major DESC,
+         latestPackage.version_minor DESC,
+         latestPackage.version_patch DESC,
+         {$if}(release = '' OR release = 'ga' OR release = 'pl','z',release) DESC,
+         latestPackage.release_index DESC
+      GROUP BY latestPackage.signature) = modTransportPackage.signature",
 ));
 $count = $modx->getCount('modTransportPackage',$c);
 $c->select(array(
     'modTransportPackage.*',
 ));
-$c->select('`Provider`.`name` AS `provider_name`');
+$c->select('Provider.name AS provider_name');
 $c->sortby('modTransportPackage.signature', 'ASC');
 if ($isLimit) $c->limit($limit,$start);
 $packages = $modx->getCollection('transport.modTransportPackage',$c);

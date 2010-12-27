@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Introduce pdo_sqlsrv support
+- Add database_dsn to config
+- Update xPDO to release 2.1.0-pl
+
 MODx Revolution 2.0.6-pl (December 20, 2010)
 ====================================
 - [#3143] Fix lexicon grid search to respond to enter key

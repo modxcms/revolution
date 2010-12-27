@@ -21,10 +21,10 @@ if (!empty($g[1])) {
 
 $c->select($modx->getSelectColumns('modCategory','modCategory'));
 $c->select(array(
-    'COUNT('.$modx->getSelectColumns('modCategory','Children','',array('id')).') AS `childrenCount`',
+    'COUNT('.$modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount',
 ));
 $c->leftJoin('modCategory','Children');
-$c->groupby($modx->getSelectColumns('modCategory','modCategory','',array('id')));
+$c->groupby($modx->getSelectColumns('modCategory','modCategory'));
 
 /* set permissions as css classes */
 $class = 'icon-category folder';

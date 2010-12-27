@@ -347,14 +347,14 @@ class modElement extends modAccessibleSimpleObject {
             $accessTable = $this->xpdo->getTableName('modAccessCategory');
             $policyTable = $this->xpdo->getTableName('modAccessPolicy');
             $categoryClosureTable = $this->xpdo->getTableName('modCategoryClosure');
-            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
-                    "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
-                    "JOIN {$categoryClosureTable} `CategoryClosure` ON `CategoryClosure`.`descendant` = :category " .
-                    "AND `Acl`.`principal_class` = 'modUserGroup' " .
-                    "AND `CategoryClosure`.`ancestor` = `Acl`.`target` " .
-                    "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
-                    "GROUP BY `target`, `principal`, `authority`, `policy` " .
-                    "ORDER BY `CategoryClosure`.`depth` DESC, `authority` ASC";
+            $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                    "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                    "JOIN {$categoryClosureTable} CategoryClosure ON CategoryClosure.descendant = :category " .
+                    "AND Acl.principal_class = 'modUserGroup' " .
+                    "AND CategoryClosure.ancestor = Acl.target " .
+                    "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                    "GROUP BY target, principal, authority, policy " .
+                    "ORDER BY CategoryClosure.depth DESC, authority ASC";
             $bindings = array(
                 ':category' => $this->get('category'),
                 ':context' => $context,

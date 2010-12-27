@@ -37,7 +37,7 @@ if ($php_ver_comp < 0) {
 
 /* set the document_root */
 if(!isset($_SERVER['DOCUMENT_ROOT']) || empty($_SERVER['DOCUMENT_ROOT'])) {
-    $_SERVER['DOCUMENT_ROOT'] = str_replace($_SERVER['PATH_INFO'], '', ereg_replace("[\][\]",'/', $_SERVER['PATH_TRANSLATED'])) . '/';
+    $_SERVER['DOCUMENT_ROOT'] = str_replace($_SERVER['PATH_INFO'], '', str_replace('\\\\', '/', $_SERVER['PATH_TRANSLATED'])) . '/';
 }
 
 /* we use this to make sure files are accessed through the manager instead of separately. */
@@ -60,7 +60,7 @@ if (!is_object($modx) || !($modx instanceof modX)) {
     exit();
 }
 
-$modx->setDebug(E_ALL & ~E_NOTICE);
+$modx->setDebug(E_ALL | E_STRICT);
 $modx->setLogLevel(modX::LOG_LEVEL_ERROR);
 $modx->setLogTarget('FILE');
 

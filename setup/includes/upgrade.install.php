@@ -325,11 +325,11 @@ if (!$setting) {
     /* drop policy index from modAccessPermission */
     $class = 'modAccessPermission';
     $table = $modx->getTableName($class);
-    $sql = "ALTER TABLE {$table} DROP INDEX `policy`";
+    $sql = "ALTER TABLE {$table} DROP INDEX policy";
     $modx->exec($sql);
 
     /* drop policy field from modAccessPermission */
-    $sql = "ALTER TABLE {$table} DROP COLUMN `policy`";
+    $sql = "ALTER TABLE {$table} DROP COLUMN policy";
     $modx->exec($sql);
 
     /* add setting so that this runs only once to prevent errors or goof-ups */
@@ -351,9 +351,9 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
         'modActionDom.active' => true,
     ));
     $c->select(array(
-        'modActionDom.*',
-        'Action.controller',
-        'Access.principal',
+        $modx->getSelectColumns('modActionDom', 'modActionDom'),
+        $modx->getSelectColumns('modAction', 'Action', '', array('controller')),
+        $modx->getSelectColumns('modAccessActionDom', 'Access', '', array('principal')),
     ));
     $c->sortby('Access.principal','ASC');
     $c->sortby('modActionDom.action','ASC');

@@ -12,12 +12,12 @@ $elementClassKey = $ar_typemap[$elementIdentifier];
 /* first handle subcategories */
 $c = $modx->newQuery('modCategory');
 $c->select($modx->getSelectColumns('modCategory','modCategory'));
-$c->select('COUNT(`'.$elementClassKey.'`.`id`) AS `elementCount`');
-$c->leftJoin($elementClassKey,$elementClassKey,'`'.$elementClassKey.'`.`category` = `modCategory`.`id`');
+$c->select('COUNT('.$elementClassKey.'.id) AS elementCount');
+$c->leftJoin($elementClassKey,$elementClassKey,$elementClassKey.'.category = modCategory.id');
 $c->where(array(
     'parent' => $categoryId,
 ));
-$c->groupby($modx->getSelectColumns('modCategory','modCategory','',array('id')));
+$c->groupby($modx->getSelectColumns('modCategory','modCategory'));
 $c->sortby($modx->getSelectColumns('modCategory','modCategory','',array('category')),'ASC');
 $categories = $modx->getCollection('modCategory',$c);
 
