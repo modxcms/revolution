@@ -157,7 +157,13 @@ class xPDOObjectVehicle extends xPDOVehicle {
                     $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Object for class {$vClass} not found; criteria: " . print_r($criteria, true));
                 }
                 if (!$exists || ($exists && $upgrade)) {
+                    if ($transport->xpdo->getOption('dbtype') === 'sqlsrv' && !$exists && $preserveKeys) {
+                        $transport->xpdo->exec("SET IDENTITY_INSERT {$transport->xpdo->getTableName($vClass)} ON");
+                    }
                     $saved = $object->save();
+                    if ($transport->xpdo->getOption('dbtype') === 'sqlsrv' && !$exists && $preserveKeys) {
+                        $transport->xpdo->exec("SET IDENTITY_INSERT {$transport->xpdo->getTableName($vClass)} OFF");
+                    }
                     if (!$saved) {
                         $transport->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error saving vehicle object of class {$vClass}; criteria: " . print_r($criteria, true));
                         if ($transport->xpdo->getDebug() === true) $transport->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Error saving vehicle object: " . print_r($vOptions, true));
