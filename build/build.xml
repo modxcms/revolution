@@ -11,11 +11,11 @@
     <property name="project.build.dir" value="${project.root.dir}/build" />
 
     <!-- Set the project version -->
-    <property name="xpdo.core.version" value="2.0.0" />
+    <property name="xpdo.core.version" value="2.0.1" />
     <property name="xpdo.core.release" value="pl" />
 
     <!-- Set some common build properties -->
-    <property name="build.src.tree" value="master" />
+    <property name="build.src.tree" value="HEAD" />
     <property name="build.src.remote"
               value="git://github.com/modxcms/xpdo.git"
     />
