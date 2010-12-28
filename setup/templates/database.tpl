@@ -58,7 +58,7 @@
     <hr />
 </p>
 <div id="modx-db-step2" class="modx-hidden2">
-
+{if $config.database_type EQ "mysql"}
 <div class="labelHolder">
     <label for="database-connection-charset">{$_lang.connection_character_set}</label>
     <select id="database-connection-charset" value="{$config.database_connection_charset}" name="database_connection_charset"></select>
@@ -70,6 +70,7 @@
     <select id="database-collation" value="{$config.database_collation}" name="database_collation"></select>
     &nbsp;<span class="field_error" id="database_collation_error"></span>
 </div>
+{/if}
 {/if}
 <br />
 <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testcoll">{$_lang.db_test_coll_msg}</a></p>

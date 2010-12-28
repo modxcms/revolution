@@ -1,7 +1,6 @@
 This file shows the changes in this release of xPDO.
 
 xPDO 2.0.1-pl (December 27, 2010)
-====================================
 - [#2927] Add ENGINE option to xPDOManager_mysql->createObjectContainer()
 - Allow columns with explicit AS, ., or ( to not be escaped
 - Override xPDOQuery->parseConditions() for sqlsrv

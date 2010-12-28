@@ -32,6 +32,10 @@ class modTransportPackage extends xPDOObject {
      */
     public $package = null;
 
+    public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0) {
+        return array('collection' => array(), 'total' => 0);
+    }
+
     /**
      * Overrides xPDOObject::save to set a default created time if new.
      *
