@@ -18,6 +18,7 @@ if (!$install->driver->verifyPDOExtension()) {
 
 /* get an instance of xPDO using the install settings */
 $xpdo = $install->getConnection($mode);
+
 $errors = array();
 $dbExists = false;
 if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
@@ -40,7 +41,7 @@ if (!$dbExists) {
     } else {
         /* otherwise try to connect to the server without the database */
         $xpdo = $install->_connect(
-                $install->settings->get('database_type') . ':' . ($install->settings->get('database_type') == 'sqlsrv' ? 'server' : 'host') . '=' . $install->settings->get('database_server')
+                $install->settings->get('server_dsn')
                 ,$install->settings->get('database_user')
                 ,$install->settings->get('database_password')
                 ,$install->settings->get('table_prefix')
