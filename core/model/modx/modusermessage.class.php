@@ -5,7 +5,7 @@
  * @package modx
  */
 class modUserMessage extends xPDOSimpleObject {
-    public function getOne($alias, $criteria= null, $cacheFlag= true) {
+    public function & getOne($alias, $criteria= null, $cacheFlag= true) {
         if (($alias === 'Recipient' || $alias === 'Sender') && $criteria === null) {
             if ($fkMeta= $this->getFKDefinition($alias)) {
                 if ($userid= $this->get($fkMeta['local'])) {
