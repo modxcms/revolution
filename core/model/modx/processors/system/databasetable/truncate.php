@@ -8,7 +8,7 @@ $modx->lexicon->load('system_info');
 
 if (empty($scriptProperties['t'])) return $modx->error->failure($modx->lexicon('truncate_table_err'));
 
-$sql = 'TRUNCATE TABLE `'.$modx->getOption('dbname').'`.'.$scriptProperties['t'];
+$sql = 'TRUNCATE TABLE '.$modx->escape($modx->getOption('dbname')).'.'.$scriptProperties['t'];
 if ($modx->exec($sql) === false) {
     return $modx->error->failure($modx->lexicon('truncate_table_err'));
 }

@@ -25,7 +25,7 @@ $mtime= explode(" ", $mtime);
 $mtime= $mtime[1] + $mtime[0];
 $tstart= $mtime;
 
-error_reporting(E_ALL & ~E_NOTICE);
+error_reporting(E_ALL | E_STRICT);
 
 /**
  * @deprecated 2.0.0

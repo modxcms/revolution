@@ -59,8 +59,8 @@ class modFormCustomizationSet extends xPDOSimpleObject {
             $c = $this->xpdo->newQuery('modTemplateVar');
             $c->leftJoin('modCategory','Category');
             $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplates');
+            $c->select($this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
             $c->select(array(
-                'modTemplateVar.*',
                 'Category.category AS category_name',
             ));
             $c->where(array(
@@ -73,8 +73,8 @@ class modFormCustomizationSet extends xPDOSimpleObject {
         } else {
             $c = $this->xpdo->newQuery('modTemplateVar');
             $c->leftJoin('modCategory','Category');
+            $c->select($this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
             $c->select(array(
-                'modTemplateVar.*',
                 'Category.category AS category_name',
             ));
             $c->sortby('Category.category','ASC');

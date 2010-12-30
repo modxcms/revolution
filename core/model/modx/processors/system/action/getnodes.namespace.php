@@ -9,10 +9,7 @@ $list = array();
 
 $c = $modx->newQuery('modAction');
 $c->leftJoin('modAction','Children');
-$c->select('
-    `modAction`.*,
-    COUNT(`Children`.`id`) AS `childrenCount`
-');
+$c->select("{$modx->escape('modAction')}.*, COUNT({$modx->escape('Children')}.{$modx->escape('id')} AS {$modx->escape('childrenCount')}");
 $c->where(array(
     'modAction.parent' => 0,
     'modAction.namespace' => $pk,

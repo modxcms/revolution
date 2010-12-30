@@ -17,8 +17,8 @@ $dateFormat = $modx->getOption('dateFormat',$scriptProperties,'%b %d, %Y %I:%M %
 if (empty($scriptProperties['signature'])) return $modx->error->failure($modx->lexicon('package_err_ns'));
 $c = $modx->newQuery('transport.modTransportPackage');
 $c->select('
-    `modTransportPackage`.*,
-    `Provider`.`name` AS `provider_name`
+    modTransportPackage.*,
+    Provider.name AS provider_name
 ');
 $c->leftJoin('transport.modTransportProvider','Provider');
 $c->where(array(

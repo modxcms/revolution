@@ -24,7 +24,7 @@ class modWebUser extends modUser {
             if ($userid= $this->get('id')) {
                 $userid= $userid * -1;
                 $activeUserTable= $this->xpdo->getTableName('modActiveUser');
-                $sql= "SELECT * FROM {$activeUserTable} WHERE `id` = :user_id LIMIT 1";
+                $sql= "SELECT * FROM {$activeUserTable} WHERE id = :user_id";
                 $bindings= array(
                     ':user_id' => array ('value' => $userid, 'type' => PDO::PARAM_INT)
                 );

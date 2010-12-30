@@ -41,11 +41,11 @@ if (!empty($username)) {
 $count = $modx->getCount('modUser',$c);
 
 $c->select('
-    `modUser`.*,
-    `UserGroup`.`id` AS `usergroup`,
-    `UserGroup`.`name` AS `usergroup_name`,
-    `UserGroupRole`.`name` AS `role`,
-    `UserGroupRole`.`name` AS `role_name`
+    modUser.*,
+    UserGroup.id AS usergroup,
+    UserGroup.name AS usergroup_name,
+    UserGroupRole.name AS role,
+    UserGroupRole.name AS role_name
 ');
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);

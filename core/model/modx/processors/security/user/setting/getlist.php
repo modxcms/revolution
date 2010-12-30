@@ -35,11 +35,11 @@ $c->select(array(
     $modx->getSelectColumns('modUserSetting','modUserSetting'),
 ));
 $c->select(array(
-    '`Entry`.`value` `name_trans`',
-    '`Description`.`value` `description_trans`',
+    'Entry.value AS name_trans',
+    'Description.value AS description_trans',
 ));
-$c->leftJoin('modLexiconEntry','Entry','CONCAT("setting_",`modUserSetting`.`key`) = `Entry`.`name`');
-$c->leftJoin('modLexiconEntry','Description','CONCAT("setting_",`modUserSetting`.`key`,"_desc") = `Description`.`name`');
+$c->leftJoin('modLexiconEntry','Entry',"CONCAT('setting_',modUserSetting.{$modx->escape('key')}) = Entry.name");
+$c->leftJoin('modLexiconEntry','Description',"CONCAT('setting_',modUserSetting.{$modx->escape('key')},'_desc') = Description.name");
 $c->where($where);
 $count = $modx->getCount('modUserSetting',$c);
 $c->sortby($modx->getSelectColumns('modUserSetting','modUserSetting','',array('area')),'ASC');

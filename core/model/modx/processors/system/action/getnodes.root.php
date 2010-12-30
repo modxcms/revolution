@@ -11,7 +11,7 @@ $c = $modx->newQuery('modNamespace');
 $c->setClassAlias('Namespace');
 $c->select(array(
     'Namespace.*',
-    'COUNT(`Actions`.`id`) AS `actionCount`',
+    'COUNT(Actions.id) AS actionCount',
 ));
 $c->leftJoin('modAction','Actions');
 $nameField = $modx->getSelectColumns('modNamespace','Namespace','',array('name'));

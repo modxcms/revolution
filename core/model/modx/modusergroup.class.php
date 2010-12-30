@@ -67,17 +67,17 @@ class modUserGroup extends xPDOSimpleObject {
     public function getUsersIn(array $criteria = array()) {
         $c = $this->xpdo->newQuery('modUser');
         $c->select('
-            `modUser`.*,
-            `UserGroupRole`.`name` AS `role`,
-            `UserGroupRole`.`name` AS `role_name`
+            modUser.*,
+            UserGroupRole.name AS role,
+            UserGroupRole.name AS role_name
         ');
         $c->innerJoin('modUserGroupMember','UserGroupMembers');
-        $c->leftJoin('modUserGroupRole','UserGroupRole','`UserGroupMembers`.`role` = `UserGroupRole`.`id`');
+        $c->leftJoin('modUserGroupRole','UserGroupRole','UserGroupMembers.role = UserGroupRole.id');
         $c->where(array(
             'UserGroupMembers.user_group' => $this->get('id'),
         ));
 
-        $sort = !empty($criteria['sort']) ? $criteria['sort'] : '`modUser`.`username`';
+        $sort = !empty($criteria['sort']) ? $criteria['sort'] : 'modUser.username';
         $dir = !empty($criteria['dir']) ? $criteria['dir'] : 'DESC';
         $c->sortby($sort,$dir);
 

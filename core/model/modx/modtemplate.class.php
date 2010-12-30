@@ -105,14 +105,14 @@ class modTemplate extends modElement {
         $collection= array ();
         if (($alias === 'TemplateVars' || $alias === 'modTemplateVar') && ($criteria === null || strtolower($criteria) === 'all')) {
             $c = $this->xpdo->newQuery('modTemplateVar');
-            $c->select('
-                DISTINCT modTemplateVar.*,
-                modTemplateVar.default_text AS value');
+            $c->query['distinct'] = 'DISTINCT';
+            $c->select($this->xpdo->getSelectColumns('modTemplateVar'));
+            $c->select(array('value' => $this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar', '', array('default_text'))));
             $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
-                '`tvtpl`.`tmplvarid` = `modTemplateVar`.`id`',
-                '`tvtpl`.templateid' => $this->get('id'),
+                'tvtpl.tmplvarid = modTemplateVar.id',
+                'tvtpl.templateid' => $this->get('id'),
             ));
-            $c->sortby('`tvtpl`.`rank`,`modTemplateVar`.`rank`');
+            $c->sortby('tvtpl.rank,modTemplateVar.rank');
 
             $collection = $this->xpdo->getCollection('modTemplateVar', $c, $cacheFlag);
         } else {
@@ -142,5 +142,29 @@ class modTemplate extends modElement {
      */
     public function getTVs() {
         return $this->getTemplateVars();
+    }
+
+    public function getTemplateVarList() {
+        $c = $modx->newQuery('modTemplateVar');
+        $count = $modx->getCount('modTemplateVar',$c);
+        $c->select($modx->getSelectColumns('modTemplateVar','modTemplateVar'));
+        if ($template) {
+            $c->leftJoin('modTemplateVarTemplate','modTemplateVarTemplate','
+                modTemplateVarTemplate.tmplvarid = modTemplateVar.id
+                AND modTemplateVarTemplate.templateid = '.$template.'
+            ');
+            $c->select("
+                {$if}(ISNULL(modTemplateVarTemplate.tmplvarid),0,1) AS access,
+                modTemplateVarTemplate.rank AS tv_rank
+            ");
+        }
+        if ($sort != 'tv_rank') {
+            $c->sortby($sortAlias.'.'.$sort,$dir);
+        } else {
+            $c->where(array('modTemplateVarTemplate.rank:!=' => null));
+            $c->sortby($sort,$dir);
+        }
+        $c->limit($limit,$start);
+        return $modx->getCollection('modTemplateVar',$c);
     }
 }

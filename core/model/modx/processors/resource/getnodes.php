@@ -32,16 +32,14 @@ if (!empty($scriptProperties['debug'])) echo '<p style="width: 800px; font-famil
 /* grab resources */
 if (empty($context) || $context == 'root') {
     $itemClass= 'modContext';
-    $c= $modx->newQuery($itemClass, array("`key` != 'mgr'"));
+    $c= $modx->newQuery($itemClass, array('key:!=' => 'mgr'));
     if (!empty($defaultRootId)) {
         $c->where(array(
-            '(SELECT COUNT(*) FROM '.$modx->getTableName('modResource').' WHERE `context_key` = `modContext`.`key` AND `id` IN ('.$defaultRootId.')) > 0',
+            "(SELECT COUNT(*) FROM {$modx->getTableName('modResource')} WHERE context_key = modContext.{$modx->escape('key')} AND id IN ({$defaultRootId})) > 0",
         ));
     }
 } else {
-    $itemClass= 'modResource';
-    $c= $modx->newQuery($itemClass);
-    $c->select(array(
+    $resourceColumns = array(
         'id'
         ,'pagetitle'
         ,'longtitle'
@@ -56,34 +54,34 @@ if (empty($context) || $context == 'root') {
         ,'hidemenu'
         ,'class_key'
         ,'context_key'
+    );
+    $itemClass= 'modResource';
+    $c= $modx->newQuery($itemClass);
+    $c->leftJoin('modResource', 'Child', array('modResource.id = Child.parent'));
+    $c->select($modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns));
+    $c->select(array(
+        'COUNT(Child.id) AS childrenCount'
     ));
-    $cc = $modx->newQuery('modResource');
-    $cc->setClassAlias('Child');
-    $cc->select('COUNT(`Child`.`id`)');
-    $cc->where(array('`modResource`.`id` = `Child`.`parent`'));
-    $cc->prepare();
-    $childrenSql = $cc->toSql();
-    $c->select('('.$childrenSql.') AS `childrenCount`');
     $c->where(array(
         'context_key' => $context,
     ));
     if (empty($node) && !empty($defaultRootId)) {
         $c->where(array(
-            'id IN ('.$defaultRootId.')',
-            'parent NOT IN ('.$defaultRootId.')',
+            'id:IN' => explode(',', $defaultRootId),
+            'parent:NOT IN' => explode(',', $defaultRootId),
         ));
     } else {
         $c->where(array(
             'parent' => $node,
         ));
     }
+    $c->groupby($modx->getSelectColumns('modResource', 'modResource', '', $resourceColumns), '');
     $c->sortby($sortBy,'ASC');
 }
 
 /* grab actions */
 $actions = $modx->request->getAllActionIDs();
 $hasEditPerm = $modx->hasPermission('edit_document');
-
 $collection = $modx->getCollection($itemClass, $c);
 
 $nodeField = $modx->getOption('resource_tree_node_name',$scriptProperties,'pagetitle');

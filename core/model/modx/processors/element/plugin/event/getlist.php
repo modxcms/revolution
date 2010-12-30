@@ -17,20 +17,30 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $name = $modx->getOption('name',$scriptProperties,false);
 $plugin = $modx->getOption('plugin',$scriptProperties,false);
 
+switch ($modx->getOption('dbtype')) {
+    case 'sqlite':
+    case 'mysql':
+        $if = 'IF';
+        break;
+    case 'sqlsrv':
+        $if = 'IIF';
+        break;
+}
+
 /* query for events */
 $c = $modx->newQuery('modEvent');
 if ($name) $c->where(array('name:LIKE' => '%'.$name.'%'));
 if ($plugin) {
     $c->leftJoin('modPluginEvent','modPluginEvent','
-        `modPluginEvent`.`event` = `modEvent`.`name`
-    AND `modPluginEvent`.`pluginid` = '.$plugin.'
+        modPluginEvent.event = modEvent.name
+    AND modPluginEvent.pluginid = '.$plugin.'
     ');
-    $c->select('
-        `modEvent`.*,
-        IF(ISNULL(`modPluginEvent`.`pluginid`),0,1) AS `enabled`,
-        `modPluginEvent`.`priority` AS `priority`,
-        `modPluginEvent`.`propertyset` AS `propertyset`
-    ');
+    $c->select("
+        modEvent.*,
+        {$if}(ISNULL(modPluginEvent.pluginid),0,1) AS enabled,
+        modPluginEvent.priority AS priority,
+        modPluginEvent.propertyset AS propertyset
+    ");
 }
 $count = $modx->getCount('modEvent',$c);
 

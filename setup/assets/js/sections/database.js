@@ -88,6 +88,7 @@ MODx.DB = function() {
                ,scope: this
                ,params: { 
                     action: 'database/connection'
+                    ,database_type: Ext.get('database-type').getValue()
                     ,database_server: Ext.get('database-server').getValue()
                     ,database_user: Ext.get('database-user').getValue()
                     ,database_password: Ext.get('database-password').getValue()

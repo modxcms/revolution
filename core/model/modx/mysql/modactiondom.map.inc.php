@@ -244,7 +244,7 @@ $xpdo_meta_map['modActionDom']= array (
   ),
   'aggregates' => 
   array (
-    'Set' => 
+    'FCSet' => 
     array (
       'class' => 'modFormCustomizationSet',
       'local' => 'set',
