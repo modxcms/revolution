@@ -96,10 +96,13 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
      * {@inheritDoc}
      */
     public function getCharsets($charset = '') {
-        return array('Latin1' => array(
+        if (empty($charset)) {
+            $charset = $this->getCharset();
+        }
+        return array($charset => array(
             'selected' => ' selected="selected"',
-            'value' => 'Latin1',
-            'name' => 'Latin1'
+            'value' => $charset,
+            'name' => $charset
         ));
     }
 
