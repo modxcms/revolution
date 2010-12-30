@@ -69,10 +69,10 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
             if (empty($collation)) $collation = $this->getCollation();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $col = array();
-                $col['selected'] = ($row['Collation']==$collation ? ' selected="selected"' : '');
-                $col['value'] = $row['Collation'];
-                $col['name'] = $row['Collation'];
-                $collations[$row['Collation']] = $col;
+                $col['selected'] = ($row['name']==$collation ? ' selected="selected"' : '');
+                $col['value'] = $row['name'];
+                $col['name'] = $row['name'];
+                $collations[$row['name']] = $col;
             }
             ksort($collations);
         }
