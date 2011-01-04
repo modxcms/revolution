@@ -14,23 +14,23 @@ class modTransportPackage_mysql extends modTransportPackage {
         ));
         $c->where(array(
             "(SELECT
-                signature
-              FROM {$modx->getTableName('modTransportPackage')} AS latestPackage
-              WHERE latestPackage.package_name = modTransportPackage.package_name
+                `signature`
+              FROM {$modx->getTableName('modTransportPackage')} AS `latestPackage`
+              WHERE `latestPackage`.`package_name` = `modTransportPackage`.`package_name`
               ORDER BY
-                 latestPackage.version_major DESC,
-                 latestPackage.version_minor DESC,
-                 latestPackage.version_patch DESC,
-                 IF(release = '' OR release = 'ga' OR release = 'pl','z',release) DESC,
-                 latestPackage.release_index DESC
-              GROUP BY latestPackage.signature) = modTransportPackage.signature",
+                 `latestPackage`.`version_major` DESC,
+                 `latestPackage`.`version_minor` DESC,
+                 `latestPackage`.`version_patch` DESC,
+                 IF(`release` = '' OR `release` = 'ga' OR `release` = 'pl','z',`release`) DESC,
+                 `latestPackage`.`release_index` DESC
+              LIMIT 1) = `modTransportPackage`.`signature`",
         ));
         $result['total'] = $modx->getCount('modTransportPackage',$c);
         $c->select(array(
             'modTransportPackage.*',
         ));
-        $c->select('Provider.name AS provider_name');
-        $c->sortby('modTransportPackage.signature', 'ASC');
+        $c->select('`Provider`.`name` AS `provider_name`');
+        $c->sortby('`modTransportPackage`.`signature`', 'ASC');
         if ($limit > 0) $c->limit($limit, $offset);
         $result['collection'] = $modx->getCollection('transport.modTransportPackage',$c);
         return $result;
