@@ -285,8 +285,8 @@ class modTemplateVar extends modElement {
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
             $userGroups = $this->xpdo->user->getUserGroups();
             $c = $this->xpdo->newQuery('modActionDom');
-            $c->innerJoin('modFormCustomizationSet','Set');
-            $c->innerJoin('modFormCustomizationProfile','Profile','Set.profile = Profile.id');
+            $c->innerJoin('modFormCustomizationSet','FCSet');
+            $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
             $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
             $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
             $c->where(array(
@@ -296,7 +296,7 @@ class modTemplateVar extends modElement {
                    OR modActionDom.rule = "tvTitle")'
                 ),
                 '"tv'.$this->get('id').'" IN ('.$this->xpdo->escape('modActionDom').'.'.$this->xpdo->escape('name').')',
-                'Set.active' => true,
+                'FCSet.active' => true,
                 'Profile.active' => true,
             ));
             $c->where(array(
@@ -311,12 +311,12 @@ class modTemplateVar extends modElement {
             ),xPDOQuery::SQL_AND,null,2);
             $c->select(array(
                 'modActionDom.*',
-                'Set.constraint_class',
-                'Set.constraint_field',
-                'Set.constraint',
-                'Set.template',
+                'FCSet.constraint_class',
+                'FCSet.constraint_field',
+                'FCSet.constraint',
+                'FCSet.template',
             ));
-            $c->sortby('Set.template','ASC');
+            $c->sortby('FCSet.template','ASC');
             $c->sortby('modActionDom.rank','ASC');
             $domRules = $this->xpdo->getCollection('modActionDom',$c);
             foreach ($domRules as $rule) {
