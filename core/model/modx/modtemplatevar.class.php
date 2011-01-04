@@ -285,21 +285,39 @@ class modTemplateVar extends modElement {
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
             $userGroups = $this->xpdo->user->getUserGroups();
             $c = $this->xpdo->newQuery('modActionDom');
-            $c->leftJoin('modAccessActionDom','Access');
+            $c->innerJoin('modFormCustomizationSet','Set');
+            $c->innerJoin('modFormCustomizationProfile','Profile','Set.profile = Profile.id');
+            $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
+            $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
             $c->where(array(
                 array(
                     '(modActionDom.rule = "tvDefault"
                    OR modActionDom.rule = "tvVisible"
                    OR modActionDom.rule = "tvTitle")'
                 ),
-                '"tv'.$this->get('id').'" IN (name)',
-                'modActionDom.active' => true,
+                '"tv'.$this->get('id').'" IN ('.$this->xpdo->escape('modActionDom').'.'.$this->xpdo->escape('name').')',
+                'Set.active' => true,
+                'Profile.active' => true,
             ));
-            $c->andCondition(array(
-                '((Access.principal_class = "modUserGroup"
-              AND Access.principal IN ('.implode(',',$userGroups).'))
-               OR Access.principal IS NULL)',
-            ),null,2);
+            $c->where(array(
+                array(
+                    'ProfileUserGroup.usergroup:IN' => $userGroups,
+                    array(
+                        'OR:ProfileUserGroup.usergroup:IS' => null,
+                        'AND:UGProfile.active:=' => true,
+                    ),
+                ),
+                'OR:ProfileUserGroup.usergroup:=' => null,
+            ),xPDOQuery::SQL_AND,null,2);
+            $c->select(array(
+                'modActionDom.*',
+                'Set.constraint_class',
+                'Set.constraint_field',
+                'Set.constraint',
+                'Set.template',
+            ));
+            $c->sortby('Set.template','ASC');
+            $c->sortby('modActionDom.rank','ASC');
             $domRules = $this->xpdo->getCollection('modActionDom',$c);
             foreach ($domRules as $rule) {
                 switch ($rule->get('rule')) {
