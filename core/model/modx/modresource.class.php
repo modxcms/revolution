@@ -86,7 +86,7 @@ class modResource extends modAccessibleSimpleObject {
         $c->select($resource->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
         $c->select(array(
             'IF(ISNULL(tvc.value),modTemplateVar.default_text,tvc.value) AS value',
-            'IF(ISNULL(tvc.value),0,'.$resource->get('id').' AS resourceId'
+            'IF(ISNULL(tvc.value),0,'.$resource->get('id').') AS resourceId'
         ));
         $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
             'tvtpl.tmplvarid = modTemplateVar.id',
