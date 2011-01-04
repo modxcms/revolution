@@ -69,8 +69,6 @@ class modResource extends modAccessibleSimpleObject {
             $c->sortby($resource->xpdo->escape('modResourceGroup') . '.' . $resource->xpdo->escape($sortKey), $sortDir);
         }
         if ($limit > 0) $c->limit($limit, $offset);
-        $c->prepare();
-        $resource->xpdo->log(xPDO::LOG_LEVEL_ERROR, $c->toSQL(), '', __METHOD__, __FILE__);
         $result['collection'] = $resource->xpdo->getCollection('modResourceGroup', $c);
         return $result;
     }
