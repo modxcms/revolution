@@ -77,7 +77,7 @@ class modTemplateVar extends modElement {
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnTemplateVarBeforeRemove',array(
                 'templateVar' => &$this,
-                'cacheFlag' => $cacheFlag,
+                'cacheFlag' => true,
             ));
         }
 
@@ -86,7 +86,7 @@ class modTemplateVar extends modElement {
         if ($removed && $this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnTemplateVarRemove',array(
                 'templateVar' => &$this,
-                'cacheFlag' => $cacheFlag,
+                'cacheFlag' => true,
             ));
         } else if (!$removed && !empty($this->xpdo->lexicon)) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('tv_err_remove').$this->toArray());
