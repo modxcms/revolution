@@ -200,7 +200,7 @@ class modInstall {
                 $database_dsn = $this->config['database_dsn'] = "{$this->config['database_type']}:server={$this->config['database_server']};database={$this->config['dbase']}";
                 break;
             case 'mysql':
-                $database_dsn = $this->config['database_dsn'] = "{$this->config['database_type']}:host={$this->config['database_server']};dbname={$this->config['dbase']}";
+                $database_dsn = $this->config['database_dsn'] = "{$this->config['database_type']}:host={$this->config['database_server']};dbname={$this->config['dbase']};charset={$this->config['database_connection_charset']}";
                 break;
             default:
                 break;

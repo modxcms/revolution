@@ -28,8 +28,8 @@ class modInstallSettings {
                     $server_dsn = "{$this->settings['database_type']}:server={$this->settings['database_server']}";
                     break;
                 case 'mysql':
-                    $database_dsn = "{$this->settings['database_type']}:host={$this->settings['database_server']};dbname={$this->settings['dbase']}";
-                    $server_dsn = "{$this->settings['database_type']}:host={$this->settings['database_server']}";
+                    $database_dsn = "{$this->settings['database_type']}:host={$this->settings['database_server']};dbname={$this->settings['dbase']};charset={$this->settings['database_connection_charset']}";
+                    $server_dsn = "{$this->settings['database_type']}:host={$this->settings['database_server']};charset={$this->settings['database_connection_charset']}";
                     break;
                 default:
                     $database_dsn = '';
@@ -43,7 +43,7 @@ class modInstallSettings {
 
     public function set($k,$v) {
         $this->settings[$k] = $v;
-        if (in_array($k, array('database_type', 'database_server', 'dbase'))) {
+        if (in_array($k, array('database_type', 'database_server', 'dbase', 'database_connection_charset'))) {
             $this->rebuildDSN();
         }
     }
