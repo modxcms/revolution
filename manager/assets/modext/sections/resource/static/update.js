@@ -101,7 +101,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
         }
         btns.push({
             process: 'preview'
-            ,text: _('preview')
+            ,text: _('view')
             ,handler: this.preview
             ,scope: this
         });

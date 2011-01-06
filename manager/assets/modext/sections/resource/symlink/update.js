@@ -98,7 +98,7 @@ Ext.extend(MODx.page.UpdateSymLink,MODx.Component,{
         }
         btns.push({
             process: 'preview'
-            ,text: _('preview')
+            ,text: _('view')
             ,handler: this.preview
             ,scope: this
         });
