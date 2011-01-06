@@ -32,13 +32,12 @@ switch ($modx->getOption('dbtype')) {
         $if = 'IIF';
         break;
 }
-
 /* query for templates */
 $c = $modx->newQuery('modTemplate');
 $c->select($modx->getSelectColumns('modTemplate','modTemplate'));
-$c->select("
+$c->select(array("
     {$if}(ISNULL(TemplateVarTemplates.tmplvarid),0,1) AS access
-");
+"));
 $c->leftJoin('modTemplateVarTemplate','TemplateVarTemplates',array(
     'modTemplate.id = TemplateVarTemplates.templateid',
     'TemplateVarTemplates.tmplvarid' => $tv,
