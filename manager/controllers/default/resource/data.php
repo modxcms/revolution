@@ -50,8 +50,10 @@ if ($buffer = $modx->cacheManager->get($resource->getCacheKey())) {
     $modx->smarty->assign('buffer', htmlspecialchars($buffer['resource']['_content']));
 }
 /* assign resource to smarty */
-/* assign resource to smarty */
 $modx->smarty->assign('resource',$resource);
+
+/* make preview url */
+$url = $modx->makeUrl($resource->get('id'));
 
 /* register JS scripts */
 $modx->smarty->assign('_ctx',$resource->get('context_key'));
@@ -64,10 +66,13 @@ Ext.onReady(function() {
     MODx.ctx = "'.$resource->get('context_key').'";
     MODx.load({
         xtype: "modx-page-resource-data"
-        ,id: "'.$resource->get('id').'"
-        ,context_key: "'.$resource->get('context_key').'"
-        ,class_key: "'.$resource->get('class_key').'"
-        ,pagetitle: "'.$resource->get('pagetitle').'"
+        ,record: {
+            id: "'.$resource->get('id').'"
+            ,context_key: "'.$resource->get('context_key').'"
+            ,class_key: "'.$resource->get('class_key').'"
+            ,pagetitle: "'.$resource->get('pagetitle').'"
+            ,preview_url: "'.$url.'"
+        }
         ,canEdit: "'.($modx->hasPermission('edit_document') ? 1 : 0).'"
     });
 });

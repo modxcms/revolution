@@ -85,7 +85,7 @@ $onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocForm
 $modx->smarty->assign('onDocFormRender',$onDocFormRender);
 
 /* get url for resource for preview window */
-$url = $modx->makeUrl($resource->get('id'));
+$url = $modx->makeUrl($resource->get('id'),'','','full');
 
 /* assign resource to smarty */
 $modx->smarty->assign('resource',$resource);
