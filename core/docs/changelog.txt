@@ -6,6 +6,7 @@ MODx Revolution 2.0.6-pl2 (January 6, 2011)
 ====================================
 - [#3350] Fix for PHP bug: http://bugs.php.net/bug.php?id=53632
 - [#3347] Fix issue where renaming a file broke the browsing of directory tree
+- Fix issue where FC tvDefault rules, regardless of active state, are always run
 
 MODx Revolution 2.0.6-pl (December 20, 2010)
 ====================================
