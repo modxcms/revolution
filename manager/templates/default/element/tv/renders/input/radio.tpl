@@ -20,8 +20,8 @@ MODx.load({
         ,id: 'tv{$tv->id}-{$k}'
         ,boxLabel: '{$item.text|escape:"javascript"}'
         ,checked: {if $item.checked}true{else}false{/if}
-        ,inputValue: {if $item.value !== 0 AND $item.value !== null}'{$item.value|escape:"javascript"}'{else}0{/if}
-        ,value: {if $item.value !== 0 AND $item.value !== null}'{$item.value|escape:"javascript"}'{else}0{/if}
+        ,inputValue: {$item.value}
+        ,value: {$item.value}
 
         {literal},listeners: { 'check': MODx.fireResourceFormChange }{/literal}
 

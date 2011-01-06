@@ -289,10 +289,21 @@ if (!empty($scriptProperties['tvs'])) {
     ));
     $c->query['distinct'] = 'DISTINCT';
     $c->select($modx->getSelectColumns('modTemplateVar', 'tv'));
-    $c->select(array(
-        "CASE tvc.value != '' THEN tvc.value ELSE tv.default_text END AS value"
-    ));
-    $c->sortby('tv.rank');
+
+    switch ($modx->getOption('dbtype')) {
+        case 'sqlite':
+        case 'mysql':
+            $c->select(array(
+                "IF(tvc.value != '',tvc.value,tv.default_text) AS value"
+            ));
+            break;
+        case 'sqlsrv':
+            $c->select(array(
+                "CASE tvc.value != '' THEN tvc.value ELSE tv.default_text END AS value"
+            ));
+            break;
+    }
+    $c->sortby($modx->escape('tv').'.'.$modx->escape('rank'));
 
     $tvs = $modx->getCollection('modTemplateVar',$c);
     foreach ($tvs as $tv) {
