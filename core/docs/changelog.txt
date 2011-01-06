@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3347] Fix issue where renaming a file broke the browsing of directory tree
 - Fix issue where FC tvDefault rules, regardless of active state, are always run
 - Introduce pdo_sqlsrv support
 - Add database_dsn to config
