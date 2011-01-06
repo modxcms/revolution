@@ -243,9 +243,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             this.windows.rename = MODx.load({
                 xtype: 'modx-window-file-rename'
                 ,record: r
-                ,prependPath: this.config.prependPath || null
                 ,listeners: {
-                    'success':{fn:this.refreshActiveNode,scope:this}
+                    'success':{fn:this.refreshParentNode,scope:this}
                 }
             });
         }
