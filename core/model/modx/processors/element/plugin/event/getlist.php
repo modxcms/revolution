@@ -35,12 +35,12 @@ if ($plugin) {
         modPluginEvent.event = modEvent.name
     AND modPluginEvent.pluginid = '.$plugin.'
     ');
-    $c->select("
-        modEvent.*,
-        {$if}(ISNULL(modPluginEvent.pluginid),0,1) AS enabled,
-        modPluginEvent.priority AS priority,
-        modPluginEvent.propertyset AS propertyset
-    ");
+    $c->select(array(
+        'modEvent.*',
+        $if.'(ISNULL(modPluginEvent.pluginid),0,1) AS enabled',
+        'modPluginEvent.priority AS priority',
+        'modPluginEvent.propertyset AS propertyset',
+    ));
 }
 $count = $modx->getCount('modEvent',$c);
 
