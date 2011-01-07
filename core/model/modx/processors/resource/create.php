@@ -165,7 +165,7 @@ if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modT
     $tmplvars = array();
     $c = $modx->newQuery('modTemplateVar');
     $c->query['distinct'] = 'DISTINCT';
-    $c->select($this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+    $c->select($modx->getSelectColumns('modTemplateVar', 'modTemplateVar'));
     $c->select(array('modTemplateVar.default_text AS value'));
     $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplates');
     $c->where(array(
