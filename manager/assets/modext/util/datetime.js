@@ -79,6 +79,12 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             ,width:this.timeWidth
             ,selectOnFocus:this.selectOnFocus
             ,validator:this.dateValidator
+            ,disabledDates: this.disabledDates || []
+            ,disabledDays: this.disabledDays || []
+            ,showToday: this.showToday || true
+            ,maxValue: this.maxDateValue || null
+            ,minValue: this.minDateValue || null
+            ,startDay: this.startDay || 0
             ,listeners:{
                   blur:{scope:this, fn:this.onBlur}
                  ,focus:{scope:this, fn:this.onFocus}
@@ -95,6 +101,9 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             ,width:this.timeWidth
             ,selectOnFocus:this.selectOnFocus
             ,validator:this.timeValidator
+            ,increment: this.timeIncrement || 15
+            ,maxValue: this.maxTimeValue || null
+            ,minValue: this.minTimeValue || null
             ,listeners:{
                   blur:{scope:this, fn:this.onBlur}
                  ,focus:{scope:this, fn:this.onFocus}

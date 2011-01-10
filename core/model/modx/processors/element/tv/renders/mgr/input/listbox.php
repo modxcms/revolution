@@ -6,16 +6,16 @@
 $this->xpdo->lexicon->load('tv_widget');
 
 $index_list = $this->parseInputOptions($this->processBindings($this->get('elements'),$this->get('name')));
-$opts = array();
+$items = array();
 while (list($item, $itemvalue) = each ($index_list)) {
     list($item,$itemvalue) = (is_array($itemvalue)) ? $itemvalue : explode("==",$itemvalue);
     if (strlen($itemvalue)==0) $itemvalue = $item;
-    $opts[] = array(
-        'value' => htmlspecialchars($itemvalue),
-        'text' => htmlspecialchars($item),
+    $items[] = array(
+        'text' => htmlspecialchars($item,ENT_COMPAT,'UTF-8'),
+        'value' => htmlspecialchars($itemvalue,ENT_COMPAT,'UTF-8'),
         'selected' => strcmp($itemvalue,$value) == 0,
     );
 }
 
-$this->xpdo->smarty->assign('opts',$opts);
+$this->xpdo->smarty->assign('opts',$items);
 return $this->xpdo->smarty->fetch('element/tv/renders/input/listbox-single.tpl');

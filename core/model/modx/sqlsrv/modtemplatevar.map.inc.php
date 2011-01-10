@@ -19,9 +19,10 @@ $xpdo_meta_map['modTemplateVar']= array (
     'elements' => NULL,
     'rank' => 0,
     'display' => '',
-    'display_params' => NULL,
     'default_text' => NULL,
     'properties' => NULL,
+    'input_properties' => '',
+    'output_properties' => '',
   ),
   'fieldMeta' => 
   array (
@@ -103,12 +104,6 @@ $xpdo_meta_map['modTemplateVar']= array (
       'null' => false,
       'default' => '',
     ),
-    'display_params' => 
-    array (
-      'dbtype' => 'nvarchar',
-      'precision' => 'max',
-      'phptype' => 'string',
-    ),
     'default_text' => 
     array (
       'dbtype' => 'nvarchar',
@@ -121,6 +116,22 @@ $xpdo_meta_map['modTemplateVar']= array (
       'precision' => 'max',
       'phptype' => 'array',
       'null' => true,
+    ),
+    'input_properties' => 
+    array (
+      'dbtype' => 'nvarchar',
+      'precision' => 'max',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'output_properties' => 
+    array (
+      'dbtype' => 'nvarchar',
+      'precision' => 'max',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
   ),
   'indexes' => 

@@ -365,6 +365,12 @@ class modTemplateVar extends modElement {
             }
         }
 
+        $params = $this->get('input_properties');
+        /* default required status to no */
+        if (!isset($params['allowBlank'])) $params['allowBlank'] = 1;
+        $this->xpdo->smarty->assign('params',$params);
+        $this->xpdo->lexicon->load('tv_widget');
+
         /* find the correct renderer for the TV, if not one, render a textbox */
         $inputRenderPaths = $this->getRenderDirectories('OnTVInputRenderList','input');
         return $this->getRender($params,$value,$inputRenderPaths,'input',$resourceId,$this->get('type'));

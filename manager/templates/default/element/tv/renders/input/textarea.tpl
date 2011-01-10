@@ -11,10 +11,13 @@ var fld = MODx.load({
     ,height: 140
     ,width: '97%'
     ,enableKeyEvents: true
+    ,msgTarget: 'under'
+    ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
 {literal}
     ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
 });
 MODx.makeDroppable(fld);
+Ext.getCmp('modx-panel-resource').getForm().add(fld);
 {/literal}
 // ]]>
 </script>

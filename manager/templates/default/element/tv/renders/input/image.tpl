@@ -15,7 +15,9 @@ var fld{/literal}{$tv->id}{literal} = MODx.load({
     ,value: '{$tv->value|escape}'
     ,relativeValue: '{$tv->relativeValue|escape}'
     ,width: '97%'
+    ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
 {literal}
+    ,msgTarget: 'under'
     ,listeners: {
         'select': {fn:function(data) {
             MODx.fireResourceFormChange();

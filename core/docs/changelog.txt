@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add Input Options to TVs, allowing TV inputs to be customized and tweaked
+
 MODx Revolution 2.0.7-pl (January 14, 2011)
 ====================================
 - [#3472] Fix issue due to tree impr that prevented element saving success response
