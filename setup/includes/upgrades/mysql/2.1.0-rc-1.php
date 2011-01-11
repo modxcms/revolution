@@ -26,13 +26,49 @@ $description = $this->install->lexicon('add_column',array('column' => 'output_pr
 $sql = "ALTER TABLE {$table} ADD `output_properties` TEXT NULL AFTER `input_properties`";
 $this->processResults($class,$description,$sql);
 
-/* migrate display_params to output_properties */
+/* migrate display_params to output_properties, change deprecated  */
 $tvs = $modx->getCollection('modTemplateVar');
 foreach ($tvs as $tv) {
+    $changed = false;
     $op = $tv->get('output_properties');
     $params = $tv->getDisplayParams();
     if (empty($op) && !empty($params)) {
         $tv->set('output_properties',$params);
+        $op = $params;
+        $changed = true;
+    }
+    switch ($tv->get('type')) {
+        case 'textareamini':
+            $tv->set('type','textarea');
+            $changed = true;
+            break;
+        case 'textbox':
+            $tv->set('type','text');
+            $changed = true;
+            break;
+        case 'dropdown':
+            $tv->set('type','listbox');
+            $changed = true;
+            break;
+        case 'htmlarea':
+            $tv->set('type','richtext');
+            $changed = true;
+            break;
+        case 'resourcelist': /* migrate parents of 2.0.x of resourcelist TV to input props */
+            $elements = $tv->get('elements');
+            if (!empty($elements)) {
+                $elements = explode('||',$elements);
+                $ip = $tv->get('input_properties');
+                if (!is_array($ip)) $ip = array();
+                $ip['parents'] = implode(',',$elements);
+                $tv->set('input_properties',$elements);
+                $changed = true;
+            }
+            break;
+            
+    }
+
+    if ($changed) {
         $tv->save();
     }
 }
