@@ -277,35 +277,8 @@ if ($resource->get('parent') != $oldparent_id) {
 /* save TVs */
 if (!empty($scriptProperties['tvs'])) {
     $tmplvars = array ();
-    $c = $modx->newQuery('modTemplateVar');
-    $c->setClassAlias('tv');
-    $c->innerJoin('modTemplateVarTemplate', 'tvtpl', array(
-        'tvtpl.tmplvarid = tv.id',
-        'tvtpl.templateid' => $resource->get('template'),
-    ));
-    $c->leftJoin('modTemplateVarResource', 'tvc', array(
-        'tvc.tmplvarid = tv.id',
-        'tvc.contentid' => $resource->get('id'),
-    ));
-    $c->query['distinct'] = 'DISTINCT';
-    $c->select($modx->getSelectColumns('modTemplateVar', 'tv'));
 
-    switch ($modx->getOption('dbtype')) {
-        case 'sqlite':
-        case 'mysql':
-            $c->select(array(
-                "IF(tvc.value != '',tvc.value,tv.default_text) AS value"
-            ));
-            break;
-        case 'sqlsrv':
-            $c->select(array(
-                "CASE tvc.value != '' THEN tvc.value ELSE tv.default_text END AS value"
-            ));
-            break;
-    }
-    $c->sortby($modx->escape('tv').'.'.$modx->escape('rank'));
-
-    $tvs = $modx->getCollection('modTemplateVar',$c);
+    $tvs = $resource->getTemplateVars();
     foreach ($tvs as $tv) {
         /* set value of TV */
         if ($tv->get('type') != 'checkbox') {

@@ -84,20 +84,28 @@ class modResource extends modAccessibleSimpleObject {
         $c = $resource->xpdo->newQuery('modTemplateVar');
         $c->query['distinct'] = 'DISTINCT';
         $c->select($resource->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
-        $c->select(array(
-            'IF(ISNULL(tvc.value),modTemplateVar.default_text,tvc.value) AS value',
-            'IF(ISNULL(tvc.value),0,'.$resource->get('id').') AS resourceId'
-        ));
+        if ($resource->isNew()) {
+            $c->select(array(
+                'modTemplateVar.default_text AS value',
+                '0 AS resourceId'
+            ));
+        } else {
+            $c->select(array(
+                'IF(ISNULL(tvc.value),modTemplateVar.default_text,tvc.value) AS value',
+                'IF(ISNULL(tvc.value),0,'.$resource->get('id').') AS resourceId'
+            ));
+        }
         $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
             'tvtpl.tmplvarid = modTemplateVar.id',
             'tvtpl.templateid' => $resource->get('template'),
         ));
-        $c->leftJoin('modTemplateVarResource','tvc',array(
-            'tvc.tmplvarid = modTemplateVar.id',
-            'tvc.contentid' => $resource->get('id'),
-        ));
+        if (!$resource->isNew()) {
+            $c->leftJoin('modTemplateVarResource','tvc',array(
+                'tvc.tmplvarid = modTemplateVar.id',
+                'tvc.contentid' => $resource->get('id'),
+            ));
+        }
         $c->sortby('tvtpl.rank,modTemplateVar.rank');
-
         return $resource->xpdo->getCollection('modTemplateVar', $c);
     }
 

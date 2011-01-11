@@ -163,16 +163,7 @@ if (isset($scriptProperties['unpub_date'])) {
 
 if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modTemplate', $scriptProperties['template']))) {
     $tmplvars = array();
-    $c = $modx->newQuery('modTemplateVar');
-    $c->query['distinct'] = 'DISTINCT';
-    $c->select($modx->getSelectColumns('modTemplateVar', 'modTemplateVar'));
-    $c->select(array('modTemplateVar.default_text AS value'));
-    $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplates');
-    $c->where(array(
-        'TemplateVarTemplates.templateid' => $scriptProperties['template'],
-    ));
-    $c->sortby('modTemplateVar.rank');
-    $templateVars = $modx->getCollection('modTemplateVar',$c);
+    $templateVars = $resource->getTemplateVars();
 
     foreach ($templateVars as $tv) {
         $value = isset($scriptProperties['tv'.$tv->get('id')]) ? $scriptProperties['tv'.$tv->get('id')] : $tv->get('default_text');

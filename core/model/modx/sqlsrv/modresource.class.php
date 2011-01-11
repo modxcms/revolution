@@ -27,19 +27,28 @@ class modResource_sqlsrv extends modResource {
         $c = $resource->xpdo->newQuery('modTemplateVar');
         $c->query['distinct'] = 'DISTINCT';
         $c->select($resource->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
-        $c->select(array(
-            "ISNULL(tvc.value,modTemplateVar.default_text) AS value",
-            "CASE WHEN tvc.value IS NULL THEN 0 ELSE {$resource->get('id')} END AS resourceId"
-        ));
+        if ($resource->isNew()) {
+            $c->select(array(
+                "modTemplateVar.default_text AS value",
+                "0 AS resourceId"
+            ));
+        } else {
+            $c->select(array(
+                "ISNULL(tvc.value,modTemplateVar.default_text) AS value",
+                "CASE WHEN tvc.value IS NULL THEN 0 ELSE {$resource->get('id')} END AS resourceId"
+            ));
+        }
         $c->select($resource->xpdo->getSelectColumns('modTemplateVarTemplate', 'tvtpl', '', array('rank')));
         $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
             'tvtpl.tmplvarid = modTemplateVar.id',
             'tvtpl.templateid' => $resource->get('template'),
         ));
-        $c->leftJoin('modTemplateVarResource','tvc',array(
-            'tvc.tmplvarid = modTemplateVar.id',
-            'tvc.contentid' => $resource->get('id'),
-        ));
+        if (!$resource->isNew()) {
+            $c->leftJoin('modTemplateVarResource','tvc',array(
+                'tvc.tmplvarid = modTemplateVar.id',
+                'tvc.contentid' => $resource->get('id'),
+            ));
+        }
         $c->sortby('tvtpl.rank,modTemplateVar.rank');
 
         return $resource->xpdo->getCollection('modTemplateVar', $c);
