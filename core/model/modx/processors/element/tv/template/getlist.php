@@ -23,21 +23,10 @@ $sort = $modx->getOption('sort',$scriptProperties,'templatename');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $tv = $modx->getOption('tv',$scriptProperties,false);
 
-switch ($modx->getOption('dbtype')) {
-    case 'sqlite':
-    case 'mysql':
-        $if = 'IF';
-        break;
-    case 'sqlsrv':
-        $if = 'IIF';
-        break;
-}
 /* query for templates */
 $c = $modx->newQuery('modTemplate');
 $c->select($modx->getSelectColumns('modTemplate','modTemplate'));
-$c->select(array("
-    {$if}(ISNULL(TemplateVarTemplates.tmplvarid),0,1) AS access
-"));
+$c->select($modx->getSelectColumns('modTemplateVarTemplate','TemplateVarTemplates','',array('tmplvarid')));
 $c->leftJoin('modTemplateVarTemplate','TemplateVarTemplates',array(
     'modTemplate.id = TemplateVarTemplates.templateid',
     'TemplateVarTemplates.tmplvarid' => $tv,
@@ -52,7 +41,8 @@ $count = $modx->getCount('modTemplate');
 $list = array();
 foreach ($templates as $template) {
     $templateArray = $template->toArray();
-    $templateArray['access'] = (boolean)$template->get('access');
+    $templateArray['access'] = $template->get('tmplvarid');
+    $templateArray['access'] = empty($templateArray['access']) ? true : false;
     unset($templateArray['content']);
     $list[] = $templateArray;
 }
