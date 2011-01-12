@@ -777,5 +777,13 @@ $xpdo_meta_map['modResource']= array (
       'owner' => 'local',
       'cardinality' => 'many',
     ),
+    'ContextResources' => 
+    array (
+      'class' => 'modContextResource',
+      'local' => 'id',
+      'foreign' => 'resource',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
   ),
 );

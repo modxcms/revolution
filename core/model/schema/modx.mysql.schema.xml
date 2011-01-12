@@ -859,6 +859,7 @@
         <composite alias="ResourceKeywords" class="modResourceKeyword" local="id" foreign="content_id" cardinality="many" owner="local" />
         <composite alias="ResourceMetatags" class="modResourceMetatag" local="id" foreign="content_id" cardinality="many" owner="local" />
         <composite alias="Acls" class="modAccessResource" local="id" foreign="target" owner="local" cardinality="many" />
+        <composite alias="ContextResources" class="modContextResource" local="id" foreign="resource" cardinality="many" owner="local" />
     </object>
     
     <object class="modResourceGroup" table="documentgroup_names" extends="modAccessibleSimpleObject">

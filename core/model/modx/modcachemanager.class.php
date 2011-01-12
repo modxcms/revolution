@@ -74,18 +74,30 @@ class modCacheManager extends xPDOCacheManager {
             }
 
             /* generate the documentMap, aliasMap, and resourceListing */
-            $tblResource= $this->modx->getTableName('modResource');
-            $tblContextResource= $this->modx->getTableName('modContextResource');
             $resourceFields= 'id,parent,alias,isfolder,content_type';
             if (isset ($contextConfig['cache_context_resourceFields']) && $contextConfig['cache_context_resourceFields']) {
                 $resourceFields= $contextConfig['cache_context_resourceFields'];
             }
-            $resourceCols= $this->modx->getSelectColumns('modResource', 'r', '', explode(',', $resourceFields));
-            $bindings= array (
-                ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
-                ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
-            );
-            $criteria= new xPDOCriteria($this->modx, "SELECT {$resourceCols} FROM {$tblResource} AS {$this->modx->escape('r')} LEFT JOIN {$tblContextResource} AS {$this->modx->escape('cr')} ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY r.id ORDER BY r.parent ASC, r.menuindex ASC", $bindings, false);
+            $resourceCols= $this->modx->getSelectColumns('modResource', 'modResource', '', explode(',', $resourceFields));
+            $resourceIdField = $this->modx->getSelectColumns('modResource','modResource','',array('id'));
+            $c = $this->modx->newQuery('modResource');
+            $c->leftJoin('modContextResource','ContextResources',array(
+                'ContextResources.context_key' => $obj->get('key'),
+                $resourceIdField.' = '.$this->modx->getSelectColumns('modContextResource','ContextResources','',array('resource')),
+            ));
+            $c->select($resourceCols);
+            $c->where(array(
+                $resourceIdField.' != '.$this->modx->getSelectColumns('modResource','modResource','',array('parent')),
+                'modResource.deleted' => false,
+            ));
+            $c->where(array(
+                'modResource.context_key:=' => $obj->get('key'),
+                'OR:modResource.context_key:!=' => null,
+            ));
+            $c->sortby($this->modx->getSelectColumns('modResource','modResource','',array('parent','menuindex')),'ASC');
+            $c->groupby($this->modx->escape('modResource').'.'.$this->modx->escape('id'));
+            $collResources = $this->modx->getIterator('modResource',$c);
+            
             if (!$collContentTypes= $this->modx->getCollection('modContentType')) {
                 $htmlContentType= $this->modx->newObject('modContentType');
                 $htmlContentType->set('name', 'HTML');
@@ -94,21 +106,18 @@ class modCacheManager extends xPDOCacheManager {
                 $htmlContentType->set('file_extensions', 'html,htm');
                 $collContentTypes['1']= $htmlContentType;
             }
-            $collResources= null;
-            if ($criteria->prepare() && $criteria->stmt->execute()) {
-                $collResources= & $criteria->stmt;
-            }
             if ($collResources) {
                 $results['resourceMap']= array ();
                 $results['resourceListing']= array ();
                 $results['aliasMap']= array ();
                 $results['documentMap']= array ();
                 $containerSuffix= isset ($contextConfig['container_suffix']) ? $contextConfig['container_suffix'] : '';
-                while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
+                $tblResource= $this->modx->getTableName('modResource');
+                foreach ($collResources as $r) {
                     $parentId= isset($r->parent) ? strval($r->parent) : "0";
                     $results['documentMap'][]= array("{$parentId}" => (string) $r->id);
                     $results['resourceMap']["{$parentId}"][] = (string) $r->id;
-                    $resourceValues= get_object_vars($r);
+                    $resourceValues= $r->toArray();
                     $results['resourceListing'][(string) $r->id]= $resourceValues;
                     $resAlias= '';
                     $resPath= '';
@@ -122,6 +131,7 @@ class modCacheManager extends xPDOCacheManager {
                                 $pathParentId= $parentId;
                                 $parentResources= array ();
                                 $currResource= $r;
+                                /* TODO: refactor this to abstracted SQL */
                                 $parentSql= "SELECT {$resourceCols} FROM {$tblResource} r WHERE r.id = :parent AND r.id != r.parent";
                                 $hasParent= (boolean) $pathParentId;
                                 if ($hasParent) {
@@ -160,7 +170,7 @@ class modCacheManager extends xPDOCacheManager {
                         $resPath .= '/';
                     }
                     if (isset ($results['aliasMap'][$resPath . $resAlias])) {
-                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource alias {$resPath}{$resAlias} already exists for resource id = {$results['aliasMap'][$resPath . $resAlias]}; skipping duplicate resource alias for resource id = {$r->id}");
+                        $this->modx->log(xPDO::LOG_LEVEL_INFO, "Resource alias {$resPath}{$resAlias} already exists for resource id = {$results['aliasMap'][$resPath . $resAlias]}; skipping duplicate resource alias for resource id = {$r->id}");
                         continue;
                     }
                     $results['aliasMap'][$resPath . $resAlias]= $r->id;
