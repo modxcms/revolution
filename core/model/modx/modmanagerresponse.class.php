@@ -152,8 +152,6 @@ class modManagerResponse extends modResponse {
         $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
         $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
-        //$c->leftJoin('modAccessActionDom','Access');
-        //$principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
         $c->where(array(
             'modActionDom.action' => $this->action['id'],
             'modActionDom.for_parent' => $forParent,
@@ -181,6 +179,10 @@ class modManagerResponse extends modResponse {
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
         foreach ($domRules as $rule) {
+            $template = $rule->get('template');
+            if (!empty($template)) {
+                if ($template != $obj->get('template')) continue;
+            }
             $constraintClass = $rule->get('constraint_class');
             if (!empty($constraintClass)) {
                 if (empty($obj) || !($obj instanceof $constraintClass)) continue;
@@ -189,6 +191,11 @@ class modManagerResponse extends modResponse {
                 if ($obj->get($constraintField) != $constraint) {
                     continue;
                 }
+            }
+            if ($rule->get('rule') == 'fieldDefault') {
+                $field = $rule->get('name');
+                if ($field == 'modx-resource-content') $field = 'content';
+                $overridden[$field] = $rule->get('value');
             }
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;

@@ -28,7 +28,7 @@ class modActionDom extends modAccessibleSimpleObject {
             case 'fieldTitle':
                 $fields = explode(',',$this->get('name'));
                 $values = explode(',',$this->get('value'));
-                $rule = 'Ext.getCmp("'.$this->get('container').'").setLabel('.$this->xpdo->toJSON($fields).','.$this->xpdo->toJSON($values).');';
+                $rule = 'MODx.on("ready",function() { MODx.renameLabel("'.$this->get('container').'",'.$this->xpdo->toJSON($fields).','.$this->xpdo->toJSON($values).'); });';
                 break;
             case 'panelTitle':
             case 'tabTitle':
