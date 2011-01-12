@@ -43,13 +43,13 @@ if (!empty($policy)) $c->where(array('policy' => $policy));
 $count = $modx->getCount('modAccessCategory',$c);
 $c->leftJoin('modUserGroupRole','Role','Role.authority = modAccessCategory.authority');
 $c->leftJoin('modAccessPolicy','Policy');
-$c->select('
-    modAccessCategory.*,
-    Target.category AS name,
-    CONCAT(Role.name," - ",modAccessCategory.authority) AS authority_name,
-    Policy.name AS policy_name,
-    Policy.data AS policy_data
-');
+$c->select(array(
+    'modAccessCategory.*',
+    'Target.category AS name',
+    'CONCAT(Role.name," - ",modAccessCategory.authority) AS authority_name',
+    'Policy.name AS policy_name',
+    'Policy.data AS policy_data',
+));
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $acls = $modx->getCollection('modAccessCategory', $c);
