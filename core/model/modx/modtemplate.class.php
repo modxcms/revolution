@@ -5,6 +5,21 @@
  * @package modx
  */
 class modTemplate extends modElement {
+    /**
+     * Get a sortable, limitable list and total record count of Template Variables.
+     *
+     * This list includes an access field indicating their relationship to a modTemplate.
+     *
+     * @static
+     * @param modTemplate &$template A modTemplate instance.
+     * @param array $sort An array of criteria for sorting the list.
+     * @param int $limit An optional limit to apply to the list.
+     * @param int $offset An optional offset to apply to the list.
+     * @return array An array with the list collection and total records in the collection.
+     */
+    public static function listTemplateVars(modTemplate &$template, array $sort = array('name' => 'ASC'), $limit = 0, $offset = 0) {
+        return array('collection' => array(), 'total' => 0);
+    }
 
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
@@ -145,31 +160,17 @@ class modTemplate extends modElement {
     }
 
     /**
-     * Gets a list of Template Variables
-     * @return array
+     * Get a list of Template Variables and if they are currently associated to this template.
+     *
+     * This is a sortable, scrollable list.
+     *
+     * @param array $sort An array of criteria for sorting the list.
+     * @param integer $limit An optional limit to apply to the list.
+     * @param integer $offset An optional offset to apply to the list.
+     * @return array An array containing the collection and total.
      */
-    public function getTemplateVarList() {
-        $c = $modx->newQuery('modTemplateVar');
-        $count = $modx->getCount('modTemplateVar',$c);
-        $c->select($modx->getSelectColumns('modTemplateVar','modTemplateVar'));
-        if ($template) {
-            $c->leftJoin('modTemplateVarTemplate','modTemplateVarTemplate','
-                modTemplateVarTemplate.tmplvarid = modTemplateVar.id
-                AND modTemplateVarTemplate.templateid = '.$template.'
-            ');
-            $c->select("
-                {$if}(ISNULL(modTemplateVarTemplate.tmplvarid),0,1) AS access,
-                modTemplateVarTemplate.rank AS tv_rank
-            ");
-        }
-        if ($sort != 'tv_rank') {
-            $c->sortby($sortAlias.'.'.$sort,$dir);
-        } else {
-            $c->where(array('modTemplateVarTemplate.rank:!=' => null));
-            $c->sortby($sort,$dir);
-        }
-        $c->limit($limit,$start);
-        return $modx->getCollection('modTemplateVar',$c);
+    public function getTemplateVarList(array $sort = array('name' => 'ASC'), $limit = 0, $offset = 0) {
+        return $this->xpdo->call('modTemplate', 'listTemplateVars', array(&$this, $sort, $limit, $offset));
     }
 
     /**
