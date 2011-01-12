@@ -142,7 +142,6 @@ $c->where(array(
     ),
     'OR:ProfileUserGroup.usergroup:=' => null,
 ),xPDOQuery::SQL_AND,null,2);
-$c->sortby('modActionDom.rank','ASC');
 $fcDt = $modx->getObject('modActionDom',$c);
 if ($fcDt) {
     $parentIds = array();
