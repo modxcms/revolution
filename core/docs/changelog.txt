@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3165] Fix issue where resource/updatefromgrid processor was missing published value if user does not have publish permission
 - [#2] Fix issue in user extended fields where subkeys in 2 separate containers DOM IDs conflict and prevent editing
 - [#3422], [#3374], [#3197] Fix issue with filemanager_url and Image/File TVs and their relative end result URLs
 - [#3201], [#177] Add modResource.leaveGroup, modTemplate.hasTemplateVar, modTemplateVar.hasTemplate
