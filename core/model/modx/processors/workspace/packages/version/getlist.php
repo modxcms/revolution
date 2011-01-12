@@ -22,10 +22,8 @@ $signatureArray = explode('-',$signature);
 
 /* get packages */
 $c = $modx->newQuery('transport.modTransportPackage');
-$c->select('
-    modTransportPackage.*,
-    Provider.name AS provider_name
-');
+$c->select($modx->getSelectColumns('transport.modTransportPackage','modTransportPackage'));
+$c->select(array('Provider.name AS provider_name'));
 $c->leftJoin('transport.modTransportProvider','Provider');
 $c->where(array(
     'workspace' => $workspace,
@@ -35,7 +33,7 @@ $count = $modx->getCount('modTransportPackage',$c);
 $c->sortby('modTransportPackage.version_major', 'DESC');
 $c->sortby('modTransportPackage.version_minor', 'DESC');
 $c->sortby('modTransportPackage.version_patch', 'DESC');
-$c->sortby('IF(modTransportPackage.release = "" OR modTransportPackage.release = "ga" OR modTransportPackage.release = "pl","z",release) DESC','');
+$c->sortby($if.'(modTransportPackage.release = "" OR modTransportPackage.release = "ga" OR modTransportPackage.release = "pl","z",release) DESC','');
 $c->sortby('modTransportPackage.release_index', 'DESC');
 if ($isLimit) $c->limit($limit,$start);
 $packages = $modx->getCollection('transport.modTransportPackage',$c);

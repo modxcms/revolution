@@ -36,12 +36,12 @@ $providerCache = array();
 
 /* now create output array */
 $list = array();
-foreach ($packages as $key => $package) {
+foreach ($packages as $package) {
     if ($package->get('installed') == '0000-00-00 00:00:00') $package->set('installed',null);
 
     $packageArray = $package->toArray();
 
-    $signatureArray = explode('-',$key);
+    $signatureArray = explode('-',$package->get('signature'));
     $packageArray['name'] = $signatureArray[0];
     $packageArray['version'] = $signatureArray[1];
     if (isset($signatureArray[2])) {
