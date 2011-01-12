@@ -1,6 +1,6 @@
 <?php
 /**
- * Gets a list of packages
+ * Gets a list of package versions for a package
  *
  * @package modx
  * @subpackage processors.workspace.package
@@ -33,9 +33,10 @@ $count = $modx->getCount('modTransportPackage',$c);
 $c->sortby('modTransportPackage.version_major', 'DESC');
 $c->sortby('modTransportPackage.version_minor', 'DESC');
 $c->sortby('modTransportPackage.version_patch', 'DESC');
-$c->sortby($if.'(modTransportPackage.release = "" OR modTransportPackage.release = "ga" OR modTransportPackage.release = "pl","z",release) DESC','');
+$c->sortby('IF(modTransportPackage.release = "" OR modTransportPackage.release = "ga" OR modTransportPackage.release = "pl","z",release) DESC','');
 $c->sortby('modTransportPackage.release_index', 'DESC');
 if ($isLimit) $c->limit($limit,$start);
+$c->prepare(); echo $c->toSql(); die();
 $packages = $modx->getCollection('transport.modTransportPackage',$c);
 
 /* now create output array */
