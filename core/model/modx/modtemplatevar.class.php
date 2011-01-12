@@ -823,4 +823,27 @@ class modTemplateVar extends modElement {
         }
         return $policy;
     }
+
+    /**
+     * Check to see if the TV has access to a Template
+     *
+     * @param mixed $templatePk Either the ID, name or object of the Template
+     * @return boolean Whether or not the TV has access to the specified Template
+     */
+    public function hasTemplate($templatePk) {
+        if (!is_int($templatePk) && !is_object($templatePk)) {
+            $template = $this->xpdo->getObject('modTemplate',array('templatename' => $templatePk));
+            if (empty($template) || !is_object($template) || !($template instanceof modTemplate)) {
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modTemplateVar::hasTemplate - No template: '.$templatePk);
+                return false;
+            }
+        } else {
+            $template =& $templatePk;
+        }
+        $templateVarTemplate = $this->xpdo->getObject('modTemplateVarTemplate',array(
+            'tmplvarid' => $this->get('id'),
+            'templateid' => is_object($template) ? $template->get('id') : $template,
+        ));
+        return !empty($templateVarTemplate) && is_object($templateVarTemplate);
+    }
 }

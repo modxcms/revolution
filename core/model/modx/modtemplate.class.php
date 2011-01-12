@@ -144,6 +144,10 @@ class modTemplate extends modElement {
         return $this->getTemplateVars();
     }
 
+    /**
+     * Gets a list of Template Variables
+     * @return array
+     */
     public function getTemplateVarList() {
         $c = $modx->newQuery('modTemplateVar');
         $count = $modx->getCount('modTemplateVar',$c);
@@ -166,5 +170,28 @@ class modTemplate extends modElement {
         }
         $c->limit($limit,$start);
         return $modx->getCollection('modTemplateVar',$c);
+    }
+
+    /**
+     * Check to see if this Template is assigned the specified Template Var
+     * 
+     * @param mixed $tvPk Either the ID, name or object of the Template Var
+     * @return boolean True if the TV is assigned to this Template
+     */
+    public function hasTemplateVar($tvPk) {
+        if (!is_int($tvPk) && !is_object($tvPk)) {
+            $tv = $this->xpdo->getObject('modTemplateVar',array('name' => $tvPk));
+            if (empty($tv) || !is_object($tv) || !($tv instanceof modTemplateVar)) {
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modTemplate::hasTemplateVar - No TV: '.$tvPk);
+                return false;
+            }
+        } else {
+            $tv =& $tvPk;
+        }
+        $templateVarTemplate = $this->xpdo->getObject('modTemplateVarTemplate',array(
+            'tmplvarid' => is_object($tv) ? $tv->get('id') : $tv,
+            'templateid' => $this->get('id'),
+        ));
+        return !empty($templateVarTemplate) && is_object($templateVarTemplate);
     }
 }

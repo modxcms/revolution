@@ -800,6 +800,37 @@ class modResource extends modAccessibleSimpleObject {
     }
 
     /**
+     * Removes a Resource from a Resource Group
+     *
+     * @access public
+     * @param mixed $resourceGroupPk Either the ID, name or object of the Resource Group
+     * @return boolean True if successful.
+     */
+    public function leaveGroup($resourceGroupPk) {
+        if (!is_object($resourceGroupPk) && !($resourceGroupPk instanceof modResourceGroup)) {
+            $c = array(
+                is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
+            );
+            $resourceGroup = $this->xpdo->getObject('modResourceGroup',$c);
+            if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::leaveGroup - No resource group: '.(is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
+                return false;
+            }
+        } else {
+            $resourceGroup =& $resourceGroupPk;
+        }
+        $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource',array(
+            'document' => $this->get('id'),
+            'document_group' => $resourceGroup->get('id'),
+        ));
+        if (!$resourceGroupResource) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'modResource::leaveGroup - Resource '.$this->get('id').' is not in resource group: '.(is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
+            return false;
+        }
+        return $resourceGroupResource->remove();
+    }
+
+    /**
      * Gets a sortable, limitable collection (and total count) of Resource Groups for the Resource.
      *
      * @param array $sort An array of sort columns in column => direction format.
