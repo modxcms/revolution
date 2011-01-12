@@ -9,16 +9,16 @@ $list = array();
 
 $c = $modx->newQuery('modAction');
 $c->leftJoin('modAction','Children');
+$c->select($modx->getSelectColumns('modAction','modAction'));
 $c->select(array(
-    $modx->getSelectColumns('modAction','modAction'),
-    'COUNT(`Children`.`id`) `childrenCount`',
+    'COUNT('.$modx->getSelectColumns('modAction','Children','',array('id')).') '.$modx->escape('childrenCount'),
 ));
 $c->where(array(
     'modAction.parent' => $pk,
 ));
 $c->groupby($modx->getSelectColumns('modAction','modAction','',array('id')));
 $c->sortby($modx->getSelectColumns('modAction','modAction','',array('controller')),'ASC');
-$actions = $modx->getCollection('modAction',$c);
+$actions = $modx->getIterator('modAction',$c);
 
 foreach ($actions as $action) {
     $list[] = array(

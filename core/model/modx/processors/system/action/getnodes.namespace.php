@@ -9,14 +9,17 @@ $list = array();
 
 $c = $modx->newQuery('modAction');
 $c->leftJoin('modAction','Children');
-$c->select("{$modx->escape('modAction')}.*, COUNT({$modx->escape('Children')}.{$modx->escape('id')} AS {$modx->escape('childrenCount')}");
+$c->select($modx->getSelectColumns('modAction','modAction'));
+$c->select(array(
+    'COUNT('.$modx->escape('Children').'.'.$modx->escape('id').') AS '.$modx->escape('childrenCount'),
+));
 $c->where(array(
     'modAction.parent' => 0,
     'modAction.namespace' => $pk,
 ));
 $c->groupby('modAction.id');
 $c->sortby('modAction.controller','ASC');
-$actions = $modx->getCollection('modAction',$c);
+$actions = $modx->getIterator('modAction',$c);
 
 foreach ($actions as $action) {
     $list[] = array(

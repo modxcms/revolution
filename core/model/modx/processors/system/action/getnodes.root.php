@@ -8,17 +8,15 @@
 $list = array();
 
 $c = $modx->newQuery('modNamespace');
-$c->setClassAlias('Namespace');
+$c->select($modx->getSelectColumns('modNamespace','modNamespace'));
 $c->select(array(
-    'Namespace.*',
-    'COUNT(Actions.id) AS actionCount',
+    'COUNT('.$modx->getSelectColumns('modAction','Actions','',array('id')).') AS '.$modx->escape('actionCount'),
 ));
 $c->leftJoin('modAction','Actions');
-$nameField = $modx->getSelectColumns('modNamespace','Namespace','',array('name'));
+$nameField = $modx->getSelectColumns('modNamespace','modNamespace','',array('name'));
 $c->sortby($nameField,'ASC');
 $c->groupby($nameField);
-$namespaces = $modx->getCollection('modNamespace',$c);
-//$sql = $c->toSql(); echo $sql; die();
+$namespaces = $modx->getIterator('modNamespace',$c);
 unset($nameField);
 
 foreach ($namespaces as $namespace) {
