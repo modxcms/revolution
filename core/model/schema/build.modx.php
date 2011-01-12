@@ -6,7 +6,8 @@ $tstart= $mtime;
 
 $properties = array();
 include_once (dirname(dirname(dirname(__FILE__))) . '/xpdo/xpdo.class.php');
-require_once (dirname(dirname(dirname(dirname(__FILE__)))) . '/_build/build.config.php');
+require_once (dirname(dirname(dirname(dirname(__FILE__)))) . '/config.core.php');
+require_once (dirname(dirname(dirname(dirname(__FILE__)))) . '/_build/build.properties.php');
 
 foreach (array('mysql', 'sqlsrv') as $driver) {
     $xpdo= new xPDO(
