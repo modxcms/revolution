@@ -124,10 +124,13 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
 
     /**
      * SQL Server check for server version
+     *
+     * @TODO Get this to actually check the server version.
+     *
      * {@inheritDoc}
      */
     public function verifyServerVersion() {
-        return array('result' => 'success','message' => 'Your SQL Server version rocks');
+        return array('result' => 'success','message' => $this->install->lexicon('sqlsrv_version_success',array('version' => '')));
 
         $handler = @sqlsrv_connect($this->install->settings->get('database_server'),$this->install->settings->get('database_user'),$this->install->settings->get('database_password'));
         $serverInfo = @sqlsrv_server_info($handler);
@@ -148,10 +151,13 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
 
     /**
      * SQL Server check for client version
+     *
+     * @TODO Get this to actually check the client version.
+     *
      * {@inheritDoc}
      */
     public function verifyClientVersion() {
-        return array('result' => 'success', 'message' => 'Your SQL Server client version rocks.');
+        return array('result' => 'success', 'message' => $this->install->lexicon('sqlsrv_version_client_success',array('version' => '')));
 
         $clientInfo = @sqlsrv_client_info();
         $sqlsrvVersion = $clientInfo['DriverVer'];

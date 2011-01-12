@@ -129,13 +129,15 @@ class modInstallVersion {
         $scripts = array();
         $path = dirname(__FILE__).'/upgrades/'.$this->install->settings->get('database_type','mysql').'/';
         $sc = '';
-        $dir = dir($path);
-        while (false !== ($script = $dir->read())) {
-            if (is_dir($path.$script)) continue;
-            $sc = str_replace('.php','',$script);
+        if (is_dir($path)) {
+            $dir = dir($path);
+            while (false !== ($script = $dir->read())) {
+                if (is_dir($path.$script)) continue;
+                $sc = str_replace('.php','',$script);
 
-            if (version_compare($this->version,$sc,'<=')) {
-                $scripts[] = $path.$sc.'.php';
+                if (version_compare($this->version,$sc,'<=')) {
+                    $scripts[] = $path.$sc.'.php';
+                }
             }
         }
         return $scripts;
