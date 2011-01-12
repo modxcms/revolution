@@ -12,11 +12,11 @@ class modTemplate_sqlsrv extends modTemplate {
         $c->select($template->xpdo->getSelectColumns('modTemplateVar','modTemplateVar'));
         $c->leftJoin('modTemplateVarTemplate','modTemplateVarTemplate', array(
             "modTemplateVarTemplate.tmplvarid = modTemplateVar.id",
-            'modTemplateVarTemplate.templateid' => $template->get('id')
+            'modTemplateVarTemplate.templateid' => $template->get('id'),
         ));
         $c->select(array(
             "CASE ISNULL(modTemplateVarTemplate.tmplvarid) THEN 0 ELSE 1 END AS access",
-            "modTemplateVarTemplate.rank AS tv_rank"
+            "CASE ISNULL(modTemplateVarTemplate.rank) THEN '-' ELSE modTemplateVarTemplate.rank AS tv_rank"
         ));
         foreach ($sort as $sortKey => $sortDir) {
             $c->sortby($sortKey, $sortDir);

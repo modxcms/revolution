@@ -16,7 +16,7 @@ class modTemplate_mysql extends modTemplate {
         ));
         $c->select(array(
             "IF(ISNULL(modTemplateVarTemplate.tmplvarid),0,1) AS access",
-            "IF(ISNULL(modTemplateVarTemplate.rank),'n/a',modTemplateVarTemplate.rank) AS tv_rank"
+            "IF(ISNULL(modTemplateVarTemplate.rank),'-',modTemplateVarTemplate.rank) AS tv_rank"
         ));
         foreach ($sort as $sortKey => $sortDir) {
             $c->sortby($sortKey, $sortDir);
