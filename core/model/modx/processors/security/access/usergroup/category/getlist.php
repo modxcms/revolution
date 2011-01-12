@@ -46,7 +46,7 @@ $c->leftJoin('modAccessPolicy','Policy');
 $c->select(array(
     'modAccessCategory.*',
     'Target.category AS name',
-    'CONCAT(Role.name," - ",modAccessCategory.authority) AS authority_name',
+    'Role.name AS role_name',
     'Policy.name AS policy_name',
     'Policy.data AS policy_data',
 ));
@@ -59,6 +59,7 @@ $list = array();
 foreach ($acls as $acl) {
     $aclArray = $acl->toArray();
     if (empty($aclArray['name'])) $aclArray['name'] = '('.$modx->lexicon('none').')';
+    $aclArray['authority_name'] = !empty($aclArray['role_name']) ? $aclArray['role_name'].' - '.$aclArray['authority'] : $aclArray['authority'];
 
     /* get permissions list */
     $data = $aclArray['policy_data'];

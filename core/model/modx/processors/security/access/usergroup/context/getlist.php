@@ -49,7 +49,7 @@ $c->leftJoin('modUserGroupRole','Role','Role.authority = modAccessContext.author
 $c->leftJoin('modAccessPolicy','Policy');
 $c->select(array(
     'modAccessContext.*',
-    'CONCAT(Role.name," - ",modAccessContext.authority) AS authority_name',
+    'Role.name AS role_name',
     'Policy.name AS policy_name',
     'Policy.data AS policy_data',
 ));
@@ -61,6 +61,7 @@ $acls = $modx->getCollection('modAccessContext', $c);
 $list = array();
 foreach ($acls as $acl) {
     $aclArray = $acl->toArray();
+    $aclArray['authority_name'] = !empty($aclArray['role_name']) ? $aclArray['role_name'].' - '.$aclArray['authority'] : $aclArray['authority'];
     
     /* get permissions list */
     $data = $aclArray['policy_data'];
