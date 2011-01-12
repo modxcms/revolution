@@ -100,25 +100,28 @@ class modContext extends modAccessibleObject {
         $policy = array();
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (empty($this->_policies) || !isset($this->_policies[$context])) {
-            $accessTable = $this->xpdo->getTableName('modAccessContext');
-            $policyTable = $this->xpdo->getTableName('modAccessPolicy');
-            $sql = "SELECT acl.target, acl.principal, acl.authority, acl.policy, p.data FROM {$accessTable} acl " .
-                    "LEFT JOIN {$policyTable} p ON p.id = acl.policy " .
-                    "WHERE acl.principal_class = 'modUserGroup' " .
-                    "AND acl.target = :context " .
-                    "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
-            $bindings = array(
-                ':context' => $this->get('key')
-            );
-            $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-            if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $policy['modAccessContext'][$row['target']][] = array(
-                        'principal' => $row['principal'],
-                        'authority' => $row['authority'],
-                        'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
-                    );
-                }
+            $c = $this->xpdo->newQuery('modAccessContext');
+            $c->leftJoin('modAccessPolicy','Policy');
+            $c->select(array(
+                'modAccessContext.id',
+                'modAccessContext.target',
+                'modAccessContext.principal',
+                'modAccessContext.authority',
+                'modAccessContext.policy',
+                'Policy.data',
+            ));
+            $c->where(array(
+                'modAccessContext.principal_class' => 'modUserGroup',
+                'modAccessContext.target' => $this->get('key'),
+            ));
+            $c->groupby('modAccessContext.target,modAccessContext.principal,modAccessContext.authority,modAccessContext.policy');
+            $acls = $this->xpdo->getCollection('modAccessContext',$c);
+            foreach ($acls as $acl) {
+                $policy['modAccessContext'][$acl->get('target')][] = array(
+                    'principal' => $acl->get('principal'),
+                    'authority' => $acl->get('authority'),
+                    'policy' => $acl->get('data') ? $this->xpdo->fromJSON($acl->get('data'), true) : array(),
+                );
             }
             $this->_policies[$context] = $policy;
         } else {
