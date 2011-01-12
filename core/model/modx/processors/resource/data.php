@@ -14,13 +14,13 @@ $modx->lexicon->load('resource');
 /* get resource */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('resource_err_ns'));
 $c = $modx->newQuery('modResource');
-$c->select('
-    modResource.*,
-    Template.templatename AS template_name,
-    CreatedBy.username AS creator,
-    EditedBy.username AS editor,
-    PublishedBy.username AS publisher
-');
+$c->select(array(
+    $modx->getSelectColumns('modResource','modResource'),
+    'Template.templatename AS template_name',
+    'CreatedBy.username AS creator',
+    'EditedBy.username AS editor',
+    'PublishedBy.username AS publisher',
+));
 $c->leftJoin('modTemplate','Template');
 $c->leftJoin('modUser','CreatedBy');
 $c->leftJoin('modUser','EditedBy');
