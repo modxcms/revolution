@@ -10,6 +10,7 @@ var fld{/literal}{$tv->id}{literal} = MODx.load({
     ,renderTo: 'tvpanel{$tv->id}'
     ,tv: '{$tv->id}'
     ,value: '{$tv->value|escape}'
+    ,relativeValue: '{$tv->relativeValue|escape}'
     ,width: '97%'
 {literal}
     ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}

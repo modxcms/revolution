@@ -2,7 +2,8 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-- [#3201], [#177] Added modResource.leaveGroup, modTemplate.hasTemplateVar, modTemplateVar.hasTemplate
+- [#3422], [#3374], [#3197] Fix issue with filemanager_url and Image/File TVs and their relative end result URLs
+- [#3201], [#177] Add modResource.leaveGroup, modTemplate.hasTemplateVar, modTemplateVar.hasTemplate
 - [#3350] Fix for PHP bug: http://www.exploringbinary.com/php-hangs-on-numeric-value-2-2250738585072011e-308/
 - [#3326] Fix issue where TV radio/cb options with value of 0 couldnt be selected
 - [#3329] Fix edit and cancel buttons on view resource page
