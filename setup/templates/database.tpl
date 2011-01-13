@@ -9,9 +9,6 @@
 
 <p>{$_lang.connection_connection_note}</p>
 
-<p>{$_lang.connection_database_info}</p>
-<br />
-
 <p class="error">{$error_message}</p>
 
 <div class="labelHolder">
