@@ -47,7 +47,7 @@
 <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testconn">{$_lang.db_test_conn_msg}</a></p>
 
 <div id="modx-db-step1-msg" class="modx-hidden2">
-    <span>{$_lang.db_connecting}</span> <span class="connect-msg"></span>
+    <span>{$_lang.db_connecting}</span>&nbsp;<span class="connect-msg"></span>
 </div>
 <p id="modx-db-info">
     <br />- {$_lang.mysql_version_server_start}<span id="modx-db-server-version"></span>
@@ -72,7 +72,7 @@
 <br />
 <p>&rarr;&nbsp;<a href="javascript:void(0);" id="modx-testcoll">{$_lang.db_test_coll_msg}</a></p>
 
-<p id="modx-db-step2-msg" class="modx-hidden2">{$_lang.db_check_db}<span></span></p>
+<p id="modx-db-step2-msg" class="modx-hidden2"><span>{$_lang.db_check_db}</span>&nbsp;<span class="result"></span></p>
 </div>
 {if $installmode EQ 0}
 <div id="modx-db-step3" class="modx-hidden">
