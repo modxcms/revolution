@@ -192,7 +192,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                     'success': {fn:function(r) {
                         var n = new Ext.tree.TreeNode({
                             text: r.name+' - <i>'+r.value+'</i>'
-                            ,id: r.name
+                            ,id: r.id
                             ,name: r.name
                             ,leaf: true
                             ,value: r.value
@@ -218,9 +218,9 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                 var n = kids[i];
                 var c = _encode(n);
                 if (n.attributes.value != null && n.attributes.value != undefined) {
-                    resultNode[n.id] = n.attributes.value;
+                    resultNode[n.attributes.name] = n.attributes.value;
                 } else {
-                    resultNode[n.id] = c;
+                    resultNode[n.attributes.name] = c;
                 }
             }
             return resultNode;
