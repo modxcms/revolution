@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODx Revolution 2.0.7-pl (January 14, 2011)
+====================================
+- [#3422], [#3374], [#3197] Fix issue with filemanager_url and Image/File TVs and their relative end result URLs
+
 MODx Revolution 2.0.6-pl2 (January 6, 2011)
 ====================================
 - [#3350] Fix for PHP bug: http://bugs.php.net/bug.php?id=53632
