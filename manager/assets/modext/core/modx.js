@@ -258,6 +258,20 @@ Ext.extend(MODx,Ext.Component,{
             el.hide();
         }
     }
+    ,renameLabel: function(ct,flds,vals) {
+        var cto;
+        if (ct == 'modx-panel-resource' && flds.indexOf('modx-resource-content') != -1) {
+            cto = Ext.getCmp('modx-resource-content');
+            if (cto) {
+                cto.setTitle(vals[0]);
+            }
+        } else {
+            cto = Ext.getCmp(ct);
+            if (cto) {
+                cto.setLabel(flds,vals);
+            }
+        }
+    }
     ,preview: function() {
         window.open(MODx.config.site_url);
     }
@@ -279,6 +293,11 @@ Ext.extend(MODx,Ext.Component,{
             });
         }
         return true;
+    }
+    ,debug: function(msg) {
+        if (MODx.config.ui_debug_mode == 1) {
+            console.log(msg);
+        }
     }
 });
 Ext.reg('modx',MODx);

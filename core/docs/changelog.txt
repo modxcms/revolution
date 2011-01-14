@@ -2,6 +2,16 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODx Revolution 2.0.7-pl (January 14, 2011)
+====================================
+- [#3376] Fix table creation when default storage engine is not MyISAM
+- [#3472] Fix issue due to tree impr that prevented element saving success response
+- Improve loading of mgr pages by preventing trees from rendering until activated
+- [#3205] FC fixes: Ensure Resource Content field can have values set/renamed, that rules on create respect template, and that default values on create are set
+- [#3165] Fix issue where resource/updatefromgrid processor was missing published value if user does not have publish permission
+- [#2] Fix issue in user extended fields where subkeys in 2 separate containers DOM IDs conflict and prevent editing
+- [#3422], [#3374], [#3197] Fix issue with filemanager_url and Image/File TVs and their relative end result URLs
+
 MODx Revolution 2.0.6-pl2 (January 6, 2011)
 ====================================
 - [#3350] Fix for PHP bug: http://bugs.php.net/bug.php?id=53632

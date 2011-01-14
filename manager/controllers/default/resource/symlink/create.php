@@ -54,22 +54,30 @@ $access_permissions = $modx->hasPermission('access_permissions');
 $default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $context->getOption('default_template', 0, $modx->_userConfig)));
 $userGroups = $modx->user->getUserGroups();
 $c = $modx->newQuery('modActionDom');
-$c->leftJoin('modAccessActionDom','Access');
-$principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
+$c->innerJoin('modFormCustomizationSet','Set');
+$c->innerJoin('modFormCustomizationProfile','Profile','Set.profile = Profile.id');
+$c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
+$c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
 $c->where(array(
-    'action' => $this->action['id'],
-    'name' => 'template',
-    'container' => 'modx-panel-resource',
-    'rule' => 'fieldDefault',
-    'active' => true,
-    array(
-        array(
-            'Access.principal_class:=' => 'modUserGroup',
-            $principalCol.' IN ('.implode(',',$userGroups).')',
-        ),
-        'OR:Access.principal:IS' => null,
-    ),
+    'modActionDom.action' => $this->action['id'],
+    'modActionDom.name' => 'template',
+    'modActionDom.container' => 'modx-panel-resource',
+    'modActionDom.rule' => 'fieldDefault',
+    'modActionDom.active' => true,
+    'Set.active' => true,
+    'Profile.active' => true,
 ));
+$c->where(array(
+    array(
+        'ProfileUserGroup.usergroup:IN' => $userGroups,
+        array(
+            'OR:ProfileUserGroup.usergroup:IS' => null,
+            'AND:UGProfile.active:=' => true,
+        ),
+    ),
+    'OR:ProfileUserGroup.usergroup:=' => null,
+),xPDOQuery::SQL_AND,null,2);
+$c->sortby('modActionDom.rank','ASC');
 $fcDt = $modx->getObject('modActionDom',$c);
 if ($fcDt) {
     $parentIds = array();

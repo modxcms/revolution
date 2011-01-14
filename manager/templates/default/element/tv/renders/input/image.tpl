@@ -1,7 +1,7 @@
 <div id="tvbrowser{$tv->id}"></div>
 <div id="tv-image-{$tv->id}" style="width: 97%"></div>
 <div id="tv-image-preview-{$tv->id}">
-    {if $tv->value}<img src="{$_config.connectors_url}system/phpthumb.php?h=150&w=150&src={$tv->value}" alt="" />{/if}
+    {if $tv->value}<img src="{$_config.connectors_url}system/phpthumb.php?h=150&w=150&src={$tv->relativeValue}" alt="" />{/if}
 </div>
 
 <script type="text/javascript">
@@ -13,13 +13,14 @@ var fld{/literal}{$tv->id}{literal} = MODx.load({
     ,renderTo: 'tv-image-{$tv->id}'
     ,tv: '{$tv->id}'
     ,value: '{$tv->value|escape}'
+    ,relativeValue: '{$tv->relativeValue|escape}'
     ,width: '97%'
 {literal}
     ,listeners: {
         'select': {fn:function(data) {
             MODx.fireResourceFormChange();
             var d = Ext.get('tv-image-preview-{/literal}{$tv->id}{literal}');
-            if (Ext.isEmpty(data.relativeUrl)) {
+            if (Ext.isEmpty(data.url)) {
                 d.update('');
             } else {
                 d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.url+'&wctx={/literal}{$ctx}{literal}" alt="" />');

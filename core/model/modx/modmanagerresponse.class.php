@@ -152,8 +152,6 @@ class modManagerResponse extends modResponse {
         $c->innerJoin('modFormCustomizationProfile','Profile','Set.profile = Profile.id');
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
         $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
-        //$c->leftJoin('modAccessActionDom','Access');
-        //$principalCol = $this->modx->getSelectColumns('modAccessActionDom','Access','',array('principal'));
         $c->where(array(
             'modActionDom.action' => $this->action['id'],
             'modActionDom.for_parent' => $forParent,
@@ -203,15 +201,10 @@ class modManagerResponse extends modResponse {
         }
 
         foreach ($domRules as $rule) {
-            /* filter by template here, so that prior rules can affect template which will change rules */
-            if ($obj) {
-                $tpl = $rule->get('template');
-                if (!empty($tpl)) {
-                    if ((int)$obj->get('template') != (int)$tpl) continue;
-                }
+            $template = $rule->get('template');
+            if (!empty($template)) {
+                if ($template != $obj->get('template')) continue;
             }
-
-            /* filter by constraints */
             $constraintClass = $rule->get('constraint_class');
             if (!empty($constraintClass)) {
                 if (empty($obj) || !($obj instanceof $constraintClass)) continue;
@@ -229,10 +222,10 @@ class modManagerResponse extends modResponse {
                     }
                 }
             }
-            /* if setting a default value, do so here */
-            if ($obj && $rule->get('rule') == 'fieldDefault') {
-                $overridden[$rule->get('name')] = $rule->get('value');
-                $obj->set($rule->get('name'),$rule->get('value'));
+            if ($rule->get('rule') == 'fieldDefault') {
+                $field = $rule->get('name');
+                if ($field == 'modx-resource-content') $field = 'content';
+                $overridden[$field] = $rule->get('value');
             }
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;
