@@ -271,9 +271,9 @@ class xPDO {
                 $this->_escapeCharClose= '"';
                 break;
             case 'sqlsrv':
-            	$this->_escapeCharOpen= '[';
-            	$this->_escapeCharClose= ']';
-            	break;
+                $this->_escapeCharOpen= '[';
+                $this->_escapeCharClose= ']';
+                break;
             default:
                 break;
         }
@@ -1647,16 +1647,16 @@ class xPDO {
         return $this->_escapeCharOpen . $string . $this->_escapeCharClose;
     }
 
-	/**
-	 * Use to insert a literal string into a SQL query without escaping or quoting.
-	 *
-	 * @param string $string A string to return as a literanl, unescaped and unquoted.
-	 * @return string The string with any escape or quote characters trimmed.
-	 */
-	public function literal($string) {
-		$string = trim($string, $this->_escapeCharOpen . $this->_escapeCharClose . $this->_quoteChar);
-		return $string;
-	}
+    /**
+     * Use to insert a literal string into a SQL query without escaping or quoting.
+     *
+     * @param string $string A string to return as a literal, unescaped and unquoted.
+     * @return string The string with any escape or quote characters trimmed.
+     */
+    public function literal($string) {
+        $string = trim($string, $this->_escapeCharOpen . $this->_escapeCharClose . $this->_quoteChar);
+        return $string;
+    }
 
     /**
      * Adds the table prefix, and optionally database name, to a given table.
