@@ -52,6 +52,7 @@ if (!$modx->hasPermission('publish_document')) {
     $_DATA['publishedby'] = $resource->get('publishedby');
     $_DATA['pub_date'] = $resource->get('pub_date');
     $_DATA['unpub_date'] = $resource->get('unpub_date');
+    $_DATA['published'] = $resource->get('published');
 }
 
 /* save resource */
