@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Improve loading of mgr pages by preventing trees from rendering until activated
 - [#3205] FC fixes: Ensure Resource Content field can have values set/renamed, that rules on create respect template, and that default values on create are set
 - [#3165] Fix issue where resource/updatefromgrid processor was missing published value if user does not have publish permission
 - [#2] Fix issue in user extended fields where subkeys in 2 separate containers DOM IDs conflict and prevent editing

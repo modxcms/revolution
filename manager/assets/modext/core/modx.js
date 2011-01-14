@@ -294,6 +294,11 @@ Ext.extend(MODx,Ext.Component,{
         }
         return true;
     }
+    ,debug: function(msg) {
+        if (MODx.config.ui_debug_mode == 1) {
+            console.log(msg);
+        }
+    }
 });
 Ext.reg('modx',MODx);
 
