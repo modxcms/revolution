@@ -80,8 +80,8 @@ $access_permissions = $modx->hasPermission('access_permissions');
 $default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $context->getOption('default_template', 0, $modx->_userConfig)));
 $userGroups = $modx->user->getUserGroups();
 $c = $modx->newQuery('modActionDom');
-$c->innerJoin('modFormCustomizationSet','FCSet');
-$c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
+$c->innerJoin('modFormCustomizationSet','Set');
+$c->innerJoin('modFormCustomizationProfile','Profile','Set.profile = Profile.id');
 $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
 $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
 $c->where(array(
@@ -90,7 +90,7 @@ $c->where(array(
     'modActionDom.container' => 'modx-panel-resource',
     'modActionDom.rule' => 'fieldDefault',
     'modActionDom.active' => true,
-    'FCSet.active' => true,
+    'Set.active' => true,
     'Profile.active' => true,
 ));
 $c->where(array(
