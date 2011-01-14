@@ -335,7 +335,7 @@ class xPDO {
                 return false;
             }
 
-            $connected= (is_object($this->pdo) && (empty($errorCode) || $errorCode == PDO::ERR_NONE));
+            $connected= (is_object($this->pdo));
             if ($connected) {
                 if ($this->config['dbtype'] === null) {
                     $this->config['dbtype']= $this->getAttribute(PDO::ATTR_DRIVER_NAME);
@@ -551,29 +551,33 @@ class xPDO {
      * @param string $class The name of a class to to get the static method from.
      * @param string $method The name of the method you want to call.
      * @param array $args An array of arguments for the method.
+     * @param boolean $transient Indicates if the class has dbtype derivatives. Set to true if you
+     * want to use on classes not derived from xPDOObject.
      * @return mixed|null The callback method's return value or null if no valid method is found.
      */
-    public function call($class, $method, array $args = array()) {
+    public function call($class, $method, array $args = array(), $transient = false) {
         $return = null;
-        $className = $this->loadClass($class) . '_' . $this->getOption('dbtype');
-        $callback = array($className, $method);
-        if (is_callable($callback)) {
+        $callback = '';
+        if ($transient) {
+            $className = $this->loadClass($class, '', false, true);
+            if ($className) {
+                $callback = array($className, $method);
+            }
+        } else {
+            $className = $this->loadClass($class);
+            if ($className) {
+                $className .= '_' . $this->getOption('dbtype');
+                $callback = array($className, $method);
+            }
+        }
+        if (!empty($callback) && is_callable($callback)) {
             try {
                 $return = call_user_func_array($callback, $args);
             } catch (Exception $e) {
                 $this->log(xPDO::LOG_LEVEL_ERROR, "An exception occurred calling {$className}::{$method}() - " . $e->getMessage());
             }
         } else {
-            $callback = array($className, $method);
-            if (is_callable($callback)) {
-                try {
-                    $return = call_user_func_array($callback, $args);
-                } catch (Exception $e) {
-                    $this->log(xPDO::LOG_LEVEL_ERROR, "An exception occurred calling {$className}::{$method}() - " . $e->getMessage());
-                }
-            } else {
-                $this->log(xPDO::LOG_LEVEL_ERROR, "{$class}::{$method}() is not a valid static method.");
-            }
+            $this->log(xPDO::LOG_LEVEL_ERROR, "{$class}::{$method}() is not a valid static method.");
         }
         return $return;
     }
@@ -1693,10 +1697,13 @@ class xPDO {
                 $result[strtolower(trim($tmp[0]))]= trim($tmp[1]);
             } else {
                 $result['dbname']= trim($parameters[$a]);
-        	}
+            }
         }
-        if (!isset($result['dbname'])) {
-        	if (isset($result['database'])) $result['dbname'] = $result['database'];
+        if (!isset($result['dbname']) && isset($result['database'])) {
+            $result['dbname'] = $result['database'];
+        }
+        if (!isset($result['host']) && isset($result['server'])) {
+            $result['host'] = $result['server'];
         }
         return $result;
     }
