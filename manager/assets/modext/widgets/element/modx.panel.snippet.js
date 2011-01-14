@@ -153,9 +153,11 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
         this.getForm().setValues(r.result.object);
         
         var t = Ext.getCmp('modx-element-tree');
-        var c = Ext.getCmp('modx-snippet-category').getValue();
-        var u = c != '' && c != null ? 'n_snippet_category_'+c : 'n_type_snippet'; 
-        t.refreshNode(u,true);
+        if (t) {
+            var c = Ext.getCmp('modx-snippet-category').getValue();
+            var u = c != '' && c != null ? 'n_snippet_category_'+c : 'n_type_snippet';
+            t.refreshNode(u,true);
+        }
     }    
     ,changeEditor: function() {
         this.cleanupEditor();

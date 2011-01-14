@@ -181,9 +181,11 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         this.getForm().setValues(o.result.object);
         
         var t = Ext.getCmp('modx-element-tree');
-        var c = Ext.getCmp('modx-plugin-category').getValue();
-        var u = c != '' && c != null ? 'n_plugin_category_'+c : 'n_type_plugin'; 
-        t.refreshNode(u,true);
+        if (t) {
+            var c = Ext.getCmp('modx-plugin-category').getValue();
+            var u = c != '' && c != null ? 'n_plugin_category_'+c : 'n_type_plugin';
+            t.refreshNode(u,true);
+        }
     }    
     ,changeEditor: function() {
         this.cleanupEditor();
