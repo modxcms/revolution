@@ -2,8 +2,8 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
-         processIsolation="true"
-         stopOnFailure="true"
+         processIsolation="false"
+         stopOnFailure="false"
          syntaxCheck="true"
          verbose="true"
          bootstrap="MODxTestHarness.php"
@@ -17,7 +17,7 @@
         <file>Tests/Processors/Browser/DirectoryTest.php</file>
         <file>Tests/Processors/Browser/FileTest.php</file>
         <file>Tests/Processors/Context/ContextTest.php</file>
-        <file>Tests/Processors/Context/ContextSettingTest.php</file>
+        <!--<file>Tests/Processors/Context/ContextSettingTest.php</file>-->
       </testsuite>
     </testsuites>
 </phpunit>
