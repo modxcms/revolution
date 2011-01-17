@@ -27,7 +27,7 @@
  * @package modx-test
  * @subpackage modx
  */
-class BrowserDirectoryProcessors extends MODxTestCase {
+class BrowserDirectoryProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'browser/directory/';
 
     public static function setUpBeforeClass() {

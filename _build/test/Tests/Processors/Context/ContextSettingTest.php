@@ -27,7 +27,7 @@
  * @package modx-test
  * @subpackage modx
  */
-class ContextSettingProcessors extends MODxTestCase {
+class ContextSettingProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'context/setting/';
 
     /**

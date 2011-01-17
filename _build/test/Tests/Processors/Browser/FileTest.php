@@ -27,7 +27,7 @@
  * @package modx-test
  * @subpackage modx
  */
-class BrowserFileProcessors extends MODxTestCase {
+class BrowserFileProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'browser/file/';
 
     /**
