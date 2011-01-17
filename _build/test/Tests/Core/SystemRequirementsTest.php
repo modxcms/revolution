@@ -21,16 +21,22 @@
  *
  * @package modx-test
  */
-require_once 'MODx.php';
 /**
- * Suite handling all MODx-class centric tests.
+ * Tests related to basic MODx class methods
  *
  * @package modx-test
+ * @subpackage modx
+ * @group Core
  */
-class MODx_AllTests extends PHPUnit_Framework_TestSuite {
-    public static function suite() {
-        $suite = new MODx_AllTests('MODxClassTest');
-        $suite->addTestSuite('MODxTest');
-        return $suite;
+class SystemRequirementsTest extends MODxTestCase {
+    public function testPDOExtension() {
+        $exists = extension_loaded('pdo');
+        $this->assertTrue($exists);
+    }
+
+    public function testVerifyMODx() {
+        $modx = MODxTestHarness::_getConnection();
+        $success = is_object($modx) && $modx instanceof modX;
+        $this->assertTrue($success);
     }
 }
