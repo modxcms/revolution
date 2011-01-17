@@ -28,7 +28,7 @@
  * @subpackage modx
  */
 class BrowserDirectoryProcessors extends MODxTestCase {
-    const PROCESSOR_LOCATION = 'browser/directory';
+    const PROCESSOR_LOCATION = 'browser/directory/';
 
     public static function setUpBeforeClass() {
         $modx = MODxTestHarness::_getConnection();
@@ -36,46 +36,48 @@ class BrowserDirectoryProcessors extends MODxTestCase {
         $modx->setOption('filemanager_url','');
         $modx->setOption('rb_base_dir','');
         $modx->setOption('rb_base_url','');
+        @rmdir(MODX_BASE_PATH.'assets/test2/');
+        @rmdir(MODX_BASE_PATH.'assets/test3/');
+        @rmdir(MODX_BASE_PATH.'assets/test4/');
     }
     /**
      * Cleanup data after this test case.
      */
     public static function tearDownAfterClass() {
-        $modx = MODxTestHarness::_getConnection();
-        @rmdir(MODX_BASE_PATH.'assets2/');
-        @rmdir(MODX_BASE_PATH.'assets3/');
-        @rmdir(MODX_BASE_PATH.'assets4/');
+        @rmdir(MODX_BASE_PATH.'assets/test2/');
+        @rmdir(MODX_BASE_PATH.'assets/test3/');
+        @rmdir(MODX_BASE_PATH.'assets/test4/');
     }
     /**
      * Tests the browser/directory/create processor, which creates a directory
      * @dataProvider providerCreateDirectory
      */
     public function testCreateDirectory($dir = '') {
-        if (empty($dir)) return false;
+        if (empty($dir)) {
+            $this->fail('Empty data set!');
+            return false;
+        }
         $this->modx->setOption('filemanager_path','');
         $this->modx->setOption('filemanager_url','');
         $this->modx->setOption('rb_base_dir','');
         $this->modx->setOption('rb_base_url','');
 
-        try {
-            $_POST['name'] = $dir;
-            $result = $this->modx->executeProcessor(array(
-                'location' => self::PROCESSOR_LOCATION,
-                'action' => 'create',
-            ));
-        } catch (Exception $e) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
+            'name' => $dir,
+        ));
+        if (empty($result)) {
+            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'create processor');
         }
         $s = $this->checkForSuccess($result);
-        $this->assertTrue($s,'Could not create directory '.$dir.' in browser/directory/create test: '.$result['message']);
+        $this->assertTrue($s,'Could not create directory '.$dir.' in browser/directory/create test: '.$result->getMessage());
     }
     /**
      * Data provider for create processor test.
      */
     public function providerCreateDirectory() {
         return array(
-            array('assets2'),
-            array('assets3/'),
+            array('assets/test2'),
+            array('assets/test3'),
         );
     }
 
@@ -92,25 +94,28 @@ class BrowserDirectoryProcessors extends MODxTestCase {
         $this->modx->setOption('rb_base_dir','');
         $this->modx->setOption('rb_base_url','');
 
-        try {
-            $_POST['dir'] = $oldDirectory;
-            $_POST['name'] = MODX_BASE_PATH.$newDirectory;
-            $result = $this->modx->executeProcessor(array(
-                'location' => self::PROCESSOR_LOCATION,
-                'action' => 'update',
-            ));
-        } catch (Exception $e) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        $adir = $this->modx->getOption('base_path').$oldDirectory;
+        @mkdir($adir);
+        if (!file_exists($adir)) {
+            $this->fail('Old directory could not be created for test: '.$adir);
+        }
+
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'update',array(
+            'dir' => $oldDirectory,
+            'name' => $this->modx->getOption('base_path').$newDirectory,
+        ));
+        if (empty($result)) {
+            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'update processor');
         }
         $s = $this->checkForSuccess($result);
-        $this->assertTrue($s,'Could not rename directory '.$oldDirectory.' to '.$newDirectory.' in browser/directory/update test: '.$result['message']);
+        $this->assertTrue($s,'Could not rename directory '.$oldDirectory.' to '.$newDirectory.' in browser/directory/update test: '.$result->getMessage());
     }
     /**
      * Data provider for update processor test
      */
     public function providerUpdateDirectory() {
         return array(
-            array('assets3/','assets4/'),
+            array('assets/test3/','assets/test4'),
         );
     }
 
@@ -128,25 +133,28 @@ class BrowserDirectoryProcessors extends MODxTestCase {
         $this->modx->setOption('rb_base_dir','');
         $this->modx->setOption('rb_base_url','');
 
-        try {
-            $_POST['dir'] = $dir;
-            $result = $this->modx->executeProcessor(array(
-                'location' => self::PROCESSOR_LOCATION,
-                'action' => 'remove',
-            ));
-        } catch (Exception $e) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        $adir = $this->modx->getOption('base_path').$dir;
+        @mkdir($adir);
+        if (!file_exists($adir)) {
+            $this->fail('Old directory could not be created for test: '.$adir);
+        }
+
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
+            'dir' => $dir,
+        ));
+        if (empty($result)) {
+            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'remove processor');
         }
         $s = $this->checkForSuccess($result);
-        $this->assertTrue($s,'Could not remove directory: `'.$dir.'`: '.$result['message']);
+        $this->assertTrue($s,'Could not remove directory: `'.$dir.'`: '.$result->getMessage());
     }
     /**
      * Data provider for remove processor test.
      */
     public function providerRemoveDirectory() {
         return array(
-            array('assets2'),
-            array('assets4/'),
+            array('assets/test2'),
+            array('assets/test4'),
         );
     }
 
@@ -164,16 +172,14 @@ class BrowserDirectoryProcessors extends MODxTestCase {
         $this->modx->setOption('filemanager_url',$filemanager_url);
         $this->modx->setOption('rb_base_dir','');
         $this->modx->setOption('rb_base_url','');
-        try {
-            $_POST['id'] = $dir;
-            $result = $this->modx->executeProcessor(array(
-                'location' => self::PROCESSOR_LOCATION,
-                'action' => 'getList',
-            ));
-        } catch (Exception $e) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+            'id' => $dir,
+        ));
+        if (empty($result)) {
+            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'getList processor');
         }
-        if (!is_array($result)) $result = $this->modx->fromJSON($result);
+        if (!is_array($result)) $result = $result->getResponse();
 
         /* ensure correct test result */
         $success = $shouldWork ?
@@ -185,12 +191,12 @@ class BrowserDirectoryProcessors extends MODxTestCase {
      * Test data provider for getList processor
      */
     public function providerGetDirectoryList() {
-        $this->modx = MODxTestHarness::_getConnection();
+        $modx = MODxTestHarness::_getConnection();
         return array(
             array('manager/',true),
             array('manager/assets',true),
             array('fakedirectory/',false),
-            array('assets',true,MODX_BASE_PATH.'manager/',MODX_BASE_URL.'manager/'),
+            array('assets',true,$modx->getOption('manager_path'),$modx->getOption('manager_url')),
         );
     }
 }

@@ -15,5 +15,6 @@ $properties = array(
 $properties['modx_test_path'] = dirname(__FILE__) . '/';
 $properties['modx_config_path'] = '';
 $properties['logLevel']= MODx::LOG_LEVEL_INFO;
+$properties['logTarget'] = 'ECHO';
 $properties['ctx'] = 'web';
 $properties['debug'] = false;

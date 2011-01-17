@@ -1,0 +1,20 @@
+<phpunit colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="true"
+         stopOnFailure="true"
+         syntaxCheck="true"
+         verbose="true"
+         bootstrap="MODxTestHarness.php"
+         strict="true">
+  <!-- ... -->
+    <testsuites>
+      <testsuite name="Processors">
+        <file>Tests/Processors/Browser/DirectoryTest.php</file>
+        <file>Tests/Processors/Browser/FileTest.php</file>
+        <file>Tests/Processors/Context/ContextTest.php</file>
+        <!--<file>Tests/Processors/Browser/ContextSettingTest.php</file>-->
+      </testsuite>
+    </testsuites>
+</phpunit>
