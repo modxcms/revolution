@@ -27,6 +27,7 @@
  * @package modx-test
  * @subpackage modx
  * @group Processors
+ * @group Context
  * @group ContextProcessors
  */
 class ContextProcessorsTest extends MODxTestCase {
