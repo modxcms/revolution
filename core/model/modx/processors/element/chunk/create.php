@@ -26,7 +26,6 @@ if ($nameExists != null) {
         'name' => $scriptProperties['name'],
     )));
 }
-
 /* category */
 if (!empty($scriptProperties['category'])) {
     $category = $modx->getObject('modCategory',array('id' => $scriptProperties['category']));
