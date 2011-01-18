@@ -39,6 +39,11 @@ class modConnectorResponse extends modResponse {
      * {@inheritdoc}
      */
     public function outputContent(array $options = array()) {
+        if (!$this->modx->loadClass('modProcessor','',false,true)) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load modProcessor class.');
+            return false;
+        }
+        
         /* variable pointer for easier access */
         $modx =& $this->modx;
 
@@ -82,8 +87,10 @@ class modConnectorResponse extends modResponse {
             if (!file_exists($file)) {
                 $this->body = $this->modx->error->failure($this->modx->lexicon('processor_err_nf').$file);
             } else {
-                /* go load the correct processor */
-                $this->body = include $file;
+                $processor = new modProcessor($this->modx);
+                $processor->setPath($file);
+                $processor->setProperties($scriptProperties);
+                $this->body = $processor->run();
             }
         }
         /* if files sent, this means that the browser needs it in text/plain,

@@ -120,6 +120,32 @@ class ChunkProcessorsTest extends MODxTestCase {
     }
 
     /**
+     * Attempts to get a list of chunks
+     *
+     * @TODO Fix this. Seems to crash phpunit when the getlist processor is run.
+     *
+     * @dataProvider providerChunkGetList
+     */
+    public function testChunkGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+            'sort' => $sort,
+            'dir' => $dir,
+            'limit' => $limit,
+            'start' => $start,
+        ));
+        //$result = $this->modx->fromJSON($result->response);
+        $this->assertTrue(!empty($result),'Could not get list of Chunks: '.$result->getMessage());
+    }
+    /**
+     * Data provider for element/chunk/getlist processor test.
+     */
+    public function providerChunkGetList() {
+        return array(
+            array('name','ASC',5,0),
+        );
+    }
+
+    /**
      * Tests the element/chunk/remove processor, which removes a Chunk
      * @dataProvider providerChunkRemove
      */
