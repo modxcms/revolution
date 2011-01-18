@@ -70,7 +70,7 @@ class CategoryProcessorsTest extends MODxTestCase {
             $this->fail('Could not load '.self::PROCESSOR_LOCATION.'create processor');
         }
         $s = $this->checkForSuccess($result);
-        $ct = $this->modx->getCount('modCategory',$categoryPk);
+        $ct = $this->modx->getCount('modCategory',array('category' => $categoryPk));
         $passed = $s && $ct > 0;
         $passed = $shouldPass ? $passed : !$passed;
         $this->assertTrue($passed,'Could not create Category: `'.$categoryPk.'`: '.$result->getMessage());
@@ -143,7 +143,7 @@ class CategoryProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not remove Category: `'.$categoryPk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/category/create processor test.
+     * Data provider for element/category/remove processor test.
      */
     public function providerCategoryRemove() {
         return array(

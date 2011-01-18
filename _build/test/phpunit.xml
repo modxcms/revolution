@@ -19,6 +19,11 @@
         <file>Tests/Processors/Context/ContextTest.php</file>
         <file>Tests/Processors/Context/ContextSettingTest.php</file>
         <file>Tests/Processors/Element/CategoryTest.php</file>
+        <file>Tests/Processors/Element/ChunkTest.php</file>
+        <file>Tests/Processors/Element/PluginTest.php</file>
+        <file>Tests/Processors/Element/SnippetTest.php</file>
+        <file>Tests/Processors/Element/TemplateTest.php</file>
+        <file>Tests/Processors/Element/TemplateVarTest.php</file>
       </testsuite>
     </testsuites>
 </phpunit>
