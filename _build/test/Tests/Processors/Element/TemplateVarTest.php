@@ -120,6 +120,30 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     }
 
     /**
+     * Attempts to get a list of Template Variables
+     *
+     * @dataProvider providerTvGetList
+     */
+    public function testTvGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+            'sort' => $sort,
+            'dir' => $dir,
+            'limit' => $limit,
+            'start' => $start,
+        ));
+        $results = $this->getResults($result);
+        $this->assertTrue(!empty($results),'Could not get list of TVs: '.$result->getMessage());
+    }
+    /**
+     * Data provider for element/tv/getlist processor test.
+     */
+    public function providerTvGetList() {
+        return array(
+            array('name','ASC',5,0),
+        );
+    }
+
+    /**
      * Tests the element/tv/remove processor, which removes a Tv
      * @dataProvider providerTvRemove
      */

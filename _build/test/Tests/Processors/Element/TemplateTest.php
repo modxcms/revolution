@@ -118,6 +118,30 @@ class TemplateProcessorsTest extends MODxTestCase {
             array(false,234),
         );
     }
+    
+    /**
+     * Attempts to get a list of templates
+     *
+     * @dataProvider providerTemplateGetList
+     */
+    public function testTemplateGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+            'sort' => $sort,
+            'dir' => $dir,
+            'limit' => $limit,
+            'start' => $start,
+        ));
+        $results = $this->getResults($result);
+        $this->assertTrue(!empty($results),'Could not get list of Templates: '.$result->getMessage());
+    }
+    /**
+     * Data provider for element/template/getlist processor test.
+     */
+    public function providerTemplateGetList() {
+        return array(
+            array('templatename','ASC',5,0),
+        );
+    }
 
     /**
      * Tests the element/template/remove processor, which removes a Template

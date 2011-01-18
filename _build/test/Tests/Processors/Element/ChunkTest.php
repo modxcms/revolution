@@ -122,8 +122,6 @@ class ChunkProcessorsTest extends MODxTestCase {
     /**
      * Attempts to get a list of chunks
      *
-     * @TODO Fix this. Seems to crash phpunit when the getlist processor is run.
-     *
      * @dataProvider providerChunkGetList
      */
     public function testChunkGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {

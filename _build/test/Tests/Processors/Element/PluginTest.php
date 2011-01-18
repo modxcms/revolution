@@ -120,6 +120,30 @@ class PluginProcessorsTest extends MODxTestCase {
     }
 
     /**
+     * Attempts to get a list of plugins
+     *
+     * @dataProvider providerPluginGetList
+     */
+    public function testPluginGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+            'sort' => $sort,
+            'dir' => $dir,
+            'limit' => $limit,
+            'start' => $start,
+        ));
+        $results = $this->getResults($result);
+        $this->assertTrue(!empty($results),'Could not get list of Plugins: '.$result->getMessage());
+    }
+    /**
+     * Data provider for element/plugin/getlist processor test.
+     */
+    public function providerPluginGetList() {
+        return array(
+            array('name','ASC',5,0),
+        );
+    }
+
+    /**
      * Tests the element/plugin/remove processor, which removes a Plugin
      * @dataProvider providerPluginRemove
      */

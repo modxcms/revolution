@@ -120,6 +120,30 @@ class SnippetProcessorsTest extends MODxTestCase {
     }
 
     /**
+     * Attempts to get a list of snippets
+     *
+     * @dataProvider providerSnippetGetList
+     */
+    public function testSnippetGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
+            'sort' => $sort,
+            'dir' => $dir,
+            'limit' => $limit,
+            'start' => $start,
+        ));
+        $results = $this->getResults($result);
+        $this->assertTrue(!empty($results),'Could not get list of Snippets: '.$result->getMessage());
+    }
+    /**
+     * Data provider for element/snippet/getlist processor test.
+     */
+    public function providerSnippetGetList() {
+        return array(
+            array('name','ASC',5,0),
+        );
+    }
+
+    /**
      * Tests the element/snippet/remove processor, which removes a Snippet
      * @dataProvider providerSnippetRemove
      */
