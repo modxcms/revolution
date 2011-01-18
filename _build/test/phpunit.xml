@@ -25,6 +25,7 @@
         <file>Tests/Processors/Element/TemplateTest.php</file>
         <file>Tests/Processors/Element/TemplateVarTest.php</file>
         <file>Tests/Processors/Element/PropertySetTest.php</file>
+        <file>Tests/Processors/System/ActionTest.php</file>
       </testsuite>
     </testsuites>
 </phpunit>

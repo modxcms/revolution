@@ -168,8 +168,6 @@ class ChunkProcessorsTest extends MODxTestCase {
      * Attempts to update a chunk
      * @dataProvider providerChunkUpdate
      * @depends testChunkCreate
-     *
-     * @TODO pass in some settings in JSON format to test that.
      */
     public function testChunkUpdate($shouldPass,$chunkPk,$properties) {
         $chunk = $this->modx->getObject('modChunk',array('name' => $chunkPk));
