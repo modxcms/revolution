@@ -17,7 +17,8 @@
         <file>Tests/Processors/Browser/DirectoryTest.php</file>
         <file>Tests/Processors/Browser/FileTest.php</file>
         <file>Tests/Processors/Context/ContextTest.php</file>
-        <!--<file>Tests/Processors/Context/ContextSettingTest.php</file>-->
+        <file>Tests/Processors/Context/ContextSettingTest.php</file>
+        <file>Tests/Processors/Element/CategoryTest.php</file>
       </testsuite>
     </testsuites>
 </phpunit>

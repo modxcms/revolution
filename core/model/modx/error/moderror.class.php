@@ -304,6 +304,8 @@ class modError {
     public function reset() {
         $this->errors = array();
         $this->message = '';
+        $this->total = 0;
+        $this->status = true;
     }
 }
 

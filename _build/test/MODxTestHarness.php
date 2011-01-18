@@ -57,7 +57,12 @@ class MODxTestHarness {
      * @return xPDO An xPDO object instance.
      */
     public static function _getConnection($options = array()) {
-        if (is_object(MODxTestHarness::$modx)) {
+        $modx = MODxTestHarness::$modx;
+        if (is_object($modx)) {
+            if (!$modx->request) { $modx->getRequest(); }
+            if (!$modx->error) { $modx->request->loadErrorHandler(); }
+            $modx->error->reset();
+            MODxTestHarness::$modx = $modx;
             return MODxTestHarness::$modx;
         }
         
@@ -80,6 +85,7 @@ class MODxTestHarness {
         $modx->user->set('username',$modx->getOption('modx.test.user.username',null,'test'));
 
         $modx->getRequest();
+        $modx->request->loadErrorHandler();
         
         MODxTestHarness::$modx = $modx;
         return $modx;
