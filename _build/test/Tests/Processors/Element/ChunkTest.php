@@ -133,9 +133,10 @@ class ChunkProcessorsTest extends MODxTestCase {
             'limit' => $limit,
             'start' => $start,
         ));
-        //$result = $this->modx->fromJSON($result->response);
-        $this->assertTrue(!empty($result),'Could not get list of Chunks: '.$result->getMessage());
+        $results = $this->getResults($result);
+        $this->assertTrue(!empty($results),'Could not get list of Chunks: '.$result->getMessage());
     }
+    
     /**
      * Data provider for element/chunk/getlist processor test.
      */

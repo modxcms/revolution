@@ -232,16 +232,14 @@ class ContextProcessorsTest extends MODxTestCase {
      * @dataProvider providerContextGetList
      */
     public function testContextGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        $this->assertTrue(true); return true;
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,
             'start' => $start,
         ));
-        die('win!');
-        $result = $this->modx->fromJSON($result->response);
-        $this->assertTrue(!empty($result),'Could not get list of contexts: '.$result->getMessage());
+        $results = $this->getResults($result);
+        $this->assertTrue(!empty($results),'Could not get list of contexts: '.$result->getMessage());
     }
     /**
      * Data provider for context/get processor test.

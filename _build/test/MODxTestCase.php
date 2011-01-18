@@ -53,4 +53,16 @@ class MODxTestCase extends PHPUnit_Framework_TestCase {
         if (empty($result) || !($result instanceof modProcessorResponse)) return false;
         return !$result->isError();
     }
+
+    /**
+     * Check a MODx processor response and return results
+     *  
+     * @param string $result The response
+     * @return array
+     */
+    public function getResults(&$result) {
+        $response = ltrim(rtrim($result->response,')'),'(');
+        $response = $this->modx->fromJSON($response);
+        return !empty($response['results']) ? $response['results'] : array();
+    }
 }
