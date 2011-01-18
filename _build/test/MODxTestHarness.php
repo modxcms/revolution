@@ -72,6 +72,9 @@ class MODxTestHarness {
         require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
         require_once MODX_CORE_PATH.'model/modx/modx.class.php';
         include_once strtr(realpath(dirname(__FILE__)) . '/properties.inc.php','\\','/');
+        if (!defined('MODX_REQP')) {
+            define('MODX_REQP',false);
+        }
         $modx = new modX(null,$properties);
         $ctx = !empty($options['ctx']) ? $options['ctx'] : 'web';
         $modx->initialize($ctx);
@@ -85,6 +88,7 @@ class MODxTestHarness {
         $modx->user->set('username',$modx->getOption('modx.test.user.username',null,'test'));
 
         $modx->getRequest();
+        $modx->getParser();
         $modx->request->loadErrorHandler();
         
         MODxTestHarness::$modx = $modx;
