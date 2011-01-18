@@ -44,6 +44,10 @@ class ChunkProcessorsTest extends MODxTestCase {
         if ($chunk) $chunk->remove();
         $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk2'));
         if ($chunk) $chunk->remove();
+        $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk3'));
+        if ($chunk) $chunk->remove();
+        $chunk = $modx->getObject('modChunk',array('name' => 'Untitled Chunk'));
+        if ($chunk) $chunk->remove();
     }
 
     /**
@@ -54,6 +58,10 @@ class ChunkProcessorsTest extends MODxTestCase {
         $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk'));
         if ($chunk) $chunk->remove();
         $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk2'));
+        if ($chunk) $chunk->remove();
+        $chunk = $modx->getObject('modChunk',array('name' => 'UnitTestChunk3'));
+        if ($chunk) $chunk->remove();
+        $chunk = $modx->getObject('modChunk',array('name' => 'Untitled Chunk'));
         if ($chunk) $chunk->remove();
     }
 
@@ -79,10 +87,54 @@ class ChunkProcessorsTest extends MODxTestCase {
      */
     public function providerChunkCreate() {
         return array(
-            array(true,'UnitTestChunk'),
-            array(true,'UnitTestChunk2'),
-            array(false,'UnitTestChunk2'),
-            array(false,''),
+            array(true,'UnitTestChunk'), /* pass: default chunk */
+            array(true,'UnitTestChunk2'), /* pass: another chunk */
+            array(false,'UnitTestChunk2'), /* fail: already exists */
+            array(false,''), /* fail: no data */
+        );
+    }
+
+
+    /**
+     * Tests the element/chunk/duplicate processor, which duplicates a Chunk
+     * @dataProvider providerChunkDuplicate
+     */
+    public function testChunkDuplicate($shouldPass,$chunkPk,$newName) {
+        $chunk = $this->modx->getObject('modChunk',array('name' => $chunkPk));
+        if (empty($chunk) && $shouldPass) {
+            $this->fail('No Chunk found "'.$chunkPk.'" as specified in test provider.');
+            return false;
+        }
+        $this->modx->lexicon->load('default');
+
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'duplicate',array(
+            'id' => $chunk ? $chunk->get('id') : $chunkPk,
+            'name' => $newName,
+        ));
+        if (empty($result)) {
+            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'duplicate processor');
+        }
+        $s = $this->checkForSuccess($result);
+        if (empty($newName) && $chunk) {
+            $newName = $this->modx->lexicon('duplicate_of',array('name' => $chunk->get('name')));
+        }
+        $ct = $this->modx->getObject('modChunk',array('name' => $newName));
+        $passed = $s && $ct;
+        $passed = $shouldPass ? $passed : !$passed;
+        if ($ct) { /* remove test data */
+            $ct->remove();
+        }
+        $this->assertTrue($passed,'Could not duplicate Chunk: `'.$chunkPk.'` to `'.$newName.'`: '.$result->getMessage());
+    }
+    /**
+     * Data provider for element/chunk/duplicate processor test.
+     */
+    public function providerChunkDuplicate() {
+        return array(
+            array(true,'UnitTestChunk','UnitTestChunk3'), /* pass: standard name */
+            array(true,'UnitTestChunk',''), /* pass: with blank name */
+            array(false,'',''), /* fail: no data */
+            array(false,'','UnitTestChunk3'), /* fail: blank chunk to duplicate */
         );
     }
 
@@ -112,9 +164,9 @@ class ChunkProcessorsTest extends MODxTestCase {
      */
     public function providerChunkGet() {
         return array(
-            array(true,'UnitTestChunk'),
-            array(false,234),
-            array(false,''),
+            array(true,'UnitTestChunk'), /* pass: get chunk from create test */
+            array(false,234), /* fail: invalid ID */
+            array(false,''), /* fail: no data */
         );
     }
 
@@ -174,9 +226,9 @@ class ChunkProcessorsTest extends MODxTestCase {
      */
     public function providerChunkRemove() {
         return array(
-            array(true,'UnitTestChunk'),
-            array(false,234),
-            array(false,''),
+            array(true,'UnitTestChunk'), /* pass: remove chunk from create test */
+            array(false,234), /* fail: invalid ID */
+            array(false,''), /* fail: no data */
         );
     }
 }
