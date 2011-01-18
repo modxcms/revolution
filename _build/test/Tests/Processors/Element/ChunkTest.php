@@ -62,7 +62,6 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @dataProvider providerChunkCreate
      */
     public function testChunkCreate($shouldPass,$chunkPk) {
-        if (empty($chunkPk)) return false;
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
             'name' => $chunkPk,
         ));
@@ -83,6 +82,7 @@ class ChunkProcessorsTest extends MODxTestCase {
             array(true,'UnitTestChunk'),
             array(true,'UnitTestChunk2'),
             array(false,'UnitTestChunk2'),
+            array(false,''),
         );
     }
 
@@ -91,8 +91,6 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @dataProvider providerChunkGet
      */
     public function testChunkGet($shouldPass,$chunkPk) {
-        if (empty($chunkPk)) return false;
-
         $chunk = $this->modx->getObject('modChunk',array('name' => $chunkPk));
         if (empty($chunk) && $shouldPass) {
             $this->fail('No Chunk found "'.$chunkPk.'" as specified in test provider.');
@@ -116,6 +114,7 @@ class ChunkProcessorsTest extends MODxTestCase {
         return array(
             array(true,'UnitTestChunk'),
             array(false,234),
+            array(false,''),
         );
     }
 
@@ -124,7 +123,7 @@ class ChunkProcessorsTest extends MODxTestCase {
      *
      * @dataProvider providerChunkGetList
      */
-    public function testChunkGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
+    public function testChunkGetList($shouldPass = true,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
         $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getList',array(
             'sort' => $sort,
             'dir' => $dir,
@@ -132,7 +131,9 @@ class ChunkProcessorsTest extends MODxTestCase {
             'start' => $start,
         ));
         $results = $this->getResults($result);
-        $this->assertTrue(!empty($results),'Could not get list of Chunks: '.$result->getMessage());
+        $passed = !empty($results);
+        $passed = $shouldPass ? $passed : !$passed;
+        $this->assertTrue($passed,'Could not get list of Chunks: '.$result->getMessage());
     }
     
     /**
@@ -140,7 +141,10 @@ class ChunkProcessorsTest extends MODxTestCase {
      */
     public function providerChunkGetList() {
         return array(
-            array('name','ASC',5,0),
+            array(true,'name','ASC',5,0), /* pass: sort 5 by name asc */
+            array(true,'name','DESC',5,0), /* pass: sort 5 by name desc */
+            array(false,'name','ASC',5,5), /* fail: start beyond what exists */
+            array(false,'badname','ASC',5,5), /* fail: invalid sort column */
         );
     }
 
@@ -149,8 +153,6 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @dataProvider providerChunkRemove
      */
     public function testChunkRemove($shouldPass,$chunkPk) {
-        if (empty($chunkPk)) return false;
-
         $chunk = $this->modx->getObject('modChunk',array('name' => $chunkPk));
         if (empty($chunk) && $shouldPass) {
             $this->fail('No Chunk found "'.$chunkPk.'" as specified in test provider.');
@@ -174,6 +176,7 @@ class ChunkProcessorsTest extends MODxTestCase {
         return array(
             array(true,'UnitTestChunk'),
             array(false,234),
+            array(false,''),
         );
     }
 }
