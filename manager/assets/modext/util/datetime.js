@@ -62,6 +62,13 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
     /**
      * @cfg {Object} timeConfig Config for TimeField constructor.
      */
+    ,maxDateValue: ''
+    ,minDateValue: ''
+    ,timeIncrement: 15
+    ,maxTimeValue: null
+    ,minTimeValue: null
+    ,disabledDates: null
+
 
     // {{{
     /**
@@ -79,11 +86,11 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             ,width:this.timeWidth
             ,selectOnFocus:this.selectOnFocus
             ,validator:this.dateValidator
-            ,disabledDates: this.disabledDates || []
+            ,disabledDates: this.disabledDates || null
             ,disabledDays: this.disabledDays || []
             ,showToday: this.showToday || true
-            ,maxValue: this.maxDateValue || null
-            ,minValue: this.minDateValue || null
+            ,maxValue: this.maxDateValue || ''
+            ,minValue: this.minDateValue || ''
             ,startDay: this.startDay || 0
             ,listeners:{
                   blur:{scope:this, fn:this.onBlur}
@@ -93,6 +100,11 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
         this.df = new Ext.form.DateField(dateConfig);
         this.df.ownerCt = this;
         delete(this.dateFormat);
+        delete(this.disabledDates);
+        delete(this.disabledDays);
+        delete(this.maxDateValue);
+        delete(this.minDateValue);
+        delete(this.startDay);
 
         // create TimeField
         var timeConfig = Ext.apply({}, {
@@ -112,6 +124,9 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
         this.tf = new Ext.form.TimeField(timeConfig);
         this.tf.ownerCt = this;
         delete(this.timeFormat);
+        delete(this.maxTimeValue);
+        delete(this.minTimeValue);
+        delete(this.timeIncrement);
 
         // relay events
         this.relayEvents(this.df, ['focus', 'specialkey', 'invalid', 'valid']);

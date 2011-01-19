@@ -42,7 +42,7 @@ $list = array();
 foreach ($templates as $template) {
     $templateArray = $template->toArray();
     $templateArray['access'] = $template->get('tmplvarid');
-    $templateArray['access'] = empty($templateArray['access']) ? true : false;
+    $templateArray['access'] = empty($templateArray['access']) ? false : true;
     unset($templateArray['content']);
     $list[] = $templateArray;
 }
