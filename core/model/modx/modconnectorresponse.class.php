@@ -38,12 +38,7 @@ class modConnectorResponse extends modResponse {
      *
      * {@inheritdoc}
      */
-    public function outputContent(array $options = array()) {
-        if (!$this->modx->loadClass('modProcessor','',false,true)) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load modProcessor class.');
-            return false;
-        }
-        
+    public function outputContent(array $options = array()) {        
         /* variable pointer for easier access */
         $modx =& $this->modx;
 
@@ -71,9 +66,7 @@ class modConnectorResponse extends modResponse {
         } else {
             /* prevent browsing of subdirectories for security */
             $options['action'] = str_replace('../','',$options['action']);
-
-            /* find the appropriate processor */
-            $file = $this->_directory.str_replace('\\', '/', $options['location'] . '/' . $options['action']).'.php';
+            $target = str_replace('\\', '/', $options['location'] . '/' . $options['action']);
 
             /* create scriptProperties array from HTTP GPC vars */
             if (!isset($_POST)) $_POST = array();
@@ -83,14 +76,14 @@ class modConnectorResponse extends modResponse {
                 $scriptProperties = array_merge($scriptProperties,$_FILES);
             }
 
-            /* verify processor exists */
-            if (!file_exists($file)) {
-                $this->body = $this->modx->error->failure($this->modx->lexicon('processor_err_nf').$file);
+            /* run processor */
+            $this->response = $this->modx->runProcessor($target,$scriptProperties);
+            if (!$this->response) {
+                $this->body = $this->modx->error->failure($this->modx->lexicon('processor_err_nf',array(
+                    'target' => $target,
+                )));
             } else {
-                $processor = new modProcessor($this->modx);
-                $processor->setPath($file);
-                $processor->setProperties($scriptProperties);
-                $this->body = $processor->run();
+                $this->body = $this->response->getResponse();
             }
         }
         /* if files sent, this means that the browser needs it in text/plain,

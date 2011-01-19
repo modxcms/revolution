@@ -1422,7 +1422,7 @@ class modX extends xPDO {
             $this->log(modX::LOG_LEVEL_ERROR,'Could not load modProcessor class.');
             return false;
         }
-        
+
         $result = null;
         /* backwards compat for $options['action'] */
         if (empty($action)) {
@@ -1446,11 +1446,10 @@ class modX extends xPDO {
             $processor->setPath($processorFile);
             $processor->setProperties($scriptProperties);
             $response = $processor->run();
-            $result = new modProcessorResponse($this,$response);
         } else {
             $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processor} does not exist; " . print_r($options, true));
         }
-        return $result;
+        return $response;
     }
 
     /**
