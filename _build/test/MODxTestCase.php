@@ -21,7 +21,6 @@
  *
  * @package modx-test
  */
-require_once 'PHPUnit/Framework.php';
 /**
  * Extends the basic PHPUnit TestCase class to provide MODx specific methods
  *
@@ -51,9 +50,19 @@ class MODxTestCase extends PHPUnit_Framework_TestCase {
      * @param array $result The result response
      */
     public function checkForSuccess(&$result) {
-        if ($result === true) return true;
-        if (!is_array($result)) $result = $this->modx->fromJSON($result);
-        $success = !empty($result['success']) && $result['success'] = true;
-        return $success;
+        if (empty($result) || !($result instanceof modProcessorResponse)) return false;
+        return !$result->isError();
+    }
+
+    /**
+     * Check a MODx processor response and return results
+     *  
+     * @param string $result The response
+     * @return array
+     */
+    public function getResults(&$result) {
+        $response = ltrim(rtrim($result->response,')'),'(');
+        $response = $this->modx->fromJSON($response);
+        return !empty($response['results']) ? $response['results'] : array();
     }
 }

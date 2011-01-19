@@ -26,8 +26,10 @@
  *
  * @package modx-test
  * @subpackage modx
+ * @group Processors
+ * @group BrowserProcessors
  */
-class BrowserFileProcessors extends MODxTestCase {
+class BrowserFileProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'browser/file/';
 
     /**
@@ -36,24 +38,19 @@ class BrowserFileProcessors extends MODxTestCase {
      * @param string $file The file to grab.
      */
     public function testGet($file = '') {
-        if (empty($file)) return false;
+        if (empty($file)) {
+            $this->fail('No provider data for BrowserFile::get');
+        }
 
         $this->modx->setOption('filemanager_path','');
         $this->modx->setOption('filemanager_url','');
         $this->modx->setOption('rb_base_dir','');
         $this->modx->setOption('rb_base_url','');
-        
-        try {
-            $_POST['file'] = MODX_BASE_PATH.$file;
-            $result = $this->modx->executeProcessor(array(
-                'location' => BrowserFileProcessors::PROCESSOR_LOCATION,
-                'action' => 'get',
-            ));
-        } catch (Exception $e) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
-        }
-        $s = $this->checkForSuccess($result);
-        $this->assertTrue($s,'Could not get file '.$file.' in browser/file/get test: '.$result['message']);
+
+        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',array(
+           'file' => MODX_BASE_PATH.$file,
+        ));
+        $this->assertTrue($this->checkForSuccess($result));
     }
     /**
      * Data provider for get processor test.

@@ -1418,6 +1418,11 @@ class modX extends xPDO {
      * @return mixed The result of the processor.
      */
     public function runProcessor($action = '',$scriptProperties = array(),$options = array()) {
+        if (!$this->loadClass('modProcessor','',false,true)) {
+            $this->log(modX::LOG_LEVEL_ERROR,'Could not load modProcessor class.');
+            return false;
+        }
+        
         $result = null;
         /* backwards compat for $options['action'] */
         if (empty($action)) {
@@ -1429,16 +1434,18 @@ class modX extends xPDO {
         }
 
         /* calculate processor file path from options and action */
-        $processor = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
-        if (isset($options['location']) && !empty($options['location'])) $processor .= $options['location'] . '/';
-        $processor .= str_replace('../', '', $action . '.php');
+        $processorFile = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
+        if (isset($options['location']) && !empty($options['location'])) $processorFile .= $options['location'] . '/';
+        $processorFile .= str_replace('../', '', $action . '.php');
 
-        if (file_exists($processor)) {
+        if (file_exists($processorFile)) {
             if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');
             if (!isset($this->error)) $this->request->loadErrorHandler();
 
-            $modx =& $this;
-            $response = include $processor;
+            $processor = new modProcessor($this);
+            $processor->setPath($processorFile);
+            $processor->setProperties($scriptProperties);
+            $response = $processor->run();
             $result = new modProcessorResponse($this,$response);
         } else {
             $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processor} does not exist; " . print_r($options, true));

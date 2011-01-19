@@ -26,8 +26,12 @@
  *
  * @package modx-test
  * @subpackage modx
+ * @group Processors
+ * @group Context
+ * @group ContextSetting
+ * @group ContextProcessors
  */
-class ContextSettingProcessors extends MODxTestCase {
+class ContextSettingProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'context/setting/';
 
     /**
@@ -54,16 +58,15 @@ class ContextSettingProcessors extends MODxTestCase {
      * Tests the context/setting/create processor, which creates a context setting
      * @dataProvider providerContextSettingCreate
      */
-    public function testContextSettingCreate($ctx,$description = '') {
+    public function testContextSettingCreate($ctx,$key,$description = '') {
         if (empty($ctx)) return false;
         $this->assertTrue(true);
         return true;
         try {
-            $_POST['key'] = 'unittest';
-            $_POST['description'] = $description;
-            $result = $this->modx->executeProcessor(array(
-                'location' => self::PROCESSOR_LOCATION,
-                'action' => 'create',
+            $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
+                'ctx' => $ctx,
+                'key' => $key,
+                'description' => $description,
             ));
         } catch (Exception $e) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
@@ -77,7 +80,7 @@ class ContextSettingProcessors extends MODxTestCase {
      */
     public function providerContextSettingCreate() {
         return array(
-            array('unittest',''),
+            array('unittest','unittest_setting',''),
         );
     }
 }

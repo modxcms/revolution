@@ -11,7 +11,7 @@ if (!$modx->hasPermission('actions')) return $modx->error->failure($modx->lexico
 $modx->lexicon->load('action','menu');
 
 /* get action */
-if (!isset($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('action_err_ns'));
 $action = $modx->getObject('modAction',$scriptProperties['id']);
 if ($action == null) return $modx->error->failure($modx->lexicon('action_err_nf'));
 
