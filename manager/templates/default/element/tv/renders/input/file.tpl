@@ -10,10 +10,15 @@ var fld{/literal}{$tv->id}{literal} = MODx.load({
     ,renderTo: 'tvpanel{$tv->id}'
     ,tv: '{$tv->id}'
     ,value: '{$tv->value|escape}'
-    ,relativeValue: '{$tv->relativeValue|escape}'
+    ,relativeValue: '{$tv->value|escape}'
     ,width: '97%'
     ,msgTarget: 'under'
     ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
+    {if $params.basePath},basePath: "{$params.basePath}"{/if}
+    ,basePathRelative: {if $params.basePathRelative}true{else}false{/if}
+    {if $params.baseUrl},baseUrl: "{$params.baseUrl}"{/if}
+    ,baseUrlRelative: {if $params.baseUrlRelative}true{else}false{/if}
+    {if $params.allowedFileTypes},allowedFileTypes: '{$params.allowedFileTypes}'{/if}
     
 {literal}
     ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}

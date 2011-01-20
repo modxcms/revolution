@@ -20,6 +20,10 @@ MODx.tree.Directory = function(config) {
         ,url: MODx.config.connectors_url+'browser/directory.php'
         ,baseParams: {
             prependPath: config.prependPath || null
+            ,basePath: config.basePath || ''
+            ,basePathRelative: config.basePathRelative || null
+            ,baseUrl: config.baseUrl || ''
+            ,baseUrlRelative: config.baseUrlRelative || null
             ,hideFiles: config.hideFiles || false
             ,ctx: MODx.ctx || 'web'
         }

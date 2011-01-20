@@ -437,8 +437,13 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 ,multiple: true
                 ,prependPath: this.config.prependPath || null
                 ,prependUrl: this.config.prependUrl || null
+                ,basePath: this.config.basePath || ''
+                ,basePathRelative: this.config.basePathRelative || null
+                ,baseUrl: this.config.baseUrl || ''
+                ,baseUrlRelative: this.config.baseUrlRelative || null
                 ,hideFiles: this.config.hideFiles || false
                 ,rootVisible: this.config.rootVisible || false
+                ,allowedFileTypes: this.config.allowedFileTypes || ''
                 ,listeners: {
                     'select': {fn: function(data) {
                         this.setValue(data.relativeUrl);

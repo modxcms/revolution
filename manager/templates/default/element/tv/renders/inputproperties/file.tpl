@@ -15,7 +15,52 @@ MODx.load({
     ,autoHeight: true
     ,labelWidth: 150
     ,border: false
-    ,items: []
+    ,items: [{
+        xtype: 'textfield'
+        ,fieldLabel: _('image_basepath')
+        ,description: _('image_basepath_desc')
+        ,name: 'inopt_basePath'
+        ,id: 'inopt_basePath{/literal}{$tv}{literal}'
+        ,value: params['basePath'] || ''
+        ,width: 300
+        ,listeners: oc
+    },{
+        xtype: 'combo-boolean'
+        ,fieldLabel: _('image_basepath_relative')
+        ,name: 'inopt_basePathRelative'
+        ,hiddenName: 'inopt_basePathRelative'
+        ,id: 'inopt_basePathRelative{/literal}{$tv}{literal}'
+        ,value: params['basePathRelative'] == 0 || params['basePathRelative'] == 'false' ? false : true
+        ,width: 300
+        ,listeners: oc
+    },{
+        xtype: 'textfield'
+        ,fieldLabel: _('image_baseurl')
+        ,description: _('image_baseurl_desc')
+        ,name: 'inopt_baseUrl'
+        ,id: 'inopt_baseUrl{/literal}{$tv}{literal}'
+        ,value: params['baseUrl'] || ''
+        ,width: 300
+        ,listeners: oc
+    },{
+        xtype: 'combo-boolean'
+        ,fieldLabel: _('image_baseurl_relative')
+        ,name: 'inopt_baseUrlRelative'
+        ,hiddenName: 'inopt_baseUrlRelative'
+        ,id: 'inopt_baseUrlRelative{/literal}{$tv}{literal}'
+        ,value: params['baseUrlRelative'] == 0 || params['baseUrlRelative'] == 'false' ? false : true
+        ,width: 300
+        ,listeners: oc
+    },{
+        xtype: 'textfield'
+        ,fieldLabel: _('image_allowedfiletypes')
+        ,description: _('image_allowedfiletypes_desc')
+        ,name: 'inopt_allowedFileTypes'
+        ,id: 'inopt_allowedFileTypes{/literal}{$tv}{literal}'
+        ,value: params['allowedFileTypes'] || ''
+        ,width: 300
+        ,listeners: oc
+    }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
 });
 // ]]>

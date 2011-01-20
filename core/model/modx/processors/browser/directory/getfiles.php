@@ -28,25 +28,63 @@ if (!empty($wctx)) {
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 
 /* get sanitized base path and current path */
-$root = $modx->fileHandler->getBasePath();
 $dir = !isset($scriptProperties['dir']) || $scriptProperties['dir'] == 'root' ? '' : $scriptProperties['dir'];
 $dir = $modx->fileHandler->sanitizePath($dir);
 $dir = $modx->fileHandler->postfixSlash($dir);
-$fullpath = $root.'/'.$dir;
 
 /* get base path/url */
-$basePath = $modx->fileHandler->getBasePath(false);
-$baseUrl = $modx->fileHandler->getBaseUrl(true);
-$isRelativeBaseUrl = $modx->getOption('filemanager_path_relative',null,true);
+$basePathRelative = false;
+if (empty($scriptProperties['basePath'])) {
+    $basePath = $modx->fileHandler->getBasePath();
+    $basePathRelative = $modx->getOption('filemanager_path_relative',null,true);
+    if ($basePathRelative) {
+        $basePathFull = $modx->getOption('base_path').ltrim($basePath,'/');
+    } else {
+        $basePathFull = $basePath;
+    }
+} else {
+    $basePath = $scriptProperties['basePath'];
+    if (!empty($scriptProperties['basePathRelative'])) {
+        $basePathFull = $modx->getOption('base_path').ltrim($basePath,'/');
+        $basePathRelative = true;
+    } else {
+        $basePathFull = $basePath;
+    }
+}
+$baseUrlRelative = false;
+if (empty($scriptProperties['baseUrl'])) {
+    $baseUrl = $modx->fileHandler->getBaseUrl();
+    $baseUrlRelative = $modx->getOption('filemanager_url_relative',null,true);
+    if ($baseUrlRelative) {
+        $baseUrlFull = $modx->getOption('base_url').ltrim($baseUrl,'/');
+    } else {
+        $baseUrlFull = $baseUrl;
+    }
+} else {
+    $baseUrl = $scriptProperties['baseUrl'];
+    if (!empty($scriptProperties['baseUrlRelative'])) {
+        $baseUrlFull = $modx->getOption('base_url').ltrim($baseUrl,'/');
+        $baseUrlRelative = true;
+    } else {
+        $baseUrlFull = $baseUrl;
+    }
+}
+$fullPath = $basePathFull.ltrim($dir,'/');
+if (empty($fullPath)) {
+    $fullPath = $modx->fileHandler->getBasePath();
+}
 
-/* setup settings */
+/* get default settings */
 $imagesExts = array('jpg','jpeg','png','gif');
 $use_multibyte = $modx->fileHandler->context->getOption('use_multibyte', false);
 $encoding = $modx->fileHandler->context->getOption('modx_charset', 'UTF-8');
+$allowedFileTypes = $modx->getOption('allowedFileTypes',$scriptProperties,'');
+$allowedFileTypes = !empty($allowedFileTypes) && is_string($allowedFileTypes) ? explode(',',$allowedFileTypes) : $allowedFileTypes;
+
 /* iterate */
 $files = array();
-if (!is_dir($fullpath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').$fullpath);
-foreach (new DirectoryIterator($fullpath) as $file) {
+if (!is_dir($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').$fullPath);
+foreach (new DirectoryIterator($fullPath) as $file) {
     if (in_array($file,array('.','..','.svn','.git','_notes'))) continue;
     if (!$file->isReadable()) continue;
 
@@ -57,8 +95,15 @@ foreach (new DirectoryIterator($fullpath) as $file) {
         $fileExtension = pathinfo($filePathName,PATHINFO_EXTENSION);
         $fileExtension = $use_multibyte ? mb_strtolower($fileExtension,$encoding) : strtolower($fileExtension);
 
+        if (!empty($allowedFileTypes) && !in_array($fileExtension,$allowedFileTypes)) continue;
+
         $filesize = @filesize($filePathName);
         $url = $dir.$fileName;
+        if (!empty($scriptProperties['baseUrl'])) {
+            $fullUrl = $scriptProperties['baseUrl'].ltrim($url,'/');
+        } else {
+            $fullUrl = $url;
+        }
 
         /* get thumbnail */
         if (in_array($fileExtension,$imagesExts)) {
@@ -78,8 +123,30 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             if ($thumbHeight > $imageHeight) $thumbHeight = $imageHeight;
 
             /* generate thumb/image URLs */
-            $thumb = $modx->fileHandler->context->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$thumbWidth.'&h='.$thumbHeight.'&HTTP_MODAUTH='.$modx->site_id.'&wctx='.$workingContext->get('key');
-            $image = $modx->fileHandler->context->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?src='.$url.'&w='.$imageWidth.'&h='.$imageHeight.'&HTTP_MODAUTH='.$modx->site_id.'&wctx='.$workingContext->get('key');
+            $thumbQuery = http_build_query(array(
+                'src' => $url,
+                'w' => $thumbWidth,
+                'h' => $thumbHeight,
+                'HTTP_MODAUTH' => $modx->site_id,
+                'wctx' => $workingContext->get('key'),
+                'basePath' => $basePath,
+                'basePathRelative' => $basePathRelative,
+                'baseUrl' => $baseUrl,
+                'baseUrlRelative' => $baseUrlRelative,
+            ));
+            $imageQuery = http_build_query(array(
+                'src' => $url,
+                'w' => $imageWidth,
+                'h' => $imageHeight,
+                'HTTP_MODAUTH' => $modx->site_id,
+                'wctx' => $workingContext->get('key'),
+                'basePath' => $basePath,
+                'basePathRelative' => $basePathRelative,
+                'baseUrl' => $baseUrl,
+                'baseUrlRelative' => $baseUrlRelative,
+            ));
+            $thumb = $modx->fileHandler->context->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.$thumbQuery;
+            $image = $modx->fileHandler->context->getOption('connectors_url', MODX_CONNECTORS_URL).'system/phpthumb.php?'.$imageQuery;
 
         } else {
             $thumb = $image = $modx->fileHandler->context->getOption('manager_url', MODX_MANAGER_URL).'templates/default/images/restyle/nopreview.jpg';
@@ -87,12 +154,6 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             $thumbHeight = $imageHeight = $modx->fileHandler->context->getOption('filemanager_thumb_height', 60);
         }
         $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
-
-        if ($isRelativeBaseUrl) {
-            $url = ltrim($url,'/');
-            $baseUrl = ltrim($baseUrl,'/');
-        }
-        $relativeUrl = $baseUrl.$url;
 
         $files[] = array(
             'id' => $filePathName,
@@ -102,10 +163,10 @@ foreach (new DirectoryIterator($fullpath) as $file) {
             'image_width' => $imageWidth,
             'image_height' => $imageHeight,
             'thumb' => $thumb,
-            'thumb_width' => $thumb,
-            'thumb_height' => $thumb,
+            'thumb_width' => $thumbWidth,
+            'thumb_height' => $thumbHeight,
             'url' => $url,
-            'relativeUrl' => $relativeUrl,
+            'relativeUrl' => ltrim($dir.$fileName,'/'),
             'ext' => $fileExtension,
             'pathname' => str_replace('//','/',$filePathName),
             'lastmod' => $file->getMTime(),

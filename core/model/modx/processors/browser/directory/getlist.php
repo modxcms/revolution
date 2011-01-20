@@ -52,17 +52,33 @@ $canUpload = $modx->hasPermission('file_upload');
 /* get base paths and sanitize incoming paths */
 $dir = $modx->fileHandler->sanitizePath($dir);
 $dir = $modx->fileHandler->postfixSlash($dir);
-$root = $modx->fileHandler->getBasePath(false);
+if (empty($scriptProperties['basePath'])) {
+    $root = $modx->fileHandler->getBasePath(false);
+} else {
+    $root = $scriptProperties['basePath'];
+    if (!empty($scriptProperties['basePathRelative'])) {
+        $root = $modx->getOption('base_path').$root;
+    }
+}
 $fullPath = str_replace('//','/',$root.$dir);
-if (!is_dir($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').$fullPath);
+if (!is_dir($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').': '.$fullPath);
 
 $editAction = false;
 $act = $modx->getObject('modAction',array('controller' => 'system/file/edit'));
 if ($act) { $editAction = $act->get('id'); }
 
 /* get relative url */
-$baseUrl = $modx->fileHandler->getBaseUrl(true);
-$isRelativeBaseUrl = $modx->getOption('filemanager_path_relative',null,true);
+$isRelativeBaseUrl = false;
+if (empty($scriptProperties['baseUrl'])) {
+    $baseUrl = $modx->fileHandler->getBaseUrl(true);
+    $isRelativeBaseUrl = $modx->getOption('filemanager_path_relative',null,true);
+} else {
+    $baseUrl = $scriptProperties['baseUrl'];
+    if (!empty($scriptProperties['baseUrlRelative'])) {
+        $baseUrl = $modx->getOption('base_url').$baseUrl;
+        $isRelativeBaseUrl = true;
+    }
+}
 
 /* get mb support settings */
 $useMultibyte = $modx->getOption('use_multibyte',null,false);

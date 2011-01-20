@@ -151,6 +151,11 @@ MODx.browser.Window = function(config) {
         ,onSelect: {fn: this.onSelect, scope: this}
         ,prependPath: config.prependPath || null
         ,prependUrl: config.prependUrl || null
+        ,basePath: config.basePath || ''
+        ,basePathRelative: config.basePathRelative || null
+        ,baseUrl: config.baseUrl || ''
+        ,baseUrlRelative: config.baseUrlRelative || null
+        ,allowedFileTypes: config.allowedFileTypes || ''
         ,ident: this.ident
     });
     this.tree = MODx.load({
@@ -158,6 +163,10 @@ MODx.browser.Window = function(config) {
         ,onUpload: function() { this.view.run(); }
         ,scope: this
         ,prependPath: config.prependPath || null
+        ,basePath: config.basePath || ''
+        ,basePathRelative: config.basePathRelative || null
+        ,baseUrl: config.baseUrl || ''
+        ,baseUrlRelative: config.baseUrlRelative || null
         ,hideFiles: config.hideFiles || false
         ,ident: this.ident
         ,rootId: '/'
@@ -248,6 +257,11 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
         this.view.run({
             dir: dir
             ,ctx: MODx.ctx
+            ,basePath: this.config.basePath || ''
+            ,basePathRelative: this.config.basePathRelative || null
+            ,baseUrl: this.config.baseUrl || ''
+            ,baseUrlRelative: this.config.baseUrlRelative || null
+            ,allowedFileTypes: this.config.allowedFileTypes || ''
         });
     }
     
@@ -347,6 +361,11 @@ MODx.browser.View = function(config) {
             action: 'getFiles'
             ,prependPath: config.prependPath || null
             ,prependUrl: config.prependUrl || null
+            ,basePath: config.basePath || ''
+            ,basePathRelative: config.basePathRelative || null
+            ,baseUrl: config.baseUrl || ''
+            ,baseUrlRelative: config.baseUrlRelative || null
+            ,allowedFileTypes: config.allowedFileTypes || ''
         }
         ,tpl: this.templates.thumb
         ,listeners: {
@@ -372,6 +391,11 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 action: 'remove'
                 ,file: d+'/'+node.id
                 ,prependPath: this.config.prependPath
+
+                ,basePath: this.config.basePath || ''
+                ,basePathRelative: this.config.basePathRelative || null
+                ,baseUrl: this.config.baseUrl || ''
+                ,baseUrlRelative: this.config.baseUrlRelative || null
                 ,ctx: MODx.ctx || 'web'
             }
             ,listeners: {
@@ -387,6 +411,10 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             action: 'getFiles'
             ,dir: this.dir
             ,ctx: MODx.ctx
+            ,basePath: this.config.basePath || ''
+            ,basePathRelative: this.config.basePathRelative || null
+            ,baseUrl: this.config.baseUrl || ''
+            ,baseUrlRelative: this.config.baseUrlRelative || null
         });
         this.store.load({
             params: p
