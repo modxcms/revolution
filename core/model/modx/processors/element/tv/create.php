@@ -48,20 +48,27 @@ if (empty($scriptProperties['caption'])) { $scriptProperties['caption'] = $scrip
 
 if ($modx->error->hasError()) return $modx->error->failure();
 
-/* extract widget properties */
-$display_params = '';
+$output_properties = array();
 foreach ($scriptProperties as $key => $value) {
     $res = strstr($key,'prop_');
     if ($res !== false) {
-        $key = str_replace('prop_','',$key);
-        $display_params .= '&'.$key.'='.$value;
+        $output_properties[str_replace('prop_','',$key)] = $value;
+    }
+}
+
+$input_properties = array();
+foreach ($scriptProperties as $key => $value) {
+    $res = strstr($key,'inopt_');
+    if ($res !== false) {
+        $input_properties[str_replace('inopt_','',$key)] = $value;
     }
 }
 
 $tv = $modx->newObject('modTemplateVar');
 $tv->fromArray($scriptProperties);
 $tv->set('elements',$scriptProperties['els']);
-$tv->set('display_params',$display_params);
+$tv->set('input_properties',$input_properties);
+$tv->set('output_properties',$output_properties);
 $tv->set('rank',!empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
 $tv->set('locked',!empty($scriptProperties['locked']));
 $properties = null;

@@ -221,7 +221,20 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             if (!o.form) return false;
 
             var f = o.form.getForm ? o.form.getForm() : o.form;
-            if (f.isValid()) {
+            var isv = true;
+            if (f.items && f.items.items) {
+                for (var fld in f.items.items) {
+                    if (f.items.items[fld] && f.items.items[fld].validate) {
+                        var fisv = f.items.items[fld].validate();
+                        if (!fisv) {
+                            f.items.items[fld].markInvalid();
+                            isv = false;
+                        }
+                    }
+                }
+            }
+
+            if (isv) {
                 Ext.applyIf(o.params,{
                     action: itm.process
                    ,'modx-ab-stay': MODx.config.stay

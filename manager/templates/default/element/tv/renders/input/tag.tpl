@@ -14,7 +14,10 @@ var fld{/literal}{$tv->id}{literal} = MODx.load({
     xtype: 'textfield'
     ,applyTo: 'tv{$tv->id}'
     ,width: '97%'
+    ,id: 'tv{$tv->id}'
     ,enableKeyEvents: true
+    ,msgTarget: 'under'
+    ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
 {literal}
     ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
 });
@@ -28,6 +31,7 @@ MODx.makeDroppable(fld{/literal}{$tv->id}{literal},function(v) {
     }
     return v;
 });
+
 {/literal}
 // ]]>
 </script>
@@ -47,13 +51,14 @@ MODx.makeDroppable(fld{/literal}{$tv->id}{literal},function(v) {
 Ext.select('#tv-{/literal}{$tv->id}{literal}-tag-list li',true).on('click',function(e,i) {
     var li = Ext.get(i);
     if (!li) { return; }
-    var tf = Ext.get('tv{/literal}{$tv->id}{literal}');
+    var tf = Ext.getCmp('tv{/literal}{$tv->id}{literal}');
+    var v = tf.getValue();
     if (li.hasClass('modx-tag-checked')) {
-        tf.dom.value = Ext.util.Format.trimCommas(tf.dom.value.replace(li.dom.title,''));
+        tf.setValue(Ext.util.Format.trimCommas(v.replace(li.dom.title,'')));
         li.removeClass('modx-tag-checked');
     } else {
-        var v = tf.dom.value+(tf.dom.value != '' ? ',' : '');
-        tf.dom.value = Ext.util.Format.trimCommas(v+li.dom.title);
+        v = v+(v != '' ? ',' : '');
+        tf.setValue(Ext.util.Format.trimCommas(v+li.dom.title));
         li.addClass('modx-tag-checked');
     }
     MODx.fireResourceFormChange();

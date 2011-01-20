@@ -16,14 +16,21 @@ $src = $modx->getOption('src',$scriptProperties,'');
 if (empty($src)) return '';
 
 /* determine absolute path to image from URL passed that is context-specific */
-$basePath = $modx->fileHandler->getBasePath(false);
+if (empty($scriptProperties['basePath'])) {
+    $basePath = $modx->fileHandler->getBasePath();
+} else {
+    $basePath = $scriptProperties['basePath'];
+    if (!empty($scriptProperties['basePathRelative'])) {
+        $basePath = $modx->getOption('base_path',null,MODX_BASE_PATH).$basePath;
+    }
+}
 
 /* dont strip stuff for absolute URLs */
 if (strpos($src,'http') === false) {
     $src = $basePath.$src;
     /* strip out double slashes */
     $src = str_replace(array('///','//'),'/',$src);
-
+    
     /* check for file existence if local url */
     if (empty($src) || !file_exists($src)) {
         if (file_exists('/'.$src)) {

@@ -1018,9 +1018,10 @@
         <field key="elements" dbtype="nvarchar" precision="max" phptype="string" />
         <field key="rank" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         <field key="display" dbtype="nvarchar" precision="20" phptype="string" null="false" default="" />
-        <field key="display_params" dbtype="nvarchar" precision="max" phptype="string" />
         <field key="default_text" dbtype="nvarchar" precision="max" phptype="string" />
         <field key="properties" dbtype="nvarchar" precision="max" phptype="array" null="true" />
+        <field key="input_properties" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
+        <field key="output_properties" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
         
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />

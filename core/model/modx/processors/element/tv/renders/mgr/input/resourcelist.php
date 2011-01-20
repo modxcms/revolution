@@ -8,7 +8,9 @@ $parents = $this->get('elements');
 
 $bindingsResult = $this->processBindings($this->get('elements'),$modx->resource->get('id'));
 $parents = $this->parseInputOptions($bindingsResult);
-if (empty($parents)) { $parents = array($modx->getOption('site_start',null,1)); }
+$parents = !empty($params['parents']) ? explode(',',$params['parents']) : $parents;
+$params['depth'] = !empty($params['depth']) ? $params['depth'] : 10;
+if (empty($parents) || empty($parents[0])) { $parents = array($modx->getOption('site_start',null,1)); }
 
 $parentList = array();
 foreach ($parents as $parent) {
@@ -25,7 +27,8 @@ foreach ($parentList as $parent) {
         $modx->switchContext($parent->get('context_key'));
         $currentContext = $parent->get('context_key');
     }
-    $ids = array_merge($ids,$modx->getChildIds($parent->get('id')));
+    if (!empty($params['includeParent'])) $ids[] = $parent->get('id');
+    $ids = array_merge($ids,$modx->getChildIds($parent->get('id'),$params['depth']));
 }
 $ids = array_unique($ids);
 $modx->switchContext($oldContext);
@@ -33,10 +36,17 @@ $modx->switchContext($oldContext);
 /* get resources */
 $c = $this->xpdo->newQuery('modResource');
 $c->leftJoin('modResource','Parent');
-$c->where(array(
-    'modResource.id:IN' => $ids,
-));
+if (!empty($ids)) {
+    $c->where(array('modResource.id:IN' => $ids));
+}
+if (!empty($params['where'])) {
+    $params['where'] = $modx->fromJSON($params['where']);
+    $c->where($params['where']);
+}
 $c->sortby('Parent.menuindex,modResource.menuindex','ASC');
+if (!empty($params['limit'])) {
+    $c->limit($params['limit']);
+}
 $resources = $this->xpdo->getCollection('modResource',$c);
 
 /* iterate */
@@ -49,5 +59,5 @@ foreach ($resources as $resource) {
         'selected' => $selected,
     );
 }
-$this->xpdo->smarty->assign('tvitems',$opts);
-return $this->xpdo->smarty->fetch('element/tv/renders/input/dropdown.tpl');
+$this->xpdo->smarty->assign('opts',$opts);
+return $this->xpdo->smarty->fetch('element/tv/renders/input/listbox-single.tpl');
