@@ -86,6 +86,7 @@ MODx.panel.FileTV = function(config) {
             ,baseUrl: config.baseUrl || ''
             ,baseUrlRelative: config.baseUrlRelative || ''
             ,allowedFileTypes: config.allowedFileTypes || ''
+            ,wctx: config.wctx || 'web'
             ,listeners: {
                 'select': {fn:function(data) {
                     Ext.getCmp('tv'+this.config.tv).setValue(data.relativeUrl);

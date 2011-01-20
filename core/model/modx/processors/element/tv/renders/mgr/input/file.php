@@ -7,6 +7,19 @@ $this->xpdo->lexicon->load('tv_widget');
 
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $this->xpdo->context->get('key')));
 
+/* get working context */
+$wctx = isset($_GET['wctx']) && !empty($_GET['wctx']) ? $modx->sanitizeString($_GET['wctx']) : '';
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->lexicon('permission_denied'));
+    }
+    $params['wctx'] = $workingContext->get('key');
+} else {
+    $params['wctx'] = $modx->context->get('key');
+}
+
+
 $value = $this->get('value');
 
 /* get base path based on either TV param or filemanager_path */

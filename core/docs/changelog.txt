@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3481], [#3571], [#3304] Fix issue with filemanager_path in non-web contexts 
 - [#3009] Add ability to assign TVs to specific directories and base paths, limit file extensions shown
 - [#2679] Add Input Options to TVs, allowing TV inputs to be customized and tweaked
 

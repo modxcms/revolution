@@ -19,6 +19,7 @@ var fld{/literal}{$tv->id}{literal} = MODx.load({
     {if $params.baseUrl},baseUrl: "{$params.baseUrl}"{/if}
     ,baseUrlRelative: {if $params.baseUrlRelative}true{else}false{/if}
     {if $params.allowedFileTypes},allowedFileTypes: '{$params.allowedFileTypes}'{/if}
+    ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
     
 {literal}
     ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}

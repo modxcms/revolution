@@ -71,7 +71,7 @@ class modFileHandler {
             $this->context->getOption('core_path', MODX_CORE_PATH, $this->config),
             $this->context->getOption('assets_path', MODX_ASSETS_PATH, $this->config),
         ), $root);
-        return $this->postfixSlash($root);
+        return !empty($root) ? $this->postfixSlash($root) : $root;
     }
 
     /**
@@ -90,7 +90,7 @@ class modFileHandler {
             $this->context->getOption('core_url', MODX_CORE_PATH, $this->config),
             $this->context->getOption('assets_url', MODX_ASSETS_PATH, $this->config),
         ), $baseUrl);
-        return $this->postfixSlash($baseUrl);
+        return !empty($baseUrl) ? $this->postfixSlash($baseUrl) : $baseUrl;
     }
 
     /**

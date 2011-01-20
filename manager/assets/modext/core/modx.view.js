@@ -156,6 +156,7 @@ MODx.browser.Window = function(config) {
         ,baseUrl: config.baseUrl || ''
         ,baseUrlRelative: config.baseUrlRelative || null
         ,allowedFileTypes: config.allowedFileTypes || ''
+        ,wctx: config.wctx || 'web'
         ,ident: this.ident
     });
     this.tree = MODx.load({
@@ -262,6 +263,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,baseUrl: this.config.baseUrl || ''
             ,baseUrlRelative: this.config.baseUrlRelative || null
             ,allowedFileTypes: this.config.allowedFileTypes || ''
+            ,wctx: this.config.wctx || 'web'
         });
     }
     
@@ -366,6 +368,7 @@ MODx.browser.View = function(config) {
             ,baseUrl: config.baseUrl || ''
             ,baseUrlRelative: config.baseUrlRelative || null
             ,allowedFileTypes: config.allowedFileTypes || ''
+            ,wctx: config.wctx || 'web'
         }
         ,tpl: this.templates.thumb
         ,listeners: {
@@ -396,7 +399,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 ,basePathRelative: this.config.basePathRelative || null
                 ,baseUrl: this.config.baseUrl || ''
                 ,baseUrlRelative: this.config.baseUrlRelative || null
-                ,ctx: MODx.ctx || 'web'
+                ,wctx: this.config.wctx || 'web'
             }
             ,listeners: {
                 'success': {fn:function(r) { this.run({ ctx: MODx.ctx }); },scope:this}

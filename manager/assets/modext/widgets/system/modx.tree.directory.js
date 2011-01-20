@@ -26,6 +26,7 @@ MODx.tree.Directory = function(config) {
             ,baseUrlRelative: config.baseUrlRelative || null
             ,hideFiles: config.hideFiles || false
             ,ctx: MODx.ctx || 'web'
+            ,wctx: MODx.ctx || 'web'
         }
         ,action: 'getList'
         ,primaryKey: 'dir'

@@ -43,6 +43,7 @@ Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
                ,'template': template
                ,'resource': config.resource
                ,ctx: MODx.ctx
+               ,wctx: MODx.ctx || 'web'
             }
             ,scripts: true
             ,callback: function() {

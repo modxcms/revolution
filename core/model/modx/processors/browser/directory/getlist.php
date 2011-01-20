@@ -53,14 +53,17 @@ $canUpload = $modx->hasPermission('file_upload');
 $dir = $modx->fileHandler->sanitizePath($dir);
 $dir = $modx->fileHandler->postfixSlash($dir);
 if (empty($scriptProperties['basePath'])) {
-    $root = $modx->fileHandler->getBasePath(false);
+    $root = $modx->fileHandler->getBasePath();
+    if ($modx->getOption('filemanager_path_relative',null,true)) {
+        $root = $modx->getOption('base_path',$scriptProperties,'').$root;
+    }
 } else {
     $root = $scriptProperties['basePath'];
     if (!empty($scriptProperties['basePathRelative'])) {
         $root = $modx->getOption('base_path').$root;
     }
 }
-$fullPath = str_replace('//','/',$root.$dir);
+$fullPath = $root.ltrim($dir,'/');
 if (!is_dir($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').': '.$fullPath);
 
 $editAction = false;
@@ -80,6 +83,7 @@ if (empty($scriptProperties['baseUrl'])) {
     }
 }
 
+//var_dump($baseUrl);
 /* get mb support settings */
 $useMultibyte = $modx->getOption('use_multibyte',null,false);
 $encoding = $modx->getOption('modx_charset',null,'UTF-8');
