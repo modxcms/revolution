@@ -22,6 +22,7 @@ var fld{/literal}{$tv->id}{literal} = MODx.load({
     ,baseUrlRelative: {if $params.baseUrlRelative}true{else}false{/if}
     {if $params.allowedFileTypes},allowedFileTypes: '{$params.allowedFileTypes}'{/if}
     ,wctx: '{if $params.wctx}{$params.wctx}{else}web{/if}'
+    {if $params.openTo},openTo: '{$params.openTo}'{/if}
 {literal}
     ,msgTarget: 'under'
     ,listeners: {

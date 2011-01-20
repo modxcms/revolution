@@ -42,6 +42,13 @@ if (!empty($params['baseUrl']) && !empty($value)) {
     $relativeValue = $value;
 }
 
+/* get auto-open to dir */
+if (!empty($value) && strpos($value,'/') !== false) {
+    $dir = pathinfo($value,PATHINFO_DIRNAME);
+    $dir = rtrim($dir,'/').'/';
+    $params['openTo'] = $dir;
+}
+
 $this->xpdo->smarty->assign('params',$params);
 
 $this->set('relativeValue',$relativeValue);

@@ -445,6 +445,7 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                 ,rootVisible: this.config.rootVisible || false
                 ,allowedFileTypes: this.config.allowedFileTypes || ''
                 ,wctx: this.config.wctx || 'web'
+                ,openTo: this.config.openTo || ''
                 ,listeners: {
                     'select': {fn: function(data) {
                         this.setValue(data.relativeUrl);

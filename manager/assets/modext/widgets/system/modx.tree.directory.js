@@ -68,8 +68,13 @@ MODx.tree.Directory = function(config) {
 Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
     ,_initExpand: function() {
-        var treeState = Ext.state.Manager.get(this.treestate_id);
-        this.expandPath(treeState,'text');
+        if (!Ext.isEmpty(this.config.openTo)) {
+            var treeState = Ext.state.Manager.get(this.treestate_id);
+            this.selectPath('/'+_('files')+'/'+this.config.openTo,'text');
+        } else {
+            var treeState = Ext.state.Manager.get(this.treestate_id);
+            this.selectPath(treeState,'text');
+        }
     }
     ,_saveState: function(n) {
         var p = n.getPath('text');

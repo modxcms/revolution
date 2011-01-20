@@ -93,6 +93,12 @@ Ext.extend(MODx.DataView,Ext.DataView,{
                 ,prependPath: config.prependPath || null
                 ,prependUrl: config.prependUrl || null
                 ,ctx: config.ctx || MODx.ctx
+                ,wctx: config.wctx || MODx.ctx
+                ,dir: config.openTo || ''
+                ,basePath: config.basePath || ''
+                ,basePathRelative: config.basePathRelative || null
+                ,baseUrl: config.baseUrl || ''
+                ,baseUrlRelative: config.baseUrlRelative || null
             }
             ,root: config.root || 'results'
             ,fields: config.fields
@@ -157,6 +163,7 @@ MODx.browser.Window = function(config) {
         ,baseUrlRelative: config.baseUrlRelative || null
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
+        ,openTo: config.openTo || ''
         ,ident: this.ident
     });
     this.tree = MODx.load({
@@ -169,6 +176,7 @@ MODx.browser.Window = function(config) {
         ,baseUrl: config.baseUrl || ''
         ,baseUrlRelative: config.baseUrlRelative || null
         ,hideFiles: config.hideFiles || false
+        ,openTo: config.openTo || ''
         ,ident: this.ident
         ,rootId: '/'
         ,rootName: _('files')
@@ -254,7 +262,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
     
     ,load: function(dir) {
-        dir = dir || '';
+        dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
         this.view.run({
             dir: dir
             ,ctx: MODx.ctx
@@ -369,6 +377,7 @@ MODx.browser.View = function(config) {
             ,baseUrlRelative: config.baseUrlRelative || null
             ,allowedFileTypes: config.allowedFileTypes || ''
             ,wctx: config.wctx || 'web'
+            ,dir: config.openTo || ''
         }
         ,tpl: this.templates.thumb
         ,listeners: {
