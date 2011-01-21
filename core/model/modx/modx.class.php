@@ -1435,8 +1435,8 @@ class modX extends xPDO {
 
         /* calculate processor file path from options and action */
         $processorFile = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
-        if (isset($options['location']) && !empty($options['location'])) $processorFile .= $options['location'] . '/';
-        $processorFile .= str_replace('../', '', $action . '.php');
+        if (isset($options['location']) && !empty($options['location'])) $processorFile .= ltrim($options['location'],'/') . '/';
+        $processorFile .= ltrim(str_replace('../', '', $action . '.php'),'/');
 
         if (file_exists($processorFile)) {
             if (!isset($this->lexicon)) $this->getService('lexicon', 'modLexicon');

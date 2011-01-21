@@ -28,12 +28,10 @@ if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE_
 if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) die();
 
 $modx= new modX();
-
 /* set debugging/logging options */
 $modx->setDebug(E_ALL | E_STRICT);
 $modx->setLogLevel(modX::LOG_LEVEL_ERROR);
 $modx->setLogTarget('FILE');
-
 /* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
 $modx->initialize($ctx);

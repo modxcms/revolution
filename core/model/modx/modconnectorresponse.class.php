@@ -77,7 +77,7 @@ class modConnectorResponse extends modResponse {
             }
 
             /* run processor */
-            $this->response = $this->modx->runProcessor($target,$scriptProperties);
+            $this->response = $this->modx->runProcessor($target,$scriptProperties,$options);
             if (!$this->response) {
                 $this->body = $this->modx->error->failure($this->modx->lexicon('processor_err_nf',array(
                     'target' => $target,
