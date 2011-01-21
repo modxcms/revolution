@@ -67,7 +67,7 @@ $wctx = $scriptProperties['context_key'];
 if (!empty($wctx)) {
     $workingContext = $modx->getContext($wctx);
     if (!$workingContext) {
-        return $modx->error->failure($modx->error->failure($modx->lexicon('access_denied')));
+        return $modx->error->failure($modx->lexicon('access_denied'));
     }
 } else {
     $workingContext =& $modx->context;
