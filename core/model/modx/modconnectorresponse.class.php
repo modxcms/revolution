@@ -65,8 +65,7 @@ class modConnectorResponse extends modResponse {
         /* execute a processor and format the response */
         } else {
             /* prevent browsing of subdirectories for security */
-            $options['action'] = str_replace('../','',$options['action']);
-            $target = str_replace('\\', '/', $options['location'] . '/' . $options['action']);
+            $target = str_replace('../','',$options['action']);
 
             /* create scriptProperties array from HTTP GPC vars */
             if (!isset($_POST)) $_POST = array();
