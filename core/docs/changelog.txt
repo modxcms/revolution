@@ -2,7 +2,8 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-- [#3568] Fixed double error->failure reference in resource/create processor
+- [#2615] Fix issue with modx->user->getResourceGroups, set resource groups in "modx.user.{$id}.resourceGroups" session key
+- [#3568] Fix double error->failure reference in resource/create processor
 - [#3425] MODx.Browser now loads directory of TV's current value on load
 - [#3481], [#3571], [#3304], [#3569] Fix issue with filemanager_path in non-web contexts 
 - [#3009] Add ability to assign TVs to specific directories and base paths, limit file extensions shown
