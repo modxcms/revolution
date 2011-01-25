@@ -63,10 +63,16 @@ foreach ($collection as $key => $object) {
     if (!$principal) $principal = $modx->newObject($object->get('principal_class'), array('name' => '(anonymous)'));
     $policyName = !empty($object->Policy) ? $object->Policy->get('name') : $modx->lexicon('no_policy_option');
 
+    if ($object->Target) {
+        $targetName = $accessClass == 'modAccessContext' ? $object->Target->get('key') : $object->Target->get('name');
+    } else {
+        $targetName = '(anonymous)';
+    }
+
     $objdata= array(
         'id' => $object->get('id'),
         'target' => $object->get('target'),
-        'target_name' => $accessClass == 'modAccessContext' ? $object->Target->get('key') : $object->Target->get('name'),
+        'target_name' => $targetName,
         'principal_class' => $object->get('principal_class'),
         'principal' => $object->get('principal'),
         'principal_name' => $principal->get('name'),
