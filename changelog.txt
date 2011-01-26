@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Fix date/time issues (sqlsrv)
+
 xPDO 2.0.1-pl (December 27, 2010)
 ====================================
 - [#2927] Add ENGINE option to xPDOManager_mysql->createObjectContainer()
