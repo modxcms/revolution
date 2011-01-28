@@ -240,16 +240,7 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
             }
         }
         if ($command == 'SELECT' && !empty ($this->query['groupby'])) {
-            $groupby= reset($this->query['groupby']);
-            $sql.= 'GROUP BY ';
-            $sql.= $groupby['column'];
-            if ($groupby['direction']) $sql.= ' ' . $groupby['direction'];
-            while ($groupby= next($this->query['groupby'])) {
-                $sql.= ', ';
-                $sql.= $groupby['column'];
-                if ($groupby['direction']) $sql.= ' ' . $groupby['direction'];
-            }
-            $sql.= ' ';
+            $sql.= $this->buildGroupByClause($limit, $offset);
         }
         if (!empty ($this->query['having'])) {
             $sql.= 'HAVING ';
@@ -258,15 +249,7 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
         }
         $orderBySql = '';
         if ($command == 'SELECT' && !empty ($this->query['sortby'])) {
-            $sortby= reset($this->query['sortby']);
-            $orderBySql= 'ORDER BY ';
-            $orderBySql.= $sortby['column'];
-            if ($sortby['direction']) $orderBySql.= ' ' . $sortby['direction'];
-            while ($sortby= next($this->query['sortby'])) {
-                $orderBySql.= ', ';
-                $orderBySql.= $sortby['column'];
-                if ($sortby['direction']) $orderBySql.= ' ' . $sortby['direction'];
-            }
+            $orderBySql = $this->buildOrderByClause($limit, $offset);
         }
         if ($command == 'SELECT' && !empty($limit) && !empty($offset)) {
             if (empty($orderBySql)) {
@@ -291,4 +274,46 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
         $this->sql= $sql;
         return (!empty ($this->sql));
     }
+
+    private function buildGroupByClause($limit, $offset) {
+        $clause = array();
+        foreach ($this->query['groupby'] as $groupby) {
+            $sql = $groupby['column'];
+            if ($groupby['direction']) $sql.= ' ' . $groupby['direction'];
+            $clause[] = $sql;
+        }
+        return 'GROUP BY ' . implode(', ', $clause) . ' ';
+    }
+
+    private function buildOrderByClause($limit, $offset) {
+        $clause = array();
+        foreach ($this->query['sortby'] as $sortby) {
+            $sql = $this->translateColumnExpression($sortby['column'], !empty($limit) && !empty($offset));
+            if ($sortby['direction']) $sql.= ' ' . $sortby['direction'];
+            $clause[] = $sql;
+        }
+        return 'ORDER BY ' . implode(', ', $clause) . ' ';
+    }
+
+    private function translateColumnExpression($expression, $limit) {
+        if ($limit) {
+            $isliteral = strpos($expression, '(') !== false;
+            if (!$isliteral) {
+                $parsed = explode('.', $expression);
+                $parsed = array_map(array($this->xpdo, 'literal'), $parsed);
+                switch (count($parsed)) {
+                    case 1:
+                        $expression = $this->xpdo->escape($this->getAlias() . '_' . $parsed[0]);
+                        break;
+                    case 2:
+                        $expression = $this->xpdo->escape($parsed[0] . '_' . $parsed[1]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        return $expression;
+    }
+
 }
