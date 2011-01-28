@@ -236,6 +236,12 @@ class xPDO {
     public $_escapeCharClose= '';
 
     /**
+     * Represents the character used for quoting strings for a particular driver.
+     * @var string
+     */
+    public $_quoteChar= "'";
+
+    /**
      * The xPDO Constructor.
      *
      * This method is used to create a new xPDO object with a connection to a
@@ -265,14 +271,17 @@ class xPDO {
             case 'mysql':
                 $this->_escapeCharOpen= "`";
                 $this->_escapeCharClose= "`";
+                $this->_quoteChar= "'";
                 break;
             case 'sqlite':
                 $this->_escapeCharOpen= '"';
                 $this->_escapeCharClose= '"';
+                $this->_quoteChar= "'";
                 break;
             case 'sqlsrv':
                 $this->_escapeCharOpen= '[';
                 $this->_escapeCharClose= ']';
+                $this->_quoteChar= "'";
                 break;
             default:
                 break;
