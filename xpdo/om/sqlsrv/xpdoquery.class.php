@@ -186,6 +186,29 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
         $sql= $this->query['command'] . ' ';
         $limit= !empty($this->query['limit']) ? intval($this->query['limit']) : 0;
         $offset= !empty($this->query['offset']) ? intval($this->query['offset']) : 0;
+        $orderBySql = '';
+        if ($command == 'SELECT' && !empty ($this->query['sortby'])) {
+            $sortby= reset($this->query['sortby']);
+            $orderBySql= 'ORDER BY ';
+            $orderBySql.= $sortby['column'];
+            if ($sortby['direction']) $orderBySql.= ' ' . $sortby['direction'];
+            while ($sortby= next($this->query['sortby'])) {
+                $orderBySql.= ', ';
+                $orderBySql.= $sortby['column'];
+                if ($sortby['direction']) $orderBySql.= ' ' . $sortby['direction'];
+            }
+        }
+        if ($command == 'SELECT' && $orderBySql == '' && !empty($limit) && !empty($offset)) {
+            $pk = $this->xpdo->getPK($this->getClass());
+            if ($pk) {
+                if (!is_array($pk)) $pk = array($pk);
+                $orderBy = array();
+                foreach ($pk as $k) {
+                    $orderBy[] = $this->xpdo->escape('xpdoLimit1') . '.' . $this->xpdo->escape($this->getAlias() . '_' . $k);
+                }
+                $orderBySql = "ORDER BY " . implode(', ', $orderBy);
+            }
+        }
         if ($command == 'SELECT') {
             $sql.= !empty($this->query['distinct']) ? $this->query['distinct'] . ' ' : '';
             if (!empty($limit) && empty($offset)) {
@@ -212,6 +235,9 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
                 }
             }
             $sql.= implode(', ', $columns);
+            if(!empty($limit) && !empty($offset)) {
+                $sql.= ', ROW_NUMBER() OVER (' . $orderBySql . ') AS RowNumber';
+            }
             $sql.= ' ';
         }
         $sql.= 'FROM ';
@@ -256,32 +282,9 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
             $sql.= $this->buildConditionalClause($this->query['having']);
             $sql.= ' ';
         }
-        $orderBySql = '';
-        if ($command == 'SELECT' && !empty ($this->query['sortby'])) {
-            $sortby= reset($this->query['sortby']);
-            $orderBySql= 'ORDER BY ';
-            $orderBySql.= $sortby['column'];
-            if ($sortby['direction']) $orderBySql.= ' ' . $sortby['direction'];
-            while ($sortby= next($this->query['sortby'])) {
-                $orderBySql.= ', ';
-                $orderBySql.= $sortby['column'];
-                if ($sortby['direction']) $orderBySql.= ' ' . $sortby['direction'];
-            }
-        }
         if ($command == 'SELECT' && !empty($limit) && !empty($offset)) {
-            if (empty($orderBySql)) {
-                $pk = $this->xpdo->getPK($this->getClass());
-                if ($pk) {
-                    if (!is_array($pk)) $pk = array($pk);
-                    $orderBy = array();
-                    foreach ($pk as $k) {
-                        $orderBy[] = $this->xpdo->escape('xpdoLimit1') . '.' . $this->xpdo->escape($this->getAlias() . '_' . $k);
-                    }
-                    $orderBySql = "ORDER BY " . implode(', ', $orderBy);
-                }
-            }
             if (!empty($orderBySql)) {
-                $sql = "SELECT [xpdoLimit2].* FROM (SELECT [xpdoLimit1].*, ROW_NUMBER() OVER({$orderBySql}) AS [xpdoRowNr] FROM ({$sql}) [xpdoLimit1]) [xpdoLimit2] WHERE [xpdoLimit2].[xpdoRowNr] BETWEEN " . ($offset + 1) . " AND " . ($offset + $limit);
+                $sql = "WITH OrderedSettings AS ($sql) SELECT * FROM OrderedSettings WHERE RowNumber BETWEEN " . ($offset + 1) . " AND " . ($offset + $limit);
             } else {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "limit() in sqlsrv requires either an explicit sortby or a defined primary key; limit ignored");
             }
