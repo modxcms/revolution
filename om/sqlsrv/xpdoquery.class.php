@@ -186,6 +186,29 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
         $sql= $this->query['command'] . ' ';
         $limit= !empty($this->query['limit']) ? intval($this->query['limit']) : 0;
         $offset= !empty($this->query['offset']) ? intval($this->query['offset']) : 0;
+        $orderBySql = '';
+        if ($command == 'SELECT' && !empty ($this->query['sortby'])) {
+            $sortby= reset($this->query['sortby']);
+            $orderBySql= 'ORDER BY ';
+            $orderBySql.= $sortby['column'];
+            if ($sortby['direction']) $orderBySql.= ' ' . $sortby['direction'];
+            while ($sortby= next($this->query['sortby'])) {
+                $orderBySql.= ', ';
+                $orderBySql.= $sortby['column'];
+                if ($sortby['direction']) $orderBySql.= ' ' . $sortby['direction'];
+            }
+        }
+        if ($command == 'SELECT' && $orderBySql == '' && !empty($limit) && !empty($offset)) {
+            $pk = $this->xpdo->getPK($this->getClass());
+            if ($pk) {
+                if (!is_array($pk)) $pk = array($pk);
+                $orderBy = array();
+                foreach ($pk as $k) {
+                    $orderBy[] = $this->xpdo->escape($this->getAlias()) . '.' . $this->xpdo->escape($k);
+                }
+                $orderBySql = "ORDER BY " . implode(', ', $orderBy);
+            }
+        }
         if ($command == 'SELECT') {
             $sql.= !empty($this->query['distinct']) ? $this->query['distinct'] . ' ' : '';
             if (!empty($limit) && empty($offset)) {
@@ -212,6 +235,9 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
                 }
             }
             $sql.= implode(', ', $columns);
+            if(!empty($limit) && !empty($offset)) {
+                $sql.= ', ROW_NUMBER() OVER (' . $orderBySql . ') AS [xpdoRowNr]';
+            }
             $sql.= ' ';
         }
         $sql.= 'FROM ';
@@ -240,31 +266,25 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
             }
         }
         if ($command == 'SELECT' && !empty ($this->query['groupby'])) {
-            $sql.= $this->buildGroupByClause($limit, $offset);
+            $groupby= reset($this->query['groupby']);
+            $sql.= 'GROUP BY ';
+            $sql.= $groupby['column'];
+            if ($groupby['direction']) $sql.= ' ' . $groupby['direction'];
+            while ($groupby= next($this->query['groupby'])) {
+                $sql.= ', ';
+                $sql.= $groupby['column'];
+                if ($groupby['direction']) $sql.= ' ' . $groupby['direction'];
+            }
+            $sql.= ' ';
         }
         if (!empty ($this->query['having'])) {
             $sql.= 'HAVING ';
             $sql.= $this->buildConditionalClause($this->query['having']);
             $sql.= ' ';
         }
-        $orderBySql = '';
-        if ($command == 'SELECT' && !empty ($this->query['sortby'])) {
-            $orderBySql = $this->buildOrderByClause($limit, $offset);
-        }
         if ($command == 'SELECT' && !empty($limit) && !empty($offset)) {
-            if (empty($orderBySql)) {
-                $pk = $this->xpdo->getPK($this->getClass());
-                if ($pk) {
-                    if (!is_array($pk)) $pk = array($pk);
-                    $orderBy = array();
-                    foreach ($pk as $k) {
-                        $orderBy[] = $this->xpdo->escape('xpdoLimit1') . '.' . $this->xpdo->escape($this->getAlias() . '_' . $k);
-                    }
-                    $orderBySql = "ORDER BY " . implode(', ', $orderBy);
-                }
-            }
             if (!empty($orderBySql)) {
-                $sql = "SELECT [xpdoLimit2].* FROM (SELECT [xpdoLimit1].*, ROW_NUMBER() OVER({$orderBySql}) AS [xpdoRowNr] FROM ({$sql}) [xpdoLimit1]) [xpdoLimit2] WHERE [xpdoLimit2].[xpdoRowNr] BETWEEN " . ($offset + 1) . " AND " . ($offset + $limit);
+                $sql = "WITH OrderedSettings AS ($sql) SELECT * FROM OrderedSettings WHERE [xpdoRowNr] BETWEEN " . ($offset + 1) . " AND " . ($offset + $limit);
             } else {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "limit() in sqlsrv requires either an explicit sortby or a defined primary key; limit ignored");
             }
@@ -274,46 +294,4 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
         $this->sql= $sql;
         return (!empty ($this->sql));
     }
-
-    private function buildGroupByClause($limit, $offset) {
-        $clause = array();
-        foreach ($this->query['groupby'] as $groupby) {
-            $sql = $groupby['column'];
-            if ($groupby['direction']) $sql.= ' ' . $groupby['direction'];
-            $clause[] = $sql;
-        }
-        return 'GROUP BY ' . implode(', ', $clause) . ' ';
-    }
-
-    private function buildOrderByClause($limit, $offset) {
-        $clause = array();
-        foreach ($this->query['sortby'] as $sortby) {
-            $sql = $this->translateColumnExpression($sortby['column'], !empty($limit) && !empty($offset));
-            if ($sortby['direction']) $sql.= ' ' . $sortby['direction'];
-            $clause[] = $sql;
-        }
-        return 'ORDER BY ' . implode(', ', $clause) . ' ';
-    }
-
-    private function translateColumnExpression($expression, $limit) {
-        if ($limit) {
-            $isliteral = strpos($expression, '(') !== false;
-            if (!$isliteral) {
-                $parsed = explode('.', $expression);
-                $parsed = array_map(array($this->xpdo, 'literal'), $parsed);
-                switch (count($parsed)) {
-                    case 1:
-                        $expression = $this->xpdo->escape($this->getAlias() . '_' . $parsed[0]);
-                        break;
-                    case 2:
-                        $expression = $this->xpdo->escape($parsed[0] . '_' . $parsed[1]);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        return $expression;
-    }
-
 }
