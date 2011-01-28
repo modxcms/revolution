@@ -204,7 +204,7 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
                 if (!is_array($pk)) $pk = array($pk);
                 $orderBy = array();
                 foreach ($pk as $k) {
-                    $orderBy[] = $this->xpdo->escape('xpdoLimit1') . '.' . $this->xpdo->escape($this->getAlias() . '_' . $k);
+                    $orderBy[] = $this->xpdo->escape($this->getAlias()) . '.' . $this->xpdo->escape($k);
                 }
                 $orderBySql = "ORDER BY " . implode(', ', $orderBy);
             }
@@ -236,7 +236,7 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
             }
             $sql.= implode(', ', $columns);
             if(!empty($limit) && !empty($offset)) {
-                $sql.= ', ROW_NUMBER() OVER (' . $orderBySql . ') AS RowNumber';
+                $sql.= ', ROW_NUMBER() OVER (' . $orderBySql . ') AS [xpdoRowNr]';
             }
             $sql.= ' ';
         }
@@ -284,7 +284,7 @@ class xPDOQuery_sqlsrv extends xPDOQuery {
         }
         if ($command == 'SELECT' && !empty($limit) && !empty($offset)) {
             if (!empty($orderBySql)) {
-                $sql = "WITH OrderedSettings AS ($sql) SELECT * FROM OrderedSettings WHERE RowNumber BETWEEN " . ($offset + 1) . " AND " . ($offset + $limit);
+                $sql = "WITH OrderedSettings AS ($sql) SELECT * FROM OrderedSettings WHERE [xpdoRowNr] BETWEEN " . ($offset + 1) . " AND " . ($offset + $limit);
             } else {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "limit() in sqlsrv requires either an explicit sortby or a defined primary key; limit ignored");
             }
