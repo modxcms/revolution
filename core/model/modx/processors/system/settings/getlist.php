@@ -16,54 +16,33 @@ if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('setting');
 
 /* setup default properties */
-$isLimit = !empty($scriptProperties['limit']);
+//$isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
-$limit = $modx->getOption('limit',$scriptProperties,20);
+$limit = $modx->getOption('limit',$scriptProperties,0);
 $sort = $modx->getOption('sort',$scriptProperties,'key');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $key = $modx->getOption('key',$scriptProperties,'');
 $namespace = $modx->getOption('namespace',$scriptProperties,'');
 $area = $modx->getOption('area',$scriptProperties,'');
 
-/* build query */
-$c = $modx->newQuery('modSystemSetting');
-$c->select(array(
-    $modx->getSelectColumns('modSystemSetting','modSystemSetting'),
-));
-$c->select(array(
-    'Entry.value AS name_trans',
-    'Description.value AS description_trans',
-));
-$c->leftJoin('modLexiconEntry','Entry',"CONCAT('setting_',modSystemSetting.{$modx->escape('key')}) = Entry.name");
-$c->leftJoin('modLexiconEntry','Description',"CONCAT('setting_',modSystemSetting.{$modx->escape('key')},'_desc') = Description.name");
+$criteria = array();
 if (!empty($key)) {
-    $c->where(array(
+    $criteria[] = array(
         'modSystemSetting.key:LIKE' => '%'.$key.'%',
-    ),null,xPDOQuery::SQL_AND,2);
-    $c->orCondition(array(
-        'Entry.value:LIKE' => '%'.$key.'%',
-    ),null,2);
-    $c->orCondition(array(
-        'modSystemSetting.value:LIKE' => '%'.$key.'%',
-    ),null,2);
-    $c->orCondition(array(
-        'Description.value:LIKE' => '%'.$key.'%',
-    ),null,2);
+        'OR:Entry.value:LIKE' => '%'.$key.'%',
+        'OR:modSystemSetting.value:LIKE' => '%'.$key.'%',
+        'OR:Description.value:LIKE' => '%'.$key.'%',
+    );
 }
-
 if (!empty($namespace)) {
-    $c->where(array('namespace' => $namespace));
+    $criteria[] = array('namespace' => $namespace);
 }
 if (!empty($area)) {
-    $c->where(array('area' => $area));
+    $criteria[] = array('area' => $area);
 }
-$count = $modx->getCount('modSystemSetting',$c);
-$c->sortby($modx->getSelectColumns('modSystemSetting','modSystemSetting','',array('area')),'ASC');
-$c->sortby($modx->getSelectColumns('modSystemSetting','modSystemSetting','',array($sort)),$dir);
-if ($isLimit) $c->limit($limit,$start);
 
-$settings = $modx->getCollection('modSystemSetting',$c);
-        
+list($count, $settings) = $modx->call('modSystemSetting', 'listSettings', array(&$modx, $criteria, array($sort=> $dir), $limit, $start));
+
 $list = array();
 foreach ($settings as $setting) {
     $settingArray = $setting->toArray();
