@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Fix limit with sortby functionality for sqlsrv
+- Fix xPDO->literal() and add missing xPDO->$_quoteChar
 - Fix date/time issues (sqlsrv)
 
 xPDO 2.0.1-pl (December 27, 2010)
