@@ -29,46 +29,26 @@ $area = $modx->getOption('area',$scriptProperties,'');
 if (!$context = $modx->getObject('modContext', $scriptProperties['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 if (!$context->checkPolicy('view')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
-/* build query */
-$c = $modx->newQuery('modContextSetting');
-$c->leftJoin('modLexiconEntry','Entry',"CONCAT('setting_',modContextSetting.{$modx->escape('key')}) = Entry.name");
-$c->leftJoin('modLexiconEntry','Description',"CONCAT('setting_',modContextSetting.{$modx->escape('key')},'_desc') = Description.name");
-$c->where(array(
-    'context_key' => $scriptProperties['context_key'],
-));
-
+$criteria = array();
+$criteria[] = array('context_key' => $scriptProperties['context_key']);
 if (!empty($key)) {
-    $c->where(array(
+    $criteria[] = array(
         'modContextSetting.key:LIKE' => '%'.$key.'%',
-    ),null,xPDOQuery::SQL_AND,2);
-    $c->orCondition(array(
-        'Entry.value:LIKE' => '%'.$key.'%',
-    ),null,2);
-    $c->orCondition(array(
-        'modContextSetting.value:LIKE' => '%'.$key.'%',
-    ),null,2);
-    $c->orCondition(array(
-        'Description.value:LIKE' => '%'.$key.'%',
-    ),null,2);
+        'OR:Entry.value:LIKE' => '%'.$key.'%',
+        'OR:modContextSetting.value:LIKE' => '%'.$key.'%',
+        'OR:Description.value:LIKE' => '%'.$key.'%',
+    );
 }
 if (!empty($namespace)) {
-    $c->where(array('namespace' => $namespace));
+    $criteria[] = array('namespace' => $namespace);
 }
 if (!empty($area)) {
-    $c->where(array('area' => $area));
+    $criteria[] = array('area' => $area);
 }
-$count = $modx->getCount('modContextSetting',$c);
 
-$c->select(array(
-    $modx->getSelectColumns('modContextSetting','modContextSetting'),
-));
-$c->select(array(
-    'Entry.value AS name_trans',
-    'Description.value AS description_trans',
-));
-$c->sortby($modx->getSelectColumns('modContextSetting','modContextSetting','',array($sort)),$dir);
-if ($isLimit) $c->limit($limit,$start);
-$settings = $modx->getCollection('modContextSetting',$c);
+$settingsResult = $modx->call('modContextSetting', 'listSettings', array(&$modx, $criteria, array($sort=> $dir), $limit, $start));
+$count = $settingsResult['count'];
+$settings = $settingsResult['collection'];
 
 $list = array();
 foreach ($settings as $setting) {
