@@ -25,8 +25,9 @@ $workspace = $modx->getOption('workspace',$scriptProperties,1);
 $dateFormat = $modx->getOption('dateFormat',$scriptProperties,'%b %d, %Y %I:%M %p');
 
 /* get packages */
-$list = $modx->call('transport.modTransportPackage', 'listPackages', array(&$modx, $workspace, $isLimit ? $limit : 0, $start));
-$packages = $list['collection'];
+$pkgList = $modx->call('transport.modTransportPackage', 'listPackages', array(&$modx, $workspace, $isLimit ? $limit : 0, $start));
+$packages = $pkgList['collection'];
+$count = $pkgList['total'];
 
 $updatesCacheExpire = $modx->getOption('auto_check_pkg_updates_cache_expire',$scriptProperties,5) * 60;
 
