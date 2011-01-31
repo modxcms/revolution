@@ -41,7 +41,9 @@ if (!empty($area)) {
     $criteria[] = array('area' => $area);
 }
 
-list($count, $settings) = $modx->call('modSystemSetting', 'listSettings', array(&$modx, $criteria, array($sort=> $dir), $limit, $start));
+$settingsResult = $modx->call('modSystemSetting', 'listSettings', array(&$modx, $criteria, array($sort=> $dir), $limit, $start));
+$count = $settingsResult['count'];
+$settings = $settingsResult['collection'];
 
 $list = array();
 foreach ($settings as $setting) {
@@ -89,4 +91,5 @@ foreach ($settings as $setting) {
 
     $list[] = $settingArray;
 }
+
 return $this->outputArray($list,$count);

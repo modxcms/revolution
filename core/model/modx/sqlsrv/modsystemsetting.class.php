@@ -25,9 +25,12 @@ class modSystemSetting_sqlsrv extends modSystemSetting {
             $c->sortby($xpdo->getSelectColumns('modSystemSetting','modSystemSetting','',array($field)),$dir);
         }
         if ((int) $limit > 0) {
-            $c->limit($limit,$offset);
+            $c->limit((int) $limit, (int) $offset);
         }
-        return array($count, $xpdo->getCollection('modSystemSetting',$c));
+        return array(
+            'count'=> $count,
+            'collection'=> $xpdo->getCollection('modSystemSetting',$c)
+        );
     }
 }
 ?>
