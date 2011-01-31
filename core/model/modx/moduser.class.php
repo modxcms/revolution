@@ -119,6 +119,9 @@ class modUser extends modPrincipal {
                             }
                         }
                         $_SESSION[$context . 'Docgroups']= array_values($legacyDocGroups);
+                        $_SESSION['modx.user.'.$this->get('id').'.resourceGroups'] = array(
+                            $context => array_values($legacyDocGroups),
+                         );
                         break;
                     case 'modAccessContext' :
                         $sql = "SELECT acl.target, acl.principal, mr.authority, acl.policy, p.data FROM {$accessTable} acl " .
@@ -196,6 +199,9 @@ class modUser extends modPrincipal {
                             }
                         }
                         $_SESSION[$context . 'Docgroups']= array_values($legacyDocGroups);
+                        $_SESSION['modx.user.'.$this->get('id').'.resourceGroups'] = array(
+                            $context => array_values($legacyDocGroups),
+                         );
                         break;
                     case 'modAccessContext' :
                         $sql = "SELECT acl.target, acl.principal, 0 AS authority, acl.policy, p.data FROM {$accessTable} acl " .
@@ -549,21 +555,17 @@ class modUser extends modPrincipal {
      * @access public
      * @return array An array of Resource Group names.
      */
-    public function getResourceGroups() {
+    public function getResourceGroups($ctx = '') {
+        if (empty($ctx)) $ctx = $this->xpdo->context->get('key');
+        
         $resourceGroups= array ();
-        if (isset($_SESSION["modx.user.{$this->id}.resourceGroups"])) {
-            $resourceGroups= $_SESSION["modx.user.{$this->id}.resourceGroups"];
+        if (isset($_SESSION["modx.user.{$this->id}.resourceGroups"][$ctx])) {
+            $resourceGroups= $_SESSION["modx.user.{$this->id}.resourceGroups"][$ctx];
         } else {
-            if ($memberships= $this->getMany('UserGroupMembers')) {
-                foreach ($memberships as $membership) {
-                    if ($documentGroupAccess= $membership->getMany('UserGroupResourceGroups')) {
-                        foreach ($documentGroupAccess as $dga) {
-                            $resourceGroups[]= $dga->get('documentgroup');
-                        }
-                    }
-                }
+            $this->loadAttributes('modAccessResourceGroup',$ctx,true);
+            if (isset($_SESSION["modx.user.{$this->id}.resourceGroups"][$ctx])) {
+                $resourceGroups= $_SESSION["modx.user.{$this->id}.resourceGroups"][$ctx];
             }
-            $_SESSION["modx.user.{$this->id}.resourceGroups"]= $resourceGroups;
         }
         return $resourceGroups;
     }
