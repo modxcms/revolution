@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3702] Ensure file/image TVs can have files drag/dropped onto them
 - [#3465] Add sanity check for non-object to log call in modAccessibleObject::_loadInstance
 - [#3615] Fix issue with modx->user->getResourceGroups, set resource groups in "modx.user.{$id}.resourceGroups" session key
 - [#3568] Fix double error->failure reference in resource/create processor
