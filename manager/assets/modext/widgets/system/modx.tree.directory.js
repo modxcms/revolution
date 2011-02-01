@@ -25,7 +25,6 @@ MODx.tree.Directory = function(config) {
             ,baseUrl: config.baseUrl || ''
             ,baseUrlRelative: config.baseUrlRelative || null
             ,hideFiles: config.hideFiles || false
-            ,ctx: MODx.ctx || 'web'
             ,wctx: MODx.ctx || 'web'
         }
         ,action: 'getList'
@@ -212,7 +211,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 xtype: 'modx-browser'
                 ,hideFiles: false
                 ,rootVisible: false
-                ,ctx: MODx.ctx
+                ,wctx: MODx.ctx
                 ,listeners: {
                     'select': {fn: function(data) {
                         this.fireEvent('fileBrowserSelect',data);
@@ -234,7 +233,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,old_name: ov
                 ,prependPath: this.config.prependPath || null
                 ,file: this.treeEditor.editNode.id
-                ,ctx: MODx.ctx || ''
+                ,wctx: MODx.ctx || ''
             }
             ,listeners: {
                'success': {fn:this.refreshActiveNode,scope:this}
@@ -305,7 +304,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 action: 'remove'
                 ,dir: node.id
                 ,prependPath: this.config.prependPath || null
-                ,ctx: MODx.ctx || ''
+                ,wctx: MODx.ctx || ''
             }
             ,listeners: {
                 'success':{fn:this.refreshParentNode,scope:this}
@@ -322,7 +321,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 action: 'remove'
                 ,file: node.id
                 ,prependPath: this.config.prependPath || null
-                ,ctx: MODx.ctx || ''
+                ,wctx: MODx.ctx || ''
             }
             ,listeners: {
                 'success':{fn:this.refreshParentNode,scope:this}
@@ -338,7 +337,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                     action: 'upload'
                     ,prependPath: this.config.prependPath || null
                     ,prependUrl: this.config.prependUrl || null
-                    ,ctx: MODx.ctx || ''
+                    ,wctx: MODx.ctx || ''
                 }
                 ,reset_on_hide: true
                 ,width: 550
@@ -386,7 +385,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,prependPath: this.config.prependPath || null
             ,prependUrl: this.config.prependUrl || null
             ,path: path
-            ,ctx: MODx.ctx || ''
+            ,wctx: MODx.ctx || ''
         });
         this.fireEvent('beforeUpload',this.cm.activeNode);
     }
@@ -414,7 +413,7 @@ MODx.window.CreateDirectory = function(config) {
         ,action: 'create'
         ,fields: [{
             xtype: 'hidden'
-            ,name: 'ctx'
+            ,name: 'wctx'
             ,value: MODx.ctx || ''
         },{
             xtype: 'hidden'
@@ -456,7 +455,7 @@ MODx.window.ChmodDirectory = function(config) {
         ,action: 'chmod'
         ,fields: [{
             xtype: 'hidden'
-            ,name: 'ctx'
+            ,name: 'wctx'
             ,value: MODx.ctx || ''
         },{
             xtype: 'hidden'
@@ -489,7 +488,7 @@ MODx.window.RenameFile = function(config) {
         ,action: 'rename'
         ,fields: [{
             xtype: 'hidden'
-            ,name: 'ctx'
+            ,name: 'wctx'
             ,value: MODx.ctx || ''
         },{
             xtype: 'hidden'

@@ -26,14 +26,18 @@ if (!empty($wctx)) {
 }
 
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
-$root = $modx->fileHandler->getBasePath(false);
+$root = $modx->fileHandler->getBasePath();
+if ($workingContext->getOption('filemanager_path_relative',true)) {
+    $root = $workingContext->getOption('base_path','').$root;
+}
 
 /* generate modFileSystemResource from path */
-$fsResource = $modx->fileHandler->make($root.$scriptProperties['path']);
+$fullPath = $root.$scriptProperties['path'];
+$fsResource = $modx->fileHandler->make($fullPath);
 $directory = $fsResource->getParentDirectory();
 
 /* make sure parent dir is a directory and writable */
-if (!($directory instanceof modDirectory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid'));
+if (!($directory instanceof modDirectory)) return $modx->error->failure($modx->lexicon('file_folder_err_invalid').$fullPath);
 if (!$directory->isReadable() || !$directory->isWritable()) {
 	return $modx->error->failure($modx->lexicon('file_folder_err_perms'));
 }

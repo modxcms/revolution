@@ -36,16 +36,16 @@ $dir = $modx->fileHandler->postfixSlash($dir);
 $basePathRelative = false;
 if (empty($scriptProperties['basePath'])) {
     $basePath = $modx->fileHandler->getBasePath();
-    $basePathRelative = $modx->getOption('filemanager_path_relative',null,true);
+    $basePathRelative = $workingContext->getOption('filemanager_path_relative',true);
     if ($basePathRelative) {
-        $basePathFull = $modx->getOption('base_path').ltrim($basePath,'/');
+        $basePathFull = $workingContext->getOption('base_path').ltrim($basePath,'/');
     } else {
         $basePathFull = $basePath;
     }
 } else {
     $basePath = $scriptProperties['basePath'];
     if (!empty($scriptProperties['basePathRelative'])) {
-        $basePathFull = $modx->getOption('base_path').ltrim($basePath,'/');
+        $basePathFull = $workingContext->getOption('base_path').ltrim($basePath,'/');
         $basePathRelative = true;
     } else {
         $basePathFull = $basePath;
@@ -54,16 +54,16 @@ if (empty($scriptProperties['basePath'])) {
 $baseUrlRelative = false;
 if (empty($scriptProperties['baseUrl'])) {
     $baseUrl = $modx->fileHandler->getBaseUrl();
-    $baseUrlRelative = $modx->getOption('filemanager_url_relative',null,true);
+    $baseUrlRelative = $workingContext->getOption('filemanager_url_relative',true);
     if ($baseUrlRelative) {
-        $baseUrlFull = $modx->getOption('base_url').ltrim($baseUrl,'/');
+        $baseUrlFull = $workingContext->getOption('base_url').ltrim($baseUrl,'/');
     } else {
         $baseUrlFull = $baseUrl;
     }
 } else {
     $baseUrl = $scriptProperties['baseUrl'];
     if (!empty($scriptProperties['baseUrlRelative'])) {
-        $baseUrlFull = $modx->getOption('base_url').ltrim($baseUrl,'/');
+        $baseUrlFull = $workingContext->getOption('base_url').ltrim($baseUrl,'/');
         $baseUrlRelative = true;
     } else {
         $baseUrlFull = $baseUrl;

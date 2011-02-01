@@ -53,7 +53,7 @@ MODx.panel.EditFile = function(config) {
             ,layout: 'form'
             ,labelWidth: 150
             ,items: [{
-                xtype: 'textfield'
+                xtype: 'statictextfield'
                 ,fieldLabel: _('name')
                 ,name: 'name'
                 ,id: 'modx-file-name'

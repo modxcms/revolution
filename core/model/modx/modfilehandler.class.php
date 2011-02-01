@@ -310,7 +310,7 @@ abstract class modFileSystemResource {
         $ppath = str_replace('//', '/', $ppath);
         if ($raw) return $ppath;
 
-        $directory = $this->fileHandler->make($ppath);
+        $directory = $this->fileHandler->make($ppath,array(),'modDirectory');
         return $directory;
     }
 }

@@ -30,6 +30,9 @@ $modx->getService('fileHandler','modFileHandler', '', array('context' => $workin
 
 /* create modFile object */
 $root = $modx->fileHandler->getBasePath(false);
+if ($workingContext->getOption('filemanager_path_relative',true)) {
+    $root = $workingContext->getOption('base_path','').$root;
+}
 $file = $modx->fileHandler->make($root.$filename);
 
 /* verify file exists */

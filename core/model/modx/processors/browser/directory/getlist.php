@@ -54,13 +54,13 @@ $dir = $modx->fileHandler->sanitizePath($dir);
 $dir = $modx->fileHandler->postfixSlash($dir);
 if (empty($scriptProperties['basePath'])) {
     $root = $modx->fileHandler->getBasePath();
-    if ($modx->getOption('filemanager_path_relative',null,true)) {
-        $root = $modx->getOption('base_path',$scriptProperties,'').$root;
+    if ($workingContext->getOption('filemanager_path_relative',true)) {
+        $root = $workingContext->getOption('base_path','').$root;
     }
 } else {
     $root = $scriptProperties['basePath'];
     if (!empty($scriptProperties['basePathRelative'])) {
-        $root = $modx->getOption('base_path').$root;
+        $root = $workingContext->getOption('base_path').$root;
     }
 }
 $fullPath = $root.ltrim($dir,'/');
