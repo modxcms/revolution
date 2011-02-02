@@ -10,24 +10,47 @@ if (!$modx->hasPermission('empty_cache')) return $modx->error->failure($modx->le
 /* invoke OnBeforeCacheUpdate event */
 $modx->invokeEvent('OnBeforeCacheUpdate');
 
-$paths = array(
-    'config.cache.php',
-    'sitePublishing.idx.php',
-    'registry/mgr/workspace/',
-    'lexicon/',
-);
-$contexts = $modx->getCollection('modContext');
-foreach ($contexts as $context) {
-    $paths[] = $context->get('key') . '/';
+$paths = array();
+$partitions = array();
+if ($modx->getOption('cache_db', null, false)) {
+    $partitions['db'] = array();
 }
 
-$options = array(
-    'publishing' => 1,
-    'extensions' => array('.cache.php', '.msg.php', '.tpl.php'),
-);
-if ($modx->getOption('cache_db')) $options['objects'] = '*';
+$contextKeys = isset($scriptProperties['contexts']) ? explode(',', $scriptProperties['contexts']) : array();
+if (!empty($contextKeys)) {
+    array_walk($contextKeys, 'trim');
+} else {
+    $contexts = array();
+    $contextCollection = $modx->getCollection('modContext');
+    foreach ($contextCollection as $context) {
+        $contexts[] = $context->get('key');
+    }
+    $contextKeys = array_diff($contexts, array('mgr'));
+}
 
-$results= $modx->cacheManager->clearCache($paths, $options);
+$publishing = isset($scriptProperties['publishing']) ? (boolean) $scriptProperties['publishing'] : true;
+if ($publishing) {
+    $partitions['auto_publish'] = array('contexts' => $contextKeys);
+}
+
+$partitions['resource'] = array('contexts' => $contextKeys);
+
+if (!isset($scriptProperties['elements']) || $scriptProperties['elements']) {
+    $partitions['scripts'] = array();
+    $paths[] = 'elements/';
+}
+
+if (!isset($scriptProperties['lexicons']) || $scriptProperties['lexicons']) {
+    $partitions['lexicon_topics'] = array();
+    $paths[] = 'lexicon/';
+}
+
+if (isset($scriptProperties['paths'])) {
+    $paths = array_merge($paths, array_walk(explode(',', $scriptProperties['paths']), 'trim'));
+}
+
+$results = array();
+$modx->cacheManager->refresh($partitions, $results);
 
 /* invoke OnSiteRefresh event */
 $modx->invokeEvent('OnSiteRefresh',array(

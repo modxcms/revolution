@@ -51,10 +51,12 @@ $modx->invokeEvent('OnDocUnpublished',array(
 /* log manager action */
 $modx->logManagerAction('unpublish_resource','modResource',$resource->get('id'));
 
-/* empty the cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
-
-$resource->removeLock();
+/* empty cache */
+$modx->cacheManager->refresh(array(
+    'db' => array(),
+    'auto_publish' => array('contexts' => $resource->get('context_key')),
+    'context_settings' => array('contexts' => $resource->get('context_key')),
+    'resource' => array('contexts' => $resource->get('context_key')),
+));
 
 return $modx->error->success('',$resource->get(array('id')));

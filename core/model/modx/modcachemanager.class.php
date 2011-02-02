@@ -174,7 +174,8 @@ class modCacheManager extends xPDOCacheManager {
             $eventMap= $this->modx->getEventMap($obj->get('key'));
             if (is_array ($eventMap) && !empty($eventMap)) {
                 $results['eventMap'] = $eventMap;
-                $pluginIds= array ();
+                $pluginIds= array();
+                $plugins= array();
                 $this->modx->loadClass('modScript');
                 foreach ($eventMap as $pluginKeys) {
                     foreach ($pluginKeys as $pluginKey) {
@@ -195,8 +196,8 @@ class modCacheManager extends xPDOCacheManager {
                 }
             }
             if ($this->getOption('cache_context_settings', $options, true)) {
-                $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'default');
-                $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_context_settings_handler', $options);
+                $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
+                $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_context_settings_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
                 $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
                 if (!$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
                     $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache context settings for ' . $obj->get('key') . '.');
@@ -237,8 +238,8 @@ class modCacheManager extends xPDOCacheManager {
             }
         }
         if (!empty($config) && $this->getOption('cache_system_settings', $options, true)) {
-            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_system_settings_key', $options, 'default');
-            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_system_settings_handler', $options);
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_system_settings_key', $options, 'system_settings');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_system_settings_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
             $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set('config', $config, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache system settings.');
@@ -293,8 +294,8 @@ class modCacheManager extends xPDOCacheManager {
                     $results['resource']['_loadedjscripts']= $obj->_loadedjscripts;
                 }
             }
-            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_resource_key', $options, 'default');
-            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_resource_handler', $options);
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_resource_key', $options, 'resource');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_resource_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
             $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (empty($results) || !$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching resource " . $obj->get('id'));
@@ -314,8 +315,8 @@ class modCacheManager extends xPDOCacheManager {
      */
     public function generateLexiconTopic($cacheKey, $entries = array(), $options = array()) {
         if (!empty($entries) && $this->getOption('cache_lexicon_topics', $options, true)) {
-            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_lexicon_topics_key', $options, 'default');
-            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_lexicon_topics_handler', $options);
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_lexicon_topics_key', $options, 'lexicon_topics');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_lexicon_topics_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
             $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $entries, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching lexicon topic " . $cacheKey);
@@ -364,8 +365,8 @@ class modCacheManager extends xPDOCacheManager {
             $results[$action->get('id')] = $objArray;
         }
         if (!empty($results) && $this->getOption('cache_action_map', $options, true)) {
-            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_action_map_key', $options, 'default');
-            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_action_map_handler', $options);
+            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_action_map_key', $options, 'action_map');
+            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_action_map_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
             $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $results, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching action map {$cacheKey}");
@@ -403,8 +404,8 @@ class modCacheManager extends xPDOCacheManager {
             }
             $results = $content;
             if ($this->getOption('cache_scripts', $options, true)) {
-                $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_scripts_key', $options, 'default');
-                $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_scripts_handler', $options);
+                $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_scripts_key', $options, 'scripts');
+                $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_scripts_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
                 $lifetime = $this->getOption(xPDO::OPT_CACHE_EXPIRES) ? intval($this->getOption(xPDO::OPT_CACHE_EXPIRES)) : 0;
                 if (empty($results) || !$this->set($objElement->getScriptCacheKey(), $results, $lifetime, $options)) {
                     $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching script " . $objElement->getScriptCacheKey());
@@ -415,8 +416,131 @@ class modCacheManager extends xPDOCacheManager {
     }
 
     /**
+     * Implements MODx cache refresh process, converting cache partitions to cache providers.
+     */
+    public function refresh(array $providers = array(), array &$results = array()) {
+        if (empty($providers)) {
+            $contexts = array();
+            $query = $this->xpdo->newQuery('modContext');
+            $query->select($this->xpdo->escape('key'));
+            if ($query->prepare() && $query->stmt->execute()) {
+                while ($context = $query->stmt->fetch(PDO::FETCH_COLUMN)) {
+                    $contexts[] = $context;
+                }
+            }
+            $providers = array(
+                'db' => array(),
+                'auto_publish' => array('contexts' => array_diff($contexts, array('mgr'))),
+                'system_settings' => array(),
+                'context_settings' => array('contexts' => $contexts),
+                'resource' => array('contexts' => array_diff($contexts, array('mgr'))),
+                'scripts' => array(),
+                'menu' => array(),
+                'action_map' => array(),
+                'lexicon_topics' => array()
+            );
+        }
+        foreach ($providers as $partition => $partOptions) {
+            switch ($partition) {
+                case 'auto_publish':
+                    $results['auto_publish'] = $this->autoPublish($partOptions);
+                    break;
+                case 'system_settings':
+                    $results['system_settings'] = ($this->generateConfig($partOptions) ? true : false);
+                    break;
+                case 'context_settings':
+                    if (array_key_exists('contexts', $partOptions)) {
+                        $contextResults = array();
+                        foreach ($partOptions['contexts'] as $context) {
+                            $contextResults[$context] = ($this->generateContext($context) ? true : false);
+                        }
+                        $results['context_settings'] = $contextResults;
+                    } else {
+                        $results['context_settings'] = false;
+                    }
+                    break;
+                case 'scripts':
+                    $results[$partition] = $this->clean(array_merge($partOptions, array(xPDO::OPT_CACHE_KEY => $this->xpdo->getOption("cache_{$partition}_key", $partOptions, $partition))));
+                    $this->deleteTree($this->getCachePath() . 'elements/');
+                    break;
+                default:
+                    $results[$partition] = $this->clean(array_merge($partOptions, array(xPDO::OPT_CACHE_KEY => $this->xpdo->getOption("cache_{$partition}_key", $partOptions, $partition))));
+                    break;
+            }
+        }
+        return $results;
+    }
+
+    public function autoPublish(array $options = array()) {
+        $publishingResults= array();
+        /* publish and unpublish resources using pub_date and unpub_date checks */
+        $tblResource= $this->modx->getTableName('modResource');
+        $timeNow= time() + $this->modx->getOption('server_offset_time', null, 0);
+        $publishingResults['published']= $this->modx->exec("UPDATE {$tblResource} SET published=1, publishedon={$timeNow} WHERE pub_date < {$timeNow} AND pub_date > 0");
+        $publishingResults['unpublished']= $this->modx->exec("UPDATE $tblResource SET published=0, publishedon={$timeNow} WHERE unpub_date < {$timeNow} AND unpub_date > 0");
+
+        /* update publish time file */
+        $timesArr= array ();
+        $minpub= 0;
+        $minunpub= 0;
+        $sql= "SELECT MIN(pub_date) FROM {$tblResource} WHERE pub_date > ?";
+        $stmt= $this->modx->prepare($sql);
+        if ($stmt) {
+            $stmt->bindValue(1, time());
+            if ($stmt->execute()) {
+                foreach ($stmt->fetchAll(PDO::FETCH_NUM) as $value) {
+                    $minpub= $value[0];
+                    unset($value);
+                    break;
+                }
+            } else {
+                $publishingResults['errors'][]= $this->modx->lexicon('cache_publish_event_error',array('info' => $stmt->errorInfo()));
+            }
+        }
+        else {
+            $publishingResults['errors'][]= $this->modx->lexicon('cache_publish_event_error',array('info' => $sql));
+        }
+        if ($minpub) $timesArr[]= $minpub;
+
+        $sql= "SELECT MIN(unpub_date) FROM {$tblResource} WHERE unpub_date > ?";
+        $stmt= $this->modx->prepare($sql);
+        if ($stmt) {
+            $stmt->bindValue(1, time());
+            if ($stmt->execute()) {
+                foreach ($stmt->fetchAll(PDO::FETCH_NUM) as $value) {
+                    $minunpub= $value[0];
+                    unset($value);
+                    break;
+                }
+            } else {
+                $publishingResults['errors'][]= $this->modx->lexicon('cache_unpublish_event_error',array('info' => $stmt->errorInfo()));
+            }
+        } else {
+            $publishingResults['errors'][]= $this->modx->lexicon('cache_unpublish_event_error',array('info' => $sql));
+        }
+        if ($minunpub) $timesArr[]= $minunpub;
+
+        if (count($timesArr) > 0) {
+            $nextevent= min($timesArr);
+        } else {
+            $nextevent= 0;
+        }
+
+        /* cache the time of the next auto_publish event */
+        $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_auto_publish_key', $options, 'auto_publish');
+        $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_auto_publish_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+        if (!$this->set('auto_publish', $nextevent, 0, $options)) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching time of next auto publishing event");
+            $publishingResults['errors'][]= $this->modx->lexicon('cache_sitepublishing_file_error');
+        }
+
+        return $publishingResults;
+    }
+
+    /**
      * Clear part or all of the MODx cache.
      *
+     * @deprecated Use refresh()
      * @param array $paths An optional array of paths, relative to the cache
      * path, to be deleted.
      * @param array $options An optional associative array of cache clearing options: <ul>
@@ -451,7 +575,7 @@ class modCacheManager extends xPDOCacheManager {
             $abspath= $this->modx->getOption(xPDO::OPT_CACHE_PATH) . $path;
             if (file_exists($abspath)) {
                 if (is_dir($abspath)) {
-                    $deleted= $this->deleteTree($abspath, false, true, $extensions);
+                    $deleted= $this->deleteTree($abspath, array('deleteTop' => false, 'skipDirs' => false, 'extensions' => $extensions));
                 } else {
                     if (unlink($abspath)) {
                         $deleted= array($path);
@@ -465,84 +589,8 @@ class modCacheManager extends xPDOCacheManager {
         $results['deleted_files']= $delFiles;
         $results['deleted_files_count']= count($delFiles);
 
-        $publishingResults= array();
         if (isset($options['publishing']) && $options['publishing']) {
-            /* publish and unpublish resources using pub_date and unpub_date checks */
-            $rows_pub = $this->modx->getCollection('modResource',array(
-                'pub_date:!=' => 0,
-                'pub_date:<' => time(),
-            ));
-            foreach ($rows_pub as $r) {
-                $r->set('published',1);
-                $r->set('pub_date',0);
-                $r->save();
-            }
-            $rows_unpub = $this->modx->getCollection('modResource',array(
-                'unpub_date:!=' => 0,
-                'unpub_date:<' => time(),
-            ));
-            foreach ($rows_unpub as $r) {
-                $r->set('published',0);
-                $r->set('unpub_date',0);
-                $r->save();
-            }
-            $publishingResults['published']= count($rows_pub);
-            $publishingResults['unpublished']= count($rows_unpub);
-
-            /* update publish time file */
-            $timesArr= array ();
-            $minpub= 0;
-            $minunpub= 0;
-            $sql= "SELECT MIN(`pub_date`) FROM " . $this->modx->getTableName('modResource') . " WHERE `pub_date` > ?";
-            $stmt= $this->modx->prepare($sql);
-            if ($stmt) {
-                $stmt->bindValue(1, time());
-                if ($stmt->execute()) {
-                    foreach ($stmt->fetchAll(PDO::FETCH_NUM) as $value) {
-                        $minpub= $value[0];
-                        unset($value);
-                        break;
-                    }
-                } else {
-                    $publishingResults['errors'][]= $this->modx->lexicon('cache_publish_event_error',array('info' => $stmt->errorInfo()));
-                }
-            }
-            else {
-                $publishingResults['errors'][]= $this->modx->lexicon('cache_publish_event_error',array('info' => $sql));
-            }
-            if ($minpub) $timesArr[]= $minpub;
-
-            $sql= "SELECT MIN(`unpub_date`) FROM " . $this->modx->getTableName('modResource') . " WHERE `unpub_date` > ?";
-            $stmt= $this->modx->prepare($sql);
-            if ($stmt) {
-                $stmt->bindValue(1, time());
-                if ($stmt->execute()) {
-                    foreach ($stmt->fetchAll(PDO::FETCH_NUM) as $value) {
-                        $minunpub= $value[0];
-                        unset($value);
-                        break;
-                    }
-                } else {
-                    $publishingResults['errors'][]= $this->modx->lexicon('cache_unpublish_event_error',array('info' => $stmt->errorInfo()));
-                }
-            } else {
-                $publishingResults['errors'][]= $this->modx->lexicon('cache_unpublish_event_error',array('info' => $sql));
-            }
-            if ($minunpub) $timesArr[]= $minunpub;
-
-            if (count($timesArr) > 0) {
-                $nextevent= min($timesArr);
-            } else {
-                $nextevent= "0";
-            }
-
-            /* write the file */
-            $filename= $this->modx->getOption(xPDO::OPT_CACHE_PATH) . 'sitePublishing.idx.php';
-            $somecontent= "<?php \$cacheRefreshTime={$nextevent};";
-            if (!$this->writeFile($filename, $somecontent)) {
-                $publishingResults['errors'][]= $this->modx->lexicon('cache_sitepublishing_file_error');
-            }
-            $results['publishing']= $publishingResults;
+           $results['publishing']= $this->autoPublish($options);
         }
 
         /* invoke OnCacheUpdate event */

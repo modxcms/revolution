@@ -450,10 +450,7 @@ class modInstall {
         $modx = $this->_modx($errors);
         if (is_object($modx) && $modx instanceof modX) {
             if ($modx->getCacheManager()) {
-                $modx->cacheManager->clearCache(array(), array(
-                    'objects' => '*',
-                    'publishing' => 1
-                ));
+                $modx->cacheManager->refresh();
             }
         }
         return $errors;

@@ -40,7 +40,6 @@ $modx->invokeEvent('OnPluginFormDelete',array(
 $modx->logManagerAction('plugin_delete','modPlugin',$plugin->get('id'));
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+$modx->cacheManager->refresh();
 
 return $modx->error->success();

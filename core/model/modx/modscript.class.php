@@ -99,7 +99,11 @@ class modScript extends modElement {
         $includeFilename = $this->xpdo->getCachePath() . $this->getScriptCacheKey() . '.include.cache.php';
         $result = file_exists($includeFilename);
         if (!$result) {
-            if (!$script= $this->xpdo->cacheManager->get($this->getScriptCacheKey())) {
+            $script= $this->xpdo->cacheManager->get($this->getScriptCacheKey(), array(
+                xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_scripts_key', null, 'scripts'),
+                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_scripts_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER))
+            ));
+            if (!$script) {
                 $script= $this->xpdo->cacheManager->generateScript($this);
             }
             if (!empty($script)) {

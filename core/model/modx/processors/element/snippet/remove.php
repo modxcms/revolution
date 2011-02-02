@@ -40,7 +40,6 @@ $modx->invokeEvent('OnSnipFormDelete',array(
 $modx->logManagerAction('snippet_delete','modSnippet',$snippet->get('id'));
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+$modx->cacheManager->refresh();
 
 return $modx->error->success('',$snippet->get(array('id','name','description','category','locked')));

@@ -40,7 +40,6 @@ $modx->invokeEvent('OnChunkFormDelete',array(
 $modx->logManagerAction('chunk_delete','modChunk',$chunk->get('id'));
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+$modx->cacheManager->refresh();
 
 return $modx->error->success();

@@ -166,7 +166,7 @@ if (isset($scriptProperties['resource_groups'])) {
             /* prevent adding records for non-existing groups */
             $resourceGroup = $modx->getObject('modResourceGroup',$resourceGroupAccess['id']);
             if (empty($resourceGroup)) continue;
-            
+
             if ($resourceGroupAccess['access']) {
                 $resourceGroupResource = $modx->getObject('modResourceGroupResource',array(
                     'document_group' => $resourceGroupAccess['id'],
@@ -311,21 +311,17 @@ $modx->invokeEvent('OnDocFormSave',array(
 /* log manager action */
 $modx->logManagerAction('save_resource','modResource',$resource->get('id'));
 
+$resource->removeLock();
+
 if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCache'])) {
     /* empty cache */
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache(array (
-            "{$resource->context_key}/resources/",
-            "{$resource->context_key}/context.cache.php",
-        ),
-        array(
-            'objects' => array('modResource', 'modContext', 'modTemplateVarResource'),
-            'publishing' => true
-        )
-    );
+    $modx->cacheManager->refresh(array(
+        'db' => array(),
+        'auto_publish' => array('contexts' => $resource->get('context_key')),
+        'context_settings' => array('contexts' => $resource->get('context_key')),
+        'resource' => array('contexts' => $resource->get('context_key')),
+    ));
 }
-
-$resource->removeLock();
 
 $returnArray = $resource->get(array_diff(array_keys($resource->_fields), array('content','ta','introtext','description','link_attributes','pagetitle','longtitle','menutitle')));
 foreach ($returnArray as $k => $v) {

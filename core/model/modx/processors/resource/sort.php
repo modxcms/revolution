@@ -20,6 +20,7 @@ $modx->invokeEvent('OnResourceBeforeSort',array(
 ));
 
 /* readjust cache */
+$contextsAffected = array();
 $dontChangeParents = array();
 foreach ($nodes as $ar_node) {
     if (!is_array($ar_node) || empty($ar_node['id'])) continue;
@@ -43,9 +44,11 @@ foreach ($nodes as $ar_node) {
         $node->set('parent',$ar_node['parent']);
     }
     $old_context_key = $node->get('context_key');
+    $contextsAffected[$old_context_key] = true;
     if ($old_context_key != $ar_node['context'] && !empty($ar_node['context'])) {
         changeChildContext($node, $ar_node['context']); /* recursively move children to new context */
         $node->set('context_key',$ar_node['context']);
+        $contextsAffected[$ar_node['context']] = true;
         $dontChangeParents[] = $node->get('id'); /* prevent children from reverting back */
     }
     $node->set('menuindex',$ar_node['order']);
@@ -56,9 +59,13 @@ $modx->invokeEvent('OnResourceSort',array(
     'nodes' => &$nodes,
 ));
 
-/* clear cache */
-$cacheManager = $modx->getCacheManager();
-$cacheManager->clearCache();
+/* empty cache */
+$modx->cacheManager->refresh(array(
+    'db' => array(),
+    'auto_publish' => array('contexts' => $contextsAffected),
+    'context_settings' => array('contexts' => $contextsAffected),
+    'resource' => array('contexts' => $contextsAffected),
+));
 
 return $modx->error->success();
 

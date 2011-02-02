@@ -53,8 +53,4 @@ $modx->invokeEvent('OnEmptyTrash',array(
     'ids' => &$ids,
 ));
 
-/* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
-
 return $modx->error->success();

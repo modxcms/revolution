@@ -10,6 +10,7 @@ $database_connection_charset = '{database_connection_charset}';
 $dbase = '{dbase}';
 $table_prefix = '{table_prefix}';
 $database_dsn = '{database_dsn}';
+$config_options = {config_options};
 
 $lastInstallTime = {last_install_time};
 
@@ -45,26 +46,26 @@ if (!defined('MODX_BASE_PATH')) {
     define('MODX_BASE_URL', $modx_base_url);
 }
 if(defined('PHP_SAPI') && (PHP_SAPI == "cli" || PHP_SAPI == "embed")) {
-	$isSecureRequest = false;
+    $isSecureRequest = false;
 } else {
-	$isSecureRequest = ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['SERVER_PORT'] == $https_port);
+    $isSecureRequest = ((isset ($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') || $_SERVER['SERVER_PORT'] == $https_port);
 }
 if (!defined('MODX_URL_SCHEME')) {
     $url_scheme=  $isSecureRequest ? 'https://' : 'http://';
     define('MODX_URL_SCHEME', $url_scheme);
 }
 if (!defined('MODX_HTTP_HOST')) {
-	if(defined('PHP_SAPI') && (PHP_SAPI == "cli" || PHP_SAPI == "embed")) {
-		$http_host='{http_host}';
-		define('MODX_HTTP_HOST', $http_host);
-	} else {
-		$http_host= $_SERVER['HTTP_HOST'];
-		if ($_SERVER['SERVER_PORT'] != 80) {
-			$http_host= str_replace(':' . $_SERVER['SERVER_PORT'], '', $http_host); // remove port from HTTP_HOST
-		}
-		$http_host .= ($_SERVER['SERVER_PORT'] == 80 || $isSecureRequest) ? '' : ':' . $_SERVER['SERVER_PORT'];
-		define('MODX_HTTP_HOST', $http_host);
-	}
+    if(defined('PHP_SAPI') && (PHP_SAPI == "cli" || PHP_SAPI == "embed")) {
+        $http_host='{http_host}';
+        define('MODX_HTTP_HOST', $http_host);
+    } else {
+        $http_host= $_SERVER['HTTP_HOST'];
+        if ($_SERVER['SERVER_PORT'] != 80) {
+            $http_host= str_replace(':' . $_SERVER['SERVER_PORT'], '', $http_host); // remove port from HTTP_HOST
+        }
+        $http_host .= ($_SERVER['SERVER_PORT'] == 80 || $isSecureRequest) ? '' : ':' . $_SERVER['SERVER_PORT'];
+        define('MODX_HTTP_HOST', $http_host);
+    }
 }
 if (!defined('MODX_SITE_URL')) {
     $site_url= $url_scheme . $http_host . MODX_BASE_URL;

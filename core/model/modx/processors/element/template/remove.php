@@ -66,7 +66,6 @@ $modx->invokeEvent('OnTempFormDelete',array(
 $modx->logManagerAction('template_delete','modTemplate',$template->get('id'));
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+$modx->cacheManager->refresh();
 
 return $modx->error->success('',$template->get(array_diff(array_keys($template->_fields), array('content'))));

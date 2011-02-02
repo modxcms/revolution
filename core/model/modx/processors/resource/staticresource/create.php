@@ -103,19 +103,16 @@ $modx->invokeEvent('OnDocFormSave',array(
 /* log manager action */
 $modx->logManagerAction('save_resource', 'modStaticResource', $resource->get('id'));
 
+$resource->removeLock();
+
 if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCache'])) {
     /* empty cache */
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache(array (
-            "{$resource->context_key}/",
-        ),
-        array(
-            'objects' => array('modResource', 'modContext', 'modTemplateVarResource'),
-            'publishing' => true
-        )
-    );
+    $modx->cacheManager->refresh(array(
+        'db' => array(),
+        'auto_publish' => array('contexts' => $resource->get('context_key')),
+        'context_settings' => array('contexts' => $resource->get('context_key')),
+        'resource' => array('contexts' => $resource->get('context_key')),
+    ));
 }
-
-$resource->removeLock();
 
 return $modx->error->success('', array('id' => $resource->get('id')));

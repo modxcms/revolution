@@ -188,9 +188,7 @@ $modx->logManagerAction('tv_create','modTemplateVar',$tv->get('id'));
 
 /* empty cache */
 if (!empty($scriptProperties['clearCache'])) {
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache();
+    $modx->cacheManager->refresh();
 }
-
 
 return $modx->error->success('',$tv->get(array('id')));

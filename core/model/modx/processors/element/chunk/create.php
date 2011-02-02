@@ -100,7 +100,8 @@ $modx->invokeEvent('OnChunkFormSave',array(
 $modx->logManagerAction('chunk_create','modChunk',$chunk->get('id'));
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+if (!empty($scriptProperties['clearCache'])) {
+    $modx->cacheManager->refresh();
+}
 
 return $modx->error->success('',$chunk->get(array('id', 'name', 'description', 'locked', 'category')));

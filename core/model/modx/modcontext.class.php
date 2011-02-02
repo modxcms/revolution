@@ -42,7 +42,10 @@ class modContext extends modAccessibleObject {
         if ($this->config === null || $regenerate) {
             if ($this->xpdo->getCacheManager()) {
                 $context = array();
-                if ($regenerate || !($context = $this->xpdo->cacheManager->get($this->getCacheKey()))) {
+                if ($regenerate || !($context = $this->xpdo->cacheManager->get($this->getCacheKey(), array(
+                    xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_context_settings_key', null, 'context_settings'),
+                    xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_context_settings_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'cache.xPDOFileCache'))
+                )))) {
                     $context = $this->xpdo->cacheManager->generateContext($this->get('key'));
                 }
                 if (!empty($context)) {
