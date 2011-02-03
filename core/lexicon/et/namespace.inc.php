@@ -19,4 +19,4 @@ $_lang['namespace_remove'] = 'Eemalda Namespace';
 $_lang['namespace_remove_confirm'] = 'Oled kindel, et soovid eemaldada namespace ja kõik sellega seotud sisu?';
 $_lang['namespace_update'] = 'Uuenda Namespace';
 $_lang['namespaces'] = 'Namespace-id';
-$_lang['namespaces_desc'] = 'Namespace-id on globaalsed tunnused pakettidele ja komponentidel, registreerides nende vehicle-d, lexiconi kirjed ja resurssid kõik kokku.';
+$_lang['namespaces_desc'] = 'Namespace-id on globaalsed tunnused pakettidele ja komponentidel, registreerides nende vehicle-d, lexiconi kirjed ja ressurssid kõik kokku.';

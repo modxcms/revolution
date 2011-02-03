@@ -71,6 +71,7 @@ $_lang['filter_by_context'] = 'Filtreeri Context-i järgi..';
 $_lang['filter_by_policy'] = 'Filtreeri Poliisi järgi...';
 $_lang['filter_by_resource_group'] = 'Filtreeri Ressurssi grupi järgi...';
 $_lang['filter_by_category'] = 'Filtreeri Kategooria järgi...';
+$_lang['no_policy_option'] = ' (poliis puudub) ';
 $_lang['resource_group'] = 'Ressurssi Grupp';
 $_lang['resource_group_add'] = 'Lisa Ressurssi Grupp';
 $_lang['resource_group_access_remove'] = 'Eemalda Ressurss grupist';
