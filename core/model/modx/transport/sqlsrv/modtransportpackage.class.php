@@ -35,4 +35,28 @@ class modTransportPackage_sqlsrv extends modTransportPackage {
         $result['collection'] = $modx->getCollection('transport.modTransportPackage',$c);
         return $result;
     }
+
+    public static function listPackageVersions(modX &$modx, $criteria, $limit = 0, $offset = 0) {
+        $result = array('collection' => array(), 'total' => 0);
+        $c = $modx->newQuery('transport.modTransportPackage');
+        $c->select($modx->getSelectColumns('transport.modTransportPackage','modTransportPackage'));
+        $c->select(array('Provider.name AS provider_name'));
+        $c->leftJoin('transport.modTransportProvider','Provider');
+        $c->where($criteria);
+        $result['total'] = $modx->getCount('modTransportPackage',$c);
+        $c->sortby('modTransportPackage.version_major', 'DESC');
+        $c->sortby('modTransportPackage.version_minor', 'DESC');
+        $c->sortby('modTransportPackage.version_patch', 'DESC');
+        $c->sortby("CASE WHEN modTransportPackage.release = '' OR modTransportPackage.release = 'ga' OR modTransportPackage.release = 'pl'
+            THEN 'z'
+            ELSE modTransportPackage.release
+          END",'DESC');
+        $c->sortby('modTransportPackage.release_index', 'DESC');
+        if((int)$limit > 0) {
+            $c->limit((int)$limit, (int)$offset);
+        }
+        $result['collection'] = $modx->getCollection('transport.modTransportPackage',$c);
+        return $result;
+    }
+
 }
