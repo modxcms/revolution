@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3740] Add proxy support to modTransportPackage.class.php
 - [#3693] Fix reversed content-disposition logic on static resources
 - [#3427] Fix issue where User Settings were not respected with filemanager_path/url
 - [#3702] Ensure file/image TVs can have files drag/dropped onto them
