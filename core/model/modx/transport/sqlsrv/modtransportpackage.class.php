@@ -13,17 +13,17 @@ class modTransportPackage_sqlsrv extends modTransportPackage {
             'workspace' => $workspace,
         ));
         $c->where(array(
-            "(SELECT
-                signature
+            "(SELECT TOP 1
+                latestPackage.signature
               FROM {$modx->getTableName('modTransportPackage')} AS latestPackage
               WHERE latestPackage.package_name = modTransportPackage.package_name
               ORDER BY
                  latestPackage.version_major DESC,
                  latestPackage.version_minor DESC,
                  latestPackage.version_patch DESC,
-                 CASE WHEN release = '' OR release = 'ga' OR release = 'pl' THEN 'z' ELSE release END DESC,
+                 CASE WHEN latestPackage.release = '' OR latestPackage.release = 'ga' OR latestPackage.release = 'pl' THEN 'z' ELSE latestPackage.release END DESC,
                  latestPackage.release_index DESC
-              GROUP BY latestPackage.signature) = modTransportPackage.signature",
+              ) = modTransportPackage.signature",
         ));
         $result['total'] = $modx->getCount('modTransportPackage',$c);
         $c->select(array(
