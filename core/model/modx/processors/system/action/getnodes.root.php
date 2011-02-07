@@ -13,7 +13,7 @@ $c->select(array(
     'COUNT('.$modx->getSelectColumns('modAction','Actions','',array('id')).') AS '.$modx->escape('actionCount'),
 ));
 $c->leftJoin('modAction','Actions');
-$nameField = $modx->getSelectColumns('modNamespace','modNamespace','',array('name'));
+$nameField = $modx->getSelectColumns('modNamespace','modNamespace','',array('name', 'path'));
 $c->sortby($nameField,'ASC');
 $c->groupby($nameField);
 $namespaces = $modx->getIterator('modNamespace',$c);
