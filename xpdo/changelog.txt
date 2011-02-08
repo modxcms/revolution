@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Fix db cache methods to be called with proper options
 - Add xPDOCacheManager->refresh() to empty all active cache providers
 - Fix limit with sortby functionality for sqlsrv
 - Fix xPDO->literal() and add missing xPDO->$_quoteChar
