@@ -77,11 +77,16 @@ function parsePHPModules() {
 
 $pi = phpinfo_array(INFO_GENERAL);
 $m = parsePHPModules();
-if (!empty($m['mysql'])) $pi = array_merge($pi,array('mysql' => $m['mysql']));
-if (!empty($m['mysqlnd'])) $pi = array_merge($pi,array('pdo' => $m['mysqlnd']));
+$dbtype_mysql = $modx->config['dbtype'] == 'mysql';
+$dbtype_sqlsrv = $modx->config['dbtype'] == 'sqlsrv';
+if ($dbtype_mysql && !empty($m['mysql'])) $pi = array_merge($pi,array('mysql' => $m['mysql']));
+if ($dbtype_mysql && !empty($m['mysqlnd'])) $pi = array_merge($pi,array('pdo' => $m['mysqlnd']));
+if ($dbtype_sqlsrv && !empty($m['sqlsrv'])) $pi = array_merge($pi,array('sqlsrv' => $m['sqlsrv']));
 if (!empty($m['PDO'])) $pi = array_merge($pi,array('pdo' => $m['PDO']));
-if (!empty($m['pdo_mysql'])) $pi = array_merge($pi,array('pdo_mysql' => $m['pdo_mysql']));
+if ($dbtype_mysql && !empty($m['pdo_mysql'])) $pi = array_merge($pi,array('pdo_mysql' => $m['pdo_mysql']));
+if ($dbtype_sqlsrv && !empty($m['pdo_sqlsrv'])) $pi = array_merge($pi,array('pdo_sqlsrv' => $m['pdo_sqlsrv']));
 if (!empty($m['zip'])) $pi = array_merge($pi,array('zip' => $m['zip']));
+
 $pi = array_merge($pi,phpinfo_array(INFO_CONFIGURATION));
 $modx->smarty->assign('pi',$pi);
 
