@@ -41,7 +41,9 @@ $c->select(array(
 ));
 $c->select('('.$subc->toSql().') AS '.$modx->escape('total_permissions'));
 
-
+if($sort == 'name') {
+    $sort = $modx->escape('TemplateGroup') . '.' . $modx->escape('name');
+}
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $templates = $modx->getCollection('modAccessPolicyTemplate', $c);
