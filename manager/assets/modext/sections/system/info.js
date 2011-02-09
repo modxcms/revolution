@@ -27,7 +27,6 @@ var viewPHPInfo = function() {
 
 MODx.panel.SystemInfo = function(config) {
     config = config || {};
-
     var info = [{
         html: '<p>'+_('sysinfo_desc')+'</p>'
         ,id: 'modx-sysinfo-msg'
@@ -141,7 +140,7 @@ MODx.panel.SystemInfo = function(config) {
             ,bodyStyle: 'padding: 15px;'
             ,id: 'modx-sysinfo-dbtables'
             ,items: [{
-                html: '<p>'+_('db_info')+'</p>'
+                html: '<p>'+_('db_info_' + MODx.config.dbtype)+'</p>'
                 ,id: 'modx-sysinfo-dbtables-msg'
                 ,border: false
             },{

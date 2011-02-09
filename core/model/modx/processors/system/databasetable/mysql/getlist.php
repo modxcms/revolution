@@ -1,4 +1,14 @@
 <?php
+/**
+ * Gets a list of database tables
+ *
+ * MySQL-specific queries and results
+ *
+ * @package modx
+ * @subpackage processors.system.databasetable
+ */
+if (!$modx->hasPermission('database')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
 $c = new xPDOCriteria($modx, 'SHOW TABLE STATUS FROM '.$modx->escape($modx->getOption('dbname')));
 $c->stmt->execute();
 $dt = array();

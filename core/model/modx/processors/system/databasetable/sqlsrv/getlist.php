@@ -1,5 +1,15 @@
 <?php
-$c = new xPDOCriteria($modx, "select [name] from sys.Tables where [type] = 'U'");
+/**
+ * Gets a list of database tables
+ *
+ * SqlSrv-specific queries and results
+ *
+ * @package modx
+ * @subpackage processors.system.databasetable
+ */
+if (!$modx->hasPermission('database')) return $modx->error->failure($modx->lexicon('permission_denied'));
+
+$c = new xPDOCriteria($modx, "select [name] from sys.Tables where [type] = 'U' ORDER BY [name]");
 $c->stmt->execute();
 $table_names = $c->stmt->fetchAll(PDO::FETCH_COLUMN);
 

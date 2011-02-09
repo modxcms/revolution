@@ -9,7 +9,7 @@ if (!$modx->hasPermission('database')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('system_info');
 
 $dt = array();
-$dbtype_processor = dirname(__FILE__) . '/' . $modx->config['dbtype'] . 'getlist.php';
+$dbtype_processor = dirname(__FILE__) . '/' . $modx->config['dbtype'] . '/getlist.php';
 if(file_exists($dbtype_processor)) {
     include $dbtype_processor;
 }
