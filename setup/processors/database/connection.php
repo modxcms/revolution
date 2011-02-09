@@ -8,6 +8,7 @@ unset($settings['action']);
 $install->settings->store($settings);
 $mode = $install->settings->get('installmode');
 
+$install->loadDriver();
 /* PDO for driver is installed */
 //if (!$install->driver->verifyExtension()) {
 //    $this->error->failure($install->lexicon($install->settings->get('database_type').'_err_ext'));
