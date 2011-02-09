@@ -91,7 +91,7 @@ $pi = array_merge($pi,phpinfo_array(INFO_CONFIGURATION));
 $modx->smarty->assign('pi',$pi);
 
 /* register JS scripts */
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.databasetables.js');
+$modx->regClientStartupScript($modx->getOption('manager_url')."assets/modext/widgets/system/{$modx->config['dbtype']}/modx.grid.databasetables.js");
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.active.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/system/info.js');
 $modx->regClientStartupHTMLBlock('<script type="text/javascript">
