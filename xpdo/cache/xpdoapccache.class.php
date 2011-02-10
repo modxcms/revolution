@@ -81,6 +81,13 @@ class xPDOAPCCache extends xPDOCache {
     }
 
     public function flush($options= array()) {
-        return apc_clear_cache('user');
+        $flushed = false;
+        if (class_exists('APCIterator', true) && $this->getOption('flush_by_key', $options, true) && !empty($this->key)) {
+            $iterator = new APCIterator('user', '/^' . $this->key . '\//', APC_ITER_KEY);
+            $flushed = apc_delete($iterator);
+        } else {
+            $flushed = apc_clear_cache('user');
+        }
+        return $flushed;
     }
 }
