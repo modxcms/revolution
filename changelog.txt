@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Fix xPDOFileCache->delete() and invalid calls to cacheManager->deleteTree()
+- Use APCIterator to support per instance flush()'ing in xPDOAPCCache
 - Prefix all cache keys with provider key
 - Fix db cache methods to be called with proper options
 - Add xPDOCacheManager->refresh() to empty all active cache providers
