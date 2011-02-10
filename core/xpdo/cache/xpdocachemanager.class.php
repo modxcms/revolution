@@ -652,6 +652,30 @@ class xPDOCacheManager {
     }
 
     /**
+     * Refresh specific or all cache providers.
+     *
+     * The default behavior is to call clean() with the provided options
+     *
+     * @param array $providers An associative array with keys representing the cache provider key
+     * and the value an array of options.
+     * @param array &$results An associative array for collecting results for each provider.
+     * @return array An array of results for each provider that is refreshed.
+     */
+    public function refresh(array $providers = array(), array &$results = array()) {
+        if (empty($providers)) {
+            foreach ($this->caches as $cacheKey => $cache) {
+                $providers[$cacheKey] = array();
+            }
+        }
+        foreach ($providers as $key => $options) {
+            if (array_key_exists($key, $this->caches) && !array_key_exists($key, $results)) {
+                $results[$key] = $this->clean(array_merge($options, array(xPDO::OPT_CACHE_KEY => $key)));
+            }
+        }
+        return (array_search(false, $results, true) === false);
+    }
+
+    /**
      * Escapes all single quotes in a string
      *
      * @access public
@@ -740,7 +764,7 @@ abstract class xPDOCache {
     public function getCacheKey($key, $options = array()) {
         $prefix = $this->getOption('cache_prefix', $options);
         if (!empty($prefix)) $key = $prefix . $key;
-        return $key;
+        return $this->key . '/' . $key;
     }
 
     /**
@@ -878,9 +902,9 @@ class xPDOFileCache extends xPDOCache {
         $deleted= false;
         $cacheKey= $this->getCacheKey($key, array_merge($options, array('cache_ext' => '')));
         if (file_exists($cacheKey) && is_dir($cacheKey)) {
-            $deleted= $this->xpdo->cacheManager->deleteTree($cacheKey, false, true);
+            $deleted= $this->xpdo->cacheManager->deleteTree($cacheKey, array_merge(array('deleteTop' => false, 'skipDirs' => false, 'extensions' => array('.cache.php')), $options));
         } else {
-            $cacheKey.= $this->getOption('cache_ext', $options, '.cache.php');
+            $cacheKey= $this->getCacheKey($key, $options);
             if (file_exists($cacheKey)) {
                 $deleted= @ unlink($cacheKey);
             }
@@ -906,6 +930,6 @@ class xPDOFileCache extends xPDOCache {
 
     public function flush($options= array()) {
         $cacheKey= $this->getCacheKey('', array_merge($options, array('cache_ext' => '')));
-        return $this->xpdo->cacheManager->deleteTree($cacheKey, false, true);
+        return $this->xpdo->cacheManager->deleteTree($cacheKey, array_merge(array('deleteTop' => false, 'skipDirs' => false, 'extensions' => array('.cache.php')), $options));
     }
 }

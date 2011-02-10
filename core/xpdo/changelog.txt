@@ -1,6 +1,16 @@
 This file shows the changes in this release of xPDO.
 
+- Fix xPDOFileCache->delete() and invalid calls to cacheManager->deleteTree()
+- Use APCIterator to support per instance flush()'ing in xPDOAPCCache
+- Prefix all cache keys with provider key
+- Fix db cache methods to be called with proper options
+- Add xPDOCacheManager->refresh() to empty all active cache providers
+- Fix limit with sortby functionality for sqlsrv
+- Fix xPDO->literal() and add missing xPDO->$_quoteChar
+- Fix date/time issues (sqlsrv)
+
 xPDO 2.0.1-pl (December 27, 2010)
+====================================
 - [#2927] Add ENGINE option to xPDOManager_mysql->createObjectContainer()
 - Allow columns with explicit AS, ., or ( to not be escaped
 - Override xPDOQuery->parseConditions() for sqlsrv
