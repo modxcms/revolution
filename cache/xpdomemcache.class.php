@@ -91,9 +91,10 @@ class xPDOMemCache extends xPDOCache {
     }
 
     public function delete($key, $options= array()) {
-        $deleted = false;
         if (!isset($options['multiple_object_delete']) || empty($options['multiple_object_delete'])) {
             $deleted= $this->memcache->delete($this->getCacheKey($key));
+        } else {
+            $deleted= $this->flush($options);
         }
         return $deleted;
     }
