@@ -173,7 +173,7 @@ switch ($node[0]) {
             $c->select('modElementPropertySet.*, '.$alias.'.*');
             $c->innerJoin($class,$alias,array(
                 'modElementPropertySet.element = '.$alias.'.id',
-                'modElementPropertySet.element_class = "'.$class.'"',
+                'modElementPropertySet.element_class' => $class,
                 'modElementPropertySet.property_set' => $node[1],
             ));
             $uk = ($class == 'modTemplate') ? 'templatename' : 'name';
