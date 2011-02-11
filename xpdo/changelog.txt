@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Implement multiple_object_delete support in xPDOAPCCache->delete()
 - Return boolean from xPDOFileCache->delete() and ->flush()
 - Fix xPDOFileCache->delete() and invalid calls to cacheManager->deleteTree()
 - Use APCIterator to support per instance flush()'ing in xPDOAPCCache
