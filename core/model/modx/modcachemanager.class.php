@@ -429,12 +429,13 @@ class modCacheManager extends xPDOCacheManager {
                 }
             }
             $providers = array(
-                'db' => array(),
                 'auto_publish' => array('contexts' => array_diff($contexts, array('mgr'))),
                 'system_settings' => array(),
                 'context_settings' => array('contexts' => $contexts),
-                'resource' => array('contexts' => array_diff($contexts, array('mgr'))),
+                'db' => array(),
                 'scripts' => array(),
+                'default' => array(),
+                'resource' => array('contexts' => array_diff($contexts, array('mgr'))),
                 'menu' => array(),
                 'action_map' => array(),
                 'lexicon_topics' => array()
