@@ -91,12 +91,12 @@ class modScript extends modElement {
     }
 
     /**
-     * Loads and evaluates the script, returing the result.
+     * Loads and evaluates the script, returning the result.
      *
-     * @return mixed The result of the script.
+     * @return boolean True if the result of the script is not false.
      */
     public function loadScript() {
-        $includeFilename = $this->xpdo->getCachePath() . $this->getScriptCacheKey() . '.include.cache.php';
+        $includeFilename = $this->xpdo->getCachePath() . 'includes/' . $this->getScriptCacheKey() . '.include.cache.php';
         $result = file_exists($includeFilename);
         if (!$result) {
             $script= $this->xpdo->cacheManager->get($this->getScriptCacheKey(), array(

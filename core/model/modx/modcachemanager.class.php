@@ -460,8 +460,9 @@ class modCacheManager extends xPDOCacheManager {
                     }
                     break;
                 case 'scripts':
+                    /* clean the configurable source cache and remove the include files */
                     $results[$partition] = $this->clean(array_merge($partOptions, array(xPDO::OPT_CACHE_KEY => $this->xpdo->getOption("cache_{$partition}_key", $partOptions, $partition))));
-                    $this->deleteTree($this->getCachePath() . 'elements/');
+                    $this->deleteTree($this->getCachePath() . 'includes/');
                     break;
                 default:
                     $results[$partition] = $this->clean(array_merge($partOptions, array(xPDO::OPT_CACHE_KEY => $this->xpdo->getOption("cache_{$partition}_key", $partOptions, $partition))));
