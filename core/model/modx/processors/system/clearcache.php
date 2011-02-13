@@ -21,9 +21,10 @@ if (!empty($contextKeys)) {
     array_walk($contextKeys, 'trim');
 } else {
     $contexts = array();
-    $contextCollection = $modx->getCollection('modContext');
-    foreach ($contextCollection as $context) {
-        $contexts[] = $context->get('key');
+    $query = $modx->newQuery('modContext');
+    $query->select($modx->escape('key'));
+    if ($query->prepare() && $query->stmt->execute()) {
+        $contexts = $query->stmt->fetchAll(PDO::FETCH_COLUMN);
     }
     $contextKeys = array_diff($contexts, array('mgr'));
 }
