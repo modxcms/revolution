@@ -163,7 +163,6 @@ class modCacheManager extends xPDOCacheManager {
                         continue;
                     }
                     $results['aliasMap'][$resPath . $resAlias]= $r->id;
-                    $results['aliasListing']["{$resPath}{$resAlias}"]= (string) $r->id;
                 }
             }
 
