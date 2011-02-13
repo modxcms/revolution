@@ -250,7 +250,7 @@ class modCacheManager extends xPDOCacheManager {
         if (!empty($config) && $this->getOption('cache_system_settings', $options, true)) {
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_system_settings_key', $options, 'system_settings');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_system_settings_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-            $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+            $lifetime = intval($this->getOption('cache_system_setting_expires', $options, 0));
             if (!$this->set('config', $config, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache system settings.');
             }
@@ -306,7 +306,7 @@ class modCacheManager extends xPDOCacheManager {
             }
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_resource_key', $options, 'resource');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_resource_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-            $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+            $lifetime = intval($this->getOption('cache_resource_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0)));
             if (empty($results) || !$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching resource " . $obj->get('id'));
             }
@@ -327,7 +327,7 @@ class modCacheManager extends xPDOCacheManager {
         if (!empty($entries) && $this->getOption('cache_lexicon_topics', $options, true)) {
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_lexicon_topics_key', $options, 'lexicon_topics');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_lexicon_topics_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-            $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+            $lifetime = intval($this->getOption('cache_lexicon_topics_expires', $options, 0));
             if (!$this->set($cacheKey, $entries, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching lexicon topic " . $cacheKey);
             }
@@ -381,7 +381,7 @@ class modCacheManager extends xPDOCacheManager {
         if (!empty($results) && $this->getOption('cache_action_map', $options, true)) {
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_action_map_key', $options, 'action_map');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_action_map_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-            $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+            $lifetime = intval($this->getOption('cache_action_map_expires', $options, 0));
             if (!$this->set($cacheKey, $results, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching action map {$cacheKey}");
             }
@@ -420,7 +420,7 @@ class modCacheManager extends xPDOCacheManager {
             if ($this->getOption('cache_scripts', $options, true)) {
                 $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_scripts_key', $options, 'scripts');
                 $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_scripts_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-                $lifetime = $this->getOption(xPDO::OPT_CACHE_EXPIRES) ? intval($this->getOption(xPDO::OPT_CACHE_EXPIRES)) : 0;
+                $lifetime = intval($this->getOption('cache_scripts_expires', $options, 0));
                 if (empty($results) || !$this->set($objElement->getScriptCacheKey(), $results, $lifetime, $options)) {
                     $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching script " . $objElement->getScriptCacheKey());
                 }
