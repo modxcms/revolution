@@ -34,44 +34,74 @@ if ($publishing) {
     $partitions['auto_publish'] = array('contexts' => $contextKeys);
 }
 
-$partitions['resource'] = array('contexts' => $contextKeys);
-
 if (!isset($scriptProperties['elements']) || $scriptProperties['elements']) {
     $partitions['scripts'] = array();
-    $paths[] = 'elements/';
 }
+
+$partitions['resource'] = array('contexts' => $contextKeys);
 
 if (!isset($scriptProperties['lexicons']) || $scriptProperties['lexicons']) {
     $partitions['lexicon_topics'] = array();
-    $paths[] = 'lexicon/';
-}
-
-if (isset($scriptProperties['paths'])) {
-    $paths = array_merge($paths, array_walk(explode(',', $scriptProperties['paths']), 'trim'));
 }
 
 $results = array();
 $modx->cacheManager->refresh($partitions, $results);
 
-/* invoke OnSiteRefresh event */
-$modx->invokeEvent('OnSiteRefresh',array(
-    'results' => $results,
-));
-
-$o = '';
-$num_rows_pub = isset($results['publishing']['published']) ? $results['publishing']['published'] : 0;
-$num_rows_unpub = isset($results['publishing']['unpublished']) ? $results['publishing']['unpublished'] : 0;
-
-sleep(1);
-$modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('refresh_published',array( 'num' => $num_rows_pub )));
-$modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('refresh_unpublished',array( 'num' => $num_rows_unpub )).'<hr />');
-$modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('cache_files_deleted'));
-if (count($results['deleted_files_count']) > 0) {
-    foreach ($results['deleted_files'] as $file) {
-        $modx->log(modX::LOG_LEVEL_INFO,$file);
+/* deprecated — use a dedicated cache partition rather than specifying paths */
+if (isset($scriptProperties['paths'])) {
+    $paths = array_walk(explode(',', $scriptProperties['paths']), 'trim');
+    if (!empty($paths)) {
+        foreach ($paths as $path) {
+            $fullPath = $modx->cacheManager->getCachePath() . $path;
+            if (is_dir($fullPath)) {
+                $pathResults[$path] = $modx->cacheManager->deleteTree($fullPath);
+            } elseif (is_file($fullPath)) {
+                $pathResults[$path] = @unlink($fullPath);
+            } else {
+                $pathResults[$path] = false;
+            }
+        }
+        $results['paths'] = $pathResults;
     }
 }
 
+/* invoke OnSiteRefresh event */
+$modx->invokeEvent('OnSiteRefresh',array(
+    'results' => $results,
+    'partitions' => $partitions
+));
+
+$o = '';
+sleep(1);
+$result = reset($results);
+$partition = key($results);
+while ($partition && $result) {
+    switch ($partition) {
+        case 'auto_publish':
+            $modx->log(modX::LOG_LEVEL_INFO, $modx->lexicon('refresh_auto_publish'));
+            $modx->log(modX::LOG_LEVEL_INFO, "-> " . $modx->lexicon('refresh_published', array('num' => $result['published'])));
+            $modx->log(modX::LOG_LEVEL_INFO, "-> " . $modx->lexicon('refresh_unpublished', array('num' => $result['unpublished'])));
+            break;
+        case 'paths':
+            $modx->log(modX::LOG_LEVEL_INFO, $modx->lexicon('cache_files_deleted'));
+            foreach ($result as $path => $pathResults) {
+                $modx->log(modX::LOG_LEVEL_INFO, "-> " . $path);
+                foreach ($pathResults as $deleted) {
+                    $modx->log(modX::LOG_LEVEL_INFO, "--> " . $deleted);
+                }
+            }
+            break;
+        default:
+            if (is_bool($result)) {
+                $modx->log(modX::LOG_LEVEL_INFO, $modx->lexicon('refresh_' . $partition) . ': ' . $modx->lexicon('refresh_' . ($result ? 'success' : 'failure')));
+            } elseif (is_array($result)) {
+                $modx->log(modX::LOG_LEVEL_INFO, $modx->lexicon('refresh_' . $partition) . ': ' . print_r($result, true));
+            }
+            break;
+    }
+    $result = next($results);
+    $partition = key($results);
+}
 sleep(1);
 $modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 
