@@ -48,7 +48,7 @@ class modCacheManager extends xPDOCacheManager {
         $results = array();
         $obj= $this->modx->getObject('modContext', $key, true);
         if (is_object($obj) && $obj instanceof modContext && $obj->get('key')) {
-            $contextConfig= $this->modx->config;
+            $contextConfig= $this->modx->_systemConfig;
 
             /* generate the ContextSettings */
             $results['config']= array();
@@ -58,10 +58,9 @@ class modCacheManager extends xPDOCacheManager {
                     $v= $setting->get('value');
                     $matches = array();
                     if (preg_match_all('~\{(.*?)\}~', $v, $matches, PREG_SET_ORDER)) {
-                        $matchValue= '';
                         foreach ($matches as $match) {
-                            if (isset ($this->modx->config["{$match[1]}"])) {
-                                $matchValue= $this->modx->config["{$match[1]}"];
+                            if (array_key_exists("{$match[1]}", $contextConfig)) {
+                                $matchValue= $contextConfig["{$match[1]}"];
                             } else {
                                 $matchValue= '';
                             }
