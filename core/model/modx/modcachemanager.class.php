@@ -473,13 +473,20 @@ class modCacheManager extends xPDOCacheManager {
         return (array_search(false, $results, true) === false);
     }
 
+    /**
+     * Check for and process Resources with pub_date or unpub_date set to now or in past.
+     *
+     * @todo Implement Context-isolated auto-publishing.
+     * @param array $options An array of options for the process.
+     * @return array An array containing published and unpublished Resource counts.
+     */
     public function autoPublish(array $options = array()) {
         $publishingResults= array();
         /* publish and unpublish resources using pub_date and unpub_date checks */
         $tblResource= $this->modx->getTableName('modResource');
         $timeNow= time() + $this->modx->getOption('server_offset_time', null, 0);
-        $publishingResults['published']= $this->modx->exec("UPDATE {$tblResource} SET published=1, publishedon={$timeNow} WHERE pub_date < {$timeNow} AND pub_date > 0");
-        $publishingResults['unpublished']= $this->modx->exec("UPDATE $tblResource SET published=0, publishedon={$timeNow} WHERE unpub_date < {$timeNow} AND unpub_date > 0");
+        $publishingResults['published']= $this->modx->exec("UPDATE {$tblResource} SET published=1, publishedon={$timeNow} WHERE pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
+        $publishingResults['unpublished']= $this->modx->exec("UPDATE $tblResource SET published=0, publishedon={$timeNow} WHERE unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
 
         /* update publish time file */
         $timesArr= array ();
