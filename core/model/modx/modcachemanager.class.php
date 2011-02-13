@@ -181,22 +181,26 @@ class modCacheManager extends xPDOCacheManager {
                             continue;
                         }
                         $pluginIds[$pluginKey]= $pluginKey;
-                        $plugins[$pluginKey]= $this->modx->getObject('modPlugin', intval($pluginKey), true);
                     }
                 }
-                if (!empty ($plugins)) {
-                    foreach ($plugins as $pluginId => $plugin) {
-                        if (!is_object($plugin)) {
-                            continue;
-                        }
-                        $results['pluginCache'][(string) $pluginId]= $plugin->toArray('', true);
+                if (!empty($pluginIds)) {
+                    $pluginQuery = $this->modx->newQuery('modPlugin', array('id:IN' => array_keys($pluginIds)), true);
+                    $pluginQuery->select($this->modx->getSelectColumns('modPlugin', 'modPlugin'));
+                    if ($pluginQuery->prepare() && $pluginQuery->stmt->execute()) {
+                        $plugins= $pluginQuery->stmt->fetchAll(PDO::FETCH_ASSOC);
+                    }
+                }
+                if (!empty($plugins)) {
+                    foreach ($plugins as $plugin) {
+                        $results['pluginCache'][(string) $plugin['id']]= $plugin;
                     }
                 }
             }
             if ($this->getOption('cache_context_settings', $options, true)) {
                 $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
                 $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_context_settings_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-                $lifetime = intval($this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
+                $options['format'] = (integer) $this->getOption('cache_context_settings_format', $options, xPDOCacheManager::CACHE_SERIALIZE);
+                $lifetime = intval($this->getOption('cache_context_settings_expires', $options, 0));
                 if (!$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
                     $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache context settings for ' . $obj->get('key') . '.');
                 }
