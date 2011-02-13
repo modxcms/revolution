@@ -441,7 +441,16 @@ class modCacheManager extends xPDOCacheManager {
                 'lexicon_topics' => array()
             );
         }
+        $cleared = array();
         foreach ($providers as $partition => $partOptions) {
+            $partKey = $this->xpdo->getOption("cache_{$partition}_key", $partOptions, $partition);
+            if (array_search($partKey, $cleared) !== false) {
+                $results[$partition] = false;
+                continue;
+            }
+            $partHandler = $this->xpdo->getOption("cache_{$partition}_handler", $partOptions, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER));
+            if (!is_array($partOptions)) $partOptions = array();
+            $partOptions = array_merge($partOptions, array(xPDO::OPT_CACHE_KEY => $partKey, xPDO::OPT_CACHE_HANDLER => $partHandler));
             switch ($partition) {
                 case 'auto_publish':
                     $results['auto_publish'] = $this->autoPublish($partOptions);
@@ -462,13 +471,14 @@ class modCacheManager extends xPDOCacheManager {
                     break;
                 case 'scripts':
                     /* clean the configurable source cache and remove the include files */
-                    $results[$partition] = $this->clean(array_merge($partOptions, array(xPDO::OPT_CACHE_KEY => $this->xpdo->getOption("cache_{$partition}_key", $partOptions, $partition))));
+                    $results[$partition] = $this->clean($partOptions);
                     $this->deleteTree($this->getCachePath() . 'includes/');
                     break;
                 default:
-                    $results[$partition] = $this->clean(array_merge($partOptions, array(xPDO::OPT_CACHE_KEY => $this->xpdo->getOption("cache_{$partition}_key", $partOptions, $partition))));
+                    $results[$partition] = $this->clean($partOptions);
                     break;
             }
+            $cleared[] = $partKey;
         }
         return (array_search(false, $results, true) === false);
     }
