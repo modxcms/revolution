@@ -470,7 +470,7 @@ class modCacheManager extends xPDOCacheManager {
                     break;
             }
         }
-        return $results;
+        return (array_search(false, $results, true) === false);
     }
 
     public function autoPublish(array $options = array()) {
