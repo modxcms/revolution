@@ -24,21 +24,22 @@ if (!empty($contextKeys)) {
     $query = $modx->newQuery('modContext');
     $query->select($modx->escape('key'));
     if ($query->prepare() && $query->stmt->execute()) {
-        $contexts = $query->stmt->fetchAll(PDO::FETCH_COLUMN);
+        $contextKeys = $query->stmt->fetchAll(PDO::FETCH_COLUMN);
     }
-    $contextKeys = array_diff($contexts, array('mgr'));
 }
 
 $publishing = isset($scriptProperties['publishing']) ? (boolean) $scriptProperties['publishing'] : true;
 if ($publishing) {
-    $partitions['auto_publish'] = array('contexts' => $contextKeys);
+    $partitions['auto_publish'] = array('contexts' => array_diff($contextKeys, array('mgr')));
 }
 
+$partitions['system_settings'] = array();
+$partitions['context_settings'] = array('contexts' => $contextKeys);
 if (!isset($scriptProperties['elements']) || $scriptProperties['elements']) {
     $partitions['scripts'] = array();
 }
 
-$partitions['resource'] = array('contexts' => $contextKeys);
+$partitions['resource'] = array('contexts' => array_diff($contextKeys, array('mgr')));
 
 if (!isset($scriptProperties['lexicons']) || $scriptProperties['lexicons']) {
     $partitions['lexicon_topics'] = array();
