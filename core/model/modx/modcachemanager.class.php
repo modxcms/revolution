@@ -345,34 +345,38 @@ class modCacheManager extends xPDOCacheManager {
     public function generateActionMap($cacheKey, array $options = array()) {
         $results= array();
         $c = $this->modx->newQuery('modAction');
-        $c->select('`modAction`.*, `Namespace`.`name` AS `namespace_name`, `Namespace`.`path` AS `namespace_path`');
+        $c->select(array(
+            $this->modx->getSelectColumns('modAction', 'modAction'),
+            $this->modx->getSelectColumns('modNamespace', 'Namespace', 'namespace_', array('name','path'))
+        ));
         $c->innerJoin('modNamespace','Namespace');
         $c->sortby('namespace','ASC');
         $c->sortby('controller','ASC');
-        $actions = $this->modx->getCollection('modAction',$c);
+        if ($c->prepare() && $c->stmt->execute()) {
+            $actions = $c->stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($actions as $action) {
-            $objArray = $action->toArray('',true);
-            if (empty($objArray['namespace_path']) || $action->get('namespace_name') == 'core') {
-                $objArray['namespace_path'] = $this->modx->getOption('manager_path');
-            }
-
-            if ($action->get('namespace_name') != 'core') {
-                $nsPath = $action->get('namespace_path');
-                if (!empty($nsPath)) {
-                    $nsPath = str_replace(array(
-                        '{core_path}',
-                        '{base_path}',
-                        '{assets_path}',
-                    ),array(
-                        $this->modx->getOption('core_path'),
-                        $this->modx->getOption('base_path'),
-                        $this->modx->getOption('assets_path'),
-                    ),$nsPath);
-                    $objArray['namespace_path'] = $nsPath;
+            foreach ($actions as $action) {
+                if (empty($action['namespace_path']) || $action['namespace_name'] == 'core') {
+                    $action['namespace_path'] = $this->modx->getOption('manager_path');
                 }
+
+                if ($action['namespace_name'] != 'core') {
+                    $nsPath = $action['namespace_path'];
+                    if (!empty($nsPath)) {
+                        $nsPath = str_replace(array(
+                            '{core_path}',
+                            '{base_path}',
+                            '{assets_path}',
+                        ),array(
+                            $this->modx->getOption('core_path'),
+                            $this->modx->getOption('base_path'),
+                            $this->modx->getOption('assets_path'),
+                        ),$nsPath);
+                        $action['namespace_path'] = $nsPath;
+                    }
+                }
+                $results[$action['id']] = $action;
             }
-            $results[$action->get('id')] = $objArray;
         }
         if (!empty($results) && $this->getOption('cache_action_map', $options, true)) {
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_action_map_key', $options, 'action_map');
