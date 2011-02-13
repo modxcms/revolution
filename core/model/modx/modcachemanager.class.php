@@ -103,6 +103,8 @@ class modCacheManager extends xPDOCacheManager {
                 $results['aliasMap']= array ();
                 $results['documentMap']= array ();
                 $containerSuffix= isset ($contextConfig['container_suffix']) ? $contextConfig['container_suffix'] : '';
+                $parentPaths= array();
+                $parentSql= "SELECT {$resourceCols} FROM {$tblResource} r WHERE r.id = :parent AND r.id != r.parent";
                 while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
                     $parentId= isset($r->parent) ? strval($r->parent) : "0";
                     $results['documentMap'][]= array("{$parentId}" => (string) $r->id);
@@ -121,24 +123,30 @@ class modCacheManager extends xPDOCacheManager {
                                 $pathParentId= $parentId;
                                 $parentResources= array ();
                                 $currResource= $r;
-                                $parentSql= "SELECT {$resourceCols} FROM {$tblResource} `r` WHERE `r`.`id` = :parent AND `r`.`id` != `r`.`parent` LIMIT 1";
                                 $hasParent= (boolean) $pathParentId;
                                 if ($hasParent) {
-                                    if ($parentStmt= $this->modx->prepare($parentSql)) {
-                                        $parentStmt->bindParam(':parent', $pathParentId);
-                                        if ($parentStmt->execute()) {
-                                            while ($hasParent && $currResource= $parentStmt->fetch(PDO::FETCH_OBJ)) {
-                                                $parentAlias= $currResource->alias;
-                                                if (empty ($parentAlias))
-                                                    $parentAlias= "{$pathParentId}";
-                                                $parentResources[]= "{$parentAlias}";
-                                                $pathParentId= $currResource->parent;
-                                                $hasParent= ($pathParentId > 0 && $parentStmt->execute());
+                                    if (array_key_exists($parentId, $parentPaths)) {
+                                        $resPath= $parentPaths[$parentId];
+                                    } else {
+                                        if ($parentStmt= $this->modx->prepare($parentSql)) {
+                                            $parentStmt->bindParam(':parent', $pathParentId);
+                                            if ($parentStmt->execute()) {
+                                                while ($hasParent && $currResource= $parentStmt->fetch(PDO::FETCH_OBJ)) {
+                                                    $parentAlias= $currResource->alias;
+                                                    if (empty ($parentAlias)) {
+                                                        $parentAlias= "{$pathParentId}";
+                                                    }
+                                                    $parentResources[]= "{$parentAlias}";
+                                                    $parentPaths[$pathParentId] = implode('/', array_reverse($parentResources));
+                                                    $pathParentId= $currResource->parent;
+                                                    $hasParent= ($pathParentId > 0 && $parentStmt->execute());
+                                                }
                                             }
                                         }
+                                        $resPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
+                                        $parentPaths[$parentId]= $resPath;
                                     }
                                 }
-                                $resPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
                             }
                         } else {
                             $resAlias= $r->id;
