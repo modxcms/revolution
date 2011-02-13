@@ -34,6 +34,7 @@
 class xPDOCacheManager {
     const CACHE_PHP = 0;
     const CACHE_JSON = 1;
+    const CACHE_SERIALIZE = 2;
     const CACHE_DIR = 'objects/';
     const LOG_DIR = 'logs/';
 
@@ -878,11 +879,19 @@ class xPDOFileCache extends xPDOCache {
                 $expireContent= 'if(time() > ' . $expirationTS . '){return null;}';
             }
             $fileName= $this->getCacheKey($key, $options);
-            if (!empty($options['format']) && $options['format'] == xPDOCacheManager::CACHE_JSON) {
-                $content= !is_scalar($var) ? $this->xpdo->toJSON($var) : $var;
-            } else {
-            $content= '<?php ' . $expireContent . ' return ' . var_export($var, true) . ';';
-        }
+            $format = (isset($options['format']) && !empty($options['format'])) ? $options['format'] : xPDOCacheManager::CACHE_PHP;
+            switch ($format) {
+                case xPDOCacheManager::CACHE_SERIALIZE:
+                    $content= '<?php ' . $expireContent . ' return unserialize(' . var_export(serialize($var), true) . ');';
+                    break;
+                case xPDOCacheManager::CACHE_JSON:
+                    $content= !is_scalar($var) ? $this->xpdo->toJSON($var) : $var;
+                    break;
+                case xPDOCacheManager::CACHE_PHP:
+                default:
+                    $content= '<?php ' . $expireContent . ' return ' . var_export($var, true) . ';';
+                    break;
+            }
             $set= $this->xpdo->cacheManager->writeFile($fileName, $content);
         }
         return $set;
