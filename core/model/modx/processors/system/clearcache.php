@@ -20,7 +20,6 @@ $contextKeys = isset($scriptProperties['contexts']) ? explode(',', $scriptProper
 if (!empty($contextKeys)) {
     array_walk($contextKeys, 'trim');
 } else {
-    $contexts = array();
     $query = $modx->newQuery('modContext');
     $query->select($modx->escape('key'));
     if ($query->prepare() && $query->stmt->execute()) {
@@ -82,6 +81,12 @@ while ($partition && $result) {
             $modx->log(modX::LOG_LEVEL_INFO, $modx->lexicon('refresh_auto_publish'));
             $modx->log(modX::LOG_LEVEL_INFO, "-> " . $modx->lexicon('refresh_published', array('num' => $result['published'])));
             $modx->log(modX::LOG_LEVEL_INFO, "-> " . $modx->lexicon('refresh_unpublished', array('num' => $result['unpublished'])));
+            break;
+        case 'context_settings':
+            $modx->log(modX::LOG_LEVEL_INFO, $modx->lexicon('refresh_context_settings'));
+            foreach ($result as $ctxKey => $ctxResult) {
+                $modx->log(modX::LOG_LEVEL_INFO, "-> " . $ctxKey . ": " . $modx->lexicon('refresh_' . ($ctxResult ? 'success' : 'failure')));
+            }
             break;
         case 'paths':
             $modx->log(modX::LOG_LEVEL_INFO, $modx->lexicon('cache_files_deleted'));
