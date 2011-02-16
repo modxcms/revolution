@@ -208,7 +208,7 @@ class xPDOCacheManager {
         if (!file_exists($dirname)) {
             $this->writeTree($dirname, $options);
         }
-        $file= fopen($filename, $mode);
+        $file= @fopen($filename, $mode);
         if ($file) {
             if (flock($file, LOCK_EX | LOCK_NB)) {
                 fseek($file, 0);
@@ -216,7 +216,7 @@ class xPDOCacheManager {
                 $written= fwrite($file, $content);
                 flock($file, LOCK_UN);
             }
-            fclose($file);
+            @fclose($file);
         }
         return ($written !== false);
     }
