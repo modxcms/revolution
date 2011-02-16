@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Add proper cache file locking and format handling
+- Add OPT_CACHE_FORMAT constant to xPDO
 - Add support for CACHE_SERIALIZE format in xPDOFileCache implementation
 - Force flush() for multiple_object_delete option in xPDOMemCache->delete()
 - Implement multiple_object_delete support in xPDOAPCCache->delete()

@@ -103,6 +103,7 @@ class xPDO {
     const OPT_CACHE_DB_EXPIRES = 'cache_db_expires';
     const OPT_CACHE_DB_HANDLER = 'cache_db_handler';
     const OPT_CACHE_EXPIRES = 'cache_expires';
+    const OPT_CACHE_FORMAT = 'cache_format';
     const OPT_CACHE_HANDLER = 'cache_handler';
     const OPT_CACHE_KEY = 'cache_key';
     const OPT_CACHE_PATH = 'cache_path';
@@ -1766,7 +1767,8 @@ class xPDO {
                     $result= $this->cacheManager->get($sig, array(
                         xPDO::OPT_CACHE_KEY => $this->getOption('cache_db_key', $options, 'db'),
                         xPDO::OPT_CACHE_HANDLER => $this->getOption(xPDO::OPT_CACHE_DB_HANDLER, $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options, 'cache.xPDOFileCache')),
-                        'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR)
+                        xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                        'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR),
                     ));
                     if ($result && $this->getOption('cache_db_format', $options, 'php') == 'json') {
                         $result= $this->toJSON($result);
@@ -1846,6 +1848,7 @@ class xPDO {
                                 $removed= $this->cacheManager->delete($fkMeta['class'], array_merge($options, array(
                                     xPDO::OPT_CACHE_KEY => $this->getOption('cache_db_key', $options, 'db'),
                                     xPDO::OPT_CACHE_HANDLER => $this->getOption(xPDO::OPT_CACHE_DB_HANDLER, $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options, 'cache.xPDOFileCache')),
+                                    xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP)),
                                     'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR),
                                     'multiple_object_delete' => true
                                 )));
@@ -1858,6 +1861,7 @@ class xPDO {
                         $cacheOptions = array_merge($options, array(
                             xPDO::OPT_CACHE_KEY => $this->getOption('cache_db_key', $options, 'db'),
                             xPDO::OPT_CACHE_HANDLER => $this->getOption(xPDO::OPT_CACHE_DB_HANDLER, $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options, 'cache.xPDOFileCache')),
+                            xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP)),
                             'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR)
                         ));
                         $result= $this->cacheManager->set($sig, $object, $lifetime, $cacheOptions);
