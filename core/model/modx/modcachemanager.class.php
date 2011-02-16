@@ -33,12 +33,10 @@ class modCacheManager extends xPDOCacheManager {
      * Generates a cache entry for a MODx site Context.
      *
      * Context cache entries can override site configuration settings and are responsible for
-     * loading the various lisitings and maps in the modX class, including documentListing,
-     * documentMap, and eventMap.  It can also be used to setup or transform any other modX
-     * properties.
+     * loading the various listings and maps in the modX class, including resourceMap, aliasMap,
+     * and eventMap.  It can also be used to setup or transform any other modX properties.
      *
-     * @todo Refactor the generation of documentMap, aliasMap, and
-     * resourceListing so it uses less memory/file size.
+     * @todo Further refactor the generation of aliasMap and resourceMap so it uses less memory/file size.
      *
      * @param modContext $obj  The modContext instance to be cached.
      * @param array $options Options for system settings generation.
@@ -72,7 +70,7 @@ class modCacheManager extends xPDOCacheManager {
                 }
             }
 
-            /* generate the documentMap, aliasMap, and resourceListing */
+            /* generate the aliasMap and resourceMap */
             $tblResource= $this->modx->getTableName('modResource');
             $tblContextResource= $this->modx->getTableName('modContextResource');
             $resourceFields= 'id,parent,alias,isfolder,content_type';
@@ -99,18 +97,13 @@ class modCacheManager extends xPDOCacheManager {
             }
             if ($collResources) {
                 $results['resourceMap']= array ();
-                $results['resourceListing']= array ();
                 $results['aliasMap']= array ();
-                $results['documentMap']= array ();
                 $containerSuffix= isset ($contextConfig['container_suffix']) ? $contextConfig['container_suffix'] : '';
                 $parentPaths= array();
                 $parentSql= "SELECT {$resourceCols} FROM {$tblResource} r WHERE r.id = :parent AND r.id != r.parent";
                 while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
                     $parentId= isset($r->parent) ? strval($r->parent) : "0";
-                    $results['documentMap'][]= array("{$parentId}" => (string) $r->id);
                     $results['resourceMap']["{$parentId}"][] = (string) $r->id;
-                    $resourceValues= get_object_vars($r);
-                    $results['resourceListing'][(string) $r->id]= $resourceValues;
                     $resAlias= '';
                     $resPath= '';
                     $contentType= isset ($collContentTypes[$r->content_type]) ? $collContentTypes[$r->content_type] : $collContentTypes['1'];
@@ -162,7 +155,6 @@ class modCacheManager extends xPDOCacheManager {
                     } else {
                         $resAlias= $r->id;
                     }
-                    $results['resourceListing'][(string) $r->id]['path']= $resPath;
                     if (!empty ($resPath)) {
                         $resPath .= '/';
                     }

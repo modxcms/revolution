@@ -230,8 +230,6 @@ class modX extends xPDO {
      * @deprecated 2006-09-15 To be removed in 2.1
      */
     public $Event= null;
-    public $documentMap= null;
-    public $documentListing= null;
     public $documentIdentifier= null;
     public $documentMethod= null;
     public $documentContent= null;
@@ -2752,9 +2750,6 @@ class modX extends xPDO {
             } else {
                 $this->aliasMap= & $this->context->aliasMap;
                 $this->resourceMap= & $this->context->resourceMap;
-                $this->documentMap= & $this->context->documentMap;
-                $this->resourceListing= & $this->context->resourceListing;
-                $this->documentListing= & $this->context->documentListing;
                 $this->eventMap= & $this->context->eventMap;
                 $this->pluginCache= & $this->context->pluginCache;
                 $this->config= array_merge($this->_systemConfig, $this->context->config);

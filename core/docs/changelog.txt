@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3111] Remove resourceListing, documentListing, and documentMap from context cache
 - [#3111] Cache refactoring with proper file locking, partitioning, and multiple format support
 - [#3111] Update xPDO to release 2.1.0-pl for cache improvements
 - [#3740] Add proxy support to modTransportPackage.class.php

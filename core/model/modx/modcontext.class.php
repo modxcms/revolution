@@ -13,17 +13,9 @@ class modContext extends modAccessibleObject {
     public $config= null;
     public $aliasMap= null;
     public $resourceMap= null;
-    public $resourceListing= null;
-    public $documentListing= null;
-    public $documentMap= null;
     public $eventMap= null;
     public $pluginCache= null;
     protected $_cacheKey= '[contextKey]/context';
-
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-        $this->documentListing= & $this->resourceListing;
-    }
 
     /**
      * Prepare a context for use.
@@ -182,7 +174,7 @@ class modContext extends modAccessibleObject {
                         $found= true;
                     }
                 }
-            } elseif (isset($this->resourceListing["{$id}"])) {
+            } elseif (array_search((string) $id, $this->aliasMap, true) !== false) {
                 $found= true;
             }
 
