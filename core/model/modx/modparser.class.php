@@ -952,7 +952,7 @@ class modLinkTag extends modTag {
                 if (!empty($this->_output)) {
                     $qs = '';
                     $context = '';
-                    $scheme = -1;
+                    $scheme = $this->modx->getOption('link_tag_scheme',null,-1);
                     if (is_array($this->_properties) && !empty($this->_properties)) {
                         $qs = array();
                         if (array_key_exists('context', $this->_properties)) {

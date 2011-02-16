@@ -611,6 +611,15 @@ $settings['hidemenu_default']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['link_tag_scheme']= $xpdo->newObject('modSystemSetting');
+$settings['link_tag_scheme']->fromArray(array (
+  'key' => 'link_tag_scheme',
+  'value' => -1,
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);
 $settings['mail_charset']= $xpdo->newObject('modSystemSetting');
 $settings['mail_charset']->fromArray(array (
   'key' => 'mail_charset',

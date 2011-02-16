@@ -208,6 +208,9 @@ $_lang['setting_friendly_urls_err'] = 'Пожалуйста, укажите хо
 $_lang['setting_hidemenu_default'] = 'Не показывать в меню по умолчанию';
 $_lang['setting_hidemenu_default_desc'] = 'Выберите «Да», для того чтобы параметр «Не показывать в меню» был выбран по умолчанию, при создании новых ресурсов .';
 
+$_lang['setting_link_tag_scheme'] = 'Схема генерации URL';
+$_lang['setting_link_tag_scheme_desc'] = 'Схема генерации URL для тега [[~id]]. Возможные значения: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+
 $_lang['setting_mail_charset'] = 'Кодировка';
 $_lang['setting_mail_charset_desc'] = 'Кодировка (по умолчанию) для электронных писем';
 $_lang['setting_mail_encoding'] = 'Формат кодирования';
