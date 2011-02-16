@@ -207,7 +207,7 @@ class modCacheManager extends xPDOCacheManager {
             if ($this->getOption('cache_context_settings', $options, true)) {
                 $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options, 'context_settings');
                 $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_context_settings_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-                $options['format'] = (integer) $this->getOption('cache_context_settings_format', $options, xPDOCacheManager::CACHE_SERIALIZE);
+                $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_context_settings_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
                 $lifetime = intval($this->getOption('cache_context_settings_expires', $options, 0));
                 if (!$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
                     $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache context settings for ' . $obj->get('key') . '.');
@@ -250,6 +250,7 @@ class modCacheManager extends xPDOCacheManager {
         if (!empty($config) && $this->getOption('cache_system_settings', $options, true)) {
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_system_settings_key', $options, 'system_settings');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_system_settings_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_system_settings_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
             $lifetime = intval($this->getOption('cache_system_setting_expires', $options, 0));
             if (!$this->set('config', $config, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not cache system settings.');
@@ -306,6 +307,7 @@ class modCacheManager extends xPDOCacheManager {
             }
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_resource_key', $options, 'resource');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_resource_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_resource_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
             $lifetime = intval($this->getOption('cache_resource_expires', $options, $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0)));
             if (empty($results) || !$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching resource " . $obj->get('id'));
@@ -327,6 +329,7 @@ class modCacheManager extends xPDOCacheManager {
         if (!empty($entries) && $this->getOption('cache_lexicon_topics', $options, true)) {
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_lexicon_topics_key', $options, 'lexicon_topics');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_lexicon_topics_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_lexicon_topics_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
             $lifetime = intval($this->getOption('cache_lexicon_topics_expires', $options, 0));
             if (!$this->set($cacheKey, $entries, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching lexicon topic " . $cacheKey);
@@ -381,6 +384,7 @@ class modCacheManager extends xPDOCacheManager {
         if (!empty($results) && $this->getOption('cache_action_map', $options, true)) {
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_action_map_key', $options, 'action_map');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_action_map_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+            $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_action_map_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
             $lifetime = intval($this->getOption('cache_action_map_expires', $options, 0));
             if (!$this->set($cacheKey, $results, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching action map {$cacheKey}");
@@ -420,6 +424,7 @@ class modCacheManager extends xPDOCacheManager {
             if ($this->getOption('cache_scripts', $options, true)) {
                 $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_scripts_key', $options, 'scripts');
                 $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_scripts_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
+                $options[xPDO::OPT_CACHE_FORMAT] = (integer) $this->getOption('cache_scripts_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
                 $lifetime = intval($this->getOption('cache_scripts_expires', $options, 0));
                 if (empty($results) || !$this->set($objElement->getScriptCacheKey(), $results, $lifetime, $options)) {
                     $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching script " . $objElement->getScriptCacheKey());
@@ -438,9 +443,7 @@ class modCacheManager extends xPDOCacheManager {
             $query = $this->xpdo->newQuery('modContext');
             $query->select($this->xpdo->escape('key'));
             if ($query->prepare() && $query->stmt->execute()) {
-                while ($context = $query->stmt->fetch(PDO::FETCH_COLUMN)) {
-                    $contexts[] = $context;
-                }
+                $contexts = $query->stmt->fetchAll(PDO::FETCH_COLUMN);
             }
             $providers = array(
                 'auto_publish' => array('contexts' => array_diff($contexts, array('mgr'))),

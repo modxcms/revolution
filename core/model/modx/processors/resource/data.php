@@ -67,8 +67,9 @@ if (empty($ra['template_name'])) $ra['template_name'] = $modx->lexicon('empty_te
 /* source */
 $resource->_contextKey= $resource->get('context_key');
 $buffer = $modx->cacheManager->get($resource->getCacheKey(), array(
-    xPDO::OPT_CACHE_KEY => $this->getOption('cache_resource_key', null, 'resource'),
-    xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_resource_handler', null, $this->getOption(xPDO::OPT_CACHE_HANDLER))
+    xPDO::OPT_CACHE_KEY => $modx->getOption('cache_resource_key', null, 'resource'),
+    xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_resource_handler', null, $modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+    xPDO::OPT_CACHE_FORMAT => (integer) $modx->getOption('cache_resource_format', null, $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
 ));
 if ($buffer) {
     $buffer = htmlspecialchars($buffer['resource']['_content']);

@@ -344,6 +344,7 @@ class modX extends xPDO {
             $options = array_merge(
                 array (
                     xPDO::OPT_CACHE_KEY => 'default',
+                    xPDO::OPT_CACHE_HANDLER => 'xPDOFileCache',
                     xPDO::OPT_CACHE_PATH => $cachePath,
                     xPDO::OPT_TABLE_PREFIX => $table_prefix,
                     xPDO::OPT_HYDRATE_FIELDS => true,
@@ -2878,7 +2879,8 @@ class modX extends xPDO {
         $this->getCacheManager();
         $config = $this->cacheManager->get('config', array(
             xPDO::OPT_CACHE_KEY => $this->getOption('cache_system_settings_key', null, 'system_settings'),
-            xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_system_settings_handler', null, $this->getOption(xPDO::OPT_CACHE_HANDLER))
+            xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_system_settings_handler', null, $this->getOption(xPDO::OPT_CACHE_HANDLER)),
+            xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_system_settings_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP))
         ));
         if (empty($config)) {
             $config = $this->cacheManager->generateConfig();

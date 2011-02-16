@@ -181,7 +181,8 @@ class modManagerRequest extends modRequest {
         $cacheKey= $this->modx->context->get('key') . '/actions';
         $map = $this->modx->cacheManager->get($cacheKey, array(
             xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_action_map_key', null, 'action_map'),
-            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_action_map_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER))
+            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_action_map_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+            xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_action_map_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ));
         if (!$map) {
             $map = $this->modx->cacheManager->generateActionMap($cacheKey);
