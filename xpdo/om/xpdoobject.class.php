@@ -937,7 +937,7 @@ class xPDOObject {
                             }
                             break;
                         case 'date' :
-                            if ($dbType == 'int' || $dbType == 'integer' || $dbType == 'INT' || $dbType == 'INTEGER') {
+                            if (preg_match('/int/i', $dbType)) {
                                 $ts= intval($value);
                             } elseif (in_array($value, $this->xpdo->driver->_currentDates)) {
                                 $ts= time();
@@ -2146,7 +2146,7 @@ class xPDOObject {
                 case 'date':
                 case 'datetime':
                 case 'timestamp':
-                    if (strtolower($dbtype) == 'int' || strtolower($dbtype) == 'integer') {
+                    if (preg_match('/int/i', $dbtype)) {
                         $this->_fields[$key] = (integer) $val;
                         $set = true;
                         break;

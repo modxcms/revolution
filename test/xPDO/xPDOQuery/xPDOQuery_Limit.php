@@ -159,6 +159,7 @@ class xPDOQueryLimitTest extends xPDOTestCase {
     public function providerLimitWithSortBy() {
         return array(
             array(3,0,true), /* limit 3, start at 0 */
+            array(3,3,true), /* limit 3, start at 3 */
         );
     }
 

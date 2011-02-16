@@ -28,7 +28,7 @@ $properties['mysql_string_dsn_error']= 'mysql:host= nonesuchhost;dbname=nonesuch
 $properties['mysql_string_username']= '';
 $properties['mysql_string_password']= '';
 $properties['mysql_array_options']= array(
-	xPDO::OPT_CACHE_PATH => $properties['xpdo_test_path'] . 'cache/',
+    xPDO::OPT_CACHE_PATH => $properties['xpdo_test_path'] . 'cache/',
     xPDO::OPT_HYDRATE_FIELDS => true,
     xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
     xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
@@ -42,7 +42,7 @@ $properties['sqlite_string_dsn_error']= 'sqlite:db/';
 $properties['sqlite_string_username']= '';
 $properties['sqlite_string_password']= '';
 $properties['sqlite_array_options']= array(
-	xPDO::OPT_CACHE_PATH => $properties['xpdo_test_path'] . 'cache/',
+    xPDO::OPT_CACHE_PATH => $properties['xpdo_test_path'] . 'cache/',
     xPDO::OPT_HYDRATE_FIELDS => true,
     xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
     xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
@@ -56,10 +56,10 @@ $properties['sqlsrv_string_dsn_error']= 'sqlsrv:server=xyz;123';
 $properties['sqlsrv_string_username']= '';
 $properties['sqlsrv_string_password']= '';
 $properties['sqlsrv_array_options']= array(
-	xPDO::OPT_CACHE_PATH => $properties['xpdo_test_path'] . 'cache/',
-	xPDO::OPT_HYDRATE_FIELDS => true,
-	xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
-	xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
+    xPDO::OPT_CACHE_PATH => $properties['xpdo_test_path'] . 'cache/',
+    xPDO::OPT_HYDRATE_FIELDS => true,
+    xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
+    xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
 );
 $properties['sqlsrv_array_driverOptions']= array(/*PDO::SQLSRV_ATTR_DIRECT_QUERY => false*/);
 
