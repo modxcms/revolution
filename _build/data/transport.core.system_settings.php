@@ -150,18 +150,9 @@ $settings['cache_expires']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
-$settings['cache_json']= $xpdo->newObject('modSystemSetting');
-$settings['cache_json']->fromArray(array (
-  'key' => 'cache_json',
-  'value' => '0',
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'caching',
-  'editedon' => null,
-), '', true, true);
-$settings['cache_json_expires']= $xpdo->newObject('modSystemSetting');
-$settings['cache_json_expires']->fromArray(array (
-  'key' => 'cache_json_expires',
+$settings['cache_format']= $xpdo->newObject('modSystemSetting');
+$settings['cache_format']->fromArray(array (
+  'key' => 'cache_format',
   'value' => '0',
   'xtype' => 'textfield',
   'namespace' => 'core',

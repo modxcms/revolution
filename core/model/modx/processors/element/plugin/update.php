@@ -134,8 +134,7 @@ $modx->logManagerAction('plugin_update','modPlugin',$plugin->get('id'));
 
 /* empty cache */
 if (!empty($scriptProperties['clearCache'])) {
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache();
+    $modx->cacheManager->refresh();
 }
 
 return $modx->error->success('', $plugin->get(array('id', 'name','description','category','locked','disabled')));

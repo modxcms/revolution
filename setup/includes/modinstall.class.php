@@ -120,7 +120,7 @@ class modInstall {
      */
     public function getConfig($mode = 0, $config = array ()) {
         global $database_dsn, $database_type, $database_server, $dbase, $database_user,
-                $database_password, $database_connection_charset, $table_prefix;
+                $database_password, $database_connection_charset, $table_prefix, $config_options;
         if (!is_array($config)) {
             $config = array ();
         }
@@ -162,6 +162,8 @@ class modInstall {
                     $config['processors_path'] = MODX_CORE_PATH.'model/modx/processors/';
                     $config['assets_path'] = MODX_ASSETS_PATH;
                     $config['assets_url'] = MODX_ASSETS_URL;
+
+                    $config_options = !empty($config_options) ? $config_options : array();
                     break;
                 }
 
@@ -176,6 +178,7 @@ class modInstall {
                 $https_port = isset ($_POST['httpsport']) ? $_POST['httpsport'] : '443';
                 $cache_disabled = isset ($_POST['cache_disabled']) ? $_POST['cache_disabled'] : 'false';
                 $site_sessionname = 'SN' . uniqid('');
+                $config_options = array();
                 break;
         }
         $config = array_merge($config,array(
@@ -193,6 +196,7 @@ class modInstall {
             'cache_disabled' => isset ($cache_disabled) && $cache_disabled ? 'true' : 'false',
             'inplace' => isset ($_POST['inplace']) ? 1 : 0,
             'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
+            'config_options' => $config_options,
         ));
         $this->config = array_merge($this->config, $config);
         switch ($this->config['database_type']) {
@@ -450,10 +454,7 @@ class modInstall {
         $modx = $this->_modx($errors);
         if (is_object($modx) && $modx instanceof modX) {
             if ($modx->getCacheManager()) {
-                $modx->cacheManager->clearCache(array(), array(
-                    'objects' => '*',
-                    'publishing' => 1
-                ));
+                $modx->cacheManager->refresh();
             }
         }
         return $errors;
@@ -564,7 +565,11 @@ class modInstall {
                 if ($content) {
                     $replace = array ();
                     while (list ($key, $value) = each($settings)) {
-                        $replace['{' . $key . '}'] = "{$value}";
+                        if (is_scalar($value)) {
+                            $replace['{' . $key . '}'] = "{$value}";
+                        } elseif (is_array($value)) {
+                            $replace['{' . $key . '}'] = var_export($value, true);
+                        }
                     }
                     $content = str_replace(array_keys($replace), array_values($replace), $content);
                     if ($configHandle = @ fopen($configFile, 'wb')) {

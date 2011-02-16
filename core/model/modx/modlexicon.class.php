@@ -218,7 +218,11 @@ class modLexicon {
         $key = $this->getCacheKey($namespace, $topic, $language);
         $enableCache = ($namespace != 'core' && !$this->modx->getOption('cache_noncore_lexicon_topics',null,true)) ? false : true;
 
-        $cached = $this->modx->cacheManager->get($key);
+        $cached = $this->modx->cacheManager->get($key, array(
+            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_lexicon_topics_key', null, 'lexicon_topics'),
+            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_lexicon_topics_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+            xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_lexicon_topics_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+        ));
         if (!$enableCache || $cached == null) {
             $results= false;
 

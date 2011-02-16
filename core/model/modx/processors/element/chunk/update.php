@@ -109,8 +109,7 @@ $modx->logManagerAction('chunk_update','modChunk',$chunk->get('id'));
 
 /* empty cache */
 if (!empty($scriptProperties['clearCache'])) {
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache();
+    $modx->cacheManager->refresh();
 }
 
 return $modx->error->success('',$chunk->get(array('id', 'name', 'description', 'locked', 'category')));

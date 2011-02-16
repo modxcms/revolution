@@ -93,8 +93,7 @@ $modx->logManagerAction('snippet_create','modSnippet',$snippet->get('id'));
 
 /* empty cache */
 if (!empty($scriptProperties['clearCache'])) {
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache();
+    $modx->cacheManager->refresh();
 }
 
 return $modx->error->success('',$snippet->get(array('id','name','description','category','locked')));

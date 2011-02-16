@@ -81,8 +81,12 @@ $modx->invokeEvent('OnResourceUndelete',array(
 $modx->logManagerAction('undelete_resource','modResource',$resource->get('id'));
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+$modx->cacheManager->refresh(array(
+    'db' => array(),
+    'auto_publish' => array('contexts' => $resource->get('context_key')),
+    'context_settings' => array('contexts' => $resource->get('context_key')),
+    'resource' => array('contexts' => $resource->get('context_key')),
+));
 
 $resource->removeLock();
 

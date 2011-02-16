@@ -93,8 +93,11 @@ foreach ($packages as $package) {
     $updates = array('count' => 0);
     if ($package->get('provider') > 0 && $modx->getOption('auto_check_pkg_updates',null,false)) {
         $updateCacheKey = 'mgr/providers/updates/'.$package->get('provider').'/'.$package->get('signature');
-
-        $updates = $modx->cacheManager->get($updateCacheKey);
+        $updateCacheOptions = array(
+            xPDO::OPT_CACHE_KEY => $modx->cacheManager->getOption('cache_packages_key', null, 'packages'),
+            xPDO::OPT_CACHE_HANDLER => $modx->cacheManager->getOption('cache_packages_handler', null, $modx->cacheManager->getOption(xPDO::OPT_CACHE_HANDLER)),
+        );
+        $updates = $modx->cacheManager->get($updateCacheKey, $updateCacheOptions);
         if (empty($updates)) {
             /* cache providers to speed up load time */
             if (!empty($providerCache[$package->get('provider')])) {
@@ -117,7 +120,7 @@ foreach ($packages as $package) {
                     }
                 }
                 $updates = array('count' => count($updates));
-                $modx->cacheManager->set($updateCacheKey,$updates,$updatesCacheExpire);
+                $modx->cacheManager->set($updateCacheKey, $updates, $updatesCacheExpire, $updateCacheOptions);
             }
         }
     }

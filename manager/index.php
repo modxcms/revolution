@@ -50,8 +50,7 @@ if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 }
 
 /* create the modX object */
-if (empty($options) || !is_array($options)) $options = array();
-$modx= new modX('', $options);
+$modx= new modX();
 if (!is_object($modx) || !($modx instanceof modX)) {
     $errorMessage = '<a href="../setup/">MODx not installed. Install now?</a>';
     include MODX_CORE_PATH . 'error/unavailable.include.php';

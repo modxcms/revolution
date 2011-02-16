@@ -147,7 +147,12 @@ class modRequest {
         }
         $fromCache = false;
         $cacheKey = $this->modx->context->get('key') . "/resources/{$resourceId}";
-        if ($cachedResource = $this->modx->cacheManager->get($cacheKey)) {
+        $cachedResource = $this->modx->cacheManager->get($cacheKey, array(
+            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_resource_key', null, 'resource'),
+            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+            xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+        ));
+        if ($cachedResource) {
             $resource = $this->modx->newObject($cachedResource['resourceClass']);
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
@@ -388,57 +393,16 @@ class modRequest {
 
     /**
      * Checks the current status of timed publishing events.
-     * @todo refactor checkPublishStatus...offload to cachemanager?
      */
     public function checkPublishStatus() {
-        $cacheRefreshTime= 0;
-        if (file_exists($this->modx->getOption(xPDO::OPT_CACHE_PATH) . "sitePublishing.idx.php"))
-            include ($this->modx->getOption(xPDO::OPT_CACHE_PATH) . "sitePublishing.idx.php");
-        $timeNow= time() + $this->modx->getOption('server_offset_time',null,0);
-        if ($cacheRefreshTime != 0 && $cacheRefreshTime <= $timeNow) {
-            /* FIXME: want to find a better way to handle this publishing check without mass updates to the database! */
-            $tblResource= $this->modx->getTableName('modResource');
-            if (!$result= $this->modx->exec("UPDATE {$tblResource} SET published=1,publishedon={$timeNow} WHERE pub_date < {$timeNow} AND pub_date > 0")) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error while refreshing resource publishing data: ' . print_r($this->modx->errorInfo(), true));
-            }
-            if (!$result= $this->modx->exec("UPDATE $tblResource SET published=0,publishedon={$timeNow} WHERE unpub_date < {$timeNow} AND unpub_date IS NOT NULL AND unpub_date > 0")) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error while refreshing resource unpublishing data: ' . print_r($this->modx->errorInfo(), true));
-            }
-            if ($this->modx->getCacheManager()) {
-                $this->modx->cacheManager->clearCache();
-            }
-            $timesArr= array ();
-            $sql= "SELECT MIN(pub_date) AS minpub FROM $tblResource WHERE pub_date>$timeNow AND pub_date IS NOT NULL";
-            if (!$result= $this->modx->query($sql)) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR, "Failed to find publishing timestamps\n" . $sql);
-            } else {
-                $result= $result->fetchAll(PDO::FETCH_ASSOC);
-                $minpub= $result[0]['minpub'];
-                if ($minpub != null) {
-                    $timesArr[]= $minpub;
-                }
-            }
-            $sql= "SELECT MIN(unpub_date) AS minunpub FROM $tblResource WHERE unpub_date>$timeNow AND unpub_date IS NOT NULL";
-            if (!$result= $this->modx->query($sql)) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR, "Failed to find publishing timestamps\n" . $sql);
-            } else {
-                $result= $result->fetchAll(PDO::FETCH_ASSOC);
-                $minunpub= $result[0]['minunpub'];
-                if ($minunpub != null) {
-                    $timesArr[]= $minunpub;
-                }
-            }
-            if (count($timesArr) > 0) {
-                $nextevent= min($timesArr);
-            } else {
-                $nextevent= 0;
-            }
-            $fp= @ fopen($this->modx->getOption(xPDO::OPT_CACHE_PATH) . "sitePublishing.idx.php", "wb");
-            if ($fp) {
-                @ flock($fp, LOCK_EX);
-                @ fwrite($fp, "<?php \$cacheRefreshTime=$nextevent; ?>");
-                @ flock($fp, LOCK_UN);
-                @ fclose($fp);
+        $cacheRefreshTime = (integer) $this->modx->cacheManager->get('auto_publish', array(
+            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_auto_publish_key', null, 'auto_publish'),
+            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_auto_publish_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER))
+        ));
+        if ($cacheRefreshTime > 0) {
+            $timeNow= time() + $this->modx->getOption('server_offset_time', null, 0);
+            if ($cacheRefreshTime <= $timeNow) {
+                $this->modx->cacheManager->refresh();
             }
         }
     }

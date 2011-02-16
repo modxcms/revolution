@@ -39,8 +39,9 @@ if ($chunk->save() === false) {
 }
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+if (!empty($scriptProperties['clearCache'])) {
+    $modx->cacheManager->refresh();
+}
 
 /* log manager action */
 $modx->logManagerAction('chunk_duplicate','modChunk',$chunk->get('id'));

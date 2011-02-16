@@ -121,7 +121,7 @@ $modx->logManagerAction('new_plugin','modPlugin',$plugin->get('id'));
 
 /* empty cache */
 if (!empty($scriptProperties['clearCache'])) {
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache();
+    $modx->cacheManager->refresh();
 }
+
 return $modx->error->success('',$plugin->get(array_diff(array_keys($plugin->_fields), array('plugincode'))));

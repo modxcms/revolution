@@ -64,8 +64,7 @@ if (!@include_once (MODX_CORE_PATH . "model/modx/modx.class.php")) {
 ob_start();
 
 /* Create an instance of the modX class */
-if (empty($options) || !is_array($options)) $options = array();
-$modx= new modX('', $options);
+$modx= new modX();
 if (!is_object($modx) || !($modx instanceof modX)) {
     @ob_end_flush();
     $errorMessage = '<a href="setup/">MODx not installed. Install now?</a>';

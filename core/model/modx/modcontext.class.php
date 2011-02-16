@@ -13,17 +13,9 @@ class modContext extends modAccessibleObject {
     public $config= null;
     public $aliasMap= null;
     public $resourceMap= null;
-    public $resourceListing= null;
-    public $documentListing= null;
-    public $documentMap= null;
     public $eventMap= null;
     public $pluginCache= null;
     protected $_cacheKey= '[contextKey]/context';
-
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-        $this->documentListing= & $this->resourceListing;
-    }
 
     /**
      * Prepare a context for use.
@@ -42,7 +34,11 @@ class modContext extends modAccessibleObject {
         if ($this->config === null || $regenerate) {
             if ($this->xpdo->getCacheManager()) {
                 $context = array();
-                if ($regenerate || !($context = $this->xpdo->cacheManager->get($this->getCacheKey()))) {
+                if ($regenerate || !($context = $this->xpdo->cacheManager->get($this->getCacheKey(), array(
+                    xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_context_settings_key', null, 'context_settings'),
+                    xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_context_settings_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'cache.xPDOFileCache')),
+                    xPDO::OPT_CACHE_FORMAT => (integer) $this->xpdo->getOption('cache_context_settings_format', null, $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                )))) {
                     $context = $this->xpdo->cacheManager->generateContext($this->get('key'));
                 }
                 if (!empty($context)) {
@@ -178,7 +174,7 @@ class modContext extends modAccessibleObject {
                         $found= true;
                     }
                 }
-            } elseif (isset($this->resourceListing["{$id}"])) {
+            } elseif (array_search((string) $id, $this->aliasMap, true) !== false) {
                 $found= true;
             }
 

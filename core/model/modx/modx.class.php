@@ -230,8 +230,6 @@ class modX extends xPDO {
      * @deprecated 2006-09-15 To be removed in 2.1
      */
     public $Event= null;
-    public $documentMap= null;
-    public $documentListing= null;
     public $documentIdentifier= null;
     public $documentMethod= null;
     public $documentContent= null;
@@ -333,7 +331,7 @@ class modX extends xPDO {
      * @return modX A new modX instance.
      */
     public function __construct($configPath= '', array $options = array()) {
-        global $database_dsn, $database_user, $database_password, $table_prefix, $site_id;
+        global $database_dsn, $database_user, $database_password, $config_options, $table_prefix, $site_id;
         modX :: protect();
         if (empty ($configPath)) {
             $configPath= MODX_CORE_PATH . 'config/';
@@ -343,6 +341,8 @@ class modX extends xPDO {
             if (MODX_CONFIG_KEY !== 'config') $cachePath .= MODX_CONFIG_KEY . '/';
             $options = array_merge(
                 array (
+                    xPDO::OPT_CACHE_KEY => 'default',
+                    xPDO::OPT_CACHE_HANDLER => 'xPDOFileCache',
                     xPDO::OPT_CACHE_PATH => $cachePath,
                     xPDO::OPT_TABLE_PREFIX => $table_prefix,
                     xPDO::OPT_HYDRATE_FIELDS => true,
@@ -351,8 +351,10 @@ class modX extends xPDO {
                     xPDO::OPT_LOADER_CLASSES => array('modAccessibleObject'),
                     xPDO::OPT_VALIDATOR_CLASS => 'validation.modValidator',
                     xPDO::OPT_VALIDATE_ON_SAVE => true,
-                    'cache_system_settings' => true
+                    'cache_system_settings' => true,
+                    'cache_system_settings_key' => 'system_settings'
                 ),
+                $config_options,
                 $options
             );
             parent :: __construct(
@@ -1077,8 +1079,8 @@ class modX extends xPDO {
      * @return array An associative array of configuration key/values
      */
     public function reloadConfig() {
-        $cacheManager= $this->getCacheManager();
-        $cacheManager->clearCache();
+        $this->getCacheManager();
+        $this->cacheManager->refresh();
 
         if (!$this->_loadConfig()) {
             $this->log(modX::LOG_LEVEL_ERROR, 'Could not reload core MODx configuration!');
@@ -2748,9 +2750,6 @@ class modX extends xPDO {
             } else {
                 $this->aliasMap= & $this->context->aliasMap;
                 $this->resourceMap= & $this->context->resourceMap;
-                $this->documentMap= & $this->context->documentMap;
-                $this->resourceListing= & $this->context->resourceListing;
-                $this->documentListing= & $this->context->documentListing;
                 $this->eventMap= & $this->context->eventMap;
                 $this->pluginCache= & $this->context->pluginCache;
                 $this->config= array_merge($this->_systemConfig, $this->context->config);
@@ -2873,7 +2872,12 @@ class modX extends xPDO {
         $this->config= $this->_config;
 
         $this->getCacheManager();
-        if (!$config = $this->cacheManager->get('config')) {
+        $config = $this->cacheManager->get('config', array(
+            xPDO::OPT_CACHE_KEY => $this->getOption('cache_system_settings_key', null, 'system_settings'),
+            xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_system_settings_handler', null, $this->getOption(xPDO::OPT_CACHE_HANDLER)),
+            xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_system_settings_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP))
+        ));
+        if (empty($config)) {
             $config = $this->cacheManager->generateConfig();
         }
         if (empty($config)) {
