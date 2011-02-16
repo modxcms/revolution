@@ -1,5 +1,8 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.1.0-pl2 (February 16, 2011)
+====================================
+
 xPDO 2.1.0-pl (February 16, 2011)
 ====================================
 - Add proper cache file locking and format handling
