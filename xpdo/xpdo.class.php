@@ -103,6 +103,7 @@ class xPDO {
     const OPT_CACHE_DB_EXPIRES = 'cache_db_expires';
     const OPT_CACHE_DB_HANDLER = 'cache_db_handler';
     const OPT_CACHE_EXPIRES = 'cache_expires';
+    const OPT_CACHE_FORMAT = 'cache_format';
     const OPT_CACHE_HANDLER = 'cache_handler';
     const OPT_CACHE_KEY = 'cache_key';
     const OPT_CACHE_PATH = 'cache_path';
