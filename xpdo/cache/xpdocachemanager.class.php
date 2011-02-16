@@ -933,44 +933,46 @@ class xPDOFileCache extends xPDOCache {
     public function get($key, $options= array()) {
         $value= null;
         $cacheKey= $this->getCacheKey($key, $options);
-        if ($file = fopen($cacheKey, 'rb')) {
-            $format = (integer) $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP);
-            if (flock($file, LOCK_SH)) {
-                switch ($format) {
-                    case xPDOCacheManager::CACHE_PHP:
-                        $value= @include $cacheKey;
-                        break;
-                    case xPDOCacheManager::CACHE_JSON:
-                        $payload = stream_get_contents($file);
-                        if ($payload !== false) {
-                            $payload = $this->xpdo->fromJSON($payload);
-                            if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
-                                if (array_key_exists('content', $payload)) {
-                                    $value= $payload['content'];
+        if (file_exists($cacheKey)) {
+            if ($file = @fopen($cacheKey, 'rb')) {
+                $format = (integer) $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP);
+                if (flock($file, LOCK_SH)) {
+                    switch ($format) {
+                        case xPDOCacheManager::CACHE_PHP:
+                            $value= @include $cacheKey;
+                            break;
+                        case xPDOCacheManager::CACHE_JSON:
+                            $payload = stream_get_contents($file);
+                            if ($payload !== false) {
+                                $payload = $this->xpdo->fromJSON($payload);
+                                if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
+                                    if (array_key_exists('content', $payload)) {
+                                        $value= $payload['content'];
+                                    }
                                 }
                             }
-                        }
-                        break;
-                    case xPDOCacheManager::CACHE_SERIALIZE:
-                        $payload = stream_get_contents($file);
-                        if ($payload !== false) {
-                            $payload = unserialize($payload);
-                            if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
-                                if (array_key_exists('content', $payload)) {
-                                    $value= $payload['content'];
+                            break;
+                        case xPDOCacheManager::CACHE_SERIALIZE:
+                            $payload = stream_get_contents($file);
+                            if ($payload !== false) {
+                                $payload = unserialize($payload);
+                                if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
+                                    if (array_key_exists('content', $payload)) {
+                                        $value= $payload['content'];
+                                    }
                                 }
                             }
-                        }
-                        break;
+                            break;
+                    }
+                    flock($file, LOCK_UN);
+                    if ($value === null && $this->getOption('removeIfEmpty', $options, true)) {
+                        fclose($file);
+                        @ unlink($cacheKey);
+                        return $value;
+                    }
                 }
-                flock($file, LOCK_UN);
-                if ($value === null && $this->getOption('removeIfEmpty', $options, true)) {
-                    fclose($file);
-                    @ unlink($cacheKey);
-                    return $value;
-                }
+                @fclose($file);
             }
-            fclose($file);
         }
         return $value;
     }
