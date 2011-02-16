@@ -115,14 +115,11 @@ $_lang['setting_cache_disabled'] = 'Disable Global Cache Options';
 $_lang['setting_cache_disabled_desc'] = 'Select \'Yes\' to disable all MODx caching features. MODx does not recommend disabling caching.';
 $_lang['setting_cache_disabled_err'] = 'Please state whether or not you want the cache enabled.';
 
-$_lang['setting_cache_json'] = 'Cache JSON Data';
-$_lang['setting_cache_json_desc'] = 'Cache any JSON data sent to and from the manager UI.';
-
 $_lang['setting_cache_expires'] = 'Expiration Time for Default Cache';
 $_lang['setting_cache_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for default caching.';
 
-$_lang['setting_cache_json_expires'] = 'Expiration Time for JSON Cache';
-$_lang['setting_cache_json_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for JSON caching.';
+$_lang['setting_cache_format'] = 'Caching Format to Use';
+$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. One of the formats';
 
 $_lang['setting_cache_handler'] = 'Caching Handler Class';
 $_lang['setting_cache_handler_desc'] = 'The class name of the type handler to use for caching.';
