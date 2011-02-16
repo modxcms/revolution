@@ -195,24 +195,30 @@ class xPDOCacheManager {
      * @param string $filename The absolute path to the location the file will
      * be written in.
      * @param string $content The content of the newly written file.
-     * @param string $mode The php file mode to write in. Defaults to 'wb'
+     * @param string $mode The php file mode to write in. Defaults to 'ab'
      * @param array $options An array of options for the function.
      * @return boolean Returns true if the file was successfully written.
      */
-    public function writeFile($filename, $content, $mode= 'wb', $options= array()) {
+    public function writeFile($filename, $content, $mode= 'ab', $options= array()) {
         $written= false;
-        if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_folder_permissions' => $options) : array();
+        if (!is_array($options)) {
+            $options = is_scalar($options) && !is_bool($options) ? array('new_folder_permissions' => $options) : array();
+        }
         $dirname= dirname($filename);
         if (!file_exists($dirname)) {
-            if ($this->writeTree($dirname, $options)) {
-                $file= @ fopen($filename, $mode);
+            $this->writeTree($dirname, $options);
+        }
+        $file= fopen($filename, $mode);
+        if ($file) {
+            if (flock($file, LOCK_EX | LOCK_NB)) {
+                fseek($file, 0);
+                ftruncate($file, 0);
+                $written= fwrite($file, $content);
+                flock($file, LOCK_UN);
             }
+            fclose($file);
         }
-        if ($file= @ fopen($filename, $mode)) {
-            $written= @ fwrite($file, $content);
-            @ fclose($file);
-        }
-        return $written;
+        return ($written !== false);
     }
 
     /**
@@ -879,13 +885,13 @@ class xPDOFileCache extends xPDOCache {
                 $expireContent= 'if(time() > ' . $expirationTS . '){return null;}';
             }
             $fileName= $this->getCacheKey($key, $options);
-            $format = (isset($options['format']) && !empty($options['format'])) ? $options['format'] : xPDOCacheManager::CACHE_PHP;
+            $format = (integer) $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP);
             switch ($format) {
                 case xPDOCacheManager::CACHE_SERIALIZE:
-                    $content= '<?php ' . $expireContent . ' return unserialize(' . var_export(serialize($var), true) . ');';
+                    $content= serialize(array('expires' => $expirationTS, 'content' => $var));
                     break;
                 case xPDOCacheManager::CACHE_JSON:
-                    $content= !is_scalar($var) ? $this->xpdo->toJSON($var) : $var;
+                    $content= $this->xpdo->toJSON(array('expires' => $expirationTS, 'content' => $var));
                     break;
                 case xPDOCacheManager::CACHE_PHP:
                 default:
@@ -927,15 +933,44 @@ class xPDOFileCache extends xPDOCache {
     public function get($key, $options= array()) {
         $value= null;
         $cacheKey= $this->getCacheKey($key, $options);
-        if (file_exists($cacheKey)) {
-            if (!empty($options['format']) && $options['format'] == xPDOCacheManager::CACHE_JSON) {
-                $value= file_get_contents($cacheKey);
-            } else {
-                $value= @ include ($cacheKey);
+        if ($file = fopen($cacheKey, 'rb')) {
+            $format = (integer) $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP);
+            if (flock($file, LOCK_SH)) {
+                switch ($format) {
+                    case xPDOCacheManager::CACHE_PHP:
+                        $value= @include $cacheKey;
+                        break;
+                    case xPDOCacheManager::CACHE_JSON:
+                        $payload = stream_get_contents($file);
+                        if ($payload !== false) {
+                            $payload = $this->xpdo->fromJSON($payload);
+                            if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
+                                if (array_key_exists('content', $payload)) {
+                                    $value= $payload['content'];
+                                }
+                            }
+                        }
+                        break;
+                    case xPDOCacheManager::CACHE_SERIALIZE:
+                        $payload = stream_get_contents($file);
+                        if ($payload !== false) {
+                            $payload = unserialize($payload);
+                            if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
+                                if (array_key_exists('content', $payload)) {
+                                    $value= $payload['content'];
+                                }
+                            }
+                        }
+                        break;
+                }
+                flock($file, LOCK_UN);
+                if ($value === null && $this->getOption('removeIfEmpty', $options, true)) {
+                    fclose($file);
+                    @ unlink($cacheKey);
+                    return $value;
+                }
             }
-            if ($value === null && $this->getOption('removeIfEmpty', $options, true)) {
-                @ unlink($cacheKey);
-            }
+            fclose($file);
         }
         return $value;
     }
