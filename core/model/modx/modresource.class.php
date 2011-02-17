@@ -109,6 +109,47 @@ class modResource extends modAccessibleSimpleObject {
         return $resource->xpdo->getCollection('modTemplateVar', $c);
     }
 
+    /**
+     * Refresh Resource URI fields for children of the specified parent.
+     *
+     * @static
+     * @param modX &$modx A reference to a valid modX instance.
+     * @param int $parent The id of a Resource parent to start from (default is 0, the root)
+     * @param array $options An array of various options for the method:
+     *      - resetOverrides: if true, Resources with uri_override set to true will be included
+     *      - resetParent: if not false, resets the URI of the parent (default is true)
+     *      - contexts: an optional array of context keys to limit the refresh scope
+     * @return void
+     */
+    public static function refreshURIs(modX &$modx, $parent = 0, array $options = array()) {
+        $resetOverrides = array_key_exists('resetOverrides', $options) ? (boolean) $options['resetOverrides'] : false;
+        $resetParent = array_key_exists('resetParent', $options) ? (boolean) $options['resetParent'] : true;
+        $contexts = array_key_exists('contexts', $options) ? explode(',', $options['contexts']) : null;
+        if ($parent > 0 && $resetParent) {
+            $parentResource = $modx->getObject('modResource', $parent);
+            if ($resetOverrides || !$parentResource->get('uri_override')) {
+                $parentResource->set('uri', '');
+                $parentResource->set('uri_override', false);
+                $parentResource->save();
+            }
+        }
+        $criteria = $modx->newQuery('modResource', array('parent' => $parent));
+        if (!$resetOverrides) {
+            $criteria->where(array('uri_override' => false));
+        }
+        if (!empty($contexts)) {
+            $criteria->where(array('context_key:IN' => $contexts));
+        }
+        $criteria->sortby('menuindex', 'ASC');
+        foreach ($modx->getIterator('modResource', $criteria) as $resource) {
+            $resource->set('uri', '');
+            if ($resetOverrides) {
+                $resource->set('uri_override', false);
+            }
+            $resource->save();
+        }
+    }
+
     function __construct(& $xpdo) {
         parent :: __construct($xpdo);
         $this->_contextKey= isset ($this->xpdo->context) ? $this->xpdo->context->get('key') : 'web';
@@ -435,13 +476,32 @@ class modResource extends modAccessibleSimpleObject {
      *
      * If the modResource is new, the createdon and createdby fields will be set
      * using the current time and user authenticated in the context.
+     *
+     * If uri is empty or uri_overridden is not set and something has been changed which
+     * might affect the Resource's uri, it is (re-)calculated using getAliasPath().
      */
     public function save($cacheFlag= null) {
-        if ($this->_new) {
+        if ($this->isNew()) {
             if (!$this->get('createdon')) $this->set('createdon', time());
             if (!$this->get('createdby') && $this->xpdo instanceof modX) $this->set('createdby', $this->xpdo->getLoginUserID());
         }
+        $refreshChildURIs = false;
+        if ($this->xpdo instanceof modX) {
+            if ($this->get('uri') == '' || (!$this->get('uri_override') && ($this->isDirty('alias') || $this->isDirty('content_type') || $this->isDirty('parent') || $this->isDirty('context_key')))) {
+                $this->set('uri', $this->getAliasPath($this->get('alias')));
+                if ($this->isDirty('uri')) {
+                    $refreshChildURIs = true;
+                }
+            }
+        }
         $rt= parent :: save($cacheFlag);
+        if ($rt && $refreshChildURIs) {
+            $this->xpdo->call('modResource', 'refreshURIs', array(
+                &$this->xpdo,
+                $this->get('id'),
+                array('resetParent' => false)
+            ));
+        }
         return $rt;
     }
 
@@ -608,45 +668,49 @@ class modResource extends modAccessibleSimpleObject {
     public function getAliasPath($alias = '',array $fields = array()) {
         if (empty($fields)) $fields = $this->toArray();
 
-        /* auto assign alias if using automatic_alias */
-        if (empty($alias) && $this->xpdo->getOption('automatic_alias',null,false)) {
-            $alias = $this->cleanAlias($fields['pagetitle']);
-        } else {
-            $alias = $this->cleanAlias($alias);
-        }
-
-        $fullAlias= $alias;
-        $isHtml= true;
-        $extension= '';
-        $containerSuffix= $this->xpdo->getOption('container_suffix',null,'');
-        /* process content type */
-        if (!empty($fields['content_type']) && $contentType= $this->xpdo->getObject('modContentType', $fields['content_type'])) {
-            $extension= $contentType->getExtension();
-            $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
-        }
-        /* set extension to container suffix if Resource is a folder, HTML content type, and the container suffix is set */
-        if (!empty($fields['isfolder']) && $isHtml && !empty ($containerSuffix)) {
-            $extension= $containerSuffix;
-        }
-        $aliasPath= '';
-        /* if using full alias paths, calculate here */
-        if ($this->xpdo->getOption('use_alias_path',null,false)) {
-            $pathParentId= $fields['parent'];
-            $parentResources= array ();
-            $currResource= $this->xpdo->getObject('modResource', $pathParentId);
-            while ($currResource) {
-                $parentAlias= $currResource->get('alias');
-                if (empty ($parentAlias)) {
-                    $parentAlias= "{$pathParentId}";
-                }
-                $parentResources[]= "{$parentAlias}";
-                $pathParentId= $currResource->get('parent');
-                $currResource= $currResource->getOne('Parent');
+        if (empty($fields['uri_override']) || empty($fields['uri'])) {
+            /* auto assign alias if using automatic_alias */
+            if (empty($alias) && $this->xpdo->getOption('automatic_alias', null, false)) {
+                $alias = $this->cleanAlias($fields['pagetitle']);
+            } else {
+                $alias = $this->cleanAlias($alias);
             }
-            $aliasPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
-            if (!empty($aliasPath) && strpos($aliasPath,'/') === false) $aliasPath .= '/';
+
+            $fullAlias= $alias;
+            $isHtml= true;
+            $extension= '';
+            $containerSuffix= $this->xpdo->getOption('container_suffix',null,'');
+            /* process content type */
+            if (!empty($fields['content_type']) && $contentType= $this->xpdo->getObject('modContentType', $fields['content_type'])) {
+                $extension= $contentType->getExtension();
+                $isHtml= (strpos($contentType->get('mime_type'), 'html') !== false);
+            }
+            /* set extension to container suffix if Resource is a folder, HTML content type, and the container suffix is set */
+            if (!empty($fields['isfolder']) && $isHtml && !empty ($containerSuffix)) {
+                $extension= $containerSuffix;
+            }
+            $aliasPath= '';
+            /* if using full alias paths, calculate here */
+            if ($this->xpdo->getOption('use_alias_path',null,false)) {
+                $pathParentId= $fields['parent'];
+                $parentResources= array ();
+                $currResource= $this->xpdo->getObject('modResource', $pathParentId);
+                while ($currResource) {
+                    $parentAlias= $currResource->get('alias');
+                    if (empty ($parentAlias)) {
+                        $parentAlias= "{$pathParentId}";
+                    }
+                    $parentResources[]= "{$parentAlias}";
+                    $pathParentId= $currResource->get('parent');
+                    $currResource= $currResource->getOne('Parent');
+                }
+                $aliasPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
+                if (!empty($aliasPath) && $aliasPath[-1] !== '/') $aliasPath .= '/';
+            }
+            $fullAlias= $aliasPath . $fullAlias . $extension;
+        } else {
+            $fullAlias= $fields['uri'];
         }
-        $fullAlias= $aliasPath . $fullAlias . $extension;
         return $fullAlias;
     }
 
@@ -661,22 +725,14 @@ class modResource extends modAccessibleSimpleObject {
     public function isDuplicateAlias($aliasPath = '', $contextKey = '') {
         if (empty($aliasPath)) $aliasPath = $this->getAliasPath($this->get('alias'));
         if (empty($contextKey)) $contextKey = $this->get('context_key');
-        $isDuplicate = false;
-
-        $resourceContext= $this->xpdo->getObject('modContext', array('key' => $contextKey));
-        if (!$resourceContext) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not find context for Resource '.print_r($this->toArray(),true));
-            return $isDuplicate;
-        }
-        $resourceContext->prepare();
-
-        if (isset($resourceContext->aliasMap[$aliasPath])) {
-            $duplicateId= $resourceContext->aliasMap[$aliasPath];
-            if ($duplicateId != $this->get('id')) {
-                $isDuplicate = true;
-            }
-        }
-        return $isDuplicate ? $duplicateId : false;
+        $duplicates = $this->xpdo->getCount('modResource', array(
+            'id:!=' => $this->get('id'),
+            'uri' => $aliasPath,
+            'context_key' => $contextKey,
+            'deleted' => false,
+            'published' => true
+        ));
+        return $duplicates > 0;
     }
 
     /**
@@ -717,8 +773,7 @@ class modResource extends modAccessibleSimpleObject {
         if ($this->xpdo->getOption('friendly_alias_urls',null,false)) {
             /* auto assign alias */
             $aliasPath = $newResource->getAliasPath($newName);
-            $duplicateId = $newResource->isDuplicateAlias($aliasPath);
-            if (!$this->xpdo->getOption('allow_duplicate_alias',null,false) && !empty($duplicateId)) {
+            if ($newResource->isDuplicateAlias($aliasPath)) {
                 $alias = '';
             }
         }

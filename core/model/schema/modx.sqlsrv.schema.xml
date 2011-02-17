@@ -795,6 +795,8 @@
         <field key="class_key" dbtype="nvarchar" precision="100" phptype="string" null="false" default="modDocument" index="index" />
         <field key="context_key" dbtype="nvarchar" precision="100" phptype="string" null="false" default="web" index="index" />
         <field key="content_type" dbtype="int" phptype="integer" null="false" default="1" />
+        <field key="uri" dbtype="nvarchar" precision="1000" phptype="string" null="false" default="" index="index" />
+        <field key="uri_override" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         
         <index alias="alias" name="alias" primary="false" unique="false" type="BTREE">
             <column key="alias" length="" collation="A" null="true" />
@@ -834,6 +836,12 @@
         </index>
         <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
             <column key="context_key" length="" collation="A" null="false" />
+        </index>
+        <index alias="uri" name="uri" primary="false" unique="false" type="BTREE">
+            <column key="uri" length="1000" collation="A" null="false" />
+        </index>
+        <index alias="uri_override" name="uri_override" primary="false" unique="false" type="BTREE">
+            <column key="uri_override" length="" collation="A" null="false" />
         </index>
         <index alias="content_ft_idx" name="content_ft_idx" primary="false" unique="false" type="FULLTEXT">
             <column key="pagetitle" length="" collation="A" null="false" />

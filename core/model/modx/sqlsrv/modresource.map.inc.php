@@ -48,6 +48,8 @@ $xpdo_meta_map['modResource']= array (
     'class_key' => 'modDocument',
     'context_key' => 'web',
     'content_type' => 1,
+    'uri' => '',
+    'uri_override' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -356,6 +358,23 @@ $xpdo_meta_map['modResource']= array (
       'null' => false,
       'default' => 1,
     ),
+    'uri' => 
+    array (
+      'dbtype' => 'nvarchar',
+      'precision' => '1000',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+      'index' => 'index',
+    ),
+    'uri_override' => 
+    array (
+      'dbtype' => 'bit',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
   ),
   'indexes' => 
   array (
@@ -560,6 +579,38 @@ $xpdo_meta_map['modResource']= array (
       'columns' => 
       array (
         'context_key' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'uri' => 
+    array (
+      'alias' => 'uri',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'uri' => 
+        array (
+          'length' => '1000',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'uri_override' => 
+    array (
+      'alias' => 'uri_override',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'uri_override' => 
         array (
           'length' => '',
           'collation' => 'A',
