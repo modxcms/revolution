@@ -238,8 +238,6 @@ class modRequest {
                 break;
             case 'id' :
                 $rId = $this->modx->getOption('request_param_id',null,'id');
-                /* fix for PHP bug: http://www.exploringbinary.com/php-hangs-on-numeric-value-2-2250738585072011e-308/ */
-                if ($_REQUEST[$rId] == '2.2250738585072011e-308') $_REQUEST[$rId] = 0;
                 $identifier = isset ($_REQUEST[$rId]) ? $_REQUEST[$rId] : $identifier;
                 break;
             default :

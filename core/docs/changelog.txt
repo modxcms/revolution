@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3859] Remove redundant check for php bug
 - [#3858] Fix javascript errors from FC hideField rule
 - [#2812] Add link_tag_scheme to define default scheme for makeUrl() call in modLinkTag
 - [#3111] Remove resourceListing, documentListing, and documentMap from context cache
