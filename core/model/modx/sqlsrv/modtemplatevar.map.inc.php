@@ -121,7 +121,7 @@ $xpdo_meta_map['modTemplateVar']= array (
     array (
       'dbtype' => 'nvarchar',
       'precision' => 'max',
-      'phptype' => 'string',
+      'phptype' => 'array',
       'null' => false,
       'default' => '',
     ),
@@ -129,7 +129,7 @@ $xpdo_meta_map['modTemplateVar']= array (
     array (
       'dbtype' => 'nvarchar',
       'precision' => 'max',
-      'phptype' => 'string',
+      'phptype' => 'array',
       'null' => false,
       'default' => '',
     ),
