@@ -1890,12 +1890,11 @@ class xPDOObject {
         } else {
             $fkMeta= $this->getFKDefinition($alias);
             if ($fkMeta) {
-                $relationCriteria = array($fkMeta['foreign'] => $this->get($fkMeta['local']));
                 if ($criteria === null) {
-                    $criteria= $relationCriteria;
+                    $criteria= array($fkMeta['foreign'] => $this->get($fkMeta['local']));
                 } else {
                     $criteria= $this->xpdo->newQuery($fkMeta['class'], $criteria);
-                    $criteria->andCondition($relationCriteria);
+                    $criteria->andCondition(array("{$criteria->getAlias()}.{$fkMeta['foreign']}" => $this->get($fkMeta['local'])));
                 }
                 if ($collection= $this->xpdo->getCollection($fkMeta['class'], $criteria, $cacheFlag)) {
                     $this->_relatedObjects[$alias]= array_merge($this->_relatedObjects[$alias], $collection);
