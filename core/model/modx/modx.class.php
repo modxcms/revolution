@@ -2830,7 +2830,8 @@ class modX extends xPDO {
                 }
             }
             if (!$sh) {
-                if ($sessionSavePath = $this->getOption('session_save_path') && is_writable($sessionSavePath)) {
+                $sessionSavePath = $this->getOption('session_save_path');
+                if ($sessionSavePath && is_writable($sessionSavePath)) {
                     session_save_path($sessionSavePath);
                 }
             }
