@@ -110,7 +110,7 @@ class modContext extends modAccessibleObject {
                 'modAccessContext.principal_class' => 'modUserGroup',
                 'modAccessContext.target' => $this->get('key'),
             ));
-            $c->groupby('modAccessContext.target,modAccessContext.principal,modAccessContext.authority,modAccessContext.policy');
+            $c->sortby('modAccessContext.target,modAccessContext.principal,modAccessContext.authority,modAccessContext.policy');
             $acls = $this->xpdo->getCollection('modAccessContext',$c);
             foreach ($acls as $acl) {
                 $policy['modAccessContext'][$acl->get('target')][] = array(

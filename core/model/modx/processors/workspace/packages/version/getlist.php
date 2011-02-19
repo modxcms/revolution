@@ -21,23 +21,13 @@ if (empty($signature)) return $this->outputArray(array());
 $signatureArray = explode('-',$signature);
 
 /* get packages */
-$c = $modx->newQuery('transport.modTransportPackage');
-$c->select($modx->getSelectColumns('transport.modTransportPackage','modTransportPackage'));
-$c->select(array('Provider.name AS provider_name'));
-$c->leftJoin('transport.modTransportProvider','Provider');
-$c->where(array(
+$criteria = array(
     'workspace' => $workspace,
     'package_name' => $signatureArray[0],
-));
-$count = $modx->getCount('modTransportPackage',$c);
-$c->sortby('modTransportPackage.version_major', 'DESC');
-$c->sortby('modTransportPackage.version_minor', 'DESC');
-$c->sortby('modTransportPackage.version_patch', 'DESC');
-$c->sortby('IF(modTransportPackage.release = "" OR modTransportPackage.release = "ga" OR modTransportPackage.release = "pl","z",release) DESC','');
-$c->sortby('modTransportPackage.release_index', 'DESC');
-if ($isLimit) $c->limit($limit,$start);
-$c->prepare(); echo $c->toSql(); die();
-$packages = $modx->getCollection('transport.modTransportPackage',$c);
+);
+$pkgList = $modx->call('transport.modTransportPackage', 'listPackageVersions', array(&$modx, $criteria, $isLimit ? $limit : 0, $start));
+$packages = $pkgList['collection'];
+$count = $pkgList['total'];
 
 /* now create output array */
 $list = array();

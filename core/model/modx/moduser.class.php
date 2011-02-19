@@ -102,7 +102,7 @@ class modUser extends modPrincipal {
                                 "AND mug.user_group = acl.principal " .
                                 "JOIN {$memberRoleTable} mr ON mr.id = mug.role " .
                                 "AND mr.authority <= acl.authority " .
-                                "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
+                                "ORDER BY acl.target, acl.principal, mr.authority, acl.policy";
                         $bindings = array(
                             ':principal' => $this->get('id'),
                             ':context' => $context
@@ -131,7 +131,7 @@ class modUser extends modPrincipal {
                                 "AND mug.user_group = acl.principal " .
                                 "JOIN {$memberRoleTable} mr ON mr.id = mug.role " .
                                 "AND mr.authority <= acl.authority " .
-                                "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
+                                "ORDER BY acl.target, acl.principal, mr.authority, acl.policy";
                         $bindings = array(
                             ':principal' => $this->get('id')
                         );
@@ -155,7 +155,7 @@ class modUser extends modPrincipal {
                                 "AND mug.user_group = acl.principal " .
                                 "JOIN {$memberRoleTable} mr ON mr.id = mug.role " .
                                 "AND mr.authority <= acl.authority " .
-                                "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
+                                "ORDER BY acl.target, acl.principal, mr.authority, acl.policy";
                         $bindings = array(
                             ':principal' => $this->get('id'),
                             ':context' => $context
@@ -183,7 +183,7 @@ class modUser extends modPrincipal {
                                 "WHERE acl.principal_class = 'modUserGroup' " .
                                 "AND acl.principal = 0 " .
                                 "AND (acl.context_key = :context OR acl.context_key IS NULL OR acl.context_key = '') " .
-                                "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
+                                "ORDER BY acl.target, acl.principal, acl.authority, acl.policy";
                         $bindings = array(
                             ':context' => $context
                         );
@@ -208,7 +208,7 @@ class modUser extends modPrincipal {
                                 "LEFT JOIN {$policyTable} p ON p.id = acl.policy " .
                                 "WHERE acl.principal_class = 'modUserGroup' " .
                                 "AND acl.principal = 0 " .
-                                "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
+                                "ORDER BY acl.target, acl.principal, acl.authority, acl.policy";
                         $query = new xPDOCriteria($this->xpdo, $sql);
                         if ($query->stmt && $query->stmt->execute()) {
                             while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -226,7 +226,7 @@ class modUser extends modPrincipal {
                                 "WHERE acl.principal_class = 'modUserGroup' " .
                                 "AND acl.principal = 0 " .
                                 "AND (acl.context_key = :context OR acl.context_key IS NULL OR acl.context_key = '') " .
-                                "GROUP BY acl.target, acl.principal, acl.authority, acl.policy";
+                                "ORDER BY acl.target, acl.principal, acl.authority, acl.policy";
                         $bindings = array(
                             ':context' => $context
                         );

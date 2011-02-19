@@ -15,8 +15,8 @@ class modTemplate_sqlsrv extends modTemplate {
             'modTemplateVarTemplate.templateid' => $template->get('id'),
         ));
         $c->select(array(
-            "CASE ISNULL(modTemplateVarTemplate.tmplvarid) THEN 0 ELSE 1 END AS access",
-            "CASE ISNULL(modTemplateVarTemplate.rank) THEN '-' ELSE modTemplateVarTemplate.rank AS tv_rank"
+            "CASE modTemplateVarTemplate.tmplvarid WHEN NULL THEN 0 ELSE 1 END AS access",
+            "ISNULL(modTemplateVarTemplate.rank, '-') AS tv_rank"
         ));
         foreach ($sort as $sortKey => $sortDir) {
             $c->sortby($sortKey, $sortDir);

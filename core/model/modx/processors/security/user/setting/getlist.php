@@ -16,36 +16,23 @@ if (!$modx->hasPermission('settings')) return $modx->error->failure($modx->lexic
 $modx->lexicon->load('setting');
 
 /* setup default properties */
-$isLimit = empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
-$limit = $modx->getOption('limit',$scriptProperties,10);
+$limit = $modx->getOption('limit',$scriptProperties,0);
 $sort = $modx->getOption('sort',$scriptProperties,'key');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $user = $modx->getOption('user',$scriptProperties,0);
 $key = $modx->getOption('key',$scriptProperties,false);
 
 /* setup criteria and get settings */
-$where = array(
-    'user' => $user,
-);
-if ($key) $where['key:LIKE'] = '%'.$key.'%';
+$criteria = array();
+$criteria[] = array('user' => $user);
+if ($key) {
+    $criteria[] = array('key:LIKE'=> '%'.$key.'%');
+}
 
-$c = $modx->newQuery('modUserSetting');
-$c->select(array(
-    $modx->getSelectColumns('modUserSetting','modUserSetting'),
-));
-$c->select(array(
-    'Entry.value AS name_trans',
-    'Description.value AS description_trans',
-));
-$c->leftJoin('modLexiconEntry','Entry',"CONCAT('setting_',modUserSetting.{$modx->escape('key')}) = Entry.name");
-$c->leftJoin('modLexiconEntry','Description',"CONCAT('setting_',modUserSetting.{$modx->escape('key')},'_desc') = Description.name");
-$c->where($where);
-$count = $modx->getCount('modUserSetting',$c);
-$c->sortby($modx->getSelectColumns('modUserSetting','modUserSetting','',array('area')),'ASC');
-$c->sortby($modx->getSelectColumns('modUserSetting','modUserSetting','',array($sort)),$dir);
-if ($isLimit) $c->limit($limit,$start);
-$settings = $modx->getCollection('modUserSetting',$c);
+$settingsResult = $modx->call('modUserSetting', 'listSettings', array(&$modx, $criteria, array($sort=> $dir), $limit, $start));
+$count = $settingsResult['count'];
+$settings = $settingsResult['collection'];
 
 /* iterate through settings */
 $list = array();
