@@ -784,7 +784,7 @@ class modX extends xPDO {
                     $ctx = $this->getContext($context);
                 }
                 if ($ctx) {
-                    $url= $ctx->makeUrl($id, $args, $scheme);
+                    $url= $ctx->makeUrl($id, $args, 'full');
                 }
             }
 
