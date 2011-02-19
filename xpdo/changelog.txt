@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Fix modCacheManager->writeFile() not to truncate files if a mode is specified
+
 xPDO 2.1.0-pl2 (February 16, 2011)
 ====================================
 - Avoid PHP warning from fopen in xPDOFileCache->get()
