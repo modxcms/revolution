@@ -350,9 +350,9 @@ if (!empty($scriptProperties['syncsite']) || !empty($scriptProperties['clearCach
     /* empty cache */
     $modx->cacheManager->refresh(array(
         'db' => array(),
-        'auto_publish' => array('contexts' => $workingContext->get('key')),
-        'context_settings' => array('contexts' => $workingContext->get('key')),
-        'resource' => array('contexts' => $workingContext->get('key')),
+        'auto_publish' => array('contexts' => array($workingContext->get('key'))),
+        'context_settings' => array('contexts' => array($workingContext->get('key'))),
+        'resource' => array('contexts' => array($workingContext->get('key'))),
     ));
 }
 

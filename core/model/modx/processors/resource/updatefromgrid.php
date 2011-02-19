@@ -67,9 +67,9 @@ $resource->removeLock();
 /* empty cache */
 $modx->cacheManager->refresh(array(
     'db' => array(),
-    'auto_publish' => array('contexts' => $resource->get('context_key')),
-    'context_settings' => array('contexts' => $resource->get('context_key')),
-    'resource' => array('contexts' => $resource->get('context_key')),
+    'auto_publish' => array('contexts' => array($resource->get('context_key'))),
+    'context_settings' => array('contexts' => array($resource->get('context_key'))),
+    'resource' => array('contexts' => array($resource->get('context_key'))),
 ));
 
 return $modx->error->success();
