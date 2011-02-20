@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Update xPDO to v2.1.1-pl
 - Add modResource.uri_override to allow a uri to be manually set and locked per Resource
 - [#3111] Add modResource.uri field to allow context maps to be regenerated in a single query
 - [#3859] Remove redundant check for php bug
