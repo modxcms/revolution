@@ -20,7 +20,7 @@ $table = $modx->getTableName($class);
 
 $description = $this->install->lexicon('add_column',array('column' => 'uri','table' => $table));
 $sql = "ALTER TABLE {$table} ADD COLUMN {$modx->escape('uri')} NVARCHAR(1000) NULL AFTER {$modx->escape('content_type')}";
-$this->processResults($class,$description,$sql);
+$uriAdded = $this->processResults($class,$description,$sql);
 
 $sql = "ALTER TABLE {$table} ADD INDEX [uri] ([uri](1000))";
 $modx->exec($sql);
@@ -31,3 +31,7 @@ $this->processResults($class,$description,$sql);
 
 $sql = "ALTER TABLE {$table} ADD INDEX [uri_override] ([uri_override])";
 $modx->exec($sql);
+
+if ($uriAdded && $modx->getOption('friendly_urls')) {
+    $modx->call('modResource', 'refreshURIs', array(&$modx));
+}

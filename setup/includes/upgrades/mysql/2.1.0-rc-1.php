@@ -96,6 +96,6 @@ $this->processResults($class,$description,$sql);
 $sql = "ALTER TABLE {$table} ADD INDEX uri_override (uri_override)";
 $modx->exec($sql);
 
-if ($uriAdded && $modx->getOption('friendly_urls') && $modx->getOption('friendly_alias_urls')) {
+if ($uriAdded && $modx->getOption('friendly_urls')) {
     $modx->call('modResource', 'refreshURIs', array(&$modx));
 }

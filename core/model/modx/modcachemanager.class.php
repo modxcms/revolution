@@ -89,11 +89,13 @@ class modCacheManager extends xPDOCacheManager {
                 $results['aliasMap']= array ();
                 while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
                     $results['resourceMap'][(string) $r->parent][] = (string) $r->id;
-                    if (isset ($results['aliasMap'][$r->uri])) {
-                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource URI {$r->uri} already exists for resource id = {$results['aliasMap'][$r->uri]}; skipping duplicate resource URI for resource id = {$r->id}");
-                        continue;
+                    if ($this->modx->getOption('friendly_urls', $contextConfig, false)) {
+                        if (array_key_exists($r->uri, $results['aliasMap'])) {
+                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource URI {$r->uri} already exists for resource id = {$results['aliasMap'][$r->uri]}; skipping duplicate resource URI for resource id = {$r->id}");
+                            continue;
+                        }
+                        $results['aliasMap'][$r->uri]= $r->id;
                     }
-                    $results['aliasMap'][$r->uri]= $r->id;
                 }
             }
 

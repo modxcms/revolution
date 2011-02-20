@@ -486,7 +486,7 @@ class modResource extends modAccessibleSimpleObject {
             if (!$this->get('createdby') && $this->xpdo instanceof modX) $this->set('createdby', $this->xpdo->getLoginUserID());
         }
         $refreshChildURIs = false;
-        if ($this->xpdo instanceof modX) {
+        if ($this->xpdo instanceof modX && $this->xpdo->getOption('friendly_urls')) {
             if ($this->get('uri') == '' || (!$this->get('uri_override') && ($this->isDirty('alias') || $this->isDirty('content_type') || $this->isDirty('parent') || $this->isDirty('context_key')))) {
                 $this->set('uri', $this->getAliasPath($this->get('alias')));
                 if ($this->isDirty('uri')) {
@@ -770,7 +770,7 @@ class modResource extends modAccessibleSimpleObject {
 
         /* get new alias */
         $alias = $newResource->cleanAlias($newName);
-        if ($this->xpdo->getOption('friendly_alias_urls',null,false)) {
+        if ($this->xpdo->getOption('friendly_urls',null,false)) {
             /* auto assign alias */
             $aliasPath = $newResource->getAliasPath($newName);
             if ($newResource->isDuplicateAlias($aliasPath)) {
