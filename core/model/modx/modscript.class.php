@@ -39,7 +39,8 @@ class modScript extends modElement {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $scriptName= $this->getScriptName();
-            if (!$this->_result= function_exists($scriptName)) {
+            $this->_result= function_exists($scriptName);
+            if (!$this->_result) {
                 $this->_result= $this->loadScript();
             }
             if ($this->_result) {
@@ -113,6 +114,9 @@ class modScript extends modElement {
         }
         if ($result) {
             $result = include($includeFilename);
+            if ($result) {
+                $result = function_exists($this->getScriptName());
+            }
         }
         return ($result !== false);
     }
