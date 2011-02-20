@@ -30,9 +30,14 @@ if ($contentType == null) {
 /* save content type */
 $scriptProperties['binary'] = !empty($scriptProperties['binary']) ? true : false;
 $contentType->fromArray($scriptProperties);
+$refresh = $contentType->isDirty('file_extensions') && $modx->getCount('modResource', array('content_type' => $contentType->get('id')));
 if ($contentType->save() == false) {
     $modx->error->checkValidation($contentType);
     return $modx->error->failure($modx->lexicon('content_type_err_save'));
+}
+
+if ($refresh) {
+    $modx->call('modResource', 'refreshURIs', array(&$modx));
 }
 
 /* log manager action */
