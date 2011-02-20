@@ -1,5 +1,8 @@
 This file shows the changes in this release of xPDO.
 
+- [#2909] Make auto-table creation optional
+- Add options and default parameters to xPDOObject->getOption()
+- [#3174] Use xPDOQuery alias to build join criteria for getMany()
 - [#3342] Fix use of deprecated split() function in xPDORevisionControl
 - Fix modCacheManager->writeFile() not to truncate files if a mode is specified
 
