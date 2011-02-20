@@ -222,7 +222,7 @@ class xPDOCacheManager {
         $fmode = (strlen($mode) > 1 && in_array($mode[1], array('b', 't'))) ? "a{$mode[1]}" : 'a';
         $file= @fopen($filename, $fmode);
         if ($file) {
-            if ($append === false || flock($file, LOCK_EX | LOCK_NB)) {
+            if ($append === true || flock($file, LOCK_EX | LOCK_NB)) {
                 if ($append === false) {
                     fseek($file, 0);
                     ftruncate($file, 0);
