@@ -239,7 +239,7 @@ class xPDOObject {
                 $xpdo->executedQueries= $xpdo->executedQueries + 1;
                 $errorInfo= $criteria->stmt->errorInfo();
                 $xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error ' . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($errorInfo, true));
-                if ($errorInfo[1] == '1146' || $errorInfo[1] == '1') {
+                if (($errorInfo[1] == '1146' || $errorInfo[1] == '1') && $xpdo->getOption(xPDO::OPT_AUTO_CREATE_TABLES)) {
                     if ($xpdo->getManager() && $xpdo->manager->createObjectContainer($className)) {
                         $tstart= $xpdo->getMicroTime();
                         if (!$criteria->stmt->execute()) {
@@ -258,7 +258,7 @@ class xPDOObject {
         } else {
             $errorInfo = $xpdo->errorInfo();
             $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
-            if ($errorInfo[1] == '1146' || $errorInfo[1] == '1') {
+            if (($errorInfo[1] == '1146' || $errorInfo[1] == '1') && $xpdo->getOption(xPDO::OPT_AUTO_CREATE_TABLES)) {
                 if ($xpdo->getManager() && $xpdo->manager->createObjectContainer($className)) {
                     if (!$criteria->prepare()) {
                         $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
@@ -1291,7 +1291,7 @@ class xPDOObject {
                     if (!$result= $criteria->stmt->execute()) {
                         $errorInfo= $criteria->stmt->errorInfo();
                         $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement:\n" . $criteria->toSQL() . "\n" . print_r($errorInfo, true));
-                        if ($errorInfo[1] == '1146' || $errorInfo[1] == '1') {
+                        if (($errorInfo[1] == '1146' || $errorInfo[1] == '1') && $this->getOption(xPDO::OPT_AUTO_CREATE_TABLES)) {
                             if ($this->xpdo->getManager() && $this->xpdo->manager->createObjectContainer($this->_class) === true) {
                                 if (!$result= $criteria->stmt->execute()) {
                                     $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement:\n{$sql}\n");
