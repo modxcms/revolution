@@ -189,17 +189,19 @@ class xPDOCacheManager {
     }
 
     /**
-     * Writes a file to the filesystem
+     * Writes a file to the filesystem.
      *
      * @access public
      * @param string $filename The absolute path to the location the file will
      * be written in.
      * @param string $content The content of the newly written file.
-     * @param string $mode The php file mode to write in. Defaults to 'ab'
+     * @param string $mode The php file mode to write in. Defaults to 'wb'. Note that this method always
+     * uses a (with b or t if specified) to open the file and that any mode except a means existing file
+     * contents will be overwritten.
      * @param array $options An array of options for the function.
      * @return boolean Returns true if the file was successfully written.
      */
-    public function writeFile($filename, $content, $mode= 'ab', $options= array()) {
+    public function writeFile($filename, $content, $mode= 'wb', $options= array()) {
         $written= false;
         if (!is_array($options)) {
             $options = is_scalar($options) && !is_bool($options) ? array('new_folder_permissions' => $options) : array();
@@ -208,13 +210,25 @@ class xPDOCacheManager {
         if (!file_exists($dirname)) {
             $this->writeTree($dirname, $options);
         }
-        $file= @fopen($filename, $mode);
+        $mode = str_replace('+', '', $mode);
+        switch ($mode[0]) {
+            case 'a':
+                $append = true;
+                break;
+            default:
+                $append = false;
+                break;
+        }
+        $fmode = (strlen($mode) > 1 && in_array($mode[1], array('b', 't'))) ? "a{$mode[1]}" : 'a';
+        $file= @fopen($filename, $fmode);
         if ($file) {
-            if (flock($file, LOCK_EX | LOCK_NB)) {
-                fseek($file, 0);
-                ftruncate($file, 0);
+            if ($append === false || flock($file, LOCK_EX | LOCK_NB)) {
+                if ($append === false) {
+                    fseek($file, 0);
+                    ftruncate($file, 0);
+                }
                 $written= fwrite($file, $content);
-                flock($file, LOCK_UN);
+                if ($append === false) flock($file, LOCK_UN);
             }
             @fclose($file);
         }
@@ -933,44 +947,46 @@ class xPDOFileCache extends xPDOCache {
     public function get($key, $options= array()) {
         $value= null;
         $cacheKey= $this->getCacheKey($key, $options);
-        if ($file = fopen($cacheKey, 'rb')) {
-            $format = (integer) $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP);
-            if (flock($file, LOCK_SH)) {
-                switch ($format) {
-                    case xPDOCacheManager::CACHE_PHP:
-                        $value= @include $cacheKey;
-                        break;
-                    case xPDOCacheManager::CACHE_JSON:
-                        $payload = stream_get_contents($file);
-                        if ($payload !== false) {
-                            $payload = $this->xpdo->fromJSON($payload);
-                            if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
-                                if (array_key_exists('content', $payload)) {
-                                    $value= $payload['content'];
+        if (file_exists($cacheKey)) {
+            if ($file = @fopen($cacheKey, 'rb')) {
+                $format = (integer) $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP);
+                if (flock($file, LOCK_SH)) {
+                    switch ($format) {
+                        case xPDOCacheManager::CACHE_PHP:
+                            $value= @include $cacheKey;
+                            break;
+                        case xPDOCacheManager::CACHE_JSON:
+                            $payload = stream_get_contents($file);
+                            if ($payload !== false) {
+                                $payload = $this->xpdo->fromJSON($payload);
+                                if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
+                                    if (array_key_exists('content', $payload)) {
+                                        $value= $payload['content'];
+                                    }
                                 }
                             }
-                        }
-                        break;
-                    case xPDOCacheManager::CACHE_SERIALIZE:
-                        $payload = stream_get_contents($file);
-                        if ($payload !== false) {
-                            $payload = unserialize($payload);
-                            if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
-                                if (array_key_exists('content', $payload)) {
-                                    $value= $payload['content'];
+                            break;
+                        case xPDOCacheManager::CACHE_SERIALIZE:
+                            $payload = stream_get_contents($file);
+                            if ($payload !== false) {
+                                $payload = unserialize($payload);
+                                if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
+                                    if (array_key_exists('content', $payload)) {
+                                        $value= $payload['content'];
+                                    }
                                 }
                             }
-                        }
-                        break;
+                            break;
+                    }
+                    flock($file, LOCK_UN);
+                    if ($value === null && $this->getOption('removeIfEmpty', $options, true)) {
+                        fclose($file);
+                        @ unlink($cacheKey);
+                        return $value;
+                    }
                 }
-                flock($file, LOCK_UN);
-                if ($value === null && $this->getOption('removeIfEmpty', $options, true)) {
-                    fclose($file);
-                    @ unlink($cacheKey);
-                    return $value;
-                }
+                @fclose($file);
             }
-            fclose($file);
         }
         return $value;
     }
