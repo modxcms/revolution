@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.1.1-pl (February 19, 2011)
+====================================
 - [#2909] Make auto-table creation optional
 - Add options and default parameters to xPDOObject->getOption()
 - [#3174] Use xPDOQuery alias to build join criteria for getMany()
