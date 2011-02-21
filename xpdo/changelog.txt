@@ -1,5 +1,8 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.1.1-pl2 (February 21, 2011)
+====================================
+
 xPDO 2.1.1-pl (February 20, 2011)
 ====================================
 - [#2909] Make auto-table creation optional
