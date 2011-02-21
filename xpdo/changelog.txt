@@ -2,6 +2,7 @@ This file shows the changes in this release of xPDO.
 
 xPDO 2.1.1-pl2 (February 21, 2011)
 ====================================
+- Fix error in xPDOObject->getOption() when handling option overrides
 
 xPDO 2.1.1-pl (February 20, 2011)
 ====================================
