@@ -200,18 +200,36 @@ class xPDOCacheManager {
      */
     public function writeFile($filename, $content, $mode= 'wb', $options= array()) {
         $written= false;
-        if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_folder_permissions' => $options) : array();
+        if (!is_array($options)) {
+            $options = is_scalar($options) && !is_bool($options) ? array('new_folder_permissions' => $options) : array();
+        }
         $dirname= dirname($filename);
         if (!file_exists($dirname)) {
-            if ($this->writeTree($dirname, $options)) {
-                $file= @ fopen($filename, $mode);
+            $this->writeTree($dirname, $options);
+        }
+        $mode = str_replace('+', '', $mode);
+        switch ($mode[0]) {
+            case 'a':
+                $append = true;
+                break;
+            default:
+                $append = false;
+                break;
+        }
+        $fmode = (strlen($mode) > 1 && in_array($mode[1], array('b', 't'))) ? "a{$mode[1]}" : 'a';
+        $file= @fopen($filename, $fmode);
+        if ($file) {
+            if ($append === true || flock($file, LOCK_EX | LOCK_NB)) {
+                if ($append === false) {
+                    fseek($file, 0);
+                    ftruncate($file, 0);
+                }
+                $written= fwrite($file, $content);
+                if ($append === false) flock($file, LOCK_UN);
             }
+            @fclose($file);
         }
-        if ($file= @ fopen($filename, $mode)) {
-            $written= @ fwrite($file, $content);
-            @ fclose($file);
-        }
-        return $written;
+        return ($written !== false);
     }
 
     /**
