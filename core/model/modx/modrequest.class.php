@@ -147,7 +147,8 @@ class modRequest {
         }
         $fromCache = false;
         $cacheKey = $this->modx->context->get('key') . "/resources/{$resourceId}";
-        if ($cachedResource = $this->modx->cacheManager->get($cacheKey)) {
+        $cachedResource = $this->modx->cacheManager->get($cacheKey);
+        if (is_array($cachedResource) && array_key_exists('resource', $cachedResource) && is_array($cachedResource['resource'])) {
             $resource = $this->modx->newObject($cachedResource['resourceClass']);
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
@@ -172,7 +173,6 @@ class modRequest {
                 $fromCache = true;
             }
         }
-        $this->modx->resourceGenerated = (boolean) !$fromCache;
         if (!$fromCache || !is_object($resource)) {
             $criteria = array('id' => $resourceId, 'deleted' => '0');
             if (!$this->modx->hasPermission('view_unpublished')) $criteria['published']= 1;
@@ -198,6 +198,7 @@ class modRequest {
                             );
                         }
                     }
+                    $this->modx->resourceGenerated = true;
                 }
             }
         } elseif ($fromCache && $resource instanceof modResource && !$resource->get('deleted')) {
