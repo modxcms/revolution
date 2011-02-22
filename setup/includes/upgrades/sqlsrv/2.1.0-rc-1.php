@@ -19,17 +19,17 @@ $class = 'modResource';
 $table = $modx->getTableName($class);
 
 $description = $this->install->lexicon('add_column',array('column' => 'uri','table' => $table));
-$sql = "ALTER TABLE {$table} ADD COLUMN {$modx->escape('uri')} NVARCHAR(1000) NULL AFTER {$modx->escape('content_type')}";
+$sql = "ALTER TABLE {$table} ADD [uri] NVARCHAR(1000) NULL"; // AFTER {$modx->escape('content_type')}
 $uriAdded = $this->processResults($class,$description,$sql);
 
-$sql = "ALTER TABLE {$table} ADD INDEX [uri] ([uri](1000))";
+$sql = "CREATE INDEX [uri] ON {$table} ([uri])";
 $modx->exec($sql);
 
 $description = $this->install->lexicon('add_column',array('column' => 'uri_override','table' => $table));
-$sql = "ALTER TABLE {$table} ADD {$modx->escape('uri_override')} BIT NOT NULL DEFAULT 0 AFTER {$modx->escape('uri')}";
+$sql = "ALTER TABLE {$table} ADD [uri_override] BIT NOT NULL DEFAULT 0"; // AFTER {$modx->escape('uri')}
 $this->processResults($class,$description,$sql);
 
-$sql = "ALTER TABLE {$table} ADD INDEX [uri_override] ([uri_override])";
+$sql = "CREATE INDEX [uri_override] ON {$table} ([uri_override])";
 $modx->exec($sql);
 
 if ($uriAdded && $modx->getOption('friendly_urls')) {
