@@ -648,7 +648,7 @@ class xPDOObject {
      */
     public function getOption($key, $options = null, $default = null) {
         if (is_array($options) && array_key_exists($key, $options)) {
-            $value= $this->_options[$key];
+            $value= $options[$key];
         } elseif (array_key_exists($key, $this->_options)) {
             $value= $this->_options[$key];
         } else {
