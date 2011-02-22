@@ -94,6 +94,7 @@ class xPDO {
     /**#@+
      * Constants
      */
+    const OPT_AUTO_CREATE_TABLES = 'auto_create_tables';
     const OPT_BASE_CLASSES = 'base_classes';
     const OPT_BASE_PACKAGES = 'base_packages';
     const OPT_CACHE_COMPRESS = 'cache_compress';

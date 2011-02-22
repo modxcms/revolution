@@ -76,3 +76,26 @@ foreach ($tvs as $tv) {
 /* and drop display_params field from modTemplateVar */
 $sql = "ALTER TABLE {$table} DROP COLUMN `display_params`";
 $this->install->xpdo->exec($sql);
+
+/* add uri field and index to modResource */
+$class = 'modResource';
+$table = $modx->getTableName($class);
+
+$description = $this->install->lexicon('add_column',array('column' => 'uri','table' => $table));
+$sql = "ALTER TABLE {$table} ADD {$modx->escape('uri')} TEXT NULL AFTER {$modx->escape('content_type')}";
+$uriAdded = $this->processResults($class,$description,$sql);
+
+$sql = "ALTER TABLE {$table} ADD INDEX uri (uri(1000))";
+$modx->exec($sql);
+
+/* add uri_override field and index to modResource */
+$description = $this->install->lexicon('add_column',array('column' => 'uri_override','table' => $table));
+$sql = "ALTER TABLE {$table} ADD {$modx->escape('uri_override')} TINYINT(1) NOT NULL DEFAULT 0 AFTER {$modx->escape('uri')}";
+$this->processResults($class,$description,$sql);
+
+$sql = "ALTER TABLE {$table} ADD INDEX uri_override (uri_override)";
+$modx->exec($sql);
+
+if ($uriAdded && $modx->getOption('friendly_urls')) {
+    $modx->call('modResource', 'refreshURIs', array(&$modx));
+}

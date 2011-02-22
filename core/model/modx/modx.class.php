@@ -157,7 +157,7 @@ class modX extends xPDO {
     /**
      * @var boolean Indicates if the resource was generated during this request.
      */
-    public $resourceGenerated= true;
+    public $resourceGenerated= false;
     /**
      * @var array Version information for this MODx deployment.
      */
@@ -784,7 +784,7 @@ class modX extends xPDO {
                     $ctx = $this->getContext($context);
                 }
                 if ($ctx) {
-                    $url= $ctx->makeUrl($id, $args, $scheme);
+                    $url= $ctx->makeUrl($id, $args, 'full');
                 }
             }
 
@@ -1449,7 +1449,7 @@ class modX extends xPDO {
             $processor->setProperties($scriptProperties);
             $response = $processor->run();
         } else {
-            $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processor} does not exist; " . print_r($options, true));
+            $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processorFile} does not exist; " . print_r($options, true));
         }
         return $response;
     }
@@ -2830,7 +2830,8 @@ class modX extends xPDO {
                 }
             }
             if (!$sh) {
-                if ($sessionSavePath = $this->getOption('session_save_path') && is_writable($sessionSavePath)) {
+                $sessionSavePath = $this->getOption('session_save_path');
+                if ($sessionSavePath && is_writable($sessionSavePath)) {
                     session_save_path($sessionSavePath);
                 }
             }
@@ -2963,7 +2964,7 @@ class modX extends xPDO {
      * @access protected
      */
     public function _postProcess() {
-        if ($this->getOption('cache_resource', true)) {
+        if ($this->resourceGenerated && $this->getOption('cache_resource', null, true)) {
             if (is_object($this->resource) && $this->resource instanceof modResource && $this->resource->get('id') && $this->resource->get('cacheable')) {
                 $this->invokeEvent('OnBeforeSaveWebPageCache');
                 $this->cacheManager->generateResource($this->resource);

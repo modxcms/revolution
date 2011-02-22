@@ -31,7 +31,6 @@ foreach (array('mysql', 'sqlsrv') as $driver) {
  */
 class [+class+] extends [+extends+] {
 }
-?>
 EOD;
     $generator->platformTemplate= <<<EOD
 <?php
@@ -42,7 +41,6 @@ EOD;
 require_once (dirname(dirname(__FILE__)) . '/[+class-lowercase+].class.php');
 class [+class+]_[+platform+] extends [+class+] {
 }
-?>
 EOD;
     $generator->mapHeader= <<<EOD
 <?php

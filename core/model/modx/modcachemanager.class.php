@@ -73,97 +73,29 @@ class modCacheManager extends xPDOCacheManager {
             /* generate the aliasMap and resourceMap */
             $tblResource= $this->modx->getTableName('modResource');
             $tblContextResource= $this->modx->getTableName('modContextResource');
-            $resourceFields= 'id,parent,alias,isfolder,content_type';
-            if (isset ($contextConfig['cache_context_resourceFields']) && $contextConfig['cache_context_resourceFields']) {
-                $resourceFields= $contextConfig['cache_context_resourceFields'];
-            }
-            $resourceCols= $this->modx->getSelectColumns('modResource', 'r', '', explode(',', $resourceFields));
+            $resourceFields= array('id','parent','uri');
+            $resourceCols= $this->modx->getSelectColumns('modResource', 'r', '', $resourceFields);
             $bindings= array (
                 ':context_key1' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
                 ,':context_key2' => array('value' => $obj->get('key'), 'type' => PDO::PARAM_STR)
             );
             $sql = "SELECT {$resourceCols} FROM {$tblResource} r LEFT JOIN {$tblContextResource} cr ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY {$resourceCols}, r.menuindex ORDER BY r.parent ASC, r.menuindex ASC";
             $criteria= new xPDOCriteria($this->modx, $sql, $bindings, false);
-            if (!$collContentTypes= $this->modx->getCollection('modContentType')) {
-                $htmlContentType= $this->modx->newObject('modContentType');
-                $htmlContentType->set('name', 'HTML');
-                $htmlContentType->set('description', 'HTML content');
-                $htmlContentType->set('mime_type', 'text/html');
-                $htmlContentType->set('file_extensions', 'html,htm');
-                $collContentTypes['1']= $htmlContentType;
-            }
-            $collResources= null;
-            if ($criteria->prepare() && $criteria->stmt->execute()) {
+            if ($criteria->stmt && $criteria->stmt->execute()) {
                 $collResources= & $criteria->stmt;
             }
             if ($collResources) {
                 $results['resourceMap']= array ();
                 $results['aliasMap']= array ();
-                $containerSuffix= isset ($contextConfig['container_suffix']) ? $contextConfig['container_suffix'] : '';
-                $parentPaths= array();
-                $parentSql= "SELECT {$resourceCols} FROM {$tblResource} r WHERE r.id = :parent AND r.id != r.parent";
                 while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
-                    $parentId= isset($r->parent) ? strval($r->parent) : "0";
-                    $results['resourceMap']["{$parentId}"][] = (string) $r->id;
-                    $resAlias= '';
-                    $resPath= '';
-                    $contentType= isset ($collContentTypes[$r->content_type]) ? $collContentTypes[$r->content_type] : $collContentTypes['1'];
-                    if ((isset ($obj->config['friendly_urls']) && $obj->config['friendly_urls']) || $contextConfig['friendly_urls']) {
-                        if ((isset ($obj->config['friendly_alias_urls']) && $obj->config['friendly_alias_urls']) || $contextConfig['friendly_alias_urls']) {
-                            $resAlias= $r->alias;
-                            if (empty ($resAlias)) $resAlias= $r->id;
-                            $parentResource= '';
-                            if ((isset ($obj->config['use_alias_path']) && $obj->config['use_alias_path'] == 1) || $contextConfig['use_alias_path']) {
-                                $pathParentId= $parentId;
-                                $parentResources= array ();
-                                $currResource= $r;
-                                $hasParent= (boolean) $pathParentId;
-                                if ($hasParent) {
-                                    if (array_key_exists($parentId, $parentPaths)) {
-                                        $resPath= $parentPaths[$parentId];
-                                    } else {
-                                        if ($parentStmt= $this->modx->prepare($parentSql)) {
-                                            $parentStmt->bindParam(':parent', $pathParentId);
-                                            if ($parentStmt->execute()) {
-                                                while ($hasParent && $currResource= $parentStmt->fetch(PDO::FETCH_OBJ)) {
-                                                    $parentAlias= $currResource->alias;
-                                                    if (empty ($parentAlias)) {
-                                                        $parentAlias= "{$pathParentId}";
-                                                    }
-                                                    $parentResources[]= "{$parentAlias}";
-                                                    $parentPaths[$pathParentId] = implode('/', array_reverse($parentResources));
-                                                    $pathParentId= $currResource->parent;
-                                                    $hasParent= ($pathParentId > 0 && $parentStmt->execute());
-                                                }
-                                            }
-                                        }
-                                        $resPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
-                                        $parentPaths[$parentId]= $resPath;
-                                    }
-                                }
-                            }
-                        } else {
-                            $resAlias= $r->id;
+                    $results['resourceMap'][(string) $r->parent][] = (string) $r->id;
+                    if ($this->modx->getOption('friendly_urls', $contextConfig, false)) {
+                        if (array_key_exists($r->uri, $results['aliasMap'])) {
+                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource URI {$r->uri} already exists for resource id = {$results['aliasMap'][$r->uri]}; skipping duplicate resource URI for resource id = {$r->id}");
+                            continue;
                         }
-                        if (!empty($containerSuffix) && $r->isfolder) {
-                            $resourceExt= $containerSuffix;
-                        } else {
-                            $resourceExt= $contentType->getExtension();
-                        }
-                        if (!empty($resourceExt)) {
-                            $resAlias .= $resourceExt;
-                        }
-                    } else {
-                        $resAlias= $r->id;
+                        $results['aliasMap'][$r->uri]= $r->id;
                     }
-                    if (!empty ($resPath)) {
-                        $resPath .= '/';
-                    }
-                    if (isset ($results['aliasMap'][$resPath . $resAlias])) {
-                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Resource alias {$resPath}{$resAlias} already exists for resource id = {$results['aliasMap'][$resPath . $resAlias]}; skipping duplicate resource alias for resource id = {$r->id}");
-                        continue;
-                    }
-                    $results['aliasMap'][$resPath . $resAlias]= $r->id;
                 }
             }
 
