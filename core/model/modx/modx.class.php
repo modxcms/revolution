@@ -157,7 +157,7 @@ class modX extends xPDO {
     /**
      * @var boolean Indicates if the resource was generated during this request.
      */
-    public $resourceGenerated= true;
+    public $resourceGenerated= false;
     /**
      * @var array Version information for this MODx deployment.
      */
@@ -2964,7 +2964,7 @@ class modX extends xPDO {
      * @access protected
      */
     public function _postProcess() {
-        if ($this->getOption('cache_resource', true)) {
+        if ($this->resourceGenerated && $this->getOption('cache_resource', null, true)) {
             if (is_object($this->resource) && $this->resource instanceof modResource && $this->resource->get('id') && $this->resource->get('cacheable')) {
                 $this->invokeEvent('OnBeforeSaveWebPageCache');
                 $this->cacheManager->generateResource($this->resource);
