@@ -61,7 +61,7 @@
         <phingcall target="css-concat-min" />
         <phingcall target="copy-prepared-css" />
         <phingcall target="generate-core-transport" />
-        <phingcall target="copy-core-transport" />
+        <!--<phingcall target="copy-core-transport" />-->
         <phingcall target="prepare-build-distrib" />
         <phingcall target="generate-phpdocs" />
         <phingcall target="build-sdk" />
@@ -247,14 +247,16 @@
             <not><isset property="build.distrib" /></not>
             <then>
                 <property name="core.dir" value="${project.core.dir}" />
+                <property name="transport.image" value="wc" />
             </then>
             <else>
                 <property name="core.dir" value="${image.core.dir}" />
+                <property name="transport.image" value="${build.distrib.name}" />
             </else>
         </if>
         <delete file="${core.dir}/packages/core.transport.zip" />
         <delete dir="${core.dir}/packages/core" />
-        <exec dir="${project.basedir}" command="${php.command} transport.core.php" />
+        <exec dir="${project.basedir}" command="${php.command} transport.core.php ${transport.image}" />
     </target>
 
     <!-- Run the phpdoc generation script -->
