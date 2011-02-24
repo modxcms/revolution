@@ -42,11 +42,9 @@ if (!empty($_POST)) {
         if ($user) {
             $cachepwd = $user->get('cachepwd');
             if (!empty($_REQUEST['modahsh']) && !empty($cachepwd)) {
-                if ($_REQUEST['modahsh'] == md5($cachepwd)) {
+                if ($_REQUEST['modahsh'] == $cachepwd) {
                     /* correct hash and pwd specified, so reset actual pwd to new one */
-                    $user->set('password',md5($cachepwd));
-                    $user->set('cachepwd','');
-                    $user->save();
+                    $user->activatePassword();
                 } else {
                     $modx->smarty->assign('error_message',$modx->lexicon('login_activation_key_err'));
                     $validated = false;
@@ -88,9 +86,12 @@ if (!empty($_POST)) {
         if ($user) {
 
             $newPassword = $user->generatePassword();
-            $newPasswordHash = md5($newPassword);
 
-            $user->set('cachepwd',$newPassword);
+            $modx->getService('hashing', 'hashing.modHashing');
+            $hashOptions = array('salt' => $user->get('salt'));
+            $newPasswordHash = $modx->hashing->getHash('', $user->get('hash_class'))->hash($newPassword, $hashOptions);
+
+            $user->set('cachepwd', $newPassword);
             $user->save();
 
             /* send activation email */

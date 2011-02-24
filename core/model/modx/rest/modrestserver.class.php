@@ -151,7 +151,7 @@ class modRestServer {
         ));
         if (empty($user)) return $this->deny($this->modx->lexicon('user_err_nf'));
 
-        if ($user->get('password') != md5($_REQUEST[$this->config[modRestServer::OPT_AUTH_PASS_VAR]])) {
+        if (!$user->passwordMatches($_REQUEST[$this->config[modRestServer::OPT_AUTH_PASS_VAR]])) {
             return $this->deny($this->modx->lexicon('user_err_password'));
         }
         return true;

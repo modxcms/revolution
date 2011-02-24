@@ -13,13 +13,29 @@ class modUser extends modPrincipal {
     public $sessionContexts= array ();
 
     /**
+     * The modUser password field is hashed automatically.
+     *
+     * {@inheritdoc}
+     */
+    public function set($k, $v= null, $vType= '') {
+        if (in_array($k, array('password', 'cachepwd')) && $this->xpdo->getService('hashing', 'hashing.modHashing')) {
+            if (!$this->get('salt')) {
+                $this->set('salt', md5(uniqid(rand(),true)));
+            }
+            $vOptions = array('salt' => $this->get('salt'));
+            $v = $this->xpdo->hashing->getHash('', $this->get('hash_class'))->hash($v, $vOptions);
+        }
+        return parent::set($k, $v, $vType);
+    }
+
+    /**
      * Overrides xPDOObject::save to fire modX-specific events
      * 
      * {@inheritDoc}
      */
     public function save($cacheFlag = false) {
         $isNew = $this->isNew();
-        
+
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnUserBeforeSave',array(
                 'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
@@ -301,6 +317,39 @@ class modUser extends modPrincipal {
     }
 
     /**
+     * Determines if the provided password matches the hashed password stored for the user.
+     *
+     * @param string $password The password to determine if it matches.
+     * @param array $options Optional settings for the hashing process.
+     * @return boolean True if the provided password matches the stored password for the user.
+     */
+    public function passwordMatches($password, array $options = array()) {
+        $match = false;
+        if ($this->xpdo->getService('hashing', 'hashing.modHashing')) {
+            $options = array_merge(array('salt' => $this->get('salt')), $options);
+            $hashedPassword = $this->xpdo->hashing->getHash('', $this->get('hash_class'))->hash($password, $options);
+            $match = ($this->get('password') === $hashedPassword);
+        }
+        return $match;
+    }
+
+    /**
+     * Activate a user password by moving the cachepwd to the password.
+     * 
+     * @return boolean True if the activation was successful.
+     */
+    public function activatePassword() {
+        $activated = false;
+        if ($this->get('cachepwd')) {
+            $this->_fields['password'] = $this->get('cachepwd');
+            $this->setDirty('password');
+            $this->set('cachepwd', '');
+            $activated = $this->save();
+        }
+        return $activated;
+    }
+
+    /**
      * Change the user password.
      *
      * @access public
@@ -311,9 +360,9 @@ class modUser extends modPrincipal {
      */
     public function changePassword($newPassword, $oldPassword) {
         $changed= false;
-        if ($this->get('password') === md5($oldPassword)) {
+        if ($this->passwordMatches($oldPassword)) {
             if (!empty ($newPassword)) {
-                $this->set('password', md5($newPassword));
+                $this->set('password', $newPassword);
                 $changed= $this->save();
                 if ($changed) {
                     $this->xpdo->invokeEvent('OnUserChangePassword', array (

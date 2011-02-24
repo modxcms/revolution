@@ -24,7 +24,7 @@ if (isset($scriptProperties['newpassword']) && $scriptProperties['newpassword'] 
     if ($scriptProperties['passwordgenmethod'] == 'g') {
     $len = $modx->getOption('password_generated_length',null,8);
             $autoPassword = generate_password($len);
-            $user->set('password', $user->encode($autoPassword));
+            $user->set('password', $autoPassword);
             $newPassword= $autoPassword;
     } else {
         if (empty($scriptProperties['specifiedpassword'])) {
@@ -34,7 +34,7 @@ if (isset($scriptProperties['newpassword']) && $scriptProperties['newpassword'] 
         } elseif (strlen($scriptProperties['specifiedpassword']) < $modx->getOption('password_min_length',null,6)) {
                 $modx->error->addField('password',$modx->lexicon('user_err_password_too_short'));
         } else {
-                $user->set('password',$user->encode($scriptProperties['specifiedpassword']));
+                $user->set('password', $scriptProperties['specifiedpassword']);
                 $newPassword= $scriptProperties['specifiedpassword'];
         }
     }
