@@ -35,3 +35,18 @@ $modx->exec($sql);
 if ($uriAdded && $modx->getOption('friendly_urls')) {
     $modx->call('modResource', 'refreshURIs', array(&$modx));
 }
+
+/* add hash_class and salt to modUser */
+$class = 'modUser';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'hash_class','table' => $table));
+$sql = "ALTER TABLE {$table} ADD COLUMN {$modx->escape('hash_class')} NVARCHAR(100) NOT NULL DEFAULT 'hashing.modPBKDF2'"; // AFTER {$modx->escape('remote_data')}
+$hashClassAdded = $this->processResults($class,$description,$sql);
+
+$description = $this->install->lexicon('add_column',array('column' => 'salt','table' => $table));
+$sql = "ALTER TABLE {$table} ADD COLUMN {$modx->escape('salt')} NVARCHAR(100) NOT NULL DEFAULT ''"; // AFTER {$modx->escape('hash_class')}
+$this->processResults($class,$description,$sql);
+
+if ($hashClassAdded) {
+    $modx->exec("UPDATE {$table} SET {$modx->escape('hash_class')} = 'hashing.modMD5'");
+}

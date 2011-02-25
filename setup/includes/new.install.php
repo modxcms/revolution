@@ -27,7 +27,7 @@ $settings_distro->save();
 /* add default admin user */
 $user = $this->xpdo->newObject('modUser');
 $user->set('username', $this->settings->get('cmsadmin'));
-$user->set('password', md5($this->settings->get('cmspassword')));
+$user->set('password', $this->settings->get('cmspassword'));
 $saved = $user->save();
 
 if ($saved) {

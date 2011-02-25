@@ -40,14 +40,9 @@ if (!empty($_POST)) {
         ));
         /* first if there's an activation hash, process that */
         if ($user) {
-            $cachepwd = $user->get('cachepwd');
-            if (!empty($_REQUEST['modahsh']) && !empty($cachepwd)) {
-                if ($_REQUEST['modahsh'] == md5($cachepwd)) {
-                    /* correct hash and pwd specified, so reset actual pwd to new one */
-                    $user->set('password',md5($cachepwd));
-                    $user->set('cachepwd','');
-                    $user->save();
-                } else {
+            if (array_key_exists('modahsh', $_REQUEST) && !empty($_REQUEST['modahsh'])) {
+                $activated = $user->activatePassword($_REQUEST['modahsh']);
+                if ($activated === false) {
                     $modx->smarty->assign('error_message',$modx->lexicon('login_activation_key_err'));
                     $validated = false;
                 }
@@ -86,11 +81,17 @@ if (!empty($_POST)) {
         ));
         $user = $modx->getObject('modUser',$c);
         if ($user) {
+            $activationHash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
+
+            $modx->getService('registry', 'registry.modRegistry');
+            $modx->registry->getRegister('user', 'registry.modDbRegister');
+            $modx->registry->user->connect();
+            $modx->registry->user->subscribe('/pwd/reset/');
+            $modx->registry->user->send('/pwd/reset/', array(md5($user->get('username')) => $activationHash), array('ttl' => 86400));
 
             $newPassword = $user->generatePassword();
-            $newPasswordHash = md5($newPassword);
 
-            $user->set('cachepwd',$newPassword);
+            $user->set('cachepwd', $newPassword);
             $user->save();
 
             /* send activation email */
@@ -99,7 +100,7 @@ if (!empty($_POST)) {
             $placeholders['url_scheme'] = $modx->getOption('url_scheme');
             $placeholders['http_host'] = $modx->getOption('http_host');
             $placeholders['manager_url'] = $modx->getOption('manager_url');
-            $placeholders['hash'] = $newPasswordHash;
+            $placeholders['hash'] = $activationHash;
             $placeholders['password'] = $newPassword;
             foreach ($placeholders as $k => $v) {
                 $message = str_replace('[[+'.$k.']]',$v,$message);

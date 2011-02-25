@@ -136,7 +136,7 @@ if ($mgrEvents) {
 /* check if plugin authenticated the user */
 if (!$rt || (is_array($rt) && !in_array(true, $rt))) {
     /* check user password - local authentication */
-    if ($user->get('password') != md5($givenPassword)) {
+    if (!$user->passwordMatches($givenPassword)) {
         $flc = ((int)$up->get('failedlogincount'))+1;
         $up->set('failedlogincount',$flc);
         $up->save();

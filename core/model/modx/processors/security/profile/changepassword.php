@@ -15,7 +15,7 @@ if (!$modx->hasPermission('change_password')) return $modx->error->failure($modx
 $modx->lexicon->load('user');
 
 /* if changing the password */
-if (md5($scriptProperties['password_old']) != $modx->user->get('password')) {
+if (!$modx->user->passwordMatches($scriptProperties['password_old'])) {
     return $modx->error->failure($modx->lexicon('user_err_password_invalid_old'));
 }
 if (empty($scriptProperties['password_new']) || strlen($scriptProperties['password_new']) < $modx->getOption('password_min_length',null,8)) {
