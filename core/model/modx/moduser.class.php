@@ -334,17 +334,36 @@ class modUser extends modPrincipal {
     }
 
     /**
-     * Activate a user password by moving the cachepwd to the password.
-     * 
-     * @return boolean True if the activation was successful.
+     * Activate a reset user password if the proper activation key is provided.
+     *
+     * {@internal This does not mark the user active, but rather moves the cachepwd to the
+     * password field if the activation key matches.}
+     *
+     * @param string $key The activation key provided to the user and stored in the registry for matching.
+     * @return boolean|integer True if the activation was successful, false if unsuccessful,
+     * and -1 if there is no activation to perform.
      */
-    public function activatePassword() {
-        $activated = false;
+    public function activatePassword($key) {
+        $activated = -1;
         if ($this->get('cachepwd')) {
-            $this->_fields['password'] = $this->get('cachepwd');
-            $this->setDirty('password');
-            $this->set('cachepwd', '');
-            $activated = $this->save();
+            if ($this->xpdo->getService('registry', 'registry.modRegistry') && $this->xpdo->registry->getRegister('user', 'registry.modDbRegister')) {
+                if ($this->xpdo->registry->user->connect()) {
+                    $activated = false;
+                    $this->xpdo->registry->user->subscribe('/pwd/reset/' . md5($this->get('username')));
+                    $msgs = $this->xpdo->registry->user->read(array('poll_limit' => 1));
+                    if (!empty($msgs)) {
+                        if ($key === reset($msgs)) {
+                            $this->_setRaw('password', $this->get('cachepwd'));
+                            $this->_setRaw('cachepwd', '');
+                            $activated = $this->save();
+                        }
+                    }
+                }
+            }
+            if ($activated === false) {
+                $this->_setRaw('cachepwd', '');
+                $this->save();
+            }
         }
         return $activated;
     }
