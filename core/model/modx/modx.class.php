@@ -1468,42 +1468,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Determines if the current webuser is a member of the specified webgroups.
-     *
-     * @deprecated 2009-11-01 To be removed in 2.1
-     * @param array $groupNames An array of groups to check against.
-     * @return boolean True if the user is a member of any one of the supplied
-     * group names, false otherwise.
-     */
-    public function isMemberOfWebGroup(array $groupNames= array ()) {
-        if (!is_array($groupNames))
-            return false;
-        // check cache
-        $grpNames= isset ($_SESSION['webUserGroupNames']) ? $_SESSION['webUserGroupNames'] : false;
-        if (!is_array($grpNames)) {
-            if ($user= $this->getUser('web')) {
-                if ($groupMemberships= $user->getMany('UserGroupMembers')) {
-                    foreach ($groupMemberships as $gm) {
-                        if ($group= $gm->getOne('UserGroup')) {
-                            $grpNames[]= $group->get('name');
-                        }
-                    }
-                }
-            }
-            // save to session
-            if ($grpNames) $_SESSION['webUserGroupNames']= $grpNames;
-        }
-        if ($grpNames && !empty ($grpNames)) {
-            foreach ($groupNames as $k => $v) {
-                if (in_array(trim($v), $grpNames)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
      * Get persistent data from a specific document.
      * @deprecated 2007-09-17 To be removed in 2.1.
      */
