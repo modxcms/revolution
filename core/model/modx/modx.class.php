@@ -1578,37 +1578,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Get all published children documents of the specified document.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getActiveChildren($id=0, $sort='menuindex', $dir='ASC', $fields='id, pagetitle, description, parent, alias, menutitle, class_key, context_key') {
-        $collection = array();
-        if ($fields == '*') {
-            $columns = array_keys($this->getFields('modResource'));
-        } else {
-            $columns = explode(',', $fields);
-            foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
-        }
-        $criteria = $this->newQuery('modResource');
-        $criteria->setClassAlias('sc');
-        $criteria->select('id');
-        $criteria->select($columns);
-        $criteria->where(array(
-            'sc.parent' => $id,
-            'sc.published' => '1',
-            'sc.deleted' => '0'
-        ));
-        if (!empty($sort)) $criteria->sortby($sort, $dir);
-        if ($objCollection = $this->getCollection('modResource', $criteria)) {
-            foreach ($objCollection as $obj) {
-                array_push($collection, $obj->get($columns));
-            }
-        }
-        if (empty($collection)) $collection = false;
-        return $collection;
-    }
-
-    /**
      * Get all children documents of the specified document.
      * @deprecated 2007-09-17 To be removed in 2.1
      */
