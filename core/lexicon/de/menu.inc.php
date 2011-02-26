@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic menu
+ *
+ * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['lexicon_key'] = 'Lexikon-Schlüssel';
 $_lang['menu_create'] = 'Menü erstellen';

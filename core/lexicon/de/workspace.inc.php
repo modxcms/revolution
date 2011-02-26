@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic workspace
+ *
+ * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['alphabetically'] = 'Alphabetisch';
 $_lang['already_downloaded'] = 'Sie haben dieses Package bereits heruntergeladen.';

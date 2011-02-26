@@ -1,8 +1,12 @@
 <?php
 /**
- * German language files for Revolution 2.0.0 setup
+ * German Default Lexicon Topic for Revolution setup
  *
  * @package setup
+ * @subpackage lexicon
+ * @language de
+ *
+ * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Add-ons';

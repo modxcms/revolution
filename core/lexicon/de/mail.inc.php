@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic mail
+ *
+ * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['mail_err_address_ns'] = 'Sie müssen eine Empfänger-E-Mail-Adresse angeben.';
 $_lang['mail_err_derive_getmailer'] = 'Es wurde versucht, die abstrakte Funktion _getMailer() der Klasse modMail aufzurufen. Sie müssen diese Funktion in einer von modMail abgeleiteten Klasse implementieren.';

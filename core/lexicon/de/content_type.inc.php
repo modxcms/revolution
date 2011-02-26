@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic content_type
+ *
+ * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['binary'] = 'Binär';
 $_lang['binary_desc'] = 'Ist die Datei eine Binärdatei oder eine Textdatei (text/ascii)?';

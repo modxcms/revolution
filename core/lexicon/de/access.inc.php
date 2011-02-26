@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic access
+ *
+ * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['access_category_management_msg'] = 'Verwalten Sie die Zugriffsrechte von Benutzergruppen-Mitgliedern auf Elemente über Kategorien und weisen Sie optional Zugriffsrichtlinien zu.';
 $_lang['access_category_err_ae'] = 'Eine ACL für diese Kategorie existiert bereits!';

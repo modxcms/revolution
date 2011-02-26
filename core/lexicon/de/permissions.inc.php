@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic permissions
+ *
+ * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['perm.about_desc'] = 'Die Seite "Über MODX" anzeigen.';
 $_lang['perm.access_permissions_desc'] = 'Mit Zugriffsrechten zusammenhängende Seiten und Aktionen anzeigen und bearbeiten/benutzen.';
