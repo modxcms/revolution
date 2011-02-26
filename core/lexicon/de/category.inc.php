@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic category
+ *
+ * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['categories'] = 'Kategorien';
 $_lang['category_confirm_delete'] = 'Sind Sie sicher, dass Sie diese Kategorie löschen möchten? Alle Elemente in dieser Kategorie werden als unkategorisiert eingeordnet.';

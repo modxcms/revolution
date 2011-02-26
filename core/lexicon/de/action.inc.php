@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic action
+ *
+ * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['action'] = 'Aktion';
 $_lang['action_confirm_remove'] = 'Sind Sie sicher, dass Sie diese Aktion löschen möchten? Dies könnte möglicherweise Ihre MODX-Manager-Benutzeroberfläche beschädigen.';

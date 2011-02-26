@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic dashboard
+ *
+ * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['active_users_none'] = 'Momentan keine Benutzer aktiv.';  // Keine momentan aktiven Benutzer.
 $_lang['add_user'] = 'Benutzer hinzufügen';

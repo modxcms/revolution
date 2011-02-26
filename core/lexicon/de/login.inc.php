@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic login
+ *
+ * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['login_activation_key_err'] = 'Aktivierungs-Schlüssel ist nicht korrekt! Bitte überprüfen Sie Ihre Aktivierungs-E-Mail und stellen Sie sicher, dass Sie die richtige URL aufgerufen haben.';
 $_lang['login_blocked_admin'] = 'Sie wurden durch einen Administrator vom MODX-Manager ausgeschlossen.';
