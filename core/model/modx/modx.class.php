@@ -1288,23 +1288,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Legacy call to set the current documentObject being handled by MODx.
-     *
-     * @param string $method 'id' or 'alias' to indicate the lookup method.
-     * @param string|int $identifier The identifier for looking up the document.
-     * @return array An associative array containing all the document data.
-     * @deprecated 0.9.7 - Jan 18, 2007
-     */
-    public function getDocumentObject($method, $identifier) {
-        if (!$this->getRequest()) {
-            $this->log(modX::LOG_LEVEL_FATAL, 'Could not load request class.');
-        }
-        $this->resource= $this->request->getResource($method, $identifier);
-        $documentObject= & $this->documentObject;
-        return $documentObject;
-    }
-
-    /**
      * Invokes a specified Event with an optional array of parameters.
      *
      * @access public
