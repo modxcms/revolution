@@ -2498,15 +2498,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Alias of getChunk.
-     *
-     * @deprecated 9/15/2007 Use getChunk instead; to be removed in 2.1.
-     */
-    public function putChunk($chunkName) {
-        return $this->getChunk($chunkName);
-    }
-
-    /**
      * Switches the primary Context for the modX instance.
      *
      * Be aware that switching contexts does not allow custom session handling
