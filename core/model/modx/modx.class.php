@@ -1578,39 +1578,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Get all children documents of the specified document.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getDocumentChildren($parentid= 0, $published= 1, $deleted= 0, $fields= "*", $where= '', $sort= "menuindex", $dir= "ASC", $limit= "") {
-        $collection = array();
-        if ($fields == '*') {
-            $columns = array_keys($this->getFields('modResource'));
-        } else {
-            $columns = explode(',', $fields);
-            foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
-        }
-        $criteria = $this->newQuery('modResource');
-        $criteria->setClassAlias('sc');
-        $criteria->select('id');
-        $criteria->select($columns);
-        $criteria->where(array(
-            'sc.parent' => $parentid,
-            'sc.published' => $published,
-            'sc.deleted' => $deleted
-        ));
-        if (!empty($where)) $criteria->andCondition($where);
-        if (!empty($sort)) $criteria->sortby($sort, $dir);
-        if (!empty($limit)) $criteria->limit($limit);
-        if ($objCollection = $this->getCollection('modResource', $criteria)) {
-            foreach ($objCollection as $obj) {
-                array_push($collection, $obj->get($columns));
-            }
-        }
-        if (empty($collection)) $collection = false;
-        return $collection;
-    }
-
-    /**
      * @deprecated 2007-09-17 To be removed in 2.1
      */
     public function getDocumentChildrenTVars($parentid=0, array $tvidnames=array(), $published=1, $docsort="menuindex", $docsortdir="ASC", $tvfields="*", $tvsort="rank", $tvsortdir="ASC") {
