@@ -635,8 +635,8 @@ class modTemplateVar extends modElement {
             case 'SELECT': /* selects a record from the cms database */
                 if ($preProcess) {
                     $dbtags = array();
-                    $dbtags['DBASE'] = $this->xpdo->db->config['dbase'];
-                    $dbtags['PREFIX'] = $this->xpdo->db->config['table_prefix'];
+                    $dbtags['DBASE'] = $this->xpdo->getOption('dbname');
+                    $dbtags['PREFIX'] = $this->xpdo->getOption('table_prefix');
                     foreach($dbtags as $key => $pValue) {
                         $param = str_replace('[[+'.$key.']]', $pValue, $param);
                     }

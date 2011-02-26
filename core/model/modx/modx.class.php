@@ -213,13 +213,6 @@ class modX extends xPDO {
     public $_userConfig= array();
     protected $_logSequence= 0;
 
-    /**
-     * @var DBAPI An instance of the DBAPI helper class.
-     * @deprecated Aug 28, 2006 For legacy component support only; use xPDO
-     * methods inherited by modX class instead. To be removed in 2.1.
-     */
-    public $db= null;
-
     public $pluginCache= array();
     public $sourceCache= array(
         'modChunk' => array()
@@ -410,10 +403,6 @@ class modX extends xPDO {
             $this->_initCulture();
 
             $this->getService('registry', 'registry.modRegistry');
-
-            if ($this->loadClass('DBAPI', '', false, true)) {
-                $this->db= new DBAPI();
-            }
 
             if (is_array ($this->config)) {
                 $this->setPlaceholders($this->config, '+');
@@ -1764,16 +1753,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Returns the full table name based on db settings.
-     *
-     * @deprecated Aug 28, 2006 Use {@link getTableName($className)} instead. To
-     * be removed in 2.1.
-     */
-    public function getFullTableName($tbl){
-        return $this->escape($this->db->config['dbase']) . '.' . $this->escape($this->db->config['table_prefix'].$tbl);
-    }
-
-    /**
      * Get children of the specified resource without regard to status.
      * @deprecated 2007-09-17 To be removed in 2.1
      */
@@ -2694,7 +2673,6 @@ class modX extends xPDO {
         $this->documentMethod= & $this->resourceMethod;
         $this->documentContent= & $this->resource->_content;
         $this->documentGenerated= & $this->resourceGenerated;
-        $this->dbConfig= & $this->db->config;
     }
 
     /**

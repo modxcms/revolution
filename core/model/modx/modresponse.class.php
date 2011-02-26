@@ -85,13 +85,9 @@ class modResponse {
             }
 
             $totalTime= ($this->modx->getMicroTime() - $this->modx->startTime);
-            $queries= 0;
-            $queryTime= 0;
-            if ($this->modx->db !== null && $this->modx->db instanceof DBAPI) {
-                $queryTime= $this->modx->queryTime;
-                $queryTime= sprintf("%2.4f s", $queryTime);
-                $queries= isset ($this->modx->executedQueries) ? $this->modx->executedQueries : 0;
-            }
+            $queryTime= $this->modx->queryTime;
+            $queryTime= sprintf("%2.4f s", $queryTime);
+            $queries= isset ($this->modx->executedQueries) ? $this->modx->executedQueries : 0;
             $totalTime= sprintf("%2.4f s", $totalTime);
             $phpTime= $totalTime - $queryTime;
             $phpTime= sprintf("%2.4f s", $phpTime);
