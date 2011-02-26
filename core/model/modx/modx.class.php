@@ -1468,62 +1468,11 @@ class modX extends xPDO {
     }
 
     /**
-     * Get persistent data from a specific document.
-     * @deprecated 2007-09-17 To be removed in 2.1.
-     */
-    public function getDocument($id=0,$fields="*",$published=1, $deleted=0) {
-        if($id==0) {
-            return false;
-        } else {
-            $tmpArr[] = $id;
-            $docs = $this->getDocuments($tmpArr, $published, $deleted, $fields,"","","",1);
-            if($docs!=false) {
-                return $docs[0];
-            } else {
-                return false;
-            }
-        }
-    }
-
-    /**
-     * Get persistent data from a collection of specified documents.
-     * @deprecated 2008-10-10 To be removed in 2.1.
-     */
-    public function getDocuments(array $ids=array(), $published=1, $deleted=0, $fields="*", $where='', $sort="menuindex", $dir="ASC", $limit="") {
-        $collection = array();
-        if ($fields == '*') {
-            $columns = array_keys($this->getFields('modResource'));
-        } else {
-            $columns = explode(',', $fields);
-            foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
-        }
-        $criteria = $this->newQuery('modResource');
-        $criteria->setClassAlias('sc');
-        $criteria->select('id');
-        $criteria->select($columns);
-        $criteria->where('sc.id IN (' . implode(',', $ids) . ')', array(
-            'sc.published' => $published,
-            'sc.deleted' => $deleted
-        ));
-        if (!empty($where)) $criteria->andCondition($where);
-        if (!empty($sort)) $criteria->sortby($sort, $dir);
-        if (!empty($limit)) $criteria->limit($limit);
-        if ($objCollection = $this->getCollection('modResource', $criteria)) {
-            foreach ($objCollection as $obj) {
-                array_push($collection, $obj->get($columns));
-            }
-        }
-        if (empty($collection)) $collection = false;
-        return $collection;
-    }
-
-    /**
      * Legacy fatal error message.
      */
     public function messageQuit($msg='unspecified error', $query='', $is_error=true, $nr='', $file='', $source='', $text='', $line='') {
         $this->log(modX::LOG_LEVEL_FATAL, 'msg: ' . $msg . "\n" . 'query: ' . $query . "\n" . 'nr: ' . $nr . "\n" . 'file: ' . $file . "\n" . 'source: ' . $source . "\n" . 'text: ' . $text . "\n" . 'line: ' . $line . "\n");
     }
-
 
     /**
      * Process and return the output from a PHP snippet by name.

@@ -626,9 +626,16 @@ class modTemplateVar extends modElement {
             case 'RESOURCE':
             case 'DOCUMENT': /* retrieve a document and process it's content */
                 if ($preProcess) {
-                    $rs = $this->xpdo->getDocument($param);
-                    if (is_array($rs)) $output = $rs['content'];
-                    else $output = 'Unable to locate resource '.$param;
+                    $query = $this->xpdo->newQuery('modResource', array(
+                        'id' => (integer) $param,
+                        'deleted' => false
+                    ));
+                    $query->select('content');
+                    if ($query->prepare() && $query->stmt->execute()) {
+                        $output = $query->stmt->fetch(PDO::FETCH_COLUMN);
+                    } else {
+                        $output = 'Unable to locate resource '.$param;
+                    }
                 }
                 break;
 
