@@ -1129,15 +1129,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Alias for getConfig().
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getSettings() {
-        $this->getConfig();
-        return $this->config;
-    }
-
-    /**
      * Initialize, cleanse, and process a request made to a modX site.
      *
      * @return mixed The result of the request handler.
