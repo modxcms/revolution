@@ -1454,10 +1454,10 @@ class modX extends xPDO {
         if ($context && isset ($_SESSION[$context . 'Validated'])) {
             return $_SESSION[$context . 'InternalKey'];
         }
-        elseif (!$context && $this->isFrontend() && isset ($_SESSION['webValidated'])) {
+        elseif (!$context && $this->context->get('key') !== 'mgr' && isset ($_SESSION['webValidated'])) {
             return $_SESSION['webInternalKey'];
         }
-        elseif (!$context && $this->isBackend() && isset ($_SESSION['mgrValidated'])) {
+        elseif (!$context && $this->context->get('key') === 'mgr' && isset ($_SESSION['mgrValidated'])) {
             return $_SESSION['mgrInternalKey'];
         }
         return false;
@@ -1474,30 +1474,13 @@ class modX extends xPDO {
         if ($context && isset ($_SESSION[$context . 'Validated'])) {
             return $_SESSION[$context . 'Shortname'];
         }
-        if ($this->isFrontend() && isset ($_SESSION['webValidated'])) {
+        if ($this->context->get('key') !== 'mgr' && isset ($_SESSION['webValidated'])) {
             return $_SESSION['webShortname'];
         }
-        elseif ($this->isBackend() && isset ($_SESSION['mgrValidated'])) {
+        elseif ($this->context->get('key') === 'mgr' && isset ($_SESSION['mgrValidated'])) {
             return $_SESSION['mgrShortname'];
         }
         return false;
-    }
-
-    /**
-     * Returns current login user type - web or manager.
-     *
-     * @deprecated 2007-09-17 To be removed in 1.0.
-     * @return string 'web', 'manager' or an empty string.
-     */
-    public function getLoginUserType() {
-        if ($this->isFrontend() && isset ($_SESSION['webValidated'])) {
-            return 'web';
-        }
-        elseif ($this->isBackend() && isset ($_SESSION['mgrValidated'])) {
-            return 'manager';
-        } else {
-            return '';
-        }
     }
 
     /**
@@ -1705,51 +1688,6 @@ class modX extends xPDO {
             }
         }
         return $stripped;
-    }
-
-    /**
-     * Returns an array of resource groups that current user is assigned to.
-     *
-     * This function will first return the web user doc groups when running from
-     * frontend otherwise it will return manager user's resource group.
-     * @param boolean $resolveIds Set to true to return the resource group
-     * names.
-     * @return mixed An array of document group ids, names, false or empty string.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getUserDocGroups($resolveIds= false) {
-        $dgn= false;
-        if ($this->isFrontend() && isset ($_SESSION['webDocgroups']) && isset ($_SESSION['webValidated'])) {
-            $dg= $_SESSION['webDocgroups'];
-            $dgn= isset ($_SESSION['webDocgrpNames']) ? $_SESSION['webDocgrpNames'] : false;
-        } elseif ($this->isBackend() && isset ($_SESSION['mgrDocgroups']) && isset ($_SESSION['mgrValidated'])) {
-            $dg= $_SESSION['mgrDocgroups'];
-            $dgn= $_SESSION['mgrDocgrpNames'];
-        } else {
-            $dg= '';
-        }
-        if (!$resolveIds) {
-            return $dg;
-        }
-        elseif (is_array($dgn)) {
-            return $dgn;
-        }
-        elseif (is_array($dg)) {
-            $dgn= array ();
-            $tbl= $this->getTableName('modResourceGroup');
-            $criteria= new xPDOCriteria($this, "SELECT * FROM {$tbl} WHERE id IN (" . implode(",", $dg) . ")");
-            $collResourceGroups= $this->getCollection('modResourceGroup', $criteria);
-            foreach ($collResourceGroups as $rg) {
-                $dgn[count($dgn)]= $rg->get('name');
-            }
-            if ($this->isFrontend()) {
-                $_SESSION['webDocgrpNames']= $dgn;
-            }
-            else {
-                $_SESSION['mgrDocgrpNames']= $dgn;
-            }
-        }
-        return $dgn;
     }
 
     /**
@@ -2144,15 +2082,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Alias of getUserDocGroups().
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getDocGroups() {
-        $docGroups= $this->getUserDocGroups();
-        return $docGroups;
-    }
-
-    /**
      * Alias of changePassword().
      * @deprecated 2007-09-17 To be removed in 2.1
      */
@@ -2309,33 +2238,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Checks if a user is authenticated and returns array of data if so.
-     *
-     * @return mixed An array of authenticated user data or false.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function userLoggedIn() {
-        $userdetails = array();
-        if($this->isFrontend() && isset($_SESSION['webValidated'])) {
-            $userdetails['loggedIn']=true;
-            $userdetails['id']=$_SESSION['webInternalKey'];
-            $userdetails['username']=$_SESSION['webShortname'];
-            $userdetails['usertype']='web';
-            return $userdetails;
-        }
-        else if($this->isBackend() && isset($_SESSION['mgrValidated'])) {
-            $userdetails['loggedIn']=true;
-            $userdetails['id']=$_SESSION['mgrInternalKey'];
-            $userdetails['username']=$_SESSION['mgrShortname'];
-            $userdetails['usertype']='manager';
-            return $userdetails;
-        }
-        else {
-            return false;
-        }
-    }
-
-    /**
      * Gets keyword data associated with a document.
      *
      * @deprecated 2009-11-01 To be removed in 2.1
@@ -2446,36 +2348,6 @@ class modX extends xPDO {
     public function removeAllEventListener() {
         unset ($this->eventMap);
         $this->eventMap= array ();
-    }
-
-    /**
-     * Indicates if modX is executing in the default mgr context.
-     *
-     * @deprecated 2007-09-15: Use the context key to identify a specific context.
-     * @return boolean true if the context is 'mgr'.
-     */
-    public function isBackend() {
-        return $this->insideManager() ? true : false;
-    }
-
-    /**
-     * Indicates if modX is executing in a context other than mgr.
-     *
-     * @deprecated 2007-09-15: Use the context key to identify a specific context.
-     * @return boolean true if the context is not 'mgr'.
-     */
-    public function isFrontend() {
-        return !$this->insideManager() ? true : false;
-    }
-
-    /**
-     * Indicates if the request is taking place inside the mgr context.
-     *
-     * @deprecated 2007-09-15: Use the context key to identify a specific context.
-     * @return boolean true if the request is executing in the mgr context.
-     */
-    public function insideManager() {
-        return is_object($this->context) && ($this->context->get('key') === 'mgr');
     }
 
     /**
