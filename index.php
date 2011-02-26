@@ -27,17 +27,6 @@ $tstart= $mtime;
 
 error_reporting(E_ALL | E_STRICT);
 
-/**
- * @deprecated 2.0.0
- * For backward compatibility with MODx 0.9.x
- */
-define("IN_PARSER_MODE", "true");
-/**
- * @deprecated 2.0.0
- * For backward compatibility with MODx 0.9.x
- */
-define("IN_MANAGER_MODE", false);
-
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODx request handler */
 if (!defined('MODX_API_MODE')) {
