@@ -116,14 +116,11 @@ $_lang['setting_cache_disabled'] = 'Globale Cache-Optionen deaktivieren';
 $_lang['setting_cache_disabled_desc'] = 'Wählen Sie "ja", um alle MODx-Caching-Features zu deaktivieren.';
 $_lang['setting_cache_disabled_err'] = 'Bitte geben Sie an, ob der Cache aktiviert werden soll oder nicht.';
 
-$_lang['setting_cache_json'] = 'JSON-Daten cachen';
-$_lang['setting_cache_json_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, so wird das Cachen im JSON-Format vorgenommen.';
-
 $_lang['setting_cache_expires'] = 'Ablaufzeit für den Standard-Cache';
 $_lang['setting_cache_expires_desc'] = 'Dieser Wert (in Sekunden) legt fest, wie lange Cache-Dateien des Standard-Caches gültig sind.';
 
-$_lang['setting_cache_json_expires'] = 'Ablaufzeit für JSON-Cache';
-$_lang['setting_cache_json_expires_desc'] = 'Ablaufzeit für im JSON-Format gecachte Daten. Der Wert "0" bedeutet, dass der Cache niemals abläuft.';
+$_lang['setting_cache_format'] = 'Zu verwendendes Cache-Format';
+$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialisiert. Bitte wählen Sie eines dieser Formate.';
 
 $_lang['setting_cache_handler'] = 'Caching-Handler-Klasse';
 $_lang['setting_cache_handler_desc'] = 'Der Klassenname des Type-Handlers, der für das Caching genutzt werden soll.';
@@ -278,6 +275,9 @@ $_lang['setting_friendly_urls_err'] = 'Bitte geben Sie an, ob Sie suchmaschinenf
 
 $_lang['setting_hidemenu_default'] = 'Standardeinstellung für Option "nicht in Menüs anzeigen"';
 $_lang['setting_hidemenu_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig nicht in Menüs angezeigt werden sollen.';
+
+$_lang['setting_link_tag_scheme'] = 'URL-Generierungs-Schema';
+$_lang['setting_link_tag_scheme_desc'] = 'URL-Generierungs-Schema für das Tag [[~id]]. Mögliche Optionen: siehe <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
 
 $_lang['setting_mail_charset'] = 'E-Mail-Zeichensatz';
 $_lang['setting_mail_charset_desc'] = 'Legt den Standard-Zeichensatz (charset) für E-Mails fest, z.B. "iso-8859-1" oder "utf-8"';
