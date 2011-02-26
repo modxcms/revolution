@@ -1578,59 +1578,6 @@ class modX extends xPDO {
     }
 
     /**
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getDocumentChildrenTVars($parentid=0, array $tvidnames=array(), $published=1, $docsort="menuindex", $docsortdir="ASC", $tvfields="*", $tvsort="rank", $tvsortdir="ASC") {
-        $collection = array();
-        $all= ($tvidnames=="*");
-        $byName= (is_numeric($tvidnames[0]) == false);
-        if ($tvfields == '*') {
-            $columns = array_keys($this->getFields('modTemplateVar'));
-            $columns[] = 'value';
-        } else {
-            $columns = explode(',', $tvfields);
-            foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
-        }
-        $criteria = $this->newQuery('modResource');
-        $criteria->setClassAlias('sc');
-        $criteria->where(array(
-            'sc.parent' => $parentid,
-            'sc.published' => $published,
-            'sc.deleted' => '0'
-        ));
-        if (!empty($docsort)) $criteria->sortby($docsort, $docsortdir);
-        if ($objCollection = $this->getCollection('modResource', $criteria)) {
-            foreach ($objCollection as $obj) {
-                $objArray= array();
-                $tvs= $obj->getMany('TemplateVars');
-                foreach ($tvs as $tv) {
-                    if (!$all) {
-                        if ($byName) {
-                            if (!in_array($tv->name, $tvidnames)) continue;
-                        } else {
-                            if (!in_array($tv->id, $tvidnames)) continue;
-                        }
-                    }
-                    $idx= (integer) $tv->get($tvsort);
-                    while (isset($objArray[$idx])) $idx++;
-                    $objArray[$idx]= $tv->get($columns);
-                }
-                ksort($objArray);
-                if ($tvsortdir == 'DESC') $objArray = array_reverse($objArray);
-                if ($all || $byName) {
-                    foreach ($obj->toArray() as $name => $value) {
-                        if (!$all && $byName && !in_array($name, $tvidnames)) continue;
-                        $objArray[]= array('name' => $name, 'value' => $value);
-                    }
-                }
-                if (!empty($objArray)) array_push($collection, $objArray);
-            }
-        }
-        if (empty($collection)) $collection = false;
-        return $collection;
-    }
-
-    /**
      * Returns a single TV record.
      *
      * @param string $idname can be an id or name that belongs the template
