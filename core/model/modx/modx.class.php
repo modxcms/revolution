@@ -1578,31 +1578,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Alias of changePassword().
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function changeWebUserPassword($oldPwd, $newPwd) {
-        $rt= $this->changePassword($oldPwd, $newPwd);
-        return $rt;
-    }
-
-    /**
-     * Change current user's password.
-     *
-     * @param string $o The old password.
-     * @param string $n The new password.
-     * @return mixed true if successful, otherwise return error message.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function changePassword($o, $n) {
-        $rt= false;
-        if ($this->getUser()) {
-            $rt= $this->user->changePassword($n, $o);
-        }
-        return $rt;
-    }
-
-    /**
      * Cleans the document request parameter.
      *
      * @access private
