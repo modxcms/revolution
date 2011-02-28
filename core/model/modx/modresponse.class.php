@@ -115,7 +115,7 @@ class modResponse {
                 $header .= '; charset=' . $charset;
             }
             header($header);
-            if (!$this->modx->checkPreview()) {
+            if (!$this->checkPreview()) {
                 $dispositionSet= false;
                 if ($customHeaders= $contentType->get('headers')) {
                     foreach ($customHeaders as $headerKey => $headerString) {

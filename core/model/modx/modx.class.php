@@ -1578,20 +1578,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Checks to see if the preview parameter is set.
-     *
-     * @return boolean
-     * @deprecated 2007-09-17 TO be removed in 2.1
-     */
-    public function checkPreview() {
-        $preview= false;
-        if ($this->getResponse()) {
-            $preview= $this->response->checkPreview();
-        }
-        return $preview;
-    }
-
-    /**
      * Returns true if user has the specified policy permission.
      *
      * @param string $pm Permission key to check.
