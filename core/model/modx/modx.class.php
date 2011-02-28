@@ -223,12 +223,7 @@ class modX extends xPDO {
      * @deprecated 2006-09-15 To be removed in 2.1
      */
     public $Event= null;
-    public $documentIdentifier= null;
-    public $documentMethod= null;
-    public $documentContent= null;
     public $documentOutput= null;
-    public $documentObject= null;
-    public $documentGenerated= false;
     public $stopOnNotice= false;
     public $dumpSQL= false;
     /**#@-*/
@@ -1891,29 +1886,16 @@ class modX extends xPDO {
 
     /**
      * Executed before parser processing of an element.
-     *
-     * @access public
      */
-    public function beforeProcessing() {
-        $this->documentIdentifier= & $this->resourceIdentifier;
-        $this->documentMethod= & $this->resourceMethod;
-        $this->documentContent= & $this->resource->_content;
-        $this->documentGenerated= & $this->resourceGenerated;
-    }
+    public function beforeProcessing() {}
 
     /**
      * Executed before the response is rendered.
-     *
-     * @access protected
      */
-    public function beforeRender() {
-        $this->documentOutput= & $this->resource->_output;
-    }
+    public function beforeRender() {}
 
     /**
      * Executed before the handleRequest function.
-     *
-     * @access public
      */
     public function beforeRequest() {}
 

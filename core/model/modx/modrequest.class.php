@@ -156,7 +156,6 @@ class modRequest {
             $resource = $this->modx->newObject($cachedResource['resourceClass']);
             if ($resource) {
                 $resource->fromArray($cachedResource['resource'], '', true, true, true);
-                $this->modx->documentObject = & $resource->_fields;
                 if (isset($cachedResource['contentType'])) {
                     $contentType = $this->modx->newObject('modContentType');
                     $contentType->fromArray($cachedResource['contentType'], '', true, true, true);
@@ -190,16 +189,15 @@ class modRequest {
                     if (!$resource->checkPolicy('view')) {
                         $this->modx->sendUnauthorizedPage();
                     }
-                    $this->modx->documentObject = & $resource->_fields;
                     if ($tvs = $resource->getMany('TemplateVars', 'all')) {
                         foreach ($tvs as $tv) {
-                            $this->modx->documentObject[$tv->get('name')] = array (
+                            $this->modx->set($tv->get('name'), array(
                                 $tv->get('name'),
                                 $tv->getValue($resource->get('id')),
                                 $tv->get('display'),
                                 $tv->get('display_params'),
                                 $tv->get('type'),
-                            );
+                            ));
                         }
                     }
                     $this->modx->resourceGenerated = true;
