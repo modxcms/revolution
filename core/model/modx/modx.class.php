@@ -1641,17 +1641,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Gets the URL for the 'mgr' context.
-     *
-     * @return string The base URL of the 'mgr' context relative to the
-     * web server document root.
-     * @deprecated 2007-09-17 Use MODX_MANAGER_URL or modX->getOption('manager_url')
-     */
-    public function getManagerPath() {
-        return MODX_MANAGER_URL;
-    }
-
-    /**
      * Gets keyword data associated with a document.
      *
      * @deprecated 2009-11-01 To be removed in 2.1
