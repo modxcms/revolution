@@ -1578,19 +1578,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Gets the method being used to request a document.
-     *
-     * @return string 'id', 'alias', or 'none'.
-     * @deprecated 2007-09-17 TO be removed in 2.1
-     */
-    public function getDocumentMethod() {
-        if (!$this->getRequest()) {
-            $this->log(modX::LOG_LEVEL_FATAL, 'Could not load request class.');
-        }
-        return $this->request->getResourceMethod();
-    }
-
-    /**
      * Checks to see if the preview parameter is set.
      *
      * @return boolean
