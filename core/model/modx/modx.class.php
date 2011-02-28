@@ -1690,46 +1690,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Processes document content tags.
-     * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
-     */
-    public function mergeDocumentContent($content) {
-        $this->getParser();
-        $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('*'));
-        return $content;
-    }
-
-    /**
-     * Processes document setting tags (and placeholders).
-     * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
-     */
-    public function mergeSettingsContent($content) {
-        $this->getParser();
-        $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('+'));
-        return $content;
-    }
-
-    /**
-     * Processes chunk content tags.
-     * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
-     */
-    public function mergeChunkContent($content) {
-        $this->getParser();
-        $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('$'));
-        return $content;
-    }
-
-    /**
-     * Processes placeholder content tags.
-     * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
-     */
-    public function mergePlaceholderContent($content) {
-        $this->getParser();
-        $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('+'));
-        return $content;
-    }
-
-    /**
      * Remove an event from the eventMap so it will not be invoked.
      *
      * @param string $event
