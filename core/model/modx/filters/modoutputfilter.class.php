@@ -499,8 +499,14 @@ class modOutputFilter {
                         /* Returns the requested user data (input: userid) */
                         if (!empty($output)) {
                             $key = (!empty($m_val)) ? $m_val : 'username';
-                            $user = $this->modx->getUserInfo($output);
-                            $output = $user ? $user[$key] : null;
+                            $userInfo= false;
+                            if ($user= $this->getObjectGraph('modUser', '{"Profile":{}}', $output)) {
+                                $userInfo= $user->get(array ('username', 'password'));
+                                if ($user->getOne('Profile')) {
+                                    $userInfo= array_merge($userInfo, $user->Profile->toArray());
+                                }
+                            }
+                            $output = $userInfo && isset($userInfo[$key]) ? $userInfo[$key] : null;
                         }
                         break;
 

@@ -1578,36 +1578,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Returns an array of user data.
-     *
-     * @param integer $uid
-     * @return mixed
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getUserInfo($uid) {
-        $userInfo= false;
-        if ($user= $this->getObjectGraph('modUser', '{"Profile":{}}', $uid, true)) {
-            $userInfo= $user->get(array ('username', 'password'));
-            if ($user->getOne('Profile')) {
-                $userInfo= array_merge($userInfo, $user->Profile->toArray());
-            }
-        }
-        return $userInfo;
-    }
-
-    /**
-     * Returns an array of web user data.
-     *
-     * @param integer $uid
-     * @return mixed
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getWebUserInfo($uid) {
-        $userInfo= $this->getUserInfo($uid);
-        return $userInfo;
-    }
-
-    /**
      * Alias of changePassword().
      * @deprecated 2007-09-17 To be removed in 2.1
      */
