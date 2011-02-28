@@ -1578,47 +1578,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Gets data from a resource.
-     *
-     * @param integer $pageid
-     * @param integer $active
-     * @param string $fields
-     * @return mixed
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getPageInfo($pageid=-1, $active=1, $fields='id, pagetitle, description, alias, class_key, context_key') {
-        $data = false;
-        $pageid = intval($pageid);
-        if ($pageid == -1) {
-            $pageid = is_object($this->resource) && $this->resource->id > 0 ? $this->resource->id : 0;
-        }
-        if ($pageid > 0) {
-            if ($fields == '*') {
-                $columns = array_keys($this->getFields('modResource'));
-            } else {
-                $columns = explode(',', $fields);
-                foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
-            }
-            if (is_object($this->resource) && $this->resource->id == $pageid) {
-                $data= $this->resource->get($columns);
-            } else {
-                $criteria= $this->newQuery('modResource');
-                $criteria->select('id');
-                $criteria->select($columns);
-                $criteria->where(array(
-                    'id' => $pageid,
-                    'published' => !empty($active) ? 1 : '0',
-                    'deleted' => '0'
-                ));
-                if ($obj= $this->getObject('modResource', $criteria)) {
-                    $data= $obj->get($columns);
-                }
-            }
-        }
-        return $data;
-    }
-
-    /**
      * Returns an array of user data.
      *
      * @param integer $uid
