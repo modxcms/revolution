@@ -1578,28 +1578,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Gets the parent resource.
-     *
-     * @param integer $pid
-     * @param integer $active
-     * @param string $fields
-     * @return mixed
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getParent($pid=-1, $active=1, $fields='id, pagetitle, description, alias, parent, class_key, context_key') {
-        if($pid==-1) {
-            $pid = is_object($this->resource) ? $this->resource->get('parent') : 0;
-            return ($pid==0)? false:$this->getPageInfo($pid,$active,$fields);
-        }else if($pid==0) {
-            return false;
-        } else {
-            $child = $this->getPageInfo($pid,$active,"id,parent");
-            $pid = (isset ($child['parent']) && intval($child['parent']))? intval($child['parent']):0;
-            return ($pid==0)? false:$this->getPageInfo($pid,$active,$fields);
-        }
-    }
-
-    /**
      * Gets data from a resource.
      *
      * @param integer $pageid
