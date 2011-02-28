@@ -1578,22 +1578,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Cleans the document request parameter.
-     *
-     * @access private
-     * @param string|integer $qOrig
-     * @return string|integer
-     * @deprecated 2007-09-17 TO be removed in 2.1
-     */
-    public function cleanDocumentIdentifier($qOrig) {
-        if (!$this->getRequest()) {
-            $this->log(modX::LOG_LEVEL_FATAL, 'Could not load request class.');
-        }
-        $return= $this->request->_cleanResourceIdentifier($qOrig);
-        return $return;
-    }
-
-    /**
      * Gets the identifier specifying a requested document.
      *
      * @param string $method 'id' or 'alias'.
