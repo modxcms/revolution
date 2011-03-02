@@ -120,91 +120,33 @@ class xPDOManager_sqlsrv extends xPDOManager {
                 return true;
             }
             $tableMeta= $this->xpdo->getTableMeta($className);
-            $pk= $this->xpdo->getPK($className);
-            $pktype= $this->xpdo->getPKType($className);
             $sql= 'CREATE TABLE ' . $tableName . ' (';
             $fieldMeta = $this->xpdo->getFieldMeta($className);
             $nativeGen = false;
+            $columns = array();
             while (list($key, $meta)= each($fieldMeta)) {
-                $dbtype= strtoupper($meta['dbtype']);
-                $precision= (isset ($meta['precision']) && !preg_match('/ENUM/i', $dbtype) && !in_array($this->xpdo->driver->getPHPType($dbtype), array('integer', 'bit', 'date', 'datetime', 'time'))) ? '(' . $meta['precision'] . ')' : '';
-                if (preg_match('/ENUM/i', $dbtype)) {
-                	$maxlength = 255;
-                	if (isset($meta['precision'])) {
-                		$pieces= explode(',', $meta['precision']);
-                		if (!empty($pieces)) {
-                			$length = 0;
-                			$maxlength = 0;
-	                		foreach ($pieces as $piece) {
-        	        			$length = strlen($piece);
-        	        			if ($length > $maxlength) $maxlength = $length;
-    	            		}
-    	            		if ($maxlength < 1) $maxlength = 255;
-	            		}
-            		}
-                    $dbtype= 'VARCHAR';
-                    $precision= "({$maxlength})";
-                }
-                $notNull= !isset ($meta['null'])
-                    ? false
-                    : ($meta['null'] === 'false' || empty($meta['null']));
-                $null= $notNull ? ' NOT NULL' : ' NULL';
-                $extra = '';
-                if (isset ($meta['index']) && $meta['index'] == 'pk' && !is_array($pk) && $pktype == 'integer' && isset ($meta['generated']) && $meta['generated'] == 'native') {
-                    $extra= ' IDENTITY PRIMARY KEY';
-                    $nativeGen = true;
-                    $null= '';
-                }
-                if (empty ($extra) && isset ($meta['extra'])) {
-                    $extra= ' ' . $meta['extra'];
-                }
-                $default= '';
-                if (array_key_exists('default', $meta)) {
-                    $defaultVal= $meta['default'];
-                    if ($defaultVal === null || strtoupper($defaultVal) === 'NULL' || in_array($this->xpdo->driver->getPHPType($dbtype), array('integer', 'float', 'bit')) || (in_array($this->xpdo->driver->getPHPType($dbtype), array('datetime', 'date', 'timestamp', 'time')) && in_array($defaultVal, array_merge($this->xpdo->driver->_currentTimestamps, $this->xpdo->driver->_currentDates, $this->xpdo->driver->_currentTimes)))) {
-                        $default= ' DEFAULT ' . $defaultVal;
-                    } else {
-                        $default= ' DEFAULT \'' . $defaultVal . '\'';
-                    }
-                }
-                $attributes= (isset ($meta['attributes'])) ? ' ' . $meta['attributes'] : '';
-                if (strpos(strtolower($attributes), 'unsigned') !== false) {
-                    $sql .= $this->xpdo->escape($key) . ' ' . $dbtype . $precision . $attributes . $null . $default . $extra . ',';
-                } else {
-                    $sql .= $this->xpdo->escape($key) . ' ' . $dbtype . $precision . $null . $default . $attributes . $extra . ',';
-                }
+                $columns[] = $this->getColumnDef($className, $key, $meta);
+                if (array_key_exists('generated', $meta) && $meta['generated'] == 'native') $nativeGen = true;
             }
-            $sql= substr($sql, 0, strlen($sql) - 1);
+            $sql .= implode(', ', $columns);
             $indexes = $this->xpdo->getIndexMeta($className);
             $createIndices = array();
             $tableConstraints = array();
             if (!empty ($indexes)) {
                 foreach ($indexes as $indexkey => $indexdef) {
                     $indexType = ($indexdef['primary'] ? 'PRIMARY KEY' : ($indexdef['unique'] ? 'UNIQUE' : 'INDEX'));
-                    $index = $indexdef['columns'];
-                    if (is_array($index)) {
-                        $indexset= array ();
-                        foreach ($index as $indexmember => $indexmemberdetails) {
-                            $indexMemberDetails = $this->xpdo->escape($indexmember);
-                            $indexset[]= $indexMemberDetails;
-                        }
-                        $indexset= implode(',', $indexset);
-                        if (!empty($indexset)) {
-                            switch ($indexType) {
-                                case 'UNIQUE':
-                                    $createIndices[$indexkey] = "CREATE UNIQUE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
-                                    break;
-                                case 'INDEX':
-                                    $createIndices[$indexkey] = "CREATE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
-                                    break;
-                                case 'PRIMARY KEY':
-                                    if ($nativeGen) break;
-                                default:
-                                    $tableConstraints[]= "{$indexType} ({$indexset})";
-                                    break;
-                            }
-                        }
-                    } 
+                    $indexset = $this->getIndexDef($className, $indexkey, $indexdef);
+                    switch ($indexType) {
+                        case 'INDEX':
+                            $createIndices[$indexkey] = "CREATE INDEX {$this->xpdo->escape($indexkey)} ON {$tableName} ({$indexset})";
+                            break;
+                        case 'PRIMARY KEY':
+                            if ($nativeGen) break;
+                        case 'UNIQUE':
+                        default:
+                            $tableConstraints[]= "CONSTRAINT {$this->xpdo->escape($indexkey)} {$indexType} ({$indexset})";
+                            break;
+                    }
                 }
             }
             if (!empty($tableConstraints)) {
@@ -230,5 +172,206 @@ class xPDOManager_sqlsrv extends xPDOManager {
             }
         }
         return $created;
+    }
+
+    public function alterObjectContainer($className, array $options = array()) {
+        // TODO: Implement alterObjectContainer() method.
+    }
+
+    public function addConstraint($class, $name, array $options = array()) {
+        // TODO: Implement addConstraint() method.
+    }
+
+    public function addField($class, $name, array $options = array()) {
+        $result = false;
+        $className = $this->xpdo->loadClass($class);
+        if ($className) {
+            $meta = $this->xpdo->getFieldMeta($className);
+            if (is_array($meta) && array_key_exists($name, $meta)) {
+                $colDef = $this->getColumnDef($className, $name, $meta[$name]);
+                if (!empty($colDef)) {
+                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD {$colDef}";
+                    if ($this->xpdo->exec($sql)) {
+                        $result = true;
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+    public function addIndex($class, $name, array $options = array()) {
+        $result = false;
+        $className = $this->xpdo->loadClass($class);
+        if ($className) {
+            $meta = $this->xpdo->getIndexMeta($className);
+            if (is_array($meta) && array_key_exists($name, $meta)) {
+                $idxDef = $this->getIndexDef($className, $name, $meta[$name]);
+                if (!empty($idxDef)) {
+                    $indexType = ($meta[$name]['primary'] ? 'PRIMARY KEY' : ($meta[$name]['unique'] ? 'UNIQUE' : 'INDEX'));
+                    switch ($indexType) {
+                        case 'PRIMARY KEY':
+                        case 'UNIQUE':
+                            $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD CONSTRAINT {$this->xpdo->escape($name)} {$indexType} ({$idxDef})";
+                            break;
+                        default:
+                            $sql = "CREATE {$indexType} {$this->xpdo->escape($name)} ON {$this->xpdo->getTableName($className)} ({$idxDef})";
+                            break;
+                    }
+                    if ($this->xpdo->exec($sql)) {
+                        $result = true;
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error adding index {$name} to {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+    public function alterField($class, $name, array $options = array()) {
+        $result = false;
+        $className = $this->xpdo->loadClass($class);
+        if ($className) {
+            $meta = $this->xpdo->getFieldMeta($className);
+            if (is_array($meta) && array_key_exists($name, $meta)) {
+                $colDef = $this->getColumnDef($className, $name, $meta[$name]);
+                if (!empty($colDef)) {
+                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ALTER COLUMN {$colDef}";
+                    if ($this->xpdo->exec($sql)) {
+                        $result = true;
+                    } else {
+                        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error altering field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+    public function removeConstraint($class, $name, array $options = array()) {
+        $result = false;
+        $className = $this->xpdo->loadClass($class);
+        if ($className) {
+            $meta = $this->xpdo->getFieldMeta($className);
+            if (is_array($meta) && array_key_exists($name, $meta)) {
+                $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP CONSTRAINT {$this->xpdo->escape($name)}";
+                if ($this->xpdo->exec($sql)) {
+                    $result = true;
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                }
+            }
+        }
+        return $result;
+    }
+
+    public function removeField($class, $name, array $options = array()) {
+        $result = false;
+        $className = $this->xpdo->loadClass($class);
+        if ($className) {
+            $meta = $this->xpdo->getFieldMeta($className);
+            if (is_array($meta) && array_key_exists($name, $meta)) {
+                $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP COLUMN {$this->xpdo->escape($name)}";
+                if ($this->xpdo->exec($sql)) {
+                    $result = true;
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                }
+            }
+        }
+        return $result;
+    }
+
+    public function removeIndex($class, $name, array $options = array()) {
+        $result = false;
+        $className = $this->xpdo->loadClass($class);
+        if ($className) {
+            $meta = $this->xpdo->getIndexMeta($className);
+            if (is_array($meta) && array_key_exists($name, $meta)) {
+                $indexType = ($meta[$name]['primary'] ? 'PRIMARY KEY' : ($meta[$name]['unique'] ? 'UNIQUE' : 'INDEX'));
+                switch ($indexType) {
+                    case 'PRIMARY KEY':
+                    case 'UNIQUE':
+                        $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP CONSTRAINT {$this->xpdo->escape($name)}";
+                        break;
+                    default:
+                        $sql = "DROP INDEX {$this->xpdo->escape($name)} ON {$this->xpdo->getTableName($className)}";
+                        break;
+                }
+                if ($this->xpdo->exec($sql)) {
+                    $result = true;
+                } else {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing index {$name} from {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
+                }
+            }
+        }
+        return $result;
+    }
+
+    protected function getColumnDef($class, $name, $meta, array $options = array()) {
+        $pk= $this->xpdo->getPK($class);
+        $pktype= $this->xpdo->getPKType($class);
+        $dbtype= strtoupper($meta['dbtype']);
+        $precision= (isset ($meta['precision']) && !preg_match('/ENUM/i', $dbtype) && !in_array($this->xpdo->driver->getPHPType($dbtype), array('integer', 'bit', 'date', 'datetime', 'time'))) ? '(' . $meta['precision'] . ')' : '';
+        if (preg_match('/ENUM/i', $dbtype)) {
+            $maxlength = 255;
+            if (isset($meta['precision'])) {
+                $pieces= explode(',', $meta['precision']);
+                if (!empty($pieces)) {
+                    $length = 0;
+                    $maxlength = 0;
+                    foreach ($pieces as $piece) {
+                        $length = strlen($piece);
+                        if ($length > $maxlength) $maxlength = $length;
+                    }
+                    if ($maxlength < 1) $maxlength = 255;
+                }
+            }
+            $dbtype= 'VARCHAR';
+            $precision= "({$maxlength})";
+        }
+        $notNull= !isset ($meta['null']) ? false : ($meta['null'] === 'false' || empty($meta['null']));
+        $null= $notNull ? ' NOT NULL' : ' NULL';
+        $extra = '';
+        if (isset ($meta['index']) && $meta['index'] == 'pk' && !is_array($pk) && $pktype == 'integer' && isset ($meta['generated']) && $meta['generated'] == 'native') {
+            $extra= ' IDENTITY PRIMARY KEY';
+            $null= '';
+        }
+        if (empty ($extra) && isset ($meta['extra'])) {
+            $extra= ' ' . $meta['extra'];
+        }
+        $default= '';
+        if (array_key_exists('default', $meta)) {
+            $defaultVal= $meta['default'];
+            if ($defaultVal === null || strtoupper($defaultVal) === 'NULL' || in_array($this->xpdo->driver->getPHPType($dbtype), array('integer', 'float', 'bit')) || (in_array($this->xpdo->driver->getPHPType($dbtype), array('datetime', 'date', 'timestamp', 'time')) && in_array($defaultVal, array_merge($this->xpdo->driver->_currentTimestamps, $this->xpdo->driver->_currentDates, $this->xpdo->driver->_currentTimes)))) {
+                $default= ' DEFAULT ' . $defaultVal;
+            } else {
+                $default= ' DEFAULT \'' . $defaultVal . '\'';
+            }
+        }
+        $attributes= (isset ($meta['attributes'])) ? ' ' . $meta['attributes'] : '';
+        if (strpos(strtolower($attributes), 'unsigned') !== false) {
+            $result = $this->xpdo->escape($name) . ' ' . $dbtype . $precision . $attributes . $null . $default . $extra . ',';
+        } else {
+            $result = $this->xpdo->escape($name) . ' ' . $dbtype . $precision . $null . $default . $attributes . $extra . ',';
+        }
+        return $result;
+    }
+
+    protected function getIndexDef($class, $name, $meta, array $options = array()) {
+        $result = '';
+        $index = isset($meta['columns']) ? $meta['columns'] : null;
+        if (is_array($index)) {
+            $indexset= array ();
+            foreach ($index as $indexmember => $indexmemberdetails) {
+                $indexMemberDetails = $this->xpdo->escape($indexmember);
+                $indexset[]= $indexMemberDetails;
+            }
+            $result= implode(',', $indexset);
+        }
+        return $result;
     }
 }
