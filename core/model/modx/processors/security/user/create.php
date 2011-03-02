@@ -20,14 +20,6 @@ $newPassword= '';
 $result = include_once $modx->getOption('processors_path').'security/user/_validation.php';
 if ($result !== true) return $result;
 
-
-/* invoke OnBeforeUserFormSave event */
-$modx->invokeEvent('OnBeforeUserFormSave',array(
-    'mode' => modSystemEvent::MODE_NEW,
-    'id' => $scriptProperties['id'],
-    'user' => &$user,
-));
-
 /* create user group links */
 if (isset($scriptProperties['groups'])) {
     $ugms = array();
@@ -39,6 +31,16 @@ if (isset($scriptProperties['groups'])) {
         $ugms[] = $ugm;
     }
     $user->addMany($ugms,'UserGroupMembers');
+}
+
+/* invoke OnBeforeUserFormSave event */
+$OnBeforeUserFormSave = $modx->invokeEvent('OnBeforeUserFormSave',array(
+    'mode' => modSystemEvent::MODE_NEW,
+    'user' => &$user,
+));
+$canSave = $this->processEventResponse($OnBeforeUserFormSave);
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
 }
 
 /* update user */

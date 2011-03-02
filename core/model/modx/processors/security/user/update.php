@@ -23,13 +23,25 @@ $newPassword= false;
 $result = include_once $modx->getOption('processors_path').'security/user/_validation.php';
 if ($result !== true) return $result;
 
+/* set fields */
+$user->fromArray($scriptProperties);
+if (!empty($scriptProperties['remote_data'])) {
+    $data = $modx->fromJSON($scriptProperties['remote_data']);
+    $user->set('remote_data',$data);
+}
+
 /* invoke OnBeforeUserFormSave event */
-$modx->invokeEvent('OnBeforeUserFormSave',array(
+$OnBeforeUserFormSave = $modx->invokeEvent('OnBeforeUserFormSave',array(
     'mode' => modSystemEvent::MODE_UPD,
     'user' => &$user,
     'id' => $user->get('id'),
 ));
+$canSave = $this->processEventResponse($OnBeforeUserFormSave);
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
 
+/* save user groups */
 if (isset($scriptProperties['groups'])) {
     /* remove prior user group links */
     $ugms = $user->getMany('UserGroupMembers');
@@ -46,12 +58,6 @@ if (isset($scriptProperties['groups'])) {
         $ugms[] = $ugm;
     }
     $user->addMany($ugms,'UserGroupMembers');
-}
-
-$user->fromArray($scriptProperties);
-if (!empty($scriptProperties['remote_data'])) {
-    $data = $modx->fromJSON($scriptProperties['remote_data']);
-    $user->set('remote_data',$data);
 }
 
 /* update user */

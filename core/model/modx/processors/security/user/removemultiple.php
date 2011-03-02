@@ -14,6 +14,16 @@ if (empty($scriptProperties['users'])) {
 
 $userIds = explode(',',$scriptProperties['users']);
 
+/* invoke OnBeforeUserFormDelete event */
+$OnBeforeUserFormDelete = $modx->invokeEvent('OnBeforeUserFormDelete',array(
+    'ids' => $userIds,
+));
+$canRemove = $this->processEventResponse($OnBeforeUserFormDelete);
+if (!empty($canRemove)) {
+    return $modx->error->failure($canSave);
+}
+
+/* loop through ids */
 foreach ($userIds as $userId) {
     $user = $modx->getObject('modUser',$userId);
     if ($user == null) continue;
