@@ -1362,7 +1362,7 @@ class modX extends xPDO {
                 if ($plugin && !$plugin->get('disabled')) {
                     $this->event->activated= true;
                     $this->event->activePlugin= $plugin->get('name');
-                    $this->event->propertySet= (($pspos = strpos($pluginPropset, ':')) > 1) ? substr($pluginPropset, $pspos + 1) : '';
+                    $this->event->propertySet= (($pspos = strpos($pluginPropset, ':')) >= 1) ? substr($pluginPropset, $pspos + 1) : '';
 
                     /* merge in plugin properties */
                     $eventParams = array_merge($plugin->getProperties(),$params);
