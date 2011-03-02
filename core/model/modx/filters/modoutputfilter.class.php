@@ -500,7 +500,7 @@ class modOutputFilter {
                         break;
 
                     case 'userinfo':
-                        /* Returns the requested user data (input: userid) */
+                        /* Returns the requested user data (input: userid) defaults to current user on empty $output and username on empty value */
                         $user = (!empty($output)) ? $this->modx->getObject('modUser', $output) : $this->modx->user;
                         $profile = $user->getOne('Profile');
                         $key = (!empty($m_val)) ? $m_val : 'username';
