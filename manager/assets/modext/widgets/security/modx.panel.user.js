@@ -315,6 +315,13 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,fieldLabel: _('user_gender')
                     ,xtype: 'modx-combo-gender'
                 },{
+                    id: 'modx-user-class-key'
+                    ,name: 'class_key'
+                    ,fieldLabel: _('class_key')
+                    ,xtype: 'textfield'
+                    ,width: 300
+                    ,value: 'modUser'
+                },{
                     id: 'modx-user-comment'
                     ,name: 'comment'
                     ,fieldLabel: _('comment')

@@ -11,7 +11,10 @@
 if (!$modx->hasPermission(array('access_permissions' => true, 'new_user' => true))) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-$user = $modx->newObject('modUser');
+/* setup default properties */
+$classKey = $modx->getOption('class_key',$scriptProperties,'modUser');
+
+$user = $modx->newObject($classKey);
 
 /* validate post */
 $blocked = empty($scriptProperties['blocked']) ? false : true;
