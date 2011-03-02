@@ -130,7 +130,7 @@ class modOutputFilter {
                             /* holder over from PHx in evolution? */
                             $output = ($output == "&_PHX_INTERNAL_&") ? '' : $output;
                             /* get a user object based on input, or get current user */
-                            $user = !empty($input) ? $this->modx->getObject('modUser', $output) : $this->modx->user;
+                            $user = !empty($output) ? $this->modx->getObject('modUser', $output) : $this->modx->user;
                             $condition[] = intval($user->isMember($grps));
                         }
                         break;
@@ -501,11 +501,10 @@ class modOutputFilter {
 
                     case 'userinfo':
                         /* Returns the requested user data (input: userid) */
-                        if (!empty($output)) {
-                            $key = (!empty($m_val)) ? $m_val : 'username';
-                            $user = $this->modx->getUserInfo($output);
-                            $output = $user ? $user[$key] : null;
-                        }
+                        $user = (!empty($output)) ? $this->modx->getObject('modUser', $output) : $this->modx->user;
+                        $profile = $user->getOne('Profile');
+                        $key = (!empty($m_val)) ? $m_val : 'username';
+                        $output = $user ? $profile->get($key) : null;
                         break;
 
                     case 'isloggedin':
