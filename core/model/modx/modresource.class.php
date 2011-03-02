@@ -178,8 +178,6 @@ class modResource extends modAccessibleSimpleObject {
                 $this->_processed= true;
             }
         }
-        $this->mergeKeywords();
-        $this->mergeMetatags();
         return $this->_content;
     }
 
@@ -213,40 +211,6 @@ class modResource extends modAccessibleSimpleObject {
      */
     public function setContent($content, array $options = array()) {
         return $this->set('content', $content);
-    }
-
-    /**
-     * Merge in Keywords into content.
-     *
-     * @access public
-     * @deprecated 2.0
-     */
-    public function mergeKeywords() {
-        if ($this->get('haskeywords')) {
-            $keywords = implode(", ",$this->xpdo->getKeywords());
-            $metas = "<meta name=\"keywords\" content=\"{$keywords}\" />\n";
-            $this->_content = preg_replace("/(<head>)/i", "\\1\n".$metas, $this->_content);
-        }
-    }
-
-    /**
-     * Merge in META tags to content.
-     *
-     * @access public
-     * @deprecated 2.0
-     */
-    public function mergeMetaTags() {
-        if ($this->get('hasmetatags')) {
-            if ($tags = $this->xpdo->getMETATags()) {
-                foreach ($tags as $n=>$col) {
-                    $tag = strtolower($col['tag']);
-                    $tagvalue = $col['tagvalue'];
-                    $tagstyle = $col['http_equiv'] ? 'http-equiv':'name';
-                    $metas.= "\t<meta $tagstyle=\"$tag\" content=\"$tagvalue\" />\n";
-                }
-                $this->_content = preg_replace("/(<head>)/i", "\\1\n".$metas, $this->_content);
-            }
-        }
     }
 
     /**

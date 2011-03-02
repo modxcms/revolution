@@ -1636,55 +1636,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Gets keyword data associated with a document.
-     *
-     * @deprecated 2009-11-01 To be removed in 2.1
-     * @param integer $id A document id, defaults to current document id.
-     * @return array An array of keyword data for the specified document.
-     */
-    public function getKeywords($id=0) {
-        if (intval($id) == 0) {
-            $id = intval($this->resource->id);
-        }
-        $query = new xPDOCriteria($this, "SELECT keywords.keyword FROM " . $this->getTableName('modKeyword') . " AS keywords "
-            . "INNER JOIN " . $this->getTableName('modResourceKeyword') . " AS xref "
-            . "ON keywords.id=xref.keyword_id WHERE xref.content_id = :id", array(':id' => $id));
-        $keywords = array();
-        if ($stmt = $query->prepare()) {
-            if ($stmt->execute()) {
-                $keywords= $stmt->fetchAll(PDO::FETCH_COLUMN);
-            }
-        }
-        return $keywords;
-    }
-
-    /**
-     * Gets META tag data associated with a document.
-     *
-     * @deprecated 2009-11-01 To be removed in 2.1
-     * @param integer $id A document id, defaults to current document id.
-     * @return array An array of META tag data for the specified document.
-     */
-    public function getMETATags($id=0) {
-        if (intval($id) == 0) {
-            $id = intval($this->resource->id);
-        }
-        $query = new xPDOCriteria($this, "SELECT smt.* ".
-               "FROM ".$this->getTableName('modMetatag')." smt ".
-               "INNER JOIN ".$this->getTableName('modResourceMetatag')." cmt ON cmt.metatag_id=smt.id ".
-               "WHERE cmt.content_id = :id", array(':id' => $id));
-        $metatags = array();
-        if ($stmt = $query->prepare()) {
-            if ($stmt->execute()) {
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $metatags[$row['name']] = array("tag"=>$row['tag'],"tagvalue"=>$row['tagvalue'],"http_equiv"=>$row['http_equiv']);
-                }
-            }
-        }
-        return $metatags;
-    }
-
-    /**
      * Remove an event from the eventMap so it will not be invoked.
      *
      * @param string $event

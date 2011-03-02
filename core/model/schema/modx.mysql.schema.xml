@@ -565,16 +565,6 @@
 
     <object class="modJSONRPCResource" extends="modXMLRPCResource" />
     
-    <object class="modKeyword" table="site_keywords" extends="xPDOSimpleObject">
-        <field key="keyword" dbtype="varchar" precision="40" phptype="string" null="false" default="" index="unique" />
-        
-        <index alias="keyword" name="keyword" primary="false" unique="true" type="BTREE">
-            <column key="keyword" length="" collation="A" null="false" />
-        </index>
-
-        <composite alias="ResourceKeywords" class="modResourceKeyword" key="id" local="id" foreign="keyword_id" cardinality="many" owner="local" />
-    </object>
-    
     <object class="modLexiconEntry" table="lexicon_entries" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="value" dbtype="text" phptype="string" null="false" default="" />
@@ -667,15 +657,6 @@
         <aggregate alias="Parent" class="modMenu" local="parent" foreign="text" owner="foreign" cardinality="one" />
         <aggregate alias="Children" class="modMenu" local="text" foreign="parent" owner="local" cardinality="many" />
         <composite alias="Acls" class="modAccessMenu" local="text" foreign="target" owner="local" cardinality="many" />
-    </object>
-    
-    <object class="modMetatag" table="site_metatags" extends="xPDOSimpleObject">
-        <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
-        <field key="tag" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
-        <field key="tagvalue" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="http_equiv" dbtype="tinyint" precision="4" phptype="integer" null="false" default="0" />
-        
-        <composite alias="ResourceMetatags" class="modResourceMetatag" key="id" local="id" foreign="metatag_id" cardinality="many" owner="local" />
     </object>
     
     <object class="modNamespace" table="namespaces" extends="xPDOObject">
@@ -786,8 +767,6 @@
         <field key="publishedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="menutitle" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="donthit" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
-        <field key="haskeywords" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
-        <field key="hasmetatags" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
         <field key="privateweb" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
         <field key="privatemgr" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
         <field key="content_dispo" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
@@ -864,8 +843,6 @@
         <aggregate alias="Context" class="modContext" local="context_key" foreign="key" owner="foreign" cardinality="one" />
         <composite alias="TemplateVarResources" class="modTemplateVarResource" local="id" foreign="contentid" cardinality="many" owner="local" />
         <composite alias="ResourceGroupResources" class="modResourceGroupResource" local="id" foreign="document" cardinality="many" owner="local" />
-        <composite alias="ResourceKeywords" class="modResourceKeyword" local="id" foreign="content_id" cardinality="many" owner="local" />
-        <composite alias="ResourceMetatags" class="modResourceMetatag" local="id" foreign="content_id" cardinality="many" owner="local" />
         <composite alias="Acls" class="modAccessResource" local="id" foreign="target" owner="local" cardinality="many" />
         <composite alias="ContextResources" class="modContextResource" local="id" foreign="resource" cardinality="many" owner="local" />
     </object>
@@ -896,32 +873,6 @@
 
         <aggregate alias="ResourceGroup" class="modResourceGroup" key="id" local="document_group" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Resource" class="modResource" key="id" local="document" foreign="id" cardinality="one" owner="foreign" />
-    </object>
-    
-    <object class="modResourceKeyword" table="keyword_xref" extends="xPDOObject">
-        <field key="content_id" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
-        <field key="keyword_id" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
-        
-        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
-            <column key="content_id" length="" collation="A" null="false" />
-            <column key="keyword_id" length="" collation="A" null="false" />
-        </index>
-
-        <aggregate alias="Resource" class="modResource" key="id" local="content_id" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="Keyword" class="modKeyword" key="id" local="keyword_id" foreign="id" cardinality="one" owner="foreign" />
-    </object>
-    
-    <object class="modResourceMetatag" table="site_content_metatags" extends="xPDOObject">
-        <field key="content_id" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
-        <field key="metatag_id" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
-        
-        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
-            <column key="content_id" length="" collation="A" null="false" />
-            <column key="metatag_id" length="" collation="A" null="false" />
-        </index>
-
-        <aggregate alias="Resource" class="modResource" key="id" local="content_id" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="Metatag" class="modMetatag" key="id" local="metatag_id" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
     <object class="modScript" table="site_script" extends="modElement">
@@ -1050,7 +1001,7 @@
         <composite alias="TemplateVarResourceGroups" class="modTemplateVarResourceGroup" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
         <validation>
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff_-\s]+(?!\s)$/" message="tv_err_invalid_name" />
-            <rule field="name" name="reserved" type="preg_match" rule="/(?!^(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|haskeywords|hasmetatags|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type)$)/" message="tv_err_reserved_name" />
+            <rule field="name" name="reserved" type="preg_match" rule="/(?!^(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type)$)/" message="tv_err_reserved_name" />
         </validation>
     </object>
     

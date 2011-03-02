@@ -86,8 +86,6 @@ if (!function_exists('getAction')) {
             case "78" : return "Editing Chunk (HTML Snippet) $itemid"; break;
             case "79" : return "Saving Chunk (HTML Snippet) $itemid"; break;
             case "80" : return "Deleting Chunk (HTML Snippet) $itemid"; break;
-            case "81" : return "Managing keywords"; break;
-            case "81" : return "Managing keywords"; break;
             case "83" : return "Exporting a document to HTML"; break;
             case "84" : return "Load Resource Selector"; break;
             case "85" : return "Create Folder"; break;

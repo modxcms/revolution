@@ -114,3 +114,15 @@ $this->processResults($class,$description,$sql);
 if ($hashClassAdded) {
     $modx->exec("UPDATE {$table} SET {$modx->escape('hash_class')} = 'hashing.modMD5'");
 }
+
+/* remove haskeywords column in modResource */
+$modx->getManager();
+
+$class = 'modResource';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('drop_column',array('column' => 'haskeywords', 'table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'removeField'), array($class, 'haskeywords'));
+
+/* remove hasmetatags column in modResource */
+$description = $this->install->lexicon('drop_column',array('column' => 'hasmetatags', 'table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'removeField'), array($class, 'hasmetatags'));
