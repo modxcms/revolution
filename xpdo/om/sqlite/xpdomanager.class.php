@@ -243,14 +243,11 @@ class xPDOManager_sqlite extends xPDOManager {
         $result = false;
         $className = $this->xpdo->loadClass($class);
         if ($className) {
-            $meta = $this->xpdo->getIndexMeta($className);
-            if (is_array($meta) && array_key_exists($name, $meta)) {
-                $sql = "DROP INDEX {$this->xpdo->escape($name)}";
-                if ($this->xpdo->exec($sql)) {
-                    $result = true;
-                } else {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing index {$name} from {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
-                }
+            $sql = "DROP INDEX {$this->xpdo->escape($name)}";
+            if ($this->xpdo->exec($sql)) {
+                $result = true;
+            } else {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing index {$name} from {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
             }
         }
         return $result;

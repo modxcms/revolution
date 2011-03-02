@@ -257,14 +257,11 @@ class xPDOManager_sqlsrv extends xPDOManager {
         $result = false;
         $className = $this->xpdo->loadClass($class);
         if ($className) {
-            $meta = $this->xpdo->getFieldMeta($className);
-            if (is_array($meta) && array_key_exists($name, $meta)) {
-                $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP CONSTRAINT {$this->xpdo->escape($name)}";
-                if ($this->xpdo->exec($sql)) {
-                    $result = true;
-                } else {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
-                }
+            $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP CONSTRAINT {$this->xpdo->escape($name)}";
+            if ($this->xpdo->exec($sql)) {
+                $result = true;
+            } else {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
             }
         }
         return $result;
@@ -274,14 +271,11 @@ class xPDOManager_sqlsrv extends xPDOManager {
         $result = false;
         $className = $this->xpdo->loadClass($class);
         if ($className) {
-            $meta = $this->xpdo->getFieldMeta($className);
-            if (is_array($meta) && array_key_exists($name, $meta)) {
-                $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP COLUMN {$this->xpdo->escape($name)}";
-                if ($this->xpdo->exec($sql)) {
-                    $result = true;
-                } else {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
-                }
+            $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP COLUMN {$this->xpdo->escape($name)}";
+            if ($this->xpdo->exec($sql)) {
+                $result = true;
+            } else {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing field {$class}->{$name}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
             }
         }
         return $result;
@@ -291,23 +285,20 @@ class xPDOManager_sqlsrv extends xPDOManager {
         $result = false;
         $className = $this->xpdo->loadClass($class);
         if ($className) {
-            $meta = $this->xpdo->getIndexMeta($className);
-            if (is_array($meta) && array_key_exists($name, $meta)) {
-                $indexType = ($meta[$name]['primary'] ? 'PRIMARY KEY' : ($meta[$name]['unique'] ? 'UNIQUE' : 'INDEX'));
-                switch ($indexType) {
-                    case 'PRIMARY KEY':
-                    case 'UNIQUE':
-                        $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP CONSTRAINT {$this->xpdo->escape($name)}";
-                        break;
-                    default:
-                        $sql = "DROP INDEX {$this->xpdo->escape($name)} ON {$this->xpdo->getTableName($className)}";
-                        break;
-                }
-                if ($this->xpdo->exec($sql)) {
-                    $result = true;
-                } else {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing index {$name} from {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
-                }
+            $indexType = (isset($options['type']) && in_array($options['type'], array('PRIMARY KEY', 'UNIQUE', 'INDEX', 'FULLTEXT')) ? $options['type'] : 'INDEX');
+            switch ($indexType) {
+                case 'PRIMARY KEY':
+                case 'UNIQUE':
+                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP CONSTRAINT {$this->xpdo->escape($name)}";
+                    break;
+                default:
+                    $sql = "DROP INDEX {$this->xpdo->escape($name)} ON {$this->xpdo->getTableName($className)}";
+                    break;
+            }
+            if ($this->xpdo->exec($sql)) {
+                $result = true;
+            } else {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error removing index {$name} from {$class}: " . print_r($this->xpdo->errorInfo(), true), '', __METHOD__, __FILE__, __LINE__);
             }
         }
         return $result;
