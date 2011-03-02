@@ -142,6 +142,8 @@ class xPDOManager_sqlsrv extends xPDOManager {
                             break;
                         case 'PRIMARY KEY':
                             if ($nativeGen) break;
+                            $tableConstraints[]= "{$indexType} ({$indexset})";
+                            break;
                         case 'UNIQUE':
                         default:
                             $tableConstraints[]= "CONSTRAINT {$this->xpdo->escape($indexkey)} {$indexType} ({$indexset})";
@@ -354,9 +356,9 @@ class xPDOManager_sqlsrv extends xPDOManager {
         }
         $attributes= (isset ($meta['attributes'])) ? ' ' . $meta['attributes'] : '';
         if (strpos(strtolower($attributes), 'unsigned') !== false) {
-            $result = $this->xpdo->escape($name) . ' ' . $dbtype . $precision . $attributes . $null . $default . $extra . ',';
+            $result = $this->xpdo->escape($name) . ' ' . $dbtype . $precision . $attributes . $null . $default . $extra;
         } else {
-            $result = $this->xpdo->escape($name) . ' ' . $dbtype . $precision . $null . $default . $attributes . $extra . ',';
+            $result = $this->xpdo->escape($name) . ' ' . $dbtype . $precision . $null . $default . $attributes . $extra;
         }
         return $result;
     }
