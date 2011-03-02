@@ -29,7 +29,7 @@ class modManagerResponse extends modResponse {
         if (!isset($this->modx->request) || !isset($this->modx->request->action)) {
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
         } else {
-            $action =& $this->modx->request->action;
+            $action =& intval($this->modx->request->action);
         }
 
         $theme = $this->modx->getOption('manager_theme',null,'default');
