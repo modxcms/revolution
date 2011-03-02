@@ -21,10 +21,14 @@ if ($user->get('id') == $modx->user->get('id')) {
 }
 
 /* invoke OnBeforeUserFormDelete event */
-$modx->invokeEvent('OnBeforeUserFormDelete',array(
+$OnBeforeUserFormDelete = $modx->invokeEvent('OnBeforeUserFormDelete',array(
     'user' => &$user,
     'id' => $user->get('id'),
 ));
+$canRemove = $this->processEventResponse($OnBeforeUserFormDelete);
+if (!empty($canRemove)) {
+    return $modx->error->failure($canSave);
+}
 
 /* remove user */
 if ($user->remove() == false) {
