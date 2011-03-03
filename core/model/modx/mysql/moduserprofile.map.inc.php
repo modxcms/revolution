@@ -276,13 +276,5 @@ $xpdo_meta_map['modUserProfile']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'UserRole' => 
-    array (
-      'class' => 'modUserRole',
-      'local' => 'role',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
   ),
 );

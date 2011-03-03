@@ -62,7 +62,6 @@ $classes= array (
     'modUserGroupMember',
     'modUserGroupRole',
     'modUserMessage',
-    'modUserRole',
     'modUserSetting',
     'modWorkspace',
     'registry.db.modDbRegisterMessage',
