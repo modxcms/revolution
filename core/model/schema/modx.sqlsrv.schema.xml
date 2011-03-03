@@ -1138,7 +1138,6 @@
     <object class="modUserProfile" table="user_attributes" extends="xPDOSimpleObject">
         <field key="internalKey" dbtype="int" phptype="integer" null="false" default="0" index="unique" />
         <field key="fullname" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" />
-        <field key="role" dbtype="int" phptype="integer" null="false" default="0" />
         <field key="email" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" />
         <field key="phone" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" />
         <field key="mobilephone" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" />

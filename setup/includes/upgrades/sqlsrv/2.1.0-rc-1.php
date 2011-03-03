@@ -62,3 +62,9 @@ $this->processResults($class, $description, array($modx->manager, 'removeField')
 /* remove hasmetatags column in modResource */
 $description = $this->install->lexicon('drop_column',array('column' => 'hasmetatags', 'table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'removeField'), array($class, 'hasmetatags'));
+
+/* remove modUserProfile.role column */
+$class = 'modUserProfile';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('drop_column', array('column' => 'role', 'table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'removeField'), array($class, 'role'));
