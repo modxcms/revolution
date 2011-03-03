@@ -271,6 +271,11 @@ class xPDOManager_sqlsrv extends xPDOManager {
         $result = false;
         $className = $this->xpdo->loadClass($class);
         if ($className) {
+            if ($defaultConstraints = $this->getDefaultConstraints($class, $name)) {
+                foreach ($defaultConstraints as $defaultConstraint) {
+                    $this->removeConstraint($class, $defaultConstraint);
+                }
+            }
             $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} DROP COLUMN {$this->xpdo->escape($name)}";
             if ($this->xpdo->exec($sql)) {
                 $result = true;
@@ -366,5 +371,16 @@ class xPDOManager_sqlsrv extends xPDOManager {
             $result= implode(',', $indexset);
         }
         return $result;
+    }
+
+    private function getDefaultConstraints($class, $name, array $options = array()) {
+        $constraints = array();
+        $table = $this->xpdo->getTableName($class);
+        $sql = "SELECT name FROM sys.default_constraints WHERE parent_object_id = object_id(?) AND type = 'D' AND parent_column_id = (SELECT column_id FROM sys.columns WHERE object_id = object_id(?) AND name = ?)";
+        $stmt = $this->xpdo->prepare($sql);
+        if ($stmt && $stmt->execute(array($table, $table, $name))) {
+            $constraints = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        }
+        return $constraints;
     }
 }
