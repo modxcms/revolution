@@ -95,7 +95,7 @@ class modTemplate extends modElement {
 
             if (is_string($this->_output) && !empty($this->_output)) {
                 /* turn the processed properties into placeholders */
-                $this->toPlaceholders($this->_properties);
+                $this->xpdo->toPlaceholders($this->_properties, '', '.', true);
 
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
