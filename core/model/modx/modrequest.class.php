@@ -191,7 +191,7 @@ class modRequest {
                     }
                     if ($tvs = $resource->getMany('TemplateVars', 'all')) {
                         foreach ($tvs as $tv) {
-                            $this->modx->set($tv->get('name'), array(
+                            $resource->set($tv->get('name'), array(
                                 $tv->get('name'),
                                 $tv->getValue($resource->get('id')),
                                 $tv->get('display'),
