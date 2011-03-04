@@ -152,12 +152,6 @@ class modTemplate extends modElement {
         $c->sortby('TemplateVarTemplates.rank','ASC');
         return $this->xpdo->getCollection('modTemplateVar',$c);
     }
-    /**
-     * @deprecated 2009-10-05 Use getTemplateVars instead.
-     */
-    public function getTVs() {
-        return $this->getTemplateVars();
-    }
 
     /**
      * Get a list of Template Variables and if they are currently associated to this template.
