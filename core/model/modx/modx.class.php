@@ -220,7 +220,7 @@ class modX extends xPDO {
     );
 
     /**#@+
-     * @deprecated 2006-09-15 To be removed in 2.1
+     * @deprecated
      */
     public $Event= null;
     public $documentOutput= null;
@@ -2076,7 +2076,7 @@ class modSystemEvent {
      */
     const MODE_UPD = 'upd';
     /**@#+
-     * @deprecated 2007-09-18 Will be delegated in 1.0 or sooner.
+     * @deprecated
      * @var string
      */
     public $name = '';
