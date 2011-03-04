@@ -1344,27 +1344,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Executes a specific processor. The only argument is an array, which can
-     * take the following values:
-     *
-     * - action - The action to take, similar to connector handling.
-     * - processors_path - If specified, will override the default MODx
-     * processors path.
-     * - location - A prefix to load processor files from, will prepend to the
-     * action parameter.
-     *
-     * @deprecated 2.0.5 Will be removed in 2.1.
-     * @param array $options An array of options.
-     * @return mixed $result The result of the processor.
-     */
-    public function executeProcessor($options) {
-        $scriptProperties = $options;
-        unset($scriptProperties['action'],$scriptProperties['location'],$scriptProperties['processors_path']);
-        $response = $this->runProcessor('',$scriptProperties,$options);
-        return $response->getResponse();
-    }
-
-    /**
      * Loads and runs a specific processor.
      *
      * @param string $action The processor to run, eg: context/update
