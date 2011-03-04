@@ -7,7 +7,7 @@ $modx->lexicon->load('access');
 $modx->smarty->assign('_lang',$modx->lexicon->fetch());
 
 if (!empty($_POST['logout'])) {
-    $modx->executeProcessor(array(
+    $modx->runProcessor(array(
         'action' => 'security/logout',
     ));
     $url = $modx->getOption('manager_url');
