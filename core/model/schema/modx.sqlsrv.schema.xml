@@ -570,39 +570,7 @@
         </index>
 
         <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
-        
-        <!-- LEGACY RELATIONSHIPS : PLEASE USE ABOVE -->
-        <aggregate alias="modNamespace" class="modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
-    
-    <object class="modLexiconLanguage" table="lexicon_languages" extends="xPDOObject">
-        <field key="name" dbtype="nvarchar" precision="20" phptype="string" null="false" default="" index="pk" />
-        
-        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
-            <column key="name" length="" collation="A" null="false" />
-        </index>
-
-        <composite alias="Entries" class="modLexiconEntry" local="name" foreign="language" cardinality="many" owner="local" />
-    </object>
-    
-    <object class="modLexiconTopic" table="lexicon_topics" extends="xPDOSimpleObject">
-        <field key="name" dbtype="nvarchar" precision="100" phptype="string" null="false" default="" index="unique" indexgrp="foci" />
-        <field key="namespace" dbtype="nvarchar" precision="40" phptype="string" null="false" default="core" index="unique" indexgrp="foci" />
-        
-        <index alias="foci" name="foci" primary="false" unique="true" type="BTREE">
-            <column key="name" length="" collation="A" null="false" />
-            <column key="namespace" length="" collation="A" null="false" />
-        </index>
-
-        <composite alias="Entries" class="modLexiconEntry" local="id" foreign="topic" cardinality="many" owner="local" />
-        <aggregate alias="Namespace" class="modNamespace" local="namespace" foreign="key" cardinality="one" owner="foreign" />
-        
-        <!-- LEGACY RELATIONSHIPS : PLEASE USE ABOVE -->
-        <composite alias="modLexiconEntry" class="modLexiconEntry" local="id" foreign="topic" cardinality="many" owner="local" />
-        <aggregate alias="modNamespace" class="modNamespace" local="namespace" foreign="key" cardinality="one" owner="foreign" />
-    </object>
-    
-    <object class="modLexiconFocus" extends="modLexiconTopic"></object>
     
     <object class="modManagerLog" table="manager_log" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" phptype="integer" null="false" default="0" />
@@ -649,7 +617,6 @@
             <column key="name" length="" collation="A" null="false" />
         </index>
 
-        <composite alias="LexiconTopics" class="modLexiconTopic" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="LexiconEntries" class="modLexiconEntry" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="SystemSettings" class="modSystemSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="ContextSettings" class="modContextSetting" local="name" foreign="namespace" cardinality="many" owner="local" />

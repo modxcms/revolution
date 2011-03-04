@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <component name="demo" version="alpha" release="1" namespace="demo">
 	<autoinclude class="modLexiconEntry" />
-	<autoinclude class="modLexiconTopic" />
 	<autoinclude class="modSystemSetting" />
 	<autoinclude class="modContextSetting" />
 	
