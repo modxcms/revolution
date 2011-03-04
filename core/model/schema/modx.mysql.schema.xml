@@ -422,24 +422,6 @@
         <aggregate alias="PluginEvents" class="modPluginEvent" local="name" foreign="event" cardinality="many" owner="local" />
     </object>
 
-    <!-- Deprecated -->
-    <object class="modEventLog" table="event_log" extends="xPDOSimpleObject">
-        <field key="eventid" dbtype="int" precision="11" phptype="integer" null="true" default="0" />
-        <field key="createdon" dbtype="int" precision="11" phptype="timestamp" null="false" default="0" />
-        <field key="type" dbtype="tinyint" precision="4" attributes="unsigned" phptype="integer" null="false" default="1" />
-        <field key="user" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
-        <field key="usertype" dbtype="tinyint" precision="4" phptype="integer" null="false" default="0" />
-        <field key="source" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
-        <field key="description" dbtype="text" phptype="string" />
-        
-        <index alias="user" name="user" primary="false" unique="false" type="BTREE">
-            <column key="user" length="" collation="A" null="false" />
-        </index>
-
-        <composite alias="Event" class="modEvent" key="id" local="eventid" foreign="name" cardinality="one" owner="foreign" />
-    </object>
-
-
     <object class="modActionDom" table="actiondom" extends="modAccessibleSimpleObject">
         <field key="set" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
         <field key="action" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />

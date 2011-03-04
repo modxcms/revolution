@@ -1584,33 +1584,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Add an a alert message to the system event log
-     *
-     * @param integer $evtid
-     * @param integer $type 1 = information, 2 = warning, 3 = error.
-     * @param string $msg
-     * @param string $source Default is 'Parser'.
-     * @deprecated 2007-09-17 TO be removed in 1.0
-     */
-    public function logEvent($evtid,$type,$msg,$source='Parser') {
-        $eventLog= $this->newObject('modEventLog');
-        $evtid = intval($evtid);
-        if ($type<1) $type = 1; else if($type>3) $type = 3;
-        $user= $this->getLoginUserID();
-        $eventLog->set('eventid', $evtid);
-        $eventLog->set('type', $type);
-        $eventLog->set('createdon', time());
-        $eventLog->set('source', $source);
-        $eventLog->set('description', $msg);
-        $eventLog->set('user', $user);
-        $ds = $eventLog->save(false);
-        if(!$ds) {
-            echo "Error while inserting event log into database.";
-            exit;
-        }
-    }
-
-    /**
      * Logs a manager action.
      * @access public
      * @param string $action The action to pull from the lexicon module.

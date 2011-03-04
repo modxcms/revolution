@@ -379,16 +379,6 @@ $collection['56']->fromArray(array (
   'lang_topics' => 'login',
   'assets' => '',
 ), '', true, true);
-$collection['58']= $xpdo->newObject('modAction');
-$collection['58']->fromArray(array (
-  'id' => 58,
-  'namespace' => 'core',
-  'parent' => 57,
-  'controller' => 'system/event/details',
-  'haslayout' => 1,
-  'lang_topics' => '',
-  'assets' => '',
-), '', true, true);
 $collection['62']= $xpdo->newObject('modAction');
 $collection['62']->fromArray(array (
   'id' => 62,

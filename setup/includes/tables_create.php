@@ -34,7 +34,6 @@ $classes= array (
     'modContextSetting',
     'modElementPropertySet',
     'modEvent',
-    'modEventLog',
     'modFormCustomizationProfile',
     'modFormCustomizationProfileUserGroup',
     'modFormCustomizationSet',
