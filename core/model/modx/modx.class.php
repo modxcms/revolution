@@ -225,7 +225,6 @@ class modX extends xPDO {
     public $Event= null;
     public $documentOutput= null;
     public $stopOnNotice= false;
-    public $dumpSQL= false;
     /**#@-*/
 
     /**
