@@ -10,7 +10,10 @@ $modx->lexicon->load('workspace');
 if (empty($scriptProperties['info'])) return $modx->error->failure($modx->lexicon('package_download_err_ns'));
 if (empty($scriptProperties['provider'])) {
     $c = $modx->newQuery('transport.modTransportProvider');
-    $c->where(array('name' => 'modxcms.com'));
+    $c->where(array(
+        'name:=' => 'modxcms.com',
+        'OR:name:=' => 'modx.com',
+    ));
     $provider= $modx->getObject('transport.modTransportProvider',$c);
     if (empty($provider)) return $modx->error->failure($modx->lexicon('provider_err_nf'));
     $scriptProperties['provider'] = $provider->get('id');

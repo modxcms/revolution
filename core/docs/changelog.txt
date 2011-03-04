@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Change modxcms.com references to modx.com
 - [#3898] Prevent any non-integer being set in ?a= in mgr interface
 - [#3926] Ensure security/user/create processor can take in a class_key parameter to set class_key for SSO
 - Improve user processors event handling to allow for better SSO integration that can stop save/remove/update

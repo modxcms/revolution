@@ -833,7 +833,7 @@ $children[0]->fromArray(array (
   'description' => 'forums_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 0,
-  'handler' => 'window.open("http://modxcms.com/forums");',
+  'handler' => 'window.open("http://modx.com/forums");',
 ), '', true, true);
 
 /* confluence */
@@ -869,7 +869,7 @@ $children[3]->fromArray(array (
   'description' => 'api_docs_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 3,
-  'handler' => 'window.open("http://api.modxcms.com/");',
+  'handler' => 'window.open("http://api.modx.com/");',
 ), '', true, true);
 
 $menus[7]->addMany($children,'Children');

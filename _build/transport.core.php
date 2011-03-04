@@ -159,14 +159,14 @@ unset ($collection, $c, $attributes);
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Default workspace packaged.'); flush();
 
-/* modxcms.com extras provisioner */
+/* modx.com extras provisioner */
 $collection = array ();
 $collection['1'] = $xpdo->newObject('transport.modTransportProvider');
 $collection['1']->fromArray(array (
     'id' => 1,
-    'name' => 'modxcms.com',
+    'name' => 'modx.com',
     'description' => 'The official MODx transport facility for 3rd party components.',
-    'service_url' => 'http://rest.modxcms.com/extras/',
+    'service_url' => 'http://rest.modx.com/extras/',
     'created' => strftime('%Y-%m-%d %H:%M:%S'),
 ), '', true, true);
 $attributes = array (

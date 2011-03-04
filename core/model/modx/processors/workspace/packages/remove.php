@@ -30,6 +30,7 @@ if ($package->removePackage($scriptProperties['force']) == false) {
 }
 
 /* empty cache */
+$modx->getCacheManager();
 $modx->cacheManager->refresh();
 
 /* remove transport zip */
