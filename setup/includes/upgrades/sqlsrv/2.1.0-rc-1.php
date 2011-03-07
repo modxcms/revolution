@@ -40,13 +40,31 @@ if ($uriAdded && $modx->getOption('friendly_urls')) {
 $class = 'modUser';
 $table = $modx->getTableName($class);
 $description = $this->install->lexicon('add_column',array('column' => 'hash_class','table' => $table));
-$sql = "ALTER TABLE {$table} ADD COLUMN {$modx->escape('hash_class')} NVARCHAR(100) NOT NULL DEFAULT 'hashing.modPBKDF2'"; // AFTER {$modx->escape('remote_data')}
+$sql = "ALTER TABLE {$table} ADD {$modx->escape('hash_class')} NVARCHAR(100) NOT NULL DEFAULT 'hashing.modPBKDF2'"; // AFTER {$modx->escape('remote_data')}
 $hashClassAdded = $this->processResults($class,$description,$sql);
 
 $description = $this->install->lexicon('add_column',array('column' => 'salt','table' => $table));
-$sql = "ALTER TABLE {$table} ADD COLUMN {$modx->escape('salt')} NVARCHAR(100) NOT NULL DEFAULT ''"; // AFTER {$modx->escape('hash_class')}
+$sql = "ALTER TABLE {$table} ADD {$modx->escape('salt')} NVARCHAR(100) NOT NULL DEFAULT ''"; // AFTER {$modx->escape('hash_class')}
 $this->processResults($class,$description,$sql);
 
 if ($hashClassAdded) {
     $modx->exec("UPDATE {$table} SET {$modx->escape('hash_class')} = 'hashing.modMD5'");
 }
+
+/* remove haskeywords column in modResource */
+$modx->getManager();
+
+$class = 'modResource';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('drop_column',array('column' => 'haskeywords', 'table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'removeField'), array($class, 'haskeywords'));
+
+/* remove hasmetatags column in modResource */
+$description = $this->install->lexicon('drop_column',array('column' => 'hasmetatags', 'table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'removeField'), array($class, 'hasmetatags'));
+
+/* remove modUserProfile.role column */
+$class = 'modUserProfile';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('drop_column', array('column' => 'role', 'table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'removeField'), array($class, 'role'));

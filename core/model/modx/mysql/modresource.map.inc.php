@@ -39,8 +39,6 @@ $xpdo_meta_map['modResource']= array (
     'publishedby' => 0,
     'menutitle' => '',
     'donthit' => 0,
-    'haskeywords' => 0,
-    'hasmetatags' => 0,
     'privateweb' => 0,
     'privatemgr' => 0,
     'content_dispo' => 0,
@@ -306,24 +304,6 @@ $xpdo_meta_map['modResource']= array (
       'default' => '',
     ),
     'donthit' => 
-    array (
-      'dbtype' => 'tinyint',
-      'precision' => '1',
-      'attributes' => 'unsigned',
-      'phptype' => 'boolean',
-      'null' => false,
-      'default' => 0,
-    ),
-    'haskeywords' => 
-    array (
-      'dbtype' => 'tinyint',
-      'precision' => '1',
-      'attributes' => 'unsigned',
-      'phptype' => 'boolean',
-      'null' => false,
-      'default' => 0,
-    ),
-    'hasmetatags' => 
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -800,22 +780,6 @@ $xpdo_meta_map['modResource']= array (
       'class' => 'modResourceGroupResource',
       'local' => 'id',
       'foreign' => 'document',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'ResourceKeywords' => 
-    array (
-      'class' => 'modResourceKeyword',
-      'local' => 'id',
-      'foreign' => 'content_id',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'ResourceMetatags' => 
-    array (
-      'class' => 'modResourceMetatag',
-      'local' => 'id',
-      'foreign' => 'content_id',
       'cardinality' => 'many',
       'owner' => 'local',
     ),

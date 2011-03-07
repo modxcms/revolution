@@ -36,8 +36,8 @@ if ($profile && $profile->get('lastlogin') != '') {
 }
 $modx->smarty->assign('previous_login',$previous_login);
 
-/* online users
- * @deprecated big time, to be removed in 2.1
+/*
+ * @todo refactor online user tracking
  */
 $timetocheck = (time()-(60*20))+$serverOffset;
 $c = $modx->newQuery('modActiveUser');

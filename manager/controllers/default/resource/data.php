@@ -28,18 +28,6 @@ $resource->getOne('CreatedBy');
 $resource->getOne('EditedBy');
 $resource->getOne('Template');
 
-$dkws = $resource->getMany('ResourceKeywords');
-$resource->keywords = array();
-foreach ($dkws as $dkw) {
-	$resource->keywords[$dkw->get('keyword_id')] = $dkw->getOne('Keyword');
-}
-$keywords = array();
-foreach ($resource->keywords as $kw) {
-	$keywords[] = $kw->get('keyword');
-}
-$keywords = join($keywords,',');
-$modx->smarty->assign('keywords',$keywords);
-
 $server_offset_time= intval($modx->getOption('server_offset_time',null,0));
 $resource->set('createdon_adjusted',strftime('%c', $resource->get('createdon') + $server_offset_time));
 $resource->set('editedon_adjusted',strftime('%c', $resource->get('editedon') + $server_offset_time));

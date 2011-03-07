@@ -47,26 +47,6 @@ switch ($scriptProperties['type']) {
 		if (!$message->save()) return $modx->error->failure($modx->lexicon('message_err_save'));
 		break;
 
-	case 'role':
-		$role = $modx->getObject('modUserRole',$scriptProperties['role']);
-		if ($role == null) return $modx->error->failure($modx->lexicon('role_err_not_found'));
-
-		$users = $modx->getCollection('modUserProfile',array('role' => $scriptProperties['role']));
-
-		foreach ($users as $user) {
-			if ($user->get('internalKey') != $modx->user->get('id')) {
-				$message = $modx->newObject('modUserMessage');
-				$message->set('recipient',$user->get('internalKey'));
-				$message->set('subject',$scriptProperties['subject']);
-				$message->set('message',$scriptProperties['message']);
-				$message->set('sender',$modx->user->get('id'));
-				$message->set('postdate',time());
-				$message->set('type','Message');
-				$message->set('private',false);
-				if (!$message->save()) return $modx->error->failure($modx->lexicon('message_err_save'));
-			}
-		}
-		break;
 	case 'all':
 		$users = $modx->getCollection('modUser');
 		foreach ($users as $user) {

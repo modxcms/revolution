@@ -40,9 +40,6 @@ if(!isset($_SERVER['DOCUMENT_ROOT']) || empty($_SERVER['DOCUMENT_ROOT'])) {
     $_SERVER['DOCUMENT_ROOT'] = str_replace($_SERVER['PATH_INFO'], '', str_replace('\\\\', '/', $_SERVER['PATH_TRANSLATED'])) . '/';
 }
 
-/* we use this to make sure files are accessed through the manager instead of separately. */
-define('IN_MANAGER_MODE',true);
-
 /* include the modX class */
 if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
     include MODX_CORE_PATH . 'error/unavailable.include.php';

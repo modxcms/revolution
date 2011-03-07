@@ -628,25 +628,4 @@ class modElement extends modAccessibleSimpleObject {
     public function setCacheable($cacheable = true) {
         $this->_cacheable = (boolean) $cacheable;
     }
-
-    /**
-     * Turns associative arrays into placeholders in the scope of this element.
-     *
-     * @deprecated To be removed in 2.1. See xPDO::toPlaceholders() for similar functionality.
-     * @param array $placeholders An associative array of placeholders to set.
-     * @return array An array of placeholders overwritten from the containing
-     * scope you can use to restore values from, or an empty array if no
-     * placeholders were overwritten.
-     */
-    public function toPlaceholders($placeholders) {
-        $restore = array();
-        if (is_array($placeholders) && !empty($placeholders)) {
-            $restoreKeys = array_keys($placeholders);
-            foreach ($restoreKeys as $phKey) {
-                if (isset($this->xpdo->placeholders[$phKey])) $restore[$phKey]= $this->xpdo->getPlaceholder($phKey);
-            }
-            $this->xpdo->toPlaceholders($placeholders);
-        }
-        return $restore;
-    }
 }

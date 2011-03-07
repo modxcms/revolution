@@ -11,7 +11,6 @@ $xpdo_meta_map['modUserProfile']= array (
   array (
     'internalKey' => 0,
     'fullname' => '',
-    'role' => 0,
     'email' => '',
     'phone' => '',
     'mobilephone' => '',
@@ -53,13 +52,6 @@ $xpdo_meta_map['modUserProfile']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
-    ),
-    'role' => 
-    array (
-      'dbtype' => 'int',
-      'phptype' => 'integer',
-      'null' => false,
-      'default' => 0,
     ),
     'email' => 
     array (
@@ -264,14 +256,6 @@ $xpdo_meta_map['modUserProfile']= array (
     array (
       'class' => 'modUser',
       'local' => 'internalKey',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'UserRole' => 
-    array (
-      'class' => 'modUserRole',
-      'local' => 'role',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

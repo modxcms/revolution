@@ -100,10 +100,20 @@ class modInstallVersion {
      * Process a SQL command
      *
      * @access public
+     * @param string $class The class being operated on.
+     * @param string $description The description of the operation.
+     * @param string|callable $callable A callable function or string representing a SQL command.
+     * @param array $params Optional parameters to be passed to a callable function.
      * @return boolean True if successful
      */
-    public function processResults($class,$description,$sql) {
-        if (!$this->install->xpdo->exec($sql)) {
+    public function processResults($class,$description,$callable,array $params=array()) {
+        $result = false;
+        if (is_callable($callable)) {
+            $result = call_user_func_array($callable, $params);
+        } elseif (is_string($callable)) {
+            $result = $this->install->xpdo->exec($callable);
+        }
+        if (!$result) {
             $this->results[] = array (
                 'class' => 'warning',
                 'msg' => '<p class="notok">'.$this->install->lexicon('err_update_table',array('class' => $class)).'<br /><small>' . nl2br(print_r($this->install->xpdo->errorInfo(), true)) . '</small></p>'

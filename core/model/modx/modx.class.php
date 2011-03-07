@@ -213,13 +213,6 @@ class modX extends xPDO {
     public $_userConfig= array();
     protected $_logSequence= 0;
 
-    /**
-     * @var DBAPI An instance of the DBAPI helper class.
-     * @deprecated Aug 28, 2006 For legacy component support only; use xPDO
-     * methods inherited by modX class instead. To be removed in 2.1.
-     */
-    public $db= null;
-
     public $pluginCache= array();
     public $sourceCache= array(
         'modChunk' => array()
@@ -227,17 +220,11 @@ class modX extends xPDO {
     );
 
     /**#@+
-     * @deprecated 2006-09-15 To be removed in 2.1
+     * @deprecated
      */
     public $Event= null;
-    public $documentIdentifier= null;
-    public $documentMethod= null;
-    public $documentContent= null;
     public $documentOutput= null;
-    public $documentObject= null;
-    public $documentGenerated= false;
     public $stopOnNotice= false;
-    public $dumpSQL= false;
     /**#@-*/
 
     /**
@@ -410,10 +397,6 @@ class modX extends xPDO {
             $this->_initCulture();
 
             $this->getService('registry', 'registry.modRegistry');
-
-            if ($this->loadClass('DBAPI', '', false, true)) {
-                $this->db= new DBAPI();
-            }
 
             if (is_array ($this->config)) {
                 $this->setPlaceholders($this->config, '+');
@@ -1140,15 +1123,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Alias for getConfig().
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getSettings() {
-        $this->getConfig();
-        return $this->config;
-    }
-
-    /**
      * Initialize, cleanse, and process a request made to a modX site.
      *
      * @return mixed The result of the request handler.
@@ -1308,23 +1282,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Legacy call to set the current documentObject being handled by MODx.
-     *
-     * @param string $method 'id' or 'alias' to indicate the lookup method.
-     * @param string|int $identifier The identifier for looking up the document.
-     * @return array An associative array containing all the document data.
-     * @deprecated 0.9.7 - Jan 18, 2007
-     */
-    public function getDocumentObject($method, $identifier) {
-        if (!$this->getRequest()) {
-            $this->log(modX::LOG_LEVEL_FATAL, 'Could not load request class.');
-        }
-        $this->resource= $this->request->getResource($method, $identifier);
-        $documentObject= & $this->documentObject;
-        return $documentObject;
-    }
-
-    /**
      * Invokes a specified Event with an optional array of parameters.
      *
      * @access public
@@ -1386,27 +1343,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Executes a specific processor. The only argument is an array, which can
-     * take the following values:
-     *
-     * - action - The action to take, similar to connector handling.
-     * - processors_path - If specified, will override the default MODx
-     * processors path.
-     * - location - A prefix to load processor files from, will prepend to the
-     * action parameter.
-     *
-     * @deprecated 2.0.5 Will be removed in 2.1.
-     * @param array $options An array of options.
-     * @return mixed $result The result of the processor.
-     */
-    public function executeProcessor($options) {
-        $scriptProperties = $options;
-        unset($scriptProperties['action'],$scriptProperties['location'],$scriptProperties['processors_path']);
-        $response = $this->runProcessor('',$scriptProperties,$options);
-        return $response->getResponse();
-    }
-
-    /**
      * Loads and runs a specific processor.
      *
      * @param string $action The processor to run, eg: context/update
@@ -1426,7 +1362,9 @@ class modX extends xPDO {
         }
 
         $result = null;
-        /* backwards compat for $options['action'] */
+        /* backwards compat for $options['action']
+         * @deprecated Removing in 2.2
+         */
         if (empty($action)) {
             if (!empty($options['action'])) {
                 $action = $options['action'];
@@ -1465,10 +1403,10 @@ class modX extends xPDO {
         if ($context && isset ($_SESSION[$context . 'Validated'])) {
             return $_SESSION[$context . 'InternalKey'];
         }
-        elseif (!$context && $this->isFrontend() && isset ($_SESSION['webValidated'])) {
+        elseif (!$context && $this->context->get('key') !== 'mgr' && isset ($_SESSION['webValidated'])) {
             return $_SESSION['webInternalKey'];
         }
-        elseif (!$context && $this->isBackend() && isset ($_SESSION['mgrValidated'])) {
+        elseif (!$context && $this->context->get('key') === 'mgr' && isset ($_SESSION['mgrValidated'])) {
             return $_SESSION['mgrInternalKey'];
         }
         return false;
@@ -1485,30 +1423,13 @@ class modX extends xPDO {
         if ($context && isset ($_SESSION[$context . 'Validated'])) {
             return $_SESSION[$context . 'Shortname'];
         }
-        if ($this->isFrontend() && isset ($_SESSION['webValidated'])) {
+        if ($this->context->get('key') !== 'mgr' && isset ($_SESSION['webValidated'])) {
             return $_SESSION['webShortname'];
         }
-        elseif ($this->isBackend() && isset ($_SESSION['mgrValidated'])) {
+        elseif ($this->context->get('key') === 'mgr' && isset ($_SESSION['mgrValidated'])) {
             return $_SESSION['mgrShortname'];
         }
         return false;
-    }
-
-    /**
-     * Returns current login user type - web or manager.
-     *
-     * @deprecated 2007-09-17 To be removed in 1.0.
-     * @return string 'web', 'manager' or an empty string.
-     */
-    public function getLoginUserType() {
-        if ($this->isFrontend() && isset ($_SESSION['webValidated'])) {
-            return 'web';
-        }
-        elseif ($this->isBackend() && isset ($_SESSION['mgrValidated'])) {
-            return 'manager';
-        } else {
-            return '';
-        }
     }
 
     /**
@@ -1522,98 +1443,11 @@ class modX extends xPDO {
     }
 
     /**
-     * Determines if the current webuser is a member of the specified webgroups.
-     *
-     * @deprecated 2009-11-01 To be removed in 2.1
-     * @param array $groupNames An array of groups to check against.
-     * @return boolean True if the user is a member of any one of the supplied
-     * group names, false otherwise.
-     */
-    public function isMemberOfWebGroup(array $groupNames= array ()) {
-        if (!is_array($groupNames))
-            return false;
-        // check cache
-        $grpNames= isset ($_SESSION['webUserGroupNames']) ? $_SESSION['webUserGroupNames'] : false;
-        if (!is_array($grpNames)) {
-            if ($user= $this->getUser('web')) {
-                if ($groupMemberships= $user->getMany('UserGroupMembers')) {
-                    foreach ($groupMemberships as $gm) {
-                        if ($group= $gm->getOne('UserGroup')) {
-                            $grpNames[]= $group->get('name');
-                        }
-                    }
-                }
-            }
-            // save to session
-            if ($grpNames) $_SESSION['webUserGroupNames']= $grpNames;
-        }
-        if ($grpNames && !empty ($grpNames)) {
-            foreach ($groupNames as $k => $v) {
-                if (in_array(trim($v), $grpNames)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Get persistent data from a specific document.
-     * @deprecated 2007-09-17 To be removed in 2.1.
-     */
-    public function getDocument($id=0,$fields="*",$published=1, $deleted=0) {
-        if($id==0) {
-            return false;
-        } else {
-            $tmpArr[] = $id;
-            $docs = $this->getDocuments($tmpArr, $published, $deleted, $fields,"","","",1);
-            if($docs!=false) {
-                return $docs[0];
-            } else {
-                return false;
-            }
-        }
-    }
-
-    /**
-     * Get persistent data from a collection of specified documents.
-     * @deprecated 2008-10-10 To be removed in 2.1.
-     */
-    public function getDocuments(array $ids=array(), $published=1, $deleted=0, $fields="*", $where='', $sort="menuindex", $dir="ASC", $limit="") {
-        $collection = array();
-        if ($fields == '*') {
-            $columns = array_keys($this->getFields('modResource'));
-        } else {
-            $columns = explode(',', $fields);
-            foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
-        }
-        $criteria = $this->newQuery('modResource');
-        $criteria->setClassAlias('sc');
-        $criteria->select('id');
-        $criteria->select($columns);
-        $criteria->where('sc.id IN (' . implode(',', $ids) . ')', array(
-            'sc.published' => $published,
-            'sc.deleted' => $deleted
-        ));
-        if (!empty($where)) $criteria->andCondition($where);
-        if (!empty($sort)) $criteria->sortby($sort, $dir);
-        if (!empty($limit)) $criteria->limit($limit);
-        if ($objCollection = $this->getCollection('modResource', $criteria)) {
-            foreach ($objCollection as $obj) {
-                array_push($collection, $obj->get($columns));
-            }
-        }
-        if (empty($collection)) $collection = false;
-        return $collection;
-    }
-
-    /**
      * Legacy fatal error message.
      */
     public function messageQuit($msg='unspecified error', $query='', $is_error=true, $nr='', $file='', $source='', $text='', $line='') {
         $this->log(modX::LOG_LEVEL_FATAL, 'msg: ' . $msg . "\n" . 'query: ' . $query . "\n" . 'nr: ' . $nr . "\n" . 'file: ' . $file . "\n" . 'source: ' . $source . "\n" . 'text: ' . $text . "\n" . 'line: ' . $line . "\n");
     }
-
 
     /**
      * Process and return the output from a PHP snippet by name.
@@ -1719,543 +1553,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Returns an array of resource groups that current user is assigned to.
-     *
-     * This function will first return the web user doc groups when running from
-     * frontend otherwise it will return manager user's resource group.
-     * @param boolean $resolveIds Set to true to return the resource group
-     * names.
-     * @return mixed An array of document group ids, names, false or empty string.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getUserDocGroups($resolveIds= false) {
-        $dgn= false;
-        if ($this->isFrontend() && isset ($_SESSION['webDocgroups']) && isset ($_SESSION['webValidated'])) {
-            $dg= $_SESSION['webDocgroups'];
-            $dgn= isset ($_SESSION['webDocgrpNames']) ? $_SESSION['webDocgrpNames'] : false;
-        } elseif ($this->isBackend() && isset ($_SESSION['mgrDocgroups']) && isset ($_SESSION['mgrValidated'])) {
-            $dg= $_SESSION['mgrDocgroups'];
-            $dgn= $_SESSION['mgrDocgrpNames'];
-        } else {
-            $dg= '';
-        }
-        if (!$resolveIds) {
-            return $dg;
-        }
-        elseif (is_array($dgn)) {
-            return $dgn;
-        }
-        elseif (is_array($dg)) {
-            $dgn= array ();
-            $tbl= $this->getTableName('modResourceGroup');
-            $criteria= new xPDOCriteria($this, "SELECT * FROM {$tbl} WHERE id IN (" . implode(",", $dg) . ")");
-            $collResourceGroups= $this->getCollection('modResourceGroup', $criteria);
-            foreach ($collResourceGroups as $rg) {
-                $dgn[count($dgn)]= $rg->get('name');
-            }
-            if ($this->isFrontend()) {
-                $_SESSION['webDocgrpNames']= $dgn;
-            }
-            else {
-                $_SESSION['mgrDocgrpNames']= $dgn;
-            }
-        }
-        return $dgn;
-    }
-
-    /**
-     * Returns the full table name based on db settings.
-     *
-     * @deprecated Aug 28, 2006 Use {@link getTableName($className)} instead. To
-     * be removed in 2.1.
-     */
-    public function getFullTableName($tbl){
-        return $this->escape($this->db->config['dbase']) . '.' . $this->escape($this->db->config['table_prefix'].$tbl);
-    }
-
-    /**
-     * Get children of the specified resource without regard to status.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getAllChildren($id=0, $sort='menuindex', $dir='ASC', $fields='id, pagetitle, description, parent, alias, menutitle, class_key, context_key') {
-        $collection = array();
-        if ($fields == '*') {
-            $columns = array_keys($this->getFields('modResource'));
-        } else {
-            $columns = explode(',', $fields);
-            foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
-        }
-        $criteria = $this->newQuery('modResource');
-        $criteria->select('id');
-        $criteria->select($columns);
-        $criteria->where(array('parent' => $id));
-        if (!empty($sort)) $criteria->sortby($sort, $dir);
-        if ($objCollection = $this->getCollection('modResource', $criteria)) {
-            foreach ($objCollection as $obj) {
-                array_push($collection, $obj->get($columns));
-            }
-        }
-        if (empty($collection)) $collection = false;
-        return $collection;
-    }
-
-    /**
-     * Get all published children documents of the specified document.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getActiveChildren($id=0, $sort='menuindex', $dir='ASC', $fields='id, pagetitle, description, parent, alias, menutitle, class_key, context_key') {
-        $collection = array();
-        if ($fields == '*') {
-            $columns = array_keys($this->getFields('modResource'));
-        } else {
-            $columns = explode(',', $fields);
-            foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
-        }
-        $criteria = $this->newQuery('modResource');
-        $criteria->setClassAlias('sc');
-        $criteria->select('id');
-        $criteria->select($columns);
-        $criteria->where(array(
-            'sc.parent' => $id,
-            'sc.published' => '1',
-            'sc.deleted' => '0'
-        ));
-        if (!empty($sort)) $criteria->sortby($sort, $dir);
-        if ($objCollection = $this->getCollection('modResource', $criteria)) {
-            foreach ($objCollection as $obj) {
-                array_push($collection, $obj->get($columns));
-            }
-        }
-        if (empty($collection)) $collection = false;
-        return $collection;
-    }
-
-    /**
-     * Get all children documents of the specified document.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getDocumentChildren($parentid= 0, $published= 1, $deleted= 0, $fields= "*", $where= '', $sort= "menuindex", $dir= "ASC", $limit= "") {
-        $collection = array();
-        if ($fields == '*') {
-            $columns = array_keys($this->getFields('modResource'));
-        } else {
-            $columns = explode(',', $fields);
-            foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
-        }
-        $criteria = $this->newQuery('modResource');
-        $criteria->setClassAlias('sc');
-        $criteria->select('id');
-        $criteria->select($columns);
-        $criteria->where(array(
-            'sc.parent' => $parentid,
-            'sc.published' => $published,
-            'sc.deleted' => $deleted
-        ));
-        if (!empty($where)) $criteria->andCondition($where);
-        if (!empty($sort)) $criteria->sortby($sort, $dir);
-        if (!empty($limit)) $criteria->limit($limit);
-        if ($objCollection = $this->getCollection('modResource', $criteria)) {
-            foreach ($objCollection as $obj) {
-                array_push($collection, $obj->get($columns));
-            }
-        }
-        if (empty($collection)) $collection = false;
-        return $collection;
-    }
-
-    /**
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getDocumentChildrenTVars($parentid=0, array $tvidnames=array(), $published=1, $docsort="menuindex", $docsortdir="ASC", $tvfields="*", $tvsort="rank", $tvsortdir="ASC") {
-        $collection = array();
-        $all= ($tvidnames=="*");
-        $byName= (is_numeric($tvidnames[0]) == false);
-        if ($tvfields == '*') {
-            $columns = array_keys($this->getFields('modTemplateVar'));
-            $columns[] = 'value';
-        } else {
-            $columns = explode(',', $tvfields);
-            foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
-        }
-        $criteria = $this->newQuery('modResource');
-        $criteria->setClassAlias('sc');
-        $criteria->where(array(
-            'sc.parent' => $parentid,
-            'sc.published' => $published,
-            'sc.deleted' => '0'
-        ));
-        if (!empty($docsort)) $criteria->sortby($docsort, $docsortdir);
-        if ($objCollection = $this->getCollection('modResource', $criteria)) {
-            foreach ($objCollection as $obj) {
-                $objArray= array();
-                $tvs= $obj->getMany('TemplateVars');
-                foreach ($tvs as $tv) {
-                    if (!$all) {
-                        if ($byName) {
-                            if (!in_array($tv->name, $tvidnames)) continue;
-                        } else {
-                            if (!in_array($tv->id, $tvidnames)) continue;
-                        }
-                    }
-                    $idx= (integer) $tv->get($tvsort);
-                    while (isset($objArray[$idx])) $idx++;
-                    $objArray[$idx]= $tv->get($columns);
-                }
-                ksort($objArray);
-                if ($tvsortdir == 'DESC') $objArray = array_reverse($objArray);
-                if ($all || $byName) {
-                    foreach ($obj->toArray() as $name => $value) {
-                        if (!$all && $byName && !in_array($name, $tvidnames)) continue;
-                        $objArray[]= array('name' => $name, 'value' => $value);
-                    }
-                }
-                if (!empty($objArray)) array_push($collection, $objArray);
-            }
-        }
-        if (empty($collection)) $collection = false;
-        return $collection;
-    }
-
-    /**
-     * Returns a single TV record.
-     *
-     * @param string $idname can be an id or name that belongs the template
-     * that the current document is using.
-     * @param string $fields
-     * @param integer $docid
-     * @param integer $published 1 for published, 0 for unpublished.
-     * @return mixed An array of the template variable fields or false.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getTemplateVar($idname="", $fields = "*", $resourceId="", $published=1) {
-        if($idname=="") {
-            return false;
-        }
-        else {
-            $result = $this->getTemplateVars(array($idname),$fields,$resourceId,$published,"","");
-            return reset($result);
-        }
-    }
-
-    /**
-     * Returns an array of TV records.
-     *
-     * @param string|array $idnames Can be an id or name that belongs to
-     * the template assigned to the current resource.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getTemplateVars(array $idnames=array(), $fields = "*", $resourceId="", $published=1, $sort="tv.rank,tvtpl.rank", $dir="ASC,ASC") {
-        if(($idnames!='*' && !is_array($idnames)) || count($idnames)==0) {
-            return false;
-        }
-        else {
-            $resourceId = intval($resourceId);
-            if ($resourceId < 1) {
-                if (is_object($this->resource)) {
-                    $resourceId = intval($this->resource->resourceIdentifier);
-                }
-            }
-            $result = array();
-
-            $fields = (empty($fields) || $fields=='*') ? "tv.*" : $this->getSelectColumns('modTemplateVar', 'tv', '', $fields);
-
-            $query = $this->newQuery('modTemplateVar');
-            $query->setClassAlias('tv');
-            $query->innerJoin('modTemplateVarTemplate', 'tvtpl', array(
-                'tvtpl.tmplvarid = tv.id',
-            ));
-            $query->innerJoin('modResource', 'sc', array(
-                'sc.id = ' . intval($resourceId),
-                'tvtpl.templateid = sc.template',
-            ));
-            $query->leftJoin('modTemplateVarResource', 'tvc', array(
-                'tvc.tmplvarid = tv.id',
-                array('tvc.contentid' => $resourceId)
-            ));
-            if ($idnames == '*') {
-                $query->where(array('tv.id:!=' => '0'));
-            } elseif (isset($idnames[0])) {
-                if (intval($idnames[0])) {
-                    $tvIdentifiers = implode(',', $idnames);
-                    $query->where('tv.id IN (' . $tvIdentifiers . ')');
-                } else {
-                    $tvIdentifiers = implode("','", $idnames);
-                    $query->where('tv.name IN ' . "('" . $tvIdentifiers . "')");
-                }
-            }
-            if (!empty($sort)) {
-                $sortby = explode(',', $sort);
-                if (!empty($dir)) {
-                    $sortdir = explode(',', $dir);
-                } else {
-                    $sortdir = array('');
-                }
-                if (is_array($sortby)) {
-                    foreach ($sortby as $idx => $col) {
-                        $sd = isset ($sortdir[$idx]) ? $sortdir[$idx] : '';
-                        $query->sortby($col, $sd);
-                    }
-                }
-            } else {
-                $query->sortby('tvtpl.rank');
-                $query->sortby('tv.rank');
-            }
-            $query->select('DISTINCT ' . $fields . ', IF(ISNULL(tvc.value),tv.default_text,tvc.value) AS value');
-
-            $collection = $this->getCollection('modTemplateVar', $query);
-            foreach ($collection as $pk => $tv) {
-                $result[$tv->get('name')]= array (
-                    'name' => $tv->get('name'),
-                    'value' => $tv->getValue($resourceId),
-                    'display' => $tv->get('display'),
-                    'display_params' => $tv->get('display_params'),
-                    'type' => $tv->get('type')
-                );
-            }
-            return $result;
-        }
-    }
-
-    /**
-     * Gets an array of template variable data, with processed output.
-     *
-     * @param string|array $idnames
-     * @param integer $resourceId
-     * @param integer $published
-     * @return mixed
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getTemplateVarOutput(array $idnames=array(), $resourceId="", $published=1) {
-        if(count($idnames)==0) {
-            return false;
-        }
-        else {
-            $output = array();
-            if ($resourceId=="") {
-                $resourceId = $this->resourceIdentifier;
-            }
-
-            $query = $this->newQuery('modTemplateVar');
-            $query->setClassAlias('tv');
-            $query->innerJoin('modTemplateVarTemplate', 'tvtpl', array(
-                'tvtpl.tmplvarid = tv.id',
-            ));
-            $query->innerJoin('modResource', 'sc', array(
-                'sc.id = ' . intval($resourceId),
-                'tvtpl.templateid = sc.template',
-            ));
-            $query->leftJoin('modTemplateVarResource', 'tvc', array(
-                'tvc.tmplvarid = tv.id',
-                'tvc.contentid = sc.id'
-            ));
-            if ($idnames == '*') {
-                $query->where(array('tv.id:!=' => '0'));
-            } elseif (isset($idnames[0])) {
-                if (is_numeric($idnames[0])) {
-                    $tvIdentifiers = implode(',', $idnames);
-                    $query->where('tv.id IN (' . $tvIdentifiers . ')');
-                } else {
-                    $tvIdentifiers = implode("','", $idnames);
-                    $query->where('tv.name IN (\'' . $tvIdentifiers . '\')');
-                }
-            }
-            $query->sortby('tvtpl.rank');
-            $query->sortby('tv.rank');
-            $query->select('DISTINCT tv.*, IF(ISNULL(tvc.value),tv.default_text,tvc.value) AS value');
-
-            $collection = $this->getCollection('modTemplateVar', $query);
-            foreach ($collection as $pk => $tv) {
-                $output[$tv->get('name')]= $tv->renderOutput($resourceId);
-            }
-            return $output;
-        }
-    }
-
-    /**
-     * Gets the parent resource.
-     *
-     * @param integer $pid
-     * @param integer $active
-     * @param string $fields
-     * @return mixed
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getParent($pid=-1, $active=1, $fields='id, pagetitle, description, alias, parent, class_key, context_key') {
-        if($pid==-1) {
-            $pid = is_object($this->resource) ? $this->resource->get('parent') : 0;
-            return ($pid==0)? false:$this->getPageInfo($pid,$active,$fields);
-        }else if($pid==0) {
-            return false;
-        } else {
-            $child = $this->getPageInfo($pid,$active,"id,parent");
-            $pid = (isset ($child['parent']) && intval($child['parent']))? intval($child['parent']):0;
-            return ($pid==0)? false:$this->getPageInfo($pid,$active,$fields);
-        }
-    }
-
-    /**
-     * Gets data from a resource.
-     *
-     * @param integer $pageid
-     * @param integer $active
-     * @param string $fields
-     * @return mixed
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getPageInfo($pageid=-1, $active=1, $fields='id, pagetitle, description, alias, class_key, context_key') {
-        $data = false;
-        $pageid = intval($pageid);
-        if ($pageid == -1) {
-            $pageid = is_object($this->resource) && $this->resource->id > 0 ? $this->resource->id : 0;
-        }
-        if ($pageid > 0) {
-            if ($fields == '*') {
-                $columns = array_keys($this->getFields('modResource'));
-            } else {
-                $columns = explode(',', $fields);
-                foreach ($columns as $colKey => $column) $columns[$colKey] = trim($column);
-            }
-            if (is_object($this->resource) && $this->resource->id == $pageid) {
-                $data= $this->resource->get($columns);
-            } else {
-                $criteria= $this->newQuery('modResource');
-                $criteria->select('id');
-                $criteria->select($columns);
-                $criteria->where(array(
-                    'id' => $pageid,
-                    'published' => !empty($active) ? 1 : '0',
-                    'deleted' => '0'
-                ));
-                if ($obj= $this->getObject('modResource', $criteria)) {
-                    $data= $obj->get($columns);
-                }
-            }
-        }
-        return $data;
-    }
-
-    /**
-     * Returns an array of user data.
-     *
-     * @param integer $uid
-     * @return mixed
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getUserInfo($uid) {
-        $userInfo= false;
-        if ($user= $this->getObjectGraph('modUser', '{"Profile":{}}', $uid, true)) {
-            $userInfo= $user->get(array ('username', 'password'));
-            if ($user->getOne('Profile')) {
-                $userInfo= array_merge($userInfo, $user->Profile->toArray());
-            }
-        }
-        return $userInfo;
-    }
-
-    /**
-     * Returns an array of web user data.
-     *
-     * @param integer $uid
-     * @return mixed
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getWebUserInfo($uid) {
-        $userInfo= $this->getUserInfo($uid);
-        return $userInfo;
-    }
-
-    /**
-     * Alias of getUserDocGroups().
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function getDocGroups() {
-        $docGroups= $this->getUserDocGroups();
-        return $docGroups;
-    }
-
-    /**
-     * Alias of changePassword().
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function changeWebUserPassword($oldPwd, $newPwd) {
-        $rt= $this->changePassword($oldPwd, $newPwd);
-        return $rt;
-    }
-
-    /**
-     * Change current user's password.
-     *
-     * @param string $o The old password.
-     * @param string $n The new password.
-     * @return mixed true if successful, otherwise return error message.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function changePassword($o, $n) {
-        $rt= false;
-        if ($this->getUser()) {
-            $rt= $this->user->changePassword($n, $o);
-        }
-        return $rt;
-    }
-
-    /**
-     * Cleans the document request parameter.
-     *
-     * @access private
-     * @param string|integer $qOrig
-     * @return string|integer
-     * @deprecated 2007-09-17 TO be removed in 2.1
-     */
-    public function cleanDocumentIdentifier($qOrig) {
-        if (!$this->getRequest()) {
-            $this->log(modX::LOG_LEVEL_FATAL, 'Could not load request class.');
-        }
-        $return= $this->request->_cleanResourceIdentifier($qOrig);
-        return $return;
-    }
-
-    /**
-     * Gets the identifier specifying a requested document.
-     *
-     * @param string $method 'id' or 'alias'.
-     * @return string|integer The requested document alias or id.
-     * @deprecated 2007-09-17 TO be removed in 2.1
-     */
-    public function getDocumentIdentifier($method) {
-        if (!$this->getRequest()) {
-            $this->log(modX::LOG_LEVEL_FATAL, 'Could not load request class.');
-        }
-        return $this->request->getResourceIdentifier($method);
-    }
-
-    /**
-     * Gets the method being used to request a document.
-     *
-     * @return string 'id', 'alias', or 'none'.
-     * @deprecated 2007-09-17 TO be removed in 2.1
-     */
-    public function getDocumentMethod() {
-        if (!$this->getRequest()) {
-            $this->log(modX::LOG_LEVEL_FATAL, 'Could not load request class.');
-        }
-        return $this->request->getResourceMethod();
-    }
-
-    /**
-     * Checks to see if the preview parameter is set.
-     *
-     * @return boolean
-     * @deprecated 2007-09-17 TO be removed in 2.1
-     */
-    public function checkPreview() {
-        $preview= false;
-        if ($this->getResponse()) {
-            $preview= $this->response->checkPreview();
-        }
-        return $preview;
-    }
-
-    /**
      * Returns true if user has the specified policy permission.
      *
      * @param string $pm Permission key to check.
@@ -2264,33 +1561,6 @@ class modX extends xPDO {
     public function hasPermission($pm) {
         $state = $this->context->checkPolicy($pm);
         return $state;
-    }
-
-    /**
-     * Add an a alert message to the system event log
-     *
-     * @param integer $evtid
-     * @param integer $type 1 = information, 2 = warning, 3 = error.
-     * @param string $msg
-     * @param string $source Default is 'Parser'.
-     * @deprecated 2007-09-17 TO be removed in 1.0
-     */
-    public function logEvent($evtid,$type,$msg,$source='Parser') {
-        $eventLog= $this->newObject('modEventLog');
-        $evtid = intval($evtid);
-        if ($type<1) $type = 1; else if($type>3) $type = 3;
-        $user= $this->getLoginUserID();
-        $eventLog->set('eventid', $evtid);
-        $eventLog->set('type', $type);
-        $eventLog->set('createdon', time());
-        $eventLog->set('source', $source);
-        $eventLog->set('description', $msg);
-        $eventLog->set('user', $user);
-        $ds = $eventLog->save(false);
-        if(!$ds) {
-            echo "Error while inserting event log into database.";
-            exit;
-        }
     }
 
     /**
@@ -2319,133 +1589,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Gets the URL for the 'mgr' context.
-     *
-     * @return string The base URL of the 'mgr' context relative to the
-     * web server document root.
-     * @deprecated 2007-09-17 Use MODX_MANAGER_URL or modX->getOption('manager_url')
-     */
-    public function getManagerPath() {
-        return MODX_MANAGER_URL;
-    }
-
-    /**
-     * Checks if a user is authenticated and returns array of data if so.
-     *
-     * @return mixed An array of authenticated user data or false.
-     * @deprecated 2007-09-17 To be removed in 2.1
-     */
-    public function userLoggedIn() {
-        $userdetails = array();
-        if($this->isFrontend() && isset($_SESSION['webValidated'])) {
-            $userdetails['loggedIn']=true;
-            $userdetails['id']=$_SESSION['webInternalKey'];
-            $userdetails['username']=$_SESSION['webShortname'];
-            $userdetails['usertype']='web';
-            return $userdetails;
-        }
-        else if($this->isBackend() && isset($_SESSION['mgrValidated'])) {
-            $userdetails['loggedIn']=true;
-            $userdetails['id']=$_SESSION['mgrInternalKey'];
-            $userdetails['username']=$_SESSION['mgrShortname'];
-            $userdetails['usertype']='manager';
-            return $userdetails;
-        }
-        else {
-            return false;
-        }
-    }
-
-    /**
-     * Gets keyword data associated with a document.
-     *
-     * @deprecated 2009-11-01 To be removed in 2.1
-     * @param integer $id A document id, defaults to current document id.
-     * @return array An array of keyword data for the specified document.
-     */
-    public function getKeywords($id=0) {
-        if (intval($id) == 0) {
-            $id = intval($this->resource->id);
-        }
-        $query = new xPDOCriteria($this, "SELECT keywords.keyword FROM " . $this->getTableName('modKeyword') . " AS keywords "
-            . "INNER JOIN " . $this->getTableName('modResourceKeyword') . " AS xref "
-            . "ON keywords.id=xref.keyword_id WHERE xref.content_id = :id", array(':id' => $id));
-        $keywords = array();
-        if ($stmt = $query->prepare()) {
-            if ($stmt->execute()) {
-                $keywords= $stmt->fetchAll(PDO::FETCH_COLUMN);
-            }
-        }
-        return $keywords;
-    }
-
-    /**
-     * Gets META tag data associated with a document.
-     *
-     * @deprecated 2009-11-01 To be removed in 2.1
-     * @param integer $id A document id, defaults to current document id.
-     * @return array An array of META tag data for the specified document.
-     */
-    public function getMETATags($id=0) {
-        if (intval($id) == 0) {
-            $id = intval($this->resource->id);
-        }
-        $query = new xPDOCriteria($this, "SELECT smt.* ".
-               "FROM ".$this->getTableName('modMetatag')." smt ".
-               "INNER JOIN ".$this->getTableName('modResourceMetatag')." cmt ON cmt.metatag_id=smt.id ".
-               "WHERE cmt.content_id = :id", array(':id' => $id));
-        $metatags = array();
-        if ($stmt = $query->prepare()) {
-            if ($stmt->execute()) {
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $metatags[$row['name']] = array("tag"=>$row['tag'],"tagvalue"=>$row['tagvalue'],"http_equiv"=>$row['http_equiv']);
-                }
-            }
-        }
-        return $metatags;
-    }
-
-    /**
-     * Processes document content tags.
-     * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
-     */
-    public function mergeDocumentContent($content) {
-        $this->getParser();
-        $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('*'));
-        return $content;
-    }
-
-    /**
-     * Processes document setting tags (and placeholders).
-     * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
-     */
-    public function mergeSettingsContent($content) {
-        $this->getParser();
-        $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('+'));
-        return $content;
-    }
-
-    /**
-     * Processes chunk content tags.
-     * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
-     */
-    public function mergeChunkContent($content) {
-        $this->getParser();
-        $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('$'));
-        return $content;
-    }
-
-    /**
-     * Processes placeholder content tags.
-     * @deprecated 2007-09-17 To be removed in 2.1 - use modParser::processElementTags().
-     */
-    public function mergePlaceholderContent($content) {
-        $this->getParser();
-        $this->parser->processElementTags('', $content, false, false, '[[', ']]', array ('+'));
-        return $content;
-    }
-
-    /**
      * Remove an event from the eventMap so it will not be invoked.
      *
      * @param string $event
@@ -2470,36 +1613,6 @@ class modX extends xPDO {
     }
 
     /**
-     * Indicates if modX is executing in the default mgr context.
-     *
-     * @deprecated 2007-09-15: Use the context key to identify a specific context.
-     * @return boolean true if the context is 'mgr'.
-     */
-    public function isBackend() {
-        return $this->insideManager() ? true : false;
-    }
-
-    /**
-     * Indicates if modX is executing in a context other than mgr.
-     *
-     * @deprecated 2007-09-15: Use the context key to identify a specific context.
-     * @return boolean true if the context is not 'mgr'.
-     */
-    public function isFrontend() {
-        return !$this->insideManager() ? true : false;
-    }
-
-    /**
-     * Indicates if the request is taking place inside the mgr context.
-     *
-     * @deprecated 2007-09-15: Use the context key to identify a specific context.
-     * @return boolean true if the request is executing in the mgr context.
-     */
-    public function insideManager() {
-        return is_object($this->context) && ($this->context->get('key') === 'mgr');
-    }
-
-    /**
      * Add a plugin to the eventMap within the current execution cycle.
      *
      * @param string $event Name of the event.
@@ -2516,15 +1629,6 @@ class modX extends xPDO {
             $added= true;
         }
         return $added;
-    }
-
-    /**
-     * Alias of getChunk.
-     *
-     * @deprecated 9/15/2007 Use getChunk instead; to be removed in 2.1.
-     */
-    public function putChunk($chunkName) {
-        return $this->getChunk($chunkName);
     }
 
     /**
@@ -2686,30 +1790,16 @@ class modX extends xPDO {
 
     /**
      * Executed before parser processing of an element.
-     *
-     * @access public
      */
-    public function beforeProcessing() {
-        $this->documentIdentifier= & $this->resourceIdentifier;
-        $this->documentMethod= & $this->resourceMethod;
-        $this->documentContent= & $this->resource->_content;
-        $this->documentGenerated= & $this->resourceGenerated;
-        $this->dbConfig= & $this->db->config;
-    }
+    public function beforeProcessing() {}
 
     /**
      * Executed before the response is rendered.
-     *
-     * @access protected
      */
-    public function beforeRender() {
-        $this->documentOutput= & $this->resource->_output;
-    }
+    public function beforeRender() {}
 
     /**
      * Executed before the handleRequest function.
-     *
-     * @access public
      */
     public function beforeRequest() {}
 
@@ -2988,7 +2078,7 @@ class modSystemEvent {
      */
     const MODE_UPD = 'upd';
     /**@#+
-     * @deprecated 2007-09-18 Will be delegated in 1.0 or sooner.
+     * @deprecated
      * @var string
      */
     public $name = '';

@@ -35,7 +35,6 @@ if ($saved) {
     $userProfile->set('internalKey', $user->get('id'));
     $userProfile->set('fullname', $this->lexicon('default_admin_user'));
     $userProfile->set('email', $this->settings->get('cmsadminemail'));
-    $userProfile->set('role', 1);
     $saved = $userProfile->save();
     if ($saved) {
         $userGroupMembership = $this->xpdo->newObject('modUserGroupMember');

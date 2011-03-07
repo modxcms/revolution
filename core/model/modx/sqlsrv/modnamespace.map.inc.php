@@ -52,14 +52,6 @@ $xpdo_meta_map['modNamespace']= array (
   ),
   'composites' => 
   array (
-    'LexiconTopics' => 
-    array (
-      'class' => 'modLexiconTopic',
-      'local' => 'name',
-      'foreign' => 'namespace',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
     'LexiconEntries' => 
     array (
       'class' => 'modLexiconEntry',

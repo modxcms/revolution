@@ -95,7 +95,7 @@ class modTemplate extends modElement {
 
             if (is_string($this->_output) && !empty($this->_output)) {
                 /* turn the processed properties into placeholders */
-                $this->toPlaceholders($this->_properties);
+                $this->xpdo->toPlaceholders($this->_properties, '', '.', true);
 
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->xpdo->getOption('parser_max_iterations',null,10));
@@ -151,12 +151,6 @@ class modTemplate extends modElement {
         ));
         $c->sortby('TemplateVarTemplates.rank','ASC');
         return $this->xpdo->getCollection('modTemplateVar',$c);
-    }
-    /**
-     * @deprecated 2009-10-05 Use getTemplateVars instead.
-     */
-    public function getTVs() {
-        return $this->getTemplateVars();
     }
 
     /**

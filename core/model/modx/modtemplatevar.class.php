@@ -170,8 +170,9 @@ class modTemplateVar extends modElement {
         $value= null;
         $resourceId = intval($resourceId);
         if ($resourceId) {
-            if ($resourceId === $this->xpdo->resourceIdentifier && isset ($this->xpdo->documentObject[$this->get('name')]) && is_array($this->xpdo->documentObject[$this->get('name')])) {
-                $value= $this->xpdo->documentObject[$this->get('name')][1];
+            if ($resourceId === $this->xpdo->resourceIdentifier && is_array($this->xpdo->resource->get($this->get('name')))) {
+                $valueArray= $this->xpdo->resource->get($this->get('name'));
+                $value= $valueArray[1];
             } elseif ($resourceId === $this->get('resourceId') && array_key_exists('value', $this->_fields)) {
                 $value= $this->get('value');
             } else {
@@ -181,7 +182,6 @@ class modTemplateVar extends modElement {
                 ),true);
                 if ($resource && $resource instanceof modTemplateVarResource) {
                     $value= $resource->get('value');
-                    $this->set('resourceId', $resourceId);
                 }
             }
         }
@@ -626,17 +626,24 @@ class modTemplateVar extends modElement {
             case 'RESOURCE':
             case 'DOCUMENT': /* retrieve a document and process it's content */
                 if ($preProcess) {
-                    $rs = $this->xpdo->getDocument($param);
-                    if (is_array($rs)) $output = $rs['content'];
-                    else $output = 'Unable to locate resource '.$param;
+                    $query = $this->xpdo->newQuery('modResource', array(
+                        'id' => (integer) $param,
+                        'deleted' => false
+                    ));
+                    $query->select('content');
+                    if ($query->prepare() && $query->stmt->execute()) {
+                        $output = $query->stmt->fetch(PDO::FETCH_COLUMN);
+                    } else {
+                        $output = 'Unable to locate resource '.$param;
+                    }
                 }
                 break;
 
             case 'SELECT': /* selects a record from the cms database */
                 if ($preProcess) {
                     $dbtags = array();
-                    $dbtags['DBASE'] = $this->xpdo->db->config['dbase'];
-                    $dbtags['PREFIX'] = $this->xpdo->db->config['table_prefix'];
+                    $dbtags['DBASE'] = $this->xpdo->getOption('dbname');
+                    $dbtags['PREFIX'] = $this->xpdo->getOption('table_prefix');
                     foreach($dbtags as $key => $pValue) {
                         $param = str_replace('[[+'.$key.']]', $pValue, $param);
                     }
@@ -730,24 +737,34 @@ class modTemplateVar extends modElement {
     public function processInheritBinding($default = '',$resourceId = null) {
         $output = $default; /* Default to param value if no content from parents */
         $resource = null;
+        $resourceColumns = $this->xpdo->getSelectColumns('modResource', '', '', array('id', 'parent'));
+        $resourceQuery = new xPDOCriteria($this->xpdo, "SELECT {$resourceColumns} FROM {$this->xpdo->getTableName('modResource')} WHERE id = ?");
         if (!empty($resourceId) && (!($this->xpdo->resource instanceof modResource) || $this->xpdo->resource->get('id') != $resourceId)) {
-            $resource = $this->xpdo->getObject('modResource',$resourceId);
+            if ($resourceQuery->stmt && $resourceQuery->stmt->execute(array($resourceId))) {
+                $result = $resourceQuery->stmt->fetchAll(PDO::FETCH_ASSOC);
+                $resource = reset($result);
+            }
         } else if ($this->xpdo->resource instanceof modResource) {
-            $resource =& $this->xpdo->resource;
+            $resource = $this->xpdo->resource->get(array('id', 'parent'));
         }
-        if (!$resource) return $output;
-
-        $currentResource = $resource;
-        while ($currentResource->get('parent') != 0) {
-            $currentResource = $this->xpdo->getObject('modResource',array('id' => $currentResource->get('parent')));
-            if (!empty($currentResource)) {
-                $tv = $this->xpdo->getTemplateVar($this->get('name'), '*', $currentResource->get('id'));
-                if (isset($tv['value']) && $tv['value'] && substr($tv['value'],0,1) != '@') {
-                    $output = $tv['value'];
-                    return $output;
+        if (!empty($resource)) {
+            $currentResource = $resource;
+            while ($currentResource['parent'] != 0) {
+                if ($resourceQuery->stmt && $resourceQuery->stmt->execute(array($currentResource['parent']))) {
+                    $result = $resourceQuery->stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $currentResource = reset($result);
+                } else {
+                    break;
                 }
-            } else {
-                return $output;
+                if (!empty($currentResource)) {
+                    $tv = $this->getValue($currentResource['id']);
+                    if (($tv === '0' || !empty($tv)) && substr($tv,0,1) != '@') {
+                        $output = $tv;
+                        break;
+                    }
+                } else {
+                    break;
+                }
             }
         }
         return $output;

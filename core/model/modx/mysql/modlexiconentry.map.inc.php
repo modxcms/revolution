@@ -152,13 +152,5 @@ $xpdo_meta_map['modLexiconEntry']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'modNamespace' => 
-    array (
-      'class' => 'modNamespace',
-      'local' => 'namespace',
-      'foreign' => 'name',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
   ),
 );
