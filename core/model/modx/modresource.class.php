@@ -451,7 +451,7 @@ class modResource extends modAccessibleSimpleObject {
         }
         $refreshChildURIs = false;
         if ($this->xpdo instanceof modX && $this->xpdo->getOption('friendly_urls')) {
-            if ($this->get('uri') == '' || (!$this->get('uri_override') && ($this->isDirty('alias') || $this->isDirty('content_type') || $this->isDirty('parent') || $this->isDirty('context_key')))) {
+            if ($this->get('uri') == '' || (!$this->get('uri_override') && ($this->isDirty('uri_override') || $this->isDirty('alias') || $this->isDirty('content_type') || $this->isDirty('parent') || $this->isDirty('context_key')))) {
                 $this->set('uri', $this->getAliasPath($this->get('alias')));
                 if ($this->isDirty('uri')) {
                     $refreshChildURIs = true;

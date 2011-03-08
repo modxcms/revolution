@@ -306,6 +306,27 @@ MODx.panel.SymLink = function(config) {
         ,value: config.record.class_key || 'modSymLink'
         ,anchor: '70%'
     });
+    va.push({
+        xtype: 'checkbox'
+        ,fieldLabel: _('resource_uri_override')
+        ,description: _('resource_uri_override_help')
+        ,name: 'uri_override'
+        ,value: 1
+        ,checked: config.record.uri_override ? true : false
+        ,id: 'modx-resource-uri-override'
+
+    });
+    va.push({
+        xtype: 'textfield'
+        ,fieldLabel: _('resource_uri')
+        ,description: '<b>[[*uri]]</b><br />'+_('resource_uri_help')
+        ,name: 'uri'
+        ,id: 'modx-resource-uri'
+        ,maxLength: 255
+        ,anchor: '70%'
+        ,value: config.record.uri || ''
+        ,hidden: config.record.uri_override ? false : true
+    });
     it.push({
         id: 'modx-page-settings'
         ,title: _('page_settings')
@@ -367,6 +388,8 @@ MODx.panel.SymLink = function(config) {
         }
     });
     MODx.panel.SymLink.superclass.constructor.call(this,config);
+    var urio = Ext.getCmp('modx-resource-uri-override');
+    if (urio) { urio.on('check',this.freezeUri); }
 };
 Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
     initialized: false
@@ -429,6 +452,15 @@ Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
         Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
     }
 
+    ,freezeUri: function(cb) {
+        var uri = Ext.getCmp('modx-resource-uri');
+        if (!uri) { return false; }
+        if (cb.checked) {
+            uri.show();
+        } else {
+            uri.hide();
+        }
+    }
 
     ,templateWarning: function() {
         var t = Ext.getCmp('modx-resource-template');

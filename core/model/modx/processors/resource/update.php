@@ -124,6 +124,7 @@ $scriptProperties['cacheable'] = empty($scriptProperties['cacheable']) ? 0 : 1;
 $scriptProperties['searchable'] = empty($scriptProperties['searchable']) ? 0 : 1;
 $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
 $scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
+$scriptProperties['uri_override'] = empty($scriptProperties['uri_override']) ? 0 : 1;
 
 /* friendly url alias checks */
 if ($modx->getOption('friendly_alias_urls') && isset($scriptProperties['alias'])) {

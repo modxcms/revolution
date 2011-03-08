@@ -351,6 +351,26 @@ MODx.panel.Resource = function(config) {
         ,allowBlank: false
         ,value: config.record.class_key || 'modDocument'
         ,anchor: '70%'
+
+    },{
+        xtype: 'checkbox'
+        ,fieldLabel: _('resource_uri_override')
+        ,description: _('resource_uri_override_help')
+        ,name: 'uri_override'
+        ,value: 1
+        ,checked: config.record.uri_override ? true : false
+        ,id: 'modx-resource-uri-override'
+
+    },{
+        xtype: 'textfield'
+        ,fieldLabel: _('resource_uri')
+        ,description: '<b>[[*uri]]</b><br />'+_('resource_uri_help')
+        ,name: 'uri'
+        ,id: 'modx-resource-uri'
+        ,maxLength: 255
+        ,anchor: '70%'
+        ,value: config.record.uri || ''
+        ,hidden: config.record.uri_override ? false : true
     });
     it.push({
         id: 'modx-page-settings'
@@ -440,6 +460,8 @@ MODx.panel.Resource = function(config) {
     var ta = Ext.get('ta');
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     this.on('ready',this.onReady,this);
+    var urio = Ext.getCmp('modx-resource-uri-override');
+    if (urio) { urio.on('check',this.freezeUri); }
 };
 Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     rteLoaded: false
@@ -514,6 +536,16 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         } else {
             this.getForm().setValues(o.result.object);
             Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
+        }
+    }
+
+    ,freezeUri: function(cb) {
+        var uri = Ext.getCmp('modx-resource-uri');
+        if (!uri) { return false; }
+        if (cb.checked) {
+            uri.show();
+        } else {
+            uri.hide();
         }
     }
     

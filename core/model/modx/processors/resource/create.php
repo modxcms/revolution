@@ -87,6 +87,7 @@ $scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
 $scriptProperties['createdby'] = $modx->user->get('username');
 $scriptProperties['menuindex'] = empty($scriptProperties['menuindex']) ? 0 : $scriptProperties['menuindex'];
 $scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;
+$scriptProperties['uri_override'] = empty($scriptProperties['uri_override']) ? 0 : 1;
 
 /* make sure parent exists and user can add_children to the parent */
 $parent = null;
