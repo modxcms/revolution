@@ -264,7 +264,7 @@ class xPDOManager_mysql extends xPDOManager {
             if (is_array($meta) && array_key_exists($name, $meta)) {
                 $colDef = $this->getColumnDef($className, $name, $meta[$name]);
                 if (!empty($colDef)) {
-                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD COLUMN {$this->xpdo->escape($name)} {$colDef}";
+                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD COLUMN {$colDef}";
                     if (isset($options['first']) && !empty($options['first'])) {
                         $sql .= " FIRST";
                     } elseif (isset($options['after']) && array_key_exists($options['after'], $meta)) {
@@ -309,11 +309,11 @@ class xPDOManager_mysql extends xPDOManager {
             if (is_array($meta) && array_key_exists($name, $meta)) {
                 $colDef = $this->getColumnDef($className, $name, $meta[$name]);
                 if (!empty($colDef)) {
-                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} MODIFY COLUMN {$this->xpdo->escape($name)} {$colDef}";
+                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} MODIFY COLUMN {$colDef}";
                     if (isset($options['first']) && !empty($options['first'])) {
-                        $sql .= "FIRST";
+                        $sql .= " FIRST";
                     } elseif (isset($options['after']) && array_key_exists($options['after'], $meta)) {
-                        $sql .= "AFTER {$this->xpdo->escape($options['after'])}";
+                        $sql .= " AFTER {$this->xpdo->escape($options['after'])}";
                     }
                     if ($this->xpdo->exec($sql)) {
                         $result = true;

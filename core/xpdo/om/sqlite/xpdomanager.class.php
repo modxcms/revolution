@@ -188,7 +188,7 @@ class xPDOManager_sqlite extends xPDOManager {
             if (is_array($meta) && array_key_exists($name, $meta)) {
                 $colDef = $this->getColumnDef($className, $name, $meta[$name]);
                 if (!empty($colDef)) {
-                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD COLUMN {$this->xpdo->escape($name)} {$colDef}";
+                    $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD COLUMN {$colDef}";
                     if ($this->xpdo->exec($sql)) {
                         $result = true;
                     } else {
