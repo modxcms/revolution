@@ -492,7 +492,7 @@ class modOutputFilter {
                         $output= md5($output);
                         break;
                     case 'cdata':
-                        $output= "<![CDATA[ {$output} ]]>";
+                        $output= "<![CDATA[{$output}]]>";
                         break;
 
                     case 'userinfo':
