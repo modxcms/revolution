@@ -6,7 +6,6 @@
 {if count($category->tvs) > 0}
 
     <div id="modx-tv-tab{$category->id}" class="x-tab{if $category->hidden}-hidden{/if}" title="{$category->category|default:$_lang.uncategorized|ucfirst}">
-    
     {foreach from=$category->tvs item=tv name='tv'}
 {if $tv->type NEQ "hidden"}
     <div class="x-form-item x-tab-item {cycle values=",alt"} modx-tv" id="tv{$tv->id}-tr">
