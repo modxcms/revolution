@@ -39,7 +39,7 @@ foreach ($categories as $category) {
     if ($category->get('elementCount') <= 0) continue;
 
     $nodes[] = array(
-        'text' => strip_tags($category->get('category')) . ' (' . $category->get('id') . ')',
+        'text' => strip_tags($category->get('category')) . ' (' . $category->get('elementCount') . ')',
         'id' => 'n_'.$g[0].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
         'pk' => $category->get('id'),
         'category' => $category->get('id'),
