@@ -100,6 +100,7 @@ $_lang['radio_columns_desc'] = 'The number of columns the radio boxes are displa
 $_lang['rawtext'] = 'Raw Text (deprecated)';
 $_lang['rawtextarea'] = 'Raw Textarea (deprecated)';
 $_lang['required'] = 'Allow Blank';
+$_lang['required_desc'] = 'If set to No, MODX will not allow the user to save the Resource until a valid, non-blank value has been entered.';
 $_lang['resourcelist'] = 'Resource List';
 $_lang['resourcelist_depth'] = 'Depth';
 $_lang['resourcelist_depth_desc'] = 'The levels deep that the query to grab the list of Resources will go. The default is 10 deep.';

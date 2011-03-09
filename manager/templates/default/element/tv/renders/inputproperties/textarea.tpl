@@ -18,6 +18,7 @@ MODx.load({
     ,items: [{
         xtype: 'combo-boolean'
         ,fieldLabel: _('required')
+        ,description: _('required_desc')
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv}{literal}'
