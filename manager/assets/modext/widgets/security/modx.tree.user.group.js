@@ -170,33 +170,6 @@ Ext.reg('modx-tree-usergroup',MODx.tree.UserGroup);
 
 MODx.window.CreateUserGroup = function(config) {
     config = config || {};
-    Ext.applyIf(config,{
-        title: _('user_group_create')
-        ,height: 150
-        ,width: 400
-        ,url: MODx.config.connectors_url+'security/usergroup/index.php'
-        ,action: 'create'
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'parent'
-            ,value: 0
-        },{
-            fieldLabel: _('name')
-            ,name: 'name'
-            ,hiddenName: 'name'
-            ,id: 'modx-cug-name'
-            ,xtype: 'textfield'
-            ,allowBlank: false
-            ,anchor: '90%'
-        }]
-    });
-    MODx.window.CreateUserGroup.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.window.CreateUserGroup,MODx.Window);
-Ext.reg('modx-window-usergroup-create',MODx.window.CreateUserGroup);
-
-MODx.window.CreateUserGroup = function(config) {
-    config = config || {};
     this.ident = config.ident || 'cugrp'+Ext.id();
     Ext.applyIf(config,{
         title: _('create_user_group')
@@ -206,10 +179,16 @@ MODx.window.CreateUserGroup = function(config) {
         ,url: MODx.config.connectors_url+'security/group.php'
         ,action: 'create'
         ,fields: [{
-            fieldLabel: _('name')
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
-            ,xtype: 'textfield'
+            ,anchor: '90%'
+        },{
+            xtype: 'textarea'
+            ,fieldLabel: _('description')
+            ,name: 'description'
+            ,id: 'modx-'+this.ident+'-description'
             ,anchor: '90%'
         },{
             name: 'parent'

@@ -132,3 +132,10 @@ $class = 'modUserProfile';
 $table = $modx->getTableName($class);
 $description = $this->install->lexicon('drop_column', array('column' => 'role', 'table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'removeField'), array($class, 'role'));
+
+/* add description field to modUserGroup */
+$class = 'modUserGroup';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'description','table' => $table));
+$sql = "ALTER TABLE {$table} ADD {$modx->escape('description')} TEXT NULL AFTER {$modx->escape('name')}";
+$this->processResults($class,$description,$sql);

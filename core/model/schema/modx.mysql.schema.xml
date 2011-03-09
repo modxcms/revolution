@@ -1026,6 +1026,7 @@
     
     <object class="modUserGroup" table="membergroup_names" extends="modPrincipal">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="unique" />
+        <field key="description" dbtype="text" phptype="string" />
         <field key="parent" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">

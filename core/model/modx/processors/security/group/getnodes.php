@@ -52,6 +52,7 @@ foreach ($groups as $group) {
         'id' => 'n_ug_'.$group->get('id'),
         'leaf' => false,
         'type' => 'usergroup',
+        'qtip' => $group->get('description'),
         'cls' => $cls,
     );
 }
