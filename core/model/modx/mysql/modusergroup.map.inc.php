@@ -10,6 +10,7 @@ $xpdo_meta_map['modUserGroup']= array (
   'fields' => 
   array (
     'name' => '',
+    'description' => NULL,
     'parent' => 0,
   ),
   'fieldMeta' => 
@@ -22,6 +23,11 @@ $xpdo_meta_map['modUserGroup']= array (
       'null' => false,
       'default' => '',
       'index' => 'unique',
+    ),
+    'description' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
     ),
     'parent' => 
     array (

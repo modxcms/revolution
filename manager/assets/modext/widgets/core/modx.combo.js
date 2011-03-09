@@ -108,10 +108,12 @@ MODx.combo.UserGroup = function(config) {
         ,hiddenName: 'group'
         ,displayField: 'name'
         ,valueField: 'id'
-        ,fields: ['name','id']
+        ,fields: ['name','id','description']
         ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connectors_url+'security/group.php'
+        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name}</span>'
+            ,'<br />{description}</div></tpl>')
     });
     MODx.combo.UserGroup.superclass.constructor.call(this,config);
 };

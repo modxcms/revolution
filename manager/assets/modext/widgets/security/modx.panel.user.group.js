@@ -50,12 +50,19 @@ MODx.panel.UserGroup = function(config) {
                     ,allowBlank: false
                     ,enableKeyEvents: true
                     ,disabled: config.usergroup === 0 ? true : false
-                    ,width: 300
+                    ,anchor: '97%'
                     ,listeners: {
                         'keyup': {scope:this,fn:function(f,e) {
                             Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+f.getValue()+'</h2>');
                         }}
                     }
+                },{
+                    name: 'description'
+                    ,id: 'modx-usergroup-description'
+                    ,xtype: 'textarea'
+                    ,fieldLabel: _('description')
+                    ,anchor: '97%'
+                    ,grow: true
                 },{
                     name: 'parent'
                     ,hiddenName: 'parent'
@@ -63,7 +70,7 @@ MODx.panel.UserGroup = function(config) {
                     ,xtype: 'modx-combo-usergroup'
                     ,fieldLabel: _('user_group_parent')
                     ,editable: false
-                    ,width: '97%'
+                    ,anchor: '97%'
                     ,disabled: config.usergroup === 0 ? true : false
                     ,baseParams: {
                         action: 'getList'
