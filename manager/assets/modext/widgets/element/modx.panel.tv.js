@@ -23,7 +23,7 @@ MODx.panel.TV = function(config) {
             ,border: false
         },MODx.getPageStructure([{
             title: _('general_information')
-            ,defaults: { border: false ,msgTarget: 'side' }
+            ,defaults: {border: false ,msgTarget: 'side'}
             ,bodyStyle: 'padding: 15px;'
             ,layout: 'form'
             ,id: 'modx-tv-form'
@@ -126,7 +126,7 @@ MODx.panel.TV = function(config) {
             title: _('tv_tmpl_access')
             ,itemId: 'form-template'
             ,bodyStyle: 'padding: 15px;'
-            ,defaults: { autoHeight: true }
+            ,defaults: {autoHeight: true}
             ,items: [{
                 html: '<p>'+_('tv_tmpl_access_msg')+'</p>'
                 ,border: false
@@ -147,7 +147,7 @@ MODx.panel.TV = function(config) {
             ,id: 'modx-tv-access-form'
             ,itemId: 'form-access'
             ,bodyStyle: 'padding: 15px;'
-            ,defaults: { autoHeight: true }
+            ,defaults: {autoHeight: true}
             ,items: [{
                 html: '<p>'+_('tv_access_msg')+'</p>'
                 ,id: 'modx-tv-access-msg'
@@ -180,7 +180,7 @@ MODx.panel.TV = function(config) {
 Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
-        if (!this.initialized) { this.getForm().setValues(this.config.record); }
+        if (!this.initialized) {this.getForm().setValues(this.config.record);}
         if (!Ext.isEmpty(this.config.record.name)) {
             Ext.getCmp('modx-tv-header').getEl().update('<h2>'+_('tv')+': '+this.config.record.name+'</h2>');
         }
@@ -197,7 +197,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         Ext.getCmp('modx-panel-tv-input-properties').showInputProperties(Ext.getCmp('modx-tv-type'));
 
         this.fireEvent('ready',this.config.record);
-        if (MODx.onLoadEditor) { MODx.onLoadEditor(this); }
+        if (MODx.onLoadEditor) {MODx.onLoadEditor(this);}
         this.clearDirty();
         this.initialized = true;
         MODx.fireEvent('ready');
@@ -254,7 +254,7 @@ MODx.panel.TVInputProperties = function(config) {
         ,title: _('tv_input_options')
         ,header: false
         ,bodyStyle: 'padding: 15px;'
-        ,defaults: { border: false ,msgTarget: 'side', anchor: '97%' }
+        ,defaults: {border: false ,msgTarget: 'side', anchor: '97%'}
         ,layout: 'form'
         ,labelWidth: 150
         ,items: [{
@@ -278,6 +278,9 @@ MODx.panel.TVInputProperties = function(config) {
             ,itemId: 'fld-els'
             ,anchor: '90%'
             ,value: config.record.elements || ''
+            ,listeners: {
+                'change': {fn:this.markPanelDirty,scope:this}
+            }
         },{
             xtype: 'textarea'
             ,fieldLabel: _('tv_default')
@@ -287,6 +290,9 @@ MODx.panel.TVInputProperties = function(config) {
             ,anchor: '90%'
             ,height: 200
             ,value: config.record.default_text || ''
+            ,listeners: {
+                'change': {fn:this.markPanelDirty,scope:this}
+            }
         },{
             html: '<hr />'
         },{
@@ -297,7 +303,11 @@ MODx.panel.TVInputProperties = function(config) {
     MODx.panel.TVInputProperties.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
-    showInputProperties: function(cb,rc,i) {
+    markPanelDirty: function() {
+        Ext.getCmp('modx-panel-tv').markDirty();
+    }
+    ,showInputProperties: function(cb,rc,i) {
+        this.markPanelDirty();
         var pu = Ext.get('modx-input-props').getUpdater();
         pu.loadScripts = true;
 
@@ -313,7 +323,7 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                 }
                 ,scripts: true
             });
-        } catch(e) { console.log(e); }
+        } catch(e) {console.log(e);}
     }
 });
 Ext.reg('modx-panel-tv-input-properties',MODx.panel.TVInputProperties);
@@ -327,7 +337,7 @@ MODx.panel.TVOutputProperties = function(config) {
         ,title: _('tv_output_options')
         ,header: false
         ,bodyStyle: 'padding: 15px;'
-        ,defaults: { border: false ,msgTarget: 'side', anchor: '97%' }
+        ,defaults: {border: false ,msgTarget: 'side', anchor: '97%'}
         ,layout: 'form'
         ,labelWidth: 150
         ,items: [{
@@ -353,6 +363,7 @@ MODx.panel.TVOutputProperties = function(config) {
 };
 Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
     showOutputProperties: function(cb,rc,i) {
+        Ext.getCmp('modx-panel-tv').markDirty();
         var pu = Ext.get('modx-widget-props').getUpdater();
         pu.loadScripts = true;
 
@@ -368,7 +379,7 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
                 }
                 ,scripts: true
             });
-        } catch(e) { console.log(e); }
+        } catch(e) {console.log(e);}
     }
 });
 Ext.reg('modx-panel-tv-output-properties',MODx.panel.TVOutputProperties);

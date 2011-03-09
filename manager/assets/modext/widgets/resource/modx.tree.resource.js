@@ -915,7 +915,15 @@ MODx.getQRSettings = function(id,va) {
         ,fieldLabel: _('resource_published')
         ,description: _('resource_published_help')
         ,inputValue: 1
+        ,submitValue: false
         ,checked: va['published'] != undefined ? va['published'] : (MODx.config.publish_default == '1' ? true : false)
+        ,listeners: {'check': {fn:MODx.handleQUCB}}
+    },{
+        xtype: 'hidden'
+        ,name: 'published'
+        ,id: 'modx-'+id+'-published-hd'
+        ,value: va['published'] != undefined ? va['published'] : (MODx.config.publish_default == '1' ? 1 : 0)
+        
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_folder')
@@ -923,7 +931,15 @@ MODx.getQRSettings = function(id,va) {
         ,name: 'isfolder'
         ,id: 'modx-'+id+'-isfolder'
         ,inputValue: 1
+        ,submitValue: false
         ,checked: va['isfolder'] != undefined ? va['isfolder'] : false
+        ,listeners: {'check': {fn:MODx.handleQUCB}}
+    },{
+        xtype: 'hidden'
+        ,name: 'isfolder'
+        ,id: 'modx-'+id+'-isfolder-hd'
+        ,value: va['isfolder'] != undefined ? va['isfolder'] : false
+        
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_richtext')
@@ -931,7 +947,15 @@ MODx.getQRSettings = function(id,va) {
         ,name: 'richtext'
         ,id: 'modx-'+id+'-richtext'
         ,inputValue: 1
+        ,submitValue: false
         ,checked: va['richtext'] != undefined ? va['richtext'] : (MODx.config.richtext_default == '1' ? true : false)
+        ,listeners: {'check': {fn:MODx.handleQUCB}}
+    },{
+        xtype: 'hidden'
+        ,name: 'richtext'
+        ,id: 'modx-'+id+'-richtext-hd'
+        ,value: va['richtext'] != undefined ? va['richtext'] : (MODx.config.richtext_default == '1' ? 1 : 0)
+        
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_searchable')
@@ -939,7 +963,15 @@ MODx.getQRSettings = function(id,va) {
         ,name: 'searchable'
         ,id: 'modx-'+id+'-searchable'
         ,inputValue: 1
-        ,checked: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? true : false)            
+        ,submitValue: false
+        ,checked: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? true : false)
+        ,listeners: {'check': {fn:MODx.handleQUCB}}
+    },{
+        xtype: 'hidden'
+        ,name: 'searchable'
+        ,id: 'modx-'+id+'-searchable-hd'
+        ,value: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? 1 : 0)
+
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_hide_from_menus')
@@ -947,7 +979,14 @@ MODx.getQRSettings = function(id,va) {
         ,name: 'hidemenu'
         ,id: 'modx-'+id+'-hidemenu'
         ,inputValue: 1
+        ,submitValue: false
         ,checked: va['hidemenu'] != undefined ? va['hidemenu'] : (MODx.config.hidemenu_default == '1' ? true : false)
+        ,listeners: {'check': {fn:MODx.handleQUCB}}
+    },{
+        xtype: 'hidden'
+        ,name: 'hidemenu'
+        ,id: 'modx-'+id+'-hidemenu-hd'
+        ,value: va['hidemenu'] != undefined ? va['hidemenu'] : (MODx.config.hidemenu_default == '1' ? 1 : 0)
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_cacheable')
@@ -955,7 +994,15 @@ MODx.getQRSettings = function(id,va) {
         ,name: 'cacheable'
         ,id: 'modx-'+id+'-cacheable'
         ,inputValue: 1
+        ,submitValue: false
         ,checked: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? true : false)
+        ,listeners: {'check': {fn:MODx.handleQUCB}}
+    },{
+        xtype: 'hidden'
+        ,name: 'cacheable'
+        ,id: 'modx-'+id+'-cacheable-hd'
+        ,value: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? 1 : 0)
+
     },{
         xtype: 'checkbox'
         ,name: 'clearCache'
@@ -966,3 +1013,11 @@ MODx.getQRSettings = function(id,va) {
         ,checked: true
     }];
 };
+MODx.handleQUCB = function(cb) {
+    var h = Ext.getCmp(cb.id+'-hd');
+    if (cb.checked && h) {
+        h.setValue(1);
+    } else if (h) {
+        h.setValue(0);
+    }
+}
