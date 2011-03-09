@@ -180,7 +180,9 @@ class modPHPMailer extends modMail {
     public function reset($attributes= array()) {
         parent :: reset($attributes);
         $this->mailer->ClearAllRecipients();
+        $this->mailer->ClearReplyTos();
         $this->mailer->ClearAttachments();
+        $this->mailer->ClearCustomHeaders();
         $this->mailer->IsHTML(false);
     }
 
