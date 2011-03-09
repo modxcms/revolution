@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3673] Add "Save and Close" button to quick update windows
 - Add UI for managing Resource uri and uri_override fields
 - Remove all deprecated methods and variables scheduled for removal in next minor release
 - Change modxcms.com references to modx.com

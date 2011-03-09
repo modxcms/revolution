@@ -363,6 +363,7 @@ $_lang['resource_settings'] = 'Resource Settings';
 $_lang['role'] = 'Role';
 $_lang['roles'] = 'Roles';
 $_lang['save'] = 'Save';
+$_lang['save_and_close'] = 'Save and Close';
 $_lang['save_changes'] = 'Save Changes';
 $_lang['save_successful'] = 'Save successful.';
 $_lang['save_tag'] = 'Save tag';
