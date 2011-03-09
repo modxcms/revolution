@@ -43,12 +43,28 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
         return false;
     }
     
-    ,duplicate: function(btn,e) {
+    ,duplicateResource: function(btn,e) {
         MODx.msg.confirm({
             text: _('resource_duplicate_confirm')
             ,url: MODx.config.connectors_url+'resource/index.php'
             ,params: {
                 action: 'duplicate'
+                ,id: this.config.resource
+            }
+            ,listeners: {
+                success: {fn:function(r) {
+                    location.href = '?a='+MODx.action['resource/update']+'&id='+r.object.id;
+                },scope:this}
+            }
+        });
+    }
+
+    ,deleteResource: function(btn,e) {
+        MODx.msg.confirm({
+            text: _('resource_delete_confirm')
+            ,url: MODx.config.connectors_url+'resource/index.php'
+            ,params: {
+                action: 'delete'
                 ,id: this.config.resource
             }
             ,listeners: {
@@ -94,7 +110,16 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             btns.push({
                 process: 'duplicate'
                 ,text: _('duplicate')
-                ,handler: this.duplicate
+                ,handler: this.duplicateResource
+                ,scope:this
+            });
+            btns.push('-');
+        }
+        if (cfg.canDelete == 1) {
+            btns.push({
+                process: 'delete'
+                ,text: _('delete')
+                ,handler: this.deleteResource
                 ,scope:this
             });
             btns.push('-');
