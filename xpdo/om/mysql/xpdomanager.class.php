@@ -266,9 +266,9 @@ class xPDOManager_mysql extends xPDOManager {
                 if (!empty($colDef)) {
                     $sql = "ALTER TABLE {$this->xpdo->getTableName($className)} ADD COLUMN {$this->xpdo->escape($name)} {$colDef}";
                     if (isset($options['first']) && !empty($options['first'])) {
-                        $sql .= "FIRST";
+                        $sql .= " FIRST";
                     } elseif (isset($options['after']) && array_key_exists($options['after'], $meta)) {
-                        $sql .= "AFTER {$this->xpdo->escape($options['after'])}";
+                        $sql .= " AFTER {$this->xpdo->escape($options['after'])}";
                     }
                     if ($this->xpdo->exec($sql)) {
                         $result = true;
