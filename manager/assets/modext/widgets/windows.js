@@ -236,6 +236,19 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,fn: this.submit
             ,scope: this
         }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
+        }]
     });
     MODx.window.QuickUpdateChunk.superclass.constructor.call(this,config);
 };
@@ -343,6 +356,19 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,shift: true
             ,fn: this.submit
             ,scope: this
+        }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
         }]
     });
     MODx.window.QuickUpdateTemplate.superclass.constructor.call(this,config);
@@ -452,6 +478,19 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,shift: true
             ,fn: this.submit
             ,scope: this
+        }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
         }]
     });
     MODx.window.QuickUpdateSnippet.superclass.constructor.call(this,config);
@@ -576,6 +615,19 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,shift: true
             ,fn: this.submit
             ,scope: this
+        }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
         }]
     });
     MODx.window.QuickUpdatePlugin.superclass.constructor.call(this,config);
@@ -710,6 +762,19 @@ MODx.window.QuickUpdateTV = function(config) {
             ,shift: true
             ,fn: this.submit
             ,scope: this
+        }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
         }]
     });
     MODx.window.QuickUpdateTV.superclass.constructor.call(this,config);

@@ -800,6 +800,19 @@ MODx.window.QuickUpdateResource = function(config) {
             ,fn: this.submit
             ,scope: this
         }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
+        }]
     });
     MODx.window.QuickUpdateResource.superclass.constructor.call(this,config);
 };
