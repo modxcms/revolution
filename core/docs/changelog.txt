@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3764] Add delete to actionbar on Resource edit panel
 - [#3585] Add description field to modUserGroup
 - [#3020] Improve trees to expand node on click if no href target is set for tree node
 - [#4006] Show children count rather than IDs on categories in element tree to lessen id ambiguity

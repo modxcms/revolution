@@ -111,6 +111,7 @@ Ext.onReady(function() {
         ,canSave: "'.($modx->hasPermission('save_document') ? 1 : 0).'"
         ,canEdit: "'.($modx->hasPermission('edit_document') ? 1 : 0).'"
         ,canCreate: "'.($modx->hasPermission('new_document') ? 1 : 0).'"
+        ,canDelete: "'.($modx->hasPermission('delete_document') ? 1 : 0).'"
     });
 });
 // ]]>
