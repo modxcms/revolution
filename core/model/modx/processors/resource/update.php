@@ -91,6 +91,16 @@ if (!is_numeric($scriptProperties['parent'])) {
     $scriptProperties['parent'] = 0;
 }
 
+/* ensure parent isn't a child of self */
+if ($resource->get('parent') != $scriptProperties['parent']) {
+    $children = $modx->getChildIds($resource->get('id'),20,array(
+        'context' => $resource->get('context_key'),
+    ));
+    if (in_array($scriptProperties['parent'],$children)) {
+        $modx->error->addField('parent-cmb',$modx->lexicon('resource_err_move_to_child'));
+    }
+}
+
 /* process derivative resource classes */
 $resourceClass = !empty($scriptProperties['class_key']) ? $scriptProperties['class_key'] : $resource->get('class_key');
 $resourceDir= strtolower(substr($resourceClass, 3));
@@ -140,7 +150,7 @@ if ($modx->getOption('friendly_alias_urls') && isset($scriptProperties['alias'])
     }
 }
 
-if ($modx->error->hasError()) return $modx->error->failure();
+if ($modx->error->hasError()) return $modx->error->failure($modx->lexicon('correct_errors'));
 
 /* publish and unpublish dates */
 $now = time();

@@ -527,20 +527,28 @@ class modX extends xPDO {
     /**
      * Gets all of the child resource ids for a given resource.
      *
-     * @see getTree for heirarchical node results
+     * @see getTree for hierarchical node results
      * @param integer $id The resource id for the starting node.
      * @param integer $depth How many levels max to search for children (default 10).
      * @return array An array of all the child resource ids for the specified resource.
      */
-    public function getChildIds($id= null, $depth= 10) {
+    public function getChildIds($id= null, $depth= 10,array $options = array()) {
         $children= array ();
         if ($id !== null && intval($depth) >= 1) {
             $id= is_int($id) ? $id : intval($id);
-            if (isset ($this->resourceMap["{$id}"])) {
-                if ($children= $this->resourceMap["{$id}"]) {
+
+            $context = '';
+            if (!empty($options['context'])) {
+                $this->getContext($options['context']);
+                $context = $options['context'];
+            }
+            $resourceMap = !empty($context) && !empty($this->contexts[$context]->resourceMap) ? $this->contexts[$context]->resourceMap : $this->resourceMap;
+            
+            if (isset ($resourceMap["{$id}"])) {
+                if ($children= $resourceMap["{$id}"]) {
                     foreach ($children as $child) {
                         $processDepth = $depth - 1;
-                        if ($c= $this->getChildIds($child, $processDepth)) {
+                        if ($c= $this->getChildIds($child, $processDepth,array('context' => $context))) {
                             $children= array_merge($children, $c);
                         }
                     }

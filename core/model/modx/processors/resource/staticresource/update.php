@@ -39,7 +39,7 @@ if ($modx->getOption('friendly_alias_urls') && isset($scriptProperties['alias'])
     }
 }
 
-if ($modx->error->hasError()) return $modx->error->failure();
+if ($modx->error->hasError()) return $modx->error->failure($modx->lexicon('correct_errors'));
 
 
 /* publish and unpublish dates */

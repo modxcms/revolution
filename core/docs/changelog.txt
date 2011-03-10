@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3754] Ensure Resources can not have their parent set as one of their descendants
+- Add context param to modX.getChildIds
 - [#3612] Improve CDATA filter to not add spaces at beginning or end
 - [#3764] Add delete to actionbar on Resource edit panel
 - [#3585] Add description field to modUserGroup
