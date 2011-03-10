@@ -9,29 +9,30 @@
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-var fld{/literal}{$tv->id}{literal} = MODx.load({
-{/literal}
-    xtype: 'textfield'
-    ,applyTo: 'tv{$tv->id}'
-    ,width: '97%'
-    ,id: 'tv{$tv->id}'
-    ,enableKeyEvents: true
-    ,msgTarget: 'under'
-    ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-{literal}
-    ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
-});
-MODx.makeDroppable(fld{/literal}{$tv->id}{literal},function(v) {
-    var tf = fld{/literal}{$tv->id}{literal};
-    if (tf) {
-        var ov = tf.getValue();
-        if (ov != '') {
-            v = ','+v;
+Ext.onReady(function() {
+    var fld{/literal}{$tv->id}{literal} = MODx.load({
+    {/literal}
+        xtype: 'textfield'
+        ,applyTo: 'tv{$tv->id}'
+        ,width: '97%'
+        ,id: 'tv{$tv->id}'
+        ,enableKeyEvents: true
+        ,msgTarget: 'under'
+        ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
+    {literal}
+        ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
+    });
+    MODx.makeDroppable(fld{/literal}{$tv->id}{literal},function(v) {
+        var tf = fld{/literal}{$tv->id}{literal};
+        if (tf) {
+            var ov = tf.getValue();
+            if (ov != '') {
+                v = ','+v;
+            }
         }
-    }
-    return v;
+        return v;
+    });
 });
-
 {/literal}
 // ]]>
 </script>
@@ -48,36 +49,38 @@ MODx.makeDroppable(fld{/literal}{$tv->id}{literal},function(v) {
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-Ext.select('#tv-{/literal}{$tv->id}{literal}-tag-list li',true).on('click',function(e,i) {
-    var li = Ext.get(i);
-    if (!li) { return; }
-    var tf = Ext.getCmp('tv{/literal}{$tv->id}{literal}');
-    var v = tf.getValue();
-    if (li.hasClass('modx-tag-checked')) {
-        tf.setValue(Ext.util.Format.trimCommas(v.replace(li.dom.title,'')));
-        li.removeClass('modx-tag-checked');
-    } else {
-        v = v+(v != '' ? ',' : '');
-        tf.setValue(Ext.util.Format.trimCommas(v+li.dom.title));
-        li.addClass('modx-tag-checked');
-    }
-    MODx.fireResourceFormChange();
-});
-
-var rs = Ext.get('modx-reset-tv-{/literal}{$tv->id}{literal}');
-if (rs) {
-    rs.on('click',function(e,o) {
-        var df = Ext.get('tvdef{/literal}{$tv->id}{literal}').dom.value;
-        df = df.split(',');
-        Ext.select('#tv-{/literal}{$tv->id}{literal}-tag-list li',true).each(function(li,c,idx) {
-            if (df.indexOf(li.dom.title) != -1) {
-                li.addClass('modx-tag-checked');
-            } else {
-                li.removeClass('modx-tag-checked');
-            }
-        });
+Ext.onReady(function() {
+    Ext.select('#tv-{/literal}{$tv->id}{literal}-tag-list li',true).on('click',function(e,i) {
+        var li = Ext.get(i);
+        if (!li) { return; }
+        var tf = Ext.getCmp('tv{/literal}{$tv->id}{literal}');
+        var v = tf.getValue();
+        if (li.hasClass('modx-tag-checked')) {
+            tf.setValue(Ext.util.Format.trimCommas(v.replace(li.dom.title,'')));
+            li.removeClass('modx-tag-checked');
+        } else {
+            v = v+(v != '' ? ',' : '');
+            tf.setValue(Ext.util.Format.trimCommas(v+li.dom.title));
+            li.addClass('modx-tag-checked');
+        }
+        MODx.fireResourceFormChange();
     });
-}
+
+    var rs = Ext.get('modx-reset-tv-{/literal}{$tv->id}{literal}');
+    if (rs) {
+        rs.on('click',function(e,o) {
+            var df = Ext.get('tvdef{/literal}{$tv->id}{literal}').dom.value;
+            df = df.split(',');
+            Ext.select('#tv-{/literal}{$tv->id}{literal}-tag-list li',true).each(function(li,c,idx) {
+                if (df.indexOf(li.dom.title) != -1) {
+                    li.addClass('modx-tag-checked');
+                } else {
+                    li.removeClass('modx-tag-checked');
+                }
+            });
+        });
+    }
+});
 {/literal}
 // ]]>
 </script>

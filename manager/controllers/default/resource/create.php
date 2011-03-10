@@ -191,10 +191,15 @@ if ($parent == null) {
 }
 $parent->fromArray($defaults);
 $parent->set('template',$default_template);
+$resource->set('template',$default_template);
 $overridden = $this->checkFormCustomizationRules($parent,true);
 $defaults = array_merge($defaults,$overridden);
 
 $defaults['parent_pagetitle'] = $parent->get('pagetitle');
+
+/* get TVs */
+$tvOutput = include dirname(__FILE__).'/tvs.php';
+$modx->smarty->assign('tvOutput',$tvOutput);
 
 /* register JS */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);

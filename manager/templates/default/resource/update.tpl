@@ -1,5 +1,7 @@
 <div id="modx-panel-resource-div"></div>
 
+<div id="modx-resource-tvs-div">{$tvOutput}</div>
+
 {include file='resource/_javascript.tpl'}
 
 {$onDocFormPrerender}

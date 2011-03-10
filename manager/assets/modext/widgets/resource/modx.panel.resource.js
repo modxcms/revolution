@@ -25,7 +25,6 @@ MODx.panel.Resource = function(config) {
             ,border: false
         }]
     };
-    delete rte;
     var it = [];
     it.push({
         title: _('createedit_document')
@@ -396,6 +395,7 @@ MODx.panel.Resource = function(config) {
         ,class_key: config.record.class_key || 'modDocument'
         ,template: config.record.template
         ,anchor: '100%'
+        ,border: true
     });
     if (config.access_permissions) {
         it.push({
@@ -464,27 +464,29 @@ MODx.panel.Resource = function(config) {
     if (urio) { urio.on('check',this.freezeUri); }
 };
 Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
-    rteLoaded: false
-    ,initialized: false
-    ,defaultClassKey: 'modResource'
+    initialized: false
+    ,defaultClassKey: 'modDocument'
+    ,classLexiconKey: 'document'
+    ,rteElements: 'ta'
+    ,rteLoaded: false
     ,setup: function() {
         if (!this.initialized) { 
             this.getForm().setValues(this.config.record);
-            if (Ext.isEmpty(this.config.record.parent_pagetitle)) {
-                this.getForm().findField('parent-cmb').setValue('');
-            } else {
-                this.getForm().findField('parent-cmb').setValue(this.config.record.parent_pagetitle+' ('+this.config.record.parent+')');
+            pcmb = this.getForm().findField('parent-cmb');
+            if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
+                pcmb.setValue('');
+            } else if (pcmb) {
+                pcmb.setValue(this.config.record.parent_pagetitle+' ('+this.config.record.parent+')');
             }
             if (!Ext.isEmpty(this.config.record.pagetitle)) {
-                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('document')+': '+this.config.record.pagetitle+'</h2>');
+                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_(this.classLexiconKey)+': '+this.config.record.pagetitle+'</h2>');
             }
-            this.defaultClassKey = this.config.record.class_key || 'modDocument';
+            this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
         }
-
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');
             if (f && f.getValue() == 1 && !this.rteLoaded) {
-                MODx.on('ready',function() { MODx.loadRTE('ta'); });
+                MODx.loadRTE(this.rteElements);
                 this.rteLoaded = true;
             } else if (f && f.getValue() == 0 && this.rteLoaded) {
                 if (MODx.unloadRTE) {
@@ -495,24 +497,29 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
         this.fireEvent('ready');
         this.initialized = true;
+
+        MODx.fireEvent('ready');
+        MODx.sleep(4); /* delay load event to allow FC rules to move before loading RTE */
+        if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
+        this.fireEvent('load');
     }
     
-    ,beforeSubmit: function(o) {        
+    ,beforeSubmit: function(o) {
         var ta = Ext.get('ta');
-        if (!ta) return false;
-        
-        var v = ta.dom.value;
-        
-        var hc = Ext.getCmp('hiddenContent');
-        if (hc) { hc.setValue(v); }
-
+        if (ta) {
+            var v = ta.dom.value;
+            var hc = Ext.getCmp('hiddenContent');
+            if (hc) { hc.setValue(v); }
+        }
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) {
             Ext.apply(o.form.baseParams,{
                 resource_groups: g.encodeModified()
             });
         }
-        this.cleanupEditor();
+        if (ta) {
+            this.cleanupEditor();
+        }
         return this.fireEvent('save',{
             values: this.getForm().getValues()
             ,stay: Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay')
@@ -555,47 +562,17 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if(t.getValue() !== t.originalValue) {
             Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
                 if (e == 'yes') {
-                    if (MODx.unloadTVRTE) {
-                        MODx.unloadTVRTE();
-                    }
-                    var tvpanel = Ext.getCmp('modx-panel-resource-tv');
-                    if(tvpanel && tvpanel.body) {
-                        this.tvum = tvpanel.body.getUpdater();
-                        this.tvum.update({
-                            url: 'index.php?a='+MODx.action['resource/tvs']
-                            ,params: {
-                                class_key: this.config.record.class_key
-                                ,resource: (this.config.resource ? this.config.resource : 0)
-                                ,template: t.getValue()
-                            }
-                            ,discardUrl: true
-                            ,scripts: true
-                            ,nocache: true
-                            ,callback: function(el) {
-                                tvpanel.fireEvent('load');
-                            }
-                            ,scope: this
-                        });
-                    }
-                    t.originalValue = t.getValue();
+                    MODx.activePage.submitForm({
+                        success: {fn:function(r) {
+                            location.href = '?a='+MODx.request.a+'&id='+r.result.object.id;
+                        },scope:this}
+                    });
                 } else {
                     t.setValue(this.config.record.template);
                 }
             },this);
         }
     }
-    
-    ,changeEditor: function() {
-        this.cleanupEditor();
-        this.on('success',function(o) {
-            var id = o.result.object.id;
-            var w = Ext.getCmp('modx-resource-which-editor').getValue();
-            MODx.request.a = MODx.action['resource/update'];
-            var u = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
-            location.href = u;
-        });
-        this.submit();
-    }    
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('ta');

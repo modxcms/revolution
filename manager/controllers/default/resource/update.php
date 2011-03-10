@@ -131,6 +131,12 @@ $record = array_merge($record,$overridden);
 
 $record['parent_pagetitle'] = $parent ? $parent->get('pagetitle') : '';
 
+
+/* get TVs */
+$templateId = $record['template'];
+$tvOutput = include dirname(__FILE__).'/tvs.php';
+$modx->smarty->assign('tvOutput',$tvOutput);
+
 /* register JS */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
 $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');

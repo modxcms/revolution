@@ -84,6 +84,11 @@ $record = array_merge($record,$overridden);
 
 $record['parent_pagetitle'] = $parent ? $parent->get('pagetitle') : '';
 
+/* get TVs */
+$templateId = $record['template'];
+$tvOutput = include dirname(dirname(__FILE__)).'/tvs.php';
+$modx->smarty->assign('tvOutput',$tvOutput);
+
 /* register JS scripts */
 $modx->smarty->assign('_ctx',$resource->get('context_key'));
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
@@ -91,6 +96,7 @@ $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.weblink.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/sections/resource/weblink/update.js');
 $modx->regClientStartupHTMLBlock('

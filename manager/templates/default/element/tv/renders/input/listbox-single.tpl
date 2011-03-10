@@ -8,35 +8,37 @@
 <script type="text/javascript">
 // <![CDATA[
 {literal}
-var fld = MODx.load({
-{/literal}
-    xtype: 'combo'
-    ,transform: 'tv{$tv->id}'
-    ,id: 'tv{$tv->id}'
-    ,triggerAction: 'all'
-    ,width: 350
-    ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-    
-    {if $params.title},title: '{$params.title}'{/if}
-    {if $params.listWidth},listWidth: {$params.listWidth}{/if}
-    ,maxHeight: {if $params.maxHeight}{$params.maxHeight}{else}300{/if}
-    {if $params.typeAhead}
-        ,typeAhead: true
-        ,typeAheadDelay: {if $params.typeAheadDelay && $params.typeAheadDelay != ''}{$params.typeAheadDelay}{else}250{/if}
-    {else}
-        ,editable: false
-        ,typeAhead: false
-    {/if}
-    {if $params.listEmptyText}
-        ,listEmptyText: '{$params.listEmptyText}'
-    {/if}
-    ,forceSelection: {if $params.forceSelection && $params.forceSelection != 'false'}true{else}false{/if}
-    ,msgTarget: 'under'
+Ext.onReady(function() {
+    var fld = MODx.load({
+    {/literal}
+        xtype: 'combo'
+        ,transform: 'tv{$tv->id}'
+        ,id: 'tv{$tv->id}'
+        ,triggerAction: 'all'
+        ,width: 350
+        ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
 
-{literal}
-    ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
+        {if $params.title},title: '{$params.title}'{/if}
+        {if $params.listWidth},listWidth: {$params.listWidth}{/if}
+        ,maxHeight: {if $params.maxHeight}{$params.maxHeight}{else}300{/if}
+        {if $params.typeAhead}
+            ,typeAhead: true
+            ,typeAheadDelay: {if $params.typeAheadDelay && $params.typeAheadDelay != ''}{$params.typeAheadDelay}{else}250{/if}
+        {else}
+            ,editable: false
+            ,typeAhead: false
+        {/if}
+        {if $params.listEmptyText}
+            ,listEmptyText: '{$params.listEmptyText}'
+        {/if}
+        ,forceSelection: {if $params.forceSelection && $params.forceSelection != 'false'}true{else}false{/if}
+        ,msgTarget: 'under'
+
+    {literal}
+        ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
+    });
+    Ext.getCmp('modx-panel-resource').getForm().add(fld);
 });
-Ext.getCmp('modx-panel-resource').getForm().add(fld);
 {/literal}
 // ]]>
 </script>

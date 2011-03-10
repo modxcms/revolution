@@ -368,145 +368,20 @@ MODx.panel.SymLink = function(config) {
         });
     }
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
-        ,baseParams: {}
-        ,id: 'modx-panel-resource'
+        id: 'modx-panel-resource'
         ,class_key: 'modSymLink'
-        ,resource: ''
-        ,bodyStyle: ''
-        ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+_('symlink_new')+'</h2>'
             ,id: 'modx-resource-header'
             ,cls: 'modx-page-header'
             ,border: false
         },MODx.getPageStructure(it,{id:'modx-resource-tabs' ,forceLayout: true ,deferredRender: false })]
-        ,listeners: {
-            'setup': {fn:this.setup,scope:this}
-            ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
-            ,'success': {fn:this.success,scope:this}
-        }
     });
     MODx.panel.SymLink.superclass.constructor.call(this,config);
-    var urio = Ext.getCmp('modx-resource-uri-override');
-    if (urio) { urio.on('check',this.freezeUri); }
 };
-Ext.extend(MODx.panel.SymLink,MODx.FormPanel,{
-    initialized: false
-    ,defaultClassKey: 'modSymLink'
-    ,rteLoaded: false
-    ,setup: function() {
-        if (!this.initialized) {
-            this.getForm().setValues(this.config.record);
-
-            if (Ext.isEmpty(this.config.record.parent_pagetitle)) {
-                this.getForm().findField('parent-cmb').setValue('');
-            } else {
-                this.getForm().findField('parent-cmb').setValue(this.config.record.parent_pagetitle+' ('+this.config.record.parent+')');
-            }
-            if (!Ext.isEmpty(this.config.record.pagetitle)) {
-                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('symlink')+': '+this.config.record.pagetitle+'</h2>');
-            }
-            this.defaultClassKey = this.config.record.class_key || 'modSymLink';
-        }
-        if (MODx.config.use_editor == 1 && !this.rteLoaded) {
-            if (!this.rteLoaded) {
-                if (MODx.loadRTE) { MODx.loadRTE(); }
-                this.rteLoaded = true;
-            } else if (this.rteLoaded) {
-                if (MODx.unloadRTE) { MODx.unloadRTE(); }
-                this.rteLoaded = false;
-            }
-        }
-        this.fireEvent('ready',this.config.record);
-        this.initialized = true;
-    }
-    ,beforeSubmit: function(o) {
-        var g = Ext.getCmp('modx-grid-resource-security');
-        if (g) {
-            Ext.apply(o.form.baseParams,{
-                resource_groups: g.encodeModified()
-            });
-        }
-        return this.fireEvent('save',{
-            values: this.getForm().getValues()
-            ,stay: MODx.config.stay
-        });
-    }
-
-    ,success: function(o) {
-        var g = Ext.getCmp('modx-grid-resource-security');
-        if (g) { g.getStore().commitChanges(); }
-        var t = Ext.getCmp('modx-resource-tree');
-        if (t) {
-            var ctx = Ext.getCmp('modx-resource-context-key').getValue();
-            var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
-            var v = ctx+'_'+pa;
-            var n = t.getNodeById(v);
-            n.leaf = false;
-            t.refreshNode(v,true);
-        }
-        if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
-            location.href = location.href;
-        }
-        Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
-    }
-
-    ,freezeUri: function(cb) {
-        var uri = Ext.getCmp('modx-resource-uri');
-        if (!uri) { return false; }
-        if (cb.checked) {
-            uri.show();
-        } else {
-            uri.hide();
-        }
-    }
-
-    ,templateWarning: function() {
-        var t = Ext.getCmp('modx-resource-template');
-        if (!t) { return false; }
-        if(t.getValue() !== t.originalValue) {
-            Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
-                if (e == 'yes') {
-                    if (MODx.unloadTVRTE) {
-                        MODx.unloadTVRTE();
-                    }
-                    var tvpanel = Ext.getCmp('modx-panel-resource-tv');
-                    if(tvpanel && tvpanel.body) {
-                        this.tvum = tvpanel.body.getUpdater();
-                        this.tvum.update({
-                            url: 'index.php?a='+MODx.action['resource/tvs']
-                            ,params: {
-                                class_key: this.config.record.class_key
-                                ,resource: (this.config.resource ? this.config.resource : 0)
-                                ,template: t.getValue()
-                            }
-                            ,discardUrl: true
-                            ,scripts: true
-                            ,nocache: true
-                            ,callback: function(el) {
-                                tvpanel.fireEvent('load');
-                            }
-                            ,scope: this
-                        });
-                    }
-                    t.originalValue = t.getValue();
-                } else {
-                    t.setValue(this.config.record.template);
-                }
-            },this);
-        }
-    }
+Ext.extend(MODx.panel.SymLink,MODx.panel.Resource,{
+    defaultClassKey: 'modSymLink'
+    ,classLexiconKey: 'symlink'
+    ,rteElements: false
 });
 Ext.reg('modx-panel-symlink',MODx.panel.SymLink);
-
-/* global accessor for TV dynamic fields */
-var triggerDirtyField = function(fld) {
-    Ext.getCmp('modx-panel-resource').fieldChangeEvent(fld);
-};
-MODx.triggerRTEOnChange = function(i) {
-    triggerDirtyField(Ext.getCmp('ta'));
-};
-MODx.fireResourceFormChange = function(f,nv,ov) {
-    Ext.getCmp('modx-panel-resource').fireEvent('fieldChange');
-};

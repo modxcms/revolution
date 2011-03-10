@@ -7,12 +7,9 @@
  * @package modx
  * @subpackage manager
  */
-$resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument';
-$resourceClass = $modx->sanitizeString($resourceClass);
-$resourceClass = str_replace(array('../','..','/','\\'),'',$resourceClass);
+$resourceClass = $resource->get('class_key');
 $resourceDir= strtolower(substr($resourceClass, 3));
-
-$resourceId = isset($_REQUEST['resource']) ? intval($_REQUEST['resource']) : 0;
+$resourceId = !empty($resource) ? $resource->get('id') : 0;
 
 $onResourceTVFormPrerender = $modx->invokeEvent('OnResourceTVFormPrerender',array(
     'resource' => $resourceId,
@@ -30,8 +27,6 @@ if (file_exists($delegateView)) {
     }
 }
 
-$templateId = 0;
-
 /* get categories */
 $c = $modx->newQuery('modCategory');
 $c->sortby('category','ASC');
@@ -41,9 +36,8 @@ $emptycat->set('category','');
 $emptycat->id = 0;
 $categories[0] = $emptycat;
 $tvMap = array();
-if (isset ($_REQUEST['template'])) {
-    $templateId = intval($_REQUEST['template']);
-}
+$templateId = !empty($templateId) ? $templateId : $resource->get('template');
+
 if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
     $resource = $modx->getObject($resourceClass, $resourceId);
     if (empty($resourceId) || empty($resource)) {
@@ -147,5 +141,6 @@ $modx->smarty->assign('tvMap',$modx->toJSON($tvMap));
 if (!empty($_REQUEST['showCheckbox'])) {
     $modx->smarty->assign('showCheckbox',1);
 }
+
 
 return $modx->smarty->fetch('resource/sections/tvs.tpl');
