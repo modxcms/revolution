@@ -492,7 +492,16 @@ class modOutputFilter {
                         $output= md5($output);
                         break;
                     case 'cdata':
-                        $output= "<![CDATA[ {$output} ]]>";
+                        if ($usemb) {
+                            $len = mb_strlen($output,$encoding);
+                            if (mb_strpos($output,'[',0,$encoding) === 0) { $output = ' '.$output; }
+                            if (mb_strpos($output,']',0,$encoding) === $len) { $output = $output.' '; }
+                        } else {
+                            $len = strlen($output);
+                            if (strpos($output,'[') === 0) { $output = ' '.$output; }
+                            if (strpos($output,']') === $len) { $output = $output.' '; }
+                        }
+                        $output= "<![CDATA[{$output}]]>";
                         break;
 
                     case 'userinfo':
