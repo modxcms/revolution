@@ -155,10 +155,15 @@ if ($parent == null) {
 }
 $parent->fromArray($defaults);
 $parent->set('template',$default_template);
+$resource->set('template',$default_template);
 $overridden = $this->checkFormCustomizationRules($parent,true);
 $defaults = array_merge($defaults,$overridden);
 
 $defaults['parent_pagetitle'] = $parent->get('pagetitle');
+
+/* get TVs */
+$tvOutput = include dirname(dirname(__FILE__)).'/tvs.php';
+$modx->smarty->assign('tvOutput',$tvOutput);
 
 /* register JS scripts */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
@@ -166,6 +171,7 @@ $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.symlink.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/sections/resource/symlink/create.js');
 $modx->regClientStartupHTMLBlock('

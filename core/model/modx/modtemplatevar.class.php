@@ -294,6 +294,9 @@ class modTemplateVar extends modElement {
 
         /* if any FC tvDefault rules, set here */
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
+            if (!empty($resourceId)) {
+                $resource = $this->xpdo->getObject('modResource',$resourceId);
+            }
             $userGroups = $this->xpdo->user->getUserGroups();
             $c = $this->xpdo->newQuery('modActionDom');
             $c->innerJoin('modFormCustomizationSet','FCSet');
@@ -331,6 +334,12 @@ class modTemplateVar extends modElement {
             $c->sortby('modActionDom.rank','ASC');
             $domRules = $this->xpdo->getCollection('modActionDom',$c);
             foreach ($domRules as $rule) {
+                if (!empty($resourceId)) {
+                    $template = $rule->get('template');
+                    if (!empty($template)) {
+                        if ($resource && $template != $resource->get('template')) continue;
+                    }
+                }
                 switch ($rule->get('rule')) {
                     case 'tvVisible':
                         if ($rule->get('value') == 0) {

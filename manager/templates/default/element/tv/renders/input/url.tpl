@@ -10,5 +10,7 @@
 	onchange="MODx.fireResourceFormChange();"
 />
 <script type="text/javascript">
-MODx.makeDroppable(Ext.get('tv{$tv->id}'));
+Ext.onReady(function() {
+    MODx.makeDroppable(Ext.get('tv{$tv->id}'));
+});
 </script>

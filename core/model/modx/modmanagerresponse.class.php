@@ -85,6 +85,9 @@ class modManagerResponse extends modResponse {
                     $cbody = 'Could not find action file at: '.$f;
                 }
 
+                if (!empty($this->ruleOutput)) {
+                    $this->modx->regClientStartupHTMLBlock($this->ruleOutput);
+                }
                 $this->registerCssJs();
 
                 /* reset path to core modx path for header/footer */
@@ -200,12 +203,11 @@ class modManagerResponse extends modResponse {
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;
         }
-        $ruleOutput = '';
+        $this->ruleOutput = '';
         if (!empty($rules)) {
-            $ruleOutput .= '<script type="text/javascript">Ext.onReady(function() {';
-            $ruleOutput .= implode("\n",$rules);
-            $ruleOutput .= '});</script>';
-            $this->modx->regClientStartupHTMLBlock($ruleOutput);
+            $this->ruleOutput .= '<script type="text/javascript">Ext.onReady(function() {';
+            $this->ruleOutput .= implode("\n",$rules);
+            $this->ruleOutput .= '});</script>';
         }
         return $overridden;
     }

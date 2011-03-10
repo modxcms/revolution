@@ -17,6 +17,7 @@ MODx.page.UpdateResource = function(config) {
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
+        ,action: 'update'
         ,actions: {
             'new': MODx.action['resource/create']
             ,edit: MODx.action['resource/update']

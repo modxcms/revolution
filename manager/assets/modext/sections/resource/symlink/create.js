@@ -13,6 +13,7 @@ MODx.page.CreateSymLink = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
+        ,action: 'create'
         ,actions: {
             'new': MODx.action['resource/create']
             ,edit: MODx.action['resource/update']
