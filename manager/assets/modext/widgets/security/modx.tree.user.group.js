@@ -16,7 +16,7 @@ MODx.tree.UserGroup = function(config) {
         ,root_name: _('user_groups')
         ,enableDrag: true
         ,enableDrop: true
-        ,rootVisible: false
+        ,rootVisible: true
         ,ddAppendOnly: true
         ,useDefaultToolbar: true
         ,tbar: [{
@@ -164,6 +164,21 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
                 'success':{fn:this.refresh,scope:this}
             }
         });
+    }
+
+    ,_handleDrop: function(e) {
+        s = false;
+        switch (e.dropNode.attributes.type) {
+            case 'user':
+                s = !(e.point == 'above' || e.point == 'below');
+                s = s && e.target.attributes.type == 'usergroup' && e.point == 'append';
+            break;
+            case 'usergroup':
+                s = true;
+            break;
+        }
+        return s;
+
     }
 });
 Ext.reg('modx-tree-usergroup',MODx.tree.UserGroup);

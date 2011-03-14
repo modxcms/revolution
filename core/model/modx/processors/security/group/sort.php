@@ -20,6 +20,7 @@ getGroupsFormatted($groups,$data);
 
 $users = array();
 getUsersFormatted($users,$data);
+//return $modx->error->failure(print_r($groups,true));
 
 /* readjust groups */
 foreach ($groups as $ar_group) {
@@ -33,12 +34,10 @@ foreach ($groups as $ar_group) {
     }
 
     if ($ar_group['parent'] == $group->get('id')) {
-        return $modx->error->failure($modx->lexicon('err_self_parent'));
+        continue;
     }
 
-
     if ($ar_group['parent'] == 0 || $old_parent_id != $ar_group['parent']) {
-
         /* get new parent, if invalid, skip, unless is root */
         if ($ar_group['parent'] != 0) {
             $parent = $modx->getObject('modUserGroup',$ar_group['parent']);
@@ -52,26 +51,40 @@ foreach ($groups as $ar_group) {
         $group->set('parent',$ar_group['parent']);
         $group->set('depth',$depth);
     }
-    if ($ar_group['id'] != 0) $group->save();
+    if ($ar_group['id'] != 0) {
+        $group->save();
+    }
 }
 
 /* readjust users */
 foreach ($users as $ar_user) {
+    if (empty($ar_user['id'])) continue;
     $user = $modx->getObject('modUser',$ar_user['id']);
     if ($user == null) continue;
 
     /* get new parent, if invalid, skip, unless is root */
-    if ($ar_user['parent'] != 0) {
+    if ($ar_user['new_group'] != 0 && $ar_user['new_group'] != $ar_user['old_group']) {
         $ugm = $modx->getObject('modUserGroupMember',array(
-            'user_group' => $ar_user['parent'],
+            'user_group' => $ar_user['new_group'],
             'member' => $user->get('id'),
         ));
         if ($ugm == null) {
             $ugm = $modx->newObject('modUserGroupMember');
-            $ugm->set('user_group',$ar_user['parent']);
+            $ugm->set('user_group',$ar_user['new_group']);
         }
         $ugm->set('member',$user->get('id'));
-        $ugm->save();
+        if ($ugm->save()) {
+            /* remove user from old group */
+            if (!empty($ar_user['old_group'])) {
+                $ugm = $modx->getObject('modUserGroupMember',array(
+                    'user_group' => $ar_user['old_group'],
+                    'member' => $user->get('id'),
+                ));
+                if ($ugm) {
+                    $ugm->remove();
+                }
+            }
+        }
     }
 }
 
@@ -98,9 +111,12 @@ function getUsersFormatted(&$ar_nodes,$cur_level,$parent = 0) {
     foreach ($cur_level as $id => $children) {
         $id = substr($id,2); /* get rid of CSS id n_ prefix */
         if (substr($id,0,4) == 'user') {
+            $userMap = substr($id,5);
+            $userMap = explode('_',$userMap);
             $ar_nodes[] = array(
-                'id' => substr($id,5),
-                'parent' => substr($parent,3),
+                'id' => $userMap[0],
+                'old_group' => $userMap[1],
+                'new_group' => substr($parent,3),
                 'order' => $order,
             );
             $order++;
@@ -108,3 +124,5 @@ function getUsersFormatted(&$ar_nodes,$cur_level,$parent = 0) {
         getUsersFormatted($ar_nodes,$children,$id);
     }
 }
+
+return $modx->error->success();
