@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4054] Improve select binding to be able to use Resource fields via placeholders
 - [#3511], [#2964], [#3601] Fix issues regarding form customization and Templates by removing ajax loading of TVs in Resource panels
 - Consolidate JS for derivative Resource panels to allow to inherit from main Resource panel
 - Add context param to modx.getParentIds
