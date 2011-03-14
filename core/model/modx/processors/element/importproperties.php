@@ -29,8 +29,8 @@ foreach ($properties as $property) {
 
     /* backwards compat */
     if (empty($desc)) { $desc = empty($property['description']) ? '' : $property['description']; }
-    
-    $desc = htmlspecialchars(str_replace("'",'"',$desc));
+
+    $desc = str_replace(array("\\n",'\"',"'",'<','>','[',']'),array('','&quot;','"',"&lt;","&gt;",'&#91;','&#93;'),$desc);
     $value = str_replace(array('<','>'),array("&lt;","&gt;"),$property['value']);
     $data[] = array(
         $property['name'],
@@ -41,5 +41,5 @@ foreach ($properties as $property) {
         false, /* overridden set to false */
     );
 }
-
+//return $modx->error->failure('test');
 return $modx->error->success('',$data);
