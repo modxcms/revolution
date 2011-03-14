@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4052] Fix issues with element property import and invalid characters causing freezing in UI
 - [#4042] Fix issue in phpThumb base class preventing far property from working
 - [#4049] Add resource_tree_node_tooltip for controlling field in Resource Tree tooltip
 - [#3511], [#2964], [#3601] Fix issues regarding form customization and Templates by removing ajax loading of TVs in Resource panels
