@@ -1135,6 +1135,15 @@ $settings['resource_tree_node_name']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['resource_tree_node_tooltip']= $xpdo->newObject('modSystemSetting');
+$settings['resource_tree_node_tooltip']->fromArray(array (
+  'key' => 'resource_tree_node_tooltip',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['richtext_default']= $xpdo->newObject('modSystemSetting');
 $settings['richtext_default']->fromArray(array (
   'key' => 'richtext_default',

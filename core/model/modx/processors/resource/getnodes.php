@@ -85,6 +85,7 @@ $hasEditPerm = $modx->hasPermission('edit_document');
 $collection = $modx->getCollection($itemClass, $c);
 
 $nodeField = $modx->getOption('resource_tree_node_name',$scriptProperties,'pagetitle');
+$qtipField = $modx->getOption('resource_tree_node_tooltip',$scriptProperties,'');
 $items = array();
 $item = reset($collection);
 while ($item) {
@@ -128,11 +129,15 @@ while ($item) {
             $class .= $hasChildren ? ' haschildren' : '';
 
             $qtip = '';
-            if ($item->longtitle != '') {
-                $qtip = '<b>'.strip_tags($item->longtitle).'</b><br />';
-            }
-            if ($item->description != '') {
-                $qtip = '<i>'.strip_tags($item->description).'</i>';
+            if (!empty($qtipField)) {
+                $qtip = '<b>'.strip_tags($item->$qtipField).'</b>';
+            } else {
+                if ($item->longtitle != '') {
+                    $qtip = '<b>'.strip_tags($item->longtitle).'</b><br />';
+                }
+                if ($item->description != '') {
+                    $qtip = '<i>'.strip_tags($item->description).'</i>';
+                }
             }
 
             $locked = $item->getLock();

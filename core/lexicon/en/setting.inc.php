@@ -465,6 +465,9 @@ $_lang['setting_resolve_hostnames_desc'] = 'Do you want MODx to try to resolve y
 $_lang['setting_resource_tree_node_name'] = 'Resource Tree Node Field';
 $_lang['setting_resource_tree_node_name_desc'] = 'Specify the Resource field to use when rendering the nodes in the Resource Tree. Defaults to pagetitle, although any Resource field can be used, such as menutitle, alias, longtitle, etc.';
 
+$_lang['setting_resource_tree_node_tooltip'] = 'Resource Tree Tooltip Field';
+$_lang['setting_resource_tree_node_tooltip_desc'] = 'Specify the Resource field to use when rendering the nodes in the Resource Tree. Any Resource field can be used, such as menutitle, alias, longtitle, etc. If blank, will be the longtitle with a description underneath.';
+
 $_lang['setting_richtext_default'] = 'Richtext Default';
 $_lang['setting_richtext_default_desc'] = 'Select \'Yes\' to make all new Resources use the Richtext Editor by default.';
 
