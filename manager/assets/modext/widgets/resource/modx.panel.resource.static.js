@@ -134,7 +134,7 @@ MODx.panel.Static = function(config) {
             ,value: (config.record.content || config.record.ta) || ''
             ,listeners: {
                 'select':{fn:function(data) {
-                    var str = data.url;
+                    var str = data.fullRelativeUrl;
                     str = str.replace(MODx.config.base_url,'');
                     if (str.substring(0,1) == '/') str = str.substring(1);
                     Ext.getCmp('modx-resource-content').setValue(str);

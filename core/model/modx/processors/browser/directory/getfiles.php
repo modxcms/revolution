@@ -167,6 +167,7 @@ foreach (new DirectoryIterator($fullPath) as $file) {
             'thumb_height' => $thumbHeight,
             'url' => $url,
             'relativeUrl' => ltrim($dir.$fileName,'/'),
+            'fullRelativeUrl' => rtrim($baseUrl).ltrim($dir.$fileName,'/'),
             'ext' => $fileExtension,
             'pathname' => str_replace('//','/',$filePathName),
             'lastmod' => $file->getMTime(),
