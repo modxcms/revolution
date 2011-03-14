@@ -621,6 +621,26 @@ class modResource extends modAccessibleSimpleObject {
     }
 
     /**
+     * Sets a value for a TV for this Resource
+     * 
+     * @param mixed $pk The TV name or ID to set
+     * @param string $value The value to set for the TV
+     * @return bool Whether or not the TV saved successfully
+     */
+    public function setTVValue($pk,$value) {
+        $success = false;
+        if (is_string($pk)) {
+            $pk = array('name' => $pk);
+        }
+        $tv = $this->xpdo->getObject('modTemplateVar',$pk);
+        if ($tv) {
+            $tv->setValue($this->get('id'),$value);
+            $success = $tv->save();
+        }
+        return $success;
+    }
+
+    /**
      * Get the Resource's full alias path.
      *
      * @param string $alias Optional. The alias to check. If not set, will
