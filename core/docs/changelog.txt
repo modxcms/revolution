@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3350] Improvements to bugfix for PHP bug 53632
 - [#4054] Improve select binding to be able to use Resource fields via placeholders
 - [#142] Add modResource.setTVValue API method
 - [#4021] Add system setting to allow setting of a custom favicon for the manager
