@@ -362,7 +362,7 @@ MODx.browser.View = function(config) {
         url: MODx.config.connectors_url+'browser/directory.php'
         ,id: this.ident
         ,fields: [
-            'name','cls','url','relativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled'
+            'name','cls','url','relativeUrl','fullRelativeUrl','image','image_width','image_height','thumb','thumb_width','thumb_height','pathname','ext','disabled'
             ,{name:'size', type: 'float'}
             ,{name:'lastmod', type:'date', dateFormat:'timestamp'}
             ,'menu'
