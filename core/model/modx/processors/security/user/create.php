@@ -13,12 +13,14 @@ $modx->lexicon->load('user');
 
 /* setup default properties */
 $classKey = $modx->getOption('class_key',$scriptProperties,'modUser');
+$blocked = empty($scriptProperties['blocked']) ? false : true;
+$scriptProperties['active'] = !empty($scriptProperties['active']) ? true : false;
+
 
 $user = $modx->newObject($classKey);
+$user->set('active',$scriptProperties['active']);
 
 /* validate post */
-$blocked = empty($scriptProperties['blocked']) ? false : true;
-
 $newPassword= '';
 $result = include_once $modx->getOption('processors_path').'security/user/_validation.php';
 if ($result !== true) return $result;
