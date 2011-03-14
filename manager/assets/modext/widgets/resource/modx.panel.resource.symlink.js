@@ -116,7 +116,7 @@ MODx.panel.SymLink = function(config) {
             ,fieldLabel: _('symlink')
             ,description: '<b>[[*content]]</b><br />'+_('symlink_help')
             ,name: 'content'
-            ,id: 'modx-resource-content'
+            ,id: 'modx-symlink-content'
             ,maxLength: 255
             ,anchor: '90%'
             ,value: (config.record.content || config.record.ta) || ''
