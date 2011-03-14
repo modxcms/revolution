@@ -1363,7 +1363,7 @@ class phpthumb {
 								$commandline .= ' -'.$IMresizeParameter.' x'.$thumbnailH;
 							}
 
-							switch (strtoupper($this->zc)) {
+							switch (strtoupper($this->far)) {
 								case 'T':
 									$commandline .= ' -gravity north';
 									break;
