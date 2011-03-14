@@ -205,9 +205,7 @@ class modManagerResponse extends modResponse {
         }
         $this->ruleOutput = '';
         if (!empty($rules)) {
-            $this->ruleOutput .= '<script type="text/javascript">Ext.onReady(function() {';
-            $this->ruleOutput .= implode("\n",$rules);
-            $this->ruleOutput .= '});</script>';
+            $this->ruleOutput .= '<script type="text/javascript">Ext.onReady(function() {'.implode("\n",$rules).'});</script>';
         }
         return $overridden;
     }
