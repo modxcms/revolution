@@ -44,7 +44,7 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
         var xtype = this.config.dynProperty;
         if (!r[xtype] || r[xtype] == 'combo-boolean') {
             f = MODx.grid.Grid.prototype.rendYesNo;
-            oz = f(v == 1 ? true : false,md);
+            oz = f(v == 1,md);
         } else if (r[xtype] === 'datefield') {
             f = Ext.util.Format.dateRenderer('Y-m-d');
             oz = f(v);
