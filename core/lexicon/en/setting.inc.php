@@ -323,6 +323,9 @@ $_lang['setting_manager_direction_desc'] = 'Choose the direction that the text w
 $_lang['setting_manager_date_format'] = 'Manager Date Format';
 $_lang['setting_manager_date_format_desc'] = 'The format string, in PHP date() format, for the dates represented in the manager.';
 
+$_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
+$_lang['setting_manager_favicon_url_desc'] = 'If set, will load this URL as a favicon for the MODX manager. Must be a relative URL to the manager/ directory, or an absolute URL.';
+
 $_lang['setting_manager_lang_attribute'] = 'Manager HTML and XML Language Attribute';
 $_lang['setting_manager_lang_attribute_desc'] = 'Enter the language code that best fits with your chosen manager language, this will ensure that the browser can present content in the best format for you.';
 

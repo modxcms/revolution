@@ -746,6 +746,15 @@ $settings['manager_date_format']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['manager_favicon_url']= $xpdo->newObject('modSystemSetting');
+$settings['manager_favicon_url']->fromArray(array (
+  'key' => 'manager_favicon_url',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['manager_time_format']= $xpdo->newObject('modSystemSetting');
 $settings['manager_time_format']->fromArray(array (
   'key' => 'manager_time_format',
