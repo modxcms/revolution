@@ -910,25 +910,25 @@ MODx.getQRSettings = function(id,va) {
         ,value: va['publishedon']
     },{
         xtype: 'checkbox'
-        ,name: 'published'
+        ,name: 'published_cb'
         ,id: 'modx-'+id+'-published'
         ,fieldLabel: _('resource_published')
         ,description: _('resource_published_help')
         ,inputValue: 1
         ,submitValue: false
-        ,checked: va['published'] != undefined ? va['published'] : (MODx.config.publish_default == '1' ? true : false)
+        ,checked: va['published'] !== undefined ? va['published'] : (MODx.config.publish_default == '1' ? 1 : 0)
         ,listeners: {'check': {fn:MODx.handleQUCB}}
     },{
         xtype: 'hidden'
         ,name: 'published'
         ,id: 'modx-'+id+'-published-hd'
-        ,value: va['published'] != undefined ? va['published'] : (MODx.config.publish_default == '1' ? 1 : 0)
+        ,value: va['published'] !== undefined ? va['published'] : (MODx.config.publish_default == '1' ? 1 : 0)
         
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_folder')
         ,description: _('resource_folder_help')
-        ,name: 'isfolder'
+        ,name: 'isfolder_cb'
         ,id: 'modx-'+id+'-isfolder'
         ,inputValue: 1
         ,submitValue: false
@@ -944,27 +944,27 @@ MODx.getQRSettings = function(id,va) {
         xtype: 'checkbox'
         ,fieldLabel: _('resource_richtext')
         ,description: _('resource_richtext_help')
-        ,name: 'richtext'
+        ,name: 'richtext_cb'
         ,id: 'modx-'+id+'-richtext'
         ,inputValue: 1
         ,submitValue: false
-        ,checked: va['richtext'] != undefined ? va['richtext'] : (MODx.config.richtext_default == '1' ? true : false)
+        ,checked: va['richtext'] !== undefined ? (va['richtext'] ? 1 : 0) : (MODx.config.richtext_default == '1' ? 1 : 0)
         ,listeners: {'check': {fn:MODx.handleQUCB}}
     },{
         xtype: 'hidden'
         ,name: 'richtext'
         ,id: 'modx-'+id+'-richtext-hd'
-        ,value: va['richtext'] != undefined ? va['richtext'] : (MODx.config.richtext_default == '1' ? 1 : 0)
+        ,value: va['richtext'] !== undefined ? (va['richtext'] ? 1 : 0) : (MODx.config.richtext_default == '1' ? 1 : 0)
         
     },{
         xtype: 'checkbox'
         ,fieldLabel: _('resource_searchable')
         ,description: _('resource_searchable_help')
-        ,name: 'searchable'
+        ,name: 'searchable_cb'
         ,id: 'modx-'+id+'-searchable'
         ,inputValue: 1
         ,submitValue: false
-        ,checked: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? true : false)
+        ,checked: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? 1 : 0)
         ,listeners: {'check': {fn:MODx.handleQUCB}}
     },{
         xtype: 'hidden'
@@ -976,11 +976,11 @@ MODx.getQRSettings = function(id,va) {
         xtype: 'checkbox'
         ,fieldLabel: _('resource_hide_from_menus')
         ,description: _('resource_hide_from_menus_help')
-        ,name: 'hidemenu'
+        ,name: 'hidemenu_cb'
         ,id: 'modx-'+id+'-hidemenu'
         ,inputValue: 1
         ,submitValue: false
-        ,checked: va['hidemenu'] != undefined ? va['hidemenu'] : (MODx.config.hidemenu_default == '1' ? true : false)
+        ,checked: va['hidemenu'] != undefined ? va['hidemenu'] : (MODx.config.hidemenu_default == '1' ? 1 : 0)
         ,listeners: {'check': {fn:MODx.handleQUCB}}
     },{
         xtype: 'hidden'
@@ -991,11 +991,11 @@ MODx.getQRSettings = function(id,va) {
         xtype: 'checkbox'
         ,fieldLabel: _('resource_cacheable')
         ,description: _('resource_cacheable_help')
-        ,name: 'cacheable'
+        ,name: 'cacheable_cb'
         ,id: 'modx-'+id+'-cacheable'
         ,inputValue: 1
         ,submitValue: false
-        ,checked: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? true : false)
+        ,checked: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? 1 : 0)
         ,listeners: {'check': {fn:MODx.handleQUCB}}
     },{
         xtype: 'hidden'
@@ -1016,8 +1016,10 @@ MODx.getQRSettings = function(id,va) {
 MODx.handleQUCB = function(cb) {
     var h = Ext.getCmp(cb.id+'-hd');
     if (cb.checked && h) {
+        cb.setValue(1);
         h.setValue(1);
     } else if (h) {
+        cb.setValue(0);
         h.setValue(0);
     }
 }
