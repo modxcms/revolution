@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3636] Fix issue with empty values on options in list/dropdown/checkbox/radio TVs
 - [#4024] Fix issue with display value not always showing for list properties in element property grid
 - [#4056], [#4041] Add xtype password, template, user, usergroup, etc to available xtypes for System Settings
 - [#3350] Improvements to bugfix for PHP bug 53632
