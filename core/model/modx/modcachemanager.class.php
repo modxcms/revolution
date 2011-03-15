@@ -70,6 +70,11 @@ class modCacheManager extends xPDOCacheManager {
                 }
             }
 
+            /* check for category ACLs in this context and set contextConfig option */
+            $catACLCount = $this->modx->getCount('modAccessCategory', array('context_key' => $key));
+            $results['config']['access_category_enabled'] = $catACLCount > 0 ? '1' : '0';
+            $contextConfig['access_category_enabled'] = $catACLCount > 0 ? '1' : '0';
+
             /* generate the aliasMap and resourceMap */
             $tblResource= $this->modx->getTableName('modResource');
             $tblContextResource= $this->modx->getTableName('modContextResource');
