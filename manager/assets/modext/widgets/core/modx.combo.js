@@ -85,6 +85,19 @@ Ext.extend(MODx.combo.Boolean,MODx.combo.ComboBox);
 Ext.reg('combo-boolean',MODx.combo.Boolean);
 Ext.reg('modx-combo-boolean',MODx.combo.Boolean);
 
+MODx.util.PasswordField = function(config) {
+    config = config || {};
+    delete config.xtype;
+    Ext.applyIf(config,{
+        xtype: 'textfield'
+        ,inputType: 'password'
+    });
+    MODx.util.PasswordField.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.util.PasswordField,Ext.form.TextField);
+Ext.reg('text-password',MODx.util.PasswordField);
+Ext.reg('modx-text-password',MODx.util.PasswordField);
+
 MODx.combo.User = function(config) {
     config = config || {};
     Ext.applyIf(config,{

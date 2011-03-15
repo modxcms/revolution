@@ -24,6 +24,8 @@ $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the 
 $_lang['area_site'] = 'Site';
 $_lang['area_system'] = 'System and Server';
 $_lang['areas'] = 'Areas';
+$_lang['charset'] = 'Charset';
+$_lang['country'] = 'Country';
 $_lang['namespace'] = 'Namespace';
 $_lang['namespace_filter'] = 'Filter by namespace...';
 $_lang['search_by_key'] = 'Search by key...';
@@ -47,6 +49,7 @@ $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Features';
 $_lang['settings_users'] = 'User';
 $_lang['system_settings'] = 'System Settings';
+$_lang['usergroup'] = 'User Group';
 
 // user settings
 $_lang['setting_allow_mgr_access'] = 'Manager Interface Access';
