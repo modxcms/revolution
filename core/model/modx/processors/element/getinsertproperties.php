@@ -40,7 +40,7 @@ foreach ($properties as $k => $property) {
         case 'combo':
             $data = array();
             foreach ($property['options'] as $option) {
-                $data[] = array($option['name'],$option['value']);
+                $data[] = array($option['value'],$option['name']);
             }
             $props[] = array(
                 'xtype' => 'combo',

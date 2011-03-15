@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3552] Fix issue causing list-xtype properties to be swapped when using drag/drop into field functionality
 - [#4069] Ensure that you cannot delete the last User in the Administrator user group
 - Add fix for ie9 to get tree nodes to work properly
 - Prevent Category ACL queries on Elements if no entries for current context
