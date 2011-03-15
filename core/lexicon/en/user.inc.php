@@ -71,6 +71,7 @@ $_lang['user_err_access_permissions_save'] = 'An error occurred while saving use
 $_lang['user_err_ae_group'] = 'User is already in that group!';
 $_lang['user_err_already_exists'] = 'User name is already in use!';
 $_lang['user_err_already_exists_email'] = 'Email already in use!';
+$_lang['user_err_cannot_delete_last_admin'] = 'You cannot remove the last User in the Administrator group, as this will prevent administration of your site.';
 $_lang['user_err_cannot_delete_self'] = 'You cannot delete yourself!';
 $_lang['user_err_nf'] = 'User not found.';
 $_lang['user_err_not_specified'] = 'No user specified!';
