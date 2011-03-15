@@ -175,6 +175,7 @@ $_lang['updateable'] = 'Updates Available';
 $_lang['uninstall'] = 'Uninstall';
 $_lang['uploaded_on'] = 'Uploaded On';
 $_lang['uploaded_versions'] = 'Uploaded Versions';
+$_lang['username'] = 'Username';
 $_lang['workspace'] = 'Workspace';
 $_lang['workspace_err_nf'] = 'Workspace not found.';
 $_lang['workspace_grabbing'] = 'Grabbing package workspace...';
