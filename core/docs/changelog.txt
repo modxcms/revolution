@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Add username field to modTransportProvider, and send it and UUID to providers during transmissions
 - [#3641] Add base URL for Help links in manager for easier management and customization of URLs
 - [#3552] Fix issue causing list-xtype properties to be swapped when using drag/drop into field functionality
 - [#4069] Ensure that you cannot delete the last User in the Administrator user group

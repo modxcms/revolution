@@ -138,3 +138,12 @@ $class = 'modUserGroup';
 $table = $modx->getTableName($class);
 $description = $this->install->lexicon('add_column',array('column' => 'description','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'description', array('after' => 'name')));
+
+/* add username to modTransportProvider */
+$class = 'transport.modTransportProvider';
+$table = $this->install->xpdo->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'username','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'username',array('after' => 'service_url')));
+
+$description = $this->install->lexicon('add_index',array('index' => 'username','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'username'));

@@ -320,7 +320,7 @@ class modX extends xPDO {
      * @return modX A new modX instance.
      */
     public function __construct($configPath= '', array $options = array()) {
-        global $database_dsn, $database_user, $database_password, $config_options, $table_prefix, $site_id;
+        global $database_dsn, $database_user, $database_password, $config_options, $table_prefix, $site_id, $uuid;
         modX :: protect();
         if (empty ($configPath)) {
             $configPath= MODX_CORE_PATH . 'config/';
@@ -359,6 +359,7 @@ class modX extends xPDO {
             $this->setPackage('modx', MODX_CORE_PATH . 'model/', $table_prefix);
             $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
             if (!empty($site_id)) $this->site_id = $site_id;
+            if (!empty($uuid)) $this->uuid = $uuid;
         } else {
             $this->sendError($this->getOption('error_type', null, 'unavailable'), $options);
         }

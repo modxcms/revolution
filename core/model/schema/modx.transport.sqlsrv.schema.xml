@@ -26,6 +26,7 @@
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" />
         <field key="service_url" dbtype="nvarchar" precision="512" phptype="string" />
+        <field key="username" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="api_key" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="created" dbtype="datetime" phptype="datetime" null="false" />
         <field key="updated" dbtype="datetime" phptype="timestamp" />
@@ -35,6 +36,9 @@
         </index>
         <index alias="api_key" name="api_key" primary="false" unique="false" type="BTREE">
             <column key="api_key" length="" collation="A" null="false" />
+        </index>
+        <index alias="username" name="username" primary="false" unique="false" type="BTREE">
+            <column key="username" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Packages" class="transport.modTransportPackage" local="id" foreign="provider" cardinality="many" owner="local" />

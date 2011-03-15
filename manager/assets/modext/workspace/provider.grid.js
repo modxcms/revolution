@@ -72,6 +72,12 @@ MODx.window.CreateProvider = function(config) {
             ,anchor: '95%'
             ,allowBlank: false
         },{
+            fieldLabel: _('username')
+            ,name: 'username'
+            ,id: 'modx-cprov-username'
+            ,xtype: 'textfield'
+            ,anchor: '95%'
+        },{
             fieldLabel: _('api_key')
             ,name: 'api_key'
             ,id: 'modx-cprov-api_key'
@@ -125,6 +131,12 @@ MODx.window.UpdateProvider = function(config) {
             ,xtype: 'textfield'
             ,anchor: '95%'
             ,allowBlank: false
+        },{
+            fieldLabel: _('username')
+            ,name: 'username'
+            ,id: 'modx-cprov-username'
+            ,xtype: 'textfield'
+            ,anchor: '95%'
         },{
             fieldLabel: _('api_key')
             ,name: 'api_key'
