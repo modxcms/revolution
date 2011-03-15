@@ -84,6 +84,10 @@ Ext.apply = function(o, c, defaults){
             DOC.execCommand("BackgroundImageCache", false, true);
         }catch(e){}
     }
+    if(isIE && check(/msie 9/)) {
+        isIE6 = isIE = false;
+        isChrome = true;
+    }
 
     Ext.apply(Ext, {
         /**
@@ -445,11 +449,11 @@ Ext.urlDecode("foo=1&bar=2&bar=3&bar=4", false); // returns {foo: "1", bar: ["2"
          * @param {Object} scope The scope (<code>this</code> reference) in which the specified function is executed.
          * Defaults to the <code>item</code> at the current <code>index</code>
          * within the passed <code>array</code>.
-         * @return See description for the fn parameter.
+         * @return {Mixed} See description for the fn parameter.
          */
         each : function(array, fn, scope){
             if(Ext.isEmpty(array, true)){
-                return;
+                return null;
             }
             if(!Ext.isIterable(array) || Ext.isPrimitive(array)){
                 array = [array];
