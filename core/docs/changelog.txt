@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3641] Add base URL for Help links in manager for easier management and customization of URLs
 - Add fix for ie9 to get tree nodes to work properly
 - Prevent Category ACL queries on Elements if no entries for current context
 - [#2601] Improve text and drag/drop for weblink/symlink content fields

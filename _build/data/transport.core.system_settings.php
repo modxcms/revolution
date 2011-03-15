@@ -78,6 +78,15 @@ $settings['automatic_alias']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
+$settings['base_help_url']= $xpdo->newObject('modSystemSetting');
+$settings['base_help_url']->fromArray(array (
+  'key' => 'base_help_url',
+  'value' => 'http://rtfm.modx.com/display/revolution20/',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['blocked_minutes']= $xpdo->newObject('modSystemSetting');
 $settings['blocked_minutes']->fromArray(array (
   'key' => 'blocked_minutes',
