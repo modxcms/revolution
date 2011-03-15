@@ -95,6 +95,9 @@ $_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the 
 $_lang['setting_automatic_alias'] = 'Automatically generate alias';
 $_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
 
+$_lang['setting_base_help_url'] = 'Base Help URL';
+$_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';
+
 $_lang['setting_blocked_minutes'] = 'Blocked Minutes';
 $_lang['setting_blocked_minutes_desc'] = 'Here you can enter the number of minutes that a user will be blocked for if they reach their maximum number of allowed failed login attempts. Please enter this value as numbers only (no commas, spaces etc.)';
 
