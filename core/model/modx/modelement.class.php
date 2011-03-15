@@ -350,7 +350,6 @@ class modElement extends modAccessibleSimpleObject {
             $enabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_category_enabled', false);
         }
         if ($enabled) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Checking category ACLs for element ' . get_class($this) . ':' . $this->get('name'));
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
                 $accessTable = $this->xpdo->getTableName('modAccessCategory');
                 $policyTable = $this->xpdo->getTableName('modAccessPolicy');
@@ -381,8 +380,6 @@ class modElement extends modAccessibleSimpleObject {
             } else {
                 $policy = $this->_policies[$context];
             }
-        } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Skipping category ACLs for element ' . get_class($this) . ':' . $this->get('name'));
         }
         return $policy;
     }
