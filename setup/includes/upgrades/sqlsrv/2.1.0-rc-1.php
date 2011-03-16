@@ -85,3 +85,28 @@ $this->processResults($class, $description, array($modx->manager, 'addField'), a
 
 $description = $this->install->lexicon('add_index',array('index' => 'username','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'username'));
+
+/* add tree_show_resource_ids+tree_show_element_ids to all AdministratorTemplate-based policies */
+$adminTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'AdministratorTemplate'));
+if ($adminTpl) {
+    $policies = $adminTpl->getMany('Policies');
+    if (!empty($policies) && is_array($policies)) {
+        foreach ($policies as $policy) {
+            $changed = false;
+            $data = $policy->get('data');
+            if (!isset($data['tree_show_resource_ids'])) {
+                $data['tree_show_resource_ids'] = true;
+                $changed = true;
+            }
+            if (!isset($data['tree_show_element_ids'])) {
+                $data['tree_show_element_ids'] = true;
+                $changed = true;
+            }
+            if ($changed) {
+                ksort($data);
+                $policy->set('data',$data);
+                $policy->save();
+            }
+        }
+    }
+}

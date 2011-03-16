@@ -531,6 +531,16 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'tree_show_element_ids',
+    'description' => 'perm.tree_show_element_ids_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'tree_show_resource_ids',
+    'description' => 'perm.tree_show_resource_ids_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'undelete_document',
     'description' => 'perm.undelete_document_desc',
     'value' => true,

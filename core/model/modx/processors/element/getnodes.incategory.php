@@ -70,9 +70,10 @@ foreach ($elements as $element) {
     $class .= $modx->hasPermission('edit_'.$elementIdentifier) && $element->checkPolicy(array('save','view')) ? ' pedit' : '';
     $class .= $modx->hasPermission('delete_'.$elementIdentifier) && $element->checkPolicy('remove') ? ' pdelete' : '';
     $class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
-    
+
+    $idNote = $modx->hasPermission('tree_show_element_ids') ? ' (' . $element->get('id') . ')' : '';
     $nodes[] = array(
-        'text' => strip_tags($name) . ' (' . $element->get('id') . ')',
+        'text' => strip_tags($name) . $idNote,
         'id' => 'n_'.$elementIdentifier.'_element_'.$element->get('id').'_'.$element->get('category'),
         'pk' => $element->get('id'),
         'category' => $categoryId,
