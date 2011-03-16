@@ -84,6 +84,23 @@ $actions = $modx->request->getAllActionIDs();
 $hasEditPerm = $modx->hasPermission('edit_document');
 $collection = $modx->getCollection($itemClass, $c);
 
+$permissionList = array(
+    'save_document' => $modx->hasPermission('save_document') ? 'psave' : '',
+    'view_document' => $modx->hasPermission('view_document') ? 'pview' : '',
+    'edit_document' => $modx->hasPermission('edit_document') ? 'pedit' : '',
+    'new_document' => $modx->hasPermission('new_document') ? 'pnew' : '',
+    'delete_document' => $modx->hasPermission('delete_document') ? 'pdelete' : '',
+    'undelete_document' => $modx->hasPermission('undelete_document') ? 'pundelete' : '',
+    'publish_document' => $modx->hasPermission('publish_document') ? 'ppublish' : '',
+    'unpublish_document' => $modx->hasPermission('unpublish_document') ? 'punpublish' : '',
+    'resource_quick_create' => $modx->hasPermission('resource_quick_create') ? 'pqcreate' : '',
+    'resource_quick_update' => $modx->hasPermission('resource_quick_update') ? 'pqupdate' : '',
+    'edit_context' => $modx->hasPermission('edit_context') ? 'pedit' : '',
+    'new_context' => $modx->hasPermission('new_context') ? 'pnew' : '',
+    'delete_context' => $modx->hasPermission('delete_context') ? 'pdelete' : '',
+    'new_context_document' => $modx->hasPermission('new_document') ? 'pnewdoc' : '',
+);
+
 $nodeField = $modx->getOption('resource_tree_node_name',$scriptProperties,'pagetitle');
 $qtipField = $modx->getOption('resource_tree_node_tooltip',$scriptProperties,'');
 $items = array();
@@ -92,11 +109,13 @@ while ($item) {
     $canList = $item->checkPolicy('list');
     if ($canList) {
         if ($itemClass == 'modContext') {
-            $class = 'icon-context';
-            $class .= $modx->hasPermission('edit_context') ? ' pedit' : '';
-            $class .= $modx->hasPermission('new_context') ? ' pnew' : '';
-            $class .= $modx->hasPermission('delete_document') ? ' pdelete' : '';
-            $class .= $modx->hasPermission('new_document') ? ' pnewdoc' : '';
+            $class = array();
+            $class[] = 'icon-context';
+            $class[] = !empty($permissionList['edit_context']) ? $permissionList['edit_context'] : '';
+            $class[] = !empty($permissionList['new_context']) ? $permissionList['new_context'] : '';
+            $class[] = !empty($permissionList['delete_context']) ? $permissionList['delete_context'] : '';
+            $class[] = !empty($permissionList['new_context_document']) ? $permissionList['new_context_document'] : '';
+            $class[] = !empty($permissionList['resource_quick_create']) ? $permissionList['resource_quick_create'] : '';
 
             $items[] = array(
                 'text' => $item->get('key'),
@@ -104,7 +123,7 @@ while ($item) {
                 'pk' => $item->get('key'),
                 'ctx' => $item->get('key'),
                 'leaf' => false,
-                'cls' => $class,
+                'cls' => implode(' ',$class),
                 'qtip' => $item->get('description') != '' ? strip_tags($item->get('description')) : '',
                 'type' => 'modContext',
                 'page' => empty($scriptProperties['nohref']) ? '?a='.$actions['context/update'].'&key='.$item->get('key') : '',
@@ -112,21 +131,24 @@ while ($item) {
         } else {
             $hasChildren = (int)$item->get('childrenCount') > 0 ? true : false;
 
-            $class = 'icon-'.strtolower(str_replace('mod','',$item->get('class_key')));
-            $class .= $item->isfolder ? ' icon-folder' : ' x-tree-node-leaf icon-resource';
-            $class .= ($item->get('published') ? '' : ' unpublished')
-                .($item->get('deleted') ? ' deleted' : '')
-                .($item->get('hidemenu') == 1 ? ' hidemenu' : '');
+            $class = array();
+            $class[] = 'icon-'.strtolower(str_replace('mod','',$item->get('class_key')));
+            $class[] = $item->isfolder ? ' icon-folder' : 'x-tree-node-leaf icon-resource';
+            $class[] = ($item->get('published') ? '' : 'unpublished')
+                .($item->get('deleted') ? 'deleted' : '')
+                .($item->get('hidemenu') == 1 ? 'hidemenu' : '');
 
-            $class .= $modx->hasPermission('save_document') ? ' psave' : '';
-            $class .= $modx->hasPermission('view_document') ? ' pview' : '';
-            $class .= $modx->hasPermission('edit_document') ? ' pedit' : '';
-            $class .= $modx->hasPermission('new_document') ? ' pnew' : '';
-            $class .= $modx->hasPermission('delete_document') ? ' pdelete' : '';
-            $class .= $modx->hasPermission('undelete_document') ? ' pundelete' : '';
-            $class .= $modx->hasPermission('publish_document') ? ' ppublish' : '';
-            $class .= $modx->hasPermission('unpublish_document') ? ' punpublish' : '';
-            $class .= $hasChildren ? ' haschildren' : '';
+            $class[] = !empty($permissionList['save_document']) ? $permissionList['save_document'] : '';
+            $class[] = !empty($permissionList['view_document']) ? $permissionList['view_document'] : '';
+            $class[] = !empty($permissionList['edit_document']) ? $permissionList['edit_document'] : '';
+            $class[] = !empty($permissionList['new_document']) ? $permissionList['new_document'] : '';
+            $class[] = !empty($permissionList['delete_document']) ? $permissionList['delete_document'] : '';
+            $class[] = !empty($permissionList['undelete_document']) ? $permissionList['undelete_document'] : '';
+            $class[] = !empty($permissionList['publish_document']) ? $permissionList['publish_document'] : '';
+            $class[] = !empty($permissionList['unpublish_document']) ? $permissionList['unpublish_document'] : '';
+            $class[] = !empty($permissionList['resource_quick_create']) ? $permissionList['resource_quick_create'] : '';
+            $class[] = !empty($permissionList['resource_quick_update']) ? $permissionList['resource_quick_update'] : '';
+            $class[] = $hasChildren ? 'haschildren' : '';
 
             $qtip = '';
             if (!empty($qtipField)) {
@@ -154,7 +176,7 @@ while ($item) {
                 'text' => strip_tags($item->$nodeField).$idNote,
                 'id' => $item->context_key . '_'.$item->id,
                 'pk' => $item->id,
-                'cls' => $class,
+                'cls' => implode(' ',$class),
                 'type' => 'modResource',
                 'classKey' => $item->class_key,
                 'ctx' => $item->context_key,
