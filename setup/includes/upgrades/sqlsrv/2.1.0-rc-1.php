@@ -102,6 +102,14 @@ if ($adminTpl) {
                 $data['tree_show_element_ids'] = true;
                 $changed = true;
             }
+            if (!isset($data['resource_quick_create'])) {
+                $data['resource_quick_create'] = true;
+                $changed = true;
+            }
+            if (!isset($data['resource_quick_update'])) {
+                $data['resource_quick_update'] = true;
+                $changed = true;
+            }
             if ($changed) {
                 ksort($data);
                 $policy->set('data',$data);
