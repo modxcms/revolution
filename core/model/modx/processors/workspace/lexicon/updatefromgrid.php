@@ -33,6 +33,7 @@ if (!empty($entries[$_DATA['name']]) && $entries[$_DATA['name']] == $_DATA['valu
         $entry->set('language',$_DATA['language']);
         $entry->set('topic',$_DATA['topic']);
     }
+    $entry->set('editedon',date('Y-m-d h:i:s'));
     $entry->set('value',$_DATA['value']);
 
     if ($entry->save() == false) {

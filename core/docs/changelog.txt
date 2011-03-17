@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3765] Ensure entries editedon values are set when editing a Lexicon Entry
 - Update ExtJS to 3.3.1
 - [#4073] Add session_name, session_cookie_path, session_cookie_domain as System Settings with blank default values
 - [#4077] Add resource_quick_create and resource_quick_update Permissions to restrict access to Quick actions on Resource tree

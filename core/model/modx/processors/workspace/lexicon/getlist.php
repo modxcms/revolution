@@ -96,7 +96,7 @@ foreach ($entries as $name => $value) {
         $entryArray['editedon'] = $entryArray['editedon'] == '0000-00-00 00:00:00'
                                || $entryArray['editedon'] == '-001-11-30 00:00:00'
                                || empty($entryArray['editedon'])
-            ? ''
+            ? strftime('%b %d, %Y %I:%M %p',strtotime($entryArray['createdon']))
             : strftime('%b %d, %Y %I:%M %p',strtotime($entryArray['editedon']));
         $entryArray['overridden'] = 1;
     }

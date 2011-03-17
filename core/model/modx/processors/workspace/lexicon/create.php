@@ -19,6 +19,7 @@ if ($entry) return $modx->error->failure($modx->lexicon('entry_err_ae'));
 
 $entry = $modx->newObject('modLexiconEntry');
 $entry->fromArray($scriptProperties);
+$entry->set('editedon',date('Y-m-d h:i:s'));
 
 if ($entry->save() == false) {
     return $modx->error->failure($modx->lexicon('entry_err_save'));
