@@ -1198,10 +1198,28 @@ $settings['server_protocol']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['session_cookie_domain']= $xpdo->newObject('modSystemSetting');
+$settings['session_cookie_domain']->fromArray(array (
+  'key' => 'session_cookie_domain',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
 $settings['session_cookie_lifetime']= $xpdo->newObject('modSystemSetting');
 $settings['session_cookie_lifetime']->fromArray(array (
   'key' => 'session_cookie_lifetime',
   'value' => '604800',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
+$settings['session_cookie_path']= $xpdo->newObject('modSystemSetting');
+$settings['session_cookie_path']->fromArray(array (
+  'key' => 'session_cookie_path',
+  'value' => '',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'session',
@@ -1220,6 +1238,15 @@ $settings['session_handler_class']= $xpdo->newObject('modSystemSetting');
 $settings['session_handler_class']->fromArray(array (
   'key' => 'session_handler_class',
   'value' => 'modSessionHandler',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+), '', true, true);
+$settings['session_name']= $xpdo->newObject('modSystemSetting');
+$settings['session_name']->fromArray(array (
+  'key' => 'session_name',
+  'value' => '',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'session',

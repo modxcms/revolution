@@ -1955,7 +1955,7 @@ class modX extends xPDO {
             if ($gcMaxlifetime > 0) {
                 ini_set('session.gc_maxlifetime', $gcMaxlifetime);
             }
-            $site_sessionname= $this->getOption('session_name', '');
+            $site_sessionname= $this->getOption('session_name', null,'');
             if (!empty($site_sessionname)) session_name($site_sessionname);
             session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure);
             session_start();

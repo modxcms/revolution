@@ -494,22 +494,22 @@ $_lang['setting_server_protocol_http'] = 'http';
 $_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Session Cookie Domain';
-$_lang['setting_session_cookie_domain_desc'] = 'Use this setting to customize the session cookie domain.';
+$_lang['setting_session_cookie_domain_desc'] = 'Use this setting to customize the session cookie domain. Leave blank to use the current domain.';
 
 $_lang['setting_session_cookie_lifetime'] = 'Session Cookie Lifetime';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Use this setting to customize the session cookie lifetime in seconds.  This is used to set the lifetime of a client session cookie when they choose the \'remember me\' option on login.';
 
 $_lang['setting_session_cookie_path'] = 'Session Cookie Path';
-$_lang['setting_session_cookie_path_desc'] = 'Use this setting to customize the cookie path for identifying site specific session cookies.';
+$_lang['setting_session_cookie_path_desc'] = 'Use this setting to customize the cookie path for identifying site specific session cookies. Leave blank to use MODX_BASE_URL.';
 
 $_lang['setting_session_cookie_secure'] = 'Session Cookie Secure';
 $_lang['setting_session_cookie_secure_desc'] = 'Enable this setting to use secure session cookies.';
 
-$_lang['setting_session_handler_class'] = 'Session Handler Classname';
+$_lang['setting_session_handler_class'] = 'Session Handler Class Name';
 $_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'Session Name';
-$_lang['setting_session_name_desc'] = 'Use this setting to customize the session name used for the sessions in MODx.';
+$_lang['setting_session_name_desc'] = 'Use this setting to customize the session name used for the sessions in MODx. Leave blank to use the default PHP session name.';
 
 $_lang['setting_settings_version'] = 'Settings Version';
 $_lang['setting_settings_version_desc'] = 'The current installed version of MODx.';
@@ -520,7 +520,7 @@ $_lang['setting_settings_distro_desc'] = 'The current installed distribution of 
 $_lang['setting_set_header'] = 'Set HTTP Headers';
 $_lang['setting_set_header_desc'] = 'When enabled, MODx will attempt to set the HTTP headers for Resources.';
 
-$_lang['setting_signupemail_message'] = 'Signup e-mail';
+$_lang['setting_signupemail_message'] = 'Sign-up e-mail';
 $_lang['setting_signupemail_message_desc'] = 'Here you can set the message sent to your users when you create an account for them and let MODx send them an e-mail containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site url, <br />[[+uid]] - User\'s Login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the e-mail, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]] Content Manager:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
