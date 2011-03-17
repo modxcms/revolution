@@ -42,8 +42,10 @@ $class .= $modx->hasPermission('delete_category') ? ' pdelcat' : '';
 $categories = $modx->getCollection('modCategory',$c);
 foreach ($categories as $category) {
     if (!$category->checkPolicy('list')) continue;
+
+    $idNote = $modx->hasPermission('tree_show_element_ids') ? ' (' . $category->get('id') . ')' : '';
     $nodes[] = array(
-        'text' => strip_tags($category->get('category')) . ' (' . $category->get('id') . ')',
+        'text' => strip_tags($category->get('category')).$idNote,
         'id' => 'n_category_'.$category->get('id'),
         'pk' => $category->get('id'),
         'data' => $category->toArray(),

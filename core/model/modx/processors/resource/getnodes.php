@@ -149,8 +149,9 @@ while ($item) {
                 }
             }
 
+            $idNote = $modx->hasPermission('tree_show_resource_ids') ? ' <span dir="ltr">('.$item->id.')</span>' : '';
             $itemArray = array(
-                'text' => strip_tags($item->$nodeField).' <span dir="ltr">('.$item->id.')</span>',
+                'text' => strip_tags($item->$nodeField).$idNote,
                 'id' => $item->context_key . '_'.$item->id,
                 'pk' => $item->id,
                 'cls' => $class,

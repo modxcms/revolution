@@ -80,8 +80,9 @@ foreach ($elements as $element) {
     $class .= $modx->hasPermission('delete_'.$g[1]) && $element->checkPolicy('remove') ? ' pdelete' : '';
     $class .= $modx->hasPermission('new_category') ? ' pnewcat' : '';
 
+    $idNote = $modx->hasPermission('tree_show_element_ids') ? ' (' . $element->get('id') . ')' : '';
     $nodes[] = array(
-        'text' => strip_tags($name) . ' (' . $element->get('id') . ')',
+        'text' => strip_tags($name) . $idNote,
         'id' => 'n_'.$g[1].'_element_'.$element->get('id').'_0',
         'pk' => $element->get('id'),
         'category' => 0,
