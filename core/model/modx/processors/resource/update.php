@@ -136,33 +136,15 @@ if ($resource->get('parent') != $scriptProperties['parent']) {
 }
 
 /* handle checkboxes */
-if (isset($scriptProperties['hidemenu'])) {
-    $scriptProperties['hidemenu'] = empty($scriptProperties['hidemenu']) || $scriptProperties['hidemenu'] === 'false' ? 0 : 1;
-}
-if (isset($scriptProperties['isfolder'])) {
-    $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) || $scriptProperties['isfolder'] === 'false' ? 0 : 1;
-}
-if (isset($scriptProperties['richtext'])) {
-    $scriptProperties['richtext'] = empty($scriptProperties['richtext']) || $scriptProperties['richtext'] === 'false' ? 0 : 1;
-}
-if (isset($scriptProperties['published'])) {
-    $scriptProperties['published'] = empty($scriptProperties['published']) || $scriptProperties['published'] === 'false' ? 0 : 1;
-}
-if (isset($scriptProperties['cacheable'])) {
-    $scriptProperties['cacheable'] = empty($scriptProperties['cacheable']) || $scriptProperties['cacheable'] === 'false' ? 0 : 1;
-}
-if (isset($scriptProperties['searchable'])) {
-    $scriptProperties['searchable'] = empty($scriptProperties['searchable']) || $scriptProperties['searchable'] === 'false' ? 0 : 1;
-}
-if (isset($scriptProperties['syncsite'])) {
-    $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) || $scriptProperties['syncsite'] === 'false' ? 0 : 1;
-}
-if (isset($scriptProperties['deleted'])) {
-    $scriptProperties['deleted'] = empty($scriptProperties['deleted']) || $scriptProperties['deleted'] === 'false' ? 0 : 1;
-}
-if (isset($scriptProperties['uri_override'])) {
-    $scriptProperties['uri_override'] = empty($scriptProperties['uri_override']) || $scriptProperties['uri_override'] === 'false' ? 0 : 1;
-}
+$scriptProperties['hidemenu'] = empty($scriptProperties['hidemenu']) || $scriptProperties['hidemenu'] === 'false' ? 0 : 1;
+$scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) || $scriptProperties['isfolder'] === 'false' ? 0 : 1;
+$scriptProperties['richtext'] = empty($scriptProperties['richtext']) || $scriptProperties['richtext'] === 'false' ? 0 : 1;
+$scriptProperties['published'] = empty($scriptProperties['published']) || $scriptProperties['published'] === 'false' ? 0 : 1;
+$scriptProperties['cacheable'] = empty($scriptProperties['cacheable']) || $scriptProperties['cacheable'] === 'false' ? 0 : 1;
+$scriptProperties['searchable'] = empty($scriptProperties['searchable']) || $scriptProperties['searchable'] === 'false' ? 0 : 1;
+$scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) || $scriptProperties['syncsite'] === 'false' ? 0 : 1;
+$scriptProperties['deleted'] = empty($scriptProperties['deleted']) || $scriptProperties['deleted'] === 'false' ? 0 : 1;
+$scriptProperties['uri_override'] = empty($scriptProperties['uri_override']) || $scriptProperties['uri_override'] === 'false' ? 0 : 1;
 
 /* get the targeted working context */
 $workingContext = $modx->getContext($scriptProperties['context_key']);
