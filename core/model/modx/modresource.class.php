@@ -678,15 +678,21 @@ class modResource extends modAccessibleSimpleObject {
             if ($workingContext->getOption('use_alias_path', false)) {
                 $pathParentId= $fields['parent'];
                 $parentResources= array ();
-                $currResource= $this->xpdo->getObject('modResource', $pathParentId);
+                $query = $this->xpdo->newQuery('modResource');
+                $query->select($this->xpdo->getSelectColumns('modResource', '', '', array('parent', 'alias')));
+                $query->where("{$this->xpdo->escape('id')} = ?");
+                $query->prepare();
+                $query->stmt->execute(array($pathParentId));
+                $currResource= $query->stmt->fetch(PDO::FETCH_ASSOC);
                 while ($currResource) {
-                    $parentAlias= $currResource->get('alias');
+                    $parentAlias= $currResource['alias'];
                     if (empty ($parentAlias)) {
                         $parentAlias= "{$pathParentId}";
                     }
                     $parentResources[]= "{$parentAlias}";
-                    $pathParentId= $currResource->get('parent');
-                    $currResource= $currResource->getOne('Parent');
+                    $pathParentId= $currResource['parent'];
+                    $query->stmt->execute(array($pathParentId));
+                    $currResource= $query->stmt->fetch(PDO::FETCH_ASSOC);
                 }
                 $aliasPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
                 if (!empty($aliasPath) && $aliasPath[-1] !== '/') $aliasPath .= '/';
