@@ -651,10 +651,10 @@ class modResource extends modAccessibleSimpleObject {
      */
     public function getAliasPath($alias = '',array $fields = array()) {
         if (empty($fields)) $fields = $this->toArray();
-
+        $workingContext = $this->xpdo->getContext($fields['context_key']);
         if (empty($fields['uri_override']) || empty($fields['uri'])) {
             /* auto assign alias if using automatic_alias */
-            if (empty($alias) && $this->xpdo->getOption('automatic_alias', null, false)) {
+            if (empty($alias) && $workingContext->getOption('automatic_alias', false)) {
                 $alias = $this->cleanAlias($fields['pagetitle']);
             } else {
                 $alias = $this->cleanAlias($alias);
@@ -663,7 +663,7 @@ class modResource extends modAccessibleSimpleObject {
             $fullAlias= $alias;
             $isHtml= true;
             $extension= '';
-            $containerSuffix= $this->xpdo->getOption('container_suffix',null,'');
+            $containerSuffix= $workingContext->getOption('container_suffix', '');
             /* process content type */
             if (!empty($fields['content_type']) && $contentType= $this->xpdo->getObject('modContentType', $fields['content_type'])) {
                 $extension= $contentType->getExtension();
@@ -675,7 +675,7 @@ class modResource extends modAccessibleSimpleObject {
             }
             $aliasPath= '';
             /* if using full alias paths, calculate here */
-            if ($this->xpdo->getOption('use_alias_path',null,false)) {
+            if ($workingContext->getOption('use_alias_path', false)) {
                 $pathParentId= $fields['parent'];
                 $parentResources= array ();
                 $currResource= $this->xpdo->getObject('modResource', $pathParentId);
@@ -708,14 +708,16 @@ class modResource extends modAccessibleSimpleObject {
      */
     public function isDuplicateAlias($aliasPath = '', $contextKey = '') {
         if (empty($aliasPath)) $aliasPath = $this->getAliasPath($this->get('alias'));
-        if (empty($contextKey)) $contextKey = $this->get('context_key');
-        $duplicates = $this->xpdo->getCount('modResource', array(
+        $criteria = array(
             'id:!=' => $this->get('id'),
             'uri' => $aliasPath,
-            'context_key' => $contextKey,
             'deleted' => false,
             'published' => true
-        ));
+        );
+        if (!empty($contextKey)) {
+            $criteria['context_key'] = $contextKey;
+        }
+        $duplicates = $this->xpdo->getCount('modResource', $criteria);
         return $duplicates > 0;
     }
 
@@ -754,10 +756,11 @@ class modResource extends modAccessibleSimpleObject {
 
         /* get new alias */
         $alias = $newResource->cleanAlias($newName);
-        if ($this->xpdo->getOption('friendly_urls',null,false)) {
+        if ($this->xpdo->getOption('friendly_urls', $options, false)) {
             /* auto assign alias */
             $aliasPath = $newResource->getAliasPath($newName);
-            if ($newResource->isDuplicateAlias($aliasPath)) {
+            $dupeContext = $this->xpdo->getOption('global_duplicate_uri_check', $options, false) ? '' : $newResource->get('context_key');
+            if ($newResource->isDuplicateAlias($aliasPath, $dupeContext)) {
                 $alias = '';
             }
         }

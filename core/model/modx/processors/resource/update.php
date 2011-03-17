@@ -120,6 +120,21 @@ if (isset($scriptProperties['parent'])) {
     $scriptProperties['parent'] = empty($scriptProperties['parent']) ? 0 : intval($scriptProperties['parent']);
 }
 
+/* if parent changed, set context to new parent's context */
+$oldparent = null;
+$oldContext = null;
+if ($resource->get('parent') != $scriptProperties['parent']) {
+    $oldparent = $resource->getOne('Parent');
+    $newparent = $modx->getObject('modResource', $scriptProperties['parent']);
+    if ($newparent && $newparent->get('context_key') !== $resource->get('context_key')) {
+        $oldContext = $modx->getContext($resource->get('context_key'));
+        if ($resource->get('id') == $oldContext->getOption('site_start')) {
+            return $modx->error->failure($modx->lexicon('resource_err_move_sitestart'));
+        }
+        $scriptProperties['context_key'] = $newparent->get('context_key');
+    }
+}
+
 /* handle checkboxes */
 if (isset($scriptProperties['hidemenu'])) {
     $scriptProperties['hidemenu'] = empty($scriptProperties['hidemenu']) || $scriptProperties['hidemenu'] === 'false' ? 0 : 1;
@@ -149,17 +164,24 @@ if (isset($scriptProperties['uri_override'])) {
     $scriptProperties['uri_override'] = empty($scriptProperties['uri_override']) || $scriptProperties['uri_override'] === 'false' ? 0 : 1;
 }
 
+/* get the targeted working context */
+$workingContext = $modx->getContext($scriptProperties['context_key']);
+
 /* friendly url alias checks */
-if ($modx->getOption('friendly_alias_urls') && isset($scriptProperties['alias'])) {
+if ($workingContext->getOption('friendly_urls', false)) {
     /* auto assign alias */
+    $duplicateContext = $workingContext->getOption('global_duplicate_uri_check', false) ? '' : $scriptProperties['context_key'];
     $aliasPath = $resource->getAliasPath($scriptProperties['alias'],$scriptProperties);
-    $duplicateId = $resource->isDuplicateAlias($aliasPath);
-    if (!$modx->getOption('allow_duplicate_alias',null,false) && !empty($duplicateId)) {
-        $err = $modx->lexicon('duplicate_alias_found',array(
+    $duplicateId = $resource->isDuplicateAlias($aliasPath, $duplicateContext);
+    if (!empty($duplicateId)) {
+        $err = $modx->lexicon('duplicate_uri_found', array(
             'id' => $duplicateId,
-            'alias' => $aliasPath,
+            'uri' => $aliasPath,
         ));
-        $modx->error->addField('alias', $err);
+        $modx->error->addField('uri', $err);
+        if (!isset($scriptProperties['uri_override']) || $scriptProperties['uri_override'] !== 1) {
+            $modx->error->addField('alias', $err);
+        }
     }
 }
 
@@ -212,10 +234,11 @@ if (!$modx->hasPermission('publish_document')) {
 
 /* check to prevent unpublishing of site_start */
 $oldparent_id = $resource->get('parent');
-if ($resource->get('id') == $modx->getOption('site_start') && (isset($scriptProperties['published']) && empty($scriptProperties['published']))) {
+$siteStart = ($resource->get('id') == $workingContext->getOption('site_start') || $resource->get('id') == $modx->getOption('site_start'));
+if ($siteStart && (isset($scriptProperties['published']) && empty($scriptProperties['published']))) {
     return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart'));
 }
-if ($resource->get('id') == $modx->getOption('site_start')&& (!empty($scriptProperties['pub_date']) || !empty($scriptProperties['unpub_date']))) {
+if ($siteStart && (!empty($scriptProperties['pub_date']) || !empty($scriptProperties['unpub_date']))) {
     return $modx->error->failure($modx->lexicon('resource_err_unpublish_sitestart_dates'));
 }
 
@@ -258,8 +281,6 @@ $resource->fromArray($scriptProperties);
 $resource->set('editedby', $modx->user->get('id'));
 $resource->set('editedon', time(), 'integer');
 
-//return $modx->error->failure(print_r($resource->toArray(),true));
-
 /* invoke OnBeforeDocFormSave event, and allow non-empty responses to prevent save */
 $OnBeforeDocFormSave = $modx->invokeEvent('OnBeforeDocFormSave',array(
     'mode' => modSystemEvent::MODE_UPD,
@@ -285,29 +306,16 @@ if ($resource->save() == false) {
     return $modx->error->failure($modx->lexicon('resource_err_save'));
 }
 
-/* if parent changed, change folder status of old and new parents
- * also verify context, if changed  */
-if ($resource->get('parent') != $oldparent_id) {
-    $oldparent = $modx->getObject('modResource',$oldparent_id);
-    if ($oldparent != null) {
-        $opc = $modx->getCount('modResource',array('parent' => $oldparent->get('id')));
-        if ($opc <= 0 || $opc == null) {
-            $oldparent->set('isfolder',false);
-            $oldparent->save();
-        }
+if ($oldparent !== null && $newparent !== null) {
+    $opc = $modx->getCount('modResource', array('parent' => $oldparent->get('id')));
+    if ($opc <= 0 || $opc == null) {
+        $oldparent->set('isfolder', false);
+        $oldparent->save();
     }
 
-    $newParent = $modx->getObject('modResource',$resource->get('parent'));
-    if ($newParent && $newParent instanceof modResource) {
-        $newParent->set('isfolder',true);
-        $newParent->save();
-
-        /* set context to new parent context */
-        $resource->set('context_key',$newParent->get('context_key'));
-        $resource->save();
-    }
+    $newParent->set('isfolder', true);
+    $newParent->save();
 }
-
 
 /* save TVs */
 if (!empty($scriptProperties['tvs'])) {

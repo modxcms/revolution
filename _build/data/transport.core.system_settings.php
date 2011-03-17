@@ -15,15 +15,6 @@ $settings['allow_tags_in_post']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
-$settings['allow_duplicate_alias']= $xpdo->newObject('modSystemSetting');
-$settings['allow_duplicate_alias']->fromArray(array (
-  'key' => 'allow_duplicate_alias',
-  'value' => false,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'furls',
-  'editedon' => null,
-), '', true, true);
 $settings['allow_multiple_emails']= $xpdo->newObject('modSystemSetting');
 $settings['allow_multiple_emails']->fromArray(array (
   'key' => 'allow_multiple_emails',
@@ -575,15 +566,6 @@ $settings['friendly_alias_trim_chars']->fromArray(array (
   'area' => 'furls',
   'editedon' => null,
 ), '', true, true);
-$settings['friendly_alias_urls']= $xpdo->newObject('modSystemSetting');
-$settings['friendly_alias_urls']->fromArray(array (
-  'key' => 'friendly_alias_urls',
-  'value' => '1',
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'furls',
-  'editedon' => null,
-), '', true, true);
 $settings['friendly_alias_word_delimiter']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_alias_word_delimiter']->fromArray(array (
   'key' => 'friendly_alias_word_delimiter',
@@ -605,6 +587,15 @@ $settings['friendly_alias_word_delimiters']->fromArray(array (
 $settings['friendly_urls']= $xpdo->newObject('modSystemSetting');
 $settings['friendly_urls']->fromArray(array (
   'key' => 'friendly_urls',
+  'value' => '0',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+), '', true, true);
+$settings['global_duplicate_uri_check']= $xpdo->newObject('modSystemSetting');
+$settings['global_duplicate_uri_check']->fromArray(array (
+  'key' => 'global_duplicate_uri_check',
   'value' => '0',
   'xtype' => 'combo-boolean',
   'namespace' => 'core',

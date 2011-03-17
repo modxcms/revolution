@@ -231,15 +231,15 @@ class modRequest {
         $identifier = '';
         switch ($method) {
             case 'alias' :
-                $rAlias = $this->modx->getOption('request_param_alias',null,'q');
+                $rAlias = $this->modx->getOption('request_param_alias', null, 'q');
                 $identifier = isset ($_REQUEST[$rAlias]) ? $_REQUEST[$rAlias] : $identifier;
                 break;
             case 'id' :
-                $rId = $this->modx->getOption('request_param_id',null,'id');
+                $rId = $this->modx->getOption('request_param_id', null, 'id');
                 $identifier = isset ($_REQUEST[$rId]) ? $_REQUEST[$rId] : $identifier;
                 break;
             default :
-                $identifier = $this->modx->getOption('site_start',1);
+                $identifier = $this->modx->getOption('site_start', null, 1);
         }
         return $identifier;
     }
@@ -252,11 +252,11 @@ class modRequest {
      */
     public function _cleanResourceIdentifier($identifier) {
         if (empty ($identifier)) {
-            $identifier = $this->modx->getOption('site_start',1);
+            $identifier = $this->modx->getOption('site_start', null, 1);
             $this->modx->resourceMethod = 'id';
         }
-        elseif ($this->modx->getOption('friendly_urls',false)) {
-            $containerSuffix = trim($this->modx->getOption('container_suffix',null,''));
+        elseif ($this->modx->getOption('friendly_urls', null, false)) {
+            $containerSuffix = trim($this->modx->getOption('container_suffix', null, ''));
             if (!isset ($this->modx->aliasMap[$identifier])) {
                 if (!empty ($containerSuffix)) {
                     $suffixPos = strpos($identifier, $containerSuffix);
@@ -269,14 +269,14 @@ class modRequest {
                         $identifier = "{$identifier}{$containerSuffix}";
                     }
                     if (isset ($this->modx->aliasMap[$identifier])) {
-                        $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier]);
+                        $url = $this->modx->makeUrl($this->modx->aliasMap[$identifier], '', '', 'full');
                         $this->modx->sendRedirect($url);
                     }
                     $this->modx->resourceMethod = 'alias';
                 }
             }
-            elseif ($this->modx->getOption('site_start',null,1) == $this->modx->aliasMap[$identifier]) {
-                $this->modx->sendRedirect($this->modx->getOption('site_url',MODX_SITE_URL));
+            elseif ($this->modx->getOption('site_start', null, 1) == $this->modx->aliasMap[$identifier]) {
+                $this->modx->sendRedirect($this->modx->getOption('site_url', null, MODX_SITE_URL));
             } else {
                 $this->modx->resourceMethod = 'alias';
             }
@@ -299,7 +299,7 @@ class modRequest {
         }
         modX :: sanitize($_COOKIE, $modxtags);
         modX :: sanitize($_REQUEST, $modxtags);
-        $rAlias = $this->modx->getOption('request_param_alias',null,'q');
+        $rAlias = $this->modx->getOption('request_param_alias', null, 'q');
         if (isset ($_GET[$rAlias])) {
             $_GET[$rAlias] = preg_replace("/[^A-Za-z0-9_\-\.\/]/", "", $_GET[$rAlias]);
         }

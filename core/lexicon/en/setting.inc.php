@@ -71,9 +71,6 @@ $_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want t
 $_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
 $_lang['setting_access_policies_version_desc'] = 'The version of the Access Policy system. DO NOT CHANGE.';
 
-$_lang['setting_allow_duplicate_alias'] = 'Allow duplicate aliases';
-$_lang['setting_allow_duplicate_alias_desc'] = 'If set to \'yes\', this will allow duplicate aliases to be saved. <strong>NOTE: This option should be used with \'Friendly alias path\' option set to \'Yes\' in order to avoid problems when referencing a resource.</strong>';
-
 $_lang['setting_allow_tags_in_post'] = 'Allow HTML Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST actions within the manager will strip out any tags. MODx Recommends to leave this set at true.';
 
@@ -265,9 +262,6 @@ $_lang['setting_friendly_alias_translit_class_path_desc'] = 'The model package l
 $_lang['setting_friendly_alias_trim_chars'] = 'FURL Alias Trim Characters';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Characters to trim from the ends of a provided Resource alias.';
 
-$_lang['setting_friendly_alias_urls'] = 'Use Friendly Aliases';
-$_lang['setting_friendly_alias_urls_desc'] = 'If you are using friendly URLs, and the resource has an alias, the alias will always have precedence over the friendly URL. By setting this option to \'Yes\', the Content Type suffix of the Resource will also be applied to the alias. For example, if your Resource with ID 1 has an alias of `introduction`, and you\'ve set a Content Type suffix of `.html`, setting this option to `yes` will generate `introduction.html`. If there\'s no alias, MODx will generate `1.html` as link.';
-
 $_lang['setting_friendly_alias_word_delimiter'] = 'FURL Alias Word Delimiter';
 $_lang['setting_friendly_alias_word_delimiter_desc'] = 'The preferred word delimiter for friendly URL alias slugs.';
 
@@ -277,6 +271,9 @@ $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Characters which repres
 $_lang['setting_friendly_urls'] = 'Use Friendly URLs';
 $_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODx. Please note, this only works for MODx installations running on Apache, and you\'ll need to write a .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
 $_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
+
+$_lang['setting_global_duplicate_uri_check'] = 'Check for Duplicate URIs Across All Contexts';
+$_lang['setting_global_duplicate_uri_check_desc'] = 'Select \'Yes\' to make duplicate URI checks include all Contexts in the search. Otherwise, only the Context the Resource is being saved in is checked.';
 
 $_lang['setting_hidemenu_default'] = 'Hide From Menus Default';
 $_lang['setting_hidemenu_default_desc'] = 'Select \'Yes\' to make all new resources hidden from menus by default.';

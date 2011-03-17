@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Refactor duplicate alias checks into duplicate URI checks
 - Cleanup deprecated code in Resource templates
 - [#3765] Ensure entries editedon values are set when editing a Lexicon Entry
 - Update ExtJS to 3.3.1
