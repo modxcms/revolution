@@ -146,7 +146,7 @@ class xPDOManager_sqlsrv extends xPDOManager {
                             break;
                         case 'UNIQUE':
                         default:
-                            $tableConstraints[]= "CONSTRAINT {$this->xpdo->escape($indexkey)} {$indexType} ({$indexset})";
+                            $tableConstraints[]= "CONSTRAINT {$this->xpdo->escape($className . '_' . $indexkey)} {$indexType} ({$indexset})";
                             break;
                     }
                 }
