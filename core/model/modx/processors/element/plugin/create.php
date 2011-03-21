@@ -46,6 +46,15 @@ if (isset($scriptProperties['propdata'])) {
 }
 if (is_array($properties)) $plugin->setProperties($properties);
 
+if (!$plugin->validate()) {
+    $validator = $plugin->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+}
+
 /* invoke OnBeforePluginFormSave event */
 $OnBeforePluginFormSave = $modx->invokeEvent('OnBeforePluginFormSave',array(
     'mode' => modSystemEvent::MODE_NEW,
@@ -66,18 +75,7 @@ if (!empty($canSave)) {
     return $modx->error->failure($canSave);
 }
 
-if (!$plugin->validate()) {
-    $validator = $plugin->getValidator();
-    if ($validator->hasMessages()) {
-        foreach ($validator->getMessages() as $message) {
-            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
-        }
-    }
-    if ($modx->error->hasError()) {
-        return $modx->error->failure();
-    }
-}
-
+/* save plugin */
 if ($plugin->save() == false) {
     return $modx->error->failure($modx->lexicon('plugin_err_create'));
 }
