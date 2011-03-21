@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- [#4128] Fix Windows drive issue in xPDOTransport->pack()
 - [#4125] Fix bug getting composites in xPDOObject->getFKClass()
 - [#4097] Make constraint names unique for sqlsrv
 - [#4047] Fix bug adding single file to zip in xPDOZip
