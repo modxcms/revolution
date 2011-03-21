@@ -32,16 +32,32 @@ if (!empty($scriptProperties['category'])) {
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
     if (!$category->checkPolicy('add_children')) return $modx->error->failure($modx->lexicon('access_denied'));
 }
+/* set fields for the new chunk */
+$chunk = $modx->newObject('modChunk');
+$chunk->fromArray($scriptProperties);
+$chunk->set('locked',!empty($scriptProperties['locked']));
+
+/* set properties */
+$properties = null;
+if (isset($scriptProperties['propdata'])) {
+    $properties = $scriptProperties['propdata'];
+    $properties = $modx->fromJSON($properties);
+}
+if (is_array($properties)) $chunk->setProperties($properties);
+
+if (!$chunk->validate()) {
+    $validator = $chunk->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+}
 
 /* if has any errors, return */
 if ($modx->error->hasError()) {
     return $modx->error->failure();
 }
-
-/* set fields for the new chunk */
-$chunk = $modx->newObject('modChunk', $scriptProperties);
-$chunk->fromArray($scriptProperties);
-$chunk->set('locked',!empty($scriptProperties['locked']));
 
 /* invoke OnBeforeChunkFormSave event */
 $OnBeforeChunkFormSave = $modx->invokeEvent('OnBeforeChunkFormSave',array(
@@ -63,27 +79,6 @@ if (is_array($OnBeforeChunkFormSave)) {
 if (!empty($canSave)) {
     return $modx->error->failure($canSave);
 }
-
-/* set properties */
-$properties = null;
-if (isset($scriptProperties['propdata'])) {
-    $properties = $scriptProperties['propdata'];
-    $properties = $modx->fromJSON($properties);
-}
-if (is_array($properties)) $chunk->setProperties($properties);
-
-if (!$chunk->validate()) {
-    $validator = $chunk->getValidator();
-    if ($validator->hasMessages()) {
-        foreach ($validator->getMessages() as $message) {
-            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
-        }
-    }
-    if ($modx->error->hasError()) {
-        return $modx->error->failure();
-    }
-}
-
 /* save chunk */
 if ($chunk->save() == false) {
     return $modx->error->failure($modx->lexicon('chunk_err_save'));

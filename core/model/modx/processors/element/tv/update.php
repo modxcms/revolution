@@ -77,6 +77,21 @@ $tv->set('output_properties',$output_properties);
 $tv->set('rank', !empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
 $tv->set('locked', !empty($scriptProperties['locked']));
 
+/* validate TV */
+if (!$tv->validate()) {
+    $validator = $tv->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+}
+
+/* if error, return */
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
+}
+
 /* invoke OnBeforeTVFormSave event */
 $OnBeforeTVFormSave = $modx->invokeEvent('OnBeforeTVFormSave',array(
     'mode' => modSystemEvent::MODE_UPD,
@@ -97,19 +112,7 @@ if (!empty($canSave)) {
     return $modx->error->failure($canSave);
 }
 
-/* validate TV */
-if (!$tv->validate()) {
-    $validator = $tv->getValidator();
-    if ($validator->hasMessages()) {
-        foreach ($validator->getMessages() as $message) {
-            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
-        }
-    }
-    if ($modx->error->hasError()) {
-        return $modx->error->failure();
-    }
-}
-
+/* save TV */
 if ($tv->save() === false) {
     return $modx->error->failure($modx->lexicon('tv_err_save'));
 }

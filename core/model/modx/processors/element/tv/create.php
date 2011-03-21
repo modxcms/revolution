@@ -34,19 +34,14 @@ if (!empty($scriptProperties['category'])) {
     if (!$category->checkPolicy('add_children')) return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
-$name_exists = $modx->getObject('modTemplateVar',array('name' => $scriptProperties['name']));
-if ($name_exists != null) $modx->error->addField('name',$modx->lexicon('tv_err_exists_name',array('name' => $scriptProperties['name'])));
+$nameExists = $modx->getObject('modTemplateVar',array('name' => $scriptProperties['name']));
+if (!empty($nameExists)) {
+    $modx->error->addField('name',$modx->lexicon('tv_err_exists_name',array('name' => $scriptProperties['name'])));
+}
 
-if (empty($scriptProperties['name'])) $scriptProperties['name'] = $modx->lexicon('untitled_tv');
-
-/* get rid of invalid chars */
-//$invchars = array('!','@','#','$','%','^','&','*','(',')','+','=',
-//    '[',']','{','}','\'','"',':',';','\\','/','<','>','?',' ',',','`','~');
-//$scriptProperties['name'] = str_replace($invchars,'',$scriptProperties['name']);
-
+/* prevent empty fields */
+if (empty($scriptProperties['name'])) { $scriptProperties['name'] = $modx->lexicon('untitled_tv'); }
 if (empty($scriptProperties['caption'])) { $scriptProperties['caption'] = $scriptProperties['name']; }
-
-if ($modx->error->hasError()) return $modx->error->failure();
 
 $output_properties = array();
 foreach ($scriptProperties as $key => $value) {
@@ -78,6 +73,21 @@ if (isset($scriptProperties['propdata'])) {
 }
 if (is_array($properties)) $tv->setProperties($properties);
 
+/* validate TV */
+if (!$tv->validate()) {
+    $validator = $tv->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+}
+
+/* if error, return */
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
+}
+
 /* invoke OnBeforeTVFormSave event */
 $OnBeforeTVFormSave = $modx->invokeEvent('OnBeforeTVFormSave',array(
     'mode' => modSystemEvent::MODE_NEW,
@@ -98,19 +108,7 @@ if (!empty($canSave)) {
     return $modx->error->failure($canSave);
 }
 
-/* validate TV */
-if (!$tv->validate()) {
-    $validator = $tv->getValidator();
-    if ($validator->hasMessages()) {
-        foreach ($validator->getMessages() as $message) {
-            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
-        }
-    }
-    if ($modx->error->hasError()) {
-        return $modx->error->failure();
-    }
-}
-
+/* save TV */
 if ($tv->save() == false) {
     return $modx->error->failure($modx->lexicon('tv_err_save'));
 }

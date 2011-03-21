@@ -31,8 +31,6 @@ if (!empty($scriptProperties['category'])) {
     if (!$category->checkPolicy('add_children')) return $modx->error->failure($modx->lexicon('access_denied'));
 }
 
-if ($modx->error->hasError()) return $modx->error->failure();
-
 /* create new snippet */
 $snippet = $modx->newObject('modSnippet');
 $snippet->fromArray($scriptProperties);
@@ -43,6 +41,20 @@ if (isset($scriptProperties['propdata'])) {
     $properties = $modx->fromJSON($properties);
 }
 if (is_array($properties)) $snippet->setProperties($properties);
+
+if (!$snippet->validate()) {
+    $validator = $snippet->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+}
+
+/* if errors, return */
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
+}
 
 /* invoke OnBeforeSnipFormSave event */
 $OnBeforeSnipFormSave = $modx->invokeEvent('OnBeforeSnipFormSave',array(
@@ -62,18 +74,6 @@ if (is_array($OnBeforeSnipFormSave)) {
 }
 if (!empty($canSave)) {
     return $modx->error->failure($canSave);
-}
-
-if (!$snippet->validate()) {
-    $validator = $snippet->getValidator();
-    if ($validator->hasMessages()) {
-        foreach ($validator->getMessages() as $message) {
-            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
-        }
-    }
-    if ($modx->error->hasError()) {
-        return $modx->error->failure();
-    }
 }
 
 /* save snippet */
