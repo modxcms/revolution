@@ -395,6 +395,9 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Delete least-recently-accessed
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb Cache Source Files';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Whether or not to cache source files as they are loaded. Recommended to off.';
 
+$_lang['setting_phpthumb_document_root'] = 'PHPThumb Document Root';
+$_lang['setting_phpthumb_document_root_desc'] = 'Set this if you are experiencing issues with the server variable DOCUMENT_ROOT, or getting errors with OutputThumbnail or !is_resource. Set it to the absolute document root path you would like to use. If this is empty, MODX will use the DOCUMENT_ROOT server variable.';
+
 $_lang['setting_phpthumb_error_bgcolor'] = 'phpThumb Error Background Color';
 $_lang['setting_phpthumb_error_bgcolor_desc'] = 'A hex value, without the #, indicating a background color for phpThumb error output.';
 

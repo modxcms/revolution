@@ -927,6 +927,15 @@ $settings['phpthumb_cache_source_enabled']->fromArray(array (
   'area' => 'phpthumb',
   'editedon' => null,
 ), '', true, true);
+$settings['phpthumb_document_root']= $xpdo->newObject('modSystemSetting');
+$settings['phpthumb_document_root']->fromArray(array (
+  'key' => 'phpthumb_document_root',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'phpthumb',
+  'editedon' => null,
+), '', true, true);
 $settings['phpthumb_error_bgcolor']= $xpdo->newObject('modSystemSetting');
 $settings['phpthumb_error_bgcolor']->fromArray(array (
   'key' => 'phpthumb_error_bgcolor',
