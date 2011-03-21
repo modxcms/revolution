@@ -1,5 +1,8 @@
 This file shows the changes in this release of xPDO.
 
+- [#4125] Fix bug getting composites in xPDOObject->getFKClass()
+- [#4097] Make constraint names unique for sqlsrv
+- [#4047] Fix bug adding single file to zip in xPDOZip
 - [#3971] Add xPDOManager API for manipulating table structures
 
 xPDO 2.1.1-pl2 (February 21, 2011)
