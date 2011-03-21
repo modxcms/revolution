@@ -366,7 +366,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($collection).' default role
 unset ($collection, $c, $attributes);
 
 /* modAccessPolicyTemplateGroups */
-$templateGroups = MODX_BUILD_DIR . 'data/transport.core.accesspolicytemplategroups.php';
+$templateGroups = include MODX_BUILD_DIR . 'data/transport.core.accesspolicytemplategroups.php';
 $attributes = array (
     xPDOTransport::PRESERVE_KEYS => false,
     xPDOTransport::UNIQUE_KEY => array('name'),
