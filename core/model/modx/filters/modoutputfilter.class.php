@@ -509,7 +509,7 @@ class modOutputFilter {
                         if (!empty($output)) {
                             $key = (!empty($m_val)) ? $m_val : 'username';
                             $userInfo= false;
-                            if ($user= $this->getObjectGraph('modUser', '{"Profile":{}}', $output)) {
+                            if ($user= $this->modx->getObjectGraph('modUser', '{"Profile":{}}', $output)) {
                                 $userInfo= $user->get(array ('username', 'password'));
                                 if ($user->getOne('Profile')) {
                                     $userInfo= array_merge($userInfo, $user->Profile->toArray());
