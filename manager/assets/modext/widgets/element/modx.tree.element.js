@@ -255,7 +255,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
     ,_handleDrop: function(e) {
         var target = e.target;
         if (e.point == 'above' || e.point == 'below') {return false;}
-        if (target.attributes.classKey != 'modCategory') { return false; }
+        if (target.attributes.classKey != 'modCategory' && target.attributes.classKey != 'root') { return false; }
 
         if (!this.isCorrectType(e.dropNode,target)) {return false;}
         if (target.attributes.type == 'category' && e.point == 'append') {return true;}
