@@ -593,6 +593,7 @@ table.classy tr.odd td {
     width: 16px;
     height: 16px;
     background: url(../images/restyle/icons/arrow_rotate_anticlockwise.png) top right no-repeat;
+    cursor: pointer;
 }
 .modx-tv-description {
     color: #666;

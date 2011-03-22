@@ -462,6 +462,7 @@ MODx.panel.Resource = function(config) {
     this.on('ready',this.onReady,this);
     var urio = Ext.getCmp('modx-resource-uri-override');
     if (urio) { urio.on('check',this.freezeUri); }
+    this.addEvents('tv-reset');
 };
 Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     initialized: false
