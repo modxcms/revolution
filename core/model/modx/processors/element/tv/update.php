@@ -71,10 +71,11 @@ foreach ($scriptProperties as $key => $value) {
 }
 
 $tv->fromArray($scriptProperties);
-$tv->set('elements',$scriptProperties['els']);
+if (isset($scriptProperties['els'])) {
+    $tv->set('elements',$scriptProperties['els']);
+}
 $tv->set('input_properties',$input_properties);
 $tv->set('output_properties',$output_properties);
-$tv->set('rank', !empty($scriptProperties['rank']) ? $scriptProperties['rank'] : 0);
 $tv->set('locked', !empty($scriptProperties['locked']));
 
 /* validate TV */
