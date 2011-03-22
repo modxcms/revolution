@@ -70,7 +70,7 @@ class modPhpThumb extends phpThumb {
      * Sets the source image
      */
     public function set($src) {
-        $src = str_replace('+','%27',urldecode($src));
+        $src = rawurldecode($src);
         if (empty($src)) return '';
         return $this->setSourceFilename($src);
     }
