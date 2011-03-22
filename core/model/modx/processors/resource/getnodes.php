@@ -164,7 +164,7 @@ while ($item) {
 
             $locked = $item->getLock();
             if ($locked && $locked != $modx->user->get('id')) {
-                $class = 'icon-locked';
+                $class[] = 'icon-locked';
                 $lockedBy = $modx->getObject('modUser',$locked);
                 if ($lockedBy) {
                     $qtip .= ' - '.$modx->lexicon('locked_by',array('username' => $lockedBy->get('username')));

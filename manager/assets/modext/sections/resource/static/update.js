@@ -106,6 +106,13 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
                 }]
             });
             btns.push('-');
+        } else {
+            btns.push({
+                text: cfg.lockedText || _('locked')
+                ,handler: Ext.emptyFn
+                ,disabled: true
+            });
+            btns.push('-');
         }
         if (cfg.canCreate == 1) {
             btns.push({
@@ -116,7 +123,7 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
             });
             btns.push('-');
         }
-        if (cfg.canDelete == 1) {
+        if (cfg.canDelete == 1 && !cfg.locked) {
             btns.push({
                 process: 'delete'
                 ,text: _('delete')
