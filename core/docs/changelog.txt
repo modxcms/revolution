@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2652] Fix issue where Element could be drag/dropped onto another Element in tree
 - Add ability to select a blank value for ResourceList TV input type
 - [#54] Fix issues with phpThumb and DOCUMENT_ROOT by adding a custom phpthumb_document_root System Setting
 - [#4122] Fix order of execution of validation and plugin events for Element processors
