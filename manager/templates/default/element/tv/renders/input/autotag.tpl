@@ -63,13 +63,13 @@ Ext.onReady(function() {
         }
         MODx.fireResourceFormChange();
     });
-
-    var rs = Ext.get('modx-reset-tv-{/literal}{$tv->id}{literal}');
-    if (rs) {
-        rs.on('click',function(e,o) {
-            var df = Ext.get('tvdef{/literal}{$tv->id}{literal}').dom.value;
+    var p = Ext.getCmp('modx-panel-resource');
+    if (p) {
+        p.on('tv-reset',function(o) {
+            if (o.id != '{/literal}{$tv->id}{literal}') return;
+            var df = Ext.get('tvdef'+o.id).dom.value;
             df = df.split(',');
-            Ext.select('#tv-{/literal}{$tv->id}{literal}-tag-list li',true).each(function(li,c,idx) {
+            Ext.select('#tv-'+o.id+'-tag-list li',true).each(function(li,c,idx) {
                 if (df.indexOf(li.dom.title) != -1) {
                     li.addClass('modx-tag-checked');
                 } else {

@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2719] Fix reset behavior on autotag/tag TV inputs
 - [#3586] Adjust improper text on Content Types page
 - [#2652] Fix issue where Element could be drag/dropped onto another Element in tree
 - Add ability to select a blank value for ResourceList TV input type
