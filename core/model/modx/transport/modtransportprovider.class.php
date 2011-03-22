@@ -45,6 +45,7 @@ class modTransportProvider extends xPDOSimpleObject {
             'api_key' => $this->get('api_key'),
             'username' => $this->get('username'),
             'uuid' => $this->xpdo->uuid,
+            'database' => $this->xpdo->config['dbtype'],
             'revolution_version' => $productVersion,
         ),$params);
         return $this->xpdo->rest->request($this->get('service_url'),$path,$method,$params);
