@@ -372,6 +372,7 @@ $_lang['scroll_dn'] = 'Scroll down';
 $_lang['scroll_up'] = 'Scroll up';
 $_lang['search'] = 'Search';
 $_lang['search_criteria'] = 'Search criteria';
+$_lang['search_ellipsis'] = 'Search...';
 $_lang['search_results'] = 'Search results';
 $_lang['security'] = 'Security';
 $_lang['select_date'] = 'Select a date';

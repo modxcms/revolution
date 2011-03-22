@@ -26,20 +26,31 @@ $limit = $modx->getOption('limit',$scriptProperties,20);
 $sort = $modx->getOption('sort',$scriptProperties,'name');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $template = (integer) $modx->getOption('template',$scriptProperties,0);
+$category = (integer) $modx->getOption('category',$scriptProperties,0);
+$search = $modx->getOption('search',$scriptProperties,'');
 
 if ($template > 0) {
     $templateObj = $modx->getObject('modTemplate', $template);
 } else {
     $templateObj = $modx->newObject('modTemplate');
 }
-$tvList = $templateObj->getTemplateVarList(array($sort => $dir), $limit, $start);
+$conditions = array();
+if (!empty($category)) {
+    $conditions['category'] = $category;
+}
+if (!empty($search)) {
+    $conditions['name:LIKE'] = '%'.$search.'%';
+    $conditions['OR:description:LIKE'] = '%'.$search.'%';
+    $conditions['OR:caption:LIKE'] = '%'.$search.'%';
+}
+$tvList = $templateObj->getTemplateVarList(array($sort => $dir), $limit, $start, $conditions);
 $tvs = $tvList['collection'];
 $count = $tvList['total'];
 
 /* iterate through tvs */
 $list = array();
 foreach ($tvs as $tv) {
-    $tvArray = $tv->get(array('id','name','description','tv_rank'));
+    $tvArray = $tv->get(array('id','name','description','tv_rank','category_name'));
     $tvArray['access'] = (boolean)$tv->get('access');
     
     $list[] = $tvArray;

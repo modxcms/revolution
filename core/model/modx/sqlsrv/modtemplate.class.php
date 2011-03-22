@@ -5,7 +5,7 @@
  */
 require_once (dirname(dirname(__FILE__)) . '/modtemplate.class.php');
 class modTemplate_sqlsrv extends modTemplate {
-    public static function listTemplateVars(modTemplate &$template, array $sort = array('name' => 'ASC'), $limit = 0, $offset = 0) {
+    public static function listTemplateVars(modTemplate &$template, array $sort = array('name' => 'ASC'), $limit = 0, $offset = 0,array $conditions = array()) {
         $result = array('collection' => array(), 'total' => 0);
         $c = $template->xpdo->newQuery('modTemplateVar');
         $result['total'] = $template->xpdo->getCount('modTemplateVar',$c);
@@ -14,9 +14,12 @@ class modTemplate_sqlsrv extends modTemplate {
             "modTemplateVarTemplate.tmplvarid = modTemplateVar.id",
             'modTemplateVarTemplate.templateid' => $template->get('id'),
         ));
+        $c->leftJoin('modCategory','Category');
+        if (!empty($conditions)) { $c->where($conditions); }
         $c->select(array(
             "CASE modTemplateVarTemplate.tmplvarid WHEN NULL THEN 0 ELSE 1 END AS access",
-            "ISNULL(modTemplateVarTemplate.rank, '-') AS tv_rank"
+            "ISNULL(modTemplateVarTemplate.rank, '-') AS tv_rank",
+            'category_name' => 'Category.category',
         ));
         foreach ($sort as $sortKey => $sortDir) {
             $c->sortby($sortKey, $sortDir);
