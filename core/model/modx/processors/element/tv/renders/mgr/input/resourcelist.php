@@ -51,6 +51,9 @@ $resources = $this->xpdo->getCollection('modResource',$c);
 
 /* iterate */
 $opts = array();
+if (!empty($params['showNone'])) {
+    $opts[] = array('value' => '','text' => '-','selected' => $this->get('value') == '');
+}
 foreach ($resources as $resource) {
     $selected = $resource->get('id') == $this->get('value');
     $opts[] = array(

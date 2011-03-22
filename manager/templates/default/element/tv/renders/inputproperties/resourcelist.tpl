@@ -26,6 +26,16 @@ MODx.load({
         ,width: 300
         ,listeners: oc
     },{
+        xtype: 'combo-boolean'
+        ,fieldLabel: _('shownone')
+        ,description: _('shownone_desc')
+        ,name: 'inopt_showNone'
+        ,hiddenName: 'inopt_showNone'
+        ,id: 'inopt_showNone{/literal}{$tv}{literal}'
+        ,value: params['showNone'] == 0 || params['showNone'] == 'false' ? false : true
+        ,width: 300
+        ,listeners: oc
+    },{
         xtype: 'textfield'
         ,fieldLabel: _('resourcelist_parents')
         ,description: _('resourcelist_parents_desc')
