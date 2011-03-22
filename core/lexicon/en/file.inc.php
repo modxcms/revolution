@@ -33,7 +33,6 @@ $_lang['file_err_unzip_missing_lib'] = ' Missing zip library (php_zip.dll / zip.
 $_lang['file_err_upload'] = 'An error occurred while trying to upload the files.';
 $_lang['file_exists_hk'] = 'File <b>{0}</b> already exists';
 $_lang['file_extensions'] = 'File Extensions';
-$_lang['file_extensions_desc'] = 'These are the allowed file extensions for the content type.';
 $_lang['file_folder_enter_new'] = 'Enter New Folder Name';
 $_lang['file_folder_chmod'] = 'Chmod Directory';
 $_lang['file_folder_create'] = 'Create Directory';
