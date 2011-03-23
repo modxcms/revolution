@@ -1581,7 +1581,7 @@ class xPDOObject {
                     }
                 }
             }
-            if ($fkclass && !empty ($this->_composites)) {
+            if (!$fkclass && !empty ($this->_composites)) {
                 foreach ($this->_composites as $compositeAlias => $composite) {
                     if ($composite['local'] === $k) {
                         $fkclass= $composite['class'];
