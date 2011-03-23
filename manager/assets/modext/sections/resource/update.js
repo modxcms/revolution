@@ -113,7 +113,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 process: 'update'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: cfg.richtext ? false : true
+                ,checkDirty: cfg.richtext || MODx.request.activeSave == 1 ? false : true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,alt: true

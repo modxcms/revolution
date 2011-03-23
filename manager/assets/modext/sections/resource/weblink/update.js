@@ -95,7 +95,7 @@ Ext.extend(MODx.page.UpdateWebLink,MODx.Component,{
                 process: 'update'
                 ,text: _('save')
                 ,method: 'remote'
-                ,checkDirty: true
+                ,checkDirty: MODx.request.activeSave == 1
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
                     ,alt: true

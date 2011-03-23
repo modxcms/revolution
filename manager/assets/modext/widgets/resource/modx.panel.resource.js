@@ -563,9 +563,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if(t.getValue() !== t.originalValue) {
             Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
                 if (e == 'yes') {
+                    var nt = t.getValue();
+                    t.setValue(this.config.record.template);
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            location.href = '?a='+MODx.request.a+'&id='+r.result.object.id;
+                            location.href = '?a='+MODx.request.a+'&id='+r.result.object.id+'&template='+nt+'&activeSave=1';
                         },scope:this}
                     });
                 } else {
