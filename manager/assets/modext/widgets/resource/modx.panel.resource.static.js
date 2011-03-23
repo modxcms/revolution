@@ -59,7 +59,7 @@ MODx.panel.Static = function(config) {
                 ,labelWidth: 0
                 ,border: false
                 ,items: [{
-                    xtype: 'checkbox'
+                    xtype: 'xcheckbox'
                     ,boxLabel: _('resource_published')
                     ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
                     ,name: 'published'
@@ -187,7 +187,7 @@ MODx.panel.Static = function(config) {
             ,value: config.record.menuindex || 0
             
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,fieldLabel: _('resource_hide_from_menus')
             ,description: '<b>[[*hidemenu]]</b><br />'+_('resource_hide_from_menus_help')
             ,name: 'hidemenu'
@@ -211,7 +211,7 @@ MODx.panel.Static = function(config) {
     
     var va = [];
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_folder')
         ,description: '<b>[[*isfolder]]</b><br />'+_('resource_folder_help')
         ,name: 'isfolder'
@@ -263,7 +263,7 @@ MODx.panel.Static = function(config) {
         });
     }
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_searchable')
         ,description: '<b>[[*searchable]]</b><br />'+_('resource_searchable_help')
         ,name: 'searchable'
@@ -272,7 +272,7 @@ MODx.panel.Static = function(config) {
         ,checked: config.record.searchable
     });
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_cacheable')
         ,description: '<b>[[*cacheable]]</b><br />'+_('resource_cacheable_help')
         ,name: 'cacheable'
@@ -281,7 +281,7 @@ MODx.panel.Static = function(config) {
         ,checked: config.record.cacheable
     });
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_syncsite')
         ,description: _('resource_syncsite_help')
         ,name: 'syncsite'
@@ -290,7 +290,7 @@ MODx.panel.Static = function(config) {
         ,checked: config.record.syncsite || true
     });
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('deleted')
         ,description: '<b>[[*deleted]]</b>'
         ,name: 'deleted'
@@ -329,7 +329,7 @@ MODx.panel.Static = function(config) {
         ,anchor: '70%'
     });
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_uri_override')
         ,description: _('resource_uri_override_help')
         ,name: 'uri_override'

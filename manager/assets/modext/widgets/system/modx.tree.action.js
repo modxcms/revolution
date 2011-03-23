@@ -166,7 +166,7 @@ MODx.window.CreateAction = function(config) {
         },{
             fieldLabel: _('load_headers')
             ,name: 'haslayout'
-            ,xtype: 'checkbox'
+            ,xtype: 'xcheckbox'
             ,checked: true
             ,inputValue: 1
         },{
@@ -229,7 +229,7 @@ MODx.window.UpdateAction = function(config) {
         },{
             fieldLabel: _('load_headers')
             ,name: 'haslayout'
-            ,xtype: 'checkbox'
+            ,xtype: 'xcheckbox'
             ,checked: true
         },{
             fieldLabel: _('lang_topics')

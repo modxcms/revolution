@@ -152,7 +152,7 @@ MODx.window.InsertElement = function(config) {
             ,name: 'classKey'
             ,id: 'modx-dise-classkey'
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,fieldLabel: _('cached')
             ,name: 'cached'
             ,id: 'modx-dise-cached'

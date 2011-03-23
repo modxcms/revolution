@@ -222,7 +222,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     id: 'modx-user-active'
                     ,name: 'active'
                     ,fieldLabel: _('active')
-                    ,xtype: 'checkbox'
+                    ,xtype: 'xcheckbox'
                     ,inputValue: 1
                 },{
                     id: 'modx-user-fullname'
@@ -355,7 +355,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     id: 'modx-user-blocked'
                     ,name: 'blocked'
                     ,fieldLabel: _('user_block')
-                    ,xtype: 'checkbox'
+                    ,xtype: 'xcheckbox'
                     ,inputValue: 1
                 },{
                     id: 'modx-user-blockeduntil'

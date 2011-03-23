@@ -81,7 +81,7 @@ MODx.panel.TV = function(config) {
                 ,width: 250
                 ,value: config.record.category || 0
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('tv_lock')
                 ,description: _('tv_lock_msg')
                 ,name: 'locked'
@@ -99,7 +99,7 @@ MODx.panel.TV = function(config) {
                 ,allowBlank: false
                 ,value: config.record.rank || 0
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('clear_cache_on_save')
                 ,description: _('clear_cache_on_save_msg')
                 ,name: 'clearCache'

@@ -29,7 +29,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
 
         if (this.config.is_folder) {
             items.push({
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('duplicate_children')
                 ,name: 'duplicate_children'
                 ,id: 'modx-'+this.ident+'-duplicate-children'
@@ -215,7 +215,7 @@ MODx.window.QuickUpdateChunk = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'clearCache'
             ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
@@ -336,7 +336,7 @@ MODx.window.QuickUpdateTemplate = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'clearCache'
             ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
@@ -458,7 +458,7 @@ MODx.window.QuickUpdateSnippet = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'clearCache'
             ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
@@ -529,7 +529,7 @@ MODx.window.QuickCreatePlugin = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'disabled'
             ,id: 'modx-'+this.ident+'-disabled'
             ,fieldLabel: _('disabled')
@@ -588,14 +588,14 @@ MODx.window.QuickUpdatePlugin = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'disabled'
             ,id: 'modx-'+this.ident+'-disabled'
             ,fieldLabel: _('disabled')
             ,inputValue: 1
             ,checked: false
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'clearCache'
             ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')
@@ -729,7 +729,7 @@ MODx.window.QuickUpdateTV = function(config) {
             ,anchor: '97%'
             ,rows: 2
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'clearCache'
             ,id: 'modx-'+this.ident+'-clearcache'
             ,fieldLabel: _('clear_cache_on_save')

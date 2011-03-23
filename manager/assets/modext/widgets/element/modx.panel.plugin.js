@@ -71,14 +71,14 @@ MODx.panel.Plugin = function(config) {
                 ,width: 250
                 ,value: config.record.category || 0
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('plugin_disabled')
                 ,name: 'disabled'
                 ,id: 'modx-plugin-disabled'
                 ,inputValue: 1
                 ,checked: config.record.disabled || 0
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('plugin_lock')
                 ,description: _('plugin_lock_msg')
                 ,name: 'locked'
@@ -86,7 +86,7 @@ MODx.panel.Plugin = function(config) {
                 ,inputValue: 1
                 ,checked: config.record.locked || 0
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('clear_cache_on_save')
                 ,description: _('clear_cache_on_save_msg')
                 ,name: 'clearCache'

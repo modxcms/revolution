@@ -335,7 +335,7 @@ MODx.window.CreateFCProfile = function(config) {
             ,anchor: '90%'
 
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,fieldLabel: _('active')
             ,name: 'active'
             ,id: 'modx-fccp-active'
