@@ -203,9 +203,9 @@ class modCacheManager extends xPDOCacheManager {
         if ($this->getOption('cache_resource', $options, true)) {
             if (is_object($obj) && $obj instanceof modResource && $obj->getProcessed() && $obj->get('cacheable') && $obj->get('id')) {
                 $results['resourceClass']= $obj->_class;
+                $results['resource']['_processed']= $obj->getProcessed();
                 $results['resource']= $obj->toArray('', true);
                 $results['resource']['_content']= $obj->_content;
-                $results['resource']['_processed']= $obj->getProcessed();
                 if ($contentType = $obj->getOne('ContentType')) {
                     $results['contentType']= $contentType->toArray('', true);
                 }

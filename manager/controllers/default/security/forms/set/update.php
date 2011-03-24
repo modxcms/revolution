@@ -55,7 +55,7 @@ foreach ($setData['tabs'] as $tab) {
         (int)$tab['rank'],
         (boolean)$tab['visible'],
         $tab['label'],
-        '',
+        $tab['type'],
         'core',
     );
 }
