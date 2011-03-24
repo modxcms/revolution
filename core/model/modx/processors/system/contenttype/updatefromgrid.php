@@ -22,6 +22,7 @@ $modx->lexicon->load('content_type');
 if (empty($scriptProperties['data'])) return $modx->error->failure();
 $_DATA = $modx->fromJSON($scriptProperties['data']);
 
+$refresh = array();
 foreach ($_DATA as $ct) {
     /* get content type */
     if (empty($ct['id'])) continue;
@@ -31,6 +32,7 @@ foreach ($_DATA as $ct) {
     /* save content type */
     $ct['binary'] = !empty($ct['binary']) ? true : false;
     $contentType->fromArray($ct);
+    $refresh[] = $contentType->isDirty('file_extensions') && $modx->getCount('modResource', array('content_type' => $contentType->get('id')));
     if ($contentType->save() == false) {
         $modx->error->checkValidation($contentType);
         return $modx->error->failure($modx->lexicon('content_type_err_save'));
@@ -38,6 +40,10 @@ foreach ($_DATA as $ct) {
 
     /* log manager action */
     $modx->logManagerAction('content_type_save','modContentType',$contentType->get('id'));
+}
+
+if (array_search(true, $refresh, true) !== false) {
+    $modx->call('modResource', 'refreshURIs', array(&$modx));
 }
 
 return $modx->error->success('',$contentType);
