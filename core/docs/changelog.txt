@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODx. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#2578] Fix issues with manager log view page where sorting was off and grid was not sortable
 - Fix issue where user-created FC tabs were not removable from a Set
 - [#4096] Fix Package Management archive issue when using mapped Windows drives
 - [#3785] Add category filter and search box to TV grid on Template panel
