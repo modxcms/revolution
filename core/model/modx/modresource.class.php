@@ -117,22 +117,12 @@ class modResource extends modAccessibleSimpleObject {
      * @param int $parent The id of a Resource parent to start from (default is 0, the root)
      * @param array $options An array of various options for the method:
      *      - resetOverrides: if true, Resources with uri_override set to true will be included
-     *      - resetParent: if not false, resets the URI of the parent (default is true)
      *      - contexts: an optional array of context keys to limit the refresh scope
      * @return void
      */
     public static function refreshURIs(modX &$modx, $parent = 0, array $options = array()) {
         $resetOverrides = array_key_exists('resetOverrides', $options) ? (boolean) $options['resetOverrides'] : false;
-        $resetParent = array_key_exists('resetParent', $options) ? (boolean) $options['resetParent'] : true;
         $contexts = array_key_exists('contexts', $options) ? explode(',', $options['contexts']) : null;
-        if ($parent > 0 && $resetParent) {
-            $parentResource = $modx->getObject('modResource', $parent);
-            if ($resetOverrides || !$parentResource->get('uri_override')) {
-                $parentResource->set('uri', '');
-                $parentResource->set('uri_override', false);
-                $parentResource->save();
-            }
-        }
         $criteria = $modx->newQuery('modResource', array('parent' => $parent));
         if (!$resetOverrides) {
             $criteria->where(array('uri_override' => false));
@@ -142,9 +132,12 @@ class modResource extends modAccessibleSimpleObject {
         }
         $criteria->sortby('menuindex', 'ASC');
         foreach ($modx->getIterator('modResource', $criteria) as $resource) {
-            $resource->set('uri', '');
+            $resource->set('refreshURIs', true);
             if ($resetOverrides) {
                 $resource->set('uri_override', false);
+            }
+            if (!$resource->get('uri_override')) {
+                $resource->set('uri', '');
             }
             $resource->save();
         }
@@ -442,7 +435,8 @@ class modResource extends modAccessibleSimpleObject {
      * using the current time and user authenticated in the context.
      *
      * If uri is empty or uri_overridden is not set and something has been changed which
-     * might affect the Resource's uri, it is (re-)calculated using getAliasPath().
+     * might affect the Resource's uri, it is (re-)calculated using getAliasPath(). This
+     * can be forced recursively by setting refreshURIs to true before calling save().
      */
     public function save($cacheFlag= null) {
         if ($this->isNew()) {
@@ -451,11 +445,9 @@ class modResource extends modAccessibleSimpleObject {
         }
         $refreshChildURIs = false;
         if ($this->xpdo instanceof modX && $this->xpdo->getOption('friendly_urls')) {
-            if ($this->get('uri') == '' || (!$this->get('uri_override') && ($this->isDirty('uri_override') || $this->isDirty('alias') || $this->isDirty('content_type') || $this->isDirty('parent') || $this->isDirty('context_key')))) {
+            $refreshChildURIs = ($this->get('refreshURIs') || $this->isDirty('alias') || $this->isDirty('parent') || $this->isDirty('context_key'));
+            if ($this->get('uri') == '' || (!$this->get('uri_override') && ($this->isDirty('uri_override') || $this->isDirty('content_type') || $refreshChildURIs))) {
                 $this->set('uri', $this->getAliasPath($this->get('alias')));
-                if ($this->isDirty('uri')) {
-                    $refreshChildURIs = true;
-                }
             }
         }
         $rt= parent :: save($cacheFlag);
@@ -463,7 +455,6 @@ class modResource extends modAccessibleSimpleObject {
             $this->xpdo->call('modResource', 'refreshURIs', array(
                 &$this->xpdo,
                 $this->get('id'),
-                array('resetParent' => false)
             ));
         }
         return $rt;
