@@ -216,12 +216,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     id: 'modx-user-username'
                     ,name: 'username'
                     ,fieldLabel: _('username')
+                    ,description: _('user_username_desc')
                     ,xtype: 'textfield'
                     ,width: 300
                 },{
                     id: 'modx-user-active'
                     ,name: 'active'
                     ,fieldLabel: _('active')
+                    ,description: _('user_active_desc')
                     ,xtype: 'xcheckbox'
                     ,inputValue: 1
                 },{
@@ -318,6 +320,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     id: 'modx-user-class-key'
                     ,name: 'class_key'
                     ,fieldLabel: _('class_key')
+                    ,description: _('user_class_key_desc')
                     ,xtype: 'textfield'
                     ,width: 300
                     ,value: 'modUser'
@@ -340,27 +343,32 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     id: 'modx-user-logincount'
                     ,name: 'logincount'
                     ,fieldLabel: _('user_logincount')
+                    ,description: _('user_logincount_desc')
                     ,xtype: 'statictextfield'
                 },{
                     id: 'modx-user-lastlogin'
                     ,name: 'lastlogin'
                     ,fieldLabel: _('user_prevlogin')
+                    ,description: _('user_prevlogin_desc')
                     ,xtype: 'statictextfield'
                 },{
                     id: 'modx-user-failedlogincount'
                     ,name: 'failedlogincount'
                     ,fieldLabel: _('user_failedlogincount')
+                    ,description: _('user_failedlogincount_desc')
                     ,xtype: 'textfield'
                 },{
                     id: 'modx-user-blocked'
                     ,name: 'blocked'
                     ,fieldLabel: _('user_block')
+                    ,description: _('user_block_desc')
                     ,xtype: 'xcheckbox'
                     ,inputValue: 1
                 },{
                     id: 'modx-user-blockeduntil'
                     ,name: 'blockeduntil'
                     ,fieldLabel: _('user_blockeduntil')
+                    ,description: _('user_blockeduntil_desc')
                     ,xtype: 'xdatetime'
                     ,width: 300
                     ,timeWidth: 150
@@ -373,6 +381,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     id: 'modx-user-blockedafter'
                     ,name: 'blockedafter'
                     ,fieldLabel: _('user_blockedafter')
+                    ,description: _('user_blockedafter_desc')
                     ,xtype: 'xdatetime'
                     ,width: 300
                     ,timeWidth: 150
