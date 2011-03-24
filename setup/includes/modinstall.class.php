@@ -641,7 +641,7 @@ class modInstall {
             } else {
                 /* try to initialize the mgr context */
                 $modx->initialize('mgr');
-                if (!$modx->_initialized) {
+                if (!$modx->isInitialized()) {
                     $errors[] = '<p>'.$this->lexicon('modx_err_instantiate_mgr').'</p>';
                 } else {
                     $loaded = $modx->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
