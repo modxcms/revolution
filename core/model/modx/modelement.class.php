@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -20,7 +20,7 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * Represents an element of source content managed by MODx.
+ * Represents an element of source content managed by MODX.
  *
  * These elements are defined by some type of source content that when processed
  * will provide output or some type of logical result based on mutable
@@ -31,7 +31,7 @@
  *
  * @package modx
  * @abstract Implement a derivative of this class to represent an element which
- * can be processed within the MODx framework.
+ * can be processed within the MODX framework.
  * @extends modAccessibleSimpleObject
  */
 class modElement extends modAccessibleSimpleObject {
@@ -232,7 +232,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Process the element source content to produce a result.
      *
-     * @abstract Implement this to define behavior for a MODx content element.
+     * @abstract Implement this to define behavior for a MODX content element.
      * @access public
      * @param array|string $properties A set of configuration properties for the
      * element.

@@ -37,11 +37,11 @@ $_lang['setting_err_save'] = 'Tekkis viga seade salvestamisel.';
 $_lang['setting_err_startint'] = 'Seaded ei või alata numbriga.';
 $_lang['setting_err_invalid_document'] = 'Dokumenti ID-ga %d ei ole olemas. Palun määrake olemasolev dokument.';
 $_lang['setting_remove'] = 'Eemalda Seade';
-$_lang['setting_remove_confirm'] = 'Olete kindel, et soovite eemaldada selle seade? See võib teie MODx installatsiooni katki teha.';
+$_lang['setting_remove_confirm'] = 'Olete kindel, et soovite eemaldada selle seade? See võib teie MODX installatsiooni katki teha.';
 $_lang['setting_update'] = 'Muuda Seadet';
-$_lang['settings_after_install'] = 'Kuna MODx on hetkel värske install, peate kontrollima neid seaded ja muutma neid seadeid mida soovite. P
+$_lang['settings_after_install'] = 'Kuna MODX on hetkel värske install, peate kontrollima neid seaded ja muutma neid seadeid mida soovite. P
 Pärast seadete kontrollimist, vajutage \'Salvesta\', uuendamaks seadete andmebaasi<br /><br />';
-$_lang['settings_desc'] = 'Siit saate muuta MODx manageri liidese üldiseid eelistusi ja konfiguratsiooni seadistusi ja ka kuidas leht töötab. Tehke topelt-klikk väärtustel, mid soovite muuta tabelis või parem-klikkige seade peal rohkemateks valikuteks. Samuti saate klikkida ka "+" märgil, et näha seade kirjeldust.';
+$_lang['settings_desc'] = 'Siit saate muuta MODX manageri liidese üldiseid eelistusi ja konfiguratsiooni seadistusi ja ka kuidas leht töötab. Tehke topelt-klikk väärtustel, mid soovite muuta tabelis või parem-klikkige seade peal rohkemateks valikuteks. Samuti saate klikkida ka "+" märgil, et näha seade kirjeldust.';
 $_lang['settings_furls'] = 'Sõbralikud URL-id';
 $_lang['settings_misc'] = 'Mitmesugust';
 $_lang['settings_site'] = 'Sait';
@@ -73,7 +73,7 @@ $_lang['setting_allow_duplicate_alias'] = 'Luba samad aliased';
 $_lang['setting_allow_duplicate_alias_desc'] = 'Kui \'jah\', siis lubatakse samadel aliastel salvestuda. <strong>Märkus: Seda valikut tuleks koos kasutada \'Friendly alias path\' valikuga, mis on määratud \'Jah\' asendisse, et ära hoida probleeme dokumentide kuvamisega.</strong>';
 
 $_lang['setting_allow_tags_in_post'] = 'Luba HTML Tagid POST-is';
-$_lang['setting_allow_tags_in_post_desc'] = 'Kui false, siis kõikidest POST tegevustest manageri eemaldatakse HTML-tagid. MODx Soovitab selle valiku jätta true asendisse.';
+$_lang['setting_allow_tags_in_post_desc'] = 'Kui false, siis kõikidest POST tegevustest manageri eemaldatakse HTML-tagid. MODX Soovitab selle valiku jätta true asendisse.';
 
 $_lang['setting_archive_with'] = 'Kasuta PCLZip Arhiive';
 $_lang['setting_archive_with_desc'] = 'Kui true asendis, siis kasutatakse PCLZip-i ZipArchive asemel zip laiendusena. Luba see valik, kui tekib lahtipakkimise probleeme Pakkide Halduses.';
@@ -82,7 +82,7 @@ $_lang['setting_auto_menuindex'] = 'Menüü vaikimisi indekseerimine';
 $_lang['setting_auto_menuindex_desc'] = 'Vali \'Jah\' asend, et lülitada sisse automaatne manüü indeksi loomine.';
 
 $_lang['setting_auto_check_pkg_updates'] = 'Pakkide Uuenduste Automaatne Kontroll';
-$_lang['setting_auto_check_pkg_updates_desc'] = 'Kui \'Jah\' asendis, siis MODx automaatselt kontrollib Pakkide uuendusi Pakkide Halduse all. See võib põhjustada tabeli aeglast laadimist.';
+$_lang['setting_auto_check_pkg_updates_desc'] = 'Kui \'Jah\' asendis, siis MODX automaatselt kontrollib Pakkide uuendusi Pakkide Halduse all. See võib põhjustada tabeli aeglast laadimist.';
 
 $_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Puhvri Aegumise Aeg Pakkide uuenduste kontrollimise vahel';
 $_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'Arv minuteid kui kaukas Pakkide Haldus puhverdab pakkide uunenduste tulemusi.';
@@ -113,7 +113,7 @@ $_lang['setting_cache_default_desc'] = 'Valige \'Jah\', et muuta kõik Ressurssi
 $_lang['setting_cache_default_err'] = 'Palun määrake kas või mitte soovite, et dokumendid oleks puhverdatud vaikimisi.';
 
 $_lang['setting_cache_disabled'] = 'Keela Globaalne Puhverdus Võimalused';
-$_lang['setting_cache_disabled_desc'] = 'Valige \'Jah\', keelata kõik MODx puhverdus võimalused. MODx ei soovita selle võimaluse keelamist.';
+$_lang['setting_cache_disabled_desc'] = 'Valige \'Jah\', keelata kõik MODX puhverdus võimalused. MODX ei soovita selle võimaluse keelamist.';
 $_lang['setting_cache_disabled_err'] = 'Palun märkige, kas soovite või mitte puhvri lubada.';
 
 $_lang['setting_cache_json'] = 'Puhverda JSON andmeid';
@@ -132,7 +132,7 @@ $_lang['setting_cache_lang_js'] = 'Puhvrerda Lexiconi JS Stringid';
 $_lang['setting_cache_lang_js_desc'] = 'Kui true, siis see kasutab serveri päeised, et puhverdada lexiconi stringe, mis laetakse manageri liidessesse JavaScripti poolt.';
 
 $_lang['setting_cache_lexicon_topics'] = 'Puhverda Lexiconi Teemad';
-$_lang['setting_cache_lexicon_topics_desc'] = 'Kui lubatud, sii kõik Lexiconi Teemad puhverdatakse, et vähendada tõsiselt laadimise aegu Internationalizationi funktsionaalsuses. MODx soovitab selle seade määrata \'Jah\' asendisse.';
+$_lang['setting_cache_lexicon_topics_desc'] = 'Kui lubatud, sii kõik Lexiconi Teemad puhverdatakse, et vähendada tõsiselt laadimise aegu Internationalizationi funktsionaalsuses. MODX soovitab selle seade määrata \'Jah\' asendisse.';
 
 $_lang['setting_cache_noncore_lexicon_topics'] = 'Puhverda Mitte-Core kuuluvad Lexiconi Teemad';
 $_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Kui keelatud, siis Lexiconi teemasid ei puhverdata, neid mis Core alla ei kuulu. See on kasulik keelta siis, kui arendad omaenda lisasid.';
@@ -144,22 +144,22 @@ $_lang['setting_cache_resource_expires'] = 'Aegumise Aeg Osalisele Ressurssi Puh
 $_lang['setting_cache_resource_expires_desc'] = 'See väärtus (sekundites) määrab aja, kui kaua osalise Ressurssi puhver failid kestavad puhverdamisel.';
 
 $_lang['setting_cache_scripts'] = 'Luba Skriptide Puhver';
-$_lang['setting_cache_scripts_desc'] = 'Kui lubatud, MODx puhverdab kõiki Skripte (Snippeteid ja Pluginaid) failidesse, vähendades koormust serverile. MODx soovitab jätta selle seade asendisse\'Jah\'.';
+$_lang['setting_cache_scripts_desc'] = 'Kui lubatud, MODX puhverdab kõiki Skripte (Snippeteid ja Pluginaid) failidesse, vähendades koormust serverile. MODX soovitab jätta selle seade asendisse\'Jah\'.';
 
 $_lang['setting_cache_system_settings'] = 'Luba Süsteemi Seadete Puhverdamine';
-$_lang['setting_cache_system_settings_desc'] = 'Kui lubatud, süsteemi seaded puhverdatakse, et vähendada laadmise aega. MODx soovitab selle seade jätmist lubavasse asendisse.';
+$_lang['setting_cache_system_settings_desc'] = 'Kui lubatud, süsteemi seaded puhverdatakse, et vähendada laadmise aega. MODX soovitab selle seade jätmist lubavasse asendisse.';
 
 $_lang['setting_clear_cache_refresh_trees'] = 'Värskenda Puud kui Saidi Pühves Puhastatakse';
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Kui lubatud, uuendab puud pärast saidi puhvri puhastamist.';
 
 $_lang['setting_compress_css'] = 'Kasuta Kokkusurutud CSS-i';
-$_lang['setting_compress_css_desc'] = 'Kui see võimalus on lubatud, siis MODx kasutab kokkusurutud versiooni oma css stiilides, mida kasutatakse manageri liideses. See vähendab märgatavalt laadmise ja käivitamise aegu manageris. Keela ainult siis, kui muudad core elemente.';
+$_lang['setting_compress_css_desc'] = 'Kui see võimalus on lubatud, siis MODX kasutab kokkusurutud versiooni oma css stiilides, mida kasutatakse manageri liideses. See vähendab märgatavalt laadmise ja käivitamise aegu manageris. Keela ainult siis, kui muudad core elemente.';
 
 $_lang['setting_compress_js'] = 'Kasuta Kokkusurutud Javascript Teeke';
-$_lang['setting_compress_js_desc'] = 'Kui lubatud, MODx kasutab kokkusurutud versioone oma JavaScript teekidest, mida kasutatakse manageri liideses. See vähendab märgatavalt laadimise ja käivitamise aega manageris. Keela ainult juhul, kui muudad core elemente.';
+$_lang['setting_compress_js_desc'] = 'Kui lubatud, MODX kasutab kokkusurutud versioone oma JavaScript teekidest, mida kasutatakse manageri liideses. See vähendab märgatavalt laadimise ja käivitamise aega manageris. Keela ainult juhul, kui muudad core elemente.';
 
 $_lang['setting_concat_js'] = 'Kasuta Ühendatud Javascript Teeke';
-$_lang['setting_concat_js_desc'] = 'Kui lubatud, siis MODx kasutab ühendatud (kõik failid on liidetud üheks) versiooni oma JavaScript teekidest manageri liideses. See vähendab märgatavalt laadimise ja käivitamise aega manageris. Keela ainult juhul, kui muudad core elemente.';
+$_lang['setting_concat_js_desc'] = 'Kui lubatud, siis MODX kasutab ühendatud (kõik failid on liidetud üheks) versiooni oma JavaScript teekidest manageri liideses. See vähendab märgatavalt laadimise ja käivitamise aega manageris. Keela ainult juhul, kui muudad core elemente.';
 
 $_lang['setting_container_suffix'] = 'Konteineri Järelliide (Suffix)';
 $_lang['setting_container_suffix_desc'] = 'Suffix, mis lisatakse Ressursside lõppu, mis on konteinerid, kasutatakse FURL-ide kasutamisel.';
@@ -198,7 +198,7 @@ $_lang['setting_error_page_desc'] = 'Sisestage dokumendi ID, mida soovite saata 
 $_lang['setting_error_page_err'] = 'palun määrake dokumendi ID mis on vealeheks.';
 
 $_lang['setting_extension_packages'] = 'Laiendus Paketid';
-$_lang['setting_extension_packages_desc'] = 'Koma eraldatud nimekiri pakettidest, mida laadida MODx A comma separated list of packages to load on MODx käivitamisel. Formaadis packagename:pathtomodel';
+$_lang['setting_extension_packages_desc'] = 'Koma eraldatud nimekiri pakettidest, mida laadida MODX A comma separated list of packages to load on MODX käivitamisel. Formaadis packagename:pathtomodel';
 
 $_lang['setting_failed_login_attempts'] = 'Läbikukkunud Sisselogimise Katseid';
 $_lang['setting_failed_login_attempts_desc'] = 'Arv läbikukkunud sisselogimise katseid, mida kasutaja saab sootatada, enne kui ta \'blokeeritakse\'.';
@@ -206,32 +206,32 @@ $_lang['setting_failed_login_attempts_desc'] = 'Arv läbikukkunud sisselogimise 
 $_lang['setting_fe_editor_lang'] = 'Front-end Editori Keel';
 $_lang['setting_fe_editor_lang_desc'] = 'Valige keel editorile, kui seda kasutatakse front-endis.';
 
-$_lang['setting_feed_modx_news'] = 'MODx Uudiste Feed';
-$_lang['setting_feed_modx_news_desc'] = 'Määrake URL RSS feed-ile, et kuvada MODx uundiseid manageris.';
+$_lang['setting_feed_modx_news'] = 'MODX Uudiste Feed';
+$_lang['setting_feed_modx_news_desc'] = 'Määrake URL RSS feed-ile, et kuvada MODX uundiseid manageris.';
 
-$_lang['setting_feed_modx_news_enabled'] = 'MODx Uudiste Feed Lubatud';
-$_lang['setting_feed_modx_news_enabled_desc'] = 'Kui \'Ei\', siis MODx peaidab uudised welcome sektsioonist manageris.';
+$_lang['setting_feed_modx_news_enabled'] = 'MODX Uudiste Feed Lubatud';
+$_lang['setting_feed_modx_news_enabled_desc'] = 'Kui \'Ei\', siis MODX peaidab uudised welcome sektsioonist manageris.';
 
-$_lang['setting_feed_modx_security'] = 'MODx Turva Teadete Feed URL';
-$_lang['setting_feed_modx_security_desc'] = 'Määrake URL RSS feed-ile MODx Turva Teadete saamiseks manageris.';
+$_lang['setting_feed_modx_security'] = 'MODX Turva Teadete Feed URL';
+$_lang['setting_feed_modx_security_desc'] = 'Määrake URL RSS feed-ile MODX Turva Teadete saamiseks manageris.';
 
-$_lang['setting_feed_modx_security_enabled'] = 'MODx Turva Feed Lubatud';
-$_lang['setting_feed_modx_security_enabled_desc'] = 'Kui \'Ei\', siis MODx peidab Turva feedi welcome sektsioonist manageris.';
+$_lang['setting_feed_modx_security_enabled'] = 'MODX Turva Feed Lubatud';
+$_lang['setting_feed_modx_security_enabled_desc'] = 'Kui \'Ei\', siis MODX peidab Turva feedi welcome sektsioonist manageris.';
 
 $_lang['setting_filemanager_path'] = 'Failide Manageri Path';
-$_lang['setting_filemanager_path_desc'] = 'IIS tihtipeale ei täida document_root välja õigesti, mida ksutatakse faili manageri poolt. Kui teil on probleeme faili managerigia, kontrollige, et see oath oleks õige root kataloogi peale, kui asub teie MODx installatsioon..';
+$_lang['setting_filemanager_path_desc'] = 'IIS tihtipeale ei täida document_root välja õigesti, mida ksutatakse faili manageri poolt. Kui teil on probleeme faili managerigia, kontrollige, et see oath oleks õige root kataloogi peale, kui asub teie MODX installatsioon..';
 
 $_lang['setting_filemanager_path_relative'] = 'Kas Is Faili Manager Path on Relatiivne?';
-$_lang['setting_filemanager_path_relative_desc'] = 'Kui teie filemanager_path seade on relatiivne MODx base_path suhtes, siis palun määrake see sede Jah asendisse. Kui teie filemanager_path on väljaspool docroot-i, määrakse see Ei peale.';
+$_lang['setting_filemanager_path_relative_desc'] = 'Kui teie filemanager_path seade on relatiivne MODX base_path suhtes, siis palun määrake see sede Jah asendisse. Kui teie filemanager_path on väljaspool docroot-i, määrakse see Ei peale.';
 
 $_lang['setting_filemanager_url'] = 'Failide Manageri Url';
-$_lang['setting_filemanager_url_desc'] = 'Valikuline. Määra juhul, kui soovite määrata kindla URL-i, et juurdepääseda failidele Failide Manageri kaudu (kasulik, kui olete filemanager_path määranud kataloogi peale, mis asub väljaspool MODx webroot-i). Olge kindlad, et see on veebist ligipääsetav URL vastavalt filemanager_path seade väärtusele. Kui jätate tühjaks, siis MODx üritab automaatselt selle välja arvutada.';
+$_lang['setting_filemanager_url_desc'] = 'Valikuline. Määra juhul, kui soovite määrata kindla URL-i, et juurdepääseda failidele Failide Manageri kaudu (kasulik, kui olete filemanager_path määranud kataloogi peale, mis asub väljaspool MODX webroot-i). Olge kindlad, et see on veebist ligipääsetav URL vastavalt filemanager_path seade väärtusele. Kui jätate tühjaks, siis MODX üritab automaatselt selle välja arvutada.';
 
 $_lang['setting_filemanager_url_relative'] = 'On Faili Manager URL Relatiivne?';
-$_lang['setting_filemanager_url_relative_desc'] = 'Kui teie filemanager_url seade on relatiivne MODx base_url suhtes, siis palun määrake see seade jah asendisse. Kui teie filemanager_url on väljaspool põhi webroot-i, määrakse see Ei asendisse.';
+$_lang['setting_filemanager_url_relative_desc'] = 'Kui teie filemanager_url seade on relatiivne MODX base_url suhtes, siis palun määrake see seade jah asendisse. Kui teie filemanager_url on väljaspool põhi webroot-i, määrakse see Ei asendisse.';
 
 $_lang['setting_forgot_login_email'] = 'Ununenud kasutajatunnuste Email';
-$_lang['setting_forgot_login_email_desc'] = 'Template emailile, mis saadetakse kasutajale, kui nad on unustanud oma MODx kasutajanime ja/või parooli';
+$_lang['setting_forgot_login_email_desc'] = 'Template emailile, mis saadetakse kasutajale, kui nad on unustanud oma MODX kasutajanime ja/või parooli';
 
 $_lang['setting_forward_merge_excludes'] = 'sendForward Exclude Fields on Merge';
 $_lang['setting_forward_merge_excludes_desc'] = 'A SymLink merges non-empty field values over the values in the target Resource; using this comma-delimited list of excludes prevents specified fields from being overridden by the SymLink.';
@@ -264,7 +264,7 @@ $_lang['setting_friendly_alias_trim_chars'] = 'FURL Aliase Trim Tähed';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Tähed, mis tuleb Ressurssi aliase lõpust eemaldada.';
 
 $_lang['setting_friendly_alias_urls'] = 'Kasuta Friendly Aliaseid';
-$_lang['setting_friendly_alias_urls_desc'] = 'Kui kasutate sõbralikke URL-e ja ressurssil on alias, siis aliasel on alati eelis õigus friendly URL üle. Määrates selel valiku \'Jah\' peale, siis Ressurssi Content Type suffix lisatakse ka aliasele. Näiteks: Teil on Ressurss ID-ga 1. millel on alias `sissejuhatus` ja olete määranud Content Type suffix `.html`, peale selle valiku `yes` peale muutmisele genereeritakse `sissejuhatus.html` alias. Kui aliast ei ole määratud, siis MODx genereerib `1.html` lingina.';
+$_lang['setting_friendly_alias_urls_desc'] = 'Kui kasutate sõbralikke URL-e ja ressurssil on alias, siis aliasel on alati eelis õigus friendly URL üle. Määrates selel valiku \'Jah\' peale, siis Ressurssi Content Type suffix lisatakse ka aliasele. Näiteks: Teil on Ressurss ID-ga 1. millel on alias `sissejuhatus` ja olete määranud Content Type suffix `.html`, peale selle valiku `yes` peale muutmisele genereeritakse `sissejuhatus.html` alias. Kui aliast ei ole määratud, siis MODX genereerib `1.html` lingina.';
 
 $_lang['setting_friendly_alias_word_delimiter'] = 'FURL Aliase Sõnade Eraldaja';
 $_lang['setting_friendly_alias_word_delimiter_desc'] = 'Eelistatud eraldaja, mida kasutada friendly URL aliaste slug-ides.';
@@ -273,7 +273,7 @@ $_lang['setting_friendly_alias_word_delimiters'] = 'FURL Aliase Sõnade Eraldaja
 $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Tähed mis esindavad sõnade eraldajaid kui töödeltakse friendly URL aliase sluge. Need tähed konverditakse ja konsolideeritakse eelistatud FURL aliase sõna eraldajaga.';
 
 $_lang['setting_friendly_urls'] = 'Kasuta Friendly URLe';
-$_lang['setting_friendly_urls_desc'] = 'See lubab kasutada otsingumootori jaoks sõbralikke URLe MODx-iga. Palun pnagetähele, et see töötab ainult MODx installatsioonidel, mis töötavad Apache veebiserveril ja te peate kirjutama .htaccess-i faili, et see võimalus töötaks. Uurige .htaccess faili mis on kaasapandud MODx-iga, et saada rohkem infot.';
+$_lang['setting_friendly_urls_desc'] = 'See lubab kasutada otsingumootori jaoks sõbralikke URLe MODX-iga. Palun pnagetähele, et see töötab ainult MODX installatsioonidel, mis töötavad Apache veebiserveril ja te peate kirjutama .htaccess-i faili, et see võimalus töötaks. Uurige .htaccess faili mis on kaasapandud MODX-iga, et saada rohkem infot.';
 $_lang['setting_friendly_urls_err'] = 'Palun määrake kas või mitte soovite kasutada sõbralikke URLe.';
 
 $_lang['setting_hidemenu_default'] = 'Peida Vaikimisi Menüüdest';
@@ -286,7 +286,7 @@ $_lang['setting_mail_encoding'] = 'Mail Kodeering';
 $_lang['setting_mail_encoding_desc'] = 'Määrab sõnumi kodeeringu (encoding). Valikud on selle jaoks "8bit", "7bit", "binary", "base64" ja "quoted-printable".';
 
 $_lang['setting_mail_use_smtp'] = 'Kasuta SMTP';
-$_lang['setting_mail_use_smtp_desc'] = 'Kui true, MODx üritab kasutada SMTP-d maili funktsioonides.';
+$_lang['setting_mail_use_smtp_desc'] = 'Kui true, MODX üritab kasutada SMTP-d maili funktsioonides.';
 
 $_lang['setting_mail_smtp_auth'] = 'SMTP Autentimine';
 $_lang['setting_mail_smtp_auth_desc'] = 'Määrab SMTP autentimise. Kasutab mail_smtp_user ja mail_smtp_pass seadet.';
@@ -328,7 +328,7 @@ $_lang['setting_manager_lang_attribute'] = 'Manageri HTML ja XML Keele Atribuut'
 $_lang['setting_manager_lang_attribute_desc'] = 'Sisestage keele kood, mis sobib paremini valitud manageri keelega, see kindlustab, et brauser saab esitada sisu parimas teile sobilikus formaadis.';
 
 $_lang['setting_manager_language'] = 'Manageri Keel';
-$_lang['setting_manager_language_desc'] = 'Valige keel MODx Sihuhaldussüsteemi Managerile.';
+$_lang['setting_manager_language_desc'] = 'Valige keel MODX Sihuhaldussüsteemi Managerile.';
 
 $_lang['setting_manager_login_start'] = 'Manageri Login Startup';
 $_lang['setting_manager_login_start_desc'] = 'Sisestage dokumendi ID, mida soovite saata kasutajale pärast kui nad on sisse loginud manageri. <strong>Märge: olge kindel, et ID kuulub olemasolevale dokumendile ja et see on avalikustatud ning juudepääsetav kasutaja poolt!</strong>';
@@ -346,7 +346,7 @@ $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_charset'] = 'Character encoding';
-$_lang['setting_modx_charset_desc'] = 'Palun valige millist character encoding soovite kasutada. Teadmiseks, et MODx-i on teistud mitmete encodingutega, kuid mitte kõigiga. Enamus keelte jaoks vaikeväärtus UTF-8 on eelistatud.';
+$_lang['setting_modx_charset_desc'] = 'Palun valige millist character encoding soovite kasutada. Teadmiseks, et MODX-i on teistud mitmete encodingutega, kuid mitte kõigiga. Enamus keelte jaoks vaikeväärtus UTF-8 on eelistatud.';
 
 $_lang['setting_new_file_permissions'] = 'Uue Faili Õigused';
 $_lang['setting_new_file_permissions_desc'] = 'Kui laete üles uue faili File Manageri kaudu, siis File Manager üritab muuta faili õigused selle seade järgi. See ei pruugi töödata osadel serveritel, nagu näiteks IIS - sel juhul peate käsitsi muutma faili õiguseid.';
@@ -361,7 +361,7 @@ $_lang['setting_proxy_auth_type'] = 'Proxy Autentimise Tüüp';
 $_lang['setting_proxy_auth_type_desc'] = 'Toetab kas BASIC või NTLM tüüpi.';
 
 $_lang['setting_proxy_host'] = 'Proxy Host';
-$_lang['setting_proxy_host_desc'] = 'Kui teie server kasutab proxy-it, pange proxy hostinimi siia, et lubada see MODx funktsioonidel mis võivad vajada proxy-it, nagu näiteks Pakkide Haldus.';
+$_lang['setting_proxy_host_desc'] = 'Kui teie server kasutab proxy-it, pange proxy hostinimi siia, et lubada see MODX funktsioonidel mis võivad vajada proxy-it, nagu näiteks Pakkide Haldus.';
 
 $_lang['setting_proxy_password'] = 'Proxy Parool';
 $_lang['setting_proxy_password_desc'] = 'Nõutud parool millega autentiseerida proxy serveris.';
@@ -433,26 +433,26 @@ $_lang['setting_phpthumb_nooffsitelink_watermark_src'] = 'phpThumb Offsite Linki
 $_lang['setting_phpthumb_nooffsitelink_watermark_src_desc'] = 'Optional. A valid file system path to a file to use as a watermark source when your images are rendered offsite by phpThumb.';
 
 $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop';
-$_lang['setting_phpthumb_zoomcrop_desc'] = 'Vaikimisi zc seade phpThumb-ile kui kasutuses MODx-iga. Vaikimisi 0, et ära hoida zoom-i ja cropp-imist.';
+$_lang['setting_phpthumb_zoomcrop_desc'] = 'Vaikimisi zc seade phpThumb-ile kui kasutuses MODX-iga. Vaikimisi 0, et ära hoida zoom-i ja cropp-imist.';
 
 $_lang['setting_phpthumb_far'] = 'phpThumb Force Aspect Ratio';
-$_lang['setting_phpthumb_far_desc'] = 'Vaikimsi far seade phpThumb-ile kui kasutuses MODx-iga. Vaikimisi C, et sundida aspect ratio pildi keskme suunas.';
+$_lang['setting_phpthumb_far_desc'] = 'Vaikimsi far seade phpThumb-ile kui kasutuses MODX-iga. Vaikimisi C, et sundida aspect ratio pildi keskme suunas.';
 
 $_lang['setting_publish_default'] = 'Avalikustatud Vaikimisi';
 $_lang['setting_publish_default_desc'] = 'Valige \'Jah\', et muuta kõik ressurssid vaikimisi avalikustatuks.';
 $_lang['setting_publish_default_err'] = 'Palun määrake, kas soovite või mitte, et dokumendid oleksid avalikustatud vaikimisi.';
 
 $_lang['setting_rb_base_dir'] = 'Ressurssi path';
-$_lang['setting_rb_base_dir_desc'] = 'Siestage füüsiline asukoht ressurssi kaustani. See seade tavaliselt genereeritakse automaatselt. Kuid, kui kasutate IIS-i, siis ei pruugi MODx olla võimeline kaustasid välja nuputama, põhustades Resource Browser näitama erroreid. Sellisel juhul saate sisestada kasuta piltideni siit (sisestage kaust nii nagu näete seda Windows Explorer-is). <strong>MÄRKUS:</strong> Ressurssi kataloog peab sisaldama alamkaustasid: images, files, flash ja media selleks, et resssurssi brauseri saaks töödata korralikult.';
+$_lang['setting_rb_base_dir_desc'] = 'Siestage füüsiline asukoht ressurssi kaustani. See seade tavaliselt genereeritakse automaatselt. Kuid, kui kasutate IIS-i, siis ei pruugi MODX olla võimeline kaustasid välja nuputama, põhustades Resource Browser näitama erroreid. Sellisel juhul saate sisestada kasuta piltideni siit (sisestage kaust nii nagu näete seda Windows Explorer-is). <strong>MÄRKUS:</strong> Ressurssi kataloog peab sisaldama alamkaustasid: images, files, flash ja media selleks, et resssurssi brauseri saaks töödata korralikult.';
 $_lang['setting_rb_base_dir_err'] = 'Palun määrake ressurssi brauseri baas kataloog.';
 $_lang['setting_rb_base_dir_err_invalid'] = 'Seda ressurssi kataloogi ei eksisteeri või sellele puudub juurdepääs. Palun määrake kehtiv kataloog või muudke kataloogi õiguseid.';
 
 $_lang['setting_rb_base_url'] = 'Ressurssi URL';
-$_lang['setting_rb_base_url_desc'] = 'Sisestage virtuaalne sihtkoht ressurssi kataloogini. See seade tavaliselt genereeritakse automaatselt. Kuid, kui kasutate IIS-i, siis ei pruugi MODx olla võimeline kaustasid välja nuputama, põhustades Resource Browser näitama erroreid. Sellisel juhul saate sisestada URL-i piltide kataloogini siit (URL nagu isestaksite seda Internet Explorer-is).';
+$_lang['setting_rb_base_url_desc'] = 'Sisestage virtuaalne sihtkoht ressurssi kataloogini. See seade tavaliselt genereeritakse automaatselt. Kuid, kui kasutate IIS-i, siis ei pruugi MODX olla võimeline kaustasid välja nuputama, põhustades Resource Browser näitama erroreid. Sellisel juhul saate sisestada URL-i piltide kataloogini siit (URL nagu isestaksite seda Internet Explorer-is).';
 $_lang['setting_rb_base_url_err'] = 'Palun määrake ressurssi brauseri baas URL.';
 
 $_lang['setting_request_controller'] = 'Päringu Kontrolleri Failinimi';
-$_lang['setting_request_controller_desc'] = 'Põhi päringu kontrolleri failinimi, millest MODx laetakse. Enamus kasutajaid jätavad selle index.php peale.';
+$_lang['setting_request_controller_desc'] = 'Põhi päringu kontrolleri failinimi, millest MODX laetakse. Enamus kasutajaid jätavad selle index.php peale.';
 
 $_lang['setting_request_param_alias'] = 'Päringu Aliase Parameeter';
 $_lang['setting_request_param_alias_desc'] = 'GET parameeteri nimi, millega idenfitseerida Ressurssi alaseid, kui toimub suunamine FURL-idega.';
@@ -462,7 +462,7 @@ $_lang['setting_request_param_id_desc'] = 'GET parameeteri nimi, millega idenfit
 
 
 $_lang['setting_resolve_hostnames'] = 'Lahenda hostinimed';
-$_lang['setting_resolve_hostnames_desc'] = 'kas soovite, et MODx üritaks lahendada külastajte hostinimesid, kui nad külastavad teie lehte? Hostinimede lahendamine võib põhjustada lisa koormust teie serverile, kuigi külastajatele jääb see märkamatuks.';
+$_lang['setting_resolve_hostnames_desc'] = 'kas soovite, et MODX üritaks lahendada külastajte hostinimesid, kui nad külastavad teie lehte? Hostinimede lahendamine võib põhjustada lisa koormust teie serverile, kuigi külastajatele jääb see märkamatuks.';
 
 $_lang['setting_resource_tree_node_name'] = 'Ressurssi Puu Üksuse Väli';
 $_lang['setting_resource_tree_node_name_desc'] = 'Määra Ressurssi väli, mida kasutada üksutse kuvamisel Ressurssi Puus. Vaikimisi Kasutatakse pagetitle välja, kui suvalist Ressurssi välja on võimalk kasutada, nagu näiteks menutitle, alias, longtitle, jne.';
@@ -499,19 +499,19 @@ $_lang['setting_session_handler_class'] = 'Session Handler Classname';
 $_lang['setting_session_handler_class_desc'] = 'Sessioonid, mis salvestatakse andmebaasi, kasutage \'modSessionHandler\'. Jätek väli tühjaks, kui soovite standartset PHP sessioonide haldust.';
 
 $_lang['setting_session_name'] = 'Sessiooni Nimi';
-$_lang['setting_session_name_desc'] = 'Kasutage seda seadet, et määrata sessiooni nimi, mida kasutatakse MODx sessioonides.';
+$_lang['setting_session_name_desc'] = 'Kasutage seda seadet, et määrata sessiooni nimi, mida kasutatakse MODX sessioonides.';
 
 $_lang['setting_settings_version'] = 'Seadete Versioon';
-$_lang['setting_settings_version_desc'] = 'Hetkel installitud MODx versioon.';
+$_lang['setting_settings_version_desc'] = 'Hetkel installitud MODX versioon.';
 
 $_lang['setting_settings_distro'] = 'Settings Distribution';
-$_lang['setting_settings_distro_desc'] = 'Hetkel installeeritud MODx distribution.';
+$_lang['setting_settings_distro_desc'] = 'Hetkel installeeritud MODX distribution.';
 
 $_lang['setting_set_header'] = 'Määra HTTP Headerid';
-$_lang['setting_set_header_desc'] = 'Kui lubatud, MODx üritab määrata HTTP headereid Ressurssi jaoks.';
+$_lang['setting_set_header_desc'] = 'Kui lubatud, MODX üritab määrata HTTP headereid Ressurssi jaoks.';
 
 $_lang['setting_signupemail_message'] = 'Registreerumise e-mail';
-$_lang['setting_signupemail_message_desc'] = 'Siit saate määrata sõnumi, mis saadetekase kasutajatele, kui loote neidle konto, ning lubate MODx-il saata neile e-maili, mis sisaldab nende kasutajanime ja parooli. <br /><strong>MÄRKUS:</strong> Järgnevad placeholders asendatakse Sisu Halduse poolt sõnumi saatmisel: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise nimi või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täis nimi. <br /><br /><strong>Jätke [[+uid]] ja [[+pwd]] e-maili või muidu kasutajanime ja parooli ei saadeta ja kasutajad ei tea oma kasutajatunnust ja prooli!</strong>';
+$_lang['setting_signupemail_message_desc'] = 'Siit saate määrata sõnumi, mis saadetekase kasutajatele, kui loote neidle konto, ning lubate MODX-il saata neile e-maili, mis sisaldab nende kasutajanime ja parooli. <br /><strong>MÄRKUS:</strong> Järgnevad placeholders asendatakse Sisu Halduse poolt sõnumi saatmisel: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise nimi või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täis nimi. <br /><br /><strong>Jätke [[+uid]] ja [[+pwd]] e-maili või muidu kasutajanime ja parooli ei saadeta ja kasutajad ei tea oma kasutajatunnust ja prooli!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Tere [[+uid]] \n\nSiin on teie sisselogimise detailid [[+sname]] Sisuhaldus Süsteemi:\n\nKasutajanimi: [[+uid]]\nParool: [[+pwd]]\n\nKui olete sisse loginud Sisuhaldusesse ([[+surl]]), on teil võimalk muuta oma parooli.\n\nParimat,\nLehe Administraator';
 
 $_lang['setting_site_name'] = 'Lahe Nimi';
@@ -534,10 +534,10 @@ $_lang['setting_site_unavailable_page_desc'] = 'Sisestage Ressurssi ID, mida soo
 $_lang['setting_site_unavailable_page_err'] = 'Palun määrake dokumendi ID \'leht pole saadaval\' lehele.';
 
 $_lang['setting_strip_image_paths'] = 'Kirjuta ümber brauseri path-id?';
-$_lang['setting_strip_image_paths_desc'] = 'Kui valitud \'Ei\' asend, siis MODx kirjutab faili brauseri resurssi src-id (images, files, flash, jne.) absoluutsete URL-idena. Relatiivsed URL-id on kasulikud, kui soovite kolida MODx installiga, nt: staging serverist production servierisse. Kui teil pole aimugi, mis see tähendab, siis parim on jätta see valik \'Jah\' peale.';
+$_lang['setting_strip_image_paths_desc'] = 'Kui valitud \'Ei\' asend, siis MODX kirjutab faili brauseri resurssi src-id (images, files, flash, jne.) absoluutsete URL-idena. Relatiivsed URL-id on kasulikud, kui soovite kolida MODX installiga, nt: staging serverist production servierisse. Kui teil pole aimugi, mis see tähendab, siis parim on jätta see valik \'Jah\' peale.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Näita kirjeldusi Põhi Menüüs';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Kui \'Ei\', siis MODx peidab kirjeldused põhi menüü linkidelt manageris.';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Kui \'Ei\', siis MODX peidab kirjeldused põhi menüü linkidelt manageris.';
 
 $_lang['setting_tree_default_sort'] = 'Ressurssi Puu Vaikimisi Sorteeritav Väli';
 $_lang['setting_tree_default_sort_desc'] = 'Vaikimisi väli mille järgi soreeritakse Ressurssi puu, kui manager laetakse.';
@@ -579,7 +579,7 @@ $_lang['setting_use_editor_desc'] = 'Kas soovite lubada rich text editor? Kui ol
 $_lang['setting_use_editor_err'] = 'Palun määrake, kas soovite või mitte kasutada RTE editori.';
 
 $_lang['setting_use_multibyte'] = 'Kasuta Multibyte Laiendust';
-$_lang['setting_use_multibyte_desc'] = 'Määrake "true", kui soovite kasutada mbstring laiendust multibyte tähtede jaoks teie MODx-is. Ainult siis määrake "true" kui teie serveril on mbstring PHP laiendus installeeritud.';
+$_lang['setting_use_multibyte_desc'] = 'Määrake "true", kui soovite kasutada mbstring laiendust multibyte tähtede jaoks teie MODX-is. Ainult siis määrake "true" kui teie serveril on mbstring PHP laiendus installeeritud.';
 
 $_lang['setting_webpwdreminder_message'] = 'Veebi Parooli Meeletuletuse e-mail';
 $_lang['setting_webpwdreminder_message_desc'] = 'Sisetage sõnum, mis saadetakse kasutajatele, kui nad tellivad uu parooli e-posti kaudu. Sisu Haldus saadab e-maili, mis sisaldab nende uut parooli ja aktiveerimise informatsiooni. <br /><strong>Märkus:</strong> Järgnevad placeholder-id asendatakse Content Manageri poolt, kui sõnum saadetakse: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise tunnus või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täisnimi. <br /><br /><strong>Jätke [[+uid]] aja [[+pwd]] e-maili või mudiu kasutajanime ja prooli ei saadeta ja kasutajad ei tea omaenda kasutajanime või parooli!</strong>';
@@ -593,7 +593,7 @@ $_lang['setting_welcome_screen'] = 'Näita Tervitus Ekraani';
 $_lang['setting_welcome_screen_desc'] = 'Kui on true, tervitus ekraan ilmub järgmise eduka laadimise avaleheküljele ja siis ei näidata pärast seda.';
 
 $_lang['setting_welcome_screen_url'] = 'Tervitus Ekraani URL';
-$_lang['setting_welcome_screen_url_desc'] = 'URL tervitus ekraani jaoks, mida laadida, kui esimest korda laetakse MODx Revolution.';
+$_lang['setting_welcome_screen_url_desc'] = 'URL tervitus ekraani jaoks, mida laadida, kui esimest korda laetakse MODX Revolution.';
 
 $_lang['setting_which_editor'] = 'Editor, mida ksutada';
 $_lang['setting_which_editor_desc'] = 'Siit saate valida, millist Rich Text Editori soovite kasutada. Saate allalaadida ja installida täiendavaid Rich Text Editore Pakkide Halduses.';
@@ -602,5 +602,5 @@ $_lang['setting_which_element_editor'] = 'Editor, mida kasutada Elementidel';
 $_lang['setting_which_element_editor_desc'] = 'Siit saate valida Rich Text Editori, mida soovite kasutada, kui muudate Elemente. Saate allalaadida ja installida täiendavaid Rich Text Editore Pakkide Halduses.';
 
 $_lang['setting_xhtml_urls'] = 'XHTML URL-id';
-$_lang['setting_xhtml_urls_desc'] = 'Kui true, siis kõik genereeritud URL-id MODx-i poolt on XHTML standardi järgi, kaasaarvatud ampersand tähemärk.';
+$_lang['setting_xhtml_urls_desc'] = 'Kui true, siis kõik genereeritud URL-id MODX-i poolt on XHTML standardi järgi, kaasaarvatud ampersand tähemärk.';
 

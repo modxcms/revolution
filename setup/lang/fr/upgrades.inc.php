@@ -8,7 +8,7 @@
 $_lang['add_column'] = 'Ajout d\'une nouvelle colonne `[[+column]]` à `[[+table]]`.';
 $_lang['add_index'] = 'Ajout d\'un nouvel index sur `[[+index]]` pour la table `[[+table]]`.';
 $_lang['add_moduser_classkey'] = 'Ajout du champ class_key pour supporter les dérivés modUser.';
-$_lang['added_cachepwd'] = 'Ajout du champ cachepwd, manquant aux premières versions de MODx Revolution.';
+$_lang['added_cachepwd'] = 'Ajout du champ cachepwd, manquant aux premières versions de MODX Revolution.';
 $_lang['added_content_ft_idx'] = 'Ajout du nouvel index full-text `content_ft_idx` sur les champs `pagetitle`, `longtitle`, `description`, `introtext`, `content`.';
 $_lang['allow_null_properties'] = 'Autorisation de null pour `[[+class]`.`properties` fixée.';
 $_lang['alter_activeuser_action'] = 'Modification du champ modActiveUser `action` afin d\'autoriser des dénominations plus longues pour les actions.';

@@ -1,6 +1,6 @@
 <?php
 /**
- * Default MODx Access Policies
+ * Default MODX Access Policies
  *
  * @package modx
  * @subpackage build
@@ -11,7 +11,7 @@ $policies['1']= $xpdo->newObject('modAccessPolicy');
 $policies['1']->fromArray(array (
   'id' => 1,
   'name' => 'Resource',
-  'description' => 'MODx Resource Policy with all attributes.',
+  'description' => 'MODX Resource Policy with all attributes.',
   'parent' => 0,
   'class' => '',
   'data' => '{"add_children":true,"create":true,"copy":true,"delete":true,"list":true,"load":true,"move":true,"publish":true,"remove":true,"save":true,"steal_lock":true,"undelete":true,"unpublish":true,"view":true}',
@@ -66,7 +66,7 @@ $policies['6']= $xpdo->newObject('modAccessPolicy');
 $policies['6']->fromArray(array (
   'id' => 6,
   'name' => 'Element',
-  'description' => 'MODx Element policy with all attributes.',
+  'description' => 'MODX Element policy with all attributes.',
   'parent' => 0,
   'class' => '',
   'data' => '{"add_children":true,"create":true,"delete":true,"list":true,"load":true,"remove":true,"save":true,"view":true,"copy":true}',

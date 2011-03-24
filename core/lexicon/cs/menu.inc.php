@@ -24,4 +24,4 @@ $_lang['menu_remove'] = 'Odstranit položku menu';
 $_lang['menu_top'] = 'Horní menu';
 $_lang['menu_update'] = 'Upravit menu';
 $_lang['topmenu'] = 'Horní menu';
-$_lang['topmenu_desc'] = 'Toto umožňuje propojení akcí s položkami menu v horním menu MODx správce obsahu. Jednoduše umístěte akci na místo, kde by jste jej chtěli v menu mít.';
+$_lang['topmenu_desc'] = 'Toto umožňuje propojení akcí s položkami menu v horním menu MODX správce obsahu. Jednoduše umístěte akci na místo, kde by jste jej chtěli v menu mít.';

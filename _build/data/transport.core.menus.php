@@ -29,7 +29,7 @@ $children[0]->fromArray(array (
   'description' => 'preview_desc',
   'icon' => 'images/icons/show.gif',
   'menuindex' => 0,
-  'handler' => 'MODx.preview(); return false;',
+  'handler' => 'MODX.preview(); return false;',
 ), '', true, true);
 
 
@@ -42,7 +42,7 @@ $children[1]->fromArray(array (
   'description' => 'refresh_site_desc',
   'icon' => 'images/icons/refresh.png',
   'menuindex' => 1,
-  'handler' => 'MODx.clearCache(); return false;',
+  'handler' => 'MODX.clearCache(); return false;',
   'permissions' => 'empty_cache',
 ), '', true, true);
 
@@ -56,10 +56,10 @@ $children[2]->fromArray(array (
   'icon' => 'images/ext/default/grid/hmenu-unlock.png',
   'menuindex' => 2,
   'handler' => '
-MODx.msg.confirm({
+MODX.msg.confirm({
     title: _(\'remove_locks\')
     ,text: _(\'confirm_remove_locks\')
-    ,url: MODx.config.connectors_url+\'system/remove_locks.php\'
+    ,url: MODX.config.connectors_url+\'system/remove_locks.php\'
     ,params: {
         action: \'remove\'
     }
@@ -172,7 +172,7 @@ $children[8]->fromArray(array (
   'description' => 'logout_desc',
   'icon' => 'images/misc/logo_tbar.gif',
   'menuindex' => 8,
-  'handler' => 'MODx.logout(); return false;',
+  'handler' => 'MODX.logout(); return false;',
 ), '', true, true);
 
 
@@ -314,10 +314,10 @@ $children[4]->fromArray(array (
   'description' => 'flush_access_desc',
   'icon' => 'images/icons/unzip.gif',
   'menuindex' => 4,
-  'handler' => 'MODx.msg.confirm({
+  'handler' => 'MODX.msg.confirm({
     title: _(\'flush_access\')
     ,text: _(\'flush_access_confirm\')
-    ,url: MODx.config.connectors_url+\'security/access/index.php\'
+    ,url: MODX.config.connectors_url+\'security/access/index.php\'
     ,params: {
         action: \'flush\'
     }
@@ -337,10 +337,10 @@ $children[5]->fromArray(array (
   'description' => 'flush_sessions_desc',
   'icon' => 'images/icons/unzip.gif',
   'menuindex' => 5,
-  'handler' => 'MODx.msg.confirm({
+  'handler' => 'MODX.msg.confirm({
     title: _(\'flush_sessions\')
     ,text: _(\'flush_sessions_confirm\')
-    ,url: MODx.config.connectors_url+\'security/flush.php\'
+    ,url: MODX.config.connectors_url+\'security/flush.php\'
     ,params: {
         action: \'flush\'
     }

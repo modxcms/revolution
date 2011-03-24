@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Acerca de';
-$_lang['about_desc'] = 'Más información acerca de MODx Revolution.';
+$_lang['about_desc'] = 'Más información acerca de MODX Revolution.';
 $_lang['access_permissions'] = 'Permisos de Acceso';
 $_lang['access_permissions_desc'] = 'Administrar el acceso del grupo de usuarios a recursos y contextos.';
 $_lang['api_docs'] = 'Documentación del API';
@@ -20,7 +20,7 @@ $_lang['contexts_desc'] = 'Administrar contextos del sitio y su configuración.'
 $_lang['edit_menu'] = 'Acciones';
 $_lang['edit_menu_desc'] = 'Administrar Acciones y la estructura del Menú Principal.';
 $_lang['eventlog_viewer'] = 'Bitácora de Errores';
-$_lang['eventlog_viewer_desc'] = 'Ver el error.log de MODx.';
+$_lang['eventlog_viewer_desc'] = 'Ver el error.log de MODX.';
 $_lang['export_site'] = 'Exportar HTML Estático';
 $_lang['export_site_desc'] = 'Exportar el sitio actual como páginas estáticas de HTML.';
 $_lang['flush_access'] = 'Vaciar Permisos';
@@ -34,15 +34,15 @@ $_lang['flush_sessions_not_supported'] = 'El vaciado de sesiones de usuario no e
 $_lang['form_customization'] = 'Personalización de Formas';
 $_lang['form_customization_desc'] = 'Personalizar formas del admin por permisos de seguridad.';
 $_lang['forums'] = 'Foros';
-$_lang['forums_desc'] = 'Ver los foros oficiales de MODx.';
+$_lang['forums_desc'] = 'Ver los foros oficiales de MODX.';
 $_lang['import_resources'] = 'Importar Recursos';
 $_lang['import_resources_desc'] = 'Importar un lote de recursos estáticos a este sitio.';
 $_lang['import_site'] = 'Importar HTML';
 $_lang['import_site_desc'] = 'Importar un lote de archivos HTML a este sitio.';
 $_lang['jira'] = 'Bugs';
-$_lang['jira_desc'] = 'Ir al bugtracker de MODx para rastrear y archivar bugs.';
+$_lang['jira_desc'] = 'Ir al bugtracker de MODX para rastrear y archivar bugs.';
 $_lang['lexicon_management'] = 'Administración del Léxico';
-$_lang['lexicon_management_desc'] = 'Editar cualquiera de los textos de idioma a lo largo del admin de MODx.';
+$_lang['lexicon_management_desc'] = 'Editar cualquiera de los textos de idioma a lo largo del admin de MODX.';
 
 $_lang['manage_workspaces'] = 'Administración de Paquetes';
 $_lang['manage_workspaces_desc'] = 'Descargar Componentes de Terceros, añadir Proveedores e instalar paquetes.';
@@ -98,4 +98,4 @@ $_lang['view_logging_desc'] = 'Ver la actividad reciente en el administrador.';
 $_lang['view_sysinfo'] = 'Información del Sistema';
 $_lang['view_sysinfo_desc'] = 'Ver información del servidor, como phpinfo, información de la base de datos MySQL, y más.';
 $_lang['wiki'] = 'Wiki';
-$_lang['wiki_desc'] = 'Lanza el wiki Confluence de MODx, donde se almacena la documentación de MODx Revolution.';
+$_lang['wiki_desc'] = 'Lanza el wiki Confluence de MODX, donde se almacena la documentación de MODX Revolution.';

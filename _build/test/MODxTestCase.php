@@ -1,8 +1,8 @@
 <?php
 /**
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -22,7 +22,7 @@
  * @package modx-test
  */
 /**
- * Extends the basic PHPUnit TestCase class to provide MODx specific methods
+ * Extends the basic PHPUnit TestCase class to provide MODX specific methods
  *
  * @package modx-test
  */
@@ -31,7 +31,7 @@ class MODxTestCase extends PHPUnit_Framework_TestCase {
     protected $modx = null;
 
     /**
-     * Ensure all tests have a reference to the MODx object
+     * Ensure all tests have a reference to the MODX object
      */
     public function setUp() {
         $this->modx =& MODxTestHarness::_getConnection();
@@ -45,7 +45,7 @@ class MODxTestCase extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * Check a MODx return result for a success flag
+     * Check a MODX return result for a success flag
      *
      * @param array $result The result response
      */
@@ -55,7 +55,7 @@ class MODxTestCase extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * Check a MODx processor response and return results
+     * Check a MODX processor response and return results
      *  
      * @param string $result The response
      * @return array

@@ -1,8 +1,8 @@
-# MODx supports Friendly URLs via this .htaccess file. You must serve web
+# MODX supports Friendly URLs via this .htaccess file. You must serve web
 # pages via Apache with mod_rewrite to use this functionality, and you must
 # change the file name from ht.access to .htaccess.
 #
-# Make sure RewriteBase points to the directory where you installed MODx.
+# Make sure RewriteBase points to the directory where you installed MODX.
 # E.g., "/modx" if your installation is in a "modx" subdirectory.
 #
 # You may choose to make your URLs non-case-sensitive by adding a NC directive

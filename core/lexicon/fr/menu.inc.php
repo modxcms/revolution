@@ -21,4 +21,4 @@ $_lang['menu_remove'] = 'Supprimer l\'élément du menu';
 $_lang['menu_top'] = 'Barre de menu';
 $_lang['menu_update'] = 'Mettre à jour le menu';
 $_lang['topmenu'] = 'Navigation';
-$_lang['topmenu_desc'] = 'Ceci vous permet d\'associer des actions au menu Navigation de MODx. Placez simplement les actions où vous les désirez.';
+$_lang['topmenu_desc'] = 'Ceci vous permet d\'associer des actions au menu Navigation de MODX. Placez simplement les actions où vous les désirez.';

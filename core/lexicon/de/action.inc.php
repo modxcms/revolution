@@ -8,10 +8,10 @@
  * @topic action
  */
 $_lang['action'] = 'Aktion';
-$_lang['action_confirm_remove'] = 'Sind Sie sicher, dass Sie diese Aktion löschen möchten? Dies könnte möglicherweise Ihre MODx-Manager-Benutzeroberfläche beschädigen.';
+$_lang['action_confirm_remove'] = 'Sind Sie sicher, dass Sie diese Aktion löschen möchten? Dies könnte möglicherweise Ihre MODX-Manager-Benutzeroberfläche beschädigen.';
 $_lang['action_create'] = 'Aktion erstellen';
 $_lang['action_create_here'] = 'Aktion hier erstellen';
-$_lang['action_desc'] = 'Aktionen sind Abstraktionen von MODx-Controllern. Sie können benutzt werden, um eigene Manager-Seiten zu erstellen oder um das Hauptmenü des MODx-Managers umzugestalten.';
+$_lang['action_desc'] = 'Aktionen sind Abstraktionen von MODX-Controllern. Sie können benutzt werden, um eigene Manager-Seiten zu erstellen oder um das Hauptmenü des MODX-Managers umzugestalten.';
 $_lang['action_err_create'] = 'Ein Fehler trat auf beim Erstellen der Aktion.';
 $_lang['action_err_nf'] = 'Aktion nicht gefunden!';
 $_lang['action_err_ns'] = 'Keine Aktion angegeben!';

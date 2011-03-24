@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -20,7 +20,7 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * Represents the MODx parser responsible for processing MODx tags.
+ * Represents the MODX parser responsible for processing MODX tags.
  *
  * This class encapsulates all of the functions for collecting and evaluating
  * element tags embedded in text content.
@@ -801,7 +801,7 @@ abstract class modTag {
     }
 }
 /**
- * Tag representing a modResource field from the current MODx resource.
+ * Tag representing a modResource field from the current MODX resource.
  *
  * [[*content]] Represents the content field from modResource.
  *

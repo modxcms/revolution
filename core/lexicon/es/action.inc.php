@@ -7,10 +7,10 @@
  * @subpackage lexicon
  */
 $_lang['action'] = 'Acción';
-$_lang['action_confirm_remove'] = '¿Estás seguro de que quieres borrar esta acción? Esto puede potencialmente romper tu interfase del administrador de MODx.';
+$_lang['action_confirm_remove'] = '¿Estás seguro de que quieres borrar esta acción? Esto puede potencialmente romper tu interfase del administrador de MODX.';
 $_lang['action_create'] = 'Crear Acción';
 $_lang['action_create_here'] = 'Crear Acción Aquí';
-$_lang['action_desc'] = 'La acciones son abstracciones de controladores de MODx.  Pueden ser usados para crear páginas personalizadas del admin, así como reorganizar el menu superior del admin de MODx.';
+$_lang['action_desc'] = 'La acciones son abstracciones de controladores de MODX.  Pueden ser usados para crear páginas personalizadas del admin, así como reorganizar el menu superior del admin de MODX.';
 $_lang['action_err_create'] = 'Ocurrió un error mientras se creaba la acción.';
 $_lang['action_err_nf'] = '¡Acción no encontrada!';
 $_lang['action_err_ns'] = '¡No se especificó un acción!';

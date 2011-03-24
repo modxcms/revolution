@@ -1,6 +1,6 @@
 <?php
 /**
- * Create a new MODx Revolution repository.
+ * Create a new MODX Revolution repository.
  *
  * @package setup
  */

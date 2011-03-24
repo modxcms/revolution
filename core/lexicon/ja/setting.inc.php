@@ -131,7 +131,7 @@ $_lang['setting_cache_lang_js'] = '語彙Javascript文字列のキャッシュ';
 $_lang['setting_cache_lang_js_desc'] = 'If set to true, this will use server headers to cache the lexicon strings loaded into JavaScript for the manager interface.';
 
 $_lang['setting_cache_lexicon_topics'] = '語彙トピックのキャッシュ';
-$_lang['setting_cache_lexicon_topics_desc'] = 'When enabled, all Lexicon Topics will be cached so as to greatly reduce load times for Internationalization functionality. MODx strongly recommends leaving this set to \'Yes\'.';
+$_lang['setting_cache_lexicon_topics_desc'] = 'When enabled, all Lexicon Topics will be cached so as to greatly reduce load times for Internationalization functionality. MODX strongly recommends leaving this set to \'Yes\'.';
 
 $_lang['setting_cache_noncore_lexicon_topics'] = 'コア以外の語彙トピックを有効';
 $_lang['setting_cache_noncore_lexicon_topics_desc'] = 'When disabled, non-core Lexicon Topics will be not be cached. This is useful to disable when developing your own Extras.';
@@ -143,19 +143,19 @@ $_lang['setting_cache_resource_expires'] = '部分的なリソースキャッシ
 $_lang['setting_cache_resource_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for partial Resource caching.';
 
 $_lang['setting_cache_scripts'] = 'スクリプトキャッシュを有効';
-$_lang['setting_cache_scripts_desc'] = 'When enabled, MODx will cache all Scripts (Snippets and Plugins) to file to reduce load times. MODx recommends leaving this set to \'Yes\'.';
+$_lang['setting_cache_scripts_desc'] = 'When enabled, MODX will cache all Scripts (Snippets and Plugins) to file to reduce load times. MODX recommends leaving this set to \'Yes\'.';
 
 $_lang['setting_cache_system_settings'] = 'システム設定キャッシュを有効';
-$_lang['setting_cache_system_settings_desc'] = 'When enabled, system settings will be cached to reduce load times. MODx recommends leaving this on.';
+$_lang['setting_cache_system_settings_desc'] = 'When enabled, system settings will be cached to reduce load times. MODX recommends leaving this on.';
 
 $_lang['setting_compress_css'] = '圧縮したCSSを使用';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODx will use a compressed version of its css stylesheets in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its css stylesheets in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
 $_lang['setting_compress_js'] = '圧縮したJavascriptを使用';
-$_lang['setting_compress_js_desc'] = 'When this is enabled, MODx will use a compressed version of its custom JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will use a compressed version of its custom JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
 $_lang['setting_concat_js'] = '連結したJavascriptを使用';
-$_lang['setting_concat_js_desc'] = 'When this is enabled, MODx will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
 $_lang['setting_container_suffix'] = 'コンテナの添え字';
 $_lang['setting_container_suffix_desc'] = 'フレンドリーURLを使用する場合に、コンテナ属性のリソースに追加する添え字';
@@ -191,7 +191,7 @@ $_lang['setting_error_page_desc'] = 'ドキュメントが存在しない場合�
 $_lang['setting_error_page_err'] = 'エラーページに使用するドキュメントIDを指定してください。';
 
 $_lang['setting_extension_packages'] = 'Extension Packages';
-$_lang['setting_extension_packages_desc'] = 'A comma separated list of packages to load on MODx instantiation. In the format packagename:pathtomodel';
+$_lang['setting_extension_packages_desc'] = 'A comma separated list of packages to load on MODX instantiation. In the format packagename:pathtomodel';
 
 $_lang['setting_failed_login_attempts'] = 'ログイン失敗回数の上限';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
@@ -200,25 +200,25 @@ $_lang['setting_fe_editor_lang'] = 'エディタの言語';
 $_lang['setting_fe_editor_lang_desc'] = 'Choose a language for the editor to use when used as a front-end editor.';
 
 $_lang['setting_feed_modx_news'] = 'MODxニュースフィードURL';
-$_lang['setting_feed_modx_news_desc'] = 'Set the URL for the RSS feed for the MODx News panel in the manager.';
+$_lang['setting_feed_modx_news_desc'] = 'Set the URL for the RSS feed for the MODX News panel in the manager.';
 
 $_lang['setting_feed_modx_news_enabled'] = 'MODxニュースフィードを有効';
 $_lang['setting_feed_modx_news_enabled_desc'] = '「いいえ」を選択すると管理画面のようこそ画面でニュースフィードが表示されません。';
 
 $_lang['setting_feed_modx_security'] = 'MODxセキュリティー警告フィードのURL';
-$_lang['setting_feed_modx_security_desc'] = 'Set the URL for the RSS feed for the MODx Security Notices panel in the manager.';
+$_lang['setting_feed_modx_security_desc'] = 'Set the URL for the RSS feed for the MODX Security Notices panel in the manager.';
 
 $_lang['setting_feed_modx_security_enabled'] = 'MODxセキュリティフィードを有効';
-$_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODx will hide the Security feed in the welcome section of the manager.';
+$_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODX will hide the Security feed in the welcome section of the manager.';
 
 $_lang['setting_filemanager_path'] = 'ファイル管理領域のパス';
-$_lang['setting_filemanager_path_desc'] = 'IIS often does not populate the document_root setting properly, which is used by the file manager to determine what you can look at. If you\'re having problems using the file manager, make sure this path points to the root of your MODx installation.';
+$_lang['setting_filemanager_path_desc'] = 'IIS often does not populate the document_root setting properly, which is used by the file manager to determine what you can look at. If you\'re having problems using the file manager, make sure this path points to the root of your MODX installation.';
 
 $_lang['setting_filemanager_url'] = 'File Manager Url';
-$_lang['setting_filemanager_url_desc'] = 'Optional. Set this if you want to set an explicit URL to access the files in the MODx file manager from (useful if you have changed filemanager_path to a path outside the MODx webroot). Make sure this is the web-accessible URL of the filemanager_path setting value. If leave this empty, MODx will try to automatically calculate it.';
+$_lang['setting_filemanager_url_desc'] = 'Optional. Set this if you want to set an explicit URL to access the files in the MODX file manager from (useful if you have changed filemanager_path to a path outside the MODX webroot). Make sure this is the web-accessible URL of the filemanager_path setting value. If leave this empty, MODX will try to automatically calculate it.';
 
 $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
-$_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODx username and/or password.';
+$_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODX username and/or password.';
 
 $_lang['setting_friendly_alias_lowercase_only'] = 'エイリアスを小文字で揃える';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'リソースのエイリアスに小文字のみを許可するかを決定します。';
@@ -339,7 +339,7 @@ $_lang['setting_proxy_auth_type'] = 'プロキシの認証タイプ';
 $_lang['setting_proxy_auth_type_desc'] = 'Supports either BASIC or NTLM.';
 
 $_lang['setting_proxy_host'] = 'プロキシのホスト';
-$_lang['setting_proxy_host_desc'] = 'If your server is using a proxy, set the hostname here to enable MODx features that might need to use the proxy, such as Package Management.';
+$_lang['setting_proxy_host_desc'] = 'If your server is using a proxy, set the hostname here to enable MODX features that might need to use the proxy, such as Package Management.';
 
 $_lang['setting_proxy_password'] = 'プロキシのパスワード';
 $_lang['setting_proxy_password_desc'] = 'The password required to authenticate to your proxy server.';
@@ -369,10 +369,10 @@ $_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb ImageMagick Path';
 $_lang['setting_phpthumb_imagemagick_path_desc'] = 'Optional. Set an alternative ImageMagick path here for generating thumbnails with phpThumb, if it is not in the PHP default.';
 
 $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop';
-$_lang['setting_phpthumb_zoomcrop_desc'] = 'The default zc setting for phpThumb when used in MODx. Defaults to 0 to prevent zoom cropping.';
+$_lang['setting_phpthumb_zoomcrop_desc'] = 'The default zc setting for phpThumb when used in MODX. Defaults to 0 to prevent zoom cropping.';
 
 $_lang['setting_phpthumb_far'] = 'phpThumb Force Aspect Ratio';
-$_lang['setting_phpthumb_far_desc'] = 'The default far setting for phpThumb when used in MODx. Defaults to C to force aspect ratio toward the center.';
+$_lang['setting_phpthumb_far_desc'] = 'The default far setting for phpThumb when used in MODX. Defaults to C to force aspect ratio toward the center.';
 
 $_lang['setting_publish_default'] = '公開デフォルト';
 $_lang['setting_publish_default_desc'] = '新しく作成するドキュメントをデフォルトで公開に設定する場合は「はい」を選択してください。';
@@ -397,7 +397,7 @@ $_lang['setting_request_param_id'] = 'IDを受け取るパラメータ';
 $_lang['setting_request_param_id_desc'] = 'The name of the GET parameter to identify Resource IDs when not using FURLs.';
 
 $_lang['setting_resolve_hostnames'] = 'Resolve hostnames';
-$_lang['setting_resolve_hostnames_desc'] = 'Do you want MODx to try to resolve your visitors\' hostnames when they visit your site? Resolving hostnames may create some extra server load, although your visitors won\'t notice this in any way.';
+$_lang['setting_resolve_hostnames_desc'] = 'Do you want MODX to try to resolve your visitors\' hostnames when they visit your site? Resolving hostnames may create some extra server load, although your visitors won\'t notice this in any way.';
 
 $_lang['setting_richtext_default'] = 'デフォルトのエディタ';
 $_lang['setting_richtext_default_desc'] = '「はい」を選択すると、デフォルトで新しいリソースを作成する際にリッチテキストエディタを使用します。';
@@ -431,7 +431,7 @@ $_lang['setting_session_handler_class'] = 'Session Handler Classname';
 $_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'セッション名';
-$_lang['setting_session_name_desc'] = 'Use this setting to customize the session name used for the sessions in MODx.';
+$_lang['setting_session_name_desc'] = 'Use this setting to customize the session name used for the sessions in MODX.';
 
 $_lang['setting_settings_version'] = 'コアのバージョン';
 $_lang['setting_settings_version_desc'] = '稼働しているMODxのバージョンです。';
@@ -499,7 +499,7 @@ $_lang['setting_use_editor_desc'] = 'リッチテキストエディタを使用�
 $_lang['setting_use_editor_err'] = 'リッチテキストエディタの使用を選択してください。';
 
 $_lang['setting_use_multibyte'] = 'MB関数を有効(マルチバイト)';
-$_lang['setting_use_multibyte_desc'] = 'MB関数を有効にします。日本語環境では必須です。Set to true if you want to use the mbstring extension for multibyte characters in your MODx installation. Only set to true if you have the mbstring PHP extension installed.';
+$_lang['setting_use_multibyte_desc'] = 'MB関数を有効にします。日本語環境では必須です。Set to true if you want to use the mbstring extension for multibyte characters in your MODX installation. Only set to true if you have the mbstring PHP extension installed.';
 
 $_lang['setting_webpwdreminder_message'] = 'パスワード変更リクエストメール';
 $_lang['setting_webpwdreminder_message_desc'] = 'ウェブユーザが、メールで新しいパスワードを要求する場合に、常に送信されるメッセージを入力します。コンテント管理はそれらの新しいパスワードと有効化情報を含むメールを送信します。<br /><strong>ノート:</strong>コンテント管理は、メッセージを送るときに以下のプレースホルダを置き換えます。<br /><br />[[+sname]] - ウェブサイト名、<br />[[+saddr]] - ウェブサイトのメールアドレス、<br />[[+surl]] - サイトのURL、<br />[[+uid]] - ユーザーのログイン名またはID、<br />[[+pwd]] - ユーザーのパスワード、<br />[[+ufn]] - ユーザーのフルネーム。<br /><br /><strong>[[+uid]] と [[+pwd]] は必ず記載してください。記載しない場合はユーザー名とパスワードはメールで送られないため、ユーザーはユーザー名とパスワードを知ることができません。</strong>';
@@ -513,7 +513,7 @@ $_lang['setting_welcome_screen'] = 'ようこそ画面の表示';
 $_lang['setting_welcome_screen_desc'] = '「はい」を選択すると、ようこそページの読み込みが完了したときに、ようこそ画面を表示します。そしてそれ以降は表示しません。';
 
 $_lang['setting_welcome_screen_url'] = 'Welcome Screen URL';
-$_lang['setting_welcome_screen_url_desc'] = 'The URL for the welcome screen that loads on first load of MODx Revolution.';
+$_lang['setting_welcome_screen_url_desc'] = 'The URL for the welcome screen that loads on first load of MODX Revolution.';
 
 $_lang['setting_which_editor'] = '使用するエディタ';
 $_lang['setting_which_editor_desc'] = '使用したいリッチテキストエディタを選択します。パッケージマネージャから他のリッチテキストエディタをダウンロード・インストールできます。';
@@ -521,4 +521,4 @@ $_lang['setting_which_element_editor'] = 'エレメントで使用するエデ�
 $_lang['setting_which_element_editor_desc'] = 'エレメントの編集で使用したいリッチテキストエディタを選択します。リッチテキストエディタはパッケージマネージャでダウンロード・インストールできます。';
 
 $_lang['setting_xhtml_urls'] = 'XHTML URLs';
-$_lang['setting_xhtml_urls_desc'] = 'If set to true, all URLs generated by MODx will be XHTML-compliant, including encoding of the ampersand character.';
+$_lang['setting_xhtml_urls_desc'] = 'If set to true, all URLs generated by MODX will be XHTML-compliant, including encoding of the ampersand character.';

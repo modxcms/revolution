@@ -10,6 +10,6 @@
  */
 $_lang['clear'] = 'Legen';
 $_lang['error_log'] = 'Fout Log';
-$_lang['error_log_desc'] = 'Hier is de fout log van MODx Revolution:';
+$_lang['error_log_desc'] = 'Hier is de fout log van MODX Revolution:';
 $_lang['system_events'] = 'Systeem gebeurtenissen';
 $_lang['priority'] = 'Prioriteit';

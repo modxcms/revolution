@@ -5,7 +5,7 @@
  */
 
 /**
- * Represents an xPDOTransport package as required for MODx Web Transport Facilities.
+ * Represents an xPDOTransport package as required for MODX Web Transport Facilities.
  *
  * @package modx
  * @subpackage transport
@@ -298,7 +298,7 @@ class modTransportPackage extends xPDOObject {
                     $transferred= $cacheManager->writeFile($target, $content);
                 }
             } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'MODx could not download the file. You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.');
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'MODX could not download the file. You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.');
             }
         } else {
              $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_target_write',array(

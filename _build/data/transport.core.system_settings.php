@@ -1,6 +1,6 @@
 <?php
 /**
- * Default System Settings for MODx Revolution
+ * Default System Settings for MODX Revolution
  *
  * @package modx
  * @subpackage build
@@ -460,7 +460,7 @@ $settings['forgot_login_email']= $xpdo->newObject('modSystemSetting');
 $settings['forgot_login_email']->fromArray(array (
   'key' => 'forgot_login_email',
   'value' => '<p>Hello [[+username]],</p>
-<p>A request for a password reset has been issued for your MODx user. If you sent this, you may follow this link and use this password to login. If you did not send this request, please ignore this email.</p>
+<p>A request for a password reset has been issued for your MODX user. If you sent this, you may follow this link and use this password to login. If you did not send this request, please ignore this email.</p>
 
 <p>
     <strong>Activation Link:</strong> [[+url_scheme]][[+http_host]][[+manager_url]]?modahsh=[[+hash]]<br />
@@ -468,7 +468,7 @@ $settings['forgot_login_email']->fromArray(array (
     <strong>Password:</strong> [[+password]]<br />
 </p>
 
-<p>After you log into the MODx Manager, you can change your password again, if you wish.</p>
+<p>After you log into the MODX Manager, you can change your password again, if you wish.</p>
 
 <p>Regards,<br />Site Administrator</p>',
   'xtype' => 'textarea',
@@ -1265,14 +1265,14 @@ $settings['signupemail_message']= $xpdo->newObject('modSystemSetting');
 $settings['signupemail_message']->fromArray(array (
   'key' => 'signupemail_message',
   'value' => '<p>Hello [[+uid]],</p>
-    <p>Here are your login details for the [[+sname]] MODx Manager:</p>
+    <p>Here are your login details for the [[+sname]] MODX Manager:</p>
 
     <p>
         <strong>Username:</strong> [[+uid]]<br />
         <strong>Password:</strong> [[+pwd]]<br />
     </p>
 
-    <p>Once you log into the MODx Manager at [[+surl]], you can change your password.</p>
+    <p>Once you log into the MODX Manager at [[+surl]], you can change your password.</p>
 
     <p>Regards,<br />Site Administrator</p>',
   'xtype' => 'textarea',
@@ -1283,7 +1283,7 @@ $settings['signupemail_message']->fromArray(array (
 $settings['site_name']= $xpdo->newObject('modSystemSetting');
 $settings['site_name']->fromArray(array (
   'key' => 'site_name',
-  'value' => 'MODx Revolution',
+  'value' => 'MODX Revolution',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'site',

@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -28,12 +28,12 @@ $tstart= $mtime;
 error_reporting(E_ALL | E_STRICT);
 
 /* define this as true in another entry file, then include this file to simply access the API
- * without executing the MODx request handler */
+ * without executing the MODX request handler */
 if (!defined('MODX_API_MODE')) {
     define('MODX_API_MODE', false);
 }
 
-/* this can be used to disable caching in MODx absolutely */
+/* this can be used to disable caching in MODX absolutely */
 $modx_cache_disabled= false;
 
 /* include custom core config and define core path */
@@ -56,7 +56,7 @@ ob_start();
 $modx= new modX();
 if (!is_object($modx) || !($modx instanceof modX)) {
     @ob_end_flush();
-    $errorMessage = '<a href="setup/">MODx not installed. Install now?</a>';
+    $errorMessage = '<a href="setup/">MODX not installed. Install now?</a>';
     @include(MODX_CORE_PATH . 'error/unavailable.include.php');
     header('HTTP/1.1 503 Service Unavailable');
     echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";

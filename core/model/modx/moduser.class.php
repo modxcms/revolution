@@ -1,6 +1,6 @@
 <?php
 /**
- * The core MODx user class.
+ * The core MODX user class.
  *
  * @package modx
  */

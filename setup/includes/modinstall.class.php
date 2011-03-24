@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006, 2007, 2008, 2009, 2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -21,7 +21,7 @@
  */
 
 /**
- * Common classes for the MODx installation and provisioning services.
+ * Common classes for the MODX installation and provisioning services.
  *
  * @package setup
  */
@@ -334,7 +334,7 @@ class modInstall {
 
         /* run appropriate database routines */
         switch ($mode) {
-            /* TODO: MODx Evolution to Revolution migration */
+            /* TODO: MODX Evolution to Revolution migration */
             case modInstall::MODE_UPGRADE_EVO :
                 $results = include MODX_SETUP_PATH . 'includes/tables_migrate.php';
                 break;
@@ -695,8 +695,8 @@ class modInstall {
      * @access public
      * @return integer One of three possible mode indicators:<ul>
      * <li>0 = new install only</li>
-     * <li>1 = new OR upgrade from older versions of MODx Revolution</li>
-     * <li>2 = new OR upgrade from MODx Evolution</li>
+     * <li>1 = new OR upgrade from older versions of MODX Revolution</li>
+     * <li>2 = new OR upgrade from MODX Evolution</li>
      * </ul>
      */
     public function getInstallMode() {

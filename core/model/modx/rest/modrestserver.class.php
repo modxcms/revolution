@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006, 2007, 2008, 2009, 2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  *
  * All rights reserved.
  *
@@ -64,7 +64,7 @@ class modRestServer {
             modRestServer::OPT_FORMAT => 'xml',
             modRestServer::OPT_PROCESSORS_PATH => '',
             modRestServer::OPT_REQUEST_VAR => 'p',
-            modRestServer::OPT_REALM => 'MODx',
+            modRestServer::OPT_REALM => 'MODX',
             modRestServer::OPT_RENDERERS => 'renderers',
             modRestServer::OPT_ERROR_DATA_NODE => 'data',
             modRestServer::OPT_ERROR_NODE => 'error',

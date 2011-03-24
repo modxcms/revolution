@@ -10,7 +10,7 @@
  */
 $_lang['configcheck_admin'] = 'Neem contact op met de beheerder en waarschuw hem over deze melding!';
 $_lang['configcheck_cache'] = 'cache map is niet schrijfbaar';
-$_lang['configcheck_cache_msg'] = 'MODx kan niet schrijven naar de cache map. MODx zal nog steeds functioneren als verwacht maar caching zal niet werken. Om dit op te lossen maak de /_cache/ map schrijfbaar.';
+$_lang['configcheck_cache_msg'] = 'MODX kan niet schrijven naar de cache map. MODX zal nog steeds functioneren als verwacht maar caching zal niet werken. Om dit op te lossen maak de /_cache/ map schrijfbaar.';
 $_lang['configcheck_configinc'] = 'Configuratiebestand nog steeds schrijfbaar!';
 $_lang['configcheck_configinc_msg'] = 'Jouw website is kwetsbaar voor hackers welke veel schade aan jouw website kunnen aanrichten. Stel jouw configuratiebestand in op alleen-lezen! Indien je niet de beheerder bent, neem dan contact met de beheerder op en waarschuw hem over deze melding. Het bestand is core/config/config.inc.php';
 $_lang['configcheck_default_msg'] = 'Een onverwachte fout is opgetreden. Wat raar is...';
@@ -21,7 +21,7 @@ $_lang['configcheck_errorpage_unpublished_msg'] = 'Dit betekent dat jouw foutpag
 $_lang['configcheck_images'] = 'Afbeeldingen map is niet schrijfbaar';
 $_lang['configcheck_images_msg'] = 'De afbeeldingen map is niet schrijfbaar of bestaat niet. Dit betekent dat Afbeeldingenbeheer functionaliteiten in de editor niet werken!';
 $_lang['configcheck_installer'] = 'Installatie is nog aanwezig';
-$_lang['configcheck_installer_msg'] = 'De setup/ map bevat de installatie voor MODx. Stel je eens voor wat er kan gebeuren als een kwaadaardig persoon deze map vind en de installatie opnieuw doorloopt! Hij zal waarschijnlijk niet ver komen, omdat hij gebruikersinformatie voor de database in moet vullen, maar het is nog altijd beter om deze map te verwijderen van de server.';
+$_lang['configcheck_installer_msg'] = 'De setup/ map bevat de installatie voor MODX. Stel je eens voor wat er kan gebeuren als een kwaadaardig persoon deze map vind en de installatie opnieuw doorloopt! Hij zal waarschijnlijk niet ver komen, omdat hij gebruikersinformatie voor de database in moet vullen, maar het is nog altijd beter om deze map te verwijderen van de server.';
 $_lang['configcheck_lang_difference'] = 'Er is een onjuist aantal entries gevonden in het taalbestand';
 $_lang['configcheck_lang_difference_msg'] = 'Het huidige geselecteerd taalbestand heeft een verschillend aantal entries dan de standaard taal. Waar dit niet direct een probleem is, kan dit betekenen dat dit bestand geupdate moet worden.';
 $_lang['configcheck_notok'] = 'E&eacute;n of meerdere configuratiedetails zijn niet succesvol: ';

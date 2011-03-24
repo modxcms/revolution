@@ -21,4 +21,4 @@ $_lang['menu_remove'] = 'Remove Menu Item';
 $_lang['menu_top'] = 'Top Menu';
 $_lang['menu_update'] = 'Update Menu';
 $_lang['topmenu'] = 'Top Menu';
-$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the top menu bar of the MODx manager. Simply place actions where you would like them in their respective menu position.';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the top menu bar of the MODX manager. Simply place actions where you would like them in their respective menu position.';

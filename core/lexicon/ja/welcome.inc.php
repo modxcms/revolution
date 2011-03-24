@@ -9,7 +9,7 @@
  * @author shimojo http://www.priqia.com/
  * @author yamamoto http://kyms.jp
  */
-$_lang['modx_news'] = 'MODx ニュース';
+$_lang['modx_news'] = 'MODX ニュース';
 $_lang['security_notices'] = 'セキュリティ通知';
 $_lang['welcome_messages'] = '受信トレイに <strong>%d</strong> 件のメッセージが入っています。<strong>%s</strong> 件が未読です。';
 $_lang['welcome_title'] = 'MODxへようこそ';

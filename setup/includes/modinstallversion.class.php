@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006, 2007, 2008, 2009, 2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -157,7 +157,7 @@ class modInstallVersion {
      * Grabs the version from the installation
      *
      * @access private
-     * @return string The full version of the MODx installation
+     * @return string The full version of the MODX installation
      */
     private function _getVersion() {
         $installVersion = '2.0.0-alpha-1';

@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -20,12 +20,12 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * Encapsulates the interaction of MODx with an HTTP request.
+ * Encapsulates the interaction of MODX with an HTTP request.
  *
- * This class represents the functional portion of the MODx {@link
+ * This class represents the functional portion of the MODX {@link
  * http://www.martinfowler.com/eaaCatalog/frontController.html front-
  * controller}, and is responsible for sanitizing, interpretting, and
- * dispatching a web request to the appropriate MODx {@link modResource
+ * dispatching a web request to the appropriate MODX {@link modResource
  * Web Resource}.
  *
  * @package modx
@@ -45,7 +45,7 @@ class modRequest {
     }
 
     /**
-     * The primary MODx request handler (a.k.a. controller).
+     * The primary MODX request handler (a.k.a. controller).
      *
      * @return boolean True if a request is handled without interruption.
      */
@@ -95,7 +95,7 @@ class modRequest {
     }
 
     /**
-     * Prepares the MODx response to a web request that is being handled.
+     * Prepares the MODX response to a web request that is being handled.
      *
      * @param array $options An array of options
      * @return boolean True if the response is properly prepared.
@@ -287,7 +287,7 @@ class modRequest {
     }
 
     /**
-     * Harden GPC variables by removing any MODx tags, Javascript, or entities.
+     * Harden GPC variables by removing any MODX tags, Javascript, or entities.
      */
     public function sanitizeRequest() {
         $modxtags = array_values($this->modx->sanitizePatterns);

@@ -337,7 +337,7 @@ class modResource extends modAccessibleSimpleObject {
         $translit = $this->xpdo->getOption('friendly_alias_translit', $options, $iconv ? 'iconv' : 'none');
         $translitClass = $this->xpdo->getOption('friendly_alias_translit_class', $options, 'translit.modTransliterate');
 
-        /* strip html and optionally MODx element tags (stripped by default) */
+        /* strip html and optionally MODX element tags (stripped by default) */
         if ($this->xpdo instanceof modX) {
             $alias = $this->xpdo->stripTags($alias, '', $stripElementTags ? array() : null);
         }

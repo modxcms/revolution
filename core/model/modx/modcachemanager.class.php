@@ -1,13 +1,13 @@
 <?php
 /**
- * Contains the xPDOCacheManager implementation for MODx.
+ * Contains the xPDOCacheManager implementation for MODX.
  * @package modx
  */
 
 /**
- * The default xPDOCacheManager instance for MODx.
+ * The default xPDOCacheManager instance for MODX.
  *
- * Through this class, MODx provides several types of default, file-based
+ * Through this class, MODX provides several types of default, file-based
  * caching to reduce load and dependencies on the database, including:
  * <ul>
  * <li>partial modResource caching, which stores the object properties,
@@ -30,7 +30,7 @@ class modCacheManager extends xPDOCacheManager {
     }
 
     /**
-     * Generates a cache entry for a MODx site Context.
+     * Generates a cache entry for a MODX site Context.
      *
      * Context cache entries can override site configuration settings and are responsible for
      * loading the various listings and maps in the modX class, including resourceMap, aliasMap,
@@ -148,7 +148,7 @@ class modCacheManager extends xPDOCacheManager {
     }
 
     /**
-     * Generates the system settings cache for a MODx site.
+     * Generates the system settings cache for a MODX site.
      *
      * @param array $options Options for system settings generation.
      * @return array The generated system settings array.
@@ -365,7 +365,7 @@ class modCacheManager extends xPDOCacheManager {
     }
 
     /**
-     * Implements MODx cache refresh process, converting cache partitions to cache providers.
+     * Implements MODX cache refresh process, converting cache partitions to cache providers.
      */
     public function refresh(array $providers = array(), array &$results = array()) {
         if (empty($providers)) {
@@ -504,7 +504,7 @@ class modCacheManager extends xPDOCacheManager {
     }
 
     /**
-     * Clear part or all of the MODx cache.
+     * Clear part or all of the MODX cache.
      *
      * @deprecated Use refresh()
      * @param array $paths An optional array of paths, relative to the cache

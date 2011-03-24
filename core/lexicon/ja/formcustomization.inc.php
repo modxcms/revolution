@@ -25,7 +25,7 @@ $_lang['field_desc'] = 'This is the field to affect. This may also be a tab, or 
 $_lang['field_default'] = 'フィールドのデフォルト値';
 $_lang['field_label'] = 'フィールドのラベル';
 $_lang['field_visible'] = 'フィールドの表示／非表示';
-$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODx Revolution installation. Inactive Rules are faded gray.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'フォームのルール';
 $_lang['rule'] = 'ルール';
 $_lang['rule_create'] = 'ルールを作成';

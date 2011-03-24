@@ -1,6 +1,6 @@
 <?php
 /**
- * Builds the MODx core transport package.
+ * Builds the MODX core transport package.
  *
  * @package modx
  * @subpackage build
@@ -145,7 +145,7 @@ $collection = array ();
 $collection['1'] = $xpdo->newObject('modWorkspace');
 $collection['1']->fromArray(array (
     'id' => 1,
-    'name' => 'Default MODx workspace',
+    'name' => 'Default MODX workspace',
     'active' => 1,
 ), '', true, true);
 $attributes = array (
@@ -165,7 +165,7 @@ $collection['1'] = $xpdo->newObject('transport.modTransportProvider');
 $collection['1']->fromArray(array (
     'id' => 1,
     'name' => 'modx.com',
-    'description' => 'The official MODx transport facility for 3rd party components.',
+    'description' => 'The official MODX transport facility for 3rd party components.',
     'service_url' => 'http://rest.modx.com/extras/',
     'created' => strftime('%Y-%m-%d %H:%M:%S'),
 ), '', true, true);

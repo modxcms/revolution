@@ -6,8 +6,8 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['about'] = 'MODx';
-$_lang['about_desc'] = 'Rohkem informatsiooni MODx Revolution-ist.';
+$_lang['about'] = 'MODX';
+$_lang['about_desc'] = 'Rohkem informatsiooni MODX Revolution-ist.';
 $_lang['access_permissions'] = 'Juurdepääsu Õigused';
 $_lang['access_permissions_desc'] = 'Halda kasutaja grupi juurdepääsu ressurssidele ja context-idele.';
 $_lang['api_docs'] = 'API Dokumentatsioon';
@@ -20,7 +20,7 @@ $_lang['contexts_desc'] = 'Halda saidi contexte ja nende seadeid.';
 $_lang['edit_menu'] = 'Tegevused';
 $_lang['edit_menu_desc'] = 'Halda Tegevusi ja Pea Menüü struktuuri.';
 $_lang['eventlog_viewer'] = 'Veateadete Logi';
-$_lang['eventlog_viewer_desc'] = 'Vaata MODx-i error.log.';
+$_lang['eventlog_viewer_desc'] = 'Vaata MODX-i error.log.';
 $_lang['export_site'] = 'Ekpordi Staatiline HTML';
 $_lang['export_site_desc'] = 'Ekpordi sait staatiliste HTML lehtedena.';
 $_lang['flush_access'] = 'Flushi Õigused';
@@ -34,16 +34,16 @@ $_lang['flush_sessions_not_supported'] = 'Kasutaja sessioonide flushimine ei ole
 $_lang['form_customization'] = 'Vormide Kohandamine';
 $_lang['form_customization_desc'] = 'Kohanda manageri vorme turvaõigustega.';
 $_lang['forums'] = 'Foorumid';
-$_lang['forums_desc'] = 'Vaata ametlikku MODx foorumit.';
+$_lang['forums_desc'] = 'Vaata ametlikku MODX foorumit.';
 $_lang['import_resources'] = 'Impordi Ressursse';
 $_lang['import_resources_desc'] = 'Impordi hulgi staatilisi ressursse lehele.';
 $_lang['import_site'] = 'Impordi HTML';
 $_lang['import_site_desc'] = 'Impordi hulgi HTML faile lehele.';
 $_lang['jira'] = 'JIRA';
-$_lang['jira_desc'] = 'Mine MODx JIRA bugtrackerisse, et jälgida ja teavitada bugidest.';
+$_lang['jira_desc'] = 'Mine MODX JIRA bugtrackerisse, et jälgida ja teavitada bugidest.';
 $_lang['lexicon_management'] = 'Lexiconi Haldus';
-$_lang['lexicon_management_desc'] = 'Muuda kõiki keele stringe üle kogu MODx manageri.';
-$_lang['logout_desc'] = 'Logi välja MODx managerist.';
+$_lang['lexicon_management_desc'] = 'Muuda kõiki keele stringe üle kogu MODX manageri.';
+$_lang['logout_desc'] = 'Logi välja MODX managerist.';
 $_lang['manage_workspaces'] = 'Pakkide Haldus';
 $_lang['manage_workspaces_desc'] = 'Lae alla kolmanda osapoole komponente, lisa teenusepakkujaid ja installeeri uusi pakke.';
 $_lang['messages'] = 'Teated';
@@ -98,4 +98,4 @@ $_lang['view_logging_desc'] = 'Vaata hiljutisi manageri tegevusi.';
 $_lang['view_sysinfo'] = 'Süsteemi Info';
 $_lang['view_sysinfo_desc'] = 'Vaata serveri informatsiooni nagu näiteks phpinfo, mysql db info ja palju muud.';
 $_lang['wiki'] = 'Viki';
-$_lang['wiki_desc'] = 'Mine MODx Vikisse, koht kus asub MODx Revolution dokumentatsioon.';
+$_lang['wiki_desc'] = 'Mine MODX Vikisse, koht kus asub MODX Revolution dokumentatsioon.';

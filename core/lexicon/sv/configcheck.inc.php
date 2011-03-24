@@ -8,7 +8,7 @@
  */
 $_lang['configcheck_admin'] = 'Kontakta en systemadministratör och varna om detta meddelande!';
 $_lang['configcheck_cache'] = 'cache-katalogen inte skrivbar';
-$_lang['configcheck_cache_msg'] = 'MODx kan inte skriva till cache-katalogen. MODx kommer fortfarande att fungera som väntat, men inga dokument kommer att cachas. För att rätta till det här, gör /_cache/-katalogen skrivbar.';
+$_lang['configcheck_cache_msg'] = 'MODX kan inte skriva till cache-katalogen. MODX kommer fortfarande att fungera som väntat, men inga dokument kommer att cachas. För att rätta till det här, gör /_cache/-katalogen skrivbar.';
 $_lang['configcheck_configinc'] = 'Konfigurationsfilen är fortfarande skrivbar!';
 $_lang['configcheck_configinc_msg'] = 'Din webbplats är sårbar för hackers som kan göra mycket skada. Se till att din konfigurationsfil blir enbart läsbar. Om du inte är webbplatsens administratör bör du kontakta denne och berätta om det här meddelandet. Konfigurationsfilen finns här: core/config/config.inc.php';
 $_lang['configcheck_default_msg'] = 'En ospecificerad varning hittades, vilket är konstigt.';
@@ -19,7 +19,7 @@ $_lang['configcheck_errorpage_unpublished_msg'] = 'Detta betyder att din felsida
 $_lang['configcheck_images'] = 'Bildkatalogen är inte skrivbar';
 $_lang['configcheck_images_msg'] = 'Bildkatalogen är inte skrivbar eller finns inte. Detta betyder att bildhanteringsfunktionerna i editorn inte kommer att fungera!';
 $_lang['configcheck_installer'] = 'Installationsprogrammet är fortfarande kvar';
-$_lang['configcheck_installer_msg'] = 'Katalogen setup/ innehåller installationsprogrammet för MODx. Tänk vad som kan hända om en elak människa hittar katalogen och kör installationen! Han kommer förhoppningsvis inte så långt, eftersom databasen kräver inloggningsuppgifter, men det är ändå bäst att ta bort katalogen från servern.';
+$_lang['configcheck_installer_msg'] = 'Katalogen setup/ innehåller installationsprogrammet för MODX. Tänk vad som kan hända om en elak människa hittar katalogen och kör installationen! Han kommer förhoppningsvis inte så långt, eftersom databasen kräver inloggningsuppgifter, men det är ändå bäst att ta bort katalogen från servern.';
 $_lang['configcheck_lang_difference'] = 'Fel antal fraser i språkfilen';
 $_lang['configcheck_lang_difference_msg'] = 'Språket som för närvarande är valt har ett annat antal fraser än standardspråket. Detta behöver inte vara ett problem, men kan betyda att språkfilen behöver uppdateras.';
 $_lang['configcheck_notok'] = 'En eller flera konfigurationsdetaljer är inte korrekta: ';

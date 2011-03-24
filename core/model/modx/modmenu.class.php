@@ -1,6 +1,6 @@
 <?php
 /**
- * Represents a menu item at the top of the MODx manager.
+ * Represents a menu item at the top of the MODX manager.
  *
  * @package modx
  */

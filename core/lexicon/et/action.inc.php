@@ -7,10 +7,10 @@
  * @subpackage lexicon
  */
 $_lang['action'] = 'Tegevus';
-$_lang['action_confirm_remove'] = 'Oled kindel, et soovid eemaldada selle tegevuse? See võib MODx manageri liidese katki teha.';
+$_lang['action_confirm_remove'] = 'Oled kindel, et soovid eemaldada selle tegevuse? See võib MODX manageri liidese katki teha.';
 $_lang['action_create'] = 'Lisa Tegevus';
 $_lang['action_create_here'] = 'Loo Tegevus Siia';
-$_lang['action_desc'] = 'Tegevused on MODx controller-ite laiendused. Neid saab kasutada uute manager-i lehtede loomiseks ja ka ümberkorraldada MODx manageri navigatsiooni.';
+$_lang['action_desc'] = 'Tegevused on MODX controller-ite laiendused. Neid saab kasutada uute manager-i lehtede loomiseks ja ka ümberkorraldada MODX manageri navigatsiooni.';
 $_lang['action_err_create'] = 'Tekkis viga selle tegevuse loomisel.';
 $_lang['action_err_nf'] = 'Tegevust ei leitud!';
 $_lang['action_err_ns'] = 'Tegevust ei olnud täpsustatud!';

@@ -20,7 +20,7 @@ class modPrincipal extends xPDOSimpleObject {
      * Load attributes of the principal that define access to secured objects.
      *
      * {@internal Implement this function in derivatives to control how your
-     * user class uses the MODx ABAC (Attribute-Based Access Control) security
+     * user class uses the MODX ABAC (Attribute-Based Access Control) security
      * model}
      *
      * @abstract

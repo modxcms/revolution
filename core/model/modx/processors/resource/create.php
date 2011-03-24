@@ -32,9 +32,9 @@
  * menu builders.
  * @param boolean $isfolder (optional) Whether or not the resource is a
  * container of resources.
- * @param boolean $richtext (optional) If true, MODx will render the available
+ * @param boolean $richtext (optional) If true, MODX will render the available
  * RTE for editing this resource.
- * @param boolean $donthit (optional) (deprecated) If true, MODx will not log
+ * @param boolean $donthit (optional) (deprecated) If true, MODX will not log
  * visits on this resource.
  * @param boolean $cacheable (optional) If false, the resource will not be
  * cached.

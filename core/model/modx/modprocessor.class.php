@@ -5,7 +5,7 @@
  * @package modx
  */
 /**
- * Abstracts a MODx processor
+ * Abstracts a MODX processor
  *
  * {@inheritdoc}
  *

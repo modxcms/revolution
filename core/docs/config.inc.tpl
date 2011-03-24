@@ -1,6 +1,6 @@
 <?php
 /**
- *  MODx Configuration file
+ *  MODX Configuration file
  */
 $database_type = '{database_type}';
 $database_server = '{database_server}';

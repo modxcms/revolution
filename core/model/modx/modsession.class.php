@@ -1,7 +1,7 @@
 <?php
 /*
- * MODx Revolution  *
- * Copyright 2006-2010 by the MODx Team.
+ * MODX Revolution  *
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -19,7 +19,7 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * Represents a client session managed by MODx.
+ * Represents a client session managed by MODX.
  *
  * @see modSessionHandler
  * @package modx

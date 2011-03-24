@@ -22,4 +22,4 @@ $_lang['menu_remove'] = 'Menüeintrag entfernen';
 $_lang['menu_top'] = 'Hauptmenü';
 $_lang['menu_update'] = 'Menü bearbeiten';
 $_lang['topmenu'] = 'Hauptmenü';
-$_lang['topmenu_desc'] = 'Dies erlaubt Ihnen, Aktionen mit Elementen des Hauptmenüs des MODx-Managers zu verknüpfen. Platzieren Sie die Aktionen einfach dort, wo im Menü Sie sie gern hätten.';
+$_lang['topmenu_desc'] = 'Dies erlaubt Ihnen, Aktionen mit Elementen des Hauptmenüs des MODX-Managers zu verknüpfen. Platzieren Sie die Aktionen einfach dort, wo im Menü Sie sie gern hätten.';

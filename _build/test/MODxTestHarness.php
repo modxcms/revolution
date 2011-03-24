@@ -1,8 +1,8 @@
 <?php
 /**
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -23,7 +23,7 @@
  */
 require_once dirname(__FILE__).'/MODxTestCase.php';
 /**
- * Main MODx test harness.
+ * Main MODX test harness.
  *
  * Use by running this in command-line:
  *

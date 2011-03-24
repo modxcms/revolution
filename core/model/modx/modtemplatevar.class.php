@@ -8,7 +8,7 @@
  */
 class modTemplateVar extends modElement {
     /**
-     * @var array Supported bindings for MODx
+     * @var array Supported bindings for MODX
      * @access public
      */
     public $bindings= array (

@@ -47,7 +47,7 @@
         </div>
         <div class="clear">&nbsp;</div>
         <div id="mainheader">
-            <h1 id="logo" class="pngfix"><span>MODx</span></h1>
+            <h1 id="logo" class="pngfix"><span>MODX</span></h1>
         </div>
         <div class="clear">&nbsp;</div>
     </div>

@@ -9,7 +9,7 @@
  */
 $_lang['configcheck_admin'] = 'Bitte kontaktieren Sie einen Systemadministrator und setzen Sie ihn über diese Nachricht in Kenntnis!';
 $_lang['configcheck_cache'] = 'Cache-Verzeichnis nicht beschreibbar';
-$_lang['configcheck_cache_msg'] = 'MODx kann nicht in das Cache-Verzeichnis schreiben. MODx wird trotzdem wie erwartet funktionieren, aber es findet kein Caching statt. Um dies zu beheben, sorgen Sie dafür, dass das Verzeichnis /_cache/ beschreibbar ist.';
+$_lang['configcheck_cache_msg'] = 'MODX kann nicht in das Cache-Verzeichnis schreiben. MODX wird trotzdem wie erwartet funktionieren, aber es findet kein Caching statt. Um dies zu beheben, sorgen Sie dafür, dass das Verzeichnis /_cache/ beschreibbar ist.';
 $_lang['configcheck_configinc'] = 'Config-Datei ist noch beschreibbar!';
 $_lang['configcheck_configinc_msg'] = 'Ihre Site ist anfällig für Hacker-Angriffe, die einigen Schaden auf Ihrer Site anrichten könnten. Bitte sorgen Sie dafür, dass Ihre Config-Datei schreibgeschützt ist! Wenn Sie nicht der Site-Admin sind, kontaktieren Sie bitte einen Systemadministrator und setzen Sie ihn über diese Nachricht in Kenntnis! Der Pfad zur Config-Datei lautet core/config/config.inc.php';
 $_lang['configcheck_default_msg'] = 'Eine unspezifizierte Warnung wurde übermittelt. Was merkwürdig ist.';
@@ -20,7 +20,7 @@ $_lang['configcheck_errorpage_unpublished_msg'] = 'Dies bedeutet, dass Ihre Fehl
 $_lang['configcheck_images'] = 'Bilderverzeichnis nicht beschreibbar';
 $_lang['configcheck_images_msg'] = 'Das Bilderverzeichnis ist nicht beschreibbar oder existiert nicht. Das bedeutet, dass die Bildmanager-Funktionen im Editor nicht funktionieren!';
 $_lang['configcheck_installer'] = 'Installationsskript noch vorhanden';
-$_lang['configcheck_installer_msg'] = 'Das Verzeichnis setup/ enthält das Installationsskript für MODx. Stellen Sie sich nur einmal vor, was passieren könnte, wenn ein böser Mensch dieses Verzeichnis findet und die Installationsroutine startet! Er würde zwar vermutlich nicht allzu weit kommen, weil er Zugangsdaten für die Datenbank eingeben müsste, aber es ist dennoch am besten, dieses Verzeichnis von Ihrem Server zu löschen.';
+$_lang['configcheck_installer_msg'] = 'Das Verzeichnis setup/ enthält das Installationsskript für MODX. Stellen Sie sich nur einmal vor, was passieren könnte, wenn ein böser Mensch dieses Verzeichnis findet und die Installationsroutine startet! Er würde zwar vermutlich nicht allzu weit kommen, weil er Zugangsdaten für die Datenbank eingeben müsste, aber es ist dennoch am besten, dieses Verzeichnis von Ihrem Server zu löschen.';
 $_lang['configcheck_lang_difference'] = 'Inkorrekte Anzahl von Einträgen in der Sprachdatei';
 $_lang['configcheck_lang_difference_msg'] = 'Die momentan ausgewählte Sprache hat eine andere Anzahl von Einträgen als die Standardsprache. Das muss nicht notwendigerweise ein Problem sein, kann aber bedeuten, dass die Sprachdatei aktualisiert werden muss.';
 $_lang['configcheck_notok'] = 'Ein oder mehrere Konfigurationsdetails haben die Prüfung nicht bestanden: ';

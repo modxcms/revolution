@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -22,7 +22,7 @@
  */
 
 /**
- * This is the main file to include in your scripts to use MODx.
+ * This is the main file to include in your scripts to use MODX.
  *
  * For detailed information on using this class, see {@tutorial modx/modx.pkg}.
  *
@@ -43,10 +43,10 @@ if (!defined('MODX_CONFIG_KEY')) {
 require_once (MODX_CORE_PATH . 'xpdo/xpdo.class.php');
 
 /**
- * This is the MODx gateway class.
+ * This is the MODX gateway class.
  *
- * It can be used to interact with the MODx framework and serves as a front
- * controller for handling requests to the virtual resources managed by the MODx
+ * It can be used to interact with the MODX framework and serves as a front
+ * controller for handling requests to the virtual resources managed by the MODX
  * Content Management Framework.
  *
  * @package modx
@@ -161,7 +161,7 @@ class modX extends xPDO {
      */
     public $resourceGenerated= false;
     /**
-     * @var array Version information for this MODx deployment.
+     * @var array Version information for this MODX deployment.
      */
     public $version= null;
     /**
@@ -181,7 +181,7 @@ class modX extends xPDO {
     public $jscripts= array ();
     public $loadedjscripts= array ();
     /**
-     * @var string Stores the virtual path for a request to MODx if the
+     * @var string Stores the virtual path for a request to MODX if the
      * friendly_alias_paths option is enabled.
      */
     public $virtualDir;
@@ -471,7 +471,7 @@ class modX extends xPDO {
     }
 
     /**
-     * Get an extended xPDOCacheManager instance responsible for MODx caching.
+     * Get an extended xPDOCacheManager instance responsible for MODX caching.
      *
      * @return object A modCacheManager registered for this modX instance.
      */
@@ -490,7 +490,7 @@ class modX extends xPDO {
     }
 
     /**
-     * Gets the MODx parser.
+     * Gets the MODX parser.
      *
      * Returns an instance of modParser responsible for parsing tags in element
      * content, performing actions, returning content and/or sending other responses
@@ -919,7 +919,7 @@ class modX extends xPDO {
     }
 
     /**
-     * Send the user to a MODx virtual error page.
+     * Send the user to a MODX virtual error page.
      *
      * @uses invokeEvent() The OnPageNotFound event is invoked before the error page is forwarded
      * to.
@@ -943,7 +943,7 @@ class modX extends xPDO {
     }
 
     /**
-     * Send the user to the MODx unauthorized page.
+     * Send the user to the MODX unauthorized page.
      *
      * @uses invokeEvent() The OnPageUnauthorized event is invoked before the unauthorized page is
      * forwarded to.
@@ -1087,7 +1087,7 @@ class modX extends xPDO {
         $this->cacheManager->refresh();
 
         if (!$this->_loadConfig()) {
-            $this->log(modX::LOG_LEVEL_ERROR, 'Could not reload core MODx configuration!');
+            $this->log(modX::LOG_LEVEL_ERROR, 'Could not reload core MODX configuration!');
         }
         return $this->config;
     }
@@ -1136,7 +1136,7 @@ class modX extends xPDO {
 
             $this->_config= $this->config;
             if (!$this->_loadConfig()) {
-                $this->log(modX::LOG_LEVEL_FATAL, "Could not load core MODx configuration!");
+                $this->log(modX::LOG_LEVEL_FATAL, "Could not load core MODX configuration!");
                 return null;
             }
         }
@@ -1161,7 +1161,7 @@ class modX extends xPDO {
      * @param $string The class name of the response class to load. Defaults to
      * modRequest; is ignored if the Setting "modRequest.class" is set.
      * @param $path The absolute path by which to load the response class from.
-     * Defaults to the current MODx model path.
+     * Defaults to the current MODX model path.
      * @return boolean Returns true if a valid request handler object was
      * loaded on this or any previous call to the function, false otherwise.
      */
@@ -1181,7 +1181,7 @@ class modX extends xPDO {
      * @param $string The class name of the response class to load. Defaults to
      * modResponse; is ignored if the Setting "modResponse.class" is set.
      * @param $path The absolute path by which to load the response class from.
-     * Defaults to the current MODx model path.
+     * Defaults to the current MODX model path.
      * @return boolean Returns true if a valid response handler object was
      * loaded on this or any previous call to the function, false otherwise.
      */
@@ -1370,7 +1370,7 @@ class modX extends xPDO {
      * @param array $scriptProperties Optional. An array of parameters to pass to the processor.
      * @param array $options Optional. An array of options for running the processor, such as:
      *
-     * - processors_path - If specified, will override the default MODx processors path.
+     * - processors_path - If specified, will override the default MODX processors path.
      * - location - A prefix to load processor files from, will prepend to the action parameter
      * (Note: location will be deprecated in future Revolution versions.)
      *

@@ -5,7 +5,7 @@
  * @package modx
  */
 /**
- * Represents a Component in the MODx framework.
+ * Represents a Component in the MODX framework.
  *
  * @package modx
  */

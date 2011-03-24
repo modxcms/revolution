@@ -21,4 +21,4 @@ $_lang['menu_remove'] = 'Eemalda Menüü Üksus';
 $_lang['menu_top'] = 'Ülemine Menüü';
 $_lang['menu_update'] = 'Uuenda Menüüd';
 $_lang['topmenu'] = 'Ülemine Menüü';
-$_lang['topmenu_desc'] = 'See lubab sul määrata tegevusi menüü üksustele MODx manageri ülemises manüüs. Aseta tegevus kohta, kus soovid neid menüüs näha.';
+$_lang['topmenu_desc'] = 'See lubab sul määrata tegevusi menüü üksustele MODX manageri ülemises manüüs. Aseta tegevus kohta, kus soovid neid menüüs näha.';

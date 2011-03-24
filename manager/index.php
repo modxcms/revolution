@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -32,7 +32,7 @@ if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(dirname(__FILE_
 /* check for correct version of php */
 $php_ver_comp = version_compare(phpversion(),'5.1.0');
 if ($php_ver_comp < 0) {
-    die('Wrong php version! You\'re using PHP version "'.phpversion().'", and MODx Revolution only works on 5.1.0 or higher.');
+    die('Wrong php version! You\'re using PHP version "'.phpversion().'", and MODX Revolution only works on 5.1.0 or higher.');
 }
 
 /* set the document_root */
@@ -49,7 +49,7 @@ if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
 /* create the modX object */
 $modx= new modX();
 if (!is_object($modx) || !($modx instanceof modX)) {
-    $errorMessage = '<a href="../setup/">MODx not installed. Install now?</a>';
+    $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
     header('HTTP/1.1 503 Service Unavailable');
     echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
@@ -67,7 +67,7 @@ $modx->getParser();
 
 if (isset($modx) && is_object($modx) && $modx instanceof modX) {
     if (!$modx->getRequest()) {
-        $modx->log(modX::LOG_LEVEL_FATAL,"Could not load the MODx manager request object.");
+        $modx->log(modX::LOG_LEVEL_FATAL,"Could not load the MODX manager request object.");
     }
     $modx->request->handleRequest();
 }

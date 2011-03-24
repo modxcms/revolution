@@ -1,6 +1,6 @@
 <?php
 /**
- * Runs tests on the server to determine if MODx can be installed
+ * Runs tests on the server to determine if MODX can be installed
  *
  * @package setup
  * @subpackage tests

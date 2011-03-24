@@ -9,6 +9,6 @@
  */
 $_lang['clear'] = 'Löschen';
 $_lang['error_log'] = 'Fehlerprotokoll';
-$_lang['error_log_desc'] = 'Hier ist das Fehlerprotokoll für MODx Revolution:';
+$_lang['error_log_desc'] = 'Hier ist das Fehlerprotokoll für MODX Revolution:';
 $_lang['system_events'] = 'System-Ereignisse';
 $_lang['priority'] = 'Priorität';

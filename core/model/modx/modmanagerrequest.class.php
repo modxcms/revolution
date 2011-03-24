@@ -6,7 +6,7 @@
  */
 require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
 /**
- * Encapsulates the interaction of MODx manager with an HTTP request.
+ * Encapsulates the interaction of MODX manager with an HTTP request.
  *
  * {@inheritdoc}
  *
@@ -140,7 +140,7 @@ class modManagerRequest extends modRequest {
     }
 
     /**
-     * The primary MODx manager request handler (a.k.a. controller).
+     * The primary MODX manager request handler (a.k.a. controller).
      *
      * @access public
      * @return boolean True if a request is handled without interruption.
@@ -195,7 +195,7 @@ class modManagerRequest extends modRequest {
     }
 
     /**
-     * Prepares the MODx response to a mgr request that is being handled.
+     * Prepares the MODX response to a mgr request that is being handled.
      *
      * @access public
      * @param array $options An array of options
