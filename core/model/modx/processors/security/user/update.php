@@ -20,7 +20,7 @@ $scriptProperties['blocked'] = empty($scriptProperties['blocked']) ? 0 : 1;
 $scriptProperties['active'] = empty($scriptProperties['active']) ? 0 : 1;
 
 $newPassword= false;
-$result = include_once $modx->getOption('processors_path').'security/user/_validation.php';
+$result = include $modx->getOption('processors_path').'security/user/_validation.php';
 if ($result !== true) return $result;
 
 /* set fields */

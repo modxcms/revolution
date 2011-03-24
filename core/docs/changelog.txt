@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#3967] Fix issue with running user create/update processors more than once in a session
 - [#3542] Hide Template Variables tab on Resource create/update pages if no TVs are present
 - [#788] FC Rules for TVs now display distinctly for create or update
 - [#1118] Add more help for User fields in manager editing page

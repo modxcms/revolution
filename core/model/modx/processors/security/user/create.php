@@ -22,7 +22,7 @@ $user->set('active',$scriptProperties['active']);
 
 /* validate post */
 $newPassword= '';
-$result = include_once $modx->getOption('processors_path').'security/user/_validation.php';
+$result = include $modx->getOption('processors_path').'security/user/_validation.php';
 if ($result !== true) return $result;
 
 /* create user group links */
