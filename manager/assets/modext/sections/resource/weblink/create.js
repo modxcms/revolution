@@ -27,7 +27,8 @@ MODx.page.CreateWebLink = function(config) {
             ,resource: 0
             ,record: config.record || {}
             ,publish_document: config.publish_document
-            ,access_permissions: config.access_permissions            
+            ,access_permissions: config.access_permissions
+            ,show_tvs: config.show_tvs       
         }]
     });
     MODx.page.CreateWebLink.superclass.constructor.call(this,config);

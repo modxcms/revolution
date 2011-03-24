@@ -340,13 +340,15 @@ MODx.panel.WebLink = function(config) {
         }
         ,items: va
     });
-    it.push({
-        xtype: 'modx-panel-resource-tv'
-        ,resource: config.resource
-        ,class_key: config.record.class_key || 'modWebLink'
-        ,template: config.record.template
-        
-    });
+    if (config.show_tvs) {
+        it.push({
+            xtype: 'modx-panel-resource-tv'
+            ,resource: config.resource
+            ,class_key: config.record.class_key || 'modWebLink'
+            ,template: config.record.template
+
+        });
+    }
     if (config.access_permissions) {
         it.push({
             id: 'modx-resource-access-permissions'

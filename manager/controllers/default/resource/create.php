@@ -198,8 +198,12 @@ $defaults = array_merge($defaults,$overridden);
 $defaults['parent_pagetitle'] = $parent->get('pagetitle');
 
 /* get TVs */
+$tvCounts = array();
 $tvOutput = include dirname(__FILE__).'/tvs.php';
-$modx->smarty->assign('tvOutput',$tvOutput);
+if (!empty($tvCounts)) {
+    $modx->smarty->assign('tvOutput',$tvOutput);
+}
+
 
 /* register JS */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
@@ -222,6 +226,7 @@ Ext.onReady(function() {
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
         ,canSave: "'.($modx->hasPermission('save_document') ? 1 : 0).'"
+        ,show_tvs: '.(!empty($tvCounts) ? 1 : 0).'
     });
 });
 // ]]>

@@ -28,6 +28,7 @@ MODx.page.CreateSymLink = function(config) {
             ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
+            ,show_tvs: config.show_tvs
         }]
     });
     MODx.page.CreateSymLink.superclass.constructor.call(this,config);

@@ -86,8 +86,11 @@ $record['parent_pagetitle'] = $parent ? $parent->get('pagetitle') : '';
 
 /* get TVs */
 $templateId = $record['template'];
+$tvCounts = array();
 $tvOutput = include dirname(dirname(__FILE__)).'/tvs.php';
-$modx->smarty->assign('tvOutput',$tvOutput);
+if (!empty($tvCounts)) {
+    $modx->smarty->assign('tvOutput',$tvOutput);
+}
 
 /* register JS scripts */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
@@ -119,6 +122,7 @@ Ext.onReady(function() {
         ,canEdit: "'.($modx->hasPermission('edit_document') ? 1 : 0).'"
         ,canCreate: "'.($modx->hasPermission('new_document') ? 1 : 0).'"
         ,canDelete: "'.($modx->hasPermission('delete_document') ? 1 : 0).'"
+        ,show_tvs: '.(!empty($tvCounts) ? 1 : 0).'
     });
 });
 // ]]>

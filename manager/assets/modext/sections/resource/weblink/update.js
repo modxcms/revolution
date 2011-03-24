@@ -28,6 +28,7 @@ MODx.page.UpdateWebLink = function(config) {
             ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
+            ,show_tvs: config.show_tvs
         }]
     	,loadStay: true
         ,buttons: this.getButtons(config)

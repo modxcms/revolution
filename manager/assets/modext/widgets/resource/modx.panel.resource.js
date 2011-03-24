@@ -387,16 +387,18 @@ MODx.panel.Resource = function(config) {
         }
         ,items: va
     });
-    
-    it.push({
-        xtype: 'modx-panel-resource-tv'
-        ,collapsed: false
-        ,resource: config.resource
-        ,class_key: config.record.class_key || 'modDocument'
-        ,template: config.record.template
-        ,anchor: '100%'
-        ,border: true
-    });
+
+    if (config.show_tvs) {
+        it.push({
+            xtype: 'modx-panel-resource-tv'
+            ,collapsed: false
+            ,resource: config.resource
+            ,class_key: config.record.class_key || 'modDocument'
+            ,template: config.record.template
+            ,anchor: '100%'
+            ,border: true
+        });
+    }
     if (config.access_permissions) {
         it.push({
             id: 'modx-resource-access-permissions'
