@@ -323,6 +323,11 @@ class modTemplateVar extends modElement {
                 ),
                 'OR:ProfileUserGroup.usergroup:=' => null,
             ),xPDOQuery::SQL_AND,null,2);
+            if (!empty($this->xpdo->request) && !empty($this->xpdo->request->action)) {
+                $c->where(array(
+                    'modActionDom.action' => $this->xpdo->request->action,
+                ));
+            }
             $c->select(array(
                 'modActionDom.*',
                 'FCSet.constraint_class',
