@@ -851,6 +851,25 @@ class xPDO {
     }
 
     /**
+     * Execute a PDOStatement and get a single column value from the first row of the result set.
+     *
+     * @param PDOStatement $stmt A prepared PDOStatement object ready to be executed.
+     * @param null|integer $column 0-indexed number of the column you wish to retrieve from the row. If
+     * null or no value is supplied, it fetches the first column.
+     * @return mixed The value of the specified column from the first row of the result set, or null.
+     */
+    public function getValue($stmt, $column= null) {
+        $value = null;
+        if (is_object($stmt) && $stmt instanceof PDOStatement) {
+            if ($stmt->execute()) {
+                $value= $stmt->fetchColumn($column);
+                $stmt->closeCursor();
+            }
+        }
+        return $value;
+    }
+
+    /**
      * Convert any valid criteria into an xPDOQuery instance.
      *
      * @todo Get criteria pre-defined in an {@link xPDOObject} class metadata

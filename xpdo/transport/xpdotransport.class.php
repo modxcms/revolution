@@ -286,13 +286,8 @@ class xPDOTransport {
             return false;
         }
         $this->writeManifest();
-        $path = $this->path;
-        $pos = strpos($path, ':');
-        if ($pos !== false) {
-            $path = substr($path, $pos +1);
-        }
-        $fileName = $path . $this->signature . '.transport.zip';
-        return xPDOTransport::_pack($this->xpdo, $fileName, $path, $this->signature);
+        $fileName = $this->path . $this->signature . '.transport.zip';
+        return xPDOTransport::_pack($this->xpdo, $fileName, $this->path, $this->signature);
     }
 
     /**
