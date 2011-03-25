@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4146] Fix issue where new Content Types were always created as Binary
 - [#291] Add principal_targets setting to allow custom ACLs to be loaded by MODX Principals/Users
 - [#99] Allow SymLinks/modX->sendForward() to forward to Resources in external Contexts
 - [#4147] Changing ContentType extension in grid not refreshing URIs

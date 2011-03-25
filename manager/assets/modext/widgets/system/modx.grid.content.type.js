@@ -168,6 +168,7 @@ MODx.window.CreateContentType = function(config) {
             xtype: 'combo-boolean'
             ,fieldLabel: _('binary')
             ,name: 'binary'
+            ,hiddenName: 'binary'
             ,id: 'modx-'+this.ident+'-binary'
             ,description: _('binary_desc')
             ,width: 60
