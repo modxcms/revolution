@@ -827,6 +827,15 @@ $settings['modx_charset']->fromArray(array (
   'area' => 'language',
   'editedon' => null,
 ), '', true, true);
+$settings['principal_targets']= $xpdo->newObject('modSystemSetting');
+$settings['principal_targets']->fromArray(array (
+  'key' => 'principal_targets',
+  'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'security',
+  'editedon' => null,
+), '', true, true);
 $settings['proxy_auth_type']= $xpdo->newObject('modSystemSetting');
 $settings['proxy_auth_type']->fromArray(array (
   'key' => 'proxy_auth_type',
