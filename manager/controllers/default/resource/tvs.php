@@ -53,6 +53,7 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
         $c = $modx->newQuery('modTemplateVar');
         $c->query['distinct'] = 'DISTINCT';
         $c->select($modx->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+        $c->select($modx->getSelectColumns('modCategory', 'Category', 'cat_', array('category')));
         $c->select($modx->getSelectColumns('modTemplateVarResource', 'TemplateVarResource', '', array('value')));
         $c->select($modx->getSelectColumns('modTemplateVarTemplate', 'TemplateVarTemplate', '', array('rank')));
         $c->leftJoin('modCategory','Category');
@@ -64,7 +65,7 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
             'TemplateVarResource.tmplvarid = modTemplateVar.id',
             'TemplateVarResource.contentid' => $resourceId,
         ));
-        $c->sortby('Category.category,TemplateVarTemplate.rank,modTemplateVar.rank','ASC');
+        $c->sortby('cat_category,TemplateVarTemplate.rank,modTemplateVar.rank','ASC');
         $tvs = $modx->getCollection('modTemplateVar',$c);
         
         $modx->smarty->assign('tvcount',count($tvs));
