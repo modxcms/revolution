@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.1.2-pl (March 25, 2011)
+====================================
 - Add xPDO->getValue() convenience method for retrieving single column from single row
 - [#4128] Fix Windows drive issue in xPDOTransport->pack()
 - [#4125] Fix bug getting composites in xPDOObject->getFKClass()
