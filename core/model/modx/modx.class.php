@@ -890,7 +890,7 @@ class modX extends xPDO {
                     }
                 }
             }
-            $this->resource= $this->request->getResource('id', $idInt);
+            $this->resource= $this->request->getResource('id', $idInt, array('forward' => true));
             if ($this->resource) {
                 if ($merge && !empty($currentResource)) {
                     $this->resource->_fields = array_merge($this->resource->_fields, $currentResource);

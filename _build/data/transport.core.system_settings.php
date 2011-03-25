@@ -6,6 +6,15 @@
  * @subpackage build
  */
 $settings = array();
+$settings['allow_forward_across_contexts']= $xpdo->newObject('modSystemSetting');
+$settings['allow_forward_across_contexts']->fromArray(array (
+  'key' => 'allow_forward_across_contexts',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'core',
+  'editedon' => null,
+), '', true, true);
 $settings['allow_tags_in_post']= $xpdo->newObject('modSystemSetting');
 $settings['allow_tags_in_post']->fromArray(array (
   'key' => 'allow_tags_in_post',

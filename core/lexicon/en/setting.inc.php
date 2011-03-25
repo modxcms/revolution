@@ -71,6 +71,9 @@ $_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want t
 $_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
 $_lang['setting_access_policies_version_desc'] = 'The version of the Access Policy system. DO NOT CHANGE.';
 
+$_lang['setting_allow_forward_across_contexts'] = 'Allow Forwarding Across Contexts';
+$_lang['setting_allow_forward_across_contexts_desc'] = 'When true, SymLinks and modX::sendForward() API calls can forward requests to Resources in other Contexts.';
+
 $_lang['setting_allow_tags_in_post'] = 'Allow HTML Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST actions within the manager will strip out any tags. MODX Recommends to leave this set at true.';
 

@@ -134,7 +134,7 @@ class modRequest {
      * @return modResource The requested modResource instance or request
      * is forwarded to the error page, or unauthorized page.
      */
-    public function getResource($method, $identifier) {
+    public function getResource($method, $identifier, array $options = array()) {
         $resource = null;
         if ($method == 'alias') {
             $resourceId = $this->modx->aliasMap[$identifier];
@@ -145,6 +145,7 @@ class modRequest {
         if (!is_numeric($resourceId)) {
             $this->modx->sendErrorPage();
         }
+        $isForward = array_key_exists('forward', $options) && !empty($options['forward']);
         $fromCache = false;
         $cacheKey = $this->modx->context->get('key') . "/resources/{$resourceId}";
         $cachedResource = $this->modx->cacheManager->get($cacheKey, array(
@@ -182,8 +183,10 @@ class modRequest {
             if ($resource = $this->modx->getObject('modResource', $criteria)) {
                 if ($resource instanceof modResource) {
                     if ($resource->get('context_key') !== $this->modx->context->get('key')) {
-                        if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
-                            return null;
+                        if (!$isForward || ($isForward && !$this->modx->getOption('allow_forward_across_contexts', $options, false))) {
+                            if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
+                                return null;
+                            }
                         }
                     }
                     if (!$resource->checkPolicy('view')) {
@@ -206,8 +209,10 @@ class modRequest {
         } elseif ($fromCache && $resource instanceof modResource && !$resource->get('deleted')) {
             if ($resource->checkPolicy('load') && ($resource->get('published') || $this->modx->hasPermission('view_unpublished'))) {
                 if ($resource->get('context_key') !== $this->modx->context->get('key')) {
-                    if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
-                        return null;
+                    if (!$isForward || ($isForward && !$this->modx->getOption('allow_forward_across_contexts', $options, false))) {
+                        if (!$this->modx->getCount('modContextResource', array($this->modx->context->get('key'), $resourceId))) {
+                            return null;
+                        }
                     }
                 }
                 if (!$resource->checkPolicy('view')) {
