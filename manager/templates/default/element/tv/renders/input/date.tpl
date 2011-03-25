@@ -10,7 +10,6 @@ Ext.onReady(function() {
     {/literal}
         xtype: 'xdatetime'
         ,applyTo: 'tv{$tv->id}'
-        ,width: '97%'
         ,name: 'tv{$tv->id}'
         ,dateFormat: MODx.config.manager_date_format
         ,timeFormat: MODx.config.manager_time_format
