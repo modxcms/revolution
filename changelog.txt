@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Add xPDO->getValue() convenience method for retrieving single column from single row
 - [#4128] Fix Windows drive issue in xPDOTransport->pack()
 - [#4125] Fix bug getting composites in xPDOObject->getFKClass()
 - [#4097] Make constraint names unique for sqlsrv
