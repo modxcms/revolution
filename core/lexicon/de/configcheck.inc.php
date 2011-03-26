@@ -7,7 +7,7 @@
  * @namespace core
  * @topic configcheck
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['configcheck_admin'] = 'Bitte kontaktieren Sie einen Systemadministrator und setzen Sie ihn über diese Nachricht in Kenntnis!';
 $_lang['configcheck_cache'] = 'Cache-Verzeichnis nicht beschreibbar';

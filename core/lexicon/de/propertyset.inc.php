@@ -7,7 +7,7 @@
  * @namespace core
  * @topic propertyset
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['class_name'] = 'Klassen-Name';
 $_lang['default'] = 'Standardeigenschaften';

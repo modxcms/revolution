@@ -7,7 +7,7 @@
  * @namespace core
  * @topic workspace
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['alphabetically'] = 'Alphabetisch';
 $_lang['already_downloaded'] = 'Sie haben dieses Package bereits heruntergeladen.';
@@ -15,6 +15,7 @@ $_lang['api_key'] = 'API-Schlüssel';
 $_lang['author'] = 'Autor';
 $_lang['autoincludes_packaging'] = 'Binde folgende Auto-Includes ein: [[+autoincludes]]';
 $_lang['back_txt'] = 'Zurück';
+$_lang['breaks_at'] = 'Unterstützt bis zu';
 $_lang['by'] = 'von';
 $_lang['changelog'] = 'Changelog';
 $_lang['changelog_desc'] = 'Bitte schauen Sie in Liste der Änderungen (Changelog) für diese Version.';
@@ -38,6 +39,7 @@ $_lang['license_agree'] = 'Ich stimme zu';
 $_lang['license_agreement'] = 'Lizenzvereinbarung';
 $_lang['license_agreement_desc'] = 'Bitte beachten Sie die Lizenzvereinbarung für dieses Package.';
 $_lang['license_disagree'] = 'Ich stimme nicht zu';
+$_lang['minimum_supports'] = 'Setzt MODX voraus';
 $_lang['more_info'] = 'Weitere Informationen';
 $_lang['most_downloads'] = 'Meiste Downloads';
 $_lang['most_popular'] = 'Am populärsten';
@@ -169,7 +171,7 @@ $_lang['setup_options'] = 'Installations-Optionen';
 $_lang['setup_options_desc'] = 'Bitte wählen Sie die geeigneten Options (falls verfügbar) und klicken Sie "Fertigstellen" an, um das Package zu installieren.';
 $_lang['signature'] = 'Signatur';
 $_lang['sort_by_dots'] = 'Sortieren nach...';
-$_lang['supports'] = 'Unterstützte Version(en)';
+$_lang['supports_db'] = 'Unterstützte Datenbanken';
 $_lang['top_rated'] = 'Am besten bewertet';
 $_lang['transport_package_create'] = 'Neues Package erstellen';
 $_lang['transport_package_install'] = 'Package installieren';
@@ -178,6 +180,7 @@ $_lang['updateable'] = 'Updates verfügbar';
 $_lang['uninstall'] = 'Deinstallieren';
 $_lang['uploaded_on'] = 'Hochgeladen am';
 $_lang['uploaded_versions'] = 'Hochgeladene Versionen';
+$_lang['username'] = 'Benutzername';
 $_lang['workspace'] = 'Workspace';
 $_lang['workspace_err_nf'] = 'Workspace nicht gefunden.';
 $_lang['workspace_grabbing'] = 'Übertrage Package-Workspace...';

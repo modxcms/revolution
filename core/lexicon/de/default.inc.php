@@ -7,7 +7,7 @@
  * @namespace core
  * @topic default
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['access'] = 'Zugriff';
 $_lang['access_denied'] = 'Zugriff verweigert.';
@@ -366,6 +366,7 @@ $_lang['resource_settings'] = 'Ressourcen-Einstellungen';
 $_lang['role'] = 'Rolle';
 $_lang['roles'] = 'Rollen';
 $_lang['save'] = 'Speichern';
+$_lang['save_and_close'] = 'Speichern und schließen';
 $_lang['save_changes'] = 'Änderungen speichern';
 $_lang['save_successful'] = 'Erfolgreich gespeichert.';
 $_lang['save_tag'] = 'Tag speichern';
@@ -374,6 +375,7 @@ $_lang['scroll_dn'] = 'Herunterscrollen';
 $_lang['scroll_up'] = 'Heraufscrollen';
 $_lang['search'] = 'Suchen';
 $_lang['search_criteria'] = 'Suchkriterien';
+$_lang['search_ellipsis'] = 'Suche...';
 $_lang['search_results'] = 'Suchergebnisse';
 $_lang['security'] = 'Sicherheit';
 $_lang['select_date'] = 'Wählen Sie ein Datum';

@@ -7,7 +7,7 @@
  * @namespace core
  * @topic chunk
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['chunk'] = 'Chunk';
 $_lang['chunk_code'] = 'Chunk-Code (HTML)';

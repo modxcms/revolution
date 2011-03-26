@@ -7,7 +7,7 @@
  * @namespace core
  * @topic login
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['login_activation_key_err'] = 'Aktivierungs-Schlüssel ist nicht korrekt! Bitte überprüfen Sie Ihre Aktivierungs-E-Mail und stellen Sie sicher, dass Sie die richtige URL aufgerufen haben.';
 $_lang['login_blocked_admin'] = 'Sie wurden durch einen Administrator vom MODX-Manager ausgeschlossen.';
@@ -17,7 +17,7 @@ $_lang['login_blocked_time'] = 'Sie dürfen sich momentan nicht einloggen. Bitte
 $_lang['login_blocked_too_many_attempts'] = 'Sie wurden geblockt wegen zu vieler fehlgeschlagener Login-Versuche.';
 $_lang['login_button'] = 'Login';
 $_lang['login_cannot_locate_account'] = 'Dieser Account konnte nicht gefunden werden. Bitte überprüfen Sie den Benutzernamen, geben Sie das Passwort noch einmal ein und versuchen Sie es erneut.';
-$_lang['login_copyright'] = '&copy; 2005-2010 by the <a href="http://modxcms.com/" target="_blank">MODX Team</a>. <strong>MODX</strong>&trade; is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-2011 by the <a href="http://modxcms.com/" target="_blank">MODX Team</a>. <strong>MODX</strong>&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Account-E-Mail:';
 $_lang['login_err_unknown'] = 'Es trat ein unbekannter Fehler auf beim Versuch, sich einzuloggen.';
 $_lang['login_forget_your_login'] = 'Zugangsdaten vergessen?';

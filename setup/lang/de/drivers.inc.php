@@ -6,7 +6,7 @@
  * @subpackage lexicon
  * @language de
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['mysql_err_ext'] = 'MODX benötigt die mysql-Erweiterung für PHP, aber diese scheint nicht geladen zu sein.';
 $_lang['mysql_err_pdo'] = 'MODX benötigt den pdo_mysql-Treiber, wenn natives PDO verwendet wird, aber dieser scheint nicht geladen zu sein.';

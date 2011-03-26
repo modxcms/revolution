@@ -7,7 +7,7 @@
  * @namespace core
  * @topic package_builder
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['as_system_settings'] = 'Systemeinstellungen';
 $_lang['as_context_settings'] = 'Kontext-Einstellungen';

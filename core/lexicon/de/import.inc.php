@@ -7,7 +7,7 @@
  * @namespace core
  * @topic import
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['import_allowed_extensions'] = 'Geben Sie eine durch Kommata getrennte Liste von Dateiendungen für den Import an:<br /><small><em>Lassen Sie das Feld leer, wenn alle Dateien entsprechend den in Ihrer Site verfügbaren Inhaltstypen importiert werden sollen. Unbekannte Typen werden als einfacher Text behandelt.</em></small>';
 $_lang['import_base_path'] = 'Geben Sie den Pfad zu dem Verzeichnis an, in dem die zu installierenden Dateien liegen:<br /><small><em>Lassen Sie dieses Feld leer, wenn Sie den Pfad für statische Dateien verwenden möchten, der für den Kontext, in den importiert wird, eingestellt ist.</em></small>';
