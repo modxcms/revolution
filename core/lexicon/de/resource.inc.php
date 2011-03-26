@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic resource
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['access'] = 'Zugriff';
 $_lang['cache_output'] = 'Cache-Ausgabe';
@@ -21,7 +23,7 @@ $_lang['document_create'] = 'Dokument erstellen';
 $_lang['document_create_here'] = 'Dokument hier erstellen';
 $_lang['document_new'] = 'Neues Dokument';
 $_lang['documents'] = 'Dokumente';
-$_lang['duplicate_alias_found'] = 'Ressource [[+id]] verwendet bereits den Alias [[+alias]]. Bitte geben Sie einen eindeutigen Alias ein.';
+$_lang['duplicate_uri_found'] = 'Ressource [[+id]] verwendet bereits den URI (bzw. URL) [[+uri]]. Bitte geben Sie einen eindeutigen Alias ein oder verwenden Sie "URI fixieren", um ihn manuell festzulegen.';
 $_lang['empty_template'] = '(leer)';
 $_lang['general'] = 'Allgemein';
 $_lang['markup'] = 'Markup/Struktur';
@@ -32,7 +34,7 @@ $_lang['resource_access_message'] = 'Hier können Sie auswählen, zu welchen Res
 $_lang['resource_add_children_access_denied'] = 'Sie haben keine Berechtigung, an dieser Stelle eine Ressource zu erstellen.';
 $_lang['resource_alias'] = 'Ressourcen-Alias';
 $_lang['resource_alias_help'] = 'Ein Alias für diese Ressource. Dies wird die Ressource verfügbar machen unter:<br /><br />http://ihrserver/alias<br /><br /><strong>Hinweis:</strong> Dies funktioniert nur, wenn Sie suchmaschinenfreundliche URLs verwenden.';
-$_lang['resource_change_template_confirm'] = 'Sind Sie sicher, dass Sie das Template wechseln möchten?';
+$_lang['resource_change_template_confirm'] = 'Sind Sie sicher, dass Sie das Template wechseln möchten? WARNUNG: Hierdurch werden Ihre Änderungen gespeichert und die Seite neu geladen; bitte stellen Sie sicher, dass Sie bereit sind, dies zu tun, bevor Sie fortfahren.';
 $_lang['resource_cacheable'] = 'Cache aktiv';
 $_lang['resource_cacheable_help'] = 'Wenn diese Einstellung aktiviert ist, wird die Ressource in den Cache übernommen.';
 $_lang['resource_cancel_dirty_confirm'] = 'Sie haben Änderungen vorgenommen, die noch nicht gespeichert wurden; sind Sie sicher, dass Sie abbrechen möchten?';
@@ -65,7 +67,8 @@ $_lang['resource_err_delete_container_siteunavailable'] = 'Die Ressource, die Si
 $_lang['resource_err_delete_sitestart'] = 'Die Ressource ist als Startseite der Site registriert und kann nicht gelöscht werden!';
 $_lang['resource_err_delete_siteunavailable'] = 'Die Ressource ist innerhalb der Site als Seite für unautorisierte Zugriffe registriert und kann nicht gelöscht werden!';
 $_lang['resource_err_duplicate'] = 'Ein Fehler ist beim Duplizieren der Ressource aufgetreten.';
-$_lang['resource_err_move_to_child'] = 'Sie können eine Ressource nicht an einen Ort unterhalb einer ihrer Kind-Ressourcen verschieben.';
+$_lang['resource_err_move_to_child'] = 'Sie können eine Ressource nicht an einen Ort unterhalb einer ihrer eigenen Kind-Ressourcen verschieben.';
+$_lang['resource_err_move_sitestart'] = 'Die Ressource ist mit der site_start-Variablen verbunden und kann nicht in einen anderen Kontext verschoben werden!';
 $_lang['resource_err_nf'] = 'Ressource nicht gefunden.';
 $_lang['resource_err_nfs'] = 'Resource mit der ID [[+id]] nicht gefunden';
 $_lang['resource_err_ns'] = 'Ressource nicht angegeben.';
@@ -88,7 +91,7 @@ $_lang['resource_hide_from_menus'] = 'Nicht in Menüs anzeigen';
 $_lang['resource_hide_from_menus_help'] = 'Wenn diese Einstellung aktiviert ist, ist die Ressource <b>nicht</b> für die Verwendung in Menüs Ihrer Website verfügbar. Bitte beachten Sie, dass einige Menü-Skripte diese Option ignorieren könnten.';
 $_lang['resource_link_attributes'] = 'Link-Attribute';
 $_lang['resource_link_attributes_help'] = 'Attribute für den Link für diese Ressource, z.B. target= or rel=.';
-$_lang['resource_locked_by'] = 'Die Ressource mit der ID [[+id]] ist momentan gesperrt durch [[+user]]';
+$_lang['resource_locked_by'] = 'Gesperrt durch [[+user]]';
 $_lang['resource_longtitle'] = 'Langer Titel';
 $_lang['resource_longtitle_help'] = 'Dies ist ein längerer Titel für Ihre Ressource. Das ist nützlich für Suchmaschinen und kann die Ressource besser beschreiben.';
 $_lang['resource_menuindex'] = 'Menü-Index';
@@ -132,6 +135,10 @@ $_lang['resource_unpublishdate'] = 'Zurückziehen am';
 $_lang['resource_unpublishdate_help'] = 'Wenn Sie ein Rückzugsdatum angeben, wird die Ressource zurückgezogen, sobald das Rückzugsdatum erreicht ist. Klicken Sie auf das Kalender-Icon, um ein Datum auszuwählen, oder lassen Sie das Feld leer, damit die Ressource niemals automatisch zurückgezogen wird.';
 $_lang['resource_unpublished'] = 'Zurückgezogen';
 $_lang['resource_untitled'] = 'Unbenannte Ressource';
+$_lang['resource_uri'] = 'URI';
+$_lang['resource_uri_help'] = 'Die komplette relative URL für diese Ressource.';
+$_lang['resource_uri_override'] = 'URI fixieren';
+$_lang['resource_uri_override_help'] = 'Hier ein Häkchen zu setzen erlaubt Ihnen, den URI für diese Ressource auf den Wert im Textfeld darunter zu fixieren.';
 $_lang['resource_with_id_not_found'] = 'Ressource mit der ID %s nicht gefunden!';
 $_lang['resource_view'] = 'Ressource ansehen';
 $_lang['show_sort_options'] = 'Sortier-Optionen anzeigen';
@@ -145,6 +152,7 @@ $_lang['status'] = 'Status';
 $_lang['symlink'] = 'Symlink';
 $_lang['symlink_create'] = 'Symlink erstellen';
 $_lang['symlink_create_here'] = 'Symlink hier erstellen';
+$_lang['symlink_help'] = 'Die Adresse des Objekts, das Sie mit diesem Symlink referenzieren möchten. Wenn Sie auf eine existierende MODX-Ressource verweisen möchten, geben Sie hier deren ID ein.';
 $_lang['symlink_message'] = 'Ein Symlink ist ein symbolischer Link auf eine andere Ressource Ihrer Site, zu der weitergeleitet wird, ohne die URL zu ändern.';
 $_lang['symlink_new'] = 'Neuer Symlink';
 $_lang['template_variables'] = 'Template-Variablen';
@@ -152,6 +160,6 @@ $_lang['untitled_resource'] = 'Unbenannte Ressource';
 $_lang['weblink'] = 'Weblink';
 $_lang['weblink_create'] = 'Weblink erstellen';
 $_lang['weblink_create_here'] = 'Weblink hier erstellen';
-$_lang['weblink_help'] = 'Die Adresse des Objekts, das Sie mit diesem Weblink referenzieren möchten.';
+$_lang['weblink_help'] = 'Die Adresse des Objekts, das Sie mit diesem Weblink referenzieren möchten. Wenn Sie auf eine existierende MODX-Ressource verweisen möchten, geben Sie hier deren ID ein.';
 $_lang['weblink_message'] = 'Ein Weblink ist eine Referenz auf ein Objekt im Internet. Dies kann ein Dokument innerhalb von MODX, eine Seite in einer anderen Website oder ein Bild oder eine andere Datei im Internet sein.<p>';
 $_lang['weblink_new'] = 'Neuer Weblink';

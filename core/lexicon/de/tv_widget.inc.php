@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic tv_widget
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['attributes'] = 'Tag-Attribute';
 $_lang['capitalize'] = 'Alle Worte groß';
@@ -101,6 +103,7 @@ $_lang['radio_columns_desc'] = 'Die Anzahl der Spalten, in denen die Radio-Butto
 $_lang['rawtext'] = 'Raw Text (deprecated)';
 $_lang['rawtextarea'] = 'Raw Textarea (deprecated)';
 $_lang['required'] = 'Leere Eingabe erlauben';
+$_lang['required_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, erlaubt MODX dem Benutzer so lange das Speichern der Ressource nicht, bis ein gültiger Wert eingegeben wurde; das Feld darf dann nicht leer bleiben.';
 $_lang['resourcelist'] = 'Ressourcen-Liste';
 $_lang['resourcelist_depth'] = 'Tiefe';
 $_lang['resourcelist_depth_desc'] = 'Gibt an, bis zu welcher Tiefe im Ressourcen-Baum die Anzeige der Ressourcen-Liste erfolgen soll (ab der Ebene unter der angegebenen Eltern-Ressource). Der Standardwert ist 10.';
@@ -114,6 +117,8 @@ $_lang['resourcelist_where'] = 'WHERE-Bedingungen';
 $_lang['resourcelist_where_desc'] = 'Ein JSON-Objekt von WHERE-Bedingungen, die in der generierten SQL-Abfrage zur Darstellung der Ressourcen-Liste für die Filterung der angezeigten Ressourcen verwendet werden. (Die Suche in Template-Variablen wird nicht unterstützt.)';
 $_lang['richtext'] = 'Rich Text';
 $_lang['sentence_case'] = 'Nur 1. Wort des Satzes groß';
+$_lang['shownone'] = 'Leere Auswahl erlauben';
+$_lang['shownone_desc'] = 'Erlaubt dem Benutzer, einen leeren Wert auszuwählen.';
 $_lang['start_day'] = 'Wochenstart';
 $_lang['start_day_desc'] = 'Der Index des Tages, an dem die Woche beginnen soll, beginnend bei 0 (Standard ist 0, was für "Sonntag" steht)';
 $_lang['string'] = 'Zeichenkette';
