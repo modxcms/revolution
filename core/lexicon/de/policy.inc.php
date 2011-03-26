@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic policy
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['active_of'] = '[[+active]] von [[+total]]';
 $_lang['active_permissions'] = 'Aktivierte Berechtigungen';

@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic permissions
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['perm.about_desc'] = 'Die Seite "Über MODX" anzeigen.';
 $_lang['perm.access_permissions_desc'] = 'Mit Zugriffsrechten zusammenhängende Seiten und Aktionen anzeigen und bearbeiten/benutzen.';
@@ -118,6 +120,8 @@ $_lang['perm.search_desc'] = 'Die Suchfunktion des MODX-Managers benutzen.';  //
 $_lang['perm.settings_desc'] = 'Systemeinstellungen anzeigen und bearbeiten.';
 $_lang['perm.steal_lock_desc'] = 'Eine Sperre einer Ressource "stehlen" oder entfernen.';
 $_lang['perm.steal_locks_desc'] = 'Sperren "stehlen", indem man eine bestehende Sperre einer Ressource umgeht.';
+$_lang['perm.tree_show_resource_ids_desc'] = 'IDs im Ressourcen-Baum anzeigen.';
+$_lang['perm.tree_show_element_ids_desc'] = 'IDs im Elemente-Baum anzeigen.';
 $_lang['perm.undelete_desc'] = 'Elementare Berechtigung, Objekte "wiederherzustellen".';
 $_lang['perm.undelete_document_desc'] = 'Ressourcen wiederherstellen.';
 $_lang['perm.unlock_element_properties_desc'] = 'Standard-Eigenschaften von Elementen bearbeiten.';
