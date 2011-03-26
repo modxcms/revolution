@@ -119,7 +119,7 @@ $_lang['setting_cache_disabled_desc'] = 'Wählen Sie "ja", um alle MODX-Caching-
 $_lang['setting_cache_disabled_err'] = 'Bitte geben Sie an, ob der Cache aktiviert werden soll oder nicht.';
 
 $_lang['setting_cache_expires'] = 'Ablaufzeit für den Standard-Cache';
-$_lang['setting_cache_expires_desc'] = 'Dieser Wert (in Sekunden) legt fest, wie lange Cache-Dateien des Standard-Caches gültig sind.';
+$_lang['setting_cache_expires_desc'] = 'Dieser Wert (in Sekunden) legt fest, wie lange Cache-Dateien des Standard-Caches gültig sind. Der Wert "0" bedeutet, dass der Cache niemals abläuft.';
 
 $_lang['setting_cache_format'] = 'Zu verwendendes Cache-Format';
 $_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialisiert. Bitte wählen Sie eines dieser Formate.';
