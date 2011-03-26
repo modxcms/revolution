@@ -72,7 +72,7 @@ $_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
 $_lang['setting_access_policies_version_desc'] = 'The version of the Access Policy system. DO NOT CHANGE.';
 
 $_lang['setting_allow_forward_across_contexts'] = 'Allow Forwarding Across Contexts';
-$_lang['setting_allow_forward_across_contexts_desc'] = 'When true, SymLinks and modX::sendForward() API calls can forward requests to Resources in other Contexts.';
+$_lang['setting_allow_forward_across_contexts_desc'] = 'When true, Symlinks and modX::sendForward() API calls can forward requests to Resources in other Contexts.';
 
 $_lang['setting_allow_tags_in_post'] = 'Allow HTML Tags in POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST actions within the manager will strip out any tags. MODX Recommends to leave this set at true.';
@@ -236,7 +236,7 @@ $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
 $_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODX username and/or password.';
 
 $_lang['setting_forward_merge_excludes'] = 'sendForward Exclude Fields on Merge';
-$_lang['setting_forward_merge_excludes_desc'] = 'A SymLink merges non-empty field values over the values in the target Resource; using this comma-delimited list of excludes prevents specified fields from being overridden by the SymLink.';
+$_lang['setting_forward_merge_excludes_desc'] = 'A Symlink merges non-empty field values over the values in the target Resource; using this comma-delimited list of excludes prevents specified fields from being overridden by the Symlink.';
 
 $_lang['setting_friendly_alias_lowercase_only'] = 'FURL Lowercase Aliases';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Determines whether to allow only lowercase characters in a Resource alias.';

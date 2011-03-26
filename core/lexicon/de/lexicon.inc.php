@@ -7,7 +7,7 @@
  * @namespace core
  * @topic lexicon
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['duplicate'] = 'Duplizieren';
 $_lang['entry'] = 'Eintrag';

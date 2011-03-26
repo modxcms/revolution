@@ -7,7 +7,7 @@
  * @namespace core
  * @topic messages
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['all'] = 'Alle';
 $_lang['date_sent'] = 'Gesendet';

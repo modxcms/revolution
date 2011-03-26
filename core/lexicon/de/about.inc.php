@@ -7,7 +7,7 @@
  * @namespace core
  * @topic about
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['about_msg'] = 'MODX ist ein <a href="http://modxcms.com/" target="_blank">PHP-Application-Framework und Content-Management-System</a>, lizenziert unter der <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> und (wahlweise) jeder späteren Version.';
 $_lang['about_title'] = 'Über MODX';

@@ -7,7 +7,7 @@
  * @namespace core
  * @topic filters
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['ago'] = 'vor [[+time]]';
 $_lang['ago_day'] = '[[+time]] Tag';

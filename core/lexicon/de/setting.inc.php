@@ -7,7 +7,7 @@
  * @namespace core
  * @topic setting
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['area'] = 'Bereich';
 $_lang['area_authentication'] = 'Authentifizierung und Sicherheit';
@@ -27,6 +27,8 @@ $_lang['area_lexicon_string_msg'] = 'Geben Sie hier den Schlüssel für den Lexi
 $_lang['area_site'] = 'Site';
 $_lang['area_system'] = 'System und Server';
 $_lang['areas'] = 'Bereiche';
+$_lang['charset'] = 'Zeichensatz';
+$_lang['country'] = 'Land';
 $_lang['namespace'] = 'Namensraum';
 $_lang['namespace_filter'] = 'Nach Namensraum filtern...';
 $_lang['search_by_key'] = 'Nach Schlüssel suchen...';
@@ -50,6 +52,7 @@ $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Features';
 $_lang['settings_users'] = 'Benutzer';
 $_lang['system_settings'] = 'Systemeinstellungen';
+$_lang['usergroup'] = 'Benutzergruppe';
 
 // user settings
 $_lang['setting_allow_mgr_access'] = 'Zugriff auf den MODX-Manager';
@@ -71,17 +74,17 @@ $_lang['setting_login_homepage_desc'] = 'Geben Sie die ID des Dokuments ein, zu 
 $_lang['setting_access_policies_version'] = 'Zugriffs-Richtlinien-Schema-Version';
 $_lang['setting_access_policies_version_desc'] = 'Die Version des Zugriffs-Richtlinien-Systems. BITTE NICHT ÄNDERN!';
 
-$_lang['setting_allow_duplicate_alias'] = 'Alias-Duplikate zulassen';
-$_lang['setting_allow_duplicate_alias_desc'] = 'Wenn diese Einstellung auf "ja" gesetzt wird, können doppelte Aliasse gespeichert werden. <strong>ACHTUNG: Bei Verwendung dieser Einstellung sollte auch die Option "Suchmaschinenfreundliche Aliasse benutzen" auf "ja" gesetzt werden, um Probleme bei der Referenzierung von Ressourcen zu vermeiden.</strong>';
+$_lang['setting_allow_forward_across_contexts'] = 'Weiterleitungen in andere Kontexte erlauben';
+$_lang['setting_allow_forward_across_contexts_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, können Symlinks und modX::sendForward()-API-Aufrufe Requests zu Ressourcen in anderen Kontexten weiterleiten.';
 
 $_lang['setting_allow_tags_in_post'] = 'HTML-Tags in POST-Requests erlauben';
-$_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "ja" gesetzt ist, können POST-Requests HTML-Formular-Tags enthalten.';
+$_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, können POST-Requests HTML-Formular-Tags enthalten.';
 
 $_lang['setting_archive_with'] = 'Erzwinge PCLZip-Archive';
 $_lang['setting_archive_with_desc'] = 'Wählen Sie "Ja", um PCLZip anstatt ZipArchive als ZIP-Erweiterung zu nutzen. Wählen Sie diese Einstellung, falls Sie "extractTo"-Fehler erhalten oder Probleme beim Entpacken in der Package-Verwaltung haben.';
 
 $_lang['setting_auto_menuindex'] = 'Automatische Menü-Indizierung';
-$_lang['setting_auto_menuindex_desc'] = 'Wählen Sie "ja", um die automatische Menü-Indizierung einzuschalten. Ist diese aktiv, erhält das als erstes erstellte Dokument in einem Container/Ordner als Menü-Index den Wert 0, und dieser Wert wird dann für jedes nachfolgende Dokument, das Sie erstellen, erhöht.';
+$_lang['setting_auto_menuindex_desc'] = 'Wählen Sie "Ja", um die automatische Menü-Indizierung einzuschalten. Ist diese aktiv, erhält das als erstes erstellte Dokument in einem Container/Ordner als Menü-Index den Wert 0, und dieser Wert wird dann für jedes nachfolgende Dokument, das Sie erstellen, erhöht.';
 
 $_lang['setting_auto_check_pkg_updates'] = 'Automatische Suche nach Package-Updates';
 $_lang['setting_auto_check_pkg_updates_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, sucht MODX in der Package-Verwaltung automatisch nach Updates für Packages. Dies kann die Anzeige der Tabelle verlangsamen.';
@@ -93,7 +96,10 @@ $_lang['setting_allow_multiple_emails'] = 'E-Mail-Adressen-Duplikate für Benutz
 $_lang['setting_allow_multiple_emails_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, dürfen mehrere Benutzer die selbe E-Mail-Adresse verwenden.';
 
 $_lang['setting_automatic_alias'] = 'Alias automatisch generieren';
-$_lang['setting_automatic_alias_desc'] = 'Wählen Sie "ja", wenn das System beim Speichern automatisch einen auf dem Seitentitel der Ressource basierenden Alias generieren soll.';
+$_lang['setting_automatic_alias_desc'] = 'Wählen Sie "Ja", wenn das System beim Speichern automatisch einen auf dem Seitentitel der Ressource basierenden Alias generieren soll.';
+
+$_lang['setting_base_help_url'] = 'Basis-URL der Hilfe';
+$_lang['setting_base_help_url_desc'] = 'Die Basis-URL für die Hilfe-Links oben rechts auf den Seiten im Manager.';
 
 $_lang['setting_blocked_minutes'] = 'Anzahl Minuten für Sperrung';
 $_lang['setting_blocked_minutes_desc'] = 'Hier können Sie die Anzahl der Minuten eingeben, für die ein Benutzer geblockt wird, wenn er die maximal erlaubte Anzahl an fehlgeschlagenen Login-Versuchen erreicht hat. Bitte geben Sie hier nur ganze Zahlen ein (keine Kommata, Leerzeichen etc.)';
@@ -111,11 +117,11 @@ $_lang['setting_cache_db_expires'] = 'Ablaufzeit für Datenbank-Cache';
 $_lang['setting_cache_db_expires_desc'] = 'Standardzeit für das Ablaufen des Datenbank-Caches. Wird diese Einstellung auf"0" gesetzt, läuft der Cache niemals ab, wenn nicht ein Datensatz aktualisiert (geändert) wird.';
 
 $_lang['setting_cache_default'] = 'Voreinstellung für Cache';
-$_lang['setting_cache_default_desc'] = 'Wählen Sie "ja", um für alle neuen Ressourcen standardmäßig den Cache zu aktivieren.';
+$_lang['setting_cache_default_desc'] = 'Wählen Sie "Ja", um für alle neuen Ressourcen standardmäßig den Cache zu aktivieren.';
 $_lang['setting_cache_default_err'] = 'Bitte geben Sie an, ob Dokumente standardmäßig gecacht werden sollen oder nicht.';
 
 $_lang['setting_cache_disabled'] = 'Globale Cache-Optionen deaktivieren';
-$_lang['setting_cache_disabled_desc'] = 'Wählen Sie "ja", um alle MODX-Caching-Features zu deaktivieren.';
+$_lang['setting_cache_disabled_desc'] = 'Wählen Sie "Ja", um alle MODX-Caching-Features zu deaktivieren.';
 $_lang['setting_cache_disabled_err'] = 'Bitte geben Sie an, ob der Cache aktiviert werden soll oder nicht.';
 
 $_lang['setting_cache_expires'] = 'Ablaufzeit für den Standard-Cache';
@@ -128,7 +134,7 @@ $_lang['setting_cache_handler'] = 'Caching-Handler-Klasse';
 $_lang['setting_cache_handler_desc'] = 'Der Klassenname des Type-Handlers, der für das Caching genutzt werden soll.';
 
 $_lang['setting_cache_lang_js'] = 'Lexikon-JavaScript-Zeichenketten cachen';
-$_lang['setting_cache_lang_js_desc'] = 'Wenn diese Option auf "ja" gesetzt ist, werden Server-Header verwendet, um die ins JavaScript geladenen Lexikon-Zeichenketten für die Manager-Oberfläche zu cachen.';
+$_lang['setting_cache_lang_js_desc'] = 'Wenn diese Option auf "Ja" gesetzt ist, werden Server-Header verwendet, um die ins JavaScript geladenen Lexikon-Zeichenketten für die Manager-Oberfläche zu cachen.';
 
 $_lang['setting_cache_lexicon_topics'] = 'Lexikon-Themen cachen';
 $_lang['setting_cache_lexicon_topics_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden alle Lexikon-Themen gecacht, wodurch die Ladezeiten für die Internationalisierungs-Funktionalität drastisch reduziert werden. Es wird dringend empfohlen, diese Einstellung auf "Ja" zu belassen.';
@@ -262,8 +268,8 @@ $_lang['setting_friendly_alias_translit_class_path_desc'] = 'Der Pfad zum Model-
 $_lang['setting_friendly_alias_trim_chars'] = 'Suchmaschinenfreundliche Aliasse: abzuschneidende Zeichen';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Zeichen, die am Ende eines übergebenen Ressourcen-Alias abgeschnitten werden sollen.';
 
-$_lang['setting_friendly_alias_urls'] = 'Suchmaschinenfreundliche Aliasse benutzen';
-$_lang['setting_friendly_alias_urls_desc'] = 'Wenn Sie suchmaschinenfreundliche URLs verwenden und die Ressource einen Alias hat, hat der Alias immer Vorrang vor der suchmaschinenfreundlichen URL. Wird diese Option auf "Ja" gesetzt, wird auch das Inhaltstyp-Suffix der Ressource auf den Alias angewendet. Wenn z.B. Ihre Ressource mit der ID 1 den Alias "einfuehrung" hat, und Sie haben als Inhaltstyp-Suffix ".html" eingestellt, wird das Setzen dieser Option auf "Ja" dazu führen, dass der Link "einfuehrung.html" generiert wird. Wenn es keinen Alias gibt, generiert MODX den Link "1.html".';
+// $_lang['setting_friendly_alias_urls'] = 'Suchmaschinenfreundliche Aliasse benutzen';
+// $_lang['setting_friendly_alias_urls_desc'] = 'Wenn Sie suchmaschinenfreundliche URLs verwenden und die Ressource einen Alias hat, hat der Alias immer Vorrang vor der suchmaschinenfreundlichen URL. Wird diese Option auf "Ja" gesetzt, wird auch das Inhaltstyp-Suffix der Ressource auf den Alias angewendet. Wenn z.B. Ihre Ressource mit der ID 1 den Alias "einfuehrung" hat, und Sie haben als Inhaltstyp-Suffix ".html" eingestellt, wird das Setzen dieser Option auf "Ja" dazu führen, dass der Link "einfuehrung.html" generiert wird. Wenn es keinen Alias gibt, generiert MODX den Link "1.html".';
 
 $_lang['setting_friendly_alias_word_delimiter'] = 'Suchmaschinenfreundliche Aliasse: bevorzugtes Wort-Trennzeichen';
 $_lang['setting_friendly_alias_word_delimiter_desc'] = 'Das bevorzugte Wort-Trennzeichen für suchmaschinenfreundliche Aliasse.';
@@ -274,6 +280,9 @@ $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Zeichen, die Wort-Trenn
 $_lang['setting_friendly_urls'] = 'Suchmaschinenfreundliche URLs benutzen';
 $_lang['setting_friendly_urls_desc'] = 'Dies erlaubt Ihnen, suchmaschinenfreundliche URLs mit MODX zu verwenden. Bitte beachten Sie, dass dies nur für MODX-Installationen gilt, die auf einem Apache-Webserver laufen, und dass Sie eine .htaccess-Datei schreiben müssen, damit dies funktioniert. Mehr Informationen finden Sie in der .htaccess-Datei, die in der MODX-Distribution enthalten ist.';
 $_lang['setting_friendly_urls_err'] = 'Bitte geben Sie an, ob Sie suchmaschinenfreundliche URLs verwenden möchten oder nicht.';
+
+$_lang['setting_global_duplicate_uri_check'] = 'In allen Kontexten nach doppelten URIs suchen';
+$_lang['setting_global_duplicate_uri_check_desc'] = 'Wählen Sie "Ja", wenn bei der Überprüfung auf doppelte URIs alle Kontexte berücksichtigt werden sollen. Anderenfalls wird nur der Kontext, in dem die Ressource gespeichert wird, überprüft.';
 
 $_lang['setting_hidemenu_default'] = 'Standardeinstellung für Option "nicht in Menüs anzeigen"';
 $_lang['setting_hidemenu_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig nicht in Menüs angezeigt werden sollen.';
@@ -326,6 +335,9 @@ $_lang['setting_manager_direction_desc'] = 'Geben Sie an, ob der Text im MODX-Ma
 $_lang['setting_manager_date_format'] = 'Manager-Datumsformat';
 $_lang['setting_manager_date_format_desc'] = 'Das Format für Datumsangaben im Manager. Diese Einstellung ist im gleichen Format vorzunehmen, wie es die PHP-Funktion <a href="http://de.php.net/manual/en/function.date.php" target="_blank">date()</a> erwartet.';
 
+$_lang['setting_manager_favicon_url'] = 'Manager-Favicon-URL';
+$_lang['setting_manager_favicon_url_desc'] = 'Wenn hier etwas eingegeben wird, wird diese URL als favicon für den MODX-Manager geladen. Es muss eine zum Verzeichnis manager/ relative URL oder eine absolute URL eingegeben werden.';
+
 $_lang['setting_manager_lang_attribute'] = 'HTML- und XML-Sprach-Attribute im Manager';
 $_lang['setting_manager_lang_attribute_desc'] = 'Geben Sie den Code für die Sprache ein, der am besten zu der von Ihnen gewählten Sprache für den MODX-Manager passt. Dies stellt sicher, dass Ihr Browser den Inhalt im am besten für Sie geeigneten Format ausgeben kann.';
 
@@ -362,6 +374,9 @@ $_lang['setting_password_generated_length_desc'] = 'Die Länge der automatisch f
 $_lang['setting_password_min_length'] = 'Passwort-Mindestlänge';
 $_lang['setting_password_min_length_desc'] = 'Die Mindestlänge für ein Benutzer-Passwort.';
 
+$_lang['setting_principal_targets'] = 'Zu ladende ACL-Targets';
+$_lang['setting_principal_targets_desc'] = 'Passen Sie die ACL-Targets an, die für MODX-Benutzer geladen werden sollen (ACL = Access Control List, deutsch: Zugriffssteuerungsliste).';
+
 $_lang['setting_proxy_auth_type'] = 'Proxy-Authentifizierungs-Typ';
 $_lang['setting_proxy_auth_type_desc'] = 'Unterstützt entweder BASIC oder NTLM.';
 
@@ -391,6 +406,9 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Lösche die Thumbnails, deren 
 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb: Cache für Quelldateien';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Gibt an, ob Quelldateien gecacht werden sollen, wenn sie geladen werden, oder nicht. Es wird die Einstellung "off" empfohlen.';
+
+$_lang['setting_phpthumb_document_root'] = 'PHPThumb-Document-Root';
+$_lang['setting_phpthumb_document_root_desc'] = 'Tragen Sie hier etwas ein, wenn Sie Probleme mit der Server-Variablen DOCUMENT_ROOT haben oder wenn Fehler bei der Verwendung von OutputThumbnail oder !is_resource auftreten. Geben Sie den absoluten Document-Root-Pfad ein, den Sie verwenden möchten. Wenn dieses Feld leer ist, verwendet MODX die DOCUMENT_ROOT-Server-Variable.';
 
 $_lang['setting_phpthumb_error_bgcolor'] = 'phpThumb: Fehler-Hintergrundfarbe';
 $_lang['setting_phpthumb_error_bgcolor_desc'] = 'Ein Hexadezimalwert, ohne das #, der die Hintergrundfarbe für phpThumb-Fehlermeldungen angibt.';
@@ -468,6 +486,9 @@ $_lang['setting_resolve_hostnames_desc'] = 'Möchten Sie, dass MODX versucht, di
 $_lang['setting_resource_tree_node_name'] = 'Feld zur Benennung der Knoten im Ressourcen-Baum';
 $_lang['setting_resource_tree_node_name_desc'] = 'Geben Sie das Ressourcen-Feld an, das zur Darstellung der Knoten im Ressourcen-Baum verwendet werden soll. Standardmäßig wird das Feld pagetitle verwendet, es kann aber jedes Ressourcen-Feld verwendet werden, z.B. menutitle, alias, longtitle etc.';
 
+$_lang['setting_resource_tree_node_tooltip'] = 'Ressourcen-Baum-Tooltip-Feld';
+$_lang['setting_resource_tree_node_tooltip_desc'] = 'Geben Sie das Ressourcen-Feld ein, das bei der Darstellung der Einträge im Ressourcen-Baum verwendet wird. Jedes Ressourcen-Feld kann verwendet werden, z. B. menutitle, alias, longtitle etc. Wird dieses Feld leer gelassen, so wird der longtitle mit einer Beschreibung darunter angezeigt.';
+
 $_lang['setting_richtext_default'] = 'Rich-Text-Editor standardmäßig verwenden';
 $_lang['setting_richtext_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig den Rich-Text-Editor verwenden sollen.';
 
@@ -485,13 +506,13 @@ $_lang['setting_server_protocol_http'] = 'HTTP';
 $_lang['setting_server_protocol_https'] = 'HTTPS';
 
 $_lang['setting_session_cookie_domain'] = 'Session-Cookie-Domain';
-$_lang['setting_session_cookie_domain_desc'] = 'Verwenden Sie diese Einstellung, um die Session-Cookie-Somain anzupassen.';
+$_lang['setting_session_cookie_domain_desc'] = 'Verwenden Sie diese Einstellung, um die Session-Cookie-Domain anzupassen. Lassen Sie das Feld leer, wenn die aktuelle Domain verwendet werden soll.';
 
 $_lang['setting_session_cookie_lifetime'] = 'Session-Cookie-Lebensdauer';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Verwenden Sie diese Einstellung, um die Session-Cookie-Lebensdauer anzupassen (in Sekunden). Diese gibt an, wie lange ein Session-Cookie gültig ist, wenn die Login-Option "An mich erinnern" gewählt wurde. Standardeinstellung ist "604800" (= 7 Tage).';
 
 $_lang['setting_session_cookie_path'] = 'Session-Cookie-Pfad';
-$_lang['setting_session_cookie_path_desc'] = 'Verwenden Sie diese Einstellung, um den Cookie-Pfad anzupassen. Damit kann genau festgelegt werden, wo innerhalb einer Site ein Cookie gültig ist und wo nicht.';
+$_lang['setting_session_cookie_path_desc'] = 'Verwenden Sie diese Einstellung, um den Cookie-Pfad anzupassen. Damit kann genau festgelegt werden, wo innerhalb einer Site ein Cookie gültig ist und wo nicht. Lassen Sie das Feld leer, wenn die MODX_BASE_URL verwendet werden soll.';
 
 $_lang['setting_session_cookie_secure'] = 'Sichere Session-Cookies';
 $_lang['setting_session_cookie_secure_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um sichere Session-Cookies zu verwenden. Diese werden ausschließlich SSL-geschützt übertragen.';
@@ -500,7 +521,7 @@ $_lang['setting_session_handler_class'] = 'Name der Session-Handler-Klasse';
 $_lang['setting_session_handler_class_desc'] = 'Für datenbankgestützte Sessions verwenden Sie bitte "modSessionHandler". Lassen Sie dieses Feld leer, um die Standard-PHP-Sessionverwaltung zu verwenden.';
 
 $_lang['setting_session_name'] = 'Session-Name';
-$_lang['setting_session_name_desc'] = 'Verwenden Sie diese Einstellung, um den Session-Namen für die Sessions in MODX anzupassen.';
+$_lang['setting_session_name_desc'] = 'Verwenden Sie diese Einstellung, um den Session-Namen für die Sessions in MODX anzupassen. Lassen Sie das Feld leer, wenn der standardmäßige PHP-Session-Name verwendet werden soll.';
 
 $_lang['setting_settings_version'] = 'MODX-Version';
 $_lang['setting_settings_version_desc'] = 'Die aktuell verwendete Version von MODX Revolution.';
@@ -536,6 +557,9 @@ $_lang['setting_site_unavailable_page_err'] = 'Bitte geben Sie die Ressourcen-ID
 
 $_lang['setting_strip_image_paths'] = 'Relative Dateibrowser-Pfade?';
 $_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird MODX Dateibrowser-Ressourcen-Quellen (Bilder, Dateien, Flash-Animationen etc.) als absolute URLs speichern. Relative URLs dagegen sind hilfreich, wenn Sie Ihre MODX-Installation verschieben möchten, z. B. von einer Testsite zu einer produktiven Website. Falls Ihnen nicht klar ist, was das bedeutet, belassen Sie es am besten bei der Einstellung "Ja".';
+
+$_lang['setting_symlink_merge_fields'] = 'Ressourcen-Felder in Symlinks kombinieren';
+$_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Beschreibungen im Hauptmenü anzeigen';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, werden die Beschreibungen in den Menüpunkten des MODX-Manager-Hauptmenüs nicht angezeigt.';

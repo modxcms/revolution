@@ -7,7 +7,7 @@
  * @namespace core
  * @topic formcustomization
  *
- * MODx Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['action'] = 'Aktion';
 $_lang['action_desc'] = 'Die Aktion, auf die diese Regel angewendet wird.';
