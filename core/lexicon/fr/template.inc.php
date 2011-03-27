@@ -7,6 +7,7 @@
 * @subpackage lexicon
 */
 $_lang['access'] = 'Accès';
+$_lang['filter_by_category'] = 'Filtrer par catégorie…';
 $_lang['rank'] = 'Rang';
 $_lang['template'] = 'Modèle';
 $_lang['template_assignedtv_tab'] = 'Variables de modèle assignées';
@@ -19,7 +20,7 @@ $_lang['template_empty'] = '(vide)';
 $_lang['template_err_default_template'] = 'Ce modèle est défini comme modèle par défaut. Veuillez choisir un autre modèle par défaut dans la configuration de MODX avant de supprimer celui-ci.<br />';
 $_lang['template_err_delete'] = 'Une erreur est survenue lors de la suppression du modèle.';
 $_lang['template_err_duplicate'] = 'Une erreur est survenue lors de la duplication du modèle.';
-$_lang['template_err_exists_name'] = 'Un modèle du même nom existe déjà.';
+$_lang['template_err_exists_name'] = 'Un modèle ayant pour nom "[[+name]]" existe déjà.';
 $_lang['template_err_in_use'] = 'Ce modèle est utilisé. Veuillez sélectionner un autre modèle pour les documents utilisant ce modèle. Les documents qui utilisent ce modèles sont:<br />';
 $_lang['template_err_locked'] = 'Le modèle est protégé en écriture.';
 $_lang['template_err_nf'] = 'Modèle introuvable!';

@@ -33,7 +33,6 @@ $_lang['file_err_unzip_missing_lib'] = ' Librairie zip manquante (php_zip.dll / 
 $_lang['file_err_upload'] = 'Une erreur s\'est produite en tentant d\'envoyer les fichiers.';
 $_lang['file_exists_hk'] = 'Le fichier <b>{0}</b> existe déjà';
 $_lang['file_extensions'] = 'Extensions de fichiers';
-$_lang['file_extensions_desc'] = 'Voici les extensions de fichiers autorisées pour le type de contenu.';
 $_lang['file_folder_enter_new'] = 'Entrer un nouveau nom de dossier';
 $_lang['file_folder_chmod'] = 'Appliquer un Chmod sur le répertoire';
 $_lang['file_folder_create'] = 'Créer un répertoire';
