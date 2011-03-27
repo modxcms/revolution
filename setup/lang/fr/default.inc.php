@@ -29,7 +29,6 @@ $_lang['connection_collation'] = 'Collation:';
 $_lang['connection_connection_and_login_information'] = 'Informations de connexion à la base de données';
 $_lang['connection_connection_note'] = 'Veuillez entrer le nom de la base de données créée pour MODX. S\'il n\'y a pas encore de base de donnése, MODX essaiera d\'en créer une pour vous. Cette opération peut échouer selon la configuration de MySQL ou les permissions utilisateur pour votre domaine/installation.';
 $_lang['connection_database_host'] = 'Hôte de la base de données:';
-$_lang['connection_database_info'] = 'Veuillez entrer les informations d\'identification pour votre base de données.';
 $_lang['connection_database_login'] = 'Identifiant de base de données:';
 $_lang['connection_database_name'] = 'Nom de la base de données:';
 $_lang['connection_database_pass'] = 'Mot de passe de la base de données:';
