@@ -515,11 +515,11 @@ MODx.grid.ElementPropertyOption = function(config) {
         ,autoHeight: true
         ,maxHeight: 300
         ,width: '100%'
-        ,fields: ['name','value']
+        ,fields: ['text','value','name']
         ,data: []
         ,columns: [{
             header: _('name')
-            ,dataIndex: 'name'
+            ,dataIndex: 'text'
             ,width: 150
             ,editor: { xtype: 'textfield' ,allowBlank: false }
         },{
@@ -536,7 +536,7 @@ MODx.grid.ElementPropertyOption = function(config) {
         }]
     });
     MODx.grid.ElementPropertyOption.superclass.constructor.call(this,config);
-    this.optRecord = Ext.data.Record.create([{name: 'name'},{name: 'value'}]);
+    this.optRecord = Ext.data.Record.create([{name: 'text'},{name: 'value'}]);
 };
 Ext.extend(MODx.grid.ElementPropertyOption,MODx.grid.LocalGrid,{
     create: function(btn,e) {
@@ -545,7 +545,7 @@ Ext.extend(MODx.grid.ElementPropertyOption,MODx.grid.LocalGrid,{
             ,listeners: {
                 'success': {fn:function(r) {
                     var rec = new this.optRecord({
-                        name: r.name
+                        text: r.text
                         ,value: r.value
                     });
                     this.getStore().add(rec);
@@ -768,7 +768,7 @@ Ext.extend(MODx.window.UpdateElementProperty,MODx.Window,{
             var opts = [];
             for (var x in opt) {
               if (opt.hasOwnProperty(x)) {
-                opts.push([opt[x].name,opt[x].value]);
+                opts.push([opt[x].text,opt[x].value]);
               }
             }
             g.getStore().loadData(opts);
@@ -795,8 +795,8 @@ MODx.window.CreateElementPropertyOption = function(config) {
         ,saveBtnText: _('done')
         ,fields: [{
             fieldLabel: _('name')
-            ,name: 'name'
-            ,id: 'modx-cepo-name'
+            ,name: 'text'
+            ,id: 'modx-cepo-text'
             ,xtype: 'textfield'
             ,width: 200
         },{
