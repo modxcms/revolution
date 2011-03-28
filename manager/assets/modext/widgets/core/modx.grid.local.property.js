@@ -51,14 +51,27 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
         } else if (r[xtype].substr(0,5) == 'combo' || r[xtype] == 'list' || r[xtype].substr(0,9) == 'modx-combo') {
             var cm = g.getColumnModel();
             var ed = cm.getCellEditor(ci,ri);
+            var cb;
             if (!ed) {
                 r.xtype = r.xtype || 'combo-boolean';
-                var cb = this.createCombo(r);
+                cb = this.createCombo(r);
                 ed = new Ext.grid.GridEditor(cb);
                 cm.setEditor(ci,ed);
+            } else if (ed && ed.field && ed.field.xtype == 'modx-combo') {
+                cb = ed.field;
             }
-            f = MODx.combo.Renderer(ed.field);
-            oz = f(v);
+            if (r[xtype] != 'list') {
+                f = MODx.combo.Renderer(ed.field);
+                oz = f(v);
+            } else if (cb) {
+                idx = cb.getStore().find(cb.valueField,v);
+                rec = cb.getStore().getAt(idx);
+                if (rec) {
+                    rec.get(cb.displayField);
+                } else {
+                    oz = v;
+                }
+            }
         }
         return Ext.util.Format.htmlEncode(oz);
     }
@@ -66,7 +79,7 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
     ,createCombo: function(p) {
         var obj;
         try {
-            obj = Ext.ComponentMgr.create({ xtype: r.xtype });
+            obj = Ext.ComponentMgr.create({ xtype: r.xtype, id: Ext.id() });
         } catch(e) {
             try {
                 var flds = p.options;
@@ -89,7 +102,7 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
                     ,preventRender: true
                 });
             } catch (e2) {
-                obj = Ext.ComponentMgr.create({ xtype: 'combo-boolean' });
+                obj = Ext.ComponentMgr.create({ xtype: 'combo-boolean', id: Ext.id() });
             }
         }
         return obj;
