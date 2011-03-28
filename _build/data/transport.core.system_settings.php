@@ -81,7 +81,7 @@ $settings['automatic_alias']->fromArray(array (
 $settings['base_help_url']= $xpdo->newObject('modSystemSetting');
 $settings['base_help_url']->fromArray(array (
   'key' => 'base_help_url',
-  'value' => 'http://rtfm.modx.com/display/revolution20/',
+  'value' => 'http://rtfm.modx.com/display/revolution21/',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1540,7 +1540,7 @@ $settings['welcome_screen']->fromArray(array (
 $settings['welcome_screen_url']= $xpdo->newObject('modSystemSetting');
 $settings['welcome_screen_url']->fromArray(array (
   'key' => 'welcome_screen_url',
-  'value' => 'http://misc.modx.com/revolution/welcome.20.html',
+  'value' => 'http://misc.modx.com/revolution/welcome.21.html',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
