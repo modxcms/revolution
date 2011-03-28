@@ -147,6 +147,12 @@ class modElement extends modAccessibleSimpleObject {
                     $this->xpdo->lexicon->load($property['lexicon']);
                 }
                 $property['desc_trans'] = $this->xpdo->lexicon($property['desc']);
+
+                if (!empty($property['options'])) {
+                    foreach ($property['options'] as &$option) {
+                        $option['name'] = $this->xpdo->lexicon($option['text']);
+                    }
+                }
             }
         }
         return $value;
@@ -535,21 +541,13 @@ class modElement extends modAccessibleSimpleObject {
                         'lexicon' => null,
                     );
                 }
-                /* handle translations of properties (temp fix until modLocalizableObject in 2.1 and beyond) */
-                /*
-                if (!empty($propertyArray['lexicon'])) {
-                    $this->xpdo->lexicon->load($propertyArray['lexicon']);
-                    $propertyArray['desc'] = $this->xpdo->lexicon($propertyArray['desc']);
 
-                    if (is_array($propertyArray['options'])) {
-                        foreach ($propertyArray['options'] as $optionKey => &$option) {
-                            if (!empty($option['text'])) {
-                                $option['text'] = $this->xpdo->lexicon($option['text']);
-                            }
-                        }
+                if (!empty($propertyArray['options'])) {
+                    foreach ($propertyArray['options'] as $optionKey => &$option) {
+                        unset($option['menu'],$option['name']);
                     }
                 }
-                 */
+                
                 $propertiesArray[$key] = $propertyArray;
             }
 

@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.1.0-rc-1 (March 25, 2011)
 ====================================
+- Fix issue with properties and i18n in Element properties and in drag/drop box
 - [#4146] Fix issue where new Content Types were always created as Binary
 - [#291] Add principal_targets setting to allow custom ACLs to be loaded by MODX Principals/Users
 - [#99] Allow SymLinks/modX->sendForward() to forward to Resources in external Contexts

@@ -72,12 +72,12 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
                 var flds = p.options;
                 var data = [];
                 for (var i=0;i<flds.length;i=i+1) {
-                    data.push([flds[i].name,flds[i].value]);
+                    data.push([flds[i].name,flds[i].value,flds[i].text]);
                 }
                 obj = MODx.load({
                     xtype: 'modx-combo'
                     ,store: new Ext.data.SimpleStore({
-                        fields: ['d','v']
+                        fields: ['d','v','t']
                         ,data: data
                     })
                     ,displayField: 'd'
