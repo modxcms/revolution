@@ -158,22 +158,6 @@ if ($language != 'en') {
     $setting->save();
 }
 
-/* set welcome screen URL */
-$setting = $this->xpdo->getObject('modSystemSetting',array(
-    'key' => 'welcome_screen_url',
-));
-if (!$setting) {
-    $setting = $this->xpdo->newObject('modSystemSetting');
-    $setting->fromArray(array(
-        'key' => 'welcome_screen_url',
-        'namespace' => 'core',
-        'xtype' => 'textfield',
-        'area' => 'manager',
-    ));
-}
-$setting->set('value','http://misc.modx.com/revolution/welcome.20.html');
-$setting->save();
-
 /* Access Policy changes (have to happen post package install) */
 
 /* setup a setting to run this only once */

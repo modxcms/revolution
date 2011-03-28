@@ -180,3 +180,14 @@ if ($adminTpl) {
         }
     }
 }
+/* change help/welcome screen URL references */
+$setting = $modx->getObject('modSystemSetting',array('key' => 'base_help_url'));
+if ($setting && $setting->get('value') == 'http://rtfm.modx.com/display/revolution20/') {
+    $setting->set('value','http://rtfm.modx.com/display/revolution21/');
+    $setting->save();
+}
+$setting = $modx->getObject('modSystemSetting',array('key' => 'welcome_screen_url'));
+if ($setting && $setting->get('value') == 'http://misc.modx.com/revolution/welcome.20.html') {
+    $setting->set('value','http://misc.modx.com/revolution/welcome.21.html');
+    $setting->save();
+}
