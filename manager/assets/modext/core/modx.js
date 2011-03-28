@@ -2,6 +2,20 @@ Ext.namespace('MODx');
 Ext.apply(Ext,{
     isFirebug: (window.console && window.console.firebug)
 });
+/* work around IE9 createContextualFragment bug
+   http://www.sencha.com/forum/showthread.php?125869-Menu-shadow-probolem-in-IE9
+ */
+if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
+{
+	Range.prototype.createContextualFragment = function(html)
+	{
+		var frag = document.createDocumentFragment(),
+		div = document.createElement("div");
+		frag.appendChild(div);
+		div.outerHTML = html;
+		return frag;
+	};
+}
 /**
  * @class MODx
  * @extends Ext.Component
@@ -298,6 +312,9 @@ Ext.extend(MODx,Ext.Component,{
         if (MODx.config.ui_debug_mode == 1) {
             console.log(msg);
         }
+    }
+    ,isEmpty: function(v) {
+        return Ext.isEmpty(v) || v === false || v === 'false' || v === 'FALSE' || v === '0' || v === 0;
     }
 });
 Ext.reg('modx',MODx);

@@ -25,6 +25,9 @@ $props = array();
 foreach ($properties as $k => $property) {
     $xtype = 'textfield';
     $desc = $property['desc_trans'];
+    if (!empty($property['lexicon'])) {
+        $modx->lexicon->load($property['lexicon']);
+    }
 
     if (is_array($property)) {
         $v = $property['value'];
@@ -40,7 +43,8 @@ foreach ($properties as $k => $property) {
         case 'combo':
             $data = array();
             foreach ($property['options'] as $option) {
-                $data[] = array($option['name'],$option['value']);
+                $text = !empty($property['lexicon']) ? $modx->lexicon($option['text']) : $option['text'];
+                $data[] = array($option['value'],$text);
             }
             $props[] = array(
                 'xtype' => 'combo',

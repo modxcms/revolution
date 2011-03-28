@@ -59,12 +59,8 @@ class modFileHandler {
      * to the return value. Defaults to true.
      * @return string The base path
      */
-    public function getBasePath($prependBasePath = false) {
+    public function getBasePath() {
         $root = $this->context->getOption('filemanager_path', '', $this->config);
-        if (empty($root)) {
-            /* TODO: deprecated - remove this in 2.1 */
-            $root = $this->context->getOption('rb_base_dir', MODX_BASE_PATH, $this->config);
-        }
         /* expand placeholders */
         $root = str_replace(array(
             '{base_path}',
@@ -75,28 +71,26 @@ class modFileHandler {
             $this->context->getOption('core_path', MODX_CORE_PATH, $this->config),
             $this->context->getOption('assets_path', MODX_ASSETS_PATH, $this->config),
         ), $root);
-
-        /* check for absolute/relative */
-        $relative = $this->context->getOption('filemanager_path_relative', true, $this->config);
-        if ($relative || $prependBasePath) {
-            $root = $this->context->getOption('base_path', MODX_BASE_PATH, $this->config) . $root;
-        }
-
-        return $this->postfixSlash($root);
+        return !empty($root) ? $this->postfixSlash($root) : $root;
     }
 
     /**
      * Get base URL of file manager
      */
-    public function getBaseUrl($getRelative = false) {
+    public function getBaseUrl() {
         $baseUrl = $this->context->getOption('filemanager_url', $this->context->getOption('rb_base_url', MODX_BASE_URL, $this->config), $this->config);
 
-        /* check for absolute/relative */
-        $sourceRelative = $this->context->getOption('filemanager_url_relative', true, $this->config);
-        if (!$getRelative && $sourceRelative) {
-            $baseUrl = $this->context->getOption('base_url', MODX_BASE_URL, $this->config) . $baseUrl;
-        }
-        return $this->postfixSlash($baseUrl);
+        /* expand placeholders */
+        $baseUrl = str_replace(array(
+            '{base_url}',
+            '{core_url}',
+            '{assets_url}',
+        ), array(
+            $this->context->getOption('base_url', MODX_BASE_PATH, $this->config),
+            $this->context->getOption('core_url', MODX_CORE_PATH, $this->config),
+            $this->context->getOption('assets_url', MODX_ASSETS_PATH, $this->config),
+        ), $baseUrl);
+        return !empty($baseUrl) ? $this->postfixSlash($baseUrl) : $baseUrl;
     }
 
     /**
@@ -316,7 +310,7 @@ abstract class modFileSystemResource {
         $ppath = str_replace('//', '/', $ppath);
         if ($raw) return $ppath;
 
-        $directory = $this->fileHandler->make($ppath);
+        $directory = $this->fileHandler->make($ppath,array(),'modDirectory');
         return $directory;
     }
 }

@@ -28,30 +28,25 @@ $resource->getOne('CreatedBy');
 $resource->getOne('EditedBy');
 $resource->getOne('Template');
 
-$dkws = $resource->getMany('ResourceKeywords');
-$resource->keywords = array();
-foreach ($dkws as $dkw) {
-	$resource->keywords[$dkw->get('keyword_id')] = $dkw->getOne('Keyword');
-}
-$keywords = array();
-foreach ($resource->keywords as $kw) {
-	$keywords[] = $kw->get('keyword');
-}
-$keywords = join($keywords,',');
-$modx->smarty->assign('keywords',$keywords);
-
 $server_offset_time= intval($modx->getOption('server_offset_time',null,0));
 $resource->set('createdon_adjusted',strftime('%c', $resource->get('createdon') + $server_offset_time));
 $resource->set('editedon_adjusted',strftime('%c', $resource->get('editedon') + $server_offset_time));
 
 $buffer = '';
 $resource->_contextKey= $resource->get('context_key');
-if ($buffer = $modx->cacheManager->get($resource->getCacheKey())) {
+$buffer = $modx->cacheManager->get($resource->getCacheKey(), array(
+    xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_resource_key', null, 'resource'),
+    xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+    xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+));
+if ($buffer) {
     $modx->smarty->assign('buffer', htmlspecialchars($buffer['resource']['_content']));
 }
 /* assign resource to smarty */
-/* assign resource to smarty */
 $modx->smarty->assign('resource',$resource);
+
+/* make preview url */
+$url = $modx->makeUrl($resource->get('id'));
 
 /* register JS scripts */
 $modx->smarty->assign('_ctx',$resource->get('context_key'));
@@ -64,10 +59,13 @@ Ext.onReady(function() {
     MODx.ctx = "'.$resource->get('context_key').'";
     MODx.load({
         xtype: "modx-page-resource-data"
-        ,id: "'.$resource->get('id').'"
-        ,context_key: "'.$resource->get('context_key').'"
-        ,class_key: "'.$resource->get('class_key').'"
-        ,pagetitle: "'.$resource->get('pagetitle').'"
+        ,record: {
+            id: "'.$resource->get('id').'"
+            ,context_key: "'.$resource->get('context_key').'"
+            ,class_key: "'.$resource->get('class_key').'"
+            ,pagetitle: "'.$resource->get('pagetitle').'"
+            ,preview_url: "'.$url.'"
+        }
         ,canEdit: "'.($modx->hasPermission('edit_document') ? 1 : 0).'"
     });
 });

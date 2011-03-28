@@ -31,7 +31,7 @@ $_lang['filter_by_rule_type'] = 'กรองตามกฎ...';
 $_lang['filter_by_search'] = 'ค้นหา...';
 $_lang['for_parent'] = 'สำหรับแพเรนท์';
 $_lang['for_parent_desc'] = 'ทำเครื่องหมายตรงนี้เมื่อคุณต้องการให้กฎนี้ถูกนำไปใช้กับแพเรนท์ ใช้กับแค่แหล่งข้อมูลหรืออ็อบเจกต์ที่อยู่ในแพเรนท์ฟิลด์ มีประโยชน์สำหรับ "การสร้าง" หน้าของแหล่งข้อมูล';
-$_lang['form_customization_msg'] = 'นี่คือรายการของกฎที่ประยุกต์ใช้ในตอนนี้ ข้อมูลเพิ่มเติมของกฎและรูปแบบการปรับแต่ง ดูได้ <a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization" target="_blank">ที่นี่</a> กรุณาระลึกว่ากฎที่ไม่ถูกต้องอาจจะเป็นต้นเหตุปัญหาของการติดตั้ง MODx Revolution ของคุณ กฎที่ไม่ได้ใช้งานจะเป็นสีเทาจาง';
+$_lang['form_customization_msg'] = 'นี่คือรายการของกฎที่ประยุกต์ใช้ในตอนนี้ ข้อมูลเพิ่มเติมของกฎและรูปแบบการปรับแต่ง ดูได้ <a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization" target="_blank">ที่นี่</a> กรุณาระลึกว่ากฎที่ไม่ถูกต้องอาจจะเป็นต้นเหตุปัญหาของการติดตั้ง MODX Revolution ของคุณ กฎที่ไม่ได้ใช้งานจะเป็นสีเทาจาง';
 $_lang['form_rules'] = 'รูปแบบกฎ';
 $_lang['rule'] = 'กฎ';
 $_lang['rule_create'] = 'สร้างกฎ';

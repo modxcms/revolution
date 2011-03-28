@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic access
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['access_category_management_msg'] = 'Verwalten Sie die Zugriffsrechte von Benutzergruppen-Mitgliedern auf Elemente über Kategorien und weisen Sie optional Zugriffsrichtlinien zu.';
 $_lang['access_category_err_ae'] = 'Eine ACL für diese Kategorie existiert bereits!';
@@ -90,7 +92,7 @@ $_lang['resource_group_resource_err_create'] = 'Ein Fehler trat auf beim Versuch
 $_lang['resource_group_resource_err_nf'] = 'Die Ressource ist nicht Teil dieser Ressourcen-Gruppe.';
 $_lang['resource_group_resource_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Ressource aus der Ressourcen-Gruppe zu entfernen.';
 $_lang['resource_group_untitled'] = 'Unbenannte Ressourcen-Gruppe';
-$_lang['roles_msg'] = 'Eine Rolle ist per Definition eine Position oder ein Status, den man in einer bestimmten Situation hat. Rollen können verwendet werden, um Benutzer innerhalb einer Benutzergruppe nach Position oder Status zu gruppieren. Rollen haben in MODx zudem das, was wir "Autorität" nennen. Dies ist ein Zahlenwert, genauer gesagt eine beliebige ganze Zahl >= 0. Autoritäts-Level sind "abwärts vererbbar" in dem Sinne, dass eine Rolle mit Autorität 1 alle Gruppenrichtlinien erbt, die ihr selbst und allen Rollen mit einem höheren Autoritäts-Wert als 1 zugeordnet sind.';
+$_lang['roles_msg'] = 'Eine Rolle ist per Definition eine Position oder ein Status, den man in einer bestimmten Situation hat. Rollen können verwendet werden, um Benutzer innerhalb einer Benutzergruppe nach Position oder Status zu gruppieren. Rollen haben in MODX zudem das, was wir "Autorität" nennen. Dies ist ein Zahlenwert, genauer gesagt eine beliebige ganze Zahl >= 0. Autoritäts-Level sind "abwärts vererbbar" in dem Sinne, dass eine Rolle mit Autorität 1 alle Gruppenrichtlinien erbt, die ihr selbst und allen Rollen mit einem höheren Autoritäts-Wert als 1 zugeordnet sind.';
 $_lang['user_group_category_access'] = 'Zugriff auf Elemente über Kategorien';
 $_lang['user_group_category_access_msg'] = 'Hier können Sie festlegen, auf welche Elemente diese Benutzergruppe über die Kategorien, in denen sich die Elemente befinden, zugreifen kann.';
 $_lang['user_group_category_err_ae'] = 'Die Benutzergruppe hat bereits Zugriff auf diese Kategorie.';

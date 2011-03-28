@@ -52,13 +52,23 @@ if (!empty($errors)) {
 
 
 /* get default provider */
-$provider = $modx->getObject('transport.modTransportProvider',array(
-    'name' => 'modxcms.com',
+$c = $modx->newQuery('transport.modTransportProvider');
+$c->where(array(
+    'name:=' => 'modxcms.com',
+    'OR:name:=' => 'modx.com',
 ));
+$provider = $modx->getObject('transport.modTransportProvider',$c);
 if ($provider) {
     $modx->regClientStartupHTMLBlock('<script type="text/javascript">
 MODx.provider = "'.$provider->get('id').'";
 MODx.providerName = "'.$provider->get('name').'";
+</script>');
+} else {
+    /* fallback */
+    $modx->log(modX::LOG_LEVEL_ERROR,'Could not find the main provider for some reason with a name of "modx.com". Did you delete it?');
+    $modx->regClientStartupHTMLBlock('<script type="text/javascript">
+MODx.provider = "1";
+MODx.providerName = "modx.com";
 </script>');
 }
 

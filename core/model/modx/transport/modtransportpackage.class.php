@@ -5,7 +5,7 @@
  */
 
 /**
- * Represents an xPDOTransport package as required for MODx Web Transport Facilities.
+ * Represents an xPDOTransport package as required for MODX Web Transport Facilities.
  *
  * @package modx
  * @subpackage transport
@@ -31,6 +31,10 @@ class modTransportPackage extends xPDOObject {
      * @access protected
      */
     public $package = null;
+
+    public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0) {
+        return array('collection' => array(), 'total' => 0);
+    }
 
     /**
      * Overrides xPDOObject::save to set a default created time if new.
@@ -261,6 +265,24 @@ class modTransportPackage extends xPDOObject {
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_TIMEOUT,120);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
+                $proxyHost = $this->xpdo->getOption('proxy_host',null,'');
+                if (!empty($proxyHost)) {
+                    $proxyPort = $this->xpdo->getOption('proxy_port',null,'');
+                    curl_setopt($ch, CURLOPT_PROXY,$proxyHost);
+                    curl_setopt($ch, CURLOPT_PROXYPORT,$proxyPort);
+
+                    $proxyUsername = $this->xpdo->getOption('proxy_username',null,'');
+                    if (!empty($proxyUsername)) {
+                        $proxyAuth = $this->xpdo->getOption('proxy_auth_type',null,'BASIC');
+                        $proxyAuth = $proxyAuth == 'NTLM' ? CURLAUTH_NTLM : CURLAUTH_BASIC;
+                        curl_setopt($ch, CURLOPT_PROXYAUTH,$proxyAuth);
+
+                        $proxyPassword = $this->xpdo->getOption('proxy_password',null,'');
+                        $up = $proxyUsername.(!empty($proxyPassword) ? ':'.$proxyPassword : '');
+                        curl_setopt($ch, CURLOPT_PROXYUSERPWD,$up);
+                    }
+                }
                 $content = curl_exec($ch);
                 curl_close($ch);
 
@@ -276,7 +298,7 @@ class modTransportPackage extends xPDOObject {
                     $transferred= $cacheManager->writeFile($target, $content);
                 }
             } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'MODx could not download the file. You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.');
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'MODX could not download the file. You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.');
             }
         } else {
              $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_target_write',array(

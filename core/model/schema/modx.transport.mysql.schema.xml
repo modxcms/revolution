@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 /*
- * MODx CMS and PHP Application Framework ("MODx")
- * Copyright 2006, 2007, 2008 by the MODx Team.
+ * MODX CMS and PHP Application Framework ("MODX")
+ * Copyright 2006, 2007, 2008 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -20,12 +20,13 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
  -->
-<!-- The following xPDO model represents an object-relational map structure of the MODx transport package -->
+<!-- The following xPDO model represents an object-relational map structure of the MODX transport package -->
 <model package="modx.transport" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="modx" phpdoc-subpackage="transport" version="1.1">
     <object class="modTransportProvider" table="transport_providers" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="mediumtext" phptype="string" />
         <field key="service_url" dbtype="tinytext" phptype="string" />
+        <field key="username" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="api_key" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="created" dbtype="datetime" phptype="datetime" null="false" />
         <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
@@ -35,6 +36,9 @@
         </index>
         <index alias="api_key" name="api_key" primary="false" unique="false" type="BTREE">
             <column key="api_key" length="" collation="A" null="false" />
+        </index>
+        <index alias="username" name="username" primary="false" unique="false" type="BTREE">
+            <column key="username" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Packages" class="transport.modTransportPackage" local="id" foreign="provider" cardinality="many" owner="local" />

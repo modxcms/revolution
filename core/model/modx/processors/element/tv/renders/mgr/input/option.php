@@ -7,30 +7,39 @@ $this->xpdo->lexicon->load('tv_widget');
 $default = $this->get('default_text');
 
 // handles radio buttons
-$index_list = $this->parseInputOptions($this->processBindings($this->get('elements'),$this->get('name')));
-$opts = array();
+$options = $this->parseInputOptions($this->processBindings($this->get('elements'),$this->get('name')));
+$items = array();
 $defaultIndex = '';
 $i = 0;
-while (list($item, $itemvalue) = each ($index_list)) {
-    $checked = false;
-    list($item,$itemvalue) =  (is_array($itemvalue)) ? $itemvalue : explode("==",$itemvalue);
-    if (strlen($itemvalue)==0) $itemvalue = $item;
+foreach ($options as $option) {
+    $opt = explode("==",$option);
+    if (!isset($opt[1])) $opt[1] = $opt[0];
+    $checked = FALSE;
 
-    if (strcmp($itemvalue,$value) == 0) {
-        $checked = true;
+    /* set checked status */
+    if (strcmp($opt[1],$value) == 0) {
+        $checked = TRUE;
     }
-    if (strcmp($itemvalue,$default) == 0) {
+    /* set default value */
+    if (strcmp($opt[1],$default) == 0) {
         $defaultIndex = 'tv'.$this->get('id').'-'.$i;
         $this->set('default_text',$defaultIndex);
     }
+    /* do escaping of strings, encapsulate in " so extjs/other systems can
+     * utilize values correctly in their cast
+     */
+    if (intval($opt[1]) === 0 && $opt[1] !== 0 && $opt[1] !== '0') {
+        $opt[1] = '"'.str_replace('"','\"',$opt[1]).'"';
+    }
 
-    $opts[] = array(
-        'value' => $itemvalue,
-        'text' => htmlspecialchars($item,ENT_COMPAT,'UTF-8'),
+    $items[] = array(
+        'text' => htmlspecialchars($opt[0],ENT_COMPAT,'UTF-8'),
+        'value' => $opt[1],
         'checked' => $checked,
     );
+
     $i++;
 }
-$this->xpdo->smarty->assign('opts',$opts);
+$this->xpdo->smarty->assign('opts',$items);
 $this->xpdo->smarty->assign('cbdefaults',$defaultIndex);
 return $this->xpdo->smarty->fetch('element/tv/renders/input/radio.tpl');

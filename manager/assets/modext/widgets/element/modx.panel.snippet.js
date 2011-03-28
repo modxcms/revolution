@@ -70,7 +70,7 @@ MODx.panel.Snippet = function(config) {
                 ,width: 250
                 ,value: config.record.category || 0
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('snippet_lock')
                 ,description: _('snippet_lock_msg')
                 ,name: 'locked'
@@ -78,7 +78,7 @@ MODx.panel.Snippet = function(config) {
                 ,inputValue: 1
                 ,checked: config.record.locked || 0
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('clear_cache_on_save')
                 ,description: _('clear_cache_on_save_msg')
                 ,name: 'clearCache'

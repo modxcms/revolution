@@ -1,8 +1,8 @@
 /*!
- * Ext JS Library 3.3.0
- * Copyright(c) 2006-2010 Ext JS, Inc.
- * licensing@extjs.com
- * http://www.extjs.com/license
+ * Ext JS Library 3.3.1
+ * Copyright(c) 2006-2010 Sencha Inc.
+ * licensing@sencha.com
+ * http://www.sencha.com/license
  */
 // for old browsers
 window.undefined = window.undefined;
@@ -18,11 +18,11 @@ Ext = {
      * The version of the framework
      * @type String
      */
-    version : '3.3.0',
+    version : '3.3.1',
     versionDetail : {
         major : 3,
         minor : 3,
-        patch : 0
+        patch : 1
     }
 };
 
@@ -85,6 +85,10 @@ Ext.apply = function(o, c, defaults){
         }catch(e){}
     }
 
+    if(isIE && check(/msie 9/)) {
+        isIE6 = isIE = false;
+        isChrome = true;	
+    }
     Ext.apply(Ext, {
         /**
          * URL to a blank file used by Ext when in secure mode for iframe src and onReady src to prevent

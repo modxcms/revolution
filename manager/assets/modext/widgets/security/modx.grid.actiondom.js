@@ -437,7 +437,7 @@ MODx.window.CreateActionDom = function(config) {
             ,description: _('for_parent_desc')
             ,name: 'for_parent'
             ,id: 'modx-'+this.ident+'-for-parent'
-            ,xtype: 'checkbox'
+            ,xtype: 'xcheckbox'
             ,value: 1
             ,checked: false
         },{ html: '<hr />' },{
@@ -452,7 +452,7 @@ MODx.window.CreateActionDom = function(config) {
             ,description: _('active_desc')
             ,name: 'active'
             ,id: 'modx-'+this.ident+'-active'
-            ,xtype: 'checkbox'
+            ,xtype: 'xcheckbox'
             ,value: 1
             ,checked: true
         }]
@@ -562,7 +562,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,description: _('for_parent_desc')
             ,name: 'for_parent'
             ,id: 'modx-'+this.ident+'-for-parent'
-            ,xtype: 'checkbox'
+            ,xtype: 'xcheckbox'
             ,value: 1
             ,checked: config.record && !Ext.isEmpty(config.record.for_parent) ? true : false
         },{ html: '<hr />' },{
@@ -577,7 +577,7 @@ MODx.window.UpdateActionDom = function(config) {
             ,description: _('active_desc')
             ,name: 'active'
             ,id: 'modx-'+this.ident+'-active'
-            ,xtype: 'checkbox'
+            ,xtype: 'xcheckbox'
             ,value: 1
         }]
     });

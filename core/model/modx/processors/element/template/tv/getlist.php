@@ -22,37 +22,35 @@ $modx->lexicon->load('template');
 $isLimit = !empty($scriptProperties['limit']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,20);
-$sortAlias = $modx->getOption('sortAlias',$scriptProperties,'modTemplateVar');
+//$sortAlias = $modx->getOption('sortAlias',$scriptProperties,'modTemplateVar');
 $sort = $modx->getOption('sort',$scriptProperties,'name');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
-$template = $modx->getOption('template',$scriptProperties,false);
+$template = (integer) $modx->getOption('template',$scriptProperties,0);
+$category = (integer) $modx->getOption('category',$scriptProperties,0);
+$search = $modx->getOption('search',$scriptProperties,'');
 
-$c = $modx->newQuery('modTemplateVar');
-$count = $modx->getCount('modTemplateVar',$c);
-$c->select($modx->getSelectColumns('modTemplateVar','modTemplateVar'));
-if ($template) {
-    $c->leftJoin('modTemplateVarTemplate','modTemplateVarTemplate','
-        `modTemplateVarTemplate`.`tmplvarid` = `modTemplateVar`.`id`
-    AND `modTemplateVarTemplate`.`templateid` = '.$template.'
-    ');
-    $c->select('
-        IF(ISNULL(`modTemplateVarTemplate`.`tmplvarid`),0,1) AS `access`,
-        `modTemplateVarTemplate`.`rank` AS `tv_rank`
-    ');
-}
-if ($sort != 'tv_rank') {
-    $c->sortby($sortAlias.'.'.$sort,$dir);
+if ($template > 0) {
+    $templateObj = $modx->getObject('modTemplate', $template);
 } else {
-    $c->where(array('modTemplateVarTemplate.rank:!=' => null));
-    $c->sortby($sort,$dir);
+    $templateObj = $modx->newObject('modTemplate');
 }
-$c->limit($limit,$start);
-$tvs = $modx->getCollection('modTemplateVar',$c);
+$conditions = array();
+if (!empty($category)) {
+    $conditions['category'] = $category;
+}
+if (!empty($search)) {
+    $conditions['name:LIKE'] = '%'.$search.'%';
+    $conditions['OR:description:LIKE'] = '%'.$search.'%';
+    $conditions['OR:caption:LIKE'] = '%'.$search.'%';
+}
+$tvList = $templateObj->getTemplateVarList(array($sort => $dir), $limit, $start, $conditions);
+$tvs = $tvList['collection'];
+$count = $tvList['total'];
 
 /* iterate through tvs */
 $list = array();
 foreach ($tvs as $tv) {
-    $tvArray = $tv->get(array('id','name','description','tv_rank'));
+    $tvArray = $tv->get(array('id','name','description','tv_rank','category_name'));
     $tvArray['access'] = (boolean)$tv->get('access');
     
     $list[] = $tvArray;

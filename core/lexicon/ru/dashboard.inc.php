@@ -1,6 +1,6 @@
 <?php
 /**
-* Russian language strings for MODx Dashboard
+* Russian language strings for MODX Dashboard
 *
 * @package modx
 * @subpackage lexicon
@@ -14,7 +14,7 @@ $_lang['documentation'] = 'Документация';
 $_lang['file_bug'] = 'Сообщить об ошибке';
 $_lang['forums'] = 'Форум';
 $_lang['help'] = 'Помощь';
-$_lang['modx_news'] = 'Новости MODx';
+$_lang['modx_news'] = 'Новости MODX';
 $_lang['onlineusers_action'] = 'Действия';
 $_lang['onlineusers_actionid'] = 'ID - Действия';
 $_lang['onlineusers_ipaddress'] = 'IP адрес пользователя';
@@ -28,7 +28,7 @@ $_lang['security_notices'] = 'Безопасность';
 $_lang['view_tree'] = 'Смотреть дерево';
 $_lang['welcome_back'] = 'С возвращением, [[+name]].';
 $_lang['welcome_messages'] = 'Ваш ящик содержит <strong>%d</strong> сообщение(ия), из которых <strong>%s</strong> не прочитано.';
-$_lang['welcome_title'] = 'Добро пожаловать в систему управления сайтом MODx';
+$_lang['welcome_title'] = 'Добро пожаловать в систему управления сайтом MODX';
 $_lang['yourinfo_message'] = 'Этот раздел показывает информацию о вас:';
 $_lang['yourinfo_previous_login'] = 'Ваш последний вход:';
 $_lang['yourinfo_title'] = 'Информация о вас';

@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006, 2007, 2008, 2009, 2010 by the MODx Team. All rights reserved.
+ * Copyright 2006-2011 by MODX, LLC. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -35,19 +35,19 @@ session_start();
 define('MODX_SETUP_PHP_VERSION', phpversion());
 $php_ver_comp = version_compare(MODX_SETUP_PHP_VERSION, '5.1.1');
 if ($php_ver_comp < 0) {
-    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Wrong PHP version! You\'re using PHP version '.MODX_SETUP_PHP_VERSION.', and MODx requires version 5.1.1 or higher.</p></body></html>');
+    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Wrong PHP version! You\'re using PHP version '.MODX_SETUP_PHP_VERSION.', and MODX requires version 5.1.1 or higher.</p></body></html>');
 }
 
 /* make sure json extension is available */
 if (!function_exists('json_encode')) {
-    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>MODx requires the PHP JSON extension! You\'re PHP configuration at version '.MODX_SETUP_PHP_VERSION.' does not appear to have this extension enabled. This should be a standard extension on PHP 5.2+; it is available as a PECL extension in 5.1.</p></body></html>');
+    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>MODX requires the PHP JSON extension! You\'re PHP configuration at version '.MODX_SETUP_PHP_VERSION.' does not appear to have this extension enabled. This should be a standard extension on PHP 5.2+; it is available as a PECL extension in 5.1.</p></body></html>');
 }
 
 /* make sure date.timezone is set for PHP 5.3.0+ users */
 if (version_compare(MODX_SETUP_PHP_VERSION,'5.3.0') >= 0) {
     $phptz = @ini_get('date.timezone');
     if (empty($phptz)) {
-        die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini. Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
+        die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.3.0+, you must set the date.timezone setting in your php.ini. Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
     }
 }
 $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
@@ -64,7 +64,7 @@ if ((!isset($_GET['s']) || $_GET['s'] != 'set') && !isset($_SESSION['session_tes
     echo "<html><head><title>Loading...</title><script>window.location.href='" . MODX_SETUP_URL . "?s=set';</script></head><body></body></html>";
     exit ();
 } elseif (isset($_GET['s']) && $_GET['s'] == 'set' && !isset($_SESSION['session_test'])) {
-    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Make sure your PHP session configuration is valid and working.</p></body></html>');
+    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Make sure your PHP session configuration is valid and working.</p></body></html>');
 }
 
 $setupPath= strtr(realpath(dirname(__FILE__)), '\\', '/') . '/';
@@ -73,10 +73,10 @@ $installPath= strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/';
 define('MODX_INSTALL_PATH', $installPath);
 
 if (!include(MODX_SETUP_PATH . 'includes/config.core.php')) {
-    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Make sure you have uploaded all of the setup/ files; your setup/includes/config.core.php file is missing.</p></body></html>');
+    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Make sure you have uploaded all of the setup/ files; your setup/includes/config.core.php file is missing.</p></body></html>');
 }
 if (!include(MODX_SETUP_PATH . 'includes/modinstall.class.php')) {
-    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Make sure you have uploaded all of the setup/ files; your setup/includes/modinstall.class.php file is missing.</p></body></html>');
+    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Make sure you have uploaded all of the setup/ files; your setup/includes/modinstall.class.php file is missing.</p></body></html>');
 }
 $modInstall = new modInstall();
 if ($modInstall->loadLexicon()) {

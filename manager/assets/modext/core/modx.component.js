@@ -9,9 +9,12 @@ MODx.Component = function(config) {
     }
     this._loadComponents();
     this._loadActionButtons();
+    MODx.activePage = this;
 };
 Ext.extend(MODx.Component,Ext.Component,{
     fields: {}
+    ,form: null
+    ,action: false
 
     ,_loadForm: function() {
         if (!this.config.form) { return false; }
@@ -70,6 +73,32 @@ Ext.extend(MODx.Component,Ext.Component,{
         if (cp) {
             cp.doLayout();
         }
+        return true;
+    }
+
+    ,submitForm: function(listeners) {
+        listeners = listeners || {}
+        if (!this.config.formpanel || !this.config.action) { return false; }
+        f = Ext.getCmp(this.config.formpanel);
+        if (!f) { return false; }
+
+        for (var i in listeners) {
+            if (typeof listeners[i] == 'function') {
+                f.on(i,listeners[i],this);
+            } else if (listeners[i] && typeof listeners[i] == 'object' && listeners[i].fn) {
+                f.on(i,listeners[i].fn,listeners[i].scope || this);
+            }
+        }
+        
+        Ext.apply(f.baseParams,{
+            'action':this.config.action
+        });
+        f.submit({
+            headers: {
+                'Powered-By': 'MODx'
+                ,'modAuth': MODx.siteId
+            }
+        });
         return true;
     }
 });
@@ -221,7 +250,20 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             if (!o.form) return false;
 
             var f = o.form.getForm ? o.form.getForm() : o.form;
-            if (f.isValid()) {
+            var isv = true;
+            if (f.items && f.items.items) {
+                for (var fld in f.items.items) {
+                    if (f.items.items[fld] && f.items.items[fld].validate) {
+                        var fisv = f.items.items[fld].validate();
+                        if (!fisv) {
+                            f.items.items[fld].markInvalid();
+                            isv = false;
+                        }
+                    }
+                }
+            }
+
+            if (isv) {
                 Ext.applyIf(o.params,{
                     action: itm.process
                    ,'modx-ab-stay': MODx.config.stay

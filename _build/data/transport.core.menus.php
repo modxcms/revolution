@@ -104,7 +104,7 @@ $children[3]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'resource',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Resource',
+          'help_url' => 'Resource',
         ), '', true, true);
 
 /* new document resource */
@@ -229,7 +229,7 @@ $children[0]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'user',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Users',
+          'help_url' => 'Users',
         ), '', true, true);
         $children[0]->addOne($action);
 
@@ -253,7 +253,7 @@ $children[1]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'user,access,policy',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Security',
+          'help_url' => 'Security',
         ), '', true, true);
         $children[1]->addOne($action);
 
@@ -277,7 +277,7 @@ $children[2]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'resource,user,access',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Resource+Groups',
+          'help_url' => 'Resource+Groups',
         ), '', true, true);
         $children[2]->addOne($action);
 
@@ -301,7 +301,7 @@ $children[3]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'formcustomization,user,access,policy',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Customizing+The+Manager',
+          'help_url' => 'Customizing+The+Manager',
         ), '', true, true);
         $children[3]->addOne($action);
 
@@ -433,7 +433,7 @@ $children[2]->fromArray(array(
           'haslayout' => 1,
           'lang_topics' => 'element,category,propertyset',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Properties+and+Property+Sets',
+          'help_url' => 'Properties+and+Property+Sets',
         ), '', true, true);
         $children[2]->addOne($action);
 
@@ -601,7 +601,7 @@ $children[0]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'workspace',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Package+Management',
+          'help_url' => 'Package+Management',
         ), '', true, true);
         $children[0]->addOne($action);
         
@@ -625,7 +625,7 @@ $children[1]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'setting',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Settings',
+          'help_url' => 'Settings',
         ), '', true, true);
         $children[1]->addOne($action);
 
@@ -649,7 +649,7 @@ $children[2]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'package_builder,lexicon,namespace',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Internationalization',
+          'help_url' => 'Internationalization',
         ), '', true, true);
         $children[2]->addOne($action);
 
@@ -673,7 +673,7 @@ $children[3]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'content_type',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Content+Types',
+          'help_url' => 'Content+Types',
         ), '', true, true);
         $children[3]->addOne($action);
         
@@ -697,7 +697,7 @@ $children[4]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'context',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Contexts',
+          'help_url' => 'Contexts',
         ), '', true, true);
         $children[4]->addOne($action);
 
@@ -721,7 +721,7 @@ $children[5]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'action,menu,namespace',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Actions+and+Menus',
+          'help_url' => 'Actions+and+Menus',
         ), '', true, true);
         $children[5]->addOne($action);
 
@@ -745,7 +745,7 @@ $children[6]->fromArray(array (
           'haslayout' => 1,
           'lang_topics' => 'workspace,package_builder,lexicon,namespace',
           'assets' => '',
-          'help_url' => 'http://rtfm.modx.com/display/revolution20/Namespaces',
+          'help_url' => 'Namespaces',
         ), '', true, true);
         $children[6]->addOne($action);
 
@@ -833,7 +833,7 @@ $children[0]->fromArray(array (
   'description' => 'forums_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 0,
-  'handler' => 'window.open("http://modxcms.com/forums");',
+  'handler' => 'window.open("http://modx.com/forums");',
 ), '', true, true);
 
 /* confluence */
@@ -869,7 +869,7 @@ $children[3]->fromArray(array (
   'description' => 'api_docs_desc',
   'icon' => 'images/icons/sysinfo.gif',
   'menuindex' => 3,
-  'handler' => 'window.open("http://api.modxcms.com/");',
+  'handler' => 'window.open("http://api.modx.com/");',
 ), '', true, true);
 
 $menus[7]->addMany($children,'Children');

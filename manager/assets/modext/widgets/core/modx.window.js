@@ -80,7 +80,8 @@ Ext.extend(MODx.Window,Ext.Window,{
         this.renderForm();
     }
 	
-    ,submit: function() {
+    ,submit: function(close) {
+        close = close === false ? false : true;
         var f = this.fp.getForm();
         if (f.isValid() && this.fireEvent('beforeSubmit',f.getValues())) {
             f.submit({
@@ -96,7 +97,7 @@ Ext.extend(MODx.Window,Ext.Window,{
                         Ext.callback(this.config.success,this.config.scope || this,[frm,a]);
                     }
                     this.fireEvent('success',{f:frm,a:a});
-                    this.hide();
+                    if (close) { this.hide(); }
                 }
             });
         }

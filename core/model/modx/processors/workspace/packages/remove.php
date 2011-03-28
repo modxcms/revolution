@@ -30,8 +30,8 @@ if ($package->removePackage($scriptProperties['force']) == false) {
 }
 
 /* empty cache */
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache();
+$modx->getCacheManager();
+$modx->cacheManager->refresh();
 
 /* remove transport zip */
 $f = $modx->getOption('core_path').'packages/'.$package->signature.'.transport.zip';

@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic tv
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['has_access'] = 'Hat Zugriff?';
 $_lang['rank'] = 'Rang';
@@ -31,6 +33,8 @@ $_lang['tv_err_reserved_name'] = 'Eine Template-Variable kann nicht den gleichen
 $_lang['tv_err_save_access_permissions'] = 'Ein Fehler trat auf beim Versuch, die Zugriffsrechte der Template-Variablen zu speichern.';
 $_lang['tv_err_save'] = 'Ein Fehler trat auf beim Speichern der Template-Variable.';
 $_lang['tv_inuse'] = 'Die unten aufgeführten Dokumente verwenden momentan diese Template-Variable. Um mit dem Löschen fortzufahren, klicken Sie bitte auf den Löschen-Button, anderenfalls klicken Sie auf den Abbrechen-Button.';
+$_lang['tv_input_options'] = 'Eingabe-Optionen';
+$_lang['tv_input_options_msg'] = '<p>Hier können Sie die Eingabe-Optionen für die Template-Variable bearbeiten. Die verfügbaren Optionen sind abhängig vom Eingabe-Typ, den Sie auswählen.</p>';
 $_lang['tv_lock'] = 'Variable zum Bearbeiten sperren';
 $_lang['tv_lock_msg'] = 'Benutzer müssen das Attribut edit_locked haben, um diese Template-Variable bearbeiten zu können.';
 $_lang['tv_management_msg'] = 'Verwalten Sie zusätzliche eigene Inhaltsfelder (Template-Variablen) für Ihre Dokumente.';
@@ -38,6 +42,8 @@ $_lang['tv_msg'] = 'Hier können Sie Template-Variablen erstellen oder bearbeite
 $_lang['tv_name'] = 'Variablenname';
 $_lang['tv_new'] = 'Neue Template-Variable';
 $_lang['tv_novars'] = 'Keine Template-Variablen gefunden';
+$_lang['tv_output_options'] = 'Ausgabe-Optionen';
+$_lang['tv_output_options_msg'] = '<p>Hier können Sie die Ausgabe-Optionen für die Template-Variable bearbeiten. Die verfügbaren Optionen sind abhängig vom Eingabe-Typ, den Sie auswählen.</p>';
 $_lang['tv_properties'] = 'Standardeigenschaften';
 $_lang['tv_rank'] = 'Sortierreihenfolge';
 $_lang['tv_reset_params'] = 'Parameter zurücksetzen';

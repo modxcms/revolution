@@ -1,6 +1,6 @@
 <?php
 /**
- * Represents a MODx Resource that services JSON-RPC client requests.
+ * Represents a MODX Resource that services JSON-RPC client requests.
  *
  * @package modx
  */

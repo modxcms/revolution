@@ -114,7 +114,7 @@ class xPDOZip {
                     }
                 }
             } elseif (is_file($source)) {
-                $file = basename($file);
+                $file = basename($source);
                 if ($this->_archive->addFile($source, $target . $file)) {
                     $results[$target . $file] = "Successfully packed {$target}{$file} from {$source}";
                 } else {

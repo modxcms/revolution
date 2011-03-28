@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="MODx Revolution" description="MODx Revolution build script for Phing" default="complete" basedir=".">
+<project name="MODX Revolution" description="MODX Revolution build script for Phing" default="complete" basedir=".">
     <!-- Override properties in the build.properties file -->
     <property file="build.properties" />
 
@@ -21,8 +21,8 @@
     <property name="project.css.dir" value="${project.manager.dir}/templates/default/css" />
 
     <!-- Set the project version -->
-    <property name="modx.core.version" value="2.0.8" />
-    <property name="modx.core.release" value="pl" />
+    <property name="modx.core.version" value="2.1.0" />
+    <property name="modx.core.release" value="rc1" />
 
     <!-- Set some common build properties -->
     <property name="build.dir" value="${project.basedir}" />
@@ -61,7 +61,7 @@
         <phingcall target="css-concat-min" />
         <phingcall target="copy-prepared-css" />
         <phingcall target="generate-core-transport" />
-        <phingcall target="copy-core-transport" />
+        <!--<phingcall target="copy-core-transport" />-->
         <phingcall target="prepare-build-distrib" />
         <phingcall target="generate-phpdocs" />
         <phingcall target="build-sdk" />
@@ -80,7 +80,7 @@
     </target>
 
     <!-- Export a build image from a local Git repository tree; requires a local Git clone of the repository -->
-    <target name="git-export-build-image" description="export a repository tree of MODx from the local Git repository" if="build.distrib">
+    <target name="git-export-build-image" description="export a repository tree of MODX from the local Git repository" if="build.distrib">
         <mkdir dir="${build.image.dir}" />
         <resolvepath propertyName="absolute.root.dir" file="${project.root.dir}" />
         <resolvepath propertyName="absolute.image.basedir" file="${build.image.basedir}" />
@@ -237,7 +237,7 @@
     </target>
 
     <!-- Run the core data generation script -->
-    <target name="generate-core-data" description="generate core data for MODx from a reference database">
+    <target name="generate-core-data" description="generate core data for MODX from a reference database">
         <exec dir="${project.basedir}" command="${php.command} transport.data.php" />
     </target>
 
@@ -247,14 +247,16 @@
             <not><isset property="build.distrib" /></not>
             <then>
                 <property name="core.dir" value="${project.core.dir}" />
+                <property name="transport.image" value="wc" />
             </then>
             <else>
                 <property name="core.dir" value="${image.core.dir}" />
+                <property name="transport.image" value="${build.distrib.name}" />
             </else>
         </if>
         <delete file="${core.dir}/packages/core.transport.zip" />
         <delete dir="${core.dir}/packages/core" />
-        <exec dir="${project.basedir}" command="${php.command} transport.core.php" />
+        <exec dir="${project.basedir}" command="${php.command} transport.core.php ${transport.image}" />
     </target>
 
     <!-- Run the phpdoc generation script -->
@@ -314,7 +316,7 @@
         </delete>
     </target>
 
-    <!-- Build a MODx SDK distrib with all files in place and extracted -->
+    <!-- Build a MODX SDK distrib with all files in place and extracted -->
     <target name="build-sdk" description="create the traditional distribution package" if="build.distrib" unless="build.nodocs">
         <if>
             <istrue value="${build.timestamp}" />
@@ -386,7 +388,7 @@
         <delete dir="${build.image.dir}/docs" includeemptydirs="true" />
     </target>
 
-    <!-- Build a traditional MODx distrib with all files in place and extracted -->
+    <!-- Build a traditional MODX distrib with all files in place and extracted -->
     <target name="build-traditional" description="create the traditional distribution package" if="build.distrib">
         <if>
             <istrue value="${build.timestamp}" />
@@ -479,7 +481,7 @@
         <delete file="${build.image.dir}/connectors/config.core.php" />
     </target>
 
-    <!-- Build a new advanced MODx distrib with only the core/ and setup/ dirs
+    <!-- Build a new advanced MODX distrib with only the core/ and setup/ dirs
         and the core transport package included -->
     <target name="build-advanced" description="create the advanced distribution package" if="build.distrib">
         <if>

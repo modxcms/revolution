@@ -52,14 +52,26 @@ if (!empty($scriptProperties['category'])) {
     if ($category == null) $modx->error->addField('category',$modx->lexicon('category_err_nf'));
 }
 
-if ($modx->error->hasError()) return $modx->error->failure();
-
 /* set fields */
 $plugin->fromArray($scriptProperties);
 $plugin->set('locked',!empty($scriptProperties['locked']));
 $plugin->set('disabled',!empty($scriptProperties['disabled']));
 
-/* invoke OnBeforeTempFormSave event */
+if (!$plugin->validate()) {
+    $validator = $plugin->getValidator();
+    if ($validator->hasMessages()) {
+        foreach ($validator->getMessages() as $message) {
+            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
+        }
+    }
+}
+
+/* if any errors, return */
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
+}
+
+/* invoke OnBeforePluginFormSave event */
 $OnBeforePluginFormSave = $modx->invokeEvent('OnBeforePluginFormSave',array(
     'mode' => modSystemEvent::MODE_UPD,
     'id' => $plugin->get('id'),
@@ -77,18 +89,6 @@ if (is_array($OnBeforePluginFormSave)) {
 }
 if (!empty($canSave)) {
     return $modx->error->failure($canSave);
-}
-
-if (!$plugin->validate()) {
-    $validator = $plugin->getValidator();
-    if ($validator->hasMessages()) {
-        foreach ($validator->getMessages() as $message) {
-            $modx->error->addField($message['field'], $modx->lexicon($message['message']));
-        }
-    }
-    if ($modx->error->hasError()) {
-        return $modx->error->failure();
-    }
 }
 
 /* save plugin */
@@ -134,8 +134,7 @@ $modx->logManagerAction('plugin_update','modPlugin',$plugin->get('id'));
 
 /* empty cache */
 if (!empty($scriptProperties['clearCache'])) {
-    $cacheManager= $modx->getCacheManager();
-    $cacheManager->clearCache();
+    $modx->cacheManager->refresh();
 }
 
 return $modx->error->success('', $plugin->get(array('id', 'name','description','category','locked','disabled')));

@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006, 2007, 2008, 2009, 2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -58,7 +58,7 @@ class modInstallRequest {
 
         $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
 
-        $this->parser->assign('app_name', 'MODx '.$currentVersion['code_name']);
+        $this->parser->assign('app_name', 'MODX '.$currentVersion['code_name']);
         $this->parser->assign('app_version', $currentVersion['full_version']);
 
         $agreed= isset ($_REQUEST['agreed']) ? true : false;
@@ -86,7 +86,7 @@ class modInstallRequest {
         $loaded = false;
         if (!@require_once (MODX_SETUP_PATH . 'includes/modinstallsmarty.class.php')) {
             if (!@include (MODX_SETUP_PATH . 'provisioner/bootstrap.php')) {
-                die ('<html><head><title></title></head><body><h1>FATAL ERROR: MODx Setup cannot continue.</h1><p>Make sure all the files in the MODx setup package have been uploaded to your server.</p></body></html>');
+                die ('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Make sure all the files in the MODX setup package have been uploaded to your server.</p></body></html>');
             }
         }
         $this->parser = new modInstallSmarty();

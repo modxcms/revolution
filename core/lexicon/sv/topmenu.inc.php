@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Om';
-$_lang['about_desc'] = 'Mer information om MODx Revolution.';
+$_lang['about_desc'] = 'Mer information om MODX Revolution.';
 $_lang['access_permissions'] = 'Åtkomstinställningar';
 $_lang['access_permissions_desc'] = 'Hantera användargruppers tillgång till resurser och kontexter.';
 $_lang['api_docs'] = 'API-dokumentation';
@@ -20,7 +20,7 @@ $_lang['contexts_desc'] = 'Hantera webbplatsens kontexter och deras inställning
 $_lang['edit_menu'] = 'Åtgärder';
 $_lang['edit_menu_desc'] = 'Hantera händelser i och strukturen på toppmenyn.';
 $_lang['eventlog_viewer'] = 'Fellogg';
-$_lang['eventlog_viewer_desc'] = 'Visa MODx fellogg - error.log.';
+$_lang['eventlog_viewer_desc'] = 'Visa MODX fellogg - error.log.';
 $_lang['export_site'] = 'Exportera statisk HTML';
 $_lang['export_site_desc'] = 'Exportera den nuvarande webbplatsen till statiska HTML-sidor.';
 //"Flush" in Flush Permissions means to basically 'reload' the permissions. So think 'reload', or 'reset'.
@@ -35,16 +35,16 @@ $_lang['flush_sessions_not_supported'] = 'Återställning av användarsessioner 
 $_lang['form_customization'] = 'Formuläranpassning';
 $_lang['form_customization_desc'] = 'Anpassa hanterarens formulär efter säkerhetsbehörigheter.';
 $_lang['forums'] = 'Forum';
-$_lang['forums_desc'] = 'Besök MODx officiella forum.';
+$_lang['forums_desc'] = 'Besök MODX officiella forum.';
 $_lang['import_resources'] = 'Importera resurser';
 $_lang['import_resources_desc'] = 'Importera en uppsättning statiska resurser till webbplatsen.';
 $_lang['import_site'] = 'Importera HTML';
 $_lang['import_site_desc'] = 'Importera en uppsättning HTML-filer till webbplatsen.';
 $_lang['jira'] = 'Buggar';
-$_lang['jira_desc'] = 'Öppna MODx buggverktyg för att följa och anmäla buggar.';
+$_lang['jira_desc'] = 'Öppna MODX buggverktyg för att följa och anmäla buggar.';
 $_lang['lexicon_management'] = 'Lexikonhantering';
-$_lang['lexicon_management_desc'] = 'Redigera språksträngarna i MODx hanterare.';
-$_lang['logout_desc'] = 'Logga ut från MODx hanterare.';
+$_lang['lexicon_management_desc'] = 'Redigera språksträngarna i MODX hanterare.';
+$_lang['logout_desc'] = 'Logga ut från MODX hanterare.';
 $_lang['manage_workspaces'] = 'Pakethantering';
 $_lang['manage_workspaces_desc'] = 'Ladda ner komponenter från 3:e part, lägg till leverantörer och installera paket.';
 $_lang['messages'] = 'Meddelanden';
@@ -99,4 +99,4 @@ $_lang['view_logging_desc'] = 'Se de senaste aktiviteterna i hanteraren.';
 $_lang['view_sysinfo'] = 'Systeminformation';
 $_lang['view_sysinfo_desc'] = 'Se serverinformation såsom phpinfo, MySQL db-info med mera.';
 $_lang['wiki'] = 'Wiki';
-$_lang['wiki_desc'] = 'Öppna MODx Confluence wiki, där dokumentationen för MODx Revolution finns lagrad.';
+$_lang['wiki_desc'] = 'Öppna MODX Confluence wiki, där dokumentationen för MODX Revolution finns lagrad.';

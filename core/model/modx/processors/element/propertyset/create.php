@@ -8,11 +8,18 @@
 if (!$modx->hasPermission('new_propertyset')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('propertyset');
 
+if (empty($scriptProperties['name'])) {
+    $modx->error->addField('name',$modx->lexicon('propertyset_err_ns_name'));
+}
 /* make sure set with that name doesn't already exist */
 $alreadyExists = $modx->getCount('modPropertySet',array(
     'name' => $scriptProperties['name'],
 ));
-if ($alreadyExists > 0) return $modx->error->failure($modx->lexicon('propertyset_err_ae'));
+if ($alreadyExists > 0) return $modx->error->addField('name',$modx->lexicon('propertyset_err_ae'));
+
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
+}
 
 /* create property set */
 $set = $modx->newObject('modPropertySet');

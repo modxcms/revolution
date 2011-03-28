@@ -6,7 +6,6 @@
 {if count($category->tvs) > 0}
 
     <div id="modx-tv-tab{$category->id}" class="x-tab{if $category->hidden}-hidden{/if}" title="{$category->category|default:$_lang.uncategorized|ucfirst}">
-    
     {foreach from=$category->tvs item=tv name='tv'}
 {if $tv->type NEQ "hidden"}
     <div class="x-form-item x-tab-item {cycle values=",alt"} modx-tv" id="tv{$tv->id}-tr">
@@ -14,7 +13,7 @@
 
             {if $showCheckbox}<input type="checkbox" name="tv{$tv->id}-checkbox" class="modx-tv-checkbox" value="1" />{/if}
             <span class="modx-tv-caption" id="tv{$tv->id}-caption">{$tv->caption}</span>
-            <a class="modx-tv-reset" href="javascript:;" onclick="MODx.resetTV({$tv->id});" title="{$_lang.set_to_default}"></a>
+            <a class="modx-tv-reset" id="modx-tv-reset-{$tv->id}" title="{$_lang.set_to_default}"></a>
 
             {if $tv->description}<span class="modx-tv-description">{$tv->description}</span>{/if}
             {if $tv->inherited}<br /><span class="modx-tv-inherited">{$_lang.tv_value_inherited}</span>{/if}
@@ -55,15 +54,25 @@ Ext.onReady(function() {
                 var cbs = d.dom.value.split(',');
                 for (var i=0;i<c.items.length;i++) {
                     if (c.items.items[i]) {
-                        c.items.items[i].setValue(cbs.indexOf(c.items.items[i].id) != -1 ? true : false);
+                        c.items.items[i].setValue(cbs.indexOf(c.items.items[i].id) != -1);
                     }
                 } 
             } else {
                 c.setValue(d.dom.value);
             }
         }
-        Ext.getCmp('modx-panel-resource').markDirty();
+        var p = Ext.getCmp('modx-panel-resource');
+        if (p) {
+            p.markDirty();
+            p.fireEvent('tv-reset',{id:id});
+        }
     };
+
+    Ext.select('.modx-tv-reset').on('click',function(e,t,o) {
+        var id = t.id.split('-');
+        id = id[3];
+        MODx.resetTV(id);
+    });
     MODx.refreshTVs = function() {
         if (MODx.unloadTVRTE) { MODx.unloadTVRTE(); }
         Ext.getCmp('modx-panel-resource-tv').refreshTVs();

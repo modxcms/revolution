@@ -62,17 +62,14 @@ if ($resource->save() === false) {
     return $modx->error->failure($modx->lexicon('resource_err_save'));
 }
 
-$cacheManager= $modx->getCacheManager();
-$cacheManager->clearCache(array (
-        "{$resource->context_key}/resources/",
-        "{$resource->context_key}/context.cache.php",
-    ),
-    array(
-        'objects' => array('modResource', 'modContext', 'modTemplateVarResource'),
-        'publishing' => true
-    )
-);
-
 $resource->removeLock();
+
+/* empty cache */
+$modx->cacheManager->refresh(array(
+    'db' => array(),
+    'auto_publish' => array('contexts' => array($resource->get('context_key'))),
+    'context_settings' => array('contexts' => array($resource->get('context_key'))),
+    'resource' => array('contexts' => array($resource->get('context_key'))),
+));
 
 return $modx->error->success();

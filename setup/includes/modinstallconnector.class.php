@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006, 2007, 2008, 2009, 2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -57,7 +57,9 @@ class modInstallConnector {
         if (empty($_REQUEST['action'])) $this->error->failure('No processor specified!');
         $this->action = $_REQUEST['action'];
 
-        $this->install->loadDriver();
+        if($this->action !== 'database/connection') {
+            $this->install->loadDriver();
+        }
         
         $f = MODX_SETUP_PATH . 'processors/' . $this->action . '.php';
         if (!file_exists($f)) $this->error->failure('Could not load requested processor for action ' . $this->action . '.');

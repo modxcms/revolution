@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -20,7 +20,7 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * Represents an element of source content managed by MODx.
+ * Represents an element of source content managed by MODX.
  *
  * These elements are defined by some type of source content that when processed
  * will provide output or some type of logical result based on mutable
@@ -31,7 +31,7 @@
  *
  * @package modx
  * @abstract Implement a derivative of this class to represent an element which
- * can be processed within the MODx framework.
+ * can be processed within the MODX framework.
  * @extends modAccessibleSimpleObject
  */
 class modElement extends modAccessibleSimpleObject {
@@ -147,6 +147,12 @@ class modElement extends modAccessibleSimpleObject {
                     $this->xpdo->lexicon->load($property['lexicon']);
                 }
                 $property['desc_trans'] = $this->xpdo->lexicon($property['desc']);
+
+                if (!empty($property['options'])) {
+                    foreach ($property['options'] as &$option) {
+                        $option['name'] = $this->xpdo->lexicon($option['text']);
+                    }
+                }
             }
         }
         return $value;
@@ -232,7 +238,7 @@ class modElement extends modAccessibleSimpleObject {
     /**
      * Process the element source content to produce a result.
      *
-     * @abstract Implement this to define behavior for a MODx content element.
+     * @abstract Implement this to define behavior for a MODX content element.
      * @access public
      * @param array|string $properties A set of configuration properties for the
      * element.
@@ -342,36 +348,44 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function findPolicy($context = '') {
         $policy = array();
+        $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
-        if (empty($this->_policies) || !isset($this->_policies[$context])) {
-            $accessTable = $this->xpdo->getTableName('modAccessCategory');
-            $policyTable = $this->xpdo->getTableName('modAccessPolicy');
-            $categoryClosureTable = $this->xpdo->getTableName('modCategoryClosure');
-            $sql = "SELECT `Acl`.`target`, `Acl`.`principal`, `Acl`.`authority`, `Acl`.`policy`, `Policy`.`data` FROM {$accessTable} `Acl` " .
-                    "LEFT JOIN {$policyTable} `Policy` ON `Policy`.`id` = `Acl`.`policy` " .
-                    "JOIN {$categoryClosureTable} `CategoryClosure` ON `CategoryClosure`.`descendant` = :category " .
-                    "AND `Acl`.`principal_class` = 'modUserGroup' " .
-                    "AND `CategoryClosure`.`ancestor` = `Acl`.`target` " .
-                    "AND (`Acl`.`context_key` = :context OR `Acl`.`context_key` IS NULL OR `Acl`.`context_key` = '') " .
-                    "GROUP BY `target`, `principal`, `authority`, `policy` " .
-                    "ORDER BY `CategoryClosure`.`depth` DESC, `authority` ASC";
-            $bindings = array(
-                ':category' => $this->get('category'),
-                ':context' => $context,
-            );
-            $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-            if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $policy['modAccessCategory'][$row['target']][] = array(
-                        'principal' => $row['principal'],
-                        'authority' => $row['authority'],
-                        'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
-                    );
+        if ($context === $this->xpdo->context->get('key')) {
+            $enabled = (boolean) $this->xpdo->getOption('access_category_enabled', null, false);
+        } elseif ($this->xpdo->getContext($context)) {
+            $enabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_category_enabled', false);
+        }
+        if ($enabled) {
+            if (empty($this->_policies) || !isset($this->_policies[$context])) {
+                $accessTable = $this->xpdo->getTableName('modAccessCategory');
+                $policyTable = $this->xpdo->getTableName('modAccessPolicy');
+                $categoryClosureTable = $this->xpdo->getTableName('modCategoryClosure');
+                $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                        "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                        "JOIN {$categoryClosureTable} CategoryClosure ON CategoryClosure.descendant = :category " .
+                        "AND Acl.principal_class = 'modUserGroup' " .
+                        "AND CategoryClosure.ancestor = Acl.target " .
+                        "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                        "GROUP BY target, principal, authority, policy " .
+                        "ORDER BY CategoryClosure.depth DESC, authority ASC";
+                $bindings = array(
+                    ':category' => $this->get('category'),
+                    ':context' => $context,
+                );
+                $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
+                if ($query->stmt && $query->stmt->execute()) {
+                    while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $policy['modAccessCategory'][$row['target']][] = array(
+                            'principal' => $row['principal'],
+                            'authority' => $row['authority'],
+                            'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+                        );
+                    }
                 }
+                $this->_policies[$context] = $policy;
+            } else {
+                $policy = $this->_policies[$context];
             }
-            $this->_policies[$context] = $policy;
-        } else {
-            $policy = $this->_policies[$context];
         }
         return $policy;
     }
@@ -527,21 +541,13 @@ class modElement extends modAccessibleSimpleObject {
                         'lexicon' => null,
                     );
                 }
-                /* handle translations of properties (temp fix until modLocalizableObject in 2.1 and beyond) */
-                /*
-                if (!empty($propertyArray['lexicon'])) {
-                    $this->xpdo->lexicon->load($propertyArray['lexicon']);
-                    $propertyArray['desc'] = $this->xpdo->lexicon($propertyArray['desc']);
 
-                    if (is_array($propertyArray['options'])) {
-                        foreach ($propertyArray['options'] as $optionKey => &$option) {
-                            if (!empty($option['text'])) {
-                                $option['text'] = $this->xpdo->lexicon($option['text']);
-                            }
-                        }
+                if (!empty($propertyArray['options'])) {
+                    foreach ($propertyArray['options'] as $optionKey => &$option) {
+                        unset($option['menu'],$option['name']);
                     }
                 }
-                 */
+                
                 $propertiesArray[$key] = $propertyArray;
             }
 
@@ -627,26 +633,5 @@ class modElement extends modAccessibleSimpleObject {
      */
     public function setCacheable($cacheable = true) {
         $this->_cacheable = (boolean) $cacheable;
-    }
-
-    /**
-     * Turns associative arrays into placeholders in the scope of this element.
-     *
-     * @deprecated To be removed in 2.1. See xPDO::toPlaceholders() for similar functionality.
-     * @param array $placeholders An associative array of placeholders to set.
-     * @return array An array of placeholders overwritten from the containing
-     * scope you can use to restore values from, or an empty array if no
-     * placeholders were overwritten.
-     */
-    public function toPlaceholders($placeholders) {
-        $restore = array();
-        if (is_array($placeholders) && !empty($placeholders)) {
-            $restoreKeys = array_keys($placeholders);
-            foreach ($restoreKeys as $phKey) {
-                if (isset($this->xpdo->placeholders[$phKey])) $restore[$phKey]= $this->xpdo->getPlaceholder($phKey);
-            }
-            $this->xpdo->toPlaceholders($placeholders);
-        }
-        return $restore;
     }
 }

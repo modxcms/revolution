@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic default
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['access'] = 'Zugriff';
 $_lang['access_denied'] = 'Zugriff verweigert.';
@@ -81,7 +83,7 @@ $_lang['context_refresh'] = 'Kontext aktualisieren';
 $_lang['context_remove'] = 'Kontext löschen';
 $_lang['context_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Kontext löschen möchten? Dadurch werden auch alle Ressourcen in diesem Kontext endgültig gelöscht und lassen sich nicht mehr wiederherstellen.';
 $_lang['copy_to_clipboard'] = 'In die Zwischenablage kopieren';
-$_lang['core_rte'] = 'MODx-Editor';
+$_lang['core_rte'] = 'MODX-Editor';
 $_lang['correct_errors'] = 'Bitte korrigieren Sie die Fehler in Ihrem Formular, bevor Sie es abschicken.';
 $_lang['create'] = 'Erstellen';
 $_lang['create_document_here'] = 'Dokument hier erstellen';
@@ -95,7 +97,8 @@ $_lang['data_err_load'] = 'Fehler beim Laden von Daten.';
 $_lang['date'] = 'Datum';
 $_lang['datechanged'] = 'Datum geändert';
 $_lang['db_header'] = 'Datenbank-Tabellen';
-$_lang['db_info'] = 'Wenn eine Tabelle einen Overhead hat, können Sie sie optimieren, indem Sie auf den Link in der Spalte "Overhead" klicken.';
+$_lang['db_info_mysql'] = 'Wenn eine Tabelle einen Overhead hat, können Sie sie optimieren, indem Sie auf den Link in der Spalte "Overhead" klicken.';
+$_lang['db_info_sqlsrv'] = 'Sie können den Index einer Tabelle neu erstellen lassen, indem Sie auf den Link in der Spalte "Ungenutzt" klicken.';
 $_lang['delete'] = 'Lösche';  // actually 'Löschen', but needed in this form for TVs etc.
 $_lang['deleted'] = 'Gelöscht';
 $_lang['description'] = 'Beschreibung';
@@ -230,8 +233,8 @@ $_lang['menu_order'] = 'Menü-Reihenfolge';
 $_lang['mime_type'] = 'MIME-Type';
 $_lang['mime_type_desc'] = 'Der Mime-Type für alle Dateien mit dem Inhaltstyp.';
 $_lang['mode'] = 'Modus';
-$_lang['modx_browser'] = 'MODx-Browser';
-$_lang['modx_resource_browser'] = 'MODx-Ressourcen-Browser';
+$_lang['modx_browser'] = 'MODX-Browser';
+$_lang['modx_resource_browser'] = 'MODX-Ressourcen-Browser';
 $_lang['move'] = 'Verschieben';
 $_lang['name'] = 'Name';
 $_lang['new'] = 'Neu:';
@@ -293,7 +296,7 @@ $_lang['plugin'] = 'Plugin';
 $_lang['plugins'] = 'Plugins';
 $_lang['preview'] = 'Vorschau';
 $_lang['private'] = 'Privat';
-$_lang['processor_err_nf'] = 'Verarbeitungssystem nicht gefunden.';
+$_lang['processor_err_nf'] = 'Verarbeitungssystem "[[+target]]" nicht gefunden.';
 $_lang['progress'] = 'Fortschritt';
 $_lang['properties'] = 'Eigenschaften';
 $_lang['property_set'] = 'Gruppe von Einstellungen';
@@ -319,7 +322,19 @@ $_lang['quick_update_template'] = 'Template schnell bearbeiten';
 $_lang['quick_update_tv'] = 'TV  schnell bearbeiten';
 $_lang['recent_docs'] = 'Letzte Dokumente';
 $_lang['redirecting'] = 'Leite weiter...';
+$_lang['refresh_action_map'] = 'Leere den Aktionen-Map-Cache';
+$_lang['refresh_auto_publish'] = 'Verarbeite automatische Veröffentlichungsdaten';
+$_lang['refresh_context_settings'] = 'Erstelle die Kontext-Caches neu';
+$_lang['refresh_db'] = 'Leere den Datenbank-Abfrageergebnis-Cache';
+$_lang['refresh_default'] = 'Leere den Standard-Cache';
+$_lang['refresh_failure'] = 'Neuerstellung des Caches fehlgeschlagen! (HINWEIS: Dieser Cache-Bereich ist möglicherweise einfach leer)';
+$_lang['refresh_lexicon_topics'] = 'Leere den Lexikon-Themen-Cache';
+$_lang['refresh_menu'] = 'Leere den Menü-Cache';
 $_lang['refresh_published'] = '<strong>[[+num]]</strong> Dokumente wurden veröffentlicht.';
+$_lang['refresh_resource'] = 'Leere den Ressourcen-Cache';
+$_lang['refresh_scripts'] = 'Leere den Snippet/Plugin-Skript-Cache';
+$_lang['refresh_success'] = 'Neuerstellung des Caches erfolgreich!';
+$_lang['refresh_system_settings'] = 'Erstelle den Systemeinstellungen-Cache neu';
 $_lang['refresh_title'] = 'Site aktualisieren';
 $_lang['refresh_tree'] = 'Baum aktualisieren';
 $_lang['refresh_unpublished'] = '<strong>[[+num]]</strong> Dokumente wurden zurückgezogen.';
@@ -351,6 +366,7 @@ $_lang['resource_settings'] = 'Ressourcen-Einstellungen';
 $_lang['role'] = 'Rolle';
 $_lang['roles'] = 'Rollen';
 $_lang['save'] = 'Speichern';
+$_lang['save_and_close'] = 'Speichern und schließen';
 $_lang['save_changes'] = 'Änderungen speichern';
 $_lang['save_successful'] = 'Erfolgreich gespeichert.';
 $_lang['save_tag'] = 'Tag speichern';
@@ -359,6 +375,7 @@ $_lang['scroll_dn'] = 'Herunterscrollen';
 $_lang['scroll_up'] = 'Heraufscrollen';
 $_lang['search'] = 'Suchen';
 $_lang['search_criteria'] = 'Suchkriterien';
+$_lang['search_ellipsis'] = 'Suche...';
 $_lang['search_results'] = 'Suchergebnisse';
 $_lang['security'] = 'Sicherheit';
 $_lang['select_date'] = 'Wählen Sie ein Datum';

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# This script runs the MODx Test Harness.
+# This script runs the MODX Test Harness.
 #
 
-phpunit --colors --syntax-check MODxTestHarness
+phpunit 

@@ -87,6 +87,14 @@ $record = array_merge($record,$overridden);
 
 $record['parent_pagetitle'] = $parent ? $parent->get('pagetitle') : '';
 
+/* get TVs */
+$templateId = $record['template'];
+$tvCounts = array();
+$tvOutput = include dirname(dirname(__FILE__)).'/tvs.php';
+if (!empty($tvCounts)) {
+    $modx->smarty->assign('tvOutput',$tvOutput);
+}
+
 /* register JS scripts */
 $modx->smarty->assign('_ctx',$resource->get('context_key'));
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
@@ -94,6 +102,7 @@ $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/element/modx.panel.tv.renders.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.grid.resource.security.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.tv.js');
+$modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/widgets/resource/modx.panel.resource.static.js');
 $modx->regClientStartupScript($managerUrl.'assets/modext/sections/resource/static/update.js');
 $modx->regClientStartupHTMLBlock('
@@ -111,9 +120,13 @@ Ext.onReady(function() {
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
         ,preview_url: "'.$url.'"
-        ,canSave: "'.($modx->hasPermission('save_document') ? 1 : 0).'"
+        ,locked: '.($locked ? 1 : 0).'
+        ,canSave: '.($canSave ? 1 : 0).'
+        ,lockedText: "'.$lockedText.'"
         ,canEdit: "'.($modx->hasPermission('edit_document') ? 1 : 0).'"
         ,canCreate: "'.($modx->hasPermission('new_document') ? 1 : 0).'"
+        ,canDelete: "'.($modx->hasPermission('delete_document') ? 1 : 0).'"
+        ,show_tvs: '.(!empty($tvCounts) ? 1 : 0).'
     });
 });
 // ]]>

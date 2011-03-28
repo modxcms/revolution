@@ -9,11 +9,23 @@ if (!$modx->hasPermission('file_view')) return $modx->error->failure($modx->lexi
 if (empty($_GET['file'])) return $modx->error->failure($modx->lexicon('file_err_nf'));
 $wctx = !empty($_GET['wctx']) ? $_GET['wctx'] : $modx->context->get('key');
 
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+
 /* format filename */
 $filename = preg_replace('#([\\\\]+|/{2,})#', '/',$_GET['file']);
 $modx->getService('fileHandler', 'modFileHandler', '',array('context' => $wctx));
-$basePath = $modx->fileHandler->getBasePath(false);
-$file = $modx->fileHandler->make($basePath.$filename);
+$root = $modx->fileHandler->getBasePath(false);
+if ($workingContext->getOption('filemanager_path_relative',true)) {
+    $root = $workingContext->getOption('base_path','').$root;
+}
+$file = $modx->fileHandler->make($root.$filename);
 
 if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf'));
 if (!$file->isReadable()) {
@@ -23,7 +35,7 @@ $imagesExts = array('jpg','jpeg','png','gif','ico');
 $fileExtension = pathinfo($filename,PATHINFO_EXTENSION);
 
 $fa = array(
-    'name' => $file->getPath(),
+    'name' => $filename,//$file->getPath(),
     'size' => $file->getSize(),
     'last_accessed' => $file->getLastAccessed(),
     'last_modified' => $file->getLastModified(),

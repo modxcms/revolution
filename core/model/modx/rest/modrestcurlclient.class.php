@@ -146,8 +146,11 @@ class modRestCurlClient extends modRestClient {
             $proxyUserpwd = $this->modx->getOption('proxy_username',null,'');
             if (!empty($proxyUserpwd)) {
                 $proxyAuthType = $this->modx->getOption('proxy_auth_type',null,'BASIC');
+                $proxyAuthType = $proxyAuthType == 'NTLM' ? CURLAUTH_NTLM : CURLAUTH_BASIC;
                 curl_setopt($ch, CURLOPT_PROXYAUTH,$proxyAuthType);
-                $proxyUserpwd .= ':'.$this->modx->getOption('proxy_password',null,'');
+
+                $proxyPassword = $this->modx->getOption('proxy_password',null,'');
+                if (!empty($proxyPassword)) $proxyUserpwd .= ':'.$proxyPassword;
                 curl_setopt($ch, CURLOPT_PROXYUSERPWD,$proxyUserpwd);
             }
         }

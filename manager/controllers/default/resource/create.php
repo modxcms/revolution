@@ -119,8 +119,8 @@ if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)
 $default_template = (isset($_REQUEST['template']) ? $_REQUEST['template'] : ($parent != null ? $parent->get('template') : $context->getOption('default_template', 0, $modx->_userConfig)));
 $userGroups = $modx->user->getUserGroups();
 $c = $modx->newQuery('modActionDom');
-$c->innerJoin('modFormCustomizationSet','Set');
-$c->innerJoin('modFormCustomizationProfile','Profile','Set.profile = Profile.id');
+$c->innerJoin('modFormCustomizationSet','FCSet');
+$c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
 $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
 $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
 $c->where(array(
@@ -129,7 +129,7 @@ $c->where(array(
     'modActionDom.container' => 'modx-panel-resource',
     'modActionDom.rule' => 'fieldDefault',
     'modActionDom.active' => true,
-    'Set.active' => true,
+    'FCSet.active' => true,
     'Profile.active' => true,
 ));
 $c->where(array(
@@ -191,10 +191,19 @@ if ($parent == null) {
 }
 $parent->fromArray($defaults);
 $parent->set('template',$default_template);
+$resource->set('template',$default_template);
 $overridden = $this->checkFormCustomizationRules($parent,true);
 $defaults = array_merge($defaults,$overridden);
 
 $defaults['parent_pagetitle'] = $parent->get('pagetitle');
+
+/* get TVs */
+$tvCounts = array();
+$tvOutput = include dirname(__FILE__).'/tvs.php';
+if (!empty($tvCounts)) {
+    $modx->smarty->assign('tvOutput',$tvOutput);
+}
+
 
 /* register JS */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
@@ -217,6 +226,7 @@ Ext.onReady(function() {
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
         ,canSave: "'.($modx->hasPermission('save_document') ? 1 : 0).'"
+        ,show_tvs: '.(!empty($tvCounts) ? 1 : 0).'
     });
 });
 // ]]>

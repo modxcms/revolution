@@ -98,7 +98,7 @@ MODx.panel.FCSet = function(config) {
                 ,anchor: '90%'
                 ,allowBlank: true
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('active')
                 ,name: 'active'
                 ,inputValue: true

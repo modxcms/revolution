@@ -8,6 +8,6 @@
  */
 $_lang['clear'] = 'Rensa';
 $_lang['error_log'] = 'Fellogg';
-$_lang['error_log_desc'] = 'Här är felloggen för MODx Revolution:';
+$_lang['error_log_desc'] = 'Här är felloggen för MODX Revolution:';
 $_lang['system_events'] = 'Systemhändelser';
 $_lang['priority'] = 'Prioritet';

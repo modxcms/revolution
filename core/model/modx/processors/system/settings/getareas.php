@@ -18,45 +18,42 @@ $dir = $modx->getOption('dir',$scriptProperties,'ASC');
 $namespace = $modx->getOption('namespace',$scriptProperties,'');
 
 /* build query */
-$subc = $modx->newQuery('modSystemSetting');
-$subc->setClassAlias('AreaSS');
-$subc->select(array(
-    'COUNT('.$modx->escape('AreaSS').'.'.$modx->escape('key').')',
-));
-$subc->where(array(
-    $modx->getSelectColumns('modSystemSetting','AreaSS','',array('area')).' = '.$modx->getSelectColumns('modSystemSetting','modSystemSetting','',array('area'))
-));
-$subc->prepare();
-$sql = $subc->toSql();
 $c = $modx->newQuery('modSystemSetting');
-$c->select(array(
-    $modx->escape('key'),
-    'area',
+$c->setClassAlias('settingsArea');
+$c->leftJoin('modSystemSetting', 'settingsCount', array(
+    'settingsArea.' . $modx->escape('key') . ' = settingsCount.' . $modx->escape('key')
 ));
-$c->select('('.$sql.') AS '.$modx->escape('ct'));
+$c->select(array(
+    'settingsArea.' . $modx->escape('area'),
+    'settingsArea.' . $modx->escape('namespace'),
+    'COUNT(settingsCount.' . $modx->escape('key') . ') AS num_settings'
+));
 if (!empty($namespace)) {
     $c->where(array(
-        'modSystemSetting.namespace' => $namespace,
+        'settingsArea.namespace' => $namespace,
     ));
 }
-$c->groupby($modx->escape('area'));
+$c->groupby('settingsArea.' . $modx->escape('area') . ', settingsArea.' . $modx->escape('namespace'));
 $c->sortby($modx->escape('area'),$dir);
-$areas = $modx->getCollection('modSystemSetting',$c);
 
 $list = array();
-foreach ($areas as $area) {
-    $areaArray = $area->toArray();
-    if ($area->get('namespace') != 'core') {
-        $modx->lexicon->load($area->get('namespace').':default');
+if($c->prepare() && $c->stmt->execute()) {
+    while($r = $c->stmt->fetch(PDO::FETCH_NUM)) {
+        $area = $r[0];
+        $name = $area;
+        $namespace = $r[1];
+        $count = $r[2];
+        if ($namespace != 'core') {
+            $modx->lexicon->load($namespace.':default');
+        }
+        $lex = 'area_'.$name;
+        if ($modx->lexicon->exists($lex)) {
+            $name = $modx->lexicon($lex);
+        }
+        $list[] = array(
+            'd' => "$name ({$count})",
+            'v' => $area,
+        );
     }
-    $name = $area->get('area');
-    $lex = 'area_'.$name;
-    if ($modx->lexicon->exists($lex)) {
-        $name = $modx->lexicon($lex);
-    }
-    $list[] = array(
-        'd' => $name.' ('.$area->get('ct').')',
-        'v' => $area->get('area'),
-    );
 }
 return $this->outputArray($list);

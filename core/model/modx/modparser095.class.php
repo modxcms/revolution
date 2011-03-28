@@ -7,12 +7,12 @@
 include_once (strtr(realpath(dirname(__FILE__)) . '/modparser.class.php', '\\', '/'));
 
 /**
- * An extension of the MODx parser to support legacy MODx tags.
+ * An extension of the MODX parser to support legacy MODX tags.
  *
  * Use of this class is only necessary if you have a site that contains legacy
- * MODx tags.  It provides facilities for translating the legacy tags, as well
+ * MODX tags.  It provides facilities for translating the legacy tags, as well
  * as for supporting legacy behavior of the onParseDocument event used in many
- * legacy MODx plugins.
+ * legacy MODX plugins.
  *
  * @package modx
  */
@@ -27,7 +27,7 @@ class modParser095 extends modParser {
     );
 
     /**
-     * Collects MODx legacy tags and translates them to the new tag format.
+     * Collects MODX legacy tags and translates them to the new tag format.
      *
      * @param string &$content The content in which legacy tags are to be
      * replaced.

@@ -21,10 +21,10 @@ if (!empty($g[1])) {
 
 $c->select($modx->getSelectColumns('modCategory','modCategory'));
 $c->select(array(
-    'COUNT('.$modx->getSelectColumns('modCategory','Children','',array('id')).') AS `childrenCount`',
+    'COUNT('.$modx->getSelectColumns('modCategory','Children','',array('id')).') AS childrenCount',
 ));
 $c->leftJoin('modCategory','Children');
-$c->groupby($modx->getSelectColumns('modCategory','modCategory','',array('id')));
+$c->groupby($modx->getSelectColumns('modCategory','modCategory'));
 
 /* set permissions as css classes */
 $class = 'icon-category folder';
@@ -42,8 +42,10 @@ $class .= $modx->hasPermission('delete_category') ? ' pdelcat' : '';
 $categories = $modx->getCollection('modCategory',$c);
 foreach ($categories as $category) {
     if (!$category->checkPolicy('list')) continue;
+
+    $idNote = $modx->hasPermission('tree_show_element_ids') ? ' (' . $category->get('id') . ')' : '';
     $nodes[] = array(
-        'text' => strip_tags($category->get('category')) . ' (' . $category->get('id') . ')',
+        'text' => strip_tags($category->get('category')).$idNote,
         'id' => 'n_category_'.$category->get('id'),
         'pk' => $category->get('id'),
         'data' => $category->toArray(),

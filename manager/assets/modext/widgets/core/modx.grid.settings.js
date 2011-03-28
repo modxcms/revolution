@@ -108,7 +108,15 @@ MODx.grid.SettingsGrid = function(config) {
             var field = this.getDataIndex(colIndex);
             if (field == 'value') {
                 var rec = config.store.getAt(rowIndex);
-                var o = MODx.load({xtype: rec ? (rec.get('xtype') || 'textfield') : 'textfield'});
+                var xt = {xtype: 'textfield'};
+                if (rec) {
+                    xt.xtype = rec.get('xtype');
+                    if (xt == 'text-password') {
+                        xt.xtype = 'textfield';
+                        xt.inputType = 'password';
+                    }
+                }
+                var o = MODx.load(xt);
                 return new Ext.grid.GridEditor(o);
             }
             return Ext.grid.ColumnModel.prototype.getCellEditor.call(this, colIndex, rowIndex);
@@ -179,7 +187,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         } else {
             m.push({
                 text: _('setting_update')
-                ,handler: {xtype: 'modx-window-setting-update', record: {fk: Ext.isDefined(this.config.fk) ? this.config.fk : 0}}
+                ,handler: this.updateSetting
             },'-',{
                 text: _('setting_remove')
                 ,handler: this.remove.createDelegate(this,['setting_remove_confirm'])
@@ -189,6 +197,24 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
             this.addContextMenuItem(m);
             this.menu.showAt(e.xy);
         }
+    }
+
+    ,updateSetting: function(btn,e) {
+        var r = this.menu.record;
+        r.fk = Ext.isDefined(this.config.fk) ? this.config.fk : 0;
+        var uss = MODx.load({
+            xtype: 'modx-window-setting-update'
+            ,record: r
+            ,grid: this
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        uss.reset();
+        uss.setValues(r);
+        uss.show(e.target);
     }
     
     ,clearFilter: function() {
@@ -249,6 +275,9 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         } else if (r.xtype === 'datefield') {
             f = Ext.util.Format.dateRenderer('Y-m-d');
             return f(v,md,rec,ri,ci,s,g);
+        } else if (r.xtype === 'text-password' || r.xtype == 'modx-text-password') {
+            f = MODx.grid.Grid.prototype.rendPassword;
+            return f(v,md,rec,ri,ci,s,g);
         } else if (r.xtype.substr(0,5) == 'combo' || r.xtype.substr(0,10) == 'modx-combo') {
             var cm = g.getColumnModel();
             var ed = cm.getCellEditor(ci,ri);
@@ -257,7 +286,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
                 ed = new Ext.grid.GridEditor(o);
                 cm.setEditor(ci,ed);
             }
-            f = MODx.combo.Renderer(ed.field);
+            f = MODx.combo.Renderer(ed.field,v);
             return f(v,md,rec,ri,ci,s,g);
         }
         return v;
@@ -357,7 +386,19 @@ MODx.combo.xType = function(config) {
     Ext.applyIf(config,{
         store: new Ext.data.SimpleStore({
             fields: ['d','v']
-            ,data: [[_('textfield'),'textfield'],[_('textarea'),'textarea'],[_('yesno'),'combo-boolean']]
+            ,data: [[_('textfield'),'textfield']
+                ,[_('textarea'),'textarea']
+                ,[_('yesno'),'combo-boolean']
+                ,[_('password'),'text-password']
+                ,[_('category'),'modx-combo-category']
+                ,[_('charset'),'modx-combo-charset']
+                ,[_('country'),'modx-combo-country']
+                ,[_('context'),'modx-combo-context']
+                ,[_('namespace'),'modx-combo-namespace']
+                ,[_('template'),'modx-combo-template']
+                ,[_('user'),'modx-combo-user']
+                ,[_('usergroup'),'modx-combo-usergroup']
+            ]
         })
         ,displayField: 'd'
         ,valueField: 'v'
@@ -377,6 +418,7 @@ Ext.reg('modx-combo-xtype-spec',MODx.combo.xType);
 
 MODx.window.UpdateSetting = function(config) {
     config = config || {};
+    var ident = config.ident || 'modx-uss-'+Ext.id();
     Ext.applyIf(config,{
         title: _('setting_update')
         ,width: 450
@@ -385,51 +427,57 @@ MODx.window.UpdateSetting = function(config) {
         ,fields: [{
             xtype: 'hidden'
             ,name: 'fk'
-            ,id: 'modx-us-fk'
+            ,id: 'modx-'+ident+'-fk'
             ,value: config.fk || 0
         },{
             xtype: 'statictextfield'
             ,fieldLabel: _('key')
             ,name: 'key'
-            ,id: 'modx-us-key'
+            ,id: 'modx-'+ident+'-key'
             ,submitValue: true
+            ,anchor: '97%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
-            ,id: 'modx-us-name'
+            ,id: 'modx-'+ident+'-name'
+            ,anchor: '97%'
         },{
             xtype: 'modx-combo-xtype-spec'
             ,name: 'xtype'
             ,hiddenName: 'xtype'
-            ,id: 'modx-us-xtype'
+            ,id: 'modx-'+ident+'-xtype'
             ,fieldLabel: _('xtype')
             ,description: _('xtype_desc')
+            ,anchor: '97%'
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
             ,name: 'namespace'
-            ,id: 'modx-us-namespace'
+            ,id: 'modx-'+ident+'-namespace'
             ,value: 'core'
+            ,anchor: '97%'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('area_lexicon_string')
             ,description: _('area_lexicon_string_msg')
             ,name: 'area'
-            ,id: 'modx-us-area'
+            ,id: 'modx-'+ident+'-area'
+            ,anchor: '97%'
         },{
-            xtype: 'textfield'
+            xtype: config.record ? config.record.xtype : 'textfield'
             ,fieldLabel: _('value')
             ,name: 'value'
-            ,id: 'modx-us-value'
-            ,width: 250
+            ,hiddenName: 'value'
+            ,id: 'modx-'+ident+'-value'
+            ,anchor: '97%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
-            ,id: 'modx-us-description'
+            ,id: 'modx-'+ident+'-description'
             ,allowBlank: true
-            ,width: 250
+            ,anchor: '97%'
         }]
     });
     MODx.window.UpdateSetting.superclass.constructor.call(this,config);

@@ -27,7 +27,7 @@ $settings_distro->save();
 /* add default admin user */
 $user = $this->xpdo->newObject('modUser');
 $user->set('username', $this->settings->get('cmsadmin'));
-$user->set('password', md5($this->settings->get('cmspassword')));
+$user->set('password', $this->settings->get('cmspassword'));
 $saved = $user->save();
 
 if ($saved) {
@@ -35,7 +35,6 @@ if ($saved) {
     $userProfile->set('internalKey', $user->get('id'));
     $userProfile->set('fullname', $this->lexicon('default_admin_user'));
     $userProfile->set('email', $this->settings->get('cmsadminemail'));
-    $userProfile->set('role', 1);
     $saved = $userProfile->save();
     if ($saved) {
         $userGroupMembership = $this->xpdo->newObject('modUserGroupMember');

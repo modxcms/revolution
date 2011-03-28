@@ -19,19 +19,19 @@ $event = $modx->getOption('event',$scriptProperties,false);
 
 $c = $modx->newQuery('modPlugin');
 if (!empty($name)) {
-     $c->where(array('name:LIKE' => '%'.$name.'%'));
+    $c->where(array('name:LIKE' => '%'.$name.'%'));
 }
 if (!empty($event)) {
-    $c->innerJoin('modPluginEvent','modPluginEvent','
-        `modPluginEvent`.`pluginid` = `modPlugin`.`id`
-    AND `modPluginEvent`.`event` = "'.$event.'"
-    ');
-    $c->select('
-        `modPlugin`.*,
-        IF(ISNULL(`modPluginEvent`.`pluginid`),0,1) AS `enabled`,
-        `modPluginEvent`.`priority` AS `priority`,
-        `modPluginEvent`.`propertyset` AS `propertyset`
-    ');
+    $c->innerJoin('modPluginEvent','modPluginEvent',array(
+        'modPluginEvent.pluginid = modPlugin.id',
+        'modPluginEvent.event' => $event,
+    ));
+    $c->select($modx->getSelectColumns('modPlugin','modPlugin'));
+    $c->select(array(
+        'modPluginEvent.priority',
+        'modPluginEvent.pluginid',
+        'modPluginEvent.propertyset',
+    ));
 }
 $count = $modx->getCount('modPlugin',$c);
 

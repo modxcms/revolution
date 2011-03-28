@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006, 2007, 2008, 2009, 2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -28,7 +28,7 @@ include_once strtr(realpath(MODX_CORE_PATH . 'model/smarty/Smarty.class.php'),'\
  * An extension of the Smarty class for use with modX.
  *
  * Automatically sets appropriate configuration variables for Smarty in
- * the MODx context.
+ * the MODX context.
  * @package setup
  */
 class modInstallSmarty extends Smarty {
@@ -55,7 +55,7 @@ class modInstallSmarty extends Smarty {
 
         if (!is_dir($this->compile_dir) || !is_writable($this->compile_dir)) $this->writeTree($this->compile_dir, '0777');
 
-        $this->assign('app_name','MODx');
+        $this->assign('app_name','MODX');
 
         $this->_blocks = array();
         $this->_derived = NULL;

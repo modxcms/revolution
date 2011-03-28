@@ -94,6 +94,7 @@ class xPDO {
     /**#@+
      * Constants
      */
+    const OPT_AUTO_CREATE_TABLES = 'auto_create_tables';
     const OPT_BASE_CLASSES = 'base_classes';
     const OPT_BASE_PACKAGES = 'base_packages';
     const OPT_CACHE_COMPRESS = 'cache_compress';
@@ -103,6 +104,7 @@ class xPDO {
     const OPT_CACHE_DB_EXPIRES = 'cache_db_expires';
     const OPT_CACHE_DB_HANDLER = 'cache_db_handler';
     const OPT_CACHE_EXPIRES = 'cache_expires';
+    const OPT_CACHE_FORMAT = 'cache_format';
     const OPT_CACHE_HANDLER = 'cache_handler';
     const OPT_CACHE_KEY = 'cache_key';
     const OPT_CACHE_PATH = 'cache_path';
@@ -236,6 +238,12 @@ class xPDO {
     public $_escapeCharClose= '';
 
     /**
+     * Represents the character used for quoting strings for a particular driver.
+     * @var string
+     */
+    public $_quoteChar= "'";
+
+    /**
      * The xPDO Constructor.
      *
      * This method is used to create a new xPDO object with a connection to a
@@ -265,15 +273,18 @@ class xPDO {
             case 'mysql':
                 $this->_escapeCharOpen= "`";
                 $this->_escapeCharClose= "`";
+                $this->_quoteChar= "'";
                 break;
             case 'sqlite':
                 $this->_escapeCharOpen= '"';
                 $this->_escapeCharClose= '"';
+                $this->_quoteChar= "'";
                 break;
             case 'sqlsrv':
-            	$this->_escapeCharOpen= '[';
-            	$this->_escapeCharClose= ']';
-            	break;
+                $this->_escapeCharOpen= '[';
+                $this->_escapeCharClose= ']';
+                $this->_quoteChar= "'";
+                break;
             default:
                 break;
         }
@@ -837,6 +848,25 @@ class xPDO {
      */
     public function getCollectionGraph($className, $graph, $criteria= null, $cacheFlag= true) {
         return $this->call($className, 'loadCollectionGraph', array(& $this, $className, $graph, $criteria, $cacheFlag));
+    }
+
+    /**
+     * Execute a PDOStatement and get a single column value from the first row of the result set.
+     *
+     * @param PDOStatement $stmt A prepared PDOStatement object ready to be executed.
+     * @param null|integer $column 0-indexed number of the column you wish to retrieve from the row. If
+     * null or no value is supplied, it fetches the first column.
+     * @return mixed The value of the specified column from the first row of the result set, or null.
+     */
+    public function getValue($stmt, $column= null) {
+        $value = null;
+        if (is_object($stmt) && $stmt instanceof PDOStatement) {
+            if ($stmt->execute()) {
+                $value= $stmt->fetchColumn($column);
+                $stmt->closeCursor();
+            }
+        }
+        return $value;
     }
 
     /**
@@ -1647,16 +1677,16 @@ class xPDO {
         return $this->_escapeCharOpen . $string . $this->_escapeCharClose;
     }
 
-	/**
-	 * Use to insert a literal string into a SQL query without escaping or quoting.
-	 *
-	 * @param string $string A string to return as a literanl, unescaped and unquoted.
-	 * @return string The string with any escape or quote characters trimmed.
-	 */
-	public function literal($string) {
-		$string = trim($string, $this->_escapeCharOpen . $this->_escapeCharClose . $this->_quoteChar);
-		return $string;
-	}
+    /**
+     * Use to insert a literal string into a SQL query without escaping or quoting.
+     *
+     * @param string $string A string to return as a literal, unescaped and unquoted.
+     * @return string The string with any escape or quote characters trimmed.
+     */
+    public function literal($string) {
+        $string = trim($string, $this->_escapeCharOpen . $this->_escapeCharClose . $this->_quoteChar);
+        return $string;
+    }
 
     /**
      * Adds the table prefix, and optionally database name, to a given table.
@@ -1754,7 +1784,12 @@ class xPDO {
                     $sig= implode('/', array ($sigClass, $sigHash));
                 }
                 if (is_string($sig) && !empty($sig)) {
-                    $result= $this->cacheManager->get(xPDOCacheManager::CACHE_DIR . $sig);
+                    $result= $this->cacheManager->get($sig, array(
+                        xPDO::OPT_CACHE_KEY => $this->getOption('cache_db_key', $options, 'db'),
+                        xPDO::OPT_CACHE_HANDLER => $this->getOption(xPDO::OPT_CACHE_DB_HANDLER, $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options, 'cache.xPDOFileCache')),
+                        xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                        'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR),
+                    ));
                     if ($result && $this->getOption('cache_db_format', $options, 'php') == 'json') {
                         $result= $this->toJSON($result);
                     }
@@ -1789,9 +1824,7 @@ class xPDO {
                 elseif (!$lifetime && $this->getOption(xPDO::OPT_CACHE_DB_EXPIRES, $options, 0)) {
                     $lifetime= intval($this->getOption(xPDO::OPT_CACHE_DB_EXPIRES, $options, 0));
                 }
-                $sig= '';
                 $sigKey= array();
-                $sigHash= '';
                 $sigClass= '';
                 $sigGraph= array();
                 if (is_object($signature)) {
@@ -1832,14 +1865,26 @@ class xPDO {
                                 if (isset($classes[$fkMeta['class']])) {
                                     continue;
                                 }
-                                $removed= $this->cacheManager->delete(xPDOCacheManager::CACHE_DIR . $fkMeta['class'], array_merge($options, array('multiple_object_delete' => true)));
+                                $removed= $this->cacheManager->delete($fkMeta['class'], array_merge($options, array(
+                                    xPDO::OPT_CACHE_KEY => $this->getOption('cache_db_key', $options, 'db'),
+                                    xPDO::OPT_CACHE_HANDLER => $this->getOption(xPDO::OPT_CACHE_DB_HANDLER, $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options, 'cache.xPDOFileCache')),
+                                    xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP)),
+                                    'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR),
+                                    'multiple_object_delete' => true
+                                )));
                                 if ($this->getDebug() === true) {
                                     $this->log(xPDO::LOG_LEVEL_DEBUG, "Removing all cache objects of class {$fkMeta['class']}: " . ($removed ? 'successful' : 'failed'));
                                 }
                                 $classes[$fkMeta['class']]= $fkMeta['class'];
                             }
                         }
-                        $result= $this->cacheManager->set(xPDOCacheManager::CACHE_DIR . $sig, $object, $lifetime, $options);
+                        $cacheOptions = array_merge($options, array(
+                            xPDO::OPT_CACHE_KEY => $this->getOption('cache_db_key', $options, 'db'),
+                            xPDO::OPT_CACHE_HANDLER => $this->getOption(xPDO::OPT_CACHE_DB_HANDLER, $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options, 'cache.xPDOFileCache')),
+                            xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_db_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP)),
+                            'cache_prefix' => $this->getOption('cache_db_prefix', $options, xPDOCacheManager::CACHE_DIR)
+                        ));
+                        $result= $this->cacheManager->set($sig, $object, $lifetime, $cacheOptions);
                         if ($result && $object instanceof xPDOObject) {
                             if ($this->getDebug() === true) {
                                 $this->log(xPDO::LOG_LEVEL_DEBUG, "xPDO->toCache() successfully cached object with signature " . xPDOCacheManager::CACHE_DIR . $sig);
@@ -1850,7 +1895,7 @@ class xPDO {
                             $pk= is_array($pk) ? $pk : array($pk);
                             $pkHash= md5($this->toJSON($pk));
                             $pkSig= implode('/', array($pkClass, $pkHash));
-                            $this->cacheManager->set(xPDOCacheManager::CACHE_DIR . $pkSig, $object, $lifetime, $options);
+                            $this->cacheManager->set($pkSig, $object, $lifetime, $cacheOptions);
                         }
                         if (!$result) {
                             $this->log(xPDO::LOG_LEVEL_WARN, "xPDO->toCache() could not cache object with signature " . xPDOCacheManager::CACHE_DIR . $sig);

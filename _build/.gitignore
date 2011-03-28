@@ -1,4 +1,5 @@
 build.config.php
+build.distrib.config.php
 build.number
 build.properties
 build.properties.php

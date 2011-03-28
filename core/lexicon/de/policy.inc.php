@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic policy
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['active_of'] = '[[+active]] von [[+total]]';
 $_lang['active_permissions'] = 'Aktivierte Berechtigungen';
@@ -28,7 +30,7 @@ $_lang['policies'] = 'Zugriffs-Richtlinien';
 $_lang['policy'] = 'Zugriffs-Richtlinie';
 $_lang['policy_create'] = 'Zugriffs-Richtlinie erstellen';
 $_lang['policy_data'] = 'Richtlinien-Daten';
-$_lang['policy_desc'] = 'Zugriffs-Richtlinien sind allgemeine Richtlinien, die bestimmte Aktionen von MODx einschränken oder ermöglichen.';
+$_lang['policy_desc'] = 'Zugriffs-Richtlinien sind allgemeine Richtlinien, die bestimmte Aktionen von MODX einschränken oder ermöglichen.';
 $_lang['policy_duplicate'] = 'Richtlinie duplizieren';
 $_lang['policy_duplicate_confirm'] = 'Sind Sie sicher, dass Sie diese Richtlinie und alle Ihre Daten duplizieren möchten?';
 $_lang['policy_err_ae'] = 'Eine Richtlinie mit dem Namen `[[+name]]` existiert bereits. Bitte wählen Sie einen anderen Namen.';
@@ -37,7 +39,7 @@ $_lang['policy_err_ns'] = 'Richtlinie nicht angegeben.';
 $_lang['policy_err_remove'] = 'Ein Fehler trat auf beim Versuch, die Richtlinie zu entfernen.';
 $_lang['policy_err_save'] = 'Ein Fehler trat auf beim Versuch, die Richtlinie zu speichern.';
 $_lang['policy_management'] = 'Zugriffs-Richtlinien';
-$_lang['policy_management_msg'] = 'Zugriffs-Richtlinien legen fest, wie MODx Berechtigungen für bestimmte Aktionen handhabt.';
+$_lang['policy_management_msg'] = 'Zugriffs-Richtlinien legen fest, wie MODX Berechtigungen für bestimmte Aktionen handhabt.';
 $_lang['policy_name'] = 'Richtlinien-Name';
 $_lang['policy_property_create'] = 'Zugriffs-Richtlinien-Eigenschaft erstellen';
 $_lang['policy_property_new'] = 'Neue Richtlinien-Eigenschaft';
@@ -59,9 +61,9 @@ $_lang['policy_template_err_ns'] = 'Richtlinien-Template nicht angegeben.';
 $_lang['policy_template_err_remove'] = 'Ein Fehler trat auf beim Versuch, das Richtlinien-Template zu löschen.';
 $_lang['policy_template_err_save'] = 'Ein Fehler trat auf beim Versuch, das Richtlinien-Template zu speichern.';
 $_lang['policy_template_remove'] = 'Richtlinien-Template löschen';
-$_lang['policy_template_remove_confirm'] = 'Sind Sie sicher, dass Sie dieses Richtlinien-Template löschen möchten? Dabei werden auch alle Richtlinien gelöscht, die diesem Template zugeordnet sind - das könnte Ihre MODx-Installation unbrauchbar machen, falls aktive Richtlinien diesem Template zugeordnet sind.';
+$_lang['policy_template_remove_confirm'] = 'Sind Sie sicher, dass Sie dieses Richtlinien-Template löschen möchten? Dabei werden auch alle Richtlinien gelöscht, die diesem Template zugeordnet sind - das könnte Ihre MODX-Installation unbrauchbar machen, falls aktive Richtlinien diesem Template zugeordnet sind.';
 $_lang['policy_template_remove_multiple'] = 'Ausgewählte Richtlinien-Templates löschen';
-$_lang['policy_template_remove_multiple_confirm'] = 'Sind Sie sicher, dass Sie diese Richtlinien-Templates löschen möchten? Dabei werden auch alle Richtlinien gelöscht, die diesen Templates zugeordnet sind - das könnte Ihre MODx-Installation unbrauchbar machen, falls aktive Richtlinien diesen Templates zugeordnet sind.';
+$_lang['policy_template_remove_multiple_confirm'] = 'Sind Sie sicher, dass Sie diese Richtlinien-Templates löschen möchten? Dabei werden auch alle Richtlinien gelöscht, die diesen Templates zugeordnet sind - das könnte Ihre MODX-Installation unbrauchbar machen, falls aktive Richtlinien diesen Templates zugeordnet sind.';
 $_lang['policy_template_update'] = 'Richtlinien-Template bearbeiten';
 $_lang['policy_templates'] = 'Richtlinien-Templates';
 $_lang['policy_templates.intro_msg'] = 'Dies ist eine Liste von Richtlinien-Templates, die Listen von Berechtigungen definieren, die in bestimmten Richtlinien aktiviert oder deaktiviert sind.';

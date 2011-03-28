@@ -435,7 +435,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         });
         if (ui.hasClass('pnewdoc')) {
             m.push('-');
-            this._getCreateMenus(m,'0');
+            this._getCreateMenus(m,'0',ui);
         }
         if (ui.hasClass('pnew')) {
             m.push({
@@ -444,6 +444,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             });
         }
         if (ui.hasClass('pdelete')) {
+            m.push('-');
             m.push({
                 text: _('context_remove')
                 ,handler: this.removeContext
@@ -473,6 +474,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 text: _('resource_edit')
                 ,handler: function() {this.loadAction('a='+MODx.action['resource/update']);}
             });
+        }
+        if (ui.hasClass('pqupdate')) {
             m.push({
                 text: _('quick_update_resource')
                 ,classKey: a.classKey
@@ -497,7 +500,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 
         if (ui.hasClass('pnew')) {
             m.push('-');
-            this._getCreateMenus(m);
+            this._getCreateMenus(m,null,ui);
         }
 
         if (ui.hasClass('psave')) {
@@ -535,7 +538,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
-    ,_getCreateMenus: function(m,pk) {
+    ,_getCreateMenus: function(m,pk,ui) {
         var types = MODx.resourceTypes || {
             'document': 'modDocument'
             ,'weblink': 'modWebLink'
@@ -573,27 +576,31 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 }
                 ,scope: this
             });
-            qct.push({
-                text: _(k)
-                ,classKey: types[k]
-                ,handler: function(itm,e) {
-                    var at = this.cm.activeNode.attributes;
-                    var p = itm.usePk ? itm.usePk : at.pk;
-                    Ext.getCmp('modx-resource-tree').quickCreate(itm,e,itm.classKey,at.ctx,p);
-                }
-                ,scope: this
-            });
+            if (ui && ui.hasClass('pqcreate')) {
+                qct.push({
+                    text: _(k)
+                    ,classKey: types[k]
+                    ,handler: function(itm,e) {
+                        var at = this.cm.activeNode.attributes;
+                        var p = itm.usePk ? itm.usePk : at.pk;
+                        Ext.getCmp('modx-resource-tree').quickCreate(itm,e,itm.classKey,at.ctx,p);
+                    }
+                    ,scope: this
+                });
+            }
         }
         m.push({
             text: _('create')
             ,handler: function() {return false;}
             ,menu: {items: ct}
         });
-        m.push({
-           text: _('quick_create')
-           ,handler: function() {return false;}
-           ,menu: {items: qct}
-        });
+        if (ui && ui.hasClass('pqcreate')) {
+            m.push({
+               text: _('quick_create')
+               ,handler: function() {return false;}
+               ,menu: {items: qct}
+            });
+        }
         return m;
     }
 });
@@ -800,6 +807,19 @@ MODx.window.QuickUpdateResource = function(config) {
             ,fn: this.submit
             ,scope: this
         }]
+        ,buttons: [{
+            text: config.cancelBtnText || _('cancel')
+            ,scope: this
+            ,handler: function() { this.hide(); }
+        },{
+            text: config.saveBtnText || _('save')
+            ,scope: this
+            ,handler: function() { this.submit(false); }
+        },{
+            text: config.saveBtnText || _('save_and_close')
+            ,scope: this
+            ,handler: this.submit
+        }]
     });
     MODx.window.QuickUpdateResource.superclass.constructor.call(this,config);
 };
@@ -896,15 +916,15 @@ MODx.getQRSettings = function(id,va) {
         ,id: 'modx-'+id+'-publishedon'
         ,value: va['publishedon']
     },{
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,name: 'published'
         ,id: 'modx-'+id+'-published'
         ,fieldLabel: _('resource_published')
         ,description: _('resource_published_help')
         ,inputValue: 1
-        ,checked: va['published'] != undefined ? va['published'] : (MODx.config.publish_default == '1' ? true : false)
+        ,checked: va['published'] !== undefined ? va['published'] : (MODx.config.publish_default == '1' ? 1 : 0)
     },{
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_folder')
         ,description: _('resource_folder_help')
         ,name: 'isfolder'
@@ -912,39 +932,40 @@ MODx.getQRSettings = function(id,va) {
         ,inputValue: 1
         ,checked: va['isfolder'] != undefined ? va['isfolder'] : false
     },{
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_richtext')
         ,description: _('resource_richtext_help')
         ,name: 'richtext'
         ,id: 'modx-'+id+'-richtext'
         ,inputValue: 1
-        ,checked: va['richtext'] != undefined ? va['richtext'] : (MODx.config.richtext_default == '1' ? true : false)
+        ,checked: va['richtext'] !== undefined ? (va['richtext'] ? 1 : 0) : (MODx.config.richtext_default == '1' ? 1 : 0)
     },{
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_searchable')
         ,description: _('resource_searchable_help')
         ,name: 'searchable'
         ,id: 'modx-'+id+'-searchable'
         ,inputValue: 1
-        ,checked: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? true : false)            
+        ,checked: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? 1 : 0)
+        ,listeners: {'check': {fn:MODx.handleQUCB}}
     },{
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_hide_from_menus')
         ,description: _('resource_hide_from_menus_help')
         ,name: 'hidemenu'
         ,id: 'modx-'+id+'-hidemenu'
         ,inputValue: 1
-        ,checked: va['hidemenu'] != undefined ? va['hidemenu'] : (MODx.config.hidemenu_default == '1' ? true : false)
+        ,checked: va['hidemenu'] != undefined ? va['hidemenu'] : (MODx.config.hidemenu_default == '1' ? 1 : 0)
     },{
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_cacheable')
         ,description: _('resource_cacheable_help')
         ,name: 'cacheable'
         ,id: 'modx-'+id+'-cacheable'
         ,inputValue: 1
-        ,checked: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? true : false)
+        ,checked: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? 1 : 0)
     },{
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,name: 'clearCache'
         ,id: 'modx-'+id+'-clearcache'
         ,fieldLabel: _('clear_cache_on_save')
@@ -953,3 +974,13 @@ MODx.getQRSettings = function(id,va) {
         ,checked: true
     }];
 };
+MODx.handleQUCB = function(cb) {
+    var h = Ext.getCmp(cb.id+'-hd');
+    if (cb.checked && h) {
+        cb.setValue(1);
+        h.setValue(1);
+    } else if (h) {
+        cb.setValue(0);
+        h.setValue(0);
+    }
+}

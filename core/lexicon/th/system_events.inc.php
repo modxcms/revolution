@@ -11,6 +11,6 @@
  */
 $_lang['clear'] = 'ล้าง';
 $_lang['error_log'] = 'บันทึกข้อผิดพลาด';
-$_lang['error_log_desc'] = 'นี่คือบันทึกข้อผิดพลาดสำหรับ MODx Revolution:';
+$_lang['error_log_desc'] = 'นี่คือบันทึกข้อผิดพลาดสำหรับ MODX Revolution:';
 $_lang['system_events'] = 'เหตุการณ์ของระบบ';
 $_lang['priority'] = 'การจัดลำดับความสำคัญ';

@@ -6,7 +6,7 @@
  */
 require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
 /**
- * Encapsulates the interaction of MODx manager with an HTTP request.
+ * Encapsulates the interaction of MODX manager with an HTTP request.
  *
  * {@inheritdoc}
  *
@@ -104,7 +104,7 @@ class modManagerRequest extends modRequest {
             @session_write_close();
             exit();
         } else {
-            /* log user action */
+            /* log user action
             if (getenv('HTTP_CLIENT_IP')) {
                 $ip= getenv('HTTP_CLIENT_IP');
             } else {
@@ -129,7 +129,7 @@ class modManagerRequest extends modRequest {
                 if (!$rs= $this->modx->exec($sql)) {
                     $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error logging active user information! SQL: ' . $sql . "\n" . print_r($this->modx->errorInfo(), 1));
                 }
-            }
+            }*/
         }
 
         if ($this->modx->actionMap === null || !is_array($this->modx->actionMap)) {
@@ -140,7 +140,7 @@ class modManagerRequest extends modRequest {
     }
 
     /**
-     * The primary MODx manager request handler (a.k.a. controller).
+     * The primary MODX manager request handler (a.k.a. controller).
      *
      * @access public
      * @return boolean True if a request is handled without interruption.
@@ -179,7 +179,11 @@ class modManagerRequest extends modRequest {
     public function loadActionMap() {
         $loaded = false;
         $cacheKey= $this->modx->context->get('key') . '/actions';
-        $map = $this->modx->cacheManager->get($cacheKey);
+        $map = $this->modx->cacheManager->get($cacheKey, array(
+            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_action_map_key', null, 'action_map'),
+            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_action_map_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
+            xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption('cache_action_map_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+        ));
         if (!$map) {
             $map = $this->modx->cacheManager->generateActionMap($cacheKey);
         }
@@ -191,7 +195,7 @@ class modManagerRequest extends modRequest {
     }
 
     /**
-     * Prepares the MODx response to a mgr request that is being handled.
+     * Prepares the MODX response to a mgr request that is being handled.
      *
      * @access public
      * @param array $options An array of options

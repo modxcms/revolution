@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -30,7 +30,7 @@
  *
  * -Logging of registry transactions to file or DB
  * -Tracking progress of asynchonous processes
- * -Can serve as a generic message queue, where MODx elements can register new
+ * -Can serve as a generic message queue, where MODX elements can register new
  * messages or grab the latest messages via scheduled or ad hoc requests.
  *
  * @todo Encapsulate all debugging, error handling, error reporting, and audit
@@ -61,7 +61,7 @@ class modRegistry {
         'modx',
     );
     /**
-     * An array of MODx registers managed by the registry.
+     * An array of MODX registers managed by the registry.
      * @var array
      * @access private
      */

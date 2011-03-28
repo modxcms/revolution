@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic system_info
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['database_charset'] = 'Datenbank-Zeichensatz (charset)';
 $_lang['database_name'] = 'Datenbankname';
@@ -20,16 +22,18 @@ $_lang['database_table_droptablestatements'] = 'DROP TABLE Statements generieren
 $_lang['database_table_effectivesize'] = 'Effektive Größe';
 $_lang['database_table_indexsize'] = 'Index-Größe';
 $_lang['database_table_overhead'] = 'Overhead';
+$_lang['database_table_reserved'] = 'Reserviert';//sqlsrv
 $_lang['database_table_records'] = 'Datensätze';
 $_lang['database_table_tablename'] = 'Tabellenname';
 $_lang['database_table_totalsize'] = 'Gesamtgröße';
 $_lang['database_table_totals'] = 'Gesamt:';
+$_lang['database_table_unused'] = 'Ungenutzt';//sqlsrv
 $_lang['database_type'] = 'Datenbanktyp';
 $_lang['database_version'] = 'Datenbank-Version';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a>-Version';
 $_lang['localtime'] = 'Lokale Zeit';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a>-Version';
-$_lang['modx_version'] = 'MODx-Version';
+$_lang['modx_version'] = 'MODX-Version';
 $_lang['onlineusers_action'] = 'Aktion';
 $_lang['onlineusers_actionid'] = 'Aktions-ID';
 $_lang['onlineusers_ipaddress'] = 'IP-Adresse des Benutzers';
@@ -45,7 +49,7 @@ $_lang['server'] = 'Server';
 $_lang['servertime'] = 'Serverzeit';
 $_lang['serveroffset'] = 'Server-Offset';
 $_lang['smarty_version'] = '<a href="http://smarty.net/" target="_blank">Smarty</a>-Version';
-$_lang['sysinfo_desc'] = 'Hier finden Sie allgemeine Informationen über Ihre MODx-Umgebung.';
+$_lang['sysinfo_desc'] = 'Hier finden Sie allgemeine Informationen über Ihre MODX-Umgebung.';
 $_lang['view_sysinfo'] = 'System-Informationen';
 $_lang['table_prefix'] = 'Tabellenpräfix';
 $_lang['truncate_table'] = 'Klicken Sie hier, um diese Tabelle zu leeren';

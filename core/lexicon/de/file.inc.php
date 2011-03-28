@@ -2,10 +2,12 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic file
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['file_confirm_remove'] = 'Sind Sie sicher, dass Sie diese Datei löschen möchten? Das könnte möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert.';
 $_lang['file_deleted'] = 'Erfolgreich!';
@@ -24,8 +26,8 @@ $_lang['file_err_ns'] = 'Bitte geben Sie eine gültige Datei an.';
 $_lang['file_err_open'] = 'Kann Datei nicht öffnen: ';
 $_lang['file_err_perms_rename'] = 'Der Webserver hat nicht die nötigen Rechte, um die Datei zu umzubenennen.';
 $_lang['file_err_perms_remove'] = 'Der Webserver hat nicht die nötigen Rechte, um die Datei zu löschen.';
-$_lang['file_err_rename'] = 'MODx konnte die Datei nicht umbenennen. Bitte stellen Sie sicher, dass Ihre Rechte korrekt gesetzt sind.';
-$_lang['file_err_remove'] = 'MODx konnte die Datei nicht löschen. Bitte stellen Sie sicher, dass Ihre Rechte korrekt gesetzt sind.';
+$_lang['file_err_rename'] = 'MODX konnte die Datei nicht umbenennen. Bitte stellen Sie sicher, dass Ihre Rechte korrekt gesetzt sind.';
+$_lang['file_err_remove'] = 'MODX konnte die Datei nicht löschen. Bitte stellen Sie sicher, dass Ihre Rechte korrekt gesetzt sind.';
 $_lang['file_err_save'] = 'Kann die Datei nicht speichern, bitte stellen Sie sicher, dass das Zielverzeichnis beschreibbar ist!';
 $_lang['file_err_too_large'] = 'Die hochgeladene Datei ist zu groß ([[+size]] Bytes). Bitte stellen Sie sicher, dass Ihre Dateien kleiner als [[+allowed]] Bytes sind.';
 $_lang['file_err_unzip'] = 'Entpacken fehlgeschlagen!';
@@ -42,7 +44,7 @@ $_lang['file_folder_create_here'] = 'Verzeichnis hier anlegen';
 $_lang['file_folder_created'] = 'Ordner erfolgreich angelegt!';
 $_lang['file_folder_deleted'] = 'Ordner erfolgreich gelöscht!';
 $_lang['file_folder_err_ae'] = 'Es existiert bereits ein Verzeichnis mit diesem Namen an diesem Ort.';
-$_lang['file_folder_err_chmod'] = 'Kann die Rechte nicht ändern, Sie müssen die Rechte außerhalb von MODx ändern.';
+$_lang['file_folder_err_chmod'] = 'Kann die Rechte nicht ändern, Sie müssen die Rechte außerhalb von MODX ändern.';
 $_lang['file_folder_err_create'] = 'Ein unbekannter Fehler trat auf bei dem Versuch, das Verzeichnis zu erstellen.';
 $_lang['file_folder_err_invalid'] = 'Das angegebene Verzeichnis ist kein Verzeichnis.';
 $_lang['file_folder_err_invalid_path'] = 'Ungültiger Pfad zum Erstellen eines neuen Verzeichnisses.';

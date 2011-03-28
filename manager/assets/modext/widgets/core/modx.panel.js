@@ -130,6 +130,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                         ctype = 'keydown';
                         break;
                     case 'checkbox':
+                    case 'xcheckbox':
                     case 'radio':
                         ctype = 'check';
                         break;

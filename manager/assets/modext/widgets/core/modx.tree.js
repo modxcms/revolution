@@ -385,6 +385,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         if (e.ctrlKey) {return true;}
         if (n.attributes.page && n.attributes.page !== '') {
             location.href = n.attributes.page;
+        } else {
+            n.toggle();
         }
         return true;
     }

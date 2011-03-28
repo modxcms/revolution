@@ -1,8 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.manager_lang_attribute}" xml:lang="{$_config.manager_lang_attribute}">
 <head>
-<title>MODx :: {$_config.site_name}</title>
+<title>MODX :: {$_config.site_name}</title>
 <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
+
+{if $_config.manager_favicon_url}<link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />{/if}
 
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 {if $_config.compress_css}
@@ -34,7 +36,7 @@
         <div id="modx-logo"><a href="http://modxcms.com" onclick="window.open(this.href); return false;"><img src="templates/{$_config.manager_theme}/images/style/modx_logo_header.png" alt="" /></a></div>
         <div id="modx-site-name">
             {$_config.site_name}
-            <span class="modx-version">MODx Revolution {$_config.settings_version} ({$_config.settings_distro})</span>
+            <span class="modx-version">MODX Revolution {$_config.settings_version} ({$_config.settings_distro})</span>
         </div>
     </div>
     <div id="modx-navbar">

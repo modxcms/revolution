@@ -23,12 +23,17 @@ $context->prepare();
 
 /* check for locked status */
 $lockedBy = $resource->addLock($modx->user->get('id'));
+$canSave = $modx->hasPermission('save_document') ? 1 : 0;
+$locked = false;
+$lockedText = '';
 if (!empty($lockedBy) && $lockedBy !== true) {
-    $user = $modx->getObject('modUser', $lockedBy);
-    if ($user) {
-        $lockedBy = $user->get('username');
+    $canSave = false;
+    $locked = true;
+    $locker = $modx->getObject('modUser',$lockedBy);
+    if ($locker) {
+        $lockedBy = $locker->get('username');
     }
-    return $modx->error->failure($modx->lexicon('resource_locked_by', array('user' => $lockedBy, 'id' => $resource->get('id'))));
+    $lockedText = $modx->lexicon('resource_locked_by', array('user' => $lockedBy, 'id' => $resource->get('id')));
 }
 
 /* handle custom resource types */
@@ -85,7 +90,7 @@ $onDocFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onDocForm
 $modx->smarty->assign('onDocFormRender',$onDocFormRender);
 
 /* get url for resource for preview window */
-$url = $modx->makeUrl($resource->get('id'));
+$url = $modx->makeUrl($resource->get('id'),'','','full');
 
 /* assign resource to smarty */
 $modx->smarty->assign('resource',$resource);
@@ -131,6 +136,15 @@ $record = array_merge($record,$overridden);
 
 $record['parent_pagetitle'] = $parent ? $parent->get('pagetitle') : '';
 
+
+/* get TVs */
+$templateId = $record['template'];
+$tvCounts = array();
+$tvOutput = include dirname(__FILE__).'/tvs.php';
+if (!empty($tvCounts)) {
+    $modx->smarty->assign('tvOutput',$tvOutput);
+}
+
 /* register JS */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);
 $modx->regClientStartupScript($managerUrl.'assets/modext/util/datetime.js');
@@ -153,9 +167,13 @@ Ext.onReady(function() {
         ,access_permissions: "'.$access_permissions.'"
         ,publish_document: "'.$publish_document.'"
         ,preview_url: "'.$url.'"
-        ,canSave: "'.($modx->hasPermission('save_document') ? 1 : 0).'"
+        ,locked: '.($locked ? 1 : 0).'
+        ,lockedText: "'.$lockedText.'"
+        ,canSave: '.($canSave ? 1 : 0).'
         ,canEdit: "'.($modx->hasPermission('edit_document') ? 1 : 0).'"
         ,canCreate: "'.($modx->hasPermission('new_document') ? 1 : 0).'"
+        ,canDelete: "'.($modx->hasPermission('delete_document') ? 1 : 0).'"
+        ,show_tvs: '.(!empty($tvCounts) ? 1 : 0).'
     });
 });
 // ]]>

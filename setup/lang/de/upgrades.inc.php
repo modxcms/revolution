@@ -1,9 +1,12 @@
 <?php
 /**
- * German Upgrades Lexicon Topic for Revolution setup.
+ * German Upgrades Lexicon Topic for Revolution setup
  *
  * @package setup
  * @subpackage lexicon
+ * @language de
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
 $_lang['add_column'] = 'Neue Spalte `[[+column]]` zu `[[+table]]` hinzugefügt.';
 $_lang['add_index'] = 'Neuen Index für `[[+index]]` in der Tabelle `[[+table]]` hinzugefügt.';

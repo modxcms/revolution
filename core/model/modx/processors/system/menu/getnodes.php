@@ -27,17 +27,19 @@ if (empty($id)) $id = '';
 $c = $modx->newQuery('modMenu');
 $c->leftJoin('modMenu','Children');
 $c->leftJoin('modAction','Action');
+$modMenuCols = $modx->getSelectColumns('modMenu','modMenu');
 $c->select(array(
-    'modMenu.*',
+    $modMenuCols,
     'Action.controller',
     'Action.namespace',
 ));
-$c->select('COUNT(`Children`.`text`) AS `childrenCount`');
+$c->select('COUNT(Children.text) AS childrenCount');
 $c->where(array(
     'modMenu.parent' => $id,
 ));
 $c->sortby($sort,$dir);
-$c->groupby($modx->getSelectColumns('modMenu','modMenu','',array('text')));
+$c->groupby($modMenuCols . ', controller, namespace');
+$c->prepare();
 if ($isLimit) $c->limit($limit,$start);
 $menus = $modx->getCollection('modMenu',$c);
 

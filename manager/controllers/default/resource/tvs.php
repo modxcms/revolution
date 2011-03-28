@@ -7,12 +7,9 @@
  * @package modx
  * @subpackage manager
  */
-$resourceClass= isset ($_REQUEST['class_key']) ? $_REQUEST['class_key'] : 'modDocument';
-$resourceClass = $modx->sanitizeString($resourceClass);
-$resourceClass = str_replace(array('../','..','/','\\'),'',$resourceClass);
+$resourceClass = $resource->get('class_key');
 $resourceDir= strtolower(substr($resourceClass, 3));
-
-$resourceId = isset($_REQUEST['resource']) ? intval($_REQUEST['resource']) : 0;
+$resourceId = !empty($resource) ? $resource->get('id') : 0;
 
 $onResourceTVFormPrerender = $modx->invokeEvent('OnResourceTVFormPrerender',array(
     'resource' => $resourceId,
@@ -30,21 +27,17 @@ if (file_exists($delegateView)) {
     }
 }
 
-$templateId = 0;
-
 /* get categories */
 $c = $modx->newQuery('modCategory');
 $c->sortby('category','ASC');
 $categories = $modx->getCollection('modCategory',$c);
-
 $emptycat = $modx->newObject('modCategory');
-$emptycat->set('category','uncategorized');
+$emptycat->set('category','');
 $emptycat->id = 0;
-$categories[] = $emptycat;
+$categories[0] = $emptycat;
 $tvMap = array();
-if (isset ($_REQUEST['template'])) {
-    $templateId = intval($_REQUEST['template']);
-}
+$templateId = !empty($templateId) ? $templateId : $resource->get('template');
+
 if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
     $resource = $modx->getObject($resourceClass, $resourceId);
     if (empty($resourceId) || empty($resource)) {
@@ -59,25 +52,25 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
     if ($template) {
         $c = $modx->newQuery('modTemplateVar');
         $c->query['distinct'] = 'DISTINCT';
-        $c->select(array(
-            'modTemplateVar.*',
-            'TemplateVarResource.value',
-            'TemplateVarTemplate.rank',
-        ));
+        $c->select($modx->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+        $c->select($modx->getSelectColumns('modCategory', 'Category', 'cat_', array('category')));
+        $c->select($modx->getSelectColumns('modTemplateVarResource', 'TemplateVarResource', '', array('value')));
+        $c->select($modx->getSelectColumns('modTemplateVarTemplate', 'TemplateVarTemplate', '', array('rank')));
         $c->leftJoin('modCategory','Category');
         $c->innerJoin('modTemplateVarTemplate','TemplateVarTemplate',array(
-            '`TemplateVarTemplate`.`tmplvarid` = `modTemplateVar`.`id`',
-            '`TemplateVarTemplate`.`templateid`' => $templateId,
+            'TemplateVarTemplate.tmplvarid = modTemplateVar.id',
+            'TemplateVarTemplate.templateid' => $templateId,
         ));
         $c->leftJoin('modTemplateVarResource','TemplateVarResource',array(
-            '`TemplateVarResource`.`tmplvarid` = `modTemplateVar`.`id`',
-            '`TemplateVarResource`.`contentid`' => $resourceId,
+            'TemplateVarResource.tmplvarid = modTemplateVar.id',
+            'TemplateVarResource.contentid' => $resourceId,
         ));
-        $c->sortby('`Category`.`category`,`TemplateVarTemplate`.`rank`,`modTemplateVar`.`rank`','ASC');
+        $c->sortby('cat_category,TemplateVarTemplate.rank,modTemplateVar.rank','ASC');
         $tvs = $modx->getCollection('modTemplateVar',$c);
         
         $modx->smarty->assign('tvcount',count($tvs));
         foreach ($tvs as $tv) {
+            $cat = (int)$tv->get('category');
             $default = $tv->processBindings($tv->get('default_text'),$resourceId);
             if (strpos($tv->get('default_text'),'@INHERIT') > -1 && (strcmp($default,$tv->get('value')) == 0 || $tv->get('value') == null)) {
                 $tv->set('inherited',true);
@@ -90,7 +83,7 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
                 $tv->set('value',$v);
             }
             
-            if ($tv->type == 'richtext') {
+            if ($tv->get('type') == 'richtext') {
                 if (is_array($replace_richtexteditor))
                     $replace_richtexteditor = array_merge($replace_richtexteditor, array (
                         'tv' . $tv->id
@@ -104,34 +97,35 @@ if ($templateId && ($template = $modx->getObject('modTemplate', $templateId))) {
             if (empty($inputForm)) continue;
 
             $tv->set('formElement',$inputForm);
-            if (!is_array($categories[$tv->category]->tvs)) {
-                $categories[$tv->category]->tvs = array();
-                $categories[$tv->category]->tvCount = 0;
+            if (!is_array($categories[$cat]->tvs)) {
+                $categories[$cat]->tvs = array();
+                $categories[$cat]->tvCount = 0;
             }
 
             /* add to tv/category map */
             $tvMap[$tv->id] = $tv->category;
 
             /* add TV to category array */
-            $categories[$tv->category]->tvs[] = $tv;
+            $categories[$cat]->tvs[] = $tv;
             if ($tv->get('type') != 'hidden') {
-                $categories[$tv->category]->tvCount++;
+                $categories[$cat]->tvCount++;
             }
         }
     }
 }
 
 $tvCounts = array();
+$finalCategories = array();
 foreach ($categories as $n => $category) {
+    $category->hidden = empty($category->tvCount) ? true : false;
     $ct = count($category->tvs);
-    if (!empty($ct)) {
+    if ($ct > 0) {
+        $finalCategories[$category->get('id')] = $category;
         $tvCounts[$n] = $ct;
     }
-    $category->hidden = empty($category->tvCount) ? true : false;
 }
-
 $onResourceTVFormRender = $modx->invokeEvent('OnResourceTVFormRender',array(
-    'categories' => &$categories,
+    'categories' => &$finalCategories,
     'template' => $templateId,
     'resource' => $resourceId,
     'tvCounts' => &$tvCounts,
@@ -141,12 +135,13 @@ if (is_array($onResourceTVFormRender)) {
 }
 $modx->smarty->assign('OnResourceTVFormRender',$onResourceTVFormRender);
 
-$modx->smarty->assign('categories',$categories);
+$modx->smarty->assign('categories',$finalCategories);
 $modx->smarty->assign('tvCounts',$modx->toJSON($tvCounts));
 $modx->smarty->assign('tvMap',$modx->toJSON($tvMap));
 
 if (!empty($_REQUEST['showCheckbox'])) {
     $modx->smarty->assign('showCheckbox',1);
 }
+
 
 return $modx->smarty->fetch('resource/sections/tvs.tpl');

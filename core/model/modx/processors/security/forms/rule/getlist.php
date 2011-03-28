@@ -47,12 +47,9 @@ if (!empty($rule)) {
 }
 
 $count = $modx->getCount('modActionDom',$c);
-$c->select(array(
-    'modActionDom.*',
-    'Action.controller',
-    'Access.principal',
-    'Access.principal_class',
-));
+$c->select($modx->getSelectColumns('modActionDom'));
+$c->select($modx->getSelectColumns('modAction', 'Action', '', array('controller')));
+$c->select($modx->getSelectColumns('modAccessActionDom', 'Access', '', array('principal', 'principal_class')));
 
 $c->sortby($sort,$dir);
 if ($limit) $c->limit($limit,$start);

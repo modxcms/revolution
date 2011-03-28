@@ -59,7 +59,7 @@ MODx.panel.Static = function(config) {
                 ,labelWidth: 0
                 ,border: false
                 ,items: [{
-                    xtype: 'checkbox'
+                    xtype: 'xcheckbox'
                     ,boxLabel: _('resource_published')
                     ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
                     ,name: 'published'
@@ -134,7 +134,7 @@ MODx.panel.Static = function(config) {
             ,value: (config.record.content || config.record.ta) || ''
             ,listeners: {
                 'select':{fn:function(data) {
-                    var str = data.url;
+                    var str = data.fullRelativeUrl;
                     str = str.replace(MODx.config.base_url,'');
                     if (str.substring(0,1) == '/') str = str.substring(1);
                     Ext.getCmp('modx-resource-content').setValue(str);
@@ -187,7 +187,7 @@ MODx.panel.Static = function(config) {
             ,value: config.record.menuindex || 0
             
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,fieldLabel: _('resource_hide_from_menus')
             ,description: '<b>[[*hidemenu]]</b><br />'+_('resource_hide_from_menus_help')
             ,name: 'hidemenu'
@@ -211,7 +211,7 @@ MODx.panel.Static = function(config) {
     
     var va = [];
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_folder')
         ,description: '<b>[[*isfolder]]</b><br />'+_('resource_folder_help')
         ,name: 'isfolder'
@@ -263,7 +263,7 @@ MODx.panel.Static = function(config) {
         });
     }
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_searchable')
         ,description: '<b>[[*searchable]]</b><br />'+_('resource_searchable_help')
         ,name: 'searchable'
@@ -272,7 +272,7 @@ MODx.panel.Static = function(config) {
         ,checked: config.record.searchable
     });
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_cacheable')
         ,description: '<b>[[*cacheable]]</b><br />'+_('resource_cacheable_help')
         ,name: 'cacheable'
@@ -281,7 +281,7 @@ MODx.panel.Static = function(config) {
         ,checked: config.record.cacheable
     });
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('resource_syncsite')
         ,description: _('resource_syncsite_help')
         ,name: 'syncsite'
@@ -290,7 +290,7 @@ MODx.panel.Static = function(config) {
         ,checked: config.record.syncsite || true
     });
     va.push({
-        xtype: 'checkbox'
+        xtype: 'xcheckbox'
         ,fieldLabel: _('deleted')
         ,description: '<b>[[*deleted]]</b>'
         ,name: 'deleted'
@@ -328,6 +328,27 @@ MODx.panel.Static = function(config) {
         ,value: config.record.class_key || 'modStaticResource'
         ,anchor: '70%'
     });
+    va.push({
+        xtype: 'xcheckbox'
+        ,fieldLabel: _('resource_uri_override')
+        ,description: _('resource_uri_override_help')
+        ,name: 'uri_override'
+        ,value: 1
+        ,checked: config.record.uri_override ? true : false
+        ,id: 'modx-resource-uri-override'
+
+    });
+    va.push({
+        xtype: 'textfield'
+        ,fieldLabel: _('resource_uri')
+        ,description: '<b>[[*uri]]</b><br />'+_('resource_uri_help')
+        ,name: 'uri'
+        ,id: 'modx-resource-uri'
+        ,maxLength: 255
+        ,anchor: '70%'
+        ,value: config.record.uri || ''
+        ,hidden: config.record.uri_override ? false : true
+    });
     it.push({
         id: 'modx-page-settings'
         ,title: _('page_settings')
@@ -341,12 +362,15 @@ MODx.panel.Static = function(config) {
         }
         ,items: va
     });
-    it.push({
-        xtype: 'modx-panel-resource-tv'
-        ,resource: config.resource
-        ,class_key: config.record.class_key || 'modStaticResource'
-        ,template: config.record.template
-    });
+
+    if (config.show_tvs) {
+        it.push({
+            xtype: 'modx-panel-resource-tv'
+            ,resource: config.resource
+            ,class_key: config.record.class_key || 'modStaticResource'
+            ,template: config.record.template
+        });
+    }
     if (config.access_permissions) {
         it.push({
             id: 'modx-resource-access-permissions'
@@ -366,138 +390,22 @@ MODx.panel.Static = function(config) {
                 }
             }]
         });
-    }
+    }    
     Ext.applyIf(config,{
-        url: MODx.config.connectors_url+'resource/index.php'
-        ,baseParams: {}
-        ,id: 'modx-panel-resource'
+        id: 'modx-panel-resource'
         ,class_key: 'modStaticResource'
-        ,resource: ''
-        ,bodyStyle: ''
-        ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: '<h2>'+_('static_resource_new')+'</h2>'
             ,id: 'modx-resource-header'
             ,cls: 'modx-page-header'
             ,border: false
         },MODx.getPageStructure(it,{id:'modx-resource-tabs' ,forceLayout: true ,deferredRender: false })]
-        ,listeners: {
-            'setup': {fn:this.setup,scope:this}
-            ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
-            ,'success': {fn:this.success,scope:this}
-        }
     });
     MODx.panel.Static.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.panel.Static,MODx.FormPanel,{
-    initialized: false
-    ,defaultClassKey: 'modStaticResource'
-    ,rteLoaded: false
-    ,setup: function() {
-        if (!this.initialized) {
-            this.getForm().setValues(this.config.record);
-
-            if (Ext.isEmpty(this.config.record.parent_pagetitle)) {
-                this.getForm().findField('parent-cmb').setValue('');
-            } else {
-                this.getForm().findField('parent-cmb').setValue(this.config.record.parent_pagetitle+' ('+this.config.record.parent+')');
-            }
-            if (!Ext.isEmpty(this.config.record.pagetitle)) {
-                Ext.getCmp('modx-resource-header').getEl().update('<h2>'+_('static_resource')+': '+this.config.record.pagetitle+'</h2>');
-            }
-            this.defaultClassKey = this.config.record.class_key || 'modStaticResource';
-        }
-        if (MODx.config.use_editor == 1 && !this.rteLoaded) {
-            if (!this.rteLoaded) {
-                if (MODx.loadRTE) { MODx.loadRTE(); }
-                this.rteLoaded = true;
-            } else if (this.rteLoaded) {
-                if (MODx.unloadRTE) { MODx.unloadRTE(); }
-                this.rteLoaded = false;
-            }
-        }
-        this.fireEvent('ready',this.config.record);
-        this.initialized = true;
-    }
-    ,beforeSubmit: function(o) {        
-        var g = Ext.getCmp('modx-grid-resource-security');
-        if (g) { 
-            Ext.apply(o.form.baseParams,{
-                resource_groups: g.encodeModified()
-            });
-        }
-        return this.fireEvent('save',{
-            values: this.getForm().getValues()
-            ,stay: MODx.config.stay
-        });
-    }
-
-    ,success: function(o) {
-        var g = Ext.getCmp('modx-grid-resource-security');
-        if (g) { g.getStore().commitChanges(); }
-        var t = Ext.getCmp('modx-resource-tree');
-        
-        this.getForm().setValues(o.result.object);
-        if (t) {
-            var ctx = Ext.getCmp('modx-resource-context-key').getValue();
-            var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
-            var v = ctx+'_'+pa;
-            var n = t.getNodeById(v);
-            n.leaf = false;
-            t.refreshNode(v,true);
-        }
-        if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
-            location.href = location.href;
-        }
-        Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
-    }
-
-
-    ,templateWarning: function() {
-        var t = Ext.getCmp('modx-resource-template');
-        if (!t) { return false; }
-        if(t.getValue() !== t.originalValue) {
-            Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
-                if (e == 'yes') {
-                    if (MODx.unloadTVRTE) {
-                        MODx.unloadTVRTE();
-                    }
-                    var tvpanel = Ext.getCmp('modx-panel-resource-tv');
-                    if(tvpanel && tvpanel.body) {
-                        this.tvum = tvpanel.body.getUpdater();
-                        this.tvum.update({
-                            url: 'index.php?a='+MODx.action['resource/tvs']
-                            ,params: {
-                                class_key: this.config.record.class_key
-                                ,resource: (this.config.resource ? this.config.resource : 0)
-                                ,template: t.getValue()
-                            }
-                            ,discardUrl: true
-                            ,scripts: true
-                            ,nocache: true
-                            ,callback: function(el) {
-                                tvpanel.fireEvent('load');
-                            }
-                            ,scope: this
-                        });
-                    }
-                    t.originalValue = t.getValue();
-                } else {
-                    t.setValue(this.config.record.template);
-                }
-            },this);
-        }
-    }
+Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
+    defaultClassKey: 'modStaticResource'
+    ,classLexiconKey: 'static_resource'
+    ,rteElements: false
 });
 Ext.reg('modx-panel-static',MODx.panel.Static);
-
-/* global accessor for TV dynamic fields */
-var triggerDirtyField = function(fld) {
-    Ext.getCmp('modx-panel-resource').fieldChangeEvent(fld);
-};
-MODx.triggerRTEOnChange = function(i) {
-    triggerDirtyField(Ext.getCmp('ta'));
-};
-MODx.fireResourceFormChange = function(f,nv,ov) {
-    Ext.getCmp('modx-panel-resource').fireEvent('fieldChange');
-};

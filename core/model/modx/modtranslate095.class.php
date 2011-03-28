@@ -1,8 +1,8 @@
 <?php
 /*
- * MODx Revolution
+ * MODX Revolution
  *
- * Copyright 2006-2010 by the MODx Team.
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -20,7 +20,7 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * Utility class for assisting in migrating content from older MODx releases.
+ * Utility class for assisting in migrating content from older MODX releases.
  *
  * @package modx
  */

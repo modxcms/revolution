@@ -54,6 +54,11 @@ class modPhpThumb extends phpThumb {
         $this->setParameter('far',$this->modx->getOption('far',$_REQUEST,$this->modx->getOption('phpthumb_far',$this->config,'C')));
         $this->setParameter('cache_directory_depth',4);
 
+        $documentRoot = $this->modx->getOption('phpthumb_document_root',$this->config,'');
+        if (!empty($documentRoot)) {
+            $this->setParameter('config_document_root',$documentRoot);
+        }
+
         /* iterate through properties */
         foreach ($this->config as $property => $value) {
             $this->setParameter($property,$value);
@@ -65,7 +70,7 @@ class modPhpThumb extends phpThumb {
      * Sets the source image
      */
     public function set($src) {
-        $src = str_replace('+','%27',urldecode($src));
+        $src = rawurldecode($src);
         if (empty($src)) return '';
         return $this->setSourceFilename($src);
     }

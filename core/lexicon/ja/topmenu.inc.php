@@ -10,7 +10,7 @@
  * @author yamamoto http://kyms.jp
  */
 $_lang['about'] = 'MODxについて';
-$_lang['about_desc'] = 'MODx Revolutionに関する情報';
+$_lang['about_desc'] = 'MODX Revolutionに関する情報';
 $_lang['access_permissions'] = 'アクセス許可';
 $_lang['access_permissions_desc'] = 'リソースとコンテキストへのユーザーアクセス管理';
 $_lang['api_docs'] = 'APIドキュメント';
@@ -43,7 +43,7 @@ $_lang['import_resources_desc'] = '静的リソースの一括インポート';
 $_lang['import_site'] = 'サイトのインポート';
 $_lang['import_site_desc'] = 'HTMLファイルの一括インポート';
 $_lang['jira'] = 'JIRA';
-$_lang['jira_desc'] = 'MODx JIRA バグトラッカーにアクセスし不具合や改善要望を報告';
+$_lang['jira_desc'] = 'MODX JIRA バグトラッカーにアクセスし不具合や改善要望を報告';
 $_lang['lexicon_management'] = '語彙トピックの管理';
 $_lang['lexicon_management_desc'] = 'MODx管理画面で用いる語彙(Lexicon)を各国語単位で管理';
 $_lang['logout_desc'] = '管理画面からログアウト';
@@ -101,4 +101,4 @@ $_lang['view_logging_desc'] = '管理ログを閲覧';
 $_lang['view_sysinfo'] = 'システム情報';
 $_lang['view_sysinfo_desc'] = 'phpinfo・mysql他サーバー情報の閲覧';
 $_lang['wiki'] = 'Wiki';
-$_lang['wiki_desc'] = 'MODx Revolution関連文章を含むwikiの閲覧(英語)';
+$_lang['wiki_desc'] = 'MODX Revolution関連文章を含むwikiの閲覧(英語)';

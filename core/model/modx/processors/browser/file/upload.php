@@ -25,6 +25,9 @@ if (!empty($wctx)) {
 
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 $root = $modx->fileHandler->getBasePath(false);
+if ($workingContext->getOption('filemanager_path_relative',true)) {
+    $root = $workingContext->getOption('base_path','').$root;
+}
 $directory = $modx->fileHandler->make($root.$scriptProperties['path']);
 
 /* verify target path is a directory and writable */
@@ -34,7 +37,7 @@ if (!($directory->isReadable()) || !$directory->isWritable()) {
 }
 
 $modx->context->prepare();
-$allowedFileTypes = explode(',',$modx->getOption('upload_files'));
+$allowedFileTypes = explode(',',$modx->getOption('upload_files',null,''));
 $allowedFileTypes = array_merge(explode(',',$modx->getOption('upload_images')),explode(',',$modx->getOption('upload_media')),explode(',',$modx->getOption('upload_flash')),$allowedFileTypes);
 $allowedFileTypes = array_unique($allowedFileTypes);
 $maxFileSize = $modx->getOption('upload_maxsize',1048576);
@@ -44,6 +47,7 @@ foreach ($_FILES as $file) {
     if ($file['error'] != 0) continue;
     if (empty($file['name'])) continue;
     $ext = @pathinfo($file['name'],PATHINFO_EXTENSION);
+    $ext = strtolower($ext);
 
     if (empty($ext) || !in_array($ext,$allowedFileTypes)) {
         return $modx->error->failure($modx->lexicon('file_err_ext_not_allowed',array(

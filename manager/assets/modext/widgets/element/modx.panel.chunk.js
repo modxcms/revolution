@@ -70,7 +70,7 @@ MODx.panel.Chunk = function(config) {
                 ,width: 250
                 ,value: config.record.category || 0
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('chunk_lock')
                 ,description: _('chunk_lock_msg')
                 ,name: 'locked'
@@ -78,7 +78,7 @@ MODx.panel.Chunk = function(config) {
                 ,inputValue: true
                 ,checked: config.record.locked || 0
             },{
-                xtype: 'checkbox'
+                xtype: 'xcheckbox'
                 ,fieldLabel: _('clear_cache_on_save')
                 ,description: _('clear_cache_on_save_msg')
                 ,name: 'clearCache'

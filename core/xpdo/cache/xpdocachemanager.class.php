@@ -34,6 +34,7 @@
 class xPDOCacheManager {
     const CACHE_PHP = 0;
     const CACHE_JSON = 1;
+    const CACHE_SERIALIZE = 2;
     const CACHE_DIR = 'objects/';
     const LOG_DIR = 'logs/';
 
@@ -188,13 +189,15 @@ class xPDOCacheManager {
     }
 
     /**
-     * Writes a file to the filesystem
+     * Writes a file to the filesystem.
      *
      * @access public
      * @param string $filename The absolute path to the location the file will
      * be written in.
      * @param string $content The content of the newly written file.
-     * @param string $mode The php file mode to write in. Defaults to 'wb'
+     * @param string $mode The php file mode to write in. Defaults to 'wb'. Note that this method always
+     * uses a (with b or t if specified) to open the file and that any mode except a means existing file
+     * contents will be overwritten.
      * @param array $options An array of options for the function.
      * @return boolean Returns true if the file was successfully written.
      */
@@ -670,6 +673,30 @@ class xPDOCacheManager {
     }
 
     /**
+     * Refresh specific or all cache providers.
+     *
+     * The default behavior is to call clean() with the provided options
+     *
+     * @param array $providers An associative array with keys representing the cache provider key
+     * and the value an array of options.
+     * @param array &$results An associative array for collecting results for each provider.
+     * @return array An array of results for each provider that is refreshed.
+     */
+    public function refresh(array $providers = array(), array &$results = array()) {
+        if (empty($providers)) {
+            foreach ($this->caches as $cacheKey => $cache) {
+                $providers[$cacheKey] = array();
+            }
+        }
+        foreach ($providers as $key => $options) {
+            if (array_key_exists($key, $this->caches) && !array_key_exists($key, $results)) {
+                $results[$key] = $this->clean(array_merge($options, array(xPDO::OPT_CACHE_KEY => $key)));
+            }
+        }
+        return (array_search(false, $results, true) === false);
+    }
+
+    /**
      * Escapes all single quotes in a string
      *
      * @access public
@@ -758,7 +785,7 @@ abstract class xPDOCache {
     public function getCacheKey($key, $options = array()) {
         $prefix = $this->getOption('cache_prefix', $options);
         if (!empty($prefix)) $key = $prefix . $key;
-        return $key;
+        return $this->key . '/' . $key;
     }
 
     /**
@@ -872,11 +899,19 @@ class xPDOFileCache extends xPDOCache {
                 $expireContent= 'if(time() > ' . $expirationTS . '){return null;}';
             }
             $fileName= $this->getCacheKey($key, $options);
-            if (!empty($options['format']) && $options['format'] == xPDOCacheManager::CACHE_JSON) {
-                $content= !is_scalar($var) ? $this->xpdo->toJSON($var) : $var;
-            } else {
-            $content= '<?php ' . $expireContent . ' return ' . var_export($var, true) . ';';
-        }
+            $format = (integer) $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP);
+            switch ($format) {
+                case xPDOCacheManager::CACHE_SERIALIZE:
+                    $content= serialize(array('expires' => $expirationTS, 'content' => $var));
+                    break;
+                case xPDOCacheManager::CACHE_JSON:
+                    $content= $this->xpdo->toJSON(array('expires' => $expirationTS, 'content' => $var));
+                    break;
+                case xPDOCacheManager::CACHE_PHP:
+                default:
+                    $content= '<?php ' . $expireContent . ' return ' . var_export($var, true) . ';';
+                    break;
+            }
             $set= $this->xpdo->cacheManager->writeFile($fileName, $content);
         }
         return $set;
@@ -896,9 +931,12 @@ class xPDOFileCache extends xPDOCache {
         $deleted= false;
         $cacheKey= $this->getCacheKey($key, array_merge($options, array('cache_ext' => '')));
         if (file_exists($cacheKey) && is_dir($cacheKey)) {
-            $deleted= $this->xpdo->cacheManager->deleteTree($cacheKey, false, true);
+            $results = $this->xpdo->cacheManager->deleteTree($cacheKey, array_merge(array('deleteTop' => false, 'skipDirs' => false, 'extensions' => array('.cache.php')), $options));
+            if ($results !== false) {
+                $deleted = true;
+            }
         } else {
-            $cacheKey.= $this->getOption('cache_ext', $options, '.cache.php');
+            $cacheKey= $this->getCacheKey($key, $options);
             if (file_exists($cacheKey)) {
                 $deleted= @ unlink($cacheKey);
             }
@@ -910,13 +948,44 @@ class xPDOFileCache extends xPDOCache {
         $value= null;
         $cacheKey= $this->getCacheKey($key, $options);
         if (file_exists($cacheKey)) {
-            if (!empty($options['format']) && $options['format'] == xPDOCacheManager::CACHE_JSON) {
-                $value= file_get_contents($cacheKey);
-            } else {
-                $value= @ include ($cacheKey);
-            }
-            if ($value === null && $this->getOption('removeIfEmpty', $options, true)) {
-                @ unlink($cacheKey);
+            if ($file = @fopen($cacheKey, 'rb')) {
+                $format = (integer) $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP);
+                if (flock($file, LOCK_SH)) {
+                    switch ($format) {
+                        case xPDOCacheManager::CACHE_PHP:
+                            $value= @include $cacheKey;
+                            break;
+                        case xPDOCacheManager::CACHE_JSON:
+                            $payload = stream_get_contents($file);
+                            if ($payload !== false) {
+                                $payload = $this->xpdo->fromJSON($payload);
+                                if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
+                                    if (array_key_exists('content', $payload)) {
+                                        $value= $payload['content'];
+                                    }
+                                }
+                            }
+                            break;
+                        case xPDOCacheManager::CACHE_SERIALIZE:
+                            $payload = stream_get_contents($file);
+                            if ($payload !== false) {
+                                $payload = unserialize($payload);
+                                if (is_array($payload) && isset($payload['expires']) && (empty($payload['expires']) || time() < $payload['expires'])) {
+                                    if (array_key_exists('content', $payload)) {
+                                        $value= $payload['content'];
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                    flock($file, LOCK_UN);
+                    if ($value === null && $this->getOption('removeIfEmpty', $options, true)) {
+                        fclose($file);
+                        @ unlink($cacheKey);
+                        return $value;
+                    }
+                }
+                @fclose($file);
             }
         }
         return $value;
@@ -924,6 +993,7 @@ class xPDOFileCache extends xPDOCache {
 
     public function flush($options= array()) {
         $cacheKey= $this->getCacheKey('', array_merge($options, array('cache_ext' => '')));
-        return $this->xpdo->cacheManager->deleteTree($cacheKey, false, true);
+        $results = $this->xpdo->cacheManager->deleteTree($cacheKey, array_merge(array('deleteTop' => false, 'skipDirs' => false, 'extensions' => array('.cache.php')), $options));
+        return ($results !== false);
     }
 }

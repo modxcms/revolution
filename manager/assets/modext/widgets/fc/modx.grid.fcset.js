@@ -404,7 +404,7 @@ MODx.window.CreateFCSet = function(config) {
             ,allowBlank: true
             
         },{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,fieldLabel: _('active')
             ,name: 'active'
             ,inputValue: 1

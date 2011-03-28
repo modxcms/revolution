@@ -13,6 +13,7 @@ MODx.page.CreateStatic = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
+        ,action: 'create'
         ,actions: {
             'new': MODx.action['resource/create']
             ,edit: MODx.action['resource/update']
@@ -27,6 +28,7 @@ MODx.page.CreateStatic = function(config) {
             ,record: config.record || {}
             ,publish_document: config.publish_document
             ,access_permissions: config.access_permissions
+            ,show_tvs: config.show_tvs
         }]
     });
     MODx.page.CreateStatic.superclass.constructor.call(this,config);

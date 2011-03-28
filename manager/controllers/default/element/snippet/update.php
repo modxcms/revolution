@@ -43,6 +43,7 @@ foreach ($properties as $property) {
         $property['desc_trans'],
     );
 }
+
 $snippetArray = $snippet->toArray();
 $snippetArray['properties'] = $data;
 if (strpos($snippetArray['snippet'],'<?php') === false) {

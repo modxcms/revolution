@@ -13,6 +13,7 @@ MODx.page.CreateResource = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
+        ,action: 'create'
     	,actions: {
             'new': MODx.action['resource/create']
             ,edit: MODx.action['resource/update']
@@ -27,6 +28,7 @@ MODx.page.CreateResource = function(config) {
             ,record: config.record
             ,access_permissions: config.access_permissions
             ,publish_document: config.publish_document
+            ,show_tvs: config.show_tvs
         }]
     });
     MODx.page.CreateResource.superclass.constructor.call(this,config);

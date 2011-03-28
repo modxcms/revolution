@@ -255,11 +255,12 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
     ,_handleDrop: function(e) {
         var target = e.target;
         if (e.point == 'above' || e.point == 'below') {return false;}
-        if (e.target.attributes.type == 'category' && e.point == 'append') {return true;}
+        if (target.attributes.classKey != 'modCategory' && target.attributes.classKey != 'root') { return false; }
 
         if (!this.isCorrectType(e.dropNode,target)) {return false;}
-        
-        return e.target.getDepth() > 0;
+        if (target.attributes.type == 'category' && e.point == 'append') {return true;}
+
+        return target.getDepth() > 0;
     }
     
     ,isCorrectType: function(dropNode,targetNode) {
@@ -502,7 +503,7 @@ MODx.window.DuplicateElement = function(config) {
     }];
     if (config.record.type == 'tv') {
         flds.push({
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,fieldLabel: _('element_duplicate_values')
             ,labelSeparator: ''
             ,name: 'duplicateValues'

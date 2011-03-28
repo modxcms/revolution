@@ -112,4 +112,8 @@ class modPlugin extends modScript {
         }
         return parent :: getPropertySet($setName);
     }
+
+    public static function listGroups(modResource &$resource, array $sort = array('id' => 'ASC'), $limit = 0, $offset = 0) {
+        
+    }
 }

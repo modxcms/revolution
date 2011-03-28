@@ -33,25 +33,21 @@ $elementType = $modx->getOption('elementType',$scriptProperties,false);
 
 /* query for sets */
 $c = $modx->newQuery('modPropertySet');
+$c->leftJoin('modElementPropertySet','Elements', array(
+    'Elements.element_class'=> $elementType,
+    'Elements.element'=> $elementId,
+    'Elements.property_set = modPropertySet.id'
+));
 if ($showNotAssociated) {
-    $c->leftJoin('modElementPropertySet','Elements','
-        `Elements`.`element_class` = "'.$elementType.'"
-    AND `Elements`.`element` = "'.$elementId.'"
-    AND `Elements`.`property_set` = `modPropertySet`.`id`
-    ');
     $c->where(array(
         'Elements.property_set' => null,
     ));
 } else if ($showAssociated) {
-    $c->leftJoin('modElementPropertySet','Elements','
-        `Elements`.`element_class` = "'.$elementType.'"
-    AND `Elements`.`element` = "'.$elementId.'"
-    AND `Elements`.`property_set` = `modPropertySet`.`id`
-    ');
     $c->where(array(
         'Elements.property_set:!=' => null,
     ));
 }
+
 $count = $modx->getCount('modPropertySet',$c);
 
 $c->sortby($sort,$dir);

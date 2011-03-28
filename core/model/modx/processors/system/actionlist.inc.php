@@ -13,7 +13,7 @@ if (!function_exists('getAction')) {
             case "4" : return "Creating a document"; break;
             case "5" : return "Saving document $itemid"; break;
             case "6" : return "Deleting document $itemid"; break;
-            case "7" : return "Waiting while MODx cleans up"; break;
+            case "7" : return "Waiting while MODX cleans up"; break;
             case "8" : return "Logged out"; break;
             case "9" : return "Viewing help"; break;
             case "10" : return "Viewing/ composing messages"; break;
@@ -64,7 +64,7 @@ if (!function_exists('getAction')) {
             case "56" : return "Refresh document tree"; break;
             case "57" : return "Refresh menu"; break;
             case "58" : return "Logged in"; break;
-            case "59" : return "About MODx"; break;
+            case "59" : return "About MODX"; break;
             case "60" : return "Emptying Recycle Bin"; break;
             case "61" : return "Publishing a document"; break;
             case "62" : return "Un-publishing a document"; break;
@@ -86,8 +86,6 @@ if (!function_exists('getAction')) {
             case "78" : return "Editing Chunk (HTML Snippet) $itemid"; break;
             case "79" : return "Saving Chunk (HTML Snippet) $itemid"; break;
             case "80" : return "Deleting Chunk (HTML Snippet) $itemid"; break;
-            case "81" : return "Managing keywords"; break;
-            case "81" : return "Managing keywords"; break;
             case "83" : return "Exporting a document to HTML"; break;
             case "84" : return "Load Resource Selector"; break;
             case "85" : return "Create Folder"; break;

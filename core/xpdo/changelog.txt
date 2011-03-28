@@ -1,5 +1,47 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.1.2-pl (March 25, 2011)
+====================================
+- Add xPDO->getValue() convenience method for retrieving single column from single row
+- [#4128] Fix Windows drive issue in xPDOTransport->pack()
+- [#4125] Fix bug getting composites in xPDOObject->getFKClass()
+- [#4097] Make constraint names unique for sqlsrv
+- [#4047] Fix bug adding single file to zip in xPDOZip
+- [#3971] Add xPDOManager API for manipulating table structures
+
+xPDO 2.1.1-pl2 (February 21, 2011)
+====================================
+- Fix error in xPDOObject->getOption() when handling option overrides
+
+xPDO 2.1.1-pl (February 20, 2011)
+====================================
+- [#2909] Make auto-table creation optional
+- Add options and default parameters to xPDOObject->getOption()
+- [#3174] Use xPDOQuery alias to build join criteria for getMany()
+- [#3342] Fix use of deprecated split() function in xPDORevisionControl
+- Fix modCacheManager->writeFile() not to truncate files if a mode is specified
+
+xPDO 2.1.0-pl2 (February 16, 2011)
+====================================
+- Avoid PHP warning from fopen in xPDOFileCache->get()
+
+xPDO 2.1.0-pl (February 16, 2011)
+====================================
+- Add proper cache file locking and format handling
+- Add OPT_CACHE_FORMAT constant to xPDO
+- Add support for CACHE_SERIALIZE format in xPDOFileCache implementation
+- Force flush() for multiple_object_delete option in xPDOMemCache->delete()
+- Implement multiple_object_delete support in xPDOAPCCache->delete()
+- Return boolean from xPDOFileCache->delete() and ->flush()
+- Fix xPDOFileCache->delete() and invalid calls to cacheManager->deleteTree()
+- Use APCIterator to support per instance flush()'ing in xPDOAPCCache
+- Prefix all cache keys with provider key
+- Fix db cache methods to be called with proper options
+- Add xPDOCacheManager->refresh() to empty all active cache providers
+- Fix limit with sortby functionality for sqlsrv
+- Fix xPDO->literal() and add missing xPDO->$_quoteChar
+- Fix date/time issues (sqlsrv)
+
 xPDO 2.0.1-pl (December 27, 2010)
 ====================================
 - [#2927] Add ENGINE option to xPDOManager_mysql->createObjectContainer()

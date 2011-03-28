@@ -9,7 +9,7 @@
 require_once MODX_CORE_PATH . 'model/modx/modmanagerrequest.class.php';
 
 /**
- * This is the Connector Request handler for MODx.
+ * This is the Connector Request handler for MODX.
  *
  * It serves to redirect connector requests to their appropriate processors,
  * while validating for security.

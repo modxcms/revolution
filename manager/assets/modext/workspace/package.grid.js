@@ -385,7 +385,7 @@ MODx.window.RemovePackage = function(config) {
             html: _('package_remove_force_desc') 
             ,border: false
         },MODx.PanelSpacer,{
-            xtype: 'checkbox'
+            xtype: 'xcheckbox'
             ,name: 'force'
             ,boxLabel: _('package_remove_force')
             ,id: 'modx-rpack-force'

@@ -1,6 +1,6 @@
 <?php
 /**
- * Represents a menu item at the top of the MODx manager.
+ * Represents a menu item at the top of the MODX manager.
  *
  * @package modx
  */
@@ -41,8 +41,11 @@ class modMenu extends modAccessibleObject {
      */
     public function rebuildCache($start = '') {
         $menus = $this->getSubMenus($start);
-
-        if ($this->xpdo->cacheManager->set('mgr/menus/'.$this->xpdo->getOption('manager_language',null,$this->xpdo->getOption('cultureKey',null,'en')),$menus) == false) {
+        $cached = $this->xpdo->cacheManager->set('mgr/menus/'.$this->xpdo->getOption('manager_language',null,$this->xpdo->getOption('cultureKey',null,'en')), $menus, 0, array(
+            xPDO::OPT_CACHE_KEY => $this->xpdo->cacheManager->getOption('cache_menu_key', null, 'menu'),
+            xPDO::OPT_CACHE_HANDLER => $this->xpdo->cacheManager->getOption('cache_menu_handler', null, $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER))
+        ));
+        if ($cached === false) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'The menu cache could not be written.');
         }
 

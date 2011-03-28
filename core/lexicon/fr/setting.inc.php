@@ -24,6 +24,8 @@ $_lang['area_lexicon_string_msg'] = 'Entrez ici la clé de l\'entrée du lexique
 $_lang['area_site'] = 'Site';
 $_lang['area_system'] = 'Systéme et Serveur';
 $_lang['areas'] = 'Zones';
+$_lang['charset'] = 'Jeu de caractères (charset)';
+$_lang['country'] = 'Pays';
 $_lang['namespace'] = 'Espace de nom';
 $_lang['namespace_filter'] = 'Filtrer par espace de nom…';
 $_lang['search_by_key'] = 'Chercher par clé…';
@@ -37,16 +39,17 @@ $_lang['setting_err_save'] = 'Une erreur est survenue lors de la sauvegarde de l
 $_lang['setting_err_startint'] = 'Les options ne peuvent débuter par un entier.';
 $_lang['setting_err_invalid_document'] = 'Il n\'y a pas de document ayant pour ID %d. Veuillez indiquer un document existant.';
 $_lang['setting_remove'] = 'Supprimer l\'option';
-$_lang['setting_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer cette option ? Ceci peut endommager votre installation de MODx.';
+$_lang['setting_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer cette option ? Ceci peut endommager votre installation de MODX.';
 $_lang['setting_update'] = 'Mettre à jour l\'option';
 $_lang['settings_after_install'] = 'Comme c\'est une nouvelle installation, vous devez contrôler les options de configuration et changer celles que vous souhaitez. Après avoir contrôlé les options, cliquez sur \'Sauvegarder\' pour mettre à jour la base de données des options.<br /><br />';
-$_lang['settings_desc'] = 'Ici vous pouvez indiquer les préférences et configurations pour l\'interface de gestion de MODx et également le fonctionnement de votre site MODx. Double-cliquez sur la colonne de valeur de l\'option que vous souhaitez éditer pour éditer dynamiquement via la grille, ou faites un clic droit sur une option pour plus d\'options. Vous pouvez également cliquer le symbole "+" pour une description de l\'option de configuration.';
+$_lang['settings_desc'] = 'Ici vous pouvez indiquer les préférences et configurations pour l\'interface de gestion de MODX et également le fonctionnement de votre site MODX. Double-cliquez sur la colonne de valeur de l\'option que vous souhaitez éditer pour éditer dynamiquement via la grille, ou faites un clic droit sur une option pour plus d\'options. Vous pouvez également cliquer le symbole "+" pour une description de l\'option de configuration.';
 $_lang['settings_furls'] = 'URLs simples';
 $_lang['settings_misc'] = 'Divers';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Fonctions';
 $_lang['settings_users'] = 'Utilisateur';
 $_lang['system_settings'] = 'Configuration du Systéme';
+$_lang['usergroup'] = 'Groupe d\'utilisateur';
 
 // user settings
 $_lang['setting_allow_mgr_access'] = 'Accès à l\'interface du manager';
@@ -68,8 +71,8 @@ $_lang['setting_login_homepage_desc'] = 'Entrez l\'ID du document vers lequel vo
 $_lang['setting_access_policies_version'] = 'Version du schéma de règle d\'accès';
 $_lang['setting_access_policies_version_desc'] = 'La version du système de règle d\'accès. NE PAS CHANGER.';
 
-$_lang['setting_allow_duplicate_alias'] = 'Autoriser les doublons d\'alias';
-$_lang['setting_allow_duplicate_alias_desc'] = 'Si \'oui\' est sélectionné, cela permet de saugarder des alias en doublons. <strong>NOTE: Cette option doit être utilisée avec l\'option \'URLs simple de répertoire\' définie sur \'Oui\' pour éviter des problèmes de référence aux ressources.</strong>';
+$_lang['setting_allow_forward_across_contexts'] = 'Autoriser la redirection dans d\'autres contextes';
+$_lang['setting_allow_forward_across_contexts_desc'] = 'Les Symlinks et les appels à l\'API modX::sendForward() peuvent rediriger les requètes vers des ressources dans d\'autres contextes.';
 
 $_lang['setting_allow_tags_in_post'] = 'Autoriser les tags HTML en POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Désactivé, toutes les actions POST à l\'intérieur du manager seront débarrassées de tout tags. Modx recommande de laisser cette option activée.';
@@ -81,7 +84,7 @@ $_lang['setting_auto_menuindex'] = 'Index de menu par défaut';
 $_lang['setting_auto_menuindex_desc'] = 'Sélectionnez \'Oui\' pour activer l\'incrémentation automatique de l\'index de menu par défaut.';
 
 $_lang['setting_auto_check_pkg_updates'] = 'Vérification automatique des mises à jour de package';
-$_lang['setting_auto_check_pkg_updates_desc'] = 'Si \'Oui\' est sélectionné, MODx vérifiera automatiquement la présence de mise à jour des packages dans le gestionnaire de packages. Cela ralentie le chargement de la grille.';
+$_lang['setting_auto_check_pkg_updates_desc'] = 'Si \'Oui\' est sélectionné, MODX vérifiera automatiquement la présence de mise à jour des packages dans le gestionnaire de packages. Cela ralentie le chargement de la grille.';
 
 $_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Expiration du cache pour les vérifications automatiques de mise à jour de package';
 $_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'Valeur en minutes que le gestionnaire de package gardera en cache les résultats de recherche de mise à jour.';
@@ -91,6 +94,9 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Activé, cela permet aux utilisa
 
 $_lang['setting_automatic_alias'] = 'Création automatique d\'alias';
 $_lang['setting_automatic_alias_desc'] = 'Sélectionnez \'Oui\' pour que le système génère automatiquement un alias basé sur le titre de la page lors de son enregistrement.';
+
+$_lang['setting_base_help_url'] = 'URL de base de l\'aide';
+$_lang['setting_base_help_url_desc'] = 'L\'URL de base à partir de laquelle la construction de liens d\'aide se fait (en haut à droite des pages dans le manager).';
 
 $_lang['setting_blocked_minutes'] = 'Durée de blocage';
 $_lang['setting_blocked_minutes_desc'] = 'Entrez ici le nombre de minutes qu\'un utilisateur sera bloqué s\'il atteint le nombre maximal de tentative de connexions. Veuillez n\'entrer qu\'un nombre (pas de virgule, espace, etc.)';
@@ -112,17 +118,14 @@ $_lang['setting_cache_default_desc'] = 'Sélectionnez \'Oui\' pour mettre en cac
 $_lang['setting_cache_default_err'] = 'Veuillez indiquer si vous souhaitez ou non que les documents soient mis en cache par défaut..';
 
 $_lang['setting_cache_disabled'] = 'Désactiver les options de cache global';
-$_lang['setting_cache_disabled_desc'] = 'Sélectionnez \'Oui\' pour désactiver toutes les fonctions de cache de MODx. MODx recommande de ne pas désactiver le cache.';
+$_lang['setting_cache_disabled_desc'] = 'Sélectionnez \'Oui\' pour désactiver toutes les fonctions de cache de MODX. MODX recommande de ne pas désactiver le cache.';
 $_lang['setting_cache_disabled_err'] = 'Veuillez indiquer si vous souhaitez ou non que le cache soit activé.';
-
-$_lang['setting_cache_json'] = 'Mie en cache des données JSON';
-$_lang['setting_cache_json_desc'] = 'Met en cache les données JSON envers depuis et vers l\'interface du manager.';
 
 $_lang['setting_cache_expires'] = 'Délais d\'expiration par défaut du cache';
 $_lang['setting_cache_expires_desc'] = 'Cette valeur (en secondes) défini la durée de mise en cache par défaut des fichiers.';
 
-$_lang['setting_cache_json_expires'] = 'Délais d\'expiration du cache JSON';
-$_lang['setting_cache_json_expires_desc'] = 'Cette valeur (en secondes) défini la durée de mise en cache des fichiers pour le cache JSON.';
+$_lang['setting_cache_format'] = 'Format de cache à utiliser';
+$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = sérialiser. Un des formats';
 
 $_lang['setting_cache_handler'] = 'Classe de prise en charge du cache';
 $_lang['setting_cache_handler_desc'] = 'Nom de la classe à utiliser pour la prise en charge du cache.';
@@ -131,7 +134,7 @@ $_lang['setting_cache_lang_js'] = 'Mettre en cache les chaînes JS du lexique';
 $_lang['setting_cache_lang_js_desc'] = 'Activé, cela utilisera les entêtes serveur pour mettre en cache les chaînes du lexique chargées dans Javascript pour l\'interface du manager.';
 
 $_lang['setting_cache_lexicon_topics'] = 'Mettre en cache des sujets de lexique';
-$_lang['setting_cache_lexicon_topics_desc'] = 'Activé, tous les sujets du lexique seront mis en cache afin de réduire les temps de chargement des fonctionnalités d\'internationnalisation. MODx recommande vivement de laisser cette option sur \'Oui\'.';
+$_lang['setting_cache_lexicon_topics_desc'] = 'Activé, tous les sujets du lexique seront mis en cache afin de réduire les temps de chargement des fonctionnalités d\'internationnalisation. MODX recommande vivement de laisser cette option sur \'Oui\'.';
 
 $_lang['setting_cache_noncore_lexicon_topics'] = 'Mettre en cache le lexique des sujets autres au ceux du noyau';
 $_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Désactivé, le lexique des sujets autres que ceux du noyau ne seront pas mis en cache. C\'est utile lors du développement de vos Extras.';
@@ -143,22 +146,22 @@ $_lang['setting_cache_resource_expires'] = 'Temps d\'expiration pour le cache pa
 $_lang['setting_cache_resource_expires_desc'] = 'Cette valeur (en secondes) défini la durée de mise en cache partiel des ressources.';
 
 $_lang['setting_cache_scripts'] = 'Activer le système de cache de Script';
-$_lang['setting_cache_scripts_desc'] = 'Activé, MODx mettra en cache tous les Scripts (Snippets et Plugins) "to file" pour réduire les temps de chargement. MODx recommande de laisser \'Oui\' activé.';
+$_lang['setting_cache_scripts_desc'] = 'Activé, MODX mettra en cache tous les Scripts (Snippets et Plugins) "to file" pour réduire les temps de chargement. MODX recommande de laisser \'Oui\' activé.';
 
 $_lang['setting_cache_system_settings'] = 'Activer le système de cache de la configuration';
-$_lang['setting_cache_system_settings_desc'] = 'Activé, les options de configurations seront mis en cache pour réduire les temps de chargement. MODx recommande de laisser activé.';
+$_lang['setting_cache_system_settings_desc'] = 'Activé, les options de configurations seront mis en cache pour réduire les temps de chargement. MODX recommande de laisser activé.';
 
 $_lang['setting_clear_cache_refresh_trees'] = 'Rafraîchir l\'arborescence lors de la purge du cache';
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Rafraîchie l\'arborescence après une purge du cache.';
 
 $_lang['setting_compress_css'] = 'Utitliser des CSS compressés';
-$_lang['setting_compress_css_desc'] = 'Lorsque cei est activé, MODx utilise une version compressée de ses feuilles de style dans l\'interface du manager. Ceci réduit grandement les temps de chargement et d\'éxécution au sein du manager. Désactivez cette option seulement si vous modifiez des éléments du noyau.';
+$_lang['setting_compress_css_desc'] = 'Lorsque cei est activé, MODX utilise une version compressée de ses feuilles de style dans l\'interface du manager. Ceci réduit grandement les temps de chargement et d\'éxécution au sein du manager. Désactivez cette option seulement si vous modifiez des éléments du noyau.';
 
 $_lang['setting_compress_js'] = 'Utilisation de librairies Javascript compressées';
-$_lang['setting_compress_js_desc'] = 'Quand ceci est activé, MODx utilisera une version compressée de ses librairies Javascript dans l\'interface du manager. Désactivez seulement si vous modifiez des élements du coeur/noyau/base.';
+$_lang['setting_compress_js_desc'] = 'Quand ceci est activé, MODX utilisera une version compressée de ses librairies Javascript dans l\'interface du manager. Désactivez seulement si vous modifiez des élements du coeur/noyau/base.';
 
 $_lang['setting_concat_js'] = 'Utiliser les librairies Javascript concaténées';
-$_lang['setting_concat_js_desc'] = 'Quand ceci est activé, MODx utilisera une version concaténée de ses librairies Javascript dans l\'interface du manager. Ceci réduit grandement le chargement et le temps d\'éxécution au sein du manager. Désactivez seuelement si vous modifiez des éléments du coeur/noyau/base.';
+$_lang['setting_concat_js_desc'] = 'Quand ceci est activé, MODX utilisera une version concaténée de ses librairies Javascript dans l\'interface du manager. Ceci réduit grandement le chargement et le temps d\'éxécution au sein du manager. Désactivez seuelement si vous modifiez des éléments du coeur/noyau/base.';
 
 $_lang['setting_container_suffix'] = 'Suffixe de conteneur';
 $_lang['setting_container_suffix_desc'] = 'Le suffixe à ajouter aux ressources conteneurs avec l\'utilisation des URLs simples.';
@@ -197,7 +200,7 @@ $_lang['setting_error_page_desc'] = 'Entrez l\'ID du document que vous souhaitez
 $_lang['setting_error_page_err'] = 'Veuillez indiquer un ID de document pour la page d\'erreur.';
 
 $_lang['setting_extension_packages'] = 'Extension Packages';
-$_lang['setting_extension_packages_desc'] = 'Une array JSON de paquets à charger lors de l\'instanciation de MODx, au format [{"packagename":{path":"path/to/package"},{"anotherpkg":{"path":"path/to/otherpackage"}}]';
+$_lang['setting_extension_packages_desc'] = 'Une array JSON de paquets à charger lors de l\'instanciation de MODX, au format [{"packagename":{path":"path/to/package"},{"anotherpkg":{"path":"path/to/otherpackage"}}]';
 
 $_lang['setting_failed_login_attempts'] = 'Tentatives échouées de connexion';
 $_lang['setting_failed_login_attempts_desc'] = 'Nombre de tentatives échouées de connexion qu\'un utilisateur est autorisé à commetre avant d\'être \'bloqué\'.';
@@ -205,17 +208,17 @@ $_lang['setting_failed_login_attempts_desc'] = 'Nombre de tentatives échouées 
 $_lang['setting_fe_editor_lang'] = 'Langue de l\'éditeur de Front-end';
 $_lang['setting_fe_editor_lang_desc'] = 'Choisissez une langue à utiliser pour éditer dans le front-end.';
 
-$_lang['setting_feed_modx_news'] = 'URL du flux d\'actualités de MODx';
-$_lang['setting_feed_modx_news_desc'] = 'Défini l\'URL du flux d\'actualités du panneau de MODx dans le manager.';
+$_lang['setting_feed_modx_news'] = 'URL du flux d\'actualités de MODX';
+$_lang['setting_feed_modx_news_desc'] = 'Défini l\'URL du flux d\'actualités du panneau de MODX dans le manager.';
 
-$_lang['setting_feed_modx_news_enabled'] = 'Actualités de MODx activées';
-$_lang['setting_feed_modx_news_enabled_desc'] = 'Si \'Non\' est sélectionné, MODx cachera le flux d\'actualités de la page d\'accueil du manager.';
+$_lang['setting_feed_modx_news_enabled'] = 'Actualités de MODX activées';
+$_lang['setting_feed_modx_news_enabled_desc'] = 'Si \'Non\' est sélectionné, MODX cachera le flux d\'actualités de la page d\'accueil du manager.';
 
-$_lang['setting_feed_modx_security'] = 'URL du flux des bulletins de sécurité de MODx';
-$_lang['setting_feed_modx_security_desc'] = 'Défini l\'URL du panneau de flux des bulletins de sécurité de MODx dans le manager.';
+$_lang['setting_feed_modx_security'] = 'URL du flux des bulletins de sécurité de MODX';
+$_lang['setting_feed_modx_security_desc'] = 'Défini l\'URL du panneau de flux des bulletins de sécurité de MODX dans le manager.';
 
-$_lang['setting_feed_modx_security_enabled'] = 'Activer le flux RSS des informations de Sécurité MODx';
-$_lang['setting_feed_modx_security_enabled_desc'] = 'Si \'Non\' est sélectionné, MODx mettra en cache le flux de sécurité de la page d\'accueil du manager.';
+$_lang['setting_feed_modx_security_enabled'] = 'Activer le flux RSS des informations de Sécurité MODX';
+$_lang['setting_feed_modx_security_enabled_desc'] = 'Si \'Non\' est sélectionné, MODX mettra en cache le flux de sécurité de la page d\'accueil du manager.';
 
 $_lang['setting_filemanager_path'] = 'Chemin du gestionnaire de fichier';
 $_lang['setting_filemanager_path_desc'] = 'Souvent, IIS ne détermine pas correctement l\'option document_root, qui est utilisé par le gestionnaire de fichier pour déterminer ce que vous pouver explorer. Si vous avez des problèmes en utilisant le gestionnaire de fichier, assurez-vous que ce chemin pointe vers la racine de votre installation MODX.';
@@ -224,13 +227,13 @@ $_lang['setting_filemanager_path_relative'] = 'Le chemin vers le gestionnaire de
 $_lang['setting_filemanager_path_relative_desc'] = 'Si votre paramètre filemanager_path est relatif à base_path, veuillez sélectionner Oui. Si votre paramètre filemanager_path est en dehors du docroot, veuillez sélectionner non.';
 
 $_lang['setting_filemanager_url'] = 'Adresse du gestionnaire de fichier';
-$_lang['setting_filemanager_url_desc'] = 'Optionel. Définissez ce paramètre pour utiliser une URL spécifique afin d\'accèder aux fichiers depuis le gestionnaire de fichier de MODx (utile si vous avez changé filemanager_path pour un répertoire en dehors de la racine web de MODx). Assurez-vous que ce paramètre soit l\'URL du paramètre filemanager_path. Laissez vide pour que MODx essaie de déterminer ce paramètre.';
+$_lang['setting_filemanager_url_desc'] = 'Optionel. Définissez ce paramètre pour utiliser une URL spécifique afin d\'accèder aux fichiers depuis le gestionnaire de fichier de MODX (utile si vous avez changé filemanager_path pour un répertoire en dehors de la racine web de MODX). Assurez-vous que ce paramètre soit l\'URL du paramètre filemanager_path. Laissez vide pour que MODX essaie de déterminer ce paramètre.';
 
 $_lang['setting_filemanager_url_relative'] = 'URL du gestionnaire de ficher relative?';
 $_lang['setting_filemanager_url_relative_desc'] = 'Si votre paramètre filemanager_url est relatif à base_url, veuillez alors sélectionner oui. Si votre paramètre filemanager_url est en dehors de la racine web, sélectionnez non.';
 
 $_lang['setting_forgot_login_email'] = 'Forgot Login Email';
-$_lang['setting_forgot_login_email_desc'] = 'Le modèle de l\'email qui est envoyé quand un utilisateur a oublié ses identifiants et/ou mot de passe de MODx.';
+$_lang['setting_forgot_login_email_desc'] = 'Le modèle de l\'email qui est envoyé quand un utilisateur a oublié ses identifiants et/ou mot de passe de MODX.';
 
 $_lang['setting_forward_merge_excludes'] = 'Faire suivre exclue les champs "fusionnés"';
 $_lang['setting_forward_merge_excludes_desc'] = 'Un lien symbolique qui fusionne les valeurs des champs non vides vers les valeurs de la ressource cible; utiliser une liste "d\'exclusions", séparées par des virgules, évite que les champs indiqués soient écrasés par le lien symbolique.';
@@ -262,9 +265,6 @@ $_lang['setting_friendly_alias_translit_class_path_desc'] = 'The model package l
 $_lang['setting_friendly_alias_trim_chars'] = 'Caractères de bord';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Les caractères à supprimer de la fin des alias de ressource fournis.';
 
-$_lang['setting_friendly_alias_urls'] = 'Utiliser les URLs simples';
-$_lang['setting_friendly_alias_urls_desc'] = 'Si vous utilisez les URLs simples et que la ressource a un alias, l\'alias sera prioritaire face aux URLs simples. En mettant cette option à \'Oui\', le suffix de type de contenu de la ressource sera également appliqué à l\'alias. Par exemple, si la ressource ayant pour ID 1 a un alias `introduction`, et que vous avez défini le suffixe de type de contenu à `.html`, mettre cette option à `oui` génèrera `introduction.html`. S\'il n\'y a pas d\'alias, MODx génèrera `1.html` en lien.';
-
 $_lang['setting_friendly_alias_word_delimiter'] = 'Séparateur de mot';
 $_lang['setting_friendly_alias_word_delimiter_desc'] = 'Le séparateur de mot préféré pour les alias d\'URL simples.';
 
@@ -272,11 +272,17 @@ $_lang['setting_friendly_alias_word_delimiters'] = 'Séparateurs de mot';
 $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Les séparateurs de mot préférés pour les alias d\'URL simples. Ces caractères seront convertis et unifiés pour les alias d\'URL simples.';
 
 $_lang['setting_friendly_urls'] = 'Utiliser les URLs simples';
-$_lang['setting_friendly_urls_desc'] = 'Ceci vous autorise à utiliser les URLs simple (pour les moteurs de recherche). Veuillez noter que cette option ne fonctionne que pour les installations MODx tournant avec Apache et que vous aurez besoin d\'écrire un fichier .htaccess pour que cela fonctionne. Regardez le fichier .htaccess inclu dans la distribution pour plus d\'informations.';
-$_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
+$_lang['setting_friendly_urls_desc'] = 'Ceci vous autorise à utiliser les URLs simple (pour les moteurs de recherche). Veuillez noter que cette option ne fonctionne que pour les installations MODX tournant avec Apache et que vous aurez besoin d\'écrire un fichier .htaccess pour que cela fonctionne. Regardez le fichier .htaccess inclu dans la distribution pour plus d\'informations.';
+$_lang['setting_friendly_urls_err'] = 'Veuillez indiquer si vous souhaitez utiliser les URLs simples';
+
+$_lang['setting_global_duplicate_uri_check'] = 'Vérifier les URIs identiques dans tous les contextes';
+$_lang['setting_global_duplicate_uri_check_desc'] = 'Sélectionnez \'Oui\' pour vérifier l\'existance de doublons d\'URI dans tous les contextes. Sinon, seul le contexte dans lequel la ressource est enregistrée est vérifié.';
 
 $_lang['setting_hidemenu_default'] = 'Ne pas afficher dans les menus par défaut';
 $_lang['setting_hidemenu_default_desc'] = 'Choisissez \'oui\' pour que toutes les nouvelles ressources soient cachées des menus par défaut.';
+
+$_lang['setting_link_tag_scheme'] = 'Schéma de génération d\'URL';
+$_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération d\'URL pour le tag [[~id]]. Options disponibles: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
 
 $_lang['setting_mail_charset'] = 'Charset Mail';
 $_lang['setting_mail_charset_desc'] = 'Le charset (par défaut défaut) pour les emails, par ex. \'iso-8859-1\' ou \'UTF-8\'';
@@ -285,7 +291,7 @@ $_lang['setting_mail_encoding'] = 'Encodage Mail';
 $_lang['setting_mail_encoding_desc'] = 'Défini l\'encodage du message. Les choix sont "8bit", "7bit", "binary", "base64", et "quoted-printable".';
 
 $_lang['setting_mail_use_smtp'] = 'Utiliser un SMTP';
-$_lang['setting_mail_use_smtp_desc'] = 'Si activé, MODx essaiera d\'utiliser le SMTP pour les fonctions mail.';
+$_lang['setting_mail_use_smtp_desc'] = 'Si activé, MODX essaiera d\'utiliser le SMTP pour les fonctions mail.';
 
 $_lang['setting_mail_smtp_auth'] = 'Identification SMTP';
 $_lang['setting_mail_smtp_auth_desc'] = 'Défini l\'identification SMTP. Utilise les options mail_smtp_user et mail_smtp_password.';
@@ -323,11 +329,14 @@ $_lang['setting_manager_direction_desc'] = 'Choisissez l\'orientation dans laque
 $_lang['setting_manager_date_format'] = 'Format de date du manager';
 $_lang['setting_manager_date_format_desc'] = 'Le format de chaine de caratères, au format PHP date(), pour les dates représentées dans le manager.';
 
+$_lang['setting_manager_favicon_url'] = 'URL de favicon du manager';
+$_lang['setting_manager_favicon_url_desc'] = 'Utilise le favicon indiqué pour le manager de MODX. Doit être relatif au répertoire manager/ ou une URL absolue.';
+
 $_lang['setting_manager_lang_attribute'] = 'Attributs HTML et XML du manager';
 $_lang['setting_manager_lang_attribute_desc'] = 'Entrez le code de langue qui correspond au mieux à la langue choisie pour votre manager, ceci assurera que le navigateur puisse afficher le contenu de la meilleur façon possible pour vous.';
 
 $_lang['setting_manager_language'] = 'Langue du manager';
-$_lang['setting_manager_language_desc'] = 'Sélectionnez la langue pour le gestionnaire de contenu de MODx.';
+$_lang['setting_manager_language_desc'] = 'Sélectionnez la langue pour le gestionnaire de contenu de MODX.';
 
 $_lang['setting_manager_login_start'] = 'Démarrage après identification au manager';
 $_lang['setting_manager_login_start_desc'] = 'Entrez l\'ID du document vers lequel vous souhaitez envoyer un utilisateur après sa connexion au manager. <strong>NOTE: assurez-vous que l\'ID que vous avez entré appartient à un document existant, publié et accessible par cet utilisateur!</strong>';
@@ -345,7 +354,7 @@ $_lang['setting_modRequest.class'] = 'Classe de prise en charge de requête';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_charset'] = 'Encodage de caractère';
-$_lang['setting_modx_charset_desc'] = 'Veuillez indiquer quel encodage de caractère vous souhaitez utiliser. Veuillez noter que MODx a été testé certains encodages mais pas tous. Pour la plupart des langues, l\'option par défaut UTF-8 est préférable.';
+$_lang['setting_modx_charset_desc'] = 'Veuillez indiquer quel encodage de caractère vous souhaitez utiliser. Veuillez noter que MODX a été testé certains encodages mais pas tous. Pour la plupart des langues, l\'option par défaut UTF-8 est préférable.';
 
 $_lang['setting_new_file_permissions'] = 'Permissions des nouveaux fichiers';
 $_lang['setting_new_file_permissions_desc'] = 'Lorsque vous uploadez un nouveau fichier dans le gestionnaire de fichier, celui-ci essaiera de changer les permissions du fichier à celles définies dans cette option. Il se peut que cela ne fonctionne pas sur certaines configurations, telles qu\'avec IIS, dans quel cas vous devrez changer manuellement les permissions.';
@@ -355,6 +364,27 @@ $_lang['setting_new_folder_permissions_desc'] = 'Lorsque vous créez un nouveau 
 
 $_lang['setting_password_generated_length'] = 'Longueur des mots de passe générés automatiquement';
 $_lang['setting_password_generated_length_desc'] = 'La longueur des mots de passe utilisateur générés automatiquement.';
+
+$_lang['setting_password_min_length'] = 'Longueur minimale du mot de passe';
+$_lang['setting_password_min_length_desc'] = 'Longueur minimale du mot de passe des utilisateurs.';
+
+$_lang['setting_principal_targets'] = 'ACL à charger';
+$_lang['setting_principal_targets_desc'] = 'Personnalise les ACL à charger pour les utilisateur MODX.';
+
+$_lang['setting_proxy_auth_type'] = 'Type d\'identification du proxy';
+$_lang['setting_proxy_auth_type_desc'] = 'Supporte soit BASIC ou NTLM.';
+
+$_lang['setting_proxy_host'] = 'Hôte du proxy';
+$_lang['setting_proxy_host_desc'] = 'Si votre serveur utilise un proxy, indiquez ici son nom de domaine pour activer les fonctions de MODX qui peuvent utiliser le serveur proxy, comme le gestionnaire de package.';
+
+$_lang['setting_proxy_password'] = 'Mot de passe du proxy';
+$_lang['setting_proxy_password_desc'] = 'Le mot de passe nécessaire pour vous identifier sur votre serveur proxy.';
+
+$_lang['setting_proxy_port'] = 'Port du Proxy';
+$_lang['setting_proxy_port_desc'] = 'Port de votre serveur proxy.';
+
+$_lang['setting_proxy_username'] = 'Nom d\'utilisateur du Proxy';
+$_lang['setting_proxy_username_desc'] = 'Le nom d\'utilisateur pour vous identifier sur votre serveur proxy.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb autorise des sources en dehors de la racine web';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indique si le chemin source peut être en dehors de la racine web. Ce paramètre est utile pour déployer des contextes multiples avec plusieurs virtuals hosts.';
@@ -371,6 +401,9 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Supprime les vignettes les plu
 $_lang['setting_phpthumb_cache_source_enabled'] = 'Mettre en cache les fichiers sources';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Choisissez de mettre en cache ou pas les fichiers sources quand ils sont chargés. Désactiver cette option est recommandé.';
 
+$_lang['setting_phpthumb_document_root'] = 'Répertoire racine pour PHPThumb';
+$_lang['setting_phpthumb_document_root_desc'] = 'Utilisez ceci si vous rencontrez des problèmes avec la variable serveur DOCUMENT_ROOT, ou si vous obtenez des erreurs avec OutputThumbnail ou !is_resource. Indiquez le chemin absolu du répertoire racine que vous souhaitez utiliser. Si ce champs reste vide, MODX utilisera la variable de serveur DOCUMENT_ROOT.';
+
 $_lang['setting_phpthumb_error_bgcolor'] = 'Couleur de fond d\'erreur phpThumb';
 $_lang['setting_phpthumb_error_bgcolor_desc'] = 'Valeure hexadecimale, sans le #, indiquant une couleur de fond pour les erreurs de rendu.';
 
@@ -381,7 +414,7 @@ $_lang['setting_phpthumb_error_textcolor'] = 'Couleur de police d\'erreur phpThu
 $_lang['setting_phpthumb_error_textcolor_desc'] = 'Valeure hexadecimale, sans le #, indiquant une couleur de police pour le texte apparaissant dans les erreurs de rendu.';
 
 $_lang['setting_phpthumb_far'] = 'Forcer l\'aspect-ratio de phpThumb';
-$_lang['setting_phpthumb_far_desc'] = 'Les options par défaut d\'éloignement lorsque phpThumb est utilisé avec MODx. « C » par défaut pour forcer l\'aspect-ratio vers le centre.';
+$_lang['setting_phpthumb_far_desc'] = 'Les options par défaut d\'éloignement lorsque phpThumb est utilisé avec MODX. « C » par défaut pour forcer l\'aspect-ratio vers le centre.';
 
 $_lang['setting_phpthumb_imagemagick_path'] = 'Chemin ImageMagick pour phpThumb';
 $_lang['setting_phpthumb_imagemagick_path_desc'] = 'Optionnel. Définissez le chemin d\'un alternatif à ImageMagick pour générer des miniatures avec phpThumb, si ce n\'est déjà défini dans PHP.';
@@ -417,41 +450,23 @@ $_lang['setting_phpthumb_nooffsitelink_watermark_src'] = 'phpThumb lien offsite,
 $_lang['setting_phpthumb_nooffsitelink_watermark_src_desc'] = 'Optionnel. Un chemin (système) valide vers un fichier à utiliser en tant que filigrane quand vos images sont affichées offsite par phpThumb.';
 
 $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb zoom-recadrage';
-$_lang['setting_phpthumb_zoomcrop_desc'] = 'Les options zc par défaut lorsque phpThumb est utilisé dans MODx. « 0 » par défaut pour éviter le zoom et le recadrage.';
-
-$_lang['setting_proxy_auth_type'] = 'Type d\'identification du proxy';
-$_lang['setting_proxy_auth_type_desc'] = 'Supporte soit BASIC ou NTLM.';
-
-$_lang['setting_proxy_host'] = 'Hôte du proxy';
-$_lang['setting_proxy_host_desc'] = 'Si votre serveur utilise un proxy, indiquez ici son nom de domaine pour activer les fonctions de MODx qui peuvent utiliser le serveur proxy, comme le gestionnaire de package.';
-
-$_lang['setting_proxy_password'] = 'Mot de passe du proxy';
-$_lang['setting_proxy_password_desc'] = 'Le mot de passe nécessaire pour vous identifier sur votre serveur proxy.';
-
-$_lang['setting_proxy_port'] = 'Port du Proxy';
-$_lang['setting_proxy_port_desc'] = 'Port de votre serveur proxy.';
-
-$_lang['setting_proxy_username'] = 'Nom d\'utilisateur du Proxy';
-$_lang['setting_proxy_username_desc'] = 'Le nom d\'utilisateur pour vous identifier sur votre serveur proxy.';
-
-$_lang['setting_password_min_length'] = 'Longueur minimale du mot de passe';
-$_lang['setting_password_min_length_desc'] = 'Longueur minimale du mot de passe des utilisateurs.';
+$_lang['setting_phpthumb_zoomcrop_desc'] = 'Les options zc par défaut lorsque phpThumb est utilisé dans MODX. « 0 » par défaut pour éviter le zoom et le recadrage.';
 
 $_lang['setting_publish_default'] = 'Publié par défaut';
 $_lang['setting_publish_default_desc'] = 'Sélectionnez \'Oui\' pour définir les nouvelles ressources comme publiées par défaut.';
 $_lang['setting_publish_default_err'] = 'Veuillez indiquer si vous désirez ou non que vos documents soient publiés apr défaut.';
 
 $_lang['setting_rb_base_dir'] = 'Chemin des ressources';
-$_lang['setting_rb_base_dir_desc'] = 'Entrez le chemin physique du navigateur de ressource. Cette option est généralement générée automatique. Cependant, si vous utilisez IIS, MODx peut ne pas trouver le chemin d\'accès par lui même, entrainant un message d\'erreur dans la navigateur de ressource. Dans ce cas, veuillez entrer le chemin d\'accès du répertoire d\'images (comme vous le verriez dans l\'explorateur Windows). <strong>NOTE:</strong> Le répertoire de ressource doit contenir les sous-répertoires images, files, flash et media afin que le navigateur de ressource fonctionne correctement.';
+$_lang['setting_rb_base_dir_desc'] = 'Entrez le chemin physique du navigateur de ressource. Cette option est généralement générée automatique. Cependant, si vous utilisez IIS, MODX peut ne pas trouver le chemin d\'accès par lui même, entrainant un message d\'erreur dans la navigateur de ressource. Dans ce cas, veuillez entrer le chemin d\'accès du répertoire d\'images (comme vous le verriez dans l\'explorateur Windows). <strong>NOTE:</strong> Le répertoire de ressource doit contenir les sous-répertoires images, files, flash et media afin que le navigateur de ressource fonctionne correctement.';
 $_lang['setting_rb_base_dir_err'] = 'Veuillez indiquer le répertoire de base du navigateur de ressource.';
 $_lang['setting_rb_base_dir_err_invalid'] = 'soit ce répertoire de ressource n\'existe pas, soit il ne peut être accédé. Veuillez indiquer un répertoire valide ou ajuster les droits d\'accès de ce répertoire.';
 
 $_lang['setting_rb_base_url'] = 'URL des ressources';
-$_lang['setting_rb_base_url_desc'] = 'Entrez le chemin virtuel d\'accès au répertoire des ressources. Cette option est en générale définie automatiquement. Cependant, si vous utilisez IIS, MODx peut ne pas trouver l\'URL par lui même, entrainant un message d\'erreur dans le navigateur de ressource. Dans ce cas, vous pouvez entrez l\'URL du répertoire d\'images (l\'URL telle que vous la rentreriez dans Internet Explorer).';
+$_lang['setting_rb_base_url_desc'] = 'Entrez le chemin virtuel d\'accès au répertoire des ressources. Cette option est en générale définie automatiquement. Cependant, si vous utilisez IIS, MODX peut ne pas trouver l\'URL par lui même, entrainant un message d\'erreur dans le navigateur de ressource. Dans ce cas, vous pouvez entrez l\'URL du répertoire d\'images (l\'URL telle que vous la rentreriez dans Internet Explorer).';
 $_lang['setting_rb_base_url_err'] = 'Veuillez indiquer l\'URL de base du navigateur de ressource.';
 
 $_lang['setting_request_controller'] = 'Nom de fichier du contrôleur de requête';
-$_lang['setting_request_controller_desc'] = 'Le nom de fichier du contrôleur principale de requête par lequel MODx est chargé. La plupart des utilisateurs peuvent laisser index.php.';
+$_lang['setting_request_controller_desc'] = 'Le nom de fichier du contrôleur principale de requête par lequel MODX est chargé. La plupart des utilisateurs peuvent laisser index.php.';
 
 $_lang['setting_request_param_alias'] = 'Paramètre de requête d\'alias';
 $_lang['setting_request_param_alias_desc'] = 'Nom du paramètre GET pour identifier les alias des ressources quand les FURLs sont utilisées.';
@@ -460,10 +475,13 @@ $_lang['setting_request_param_id'] = 'Paramètre de requête ID';
 $_lang['setting_request_param_id_desc'] = 'Nom du paramètre GET pour identifier les IDs des ressources quand les FURLs ne sont pas utilisées.';
 
 $_lang['setting_resolve_hostnames'] = 'Résolution des noms de domaines';
-$_lang['setting_resolve_hostnames_desc'] = 'Souhaitez-vous que MODx essai de résoudre les noms de domaines de vos visiteurs quand ils visitent votre site? Résoudre les noms de domaines peut créer une charge supplémentaire du serveur, mais vos visiteurs ne le ressentiront pas.';
+$_lang['setting_resolve_hostnames_desc'] = 'Souhaitez-vous que MODX essai de résoudre les noms de domaines de vos visiteurs quand ils visitent votre site? Résoudre les noms de domaines peut créer une charge supplémentaire du serveur, mais vos visiteurs ne le ressentiront pas.';
 
 $_lang['setting_resource_tree_node_name'] = 'Resource Tree Node Field';
 $_lang['setting_resource_tree_node_name_desc'] = 'Indiquez le champ de ressource à utiliser lors de l\'affichage des nodes dans l\'arborescence. Pagetitle par défaut, mais n\'importe quel champ de ressource peut être utilisé, tels que menutitle, alias, longtitle, etc.';
+
+$_lang['setting_resource_tree_node_tooltip'] = 'Champs des infos-bulles de ressource';
+$_lang['setting_resource_tree_node_tooltip_desc'] = 'Indiquez le champs de ressource à utiliser lors de l\'affichage des nodes de l\'arborescence de ressources. Tous les champs de ressource peuvent être utilisés, tels que menutitle, alias, longtitle, etc. Si ce champs reste vide, le champs longtitle sera utilisé ainsi que description en dessous.';
 
 $_lang['setting_richtext_default'] = 'Richtext Default';
 $_lang['setting_richtext_default_desc'] = 'Sélectionnez \'Oui\' pour définir les nouvelles ressources comme utilisant un éditeur riche de texte par défaut.';
@@ -497,19 +515,19 @@ $_lang['setting_session_handler_class'] = 'Nom de classe de prise en charge des 
 $_lang['setting_session_handler_class_desc'] = 'Pour les sessions de base de données gérées, utilisez \'modSessionHandler\'.  Laissez vide pour utiliser la gestion des sessions standard avec PHP.';
 
 $_lang['setting_session_name'] = 'Nom de Session';
-$_lang['setting_session_name_desc'] = 'Utilisez ces options pour personnaliser les noms de sessions utilisées dans MODx.';
+$_lang['setting_session_name_desc'] = 'Utilisez ces options pour personnaliser les noms de sessions utilisées dans MODX.';
 
 $_lang['setting_settings_version'] = 'Options de Version';
-$_lang['setting_settings_version_desc'] = 'Version installée de MODx.';
+$_lang['setting_settings_version_desc'] = 'Version installée de MODX.';
 
 $_lang['setting_settings_distro'] = 'Paramètres de distribution';
-$_lang['setting_settings_distro_desc'] = 'Distribution de MODx actuellement installée.';
+$_lang['setting_settings_distro_desc'] = 'Distribution de MODX actuellement installée.';
 
 $_lang['setting_set_header'] = 'Activer les entêtes HTTP';
-$_lang['setting_set_header_desc'] = 'Activé, MODx essai de définir les entêtes HTTP pour les ressources.';
+$_lang['setting_set_header_desc'] = 'Activé, MODX essai de définir les entêtes HTTP pour les ressources.';
 
 $_lang['setting_signupemail_message'] = 'E-mail d\'inscription';
-$_lang['setting_signupemail_message_desc'] = 'Ici vous pouvez définir le message envoyé à vos utilisateurs lorsque vous leur créer un compte et laissez MODx leur envoyer un email contenant leur nom d\'utilisateur et leur mot de passe. <br /><strong>Note:</strong> Les placeholders suivants sont remplacés par le gestionnaire de contenu lors de l\'envoi du message: <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Adresse email de votre site internet, <br />[[+surl]] - URL de votre site, <br />[[+uid]] - Identifiant ou id d\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'email ou le nom d\'utilisateur et le mot de passe ne seront pas envoyés par email et vos utilisateurs ne pourront se connecter!</strong>';
+$_lang['setting_signupemail_message_desc'] = 'Ici vous pouvez définir le message envoyé à vos utilisateurs lorsque vous leur créer un compte et laissez MODX leur envoyer un email contenant leur nom d\'utilisateur et leur mot de passe. <br /><strong>Note:</strong> Les placeholders suivants sont remplacés par le gestionnaire de contenu lors de l\'envoi du message: <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Adresse email de votre site internet, <br />[[+surl]] - URL de votre site, <br />[[+uid]] - Identifiant ou id d\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'email ou le nom d\'utilisateur et le mot de passe ne seront pas envoyés par email et vos utilisateurs ne pourront se connecter!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Bonjour [[+uid]] \n\nVoici vos informations de connexion au gestionnaire de contenu pour [[+sname]] :\n\nNom d\'utilisateur: [[+uid]]\nMot de passe: [[+pwd]]\n\nUne fois connecté au gestionnaire de contenu ([[+surl]]), vous pouvez changer votre mot de passe.\n\nCordialement,\nl\'administrateur du site';
 
 $_lang['setting_site_name'] = 'Nom du site';
@@ -532,10 +550,13 @@ $_lang['setting_site_unavailable_page_desc'] = 'Entrez l\'ID de la ressource que
 $_lang['setting_site_unavailable_page_err'] = 'Veuillez indiquer l\'ID du document pour la page site indisponible.';
 
 $_lang['setting_strip_image_paths'] = 'Réécrire les chemins du navigateur?';
-$_lang['setting_strip_image_paths_desc'] = 'Sélectionnez \'Non\' pour que MODx écrive les src (images, fichiers, flash, etc.) des fichiers ressources en URL absolues. Les URL relatives sont utiles si vous souhaitez déplacer votre installation MODx, par exemple, depuis un site en temporaire vers un site en production. Si vous ne savez pas ce que cela signifie, il est préférable de laisser \'oui\'.';
+$_lang['setting_strip_image_paths_desc'] = 'Sélectionnez \'Non\' pour que MODX écrive les src (images, fichiers, flash, etc.) des fichiers ressources en URL absolues. Les URL relatives sont utiles si vous souhaitez déplacer votre installation MODX, par exemple, depuis un site en temporaire vers un site en production. Si vous ne savez pas ce que cela signifie, il est préférable de laisser \'oui\'.';
+
+$_lang['setting_symlink_merge_fields'] = 'Fusionner les champs de ressource des Symlinks';
+$_lang['setting_symlink_merge_fields_desc'] = 'Activé, cela fusionnera automatiquement les champs non vides avec ceux de la ressource cible, lors de redirections utilisant les Symlinks.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Afficher les description dans la navigation principale';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Sélectionnez non pour que MODx cache les descriptions dans la navigation principale du manager.';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Sélectionnez non pour que MODX cache les descriptions dans la navigation principale du manager.';
 
 $_lang['setting_tree_default_sort'] = 'Champ de classement de l\'arborescence';
 $_lang['setting_tree_default_sort_desc'] = 'Le champ par défaut utilisé pour classer les ressources dans l\'arborescence lors du chargement du manager.';
@@ -577,7 +598,7 @@ $_lang['setting_use_editor_desc'] = 'Voulez-vous activer l\'éditeur de texte ri
 $_lang['setting_use_editor_err'] = 'Veuillez indiquer si vous désirez ou non utiliser un RTE.';
 
 $_lang['setting_use_multibyte'] = 'Utiliser l\'extenssion Multibyte';
-$_lang['setting_use_multibyte_desc'] = 'Mettre à oui si vous désirez utilisez l\'extenssion mbstring pour les caractères multibyte dans votre installation de MODx. À n\'activer que si l\'extenssion mbstring est installée.';
+$_lang['setting_use_multibyte_desc'] = 'Mettre à oui si vous désirez utilisez l\'extenssion mbstring pour les caractères multibyte dans votre installation de MODX. À n\'activer que si l\'extenssion mbstring est installée.';
 
 $_lang['setting_webpwdreminder_message'] = 'Email de rappel web';
 $_lang['setting_webpwdreminder_message_desc'] = 'Entrez un message qui sera envoyé aux utilisateurs web lorsqu\'ils demanderont un nouveau mot de passe par email. Le gestionnaire de contenu envera un email contenant leur nouveau mot de passe et les informations d\'activation. <br /><strong>Note:</strong> Les placeholders sont remplacés par le gestionnaire de contenu lors de l\'envoi du message : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Addresse email du site web, <br />[[+surl]] - URL du site web, <br />[[+uid]] - Identifiant ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail ou l\'itendifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter!</strong>';
@@ -591,7 +612,7 @@ $_lang['setting_welcome_screen'] = 'Afficher l\'écran de bienvenue';
 $_lang['setting_welcome_screen_desc'] = 'Coché, la page de bienvenue sera affichée au prochain chargement de la page et ne s\'affichera plus par la suite.';
 
 $_lang['setting_welcome_screen_url'] = 'URL d\'écran de bienvenue';
-$_lang['setting_welcome_screen_url_desc'] = 'URL pour l\'écran de bienvenue qui s\'affiche lors du premier chargement de MODx Revolution.';
+$_lang['setting_welcome_screen_url_desc'] = 'URL pour l\'écran de bienvenue qui s\'affiche lors du premier chargement de MODX Revolution.';
 
 $_lang['setting_which_editor'] = 'Éditeur à utiliser';
 $_lang['setting_which_editor_desc'] = 'Ici vous pouvez choisir quel RTE vous souhaitez utiliser. Vous pouvez télécharger et installer d\'autres RTE depuis la page de téléchargement de MODX.';
@@ -600,5 +621,5 @@ $_lang['setting_which_element_editor'] = 'Éditeur à utiliser pour les élémen
 $_lang['setting_which_element_editor_desc'] = 'Vous pouvez indiquer ici quel éditeur de texte riche vous souhaitez utiliser pour éditer les éléments. Vous pouvez télécharger et installer des éditeurs additionnels depuis le gestionnaire de package.';
 
 $_lang['setting_xhtml_urls'] = 'XHTML URLs';
-$_lang['setting_xhtml_urls_desc'] = 'Toutes les URLs générées par MODx seront XHTML-compliant, inclu l\'encoding du caractère ampersand.';
+$_lang['setting_xhtml_urls_desc'] = 'Toutes les URLs générées par MODX seront XHTML-compliant, inclu l\'encoding du caractère ampersand.';
 

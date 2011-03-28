@@ -23,9 +23,13 @@ if (!empty($wctx)) {
 } else {
     $workingContext =& $modx->context;
 }
+$root = $modx->getBasePath(false);
+if ($workingContext->getOption('filemanager_path_relative',true)) {
+    $root = $workingContext->getOption('base_path','').$root;
+}
 
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
-$file = $modx->fileHandler->make($filename);
+$file = $modx->fileHandler->make($root.$filename);
 
 if (!$file->exists()) return $modx->error->failure($modx->lexicon('file_err_nf'));
 if (!$file->isReadable()) {

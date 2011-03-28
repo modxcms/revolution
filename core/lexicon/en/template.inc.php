@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access'] = 'Access';
+$_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'Rank';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Assigned Template Variables';
@@ -16,7 +17,7 @@ $_lang['template_delete_confirm'] = 'Are you sure you want to delete this templa
 $_lang['template_duplicate_confirm'] = 'Are you sure you want to duplicate this template?';
 $_lang['template_edit_tab'] = 'Edit Template';
 $_lang['template_empty'] = '(empty)';
-$_lang['template_err_default_template'] = 'This template is set as the default template. Please choose a different default template in the MODx configuration before deleting this template.<br />';
+$_lang['template_err_default_template'] = 'This template is set as the default template. Please choose a different default template in the MODX configuration before deleting this template.<br />';
 $_lang['template_err_delete'] = 'An error occurred while deleting the template.';
 $_lang['template_err_duplicate'] = 'An error occured while duplicating the template.';
 $_lang['template_err_exists_name'] = 'A template already exists with the name "[[+name]]".';

@@ -6,7 +6,7 @@
  */
 require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
 /**
- * Encapsulates an HTTP response from the MODx manager.
+ * Encapsulates an HTTP response from the MODX manager.
  *
  * {@inheritdoc}
  *
@@ -29,7 +29,7 @@ class modManagerResponse extends modResponse {
         if (!isset($this->modx->request) || !isset($this->modx->request->action)) {
             $this->body = $this->modx->error->failure($modx->lexicon('action_err_ns'));
         } else {
-            $action =& $this->modx->request->action;
+            $action =& intval($this->modx->request->action);
         }
 
         $theme = $this->modx->getOption('manager_theme',null,'default');
@@ -85,6 +85,9 @@ class modManagerResponse extends modResponse {
                     $cbody = 'Could not find action file at: '.$f;
                 }
 
+                if (!empty($this->ruleOutput)) {
+                    $this->modx->regClientStartupHTMLBlock($this->ruleOutput);
+                }
                 $this->registerCssJs();
 
                 /* reset path to core modx path for header/footer */
@@ -148,14 +151,14 @@ class modManagerResponse extends modResponse {
         
         $userGroups = $this->modx->user->getUserGroups();
         $c = $this->modx->newQuery('modActionDom');
-        $c->innerJoin('modFormCustomizationSet','Set');
-        $c->innerJoin('modFormCustomizationProfile','Profile','Set.profile = Profile.id');
+        $c->innerJoin('modFormCustomizationSet','FCSet');
+        $c->innerJoin('modFormCustomizationProfile','Profile','FCSet.profile = Profile.id');
         $c->leftJoin('modFormCustomizationProfileUserGroup','ProfileUserGroup','Profile.id = ProfileUserGroup.profile');
         $c->leftJoin('modFormCustomizationProfile','UGProfile','UGProfile.id = ProfileUserGroup.profile');
         $c->where(array(
             'modActionDom.action' => $this->action['id'],
             'modActionDom.for_parent' => $forParent,
-            'Set.active' => true,
+            'FCSet.active' => true,
             'Profile.active' => true,
         ));
         $c->where(array(
@@ -168,38 +171,16 @@ class modManagerResponse extends modResponse {
             ),
             'OR:ProfileUserGroup.usergroup:=' => null,
         ),xPDOQuery::SQL_AND,null,2);
-        $c->select(array(
-            'modActionDom.*',
-            'Set.constraint_class',
-            'Set.constraint_field',
-            'Set.constraint',
-            'Set.template',
-        ));
-        /* sort by template to get template default value first
-         * TODO: eventually add rank to Sets to allow more fine-grained control
-         */
-        $c->sortby('Set.template','ASC');
+        $c->select($this->modx->getSelectColumns('modActionDom', 'modActionDom'));
+        $c->select($this->modx->getSelectColumns('modFormCustomizationSet', 'FCSet', '', array(
+            'constraint_class',
+            'constraint_field',
+            'constraint',
+            'template'
+        )));
         $c->sortby('modActionDom.rank','ASC');
         $domRules = $this->modx->getCollection('modActionDom',$c);
         $rules = array();
-
-        /* grab parents of current obj */
-        if ($obj) {
-            $rCtx = $obj->get('context_key');
-            $oCtx = $this->modx->context->get('key');
-            if (!empty($rCtx) && $rCtx != 'mgr') {
-                $this->modx->switchContext($rCtx);
-            }
-            $parents = $this->modx->getParentIds($obj->get('id'));
-            /* if on resource/create, set obj id to parent as well */
-            if ($forParent) {
-                $parents[] = $obj->get('id');
-            }
-            if (!empty($rCtx)) {
-                $this->modx->switchContext($oCtx);
-            }
-        }
-
         foreach ($domRules as $rule) {
             $template = $rule->get('template');
             if (!empty($template)) {
@@ -210,16 +191,8 @@ class modManagerResponse extends modResponse {
                 if (empty($obj) || !($obj instanceof $constraintClass)) continue;
                 $constraintField = $rule->get('constraint_field');
                 $constraint = $rule->get('constraint');
-
-                /* if checking a parent, get all parents up the tree */
-                if (($forParent && $constraintField == 'id') || $constraintField == 'parent') {
-                    if (!in_array($constraint,$parents)) {
-                        continue;
-                    }
-                } else { /* otherwise just check constraint */
-                    if ($obj->get($constraintField) != $constraint) {
-                        continue;
-                    }
+                if ($obj->get($constraintField) != $constraint) {
+                    continue;
                 }
             }
             if ($rule->get('rule') == 'fieldDefault') {
@@ -230,12 +203,9 @@ class modManagerResponse extends modResponse {
             $r = $rule->apply();
             if (!empty($r)) $rules[] = $r;
         }
-        $ruleOutput = '';
+        $this->ruleOutput = '';
         if (!empty($rules)) {
-            $ruleOutput .= '<script type="text/javascript">MODx.on("ready",function() {';
-            $ruleOutput .= implode("\n",$rules);
-            $ruleOutput .= '});</script>';
-            $this->modx->regClientStartupHTMLBlock($ruleOutput);
+            $this->ruleOutput .= '<script type="text/javascript">Ext.onReady(function() {'.implode("\n",$rules).'});</script>';
         }
         return $overridden;
     }

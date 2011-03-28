@@ -2,12 +2,14 @@
 /**
  * @package modx
  * @subpackage lexicon
-
+ *
  * @language de
  * @namespace core
  * @topic permissions
+ *
+ * MODX Revolution translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
-$_lang['perm.about_desc'] = 'Die Seite "Über MODx" anzeigen.';
+$_lang['perm.about_desc'] = 'Die Seite "Über MODX" anzeigen.';
 $_lang['perm.access_permissions_desc'] = 'Mit Zugriffsrechten zusammenhängende Seiten und Aktionen anzeigen und bearbeiten/benutzen.';
 $_lang['perm.actions_desc'] = 'Die Aktionen-Seite anzeigen und benutzen.';
 $_lang['perm.add_children_desc'] = 'Der angegebenen Ressource Kind-Ressourcen hinzufügen oder Elemente einer Kategorie hinzufügen.';
@@ -67,7 +69,7 @@ $_lang['perm.file_update_desc'] = 'Den Inhalt von Dateien ändern.';
 $_lang['perm.file_upload_desc'] = 'Dateien in ein Verzeichnis hochladen.';
 $_lang['perm.file_view_desc'] = 'Inhalte von Dateien anzeigen.';
 $_lang['perm.flush_sessions_desc'] = 'Sessions Site-übergreifend zurücksetzen.';
-$_lang['perm.frames_desc'] = 'Die MODx-Manager-Oberfläche benutzen.';
+$_lang['perm.frames_desc'] = 'Die MODX-Manager-Oberfläche benutzen.';
 $_lang['perm.help_desc'] = 'Die Hilfe-Seite anzeigen.';
 $_lang['perm.home_desc'] = 'Die Manager-Startseite anzeigen.';
 $_lang['perm.import_static_desc'] = 'Import-Seiten anzeigen oder benutzen.';
@@ -114,10 +116,12 @@ $_lang['perm.save_snippet_desc'] = 'Snippets speichern.';
 $_lang['perm.save_template_desc'] = 'Templates speichern.';
 $_lang['perm.save_tv_desc'] = 'Template-Variablen speichern.';
 $_lang['perm.save_user_desc'] = 'Benutzer speichern.';
-$_lang['perm.search_desc'] = 'Die Suchfunktion des MODx-Managers benutzen.';  // Such-Seite
+$_lang['perm.search_desc'] = 'Die Suchfunktion des MODX-Managers benutzen.';  // Such-Seite
 $_lang['perm.settings_desc'] = 'Systemeinstellungen anzeigen und bearbeiten.';
 $_lang['perm.steal_lock_desc'] = 'Eine Sperre einer Ressource "stehlen" oder entfernen.';
 $_lang['perm.steal_locks_desc'] = 'Sperren "stehlen", indem man eine bestehende Sperre einer Ressource umgeht.';
+$_lang['perm.tree_show_resource_ids_desc'] = 'IDs im Ressourcen-Baum anzeigen.';
+$_lang['perm.tree_show_element_ids_desc'] = 'IDs im Elemente-Baum anzeigen.';
 $_lang['perm.undelete_desc'] = 'Elementare Berechtigung, Objekte "wiederherzustellen".';
 $_lang['perm.undelete_document_desc'] = 'Ressourcen wiederherstellen.';
 $_lang['perm.unlock_element_properties_desc'] = 'Standard-Eigenschaften von Elementen bearbeiten.';

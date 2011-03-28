@@ -8,7 +8,7 @@
  *
  * @uses modRestClient This REST implementation is used to communicate with a
  * remote server that can provide information about and downloads of one or more
- * MODx transport packages.
+ * MODX transport packages.
  */
 class modTransportProvider extends xPDOSimpleObject {
     /**
@@ -43,6 +43,9 @@ class modTransportProvider extends xPDOSimpleObject {
 
         $params = array_merge(array(
             'api_key' => $this->get('api_key'),
+            'username' => $this->get('username'),
+            'uuid' => $this->xpdo->uuid,
+            'database' => $this->xpdo->config['dbtype'],
             'revolution_version' => $productVersion,
         ),$params);
         return $this->xpdo->rest->request($this->get('service_url'),$path,$method,$params);

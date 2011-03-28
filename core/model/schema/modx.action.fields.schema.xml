@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /*
- * MODx CMS and PHP Application Framework ("MODx")
- * Copyright 2006-2010 by the MODx Team.
+ * MODX CMS and PHP Application Framework ("MODX")
+ * Copyright 2006-2011 by MODX, LLC.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -51,6 +51,8 @@
             <field name="content_type" />
             <field name="content_dispo" />
             <field name="class_key" />
+            <field name="uri_override" />
+            <field name="uri" />
         </tab>
         <tab name="modx-panel-resource-tv" other="tv" />
         <tab name="modx-resource-access-permissions" />
@@ -86,6 +88,8 @@
             <field name="content_type" />
             <field name="content_dispo" />
             <field name="class_key" />
+            <field name="uri_override" />
+            <field name="uri" />
         </tab>
         <tab name="modx-panel-resource-tv" other="tv" />
         <tab name="modx-resource-access-permissions" />
