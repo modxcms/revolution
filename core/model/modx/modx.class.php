@@ -2018,22 +2018,22 @@ class modX extends xPDO {
         $targetOptions = array();
         if (is_array($target)) {
             if (isset($target['options'])) $targetOptions = $target['options'];
-            $target = isset($target['target']) ? $target['target'] : 'ECHO';
+            $targetObj = isset($target['target']) ? $target['target'] : 'ECHO';
         }
-        if (is_object($target) && $target instanceof modRegister) {
+        if (is_object($targetObj) && $targetObj instanceof modRegister) {
             if ($level === modX::LOG_LEVEL_FATAL) {
                 if (empty ($file)) $file= (isset ($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : (isset ($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '');
-                $this->_logInRegister($target, $level, $msg, $def, $file, $line);
+                $this->_logInRegister($targetObj, $level, $msg, $def, $file, $line);
                 $this->sendError('fatal');
             }
             if ($this->_debug === true || $level <= $this->logLevel) {
                 if (empty ($file)) $file= (isset ($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : (isset ($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '');
-                $this->_logInRegister($target, $level, $msg, $def, $file, $line);
+                $this->_logInRegister($targetObj, $level, $msg, $def, $file, $line);
             }
         } else {
             if ($level === modX::LOG_LEVEL_FATAL) {
                 while (@ob_end_clean()) {}
-                if ($target == 'FILE' && $cacheManager= $this->getCacheManager()) {
+                if ($targetObj == 'FILE' && $cacheManager= $this->getCacheManager()) {
                     $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
                     $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
                     $cacheManager->writeFile($filepath . $filename, '[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''), 'a');
