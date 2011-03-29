@@ -2016,7 +2016,7 @@ class modX extends xPDO {
             $target = $this->logTarget;
         }
         $targetOptions = array();
-        $targetObj = null;
+        $targetObj = $target;
         if (is_array($target)) {
             if (isset($target['options'])) $targetOptions = $target['options'];
             $targetObj = isset($target['target']) ? $target['target'] : 'ECHO';
@@ -2041,7 +2041,7 @@ class modX extends xPDO {
                 }
                 $this->sendError('fatal');
             }
-            parent :: _log($level, $msg, $target, $def, $file, $line);
+            parent :: _log($level, $msg, $targetObj, $def, $file, $line);
         }
     }
 
