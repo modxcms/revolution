@@ -2016,6 +2016,7 @@ class modX extends xPDO {
             $target = $this->logTarget;
         }
         $targetOptions = array();
+        $targetObj = null;
         if (is_array($target)) {
             if (isset($target['options'])) $targetOptions = $target['options'];
             $targetObj = isset($target['target']) ? $target['target'] : 'ECHO';
