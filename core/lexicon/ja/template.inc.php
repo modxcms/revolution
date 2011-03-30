@@ -10,6 +10,7 @@
  * @author yamamoto http://kyms.jp
  */
 $_lang['access'] = 'アクセス';
+$_lang['filter_by_category'] = 'Filter by Category...';
 $_lang['rank'] = 'ランク';
 $_lang['template'] = 'テンプレート';
 $_lang['template_assignedtv_tab'] = '指定されているテンプレート変数';
