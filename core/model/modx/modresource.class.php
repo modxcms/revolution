@@ -686,7 +686,7 @@ class modResource extends modAccessibleSimpleObject {
                     $currResource= $query->stmt->fetch(PDO::FETCH_ASSOC);
                 }
                 $aliasPath= !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
-                if (!empty($aliasPath) && $aliasPath[-1] !== '/') $aliasPath .= '/';
+                if (strlen($aliasPath) > 0 && $aliasPath[strlen($aliasPath) - 1] !== '/') $aliasPath .= '/';
             }
             $fullAlias= $aliasPath . $fullAlias . $extension;
         } else {
