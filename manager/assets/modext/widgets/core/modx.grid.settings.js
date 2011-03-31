@@ -135,6 +135,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,groupBy: 'area_text'
         ,singleText: _('setting')
         ,pluralText: _('settings')
+        ,sortBy: 'key'
         ,plugins: this.exp
         ,primaryKey: 'key'
         ,autosave: true
