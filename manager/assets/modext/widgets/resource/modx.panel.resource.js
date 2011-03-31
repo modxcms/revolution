@@ -566,7 +566,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     t.setValue(this.config.record.template);
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            location.href = '?a='+MODx.request.a+'&id='+r.result.object.id+'&template='+nt+'&activeSave=1';
+                            location.href = '?a='+MODx.action['resource/update']+'&id='+r.result.object.id+'&template='+nt+'&activeSave=1';
                         },scope:this}
                     });
                 } else {
