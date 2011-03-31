@@ -102,13 +102,11 @@ if ($up->get('blockeduntil') > time()) {
 if ($up->get('blockedafter') > 0 && $up->get('blockedafter') < time()) {
     return $modx->error->failure($modx->lexicon('login_blocked_error'));
 }
+
 if (isset ($allowed_ip) && $allowed_ip) {
-    if (($hostname = gethostbyaddr($_SERVER['REMOTE_ADDR'])) && ($hostname != $_SERVER['REMOTE_ADDR'])) {
-        if (gethostbyname($hostname) != $_SERVER['REMOTE_ADDR']) {
-            return $modx->error->failure($modx->lexicon('login_hostname_error'));
-        }
-    }
-    if (!in_array($_SERVER['REMOTE_ADDR'], explode(',', str_replace(' ', '', $allowed_ip)))) {
+    $ip = $modx->request->getClientIp();
+    $ip = $ip['ip'];
+    if (!in_array($ip, explode(',', str_replace(' ', '', $allowed_ip)))) {
         return $modx->error->failure($modx->lexicon('login_blocked_ip'));
     }
 }

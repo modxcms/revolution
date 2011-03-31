@@ -276,11 +276,11 @@ class modProcessorResponse {
      */
     public function getAllErrors($fieldErrorSeparator = ': ') {
         $errormsgs = array();
-        if ($this->response->hasMessage()) {
-            $errormsgs[] = $this->response->getMessage();
+        if ($this->hasMessage()) {
+            $errormsgs[] = $this->getMessage();
         }
-        if ($this->response->hasFieldErrors()) {
-            $errors = $this->response->getFieldErrors();
+        if ($this->hasFieldErrors()) {
+            $errors = $this->getFieldErrors();
             if (!empty($errors)) {
                 foreach ($errors as $error) {
                     $errormsgs[] = $error->field.$fieldErrorSeparator.$error->message;
