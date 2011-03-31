@@ -85,7 +85,7 @@ MODx.panel.Resource = function(config) {
                     ,name: 'published'
                     ,id: 'modx-resource-published'
                     ,inputValue: 1
-                    ,checked: config.record.published
+                    ,checked: parseInt(config.record.published)
                 }]
             }]
         },{
@@ -184,7 +184,7 @@ MODx.panel.Resource = function(config) {
             ,name: 'menuindex'
             ,id: 'modx-resource-menuindex'
             ,width: 60
-            ,value: config.record.menuindex || 0
+            ,value: parseInt(config.record.menuindex) || 0
             
         },{
             xtype: 'xcheckbox'
@@ -193,8 +193,7 @@ MODx.panel.Resource = function(config) {
             ,name: 'hidemenu'
             ,id: 'modx-resource-hidemenu'
             ,inputValue: 1
-            ,checked: false
-            ,value: config.record.hidemenu || 0
+            ,checked: parseInt(config.record.hidemenu) || false
             
         },{
             xtype: 'hidden'
@@ -226,7 +225,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'isfolder'
         ,id: 'modx-resource-isfolder'
         ,inputValue: 1
-        ,checked: config.record.isfolder || 0
+        ,checked: parseInt(config.record.isfolder) || 0
         
     },{
         xtype: 'xcheckbox'
@@ -235,7 +234,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'richtext'
         ,id: 'modx-resource-richtext'
         ,inputValue: 1
-        ,checked: config.record.richtext
+        ,checked: parseInt(config.record.richtext)
         
     },{
         xtype: 'xdatetime'
@@ -288,7 +287,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'searchable'
         ,id: 'modx-resource-searchable'
         ,inputValue: 1
-        ,checked: config.record.searchable
+        ,checked: parseInt(config.record.searchable)
         
     },{
         xtype: 'xcheckbox'
@@ -297,7 +296,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'cacheable'
         ,id: 'modx-resource-cacheable'
         ,inputValue: 1
-        ,checked: config.record.cacheable
+        ,checked: parseInt(config.record.cacheable)
         
     },{
         xtype: 'xcheckbox'
@@ -306,8 +305,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'syncsite'
         ,id: 'modx-resource-syncsite'
         ,inputValue: 1
-        ,checked: true
-        ,value: config.record.syncsite || 1
+        ,checked: parseInt(config.record.syncsite) || true
         
     },{
         xtype: 'xcheckbox'
@@ -316,8 +314,7 @@ MODx.panel.Resource = function(config) {
         ,name: 'deleted'
         ,id: 'modx-resource-deleted'
         ,inputValue: 1
-        ,checked: false
-        ,value: config.record.deleted || 0
+        ,checked: parseInt(config.record.deleted) || false
 
     },{
         xtype: 'modx-combo-content-type'
@@ -357,7 +354,7 @@ MODx.panel.Resource = function(config) {
         ,description: _('resource_uri_override_help')
         ,name: 'uri_override'
         ,value: 1
-        ,checked: config.record.uri_override ? true : false
+        ,checked: parseInt(config.record.uri_override) ? true : false
         ,id: 'modx-resource-uri-override'
 
     },{
@@ -369,7 +366,7 @@ MODx.panel.Resource = function(config) {
         ,maxLength: 255
         ,anchor: '70%'
         ,value: config.record.uri || ''
-        ,hidden: config.record.uri_override ? false : true
+        ,hidden: parseInt(config.record.uri_override) ? false : true
     });
     it.push({
         id: 'modx-page-settings'
