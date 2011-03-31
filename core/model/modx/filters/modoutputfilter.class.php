@@ -321,7 +321,7 @@ class modOutputFilter {
                         /* Returns input incremented by option (default: +1) */
                     	if (empty($m_val))
                             $m_val = 1;
-                    	$output = intval($output) + intval($m_val);
+                    	$output = (float)$output + (float)$m_val;
                     	break;
 
                     case 'subtract':
@@ -330,7 +330,7 @@ class modOutputFilter {
                         /* Returns input decremented by option (default: -1) */
                         if (empty($m_val))
                             $m_val = 1;
-                        $output = intval($output) - intval($m_val);
+                        $output = (float)$output - (float)$m_val;
                         break;
 
                     case 'multiply':
@@ -338,7 +338,7 @@ class modOutputFilter {
                         /* Returns input multiplied by option (default: *2) */
                         if (empty($m_val))
                             $m_val = 1;
-                        $output = intval($output) * intval($m_val);
+                        $output = (float)$output * (float)$m_val;
                         break;
 
                     case 'divide':
@@ -346,7 +346,7 @@ class modOutputFilter {
                         /* Returns input divided by option (default: /2) */
                         if (empty($m_val))
                             $m_val = 2;
-                        $output = intval($output) / intval($m_val);
+                        $output = (float)$output / (float)$m_val;
                         break;
 
                     case 'modulus':
@@ -354,7 +354,7 @@ class modOutputFilter {
                         /* Returns the option modulus on input (default: %2, returns 0 or 1) */
                         if (empty($m_val))
                             $m_val = 2;
-                        $output = intval($output) % intval($m_val);
+                        $output = (float)$output % (float)$m_val;
                         break;
 
                     case 'default':
