@@ -47,26 +47,19 @@ foreach ($settings as $setting) {
 }
 
 /* now duplicate resources by level */
-duplicateLevel($modx,$oldContext->get('key'),$newContext->get('key'));
-
-function duplicateLevel(modX &$modx,$oldKey,$newKey,$parent = 0,$newParent = 0) {
-    $resources = $modx->getCollection('modResource',array(
-        'context_key' => $oldKey,
-        'parent' => $parent,
-    ));
-    if (count($resources) <= 0) return array();
-
-    foreach ($resources as $oldResource) {
-        $oldResourceArray = $oldResource->toArray();
-
-        $newResource = $modx->newObject('modResource');
-        $newResource->fromArray($oldResourceArray);
-        $newResource->set('parent',$newParent);
-        $newResource->set('context_key',$newKey);
-        $newResource->save();
-
-        duplicateLevel($modx,$oldKey,$newKey,$oldResourceArray['id'],$newResource->get('id'));
+$resources = $modx->getCollection('modResource',array(
+    'context_key' => $oldContext->get('key'),
+    'parent' => 0,
+));
+if (count($resources) > 0) {
+    foreach ($resources as $resource) {
+        $resource->duplicate(array(
+            'prefixDuplicate' => false,
+            'duplicateChildren' => true,
+            'overrides' => array(
+                'context_key' => $newContext->get('key'),
+            ),
+        ));
     }
 }
-
 return $modx->error->success('',$newContext);

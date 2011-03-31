@@ -734,8 +734,21 @@ class modResource extends modAccessibleSimpleObject {
         )) : $this->get('pagetitle'));
         $newResource = $this->xpdo->newObject($this->get('class_key'));
         $newResource->fromArray($this->toArray('', true), '', false, true);
-        $newResource->set('id',0);
         $newResource->set('pagetitle', $newName);
+
+        /* make sure duplicate is not published or deleted */
+        $newResource->set('published',false);
+        $newResource->set('publishedon',0);
+        $newResource->set('publishedby',0);
+        $newResource->set('deleted',false);
+        $newResource->set('deletedon',0);
+        $newResource->set('deletedby',0);
+
+        /* allow overrides for every item */
+        if (!empty($options['overrides']) && is_array($options['overrides'])) {
+            $newResource->fromArray($options['overrides']);
+        }
+        $newResource->set('id',0);
 
         /* make sure children get assigned to new parent */
         $newResource->set('parent',isset($options['parent']) ? $options['parent'] : $this->get('parent'));
@@ -743,13 +756,6 @@ class modResource extends modAccessibleSimpleObject {
         $newResource->set('createdon',time());
         $newResource->set('editedby',0);
         $newResource->set('editedon',0);
-        $newResource->set('deleted',false);
-        $newResource->set('deletedon',0);
-        $newResource->set('deletedby',0);
-        /* make sure duplicate is not published */
-        $newResource->set('published',false);
-        $newResource->set('publishedon',0);
-        $newResource->set('publishedby',0);
 
         /* get new alias */
         $alias = $newResource->cleanAlias($newName);
@@ -797,6 +803,7 @@ class modResource extends modAccessibleSimpleObject {
                         'duplicateChildren' => true,
                         'parent' => $newResource->get('id'),
                         'prefixDuplicate' => $prefixDuplicate,
+                        'overrides' => !empty($options['overrides']) ? $options['overrides'] : false,
                     ));
                 }
             }
