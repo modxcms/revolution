@@ -48,7 +48,7 @@ foreach ($groups as $group) {
     }
 
     $list[] = array(
-        'text' => $group->get('name'),
+        'text' => $group->get('name').' ('.$group->get('id').')',
         'id' => 'n_ug_'.$group->get('id'),
         'leaf' => false,
         'type' => 'usergroup',

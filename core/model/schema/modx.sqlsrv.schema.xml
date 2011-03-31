@@ -1026,13 +1026,18 @@
     
     <object class="modUserGroup" table="membergroup_names" extends="modPrincipal">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="unique" />
+        <field key="description" dbtype="text" phptype="string" />
         <field key="parent" dbtype="int" phptype="integer" null="false" default="0" index="index" />
+        <field key="rank" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
         <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
             <column key="parent" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Parent" class="modUserGroup" local="parent" foreign="id" cardinality="one" owner="foreign" />

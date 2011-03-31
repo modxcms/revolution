@@ -1,6 +1,6 @@
 <?php
 /**
- * Specific upgrades for Revolution 2.1.0
+ * Specific upgrades for Revolution 2.1.0-rc-1
  *
  * @package setup
  * @subpackage upgrades
@@ -191,3 +191,12 @@ if ($setting && $setting->get('value') == 'http://misc.modx.com/revolution/welco
     $setting->set('value','http://misc.modx.com/revolution/welcome.21.html');
     $setting->save();
 }
+
+/* add rank to modUserGroup */
+$class = 'modUserGroup';
+$table = $this->install->xpdo->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'rank','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'rank'));
+
+$description = $this->install->lexicon('add_index',array('index' => 'rank','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'rank'));
