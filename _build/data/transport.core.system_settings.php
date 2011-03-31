@@ -6,6 +6,33 @@
  * @subpackage build
  */
 $settings = array();
+$settings['access_category_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['access_category_enabled']->fromArray(array (
+  'key' => 'access_category_enabled',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
+$settings['access_context_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['access_context_enabled']->fromArray(array (
+  'key' => 'access_context_enabled',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
+$settings['access_resource_group_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['access_resource_group_enabled']->fromArray(array (
+  'key' => 'access_resource_group_enabled',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
 $settings['allow_forward_across_contexts']= $xpdo->newObject('modSystemSetting');
 $settings['allow_forward_across_contexts']->fromArray(array (
   'key' => 'allow_forward_across_contexts',
