@@ -22,7 +22,7 @@ $_lang['login_email_label'] = '登録メールアドレス：';
 $_lang['login_err_unknown'] = 'ログイン処理中に不明なエラーが発生しました。';
 $_lang['login_forget_your_login'] = 'パスワードを忘れましたか？';
 $_lang['login_hostname_error'] = 'ホスト名とIPアドレスが一致しません。';
-$_lang['login_message'] = 'MODxへようこそ。ユーザー名とパスワードは大文字・小文字を区別します。';
+$_lang['login_message'] = 'MODXへようこそ。ユーザー名とパスワードは大文字・小文字を区別します。';
 $_lang['login_modx_support'] = '<p>Supported By:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>The MODX Community</strong></a></p>';
 $_lang['login_password'] = 'パスワード：';
 $_lang['login_password_reset_act_sent'] = 'パスワードを再発行し登録されているメールアドレスへ送信しました。メールを確認してください。';

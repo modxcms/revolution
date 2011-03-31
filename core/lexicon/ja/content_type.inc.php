@@ -25,3 +25,4 @@ $_lang['content_type_remove'] = 'コンテンツタイプの削除';
 $_lang['content_type_remove_confirm'] = '本当にこのコンテンツタイプを削除しますか？';
 $_lang['content_types'] = 'コンテンツタイプ';
 $_lang['file_extensions'] = 'ファイル拡張子';
+$_lang['file_extensions_desc'] = 'This is the specified file extension for this Content Type.';
