@@ -33,7 +33,6 @@ $_lang['file_err_unzip_missing_lib'] = ' Falta la librería de compresión (php_
 $_lang['file_err_upload'] = 'Ocurrió un error mientras se trataban de subir los archivos.';
 $_lang['file_exists_hk'] = 'El archivo <b>{0}</b> ya existe';
 $_lang['file_extensions'] = 'Extensiones de Archivo';
-$_lang['file_extensions_desc'] = 'Estas son las extensiones de archivo permitidas para el tipo de contenido.';
 $_lang['file_folder_enter_new'] = 'Ingresar el Nombre de la Carpeta Nueva';
 $_lang['file_folder_chmod'] = 'Directorio Chmod';
 $_lang['file_folder_create'] = 'Crear Directorio';

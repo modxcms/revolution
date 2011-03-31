@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access'] = 'Acceso';
+$_lang['filter_by_category'] = 'Filtrar por Categoría...';
 $_lang['rank'] = 'Rango';
 $_lang['template'] = 'Plantilla';
 $_lang['template_assignedtv_tab'] = 'Variables de Plantilla Asignadas';
