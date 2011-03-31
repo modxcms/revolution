@@ -28,6 +28,10 @@ $settings = array();
 if (!empty($scriptProperties['tv'])) {
     $tv = $modx->getObject('modTemplateVar',$scriptProperties['tv']);
     if (is_object($tv) && $tv instanceof modTemplateVar) {
+        /**
+         * Backwards support for display_params
+         * @deprecated To be removed in 2.2
+         */
         $params = $tv->get('display_params');
         $ps = explode('&',$params);
         foreach ($ps as $p) {
@@ -36,6 +40,8 @@ if (!empty($scriptProperties['tv'])) {
                 $settings[$param[0]] = str_replace('%3D','=',$param[1]);
             }
         }
+        /* now get output_properties */
+        $settings = array_merge($settings,$tv->get('output_properties'));
     }
     $modx->smarty->assign('tv',$scriptProperties['tv']);
 }

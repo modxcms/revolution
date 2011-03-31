@@ -242,6 +242,10 @@ class modTemplateVar extends modElement {
         $value= $this->processBindings($value, $resourceId);
 
         $params= array ();
+        /**
+         * Backwards support for display_params
+         * @deprecated To be removed in 2.2
+         */
         if ($paramstring= $this->get('display_params')) {
             $cp= explode("&", $paramstring);
             foreach ($cp as $p => $v) {
@@ -251,6 +255,8 @@ class modTemplateVar extends modElement {
                 }
             }
         }
+        /* get output_properties for rendering properties */
+        $params = array_merge($params,$this->get('output_properties'));
         
         /* for base_url in image/file tvs */
         if (!empty($value) && in_array($this->get('type'),array('image','file'))) {
