@@ -16,11 +16,18 @@ MODx.grid.UserGroupCategory = function(config) {
         ,paging: true
         ,hideMode: 'offsets'
         ,fields: ['id','target','name','principal','authority','authority_name','policy','policy_name','context_key','permissions','menu']
+        ,grouping: true
+        ,groupBy: 'authority_name'
+        ,singleText: _('policy')
+        ,pluralText: _('policies')
+        ,sortBy: 'authority'
+        ,sortDir: 'DESC'
         ,plugins: [this.exp]
         ,columns: [this.exp,{
             header: _('category')
             ,dataIndex: 'name'
             ,width: 120
+            ,sortable: true
         },{
             header: _('minimum_role')
             ,dataIndex: 'authority_name'
@@ -33,6 +40,7 @@ MODx.grid.UserGroupCategory = function(config) {
             header: _('context')
             ,dataIndex: 'context_key'
             ,width: 150
+            ,sortable: true
         }]
         ,tbar: [{
             text: _('category_add')

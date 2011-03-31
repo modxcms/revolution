@@ -208,16 +208,24 @@ MODx.grid.UserGroupUsers = function(config) {
             ,usergroup: config.usergroup
         }
         ,paging: true
-        ,fields: ['id','username','role','role_name','menu']
-        ,columns: [
-            { header: _('id') ,dataIndex: 'id' ,width: 40 }
-            ,{ header: _('username') ,dataIndex: 'username' ,width: 175 }
-            ,{
-                header: _('role')
-                ,dataIndex: 'role'
-                ,width: 175
-            }
-        ]
+        ,grouping: true
+        ,groupBy: 'role_name'
+        ,singleText: _('user')
+        ,pluralText: _('users')
+        ,sortBy: 'authority'
+        ,sortDir: 'ASC'
+        ,fields: ['id','username','role','role_name','authority']
+        ,columns: [{
+            header: _('username')
+            ,dataIndex: 'username'
+            ,width: 175
+            ,sortable: true
+        },{
+            header: _('role')
+            ,dataIndex: 'role_name'
+            ,width: 175
+            ,sortable: true
+        }]
         ,tbar: [{
             text: _('user_group_user_add')
             ,handler: this.addMember
@@ -250,8 +258,21 @@ MODx.grid.UserGroupUsers = function(config) {
     this.addEvents('updateRole','addMember');
 };
 Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
-    
-    searchUser: function(tf,nv,ov) {
+
+    getMenu: function() {
+        var m = [];
+        m.push({
+            text: _('user_role_update')
+            ,handler: this.updateRole
+        });
+        m.push('-');
+        m.push({
+            text: _('user_group_user_remove')
+            ,handler: this.removeUser
+        });
+        return m;
+    }
+    ,searchUser: function(tf,nv,ov) {
         this.getStore().baseParams['username'] = Ext.getCmp('modx-ugu-filter-username').getValue();
         this.getBottomToolbar().changePage(1);
         this.refresh();

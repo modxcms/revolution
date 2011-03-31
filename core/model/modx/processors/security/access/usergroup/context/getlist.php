@@ -53,6 +53,7 @@ $c->select(array(
     'Policy.name AS policy_name',
     'Policy.data AS policy_data',
 ));
+$c->sortby('role_name','DESC');
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 $acls = $modx->getCollection('modAccessContext', $c);
