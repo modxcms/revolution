@@ -174,7 +174,7 @@ class modContext extends modAccessibleObject {
                         $found= true;
                     }
                 }
-            } elseif (array_search((string) $id, $this->aliasMap, true) !== false) {
+            } elseif (array_keys((string) $id, $this->resourceMap, true) !== false) {
                 $found= true;
             }
 

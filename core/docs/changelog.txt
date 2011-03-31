@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4220] Fix modX::makeUrl() when friendly_urls not enabled
 - [#4207] Fix issues with checkboxes and Form Customization rules
 - [#4013] Fix modX::_log() to pass target to parent::_log() properly
 
