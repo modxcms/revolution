@@ -39,7 +39,7 @@ $settings['allow_forward_across_contexts']->fromArray(array (
   'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'core',
+  'area' => 'system',
   'editedon' => null,
 ), '', true, true);
 $settings['allow_tags_in_post']= $xpdo->newObject('modSystemSetting');
@@ -518,7 +518,7 @@ $settings['forward_merge_excludes']->fromArray(array (
   'value' => 'type,published,class_key,context_key',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'core',
+  'area' => 'system',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_lowercase_only']= $xpdo->newObject('modSystemSetting');
@@ -860,7 +860,7 @@ $settings['principal_targets']->fromArray(array (
   'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'security',
+  'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
 $settings['proxy_auth_type']= $xpdo->newObject('modSystemSetting');
