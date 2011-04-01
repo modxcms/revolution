@@ -207,9 +207,9 @@ MODx.combo.Template = function(config) {
         ,displayField: 'templatename'
         ,valueField: 'id'
         ,pageSize: 20
-        ,fields: ['id','templatename','description','category']
+        ,fields: ['id','templatename','description','category_name']
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{templatename}</span>'
-            ,' - <span style="font-style:italic">{category}</span>'
+            ,'<tpl if="category_name"> - <span style="font-style:italic">{category_name}</span></tpl>'
             ,'<br />{description}</div></tpl>')
         ,url: MODx.config.connectors_url+'element/template.php'
         ,listWidth: 350

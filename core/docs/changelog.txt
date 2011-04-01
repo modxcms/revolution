@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4236] Fix bug in Template combo that hid category name
 - Improve compression of images in mgr to reduce load times and core transport zip size
 - [#4232] Fix Output Options being ignored in TVs in 2.1.0-rc1
 - Add options to allow ACL queries to be disabled for Contexts, Categories, and Resource Groups
