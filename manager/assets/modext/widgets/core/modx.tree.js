@@ -138,6 +138,19 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * Sets up the tree and initializes it with the specified options.
      */
     ,setup: function(config) {
+        config.listeners = config.listeners || {};
+        config.listeners.render = {fn:function() {
+            this.root.expand();
+            var tl = this.getLoader();
+            Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')})});
+            tl.fullMask.removeMask=false;
+            tl.on({
+                'load' : function(){this.fullMask.hide();}
+                ,'loadexception' : function(){this.fullMask.hide();}
+                ,'beforeload' : function(){this.fullMask.show();}
+                ,scope : tl
+            });
+        },scope:this};
         MODx.tree.Tree.superclass.constructor.call(this,config);
         this.addEvents('afterSort','beforeSort');
         this.cm = new Ext.menu.Menu(config.menuConfig);
@@ -153,19 +166,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         this.on('load',this._initExpand,this,{single: true});
         this.on('expandnode',this._saveState,this);
         this.on('collapsenode',this._saveState,this);
-        
-        this.on('render',function() {
-            this.root.expand();
-            var tl = this.getLoader();
-            Ext.apply(tl,{fullMask : new Ext.LoadMask(this.getEl(),{msg:_('loading')})});
-            tl.fullMask.removeMask=false;
-            tl.on({
-                'load' : function(){this.fullMask.hide();}
-                ,'loadexception' : function(){this.fullMask.hide();}
-                ,'beforeload' : function(){this.fullMask.show();}
-                ,scope : tl
-            });
-        },this);
     }
 	
     /**

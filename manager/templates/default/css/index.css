@@ -971,6 +971,7 @@ html #modx-topnav ul.modx-subnav li a:hover{
 .icon-package { background-image:url(../images/restyle/icons/package.png) !important; padding-right: 5px !important; }
 
 .icon-locked .x-tree-node-icon { background-image:url(../images/restyle/icons/lock_edit.png) !important; }
+.icon-lock .x-tree-node-icon { background-image:url(../images/restyle/icons/lock.png) !important; }
 
 /* ext extensions */
 input.x-static-text-field {
