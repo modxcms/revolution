@@ -150,6 +150,14 @@ class modElement extends modAccessibleSimpleObject {
 
                 if (!empty($property['options'])) {
                     foreach ($property['options'] as &$option) {
+                        if (empty($option['text']) && !empty($option['name'])) {
+                            $option['text'] = $option['name'];
+                            unset($option['name']);
+                        }
+                        if (empty($option['value']) && !empty($option[0])) {
+                            $option['value'] = $option[0];
+                            unset($option[0]);
+                        }
                         $option['name'] = $this->xpdo->lexicon($option['text']);
                     }
                 }
@@ -544,6 +552,7 @@ class modElement extends modAccessibleSimpleObject {
 
                 if (!empty($propertyArray['options'])) {
                     foreach ($propertyArray['options'] as $optionKey => &$option) {
+                        if (empty($option['text']) && !empty($option['name'])) $option['text'] = $option['name'];
                         unset($option['menu'],$option['name']);
                     }
                 }
