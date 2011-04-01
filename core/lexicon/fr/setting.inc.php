@@ -52,6 +52,15 @@ $_lang['system_settings'] = 'Configuration du Systéme';
 $_lang['usergroup'] = 'Groupe d\'utilisateur';
 
 // user settings
+$_lang['setting_access_category_enabled'] = 'Vérifier les permissions de catégorie';
+$_lang['setting_access_category_enabled_desc'] = 'Utilisez ceci pour activer ou désactiver la vérification des droits d\'accès aux catégories (par contexte). <strong>NOTE: Si cette option est désactivée, alors toutes les permissions d\'accès aux catégories seront ignorées!</strong>';
+
+$_lang['setting_access_context_enabled'] = 'Vérifier les permissions de contexte';
+$_lang['setting_access_context_enabled_desc'] = 'Utilisez ceci pour activer ou désactiver la vérification des droits d\'accès aux contextes. <strong>NOTE: Si cette option est désactivée, alors toutes les permissions d\'accès aux contextes seront ignorées. NE DÉSACTIVEZ PAS cette option pour le système entier ou pour le contexte mgr car vous interdiriez l\'accès au gestionnaire.</strong>';
+
+$_lang['setting_access_resource_group_enabled'] = 'Vérifier les permissions des groupes de ressource';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Utilisez ceci pour activer ou désactiver la vérification des droits d\'accès aux groupes de ressource (par contexte). <strong>NOTE: Si cette option est désactivée, alors toutes les permissions d\'accès aux groupes de ressource seront ignorées!</strong>';
+
 $_lang['setting_allow_mgr_access'] = 'Accès à l\'interface du manager';
 $_lang['setting_allow_mgr_access_desc'] = 'Utilisez cette option pour activer ou désactiver l\'accès à l\'interface du manager. <strong>NOTE: Si cette option est définie à non, alors l\'utilisateur sera redirigé vers l\'écran d\'identification ou la page d\'accueil du site web.</strong>';
 
