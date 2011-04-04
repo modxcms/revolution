@@ -9,7 +9,7 @@
 $_lang['about_msg'] = 'MODX <a href="http://modxcms.com/" target="_blank">PHP Application Framework ja Sisuhaldussüsteem</a> on <a href="http://opensource.org/licenses/gpl-2.0.php">GNU Public License v2</a> litsentsi all ja (vastavalt Teie valikule) ükskõik millise hilisema versiooni all.';
 $_lang['about_title'] = 'MODX-ist';
 $_lang['credits'] = 'Tänud';
-$_lang['credits_mysql'] = 'MODX kasutab <a href="http://www.mysql.com" target="_blank">MySQL</a>.';
+$_lang['credits_database'] = 'MODX kasutab <a href="http://www.mysql.com" target="_blank">MySQL</a>.';
 $_lang['credits_php'] = 'MODX kasutab <a href="http://www.php.net" target="_blank">PHP</a>.';
 $_lang['credits_sencha'] = 'MODX kasutab <a href="http://www.sencha.com/" target="_blank">Sencha (ExtJS)</a> oma tava-manageri kasutajaliideses.';
 $_lang['credits_smarty'] = 'MODX kasutab <a href="http://www.smarty.net/" target="_blank">Smarty</a> oma tava-manageri kasutajaliideses.';

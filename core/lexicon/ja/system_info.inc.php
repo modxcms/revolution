@@ -14,7 +14,6 @@ $_lang['database_name'] = 'データベース名';
 $_lang['database_server'] = 'データベースサーバー';
 $_lang['database_tables'] = 'テーブル一覧';
 $_lang['database_optimize'] = 'Optimize Database';
-$_lang['database_overhead'] = '<strong style=\'color:#990033\'>注:</strong>オーバーヘッドとは、確保されているが使われていない領域のことです。オーバーヘッドの数字をクリックすると、この領域を開放します';
 $_lang['database_table_clickhere'] = 'ここをクリック';
 $_lang['database_table_clickbackup'] = '選択したテーブルをバックアップ・ダウンロード';
 $_lang['database_table_datasize'] = 'データサイズ';

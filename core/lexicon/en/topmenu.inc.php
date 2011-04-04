@@ -96,6 +96,6 @@ $_lang['user_group_management_desc'] = 'Manage user groups, roles, and access po
 $_lang['view_logging'] = 'Manager Actions';
 $_lang['view_logging_desc'] = 'View the recent manager activity.';
 $_lang['view_sysinfo'] = 'System Info';
-$_lang['view_sysinfo_desc'] = 'View server information, such as phpinfo, mysql db info, and more.';
+$_lang['view_sysinfo_desc'] = 'View server information, such as phpinfo, database info, and more.';
 $_lang['wiki'] = 'Wiki';
 $_lang['wiki_desc'] = 'Launch the MODX Confluence wiki, where documentation on MODX Revolution is stored.';

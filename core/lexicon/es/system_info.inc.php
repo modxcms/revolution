@@ -11,7 +11,6 @@ $_lang['database_name'] = 'Nombre de base de datos';
 $_lang['database_server'] = 'Servidor de base de datos';
 $_lang['database_tables'] = 'Tablas de base de datos';
 $_lang['database_optimize'] = 'Optimizar base de datos';
-$_lang['database_overhead'] = '<b style=\'color:#990033\'>Nota:</strong> Overhead es espacio no usado reservado por MySQL. Para liberar este espacio, haz click en la cifra de overhead en de tabla.';
 $_lang['database_table_clickhere'] = 'Haz click aquí';
 $_lang['database_table_clickbackup'] = 'para respaldar y bajar las tablas seleccionadas';
 $_lang['database_table_datasize'] = 'Tamaño de los datos';

@@ -14,7 +14,6 @@ $_lang['database_name'] = 'Datenbankname';
 $_lang['database_server'] = 'Datenbankserver';
 $_lang['database_tables'] = 'Datenbank-Tabellen';
 $_lang['database_optimize'] = 'Datenbank optimieren';
-$_lang['database_overhead'] = '<b style="color: #903">Hinweis:</b> Overhead ist unbenutzter Speicherplatz, der von MySQL reserviert ist. Um diesen Speicherplatz freizugeben, klicken Sie auf den jeweiligen Link in der Overhead-Tabellenspalte.';
 $_lang['database_table_clickhere'] = 'Klicken Sie hier';
 $_lang['database_table_clickbackup'] = 'um die ausgewählten Tabellen zu sichern &amp; herunterzuladen';
 $_lang['database_table_datasize'] = 'Datengröße';

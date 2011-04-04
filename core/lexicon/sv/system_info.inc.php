@@ -11,7 +11,6 @@ $_lang['database_name'] = 'Databasens namn';
 $_lang['database_server'] = 'Databasens server';
 $_lang['database_tables'] = 'Databasens tabeller';
 $_lang['database_optimize'] = 'Optimera databas';
-$_lang['database_overhead'] = '<b style=\'color:#990033\'>Notera:</b><br />"Overhead" är oanvänt utrymme reserverat av MySQL. Klicka på ett overhead-belopp för att frigöra utrymmet.';
 $_lang['database_table_clickhere'] = 'Klicka här';
 $_lang['database_table_clickbackup'] = 'för att säkerhetskopiera och ladda ner de valda tabellerna.';
 $_lang['database_table_datasize'] = 'Datastorlek';

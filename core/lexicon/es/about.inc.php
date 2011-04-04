@@ -9,7 +9,7 @@
 $_lang['about_msg'] = 'MODX es un <a href="http://modxcms.com/what-is-modx.html" target="_blank">Esquema para Aplicaciones PHP y Sistema de Administración de Contenido</a> con licencia bajo la <a href="http://opensource.org/licenses/gpl-2.0.php">Licencia Pública GNU v2</a> y (a tu opción) cualquier versión subsecuente.';
 $_lang['about_title'] = 'Acerca de MODX';
 $_lang['credits'] = 'Créditos';
-$_lang['credits_mysql'] = 'MODX opera con <a href="http://www.mysql.com" target="_blank">MySQL</a>!';
+$_lang['credits_database'] = 'MODX opera con <a href="http://www.mysql.com" target="_blank">MySQL</a>!';
 $_lang['credits_php'] = 'MODX opera con <a href="http://www.php.net" target="_blank">PHP</a>!';
 $_lang['credits_sencha'] = 'MODX usa <a href="http://www.sencha.com/" target="_blank">Sencha (ExtJS)</a> en su IU predeterminada del administrador.';
 $_lang['credits_smarty'] = 'MODX usa <a href="http://www.smarty.net/" target="_blank">Smarty</a> en su IU predeterminada del administrador.';
