@@ -42,12 +42,19 @@ MODx.grid.ActionDom = function(config) {
             ,width: 150
             ,sortable: true
             ,editor: { xtype: 'modx-combo-rule-type' ,renderer: true }
+            ,renderer: function(v,md) {
+                console.log(v);
+                return Ext.util.Format.htmlEncode(v);
+            }
         },{
             header: _('value')
             ,dataIndex: 'value'
             ,width: 300
             ,sortable: true
             ,editor: { xtype: 'textfield' }
+            ,renderer: function(v,md) {
+                return Ext.util.Format.htmlEncode(v);
+            }
         },{
             header: _('usergroup')
             ,dataIndex: 'principal'

@@ -231,10 +231,16 @@ MODx.grid.FCSetFields = function(config) {
             header: _('label')
             ,dataIndex: 'label'
             ,editor: { xtype: 'textfield' }
+            ,renderer: function(v,md) {
+                return Ext.util.Format.htmlEncode(v);
+            }
         },{
             header: _('default_value')
             ,dataIndex: 'default_value'
             ,editor: { xtype: 'textfield' }
+            ,renderer: function(v,md) {
+                return Ext.util.Format.htmlEncode(v);
+            }
         }]
         ,viewConfig: {
             forceFit:true

@@ -15,6 +15,7 @@ class modActionDom extends modAccessibleSimpleObject {
     public function apply($objId = '') {
         if (empty($objId)) $objId = $_REQUEST['id'];
         $rule = '';
+        $encoding = $this->xpdo->getOption('modx_charset',null,'UTF-8');
 
         /* now switch by types of rules */
         switch ($this->get('rule')) {
@@ -28,12 +29,15 @@ class modActionDom extends modAccessibleSimpleObject {
             case 'fieldTitle':
                 $fields = explode(',',$this->get('name'));
                 $values = explode(',',$this->get('value'));
+                foreach ($values as &$value) {
+                    $value = htmlspecialchars($value,ENT_COMPAT,$encoding);
+                }
                 $rule = 'MODx.renameLabel("'.$this->get('container').'",'.$this->xpdo->toJSON($fields).','.$this->xpdo->toJSON($values).');';
                 break;
             case 'panelTitle':
             case 'tabTitle':
             case 'tabLabel':
-                $rule = 'Ext.getCmp("'.$this->get('name').'").setTitle("'.$this->get('value').'");';
+                $rule = 'Ext.getCmp("'.$this->get('name').'").setTitle("'.htmlspecialchars($this->get('value'),ENT_COMPAT,$encoding).'");';
                 break;
             case 'tabVisible':
                 if (!$this->get('value')) {
@@ -47,7 +51,7 @@ class modActionDom extends modAccessibleSimpleObject {
                 break;
             case 'tabNew':
                 $title = $this->get('value');
-                $rule = 'MODx.addTab("'.$this->get('container').'",{title:"'.$title.'",id:"'.$this->get('name').'"});';
+                $rule = 'MODx.addTab("'.$this->get('container').'",{title:"'.htmlspecialchars($title,ENT_COMPAT,$encoding).'",id:"'.$this->get('name').'"});';
                 break;
             case 'tvMove':
                 $tvs = explode(',',$this->get('name'));
