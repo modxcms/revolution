@@ -233,6 +233,7 @@ MODx.window.AddUserToUserGroup = function(config) {
             ,xtype: 'modx-combo-user'
             ,editable: true
             ,typeAhead: true
+            ,allowBlank: false
             ,id: 'modx-'+this.ident+'-user'
             ,anchor: '90%'
         },{

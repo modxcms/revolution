@@ -374,7 +374,8 @@ MODx.window.AddUserToUserGroup = function(config) {
             ,hiddenName: 'user'
             ,id: 'modx-auug-user'
             ,xtype: 'modx-combo-user'
-            ,editable: false
+            ,editable: true
+            ,typeAhead: true
             ,allowBlank: false
             ,anchor: '90%'
         },{
