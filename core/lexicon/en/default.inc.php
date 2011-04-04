@@ -42,6 +42,7 @@ $_lang['cache_sitepublishing_file_error'] = '<p>ERROR: Could not write site publ
 $_lang['cache_unpublish_event_error'] = '<p>ERROR: Could not determine next unpublish event!</p><pre>[[+info]]</pre>';
 $_lang['cached'] = 'Cached';
 $_lang['cancel'] = 'Cancel';
+$_lang['caption'] = 'Caption';
 $_lang['categories'] = 'Categories';
 $_lang['category'] = 'Category';
 $_lang['category_create'] = 'Create New Category';

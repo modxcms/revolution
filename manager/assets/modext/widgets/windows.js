@@ -652,6 +652,12 @@ MODx.window.QuickCreateTV = function(config) {
             ,fieldLabel: _('name')
             ,anchor: '90%'
         },{
+            xtype: 'textfield'
+            ,name: 'caption'
+            ,id: 'modx-'+this.ident+'-caption'
+            ,fieldLabel: _('caption')
+            ,anchor: '90%'
+        },{
             xtype: 'modx-combo-category'
             ,name: 'category'
             ,fieldLabel: _('category')
@@ -714,6 +720,12 @@ MODx.window.QuickUpdateTV = function(config) {
             ,name: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,fieldLabel: _('name')
+            ,anchor: '90%'
+        },{
+            xtype: 'textfield'
+            ,name: 'caption'
+            ,id: 'modx-'+this.ident+'-caption'
+            ,fieldLabel: _('caption')
             ,anchor: '90%'
         },{
             xtype: 'modx-combo-category'
