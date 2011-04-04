@@ -23,6 +23,7 @@ MODx.tree.Resource = function(config) {
         ,baseParams: {
             action: 'getNodes'
             ,sortBy: MODx.config.tree_default_sort || 'menuindex'
+            ,currentResource: MODx.request.id || 0
         }
     });
     MODx.tree.Resource.superclass.constructor.call(this,config);

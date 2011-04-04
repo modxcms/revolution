@@ -149,6 +149,9 @@ while ($item) {
             $class[] = !empty($permissionList['resource_quick_create']) ? $permissionList['resource_quick_create'] : '';
             $class[] = !empty($permissionList['resource_quick_update']) ? $permissionList['resource_quick_update'] : '';
             $class[] = $hasChildren ? 'haschildren' : '';
+            if (!empty($scriptProperties['currentResource']) && $scriptProperties['currentResource'] == $item->id) {
+                $class[] = 'active-node';
+            }
 
             $qtip = '';
             if (!empty($qtipField)) {
