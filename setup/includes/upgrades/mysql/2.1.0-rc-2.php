@@ -22,6 +22,15 @@ $this->processResults($class, $description, array($modx->manager, 'addField'), a
 $description = $this->install->lexicon('add_index',array('index' => 'rank','table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'rank'));
 
+/* add rank to modUserGroupMember */
+$class = 'modUserGroupMember';
+$table = $modx->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'rank','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'rank'));
+
+$description = $this->install->lexicon('add_index',array('index' => 'rank','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'rank'));
+
 /* change help screen URL references */
 $setting = $modx->getObject('modSystemSetting',array('key' => 'base_help_url'));
 if ($setting && $setting->get('value') == 'http://rtfm.modx.com/display/revolution21/') {

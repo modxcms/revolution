@@ -1050,9 +1050,13 @@
         <field key="user_group" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="member" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="role" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="1" index="index" />
+        <field key="rank" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         
         <index alias="role" name="role" primary="false" unique="false" type="BTREE">
             <column key="role" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="UserGroupRole" class="modUserGroupRole" local="role" foreign="id" cardinality="one" owner="foreign" />
