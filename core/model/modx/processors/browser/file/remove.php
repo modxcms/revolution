@@ -14,6 +14,7 @@ $modx->lexicon->load('file');
 
 if (empty($scriptProperties['file'])) return $modx->error->failure($modx->lexicon('file_err_ns'));
 
+
 /* get working context */
 $wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
 if (!empty($wctx)) {
@@ -27,16 +28,23 @@ if (!empty($wctx)) {
 
 $modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
 
-/* in case rootVisible is true */
-$file = str_replace('root/','',$scriptProperties['file']);
-$file = str_replace('undefined/','',$file);
-
-/* create modFile object */
-$root = $modx->fileHandler->getBasePath(false);
-if ($workingContext->getOption('filemanager_path_relative',true)) {
-    $root = $workingContext->getOption('base_path','').$root;
+/* get base paths and sanitize incoming paths */
+$dir = $modx->fileHandler->sanitizePath($scriptProperties['file']);
+if (empty($scriptProperties['basePath'])) {
+    $root = $modx->fileHandler->getBasePath();
+    if ($workingContext->getOption('filemanager_path_relative',true)) {
+        $root = $workingContext->getOption('base_path','').$root;
+    }
+} else {
+    $root = $scriptProperties['basePath'];
+    if (!empty($scriptProperties['basePathRelative'])) {
+        $root = $workingContext->getOption('base_path').$root;
+    }
 }
-$file = $modx->fileHandler->make($root.$file);
+$fullPath = $root.ltrim($dir,'/');
+if (!file_exists($fullPath)) return $modx->error->failure($modx->lexicon('file_folder_err_ns').': '.$fullPath);
+
+$file = $modx->fileHandler->make($fullPath);
 
 /* verify file exists and is writable */
 if (!$file->exists()) {
