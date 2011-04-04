@@ -8,7 +8,6 @@ MODx.page.EditFile = function(config) {
             ,method: 'remote'
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
-                ,alt: true
                 ,ctrl: true
             }]
         });

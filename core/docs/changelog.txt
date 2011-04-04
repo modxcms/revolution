@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4261] Change keyboard save shortcut to CTRL+S
 - [#4262] Ensure that FC rules htmlencode their tab/field labels
 - [#4243] Ensure that files that are read-only do not show save button; fix file tree opening
 - [#4244] Add backwards compatibility for Element properties of list type with older indexes

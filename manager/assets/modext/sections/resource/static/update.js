@@ -102,7 +102,6 @@ Ext.extend(MODx.page.UpdateStatic,MODx.Component,{
                 ,checkDirty: MODx.request.activeSave == 1
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
-                    ,alt: true
                     ,ctrl: true
                 }]
             });

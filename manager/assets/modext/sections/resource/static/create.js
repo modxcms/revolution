@@ -44,7 +44,6 @@ Ext.extend(MODx.page.CreateStatic,MODx.Component,{
                 ,checkDirty: true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
-                    ,alt: true
                     ,ctrl: true
                 }]
             });

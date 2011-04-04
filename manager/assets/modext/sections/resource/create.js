@@ -44,7 +44,6 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
                 ,checkDirty: cfg.record.richtext ? false : true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
-                    ,alt: true
                     ,ctrl: true
                 }]
             });
