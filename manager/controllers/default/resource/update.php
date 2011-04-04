@@ -188,4 +188,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('editing',array('name'  => $record['pagetitle'])));
 return $modx->smarty->fetch('resource/update.tpl');

@@ -13,5 +13,6 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.panel.resource.group.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/security/resourcegroup/list.js');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('resource_groups'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('security/resourcegroup/index.tpl');

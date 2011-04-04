@@ -57,5 +57,6 @@ if(is_array($onTVFormPrerender)) $onTVFormPrerender = implode('',$onTVFormPreren
 $modx->smarty->assign('onTVFormPrerender',$onTVFormPrerender);
 
 /* display template */
+$modx->smarty->assign('_pagetitle',$modx->lexicon('tv_new'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('element/tv/create.tpl');

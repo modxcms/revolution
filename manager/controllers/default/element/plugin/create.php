@@ -55,5 +55,6 @@ $onPluginFormPrerender = $modx->invokeEvent('OnPluginFormPrerender',array(
 if (is_array($onPluginFormPrerender)) $onPluginFormPrerender = implode('',$onPluginFormPrerender);
 $modx->smarty->assign('onPluginFormPrerender',$onPluginFormPrerender);
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('plugin_new'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('element/plugin/create.tpl');

@@ -47,5 +47,6 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('form_customization'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('security/forms/profile.tpl');

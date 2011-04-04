@@ -22,5 +22,6 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('profile'));
 $this->checkFormCustomizationRules($modx->user);
 return $modx->smarty->fetch('security/profile/index.tpl');

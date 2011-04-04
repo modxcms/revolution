@@ -57,5 +57,6 @@ MODx.ctx = "'.$context->get('key').'";
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('context').': '.$context->get('key'));
 $this->checkFormCustomizationRules($context);
 return $modx->smarty->fetch('context/update.tpl');

@@ -14,4 +14,5 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wor
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/workspace/lexicon/lexicon.panel.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/workspace/lexicon/index.js');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('lexicon_management'));
 return $modx->smarty->fetch('workspaces/lexicon/index.tpl');

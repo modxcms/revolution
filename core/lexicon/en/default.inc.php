@@ -112,6 +112,7 @@ $_lang['duplicate_of'] = 'Duplicate of [[+name]]';
 $_lang['duplication_options'] = 'Duplication Options';
 $_lang['edit'] = 'Edit';
 $_lang['edit_context'] = 'Edit context';
+$_lang['editing'] = 'Editing: [[+name]]';
 $_lang['editedon'] = 'Edit Date';
 $_lang['editing_form'] = 'Editing Form';
 $_lang['element_duplicate'] = 'Duplicate Element';

@@ -7,5 +7,5 @@
  */
 if(!$modx->hasPermission('new_role')) return $modx->error->failure($modx->lexicon('access_denied'));
 
-$this->checkFormCustomizationRules();
+$modx->smarty->assign('_pagetitle',$modx->lexicon('role'));
 return $modx->smarty->fetch('security/role/create.tpl');

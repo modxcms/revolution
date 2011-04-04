@@ -88,4 +88,5 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wor
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/workspace/workspace.panel.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/workspace/index.js');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('package_management'));
 return $modx->smarty->fetch('workspaces/index.tpl');

@@ -241,4 +241,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('document_new'));
 return $modx->smarty->fetch('resource/create.tpl');

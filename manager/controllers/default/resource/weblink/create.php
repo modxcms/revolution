@@ -205,4 +205,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('weblink_new'));
 return $modx->smarty->fetch('resource/weblink/create.tpl');

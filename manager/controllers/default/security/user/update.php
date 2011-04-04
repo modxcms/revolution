@@ -99,5 +99,6 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('user').': '.$user->get('username'));
 $this->checkFormCustomizationRules($user);
 return $modx->smarty->fetch('security/user/update.tpl');

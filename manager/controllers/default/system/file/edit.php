@@ -67,5 +67,6 @@ $modx->smarty->assign('OnFileEditFormPrerender',$onFileEditFormPrerender);
 
 $modx->smarty->assign('fa',$fa);
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('file_edit').': '.basename($filename));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('system/file/edit.tpl');

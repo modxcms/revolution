@@ -206,4 +206,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('symlink_new'));
 return $modx->smarty->fetch('resource/symlink/create.tpl');

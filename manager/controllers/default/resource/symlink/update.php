@@ -138,6 +138,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
-
-$this->checkFormCustomizationRules($resource);
+$modx->smarty->assign('_pagetitle',$modx->lexicon('editing',array('name'  => $record['pagetitle'])));
 return $modx->smarty->fetch('resource/symlink/update.tpl');

@@ -14,5 +14,6 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.panel.user.group.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/security/usergroup/create.js');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('user_group_new'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('security/usergroup/create.tpl');
