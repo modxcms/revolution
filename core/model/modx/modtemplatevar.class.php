@@ -256,7 +256,10 @@ class modTemplateVar extends modElement {
             }
         }
         /* get output_properties for rendering properties */
-        $params = array_merge($params,$this->get('output_properties'));
+        $outputProperties = $this->get('output_properties');
+        if (!empty($outputProperties) && is_array($outputProperties)) {
+            $params = array_merge($params,$outputProperties);
+        }
         
         /* for base_url in image/file tvs */
         if (!empty($value) && in_array($this->get('type'),array('image','file'))) {
