@@ -973,7 +973,7 @@ html #modx-topnav ul.modx-subnav li a:hover{
 .icon-locked .x-tree-node-icon { background-image:url(../images/restyle/icons/lock_edit.png) !important; }
 .icon-lock .x-tree-node-icon { background-image:url(../images/restyle/icons/lock.png) !important; }
 .active-node, .active-node span {
-    color: #29871C !important;
+    font-weight: bold;
 }
 /* ext extensions */
 input.x-static-text-field {
