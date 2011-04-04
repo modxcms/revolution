@@ -23,6 +23,17 @@ if (empty($scriptProperties['id'])) {
 /* set fields */
 $usergroup->fromArray($scriptProperties);
 
+/* invoke OnBeforeUserGroupFormSave event */
+$OnUserGroupBeforeFormSave = $modx->invokeEvent('OnUserGroupBeforeFormSave',array(
+    'mode' => modSystemEvent::MODE_UPD,
+    'usergroup' => &$usergroup,
+    'id' => $usergroup->get('id'),
+));
+$canSave = $this->processEventResponse($OnUserGroupBeforeFormSave);
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
+
 /* users */
 if (isset($scriptProperties['users']) && !empty($scriptProperties['id'])) {
     $ous = $usergroup->getMany('UserGroupMembers');
@@ -44,6 +55,13 @@ if (!empty($scriptProperties['id'])) {
         return $modx->error->failure($modx->lexicon('user_group_err_save'));
     }
 }
+
+/* invoke OnUserGroupFormSave event */
+$OnUserGroupFormSave = $modx->invokeEvent('OnUserGroupFormSave',array(
+    'mode' => modSystemEvent::MODE_NEW,
+    'usergroup' => &$usergroup,
+    'id' => $usergroup->get('id'),
+));
 
 /* log manager action */
 $modx->logManagerAction('save_user_group','modUserGroup',$usergroup->get('id'));

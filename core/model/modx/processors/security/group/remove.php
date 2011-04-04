@@ -20,10 +20,26 @@ if ($usergroup->get('id') == 1 || $usergroup->get('name') == $modx->lexicon('adm
     return $modx->error->failure($modx->lexicon('user_group_err_remove_admin'));
 }
 
+/* invoke OnUserGroupBeforeFormRemove event */
+$OnUserGroupBeforeFormRemove = $modx->invokeEvent('OnUserGroupBeforeFormRemove',array(
+    'usergroup' => &$usergroup,
+    'id' => $usergroup->get('id'),
+));
+$canRemove = $this->processEventResponse($OnUserGroupBeforeFormRemove);
+if (!empty($canRemove)) {
+    return $modx->error->failure($canRemove);
+}
+
 /* remove usergroup */
 if ($usergroup->remove() == false) {
     return $modx->error->failure($modx->lexicon('user_group_err_remove'));
 }
+
+/* invoke OnUserGroupFormRemove event */
+$OnUserGroupFormRemove = $modx->invokeEvent('OnUserGroupFormRemove',array(
+    'usergroup' => &$usergroup,
+    'id' => $usergroup->get('id'),
+));
 
 /* log manager action */
 $modx->logManagerAction('delete_user_group','modUserGroup',$usergroup->get('id'));

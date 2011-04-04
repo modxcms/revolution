@@ -40,6 +40,17 @@ if (isset($scriptProperties['users'])) {
     $usergroup->addMany($members);
 }
 
+/* invoke OnBeforeUserGroupFormSave event */
+$OnUserGroupBeforeFormSave = $modx->invokeEvent('OnUserGroupBeforeFormSave',array(
+    'mode' => modSystemEvent::MODE_NEW,
+    'usergroup' => &$usergroup,
+    'id' => $usergroup->get('id'),
+));
+$canSave = $this->processEventResponse($OnUserGroupBeforeFormSave);
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
+
 /* save usergroup */
 if ($usergroup->save() == false) {
     return $modx->error->failure($modx->lexicon('user_group_err_create'));
@@ -68,6 +79,14 @@ if (!empty($scriptProperties['resource_groups'])) {
         $acl->save();
     }
 }
+
+
+/* invoke OnUserGroupFormSave event */
+$OnUserGroupFormSave = $modx->invokeEvent('OnUserGroupFormSave',array(
+    'mode' => modSystemEvent::MODE_NEW,
+    'usergroup' => &$usergroup,
+    'id' => $usergroup->get('id'),
+));
 
 /* log manager action */
 $modx->logManagerAction('new_user_group','modUserGroup',$usergroup->get('id'));

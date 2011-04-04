@@ -33,9 +33,25 @@ $member = $modx->newObject('modUserGroupMember');
 $member->set('user_group',$usergroup->get('id'));
 $member->set('member',$user->get('id'));
 
+/* invoke OnUserBeforeAddToGroup event */
+$OnUserBeforeAddToGroup = $modx->invokeEvent('OnUserBeforeAddToGroup',array(
+    'user' => &$user,
+    'usergroup' => &$usergroup,
+));
+$canSave = $this->processEventResponse($OnUserBeforeAddToGroup);
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
+
 /* save membership */
 if ($member->save() == false) {
     return $modx->error->failure($modx->lexicon('user_group_member_err_save'));
 }
+
+/* invoke OnUserAddToGroup event */
+$modx->invokeEvent('OnUserAddToGroup',array(
+    'user' => &$user,
+    'usergroup' => &$usergroup,
+));
 
 return $modx->error->success('',$member);
