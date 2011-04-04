@@ -41,7 +41,10 @@ if (!empty($scriptProperties['tv'])) {
             }
         }
         /* now get output_properties */
-        $settings = array_merge($settings,$tv->get('output_properties'));
+        $outputProperties = $tv->get('output_properties');
+        if (!empty($outputProperties) && is_array($outputProperties)) {
+            $settings = array_merge($settings,$outputProperties);
+        }
     }
     $modx->smarty->assign('tv',$scriptProperties['tv']);
 }
