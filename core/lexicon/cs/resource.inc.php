@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2011-03-26
  */
 $_lang['access'] = 'Přístup';
 $_lang['cache_output'] = 'Obsah cache';
@@ -23,7 +23,7 @@ $_lang['document_create'] = 'Dokument'; // strom > vytvorit v okne
 $_lang['document_create_here'] = 'Dokument'; // strom > vytvorit
 $_lang['document_new'] = 'Nový dokument';
 $_lang['documents'] = 'Dokumenty';
-$_lang['duplicate_alias_found'] = 'Dokument ID [[+id]] již používá alias [[+alias]]. Zadejte jiný, ještě nepoužitý alias.';
+$_lang['duplicate_uri_found'] = 'Dokument ID [[+id]] již používá URI [[+uri]]. Zadejte unikátní alias nebo použijte Freeze URI pro manuální nastavení.';
 $_lang['empty_template'] = '(žádný)';
 $_lang['general'] = 'Obecné informace';
 $_lang['markup'] = 'Markup/Struktura';
@@ -68,6 +68,7 @@ $_lang['resource_err_delete_sitestart'] = 'Tento dokument je nastaven jako "Úvo
 $_lang['resource_err_delete_siteunavailable'] = 'Tento dokument je nastaven jako "Stránka nedostupnosti" a nemůže být odstraněn!';
 $_lang['resource_err_duplicate'] = 'Nastala chyba při kopírování dokumentu.';
 $_lang['resource_err_move_to_child'] = 'Nemůžete přesunout dokument do jeho potomka.';
+$_lang['resource_err_move_sitestart'] = 'Dokument je nastaven v proměnné konfigurace site_start a nelze jej přesunout do jiného kontextu!';
 $_lang['resource_err_nf'] = 'Dokument nenalezen.';
 $_lang['resource_err_nfs'] = 'Dokument s ID: [[+id]] nenalezen';
 $_lang['resource_err_ns'] = 'Nespecifikovaný dokument.';
@@ -90,7 +91,7 @@ $_lang['resource_hide_from_menus'] = 'Skrýt z menu';
 $_lang['resource_hide_from_menus_help'] = 'Pokud je aktivní, stránka se <b>nebude</b> zobrazovat v menu. Může se stát, že některé konstruktory menu mohou tuto volbu ignorovat.';
 $_lang['resource_link_attributes'] = 'Atributy odkazu';
 $_lang['resource_link_attributes_help'] = 'Atributy odkazu na tento dokument, např. target= nebo rel=.';
-$_lang['resource_locked_by'] = 'Dokument s ID [[+id]] je uzamčen uživatelem [[+user]]';
+$_lang['resource_locked_by'] = 'Uzamčeno uživatelem [[+user]]';
 $_lang['resource_longtitle'] = 'Dlouhý název';
 $_lang['resource_longtitle_help'] = 'Toto je delší název pro tento dokument. Je dobrý pro vyhledávače a měl by více popisovat tento dokument.';
 $_lang['resource_menuindex'] = 'Index řazení';
@@ -134,6 +135,10 @@ $_lang['resource_unpublishdate'] = 'Ukončení publikování';
 $_lang['resource_unpublishdate_help'] = 'Pokud nastavíte datum ukončení publikování, bude dokumentu automaticky ukončeno publikování jakmile nastane toto datum. Klikněte na ikonu kalendáře pro výběr data nebo nechte políčko prázdné a tím neomezíte ukončení publikování dokumentu.';
 $_lang['resource_unpublished'] = 'Nepublikovaný';
 $_lang['resource_untitled'] = '_Bezejmenný dokument';
+$_lang['resource_uri'] = 'URI';
+$_lang['resource_uri_help'] = 'Relativní URL pro tento dokument.';
+$_lang['resource_uri_override'] = 'Statická URI';
+$_lang['resource_uri_override_help'] = 'Změnou tohoto nastavení dovolíte určit statickou URI pro tento dokument hodnotou zapsanou níže.';
 $_lang['resource_with_id_not_found'] = 'Dokument s ID %s nenalezen!';
 $_lang['resource_view'] = 'Zobrazit dokument';
 $_lang['show_sort_options'] = 'Zobrazit možnosti řazení';
@@ -147,6 +152,7 @@ $_lang['status'] = 'Stav';
 $_lang['symlink'] = 'Symbolický odkaz';
 $_lang['symlink_create'] = 'Vytvořit symbolický odkaz';
 $_lang['symlink_create_here'] = 'Symbolický odkaz'; // strom > vytvorit
+$_lang['symlink_help'] = 'Adresa objektu, na který chcete odkazovat pomocít tohoto symbolického linku. Chcete-li odkazovat na existující MODx dokument zadejte zde jeho ID.';
 $_lang['symlink_message'] = 'Symbolický odkaz je odkaz na jiný dokument v rámci portálu, kterého obsah je zobrazen beze změny URL.';
 $_lang['symlink_new'] = 'Nový symbolický odkaz';
 $_lang['template_variables'] = 'Template variable';

@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-17
+ * @updated 2011-03-26
  */
 $_lang['binary'] = 'Binární';
 $_lang['binary_desc'] = 'Je tento soubor binární nebo textový/ascii?';
@@ -25,3 +25,4 @@ $_lang['content_type_remove'] = 'Odstranit typ obsahu';
 $_lang['content_type_remove_confirm'] = 'Opravdu chcete odstranit tento typ obsahu?';
 $_lang['content_types'] = 'Typy obsahů';
 $_lang['file_extensions'] = 'Přípony souborů';
+$_lang['file_extensions_desc'] = 'Toto je přípona souboru pro tento Typ obsahu.';

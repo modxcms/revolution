@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-20
+ * @updated 2011-03-30
  */
 $_lang['class_name'] = 'Třída obsahu';
 $_lang['default'] = 'Výchozí';
@@ -18,9 +18,9 @@ $_lang['import'] = 'Importovat';
 $_lang['new_name'] = 'Nový název';
 $_lang['object'] = 'Objekt';
 $_lang['properties'] = 'Vlastnosti';
-$_lang['properties_default_locked'] = 'Výchozí vlastnosti uzamčeny';
+$_lang['properties_default_locked'] = 'Výchozí vlastnosti jsou uzamčeny';
 $_lang['properties_default_locked_msg'] = 'Pouze uživatel s právem "unlock_element_properties" může odemknout výchozí vlastnosti.';
-$_lang['properties_default_unlocked'] = 'Výchozí vlastnosti odemčeny';
+$_lang['properties_default_unlocked'] = 'Výchozí vlastnosti jsou odemčeny';
 $_lang['properties_import'] = 'Importovat vlastnosti';
 $_lang['properties_import_err_invalid'] = 'Vybraný soubor není platný soubor obsahující vlastnosti. Zkuste to znovu.';
 $_lang['properties_import_err_upload'] = 'Vyberte soubor obsahující platné vlastnosti, které chcete nahrát.';

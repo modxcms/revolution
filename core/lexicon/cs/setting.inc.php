@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-12-02
+ * @updated 2011-04-04
  */
 $_lang['area'] = 'Oblast';
 $_lang['area_authentication'] = 'Autentizaci a zabezpečení';
@@ -27,6 +27,8 @@ $_lang['area_lexicon_string_msg'] = 'Zadejte klíč záznamu slovníku pro tuto 
 $_lang['area_site'] = 'Portál';
 $_lang['area_system'] = 'Systém a server';
 $_lang['areas'] = 'Oblasti';
+$_lang['charset'] = 'Znaková sada';
+$_lang['country'] = 'Země';
 $_lang['namespace'] = 'Jmenný prostor';
 $_lang['namespace_filter'] = 'Filtrovat dle jmenného prostoru...';
 $_lang['search_by_key'] = 'Hledat dle klíče...';
@@ -50,8 +52,18 @@ $_lang['settings_site'] = 'Portál';
 $_lang['settings_ui'] = 'Rozhranní &amp; Funkce';
 $_lang['settings_users'] = 'Uživatel';
 $_lang['system_settings'] = 'Konfigurace systému';
+$_lang['usergroup'] = 'Uživatelská skupina';
 
 // user settings
+$_lang['setting_access_category_enabled'] = 'Kontrolovat přístupy ke kategoriím';
+$_lang['setting_access_category_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke kategoriím v rámci daného kontextu. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke kategoriím!</strong>';
+
+$_lang['setting_access_context_enabled'] = 'Kontrolovat přístupy ke kontextům';
+$_lang['setting_access_context_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke kontextům. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke kontextům! NEVYPÍNEJTE TUTO VOLBU v rámci celého systému nebo pro kontext "mgr", došlo by tím k zamezní přístupu do správce obsahu.</strong>';
+
+$_lang['setting_access_resource_group_enabled'] = 'Kontrolovat přístupy ke skupinám dokumentů';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Použijte pro povolení / zamezení kontroly přístupů ke skupinám dokumentů v rámci daného kontextu. <strong>POZNÁMKA: Je-li tato možnost nastavena na Ne, pak jsou ignorována práva pro přístup ke skupinám dokumentů!!</strong>';
+
 $_lang['setting_allow_mgr_access'] = 'Přístup do správce obsahu';
 $_lang['setting_allow_mgr_access_desc'] = 'Toto vyberte pokud si přejete povolit přístup do správce obsahu. <strong>Poznámka: Pokud je tato možnost nastavena na hodnotu "Ne" bude uživatel přesměrován na stránku přihlášení do správce obsahu nebo na úvodní stránku portálu.</strong>';
 
@@ -71,8 +83,8 @@ $_lang['setting_login_homepage_desc'] = 'Zadejte ID dokumentu, do kterého chcet
 $_lang['setting_access_policies_version'] = 'Verze schématu přístupových práv';
 $_lang['setting_access_policies_version_desc'] = 'Verze systému přístupových práv. NEMĚŇTE.';
 
-$_lang['setting_allow_duplicate_alias'] = 'Povolit duplicitu aliasů';
-$_lang['setting_allow_duplicate_alias_desc'] = 'Pokud je nastaveno na "Ano", budete mít možnost ukládat duplicitní aliasy. <strong>Poznámka: Tato možnost by měla být aktivní spolu s nastavením "Ano" u položky "Cesta k přátelským aliasům", aby se předešlo problémům při odkazování na dokumenty.</strong>';
+$_lang['setting_allow_forward_across_contexts'] = 'Povolit přesměrování mezi kontexty';
+$_lang['setting_allow_forward_across_contexts_desc'] = 'Tímto lze povolit, aby symbolický odkaz nebo API metoda modX::sendForward() mohla přesměrovat na dokument z jiného kontextu.';
 
 $_lang['setting_allow_tags_in_post'] = 'Povolit HTML tagy v POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Je-li nastaveno "Ne", z obsahu POST proměnných v rámci správce obsahu budou odstraněny všechny HTML tagy. Doporučujeme nechat tuto hodnotu na "Ano".';
@@ -94,6 +106,9 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Je-li nastaveno "Ano", uživatel
 
 $_lang['setting_automatic_alias'] = 'Automaticky generovat aliasy';
 $_lang['setting_automatic_alias_desc'] = 'Zvolte "Ano", pokud má MODX automaticky generovat aliasy z titulků dokumentů při ukládání.';
+
+$_lang['setting_base_help_url'] = 'Základní URL nápovědy';
+$_lang['setting_base_help_url_desc'] = 'Základní URL pro odkazy Nápovědy v pravém horním rohu správce obsahu.';
 
 $_lang['setting_blocked_minutes'] = 'Doba blokování uživatele';
 $_lang['setting_blocked_minutes_desc'] = 'Počet minut, po které bude uživatel blokován, pokud překročí maximální počet pokusů pro přihlášení. Zadávejte pouze čísla (žádné čárky, mezery atd.)';
@@ -118,14 +133,11 @@ $_lang['setting_cache_disabled'] = 'Globálně zakázat cache';
 $_lang['setting_cache_disabled_desc'] = 'Zvolte "Ano" pokud chcete zakázat všechny funkce cache. Nedoporučuje se.';
 $_lang['setting_cache_disabled_err'] = 'Zvolte jestli chcete zakát nebo povolit všechny cache funkce.';
 
-$_lang['setting_cache_json'] = 'Ukládat JSON data do cache';
-$_lang['setting_cache_json_desc'] = 'Možnost určující zda se mají ukládat všechny JSON data posílané z/do UI správce obsahu do cache.';
-
 $_lang['setting_cache_expires'] = 'Obecná expirace cache';
 $_lang['setting_cache_expires_desc'] = 'Doba (v sekundách), po kterou bude zachovávána cache.';
 
-$_lang['setting_cache_json_expires'] = 'Expirace JSON cache';
-$_lang['setting_cache_json_expires_desc'] = 'Doba (v sekundách), po které budou zachovány JSON soubory v cache.';
+$_lang['setting_cache_format'] = 'Formát dat pro uchování cache';
+$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serializace. Vyberte jeden z těchto formátů';
 
 $_lang['setting_cache_handler'] = 'Název třídy správce cache';
 $_lang['setting_cache_handler_desc'] = 'Název třídy, která se bude používat při ukládání do cache.';
@@ -265,9 +277,6 @@ $_lang['setting_friendly_alias_translit_class_path_desc'] = 'Cesta k balíčku s
 $_lang['setting_friendly_alias_trim_chars'] = 'Odstranění znaků z konce aliasů';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Znaky, které mají být odstraněny z konce URL u aliasu dokumentu.';
 
-$_lang['setting_friendly_alias_urls'] = 'Používat přátelské aliasy';
-$_lang['setting_friendly_alias_urls_desc'] = 'Nastavením této možnosti na "Ano", bude také k aliasu připojena přípona typu obsahu. Například pokud ID zdroje bude 1, jeho alias bude "uvod" a máte nastavenou koncovku typu obsahu na ".html", nastavením této možnosti na "Ano" dojde vždy k vygenerování odkazu "uvod.html". Pokud zde alias není definován MODX vygeneruje odkaz "1.html".';
-
 $_lang['setting_friendly_alias_word_delimiter'] = 'Oddělovač slov aliasu';
 $_lang['setting_friendly_alias_word_delimiter_desc'] = 'Preferovaný oddělovač slov v přátelských URL.';
 
@@ -278,8 +287,14 @@ $_lang['setting_friendly_urls'] = 'Používat přátelská URL';
 $_lang['setting_friendly_urls_desc'] = 'Nastavení zda má MODX používat přátelská URL (lepší pro zpracování vyhledávači). Toto nastavení funguje pouze pro MODX instalace běžící serveru Apache, pro správnou funkčnost je také nutné nastavit soubor .htaccess. Pro více informací náhledněte do souboru .htaccess přiloženého v MODX distribuci.';
 $_lang['setting_friendly_urls_err'] = 'Zvolte zda chcete používat přátelská URL či nikoli.';
 
+$_lang['setting_global_duplicate_uri_check'] = 'Kontrola duplicitních URI napříč kontexty';
+$_lang['setting_global_duplicate_uri_check_desc'] = 'Vyberte  \'Ano\' pokud chcete kontrolovat duplikáty napříč všemi kontexty. V ostatních případech je kontrolován pouze kontext v němž je daný dokument ukládán.';
+
 $_lang['setting_hidemenu_default'] = 'Nezobrazovat v menu jako výchozí nastavení';
 $_lang['setting_hidemenu_default_desc'] = 'Nastavte "Ano" pokud chcete, aby všechny nově vytvořené dokumenty měli přednastaveno nezobrazování se v menu.';
+
+$_lang['setting_link_tag_scheme'] = 'Schéma generování URL';
+$_lang['setting_link_tag_scheme_desc'] = 'Schéma generování URL pro tag [[~id]]. Možné volby viz: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
 
 $_lang['setting_mail_charset'] = 'Znaková sada e-mailu';
 $_lang['setting_mail_charset_desc'] = 'Znaková sada e-mailu, např. "iso-8859-1" nebo "UTF-8". Doporučujeme "UTF-8".';
@@ -326,6 +341,9 @@ $_lang['setting_manager_direction_desc'] = 'Zvolte směr textu, kterým bude zob
 $_lang['setting_manager_date_format'] = 'Formát data ve správci obsahu';
 $_lang['setting_manager_date_format_desc'] = 'Formátovací řetězec v PHP date() formátu, jak má být datum reprezentován ve správci obsahu.';
 
+$_lang['setting_manager_favicon_url'] = 'URL favikony pro správce obsahu';
+$_lang['setting_manager_favicon_url_desc'] = 'Je-li tato volba nastavena, bude její hodnota použita pro načtení favikony pro správce obsahu. Cesta musí být zadána absolutně nebo relativně vůči adresáři /manager.';
+
 $_lang['setting_manager_lang_attribute'] = 'HTML a XML jazykové atributy správce obsahu';
 $_lang['setting_manager_lang_attribute_desc'] = 'Zadejte jazykový kód, který nejlépe vystihuje zvolený jazyk správce obsahu, toto nastavení zajistí, že Vám prohlížeč zobrazí správně data.';
 
@@ -362,6 +380,9 @@ $_lang['setting_password_generated_length_desc'] = 'Délka automaticky generovan
 $_lang['setting_password_min_length'] = 'Minimální délka hesla';
 $_lang['setting_password_min_length_desc'] = 'Minimální délka hesla uživatele.';
 
+$_lang['setting_principal_targets'] = 'ACL cíle pro načtení';
+$_lang['setting_principal_targets_desc'] = 'Vlastní ACL cíle pro MODx uživatele.';
+
 $_lang['setting_proxy_auth_type'] = 'Proxy typ autentizace';
 $_lang['setting_proxy_auth_type_desc'] = 'Podporuje buď BASIC nebo NTLM.';
 
@@ -391,6 +412,9 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Smaže nejméně často načí
 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb Ukládat zdrojové soubory do cache';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Určuje zda se mají zdrojové soubory načítat do cache nebo ne. Doporujeme nastavit "Ne".';
+
+$_lang['setting_phpthumb_document_root'] = 'PHPThumb Document Root';
+$_lang['setting_phpthumb_document_root_desc'] = 'Tuto volbu nastavte pokud máte problém se serverovou proměnnou DOCUMENT_ROOT, nebo dostáváte chyby od OutputThumbnail nebo !is_resource. Chcete-li tuto volbu využít pak nastavte absolutní cestu v rámci serveru. Je-li hodnota tohoto nastavení prázdná tak MODX použije proměnné serveru DOCUMENT_ROOT.';
 
 $_lang['setting_phpthumb_error_bgcolor'] = 'phpThumb Chyba: barva pozadí';
 $_lang['setting_phpthumb_error_bgcolor_desc'] = 'Hexadecimální hodnota barvy bez #, definující barvu pozadí při výpisu chyby phpThumb.';
@@ -466,7 +490,10 @@ $_lang['setting_resolve_hostnames'] = 'Získavat hostname návštěvníků';
 $_lang['setting_resolve_hostnames_desc'] = 'Chcete, aby se MODX pokoušel získávat hostname návštěvníků portálu? Získávání hostname může způsobit zatížení serveru navíc, ale návštěvníky to neovlivní.';
 
 $_lang['setting_resource_tree_node_name'] = 'Zdroj názvu dokumentu ve stromu dokumentů';
-$_lang['setting_resource_tree_node_name_desc'] = 'Zadejte název políčka, kterého obsah se má zobrazovat jako název dokumentu ve stromu dokumentů. Výchozí hodnotou je pagetitle, ale může zde být použito jakékoliv políčko jako např. menutitle, alias, longtitle, atd.';
+$_lang['setting_resource_tree_node_name_desc'] = 'Zadejte název políčka, kterého obsah se má zobrazovat jako název dokumentu ve stromu dokumentů. Výchozí hodnotou je "pagetitle", ale může zde být použito jakékoliv políčko jako např. "menutitle", "alias", "longtitle" atd.';
+
+$_lang['setting_resource_tree_node_tooltip'] = 'Políčko nápovědy pro strom dokumentů';
+$_lang['setting_resource_tree_node_tooltip_desc'] = 'Vyberte políčko, které má být použito pro zobrazení nápovědy. Lze použít jakékoliv políčko dokumentu jako např. "menutitle", "alias", "longtitle", atd. Je-li tato volba nevyplněna bude použito políčko "longtitle" včetně podpopisu z políčka "description".';
 
 $_lang['setting_richtext_default'] = 'WYSIWYG editor';
 $_lang['setting_richtext_default_desc'] = 'Zvolte "Ano" pokud chcete, aby všechny nově vytvořené dokumenty používaly ve výchozím stavu WYSIWYG editor.';
@@ -536,6 +563,9 @@ $_lang['setting_site_unavailable_page_err'] = 'Zadejte ID dokumentu, která bude
 
 $_lang['setting_strip_image_paths'] = 'Přepisovat URL souborů';
 $_lang['setting_strip_image_paths_desc'] = 'Pokud je nastaveno na "Ne", MODX bude zapisovat cesty k souborům (obrázky, soubory, flash, atd.) jako absolutní URL. Relativní URL jsou užitečné pokud byste chtěli přesunout celou instalaci MODX, např. z vývojového serveru na produkční. Pokud netušíte co s tímto nastavením, ponechte jej nastavené na "Ano".';
+
+$_lang['setting_symlink_merge_fields'] = 'Sloučit políčka dokumentů v symbolických odkazech';
+$_lang['setting_symlink_merge_fields_desc'] = 'JeIf nastaveno "Ano", dojde k automatickému sloučení neprázdných políček při přesměrování pomocí symbolických odkazů.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Zobrazovat popisky v horním menu';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na \'Ne\', MODX skryje popisky u položek horního menu v rámci správce obsahu.';

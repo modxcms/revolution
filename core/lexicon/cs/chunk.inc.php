@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2011-03-26
  */
 $_lang['chunk'] = 'Chunk';
 $_lang['chunk_code'] = 'Kód chunku (html)';
@@ -15,7 +15,7 @@ $_lang['chunk_desc'] = 'Popis';
 $_lang['chunk_delete_confirm'] = 'Opravdu chcete odstranit tento chunk?';
 $_lang['chunk_duplicate_confirm'] = 'Opravtu chcete zkopírovat tento chunk?';
 $_lang['chunk_err_duplicate'] = 'Chyba při kopírování chunku.';
-$_lang['chunk_err_exists_name'] = 'Chunk s tímto názvem již existuje.';
+$_lang['chunk_err_exists_name'] = 'Chunk s názvem "[[+name]]" již existuje.';
 $_lang['chunk_err_invalid_name'] = 'Název chunku je chybný.';
 $_lang['chunk_err_locked'] = 'Chunk je uzamčen.';
 $_lang['chunk_err_remove'] = 'Nastala chyba při odstraňování chunku.';

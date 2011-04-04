@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-09-11
+ * @updated 2011-03-26
  */
 $_lang['mysql_err_ext'] = 'MODX vyžaduje MySQL extenzi pro PHP a ta se zdá být nenačtena.';
 $_lang['mysql_err_pdo'] = 'MODX vyžaduje ovladač pdo_mysql pokud má být používáno nativní PDO a ten se zdá být nenačten.';
@@ -20,3 +20,5 @@ $_lang['mysql_version_server_nf'] = 'MODX se nepodařilo zjistit verzi vašeho M
 $_lang['mysql_version_server_start'] = 'Kontroluji verzi MySQL serveru:';
 $_lang['mysql_version_success'] = 'OK! Běží na: [[+version]]';
 
+$_lang['sqlsrv_version_success'] = 'OK!';
+$_lang['sqlsrv_version_client_success'] = 'OK!';
