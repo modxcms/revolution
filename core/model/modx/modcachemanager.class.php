@@ -86,12 +86,13 @@ class modCacheManager extends xPDOCacheManager {
             );
             $sql = "SELECT {$resourceCols} FROM {$tblResource} r LEFT JOIN {$tblContextResource} cr ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY {$resourceCols}, r.menuindex ORDER BY r.parent ASC, r.menuindex ASC";
             $criteria= new xPDOCriteria($this->modx, $sql, $bindings, false);
+            $collResources = null;
             if ($criteria->stmt && $criteria->stmt->execute()) {
                 $collResources= & $criteria->stmt;
             }
+            $results['resourceMap']= array ();
+            $results['aliasMap']= array ();
             if ($collResources) {
-                $results['resourceMap']= array ();
-                $results['aliasMap']= array ();
                 while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
                     $results['resourceMap'][(string) $r->parent][] = (string) $r->id;
                     if ($this->modx->getOption('friendly_urls', $contextConfig, false)) {
