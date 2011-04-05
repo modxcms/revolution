@@ -61,7 +61,7 @@ MODx.panel.SystemInfo = function(config) {
         xtype: 'statictextfield'
         ,fieldLabel: _('extjs_version')
         ,name: 'extjs_version'
-        ,value: '3.3.0'
+        ,value: '3.3.1'
     },{
         xtype: 'statictextfield'
         ,fieldLabel: _('smarty_version')
@@ -76,7 +76,7 @@ MODx.panel.SystemInfo = function(config) {
         xtype: 'statictextfield'
         ,fieldLabel: _('magpie_version')
         ,name: 'magpie_version'
-        ,value: '0.7a'
+        ,value: '0.72'
     },{
         html: '<hr />'
     },{
