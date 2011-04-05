@@ -32,24 +32,25 @@
 
 <div id="modx-browser"></div>
 <div id="modx-container">
-    <div id="modx-topbar">
-        <div id="modx-logo"><a href="http://modx.com" onclick="window.open(this.href); return false;"><img src="templates/{$_config.manager_theme}/images/style/modx-logo-header.png" alt="" /></a></div>
-        <div id="modx-site-name">
-            {$_config.site_name}
-            <span class="modx-version">MODX Revolution {$_config.settings_version} ({$_config.settings_distro})</span>
+    <div id="modx-header">
+        <div id="modx-mainpanel">
+            <div id="modx-topbar">
+            <div id="modx-logo"><a href="http://modx.com" onclick="window.open(this.href); return false;"><img src="templates/{$_config.manager_theme}/images/style/modx-logo-header.png" alt="" /></a></div>
+            <div id="modx-site-name">
+                {$_config.site_name}
+                <span class="modx-version">MODX Revolution {$_config.settings_version} ({$_config.settings_distro})</span>
+            </div>
+        </div>
+        <div id="modx-navbar">
+            <div id="rightlogin">
+            <span>
+                <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
+                <a id="modx-login-user" href="?a={$profileAction}">{$username}</a>
+            </span>
+            </div>
+            {include file="navbar.tpl"}
         </div>
     </div>
-    <div id="modx-navbar">
-        <div id="rightlogin">
-        <span>
-            <a class="modx-logout" href="javascript:;" onclick="MODx.logout();">{$_lang.logout}</a>
-            <a id="modx-login-user" href="?a={$profileAction}">{$username}</a>
-        </span>
-        </div>
-        {include file="navbar.tpl"}
-    </div>
-
-    <div id="modx-mainpanel">
         <div id="modAB"></div>
         <div id="modx-leftbar"></div>
         <div id="modx-content">
