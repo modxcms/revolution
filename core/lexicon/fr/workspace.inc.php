@@ -24,6 +24,7 @@ $_lang['dir_err_assets_comp'] = 'Votre répertoire assets/components/ n\'a pu ê
 $_lang['dir_err_core_comp'] = 'Votre répertoire core/components/ n\'a pu être créé dans: [[+path]] <br />Vous devrez créer ce répertoire et le rendre inscriptible si vous souhaitez utiliser le gestionnaire de paquet ou des composants tierces.';
 $_lang['download'] = 'Télécharger';
 $_lang['downloaded'] = 'Téléchargé';
+$_lang['downloading'] = 'Téléchargement…';
 $_lang['download_extras'] = 'Télécharger des extras';
 $_lang['downloads'] = 'Téléchargements';
 $_lang['installation_instructions'] = 'Instructions d\'Installation';
