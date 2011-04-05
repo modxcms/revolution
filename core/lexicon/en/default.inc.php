@@ -176,6 +176,7 @@ $_lang['ext_timemin'] = 'The time in this field must be equal to or after {0}';
 $_lang['ext_today_tip'] = '{0} (Spacebar)';
 $_lang['failure'] = 'Failure';
 $_lang['female'] = 'Female';
+$_lang['field_required'] = 'This field is required.';
 $_lang['files'] = 'Files';
 $_lang['filter'] = 'Filter';
 $_lang['filter_clear'] = 'Clear Filter';

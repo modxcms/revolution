@@ -123,8 +123,10 @@ if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->le
 /* friendly url alias checks */
 if ($workingContext->getOption('friendly_urls', false)) {
     /* auto assign alias */
-    if(empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
+    if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
         $scriptProperties['alias'] = $scriptProperties['pagetitle'];
+    } elseif (empty($scriptProperties['alias'])) {
+        $modx->error->addField('alias', $modx->lexicon('field_required'));
     }
     $duplicateContext = $workingContext->getOption('global_duplicate_uri_check', false) ? '' : $scriptProperties['context_key'];
     $aliasPath = $resource->getAliasPath($scriptProperties['alias'], $scriptProperties);
