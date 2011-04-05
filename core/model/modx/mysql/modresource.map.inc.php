@@ -342,7 +342,8 @@ $xpdo_meta_map['modResource']= array (
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
-      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'phptype' => 'boolean',
       'null' => false,
       'default' => 0,
       'index' => 'index',

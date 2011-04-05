@@ -912,7 +912,7 @@
 
         <aggregate alias="Category" class="modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Resources" class="modResource" local="id" foreign="template" cardinality="many" owner="local" />
-        <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
+        <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="templateid" cardinality="many" owner="local" />
     </object>
     
     <object class="modTemplateVar" table="site_tmplvars" extends="modElement">
