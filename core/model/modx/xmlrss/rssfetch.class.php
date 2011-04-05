@@ -32,7 +32,7 @@ require_once MAGPIE_DIR . 'rsscache.class.php';
 
 // for including 3rd party libraries
 define('MAGPIE_EXTLIB', MAGPIE_DIR . 'extlib' . DIR_SEP);
-require_once MAGPIE_EXTLIB . 'Snoopy.class.php';
+require_once MAGPIE_EXTLIB . 'snoopy.class.php';
 
 
 /* 
