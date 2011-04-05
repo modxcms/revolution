@@ -1,11 +1,4 @@
 <?php
-/**
- * Category Russian lexicon topic
- *
- * @language ru
- * @package modx
- * @subpackage lexicon
- */
 $_lang['categories'] = 'Категории';
 $_lang['category_confirm_delete'] = 'Вы уверены что хотите удалить эту категорию? Все элементы в ней будут помечены как &laquo; Без категории&raquo;.';
 $_lang['category_create'] = 'Создать категорию';
