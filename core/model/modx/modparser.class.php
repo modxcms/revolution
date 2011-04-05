@@ -380,7 +380,7 @@ class modParser {
                     break;
                 case '$':
                     $tagName= substr($tagName, 1 + $tokenOffset);
-                    if ($element= $this->modx->getObject('modChunk', array ('name' => $this->realname($tagName)), true)) {
+                    if ($element= $this->getElement('modChunk', $tagName)) {
                         $element->set('name', $tagName);
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
@@ -400,7 +400,7 @@ class modParser {
                         $element->setCacheable($cacheable);
                         $elementOutput= $element->process($tagPropString);
                     }
-                    elseif ($element= $this->modx->getObject('modTemplateVar', array ('name' => $this->realname($tagName)), true)) {
+                    elseif ($element= $this->getElement('modTemplateVar', $tagName)) {
                         $element->set('name', $tagName);
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
@@ -409,7 +409,7 @@ class modParser {
                     break;
                 default:
                     $tagName= substr($tagName, $tokenOffset);
-                    if ($element= $this->modx->getObject('modSnippet', array ('name' => $this->realname($tagName)), true)) {
+                    if ($element= $this->getElement('modSnippet', $tagName)) {
                         $element->set('name', $tagName);
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);
@@ -422,6 +422,31 @@ class modParser {
             /* $this->modx->cacheManager->writeFile(MODX_BASE_PATH . 'parser.log', "Processing {$outerTag} as {$innerTag}:\n" . print_r($elementOutput, 1) . "\n\n", 'a'); */
         }
         return $elementOutput;
+    }
+
+    /**
+     * Get a modElement instance taking advantage of the modX::$sourceCache.
+     *
+     * @param string $class The modElement derivative class to load.
+     * @param string $name An element name or raw tagName to identify the modElement instance.
+     * @return modElement|null An instance of the specified modElement derivative class.
+     */
+    public function getElement($class, $name) {
+        $realname = $this->realname($name);
+        if (array_key_exists($class, $this->modx->sourceCache) && array_key_exists($realname, $this->modx->sourceCache[$class])) {
+            $element = $this->modx->newObject($class);
+            $element->fromArray($this->modx->sourceCache[$class][$realname]['fields'], '', true, true);
+            $element->setPolicies($this->modx->sourceCache[$class][$realname]['policies']);
+        } else {
+            $element = $this->modx->getObject($class, array('name' => $realname), true);
+            if ($element && array_key_exists($class, $this->modx->sourceCache)) {
+                $this->modx->sourceCache[$class][$realname] = array(
+                    'fields' => $element->toArray(),
+                    'policies' => $element->getPolicies()
+                );
+            }
+        }
+        return $element;
     }
 
     /**

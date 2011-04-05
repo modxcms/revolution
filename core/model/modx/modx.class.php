@@ -219,6 +219,7 @@ class modX extends xPDO {
     public $sourceCache= array(
         'modChunk' => array()
         ,'modSnippet' => array()
+        ,'modTemplateVar' => array()
     );
 
     /**#@+
