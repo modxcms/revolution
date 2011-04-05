@@ -1,11 +1,4 @@
 <?php
-/**
- * Snippet Russian lexicon topic
- *
- * @language ru
- * @package modx
- * @subpackage lexicon
- */
 $_lang['snippet'] = 'Сниппет';
 $_lang['snippets_available'] = 'Сниппеты доступные вам для включения в вашу страницу';
 $_lang['snippet_code'] = 'Код сниппета (php)';
