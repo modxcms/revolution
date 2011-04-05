@@ -145,7 +145,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
     	
     ,preview: function() {
-        window.open('../'+this.cm.activeNode.attributes.preview_url);
+        window.open(this.cm.activeNode.attributes.preview_url);
     }
     
     ,deleteDocument: function(itm,e) {

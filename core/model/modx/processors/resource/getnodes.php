@@ -184,7 +184,7 @@ while ($item) {
                 'classKey' => $item->class_key,
                 'ctx' => $item->context_key,
                 'qtip' => $qtip,
-                'preview_url' => $modx->makeUrl($item->get('id')),
+                'preview_url' => $modx->makeUrl($item->get('id'), '', '', 'full'),
                 'page' => empty($scriptProperties['nohref']) ? '?a='.($hasEditPerm ? $actions['resource/update'] : $actions['resource/data']).'&id='.$item->id : '',
                 'allowDrop' => true,
             );
