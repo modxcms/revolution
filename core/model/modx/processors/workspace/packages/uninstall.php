@@ -27,6 +27,7 @@ $modx->log(modX::LOG_LEVEL_INFO,$modx->lexicon('package_uninstall_info_prep'));
 $options = array(
     xPDOTransport::PREEXISTING_MODE => $scriptProperties['preexisting_mode'],
 );
+
 if ($package->uninstall($options) == false) {
     return $modx->error->failure(sprintf($modx->lexicon('package_err_uninstall'),$package->getPrimaryKey()));
 }
