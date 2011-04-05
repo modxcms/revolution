@@ -93,7 +93,6 @@ $record['isfolder'] = intval($record['isfolder']) == 1 ? true : false;
 $record['richtext'] = intval($record['richtext']) == 1 ? true : false;
 $record['searchable'] = intval($record['searchable']) == 1 ? true : false;
 $record['cacheable'] = intval($record['cacheable']) == 1 ? true : false;
-$record['syncsite'] = intval($record['syncsite']) == 1 ? true : false;
 $record['deleted'] = intval($record['deleted']) == 1 ? true : false;
 $record['uri_override'] = intval($record['uri_override']) == 1 ? true : false;
 

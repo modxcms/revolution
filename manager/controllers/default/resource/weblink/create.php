@@ -165,7 +165,6 @@ $defaults['isfolder'] = intval($defaults['isfolder']) == 1 ? true : false;
 $defaults['richtext'] = intval($defaults['richtext']) == 1 ? true : false;
 $defaults['searchable'] = intval($defaults['searchable']) == 1 ? true : false;
 $defaults['cacheable'] = intval($defaults['cacheable']) == 1 ? true : false;
-$defaults['syncsite'] = intval($defaults['syncsite']) == 1 ? true : false;
 $defaults['deleted'] = intval($defaults['deleted']) == 1 ? true : false;
 $defaults['uri_override'] = intval($defaults['uri_override']) == 1 ? true : false;
 
