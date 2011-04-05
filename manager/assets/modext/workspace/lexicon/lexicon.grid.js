@@ -321,31 +321,16 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
             }
     	});
     }
-    ,_showMenu: function(g,ri,e) {
-        e.stopEvent();
-        e.preventDefault();
-        this.menu.record = this.getStore().getAt(ri).data;
-        if (!this.getSelectionModel().isSelected(ri)) {
-            this.getSelectionModel().selectRow(ri);
-        }
-        this.menu.removeAll();
-
+    ,getMenu: function() {
+        var r = this.getSelectionModel().getSelected();
         var m = [];
-        if (this.menu.record.menu) {
-            m = this.menu.record.menu;
-        } else {
-            if (this.menu.record.overridden) {
-                m.push({
-                    text: _('entry_revert')
-                    ,handler: this.revertEntry
-                    ,scope: this
-                });
-            }
+        if (r.data.overridden) {
+            m.push({
+                text: _('entry_revert')
+                ,handler: this.revertEntry
+            });
         }
-        if (m.length > 0) {
-            this.addContextMenuItem(m);
-            this.menu.show(e.target);
-        }
+        return m;
     }
 
     ,createEntry: function(btn,e) {

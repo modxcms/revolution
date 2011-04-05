@@ -233,7 +233,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 this.addContextMenuItem(m);
             }
         }
-        if (m && m.length <= 0 && this.menu.record.menu) {
+        if ((!m || m.length <= 0) && this.menu.record.menu) {
             this.addContextMenuItem(this.menu.record.menu);
         }
         if (this.menu.items.length > 0) {
