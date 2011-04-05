@@ -182,7 +182,7 @@ class modContext extends modAccessibleObject {
                         $found= true;
                     }
                 }
-            } elseif (array_keys((string) $id, $this->resourceMap, true) !== false) {
+            } elseif (array_keys(array((string) $id), $this->resourceMap, true) !== false) {
                 $found= true;
             }
 
