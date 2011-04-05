@@ -46,7 +46,7 @@ MODx.grid.Namespace = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         url: MODx.config.connectors_url+'workspace/namespace.php'
-        ,fields: ['id','name','path','menu']
+        ,fields: ['id','name','path','perm']
         ,anchor: '100%'
         ,paging: true
         ,autosave: true
@@ -65,31 +65,65 @@ MODx.grid.Namespace = function(config) {
             ,editor: { xtype: 'textfield' }
         }]
         ,tbar: [{
-            text: _('search_by_key')
-        },{
-            xtype: 'textfield'
-            ,name: 'name'
-            ,id: 'modx-namespace-filter-name'
-            ,listeners: {
-                'change': {fn:this.filter.createDelegate(this,['name'],true),scope:this}
-                ,'render': {fn:function(tf) {
-                    tf.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
-                        tf.fireEvent('change'); 
-                    },this);
-                }}
-            }
-        },{
             text: _('create_new')
             ,handler: { xtype: 'modx-window-namespace-create' ,blankValues: true }
             ,scope: this
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-namespace-search'
+            ,emptyText: _('search_ellipsis')
+            ,listeners: {
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this}
+            }
         }]
     });
     MODx.grid.Namespace.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
-    filter: function(cb,nv,ov,name) {
-        if (!name) { return false; }
-        this.store.baseParams[name] = nv;
+    getMenu: function() {
+        var r = this.getSelectionModel().getSelected();
+        var p = r.data.perm;
+        var m = [];
+        if (p.indexOf('premove') != -1) {
+            m.push({
+                text: _('namespace_remove')
+                ,handler: this.remove.createDelegate(this,["namespace_remove_confirm"])
+            });
+        }
+        return m;
+    }
+
+    ,search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
+    ,clearFilter: function() {
+    	this.getStore().baseParams = {
+            action: 'getList'
+    	};
+        Ext.getCmp('modx-namespace-search').reset();
+    	this.getBottomToolbar().changePage(1);
         this.refresh();
     }
 });
