@@ -655,6 +655,8 @@ class modResource extends modAccessibleSimpleObject {
             /* auto assign alias if using automatic_alias */
             if (empty($alias) && $workingContext->getOption('automatic_alias', false)) {
                 $alias = $this->cleanAlias($fields['pagetitle']);
+            } elseif (empty($alias) && isset($fields['id']) && !empty($fields['id'])) {
+                $alias = $this->cleanAlias($fields['id']);
             } else {
                 $alias = $this->cleanAlias($alias);
             }
