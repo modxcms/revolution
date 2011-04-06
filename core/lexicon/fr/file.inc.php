@@ -106,4 +106,4 @@ $_lang['upf_upload_desc'] = 'Envoyer les fichiers de la liste sur le serveur.';
 $_lang['upf_upload_err'] = 'Erreur d\'envoi.';
 $_lang['upf_uploading'] = 'Envoi...';
 $_lang['upf_uploading_desc'] = 'Envoi: {0} sur {1} fichiers envoyés.';
-$_lang['upload_files'] = 'Fichiers envoyés';
+$_lang['upload_files'] = 'Envoyer des fichiers';

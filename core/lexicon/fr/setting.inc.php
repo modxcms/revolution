@@ -22,7 +22,7 @@ $_lang['area_session'] = 'Session et Cookie';
 $_lang['area_lexicon_string'] = 'Entrées du lexique de zone';
 $_lang['area_lexicon_string_msg'] = 'Entrez ici la clé de l\'entrée du lexique pour la zone. S\'il n\'y a pas d\'entrée de lexique, cela affichera la clé de la zone.<br />Zones du coeur:<ul><li>identification</li><li>cache</li><li>fichier</li><li>urls simples</li><li>gateway</li><li>langue</li><li>manager</li><li>session</li><li>site</li><li>système</li></ul>';
 $_lang['area_site'] = 'Site';
-$_lang['area_system'] = 'Systéme et Serveur';
+$_lang['area_system'] = 'Système et Serveur';
 $_lang['areas'] = 'Zones';
 $_lang['charset'] = 'Jeu de caractères (charset)';
 $_lang['country'] = 'Pays';
@@ -48,7 +48,7 @@ $_lang['settings_misc'] = 'Divers';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Fonctions';
 $_lang['settings_users'] = 'Utilisateur';
-$_lang['system_settings'] = 'Configuration du Systéme';
+$_lang['system_settings'] = 'Configuration du Système';
 $_lang['usergroup'] = 'Groupe d\'utilisateur';
 
 // user settings
