@@ -252,6 +252,12 @@ $events['OnTVInputRenderList']->fromArray(array (
   'service' => 1,
   'groupname' => 'Template Variables',
 ), '', true, true);
+$events['OnTVInputPropertiesList']= $xpdo->newObject('modEvent');
+$events['OnTVInputPropertiesList']->fromArray(array (
+  'name' => 'OnTVInputPropertiesList',
+  'service' => 1,
+  'groupname' => 'Template Variables',
+), '', true, true);
 $events['OnTVOutputRenderList']= $xpdo->newObject('modEvent');
 $events['OnTVOutputRenderList']->fromArray(array (
   'name' => 'OnTVOutputRenderList',

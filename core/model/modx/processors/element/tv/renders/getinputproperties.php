@@ -42,7 +42,7 @@ $renderDirectories = array(
 );
 
 /* allow for custom directories */
-$pluginResult = $modx->invokeEvent('OnTVOutputInputPropertiesList',array(
+$pluginResult = $modx->invokeEvent('OnTVInputPropertiesList',array(
     'context' => $context,
 ));
 if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($pluginResult); }
