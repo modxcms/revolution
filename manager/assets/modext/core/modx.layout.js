@@ -134,6 +134,7 @@ MODx.Layout = function(config){
             ,border: false
             ,autoScroll: true
             ,margins: '0 0 0 15'
+            ,padding: '0 1px 0 0'
             ,bodyStyle: 'background-color:transparent;'
         }]
     });
