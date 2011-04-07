@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-03-30
+ * @updated 2011-04-07
  */
 $_lang['access'] = 'Přístup';
 $_lang['access_denied'] = 'Přístup zamezen.';
@@ -45,6 +45,7 @@ $_lang['cache_sitepublishing_file_error'] = '<p>CHYBA: Nemohu zapsat stránku pr
 $_lang['cache_unpublish_event_error'] = '<p>CHYBA: Nemohu určit příští událost pro ukončení publikace!</p><pre>[[+info]]</pre>';
 $_lang['cached'] = 'Uloženo do cache';
 $_lang['cancel'] = 'Zpět';
+$_lang['caption'] = 'Titulek';
 $_lang['categories'] = 'Kategorie';
 $_lang['category'] = 'Kategorie';
 $_lang['category_create'] = 'Vytvořit novou kategorii';
@@ -114,6 +115,7 @@ $_lang['duplicate_of'] = 'Kopie [[+name]]';
 $_lang['duplication_options'] = 'Možnosti kopie';
 $_lang['edit'] = 'Upravit';
 $_lang['edit_context'] = 'Upravit kontext';
+$_lang['editing'] = 'Úprava: [[+name]]';
 $_lang['editedon'] = 'Datum úpravy';
 $_lang['editing_form'] = 'Formulář';
 $_lang['element_duplicate'] = 'Kopie elementu';
@@ -177,6 +179,7 @@ $_lang['ext_timemin'] = 'Čas v tomto políčku musí být roven nebo větší n
 $_lang['ext_today_tip'] = '{0} (Spacebar)';
 $_lang['failure'] = 'Porucha';
 $_lang['female'] = 'Žena';
+$_lang['field_required'] = 'Tento údaj je povinný.';
 $_lang['files'] = 'Soubory';
 $_lang['filter'] = 'Filtr';
 $_lang['filter_clear'] = 'Zrušit filtr';

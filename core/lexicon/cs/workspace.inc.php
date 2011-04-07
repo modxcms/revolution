@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2011-04-04
+ * @updated 2011-04-07
  */
 $_lang['alphabetically'] = 'Abecedně';
 $_lang['already_downloaded'] = 'Tento balíček je již stažen.';
@@ -27,6 +27,7 @@ $_lang['dir_err_assets_comp'] = 'Vaši "assets/components" složku nebylo možna
 $_lang['dir_err_core_comp'] = 'Vaši "core/components" složku nebylo možno vytvořit: [[+path]] <br />Musíte vytvořit složku a nastavit její práva pro zápis.';
 $_lang['download'] = 'Stáhnout';
 $_lang['downloaded'] = 'Staženo';
+$_lang['downloading'] = 'Stahuji...';
 $_lang['download_extras'] = 'Stáhnout Extras';
 $_lang['downloads'] = 'Stahování';
 $_lang['installation_instructions'] = 'Instalační instrukce';
