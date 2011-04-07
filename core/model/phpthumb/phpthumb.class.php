@@ -1031,9 +1031,9 @@ class phpthumb {
 
 			// relative to current directory (any OS)
 			$AbsoluteFilename = $this->config_document_root.dirname(@$_SERVER['PHP_SELF']).DIRECTORY_SEPARATOR.$filename;
-			//if (!@file_exists($AbsoluteFilename) && @file_exists(realpath($this->DotPadRelativeDirectoryPath($filename)))) {
-			//	$AbsoluteFilename = realpath($this->DotPadRelativeDirectoryPath($filename));
-			//}
+            if (!file_exists($AbsoluteFilename)) {
+                $AbsoluteFilename = $this->config_document_root.$filename;
+            }
 
 			if (substr(dirname(@$_SERVER['PHP_SELF']), 0, 2) == '/~') {
 				if ($ApacheLookupURIarray = phpthumb_functions::ApacheLookupURIarray(dirname(@$_SERVER['PHP_SELF']))) {
@@ -1970,24 +1970,27 @@ class phpthumb {
 		$this->thumbnail_width  = $this->w;
 		$this->thumbnail_height = $this->h;
 		$this->is_alpha = true;
+        if ($this->thumbnail_image_width <= 0) {
+            $this->thumbnail_image_width = 0;
+        }
+		$aspectRatio = $this->thumbnail_image_height / $this->thumbnail_image_width;
 		if ($this->thumbnail_image_width >= $this->thumbnail_width) {
-
 			if ($this->w) {
-				$aspectratio = $this->thumbnail_image_height / $this->thumbnail_image_width;
-				$this->thumbnail_image_height = round($this->thumbnail_image_width * $aspectratio);
+				$aspectRatio = $this->thumbnail_image_height / $this->thumbnail_image_width;
+				$this->thumbnail_image_height = round($this->thumbnail_image_width * $aspectRatio);
 				$this->thumbnail_height = ($this->h ? $this->h : $this->thumbnail_image_height);
 			} elseif ($this->thumbnail_image_height < $this->thumbnail_height) {
 				$this->thumbnail_image_height = $this->thumbnail_height;
-				$this->thumbnail_image_width  = round($this->thumbnail_image_height / $aspectratio);
+				$this->thumbnail_image_width  = round($this->thumbnail_image_height / $aspectRatio);
 			}
 
 		} else {
 			if ($this->h) {
-				$aspectratio = $this->thumbnail_image_width / $this->thumbnail_image_height;
-				$this->thumbnail_image_width = round($this->thumbnail_image_height * $aspectratio);
+				$aspectRatio = $this->thumbnail_image_width / $this->thumbnail_image_height;
+				$this->thumbnail_image_width = round($this->thumbnail_image_height * $aspectRatio);
 			} elseif ($this->thumbnail_image_width < $this->thumbnail_width) {
 				$this->thumbnail_image_width = $this->thumbnail_width;
-				$this->thumbnail_image_height  = round($this->thumbnail_image_width / $aspectratio);
+				$this->thumbnail_image_height  = round($this->thumbnail_image_width / $aspectRatio);
 			}
 
 		}
@@ -3165,7 +3168,7 @@ exit;
 						if (function_exists($ImageCreateFromFunctionName)) {
 							$this->DebugMessage('Calling '.$ImageCreateFromFunctionName.'('.$filename.')', __FILE__, __LINE__);
 							$ImageCreateWasAttempted = true;
-							$gd_image = $ImageCreateFromFunctionName($filename);
+                            $gd_image = call_user_func($ImageCreateFromFunctionName,array($filename));
 						} else {
 							$this->DebugMessage('NOT calling '.$ImageCreateFromFunctionName.'('.$filename.') because !function_exists('.$ImageCreateFromFunctionName.')', __FILE__, __LINE__);
 						}
@@ -3802,7 +3805,6 @@ exit;
 							$this->DebugMessage('gif_loadFileToGDimageResource('.$tempfilename.') completed', __FILE__, __LINE__);
 							unlink($tempfilename);
 							return $gdimg_source;
-							break;
 						} else {
 							$ErrorMessage = 'Failed to open tempfile in '.__FILE__.' on line '.__LINE__;
 							$this->DebugMessage($ErrorMessage, __FILE__, __LINE__);
