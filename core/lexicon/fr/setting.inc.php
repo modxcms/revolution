@@ -581,19 +581,19 @@ $_lang['setting_unauthorized_page_desc'] = 'Entrez l\'ID de la ressource vers la
 $_lang['setting_unauthorized_page_err'] = 'Veuillez spécifier un ID de ressource pour la page « non autorisé ».';
 
 $_lang['setting_upload_files'] = 'Types de fichiers uploadables';
-$_lang['setting_upload_files_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/files/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extenssions pour chaque type de fichier, séparés par des virgules.';
+$_lang['setting_upload_files_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/files/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extensions pour chaque type de fichier, séparés par des virgules.';
 
 $_lang['setting_upload_flash'] = 'Types de fichiers Flash uploadables';
-$_lang['setting_upload_flash_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/flash/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extenssions pour chaque type de fichier flash, séparés par des virgules.';
+$_lang['setting_upload_flash_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/flash/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extensions pour chaque type de fichier flash, séparés par des virgules.';
 
 $_lang['setting_upload_images'] = 'Types d\'images uploadables';
-$_lang['setting_upload_images_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/images/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extenssions pour chaque type d\'images, séparés par des virgules.';
+$_lang['setting_upload_images_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/images/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extensions pour chaque type d\'images, séparés par des virgules.';
 
 $_lang['setting_upload_maxsize'] = 'Taille maximale des uploads';
 $_lang['setting_upload_maxsize_desc'] = 'Entrez la taille maximale des fichiers qui peuvent être uploadés via le gestionnaire de fichier. La taille doit être indiquée en octects (bytes). <strong>NOTE: Les fichiers volumineux peuvent demander beaoucp de temps pour être uploadés!</strong>';
 
 $_lang['setting_upload_media'] = 'Types de média uploadables';
-$_lang['setting_upload_media_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/media/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extenssions pour chaque type de média, séparés par des virgules.';
+$_lang['setting_upload_media_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/media/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extensions pour chaque type de média, séparés par des virgules.';
 
 $_lang['setting_use_alias_path'] = 'Utiliser les alias simples';
 $_lang['setting_use_alias_path_desc'] = 'Sélectionner \'oui\' pour cette option affichera le chemin complet de la ressource si la ressource a un alias. Par exemple, si une ressource ayant pour alias \'enfant\' est située dans une ressource conteneur ayant pour alias \'parent\', alors l\'alias du chemin complet sera affiché \'/parent/enfant.html\'.<br /><strong>NOTE: Mettre \'oui\' dans cette option (activer les alias simples) implique l\'utilisation de chemin absolu pour les objets (tels qu\'images, css, javascripts, etc), par exemple : \'/assets/images\' au lieu de \'assets/images\'. En faisant de tel, vous éviterez au navigateur (ou serveur web) d\'ajouter le chemin relatif à l\'alias.</strong>';
