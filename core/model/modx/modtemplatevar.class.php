@@ -264,7 +264,6 @@ class modTemplateVar extends modElement {
         /* for base_url in image/file tvs */
         if (!empty($value) && in_array($this->get('type'),array('image','file'))) {
             $ips = $this->get('input_properties');
-            var_dump($ips);
             $fmu = $this->xpdo->getOption('filemanager_url',null,'');
             if (!empty($ips['baseUrl'])) {
                 $value = $ips['baseUrl'].$value;
