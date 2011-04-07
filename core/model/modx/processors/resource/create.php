@@ -165,6 +165,7 @@ if (isset($scriptProperties['unpub_date'])) {
     }
 }
 
+$resource->set('template',$scriptProperties['template']);
 if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modTemplate', $scriptProperties['template']))) {
     $tmplvars = array();
     $templateVars = $resource->getTemplateVars();
@@ -187,7 +188,7 @@ if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modT
                 $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S',strtotime($value));
                 break;
             case 'url':
-                if ($scriptProperties['tv' . $row['name'] . '_prefix'] != '--') {
+                if ($scriptProperties['tv' . $tv->get('id') . '_prefix'] != '--') {
                     $value = str_replace(array('ftp://','http://'),'', $value);
                     $value = $scriptProperties['tv'.$tv->get('id').'_prefix'].$value;
                 }
@@ -206,6 +207,7 @@ if (!empty($scriptProperties['template']) && ($template = $modx->getObject('modT
 
         /* save value if it was modified */
         $default = $tv->processBindings($tv->get('default_text'),0);
+
         if (strcmp($value,$default) != 0) {
             $templateVarResource = $modx->newObject('modTemplateVarResource');
             $templateVarResource->set('tmplvarid',$tv->get('id'));
