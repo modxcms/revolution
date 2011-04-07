@@ -26,17 +26,23 @@ if (empty($scriptProperties['basePath'])) {
 }
 
 /* dont strip stuff for absolute URLs */
-if (strpos($src,'http') === false) {
-    $src = $basePath.$src;
-    /* strip out double slashes */
-    $src = str_replace(array('///','//'),'/',$src);
-    
-    /* check for file existence if local url */
-    if (empty($src) || !file_exists($src)) {
-        if (file_exists('/'.$src)) {
-            $src = '/'.$src;
-        } else {
-            return '';
+if (substr($src,0,4) != 'http') {
+    $valid = true;
+    if (!empty($scriptProperties['baseUrlPrependCheckSlash'])) {
+        $valid = !(substr($src,0,1) == '/' || substr($src,0,7) == 'http://' || substr($src,0,8) == 'https://');
+    }
+    if ($valid) {
+        $src = $basePath.$src;
+        /* strip out double slashes */
+        $src = str_replace(array('///','//'),'/',$src);
+
+        /* check for file existence if local url */
+        if (empty($src) || !file_exists($src)) {
+            if (file_exists('/'.$src)) {
+                $src = '/'.$src;
+            } else {
+                return '';
+            }
         }
     }
 }
@@ -49,7 +55,6 @@ if (!$modx->loadClass('modPhpThumb',$modx->getOption('core_path').'model/phpthum
 $phpThumb = new modPhpThumb($modx,$scriptProperties);
 /* do initial setup */
 $phpThumb->initialize();
-
 /* set source and generate thumbnail */
 $phpThumb->set($src);
 

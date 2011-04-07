@@ -34,7 +34,7 @@ Ext.onReady(function() {
                     d.update('');
                 } else {
                     {/literal}
-                    d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.url+'&wctx={$ctx}&basePath={$params.basePath}&basePathRelative={if $params.basePathRelative}1{else}0{/if}&baseUrl={$params.baseUrl}&baseUrlRelative={if $params.baseUrlRelative}1{else}0{/if}" alt="" />');
+                    d.update('<img src="'+MODx.config.connectors_url+'system/phpthumb.php?h=150&w=150&src='+data.url+'&wctx={$ctx}&basePath={$params.basePath}&basePathRelative={if $params.basePathRelative}1{else}0{/if}&baseUrl={$params.baseUrl}&baseUrlRelative={if $params.baseUrlRelative}1{else}0{/if}&baseUrlPrependCheckSlash={if $params.baseUrlPrependCheckSlash}1{else}0{/if}" alt="" />');
                     {literal}
                 }
             }}
