@@ -38,7 +38,6 @@ MODx.panel.ImageTV = function(config) {
             ,openTo: config.openTo || ''
             ,listeners: {
                 'select': {fn:function(data) {
-                    console.log(data);
                     Ext.getCmp('tv'+this.config.tv).setValue(data.relativeUrl);
                     Ext.getCmp('tvbrowser'+this.config.tv).setValue(data.relativeUrl);
                     this.fireEvent('select',data);

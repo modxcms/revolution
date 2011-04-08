@@ -134,9 +134,9 @@ while ($item) {
             $class = array();
             $class[] = 'icon-'.strtolower(str_replace('mod','',$item->get('class_key')));
             $class[] = $item->isfolder ? ' icon-folder' : 'x-tree-node-leaf icon-resource';
-            $class[] = ($item->get('published') ? '' : 'unpublished')
-                .($item->get('deleted') ? 'deleted' : '')
-                .($item->get('hidemenu') == 1 ? 'hidemenu' : '');
+            if (!$item->get('published')) $class[] = 'unpublished';
+            if ($item->get('deleted')) $class[] = 'deleted';
+            if ($item->get('hidemenu')) $class[] = 'hidemenu';
 
             $class[] = !empty($permissionList['save_document']) ? $permissionList['save_document'] : '';
             $class[] = !empty($permissionList['view_document']) ? $permissionList['view_document'] : '';
@@ -148,7 +148,7 @@ while ($item) {
             $class[] = !empty($permissionList['unpublish_document']) ? $permissionList['unpublish_document'] : '';
             $class[] = !empty($permissionList['resource_quick_create']) ? $permissionList['resource_quick_create'] : '';
             $class[] = !empty($permissionList['resource_quick_update']) ? $permissionList['resource_quick_update'] : '';
-            $class[] = $hasChildren ? 'haschildren' : '';
+            if ($hasChildren) $class[] = 'haschildren';
             if (!empty($scriptProperties['currentResource']) && $scriptProperties['currentResource'] == $item->id) {
                 $class[] = 'active-node';
             }

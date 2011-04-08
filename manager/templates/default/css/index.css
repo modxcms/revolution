@@ -42,13 +42,6 @@ hr {
 .red { color: red !important; }
 .green { color: green !important; }
 .error { color: red !important; }
-.unpublished { font-style: italic; }
-.deleted { color: red !important; }
-.deleted a span {
-    color: #CC3333 !important;
-    text-decoration: line-through !important;
-}
-.hidemenu a span { color: gray !important; }
 
 /* leftbar */
 #modx-leftbar, #modx-content {
@@ -973,6 +966,15 @@ html #modx-topnav ul.modx-subnav li a:hover{
 .active-node, .active-node span {
     font-weight: bold;
 }
+.unpublished { font-style: italic; }
+.hidemenu a span { color: gray !important; }
+.deleted { color: red !important; }
+.deleted a span {
+    color: #CC3333 !important;
+    text-decoration: line-through !important;
+}
+
+
 /* ext extensions */
 input.x-static-text-field {
     background: transparent;
