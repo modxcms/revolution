@@ -543,8 +543,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             var n = t.getNodeById(v);
             if(pa !== pao) {
                 t.refresh();
+                Ext.getCmp('modx-resource-parent-old-hidden').setValue(pa);
             } else {
-                n.leaf = true;
+                n.leaf = false;
                 t.refreshNode(v,true);
             }
         }
