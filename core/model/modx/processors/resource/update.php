@@ -313,8 +313,8 @@ if ($oldparent !== null && $newparent !== null) {
         $oldparent->save();
     }
 
-    $newParent->set('isfolder', true);
-    $newParent->save();
+    $newparent->set('isfolder', true);
+    $newparent->save();
 }
 
 /* save TVs */
