@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Kevin van Haare, Webton.nl
+ * @author Bert Oost <bertoost85@gmail.com>
  */
 $_lang['alphabetically'] = 'Alfabetisch';
 $_lang['already_downloaded'] = 'Je hebt dit pakket al gedownload.';
@@ -14,7 +14,10 @@ $_lang['api_key'] = 'API sleutel';
 $_lang['author'] = 'Auteur';
 $_lang['autoincludes_packaging'] = 'Pakket in autoinclude: [[+autoincludes]]';
 $_lang['back_txt'] = 'Terug';
+$_lang['breaks_at'] = 'Ondersteund tot';
 $_lang['by'] = 'door';
+$_lang['changelog'] = 'Changelog';
+$_lang['changelog_desc'] = 'Bekijk de changelog voor deze versie.';
 $_lang['core_err_invalid'] = 'Je dient een correcte core installatie met de active werkruimte te hebben om deze build uit te voeren.';
 $_lang['description'] = 'Omschrijving';
 $_lang['details'] = 'Details';
@@ -35,6 +38,7 @@ $_lang['license_agree'] = 'Ik ga akkoord';
 $_lang['license_agreement'] = 'Licentie overeenkomsten';
 $_lang['license_agreement_desc'] = 'Bekijk de licentieovereenkomsten voor dit pakket.';
 $_lang['license_disagree'] = 'Ik ga niet akkoord';
+$_lang['minimum_supports'] = 'MODX verplicht';
 $_lang['more_info'] = 'Meer informatie';
 $_lang['most_downloads'] = 'Meeste downloads';
 $_lang['most_popular'] = 'Meest populair';
@@ -166,7 +170,7 @@ $_lang['setup_options'] = 'Setup opties';
 $_lang['setup_options_desc'] = 'Selecteer de juiste opties (indien van toepassing) en klik op Gereed om te installeren.';
 $_lang['signature'] = 'Handtekening';
 $_lang['sort_by_dots'] = 'Sorteren op...';
-$_lang['supports'] = 'Ondersteund';
+$_lang['supports_db'] = 'Ondersteund databases';
 $_lang['top_rated'] = 'Beste beoordeling';
 $_lang['transport_package_create'] = 'Maak nieuw pakket';
 $_lang['transport_package_install'] = 'Installeer pakket';
@@ -175,6 +179,7 @@ $_lang['updateable'] = 'Updates beschikbaar';
 $_lang['uninstall'] = 'Deinstalleren';
 $_lang['uploaded_on'] = 'Geupload op';
 $_lang['uploaded_versions'] = 'Geuploade versies';
+$_lang['username'] = 'Gebruikersnaam';
 $_lang['workspace'] = 'Werkruimte';
 $_lang['workspace_err_nf'] = 'Werkruimte niet gevonden.';
 $_lang['workspace_grabbing'] = 'Verkrijgen van pakket werkruimte...';
