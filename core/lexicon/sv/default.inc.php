@@ -176,6 +176,7 @@ $_lang['ext_timemin'] = 'Klockslaget i detta fält måste vara lika med eller ef
 $_lang['ext_today_tip'] = '{0} (Mellanslag)';
 $_lang['failure'] = 'Misslyckande';
 $_lang['female'] = 'Kvinna';
+$_lang['field_required'] = 'Detta fält är obligatoriskt.';
 $_lang['files'] = 'Filer';
 $_lang['filter'] = 'Filter';
 $_lang['filter_clear'] = 'Rensa filter';

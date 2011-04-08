@@ -16,3 +16,5 @@ $_lang['mysql_version_server_nf'] = 'MODx non ha potuto rilevare la versione del
 $_lang['mysql_version_server_start'] = 'Controllo versione server MySQL:';
 $_lang['mysql_version_success'] = 'OK! Sta girando: [[+version]]';
 
+$_lang['sqlsrv_version_success'] = 'OK!';
+$_lang['sqlsrv_version_client_success'] = 'OK!';
