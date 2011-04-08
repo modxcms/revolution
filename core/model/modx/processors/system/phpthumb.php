@@ -18,6 +18,9 @@ if (empty($src)) return '';
 /* determine absolute path to image from URL passed that is context-specific */
 if (empty($scriptProperties['basePath'])) {
     $basePath = $modx->fileHandler->getBasePath();
+    if (empty($basePath)) {
+        $basePath = $modx->getOption('base_path','',MODX_BASE_PATH);
+    }
 } else {
     $basePath = $scriptProperties['basePath'];
     if (!empty($scriptProperties['basePathRelative'])) {
