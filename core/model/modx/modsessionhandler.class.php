@@ -38,6 +38,18 @@ class modSessionHandler {
      * @return modSessionHandler
      */
     function __construct(modX &$modx) {
+        // Apache's timeout: 300 secs
+        if (function_exists('ini_get') && !ini_get('safe_mode')) {
+            if (function_exists('set_time_limit')) {
+                set_time_limit(300);
+            }
+            if (function_exists('ini_set')) {
+                if (ini_get('max_execution_time') !== 300) {
+                    ini_set('max_execution_time', 300);
+                }
+            }
+        }
+        
         $this->modx= & $modx;
     }
 
