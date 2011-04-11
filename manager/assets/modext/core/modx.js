@@ -313,6 +313,7 @@ Ext.extend(MODx,Ext.Component,{
             console.log(msg);
         }
     }
+
     ,isEmpty: function(v) {
         return Ext.isEmpty(v) || v === false || v === 'false' || v === 'FALSE' || v === '0' || v === 0;
     }

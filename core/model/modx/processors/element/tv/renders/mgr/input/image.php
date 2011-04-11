@@ -18,10 +18,6 @@ if (!empty($wctx)) {
 } else {
     $params['wctx'] = $modx->context->get('key');
 }
-$value = ltrim($value,'/');    
-
-$this->set('relativeValue',$value);
-$this->xpdo->smarty->assign('tv',$this);
 
 $value = $this->get('value');
 
