@@ -93,7 +93,7 @@ MODx.panel.FileTV = function(config) {
                 'select': {fn:function(data) {
                     Ext.getCmp('tv'+this.config.tv).setValue(data.relativeUrl);
                     Ext.getCmp('tvbrowser'+this.config.tv).setValue(data.relativeUrl);
-                    this.fireEvent('select',data);                    
+                    this.fireEvent('select',data);
                 },scope:this}
                 ,'change': {fn:function(cb,nv) {
                     Ext.getCmp('tv'+this.config.tv).setValue(nv);
