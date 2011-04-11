@@ -11,7 +11,7 @@ MODx.grid.Context = function(config) {
     Ext.applyIf(config,{
         title: _('contexts')
         ,url: MODx.config.connectors_url+'context/index.php'
-        ,fields: ['key','description','menu']
+        ,fields: ['key','description','perm']
         ,paging: true
         ,autosave: true
         ,remoteSort: true
@@ -29,16 +29,77 @@ MODx.grid.Context = function(config) {
             ,editor: { xtype: 'textfield' }
         }]
         ,tbar: [{
-                text: _('create_new')
-                ,handler: { xtype: 'modx-window-context-create' ,blankValues: true }
+            text: _('create_new')
+            ,handler: { xtype: 'modx-window-context-create' ,blankValues: true }
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-ctx-search'
+            ,emptyText: _('search_ellipsis')
+            ,listeners: {
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this}
+            }
         }]
     });
     MODx.grid.Context.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
-    update: function(itm,e) {
+    updateContext: function(itm,e) {
         location.href = 'index.php?a='+MODx.action['context/update']+'&key='+this.menu.record.key;
     }
+    ,getMenu: function() {
+        var r = this.getSelectionModel().getSelected();
+        var p = r.data.perm;
+        var m = [];
+        if (p.indexOf('pedit') != -1) {
+            m.push({
+                text: _('context_update')
+                ,handler: this.updateContext
+            });
+        }
+        if (p.indexOf('premove') != -1) {
+            m.push('-');
+            m.push({
+                text: _('context_remove')
+                ,handler: this.remove.createDelegate(this,["context_remove_confirm"])
+            });
+        }
+        return m;
+    }
+
+    ,search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
+    ,clearFilter: function() {
+    	this.getStore().baseParams = {
+            action: 'getList'
+    	};
+        Ext.getCmp('modx-ctx-search').reset();
+    	this.getBottomToolbar().changePage(1);
+        this.refresh();
+    }
+
 });
 Ext.reg('modx-grid-contexts',MODx.grid.Context);
 

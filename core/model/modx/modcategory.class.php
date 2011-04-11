@@ -123,37 +123,45 @@ class modCategory extends modAccessibleSimpleObject {
      */
     public function findPolicy($context = '') {
         $policy = array();
+        $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
-        if (empty($this->_policies) || !isset($this->_policies[$context])) {
-            $aclSelectColumns = $this->xpdo->getSelectColumns('modAccessCategory','modAccessCategory','',array('id','target','principal','authority','policy'));
-            $c = $this->xpdo->newQuery('modAccessCategory');
-            $c->select($aclSelectColumns);
-            $c->select($this->xpdo->getSelectColumns('modAccessPolicy','Policy','',array('data')));
-            $c->leftJoin('modAccessPolicy','Policy');
-            $c->innerJoin('modCategoryClosure','CategoryClosure',array(
-                'CategoryClosure.descendant:=' => $this->get('id'),
-                'modAccessCategory.principal_class:=' => 'modUserGroup',
-                'CategoryClosure.ancestor = modAccessCategory.target',
-                array(
-                    'modAccessCategory.context_key:=' => $context,
-                    'OR:modAccessCategory.context_key:=' => null,
-                    'OR:modAccessCategory.context_key:=' => '',
-                ),
-            ));
-            $c->groupby($aclSelectColumns);
-            $c->sortby($this->xpdo->getSelectColumns('modCategoryClosure','CategoryClosure','',array('depth')).' DESC, '.$this->xpdo->getSelectColumns('modAccessCategory','modAccessCategory','',array('authority')).' ASC','');
-            $acls = $this->xpdo->getIterator('modAccessCategory',$c);
-            
-            foreach ($acls as $acl) {
-                $policy['modAccessCategory'][$acl->get('target')][] = array(
-                    'principal' => $acl->get('principal'),
-                    'authority' => $acl->get('authority'),
-                    'policy' => $acl->get('data') ? $this->xpdo->fromJSON($acl->get('data'), true) : array(),
-                );
+        if ($context === $this->xpdo->context->get('key')) {
+            $enabled = (boolean) $this->xpdo->getOption('access_category_enabled', null, true);
+        } elseif ($this->xpdo->getContext($context)) {
+            $enabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_category_enabled', true);
+        }
+        if ($enabled) {
+            if (empty($this->_policies) || !isset($this->_policies[$context])) {
+                $aclSelectColumns = $this->xpdo->getSelectColumns('modAccessCategory','modAccessCategory','',array('id','target','principal','authority','policy'));
+                $c = $this->xpdo->newQuery('modAccessCategory');
+                $c->select($aclSelectColumns);
+                $c->select($this->xpdo->getSelectColumns('modAccessPolicy','Policy','',array('data')));
+                $c->leftJoin('modAccessPolicy','Policy');
+                $c->innerJoin('modCategoryClosure','CategoryClosure',array(
+                    'CategoryClosure.descendant:=' => $this->get('id'),
+                    'modAccessCategory.principal_class:=' => 'modUserGroup',
+                    'CategoryClosure.ancestor = modAccessCategory.target',
+                    array(
+                        'modAccessCategory.context_key:=' => $context,
+                        'OR:modAccessCategory.context_key:=' => null,
+                        'OR:modAccessCategory.context_key:=' => '',
+                    ),
+                ));
+                $c->groupby($aclSelectColumns);
+                $c->sortby($this->xpdo->getSelectColumns('modCategoryClosure','CategoryClosure','',array('depth')).' DESC, '.$this->xpdo->getSelectColumns('modAccessCategory','modAccessCategory','',array('authority')).' ASC','');
+                $acls = $this->xpdo->getIterator('modAccessCategory',$c);
+
+                foreach ($acls as $acl) {
+                    $policy['modAccessCategory'][$acl->get('target')][] = array(
+                        'principal' => $acl->get('principal'),
+                        'authority' => $acl->get('authority'),
+                        'policy' => $acl->get('data') ? $this->xpdo->fromJSON($acl->get('data'), true) : array(),
+                    );
+                }
+                $this->_policies[$context] = $policy;
+            } else {
+                $policy = $this->_policies[$context];
             }
-            $this->_policies[$context] = $policy;
-        } else {
-            $policy = $this->_policies[$context];
         }
         return $policy;
     }

@@ -10,4 +10,5 @@ if(!$modx->hasPermission('view_context')) return $modx->error->failure($modx->le
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.grid.context.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/context/list.js');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('contexts'));
 return $modx->smarty->fetch('context/list.tpl');

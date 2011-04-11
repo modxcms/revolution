@@ -103,5 +103,6 @@ Ext.onReady(function() {
 });
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('view_sysinfo'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('system/info.tpl');

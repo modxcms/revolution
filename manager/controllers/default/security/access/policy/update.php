@@ -42,5 +42,6 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('policy').': '.$policy->get('name'));
 $this->checkFormCustomizationRules($policy);
 return $modx->smarty->fetch('security/access/policy/update.tpl');

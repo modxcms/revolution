@@ -500,7 +500,13 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
             case 'package-download':
                 if (!rec.downloading || rec.downloading == undefined) {
                     var btns = Ext.query('.package-download');
-                    Ext.each(btns,function(btn) { btn.style.opacity = '0.5'; });
+                    Ext.each(btns,function(btn) {
+                        var b = Ext.get(btn);
+                        if (b) {
+                            b.setStyle('opacity','0.5');
+                            b.update('<span>'+_('downloading')+'</span>');
+                        }
+                    });
                     rec.downloading = true;
                     this.download(g,rec,a,ri);
                 }
@@ -531,12 +537,24 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
                     this.refresh();
                     rec.downloading = false;
                     var btns = Ext.query('.package-download');
-                    Ext.each(btns,function(btn) { btn.style.opacity = '1.0'; });
+                    Ext.each(btns,function(btn) {
+                        var b = Ext.get(btn);
+                        if (b) {
+                            b.setStyle('opacity','1.0');
+                            b.update('<span>'+_('download')+'</span>');
+                        }
+                    });
                 },scope:this}
                 ,'failure': {fn:function(r) {
                     rec.downloading = false;
                     var btns = Ext.query('.package-download');
-                    Ext.each(btns,function(btn) { btn.style.opacity = '1.0'; });
+                    Ext.each(btns,function(btn) {
+                        var b = Ext.get(btn);
+                        if (b) {
+                            b.setStyle('opacity','1.0');
+                            b.update('<span>'+_('download')+'</span>');
+                        }
+                    });
                 },scope:this}
             }
         });

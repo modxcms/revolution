@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2011-03-30
  */
 $_lang['login_activation_key_err'] = 'Aktivační klíč neodpovídá! Zkontrolujte si aktivační e-mail a ujistěte se, že jste použili správný odkaz.';
 $_lang['login_blocked_admin'] = 'Váš účet byl uzamčen administrátorem.';
@@ -22,7 +22,7 @@ $_lang['login_email_label'] = 'E-mail účtu:';
 $_lang['login_err_unknown'] = 'Nastala neznámá chyba při přihlášování.';
 $_lang['login_forget_your_login'] = 'Zapomněli jste své přihlášovací údaje?';
 $_lang['login_hostname_error'] = 'Váš hostname neodpovídá IP adrese.';
-$_lang['login_message'] = 'Zadejte Vaše přihlašovací údaje a přejděte do správce obsahu. Uživatelské jméno a heslo rozlišují velké a malá písmena!';
+$_lang['login_message'] = 'Zadejte Vaše přihlašovací údaje pro přístup do správce obsahu. Uživatelské jméno a heslo rozlišují velká a malá písmena!';
 $_lang['login_modx_support'] = '<p>Podporováno:</p><p><a href="http://www.modxcms.com/forums/" target="_blank"><strong>MODX komunitou</strong></a></p><p><a href="http://www.modxcms.cz/forums/" target="_blank"><strong>Českou MODX komunitou</strong></a></p>';
 $_lang['login_password'] = 'Heslo: ';
 $_lang['login_password_reset_act_sent'] = 'E-mail pro reset hesla byl odeslán. Zkontrolujte se Vaši e-mailovou schránku.';

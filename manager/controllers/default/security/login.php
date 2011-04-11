@@ -50,26 +50,14 @@ if (!empty($_POST)) {
         }
 
         if ($validated) {
-            $processor = $modx->getOption('core_path').'model/modx/processors/security/login.php';
-            $response = require_once $processor;
-
-            if (!empty($response) && is_array($response)) {
-                if (!empty($response['success']) && isset($response['object'])) {
-                    $url = !empty($_POST['returnUrl']) ? $_POST['returnUrl'] : $modx->getOption('manager_url',null,MODX_MANAGER_URL);
-                    $modx->sendRedirect(rtrim($url,'/'),'','','full');
-                } else {
-                    $error_message = '';
-                    if (isset($response['errors']) && !empty($response['errors'])) {
-                        foreach ($response['errors'] as $error) {
-                            $error_message .= $error.'<br />';
-                        }
-                    } elseif (isset($response['message']) && !empty($response['message'])) {
-                        $error_message = $response['message'];
-                    } else {
-                        $error_message = $modx->lexicon('login_err_unknown');
-                    }
-                    $modx->smarty->assign('error_message',$error_message);
-                }
+            $response = $modx->runProcessor('security/login',$_POST);
+            if (($response instanceof modProcessorResponse) && !$response->isError()) {
+                $url = !empty($_POST['returnUrl']) ? $_POST['returnUrl'] : $modx->getOption('manager_url',null,MODX_MANAGER_URL);
+                $modx->sendRedirect(rtrim($url,'/'),'','','full');
+            } else {
+                $errors = $response->getAllErrors();
+                $error_message = implode("\n",$errors);
+                $modx->smarty->assign('error_message',$error_message);
             }
         }
     } else if (!empty($_POST['forgotlogin'])) {

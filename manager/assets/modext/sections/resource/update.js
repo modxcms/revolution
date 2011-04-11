@@ -117,7 +117,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 ,checkDirty: cfg.richtext || MODx.request.activeSave == 1 ? false : true
                 ,keys: [{
                     key: MODx.config.keymap_save || 's'
-                    ,alt: true
                     ,ctrl: true
                 }]
             });

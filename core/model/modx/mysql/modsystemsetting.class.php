@@ -12,8 +12,8 @@ class modSystemSetting_mysql extends modSystemSetting {
             $xpdo->getSelectColumns('modSystemSetting','modSystemSetting'),
         ));
         $c->select(array(
-            'Entry.value AS name_trans',
-            'Description.value AS description_trans',
+            'name_trans' => 'Entry.value',
+            'description_trans' => 'Description.value',
         ));
         $c->leftJoin('modLexiconEntry','Entry',"CONCAT('setting_',modSystemSetting.{$xpdo->escape('key')}) = Entry.name");
         $c->leftJoin('modLexiconEntry','Description',"CONCAT('setting_',modSystemSetting.{$xpdo->escape('key')},'_desc') = Description.name");
@@ -27,6 +27,7 @@ class modSystemSetting_mysql extends modSystemSetting {
         if ((int) $limit > 0) {
             $c->limit((int) $limit, (int) $offset);
         }
+        $c->prepare();
         return array(
             'count'=> $count,
             'collection'=> $xpdo->getCollection('modSystemSetting',$c)

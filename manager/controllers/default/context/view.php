@@ -21,5 +21,6 @@ if (!$context->prepare()) {
 $modx->smarty->assign('context', $context);
 $modx->smarty->assign('_ctx',$context->get('key'));
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('context').': '.$context->get('key'));
 $this->checkFormCustomizationRules($context);
 return $modx->smarty->fetch('context/view.tpl');

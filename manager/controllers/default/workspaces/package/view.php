@@ -13,4 +13,5 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wor
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/workspace/package/package.panel.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/workspace/package/index.js');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('package_view'));
 return $modx->smarty->fetch('workspaces/package/view.tpl');

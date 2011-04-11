@@ -70,11 +70,6 @@ class modCacheManager extends xPDOCacheManager {
                 }
             }
 
-            /* check for category ACLs in this context and set contextConfig option */
-            $catACLCount = $this->modx->getCount('modAccessCategory', array('context_key' => $key));
-            $results['config']['access_category_enabled'] = $catACLCount > 0 ? '1' : '0';
-            $contextConfig['access_category_enabled'] = $catACLCount > 0 ? '1' : '0';
-
             /* generate the aliasMap and resourceMap */
             $tblResource= $this->modx->getTableName('modResource');
             $tblContextResource= $this->modx->getTableName('modContextResource');
@@ -86,12 +81,13 @@ class modCacheManager extends xPDOCacheManager {
             );
             $sql = "SELECT {$resourceCols} FROM {$tblResource} r LEFT JOIN {$tblContextResource} cr ON cr.context_key = :context_key1 AND r.id = cr.resource WHERE r.id != r.parent AND (r.context_key = :context_key2 OR cr.context_key IS NOT NULL) AND r.deleted = 0 GROUP BY {$resourceCols}, r.menuindex ORDER BY r.parent ASC, r.menuindex ASC";
             $criteria= new xPDOCriteria($this->modx, $sql, $bindings, false);
+            $collResources = null;
             if ($criteria->stmt && $criteria->stmt->execute()) {
                 $collResources= & $criteria->stmt;
             }
+            $results['resourceMap']= array ();
+            $results['aliasMap']= array ();
             if ($collResources) {
-                $results['resourceMap']= array ();
-                $results['aliasMap']= array ();
                 while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
                     $results['resourceMap'][(string) $r->parent][] = (string) $r->id;
                     if ($this->modx->getOption('friendly_urls', $contextConfig, false)) {
@@ -442,8 +438,8 @@ class modCacheManager extends xPDOCacheManager {
         /* publish and unpublish resources using pub_date and unpub_date checks */
         $tblResource= $this->modx->getTableName('modResource');
         $timeNow= time() + $this->modx->getOption('server_offset_time', null, 0);
-        $publishingResults['published']= $this->modx->exec("UPDATE {$tblResource} SET published=1, publishedon={$timeNow} WHERE pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
-        $publishingResults['unpublished']= $this->modx->exec("UPDATE $tblResource SET published=0, publishedon={$timeNow} WHERE unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
+        $publishingResults['published']= $this->modx->exec("UPDATE {$tblResource} SET published=1, pub_date=0, publishedon={$timeNow} WHERE published = 0 AND pub_date IS NOT NULL AND pub_date < {$timeNow} AND pub_date > 0");
+        $publishingResults['unpublished']= $this->modx->exec("UPDATE $tblResource SET published=0, pub_date=0, publishedon={$timeNow} WHERE published = 1 AND unpub_date IS NOT NULL AND unpub_date < {$timeNow} AND unpub_date > 0");
 
         /* update publish time file */
         $timesArr= array ();

@@ -101,16 +101,28 @@ MODx.grid.User = function(config) {
             }]
         },'->',{
             xtype: 'textfield'
-            ,name: 'query'
-            ,itemId: 'fld-search'
-            ,emptyText: _('search')
+            ,name: 'search'
+            ,id: 'modx-user-search'
+            ,emptyText: _('search_ellipsis')
             ,listeners: {
-                'change': {fn:this.search,scope:this}
-                ,'render': {fn:function(tf) {
-                    tf.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
-                        this.search(tf);
-                    },this);
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
                 },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this}
             }
         }]
     });
@@ -253,12 +265,19 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         }
     }
     
-    ,search: function(tf,nv,ov) {
-        this.getStore().baseParams = {
-            action: 'getList'
-            ,query: tf.getValue()
-        };
+    ,search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
+    ,clearFilter: function() {
+    	this.getStore().baseParams = {
+            action: 'getList'
+    	};
+        Ext.getCmp('modx-user-search').reset();
+    	this.getBottomToolbar().changePage(1);
         this.refresh();
     }
 });

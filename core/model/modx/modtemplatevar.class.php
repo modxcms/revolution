@@ -242,6 +242,10 @@ class modTemplateVar extends modElement {
         $value= $this->processBindings($value, $resourceId);
 
         $params= array ();
+        /**
+         * Backwards support for display_params
+         * @deprecated To be removed in 2.2
+         */
         if ($paramstring= $this->get('display_params')) {
             $cp= explode("&", $paramstring);
             foreach ($cp as $p => $v) {
@@ -251,15 +255,23 @@ class modTemplateVar extends modElement {
                 }
             }
         }
-        
+        /* get output_properties for rendering properties */
+        $outputProperties = $this->get('output_properties');
+        if (!empty($outputProperties) && is_array($outputProperties)) {
+            $params = array_merge($params,$outputProperties);
+        }
+
         /* for base_url in image/file tvs */
         if (!empty($value) && in_array($this->get('type'),array('image','file'))) {
             $ips = $this->get('input_properties');
             $fmu = $this->xpdo->getOption('filemanager_url',null,'');
-            if (!empty($ips['baseUrl'])) {
-                $value = $ips['baseUrl'].$value;
-            } else if (!empty($fmu)) {
-                $value = $fmu.$value;
+            $absValCheck = substr($value,0,1) == '/' || substr($value,0,7) == 'http://' || substr($value,0,8) == 'https://';
+            if (empty($ips['baseUrlPrependCheckSlash']) || !($absValCheck)) {
+                if (!empty($ips['baseUrl'])) {
+                    $value = $ips['baseUrl'].$value;
+                } else if (!empty($fmu)) {
+                    $value = $fmu.$value;
+                }
             }
         }
 
@@ -819,58 +831,72 @@ class modTemplateVar extends modElement {
     public function findPolicy($context = '') {
         $policy = array();
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
-        if (empty($this->_policies) || !isset($this->_policies[$context])) {
-            $accessTable = $this->xpdo->getTableName('modAccessResourceGroup');
-            $policyTable = $this->xpdo->getTableName('modAccessPolicy');
-            $resourceGroupTable = $this->xpdo->getTableName('modTemplateVarResourceGroup');
-            $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
-                    "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
-                    "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
-                    "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
-                    "AND ResourceGroup.tmplvarid = :element " .
-                    "AND ResourceGroup.documentgroup = acl.target " .
-                    "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
-            $bindings = array(
-                ':element' => $this->get('id'),
-                ':context' => $context
-            );
-            $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-            if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $policy['modAccessResourceGroup'][$row['target']][] = array(
-                        'principal' => $row['principal'],
-                        'authority' => $row['authority'],
-                        'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+        if ($context === $this->xpdo->context->get('key')) {
+            $catEnabled = (boolean) $this->xpdo->getOption('access_category_enabled', null, true);
+            $rgEnabled = (boolean) $this->xpdo->getOption('access_resource_group_enabled', null, true);
+        } elseif ($this->xpdo->getContext($context)) {
+            $catEnabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_category_enabled', true);
+            $rgEnabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_resource_group_enabled', true);
+        }
+        $enabled = ($catEnabled || $rgEnabled);
+        if ($enabled) {
+            if (empty($this->_policies) || !isset($this->_policies[$context])) {
+                if ($rgEnabled) {
+                    $accessTable = $this->xpdo->getTableName('modAccessResourceGroup');
+                    $policyTable = $this->xpdo->getTableName('modAccessPolicy');
+                    $resourceGroupTable = $this->xpdo->getTableName('modTemplateVarResourceGroup');
+                    $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                            "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                            "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
+                            "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                            "AND ResourceGroup.tmplvarid = :element " .
+                            "AND ResourceGroup.documentgroup = acl.target " .
+                            "GROUP BY Acl.target, Acl.principal, Acl.authority, Acl.policy";
+                    $bindings = array(
+                        ':element' => $this->get('id'),
+                        ':context' => $context
                     );
+                    $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
+                    if ($query->stmt && $query->stmt->execute()) {
+                        while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
+                            $policy['modAccessResourceGroup'][$row['target']][] = array(
+                                'principal' => $row['principal'],
+                                'authority' => $row['authority'],
+                                'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+                            );
+                        }
+                    }
                 }
-            }
-            $accessTable = $this->xpdo->getTableName('modAccessCategory');
-            $categoryClosureTable = $this->xpdo->getTableName('modCategoryClosure');
-            $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
-                    "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
-                    "JOIN {$categoryClosureTable} CategoryClosure ON CategoryClosure.descendant = :category " .
-                    "AND Acl.principal_class = 'modUserGroup' " .
-                    "AND CategoryClosure.ancestor = Acl.target " .
-                    "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
-                    "GROUP BY target, principal, authority, policy " .
-                    "ORDER BY CategoryClosure.depth DESC, authority ASC";
-            $bindings = array(
-                ':category' => $this->get('category'),
-                ':context' => $context,
-            );
-            $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
-            if ($query->stmt && $query->stmt->execute()) {
-                while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $policy['modAccessCategory'][$row['target']][] = array(
-                        'principal' => $row['principal'],
-                        'authority' => $row['authority'],
-                        'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+                if ($catEnabled) {
+                    $accessTable = $this->xpdo->getTableName('modAccessCategory');
+                    $categoryClosureTable = $this->xpdo->getTableName('modCategoryClosure');
+                    $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
+                            "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
+                            "JOIN {$categoryClosureTable} CategoryClosure ON CategoryClosure.descendant = :category " .
+                            "AND Acl.principal_class = 'modUserGroup' " .
+                            "AND CategoryClosure.ancestor = Acl.target " .
+                            "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
+                            "GROUP BY target, principal, authority, policy " .
+                            "ORDER BY CategoryClosure.depth DESC, authority ASC";
+                    $bindings = array(
+                        ':category' => $this->get('category'),
+                        ':context' => $context,
                     );
+                    $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
+                    if ($query->stmt && $query->stmt->execute()) {
+                        while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
+                            $policy['modAccessCategory'][$row['target']][] = array(
+                                'principal' => $row['principal'],
+                                'authority' => $row['authority'],
+                                'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : array(),
+                            );
+                        }
+                    }
                 }
+                $this->_policies[$context] = $policy;
+            } else {
+                $policy = $this->_policies[$context];
             }
-            $this->_policies[$context] = $policy;
-        } else {
-            $policy = $this->_policies[$context];
         }
         return $policy;
     }

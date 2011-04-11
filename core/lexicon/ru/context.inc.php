@@ -1,11 +1,4 @@
 <?php
-/**
- * Context Russian lexicon topic
- *
- * @language ru
- * @package modx
- * @subpackage lexicon
- */
 $_lang['context'] = 'Контекст';
 $_lang['context_add'] = 'Добавить контекст';
 $_lang['context_create'] = 'Создать контекст';

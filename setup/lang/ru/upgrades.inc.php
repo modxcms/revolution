@@ -1,10 +1,4 @@
 <?php
-/**
- * Russian Upgrades Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
 $_lang['add_column'] = 'Добавлен новый столбец `[[+column]]`  к таблице `[[+table]]`.';
 $_lang['add_index'] = 'Добавлен новый индекс `[[+index]]` для таблицы `[[+table]]`.';
 $_lang['add_moduser_classkey'] = 'Добавлено поле class_key для поддержки производных от modUser';

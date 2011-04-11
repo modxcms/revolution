@@ -83,7 +83,6 @@ if (empty($scriptProperties['baseUrl'])) {
     }
 }
 
-//var_dump($baseUrl);
 /* get mb support settings */
 $useMultibyte = $modx->getOption('use_multibyte',null,false);
 $encoding = $modx->getOption('modx_charset',null,'UTF-8');
@@ -100,18 +99,19 @@ foreach (new DirectoryIterator($fullPath) as $file) {
     $octalPerms = substr(sprintf('%o', $file->getPerms()), -4);
 
     /* handle dirs */
+    $cls = array();
     if ($file->isDir() && $canListDirs) {
-        $cls = 'folder';
-        if ($canChmodDirs) $cls .= ' pchmod';
-        if ($canCreateDirs) $cls .= ' pcreate';
-        if ($canRemoveDirs) $cls .= ' premove';
-        if ($canUpdateDirs) $cls .= ' pupdate';
-        if ($canUpload) $cls .= ' pupload';
+        $cls[] = 'folder';
+        if ($canChmodDirs) $cls[] = 'pchmod';
+        if ($canCreateDirs) $cls[] = 'pcreate';
+        if ($canRemoveDirs) $cls[] = 'premove';
+        if ($canUpdateDirs) $cls[] = 'pupdate';
+        if ($canUpload) $cls[] = 'pupload';
 
         $directories[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
-            'cls' => $cls,
+            'cls' => implode(' ',$cls),
             'type' => 'dir',
             'leaf' => false,
             'perms' => $octalPerms,
@@ -123,9 +123,16 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         $ext = pathinfo($filePathName,PATHINFO_EXTENSION);
         $ext = $useMultibyte ? mb_strtolower($ext,$encoding) : strtolower($ext);
 
-        $cls = 'icon-file icon-'.$ext;
-        if ($canRemoveFile) $cls .= ' premove';
-        if ($canUpdateFile) $cls .= ' pupdate';
+        $cls = array();
+        $cls[] = 'icon-file';
+        $cls[] = 'icon-'.$ext;
+        if ($canRemoveFile) $cls[] = 'premove';
+        if ($canUpdateFile) $cl[] = 'pupdate';
+
+
+        if (!$file->isWritable()) {
+            $cls[] = 'icon-lock';
+        }
         $encFile = rawurlencode($dir.$fileName);
         $page = !empty($editAction) ? '?a='.$editAction.'&file='.$encFile.'&wctx='.$workingContext->get('key') : null;
 
@@ -145,7 +152,7 @@ foreach (new DirectoryIterator($fullPath) as $file) {
         $files[$fileName] = array(
             'id' => $dir.$fileName,
             'text' => $fileName,
-            'cls' => $cls,
+            'cls' => implode(' ',$cls),
             'type' => 'file',
             'leaf' => true,
             'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',

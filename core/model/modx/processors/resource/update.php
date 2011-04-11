@@ -122,6 +122,7 @@ if (isset($scriptProperties['parent'])) {
 
 /* if parent changed, set context to new parent's context */
 $oldparent = null;
+$newparent = null;
 $oldContext = null;
 if ($resource->get('parent') != $scriptProperties['parent']) {
     $oldparent = $resource->getOne('Parent');
@@ -301,11 +302,6 @@ if (!empty($canSave)) {
     return $modx->error->failure($canSave);
 }
 
-/* save resource */
-if ($resource->save() == false) {
-    return $modx->error->failure($modx->lexicon('resource_err_save'));
-}
-
 if ($oldparent !== null && $newparent !== null) {
     $opc = $modx->getCount('modResource', array('parent' => $oldparent->get('id')));
     if ($opc <= 0 || $opc == null) {
@@ -313,8 +309,13 @@ if ($oldparent !== null && $newparent !== null) {
         $oldparent->save();
     }
 
-    $newParent->set('isfolder', true);
-    $newParent->save();
+    $newparent->set('isfolder', true);
+    $resource->addOne($newparent, 'Parent');
+}
+
+/* save resource */
+if ($resource->save() == false) {
+    return $modx->error->failure($modx->lexicon('resource_err_save'));
 }
 
 /* save TVs */

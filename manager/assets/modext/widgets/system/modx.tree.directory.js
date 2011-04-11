@@ -337,6 +337,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                     action: 'upload'
                     ,prependPath: this.config.prependPath || null
                     ,prependUrl: this.config.prependUrl || null
+                    ,basePath: this.config.basePath || ''
+                    ,basePathRelative: this.config.basePathRelative || null
+                    ,baseUrl: this.config.baseUrl || ''
+                    ,baseUrlRelative: this.config.baseUrlRelative || null
                     ,wctx: MODx.ctx || ''
                 }
                 ,reset_on_hide: true
@@ -384,6 +388,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             action: 'upload'
             ,prependPath: this.config.prependPath || null
             ,prependUrl: this.config.prependUrl || null
+            ,basePath: this.config.basePath || ''
+            ,basePathRelative: this.config.basePathRelative || null
+            ,baseUrl: this.config.baseUrl || ''
+            ,baseUrlRelative: this.config.baseUrlRelative || null
             ,path: path
             ,wctx: MODx.ctx || ''
         });

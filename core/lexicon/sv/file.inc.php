@@ -33,7 +33,6 @@ $_lang['file_err_unzip_missing_lib'] = ' Saknar zip-bibliotek (php_zip.dll / zip
 $_lang['file_err_upload'] = 'Ett fel inträffade när filerna skulle laddas upp.';
 $_lang['file_exists_hk'] = 'Filen <b>{0}</b> finns redan';
 $_lang['file_extensions'] = 'Filändelser';
-$_lang['file_extensions_desc'] = 'Detta är de tillåtna filändelserna för innehållstypen.';
 $_lang['file_folder_enter_new'] = 'Ange den nya katalogens namn';
 $_lang['file_folder_chmod'] = 'Chmoda katalog';
 $_lang['file_folder_create'] = 'Skapa katalog';

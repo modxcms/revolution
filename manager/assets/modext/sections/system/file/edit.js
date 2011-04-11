@@ -1,5 +1,24 @@
 MODx.page.EditFile = function(config) {
     config = config || {};
+    var btns = [];
+    if (config.canSave) {
+        btns.push({
+            process: 'update'
+            ,text: _('save')
+            ,method: 'remote'
+            ,keys: [{
+                key: MODx.config.keymap_save || 's'
+                ,ctrl: true
+            }]
+        });
+        btns.push('-');
+    }
+    btns.push({
+        process: 'cancel'
+        ,text: _('cancel')
+        ,params: {a:MODx.action['welcome']}
+    });
+
     Ext.applyIf(config,{
         formpanel: 'modx-panel-file-edit'
         ,components: [{
@@ -8,20 +27,7 @@ MODx.page.EditFile = function(config) {
             ,file: config.file
             ,record: config.record || {}
         }]
-        ,buttons: [{
-            process: 'update'
-            ,text: _('save')
-            ,method: 'remote'
-            ,keys: [{
-                key: MODx.config.keymap_save || 's'
-                ,alt: true
-                ,ctrl: true
-            }]
-        },'-',{
-            process: 'cancel'
-            ,text: _('cancel')
-            ,params: {a:MODx.action['welcome']}
-        }]
+        ,buttons: btns
     });
     MODx.page.EditFile.superclass.constructor.call(this,config);
 };

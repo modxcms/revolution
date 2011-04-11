@@ -24,6 +24,8 @@ $_lang['area_lexicon_string_msg'] = 'Ingresa la clave de la entrada de léxico p
 $_lang['area_site'] = 'Sitio';
 $_lang['area_system'] = 'Sistema y Servidor';
 $_lang['areas'] = 'Áreas';
+$_lang['charset'] = 'Conjunto de Caractéres';
+$_lang['country'] = 'País';
 $_lang['namespace'] = 'Espacio de nombres';
 $_lang['namespace_filter'] = 'Filtrar por espacio de nombres...';
 $_lang['search_by_key'] = 'Buscar por clave...';
@@ -47,6 +49,7 @@ $_lang['settings_site'] = 'Sitio';
 $_lang['settings_ui'] = 'Interfase &amp; Características';
 $_lang['settings_users'] = 'Usuario';
 $_lang['system_settings'] = 'Configuración del Sistema';
+$_lang['usergroup'] = 'Grupo de Usuarios';
 
 // user settings
 $_lang['setting_allow_mgr_access'] = 'Acceso a la Interfase del Admin';
@@ -68,8 +71,8 @@ $_lang['setting_login_homepage_desc'] = 'Ingresa el ID del documento al que quie
 $_lang['setting_access_policies_version'] = 'Versión del Esquema de la Póliza de Acceso';
 $_lang['setting_access_policies_version_desc'] = 'La versión del sistema de Pólizas de Acceso.  NO LO CAMBIES.';
 
-$_lang['setting_allow_duplicate_alias'] = 'Permitir aliases duplicados';
-$_lang['setting_allow_duplicate_alias_desc'] = 'Si se configura a \'si\', esto permitirá que se puedan guardar aliases duplicados. <strong>NOTA: Esta opción deberá ser usada con la opción \'Ruta de alias amigable\' configurada a \'Si\' para evitar problemas cuando se referencia un recurso.</strong>';
+$_lang['setting_allow_forward_across_contexts'] = 'Permitir Pasar Solicitudes a Traves de Contextos';
+$_lang['setting_allow_forward_across_contexts_desc'] = 'Cuando es verdadero, los Symlinks y los llamados al API modx::sendForward() pueden pasar solicitudes a Recursos en otros Contextos';
 
 $_lang['setting_allow_tags_in_post'] = 'Permitir Etiquetas HTML Tags en POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Si es falso, todas las acciones POST dentro del admin quitarán cualquier etiqueta.  MODX recomienda dejar esta configuracion en verdadero.';
@@ -91,6 +94,9 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Si está habilitado, los Usuario
 
 $_lang['setting_automatic_alias'] = 'Generar automáticamente el alias';
 $_lang['setting_automatic_alias_desc'] = 'Selecciona \'Si\' para que el sistema genere automáticamente el alias basado en el título de la página del Recurso cuando sea guardado.';
+
+$_lang['setting_base_help_url'] = 'URL de Ayuda Base';
+$_lang['setting_base_help_url_desc'] = 'El URL base por el cual construir los enlaces de Ayuda en la parte superior derecha de las páginas del Admin.';
 
 $_lang['setting_blocked_minutes'] = 'Minutos Bloqueado';
 $_lang['setting_blocked_minutes_desc'] = 'Aquí puedes ingresar el número de minutos que un usuario será bloqueado si alcanza su número permitido máximo de intentos de entrada fallidos.  Por favor ingresa este valor sólamente como un número (sin comas, espacios etc.)';
@@ -115,14 +121,11 @@ $_lang['setting_cache_disabled'] = 'Deshabilitar las Opciones Globales del Cache
 $_lang['setting_cache_disabled_desc'] = 'Selecciona \'Si\' para desahbilitar todas las características de cache de MODX.  MODX no recomienda deshabilitar caching.';
 $_lang['setting_cache_disabled_err'] = 'Por favor indica si quieres o no que el cache esté habilitado.';
 
-$_lang['setting_cache_json'] = 'Cachear Datos JSON';
-$_lang['setting_cache_json_desc'] = 'Cachear cualesquiera datos de JSON que sean enviados a o de la Interfase del Usuario del admin.';
-
 $_lang['setting_cache_expires'] = 'Tiempo de Expiración del Cache Prefijado';
 $_lang['setting_cache_expires_desc'] = 'Este valor (en segundos) configura la cantidad de tiempo que los archivos de cache duran para el Cache prefijado.';
 
-$_lang['setting_cache_json_expires'] = 'Tiempo de Expiración del Cache de JSON';
-$_lang['setting_cache_json_expires_desc'] = 'Este valor (en segundos) configura la cantidad de tiempo que los archivos de cache duran para el caching de JSON.';
+$_lang['setting_cache_format'] = 'Formato de Cache a Usar';
+$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize.  Uno de los formatos.';
 
 $_lang['setting_cache_handler'] = 'Clase de Manejador de Caching';
 $_lang['setting_cache_handler_desc'] = 'El nombre de la clase del manejador de tipos que se usará para caching.';
@@ -262,9 +265,6 @@ $_lang['setting_friendly_alias_translit_class_path_desc'] = 'El lugar del modelo
 $_lang['setting_friendly_alias_trim_chars'] = 'Caractéres a Cortar del Alias de FURL';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Los caractéres a cortar de los lados del alias de un Recurso.';
 
-$_lang['setting_friendly_alias_urls'] = 'Usar Aliases Amigables';
-$_lang['setting_friendly_alias_urls_desc'] = 'Si estás usando URLs amigables, y el recurso tiene un alias, el alias siempre tendrá precedencia sobre el URL amigable.  Al configurar esta opción a \'Si\', el sufijo del Tipo de Contenido del Recurso también será aplicado al alias.  Por ejemplo, si tu Recurso con ID 1 tienen un alias de `introduccion`, y has configurado un sufijo de Tipo de Contenido como `.html`, al configurar esta opción como `si` generará `introduccion.html`.  Si no hay alias, MODX generará `1.html` como enlace.';
-
 $_lang['setting_friendly_alias_word_delimiter'] = 'Delimitador de Palabras del Alias de FURL';
 $_lang['setting_friendly_alias_word_delimiter_desc'] = 'El delimitador de palabras preferido para el alias en URLs amigables.';
 
@@ -275,8 +275,14 @@ $_lang['setting_friendly_urls'] = 'Usar URLs Amigables';
 $_lang['setting_friendly_urls_desc'] = 'Esto te permite usar URLs amigables para los buscadores con MODX.  Por favor nota, esto sólo funciona para instalaciones de MODX que corren en Apache y necesitarás escribir un archivo .htaccess para que esto funcione.  Ve el archivo .htaccess incluido en la distribución para más información.';
 $_lang['setting_friendly_urls_err'] = 'Por favor indica si quieres o no usar URLs amigables.';
 
+$_lang['setting_global_duplicate_uri_check'] = 'Revisar por URIs Duplicados a Través de Todos los Contextos';
+$_lang['setting_global_duplicate_uri_check_desc'] = 'Selecciona \'Si\' para que las revisiones de URIs duplicados incluyan todos los Contextos en la búsqueda.  De otra manera, sólo el Contexto en el que se esté guardando el Recurso es revisado.';
+
 $_lang['setting_hidemenu_default'] = 'Ocultar de los Menús';
 $_lang['setting_hidemenu_default_desc'] = 'Selecciona \'Si\' para ocultar todos los recursos nuevos de los menús.';
+
+$_lang['setting_link_tag_scheme'] = 'Esquema de Generación de URLs';
+$_lang['setting_link_tag_scheme_desc'] = 'Esquema de generación de URLs para la etiqueta [[~id]].  Opciones disponibles:  <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
 
 $_lang['setting_mail_charset'] = 'Conjunto de Caractéres del Correo';
 $_lang['setting_mail_charset_desc'] = 'El conjunto de caractéres prefijado para los emails, p.e. \'iso-8859-1\' o \'utf-8\'';
@@ -323,6 +329,9 @@ $_lang['setting_manager_direction_desc'] = 'Elige la dirección en la cual será
 $_lang['setting_manager_date_format'] = 'Formato de Fechas del Admin';
 $_lang['setting_manager_date_format_desc'] = 'La palabra de formato, en formato de date() de PHP, para las fechas representadas en el admin.';
 
+$_lang['setting_manager_favicon_url'] = 'URL del Favicon del Admin';
+$_lang['setting_manager_favicon_url_desc'] = 'Si está configurado, cargará este URL como e favicon para el Admin de MODX.  Debe de ser un URL relativo al directorio  manager/, o un URL absoluto.';
+
 $_lang['setting_manager_lang_attribute'] = 'Atributo de Idioma de HTML y XML del Admin';
 $_lang['setting_manager_lang_attribute_desc'] = 'Ingresa el código de idioma que mejor encaja con el idioma que eligiste para el admin,  esto asegurará que el navegador pueda presentar contenido en el mejor formato para tí.';
 
@@ -359,6 +368,9 @@ $_lang['setting_password_generated_length_desc'] = 'La longitud de la contraseñ
 $_lang['setting_password_min_length'] = 'Longitud Mínima de la Contraseña';
 $_lang['setting_password_min_length_desc'] = 'La longitud mínima de una contraseña para un Usuario.';
 
+$_lang['setting_principal_targets'] = 'Objetivos de ACL a Cargar';
+$_lang['setting_principal_targets_desc'] = 'Personalizar los objetivos de ACL a cargar por los Usuarios de MODX.';
+
 $_lang['setting_proxy_auth_type'] = 'Tipo de Autentificación de Proxy';
 $_lang['setting_proxy_auth_type_desc'] = 'Soporta BASIC o NTLM.';
 
@@ -388,6 +400,9 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Borrar las imágenes miniatura
 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'phpThumb Archivos Fuente del Cache';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Si o no poner en el cache los archivos fuente conforme se van cargando. Recomendable desactivar.';
+
+$_lang['setting_phpthumb_document_root'] = 'Raíz de Documento de PHPThumb';
+$_lang['setting_phpthumb_document_root_desc'] = 'Configura esto si estás experimentando problemas con la variable de servidor DOCUMENT_ROOT, u obteniendo errores con OutputThumbnail o !is_resource.  Configúralo a la ruta absoluta de la raíz del documento que quieres usar.  Si está vacío, MODX usará la variable de servidor DOCUMENT_ROOT.';
 
 $_lang['setting_phpthumb_error_bgcolor'] = 'phpThumb Color del Fondo de los Errores';
 $_lang['setting_phpthumb_error_bgcolor_desc'] = 'Un valor hexadecimal, sin el símbolo #, el cual indica el color de fondo para los errores de phpThumb.';
@@ -435,7 +450,7 @@ $_lang['setting_phpthumb_nooffsitelink_watermark_src'] = 'phpThumb Fuente de la 
 $_lang['setting_phpthumb_nooffsitelink_watermark_src_desc'] = 'Opcional.  Una ruta válida del sistema de archivos a usar como la fuente de la marca de agua cuando tus imágenes sean mostradas fuera del sitio por phpThumb.';
 
 $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Recortar';
-$_lang['setting_phpthumb_zoomcrop_desc'] = 'EL ZC prefijado para phpThumb cuand es usado en MODX.  El valor prefijado es 0 para prevenir zoom y recortar.';
+$_lang['setting_phpthumb_zoomcrop_desc'] = 'EL ZC prefijado para phpThumb cuando es usado en MODX.  El valor prefijado es 0 para prevenir zoom y recortar.';
 
 $_lang['setting_publish_default'] = 'Valor Prefijado de Publicar';
 $_lang['setting_publish_default_desc'] = 'Selecciona \'Si\' para hacer todos los recursos nuevos publicados.';
@@ -465,6 +480,9 @@ $_lang['setting_resolve_hostnames_desc'] = 'Quieres que MODX trate de resolver l
 $_lang['setting_resource_tree_node_name'] = 'Campo de Nodo del Árbol de Recursos';
 $_lang['setting_resource_tree_node_name_desc'] = 'Especifica el campo del Recurso a usar cuando se generen los nodos en el Árbol de Recursos.  El valor prefijado es pagetitle, aunque cualquier campo del Recurso puede ser usado, tal como menutitle, alias, longtitle, etc.';
 
+$_lang['setting_resource_tree_node_tooltip'] = 'Campo de Tips del Árbol de Recursos';
+$_lang['setting_resource_tree_node_tooltip_desc'] = 'Especifíca el campo de Recurso a usar cuando se muestran los nodos en el Árbol de Recursos.  Cualquier campo de Recursos puede ser usado, tal como menutitle, alias, longtitle, etc.  Si está en blanco, será usado el longtitle con una descripción abajo.';
+
 $_lang['setting_richtext_default'] = 'Texto Formateado Prefijado';
 $_lang['setting_richtext_default_desc'] = 'Selecciona \'Si\' para hacer que todos los recursos nuevos utilicen el Editor de Texto Formateado.';
 
@@ -482,13 +500,13 @@ $_lang['setting_server_protocol_http'] = 'http';
 $_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Dominio de Cookie de Sesión';
-$_lang['setting_session_cookie_domain_desc'] = 'Usa esta configuración para personalizar el dominio de la cookie de la sesión.';
+$_lang['setting_session_cookie_domain_desc'] = 'Usa esta configuración para personalizar el dominio de la cookie de la sesión.  Déjalo en blanco para usar el dominio actual.';
 
 $_lang['setting_session_cookie_lifetime'] = 'Tiempo de Vida de la Cookie de Sesión';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Usa esta configuración para personalizar el tiempo de vida de la cookie de sesión en segundos.  Esto es usado para configurar el tiempo de vida de una cookie de sesión de un cliente cuando ellos eligen la opción de \'recuérdame\' en la entrada.';
 
 $_lang['setting_session_cookie_path'] = 'Ruta de la Cookie de Sesión';
-$_lang['setting_session_cookie_path_desc'] = 'Usa esta configuración para personalizar la ruta de cookies para identificar las cookies de sesión específicas del sitio.';
+$_lang['setting_session_cookie_path_desc'] = 'Usa esta configuración para personalizar la ruta de cookies para identificar las cookies de sesión específicas del sitio.  Déjalo en blanco para usar MODX_BASE_URL.';
 
 $_lang['setting_session_cookie_secure'] = 'Cookies de Sesión Seguras';
 $_lang['setting_session_cookie_secure_desc'] = 'Habilitar esta configuración para usar cookies de sesión seguras.';
@@ -497,7 +515,7 @@ $_lang['setting_session_handler_class'] = 'Nombre de Clase del Manejador de Sesi
 $_lang['setting_session_handler_class_desc'] = 'Para sesiones administradas en base de datos, usa \'modSessionHandler\'.  Deja esto en blanco para usar administración de sesiones estándar de PHP.';
 
 $_lang['setting_session_name'] = 'Nombre de Sesión';
-$_lang['setting_session_name_desc'] = 'Usa esta configuración para personalizar el nombre de sesión usado para las sesiones en MODX.';
+$_lang['setting_session_name_desc'] = 'Usa esta configuración para personalizar el nombre de sesión usado para las sesiones en MODX.  Déjalo en blanco para usar el valor de nombre de sesión prefijado de PHP.';
 
 $_lang['setting_settings_version'] = 'Versión de Configuraciónes';
 $_lang['setting_settings_version_desc'] = 'La versión de MODX actualmente instalada.';
@@ -533,6 +551,9 @@ $_lang['setting_site_unavailable_page_err'] = 'Por favor especifíca el ID del d
 
 $_lang['setting_strip_image_paths'] = 'Re-escribir rutas del navegador?';
 $_lang['setting_strip_image_paths_desc'] = 'Si esto está configurado a \'No\', MODX escribirá las fuentes de recursos (imágenes, archivos, flash, etc.) del navegador de recursos como URLs absolutas.  Las URLs relativas son útiles si quisieras mover tu instalación de MODX, p.e., de un sitio en desarrollo a un sitio en producción.  Si no tienes idea de lo que esto significa, es mejor dejarlo configurado a \'Si\'.';
+
+$_lang['setting_symlink_merge_fields'] = 'Combinar Campos de Recurso en SymLinks';
+$_lang['setting_symlink_merge_fields_desc'] = 'Si está configurado a Si, combinará automáticamente campos no vacíos con el recurso objetivo cuando se use forwarding usando SymLinks.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Mostrar Descripciones en el Menú Superior';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Si se configura a \'No\', MODX ocultará las descripciones de los artículos del menú superior en el Admin.';
@@ -601,4 +622,3 @@ $_lang['setting_which_element_editor_desc'] = 'Aquí puedes seleccionar que Edit
 
 $_lang['setting_xhtml_urls'] = 'URLs de XHTML';
 $_lang['setting_xhtml_urls_desc'] = 'Si se configura a verdadero,  todos los URLs generados por MODX serán conforme a XHTML, incluyendo la codificación del caracter del símbolo &.';
-

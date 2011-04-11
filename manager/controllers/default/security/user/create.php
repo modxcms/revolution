@@ -36,5 +36,6 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.panel.user.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/security/user/create.js');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('user_new'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('security/user/create.tpl');

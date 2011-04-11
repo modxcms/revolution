@@ -24,6 +24,7 @@ $_lang['dir_err_assets_comp'] = 'Your assets/components/ directory was not able 
 $_lang['dir_err_core_comp'] = 'Your core/components/ directory was not able to be created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd Party Components.';
 $_lang['download'] = 'Download';
 $_lang['downloaded'] = 'Downloaded';
+$_lang['downloading'] = 'Downloading...';
 $_lang['download_extras'] = 'Download Extras';
 $_lang['downloads'] = 'Downloads';
 $_lang['installation_instructions'] = 'Installation Instructions';

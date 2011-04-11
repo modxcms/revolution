@@ -12,5 +12,6 @@ if (!$modx->hasPermission('help')) {
 /* load JS scripts for page */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/system/help.js');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('help'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('help.tpl');

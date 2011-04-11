@@ -194,6 +194,14 @@ $parent->set('template',$default_template);
 $resource->set('template',$default_template);
 $overridden = $this->checkFormCustomizationRules($parent,true);
 $defaults = array_merge($defaults,$overridden);
+$defaults['published'] = intval($defaults['published']) == 1 ? true : false;
+$defaults['hidemenu'] = intval($defaults['hidemenu']) == 1 ? true : false;
+$defaults['isfolder'] = intval($defaults['isfolder']) == 1 ? true : false;
+$defaults['richtext'] = intval($defaults['richtext']) == 1 ? true : false;
+$defaults['searchable'] = intval($defaults['searchable']) == 1 ? true : false;
+$defaults['cacheable'] = intval($defaults['cacheable']) == 1 ? true : false;
+$defaults['deleted'] = intval($defaults['deleted']) == 1 ? true : false;
+$defaults['uri_override'] = intval($defaults['uri_override']) == 1 ? true : false;
 
 $defaults['parent_pagetitle'] = $parent->get('pagetitle');
 
@@ -232,4 +240,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('document_new'));
 return $modx->smarty->fetch('resource/create.tpl');

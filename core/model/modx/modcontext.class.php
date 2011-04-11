@@ -94,34 +94,42 @@ class modContext extends modAccessibleObject {
      */
     public function findPolicy($context = '') {
         $policy = array();
+        $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
-        if (empty($this->_policies) || !isset($this->_policies[$context])) {
-            $c = $this->xpdo->newQuery('modAccessContext');
-            $c->leftJoin('modAccessPolicy','Policy');
-            $c->select(array(
-                'modAccessContext.id',
-                'modAccessContext.target',
-                'modAccessContext.principal',
-                'modAccessContext.authority',
-                'modAccessContext.policy',
-                'Policy.data',
-            ));
-            $c->where(array(
-                'modAccessContext.principal_class' => 'modUserGroup',
-                'modAccessContext.target' => $this->get('key'),
-            ));
-            $c->sortby('modAccessContext.target,modAccessContext.principal,modAccessContext.authority,modAccessContext.policy');
-            $acls = $this->xpdo->getCollection('modAccessContext',$c);
-            foreach ($acls as $acl) {
-                $policy['modAccessContext'][$acl->get('target')][] = array(
-                    'principal' => $acl->get('principal'),
-                    'authority' => $acl->get('authority'),
-                    'policy' => $acl->get('data') ? $this->xpdo->fromJSON($acl->get('data'), true) : array(),
-                );
+        if ($context === $this->xpdo->context->get('key')) {
+            $enabled = (boolean) $this->xpdo->getOption('access_context_enabled', null, true);
+        } elseif ($this->xpdo->getContext($context)) {
+            $enabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_context_enabled', true);
+        }
+        if ($enabled) {
+            if (empty($this->_policies) || !isset($this->_policies[$context])) {
+                $c = $this->xpdo->newQuery('modAccessContext');
+                $c->leftJoin('modAccessPolicy','Policy');
+                $c->select(array(
+                    'modAccessContext.id',
+                    'modAccessContext.target',
+                    'modAccessContext.principal',
+                    'modAccessContext.authority',
+                    'modAccessContext.policy',
+                    'Policy.data',
+                ));
+                $c->where(array(
+                    'modAccessContext.principal_class' => 'modUserGroup',
+                    'modAccessContext.target' => $this->get('key'),
+                ));
+                $c->sortby('modAccessContext.target,modAccessContext.principal,modAccessContext.authority,modAccessContext.policy');
+                $acls = $this->xpdo->getCollection('modAccessContext',$c);
+                foreach ($acls as $acl) {
+                    $policy['modAccessContext'][$acl->get('target')][] = array(
+                        'principal' => $acl->get('principal'),
+                        'authority' => $acl->get('authority'),
+                        'policy' => $acl->get('data') ? $this->xpdo->fromJSON($acl->get('data'), true) : array(),
+                    );
+                }
+                $this->_policies[$context] = $policy;
+            } else {
+                $policy = $this->_policies[$context];
             }
-            $this->_policies[$context] = $policy;
-        } else {
-            $policy = $this->_policies[$context];
         }
         return $policy;
     }
@@ -174,7 +182,7 @@ class modContext extends modAccessibleObject {
                         $found= true;
                     }
                 }
-            } elseif (array_search((string) $id, $this->aliasMap, true) !== false) {
+            } elseif (array_keys(array((string) $id), $this->resourceMap, true) !== false) {
                 $found= true;
             }
 

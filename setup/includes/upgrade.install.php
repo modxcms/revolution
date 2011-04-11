@@ -494,4 +494,28 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
     }
 }
 
+/* remove modxcms.com provider if it occurs */
+$provider = $modx->getObject('transport.modTransportProvider',array(
+    'service_url' => 'http://rest.modxcms.com/extras/',
+));
+$newProvider = $modx->getObject('transport.modTransportProvider',array(
+    'service_url' => 'http://rest.modx.com/extras/',
+));
+if ($provider && $newProvider && $provider->get('id') != $newProvider->get('id')) {
+    /* if 2 providers found, remove old one */
+    if ($provider->remove()) {
+        /* and then migrate old packages to new provider */
+        $packages = $modx->getCollection('transport.modTransportPackage',array(
+            'provider' => $provider->get('id'),
+        ));
+        foreach ($packages as $package) {
+            $package->set('provider',$newProvider->get('id'));
+            $package->save();
+        }
+    }
+} else if ($provider && empty($newProvider)) {
+    $provider->set('service_url','http://rest.modx.com/extras/');
+    $provider->save();
+}
+
 return true;

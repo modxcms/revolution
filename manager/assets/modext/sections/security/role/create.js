@@ -23,7 +23,6 @@ MODx.page.CreateRole = function(config) {
             process: 'create', text: _('save'), method: 'remote'
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
-                ,alt: true
                 ,ctrl: true
             }]
         },'-',{

@@ -1,6 +1,6 @@
 <?php
 /**
- * Specific upgrades for Revolution 2.1.0
+ * Specific upgrades for Revolution 2.1.0-rc-1
  *
  * @package setup
  * @subpackage upgrades
@@ -181,13 +181,17 @@ if ($adminTpl) {
     }
 }
 /* change help/welcome screen URL references */
-$setting = $modx->getObject('modSystemSetting',array('key' => 'base_help_url'));
-if ($setting && $setting->get('value') == 'http://rtfm.modx.com/display/revolution20/') {
-    $setting->set('value','http://rtfm.modx.com/display/revolution21/');
-    $setting->save();
-}
 $setting = $modx->getObject('modSystemSetting',array('key' => 'welcome_screen_url'));
 if ($setting && $setting->get('value') == 'http://misc.modx.com/revolution/welcome.20.html') {
     $setting->set('value','http://misc.modx.com/revolution/welcome.21.html');
     $setting->save();
 }
+
+/* add rank to modUserGroup */
+$class = 'modUserGroup';
+$table = $this->install->xpdo->getTableName($class);
+$description = $this->install->lexicon('add_column',array('column' => 'rank','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'rank'));
+
+$description = $this->install->lexicon('add_index',array('index' => 'rank','table' => $table));
+$this->processResults($class, $description, array($modx->manager, 'addIndex'), array($class, 'rank'));

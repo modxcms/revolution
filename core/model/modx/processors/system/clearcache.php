@@ -108,7 +108,5 @@ while ($partition && $result) {
     $result = next($results);
     $partition = key($results);
 }
-sleep(1);
-$modx->log(modX::LOG_LEVEL_INFO,'COMPLETED');
 
 return $modx->error->success($o);

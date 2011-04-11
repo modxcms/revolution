@@ -81,6 +81,6 @@ $onTempFormPrerender = $modx->invokeEvent('OnTempFormPrerender',array(
 if (is_array($onTempFormPrerender)) $onTempFormPrerender = implode('',$onTempFormPrerender);
 $modx->smarty->assign('onTempFormPrerender',$onTempFormPrerender);
 
-
+$modx->smarty->assign('_pagetitle',$modx->lexicon('template').': '.$template->get('templatename'));
 $this->checkFormCustomizationRules($template);
 return $modx->smarty->fetch('element/template/update.tpl');

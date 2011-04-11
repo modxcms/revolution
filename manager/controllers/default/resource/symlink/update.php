@@ -84,6 +84,15 @@ $record = array_merge($record,$overridden);
 
 $record['parent_pagetitle'] = $parent ? $parent->get('pagetitle') : '';
 
+$record['published'] = intval($record['published']) == 1 ? true : false;
+$record['hidemenu'] = intval($record['hidemenu']) == 1 ? true : false;
+$record['isfolder'] = intval($record['isfolder']) == 1 ? true : false;
+$record['richtext'] = intval($record['richtext']) == 1 ? true : false;
+$record['searchable'] = intval($record['searchable']) == 1 ? true : false;
+$record['cacheable'] = intval($record['cacheable']) == 1 ? true : false;
+$record['deleted'] = intval($record['deleted']) == 1 ? true : false;
+$record['uri_override'] = intval($record['uri_override']) == 1 ? true : false;
+
 /* get TVs */
 $templateId = $record['template'];
 $tvCounts = array();
@@ -128,6 +137,5 @@ Ext.onReady(function() {
 // ]]>
 </script>');
 
-
-$this->checkFormCustomizationRules($resource);
+$modx->smarty->assign('_pagetitle',$modx->lexicon('editing',array('name'  => $record['pagetitle'])));
 return $modx->smarty->fetch('resource/symlink/update.tpl');

@@ -13,5 +13,6 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.panel.actions.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/system/action.js');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('actions'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('system/action/index.tpl');

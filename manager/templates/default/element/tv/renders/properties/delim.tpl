@@ -1,6 +1,6 @@
 <div id="tv-wprops-form{$tv}"></div>
-{literal}
 
+{literal}
 <script type="text/javascript">
 // <![CDATA[
 var params = {

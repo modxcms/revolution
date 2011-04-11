@@ -14,7 +14,6 @@ $_lang['database_name'] = 'データベース名';
 $_lang['database_server'] = 'データベースサーバー';
 $_lang['database_tables'] = 'テーブル一覧';
 $_lang['database_optimize'] = 'Optimize Database';
-$_lang['database_overhead'] = '<strong style=\'color:#990033\'>注:</strong>オーバーヘッドとは、確保されているが使われていない領域のことです。オーバーヘッドの数字をクリックすると、この領域を開放します';
 $_lang['database_table_clickhere'] = 'ここをクリック';
 $_lang['database_table_clickbackup'] = '選択したテーブルをバックアップ・ダウンロード';
 $_lang['database_table_datasize'] = 'データサイズ';
@@ -22,16 +21,18 @@ $_lang['database_table_droptablestatements'] = 'DROP文を生成';
 $_lang['database_table_effectivesize'] = '有効サイズ';
 $_lang['database_table_indexsize'] = 'インデックス';
 $_lang['database_table_overhead'] = 'オーバーヘッド';
+$_lang['database_table_reserved'] = 'Reserved';//sqlsrv
 $_lang['database_table_records'] = '件数';
 $_lang['database_table_tablename'] = 'テーブル名';
 $_lang['database_table_totalsize'] = '合計サイズ';
 $_lang['database_table_totals'] = '総計:';
+$_lang['database_table_unused'] = 'Unused';//sqlsrv
 $_lang['database_type'] = 'データベースの種類';
 $_lang['database_version'] = 'データベースのバージョン:';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> のバージョン';
 $_lang['localtime'] = 'ローカル時刻';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> のバージョン';
-$_lang['modx_version'] = 'MODxバージョン';
+$_lang['modx_version'] = 'MODXのバージョン';
 $_lang['onlineusers_action'] = 'アクション';
 $_lang['onlineusers_actionid'] = 'アクションID';
 $_lang['onlineusers_ipaddress'] = 'IPアドレス';

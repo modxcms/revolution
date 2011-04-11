@@ -22,7 +22,7 @@ $_lang['area_session'] = 'Session et Cookie';
 $_lang['area_lexicon_string'] = 'Entrées du lexique de zone';
 $_lang['area_lexicon_string_msg'] = 'Entrez ici la clé de l\'entrée du lexique pour la zone. S\'il n\'y a pas d\'entrée de lexique, cela affichera la clé de la zone.<br />Zones du coeur:<ul><li>identification</li><li>cache</li><li>fichier</li><li>urls simples</li><li>gateway</li><li>langue</li><li>manager</li><li>session</li><li>site</li><li>système</li></ul>';
 $_lang['area_site'] = 'Site';
-$_lang['area_system'] = 'Systéme et Serveur';
+$_lang['area_system'] = 'Système et Serveur';
 $_lang['areas'] = 'Zones';
 $_lang['charset'] = 'Jeu de caractères (charset)';
 $_lang['country'] = 'Pays';
@@ -48,10 +48,19 @@ $_lang['settings_misc'] = 'Divers';
 $_lang['settings_site'] = 'Site';
 $_lang['settings_ui'] = 'Interface &amp; Fonctions';
 $_lang['settings_users'] = 'Utilisateur';
-$_lang['system_settings'] = 'Configuration du Systéme';
+$_lang['system_settings'] = 'Configuration du Système';
 $_lang['usergroup'] = 'Groupe d\'utilisateur';
 
 // user settings
+$_lang['setting_access_category_enabled'] = 'Vérifier les permissions de catégorie';
+$_lang['setting_access_category_enabled_desc'] = 'Utilisez ceci pour activer ou désactiver la vérification des droits d\'accès aux catégories (par contexte). <strong>NOTE: Si cette option est désactivée, alors toutes les permissions d\'accès aux catégories seront ignorées!</strong>';
+
+$_lang['setting_access_context_enabled'] = 'Vérifier les permissions de contexte';
+$_lang['setting_access_context_enabled_desc'] = 'Utilisez ceci pour activer ou désactiver la vérification des droits d\'accès aux contextes. <strong>NOTE: Si cette option est désactivée, alors toutes les permissions d\'accès aux contextes seront ignorées. NE DÉSACTIVEZ PAS cette option pour le système entier ou pour le contexte mgr car vous interdiriez l\'accès au gestionnaire.</strong>';
+
+$_lang['setting_access_resource_group_enabled'] = 'Vérifier les permissions des groupes de ressource';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Utilisez ceci pour activer ou désactiver la vérification des droits d\'accès aux groupes de ressource (par contexte). <strong>NOTE: Si cette option est désactivée, alors toutes les permissions d\'accès aux groupes de ressource seront ignorées!</strong>';
+
 $_lang['setting_allow_mgr_access'] = 'Accès à l\'interface du manager';
 $_lang['setting_allow_mgr_access_desc'] = 'Utilisez cette option pour activer ou désactiver l\'accès à l\'interface du manager. <strong>NOTE: Si cette option est définie à non, alors l\'utilisateur sera redirigé vers l\'écran d\'identification ou la page d\'accueil du site web.</strong>';
 
@@ -572,19 +581,19 @@ $_lang['setting_unauthorized_page_desc'] = 'Entrez l\'ID de la ressource vers la
 $_lang['setting_unauthorized_page_err'] = 'Veuillez spécifier un ID de ressource pour la page « non autorisé ».';
 
 $_lang['setting_upload_files'] = 'Types de fichiers uploadables';
-$_lang['setting_upload_files_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/files/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extenssions pour chaque type de fichier, séparés par des virgules.';
+$_lang['setting_upload_files_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/files/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extensions pour chaque type de fichier, séparés par des virgules.';
 
 $_lang['setting_upload_flash'] = 'Types de fichiers Flash uploadables';
-$_lang['setting_upload_flash_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/flash/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extenssions pour chaque type de fichier flash, séparés par des virgules.';
+$_lang['setting_upload_flash_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/flash/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extensions pour chaque type de fichier flash, séparés par des virgules.';
 
 $_lang['setting_upload_images'] = 'Types d\'images uploadables';
-$_lang['setting_upload_images_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/images/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extenssions pour chaque type d\'images, séparés par des virgules.';
+$_lang['setting_upload_images_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/images/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extensions pour chaque type d\'images, séparés par des virgules.';
 
 $_lang['setting_upload_maxsize'] = 'Taille maximale des uploads';
 $_lang['setting_upload_maxsize_desc'] = 'Entrez la taille maximale des fichiers qui peuvent être uploadés via le gestionnaire de fichier. La taille doit être indiquée en octects (bytes). <strong>NOTE: Les fichiers volumineux peuvent demander beaoucp de temps pour être uploadés!</strong>';
 
 $_lang['setting_upload_media'] = 'Types de média uploadables';
-$_lang['setting_upload_media_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/media/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extenssions pour chaque type de média, séparés par des virgules.';
+$_lang['setting_upload_media_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être uploadés dans \'assets/media/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extensions pour chaque type de média, séparés par des virgules.';
 
 $_lang['setting_use_alias_path'] = 'Utiliser les alias simples';
 $_lang['setting_use_alias_path_desc'] = 'Sélectionner \'oui\' pour cette option affichera le chemin complet de la ressource si la ressource a un alias. Par exemple, si une ressource ayant pour alias \'enfant\' est située dans une ressource conteneur ayant pour alias \'parent\', alors l\'alias du chemin complet sera affiché \'/parent/enfant.html\'.<br /><strong>NOTE: Mettre \'oui\' dans cette option (activer les alias simples) implique l\'utilisation de chemin absolu pour les objets (tels qu\'images, css, javascripts, etc), par exemple : \'/assets/images\' au lieu de \'assets/images\'. En faisant de tel, vous éviterez au navigateur (ou serveur web) d\'ajouter le chemin relatif à l\'alias.</strong>';

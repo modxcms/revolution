@@ -20,13 +20,24 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,10);
 $sort = $modx->getOption('sort',$scriptProperties,'key');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$search = $modx->getOption('search',$scriptProperties,'');
 
 /* query contexts */
 $c = $modx->newQuery('modContext');
+if (!empty($search)) {
+    $c->where(array(
+        'key:LIKE' => '%'.$search.'%',
+        'OR:description:LIKE' => '%'.$search.'%',
+    ));
+}
+$count = $modx->getCount('modContext',$c);
+
 $c->sortby($modx->getSelectColumns('modContext','modContext','',array($sort)),$dir);
 if ($isLimit) $c->limit($limit,$start);
 $contexts = $modx->getCollection('modContext',$c);
-$count = $modx->getCount('modContext');
+
+$canEdit = $modx->hasPermission('edit_context');
+$canRemove = $modx->hasPermission('delete_context');
 
 /* iterate through contexts */
 $list = array();
@@ -34,19 +45,12 @@ foreach ($contexts as $context) {
     if (!$context->checkPolicy('list')) continue;
 
     $contextArray = $context->toArray();
-    $contextArray['menu'] = array();
-    if ($modx->hasPermission('edit_context')) {
-        $contextArray['menu'][] = array(
-            'text' => $modx->lexicon('context_update'),
-            'handler' => 'this.update',
-        );
+    $contextArray['perm'] = array();
+    if ($canEdit) {
+        $contextArray['perm'][] = 'pedit';
     }
-    if (!in_array($context->get('key'),array('mgr','web')) && $modx->hasPermission('delete_context')) {
-        $contextArray['menu'][] = '-';
-        $contextArray['menu'][] = array(
-            'text' => $modx->lexicon('context_remove'),
-            'handler' => 'this.remove.createDelegate(this,["context_remove_confirm"])',
-        );
+    if (!in_array($context->get('key'),array('mgr','web')) && $canRemove) {
+        $contextArray['perm'][] = 'premove';
     }
     $list[]= $contextArray;
 }

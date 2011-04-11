@@ -88,8 +88,6 @@ class modManagerRequest extends modRequest {
         /* include version info */
         if ($this->modx->version === null) $this->modx->getVersionData();
 
-        /* if not validated, load login page */
-        $modx = & $this->modx;
 
         if ($this->modx->getOption('manager_language')) {
             $this->modx->setOption('cultureKey',$this->modx->getOption('manager_language'));
@@ -98,38 +96,14 @@ class modManagerRequest extends modRequest {
         /* load default core cache file of lexicon strings */
         $this->modx->lexicon->load('core:default');
 
+        /* if not validated, load login page */
         if (!isset($this->modx->user) || !$this->modx->user->isAuthenticated('mgr')) {
+            $modx = & $this->modx;
+            $modx->request =& $this;
             $theme = $this->modx->getOption('manager_theme',null,'default');
-            include_once $this->modx->getOption('manager_path') . 'controllers/'.$theme.'/security/login.php';
+            require $this->modx->getOption('manager_path') . 'controllers/'.$theme.'/security/login.php';
             @session_write_close();
             exit();
-        } else {
-            /* log user action
-            if (getenv('HTTP_CLIENT_IP')) {
-                $ip= getenv('HTTP_CLIENT_IP');
-            } else {
-                if (getenv('HTTP_X_FORWARDED_FOR')) {
-                    $ip= getenv('HTTP_X_FORWARDED_FOR');
-                } else {
-                    if (getenv('REMOTE_ADDR')) {
-                        $ip= getenv('REMOTE_ADDR');
-                    } else {
-                        $ip= 'UNKNOWN';
-                    }
-                }
-            }
-            $_SESSION['ip']= $ip;
-            $itemid= isset ($_REQUEST[$this->modx->getOption('request_param_id')]) ? $_REQUEST[$this->modx->getOption('request_param_id')] : 0;
-            $lasthittime= time();
-            $a= isset ($_REQUEST['a']) ? $_REQUEST['a'] : '';
-            if ($a != 1 && $a != 0) {
-                $itemid= intval($itemid);
-                $activeUserTbl= $this->modx->getTableName('modActiveUser');
-                $sql= "REPLACE INTO {$activeUserTbl} (internalKey, username, lasthit, action, id, ip) values(" . $this->modx->getLoginUserID('mgr') . ", '{$_SESSION['mgrShortname']}', '{$lasthittime}', '{$a}', {$itemid}, '{$ip}')";
-                if (!$rs= $this->modx->exec($sql)) {
-                    $this->modx->log(modX::LOG_LEVEL_ERROR, 'Error logging active user information! SQL: ' . $sql . "\n" . print_r($this->modx->errorInfo(), 1));
-                }
-            }*/
         }
 
         if ($this->modx->actionMap === null || !is_array($this->modx->actionMap)) {

@@ -11,7 +11,6 @@ $_lang['database_name'] = 'Andmebassi nimi';
 $_lang['database_server'] = 'Andmebassi server';
 $_lang['database_tables'] = 'Andmebassi tabelid';
 $_lang['database_optimize'] = 'Optimeeri Andmebassi';
-$_lang['database_overhead'] = '<b style=\'color:#990033\'>Märkus:</strong> Overhead on kasutamata ruum, mis on varutud MySQL-i poolt. Et vabastada see ruum, klikkige tabeli overhead kujutisel.';
 $_lang['database_table_clickhere'] = 'Klikkige siin';
 $_lang['database_table_clickbackup'] = 'et varundada ja allalaadida valitud tabelid';
 $_lang['database_table_datasize'] = 'Andmete suurus';

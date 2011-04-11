@@ -6,13 +6,40 @@
  * @subpackage build
  */
 $settings = array();
+$settings['access_category_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['access_category_enabled']->fromArray(array (
+  'key' => 'access_category_enabled',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
+$settings['access_context_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['access_context_enabled']->fromArray(array (
+  'key' => 'access_context_enabled',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
+$settings['access_resource_group_enabled']= $xpdo->newObject('modSystemSetting');
+$settings['access_resource_group_enabled']->fromArray(array (
+  'key' => 'access_resource_group_enabled',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'authentication',
+  'editedon' => null,
+), '', true, true);
 $settings['allow_forward_across_contexts']= $xpdo->newObject('modSystemSetting');
 $settings['allow_forward_across_contexts']->fromArray(array (
   'key' => 'allow_forward_across_contexts',
   'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
-  'area' => 'core',
+  'area' => 'system',
   'editedon' => null,
 ), '', true, true);
 $settings['allow_tags_in_post']= $xpdo->newObject('modSystemSetting');
@@ -81,7 +108,7 @@ $settings['automatic_alias']->fromArray(array (
 $settings['base_help_url']= $xpdo->newObject('modSystemSetting');
 $settings['base_help_url']->fromArray(array (
   'key' => 'base_help_url',
-  'value' => 'http://rtfm.modx.com/display/revolution21/',
+  'value' => 'http://rtfm.modx.com/display/revolution20/',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -491,7 +518,7 @@ $settings['forward_merge_excludes']->fromArray(array (
   'value' => 'type,published,class_key,context_key',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'core',
+  'area' => 'system',
   'editedon' => null,
 ), '', true, true);
 $settings['friendly_alias_lowercase_only']= $xpdo->newObject('modSystemSetting');
@@ -833,7 +860,7 @@ $settings['principal_targets']->fromArray(array (
   'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory',
   'xtype' => 'textfield',
   'namespace' => 'core',
-  'area' => 'security',
+  'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
 $settings['proxy_auth_type']= $xpdo->newObject('modSystemSetting');

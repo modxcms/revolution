@@ -14,7 +14,6 @@ $_lang['database_name'] = 'ชื่อฐานข้อมูล';
 $_lang['database_server'] = 'เซิร์ฟเวอร์ฐานข้อมูล';
 $_lang['database_tables'] = 'ตารางฐานข้อมูล';
 $_lang['database_optimize'] = 'เพิ่มประสิทธิภาพฐานข้อมูล';
-$_lang['database_overhead'] = '<b style=\'color:#990033\'>หมายเหตุ:</strong> โอเวอร์เฮด คือพื้นที่ว่างที่ถูกสำรองโดย MySQL หากต้องการปลดปล่อยพื้นที่นี้ คลิ๊กบนตัวเลขโอเวอร์เฮดในตาราง';
 $_lang['database_table_clickhere'] = 'คลิ๊กที่นี่';
 $_lang['database_table_clickbackup'] = 'เพื่อสำรองข้อมูล &amp; ดาวน์โหลดตารางที่เลือก';
 $_lang['database_table_datasize'] = 'ขนาดข้อมูล';

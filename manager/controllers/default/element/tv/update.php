@@ -83,5 +83,6 @@ $onTVFormPrerender = $modx->invokeEvent('OnTVFormPrerender',array(
 if(is_array($onTVFormPrerender)) $onTVFormPrerender = implode('',$onTVFormPrerender);
 $modx->smarty->assign('onTVFormPrerender',$onTVFormPrerender);
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('tv').': '.$tv->get('name'));
 $this->checkFormCustomizationRules($tv);
 return $modx->smarty->fetch('element/tv/update.tpl');

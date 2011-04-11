@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-12-02
+ * @updated 2011-04-07
  */
 $_lang['alphabetically'] = 'Abecedně';
 $_lang['already_downloaded'] = 'Tento balíček je již stažen.';
@@ -15,6 +15,7 @@ $_lang['api_key'] = 'API klíč';
 $_lang['author'] = 'Autor';
 $_lang['autoincludes_packaging'] = 'Automaticky zahrnuté balíčky: [[+autoincludes]]';
 $_lang['back_txt'] = 'Zpět';
+$_lang['breaks_at'] = 'Podporováno do verze';
 $_lang['by'] = 'od';
 $_lang['changelog'] = 'Změny';
 $_lang['changelog_desc'] = 'Přečtěte si prosím změny v této verzi.';
@@ -26,6 +27,7 @@ $_lang['dir_err_assets_comp'] = 'Vaši "assets/components" složku nebylo možna
 $_lang['dir_err_core_comp'] = 'Vaši "core/components" složku nebylo možno vytvořit: [[+path]] <br />Musíte vytvořit složku a nastavit její práva pro zápis.';
 $_lang['download'] = 'Stáhnout';
 $_lang['downloaded'] = 'Staženo';
+$_lang['downloading'] = 'Stahuji...';
 $_lang['download_extras'] = 'Stáhnout Extras';
 $_lang['downloads'] = 'Stahování';
 $_lang['installation_instructions'] = 'Instalační instrukce';
@@ -38,6 +40,7 @@ $_lang['license_agree'] = 'Souhlasím';
 $_lang['license_agreement'] = 'Licenční smlouva';
 $_lang['license_agreement_desc'] = 'Přečtěte si prosím podmínky licenční smlouvy.';
 $_lang['license_disagree'] = 'Nesouhlasím';
+$_lang['minimum_supports'] = 'Vyžaduje MODX';
 $_lang['more_info'] = 'Více informací';
 $_lang['most_downloads'] = 'Nejstahovanější';
 $_lang['most_popular'] = 'Nejpopulárnější';
@@ -169,7 +172,7 @@ $_lang['setup_options'] = 'Nastavení možností';
 $_lang['setup_options_desc'] = 'Vyberte vhodné možnosti a klikněte na "Dokončit" pro nainstalování balíčku.';
 $_lang['signature'] = 'Podpis';
 $_lang['sort_by_dots'] = 'Seředit podle...';
-$_lang['supports'] = 'Podporuje';
+$_lang['supports_db'] = 'Podporované databáze';
 $_lang['top_rated'] = 'Nejlépe hodnocené';
 $_lang['transport_package_create'] = 'Vytvořit nový balíček';
 $_lang['transport_package_install'] = 'Nainstalovat balíček';
@@ -178,6 +181,7 @@ $_lang['updateable'] = 'Dostupné aktualizace';
 $_lang['uninstall'] = 'Odinstalovat';
 $_lang['uploaded_on'] = 'Nahráno';
 $_lang['uploaded_versions'] = 'Nahraná verze';
+$_lang['username'] = 'Uživatelské jméno';
 $_lang['workspace'] = 'Workspace';
 $_lang['workspace_err_nf'] = 'Workspace nenalezeno.';
 $_lang['workspace_grabbing'] = 'Sbírání workspace balíčku...';

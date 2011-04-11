@@ -2,6 +2,50 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.1.0-rc-2 (April 11, 2011)
+====================================
+- Refresh resource tree if resource's parent has changed
+- [#4327] Fix bug with auto-publishing
+- Fix positioning of right panel in mgr UI to make tree/nav static and isolated from scrolling of right panel
+- Make alias required field in resource/create processor when friendly_urls is on but automatic_alias is off
+- [#4280] Fix issue where transport package could not be removed if transport files were removed
+- [#4281] Utilize modX::sourceCache in modParser::processElement()
+- Fix issues with Namespace grid related to context menus and search
+- [#4257] Fix issue where context menus did not show in Contexts grid
+- [#4288] Fix issue with resource preview context menu
+- [#4279] Fix undefined collResources notice with empty Contexts
+- [#3119] Fix modResource->getAliasPath() to use id if set
+- Upgrade MagpieRSS to 0.72 to fix issues with atom feeds
+- [#3623] Fix TemplateVarTemplate foreign key definition in modTemplate
+- Replace specific references to MySQL with more general language
+- [#4185] Change modx logo in mgr to new logo
+- [#4217] Add rank field to modUserGroupMember table
+- [#4271] Highlight currently editing Resource on tree
+- Fix issue with image/file TV and uploading in MODx.Browser when using a custom basePath TV
+- [#4270] Fix issue where images could not be removed when using a custom basePath TV
+- Add User Group related events
+- [#4260] Change title tag in mgr UI to reflect current page
+- [#4256] Add caption field to Quick Create/Update TV
+- [#4261] Change keyboard save shortcut to CTRL+S
+- [#4262] Ensure that FC rules htmlencode their tab/field labels
+- [#4243] Ensure that files that are read-only do not show save button; fix file tree opening
+- [#4244] Add backwards compatibility for Element properties of list type with older indexes
+- [#4236] Fix bug in Template combo that hid category name
+- Improve compression of images in mgr to reduce load times and core transport zip size
+- [#4232] Fix Output Options being ignored in TVs in 2.1.0-rc1
+- Add options to allow ACL queries to be disabled for Contexts, Categories, and Resource Groups
+- [#3941] Fix issue where Resource TV values were not copied when duplicating a Context
+- [#4202] Fix issues with file/image TVs urls/paths when using modx path placeholders
+- Fix sorting/display bugs on UserGroup ACL grids, add grouping for better visibility
+- [#4175] Add modRequest->getClientIp() for better IP handling
+- [#4217] Add rank field to modUserGroup
+- Update version to 2.1.0-rc-2
+- [#4173] Fix issues with math-related output filters and floats
+- [#4205] Ensure old modxcms.com provider is removed after change to modx.com provider
+- [#4220] Fix modX::makeUrl() when friendly_urls not enabled
+- [#4207] Fix issues with checkboxes and Form Customization rules
+- [#4013] Fix modX::_log() to pass target to parent::_log() properly
+
 MODX Revolution 2.1.0-rc-1 (March 28, 2011)
 ====================================
 - Fix issue with properties and i18n in Element properties and in drag/drop box

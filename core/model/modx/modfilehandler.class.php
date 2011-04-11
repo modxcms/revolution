@@ -60,9 +60,9 @@ class modFileHandler {
      * @return string The base path
      */
     public function getBasePath() {
-        $root = $this->context->getOption('filemanager_path', '', $this->config);
+        $basePath = $this->context->getOption('filemanager_path', '', $this->config);
         /* expand placeholders */
-        $root = str_replace(array(
+        $basePath = str_replace(array(
             '{base_path}',
             '{core_path}',
             '{assets_path}',
@@ -70,8 +70,8 @@ class modFileHandler {
             $this->context->getOption('base_path', MODX_BASE_PATH, $this->config),
             $this->context->getOption('core_path', MODX_CORE_PATH, $this->config),
             $this->context->getOption('assets_path', MODX_ASSETS_PATH, $this->config),
-        ), $root);
-        return !empty($root) ? $this->postfixSlash($root) : $root;
+        ), $basePath);
+        return !empty($basePath) ? $this->postfixSlash($basePath) : $basePath;
     }
 
     /**

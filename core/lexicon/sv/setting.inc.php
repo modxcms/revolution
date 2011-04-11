@@ -24,6 +24,8 @@ $_lang['area_lexicon_string_msg'] = 'Ange lexikonpostens nyckel för området h�
 $_lang['area_site'] = 'Webbplats';
 $_lang['area_system'] = 'System och server';
 $_lang['areas'] = 'Områden';
+$_lang['charset'] = 'Teckenuppsättning';
+$_lang['country'] = 'Land';
 $_lang['namespace'] = 'Namnrymd';
 $_lang['namespace_filter'] = 'Filtrera efter namnrymd...';
 $_lang['search_by_key'] = 'Sök på nyckel...';
@@ -47,6 +49,7 @@ $_lang['settings_site'] = 'Webbplatsen';
 $_lang['settings_ui'] = 'Gränssnitt &amp; funktioner';
 $_lang['settings_users'] = 'Användare';
 $_lang['system_settings'] = 'Systeminställningar';
+$_lang['usergroup'] = 'Användargrupp';
 
 // user settings
 $_lang['setting_allow_mgr_access'] = 'Tillgång till hanterarens gränssnitt';
@@ -68,8 +71,8 @@ $_lang['setting_login_homepage_desc'] = 'Ange ID på det dokument som du vill sk
 $_lang['setting_access_policies_version'] = 'Version på åtkomstpolicyschema';
 $_lang['setting_access_policies_version_desc'] = 'Versionen på åtkomstpolicysystemet. ÄNDRA INTE.';
 
-$_lang['setting_allow_duplicate_alias'] = 'Tillåt aliasdubletter';
-$_lang['setting_allow_duplicate_alias_desc'] = 'Om satt till "Ja" kommer aliasdubletter att kunna sparas.<br /><strong>Notera: Den här inställningen bör användas med "Vänliga aliassökvägar" satt till "Ja" för att undvika problem med refereringen av dokument.</strong>';
+$_lang['setting_allow_forward_across_contexts'] = 'Tillåt vidarebefordran mellan kontexter';
+$_lang['setting_allow_forward_across_contexts_desc'] = 'Om denna sätts till "Ja" kan symlänkar och modX::sendForward() API-anrop vidarebefordra länkningar till resurser i andra kontexter.';
 
 $_lang['setting_allow_tags_in_post'] = 'Tillåt HTML-taggar i POST';
 $_lang['setting_allow_tags_in_post_desc'] = 'Om denna sätts till "Nej" kommer alla POST-händelser i hanteraren att rensas från taggar. MODX rekommenderar att denna lämnas att till "Ja".';
@@ -81,7 +84,7 @@ $_lang['setting_auto_menuindex'] = 'Standardvärde för menyindexering';
 $_lang['setting_auto_menuindex_desc'] = 'Välj "Ja" för att aktivera automatisk ökning av menyindex som standard.';
 
 $_lang['setting_auto_check_pkg_updates'] = 'Automatisk sökning efter paketuppdateringar';
-$_lang['setting_auto_check_pkg_updates_desc'] = 'Om denna sätts till "Ja" kommer MODX att automatiskt söka efter uppdateringar för paket i pakethanteraren. Det här kan sakta ner laddningen av sidan (the grid).';
+$_lang['setting_auto_check_pkg_updates_desc'] = 'Om denna sätts till "Ja" kommer MODX att automatiskt söka efter uppdateringar för paket i pakethanteraren. Det här kan sakta ner laddningen av sidan (the grid).';$_lang['setting_allow_multiple_emails'] = 'Tillåt e-postdubletter för användare';
 
 $_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Utgångstid för cachning av resultaten vid automatisk sökning efter paketuppdateringar';
 $_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'Det antal minuter som pakethanteringen ska cacha resultaten vid sökande efter paketuppdateringar.';
@@ -92,6 +95,8 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Om denna aktiveras så kan anvä
 $_lang['setting_automatic_alias'] = 'Generera alias automatiskt';
 $_lang['setting_automatic_alias_desc'] = 'Välj "Ja" för att låta systemet automatiskt skapa ett alias baserat på resursens titel när det sparas.';
 
+$_lang['setting_base_help_url'] = 'Standard-URL för hjälp';
+$_lang['setting_base_help_url_desc'] = 'Den standard-URL som ska användas för att bygga hjälplänkarna i det övre högra hörnet av sidor i hanteraren.';
 
 $_lang['setting_blocked_minutes'] = 'Blockeringstid:';
 $_lang['setting_blocked_minutes_desc'] = 'Här kan du ange hur många minuter en användare blir blockerad efter att ha gjort för många misslyckade inloggningsförsök. Ange värdet som ett tal (inga kommatecken, mellanslag etc).';
@@ -116,14 +121,11 @@ $_lang['setting_cache_disabled'] = 'Avaktivera globala cachealternativ';
 $_lang['setting_cache_disabled_desc'] = 'Välj "Ja" för att avaktivera alla MODX cachefunktioner. MODX rekommenderar inte att cachning avaktiveras.';
 $_lang['setting_cache_disabled_err'] = 'Ange om du vill att cachen ska vara aktiverad eller inte.';
 
-$_lang['setting_cache_json'] = 'Cacha JSON-data';
-$_lang['setting_cache_json_desc'] = 'Cacha all JSON-data som skickas till eller från hanterarens gränssnitt.';
-
 $_lang['setting_cache_expires'] = 'Utgångstid för standardcache';
 $_lang['setting_cache_expires_desc'] = 'Detta värde (i sekunder) anger den tid som cache-filer varar för standardcachning.';
 
-$_lang['setting_cache_json_expires'] = 'Utgångstid för JSON-cache';
-$_lang['setting_cache_json_expires_desc'] = 'Detta värde (i sekunder) anger den tid som cache-filer varar för JSON-cachning.';
+$_lang['setting_cache_format'] = 'Cacheformat att använda';
+$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialisera. Ett av formaten';
 
 $_lang['setting_cache_handler'] = 'Klass för cache-hantering';
 $_lang['setting_cache_handler_desc'] = 'Klassnamnet på den typhanterare som ska användas för cachning.';
@@ -190,12 +192,12 @@ $_lang['setting_emailsubject'] = 'Ämne i registreringsmeddelande';
 $_lang['setting_emailsubject_desc'] = 'Här kan du ange ämnet för e-posten som skickas när en användare är registrerad.';
 $_lang['setting_emailsubject_err'] = 'Ange ett ärende för e-posten som skickas vi registrering.';
 
+$_lang['setting_enable_dragdrop'] = 'Aktivera dra-och-släpp i resurs/elementträden';
+$_lang['setting_enable_dragdrop_desc'] = 'Om denna sätts till Av hindras dra-och-släpp i resurs- och elementträden.';
+
 $_lang['setting_error_page'] = 'Felsida';
 $_lang['setting_error_page_desc'] = 'Skriv in ID till den sida du vill skicka användare till om de försöker komma åt ett dokument som inte finns.<br /><strong>OBS: Se till att detta ID tillhör ett existerande dokument, och att det har blivit publicerat!</strong>';
 $_lang['setting_error_page_err'] = 'Ange ett dokument-ID för felsidan.';
-
-$_lang['setting_enable_dragdrop'] = 'Aktivera dra-och-släpp i resurs/elementträden';
-$_lang['setting_enable_dragdrop_desc'] = 'Om denna sätts till Av hindras dra-och-släpp i resurs- och elementträden.';
 
 $_lang['setting_extension_packages'] = 'Tilläggspaket';
 $_lang['setting_extension_packages_desc'] = 'En JSON-lista med paket som ska laddas när MODX instansieras. Ska var i formatet [{"packagename":{"path":"path/to/package"},{"anotherpkg":{"path":"path/to/otherpackage"}}]';
@@ -245,7 +247,7 @@ $_lang['setting_friendly_alias_max_length_desc'] = 'Om större än noll, det max
 $_lang['setting_friendly_alias_restrict_chars'] = 'Metod för teckenbegränsning i FURL-alias';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Den metod som ska användas för att begränsa antalet tecken i ett resursalias. "pattern" tillåter att ett RegEx anges, "legal" tillåter bara giltiga tecken för URL:er, "alpha" tillåter bara bokstäver fråm alfabetet och "alphanumeric" tillåter bara bokstäver och siffror.';
 
-$_lang['setting_friendly_alias_restrict_chars_pattern'] = 'Mänster för begränsning av tecken i FURL-alias';
+$_lang['setting_friendly_alias_restrict_chars_pattern'] = 'Mönster för begränsning av tecken i FURL-alias';
 $_lang['setting_friendly_alias_restrict_chars_pattern_desc'] = 'Ett giltigt RegEx som ska användas för att begränsa vilka tecken som får användas i ett resursalias.';
 
 $_lang['setting_friendly_alias_strip_element_tags'] = 'Rensa elementtaggar från FURL-alias';
@@ -263,9 +265,6 @@ $_lang['setting_friendly_alias_translit_class_path_desc'] = 'Den plats för mode
 $_lang['setting_friendly_alias_trim_chars'] = 'Rensningstecken i FURL-alias';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Tecken som ska rensas bort från slutet på ett givet resursalias.';
 
-$_lang['setting_friendly_alias_urls'] = 'Använd vänliga alias';
-$_lang['setting_friendly_alias_urls_desc'] = 'Om du använder vänliga adresser och resursen har ett alias, kommer aliaset alltid att prioriteras i den vänliga adressen. Genom att sätta detta alternativ till "Ja", kommer resursens innehållstypssuffix att läggas till aliaset.<br />Exempel: om din resurs med ID 1 har aliaset "introduktion", prefixet är satt till "", innehållstypssuffixet till ".html" och du sätter denna inställning till "Ja", så kommer "introduktion.html" att visas. Om det inte finns något alias, kommer MODX att generera länken "1.html".';
-
 $_lang['setting_friendly_alias_word_delimiter'] = 'Föredragen ordavgränsare för FURL-alias';
 $_lang['setting_friendly_alias_word_delimiter_desc'] = 'Den föredragna avgränsaren mellan ord i vänliga URL:er.';
 
@@ -276,8 +275,14 @@ $_lang['setting_friendly_urls'] = 'Använd vänliga adresser';
 $_lang['setting_friendly_urls_desc'] = 'Detta låter dig använda adresser som är vänliga mot sökmotorer. Notera att detta endast fungerar när MODX körs på Apache, och du måste skriva en .htaccess-fil för att det ska fungera. Se .htaccess-filen som följde med i distributionen för mer information.';
 $_lang['setting_friendly_urls_err'] = 'Ange om du vill använda vänliga adresser eller inte.';
 
+$_lang['setting_global_duplicate_uri_check'] = 'Kontrollera URI-dubletter i alla kontexter';
+$_lang['setting_global_duplicate_uri_check_desc'] = 'Om du väljer "Ja" kommer kontroller av URI-dubletter att inkludera alla kontexter. Väljer du "Nej" görs kontrollen bara i den kontext som resursen sparas i.';
+
 $_lang['setting_hidemenu_default'] = 'Dölj i menyer som standard';
 $_lang['setting_hidemenu_default_desc'] = 'Välj "Ja" för att dölja alla nya resurser i menyer som standard.';
+
+$_lang['setting_link_tag_scheme'] = 'Schema för att skapa URL';
+$_lang['setting_link_tag_scheme_desc'] = 'Schema för URL-skapande för taggen [[~id]]. Tillgängliga alternativ: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
 
 $_lang['setting_mail_charset'] = 'Teckenkodning för e-post';
 $_lang['setting_mail_charset_desc'] = 'Standardteckenkodningen för e-post, tex "iso-8859-1" eller "UTF-8"';
@@ -324,6 +329,9 @@ $_lang['setting_manager_direction_desc'] = 'Välj textriktning i hanteraren: ant
 $_lang['setting_manager_date_format'] = 'Hanterarens datumformat';
 $_lang['setting_manager_date_format_desc'] = 'Formateringssträngen, i PHP date()-format, för datum som visas i hanteraren.';
 
+$_lang['setting_manager_favicon_url'] = 'URL för hanterarens favicon';
+$_lang['setting_manager_favicon_url_desc'] = 'Om du anger en URL här kommer den att laddas som hanteraren favicon. Måste vara en relativ URL i förhållande till katalogen /manager eller en absolut URL.';
+
 $_lang['setting_manager_lang_attribute'] = 'Hanterarens språkattribut<br />för HTML och XML';
 $_lang['setting_manager_lang_attribute_desc'] = 'Ange den språkkod som bäst överensstämmer med din språkinställning för hanteraren. Det här säkerställer att webbläsare kan presentera innehållet i det bästa formatet för dig.';
 
@@ -360,6 +368,9 @@ $_lang['setting_password_generated_length_desc'] = 'Längden på ett automatgene
 $_lang['setting_password_min_length'] = 'Minimal längd för lösenord';
 $_lang['setting_password_min_length_desc'] = 'Den minimala längden på en användares lösenord.';
 
+$_lang['setting_principal_targets'] = 'ACL-mål att ladda';
+$_lang['setting_principal_targets_desc'] = 'Anpassa ACL-målen som ska laddas för MODX-användare.';
+
 $_lang['setting_proxy_auth_type'] = 'Autentiseringstyp för proxy';
 $_lang['setting_proxy_auth_type_desc'] = 'Stödjer antingen BASIC eller NTLM.';
 
@@ -390,6 +401,9 @@ $_lang['setting_phpthumb_cache_maxfiles_desc'] = 'Ta bort de tumnaglar som inte 
 $_lang['setting_phpthumb_cache_source_enabled'] = 'Cacha källfiler för phpThumb';
 $_lang['setting_phpthumb_cache_source_enabled_desc'] = 'Anger om källfiler ska cachas när de laddas eller inte. Rekommenderas vara inaktiverad.';
 
+$_lang['setting_phpthumb_document_root'] = 'Dokumentrot för PHPThumb';
+$_lang['setting_phpthumb_document_root_desc'] = 'Ange den här om du har problem med servervariabeln DOCUMENT_ROOT eller om du får fel med OutputThumbnail eller !is_resource. Ange den absoluta sökvägen till dokumentroten som du vill använda. Om fältet lämnas tomt kommer MODX att använda servervariabeln DOCUMENT_ROOT.';
+
 $_lang['setting_phpthumb_error_bgcolor'] = 'Bakgrundsfärg för fel i phpThumb';
 $_lang['setting_phpthumb_error_bgcolor_desc'] = 'Ett hexadecimalt värde, utan #-tecknet, som anger vilken bakgrundsfärg som ska användas vid felmeddelanden från phpThumb.';
 
@@ -411,11 +425,11 @@ $_lang['setting_phpthumb_nohotlink_enabled_desc'] = 'Fjärrservrar är tillåtna
 $_lang['setting_phpthumb_nohotlink_erase_image'] = 'Borttagning av bild vid hotlinking för phpThumb';
 $_lang['setting_phpthumb_nohotlink_erase_image_desc'] = 'Anger om en bild som genererats på en fjärrserver ska tas bort om det inte är tillåtet.';
 
-$_lang['setting_phpthumb_nohotlink_valid_domains'] = 'Giltiga domäner vid hotlinking för phpThumb';
-$_lang['setting_phpthumb_nohotlink_valid_domains_desc'] = 'En kommaavgränsad lista med domännamn som är tillåtna i src-URL:er.';
-
 $_lang['setting_phpthumb_nohotlink_text_message'] = 'Meddelande vid otillåten hotlinking för phpThumb';
 $_lang['setting_phpthumb_nohotlink_text_message_desc'] = 'Ett meddelande som visas istället för tumnageln när ett hotlink-försök hindrats.';
+
+$_lang['setting_phpthumb_nohotlink_valid_domains'] = 'Giltiga domäner vid hotlinking för phpThumb';
+$_lang['setting_phpthumb_nohotlink_valid_domains_desc'] = 'En kommaavgränsad lista med domännamn som är tillåtna i src-URL:er.';
 
 $_lang['setting_phpthumb_nooffsitelink_enabled'] = 'Inaktiverad länkning från andra webbplatser för phpThumb';
 $_lang['setting_phpthumb_nooffsitelink_enabled_desc'] = 'Inaktiverar möjligheten för andra att använda phpThumb för att visa bilder på deras egna webbplatser.';
@@ -466,6 +480,9 @@ $_lang['setting_resolve_hostnames_desc'] = 'Vill du att MODX ska försöka göra
 $_lang['setting_resource_tree_node_name'] = 'Resursträdets nodfält';
 $_lang['setting_resource_tree_node_name_desc'] = 'Ange det resursfält som ska användas när noder i resursträdet ska visas. pagetitle används som standard, men vilket resursfält som helst kan användas, tex menutitle, alias, longtitle etc.';
 
+$_lang['setting_resource_tree_node_tooltip'] = 'Fält att använda för resursträdets textbubblor';
+$_lang['setting_resource_tree_node_tooltip_desc'] = 'Ange det resursfält som ska användas när noder visas i resursträdet. Vilket resursfält som helst kan användas, tex menytitel, resursens alias, lång titel etc. Om fältet lämnas tomt kommer den långa titeln att användas med en beskrivning under.';
+
 $_lang['setting_richtext_default'] = 'Richtext som standard';
 $_lang['setting_richtext_default_desc'] = 'Välj "Ja" för att ange att alla nya resurser ska använda richtext-editorn som standard.';
 
@@ -483,22 +500,22 @@ $_lang['setting_server_protocol_http'] = 'http';
 $_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Sessionscookiens domän';
-$_lang['setting_session_cookie_domain_desc'] = 'Använd den här inställningen för att anpassa domänen för sessionscookien.';
+$_lang['setting_session_cookie_domain_desc'] = 'Använd den här inställningen för att anpassa domänen för sessionscookien. Lämna tom för att använda den nuvarande domänen.';
 
 $_lang['setting_session_cookie_lifetime'] = 'Sessionscookiens livslängd';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Använd denna inställning för att anpassa sessionscookiens livslängd i sekunder. Den bestämmer livslängden på en användares sessionscookie när den valt \'Kom ihåg mig\' vid inloggningen.';
 
 $_lang['setting_session_cookie_path'] = 'Sessionscookiens sökväg';
-$_lang['setting_session_cookie_path_desc'] = 'Använd den här inställningen för att anpassa cookiesökvägen så webbplatsspecifika sessionscookies kan identifieras.';
+$_lang['setting_session_cookie_path_desc'] = 'Använd den här inställningen för att anpassa cookiesökvägen så webbplatsspecifika sessionscookies kan identifieras. Lämna tom för att använda MODX_BASE_URL.';
 
 $_lang['setting_session_cookie_secure'] = 'Säkra sessionscookies';
 $_lang['setting_session_cookie_secure_desc'] = 'Aktivera denna inställning för att använda säkra sessionscookies.';
 
-$_lang['setting_session_handler_class'] = 'Sessionshanterarens klassnamn';
+$_lang['setting_session_handler_class'] = 'Sessionshanterarklassens namn';
 $_lang['setting_session_handler_class_desc'] = 'Använd \'modSessionHandler\' för databashanterade sessioner. Lämna fältet tomt för att använda PHPs vanliga sessionshantering.';
 
 $_lang['setting_session_name'] = 'Sessionsnamn';
-$_lang['setting_session_name_desc'] = 'Använd denna inställning för att anpassa det sessionsnamn som används för sessioner i MODX.';
+$_lang['setting_session_name_desc'] = 'Använd denna inställning för att anpassa det sessionsnamn som används för sessioner i MODX. Lämna tom för att använda PHP:s standardnamn.';
 
 $_lang['setting_settings_version'] = 'Versionsinställning';
 $_lang['setting_settings_version_desc'] = 'Den aktuella installerade versionen av MODX.';
@@ -511,7 +528,7 @@ $_lang['setting_set_header_desc'] = 'När denna är aktiverad kommer MODX att f�
 
 $_lang['setting_signupemail_message'] = 'Registreringsmeddelande';
 $_lang['setting_signupemail_message_desc'] = 'Här kan du ange det meddelande som skickas till användare när du skapar ett konto för dem och låta MODX skicka e-post till dom med deras användarnamn och lösenord.<br /><strong>Notera:</strong> Följande begrepp ersätts av innehållshanteraren när meddelandet sänds:<br /><br />[[+sname]] - Namnet på din webbplats<br />[[+saddr]] - Webbplatsens e-postadress<br />[[+surl]] - Webbplatsens adress<br />[[+uid]] - Användarens login eller ID<br />[[+pwd]] - Användarens lösenord<br />[[+ufn]] - Användarens namn<br /><br /><strong>Låt [[+uid]] och [[+pwd]] stå kvar i meddelandet, annars innehåller mailet inte användarnamn och lösenord, vilket gör att dina användare inte kan logga in!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Hej [[+uid]] \n\nHär kommer dina inloggningsuppgifter för [[+sname]] ([[+surl]]) innehållshanterare:\n\nAnvändarnamn: [[+uid]]\nLösenord: [[+pwd]]\n\nDu kan ändra ditt lösenord när du loggat in i innehålshanteraren.\n\nVänliga hälsningar\nWebmastern';
+$_lang['setting_signupemail_message_default'] = 'Hej [[+uid]] \n\nHär kommer dina inloggningsuppgifter för [[+sname]] ([[+surl]]) innehållshanterare:\n\nAnvändarnamn: [[+uid]]\nLösenord: [[+pwd]]\n\nDu kan ändra ditt lösenord när du loggat in i innehållshanteraren.\n\nVänliga hälsningar\nWebmastern';
 
 $_lang['setting_site_name'] = 'Webbplatsens namn';
 $_lang['setting_site_name_desc'] = 'Skriv in namnet på din webbplats här.';
@@ -534,6 +551,9 @@ $_lang['setting_site_unavailable_page_err'] = 'Ange ett dokument-ID för sidan s
 
 $_lang['setting_strip_image_paths'] = 'Skriv om sökvägar till resurser?';
 $_lang['setting_strip_image_paths_desc'] = 'Om denna inställning sätts till "Nej", så kommer MODX att skriva sökvägarna till resurser i filhanteraren (bilder, filer, flash etc.) som absoluta URLer. Relativa URLer är användbara om du ska flytta din MODX-installation, tex från en testserver till en produktionsserver. Om du inte har någon aning om vad det här betyder, så är det bäst att lämna inställningen satt till "Ja".';
+
+$_lang['setting_symlink_merge_fields'] = 'Slå ihop resursfält i symlänkar';
+$_lang['setting_symlink_merge_fields_desc'] = 'Om du anger "Ja" här kommer ifyllda fält automatiskt att slås ihop med målresursen när vidarebefordring sker via symlänkar.';
 
 $_lang['setting_topmenu_show_descriptions'] = 'Visa beskrivningar i toppmenyn';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Om denna sätts till "Nej" kommer MODX att dölja beskrivningarna för menyposter i hanterarens toppmeny.';

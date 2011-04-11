@@ -11,7 +11,6 @@ $_lang['database_name'] = 'Nombre de base de datos';
 $_lang['database_server'] = 'Servidor de base de datos';
 $_lang['database_tables'] = 'Tablas de base de datos';
 $_lang['database_optimize'] = 'Optimizar base de datos';
-$_lang['database_overhead'] = '<b style=\'color:#990033\'>Nota:</strong> Overhead es espacio no usado reservado por MySQL. Para liberar este espacio, haz click en la cifra de overhead en de tabla.';
 $_lang['database_table_clickhere'] = 'Haz click aquí';
 $_lang['database_table_clickbackup'] = 'para respaldar y bajar las tablas seleccionadas';
 $_lang['database_table_datasize'] = 'Tamaño de los datos';
@@ -19,10 +18,12 @@ $_lang['database_table_droptablestatements'] = 'Generar declaraciones DROP TABLE
 $_lang['database_table_effectivesize'] = 'Tamaño efectivo';
 $_lang['database_table_indexsize'] = 'Tamaño del índice';
 $_lang['database_table_overhead'] = 'Overhead';
+$_lang['database_table_reserved'] = 'Reservado';//sqlsrv
 $_lang['database_table_records'] = 'Registros';
 $_lang['database_table_tablename'] = 'Nombre de la tabla';
 $_lang['database_table_totalsize'] = 'Tamaño total';
 $_lang['database_table_totals'] = 'Totales:';
+$_lang['database_table_unused'] = 'No Usado';//sqlsrv
 $_lang['database_type'] = 'Tipo de base de datos';
 $_lang['database_version'] = 'Versión de la base de datos';
 $_lang['extjs_version'] = 'Versión de <a href="http://extjs.com/" target="_blank">ExtJS</a>';

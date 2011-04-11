@@ -1,11 +1,4 @@
 <?php
-/**
-* Пользовательские фильтры тем английского лексикона
-*
-* @language ru
-* @package modx
-* @subpackage lexicon
-*/
 $_lang['ago'] = '[[+time]] назад';
 $_lang['ago_day'] = '[[+time]] день';
 $_lang['ago_days'] = '[[+time]] дней';

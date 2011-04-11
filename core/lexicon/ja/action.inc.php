@@ -9,10 +9,10 @@
  * @author yamamoto http://kyms.jp
  */
 $_lang['action'] = '操作内容';
-$_lang['action_confirm_remove'] = '本当にこのアクションを削除しますか？これはMODx管理画面のインターフェイスを壊す可能性があります。';
+$_lang['action_confirm_remove'] = '本当にこのアクションを削除しますか？これはMODX管理画面のインターフェイスを壊す可能性があります。';
 $_lang['action_create'] = 'アクションを作成';
 $_lang['action_create_here'] = 'ここにアクションを作成';
-$_lang['action_desc'] = 'アクションはMODxコントローラーの抽象概念です。それらはMODx管理画面のトップメニューを再編成するだけではなく、カスタムした管理ページを作成することもできます。';
+$_lang['action_desc'] = 'アクションはMODXコントローラーの抽象概念です。それらはMODX管理画面のトップメニューを再編成するだけではなく、カスタムした管理ページを作成することもできます。';
 $_lang['action_err_create'] = 'アクションの作成中にエラーが発生しました。';
 $_lang['action_err_nf'] = 'アクションが見つかりませんでした';
 $_lang['action_err_ns'] = '既定のアクションが見つかりません';

@@ -86,6 +86,11 @@ MODx.Layout = function(config){
          layout: 'border'
         ,id: 'modx-layout'
         ,items: [{
+            xtype: 'box'
+            ,region: 'north'
+            ,applyTo: 'modx-header'
+            ,height: 90
+        },{
              region: 'west'
             ,applyTo: 'modx-leftbar'
             ,id: 'modx-leftbar-tabs'
@@ -93,7 +98,7 @@ MODx.Layout = function(config){
             ,width: 310
             ,minSize: 150
             ,maxSize: 800
-            ,autoHeight: true
+            ,autoScroll: true
             ,unstyled: true
             ,collapseMode: 'mini'
             ,useSplitTips: true
@@ -127,8 +132,9 @@ MODx.Layout = function(config){
             ,applyTo: 'modx-content'
             ,id: 'modx-content'
             ,border: false
-            ,autoHeight: true
-            ,margins: '0 30 0 15'
+            ,autoScroll: true
+            ,margins: '0 0 0 15'
+            ,padding: '0 1px 0 0'
             ,bodyStyle: 'background-color:transparent;'
         }]
     });

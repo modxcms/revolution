@@ -16,19 +16,29 @@ MODx.grid.UserGroupContext = function(config) {
         ,fields: ['id','target','principal','authority','authority_name','policy','policy_name','permissions','cls']
         ,paging: true
         ,hideMode: 'offsets'
+        ,grouping: true
+        ,groupBy: 'authority_name'
+        ,singleText: _('policy')
+        ,pluralText: _('policies')
+        ,sortBy: 'authority'
+        ,sortDir: 'DESC'
+        ,remoteSort: true
         ,plugins: [this.exp]
         ,columns: [this.exp,{
             header: _('context')
             ,dataIndex: 'target'
             ,width: 120
+            ,sortable: true
         },{
             header: _('minimum_role')
             ,dataIndex: 'authority_name'
             ,width: 100
+            ,sortable: false
         },{
             header: _('policy')
             ,dataIndex: 'policy_name'
             ,width: 200
+            ,sortable: true
         }]
         ,tbar: [{
             text: _('context_add')

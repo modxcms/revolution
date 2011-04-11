@@ -198,7 +198,11 @@ class modTransportPackage extends xPDOObject {
      */
     public function uninstall(array $options = array()) {
         $uninstalled = false;
-        if ($this->getTransport()) {
+        if (!$this->getTransport()) {
+            /* files have already been removed, so ignore this */
+            return true;
+        }
+        if ($this->package) {
             $this->getOne('Workspace');
             $wc = isset($this->Workspace->config) && is_array($this->Workspace->config) ? $this->Workspace->config : array();
             $at = is_array($this->get('attributes')) ? $this->get('attributes') : array();

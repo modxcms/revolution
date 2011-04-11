@@ -6,7 +6,7 @@ body, html {
     background-color: #fafafa;
 }
 
-.x-viewport, .x-viewport body {
+.x-viewport {
     overflow:auto;
 }
 
@@ -42,13 +42,6 @@ hr {
 .red { color: red !important; }
 .green { color: green !important; }
 .error { color: red !important; }
-.unpublished { font-style: italic; }
-.deleted { color: red !important; }
-.deleted a span {
-    color: #CC3333 !important;
-    text-decoration: line-through !important;
-}
-.hidemenu a span { color: gray !important; }
 
 /* leftbar */
 #modx-leftbar, #modx-content {
@@ -393,8 +386,6 @@ textarea.x-form-field {
     margin: 7px 11px 0 0;
 }
 #modx-logo img {
-    width: 94px;
-    height: 25px;
     vertical-align: middle;
 }
 
@@ -971,6 +962,18 @@ html #modx-topnav ul.modx-subnav li a:hover{
 .icon-package { background-image:url(../images/restyle/icons/package.png) !important; padding-right: 5px !important; }
 
 .icon-locked .x-tree-node-icon { background-image:url(../images/restyle/icons/lock_edit.png) !important; }
+.icon-lock .x-tree-node-icon { background-image:url(../images/restyle/icons/lock.png) !important; }
+.active-node, .active-node span {
+    font-weight: bold;
+}
+.unpublished { font-style: italic; }
+.hidemenu a span { color: gray !important; }
+.deleted { color: red !important; }
+.deleted a span {
+    color: #CC3333 !important;
+    text-decoration: line-through !important;
+}
+
 
 /* ext extensions */
 input.x-static-text-field {

@@ -43,6 +43,7 @@ foreach ($properties as $k => $property) {
         case 'combo':
             $data = array();
             foreach ($property['options'] as $option) {
+                if (empty($property['text']) && !empty($property['name'])) $property['text'] = $property['name'];
                 $text = !empty($property['lexicon']) ? $modx->lexicon($option['text']) : $option['text'];
                 $data[] = array($option['value'],$text);
             }

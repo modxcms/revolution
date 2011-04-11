@@ -1,4 +1,4 @@
-<?php 
+<?php
 $_lang['as_system_settings'] = 'Системные настройки';
 $_lang['as_context_settings'] = 'Настройки контекста';
 $_lang['as_lexicon_entries'] = 'Записи лексикона';

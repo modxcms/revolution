@@ -252,6 +252,12 @@ $events['OnTVInputRenderList']->fromArray(array (
   'service' => 1,
   'groupname' => 'Template Variables',
 ), '', true, true);
+$events['OnTVInputPropertiesList']= $xpdo->newObject('modEvent');
+$events['OnTVInputPropertiesList']->fromArray(array (
+  'name' => 'OnTVInputPropertiesList',
+  'service' => 1,
+  'groupname' => 'Template Variables',
+), '', true, true);
 $events['OnTVOutputRenderList']= $xpdo->newObject('modEvent');
 $events['OnTVOutputRenderList']->fromArray(array (
   'name' => 'OnTVOutputRenderList',
@@ -290,6 +296,31 @@ $events['OnUserGroupRemove']->fromArray(array (
   'service' => 1,
   'groupname' => 'User Groups',
 ), '', true, true);
+$events['OnUserGroupBeforeFormSave']= $xpdo->newObject('modEvent');
+$events['OnUserGroupBeforeFormSave']->fromArray(array (
+  'name' => 'OnBeforeUserGroupFormSave',
+  'service' => 1,
+  'groupname' => 'User Groups',
+), '', true, true);
+$events['OnUserGroupFormSave']= $xpdo->newObject('modEvent');
+$events['OnUserGroupFormSave']->fromArray(array (
+  'name' => 'OnUserGroupFormSave',
+  'service' => 1,
+  'groupname' => 'User Groups',
+), '', true, true);
+$events['OnUserGroupBeforeFormRemove']= $xpdo->newObject('modEvent');
+$events['OnUserGroupBeforeFormRemove']->fromArray(array (
+  'name' => 'OnBeforeUserGroupFormRemove',
+  'service' => 1,
+  'groupname' => 'User Groups',
+), '', true, true);
+$events['OnUserGroupFormRemove']= $xpdo->newObject('modEvent');
+$events['OnUserGroupFormRemove']->fromArray(array (
+  'name' => 'OnBeforeUserGroupFormRemove',
+  'service' => 1,
+  'groupname' => 'User Groups',
+), '', true, true);
+
 
 
 /* Resources */
@@ -589,7 +620,30 @@ $events['OnUserRemove']->fromArray(array (
   'service' => 1,
   'groupname' => 'Users',
 ), '', true, true);
-
+$events['OnUserBeforeAddToGroup']= $xpdo->newObject('modEvent');
+$events['OnUserBeforeAddToGroup']->fromArray(array (
+  'name' => 'OnUserBeforeAddToGroup',
+  'service' => 1,
+  'groupname' => 'User Groups',
+), '', true, true);
+$events['OnUserAddToGroup']= $xpdo->newObject('modEvent');
+$events['OnUserAddToGroup']->fromArray(array (
+  'name' => 'OnUserAddToGroup',
+  'service' => 1,
+  'groupname' => 'User Groups',
+), '', true, true);
+$events['OnUserBeforeRemoveFromGroup']= $xpdo->newObject('modEvent');
+$events['OnUserBeforeRemoveFromGroup']->fromArray(array (
+  'name' => 'OnUserBeforeRemoveFromGroup',
+  'service' => 1,
+  'groupname' => 'User Groups',
+), '', true, true);
+$events['OnUserRemoveFromGroup']= $xpdo->newObject('modEvent');
+$events['OnUserRemoveFromGroup']->fromArray(array (
+  'name' => 'OnUserRemoveFromGroup',
+  'service' => 1,
+  'groupname' => 'User Groups',
+), '', true, true);
 
 /* System */
 $events['OnWebPagePrerender']= $xpdo->newObject('modEvent');

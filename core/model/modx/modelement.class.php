@@ -150,6 +150,14 @@ class modElement extends modAccessibleSimpleObject {
 
                 if (!empty($property['options'])) {
                     foreach ($property['options'] as &$option) {
+                        if (empty($option['text']) && !empty($option['name'])) {
+                            $option['text'] = $option['name'];
+                            unset($option['name']);
+                        }
+                        if (empty($option['value']) && !empty($option[0])) {
+                            $option['value'] = $option[0];
+                            unset($option[0]);
+                        }
                         $option['name'] = $this->xpdo->lexicon($option['text']);
                     }
                 }
@@ -351,9 +359,9 @@ class modElement extends modAccessibleSimpleObject {
         $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if ($context === $this->xpdo->context->get('key')) {
-            $enabled = (boolean) $this->xpdo->getOption('access_category_enabled', null, false);
+            $enabled = (boolean) $this->xpdo->getOption('access_category_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
-            $enabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_category_enabled', false);
+            $enabled = (boolean) $this->xpdo->contexts[$context]->getOption('access_category_enabled', true);
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
@@ -544,6 +552,7 @@ class modElement extends modAccessibleSimpleObject {
 
                 if (!empty($propertyArray['options'])) {
                     foreach ($propertyArray['options'] as $optionKey => &$option) {
+                        if (empty($option['text']) && !empty($option['name'])) $option['text'] = $option['name'];
                         unset($option['menu'],$option['name']);
                     }
                 }

@@ -1,11 +1,4 @@
 <?php
-/**
- * Plugin Russian lexicon topic
- *
- * @language ru
- * @package modx
- * @subpackage lexicon
- */
 $_lang['event'] = 'Событие';
 $_lang['events'] = 'События';
 $_lang['plugin'] = 'Плагин';

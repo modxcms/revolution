@@ -1,12 +1,12 @@
 <?php
 /**
- * Czech language files for Revolution 2.0.4 setup
+ * Czech language files for Revolution 2.1.0 setup
  *
  * @language cs
  * @package setup
  *
  * @author modxcms.cz
- * @updated 2010-10-12
+ * @updated 2011-03-30
  */
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Doplňky';
@@ -31,17 +31,16 @@ $_lang['config_not_writable_err'] = 'Pokusil jste se změnit nastavení v soubor
 $_lang['connection_character_set'] = 'Znaková sada připojení:';
 $_lang['connection_collation'] = 'Porovnání:';
 $_lang['connection_connection_and_login_information'] = 'Údaje pro připojení a přihlášení k databázi';
-$_lang['connection_connection_note'] = 'Zadejte název databáze vytvořené pro MODX. Pokud databáze ještě neexistuje, pokusí se ji instalátor vytvořit. Toto se nemusí povést v závislosti na nastavení MySQL nebo na uživatelských právech pro Vaši doménu/instalaci.';
+$_lang['connection_connection_note'] = 'Zadejte název databáze vytvořené pro MODX. Pokud tato databáze ještě neexistuje, instalátor se jí pokusí vytvořit. V závislosti na nastavení databáze nebo uživatelských právech se vytvoření nemusí povést.';
 $_lang['connection_database_host'] = 'Databázový server:';
-$_lang['connection_database_info'] = 'Nyní zadejte údaje pro přihlášení k databázi.';
 $_lang['connection_database_login'] = 'Uživatelské jméno pro databázi:';
 $_lang['connection_database_name'] = 'Název databáze:';
 $_lang['connection_database_pass'] = 'Heslo pro databázi:';
 $_lang['connection_database_type'] = 'Typ databáze:';
-$_lang['connection_default_admin_email'] = 'E-mail administrátora:';
-$_lang['connection_default_admin_login'] = 'Uživatelské jméno administrátora:';
-$_lang['connection_default_admin_note'] = 'Nyní je třeba, aby jste zadali údaje pro výchozí administrátorský účet. Vyplněte uživatelské jméno a heslo, které si zapamatujte. Tyto údaje budete potřebovat po skončení instalace pro přístup do správce obsahu.';
-$_lang['connection_default_admin_password'] = 'Heslo administrátora:';
+$_lang['connection_default_admin_email'] = 'E-mail:';
+$_lang['connection_default_admin_login'] = 'Uživatelské jméno:';
+$_lang['connection_default_admin_note'] = 'Nyní je třeba, aby jste zadali údaje pro výchozí administrátorský účet. Vyplněte uživatelské jméno a heslo, které si zapamatujte. Tyto údaje budete potřebovat po dokončení instalace pro přístup do správce obsahu.';
+$_lang['connection_default_admin_password'] = 'Heslo:';
 $_lang['connection_default_admin_password_confirm'] = 'Ověření hesla:';
 $_lang['connection_default_admin_user'] = 'Výchozí uživatel správce obsahu';
 $_lang['connection_table_prefix'] = 'Prefix tabulek:';
@@ -51,7 +50,7 @@ $_lang['context_connector_options'] = '<strong>Nastavení kontextu pro konektory
 $_lang['context_connector_path'] = 'Cesta k souborům pro kontext konektorů';
 $_lang['context_connector_url'] = 'URL pro kontext konektorů';
 $_lang['context_installation'] = 'Možnosti kontextů';
-$_lang['context_manager_options'] = '<strong>Nastavení kontextu pro správce obsahu</strong> (backend administrační rozhraní)';
+$_lang['context_manager_options'] = '<strong>Nastavení kontextu pro správce obsahu</strong> (backend webového portálu)';
 $_lang['context_manager_path'] = 'Cesta k souborům pro kontext správce obsahu';
 $_lang['context_manager_url'] = 'URL pro kontext správce obsahu';
 $_lang['context_override'] = 'Pokud necháte hodnoty nezměněny (nezaškrtnuté zaškrtávací políčko), budou použity automaticky zjištěné hodnoty. Zadáním vlastní hodnoty (zaškrtnutím políčka), dáváte systému najevo, že si přejete, aby byla použita zadaná cesta bez ohledu na nastavení v konfiguračním souboru.';
@@ -73,10 +72,10 @@ $_lang['db_err_create_database'] = 'MODX nemohl vytvořit vaši databázi. Vytvo
 $_lang['db_err_show_charsets'] = 'MODX nemohl získat možné znakové sady pro Váš MySQL server.';
 $_lang['db_err_show_collations'] = 'MODX nemohl získat možná porovnání pro Vaš MySQL server.';
 $_lang['db_success'] = 'V pořádku!';
-$_lang['db_test_coll_msg'] = 'Ověřit, případně vytvořit databázi.';
+$_lang['db_test_coll_msg'] = 'Ověřit a případně vytvořit databázi.';
 $_lang['db_test_conn_msg'] = 'Ověřit připojení k databázovému serveru a zobrazit porovnání.';
 $_lang['default_admin_user'] = 'Výchozí účet administrátora';
-$_lang['delete_setup_dir'] = 'Zde zaškrtněte pro ODSTRANĚNÍ instalačního adresáře "setup" z disku.';
+$_lang['delete_setup_dir'] = 'Zde zaškrtněte pro ODSTRANĚNÍ instalačního adresáře "/setup".';
 $_lang['dir'] = 'ltr';
 $_lang['email_err_ns'] = 'E-mailová adresa není platná';
 $_lang['err_occ'] = 'Vyskytly se chyby!';
@@ -156,12 +155,12 @@ $_lang['modx_object_err'] = 'Objekt MODX se nepodařilo načíst.';
 $_lang['next'] = 'Další';
 $_lang['none'] = 'Žádný';
 $_lang['ok'] = 'OK!';
-$_lang['options_core_inplace'] = 'Soubory jsou připravené<br /><small>(Doporučeno pro instalaci na sdíleném serveru.)</small>';
-$_lang['options_core_inplace_note'] = 'Zaškrtněte pokud jste exportovali MODX ze SVN repozitáře nebo jste jej rozbalili z archívu před instalací.';
-$_lang['options_core_unpacked'] = 'Balíček jádra byl manuálně rozbalen<br /><small>(Doporučeno pro instalaci na sdíleném serveru.)</small>';
-$_lang['options_core_unpacked_note'] = 'Ověřte, že je rozbalen obsah souboru "core/packages/core.transport.zip". Toto nastavení ušetří čas instalace na systémech s nízko nastavenými hodnotami PHP "time_limit" a Apache script execution time "KeepAliveTimeout", které nemáte možnost přenastavit.';
+$_lang['options_core_inplace'] = 'Soubory jsou připravené<br /><small>(Doporučeno pro instalaci na sdíleném serveru)</small>';
+$_lang['options_core_inplace_note'] = 'Tuto volbu zaškrtněte pokud jste exportovali MODX z GIT repozitáře nebo jste jej před instalací rozbalili z archívu.';
+$_lang['options_core_unpacked'] = 'Balíček jádra byl manuálně rozbalen<br /><small>(Doporučeno pro instalaci na sdíleném serveru)</small>';
+$_lang['options_core_unpacked_note'] = 'Ověřte, že je rozbalen obsah souboru "core/packages/core.transport.zip". Tato volba zkrátí čas instalace na systémech s nízko nastavenými hodnotami PHP "time_limit" a Apache script execution time "KeepAliveTimeout", které nemáte možnost přenastavit.';
 $_lang['options_install_new_copy'] = 'Instalace nové kopie ';
-$_lang['options_install_new_note'] = 'Berte na vědomí, že tato možnost přepíše všechna data v dané databázi.';
+$_lang['options_install_new_note'] = 'Pozor, tato volba přepíše všechna současná data ve zvolené databázi.';
 $_lang['options_important_upgrade'] = 'Důležitá poznámka pro aktualizaci';
 $_lang['options_important_upgrade_note'] = 'Ujistěte se, že jsou uživatelé správce obsahu <strong>odhlášeni před aktualizací</strong>, předejdete tím problémům (např: znemožnění přístupu k dokumentům). Pokud máte problémy po aktualizaci, odhlašte všechny session, vyprázdněte cache prohlížeče a následně se znovu přihlašte.';
 $_lang['options_new_file_permissions'] = 'Atributy nového souboru';
@@ -171,9 +170,9 @@ $_lang['options_new_folder_permissions_note'] = 'Zde určete jaké atributy budo
 $_lang['options_new_installation'] = 'Nová instalace';
 $_lang['options_title'] = 'Možnosti instalace';
 $_lang['options_upgrade_advanced'] = 'Pokročilá aktualizace<br /><small>(úprava databázové konfigurace)</small>';
-$_lang['options_upgrade_advanced_note'] = 'Pro pokročilé správce nebo při přechodu na server s jiným kódováním znaků databáze. <strong>Je třeba znát celý název databáze, uživatelské jméno, heslo a detaily připojení/porovnávání.</strong>';
+$_lang['options_upgrade_advanced_note'] = 'Pouze pro administrátory nebo při přechodu na server s jiným kódováním znaků. <strong>V této volbě je třeba znát název databáze, uživatelské jméno, heslo a detaily připojení/porovnávání.</strong>';
 $_lang['options_upgrade_existing'] = 'Aktualizace existující instalace';
-$_lang['options_upgrade_existing_note'] = 'Aktualizuje současné soubory a databázi.';
+$_lang['options_upgrade_existing_note'] = 'Aktualizace současné verze souborů a databáze.';
 $_lang['package_execute_err_retrieve'] = 'Instalace se  nezdařila, protože MODX nemohl rozbalit balíček "[[+path]]packages/core.transport.zip". Ujistěte se, že soubor "[[+path]]packages/core.transport.zip" existuje a je možné do něj zapisovat a také že je možno zapisovat do adresáře "[[+path]]packages/".';
 $_lang['package_err_install'] = 'Nepodařilo se nainstalovat balíček [[+package]].';
 $_lang['package_err_nf'] = 'Nepodařilo se získat balíček [[+package]] pro instalaci.';
@@ -203,7 +202,7 @@ $_lang['table_err_create'] = 'Chyba při pokusu vytvořit tabulku pro třídu [[
 $_lang['table_updated'] = 'Úspěšně aktualizována tabulka pro třídu [[+class]]';
 $_lang['test_class_nf'] = 'Nepodařilo se najít třídu instalačních testů v umístění: [[+path]] <br />Ujistěte se prosím, že jste nahráli všechny potřebné soubory.';
 $_lang['test_version_class_nf'] = 'Nepodařilo se najít třídu instačních testů Versioner v umístění: [[+path]] <br />Ujistěte se prosím, že jste nahráli všechny potřebné soubory.';
-$_lang['thank_installing'] = 'Děkujeme za nainstalování ';
+$_lang['thank_installing'] = 'Děkujeme, že jste si vybrali ';
 $_lang['transport_class_err_load'] = 'Chyba při nahrávání transportní třídy.';
 $_lang['toggle'] = 'Zobrazit/skrýt';
 $_lang['toggle_success'] = 'Zobrazit/skrýt zprávy';

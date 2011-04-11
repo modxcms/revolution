@@ -10,7 +10,7 @@
     <h2>{$_lang.credits}</h2>
     <ul>
         <li>{$_lang.credits_php}</li>
-        <li>{$_lang.credits_mysql}</li>
+        <li>{$_lang.credits_database}</li>
         <li>{$_lang.credits_xpdo}</li>
         <li>{$_lang.credits_sencha}</li>
         <li>{$_lang.credits_smarty}</li>

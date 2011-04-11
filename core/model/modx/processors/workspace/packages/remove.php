@@ -21,23 +21,29 @@ $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_gpack'));
 $package = $modx->getObject('transport.modTransportPackage', $scriptProperties['signature']);
 if ($package == null) return $modx->error->failure($modx->lexicon('package_err_nfs',array('signature' => $scriptProperties['signature'])));
 
-$modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tzip_start'));
+$transportZip = $modx->getOption('core_path').'packages/'.$package->signature.'.transport.zip';
+$transportDir = $modx->getOption('core_path').'packages/'.$package->signature.'/';
+if (file_exists($transportZip) && file_exists($transportDir)) {
+    $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tzip_start'));
 
-/* remove transport package */
-if ($package->removePackage($scriptProperties['force']) == false) {
-    $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('package_err_remove'));
-    return $modx->error->failure($modx->lexicon('package_err_remove',array('signature' => $package->getPrimaryKey())));
+    /* remove transport package */
+    if ($package->removePackage($scriptProperties['force']) == false) {
+        $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('package_err_remove'));
+        return $modx->error->failure($modx->lexicon('package_err_remove',array('signature' => $package->getPrimaryKey())));
+    }
+} else {
+    /* for some reason the files were removed, so just remove the DB object instead */
+    $package->remove();
 }
-
 /* empty cache */
 $modx->getCacheManager();
 $modx->cacheManager->refresh();
+sleep(2);
 
 /* remove transport zip */
-$f = $modx->getOption('core_path').'packages/'.$package->signature.'.transport.zip';
-if (!file_exists($f)) {
+if (!file_exists($transportZip)) {
     $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('package_remove_err_tzip_nf'));
-} else if (!@unlink($f)) {
+} else if (!@unlink($transportZip)) {
     $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('package_remove_err_tzip'));
 } else {
     $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tzip'));
@@ -45,10 +51,9 @@ if (!file_exists($f)) {
 $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tdir_start'));
 
 /* remove transport dir */
-$f = $modx->getOption('core_path').'packages/'.$package->signature.'/';
-if (!file_exists($f)) {
+if (!file_exists($transportDir)) {
     $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('package_remove_err_tdir_nf'));
-} else if (!$cacheManager->deleteTree($f,true,false,array())) {
+} else if (!$modx->cacheManager->deleteTree($transportDir,true,false,array())) {
     $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('package_remove_err_tdir'));
 } else {
     $modx->log(xPDO::LOG_LEVEL_INFO,$modx->lexicon('package_remove_info_tdir'));

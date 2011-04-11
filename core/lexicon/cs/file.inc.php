@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-10-12
+ * @updated 2011-03-26
  */
 $_lang['file_confirm_remove'] = 'Opravdu chcete odstranit tento soubor? Může to zapříčinit nefunkčnost celého portálu.';
 $_lang['file_deleted'] = 'Odstraněno!';
@@ -36,7 +36,6 @@ $_lang['file_err_unzip_missing_lib'] = ' Chybí knihovna (php_zip.dll / zip.so)'
 $_lang['file_err_upload'] = 'Nastala chyba při nahrávání souborů.';
 $_lang['file_exists_hk'] = 'Soubor <b>{0}</b> již existuje';
 $_lang['file_extensions'] = 'Přípony souborů';
-$_lang['file_extensions_desc'] = 'Toto jsou povolené přípony souborů pro typy souborů.';
 $_lang['file_folder_enter_new'] = 'Zadejte název nové složky';
 $_lang['file_folder_chmod'] = 'Změna atributů složky';
 $_lang['file_folder_create'] = 'Vytvořit složku';

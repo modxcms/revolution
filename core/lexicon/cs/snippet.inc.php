@@ -7,7 +7,7 @@
  * @subpackage lexicon
  *
  * @author modxcms.cz
- * @updated 2010-07-18
+ * @updated 2011-03-26
  */
 $_lang['snippet'] = 'Snippet';
 $_lang['snippets_available'] = 'Dostupné snippety pro použití ve stránkách.';
@@ -19,7 +19,7 @@ $_lang['snippet_duplicate_error'] = 'Nastala chyba při kopírování snippetu.'
 $_lang['snippet_err_create'] = 'Nastala chyba při vytváření snippetu.';
 $_lang['snippet_err_delete'] = 'Nastala chyba při odstraňování snippetu.';
 $_lang['snippet_err_duplicate'] = 'Nastala chyba při kopírování snippetu.';
-$_lang['snippet_err_exists_name'] = 'Snippet s tímto názvem již existuje.';
+$_lang['snippet_err_exists_name'] = 'Snippet s názvem "[[+name]]" již existuje.';
 $_lang['snippet_err_invalid_name'] = 'Název snippetu je chybný.';
 $_lang['snippet_err_locked'] = 'Snippet je uzamčen.';
 $_lang['snippet_err_nf'] = 'Snippet nenalezen!';

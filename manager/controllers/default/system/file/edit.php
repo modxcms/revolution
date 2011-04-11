@@ -42,6 +42,7 @@ $fa = array(
     'content' => $file->getContents(),
     'image' => in_array($fileExtension,$imagesExts) ? true : false,
 );
+$canSave = $file->isWritable() ? true : false;
 
 /* register JS */
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/system/file/edit.js');
@@ -50,6 +51,7 @@ $modx->regClientStartupHTMLBlock('<script type="text/javascript">Ext.onReady(fun
         xtype: "modx-page-file-edit"
         ,file: "'.$filename.'"
         ,record: '.$modx->toJSON($fa).'
+        ,canSave: '.($canSave ? 1 : 0).'
     });
 });</script>');
 
@@ -65,5 +67,6 @@ $modx->smarty->assign('OnFileEditFormPrerender',$onFileEditFormPrerender);
 
 $modx->smarty->assign('fa',$fa);
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('file_edit').': '.basename($filename));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('system/file/edit.tpl');

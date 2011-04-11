@@ -52,6 +52,16 @@ MODx.load({
         ,width: 300
         ,listeners: oc
     },{
+        xtype: 'combo-boolean'
+        ,fieldLabel: _('image_baseurl_prepend_check_slash')
+        ,description: _('image_baseurl_prepend_check_slash_desc')
+        ,name: 'inopt_baseUrlPrependCheckSlash'
+        ,hiddenName: 'inopt_baseUrlPrependCheckSlash'
+        ,id: 'inopt_baseUrlPrependCheckSlash{/literal}{$tv}{literal}'
+        ,value: params['baseUrlPrependCheckSlash'] == 0 || params['baseUrlPrependCheckSlash'] == 'false' ? false : true
+        ,width: 300
+        ,listeners: oc
+    },{
         xtype: 'textfield'
         ,fieldLabel: _('image_allowedfiletypes')
         ,description: _('image_allowedfiletypes_desc')

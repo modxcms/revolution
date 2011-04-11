@@ -11,7 +11,6 @@ $_lang['database_name'] = 'Nom de la base de données';
 $_lang['database_server'] = 'Serveur de la base de données';
 $_lang['database_tables'] = 'Tables de la base de données';
 $_lang['database_optimize'] = 'Optimiser la base de données';
-$_lang['database_overhead'] = '<b style=\'color:#990033\'>Note:</b> Le dépassement est un espace réservé par MySQL et qui est inutilisé. Pour libérer cet espace, cliquez sur le chiffre dans la colonne dépassement.';
 $_lang['database_table_clickhere'] = 'Cliquez ici';
 $_lang['database_table_clickbackup'] = 'pour sauvegarder et télécharger les tables sélectionnées.';
 $_lang['database_table_datasize'] = 'Taille';

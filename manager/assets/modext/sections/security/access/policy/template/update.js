@@ -22,7 +22,6 @@ MODx.page.UpdateAccessPolicyTemplate = function(config) {
             ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
-                ,alt: true
                 ,ctrl: true
             }]
         },'-',{

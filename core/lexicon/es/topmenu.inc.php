@@ -43,7 +43,7 @@ $_lang['jira'] = 'Bugs';
 $_lang['jira_desc'] = 'Ir al bugtracker de MODX para rastrear y archivar bugs.';
 $_lang['lexicon_management'] = 'Administración del Léxico';
 $_lang['lexicon_management_desc'] = 'Editar cualquiera de los textos de idioma a lo largo del admin de MODX.';
-
+$_lang['logout_desc'] = 'Salir del Admin de MODX.';
 $_lang['manage_workspaces'] = 'Administración de Paquetes';
 $_lang['manage_workspaces_desc'] = 'Descargar Componentes de Terceros, añadir Proveedores e instalar paquetes.';
 $_lang['messages'] = 'Mensajes';

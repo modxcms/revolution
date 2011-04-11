@@ -24,9 +24,10 @@ $combo = $modx->getOption('combo',$scriptProperties,false);
 /* query templates */
 $c = $modx->newQuery('modTemplate');
 $c->leftJoin('modCategory','Category');
-$c->select($modx->getSelectColumns('modTemplate', 'modTemplate', 'modTemplate_'));
-$c->select(array('Category.category AS catname'));
-
+$c->select($modx->getSelectColumns('modTemplate', 'modTemplate'));
+$c->select(array(
+    'category_name' => 'Category.category',
+));
 $c->sortby($sort,$dir);
 if ($isLimit) $c->limit($limit,$start);
 
@@ -46,14 +47,14 @@ if ($combo) {
         'content' => '',
         'locked' => false,
     );
-    $empty['catname'] = '';
+    $empty['category_name'] = '';
     $list[] = $empty;
 }
 foreach ($templates as $template) {
     if (!$template->checkPolicy('list')) continue;
     
     $templateArray = $template->toArray();
-    $templateArray['category'] = $template->get('catname') != null ? $template->get('catname') : '';
+    $templateArray['category_name']= $template->get('category_name');
     unset($templateArray['content']);
     $list[] = $templateArray;
 }

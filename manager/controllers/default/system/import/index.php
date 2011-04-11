@@ -12,5 +12,6 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/system/modx.panel.import.resources.js');
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/sections/system/import/resource.js');
 
+$modx->smarty->assign('_pagetitle',$modx->lexicon('import_site'));
 $this->checkFormCustomizationRules();
 return $modx->smarty->fetch('system/import/index.tpl');
