@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  * 
- * @author Rene Klomp
+ * @author Bert Oost <bertoost85@gmail.com>
  */
 $_lang['binary'] = 'Binair';
 $_lang['binary_desc'] = 'Is het bestand een binair bestand of tekst/ASCII?';
@@ -24,3 +24,4 @@ $_lang['content_type_remove'] = 'Verwijder Content Type';
 $_lang['content_type_remove_confirm'] = 'Weet u zeker dat u dit content type wilt verwijderen?';
 $_lang['content_types'] = 'Content Typen';
 $_lang['file_extensions'] = 'Bestandsextensies';
+$_lang['file_extensions_desc'] = 'Dit is de aangegeven extentie voor dit Content Type.';

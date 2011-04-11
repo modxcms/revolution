@@ -78,15 +78,13 @@ MODx.tree.Tree = function(config) {
         ,menuConfig: {defaultAlign: 'tl-b?' ,enableScrolling: false}
     });
     if (config.remoteToolbar === true && (config.tbar === undefined || config.tbar === null)) {
-        Ext.Ajax.request({
-            url: config.url
+        MODx.Ajax.request({
+            url: config.remoteToolbarUrl || config.url
             ,params: {
-                action: 'getToolbar'
+                action: config.remoteToolbarAction || 'getToolbar'
             }
-            ,scope: this
-            ,success: function(r) {
-                r = Ext.decode(r.responseText);
-                if (r.success) {
+            ,listeners: {
+                'success': {fn:function(r) {
                     var itms = this._formatToolbar(r.object);
                     var tb = this.getTopToolbar();
                     if (tb) {
@@ -95,7 +93,7 @@ MODx.tree.Tree = function(config) {
                         }
                         tb.doLayout();
                     }
-                }
+                },scope:this}
             }
         });
         config.tbar = {bodyStyle: 'padding: 0'};
@@ -279,11 +277,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,remove: function(text,substr,split) {
         var node = this.cm.activeNode;
         var id = this._extractId(node.id,substr,split);
-        var p = {action: 'remove'};
+        var p = {action: this.config.removeAction || 'remove'};
         var pk = this.config.primaryKey || 'id';
         p[pk] = id;
         MODx.msg.confirm({
-            title: _('warning')
+            title: this.config.removeTitle || _('warning')
             ,text: _(text)
             ,url: this.config.url
             ,params: p
@@ -569,7 +567,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             }
             Ext.applyIf(a[i],{
                 scope: this
-                ,cls: 'x-btn-icon'
+                ,cls: this.config.toolbarItemCls || 'x-btn-icon'
             });
         }
         return a;

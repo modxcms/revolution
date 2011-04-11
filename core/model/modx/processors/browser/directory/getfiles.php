@@ -165,7 +165,7 @@ foreach (new DirectoryIterator($fullPath) as $file) {
             'thumb' => $thumb,
             'thumb_width' => $thumbWidth,
             'thumb_height' => $thumbHeight,
-            'url' => $url,
+            'url' => ltrim($dir.$fileName,'/'),
             'relativeUrl' => ltrim($dir.$fileName,'/'),
             'fullRelativeUrl' => rtrim($baseUrl).ltrim($dir.$fileName,'/'),
             'ext' => $fileExtension,

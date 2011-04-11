@@ -168,6 +168,11 @@ MODx.panel.Resource = function(config) {
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
         },{
+            xtype: 'hidden'
+            ,name: 'parent-original'
+            ,value: config.record.parent || 0
+            ,id: 'modx-resource-parent-old-hidden'
+        },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_menutitle')
             ,description: '<b>[[*menutitle]]</b><br />'+_('resource_menutitle_help')
@@ -533,10 +538,16 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (t) {
             var ctx = Ext.getCmp('modx-resource-context-key').getValue();
             var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
+            var pao = Ext.getCmp('modx-resource-parent-old-hidden').getValue();
             var v = ctx+'_'+pa;
             var n = t.getNodeById(v);
-            n.leaf = false;
-            t.refreshNode(v,true);
+            if(pa !== pao) {
+                t.refresh();
+                Ext.getCmp('modx-resource-parent-old-hidden').setValue(pa);
+            } else {
+                n.leaf = false;
+                t.refreshNode(v,true);
+            }
         }
         if (o.result.object.class_key != this.defaultClassKey && this.config.resource != '' && this.config.resource != 0) {
             location.href = location.href;

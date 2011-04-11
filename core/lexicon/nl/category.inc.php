@@ -8,7 +8,7 @@
  * 
  * @author Bert Oost, <bertoost85@gmail.com>
  */
-$_lang['categories'] = 'Categorieën';
+$_lang['categories'] = 'Categorie&euml;n';
 $_lang['category_confirm_delete'] = 'Weet je zeker dat je deze category wilt verwijderen? Alle elementen in deze categorie worden losgekoppeld.';
 $_lang['category_create'] = 'Nieuwe categorie';
 $_lang['category_err_create'] = 'Er is een fout opgetreden tijdens het maken van de categorie.';

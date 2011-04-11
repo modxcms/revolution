@@ -3207,16 +3207,8 @@ exit;
 				$this->DebugMessage(@$ImageCreateFromFunctionName.'() was attempted but FAILED', __FILE__, __LINE__);
 			}
 			$this->DebugMessage('Populating $rawimagedata', __FILE__, __LINE__);
-			$rawimagedata = '';
-			if ($fp = @fopen($filename, 'rb')) {
-				$filesize = filesize($filename);
-				$blocksize = 8192;
-				$blockreads = ceil($filesize / $blocksize);
-				for ($i = 0; $i < $blockreads; $i++) {
-					$rawimagedata .= fread($fp, $blocksize);
-				}
-				fclose($fp);
-			} else {
+            $rawimagedata = file_get_contents($filename);
+			if (empty($rawimagedata)) {
 				$this->DebugMessage('cannot fopen('.$filename.')', __FILE__, __LINE__);
 			}
 			if ($rawimagedata) {

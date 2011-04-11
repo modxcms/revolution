@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.1.0-rc-2 (April 11, 2011)
+====================================
+- Refresh resource tree if resource's parent has changed
+- [#4327] Fix bug with auto-publishing
 - Fix positioning of right panel in mgr UI to make tree/nav static and isolated from scrolling of right panel
 - Make alias required field in resource/create processor when friendly_urls is on but automatic_alias is off
 - [#4280] Fix issue where transport package could not be removed if transport files were removed
