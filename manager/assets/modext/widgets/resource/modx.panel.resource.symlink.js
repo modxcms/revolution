@@ -135,17 +135,19 @@ MODx.panel.SymLink = function(config) {
             ,fieldLabel: _('resource_parent')
             ,description: '<b>[[*parent]]</b><br />'+_('resource_parent_help')
             ,name: 'parent-cmb'
-            ,editable: false
-            ,anchor: '95%'
             ,id: 'modx-resource-parent'
             ,value: config.record.parent || 0
-            ,formpanel: 'modx-panel-resource'
+            ,anchor: '70%'
         },{
             xtype: 'hidden'
             ,name: 'parent'
-            ,anchor: '90%'
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
+        },{
+            xtype: 'hidden'
+            ,name: 'parent-original'
+            ,value: config.record.parent || 0
+            ,id: 'modx-resource-parent-old-hidden'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_menutitle')
