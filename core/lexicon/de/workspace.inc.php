@@ -27,6 +27,7 @@ $_lang['dir_err_assets_comp'] = 'Das Verzeichnis assets/components/ konnte nicht
 $_lang['dir_err_core_comp'] = 'Das Verzeichnis core/components/ konnte nicht in [[+path]] angelegt werden.<br />Sie müssen dieses Verzeichnis anlegen und dafür sorgen, dass es beschreibbar ist, wenn Sie das Package-Verwaltung oder Komponenten von Drittanbietern verwenden möchten.';
 $_lang['download'] = 'Herunterladen';
 $_lang['downloaded'] = 'Heruntergeladen';
+$_lang['downloading'] = 'Lade herunter...';
 $_lang['download_extras'] = 'Extras herunterladen';
 $_lang['downloads'] = 'Downloads';
 $_lang['installation_instructions'] = 'Installationsanweisungen';
