@@ -192,9 +192,17 @@ if (isset($scriptProperties['pub_date'])) {
     if (empty($scriptProperties['pub_date'])) {
         $scriptProperties['pub_date'] = 0;
     } else {
+        $strPubDate = $scriptProperties['pub_date'];
         $scriptProperties['pub_date'] = strtotime($scriptProperties['pub_date']);
-        if ($scriptProperties['pub_date'] < $now) $scriptProperties['published'] = 1;
-        if ($scriptProperties['pub_date'] > $now) $scriptProperties['published'] = 0;
+        if ($scriptProperties['pub_date'] < $now) {
+            $scriptProperties['published'] = 1;
+            $scriptProperties['publishedon'] = $strPubDate;
+            $scriptProperties['pub_date'] = 0;
+        }
+        if ($scriptProperties['pub_date'] > $now) {
+            $scriptProperties['published'] = 0;
+            $scriptProperties['publishedon'] = 0;
+        }
     }
 }
 if (isset($scriptProperties['unpub_date'])) {
@@ -204,6 +212,9 @@ if (isset($scriptProperties['unpub_date'])) {
         $scriptProperties['unpub_date'] = strtotime($scriptProperties['unpub_date']);
         if ($scriptProperties['unpub_date'] < $now) {
             $scriptProperties['published'] = 0;
+            $scriptProperties['unpub_date'] = 0;
+            $scriptProperties['pub_date'] = 0;
+            $scriptProperties['publishedon'] = 0;
         }
     }
 }
