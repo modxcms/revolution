@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.1.0-rc-3 (April 11, 2011)
 ====================================
+- [#4399] Fix IE8 javascript error on Resource and Element update pages
 - Fix invalid merge retained in master branch from 2.1.0-rc-1
 - Fix modResource::save() to refresh uri if isfolder field is dirty.
 

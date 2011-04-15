@@ -516,12 +516,18 @@ Ext.extend(MODx.Msg,Ext.Component,{
 
         var fadeOpts = {remove:true,useDisplay:true};
         if (!opt.dontHide) {
-            m.pause(opt.delay || 1.5).ghost("t",fadeOpts);
+            if(!Ext.isIE8) {
+                m.pause(opt.delay || 1.5).ghost("t",fadeOpts);
+            } else {
+                fadeOpts.duration = (opt.delay || 1.5);
+                m.ghost("t",fadeOpts);
+            }
         } else {
             m.on('click',function() {
                 m.ghost('t',fadeOpts);
             });
         }
+
     }
     ,getStatusMarkup: function(opt) {
         var mk = '<div class="modx-status-msg">';
