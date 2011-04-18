@@ -2,12 +2,12 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4447] Fix ACL grid in Edit Context view
 - [#4438] Fix error logging to custom log targets defined by array
+- [#4399] Fix IE8 javascript error on Resource and Element update pages
 
 MODX Revolution 2.1.0-rc-3 (April 11, 2011)
 ====================================
-- [#4447] Fix ACL grid in Edit Context view
-- [#4399] Fix IE8 javascript error on Resource and Element update pages
 - Fix invalid merge retained in master branch from 2.1.0-rc-1
 - Fix modResource::save() to refresh uri if isfolder field is dirty.
 
