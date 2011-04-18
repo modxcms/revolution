@@ -31,7 +31,7 @@ MODx.panel.Context = function(config) {
                 ,width: 300
                 ,maxLength: 255
                 ,enableKeyEvents: true
-                ,allowBlank: false
+                ,allowBlank: true
                 ,value: config.context
                 ,submitValue: true
             },{
