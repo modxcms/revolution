@@ -30,7 +30,7 @@ if ($setting == null) return $modx->error->failure($modx->lexicon('setting_err_n
 
 /* value parsing */
 if ($scriptProperties['xtype'] == 'combo-boolean' && !is_numeric($scriptProperties['value'])) {
-    if ($scriptProperties['value'] == 'yes' || $scriptProperties['value'] == 'Yes' || $scriptProperties['value'] == $modx->lexicon('yes')) {
+    if (in_array($scriptProperties['value'], array('yes', 'Yes', $modx->lexicon('yes'), 'true', 'True'))) {
         $scriptProperties['value'] = 1;
     } else $scriptProperties['value'] = 0;
 }
