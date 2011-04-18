@@ -87,8 +87,9 @@ MODx.panel.Context = function(config) {
     MODx.panel.Context.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.Context,MODx.FormPanel,{
-    setup: function() {
-        if (this.config.context === '' || this.config.context === 0) {
+    initialized: false
+    ,setup: function() {
+        if (this.initialized || (this.config.context === '' || this.config.context === 0)) {
             this.fireEvent('ready');
             return false;
         }
@@ -105,6 +106,7 @@ Ext.extend(MODx.panel.Context,MODx.FormPanel,{
                     if (el) { el.getEl().update('<h2>'+_('context')+': '+r.object.key+'</h2>'); }
                     this.fireEvent('ready');
                     MODx.fireEvent('ready');
+                    this.initialized = true;
             	},scope:this}
             }
         });
