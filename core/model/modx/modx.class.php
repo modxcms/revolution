@@ -2042,7 +2042,7 @@ class modX extends xPDO {
                 }
                 $this->sendError('fatal');
             }
-            parent :: _log($level, $msg, $targetObj, $def, $file, $line);
+            parent :: _log($level, $msg, $target, $def, $file, $line);
         }
     }
 

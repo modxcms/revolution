@@ -2,6 +2,8 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4438] Fix error logging to custom log targets defined by array
+
 MODX Revolution 2.1.0-rc-3 (April 11, 2011)
 ====================================
 - [#4399] Fix IE8 javascript error on Resource and Element update pages
