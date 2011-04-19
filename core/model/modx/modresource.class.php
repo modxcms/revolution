@@ -92,7 +92,7 @@ class modResource extends modAccessibleSimpleObject {
         } else {
             $c->select(array(
                 'IF(ISNULL(tvc.value),modTemplateVar.default_text,tvc.value) AS value',
-                'IF(ISNULL(tvc.value),0,'.$resource->get('id').') AS resourceId'
+                $resource->get('id').' AS resourceId'
             ));
         }
         $c->innerJoin('modTemplateVarTemplate','tvtpl',array(
