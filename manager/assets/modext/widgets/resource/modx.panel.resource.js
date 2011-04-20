@@ -526,7 +526,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (ta) {
             this.cleanupEditor();
         }
-        Ext.getCmp('modx-button-save-resource').disable();
+        if(this.getForm().baseParams.action == 'create') {
+            Ext.getCmp('modx-button-save-resource').disable();
+        }
         return this.fireEvent('save',{
             values: this.getForm().getValues()
             ,stay: Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay')
@@ -559,7 +561,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
     ,failure: function(o) {
-        Ext.getCmp('modx-button-save-resource').enable();
+        if(this.getForm().baseParams.action == 'create') {
+            Ext.getCmp('modx-button-save-resource').enable();
+        }
     }
 
     ,freezeUri: function(cb) {
