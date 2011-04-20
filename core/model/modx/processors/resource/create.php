@@ -124,8 +124,9 @@ if (!$resource instanceof $resourceClass) return $modx->error->failure($modx->le
 if ($workingContext->getOption('friendly_urls', false)) {
     /* auto assign alias */
     if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
-        $scriptProperties['alias'] = $scriptProperties['pagetitle'];
-    } elseif (empty($scriptProperties['alias'])) {
+        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
+    }
+    if (empty($scriptProperties['alias'])) {
         $modx->error->addField('alias', $modx->lexicon('field_required'));
     }
     $duplicateContext = $workingContext->getOption('global_duplicate_uri_check', false) ? '' : $scriptProperties['context_key'];
