@@ -39,6 +39,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
         if (cfg.canSave == 1) {
             btns.push({
                 process: 'create'
+                ,id: 'modx-button-save-resource'
                 ,text: _('save')
                 ,method: 'remote'
                 ,checkDirty: cfg.record.richtext ? false : true
