@@ -24,6 +24,7 @@ $_lang['dir_err_assets_comp'] = 'Non è stato possibile creare la directory asse
 $_lang['dir_err_core_comp'] = 'Non è stato possibile creare la directory core/components/ in: [[+path]] <br />Devi creare questa directory e renderla scrivibile se vuoi usare il Gestore Pacchetti o componenti di terzi.';
 $_lang['download'] = 'Scarica';
 $_lang['downloaded'] = 'Scaricato';
+$_lang['downloading'] = 'Sto scaricando...';
 $_lang['download_extras'] = 'Scarica Extras';
 $_lang['downloads'] = 'Scaricati';
 $_lang['installation_instructions'] = 'Istruzioni Installazione';
