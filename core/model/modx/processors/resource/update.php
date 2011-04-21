@@ -490,5 +490,6 @@ foreach ($returnArray as $k => $v) {
     }
 }
 $returnArray['class_key'] = $resource->get('class_key');
+$workingContext->prepare(true);
 $returnArray['preview_url'] = $modx->makeUrl($resource->get('id'));
 return $modx->error->success('',$returnArray);
