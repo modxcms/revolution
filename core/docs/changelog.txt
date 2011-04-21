@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- [#4400] Trim whitespace from Namespace paths when adding/updating them
 - [#4434] Fix issue with edit panel on contexts
 - [#4372] Fix View button not getting URI change after Save Resource (all Resource types)
 - [#4369] Ensure Save button is active after Template change on Weblink, Symlink, Static Resource
