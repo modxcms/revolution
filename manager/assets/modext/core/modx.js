@@ -199,31 +199,33 @@ Ext.extend(MODx,Ext.Component,{
 
     ,addTab: function(tbp,opt) {
         var tabs = Ext.getCmp(tbp);
-        Ext.applyIf(opt,{
-            id: 'modx-'+Ext.id()+'-tab'
-            ,layout: 'form'
-            ,cls: 'modx-resource-tab'
-            ,bodyStyle: 'padding: 15px;'
-            ,autoHeight: true
-            ,defaults: {
-                border: false
-                ,msgTarget: 'side'
-                ,width: 400
-            }
-        });
-        tabs.add(opt);
-        tabs.doLayout();
-        tabs.setActiveTab(0);
+        if (tabs) {
+            Ext.applyIf(opt,{
+                id: 'modx-'+Ext.id()+'-tab'
+                ,layout: 'form'
+                ,cls: 'modx-resource-tab'
+                ,bodyStyle: 'padding: 15px;'
+                ,autoHeight: true
+                ,defaults: {
+                    border: false
+                    ,msgTarget: 'side'
+                    ,width: 400
+                }
+            });
+            tabs.add(opt);
+            tabs.doLayout();
+            tabs.setActiveTab(0);
+        }
     }
     ,hiddenTabs: []
     ,hideTab: function(ct,tab) {
         var tp = Ext.getCmp(ct);
-        if (!tp) return false;
-        
-        tp.hideTabStripItem(tab);
-        MODx.hiddenTabs.push(tab);
-        var idx = this._getNextActiveTab(tp,tab);
-        tp.setActiveTab(idx);
+        if (tp) {
+            tp.hideTabStripItem(tab);
+            MODx.hiddenTabs.push(tab);
+            var idx = this._getNextActiveTab(tp,tab);
+            tp.setActiveTab(idx);
+        }
     }
     ,_getNextActiveTab: function(tp,tab) {
         if (MODx.hiddenTabs.indexOf(tab) != -1) {
@@ -243,7 +245,7 @@ Ext.extend(MODx,Ext.Component,{
 
         for (var i=0;i<tvs.length;i++) {
             var tr = Ext.get(tvs[i]+'-tr');
-            
+
             if (!tr) { return; }
             var fp = Ext.getCmp(tab);
             if (!fp) { return; }
@@ -261,15 +263,17 @@ Ext.extend(MODx,Ext.Component,{
     }
     ,hideTV: function(tvs) {
         if (!Ext.isArray(tvs)) { tvs = [tvs]; }
-        MODx.on("ready",function() { this.hideTVs(tvs); },this);
+        this.hideTVs(tvs);
     }
     ,hideTVs: function(tvs) {
         if (!Ext.isArray(tvs)) { tvs = [tvs]; }
         var el;
         for (var i=0;i<tvs.length;i++) {
             el = Ext.get(tvs[i]+'-tr');
-            el.setVisibilityMode(Ext.Element.DISPLAY);
-            el.hide();
+            if (el) {
+                el.setVisibilityMode(Ext.Element.DISPLAY);
+                el.hide();
+            }
         }
     }
     ,renameLabel: function(ct,flds,vals) {
