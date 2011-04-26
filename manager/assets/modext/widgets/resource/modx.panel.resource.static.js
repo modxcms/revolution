@@ -7,6 +7,7 @@
 MODx.panel.Static = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
+    console.log(config.record.openTo);
     
     var it = [];
     it.push({
@@ -132,11 +133,14 @@ MODx.panel.Static = function(config) {
             ,maxLength: 255
             ,anchor: '95%'
             ,value: (config.record.content || config.record.ta) || ''
+            ,openTo: config.record.openTo
             ,listeners: {
                 'select':{fn:function(data) {
                     var str = data.fullRelativeUrl;
-                    str = str.replace(MODx.config.base_url,'');
-                    if (str.substring(0,1) == '/') str = str.substring(1);
+                    if (MODx.config.base_url != '/') {
+                        str = str.replace(MODx.config.base_url,'');
+                    }
+                    if (str.substring(0,1) == '/') { str = str.substring(1); }
                     Ext.getCmp('modx-resource-content').setValue(str);
                     this.markDirty();
                 },scope:this}
