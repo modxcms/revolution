@@ -349,6 +349,9 @@ class modParser {
             $tokenOffset++;
             $token= substr($tagName, $tokenOffset, 1);
         }
+        if ($token === '+') {
+            $cacheable= false; /* placeholders cannot be cacheable! */
+        }
         if ($cacheable) {
             $elementOutput= $this->loadFromCache($outerTag);
         }
@@ -359,7 +362,7 @@ class modParser {
                     $element= new modPlaceholderTag($this->modx);
                     $element->set('name', $tagName);
                     $element->setTag($outerTag);
-                    $element->setCacheable(false); /* placeholders cannot be cacheable! */
+                    $element->setCacheable($cacheable);
                     $elementOutput= $element->process($tagPropString);
                     break;
                 case '%':
@@ -905,14 +908,14 @@ class modPlaceholderTag extends modTag {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $this->_output= $this->_content;
-            if (is_string($this->_output) && !empty ($this->_output)) {
+            if (is_string($this->_output) && (!empty($this->_output) || $this->_output === '0')) {
                 /* collect element tags in the content and process them */
                 $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
                 $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                $this->_processed= true;
+                $this->filterOutput();
+                $this->cache();
             }
-            $this->filterOutput();
-            $this->cache();
-            $this->_processed= true;
         }
         /* finally, return the processed element content */
         return $this->_output;
