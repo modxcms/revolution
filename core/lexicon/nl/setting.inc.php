@@ -523,7 +523,7 @@ $_lang['setting_settings_version'] = 'Instellingen Versie';
 $_lang['setting_settings_version_desc'] = 'De huidig ge�nstalleerde versie van MODX.';
 
 $_lang['setting_settings_distro'] = 'Distributie instellingen';
-$_lang['setting_settings_distro_desc'] = 'De huidige geinstalleerde distributie van MODX.';
+$_lang['setting_settings_distro_desc'] = 'De huidige ge&iuml;nstalleerde distributie van MODX.';
 
 $_lang['setting_set_header'] = 'Stel HTTP Headers in';
 $_lang['setting_set_header_desc'] = 'Indien geactiveerd, MODX zal proberen de HTTP headers in te stellen voor documenten.';
