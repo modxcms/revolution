@@ -29,6 +29,19 @@ if ($locked !== true) {
     }
 }
 
+/* get the targeted working context */
+$workingContext = $modx->getContext($resource->get('context_key'));
+
+/* friendly url duplicate alias checks */
+if ($workingContext->getOption('friendly_urls', false)) {
+    $duplicateContext = $workingContext->getOption('global_duplicate_uri_check', false) ? '' : $resource->get('context_key');
+    $aliasPath = $resource->getAliasPath($resource->get('alias'));
+    $duplicateId = $resource->isDuplicateAlias($aliasPath, $duplicateContext);
+    if (!empty($duplicateId)) {
+        return $modx->error->failure($modx->lexicon('duplicate_uri_found', array('id' => $duplicateId, 'uri' => $aliasPath)));
+    }
+}
+
 /* publish resource */
 $resource->set('published',true);
 $resource->set('pub_date',false);
