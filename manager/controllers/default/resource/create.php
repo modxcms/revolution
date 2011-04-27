@@ -212,6 +212,12 @@ if (!empty($tvCounts)) {
     $modx->smarty->assign('tvOutput',$tvOutput);
 }
 
+/* single-use token for creating resource */
+if(!isset($_SESSION['newResourceTokens']) || !is_array($_SESSION['newResourceTokens'])) {
+    $_SESSION['newResourceTokens'] = array();
+}
+$defaults['create_resource_token'] = uniqid('', true);
+$_SESSION['newResourceTokens'][] = $defaults['create_resource_token'];
 
 /* register JS */
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);

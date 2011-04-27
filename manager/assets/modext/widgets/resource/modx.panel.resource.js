@@ -215,6 +215,11 @@ MODx.panel.Resource = function(config) {
             ,id: 'hiddenContent'
             ,value: (config.record.content || config.record.ta) || ''
         },{
+            xtype: 'hidden'
+            ,name: 'create-resource-token'
+            ,id: 'modx-create-resource-token'
+            ,value: config.record.create_resource_token || ''
+        },{
             html: MODx.onDocFormRender, border: false
         }]
     });

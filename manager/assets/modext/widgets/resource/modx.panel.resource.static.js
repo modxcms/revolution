@@ -211,6 +211,11 @@ MODx.panel.Static = function(config) {
             ,id: 'modx-resource-context-key'
             ,value: config.record.context_key || 'web'
         },{
+            xtype: 'hidden'
+            ,name: 'create-resource-token'
+            ,id: 'modx-create-resource-token'
+            ,value: config.record.create_resource_token || ''
+        },{
             html: MODx.onDocFormRender, border: false
         }]
     });
