@@ -37,7 +37,7 @@ class modUserGroup extends xPDOSimpleObject {
      *
      * {@inheritDoc}
      */
-     public function remove(array $ancestors= array ()) {
+    public function remove(array $ancestors= array ()) {
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnUserGroupBeforeRemove',array(
                 'usergroup' => &$this,
@@ -55,7 +55,7 @@ class modUserGroup extends xPDOSimpleObject {
         }
 
         return $removed;
-     }
+    }
 
 
     /**
