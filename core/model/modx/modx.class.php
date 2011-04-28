@@ -135,7 +135,7 @@ class modX extends xPDO {
      */
     public $cultureKey= '';
     /**
-     * @var array Represents a localized dictionary of common words and phrases.
+     * @var modLexicon Represents a localized dictionary of common words and phrases.
      */
     public $lexicon= null;
     /**
