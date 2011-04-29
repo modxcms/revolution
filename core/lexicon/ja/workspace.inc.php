@@ -27,6 +27,7 @@ $_lang['dir_err_assets_comp'] = 'assets/components/ ディレクトリは [[+pat
 $_lang['dir_err_core_comp'] = 'core/components/ ディレクトリは [[+path]] で作成できませんでした。<br />パッケージマネージャーまたはサードパーティー製のコンポーネントを使用する場合は、このディレクトリを作成し、書き込み可能にする必要があります。';
 $_lang['download'] = 'ダウンロード';
 $_lang['downloaded'] = 'ダウンロード済み';
+$_lang['downloading'] = 'ダウンロードしています';
 $_lang['download_extras'] = 'プロバイダから取得';
 $_lang['downloads'] = 'ダウンロード';
 $_lang['installation_instructions'] = 'インストールガイド';

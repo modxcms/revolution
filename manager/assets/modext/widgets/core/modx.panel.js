@@ -196,7 +196,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         var fld = false;
         if (typeof f == 'string') {
             fld = this.getForm().findField(f);
-            if (!fld) fld = Ext.getCmp(f);
+            if (!fld) { fld = Ext.getCmp(f); }
         }
         return fld;
     }
@@ -237,7 +237,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             v = String.format('{0}',vals[i]);
             if ((f.xtype == 'checkbox' || f.xtype == 'radio') && flds[i] == 'published') {
                 f.setBoxLabel(v);
-            } else {
+            } else if (f.label) {
                 f.label.update(v);
             }
         }

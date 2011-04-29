@@ -55,6 +55,14 @@ $_lang['system_settings'] = 'Systemeinstellungen';
 $_lang['usergroup'] = 'Benutzergruppe';
 
 // user settings
+$_lang['setting_access_category_enabled'] = 'Kategorien-Zugriff prüfen';
+$_lang['setting_access_category_enabled_desc'] = 'Verwenden Sie diese Einstellung, um Kategorien-ACL-Checks zu aktivieren oder zu deaktivieren (pro Kontext). <strong>HINWEIS: Wenn diese Option auf "Nein" gesetzt wurde, werden ALLE Kategorien-Zugriffsberechtigungen ignoriert!</strong>';
+
+$_lang['setting_access_context_enabled'] = 'Kontext-Zugriff prüfen';
+$_lang['setting_access_context_enabled_desc'] = 'Verwenden Sie diese Einstellung, um Kontext-ACL-Checks zu aktivieren oder zu deaktivieren. <strong>HINWEIS: Wenn diese Option auf "Nein" gesetzt wurde, werden ALLE Kontext-Zugriffsberechtigungen ignoriert. Deaktivieren Sie diese Einstellung NICHT systemweit oder für den mgr-Kontext, da Sie sonst den Zugriff auf die Manager-Oberfläche deaktivieren!</strong>';
+
+$_lang['setting_access_resource_group_enabled'] = 'Ressourcen-Gruppen-Zugriff prüfen';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Verwenden Sie diese Einstellung, um Ressourcen-Gruppen-ACL-Checks zu aktivieren oder zu deaktivieren (pro Kontext). <strong>HINWEIS: Wenn diese Option auf "Nein" gesetzt wurde, werden ALLE Ressourcen-Gruppen-Zugriffsberechtigungen ignoriert!</strong>';
 $_lang['setting_allow_mgr_access'] = 'Zugriff auf den MODX-Manager';
 $_lang['setting_allow_mgr_access_desc'] = 'Verwenden Sie diese Option, um den Zugriff auf die MODX-Manager-Oberfläche zu erlauben oder zu verbieten. <strong>HINWEIS: Wenn diese Einstellung auf "nein" gesetzt ist, werden Benutzer auf die "Startseite für in den Manager eingeloggte Benutzer" oder die "Startseite der Website" weitergeleitet.';
 

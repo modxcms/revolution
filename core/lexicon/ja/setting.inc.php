@@ -55,6 +55,15 @@ $_lang['system_settings'] = 'システム設定';
 $_lang['usergroup'] = 'User Group';
 
 // user settings
+$_lang['setting_access_category_enabled'] = 'Check Category Access';
+$_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Category Access Permissions will be ignored!</strong>';
+
+$_lang['setting_access_context_enabled'] = 'Check Context Access';
+$_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
+
+$_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no then ALL Resource Group Access Permissions will be ignored!</strong>';
+
 $_lang['setting_allow_mgr_access'] = '管理画面へのアクセス';
 $_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no then the user will be redirected the the Manager Login Startup or Site Start web page.</strong>';
 
@@ -610,7 +619,7 @@ $_lang['setting_webpwdreminder_message_default'] = 'こんにちは [[+uid]]さ�
 
 $_lang['setting_websignupemail_message'] = 'ウェブサインアップのメールアドレス';
 $_lang['setting_websignupemail_message_desc'] = 'ユーザー自らがウェブユーザーアカウントを作成した時に、ユーザー名とパスワードを記載したメールを送信することができます。このメールの内容を設定してください。 <br /><strong>注意:</strong> 下記の差し込み文字列は送信時に自動的に置き換えられます。<br><br>[[+sname]] - サイトの名前, <br>[[+saddr]] - サイト管理者のメールアドレス, <br>[[+surl]] - サイトのURL, <br>[[+uid]] - ユーザーのログイン名, <br>[[+pwd]] - ユーザーのパスワード, <br>[[+ufn]] - ユーザーのフルネーム. <br /><br /><strong>メールの文章を編集するときは、[[+uid]]と[[+pwd]]を残すようにしてください。記述されてないとユーザー名とパスワードが分からないため、ユーザーはログインできません。</strong>';
-$_lang['setting_websignupemail_message_default'] = 'こんにちは  [[+uid]]さん \n\n[[+sname]] の管理画面へのログイン情報をお送りします。:\n\nユーザー名: [[+uid]]\nパスワード: [[+pwd]]\n\n[[+surl]]の管理画面へログイン後、パスワードを変更できます。\n\n[[+sname]] 管理者';
+$_lang['setting_websignupemail_message_default'] = 'こんにちは  [[+uid]]さん \n\n[[+sname]] の管理画面へのログイン情報をお送りします。:\n\nユーザー名: [[+uid]]\nパスワード: [[+pwd]]\n\n[[+sname]]( [[+surl]] )の管理画面へログイン後、パスワードを変更できます。\n\n管理者';
 
 $_lang['setting_welcome_screen'] = 'ようこそ画面の表示';
 $_lang['setting_welcome_screen_desc'] = '「はい」を選択すると、ようこそページの読み込みが完了したときに、ようこそ画面を表示します。そしてそれ以降は表示しません。';

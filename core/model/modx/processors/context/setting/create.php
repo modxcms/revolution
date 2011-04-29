@@ -21,7 +21,7 @@ $modx->lexicon->load('setting');
 
 /* get context */
 $scriptProperties['context_key'] = isset($scriptProperties['fk']) ? $scriptProperties['fk'] : 0;
-if (!$context = $modx->getObject('modContext', $scriptProperties['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
+if (!$context = $modx->getContext($scriptProperties['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 if (!$context->checkPolicy('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 /* prevent duplicates */
@@ -44,6 +44,17 @@ if ($modx->error->hasError()) {
 
 $setting= $modx->newObject('modContextSetting');
 $setting->fromArray($scriptProperties,'',true);
+
+$refreshURIs = false;
+if ($setting->get('key') === 'friendly_urls' && $setting->get('value') == '1') {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'use_alias_path') {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'container_suffix') {
+    $refreshURIs = true;
+}
 
 /* only set name/description lexicon entries if they dont exist
  * for context settings
@@ -84,6 +95,16 @@ if ($setting->save() === false) {
     return $modx->error->failure($modx->lexicon('setting_err_save'));
 }
 
-$modx->reloadConfig();
+/* if friendly_urls is set on or use_alias_path changes, refreshURIs */
+if ($refreshURIs) {
+    $context->config[$setting->get('key')] = $setting->get('value');
+    $modx->call('modResource', 'refreshURIs', array(&$modx, 0, array('contexts' => $context->get('key'))));
+}
+
+$modx->cacheManager->refresh(array(
+    'db' => array(),
+    'context_settings' => array('contexts' => array($context->get('key'))),
+    'resource' => array('contexts' => array($context->get('key'))),
+));
 
 return $modx->error->success();

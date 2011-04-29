@@ -7,6 +7,7 @@
 MODx.panel.Static = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
+    console.log(config.record.openTo);
     
     var it = [];
     it.push({
@@ -132,11 +133,14 @@ MODx.panel.Static = function(config) {
             ,maxLength: 255
             ,anchor: '95%'
             ,value: (config.record.content || config.record.ta) || ''
+            ,openTo: config.record.openTo
             ,listeners: {
                 'select':{fn:function(data) {
                     var str = data.fullRelativeUrl;
-                    str = str.replace(MODx.config.base_url,'');
-                    if (str.substring(0,1) == '/') str = str.substring(1);
+                    if (MODx.config.base_url != '/') {
+                        str = str.replace(MODx.config.base_url,'');
+                    }
+                    if (str.substring(0,1) == '/') { str = str.substring(1); }
                     Ext.getCmp('modx-resource-content').setValue(str);
                     this.markDirty();
                 },scope:this}
@@ -157,17 +161,19 @@ MODx.panel.Static = function(config) {
             ,fieldLabel: _('resource_parent')
             ,description: '<b>[[*parent]]</b><br />'+_('resource_parent_help')
             ,name: 'parent-cmb'
-            ,editable: false
             ,id: 'modx-resource-parent'
             ,value: config.record.parent || 0
-            ,formpanel: 'modx-panel-resource'
-            ,anchor: '95%'
+            ,anchor: '70%'
         },{
             xtype: 'hidden'
             ,name: 'parent'
             ,value: config.record.parent || 0
             ,id: 'modx-resource-parent-hidden'
-            ,anchor: '90%'
+        },{
+            xtype: 'hidden'
+            ,name: 'parent-original'
+            ,value: config.record.parent || 0
+            ,id: 'modx-resource-parent-old-hidden'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_menutitle')
@@ -204,6 +210,11 @@ MODx.panel.Static = function(config) {
             ,name: 'context_key'
             ,id: 'modx-resource-context-key'
             ,value: config.record.context_key || 'web'
+        },{
+            xtype: 'hidden'
+            ,name: 'create-resource-token'
+            ,id: 'modx-create-resource-token'
+            ,value: config.record.create_resource_token || ''
         },{
             html: MODx.onDocFormRender, border: false
         }]

@@ -13,14 +13,15 @@ $modx->lexicon->load('workspace','lexicon');
 
 /* validate name */
 if (empty($scriptProperties['name'])) {
-	return $modx->error->failure($modx->lexicon('namespace_err_ns_name'));
+    return $modx->error->failure($modx->lexicon('namespace_err_ns_name'));
 }
 
 /* create and save namespace */
 $namespace = $modx->newObject('modNamespace');
 $namespace->fromArray($scriptProperties,'',true,true);
+$namespace->set('path',trim($scriptProperties['path']));
 if ($namespace->save() === false) {
-	return $modx->error->failure($modx->lexicon('namespace_err_create'));
+    return $modx->error->failure($modx->lexicon('namespace_err_create'));
 }
 
 /* log manager action */

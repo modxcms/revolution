@@ -26,6 +26,10 @@ if (empty($scriptProperties['password_confirm']) || $scriptProperties['password_
     return $modx->error->failure($modx->lexicon('user_err_password_no_match'));
 }
 
+if (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/', $scriptProperties['password_new'])) {
+    return $modx->error->failure($modx->lexicon('user_err_password_invalid'));
+}
+
 $modx->user->changePassword($scriptProperties['password_new'],$scriptProperties['password_old']);
 
 /* log manager action */

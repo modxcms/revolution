@@ -52,6 +52,15 @@ $_lang['system_settings'] = 'Impostazioni Sistema';
 $_lang['usergroup'] = 'Gruppo Utenti';
 
 // user settings
+$_lang['setting_access_category_enabled'] = 'Controllare Accessi alle Categorie';
+$_lang['setting_access_category_enabled_desc'] = 'Usa questa opzione per abilitare o disabilitare i controlli ACL della Categoria (Category ACL checks) (per Contesto). <strong>NOTA: Se questa opzione è disattivata, allora TUTTI i Permessi di Accesso alle Categorie saranno ignorati!</strong>';
+
+$_lang['setting_access_context_enabled'] = 'Controllare Accessi ai Contesti';
+$_lang['setting_access_context_enabled_desc'] = 'Usa questa opzione per abilitare o disabilitare i controlli ACL del Contesto. <strong>NOTA: Se questa opzione è disattivata, allora TUTTI i permessi di Accesso al Contesto saranno ignorati. NON disabilitarla per tutto il sistema o per il Contesto mgr, altrimenti disabiliterai l\'accesso al pannello di controllo di MODX.</strong>';
+
+$_lang['setting_access_resource_group_enabled'] = 'Controllare Accessi ai Gruppi di Risorse';
+$_lang['setting_access_resource_group_enabled_desc'] = 'Usa questa opzione per abilitare o disabilitare i controlli ACL dei Gruppi di Risorse (per Contesto). <strong>NOTA: Se questa opzione è disattivata allora TUTTI i permessi di Accesso ai Gruppi di Risorse saranno ignorati!</strong>';
+
 $_lang['setting_allow_mgr_access'] = 'Accesso Pannello Controllo';
 $_lang['setting_allow_mgr_access_desc'] = 'Seleziona questa opzione per abilitare o disabilitare l\'accesso al pannello di controllo (manager). <strong>NOTA: Se questa opzione è impostata su "NO" allora l\'utente sarà reindirizzato al Login del Manager o alla Pagina Iniziale del sito.</strong>';
 

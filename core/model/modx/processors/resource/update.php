@@ -171,14 +171,20 @@ $workingContext = $modx->getContext($scriptProperties['context_key']);
 /* friendly url alias checks */
 if ($workingContext->getOption('friendly_urls', false)) {
     /* auto assign alias */
+    if (empty($scriptProperties['alias']) && $workingContext->getOption('automatic_alias', false)) {
+        $scriptProperties['alias'] = $resource->cleanAlias($scriptProperties['pagetitle']);
+    }
+    if (empty($scriptProperties['alias'])) {
+        $modx->error->addField('alias', $modx->lexicon('field_required'));
+    }
     $duplicateContext = $workingContext->getOption('global_duplicate_uri_check', false) ? '' : $scriptProperties['context_key'];
-    $aliasPath = $resource->getAliasPath($scriptProperties['alias'],$scriptProperties);
+    $aliasPath = $resource->getAliasPath($scriptProperties['alias'], $scriptProperties);
     $duplicateId = $resource->isDuplicateAlias($aliasPath, $duplicateContext);
     if (!empty($duplicateId)) {
         $err = $modx->lexicon('duplicate_uri_found', array(
-            'id' => $duplicateId,
-            'uri' => $aliasPath,
-        ));
+                                                          'id' => $duplicateId,
+                                                          'uri' => $aliasPath,
+                                                     ));
         $modx->error->addField('uri', $err);
         if (!isset($scriptProperties['uri_override']) || $scriptProperties['uri_override'] !== 1) {
             $modx->error->addField('alias', $err);
@@ -192,9 +198,17 @@ if (isset($scriptProperties['pub_date'])) {
     if (empty($scriptProperties['pub_date'])) {
         $scriptProperties['pub_date'] = 0;
     } else {
+        $strPubDate = $scriptProperties['pub_date'];
         $scriptProperties['pub_date'] = strtotime($scriptProperties['pub_date']);
-        if ($scriptProperties['pub_date'] < $now) $scriptProperties['published'] = 1;
-        if ($scriptProperties['pub_date'] > $now) $scriptProperties['published'] = 0;
+        if ($scriptProperties['pub_date'] < $now) {
+            $scriptProperties['published'] = 1;
+            $scriptProperties['publishedon'] = $strPubDate;
+            $scriptProperties['pub_date'] = 0;
+        }
+        if ($scriptProperties['pub_date'] > $now) {
+            $scriptProperties['published'] = 0;
+            $scriptProperties['publishedon'] = 0;
+        }
     }
 }
 if (isset($scriptProperties['unpub_date'])) {
@@ -204,6 +218,9 @@ if (isset($scriptProperties['unpub_date'])) {
         $scriptProperties['unpub_date'] = strtotime($scriptProperties['unpub_date']);
         if ($scriptProperties['unpub_date'] < $now) {
             $scriptProperties['published'] = 0;
+            $scriptProperties['unpub_date'] = 0;
+            $scriptProperties['pub_date'] = 0;
+            $scriptProperties['publishedon'] = 0;
         }
     }
 }
@@ -473,5 +490,6 @@ foreach ($returnArray as $k => $v) {
     }
 }
 $returnArray['class_key'] = $resource->get('class_key');
-$returnArray['preview_url'] = $modx->makeUrl($resource->get('id'));
+$workingContext->prepare(true);
+$returnArray['preview_url'] = $modx->makeUrl($resource->get('id'), '', '', 'full');
 return $modx->error->success('',$returnArray);

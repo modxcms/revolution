@@ -22,12 +22,6 @@ class modTemplateVar extends modElement {
         'DIRECTORY'
     );
     /**
-     * @var integer Indicates a value is loaded for a specified resource.
-     * @access public
-     */
-    public $resourceId= 0;
-
-    /**
      * Creates a modTemplateVar instance, and sets the token of the class to *
      *
      * {@inheritdoc}
@@ -170,10 +164,10 @@ class modTemplateVar extends modElement {
         $value= null;
         $resourceId = intval($resourceId);
         if ($resourceId) {
-            if ($resourceId === $this->xpdo->resourceIdentifier && is_array($this->xpdo->resource->get($this->get('name')))) {
+            if (is_object($this->xpdo->resource) && $resourceId === (integer) $this->xpdo->resourceIdentifier && is_array($this->xpdo->resource->get($this->get('name')))) {
                 $valueArray= $this->xpdo->resource->get($this->get('name'));
                 $value= $valueArray[1];
-            } elseif ($resourceId === $this->get('resourceId') && array_key_exists('value', $this->_fields)) {
+            } elseif ($resourceId === (integer) $this->get('resourceId') && array_key_exists('value', $this->_fields)) {
                 $value= $this->get('value');
             } else {
                 $resource = $this->xpdo->getObject('modTemplateVarResource',array(
