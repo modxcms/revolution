@@ -209,5 +209,5 @@ foreach ($returnArray as $k => $v) {
 }
 $returnArray['class_key'] = $resource->get('class_key');
 $workingContext->prepare(true);
-$returnArray['preview_url'] = $modx->makeUrl($resource->get('id'));
+$returnArray['preview_url'] = $modx->makeUrl($resource->get('id'), '', '', 'full');
 return $modx->error->success('',$returnArray);
