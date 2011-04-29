@@ -215,6 +215,11 @@ MODx.panel.Resource = function(config) {
             ,id: 'hiddenContent'
             ,value: (config.record.content || config.record.ta) || ''
         },{
+            xtype: 'hidden'
+            ,name: 'create-resource-token'
+            ,id: 'modx-create-resource-token'
+            ,value: config.record.create_resource_token || ''
+        },{
             html: MODx.onDocFormRender, border: false
         }]
     });
@@ -457,6 +462,7 @@ MODx.panel.Resource = function(config) {
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
+            ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
         }
     });
@@ -525,6 +531,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (ta) {
             this.cleanupEditor();
         }
+        if(this.getForm().baseParams.action == 'create') {
+            Ext.getCmp('modx-button-save-resource').disable();
+        }
         return this.fireEvent('save',{
             values: this.getForm().getValues()
             ,stay: Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay')
@@ -554,6 +563,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         } else {
             this.getForm().setValues(o.result.object);
             Ext.getCmp('modx-page-update-resource').config.preview_url = o.result.object.preview_url;
+        }
+    }
+    ,failure: function(o) {
+        if(this.getForm().baseParams.action == 'create') {
+            Ext.getCmp('modx-button-save-resource').enable();
         }
     }
 

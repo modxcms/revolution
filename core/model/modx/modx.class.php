@@ -135,7 +135,7 @@ class modX extends xPDO {
      */
     public $cultureKey= '';
     /**
-     * @var array Represents a localized dictionary of common words and phrases.
+     * @var modLexicon Represents a localized dictionary of common words and phrases.
      */
     public $lexicon= null;
     /**
@@ -2042,7 +2042,7 @@ class modX extends xPDO {
                 }
                 $this->sendError('fatal');
             }
-            parent :: _log($level, $msg, $targetObj, $def, $file, $line);
+            parent :: _log($level, $msg, $target, $def, $file, $line);
         }
     }
 

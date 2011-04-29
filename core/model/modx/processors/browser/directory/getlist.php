@@ -17,7 +17,9 @@ $modx->lexicon->load('file');
 /* setup default properties */
 $hideFiles = !empty($scriptProperties['hideFiles']) && $scriptProperties['hideFiles'] != 'false' ? true : false;
 $stringLiterals = !empty($scriptProperties['stringLiterals']) ? true : false;
-$dir = !isset($scriptProperties['id']) || $scriptProperties['id'] == 'root' ? '' : str_replace('n_','',$scriptProperties['id']);
+$dir = !isset($scriptProperties['id']) || $scriptProperties['id'] == 'root'
+        ? ''
+        : strpos($scriptProperties['id'], 'n_') === 0 ? substr($scriptProperties['id'], 2) : $scriptProperties['id'];
 
 /* get working context */
 $wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';

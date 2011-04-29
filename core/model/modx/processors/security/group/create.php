@@ -24,6 +24,7 @@ if ($alreadyExists) return $modx->error->failure($modx->lexicon('user_group_err_
 /* add group */
 $usergroup = $modx->newObject('modUserGroup');
 $usergroup->set('name',$scriptProperties['name']);
+$usergroup->set('description',$scriptProperties['description']);
 $usergroup->set('parent',$scriptProperties['parent']);
 
 /* users */

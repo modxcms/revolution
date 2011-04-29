@@ -41,11 +41,27 @@ if ($entry != null) {
     $entry->clearCache();
 }
 
+$refreshURIs = false;
+if ($setting->get('key') === 'friendly_urls' && $setting->isDirty('value') && $setting->get('value') == '1') {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'use_alias_path' && $setting->isDirty('value')) {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'container_suffix' && $setting->isDirty('value')) {
+    $refreshURIs = true;
+}
+
 /* save setting */
 if ($setting->save() == false) {
     return $modx->error->failure($modx->lexicon('setting_err_save'));
 }
 
+/* if friendly_urls is set on or use_alias_path changes, refreshURIs */
+if ($refreshURIs) {
+    $modx->setOption($setting->get('key'), $setting->get('value'));
+    $modx->call('modResource', 'refreshURIs', array(&$modx));
+}
 
 $modx->reloadConfig();
 $modx->cacheManager->deleteTree($modx->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/smarty/',array(
@@ -53,6 +69,5 @@ $modx->cacheManager->deleteTree($modx->getOption('core_path',null,MODX_CORE_PATH
     'skipDirs' => false,
     'extensions' => array('.cache.php','.php'),
 ));
-
 
 return $modx->error->success('',$setting);

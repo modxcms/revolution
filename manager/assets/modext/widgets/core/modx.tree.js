@@ -78,23 +78,23 @@ MODx.tree.Tree = function(config) {
         ,menuConfig: {defaultAlign: 'tl-b?' ,enableScrolling: false}
     });
     if (config.remoteToolbar === true && (config.tbar === undefined || config.tbar === null)) {
-        MODx.Ajax.request({
+        Ext.Ajax.request({
             url: config.remoteToolbarUrl || config.url
             ,params: {
                 action: config.remoteToolbarAction || 'getToolbar'
             }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    var itms = this._formatToolbar(r.object);
-                    var tb = this.getTopToolbar();
-                    if (tb) {
-                        for (var i=0;i<itms.length;i++) {
-                            tb.add(itms[i]);
-                        }
-                        tb.doLayout();
+            ,success: function(r) {
+                r = Ext.decode(r.responseText);
+                var itms = this._formatToolbar(r.object);
+                var tb = this.getTopToolbar();
+                if (tb) {
+                    for (var i=0;i<itms.length;i++) {
+                        tb.add(itms[i]);
                     }
-                },scope:this}
+                    tb.doLayout();
+                }
             }
+            ,scope:this
         });
         config.tbar = {bodyStyle: 'padding: 0'};
     } else {

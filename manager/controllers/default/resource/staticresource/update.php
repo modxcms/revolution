@@ -104,6 +104,25 @@ if (!empty($tvCounts)) {
     $modx->smarty->assign('tvOutput',$tvOutput);
 }
 
+/* get openTo directory */
+$baseUrlRelative = false;
+$wctx = $resource->get('context_key');
+if (!empty($wctx)) {
+    $workingContext = $modx->getContext($wctx);
+    if (!$workingContext) {
+        return $modx->error->failure($modx->error->failure($modx->lexicon('permission_denied')));
+    }
+} else {
+    $workingContext =& $modx->context;
+}
+$modx->getService('fileHandler','modFileHandler', '', array('context' => $workingContext->get('key')));
+$baseUrl = $modx->fileHandler->getBaseUrl();
+if (!empty($record['content'])) {
+    $record['openTo'] = str_replace($baseUrl,'',dirname($record['content']).'/');
+} else {
+    $record['openTo'] = '/';
+}
+
 /* register JS scripts */
 $modx->smarty->assign('_ctx',$resource->get('context_key'));
 $managerUrl = $context->getOption('manager_url', MODX_MANAGER_URL, $modx->_userConfig);

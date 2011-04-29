@@ -29,9 +29,28 @@
  */
 class modParser {
     public $modx= null;
+    protected $_processingTag = false;
+    protected $_processingUncacheable = false;
+    protected $_removingUnprocessed = false;
 
     function __construct(xPDO &$modx) {
         $this->modx =& $modx;
+    }
+
+    public function isProcessingUncacheable() {
+        $result = false;
+        if ($this->isProcessingTag()) $result = (boolean) $this->_processingUncacheable;
+        return $result;
+    }
+
+    public function isRemovingUnprocessed() {
+        $result = false;
+        if ($this->isProcessingTag()) $result = (boolean) $this->_removingUnprocessed;
+        return $result;
+    }
+
+    public function isProcessingTag() {
+        return (boolean) $this->_processingTag;
     }
 
     /**
@@ -136,7 +155,8 @@ class modParser {
      * returned by prior passes, 0 by default.
      */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
-        $depth = intval($depth);
+        $this->_processingUncacheable = (boolean) $processUncacheable;
+        $this->_removingUnprocessed = (boolean) $removeUnprocessed;
         $depth = $depth > 0 ? $depth - 1 : 0;
         $processed= 0;
         $tags= array ();
@@ -147,6 +167,7 @@ class modParser {
         if ($collected= $this->collectElementTags($content, $tags, $prefix, $suffix, $tokens)) {
             $tagMap= array ();
             foreach ($tags as $tag) {
+                $this->_processingTag = true;
                 $token= substr($tag[1], 0, 1);
                 if (!$processUncacheable && $token === '!') {
                     if ($removeUnprocessed) {
@@ -172,6 +193,7 @@ class modParser {
                     $processed++;
                 }
             }
+            $this->_processingTag = false;
             $this->mergeTagOutput($tagMap, $content);
             if ($depth > 0) {
                 $processed+= $this->processElementTags($parentTag, $content, $processUncacheable, $removeUnprocessed, $prefix, $suffix, $tokens, $depth);
@@ -349,7 +371,7 @@ class modParser {
             $tokenOffset++;
             $token= substr($tagName, $tokenOffset, 1);
         }
-        if ($cacheable) {
+        if ($cacheable && $token !== '+') {
             $elementOutput= $this->loadFromCache($outerTag);
         }
         if ($elementOutput === null) {
@@ -359,7 +381,6 @@ class modParser {
                     $element= new modPlaceholderTag($this->modx);
                     $element->set('name', $tagName);
                     $element->setTag($outerTag);
-                    $element->setCacheable(false); /* placeholders cannot be cacheable! */
                     $elementOutput= $element->process($tagPropString);
                     break;
                 case '%':
@@ -905,14 +926,17 @@ class modPlaceholderTag extends modTag {
         parent :: process($properties, $content);
         if (!$this->_processed) {
             $this->_output= $this->_content;
-            if (is_string($this->_output) && !empty ($this->_output)) {
-                /* collect element tags in the content and process them */
-                $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
-                $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+            if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
+                if (is_string($this->_output) && !empty($this->_output)) {
+                    /* collect element tags in the content and process them */
+                    $maxIterations= intval($this->modx->getOption('parser_max_iterations',null,10));
+                    $this->modx->parser->processElementTags($this->_tag, $this->_output, false, false, '[[', ']]', array(), $maxIterations);
+                }
             }
-            $this->filterOutput();
-            $this->cache();
-            $this->_processed= true;
+            if ($this->_output !== null || $this->modx->parser->isProcessingUncacheable()) {
+                $this->filterOutput();
+                $this->_processed = true;
+            }
         }
         /* finally, return the processed element content */
         return $this->_output;
@@ -922,7 +946,7 @@ class modPlaceholderTag extends modTag {
      * Get the raw source content of the field.
      */
     public function getContent(array $options = array()) {
-        if (!is_string($this->_content) || $this->_content === '') {
+        if (!is_string($this->_content)) {
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
             } else {

@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Add options to xPDOCacheManager::writeFile() to allow multiple attempts when exclusive locks fail
+
 xPDO 2.1.2-pl (March 25, 2011)
 ====================================
 - Add xPDO->getValue() convenience method for retrieving single column from single row

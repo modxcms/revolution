@@ -8,7 +8,7 @@
  * @subpackage processors.layout.tree.resource
  */
 if (!$modx->hasPermission('save_document')) return $modx->error->failure($modx->lexicon('access_denied'));
-$modx->lexicon->load('resource');
+$modx->lexicon->load('resource', 'context');
 
 $data = urldecode($scriptProperties['data']);
 $data = $modx->fromJSON($data);
@@ -20,6 +20,8 @@ $modx->invokeEvent('OnResourceBeforeSort',array(
 ));
 
 /* readjust cache */
+$nodeErrors = array();
+$modifiedNodes = array();
 $contextsAffected = array();
 $dontChangeParents = array();
 foreach ($nodes as $ar_node) {
@@ -27,7 +29,10 @@ foreach ($nodes as $ar_node) {
     $node = $modx->getObject('modResource',$ar_node['id']);
     if (empty($node)) continue;
 
-    if (!$node->checkPolicy('save')) continue;
+    if (!$node->checkPolicy('save')) {
+        $nodeErrors[] = $modx->lexicon('access_denied');
+        continue;
+    }
     if (empty($ar_node['context'])) continue;
     if (in_array($ar_node['parent'],$dontChangeParents)) continue;
 
@@ -37,7 +42,24 @@ foreach ($nodes as $ar_node) {
         /* get new parent, if invalid, skip, unless is root */
         if ($ar_node['parent'] != 0) {
             $parent = $modx->getObject('modResource',$ar_node['parent']);
-            if ($parent == null) continue;
+            if ($parent == null) {
+                $nodeErrors[] = $modx->lexicon('resource_err_new_parent_nf', array('id' => $ar_node['parent']));
+                continue;
+            }
+            if (!$parent->checkPolicy('add_children')) {
+                $nodeErrors[] = $modx->lexicon('resource_add_children_access_denied');
+                continue;
+            }
+        } else {
+            $context = $modx->getObject('modContext',$ar_node['context']);
+            if (empty($context)) {
+                $nodeErrors[] = $modx->lexicon('context_err_nfs', array('key' => $ar_node['context']));
+                continue;
+            }
+            if (!$modx->hasPermission('new_document_in_root')) {
+                $nodeErrors[] = $modx->lexicon('resource_add_children_access_denied');
+                continue;
+            }
         }
 
         /* save new parent */
@@ -52,11 +74,20 @@ foreach ($nodes as $ar_node) {
         $dontChangeParents[] = $node->get('id'); /* prevent children from reverting back */
     }
     $node->set('menuindex',$ar_node['order']);
-    $node->save();
+    $modifiedNodes[] = $node;
+}
+if (!empty($nodeErrors)) {
+    return $modx->error->failure(implode("\n", array_unique($nodeErrors)));
+}
+if (!empty($modifiedNodes)) {
+    foreach ($modifiedNodes as $modifiedNode) {
+        $modifiedNode->save();
+    }
 }
 
-$modx->invokeEvent('OnResourceSort',array(
+$modx->invokeEvent('OnResourceSort', array(
     'nodes' => &$nodes,
+    'modifiedNodes' => &$modifiedNodes
 ));
 
 /* empty cache */
@@ -87,10 +118,9 @@ function getNodesFormatted(&$ar_nodes,$cur_level,$parent = 0) {
     }
 }
 
-function changeChildContext($node, $context) {
+function changeChildContext(&$node, $context) {
     foreach ($node->getMany('Children') as $child) {
         changeChildContext($child, $context);
         $child->set('context_key', $context);
-        $child->save();
     }
 }

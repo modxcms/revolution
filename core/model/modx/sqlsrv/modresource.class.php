@@ -35,7 +35,7 @@ class modResource_sqlsrv extends modResource {
         } else {
             $c->select(array(
                 "ISNULL(tvc.value,modTemplateVar.default_text) AS value",
-                "CASE WHEN tvc.value IS NULL THEN 0 ELSE {$resource->get('id')} END AS resourceId"
+                "{$resource->get('id')} AS resourceId"
             ));
         }
         $c->select($resource->xpdo->getSelectColumns('modTemplateVarTemplate', 'tvtpl', '', array('rank')));

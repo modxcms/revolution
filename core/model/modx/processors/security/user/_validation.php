@@ -8,7 +8,8 @@
 /* username */
 if (empty($scriptProperties['username'])) {
     $modx->error->addField('username',$modx->lexicon('user_err_not_specified_username'));
-
+} elseif (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/', $scriptProperties['username'])) {
+    $modx->error->addField('username',$modx->lexicon('user_err_username_invalid'));
 } else if (!empty($scriptProperties['username']) && $scriptProperties['username'] != $user->get('username')) {
     $alreadyExists = $modx->getObject('modUser',array('username' => $scriptProperties['username']));
     if ($alreadyExists) $modx->error->addField('username',$modx->lexicon('user_err_already_exists'));
@@ -19,23 +20,25 @@ if (empty($scriptProperties['username'])) {
 /* password */
 if (isset($scriptProperties['newpassword']) && $scriptProperties['newpassword'] != 'false' || empty($scriptProperties['id'])) {
     if (!isset($scriptProperties['passwordnotifymethod'])) {
-            $modx->error->addField('password_notify_method',$modx->lexicon('user_err_not_specified_notification_method'));
+        $modx->error->addField('password_notify_method',$modx->lexicon('user_err_not_specified_notification_method'));
     }
     if ($scriptProperties['passwordgenmethod'] == 'g') {
-    $len = $modx->getOption('password_generated_length',null,8);
-            $autoPassword = generate_password($len);
-            $user->set('password', $autoPassword);
-            $newPassword= $autoPassword;
+        $len = $modx->getOption('password_generated_length',null,8);
+        $autoPassword = generate_password($len);
+        $user->set('password', $autoPassword);
+        $newPassword= $autoPassword;
     } else {
         if (empty($scriptProperties['specifiedpassword'])) {
-                $modx->error->addField('password',$modx->lexicon('user_err_not_specified_password'));
+            $modx->error->addField('password',$modx->lexicon('user_err_not_specified_password'));
         } elseif ($scriptProperties['specifiedpassword'] != $scriptProperties['confirmpassword']) {
-                $modx->error->addField('password',$modx->lexicon('user_err_password_no_match'));
+            $modx->error->addField('password',$modx->lexicon('user_err_password_no_match'));
         } elseif (strlen($scriptProperties['specifiedpassword']) < $modx->getOption('password_min_length',null,6)) {
-                $modx->error->addField('password',$modx->lexicon('user_err_password_too_short'));
+            $modx->error->addField('password',$modx->lexicon('user_err_password_too_short'));
+        } elseif (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/', $scriptProperties['specifiedpassword'])) {
+            $modx->error->addField('password', $modx->lexicon('user_err_password_invalid'));
         } else {
-                $user->set('password', $scriptProperties['specifiedpassword']);
-                $newPassword= $scriptProperties['specifiedpassword'];
+            $user->set('password', $scriptProperties['specifiedpassword']);
+            $newPassword= $scriptProperties['specifiedpassword'];
         }
     }
 }
