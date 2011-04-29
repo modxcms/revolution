@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.1.0-rc-4 (April 29, 2011)
 ====================================
+- [#4543] Fix preview URLs when FURLs are turned Off
 - [#4537] Trigger refreshURIs when related settings are modified
 - Have modAccess*::loadAttributes() check access_*_enabled settings
 - [#4502] Enable custom targets in modUser->loadAttributes()

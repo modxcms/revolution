@@ -70,7 +70,7 @@ if ($context->getOption('use_editor', false, $modx->_userConfig) && !empty($rte)
 }
 
 /* get url for resource for preview window */
-$url = $modx->makeUrl($resource->get('id'));
+$url = $modx->makeUrl($resource->get('id'), '', '', 'full');
 
 /* assign static resource to smarty */
 $modx->smarty->assign('resource',$resource);
