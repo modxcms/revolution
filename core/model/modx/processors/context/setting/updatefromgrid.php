@@ -14,7 +14,7 @@ $modx->lexicon->load('setting');
 
 $_DATA = $modx->fromJSON($scriptProperties['data']);
 
-if (!$context = $modx->getObject('modContext', $_DATA['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
+if (!$context = $modx->getContext($_DATA['context_key'])) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 if (!$context->checkPolicy('save')) return $modx->error->failure($modx->lexicon('permission_denied'));
 
 $setting = $modx->getObject('modContextSetting',array(
@@ -24,10 +24,32 @@ $setting = $modx->getObject('modContextSetting',array(
 if (!$setting) return $modx->error->failure($modx->lexicon('setting_err_nf'));
 
 $setting->set('value',$_DATA['value']);
+
+$refreshURIs = false;
+if ($setting->get('key') === 'friendly_urls' && $setting->isDirty('value') && $setting->get('value') == '1') {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'use_alias_path' && $setting->isDirty('value')) {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'container_suffix' && $setting->isDirty('value')) {
+    $refreshURIs = true;
+}
+
 if ($setting->save() == false) {
     return $modx->error->failure($modx->lexicon('setting_err_save'));
 }
 
-$modx->reloadConfig();
+/* if friendly_urls is set on or use_alias_path changes, refreshURIs */
+if ($refreshURIs) {
+    $context->config[$setting->get('key')] = $setting->get('value');
+    $modx->call('modResource', 'refreshURIs', array(&$modx, 0, array('contexts' => $context->get('key'))));
+}
+
+$modx->cacheManager->refresh(array(
+    'db' => array(),
+    'context_settings' => array('contexts' => array($context->get('key'))),
+    'resource' => array('contexts' => array($context->get('key'))),
+));
 
 return $modx->error->success();

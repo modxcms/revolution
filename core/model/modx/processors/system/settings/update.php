@@ -37,6 +37,17 @@ if ($scriptProperties['xtype'] == 'combo-boolean' && !is_numeric($scriptProperti
 
 $setting->fromArray($scriptProperties,'',true);
 
+$refreshURIs = false;
+if ($setting->get('key') === 'friendly_urls' && $setting->isDirty('value') && $setting->get('value') == '1') {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'use_alias_path' && $setting->isDirty('value')) {
+    $refreshURIs = true;
+}
+if ($setting->get('key') === 'container_suffix' && $setting->isDirty('value')) {
+    $refreshURIs = true;
+}
+
 /* save setting */
 if ($setting->save() === false) {
     $modx->error->checkValidation($setting);
@@ -50,6 +61,12 @@ $setting->updateTranslation('setting_'.$scriptProperties['key'],$scriptPropertie
 $setting->updateTranslation('setting_'.$scriptProperties['key'].'_desc',$scriptProperties['description'],array(
     'namespace' => $namespace->get('name'),
 ));
+
+/* if friendly_urls is set on or use_alias_path changes, refreshURIs */
+if ($refreshURIs) {
+    $modx->setOption($setting->get('key'), $setting->get('value'));
+    $modx->call('modResource', 'refreshURIs', array(&$modx));
+}
 
 $modx->reloadConfig();
 $modx->cacheManager->deleteTree($modx->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/smarty/',array(
