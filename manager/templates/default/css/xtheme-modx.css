@@ -1,6 +1,6 @@
 /**
  * xtheme-modx
- * Copyright (c) 2009-2010, lossendae@gmail.com, shaun@modx.com, MODx, LLC
+ * Copyright (c) 2009-2011, lossendae@gmail.com, shaun@modx.com, MODX, LLC
  *
  * xtheme-modx is licensed under the terms of the GNU Open Source GPL 2.0
  * or later license.
@@ -120,10 +120,10 @@ ul.x-tab-strip-top{
 ul.x-tab-strip-bottom{
     -moz-border-radius-topleft: 3px;
     -moz-border-radius-topright: 3px;
-    -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    -webkit-border-top-left-radius: 2px;
+    -webkit-border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
     background-color: #dddddd;
     background-image: url(../images/modx-theme/tabs/tab-strip-btm-bg.gif);
     border-top-color: #d0d0d0;
@@ -133,10 +133,10 @@ ul.x-tab-strip-bottom{
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
     -moz-border-radius-topleft: 3px;
     -moz-border-radius-topright: 3px;
-    -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    -webkit-border-top-left-radius: 2px;
+    -webkit-border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
     background-color: #5e5e5e;
     border: 1px solid #5E5E5E;
 }
@@ -170,10 +170,10 @@ ul.x-tab-strip-bottom{
 ul.x-tab-strip li {
     -moz-border-radius-topleft: 3px;
     -moz-border-radius-topright: 3px;
-    -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    -webkit-border-top-left-radius: 2px;
+    -webkit-border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
     background-color: #779937;
     border: 1px solid #5C7F17;
     padding: 2px 2px 1px;
@@ -269,9 +269,9 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-form-text, textarea.x-form-field{
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
     position: relative;
     background-color: #fbfbfb;
     background-image: none;
@@ -303,16 +303,16 @@ ul.x-tab-strip li.x-tab-strip-active  {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right: 0 none;
+    padding-top: 2px;
     padding-right: 3px;
-    text-shadow: 1px -1px 0 #FFFFFF;
 }
 .x-small-editor .x-form-field-wrap .x-form-trigger, .x-form-field-wrap .x-form-trigger{
     -moz-border-radius-topright: 3px;
-    -moz-border-radius-bottomright: 3px;
-    -webkit-border-top-right-radius: 3px;
-    -webkit-border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    -moz-border-radius-bottomright: 2px;
+    -webkit-border-top-right-radius: 2px;
+    -webkit-border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
     background: transparent url(../images/modx-theme/form/trigger.png);
     border-bottom: 1px solid #C5C5C5 !important;
     border-left: 0 none;
@@ -352,12 +352,14 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 .x-small-editor .x-form-field-wrap .x-form-trigger{
     width: 26px;
-    height: 22px;
+    height: 20px;
+    padding-bottom:0;
+    padding-top:2px;
 }
 
 .x-form-field-wrap .x-form-trigger{
-    background-position: -26px 0;
-    height: 24px;
+    background-position: -26px -3px;
+    height: 20px;
     width: 29px;
 }
 
@@ -415,12 +417,11 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .ext-strict .x-small-editor .x-form-text {
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    height: 18px !important;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    height: 20px !important;
 }
 .ext-gecko .x-form-text, .ext-ie8 .x-form-text {
-    padding-top: 4px;
 }
 
 .ext-safari .x-form-invalid{
@@ -474,9 +475,9 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-btn {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
     -moz-box-shadow:0 0 1px rgba(0, 0, 0, 0.15);
     -webkit-box-shadow:0 0 1px rgba(0, 0, 0, 0.15);
     font:normal 12px arial, tahoma, verdana, helvetica;
@@ -578,8 +579,8 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-btn-group {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
     border:1px solid #DFDFDF;
     padding:0;
     margin-right:2px;
@@ -787,9 +788,9 @@ ul.x-tab-strip li.x-tab-strip-active  {
 }
 
 .x-grid3 {
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
     background: url("../images/modx-theme/grid/grid3-hd-bg.png") repeat-x scroll left -25px #666;
     border:1px solid #666666;
     padding:0 2px 2px;
@@ -1960,9 +1961,9 @@ a.x-menu-item {
 .x-window .x-btn-over .x-btn-small .x-btn-text { color: #636F4C; }
 
 .x-window {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
     background: transparent url(../images/modx-theme/window/border.png) repeat scroll 0 0;
     z-index: 10000 !important;
 }
@@ -2142,9 +2143,9 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 
 .x-toolbar td, .x-toolbar span, .x-toolbar input, .x-toolbar div, .x-toolbar select, .x-toolbar label {
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
 }
 
 .x-html-editor-tb .x-btn-text {

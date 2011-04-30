@@ -1,19 +1,19 @@
 /**
- * MODx Revolution 2.0.0 CSS Stylesheet
+ * MODX Revolution 2.0.0 CSS Stylesheet
  */
 body, html {
     height: 100%;
     background-color: #fafafa;
 }
 
-.x-viewport, .x-viewport body {
+.x-viewport {
     overflow:auto;
 }
 
 body {
     margin-bottom: 1px; /* avoid jumping scrollbars */
     color: #111;
-    font: 13px/17px Verdana, Arial, Helvetica, sans-serif;
+    font: 12px/17px Verdana, Arial, Helvetica, sans-serif;
 }
 
 img, a img {
@@ -42,13 +42,6 @@ hr {
 .red { color: red !important; }
 .green { color: green !important; }
 .error { color: red !important; }
-.unpublished { font-style: italic; }
-.deleted { color: red !important; }
-.deleted a span {
-    color: #CC3333 !important;
-    text-decoration: line-through !important;
-}
-.hidemenu a span { color: gray !important; }
 
 /* leftbar */
 #modx-leftbar, #modx-content {
@@ -61,9 +54,9 @@ hr {
 }
 
 #modx-leftbar .x-tab-panel-noborder{
-    -moz-border-radius:5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+    -moz-border-radius:4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
     /*border:1px solid #E4E4E4;*/
     margin:15px 0 10px 10px;
     padding:8px 6px;
@@ -73,7 +66,7 @@ hr {
 
 
 #modx-leftbar .x-tab-panel-noborder .x-tab-panel-body-noborder {
-    -moz-border-radius:4px;
+/*    -moz-border-radius:4px;*/
     -webkit-border-radius:4px;
     padding-bottom: 5px;
     background-color: #EFEFEF;
@@ -197,21 +190,21 @@ hr {
 }
 
 .modx-leftbar .x-tab-panel-body-top {
-    -moz-border-radius-bottomleft: 3px;
-    -moz-border-radius-bottomright: 3px;
-    -webkit-border-bottom-left-radius: 3px;
-    -webkit-border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    -moz-border-radius-bottomleft: 2px;
+    -moz-border-radius-bottomright: 2px;
+    -webkit-border-bottom-left-radius: 2px;
+    -webkit-border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 
 .modx-leftbar .x-tree-root-ct {
-    -moz-border-radius-bottomleft: 3px;
-    -moz-border-radius-bottomright: 3px;
-    -webkit-border-bottom-left-radius: 3px;
-    -webkit-border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    -moz-border-radius-bottomleft: 2px;
+    -moz-border-radius-bottomright: 2px;
+    -webkit-border-bottom-left-radius: 2px;
+    -webkit-border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
     background-color: #eee;
     padding: 4px;
 }
@@ -246,7 +239,7 @@ hr {
 
 h2 {
     color:#5e5e5e;
-    font: normal 22px/normal Helvetica, Tahoma, Arial, Helvetica, sans-serif;
+    font: bold 18px/normal Helvetica, Tahoma, Arial, Helvetica, sans-serif;
     margin:15px 0 5px;
     padding-bottom: 4px;
 }
@@ -305,7 +298,7 @@ textarea.x-form-field {
 
 /* context menus */
 .x-menu a.x-menu-item {
-    font-size: 13px;
+    font-size: 12px;
     padding-top: 4px;
     padding-bottom: 4px;
 }
@@ -314,13 +307,13 @@ textarea.x-form-field {
 .x-tab-strip span.x-tab-strip-text { font-size: 12px; }
 
 /* form fields */
-.modx-form .x-form-text, .modx-form .x-form-textarea { font-size: 13px; }
-.modx-form .x-form-text { height: 22px; vertical-align: middle; }
-.modx-form .x-form-item label { font-size: 13px; }
+.modx-form .x-form-text, .modx-form .x-form-textarea { font-size: 12px; }
+.modx-form .x-form-text { vertical-align: middle; }
+.modx-form .x-form-item label { font-size: 12px; }
 
 /* windows */
 .x-form-check-wrap { height: auto !important; }
-.modx-window .x-form-text, .modx-window .x-form.textarea { font-size: 13px; }
+.modx-window .x-form-text, .modx-window .x-form.textarea { font-size: 12px; }
 
 /* grids */
 .x-small-editor .x-form-field {
@@ -393,8 +386,6 @@ textarea.x-form-field {
     margin: 7px 11px 0 0;
 }
 #modx-logo img {
-    width: 94px;
-    height: 25px;
     vertical-align: middle;
 }
 
@@ -433,9 +424,9 @@ textarea.x-form-field {
     color: #ccc;
 }
 #rightlogin {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
     border:1px solid #4E4E4E;
     bottom:10px;
     color:#AAAAAA;
@@ -447,9 +438,9 @@ textarea.x-form-field {
     z-index:1;
 }
 #rightlogin span {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
     background-color:#363636;
     border:1px solid #1F1F1F;
     float:left;
@@ -515,14 +506,14 @@ table.classy {
     border-right: 3px solid #5F5F5F;
     border-left: 3px solid #5F5F5F;
     border-bottom: 3px solid #5F5F5F;
-    -moz-border-radius-bottomleft: 3px;
-    -moz-border-radius-bottomright: 3px;
+    -moz-border-radius-bottomleft: 2px;
+    -moz-border-radius-bottomright: 2px;
     -moz-border-radius-topleft: 3px;
     -moz-border-radius-topright: 3px;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
 table.classy th, table.classy td {
     line-height: 1.3;
@@ -593,6 +584,7 @@ table.classy tr.odd td {
     width: 16px;
     height: 16px;
     background: url(../images/restyle/icons/arrow_rotate_anticlockwise.png) top right no-repeat;
+    cursor: pointer;
 }
 .modx-tv-description {
     color: #666;
@@ -759,7 +751,7 @@ table.classy tr.odd td {
 #modx-topnav {
     width: 100%;
     float: left;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     height: 45px;
     list-style: none;
@@ -970,6 +962,17 @@ html #modx-topnav ul.modx-subnav li a:hover{
 .icon-package { background-image:url(../images/restyle/icons/package.png) !important; padding-right: 5px !important; }
 
 .icon-locked .x-tree-node-icon { background-image:url(../images/restyle/icons/lock_edit.png) !important; }
+.icon-lock .x-tree-node-icon { background-image:url(../images/restyle/icons/lock.png) !important; }
+.active-node, .active-node span {
+    font-weight: bold;
+}
+.unpublished { font-style: italic; }
+.hidemenu a span { color: gray !important; }
+.deleted { color: red !important; }
+.deleted a span {
+    color: #CC3333 !important;
+    text-decoration: line-through !important;
+}
 
 /* ext extensions */
 input.x-static-text-field {
@@ -1050,9 +1053,9 @@ input.x-static-text-field {
 .ux-row-action-item:active{margin:1px -1px 1px 1px;background-image:none !important;background-color:#d7d7d7 !important;}
 .ux-row-action-item:active span {text-shadow:none;}
 .ux-row-action-item{
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
 	-moz-box-shadow:0 0 1px rgba(0, 0, 0, 0.15);
 	-webkit-box-shadow:0 0 1px rgba(0, 0, 0, 0.15);
 	box-shadow:0 0 1px rgba(0, 0, 0, 0.15);
@@ -1152,6 +1155,33 @@ ul.modx-tag-list li.modx-tag-checked {
 .tq-treegrid .tq-treegrid-static .x-tree-ec-icon {display: none;}
 .tq-treegrid .tq-treegrid-static .x-tree-node-el {cursor: default;}
 
+/* superbox */
+.x-superboxselect {position:relative; height: auto !important; margin: 0; width: auto !important; overflow: hidden; padding:2px; display:block; outline: none !important;}
+.x-superboxselect input[disabled] {background-color: transparent;};
+.x-superboxselect ul {overflow: hidden; cursor: text;}
+.x-superboxselect-display-btns {padding-right: 33px !important;}
+.x-superboxselect-btns {position: absolute; right: 1px; top: 0; overflow:hidden; padding:2px;}
+.x-superboxselect-btns div {float: left; width: 16px; height: 16px; margin-top: 4px;}
+.x-superboxselect-btn-clear {background: url(../images/restyle/icons/sb_clear.png) no-repeat scroll left 0px;}
+.x-superboxselect-btn-expand {background: url(../images/restyle/icons/sb_expand.png) no-repeat scroll left 0px;}
+.x-superboxselect-btn-over {background-position: left -16px}
+.x-superboxselect-btn-hide {display:none;}
+.x-superboxselect li {float: left; margin: 1px 1px 2px 1px; padding: 0;line-height: 18px;}
+.x-superboxselect-stacked li {float: none !important;}
+.x-superboxselect-input input { border: none; outline: none; margin-top: 4px; margin-bottom: 4px;}
+body.ext-ie .x-superboxselect-input input {background: none; border: none; margin-top: 3px;}
+.x-superboxselect-item {position: relative; -moz-border-radius: 6px; -webkit-border-radius: 6px; border-radius: 6px; o-border-radius: 6px; khtml-border-radius: 6px; border: 1px solid #CAD8F3; background-color: #DEE7F8; padding: 1px 15px 1px 5px !important; }
+body.ext-ie7 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em; padding: 2px 17px 4px 5px !important;}
+body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em; padding: 2px 19px 4px 5px !important;}
+.x-superboxselect-item-hover {background: #BBCEF1; border: 1px solid #6D95E0;}
+.x-superboxselect-item-focus {border-color: #598BEC; background: #598BEC; color: #fff;}
+.x-superboxselect-item-close {background: url(../images/restyle/icons/sb_close.png) no-repeat scroll left 0px; border: none; cursor: default; font-size: 1px; height: 16px;padding:0; position: absolute; right: 0px; top: 2px; width: 13px;display:block;cursor:pointer;}
+.x-superboxselect-list { font-size: 14px !important; }
+.x-superboxselect-item-close:hover, .x-superboxselect-item-close:active  { background-position: left -12px;}
+.x-superboxselect-item-focus .x-superboxselect-item-close{ background-position: left -24px}
+.x-item-disabled .x-superboxselect-item-close{ background-position: left -36px}
+
+/* other */
 .modx-tree-load-msg {
     font-size: .9em;
     line-height: 1;
